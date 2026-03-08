@@ -192,6 +192,20 @@ with col_filter2:
 with col_filter3:
     team_filter = st.selectbox("Team", available_teams)
 
+# Price range slider
+if not df.empty and "Price (M$)" in df.columns:
+    min_price = int(df["Price (M$)"].min())
+    max_price = int(df["Price (M$)"].max()) + 1
+    price_range = st.slider(
+        "Price Range (M$)",
+        min_value=min_price,
+        max_value=max_price,
+        value=(min_price, max_price),
+        step=1
+    )
+else:
+    price_range = None
+
 filtered_df = df.copy()
 
 if quick_filter:
@@ -205,6 +219,12 @@ if position_filter != "All":
 
 if team_filter != "All":
     filtered_df = filtered_df[filtered_df["Team"] == team_filter]
+
+if price_range is not None:
+    filtered_df = filtered_df[
+        (filtered_df["Price (M$)"] >= price_range[0]) & 
+        (filtered_df["Price (M$)"] <= price_range[1])
+    ]
 
 gb = GridOptionsBuilder.from_dataframe(filtered_df)
 gb.configure_default_column(
