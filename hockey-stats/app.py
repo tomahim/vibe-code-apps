@@ -41,9 +41,41 @@ team_logo_style = JsCode("""
 
 swiss_flag_url = "https://content.app-sources.com/s/39330979433008693/uploads/store/Switzerland-flag-1-5957046.jpg?format=webp"
 
-name_flag_style = JsCode("""
-    function(params) {
-        return null;
+name_renderer = JsCode("""
+    class NameRenderer {
+        init(params) {
+            const tendance = params.data['Tendance (M$)'];
+            const name = params.value;
+            
+            this.eGui = document.createElement('div');
+            this.eGui.style.display = 'flex';
+            this.eGui.style.alignItems = 'center';
+            
+            const arrow = document.createElement('span');
+            arrow.style.marginRight = '8px';
+            arrow.style.fontWeight = 'bold';
+            
+            if (tendance > 0) {
+                arrow.style.color = 'green';
+                arrow.innerHTML = '▲';
+            } else if (tendance < 0) {
+                arrow.style.color = 'red';
+                arrow.innerHTML = '▼';
+            } else {
+                arrow.style.color = 'gray';
+                arrow.innerHTML = '▬';
+            }
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.innerHTML = name;
+            
+            this.eGui.appendChild(arrow);
+            this.eGui.appendChild(nameSpan);
+        }
+        
+        getGui() {
+            return this.eGui;
+        }
     }
 """)
 
@@ -84,7 +116,9 @@ def generate_player_data():
     df["Total Points"] = df["hm_total_points"]
     df["Avg Points"] = df["hm_avg_points"]
     df["Price (M$)"] = df["hm_price"].fillna(0)
-    df["Tendance (M$)"] = 1
+    # Generate random tendance values in 0.5 increments between -1.5 and 1.5
+    tendance_options = [-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5]
+    df["Tendance (M$)"] = np.random.choice(tendance_options, size=len(df))
     df["Expected Value (M$)"] = df["Price (M$)"] + df["Tendance (M$)"]
 
     df = df.drop(columns=[
@@ -150,13 +184,13 @@ st.subheader("Swiss League Players")
 col_filter1, col_filter2, col_filter3 = st.columns(3)
 
 with col_filter1:
-    quick_filter = st.text_input("Quick Filter (Name/Team)", "")
+    quick_filter = st.text_input("Name/Team", "")
 
 with col_filter2:
-    position_filter = st.selectbox("Position Filter", ["All"] + positions)
+    position_filter = st.selectbox("Position", ["All"] + positions)
 
 with col_filter3:
-    team_filter = st.selectbox("Team Filter", available_teams)
+    team_filter = st.selectbox("Team", available_teams)
 
 filtered_df = df.copy()
 
@@ -180,8 +214,8 @@ gb.configure_default_column(
     groupable=True,
     cellStyle={"textAlign": "left"}
 )
-gb.configure_column("Name", cellStyle=name_flag_style)
-gb.configure_column("Foreigner", cellRenderer=JsCode("function(params) { return ''; }"), cellStyle=foreigner_flag_style, filter=True, width=120)
+gb.configure_column("Name", cellRenderer=name_renderer, checkboxSelection=True, headerCheckboxSelection=True)
+gb.configure_column("Foreigner", cellRenderer=JsCode("function(params) { return ''; }"), cellStyle=foreigner_flag_style, filter=True, filterPosition="right", width=120)
 gb.configure_column("Position", valueFormatter=JsCode("function(params) { return params.value ? params.value.charAt(0) : ''; }"), width=50)
 gb.configure_column("Games", width=140)
 gb.configure_column("Goals", width=140)
