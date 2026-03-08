@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
+from dataloader import load_players
 
 st.set_page_config(page_title="Swiss Hockey League Stats", page_icon="🏒", layout="wide")
 
@@ -11,58 +12,137 @@ st.title("🏒 Swiss League Player Statistics")
 swiss_teams = ["ZSC Lions", "HC Davos", "SC Bern", "EHC Kloten", "HC Lugano", 
                 "HC Ambrì-Piotta", "EHC Biel", "HC Davos", "Lausanne HC", "HC Fribourg-Gottéron"]
 
-positions = ["Forward", "Defense", "Goalie"]
+positions = ["Forward", "Defender"]
+
+team_logo_renderer = JsCode("""
+    function(params) {
+        if (params.value && params.data.team_logo) {
+            return params.value;
+        }
+        return params.value;
+    }
+""")
+
+team_logo_style = JsCode("""
+    function(params) {
+        if (params.data && params.data.team_logo) {
+            return {
+                'background-image': 'url(' + params.data.team_logo + ')',
+                'background-size': 'contain',
+                'background-repeat': 'no-repeat',
+                'background-position': 'left center',
+                'padding-left': '30px',
+                'line-height': '25px'
+            };
+        }
+        return null;
+    }
+""")
+
+swiss_flag_url = "https://content.app-sources.com/s/39330979433008693/uploads/store/Switzerland-flag-1-5957046.jpg?format=webp"
+
+name_flag_style = JsCode("""
+    function(params) {
+        return null;
+    }
+""")
+
+foreigner_flag_style = JsCode("""
+    function(params) {
+        if (params.data && !params.data.Foreigner) {
+            return {
+                'background-image': 'url(https://content.app-sources.com/s/39330979433008693/uploads/store/Switzerland-flag-1-5957046.jpg?format=webp)',
+                'background-size': '20px 14px',
+                'background-repeat': 'no-repeat',
+                'background-position': 'left center',
+                'padding-left': '22px'
+            };
+        }
+        return null;
+    }
+""")
 
 np.random.seed(42)
 
 def generate_player_data():
-    players = []
-    for i in range(50):
-        players.append({
-            "Name": f"Player {i+1}",
-            "Position": np.random.choice(positions),
-            "Team": np.random.choice(swiss_teams),
-            "Value (M$)": round(np.random.uniform(0.5, 10), 1),
-            "Tendance (M$)": np.random.choice([-1.5, -1.0, -0.5, 0, 0.5, 1.0, 1.5]),
-            "Goals": np.random.randint(0, 25),
-            "Assists": np.random.randint(0, 35),
-            "Penalties": np.random.randint(0, 60),
-            "GP_Transfer": np.random.randint(0, 15),
-            "GP_Total": np.random.randint(20, 50)
-        })
+    players = load_players()
     df = pd.DataFrame(players)
-    df["Expected Value (M$)"] = df["Value (M$)"] + df["Tendance (M$)"]
-    df["Total Points"] = df["Goals"] + df["Assists"]
+    if df.empty:
+        return df
+    
+    df["Name"] = df["first_name"].fillna("") + " " + df["last_name"].fillna("")
+    df["Name"] = df["Name"].str.strip()
+    df["Team"] = df["team"]
+    df["Position"] = df["position"]
+    df["Foreigner"] = df["foreigner"]
+    df["Games"] = df["nb_games"].fillna(0)
+    df["Goals"] = df["goals"].fillna(0)
+    df["Assists"] = (df["first_assists"].fillna(0) + 
+                     df["secondary_assists"].fillna(0) + 
+                     df["assists_in_overtime"].fillna(0))
+    df["Points"] = df["hm_points"]
+    df["Total Points"] = df["hm_total_points"]
+    df["Avg Points"] = df["hm_avg_points"]
+    df["Price (M$)"] = df["hm_price"].fillna(0)
+    df["Tendance (M$)"] = 1
+    df["Expected Value (M$)"] = df["Price (M$)"] + df["Tendance (M$)"]
+
+    df = df.drop(columns=[
+        'id',
+        'first_name', 
+        'last_name', 
+        'nb_games',
+        'position', 
+        'foreigner',
+        'team', 
+        'first_assists', 
+        'secondary_assists', 
+        'assists_in_overtime',
+        'goals',
+        'goals_in_overtime',
+        'game_winning_goals',
+        'hm_points',
+        'hm_price',
+        'hm_total_points',
+        'hm_avg_points'
+    ])
+    
     return df
 
-@st.cache_data
+@st.cache_data(ttl=900)
 def get_player_data():
     return generate_player_data()
+
+@st.cache_data
+def get_unique_teams(df):
+    if df.empty or "Team" not in df:
+        return ["All"] + swiss_teams
+    teams = df["Team"].dropna().unique().tolist()
+    return ["All"] + sorted(teams)
 
 @st.cache_data
 def generate_evolution_data(df):
     evolution_data = []
     for _, player in df.iterrows():
-        num_games = player["GP_Total"]
+        num_games = player["Games"]
         for month in range(1, 7):
-            base_value = player["Value (M$)"]
+            base_value = player["Price (M$)"]
             value_change = np.random.uniform(-0.3, 0.3)
             cumulative_goals = int(player["Goals"] * (month / 6) + np.random.randint(-2, 2))
             cumulative_assists = int(player["Assists"] * (month / 6) + np.random.randint(-3, 3))
-            cumulative_penalties = int(player["Penalties"] * (month / 6) + np.random.randint(-5, 5))
             evolution_data.append({
                 "Name": player["Name"],
                 "Month": f"Month {month}",
                 "MonthNum": month,
-                "Value (M$)": round(base_value + value_change * month, 2),
+                "Price (M$)": round(base_value + value_change * month, 2),
                 "Goals": max(0, cumulative_goals),
                 "Assists": max(0, cumulative_assists),
-                "Penalties": max(0, cumulative_penalties),
                 "Total Points": max(0, cumulative_goals + cumulative_assists)
             })
     return pd.DataFrame(evolution_data)
 
 df = get_player_data()
+available_teams = get_unique_teams(df)
 evolution_df = generate_evolution_data(df)
 
 st.subheader("Swiss League Players")
@@ -76,7 +156,7 @@ with col_filter2:
     position_filter = st.selectbox("Position Filter", ["All"] + positions)
 
 with col_filter3:
-    team_filter = st.selectbox("Team Filter", ["All"] + swiss_teams)
+    team_filter = st.selectbox("Team Filter", available_teams)
 
 filtered_df = df.copy()
 
@@ -97,8 +177,23 @@ gb.configure_default_column(
     filterable=True,
     sortable=True,
     editable=False,
-    groupable=True
+    groupable=True,
+    cellStyle={"textAlign": "left"}
 )
+gb.configure_column("Name", cellStyle=name_flag_style)
+gb.configure_column("Foreigner", cellRenderer=JsCode("function(params) { return ''; }"), cellStyle=foreigner_flag_style, filter=True, width=120)
+gb.configure_column("Position", valueFormatter=JsCode("function(params) { return params.value ? params.value.charAt(0) : ''; }"), width=50)
+gb.configure_column("Games", width=140)
+gb.configure_column("Goals", width=140)
+gb.configure_column("Assists", width=140)
+gb.configure_column("Points", width=140)
+gb.configure_column("Total Points", sort="desc", width=140)
+gb.configure_column("Avg Points", width=140)
+gb.configure_column("Price (M$)", width=140)
+gb.configure_column("Tendance (M$)", width=140)
+gb.configure_column("Expected Value (M$)", width=140)
+gb.configure_column("Team", cellStyle=team_logo_style, width=140)
+gb.configure_column("team_logo", hide=True)
 gb.configure_selection(selection_mode='multiple', use_checkbox=True, header_checkbox=True, header_checkbox_filtered_only=True)
 gb.configure_side_bar()
 gridOptions = gb.build()
@@ -110,6 +205,7 @@ grid_response = AgGrid(
     height=400,
     width='stretch',
     enable_enterprise_modules=False,
+    allow_unsafe_jscode=True,
     key="players_grid"
 )
 
@@ -132,7 +228,7 @@ if selected_players:
     fig_price = px.line(
         selected_evolution, 
         x="Month", 
-        y="Value (M$)", 
+        y="Price (M$)", 
         color="Name",
         markers=True
     )
@@ -140,7 +236,7 @@ if selected_players:
     
     st.subheader("📊 Stats Evolution (Selected Players)")
     
-    stat_type = st.selectbox("Select Stat", ["Goals", "Assists", "Penalties", "Total Points"])
+    stat_type = st.selectbox("Select Stat", ["Goals", "Assists", "Total Points"])
     
     selected_stats = evolution_df[evolution_df["Name"].isin(selected_players)]
     fig_stats = px.line(
@@ -154,7 +250,7 @@ if selected_players:
 
 st.markdown("---")
 
-top_position_filter = st.selectbox("Top Players - Position Filter", ["All", "Forward", "Defense", "Goalie", "Forward + Defense"])
+top_position_filter = st.selectbox("Top Players - Position Filter", ["All", "Forward", "Defense", "Forward + Defense"])
 
 if top_position_filter == "All":
     top_df = df
@@ -162,8 +258,6 @@ elif top_position_filter == "Forward":
     top_df = df[df["Position"] == "Forward"]
 elif top_position_filter == "Defense":
     top_df = df[df["Position"] == "Defense"]
-elif top_position_filter == "Goalie":
-    top_df = df[df["Position"] == "Goalie"]
 else:
     top_df = df[df["Position"].isin(["Forward", "Defense"])]
 
