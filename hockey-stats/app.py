@@ -3,7 +3,13 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
-from dataloader import load_players, load_game_stats
+from dataloader import (
+    load_players,
+    load_game_stats,
+    get_top_players_all,
+    filter_top_players_by_position,
+    get_monthly_cumulative_points,
+)
 
 st.set_page_config(
     page_title="Swiss Hockey League Stats", page_icon="🏒", layout="wide"
@@ -341,6 +347,16 @@ if selected_players and player_ids:
     st.subheader("📈 Price Tendance Evolution (Selected Players)")
 
     selected_evolution = evolution_df[evolution_df["Name"].isin(selected_players)]
+    price_order = (
+        selected_evolution.groupby("Name")["Price (M$)"]
+        .last()
+        .sort_values(ascending=False)
+        .index.tolist()
+    )
+    selected_evolution = (
+        selected_evolution.set_index("Name").loc[price_order].reset_index()
+    )
+
     fig_price = px.line(
         selected_evolution, x="Month", y="Price (M$)", color="Name", markers=True
     )
@@ -357,6 +373,16 @@ if selected_players and player_ids:
 
         stat_type = st.selectbox("Select Stat", STATS_EVOLUTION_METRICS)
 
+        stat_order = (
+            game_stats_df.groupby("player_name")[stat_type]
+            .last()
+            .sort_values(ascending=False)
+            .index.tolist()
+        )
+        game_stats_df = (
+            game_stats_df.set_index("player_name").loc[stat_order].reset_index()
+        )
+
         fig_stats = px.line(
             game_stats_df, x="date", y=stat_type, color="player_name", markers=True
         )
@@ -369,25 +395,42 @@ if selected_players and player_ids:
 
 st.markdown("---")
 
-top_position_filter = st.selectbox(
-    "Position", ["All", "Forward", "Defense"]
-)
+top_position_filter = st.selectbox("Position", ["Forward", "Defense"], index=0)
 
-if top_position_filter == "All":
-    top_df = df
-elif top_position_filter == "Forward":
-    top_df = df[df["Position"] == "Forward"]
-elif top_position_filter == "Defense":
-    top_df = df[df["Position"] == "Defense"]
-else:
-    top_df = df[df["Position"].isin(["Forward", "Defense"])]
+top_players_all = get_top_players_all()
+top_players_filtered = filter_top_players_by_position(
+    top_players_all, top_position_filter
+)
 
 st.subheader(f"🏆 Top Players - Total Points Evolution ({top_position_filter})")
 
-top_players = top_df.nlargest(5, "Total Points")["Name"].tolist()
-top_evolution = evolution_df[evolution_df["Name"].isin(top_players)]
+if not top_players_filtered.empty:
+    top_player_ids = top_players_filtered["id"].tolist()
+    top_player_names = top_players_filtered["player_name"].tolist()
 
-fig_top = px.line(
-    top_evolution, x="Month", y="Total Points", color="Name", markers=True
-)
-st.plotly_chart(fig_top, use_container_width=True)
+    monthly_data = get_monthly_cumulative_points(top_player_ids)
+
+    if monthly_data:
+        monthly_df = pd.DataFrame(monthly_data)
+
+        points_order = (
+            monthly_df.groupby("player_name")["cumulative_points"]
+            .last()
+            .sort_values(ascending=False)
+            .index.tolist()
+        )
+        monthly_df = monthly_df.set_index("player_name").loc[points_order].reset_index()
+
+        fig_top = px.line(
+            monthly_df,
+            x="month",
+            y="cumulative_points",
+            color="player_name",
+            markers=True,
+        )
+        fig_top.update_layout(xaxis_title="Month", yaxis_title="Cumulative Points")
+        st.plotly_chart(fig_top, use_container_width=True)
+    else:
+        st.info("No game stats available for top players.")
+else:
+    st.info("No top players found.")
