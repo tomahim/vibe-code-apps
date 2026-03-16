@@ -7,6 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
         input { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
+        h2 { margin-top: 30px; color: #333; }
         ul { list-style: none; padding: 0; }
         li { padding: 10px; border-bottom: 1px solid #eee; }
         a { color: #0066cc; text-decoration: none; }
@@ -14,20 +15,25 @@
     </style>
 </head>
 <body>
-    <h1>Apps</h1>
+    <h1>Genious Server</h1>
     <input type="text" id="search" placeholder="Search apps..." onkeyup="filterApps()">
-    <ul id="appList">
+
+    <h2>Apps</h2>
+    <ul id="apps">
+        <li data-name="hockey-stats"><a href="http://10.0.0.1:1000">🏒 hockey-stats</a></li>
+    </ul>
+
+    <h2>Server Tools</h2>
+    <ul id="serverTools">
         <li data-name="portainer"><a href="https://10.0.0.1:9443">📦 portainer</a></li>
         <li data-name="opencode"><a href="http://10.0.0.1:4096">💻 opencode</a></li>
         <li data-name="n8n"><a href="http://10.0.0.1:5678">🔄 n8n</a></li>
         <li data-name="code-server"><a href="http://10.0.0.1:8443">🖥️ code-server</a></li>
-        <li data-name="hockey-stats"><a href="http://10.0.0.1:1000">🏒 hockey-stats</a></li>
     </ul>
     <script>
         function filterApps() {
             const input = document.getElementById('search').value.toLowerCase();
-            const items = document.querySelectorAll('#appList li');
-            items.forEach(item => {
+            document.querySelectorAll('#apps li, #serverTools li').forEach(item => {
                 const name = item.getAttribute('data-name').toLowerCase();
                 item.style.display = name.includes(input) ? '' : 'none';
             });
