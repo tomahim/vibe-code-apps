@@ -140,11 +140,13 @@
         <ul>
             <li data-name="ollama"><a href="http://10.0.0.1:3001">🤖 ollama</a></li>
             <li data-name="portainer"><a href="https://10.0.0.1:9443">📦 portainer</a></li>
-            <li data-name="redeploy"><button onclick="redeploy()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;display:flex;align-items:center;gap:12px;width:100%;">🔄 redeploy</button></li>
         <li data-name="opencode"><a href="http://10.0.0.1:4096">💻 opencode</a></li>
         <li data-name="n8n"><a href="http://10.0.0.1:5678">🔄 n8n</a></li>
-        <li data-name="code-server"><a href="http://10.0.0.1:8443">🖥️ code-server</a></li>
-    </ul>
+            <li data-name="code-server"><a href="http://10.0.0.1:8443">🖥️ code-server</a></li>
+        </ul>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <button onclick="redeploy()" style="background:#3b82f6;border:none;border-radius:8px;padding:12px 24px;color:#fff;font-size:1rem;cursor:pointer;">🔄 Redeploy</button>
     </div>
     <script>
         function filterApps() {
