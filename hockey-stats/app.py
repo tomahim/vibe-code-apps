@@ -297,6 +297,7 @@ gb.configure_column("Tendance (M$)", width=140)
 gb.configure_column("Expected Value (M$)", width=140)
 gb.configure_column("Team", cellStyle=team_logo_style, width=140)
 gb.configure_column("team_logo", hide=True)
+gb.configure_column("id", hide=True)
 gb.configure_selection(
     selection_mode="multiple",
     use_checkbox=True,
