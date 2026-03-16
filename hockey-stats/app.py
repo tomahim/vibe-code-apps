@@ -229,10 +229,10 @@ if not df.empty and "Price (M$)" in df.columns:
     max_price = int(df["Price (M$)"].max()) + 1
     price_range = st.slider(
         "Price Range (M$)",
-        min_value=min_price,
-        max_value=max_price,
-        value=(min_price, max_price),
-        step=1,
+        min_value=float(min_price),
+        max_value=float(max_price),
+        value=(float(min_price), float(max_price)),
+        step=0.5,
     )
 else:
     price_range = None
