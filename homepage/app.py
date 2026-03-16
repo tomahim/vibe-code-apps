@@ -29,32 +29,34 @@ def filter_items(items, query):
 with tab[0]:
     st.subheader("Apps")
     filtered_apps = filter_items(apps, search)
-    _, col, _ = st.columns([1, 2, 1])
-    with col:
-        for app in filtered_apps:
-            st.markdown(f"""
-            <a href="{app['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;margin-bottom:10px;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-left:auto;margin-right:auto;">
-                    <span style="font-size:1.5rem;">{app['icon']}</span>
-                    <span style="font-size:0.7rem;margin-top:4px;">{app['name']}</span>
-                </div>
-            </a>
-            """, unsafe_allow_html=True)
+    apps_html = '<div style="display:flex;flex-wrap:wrap;gap:0;">'
+    for app in filtered_apps:
+        apps_html += f"""
+        <a href="{app['url']}" target="_blank" style="text-decoration:none;">
+            <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                <span style="font-size:1.5rem;">{app['icon']}</span>
+                <span style="font-size:0.7rem;margin-top:4px;">{app['name']}</span>
+            </div>
+        </a>
+        """
+    apps_html += '</div>'
+    st.markdown(apps_html, unsafe_allow_html=True)
 
 with tab[1]:
     st.subheader("Server Tools")
     filtered_tools = filter_items(server_tools, search)
-    cols = st.columns(5)
-    for i, tool in enumerate(filtered_tools):
-        with cols[i % 5]:
-            st.markdown(f"""
-            <a href="{tool['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-left:auto;margin-right:auto;">
-                    <span style="font-size:1.5rem;">{tool['icon']}</span>
-                    <span style="font-size:0.7rem;margin-top:4px;">{tool['name']}</span>
-                </div>
-            </a>
-            """, unsafe_allow_html=True)
+    tools_html = '<div style="display:flex;flex-wrap:wrap;gap:0;">'
+    for tool in filtered_tools:
+        tools_html += f"""
+        <a href="{tool['url']}" target="_blank" style="text-decoration:none;">
+            <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                <span style="font-size:1.5rem;">{tool['icon']}</span>
+                <span style="font-size:0.7rem;margin-top:4px;">{tool['name']}</span>
+            </div>
+        </a>
+        """
+    tools_html += '</div>'
+    st.markdown(tools_html, unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown('<div style="text-align:center;margin-top:20px;">', unsafe_allow_html=True)
