@@ -96,6 +96,28 @@
             gap: 12px; 
         }
         a:hover { text-decoration: none; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+        .tab {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: #fff;
+        }
+        .tab:hover:not(.active) { background: #334155; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        body.light .tab { background: #fff; border-color: #cbd5e1; color: #64748b; }
+        body.light .tab.active { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+        body.light .tab:hover:not(.active) { background: #f1f5f9; }
     </style>
 </head>
 <body>
@@ -103,8 +125,13 @@
     <h1>Genious Server</h1>
     <input type="text" id="search" placeholder="Search apps..." onkeyup="filterApps()">
 
-    <h2>Apps</h2>
-    <ul id="apps">
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('apps')">Apps</button>
+        <button class="tab" onclick="switchTab('serverTools')">Server Tools</button>
+    </div>
+
+    <div id="apps" class="tab-content active">
+        <ul>
         <li data-name="hockey-stats"><a href="http://10.0.0.1:1000">🏒 hockey-stats</a></li>
     </ul>
 
@@ -116,6 +143,7 @@
         <li data-name="n8n"><a href="http://10.0.0.1:5678">🔄 n8n</a></li>
         <li data-name="code-server"><a href="http://10.0.0.1:8443">🖥️ code-server</a></li>
     </ul>
+    </div>
     <script>
         function filterApps() {
             const input = document.getElementById('search').value.toLowerCase();
@@ -128,6 +156,12 @@
             document.body.classList.toggle('light');
             const btn = document.querySelector('.theme-toggle');
             btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+        }
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
         }
     </script>
 </body>
