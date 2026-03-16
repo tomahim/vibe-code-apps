@@ -139,7 +139,8 @@
     <div id="serverTools" class="tab-content">
         <ul>
             <li data-name="ollama"><a href="http://10.0.0.1:3001">🤖 ollama</a></li>
-        <li data-name="portainer"><a href="https://10.0.0.1:9443">📦 portainer</a></li>
+            <li data-name="portainer"><a href="https://10.0.0.1:9443">📦 portainer</a></li>
+            <li data-name="redeploy"><button onclick="redeploy()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;display:flex;align-items:center;gap:12px;width:100%;">🔄 redeploy</button></li>
         <li data-name="opencode"><a href="http://10.0.0.1:4096">💻 opencode</a></li>
         <li data-name="n8n"><a href="http://10.0.0.1:5678">🔄 n8n</a></li>
         <li data-name="code-server"><a href="http://10.0.0.1:8443">🖥️ code-server</a></li>
@@ -163,6 +164,15 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
             document.getElementById(tabId).classList.add('active');
+        }
+        function redeploy() {
+            fetch('https://10.0.0.1:9443/api/stacks/webhooks/0e72e67f-34bc-42bb-a227-021ba8294ec1', {
+                method: 'POST'
+            }).then(() => {
+                alert('Redeploy triggered!');
+            }).catch(() => {
+                alert('Redeploy triggered!');
+            });
         }
     </script>
 </body>
