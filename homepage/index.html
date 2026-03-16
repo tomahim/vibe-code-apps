@@ -3,18 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps</title>
+    <title>Genious Server</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-        input { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
-        h2 { margin-top: 30px; color: #333; }
-        ul { list-style: none; padding: 0; }
-        li { padding: 10px; border-bottom: 1px solid #eee; }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #0f172a; 
+            color: #e2e8f0; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+        }
+        h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 30px; 
+            color: #fff; 
+            text-align: center; 
+        }
+        h2 { 
+            font-size: 1.2rem; 
+            margin: 30px 0 15px; 
+            color: #94a3b8; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        input { 
+            width: 100%; 
+            padding: 14px 20px; 
+            margin-bottom: 30px; 
+            font-size: 16px; 
+            border: 1px solid #334155; 
+            border-radius: 12px; 
+            background: #1e293b; 
+            color: #fff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus { border-color: #3b82f6; }
+        input::placeholder { color: #64748b; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+        }
+        body.light {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        body.light h2 { color: #64748b; }
+        body.light h1 { color: #0f172a; }
+        body.light input { 
+            background: #fff; 
+            border-color: #cbd5e1; 
+            color: #1e293b;
+        }
+        body.light input::placeholder { color: #94a3b8; }
+        body.light li { background: #fff; }
+        body.light li:hover { background: #f8fafc; }
+        body.light a { color: #1e293b; }
+        body.light .theme-toggle { background: #fff; border-color: #cbd5e1; }
+        ul { 
+            list-style: none; 
+            padding: 0; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 16px; 
+        }
+        li { 
+            background: #1e293b; 
+            border-radius: 12px; 
+            padding: 20px; 
+            transition: transform 0.2s, background 0.2s;
+        }
+        li:hover { 
+            transform: translateY(-2px); 
+            background: #334155; 
+        }
+        a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 1.1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        a:hover { text-decoration: none; }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
     <h1>Genious Server</h1>
     <input type="text" id="search" placeholder="Search apps..." onkeyup="filterApps()">
 
@@ -38,6 +123,11 @@
                 const name = item.getAttribute('data-name').toLowerCase();
                 item.style.display = name.includes(input) ? '' : 'none';
             });
+        }
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
         }
     </script>
 </body>
