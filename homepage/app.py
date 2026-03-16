@@ -34,9 +34,9 @@ with tab[0]:
         for app in filtered_apps:
             st.markdown(f"""
             <a href="{app['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:15px;border-radius:12px;text-align:center;color:#fff;margin-bottom:10px;">
-                    <span style="font-size:1.5rem;">{app['icon']}</span><br>
-                    <span>{app['name']}</span>
+                <div style="background:#1e293b;padding:10px;border-radius:12px;text-align:center;color:#fff;margin-bottom:10px;">
+                    <span style="font-size:1.2rem;">{app['icon']}</span><br>
+                    <span style="font-size:0.9rem;">{app['name']}</span>
                 </div>
             </a>
             """, unsafe_allow_html=True)
