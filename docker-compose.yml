@@ -2,13 +2,11 @@ version: "3.8"
 
 services:
   homepage:
-    image: nginx:alpine
+    build: ./homepage
     container_name: homepage
     restart: unless-stopped
     ports:
-      - "8080:80"
-    volumes:
-      - ./homepage:/usr/share/nginx/html
+      - "80:80"
 
   hockey-stats:
     build: ./hockey-stats
