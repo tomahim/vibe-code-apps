@@ -31,14 +31,7 @@ with tab[0]:
     filtered_apps = filter_items(apps, search)
     apps_html = '<div style="display:flex;flex-wrap:wrap;gap:0;">'
     for app in filtered_apps:
-        apps_html += f"""
-        <a href="{app['url']}" target="_blank" style="text-decoration:none;">
-            <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                <span style="font-size:1.5rem;">{app['icon']}</span>
-                <span style="font-size:0.7rem;margin-top:4px;">{app['name']}</span>
-            </div>
-        </a>
-        """
+        apps_html += f'<a href="{app["url"]}" target="_blank" style="text-decoration:none;"><div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><span style="font-size:1.5rem;">{app["icon"]}</span><span style="font-size:0.7rem;margin-top:4px;">{app["name"]}</span></div></a>'
     apps_html += '</div>'
     st.markdown(apps_html, unsafe_allow_html=True)
 
@@ -47,14 +40,7 @@ with tab[1]:
     filtered_tools = filter_items(server_tools, search)
     tools_html = '<div style="display:flex;flex-wrap:wrap;gap:0;">'
     for tool in filtered_tools:
-        tools_html += f"""
-        <a href="{tool['url']}" target="_blank" style="text-decoration:none;">
-            <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                <span style="font-size:1.5rem;">{tool['icon']}</span>
-                <span style="font-size:0.7rem;margin-top:4px;">{tool['name']}</span>
-            </div>
-        </a>
-        """
+        tools_html += f'<a href="{tool["url"]}" target="_blank" style="text-decoration:none;"><div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><span style="font-size:1.5rem;">{tool["icon"]}</span><span style="font-size:0.7rem;margin-top:4px;">{tool["name"]}</span></div></a>'
     tools_html += '</div>'
     st.markdown(tools_html, unsafe_allow_html=True)
 
