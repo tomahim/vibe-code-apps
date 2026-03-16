@@ -27,7 +27,6 @@ def filter_items(items, query):
     return [item for item in items if query.lower() in item["name"].lower()]
 
 with tab[0]:
-    st.subheader("Apps")
     filtered_apps = filter_items(apps, search)
     apps_html = '<div style="display:flex;flex-wrap:wrap;gap:20px;">'
     for app in filtered_apps:
@@ -36,7 +35,6 @@ with tab[0]:
     st.markdown(apps_html, unsafe_allow_html=True)
 
 with tab[1]:
-    st.subheader("Server Tools")
     filtered_tools = filter_items(server_tools, search)
     tools_html = '<div style="display:flex;flex-wrap:wrap;gap:20px;">'
     for tool in filtered_tools:
