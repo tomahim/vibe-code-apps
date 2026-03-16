@@ -34,9 +34,9 @@ with tab[0]:
         for app in filtered_apps:
             st.markdown(f"""
             <a href="{app['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:10px;border-radius:12px;text-align:center;color:#fff;margin-bottom:10px;">
-                    <span style="font-size:1.2rem;">{app['icon']}</span><br>
-                    <span style="font-size:0.9rem;">{app['name']}</span>
+                <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;margin-bottom:10px;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-left:auto;margin-right:auto;">
+                    <span style="font-size:1.5rem;">{app['icon']}</span>
+                    <span style="font-size:0.7rem;margin-top:4px;">{app['name']}</span>
                 </div>
             </a>
             """, unsafe_allow_html=True)
@@ -49,9 +49,9 @@ with tab[1]:
         with cols[i % 5]:
             st.markdown(f"""
             <a href="{tool['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:20px;border-radius:12px;text-align:center;color:#fff;">
-                    <span style="font-size:2rem;">{tool['icon']}</span><br>
-                    <span style="font-size:0.9rem;">{tool['name']}</span>
+                <div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-left:auto;margin-right:auto;">
+                    <span style="font-size:1.5rem;">{tool['icon']}</span>
+                    <span style="font-size:0.7rem;margin-top:4px;">{tool['name']}</span>
                 </div>
             </a>
             """, unsafe_allow_html=True)
