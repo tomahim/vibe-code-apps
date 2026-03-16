@@ -8,7 +8,7 @@ services:
     ports:
       - "1000:8501"
     volumes:
-      - ./hockey-stats:/app
-    working_dir: /app
+      - ./:/app
+    working_dir: /app/hockey-stats
     command: >
       sh -c "pip install -r requirements.txt && streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
