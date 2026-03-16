@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   hockey-stats:
@@ -7,8 +7,7 @@ services:
     restart: unless-stopped
     ports:
       - "1000:8501"
-    volumes:
-      - ./:/app
-    working_dir: /app/hockey-stats
+    working_dir: /data/compose
     command: >
-      sh -c "pip install -r requirements.txt && streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
+      sh -c "pip install -r hockey-stats/requirements.txt &&
+             streamlit run hockey-stats/app.py --server.port=8501 --server.address=0.0.0.0"
