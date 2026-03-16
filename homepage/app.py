@@ -29,13 +29,13 @@ def filter_items(items, query):
 with tab[0]:
     st.subheader("Apps")
     filtered_apps = filter_items(apps, search)
-    cols = st.columns(len(filtered_apps) if filtered_apps else 1)
+    cols = st.columns(min(len(filtered_apps), 3)) if filtered_apps else st.columns(1)
     for i, app in enumerate(filtered_apps):
-        with cols[i]:
+        with cols[i % len(cols)]:
             st.markdown(f"""
             <a href="{app['url']}" target="_blank" style="text-decoration:none;">
-                <div style="background:#1e293b;padding:20px;border-radius:12px;text-align:center;color:#fff;">
-                    <span style="font-size:2rem;">{app['icon']}</span><br>
+                <div style="background:#1e293b;padding:15px;border-radius:12px;text-align:center;color:#fff;">
+                    <span style="font-size:1.5rem;">{app['icon']}</span><br>
                     <span>{app['name']}</span>
                 </div>
             </a>
@@ -44,9 +44,9 @@ with tab[0]:
 with tab[1]:
     st.subheader("Server Tools")
     filtered_tools = filter_items(server_tools, search)
-    cols = st.columns(len(filtered_tools) if filtered_tools else 1)
+    cols = st.columns(min(len(filtered_tools), 3)) if filtered_tools else st.columns(1)
     for i, tool in enumerate(filtered_tools):
-        with cols[i]:
+        with cols[i % len(cols)]:
             st.markdown(f"""
             <a href="{tool['url']}" target="_blank" style="text-decoration:none;">
                 <div style="background:#1e293b;padding:20px;border-radius:12px;text-align:center;color:#fff;">
