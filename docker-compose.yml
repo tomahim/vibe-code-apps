@@ -2,12 +2,8 @@ version: "3.8"
 
 services:
   hockey-stats:
-    image: python:3.12-slim
+    build: ./hockey-stats
     container_name: hockey-stats
     restart: unless-stopped
     ports:
       - "1000:8501"
-    working_dir: /data/compose
-    command: >
-      sh -c "pip install -r hockey-stats/requirements.txt &&
-             streamlit run hockey-stats/app.py --server.port=8501 --server.address=0.0.0.0"
