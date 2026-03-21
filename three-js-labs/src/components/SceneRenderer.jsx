@@ -173,15 +173,17 @@ function SceneSetup({ sceneId, onThumbnailCapture }) {
     // Import handler
     const handleImport = (e) => {
       const loader = new GLTFLoader();
-      loader.parse(
-        e.detail.data,
-        '',
+      loader.load(
+        e.detail.url,
         (gltf) => {
           scene.add(gltf.scene);
           console.log('Model imported successfully');
+          URL.revokeObjectURL(e.detail.url);
         },
+        undefined,
         (error) => {
           console.error('Import error:', error);
+          URL.revokeObjectURL(e.detail.url);
         }
       );
     };

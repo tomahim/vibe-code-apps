@@ -71,14 +71,11 @@ export default function SceneEditor() {
     input.onchange = async (e) => {
       const file = e.target.files[0];
       if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const customEvent = new CustomEvent('import-gltf', {
-            detail: { data: event.target.result, filename: file.name }
-          });
-          window.dispatchEvent(customEvent);
-        };
-        reader.readAsArrayBuffer(file);
+        const url = URL.createObjectURL(file);
+        const customEvent = new CustomEvent('import-gltf', {
+          detail: { url, filename: file.name }
+        });
+        window.dispatchEvent(customEvent);
       }
     };
     input.click();
