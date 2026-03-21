@@ -84,6 +84,11 @@ export default function SceneEditor() {
     input.click();
   };
 
+  const handleCaptureThumbnail = () => {
+    const event = new CustomEvent('capture-thumbnail', { detail: { sceneId: id } });
+    window.dispatchEvent(event);
+  };
+
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -96,6 +101,9 @@ export default function SceneEditor() {
         </button>
         <h1>{id}</h1>
         <div className="editor-actions">
+          <button className="btn-action" onClick={handleCaptureThumbnail}>
+            Capture Thumbnail
+          </button>
           <button className="btn-action" onClick={handleImport}>
             Import GLTF
           </button>

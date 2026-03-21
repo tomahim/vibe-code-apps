@@ -115,18 +115,25 @@ function SceneSetup({ sceneId, onThumbnailCapture }) {
   const { scene, gl } = useThree();
 
   useEffect(() => {
+    console.log('SceneSetup mounted, onThumbnailCapture:', !!onThumbnailCapture);
+    
     // Capture thumbnail after scene loads
     const captureTimeout = setTimeout(() => {
+      console.log('Attempting to capture thumbnail...');
       if (onThumbnailCapture) {
         try {
           const canvas = gl.domElement;
+          console.log('Canvas:', canvas);
           const imageData = canvas.toDataURL('image/png');
+          console.log('Image data length:', imageData.length);
           onThumbnailCapture(imageData);
         } catch (error) {
           console.error('Error capturing thumbnail:', error);
         }
+      } else {
+        console.log('No onThumbnailCapture callback provided');
       }
-    }, 1000); // Wait 1 second for scene to render
+    }, 2000); // Wait 2 seconds for scene to render
 
     // Export handler
     const handleExport = async (e) => {
@@ -184,13 +191,30 @@ function SceneSetup({ sceneId, onThumbnailCapture }) {
       }
     };
 
+    // Manual capture handler
+    const handleManualCapture = (e) => {
+      if (e.detail.sceneId !== sceneId) return;
+      console.log('Manual thumbnail capture triggered');
+      if (onThumbnailCapture) {
+        try {
+          const canvas = gl.domElement;
+          const imageData = canvas.toDataURL('image/png');
+          onThumbnailCapture(imageData);
+        } catch (error) {
+          console.error('Error capturing thumbnail:', error);
+        }
+      }
+    };
+
     window.addEventListener('export-gltf', handleExport);
     window.addEventListener('import-gltf', handleImport);
+    window.addEventListener('capture-thumbnail', handleManualCapture);
 
     return () => {
       clearTimeout(captureTimeout);
       window.removeEventListener('export-gltf', handleExport);
       window.removeEventListener('import-gltf', handleImport);
+      window.removeEventListener('capture-thumbnail', handleManualCapture);
     };
   }, [scene, sceneId, gl, onThumbnailCapture]);
 
@@ -202,15 +226,22 @@ export default function SceneRenderer({ code, sceneId, captureThumbnail = false 
   const [thumbnailCaptured, setThumbnailCaptured] = useState(false);
 
   const handleThumbnailCapture = async (imageData) => {
-    if (!captureThumbnail || thumbnailCaptured) return;
+    console.log('handleThumbnailCapture called, captureThumbnail:', captureThumbnail, 'thumbnailCaptured:', thumbnailCaptured);
+    
+    if (thumbnailCaptured) {
+      console.log('Thumbnail already captured, skipping');
+      return;
+    }
     
     try {
-      await fetch(`/api/thumbnails/${sceneId}`, {
+      console.log('Saving thumbnail for:', sceneId);
+      const response = await fetch(`/api/thumbnails/${sceneId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageData }),
       });
-      console.log('Thumbnail saved');
+      const result = await response.json();
+      console.log('Thumbnail saved, result:', result);
       setThumbnailCaptured(true);
     } catch (error) {
       console.error('Error saving thumbnail:', error);
