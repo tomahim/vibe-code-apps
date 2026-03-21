@@ -10,16 +10,16 @@ search = st.text_input("Search apps...", key="search")
 tab = st.tabs(["Apps", "Server Tools"])
 
 apps = [
-    {"name": "hockey-stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
-    {"name": "trail-time-estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
+    {"name": "Hockey stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
+    {"name": "Trail time estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
 ]
 
 server_tools = [
-    {"name": "ollama", "icon": "🤖", "url": "http://10.0.0.1:3001"},
-    {"name": "portainer", "icon": "📦", "url": "https://10.0.0.1:9443"},
-    {"name": "opencode", "icon": "💻", "url": "http://10.0.0.1:4096"},
+    {"name": "Ollama", "icon": "🤖", "url": "http://10.0.0.1:3001"},
+    {"name": "Portainer", "icon": "📦", "url": "https://10.0.0.1:9443"},
+    {"name": "OpenCode", "icon": "💻", "url": "http://10.0.0.1:4096"},
     {"name": "n8n", "icon": "🔄", "url": "http://10.0.0.1:5678"},
-    {"name": "code-server", "icon": "🖥️", "url": "http://10.0.0.1:8443"},
+    {"name": "Code server", "icon": "🖥️", "url": "http://10.0.0.1:8443"},
 ]
 
 def filter_items(items, query):
