@@ -143,23 +143,87 @@ if target_time:
             
             profile_css = """
             <style>
-            #profilPar { position: relative; width: 100%; margin-bottom: 20px; }
-            #profil img { width: 100%; height: auto; display: block; }
-            #infoPt { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-            .pt { z-index: 100; color: black; border-color: black !important; width: 0px; height: 0px; position: absolute; border-radius: 50%; border-style: solid; border-width: 2px; transform: translate(-50%, -50%); background: white; }
-            .ptn { position: absolute; padding: 0.5%; transform: translate(-40%, -180%) rotate(-60deg); white-space: nowrap; font-size: 12px; color: #333; }
-            .tpsProfil { background-color: #a0a0f7; color: white; transform: translate(-100%, 0); padding: 3px; border-radius: 3px; font-size: 12px; }
-            .tpsProfilButt { transform: translate(-100%, 0); line-height: 1.2; padding: 5px; width: 50px; background: white; border: 1px solid rgba(34, 36, 38, 0.15); border-radius: 4px; font-size: 12px; }
-            .divDeniv, .tpsProfil { position: absolute; top: 0; text-align: center; }
-            #line { position: absolute; border-left: 1px solid rgba(152,152,152,.5); border-right: 1px solid rgba(255,255,255,.5); }
+            #profilPar { 
+                position: relative; 
+                width: 100%; 
+                margin-bottom: 20px; 
+            }
+            #profil { 
+                margin-bottom: 20px;
+                width: 100%;
+                position: relative;
+            }
+            #profil img { 
+                width: 100%; 
+                height: auto; 
+                display: block; 
+            }
+            #infoPt { 
+                position: relative;
+                max-width: 100%;
+                height: 100px;
+            }
+            .pt { 
+                z-index: 100;
+                color: black;
+                border-color: black !important;
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                border-radius: 50%;
+                border-style: solid;
+                border-width: 2px;
+                transform: translate(-50%, -50%);
+                background: white;
+            }
+            .ptn { 
+                position: absolute;
+                padding: 0.5%;
+                transform: translate(-40%, -180%) rotate(-60deg);
+                white-space: nowrap;
+                font-size: 11px;
+            }
+            .divDeniv, .tpsProfil, .tpsProfilButt { 
+                position: absolute;
+                top: 0;
+                text-align: center;
+            }
+            .tps {
+                color: black;
+                border: solid;
+                border-width: 1px;
+            }
+            .tpsProfilButt { 
+                transform: translate(-100%, 0);
+                line-height: 1.2142em;
+                padding: 5px;
+                width: 50px;
+                background: #FFFFFF;
+                border: 1px solid rgba(34, 36, 38, 0.15);
+                color: rgba(0, 0, 0, 0.87);
+                border-radius: 0.28571429rem;
+                font-size: 11px;
+            }
+            .tpsProfil { 
+                background-color: #a0a0f7;
+                color: white;
+                transform: translate(-100%, 0);
+                padding: 3px;
+                border-radius: 0.28571429rem;
+                font-size: 11px;
+            }
+            #line { 
+                position: absolute;
+                border-left: 2px solid black;
+                bottom: -65px;
+            }
             </style>
             """
             
             soup = BeautifulSoup(data['pro'], "html.parser")
             img = soup.find('img')
             if img and img.get('src'):
-                img['style'] = 'width:100%;height:auto;display:block;'
-                profil_html = f'<div id="profilPar"><div id="profil">{str(img)}</div>'
+                profil_html = f'<div id="profilPar"><div id="profil">{data["pro"]}</div>'
                 if 'dPM' in data and data['dPM']:
                     profil_html += f'<div id="infoPt">{data["dPM"]}</div>'
                 profil_html += '</div>'
