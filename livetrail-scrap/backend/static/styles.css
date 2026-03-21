@@ -1,0 +1,477 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+  overflow-x: visible;
+  margin: 0 auto;
+  background-image: url('https://images.unsplash.com/photo-1444927714506-8492d94b4e3d?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-position-y: center;
+}
+
+h1 {
+  text-align:center;
+ 
+  text-transform:uppercase;
+  font-size:26px; letter-spacing:1px;
+  
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 16px 0;
+  grid-gap: 22px;
+
+  color: #6565e1;
+}
+
+h1:after, h1:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #6565e1;
+  background-color:#f8f8f8;
+}
+
+#content {
+  background-color: white;
+  padding: 10px 20px 20px 20px;
+  width: 80%;
+  margin: 0 auto;
+
+  border-radius: 15px;
+}
+
+.ui.container{
+    height: 100%;
+  }
+  #divOdjIn,#divOdj{
+    width: 50%;
+  }
+  #newS{
+    float: right;
+    margin-right: 2%;
+    margin-Top: 2%;
+  }
+  #newSearch{
+    height: 100px;
+  }
+  #helloCpt .message{
+    margin-top: 2%;
+  }
+  #helloCpt p{
+    font-size: 20px;
+  }
+  #connexion{
+    padding-top: 5%;
+  }
+  .ui.input{
+    height: auto;
+    width: 72%;
+  }
+  #objectif.ui.input, #butt{
+    height: auto;
+    width: 35%;
+  }
+  #desItra{
+    width: 40%;
+  }
+  
+  #objInfo{
+    display: flex;
+  }
+  #divCompte{
+    margin-bottom: 2%;
+  }
+  #bibCheck{
+    display: flex;
+    margin-top: 3%;
+  }
+  #bibInput{
+    width:40%;
+  }
+  #bibS{
+    width: 95%;
+    height: 47px;
+  }
+  #bibButtonS{
+    width: 95%;
+    height: 47px;
+  }
+  #alertBib{
+    width: 60%;
+  }
+  #butt, #buttP{
+    display: flex;
+    margin-bottom: 3%;
+  }
+  #bib{
+    width: 50%;
+    height: 47px;
+  }
+  #obj{
+    width: 95%;
+    height: 47px;
+  }
+  #email, #mdp{
+    width: 50%;
+    height: 47px;
+  }
+  #bibButton, #buttMail{
+    width: 50%;
+    height: 47px;
+  }
+  #objButton{
+    width: 95%;
+    height: 47px;
+  }
+  #alertConnexion{
+    color: red;
+  }
+  #messDoss{
+     width: 72%;
+     height: 47px;
+     margin-bottom: 2%;
+  }
+  #pbNombre{
+     width: 75%;
+     height: 47px;
+  }
+  #objTitle{
+    padding-bottom: 2%;
+    padding-top: 5%;
+  }
+  #tableau{
+    padding-bottom: 3%;
+  }
+  .allButton{
+    width: 48%;
+    height: 47px;
+  }
+  .allButtonP{
+    width: 17%;
+    height: 47px;
+  }
+  #profil{
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+  }
+  #imageProfil{
+    width: 100%;
+  }
+  
+  .pt{
+    z-index: 100;
+    color: black;
+    border-color: black !important;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    transform: translate(-50%, -50%);
+  }
+  .ptn{
+    position: absolute;
+    padding: 0.5%;
+    transform: translate(-40%, -180%) rotate(-60deg);
+    white-space: nowrap;
+  }
+  #infoPt{
+    position: relative;
+    max-width: 100%;
+  }
+  .divDeniv, .tpsProfil, .tpsProfilButt{
+    position: absolute;
+    top: 0;
+    text-align: center;
+  }
+  .tps{
+    color:green;
+  }
+  .tpsProfilButt{
+    transform: translate(-100%,0);
+    line-height: 1.2142em;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding: 5px;
+    width: 50px;
+    background: #FFFFFF;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 0.28571429rem;
+  }
+  .tpsProfil{
+    background-color: #a0a0f7;
+    color : white;
+    transform: translate(-100%,0);
+    padding: 3px;
+    border-radius: 0.28571429rem;
+  }
+  #eiButt{
+    width:35%;
+  }
+  #infoPt, #infoDeniv{
+        height: 100px;
+  }
+  #line{
+    position: absolute;
+    border-left: 1px solid rgba(152,152,152,.5);
+    border-right: 1px solid rgba(255,255,255,.5);
+    bottom: -65px;
+  }
+  #lineBottom{
+    border-bottom: solid;
+    border-width: 1px;
+    padding: 10px;
+  }
+  #buttP{
+    padding-bottom: 10%;
+  }
+  #helloCpt{
+    margin-top: 2%;
+    font-weight: bold;
+  }
+  @media only screen and (max-width: 600px) {
+    .ui.input, #objectif.ui.input, #butt, #buttP{
+      height: auto;
+      width: 100%;
+    }
+    #buttP{
+      display : block;
+    }
+    #messDoss{
+       width: 100%;
+       height: 47px;
+       margin-bottom: 2%;
+    }
+    #eiButt{
+      width:100%;
+      margin-bottom: 15px;
+    }
+    .modifMess{
+      width: 100%;
+    }
+    #objInfo{
+      display: block;
+    }
+    #desItra, #pbNombre{
+      width: 100%;
+    }
+    #buut{
+      display: inline;
+    }
+    #bib, #email, #mdp{
+      width: 100%;
+    }
+    #bibButton, #buttMail{
+      width: 100%;
+    }
+    #serchBib, #objAlert{
+      display: block;
+    }
+    .allButton, .allButtonP{
+      margin-left: auto;
+      margin-right: auto;
+      width: 47%;
+    }
+    #profil, #infoPt{
+      min-width: 600px;
+      position: relative;
+    }
+    #profilPar{
+      overflow: auto;
+    }
+    #tableau{
+      overflow: auto;
+    }
+    #bibCheck{
+      display: block;
+      margin-top: 3%;
+    }
+    #bibInput{
+      width:100%;
+    }
+    #bibS{
+      width: 100%;
+      height: 47px;
+    }
+    #bibButtonS{
+      width: 100%;
+      height: 47px;
+    }
+    #alertBib{
+      width: 100%;
+    }
+    #newS{
+      float:none;
+    }
+  }
+  html, body{
+    zoom: 85%;
+  }
+  #newSearch, #butt, #buttP, #pbNombre, #objAlert, #objTitle, .warning.message{
+    display: none;
+  }
+  #tableau{
+    padding-bottom: 0%;
+  }
+  #line {
+      position: absolute;
+      border-left: 2px solid black;
+      bottom: -65px;
+  }
+  #tpsProfil {
+      border: solid;
+      border-width: 1px;
+      color: gray;
+  }
+  .tps{
+    color:black;
+    border: solid;
+    border-width: 1px;
+  }
+  table.ui.small.table {
+      font-size: 18px;
+  } 
+  
+ input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    outline: none;
+  }
+  
+ input:focus {
+    border-color: #6565e1;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+button {
+    cursor: pointer;
+    outline: 0;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #6565e1;
+    border-color: #6565e1;
+}
+
+button:hover {
+    color: #fff;
+    background-color: #6565e1;
+    border-color: #6565e1;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  table tr:hover {background-color: #ddd;}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #6565e1;
+    color: white;
+  }
+
+  table th a, table th a:hover {
+    color: rgba(226, 226, 226, 0.969);
+  }
+
+label {
+    font-size: 24px;
+    line-height: 2;
+    font-weight: bold;
+}
+
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+  margin: 20px;
+}
+
+li:last-child {
+  border: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #000;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+  display: block;
+  width: 600px;
+}
+
+li a:hover {
+  font-size: 30px;
+  background: #f6f6f6;
+}
+
+a.back-link, a.back-link:hover {
+  color: #6565e1;
+}
+
+
+hr {
+  clear: both;
+  margin: 30px auto;
+  padding: 0;
+  color: #d4d4d4;
+  border: 1px solid #d4d4d4;
+  width:100%;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  margin: 30px 0;
+  padding: 1em 2.5em;
+  width: 100%;
+  background: #2ecc71;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 1.3rem;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}

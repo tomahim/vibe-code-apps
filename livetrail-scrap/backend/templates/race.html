@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+    {% set goal = request.path_params.get('goal') %}
+    {% set id = request.path_params.get('id') %}
+    {% set speed = request.query_params.get('speed') %}
+
+    <h1>
+        {{ data['title'] }}
+        {% if goal %}
+            - Objectif: {{ goal }}
+        {% endif %}
+    </h1>
+
+    <div style="font-size:20px; text-align: bottom; margin-bottom: 20px;">
+        <a class="back-link" href="/">Retour</a>
+    </div>
+
+    <input type="hidden" id="id" name="id" value="{{ request.path_params.get('id') }}">
+    <div style="margin-bottom: 40px;">
+        <label for="goal">Temps visé :</label><br>
+        <input type="text" id="goal" name="goal" value="{{ goal if goal else '' }}" placeholder="HH:MM">
+        <button type="submit" onclick="goToRace()">Ok</button>
+    </div>
+    
+    {% if goal %}
+        <div>
+            <div style="margin-bottom: 40px;">
+                 <table>
+                    <table>
+                        <tr>
+                          <th>Point de passage</th>
+                          <th>Temps de course</th>
+                          <th>
+                            Distance / temps depuis le point précédent 
+                            -  
+                            {% if speed %}
+                                <a href="{{ url_for('race', id=id, goal=goal) }}">Afficher allure moyenne</a>
+                            {% else %}
+                                <a href="{{ url_for('race', id=id, goal=goal).include_query_params(speed=1) }}">Afficher vitesse moyenne</a>
+                            {% endif %}
+                          </th>
+                          <th>Dénivelé (D+ / D-)</th>
+                        </tr>
+                        {% for time in data['times'] %}
+                        <tr>
+                            <td>{{ time['checkpoint'] }} - <b>{{time['distance']}} km</b> - {{time['cumulatedPositiveElevation']}} D+</td>
+                            <td>
+                                {% if time['cumulatedTime'] != '0:00' %}
+                                {{ time['cumulatedTime'] }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if time['distancePreviousPoint'] > 0 %}
+                                    
+                                    {{ time['distancePreviousPoint'] }} km en <b>{{ time['timePreviousCheckpoint'] }}</b>
+                                    {% if speed %}
+                                        {% if time['speed'] > 0 %} - {{ time['speed'] }} km/h {% endif %}
+                                    {% else %}
+                                        {% if time['pace'] > 0 %} - {{ time['pace'] }}' {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span style="color: rgb(73, 107, 73)">{{ time['positiveElevation'] }}</span> 
+                                / <span style="color: rgb(227, 153, 84)">{{ time['negativeElevation'] }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                      </table>
+                 </table>
+            </div>
+
+            <hr>
+        
+            <div id="profilPar">
+                <div id="profil"> {{ data['pro']|safe }} </div>
+                <div id="infoPt"> {{ data['dPM']|safe }} </div>
+            </div>
+        </div>
+    {% endif %}
+<script>
+    function goToRace() {
+        var id = document.getElementById('id').value;
+        var goal = document.getElementById('goal').value;
+        window.location =  `/race/${id}/${goal}`; 
+    }
+
+    document.getElementById('goal').addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            goToRace();
+        }
+    });
+</script>
+{% endblock %}
