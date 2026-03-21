@@ -12,7 +12,8 @@ const app = express();
 const PORT = 1002;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increase limit for thumbnails
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const SCENES_DIR = join(__dirname, '../scenes');
 
