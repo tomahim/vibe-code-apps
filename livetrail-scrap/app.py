@@ -144,6 +144,31 @@ if target_time:
             # Use components.html for better rendering control
             import streamlit.components.v1 as components
             
+            # Merge distance info (boutP) into time info (dPM)
+            merged_dpm = data.get('dPM', '')
+            if 'boutP' in data and data['boutP']:
+                # Parse boutP to extract distance divs and merge them into dPM
+                soup_boutp = BeautifulSoup(data['boutP'], 'html.parser')
+                soup_dpm = BeautifulSoup(merged_dpm, 'html.parser')
+                
+                # Find all divDeniv elements from boutP
+                deniv_divs = soup_boutp.find_all('div', class_='divDeniv')
+                
+                # Find all tpsProfil elements from dPM and add distance info
+                for deniv_div in deniv_divs:
+                    style_attr = deniv_div.get('style', '')
+                    distance_text = deniv_div.get_text(strip=True)
+                    
+                    # Find matching tpsProfil by style (left position)
+                    for tps_div in soup_dpm.find_all('div', class_='tpsProfil'):
+                        if tps_div.get('style', '') == style_attr:
+                            # Append distance to time text
+                            current_text = tps_div.get_text(strip=True)
+                            tps_div.string = f"{current_text}\\n{distance_text}"
+                            break
+                
+                merged_dpm = str(soup_dpm)
+            
             soup = BeautifulSoup(data['pro'], "html.parser")
             img = soup.find('img')
             if img and img.get('src'):
@@ -202,15 +227,12 @@ if target_time:
                     text-align: center;
                 }}
                 .divDeniv {{
-                    color: #333;
-                    background: white;
-                    border: solid;
-                    border-width: 1px;
-                    border-color: #ccc;
-                    font-weight: 600;
+                    color: white;
+                    background-color: #a0a0f7;
                     padding: 3px;
                     border-radius: 0.28571429rem;
                     font-size: 11px;
+                    font-weight: 600;
                 }}
                 .tps {{
                     color: #333;
@@ -233,8 +255,8 @@ if target_time:
                     font-weight: 600;
                 }}
                 .tpsProfil {{ 
-                    background-color: #a0a0f7;
                     color: white;
+                    background-color: #a0a0f7;
                     transform: translate(-100%, 0);
                     padding: 3px;
                     border-radius: 0.28571429rem;
@@ -252,9 +274,10 @@ if target_time:
                         color: #eee;
                     }}
                     .divDeniv {{
-                        color: #eee;
-                        background: #333;
-                        border-color: #666;
+                        background-color: #7070d7;
+                    }}
+                    .tpsProfil {{
+                        background-color: #7070d7;
                     }}
                     .tps {{
                         color: #eee;
@@ -272,8 +295,7 @@ if target_time:
                 <body>
                 <div id="profilPar">
                     <div id="profil">{data["pro"]}</div>
-                    {'<div id="infoPt">' + data["dPM"] + '</div>' if 'dPM' in data and data['dPM'] else ''}
-                    {'<div id="infoDeniv">' + data["boutP"] + '</div>' if 'boutP' in data and data['boutP'] else ''}
+                    {'<div id="infoPt">' + merged_dpm + '</div>' if merged_dpm else ''}
                 </div>
                 </body>
                 </html>
