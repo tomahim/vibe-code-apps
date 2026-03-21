@@ -122,17 +122,36 @@ export function createScene(scene) {
 
 await createDefaultScenes();
 
+// Helper function to get scene metadata
+async function getSceneMetadata(sceneId) {
+  const metaPath = join(SCENES_DIR, `${sceneId}.meta.json`);
+  if (existsSync(metaPath)) {
+    const metaContent = await fs.readFile(metaPath, 'utf-8');
+    return JSON.parse(metaContent);
+  }
+  return { tags: [], description: '' };
+}
+
 // Get all scenes
 app.get('/api/scenes', async (req, res) => {
   try {
     const files = await fs.readdir(SCENES_DIR);
-    const scenes = files
-      .filter(file => file.endsWith('.js'))
-      .map(file => ({
-        id: file.replace('.js', ''),
-        name: file.replace('.js', ''),
-        file: file
-      }));
+    const sceneFiles = files.filter(file => file.endsWith('.js'));
+    
+    const scenes = await Promise.all(
+      sceneFiles.map(async (file) => {
+        const id = file.replace('.js', '');
+        const metadata = await getSceneMetadata(id);
+        return {
+          id,
+          name: id,
+          file,
+          tags: metadata.tags || [],
+          description: metadata.description || ''
+        };
+      })
+    );
+    
     res.json(scenes);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -198,11 +217,29 @@ export function createScene(scene) {
   }
 });
 
+// Update scene metadata (tags, description)
+app.post('/api/scenes/:id/metadata', async (req, res) => {
+  try {
+    const { tags, description } = req.body;
+    const metaPath = join(SCENES_DIR, `${req.params.id}.meta.json`);
+    await fs.writeFile(metaPath, JSON.stringify({ tags, description }, null, 2));
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Delete a scene
 app.delete('/api/scenes/:id', async (req, res) => {
   try {
     const filePath = join(SCENES_DIR, `${req.params.id}.js`);
+    const metaPath = join(SCENES_DIR, `${req.params.id}.meta.json`);
+    const thumbPath = join(SCENES_DIR, `${req.params.id}.png`);
+    
     await fs.unlink(filePath);
+    if (existsSync(metaPath)) await fs.unlink(metaPath);
+    if (existsSync(thumbPath)) await fs.unlink(thumbPath);
+    
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
