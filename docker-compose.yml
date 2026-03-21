@@ -36,4 +36,4 @@ services:
       - "1002:1002"
       - "5173:5173"
     volumes:
-      - ./three-js-labs/scenes:/app/scenes
+      - /home/tom/apps/three-js-labs/scenes:/app/scenes
