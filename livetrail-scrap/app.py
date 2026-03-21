@@ -146,7 +146,7 @@ if target_time:
             #profilPar { 
                 position: relative; 
                 width: 100%; 
-                margin-bottom: 20px; 
+                margin-bottom: 120px;
             }
             #profil { 
                 margin-bottom: 20px;
@@ -159,9 +159,12 @@ if target_time:
                 display: block; 
             }
             #infoPt { 
-                position: relative;
-                max-width: 100%;
-                height: 100px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
             }
             .pt { 
                 z-index: 100;
@@ -223,10 +226,10 @@ if target_time:
             soup = BeautifulSoup(data['pro'], "html.parser")
             img = soup.find('img')
             if img and img.get('src'):
-                profil_html = f'<div id="profilPar"><div id="profil">{data["pro"]}</div>'
+                profil_html = f'<div id="profilPar"><div id="profil">{data["pro"]}'
                 if 'dPM' in data and data['dPM']:
                     profil_html += f'<div id="infoPt">{data["dPM"]}</div>'
-                profil_html += '</div>'
+                profil_html += '</div></div>'
                 st.markdown(profile_css + profil_html, unsafe_allow_html=True)
             else:
                 st.markdown(data['pro'], unsafe_allow_html=True)
