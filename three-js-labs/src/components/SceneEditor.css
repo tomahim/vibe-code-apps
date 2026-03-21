@@ -38,6 +38,7 @@
 .editor-actions {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .btn-action {
@@ -53,6 +54,13 @@
 
 .btn-action:hover {
   background: #45a049;
+}
+
+.git-status {
+  font-size: 0.8rem;
+  color: #aaa;
+  align-self: center;
+  white-space: nowrap;
 }
 
 .editor-content {
