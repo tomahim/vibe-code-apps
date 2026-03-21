@@ -141,95 +141,103 @@ if target_time:
             st.markdown("---")
             st.subheader("🗻 Elevation Profile")
             
-            profile_css = """
-            <style>
-            #profilPar { 
-                position: relative; 
-                width: 100%; 
-                margin-bottom: 120px;
-            }
-            #profil { 
-                margin-bottom: 20px;
-                width: 100%;
-                position: relative;
-            }
-            #profil img { 
-                width: 100%; 
-                height: auto; 
-                display: block; 
-            }
-            #infoPt { 
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-            }
-            .pt { 
-                z-index: 100;
-                color: black;
-                border-color: black !important;
-                width: 0px;
-                height: 0px;
-                position: absolute;
-                border-radius: 50%;
-                border-style: solid;
-                border-width: 2px;
-                transform: translate(-50%, -50%);
-                background: white;
-            }
-            .ptn { 
-                position: absolute;
-                padding: 0.5%;
-                transform: translate(-40%, -180%) rotate(-60deg);
-                white-space: nowrap;
-                font-size: 11px;
-            }
-            .divDeniv, .tpsProfil, .tpsProfilButt { 
-                position: absolute;
-                top: 0;
-                text-align: center;
-            }
-            .tps {
-                color: black;
-                border: solid;
-                border-width: 1px;
-            }
-            .tpsProfilButt { 
-                transform: translate(-100%, 0);
-                line-height: 1.2142em;
-                padding: 5px;
-                width: 50px;
-                background: #FFFFFF;
-                border: 1px solid rgba(34, 36, 38, 0.15);
-                color: rgba(0, 0, 0, 0.87);
-                border-radius: 0.28571429rem;
-                font-size: 11px;
-            }
-            .tpsProfil { 
-                background-color: #a0a0f7;
-                color: white;
-                transform: translate(-100%, 0);
-                padding: 3px;
-                border-radius: 0.28571429rem;
-                font-size: 11px;
-            }
-            #line { 
-                position: absolute;
-                border-left: 2px solid black;
-                bottom: -65px;
-            }
-            </style>
-            """
+            # Use components.html for better rendering control
+            import streamlit.components.v1 as components
             
             soup = BeautifulSoup(data['pro'], "html.parser")
             img = soup.find('img')
             if img and img.get('src'):
-                profil_html = f'<div id="profilPar"><div id="profil">{data["pro"]}'
-                if 'dPM' in data and data['dPM']:
-                    profil_html += f'<div id="infoPt">{data["dPM"]}</div>'
-                profil_html += '</div></div>'
-                st.markdown(profile_css + profil_html, unsafe_allow_html=True)
+                profile_html = f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <style>
+                * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+                body {{ width: 100%; overflow-x: hidden; }}
+                #profilPar {{ 
+                    position: relative; 
+                    width: 100%; 
+                    margin-bottom: 120px;
+                }}
+                #profil {{ 
+                    margin-bottom: 20px;
+                    width: 100%;
+                    position: relative;
+                }}
+                #profil img {{ 
+                    width: 100%; 
+                    height: auto; 
+                    display: block; 
+                }}
+                #infoPt {{ 
+                    position: relative;
+                    max-width: 100%;
+                    height: 100px;
+                }}
+                .pt {{ 
+                    z-index: 100;
+                    color: black;
+                    border-color: black !important;
+                    width: 0px;
+                    height: 0px;
+                    position: absolute;
+                    border-radius: 50%;
+                    border-style: solid;
+                    border-width: 2px;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                }}
+                .ptn {{ 
+                    position: absolute;
+                    padding: 0.5%;
+                    transform: translate(-40%, -180%) rotate(-60deg);
+                    white-space: nowrap;
+                    font-size: 11px;
+                }}
+                .divDeniv, .tpsProfil, .tpsProfilButt {{ 
+                    position: absolute;
+                    top: 0;
+                    text-align: center;
+                }}
+                .tps {{
+                    color: black;
+                    border: solid;
+                    border-width: 1px;
+                }}
+                .tpsProfilButt {{ 
+                    transform: translate(-100%, 0);
+                    line-height: 1.2142em;
+                    padding: 5px;
+                    width: 50px;
+                    background: #FFFFFF;
+                    border: 1px solid rgba(34, 36, 38, 0.15);
+                    color: rgba(0, 0, 0, 0.87);
+                    border-radius: 0.28571429rem;
+                    font-size: 11px;
+                }}
+                .tpsProfil {{ 
+                    background-color: #a0a0f7;
+                    color: white;
+                    transform: translate(-100%, 0);
+                    padding: 3px;
+                    border-radius: 0.28571429rem;
+                    font-size: 11px;
+                }}
+                #line {{ 
+                    position: absolute;
+                    border-left: 2px solid black;
+                    bottom: -65px;
+                }}
+                </style>
+                </head>
+                <body>
+                <div id="profilPar">
+                    <div id="profil">{data["pro"]}</div>
+                    {'<div id="infoPt">' + data["dPM"] + '</div>' if 'dPM' in data and data['dPM'] else ''}
+                </div>
+                </body>
+                </html>
+                """
+                components.html(profile_html, height=600, scrolling=True)
             else:
                 st.markdown(data['pro'], unsafe_allow_html=True)
