@@ -309,8 +309,9 @@ app.post('/api/scenes/:id/git-commit', async (req, res) => {
   const filesToAdd = [jsFile];
   if (existsSync(join(repoRoot, metaFile))) filesToAdd.push(metaFile);
 
-  const addCmd = `git add ${filesToAdd.map(f => `"${f}"`).join(' ')}`;
-  const commitCmd = `git commit -m "Save scene: ${id}"`;
+  const gitBase = `git -c safe.directory=/app -c user.name="three-js-labs" -c user.email="labs@local"`;
+  const addCmd = `${gitBase} add ${filesToAdd.map(f => `"${f}"`).join(' ')}`;
+  const commitCmd = `${gitBase} commit -m "Save scene: ${id}"`;
 
   exec(`${addCmd} && ${commitCmd}`, { cwd: repoRoot }, (err, stdout, stderr) => {
     if (err) {
