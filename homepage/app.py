@@ -11,7 +11,7 @@ tab = st.tabs(["Apps", "Server Tools"])
 
 apps = [
     {"name": "hockey-stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
-    {"name": "livetrail-scrap", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
+    {"name": "trail-time-estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
 ]
 
 server_tools = [
