@@ -153,7 +153,7 @@ if target_time:
                 <head>
                 <style>
                 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-                body {{ width: 100%; overflow-x: hidden; }}
+                body {{ width: 100%; overflow-x: hidden; background-color: transparent; }}
                 #profilPar {{ 
                     position: relative; 
                     width: 100%; 
@@ -169,7 +169,7 @@ if target_time:
                     height: auto; 
                     display: block; 
                 }}
-                #infoPt {{ 
+                #infoPt, #infoDeniv {{ 
                     position: relative;
                     max-width: 100%;
                     height: 100px;
@@ -193,6 +193,8 @@ if target_time:
                     transform: translate(-40%, -180%) rotate(-60deg);
                     white-space: nowrap;
                     font-size: 11px;
+                    font-weight: 600;
+                    color: #333;
                 }}
                 .divDeniv, .tpsProfil, .tpsProfilButt {{ 
                     position: absolute;
@@ -200,9 +202,12 @@ if target_time:
                     text-align: center;
                 }}
                 .tps {{
-                    color: black;
+                    color: #333;
+                    background: white;
                     border: solid;
                     border-width: 1px;
+                    border-color: #ccc;
+                    font-weight: 600;
                 }}
                 .tpsProfilButt {{ 
                     transform: translate(-100%, 0);
@@ -214,6 +219,7 @@ if target_time:
                     color: rgba(0, 0, 0, 0.87);
                     border-radius: 0.28571429rem;
                     font-size: 11px;
+                    font-weight: 600;
                 }}
                 .tpsProfil {{ 
                     background-color: #a0a0f7;
@@ -222,11 +228,28 @@ if target_time:
                     padding: 3px;
                     border-radius: 0.28571429rem;
                     font-size: 11px;
+                    font-weight: 600;
                 }}
                 #line {{ 
                     position: absolute;
                     border-left: 2px solid black;
                     bottom: -65px;
+                }}
+                
+                @media (prefers-color-scheme: dark) {{
+                    .ptn {{
+                        color: #eee;
+                    }}
+                    .tps {{
+                        color: #eee;
+                        background: #333;
+                        border-color: #666;
+                    }}
+                    .tpsProfilButt {{
+                        background: #333;
+                        color: #eee;
+                        border-color: #666;
+                    }}
                 }}
                 </style>
                 </head>
