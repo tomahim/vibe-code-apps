@@ -144,31 +144,36 @@ if target_time:
             # Use components.html for better rendering control
             import streamlit.components.v1 as components
             
-            # Merge distance info (boutP) into time info (dPM)
+            # Merge distance info into time info (they're both in dPM)
             merged_dpm = data.get('dPM', '')
-            if 'boutP' in data and data['boutP']:
-                # Parse boutP to extract distance divs and merge them into dPM
-                soup_boutp = BeautifulSoup(data['boutP'], 'html.parser')
+            if merged_dpm:
                 soup_dpm = BeautifulSoup(merged_dpm, 'html.parser')
                 
-                # Find all divDeniv elements from boutP
-                deniv_divs = soup_boutp.find_all('div', class_='divDeniv')
+                # Find all elements in order
+                all_elements = soup_dpm.find_all(['div', 'input'])
                 
-                # Find all tpsProfil elements from dPM and add distance info
-                for deniv_div in deniv_divs:
-                    style_attr = deniv_div.get('style', '')
-                    distance_text = deniv_div.get_text(strip=True)
+                # Process each element and match distance divs to their next tpsProfil
+                i = 0
+                while i < len(all_elements):
+                    elem = all_elements[i]
                     
-                    # Find matching tpsProfil by style (left position)
-                    for tps_div in soup_dpm.find_all('div', class_='tpsProfil'):
-                        if tps_div.get('style', '') == style_attr:
-                            # Insert distance after the existing content
-                            current_text = tps_div.get_text(strip=True)
-                            tps_div.clear()
-                            tps_div.append(current_text)
-                            tps_div.append('\n')
-                            tps_div.append(distance_text)
-                            break
+                    # Check if this is a distance divDeniv (has numeric content, not labels)
+                    if elem.name == 'div' and 'divDeniv' in elem.get('class', []):
+                        text = elem.get_text(strip=True)
+                        # If it's a distance number (not "En km" or "Temps estimé")
+                        if text and text[0].isdigit():
+                            # Look for the next tpsProfil
+                            for j in range(i + 1, min(i + 5, len(all_elements))):
+                                next_elem = all_elements[j]
+                                if next_elem.name == 'div' and 'tpsProfil' in next_elem.get('class', []):
+                                    # Found the time div, merge distance into it
+                                    current_text = next_elem.get_text(strip=True)
+                                    next_elem.clear()
+                                    next_elem.append(current_text)
+                                    next_elem.append('\n')
+                                    next_elem.append(f"{text} km")
+                                    break
+                    i += 1
                 
                 merged_dpm = str(soup_dpm)
             
