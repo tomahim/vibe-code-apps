@@ -7,11 +7,14 @@ st.title("🖥️ Genious Server")
 
 search = st.text_input("Search apps...", key="search")
 
-tab = st.tabs(["Apps", "Server Tools"])
+tab = st.tabs(["Apps", "Experimental", "Server Tools"])
 
 apps = [
     {"name": "Hockey stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
     {"name": "Trail time estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
+]
+
+experimental = [
     {"name": "Three.js Labs", "icon": "🎨", "url": "http://10.0.0.1:5173"},
 ]
 
@@ -37,6 +40,14 @@ with tab[0]:
     st.markdown(apps_html, unsafe_allow_html=True)
 
 with tab[1]:
+    filtered_exp = filter_items(experimental, search)
+    exp_html = '<div style="display:flex;flex-wrap:wrap;gap:20px;">'
+    for app in filtered_exp:
+        exp_html += f'<a href="{app["url"]}" target="_blank" style="text-decoration:none;"><div style="background:#1e293b;padding:8px;border-radius:12px;text-align:center;color:#fff;width:100px;height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><span style="font-size:1.5rem;">{app["icon"]}</span><span style="font-size:1rem;margin-top:4px;">{app["name"]}</span></div></a>'
+    exp_html += '</div>'
+    st.markdown(exp_html, unsafe_allow_html=True)
+
+with tab[2]:
     filtered_tools = filter_items(server_tools, search)
     tools_html = '<div style="display:flex;flex-wrap:wrap;gap:20px;">'
     for tool in filtered_tools:
