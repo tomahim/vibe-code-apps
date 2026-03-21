@@ -8,13 +8,13 @@ from io import StringIO
 st.set_page_config(page_title="LiveTrail Scraper", page_icon="⛰️", layout="wide")
 
 RACES = [
-    {'id': '1', 'title': 'Saintélyon (80 km)', 'raceName': '80km', 'subdomain': 'saintelyon'},
-    {'id': '2', 'title': 'UTMB (175 km)', 'raceName': 'utmb', 'subdomain': 'utmb'},
-    {'id': '3', 'title': 'CCC (105 km)', 'raceName': 'ccc', 'subdomain': 'utmb'},
-    {'id': '4', 'title': 'Marathon du Mont-Blanc (44 km)', 'raceName': '42km', 'subdomain': 'mbm'},
-    {'id': '5', 'title': 'Grand Raid Ventoux UTMB (83 km)', 'raceName': 'grv100k', 'subdomain': 'grandraidventoux'},
-    {'id': '6', 'title': 'Diagonale des fous (170 km)', 'raceName': 'GRR', 'subdomain': 'grandraid-reunion-oxybol'},
-    {'id': '7', 'title': 'UTMJ Franco Suisse (105 km)', 'raceName': 'franco', 'subdomain': 'utmj'},
+    {'id': '1', 'title': 'Saintélyon (80 km)', 'raceName': '80km', 'subdomain': 'saintelyon', 'defaultTime': '10:00'},
+    {'id': '2', 'title': 'UTMB (175 km)', 'raceName': 'utmb', 'subdomain': 'utmb', 'defaultTime': '44:00'},
+    {'id': '3', 'title': 'CCC (105 km)', 'raceName': 'ccc', 'subdomain': 'utmb', 'defaultTime': '18:00'},
+    {'id': '4', 'title': 'Marathon du Mont-Blanc (44 km)', 'raceName': '42km', 'subdomain': 'mbm', 'defaultTime': '5:30'},
+    {'id': '5', 'title': 'Grand Raid Ventoux UTMB (83 km)', 'raceName': 'grv100k', 'subdomain': 'grandraidventoux', 'defaultTime': '12:00'},
+    {'id': '6', 'title': 'Diagonale des fous (170 km)', 'raceName': 'GRR', 'subdomain': 'grandraid-reunion-oxybol', 'defaultTime': '50:00'},
+    {'id': '7', 'title': 'UTMJ Franco Suisse (105 km)', 'raceName': 'franco', 'subdomain': 'utmj', 'defaultTime': '18:00'},
 ]
 
 
@@ -100,7 +100,7 @@ with col1:
 
 with col2:
     st.subheader("Set Target Finish Time")
-    default_time = "10:30" if "44" in selected_race_name else "20:00"
+    default_time = race.get('defaultTime', '10:00')
     target_time = st.text_input("Finish time (HH:MM)", value=default_time, placeholder="HH:MM")
     st.caption("Enter your target finish time to see estimated checkpoint times")
 
