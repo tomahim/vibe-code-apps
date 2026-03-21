@@ -9,7 +9,6 @@ export default function SceneEditor() {
   const navigate = useNavigate();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(true);
-  const [gitStatus, setGitStatus] = useState('');
   const saveTimeoutRef = useRef(null);
   const editorRef = useRef(null);
 
@@ -90,19 +89,6 @@ export default function SceneEditor() {
     window.dispatchEvent(event);
   };
 
-  const handleGitCommit = async () => {
-    setGitStatus('Committing...');
-    try {
-      const response = await fetch(`/api/scenes/${id}/git-commit`, { method: 'POST' });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
-      setGitStatus(data.message);
-    } catch (error) {
-      setGitStatus(`Error: ${error.message}`);
-    }
-    setTimeout(() => setGitStatus(''), 4000);
-  };
-
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -124,10 +110,6 @@ export default function SceneEditor() {
           <button className="btn-action" onClick={handleExport}>
             Export GLTF
           </button>
-          <button className="btn-action" onClick={handleGitCommit}>
-            Save to Git
-          </button>
-          {gitStatus && <span className="git-status">{gitStatus}</span>}
         </div>
       </header>
       

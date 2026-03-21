@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs/promises';
 import { existsSync } from 'fs';
-import { exec } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -297,32 +296,6 @@ app.get('/api/thumbnails/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-});
-
-// Commit a scene to git
-app.post('/api/scenes/:id/git-commit', async (req, res) => {
-  const { id } = req.params;
-  const repoRoot = join(__dirname, '..');
-  const jsFile = `scenes/${id}.js`;
-  const metaFile = `scenes/${id}.meta.json`;
-
-  const filesToAdd = [jsFile];
-  if (existsSync(join(repoRoot, metaFile))) filesToAdd.push(metaFile);
-
-  const gitBase = `git -c safe.directory=/app -c user.name="three-js-labs" -c user.email="labs@local"`;
-  const addCmd = `${gitBase} add ${filesToAdd.map(f => `"${f}"`).join(' ')}`;
-  const commitCmd = `${gitBase} commit -m "Save scene: ${id}"`;
-
-  exec(`${addCmd} && ${commitCmd}`, { cwd: repoRoot }, (err, stdout, stderr) => {
-    if (err) {
-      // Check if it's just "nothing to commit"
-      if (stderr.includes('nothing to commit') || stdout.includes('nothing to commit')) {
-        return res.json({ success: true, message: 'Nothing new to commit' });
-      }
-      return res.status(500).json({ error: stderr || err.message });
-    }
-    res.json({ success: true, message: stdout.trim() });
-  });
 });
 
 app.listen(PORT, () => {
