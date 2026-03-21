@@ -11,26 +11,31 @@ function DynamicScene({ code }) {
   const cleanupRef = useRef(null);
 
   useEffect(() => {
-    // Clear previous scene objects (except lights and camera)
+    console.log('DynamicScene: executing code');
+    
+    // Clear previous scene objects (except lights, camera, and Grid)
     const objectsToRemove = [];
-    scene.traverse((child) => {
-      if (child !== scene && 
-          !(child instanceof THREE.Light) && 
+    scene.children.forEach((child) => {
+      if (!(child instanceof THREE.Light) && 
           !(child instanceof THREE.Camera) &&
-          child.parent === scene) {
+          child.type !== 'GridHelper' &&
+          !child.isLineSegments) { // Grid uses LineSegments
         objectsToRemove.push(child);
       }
     });
     objectsToRemove.forEach(obj => scene.remove(obj));
+    console.log('Cleared objects:', objectsToRemove.length);
 
     // Execute the user's code
     try {
-      // Remove import statements and extract the createScene function
-      const codeWithoutImports = code.replace(/import\s+{[^}]+}\s+from\s+['"][^'"]+['"];?\s*/g, '');
+      // Remove import statements and export keyword
+      let codeWithoutImports = code.replace(/import\s+{[^}]+}\s+from\s+['"][^'"]+['"];?\s*/g, '');
+      codeWithoutImports = codeWithoutImports.replace(/export\s+function/g, 'function');
+      
+      console.log('Code sample:', codeWithoutImports.substring(0, 100));
       
       // Create a function from the code
-      const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
-      const userFunction = new AsyncFunction(
+      const userFunction = new Function(
         'THREE',
         'scene',
         'BoxGeometry',
@@ -48,6 +53,8 @@ function DynamicScene({ code }) {
         ${codeWithoutImports}
         if (typeof createScene === 'function') {
           return createScene(scene);
+        } else {
+          console.error('createScene function not found in code');
         }
         `
       );
@@ -69,18 +76,19 @@ function DynamicScene({ code }) {
         THREE.Color
       );
 
+      console.log('Scene children after execution:', scene.children.length);
+      console.log('Scene children types:', scene.children.map(c => c.type));
+
       // Store animation function if returned
       if (typeof result === 'function') {
         animationRef.current = result;
-      } else if (result && result.then) {
-        result.then(animFunc => {
-          if (typeof animFunc === 'function') {
-            animationRef.current = animFunc;
-          }
-        });
+        console.log('Animation function stored');
+      } else {
+        console.log('No animation function returned');
       }
     } catch (error) {
       console.error('Error executing scene code:', error);
+      console.error('Stack:', error.stack);
     }
 
     return () => {
