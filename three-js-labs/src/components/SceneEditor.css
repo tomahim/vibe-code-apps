@@ -1,0 +1,84 @@
+.scene-editor {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  background: #2a2a2a;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid #444;
+}
+
+.editor-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.btn-back {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: #555;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-action {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-action:hover {
+  background: #45a049;
+}
+
+.editor-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.editor-pane {
+  flex: 1;
+  min-width: 0;
+}
+
+.preview-pane {
+  flex: 1;
+  min-width: 0;
+  background: #1a1a1a;
+  position: relative;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #888;
+}

@@ -27,3 +27,13 @@ services:
     restart: unless-stopped
     ports:
       - "1001:8501"
+
+  three-js-labs:
+    build: ./three-js-labs
+    container_name: three-js-labs
+    restart: unless-stopped
+    ports:
+      - "1002:1002"
+      - "5173:5173"
+    volumes:
+      - ./three-js-labs/scenes:/app/scenes
