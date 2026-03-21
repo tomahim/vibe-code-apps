@@ -10,14 +10,9 @@ search = st.text_input("Search apps...", key="search")
 tab = st.tabs(["Apps", "Server Tools"])
 
 apps = [
-<<<<<<< Updated upstream
     {"name": "Hockey stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
     {"name": "Trail time estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
-=======
-    {"name": "hockey-stats", "icon": "🏒", "url": "http://10.0.0.1:1000"},
-    {"name": "trail-time-estimator", "icon": "⛰️", "url": "http://10.0.0.1:1001"},
-    {"name": "three-js-labs", "icon": "🎨", "url": "http://10.0.0.1:5173"},
->>>>>>> Stashed changes
+    {"name": "Three.js Labs", "icon": "🎨", "url": "http://10.0.0.1:5173"},
 ]
 
 server_tools = [
