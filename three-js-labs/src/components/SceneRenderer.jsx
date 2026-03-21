@@ -25,6 +25,9 @@ function DynamicScene({ code }) {
 
     // Execute the user's code
     try {
+      // Remove import statements and extract the createScene function
+      const codeWithoutImports = code.replace(/import\s+{[^}]+}\s+from\s+['"][^'"]+['"];?\s*/g, '');
+      
       // Create a function from the code
       const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
       const userFunction = new AsyncFunction(
@@ -42,7 +45,7 @@ function DynamicScene({ code }) {
         'Vector3',
         'Color',
         `
-        ${code}
+        ${codeWithoutImports}
         if (typeof createScene === 'function') {
           return createScene(scene);
         }

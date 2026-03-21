@@ -11,6 +11,9 @@ RUN npm install
 # Copy application files
 COPY . .
 
+# Create scenes directory
+RUN mkdir -p /app/scenes
+
 # Expose ports (backend on 1002, vite dev server on 5173)
 EXPOSE 1002 5173
 

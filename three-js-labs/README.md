@@ -40,12 +40,22 @@ The app will be available at:
 
 ### Docker Deployment
 
-Run with Docker Compose:
+Run with Docker Compose from the apps directory:
 ```bash
-docker-compose up -d three-js-labs
+cd /home/tom/apps
+docker compose up -d three-js-labs
 ```
 
-The app will be deployed on port 1002 (backend) and 5173 (frontend).
+The app will be deployed on:
+- **Frontend**: Port 5173 (accessible at http://10.0.0.1:5173)
+- **Backend API**: Port 1002
+
+**Note**: Three example scenes (rotating-cube, bouncing-sphere, colorful-shapes) are automatically created when the server starts for the first time.
+
+To rebuild after code changes:
+```bash
+docker compose up -d --build three-js-labs
+```
 
 ## Scene Structure
 
