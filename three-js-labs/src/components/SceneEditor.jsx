@@ -73,12 +73,12 @@ export default function SceneEditor() {
       if (file) {
         const reader = new FileReader();
         reader.onload = (event) => {
-          const customEvent = new CustomEvent('import-gltf', { 
-            detail: { data: event.target.result, filename: file.name } 
+          const customEvent = new CustomEvent('import-gltf', {
+            detail: { data: event.target.result, filename: file.name }
           });
           window.dispatchEvent(customEvent);
         };
-        reader.readAsText(file);
+        reader.readAsArrayBuffer(file);
       }
     };
     input.click();

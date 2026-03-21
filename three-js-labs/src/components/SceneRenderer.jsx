@@ -171,24 +171,19 @@ function SceneSetup({ sceneId, onThumbnailCapture }) {
     };
 
     // Import handler
-    const handleImport = async (e) => {
-      try {
-        const gltfData = JSON.parse(e.detail.data);
-        const loader = new GLTFLoader();
-        loader.parse(
-          JSON.stringify(gltfData),
-          '',
-          (gltf) => {
-            scene.add(gltf.scene);
-            console.log('Model imported successfully');
-          },
-          (error) => {
-            console.error('Import error:', error);
-          }
-        );
-      } catch (error) {
-        console.error('Error importing scene:', error);
-      }
+    const handleImport = (e) => {
+      const loader = new GLTFLoader();
+      loader.parse(
+        e.detail.data,
+        '',
+        (gltf) => {
+          scene.add(gltf.scene);
+          console.log('Model imported successfully');
+        },
+        (error) => {
+          console.error('Import error:', error);
+        }
+      );
     };
 
     // Manual capture handler
