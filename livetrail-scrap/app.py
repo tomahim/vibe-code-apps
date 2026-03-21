@@ -135,7 +135,86 @@ if target_time:
         col_display = 'Speed' if show_speed else 'Pace'
         cols_to_show = ['Checkpoint', 'Distance (km)', 'D+ (m)', 'Cumulated Time', 'Segment', col_display]
 
-        st.markdown(display_df[cols_to_show].to_html(escape=False, index=False), unsafe_allow_html=True)
+        # Modern table styling
+        table_css = """
+        <style>
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .modern-table thead tr {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: left;
+            font-weight: 600;
+        }
+        .modern-table th {
+            padding: 16px 12px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .modern-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .modern-table tbody tr {
+            transition: all 0.2s ease;
+        }
+        .modern-table tbody tr:hover {
+            background-color: rgba(102, 126, 234, 0.08);
+            transform: scale(1.01);
+        }
+        .modern-table tbody tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.02);
+        }
+        .modern-table tbody tr:nth-child(even):hover {
+            background-color: rgba(102, 126, 234, 0.08);
+        }
+        .modern-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .modern-table {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            }
+            .modern-table thead tr {
+                background: linear-gradient(135deg, #4c5fd5 0%, #5a3d7a 100%);
+            }
+            .modern-table td {
+                border-bottom-color: rgba(255,255,255,0.1);
+            }
+            .modern-table tbody tr:nth-child(even) {
+                background-color: rgba(255,255,255,0.02);
+            }
+            .modern-table tbody tr:hover {
+                background-color: rgba(102, 126, 234, 0.15);
+            }
+            .modern-table tbody tr:nth-child(even):hover {
+                background-color: rgba(102, 126, 234, 0.15);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .modern-table {
+                font-size: 12px;
+            }
+            .modern-table th, .modern-table td {
+                padding: 10px 8px;
+            }
+        }
+        </style>
+        """
+        
+        table_html = display_df[cols_to_show].to_html(escape=False, index=False, classes='modern-table')
+        st.markdown(table_css + table_html, unsafe_allow_html=True)
 
         if 'pro' in data and data['pro']:
             st.markdown("---")
