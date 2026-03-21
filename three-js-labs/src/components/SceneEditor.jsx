@@ -126,7 +126,7 @@ export default function SceneEditor() {
         </div>
         
         <div className="preview-pane">
-          <SceneRenderer code={code} sceneId={id} />
+          <SceneRenderer code={code} sceneId={id} captureThumbnail={true} />
         </div>
       </div>
     </div>

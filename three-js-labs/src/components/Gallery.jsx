@@ -78,7 +78,16 @@ export default function Gallery() {
             onClick={() => navigate(`/scene/${scene.id}`)}
           >
             <div className="scene-preview">
-              <div className="scene-icon">
+              <img 
+                src={`/api/thumbnails/${scene.id}`}
+                alt={scene.name}
+                onError={(e) => {
+                  // If thumbnail doesn't exist, show icon
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="scene-icon" style={{ display: 'none' }}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 3.6v8.2c0 4.47-2.94 8.63-7.5 9.91-.45-.13-.9-.28-1.34-.46C7.34 23.91 4 19.86 4 15.3V7.78l8-3.6z"/>
                 </svg>

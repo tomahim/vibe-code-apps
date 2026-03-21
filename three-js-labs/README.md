@@ -4,7 +4,8 @@ A modern web application for creating, editing, and managing Three.js 3D scenes 
 
 ## Features
 
-- **Gallery View**: Browse all your 3D scenes with visual previews
+- **Gallery View**: Browse all your 3D scenes with visual thumbnail previews
+- **Auto Thumbnails**: Scene screenshots are automatically captured and displayed in the gallery
 - **Live Code Editor**: Edit scene code with Monaco Editor (VS Code editor)
 - **Real-time Preview**: See changes instantly as you type
 - **Auto-save**: Changes are automatically saved after 1 second

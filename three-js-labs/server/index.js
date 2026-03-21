@@ -231,6 +231,35 @@ app.get('/api/import/:filename', async (req, res) => {
   }
 });
 
+// Save thumbnail for a scene
+app.post('/api/thumbnails/:id', async (req, res) => {
+  try {
+    const { imageData } = req.body;
+    // Remove data:image/png;base64, prefix
+    const base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const filePath = join(SCENES_DIR, `${req.params.id}.png`);
+    await fs.writeFile(filePath, buffer);
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get thumbnail for a scene
+app.get('/api/thumbnails/:id', async (req, res) => {
+  try {
+    const filePath = join(SCENES_DIR, `${req.params.id}.png`);
+    if (existsSync(filePath)) {
+      res.sendFile(filePath);
+    } else {
+      res.status(404).json({ error: 'Thumbnail not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

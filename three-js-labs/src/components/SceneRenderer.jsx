@@ -111,10 +111,23 @@ function DynamicScene({ code }) {
   return null;
 }
 
-function SceneSetup({ sceneId }) {
+function SceneSetup({ sceneId, onThumbnailCapture }) {
   const { scene, gl } = useThree();
 
   useEffect(() => {
+    // Capture thumbnail after scene loads
+    const captureTimeout = setTimeout(() => {
+      if (onThumbnailCapture) {
+        try {
+          const canvas = gl.domElement;
+          const imageData = canvas.toDataURL('image/png');
+          onThumbnailCapture(imageData);
+        } catch (error) {
+          console.error('Error capturing thumbnail:', error);
+        }
+      }
+    }, 1000); // Wait 1 second for scene to render
+
     // Export handler
     const handleExport = async (e) => {
       if (e.detail.sceneId !== sceneId) return;
@@ -175,16 +188,34 @@ function SceneSetup({ sceneId }) {
     window.addEventListener('import-gltf', handleImport);
 
     return () => {
+      clearTimeout(captureTimeout);
       window.removeEventListener('export-gltf', handleExport);
       window.removeEventListener('import-gltf', handleImport);
     };
-  }, [scene, sceneId, gl]);
+  }, [scene, sceneId, gl, onThumbnailCapture]);
 
   return null;
 }
 
-export default function SceneRenderer({ code, sceneId }) {
+export default function SceneRenderer({ code, sceneId, captureThumbnail = false }) {
   const [error, setError] = useState(null);
+  const [thumbnailCaptured, setThumbnailCaptured] = useState(false);
+
+  const handleThumbnailCapture = async (imageData) => {
+    if (!captureThumbnail || thumbnailCaptured) return;
+    
+    try {
+      await fetch(`/api/thumbnails/${sceneId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData }),
+      });
+      console.log('Thumbnail saved');
+      setThumbnailCaptured(true);
+    } catch (error) {
+      console.error('Error saving thumbnail:', error);
+    }
+  };
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -207,7 +238,7 @@ export default function SceneRenderer({ code, sceneId }) {
         gl={{ preserveDrawingBuffer: true }}
       >
         <Suspense fallback={null}>
-          <SceneSetup sceneId={sceneId} />
+          <SceneSetup sceneId={sceneId} onThumbnailCapture={captureThumbnail ? handleThumbnailCapture : null} />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} />
           <DynamicScene code={code} />
