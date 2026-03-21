@@ -82,10 +82,6 @@ def get_race_time(id: str, target: str):
         time['pace'] = round(nb_minutes_previous_checkpoint / (time['distancePreviousPoint']), 2) if nb_minutes_previous_checkpoint > 0 else 0
         time['speed'] = round(time['distancePreviousPoint'] * 60 / (nb_minutes_previous_checkpoint), 2) if nb_minutes_previous_checkpoint > 0 else 0
 
-    del data['myT']
-    del data['bout']
-    del data['boutP']
-
     data['times'] = times
     return data
 
@@ -144,9 +140,29 @@ if target_time:
         if 'pro' in data and data['pro']:
             st.markdown("---")
             st.subheader("🗻 Elevation Profile")
+            
+            profile_css = """
+            <style>
+            #profilPar { position: relative; width: 100%; margin-bottom: 20px; }
+            #profil { width: 100%; position: relative; }
+            #profil img { width: 100%; height: auto; display: block; }
+            #infoPt { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+            .pt { z-index: 100; color: black; border-color: black !important; width: 0px; height: 0px; position: absolute; border-radius: 50%; border-style: solid; border-width: 2px; transform: translate(-50%, -50%); background: white; }
+            .ptn { position: absolute; padding: 0.5%; transform: translate(-40%, -180%) rotate(-60deg); white-space: nowrap; font-size: 12px; color: #333; }
+            .tpsProfil { background-color: #a0a0f7; color: white; transform: translate(-100%, 0); padding: 3px; border-radius: 3px; font-size: 12px; }
+            .tpsProfilButt { transform: translate(-100%, 0); line-height: 1.2; padding: 5px; width: 50px; background: white; border: 1px solid rgba(34, 36, 38, 0.15); border-radius: 4px; font-size: 12px; }
+            #line { position: absolute; border-left: 1px solid rgba(152,152,152,.5); border-right: 1px solid rgba(255,255,255,.5); }
+            </style>
+            """
+            
             soup = BeautifulSoup(data['pro'], "html.parser")
             img = soup.find('img')
             if img and img.get('src'):
-                st.image(img['src'], use_container_width=True)
+                img['style'] = 'width:100%;height:auto;display:block;'
+                profil_html = f'<div id="profilPar"><div id="profil">{str(img)}</div>'
+                if 'dPM' in data and data['dPM']:
+                    profil_html += f'<div id="infoPt">{data["dPM"]}</div>'
+                profil_html += '</div>'
+                st.markdown(profile_css + profil_html, unsafe_allow_html=True)
             else:
                 st.markdown(data['pro'], unsafe_allow_html=True)
