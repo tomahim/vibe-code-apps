@@ -201,6 +201,17 @@ if target_time:
                     top: 0;
                     text-align: center;
                 }}
+                .divDeniv {{
+                    color: #333;
+                    background: white;
+                    border: solid;
+                    border-width: 1px;
+                    border-color: #ccc;
+                    font-weight: 600;
+                    padding: 3px;
+                    border-radius: 0.28571429rem;
+                    font-size: 11px;
+                }}
                 .tps {{
                     color: #333;
                     background: white;
@@ -240,6 +251,11 @@ if target_time:
                     .ptn {{
                         color: #eee;
                     }}
+                    .divDeniv {{
+                        color: #eee;
+                        background: #333;
+                        border-color: #666;
+                    }}
                     .tps {{
                         color: #eee;
                         background: #333;
@@ -257,6 +273,7 @@ if target_time:
                 <div id="profilPar">
                     <div id="profil">{data["pro"]}</div>
                     {'<div id="infoPt">' + data["dPM"] + '</div>' if 'dPM' in data and data['dPM'] else ''}
+                    {'<div id="infoDeniv">' + data["boutP"] + '</div>' if 'boutP' in data and data['boutP'] else ''}
                 </div>
                 </body>
                 </html>
