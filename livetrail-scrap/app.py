@@ -162,9 +162,12 @@ if target_time:
                     # Find matching tpsProfil by style (left position)
                     for tps_div in soup_dpm.find_all('div', class_='tpsProfil'):
                         if tps_div.get('style', '') == style_attr:
-                            # Append distance to time text
+                            # Insert distance after the existing content
                             current_text = tps_div.get_text(strip=True)
-                            tps_div.string = f"{current_text}\\n{distance_text}"
+                            tps_div.clear()
+                            tps_div.append(current_text)
+                            tps_div.append('\n')
+                            tps_div.append(distance_text)
                             break
                 
                 merged_dpm = str(soup_dpm)
@@ -227,12 +230,7 @@ if target_time:
                     text-align: center;
                 }}
                 .divDeniv {{
-                    color: white;
-                    background-color: #a0a0f7;
-                    padding: 3px;
-                    border-radius: 0.28571429rem;
-                    font-size: 11px;
-                    font-weight: 600;
+                    display: none;
                 }}
                 .tps {{
                     color: #333;
@@ -255,17 +253,22 @@ if target_time:
                     font-weight: 600;
                 }}
                 .tpsProfil {{ 
-                    color: white;
-                    background-color: #a0a0f7;
                     transform: translate(-100%, 0);
-                    padding: 3px;
-                    border-radius: 0.28571429rem;
+                    padding: 8px 10px;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(8px);
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    border-radius: 6px;
                     font-size: 11px;
                     font-weight: 600;
+                    color: #1a1a1a;
+                    line-height: 1.4;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    white-space: pre-line;
                 }}
                 #line {{ 
                     position: absolute;
-                    border-left: 2px solid black;
+                    border-left: 2px solid rgba(0, 0, 0, 0.6);
                     bottom: -65px;
                 }}
                 
@@ -273,11 +276,11 @@ if target_time:
                     .ptn {{
                         color: #eee;
                     }}
-                    .divDeniv {{
-                        background-color: #7070d7;
-                    }}
                     .tpsProfil {{
-                        background-color: #7070d7;
+                        background: rgba(30, 30, 30, 0.95);
+                        border-color: rgba(255, 255, 255, 0.2);
+                        color: #eee;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
                     }}
                     .tps {{
                         color: #eee;
@@ -288,6 +291,9 @@ if target_time:
                         background: #333;
                         color: #eee;
                         border-color: #666;
+                    }}
+                    #line {{
+                        border-left-color: rgba(255, 255, 255, 0.6);
                     }}
                 }}
                 </style>
