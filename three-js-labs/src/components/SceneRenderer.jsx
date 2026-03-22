@@ -49,6 +49,10 @@ function DynamicScene({ code }) {
         'Group',
         'Vector3',
         'Color',
+        'BufferGeometry',
+        'Points',
+        'PointsMaterial',
+        'Float32BufferAttribute',
         `
         ${codeWithoutImports}
         if (typeof createScene === 'function') {
@@ -73,7 +77,11 @@ function DynamicScene({ code }) {
         THREE.Mesh,
         THREE.Group,
         THREE.Vector3,
-        THREE.Color
+        THREE.Color,
+        THREE.BufferGeometry,
+        THREE.Points,
+        THREE.PointsMaterial,
+        THREE.Float32BufferAttribute
       );
 
       console.log('Scene children after execution:', scene.children.length);
