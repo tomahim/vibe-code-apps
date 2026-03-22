@@ -43,6 +43,7 @@ function DynamicScene({ code }) {
         'CylinderGeometry',
         'PlaneGeometry',
         'TorusGeometry',
+        'ConeGeometry',
         'MeshStandardMaterial',
         'MeshBasicMaterial',
         'Mesh',
@@ -53,6 +54,10 @@ function DynamicScene({ code }) {
         'Points',
         'PointsMaterial',
         'Float32BufferAttribute',
+        'AmbientLight',
+        'DirectionalLight',
+        'PointLight',
+        'SpotLight',
         `
         ${codeWithoutImports}
         if (typeof createScene === 'function') {
@@ -72,6 +77,7 @@ function DynamicScene({ code }) {
         THREE.CylinderGeometry,
         THREE.PlaneGeometry,
         THREE.TorusGeometry,
+        THREE.ConeGeometry,
         THREE.MeshStandardMaterial,
         THREE.MeshBasicMaterial,
         THREE.Mesh,
@@ -81,7 +87,11 @@ function DynamicScene({ code }) {
         THREE.BufferGeometry,
         THREE.Points,
         THREE.PointsMaterial,
-        THREE.Float32BufferAttribute
+        THREE.Float32BufferAttribute,
+        THREE.AmbientLight,
+        THREE.DirectionalLight,
+        THREE.PointLight,
+        THREE.SpotLight
       );
 
       console.log('Scene children after execution:', scene.children.length);
