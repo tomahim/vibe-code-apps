@@ -25,6 +25,7 @@ server_tools = [
     {"name": "n8n", "icon": "🔄", "url": "http://10.0.0.1:5678"},
     {"name": "Code server", "icon": "🖥️", "url": "http://10.0.0.1:8443"},
     {"name": "Grafana", "icon": "📊", "url": "http://10.0.0.1:3000/dashboards"},
+    {"name": "Prometheus", "icon": "📈", "url": "http://10.0.0.1:3003"},
 ]
 
 def filter_items(items, query):
