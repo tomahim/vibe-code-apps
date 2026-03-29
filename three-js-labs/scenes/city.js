@@ -235,18 +235,18 @@ export function createScene(scene) {
   group.add(createRoad(-20, 0, 8, 50, Math.PI / 2));
   group.add(createRoad(20, 0, 8, 50, Math.PI / 2));
 
-  // Cars on roads (parked along roads)
+  // Cars on roads (on the road)
   const carMaterials = [carBodyMaterial, carBodyMaterial2, carBodyMaterial3, carBodyMaterial4];
-  for (let i = -6; i <= 6; i += 3) {
-    const mat = carMaterials[Math.abs(i / 3) % carMaterials.length];
-    group.add(createCar(i, 3, 0, mat));
-    group.add(createCar(i, -3, Math.PI, carMaterials[(Math.abs(i / 3) + 1) % carMaterials.length]));
-  }
-  for (let i = -6; i <= 6; i += 3) {
-    const mat = carMaterials[Math.abs(i / 3 + 2) % carMaterials.length];
-    group.add(createCar(3, i, Math.PI / 2, mat));
-    group.add(createCar(-3, i, -Math.PI / 2, carMaterials[(Math.abs(i / 3) + 3) % carMaterials.length]));
-  }
+  group.add(createCar(-15, 2, 0, carMaterials[0]));
+  group.add(createCar(12, -2, Math.PI, carMaterials[1]));
+  group.add(createCar(2, -12, Math.PI / 2, carMaterials[2]));
+  group.add(createCar(-2, 15, -Math.PI / 2, carMaterials[3]));
+  group.add(createCar(20, 18, 0, carMaterials[0]));
+  group.add(createCar(-18, -18, Math.PI, carMaterials[1]));
+  group.add(createCar(25, -12, 0, carMaterials[2]));
+  group.add(createCar(8, 22, Math.PI, carMaterials[3]));
+  group.add(createCar(-20, 8, Math.PI / 2, carMaterials[0]));
+  group.add(createCar(18, -8, -Math.PI / 2, carMaterials[1]));
 
   return (delta) => {
     group.rotation.y += delta * 0.05;
