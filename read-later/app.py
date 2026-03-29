@@ -15,7 +15,16 @@ NOISE_TAGS = ["nav", "header", "footer", "aside", "script", "style", "noscript",
 if url:
     with st.spinner("Fetching article..."):
         try:
-            response = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            response = requests.get(url, timeout=10, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "DNT": "1",
+            "Connection": "keep-alive",
+            "Upgrade-Insecure-Requests": "1",
+        })
             response.raise_for_status()
         except Exception as e:
             st.error(f"Failed to fetch: {e}")
