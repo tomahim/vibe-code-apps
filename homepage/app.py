@@ -16,6 +16,7 @@ apps = [
 
 experimental = [
     {"name": "Three.js Labs", "icon": "🎨", "url": "http://10.0.0.1:5173"},
+    {"name": "Read Later", "icon": "📚", "url": "http://10.0.0.1:1003"},
 ]
 
 server_tools = [

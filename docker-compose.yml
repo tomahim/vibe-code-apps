@@ -28,6 +28,13 @@ services:
     ports:
       - "1001:8501"
 
+  read-later:
+    build: ./read-later
+    container_name: read-later
+    restart: unless-stopped
+    ports:
+      - "1003:8501"
+
   three-js-labs:
     build: ./three-js-labs
     container_name: three-js-labs
