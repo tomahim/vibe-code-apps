@@ -1,5 +1,7 @@
 import streamlit as st
-import trafilatura
+import requests
+from readability import Document
+from bs4 import BeautifulSoup
 
 st.set_page_config(page_title="Read Later", page_icon="📚", layout="wide")
 
@@ -9,20 +11,36 @@ url = st.text_input("Article URL", placeholder="https://...")
 
 if url:
     with st.spinner("Fetching article..."):
-        downloaded = trafilatura.fetch_url(url)
-        if downloaded:
-            text = trafilatura.extract(downloaded, include_comments=False, include_tables=False)
-            metadata = trafilatura.extract_metadata(downloaded)
-        else:
-            text = None
-            metadata = None
+        try:
+            response = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            response.raise_for_status()
+            doc = Document(response.text)
+            title = doc.title()
+            content_html = doc.summary(html_partial=True)
+        except Exception as e:
+            st.error(f"Failed to fetch article: {e}")
+            st.stop()
 
-    if text:
-        if metadata and metadata.title:
-            st.subheader(metadata.title)
-        if metadata and metadata.author:
-            st.caption(f"By {metadata.author}")
-        st.markdown("---")
-        st.markdown(text)
-    else:
-        st.error("Could not extract article content from that URL.")
+    soup = BeautifulSoup(content_html, "lxml")
+
+    # Fix relative image URLs
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+        if src.startswith("/"):
+            from urllib.parse import urlparse
+            base = urlparse(url)
+            img["src"] = f"{base.scheme}://{base.netloc}{src}"
+
+    st.subheader(title)
+    st.markdown("---")
+
+    styled_html = f"""
+    <style>
+        .article img {{ max-width: 100%; border-radius: 8px; margin: 12px 0; }}
+        .article h1, .article h2, .article h3 {{ margin-top: 1.2em; }}
+        .article p {{ line-height: 1.7; }}
+        .article a {{ color: #60a5fa; }}
+    </style>
+    <div class="article">{soup}</div>
+    """
+    st.markdown(styled_html, unsafe_allow_html=True)
