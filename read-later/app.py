@@ -34,6 +34,10 @@ if url:
     st.subheader(title)
     st.markdown("---")
 
+    # readability wraps content in <html><body><div> — unwrap to get inner content
+    body = soup.find("body")
+    inner = (body or soup).decode_contents()
+
     styled_html = f"""
     <style>
         .article img {{ max-width: 100%; border-radius: 8px; margin: 12px 0; }}
@@ -41,6 +45,6 @@ if url:
         .article p {{ line-height: 1.7; }}
         .article a {{ color: #60a5fa; }}
     </style>
-    <div class="article">{soup}</div>
+    <div class="article">{inner}</div>
     """
     st.markdown(styled_html, unsafe_allow_html=True)
