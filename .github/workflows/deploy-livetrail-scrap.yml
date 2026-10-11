@@ -1,0 +1,43 @@
+name: Deploy livetrail-scrap
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "livetrail-scrap/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: railway-livetrail-scrap-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Railway CLI
+        run: npm install --global @railway/cli
+
+      - name: Deploy to Railway
+        working-directory: livetrail-scrap
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_ID: 79593d36-e4ba-406b-8f7e-51e9116a9c5a
+          RAILWAY_ENVIRONMENT_ID: 41a544e7-4fae-4b89-8bdd-69abf384c83a
+          RAILWAY_SERVICE_ID: 72efd523-3d5a-4894-a442-dd789f8e6f97
+        run: >-
+          railway up . --ci
+          --project "$RAILWAY_PROJECT_ID"
+          --environment "$RAILWAY_ENVIRONMENT_ID"
+          --service "$RAILWAY_SERVICE_ID"
