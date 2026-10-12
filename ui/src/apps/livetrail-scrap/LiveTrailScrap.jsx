@@ -183,7 +183,7 @@ export default function LiveTrailScrap({ onHome }) {
             </label>
           </section>
           <CheckpointTable times={data.times} showSpeed={showSpeed} />
-          <Profile profileHtml={data.profileHtml} profilePointsHtml={data.profilePointsHtml} />
+          <Profile profileHtml={data.profileHtml} times={data.times} />
           <p className="data-credit">Race information provided by <a href={selectedRace?.website} target="_blank" rel="noreferrer">LiveTrail</a>.</p>
         </>
       )}
