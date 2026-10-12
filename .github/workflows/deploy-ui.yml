@@ -1,18 +1,17 @@
-name: Deploy livetrail-scrap
+name: Deploy UI to Railway
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
     paths:
-      - "livetrail-scrap/**"
-      - ".github/workflows/deploy-livetrail-scrap.yml"
+      - "ui/**"
+      - ".github/workflows/deploy-ui.yml"
 
 permissions:
   contents: read
 
 concurrency:
-  group: railway-livetrail-scrap-production
+  group: railway-ui-production
   cancel-in-progress: false
 
 jobs:
@@ -30,15 +29,14 @@ jobs:
       - name: Install Railway CLI
         run: npm install --global @railway/cli
 
-      - name: Deploy to Railway
-        working-directory: livetrail-scrap
+      - name: Deploy UI
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: 79593d36-e4ba-406b-8f7e-51e9116a9c5a
           RAILWAY_ENVIRONMENT_ID: 41a544e7-4fae-4b89-8bdd-69abf384c83a
-          RAILWAY_SERVICE_ID: 72efd523-3d5a-4894-a442-dd789f8e6f97
+          RAILWAY_SERVICE_ID: 1561708c-0f17-4e8c-aef6-04c66bd26731
         run: >-
-          railway up --ci
+          railway up ./ui --ci
           --project "$RAILWAY_PROJECT_ID"
           --environment "$RAILWAY_ENVIRONMENT_ID"
           --service "$RAILWAY_SERVICE_ID"
