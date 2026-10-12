@@ -36,7 +36,7 @@ jobs:
           RAILWAY_ENVIRONMENT_ID: 41a544e7-4fae-4b89-8bdd-69abf384c83a
           RAILWAY_SERVICE_ID: 5b117cf2-e177-4951-ba3e-9b20c4920144
         run: >-
-          railway up ./api --ci
+          railway up ./api --path-as-root --ci
           --project "$RAILWAY_PROJECT_ID"
           --environment "$RAILWAY_ENVIRONMENT_ID"
           --service "$RAILWAY_SERVICE_ID"
