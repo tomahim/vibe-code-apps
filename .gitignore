@@ -1,0 +1,13 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+.venv/
+venv/
+staticfiles/
+
+# JavaScript
+node_modules/
+dist/
