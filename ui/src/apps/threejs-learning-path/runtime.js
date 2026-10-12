@@ -126,7 +126,13 @@ async function run({ code, check, revision }) {
           elapsed += delta;
           frames.forEach((callback) => callback({ elapsed, delta }));
         }
+        const autoRotate = controls.autoRotate;
+        const damping = controls.enableDamping;
+        controls.autoRotate = autoRotate && !paused;
+        controls.enableDamping = damping && !paused;
         controls.update();
+        controls.autoRotate = autoRotate;
+        controls.enableDamping = damping;
         renderer.render(scene, activeCamera);
         if (time - lastReport > 250 && !failed) {
           lastReport = time;

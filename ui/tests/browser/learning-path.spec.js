@@ -84,6 +84,22 @@ test('viewer sandbox cannot read parent storage', async ({ page }) => {
   })).toBe('SecurityError');
 });
 
+test('pause also stops automatic camera rotation and resume restarts it', async ({ page }) => {
+  await open(page, 'orbit-controls');
+  const lesson = chapters.flatMap((chapter) => chapter.lessons).find((item) => item.id === 'orbit-controls');
+  await edit(page, `${lesson.solution}\nwindow.testCamera = camera;`);
+  await expect(page.getByRole('button', { name: 'Scene check passed' })).toBeVisible();
+  await page.getByRole('button', { name: 'Pause animation', exact: true }).click();
+  await expect(page.locator('.tl-viewer-toolbar')).toContainText('PAUSED');
+  const frame = page.frames().find((item) => item.url() === 'about:srcdoc');
+  await frame.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  const paused = await frame.evaluate(() => window.testCamera.position.toArray());
+  await page.waitForTimeout(300);
+  expect(await frame.evaluate(() => window.testCamera.position.toArray())).toEqual(paused);
+  await page.getByRole('button', { name: 'Resume animation', exact: true }).click();
+  await expect.poll(() => frame.evaluate(() => window.testCamera.position.toArray())).not.toEqual(paused);
+});
+
 test('editing a solved exercise invalidates old results, and leaving the app flushes drafts', async ({ page }) => {
   await open(page);
   await loadSolution(page);
