@@ -1,0 +1,153 @@
+{
+  "id": "gpu",
+  "order": 11,
+  "title": "A little closer to the GPU",
+  "subtitle": "Particles, instances, shaders, and performance.",
+  "lessons": [
+    {
+      "id": "particles",
+      "title": "A thousand little points",
+      "minutes": 2,
+      "concept": "Points instead of meshes",
+      "body": [
+        "THREE.Points draws a set of points using one geometry and one material. It is a good fit for stars, dust, and simple particle clouds where a full mesh per particle would be wasteful.",
+        "The position attribute stores one XYZ position for each point. PointsMaterial controls their color and size. With sizeAttenuation enabled by default, points shrink with distance under a perspective camera. Hardware limits the maximum point size."
+      ],
+      "task": "Set material.size to 0.09.",
+      "hint": "Add or edit the final material.size assignment.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst count = 800;\nconst positions = new Float32Array(count * 3);\nfor (let i = 0; i < count; i++) {\n  const angle = i * 2.39996;\n  const radius = Math.sqrt(i / count) * 3;\n  positions[i * 3] = Math.cos(angle) * radius;\n  positions[i * 3 + 1] = Math.sin(i * 0.37) * 0.7;\n  positions[i * 3 + 2] = Math.sin(angle) * radius;\n}\nconst geometry = new THREE.BufferGeometry();\ngeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\nconst material = new THREE.PointsMaterial({ color: '#c8b1ff', size: 0.02 });\nconst points = new THREE.Points(geometry, material);\nscene.add(points);\nonFrame(({ delta }) => { points.rotation.y += delta * 0.15; });\n\nmaterial.size = 0.02;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst count = 800;\nconst positions = new Float32Array(count * 3);\nfor (let i = 0; i < count; i++) {\n  const angle = i * 2.39996;\n  const radius = Math.sqrt(i / count) * 3;\n  positions[i * 3] = Math.cos(angle) * radius;\n  positions[i * 3 + 1] = Math.sin(i * 0.37) * 0.7;\n  positions[i * 3 + 2] = Math.sin(angle) * radius;\n}\nconst geometry = new THREE.BufferGeometry();\ngeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\nconst material = new THREE.PointsMaterial({ color: '#c8b1ff', size: 0.02 });\nconst points = new THREE.Points(geometry, material);\nscene.add(points);\nonFrame(({ delta }) => { points.rotation.y += delta * 0.15; });\n\nmaterial.size = 0.09;\n",
+      "check": "material.size === 0.09 && geometry.attributes.position.count === 800",
+      "quiz": {
+        "question": "Which class renders this point cloud?",
+        "options": [
+          "THREE.Points",
+          "THREE.Group",
+          "THREE.Fog"
+        ],
+        "answer": 0,
+        "explanation": "Points renders point primitives from geometry attributes."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Points.html"
+      }
+    },
+    {
+      "id": "instancing",
+      "title": "Many objects, fewer draw calls",
+      "minutes": 3,
+      "concept": "InstancedMesh",
+      "body": [
+        "Many separate meshes can mean many draw calls, even when they share a shape and material. InstancedMesh batches repeated geometry with a different transform per instance.",
+        "Use a temporary Object3D to build each transform matrix, then copy it with setMatrixAt. Mark instanceMatrix.needsUpdate after editing. Instancing reduces draw-call overhead, but more instances still increase the number of rendered triangles."
+      ],
+      "task": "Increase count from 12 to 60.",
+      "hint": "The loop will arrange all instances around a ring.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst count = 12;\nconst geometry = new THREE.BoxGeometry(0.18, 0.6, 0.18);\nconst material = new THREE.MeshStandardMaterial({ color: '#b49aff' });\nconst instances = new THREE.InstancedMesh(geometry, material, count);\nconst transform = new THREE.Object3D();\nfor (let i = 0; i < count; i++) {\n  const angle = i / count * Math.PI * 2;\n  transform.position.set(Math.cos(angle) * 2, Math.sin(angle * 3) * 0.4, Math.sin(angle) * 2);\n  transform.rotation.y = -angle;\n  transform.updateMatrix();\n  instances.setMatrixAt(i, transform.matrix);\n}\ninstances.instanceMatrix.needsUpdate = true;\nscene.add(instances);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst count = 60;\nconst geometry = new THREE.BoxGeometry(0.18, 0.6, 0.18);\nconst material = new THREE.MeshStandardMaterial({ color: '#b49aff' });\nconst instances = new THREE.InstancedMesh(geometry, material, count);\nconst transform = new THREE.Object3D();\nfor (let i = 0; i < count; i++) {\n  const angle = i / count * Math.PI * 2;\n  transform.position.set(Math.cos(angle) * 2, Math.sin(angle * 3) * 0.4, Math.sin(angle) * 2);\n  transform.rotation.y = -angle;\n  transform.updateMatrix();\n  instances.setMatrixAt(i, transform.matrix);\n}\ninstances.instanceMatrix.needsUpdate = true;\nscene.add(instances);\n",
+      "check": "instances.count === 60",
+      "quiz": {
+        "question": "Instancing primarily reduces…",
+        "options": [
+          "The size of every triangle",
+          "Draw-call overhead for repeated objects",
+          "The need for a camera"
+        ],
+        "answer": 1,
+        "explanation": "Repeated geometry can be submitted together while each instance keeps its own transform."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/InstancedMesh.html"
+      }
+    },
+    {
+      "id": "vertex-shader",
+      "title": "Move vertices on the GPU",
+      "minutes": 3,
+      "concept": "Vertex shaders and uniforms",
+      "body": [
+        "A vertex shader runs on the GPU to position vertices. The fragment shader then determines surface colors. ShaderMaterial lets you write these stages in GLSL.",
+        "Uniforms carry shared values from JavaScript into the shader. Our shader displaces each vertex using a sine wave, but its amplitude starts at zero. Increase uAmplitude to reveal the wave. The plane has enough subdivisions for the curve to appear smooth."
+      ],
+      "task": "Set material.uniforms.uAmplitude.value to 0.3.",
+      "hint": "Edit the JavaScript uniform assignment at the bottom. You do not need to rewrite the GLSL.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(3, 3, 48, 48);\nconst material = new THREE.ShaderMaterial({\n  side: THREE.DoubleSide,\n  uniforms: { uTime: { value: 0 }, uAmplitude: { value: 0 }, uMix: { value: 0 } },\n  vertexShader: `\n    uniform float uTime;\n    uniform float uAmplitude;\n    varying vec2 vUv;\n    void main() {\n      vUv = uv;\n      vec3 p = position;\n      p.z += sin(p.x * 4.0 + uTime) * uAmplitude;\n      gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);\n    }\n  `,\n  fragmentShader: `\n    uniform float uMix;\n    varying vec2 vUv;\n    void main() {\n      vec3 purple = vec3(0.55, 0.32, 0.9);\n      vec3 mint = vec3(0.3, 0.9, 0.65);\n      vec3 color = mix(purple, mint, vUv.x * uMix);\n      gl_FragColor = vec4(color, 1.0);\n      #include <tonemapping_fragment>\n      #include <colorspace_fragment>\n    }\n  `\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\nonFrame(({ elapsed }) => { material.uniforms.uTime.value = elapsed; });\n\nmaterial.uniforms.uAmplitude.value = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(3, 3, 48, 48);\nconst material = new THREE.ShaderMaterial({\n  side: THREE.DoubleSide,\n  uniforms: { uTime: { value: 0 }, uAmplitude: { value: 0 }, uMix: { value: 0 } },\n  vertexShader: `\n    uniform float uTime;\n    uniform float uAmplitude;\n    varying vec2 vUv;\n    void main() {\n      vUv = uv;\n      vec3 p = position;\n      p.z += sin(p.x * 4.0 + uTime) * uAmplitude;\n      gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);\n    }\n  `,\n  fragmentShader: `\n    uniform float uMix;\n    varying vec2 vUv;\n    void main() {\n      vec3 purple = vec3(0.55, 0.32, 0.9);\n      vec3 mint = vec3(0.3, 0.9, 0.65);\n      vec3 color = mix(purple, mint, vUv.x * uMix);\n      gl_FragColor = vec4(color, 1.0);\n      #include <tonemapping_fragment>\n      #include <colorspace_fragment>\n    }\n  `\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\nonFrame(({ elapsed }) => { material.uniforms.uTime.value = elapsed; });\n\nmaterial.uniforms.uAmplitude.value = 0.3;\n",
+      "check": "material.uniforms.uAmplitude.value === 0.3",
+      "quiz": {
+        "question": "A uniform is…",
+        "options": [
+          "A value shared across a shader draw",
+          "A new triangle",
+          "An HTML element"
+        ],
+        "answer": 0,
+        "explanation": "Uniforms provide values such as time, colors, and transformation parameters to shaders."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/ShaderMaterial.html"
+      }
+    },
+    {
+      "id": "fragment-shader",
+      "title": "Paint pixels with a formula",
+      "minutes": 3,
+      "concept": "Varyings and color gradients",
+      "body": [
+        "A fragment shader computes the output for fragments of a rasterized surface. A varying carries per-vertex values into that stage, interpolated across triangles.",
+        "We pass UVs as vUv, then use its X component to blend two colors. The GLSL mix function is linear interpolation. Enable the gradient by raising uMix to 1. The included output chunks keep tone mapping and color conversion consistent with the renderer."
+      ],
+      "task": "Set material.uniforms.uMix.value to 1.",
+      "hint": "At 0 the whole plane is purple. At 1 it blends toward mint across U.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(3, 3, 48, 48);\nconst material = new THREE.ShaderMaterial({\n  side: THREE.DoubleSide,\n  uniforms: { uTime: { value: 0 }, uAmplitude: { value: 0 }, uMix: { value: 0 } },\n  vertexShader: `\n    uniform float uTime;\n    uniform float uAmplitude;\n    varying vec2 vUv;\n    void main() {\n      vUv = uv;\n      vec3 p = position;\n      p.z += sin(p.x * 4.0 + uTime) * uAmplitude;\n      gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);\n    }\n  `,\n  fragmentShader: `\n    uniform float uMix;\n    varying vec2 vUv;\n    void main() {\n      vec3 purple = vec3(0.55, 0.32, 0.9);\n      vec3 mint = vec3(0.3, 0.9, 0.65);\n      vec3 color = mix(purple, mint, vUv.x * uMix);\n      gl_FragColor = vec4(color, 1.0);\n      #include <tonemapping_fragment>\n      #include <colorspace_fragment>\n    }\n  `\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\nonFrame(({ elapsed }) => { material.uniforms.uTime.value = elapsed; });\n\nmaterial.uniforms.uMix.value = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(3, 3, 48, 48);\nconst material = new THREE.ShaderMaterial({\n  side: THREE.DoubleSide,\n  uniforms: { uTime: { value: 0 }, uAmplitude: { value: 0 }, uMix: { value: 0 } },\n  vertexShader: `\n    uniform float uTime;\n    uniform float uAmplitude;\n    varying vec2 vUv;\n    void main() {\n      vUv = uv;\n      vec3 p = position;\n      p.z += sin(p.x * 4.0 + uTime) * uAmplitude;\n      gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);\n    }\n  `,\n  fragmentShader: `\n    uniform float uMix;\n    varying vec2 vUv;\n    void main() {\n      vec3 purple = vec3(0.55, 0.32, 0.9);\n      vec3 mint = vec3(0.3, 0.9, 0.65);\n      vec3 color = mix(purple, mint, vUv.x * uMix);\n      gl_FragColor = vec4(color, 1.0);\n      #include <tonemapping_fragment>\n      #include <colorspace_fragment>\n    }\n  `\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\nonFrame(({ elapsed }) => { material.uniforms.uTime.value = elapsed; });\n\nmaterial.uniforms.uMix.value = 1;\n",
+      "check": "material.uniforms.uMix.value === 1",
+      "quiz": {
+        "question": "A varying is interpolated…",
+        "options": [
+          "Across a triangle",
+          "Between browser tabs",
+          "Only when JavaScript loops"
+        ],
+        "answer": 0,
+        "explanation": "The rasterizer interpolates vertex outputs for fragments across a primitive."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/ShaderMaterial.html"
+      }
+    },
+    {
+      "id": "performance",
+      "title": "Spend pixels wisely",
+      "minutes": 2,
+      "concept": "Pixel ratio and render cost",
+      "body": [
+        "A high-density screen can render several physical pixels for each CSS pixel. A pixel ratio of 2 doubles each dimension and therefore draws four times as many pixels as a ratio of 1.",
+        "Cap pixel ratio to balance sharpness and GPU cost. The preview also reports draw calls and triangle count; these are useful clues, not a complete benchmark. Profile your own scenes before reducing detail or adding expensive effects."
+      ],
+      "task": "Set renderer pixel ratio to 1.",
+      "hint": "Change renderer.setPixelRatio(2) to renderer.setPixelRatio(1).",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nrenderer.setPixelRatio(2);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nrenderer.setPixelRatio(1);\n",
+      "check": "renderer.getPixelRatio() === 1",
+      "quiz": {
+        "question": "Pixel ratio 2 draws how many times as many pixels as ratio 1?",
+        "options": [
+          "Two",
+          "Four",
+          "Eight"
+        ],
+        "answer": 1,
+        "explanation": "Both width and height double: 2 × 2 = 4."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/responsive.html"
+      }
+    }
+  ]
+}

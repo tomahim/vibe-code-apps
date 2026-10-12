@@ -1,0 +1,153 @@
+{
+  "id": "materials",
+  "order": 5,
+  "title": "Surfaces with character",
+  "subtitle": "Color, roughness, metals, and transparency.",
+  "lessons": [
+    {
+      "id": "unlit",
+      "title": "Color without light",
+      "minutes": 2,
+      "concept": "Basic versus lit materials",
+      "body": [
+        "MeshStandardMaterial reacts to lights using a physically based shading model. MeshBasicMaterial shows its color without scene lighting. Unlit materials are useful for markers, UI-like objects, and intentionally flat graphics.",
+        "Switch the cube to a basic material and notice that its faces lose light-based shading. Geometry and position have not changed; the surface model has. A dark standard material may simply need a light."
+      ],
+      "task": "Replace MeshStandardMaterial with MeshBasicMaterial for the cube.",
+      "hint": "The simplified material below contains only color, which both materials accept.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff'\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshBasicMaterial({\n  color: '#b49aff'\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "material.isMeshBasicMaterial === true",
+      "quiz": {
+        "question": "Which material works without scene lights?",
+        "options": [
+          "MeshStandardMaterial",
+          "MeshBasicMaterial",
+          "Both always look identical"
+        ],
+        "answer": 1,
+        "explanation": "MeshBasicMaterial is unlit, so lights do not affect its color."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshBasicMaterial.html"
+      }
+    },
+    {
+      "id": "roughness",
+      "title": "Polished or matte?",
+      "minutes": 2,
+      "concept": "Microsurface roughness",
+      "body": [
+        "Roughness describes how uneven a surface is at a microscopic scale. Low values give sharper highlights; high values spread them into broader, softer reflections.",
+        "The property ranges from 0 to 1. It does not change the mesh’s actual shape. Compare this sphere at 0.08 and 0.9, watching the highlight from our directional light."
+      ],
+      "task": "Set material.roughness to 0.9 for a matte finish.",
+      "hint": "Change the final assignment, which overrides the constructor value.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.roughness = 0.08;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.roughness = 0.9;\n",
+      "check": "material.roughness === 0.9",
+      "quiz": {
+        "question": "Higher roughness produces…",
+        "options": [
+          "A sharper mirror-like highlight",
+          "A broader, softer highlight",
+          "More geometry"
+        ],
+        "answer": 1,
+        "explanation": "Roughness spreads reflected light over more directions."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html"
+      }
+    },
+    {
+      "id": "metalness",
+      "title": "Make it metallic",
+      "minutes": 2,
+      "concept": "Metals reflect differently",
+      "body": [
+        "Metals and nonmetals respond differently to light. In the standard material, metalness blends between those models. Pure materials are usually near 0 or 1; intermediate values can represent mixed or weathered surfaces.",
+        "Metals reflect their surroundings and have little diffuse response. A metal can look dark when there is little to reflect. We use strong studio lights here; production metallic scenes often also use an environment map."
+      ],
+      "task": "Set material.metalness to 1.",
+      "hint": "Keep roughness at 0.25 so the light produces a clear highlight.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.color.set('#eac38e');\nmaterial.roughness = 0.25;\nmaterial.metalness = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.color.set('#eac38e');\nmaterial.roughness = 0.25;\nmaterial.metalness = 1;\n",
+      "check": "material.metalness === 1",
+      "quiz": {
+        "question": "Why might a metal look dark?",
+        "options": [
+          "It has nothing bright to reflect",
+          "Metalness deletes lights",
+          "Metal materials need wireframe"
+        ],
+        "answer": 0,
+        "explanation": "Metals depend strongly on reflected lighting and environments."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html"
+      }
+    },
+    {
+      "id": "transparency",
+      "title": "See through a surface",
+      "minutes": 2,
+      "concept": "Opacity and blending",
+      "body": [
+        "Opacity is a value from 0 (invisible) to 1 (opaque). To blend a material with what is behind it, also enable transparent. Opacity alone is not enough for the usual transparent-material workflow.",
+        "Overlapping transparent surfaces can have sorting artifacts. For this simple shell, depthWrite is disabled so it does not hide later transparent draws. That is a useful technique, not a universal cure for every transparency problem."
+      ],
+      "task": "Set material.transparent to true to reveal the inner sphere.",
+      "hint": "Opacity is already 0.3. Enable the separate transparent flag.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst inner = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 16), new THREE.MeshBasicMaterial({ color: '#f1c894' }));\nscene.add(inner);\nmaterial.opacity = 0.3;\nmaterial.transparent = false;\nmaterial.depthWrite = false;\nmaterial.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst inner = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 16), new THREE.MeshBasicMaterial({ color: '#f1c894' }));\nscene.add(inner);\nmaterial.opacity = 0.3;\nmaterial.transparent = true;\nmaterial.depthWrite = false;\nmaterial.needsUpdate = true;\n",
+      "check": "material.transparent && material.opacity === 0.3",
+      "quiz": {
+        "question": "Which pair enables ordinary transparent blending?",
+        "options": [
+          "wireframe + roughness",
+          "transparent + opacity",
+          "position + rotation"
+        ],
+        "answer": 1,
+        "explanation": "transparent enables blending and opacity controls how opaque the surface is."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Material.html"
+      }
+    },
+    {
+      "id": "sides",
+      "title": "The back of a polygon",
+      "minutes": 2,
+      "concept": "Face orientation and culling",
+      "body": [
+        "Triangles have a front and a back, determined by vertex order. Materials normally draw only front faces. This saves work but means a one-sided plane disappears when viewed from behind.",
+        "DoubleSide draws both sides. Try orbiting behind this plane before and after changing the material. Use it where you need a two-sided surface, rather than enabling it on every closed solid."
+      ],
+      "task": "Change material.side from FrontSide to DoubleSide.",
+      "hint": "Set material.side = THREE.DoubleSide, then keep needsUpdate.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(2.5, 2.5);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.rotation.y = Math.PI;\nmaterial.side = THREE.FrontSide;\nmaterial.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.PlaneGeometry(2.5, 2.5);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.rotation.y = Math.PI;\nmaterial.side = THREE.DoubleSide;\nmaterial.needsUpdate = true;\n",
+      "check": "material.side === THREE.DoubleSide",
+      "quiz": {
+        "question": "Why can a plane disappear from behind?",
+        "options": [
+          "Back faces are culled",
+          "Planes have no vertices",
+          "The light is too bright"
+        ],
+        "answer": 0,
+        "explanation": "With FrontSide, only the triangle’s front-facing side is drawn."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Material.html"
+      }
+    }
+  ]
+}

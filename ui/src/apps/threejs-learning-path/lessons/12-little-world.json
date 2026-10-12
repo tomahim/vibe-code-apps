@@ -1,0 +1,153 @@
+{
+  "id": "little-world",
+  "order": 12,
+  "title": "Build your little world",
+  "subtitle": "Bring everything together, one small step at a time.",
+  "lessons": [
+    {
+      "id": "world-planet",
+      "title": "01 / Sculpt your planet",
+      "minutes": 2,
+      "concept": "A capstone in five small steps",
+      "body": [
+        "You now have the pieces to build a miniature world. Each capstone step starts from a working scene, so you can focus on one decision at a time.",
+        "Our planet uses an icosahedron with two levels of subdivision and flat shading. It gives a faceted, illustrated feel at a modest triangle count. Make it your own with a warm coral surface. The moon is a child of an orbit group, ready for animation later."
+      ],
+      "task": "Change the planet material color to #edaa91.",
+      "hint": "Use planet.material.color.set on the last line.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nplanet.material.color.set('#b49aff');\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nplanet.material.color.set('#edaa91');\n",
+      "check": "planet.material.color.getHexString() === 'edaa91'",
+      "quiz": {
+        "question": "What makes the planet appear faceted?",
+        "options": [
+          "flatShading",
+          "A higher pixel ratio",
+          "A longer far plane"
+        ],
+        "answer": 0,
+        "explanation": "Flat shading uses distinct triangle normals to show the individual faces."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/IcosahedronGeometry.html"
+      }
+    },
+    {
+      "id": "world-ring",
+      "title": "02 / Add an orbital ring",
+      "minutes": 2,
+      "concept": "Compose with a second shape",
+      "body": [
+        "A ring gives the scene a strong silhouette and a visual contrast to the round planet. Its tilt makes the composition readable from our camera angle.",
+        "The ring is a torus with a very thin tube. It exists in the scene but starts hidden. Reveal it, then experiment with its rotation after finishing the check. Visibility is useful for optional details; it does not dispose their resources."
+      ],
+      "task": "Set ring.visible to true.",
+      "hint": "The geometry and material are already in place.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nring.visible = false;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nring.visible = true;\n",
+      "check": "ring.visible === true",
+      "quiz": {
+        "question": "Setting visible to false…",
+        "options": [
+          "Disposes the geometry",
+          "Keeps the object but skips its display",
+          "Deletes its parent"
+        ],
+        "answer": 1,
+        "explanation": "Visibility is separate from scene membership and resource lifetime."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Object3D.html"
+      }
+    },
+    {
+      "id": "world-orbit",
+      "title": "03 / Set the moon in motion",
+      "minutes": 2,
+      "concept": "Animate a parent transform",
+      "body": [
+        "The moon’s local X position is its orbital radius. Rotating the parent group moves the moon around the origin while leaving that local offset intact.",
+        "This combines scene hierarchy, radians, and delta time. Spin the orbit at a gentle speed and independently rotate the planet. A real astronomical simulation would need a different scale and motion model; this is a playful visual composition."
+      ],
+      "task": "Set orbitSpeed to 0.4.",
+      "hint": "The callback rotates orbit, not moon. That keeps the radius fixed.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst orbitSpeed = 0;\nonFrame(({ delta }) => {\n  orbit.rotation.y += orbitSpeed * delta;\n  planet.rotation.y += 0.12 * delta;\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst orbitSpeed = 0.4;\nonFrame(({ delta }) => {\n  orbit.rotation.y += orbitSpeed * delta;\n  planet.rotation.y += 0.12 * delta;\n});\n",
+      "check": "orbitSpeed === 0.4 && orbit.rotation.y > 0",
+      "quiz": {
+        "question": "Why rotate the moon’s parent group?",
+        "options": [
+          "To orbit while preserving its local offset",
+          "To change its material",
+          "To add more subdivisions"
+        ],
+        "answer": 0,
+        "explanation": "The parent’s rotation transforms the child’s position around the group origin."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/scenegraph.html"
+      }
+    },
+    {
+      "id": "world-stars",
+      "title": "04 / A sky full of points",
+      "minutes": 2,
+      "concept": "Background depth without hundreds of meshes",
+      "body": [
+        "Our stars use one Points object with a shared material. Their positions lie on a sphere around the scene, which gives depth as you orbit the camera.",
+        "The deterministic pattern keeps every run consistent. Their size is small enough to read as distant points. Add the field by enabling its visibility, then compare the scene with and without this final layer of context."
+      ],
+      "task": "Set starField.visible to true.",
+      "hint": "This reveals all 300 points together.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst stars = new THREE.BufferGeometry();\nconst starPositions = [];\nfor (let i = 0; i < 300; i++) {\n  const angle = i * 2.39996;\n  const y = 1 - 2 * i / 300;\n  const r = Math.sqrt(1 - y * y);\n  starPositions.push(Math.cos(angle) * r * 12, y * 12, Math.sin(angle) * r * 12);\n}\nstars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));\nconst starField = new THREE.Points(stars, new THREE.PointsMaterial({ color: '#b9c9e9', size: 0.045 }));\nscene.add(starField);\n\nstarField.visible = false;\nonFrame(({ delta }) => { orbit.rotation.y += delta * 0.4; });\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst stars = new THREE.BufferGeometry();\nconst starPositions = [];\nfor (let i = 0; i < 300; i++) {\n  const angle = i * 2.39996;\n  const y = 1 - 2 * i / 300;\n  const r = Math.sqrt(1 - y * y);\n  starPositions.push(Math.cos(angle) * r * 12, y * 12, Math.sin(angle) * r * 12);\n}\nstars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));\nconst starField = new THREE.Points(stars, new THREE.PointsMaterial({ color: '#b9c9e9', size: 0.045 }));\nscene.add(starField);\n\nstarField.visible = true;\nonFrame(({ delta }) => { orbit.rotation.y += delta * 0.4; });\n",
+      "check": "starField.visible && stars.attributes.position.count === 300",
+      "quiz": {
+        "question": "Why use one Points object for these stars?",
+        "options": [
+          "Each star needs a separate mesh",
+          "It batches many simple points efficiently",
+          "Points remove the need for a scene"
+        ],
+        "answer": 1,
+        "explanation": "A point cloud avoids a separate mesh and draw call for each small star."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Points.html"
+      }
+    },
+    {
+      "id": "world-finish",
+      "title": "05 / The final look",
+      "minutes": 3,
+      "concept": "Tone mapping and a finished scene",
+      "body": [
+        "Tone mapping compresses a wide range of scene brightness into what a display can show. ACESFilmicToneMapping gives highlights a softer rolloff; exposure then adjusts the overall brightness before that mapping.",
+        "Enable it and take a look around your finished world. You have worked with space, geometry, cameras, materials, light, textures, time, interaction, assets, and shaders. Export this scene from the editor to keep building in your own project. The workspace API is documented alongside the exported code."
+      ],
+      "task": "Set renderer.toneMapping to THREE.ACESFilmicToneMapping.",
+      "hint": "Keep toneMappingExposure at 1.2. You can tune it after the lesson.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst stars = new THREE.BufferGeometry();\nconst starPositions = [];\nfor (let i = 0; i < 300; i++) {\n  const angle = i * 2.39996;\n  const y = 1 - 2 * i / 300;\n  const r = Math.sqrt(1 - y * y);\n  starPositions.push(Math.cos(angle) * r * 12, y * 12, Math.sin(angle) * r * 12);\n}\nstars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));\nconst starField = new THREE.Points(stars, new THREE.PointsMaterial({ color: '#b9c9e9', size: 0.045 }));\nscene.add(starField);\n\nonFrame(({ delta }) => {\n  orbit.rotation.y += delta * 0.4;\n  planet.rotation.y += delta * 0.12;\n});\nrenderer.toneMapping = THREE.NoToneMapping;\nrenderer.toneMappingExposure = 1.2;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\ngrid.visible = false;\nconst planet = new THREE.Mesh(\n  new THREE.IcosahedronGeometry(1.1, 2),\n  new THREE.MeshStandardMaterial({ color: '#b49aff', roughness: 0.75, flatShading: true })\n);\nscene.add(planet);\nconst orbit = new THREE.Group();\nscene.add(orbit);\nconst moon = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25, 1), new THREE.MeshStandardMaterial({ color: '#a9e8ce', flatShading: true }));\nmoon.position.x = 2.2;\norbit.add(moon);\n\nconst ring = new THREE.Mesh(\n  new THREE.TorusGeometry(1.65, 0.045, 8, 96),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b', roughness: 0.4 })\n);\nring.rotation.x = Math.PI / 2.5;\nring.rotation.y = -0.3;\nscene.add(ring);\n\nconst stars = new THREE.BufferGeometry();\nconst starPositions = [];\nfor (let i = 0; i < 300; i++) {\n  const angle = i * 2.39996;\n  const y = 1 - 2 * i / 300;\n  const r = Math.sqrt(1 - y * y);\n  starPositions.push(Math.cos(angle) * r * 12, y * 12, Math.sin(angle) * r * 12);\n}\nstars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));\nconst starField = new THREE.Points(stars, new THREE.PointsMaterial({ color: '#b9c9e9', size: 0.045 }));\nscene.add(starField);\n\nonFrame(({ delta }) => {\n  orbit.rotation.y += delta * 0.4;\n  planet.rotation.y += delta * 0.12;\n});\nrenderer.toneMapping = THREE.ACESFilmicToneMapping;\nrenderer.toneMappingExposure = 1.2;\n",
+      "check": "renderer.toneMapping === THREE.ACESFilmicToneMapping",
+      "quiz": {
+        "question": "Tone mapping mainly helps map…",
+        "options": [
+          "Scene brightness into the display range",
+          "Keyboard keys to actions",
+          "UVs to world positions"
+        ],
+        "answer": 0,
+        "explanation": "Tone mapping controls how scene brightness is represented on a display."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/WebGLRenderer.html"
+      }
+    }
+  ]
+}

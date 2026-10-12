@@ -1,0 +1,153 @@
+{
+  "id": "textures",
+  "order": 7,
+  "title": "Images on surfaces",
+  "subtitle": "UVs, sampling, and color that stays correct.",
+  "lessons": [
+    {
+      "id": "texture-map",
+      "title": "Wrap an image around a mesh",
+      "minutes": 2,
+      "concept": "Texture coordinates",
+      "body": [
+        "A texture is an image sampled by a material. UV coordinates tell each part of a surface which part of that image to use. U and V usually range from 0 to 1 across an image.",
+        "Built-in geometries already provide UVs. We draw a checkerboard on a tiny canvas so this example works without an external image. Assign the texture to material.map and the sphere will display it."
+      ],
+      "task": "Assign texture to material.map.",
+      "hint": "Replace material.map = null with material.map = texture.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = null;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n",
+      "check": "material.map === texture",
+      "quiz": {
+        "question": "What do UV coordinates describe?",
+        "options": [
+          "Positions on a texture",
+          "Light intensity",
+          "Camera movement"
+        ],
+        "answer": 0,
+        "explanation": "UVs map a location on a surface to a location in an image."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/textures.html"
+      }
+    },
+    {
+      "id": "texture-repeat",
+      "title": "Tile a texture",
+      "minutes": 2,
+      "concept": "Wrapping and repetition",
+      "body": [
+        "A texture normally clamps its edges when UVs go outside its bounds. RepeatWrapping instead repeats the image. Enable it separately along U and V with wrapS and wrapT.",
+        "texture.repeat scales how many times the image tiles over the existing UV range. Repetition changes sampling; it does not add geometry or require a larger source image."
+      ],
+      "task": "Set texture.repeat to (4, 2).",
+      "hint": "Both wrapping modes are already RepeatWrapping. Edit texture.repeat.set(1, 1).",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\ntexture.wrapS = texture.wrapT = THREE.RepeatWrapping;\ntexture.repeat.set(1, 1);\ntexture.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\ntexture.wrapS = texture.wrapT = THREE.RepeatWrapping;\ntexture.repeat.set(4, 2);\ntexture.needsUpdate = true;\n",
+      "check": "texture.repeat.x === 4 && texture.repeat.y === 2",
+      "quiz": {
+        "question": "Which wrapping mode tiles an image?",
+        "options": [
+          "ClampToEdgeWrapping",
+          "RepeatWrapping",
+          "NoToneMapping"
+        ],
+        "answer": 1,
+        "explanation": "RepeatWrapping repeats samples when texture coordinates cross an image boundary."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Texture.html"
+      }
+    },
+    {
+      "id": "color-space",
+      "title": "Keep your colors honest",
+      "minutes": 3,
+      "concept": "sRGB versus linear data",
+      "body": [
+        "Lighting calculations use linear color values. Most images painted for display, including our checkerboard, contain sRGB colors. The texture’s colorSpace tells Three.js how to interpret those values.",
+        "Color textures normally need SRGBColorSpace. Data textures such as normal, roughness, or metalness maps normally keep NoColorSpace. The renderer converts its linear result to the output color space; do not add a second manual conversion."
+      ],
+      "task": "Mark this color texture as THREE.SRGBColorSpace.",
+      "hint": "Change texture.colorSpace from NoColorSpace to SRGBColorSpace.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.NoColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n",
+      "check": "texture.colorSpace === THREE.SRGBColorSpace",
+      "quiz": {
+        "question": "Which texture usually contains sRGB color?",
+        "options": [
+          "A normal map",
+          "A roughness map",
+          "A base-color image"
+        ],
+        "answer": 2,
+        "explanation": "Base-color images represent display colors; normal and roughness maps contain numerical data."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/color-management.html"
+      }
+    },
+    {
+      "id": "filtering",
+      "title": "Crisp pixels or soft samples?",
+      "minutes": 2,
+      "concept": "Texture filtering",
+      "body": [
+        "A texture rarely lines up exactly with screen pixels. Filters decide how its samples are combined when displayed larger or smaller than the original image.",
+        "Linear filtering blends neighboring samples. Nearest filtering chooses the closest sample, giving a crisp pixel-art look. Minification often uses mipmaps: prefiltered smaller versions that reduce shimmering when textures shrink into the distance."
+      ],
+      "task": "Use THREE.NearestFilter for texture.magFilter.",
+      "hint": "The magnification filter controls the look when the texture is enlarged.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 8;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 8, 8);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 4, 4);\nctx.fillRect(4, 4, 4, 4);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\ntexture.magFilter = THREE.LinearFilter;\ntexture.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 8;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 8, 8);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 4, 4);\nctx.fillRect(4, 4, 4, 4);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.SRGBColorSpace;\nmaterial.map = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\ntexture.magFilter = THREE.NearestFilter;\ntexture.needsUpdate = true;\n",
+      "check": "texture.magFilter === THREE.NearestFilter",
+      "quiz": {
+        "question": "What does nearest filtering avoid?",
+        "options": [
+          "Geometry",
+          "Blending neighboring texture samples",
+          "All aliasing"
+        ],
+        "answer": 1,
+        "explanation": "Nearest sampling preserves hard pixel edges, though it can still alias."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Texture.html"
+      }
+    },
+    {
+      "id": "bump-map",
+      "title": "Detail without more polygons",
+      "minutes": 2,
+      "concept": "Bump mapping",
+      "body": [
+        "A bump map uses height-like data to perturb a surface’s shading normal. It creates the impression of small ridges without changing the actual mesh silhouette.",
+        "Normal maps directly encode directions and serve a similar purpose. Both are data rather than display color. Our checkerboard becomes a simple bump pattern. Increase bumpScale to make the lighting change more obvious, then inspect the unchanged outline."
+      ],
+      "task": "Increase material.bumpScale to 0.25.",
+      "hint": "The same canvas is used as data here, so colorSpace remains NoColorSpace.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.NoColorSpace;\nmaterial.bumpMap = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\nmaterial.bumpScale = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\n// Generate a tiny image locally: no downloaded assets needed.\nconst image = document.createElement('canvas');\nimage.width = image.height = 128;\nconst ctx = image.getContext('2d');\nctx.fillStyle = '#b49aff';\nctx.fillRect(0, 0, 128, 128);\nctx.fillStyle = '#30344b';\nctx.fillRect(0, 0, 64, 64);\nctx.fillRect(64, 64, 64, 64);\nconst texture = new THREE.CanvasTexture(image);\ntexture.colorSpace = THREE.NoColorSpace;\nmaterial.bumpMap = texture;\nmaterial.color.set('#ffffff');\nmaterial.needsUpdate = true;\n\nmaterial.bumpScale = 0.25;\n",
+      "check": "material.bumpMap === texture && material.bumpScale === 0.25",
+      "quiz": {
+        "question": "Does a bump map change a mesh’s silhouette?",
+        "options": [
+          "No",
+          "Yes, it moves every vertex",
+          "Only with a basic material"
+        ],
+        "answer": 0,
+        "explanation": "Bump mapping changes lighting normals; displacement or geometry changes are needed to alter the silhouette."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html"
+      }
+    }
+  ]
+}

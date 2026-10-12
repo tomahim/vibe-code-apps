@@ -1,0 +1,153 @@
+{
+  "id": "assets",
+  "order": 10,
+  "title": "Work with real assets",
+  "subtitle": "Loading, framing, animation, and cleanup.",
+  "lessons": [
+    {
+      "id": "gltf",
+      "title": "Load a glTF scene",
+      "minutes": 3,
+      "concept": "An asset can contain a hierarchy",
+      "body": [
+        "glTF is a common format for delivering 3D scenes and models. A .glb packs glTF data into a binary file. Models may contain several meshes, materials, and animations rather than a single mesh.",
+        "GLTFLoader returns a result whose scene is the model’s root. This lesson parses a tiny embedded glTF so there are no downloads. In your own app, use await loader.loadAsync(url) and handle loading failures. Scale the loaded root just like any other object."
+      ],
+      "task": "Set model.scale to 1.5 on every axis.",
+      "hint": "Use model.scale.setScalar(1.5). The loaded root is a Group.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\n// A tiny glTF asset, embedded here to keep the lesson self-contained.\nconst asset = {\"asset\":{\"version\":\"2.0\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0}],\"meshes\":[{\"primitives\":[{\"attributes\":{\"POSITION\":0},\"material\":0}]}],\"materials\":[{\"doubleSided\":true,\"pbrMetallicRoughness\":{\"baseColorFactor\":[0.55,0.36,0.9,1],\"metallicFactor\":0,\"roughnessFactor\":0.5}}],\"buffers\":[{\"uri\":\"data:application/octet-stream;base64,AACAvwAAgL8AAAAAAACAPwAAgL8AAAAAAAAAAGZmpj8AAAAA\",\"byteLength\":36}],\"bufferViews\":[{\"buffer\":0,\"byteOffset\":0,\"byteLength\":36}],\"accessors\":[{\"bufferView\":0,\"componentType\":5126,\"count\":3,\"type\":\"VEC3\",\"min\":[-1,-1,0],\"max\":[1,1.3,0]}]};\nconst loader = new GLTFLoader();\nconst gltf = await loader.parseAsync(JSON.stringify(asset), \"\");\nconst model = gltf.scene;\nscene.add(model);\n\nmodel.scale.setScalar(1);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\n// A tiny glTF asset, embedded here to keep the lesson self-contained.\nconst asset = {\"asset\":{\"version\":\"2.0\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0}],\"meshes\":[{\"primitives\":[{\"attributes\":{\"POSITION\":0},\"material\":0}]}],\"materials\":[{\"doubleSided\":true,\"pbrMetallicRoughness\":{\"baseColorFactor\":[0.55,0.36,0.9,1],\"metallicFactor\":0,\"roughnessFactor\":0.5}}],\"buffers\":[{\"uri\":\"data:application/octet-stream;base64,AACAvwAAgL8AAAAAAACAPwAAgL8AAAAAAAAAAGZmpj8AAAAA\",\"byteLength\":36}],\"bufferViews\":[{\"buffer\":0,\"byteOffset\":0,\"byteLength\":36}],\"accessors\":[{\"bufferView\":0,\"componentType\":5126,\"count\":3,\"type\":\"VEC3\",\"min\":[-1,-1,0],\"max\":[1,1.3,0]}]};\nconst loader = new GLTFLoader();\nconst gltf = await loader.parseAsync(JSON.stringify(asset), \"\");\nconst model = gltf.scene;\nscene.add(model);\n\nmodel.scale.setScalar(1.5);\n",
+      "check": "model.scale.x === 1.5 && model.children.length > 0",
+      "quiz": {
+        "question": "Where is a loaded glTF’s visible root?",
+        "options": [
+          "gltf.scene",
+          "gltf.cameraOnly",
+          "gltf.canvas"
+        ],
+        "answer": 0,
+        "explanation": "GLTFLoader exposes the loaded scene hierarchy as gltf.scene."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/GLTFLoader.html"
+      }
+    },
+    {
+      "id": "traverse",
+      "title": "Reach inside a model",
+      "minutes": 2,
+      "concept": "Traverse a hierarchy",
+      "body": [
+        "Imported models are often groups nested inside other groups. Setting a material on the root group will not recolor its mesh children.",
+        "traverse visits an object and all of its descendants. Test isMesh before touching material properties. Real assets can use material arrays; this example has one material per mesh. Clone shared materials when you want to change one object without changing its siblings."
+      ],
+      "task": "Change the tint variable to #a9e8ce.",
+      "hint": "The traversal applies this tint to each mesh in the loaded scene.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\n// A tiny glTF asset, embedded here to keep the lesson self-contained.\nconst asset = {\"asset\":{\"version\":\"2.0\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0}],\"meshes\":[{\"primitives\":[{\"attributes\":{\"POSITION\":0},\"material\":0}]}],\"materials\":[{\"doubleSided\":true,\"pbrMetallicRoughness\":{\"baseColorFactor\":[0.55,0.36,0.9,1],\"metallicFactor\":0,\"roughnessFactor\":0.5}}],\"buffers\":[{\"uri\":\"data:application/octet-stream;base64,AACAvwAAgL8AAAAAAACAPwAAgL8AAAAAAAAAAGZmpj8AAAAA\",\"byteLength\":36}],\"bufferViews\":[{\"buffer\":0,\"byteOffset\":0,\"byteLength\":36}],\"accessors\":[{\"bufferView\":0,\"componentType\":5126,\"count\":3,\"type\":\"VEC3\",\"min\":[-1,-1,0],\"max\":[1,1.3,0]}]};\nconst loader = new GLTFLoader();\nconst gltf = await loader.parseAsync(JSON.stringify(asset), \"\");\nconst model = gltf.scene;\nscene.add(model);\n\nconst tint = '#b49aff';\nmodel.traverse((child) => {\n  if (child.isMesh) child.material.color.set(tint);\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\n// A tiny glTF asset, embedded here to keep the lesson self-contained.\nconst asset = {\"asset\":{\"version\":\"2.0\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0}],\"meshes\":[{\"primitives\":[{\"attributes\":{\"POSITION\":0},\"material\":0}]}],\"materials\":[{\"doubleSided\":true,\"pbrMetallicRoughness\":{\"baseColorFactor\":[0.55,0.36,0.9,1],\"metallicFactor\":0,\"roughnessFactor\":0.5}}],\"buffers\":[{\"uri\":\"data:application/octet-stream;base64,AACAvwAAgL8AAAAAAACAPwAAgL8AAAAAAAAAAGZmpj8AAAAA\",\"byteLength\":36}],\"bufferViews\":[{\"buffer\":0,\"byteOffset\":0,\"byteLength\":36}],\"accessors\":[{\"bufferView\":0,\"componentType\":5126,\"count\":3,\"type\":\"VEC3\",\"min\":[-1,-1,0],\"max\":[1,1.3,0]}]};\nconst loader = new GLTFLoader();\nconst gltf = await loader.parseAsync(JSON.stringify(asset), \"\");\nconst model = gltf.scene;\nscene.add(model);\n\nconst tint = '#a9e8ce';\nmodel.traverse((child) => {\n  if (child.isMesh) child.material.color.set(tint);\n});\n",
+      "check": "model.children[0].material.color.getHexString() === 'a9e8ce'",
+      "quiz": {
+        "question": "Why test isMesh while traversing?",
+        "options": [
+          "A hierarchy can also contain groups, lights, and cameras",
+          "Every child is always a mesh",
+          "It makes loading synchronous"
+        ],
+        "answer": 0,
+        "explanation": "Different Object3D subclasses expose different properties."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Object3D.html"
+      }
+    },
+    {
+      "id": "bounds",
+      "title": "Measure and center a model",
+      "minutes": 2,
+      "concept": "Axis-aligned bounding boxes",
+      "body": [
+        "A Box3 can measure an object’s world-space bounds, including its descendants. Its center is useful when an imported asset is offset from the origin.",
+        "Our object is deliberately displaced. Subtract its bounding-box center to bring it back to the origin. This example is a direct scene child; with transformed parents, convert the world-space center into the appropriate local space first."
+      ],
+      "task": "Uncomment mesh.position.sub(center) to center the object.",
+      "hint": "The bounds and center are already computed from the displaced mesh.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.position.set(2, 1, 0);\nconst bounds = new THREE.Box3().setFromObject(mesh);\nconst center = bounds.getCenter(new THREE.Vector3());\n// mesh.position.sub(center);\nscene.add(new THREE.Box3Helper(new THREE.Box3().setFromObject(mesh), '#a9e8ce'));\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.position.set(2, 1, 0);\nconst bounds = new THREE.Box3().setFromObject(mesh);\nconst center = bounds.getCenter(new THREE.Vector3());\nmesh.position.sub(center);\nscene.add(new THREE.Box3Helper(new THREE.Box3().setFromObject(mesh), '#a9e8ce'));\n",
+      "check": "new THREE.Box3().setFromObject(mesh).getCenter(new THREE.Vector3()).length() < 0.01",
+      "quiz": {
+        "question": "Box3.setFromObject measures…",
+        "options": [
+          "Only image pixels",
+          "World-space object bounds",
+          "Only the material color"
+        ],
+        "answer": 1,
+        "explanation": "It computes an axis-aligned bounding box around the object hierarchy."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Box3.html"
+      }
+    },
+    {
+      "id": "animation-mixer",
+      "title": "Play a keyframe clip",
+      "minutes": 3,
+      "concept": "Clips, tracks, actions, mixers",
+      "body": [
+        "A keyframe track stores property values at particular times. An AnimationClip groups tracks, and an AnimationMixer applies their interpolated values to an object as time advances.",
+        "Imported glTF assets can provide clips in gltf.animations. Here we build a tiny track ourselves: the cube moves up and comes down over two seconds. Starting the action and updating the mixer each frame are both required."
+      ],
+      "task": "Uncomment action.play() to start the keyframe animation.",
+      "hint": "The mixer already receives delta in onFrame.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst track = new THREE.NumberKeyframeTrack('.position[y]', [0, 1, 2], [0, 1.5, 0]);\nconst clip = new THREE.AnimationClip('Bounce', 2, [track]);\nconst mixer = new THREE.AnimationMixer(mesh);\nconst action = mixer.clipAction(clip);\n// action.play();\nonFrame(({ delta }) => mixer.update(delta));\nonCleanup(() => { mixer.stopAllAction(); mixer.uncacheRoot(mesh); });\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst track = new THREE.NumberKeyframeTrack('.position[y]', [0, 1, 2], [0, 1.5, 0]);\nconst clip = new THREE.AnimationClip('Bounce', 2, [track]);\nconst mixer = new THREE.AnimationMixer(mesh);\nconst action = mixer.clipAction(clip);\naction.play();\nonFrame(({ delta }) => mixer.update(delta));\nonCleanup(() => { mixer.stopAllAction(); mixer.uncacheRoot(mesh); });\n",
+      "check": "action.isRunning()",
+      "quiz": {
+        "question": "What advances the animation mixer?",
+        "options": [
+          "mixer.update(delta)",
+          "scene.add(mixer)",
+          "geometry.dispose()"
+        ],
+        "answer": 0,
+        "explanation": "The mixer needs elapsed time to evaluate its active animation actions."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/AnimationMixer.html"
+      }
+    },
+    {
+      "id": "cleanup",
+      "title": "Leave no GPU memory behind",
+      "minutes": 2,
+      "concept": "Remove is not dispose",
+      "body": [
+        "Removing an object from a scene stops it being drawn, but does not free its GPU geometry or material resources. Call dispose on resources when nothing else uses them. Shared geometry or materials must stay alive until their last user is done.",
+        "This workspace cleans up the current scene, controls, and renderer after each run. Your own app also needs to clean up event listeners and animation resources. Dispose this temporary geometry before it is forgotten; its dispose event gives us a visible check."
+      ],
+      "task": "Uncomment temporary.dispose().",
+      "hint": "The temporary geometry is not used by the displayed mesh, so it is safe to dispose.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst temporary = new THREE.BoxGeometry(1, 1, 1);\nlet released = false;\ntemporary.addEventListener('dispose', () => {\n  released = true;\n  material.color.set('#a9e8ce');\n});\n// temporary.dispose();\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst temporary = new THREE.BoxGeometry(1, 1, 1);\nlet released = false;\ntemporary.addEventListener('dispose', () => {\n  released = true;\n  material.color.set('#a9e8ce');\n});\ntemporary.dispose();\n",
+      "check": "released === true",
+      "quiz": {
+        "question": "Does scene.remove(mesh) dispose its geometry?",
+        "options": [
+          "Yes, always",
+          "No",
+          "Only for boxes"
+        ],
+        "answer": 1,
+        "explanation": "Scene membership and GPU resource lifetime are separate responsibilities."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/cleanup.html"
+      }
+    }
+  ]
+}

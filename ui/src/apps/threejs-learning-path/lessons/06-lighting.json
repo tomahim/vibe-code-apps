@@ -1,0 +1,153 @@
+{
+  "id": "lighting",
+  "order": 6,
+  "title": "Paint with light",
+  "subtitle": "Reveal form, depth, and atmosphere.",
+  "lessons": [
+    {
+      "id": "hemisphere",
+      "title": "Light from sky and ground",
+      "minutes": 2,
+      "concept": "Soft environmental fill",
+      "body": [
+        "A HemisphereLight gives surfaces a gradient between a sky color and a ground color based on their normal direction. It is a cheap way to suggest light coming from an environment.",
+        "It is not a full simulation of bounced light and does not cast shadows. Use it as a fill light, then let a directional or point light define stronger highlights and shadows."
+      ],
+      "task": "Increase fill.intensity from 0.2 to 2.",
+      "hint": "Change the intensity on the last line and watch the unlit side of the cube.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nconst fill = new THREE.HemisphereLight('#a9d2ff', '#745c8d', 0.2);\nscene.add(fill);\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nfill.intensity = 0.2;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nconst fill = new THREE.HemisphereLight('#a9d2ff', '#745c8d', 0.2);\nscene.add(fill);\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nfill.intensity = 2;\n",
+      "check": "fill.intensity === 2",
+      "quiz": {
+        "question": "Does a HemisphereLight cast shadows?",
+        "options": [
+          "Yes, from every direction",
+          "No",
+          "Only on cubes"
+        ],
+        "answer": 1,
+        "explanation": "HemisphereLight provides fill lighting without shadow maps."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/HemisphereLight.html"
+      }
+    },
+    {
+      "id": "directional",
+      "title": "A small sun for your scene",
+      "minutes": 2,
+      "concept": "Parallel light rays",
+      "body": [
+        "A DirectionalLight acts like a distant source: its rays are parallel and do not weaken with distance. Its direction runs from its position toward its target.",
+        "Move the key light to the other side and compare the cube’s faces. Changing its position changes the direction, not distance-based falloff. The default target is the origin; add a custom target to the scene if you move that target."
+      ],
+      "task": "Move light.position.x from 3 to -3.",
+      "hint": "The key light is named light. Change its final X assignment.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nlight.position.x = 3;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nlight.position.x = -3;\n",
+      "check": "light.position.x === -3",
+      "quiz": {
+        "question": "A directional light gets dimmer with distance…",
+        "options": [
+          "Always",
+          "Only at night",
+          "Never through distance attenuation"
+        ],
+        "answer": 2,
+        "explanation": "Directional lights model parallel rays from a distant source."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/DirectionalLight.html"
+      }
+    },
+    {
+      "id": "point-light",
+      "title": "Light from a single point",
+      "minutes": 2,
+      "concept": "Distance and falloff",
+      "body": [
+        "A PointLight shines in every direction from its position, like a small bulb. With the default physically based decay of 2, illumination falls off with the square of distance.",
+        "The tiny unlit sphere marks our bulb. Increase its intensity to reveal the nearby knot. Unlike a directional light, moving a point light closer changes both the lighting direction and the amount of light reaching the surface."
+      ],
+      "task": "Raise bulb.intensity to 40.",
+      "hint": "Change the final intensity assignment. The marker itself stays bright because it is unlit.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nlight.intensity = 0;\nconst bulb = new THREE.PointLight('#c4adff', 5, 0, 2);\nbulb.position.set(2, 1.5, 2);\nscene.add(bulb);\nconst marker = new THREE.Mesh(new THREE.SphereGeometry(0.08), new THREE.MeshBasicMaterial({ color: '#e9dfff' }));\nmarker.position.copy(bulb.position);\nscene.add(marker);\nbulb.intensity = 5;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nlight.intensity = 0;\nconst bulb = new THREE.PointLight('#c4adff', 5, 0, 2);\nbulb.position.set(2, 1.5, 2);\nscene.add(bulb);\nconst marker = new THREE.Mesh(new THREE.SphereGeometry(0.08), new THREE.MeshBasicMaterial({ color: '#e9dfff' }));\nmarker.position.copy(bulb.position);\nscene.add(marker);\nbulb.intensity = 40;\n",
+      "check": "bulb.intensity === 40",
+      "quiz": {
+        "question": "A point light emits from…",
+        "options": [
+          "An infinitely distant plane",
+          "One position in every direction",
+          "The entire camera sensor"
+        ],
+        "answer": 1,
+        "explanation": "Point lights model a small source emitting outward in all directions."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/PointLight.html"
+      }
+    },
+    {
+      "id": "shadows",
+      "title": "Anchor objects with shadows",
+      "minutes": 3,
+      "concept": "Caster, receiver, and light",
+      "body": [
+        "A shadow makes an object feel connected to its surroundings. Shadow mapping renders depth from a light’s viewpoint, then compares surfaces against that depth.",
+        "Several switches must agree: renderer.shadowMap.enabled, light.castShadow, a mesh that casts, and a mesh that receives. The floor and light are ready. Enable the missing switch on the cube. Bigger shadow maps improve detail but consume more memory and drawing work."
+      ],
+      "task": "Enable mesh.castShadow.",
+      "hint": "Set mesh.castShadow to true. The floor already has receiveShadow enabled.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nrenderer.shadowMap.enabled = true;\nrenderer.shadowMap.type = THREE.PCFSoftShadowMap;\nlight.castShadow = true;\nlight.shadow.mapSize.set(1024, 1024);\nlight.shadow.normalBias = 0.03;\nconst floor = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), new THREE.MeshStandardMaterial({ color: '#303448' }));\nfloor.rotation.x = -Math.PI / 2;\nfloor.position.y = -1.02;\nfloor.receiveShadow = true;\nscene.add(floor);\nmesh.castShadow = false;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nrenderer.shadowMap.enabled = true;\nrenderer.shadowMap.type = THREE.PCFSoftShadowMap;\nlight.castShadow = true;\nlight.shadow.mapSize.set(1024, 1024);\nlight.shadow.normalBias = 0.03;\nconst floor = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), new THREE.MeshStandardMaterial({ color: '#303448' }));\nfloor.rotation.x = -Math.PI / 2;\nfloor.position.y = -1.02;\nfloor.receiveShadow = true;\nscene.add(floor);\nmesh.castShadow = true;\n",
+      "check": "mesh.castShadow && floor.receiveShadow && light.castShadow && renderer.shadowMap.enabled",
+      "quiz": {
+        "question": "Which surface usually needs receiveShadow?",
+        "options": [
+          "The floor beneath the object",
+          "The camera",
+          "The renderer’s canvas element"
+        ],
+        "answer": 0,
+        "explanation": "A receiving surface is where the shadow should appear."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/shadows.html"
+      }
+    },
+    {
+      "id": "fog",
+      "title": "Give distance a color",
+      "minutes": 2,
+      "concept": "Atmospheric depth",
+      "body": [
+        "Fog blends objects toward a color as their distance from the camera increases. It can give a small scene a strong sense of depth and hide a hard horizon.",
+        "THREE.Fog starts at near and reaches full fog at far. Those values are independent of the camera’s clipping planes. Matching the fog and background colors makes distant objects fade smoothly into the environment."
+      ],
+      "task": "Set the fog’s far distance to 16.",
+      "hint": "Change scene.fog.far, not camera.far.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nfor (let i = 1; i <= 6; i++) {\n  const copy = mesh.clone();\n  copy.position.set(0, 0, -i * 3);\n  scene.add(copy);\n}\nscene.fog = new THREE.Fog('#10141f', 5, 60);\nscene.fog.far = 60;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nfor (let i = 1; i <= 6; i++) {\n  const copy = mesh.clone();\n  copy.position.set(0, 0, -i * 3);\n  scene.add(copy);\n}\nscene.fog = new THREE.Fog('#10141f', 5, 60);\nscene.fog.far = 16;\n",
+      "check": "scene.fog.far === 16",
+      "quiz": {
+        "question": "Does fog remove distant geometry from the scene?",
+        "options": [
+          "Yes",
+          "No, it changes its rendered color",
+          "Only if the fog is blue"
+        ],
+        "answer": 1,
+        "explanation": "Fog changes appearance. Clipping and culling determine what gets drawn."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Fog.html"
+      }
+    }
+  ]
+}

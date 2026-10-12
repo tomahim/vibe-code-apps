@@ -1,0 +1,153 @@
+{
+  "id": "animation",
+  "order": 8,
+  "title": "Make time visible",
+  "subtitle": "Loops, curves, easing, and orientation.",
+  "lessons": [
+    {
+      "id": "delta-time",
+      "title": "A speed, not a frame count",
+      "minutes": 2,
+      "concept": "Frame-rate independence",
+      "body": [
+        "Adding the same amount every frame makes an animation faster on screens with higher refresh rates. Multiplying by elapsed seconds gives a rate such as radians per second.",
+        "The workspace caps delta after long interruptions to avoid sudden simulation jumps. Change the speed below. The motion should remain recognizable when the preview is resized or when the display refresh rate changes."
+      ],
+      "task": "Set angularSpeed to 1.2 radians per second.",
+      "hint": "Keep the multiplication by delta inside onFrame.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst angularSpeed = 0.2;\nonFrame(({ delta }) => {\n  mesh.rotation.y += angularSpeed * delta;\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst angularSpeed = 1.2;\nonFrame(({ delta }) => {\n  mesh.rotation.y += angularSpeed * delta;\n});\n",
+      "check": "angularSpeed === 1.2 && mesh.rotation.y > 0",
+      "quiz": {
+        "question": "For two radians per second, add…",
+        "options": [
+          "2 each frame",
+          "2 * delta each frame",
+          "delta / 2 each frame"
+        ],
+        "answer": 1,
+        "explanation": "A rate multiplied by time gives the amount of change."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Timer.html"
+      }
+    },
+    {
+      "id": "sine",
+      "title": "A gentle floating motion",
+      "minutes": 2,
+      "concept": "Periodic motion",
+      "body": [
+        "Math.sin returns a smooth repeating value between -1 and 1. Multiplying by an amplitude sets the travel distance on either side of the center.",
+        "The time multiplier controls angular frequency. At elapsed * 2, a full cycle takes π seconds because sine repeats every 2π radians. Using elapsed time sets the position directly, preventing accumulated drift."
+      ],
+      "task": "Set amplitude to 0.75.",
+      "hint": "The sphere will move between Y = -0.75 and Y = 0.75.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst amplitude = 0;\nonFrame(({ elapsed }) => {\n  mesh.position.y = Math.sin(elapsed * 2) * amplitude;\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst amplitude = 0.75;\nonFrame(({ elapsed }) => {\n  mesh.position.y = Math.sin(elapsed * 2) * amplitude;\n});\n",
+      "check": "amplitude === 0.75 && Math.abs(mesh.position.y) > 0.01",
+      "quiz": {
+        "question": "What range does Math.sin return?",
+        "options": [
+          "0 to 1",
+          "-1 to 1",
+          "0 to 360"
+        ],
+        "answer": 1,
+        "explanation": "Sine oscillates smoothly between -1 and 1."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/animation.html"
+      }
+    },
+    {
+      "id": "orbit-motion",
+      "title": "Draw a circle with time",
+      "minutes": 2,
+      "concept": "Sine and cosine together",
+      "body": [
+        "Sine and cosine are offset by a quarter turn. Use cosine for X and sine for Z to place an object on a horizontal circle.",
+        "Multiplying both coordinates by the same radius preserves a circular orbit. Different multipliers produce an ellipse. The parent group approach from earlier is another way to create an orbit; these coordinates make the mathematics explicit."
+      ],
+      "task": "Increase radius to 2.5.",
+      "hint": "Change the radius variable. Both sine and cosine use it.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(0.4, 24, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst radius = 1;\nonFrame(({ elapsed }) => {\n  mesh.position.x = Math.cos(elapsed) * radius;\n  mesh.position.z = Math.sin(elapsed) * radius;\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(0.4, 24, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst radius = 2.5;\nonFrame(({ elapsed }) => {\n  mesh.position.x = Math.cos(elapsed) * radius;\n  mesh.position.z = Math.sin(elapsed) * radius;\n});\n",
+      "check": "radius === 2.5 && Math.abs(Math.hypot(mesh.position.x, mesh.position.z) - 2.5) < 0.01",
+      "quiz": {
+        "question": "Equal sine and cosine amplitudes create…",
+        "options": [
+          "A straight line",
+          "A circle",
+          "Random motion"
+        ],
+        "answer": 1,
+        "explanation": "The paired coordinates lie on a circle because sin²(t) + cos²(t) = 1."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Vector3.html"
+      }
+    },
+    {
+      "id": "easing",
+      "title": "Make a movement feel natural",
+      "minutes": 2,
+      "concept": "Ease in and ease out",
+      "body": [
+        "Linear interpolation moves at a constant rate. An easing function remaps progress to change that rate while keeping the same endpoints.",
+        "Smoothstep uses t²(3−2t) for t between 0 and 1. It starts slowly, accelerates through the middle, and slows near the end. This loop moves back and forth; enable easing and watch how it approaches each marker."
+      ],
+      "task": "Set useEasing to true.",
+      "hint": "The smoothstep formula is already written. Enable its branch.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst useEasing = false;\nonFrame(({ elapsed }) => {\n  const cycle = (elapsed * 0.4) % 2;\n  const t = cycle < 1 ? cycle : 2 - cycle;\n  const progress = useEasing ? t * t * (3 - 2 * t) : t;\n  mesh.position.x = THREE.MathUtils.lerp(-2, 2, progress);\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst useEasing = true;\nonFrame(({ elapsed }) => {\n  const cycle = (elapsed * 0.4) % 2;\n  const t = cycle < 1 ? cycle : 2 - cycle;\n  const progress = useEasing ? t * t * (3 - 2 * t) : t;\n  mesh.position.x = THREE.MathUtils.lerp(-2, 2, progress);\n});\n",
+      "check": "useEasing === true",
+      "quiz": {
+        "question": "Easing changes…",
+        "options": [
+          "The mapping from time to progress",
+          "The number of meshes",
+          "The camera type"
+        ],
+        "answer": 0,
+        "explanation": "Easing shapes the speed profile of a transition."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MathUtils.html"
+      }
+    },
+    {
+      "id": "quaternions",
+      "title": "Turn smoothly in 3D",
+      "minutes": 3,
+      "concept": "Orientation interpolation",
+      "body": [
+        "Euler angles are convenient, but interpolating three separate angles can create awkward rotations. Quaternions represent orientation in a form well suited to interpolation and composition.",
+        "slerpQuaternions interpolates between two orientations along a spherical path. Build a target orientation from a normalized axis and an angle, then smoothly approach it. You rarely need to manipulate the four quaternion components directly."
+      ],
+      "task": "Change targetAngle from 0 to Math.PI.",
+      "hint": "The target is a half turn around the normalized (1, 1, 0) axis.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst start = new THREE.Quaternion();\nconst axis = new THREE.Vector3(1, 1, 0).normalize();\nconst targetAngle = 0;\nconst target = new THREE.Quaternion().setFromAxisAngle(axis, targetAngle);\nonFrame(({ elapsed }) => {\n  const t = (Math.sin(elapsed) + 1) / 2;\n  mesh.quaternion.slerpQuaternions(start, target, t);\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst start = new THREE.Quaternion();\nconst axis = new THREE.Vector3(1, 1, 0).normalize();\nconst targetAngle = Math.PI;\nconst target = new THREE.Quaternion().setFromAxisAngle(axis, targetAngle);\nonFrame(({ elapsed }) => {\n  const t = (Math.sin(elapsed) + 1) / 2;\n  mesh.quaternion.slerpQuaternions(start, target, t);\n});\n",
+      "check": "Math.abs(targetAngle - Math.PI) < 0.001",
+      "quiz": {
+        "question": "What is slerp useful for?",
+        "options": [
+          "Smooth orientation changes",
+          "Loading textures",
+          "Counting draw calls"
+        ],
+        "answer": 0,
+        "explanation": "Spherical interpolation is useful for interpolating rotations."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Quaternion.html"
+      }
+    }
+  ]
+}
