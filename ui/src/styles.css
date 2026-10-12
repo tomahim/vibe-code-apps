@@ -123,3 +123,7 @@ a { color: inherit; }
   .profile-art { height: clamp(150px, 42vw, 230px); }
   .profile-checkpoints { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.profile-checkpoint-start { border-color: #b7c7b8; background: #f1f6f0; }
+.profile-checkpoint-title { display: flex; min-width: 0; align-items: center; gap: 6px; }
+.profile-checkpoint-tag { flex: none; color: #54745b; font-size: 8px; font-weight: 800; letter-spacing: .08em; }
