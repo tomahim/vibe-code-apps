@@ -15,6 +15,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": process.env.API_DEV_URL || "http://localhost:8000",
+      "/admin": process.env.API_DEV_URL || "http://localhost:8000",
+      "/static/admin": process.env.API_DEV_URL || "http://localhost:8000",
       "/health": process.env.API_DEV_URL || "http://localhost:8000",
     },
   },

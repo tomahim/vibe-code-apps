@@ -14,6 +14,8 @@ cd api
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver 8000
 ```
 
@@ -26,6 +28,7 @@ npm run dev
 ```
 
 Open the Vite URL printed in the terminal. Vite proxies `/api` requests to Django on `localhost:8000`.
+The **Admin** link in the catalog header opens Django admin at `/admin/`.
 
 ## LiveTrail API
 
@@ -39,6 +42,7 @@ LiveTrail responses are cached in memory for one hour per API instance.
 ## Railway deployment
 
 Railway has separate `api` and `ui` services in the same production project so the UI can proxy requests to `api.railway.internal`. The UI is public; the API does not need a public domain.
+The UI also proxies `/admin/` and Django admin's `/static/admin/` assets to the API. The API applies built-in Django migrations on startup. To keep admin users and sessions across deploys, configure a persistent database for the API and create a superuser there; the current SQLite database in the API container is ephemeral.
 
 GitHub Actions deploys `api/` when changes under `api/` reach `master` and `ui/` when changes under `ui/` reach `master`. Configure these repository secrets:
 
