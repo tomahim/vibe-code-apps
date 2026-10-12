@@ -1,0 +1,153 @@
+{
+  "id": "first-scene",
+  "order": 1,
+  "title": "Your first scene",
+  "subtitle": "From an empty canvas to something real.",
+  "lessons": [
+    {
+      "id": "hello-scene",
+      "title": "Hello, third dimension",
+      "minutes": 2,
+      "concept": "Scene · camera · renderer",
+      "body": [
+        "Welcome to your little 3D studio. A scene holds objects, a camera chooses the view, and a renderer draws that view onto a canvas. Three.js connects these pieces to the browser’s graphics system.",
+        "The workspace has already created scene, camera, renderer, and orbit controls for you. The code below builds the cube and its lighting. Start small: change the background color and watch the viewer update. Drag the viewer to look around; scroll to zoom."
+      ],
+      "task": "Change the scene background from #10141f to #242038.",
+      "hint": "Edit the color string on the first line. Quotes and the # are part of the value.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#242038');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "scene.background.getHexString() === '242038'",
+      "quiz": {
+        "question": "Which part decides what appears in the final image?",
+        "options": [
+          "The camera",
+          "The geometry",
+          "The grid"
+        ],
+        "answer": 0,
+        "explanation": "The camera defines the viewpoint. The renderer draws the scene from that viewpoint."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/fundamentals.html"
+      }
+    },
+    {
+      "id": "mesh-pieces",
+      "title": "A shape needs a surface",
+      "minutes": 2,
+      "concept": "Geometry + material = mesh",
+      "body": [
+        "Geometry describes an object’s shape. A material describes how its surface looks. A Mesh combines both into an object you can position in a scene.",
+        "Built-in geometries are a quick way to experiment. BoxGeometry takes width, height, and depth. SphereGeometry starts with a radius. Swapping geometry keeps the material and lighting intact."
+      ],
+      "task": "Replace the box geometry with new THREE.SphereGeometry(1, 32, 24).",
+      "hint": "Keep the variable name geometry. Only replace the constructor and its arguments.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "mesh.geometry.type === 'SphereGeometry'",
+      "quiz": {
+        "question": "What does a material describe?",
+        "options": [
+          "Where the camera is",
+          "The appearance of a surface",
+          "The number of vertices"
+        ],
+        "answer": 1,
+        "explanation": "A material controls surface properties such as color, roughness, and transparency."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Mesh.html"
+      }
+    },
+    {
+      "id": "add-object",
+      "title": "Give it a place in the scene",
+      "minutes": 2,
+      "concept": "The scene graph",
+      "body": [
+        "Creating a mesh does not automatically display it. Objects become renderable when they belong to the scene’s hierarchy, also called the scene graph.",
+        "This cube exists in memory, but its scene.add line is commented out. Restore the connection and it appears. Later, groups will let us organize related objects beneath a shared parent."
+      ],
+      "task": "Uncomment scene.add(mesh) so the cube appears.",
+      "hint": "Remove the two slashes before scene.add(mesh).",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\n// scene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "mesh.parent === scene",
+      "quiz": {
+        "question": "Why can a newly created mesh be invisible?",
+        "options": [
+          "It has not been added to the scene",
+          "Every mesh needs a texture",
+          "JavaScript cannot draw cubes"
+        ],
+        "answer": 0,
+        "explanation": "Constructing an object and adding it to the scene are separate operations."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Scene.html"
+      }
+    },
+    {
+      "id": "first-camera",
+      "title": "Find your angle",
+      "minutes": 2,
+      "concept": "The camera is an object, too",
+      "body": [
+        "A camera has a position in 3D space. Here, positive Y is up, and the cube sits near the origin: (0, 0, 0). Our orbit controls keep the view aimed at their target.",
+        "Move the camera higher by changing the middle coordinate. The cube stays in place; only your viewpoint changes. This is the same distinction as moving a real camera around a stationary subject."
+      ],
+      "task": "Set the camera position to (4, 6, 6).",
+      "hint": "Change camera.position.set(4, 3, 6) near the top to camera.position.set(4, 6, 6).",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 6, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "camera.position.y > 5.5",
+      "quiz": {
+        "question": "Which coordinate is up in this workspace?",
+        "options": [
+          "X",
+          "Y",
+          "Z"
+        ],
+        "answer": 1,
+        "explanation": "The workspace uses Three.js’s default Y-up convention."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/PerspectiveCamera.html"
+      }
+    },
+    {
+      "id": "first-motion",
+      "title": "Bring the cube to life",
+      "minutes": 2,
+      "concept": "Frames make motion",
+      "body": [
+        "Animation is a sequence of slightly different images. Our workspace calls each onFrame callback before drawing the next image. Outside this workspace, you can set up that loop with renderer.setAnimationLoop.",
+        "The delta value is the number of seconds since the previous frame. Multiplying a speed by delta makes the rotation advance by time, even when different screens draw at different frame rates."
+      ],
+      "task": "Set speed to 0.6 radians per second.",
+      "hint": "Change const speed = 0 to const speed = 0.6.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst speed = 0;\nonFrame(({ delta }) => {\n  mesh.rotation.y += speed * delta;\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst speed = 0.6;\nonFrame(({ delta }) => {\n  mesh.rotation.y += speed * delta;\n});\n",
+      "check": "speed === 0.6 && mesh.rotation.y > 0",
+      "quiz": {
+        "question": "Why multiply speed by delta?",
+        "options": [
+          "To add more polygons",
+          "To make motion depend on elapsed time",
+          "To change the material"
+        ],
+        "answer": 1,
+        "explanation": "Time-based movement stays approximately consistent across different frame rates."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/WebGLRenderer.html"
+      }
+    }
+  ]
+}

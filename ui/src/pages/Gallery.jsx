@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 
 const initialApps = [
   {
+    slug: "threejs-learning-path",
+    name: "Three.js learning path",
+    description: "Learn 3D one small experiment at a time. Interactive lessons, a live editor, and a world to build.",
+    category: "Creative coding",
+    icon: "◇",
+  },
+  {
     slug: "livetrail-scrap",
     name: "LiveTrail Scraper",
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",
@@ -17,7 +24,11 @@ export default function Gallery({ onOpenApp }) {
     fetch("/api/apps/")
       .then((response) => response.ok ? response.json() : Promise.reject())
       .then((result) => {
-        if (Array.isArray(result.apps)) setApps(result.apps);
+        if (Array.isArray(result.apps)) {
+          const merged = new Map(initialApps.map((app) => [app.slug, app]));
+          result.apps.forEach((app) => merged.set(app.slug, { ...merged.get(app.slug), ...app }));
+          setApps([...merged.values()]);
+        }
       })
       .catch(() => {});
   }, []);
@@ -35,7 +46,7 @@ export default function Gallery({ onOpenApp }) {
       <section className="gallery-intro">
         <p className="eyebrow">THE TOOL SHED</p>
         <h1>Find your next useful tool.</h1>
-        <p>Focused apps for the things we love doing outside.</p>
+        <p>Small, thoughtful apps for exploring, learning, and getting things done.</p>
       </section>
 
       <section className="app-grid" aria-label="App gallery">

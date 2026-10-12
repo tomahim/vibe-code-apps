@@ -1,0 +1,153 @@
+{
+  "id": "interaction",
+  "order": 9,
+  "title": "A world that responds",
+  "subtitle": "Turn pointer movement into 3D interaction.",
+  "lessons": [
+    {
+      "id": "pointer",
+      "title": "From pixels to coordinates",
+      "minutes": 2,
+      "concept": "Normalized device coordinates",
+      "body": [
+        "A pointer arrives in screen pixels, while raycasting needs normalized device coordinates. NDC runs from -1 at the left to +1 at the right, and from -1 at the bottom to +1 at the top.",
+        "The workspace’s pointer helper already converts canvas-relative pixels into that range. Move inside the viewer and use its X value to move the sphere. This is motion on a plane, not yet a true 3D hit test."
+      ],
+      "task": "Set sensitivity to 3, then move your pointer over the viewer.",
+      "hint": "The helper starts outside the canvas range. The callback ignores it until you move inside.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst sensitivity = 0;\nlet moved = false;\nonFrame(() => {\n  if (Math.abs(pointer.x) <= 1) {\n    mesh.position.x = pointer.x * sensitivity;\n    moved = true;\n  }\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(1, 32, 24);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst sensitivity = 3;\nlet moved = false;\nonFrame(() => {\n  if (Math.abs(pointer.x) <= 1) {\n    mesh.position.x = pointer.x * sensitivity;\n    moved = true;\n  }\n});\n",
+      "check": "sensitivity === 3 && moved",
+      "quiz": {
+        "question": "The center of the canvas in NDC is…",
+        "options": [
+          "(0, 0)",
+          "(0.5, 0.5)",
+          "(width / 2, height / 2)"
+        ],
+        "answer": 0,
+        "explanation": "The center maps to (0, 0), independent of the canvas pixel dimensions."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/picking.html"
+      }
+    },
+    {
+      "id": "raycasting",
+      "title": "Find what the pointer touches",
+      "minutes": 2,
+      "concept": "Ray–mesh intersection",
+      "body": [
+        "A Raycaster sends an imaginary ray from the camera through a point on the image. Intersections tell you which surfaces it hits, sorted from nearest to farthest.",
+        "setFromCamera combines pointer NDC with the camera projection. Then intersectObject tests a mesh. Turn on the hit test and move over the cube: a successful hit changes its color. Orbit is disabled here to keep the exercise steady."
+      ],
+      "task": "Set pickingEnabled to true, then hover over the cube.",
+      "hint": "The center of the preview is a good starting point for the pointer.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst pickingEnabled = false;\nlet hits = [];\nonFrame(() => {\n  raycaster.setFromCamera(pointer, camera);\n  hits = pickingEnabled ? raycaster.intersectObject(mesh) : [];\n  material.color.set(hits.length ? '#a9e8ce' : '#b49aff');\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst pickingEnabled = true;\nlet hits = [];\nonFrame(() => {\n  raycaster.setFromCamera(pointer, camera);\n  hits = pickingEnabled ? raycaster.intersectObject(mesh) : [];\n  material.color.set(hits.length ? '#a9e8ce' : '#b49aff');\n});\n",
+      "check": "pickingEnabled && hits.length > 0",
+      "quiz": {
+        "question": "What does the first intersection usually represent?",
+        "options": [
+          "The farthest hit",
+          "The nearest hit",
+          "The biggest object"
+        ],
+        "answer": 1,
+        "explanation": "Raycaster intersections are ordered by distance from the ray origin."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Raycaster.html"
+      }
+    },
+    {
+      "id": "hover",
+      "title": "A little hover feedback",
+      "minutes": 2,
+      "concept": "Interaction states",
+      "body": [
+        "An interaction often has states: idle, hovered, pressed, and selected. Keep state separate from the visual response so you can change the response without rewriting the hit test.",
+        "The raycast updates hovered. The second callback scales the cube based on that state. A small scale change and color change are enough to make an object feel responsive. Repeated raycasts can be expensive in large scenes, so use suitable targets."
+      ],
+      "task": "Set hoverScale to 1.2, then hover over the cube.",
+      "hint": "Use setScalar to keep all three axes at the same scale.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nlet hovered = false;\nonFrame(() => {\n  raycaster.setFromCamera(pointer, camera);\n  hovered = raycaster.intersectObject(mesh).length > 0;\n  material.color.set(hovered ? '#a9e8ce' : '#b49aff');\n});\n\nconst hoverScale = 1;\nonFrame(() => {\n  mesh.scale.setScalar(hovered ? hoverScale : 1);\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nlet hovered = false;\nonFrame(() => {\n  raycaster.setFromCamera(pointer, camera);\n  hovered = raycaster.intersectObject(mesh).length > 0;\n  material.color.set(hovered ? '#a9e8ce' : '#b49aff');\n});\n\nconst hoverScale = 1.2;\nonFrame(() => {\n  mesh.scale.setScalar(hovered ? hoverScale : 1);\n});\n",
+      "check": "hoverScale === 1.2 && hovered && mesh.scale.x === 1.2",
+      "quiz": {
+        "question": "Why keep hovered separate from the effect?",
+        "options": [
+          "To separate hit detection from visual feedback",
+          "To remove the camera",
+          "To change the triangle order"
+        ],
+        "answer": 0,
+        "explanation": "Separating state and presentation makes the interaction easier to extend."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/picking.html"
+      }
+    },
+    {
+      "id": "click",
+      "title": "Click to select",
+      "minutes": 2,
+      "concept": "Events and persistent state",
+      "body": [
+        "Hover lasts only while the pointer touches an object. Selection can persist after the pointer leaves. A pointerdown handler lets you update that state in response to an action.",
+        "Cast a fresh ray inside the event so the result matches the click position. The onPointer helper registers the event and removes it when this lesson is rerun. Enable selection, then click the cube."
+      ],
+      "task": "Set selectionEnabled to true, then click the cube.",
+      "hint": "The cube turns mint when selected. Click the object itself, not the grid.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst selectionEnabled = false;\nlet selected = false;\nonPointer('pointerdown', () => {\n  raycaster.setFromCamera(pointer, camera);\n  if (selectionEnabled && raycaster.intersectObject(mesh).length) {\n    selected = !selected;\n    material.color.set(selected ? '#a9e8ce' : '#b49aff');\n  }\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst selectionEnabled = true;\nlet selected = false;\nonPointer('pointerdown', () => {\n  raycaster.setFromCamera(pointer, camera);\n  if (selectionEnabled && raycaster.intersectObject(mesh).length) {\n    selected = !selected;\n    material.color.set(selected ? '#a9e8ce' : '#b49aff');\n  }\n});\n",
+      "check": "selectionEnabled && selected",
+      "quiz": {
+        "question": "Which state can remain after the pointer leaves?",
+        "options": [
+          "Hover",
+          "Selection",
+          "The pointer’s pixel position only"
+        ],
+        "answer": 1,
+        "explanation": "Selection is application state and does not need a continuous hover."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Raycaster.html"
+      }
+    },
+    {
+      "id": "ray-plane",
+      "title": "Place an object under the pointer",
+      "minutes": 3,
+      "concept": "Intersect a mathematical plane",
+      "body": [
+        "A ray can intersect a mathematical plane without a visible mesh. This is useful for object placement, drawing tools, and constrained dragging.",
+        "Our plane has an upward normal and lies at Y = 0. The ray’s intersection gives a world-space point on that plane. Copy it to the sphere and the sphere follows your pointer across the ground. Real drag tools would only do this while a drag is active."
+      ],
+      "task": "Enable followPointer, then move inside the viewer.",
+      "hint": "ray.intersectPlane writes the hit into point and returns null when there is no intersection.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(0.4, 24, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);\nconst point = new THREE.Vector3();\nconst followPointer = false;\nlet placed = false;\nonFrame(() => {\n  if (Math.abs(pointer.x) > 1 || Math.abs(pointer.y) > 1) return;\n  raycaster.setFromCamera(pointer, camera);\n  if (followPointer && raycaster.ray.intersectPlane(plane, point)) {\n    mesh.position.copy(point);\n    placed = true;\n  }\n});\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.SphereGeometry(0.4, 24, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.enabled = false;\nconst plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);\nconst point = new THREE.Vector3();\nconst followPointer = true;\nlet placed = false;\nonFrame(() => {\n  if (Math.abs(pointer.x) > 1 || Math.abs(pointer.y) > 1) return;\n  raycaster.setFromCamera(pointer, camera);\n  if (followPointer && raycaster.ray.intersectPlane(plane, point)) {\n    mesh.position.copy(point);\n    placed = true;\n  }\n});\n",
+      "check": "followPointer && placed",
+      "quiz": {
+        "question": "What does intersectPlane return on a miss?",
+        "options": [
+          "The camera",
+          "null",
+          "A random point"
+        ],
+        "answer": 1,
+        "explanation": "Always check for a hit before using the intersection result."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Ray.html"
+      }
+    }
+  ]
+}

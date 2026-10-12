@@ -1,0 +1,153 @@
+{
+  "id": "geometry",
+  "order": 3,
+  "title": "The shape of things",
+  "subtitle": "Build surfaces from points and triangles.",
+  "lessons": [
+    {
+      "id": "primitives",
+      "title": "A vocabulary of shapes",
+      "minutes": 2,
+      "concept": "Parametric geometry",
+      "body": [
+        "Primitives are ready-made shapes such as boxes, spheres, cylinders, and toruses. Their constructor arguments define dimensions and subdivisions.",
+        "A torus is a ring: its first argument is the main radius, and the second is the tube radius. The remaining arguments control how finely the ring is divided. Start with primitives before reaching for an imported 3D model."
+      ],
+      "task": "Replace the box with new THREE.TorusGeometry(1, 0.3, 16, 64).",
+      "hint": "Keep the geometry variable and change its constructor.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusGeometry(1, 0.3, 16, 64);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "geometry.type === 'TorusGeometry'",
+      "quiz": {
+        "question": "What is a torus?",
+        "options": [
+          "A camera projection",
+          "A ring-shaped surface",
+          "A type of light"
+        ],
+        "answer": 1,
+        "explanation": "A torus is the familiar doughnut or ring shape."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/TorusGeometry.html"
+      }
+    },
+    {
+      "id": "segments",
+      "title": "Smoothness has a cost",
+      "minutes": 2,
+      "concept": "Tessellation and polygon count",
+      "body": [
+        "Curved surfaces are approximated by flat triangles. More subdivisions can make the silhouette smoother, but they also require more geometry processing and memory.",
+        "This sphere starts with only 6 width segments. Increase that count and inspect the silhouette, especially near the edges. Material shading can smooth the light across a surface, but it cannot round a coarse silhouette."
+      ],
+      "task": "Increase widthSegments from 6 to 32.",
+      "hint": "The widthSegments variable is passed as SphereGeometry’s second argument.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst widthSegments = 6;\n\nconst geometry = new THREE.SphereGeometry(1, widthSegments, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst widthSegments = 32;\n\nconst geometry = new THREE.SphereGeometry(1, widthSegments, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n",
+      "check": "geometry.parameters.widthSegments === 32",
+      "quiz": {
+        "question": "What improves when you add segments to a sphere?",
+        "options": [
+          "Its silhouette",
+          "Its download compression automatically",
+          "Its position"
+        ],
+        "answer": 0,
+        "explanation": "More triangles approximate the curved outline more closely."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/SphereGeometry.html"
+      }
+    },
+    {
+      "id": "wireframe",
+      "title": "See the hidden triangles",
+      "minutes": 2,
+      "concept": "Meshes are triangle surfaces",
+      "body": [
+        "The renderer ultimately draws triangles. Even the faces of a box, which look square, are usually split into pairs of triangles.",
+        "Wireframe mode draws triangle edges instead of filled surfaces. It is useful for inspecting geometry density and seeing why some shapes cost more to draw than others. Orbit around this knot to inspect how its surface is constructed."
+      ],
+      "task": "Enable material.wireframe.",
+      "hint": "Change false to true on the final line.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.wireframe = false;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.wireframe = true;\n",
+      "check": "material.wireframe === true",
+      "quiz": {
+        "question": "A typical mesh surface is built from…",
+        "options": [
+          "Triangles",
+          "CSS rectangles",
+          "Camera rays"
+        ],
+        "answer": 0,
+        "explanation": "Triangles are the basic surface primitive used by this WebGL renderer."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html"
+      }
+    },
+    {
+      "id": "vertices",
+      "title": "Shape your first triangle",
+      "minutes": 3,
+      "concept": "BufferGeometry and attributes",
+      "body": [
+        "A vertex is a point used to define geometry. BufferGeometry stores vertex data in typed arrays called attributes. The position attribute uses three numbers per vertex: X, Y, Z.",
+        "This triangle has three vertices. Raise the top vertex by changing its Y coordinate. After changing an existing attribute, mark it needsUpdate so the new data reaches the GPU. Recompute normals when a deformation changes how a lit surface should face."
+      ],
+      "task": "Set the top vertex’s Y coordinate to 2.",
+      "hint": "Change positions.setY(2, 1) to positions.setY(2, 2). The first argument is the vertex index.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BufferGeometry();\ngeometry.setAttribute('position', new THREE.Float32BufferAttribute([\n  -1, -1, 0,\n   1, -1, 0,\n   0,  1, 0\n], 3));\nconst positions = geometry.getAttribute('position');\npositions.setY(2, 1);\npositions.needsUpdate = true;\ngeometry.computeVertexNormals();\nconst mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: '#b49aff', side: THREE.DoubleSide }));\nscene.add(mesh);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BufferGeometry();\ngeometry.setAttribute('position', new THREE.Float32BufferAttribute([\n  -1, -1, 0,\n   1, -1, 0,\n   0,  1, 0\n], 3));\nconst positions = geometry.getAttribute('position');\npositions.setY(2, 2);\npositions.needsUpdate = true;\ngeometry.computeVertexNormals();\nconst mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: '#b49aff', side: THREE.DoubleSide }));\nscene.add(mesh);\n",
+      "check": "positions.getY(2) === 2",
+      "quiz": {
+        "question": "What does the 3 in Float32BufferAttribute(data, 3) mean?",
+        "options": [
+          "Three meshes",
+          "Three components per vertex",
+          "Three seconds"
+        ],
+        "answer": 1,
+        "explanation": "Each position uses three components: x, y, and z."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/BufferGeometry.html"
+      }
+    },
+    {
+      "id": "normals",
+      "title": "Which way does a surface face?",
+      "minutes": 2,
+      "concept": "Normals and shading",
+      "body": [
+        "A normal is a direction perpendicular to a surface. Lighting uses normals to decide how strongly a surface faces a light. MeshNormalMaterial lets you inspect these directions as colors.",
+        "Smooth shading blends vertex normals across a face; flat shading gives each triangle a distinct face normal. Neither changes the silhouette. Toggle flat shading on this low-detail sphere and notice its faceted look."
+      ],
+      "task": "Set material.flatShading to true.",
+      "hint": "The material is marked needsUpdate afterward so its shader can be rebuilt.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.IcosahedronGeometry(1.2, 1);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.flatShading = false;\nmaterial.needsUpdate = true;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.IcosahedronGeometry(1.2, 1);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmaterial.flatShading = true;\nmaterial.needsUpdate = true;\n",
+      "check": "material.flatShading === true",
+      "quiz": {
+        "question": "Does smooth shading add triangles?",
+        "options": [
+          "Yes, always",
+          "Only on spheres",
+          "No, it blends normal directions"
+        ],
+        "answer": 2,
+        "explanation": "Shading changes the appearance of the existing surface, not its geometry."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/MeshNormalMaterial.html"
+      }
+    }
+  ]
+}

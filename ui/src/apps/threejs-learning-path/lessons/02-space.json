@@ -1,0 +1,153 @@
+{
+  "id": "space",
+  "order": 2,
+  "title": "Thinking in 3D",
+  "subtitle": "Coordinates, transformations, and relationships.",
+  "lessons": [
+    {
+      "id": "position",
+      "title": "Meet the three axes",
+      "minutes": 2,
+      "concept": "Position is a Vector3",
+      "body": [
+        "A point in 3D needs three coordinates: X, Y, and Z. The axes helper colors them red, green, and blue. Positive X points right along the red axis; positive Y points up along green.",
+        "Object position is measured relative to its parent. Right now the mesh belongs directly to the scene, so its local coordinates are also its world coordinates. A unit can represent a meter, a centimeter, or another scale you choose consistently."
+      ],
+      "task": "Move the cube 2 units along positive X.",
+      "hint": "Set mesh.position.x = 2.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nscene.add(new THREE.AxesHelper(3));\nmesh.position.x = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nscene.add(new THREE.AxesHelper(3));\nmesh.position.x = 2;\n",
+      "check": "mesh.position.x === 2",
+      "quiz": {
+        "question": "How many numbers describe a 3D position?",
+        "options": [
+          "One",
+          "Two",
+          "Three"
+        ],
+        "answer": 2,
+        "explanation": "A Vector3 stores x, y, and z."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Vector3.html"
+      }
+    },
+    {
+      "id": "rotation",
+      "title": "Turn in radians",
+      "minutes": 2,
+      "concept": "π radians = 180 degrees",
+      "body": [
+        "Three.js object rotations use radians. A full turn is 2π radians, a half turn is π, and a quarter turn is π/2. Math.PI gives JavaScript’s value of π.",
+        "Euler rotation has one angle for each axis. Rotate this cube around Z to tilt it in the image. For complex orientation changes, the order of rotations matters; we will meet quaternions later."
+      ],
+      "task": "Set mesh.rotation.z to Math.PI / 4 (45 degrees).",
+      "hint": "Replace 0 with Math.PI / 4 on the last line.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.rotation.z = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.rotation.z = Math.PI / 4;\n",
+      "check": "Math.abs(mesh.rotation.z - Math.PI / 4) < 0.01",
+      "quiz": {
+        "question": "How many radians make a full turn?",
+        "options": [
+          "Math.PI / 2",
+          "Math.PI",
+          "Math.PI * 2"
+        ],
+        "answer": 2,
+        "explanation": "2π radians is 360 degrees."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Euler.html"
+      }
+    },
+    {
+      "id": "scale",
+      "title": "Stretch without rebuilding",
+      "minutes": 2,
+      "concept": "Scale is a multiplier",
+      "body": [
+        "An object starts with scale (1, 1, 1). Doubling one component stretches it along that local axis without rebuilding its geometry. A zero scale flattens that axis; negative scales also mirror it.",
+        "Geometry dimensions and object scale are separate. A box with height 1.6 and Y scale 2 has a displayed height of 3.2 units. Uniform scale uses the same multiplier on all axes."
+      ],
+      "task": "Stretch the cube to twice its height with mesh.scale.y = 2.",
+      "hint": "The scale property starts at 1, not 0.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.scale.y = 1;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.scale.y = 2;\n",
+      "check": "mesh.scale.y === 2",
+      "quiz": {
+        "question": "What does scale (1, 1, 1) do?",
+        "options": [
+          "Keeps the original size",
+          "Makes the object one pixel wide",
+          "Hides the object"
+        ],
+        "answer": 0,
+        "explanation": "Scale is a multiplier. Multiplying each dimension by 1 keeps its size."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Object3D.html"
+      }
+    },
+    {
+      "id": "parenting",
+      "title": "Move a family of objects",
+      "minutes": 2,
+      "concept": "Local space and world space",
+      "body": [
+        "A Group is a parent for related objects. Moving a parent moves its children, while each child keeps its position relative to that parent. These relative positions are local space; their final positions in the scene are world space.",
+        "The small sphere is 2 units to the right of its group. Move the group upward and both objects move together. This is how you build a vehicle with attached wheels or a planet with an orbiting moon."
+      ],
+      "task": "Move the whole group up 1 unit.",
+      "hint": "Edit group.position.y, not mesh.position.y or moon.position.y.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst group = new THREE.Group();\nscene.add(group);\ngroup.add(mesh);\nconst moon = new THREE.Mesh(\n  new THREE.SphereGeometry(0.35, 24, 16),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b' })\n);\nmoon.position.x = 2;\ngroup.add(moon);\ngroup.position.y = 0;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst group = new THREE.Group();\nscene.add(group);\ngroup.add(mesh);\nconst moon = new THREE.Mesh(\n  new THREE.SphereGeometry(0.35, 24, 16),\n  new THREE.MeshStandardMaterial({ color: '#f2c99b' })\n);\nmoon.position.x = 2;\ngroup.add(moon);\ngroup.position.y = 1;\n",
+      "check": "group.position.y === 1 && mesh.parent === group && moon.parent === group",
+      "quiz": {
+        "question": "A child’s position is relative to…",
+        "options": [
+          "The browser window",
+          "Its parent",
+          "The camera only"
+        ],
+        "answer": 1,
+        "explanation": "A parent’s transform is combined with its child’s local transform."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/manual/pages/scenegraph.html"
+      }
+    },
+    {
+      "id": "vectors",
+      "title": "Find the point between",
+      "minutes": 2,
+      "concept": "Vector interpolation",
+      "body": [
+        "Vectors can represent positions and directions. A direction becomes a unit vector when normalized: its length becomes 1 while its direction stays the same.",
+        "lerpVectors(a, b, t) chooses a position along the line from a to b. At t = 0 you get a; at t = 1 you get b; at t = 0.5 you get the midpoint. This is a useful building block for camera moves and transitions."
+      ],
+      "task": "Set t to 0.5 to place the cube halfway between the two markers.",
+      "hint": "The midpoint of (-2, 0, 0) and (2, 2, 0) is (0, 1, 0).",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst a = new THREE.Vector3(-2, 0, 0);\nconst b = new THREE.Vector3(2, 2, 0);\nfor (const point of [a, b]) {\n  const dot = new THREE.Mesh(new THREE.SphereGeometry(0.12), new THREE.MeshBasicMaterial({ color: '#a9e8ce' }));\n  dot.position.copy(point);\n  scene.add(dot);\n}\nconst t = 0;\nmesh.position.lerpVectors(a, b, t);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst a = new THREE.Vector3(-2, 0, 0);\nconst b = new THREE.Vector3(2, 2, 0);\nfor (const point of [a, b]) {\n  const dot = new THREE.Mesh(new THREE.SphereGeometry(0.12), new THREE.MeshBasicMaterial({ color: '#a9e8ce' }));\n  dot.position.copy(point);\n  scene.add(dot);\n}\nconst t = 0.5;\nmesh.position.lerpVectors(a, b, t);\n",
+      "check": "mesh.position.distanceTo(new THREE.Vector3(0, 1, 0)) < 0.01",
+      "quiz": {
+        "question": "What does t = 1 return in lerpVectors(a, b, t)?",
+        "options": [
+          "The origin",
+          "The midpoint",
+          "b"
+        ],
+        "answer": 2,
+        "explanation": "Interpolation starts at a when t is 0 and reaches b when t is 1."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/Vector3.html"
+      }
+    }
+  ]
+}

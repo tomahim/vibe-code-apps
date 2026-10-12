@@ -1,0 +1,153 @@
+{
+  "id": "camera",
+  "order": 4,
+  "title": "Through the lens",
+  "subtitle": "Frame your world with intention.",
+  "lessons": [
+    {
+      "id": "perspective",
+      "title": "Near looks bigger",
+      "minutes": 2,
+      "concept": "Perspective projection",
+      "body": [
+        "Perspective mimics a familiar visual cue: objects closer to the camera look larger. The camera projects a volume of 3D space onto the 2D image.",
+        "These two cubes have identical geometry. The mint cube is farther from the camera. Move it closer along positive Z and observe its apparent size grow. Its actual scale remains unchanged."
+      ],
+      "task": "Set other.position.z to 2.",
+      "hint": "Change only the Z position of other, not its scale.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(0, 2, 8);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.position.x = -1.2;\nconst other = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: '#a9e8ce' }));\nother.position.x = 1.2;\nother.position.z = -2;\nscene.add(other);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(0, 2, 8);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nmesh.position.x = -1.2;\nconst other = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: '#a9e8ce' }));\nother.position.x = 1.2;\nother.position.z = 2;\nscene.add(other);\n",
+      "check": "other.position.z === 2 && other.scale.x === 1",
+      "quiz": {
+        "question": "In perspective, a closer object usually appears…",
+        "options": [
+          "Larger",
+          "Smaller",
+          "Exactly the same size"
+        ],
+        "answer": 0,
+        "explanation": "Perspective divides by depth, so distance affects apparent size."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/PerspectiveCamera.html"
+      }
+    },
+    {
+      "id": "fov",
+      "title": "Wide angle, narrow angle",
+      "minutes": 2,
+      "concept": "Vertical field of view",
+      "body": [
+        "A perspective camera’s fov is its vertical field of view, measured in degrees. A larger value fits more of the world into the image; a smaller value creates a tighter view.",
+        "Changing projection settings requires updateProjectionMatrix(). Without that update, the camera keeps using its previous projection. This is different from moving the camera: perspective relationships can change differently."
+      ],
+      "task": "Set camera.fov to 70, keeping updateProjectionMatrix().",
+      "hint": "Use degrees here. Unlike mesh rotation, fov does not use radians.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncamera.fov = 45;\ncamera.updateProjectionMatrix();\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncamera.fov = 70;\ncamera.updateProjectionMatrix();\n",
+      "check": "camera.fov === 70 && Math.abs(camera.projectionMatrix.elements[5] - 1 / Math.tan(70 * Math.PI / 360)) < 0.01",
+      "quiz": {
+        "question": "A larger field of view shows…",
+        "options": [
+          "Less of the scene",
+          "More of the scene",
+          "Only larger triangles"
+        ],
+        "answer": 1,
+        "explanation": "A wider lens includes a wider vertical angle."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/PerspectiveCamera.html"
+      }
+    },
+    {
+      "id": "clipping",
+      "title": "What the camera cannot see",
+      "minutes": 2,
+      "concept": "Near and far clipping planes",
+      "body": [
+        "A camera draws only a bounded region. Surfaces nearer than near or farther than far are clipped. Our cube is around 8 units from the camera, beyond the current far plane.",
+        "Increasing far reveals it. Keep near above zero for perspective cameras, and avoid an unnecessarily huge gap between near and far: depth precision is finite and poor settings can produce flickering surfaces called z-fighting."
+      ],
+      "task": "Increase camera.far from 3 to 100.",
+      "hint": "Keep camera.updateProjectionMatrix() after the change.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncamera.far = 3;\ncamera.updateProjectionMatrix();\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncamera.far = 100;\ncamera.updateProjectionMatrix();\n",
+      "check": "camera.far === 100",
+      "quiz": {
+        "question": "What happens beyond the far plane?",
+        "options": [
+          "Objects render in grayscale",
+          "Objects are clipped",
+          "Objects get extra detail"
+        ],
+        "answer": 1,
+        "explanation": "The far plane limits the visible depth range."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/PerspectiveCamera.html"
+      }
+    },
+    {
+      "id": "orthographic",
+      "title": "A view without perspective",
+      "minutes": 2,
+      "concept": "Orthographic projection",
+      "body": [
+        "An orthographic camera keeps apparent size independent of distance. It is useful for diagrams, CAD, isometric scenes, and some games. Its left, right, top, and bottom bounds define the visible volume.",
+        "Our useCamera helper switches the viewer’s active camera and keeps its aspect ratio responsive. Activate the prepared orthographic camera, then orbit around the two equal-size cubes and compare their projection."
+      ],
+      "task": "Change selected = camera to selected = ortho before useCamera(selected).",
+      "hint": "Edit the second assignment to selected. The helper makes that camera active.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst other = mesh.clone();\nother.position.set(2, 0, -3);\nscene.add(other);\nconst ortho = new THREE.OrthographicCamera(-4, 4, 3, -3, 0.1, 100);\northo.position.copy(camera.position);\nlet selected = camera;\nselected = camera;\nuseCamera(selected);\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.BoxGeometry(1.6, 1.6, 1.6);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\nconst other = mesh.clone();\nother.position.set(2, 0, -3);\nscene.add(other);\nconst ortho = new THREE.OrthographicCamera(-4, 4, 3, -3, 0.1, 100);\northo.position.copy(camera.position);\nlet selected = camera;\nselected = ortho;\nuseCamera(selected);\n",
+      "check": "selected.isOrthographicCamera === true",
+      "quiz": {
+        "question": "Which projection preserves size regardless of depth?",
+        "options": [
+          "Perspective",
+          "Orthographic",
+          "Wireframe"
+        ],
+        "answer": 1,
+        "explanation": "Orthographic projection does not shrink objects as their depth increases."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/OrthographicCamera.html"
+      }
+    },
+    {
+      "id": "orbit-controls",
+      "title": "Give the viewer control",
+      "minutes": 2,
+      "concept": "Orbit, damping, and limits",
+      "body": [
+        "OrbitControls moves a camera around a target. Dragging orbits, scrolling zooms, and right-dragging pans. Damping smooths movement, and requires controls.update() in the animation loop; the workspace handles that.",
+        "Controls can have distance and angle limits. Auto-rotation is useful for a product turntable. Enable it below, then drag the scene yourself. The control system continues to handle the camera while your objects remain still."
+      ],
+      "task": "Enable controls.autoRotate.",
+      "hint": "Set autoRotate to true. autoRotateSpeed controls how quickly it turns.",
+      "code": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.autoRotate = false;\ncontrols.autoRotateSpeed = 2;\ncontrols.minDistance = 3;\ncontrols.maxDistance = 12;\n",
+      "solution": "scene.background = new THREE.Color('#10141f');\ncamera.position.set(4, 3, 6);\ncontrols.target.set(0, 0, 0);\n\n// A soft studio light and a directional key light.\nscene.add(new THREE.HemisphereLight('#cbdcff', '#45415d', 2));\nconst light = new THREE.DirectionalLight('#ffffff', 3);\nlight.position.set(3, 5, 4);\nscene.add(light);\n\nconst grid = new THREE.GridHelper(14, 28, '#30374d', '#202738');\ngrid.position.y = -1.05;\nscene.add(grid);\n\nconst geometry = new THREE.TorusKnotGeometry(0.7, 0.22, 96, 16);\nconst material = new THREE.MeshStandardMaterial({\n  color: '#b49aff', roughness: 0.4, metalness: 0.15\n});\nconst mesh = new THREE.Mesh(geometry, material);\nscene.add(mesh);\n\ncontrols.autoRotate = true;\ncontrols.autoRotateSpeed = 2;\ncontrols.minDistance = 3;\ncontrols.maxDistance = 12;\n",
+      "check": "controls.autoRotate === true",
+      "quiz": {
+        "question": "What does OrbitControls usually move?",
+        "options": [
+          "The camera",
+          "Every vertex",
+          "The light"
+        ],
+        "answer": 0,
+        "explanation": "Orbit controls change the camera’s position and orientation around a target."
+      },
+      "reference": {
+        "label": "Explore the Three.js docs",
+        "url": "https://threejs.org/docs/pages/OrbitControls.html"
+      }
+    }
+  ]
+}
