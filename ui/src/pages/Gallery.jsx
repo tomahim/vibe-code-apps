@@ -40,7 +40,10 @@ export default function Gallery({ onOpenApp }) {
           <span className="brand-mark">T</span>
           <span>Trail Tools</span>
         </a>
-        <span className="header-note">A small collection of useful tools</span>
+        <div className="header-actions">
+          <span className="header-note">A small collection of useful tools</span>
+          <a className="admin-link" href="/admin/">Admin</a>
+        </div>
       </header>
 
       <section className="gallery-intro">
