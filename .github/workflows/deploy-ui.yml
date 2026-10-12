@@ -28,6 +28,25 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect Three.js changes
+        if: github.event_name == 'pull_request'
+        id: threejs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          changed_files="$(git diff --name-only "$BASE_SHA...$HEAD_SHA" -- \
+            src/apps/threejs-learning-path \
+            scripts/build-sandbox.mjs \
+            tests/browser/learning-path.spec.js \
+            playwright.config.js)"
+          if [ -n "$changed_files" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,11 +60,13 @@ jobs:
       - name: Build production UI
         run: npm run build
       - name: Install browser
+        if: github.event_name == 'pull_request' && steps.threejs.outputs.changed == 'true'
         run: npx playwright install --with-deps chromium
       - name: Test the studio and every lesson in a browser
+        if: github.event_name == 'pull_request' && steps.threejs.outputs.changed == 'true'
         run: npm run test:browser
       - name: Upload browser failure details
-        if: failure()
+        if: failure() && github.event_name == 'pull_request' && steps.threejs.outputs.changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ui-browser-results
