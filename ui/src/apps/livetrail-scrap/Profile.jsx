@@ -1,32 +1,6 @@
-import { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 
-function mergeDistances(html) {
-  if (!html) return "";
-  const document = new DOMParser().parseFromString(html, "text/html");
-  const elements = [...document.body.querySelectorAll("div, input")];
-  elements.forEach((element, index) => {
-    if (element.tagName !== "DIV" || !element.classList.contains("divDeniv")) return;
-    const distance = element.textContent.trim();
-    if (!/^\d/.test(distance)) return;
-    const nextTime = elements.slice(index + 1, index + 5).find(
-      (candidate) => candidate.tagName === "DIV" && candidate.classList.contains("tpsProfil"),
-    );
-    if (!nextTime) return;
-    const previousText = nextTime.textContent.trim();
-    nextTime.replaceChildren(
-      document.createTextNode(previousText),
-      document.createElement("br"),
-      document.createTextNode(`${distance} km`),
-    );
-  });
-  return document.body.innerHTML;
-}
-
-export default function Profile({ profileHtml, profilePointsHtml }) {
-  const [points, setPoints] = useState("");
-  useEffect(() => setPoints(mergeDistances(profilePointsHtml)), [profilePointsHtml]);
-
+export default function Profile({ profileHtml, times = [] }) {
   if (!profileHtml) return null;
 
   return (
@@ -43,12 +17,17 @@ export default function Profile({ profileHtml, profilePointsHtml }) {
           className="profile-art"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(profileHtml) }}
         />
-        {points && (
-          <div
-            className="profile-points"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(points) }}
-          />
-        )}
+        <div className="profile-checkpoints" aria-label="Race checkpoints">
+          {times.map((checkpoint, index) => (
+            <article className="profile-checkpoint" key={`${checkpoint.checkpoint}-${index}`}>
+              <span className="profile-checkpoint-name">{checkpoint.checkpoint}</span>
+              <span className="profile-checkpoint-meta">
+                <strong>{checkpoint.cumulatedTime || "Start"}</strong>
+                <span>{checkpoint.distance} km</span>
+              </span>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
