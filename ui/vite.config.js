@@ -1,6 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// Keep Host aligned with the browser's Origin for Django's admin CSRF checks.
+const apiProxy = {
+  target: process.env.API_DEV_URL || "http://localhost:8000",
+  changeOrigin: false,
+};
+
 export default defineConfig({
   plugins: [react()],
   build: {
@@ -14,10 +20,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": process.env.API_DEV_URL || "http://localhost:8000",
-      "/admin": process.env.API_DEV_URL || "http://localhost:8000",
-      "/static/admin": process.env.API_DEV_URL || "http://localhost:8000",
-      "/health": process.env.API_DEV_URL || "http://localhost:8000",
+      "/api": apiProxy,
+      "/admin": apiProxy,
+      "/static": apiProxy,
+      "/health": apiProxy,
     },
   },
 });

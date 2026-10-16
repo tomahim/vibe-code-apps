@@ -1,6 +1,8 @@
 from pathlib import Path
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group, Permission
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.exceptions import ImproperlyConfigured
 from django.test import Client, SimpleTestCase, TestCase
 
@@ -88,3 +90,73 @@ class AdminUserManagementTests(TestCase):
 
     def test_catalog_api_remains_public(self):
         self.assertEqual(self.client.get("/api/apps/").status_code, 200)
+
+    def test_unfold_styles_all_user_management_screens(self):
+        self.client.force_login(self.admin)
+        group = Group.objects.create(name="Editors")
+        for path in (
+            "/admin/", "/admin/auth/user/", "/admin/auth/group/",
+            "/admin/auth/user/add/", "/admin/auth/group/add/",
+            f"/admin/auth/user/{self.user.pk}/change/",
+            f"/admin/auth/user/{self.user.pk}/password/",
+            f"/admin/auth/group/{group.pk}/change/", "/admin/password_change/",
+        ):
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                self.assertContains(response, staticfiles_storage.url("unfold/css/styles.css"))
+                self.assertContains(response, "Vibe Code Apps")
+                self.assertTemplateUsed(response, "unfold/layouts/skeleton.html")
+
+    def test_login_theme_assets_are_served_by_whitenoise(self):
+        response = self.client.get("/admin/login/")
+        for path, content_type in (
+            ("unfold/css/styles.css", "text/css"),
+            ("unfold/fonts/inter/styles.css", "text/css"),
+            ("unfold/fonts/material-symbols/styles.css", "text/css"),
+            ("unfold/js/app.js", "javascript"),
+        ):
+            with self.subTest(path=path):
+                url = staticfiles_storage.url(path)
+                self.assertContains(response, url)
+                asset = self.client.get(url)
+                self.assertEqual(asset.status_code, 200)
+                self.assertIn(content_type, asset["Content-Type"])
+                # Let the test client's streaming wrapper handle cleanup;
+                # closing directly emits request_finished inside the test transaction.
+                self.assertTrue(b"".join(asset.streaming_content))
+
+    def test_superuser_can_edit_user_and_change_password(self):
+        self.client.force_login(self.admin)
+        response = self.client.post(f"/admin/auth/user/{self.user.pk}/change/", {
+            "username": "regular", "email": "updated@example.com", "is_active": "on",
+            "date_joined_0": "2026-01-01", "date_joined_1": "12:00:00", "_save": "Save",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.email, "updated@example.com")
+        self.assertTrue(self.user.check_password("test-only-password"))
+        response = self.client.post(f"/admin/auth/user/{self.user.pk}/password/", {
+            "password1": "changed-test-password", "password2": "changed-test-password",
+            "usable_password": "true",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password("changed-test-password"))
+
+    def test_group_management_and_staff_permissions_are_preserved(self):
+        self.client.force_login(self.admin)
+        permission = Permission.objects.get(content_type__app_label="auth", codename="view_user")
+        response = self.client.post("/admin/auth/group/add/", {
+            "name": "User viewers", "permissions": [permission.pk], "_save": "Save",
+        })
+        self.assertEqual(response.status_code, 302)
+        group = Group.objects.get(name="User viewers")
+        self.assertTrue(group.permissions.filter(pk=permission.pk).exists())
+        self.user.is_staff = True
+        self.user.save()
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get("/admin/auth/user/").status_code, 403)
+        self.user.groups.add(group)
+        self.assertEqual(self.client.get("/admin/auth/user/").status_code, 200)
+        self.assertEqual(self.client.get("/admin/auth/user/add/").status_code, 403)
+        self.assertEqual(self.client.get("/admin/auth/group/").status_code, 403)
