@@ -29,6 +29,7 @@ npm run dev
 
 Open the Vite URL printed in the terminal. Vite proxies `/api` requests to Django on `localhost:8000`.
 The **Admin** link in the catalog header opens Django admin at `/admin/`.
+The admin uses [Unfold](https://unfoldadmin.com/docs/installation/quickstart/) for its login, Users, and Groups screens, with light/dark mode and the existing Django permissions. This is a presentation-only change: existing accounts and passwords still work, and the catalog/API remain public. Run `python manage.py collectstatic --noinput` before running API tests or serving with `DEBUG=false`; this collects both Django and Unfold assets.
 
 ## LiveTrail API
 
@@ -42,7 +43,7 @@ LiveTrail responses are cached in memory for one hour per API instance.
 ## Railway deployment
 
 Railway has separate `api` and `ui` services in the same production project so the UI can proxy requests to `api.railway.internal`. The UI is public; the API does not need a public domain.
-The UI also proxies `/admin/` and Django admin's `/static/admin/` assets to the API, preserving Railway's original HTTPS scheme for CSRF checks.
+The UI also proxies `/admin/` and `/static/` assets (Django admin and Unfold) to the API, preserving Railway's original HTTPS scheme for CSRF checks.
 
 ### Neon PostgreSQL
 

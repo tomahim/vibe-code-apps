@@ -9,14 +9,23 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() == "true"
 ALLOWED_HOSTS = [host for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",") if host]
 
 INSTALLED_APPS = [
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "apps.admin_ui",
     "apps.livetrail_scrap",
 ]
+
+UNFOLD = {
+    "SITE_TITLE": "Vibe Code Apps admin",
+    "SITE_HEADER": "Vibe Code Apps",
+    "SITE_SUBHEADER": "User management",
+    "SITE_URL": "/",
+}
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",

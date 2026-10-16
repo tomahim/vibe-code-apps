@@ -27,7 +27,8 @@ server {
         proxy_set_header X-Forwarded-Proto $originating_scheme;
     }
 
-    location /static/admin/ {
+    # Django admin and Unfold both serve assets from the API's static root.
+    location /static/ {
         proxy_pass ${API_UPSTREAM};
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $originating_scheme;
