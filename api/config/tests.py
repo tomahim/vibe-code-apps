@@ -121,7 +121,9 @@ class AdminUserManagementTests(TestCase):
                 asset = self.client.get(url)
                 self.assertEqual(asset.status_code, 200)
                 self.assertIn(content_type, asset["Content-Type"])
-                asset.close()
+                # Let the test client's streaming wrapper handle cleanup;
+                # closing directly emits request_finished inside the test transaction.
+                self.assertTrue(b"".join(asset.streaming_content))
 
     def test_superuser_can_edit_user_and_change_password(self):
         self.client.force_login(self.admin)
