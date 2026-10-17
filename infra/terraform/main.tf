@@ -22,7 +22,8 @@ locals {
 
 
 resource "railway_project" "genious_apps" {
-  name = "genious-apps"
+  name        = "genious-apps"
+  description = "Streamlit app deployed from the vibe-code-apps repository"
 
   default_environment = {
     name = "production"
