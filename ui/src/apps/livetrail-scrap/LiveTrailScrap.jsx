@@ -117,7 +117,7 @@ export default function LiveTrailScrap({ onHome }) {
     <main className="estimator-page">
       <header className="site-header estimator-header">
         <button className="brand brand-button" onClick={onHome}>
-          <span className="brand-mark">T</span><span>Trail Tools</span>
+          <span className="brand-mark">G</span><span>Genious Tools</span>
         </button>
         <button className="back-link" onClick={onHome}>← All tools</button>
       </header>
