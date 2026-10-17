@@ -40,11 +40,11 @@ resource "railway_service" "ui" {
   project_id = railway_project.genious_apps.id
 }
 
-resource "railway_service_domain" "ui" {
-  environment_id = railway_project.genious_apps.default_environment.id
-  service_id     = railway_service.ui.id
-  subdomain      = "ui-production-4774"
-}
+# Issue #7: livetrail-scrap is reachable only over the Tailscale VPN.
+# The public *.up.railway.app domain of the ui service is intentionally not
+# managed here anymore: applying this configuration deletes it. Access goes
+# through the Tailscale Subnet Router in the same Railway environment (see
+# docs/livetrail-scrap-tailscale.md).
 
 # --- ui variables ---
 
@@ -121,11 +121,6 @@ import {
 }
 
 import {
-  to = railway_service_domain.ui
-  id = "1561708c-0f17-4e8c-aef6-04c66bd26731:production:ui-production-4774.up.railway.app"
-}
-
-import {
   to = railway_variable.ui_port
   id = "1561708c-0f17-4e8c-aef6-04c66bd26731:production:PORT"
 }
@@ -137,20 +132,20 @@ import {
 
 import {
   to = railway_variable.api_port
-  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:PORT"
+  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:PORT"
 }
 
 import {
   to = railway_variable.api_django_debug
-  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DJANGO_DEBUG"
+  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DJANGO_DEBUG"
 }
 
 import {
   to = railway_variable.api_database_url
-  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DATABASE_URL"
+  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DATABASE_URL"
 }
 
 import {
   to = railway_variable.api_django_secret_key
-  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DJANGO_SECRET_KEY"
+  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DJANGO_SECRET_KEY"
 }
