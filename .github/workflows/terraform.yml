@@ -1,0 +1,126 @@
+name: Terraform (Railway)
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "infra/terraform/**"
+      - ".github/workflows/terraform.yml"
+  push:
+    branches: [master]
+    paths:
+      - "infra/terraform/**"
+      - ".github/workflows/terraform.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+# One run at a time so plan/apply never race on the shared state.
+concurrency:
+  group: terraform-railway
+  cancel-in-progress: false
+
+env:
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.TF_STATE_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_STATE_SECRET_ACCESS_KEY }}
+
+defaults:
+  run:
+    working-directory: infra/terraform
+
+jobs:
+  plan:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.10.5
+          terraform_wrapper: false
+      - name: Format check
+        run: terraform fmt -check -recursive
+      - name: Init
+        run: >-
+          terraform init
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="endpoints={s3=\"${{ secrets.TF_STATE_ENDPOINT }}\"}"
+          -backend-config="key=railway/terraform.tfstate"
+          -backend-config="region=auto"
+          -backend-config="skip_credentials_validation=true"
+          -backend-config="skip_region_validation=true"
+          -backend-config="skip_requesting_account_id=true"
+          -backend-config="skip_metadata_api_check=true"
+          -backend-config="skip_s3_checksum=true"
+          -backend-config="use_lockfile=true"
+      - name: Validate
+        run: terraform validate
+      - name: Plan
+        id: plan
+        run: |
+          set +e
+          terraform plan -no-color -lock-timeout=120s -detailed-exitcode -out=tfplan > plan.txt 2>&1
+          code=$?
+          cat plan.txt
+          echo "exitcode=$code" >> "$GITHUB_OUTPUT"
+          # 0 = no changes, 2 = changes/imports pending, anything else = error
+          if [ "$code" -eq 1 ]; then exit 1; fi
+      - name: Comment plan on the PR
+        if: always() && steps.plan.outcome != 'skipped'
+        uses: actions/github-script@v7
+        env:
+          PLAN_EXIT: ${{ steps.plan.outputs.exitcode }}
+          PLAN_OUTCOME: ${{ steps.plan.outcome }}
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- terraform-railway-plan -->';
+            let plan = '';
+            try { plan = fs.readFileSync('infra/terraform/plan.txt', 'utf8'); } catch (e) { plan = '(no plan output)'; }
+            const max = 60000;
+            if (plan.length > max) plan = plan.slice(0, max) + '\n... (truncated, see the workflow run)';
+            const exit = process.env.PLAN_EXIT;
+            const status = process.env.PLAN_OUTCOME !== 'success' ? 'Plan failed'
+              : exit === '0' ? 'No changes. Infrastructure matches the configuration.'
+              : 'Plan has pending changes/imports (applied on merge to master).';
+            const body = `${marker}\n### Terraform plan (Railway)\n**${status}**\n\n<details><summary>Show plan</summary>\n\n\`\`\`\n${plan}\n\`\`\`\n</details>\n\nCommit: ${context.sha.slice(0, 7)}`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+  apply:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.10.5
+          terraform_wrapper: false
+      - name: Init
+        run: >-
+          terraform init
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="endpoints={s3=\"${{ secrets.TF_STATE_ENDPOINT }}\"}"
+          -backend-config="key=railway/terraform.tfstate"
+          -backend-config="region=auto"
+          -backend-config="skip_credentials_validation=true"
+          -backend-config="skip_region_validation=true"
+          -backend-config="skip_requesting_account_id=true"
+          -backend-config="skip_metadata_api_check=true"
+          -backend-config="skip_s3_checksum=true"
+          -backend-config="use_lockfile=true"
+      - name: Plan
+        run: terraform plan -no-color -lock-timeout=120s -out=tfplan
+      - name: Apply
+        run: terraform apply -no-color -lock-timeout=120s tfplan
