@@ -132,20 +132,20 @@ import {
 
 import {
   to = railway_variable.api_port
-  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:PORT"
+  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:PORT"
 }
 
 import {
   to = railway_variable.api_django_debug
-  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DJANGO_DEBUG"
+  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DJANGO_DEBUG"
 }
 
 import {
   to = railway_variable.api_database_url
-  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DATABASE_URL"
+  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DATABASE_URL"
 }
 
 import {
   to = railway_variable.api_django_secret_key
-  id = "5b117cf2-e177-4e8c-aef6-04c66bd26731:production:DJANGO_SECRET_KEY"
+  id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DJANGO_SECRET_KEY"
 }
