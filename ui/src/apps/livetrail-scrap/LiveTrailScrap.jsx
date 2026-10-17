@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Profile from "./Profile.jsx";
+import { BRAND_BADGE, BRAND_NAME } from "../../config/brand.js";
 
 function formatNumber(value) {
   const number = Number(value);
@@ -117,7 +118,7 @@ export default function LiveTrailScrap({ onHome }) {
     <main className="estimator-page">
       <header className="site-header estimator-header">
         <button className="brand brand-button" onClick={onHome}>
-          <span className="brand-mark">G</span><span>Genious Tools</span>
+          <span className="brand-mark">{BRAND_BADGE}</span><span>{BRAND_NAME}</span>
         </button>
         <button className="back-link" onClick={onHome}>← All tools</button>
       </header>
