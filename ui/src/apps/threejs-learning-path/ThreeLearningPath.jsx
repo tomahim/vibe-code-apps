@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { chapters, lessons, totalMinutes } from './catalog.js';
 import { readProgress, writeProgress } from './progress.js';
 import CodeEditor from './CodeEditor.jsx';
+import { BRAND_NAME } from '../../config/brand.js';
 import Preview from './Preview.jsx';
 import './learning-path.css';
 
@@ -102,7 +103,7 @@ export default function ThreeLearningPath({ onHome }) {
     lessonPanel.current?.scrollTo(0, 0);
     document.title = `${lesson.title} · Three.js learning path`;
   }, [lesson.id]);
-  useEffect(() => () => { document.title = 'Genious Tools'; }, []);
+  useEffect(() => () => { document.title = BRAND_NAME; }, []);
   useEffect(() => { if (notice) { const timer = setTimeout(() => setNotice(''), 4000); return () => clearTimeout(timer); } }, [notice]);
 
   function navigate(id) {
