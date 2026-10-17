@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
 
 const initialApps = [
   {
@@ -36,9 +37,9 @@ export default function Gallery({ onOpenApp }) {
   return (
     <main className="gallery-page">
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Trail Tools home">
-          <span className="brand-mark">T</span>
-          <span>Trail Tools</span>
+        <a className="brand" href="/" aria-label={`${BRAND_NAME} home`}>
+          <span className="brand-mark">{BRAND_BADGE}</span>
+          <span>{BRAND_NAME}</span>
         </a>
         <div className="header-actions">
           <span className="header-note">A small collection of useful tools</span>

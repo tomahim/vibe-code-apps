@@ -1,5 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { BRAND_NAME } from "./src/config/brand.js";
+
+// Inject the shared brand name into index.html so the browser tab title
+// comes from the same source as the UI (src/config/brand.js).
+const brandHtml = () => ({
+  name: "brand-html",
+  transformIndexHtml(html) {
+    return html.replace(/%BRAND_NAME%/g, BRAND_NAME);
+  },
+});
 
 // Keep Host aligned with the browser's Origin for Django's admin CSRF checks.
 const apiProxy = {
@@ -8,7 +18,7 @@ const apiProxy = {
 };
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), brandHtml()],
   build: {
     rollupOptions: {
       output: {
