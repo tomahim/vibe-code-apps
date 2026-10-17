@@ -102,7 +102,7 @@ export default function ThreeLearningPath({ onHome }) {
     lessonPanel.current?.scrollTo(0, 0);
     document.title = `${lesson.title} · Three.js learning path`;
   }, [lesson.id]);
-  useEffect(() => () => { document.title = 'Trail Tools'; }, []);
+  useEffect(() => () => { document.title = 'Genious Tools'; }, []);
   useEffect(() => { if (notice) { const timer = setTimeout(() => setNotice(''), 4000); return () => clearTimeout(timer); } }, [notice]);
 
   function navigate(id) {
