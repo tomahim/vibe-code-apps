@@ -21,8 +21,28 @@ Set the same BOT_API_SECRET on the Railway api service. Use a generated
 random value and keep it out of Terraform files, Git, logs, and chat. The
 Terraform config intentionally leaves credentials for manual entry so they
 are not stored in Terraform state. Once the variables are saved, Railway
-deploys the bot and it starts polling Telegram. Set one replica and disable
-Serverless for the bot; the API and UI can retain their own settings.
+deploys the bot and it starts polling Telegram. Keep it at one replica.
+
+## Stop the bot overnight
+
+After Terraform has created the bot service, deploy the Railway marketplace
+[Starter Stopper template](https://railway.com/template/starter-stopper-1)
+into this project. It creates separate scheduled start and stop functions.
+The template is currently marked unverified in Railway's marketplace.
+
+Set TARGET_SERVICE_ID to the new bot service ID, TARGET_ENVIRONMENT_ID to the
+production environment ID, and RAILWAY_PROJECT_TOKEN to a project token scoped
+to production. Keep the token in Railway variables, not in this repository or
+Terraform state.
+
+Railway cron schedules use UTC, while the requested 23:00–07:00 schedule is
+Europe/Paris local time. Set the two template schedules to:
+
+- Winter (CET): start at 06:00 UTC and stop at 22:00 UTC.
+- Summer (CEST): start at 05:00 UTC and stop at 21:00 UTC.
+
+Change the schedules when Paris switches between CET and CEST. Railway may
+start a scheduled run a few minutes after its nominal time.
 
 ## Commands
 
