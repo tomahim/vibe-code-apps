@@ -41,6 +41,17 @@ resource "railway_service" "ui" {
   project_id = railway_project.genious_apps.id
 }
 
+# Issue #26: Telegram long-polling worker. It uses the same private network as
+# the API and builds from bot/Dockerfile. Credentials are entered manually in
+# Railway so Terraform state never stores their values.
+resource "railway_service" "bot" {
+  name               = "bot"
+  project_id         = railway_project.genious_apps.id
+  source_repo        = "tomahim/vibe-code-apps"
+  source_repo_branch = "master"
+  root_directory     = "/bot"
+}
+
 # Issue #7: the Genious apps are reachable only over the Tailscale VPN.
 # The public *.up.railway.app domain of the ui service is intentionally not
 # managed here anymore: applying this configuration deletes it. Access goes
@@ -89,6 +100,13 @@ resource "railway_variable" "api_django_debug" {
   service_id     = railway_service.api.id
   name           = "DJANGO_DEBUG"
   value          = "false"
+}
+
+resource "railway_variable" "bot_api_base_url" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.bot.id
+  name           = "API_BASE_URL"
+  value          = "http://api.railway.internal:8000"
 }
 
 # --- shared media bucket (issue #28) ---
