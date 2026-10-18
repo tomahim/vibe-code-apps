@@ -2,9 +2,9 @@
 
 Plain Django JSON endpoints, available inside Railway at
 `http://api.railway.internal:8000/api/apps/recipes/`. No public domain is needed.
-The bot will run in the same project/environment (issue #26); the wheel UI is
-tracked separately. The gallery card opens recipe management in Django admin
-until the wheel UI is implemented. This change does not implement either client.
+The Telegram bot runs in the same project/environment and uses these endpoints
+over Railway private networking. The gallery card opens recipe management in
+Django admin until the wheel UI is implemented.
 
 ## Configuration
 
