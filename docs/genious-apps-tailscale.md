@@ -174,3 +174,62 @@ If a device is lost, remove that device from Machines right away.
 - The `master` deploy workflows (GitHub Actions deploying `ui` and `api` to
   Railway) still succeed; they authenticate with the `RAILWAY_TOKEN` secret and
   do not depend on a public domain.
+
+## Troubleshooting: slow large downloads through the router
+
+### Symptom
+
+Over the tailnet, small responses were fast (a 560 B page in 0.2 s) but large
+static files were very slow: the 290 kB `woff2` font through `ui` took 21-29 s
+(about 10-14 kB/s), so the admin login page took several seconds. The connection
+was direct (not a DERP relay), at about 88 ms RTT from France to the router in
+Railway US East.
+
+### What was ruled out
+
+- Router to `ui` hop: from the router container, the same font from `ui` over
+  the private network took 0.011 s. `ui` nginx and the private network are fine.
+- MTU: `tailscale ping --size 1300` from the router to a laptop worked direct
+  (about 90 ms). Railway fixes `railnet0` at MTU 1316, but that did not explain it.
+- DERP relay: the path was direct.
+- Tailscale version: bumping to 1.104.1 (see below) gave no real gain
+  (login page 1.91 s to 1.78 s).
+
+### Fix
+
+Set this variable on the `tailscale-rw` service and redeploy it:
+
+```
+TS_DEBUG_DISABLE_UDP_GSO=true
+```
+
+After this the font took about 2.7-3.5 s instead of 21-29 s.
+
+To roll back, delete the variable and redeploy `tailscale-rw`.
+
+### Likely cause (hypothesis, not confirmed)
+
+UDP GSO (send offload of batched UDP packets) probably misbehaves on Railway's
+network, so large transfers collapse to a few kB/s while small ones are fine.
+Nobody has confirmed this inside Railway. The symptoms match an upstream report
+of the same pattern (fast backend, direct connection, ~20 KiB/s on large
+responses, fixed by disabling UDP GSO):
+https://github.com/tailscale/tailscale/issues/20858 (open when checked). The
+knob itself was added in
+https://github.com/tailscale/tailscale/commit/dea49bb4daaf4aea90f720d5eddce6bb39be0ce7.
+That report is about Kubernetes with a kernel TUN, while our router runs in
+userspace mode, so it is a similar symptom, not proof of the same bug.
+
+### Tailscale version pin
+
+`TAILSCALE_VERSION=1.104.1` is currently set as a Railway variable on
+`tailscale-rw` (it overrides the Dockerfile `ARG` of the template). It was set
+while investigating a netstack bug and did not fix the slowness. It is probably
+safe to leave, and removing it is untested.
+
+### Optional: move to an EU region
+
+The router, `ui` and `api` are in US East. Moving all three to an EU region would
+cut the RTT from about 88 ms. This is tracked in
+https://github.com/tomahim/vibe-code-apps/issues/33 and is optional now that the
+main slowness is fixed.
