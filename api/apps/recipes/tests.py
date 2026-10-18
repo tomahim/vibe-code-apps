@@ -38,7 +38,8 @@ class RecipeAdminTests(TestCase):
         self.client.force_login(user)
 
     def post(self, **extra):
-        data = {"title": "Pasta", "source_url": "", **extra}
+        data = {"title": "Pasta", "source_url": "",
+                "ingredient_entries-TOTAL_FORMS": "0", "ingredient_entries-INITIAL_FORMS": "0", **extra}
         return self.client.post(reverse("admin:recipes_recipe_add"), data)
 
     def test_recipe_without_image(self):
@@ -73,3 +74,18 @@ class RecipeAdminTests(TestCase):
             response = self.post(image=upload)
         self.assertEqual(response.status_code, 500)
         self.assertEqual(Recipe.objects.count(), 0)
+
+    def test_ingredients_can_be_added_inline_and_edited(self):
+        from .models import Ingredient, RecipeIngredient
+        ingredient = Ingredient.objects.create(name=" Tomato ")
+        response = self.post(**{
+            "ingredient_entries-TOTAL_FORMS": "1",
+            "ingredient_entries-0-ingredient": str(ingredient.pk),
+            "ingredient_entries-0-quantity": "200 g",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(RecipeIngredient.objects.get().quantity, "200 g")
+        response = self.client.post(reverse("admin:recipes_ingredient_change", args=[ingredient.pk]), {"name": " TOMATOES "})
+        self.assertEqual(response.status_code, 302)
+        ingredient.refresh_from_db()
+        self.assertEqual(ingredient.name, "tomatoes")

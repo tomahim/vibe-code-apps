@@ -16,5 +16,13 @@ def app_gallery(request):
             "description": "Estimate race checkpoint times and inspect the elevation profile.",
             "category": "Trail running",
             "icon": "↗",
+        }, {
+            "slug": "recipes",
+            "name": "Etchebest",
+            "description": "Save recipes and find inspiration from the ingredients you have.",
+            "category": "Cooking",
+            "icon": "🍽",
+            "href": "/admin/recipes/recipe/",
+            "action_label": "Manage recipes",
         }]
     })
