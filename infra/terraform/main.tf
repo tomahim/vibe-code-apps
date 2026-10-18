@@ -40,11 +40,11 @@ resource "railway_service" "ui" {
   project_id = railway_project.genious_apps.id
 }
 
-resource "railway_service_domain" "ui" {
-  environment_id = railway_project.genious_apps.default_environment.id
-  service_id     = railway_service.ui.id
-  subdomain      = "ui-production-4774"
-}
+# Issue #7: the Genious apps are reachable only over the Tailscale VPN.
+# The public *.up.railway.app domain of the ui service is intentionally not
+# managed here anymore: applying this configuration deletes it. Access goes
+# through the Tailscale Subnet Router in the same Railway environment (see
+# docs/genious-apps-tailscale.md).
 
 # --- ui variables ---
 
@@ -118,11 +118,6 @@ import {
 import {
   to = railway_service.ui
   id = "1561708c-0f17-4e8c-aef6-04c66bd26731"
-}
-
-import {
-  to = railway_service_domain.ui
-  id = "1561708c-0f17-4e8c-aef6-04c66bd26731:production:ui-production-4774.up.railway.app"
 }
 
 import {
