@@ -6,7 +6,8 @@ the Tailscale tailnet. They have no public `*.up.railway.app` domain.
 
 The public domain of the `ui` service is removed by Terraform
 (`infra/terraform/main.tf`). The steps below are done by hand in the Railway
-and Tailscale dashboards; they cannot be expressed in the repo.
+and Tailscale dashboards. Terraform manages the router's UDP GSO workaround
+as described below; the router itself and its auth key remain managed in Railway.
 
 ## Overview: how access works
 
@@ -87,6 +88,25 @@ account; they never see the admin's credentials or `TAILSCALE_AUTHKEY`.
    `PORT`, 8080). The `ui` service proxies `/api`, `/admin` and `/static` to
    `api.railway.internal:8000` over Railway's private network, so the whole app
    works through that one address.
+
+## Router throughput workaround
+
+The existing `tailscale-rw` service has `TS_DEBUG_DISABLE_UDP_GSO=true`.
+Terraform declares this variable and imports its existing Railway value in
+`infra/terraform/main.tf`, using the router's service ID. It does not adopt
+the router service, its volume, or `TAILSCALE_AUTHKEY`.
+
+On 2026-10-18, enabling this setting on Tailscale 1.104.1 reduced a
+291,696-byte admin font download from 21–29 seconds to 2.7–3.5 seconds.
+An [upstream report](https://github.com/tailscale/tailscale/issues/20026)
+describes a similar slowdown caused by UDP send offloading in a nested
+tunnel setup. This is evidence for the workaround, not confirmation of
+Railway's underlying network fault.
+
+For a replacement router, update `local.tailscale_router_id` and migrate the
+variable's state/import as needed. If this workaround is removed later, update Terraform as
+well so the next apply does not restore it. Variable changes can redeploy
+the router; repeat the same font download twice after any change.
 
 ## Removing the public domain
 

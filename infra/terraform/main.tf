@@ -17,7 +17,8 @@ terraform {
 provider "railway" {}
 
 locals {
-  project_id = "79593d36-e4ba-406b-8f7e-51e9116a9c5a"
+  project_id          = "79593d36-e4ba-406b-8f7e-51e9116a9c5a"
+  tailscale_router_id = "3ace600b-b518-4d3e-a2a1-30505d2d64ef"
 }
 
 
@@ -45,6 +46,18 @@ resource "railway_service" "ui" {
 # managed here anymore: applying this configuration deletes it. Access goes
 # through the Tailscale Subnet Router in the same Railway environment (see
 # docs/genious-apps-tailscale.md).
+
+# --- Tailscale router variables ---
+# The template-created router and its volume remain managed in Railway.
+# Adopt only this performance setting; leave its auth key outside Terraform.
+# Disabling UDP send offloading reduced the 292 kB font download from
+# 21–29 seconds to 2.7–3.5 seconds (2026-10-18).
+resource "railway_variable" "tailscale_disable_udp_gso" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = local.tailscale_router_id
+  name           = "TS_DEBUG_DISABLE_UDP_GSO"
+  value          = "true"
+}
 
 # --- ui variables ---
 
@@ -148,6 +161,11 @@ import {
 import {
   to = railway_service.ui
   id = "1561708c-0f17-4e8c-aef6-04c66bd26731"
+}
+
+import {
+  to = railway_variable.tailscale_disable_udp_gso
+  id = "${local.tailscale_router_id}:production:TS_DEBUG_DISABLE_UDP_GSO"
 }
 
 import {
