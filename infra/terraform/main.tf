@@ -40,11 +40,11 @@ resource "railway_service" "ui" {
   project_id = railway_project.genious_apps.id
 }
 
-# Issue #7: livetrail-scrap is reachable only over the Tailscale VPN.
+# Issue #7: the Genious apps are reachable only over the Tailscale VPN.
 # The public *.up.railway.app domain of the ui service is intentionally not
 # managed here anymore: applying this configuration deletes it. Access goes
 # through the Tailscale Subnet Router in the same Railway environment (see
-# docs/livetrail-scrap-tailscale.md).
+# docs/genious-apps-tailscale.md).
 
 # --- ui variables ---
 
