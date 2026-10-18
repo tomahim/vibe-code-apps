@@ -55,12 +55,12 @@ export default function Gallery({ onOpenApp }) {
 
       <section className="app-grid" aria-label="App gallery">
         {apps.map((app) => (
-          <button className="app-card" key={app.slug} onClick={() => onOpenApp(app.slug)}>
+          <button className="app-card" key={app.slug} onClick={() => app.href?.startsWith("/admin/") ? window.location.assign(app.href) : onOpenApp(app.slug)}>
             <span className="app-card-icon" aria-hidden="true">{app.icon || "✦"}</span>
             <span className="app-card-category">{app.category}</span>
             <span className="app-card-title">{app.name}</span>
             <span className="app-card-description">{app.description}</span>
-            <span className="app-card-link">Open tool <span aria-hidden="true">→</span></span>
+            <span className="app-card-link">{app.action_label || "Open tool"} <span aria-hidden="true">→</span></span>
           </button>
         ))}
       </section>

@@ -83,3 +83,6 @@ MEDIA_UPLOAD_MAX_BYTES = int(os.environ.get("MEDIA_UPLOAD_MAX_BYTES", str(5 * 10
 FILE_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES
 DATA_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES + 1024 * 1024
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Empty means recipe writes are disabled; separate from the Telegram bot token.
+BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")

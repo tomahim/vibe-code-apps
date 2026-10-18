@@ -1,12 +1,25 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 
-from .models import Recipe
+from .models import Ingredient, Recipe, RecipeIngredient
+
+
+class RecipeIngredientInline(TabularInline):
+    model = RecipeIngredient
+    extra = 1
+    autocomplete_fields = ("ingredient",)
+
+
+@admin.register(Ingredient)
+class IngredientAdmin(ModelAdmin):
+    search_fields = ("name",)
+    list_display = ("name",)
 
 
 @admin.register(Recipe)
 class RecipeAdmin(ModelAdmin):
+    inlines = (RecipeIngredientInline,)
     list_display = ("title", "has_image", "created_at")
     search_fields = ("title",)
     readonly_fields = ("image_preview", "created_at", "updated_at")
