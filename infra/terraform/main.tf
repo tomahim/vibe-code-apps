@@ -78,6 +78,36 @@ resource "railway_variable" "api_django_debug" {
   value          = "false"
 }
 
+# --- shared media bucket (issue #28) ---
+#
+# The Terraform provider used here (terraform-community-providers/railway
+# ~> 0.6) has no bucket resource, so the bucket itself is created by hand in
+# the Railway UI (docs/object-storage.md). Terraform only wires it to the api
+# service through Railway variable references, so no credential is ever in
+# this repo or in the state. The reference name must match the bucket name.
+# "$${" below is Terraform's escape for a literal "${".
+
+locals {
+  media_bucket_name = "genious-media"
+
+  api_bucket_variables = {
+    AWS_S3_ENDPOINT_URL     = "$${{${local.media_bucket_name}.ENDPOINT}}"
+    AWS_STORAGE_BUCKET_NAME = "$${{${local.media_bucket_name}.BUCKET}}"
+    AWS_ACCESS_KEY_ID       = "$${{${local.media_bucket_name}.ACCESS_KEY_ID}}"
+    AWS_SECRET_ACCESS_KEY   = "$${{${local.media_bucket_name}.SECRET_ACCESS_KEY}}"
+    AWS_S3_REGION_NAME      = "$${{${local.media_bucket_name}.REGION}}"
+  }
+}
+
+resource "railway_variable" "api_bucket" {
+  for_each = local.api_bucket_variables
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.api.id
+  name           = each.key
+  value          = each.value
+}
+
 # Secrets: the real values live only in Railway (and the private state).
 # Terraform tracks the variable but never overwrites or commits the value.
 resource "railway_variable" "api_database_url" {
