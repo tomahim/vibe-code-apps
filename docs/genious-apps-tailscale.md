@@ -27,6 +27,43 @@ and Tailscale dashboards; they cannot be expressed in the repo.
 | Split DNS and MagicDNS | Tailscale admin console, DNS | Tailscale admin |
 | Public domain removal | Terraform in this repo | Repo maintainers |
 
+## Creating the tailnet (admin account)
+
+Do this once, before the one-time setup below. Genious apps gets its own
+personal tailnet. Do not reuse a work tailnet: the employer's admin controls
+its ACLs, devices and subnet routers, and a personal project does not belong
+there.
+
+1. Go to https://tailscale.com and select Get Started.
+2. Sign up with a personal identity provider account, for example a personal
+   Google or GitHub account. Signing up with a public email domain such as
+   `@gmail.com` puts the tailnet on the free Personal plan (6 users,
+   unlimited devices, 3 ACL groups, enough for this setup). Signing up with a
+   custom domain starts an Enterprise trial instead, so use a personal
+   account.
+3. Choose Personal use when asked.
+4. Install the client on your first device from https://tailscale.com/download
+   and sign in with the same account. This device makes you the tailnet admin.
+5. You land in the admin console (https://login.tailscale.com). The sections
+   below happen there: Users, Machines, Access controls, DNS.
+
+Notes:
+
+- The Personal plan covers 6 users. Each invited person counts as one user,
+  no matter how many devices they add. If you hit the limit, remove an
+  inactive user (admin console, Users) or upgrade the plan.
+- One laptop can hold both a work account and this personal account
+  (account switching in the client), but only one is connected at a time. If
+  both need to be reachable together, use a second device for one of them.
+
+## Registering users
+
+Registering a user is covered below in "Onboarding a user and their devices":
+an admin invites the person by email from the Users page of the admin console
+(step 1) and adds them to `group:genious-users` (step 2). The invited person
+signs in with their own Google, GitHub or other supported identity provider
+account; they never see the admin's credentials or `TAILSCALE_AUTHKEY`.
+
 ## One-time setup
 
 1. In Railway, deploy the "Tailscale Subnet Router" template into the
