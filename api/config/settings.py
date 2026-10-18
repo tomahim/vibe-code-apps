@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from .database import database_config
+from .media import build_storages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "local-development-only-change-me")
@@ -18,6 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.admin_ui",
     "apps.livetrail_scrap",
+    "apps.recipes",
 ]
 
 UNFOLD = {
@@ -70,9 +72,14 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# Shared media storage: S3 compatible bucket when AWS_STORAGE_BUCKET_NAME is
+# set, local disk otherwise. See config/media.py and docs/object-storage.md.
+STORAGES = build_storages(os.environ)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_UPLOAD_MAX_BYTES = int(os.environ.get("MEDIA_UPLOAD_MAX_BYTES", str(5 * 1024 * 1024)))
+# Let uploads up to the limit be parsed in memory; larger ones are rejected by
+# the validator before anything is written to storage.
+FILE_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES
+DATA_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES + 1024 * 1024
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
