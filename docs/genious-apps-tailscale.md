@@ -1,8 +1,8 @@
-# livetrail-scrap over Tailscale only (issue #7)
+# Genious apps over Tailscale only (issue #7)
 
-The livetrail-scrap app (ui + api services in the Railway project
-`genious-apps`, environment `production`) is reachable only from devices on
-the Tailscale tailnet. It has no public `*.up.railway.app` domain.
+The Genious apps services (`ui` and `api`) in the Railway project
+`genious-apps`, environment `production`, are reachable only from devices on
+the Tailscale tailnet. They have no public `*.up.railway.app` domain.
 
 The public domain of the `ui` service is removed by Terraform
 (`infra/terraform/main.tf`). The steps below are done once by hand in the
