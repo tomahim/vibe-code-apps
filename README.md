@@ -72,6 +72,10 @@ Choose your username, email, and a unique strong password at the private termina
 
 Verify that the account still works after an API redeploy. If a database password was exposed, rotate it in Neon and update Railway's connection variable(s), then redeploy. Never send admin passwords through chat or store them in the repository.
 
+### Telegram recipe bot
+
+The bot in the bot/ directory runs Telegram long polling and calls the recipe API over Railway private networking. Terraform provisions it as a separate service. Set its Telegram token, shared API secret, and allowed Telegram user IDs in Railway before it can start; see [bot setup and commands](bot/README.md).
+
 ### Database maintenance and recovery
 
 Before schema changes, test migrations on a separate Neon branch and check the project's configured restore window in Neon; retention depends on the plan and settings. For an independent backup, use `pg_dump` against the **direct** endpoint, store the dump securely, and rehearse restoring into a separate database before relying on it. Database rollback means restoring a backup/branch or reversing a verified reversible migration, not merely rolling back the application image.
