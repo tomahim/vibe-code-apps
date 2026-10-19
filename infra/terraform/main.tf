@@ -70,6 +70,18 @@ resource "railway_variable" "tailscale_disable_udp_gso" {
   value          = "true"
 }
 
+# Uploads from a phone to the admin stalled (nginx 408 waiting for the request
+# body, 2026-10-19). That is the receive direction, so also disable UDP
+# receive offloading (GRO). Unlike the GSO variable above, this one does not
+# exist in Railway yet: `terraform apply` creates it, so there is no import.
+# Variable name checked in tailscale/tailscale net/batching/conn_linux.go.
+resource "railway_variable" "tailscale_disable_udp_gro" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = local.tailscale_router_id
+  name           = "TS_DEBUG_DISABLE_UDP_GRO"
+  value          = "true"
+}
+
 # --- ui variables ---
 
 resource "railway_variable" "ui_port" {

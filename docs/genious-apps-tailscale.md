@@ -103,6 +103,18 @@ describes a similar slowdown caused by UDP send offloading in a nested
 tunnel setup. This is evidence for the workaround, not confirmation of
 Railway's underlying network fault.
 
+### UDP GRO (receive side), added 2026-10-19
+
+Saving a recipe with an image from a phone in the admin stalled: the ui nginx
+logged `POST ... 408` (request body never fully arrived), so the API never saw
+the request. Uploads are the receive direction of the router, so Terraform also
+sets `TS_DEBUG_DISABLE_UDP_GRO=true` (the receive-offload counterpart of the GSO
+variable; name checked in Tailscale's `net/batching/conn_linux.go`). This is a
+hypothesis, not confirmed: it is not known that GRO is the cause. Terraform
+creates this variable on apply (it does not exist in Railway before). To test,
+upload an image of a few hundred kB from the admin after the router redeploys.
+To roll back, remove the resource from Terraform and merge, which deletes it.
+
 For a replacement router, update `local.tailscale_router_id` and migrate the
 variable's state/import as needed. If this workaround is removed later, update Terraform as
 well so the next apply does not restore it. Variable changes can redeploy
