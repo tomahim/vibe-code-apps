@@ -3,6 +3,13 @@ import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
 
 const initialApps = [
   {
+    slug: "recipes",
+    name: "Etchebest",
+    description: "Bring your ingredients. Spin a 3D wheel and discover what’s cooking tonight.",
+    category: "Cooking",
+    icon: "🍽",
+  },
+  {
     slug: "threejs-learning-path",
     name: "Three.js learning path",
     description: "Learn 3D one small experiment at a time. Interactive lessons, a live editor, and a world to build.",
@@ -27,7 +34,11 @@ export default function Gallery({ onOpenApp }) {
       .then((result) => {
         if (Array.isArray(result.apps)) {
           const merged = new Map(initialApps.map((app) => [app.slug, app]));
-          result.apps.forEach((app) => merged.set(app.slug, { ...merged.get(app.slug), ...app }));
+          result.apps.forEach((app) => {
+            // The local wheel replaces the older API card that linked to admin.
+            const local = initialApps.find((entry) => entry.slug === app.slug);
+            merged.set(app.slug, app.slug === "recipes" ? { ...app, ...local, href: undefined, action_label: undefined } : { ...local, ...app });
+          });
           setApps([...merged.values()]);
         }
       })

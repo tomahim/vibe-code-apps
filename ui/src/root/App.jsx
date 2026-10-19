@@ -2,6 +2,8 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import Gallery from "../pages/Gallery.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
+const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
+
 const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/ThreeLearningPath.jsx"));
 
 export default function App() {
@@ -25,6 +27,10 @@ export default function App() {
 
   if (path.startsWith("/apps/threejs-learning-path")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#10131a", color: "#bca3f5", display: "grid", placeItems: "center" }}>Opening your 3D studio…</div>}><ThreeLearningPath onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/recipes")) {
+    return <Suspense fallback={<div className="recipes-app">Opening the kitchen…</div>}><Recipes onHome={() => navigate("/")} /></Suspense>;
   }
 
   return <Gallery onOpenApp={(slug) => navigate(`/apps/${slug}`)} />;
