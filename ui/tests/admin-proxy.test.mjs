@@ -17,9 +17,10 @@ test('production forwards the complete Django static namespace', async () => {
   assert.match(nginx, /location \/static\/\s*\{\s*proxy_pass \$api_upstream;/);
 });
 
-test('production accepts private IPv6 traffic and refreshes the API address', async () => {
+test('production uses IPv4 ingress and refreshes the API address', async () => {
   const nginx = await readFile(new URL('../nginx/default.conf.template', import.meta.url), 'utf8');
-  assert.match(nginx, /listen \[::\]:\$\{PORT\};/);
+  assert.match(nginx, /listen 0\.0\.0\.0:\$\{PORT\};/);
+  assert.doesNotMatch(nginx, /listen\s+\[.*\]/);
   assert.match(nginx, /resolver \[fd12::10\] ipv6=off valid=5s;/);
   assert.match(nginx, /set \$api_upstream \$\{API_UPSTREAM\};/);
   for (const path of ['api', 'admin', 'static']) {

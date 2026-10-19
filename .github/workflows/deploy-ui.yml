@@ -56,6 +56,8 @@ jobs:
         run: npm ci
       - name: Validate lessons and saved progress
         run: npm test
+      - name: Test production proxy uploads
+        run: npm run test:proxy
       - name: Build production UI
         run: npm run build
       - name: Install browser

@@ -115,6 +115,62 @@ creates this variable on apply (it does not exist in Railway before). To test,
 upload an image of a few hundred kB from the admin after the router redeploys.
 To roll back, remove the resource from Terraform and merge, which deletes it.
 
+### IPv6 upload stall: use IPv4 UI ingress
+
+The GSO/GRO settings and larger nginx body limits did not resolve the reported
+admin saves. On 2026-10-19, unauthenticated POST probes to the production UI
+isolated the failure before Django or S3:
+
+| Probe | Result |
+| --- | --- |
+| IPv4, 256 bytes | HTTP 403 in 0.28 s |
+| IPv4, 16 KiB | HTTP 403 in 1.77 s |
+| IPv4, 256 KiB | HTTP 403 in 3.03 s |
+| IPv4, 5 MiB, change URL | HTTP 403 in 9.06 s |
+| IPv6, 256 bytes | HTTP 403 in 0.26 s |
+| IPv6, 16 KiB | No response within 10 s |
+| IPv6, 16 KiB sent in 500-byte writes with 150 ms pauses | HTTP 403 |
+
+HTTP 403 is expected here: probes have no CSRF token or login cookie, so they
+cannot create or edit recipes. nginx buffers the body before proxying it to
+Django. Larger IPv6 writes stalled with both add and change forms in production;
+nginx eventually logged 408. Even pacing curl at 1,000 bytes/s did not resolve
+the IPv6 stall. The exact fault inside the IPv6 transport remains unconfirmed;
+these results do not establish an S3, image validation, or overall file-size bug.
+One 5 MiB IPv4 probe initially returned 502 while the API woke from sleep;
+nginx logged an upstream connection refusal. Repeating it after startup
+returned 403. That cold-start failure is separate from the IPv6 body stall.
+
+The UI now listens only on `0.0.0.0:${PORT}`. A connection to its AAAA address
+is refused before HTTP starts, allowing dual-stack browsers to select the A
+record and send the full upload over the verified IPv4 path. An IPv6 connection
+to a closed port on the live UI failed in 0.19 s during diagnosis. This relies
+on Railway's dual-stack service DNS and the router advertising its IPv4 subnet;
+both were verified for this environment. IPv6-only private environments need
+a different solution. The hostname, cookies and CSRF origin remain the same.
+
+After deployment, check add and edit with a small image and one near the 5 MiB
+Django limit, including “Save and continue editing”. Recheck these transport
+probes from a Tailscale-connected device (no authentication required):
+
+```sh
+head -c 16384 /dev/zero > /tmp/recipe-upload-probe
+curl -4 --max-time 15 --data-binary @/tmp/recipe-upload-probe \
+  -o /dev/null -w 'status=%{http_code} seconds=%{time_total}\n' \
+  http://ui.genious-apps-production-railway.internal:8080/admin/recipes/recipe/add/
+curl -6 --max-time 15 --data-binary @/tmp/recipe-upload-probe \
+  -o /dev/null -w 'status=%{http_code} seconds=%{time_total}\n' \
+  http://ui.genious-apps-production-railway.internal:8080/admin/recipes/recipe/add/
+```
+
+IPv4 should return 403 promptly; IPv6 should refuse the connection promptly.
+Repeat IPv4 without `-4` to exercise normal address selection. Do not restore
+the IPv6 listener until normal unpaced IPv6 POSTs of 16 KiB, 256 KiB and 5 MiB
+complete repeatedly on the affected devices. `cd ui && npm run test:proxy`
+checks the actual nginx configuration in Docker, including add/change multipart
+body integrity, the 5 MiB upload allowance, the 6 MiB proxy limit and refusal of
+IPv6 connections. It uses a test backend, so it does not exercise Django or S3.
+
 For a replacement router, update `local.tailscale_router_id` and migrate the
 variable's state/import as needed. If this workaround is removed later, update Terraform as
 well so the next apply does not restore it. Variable changes can redeploy
