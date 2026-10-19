@@ -51,11 +51,18 @@ start a scheduled run a few minutes after its nominal time.
 - /list shows all recipes. /list tomato, pasta filters to recipes containing
   both ingredients.
 - /random returns one recipe. /random tomato, pasta filters first.
+- When a recipe has an image, /list and /random send it as a Telegram photo
+  with the recipe text as the caption. /list sends at most 10 photos per
+  call; the rest come as text. If an image can't be fetched (or is over 5 MB),
+  the recipe is sent as text only.
 - /help shows the command list and ingredient syntax.
 
 Ingredients can be comma or newline separated. Add optional quantities with
 name: quantity, for example tomato: 200 g, pasta: 150 g. Photos are uploaded
-as bytes to the API (up to 5 MB); the bot does not store image URLs.
+as bytes to the API (up to 5 MB); the bot does not store image URLs. For
+display, the bot downloads the `image_url` returned by the API (a presigned
+bucket URL that expires, so it is fetched right away) and uploads the bytes to
+Telegram, so Telegram never needs to reach the URL itself.
 
 The bot needs outbound HTTPS to Telegram and private-network access to the API.
 Long polling runs continuously, so do not use Railway's cron schedule for this
