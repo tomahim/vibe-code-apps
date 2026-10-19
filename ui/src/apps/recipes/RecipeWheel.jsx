@@ -80,14 +80,23 @@ export default function RecipeWheel({ recipes, spin, onComplete }) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     element.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-3, 3, 3, -3, .1, 30);
-    camera.position.set(0, 0, 9);
-    scene.add(new THREE.AmbientLight(0xffffff, 2));
+    const camera = new THREE.PerspectiveCamera(38, 1, .1, 30);
+    const cameraHome = new THREE.Vector3(4.4, 1.65, 9);
+    const cameraTarget = new THREE.Vector3(0, -.15, 0);
+    const poseCamera = (amount = 0) => {
+      camera.position.copy(cameraHome).add(new THREE.Vector3(.95 * amount, .45 * amount, -.4 * amount));
+      camera.lookAt(cameraTarget);
+    };
+    poseCamera();
+    scene.add(new THREE.AmbientLight(0xffffff, 1.4));
     const light = new THREE.DirectionalLight(0xffedce, 3);
     light.position.set(-3, 5, 8);
     scene.add(light);
+    const fill = new THREE.DirectionalLight(0xb9e4e1, 1.8);
+    fill.position.set(4, 1, -3);
+    scene.add(fill);
     const mount = new THREE.Group();
-    mount.rotation.set(.08, -.12, 0);
+    mount.rotation.set(0, 0, 0);
     mount.position.y = .2;
     scene.add(mount);
     const wheel = new THREE.Group();
@@ -101,28 +110,58 @@ export default function RecipeWheel({ recipes, spin, onComplete }) {
       parent.add(item);
       return item;
     }
-    const body = mesh(new THREE.CylinderGeometry(2.4, 2.4, .22, 80), teal, wheel);
+    const body = mesh(new THREE.CylinderGeometry(2.4, 2.4, .58, 80), teal, wheel);
     body.rotation.x = Math.PI / 2;
-    const face = mesh(new THREE.CircleGeometry(2.3, 80), new THREE.MeshBasicMaterial(), wheel, 0, 0, .12);
-    mesh(new THREE.TorusGeometry(2.37, .065, 8, 80), gold, wheel, 0, 0, .14);
-    mesh(new THREE.TorusGeometry(.66, .045, 8, 48), gold, wheel, 0, 0, .2);
-    mesh(new THREE.CircleGeometry(.64, 48), gold, wheel, 0, 0, .19);
+    const face = mesh(new THREE.CircleGeometry(2.3, 80), new THREE.MeshStandardMaterial({ roughness: .75, metalness: .05 }), wheel, 0, 0, .30);
+    mesh(new THREE.TorusGeometry(2.37, .065, 8, 80), gold, wheel, 0, 0, .33);
+    mesh(new THREE.TorusGeometry(.66, .045, 8, 48), gold, mount, 0, 0, .48);
+    mesh(new THREE.TorusGeometry(2.37, .065, 8, 80), gold, wheel, 0, 0, -.29);
+    const hub = mesh(new THREE.CylinderGeometry(.64, .64, .18, 48), gold, mount, 0, 0, .39);
+    hub.rotation.x = Math.PI / 2;
+    // Keep the lettering attached to the physical hub during the camera orbit.
+    const badge = document.createElement('canvas');
+    badge.width = badge.height = 256;
+    const ink = badge.getContext('2d');
+    ink.fillStyle = '#caa56a'; ink.fillRect(0, 0, 256, 256);
+    ink.fillStyle = '#332d1d'; ink.textAlign = 'center';
+    ink.font = '32px Georgia'; ink.fillText('À TABLE', 128, 125);
+    ink.font = '12px sans-serif'; ink.fillText('ETCHEBEST', 128, 155);
+    const badgeTexture = new THREE.CanvasTexture(badge);
+    badgeTexture.colorSpace = THREE.SRGBColorSpace;
+    mesh(new THREE.CircleGeometry(.61, 48), new THREE.MeshStandardMaterial({ map: badgeTexture, roughness: .55, metalness: .25 }), mount, 0, 0, .49);
     for (let i = 0; i < 20; i++) {
       const a = i * TAU / 20;
-      mesh(new THREE.SphereGeometry(.035, 8, 6), gold, wheel, Math.cos(a) * 2.37, Math.sin(a) * 2.37, .21);
+      mesh(new THREE.SphereGeometry(.035, 8, 6), gold, wheel, Math.cos(a) * 2.37, Math.sin(a) * 2.37, .40);
     }
     const pointer = new THREE.Shape();
     pointer.moveTo(2.12, 0); pointer.lineTo(2.67, .19); pointer.lineTo(2.67, -.19); pointer.closePath();
-    mesh(new THREE.ExtrudeGeometry(pointer, { depth: .12, bevelEnabled: true, bevelSize: .03, bevelThickness: .03, bevelSegments: 1, steps: 1 }), gold, mount, 0, 0, .3);
-    mesh(new THREE.BoxGeometry(.24, .65, .3), gold, scene, 0, -2.32, -.2);
-    mesh(new THREE.BoxGeometry(1.5, .14, .65), gold, scene, 0, -2.66, -.1);
+    mesh(new THREE.ExtrudeGeometry(pointer, { depth: .12, bevelEnabled: true, bevelSize: .03, bevelThickness: .03, bevelSegments: 1, steps: 1 }), gold, mount, 0, 0, .48);
+    mesh(new THREE.BoxGeometry(.3, 2.7, .38), gold, scene, 0, -1.3, -.5);
+    mesh(new THREE.CylinderGeometry(.22, .22, .75, 24), gold, scene, 0, -2.3, -.5);
+    mesh(new THREE.BoxGeometry(1.7, .18, 1.1), gold, scene, 0, -2.66, -.25);
+    mesh(new THREE.BoxGeometry(1.85, .08, 1.2), teal, scene, 0, -2.77, -.25);
+    // A soft contact shadow grounds the stand without a mobile shadow map.
+    const shadowCanvas = document.createElement('canvas');
+    shadowCanvas.width = shadowCanvas.height = 128;
+    const shadowInk = shadowCanvas.getContext('2d');
+    const gradient = shadowInk.createRadialGradient(64, 64, 8, 64, 64, 64);
+    gradient.addColorStop(0, 'rgba(29,45,39,.35)');
+    gradient.addColorStop(1, 'rgba(29,45,39,0)');
+    shadowInk.fillStyle = gradient; shadowInk.fillRect(0, 0, 128, 128);
+    const shadow = mesh(new THREE.PlaneGeometry(4.2, 2.8), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shadowCanvas), transparent: true, depthWrite: false }), scene, .2, -2.82, -.3);
+    shadow.rotation.x = -Math.PI / 2;
     const render = () => renderer.render(scene, camera);
-    const resize = () => { renderer.setSize(element.clientWidth, element.clientHeight); render(); };
+    const resize = () => {
+      camera.aspect = element.clientWidth / element.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(element.clientWidth, element.clientHeight);
+      render();
+    };
     const observer = new ResizeObserver(resize);
     observer.observe(element);
     const lost = (event) => { event.preventDefault(); setFallback(true); };
     renderer.domElement.addEventListener('webglcontextlost', lost);
-    engine.current = { wheel, face, render };
+    engine.current = { wheel, face, render, poseCamera };
     resize();
     return () => {
       observer.disconnect();
@@ -150,7 +189,8 @@ export default function RecipeWheel({ recipes, spin, onComplete }) {
     if (!spin) return;
     const start = rotation.current;
     const end = landingRotation(start, spin.index);
-    const milliseconds = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 100 : 4400;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const milliseconds = reducedMotion ? 100 : 4400;
     setDuration(milliseconds);
     setFallbackAngle(-end * 180 / Math.PI);
     const started = performance.now();
@@ -160,6 +200,8 @@ export default function RecipeWheel({ recipes, spin, onComplete }) {
       rotation.current = start + (end - start) * (1 - Math.pow(1 - progress, 4));
       if (engine.current && !fallback) {
         engine.current.wheel.rotation.z = rotation.current;
+        // Ease into a small orbit/dolly, then settle exactly back at the home view.
+        engine.current.poseCamera(reducedMotion ? 0 : Math.sin(Math.PI * progress) ** 2);
         engine.current.render();
       }
       if (progress < 1) frame = requestAnimationFrame(tick);
@@ -184,6 +226,6 @@ export default function RecipeWheel({ recipes, spin, onComplete }) {
         })}<circle r="65" fill="#caa56a" /><circle r="242" fill="none" stroke="#caa56a" strokeWidth="8" />
       </g><path d="M215 0L268 -18V18Z" fill="#caa56a" />
     </svg>}
-    <span className="recipe-wheel-hub" aria-hidden="true">À TABLE<small>ETCHEBEST</small></span>
+    {fallback && <span className="recipe-wheel-hub" aria-hidden="true">À TABLE<small>ETCHEBEST</small></span>}
   </div>;
 }
