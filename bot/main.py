@@ -9,6 +9,7 @@ import re
 
 import httpx
 from telegram import BotCommand, Update
+from telegram.error import TelegramError
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -24,6 +25,8 @@ API_BASE_URL = os.environ.get("API_BASE_URL", "http://api.railway.internal:8000"
 API_TIMEOUT_SECONDS = 20
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 TITLE, INGREDIENTS, SOURCE, PHOTO = range(4)
+CAPTION_LIMIT = 1024  # Telegram's photo caption limit
+MAX_LIST_PHOTOS = 10  # keep /list under Telegram's per-chat rate limits
 
 
 def required_settings() -> tuple[str, str, set[int]]:
@@ -128,6 +131,50 @@ def format_recipe(recipe: dict) -> str:
     if recipe.get("source_url"):
         lines.append(recipe["source_url"])
     return "\n".join(lines)
+
+
+async def fetch_image(context: ContextTypes.DEFAULT_TYPE, url: str) -> bytes | None:
+    """Download a recipe image so Telegram never has to reach our URL itself.
+
+    Returns None when the image can't be fetched, so callers fall back to text.
+    """
+    try:
+        async with api_client(context).stream("GET", url, headers={"Accept": "image/*"}, follow_redirects=True) as response:
+            response.raise_for_status()
+            content = bytearray()
+            async for chunk in response.aiter_bytes():
+                content.extend(chunk)
+                if len(content) > MAX_IMAGE_BYTES:
+                    logger.warning("Recipe image over %d bytes, sending text only", MAX_IMAGE_BYTES)
+                    return None
+            return bytes(content) or None
+    except httpx.HTTPError:
+        logger.warning("Could not fetch recipe image, sending text only", exc_info=True)
+        return None
+
+
+async def reply_recipe(update: Update, context: ContextTypes.DEFAULT_TYPE, recipe: dict) -> bool:
+    """Send one recipe, as a photo with caption when it has a reachable image.
+
+    Returns True when a photo was sent.
+    """
+    message = update.effective_message
+    text = format_recipe(recipe)
+    image_url = recipe.get("image_url")
+    if image_url:
+        content = await fetch_image(context, image_url)
+        if content:
+            try:
+                if len(text) <= CAPTION_LIMIT:
+                    await message.reply_photo(photo=content, caption=text)
+                else:
+                    await message.reply_photo(photo=content, caption=recipe.get("title", "")[:CAPTION_LIMIT])
+                    await message.reply_text(text[:4000])
+                return True
+            except TelegramError:
+                logger.warning("Telegram rejected the recipe image, sending text only", exc_info=True)
+    await message.reply_text(text[:4000])
+    return False
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -259,30 +306,33 @@ async def list_recipes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if not recipes:
         await update.effective_message.reply_text("No matching recipes found.")
         return
-    chunks: list[str] = []
-    current = ""
+    # Recipes with an image go out as photos (first MAX_LIST_PHOTOS only); the rest
+    # are grouped into text messages. Order is kept by flushing text before a photo.
+    pending: list[str] = []
+
+    async def flush_text() -> None:
+        current = ""
+        for block in pending:
+            block = block[:3900]
+            addition = f"\n\n{block}" if current else block
+            if current and len(current) + len(addition) > 3900:
+                await update.effective_message.reply_text(current)
+                current = block
+            else:
+                current += addition
+        if current:
+            await update.effective_message.reply_text(current)
+        pending.clear()
+
+    photos_sent = 0
     for recipe in recipes:
-        block = format_recipe(recipe)
-        if len(block) > 3900:
-            if current:
-                chunks.append(current)
-                current = ""
-            for line in block.splitlines():
-                if current and len(current) + len(line) + 1 > 3900:
-                    chunks.append(current)
-                    current = ""
-                current = f"{current}\n{line}".strip()
+        if recipe.get("image_url") and photos_sent < MAX_LIST_PHOTOS:
+            await flush_text()
+            if await reply_recipe(update, context, recipe):
+                photos_sent += 1
             continue
-        addition = f"\n\n{block}" if current else block
-        if current and len(current) + len(addition) > 3900:
-            chunks.append(current)
-            current = block
-        else:
-            current += addition
-    if current:
-        chunks.append(current)
-    for chunk in chunks:
-        await update.effective_message.reply_text(chunk)
+        pending.append(format_recipe(recipe))
+    await flush_text()
 
 
 async def random_recipe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -302,7 +352,7 @@ async def random_recipe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         logger.exception("Random recipe request failed")
         await update.effective_message.reply_text("I couldn't reach the recipe API. Please try again later.")
         return
-    await update.effective_message.reply_text(format_recipe(result))
+    await reply_recipe(update, context, result)
 
 
 async def post_init(application: Application) -> None:
