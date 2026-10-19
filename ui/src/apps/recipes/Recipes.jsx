@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import RecipeWheel from './RecipeWheel.jsx';
 import { ingredientNames, recipeQuery, safeUrl, wheelRecipes } from './wheel.js';
 import './recipes.css';
@@ -14,10 +15,41 @@ async function readRecipes(endpoint, signal) {
 
 function RecipePhoto({ recipe }) {
   const [failed, setFailed] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const trigger = useRef(null);
+  const close = useRef(null);
   const url = safeUrl(recipe.image_url);
-  return url && !failed
-    ? <img className="recipe-photo" src={url} alt={recipe.title} onError={() => setFailed(true)} />
-    : <div className="recipe-photo-placeholder"><span aria-hidden="true">♧</span><p>{failed ? 'Photo unavailable' : 'Good food needs no photo.'}</p></div>;
+
+  useEffect(() => {
+    if (!expanded) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    close.current?.focus();
+    function onKeyDown(event) {
+      if (event.key === 'Escape') setExpanded(false);
+      // The close button is the only control in the overlay. Keep keyboard
+      // focus there until the viewer closes.
+      if (event.key === 'Tab') { event.preventDefault(); close.current?.focus(); }
+    }
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+      trigger.current?.focus({ preventScroll: true });
+    };
+  }, [expanded]);
+
+  if (!url || failed) return <div className="recipe-photo-placeholder"><span aria-hidden="true">♧</span><p>{failed ? 'Photo unavailable' : 'Good food needs no photo.'}</p></div>;
+  return <>
+    <button ref={trigger} className="recipe-photo-trigger" type="button" onClick={() => setExpanded(true)} aria-label={`View ${recipe.title} photo full screen`}>
+      <img className="recipe-photo" src={url} alt={recipe.title} onError={() => { setFailed(true); setExpanded(false); }} />
+      <span className="recipe-photo-zoom" aria-hidden="true">View full screen ⤢</span>
+    </button>
+    {expanded && createPortal(<div className="recipe-photo-overlay" role="dialog" aria-modal="true" aria-label={`${recipe.title} photo full screen`}>
+      <button ref={close} className="recipe-photo-close" type="button" onClick={() => setExpanded(false)} aria-label="Close full-screen photo">Close <span aria-hidden="true">×</span></button>
+      <img src={url} alt={recipe.title} onError={() => { setFailed(true); setExpanded(false); }} />
+    </div>, document.body)}
+  </>;
 }
 
 export default function Recipes({ onHome }) {
