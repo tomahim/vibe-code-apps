@@ -37,6 +37,26 @@ test('gallery opens the wheel even with the legacy admin card; API winner lands 
   await expect(page.getByRole('heading', { name: 'Find your next useful tool.' })).toBeVisible();
 });
 
+test('desktop photo viewer fills the viewport and closes without losing the result', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const photo = { ...recipes[0], image_url: '/desktop-photo.svg' };
+  await mock(page, [photo], photo);
+  await page.route('**/desktop-photo.svg', (route) => route.fulfill({ contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#d9b276"/></svg>' }));
+  await page.goto(path);
+  await page.getByRole('button', { name: 'Spin the wheel' }).click();
+  const opener = page.getByRole('button', { name: `View ${photo.title} photo full screen` });
+  await expect(opener).toBeVisible();
+  await opener.click();
+  const viewer = page.getByRole('dialog', { name: `${photo.title} photo full screen` });
+  await expect(viewer).toBeVisible();
+  const imageBounds = await viewer.locator('img').boundingBox();
+  expect(imageBounds.width).toBeGreaterThan(1000);
+  expect(imageBounds.height).toBeGreaterThan(800);
+  await viewer.getByRole('button', { name: 'Close full-screen photo' }).click();
+  await expect(viewer).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: photo.title })).toBeVisible();
+});
+
 test('AND filters go to both endpoints, repeated slots, clear filters, and no matches', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const requests = [];
@@ -74,12 +94,32 @@ test('phone layout, photo reveal, broken photos, and reduced motion', async ({ p
   await expect(page.locator('.recipe-photo')).toHaveCount(0);
   await page.getByRole('button', { name: 'Spin the wheel' }).click();
   await expect(page.getByRole('img', { name: photo.title, exact: true })).toBeVisible();
+  const opener = page.getByRole('button', { name: `View ${photo.title} photo full screen` });
+  await expect(opener).toHaveCSS('cursor', 'zoom-in');
+  await opener.click();
+  const viewer = page.getByRole('dialog', { name: `${photo.title} photo full screen` });
+  await expect(viewer).toBeVisible();
+  await expect(viewer.locator('img')).toHaveCSS('object-fit', 'contain');
+  await expect(viewer.getByRole('button', { name: 'Close full-screen photo' })).toBeFocused();
+  await expect(page.locator('body')).toHaveCSS('overflow', 'hidden');
+  const viewerBounds = await viewer.boundingBox();
+  expect(viewerBounds.width).toBe(390);
+  expect(viewerBounds.height).toBe(844);
+  await page.keyboard.press('Tab');
+  await expect(viewer.getByRole('button', { name: 'Close full-screen photo' })).toBeFocused();
+  await viewer.getByRole('button', { name: 'Close full-screen photo' }).click();
+  await expect(viewer).toHaveCount(0);
+  await expect(opener).toBeFocused();
+  await opener.click();
+  await page.keyboard.press('Escape');
+  await expect(viewer).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.screenshot({ path: '/tmp/etchebest-mobile.png', fullPage: true });
   await page.route('**/test-recipe.svg', (route) => route.abort());
   await page.reload();
   await page.getByRole('button', { name: 'Spin the wheel' }).click();
   await expect(page.getByText('Photo unavailable')).toBeVisible();
+  await expect(page.getByRole('button', { name: `View ${photo.title} photo full screen` })).toHaveCount(0);
 });
 
 test('list failures retry and random errors never reveal an unrelated recipe', async ({ page }) => {

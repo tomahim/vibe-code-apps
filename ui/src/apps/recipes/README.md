@@ -14,7 +14,7 @@ no new backend, credentials, or image assets are required.
   a thick drum, raised hub, brass rims, pedestal, and soft contact shadow. A
   perspective camera makes a small orbit and dolly during each spin, returning
   to its home view at the result. The scene uses capped pixel ratio and renders only on resize,
-  content change, or a spin. Uploaded photos appear only in the result.
+  content change, or a spin. Uploaded photos appear only in the result. A result photo opens a viewport-sized viewer with a keyboard-accessible close button, Escape support, focus return, and fit-without-cropping scaling.
 - Reduced motion shortens spins and disables camera movement. An SVG wheel works without WebGL. The recipe
   list, spin button, and result are available to keyboard and screen-reader users.
 - List failures can be retried; random failures leave the wheel available for
