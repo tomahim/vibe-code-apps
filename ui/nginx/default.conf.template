@@ -8,9 +8,11 @@ map $http_x_forwarded_proto $originating_scheme {
 # the browser's Origin (which includes the port) with the Host header, so using
 # $host (port stripped) made admin login fail with 403 on plain-http private URLs.
 server {
-    listen ${PORT};
-    # Tailscale's subnet router can select Railway's IPv6 address for this service.
-    listen [::]:${PORT};
+    # The Tailscale userspace router stalls normal IPv6 request-body writes
+    # while IPv4 uploads complete. Refuse IPv6 at connect time so dual-stack
+    # browsers fall back to Railway's A record before submitting a form.
+    # Keep this IPv4-only until the IPv6 upload probe in the runbook passes.
+    listen 0.0.0.0:${PORT};
     server_name _;
     root /usr/share/nginx/html;
     index index.html;
