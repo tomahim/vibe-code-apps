@@ -24,6 +24,8 @@ test('gallery opens the wheel even with the legacy admin card; API winner lands 
   await page.route('**/api/apps/recipes/random/**', (route) => route.fulfill({ json: winner }));
   await page.getByRole('button', { name: 'Spin the wheel' }).click();
   await expect(page.getByRole('button', { name: 'A little suspense' })).toBeDisabled();
+  await page.waitForTimeout(1700); // Inspect the camera near the middle of its orbit.
+  await page.screenshot({ path: '/tmp/etchebest-spinning.png', fullPage: true });
   await expect(page.getByRole('heading', { name: winner.title })).toBeVisible({ timeout: 10000 });
   await expect(page.locator('.recipes-result')).toContainText('200 g');
   await expect(page.getByRole('link', { name: 'View the recipe' })).toHaveAttribute('href', winner.source_url);

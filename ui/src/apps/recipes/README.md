@@ -11,9 +11,11 @@ no new backend, credentials, or image assets are required.
   If the API winner is outside the current subset, a new subset includes it
   before animation. Selection therefore stays open to the entire collection.
 - The wheel uses one generated canvas texture (titles and generic cloches),
-  simple Three.js geometry, capped pixel ratio, and renders only on resize,
+  a thick drum, raised hub, brass rims, pedestal, and soft contact shadow. A
+  perspective camera makes a small orbit and dolly during each spin, returning
+  to its home view at the result. The scene uses capped pixel ratio and renders only on resize,
   content change, or a spin. Uploaded photos appear only in the result.
-- Reduced motion shortens spins. An SVG wheel works without WebGL. The recipe
+- Reduced motion shortens spins and disables camera movement. An SVG wheel works without WebGL. The recipe
   list, spin button, and result are available to keyboard and screen-reader users.
 - List failures can be retried; random failures leave the wheel available for
   another attempt. Empty results never fall back to unrelated recipes.
