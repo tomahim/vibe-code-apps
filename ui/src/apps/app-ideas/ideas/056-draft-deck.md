@@ -4,6 +4,7 @@ tagline: Play Constraint Cards, Ship an Atomic Essay
 domains: [WRITE, GAME]
 created: 2026-10-20T08:05:49Z
 issue: 56
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
