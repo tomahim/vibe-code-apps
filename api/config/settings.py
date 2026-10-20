@@ -86,3 +86,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Empty means recipe writes are disabled; separate from the Telegram bot token.
 BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
+
+# App Ideas star ratings: the api commits `rating` into the idea's md frontmatter.
+# Fine-grained GitHub token, contents:write on this one repo. Unset disables rating (503).
+GITHUB_IDEAS_TOKEN = os.environ.get("GITHUB_IDEAS_TOKEN", "")
+GITHUB_IDEAS_REPO = os.environ.get("GITHUB_IDEAS_REPO", "tomahim/vibe-code-apps")
+GITHUB_IDEAS_BRANCH = os.environ.get("GITHUB_IDEAS_BRANCH", "master")
+# Optional extra guard: require a logged-in Django staff session to rate.
+IDEAS_RATE_REQUIRE_STAFF = os.environ.get("IDEAS_RATE_REQUIRE_STAFF", "false").lower() == "true"
