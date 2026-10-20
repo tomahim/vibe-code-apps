@@ -4,6 +4,7 @@ tagline: Predict the Match Before the Reveal
 domains: [SPORT, GAME, LEARN]
 created: 2026-10-20T07:45:16Z
 issue: 48
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
