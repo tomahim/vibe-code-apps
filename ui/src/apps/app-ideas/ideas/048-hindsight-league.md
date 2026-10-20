@@ -2,7 +2,7 @@
 name: Hindsight League
 tagline: Predict the Match Before the Reveal
 domains: [SPORT, GAME, LEARN]
-date: 2026-10-20
+created: 2026-10-20T07:45:16Z
 issue: 48
 ---
 

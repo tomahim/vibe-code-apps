@@ -2,7 +2,7 @@
 name: First Edition
 tagline: Family Moments Typeset Like Front-Page History
 domains: [PROD, HIST]
-date: 2026-10-20
+created: 2026-10-20T08:05:50Z
 issue: 57
 ---
 

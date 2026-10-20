@@ -2,7 +2,7 @@
 name: Draft Deck
 tagline: Play Constraint Cards, Ship an Atomic Essay
 domains: [WRITE, GAME]
-date: 2026-10-20
+created: 2026-10-20T08:05:49Z
 issue: 56
 ---
 

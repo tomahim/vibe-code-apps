@@ -2,7 +2,7 @@
 name: Margin Mixer
 tagline: Turn Two Saved Ideas Into One Original Thought
 domains: [MEDIA, WRITE, LEARN]
-date: 2026-10-20
+created: 2026-10-20T07:51:06Z
 issue: 49
 ---
 

@@ -2,7 +2,7 @@
 name: Ghost Pacer
 tagline: Race a Historic Record Holder Over Your Own Training Run
 domains: [SPORT, HIST]
-date: 2026-10-20
+created: 2026-10-20T08:36:32Z
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT

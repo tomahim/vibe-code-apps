@@ -2,7 +2,7 @@
 name: Exit Interview
 tagline: Give Every Saved Link a Job or Let It Go
 domains: [MEDIA, PROD]
-date: 2026-10-20
+created: 2026-10-20T07:57:34Z
 issue: 54
 ---
 

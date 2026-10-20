@@ -2,7 +2,7 @@
 name: Strata Stories
 tagline: Excavate History One Layer at a Time
 domains: [3D, HIST, LEARN]
-date: 2026-10-20
+created: 2026-10-20T07:45:13Z
 issue: 47
 ---
 

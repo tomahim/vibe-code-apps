@@ -2,7 +2,7 @@
 name: Evidence Cabinet
 tagline: Rebuild a Historical Claim From Its Sources
 domains: [HIST, LEARN, GAME]
-date: 2026-10-20
+created: 2026-10-20T07:57:29Z
 issue: 52
 ---
 

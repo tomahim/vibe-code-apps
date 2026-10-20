@@ -2,7 +2,7 @@
 name: Passing Constellation
 tagline: Turn Simple Match Events Into Shapes You Can Explain
 domains: [SPORT, 3D]
-date: 2026-10-20
+created: 2026-10-20T07:57:32Z
 issue: 53
 ---
 
