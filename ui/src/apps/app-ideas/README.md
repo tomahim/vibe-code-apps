@@ -41,6 +41,8 @@ state; nothing is stored in the browser.
 - `rating: 2` or `3`: **Promising**, sorted 3 stars first, then 2, then newest `created`.
 - `rating: 1`: **Archive**.
 
+A rated idea shows a "Reset to Inbox" button (or tap the current star again): it sends `rating: null`, which removes the `rating` line.
+
 Inbox and Archive are sorted newest first. There is no separate archived flag.
 
 Saving a star tap: the UI calls `POST /api/app-ideas/<slug>/rate` with

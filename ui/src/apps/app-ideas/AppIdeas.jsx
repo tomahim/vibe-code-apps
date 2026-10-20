@@ -36,6 +36,16 @@ function StarRating({ idea, rating, pending, onRate }) {
           {n <= rating ? "\u2605" : "\u2606"}
         </button>
       ))}
+      {rating > 0 && (
+        <button
+          type="button"
+          className="star-reset"
+          disabled={pending}
+          onClick={() => onRate(idea, null)}
+        >
+          Reset to Inbox
+        </button>
+      )}
     </span>
   );
 }

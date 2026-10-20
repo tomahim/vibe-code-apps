@@ -33,6 +33,9 @@
 .idea-detail .star-rating { padding: 14px 0 0; }
 .star-button { width: 52px; height: 52px; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #b3bdb4; font-size: 28px; line-height: 1; touch-action: manipulation; }
 .star-button-on { border-color: #e3c25a; background: #fff8e1; color: #d99a00; }
+.star-rating { align-items: center; flex-wrap: wrap; }
+.star-reset { min-height: 44px; margin-left: auto; padding: 0 14px; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #59645d; font-size: 13px; font-weight: 700; touch-action: manipulation; }
+.star-reset:disabled { opacity: .5; }
 .star-button:disabled { opacity: .5; }
 .star-button:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
 .idea-card-domains { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
