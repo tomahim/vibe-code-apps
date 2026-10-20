@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readdir, readFile } from 'node:fs/promises';
 import { sortNewestFirst, createdAt } from '../src/apps/app-ideas/sort.js';
 import { parseFrontmatter } from '../src/apps/app-ideas/frontmatter.js';
+import { sortForView, validRating, viewOf } from '../src/apps/app-ideas/rating.js';
 
 const DOMAIN_TAGS = new Set(['PROD', 'SPORT', 'HIST', '3D', 'GAME', 'LEARN', 'WRITE', 'MEDIA']);
 
@@ -19,6 +20,7 @@ test('every idea file parses with the required frontmatter fields', () => {
     assert.ok(Array.isArray(meta.domains) && meta.domains.length, `${file} missing domains`);
     for (const tag of meta.domains) assert.ok(DOMAIN_TAGS.has(tag), `${file} unknown domain ${tag}`);
     assert.match(meta.created, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/, `${file} bad created datetime`);
+    assert.ok(meta.rating === undefined || [1, 2, 3].includes(meta.rating), `${file} rating must be 1, 2 or 3`);
     assert.ok(!names.has(meta.name), `duplicate idea name ${meta.name}`);
     names.add(meta.name);
     assert.ok(body.length > 200, `${file} body looks truncated`);
@@ -40,4 +42,25 @@ test('ideas sort newest first by creation datetime, ', () => {
   ];
   assert.deepEqual(sortNewestFirst(list).map((i) => i.slug), ['c', 'b', 'a', 'd']);
   assert.equal(createdAt({ created: 'nope' }), 0);
+});
+
+test('rating decides the view: none = inbox, 1 = archive, 2-3 = promising', () => {
+  assert.deepEqual([undefined, 0, 4, 'x', 1, 2, 3].map(viewOf), ['inbox', 'inbox', 'inbox', 'inbox', 'archive', 'promising', 'promising']);
+  assert.equal(validRating(2), 2);
+  assert.equal(validRating(7), 0);
+});
+
+test('promising sorts 3 stars, then 2, then newest first; other views newest first', () => {
+  const list = [
+    { slug: 'a', rating: 2, created: '2026-10-22T00:00:00Z' },
+    { slug: 'b', rating: 3, created: '2026-10-19T00:00:00Z' },
+    { slug: 'c', rating: 3, created: '2026-10-21T00:00:00Z' },
+    { slug: 'd', rating: 2, created: '2026-10-20T00:00:00Z' },
+  ];
+  assert.deepEqual(sortForView(list, 'promising').map((i) => i.slug), ['c', 'b', 'a', 'd']);
+  assert.deepEqual(sortForView(list, 'inbox').map((i) => i.slug), ['a', 'c', 'd', 'b']);
+});
+
+test('frontmatter parser reads the rating as a number', () => {
+  assert.equal(parseFrontmatter('---\nname: X\nrating: 3\n---\nBody').meta.rating, 3);
 });

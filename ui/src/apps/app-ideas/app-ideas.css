@@ -15,7 +15,26 @@
 
 .ideas-count { margin: 0 0 16px; color: var(--muted); font-size: 12px; }
 
-.idea-card { min-height: 190px; }
+.idea-card { min-height: 190px; padding: 0; }
+.idea-card-open { display: flex; flex-direction: column; align-items: flex-start; flex: 1; width: 100%; padding: 23px 23px 12px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.idea-card-open:focus-visible { outline: 2px solid var(--green-bright); outline-offset: -2px; border-radius: 15px; }
+
+.view-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.view-tab { flex: 1 1 0; max-width: 200px; min-height: 48px; padding: 0 6px; white-space: nowrap; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #59645d; font-size: 14px; font-weight: 700; }
+.view-tab:hover { border-color: #b9c8bb; }
+.view-tab-active { background: var(--green); border-color: var(--green); color: #fff; }
+.view-tab-count { margin-left: 4px; opacity: .65; font-weight: 600; }
+.view-tab:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
+
+.vote-error { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 16px; padding: 12px 16px; border: 1px solid #e8c4c0; border-radius: 10px; background: #fdf0ee; color: #8f2f25; font-size: 13px; }
+.vote-error-close { min-width: 44px; min-height: 44px; border: 0; background: none; color: inherit; font-size: 20px; }
+
+.star-rating { display: flex; gap: 4px; padding: 0 14px 14px; }
+.idea-detail .star-rating { padding: 14px 0 0; }
+.star-button { width: 52px; height: 52px; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #b3bdb4; font-size: 28px; line-height: 1; touch-action: manipulation; }
+.star-button-on { border-color: #e3c25a; background: #fff8e1; color: #d99a00; }
+.star-button:disabled { opacity: .5; }
+.star-button:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
 .idea-card-domains { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .domain-tag { padding: 3px 8px; border-radius: 6px; background: #eaf0e9; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .08em; }
 .idea-card-footer { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: auto; padding-top: 18px; }

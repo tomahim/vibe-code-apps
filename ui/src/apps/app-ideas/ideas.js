@@ -7,6 +7,7 @@
 //   domains: [WRITE, GAME]
 //   created: 2026-10-20T07:45:11Z   (required, ISO datetime in UTC, sorts newest first)
 //   issue: 56            (optional, set for ideas migrated from GitHub issues)
+//   rating: 2            (optional, 1-3 stars; absent = unvoted, shows in the Inbox)
 //   ---
 //   <markdown body>
 //
@@ -14,6 +15,7 @@
 
 import { parseFrontmatter } from './frontmatter.js';
 import { sortNewestFirst } from './sort.js';
+import { validRating } from './rating.js';
 
 const files = import.meta.glob('./ideas/*.md', { query: '?raw', import: 'default', eager: true });
 
@@ -32,6 +34,7 @@ export const ideas = sortNewestFirst(Object.entries(files)
       tagline: meta.tagline || '',
       domains: Array.isArray(meta.domains) ? meta.domains : [],
       created: meta.created || '',
+      rating: validRating(meta.rating),
       issue: typeof meta.issue === 'number' ? meta.issue : null,
       body,
     };
