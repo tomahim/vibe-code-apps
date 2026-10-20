@@ -40,10 +40,12 @@ function StarRating({ idea, rating, pending, onRate }) {
         <button
           type="button"
           className="star-reset"
+          aria-label="Clear rating, back to Inbox"
+          title="Clear rating"
           disabled={pending}
           onClick={() => onRate(idea, null)}
         >
-          Reset to Inbox
+          &times;
         </button>
       )}
     </span>

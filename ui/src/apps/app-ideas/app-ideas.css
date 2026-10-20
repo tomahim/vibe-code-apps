@@ -29,12 +29,13 @@
 .vote-error { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 16px; padding: 12px 16px; border: 1px solid #e8c4c0; border-radius: 10px; background: #fdf0ee; color: #8f2f25; font-size: 13px; }
 .vote-error-close { min-width: 44px; min-height: 44px; border: 0; background: none; color: inherit; font-size: 20px; }
 
-.star-rating { display: flex; gap: 4px; padding: 0 14px 14px; }
+.star-rating { display: flex; gap: 0; padding: 0 12px 10px; }
 .idea-detail .star-rating { padding: 14px 0 0; }
-.star-button { width: 52px; height: 52px; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #b3bdb4; font-size: 28px; line-height: 1; touch-action: manipulation; }
-.star-button-on { border-color: #e3c25a; background: #fff8e1; color: #d99a00; }
-.star-rating { align-items: center; flex-wrap: wrap; }
-.star-reset { min-height: 44px; margin-left: auto; padding: 0 14px; border: 1px solid #dfe4de; border-radius: 12px; background: #fff; color: #59645d; font-size: 13px; font-weight: 700; touch-action: manipulation; }
+.star-button { width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: #b3bdb4; font-size: 24px; line-height: 1; touch-action: manipulation; }
+.star-button-on { color: #d99a00; }
+.star-rating { align-items: center; gap: 0; }
+.star-reset { width: 40px; height: 40px; margin-left: 4px; border: 0; border-radius: 50%; background: none; color: #8a948c; font-size: 20px; line-height: 1; touch-action: manipulation; }
+.star-reset:hover { background: #eef1ec; color: var(--ink); }
 .star-reset:disabled { opacity: .5; }
 .star-button:disabled { opacity: .5; }
 .star-button:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
