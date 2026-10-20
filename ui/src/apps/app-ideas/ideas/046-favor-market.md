@@ -2,7 +2,7 @@
 name: Favor Market
 tagline: Trade Chores Without Keeping Score
 domains: [PROD, GAME]
-date: 2026-10-20
+created: 2026-10-20T07:45:11Z
 issue: 46
 ---
 

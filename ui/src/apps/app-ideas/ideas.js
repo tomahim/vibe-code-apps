@@ -5,7 +5,7 @@
 //   name: Draft Deck
 //   tagline: Play Constraint Cards, Ship an Atomic Essay
 //   domains: [WRITE, GAME]
-//   date: 2026-10-20
+//   created: 2026-10-20T07:45:11Z   (required, ISO datetime in UTC, sorts newest first)
 //   issue: 56            (optional, set for ideas migrated from GitHub issues)
 //   ---
 //   <markdown body>
@@ -13,6 +13,7 @@
 // Filenames: NNN-slug.md for migrated issues, YYYY-MM-DD-slug.md for new ideas.
 
 import { parseFrontmatter } from './frontmatter.js';
+import { sortNewestFirst } from './sort.js';
 
 const files = import.meta.glob('./ideas/*.md', { query: '?raw', import: 'default', eager: true });
 
@@ -22,7 +23,7 @@ function slugFromPath(path) {
   return path.split('/').pop().replace(/\.md$/, '');
 }
 
-export const ideas = Object.entries(files)
+export const ideas = sortNewestFirst(Object.entries(files)
   .map(([path, raw]) => {
     const { meta, body } = parseFrontmatter(raw);
     return {
@@ -30,11 +31,10 @@ export const ideas = Object.entries(files)
       name: meta.name || slugFromPath(path),
       tagline: meta.tagline || '',
       domains: Array.isArray(meta.domains) ? meta.domains : [],
-      date: meta.date || '',
+      created: meta.created || '',
       issue: typeof meta.issue === 'number' ? meta.issue : null,
       body,
     };
-  })
-  .sort((a, b) => (b.date + String(b.issue || '')).localeCompare(a.date + String(a.issue || '')));
+  }));
 
 export const usedDomains = DOMAIN_TAGS.filter((tag) => ideas.some((idea) => idea.domains.includes(tag)));

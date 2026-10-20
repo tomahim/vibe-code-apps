@@ -3,7 +3,14 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { BRAND_BADGE, BRAND_NAME } from "../../config/brand.js";
 import { ideas, usedDomains } from "./ideas.js";
+import { createdAt } from "./sort.js";
 import "./app-ideas.css";
+
+function formatCreated(idea) {
+  const time = createdAt(idea);
+  if (!time) return "";
+  return new Date(time).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+}
 
 function IdeaDetail({ idea, onClose }) {
   const html = useMemo(
@@ -26,7 +33,7 @@ function IdeaDetail({ idea, onClose }) {
           <h2>{idea.name}</h2>
           <p className="idea-detail-tagline">{idea.tagline}</p>
           <p className="idea-detail-meta">
-            {idea.date}
+            {formatCreated(idea)}
             {idea.issue ? <> &middot; from <a href={`https://github.com/tomahim/vibe-code-apps/issues/${idea.issue}`} target="_blank" rel="noreferrer">issue #{idea.issue}</a></> : null}
           </p>
           <button className="idea-detail-close" onClick={onClose} aria-label="Close idea">&times;</button>
@@ -110,7 +117,7 @@ export default function AppIdeas({ onHome }) {
             <span className="app-card-title">{idea.name}</span>
             <span className="app-card-description">{idea.tagline}</span>
             <span className="idea-card-footer">
-              <span className="idea-card-date">{idea.date}</span>
+              <span className="idea-card-date">{formatCreated(idea)}</span>
               <span className="app-card-link">Read the spec <span aria-hidden="true">&rarr;</span></span>
             </span>
           </button>

@@ -2,7 +2,7 @@
 name: Buffer Borough
 tagline: See Where Your Day Breaks Before It Does
 domains: [PROD, 3D]
-date: 2026-10-20
+created: 2026-10-20T07:51:08Z
 issue: 50
 ---
 

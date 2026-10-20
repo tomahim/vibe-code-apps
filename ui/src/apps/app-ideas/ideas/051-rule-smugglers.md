@@ -2,7 +2,7 @@
 name: Rule Smugglers
 tagline: Outsmart a Border That Never Explains Its Rules
 domains: [GAME, LEARN]
-date: 2026-10-20
+created: 2026-10-20T07:51:10Z
 issue: 51
 ---
 

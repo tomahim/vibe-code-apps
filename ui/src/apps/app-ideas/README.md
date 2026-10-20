@@ -16,11 +16,14 @@ Drop one markdown file per idea in `./ideas/`:
   name: Draft Deck
   tagline: Play Constraint Cards, Ship an Atomic Essay
   domains: [WRITE, GAME]
-  date: 2026-10-21
+  created: 2026-10-21T05:00:12Z   # required: ISO datetime in UTC, when the idea was written
   issue: 56            # optional, only for ideas migrated from a GitHub issue
   ---
   ```
 
+  `created` is required and drives the list order (newest first, ties broken by issue number
+  then filename). Use the real time you write the file, in UTC with a trailing `Z`; give
+  ideas written in the same batch distinct seconds.
   `domains` uses the repo's domain tags: PROD, SPORT, HIST, 3D, GAME, LEARN, WRITE, MEDIA.
 - Body: the idea spec in markdown (the 6-section issue template works as-is).
 

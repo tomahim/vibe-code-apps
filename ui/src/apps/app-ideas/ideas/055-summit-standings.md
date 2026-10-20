@@ -2,7 +2,7 @@
 name: Summit Standings
 tagline: Your Fantasy Season Carved Into a Mountain Range
 domains: [SPORT, 3D]
-date: 2026-10-20
+created: 2026-10-20T08:05:48Z
 issue: 55
 ---
 

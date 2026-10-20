@@ -2,7 +2,7 @@
 name: Spare Minutes
 tagline: Learn One Idea in the Gap Life Just Gave You
 domains: [LEARN, PROD]
-date: 2026-10-20
+created: 2026-10-20T08:36:30Z
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT

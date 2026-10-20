@@ -2,7 +2,7 @@
 name: Palimpsest Town
 tagline: Grow a Tiny Procedural Town From Every Paragraph You Write
 domains: [3D, WRITE]
-date: 2026-10-20
+created: 2026-10-20T08:36:31Z
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
