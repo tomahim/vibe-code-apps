@@ -4,6 +4,7 @@ tagline: Family Moments Typeset Like Front-Page History
 domains: [PROD, HIST]
 created: 2026-10-20T08:05:50Z
 issue: 57
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
