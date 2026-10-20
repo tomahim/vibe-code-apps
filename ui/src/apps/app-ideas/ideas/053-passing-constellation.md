@@ -4,6 +4,7 @@ tagline: Turn Simple Match Events Into Shapes You Can Explain
 domains: [SPORT, 3D]
 created: 2026-10-20T07:57:32Z
 issue: 53
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
