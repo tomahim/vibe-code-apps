@@ -52,7 +52,7 @@ class RateEndpointTests(SimpleTestCase):
         args = write.call_args.args
         self.assertEqual(args[3], "ui/src/apps/app-ideas/ideas/2026-10-20-demo.md")
         self.assertIn("rating: 3", args[4])
-        self.assertEqual(args[5:], ("sha1", "rate 2026-10-20-demo: 3 stars"))
+        self.assertEqual(args[5:], ("sha1", "rate 2026-10-20-demo: 3 stars [skip ci]"))
 
     @mock.patch("apps.app_ideas.views.github.write_file", side_effect=[github.Conflict(), None])
     @mock.patch("apps.app_ideas.views.github.read_file", side_effect=[(DOC, "old"), (DOC, "new")])
@@ -79,3 +79,48 @@ class RateEndpointTests(SimpleTestCase):
     def test_noop_when_unchanged(self, read, write):
         self.assertFalse(self.post().json()["committed"])
         write.assert_not_called()
+
+
+@override_settings(GITHUB_IDEAS_TOKEN="t", GITHUB_IDEAS_REPO="o/r", GITHUB_IDEAS_BRANCH="master")
+class RatingsEndpointTests(SimpleTestCase):
+    url = "/api/app-ideas/ratings"
+
+    @mock.patch("apps.app_ideas.views.github.read_ratings", return_value={"demo": 1, "new": None})
+    def test_current_values_are_returned_without_cache(self, read):
+        response = Client().get(self.url)
+        self.assertEqual(response.json(), {"ratings": {"demo": 1, "new": None}})
+        self.assertIn("no-store", response["Cache-Control"])
+        read.assert_called_once_with("t", "o/r", "master", "ui/src/apps/app-ideas/ideas")
+
+    @override_settings(GITHUB_IDEAS_TOKEN="")
+    def test_configuration_error(self):
+        self.assertEqual(Client().get(self.url).status_code, 503)
+
+    @mock.patch("apps.app_ideas.views.github.read_ratings", side_effect=github.GitHubError("unavailable"))
+    def test_failure_is_not_an_empty_inbox(self, read):
+        self.assertEqual(Client().get(self.url).status_code, 502)
+
+    def test_read_only(self):
+        self.assertEqual(Client().post(self.url).status_code, 405)
+
+
+class ReadRatingsTests(SimpleTestCase):
+    @mock.patch("apps.app_ideas.github.requests.post")
+    def test_single_snapshot_includes_unrated_and_cleared_ideas(self, post):
+        post.return_value.status_code = 200
+        post.return_value.json.return_value = {"data": {"repository": {"object": {"entries": [
+            {"name": "demo.md", "type": "blob", "object": {"text": set_rating(DOC, 1)}},
+            {"name": "clear.md", "type": "blob", "object": {"text": DOC}},
+            {"name": "README.txt", "type": "blob", "object": {"text": "ignore"}},
+        ]}}}}
+        self.assertEqual(github.read_ratings("t", "o/r", "master", "ideas"), {"demo": 1, "clear": None})
+        self.assertEqual(post.call_count, 1)
+        self.assertEqual(post.call_args.kwargs["json"]["variables"]["expression"], "master:ideas")
+
+    @mock.patch("apps.app_ideas.github.requests.post")
+    def test_graphql_errors_and_missing_repository_fail_closed(self, post):
+        post.return_value.status_code = 200
+        for data in ({"errors": [{"message": "denied"}]}, {"data": {"repository": None}}):
+            post.return_value.json.return_value = data
+            with self.assertRaises(github.GitHubError):
+                github.read_ratings("t", "o/r", "master", "ideas")

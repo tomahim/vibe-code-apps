@@ -21,3 +21,15 @@ def set_rating(text, rating):
     else:
         block = f"{block}\nrating: {rating}"
     return f"---\n{block}\n---{match.group(2)}" + text[match.end():]
+
+
+def get_rating(text):
+    """Read the same simple integer frontmatter field that set_rating writes."""
+    match = FRONTMATTER.match(text)
+    if not match:
+        raise ValueError("Idea file has no frontmatter.")
+    line = RATING_LINE.search(match.group(1))
+    if not line:
+        return None
+    value = line.group(0).partition(":")[2].strip()
+    return int(value) if value in ("1", "2", "3") else None

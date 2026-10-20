@@ -5,7 +5,8 @@ from urllib.parse import urlsplit
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.cache import never_cache
 
 from . import github
 from .frontmatter import set_rating
@@ -24,6 +25,22 @@ def same_origin(request):
     """Browsers always send Origin on cross-site POSTs; reject a mismatching one."""
     origin = request.headers.get("Origin")
     return not origin or urlsplit(origin).netloc == request.get_host()
+
+
+@never_cache
+@require_GET
+def ratings(request):
+    if not settings.GITHUB_IDEAS_TOKEN:
+        return error("Ratings are not configured on the api service.", 503)
+    try:
+        values = github.read_ratings(
+            settings.GITHUB_IDEAS_TOKEN, settings.GITHUB_IDEAS_REPO,
+            settings.GITHUB_IDEAS_BRANCH, IDEAS_DIR,
+        )
+        return JsonResponse({"ratings": values})
+    except Exception:
+        logger.exception("Read app idea ratings failed")
+        return error("Could not load current ratings from GitHub.", 502)
 
 
 # Not session/CSRF based: the UI is a static bundle with no login. Access is
@@ -62,7 +79,7 @@ def rate(request, slug):
             if updated == text:
                 return JsonResponse({"slug": slug, "rating": rating, "committed": False})
             try:
-                github.write_file(token, repo, branch, path, updated, sha, f"rate {slug}: {label}")
+                github.write_file(token, repo, branch, path, updated, sha, f"rate {slug}: {label} [skip ci]")
                 return JsonResponse({"slug": slug, "rating": rating, "committed": True})
             except github.Conflict:
                 logger.info("rate %s: sha conflict, retry %s", slug, attempt + 1)
