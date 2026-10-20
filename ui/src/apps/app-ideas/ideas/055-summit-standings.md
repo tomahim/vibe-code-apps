@@ -4,6 +4,7 @@ tagline: Your Fantasy Season Carved Into a Mountain Range
 domains: [SPORT, 3D]
 created: 2026-10-20T08:05:48Z
 issue: 55
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
