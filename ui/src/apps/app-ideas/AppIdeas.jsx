@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { BRAND_BADGE, BRAND_NAME } from "../../config/brand.js";
@@ -90,12 +90,44 @@ export default function AppIdeas({ onHome }) {
   const [activeDomains, setActiveDomains] = useState([]);
   const [selected, setSelected] = useState(null);
   const [view, setView] = useState("inbox");
-  // Votes made in this page, held in memory only until the redeployed bundle has them.
+  // Current GitHub ratings, then optimistic page-local updates. No browser storage.
   const [votes, setVotes] = useState({});
   const [pending, setPending] = useState({});
   const [voteError, setVoteError] = useState("");
 
-  const ratingOf = (idea) => (idea.slug in votes ? votes[idea.slug] || 0 : idea.rating);
+  const [ratingsLoaded, setRatingsLoaded] = useState(false);
+  const [ratingsError, setRatingsError] = useState("");
+  const [reloadRatings, setReloadRatings] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    let active = true;
+    setRatingsError("");
+    fetch("/api/app-ideas/ratings", { cache: "no-store", signal: controller.signal })
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        if (!data.ratings || typeof data.ratings !== "object" || Array.isArray(data.ratings)) {
+          throw new Error("Invalid ratings response");
+        }
+        if (active) {
+          setVotes(data.ratings);
+          setRatingsLoaded(true);
+        }
+      })
+      .catch((error) => {
+        if (active) setRatingsError(`Could not load current ratings: ${error.message}`);
+      })
+      .finally(() => clearTimeout(timeout));
+    return () => { active = false; clearTimeout(timeout); controller.abort(); };
+  }, [reloadRatings]);
+
+  const currentIdeas = useMemo(() => ideas.map((idea) => ({
+    ...idea, rating: idea.slug in votes ? votes[idea.slug] || 0 : 0,
+  })), [votes]);
+
+  const ratingOf = (idea) => (idea.slug in votes ? votes[idea.slug] || 0 : 0);
 
   async function rate(idea, rating) {
     const previous = idea.slug in votes ? votes[idea.slug] : idea.rating;
@@ -128,20 +160,20 @@ export default function AppIdeas({ onHome }) {
 
   const counts = useMemo(() => {
     const result = { inbox: 0, promising: 0, archive: 0 };
-    for (const idea of ideas) result[viewOf(idea.slug in votes ? votes[idea.slug] : idea.rating)] += 1;
+    for (const idea of currentIdeas) result[viewOf(idea.rating)] += 1;
     return result;
-  }, [votes]);
+  }, [currentIdeas]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const inView = ideas.filter((idea) => viewOf(idea.slug in votes ? votes[idea.slug] : idea.rating) === view);
+    const inView = currentIdeas.filter((idea) => viewOf(idea.rating) === view);
     return sortForView(inView, view).filter((idea) => {
       if (activeDomains.length && !activeDomains.every((tag) => idea.domains.includes(tag))) return false;
       if (!q) return true;
       const haystack = `${idea.name} ${idea.tagline} ${idea.body}`.toLowerCase();
       return q.split(/\s+/).every((word) => haystack.includes(word));
     });
-  }, [query, activeDomains, view, votes]);
+  }, [query, activeDomains, view, currentIdeas]);
 
   return (
     <main className="ideas-page">
@@ -167,7 +199,7 @@ export default function AppIdeas({ onHome }) {
             aria-pressed={view === name}
             onClick={() => setView(name)}
           >
-            {VIEW_LABELS[name]} <span className="view-tab-count">{counts[name]}</span>
+            {VIEW_LABELS[name]} <span className="view-tab-count">{ratingsLoaded ? counts[name] : "..."}</span>
           </button>
         ))}
       </nav>
@@ -201,6 +233,11 @@ export default function AppIdeas({ onHome }) {
         </div>
       </section>
 
+      {!ratingsLoaded && <p role="status">{ratingsError || "Loading current ratings..."}
+        {ratingsError && <> <button onClick={() => setReloadRatings((n) => n + 1)}>Retry</button></>}
+      </p>}
+
+      {ratingsLoaded && <>
       <p className="ideas-count" aria-live="polite">
         {filtered.length === counts[view] ? `${counts[view]} ideas` : `${filtered.length} of ${counts[view]} ideas`}
       </p>
@@ -227,6 +264,8 @@ export default function AppIdeas({ onHome }) {
       {filtered.length === 0 && (
         <p className="ideas-empty">{query || activeDomains.length ? "No idea matches. Try another word or remove a domain filter." : VIEW_EMPTY[view]}</p>
       )}
+
+      </>}
 
       {selected && <IdeaDetail idea={selected} rating={ratingOf(selected)} pending={!!pending[selected.slug]} onRate={rate} onClose={() => setSelected(null)} />}
     </main>

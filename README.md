@@ -89,3 +89,27 @@ GitHub Actions deploys `api/` when changes under `api/` reach `master` and `ui/`
 - `RAILWAY_TOKEN`
 
 The service and environment IDs are stored in the workflows; only the Railway project token is a repository secret.
+
+### App Ideas ratings
+
+Idea content is bundled from `ui/src/apps/app-ideas/ideas/*.md`. New ideas and
+content edits still use the normal UI build/deploy on merge.
+
+Ratings stay in each markdown file's frontmatter, with GitHub as the only durable
+store. On opening App Ideas, the UI reads `GET /api/app-ideas/ratings` from the API,
+which reads the current configured GitHub branch in one GraphQL request. The API
+returns only slug-to-rating values, with no cache, and keeps its token private.
+Loading and read failures are shown explicitly with a Retry button, rather than
+showing old bundled ratings. No localStorage or other browser persistence is used.
+
+`POST /api/app-ideas/<slug>/rate` writes only the rating to GitHub. These commits
+include `[skip ci]`, so a vote does not start a GitHub Actions pipeline or Railway
+deploy. This marker is only added by the rating endpoint; ordinary daily idea PRs
+keep their validation and deploy. It skips all push/pull-request workflows for that
+rating-only commit, not just UI deployment. GitHub documents this behavior at
+https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs.
+
+Deploy the API and UI changes together once when introducing this behavior. The
+API needs its existing `GITHUB_IDEAS_TOKEN`, `GITHUB_IDEAS_REPO` and
+`GITHUB_IDEAS_BRANCH`; no new service or database is needed. Each page open adds one
+GitHub read, so showing current ratings depends on API/GitHub availability.
