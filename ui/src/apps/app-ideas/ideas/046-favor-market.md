@@ -4,6 +4,7 @@ tagline: Trade Chores Without Keeping Score
 domains: [PROD, GAME]
 created: 2026-10-20T07:45:11Z
 issue: 46
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
