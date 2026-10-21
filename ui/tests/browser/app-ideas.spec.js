@@ -18,6 +18,7 @@ async function ratings(page, initial = {}) {
 test('a saved vote survives refresh without a new bundle, including clear and promising sort', async ({ page }) => {
   await ratings(page, {}); // API is authoritative, including when the bundled md has rating 1.
   await page.goto(path);
+  await page.getByRole('button', { name: 'List', exact: true }).click(); // Inbox defaults to the swipe deck
   await expect(card(page)).toBeVisible();
   await card(page).getByRole('button', { name: '1 star', exact: true }).click();
   await expect(card(page)).toHaveCount(0);
@@ -29,6 +30,7 @@ test('a saved vote survives refresh without a new bundle, including clear and pr
   await page.screenshot({ path: '/tmp/idea-ratings-archive.png', fullPage: true });
   await card(page).getByRole('button', { name: 'Clear rating, back to Inbox' }).click();
   await page.reload();
+  await page.getByRole('button', { name: 'List', exact: true }).click(); // Inbox defaults to the swipe deck
   await expect(card(page)).toBeVisible();
   await card(page).getByRole('button', { name: '3 stars', exact: true }).click();
   await page.getByRole('button', { name: /^Promising/ }).click();
@@ -79,4 +81,43 @@ test('Promising sorts by live ratings rather than bundled ratings', async ({ pag
   await page.getByRole('button', { name: /^Promising/ }).click();
   await expect(page.locator('.idea-card').first()).toContainText(name);
   await expect(page.locator('.idea-card').nth(1)).toContainText('Favor Market');
+});
+
+test('Inbox swipe deck: buttons rate, details expands, back returns', async ({ page }) => {
+  await ratings(page, {});
+  await page.goto(path); // Inbox defaults to swipe mode
+  const deck = page.locator('.swipe-deck');
+  await expect(deck).toBeVisible();
+  await expect(page.locator('.idea-card')).toHaveCount(0); // no grid in swipe mode
+  const firstName = await deck.locator('.swipe-card-name').textContent();
+  await expect(deck.locator('.swipe-card-pitch')).not.toBeEmpty();
+  await expect(deck.locator('.star-rating')).toHaveCount(0); // only pitch + details, no star row
+  await deck.getByRole('button', { name: 'Details' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('dialog')).toContainText('CREATIVE CONCEPT');
+  await page.getByRole('button', { name: 'Back to the idea cards' }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // back to the same card
+  await deck.getByRole('button', { name: 'Swipe up: 3 stars' }).click();
+  await expect(deck.locator('.swipe-card-name')).not.toHaveText(firstName); // deck advances
+  await page.getByRole('button', { name: /^Promising/ }).click();
+  await expect(page.locator('.idea-card').first()).toContainText(firstName);
+});
+
+test('Inbox swipe deck: a pointer swipe down archives the card', async ({ page }) => {
+  await ratings(page, {});
+  await page.goto(path);
+  const deckCard = page.locator('.swipe-card');
+  await expect(deckCard).toBeVisible();
+  const firstName = await deckCard.locator('.swipe-card-name').textContent();
+  const box = await deckCard.boundingBox();
+  const cx = box.x + box.width / 2;
+  const cy = box.y + box.height / 2;
+  await page.mouse.move(cx, cy);
+  await page.mouse.down();
+  await page.mouse.move(cx, cy + 200, { steps: 8 });
+  await page.mouse.up();
+  await expect(page.locator('.swipe-card-name')).not.toHaveText(firstName);
+  await page.getByRole('button', { name: /^Archive/ }).click();
+  await expect(page.locator('.idea-card').first()).toContainText(firstName);
 });

@@ -1,6 +1,7 @@
 ---
 name: Hindsight League
 tagline: Predict the Match Before the Reveal
+pitch: Watch a classic match with the result hidden and predict each next event before the reveal, scoring points for reading the game.
 domains: [SPORT, GAME, LEARN]
 created: 2026-10-20T07:45:16Z
 issue: 48

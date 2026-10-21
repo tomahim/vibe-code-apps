@@ -1,6 +1,7 @@
 ---
 name: Rule Smugglers
 tagline: Outsmart a Border That Never Explains Its Rules
+pitch: Smuggle words past a border that never explains its rules, and deduce them from what gets confiscated.
 domains: [GAME, LEARN]
 created: 2026-10-20T07:51:10Z
 issue: 51

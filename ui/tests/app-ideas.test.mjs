@@ -17,6 +17,8 @@ test('every idea file parses with the required frontmatter fields', () => {
   for (const { file, meta, body } of ideas) {
     assert.ok(typeof meta.name === 'string' && meta.name.length, `${file} missing name`);
     assert.ok(typeof meta.tagline === 'string' && meta.tagline.length, `${file} missing tagline`);
+    assert.ok(typeof meta.pitch === 'string' && meta.pitch.length, `${file} missing pitch`);
+    assert.ok(!meta.pitch.includes('\n'), `${file} pitch must be one line`);
     assert.ok(Array.isArray(meta.domains) && meta.domains.length, `${file} missing domains`);
     for (const tag of meta.domains) assert.ok(DOMAIN_TAGS.has(tag), `${file} unknown domain ${tag}`);
     assert.match(meta.created, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/, `${file} bad created datetime`);

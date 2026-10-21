@@ -1,6 +1,7 @@
 ---
 name: Favor Market
 tagline: Trade Chores Without Keeping Score
+pitch: Log a chore as credit and spend it asking the household for one back, so favors balance without anyone keeping score.
 domains: [PROD, GAME]
 created: 2026-10-20T07:45:11Z
 issue: 46

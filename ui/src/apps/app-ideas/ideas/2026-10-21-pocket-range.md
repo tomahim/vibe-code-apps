@@ -1,6 +1,7 @@
 ---
 name: Pocket Range
 tagline: Turn Any Run Into a Miniature Mountain Diorama You Can Print
+pitch: Turn any run into a miniature 3D mountain diorama with a glowing trail thread, ready to print.
 domains: [SPORT, 3D, HIST]
 created: 2026-10-21T06:09:44Z
 ---

@@ -1,6 +1,7 @@
 ---
 name: Bounty Board
 tagline: Pay Reviewers in Points for Confirmed Findings, Not Comments
+pitch: Open PRs post bounties, and reviewers earn points only for findings the author confirms and fixes.
 domains: [GAME, PROD]
 created: 2026-10-21T05:48:08Z
 ---

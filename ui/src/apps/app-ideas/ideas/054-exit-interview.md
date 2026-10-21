@@ -1,6 +1,7 @@
 ---
 name: Exit Interview
 tagline: Give Every Saved Link a Job or Let It Go
+pitch: Give every saved link a short interview: assign it a job to do, or let it go for good.
 domains: [MEDIA, PROD]
 created: 2026-10-20T07:57:34Z
 issue: 54

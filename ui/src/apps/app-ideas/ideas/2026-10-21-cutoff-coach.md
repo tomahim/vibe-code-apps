@@ -1,6 +1,7 @@
 ---
 name: Cutoff Coach
 tagline: Build a Checkpoint Pacing Plan From the Race's Own Past Results
+pitch: Build a per-checkpoint pacing plan with cutoff buffers derived from the race's own past results.
 domains: [SPORT, PROD]
 created: 2026-10-21T05:59:11Z
 ---

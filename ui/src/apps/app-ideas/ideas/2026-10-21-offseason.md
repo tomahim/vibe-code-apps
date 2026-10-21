@@ -1,6 +1,7 @@
 ---
 name: Offseason
 tagline: Ride Your Own Summer Routes Indoors, Against the Ghost of Your Best Day
+pitch: Ride your own summer GPX routes indoors on stylised 3D terrain, paced by ghosts of your past rides.
 domains: [SPORT, 3D, GAME]
 created: 2026-10-21T06:13:03Z
 ---

@@ -1,6 +1,7 @@
 ---
 name: Stats Bingo
 tagline: Your Strava History Secretly Fills a Bingo Card of Absurd Achievements
+pitch: Your Strava history secretly fills a 25-square bingo card of absurd achievements, with badges for lines and blackouts.
 domains: [SPORT, GAME]
 created: 2026-10-21T05:57:42Z
 ---

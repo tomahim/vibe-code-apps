@@ -1,6 +1,7 @@
 ---
 name: Draft Deck
 tagline: Play Constraint Cards, Ship an Atomic Essay
+pitch: Get dealt constraint cards, ante into a 100-word atomic essay, and bank points when you ship it.
 domains: [WRITE, GAME]
 created: 2026-10-20T08:05:49Z
 issue: 56

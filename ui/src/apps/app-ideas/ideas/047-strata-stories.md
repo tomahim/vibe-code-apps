@@ -1,6 +1,7 @@
 ---
 name: Strata Stories
 tagline: Excavate History One Layer at a Time
+pitch: Dig through stacked layers of an era, brushing away each stratum to uncover artifacts and the story they tell.
 domains: [3D, HIST, LEARN]
 created: 2026-10-20T07:45:13Z
 issue: 47

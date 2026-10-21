@@ -1,6 +1,7 @@
 ---
 name: Run Wrapped
 tagline: Your Strava Season as a Set of Ridiculous, Shareable Stat Cards
+pitch: Your Strava season as deadpan, shareable stat cards mined from your own data.
 domains: [SPORT, MEDIA]
 created: 2026-10-21T05:57:41Z
 ---

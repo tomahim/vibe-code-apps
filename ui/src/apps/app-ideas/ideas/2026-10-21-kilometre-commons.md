@@ -1,6 +1,7 @@
 ---
 name: Kilometre Commons
 tagline: Your Club's Indoor Miles Build One Shared World Together
+pitch: Your club's indoor kilometres build one shared valley together, with milestone votes and rush-hour bonuses.
 domains: [SPORT, GAME, 3D]
 created: 2026-10-21T06:13:05Z
 ---

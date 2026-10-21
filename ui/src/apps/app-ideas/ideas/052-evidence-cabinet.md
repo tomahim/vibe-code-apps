@@ -1,6 +1,7 @@
 ---
 name: Evidence Cabinet
 tagline: Rebuild a Historical Claim From Its Sources
+pitch: Rebuild a historical claim by sorting real sources into the argument they actually support.
 domains: [HIST, LEARN, GAME]
 created: 2026-10-20T07:57:29Z
 issue: 52

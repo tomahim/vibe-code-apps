@@ -1,6 +1,7 @@
 ---
 name: Margin Mixer
 tagline: Turn Two Saved Ideas Into One Original Thought
+pitch: Pick two saved notes and write the one sentence that connects them into an original thought.
 domains: [MEDIA, WRITE, LEARN]
 created: 2026-10-20T07:51:06Z
 issue: 49

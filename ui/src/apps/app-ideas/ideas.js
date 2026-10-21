@@ -4,6 +4,7 @@
 //   ---
 //   name: Draft Deck
 //   tagline: Play Constraint Cards, Ship an Atomic Essay
+//   pitch: Get dealt constraint cards, ante into a 100-word essay, bank points.
 //   domains: [WRITE, GAME]
 //   created: 2026-10-20T07:45:11Z   (required, ISO datetime in UTC, sorts newest first)
 //   issue: 56            (optional, set for ideas migrated from GitHub issues)
@@ -32,6 +33,7 @@ export const ideas = sortNewestFirst(Object.entries(files)
       slug: slugFromPath(path),
       name: meta.name || slugFromPath(path),
       tagline: meta.tagline || '',
+      pitch: meta.pitch || '',
       domains: Array.isArray(meta.domains) ? meta.domains : [],
       created: meta.created || '',
       rating: validRating(meta.rating),

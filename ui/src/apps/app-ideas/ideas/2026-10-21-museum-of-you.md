@@ -1,6 +1,7 @@
 ---
 name: Museum of You
 tagline: Your Strava History Curated as a Museum, Eras, Exhibits and Records
+pitch: Walk a small 3D museum of your running history: era rooms, a record shelf and a hall of extremes.
 domains: [SPORT, HIST, 3D]
 created: 2026-10-21T05:57:43Z
 ---

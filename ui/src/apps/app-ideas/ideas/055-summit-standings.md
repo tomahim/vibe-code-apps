@@ -1,6 +1,7 @@
 ---
 name: Summit Standings
 tagline: Your Fantasy Season Carved Into a Mountain Range
+pitch: See your fantasy season standings carved into a 3D mountain range where each team is a peak.
 domains: [SPORT, 3D]
 created: 2026-10-20T08:05:48Z
 issue: 55
