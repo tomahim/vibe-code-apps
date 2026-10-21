@@ -104,8 +104,11 @@
 
 @media (max-width: 700px) {
   .swipe-stage { padding: 40px 30px; }
-  .swipe-hint-left { left: 6px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
-  .swipe-hint-right { right: 6px; writing-mode: vertical-rl; }
+  .swipe-hint-left, .swipe-hint-right { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .swipe-hint-left { left: 6px; }
+  .swipe-hint-right { right: 6px; }
+  .swipe-hint-left .swipe-hint-label, .swipe-hint-right .swipe-hint-label { writing-mode: vertical-rl; }
+  .swipe-hint-left .swipe-hint-arrow, .swipe-hint-right .swipe-hint-arrow { font-size: 16px; }
 }
 
 /* Full-screen swipe mode (no header, tabs or filters; oldest first) */

@@ -163,8 +163,8 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) 
       </div>
       <div className="swipe-stage">
         <span className={`swipe-hint swipe-hint-top${active === "up" ? " swipe-hint-active" : ""}`} aria-hidden="true">&uarr; 3 stars</span>
-        <span className={`swipe-hint swipe-hint-left${active === "left" ? " swipe-hint-active" : ""}`} aria-hidden="true">&larr; 2 stars</span>
-        <span className={`swipe-hint swipe-hint-right${active === "right" ? " swipe-hint-active" : ""}`} aria-hidden="true">Skip &rarr;</span>
+        <span className={`swipe-hint swipe-hint-left${active === "left" ? " swipe-hint-active" : ""}`} aria-hidden="true"><span className="swipe-hint-arrow">&larr;</span> <span className="swipe-hint-label">2 stars</span></span>
+        <span className={`swipe-hint swipe-hint-right${active === "right" ? " swipe-hint-active" : ""}`} aria-hidden="true"><span className="swipe-hint-label">Skip</span> <span className="swipe-hint-arrow">&rarr;</span></span>
         <span className={`swipe-hint swipe-hint-bottom${active === "down" ? " swipe-hint-active" : ""}`} aria-hidden="true">&darr; 1 star</span>
         <div
           className={`swipe-card${drag ? " swipe-card-dragging" : ""}`}
