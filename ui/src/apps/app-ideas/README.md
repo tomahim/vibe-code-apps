@@ -43,13 +43,17 @@ rate: **up = 3 stars, left or right = 2 stars, down = 1 star**; on-screen button
 and arrow keys do the same. A rated idea leaves the Inbox, so the deck advances.
 A Swipe/List toggle restores the grid. Promising and Archive stay grid views.
 
-## Ratings (Inbox / Promising / Archive)
+## Ratings (Inbox / Improve or drop / Promising / Archive)
 
 Thomas rates each idea 1 to 3 stars. The `rating` frontmatter line is the only
 state; nothing is stored in the browser.
 
 - No `rating` (or an invalid value): **Inbox** (unvoted). New ideas must not set it.
-- `rating: 2` or `3`: **Promising**, sorted 3 stars first, then 2, then newest `created`.
+- `rating: 2`: **Improve or drop**: a good idea that lacks something. Promote it
+  to 3 or drop it to 1. This tab is capped at 30 ideas (shown as `n/30`); when it
+  is full, rating another Inbox idea 2 stars is refused until an existing one is
+  re-rated to 3 or 1. Other ratings are never blocked.
+- `rating: 3`: **Promising**, sorted newest `created` first.
 - `rating: 1`: **Archive**.
 
 A rated idea shows a small "x" button (or tap the current star again): it sends `rating: null`, which removes the `rating` line.
