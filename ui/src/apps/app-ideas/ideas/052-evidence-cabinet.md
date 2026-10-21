@@ -4,6 +4,7 @@ tagline: Rebuild a Historical Claim From Its Sources
 domains: [HIST, LEARN, GAME]
 created: 2026-10-20T07:57:29Z
 issue: 52
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
