@@ -4,7 +4,7 @@ tagline: Reveal a Procedural 3D World With Every Kilometre You Run
 pitch: Every run you log clears fog on a procedural 3D landscape, revealing a world seeded just for you.
 domains: [SPORT, 3D, GAME]
 created: 2026-10-20T20:14:03Z
-rating: 2
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
