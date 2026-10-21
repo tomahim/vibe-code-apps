@@ -4,7 +4,6 @@ tagline: Cross History's Great Routes One Training Week at a Time
 pitch: Your weekly kilometres move a caravan along a real historic route, unlocking a journal card at every checkpoint.
 domains: [SPORT, HIST, GAME]
 created: 2026-10-20T20:17:03Z
-rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
