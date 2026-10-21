@@ -96,6 +96,31 @@ test('Promising holds only 3 stars; 2 stars wait in Improve or drop with its cap
   await expect(page.getByRole('button', { name: /^Improve or drop/ })).toContainText('1/30');
 });
 
+test('Skip passes to the next idea without rating and the card comes back', async ({ page }) => {
+  const fs = await import('node:fs/promises');
+  const dir = new URL('../../src/apps/app-ideas/ideas/', import.meta.url);
+  const slugs = (await fs.readdir(dir)).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, '')).sort();
+  const [first, second] = slugs; // deck deals oldest first
+  const rest = Object.fromEntries(slugs.slice(2).map((s) => [s, 1]));
+  let rated = false;
+  await page.route('**/api/app-ideas/ratings', (route) => route.fulfill({ json: { ratings: rest } }));
+  await page.route('**/api/app-ideas/*/rate', (route) => { rated = true; return route.fulfill({ json: { committed: true } }); });
+  await page.goto(path);
+  const deck = page.locator('.swipe-deck');
+  await deck.waitFor();
+  await expect(deck.locator('.swipe-card-name')).toHaveText(/./);
+  const firstName = await deck.locator('.swipe-card-name').textContent();
+  await expect(deck.locator('.swipe-hint-right')).toHaveText('Skip →');
+  await deck.press('ArrowRight'); // swipe right = skip
+  const secondName = await deck.locator('.swipe-card-name').textContent();
+  expect(secondName).not.toEqual(firstName);
+  await expect(deck.locator('.swipe-progress')).toHaveText('2 ideas left'); // nothing rated
+  expect(rated).toBe(false);
+  await deck.press('ArrowRight');
+  await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // back of the deck
+  expect(rated).toBe(false);
+});
+
 test('a full Improve or drop tab (30) blocks a new 2 stars with an explanation', async ({ page }) => {
   const fs = await import('node:fs/promises');
   const dir = new URL('../../src/apps/app-ideas/ideas/', import.meta.url);
@@ -106,14 +131,14 @@ test('a full Improve or drop tab (30) blocks a new 2 stars with an explanation',
   const deck = page.locator('.swipe-deck');
   await deck.waitFor();
   const firstName = await deck.locator('.swipe-card-name').textContent();
-  await deck.getByRole('button', { name: 'Swipe left: 2 stars' }).click();
+  await deck.press('ArrowLeft'); // swipe left = 2 stars
   await expect(page.getByRole('alert')).toContainText('Improve or drop is full (30)');
   await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // card stays
-  await page.getByRole('button', { name: 'Swipe up: 3 stars' }).click(); // other ratings still work
+  await deck.press('ArrowUp'); // other ratings still work
   await expect(deck.locator('.swipe-card-name')).not.toHaveText(firstName);
 });
 
-test('Inbox swipe deck: buttons rate, details expands, back returns', async ({ page }) => {
+test('Inbox swipe deck: keys rate, details expands, back returns', async ({ page }) => {
   await ratings(page, {});
   await page.goto(path); // Inbox defaults to swipe mode
   const deck = page.locator('.swipe-deck');
@@ -128,7 +153,8 @@ test('Inbox swipe deck: buttons rate, details expands, back returns', async ({ p
   await page.getByRole('button', { name: 'Back to the idea cards' }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // back to the same card
-  await deck.getByRole('button', { name: 'Swipe up: 3 stars' }).click();
+  await expect(deck.locator('.swipe-hint-left')).toHaveText('← 2 stars');
+  await deck.press('ArrowUp'); // swipe up = 3 stars
   await expect(deck.locator('.swipe-card-name')).not.toHaveText(firstName); // deck advances
   await exitSwipe(page);
   await page.getByRole('button', { name: /^Promising/ }).click();

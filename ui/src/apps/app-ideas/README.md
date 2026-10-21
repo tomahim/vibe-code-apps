@@ -39,8 +39,11 @@ The list, search, domain filters and detail view update automatically at build t
 
 The Inbox defaults to a swipe deck: one card at a time showing only the pitch, with
 a Details button that expands the full spec (Back returns to the card). Swipe to
-rate: **up = 3 stars, left or right = 2 stars, down = 1 star**; on-screen buttons
-and arrow keys do the same. A rated idea leaves the Inbox, so the deck advances.
+rate: **up = 3 stars, left = 2 stars, down = 1 star**; **right skips** the card
+without rating it (no API call, no commit) and sends it to the back of the deck,
+so skipped cards come back once the fresh ones are done. There are no on-screen
+buttons: the gestures are the interface, with hint labels on all four sides. On
+desktop the arrow keys mirror the gestures and Space or `s` skips.
 A Swipe/List toggle restores the grid. Promising and Archive stay grid views.
 
 ## Ratings (Inbox / Improve or drop / Promising / Archive)
