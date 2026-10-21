@@ -4,6 +4,7 @@ tagline: Paste a Trail Race, Get the Briefing Its Organizers Never Wrote
 pitch: Paste a trail race and get a one-page briefing from its GPX and past results: finisher rate, DNF hotspots, cutoff pressure.
 domains: [SPORT, MEDIA]
 created: 2026-10-21T05:59:09Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
