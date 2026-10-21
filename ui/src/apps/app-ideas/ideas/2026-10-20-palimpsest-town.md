@@ -1,6 +1,7 @@
 ---
 name: Palimpsest Town
 tagline: Grow a Tiny Procedural Town From Every Paragraph You Write
+pitch: Every paragraph you write becomes a building shaped by your prose style, growing a town of your drafts.
 domains: [3D, WRITE]
 created: 2026-10-20T08:36:31Z
 ---

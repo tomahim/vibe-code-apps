@@ -1,6 +1,7 @@
 ---
 name: Passing Constellation
 tagline: Turn Simple Match Events Into Shapes You Can Explain
+pitch: Log simple match events and watch them connect into a constellation shape you can explain.
 domains: [SPORT, 3D]
 created: 2026-10-20T07:57:32Z
 issue: 53

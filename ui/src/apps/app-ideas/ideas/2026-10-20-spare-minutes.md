@@ -1,6 +1,7 @@
 ---
 name: Spare Minutes
 tagline: Learn One Idea in the Gap Life Just Gave You
+pitch: Tap how many minutes you have (2, 5 or 12) and get one atomic lesson that finishes inside it.
 domains: [LEARN, PROD]
 created: 2026-10-20T08:36:30Z
 ---

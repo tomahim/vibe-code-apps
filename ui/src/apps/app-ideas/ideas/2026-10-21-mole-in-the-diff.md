@@ -1,6 +1,7 @@
 ---
 name: Mole in the Diff
 tagline: One Planted Bug Hides in This PR, Find It Before You Approve
+pitch: Hunt the one deliberately planted bug hiding in a practice diff before you approve it.
 domains: [GAME, LEARN]
 created: 2026-10-21T05:48:09Z
 ---

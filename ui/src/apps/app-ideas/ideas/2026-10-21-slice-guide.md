@@ -1,6 +1,7 @@
 ---
 name: Slice Guide
 tagline: Split Any Oversized PR Into a Stack of Small Reviewable Commits
+pitch: Split an oversized PR into a stack of small, ordered slices you can approve one at a time.
 domains: [PROD]
 created: 2026-10-21T05:48:05Z
 ---

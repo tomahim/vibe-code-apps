@@ -1,6 +1,7 @@
 ---
 name: Rumour Mill
 tagline: Score Every Transfer Rumour and Learn Which Journalists to Trust
+pitch: File transfer rumours with their source, resolve them when the window closes, and build a trust table of journalists.
 domains: [SPORT, MEDIA]
 created: 2026-10-20T17:35:16Z
 ---

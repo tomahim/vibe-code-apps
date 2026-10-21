@@ -16,6 +16,7 @@ Drop one markdown file per idea in `./ideas/`:
   ---
   name: Draft Deck
   tagline: Play Constraint Cards, Ship an Atomic Essay
+  pitch: Get dealt constraint cards, ante into a 100-word atomic essay, and bank points when you ship it.
   domains: [WRITE, GAME]
   created: 2026-10-21T05:00:12Z   # required: ISO datetime in UTC, when the idea was written
   issue: 56            # optional, only for ideas migrated from a GitHub issue
@@ -23,6 +24,8 @@ Drop one markdown file per idea in `./ideas/`:
   ---
   ```
 
+  `pitch` is required: one line, 1-2 plain sentences summarising what the app does
+  (this is what the Inbox swipe card shows).
   `created` is required and drives the list order (newest first, ties broken by issue number
   then filename). Use the real time you write the file, in UTC with a trailing `Z`; give
   ideas written in the same batch distinct seconds.
@@ -31,6 +34,14 @@ Drop one markdown file per idea in `./ideas/`:
 
 The list, search, domain filters and detail view update automatically at build time.
 `npm test` validates that every idea file parses and carries the required fields.
+
+## Inbox swipe deck
+
+The Inbox defaults to a swipe deck: one card at a time showing only the pitch, with
+a Details button that expands the full spec (Back returns to the card). Swipe to
+rate: **up = 3 stars, left or right = 2 stars, down = 1 star**; on-screen buttons
+and arrow keys do the same. A rated idea leaves the Inbox, so the deck advances.
+A Swipe/List toggle restores the grid. Promising and Archive stay grid views.
 
 ## Ratings (Inbox / Promising / Archive)
 

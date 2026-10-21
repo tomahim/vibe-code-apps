@@ -1,6 +1,7 @@
 ---
 name: Angle Auction
 tagline: Bid Constraint Cards Against Bookmark Topics and Write the Winning Angle
+pitch: Pair angle cards with your bookmarked articles, then write the pairing that promises the most original take.
 domains: [WRITE, MEDIA, LEARN]
 created: 2026-10-21T05:41:21Z
 ---

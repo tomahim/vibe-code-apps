@@ -1,6 +1,7 @@
 ---
 name: Raid Review
 tagline: The Whole Team Raids the Big PR: Every File Claimed, the Diff Boss Falls
+pitch: The whole team raids a big PR as a 3D keep, claiming and clearing files until no room ships unseen.
 domains: [GAME, 3D]
 created: 2026-10-21T05:48:10Z
 ---

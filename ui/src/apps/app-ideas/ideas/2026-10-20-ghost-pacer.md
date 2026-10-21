@@ -1,6 +1,7 @@
 ---
 name: Ghost Pacer
 tagline: Race a Historic Record Holder Over Your Own Training Run
+pitch: Drop a GPX and race a legendary pace scaled to your route, with the story of the legend attached.
 domains: [SPORT, HIST]
 created: 2026-10-20T08:36:32Z
 rating: 1

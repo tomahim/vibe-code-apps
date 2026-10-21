@@ -1,6 +1,7 @@
 ---
 name: Alpine Herbarium
 tagline: Grow a Procedural 3D Forest Where Every Tree Is One Run
+pitch: Every run grows a unique L-system tree from its metrics, turning your season into a walkable grove.
 domains: [SPORT, 3D, GAME]
 created: 2026-10-21T06:09:45Z
 ---

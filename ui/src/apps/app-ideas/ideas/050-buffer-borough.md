@@ -1,6 +1,7 @@
 ---
 name: Buffer Borough
 tagline: See Where Your Day Breaks Before It Does
+pitch: Map your day as a tiny town of commitments and see which buildings collapse first when one meeting slips.
 domains: [PROD, 3D]
 created: 2026-10-20T07:51:08Z
 issue: 50

@@ -1,6 +1,7 @@
 ---
 name: Bookmark Terrarium
 tagline: Grow Your Saved Links Into a Tiny 3D Garden That Wilts If You Ignore It
+pitch: Saved links grow as plants in a 3D terrarium; read one and note a learning to make it bloom.
 domains: [MEDIA, 3D]
 created: 2026-10-21T05:02:03Z
 ---

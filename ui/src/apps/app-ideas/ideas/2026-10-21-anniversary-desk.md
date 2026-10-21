@@ -1,6 +1,7 @@
 ---
 name: Anniversary Desk
 tagline: Write the Front Page for Today's Date, Any Year in History
+pitch: Get three facts from this date in a past year plus a voice constraint, and write a 60-word dispatch for your wall.
 domains: [HIST, WRITE]
 created: 2026-10-21T05:02:04Z
 ---

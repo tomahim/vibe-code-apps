@@ -1,6 +1,7 @@
 ---
 name: Pantry Quest
 tagline: Plan Dinners From What You Already Own and Learn One Technique a Week
+pitch: Tick what is in your fridge and get three dinner routes for the week, each ending in a technique badge.
 domains: [PROD, LEARN]
 created: 2026-10-20T17:35:18Z
 ---

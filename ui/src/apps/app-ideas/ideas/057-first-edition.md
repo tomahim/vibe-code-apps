@@ -1,6 +1,7 @@
 ---
 name: First Edition
 tagline: Family Moments Typeset Like Front-Page History
+pitch: Turn a family moment into a front page typeset like the day it made history.
 domains: [PROD, HIST]
 created: 2026-10-20T08:05:50Z
 issue: 57
