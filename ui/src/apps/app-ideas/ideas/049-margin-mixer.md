@@ -4,6 +4,7 @@ tagline: Turn Two Saved Ideas Into One Original Thought
 domains: [MEDIA, WRITE, LEARN]
 created: 2026-10-20T07:51:06Z
 issue: 49
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
