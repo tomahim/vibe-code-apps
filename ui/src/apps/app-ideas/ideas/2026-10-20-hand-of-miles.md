@@ -4,6 +4,7 @@ tagline: Draw This Week's Workouts From a Deck and Play Them Your Way
 pitch: Draw a hand of workout cards each Monday and play four in the smartest order for combo points.
 domains: [SPORT, GAME]
 created: 2026-10-20T20:17:04Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
