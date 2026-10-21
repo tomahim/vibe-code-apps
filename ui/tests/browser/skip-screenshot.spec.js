@@ -8,6 +8,8 @@ test('app-ideas skip button screenshot', async ({ page }) => {
   await page.goto('/apps/app-ideas');
   const deck = page.locator('.swipe-deck');
   await deck.waitFor();
-  await expect(deck.getByRole('button', { name: 'Skip: next idea, no rating' })).toBeVisible();
+  await expect(deck.locator('.swipe-hint-left')).toBeVisible();
+  await expect(deck.locator('.swipe-hint-right')).toBeVisible();
+  await expect(deck.locator('.swipe-hint-right')).toHaveText('Skip →');
   await page.screenshot({ path: '/tmp/shot3-skip.png' });
 });

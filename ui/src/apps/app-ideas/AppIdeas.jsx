@@ -21,8 +21,9 @@ const VIEW_EMPTY = {
   archive: "Nothing archived. 1 star sends an idea here.",
 };
 
-// Swipe gestures on the Inbox deck: up = 3 stars, down = 1 star, left or right = 2 stars.
-const RATING_FOR_DIRECTION = { up: 3, down: 1, left: 2, right: 2 };
+// Swipe gestures on the Inbox deck: up = 3 stars, down = 1 star, left = 2 stars,
+// right = skip (no rating, card goes to the back of the deck).
+const RATING_FOR_DIRECTION = { up: 3, down: 1, left: 2 };
 const KEY_DIRECTIONS = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" };
 const SWIPE_THRESHOLD = 60;
 
@@ -99,10 +100,10 @@ function IdeaDetail({ idea, rating, pending, onRate, onClose }) {
   );
 }
 
-// The Inbox deck: one pitch card at a time. Swipe (or use the buttons / arrow keys)
-// to rate: up = 3 stars, left or right = 2 stars, down = 1 star. A rated idea leaves
-// the Inbox, so the deck advances on its own. Skip moves the card to the back of the
-// deck without rating it.
+// The Inbox deck: one pitch card at a time. Swipe (or use the arrow keys) to rate:
+// up = 3 stars, left = 2 stars, down = 1 star; right (or Space / s) skips without
+// rating. A rated idea leaves the Inbox, so the deck advances on its own. A skipped
+// card goes to the back of the deck and returns once the fresh ones are done.
 function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) {
   const [drag, setDrag] = useState(null);
   const [skipped, setSkipped] = useState(() => new Set());
@@ -131,14 +132,12 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) 
     origin.current = null;
     setDrag(null);
     const dir = directionFor(dx, dy);
-    if (dir && !busy) onRate(idea, RATING_FOR_DIRECTION[dir]);
+    if (dir && !busy) act(dir);
   }
-  function rateDirection(dir) {
-    if (!busy) onRate(idea, RATING_FOR_DIRECTION[dir]);
-  }
-  function skip() {
+  function act(dir) {
     if (busy) return;
-    setSkipped((prev) => new Set(prev).add(idea.slug));
+    if (dir === "right") setSkipped((prev) => new Set(prev).add(idea.slug));
+    else onRate(idea, RATING_FOR_DIRECTION[dir]);
   }
 
   return (
@@ -150,10 +149,10 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) 
         const dir = KEY_DIRECTIONS[event.key];
         if (dir) {
           event.preventDefault();
-          rateDirection(dir);
+          act(dir);
         } else if (event.key === " " || event.key === "s") {
           event.preventDefault();
-          skip();
+          act("right");
         }
       }}
     >
@@ -165,7 +164,7 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) 
       <div className="swipe-stage">
         <span className={`swipe-hint swipe-hint-top${active === "up" ? " swipe-hint-active" : ""}`} aria-hidden="true">&uarr; 3 stars</span>
         <span className={`swipe-hint swipe-hint-left${active === "left" ? " swipe-hint-active" : ""}`} aria-hidden="true">&larr; 2 stars</span>
-        <span className={`swipe-hint swipe-hint-right${active === "right" ? " swipe-hint-active" : ""}`} aria-hidden="true">2 stars &rarr;</span>
+        <span className={`swipe-hint swipe-hint-right${active === "right" ? " swipe-hint-active" : ""}`} aria-hidden="true">Skip &rarr;</span>
         <span className={`swipe-hint swipe-hint-bottom${active === "down" ? " swipe-hint-active" : ""}`} aria-hidden="true">&darr; 1 star</span>
         <div
           className={`swipe-card${drag ? " swipe-card-dragging" : ""}`}
@@ -187,13 +186,6 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) 
             Details
           </button>
         </div>
-      </div>
-      <div className="swipe-actions" role="group" aria-label="Rate this idea">
-        <button type="button" className="swipe-action" disabled={busy} aria-label="Swipe down: 1 star" onClick={() => rateDirection("down")}>&darr; 1</button>
-        <button type="button" className="swipe-action" disabled={busy} aria-label="Swipe left: 2 stars" onClick={() => rateDirection("left")}>&larr; 2</button>
-        <button type="button" className="swipe-action" disabled={busy} aria-label="Swipe right: 2 stars" onClick={() => rateDirection("right")}>2 &rarr;</button>
-        <button type="button" className="swipe-action" disabled={busy} aria-label="Swipe up: 3 stars" onClick={() => rateDirection("up")}>&uarr; 3</button>
-        <button type="button" className="swipe-action swipe-skip" disabled={busy} aria-label="Skip: next idea, no rating" onClick={skip}>Skip</button>
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ test('app-ideas two-star lifecycle screenshots', async ({ page }) => {
   await page.goto('/apps/app-ideas');
   const deck = page.locator('.swipe-deck');
   await deck.waitFor();
-  await deck.getByRole('button', { name: 'Swipe left: 2 stars' }).click();
+  await deck.press('ArrowLeft');
   await expect(page.getByRole('alert')).toContainText('Improve or drop is full');
   await page.screenshot({ path: '/tmp/shot2-cap.png' });
   await page.getByRole('button', { name: 'List' }).click();
