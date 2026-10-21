@@ -4,6 +4,7 @@ tagline: Build a Tiny Island Before the Sea Comes Back
 pitch: Place buildings on a procedural island, then watch the tide flood the low tiles at the end of each round.
 domains: [3D, GAME]
 created: 2026-10-20T17:35:17Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
