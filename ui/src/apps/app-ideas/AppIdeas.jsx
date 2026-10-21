@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import { BRAND_BADGE, BRAND_NAME } from "../../config/brand.js";
 import { ideas, usedDomains } from "./ideas.js";
 import { createdAt } from "./sort.js";
-import { VIEWS, sortForView, viewOf } from "./rating.js";
+import { TWO_STAR_LIMIT, VIEWS, sortForView, viewOf } from "./rating.js";
 import "./app-ideas.css";
 
 function formatCreated(idea) {
@@ -13,10 +13,11 @@ function formatCreated(idea) {
   return new Date(time).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 }
 
-const VIEW_LABELS = { inbox: "Inbox", promising: "Promising", archive: "Archive" };
+const VIEW_LABELS = { inbox: "Inbox", improve: "Improve or drop", promising: "Promising", archive: "Archive" };
 const VIEW_EMPTY = {
   inbox: "Inbox zero. Every idea has a vote.",
-  promising: "Nothing promising yet. Give an idea 2 or 3 stars.",
+  improve: "No 2-star ideas waiting. Swipe left or right on an Inbox card to park one here.",
+  promising: "Nothing promising yet. Give an idea 3 stars.",
   archive: "Nothing archived. 1 star sends an idea here.",
 };
 
@@ -234,6 +235,10 @@ export default function AppIdeas({ onHome }) {
   async function rate(idea, rating) {
     const previous = idea.slug in votes ? votes[idea.slug] : idea.rating;
     setVoteError("");
+    if (rating === 2 && improveFull && viewOf(previous) !== "improve") {
+      setVoteError(`"${idea.name}" needs a 2-star slot, but Improve or drop is full (${TWO_STAR_LIMIT}). Promote one to 3 stars or drop one to 1 star first.`);
+      return;
+    }
     setPending((p) => ({ ...p, [idea.slug]: true }));
     setVotes((v) => ({ ...v, [idea.slug]: rating }));
     try {
@@ -261,10 +266,12 @@ export default function AppIdeas({ onHome }) {
   }
 
   const counts = useMemo(() => {
-    const result = { inbox: 0, promising: 0, archive: 0 };
+    const result = { inbox: 0, improve: 0, promising: 0, archive: 0 };
     for (const idea of currentIdeas) result[viewOf(idea.rating)] += 1;
     return result;
   }, [currentIdeas]);
+
+  const improveFull = counts.improve >= TWO_STAR_LIMIT;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -282,6 +289,11 @@ export default function AppIdeas({ onHome }) {
   if (showDeck) {
     return (
       <main className="ideas-page swipe-page">
+        {voteError && (
+          <p className="vote-error" role="alert">
+            {voteError} <button className="vote-error-close" onClick={() => setVoteError("")} aria-label="Dismiss">&times;</button>
+          </p>
+        )}
         <SwipeDeck
           list={[...filtered].reverse()}
           ratingOf={ratingOf}
@@ -309,7 +321,7 @@ export default function AppIdeas({ onHome }) {
       <section className="ideas-intro">
         <p className="eyebrow">THE IDEA GARDEN</p>
         <h1>App ideas, ready to build.</h1>
-        <p>{ideas.length} ideas so far. Swipe through the Inbox: up for 3 stars, left or right for 2, down for 1. 2-3 stars are Promising, 1 star goes to the Archive.</p>
+        <p>{ideas.length} ideas so far. Swipe through the Inbox: up for 3 stars, left or right for 2, down for 1. 3 stars are Promising, 2 stars wait in Improve or drop, 1 star goes to the Archive.</p>
       </section>
 
       <nav className="view-tabs" aria-label="Idea views">
@@ -320,7 +332,7 @@ export default function AppIdeas({ onHome }) {
             aria-pressed={view === name}
             onClick={() => setView(name)}
           >
-            {VIEW_LABELS[name]} <span className="view-tab-count">{ratingsLoaded ? counts[name] : "..."}</span>
+            {VIEW_LABELS[name]} <span className="view-tab-count">{ratingsLoaded ? (name === "improve" ? `${counts[name]}/${TWO_STAR_LIMIT}` : counts[name]) : "..."}</span>
           </button>
         ))}
       </nav>

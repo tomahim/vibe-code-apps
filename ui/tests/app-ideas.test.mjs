@@ -46,20 +46,21 @@ test('ideas sort newest first by creation datetime, ', () => {
   assert.equal(createdAt({ created: 'nope' }), 0);
 });
 
-test('rating decides the view: none = inbox, 1 = archive, 2-3 = promising', () => {
-  assert.deepEqual([undefined, 0, 4, 'x', 1, 2, 3].map(viewOf), ['inbox', 'inbox', 'inbox', 'inbox', 'archive', 'promising', 'promising']);
+test('rating decides the view: none = inbox, 1 = archive, 2 = improve, 3 = promising', () => {
+  assert.deepEqual([undefined, 0, 4, 'x', 1, 2, 3].map(viewOf), ['inbox', 'inbox', 'inbox', 'inbox', 'archive', 'improve', 'promising']);
   assert.equal(validRating(2), 2);
   assert.equal(validRating(7), 0);
 });
 
-test('promising sorts 3 stars, then 2, then newest first; other views newest first', () => {
+test('promising holds only 3 stars, newest first; other views newest first', () => {
   const list = [
     { slug: 'a', rating: 2, created: '2026-10-22T00:00:00Z' },
     { slug: 'b', rating: 3, created: '2026-10-19T00:00:00Z' },
     { slug: 'c', rating: 3, created: '2026-10-21T00:00:00Z' },
     { slug: 'd', rating: 2, created: '2026-10-20T00:00:00Z' },
   ];
-  assert.deepEqual(sortForView(list, 'promising').map((i) => i.slug), ['c', 'b', 'a', 'd']);
+  assert.deepEqual(sortForView(list.filter((i) => i.rating === 3), 'promising').map((i) => i.slug), ['c', 'b']);
+  assert.deepEqual(sortForView(list.filter((i) => i.rating === 2), 'improve').map((i) => i.slug), ['a', 'd']);
   assert.deepEqual(sortForView(list, 'inbox').map((i) => i.slug), ['a', 'c', 'd', 'b']);
 });
 
