@@ -5,6 +5,7 @@ pitch: Give every saved link a short interview: assign it a job to do, or let it
 domains: [MEDIA, PROD]
 created: 2026-10-20T07:57:34Z
 issue: 54
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
