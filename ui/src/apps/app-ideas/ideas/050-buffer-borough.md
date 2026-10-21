@@ -4,6 +4,7 @@ tagline: See Where Your Day Breaks Before It Does
 domains: [PROD, 3D]
 created: 2026-10-20T07:51:08Z
 issue: 50
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
