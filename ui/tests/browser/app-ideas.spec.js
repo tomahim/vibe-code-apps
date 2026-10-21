@@ -96,6 +96,30 @@ test('Promising holds only 3 stars; 2 stars wait in Improve or drop with its cap
   await expect(page.getByRole('button', { name: /^Improve or drop/ })).toContainText('1/30');
 });
 
+test('Skip passes to the next idea without rating and the card comes back', async ({ page }) => {
+  const fs = await import('node:fs/promises');
+  const dir = new URL('../../src/apps/app-ideas/ideas/', import.meta.url);
+  const slugs = (await fs.readdir(dir)).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, '')).sort();
+  const [first, second] = slugs; // deck deals oldest first
+  const rest = Object.fromEntries(slugs.slice(2).map((s) => [s, 1]));
+  let rated = false;
+  await page.route('**/api/app-ideas/ratings', (route) => route.fulfill({ json: { ratings: rest } }));
+  await page.route('**/api/app-ideas/*/rate', (route) => { rated = true; return route.fulfill({ json: { committed: true } }); });
+  await page.goto(path);
+  const deck = page.locator('.swipe-deck');
+  await deck.waitFor();
+  await expect(deck.locator('.swipe-card-name')).toHaveText(/./);
+  const firstName = await deck.locator('.swipe-card-name').textContent();
+  await deck.getByRole('button', { name: 'Skip: next idea, no rating' }).click();
+  const secondName = await deck.locator('.swipe-card-name').textContent();
+  expect(secondName).not.toEqual(firstName);
+  await expect(deck.locator('.swipe-progress')).toHaveText('2 ideas left'); // nothing rated
+  expect(rated).toBe(false);
+  await deck.getByRole('button', { name: 'Skip: next idea, no rating' }).click();
+  await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // back of the deck
+  expect(rated).toBe(false);
+});
+
 test('a full Improve or drop tab (30) blocks a new 2 stars with an explanation', async ({ page }) => {
   const fs = await import('node:fs/promises');
   const dir = new URL('../../src/apps/app-ideas/ideas/', import.meta.url);

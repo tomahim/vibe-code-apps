@@ -41,6 +41,8 @@ The Inbox defaults to a swipe deck: one card at a time showing only the pitch, w
 a Details button that expands the full spec (Back returns to the card). Swipe to
 rate: **up = 3 stars, left or right = 2 stars, down = 1 star**; on-screen buttons
 and arrow keys do the same. A rated idea leaves the Inbox, so the deck advances.
+**Skip** (button, Space or `s` key) moves the card to the back of the deck without
+rating it; skipped cards come back once the fresh ones are done.
 A Swipe/List toggle restores the grid. Promising and Archive stay grid views.
 
 ## Ratings (Inbox / Improve or drop / Promising / Archive)
