@@ -101,7 +101,7 @@ function IdeaDetail({ idea, rating, pending, onRate, onClose }) {
 // The Inbox deck: one pitch card at a time. Swipe (or use the buttons / arrow keys)
 // to rate: up = 3 stars, left or right = 2 stars, down = 1 star. A rated idea leaves
 // the Inbox, so the deck advances on its own.
-function SwipeDeck({ list, ratingOf, pending, onRate, onOpen }) {
+function SwipeDeck({ list, ratingOf, pending, onRate, onOpen, onHome, onExit }) {
   const [drag, setDrag] = useState(null);
   const origin = useRef(null);
   const idea = list[0];
@@ -145,7 +145,11 @@ function SwipeDeck({ list, ratingOf, pending, onRate, onOpen }) {
         }
       }}
     >
-      <p className="swipe-progress">{list.length} idea{list.length === 1 ? "" : "s"} left in the Inbox</p>
+      <div className="swipe-topbar">
+        <button className="back-link" onClick={onHome}>&larr; All tools</button>
+        <span className="swipe-progress">{list.length} idea{list.length === 1 ? "" : "s"} left</span>
+        <button type="button" className="inbox-mode-button" onClick={onExit}>List</button>
+      </div>
       <div className="swipe-stage">
         <span className={`swipe-hint swipe-hint-top${active === "up" ? " swipe-hint-active" : ""}`} aria-hidden="true">&uarr; 3 stars</span>
         <span className={`swipe-hint swipe-hint-left${active === "left" ? " swipe-hint-active" : ""}`} aria-hidden="true">&larr; 2 stars</span>
@@ -273,7 +277,24 @@ export default function AppIdeas({ onHome }) {
     });
   }, [query, activeDomains, view, currentIdeas]);
 
-  const showDeck = view === "inbox" && inboxMode === "swipe" && filtered.length > 0;
+  const showDeck = ratingsLoaded && view === "inbox" && inboxMode === "swipe" && filtered.length > 0;
+
+  if (showDeck) {
+    return (
+      <main className="ideas-page swipe-page">
+        <SwipeDeck
+          list={[...filtered].reverse()}
+          ratingOf={ratingOf}
+          pending={pending}
+          onRate={rate}
+          onOpen={setSelected}
+          onHome={onHome}
+          onExit={() => setInboxMode("list")}
+        />
+        {selected && <IdeaDetail idea={selected} rating={ratingOf(selected)} pending={!!pending[selected.slug]} onRate={rate} onClose={() => setSelected(null)} />}
+      </main>
+    );
+  }
 
   return (
     <main className="ideas-page">
@@ -360,15 +381,6 @@ export default function AppIdeas({ onHome }) {
         {filtered.length === counts[view] ? `${counts[view]} ideas` : `${filtered.length} of ${counts[view]} ideas`}
       </p>
 
-      {showDeck ? (
-        <SwipeDeck
-          list={filtered}
-          ratingOf={ratingOf}
-          pending={pending}
-          onRate={rate}
-          onOpen={setSelected}
-        />
-      ) : (
       <section className="app-grid ideas-grid" aria-label="App ideas">
         {filtered.map((idea) => (
           <div className="app-card idea-card" key={idea.slug}>
@@ -387,7 +399,6 @@ export default function AppIdeas({ onHome }) {
           </div>
         ))}
       </section>
-      )}
 
       {filtered.length === 0 && (
         <p className="ideas-empty">{query || activeDomains.length ? "No idea matches. Try another word or remove a domain filter." : VIEW_EMPTY[view]}</p>
