@@ -84,13 +84,33 @@ test('failed save rolls the current rating back', async ({ page }) => {
   await expect(card(page).getByRole('button', { name: '1 star, tap to clear' })).toHaveAttribute('aria-pressed', 'true');
 });
 
-test('Promising sorts by live ratings rather than bundled ratings', async ({ page }) => {
+test('Promising holds only 3 stars; 2 stars wait in Improve or drop with its cap', async ({ page }) => {
   await ratings(page, { '048-hindsight-league': 3, '046-favor-market': 2 });
   await page.goto(path);
   await exitSwipe(page);
   await page.getByRole('button', { name: /^Promising/ }).click();
   await expect(page.locator('.idea-card').first()).toContainText(name);
-  await expect(page.locator('.idea-card').nth(1)).toContainText('Favor Market');
+  await expect(page.locator('.idea-card')).toHaveCount(1); // Favor Market (2 stars) is not here
+  await page.getByRole('button', { name: /^Improve or drop/ }).click();
+  await expect(page.locator('.idea-card').first()).toContainText('Favor Market');
+  await expect(page.getByRole('button', { name: /^Improve or drop/ })).toContainText('1/30');
+});
+
+test('a full Improve or drop tab (30) blocks a new 2 stars with an explanation', async ({ page }) => {
+  const fs = await import('node:fs/promises');
+  const dir = new URL('../../src/apps/app-ideas/ideas/', import.meta.url);
+  const slugs = (await fs.readdir(dir)).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, ''));
+  const full = Object.fromEntries(slugs.slice(0, 30).map((slug) => [slug, 2]));
+  await ratings(page, full);
+  await page.goto(path);
+  const deck = page.locator('.swipe-deck');
+  await deck.waitFor();
+  const firstName = await deck.locator('.swipe-card-name').textContent();
+  await deck.getByRole('button', { name: 'Swipe left: 2 stars' }).click();
+  await expect(page.getByRole('alert')).toContainText('Improve or drop is full (30)');
+  await expect(deck.locator('.swipe-card-name')).toHaveText(firstName); // card stays
+  await page.getByRole('button', { name: 'Swipe up: 3 stars' }).click(); // other ratings still work
+  await expect(deck.locator('.swipe-card-name')).not.toHaveText(firstName);
 });
 
 test('Inbox swipe deck: buttons rate, details expands, back returns', async ({ page }) => {
