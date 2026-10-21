@@ -4,6 +4,7 @@ tagline: Outsmart a Border That Never Explains Its Rules
 domains: [GAME, LEARN]
 created: 2026-10-20T07:51:10Z
 issue: 51
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
