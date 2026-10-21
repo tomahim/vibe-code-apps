@@ -4,6 +4,7 @@ tagline: An Audio Adventure Where Your Power Zones Are the Choices
 pitch: An audio adventure where your power zones are the choices: intervals are chases, recoveries are campfires.
 domains: [SPORT, GAME, WRITE]
 created: 2026-10-21T06:13:04Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
