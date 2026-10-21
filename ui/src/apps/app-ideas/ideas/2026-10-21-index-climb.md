@@ -4,6 +4,7 @@ tagline: Watch Your UTMB Index Move and Pick the Races That Move It
 pitch: See your UTMB index history as a mountain ascent and pick the races that would realistically raise it.
 domains: [SPORT, GAME, LEARN]
 created: 2026-10-21T05:59:10Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
