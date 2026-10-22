@@ -110,6 +110,14 @@ who can add recipes, ingredients and recipe ingredient entries. It opens a
 session-authenticated, CSRF-protected upload form with instructions and a
 [downloadable example CSV](../api/apps/recipes/static/recipes/import-template.csv).
 
+The adjacent **Copy LLM prompt** button opens a read-only prompt with a copy
+button (or manual selection when clipboard access is unavailable). Paste it
+into an LLM with your recipe images, documents or links. It instructs the LLM to
+extract titles and ingredient quantities, download the main photo from supplied
+links, validate the CSV and images, and return a downloadable ZIP. Its limits
+come from the importer and the configured per-image limit. Download the ZIP
+from the LLM and upload it manually using **Batch import**.
+
 Upload a ZIP with this layout (no enclosing folder inside the ZIP):
 
 ```text

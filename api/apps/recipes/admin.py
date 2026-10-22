@@ -13,6 +13,7 @@ from unfold.decorators import action
 from .forms import RecipeImportForm
 from .importing import import_recipes
 from .models import Ingredient, Recipe, RecipeIngredient
+from .prompts import recipe_import_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +32,7 @@ class IngredientAdmin(ModelAdmin):
 
 @admin.register(Recipe)
 class RecipeAdmin(ModelAdmin):
-    actions_list = ("batch_import",)
+    actions_list = ("batch_import", "llm_import_prompt")
     inlines = (RecipeIngredientInline,)
     list_display = ("title", "has_image", "created_at")
     search_fields = ("title",)
@@ -47,7 +48,10 @@ class RecipeAdmin(ModelAdmin):
     def batch_import(self, request):
         if request.method not in {"GET", "POST"}:
             return HttpResponseNotAllowed(["GET", "POST"])
-        form = RecipeImportForm(request.POST if request.method == "POST" else None, request.FILES)
+        form = RecipeImportForm(
+            request.POST if request.method == "POST" else None,
+            request.FILES if request.method == "POST" else None,
+        )
         if request.method == "POST" and form.is_valid():
             try:
                 count = import_recipes(form.cleaned_data["archive"])
@@ -71,6 +75,17 @@ class RecipeAdmin(ModelAdmin):
             "media": self.media + form.media,
         }
         return TemplateResponse(request, "admin/recipes/recipe/import.html", context)
+
+    @action(description="Copy LLM prompt", permissions=["batch_import"], url_path="import-prompt", icon="content_copy")
+    def llm_import_prompt(self, request):
+        if request.method != "GET":
+            return HttpResponseNotAllowed(["GET"])
+        return TemplateResponse(request, "admin/recipes/recipe/import_prompt.html", {
+            **self.admin_site.each_context(request),
+            "opts": self.model._meta,
+            "title": "Prepare a recipe ZIP with an LLM",
+            "prompt": recipe_import_prompt(),
+        })
 
     @admin.display(boolean=True, description="Image")
     def has_image(self, obj):

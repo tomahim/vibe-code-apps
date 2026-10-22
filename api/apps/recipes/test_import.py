@@ -19,6 +19,7 @@ from PIL import Image
 
 from .importing import CSV_COLUMNS, import_recipes
 from .models import Ingredient, Recipe, RecipeIngredient
+from .prompts import recipe_import_prompt
 
 
 def image_bytes(fmt="JPEG"):
@@ -131,6 +132,12 @@ class RecipeImportTests(TestCase):
         upload = archive_upload(csv_text=text, images={"1.jpg": image_bytes(), "2.jpg": image_bytes()})
         self.assertEqual(import_recipes(upload), 2)
         self.assertEqual(set(Recipe.objects.values_list("title", flat=True)), {"Tomato pasta", "Tomato salad"})
+
+    def test_llm_prompt_csv_example_can_be_imported(self):
+        prompt = recipe_import_prompt()
+        text = prompt.split("VALID CSV EXAMPLE (the example photo must actually be included):\n", 1)[1]
+        self.assertEqual(import_recipes(archive_upload(csv_text=text)), 1)
+        self.assertEqual(Recipe.objects.get().title, "Tomato pasta")
 
     def test_validates_later_rows_before_writing_anything(self):
         with mock.patch("django.core.files.storage.FileSystemStorage._save") as save:
@@ -306,11 +313,31 @@ class RecipeImportAdminTests(TestCase):
         response = self.client.get(reverse("admin:recipes_recipe_changelist"))
         self.assertContains(response, self.url)
         self.assertContains(response, "Batch import")
+        self.assertContains(response, reverse("admin:recipes_recipe_llm_import_prompt"))
+        self.assertContains(response, "Copy LLM prompt")
         response = self.client.get(self.url)
+        self.assertFalse(response.context["form"].is_bound)
+        self.assertNotContains(response, "This field is required")
         self.assertContains(response, 'enctype="multipart/form-data"')
         self.assertContains(response, "csrfmiddlewaretoken")
         self.assertContains(response, "Download example CSV")
         self.assertContains(response, "source_url")
+
+    @override_settings(MEDIA_UPLOAD_MAX_BYTES=123456)
+    def test_llm_prompt_can_be_selected_and_uses_current_image_limit(self):
+        response = self.client.get(reverse("admin:recipes_recipe_llm_import_prompt"))
+        self.assertContains(response, "Copy prompt")
+        self.assertContains(response, "readonly")
+        self.assertContains(response, "123456 bytes")
+        self.assertContains(response, "source_url")
+        self.assertContains(response, "recipe-import-prompt")
+        self.assertContains(response, reverse("admin:recipes_recipe_batch_import"))
+        self.assertEqual(Recipe.objects.count(), 0)
+
+    def test_llm_prompt_only_accepts_get(self):
+        url = reverse("admin:recipes_recipe_llm_import_prompt")
+        self.assertEqual(self.client.post(url).status_code, 405)
+        self.assertEqual(self.client.delete(url).status_code, 405)
 
     def test_success_redirect_and_summary(self):
         response = self.client.post(self.url, {"archive": archive_upload()}, follow=True)
@@ -340,10 +367,12 @@ class RecipeImportAdminTests(TestCase):
     def test_anonymous_and_non_staff_users_cannot_import(self):
         self.client.logout()
         self.assertEqual(self.client.get(self.url).status_code, 302)
+        self.assertEqual(self.client.get(reverse("admin:recipes_recipe_llm_import_prompt")).status_code, 302)
         self.user.is_staff = False
         self.user.save()
         self.client.force_login(self.user)
         self.assertEqual(self.client.post(self.url, {"archive": archive_upload()}).status_code, 302)
+        self.assertEqual(self.client.get(reverse("admin:recipes_recipe_llm_import_prompt")).status_code, 302)
         self.assertEqual(Recipe.objects.count(), 0)
 
     def test_staff_needs_add_permission_for_all_three_models(self):
@@ -359,6 +388,9 @@ class RecipeImportAdminTests(TestCase):
                 self.assertEqual(self.client.get(self.url).status_code, 403)
                 self.assertEqual(self.client.post(self.url, {"archive": archive_upload()}).status_code, 403)
                 self.assertNotContains(self.client.get(reverse("admin:recipes_recipe_changelist")), self.url)
+                prompt_url = reverse("admin:recipes_recipe_llm_import_prompt")
+                self.assertEqual(self.client.get(prompt_url).status_code, 403)
+                self.assertNotContains(self.client.get(reverse("admin:recipes_recipe_changelist")), prompt_url)
         self.user.user_permissions.set(permissions)
         self.assertEqual(self.client.get(self.url).status_code, 200)
         self.assertEqual(self.client.post(self.url, {"archive": archive_upload()}).status_code, 302)
