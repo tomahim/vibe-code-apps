@@ -1,0 +1,3 @@
+title,source_url,image,ingredients
+Tomato pasta,https://example.com/tomato-pasta,1.jpg,"[{""name"":""tomato"",""quantity"":""200 g""},{""name"":""pasta"",""quantity"":""150 g""}]"
+Tomato salad,https://example.com/tomato-salad,2.jpg,"[{""name"":""tomato"",""quantity"":""300 g""},{""name"":""salt""}]"

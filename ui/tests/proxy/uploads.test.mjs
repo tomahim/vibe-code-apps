@@ -96,3 +96,27 @@ test('admin bodies above 6 MiB are rejected by nginx', async () => {
   });
   assert.equal(response.status, 413);
 });
+
+test('recipe batch import preserves a 50 MiB ZIP and multipart overhead', async () => {
+  const path = '/admin/recipes/recipe/import/';
+  const form = new FormData();
+  form.set('archive', new Blob([Buffer.alloc(50 * 1024 * 1024, 0x61)], { type: 'application/zip' }), 'recipes.zip');
+  const request = new Request(`${origin}${path}`, { method: 'POST', body: form });
+  const body = Buffer.from(await request.arrayBuffer());
+  const response = await fetch(request.url, { method: 'POST', body, headers: request.headers });
+  assert.equal(response.status, 200);
+  const forwarded = await response.json();
+  assert.equal(forwarded.path, path);
+  assert.equal(forwarded.method, 'POST');
+  assert.equal(forwarded.host, new URL(origin).host);
+  assert.equal(forwarded.type, request.headers.get('content-type'));
+  assert.equal(forwarded.bytes, body.length);
+  assert.equal(forwarded.sha256, createHash('sha256').update(body).digest('hex'));
+});
+
+test('recipe batch import bodies above 51 MiB are rejected by nginx', async () => {
+  const response = await fetch(`${origin}/admin/recipes/recipe/import/`, {
+    method: 'POST', body: Buffer.alloc(51 * 1024 * 1024 + 1),
+  });
+  assert.equal(response.status, 413);
+});

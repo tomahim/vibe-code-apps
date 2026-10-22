@@ -1,5 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
+from unfold.widgets import UnfoldAdminFileFieldWidget
 
 from .models import Recipe
 
@@ -8,6 +10,15 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ("title", "source_url", "image")
+
+
+class RecipeImportForm(forms.Form):
+    archive = forms.FileField(
+        label="ZIP archive",
+        validators=[FileExtensionValidator(["zip"])],
+        widget=UnfoldAdminFileFieldWidget(attrs={"accept": ".zip,application/zip"}),
+        help_text="Up to 50 MiB, containing data.csv and an images/ folder.",
+    )
 
 
 def clean_ingredients(value):

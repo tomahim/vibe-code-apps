@@ -103,6 +103,59 @@ Recipes retain the existing image preview; ingredients and quantities can be
 edited inline. Ingredients have their own searchable admin page. Each ingredient
 can occur only once per recipe (database constraint).
 
+### Batch import from ZIP
+
+Open **Recipes → Batch import** in Django admin. The button is available to staff
+who can add recipes, ingredients and recipe ingredient entries. It opens a
+session-authenticated, CSRF-protected upload form with instructions and a
+[downloadable example CSV](../api/apps/recipes/static/recipes/import-template.csv).
+
+Upload a ZIP with this layout (no enclosing folder inside the ZIP):
+
+```text
+<name-zip>.zip
+├── data.csv
+└── images/
+    ├── 1.jpg
+    └── 2.jpg
+```
+
+The UTF-8 CSV uses one row per recipe and exactly four headers, in any order:
+
+| Column | Value |
+| --- | --- |
+| `title` | Required recipe title, maximum 200 characters. |
+| `source_url` | Optional valid recipe link, maximum 200 characters. |
+| `image` | Optional filename in `images/`, e.g. `1.jpg`; omit the folder prefix. |
+| `ingredients` | JSON array of 1–100 objects with `name` and optional `quantity`, using the same validation as recipe creation above. |
+
+All four headers are required, even when image or link cells are empty. For
+example, an ingredient cell contains
+`[{"name":"tomato","quantity":"200 g"},{"name":"salt"}]`. When writing CSV
+manually, quote that cell and double its inner quotes, as in the example CSV.
+UTF-8 with a BOM and Windows line endings are accepted. Blank rows are ignored.
+The `images/` folder is optional when every image cell is empty. Finder metadata
+(`__MACOSX` and `.DS_Store`) is ignored.
+
+Each submission creates new recipes; it never overwrites existing ones.
+Ingredient names are normalized and reused. Repeated imports create duplicate
+recipes, so check the success message before submitting the archive again.
+
+The entire archive is validated before any write. Invalid CSV rows report their
+row number; missing or invalid images reject the whole batch. Recipes and
+ingredients are saved in one database transaction. If saving fails, the database
+is rolled back and completed image uploads are deleted on a best-effort basis
+(cleanup failures are logged). Images use the configured shared storage, with
+random `recipes/<uuid>.<ext>` keys and extensions from their detected format.
+
+Limits: 500 recipes, 50 MiB ZIP upload, 100 MiB total uncompressed content,
+2 MiB CSV, 1,002 ZIP entries, and `MEDIA_UPLOAD_MAX_BYTES` per image (5 MiB by
+default). Unsafe paths, duplicate ZIP entries, symlinks and encrypted archives
+are rejected. Files are read from the archive without extracting them to disk.
+The production proxy allows 51 MiB request bodies specifically on the recipe
+import route, leaving room for multipart overhead while preserving the 6 MiB
+request limit on other admin routes.
+
 ```sh
 cd api
 pip install -r requirements-dev.txt

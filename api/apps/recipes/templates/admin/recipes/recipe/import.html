@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+{% load admin_urls i18n static %}
+
+{% block breadcrumbs %}
+    <div class="px-4 py-3">
+        <a href="{% url 'admin:index' %}">{% translate "Home" %}</a>
+        &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+        &rsaquo; {{ title }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl flex flex-col gap-6">
+        <p>Upload a ZIP containing <code>data.csv</code> at the root and an <code>images/</code> folder:</p>
+        <pre class="border border-base-200 dark:border-base-800 rounded-default p-4">recipes.zip
+├── data.csv
+└── images/
+    ├── 1.jpg
+    └── 2.jpg</pre>
+        <p>Use one row per recipe with these four columns (all headers are required):</p>
+        <ul class="space-y-2" style="list-style: disc; padding-inline-start: 1.5rem;">
+            <li><code>title</code>: required, up to 200 characters.</li>
+            <li><code>source_url</code>: optional recipe link.</li>
+            <li><code>image</code>: optional filename, for example <code>1.jpg</code>, from the images folder. JPEG, PNG and WebP are supported.</li>
+            <li><code>ingredients</code>: a JSON list of 1–100 ingredients, each with a name and optional quantity:<br><code>[{"name":"tomato","quantity":"200 g"},{"name":"salt"}]</code></li>
+        </ul>
+        <p><a class="text-primary-600 underline" href="{% static 'recipes/import-template.csv' %}" download>Download example CSV</a>. Save the CSV as UTF-8. Spreadsheet editors handle the quoting of the JSON column when exporting CSV.</p>
+        <p>A batch creates new recipes and reuses existing ingredient names. Importing the same ZIP again creates another copy of its recipes. The entire batch is validated before saving; a failed import creates no recipes.</p>
+        <p>Limits: 500 recipes, 50 MiB ZIP, 100 MiB uncompressed, 2 MiB CSV. Each image uses the configured image upload limit (5 MiB by default).</p>
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="flex items-center gap-4">
+                <button type="submit" class="bg-primary-600 border border-transparent font-medium px-3 py-2 rounded-default text-white">Import recipes</button>
+                <a href="{% url opts|admin_urlname:'changelist' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
