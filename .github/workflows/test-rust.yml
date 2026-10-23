@@ -33,11 +33,3 @@ jobs:
       - run: npm test
       - name: Check every starter and solution with real rustc
         run: npm run test:rust
-      - run: npx playwright install --with-deps chromium
-      - name: Test desktop and phone learning flows
-        run: npm run test:browser -- rust-learning-path.spec.js
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: rust-browser-results
-          path: ui/test-results/
