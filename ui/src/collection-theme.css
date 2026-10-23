@@ -1,33 +1,35 @@
-/* The collection's paper/ink/indigo palette is shared by Gallery and Artifacts.
+/* The collection's dark ink/ivory/periwinkle palette is shared by Gallery and Artifacts.
    App-specific pages and standalone experiments retain their own themes. */
 .gallery-page, .artifacts-page, .artifact-viewer {
-  --ink: #252727;
-  --muted: #60635f;
-  --green: #252dcc;
-  --green-bright: #4149dd;
-  --line: #d4d6d8;
-  --paper: #f7f6f0;
-  --collection-wash: #ececfa;
+  --ink: #e9e8e1;
+  --muted: #acb1c1;
+  --green: #a8b0ff;
+  --green-bright: #c8cdff;
+  --line: #363d52;
+  --paper: #141723;
+  --collection-wash: #20263c;
+  color-scheme: dark;
   color: var(--ink);
   background: var(--paper);
   font-family: system-ui, sans-serif;
 }
-body:has(.gallery-page), body:has(.artifacts-page), body:has(.artifact-viewer) { background: #f7f6f0; }
+body:has(.gallery-page), body:has(.artifacts-page), body:has(.artifact-viewer) { background: #141723; }
 .gallery-page, .artifacts-page { min-height: 100vh; }
-.gallery-page .brand-mark, .artifacts-page .brand-mark { border-radius: 5px; }
+.gallery-page .brand-mark, .artifacts-page .brand-mark { border-radius: 5px; background: #252dcc; color: #fff; }
 .gallery-page .eyebrow, .artifacts-page .eyebrow { color: var(--muted); font: 10px ui-monospace, monospace; letter-spacing: .12em; }
 .gallery-page .gallery-intro { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 60px; align-items: center; max-width: none; padding: 70px 0 48px; }
 .gallery-page .gallery-intro h1 { max-width: 650px; font-family: system-ui, sans-serif; font-weight: 650; }
 .gallery-page .gallery-intro > div > p:last-child { max-width: 560px; margin: 18px 0 0; font-size: 15px; line-height: 1.75; color: var(--muted); }
-.collection-artwork { display: block; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: center; border: 1px solid #25272720; }
-.gallery-page .app-card { border-radius: 7px; background: #ffffff40; box-shadow: none; }
-.gallery-page .app-card:hover { border-color: #888bce; background: #ececfa80; transform: translateY(-2px); }
+.collection-artwork { display: block; width: 200px; height: 200px; border-radius: 12px; object-fit: contain; object-position: center; border: 1px solid #e9e8e120; }
+.gallery-page .app-card { border-radius: 7px; color: var(--ink); background: var(--paper); box-shadow: none; }
+.gallery-page .app-card:hover { border-color: #888bce; background: var(--collection-wash); transform: translateY(-2px); }
 .gallery-page .app-card-icon { color: var(--green); background: var(--collection-wash); border-radius: 6px; }
 .gallery-page .app-card-category { color: var(--muted); font-family: ui-monospace, monospace; }
 .gallery-page .app-card-title { font-family: system-ui, sans-serif; font-weight: 650; }
 .gallery-page .app-card-link { color: var(--green); }
 .gallery-page .gallery-search input { border-color: var(--line); }
-.gallery-page .gallery-search input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #252dcc15; }
+.gallery-page .gallery-search input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #a8b0ff25; }
+.gallery-page .gallery-search-clear:hover { background: var(--collection-wash); }
 .gallery-page .gallery-search-clear { color: var(--green); }
 .gallery-page .gallery-search-empty { border-color: var(--line); background: var(--collection-wash); }
 @media (prefers-reduced-motion: reduce) {
