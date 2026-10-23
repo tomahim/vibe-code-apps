@@ -4,6 +4,7 @@ tagline: Turn Every Run Into One Line and the Season Into a Book
 pitch: Get a prompt built from your run data, write one line, and bind the season into a printable zine.
 domains: [SPORT, WRITE]
 created: 2026-10-20T20:17:05Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
