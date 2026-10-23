@@ -5,17 +5,26 @@ import CodeEditor from '../../components/CodeEditor.jsx';
 import { chapters, lessons } from './catalog.js';
 import { checkRun, diagnosticLocation, exercisesFor, prepareRun } from './checks.js';
 import { runRust } from './runner.js';
+import { readProgress, writeProgress } from './progress.js';
 import './rust-learning-path.css';
 
 const language = rust();
 const symbols = ['{', '}', '(', ')', '[', ']', '&', ';', ':', '<', '>', "'", '"'];
 const hashLesson = () => lessons.findIndex((lesson) => `#${lesson.id}` === window.location.hash);
+const loadProgress = () => readProgress(window.localStorage, lessons);
 
 export default function RustLearningPath({ onHome }) {
-  const [index, setIndex] = useState(() => Math.max(0, hashLesson()));
-  const [step, setStep] = useState(0);
-  const [drafts, setDrafts] = useState({});
-  const [passed, setPassed] = useState({});
+  const initial = useRef(null);
+  if (!initial.current) initial.current = loadProgress();
+  const [index, setIndex] = useState(() => {
+    const linked = hashLesson();
+    return linked >= 0 ? linked : Math.max(0, lessons.findIndex((item) => item.id === initial.current.current));
+  });
+  const [step, setStep] = useState(() => hashLesson() >= 0 && lessons[hashLesson()].id !== initial.current.current ? 0 : initial.current.step);
+  const [drafts, setDrafts] = useState(() => initial.current.drafts);
+  const [passed, setPassed] = useState(() => initial.current.passed);
+  const [saved, setSaved] = useState(true);
+  const [confirmReset, setConfirmReset] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [running, setRunning] = useState(false);
@@ -28,6 +37,11 @@ export default function RustLearningPath({ onHome }) {
   const code = drafts[key] ?? exercise.code;
   const isComplete = (item) => exercisesFor(item).every((_, n) => passed[`${item.id}:${n}`]);
   const completeCount = lessons.filter(isComplete).length;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSaved(writeProgress(window.localStorage, { current: lesson.id, step, drafts, passed })), 250);
+    return () => clearTimeout(timer);
+  }, [lesson.id, step, drafts, passed]);
 
   function invalidate() {
     activeRun.current?.abort(); activeRun.current = null;
@@ -77,6 +91,13 @@ export default function RustLearningPath({ onHome }) {
     if (!view) return;
     view.dispatch(view.state.replaceSelection(symbol)); view.focus();
   }
+  function resetProgress() {
+    invalidate();
+    setDrafts({}); setPassed({}); setStep(0); setIndex(0);
+    window.history.replaceState({}, '', '#'+lessons[0].id);
+    setHint(false); setSolution(false); setConfirmReset(false);
+    setSaved(writeProgress(window.localStorage, { current: lessons[0].id, step: 0, drafts: {}, passed: {} }));
+  }
   function next() {
     if (step < exercises.length - 1) {
       invalidate(); setStep(step + 1); setHint(false); setSolution(false);
@@ -96,13 +117,15 @@ export default function RustLearningPath({ onHome }) {
         <p className="rust-map-intro">Small steps. Real code.<br />A different way to build.</p>
         <div className="rust-progress"><span>{completeCount} / {lessons.length} lessons</span><span>{Math.round(completeCount / lessons.length * 100)}%</span></div>
         <progress aria-label="Course progress" value={completeCount} max={lessons.length} />
+        <div className="rust-save-status" aria-live="polite">{saved ? 'Progress saved on this device' : 'Progress could not be saved in this browser'}</div>
+        <div className="rust-reset-progress">{confirmReset ? <><span>Erase saved progress and code drafts?</span><button onClick={resetProgress}>Yes, reset all</button><button onClick={() => setConfirmReset(false)}>Cancel</button></> : <button onClick={() => setConfirmReset(true)}>Reset progress</button>}</div>
         <nav>{chapters.map((chapter) => <section key={chapter.id}>
           <h3><span>0{chapter.order}</span> {chapter.title}</h3>
           {lessons.filter((item) => item.chapterId === chapter.id).map((item) => <button key={item.id} onClick={() => selectLesson(lessons.indexOf(item))} aria-current={item.id === lesson.id ? 'step' : undefined}>
             <span className="rust-lesson-dot" aria-hidden="true">{isComplete(item) ? '✓' : '○'}</span><span>{item.title}<small>{item.minutes} min{exercisesFor(item).length > 1 ? ` · ${exercisesFor(item).length} exercises` : ''}{isComplete(item) ? ' · complete' : ''}</small></span>
           </button>)}
         </section>)}</nav>
-        <div className="rust-map-note"><span aria-hidden="true">↳</span> From first steps to performance-aware Rust. Progress lasts for this visit.</div>
+        <div className="rust-map-note"><span aria-hidden="true">↳</span> From first steps to performance-aware Rust.</div>
       </aside>
       <div className="rust-workspace">
         <section className="rust-lesson" aria-labelledby="lesson-title">

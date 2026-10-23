@@ -30,8 +30,12 @@ optional first exercise with its own starter, solution, task, hint, and check.
   execute in test mode, and require a successful non-empty test run.
 
 These are learning checks, not a tamper-proof grading system. Tests are bundled
-with the UI and inspectable. Drafts and completion are kept only in React state
-for the current visit. Quizzes, persistent progress, search, exports, and the
+with the UI and inspectable. Current lesson and step, code drafts, and completed exercise checks are saved
+in browser localStorage under `rust-learning-path:v1`. A lesson is complete only
+when all its step checks have passed. The course map offers a confirmed reset
+that clears saved progress and drafts. Unknown lesson IDs and malformed saved
+values are discarded; blocked or full storage leaves the session usable with a
+visible save warning. Quizzes, persistent progress, search, exports, and the
 account synchronization are outside this app.
 
 CodeMirror is shared with Three.js through `src/components/CodeEditor.jsx`, with
