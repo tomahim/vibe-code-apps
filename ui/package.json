@@ -11,12 +11,14 @@
     "prebuild": "node scripts/build-sandbox.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:proxy": "node --test tests/proxy/*.test.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "test:rust": "node scripts/check-rust-curriculum.mjs"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.20.3",
     "@codemirror/commands": "^6.11.1",
     "@codemirror/lang-javascript": "^6.2.5",
+    "@codemirror/lang-rust": "^6.0.2",
     "@codemirror/language": "^6.13.1",
     "@codemirror/search": "^6.7.2",
     "@codemirror/state": "^6.7.6",

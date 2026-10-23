@@ -11,6 +11,7 @@ urlpatterns = [
     path("api/apps/", app_gallery, name="app-gallery"),
     path("api/app-ideas/", include("apps.app_ideas.urls")),
     path("api/", include("apps.livetrail_scrap.urls")),
+    path("api/apps/rust/", include("apps.rust_learning_path.urls")),
     path("api/apps/recipes/", include("apps.recipes.urls")),
 ]
 

@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "apps.admin_ui",
     "apps.livetrail_scrap",
     "apps.recipes",
+    "apps.rust_learning_path",
 ]
 
 UNFOLD = {
