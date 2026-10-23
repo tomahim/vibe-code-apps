@@ -46,8 +46,13 @@ start a scheduled run a few minutes after its nominal time.
 
 ## Commands
 
+- /wakeup pings the API health endpoint and answers "Hello ! I am awake, what
+  can I do for you ?" only once the API responds, retrying a few times while a
+  sleeping serverless API cold-starts.
 - /add asks for a title, ingredients, optional source URL, and optional photo.
-  Use /skip for the source or photo, and /cancel to discard the draft.
+  Use /skip for the source or photo, and /cancel to discard the draft. Starting
+  /add pings the API in the background so a sleeping API cold-starts while you
+  type instead of when the recipe is saved.
 - /list shows all recipes. /list tomato, pasta filters to recipes containing
   both ingredients.
 - /random returns one recipe. /random tomato, pasta filters first.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
@@ -27,6 +28,9 @@ MAX_IMAGE_BYTES = 5 * 1024 * 1024
 TITLE, INGREDIENTS, SOURCE, PHOTO = range(4)
 CAPTION_LIMIT = 1024  # Telegram's photo caption limit
 MAX_LIST_PHOTOS = 10  # keep /list under Telegram's per-chat rate limits
+WAKEUP_ATTEMPTS = 3  # cold-starting a sleeping serverless API can outlast one request
+WAKEUP_TIMEOUT_SECONDS = 30
+WAKEUP_RETRY_DELAY_SECONDS = 5
 
 
 def required_settings() -> tuple[str, str, set[int]]:
@@ -193,6 +197,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "/add — save a recipe through a short conversation; add a photo or skip it.\n"
         "/list [ingredient, ingredient] — list recipes, optionally requiring all ingredients.\n"
         "/random [ingredient, ingredient] — pick a random recipe, optionally filtered.\n"
+        "/wakeup — wake the sleeping API and confirm it is up.\n"
         "/cancel — stop adding a recipe.\n\n"
         "During /add, enter ingredients separated by commas or new lines. Add a quantity as "
         "ingredient: quantity, for example tomato: 200 g, pasta: 150 g."
@@ -202,6 +207,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def add_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if not await require_authorized(update, context):
         return ConversationHandler.END
+    # Wake the serverless API in the background so it cold-starts while the
+    # user types the recipe instead of when the bot saves it.
+    context.application.create_task(warm_up_api(context), update=update)
     context.user_data["new_recipe"] = {}
     await update.effective_message.reply_text("What is the recipe title? Send /cancel to stop.")
     return TITLE
@@ -355,6 +363,45 @@ async def random_recipe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     await reply_recipe(update, context, result)
 
 
+async def ping_api(context: ContextTypes.DEFAULT_TYPE) -> bool:
+    """Ping the API health endpoint once; True only when the API is actually up."""
+    try:
+        response = await api_client(context).get(f"{API_BASE_URL}/health/", timeout=WAKEUP_TIMEOUT_SECONDS)
+        return response.status_code == 200 and response.json().get("status") == "ok"
+    except (httpx.RequestError, ValueError):
+        return False
+
+
+async def warm_up_api(context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Background warm-up ping so a sleeping API cold-starts while the user types.
+
+    Fire-and-forget: the result never blocks the conversation; failures only log.
+    """
+    if await ping_api(context):
+        logger.info("API warm-up ping succeeded")
+    else:
+        logger.info("API warm-up ping did not succeed yet; the request on save may wait out the cold start")
+
+
+async def wakeup(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Ping the API health endpoint and confirm only once it is actually up.
+
+    The API is serverless and sleeps when idle, so a first ping can time out
+    while the service cold-starts; retry a few times before giving up.
+    """
+    if not await require_authorized(update, context):
+        return
+    message = update.effective_message
+    for attempt in range(1, WAKEUP_ATTEMPTS + 1):
+        if await ping_api(context):
+            await message.reply_text("Hello ! I am awake, what can I do for you ?")
+            return
+        logger.warning("Wakeup ping attempt %d failed", attempt)
+        if attempt < WAKEUP_ATTEMPTS:
+            await asyncio.sleep(WAKEUP_RETRY_DELAY_SECONDS)
+    await message.reply_text("The API is still waking up. Please try /wakeup again in a moment.")
+
+
 async def post_init(application: Application) -> None:
     _, secret, user_ids = required_settings()
     application.bot_data["api_secret"] = secret
@@ -365,6 +412,7 @@ async def post_init(application: Application) -> None:
     )
     await application.bot.set_my_commands([
         BotCommand("add", "Add a recipe"),
+        BotCommand("wakeup", "Wake the API and confirm it is up"),
         BotCommand("list", "List recipes, optionally by ingredients"),
         BotCommand("random", "Pick a random recipe"),
         BotCommand("cancel", "Cancel recipe entry"),
@@ -413,6 +461,7 @@ def main() -> None:
     application.add_handler(conversation)
     application.add_handler(CommandHandler("list", list_recipes))
     application.add_handler(CommandHandler("random", random_recipe))
+    application.add_handler(CommandHandler("wakeup", wakeup))
     application.add_handler(CommandHandler("cancel", cancel))
     logger.info("Starting Telegram long polling")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
