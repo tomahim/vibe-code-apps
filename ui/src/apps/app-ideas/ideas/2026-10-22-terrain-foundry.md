@@ -4,6 +4,7 @@ tagline: Stack Independent Procedural Modules Into One Parametric Landscape
 pitch: Build a realistic 3D landscape layer by layer - mountains, rocks, rivers, trees, fog - each its own module with its own dials.
 domains: [3D, MEDIA]
 created: 2026-10-22T16:18:42Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
