@@ -4,7 +4,7 @@ import logging
 from django.conf import settings
 from django.core.exceptions import RequestDataTooBig, ValidationError
 from django.db import transaction
-from django.db.models import Count, Q
+from django.db.models import Exists, OuterRef, Q
 from django.http import JsonResponse
 from django.utils.crypto import constant_time_compare
 from django.views.decorators.csrf import csrf_exempt
@@ -40,13 +40,17 @@ def serialize_recipe(recipe, request):
 
 
 def filtered_recipes(request):
-    names = {name.strip().lower() for name in request.GET.get("ingredients", "").split(",") if name.strip()}
+    terms = [name.strip().lower() for name in request.GET.get("ingredients", "").split(",") if name.strip()]
     recipes = Recipe.objects.all()
-    # Count matching distinct names so every requested ingredient must be present.
-    if names:
-        recipes = recipes.annotate(
-            matching_ingredients=Count("ingredients", filter=Q(ingredients__name__in=names), distinct=True),
-        ).filter(matching_ingredients=len(names))
+    # Every term must match. By default a term must be an ingredient name; with
+    # match_title=1 (used by /list) it may also be contained in the recipe title.
+    match_title = request.GET.get("match_title") == "1"
+    for term in dict.fromkeys(terms):
+        has_ingredient = RecipeIngredient.objects.filter(recipe=OuterRef("pk"), ingredient__name__iexact=term)
+        condition = Exists(has_ingredient)
+        if match_title:
+            condition |= Q(title__icontains=term)
+        recipes = recipes.filter(condition)
     return recipes.prefetch_related("ingredient_entries__ingredient")
 
 

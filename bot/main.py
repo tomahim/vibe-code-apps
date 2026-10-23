@@ -82,8 +82,11 @@ async def recipe_api_error(response: httpx.Response) -> str:
     return f"The recipe API returned HTTP {response.status_code}."
 
 
-async def api_get(context: ContextTypes.DEFAULT_TYPE, path: str, ingredients: str = "") -> dict:
+async def api_get(context: ContextTypes.DEFAULT_TYPE, path: str, ingredients: str = "", match_title: bool = False
+) -> dict:
     params = {"ingredients": ingredients} if ingredients else None
+    if params and match_title:
+        params["match_title"] = "1"
     response = await api_client(context).get(f"{API_BASE_URL}{path}", params=params)
     response.raise_for_status()
     return response.json()
@@ -195,7 +198,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.effective_message.reply_text(
         "Commands:\n"
         "/add — save a recipe through a short conversation; add a photo or skip it.\n"
-        "/list [ingredient, ingredient] — list recipes, optionally requiring all ingredients.\n"
+        "/list [ingredient, ingredient] — list recipes, optionally requiring every term in an ingredient or the recipe name.\n"
         "/random [ingredient, ingredient] — pick a random recipe, optionally filtered.\n"
         "/wakeup — wake the sleeping API and confirm it is up.\n"
         "/cancel — stop adding a recipe.\n\n"
@@ -305,7 +308,7 @@ async def list_recipes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         return
     ingredients = " ".join(context.args).strip()
     try:
-        result = await api_get(context, "/api/apps/recipes/recipes/", ingredients)
+        result = await api_get(context, "/api/apps/recipes/recipes/", ingredients, match_title=True)
     except (httpx.RequestError, httpx.HTTPError):
         logger.exception("Recipe list request failed")
         await update.effective_message.reply_text("I couldn't reach the recipe API. Please try again later.")
