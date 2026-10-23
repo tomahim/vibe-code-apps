@@ -42,7 +42,7 @@ LiveTrail responses are cached in memory for one hour per API instance.
 
 ## Rust learning path
 
-Open `/apps/rust-learning-path` for four short Rust lessons with a CodeMirror editor,
+Open `/apps/rust-learning-path` for nineteen Rust lessons, from basics to advanced performance concepts, with a CodeMirror editor,
 real compiler output, and exercise checks. Run the existing API alongside the UI;
 `POST /api/apps/rust/run` proxies manual runs to the public Rust Playground with
 payload limits, rate limits, timeouts, and caching. No additional service is needed.

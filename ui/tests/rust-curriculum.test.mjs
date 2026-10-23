@@ -5,7 +5,7 @@ import { checkRun, diagnosticLocation, exercisesFor, prepareRun } from '../src/a
 const root = new URL('../src/apps/rust-learning-path/lessons/', import.meta.url);
 const chapters = readdirSync(root).filter((name) => name.endsWith('.json')).map((name) => JSON.parse(readFileSync(new URL(name, root), 'utf8')));
 
-test('Rust PoC curriculum has stable IDs, all check types, and complete exercises', () => {
+test('Rust curriculum has stable IDs, all check types, and complete exercises', () => {
   const ids = new Set(), types = new Set(), orders = new Set();
   for (const chapter of chapters) {
     assert.ok(chapter.id && chapter.title && chapter.subtitle);
@@ -13,9 +13,9 @@ test('Rust PoC curriculum has stable IDs, all check types, and complete exercise
     for (const lesson of chapter.lessons) {
       assert.ok(!ids.has(lesson.id)); ids.add(lesson.id);
       assert.equal(lesson.edition, '2021');
-      assert.ok(lesson.minutes >= 2 && lesson.minutes <= 3);
+      assert.ok(lesson.minutes >= 2 && lesson.minutes <= 9);
       assert.ok(lesson.concept && lesson.body.every((item) => typeof item === 'string' && item));
-      assert.ok(lesson.reference.url.startsWith('https://doc.rust-lang.org/book/'));
+      assert.ok(lesson.reference.url.startsWith('https://doc.rust-lang.org/'));
       for (const exercise of exercisesFor(lesson)) {
         for (const field of ['title', 'task', 'hint', 'code', 'solution']) assert.ok(typeof exercise[field] === 'string' && exercise[field], `${lesson.id}.${field}`);
         assert.notEqual(exercise.code, exercise.solution);
@@ -26,7 +26,8 @@ test('Rust PoC curriculum has stable IDs, all check types, and complete exercise
       }
     }
   }
-  assert.deepEqual([...ids].sort(), ['functions', 'hello-world', 'move-semantics', 'variables-immutable']);
+  assert.ok(ids.size >= 19);
+  for (const id of ['functions', 'hello-world', 'move-semantics', 'variables-immutable']) assert.ok(ids.has(id));
   assert.deepEqual([...types].sort(), ['compile_error', 'stdout', 'tests']);
 });
 
@@ -48,4 +49,12 @@ test('test harness is appended outside the editable source, and diagnostic links
   assert.deepEqual(prepareRun({ check: { type: 'tests', tests: '#[test] fn example() {}' } }, 'fn main() {}'), { code: 'fn main() {}\n\n#[test] fn example() {}', mode: 'test' });
   assert.deepEqual(diagnosticLocation(' --> src/main.rs:4:12', 7), { line: 4, column: 12 });
   assert.equal(diagnosticLocation(' --> src/main.rs:20:12', 7), null);
+});
+
+
+test('exercise sequencing keeps diagnostics and all additional steps in order', () => {
+  const diagnostic = { title: 'Observe' }, second = { title: 'Refine' }, third = { title: 'Apply' };
+  const lesson = { title: 'Build', diagnostic, steps: [second, third] };
+  assert.deepEqual(exercisesFor(lesson), [diagnostic, lesson, second, third]);
+  assert.deepEqual(exercisesFor({ title: 'Single' }), [{ title: 'Single' }]);
 });

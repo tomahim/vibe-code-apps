@@ -1,0 +1,113 @@
+{
+  "id": "borrow-without-copying",
+  "title": "Borrow without copying",
+  "subtitle": "Make ownership work for your hot path",
+  "order": 4,
+  "lessons": [
+    {
+      "title": "Views, not copies",
+      "task": "Return at most n elements, borrowing the original slice.",
+      "hint": "Clamp n with min before slicing.",
+      "code": "fn prefix(xs: &[i32], n: usize) -> &[i32] {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn prefix(xs: &[i32], n: usize) -> &[i32] {\n    &xs[..n.min(xs.len())]\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet xs = [2, 4, 6];\nassert_eq!(prefix(&xs, 2), &[2,4]);\nassert_eq!(prefix(&xs, 99), &xs);\nassert_eq!(prefix(&[], 2), &[]);\nassert_eq!(prefix(&xs, 2).as_ptr(), xs.as_ptr());\n    }\n}"
+      },
+      "id": "borrowed-slices",
+      "concept": "Borrowing and disjoint mutation",
+      "body": [
+        "A slice is a view into existing storage. &[T] carries a pointer and length; borrowing a subrange does not allocate or copy its elements. Returning Vec<T> would introduce ownership and potentially an allocation.",
+        "Bounds still matter: safe slicing checks that the range is valid. Optimizers can remove some checks when they can prove the bounds, but borrowing alone is not a guarantee of faster machine code.",
+        "First return a view; then use split_at_mut to express two non-overlapping mutable regions. This exposes the separation to Rust without raw pointers."
+      ],
+      "edition": "2021",
+      "minutes": 6,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/primitive.slice.html"
+      },
+      "steps": [
+        {
+          "title": "Prove the regions are disjoint",
+          "task": "Add 1 to elements before mid and 10 to the rest; clamp mid to the length.",
+          "hint": "Use split_at_mut, then iterate each half.",
+          "code": "fn bump(xs: &mut [i32], mid: usize) {\n    todo!()\n}\nfn main() {}",
+          "solution": "fn bump(xs: &mut [i32], mid: usize) {\n    let mid = mid.min(xs.len());\n    let (left, right) = xs.split_at_mut(mid);\n    for x in left { *x += 1; }\n    for x in right { *x += 10; }\n}\nfn main() {}",
+          "check": {
+            "type": "tests",
+            "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet mut xs = [0,0,0]; bump(&mut xs, 1); assert_eq!(xs,[1,10,10]);\nlet mut ys=[0]; bump(&mut ys,99); assert_eq!(ys,[1]); bump(&mut [],0);\n    }\n}"
+          },
+          "body": [
+            "Two mutable borrows must not overlap while both are live. split_at_mut checks the boundary and returns disjoint slices. The safe API packages a proof that would otherwise require unsafe code."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Parse without owning",
+      "task": "Split on the first =, returning borrowed key and value; return None when absent.",
+      "hint": "split_once returns slices with the input lifetime.",
+      "code": "fn pair<'a>(input: &'a str) -> Option<(&'a str, &'a str)> {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn pair<'a>(input: &'a str) -> Option<(&'a str, &'a str)> {\n    input.split_once('=')\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet s=String::from(\"name=Zo\u00eb=ok\"); let (k,v)=pair(&s).unwrap();\nassert_eq!((k,v),(\"name\",\"Zo\u00eb=ok\")); assert_eq!(k.as_ptr(),s.as_ptr());\nassert_eq!(pair(\"missing\"),None); assert_eq!(pair(\"=\"),Some((\"\",\"\")));\n    }\n}"
+      },
+      "id": "lifetimes-zero-copy",
+      "concept": "Lifetimes describe relationships",
+      "body": [
+        "An explicit lifetime connects an output reference to its input. It does not extend the input\u2019s life or add a runtime counter. The compiler rejects a reference that could outlive its owner.",
+        "A parser returning slices can avoid allocating one String per field. The tradeoff is retention: a small borrowed field may require keeping a large input buffer alive.",
+        "Use split_once to locate a UTF-8-safe delimiter. A byte index that splits a character is not a valid str boundary."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html"
+      },
+      "steps": []
+    },
+    {
+      "title": "Own only when necessary",
+      "task": "Replace underscores with spaces only when needed. Otherwise return Cow::Borrowed.",
+      "hint": "Check contains before constructing an owned replacement.",
+      "code": "use std::borrow::Cow;\nfn label(s: &str) -> Cow<'_, str> {\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::borrow::Cow;\nfn label(s: &str) -> Cow<'_, str> {\n    if s.contains('_') { Cow::Owned(s.replace('_', \" \")) } else { Cow::Borrowed(s) }\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert!(matches!(label(\"hello\"),Cow::Borrowed(\"hello\")));\nassert!(matches!(label(\"a_b\"),Cow::Owned(_))); assert_eq!(label(\"a_b\"),\"a b\"); assert!(matches!(label(\"\"),Cow::Borrowed(\"\")));\n    }\n}"
+      },
+      "id": "cow-on-demand",
+      "concept": "Conditional allocation with Cow",
+      "body": [
+        "Cow<str> can hold either borrowed text or an owned String. It makes a common fast path explicit: return the existing input if no transformation is needed.",
+        "Calling to_mut on a borrowed Cow creates owned storage; calling it on an owned Cow reuses that ownership. The enum and branch have costs too, so this is most useful when unchanged inputs are common.",
+        "You will inspect the variant, not just the output text. Correct text alone cannot demonstrate that the borrowed path was preserved."
+      ],
+      "edition": "2021",
+      "minutes": 6,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/borrow/enum.Cow.html"
+      },
+      "steps": [
+        {
+          "title": "Clone only on mutation",
+          "task": "Append ! through Cow::to_mut and return the Cow.",
+          "hint": "to_mut gives mutable access to a String, cloning borrowed text if needed.",
+          "code": "use std::borrow::Cow;\nfn shout(mut text: Cow<'_, str>) -> Cow<'_, str> {\n    todo!()\n}\nfn main() {}",
+          "solution": "use std::borrow::Cow;\nfn shout(mut text: Cow<'_, str>) -> Cow<'_, str> {\n    text.to_mut().push('!');\n    text\n}\nfn main() {}",
+          "check": {
+            "type": "tests",
+            "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(shout(Cow::Borrowed(\"hi\")),\"hi!\");\nassert!(matches!(shout(Cow::Borrowed(\"hi\")),Cow::Owned(_)));\nassert_eq!(shout(Cow::Owned(String::from(\"yes\"))),\"yes!\");\n    }\n}"
+          },
+          "body": [
+            "The output now must own its appended text. Cow delays the ownership decision; it cannot eliminate a copy when you genuinely need to mutate borrowed storage."
+          ]
+        }
+      ]
+    }
+  ]
+}

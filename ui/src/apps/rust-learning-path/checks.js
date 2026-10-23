@@ -1,4 +1,4 @@
-export const exercisesFor = (lesson) => lesson.diagnostic ? [lesson.diagnostic, lesson] : [lesson];
+export const exercisesFor = (lesson) => [...(lesson.diagnostic ? [lesson.diagnostic] : []), lesson, ...(lesson.steps ?? [])];
 export function prepareRun(exercise, code) {
   return { code: exercise.check.type === 'tests' ? `${code}\n\n${exercise.check.tests}` : code, mode: exercise.check.type === 'tests' ? 'test' : 'run' };
 }

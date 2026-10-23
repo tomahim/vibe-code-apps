@@ -99,18 +99,18 @@ export default function RustLearningPath({ onHome }) {
         <nav>{chapters.map((chapter) => <section key={chapter.id}>
           <h3><span>0{chapter.order}</span> {chapter.title}</h3>
           {lessons.filter((item) => item.chapterId === chapter.id).map((item) => <button key={item.id} onClick={() => selectLesson(lessons.indexOf(item))} aria-current={item.id === lesson.id ? 'step' : undefined}>
-            <span className="rust-lesson-dot" aria-hidden="true">{isComplete(item) ? '✓' : '○'}</span><span>{item.title}<small>{item.minutes} min{item.diagnostic ? ' · 2 exercises' : ''}{isComplete(item) ? ' · complete' : ''}</small></span>
+            <span className="rust-lesson-dot" aria-hidden="true">{isComplete(item) ? '✓' : '○'}</span><span>{item.title}<small>{item.minutes} min{exercisesFor(item).length > 1 ? ` · ${exercisesFor(item).length} exercises` : ''}{isComplete(item) ? ' · complete' : ''}</small></span>
           </button>)}
         </section>)}</nav>
-        <div className="rust-map-note"><span aria-hidden="true">↳</span> A four-lesson introduction for people who already code. Progress lasts for this visit.</div>
+        <div className="rust-map-note"><span aria-hidden="true">↳</span> From first steps to performance-aware Rust. Progress lasts for this visit.</div>
       </aside>
       <div className="rust-workspace">
         <section className="rust-lesson" aria-labelledby="lesson-title">
           <div className="rust-breadcrumb">{lesson.chapterTitle}<span>/</span>LESSON {String(index + 1).padStart(2, '0')}<span>·</span>{lesson.minutes} MIN</div>
           <h1 id="lesson-title">{lesson.title}</h1>
           <p className="rust-concept">{lesson.concept}</p>
-          <div className="rust-body">{lesson.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
-          <div className="rust-task"><span className="rust-task-icon" aria-hidden="true">↗</span><div><h2>Your turn{exercises.length > 1 ? ` · ${step === 0 ? '1. Read the error' : '2. Repair the move'}` : ''}</h2><p>{exercise.task}</p></div></div>
+          <div className="rust-body">{(exercise.body ?? lesson.body).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+          <div className="rust-task"><span className="rust-task-icon" aria-hidden="true">↗</span><div><h2>Your turn{exercises.length > 1 ? ` · Step ${step + 1} of ${exercises.length}: ${exercise.title}` : ''}</h2><p>{exercise.task}</p></div></div>
           <div className="rust-help"><button onClick={() => setHint(!hint)} aria-expanded={hint}>{hint ? 'Hide hint' : 'A little hint'}</button><a href={lesson.reference.url} target="_blank" rel="noreferrer">{lesson.reference.label}</a></div>
           {hint && <p className="rust-hint">{exercise.hint}</p>}
         </section>
@@ -131,11 +131,11 @@ export default function RustLearningPath({ onHome }) {
                 {!result.stdout && !result.stderr && <p>No output.</p>}
               </> : <div className="rust-empty"><span aria-hidden="true">›_</span><h3>A conversation with the compiler.</h3><p>Edit your code, then press Run.<br />Your output will appear here.</p></div>}
             </div>
-            {result && <div role="status" className={`rust-verdict ${result.passed ? 'is-pass' : 'is-fail'}`}><strong>{result.passed ? '✓ Check passed' : '↻ Not quite yet'}</strong><p>{result.passed ? (exercise.check.type === 'compile_error' ? 'You found E0382. Now let’s repair the move.' : 'Your code meets the exercise check.') : (!result.success ? 'Read the compiler output, adjust your code, and run again.' : exercise.check.type === 'stdout' ? `Expected output: ${JSON.stringify(exercise.check.expected.trim())}.${exercise.check.requires ? ' Use the concept in the task, too.' : ''}` : 'Make every exercise test pass, then try again.')}</p></div>}
+            {result && <div role="status" className={`rust-verdict ${result.passed ? 'is-pass' : 'is-fail'}`}><strong>{result.passed ? '✓ Check passed' : '↻ Not quite yet'}</strong><p>{result.passed ? (exercise.check.type === 'compile_error' ? `You found ${exercise.check.expected}. Continue to the next exercise.` : 'Your code meets the exercise check.') : (!result.success ? 'Read the compiler output, adjust your code, and run again.' : exercise.check.type === 'stdout' ? `Expected output: ${JSON.stringify(exercise.check.expected.trim())}.${exercise.check.requires ? ' Use the concept in the task, too.' : ''}` : 'Make every exercise test pass, then try again.')}</p></div>}
           </section>
         </div>
         <div className="rust-runbar"><span>{running ? 'Compiling & checking…' : 'Make a change. See what happens.'}<small>Code runs on the public Rust Playground.</small></span><button className="rust-run" onClick={run} disabled={running}>{running ? 'Running…' : '▶ Run code'}<kbd>⌘ / Ctrl ↵</kbd></button></div>
-        <footer className="rust-lesson-footer"><button disabled={index === 0 && step === 0} onClick={() => { if (step > 0) { invalidate(); setStep(step - 1); setHint(false); setSolution(false); } else selectLesson(index - 1); }}>← Previous</button><span>{completeCount === lessons.length ? 'All four lessons complete. Keep building!' : 'One concept at a time.'}</span><button disabled={!passed[key] || (index === lessons.length - 1 && step === exercises.length - 1)} onClick={next}>{step < exercises.length - 1 ? 'Repair the move →' : 'Next lesson →'}</button></footer>
+        <footer className="rust-lesson-footer"><button disabled={index === 0 && step === 0} onClick={() => { if (step > 0) { invalidate(); setStep(step - 1); setHint(false); setSolution(false); } else selectLesson(index - 1); }}>← Previous</button><span>{completeCount === lessons.length ? `All ${lessons.length} lessons complete. Keep building!` : 'One concept at a time.'}</span><button disabled={!passed[key] || (index === lessons.length - 1 && step === exercises.length - 1)} onClick={next}>{step < exercises.length - 1 ? 'Next exercise →' : 'Next lesson →'}</button></footer>
       </div>
     </div>
   </main>;

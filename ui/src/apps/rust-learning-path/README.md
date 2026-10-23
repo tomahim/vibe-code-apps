@@ -1,8 +1,15 @@
 # Rust workshop
 
-Four atomic lessons for issue #62's day-one PoC: Hello Rust, immutable bindings,
-functions, and moves. Ownership has two checks: deliberately produce E0382, then
-repair the move with `clone()`. A lesson completes only after all its checks pass.
+Nineteen lessons cover introductory Rust and its performance model. The 15 advanced
+lessons cover borrowed slices, lifetimes, Cow, Vec reuse, niche representations,
+Drop, iterator fusion, static and dynamic dispatch, Rc/RefCell, scoped threads,
+atomics, async polling, unsafe invariants, and measurement. Borrowing, Cow,
+iterators, and async have additional exercises. Ownership also includes a
+compiler-diagnostic exercise. Completion requires all exercises in a lesson.
+
+Exercises use deterministic behavior, pointer identity, capacity, variant,
+wakeup, and comparison-count checks rather than unstable timing thresholds.
+The public Playground runs debug builds; it is not a performance benchmark.
 
 Open `/apps/rust-learning-path` in the shared UI. The shared Django API must be
 running for execution (`npm run dev` proxies `/api` to localhost:8000). No new
@@ -13,6 +20,8 @@ service, database, account, migration, or Railway configuration is required.
 Chapter JSON in `lessons/` is discovered and sorted by `catalog.js`. Stable lesson
 IDs also work as URL hashes. Each lesson declares edition 2021. `diagnostic` is an
 optional first exercise with its own starter, solution, task, hint, and check.
+`steps` appends any number of exercises; each can provide its own explanatory
+`body`. Lesson duration includes all steps. Existing lesson IDs remain stable.
 
 - `stdout`: successful execution and trimmed output equals `expected`; optional
   `requires` tokens provide lightweight feedback on the concept being practiced.
@@ -23,7 +32,7 @@ optional first exercise with its own starter, solution, task, hint, and check.
 These are learning checks, not a tamper-proof grading system. Tests are bundled
 with the UI and inspectable. Drafts and completion are kept only in React state
 for the current visit. Quizzes, persistent progress, search, exports, and the
-remaining curriculum are outside this PoC.
+account synchronization are outside this app.
 
 CodeMirror is shared with Three.js through `src/components/CodeEditor.jsx`, with
 Rust language support and a 16px editor. Run is manual, with Cmd/Ctrl+Enter,
@@ -62,13 +71,10 @@ not source code. Results are briefly cached in memory; the app does not log code
 - `npm run test:rust`: runs every starter and solution with local rustc 1.85.0
   (or `RUSTC=/absolute/path/to/rustc`). Starters must fail their intended check;
   every solution must pass. Only repository fixtures are executed locally.
-- `npm run test:browser -- rust-learning-path.spec.js`: deterministic API fixtures
-  test manual execution, all check types, compiler links, errors, cancellation,
-  and 1440px / 390px layouts without contacting the Playground.
 - `python manage.py test apps.rust_learning_path` from `api/`: validates limits,
   cache/adapter behavior, malformed inputs, and upstream failures with mocks.
 
-`.github/workflows/test-rust.yml` runs the real compiler checks and browser tests;
+`.github/workflows/test-rust.yml` runs the real compiler checks;
 the existing API workflow discovers the backend tests. CI does not send workloads
 to the public Playground. Live availability still requires an occasional manual
 end-to-end smoke check with the API running.

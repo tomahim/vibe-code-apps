@@ -1,0 +1,83 @@
+{
+  "id": "sharing-and-concurrency",
+  "title": "Sharing and concurrency",
+  "subtitle": "Ownership across threads",
+  "order": 7,
+  "lessons": [
+    {
+      "title": "Share ownership, check mutation",
+      "task": "Try to increment the shared counter. Return false if it is currently borrowed, without panicking.",
+      "hint": "Match try_borrow_mut and mutate through the guard only on success.",
+      "code": "use std::{rc::Rc,cell::RefCell};\nfn increment(value: &Rc<RefCell<u32>>) -> bool {\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::{rc::Rc,cell::RefCell};\nfn increment(value: &Rc<RefCell<u32>>) -> bool {\n    match value.try_borrow_mut() { Ok(mut v) => { *v += 1; true }, Err(_) => false }\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet a=Rc::new(RefCell::new(3)); let b=Rc::clone(&a);\nlet read=a.borrow(); assert!(!increment(&b)); drop(read);\nassert!(increment(&b)); assert_eq!(*a.borrow(),4); assert!(Rc::ptr_eq(&a,&b));\n    }\n}"
+      },
+      "id": "rc-refcell",
+      "concept": "Rc and interior mutability",
+      "body": [
+        "Rc clones share an allocation by updating a non-atomic reference count; cloning Rc<T> does not clone T. Rc is for one thread. Arc provides atomic reference counting when shared ownership must cross threads.",
+        "RefCell moves borrowing checks to runtime. Conflicting borrow_mut calls panic; try_borrow_mut reports failure instead. This flexibility has bookkeeping cost and does not provide thread synchronization.",
+        "Keep guards short-lived. The exercise makes a live immutable borrow block a mutation, then succeeds when that guard is dropped. Reference cycles can leak; Weak is useful for non-owning back edges."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch15-05-interior-mutability.html"
+      },
+      "steps": []
+    },
+    {
+      "title": "Borrow across a thread boundary",
+      "task": "Split the input in half; sum each half in a scoped worker and join both results.",
+      "hint": "Use thread::scope and join the two handles inside its closure.",
+      "code": "fn parallel_sum(xs: &[i64]) -> i64 {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn parallel_sum(xs: &[i64]) -> i64 {\n    std::thread::scope(|scope| {\n        let (a,b)=xs.split_at(xs.len()/2);\n        let left=scope.spawn(|| a.iter().sum::<i64>());\n        let right=scope.spawn(|| b.iter().sum::<i64>());\n        left.join().unwrap()+right.join().unwrap()\n    })\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(parallel_sum(&[1,2,3,4,5]),15); assert_eq!(parallel_sum(&[]),0); assert_eq!(parallel_sum(&[-4,2]),-2);\n    }\n}"
+      },
+      "id": "scoped-threads",
+      "concept": "Scoped threads, Send, and Sync",
+      "body": [
+        "Scoped threads must finish before their scope returns, allowing them to borrow stack-owned data safely. This can avoid cloning a large input just to satisfy a detached thread\u2019s static lifetime requirement.",
+        "Send means ownership may be transferred between threads; Sync means shared references may cross threads. These auto traits encode safety requirements, not a promise of contention-free or fast execution.",
+        "Spawning OS threads has overhead. This tiny example teaches ownership, not a speedup: for small inputs a serial sum will usually be the better choice. Reuse a worker pool for repeated parallel work."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/thread/fn.scope.html"
+      },
+      "steps": []
+    },
+    {
+      "title": "A counter is not a publication protocol",
+      "task": "Spawn four scoped workers; each increments one shared atomic counter n times. Return the total after joining.",
+      "hint": "Use AtomicUsize::fetch_add with Relaxed; scope joins before the final load.",
+      "code": "use std::sync::atomic::{AtomicUsize,Ordering};\nfn count(n:usize)->usize {\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::sync::atomic::{AtomicUsize,Ordering};\nfn count(n:usize)->usize {\n    let counter=AtomicUsize::new(0);\n    std::thread::scope(|s| {\n        for _ in 0..4 { let c=&counter; s.spawn(move || { for _ in 0..n { c.fetch_add(1,Ordering::Relaxed); } }); }\n    });\n    counter.load(Ordering::Relaxed)\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(count(0),0); assert_eq!(count(100),400); assert_eq!(count(1),4);\n    }\n}"
+      },
+      "id": "atomic-counters",
+      "concept": "Atomic operations and memory ordering",
+      "body": [
+        "Atomic read-modify-write operations prevent lost updates to one atomic value. Relaxed ordering supplies atomicity without ordering unrelated memory accesses. It can be appropriate for an independent statistic.",
+        "A flag that publishes other data needs a properly designed synchronization protocol, often a Release store paired with an Acquire load that observes it. Simply changing every load to Relaxed can break that protocol.",
+        "Even relaxed atomics can contend on a cache line. Per-worker counters followed by reduction may scale better. Here thread joins establish completion before we inspect the final counter."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html"
+      },
+      "steps": []
+    }
+  ]
+}
