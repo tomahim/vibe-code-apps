@@ -4,6 +4,7 @@ import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 
+const RustLearningPath = lazy(() => import("../apps/rust-learning-path/RustLearningPath.jsx"));
 const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/ThreeLearningPath.jsx"));
 
 const AppIdeas = lazy(() => import("../apps/app-ideas/AppIdeas.jsx"));
@@ -37,6 +38,10 @@ export default function App() {
 
   if (path.startsWith("/apps/recipes")) {
     return <Suspense fallback={<div className="recipes-app">Opening the kitchen…</div>}><Recipes onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/rust-learning-path")) {
+    return <Suspense fallback={<div>Opening Rust workshop…</div>}><RustLearningPath onHome={() => navigate("/")} /></Suspense>;
   }
 
   return <Gallery onOpenApp={(slug) => navigate(`/apps/${slug}`)} />;

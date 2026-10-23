@@ -38,6 +38,7 @@ jobs:
         run: |
           changed_files="$(git diff --name-only "$BASE_SHA...$HEAD_SHA" -- \
             src/apps/threejs-learning-path \
+            src/components/CodeEditor.jsx \
             src/apps/app-ideas \
             tests/browser/app-ideas.spec.js \
             scripts/build-sandbox.mjs \

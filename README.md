@@ -40,6 +40,15 @@ The admin uses [Unfold](https://unfoldadmin.com/docs/installation/quickstart/) f
 
 LiveTrail responses are cached in memory for one hour per API instance.
 
+## Rust learning path
+
+Open `/apps/rust-learning-path` for four short Rust lessons with a CodeMirror editor,
+real compiler output, and exercise checks. Run the existing API alongside the UI;
+`POST /api/apps/rust/run` proxies manual runs to the public Rust Playground with
+payload limits, rate limits, timeouts, and caching. No additional service is needed.
+See [the Rust workshop guide](ui/src/apps/rust-learning-path/README.md) for checks,
+runner limits, and curriculum tests.
+
 ## Railway deployment
 
 Railway has separate `api` and `ui` services in the same production project so the UI can proxy requests to `api.railway.internal`. The UI is public; the API does not need a public domain.

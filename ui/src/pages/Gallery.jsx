@@ -3,6 +3,13 @@ import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
 
 const initialApps = [
   {
+    slug: "rust-learning-path",
+    name: "Rust learning path",
+    description: "Small lessons, real Rust. Learn the fundamentals with a code editor and compiler feedback.",
+    category: "Learn to build",
+    icon: "🦀",
+  },
+  {
     slug: "app-ideas",
     name: "App Ideas",
     description: "The idea garden: browse, search and filter every app idea waiting to be built.",

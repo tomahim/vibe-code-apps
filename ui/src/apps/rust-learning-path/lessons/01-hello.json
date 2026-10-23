@@ -1,0 +1,57 @@
+{
+  "id": "hello",
+  "title": "Hello, Rust",
+  "subtitle": "Meet the compiler",
+  "order": 1,
+  "lessons": [
+    {
+      "id": "hello-world",
+      "title": "Hello, Rust!",
+      "minutes": 3,
+      "edition": "2021",
+      "concept": "A familiar beginning, a few new details",
+      "body": [
+        "A Rust program starts in fn main(). Braces define its body, and statements usually end with a semicolon.",
+        "println! is a macro\u2014the ! is the clue. It formats text and adds a newline. Let\u2019s give the compiler something to work with."
+      ],
+      "task": "Print exactly Hello, Rust! to the console.",
+      "hint": "Change the text inside the double quotes.",
+      "code": "fn main() {\n    println!(\"Hello, world!\");\n}",
+      "solution": "fn main() {\n    println!(\"Hello, Rust!\");\n}",
+      "check": {
+        "type": "stdout",
+        "expected": "Hello, Rust!\n"
+      },
+      "reference": {
+        "label": "Read the Rust Book \u2197",
+        "url": "https://doc.rust-lang.org/book/ch01-02-hello-world.html"
+      }
+    },
+    {
+      "id": "variables-immutable",
+      "title": "Make room for change",
+      "minutes": 3,
+      "edition": "2021",
+      "concept": "Bindings are immutable by default",
+      "body": [
+        "Rust makes reassignment an explicit choice. A binding created with let cannot be assigned a new value unless you opt in with mut.",
+        "The starter produces E0384. Read the compiler\u2019s suggestion, then make x mutable. This changes the value without changing its type."
+      ],
+      "task": "Keep the reassignment, make x mutable, and print 10.",
+      "hint": "Write let mut x = 5; to allow the later assignment.",
+      "code": "fn main() {\n    let x = 5;\n    x = 10;\n    println!(\"{x}\");\n}",
+      "solution": "fn main() {\n    let mut x = 5;\n    x = 10;\n    println!(\"{x}\");\n}",
+      "check": {
+        "type": "stdout",
+        "expected": "10\n",
+        "requires": [
+          "let mut"
+        ]
+      },
+      "reference": {
+        "label": "Read the Rust Book \u2197",
+        "url": "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html"
+      }
+    }
+  ]
+}

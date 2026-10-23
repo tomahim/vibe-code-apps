@@ -1,0 +1,45 @@
+{
+  "id": "ownership",
+  "title": "Ownership",
+  "subtitle": "The Rust difference",
+  "order": 3,
+  "lessons": [
+    {
+      "id": "move-semantics",
+      "title": "One value, one owner",
+      "minutes": 3,
+      "edition": "2021",
+      "concept": "Read a move error, then repair it",
+      "body": [
+        "A String owns heap-allocated text. Assigning it to another binding moves ownership; it does not copy the text. Using the old binding after that move produces E0382.",
+        "First, make the compiler show you that error. Then repair the program with clone(), which creates an independent copy. Later, borrowing lets you share access without copying."
+      ],
+      "task": "Use clone() when assigning other, so both strings can print their length.",
+      "hint": "Use let other = text.clone(); to keep text available.",
+      "code": "fn main() {\n    let text = String::from(\"hello\");\n    let other = text;\n    println!(\"{}\", text.len());\n    println!(\"{}\", other.len());\n}",
+      "solution": "fn main() {\n    let text = String::from(\"hello\");\n    let other = text.clone();\n    println!(\"{}\", text.len());\n    println!(\"{}\", other.len());\n}",
+      "check": {
+        "type": "stdout",
+        "expected": "5\n5\n",
+        "requires": [
+          ".clone()"
+        ]
+      },
+      "reference": {
+        "label": "Read the Rust Book \u2197",
+        "url": "https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html"
+      },
+      "diagnostic": {
+        "title": "Meet E0382",
+        "task": "Remove .clone() from the assignment to move the String. Run it and look for E0382. A compile error is the goal of this step.",
+        "hint": "Change let other = text.clone(); to let other = text;",
+        "code": "fn main() {\n    let text = String::from(\"hello\");\n    let other = text.clone();\n    println!(\"{}\", text.len());\n    println!(\"{}\", other.len());\n}",
+        "solution": "fn main() {\n    let text = String::from(\"hello\");\n    let other = text;\n    println!(\"{}\", text.len());\n    println!(\"{}\", other.len());\n}",
+        "check": {
+          "type": "compile_error",
+          "expected": "E0382"
+        }
+      }
+    }
+  ]
+}
