@@ -33,6 +33,17 @@ a { color: inherit; }
 .eyebrow { margin: 0 0 12px; color: #698273; font-size: 10px; font-weight: 700; letter-spacing: .15em; }
 .gallery-intro h1, .estimator-hero h1 { margin: 0; font-family: Manrope, sans-serif; font-size: clamp(34px, 5vw, 52px); line-height: 1.1; letter-spacing: -.06em; }
 .gallery-intro > p:last-child, .hero-copy > p:last-child { margin: 15px 0 0; color: var(--muted); font-size: 15px; }
+.gallery-search { margin-bottom: 24px; }
+.gallery-search label { display: block; margin-bottom: 8px; color: var(--green); font-size: 13px; font-weight: 700; }
+.gallery-search-field { position: relative; max-width: 540px; }
+.gallery-search input { width: 100%; min-height: 48px; padding: 12px 48px 12px 15px; border: 1px solid #c8d4ca; border-radius: 10px; background: var(--paper); color: var(--ink); font-size: 16px; }
+.gallery-search input::placeholder { color: var(--muted); font-size: 13px; }
+.gallery-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.gallery-search input:focus-visible, .gallery-search-clear:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 3px; }
+.gallery-search-clear { position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; border: 0; border-radius: 8px; background: transparent; color: var(--green); font-size: 24px; }
+.gallery-search-clear:hover { background: #eaf0e9; }
+.gallery-search-status { margin: 10px 0 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.gallery-search-empty { margin: 0; padding: 28px 20px; border: 1px dashed #c8d4ca; border-radius: 15px; color: var(--muted); font-size: 14px; }
 .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 18px; }
 .app-card { min-height: 255px; display: flex; flex-direction: column; align-items: flex-start; padding: 23px; border: 1px solid var(--line); border-radius: 15px; background: var(--paper); text-align: left; transition: transform .18s, box-shadow .18s, border-color .18s; }
 .app-card:hover { transform: translateY(-3px); border-color: #c8d4ca; box-shadow: 0 14px 35px #24392b0d; }
