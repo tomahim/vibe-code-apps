@@ -9,7 +9,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from PIL import Image
 
-from .models import Recipe
+from .models import Ingredient, Recipe, RecipeIngredient
 
 MEDIA_ROOT = tempfile.mkdtemp()
 
@@ -89,3 +89,27 @@ class RecipeAdminTests(TestCase):
         self.assertEqual(response.status_code, 302)
         ingredient.refresh_from_db()
         self.assertEqual(ingredient.name, "tomatoes")
+
+
+class RecipeSearchTests(TestCase):
+    def setUp(self):
+        carbonara = Recipe.objects.create(title="Pasta Carbonara")
+        salad = Recipe.objects.create(title="Tomato salad")
+        for recipe, names in ((carbonara, ["egg", "pasta"]), (salad, ["tomato"])):
+            for name in names:
+                ingredient, _ = Ingredient.objects.get_or_create(name=name)
+                RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient, quantity="1")
+
+    def titles(self, **params):
+        response = self.client.get("/api/apps/recipes/recipes/", params)
+        return sorted(r["title"] for r in response.json()["recipes"])
+
+    def test_default_matches_ingredients_only(self):
+        self.assertEqual(self.titles(ingredients="carbonara"), [])
+        self.assertEqual(self.titles(ingredients="egg, pasta"), ["Pasta Carbonara"])
+
+    def test_match_title_also_searches_recipe_name(self):
+        self.assertEqual(self.titles(ingredients="carbonara", match_title="1"), ["Pasta Carbonara"])
+        self.assertEqual(self.titles(ingredients="tomato", match_title="1"), ["Tomato salad"])
+        self.assertEqual(self.titles(ingredients="carbonara, egg", match_title="1"), ["Pasta Carbonara"])
+        self.assertEqual(self.titles(ingredients="salad, egg", match_title="1"), [])
