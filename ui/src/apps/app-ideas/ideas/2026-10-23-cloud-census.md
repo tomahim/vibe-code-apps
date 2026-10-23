@@ -8,7 +8,7 @@ created: 2026-10-23T06:57:21Z
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
 
-- **Creative Twist / Re-imagining Angle:** The cloud is made of buildings, and most of them are hiding in plain sight. The app scans open satellite imagery (Sentinel-2, Landsat, open aerial layers) for the visual signature of data centers: huge flat roofs, cooling arrays, substations, security perimeters, telltale water infrastructure. Each candidate appears on a map as a card with its imagery chips and a confidence score with reasons ("roof area 40,000 m2", "adjacent substation", "cooling plume in thermal band"). Nothing is claimed as certain: candidates below the top confidence band are labeled "unverified", and confirming them becomes the game - players review chips, vote real or not, and earn a reputation score when later evidence (permits, news, operator listings) proves them right. Over time the map becomes a living census of the physical internet, with estimated capacity context where public data exists.
+- **Creative Twist / Re-imagining Angle:** The cloud is made of buildings, and most of them are hiding in plain sight. The app scans open satellite imagery (Sentinel-2, Landsat, open aerial layers) for the visual signature of data centers: huge flat roofs, cooling arrays, substations, security perimeters, telltale water infrastructure. Each candidate appears on a map as a card with its imagery chips and a confidence score with reasons ("roof area 40,000 m2", "adjacent substation", "cooling plume in thermal band"). Nothing is claimed as certain: every site stays a "candidate" no matter how high the score, and the game is about what public evidence exists - players review chips, vote real or not, and earn a reputation score when later evidence (permits, news, operator listings) proves them right. A site is only ever labeled "publicly documented" when such an external source is attached, never on the model score alone. Over time the map becomes a living census of the physical internet, with estimated capacity context where public data exists.
 - **Core Problem & Target User:** Data centers shape energy grids, water use and land prices, yet their locations are scattered across press releases and planning documents. Target user: the map-and-infrastructure curious, journalists, students, and anyone who has wondered where "the cloud" physically sits.
 - **Core Value Proposition:** A crowdsourced, honest-by-design map of likely data center sites from open imagery, where confidence is shown, uncertainty is explicit, and verification is fun.
 
@@ -29,7 +29,7 @@ created: 2026-10-23T06:57:21Z
 #### 4. DAY 1 POC EXECUTION SPECIFICATION
 
 - **Minimal Technical Setup:** React, TypeScript, Vite, Tailwind CSS, MapLibre with open satellite basemaps. A curated static dataset of around fifty sites (mix of known, likely, and decoy industrial buildings) with pre-cut imagery chips and rule-based scores computed offline. Voting state in localStorage. No backend, no live imagery API.
-- **Core 24-Hour Demo Flow:** Open the map on a region, tap a glowing candidate, read "confidence 72%: roof 38,000 m2, substation 200 m, no signage", then review three unverified chips and vote. **Aha moment:** a site the player confirmed flips to "verified by community" with the vote count, and the map feels owned.
+- **Core 24-Hour Demo Flow:** Open the map on a region, tap a glowing candidate, read "confidence 72%: roof 38,000 m2, substation 200 m, no signage", then review three unverified chips and vote. **Aha moment:** a site the player backed flips to "community says likely" with the vote count, and the map feels owned.
 
 #### 5. ADOPTION OPPORTUNITIES & DRIVERS
 
@@ -38,7 +38,7 @@ created: 2026-10-23T06:57:21Z
 
 #### 6. RISKS & MITIGATION
 
-- **Accuracy honesty:** Automated detection will produce false positives (distribution warehouses look similar). Mitigation: every site carries confidence and reasons, nothing below the top band is ever presented as confirmed, and the copy never claims identification - it says "candidate".
+- **Accuracy honesty:** Automated detection will produce false positives (distribution warehouses look similar). Mitigation: every site carries confidence and reasons, no site is ever presented as confirmed on model confidence alone, and the copy never claims identification - it says "candidate", upgrading only to "publicly documented" with an external source cited.
 - **Imagery rights and freshness:** Commercial satellite imagery is licensed; open sources have lower resolution and update slowly. Mitigation: build on openly licensed imagery only (Sentinel-2, Landsat, national open aerial programs), show the imagery date on every chip, and verify each source's licence during the PoC.
 - **Sensitivity:** Mapping critical infrastructure can raise concerns. Mitigation: use only publicly available imagery and public records, aggregate rather than expose security details, and follow the precedent of published open-source journalism in this space.
 - **Training data:** A good detector needs labeled examples. Mitigation: Day 1 is rule-based on a curated set; the model is Expansion scope and starts from public operator listings and planning documents as labels.
