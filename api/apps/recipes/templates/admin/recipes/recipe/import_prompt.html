@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+{% load admin_urls static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'recipes/import-prompt.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl flex flex-col gap-4">
+        <h1 class="text-xl font-semibold text-important">{{ title }}</h1>
+        <p>Copy this prompt into an LLM that can read files, browse links and create ZIP files. Attach your recipe images or documents, or paste your recipe links alongside it.</p>
+        <p>The LLM will prepare titles, ingredients, source links and available photos in the import format. Download its ZIP, then upload it using Batch import.</p>
+        <div class="flex items-center gap-4">
+            <button type="button" id="copy-import-prompt" class="bg-primary-600 border border-transparent font-medium px-3 py-2 rounded-default text-white">Copy prompt</button>
+            <a href="{% url 'admin:recipes_recipe_batch_import' %}" class="text-primary-600 underline">Batch import</a>
+            <a href="{% url opts|admin_urlname:'changelist' %}">Back to recipes</a>
+        </div>
+        <p id="copy-import-prompt-status" role="status" aria-live="polite"></p>
+        <label for="recipe-import-prompt" class="font-medium">LLM prompt</label>
+        <textarea id="recipe-import-prompt" readonly rows="24" spellcheck="false" class="border border-base-200 dark:border-base-800 bg-white dark:bg-base-900 rounded-default p-4 w-full" style="font-family: monospace; font-size: 13px; line-height: 1.6;">{{ prompt }}</textarea>
+    </div>
+{% endblock %}

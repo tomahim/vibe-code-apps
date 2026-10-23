@@ -4,6 +4,8 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { request as httpRequest } from 'node:http';
+import { Readable } from 'node:stream';
 import { after, before, test } from 'node:test';
 
 // Run against real nginx: unit tests cannot detect request-body truncation or
@@ -36,13 +38,13 @@ before(async () => {
     const http = require('node:http');
     const { createHash } = require('node:crypto');
     http.createServer(async (req, res) => {
-      const chunks = [];
-      for await (const chunk of req) chunks.push(chunk);
-      const body = Buffer.concat(chunks);
+      const hash = createHash('sha256');
+      let bytes = 0;
+      for await (const chunk of req) { hash.update(chunk); bytes += chunk.length; }
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ path: req.url, method: req.method, host: req.headers.host,
-        type: req.headers['content-type'], bytes: body.length,
-        sha256: createHash('sha256').update(body).digest('hex') }));
+        type: req.headers['content-type'], bytes,
+        sha256: hash.digest('hex') }));
     }).listen(8000, '0.0.0.0');
   `);
   docker('network', 'create', network);
@@ -95,4 +97,51 @@ test('admin bodies above 6 MiB are rejected by nginx', async () => {
     method: 'POST', body: Buffer.alloc(6 * 1024 * 1024 + 1),
   });
   assert.equal(response.status, 413);
+});
+
+test('recipe batch import preserves a streamed 500 MiB ZIP and multipart overhead', async () => {
+  const path = '/admin/recipes/recipe/import/';
+  const boundary = 'recipe-import-proxy-test';
+  const prefix = Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="archive"; filename="recipes.zip"\r\nContent-Type: application/zip\r\n\r\n`);
+  const suffix = Buffer.from(`\r\n--${boundary}--\r\n`);
+  const chunk = Buffer.alloc(1024 * 1024, 0x61);
+  const hash = createHash('sha256');
+  async function* body() {
+    hash.update(prefix);
+    yield prefix;
+    for (let i = 0; i < 500; i += 1) {
+      hash.update(chunk);
+      yield chunk;
+    }
+    hash.update(suffix);
+    yield suffix;
+  }
+  const bytes = 500 * chunk.length + prefix.length + suffix.length;
+  const type = `multipart/form-data; boundary=${boundary}`;
+  const response = await fetch(`${origin}${path}`, {
+    method: 'POST', body: Readable.from(body()), duplex: 'half',
+    headers: { 'Content-Type': type, 'Content-Length': String(bytes) },
+  });
+  assert.equal(response.status, 200);
+  const forwarded = await response.json();
+  assert.equal(forwarded.path, path);
+  assert.equal(forwarded.method, 'POST');
+  assert.equal(forwarded.host, new URL(origin).host);
+  assert.equal(forwarded.type, type);
+  assert.equal(forwarded.bytes, bytes);
+  assert.equal(forwarded.sha256, hash.digest('hex'));
+});
+
+test('recipe batch import bodies above 501 MiB are rejected by nginx', async () => {
+  const status = await new Promise((resolve, reject) => {
+    const request = httpRequest(`${origin}/admin/recipes/recipe/import/`, {
+      method: 'POST', headers: { 'Content-Length': String(501 * 1024 * 1024 + 1) },
+    }, (response) => {
+      response.resume();
+      response.on('end', () => resolve(response.statusCode));
+    });
+    request.on('error', reject);
+    request.end();
+  });
+  assert.equal(status, 413);
 });
