@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="DevFlow: a standalone pull request dashboard design experiment.">
+<title>DevFlow — PR Dashboard</title>
+<style>
+  :root { color-scheme: dark; font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #eef2ff; background: #081220; --muted: #a4bbdc; --line: #20324d; --purple: #7765ff; --green: #39e6ac; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(ellipse at 65% 0, #10213a55, transparent 60%), #081220; }
+  button, select, input { font: inherit; }
+  button, a, select { -webkit-tap-highlight-color: transparent; }
+  button, select { cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  button { color: inherit; }
+  :focus-visible { outline: 2px solid #a69bff; outline-offset: 4px; }
+  svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .sidebar { width: 235px; position: fixed; inset: 0 auto 0 0; padding: 0 15px 24px; border-right: 1px solid #182940; background: linear-gradient(140deg, #101d30, #0b1524 50%); display: flex; flex-direction: column; overflow-y: auto; }
+  .brand { display: flex; align-items: center; gap: 14px; padding: 16px 10px 29px; }
+  .brand .logo { color: #8070ff; font: 800 35px monospace; letter-spacing: -7px; width: 35px; margin-right: 5px; }
+  .brand strong { font-size: 20px; letter-spacing: -.6px; }
+  .brand small { color: var(--muted); display: block; font-size: 12px; }
+  nav { display: grid; gap: 7px; }
+  nav a, nav button { display: flex; align-items: center; gap: 12px; padding: 10px 13px; border: 0; border-radius: 7px; background: none; color: #c3d4ee; text-align: left; }
+  nav .active { background: linear-gradient(100deg, #343382, #2e3279); color: white; }
+  nav .active svg { color: #9384ff; fill: #8070ff44; }
+  nav a:hover, nav button:hover { background-color: #263451; }
+  .count { font-size: 11px; color: #b1c9ff; background: #2a405f; border-radius: 15px; padding: 2px 8px; }
+  nav .count { margin-left: auto; padding: 1px 6px; }
+  .filters { margin: 25px 6px 20px; padding-top: 23px; border-top: 1px solid #1d2c43; }
+  .filters h2 { font-size: 14px; margin: 0 0 16px; }
+  .filters label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  select { display: block; width: 100%; margin-top: 5px; border: 1px solid #2b405f; border-radius: 6px; padding: 8px 10px; background: #0e1a2c; color: #e5edff; font-size: 12px; }
+  .sidebar-note { margin: auto 6px 0; padding: 17px; border: 1px solid #1b2b43; border-radius: 9px; background: linear-gradient(130deg, #14233a, #0d1829); }
+  .sidebar-note strong { display: block; margin: 8px 0 13px; font-size: 14px; }
+  .sidebar-note p { color: var(--muted); margin: 0; font-size: 12px; }
+  .workspace { margin-left: 235px; }
+  .topbar { height: 61px; border-bottom: 1px solid #22314a; display: flex; align-items: center; justify-content: flex-end; gap: 14px; padding: 0 24px; }
+  .live { display: inline-flex; align-items: center; gap: 7px; color: #59eab3; background: #0a2d2a99; padding: 3px 8px; border-radius: 5px; font-size: 11px; white-space: nowrap; }
+  .live::before, .dot { content: ''; display: inline-block; width: 7px; height: 7px; background: #27df98; border-radius: 50%; }
+  .topbar small { color: #8fa8cd; font-size: 11px; }
+  .avatar { width: 25px; height: 25px; border-radius: 50%; display: inline-grid; place-items: center; flex-shrink: 0; color: #fff; font-weight: 700; font-size: 9px; letter-spacing: -.3px; border: 2px solid #ffffff29; background: linear-gradient(145deg, var(--avatar-color, #7874d9), #182839); box-shadow: 0 2px 8px #0003; }
+  .topbar .avatar { width: 31px; height: 31px; margin-left: 8px; }
+  main { max-width: 1600px; margin: auto; padding: 12px 24px 24px; }
+  .page-heading { margin-bottom: 17px; }
+  h1 { font-size: 29px; letter-spacing: -.8px; margin: 0 0 0; font-weight: 750; }
+  .page-heading p { color: var(--muted); margin: 0; font-size: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; scroll-margin-top: 15px; }
+  .stat { padding: 16px; min-height: 155px; border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(120deg, #0d192a, #101c2f); }
+  .stat-label { display: flex; align-items: center; gap: 12px; color: #b1c7e7; font-size: 14px; white-space: nowrap; }
+  .stat-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 50%; background: linear-gradient(145deg, #9282ff, #5943f4); box-shadow: inset 0 0 9px #ffffff33; color: #fff; }
+  .stat-icon svg { width: 23px; height: 23px; }
+  .stat:nth-child(2) .stat-icon { background: linear-gradient(145deg, #5bb7ff, #2582ee); }
+  .stat:nth-child(3) .stat-icon { background: linear-gradient(145deg, #41dfb1, #0c9f7c); }
+  .stat:nth-child(4) .stat-icon { background: linear-gradient(145deg, #7388df, #3a50a3); }
+  .stat-bottom { display: flex; align-items: center; gap: 18px; margin-top: 14px; }
+  .stat-value { font-size: clamp(32px, 3.2vw, 43px); line-height: 1.25; letter-spacing: -1px; font-weight: 750; }
+  .trend { color: var(--green); white-space: nowrap; }
+  .trend small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+  .dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  .left-column { display: grid; gap: 16px; min-width: 0; }
+  .panel { border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(130deg, #0c182a, #0d1828); overflow: hidden; scroll-margin-top: 15px; }
+  .panel-heading { display: flex; align-items: center; gap: 12px; padding: 14px 15px; }
+  h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.2px; }
+  .text-button { border: 0; background: none; color: #8c99ff; font-size: 11px; padding: 3px 0; }
+  .panel-heading .text-button { margin-left: auto; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; white-space: nowrap; }
+  th { color: #a8bfdf; padding: 0 13px 9px; font-weight: 500; border-bottom: 1px solid var(--line); }
+  td { border-bottom: 1px solid #1d2e46; padding: 8px 13px; }
+  tbody tr:last-child td { border: 0; }
+  tbody tr:hover { background: #17283d; }
+  .pr-cell { display: flex; gap: 10px; align-items: center; }
+  .pr-cell > svg { width: 14px; color: #a8c5ee; }
+  .pr-link { display: block; text-align: left; padding: 0; border: 0; background: none; line-height: 1.5; }
+  .pr-link strong { display: block; font-size: 11px; font-weight: 500; color: #95a8ff; }
+  .pr-link span { color: #d2e1f7; font-size: 11px; }
+  .person { display: flex; align-items: center; gap: 8px; }
+  .repo { color: #9cb9e0; }
+  .repo svg { width: 13px; height: 13px; vertical-align: -2px; margin-right: 5px; }
+  .priority { display: inline-block; padding: 1px 10px; border-radius: 20px; color: #071728; font-size: 10px; background: #4da9fb; }
+  .priority.high { background: #ff6875; }
+  .priority.medium { background: #ff9a61; }
+  .panel-footer { border-top: 1px solid var(--line); padding: 9px 14px; color: #9bb6db; display: flex; justify-content: space-between; gap: 10px; font-size: 10px; }
+  .leaderboard .panel-heading { padding-bottom: 8px; }
+  .leaderboard .panel-heading svg { color: #f5c34d; }
+  .leaderboard .live { margin-left: auto; }
+  .panel-subtitle { margin: 0; padding: 0 15px 12px; color: var(--muted); font-size: 13px; }
+  .leader-labels { display: flex; justify-content: space-between; padding: 10px 16px; border-block: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+  .leader-labels span:first-child { width: 40px; }
+  .leader-labels span:nth-child(2) { flex: 1; }
+  .leaders { padding: 0 16px; margin: 0; list-style: none; }
+  .leader { display: flex; align-items: center; gap: 13px; padding: 12px 0; }
+  .rank { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 50%; background: #1b2b44; font-size: 12px; font-weight: 650; flex-shrink: 0; }
+  .leader:nth-child(1) .rank { background: linear-gradient(135deg, #ffe991, #edb52f); color: #614900; }
+  .leader:nth-child(2) .rank { background: linear-gradient(135deg, #becfe9, #7088b0); color: #172945; }
+  .leader:nth-child(3) .rank { background: linear-gradient(135deg, #e7aa68, #aa611e); color: #402405; }
+  .leader .avatar { width: 37px; height: 37px; font-size: 12px; }
+  .leader-info { flex: 1; min-width: 0; }
+  .leader-name { display: flex; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 8px; }
+  .leader-name strong { flex: 1; font-weight: 550; }
+  .leader-name b { font-weight: 600; }
+  .leader-name em { color: var(--green); font-style: normal; margin-left: 15px; font-size: 11px; }
+  .bar { height: 8px; border-radius: 8px; overflow: hidden; background: #20304b; }
+  .bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #6558ff, #8270ff); transition: width .3s; }
+  .winner { margin: 16px; padding: 12px; border: 1px solid #514327; border-radius: 8px; background: linear-gradient(120deg, #171d28, #1b2026); font-size: 12px; }
+  .winner > p { margin: 0 0 9px; color: #b7cceb; }
+  .winner .avatar { width: 32px; height: 32px; }
+  .winner small { display: block; color: var(--muted); font-size: 11px; }
+  .activity .panel-heading { padding-block: 12px 7px; gap: 8px; }
+  .activity h2 { font-size: 14px; }
+  .activity-list { list-style: none; padding: 0 15px 12px; margin: 0; }
+  .activity-list li { display: flex; align-items: center; gap: 9px; padding: 4px 0; font-size: 10px; color: #a9c1e3; }
+  .activity-list strong { color: #e5ecfc; font-weight: 550; }
+  .activity-list time { margin-left: auto; white-space: nowrap; }
+  .activity-copy { min-width: 0; }
+  dialog { width: min(480px, calc(100% - 32px)); background: #101e33; color: #e7efff; border: 1px solid #384d6d; border-radius: 14px; padding: 25px; box-shadow: 0 30px 100px #0008; }
+  dialog::backdrop { background: #030a17ba; backdrop-filter: blur(4px); }
+  dialog h2 { font-size: 22px; margin: 10px 0; }
+  dialog p { color: var(--muted); }
+  dialog .close { float: right; border: 0; background: #253751; padding: 5px 10px; border-radius: 5px; }
+  .dialog-label { font: 11px monospace; color: #a69bff; letter-spacing: .1em; }
+  .empty { text-align: center; padding: 30px; color: var(--muted); }
+  body.compact td { padding-block: 4px; }
+  body.compact .leader { padding-block: 8px; }
+  @media (min-width: 1600px) { main { padding-top: 26px; } .stat { min-height: 170px; } td { padding-block: 11px; } .leader { padding-block: 15px; } }
+  @media (max-width: 1200px) { .sidebar { width: 205px; } .workspace { margin-left: 205px; } main { padding-inline: 18px; } .stat-label { font-size: 12px; gap: 8px; } .stat { padding: 13px; } .stat-bottom { gap: 10px; } .trend { font-size: 12px; } .trend small { font-size: 9px; } .dashboard-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } .leader { gap: 8px; } .leader-name em { margin-left: 2px; } }
+  @media (max-width: 1050px) { .dashboard-grid { grid-template-columns: 1fr; } .leaderboard { max-width: none; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat-label { font-size: 14px; } .stat { min-height: 140px; } .stat-value { font-size: 38px; } .leaders { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; } .leader-labels { display: none; } }
+  @media (max-width: 700px) { .sidebar { position: static; width: auto; padding: 0 15px; border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; } .brand { padding: 15px 3px; } nav { display: flex; flex-wrap: wrap; gap: 5px; } nav a, nav button { padding: 8px; font-size: 12px; gap: 6px; } nav svg { width: 16px; } .filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 15px 0 0; padding-top: 12px; } .filters h2 { display: none; } .filters label { font-size: 10px; margin-bottom: 12px; } select { padding: 7px 3px; font-size: 10px; } .sidebar-note { display: none; } .workspace { margin-left: 0; } .topbar { height: 45px; padding-inline: 16px; } main { padding: 16px 14px; } h1 { font-size: 26px; } .page-heading p { font-size: 12px; } .stats { gap: 10px; } .stat { min-height: 133px; padding: 12px; } .stat-label { font-size: 11px; gap: 7px; } .stat-icon { width: 29px; height: 29px; } .stat-icon svg { width: 18px; } .stat-bottom { align-items: flex-start; flex-direction: column; gap: 4px; margin-top: 8px; } .stat-value { font-size: 32px; } .trend { font-size: 10px; } .trend small { display: inline; margin-left: 5px; font-size: 9px; } h2 { font-size: 15px; } .leaders { display: block; } .activity-list li { align-items: flex-start; } .activity-list time { font-size: 9px; } .leader-name { font-size: 12px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
+  <symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-6v-8H9v8H3z"/></symbol>
+  <symbol id="file" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM15 3v5h5M3 7v12"/></symbol>
+  <symbol id="branch" viewBox="0 0 24 24"><circle cx="6" cy="4" r="2"/><circle cx="6" cy="20" r="2"/><circle cx="18" cy="20" r="2"/><path d="M6 6v12M6 12c0-6 12-6 12 0v6m-5-9 3-3-3-3"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+  <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v7l4 2"/></symbol>
+  <symbol id="chart" viewBox="0 0 24 24"><path d="M3 21V10h4v11zm7 0V3h4v18zm7 0V7h4v14z"/></symbol>
+  <symbol id="trophy" viewBox="0 0 24 24"><path d="M7 3h10v6c0 7-10 7-10 0zm0 2H3v3c0 4 4 4 5 4m9-7h4v3c0 4-4 4-5 4m-4 3v6m-4 0h8"/></symbol>
+  <symbol id="settings" viewBox="0 0 24 24"><path d="m10 3-1 3-3-1-2 4 2 2-2 3 2 4 3-1 1 4h4l1-4 3 1 2-4-2-3 2-2-2-4-3 1-1-3z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="repo" viewBox="0 0 24 24"><path d="M5 3h11v4H5a2 2 0 0 1 0-4Zm0 4v13h15V7zm0 13H3V5"/></symbol>
+</defs></svg>
+<aside class="sidebar">
+  <a class="brand" href="#overview"><span class="logo" aria-hidden="true">‹/›</span><span><strong>DevFlow</strong><small>PR Dashboard</small></span></a>
+  <nav aria-label="Dashboard sections">
+    <a class="active" href="#overview" aria-current="page"><svg><use href="#home"/></svg>Overview</a>
+    <a href="#reviews"><svg><use href="#file"/></svg>PRs to Review <span class="count" id="nav-count">23</span></a>
+    <a href="#leaderboard"><svg><use href="#trophy"/></svg>Leaderboard</a>
+    <a href="#stats"><svg><use href="#chart"/></svg>Team Stats</a>
+    <button id="settings-button"><svg><use href="#settings"/></svg>Settings</button>
+  </nav>
+  <section class="filters" aria-label="Dashboard filters"><h2>Filters</h2>
+    <label>Repository<select id="repository"><option value="">All Repositories</option><option>user-service</option><option>worker</option><option>frontend</option><option>api</option><option>payment</option><option>backend</option><option>docs</option></select></label>
+    <label>Team<select id="team"><option value="">All Teams</option><option>Platform</option><option>Product</option><option>Experience</option></select></label>
+    <label>Time Range<select id="range"><option value="7">Last 7 days</option><option value="1">Last 24 hours</option><option value="30">Last 30 days</option></select></label>
+  </section>
+  <div class="sidebar-note"><svg><use href="#trophy"/></svg><strong>Great code<br>builds great teams</strong><p>Keep reviewing,<br>keep shipping!</p></div>
+</aside>
+<div class="workspace" id="overview">
+  <header class="topbar"><span class="live">Live demo</span><small>Sample workspace</small><span class="avatar" style="--avatar-color:#af7b90" aria-label="Jamie Lee">JL</span></header>
+  <main>
+    <div class="page-heading"><h1>PR Dashboard</h1><p>Track PRs, review progress, and see who’s making the biggest impact.</p></div>
+    <section class="stats" id="stats" aria-label="Team statistics">
+      <article class="stat"><div class="stat-label"><span class="stat-icon"><svg><use href="#file"/></svg></span>PRs to Review</div><div class="stat-bottom"><strong class="stat-value" id="review-stat">23</strong><span class="trend">↓ 12%<small class="comparison">vs. last 7 days</small></span></div></article>
+      <article class="stat"><div class="stat-label"><span class="stat-icon"><svg><use href="#branch"/></svg></span>Open PRs</div><div class="stat-bottom"><strong class="stat-value" id="open-stat">48</strong><span class="trend">↑ 8%<small class="comparison">vs. last 7 days</small></span></div></article>
+      <article class="stat"><div class="stat-label"><span class="stat-icon"><svg><use href="#check"/></svg></span>Merged PRs</div><div class="stat-bottom"><strong class="stat-value" id="merged-stat">124</strong><span class="trend">↑ 21%<small class="comparison">vs. last 7 days</small></span></div></article>
+      <article class="stat"><div class="stat-label"><span class="stat-icon"><svg><use href="#clock"/></svg></span>Avg. Time to Review</div><div class="stat-bottom"><strong class="stat-value" id="time-stat">2.4h</strong><span class="trend">↓ 35%<small class="comparison">vs. last 7 days</small></span></div></article>
+    </section>
+    <div class="dashboard-grid">
+      <div class="left-column">
+        <section class="panel" id="reviews" aria-labelledby="reviews-title"><header class="panel-heading"><h2 id="reviews-title">PRs to Review</h2><span class="count" id="review-count">23</span><button class="text-button expand-reviews">View all →</button></header>
+          <div class="table-scroll"><table><thead><tr><th scope="col">PR</th><th scope="col">Author</th><th scope="col">Repo</th><th scope="col">Age</th><th scope="col" aria-label="Priority"></th></tr></thead><tbody id="pr-rows"></tbody></table></div>
+          <footer class="panel-footer"><span id="review-summary" role="status"></span><button class="text-button expand-reviews">View all →</button></footer>
+        </section>
+        <section class="panel activity" aria-labelledby="activity-title"><header class="panel-heading"><span class="dot" aria-hidden="true"></span><h2 id="activity-title">Live Activity</h2><button class="text-button" id="expand-activity">View all →</button></header><ul class="activity-list" id="activity-list"></ul></section>
+      </div>
+      <section class="panel leaderboard" id="leaderboard" aria-labelledby="leader-title"><header class="panel-heading"><svg aria-hidden="true"><use href="#trophy"/></svg><h2 id="leader-title">PR Reviewer Leaderboard</h2><span class="live">Live</span></header><p class="panel-subtitle">The people keeping great code moving.</p><div class="leader-labels"><span>#</span><span>Reviewer</span><span>PRs Reviewed</span></div><ol class="leaders" id="leaders"></ol><div class="winner" id="winner"></div></section>
+    </div>
+  </main>
+</div>
+<dialog id="pr-dialog" aria-labelledby="dialog-title"><button class="close" aria-label="Close PR details">✕</button><span class="dialog-label" id="dialog-id"></span><h2 id="dialog-title"></h2><p id="dialog-meta"></p><p>This pull request is ready for a fresh pair of eyes. Check the implementation, leave thoughtful feedback, and help the team ship.</p><p><small>Design preview · all data in this workspace is fictional.</small></p></dialog>
+<dialog id="settings-dialog" aria-labelledby="settings-title"><button class="close" aria-label="Close settings">✕</button><span class="dialog-label">YOUR WORKSPACE</span><h2 id="settings-title">Overview settings</h2><p>Make a little more room for your team.</p><label><input type="checkbox" id="compact"> Compact rows</label><p><small>Preferences last for this preview session.</small></p></dialog>
+<script>
+  const people = [
+    ['Alex Rivera', 'alexr', 42, 5, '#9d66d5', 'Platform'], ['Sarah Chen', 'sarah', 37, 3, '#b47cd5', 'Platform'],
+    ['Mike Johnson', 'mike', 31, 7, '#bc9b53', 'Experience'], ['Jamie Lee', 'jamie', 28, 2, '#c58685', 'Product'],
+    ['Taylor Kim', 'taylor', 25, 4, '#cf7866', 'Product'], ['Casey Brown', 'casey', 22, 1, '#6ea2a7', 'Platform'],
+    ['Riley Davis', 'riley', 19, 3, '#74a97d', 'Experience'], ['Jordan Patel', 'jordan', 16, 2, '#b27c6e', 'Experience'],
+    ['Drew Wilson', 'drew', 14, 1, '#5ca7be', 'Platform'], ['Avery Garcia', 'avery', 12, 2, '#b09bc8', 'Product']
+  ];
+  const seed = [
+    [4821, 'Add caching layer for user service', 0, 'user-service', '12m', 'High'], [4817, 'Fix memory leak in worker', 1, 'worker', '28m', 'Medium'],
+    [4812, 'Update dependencies', 2, 'frontend', '42m', 'Medium'], [4809, 'Improve error handling', 3, 'api', '1h', 'Low'],
+    [4805, 'Add unit tests for payment flow', 4, 'payment', '1h 12m', 'Medium'], [4802, 'Refactor auth middleware', 5, 'backend', '2h', 'Low'],
+    [4798, 'Update UI components', 6, 'frontend', '2h 36m', 'Medium'], [4795, 'Fix typo in documentation', 7, 'docs', '3h', 'Low'],
+    [4791, 'Add logging for background jobs', 8, 'worker', '4h', 'Low'], [4787, 'Optimize database queries', 9, 'api', '4h 32m', 'Medium'],
+    [4784, 'Add retry backoff', 0, 'worker', '6h', 'Medium'], [4780, 'Improve keyboard navigation', 2, 'frontend', '7h', 'High'],
+    [4777, 'Refresh API documentation', 7, 'docs', '8h', 'Low'], [4774, 'Validate billing addresses', 4, 'payment', '9h', 'Medium'],
+    [4770, 'Add session cleanup', 5, 'backend', '12h', 'Low'], [4766, 'Improve cache invalidation', 0, 'user-service', '1d', 'High'],
+    [4762, 'Add health check', 8, 'worker', '1d', 'Low'], [4759, 'Polish loading states', 6, 'frontend', '2d', 'Low'],
+    [4755, 'Add pagination', 3, 'api', '2d', 'Medium'], [4752, 'Update onboarding guide', 7, 'docs', '3d', 'Low'],
+    [4748, 'Handle duplicate events', 1, 'worker', '4d', 'High'], [4744, 'Improve payment receipts', 9, 'payment', '5d', 'Medium'],
+    [4740, 'Add permission checks', 5, 'backend', '6d', 'High']
+  ];
+  const prs = seed.map(([id, title, person, repo, age, priority], index) => ({ id, title, person, repo, age, priority, days: index < 15 ? 0 : Math.min(index - 14, 6) }));
+  const $ = (selector) => document.querySelector(selector);
+  const icon = (id) => `<svg aria-hidden="true"><use href="#${id}"/></svg>`;
+  const avatar = (person) => `<span class="avatar" style="--avatar-color:${person[4]}" aria-hidden="true">${person[0].split(' ').map(part => part[0]).join('')}</span>`;
+  let expanded = false;
+  let activityExpanded = false;
+  function render() {
+    const repository = $('#repository').value, team = $('#team').value, days = Number($('#range').value);
+    const filtered = prs.filter(pr => (!repository || pr.repo === repository) && (!team || people[pr.person][5] === team) && pr.days < days);
+    const visible = expanded ? filtered : filtered.slice(0, 10);
+    $('#pr-rows').innerHTML = visible.map(pr => `<tr><td><div class="pr-cell">${icon('branch')}<button class="pr-link" data-pr="${pr.id}"><strong>#${pr.id}</strong><span>${pr.title}</span></button></div></td><td><div class="person">${avatar(people[pr.person])}${people[pr.person][1]}</div></td><td class="repo">${icon('repo')}${pr.repo}</td><td>${pr.age}</td><td><span class="priority ${pr.priority.toLowerCase()}">${pr.priority}</span></td></tr>`).join('') || '<tr><td colspan="5" class="empty">No pull requests match these filters.</td></tr>';
+    $('#review-summary').textContent = `Showing ${visible.length} of ${filtered.length} PRs to review`;
+    ['#nav-count', '#review-count', '#review-stat'].forEach(id => $(id).textContent = filtered.length);
+    const fraction = filtered.length / prs.length, factor = days === 30 ? 3.6 : days === 1 ? .3 : 1;
+    $('#open-stat').textContent = Math.round(48 * fraction);
+    $('#merged-stat').textContent = Math.round(124 * fraction * factor);
+    $('#time-stat').textContent = filtered.length ? `${(2.4 - (days === 1 ? .5 : 0)).toFixed(1)}h` : '—';
+    document.querySelectorAll('.comparison').forEach(node => node.textContent = days === 1 ? 'vs. previous day' : `vs. last ${days} days`);
+    document.querySelectorAll('.expand-reviews').forEach(button => { button.textContent = expanded ? 'Show less ↑' : 'View all →'; button.disabled = filtered.length <= 10; button.setAttribute('aria-expanded', expanded); });
+    const activePeople = people.filter(person => (!team || person[5] === team) && (!repository || filtered.some(pr => people[pr.person] === person)));
+    $('#leaders').innerHTML = activePeople.map((person, index) => `<li class="leader"><span class="rank">${index + 1}</span>${avatar(person)}<div class="leader-info"><div class="leader-name"><strong>${person[0]}</strong><b>${Math.max(1, Math.round(person[2] * factor))}</b><em>↑ ${person[3]}</em></div><div class="bar"><span style="width:${person[2] / 48 * 100}%"></span></div></div></li>`).join('') || '<li class="empty">No reviewers for these filters.</li>';
+    const top = activePeople[0];
+    $('#winner').hidden = !top;
+    if (top) $('#winner').innerHTML = `<p>⚡ Top reviewer this period</p><div class="person">${avatar(top)}<span><strong>${top[0]}</strong><small>${Math.max(1, Math.round(top[2] * factor))} PRs reviewed</small></span></div>`;
+    const actions = ['reviewed', 'approved', 'requested changes on'];
+    $('#activity-list').innerHTML = filtered.slice(0, activityExpanded ? 10 : 5).map((pr, index) => `<li>${avatar(people[(pr.person + 1) % people.length])}<span class="activity-copy"><strong>${people[(pr.person + 1) % people.length][1]}</strong> &nbsp; ${actions[index % 3]} PR #${pr.id} &nbsp; “${pr.title}”</span><time>${index * 3 + 2}m ago</time></li>`).join('') || '<li>No activity for these filters.</li>';
+    $('#expand-activity').textContent = activityExpanded ? 'Show less ↑' : 'View all →';
+    $('#expand-activity').setAttribute('aria-expanded', activityExpanded);
+  }
+  document.querySelectorAll('.filters select').forEach(select => select.addEventListener('change', () => { expanded = false; render(); }));
+  document.querySelectorAll('.expand-reviews').forEach(button => button.addEventListener('click', () => { expanded = !expanded; render(); }));
+  $('#expand-activity').addEventListener('click', () => { activityExpanded = !activityExpanded; render(); });
+  $('#pr-rows').addEventListener('click', event => {
+    const button = event.target.closest('[data-pr]');
+    if (!button) return;
+    const pr = prs.find(item => item.id === Number(button.dataset.pr));
+    $('#dialog-id').textContent = `PULL REQUEST #${pr.id}`;
+    $('#dialog-title').textContent = pr.title;
+    $('#dialog-meta').textContent = `${people[pr.person][0]} · ${pr.repo} · ${pr.priority} priority · opened ${pr.age} ago`;
+    $('#pr-dialog').showModal();
+  });
+  $('#settings-button').addEventListener('click', () => $('#settings-dialog').showModal());
+  $('#compact').addEventListener('change', event => document.body.classList.toggle('compact', event.target.checked));
+  // srcdoc inherits the host URL as its base; keep section links inside this document.
+  document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
+    event.preventDefault();
+    $(link.getAttribute('href'))?.scrollIntoView({ behavior: 'instant' });
+  }));
+  document.querySelectorAll('dialog .close').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
+  render();
+</script>
+</body>
+</html>

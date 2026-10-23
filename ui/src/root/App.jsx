@@ -8,6 +8,7 @@ const RustLearningPath = lazy(() => import("../apps/rust-learning-path/RustLearn
 const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/ThreeLearningPath.jsx"));
 
 const AppIdeas = lazy(() => import("../apps/app-ideas/AppIdeas.jsx"));
+const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -22,6 +23,10 @@ export default function App() {
     window.history.pushState({}, "", nextPath);
     setPath(nextPath);
     window.scrollTo(0, 0);
+  }
+
+  if (path === "/artifacts" || path.startsWith("/artifacts/")) {
+    return <Suspense fallback={<div className="gallery-page">Opening the archive…</div>}><Artifacts path={path} /></Suspense>;
   }
 
   if (path.startsWith("/apps/livetrail-scrap")) {

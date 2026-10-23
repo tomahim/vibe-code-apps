@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
+import collectionArtwork from "../assets/genious-apps.png";
 
 const initialApps = [
   {
@@ -76,14 +77,18 @@ export default function Gallery({ onOpenApp }) {
         </a>
         <div className="header-actions">
           <span className="header-note">A small collection of useful tools</span>
+          <a className="admin-link" href="/artifacts">Artifacts</a>
           <a className="admin-link" href="/admin/">Admin</a>
         </div>
       </header>
 
       <section className="gallery-intro">
-        <p className="eyebrow">THE TOOL SHED</p>
-        <h1>Find your next useful tool.</h1>
-        <p>Small, thoughtful apps for exploring, learning, and getting things done.</p>
+        <div>
+          <p className="eyebrow">THE TOOL SHED</p>
+          <h1>Find your next useful tool.</h1>
+          <p>Small, thoughtful apps for exploring, learning, and getting things done.</p>
+        </div>
+        <img className="collection-artwork" src={collectionArtwork} alt="Genious Apps — colorful orbital shapes and ideas in motion" width="200" height="200" />
       </section>
 
       <div className="gallery-search">
