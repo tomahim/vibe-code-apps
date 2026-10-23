@@ -47,7 +47,9 @@ def build_storages(environ):
             "querystring_auth": True,  # private bucket: reads use presigned URLs
             "querystring_expire": int(environ.get("AWS_QUERYSTRING_EXPIRE", "3600")),
             "default_acl": None,
-            "file_overwrite": False,
+            # AppUploadTo gives every upload a fresh UUID key. Skip the
+            # redundant HeadObject existence check before each S3 upload.
+            "file_overwrite": True,
         }
         endpoint = environ.get("AWS_S3_ENDPOINT_URL", "").strip()
         if endpoint:
