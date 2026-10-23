@@ -108,6 +108,13 @@ class RecipeSearchTests(TestCase):
         self.assertEqual(self.titles(ingredients="carbonara"), [])
         self.assertEqual(self.titles(ingredients="egg, pasta"), ["Pasta Carbonara"])
 
+    def test_random_endpoint_accepts_match_title(self):
+        response = self.client.get("/api/apps/recipes/random/", {"ingredients": "carbonara", "match_title": "1"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["title"], "Pasta Carbonara")
+        response = self.client.get("/api/apps/recipes/random/", {"ingredients": "carbonara"})
+        self.assertEqual(response.status_code, 404)
+
     def test_match_title_also_searches_recipe_name(self):
         self.assertEqual(self.titles(ingredients="carbonara", match_title="1"), ["Pasta Carbonara"])
         self.assertEqual(self.titles(ingredients="tomato", match_title="1"), ["Tomato salad"])

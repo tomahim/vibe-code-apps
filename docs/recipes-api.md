@@ -90,6 +90,11 @@ Creation is not idempotent: do not blindly retry a POST after an ambiguous timeo
 - `GET /api/apps/recipes/random/?ingredients=tomato,pasta` chooses only from recipes
   containing all supplied ingredients.
 
+Both endpoints accept `match_title=1`: each filter term then matches when it is an
+ingredient name **or** a case-insensitive substring of the recipe title. Every term
+must still match one way or the other. The Telegram bot's /list and /random commands
+send this parameter; it defaults off so other callers keep ingredient-only matching.
+
 Both endpoints trim/lowercase filter names and ignore duplicates/empty segments.
 Missing or empty filters mean all recipes, including old recipes without
 ingredients. No matches produce an empty list for list requests and a 404
