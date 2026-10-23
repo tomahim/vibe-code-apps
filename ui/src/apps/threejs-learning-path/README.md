@@ -96,10 +96,8 @@ npm run dev
 npm test
 npm run build
 npx playwright install chromium
-npm run test:browser
 ```
 
-For an existing local Chrome installation, set `PLAYWRIGHT_CHROME_PATH` to its executable when running browser tests. CI installs Chromium and runs the curriculum/storage checks, build, and browser suite before deploying to Railway. Browser tests render every starter and solution, exercise pointer interactions, and cover persistence, errors, manual run, sandbox isolation, gallery integration, mobile layout, and deep links.
 
 `predev` and `prebuild` generate `public/threejs-runtime.js` from `runtime.js` with esbuild. That generated file is ignored in Git; the source and lockfile are committed. If you change runtime code while a dev server is running, run `node scripts/build-sandbox.mjs` and restart the preview iframe or reload the page.
 

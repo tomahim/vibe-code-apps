@@ -1,0 +1,98 @@
+{
+  "id": "abstraction-costs",
+  "title": "Abstraction costs",
+  "subtitle": "Choose the work your program performs",
+  "order": 6,
+  "lessons": [
+    {
+      "title": "One pass, no temporary vector",
+      "task": "Sum the squares of the even input values as i64, without collecting an intermediate vector.",
+      "hint": "Filter references, widen before multiplying, and sum.",
+      "code": "fn even_energy(xs: &[i32]) -> i64 {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn even_energy(xs: &[i32]) -> i64 {\n    xs.iter().filter(|x| **x % 2 == 0).map(|x| i64::from(*x).pow(2)).sum()\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(even_energy(&[1,2,3,4]),20); assert_eq!(even_energy(&[]),0); assert_eq!(even_energy(&[-2,100000]),10000000004);\n    }\n}"
+      },
+      "id": "iterator-fusion",
+      "concept": "Lazy adapters and consumers",
+      "body": [
+        "Iterator adapters construct a computation; consumers drive it. A filter-map-fold chain can process each element without materializing intermediate Vec values.",
+        "Static iterator types let the optimizer inline and combine operations. Zero-cost abstraction means you need not pay extra abstraction overhead compared with equivalent manual code; it does not mean the computation is free or always optimized identically.",
+        "The first step removes intermediate storage. The second makes short-circuiting visible by counting how many inputs are visited."
+      ],
+      "edition": "2021",
+      "minutes": 6,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch13-04-performance.html"
+      },
+      "steps": [
+        {
+          "title": "Stop when the answer is known",
+          "task": "Return whether target exists and the number of visited items, stopping at the first match.",
+          "hint": "Use inspect to count visits and any to short-circuit.",
+          "code": "fn search(xs: &[i32], target: i32) -> (bool, usize) {\n    todo!()\n}\nfn main() {}",
+          "solution": "fn search(xs: &[i32], target: i32) -> (bool, usize) {\n    let mut visits=0;\n    let found=xs.iter().inspect(|_| visits += 1).any(|x| *x == target);\n    (found,visits)\n}\nfn main() {}",
+          "check": {
+            "type": "tests",
+            "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(search(&[4,8,12],8),(true,2)); assert_eq!(search(&[4,8],9),(false,2)); assert_eq!(search(&[],0),(false,0));\n    }\n}"
+          },
+          "body": [
+            "Short-circuiting can save more work than a small instruction-level improvement. Avoid eager collect when you need only the first answer; keep observable side effects out of production iterator pipelines unless their order is intentional."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Specialize the hot path",
+      "task": "Implement total for any T: Cost by summing cost() over the borrowed slice.",
+      "hint": "Use the Cost method through each element.",
+      "code": "trait Cost { fn cost(&self) -> u64; }\nstruct Item(u64);\nimpl Cost for Item { fn cost(&self)->u64 { self.0 } }\nstruct Pair(u64,u64);\nimpl Cost for Pair { fn cost(&self)->u64 { self.0+self.1 } }\nfn total<T: Cost>(xs: &[T]) -> u64 {\n    todo!()\n}\nfn main() {}",
+      "solution": "trait Cost { fn cost(&self) -> u64; }\nstruct Item(u64);\nimpl Cost for Item { fn cost(&self)->u64 { self.0 } }\nstruct Pair(u64,u64);\nimpl Cost for Pair { fn cost(&self)->u64 { self.0+self.1 } }\nfn total<T: Cost>(xs: &[T]) -> u64 {\n    xs.iter().map(|x| x.cost()).sum()\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(total(&[Item(3),Item(5)]),8); assert_eq!(total(&[Pair(2,4)]),6); assert_eq!(total::<Item>(&[]),0);\n    }\n}"
+      },
+      "id": "static-dispatch",
+      "concept": "Traits, generics, and monomorphization",
+      "body": [
+        "A generic function can be compiled into concrete versions for its used types. This monomorphization gives the optimizer a concrete method implementation, enabling inlining and specialization of surrounding code.",
+        "The tradeoff is code size and compilation work. Many concrete instantiations may increase instruction-cache pressure. Inlining is an optimization choice, not a Rust language guarantee.",
+        "Implement one generic aggregation function and exercise it with two types. There is no need to heap-allocate either implementation."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch10-01-syntax.html"
+      },
+      "steps": []
+    },
+    {
+      "title": "Pay for flexibility deliberately",
+      "task": "Apply each borrowed operation in order to the input.",
+      "hint": "Fold over the slice and call apply on each trait object.",
+      "code": "trait Op { fn apply(&self, x:i32)->i32; }\nstruct Add(i32); impl Op for Add { fn apply(&self,x:i32)->i32 { x+self.0 } }\nstruct Mul(i32); impl Op for Mul { fn apply(&self,x:i32)->i32 { x*self.0 } }\nfn pipeline(ops: &[&dyn Op], x:i32)->i32 {\n    todo!()\n}\nfn main() {}",
+      "solution": "trait Op { fn apply(&self, x:i32)->i32; }\nstruct Add(i32); impl Op for Add { fn apply(&self,x:i32)->i32 { x+self.0 } }\nstruct Mul(i32); impl Op for Mul { fn apply(&self,x:i32)->i32 { x*self.0 } }\nfn pipeline(ops: &[&dyn Op], x:i32)->i32 {\n    ops.iter().fold(x, |value, op| op.apply(value))\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet add=Add(2); let mul=Mul(3);\nassert_eq!(pipeline(&[&add,&mul],4),18); assert_eq!(pipeline(&[&mul,&add],4),14); assert_eq!(pipeline(&[],7),7);\n    }\n}"
+      },
+      "id": "dynamic-dispatch",
+      "concept": "Trait objects and indirect calls",
+      "body": [
+        "&dyn Trait pairs a data pointer with metadata used for dynamic dispatch. Different concrete implementors can share one interface at runtime. The indirect call may limit inlining, although compilers can sometimes devirtualize it.",
+        "Dynamic dispatch does not inherently require a heap allocation: &dyn Trait borrows existing storage. Box<dyn Trait> adds owning indirection, usually with heap storage for a non-zero-sized value.",
+        "Choose dynamic dispatch for heterogeneous collections or runtime selection; measure the actual workload before replacing a clear design with generics."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch18-02-trait-objects.html"
+      },
+      "steps": []
+    }
+  ]
+}

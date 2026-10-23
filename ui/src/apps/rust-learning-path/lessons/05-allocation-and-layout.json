@@ -1,0 +1,83 @@
+{
+  "id": "allocation-and-layout",
+  "title": "Allocation and layout",
+  "subtitle": "Understand where the bytes live",
+  "order": 5,
+  "lessons": [
+    {
+      "title": "Keep the buffer warm",
+      "task": "Replace out with doubled input values, preserving its existing allocation when capacity is sufficient.",
+      "hint": "Clear the vector, then extend it. Do not replace out with a new Vec.",
+      "code": "fn refill(out: &mut Vec<i32>, input: &[i32]) {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn refill(out: &mut Vec<i32>, input: &[i32]) {\n    out.clear();\n    out.extend(input.iter().map(|x| x * 2));\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nlet mut out=Vec::with_capacity(16); out.push(99); let p=out.as_ptr(); let c=out.capacity();\nrefill(&mut out,&[2,3]); assert_eq!(out,[4,6]); assert_eq!(out.as_ptr(),p); assert_eq!(out.capacity(),c);\nrefill(&mut out,&[]); assert!(out.is_empty()); assert_eq!(out.as_ptr(),p);\n    }\n}"
+      },
+      "id": "vec-reuse",
+      "concept": "Length, capacity, and allocation reuse",
+      "body": [
+        "Vec stores initialized elements contiguously. Its length tracks valid elements; capacity tracks space available before growth requires reallocation. Never access spare capacity as initialized values.",
+        "clear drops existing elements and sets length to zero while retaining the allocation. Reusing a scratch buffer avoids repeatedly requesting storage. It also retains peak capacity, which can waste memory after a large request.",
+        "This exercise checks pointer stability only when capacity is already sufficient. It does not assume an allocator growth factor or exact capacity."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/vec/struct.Vec.html"
+      },
+      "steps": []
+    },
+    {
+      "title": "A value in the unused space",
+      "task": "Map zero to None and every other input to Some(NonZeroU32).",
+      "hint": "Use NonZeroU32::new, which validates the value.",
+      "code": "use std::num::NonZeroU32;\nfn id(raw: u32) -> Option<NonZeroU32> {\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::num::NonZeroU32;\nfn id(raw: u32) -> Option<NonZeroU32> {\n    NonZeroU32::new(raw)\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(id(0),None); assert_eq!(id(7).unwrap().get(),7); assert_eq!(id(u32::MAX).unwrap().get(),u32::MAX);\nassert_eq!(std::mem::size_of::<Option<NonZeroU32>>(),std::mem::size_of::<u32>());\n    }\n}"
+      },
+      "id": "option-niches",
+      "concept": "Representations and niche optimization",
+      "body": [
+        "NonZeroU32 excludes zero from its valid values. Rust guarantees Option<NonZeroU32> has the same size and alignment as NonZeroU32: the unused representation can encode None.",
+        "This guarantee applies to documented types, not every enum. Do not assume arbitrary Rust struct field order or transmute values based on a guessed layout. repr(C) serves interoperability; it is not a promise of better performance.",
+        "Compact representations can reduce memory traffic in large collections. They also constrain the domain: zero must really be invalid in your identifier model."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/option/#representation"
+      },
+      "steps": []
+    },
+    {
+      "title": "Know when resources end",
+      "task": "Create and drop one Guard in an inner scope, then return the observed drop count.",
+      "hint": "Let the Guard go out of scope before reading the Cell.",
+      "code": "use std::cell::Cell;\nstruct Guard<'a>(&'a Cell<usize>);\nimpl Drop for Guard<'_> { fn drop(&mut self) { self.0.set(self.0.get()+1); } }\nfn released() -> usize {\n    let count=Cell::new(0);\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::cell::Cell;\nstruct Guard<'a>(&'a Cell<usize>);\nimpl Drop for Guard<'_> { fn drop(&mut self) { self.0.set(self.0.get()+1); } }\nfn released() -> usize {\n    let count=Cell::new(0);\n    { let _guard = Guard(&count); }\n    count.get()\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(released(),1);\n    }\n}"
+      },
+      "id": "drop-raii",
+      "concept": "Deterministic cleanup with Drop",
+      "body": [
+        "Rust runs Drop when an owned value leaves scope normally, including ordinary early returns. RAII ties resource release to ownership: a guard can unlock a mutex or return a buffer when dropped.",
+        "Cleanup still performs real work. Dropping a large collection may have a visible cost. Moving a value transfers responsibility; cloning can create a second resource whose cleanup also costs time.",
+        "An inner scope makes release timing explicit. Destructors are not guaranteed during process abort, and mem::forget can intentionally prevent them, so memory safety must not rely on every destructor running."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/book/ch15-03-drop.html"
+      },
+      "steps": []
+    }
+  ]
+}

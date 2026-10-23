@@ -1,0 +1,98 @@
+{
+  "id": "advanced-execution",
+  "title": "Advanced execution",
+  "subtitle": "State machines, unsafe boundaries, and evidence",
+  "order": 8,
+  "lessons": [
+    {
+      "title": "A future is suspended work",
+      "task": "Create an async future that increments counter once and returns its new value when polled.",
+      "hint": "Return an async move block that captures the borrowed Cell.",
+      "code": "use std::cell::Cell;\nfn work(counter:&Cell<u32>) -> impl std::future::Future<Output=u32> + '_ {\n    todo!()\n}\nfn main() {}",
+      "solution": "use std::cell::Cell;\nfn work(counter:&Cell<u32>) -> impl std::future::Future<Output=u32> + '_ {\n    async move { counter.set(counter.get()+1); counter.get() }\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nuse std::{future::Future,pin::Pin,sync::Arc,task::{Context,Poll,Wake,Waker}};\nstruct Noop; impl Wake for Noop { fn wake(self:Arc<Self>) {} }\nlet c=Cell::new(0); let mut f=Box::pin(work(&c)); assert_eq!(c.get(),0);\nlet w=Waker::from(Arc::new(Noop)); let mut cx=Context::from_waker(&w);\nassert_eq!(f.as_mut().poll(&mut cx),Poll::Ready(1)); assert_eq!(c.get(),1);\n    }\n}"
+      },
+      "id": "async-state-machines",
+      "concept": "Polling, wakeups, and Pin",
+      "body": [
+        "Calling an async function constructs a future. Its body runs when polled, and values needed across suspension points become part of its state. Async does not automatically create a thread or accelerate CPU-bound work.",
+        "A future that returns Pending must arrange a wakeup when progress is possible. Executors poll ready tasks; blocking inside poll can stall other tasks sharing that executor. Production code normally uses await and a runtime.",
+        "Pin is an address-stability contract relevant to futures that may contain self-references. Box::pin is a convenient owning approach; not every future needs heap allocation. These exercises manually poll tiny futures only to reveal the protocol."
+      ],
+      "edition": "2021",
+      "minutes": 6,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/future/trait.Future.html"
+      },
+      "steps": [
+        {
+          "title": "Yield and request another poll",
+          "task": "Implement a future that returns Pending once, calls wake_by_ref, then returns Ready(7).",
+          "hint": "Use the bool as state. Set it before requesting the wakeup.",
+          "code": "use std::{future::Future,pin::Pin,task::{Context,Poll}};\nstruct YieldOnce(bool);\nimpl Future for YieldOnce {\n    type Output=u32;\n    fn poll(mut self:Pin<&mut Self>,cx:&mut Context<'_>)->Poll<u32> {\n        todo!()\n    }\n}\nfn main() {}",
+          "solution": "use std::{future::Future,pin::Pin,task::{Context,Poll}};\nstruct YieldOnce(bool);\nimpl Future for YieldOnce {\n    type Output=u32;\n    fn poll(mut self:Pin<&mut Self>,cx:&mut Context<'_>)->Poll<u32> {\n        if self.0 { Poll::Ready(7) } else { self.0=true; cx.waker().wake_by_ref(); Poll::Pending }\n    }\n}\nfn main() {}",
+          "check": {
+            "type": "tests",
+            "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nuse std::{sync::{Arc,atomic::{AtomicUsize,Ordering}},task::{Wake,Waker}};\nstruct Count(AtomicUsize); impl Wake for Count { fn wake(self:Arc<Self>) { self.0.fetch_add(1,Ordering::Relaxed); } }\nlet counter=Arc::new(Count(AtomicUsize::new(0))); let w=Waker::from(counter.clone()); let mut cx=Context::from_waker(&w);\nlet mut f=Box::pin(YieldOnce(false)); assert_eq!(f.as_mut().poll(&mut cx),Poll::Pending);\nassert_eq!(counter.0.load(Ordering::Relaxed),1); assert_eq!(f.as_mut().poll(&mut cx),Poll::Ready(7));\n    }\n}"
+          },
+          "body": [
+            "This toy future wakes immediately so it can be polled again. Real I/O futures register the task\u2019s waker with an event source. Repeatedly waking without progress wastes CPU; do not turn this example into a busy-loop executor."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Make the proof explicit",
+      "task": "Return None outside the slice; otherwise return a reference using get_unchecked after a bounds guard. Add a safety comment.",
+      "hint": "Check index < xs.len() before entering the unsafe block.",
+      "code": "fn checked(xs:&[u32],index:usize)->Option<&u32> {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn checked(xs:&[u32],index:usize)->Option<&u32> {\n    if index < xs.len() {\n        // SAFETY: the guard proves the index is in bounds; xs supplies a live shared borrow.\n        Some(unsafe { xs.get_unchecked(index) })\n    } else { None }\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(checked(&[3,5],1),Some(&5)); assert_eq!(checked(&[3,5],2),None); assert_eq!(checked(&[],0),None); assert_eq!(checked(&[1],usize::MAX),None);\n    }\n}"
+      },
+      "id": "unsafe-invariants",
+      "concept": "A safe interface around unsafe access",
+      "body": [
+        "Unsafe permits operations whose safety the compiler cannot prove. It does not disable borrowing rules or make code inherently faster. Undefined behavior can invalidate the entire program\u2019s assumptions.",
+        "A safe wrapper must validate every precondition for every caller. For get_unchecked the index must be in bounds even if the returned reference is never dereferenced. Tests can catch mistakes but cannot prove absence of undefined behavior.",
+        "The exercise is intentionally equivalent to slice::get. Prefer that safe method in real code unless profiling and generated-code inspection justify a carefully audited unsafe implementation."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/primitive.slice.html#method.get_unchecked"
+      },
+      "steps": []
+    },
+    {
+      "title": "Measure work before nanoseconds",
+      "task": "Search sorted xs for target and return (found, comparisons), counting each midpoint comparison.",
+      "hint": "Maintain a half-open [lo, hi) interval and halve it using the midpoint ordering.",
+      "code": "fn find(xs:&[i32],target:i32)->(bool,usize) {\n    todo!()\n}\nfn main() {}",
+      "solution": "fn find(xs:&[i32],target:i32)->(bool,usize) {\n    let (mut lo,mut hi,mut count)=(0,xs.len(),0);\n    while lo < hi {\n        let mid=lo+(hi-lo)/2; count+=1;\n        match xs[mid].cmp(&target) {\n            std::cmp::Ordering::Less => lo=mid+1,\n            std::cmp::Ordering::Greater => hi=mid,\n            std::cmp::Ordering::Equal => return (true,count),\n        }\n    }\n    (false,count)\n}\nfn main() {}",
+      "check": {
+        "type": "tests",
+        "tests": "#[cfg(test)]\nmod lesson_tests {\n    use super::*;\n    #[test]\n    fn contract() {\nassert_eq!(find(&[],1),(false,0));\nlet xs:Vec<i32>=(0..1024).collect();\nfor x in [-1,0,511,1023,1024] { let (found,n)=find(&xs,x); assert_eq!(found,(0..1024).contains(&x)); assert!(n<=11); }\nassert!(find(&[2,2,2],2).0);\n    }\n}"
+      },
+      "id": "measure-work",
+      "concept": "Algorithms, release builds, and benchmarks",
+      "body": [
+        "Rust cannot rescue an unnecessarily quadratic algorithm. Counting operations can expose scaling without noisy wall-clock comparisons. A sorted slice supports binary search instead of scanning every element.",
+        "For real timing, use optimized builds, realistic inputs, warmup and repeated samples; keep setup outside the measured region. black_box can discourage some optimizations but is a best-effort hint, not a substitute for sound benchmark design.",
+        "The Playground runner uses debug mode on shared infrastructure. We check a logarithmic comparison budget here, not a timing threshold. Validate speed claims locally with release benchmarks and profile allocations, CPU time, and cache behavior as appropriate."
+      ],
+      "edition": "2021",
+      "minutes": 3,
+      "reference": {
+        "label": "Rust documentation \u2197",
+        "url": "https://doc.rust-lang.org/std/hint/fn.black_box.html"
+      },
+      "steps": []
+    }
+  ]
+}
