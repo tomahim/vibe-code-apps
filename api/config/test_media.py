@@ -39,7 +39,7 @@ class StorageSelectionTests(SimpleTestCase):
         self.assertEqual(options["addressing_style"], "virtual")
         self.assertEqual(options["querystring_expire"], 600)
         self.assertTrue(options["querystring_auth"])
-        self.assertFalse(options["file_overwrite"])
+        self.assertTrue(options["file_overwrite"])
         self.assertIsNone(options["default_acl"])
 
     def test_addressing_style_is_switchable(self):
@@ -136,6 +136,14 @@ class S3StorageTests(TestCase):
         url = recipe.image.url
         self.assertIn("Signature", url)
         self.assertIn("Expires", url)
+
+    def test_uuid_upload_does_not_check_s3_for_an_existing_key(self):
+        from apps.recipes.models import Recipe
+
+        recipe = Recipe(title="Pasta")
+        with mock.patch("storages.backends.s3.S3Storage.exists", side_effect=AssertionError("unexpected HEAD")):
+            recipe.image.save("pasta.png", ContentFile(image_bytes()), save=False)
+        self.assertRegex(recipe.image.name, r"^recipes/[0-9a-f]{32}\.png$")
 
     def test_storage_failure_leaves_no_row(self):
         from apps.recipes.models import Recipe
