@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
 
 const initialApps = [
@@ -41,6 +41,14 @@ const initialApps = [
 
 export default function Gallery({ onOpenApp }) {
   const [apps, setApps] = useState(initialApps);
+  const [query, setQuery] = useState("");
+  const searchInput = useRef(null);
+  const searchTerm = query.trim().toLowerCase();
+  const filteredApps = apps.filter((app) =>
+    [app.name, app.category, app.description].some((value) =>
+      (value || "").toLowerCase().includes(searchTerm)
+    )
+  );
 
   useEffect(() => {
     fetch("/api/apps/")
@@ -78,8 +86,41 @@ export default function Gallery({ onOpenApp }) {
         <p>Small, thoughtful apps for exploring, learning, and getting things done.</p>
       </section>
 
-      <section className="app-grid" aria-label="App gallery">
-        {apps.map((app) => (
+      <div className="gallery-search">
+        <label htmlFor="app-search">Search apps</label>
+        <div className="gallery-search-field">
+          <input
+            ref={searchInput}
+            id="app-search"
+            type="search"
+            placeholder="Search by name, category or description"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            aria-controls="app-gallery"
+            autoComplete="off"
+          />
+          {query && (
+            <button
+              className="gallery-search-clear"
+              type="button"
+              aria-label="Clear search"
+              onClick={() => {
+                setQuery("");
+                searchInput.current?.focus();
+              }}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          )}
+        </div>
+        <p className="gallery-search-status" role="status">
+          {filteredApps.length} {filteredApps.length === 1 ? "app" : "apps"}
+          {searchTerm ? ` matching "${query.trim()}"` : " to explore"}
+        </p>
+      </div>
+
+      <section id="app-gallery" className="app-grid" aria-label="App gallery">
+        {filteredApps.map((app) => (
           <button className="app-card" key={app.slug} onClick={() => app.href?.startsWith("/admin/") ? window.location.assign(app.href) : onOpenApp(app.slug)}>
             <span className="app-card-icon" aria-hidden="true">{app.icon || "✦"}</span>
             <span className="app-card-category">{app.category}</span>
@@ -89,6 +130,9 @@ export default function Gallery({ onOpenApp }) {
           </button>
         ))}
       </section>
+      {filteredApps.length === 0 && (
+        <p className="gallery-search-empty">No apps found. Try another name, category or keyword.</p>
+      )}
       <footer className="site-footer">More tools will find their way here.</footer>
     </main>
   );
