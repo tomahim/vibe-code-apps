@@ -4,14 +4,17 @@ import csv
 import io
 import json
 import logging
+import shutil
 import stat
 import zipfile
 import zlib
-from pathlib import PurePosixPath
+from contextlib import ExitStack
+from pathlib import Path, PurePosixPath
+from tempfile import TemporaryDirectory
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.core.files.base import ContentFile
+from django.core.files.base import File
 from django.db import transaction
 
 from config.media import IMAGE_FORMATS
@@ -21,8 +24,8 @@ from .models import Ingredient, RecipeIngredient
 
 logger = logging.getLogger(__name__)
 
-MAX_ARCHIVE_BYTES = 50 * 1024 * 1024
-MAX_UNCOMPRESSED_BYTES = 100 * 1024 * 1024
+MAX_ARCHIVE_BYTES = 500 * 1024 * 1024
+MAX_UNCOMPRESSED_BYTES = 1024 * 1024 * 1024
 MAX_CSV_BYTES = 2 * 1024 * 1024
 MAX_RECIPES = 500
 MAX_ENTRIES = 1002
@@ -34,7 +37,7 @@ def _archive_files(archive):
     if len(entries) > MAX_ENTRIES:
         raise ValidationError(f"ZIP contains too many entries (maximum {MAX_ENTRIES}).")
     if sum(entry.file_size for entry in entries) > MAX_UNCOMPRESSED_BYTES:
-        raise ValidationError("ZIP contents exceed the 100 MiB uncompressed limit.")
+        raise ValidationError("ZIP contents exceed the 1 GiB uncompressed limit.")
     files = {}
     seen = set()
     for entry in entries:
@@ -66,7 +69,7 @@ def _archive_files(archive):
     return files
 
 
-def _prepare_recipes(archive, files):
+def _prepare_recipes(archive, files, image_dir):
     csv_text = archive.read(files["data.csv"]).decode("utf-8-sig")
     reader = csv.DictReader(io.StringIO(csv_text, newline=""), strict=True)
     if reader.fieldnames is None or sorted(reader.fieldnames) != sorted(CSV_COLUMNS):
@@ -83,7 +86,7 @@ def _prepare_recipes(archive, files):
         try:
             ingredients = clean_ingredients(json.loads(row["ingredients"]))
             image_name = row["image"].strip()
-            uploaded = {}
+            image_path = None
             if image_name:
                 if PurePosixPath(image_name).name != image_name or "\\" in image_name:
                     raise ValidationError("image must be a filename from images/, such as 1.jpg.")
@@ -91,19 +94,28 @@ def _prepare_recipes(archive, files):
                 if path not in files:
                     raise ValidationError(f"Image {path} was not found in the ZIP.")
                 if path not in images:
-                    images[path] = ContentFile(archive.read(files[path]), name=image_name)
-                uploaded["image"] = images[path]
-            form = RecipeForm(row, uploaded)
-            if not form.is_valid():
-                raise ValidationError(
-                    [f"{field}: {message}" for field, errors in form.errors.items() for message in errors]
-                )
-            recipe = form.save(commit=False)
-            if recipe.image:
-                # Use the detected format, rather than trusting the filename suffix.
-                extension = IMAGE_FORMATS[form.cleaned_data["image"].image.format][1]
-                recipe.image.name = f"image.{extension}"
-            prepared.append((recipe, ingredients))
+                    # Stage in bounded chunks under generated names. Do not keep
+                    # the whole batch in RAM or hundreds of file handles open.
+                    images[path] = image_dir / str(len(images))
+                    with archive.open(files[path]) as source, images[path].open("wb") as target:
+                        shutil.copyfileobj(source, target, length=64 * 1024)
+                image_path = images[path]
+            with ExitStack() as row_files:
+                uploaded = {}
+                if image_path is not None:
+                    uploaded["image"] = File(row_files.enter_context(image_path.open("rb")), name=image_name)
+                form = RecipeForm(row, uploaded)
+                if not form.is_valid():
+                    raise ValidationError(
+                        [f"{field}: {message}" for field, errors in form.errors.items() for message in errors]
+                    )
+                recipe = form.save(commit=False)
+                image = None
+                if recipe.image:
+                    extension = IMAGE_FORMATS[form.cleaned_data["image"].image.format][1]
+                    image = (image_path, f"image.{extension}")
+                    recipe.image = None
+                prepared.append((recipe, ingredients, image))
         except json.JSONDecodeError:
             raise ValidationError(f"CSV row {row_number}: ingredients must be a valid JSON array.") from None
         except ValidationError as exc:
@@ -113,14 +125,14 @@ def _prepare_recipes(archive, files):
     return prepared
 
 
-def prepare_archive(upload):
+def prepare_archive(upload, image_dir):
     """Validate every row and referenced image before writing to DB or storage."""
     if upload.size > MAX_ARCHIVE_BYTES:
-        raise ValidationError("ZIP exceeds the 50 MiB upload limit.")
+        raise ValidationError("ZIP exceeds the 500 MiB upload limit.")
     upload.seek(0)
     try:
         with zipfile.ZipFile(upload) as archive:
-            return _prepare_recipes(archive, _archive_files(archive))
+            return _prepare_recipes(archive, _archive_files(archive), image_dir)
     except UnicodeDecodeError:
         raise ValidationError("data.csv must use UTF-8 encoding.") from None
     except csv.Error:
@@ -132,16 +144,17 @@ def prepare_archive(upload):
         raise ValidationError("Upload a valid, unencrypted ZIP archive with supported compression.") from None
 
 
-def import_recipes(upload):
+def _save_recipes(prepared):
     """Create a whole batch, compensating completed uploads if saving fails."""
-    prepared = prepare_archive(upload)
     saved_images = []
     ingredient_cache = {}
     try:
         with transaction.atomic():
-            for recipe, ingredients in prepared:
-                if recipe.image:
-                    recipe.image.save(recipe.image.name, recipe.image.file, save=False)
+            for recipe, ingredients, image in prepared:
+                if image is not None:
+                    image_path, image_name = image
+                    with image_path.open("rb") as source:
+                        recipe.image.save(image_name, File(source), save=False)
                     saved_images.append((recipe.image.storage, recipe.image.name))
                 recipe.save()
                 entries = []
@@ -161,3 +174,9 @@ def import_recipes(upload):
                 logger.exception("Could not remove image after failed recipe batch import")
         raise
     return len(prepared)
+
+
+def import_recipes(upload):
+    """Stage and validate the batch, then save it, always cleaning temporary files."""
+    with TemporaryDirectory(prefix="recipe-import-") as directory:
+        return _save_recipes(prepare_archive(upload, Path(directory)))

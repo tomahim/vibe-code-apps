@@ -27,7 +27,7 @@
         </ul>
         <p><a class="text-primary-600 underline" href="{% static 'recipes/import-template.csv' %}" download>Download example CSV</a>. Save the CSV as UTF-8. Spreadsheet editors handle the quoting of the JSON column when exporting CSV.</p>
         <p>A batch creates new recipes and reuses existing ingredient names. Importing the same ZIP again creates another copy of its recipes. The entire batch is validated before saving; a failed import creates no recipes.</p>
-        <p>Limits: 500 recipes, 50 MiB ZIP, 100 MiB uncompressed, 2 MiB CSV. Each image uses the configured image upload limit (5 MiB by default).</p>
+        <p>Limits: 500 recipes, 500 MiB ZIP, 1 GiB uncompressed, 2 MiB CSV. Each image uses the configured image upload limit (5 MiB by default).</p>
         <form method="post" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
             {{ form.as_p }}

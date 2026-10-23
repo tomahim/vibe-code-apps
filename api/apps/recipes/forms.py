@@ -17,7 +17,7 @@ class RecipeImportForm(forms.Form):
         label="ZIP archive",
         validators=[FileExtensionValidator(["zip"])],
         widget=UnfoldAdminFileFieldWidget(attrs={"accept": ".zip,application/zip"}),
-        help_text="Up to 50 MiB, containing data.csv and an images/ folder.",
+        help_text="Up to 500 MiB, containing data.csv and an images/ folder.",
     )
 
 

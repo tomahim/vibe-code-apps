@@ -156,13 +156,18 @@ is rolled back and completed image uploads are deleted on a best-effort basis
 (cleanup failures are logged). Images use the configured shared storage, with
 random `recipes/<uuid>.<ext>` keys and extensions from their detected format.
 
-Limits: 500 recipes, 50 MiB ZIP upload, 100 MiB total uncompressed content,
+Limits: 500 recipes, 500 MiB ZIP upload, 1 GiB total uncompressed content,
 2 MiB CSV, 1,002 ZIP entries, and `MEDIA_UPLOAD_MAX_BYTES` per image (5 MiB by
 default). Unsafe paths, duplicate ZIP entries, symlinks and encrypted archives
-are rejected. Files are read from the archive without extracting them to disk.
-The production proxy allows 51 MiB request bodies specifically on the recipe
+are rejected. Images are streamed in 64 KiB chunks to a temporary staging
+directory with generated filenames, then reopened one at a time for validation
+and storage. The directory is removed after success or failure, so large batches
+do not keep all image bytes or file handles in memory.
+The production proxy allows 501 MiB request bodies specifically on the recipe
 import route, leaving room for multipart overhead while preserving the 6 MiB
 request limit on other admin routes.
+The import route and Gunicorn allow up to ten minutes for synchronous processing
+and image uploads.
 
 ```sh
 cd api

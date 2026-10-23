@@ -4,13 +4,14 @@ import json
 import warnings
 import zipfile
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, TemporaryFile
 from unittest import mock
 
 import boto3
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
+from django.core.files.base import File
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -120,6 +121,52 @@ class RecipeImportTests(TestCase):
         names = [recipe.image.name for recipe in Recipe.objects.all()]
         self.assertEqual(len(set(names)), 2)
         self.assertTrue(all(name.endswith(".webp") for name in names))
+
+    def test_imports_disk_backed_archive_larger_than_previous_50_mib_limit(self):
+        rows = [recipe_row(title=f"Recipe {i}", image=f"{i}.jpg") for i in range(60)]
+        output = io.StringIO(newline="")
+        writer = csv.DictWriter(output, fieldnames=CSV_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
+        # Reuse a bounded buffer; JPEG trailing bytes keep each fixture valid.
+        content = image_bytes() + bytes(1024 * 1024)
+        with TemporaryFile() as data:
+            with zipfile.ZipFile(data, "w", compression=zipfile.ZIP_STORED) as archive:
+                archive.writestr("data.csv", output.getvalue())
+                for row in rows:
+                    archive.writestr(f"images/{row['image']}", content)
+            upload = File(data, name="large.zip")
+            self.assertGreater(upload.size, 50 * 1024 * 1024)
+            self.assertEqual(import_recipes(upload), len(rows))
+        self.assertEqual(len(self.media_files()), len(rows))
+
+    def test_staged_images_are_reused_and_removed_after_success_or_failure(self):
+        original = TemporaryDirectory
+        directories = []
+
+        def temporary_directory(*args, **kwargs):
+            directory = original(*args, **kwargs)
+            directories.append(Path(directory.name))
+            return directory
+
+        def check_staged_files(prepared):
+            self.assertEqual(len(list(directories[-1].iterdir())), 1)
+            self.assertEqual(prepared[0][2][0], prepared[1][2][0])
+            self.assertFalse(prepared[0][0].image)
+            return len(prepared)
+
+        rows = [recipe_row(), recipe_row(title="Second")]
+        with (
+            mock.patch("apps.recipes.importing.TemporaryDirectory", side_effect=temporary_directory),
+            mock.patch("apps.recipes.importing._save_recipes", side_effect=check_staged_files),
+        ):
+            self.assertEqual(import_recipes(archive_upload(rows)), 2)
+            self.assert_rejected(archive_upload([recipe_row(), recipe_row(title="")]), "CSV row 3")
+            with mock.patch("apps.recipes.importing._save_recipes", side_effect=OSError("storage failed")):
+                with self.assertRaises(OSError):
+                    import_recipes(archive_upload(rows))
+        self.assertEqual(len(directories), 3)
+        self.assertTrue(all(not directory.exists() for directory in directories))
 
     def test_repeated_import_creates_new_recipes_and_reuses_ingredients(self):
         import_recipes(archive_upload())
@@ -232,8 +279,8 @@ class RecipeImportTests(TestCase):
 
     def test_rejects_oversized_archives_csv_and_recipe_count(self):
         cases = [
-            ("MAX_ARCHIVE_BYTES", 10, "50 MiB"),
-            ("MAX_UNCOMPRESSED_BYTES", 10, "100 MiB"),
+            ("MAX_ARCHIVE_BYTES", 10, "500 MiB"),
+            ("MAX_UNCOMPRESSED_BYTES", 10, "1 GiB"),
             ("MAX_CSV_BYTES", 10, "2 MiB"),
             ("MAX_ENTRIES", 1, "too many entries"),
             ("MAX_RECIPES", 1, "at most 1 recipes"),
