@@ -55,7 +55,8 @@ start a scheduled run a few minutes after its nominal time.
   type instead of when the recipe is saved.
 - /list shows all recipes. /list tomato, pasta filters to recipes where
   every term is an ingredient or part of the recipe name.
-- /random returns one recipe. /random tomato, pasta filters first.
+- /random returns one recipe. /random tomato, pasta filters first to
+  recipes where every term is an ingredient or part of the recipe name.
 - When a recipe has an image, /list and /random send it as a Telegram photo
   with the recipe text as the caption. /list sends at most 10 photos per
   call; the rest come as text. If an image can't be fetched (or is over 5 MB),

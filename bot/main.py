@@ -199,7 +199,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "Commands:\n"
         "/add — save a recipe through a short conversation; add a photo or skip it.\n"
         "/list [ingredient, ingredient] — list recipes, optionally requiring every term in an ingredient or the recipe name.\n"
-        "/random [ingredient, ingredient] — pick a random recipe, optionally filtered.\n"
+        "/random [ingredient, ingredient] — pick a random recipe, optionally requiring every term in an ingredient or the recipe name.\n"
         "/wakeup — wake the sleeping API and confirm it is up.\n"
         "/cancel — stop adding a recipe.\n\n"
         "During /add, enter ingredients separated by commas or new lines. Add a quantity as "
@@ -351,7 +351,7 @@ async def random_recipe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         return
     ingredients = " ".join(context.args).strip()
     try:
-        result = await api_get(context, "/api/apps/recipes/random/", ingredients)
+        result = await api_get(context, "/api/apps/recipes/random/", ingredients, match_title=True)
     except httpx.HTTPStatusError as exc:
         if exc.response.status_code == 404:
             await update.effective_message.reply_text("No matching recipes found.")
