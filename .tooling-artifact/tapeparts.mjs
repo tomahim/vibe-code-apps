@@ -17,7 +17,7 @@ export const PACK_MAX = packR(L_SIDE);      // ~24.6 mm
 // ---- layout ----
 export const SUP = { x: -21, z: 34 }, TAK = { x: 21, z: 34 };   // reel centers
 const SHELL = { x0: -50.2, z0: 0, x1: 50.2, z1: 63.8 };         // cassette outline
-const FACE = { x0: -96, z0: -20, x1: 96, z1: 112 };             // deck faceplate
+const FACE = { x0: -60, z0: -16, x1: 60, z1: 70 };             // deck faceplate
 const GUIDE_L = { x: -36, z: 5 }, GUIDE_R = { x: 36, z: 5 }, GUIDE_R_ = 2.2;
 const RUN_Z = 2.8;                        // straight tape run height
 const HEAD = { x: -10, w: 6.5 };          // play head, face top at RUN_Z
@@ -25,15 +25,15 @@ const CAP = { x: 12, z: RUN_Z - CAP_R };          // capstan center (below tape)
 const PIN = { x: 12, z: RUN_Z + PINCH_R };        // pinch roller center (above tape)
 
 export const PT = fitProjection(
-  [[-94, -6, -26], [94, 6, 120], [-94, 6, 120], [94, -6, -26]],
-  VIEW_W, VIEW_H, { pad: 24, azimuth: 90, elevation: 28 });
+  [[-68, -6, -20], [68, 6, 104], [-68, 6, 104], [68, -6, -20]],
+  VIEW_W, VIEW_H, { pad: 22, azimuth: 90, elevation: 28 });
 
 const S = (x, z, y = 0) => iso([x, y, z], PT);
 const sidePath = (pts, closed = false, y = 0) => pathOf(pts.map(([x, z]) => S(x, z, y)), closed);
 const circPts = (cx, cz, r, steps = 40, from = 0, span = Math.PI * 2) =>
   Array.from({ length: steps + 1 }, (_, i) => [cx + r * Math.cos(from + (i / steps) * span), cz + r * Math.sin(from + (i / steps) * span)]);
-const annulus = (cx, cz, ro, ri) =>
-  sidePath(circPts(cx, cz, ro, 48), true) + sidePath(circPts(cx, cz, ri, 48).reverse(), true);
+const annulus = (cx, cz, ro, ri, y = 0) =>
+  sidePath(circPts(cx, cz, ro, 48), true, y) + sidePath(circPts(cx, cz, ri, 48).reverse(), true, y);
 const flat = (d, className, tone = "hi") =>
   solidSvg({ fill: d, outline: d, crease: "", bevel: "", top: "", shades: [] }, { flat: true, tone, className });
 const label = (x, z, text, size = 10, tone = "mid", anchor = "middle") => {
@@ -55,7 +55,8 @@ export function faceSvg() {
 }
 export function shellSvg() {
   const out = [];
-  const r = (x0, z0, x1, z1) => sidePath([[x0, z0], [x1, z0], [x1, z1], [x0, z1]], true);
+  const r = (x0, z0, x1, z1, y = 0) => sidePath([[x0, z0], [x1, z0], [x1, z1], [x0, z1]], true, y);
+  out.push(flat(r(SHELL.x0, SHELL.z0, SHELL.x1, SHELL.z1, 2.4), "shell-back", "mid"));
   out.push(flat(r(SHELL.x0, SHELL.z0, SHELL.x1, SHELL.z1), "shell"));
   // hub windows
   out.push(lineSvg(sidePath(circPts(SUP.x, SUP.z, PACK_MAX + 1.5, 48)), { tone: "faint" }));
@@ -108,7 +109,7 @@ export function tapeSvg(rs, rt, travel) {
 // ---- reels + packs ----
 export function packSvg(c, r) {
   if (r < CORE_R + 0.7) return "";
-  return flat(annulus(c.x, c.z, r, CORE_R + 0.5), "pack");
+  return flat(annulus(c.x, c.z, r, CORE_R + 0.5, 1.8), "pack-back", "mid") + flat(annulus(c.x, c.z, r, CORE_R + 0.5), "pack");
 }
 export function reelSvg(c, angle) {
   const out = [];
@@ -119,6 +120,7 @@ export function reelSvg(c, angle) {
     holes.push(sidePath(circPts(c.x + Math.cos(a) * 6.4, c.z + Math.sin(a) * 6.4, 2.3, 14), true));
   }
   out.push(lineSvg(holes.join(""), { tone: "mid" }));
+  out.push(flat(sidePath(circPts(c.x, c.z, 2.2, 14), true), "reelaxle brass"));
   const teeth = [];
   for (let i = 0; i < 6; i++) {
     const a = angle + (i * Math.PI * 2) / 6;
@@ -162,21 +164,21 @@ export function pinchSvg(angle) {
 }
 
 // ---- head-gap cutaway inset ----
-const IN = { x: 0, z: 88, zoom: 6 };
+const IN = { x: -28, z: 82, zoom: 5 };
 const SI = (u, v) => S(IN.x + u * IN.zoom, IN.z + v * IN.zoom);
 export function insetFrameSvg() {
-  const c = [[-5.5, -3.75], [5.5, -3.75], [5.5, 3.75], [-5.5, 3.75]].map(([u, v]) => SI(u, v));
+  const c = [[-5.5, -3], [5.5, -3], [5.5, 3], [-5.5, 3]].map(([u, v]) => SI(u, v));
   const out = [];
   out.push(`<path class="inset-box" d="${pathOf(c, true)}"/>`);
-  const [tx, ty] = SI(0, 2.95);
-  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(tx)}" y="${tenth(ty)}" font-size="9" text-anchor="middle">the gap, magnified</text>`);
+  const [tx, ty] = SI(0, 2.1);
+  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(tx)}" y="${tenth(ty)}" font-size="10" text-anchor="middle">the gap, magnified</text>`);
   return out.join("");
 }
 export function insetLiveSvg(travel) {
   const out = [];
   // head block below, face at v=0
-  out.push(`<path class="inset-head" d="${pathOf([[-2.4, -2.2], [2.4, -2.2], [1.8, 0], [-1.8, 0]].map(([u, v]) => SI(u, v)), true)}"/>`);
-  out.push(`<path class="iso-line" data-tone="lo" d="${pathOf([[-1.9, -1.5], [1.9, -1.5]].map(([u, v]) => SI(u, v)))}${pathOf([[-2, -0.75], [2, -0.75]].map(([u, v]) => SI(u, v)))}"/>`);
+  out.push(`<path class="inset-head" d="${pathOf([[-2.4, -1.9], [2.4, -1.9], [1.8, 0], [-1.8, 0]].map(([u, v]) => SI(u, v)), true)}"/>`);
+  out.push(`<path class="iso-line" data-tone="lo" d="${pathOf([[-1.9, -1.25], [1.9, -1.25]].map(([u, v]) => SI(u, v)))}${pathOf([[-2, -0.65], [2, -0.65]].map(([u, v]) => SI(u, v)))}"/>`);
   // tape band crossing the face
   out.push(`<path class="iso-line taperun" data-tone="hi" d="${pathOf([[-5.5, 0], [5.5, 0]].map(([u, v]) => SI(u, v)))}"/>`);
   // moving magnetic-domain dashes on the tape
@@ -190,15 +192,15 @@ export function insetLiveSvg(travel) {
   // the gap, red
   out.push(`<path class="iso-line headgap" data-tone="red" d="${pathOf([[0, -0.6], [0, 0.5]].map(([u, v]) => SI(u, v)))}"/>`);
   // direction arrow
-  const [ax, ay] = SI(4.1, 0.8);
+  const [ax, ay] = SI(4.2, 0.7);
   out.push(`<path class="iso-line arrow-force" d="M${tenth(ax - 12)} ${tenth(ay)}L${tenth(ax)} ${tenth(ay)}M${tenth(ax - 3.5)} ${tenth(ay - 3)}L${tenth(ax)} ${tenth(ay)}L${tenth(ax - 3.5)} ${tenth(ay + 3)}"/>`);
   // labels
-  const [l1x, l1y] = SI(0, -3.35);
-  const [l2x, l2y] = SI(2.7, 1.45);
-  const [l3x, l3y] = SI(-4.5, 1.0);
-  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l1x)}" y="${tenth(l1y)}" font-size="8.5" text-anchor="middle">play head</text>`);
-  out.push(`<text class="iso-face-text" data-tone="red" x="${tenth(l2x)}" y="${tenth(l2y)}" font-size="8.5" text-anchor="middle">gap · a few µm</text>`);
-  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l3x)}" y="${tenth(l3y)}" font-size="8.5" text-anchor="middle">tape</text>`);
+  const [l1x, l1y] = SI(0, -2.7);
+  const [l2x, l2y] = SI(3.0, 1.15);
+  const [l3x, l3y] = SI(-4.5, 0.85);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l1x)}" y="${tenth(l1y)}" font-size="9.5" text-anchor="middle">play head</text>`);
+  out.push(`<text class="iso-face-text" data-tone="red" x="${tenth(l2x)}" y="${tenth(l2y)}" font-size="9" text-anchor="middle">gap · a few µm</text>`);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l3x)}" y="${tenth(l3y)}" font-size="9" text-anchor="middle">tape</text>`);
   return out.join("");
 }
 
@@ -213,6 +215,5 @@ export function labelsSvg() {
   out.push(label(GUIDE_L.x - 4, GUIDE_L.z + 8, "guide", 9, "lo", "end"));
   out.push(label(GUIDE_R.x + 5, GUIDE_R.z + 4.5, "guide", 9, "lo", "start"));
   out.push(label(FACE.x0 + 4, FACE.z1 - 8, "C-60 · 86 m of tape a side", 10.5, "mid", "start"));
-  out.push(label(FACE.x0 + 4, FACE.z0 + 4.5, "shell translucent · tape thickness exaggerated", 9, "faint", "start"));
   return out.join("");
 }

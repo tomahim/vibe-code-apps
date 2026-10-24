@@ -208,7 +208,7 @@ export function insetFrameSvg() {
   const out = [];
   out.push(`<path class="inset-box" d="${pathOf(c, true)}"/>`);
   const [tx, ty] = SI(0, 36);
-  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(tx)}" y="${tenth(ty)}" font-size="9.5" text-anchor="middle">the gate, magnified</text>`);
+  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(tx)}" y="${tenth(ty)}" font-size="10.5" text-anchor="middle">the gate, magnified</text>`);
   return out.join("");
 }
 export function insetLiveSvg(wheelA, cogA, engage) {
@@ -236,7 +236,7 @@ export function insetLiveSvg(wheelA, cogA, engage) {
   // labels
   const [l1x, l1y] = SI(38, 30);
   const [l2x, l2y] = SI(-38, -40);
-  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l1x)}" y="${tenth(l1y)}" font-size="9.5">ratchet</text>`);
-  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l2x)}" y="${tenth(l2y)}" font-size="9.5">pawl</text>`);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l1x)}" y="${tenth(l1y)}" font-size="10.5">ratchet</text>`);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l2x)}" y="${tenth(l2y)}" font-size="10.5">pawl</text>`);
   return out.join("");
 }

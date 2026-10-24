@@ -54,8 +54,9 @@ function tSetStep(i, announce) {
   if (i === 5) { tS = 0; tDone = false; }
   tapePanel.querySelectorAll("[data-step]").forEach((b) => { b.toggleAttribute("data-on", Number(b.dataset.step) === i); });
   const parts = TSTEPS[i].parts;
-  tStage.querySelectorAll(".it[data-part]").forEach((el) => { el.toggleAttribute("data-on", parts.length === 0 || parts.includes(el.dataset.part)); });
-  tStage.dataset.focus = TSTEPS[i].id;
+  tStage.querySelectorAll(".it[data-part]").forEach((el) => { el.toggleAttribute("data-on", parts.includes(el.dataset.part)); });
+  tStage.dataset.focus = "1";
+  if (!parts.length) delete tStage.dataset.focus;
   tIdea.textContent = TIDEAS[TSTEPS[i].id];
   if (announce) tSay.textContent = TSTEPS[i].label;
   tRender(tState());

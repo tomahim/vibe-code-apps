@@ -137,7 +137,7 @@ const addCss = `
 .iso-line.taperun{stroke-width:1.1;stroke:#5e3a18}
 .iso-line.hubteeth{stroke-width:1.4}
 .iso-line.headgap{stroke-width:1.2}
-[data-panel="tape"] .iso-solid.deckface>.iso-fill{fill:var(--anatomy-card)}
+[data-panel="tape"] .iso-solid.deckface>.iso-fill{fill:var(--anatomy-paper)}
 [data-panel="tape"] .iso-solid.deckface>.iso-edge{stroke:var(--anatomy-mid)}
 [data-panel="tape"] .iso-solid.deckslot>.iso-fill{fill:var(--anatomy-shade-1)}
 [data-panel="tape"] .iso-solid.deckslot>.iso-edge{stroke:var(--anatomy-faint)}
@@ -145,6 +145,12 @@ const addCss = `
 [data-panel="tape"] .iso-solid.shell>.iso-edge{stroke:var(--anatomy-mid)}
 [data-panel="tape"] .iso-solid.shellabel>.iso-fill{fill:var(--anatomy-paper)}
 [data-panel="tape"] .iso-solid.shellabel>.iso-edge{stroke:var(--anatomy-faint)}
+[data-panel="tape"] .iso-solid.pack-back>.iso-fill{fill:#6d4526}
+[data-panel="tape"] .iso-solid.pack-back>.iso-edge{stroke:#4a2d12}
+[data-panel="tape"] .iso-solid.shell-back>.iso-fill{fill:var(--anatomy-shade-2)}
+[data-panel="tape"] .iso-solid.shell-back>.iso-edge{stroke:var(--anatomy-mid)}
+[data-panel="tape"] .iso-solid.reelaxle>.iso-fill{fill:#f0c25c}
+[data-panel="tape"] .iso-solid.reelaxle>.iso-edge{stroke:#6d4d12}
 [data-panel="tape"] .iso-solid.pack>.iso-fill{fill:#9c6b3d}
 [data-panel="tape"] .iso-solid.pack>.iso-edge{stroke:#5e3a18}
 [data-panel="tape"] .iso-solid.reelhub>.iso-fill{fill:var(--anatomy-paper)}
