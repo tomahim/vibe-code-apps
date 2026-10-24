@@ -4,6 +4,7 @@ tagline: A Living 3D Port Where Kubernetes Finally Makes Sense - Pods Sail, the 
 pitch: A dynamic 3D simulation of a Kubernetes cluster as a working harbor: deploy, scale, break and update containers while watching the scheduler, services and traffic respond in real time.
 domains: [3D, LEARN]
 created: 2026-10-24T16:44:12Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
