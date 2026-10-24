@@ -4,6 +4,7 @@ tagline: Follow One Electron From the Grid to the GPU - An Interactive Anatomy o
 pitch: An animated cutaway that traces power through a data center - substation, switchgear, transformers, UPS, busbar, rack - with live gauges and a pull-the-plug outage simulation.
 domains: [LEARN, 3D]
 created: 2026-10-24T09:31:44Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
