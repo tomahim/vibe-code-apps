@@ -13,6 +13,7 @@ const bikeBody = [
   `<g class="it" data-part="wheel" data-b-rspokes>${B.spokesSvg(B.RH, 0)}</g>`,
   `<g class="it" data-part="cog" data-b-cog>${B.cogSvg(0)}</g>`,
   `<g class="it" data-part="pawls" data-b-pawls>${B.pawlSvg(0, 1)}</g>`,
+  `<g class="it" data-part="inset">${B.insetFrameSvg()}<g data-b-inset></g></g>`,
   `<g class="it" data-part="chain"><path class="iso-line chain" data-b-chainpath d="${B.chainPathD()}"/></g>`,
   `<g class="it" data-part="chain" data-b-pins>${B.chainPinsSvg(0)}</g>`,
   `<g class="it" data-part="crank" data-b-arms>${B.crankArmsSvg(-0.6)}</g>`,
@@ -43,7 +44,7 @@ const bikePanel = `<div class="tab-panel" data-panel="bike" id="panel-bike" role
 </div>
 <p class="bigidea" data-idea></p>
 <span class="sr" data-say aria-live="polite"></span>
-</div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key">${sw("lit")}The parts this step is about</span><span class="iso-key">${sw("dim")}The rest of the bike, still drawn</span><span class="iso-key">${sw("red")}Where chain meets teeth</span><span class="iso-key">${sw("green")}Your foot's push</span></span><span class="iso-caption">A road bike's drivetrain in side elevation, drawn to scale where it counts: 50-tooth ring, 15-tooth cog, 172.5 mm cranks, 700C wheels - 2.1 metres of road a turn. The dashed circles are the cassette's range, 11 to 28 teeth. The rider, brakes and derailleur are left off the page; the bottom chain run is drawn taut, though a real one sags a little.</span></figcaption></figure></div>`;
+</div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key">${sw("lit")}The parts this step is about</span><span class="iso-key">${sw("dim")}The rest of the bike, still drawn</span><span class="iso-key">${sw("red")}Where chain meets teeth</span><span class="iso-key">${sw("green")}Your foot's push</span></span><span class="iso-caption">A road bike's drivetrain in side elevation, drawn to scale where it counts: 50-tooth ring, 15-tooth cog, 172.5 mm cranks, 700C wheels - 2.1 metres of road a turn. The dashed circles are the cassette's range, 11 to 28 teeth. The rider, brakes and derailleur are left off the page; the bottom chain run is drawn taut, though a real one sags a little; the green force arrow is illustrative, not measured.</span></figcaption></figure></div>`;
 
 // ---------- read original ----------
 const orig = readFileSync('/home/sandbox/repo/ui/src/artifacts/2026-10-23-swiss-watch.html', 'utf8');
@@ -72,7 +73,23 @@ const addCss = `
 .iso-line.spider{stroke-width:5;stroke-linecap:round}
 .iso-line.chain{stroke-width:2.6}
 .iso-line.arrow-force{stroke:var(--anatomy-green);stroke-width:3}
-.iso-solid.tire>.iso-fill{fill:var(--anatomy-shade-1)}
+[data-panel="bike"] .iso-solid.tire>.iso-fill{fill:var(--anatomy-hi)}
+[data-panel="bike"] .iso-solid.tire>.iso-edge{stroke:var(--anatomy-hi)}
+[data-panel="bike"] .iso-solid.brass>.iso-fill{fill:#f0c25c}
+[data-panel="bike"] .iso-solid.brass>.iso-edge{stroke:#6d4d12}
+[data-panel="bike"] .iso-solid.steel>.iso-fill{fill:#dde3e8}
+[data-panel="bike"] .iso-solid.steel>.iso-edge{stroke:#67727b}
+[data-panel="bike"] .iso-solid.chainring-back>.iso-fill{fill:#8a6a20}
+[data-panel="bike"] .iso-solid.chainring-back>.iso-edge{stroke:#6d4d12}
+[data-panel="bike"] .iso-solid.pedal-back>.iso-fill{fill:#7d868e}
+[data-panel="bike"] .iso-solid.pedal-back>.iso-edge{stroke:#67727b}
+.inset-box{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.inset-pawl{fill:#f0c25c;stroke:#6d4d12;stroke-width:.6}
+.inset-pivot{fill:var(--anatomy-hi)}
+.inset-dot{fill:var(--anatomy-hi)}
+.inset-dot-red{fill:var(--anatomy-red)}
+[data-panel="bike"] .iso-stage .it[data-part="inset"]{opacity:0;transition:opacity .5s}
+[data-panel="bike"] .iso-stage[data-focus] .it[data-part="inset"][data-on]{opacity:.98}
 .iso-solid.hub>.iso-fill{fill:var(--anatomy-face)}
 .iso-solid.hubcap>.iso-fill{fill:var(--anatomy-paper)}
 .iso-solid.chainring>.iso-fill{fill:var(--anatomy-face)}

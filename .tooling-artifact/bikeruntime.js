@@ -16,7 +16,7 @@ const BSTEPS = [
   { id: "ring", short: "02 Ring", parts: ["ring", "mesh"], label: "02 · The ring pulls the chain" },
   { id: "chain", short: "03 Chain", parts: ["chain"], label: "03 · The chain carries the force" },
   { id: "gears", short: "04 Cogs", parts: ["cog", "ghost", "mesh"], label: "04 · The cogs trade force for speed" },
-  { id: "free", short: "05 Freewheel", parts: ["pawls", "cog"], label: "05 · The gate: pawls, or coast" },
+  { id: "free", short: "05 Freewheel", parts: ["pawls", "cog", "inset"], label: "05 · The gate: pawls, or coast" },
   { id: "wheel", short: "06 Wheel", parts: ["wheel", "fwheel"], label: "06 · The wheel rolls it out" },
   { id: "ride", short: "07 Ride", parts: [], label: "07 · Ride" },
 ];
@@ -57,6 +57,9 @@ function bDraw() {
   bSvg.querySelector("[data-b-rspokes]").innerHTML = spokesSvg(RH, bWheel);
   bSvg.querySelector("[data-b-fspokes]").innerHTML = spokesSvg(FH, bWheel);
   bSvg.querySelector("[data-b-pawls]").innerHTML = pawlSvg(bWheel, bEngage);
+  const insetEl = bSvg.querySelector("[data-b-inset]");
+  if (BSTEPS[bStep].id === "free") insetEl.innerHTML = insetLiveSvg(bWheel, -bChain / R2, bEngage);
+  else if (insetEl.innerHTML) insetEl.innerHTML = "";
   const frozen = still.matches;
   const cadNow = frozen ? (bStep >= 1 ? 90 : 0) : bCad;
   const wheelVelNow = frozen ? (bStep >= 1 ? (cadNow / 60) * TAU * RATIO : 0) : bWheelVel;

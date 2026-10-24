@@ -13,7 +13,7 @@ export const PB = fitProjection(
   VIEW_W, VIEW_H, { pad: 26, azimuth: 90, elevation: 28 });
 
 const S = (x, z, y = 0) => iso([x, y, z], PB);
-const sidePath = (pts, closed = false) => pathOf(pts.map(([x, z]) => S(x, z)), closed);
+const sidePath = (pts, closed = false, y = 0) => pathOf(pts.map(([x, z]) => S(x, z, y)), closed);
 const circPts = (cx, cz, r, steps = 48, from = 0, span = Math.PI * 2) =>
   Array.from({ length: steps + 1 }, (_, i) => [cx + r * Math.cos(from + (i / steps) * span), cz + r * Math.sin(from + (i / steps) * span)]);
 export const annulus = (cx, cz, ro, ri) =>
@@ -107,7 +107,7 @@ export function wheelStaticSvg(hub) {
   const out = [];
   out.push(flat(annulus(hub.x, hub.z, WHEEL_R, RIM_R), "tire", "mid"));
   out.push(lineSvg(sidePath(circPts(hub.x, hub.z, RIM_R - 4)), { tone: "mid" }));
-  out.push(flat(sidePath(circPts(hub.x, hub.z, HUB_R + 3, 24), true), "hub"));
+  out.push(flat(sidePath(circPts(hub.x, hub.z, HUB_R + 3, 24), true), "hub steel"));
   return out.join("");
 }
 export function spokesSvg(hub, angle, count = 18) {
@@ -121,14 +121,16 @@ export function spokesSvg(hub, angle, count = 18) {
 }
 export function ringSvg(angle) {
   const out = [];
-  out.push(flat(sidePath(rotPts(gearRing(BB.x, BB.z, T1, R1 - 8, R1, 0.5), [BB.x, BB.z], angle), true), "chainring"));
+  const gear = rotPts(gearRing(BB.x, BB.z, T1, R1 - 8, R1, 0.5), [BB.x, BB.z], angle);
+  out.push(flat(sidePath(gear, true, 0), "chainring-back"));
+  out.push(flat(sidePath(gear, true, 11), "chainring brass"));
   const arms = [];
   for (let i = 0; i < 5; i++) {
     const a = angle + (i * Math.PI * 2) / 5;
     arms.push(sidePath([[BB.x + Math.cos(a) * 20, BB.z + Math.sin(a) * 20], [BB.x + Math.cos(a) * (R1 - 10), BB.z + Math.sin(a) * (R1 - 10)]]));
   }
-  out.push(lineSvg(arms.join(""), { tone: "hi", className: "spider" }));
-  out.push(flat(sidePath(circPts(BB.x, BB.z, 21, 24), true), "hubcap"));
+  out.push(lineSvg(arms.join(""), { tone: "hi", className: "spider brassline" }));
+  out.push(flat(sidePath(circPts(BB.x, BB.z, 21, 24), true), "hubcap steel"));
   return out.join("");
 }
 export function crankArmsSvg(angle) {
@@ -136,7 +138,7 @@ export function crankArmsSvg(angle) {
   for (const off of [0, Math.PI]) {
     const a = angle + off;
     const px = BB.x + Math.cos(a) * CRANK, pz = BB.z + Math.sin(a) * CRANK;
-    out.push(lineSvg(sidePath([[BB.x + Math.cos(a) * 12, BB.z + Math.sin(a) * 12], [px, pz]]), { tone: "hi", className: "crank" }));
+    out.push(lineSvg(sidePath([[BB.x + Math.cos(a) * 12, BB.z + Math.sin(a) * 12], [px, pz]], false, 14), { tone: "hi", className: "crank" }));
   }
   return out.join("");
 }
@@ -145,7 +147,8 @@ export function pedalsSvg(angle, force) {
   for (const off of [0, Math.PI]) {
     const a = angle + off;
     const px = BB.x + Math.cos(a) * CRANK, pz = BB.z + Math.sin(a) * CRANK;
-    out.push(flat(sidePath([[px - 42, pz - 8], [px + 42, pz - 8], [px + 42, pz + 8], [px - 42, pz + 8]], true), "pedal"));
+    out.push(flat(sidePath([[px - 42, pz - 8], [px + 42, pz - 8], [px + 42, pz + 8], [px - 42, pz + 8]], true, 0), "pedal-back"));
+  out.push(flat(sidePath([[px - 42, pz - 8], [px + 42, pz - 8], [px + 42, pz + 8], [px - 42, pz + 8]], true, 9), "pedal steel"));
     if (force > 0 && off === 0) { // drive pedal: downward force arrow
       const [ax, ay] = S(px, pz + 34);
       const [bx, by] = S(px, pz + 34 + 150 * force);
@@ -156,7 +159,9 @@ export function pedalsSvg(angle, force) {
 }
 export function cogSvg(angle) {
   const out = [];
-  out.push(flat(sidePath(rotPts(gearRing(RH.x, RH.z, T2, R2 - 4.5, R2, 0.5), [RH.x, RH.z], angle), true), "cog"));
+  const cg = rotPts(gearRing(RH.x, RH.z, T2, R2 - 4.5, R2, 0.5), [RH.x, RH.z], angle);
+  out.push(flat(sidePath(cg, true, 0), "chainring-back"));
+  out.push(flat(sidePath(cg, true, 8), "cog brass"));
   // ratchet teeth ring (rotates with driver)
   out.push(lineSvg(sidePath(rotPts(gearRing(RH.x, RH.z, 12, 12, 15.5, 0.8), [RH.x, RH.z], angle), true), { tone: "mid" }));
   return out.join("");
@@ -192,4 +197,46 @@ export function labelsSvg() {
 export function meshDotsSvg() {
   // red dots where chain meets ring (bottom tangent entry) and cog (top tangent entry)
   return dotsSvg([S(CHAIN.meshRing[0], CHAIN.meshRing[1]), S(CHAIN.meshCog[0], CHAIN.meshCog[1])], { size: 1.05, tone: "red" });
+}
+
+// ---- freewheel cutaway inset: the gate, magnified ----
+const IN = { x: -150, z: 712, zoom: 2.8 };
+const SI = (u, v) => S(IN.x + u * IN.zoom, IN.z + v * IN.zoom);
+const rotLocal = (pts, angle) => pts.map(([u, v]) => [u * Math.cos(angle) - v * Math.sin(angle), u * Math.sin(angle) + v * Math.cos(angle)]);
+export function insetFrameSvg() {
+  const c = [[-56, -46], [56, -46], [56, 46], [-56, 46]].map(([u, v]) => SI(u, v));
+  const out = [];
+  out.push(`<path class="inset-box" d="${pathOf(c, true)}"/>`);
+  const [tx, ty] = SI(0, 36);
+  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(tx)}" y="${tenth(ty)}" font-size="9.5" text-anchor="middle">the gate, magnified</text>`);
+  return out.join("");
+}
+export function insetLiveSvg(wheelA, cogA, engage) {
+  const out = [];
+  const circ = (r, n = 36) => Array.from({ length: n + 1 }, (_, i) => { const a = (i / n) * Math.PI * 2; return [r * Math.cos(a), r * Math.sin(a)]; });
+  // ratchet ring (rotates with the cog/driver)
+  const rat = rotLocal(gearRing(0, 0, 12, 30, 35, 0.75), cogA);
+  out.push(`<path class="iso-line" data-tone="hi" d="${pathOf(rat.map(([u, v]) => SI(u, v)), true)}"/>`);
+  // hub (rotates with the wheel)
+  out.push(`<path class="iso-line" data-tone="mid" d="${pathOf(rotLocal(circ(17), wheelA).map(([u, v]) => SI(u, v)), true)}"/>`);
+  // 3 pawls on the hub, tip out when engaged
+  for (let i = 0; i < 3; i++) {
+    const a = wheelA + (i * Math.PI * 2) / 3;
+    const tipR = 15 + 15 * engage;
+    const wedge = rotLocal([[12, -3.4], [12, 3.4], [tipR, 1.2]], a + 0.35);
+    out.push(`<path class="inset-pawl" d="${pathOf(wedge.map(([u, v]) => SI(u, v)), true)}"/>`);
+    const [px, py] = SI(...rotLocal([[12, 0]], a + 0.35)[0]);
+    out.push(`<circle class="inset-pivot" cx="${tenth(px)}" cy="${tenth(py)}" r="1.4"/>`);
+  }
+  // markers so the rotation difference is visible: dot on ratchet, dot on hub
+  const [rx, ry] = SI(...rotLocal([[32.5, 0]], cogA)[0]);
+  const [hx, hy] = SI(...rotLocal([[14, 0]], wheelA)[0]);
+  out.push(`<circle class="inset-dot-red" cx="${tenth(rx)}" cy="${tenth(ry)}" r="1.6"/>`);
+  out.push(`<circle class="inset-dot" cx="${tenth(hx)}" cy="${tenth(hy)}" r="1.6"/>`);
+  // labels
+  const [l1x, l1y] = SI(38, 30);
+  const [l2x, l2y] = SI(-38, -40);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l1x)}" y="${tenth(l1y)}" font-size="9.5">ratchet</text>`);
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(l2x)}" y="${tenth(l2y)}" font-size="9.5">pawl</text>`);
+  return out.join("");
 }
