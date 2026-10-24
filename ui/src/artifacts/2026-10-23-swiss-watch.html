@@ -2450,8 +2450,8 @@ function gripInsetSvg(jawOpen, vb) {
   // labels
   { const [lx, ly] = SI(-31, 31); out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(lx)}" y="${tenth(ly)}" font-size="${tenth(fs * 0.8)}" text-anchor="middle">ø45 rope</text>`); }
   li(-64, -48, "fixed jaw");
-  li(70, -44, "moving jaw", "start");
-  li(-68, 50, "spring");
+  li(16, -48, "moving jaw", "start");
+  li(-84, 66, "spring", "end");
   li(92, 104, "control roller", "end");
   li(0, -94, "station rail rollers");
   return out.join("");
