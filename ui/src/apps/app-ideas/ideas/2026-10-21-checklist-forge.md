@@ -4,6 +4,7 @@ tagline: Turn Your Team's Past Review Comments Into a Living PR Checklist
 pitch: Mine your team's past review comments into a ranked, living PR checklist with counts and trends.
 domains: [PROD, MEDIA]
 created: 2026-10-21T05:48:07Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
