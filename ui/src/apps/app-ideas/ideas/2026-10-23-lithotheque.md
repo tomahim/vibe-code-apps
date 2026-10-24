@@ -4,6 +4,7 @@ tagline: A Jewel-Bright 3D Gallery of Earth's Rocks, Minerals and Landforms
 pitch: Wander a beautiful digital museum hall of realistic 3D geological specimens, each with the story of how deep time made it.
 domains: [3D, LEARN, HIST]
 created: 2026-10-23T20:19:37Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
