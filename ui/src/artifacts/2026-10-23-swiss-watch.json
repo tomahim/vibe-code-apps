@@ -1,6 +1,6 @@
 {
-  "title": "The Swiss Lever Watch",
-  "description": "Interactive anatomies of three machines in one plate series. Tab 1 - the Swiss lever watch: wind the crown, follow the barrel's energy through the gear train, watch the pallet fork spend it one half-tooth at a time, 28,800 beats an hour. Tab 2 - the bicycle drivetrain: push 172.5 mm cranks, follow the chain from the 50-tooth ring to the 15-tooth cog, feel the freewheel pawls let you coast. Tab 3 - the cassette deck: thread a C-60 past the play head, let the capstan hold 4.76 cm/s while the packs trade places and the reels drift between 18.5 and 43.3 rpm. Live gauges, true numbers, honest simplifications.",
+  "title": "Mechanical Experiments",
+  "description": "Interactive anatomies of four machines in one plate series. Tab 1 - the Swiss lever watch: wind the crown, follow the barrel's energy through the gear train, watch the pallet fork spend it one half-tooth at a time, 28,800 beats an hour. Tab 2 - the bicycle drivetrain: push 172.5 mm cranks, follow the chain from the 50-tooth ring to the 15-tooth cog, feel the freewheel pawls let you coast. Tab 3 - the cassette deck: thread a C-60 past the play head, let the capstan hold 4.76 cm/s while the packs trade places and the reels drift between 18.5 and 43.3 rpm. Tab 4 - the chairlift: one rope looped between two stations, a 4.5 m bullwheel pulling it at 5 m/s, sheave batteries carrying it over the towers, and a detachable grip that lets each chair creep through the station while the rope never slows. Live gauges, true numbers, honest simplifications.",
   "date": "2026-10-23",
   "tags": [
     "watch",
@@ -8,6 +8,9 @@
     "drivetrain",
     "cassette",
     "tape",
+    "ski lift",
+    "chairlift",
+    "ropeway",
     "mechanism",
     "interactive",
     "3d",
