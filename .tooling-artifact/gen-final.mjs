@@ -1,4 +1,5 @@
 import * as B from './bikeparts.mjs';
+import * as T from './tapeparts.mjs';
 import { readFileSync, writeFileSync } from 'fs';
 
 // ---------- bike baked figure (initial pose) ----------
@@ -46,6 +47,40 @@ const bikePanel = `<div class="tab-panel" data-panel="bike" id="panel-bike" role
 <span class="sr" data-say aria-live="polite"></span>
 </div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key">${sw("lit")}The parts this step is about</span><span class="iso-key">${sw("dim")}The rest of the bike, still drawn</span><span class="iso-key">${sw("red")}Where chain meets teeth</span><span class="iso-key">${sw("green")}Your foot's push</span></span><span class="iso-caption">A road bike's drivetrain in side elevation, drawn to scale where it counts: 50-tooth ring, 15-tooth cog, 172.5 mm cranks, 700C wheels - 2.1 metres of road a turn. The dashed circles are the cassette's range, 11 to 28 teeth. The rider, brakes and derailleur are left off the page; the bottom chain run is drawn taut, though a real one sags a little; the green force arrow is illustrative, not measured.</span></figcaption></figure></div>`;
 
+
+// ---------- tape baked figure (initial pose: start of side A) ----------
+const RS0 = T.packR(T.L_SIDE), RT0 = T.packR(0);
+const tapeBody = [
+  g("face", "", T.faceSvg()),
+  g("shell", "", T.shellSvg()),
+  `<g class="it" data-part="packs" data-t-packsup>${T.packSvg(T.SUP, RS0)}</g>`,
+  `<g class="it" data-part="packs" data-t-packtak>${T.packSvg(T.TAK, RT0)}</g>`,
+  `<g class="it" data-part="tape" data-t-tape>${T.tapeSvg(RS0, RT0, 0)}</g>`,
+  g("guides", "", T.guidesSvg()),
+  g("head", "", T.headSvg()),
+  `<g class="it" data-part="capstan" data-t-capstan>${T.capstanSvg(0)}</g>`,
+  `<g class="it" data-part="pinch" data-t-pinch>${T.pinchSvg(0)}</g>`,
+  `<g class="it" data-part="reels" data-t-reelsup>${T.reelSvg(T.SUP, 0)}</g>`,
+  `<g class="it" data-part="reels" data-t-reeltak>${T.reelSvg(T.TAK, 0)}</g>`,
+  `<g class="it" data-part="inset">${T.insetFrameSvg()}<g data-t-inset></g></g>`,
+  `<g>${T.labelsSvg()}</g>`,
+].join("");
+
+const tapePanel = `<div class="tab-panel" data-panel="tape" id="panel-tape" role="tabpanel" aria-labelledby="tab-tape" hidden><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 3</span><span class="iso-plate-corner" data-corner="title">The cassette deck</span><span class="iso-plate-corner" data-corner="hint">Six steps · arrows work too</span><span class="iso-plate-corner" data-corner="readout" data-readout>Load · still · 00:00 · 18.5 / 43.3 rpm</span></div><div class="iso-stage-outer">
+<div class="watch-grid">
+  <div class="steps" role="group" aria-label="Steps of the cassette deck"><button type="button" data-step="0">Load</button><button type="button" data-step="1">Path</button><button type="button" data-step="2">Capstan</button><button type="button" data-step="3">Reels</button><button type="button" data-step="4">Head</button><button type="button" data-step="5">Side A</button></div>
+  <div class="iso-stage" tabindex="0" role="group" aria-label="Cassette deck figure: arrow keys move between the six steps"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 ${T.VIEW_W} ${T.VIEW_H}" role="img" aria-label="Face view of a compact cassette deck: a C-60 cassette with two reels, tape threading past guides, a play head and a capstan with pinch roller. During play the capstan holds the tape at 4.76 centimetres a second while the packs trade places and the reel speeds drift between 18.5 and 43.3 rpm.">${tapeBody}</svg></div>
+</div>
+<div class="gauges" aria-hidden="true">
+  <div class="gauge"><span>Tape speed</span><strong>4.76 cm/s</strong><i><b style="width:100%"></b></i></div>
+  <div class="gauge"><span>Counter</span><strong data-t-count>00:00 / 30:00</strong><i><b data-t-count-bar style="width:0%"></b></i></div>
+  <div class="gauge"><span>Supply reel</span><strong data-t-sup>18.5 rpm</strong></div>
+  <div class="gauge"><span>Take-up reel</span><strong data-t-tak>43.3 rpm</strong></div>
+</div>
+<p class="bigidea" data-idea></p>
+<span class="sr" data-say aria-live="polite"></span>
+</div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key">${sw("lit")}The parts this step is about</span><span class="iso-key">${sw("dim")}The rest of the deck, still drawn</span><span class="iso-key">${sw("red")}The head's gap</span><span class="iso-key">${sw("green")}The tape's travel</span></span><span class="iso-caption">A compact cassette face-on, drawn to scale where it counts: 86 metres of 18 µm tape a side on 10.5 mm cores, so a pack's radius follows r = √(core² + L·τ/π) and reel speed runs from 18.5 to 43.3 rpm, while the ø2.4 mm capstan - 379 rpm - holds the tape at 4.76 cm/s. The shell is drawn translucent and the tape far thicker than life so you can see them; the erase head, record head, motor, belts and slip clutch are left off the page; Side A plays at 20x.</span></figcaption></figure></div>`;
+
 // ---------- read original ----------
 const orig = readFileSync('/home/sandbox/repo/ui/src/artifacts/2026-10-23-swiss-watch.html', 'utf8');
 const scriptOpen = '<script type="module">';
@@ -55,9 +90,9 @@ let script = orig.slice(si + scriptOpen.length, orig.indexOf('</script></body></
 
 // ---------- body: wrap watch figure in panel, prepend tabs, append bike panel ----------
 const mainOpen = '<main class="iso-page">';
-head = head.replace(mainOpen, mainOpen + `<div class="tabs" role="tablist" aria-label="Choose a machine"><button type="button" role="tab" id="tab-watch" data-tab="watch" aria-selected="true" aria-controls="panel-watch">Swiss lever watch</button><button type="button" role="tab" id="tab-bike" data-tab="bike" aria-selected="false" aria-controls="panel-bike" tabindex="-1">Bicycle drivetrain</button></div><div class="tab-panel" data-panel="watch" id="panel-watch" role="tabpanel" aria-labelledby="tab-watch">`);
-head = head.replace('</main>', `</div>${bikePanel}</main>`);
-head = head.replace('<title>The Swiss Lever Watch</title>', '<title>The Swiss Lever Watch &amp; the Bicycle Drivetrain</title>');
+head = head.replace(mainOpen, mainOpen + `<div class="tabs" role="tablist" aria-label="Choose a machine"><button type="button" role="tab" id="tab-watch" data-tab="watch" aria-selected="true" aria-controls="panel-watch">Swiss lever watch</button><button type="button" role="tab" id="tab-bike" data-tab="bike" aria-selected="false" aria-controls="panel-bike" tabindex="-1">Bicycle drivetrain</button><button type="button" role="tab" id="tab-tape" data-tab="tape" aria-selected="false" aria-controls="panel-tape" tabindex="-1">Cassette deck</button></div><div class="tab-panel" data-panel="watch" id="panel-watch" role="tabpanel" aria-labelledby="tab-watch">`);
+head = head.replace('</main>', `</div>${bikePanel}${tapePanel}</main>`);
+head = head.replace('<title>The Swiss Lever Watch</title>', '<title>The Swiss Lever Watch, Bicycle Drivetrain &amp; Cassette Deck</title>');
 
 // ---------- CSS additions ----------
 const addCss = `
@@ -99,6 +134,32 @@ const addCss = `
 .iso-solid.saddle>.iso-fill{fill:var(--anatomy-shade-1)}
 [data-panel="bike"] .iso-stage .it[data-part="ghost"]{opacity:0;transition:opacity .5s}
 [data-panel="bike"] .iso-stage[data-focus] .it[data-part="ghost"][data-on]{opacity:.9}
+.iso-line.taperun{stroke-width:1.1;stroke:#5e3a18}
+.iso-line.hubteeth{stroke-width:1.4}
+.iso-line.headgap{stroke-width:1.2}
+[data-panel="tape"] .iso-solid.deckface>.iso-fill{fill:var(--anatomy-card)}
+[data-panel="tape"] .iso-solid.deckface>.iso-edge{stroke:var(--anatomy-mid)}
+[data-panel="tape"] .iso-solid.deckslot>.iso-fill{fill:var(--anatomy-shade-1)}
+[data-panel="tape"] .iso-solid.deckslot>.iso-edge{stroke:var(--anatomy-faint)}
+[data-panel="tape"] .iso-solid.shell>.iso-fill{fill:var(--anatomy-paper);fill-opacity:.38}
+[data-panel="tape"] .iso-solid.shell>.iso-edge{stroke:var(--anatomy-mid)}
+[data-panel="tape"] .iso-solid.shellabel>.iso-fill{fill:var(--anatomy-paper)}
+[data-panel="tape"] .iso-solid.shellabel>.iso-edge{stroke:var(--anatomy-faint)}
+[data-panel="tape"] .iso-solid.pack>.iso-fill{fill:#9c6b3d}
+[data-panel="tape"] .iso-solid.pack>.iso-edge{stroke:#5e3a18}
+[data-panel="tape"] .iso-solid.reelhub>.iso-fill{fill:var(--anatomy-paper)}
+[data-panel="tape"] .iso-solid.reelhub>.iso-edge{stroke:var(--anatomy-mid)}
+[data-panel="tape"] .iso-solid.guide>.iso-fill{fill:#dde3e8}
+[data-panel="tape"] .iso-solid.guide>.iso-edge{stroke:#67727b}
+[data-panel="tape"] .iso-solid.head>.iso-fill{fill:#f0c25c}
+[data-panel="tape"] .iso-solid.head>.iso-edge{stroke:#6d4d12}
+[data-panel="tape"] .iso-solid.capstan>.iso-fill{fill:#dde3e8}
+[data-panel="tape"] .iso-solid.capstan>.iso-edge{stroke:#67727b}
+[data-panel="tape"] .iso-solid.pinch>.iso-fill{fill:#3a3f46}
+[data-panel="tape"] .iso-solid.pinch>.iso-edge{stroke:#23262b}
+.inset-head{fill:#f0c25c;stroke:#6d4d12;stroke-width:.6}
+[data-panel="tape"] .iso-stage .it[data-part="inset"]{opacity:0;transition:opacity .5s}
+[data-panel="tape"] .iso-stage[data-focus] .it[data-part="inset"][data-on]{opacity:.98}
 `;
 head = head.replace('</style>', addCss + '</style>');
 
@@ -126,6 +187,12 @@ bikepartsSrc = bikepartsSrc
   .replace(/import \{[^}]*\} from '\.\/engine\.mjs';\n/, '')  // drop import statement
   .replaceAll('export const ', 'const ').replaceAll('export function ', 'function ');
 const bikeRt = readFileSync('/tmp/bike/bikeruntime.js', 'utf8');
+let tapepartsSrc = readFileSync('/tmp/bike/tapeparts.mjs', 'utf8');
+tapepartsSrc = tapepartsSrc
+  .replace(/import \{[^}]*\} from '\.\/engine\.mjs';\n/, '')  // drop import statement
+  .replaceAll('export const ', 'const ').replaceAll('export function ', 'function ');
+const tapeRt = readFileSync('/tmp/bike/taperuntime.js', 'utf8');
+const tapeScoped = '{\n' + tapepartsSrc + tapeRt + '\n}\n';
 const tabsJs = `
 // ---- tabs ----
 const tabList = document.querySelector('.tabs');
@@ -146,6 +213,6 @@ tabList.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowLeft') { event.preventDefault(); const n = tabBtns[(i + tabBtns.length - 1) % tabBtns.length]; activateTab(n.dataset.tab, true); }
 });
 `;
-const out = head + scriptOpen + engine + bikepartsSrc + watchRt + bikeRt + tabsJs + '</scr' + 'ipt></body></html>';
+const out = head + scriptOpen + engine + bikepartsSrc + watchRt + bikeRt + tapeScoped + tabsJs + '</scr' + 'ipt></body></html>';
 writeFileSync('/home/sandbox/repo/ui/src/artifacts/2026-10-23-swiss-watch.html', out);
 console.log('final bytes', out.length);

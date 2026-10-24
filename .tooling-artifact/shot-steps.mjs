@@ -15,13 +15,13 @@ await new Promise(r => setTimeout(r, 400));
 for (const s of steps.split(',')) {
   await page.evaluate((sel, i) => {
     document.querySelector(`${sel} [data-step="${i}"]`).click();
-  }, tab === 'watch' ? '[data-panel="watch"]' : '[data-panel="bike"]', s);
+  }, `[data-panel=${tab}]`, s);
   await new Promise(r => setTimeout(r, +waitms));
   await page.screenshot({ path: `${prefix}-s${s}.png` });
   const state = await page.evaluate((sel) => {
     const p = document.querySelector(sel);
     return { readout: p.querySelector('[data-readout]')?.textContent, hidden: p.hidden, scrollW: document.documentElement.scrollWidth, innerW: window.innerWidth };
-  }, tab === 'watch' ? '[data-panel="watch"]' : '[data-panel="bike"]');
+  }, `[data-panel=${tab}]`);
   console.log(`step ${s}:`, JSON.stringify(state));
 }
 console.log('page errors:', errors.length ? errors : 'none');
