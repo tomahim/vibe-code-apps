@@ -82,7 +82,7 @@
     </div>
   </div>
   <div class="ctl"><label>Sun <output id="sun-out">4.0°</output></label><input type="range" id="sun" min="0.5" max="8" step="0.1" value="4" aria-label="Sun elevation"></div>
-  <div class="ctl"><label>Heat haze <output id="haze-out">1.0</output></label><input type="range" id="haze" min="0" max="2" step="0.05" value="1" aria-label="Heat haze"></div>
+  <div class="ctl"><label>Heat haze <output id="haze-out">0.7</output></label><input type="range" id="haze" min="0" max="2" step="0.05" value="0.7" aria-label="Heat haze"></div>
   <div class="ctl" style="min-width:96px;flex-basis:96px">
     <label>&nbsp;</label>
     <div class="seg">
@@ -336,7 +336,7 @@ void main(){
     float zEye = -dist;
     float zN = (uFar+uNear)/(uFar-uNear) + 2.0*uFar*uNear/((uFar-uNear)*zEye);
     fragDepth = zN*0.5+0.5;
-    hazeMask *= exp(-dist*0.0016);
+    hazeMask *= 1.0 - exp(-dist*0.004); // shimmer builds over distance; close foreground stays stable
   } else {
     col = skyColor(dir);
   }
@@ -1052,7 +1052,7 @@ gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2,4,gl.FLOAT,false,9*4,5*4
 gl.bindVertexArray(null);
 
 /* ---------- UI state ---------- */
-let camMode='auto', sunElev=4.0, hazeAmt=1.0, uiHidden=false;
+let camMode='auto', sunElev=4.0, hazeAmt=0.7, uiHidden=false;
 let yawOff=0, pitchOff=0;
 let simStart = performance.now()*0.001, paused=false;
 { const q = new URLSearchParams(location.search);
@@ -1140,7 +1140,7 @@ function frame(){
   if (window.__POSE==='level'){ cam.eye=[42,26,42]; cam.tgt=[0,3.5,0]; cam.fov=40*Math.PI/180; sunElev=45; }
   {
     const asp0 = canvas.width/canvas.height;
-    if (asp0 < 0.9){ const k = Math.min(2.4, 0.9/asp0*1.25);
+    if (asp0 < 0.9){ const k = Math.min(3.0, 0.9/asp0*1.45);
       cam.eye = add(cam.tgt, scale(sub(cam.eye, cam.tgt), k)); }
   }
   if (window.__DBG) document.title = 's='+s.toFixed(2)+' now='+now.toFixed(2)+' ss='+simStart.toFixed(2)+' end='+SIM.sEnd.toFixed(2)+' pos='+st.pos.map(v=>v.toFixed(1))+' eye='+cam.eye.map(v=>v.toFixed(1));
