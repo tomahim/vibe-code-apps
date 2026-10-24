@@ -2404,15 +2404,15 @@ function heroSvg(q) {
 }
 function gripInsetSvg(jawOpen, vb) {
   vb = vb || { x: 0, y: 0, w: LW, h: LH };
-  const bw = vb.w * 0.42, bh = vb.h * 0.5;
-  const box = { x: vb.x + vb.w * 0.03, y: vb.y + vb.h * 0.04, w: bw, h: bh };
-  const sc = Math.min((box.w * 0.86) / 190, (box.h * 0.8) / 210);
-  const OX = box.x + box.w / 2, OY = box.y + box.h * 0.54;
+  const bw = vb.w * 0.52, bh = vb.h * 0.58;
+  const box = { x: vb.x + vb.w * 0.03, y: vb.y + vb.h * 0.03, w: bw, h: bh };
+  const sc = Math.min((box.w * 0.86) / 200, (box.h * 0.74) / 225);
+  const OX = box.x + box.w / 2, OY = box.y + box.h * 0.58;
   const SI = (u, v) => [OX + u * sc, OY - v * sc];
   const fs = box.w * 0.055;
   const out = [];
   out.push(`<rect class="inset-box" x="${tenth(box.x)}" y="${tenth(box.y)}" width="${tenth(bw)}" height="${tenth(bh)}" rx="3"/>`);
-  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(box.x + box.w / 2)}" y="${tenth(box.y + box.h * 0.09)}" font-size="${tenth(fs)}" text-anchor="middle">the detachable grip, magnified</text>`);
+  out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(box.x + box.w / 2)}" y="${tenth(box.y + box.h * 0.09)}" font-size="${tenth(fs * 0.78)}" text-anchor="middle">detachable grip, magnified</text>`);
   const poly = (pts, cls) => `<path class="${cls}" d="${pathOf(pts.map(([u, v]) => SI(u, v)), true)}"/>`;
   const seg = (pts, tone) => `<path class="iso-line" data-tone="${tone}" d="${pathOf(pts.map(([u, v]) => SI(u, v)))}"/>`;
   const circ = (u, v, r, cls) => { const [cx, cy] = SI(u, v); return `<circle class="${cls}" cx="${tenth(cx)}" cy="${tenth(cy)}" r="${tenth(r * sc)}"/>`; };
@@ -2447,12 +2447,12 @@ function gripInsetSvg(jawOpen, vb) {
   out.push(circ(-26, 0, 5, "inset-dot-red"));
   out.push(circ(26, 0, 5, "inset-dot-red"));
   // labels
-  { const [lx, ly] = SI(-27, 26); out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(lx)}" y="${tenth(ly)}" font-size="${tenth(fs * 0.8)}" text-anchor="middle">ø45 rope</text>`); }
-  li(-68, 50, "fixed jaw");
+  { const [lx, ly] = SI(-31, 31); out.push(`<text class="iso-face-text" data-tone="lo" x="${tenth(lx)}" y="${tenth(ly)}" font-size="${tenth(fs * 0.8)}" text-anchor="middle">ø45 rope</text>`); }
+  li(-64, -48, "fixed jaw");
   li(70, -44, "moving jaw", "start");
-  li(-26, 90, "spring pack");
-  li(70, 102, "control roller");
-  li(-10, -92, "rollers on the station rail");
+  li(-68, 50, "spring");
+  li(92, 104, "control roller", "end");
+  li(0, -94, "station rail rollers");
   return out.join("");
 }
 // ---- chairlift runtime ----
