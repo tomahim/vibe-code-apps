@@ -8,10 +8,11 @@ const artifacts = createCatalog(
   import.meta.glob("../artifacts/*.html", { query: "?raw", import: "default" }),
   import.meta.glob("../artifacts/*.json", { eager: true, import: "default" }),
 );
-const tags = [...new Set(artifacts.flatMap((artifact) => artifact.tags))].sort();
-const years = [...new Set(artifacts.map((artifact) => artifact.date?.slice(0, 4)).filter(Boolean))].sort().reverse();
+const months = [...new Set(artifacts.map((artifact) => artifact.date?.slice(0, 7)).filter(Boolean))].sort().reverse();
 const dateFormat = new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 const formatDate = (date) => date ? dateFormat.format(new Date(`${date}T00:00:00Z`)) : "Undated";
+const monthFormat = new Intl.DateTimeFormat("en", { month: "long", year: "numeric", timeZone: "UTC" });
+const formatMonth = (month) => monthFormat.format(new Date(`${month}-01T00:00:00Z`));
 
 function ArtifactViewer({ artifact }) {
   const [source, setSource] = useState("");
@@ -37,14 +38,13 @@ function ArtifactViewer({ artifact }) {
 
 export default function Artifacts({ path }) {
   const [query, setQuery] = useState("");
-  const [tag, setTag] = useState("");
-  const [year, setYear] = useState("");
-  const [order, setOrder] = useState("newest");
+  const [month, setMonth] = useState("");
+  const [order, setOrder] = useState("oldest");
   const slug = path.replace(/^\/artifacts\/?/, "").replace(/\/$/, "");
   const artifact = artifacts.find((entry) => encodeURIComponent(entry.slug) === slug);
-  const results = filterArtifacts(artifacts, { query, tag, year, order });
+  const results = filterArtifacts(artifacts, { query, month, order });
 
-  function reset() { setQuery(""); setTag(""); setYear(""); setOrder("newest"); }
+  function reset() { setQuery(""); setMonth(""); setOrder("oldest"); }
 
   if (slug && artifact) return <ArtifactViewer key={artifact.slug} artifact={artifact} />;
 
@@ -59,22 +59,17 @@ export default function Artifacts({ path }) {
         <img className="collection-artwork" src={collectionArtwork} alt="Genious Apps — colorful orbital shapes and ideas in motion" width="200" height="200" />
       </section>
       <section className="artifact-controls" aria-label="Search and filter artifacts">
-        <label className="artifact-search"><span>Search the collection</span><input type="search" placeholder="Search titles, descriptions, tags…" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
-        <label><span>Added</span><select value={year} onChange={(event) => setYear(event.target.value)}><option value="">All years</option>{years.map((value) => <option key={value}>{value}</option>)}</select></label>
-        <label><span>Sort by</span><select value={order} onChange={(event) => setOrder(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
-        <div className="artifact-tag-filters" role="group" aria-label="Filter by tag">
-          <button aria-pressed={!tag} onClick={() => setTag("")}>All experiments <span>{artifacts.length}</span></button>
-          {tags.map((value) => <button key={value} aria-pressed={tag === value} onClick={() => setTag(tag === value ? "" : value)}>{value}</button>)}
-        </div>
+        <label className="artifact-search"><span>Search the collection</span><input type="search" placeholder="Search titles, descriptions…" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
+        <label><span>Added</span><select value={month} onChange={(event) => setMonth(event.target.value)}><option value="">All months</option>{months.map((value) => <option key={value} value={value}>{formatMonth(value)}</option>)}</select></label>
+        <label><span>Sort by</span><select value={order} onChange={(event) => setOrder(event.target.value)}><option value="oldest">Earliest first</option><option value="newest">Newest first</option></select></label>
       </section>
-      <div className="artifact-results-heading"><p role="status">{results.length} {results.length === 1 ? "experiment" : "experiments"}{query || tag || year ? ` of ${artifacts.length}` : " in the collection"}</p><span>{order === "newest" ? "LATEST → EARLIEST" : "EARLIEST → LATEST"}</span></div>
+      <div className="artifact-results-heading"><p role="status">{results.length} {results.length === 1 ? "experiment" : "experiments"}{query || month ? ` of ${artifacts.length}` : " in the collection"}</p><span>{order === "newest" ? "LATEST → EARLIEST" : "EARLIEST → LATEST"}</span></div>
       <ol className="artifact-list" aria-label="Artifacts">
         {results.map((entry, index) => <li key={entry.slug}>
           <span className="artifact-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           <div className="artifact-entry">
             <div className="artifact-entry-heading"><h2><a href={`/artifacts/${encodeURIComponent(entry.slug)}`}>{entry.title}<span aria-hidden="true">↗</span></a></h2><time dateTime={entry.date || undefined}>{formatDate(entry.date)}</time></div>
             <p>{entry.description}</p>
-            <div className="artifact-entry-tags">{entry.tags.map((value) => <span key={value}>{value}</span>)}</div>
           </div>
         </li>)}
       </ol>

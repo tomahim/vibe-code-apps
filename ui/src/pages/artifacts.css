@@ -8,10 +8,6 @@
 .artifact-controls label { display: grid; gap: 8px; color: var(--muted); font-size: 11px; font-weight: 600; }
 .artifact-controls input, .artifact-controls select { width: 100%; min-width: 0; height: 44px; padding: 0 13px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--ink); font-size: 13px; }
 .artifact-controls input:focus, .artifact-controls select:focus { outline: 2px solid var(--green); outline-offset: 2px; }
-.artifact-tag-filters { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
-.artifact-tag-filters button { padding: 7px 12px; border: 1px solid var(--line); border-radius: 30px; background: transparent; color: var(--muted); font-size: 11px; }
-.artifact-tag-filters button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--paper); }
-.artifact-tag-filters button span { margin-left: 7px; opacity: .7; }
 .artifact-results-heading { display: flex; justify-content: space-between; align-items: center; margin-top: 27px; color: var(--muted); font-size: 11px; }
 .artifact-results-heading > span { font: 9px monospace; letter-spacing: .09em; }
 .artifact-list { padding: 0; margin: 0; list-style: none; }
@@ -25,8 +21,6 @@
 .artifact-entry h2 a:hover > span { transform: translate(2px, -2px); }
 .artifact-entry time { flex-shrink: 0; color: var(--muted); font: 11px monospace; }
 .artifact-entry > p { max-width: 690px; color: var(--muted); font-size: 14px; line-height: 1.7; margin: 10px 0 14px; }
-.artifact-entry-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.artifact-entry-tags span { color: var(--green); background: var(--collection-wash); border-radius: 4px; padding: 4px 7px; font-size: 10px; }
 .artifact-empty { padding: 70px 20px; text-align: center; }
 .artifact-empty h2 { font-size: 22px; }
 .artifact-empty p { color: var(--muted); }
