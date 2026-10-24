@@ -4,6 +4,7 @@ tagline: A Synthesizer Where the Patch Is a Solar System You Rearrange
 pitch: Build synth patches by arranging a tiny solar system in 3D - planets are oscillators, orbits are filters, moons are LFOs - and hear the sound change as you play with space.
 domains: [3D, MEDIA, LEARN]
 created: 2026-10-24T03:02:01Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
