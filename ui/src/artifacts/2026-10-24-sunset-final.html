@@ -377,16 +377,17 @@ void main(){
     vec2 cuv = vUv - 0.5;
     float rf = length(cuv)*2.0;
     float ang = atan(cuv.y, cuv.x);
-    float blades = 0.72 + 0.28*sin(ang*26.0 + rf*4.0);
-    alb = mix(vec3(0.42,0.43,0.47), vec3(0.09,0.09,0.10)*blades + vec3(0.02), smoothstep(0.18,0.34,rf));
+    float blades = 0.55 + 0.45*sin(ang*26.0 + rf*4.0);
+    alb = mix(vec3(0.17,0.175,0.19), vec3(0.045,0.045,0.05)*blades + vec3(0.012), smoothstep(0.10,0.32,rf));
   }
   if (uPart < 0.5) {
     // passenger window band: uv.x around fuselage (0..1), uv.y along length
     float side = abs(sin(vUv.x*3.14159*2.0));
     float sAz = sin(vUv.x*3.14159*2.0);
+    float cAz = cos(vUv.x*3.14159*2.0);
     float rowA = smoothstep(0.80,0.86,sAz) * (1.0-smoothstep(0.92,0.985,sAz));
     float rowB = smoothstep(0.80,0.86,-sAz) * (1.0-smoothstep(0.92,0.985,-sAz));
-    float band = rowA + rowB;
+    float band = (rowA + rowB) * smoothstep(0.05,0.30,cAz); // upper flanks only: one row per side
     float dots = smoothstep(0.42,0.5,sin(vUv.y*520.0)*0.5+0.5);
     float win = band * dots * step(0.06, vUv.y) * (1.0-step(0.93, vUv.y));
     // cockpit band near nose top-front
@@ -682,7 +683,7 @@ const fusProfile = {
     let r, yo = 0;
     if (x > 12) { const s=(x-12)/7; r = 1.97*Math.sqrt(Math.max(0.001, 1-s*s)); yo = -0.3*s*s; }
     else if (x > -10) { r = 1.97; }
-    else { const s=(-x-10)/9; r = 1.97*Math.sqrt(Math.max(0.02, 1-0.8*s*s)); yo = 2.3*s*s; }
+    else { const s=(-x-10)/9; r = 1.97*Math.sqrt(Math.max(0.028, 1-0.972*s*s)); yo = 1.65*s*s; }
     return [r, yo];
   }
 };
@@ -740,13 +741,15 @@ function coneX(x0,x1,y,z,r){ // small spinner cone along +x
 parts.engines = merge([translated(nacR,0,0,7.3), translated(nacL,0,0,-7.3)]);
 parts.caps = merge([
   disk(19.0, -0.30, 0, 0.07, [1,0,0]),        // nose tip closure
-  disk(-19.0, 2.30, 0, 0.88, [-1,0,0]),       // tail cone closure flush with last ring
-  coneX(-19.0,-19.7,2.30,0,0.85),             // APU taper closing the tail
+  disk(-19.0, 1.65, 0, 0.36, [-1,0,0]),       // tail cone closure flush with last ring
+  coneX(-19.0,-19.6,1.65,0,0.35),             // APU taper closing the tail
 ]);
 parts.engineDark = merge([
   disk(7.35,-2.05,7.3,1.12,[1,0,0]), disk(7.35,-2.05,-7.3,1.12,[1,0,0]),
   disk(2.7,-2.05,7.3,0.8,[-1,0,0]), disk(2.7,-2.05,-7.3,0.8,[-1,0,0]),
-  coneX(7.35,8.05,-2.05,7.3,0.30), coneX(7.35,8.05,-2.05,-7.3,0.30)
+]);
+parts.engines = merge([parts.engines,
+  coneX(7.35,8.05,-2.05,7.3,0.30), coneX(7.35,8.05,-2.05,-7.3,0.30)  // spinner cones, bare metal
 ]);
 parts.wings = merge([parts.wings,
   // pylons in wing material so they read as structure, not holes
@@ -1052,6 +1055,11 @@ function frame(){
   const st = planeState(s);
   const model = modelMat(st.pos, st.yaw, st.roll, st.pitch);
   const cam = cameraFor(s, st);
+  {
+    const asp0 = canvas.width/canvas.height;
+    if (asp0 < 0.9){ const k = Math.min(1.9, 0.9/asp0*1.05);
+      cam.eye = add(cam.tgt, scale(sub(cam.eye, cam.tgt), k)); }
+  }
   const basis = lookAt(cam.eye, cam.tgt, [0,1,0]);
   const aspect = canvas.width/canvas.height;
   const tanF = Math.tan(cam.fov/2);
