@@ -53,8 +53,8 @@ start a scheduled run a few minutes after its nominal time.
   Use /skip for the source or photo, and /cancel to discard the draft. Starting
   /add pings the API in the background so a sleeping API cold-starts while you
   type instead of when the recipe is saved.
-- /list shows all recipes. /list tomato, pasta filters to recipes where
-  every term is an ingredient or part of the recipe name.
+- /list tomato, pasta lists recipes where every term is an ingredient or
+  part of the recipe name. At least one term is required.
 - /random returns one recipe. /random tomato, pasta filters first to
   recipes where every term is an ingredient or part of the recipe name.
 - When a recipe has an image, /list and /random send it as a Telegram photo
