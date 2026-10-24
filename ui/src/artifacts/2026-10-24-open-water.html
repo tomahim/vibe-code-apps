@@ -1273,7 +1273,7 @@ function loop(now) {
     else benchStats.times.push(nowMs - benchStats.last);
     benchStats.last = nowMs;
     benchStats.frames++;
-    if (benchStats.times.length >= 300 || (benchStats.times.length >= 60 && (nowMs - benchStats.t0) > 12000)) {
+    if (benchStats.times.length >= 300 || (benchStats.times.length >= 60 && (nowMs - benchStats.t0) > 12000) || (benchStats.times.length >= 20 && (nowMs - benchStats.t0) > 25000)) {
       benchStats.done = true;
       const ts = [...benchStats.times].sort((a, b) => a - b);
       const avg = ts.reduce((x, y) => x + y, 0) / ts.length;
@@ -1326,7 +1326,7 @@ canvas.addEventListener("pointerdown", (e) => {
     const [a, b] = [...pointers.values()];
     pinchDist = Math.hypot(a[0]-b[0], a[1]-b[1]);
   }
-  canvas.setPointerCapture(e.pointerId);
+  try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
   canvas.classList.add("dragging");
 });
 canvas.addEventListener("pointermove", (e) => {
