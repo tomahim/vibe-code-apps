@@ -17,11 +17,11 @@ export function createCatalog(files, metadata = {}) {
   });
 }
 
-export function filterArtifacts(artifacts, { query = "", tag = "", year = "", order = "newest" } = {}) {
+export function filterArtifacts(artifacts, { query = "", month = "", order = "oldest" } = {}) {
   const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   return artifacts.filter((artifact) => {
     const haystack = [artifact.title, artifact.description, ...artifact.tags, artifact.date || ""].join(" ").toLowerCase();
-    return words.every((word) => haystack.includes(word)) && (!tag || artifact.tags.includes(tag)) && (!year || artifact.date?.startsWith(year));
+    return words.every((word) => haystack.includes(word)) && (!month || artifact.date?.startsWith(month));
   }).sort((a, b) => {
     // Undated files always come last, with a deterministic title tie-breaker.
     if (!a.date && b.date) return 1;

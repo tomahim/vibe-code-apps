@@ -19,20 +19,22 @@ test('single HTML files need no registration; metadata enriches matching filenam
 
 test('date ordering is chronological in both directions with undated files last', () => {
   const catalog = createCatalog(Object.fromEntries(['undated', '2026-10-23-new', '2024-02-29-leap', '2026-02-30-invalid', '2026-10-23-alpha'].map(name => [`./${name}.html`, () => {}])));
-  assert.deepEqual(filterArtifacts(catalog).map(entry => entry.title), ['Alpha', 'New', 'Leap', 'Invalid', 'Undated']);
-  assert.deepEqual(filterArtifacts(catalog, { order: 'oldest' }).map(entry => entry.title), ['Leap', 'Alpha', 'New', 'Invalid', 'Undated']);
+  assert.deepEqual(filterArtifacts(catalog, { order: 'newest' }).map(entry => entry.title), ['Alpha', 'New', 'Leap', 'Invalid', 'Undated']);
+  assert.deepEqual(filterArtifacts(catalog).map(entry => entry.title), ['Leap', 'Alpha', 'New', 'Invalid', 'Undated'], 'default sort is earliest first');
   assert.equal(catalog.find(entry => entry.title === 'Invalid').date, null);
 });
 
-test('search words, tag and year combine without mutating the catalog', () => {
+test('search words and month filter combine without mutating the catalog', () => {
   const catalog = createCatalog({ './2026-10-23-devflow.html': () => {}, './2025-01-01-play.html': () => {} }, {
     './2026-10-23-devflow.json': { title: 'DevFlow', description: 'Review workspace', tags: ['dark', 'dashboard'] },
     './2025-01-01-play.json': { title: 'Play', tags: ['dark'] },
   });
-  assert.equal(filterArtifacts(catalog, { query: '  REVIEW dark  ', tag: 'dashboard', year: '2026' }).length, 1);
+  assert.equal(filterArtifacts(catalog, { query: '  REVIEW dark  ', month: '2026-10' }).length, 1);
   assert.equal(filterArtifacts(catalog, { query: '2025' })[0].title, 'Play');
-  assert.equal(filterArtifacts(catalog, { query: 'DevFlow', year: '2025' }).length, 0);
-  assert.equal(filterArtifacts(catalog, { tag: 'unknown' }).length, 0);
+  assert.equal(filterArtifacts(catalog, { query: 'DevFlow', month: '2025-01' }).length, 0);
+  assert.equal(filterArtifacts(catalog, { month: '2024-06' }).length, 0);
+  assert.equal(filterArtifacts(catalog, { month: '2026-10' }).length, 1);
+  assert.equal(filterArtifacts(catalog, { month: '' }).length, 2);
   assert.equal(catalog.length, 2);
   assert.deepEqual(createCatalog({}), []);
 });
