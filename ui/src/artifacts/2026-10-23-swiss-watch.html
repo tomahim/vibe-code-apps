@@ -3060,7 +3060,7 @@ function combInsetSvg(q, vb) {                                 // q: pin phase 0
   li(px - 4, py - 30, "pin", "middle");
   li(-52, 76, "tooth · E4", "middle");
   li(DC[0] + 40, DC[1] + 96, "drum", "middle");
-  li(px + 24, tipY + 10, q < 0.5 ? "the pin lifts the tooth" : "release: the tooth rings", "start");
+  out.push(`<text class="iso-face-text" data-tone="mid" x="${tenth(box.x + box.w * 0.97)}" y="${tenth(box.y + box.h * 0.24)}" font-size="${tenth(fs * 0.88)}" text-anchor="end">${q < 0.5 ? "the pin lifts the tooth" : "release: the tooth rings"}</text>`);
   return out.join("");
 }
 // ---- music box runtime ----
@@ -3366,13 +3366,13 @@ function yBellStatic() {
 }
 function yLabelsSvg() {
   return [
-    labY(PLAT.x, 166, "platen · ø32 mm", 10, "mid", "middle", 84),
-    labY(300, 100, "ribbon", 9.5, "mid", "middle", -60),
+    labY(PLAT.x, 174, "platen · ø32 mm", 10, "hi", "middle", 0),
+    labY(246, 112, "ribbon", 9.5, "hi", "end", -60),
     labY(196, 26, "typebar basket", 9.5, "mid", "middle", -40),
     labY(105, 12, "keys", 9.5, "mid", "middle", 40),
     labY(268, 56, "mainspring drum", 9.5, "mid", "middle", -16),
     labY(255, 84, "carriage rack", 9.5, "mid", "middle", 60),
-    labY(238, 48, "margin bell", 9.5, "mid", "middle", -78),
+    labY(238, 48, "margin bell", 9.5, "hi", "middle", -78),
   ].join("");
 }
 function yBuildStatic() {
@@ -3491,9 +3491,10 @@ function yBellSvg(age) {
   return out.join("");
 }
 function yPrintMarkSvg(age) {
-  if (age === null || age > 0.4) return "";
   const [sx, sy] = SY(PP[0], PP[1], 0);
-  return `<circle cx="${tenth(sx)}" cy="${tenth(sy)}" r="2.4" class="iso-line" data-tone="red" fill="none" opacity="${(1 - age / 0.4).toFixed(2)}"/>`;
+  const dot = `<circle cx="${tenth(sx)}" cy="${tenth(sy)}" r="1.9" class="inset-dot-red"/>`;
+  if (age === null || age > 0.4) return dot;
+  return dot + `<circle cx="${tenth(sx)}" cy="${tenth(sy)}" r="3.2" class="iso-line" data-tone="red" fill="none" opacity="${(1 - age / 0.4).toFixed(2)}"/>`;
 }
 function escapementInsetSvg(wheelAng, rock, rackOff, vb) {
   vb = vb || { x: 0, y: 0, w: YW, h: YH };
@@ -3534,7 +3535,7 @@ function escapementInsetSvg(wheelAng, rock, rackOff, vb) {
   out.push(seg(rack, "mid"));
   li(0, -8, "escape wheel · 24 teeth", "middle");
   li(0, 112, "rocker: two dogs alternate", "middle");
-  li(0, -76, "carriage rack - one tooth, one character", "middle");
+  li(0, -76, "one tooth per character", "middle");
   return out.join("");
 }
 // ---- typewriter runtime ----
