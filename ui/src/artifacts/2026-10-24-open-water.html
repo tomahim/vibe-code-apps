@@ -112,9 +112,10 @@
 /* ============================================================
    OPEN WATER - a real-time FFT ocean in a single file.
    Tessendorf-style GPU FFT waves (gravity-capillary dispersion,
-   Phillips/JONSWAP spectrum, Donelan spreading), Jacobian
-   whitecap foam with temporal accumulation, single-scattering
-   atmosphere, procedural clouds, HDR + filmic post.
+   Phillips/JONSWAP spectrum, Donelan spreading), a Gerstner
+   small-wave chop layer for close-range relief and crests,
+   Jacobian whitecap foam with temporal accumulation,
+   single-scattering atmosphere, procedural clouds, HDR + filmic post.
    No libraries, no network, no assets.
    ============================================================ */
 
@@ -243,6 +244,43 @@ function cascadeWeights(k, kc1, kc2, p) {
 
 // significant wave height, fully-developed sea (WMO), capped
 function targetHs(U) { return Math.min(0.0248 * U * U, 13); }
+
+// ---------- Gerstner detail chop (small-wave relief layer)
+// Six directional components (wavelengths 0.5-3.6 m) riding on top of the
+// FFT sea. The three longest displace the mesh in the vertex shader, giving
+// real crested relief near the camera; the next three are evaluated
+// per-pixel in the fragment shader as normal detail. Finer texture comes
+// from the noise-based micro chop in the fragment shader. Amplitude grows with
+// wind and saturates; per-component distance fades keep the polar mesh from
+// undersampling the geometry. Phases are fixed by the seed, so frozen
+// frames (?t=) stay deterministic.
+const G_LAM = [3.6, 2.4, 1.6, 1.1, 0.75, 0.50];
+const G_DIR = [0.0, 0.42, -0.38, 0.85, -0.75, 0.28]; // rad from wind dir
+function computeGerstner(U, windDir, seed) {
+  const rand = mulberry32((seed ^ 0x9e3779b9) >>> 0);
+  const A = Math.min(0.30, 0.0040 * U * U);   // sum of component amplitudes (m)
+  const wsum = G_LAM.reduce((s, l) => s + Math.pow(l, 1.8), 0);
+  const a = new Float32Array(6 * 4), b = new Float32Array(6 * 4);
+  for (let i = 0; i < 6; i++) {
+    const lam = G_LAM[i], k = 2 * Math.PI / lam;
+    const amp = A * Math.pow(lam, 1.8) / wsum;
+    const th = windDir + G_DIR[i];
+    a[i*4]   = Math.cos(th); a[i*4+1] = Math.sin(th);
+    a[i*4+2] = k;            a[i*4+3] = amp;
+    b[i*4]   = rand() * 2 * Math.PI;    // phase
+    b[i*4+1] = dispersion(k);           // omega, gravity-capillary
+    b[i*4+2] = 0;                       // Q (steepness), set below
+    b[i*4+3] = (i < 3 ? 30 : 60) * lam; // fade end distance (m)
+  }
+  // Gerstner steepness: sum over VS comps of Q_i*a_i*k_i = 0.85 gives sharp
+  // crests without self-intersecting loops (standard GPU Gems budget).
+  for (let i = 0; i < 3; i++) {
+    const ak = a[i*4+3] * a[i*4+2];
+    b[i*4+2] = Math.min(4, 0.85 / (3 * Math.max(ak, 1e-6)));
+  }
+  return { a, b, A };
+}
+let gerst = computeGerstner(7.5, -0.7, 42);
 
 // Build the h0 texture data for every cascade, jointly normalized so that
 // total variance = (Hs/4)^2. Returns {data: Float32Array[], Hs}.
@@ -671,13 +709,20 @@ void main() {
 }`;
 
 // ---------- water mesh
+const GLSL_GERSTNER = `
+uniform vec4 uGerstA[6]; // dirX, dirZ, k, amp
+uniform vec4 uGerstB[6]; // phase, omega, steepness Q, fade end (m)
+`;
+
 const VS_WATER = `#version 300 es
 precision highp float;
 layout(location=0) in vec2 aLocal;
 uniform mat4 uVP; uniform vec3 uCamPosV; uniform vec2 uAnchor;
 uniform sampler2D uDisp0; uniform sampler2D uDisp1; uniform sampler2D uDisp2;
 uniform vec3 uCascL; uniform vec3 uCascOn;
-out vec3 vWorld; out float vDist;
+uniform float uTime;
+${GLSL_GERSTNER}
+out vec3 vWorld; out float vDist; out vec2 vGSlope;
 void main() {
   vec2 w = uAnchor + aLocal;
   float dist = length(w - uCamPosV.xz);
@@ -687,21 +732,40 @@ void main() {
   vec4 d0 = textureLod(uDisp0, w/uCascL.x, 0.0);
   vec4 d1 = textureLod(uDisp1, w/uCascL.y, 0.0);
   vec4 d2 = textureLod(uDisp2, w/uCascL.z, 0.0);
-  vec3 disp = d0.rgb*f0 + d1.rgb*f1 + d2.rgb*f2;
+  // Gerstner chop: the three longest detail components displace the mesh,
+  // so small waves read as real crested relief rather than surface texture.
+  vec3 dispG = vec3(0.0);
+  vec2 slopeG = vec2(0.0);
+  if (dist < uGerstB[0].w) {   // uGerstB[0].w is the longest fade (108 m)
+    for (int i = 0; i < 3; i++) {
+      float f = 1.0 - smoothstep(0.45*uGerstB[i].w, uGerstB[i].w, dist);
+      float amp = uGerstA[i].w * f;
+      if (amp < 1e-6) continue;
+      vec2 D = uGerstA[i].xy;
+      float th = uGerstA[i].z * dot(D, w) - uGerstB[i].y * uTime + uGerstB[i].x;
+      float c = cos(th), s = sin(th);
+      dispG.y += amp * s;
+      dispG.xz += uGerstB[i].z * amp * D * c;
+      slopeG += amp * uGerstA[i].z * D * c;
+    }
+  }
+  vec3 disp = d0.rgb*f0 + d1.rgb*f1 + d2.rgb*f2 + dispG;
   vec3 world = vec3(w.x + disp.g, disp.r, w.y + disp.b);
   vWorld = world;
   vDist = distance(world, uCamPosV);
+  vGSlope = slopeG;
   gl_Position = uVP * vec4(world, 1.0);
 }`;
 
 const FS_WATER = `#version 300 es
 precision highp float;
-in vec3 vWorld; in float vDist; out vec4 o;
+in vec3 vWorld; in float vDist; in vec2 vGSlope; out vec4 o;
 uniform sampler2D uSlope0; uniform sampler2D uSlope1; uniform sampler2D uSlope2;
 uniform sampler2D uFoam;
 uniform vec3 uCascL; uniform vec3 uCascOn;
 uniform float uWind; uniform float uHs; uniform float uJsig0; uniform float uJsig1; uniform float uJtau0; uniform float uJtau1; uniform float uJstd0; uniform float uJstd1;
 ${GLSL_COMMON}
+${GLSL_GERSTNER}
 void main() {
   vec2 w = vWorld.xz;
   float dist = vDist;
@@ -710,7 +774,19 @@ void main() {
   vec4 s0 = texture(uSlope0, w/uCascL.x);
   vec4 s1 = texture(uSlope1, w/uCascL.y);
   vec4 s2 = texture(uSlope2, w/uCascL.z);
-  vec2 sl = s0.rg + s1.rg*f1 + s2.rg*f2;
+  vec2 sl = s0.rg + s1.rg*f1 + s2.rg*f2 + vGSlope;
+  // the next three chop components (1.1-0.5 m) as per-pixel normal detail;
+  // the existing noise micro chop covers the sub-0.5 m band
+  if (dist < 66.0) {
+    for (int i = 3; i < 6; i++) {
+      float f = 1.0 - smoothstep(0.45*uGerstB[i].w, uGerstB[i].w, dist);
+      float amp = uGerstA[i].w * f;
+      if (amp < 1e-6) continue;
+      vec2 D = uGerstA[i].xy;
+      float th = uGerstA[i].z * dot(D, w) - uGerstB[i].y * uTime + uGerstB[i].x;
+      sl += amp * uGerstA[i].z * D * cos(th);
+    }
+  }
   // procedural micro chop, fading with distance (anti-aliasing by LEAN-ish decay)
   float microF = 1.0 - smoothstep(25.0, 260.0, dist);
   vec2 d1 = texture(uNoise, w*0.130 + vec2(uTime*0.021, uTime*0.013)).rg*2.0-1.0;
@@ -926,6 +1002,7 @@ function initSim() {
 
   const spectra = buildSpectra(N, tier.cascades, state.wind, state.windDir, state.seed);
   state.Hs = spectra.Hs;
+  gerst = computeGerstner(state.wind, state.windDir, state.seed);
   const cascades = tier.cascades.map((cfg, ci) => {
     const h0Tex = makeTex(N, gl.RGBA32F, gl.RGBA, gl.FLOAT, gl.NEAREST);
     uploadTex(h0Tex, N, spectra.data[ci]);
@@ -948,6 +1025,7 @@ function rebuildSpectra() {
   const tier = TIERS[tierName];
   const spectra = buildSpectra(sim.N, tier.cascades, state.wind, state.windDir, state.seed);
   state.Hs = spectra.Hs;
+  gerst = computeGerstner(state.wind, state.windDir, state.seed);
   sim.cascades.forEach((c, i) => uploadTex(c.h0Tex, sim.N, spectra.data[i]));
   // clear foam
   [sim.fboFoamA, sim.fboFoamB].forEach(f => {
@@ -1194,6 +1272,8 @@ function render(T, light) {
   gl.uniform1i(uWater.uOct, tier.oct);
   gl.uniform1f(uWater.uWind, state.wind);
   gl.uniform1f(uWater.uHs, state.Hs);
+  gl.uniform4fv(uWater.uGerstA, gerst.a);
+  gl.uniform4fv(uWater.uGerstB, gerst.b);
   gl.uniform1f(uWater.uJsig0, sim.cascades[0].jsig);
   gl.uniform1f(uWater.uJsig1, sim.cascades[1].jsig);
   gl.uniform1f(uWater.uJtau0, sim.cascades[0].jtau);
@@ -1312,7 +1392,8 @@ if (SELFTEST) {
       wind: +state.wind.toFixed(1), hour: +state.hour.toFixed(2), camMode: state.camMode,
       tier: tierName, yawMoved: Math.abs(state.yaw - (P_YAW != null ? P_YAW : -0.6)) > 0.05,
       zoomed: state.dist > 12, panelHidden: document.getElementById("panel").classList.contains("hidden"),
-      simTime: +state.simTime.toFixed(1), Hs: +state.Hs.toFixed(2)
+      simTime: +state.simTime.toFixed(1), Hs: +state.Hs.toFixed(2),
+      chopAmp: +gerst.A.toFixed(3)
     });
   }, 4500);
 }
@@ -1418,3 +1499,4 @@ $("toggle-ui").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
