@@ -1,0 +1,6 @@
+{
+  "title": "Sunset Final",
+  "description": "An airliner on short final at golden hour, rendered live in WebGL2: atmospheric sunset sky, procedural runway with lit markings, flare, touchdown smoke and rollout with cinematic camera cuts. One self-contained file, no libraries, no assets. Inspired by @glitch_catAI's one-prompt plane-landing comparison across three video models.",
+  "date": "2026-10-24",
+  "tags": ["aviation", "webgl2", "shaders", "sunset", "3d", "full screen", "simulation", "cinematic"]
+}
