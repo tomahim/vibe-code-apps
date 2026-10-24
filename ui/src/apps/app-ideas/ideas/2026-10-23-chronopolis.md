@@ -4,6 +4,7 @@ tagline: Watch a City Rebuild Itself in 3D, Century by Century
 pitch: Scrub a timeline and a real city morphs in 3D between its historical states, rebuilt from archival imagery and maps.
 domains: [3D, HIST]
 created: 2026-10-23T06:28:14Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
