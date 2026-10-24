@@ -1,6 +1,17 @@
 {
   "title": "The Swiss Lever Watch",
-  "description": "An interactive anatomy of a Swiss mechanical watch movement: wind the crown, follow the barrel's energy through the gear train, watch the pallet fork spend it one half-tooth at a time, and see the balance and hairspring keep 28,800 beats an hour. Seven steps, live gauges, true ratios.",
+  "description": "Interactive anatomies of three machines in one plate series. Tab 1 - the Swiss lever watch: wind the crown, follow the barrel's energy through the gear train, watch the pallet fork spend it one half-tooth at a time, 28,800 beats an hour. Tab 2 - the bicycle drivetrain: push 172.5 mm cranks, follow the chain from the 50-tooth ring to the 15-tooth cog, feel the freewheel pawls let you coast. Tab 3 - the cassette deck: thread a C-60 past the play head, let the capstan hold 4.76 cm/s while the packs trade places and the reels drift between 18.5 and 43.3 rpm. Live gauges, true numbers, honest simplifications.",
   "date": "2026-10-23",
-  "tags": ["watch", "mechanism", "interactive", "3d", "education", "isometric"]
+  "tags": [
+    "watch",
+    "bicycle",
+    "drivetrain",
+    "cassette",
+    "tape",
+    "mechanism",
+    "interactive",
+    "3d",
+    "education",
+    "isometric"
+  ]
 }
