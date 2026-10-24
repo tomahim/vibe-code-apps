@@ -184,7 +184,7 @@ in vec2 vUv;
 layout(location=0) out vec4 outColor;
 layout(location=1) out vec4 outMask;
 uniform vec2 uRes;
-uniform vec3 uEye, uRight, uUp, uFwd, uSunDir;
+uniform vec3 uEye, uRight, uUp, uFwd, uSunDir, uAcPos;
 uniform float uTanF, uAspect, uTime, uSunElev, uHazeM;
 uniform float uNear, uFar;
 
@@ -317,6 +317,14 @@ void main(){
       col = mix(grass, vec3(0.13,0.125,0.12), road);
       hazeMask = 0.45;
     }
+    // soft aircraft shadow on the ground
+    {
+      float shH = clamp(uAcPos.y, 0.0, 60.0);
+      float spread = 1.0 + shH*0.05;
+      float shA = 0.62 * exp(-shH*0.09);
+      vec2 se = (rp - uAcPos.xz) / (vec2(14.0, 19.0) * spread);
+      col *= 1.0 - exp(-dot(se,se)*2.4) * shA;
+    }
     // glossy sun streak on pavement
     vec3 r = reflect(dir, vec3(0.,1.,0.));
     float spec = pow(max(dot(r, uSunDir), 0.0), 200.0);
@@ -364,14 +372,25 @@ void main(){
   vec3 N = normalize(vNrm);
   vec3 V = normalize(uEye - vWorld);
   vec3 alb = uAlbedo;
+  if (uPart > 1.5 && uPart < 2.5) {
+    // engine fan: spinner + radial blades
+    vec2 cuv = vUv - 0.5;
+    float rf = length(cuv)*2.0;
+    float ang = atan(cuv.y, cuv.x);
+    float blades = 0.72 + 0.28*sin(ang*26.0 + rf*4.0);
+    alb = mix(vec3(0.42,0.43,0.47), vec3(0.09,0.09,0.10)*blades + vec3(0.02), smoothstep(0.18,0.34,rf));
+  }
   if (uPart < 0.5) {
     // passenger window band: uv.x around fuselage (0..1), uv.y along length
     float side = abs(sin(vUv.x*3.14159*2.0));
-    float band = smoothstep(0.80,0.86,side) * (1.0-smoothstep(0.92,0.985,side));
+    float sAz = sin(vUv.x*3.14159*2.0);
+    float rowA = smoothstep(0.80,0.86,sAz) * (1.0-smoothstep(0.92,0.985,sAz));
+    float rowB = smoothstep(0.80,0.86,-sAz) * (1.0-smoothstep(0.92,0.985,-sAz));
+    float band = rowA + rowB;
     float dots = smoothstep(0.42,0.5,sin(vUv.y*520.0)*0.5+0.5);
     float win = band * dots * step(0.06, vUv.y) * (1.0-step(0.93, vUv.y));
     // cockpit band near nose top-front
-    float ck = (1.0-smoothstep(0.93,0.962,vUv.y)) * smoothstep(0.885,0.915,vUv.y) * smoothstep(0.60,0.78,side);
+    float ck = (1.0-smoothstep(0.945,0.965,vUv.y)) * smoothstep(0.905,0.928,vUv.y) * smoothstep(0.72,0.86,side);
     alb = mix(alb, vec3(0.03,0.05,0.09), clamp(win+ck, 0., 1.));
     // belly dirt
     alb *= 0.82 + 0.18*smoothstep(-1.0,0.2,N.y);
@@ -400,25 +419,27 @@ uniform mat4 uVP;
 uniform vec3 uRight, uUp, uEye;
 uniform float uTanF, uResY;
 out vec2 vCorner; out vec3 vCol;
+out float vFade;
 void main(){
-  vCorner = aCorner; vCol = aColSize.rgb;
+  vCorner = aCorner; vCol = aColSize.rgb; vFade = 1.0;
   vec4 wp = vec4(aCen, 1.0);
   vec4 cp = uVP * wp;
   float dist = length(aCen - uEye);
-  float px = aColSize.a * clamp(26.0/max(dist,2.0), 0.02, 8.0);
+  float px = aColSize.a * clamp(26.0/max(dist,2.0), 0.02, 3.0);
+  vFade = smoothstep(2.0, 16.0, dist);
   wp.xyz += (uRight*aCorner.x + uUp*aCorner.y) * px;
   gl_Position = uVP * wp;
 }`;
 const FS_LIGHT = `#version 300 es
 precision highp float;
-in vec2 vCorner; in vec3 vCol;
+in vec2 vCorner; in vec3 vCol; in float vFade;
 layout(location=0) out vec4 outColor;
 layout(location=1) out vec4 outMask;
 void main(){
   float d = length(vCorner);
   float core = smoothstep(0.55, 0.12, d);
   float halo = smoothstep(1.0, 0.25, d)*0.22;
-  outColor = vec4(vCol*(core + halo), 1.0);
+  outColor = vec4(vCol*(core + halo)*vFade, 1.0);
   outMask = vec4(0.);
 }`;
 
@@ -674,7 +695,7 @@ const stabL = airfoilWing({ z0: -0.4, z1: -6.6, chord: s=>3.4-2.1*s, le: s=>-12.
 parts.wings = merge([wingR, wingL, stabR, stabL]);
 // vertical fin as flat-ish extruded polygon via airfoil rotated: build simple double-sided fin
 function finMesh(){
-  const prof = [[-12.2,1.3],[-17.8,1.6],[-16.4,7.6],[-13.2,7.9]];
+  const prof = [[-11.5,1.2],[-17.5,1.8],[-17.0,7.4],[-15.0,7.6]];
   const pos=[],nrm=[],uv=[],idx=[]; const t=0.18;
   for (const sz of [-t,t]){
     const b=pos.length/3;
@@ -702,42 +723,74 @@ function translated(m, dx,dy,dz){
   return {pos:p,nrm:m.nrm,uv:m.uv,idx:m.idx};
 }
 function disk(cx,cy,cz,r,along){
-  const pos=[],nrm=[],uv=[],idx=[]; const N2=16;
+  const pos=[],nrm=[],uv=[],idx=[]; const N2=24;
   pos.push(cx,cy,cz); nrm.push(...along); uv.push(0.5,0.5);
   for(let i=0;i<=N2;i++){
     const a=i/N2*Math.PI*2;
     pos.push(cx, cy+Math.cos(a)*r, cz+Math.sin(a)*r);
-    nrm.push(...along); uv.push(0,0);
+    nrm.push(...along); uv.push(0.5+0.5*Math.cos(a), 0.5+0.5*Math.sin(a));
   }
   for(let i=1;i<=N2;i++) idx.push(0,i,i+1);
   return {pos,nrm,uv,idx};
 }
+function coneX(x0,x1,y,z,r){ // small spinner cone along +x
+  const m = lathe({x0:x0,x1:x1, at:(x)=>{ const t=(x-x0)/(x1-x0); return [r*(1-t*0.9)+0.01, y]; }}, 6, 14);
+  return translated(m, 0, 0, z);
+}
 parts.engines = merge([translated(nacR,0,0,7.3), translated(nacL,0,0,-7.3)]);
+parts.caps = merge([
+  disk(19.0, -0.30, 0, 0.07, [1,0,0]),        // nose tip closure
+  disk(-19.0, 2.30, 0, 0.88, [-1,0,0]),       // tail cone closure flush with last ring
+  coneX(-19.0,-19.7,2.30,0,0.85),             // APU taper closing the tail
+]);
 parts.engineDark = merge([
-  disk(7.55,-2.05,7.3,1.05,[1,0,0]), disk(7.55,-2.05,-7.3,1.05,[1,0,0]),
-  disk(2.65,-2.05,7.3,0.85,[-1,0,0]), disk(2.65,-2.05,-7.3,0.85,[-1,0,0]),
-  // pylons
+  disk(7.35,-2.05,7.3,1.12,[1,0,0]), disk(7.35,-2.05,-7.3,1.12,[1,0,0]),
+  disk(2.7,-2.05,7.3,0.8,[-1,0,0]), disk(2.7,-2.05,-7.3,0.8,[-1,0,0]),
+  coneX(7.35,8.05,-2.05,7.3,0.30), coneX(7.35,8.05,-2.05,-7.3,0.30)
+]);
+parts.wings = merge([parts.wings,
+  // pylons in wing material so they read as structure, not holes
   boxMesh(4.4,-1.1,7.3,2.6,1.4,0.5), boxMesh(4.4,-1.1,-7.3,2.6,1.4,0.5)
 ]);
+function tube(ax,ay,az, bx,by,bz, r, segs){ // cylinder between two points
+  segs = segs||12;
+  const dx=bx-ax, dy=by-ay, dz=bz-az, L=Math.hypot(dx,dy,dz);
+  const nx=dx/L, ny=dy/L, nz=dz/L;
+  // orthonormal basis around axis
+  let ux=1,uy=0,uz=0;
+  if (Math.abs(nx)>0.9){ ux=0; uy=1; uz=0; }
+  let vx=ny*uz-nz*uy, vy=nz*ux-nx*uz, vz=nx*uy-ny*ux;
+  const vl=Math.hypot(vx,vy,vz); vx/=vl; vy/=vl; vz/=vl;
+  const wx=ny*vz-nz*vy, wy=nz*vx-nx*vz, wz=nx*vy-ny*vx;
+  const pos=[],nrm=[],uv=[],idx=[];
+  for (let i=0;i<=1;i++){
+    const cx=i?bx:ax, cy=i?by:ay, cz=i?bz:az;
+    for (let j=0;j<=segs;j++){
+      const a=j/segs*Math.PI*2, ca=Math.cos(a), sa=Math.sin(a);
+      const rx=vx*ca+wx*sa, ry=vy*ca+wy*sa, rz=vz*ca+wz*sa;
+      pos.push(cx+rx*r, cy+ry*r, cz+rz*r);
+      nrm.push(rx,ry,rz);
+      uv.push(j/segs, i);
+    }
+  }
+  for (let j=0;j<segs;j++){
+    const a=j, b=j+segs+1;
+    idx.push(a,b,a+1, b,b+1,a+1);
+  }
+  return {pos,nrm,uv,idx};
+}
 function gearParts(){
   const ps=[];
-  const strut=(x,y0,y1,z,r)=>{
-    const m=lathe({x0:0,x1:1,at:()=>[r,0]},1,8);
-    const p=m.pos.slice();
-    for(let i=0;i<p.length;i+=3){ const t=p[i]; p[i]=x; p[i+1]=y0+(y1-y0)*t; p[i+2]=z; }
-    ps.push({pos:p,nrm:m.nrm,uv:m.uv,idx:m.idx});
-  };
-  const wheel=(x,y,z,r,w)=>{
-    const m=lathe({x0:0,x1:1,at:()=>[r,0]},1,12);
-    const p=m.pos.slice(), n=m.nrm.slice();
-    for(let i=0;i<p.length;i+=3){ const t=p[i]; p[i]=x+(t-0.5)*w; p[i+1]=y; p[i+2]=z; }
-    ps.push({pos:p,nrm:n,uv:m.uv,idx:m.idx});
-  };
-  strut(12.5,-1.6,-3.15,0,0.12);
-  wheel(12.5,-3.35,0.24,0.4,0.18); wheel(12.5,-3.35,-0.24,0.4,0.18);
-  strut(-1.2,-0.6,-3.1,3.6,0.16); strut(-1.2,-0.6,-3.1,-3.6,0.16);
-  wheel(-1.2,-3.35,3.35,0.55,0.2); wheel(-1.2,-3.35,3.85,0.55,0.2);
-  wheel(-1.2,-3.35,-3.35,0.55,0.2); wheel(-1.2,-3.35,-3.85,0.55,0.2);
+  // nose gear
+  ps.push(tube(12.5,-1.5,0, 12.5,-3.55,0, 0.15, 10));
+  ps.push(tube(12.5,-3.78,0.13, 12.5,-3.78,0.39, 0.45, 14));
+  ps.push(tube(12.5,-3.78,-0.13, 12.5,-3.78,-0.39, 0.45, 14));
+  // main gears (twin wheel each side)
+  for (const zs of [1,-1]){
+    ps.push(tube(-1.2,-0.5,3.6*zs, -1.2,-3.4,3.6*zs, 0.20, 10));
+    ps.push(tube(-1.2,-3.55,(3.16)*zs, -1.2,-3.55,(3.44)*zs, 0.68, 16));
+    ps.push(tube(-1.2,-3.55,(3.78)*zs, -1.2,-3.55,(4.06)*zs, 0.68, 16));
+  }
   return merge(ps);
 }
 parts.gear = gearParts();
@@ -821,7 +874,7 @@ function planeState(s){
   // lateral wander converging to centerline
   const prog = clamp((SIM.z0 - z)/(SIM.z0 - SIM.zTd), 0, 1);
   const x = 4.0*(1-prog*prog) * Math.cos(s*0.23);
-  return { pos: [x, g + 3.85, z], pitch, roll, yaw: Math.PI/2 + crab, v, g, z };
+  return { pos: [x, g + 4.18, z], pitch, roll, yaw: Math.PI/2 + crab, v, g, z };
 }
 
 /* ---------- smoke ---------- */
@@ -1049,6 +1102,7 @@ function frame(){
   gl.uniform1f(pWorld.u.uAspect, aspect);
   gl.uniform1f(pWorld.u.uTime, s);
   gl.uniform1f(pWorld.u.uSunElev, el);
+  gl.uniform3fv(pWorld.u.uAcPos, st.pos);
   gl.uniform1f(pWorld.u.uNear, 0.35);
   gl.uniform1f(pWorld.u.uFar, 6000);
   gl.bindVertexArray(quadVAO);
@@ -1067,11 +1121,12 @@ function frame(){
   drawMesh(meshes.structs, modelMat([-430,0,-1050],0.6,0,0), dark, vp);
   const mats = {
     fuselage: { alb:[0.80,0.81,0.83], sp:70, sa:0.9, part:0 },
+    caps:     { alb:[0.30,0.29,0.28], sp:20, sa:0.15, part:4 },
     wings:    { alb:[0.52,0.54,0.58], sp:40, sa:0.5, part:4 },
     tail:     { alb:[0.06,0.14,0.38], sp:50, sa:0.6, part:4 },
     engines:  { alb:[0.60,0.62,0.66], sp:60, sa:0.7, part:4 },
     engineDark:{alb:[0.05,0.05,0.06], sp:25, sa:0.4, part:2 },
-    gear:     { alb:[0.10,0.10,0.11], sp:30, sa:0.3, part:3 },
+    gear:     { alb:[0.15,0.15,0.16], sp:24, sa:0.35, part:3 },
   };
   for (const k of Object.keys(mats)) drawMesh(meshes[k], model, mats[k], vp);
   gl.bindVertexArray(null);
@@ -1090,8 +1145,8 @@ function frame(){
   const strobe = ((s%1.4)<0.05 || ((s+1.32)%1.4)<0.05) ? 9 : 0;
   if (strobe){ pushLight(tipL,[strobe,strobe,strobe],0.9); pushLight(tipR,[strobe,strobe,strobe],0.9); pushLight(tailP,[strobe,strobe,strobe],0.9); }
   if ((s%1.1)<0.55){ const bc = xformPoint(model,[0,2.05,0]); pushLight(bc,[3.2,0.15,0.1],0.55); }
-  const ll = xformPoint(model, [3.2,-1.1,2.6]), lr = xformPoint(model, [3.2,-1.1,-2.6]);
-  pushLight(ll,[9,7.5,6],1.2); pushLight(lr,[9,7.5,6],1.2);
+  const ll = xformPoint(model, [12.9,-2.4,0.7]), lr = xformPoint(model, [12.9,-2.4,-0.7]);
+  pushLight(ll,[4.2,3.6,2.9],0.5); pushLight(lr,[4.2,3.6,2.9],0.5);
   const lv = new Float32Array(lp.length*6*9);
   let o=0;
   const corners=[[-1,-1],[1,-1],[1,1],[-1,-1],[1,1],[-1,1]];
