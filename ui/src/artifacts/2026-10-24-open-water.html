@@ -291,8 +291,7 @@ function buildSpectra(N, cascades, U, windDir, seed) {
       if (k < 1e-5) continue;
       const o = (j*N + i) * 4;
       const amp2 = (g0[o]*g0[o] + g0[o+1]*g0[o+1]) * scale * scale;
-      const chop = 0.85;
-      v += amp2 * chop*chop * (Math.pow(kx*kx/k, 2) + Math.pow(kz*kz/k, 2));
+      v += amp2 * (Math.pow(kx*kx/k, 2) + Math.pow(kz*kz/k, 2)); // chop=1 reference
     }
     return Math.sqrt(v);
   });
@@ -312,7 +311,89 @@ function buildSpectra(N, cascades, U, windDir, seed) {
     }
     return pack;
   });
-  return { data: out, Hs, jsig };
+  // Per-cascade choppiness: cap the fold variance so detJ spread stays ~0.55
+  // (raw chop 0.85 folds the whole sea into a whiteout at gale force).
+  const chops = jsig.map(j => 0.85 * Math.min(1, 0.55 / Math.max(j, 1e-6)));
+  const jsigCapped = jsig.map((j, i) => j * chops[i]);
+  // Calibrate the fold threshold from the REALIZED detJ field so whitecap
+  // coverage follows the Monahan & O'Muircheartaigh law W = 2.95e-6 U^3.52.
+  const W = Math.min(0.45, 2.95e-6 * Math.pow(U, 3.52) + 0.002);
+  const cals = cascades.map((cfg, c) => calibrateFoldTau(N, cfg, out[c], chops[c], W));
+  return { data: out, Hs, jsig: jsigCapped, chops, taus: cals.map(c => c.tau), detStd: cals.map(c => c.std) };
+}
+
+// ---------- CPU FFT (used once per wind change to calibrate foam thresholds)
+function cpuFFT1D(re, im, invert) {
+  const n = re.length;
+  for (let i = 1, j = 0; i < n; i++) {
+    let bit = n >> 1;
+    for (; j & bit; bit >>= 1) j ^= bit;
+    j ^= bit;
+    if (i < j) { const tr = re[i]; re[i] = re[j]; re[j] = tr; const ti = im[i]; im[i] = im[j]; im[j] = ti; }
+  }
+  for (let len = 2; len <= n; len <<= 1) {
+    const ang = 2*Math.PI/len * (invert ? 1 : -1);
+    const wr = Math.cos(ang), wi = Math.sin(ang);
+    for (let i = 0; i < n; i += len) {
+      let cwr = 1, cwi = 0;
+      for (let j = 0; j < (len >> 1); j++) {
+        const ur = re[i+j], ui = im[i+j];
+        const vr = re[i+j+len/2]*cwr - im[i+j+len/2]*cwi;
+        const vi = re[i+j+len/2]*cwi + im[i+j+len/2]*cwr;
+        re[i+j] = ur+vr; im[i+j] = ui+vi;
+        re[i+j+len/2] = ur-vr; im[i+j+len/2] = ui-vi;
+        const nwr = cwr*wr - cwi*wi; cwi = cwr*wi + cwi*wr; cwr = nwr;
+      }
+    }
+  }
+  if (invert) for (let i = 0; i < n; i++) { re[i] /= n; im[i] /= n; }
+}
+// detJ threshold for a target whitecap coverage fraction, from the realized field at t=0
+function calibrateFoldTau(N, cfg, g0scaled, chop, coverage) {
+  const L = cfg.L;
+  const spec = new Float32Array(N*N*2);
+  const fields = [];
+  for (let comp = 0; comp < 3; comp++) { // Jxx, Jzz, Jxz
+    const re = new Float32Array(N*N), im = new Float32Array(N*N);
+    for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+      const n = i < N/2 ? i : i - N, m = j < N/2 ? j : j - N;
+      const kx = 2*Math.PI*n/L, kz = 2*Math.PI*m/L, k = Math.hypot(kx, kz);
+      if (k < 1e-5) continue;
+      const o = (j*N+i)*4;
+      // h(k,0) = h0 + conj(h0(-k)) = pack.r + pack.b
+      const hr = g0scaled[o] + g0scaled[o+2], hi = g0scaled[o+1] + g0scaled[o+3];
+      const f = comp === 0 ? kx*kx/k : comp === 1 ? kz*kz/k : kx*kz/k;
+      re[j*N+i] = hr*f*chop; im[j*N+i] = hi*f*chop;
+    }
+    // 2D inverse FFT
+    const rowRe = new Float32Array(N), rowIm = new Float32Array(N);
+    for (let j = 0; j < N; j++) {
+      for (let i = 0; i < N; i++) { rowRe[i] = re[j*N+i]; rowIm[i] = im[j*N+i]; }
+      cpuFFT1D(rowRe, rowIm, true);
+      for (let i = 0; i < N; i++) { re[j*N+i] = rowRe[i]; im[j*N+i] = rowIm[i]; }
+    }
+    const colRe = new Float32Array(N), colIm = new Float32Array(N);
+    for (let i = 0; i < N; i++) {
+      for (let j = 0; j < N; j++) { colRe[j] = re[j*N+i]; colIm[j] = im[j*N+i]; }
+      cpuFFT1D(colRe, colIm, true);
+      for (let j = 0; j < N; j++) { re[j*N+i] = colRe[j]; im[j*N+i] = colIm[j]; }
+    }
+    // cpuFFT1D applies 1/N per dimension (1/N^2 total) while the GPU pipeline applies
+    // 1/N once (vertical pass). Scale by N so these statistics match the rendered field.
+    for (let i = 0; i < re.length; i++) re[i] *= N;
+    fields.push(re);
+  }
+  const [a, b, c] = fields;
+  const det = new Float32Array(N*N);
+  for (let i = 0; i < N*N; i++) det[i] = (1+a[i])*(1+b[i]) - c[i]*c[i];
+  const sorted = Float32Array.from(det).sort();
+  // threshold at the (1-coverage) percentile, spread over the realized std
+  let mean = 0; for (let i = 0; i < det.length; i++) mean += det[i];
+  mean /= det.length;
+  let varr = 0; for (let i = 0; i < det.length; i++) { const d = det[i]-mean; varr += d*d; }
+  const std = Math.sqrt(varr / det.length);
+  const tau = sorted[Math.max(0, Math.min(det.length-1, Math.floor((1-coverage)*det.length)))];
+  return { tau, std };
 }
 
 // ---------- FFT butterfly texture (inverse transform, positive exponent)
@@ -426,10 +507,10 @@ vec3 cloudLayer(vec3 dir, vec3 ldir, vec3 lcol, out float alpha) {
   float sunUp = clamp(ldir.y*3.0+0.4, 0.0, 1.0);
   vec3 dark = mix(vec3(0.045,0.06,0.085), vec3(0.28,0.30,0.35), sunUp);
   dark = mix(dark, vec3(0.13,0.12,0.14), uCover*0.55);           // storm deck
-  vec3 lit = lcol*1.05 + vec3(0.10,0.12,0.16)*(0.4+0.6*sunUp);
+  vec3 lit = lcol*0.40 + vec3(0.10,0.12,0.16)*(0.4+0.6*sunUp);
   vec3 col = mix(dark, lit, shade);
-  float horiz = smoothstep(0.004, 0.05, dir.y);
-  alpha = cl * horiz * mix(0.55, 0.96, uCover);
+  float horiz = smoothstep(0.012, 0.11, dir.y);
+  alpha = cl * horiz * mix(0.40, 0.85, uCover);
   return col;
 }
 
@@ -560,18 +641,19 @@ uniform sampler2D uPrev;
 uniform sampler2D uDisp0; uniform sampler2D uSlope0;
 uniform sampler2D uDisp1; uniform sampler2D uSlope1;
 uniform float uL0; uniform float uL1; uniform float uDt; uniform float uTau; uniform float uHs;
-uniform float uJsig0; uniform float uJsig1;
+uniform float uJsig0; uniform float uJsig1; uniform float uJtau0; uniform float uJtau1;
+uniform float uJstd0; uniform float uJstd1;
 in vec2 vUv; out vec4 o;
-float fold(float detJ, float y, float jsig) {
-  float f = smoothstep(1.0 - 1.5*jsig, 1.0 - 5.0*jsig, detJ);
+float fold(float detJ, float y, float tau, float std) {
+  float f = smoothstep(tau, tau - 0.9*std, detJ);
   float crest = smoothstep(0.20*uHs, 0.80*uHs + 0.30, y);
   return f * (0.25 + 0.75*crest);
 }
 void main() {
   vec2 world = vUv * uL0;
   float prev = texture(uPrev, vUv).r;
-  float inj = fold(texture(uSlope0, world/uL0).b, texture(uDisp0, world/uL0).r, uJsig0);
-  inj = max(inj, 0.85 * fold(texture(uSlope1, world/uL1).b, texture(uDisp1, world/uL1).r, uJsig1));
+  float inj = fold(texture(uSlope0, world/uL0).b, texture(uDisp0, world/uL0).r, uJtau0, uJstd0);
+  inj = max(inj, 0.85 * fold(texture(uSlope1, world/uL1).b, texture(uDisp1, world/uL1).r, uJtau1, uJstd1));
   float v = max(prev * exp(-uDt / uTau), inj);
   o = vec4(clamp(v, 0.0, 1.0), 0.0, 0.0, 1.0);
 }`;
@@ -618,7 +700,7 @@ in vec3 vWorld; in float vDist; out vec4 o;
 uniform sampler2D uSlope0; uniform sampler2D uSlope1; uniform sampler2D uSlope2;
 uniform sampler2D uFoam;
 uniform vec3 uCascL; uniform vec3 uCascOn;
-uniform float uWind; uniform float uHs; uniform float uJsig0; uniform float uJsig1;
+uniform float uWind; uniform float uHs; uniform float uJsig0; uniform float uJsig1; uniform float uJtau0; uniform float uJtau1; uniform float uJstd0; uniform float uJstd1;
 ${GLSL_COMMON}
 void main() {
   vec2 w = vWorld.xz;
@@ -653,7 +735,7 @@ void main() {
   float dd = a / (nh*nh*(a-1.0)+1.0);
   float Dg = dd*dd / 3.14159;
   float Fv = 0.02 + 0.98*pow(1.0 - max(dot(n, V), 0.0), 5.0);
-  vec3 spec = lcol * Dg * Fv * nl * 0.22;
+  vec3 spec = lcol * Dg * Fv * nl * 0.17;
 
   // water body: deep absorption color + sky ambient + backlit crests
   vec3 skyAmb = atmosphere(vec3(0.0,1.0,0.0), ldir, lcol)*0.5 + vec3(0.004,0.008,0.014)*(0.3+uNightF*0.4);
@@ -670,10 +752,11 @@ void main() {
   float acc = texture(uFoam, w/uCascL.x).r;
   float pat1 = texture(uNoise, w*0.23 + vec2(uTime*0.006, -uTime*0.004)).b;
   float pat2 = texture(uNoise, w*0.95 + vec2(-uTime*0.011, uTime*0.007)).a;
-  float insta = smoothstep(1.0-1.5*uJsig0, 1.0-5.0*uJsig0, s0.b) * 0.18 + smoothstep(1.0-1.5*uJsig1, 1.0-5.0*uJsig1, s1.b) * 0.12;
-  float foam = smoothstep(0.55, 1.25, acc*(0.45 + 0.55*pat1) + insta*(0.4+0.6*pat2));
-  vec3 foamCol = (lcol*max(dot(vec3(0,1,0), ldir), 0.0)*0.85 + skyAmb*2.6) * vec3(0.93,0.96,1.0);
-  col = mix(col, foamCol, foam*0.9);
+  float insta = smoothstep(uJtau0, uJtau0 - 0.9*uJstd0, s0.b) * 0.22 + smoothstep(uJtau1, uJtau1 - 0.9*uJstd1, s1.b) * 0.15;
+  insta *= 1.0 - smoothstep(200.0, 1200.0, dist)*0.55;
+  float foam = smoothstep(0.55, 1.15, acc*(0.35 + 0.55*pat1) + insta*(0.4+0.6*pat2));
+  vec3 foamCol = (lcol*max(dot(vec3(0,1,0), ldir), 0.0)*0.55 + skyAmb*1.9) * vec3(0.93,0.96,1.0);
+  col = mix(col, foamCol, foam*0.85);
 
   // aerial perspective into the horizon sky
   vec3 vdir = (vWorld - uCamPos) / max(dist, 1e-3);
@@ -851,7 +934,7 @@ function initSim() {
     const dispTex = makeTex(N, gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, gl.LINEAR);
     const slopeTex = makeTex(N, gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, gl.LINEAR);
     return { L: cfg.L, h0Tex, texA, texB, fboA: makeFBO(texA), fboB: makeFBO(texB),
-             dispTex, slopeTex, fboComb: makeFBO([dispTex, slopeTex]), jsig: spectra.jsig[ci] };
+             dispTex, slopeTex, fboComb: makeFBO([dispTex, slopeTex]), jsig: spectra.jsig[ci], chop: spectra.chops[ci], jtau: spectra.taus[ci], jstd: spectra.detStd[ci] };
   });
   const foamN = Math.min(N, 256);
   const foamTexA = makeTex(foamN, gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, gl.LINEAR);
@@ -931,7 +1014,7 @@ function computeLight() {
   const lightCol = nightF > 0.5 ? moonCol : [sunI*tint[0], sunI*tint[1], sunI*tint[2]];
   const cover = Math.min(0.97, Math.max(0.06, 0.16 + (state.wind - 4) / 24));
   const mie = 1.2 + cover*3.2 + nightF*0.4;
-  const exposure = (nightF > 0.5 ? 2.6 : 1.0) * (1 - cover*0.18);
+  const exposure = (nightF > 0.5 ? 2.6 : (1.0 - 0.4 * Math.max(0, Math.min(1, (sunDir[1] - 0.35) / 0.4)) ** 2)) * (1 - cover*0.18);
   return { sunDir, nightF, lightCol, cover, mie, exposure };
 }
 
@@ -955,7 +1038,7 @@ function stepSim() {
     bindTex(0, c.h0Tex, uSpec.uH0);
     gl.uniform1f(uSpec.uT, state.simTime);
     gl.uniform1f(uSpec.uL, c.L);
-    gl.uniform1f(uSpec.uChop, 0.85);
+    gl.uniform1f(uSpec.uChop, c.chop);
     drawFS();
     gl.useProgram(pButter);
     bindTex(3, sim.bflyTex, uButter.uBFly);
@@ -992,6 +1075,10 @@ function stepSim() {
   gl.uniform1f(uFoam.uHs, state.Hs);
   gl.uniform1f(uFoam.uJsig0, sim.cascades[0].jsig);
   gl.uniform1f(uFoam.uJsig1, sim.cascades[1].jsig);
+  gl.uniform1f(uFoam.uJtau0, sim.cascades[0].jtau);
+  gl.uniform1f(uFoam.uJtau1, sim.cascades[1].jtau);
+  gl.uniform1f(uFoam.uJstd0, sim.cascades[0].jstd);
+  gl.uniform1f(uFoam.uJstd1, sim.cascades[1].jstd);
   drawFS();
   sim.foamFlip = !sim.foamFlip;
 }
@@ -1109,6 +1196,10 @@ function render(T, light) {
   gl.uniform1f(uWater.uHs, state.Hs);
   gl.uniform1f(uWater.uJsig0, sim.cascades[0].jsig);
   gl.uniform1f(uWater.uJsig1, sim.cascades[1].jsig);
+  gl.uniform1f(uWater.uJtau0, sim.cascades[0].jtau);
+  gl.uniform1f(uWater.uJtau1, sim.cascades[1].jtau);
+  gl.uniform1f(uWater.uJstd0, sim.cascades[0].jstd);
+  gl.uniform1f(uWater.uJstd1, sim.cascades[1].jstd);
   gl.bindVertexArray(sim.mesh.vao);
   gl.drawElements(gl.TRIANGLES, sim.mesh.count, gl.UNSIGNED_INT, 0);
   gl.bindVertexArray(null);
@@ -1143,8 +1234,88 @@ function loop(now) {
   render(T, computeLight());
   frameNo++;
   if (frameNo === 6 && state.frozen) document.title = "READY";
+  if (Q.has("debug") && frameNo === 30) try {
+    // read back realized detJ + height stats from the float pipeline (RGBA32F)
+    const N2 = sim.N, px = new Float32Array(4);
+    const out = {};
+    ["0","1"].forEach(ci => {
+      const c = sim.cascades[ci];
+      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, c.fboA);
+      const dets = [], hts = [];
+      for (let y = 0; y < N2; y += 4) for (let x = 0; x < N2; x += 4) {
+        gl.readBuffer(gl.COLOR_ATTACHMENT1);
+        gl.readPixels(x, y, 1, 1, gl.RGBA, gl.FLOAT, px);
+        const jxx = px[2];
+        gl.readBuffer(gl.COLOR_ATTACHMENT2);
+        gl.readPixels(x, y, 1, 1, gl.RGBA, gl.FLOAT, px);
+        const jzz = px[0], jxz = px[2];
+        dets.push((1+jxx)*(1+jzz) - jxz*jxz);
+        gl.readBuffer(gl.COLOR_ATTACHMENT0);
+        gl.readPixels(x, y, 1, 1, gl.RGBA, gl.FLOAT, px);
+        hts.push(px[0]);
+      }
+      dets.sort((a,b)=>a-b);
+      const hMean = hts.reduce((a,b)=>a+b,0)/hts.length;
+      const hVar = hts.reduce((a,b)=>a+(b-hMean)*(b-hMean),0)/hts.length;
+      out["c"+ci] = {
+        detMin: +dets[0].toFixed(3), detP01: +dets[Math.floor(dets.length*0.01)].toFixed(3),
+        detP10: +dets[Math.floor(dets.length*0.10)].toFixed(3), detP50: +dets[Math.floor(dets.length*0.5)].toFixed(3),
+        hRms: +Math.sqrt(hVar).toFixed(3), chop: +c.chop.toFixed(3), jtau: +(c.jtau??NaN).toFixed(3), jstd: +(c.jstd??NaN).toFixed(4)
+      };
+    });
+    gl.bindFramebuffer(gl.READ_FRAMEBUFFER, null);
+    document.title = "DBG " + JSON.stringify(out);
+    console.log("DBGRESULT", JSON.stringify(out));
+  } catch (e) { console.log("DBGERROR", e.message, e.stack); document.title = "DBGERR " + e.message; }
+  if (BENCH && !benchStats.done) {
+    const nowMs = performance.now();
+    if (benchStats.frames === 0) benchStats.t0 = nowMs;
+    else benchStats.times.push(nowMs - benchStats.last);
+    benchStats.last = nowMs;
+    benchStats.frames++;
+    if (benchStats.times.length >= 300 || (benchStats.times.length >= 60 && (nowMs - benchStats.t0) > 12000)) {
+      benchStats.done = true;
+      const ts = [...benchStats.times].sort((a, b) => a - b);
+      const avg = ts.reduce((x, y) => x + y, 0) / ts.length;
+      document.title = "BENCH " + JSON.stringify({
+        frames: benchStats.frames, avgMs: +avg.toFixed(2), fps: +(1000/avg).toFixed(1),
+        p95Ms: +ts[Math.floor(ts.length*0.95)].toFixed(2),
+        simTimeAdvanced: +state.simTime.toFixed(1), tier: tierName,
+        res: canvas.width + "x" + canvas.height, resScale: +(TIERS[tierName].resScale * resScaleBoost).toFixed(2),
+        renderer: gl.getParameter(gl.RENDERER)
+      });
+    }
+  }
 }
 requestAnimationFrame(loop);
+
+// ---------- bench/selftest hooks (only with ?bench / ?selftest)
+const BENCH = Q.has("bench"), SELFTEST = Q.has("selftest");
+const benchStats = { frames: 0, times: [], t0: 0, done: false };
+if (SELFTEST) {
+  const fire = (el, type) => el.dispatchEvent(new Event(type, { bubbles: true }));
+  setTimeout(() => {
+    const w = $("wind"); w.value = 80; fire(w, "input");
+    const t = $("tod"); t.value = 30; fire(t, "input");
+    $("cam-orbit").click();
+    $("q-low").click();
+    $("toggle-ui").click();
+    const r = canvas.getBoundingClientRect();
+    const opts = { bubbles: true, pointerId: 7, clientX: r.width/2, clientY: r.height/2 };
+    canvas.dispatchEvent(new PointerEvent("pointerdown", opts));
+    canvas.dispatchEvent(new PointerEvent("pointermove", { ...opts, clientX: r.width/2 + 120, clientY: r.height/2 + 40 }));
+    canvas.dispatchEvent(new PointerEvent("pointerup", { ...opts, clientX: r.width/2 + 120, clientY: r.height/2 + 40 }));
+    canvas.dispatchEvent(new WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: -240 }));
+  }, 1200);
+  setTimeout(() => {
+    document.title = "SELFTEST " + JSON.stringify({
+      wind: +state.wind.toFixed(1), hour: +state.hour.toFixed(2), camMode: state.camMode,
+      tier: tierName, yawMoved: Math.abs(state.yaw - (P_YAW != null ? P_YAW : -0.6)) > 0.05,
+      zoomed: state.dist > 12, panelHidden: document.getElementById("panel").classList.contains("hidden"),
+      simTime: +state.simTime.toFixed(1), Hs: +state.Hs.toFixed(2)
+    });
+  }, 4500);
+}
 
 // ---------- input
 const pointers = new Map();
