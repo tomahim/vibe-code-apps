@@ -4,6 +4,7 @@ tagline: Draw One Bookmark and Three Constraint Cards, Then Write the Post
 pitch: Draw one bookmark and three constraint cards, then write the blog post that hand demands.
 domains: [WRITE, MEDIA, GAME]
 created: 2026-10-21T05:41:19Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
