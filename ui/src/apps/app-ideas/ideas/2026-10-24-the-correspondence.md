@@ -4,6 +4,7 @@ tagline: Real Letters, Delivered Slowly - Writing to Friends the Way It Used to 
 pitch: Write letters to friends that take real days to arrive, restoring anticipation and depth to friendship one envelope at a time.
 domains: [WRITE, MEDIA]
 created: 2026-10-24T05:02:31Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
