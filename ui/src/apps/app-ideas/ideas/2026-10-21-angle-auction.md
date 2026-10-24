@@ -4,6 +4,7 @@ tagline: Bid Constraint Cards Against Bookmark Topics and Write the Winning Angl
 pitch: Pair angle cards with your bookmarked articles, then write the pairing that promises the most original take.
 domains: [WRITE, MEDIA, LEARN]
 created: 2026-10-21T05:41:21Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
