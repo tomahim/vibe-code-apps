@@ -4,6 +4,7 @@ tagline: Sign a Weekly Column Deal: One Bookmark, Fixed Constraints, Your Name o
 pitch: Define a column once (bookmark shelf plus fixed constraint cards) and get a stamped weekly brief to write.
 domains: [WRITE, PROD, GAME]
 created: 2026-10-21T05:41:20Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
