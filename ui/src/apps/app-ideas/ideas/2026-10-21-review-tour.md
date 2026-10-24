@@ -4,6 +4,7 @@ tagline: Walk Every PR on a Guided Path, Riskiest Stops First
 pitch: Walk any PR along a guided path, riskiest stops first, with one question to answer per stop.
 domains: [PROD, LEARN]
 created: 2026-10-21T05:48:06Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
