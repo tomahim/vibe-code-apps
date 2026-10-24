@@ -4,6 +4,7 @@ tagline: Argue Every Fantasy Trade in Court, Then Let the Season Pass Verdict
 pitch: File each fantasy trade with your reasoning sealed, then let the season's actual points pass verdict.
 domains: [SPORT, GAME, WRITE]
 created: 2026-10-21T05:02:05Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
