@@ -188,7 +188,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not await require_authorized(update, context):
         return
     await update.effective_message.reply_text(
-        "Recipe bot ready. Use /add, /list [ingredient, ingredient], /random [ingredient, ingredient], or /help."
+        "Recipe bot ready. Use /add, /list ingredients or name, /random [ingredients or name], or /help."
     )
 
 
@@ -198,7 +198,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.effective_message.reply_text(
         "Commands:\n"
         "/add — save a recipe through a short conversation; add a photo or skip it.\n"
-        "/list [ingredient, ingredient] — list recipes, optionally requiring every term in an ingredient or the recipe name.\n"
+        "/list ingredient, ingredient — list recipes where every term is in an ingredient or the recipe name.\n"
         "/random [ingredient, ingredient] — pick a random recipe, optionally requiring every term in an ingredient or the recipe name.\n"
         "/wakeup — wake the sleeping API and confirm it is up.\n"
         "/cancel — stop adding a recipe.\n\n"
@@ -307,6 +307,11 @@ async def list_recipes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if not await require_authorized(update, context):
         return
     ingredients = " ".join(context.args).strip()
+    if not ingredients:
+        await update.effective_message.reply_text(
+            "Tell me what to look for: /list ingredient or recipe name, for example /list tomato, pasta."
+        )
+        return
     try:
         result = await api_get(context, "/api/apps/recipes/recipes/", ingredients, match_title=True)
     except (httpx.RequestError, httpx.HTTPError):
@@ -416,7 +421,7 @@ async def post_init(application: Application) -> None:
     await application.bot.set_my_commands([
         BotCommand("add", "Add a recipe"),
         BotCommand("wakeup", "Wake the API and confirm it is up"),
-        BotCommand("list", "List recipes, optionally by ingredients"),
+        BotCommand("list", "List recipes by ingredient or name"),
         BotCommand("random", "Pick a random recipe"),
         BotCommand("cancel", "Cancel recipe entry"),
         BotCommand("help", "Show available commands"),
