@@ -1,0 +1,6 @@
+{
+  "title": "Open Water",
+  "description": "A real-time ocean simulated entirely on the GPU: Tessendorf FFT waves in three cascades, whitecap foam from wave-fold detection, a single-scattering atmosphere, sun glitter and moonlit nights, from calm to gale. One self-contained file, no libraries, no assets. Inspired by Leon Lin's open-water (github.com/Leonxlnx/open-water).",
+  "date": "2026-10-24",
+  "tags": ["water", "ocean", "webgl2", "shaders", "fft", "simulation", "sky", "foam", "3d", "interactive", "full screen"]
+}
