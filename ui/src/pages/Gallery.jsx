@@ -79,6 +79,7 @@ export default function Gallery({ onOpenApp }) {
           <span className="header-note">A small collection of useful tools</span>
           <a className="admin-link" href="/artifacts">Artifacts</a>
           <a className="admin-link" href="/admin/">Admin</a>
+          <a className="admin-link" href="/login">Log in</a>
         </div>
       </header>
 

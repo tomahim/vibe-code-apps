@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Gallery from "../pages/Gallery.jsx";
+import Login from "../pages/Login.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
@@ -23,6 +24,10 @@ export default function App() {
     window.history.pushState({}, "", nextPath);
     setPath(nextPath);
     window.scrollTo(0, 0);
+  }
+
+  if (path === "/login") {
+    return <Login />;
   }
 
   if (path === "/artifacts" || path.startsWith("/artifacts/")) {

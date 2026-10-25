@@ -1,0 +1,20 @@
+/* The login page shares the collection theme (see collection-theme.css):
+   colors here come from the shared --ink/--muted/--green/--line/--paper vars. */
+.login-page { max-width: 1120px; min-height: 100vh; margin: 0 auto; padding: 0 32px 70px; }
+.login-card { max-width: 400px; margin: 72px auto 0; padding: 40px 36px 30px; border: 1px solid var(--line); border-radius: 12px; background: var(--collection-wash, var(--paper)); text-align: center; }
+.login-artwork { display: block; width: 96px; height: 96px; margin: 0 auto 20px; border: 1px solid #e9e8e120; border-radius: 10px; object-fit: contain; }
+.login-card .eyebrow { margin: 0 0 10px; }
+.login-card h1 { margin: 0; font-family: system-ui, sans-serif; font-size: clamp(28px, 4vw, 36px); font-weight: 650; line-height: 1.1; letter-spacing: -.04em; }
+.login-subtitle { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+.login-form { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; text-align: left; }
+.login-page .field-label { color: var(--muted); }
+.login-page .field input { border-color: var(--line); background: var(--paper); color: var(--ink); }
+.login-page .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #a8b0ff25; }
+.login-submit { width: 100%; min-height: 48px; margin-top: 4px; background: var(--green); color: var(--paper); font-size: 13px; }
+.login-submit:hover:not(:disabled) { background: var(--green-bright); }
+.login-note { margin: 22px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+
+@media (max-width: 760px) {
+  .login-page { padding: 0 18px 50px; }
+  .login-card { margin-top: 40px; padding: 32px 22px 24px; }
+}
