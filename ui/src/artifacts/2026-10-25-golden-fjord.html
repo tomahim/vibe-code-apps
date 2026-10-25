@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Golden Fjord</title>
+<style>
+  :root {
+    --hud-bg: rgba(10, 12, 18, 0.55);
+    --hud-line: rgba(255, 255, 255, 0.14);
+    --hud-text: #f2ede4;
+    --hud-dim: #b8ad9c;
+    --accent: #ffb45c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0b0e14; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+  #scene.dragging { cursor: grabbing; }
+  .hud { position: fixed; z-index: 5; color: var(--hud-text); user-select: none; -webkit-user-select: none; }
+  #title-chip {
+    top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left));
+    padding: 9px 15px; background: var(--hud-bg); border: 1px solid var(--hud-line);
+    border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    line-height: 1.3; pointer-events: none;
+  }
+  #title-chip .kicker { margin: 0; font-size: 9px; letter-spacing: 0.22em; color: var(--accent); font-weight: 700; }
+  #title-chip h1 { margin: 0; font-size: 17px; font-weight: 750; letter-spacing: 0.06em; }
+  #title-chip .sub { margin: 0; font-size: 10px; color: var(--hud-dim); letter-spacing: 0.12em; }
+  #views {
+    left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  #views .label { font-size: 9px; letter-spacing: 0.22em; color: var(--hud-dim); padding-left: 4px; }
+  #views .row { display: flex; gap: 6px; }
+  .segbtn {
+    padding: 7px 13px; font: inherit; font-size: 11px; letter-spacing: 0.03em;
+    color: var(--hud-dim); background: var(--hud-bg); border: 1px solid var(--hud-line);
+    border-radius: 9px; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .segbtn[aria-pressed="true"] { color: #14100a; background: var(--accent); border-color: var(--accent); font-weight: 650; }
+  .segbtn:focus-visible, .iconbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #hint {
+    left: 50%; transform: translateX(-50%); bottom: max(14px, env(safe-area-inset-bottom));
+    font-size: 10px; letter-spacing: 0.14em; color: var(--hud-dim); pointer-events: none;
+    background: var(--hud-bg); border: 1px solid var(--hud-line); border-radius: 9px; padding: 7px 12px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); white-space: nowrap;
+  }
+  #controls {
+    right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom));
+    display: flex; align-items: center; gap: 8px;
+  }
+  #fps { font-size: 10px; letter-spacing: 0.08em; color: var(--hud-dim); min-width: 52px; text-align: right;
+    background: var(--hud-bg); border: 1px solid var(--hud-line); border-radius: 9px; padding: 7px 8px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .iconbtn {
+    width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--hud-line);
+    background: var(--hud-bg); color: var(--hud-text); font-size: 15px; cursor: pointer;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #fail {
+    inset: 0; display: none; align-items: center; justify-content: center; text-align: center;
+    color: var(--hud-text); font-size: 14px; padding: 2rem; line-height: 1.6;
+  }
+  @media (max-width: 640px) {
+    #hint { display: none; }
+    #title-chip h1 { font-size: 14px; }
+    .segbtn { padding: 6px 10px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="scene" aria-label="Golden Fjord interactive 3D diorama. Drag to orbit, scroll to zoom, arrow keys to look around. Press R for the reference view and Space to pause motion."></canvas>
+<div class="hud" id="title-chip">
+  <p class="kicker">MOUNTAIN LAKE · LIVE DIORAMA</p>
+  <h1>GOLDEN FJORD</h1>
+  <p class="sub">SUN OVER SNOW PEAKS</p>
+</div>
+<div class="hud" id="views">
+  <span class="label">VIEWPOINT</span>
+  <div class="row" role="group" aria-label="Camera viewpoints">
+    <button class="segbtn" data-view="reference" aria-pressed="true">Reference</button>
+    <button class="segbtn" data-view="lakeside" aria-pressed="false">Lakeside</button>
+    <button class="segbtn" data-view="reverse" aria-pressed="false">Reverse</button>
+  </div>
+</div>
+<div class="hud" id="hint">DRAG TO ORBIT · SCROLL TO INSPECT</div>
+<div class="hud" id="controls">
+  <span id="fps" aria-hidden="true">— FPS</span>
+  <button class="iconbtn" id="pause" aria-pressed="false" aria-label="Pause scene motion" title="Pause (Space)">⏸</button>
+</div>
+<div class="hud" id="fail"><p>This diorama needs WebGL2.<br>Please try a recent browser.</p></div>
+<script>
+'use strict';
+const FRAG = `#version 300 es
+precision highp float;
+uniform vec2 uRes;
+uniform float uTime;
+uniform vec3 uCamPos, uCamFwd, uCamRight, uCamUp;
+uniform vec3 uSunDir;
+out vec4 outColor;
+
+const float TMAX = 140.0;
+const vec2 CABIN = vec2(5.0, -13.0);
+const vec2 SUN_XZ = vec2(0.1772, -0.9843); // normalize(vec2(0.18, -1.0))
+float gCabinBase = 0.0;
+
+// ---------- noise ----------
+float hash1(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  f = f*f*(3.0-2.0*f);
+  float a = hash1(i), b = hash1(i+vec2(1,0)), c = hash1(i+vec2(0,1)), d = hash1(i+vec2(1,1));
+  return mix(mix(a,b,f.x), mix(c,d,f.x), f.y);
+}
+float fbm(vec2 p){
+  float v = 0.0, a = 0.5;
+  mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+  for(int i=0;i<5;i++){ v += a*noise(p); p = m*p; a *= 0.5; }
+  return v;
+}
+float fbm3(vec2 p){
+  float v = 0.0, a = 0.5;
+  mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+  for(int i=0;i<3;i++){ v += a*noise(p); p = m*p; a *= 0.5; }
+  return v;
+}
+float ridged(vec2 p){
+  float v = 0.0, a = 0.55;
+  mat2 m = mat2(1.7, 1.1, -1.1, 1.7);
+  for(int i=0;i<5;i++){
+    float n = noise(p);
+    n = 1.0 - abs(2.0*n - 1.0);
+    v += a*n*n; p = m*p; a *= 0.5;
+  }
+  return v;
+}
+
+// ---------- terrain ----------
+float terrainH(vec2 p){
+  float back = smoothstep(6.0, 70.0, -p.y);
+  float side = smoothstep(16.0, 60.0, abs(p.x));
+  float wall = max(back, side*0.85);
+  // a valley dip around the sun azimuth so the sun sits in the ridgeline
+  vec2 dir = normalize(p + vec2(0.001, 0.0));
+  float gap = 1.0 - 0.72*pow(max(dot(dir, SUN_XZ), 0.0), 5.0)*smoothstep(12.0, 50.0, -p.y);
+  float base = fbm(p*0.045)*1.6 + ridged(p*0.09)*0.9;
+  float h = -2.4 + base*(1.2 + 13.5*wall*gap);
+  vec2 d = p - CABIN;
+  h += 2.6*exp(-dot(d,d)/20.0); // cabin knoll
+  h += (noise(p*0.55) - 0.5)*(0.55 + 1.8*wall); // mid detail
+  return h;
+}
+float mapTerrain(vec3 p){ return (p.y - terrainH(p.xz))*0.45; }
+
+// ---------- objects ----------
+float sdBox(vec3 p, vec3 b){
+  vec3 q = abs(p) - b;
+  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
+}
+float sdRoundCyl(vec3 p, float r, float h){
+  vec2 d = vec2(length(p.xz) - r, abs(p.y) - h);
+  return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - 0.05;
+}
+mat2 rot(float a){ float c=cos(a), s=sin(a); return mat2(c,-s,s,c); }
+
+vec2 mapObjects(vec3 p){
+  float best = 1e9; float id = 0.0;
+  vec3 q = (p - vec3(CABIN.x, gCabinBase, CABIN.y))/1.3;
+  // cabin body
+  float d = sdBox(q - vec3(0.0, 0.75, 0.0), vec3(1.1, 0.75, 0.9));
+  if(d*1.3 < best){ best = d*1.3; id = 2.0; }
+  // roof: folded slab, clipped in x
+  vec3 rq = vec3(q.x, q.y - 1.78, abs(q.z));
+  float dR = dot(vec2(rq.y, rq.z), vec2(0.7071, 0.7071)) - 0.78;
+  dR = max(dR, abs(q.x) - 1.28);
+  dR = max(dR, -(q.y - 1.35));
+  if(dR*1.3 < best){ best = dR*1.3; id = 3.0; }
+  // chimney
+  float dC = sdBox(q - vec3(0.55, 2.15, 0.15), vec3(0.11, 0.5, 0.11));
+  if(dC*1.3 < best){ best = dC*1.3; id = 3.0; }
+  // dock toward the water (+z)
+  float dockY = (0.22 - gCabinBase)/1.3;
+  float dD = sdBox(q - vec3(0.0, dockY, 3.6), vec3(0.5, 0.05, 1.6));
+  dD = min(dD, sdBox(q - vec3(0.32, dockY - 0.55, 4.6), vec3(0.05, 0.55, 0.05)));
+  dD = min(dD, sdBox(q - vec3(-0.32, dockY - 0.55, 4.6), vec3(0.05, 0.55, 0.05)));
+  dD = min(dD, sdBox(q - vec3(0.32, dockY - 0.55, 2.9), vec3(0.05, 0.55, 0.05)));
+  dD = min(dD, sdBox(q - vec3(-0.32, dockY - 0.55, 2.9), vec3(0.05, 0.55, 0.05)));
+  if(dD*1.3 < best){ best = dD*1.3; id = 2.0; }
+  // drifting ice floes
+  for(int i=0;i<6;i++){
+    float fi = float(i);
+    vec2 base = vec2(-9.0 + 3.4*fi + hash1(vec2(fi, 1.0))*2.0, -1.5 - hash1(vec2(fi, 7.0))*7.0);
+    base += 1.4*vec2(sin(uTime*0.05 + fi*2.1), cos(uTime*0.037 + fi*1.3));
+    vec3 fp = p - vec3(base.x, 0.02 + 0.05*sin(uTime*0.7 + fi*1.9), base.y);
+    fp.xz = rot(0.1*uTime*(mod(fi,2.0)*2.0-1.0) + fi) * fp.xz;
+    float dF = sdRoundCyl(fp, 0.45 + 0.45*hash1(vec2(fi, 3.3)), 0.12);
+    if(dF < best){ best = dF; id = 4.0; }
+  }
+  return vec2(best, id);
+}
+
+vec2 map(vec3 p){
+  float dT = mapTerrain(p);
+  vec2 o = mapObjects(p);
+  return (o.x < dT) ? o : vec2(dT, 1.0);
+}
+
+// ---------- marching ----------
+vec2 march(vec3 ro, vec3 rd, float tmax, float epsScale, int steps){
+  float t = 0.03;
+  for(int i=0;i<260;i++){
+    if(i >= steps) break;
+    vec3 p = ro + rd*t;
+    vec2 h = map(p);
+    if(h.x < epsScale*t + 0.004) return vec2(t, h.y);
+    t += h.x*0.9;
+    if(t > tmax) break;
+  }
+  return vec2(-1.0, 0.0);
+}
+float marchTerrain(vec3 ro, vec3 rd, float tmax, float epsScale, int steps){
+  float t = 0.05;
+  for(int i=0;i<90;i++){
+    if(i >= steps) break;
+    vec3 p = ro + rd*t;
+    float h = mapTerrain(p);
+    if(h < epsScale*t + 0.02) return t;
+    t += h*0.95;
+    if(t > tmax) break;
+  }
+  return -1.0;
+}
+float softShadow(vec3 ro, vec3 rd){
+  float res = 1.0, t = 0.15;
+  for(int i=0;i<36;i++){
+    vec3 p = ro + rd*t;
+    float h = p.y - terrainH(p.xz);
+    res = min(res, 9.0*h/t);
+    t += clamp(h*0.7, 0.12, 2.5);
+    if(res < 0.01 || t > 70.0) break;
+  }
+  return clamp(res, 0.0, 1.0);
+}
+vec3 terrainNormal(vec3 p, float t){
+  float e = 0.02 + 0.004*t;
+  float h = terrainH(p.xz);
+  return normalize(vec3(
+    terrainH(p.xz - vec2(e,0.0)) - terrainH(p.xz + vec2(e,0.0)),
+    2.0*e,
+    terrainH(p.xz - vec2(0.0,e)) - terrainH(p.xz + vec2(0.0,e))));
+}
+
+// ---------- sky ----------
+vec3 skyColor(vec3 rd){
+  float sd = max(dot(rd, uSunDir), 0.0);
+  float y = clamp(rd.y, 0.0, 1.0);
+  vec3 hor = vec3(1.10, 0.58, 0.28);
+  vec3 mid = vec3(0.55, 0.48, 0.48);
+  vec3 zen = vec3(0.14, 0.27, 0.50);
+  vec3 col = mix(hor, mid, smoothstep(0.0, 0.22, y));
+  col = mix(col, zen, smoothstep(0.15, 0.75, y));
+  col = mix(col, vec3(1.05, 0.55, 0.26), pow(sd, 3.0)*0.55*(1.0-y));
+  // sun disc + halos
+  col += vec3(1.5, 1.05, 0.65) * pow(sd, 1100.0) * 26.0;
+  col += vec3(1.4, 0.85, 0.45) * pow(sd, 350.0) * 2.6;
+  col += vec3(1.2, 0.70, 0.35) * pow(sd, 60.0) * 0.9;
+  col += vec3(1.0, 0.70, 0.40) * pow(sd, 5.0) * 0.22;
+  // clouds
+  if(rd.y > 0.015){
+    vec2 cuv = rd.xz/(rd.y + 0.14)*1.3 + vec2(uTime*0.006, uTime*0.002);
+    float c = fbm(cuv*1.7);
+    float cl = smoothstep(0.56, 0.8, c)*smoothstep(0.0, 0.18, rd.y);
+    vec3 cloudCol = mix(vec3(0.50, 0.44, 0.52), vec3(1.2, 0.70, 0.38), pow(sd, 2.0));
+    col = mix(col, cloudCol, cl*0.55);
+  }
+  return col;
+}
+vec3 haze(vec3 col, float t, vec3 rd){
+  float f = 1.0 - exp(-t*0.0042);
+  vec3 hazeCol = mix(vec3(0.52, 0.55, 0.62), vec3(1.05, 0.62, 0.34), pow(max(dot(rd, uSunDir), 0.0), 3.0));
+  return mix(col, hazeCol, clamp(f, 0.0, 1.0));
+}
+
+// ---------- terrain shading ----------
+vec3 terrainAlbedo(vec3 p, vec3 n){
+  float h = p.y;
+  float slope = 1.0 - n.y;
+  vec3 grass = vec3(0.15, 0.21, 0.12);
+  vec3 rock  = vec3(0.30, 0.26, 0.24);
+  vec3 snow  = vec3(0.92, 0.94, 0.99);
+  vec3 col = mix(grass, rock, smoothstep(0.12, 0.45, slope));
+  col = mix(col, rock*0.85, smoothstep(3.5, 8.0, h));
+  float snowline = 6.0 + noise(p.xz*0.35)*2.0;
+  float sn = smoothstep(snowline, snowline + 1.6, h) * smoothstep(0.62, 0.30, slope);
+  col = mix(col, snow, sn);
+  // shore wetness
+  col *= mix(0.55, 1.0, smoothstep(-0.15, 0.45, h));
+  return col;
+}
+vec3 shadeTerrain(vec3 p, vec3 n, vec3 rd, float t, float shadowed){
+  vec3 alb = terrainAlbedo(p, n);
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float sh = shadowed > 0.5 ? softShadow(p + n*0.06, uSunDir) : 1.0;
+  vec3 sunCol = vec3(1.3, 0.68, 0.34)*3.0;
+  vec3 amb = mix(vec3(0.08, 0.11, 0.18), vec3(0.26, 0.32, 0.46), 0.5 + 0.5*n.y);
+  vec3 col = alb*(sunCol*dif*sh + amb);
+  // snow sparkle backscatter toward sun
+  float rim = pow(1.0 - max(dot(n, -rd), 0.0), 3.0);
+  col += vec3(1.0, 0.6, 0.35)*rim*pow(max(dot(rd, uSunDir), 0.0), 2.0)*0.25;
+  return haze(col, t, rd);
+}
+
+// ---------- water ----------
+float swell(vec2 p, float t){
+  return 0.11*sin(p.x*0.33 + p.y*0.26 + t*0.9)
+       + 0.075*sin(-p.x*0.23 + p.y*0.40 + t*1.25)
+       + 0.05*sin(p.x*0.85 - p.y*0.62 + t*1.7)
+       + 0.30*fbm3(p*0.33 + vec2(t*0.03, -t*0.02));
+}
+vec3 waterNormal(vec2 p, float t){
+  float e = 0.14;
+  float h  = swell(p, t) + 0.028*noise(p*2.2 + vec2(t*0.35, t*0.22));
+  float hx = swell(p + vec2(e, 0.0), t) + 0.028*noise((p + vec2(e,0.0))*2.2 + vec2(t*0.35, t*0.22));
+  float hz = swell(p + vec2(0.0, e), t) + 0.028*noise((p + vec2(0.0,e))*2.2 + vec2(t*0.35, t*0.22));
+  return normalize(vec3(h - hx, e, h - hz));
+}
+vec3 cheapTerrainColor(vec3 p, float t){
+  vec3 n = terrainNormal(p, t);
+  vec3 alb = terrainAlbedo(p, n);
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0)*0.9 + 0.1;
+  return alb*(vec3(1.25, 0.72, 0.40)*2.2*dif + vec3(0.3, 0.36, 0.5));
+}
+vec3 shadeWater(vec3 p, vec3 rd, float t){
+  vec3 n = waterNormal(p.xz, uTime);
+  vec3 r = reflect(rd, n);
+  r.y = abs(r.y) + 0.02;
+  r = normalize(r);
+  vec3 refl;
+  float rt = marchTerrain(p + vec3(0.0, 0.06, 0.0), r, 90.0, 0.012, 48);
+  if(rt > 0.0){
+    vec3 rp = p + vec3(0.0, 0.06, 0.0) + r*rt;
+    refl = haze(cheapTerrainColor(rp, rt), rt + t, r);
+  } else {
+    refl = skyColor(r);
+  }
+  float fres = 0.025 + 0.975*pow(1.0 - max(dot(-rd, n), 0.0), 5.0);
+  vec3 deep = vec3(0.020, 0.065, 0.085)*(0.6 + 0.4*clamp(dot(n, uSunDir), 0.0, 1.0));
+  vec3 col = mix(deep, refl, clamp(fres*1.25, 0.0, 1.0));
+  // sun glitter path
+  float g1 = pow(max(dot(r, uSunDir), 0.0), 800.0);
+  float g2 = pow(max(dot(r, uSunDir), 0.0), 48.0);
+  col += vec3(1.3, 0.75, 0.40)*(g1*7.0 + g2*0.35);
+  return haze(col, t, rd);
+}
+
+// ---------- cabin / floe shading ----------
+float windowMask(vec3 q){
+  float w = 0.0;
+  // front face (z+)
+  if(q.z > 0.88){
+    vec2 w1 = vec2(abs(q.x - 0.55), abs(q.y - 0.78));
+    vec2 w2 = vec2(abs(q.x + 0.55), abs(q.y - 0.78));
+    w = max(w, step(w1.x, 0.17)*step(w1.y, 0.22));
+    w = max(w, step(w2.x, 0.17)*step(w2.y, 0.22));
+  }
+  // side faces
+  if(abs(q.x) > 1.08){
+    vec2 ws = vec2(abs(q.z), abs(q.y - 0.78));
+    w = max(w, step(ws.x, 0.17)*step(ws.y, 0.22));
+  }
+  return w;
+}
+float doorMask(vec3 q){
+  return (q.z > 0.88 && abs(q.x) < 0.22 && q.y < 0.78) ? 1.0 : 0.0;
+}
+vec3 shadeCabin(vec3 p, vec3 n, float id, float t, vec3 rd){
+  vec3 q = (p - vec3(CABIN.x, gCabinBase, CABIN.y))/1.3;
+  vec3 col;
+  if(id < 2.5){
+    // wood body + dock, plank striping
+    col = vec3(0.34, 0.235, 0.155)*(0.88 + 0.12*sin(q.y*34.0));
+    if(doorMask(q) > 0.5) col = vec3(0.16, 0.10, 0.07);
+    float w = windowMask(q);
+    float flicker = 1.0 + 0.06*sin(uTime*2.7 + q.x*9.0);
+    col = mix(col, vec3(1.0, 0.55, 0.20)*2.6*flicker, w);
+  } else {
+    // rusted roof + chimney, snow on upward faces
+    col = vec3(0.55, 0.24, 0.12);
+    if(n.y > 0.78) col = mix(col, vec3(0.93, 0.95, 1.0), smoothstep(0.78, 0.92, n.y)*0.85);
+    if(abs(q.x - 0.55) < 0.14 && abs(q.z - 0.15) < 0.14 && q.y > 1.7) col = vec3(0.35, 0.33, 0.33);
+  }
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float lit = 0.35 + 0.65*dif;
+  // emissive windows stay bright in shade
+  if(id < 2.5 && windowMask(q) > 0.5) lit = 1.0;
+  col *= vec3(1.25, 0.80, 0.5)*lit + vec3(0.20, 0.25, 0.38)*(1.0 - lit)*0.7;
+  return haze(col, t, rd);
+}
+vec3 shadeFloe(vec3 p, vec3 n, float t, vec3 rd){
+  vec3 top = vec3(0.93, 0.96, 1.0);
+  vec3 side = vec3(0.62, 0.78, 0.90);
+  vec3 alb = mix(side, top, smoothstep(0.3, 0.75, n.y));
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  vec3 col = alb*(vec3(1.25, 0.75, 0.45)*2.0*dif + vec3(0.28, 0.34, 0.48));
+  // sparkle
+  float sp = pow(noise(p.xz*24.0), 8.0)*1.5;
+  col += vec3(1.0, 0.8, 0.55)*sp*dif;
+  return haze(col, t, rd);
+}
+
+vec3 objectNormal(vec3 p){
+  const float e = 0.004;
+  vec2 k = vec2(1.0, -1.0);
+  return normalize(k.xyy*mapObjects(p + k.xyy*e).x +
+                   k.yyx*mapObjects(p + k.yyx*e).x +
+                   k.yxy*mapObjects(p + k.yxy*e).x +
+                   k.xxx*mapObjects(p + k.xxx*e).x);
+}
+vec3 aces(vec3 x){
+  return clamp((x*(2.51*x + 0.03))/(x*(2.43*x + 0.59) + 0.14), 0.0, 1.0);
+}
+
+void main(){
+  gCabinBase = terrainH(CABIN);
+  vec2 uv = (gl_FragCoord.xy*2.0 - uRes)/uRes.y;
+  vec3 ro = uCamPos;
+  vec3 rd = normalize(uCamFwd*1.55 + uv.x*uCamRight + uv.y*uCamUp);
+
+  float tWater = (rd.y < -0.0005 && ro.y > 0.0) ? -ro.y/rd.y : 1e9;
+  vec3 col;
+  vec2 hit = march(ro, rd, min(tWater, TMAX), 0.0012, 230);
+  if(hit.x > 0.0){
+    vec3 p = ro + rd*hit.x;
+    if(hit.y < 1.5){
+      vec3 n = terrainNormal(p, hit.x);
+      col = shadeTerrain(p, n, rd, hit.x, 1.0);
+    } else if(hit.y < 3.5){
+      vec3 n = objectNormal(p);
+      col = shadeCabin(p, n, hit.y, hit.x, rd);
+    } else {
+      vec3 n = objectNormal(p);
+      col = shadeFloe(p, n, hit.x, rd);
+    }
+  } else if(tWater < TMAX){
+    col = shadeWater(ro + rd*tWater, rd, tWater);
+  } else {
+    col = skyColor(rd);
+  }
+
+  col = aces(col*1.05);
+  col = pow(col, vec3(0.4545));
+  vec2 vuv = gl_FragCoord.xy/uRes*2.0 - 1.0;
+  col *= 1.0 - 0.22*dot(vuv, vuv);
+  outColor = vec4(col, 1.0);
+}
+`;
+const VERT = `#version 300 es
+void main(){
+  vec2 v = vec2(float((gl_VertexID<<1)&2), float(gl_VertexID&2));
+  gl_Position = vec4(v*2.0 - 1.0, 0.0, 1.0);
+}
+`;
+
+// ---------- engine ----------
+const canvas = document.getElementById('scene');
+const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+if(!gl){
+  document.getElementById('fail').style.display = 'flex';
+  throw new Error('WebGL2 unavailable');
+}
+function compile(type, src){
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+    console.error(gl.getShaderInfoLog(s));
+    throw new Error('shader compile failed');
+  }
+  return s;
+}
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+gl.linkProgram(prog);
+if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+  console.error(gl.getProgramInfoLog(prog));
+  throw new Error('shader link failed');
+}
+gl.useProgram(prog);
+const U = {};
+for(const name of ['uRes','uTime','uCamPos','uCamFwd','uCamRight','uCamUp','uSunDir'])
+  U[name] = gl.getUniformLocation(prog, name);
+
+// sun: low over the mountain gap, slightly right of center
+const sunDir = (() => {
+  const v = [0.18, 0.20, -1.0];
+  const l = Math.hypot(...v);
+  return v.map(c => c/l);
+})();
+gl.uniform3fv(U.uSunDir, sunDir);
+
+// ---------- camera ----------
+const VIEWS = {
+  reference: { target: [2.6, 1.6, -11.5], theta: 0.10, phi: 0.23, r: 15.5 },
+  lakeside:  { target: [2.0, 0.9, -8.0],  theta: -0.10, phi: 0.06, r: 11.0 },
+  reverse:   { target: [2.6, 1.5, -11.5], theta: 3.30, phi: 0.20, r: 13.5 },
+};
+const cam = { target: [...VIEWS.reference.target], theta: VIEWS.reference.theta, phi: VIEWS.reference.phi, r: VIEWS.reference.r };
+function camVectors(){
+  const cp = Math.cos(cam.phi), sp = Math.sin(cam.phi);
+  const aspect = (canvas.clientWidth || 1)/(canvas.clientHeight || 1);
+  const rEff = cam.r * Math.min(1.9, Math.max(1, 1.5/aspect));
+  const pos = [
+    cam.target[0] + rEff*Math.sin(cam.theta)*cp,
+    cam.target[1] + rEff*sp,
+    cam.target[2] + rEff*Math.cos(cam.theta)*cp,
+  ];
+  const fwd = [cam.target[0]-pos[0], cam.target[1]-pos[1], cam.target[2]-pos[2]];
+  const fl = Math.hypot(...fwd);
+  const f = fwd.map(c => c/fl);
+  const r = [f[2], 0, -f[0]]; // cross(fwd, up=(0,1,0)) -> (-f.z?) normalized below
+  const rl = Math.hypot(...r) || 1;
+  const right = [-f[2]/rl, 0, f[0]/rl];
+  const up = [
+    right[1]*f[2] - right[2]*f[1],
+    right[2]*f[0] - right[0]*f[2],
+    right[0]*f[1] - right[1]*f[0],
+  ];
+  return { pos, fwd: f, right, up };
+}
+
+// ---------- render loop ----------
+let sceneTime = 0, lastNow = performance.now(), paused = false;
+let frames = 0, fpsLast = performance.now();
+const fpsEl = document.getElementById('fps');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotion){ paused = true; updatePauseBtn(); }
+
+function resize(){
+  const small = Math.min(window.innerWidth, window.innerHeight) < 640;
+  const cap = small ? 1.25 : 1.6;
+  const dpr = Math.min(window.devicePixelRatio || 1, cap) * quality;
+  const w = Math.max(1, Math.round(canvas.clientWidth*dpr));
+  const h = Math.max(1, Math.round(canvas.clientHeight*dpr));
+  if(canvas.width !== w || canvas.height !== h){
+    canvas.width = w; canvas.height = h;
+    gl.viewport(0, 0, w, h);
+  }
+}
+let quality = 1.0;
+const qParam = parseFloat(new URLSearchParams(location.hash.slice(1)).get('q'));
+if(qParam > 0.1 && qParam <= 1.5) quality = qParam;
+window.addEventListener('resize', resize);
+
+function frame(now){
+  const dt = Math.min(0.1, (now - lastNow)/1000);
+  lastNow = now;
+  if(!paused) sceneTime += dt;
+  resize();
+  const v = camVectors();
+  gl.uniform2f(U.uRes, canvas.width, canvas.height);
+  gl.uniform1f(U.uTime, sceneTime);
+  gl.uniform3fv(U.uCamPos, v.pos);
+  gl.uniform3fv(U.uCamFwd, v.fwd);
+  gl.uniform3fv(U.uCamRight, v.right);
+  gl.uniform3fv(U.uCamUp, v.up);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  frames++;
+  if(now - fpsLast > 500){
+    fpsEl.textContent = Math.round(frames*1000/(now - fpsLast)) + ' FPS';
+    frames = 0; fpsLast = now;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// ---------- interaction ----------
+const pointers = new Map();
+let pinchDist = 0;
+canvas.addEventListener('pointerdown', e => {
+  canvas.setPointerCapture(e.pointerId);
+  pointers.set(e.pointerId, [e.clientX, e.clientY]);
+  if(pointers.size === 2){
+    const [a, b] = [...pointers.values()];
+    pinchDist = Math.hypot(a[0]-b[0], a[1]-b[1]);
+  }
+  canvas.classList.add('dragging');
+});
+canvas.addEventListener('pointermove', e => {
+  if(!pointers.has(e.pointerId)) return;
+  const prev = pointers.get(e.pointerId);
+  pointers.set(e.pointerId, [e.clientX, e.clientY]);
+  if(pointers.size === 1){
+    cam.theta -= (e.clientX - prev[0])*0.0052;
+    cam.phi = Math.min(1.25, Math.max(0.02, cam.phi + (e.clientY - prev[1])*0.0042));
+  } else if(pointers.size === 2){
+    const [a, b] = [...pointers.values()];
+    const d = Math.hypot(a[0]-b[0], a[1]-b[1]);
+    if(pinchDist > 0){
+      cam.r = Math.min(70, Math.max(6, cam.r * pinchDist/d));
+    }
+    pinchDist = d;
+  }
+});
+function endPointer(e){
+  pointers.delete(e.pointerId);
+  if(pointers.size < 2) pinchDist = 0;
+  if(pointers.size === 0) canvas.classList.remove('dragging');
+}
+canvas.addEventListener('pointerup', endPointer);
+canvas.addEventListener('pointercancel', endPointer);
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  cam.r = Math.min(70, Math.max(6, cam.r*Math.exp(e.deltaY*0.0011)));
+}, { passive: false });
+
+window.addEventListener('keydown', e => {
+  const step = 0.09;
+  if(e.key === 'ArrowLeft'){ cam.theta += step; e.preventDefault(); }
+  else if(e.key === 'ArrowRight'){ cam.theta -= step; e.preventDefault(); }
+  else if(e.key === 'ArrowUp'){ cam.phi = Math.min(1.25, cam.phi + step*0.6); e.preventDefault(); }
+  else if(e.key === 'ArrowDown'){ cam.phi = Math.max(0.02, cam.phi - step*0.6); e.preventDefault(); }
+  else if(e.key === 'r' || e.key === 'R'){ setView('reference'); }
+  else if(e.key === ' '){ togglePause(); e.preventDefault(); }
+});
+
+// ---------- buttons ----------
+const pauseBtn = document.getElementById('pause');
+function updatePauseBtn(){
+  pauseBtn.textContent = paused ? '▶' : '⏸';
+  pauseBtn.setAttribute('aria-pressed', String(paused));
+  pauseBtn.setAttribute('aria-label', paused ? 'Resume scene motion' : 'Pause scene motion');
+}
+function togglePause(){ paused = !paused; updatePauseBtn(); }
+pauseBtn.addEventListener('click', togglePause);
+
+function setView(name){
+  const v = VIEWS[name];
+  if(!v) return;
+  cam.target = [...v.target];
+  cam.theta = v.theta; cam.phi = v.phi; cam.r = v.r;
+  document.querySelectorAll('#views .segbtn').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.view === name)));
+}
+document.querySelectorAll('#views .segbtn').forEach(b =>
+  b.addEventListener('click', () => setView(b.dataset.view)));
+
+canvas.addEventListener('webglcontextlost', e => {
+  e.preventDefault();
+  document.getElementById('fail').style.display = 'flex';
+});
+</script>
+</body>
+</html>

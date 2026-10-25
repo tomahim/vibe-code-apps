@@ -1,0 +1,6 @@
+{
+  "title": "Golden Fjord",
+  "description": "A live mountain-lake diorama: calm reflective water, drifting ice, a cabin with warm windows, and a low golden sun over snow-capped peaks. One self-contained WebGL2 file, no libraries. Inspired by Kimi's North Reach diorama.",
+  "date": "2026-10-25",
+  "tags": ["landscape", "mountains", "sun", "fjord", "water", "reflections", "webgl2", "shaders", "3d", "diorama", "interactive", "full screen"]
+}
