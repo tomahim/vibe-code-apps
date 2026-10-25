@@ -32,6 +32,14 @@ const initialApps = [
     icon: "◇",
   },
   {
+    slug: "little-grains",
+    name: "Little Grains",
+    description: "A quiet corner for your little grains. The first members-only app: signing in will be required.",
+    category: "Members",
+    icon: "🌾",
+    action_label: "Log in to open",
+  },
+  {
     slug: "livetrail-scrap",
     name: "LiveTrail Scraper",
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",
