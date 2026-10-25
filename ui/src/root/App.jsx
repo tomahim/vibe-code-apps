@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Gallery from "../pages/Gallery.jsx";
+import Login from "../pages/Login.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
+import LittleGrains from "../apps/little-grains/LittleGrains.jsx";
 
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 
@@ -25,8 +27,16 @@ export default function App() {
     window.scrollTo(0, 0);
   }
 
+  if (path === "/login") {
+    return <Login />;
+  }
+
   if (path === "/artifacts" || path.startsWith("/artifacts/")) {
     return <Suspense fallback={<div className="gallery-page">Opening the archive…</div>}><Artifacts path={path} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/little-grains")) {
+    return <LittleGrains />;
   }
 
   if (path.startsWith("/apps/livetrail-scrap")) {

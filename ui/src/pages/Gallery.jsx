@@ -32,6 +32,14 @@ const initialApps = [
     icon: "◇",
   },
   {
+    slug: "little-grains",
+    name: "Little Grains",
+    description: "A quiet corner for your little grains. The first members-only app: signing in will be required.",
+    category: "Members",
+    icon: "🌾",
+    action_label: "Log in to open",
+  },
+  {
     slug: "livetrail-scrap",
     name: "LiveTrail Scraper",
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",
@@ -79,6 +87,7 @@ export default function Gallery({ onOpenApp }) {
           <span className="header-note">A small collection of useful tools</span>
           <a className="admin-link" href="/artifacts">Artifacts</a>
           <a className="admin-link" href="/admin/">Admin</a>
+          <a className="admin-link" href="/login">Log in</a>
         </div>
       </header>
 
