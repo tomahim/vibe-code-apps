@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
 import collectionArtwork from "../assets/genious-apps.png";
+import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
   {
@@ -34,10 +35,9 @@ const initialApps = [
   {
     slug: "little-grains",
     name: "Little Grains",
-    description: "A quiet corner for your little grains. The first members-only app: signing in will be required.",
-    category: "Members",
+    description: "Atomic learning: tiny lessons that add up, one little grain at a time.",
+    category: "Learn",
     icon: "🌾",
-    action_label: "Log in to open",
   },
   {
     slug: "livetrail-scrap",
@@ -87,7 +87,7 @@ export default function Gallery({ onOpenApp }) {
           <span className="header-note">A small collection of useful tools</span>
           <a className="admin-link" href="/artifacts">Artifacts</a>
           <a className="admin-link" href="/admin/">Admin</a>
-          <a className="admin-link" href="/login">Log in</a>
+          <AccountMenu />
         </div>
       </header>
 

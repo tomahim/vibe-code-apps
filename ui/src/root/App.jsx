@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Gallery from "../pages/Gallery.jsx";
 import Login from "../pages/Login.jsx";
+import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 import LittleGrains from "../apps/little-grains/LittleGrains.jsx";
 
@@ -29,6 +30,10 @@ export default function App() {
 
   if (path === "/login") {
     return <Login />;
+  }
+
+  if (path === "/profile") {
+    return <Profile />;
   }
 
   if (path === "/artifacts" || path.startsWith("/artifacts/")) {

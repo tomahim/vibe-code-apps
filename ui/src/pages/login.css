@@ -10,6 +10,7 @@
 .login-page .field-label { color: var(--muted); }
 .login-page .field input { border-color: var(--line); background: var(--paper); color: var(--ink); }
 .login-page .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #a8b0ff25; }
+.login-error { margin: 0; padding: 10px 12px; border: 1px solid #6e3a3a; border-radius: 8px; background: #3a2226; color: #ff9d9d; font-size: 13px; }
 .login-submit { width: 100%; min-height: 48px; margin-top: 4px; background: var(--green); color: var(--paper); font-size: 13px; }
 .login-submit:hover:not(:disabled) { background: var(--green-bright); }
 

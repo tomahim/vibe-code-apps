@@ -12,8 +12,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1100 }, { name: 
     test('filters immediately, ignores case and surrounding spaces, and clears', async ({ page }) => {
       const search = page.getByRole('searchbox', { name: 'Search apps' });
       const cards = page.locator('.app-card');
-      await expect(cards).toHaveCount(5);
-      await expect(page.getByRole('status')).toHaveText('5 apps to explore');
+      await expect(cards).toHaveCount(6);
+      await expect(page.getByRole('status')).toHaveText('6 apps to explore');
       await page.screenshot({ path: `test-results/gallery-${viewport.name}.png`, fullPage: true });
       // One real keystroke must filter without submitting or leaving the field.
       await search.pressSequentially('v');
@@ -25,7 +25,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1100 }, { name: 
       await expect(cards).toContainText('Rust learning path');
       await page.screenshot({ path: `test-results/gallery-${viewport.name}-filtered.png`, fullPage: true });
       await page.getByRole('button', { name: 'Clear search', exact: true }).click();
-      await expect(cards).toHaveCount(5);
+      await expect(cards).toHaveCount(6);
       await expect(search).toBeFocused();
       await expect(search).toHaveValue('');
       await expect(page.getByRole('button', { name: 'Clear search', exact: true })).toHaveCount(0);
@@ -36,7 +36,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1100 }, { name: 
       await page.screenshot({ path: `test-results/gallery-${viewport.name}-empty.png`, fullPage: true });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       await search.fill('   ');
-      await expect(cards).toHaveCount(5);
+      await expect(cards).toHaveCount(6);
     });
 
     test('matches category and description and keeps app navigation', async ({ page }) => {
@@ -55,13 +55,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 1100 }, { name: 
 test('search includes API-provided apps and works if the API fails', async ({ page }) => {
   await page.route('**/api/apps/', (route) => route.fulfill({ json: { apps: [{ slug: 'api-tool', name: 'API Tool', description: 'A remote tool', category: 'Utilities' }] } }));
   await page.goto('/');
-  await expect(page.locator('.app-card')).toHaveCount(6);
+  await expect(page.locator('.app-card')).toHaveCount(7);
   await page.getByRole('searchbox', { name: 'Search apps' }).fill('utilities');
   await expect(page.locator('.app-card')).toHaveCount(1);
   await expect(page.locator('.app-card')).toContainText('API Tool');
   await page.route('**/api/apps/', (route) => route.fulfill({ status: 500, body: '' }));
   await page.reload();
-  await expect(page.locator('.app-card')).toHaveCount(5);
+  await expect(page.locator('.app-card')).toHaveCount(6);
   await page.getByRole('searchbox', { name: 'Search apps' }).fill('rust');
   await expect(page.locator('.app-card')).toHaveCount(1);
 });
