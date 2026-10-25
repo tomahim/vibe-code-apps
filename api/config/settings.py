@@ -5,7 +5,17 @@ from .database import database_config
 from .media import build_storages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "local-development-only-change-me")
+# Local development only; production must set DJANGO_SECRET_KEY (see below).
+LOCAL_DEV_SECRET_KEY = "local-development-only-change-me"
+# Values that are public knowledge and therefore forgeable: the dev default and
+# the Terraform placeholder that lives in this repo (infra/terraform/main.tf).
+INSECURE_SECRET_KEYS = {LOCAL_DEV_SECRET_KEY, "managed-in-railway"}
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", LOCAL_DEV_SECRET_KEY)
+# Like DATABASE_URL (config/database.py), a real secret is required in production:
+# the JWT endpoints refuse to issue or verify tokens signed with the dev default.
+SECRET_KEY_REQUIRED = os.environ.get("DJANGO_REQUIRE_SECRET_KEY", "false").lower() in {"true", "1"} or bool(
+    os.environ.get("RAILWAY_ENVIRONMENT_ID")
+)
 DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() == "true"
 ALLOWED_HOSTS = [host for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",") if host]
 
@@ -18,6 +28,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.admin_ui",
+    "apps.accounts",
+    "apps.little_grains",
     "apps.livetrail_scrap",
     "apps.recipes",
     "apps.rust_learning_path",
@@ -87,6 +99,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Empty means recipe writes are disabled; separate from the Telegram bot token.
 BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
+
+# JWT access tokens (see apps/accounts): signed with SECRET_KEY, default 7-day expiry.
+AUTH_JWT_TTL_SECONDS = int(os.environ.get("AUTH_JWT_TTL_SECONDS", str(7 * 24 * 3600)))
 
 # App Ideas star ratings: the api commits `rating` into the idea's md frontmatter.
 # Fine-grained GitHub token, contents:write on this one repo. Unset disables rating (503).

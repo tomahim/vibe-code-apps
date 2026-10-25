@@ -1,10 +1,32 @@
+import { useState } from "react";
 import { BRAND_BADGE, BRAND_NAME } from "../config/brand.js";
+import { logIn } from "../auth.js";
 import collectionArtwork from "../assets/genious-apps.png";
 import "./login.css";
 
-// Frontend-only login page. There is no backend session yet, so submitting
-// the form intentionally does nothing: no request, no storage, no state.
+// Email/password login against the api. A successful sign-in stores a JWT and
+// lands on Little Grains, the first app that requires an account.
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [pending, setPending] = useState(false);
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    setError("");
+    setPending(true);
+    try {
+      await logIn(email, password);
+      window.history.pushState({}, "", "/apps/little-grains");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      window.scrollTo(0, 0);
+    } catch (err) {
+      setError(err.message || "Could not sign in. Try again.");
+      setPending(false);
+    }
+  }
+
   return (
     <main className="login-page">
       <header className="site-header">
@@ -26,10 +48,7 @@ export default function Login() {
         <p className="eyebrow">MEMBERS AREA</p>
         <h1 id="login-title">Welcome back.</h1>
         <p className="login-subtitle">Sign in to your {BRAND_NAME} account.</p>
-        <form
-          className="login-form"
-          onSubmit={(event) => event.preventDefault()}
-        >
+        <form className="login-form" onSubmit={onSubmit}>
           <label className="field">
             <span className="field-label">Email</span>
             <input
@@ -37,6 +56,8 @@ export default function Login() {
               name="email"
               autoComplete="username"
               placeholder="you@example.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               required
             />
           </label>
@@ -47,11 +68,16 @@ export default function Login() {
               name="password"
               autoComplete="current-password"
               placeholder="••••••••"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               required
             />
           </label>
-          <button className="primary-button login-submit" type="submit">
-            Log in
+          {error && (
+            <p className="login-error" role="alert">{error}</p>
+          )}
+          <button className="primary-button login-submit" type="submit" disabled={pending}>
+            {pending ? "Signing in…" : "Log in"}
           </button>
         </form>
       </section>
