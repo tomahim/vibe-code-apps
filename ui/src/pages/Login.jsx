@@ -54,10 +54,6 @@ export default function Login() {
             Log in
           </button>
         </form>
-        <p className="login-note">
-          Accounts aren’t enabled yet. Signing in does nothing for now, and
-          nothing you type here leaves this page.
-        </p>
       </section>
     </main>
   );

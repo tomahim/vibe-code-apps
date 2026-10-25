@@ -12,7 +12,6 @@
 .login-page .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #a8b0ff25; }
 .login-submit { width: 100%; min-height: 48px; margin-top: 4px; background: var(--green); color: var(--paper); font-size: 13px; }
 .login-submit:hover:not(:disabled) { background: var(--green-bright); }
-.login-note { margin: 22px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 
 @media (max-width: 760px) {
   .login-page { padding: 0 18px 50px; }
