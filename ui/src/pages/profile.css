@@ -1,0 +1,14 @@
+/* The profile page shares the collection theme (see collection-theme.css). */
+.profile-page { max-width: 1120px; min-height: 100vh; margin: 0 auto; padding: 0 32px 70px; }
+.profile-card { max-width: 400px; margin: 72px auto 0; padding: 40px 36px 34px; border: 1px solid var(--line); border-radius: 12px; background: var(--collection-wash, var(--paper)); }
+.profile-card h1 { margin: 0; font-family: system-ui, sans-serif; font-size: clamp(28px, 4vw, 36px); font-weight: 650; line-height: 1.1; letter-spacing: -.04em; }
+.profile-card .eyebrow { margin: 0 0 10px; }
+.profile-fields { display: flex; flex-direction: column; gap: 16px; margin: 28px 0 0; }
+.profile-field { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.profile-field dt { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+.profile-field dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+
+@media (max-width: 760px) {
+  .profile-page { padding: 0 18px 50px; }
+  .profile-card { margin-top: 40px; padding: 32px 22px 26px; }
+}

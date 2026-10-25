@@ -1,0 +1,18 @@
+/* Little Grains shares the collection theme (see collection-theme.css). */
+.little-grains-page { max-width: 1120px; min-height: 100vh; margin: 0 auto; padding: 0 32px 70px; }
+.grains-intro { padding: 56px 0 8px; }
+.grains-intro h1 { margin: 8px 0 0; font-family: system-ui, sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight: 650; letter-spacing: -.04em; line-height: 1.1; }
+.grains-subtitle { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+.grains-status, .grains-error { margin: 32px 0 0; color: var(--muted); font-size: 14px; }
+.grains-error { color: #ff9d9d; }
+.grain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 32px; }
+.grain-card { display: flex; flex-direction: column; gap: 14px; padding: 20px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--collection-wash); transition: transform .15s ease, border-color .15s ease; }
+.grain-card:hover { transform: translateY(-2px); border-color: #888bce; }
+.grain-card-icon { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: var(--paper); color: var(--green); font-size: 18px; }
+.grain-card-title { margin: 0; font-family: system-ui, sans-serif; font-size: 15px; font-weight: 600; line-height: 1.45; }
+
+@media (max-width: 760px) {
+  .little-grains-page { padding: 0 18px 50px; }
+  .grains-intro { padding-top: 40px; }
+  .grain-grid { grid-template-columns: 1fr; }
+}
