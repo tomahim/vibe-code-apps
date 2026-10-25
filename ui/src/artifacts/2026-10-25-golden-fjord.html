@@ -519,12 +519,18 @@ function camVectors(){
   const cp = Math.cos(cam.phi), sp = Math.sin(cam.phi);
   const aspect = (canvas.clientWidth || 1)/(canvas.clientHeight || 1);
   const rEff = cam.r * Math.min(1.9, Math.max(1, 1.5/aspect));
+  // portrait: swing the aim toward the sun so the disc stays in the narrow frame
+  const portrait = Math.max(0, Math.min(1, (1.15 - aspect)/0.75));
   const pos = [
     cam.target[0] + rEff*Math.sin(cam.theta)*cp,
     cam.target[1] + rEff*sp,
     cam.target[2] + rEff*Math.cos(cam.theta)*cp,
   ];
-  const fwd = [cam.target[0]-pos[0], cam.target[1]-pos[1], cam.target[2]-pos[2]];
+  let fx = cam.target[0]-pos[0], fy = cam.target[1]-pos[1], fz = cam.target[2]-pos[2];
+  const rl0 = Math.hypot(fx, fz) || 1;
+  const aim = 6.0*portrait;
+  const aimX = cam.target[0] + (-fz/rl0)*aim, aimZ = cam.target[2] + (fx/rl0)*aim;
+  const fwd = [aimX-pos[0], fy, aimZ-pos[2]];
   const fl = Math.hypot(...fwd);
   const f = fwd.map(c => c/fl);
   const r = [f[2], 0, -f[0]]; // cross(fwd, up=(0,1,0)) -> (-f.z?) normalized below
