@@ -5,6 +5,8 @@ import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 import LittleGrains from "../apps/little-grains/LittleGrains.jsx";
 
+const News = lazy(() => import("../apps/news/News.jsx"));
+
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 
 const RustLearningPath = lazy(() => import("../apps/rust-learning-path/RustLearningPath.jsx"));
@@ -38,6 +40,10 @@ export default function App() {
 
   if (path === "/artifacts" || path.startsWith("/artifacts/")) {
     return <Suspense fallback={<div className="gallery-page">Opening the archive…</div>}><Artifacts path={path} /></Suspense>;
+  }
+
+  if (path === "/apps/news") {
+    return <Suspense fallback={<div>Opening the briefing...</div>}><News onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/little-grains")) {

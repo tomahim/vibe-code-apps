@@ -122,3 +122,11 @@ Deploy the API and UI changes together once when introducing this behavior. The
 API needs its existing `GITHUB_IDEAS_TOKEN`, `GITHUB_IDEAS_REPO` and
 `GITHUB_IDEAS_BRANCH`; no new service or database is needed. Each page open adds one
 GitHub read, so showing current ratings depends on API/GitHub availability.
+
+## Notion news reader
+
+`/apps/news` reads the dedicated Notion daily-news database, with Inbox/Archived
+lists, archive/restore and newest-first pagination. Content **and archive state**
+stay in Notion. It requires an explicitly allowed signed-in account and a dedicated
+server-side Notion connection with Read content + Update content, never a browser
+token. See [setup, privacy and verification](docs/notion-news-reader.md).

@@ -110,3 +110,10 @@ GITHUB_IDEAS_REPO = os.environ.get("GITHUB_IDEAS_REPO", "tomahim/vibe-code-apps"
 GITHUB_IDEAS_BRANCH = os.environ.get("GITHUB_IDEAS_BRANCH", "master")
 # Optional extra guard: require a logged-in Django staff session to rate.
 IDEAS_RATE_REQUIRE_STAFF = os.environ.get("IDEAS_RATE_REQUIRE_STAFF", "false").lower() == "true"
+
+# Personal Notion news reader: backend-only, narrow archive-checkbox writes. Fail closed.
+NOTION_NEWS_TOKEN = os.environ.get("NOTION_NEWS_TOKEN", "")
+NOTION_NEWS_DATA_SOURCE_ID = os.environ.get("NOTION_NEWS_DATA_SOURCE_ID", "")
+NOTION_NEWS_ALLOWED_USER_IDS = {
+    value.strip() for value in os.environ.get("NOTION_NEWS_ALLOWED_USER_IDS", "").split(",") if value.strip()
+}
