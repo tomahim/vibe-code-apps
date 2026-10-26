@@ -4,6 +4,7 @@ tagline: Your Household, Formally Recorded - Mock-Official Minutes of the Meetin
 pitch: Turn everyday domestic events into deadpan formal meeting minutes - motions, votes, action items - kept as a bound archive of your household's secret history.
 domains: [WRITE, MEDIA]
 created: 2026-10-26T06:02:31Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
