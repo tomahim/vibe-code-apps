@@ -4,6 +4,7 @@ tagline: A Scavenger Hunt That Turns the Sounds Around You Into Instruments
 pitch: Daily safari cards send you hunting for real-world sounds - a door creak, rain on glass, a kettle - and each recording comes back auto-chopped into a playable sampler instrument for your collection.
 domains: [MEDIA, GAME, LEARN]
 created: 2026-10-24T03:02:03Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
