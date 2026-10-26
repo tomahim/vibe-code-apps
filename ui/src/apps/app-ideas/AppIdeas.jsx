@@ -26,6 +26,21 @@ const VIEW_EMPTY = {
 const RATING_FOR_DIRECTION = { up: 3, down: 1, left: 2 };
 const KEY_DIRECTIONS = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" };
 const SWIPE_THRESHOLD = 60;
+// Match app-ideas.css's mobile layout. A manual choice wins until this page closes.
+const MOBILE_INBOX_QUERY = "(max-width: 700px)";
+
+function useInboxMode() {
+  const [mobile, setMobile] = useState(() => window.matchMedia(MOBILE_INBOX_QUERY).matches);
+  const [manualMode, setManualMode] = useState(null);
+  useEffect(() => {
+    const query = window.matchMedia(MOBILE_INBOX_QUERY);
+    const update = () => setMobile(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return [manualMode ?? (mobile ? "swipe" : "list"), setManualMode];
+}
 
 function directionFor(dx, dy) {
   if (Math.max(Math.abs(dx), Math.abs(dy)) < SWIPE_THRESHOLD) return null;
@@ -196,7 +211,7 @@ export default function AppIdeas({ onHome }) {
   const [activeDomains, setActiveDomains] = useState([]);
   const [selected, setSelected] = useState(null);
   const [view, setView] = useState("inbox");
-  const [inboxMode, setInboxMode] = useState("swipe");
+  const [inboxMode, setInboxMode] = useInboxMode();
   // Current GitHub ratings, then optimistic page-local updates. No browser storage.
   const [votes, setVotes] = useState({});
   const [pending, setPending] = useState({});
