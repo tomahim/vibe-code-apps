@@ -59,11 +59,12 @@ def normalize(page):
         "why_it_matters": value("Why it matters"),
         # Preserve provenance verbatim. Do not infer a confirmed badge from prose.
         "archived": props.get("Archived", {}).get("checkbox", False),
+        "category": value("Category") or "News",
         "claim_status": value("Claim status") or "Verification status not provided",
     }
 
 
-def read_news(cursor=None, archived=False, topic="", query="", undated=False):
+def read_news(cursor=None, archived=False, topic="", query="", undated=False, category="News"):
     try:
         source = str(uuid.UUID(settings.NOTION_NEWS_DATA_SOURCE_ID))
     except (ValueError, AttributeError):
@@ -72,6 +73,8 @@ def read_news(cursor=None, archived=False, topic="", query="", undated=False):
         raise NewsUnavailable("News is not configured on the server.")
     filters = [{"property": "Archived", "checkbox": {"equals": archived}}]
     filters.append({"property": "Published", "date": {"is_empty" if undated else "is_not_empty": True}})
+    if category:
+        filters.append({"property": "Category", "select": {"equals": category}})
     if topic:
         filters.append({"property": "Topics", "multi_select": {"contains": topic}})
     if query:
@@ -117,7 +120,7 @@ def read_news(cursor=None, archived=False, topic="", query="", undated=False):
     return result
 
 
-def set_archived(page_id, archived):
+def set_property(page_id, name, value):
     """Check membership before a narrow update; never trash the Notion page."""
     if not settings.NOTION_NEWS_TOKEN or not settings.NOTION_NEWS_DATA_SOURCE_ID:
         raise NewsUnavailable("News is not configured on the server.")
@@ -130,8 +133,23 @@ def set_archived(page_id, archived):
         parent = response.json().get("parent", {})
         if parent.get("type") != "data_source_id" or uuid.UUID(parent.get("data_source_id", "")) != uuid.UUID(settings.NOTION_NEWS_DATA_SOURCE_ID):
             raise NewsUnavailable("This record is not in the news data source.")
-        response = requests.patch(page_url, headers=headers, json={"properties": {"Archived": {"checkbox": archived}}}, timeout=(3, 12), allow_redirects=False)
-        if response.status_code != 200 or response.json().get("properties", {}).get("Archived", {}).get("checkbox") is not archived:
-            raise NewsUnavailable("Could not save archive state. Check the connection has Update content permission.")
+        response = requests.patch(page_url, headers=headers, json={"properties": {name: value}}, timeout=(3, 12), allow_redirects=False)
+        if response.status_code != 200:
+            raise NewsUnavailable("Could not save reading state. Check Update content permission.")
+        saved = response.json().get("properties", {}).get(name, {})
+        matches = ((saved.get("select") or {}).get("name") == value["select"]["name"]
+                   if name == "Category" else saved.get("checkbox") is value["checkbox"])
+        if not matches:
+            raise NewsUnavailable("Notion did not confirm the saved state. Refresh before retrying.")
     except (requests.RequestException, ValueError, TypeError, AttributeError):
-        raise NewsUnavailable("Could not save archive state in Notion. Refresh to check before retrying.") from None
+        raise NewsUnavailable("Could not save reading state in Notion. Refresh to check before retrying.") from None
+
+
+def set_archived(page_id, archived):
+    set_property(page_id, "Archived", {"checkbox": archived})
+
+
+def set_category(page_id, category):
+    if category not in {"Inbox", "News", "Favorite", "Inspiration"}:
+        raise NewsUnavailable("Unknown category.")
+    set_property(page_id, "Category", {"select": {"name": category}})
