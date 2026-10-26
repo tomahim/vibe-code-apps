@@ -32,13 +32,19 @@ resource "railway_project" "genious_apps" {
 }
 
 resource "railway_service" "api" {
-  name       = "api"
-  project_id = railway_project.genious_apps.id
+  name                       = "api"
+  project_id                 = railway_project.genious_apps.id
+  healthcheck_path           = "/health/"
+  restart_policy_max_retries = 3
+  serverless                 = true
 }
 
 resource "railway_service" "ui" {
-  name       = "ui"
-  project_id = railway_project.genious_apps.id
+  name                       = "ui"
+  project_id                 = railway_project.genious_apps.id
+  healthcheck_path           = "/health/"
+  restart_policy_max_retries = 3
+  serverless                 = true
 }
 
 # Issue #26: Telegram long-polling worker. It uses the same private network as
