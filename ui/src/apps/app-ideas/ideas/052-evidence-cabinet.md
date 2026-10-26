@@ -5,7 +5,7 @@ pitch: Rebuild a historical claim by sorting real sources into the argument they
 domains: [HIST, LEARN, GAME]
 created: 2026-10-20T07:57:29Z
 issue: 52
-rating: 3
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
