@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.test import TestCase, override_settings
 
 from apps.accounts.tokens import issue_token
-from .notion import NewsUnavailable, normalize, read_news, safe_url, set_archived
+from .notion import NewsUnavailable, normalize, read_news, safe_url, set_archived, set_category
 
 SOURCE = "c6ff1ba1-556e-473e-bdae-25df05e4c383"
 PAGE = "aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa"
@@ -48,8 +48,8 @@ class AdapterTests(TestCase):
         self.assertEqual(post.call_args.kwargs["json"]["start_cursor"], "next")
         filters = post.call_args.kwargs["json"]["filter"]["and"]
         self.assertTrue(filters[0]["checkbox"]["equals"])
-        self.assertEqual(filters[2], {"property": "Topics", "multi_select": {"contains": "Science"}})
-        self.assertEqual(filters[3]["or"][0], {"property": "Title", "title": {"contains": "particle"}})
+        self.assertEqual(filters[3], {"property": "Topics", "multi_select": {"contains": "Science"}})
+        self.assertEqual(filters[4]["or"][0], {"property": "Title", "title": {"contains": "particle"}})
 
     @patch("apps.news.notion.requests.patch")
     @patch("apps.news.notion.requests.get")
@@ -89,6 +89,26 @@ class AdapterTests(TestCase):
             set_archived(PAGE, True)
         self.assertEqual(patch_page.call_count, 1)
 
+    @patch("apps.news.notion.requests.patch")
+    @patch("apps.news.notion.requests.get")
+    def test_category_only_write_keeps_archive_independent(self, get, update):
+        get.return_value = Mock(status_code=200, json=lambda: {"parent": {"type": "data_source_id", "data_source_id": SOURCE}})
+        update.return_value = Mock(status_code=200, json=lambda: {"properties": {"Category": {"select": {"id": "x", "name": "Favorite", "color": "yellow"}}, "Archived": {"checkbox": True}}})
+        set_category(PAGE, "Favorite")
+        self.assertEqual(update.call_args.kwargs["json"], {"properties": {"Category": {"select": {"name": "Favorite"}}}})
+        with self.assertRaises(NewsUnavailable):
+            set_category(PAGE, "Archive")
+        self.assertEqual(update.call_count, 1)
+
+    @patch("apps.news.notion.requests.post")
+    def test_category_filters_do_not_mix_lists_and_archive_spans_all(self, post):
+        post.return_value = Mock(status_code=200, json=lambda: {"results": [], "has_more": False})
+        for category in ("Inbox", "News", "Favorite", "Inspiration"):
+            read_news(category=category)
+            self.assertIn({"property": "Category", "select": {"equals": category}}, post.call_args.kwargs["json"]["filter"]["and"])
+        read_news(archived=True, category="")
+        self.assertFalse(any(x.get("property") == "Category" for x in post.call_args.kwargs["json"]["filter"]["and"]))
+
 
 @override_settings(ROOT_URLCONF="apps.news.urls", NOTION_NEWS_DATA_SOURCE_ID=SOURCE)
 class ViewTests(TestCase):
@@ -113,7 +133,7 @@ class ViewTests(TestCase):
         first = self.client.get("/", **self.auth).json()["next_cursor"]
         self.assertNotEqual(first, "opaque")
         self.assertEqual(self.client.get("/", {"cursor": first}, **self.auth).status_code, 200)
-        read.assert_called_with("opaque", False, "", "", False)
+        read.assert_called_with("opaque", False, "", "", False, "News")
         self.assertEqual(self.client.get("/", {"cursor": first, "view": "archive"}, **self.auth).status_code, 400)
         self.assertEqual(self.client.get("/", {"cursor": "forged"}, **self.auth).status_code, 400)
 
@@ -127,7 +147,7 @@ class ViewTests(TestCase):
         first = self.client.get("/", **self.auth).json()
         self.assertIsNotNone(first["next_cursor"])
         second = self.client.get("/", {"cursor": first["next_cursor"]}, **self.auth).json()
-        read.assert_called_with(None, False, "", "", True)
+        read.assert_called_with(None, False, "", "", True, "News")
         self.assertIsNone(second["next_cursor"])
 
     @patch("apps.news.views.set_archived")
@@ -143,3 +163,13 @@ class ViewTests(TestCase):
     @patch("apps.news.views.set_archived", side_effect=NewsUnavailable("Check setup."))
     def test_upstream_update_failure_not_reported_saved(self, update):
         self.assertEqual(self.client.post(f"/{PAGE}/archive/", {"archived": False}, content_type="application/json", **self.auth).status_code, 503)
+
+    @patch("apps.news.views.set_category")
+    def test_category_endpoint_validation_and_origin(self, update):
+        url = f"/{PAGE}/category/"
+        self.assertEqual(self.client.post(url, {"category": "Favorite"}, content_type="application/json").status_code, 401)
+        self.assertEqual(self.client.post(url, {"category": "Favorite"}, content_type="application/json", HTTP_ORIGIN="https://other.test", **self.auth).status_code, 403)
+        for value in ("Archive", "other", True):
+            self.assertEqual(self.client.post(url, {"category": value}, content_type="application/json", **self.auth).status_code, 400)
+        self.assertEqual(self.client.post(url, {"category": "Favorite"}, content_type="application/json", **self.auth).status_code, 200)
+        update.assert_called_once_with(uuid.UUID(PAGE), "Favorite")

@@ -4,7 +4,7 @@ const items = Array.from({ length: 5 }, (_, index) => ({
   title: ['An open model built for the next generation of coding tools', 'A safer boundary for autonomous software', 'A small telescope with a much wider view', 'Open-source tools find a new audience', 'The science of holding a single particle'][index],
   source: ['Example Research Lab', 'Example Security Journal', 'Example Science Review', 'Example Developer News', 'Example Physics Journal'][index],
   author: index === 2 ? 'Unknown author' : 'Example author', published: index === 2 ? null : '2026-10-25', added: '2026-10-26',
-  topics: index % 2 ? ['Open source', 'AI'] : ['Science'],
+  category: 'Inbox', topics: index % 2 ? ['Open source', 'AI'] : ['Science'],
   url: `https://example.com/story/${index}`, notion_url: `https://example.com/record/${index}`,
   why_it_matters: 'Synthetic preview story. A thoughtful explanation of what changed and why it is worth your attention, with a link to the original source.',
   claim_status: 'Synthetic fixture only. Researcher-reported findings; independent confirmation is not yet available.',
@@ -12,16 +12,24 @@ const items = Array.from({ length: 5 }, (_, index) => ({
 
 async function mockFeed(page) {
   const archived = new Set();
+  const categories = new Map();
   await page.route('**/api/apps/news/**', async route => {
     const request = route.request(), url = new URL(request.url());
     if (request.method() === 'POST') {
       const id = url.pathname.split('/')[4];
+      if (url.pathname.endsWith('/category/')) {
+        categories.set(id, request.postDataJSON().category);
+        return route.fulfill({ json: { category: request.postDataJSON().category } });
+      }
       request.postDataJSON().archived ? archived.add(id) : archived.delete(id);
       return route.fulfill({ json: { archived: request.postDataJSON().archived } });
     }
     const archive = url.searchParams.get('view') === 'archive';
     const next = url.searchParams.get('cursor');
-    let visible = next ? [{ ...items[0], id: 'older', title: 'An older saved story', added: '2026-10-24' }] : items.filter(item => archived.has(item.id) === archive);
+    let visible = next ? [{ ...items[0], id: 'older', title: 'An older saved story', category: url.searchParams.get('view') === 'archive' ? 'Inbox' : url.searchParams.get('view').replace(/^./, c=>c.toUpperCase()), added: '2026-10-24' }] : items.filter(item => archived.has(item.id) === archive);
+    const category = url.searchParams.get('view');
+    visible = visible.map(item => ({ ...item, category: categories.get(item.id) || item.category }));
+    if (!archive) visible = visible.filter(item => item.category.toLowerCase() === category);
     if (url.searchParams.get("topic")) visible = visible.filter(item => item.topics.includes(url.searchParams.get("topic")));
     return route.fulfill({ json: { items: visible, next_cursor: next ? null : 'synthetic-next', fetched_at: '2026-10-26T07:00:00Z' } });
   });
@@ -30,19 +38,19 @@ async function mockFeed(page) {
 test('inbox, filters, archive/unarchive, both list pagination and safe links', async ({ page }) => {
   await mockFeed(page);
   await page.goto('/apps/news');
-  await expect(page.getByRole('heading', { name: 'Daily Five.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Link Keeper.' })).toBeVisible();
   await expect(page.locator('.news-story')).toHaveCount(5);
   await page.getByRole('button', { name: 'Science', exact: true }).click();
   await expect(page.locator('.news-story')).toHaveCount(3);
   await page.getByRole('button', { name: 'All topics', exact: true }).click();
   await page.getByRole('button', { name: '✓ Archive', exact: true }).first().click();
   await expect(page.locator('.news-story')).toHaveCount(4);
-  await page.getByRole('button', { name: 'Archived', exact: true }).click();
+  await page.getByRole('button', { name: 'Archive', exact: true }).click();
   await expect(page.locator('.news-story')).toHaveCount(1);
   await page.getByRole('button', { name: 'Next →', exact: true }).click();
   await expect(page.getByText('Page 2 · Newest first')).toBeVisible();
   await page.getByRole('button', { name: '← Previous', exact: true }).click();
-  await page.getByRole('button', { name: '↩ Move to inbox', exact: true }).click();
+  await page.getByRole('button', { name: '↩ Restore category', exact: true }).click();
   await expect(page.locator('.news-story')).toHaveCount(0);
   await page.getByRole('button', { name: 'Inbox', exact: true }).click();
   await page.getByRole('button', { name: 'Next →', exact: true }).click();
@@ -69,3 +77,25 @@ test('private and setup states, keyboard and mobile layout', async ({ page }) =>
   await expect(page.getByRole('alert')).toContainText('News is not configured on the server.');
   await expect(page.locator('.news-story')).toHaveCount(0);
 });
+
+ test('change category in the app, empty inspiration and independent archive', async ({ page }) => {
+  await mockFeed(page);
+  await page.goto('/apps/news');
+  await expect(page.locator('.news-story')).toHaveCount(5);
+  await page.getByRole('combobox').first().selectOption('Favorite');
+  await expect(page.locator('.news-story')).toHaveCount(4);
+  await page.getByRole('button', { name: 'Favorite', exact: true }).click();
+  await expect(page.locator('.news-story')).toHaveCount(1);
+  await page.getByRole('button', { name: '✓ Archive', exact: true }).click();
+  await expect(page.locator('.news-story')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Archive', exact: true }).click();
+  await expect(page.getByRole('combobox')).toHaveValue('Favorite');
+  await page.getByRole('combobox').selectOption('Inspiration');
+  await expect(page.getByRole('combobox')).toHaveValue('Inspiration');
+  await page.getByRole('button', { name: '↩ Restore category', exact: true }).click();
+  await expect(page.locator('.news-story')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Inspiration', exact: true }).click();
+  await expect(page.locator('.news-story')).toHaveCount(1);
+  await page.getByRole('button', { name: 'News', exact: true }).click();
+  await expect(page.locator('.news-story')).toHaveCount(0);
+ });
