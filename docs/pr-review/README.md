@@ -6,7 +6,7 @@ Two Claude Code skills and a fixed offline template that turn a pull request int
 - `/open-pr <PR>`: opens the report for a PR, regenerating HTML locally from validated JSON with the trusted template. See `.claude/skills/open-pr/SKILL.md`.
 - Template: `.claude/assets/pr-review-template.html` (template 0.2). Dark IDE-style by default, inline CSS/JS, no network.
 - Helper: `tools/report.py` (`build`, `open`, `publish`, `fetch`, validation).
-- Example data: `docs/pr-review/examples/pr-93.json` (actual PR 93, 31 files).
+- Example data: `docs/pr-review/examples/example.json` (small synthetic pull request). The skills above are self-contained and cite no external documents.
 
 ## Report layout
 
@@ -15,14 +15,14 @@ A separate PR description tab holds the verbatim PR body and PR-wide context. Ea
 ## Try it
 
 ```
-python3 tools/report.py build docs/pr-review/examples/pr-93.json --output /tmp/review-example
-python3 tools/report.py open /tmp/review-example/pr-93-<sha>.html
+python3 tools/report.py build docs/pr-review/examples/example.json --output /tmp/review-example
+python3 tools/report.py open /tmp/review-example/pr-1-<sha>.html
 
 # publish/fetch against any git remote (use a throwaway bare repo to try):
 git init --bare /tmp/remote.git
-python3 tools/report.py publish docs/pr-review/examples/pr-93.json --remote /tmp/remote.git          # dry run
-python3 tools/report.py publish docs/pr-review/examples/pr-93.json --remote /tmp/remote.git --yes
-python3 tools/report.py fetch 93 --remote /tmp/remote.git --current-head <sha> --output /tmp/fetched
+python3 tools/report.py publish docs/pr-review/examples/example.json --remote /tmp/remote.git          # dry run
+python3 tools/report.py publish docs/pr-review/examples/example.json --remote /tmp/remote.git --yes
+python3 tools/report.py fetch 1 --remote /tmp/remote.git --current-head <sha> --output /tmp/fetched
 ```
 
 ## What is automated and what is not
