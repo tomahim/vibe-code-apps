@@ -128,7 +128,7 @@ export default function News({ onHome }) {
           <button onClick={() => changePage(pageIndex + 1)} disabled={pending || !cursor}>Next →</button>
         </nav>
         <p className="news-page-note">Up to 20 stories per page. Search and topic filters cover this entire list. {cursor ? "More stories are available on the next page." : "You have reached the end of this list."}</p>
-        <footer className="news-footer"><span>Five stories. Room to think.</span><span>{fetched ? `Read from Notion ${new Intl.DateTimeFormat("en-GB", { timeStyle: "short", timeZone: "Europe/Paris" }).format(new Date(fetched))} Paris time · cache up to 2 min` : "Notion is the source of truth."}</span></footer>
+        <footer className="news-footer"><span>Five stories. Room to think.</span><span>{fetched ? `Read from Notion ${new Intl.DateTimeFormat("en-GB", { timeStyle: "short", timeZone: "Europe/Paris" }).format(new Date(fetched))} Paris time` : "Notion is the source of truth."}</span></footer>
       </div>
     </main>
   );

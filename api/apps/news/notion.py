@@ -1,11 +1,9 @@
-"""Bounded Notion reader and narrow archive-checkbox writer. No disk persistence."""
-import hashlib
+"""Bounded Notion reader and narrow archive-checkbox writer. No disk persistence and no cache (gunicorn runs several workers with per-process memory, so an archive could not invalidate every worker)."""
 import uuid
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import requests
 from django.conf import settings
-from django.core.cache import cache
 from django.utils import timezone
 
 
@@ -72,12 +70,6 @@ def read_news(cursor=None, archived=False, topic="", query="", undated=False):
         raise NewsUnavailable("News is not configured on the server.") from None
     if not settings.NOTION_NEWS_TOKEN:
         raise NewsUnavailable("News is not configured on the server.")
-    generation = cache.get("notion-news-generation", "initial")
-    identity = hashlib.sha256(f"{source}:{settings.NOTION_NEWS_TOKEN}:{cursor}:{archived}:{topic}:{query}:{undated}:{generation}".encode()).hexdigest()
-    key = f"notion-news:{identity}"
-    saved = cache.get(key)
-    if saved is not None:
-        return saved
     filters = [{"property": "Archived", "checkbox": {"equals": archived}}]
     filters.append({"property": "Published", "date": {"is_empty" if undated else "is_not_empty": True}})
     if topic:
@@ -122,7 +114,6 @@ def read_news(cursor=None, archived=False, topic="", query="", undated=False):
     except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError):
         raise NewsUnavailable("Could not read the Notion news feed. Try again later.") from None
     result = {"items": items, "next_cursor": next_cursor, "fetched_at": timezone.now().isoformat()}
-    cache.set(key, result, timeout=120)
     return result
 
 
@@ -144,5 +135,3 @@ def set_archived(page_id, archived):
             raise NewsUnavailable("Could not save archive state. Check the connection has Update content permission.")
     except (requests.RequestException, ValueError, TypeError, AttributeError):
         raise NewsUnavailable("Could not save archive state in Notion. Refresh to check before retrying.") from None
-    # Invalidate only this feed's read cache through a version bump.
-    cache.set("notion-news-generation", uuid.uuid4().hex, timeout=None)
