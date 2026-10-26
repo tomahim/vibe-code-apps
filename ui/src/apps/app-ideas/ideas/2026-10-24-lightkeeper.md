@@ -4,6 +4,7 @@ tagline: One Winter, One Lighthouse, One Voice on the Radio - and Something Wron
 pitch: A first-person narrative game about a relief lighthouse keeper alone for the winter, where the mystery unfolds through the logbook, the radio, and the sea.
 domains: [GAME, MEDIA, HIST]
 created: 2026-10-24T03:16:22Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
