@@ -42,6 +42,11 @@ Inspect desktop and phone rendering, dedicated PR description tab, compact behav
 
 Preview exact report and its audience before pushing. A repo branch is visible to everyone who can read that repo; public repositories expose reports publicly. Confirm the destination repository and `reports/pr-reviews` branch. Recheck the PR head: if it moved, label the report historical and offer regeneration, never silently publish it as current.
 
-Use an isolated temporary worktree. Fetch an existing reports branch normally. If absent, create a genuinely orphan root in the temporary worktree with no project tree or parent history (not `git branch reports/pr-reviews` from HEAD). Keep only root-level `pr-<number>-<full-head-sha>.html`, its JSON sidecar and an index mapping the exact PR/head to those files plus template version/hash. Write the initial root using `git switch --orphan` in the disposable worktree, or an equivalent empty-tree commit workflow. Do not run the comment's example verbatim: it creates a normal history branch.
+Publish with the helper, which does the git work in a scratch clone and never touches the user's checkout or working branch:
 
-Use normal fast-forward push only, never force. If another writer wins, fetch, merge only non-conflicting new report/index entries and retry once, otherwise stop. Never overwrite an immutable report for the same PR/head. Always clean up only the worktree this run created. Do not push source changes, merge PRs, deploy, post GitHub comments or open an existing remote HTML report automatically.
+1. Dry run (prints what would be pushed, pushes nothing): `python3 tools/report.py publish <data.json> --remote <remote name or URL> --current-head <full head SHA from gh pr view>`.
+2. After the user confirms the repository, branch and audience, repeat with `--yes`. If the head moved, the helper refuses; regenerate, or pass `--historical` only if the user wants a labeled historical report.
+
+The helper creates a genuine orphan `reports/pr-reviews` branch when absent (no project tree or history), otherwise fetches it. It writes root-level `pr-<number>-<full-head-sha>.html`, the JSON sidecar and `index.json` (PR/head to files, template version and hash), commits, and pushes normally (never force). If another writer wins, it refetches, re-adds its entry and retries once, then stops. An existing report for the same PR/head is never overwritten; identical content is a no-op.
+
+Do not push source changes, merge PRs, deploy, post GitHub comments or open an existing remote HTML report automatically.

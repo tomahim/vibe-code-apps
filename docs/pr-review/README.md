@@ -5,7 +5,7 @@ Two Claude Code skills and a fixed offline template that turn a pull request int
 - `/generate-pr-report <PR>`: builds validated JSON (schema v2) from the live PR, then renders it with the fixed template. See `.claude/skills/generate-pr-report/SKILL.md`.
 - `/open-pr <PR>`: opens the report for a PR, regenerating HTML locally from validated JSON with the trusted template. See `.claude/skills/open-pr/SKILL.md`.
 - Template: `.claude/assets/pr-review-template.html` (template 0.2). Dark IDE-style by default, inline CSS/JS, no network.
-- Helper: `tools/report.py` (`build`, `open`, validation).
+- Helper: `tools/report.py` (`build`, `open`, `publish`, `fetch`, validation).
 - Example data: `docs/pr-review/examples/pr-93.json` (actual PR 93, 31 files).
 
 ## Report layout
@@ -16,9 +16,17 @@ A separate PR description tab holds the verbatim PR body and PR-wide context. Ea
 
 ```
 python3 tools/report.py build docs/pr-review/examples/pr-93.json --output /tmp/review-example
-python3 tools/report.py open /tmp/review-example/<generated>.html
+python3 tools/report.py open /tmp/review-example/pr-93-<sha>.html
+
+# publish/fetch against any git remote (use a throwaway bare repo to try):
+git init --bare /tmp/remote.git
+python3 tools/report.py publish docs/pr-review/examples/pr-93.json --remote /tmp/remote.git          # dry run
+python3 tools/report.py publish docs/pr-review/examples/pr-93.json --remote /tmp/remote.git --yes
+python3 tools/report.py fetch 93 --remote /tmp/remote.git --current-head <sha> --output /tmp/fetched
 ```
 
-## Limits
+## What is automated and what is not
 
-Local build/open and validation are implemented. Fetching and publishing reports from a report branch are specified in the skills but not automated or tested end to end. Validation covers schema, text length and hunk ranges; it is not a full JSON Schema or HTML security audit. Read marks are session-only. No CI is attached (`.claude/`, `docs/` and `tools/` are outside the deploy pipelines).
+Automated and tested against a local bare remote: build, open, validation, orphan branch creation, immutable per-head reports, index, dry run/confirm, head-moved refusal, one retry after a concurrent writer, fetch by current head or SHA prefix, "no report for current head", and local regeneration from validated JSON.
+
+Left to Claude: reading the PR with `gh`, writing the layers, descriptions and highlight comments, and asking for confirmation before publishing. These have not been run in a real Claude Code session or against GitHub. Validation covers schema, text length and hunk ranges; it is not a full JSON Schema or HTML security audit. Read marks are session-only. No CI is attached.
