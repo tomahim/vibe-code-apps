@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Local renderer/viewer. No network, git mutations or AI calls."""
+import argparse, hashlib, json, pathlib, re, sys, webbrowser
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+TEMPLATE = ROOT / '.claude/assets/pr-review-template.html'
+
+def validate(data):
+    def text(v, name, maximum=10000):
+        if not isinstance(v,str) or not v.strip() or len(v)>maximum: raise ValueError('Invalid '+name)
+    for key in ('repo','number','title','author','base','head','head_sha','description','files','layers','additions','deletions','provenance'):
+        if key not in data: raise ValueError('Missing '+key)
+    if data.get('schema_version')!=2 or data.get('template_version')!='0.2': raise ValueError('Expected schema v2 / template 0.2')
+    if type(data['number']) is not int or data['number']<1: raise ValueError('Invalid PR number')
+    if not re.fullmatch('[a-f0-9]{40,64}',data['head_sha']): raise ValueError('Full head SHA required')
+    for k in ('repo','title','author','base','head','provenance'): text(data[k],k)
+    desc=data['description']
+    if not isinstance(desc,dict): raise ValueError('Invalid PR description')
+    if not isinstance(desc.get('body'),str) or len(desc['body'])>100000: raise ValueError('Invalid original PR body')
+    text(desc.get('summary'),'PR summary')
+    url=desc.get('source_url','')
+    if not re.fullmatch(r'https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/pull/[1-9][0-9]*',url): raise ValueError('Invalid source URL')
+    def attention(items):
+        if not isinstance(items,list) or len(items)>4: raise ValueError('Use at most four attention bullets')
+        for v in items:text(v,'attention bullet',300)
+    attention(desc.get('attention',[]))
+    if not isinstance(data['files'],list) or not 0<len(data['files'])<=2000 or not data['layers']: raise ValueError('Files and layers required')
+    paths={}
+    for f in data['files']:
+        text(f['path'],'file path')
+        if f['path'] in paths: raise ValueError('Duplicate file path')
+        if not isinstance(f.get('patch'),(str,type(None))): raise ValueError('Invalid patch')
+        oldlines=set();newlines=set();old=nw=0
+        for raw in (f.get('patch') or '').splitlines():
+            h=re.match(r'^@@ -(\d+)(?:,\d+)? \+(\d+)',raw)
+            if h:old,nw=map(int,h.groups());continue
+            if not raw or raw.startswith('\\'):continue
+            if raw[0]!='+':oldlines.add(old);old+=1
+            if raw[0]!='-':newlines.add(nw);nw+=1
+        paths[f['path']]={'old':oldlines,'new':newlines}
+    for l in data['layers']:
+        if l['type'] not in ('behavior','design','annex'): raise ValueError('Unknown layer')
+        text(l['title'],'layer title',120);text(l['description'],'layer description',700)
+        if any(k in l for k in ('summary','note')): raise ValueError('Old layer fields not supported')
+        attention(l.get('attention',[]))
+        for ref in l['refs']:
+            if ref['path'] not in paths: raise ValueError('Unknown file reference')
+            if not ref.get('highlights'): raise ValueError('Highlight required')
+            for r in ref['highlights']:
+                if r['side'] not in ('old','new') or type(r['start']) is not int or type(r['end']) is not int or not 0<r['start']<=r['end']: raise ValueError('Invalid range')
+                if not set(range(r['start'],r['end']+1))<=paths[ref['path']][r['side']]: raise ValueError('Highlight outside captured hunk')
+                text(r.get('comment'),'highlight comment',160)
+
+def summary(d):
+    print(f"PR #{d['number']} @ {d['head_sha'][:12]} | {d['title']}\n{d['description']['summary']}")
+    for i,l in enumerate(d['layers'],1): print(f"  {i}. [{l['type']}] {l['title']}")
+    if any(not f.get('patch') for f in d['files']): print("Warning: some files have no textual patch")
+    print(f"Schema {d['schema_version']} | Template {d['template_version']}")
+    print(f"{len(d['files'])} files | +{d['additions']} -{d['deletions']}")
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__); sub=p.add_subparsers(dest='cmd',required=True)
+    b=sub.add_parser('build');b.add_argument('json');b.add_argument('--output',default='pr-reports')
+    v=sub.add_parser('open');v.add_argument('html');v.add_argument('--no-browser',action='store_true')
+    a=p.parse_args()
+    if a.cmd=='build':
+        d=json.loads(pathlib.Path(a.json).read_text());validate(d)
+        # Escape for a raw-text script element, including adversarial </script> sequences.
+        payload=json.dumps(d,ensure_ascii=True).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
+        template=TEMPLATE.read_text();assert template.count('__PR_DATA_JSON__')==1
+        out=pathlib.Path(a.output);out.mkdir(parents=True,exist_ok=True)
+        target=out/f"pr-{d['number']}-{d['head_sha']}.html"
+        html=template.replace('__PR_DATA_JSON__',payload)
+        if target.exists() and target.read_text()!=html: raise ValueError('Immutable report already exists; use a new output directory')
+        target.write_text(html);summary(d);print(target.resolve());print('Template SHA256:',hashlib.sha256(template.encode()).hexdigest())
+    else:
+        f=pathlib.Path(a.html).resolve();html=f.read_text()
+        m=re.search(r'<script id="pr-data" type="application/json">(.*?)</script>',html,re.S)
+        if not m: raise ValueError('Missing data')
+        d=json.loads(m[1]);validate(d);summary(d)
+        # Only open reports built from this trusted template. Remote HTML is executable content.
+        payload=m[1];trusted=TEMPLATE.read_text().replace('__PR_DATA_JSON__',payload)
+        if html!=trusted: raise ValueError('Template mismatch: inspect report without opening it')
+        if not a.no_browser:webbrowser.open(f.as_uri())
+if __name__=='__main__':
+    try:main()
+    except (ValueError,KeyError,AssertionError) as e:sys.exit(str(e))
