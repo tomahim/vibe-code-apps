@@ -4,6 +4,7 @@ tagline: Last Crossing at 23:40 - You Run the Old Cable Ferry, and the Radio Kee
 pitch: A first-person narrative game about operating a small night ferry across a northern strait, where the passengers, the marine radio and the far shore tell a story the fog is hiding.
 domains: [GAME, MEDIA]
 created: 2026-10-24T03:16:58Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
