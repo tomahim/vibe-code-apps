@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlas of Realms</title>
+<style>
+  :root {
+    --bg: #16110d;
+    --bg-2: #1f1813;
+    --ink: #4a3a2a;
+    --parch: #e9dcbd;
+    --parch-deep: #d9c69c;
+    --accent: #b4452f;
+    --text: #efe6d2;
+    --dim: #a99a80;
+    --serif: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--serif);
+    background-image: radial-gradient(1200px 700px at 50% -10%, #241c15 0%, var(--bg) 60%);
+    min-height: 100vh;
+  }
+  header { text-align: center; padding: 3.2rem 1.25rem 1.6rem; }
+  header .kicker {
+    margin: 0 0 .7rem; font-size: 11px; letter-spacing: .42em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+  }
+  header h1 {
+    margin: 0; font-size: clamp(30px, 5.4vw, 52px); font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; font-variant: small-caps;
+  }
+  header .rule {
+    width: min(320px, 60vw); height: 14px; margin: 1rem auto .9rem; opacity: .8;
+    background:
+      radial-gradient(circle at 50% 50%, var(--dim) 1.5px, transparent 2px) center/16px 16px no-repeat,
+      linear-gradient(var(--dim), var(--dim)) left center/38% 1px no-repeat,
+      linear-gradient(var(--dim), var(--dim)) right center/38% 1px no-repeat;
+  }
+  header p.sub { margin: 0 auto; max-width: 560px; color: var(--dim); font-size: 15px; font-style: italic; line-height: 1.55; }
+  main { width: min(1500px, 94vw); margin: 0 auto; padding: 1.4rem 0 5rem; }
+  .grid {
+    display: grid; gap: clamp(18px, 2.6vw, 34px);
+    grid-template-columns: repeat(auto-fill, minmax(min(430px, 100%), 1fr));
+  }
+  .card {
+    appearance: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+    background: var(--bg-2); border-radius: 6px; overflow: hidden; display: block; width: 100%;
+    box-shadow: 0 18px 44px rgba(0,0,0,.5), 0 2px 0 rgba(255,255,255,.03) inset;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s;
+    font-family: inherit; color: inherit;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 26px 60px rgba(0,0,0,.62); }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .card .frame { padding: 10px; background: linear-gradient(160deg, #2a211a, #1c1510); }
+  .card canvas, .card .ph { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 2px; background: #221a13; }
+  .card .meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 13px 16px 15px; }
+  .card .meta h2 { margin: 0; font-size: 19px; letter-spacing: .06em; font-variant: small-caps; font-weight: 600; }
+  .card .meta .no { color: var(--dim); font-size: 12px; letter-spacing: .24em; white-space: nowrap; }
+  .card .meta .kind { display: block; margin-top: 2px; color: var(--dim); font-size: 12.5px; font-style: italic; letter-spacing: .04em; }
+
+  /* Fullscreen viewer */
+  #viewer {
+    position: fixed; inset: 0; z-index: 40; display: none;
+    background: rgba(10, 8, 6, .96);
+    flex-direction: column; align-items: center; justify-content: center;
+    padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  }
+  #viewer.open { display: flex; }
+  #viewer .stage { position: relative; flex: 1 1 auto; width: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  #viewer canvas.view {
+    max-width: 100%; max-height: 100%; border-radius: 3px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.75); touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  }
+  #viewer .bar {
+    flex: 0 0 auto; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding-top: 12px; flex-wrap: wrap;
+  }
+  #viewer .cap { text-align: center; min-width: min(420px, 60vw); }
+  #viewer .cap h3 { margin: 0; font-size: 18px; letter-spacing: .1em; font-variant: small-caps; }
+  #viewer .cap p { margin: 2px 0 0; color: var(--dim); font-size: 12px; font-style: italic; letter-spacing: .06em; }
+  .vbtn {
+    appearance: none; font-family: inherit; cursor: pointer;
+    background: rgba(233,220,189,.07); color: var(--text);
+    border: 1px solid rgba(233,220,189,.22); border-radius: 8px;
+    padding: 9px 14px; font-size: 13px; letter-spacing: .1em;
+    transition: background .2s, border-color .2s;
+  }
+  .vbtn:hover { background: rgba(233,220,189,.16); }
+  .vbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .vbtn.nav { font-size: 20px; padding: 9px 16px; line-height: 1; }
+  #viewer .close {
+    position: absolute; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right));
+    font-size: 15px; padding: 10px 14px;
+  }
+  @media (max-width: 640px) {
+    #viewer .cap { min-width: 0; flex: 1 1 100%; order: -1; }
+    .card .meta h2 { font-size: 17px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .card { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <p class="kicker">A procedural atlas</p>
+  <h1>Atlas of Realms</h1>
+  <div class="rule" aria-hidden="true"></div>
+  <p class="sub">Ten invented worlds, charted in the manner of the old cartographers &mdash; coasts, ranges, forests, cities and seas drawn from nothing but noise and names. Choose a chart to view it full screen.</p>
+</header>
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div id="viewer" role="dialog" aria-modal="true" aria-label="Map viewer">
+  <button class="vbtn close" id="v-close" aria-label="Close viewer">✕</button>
+  <div class="stage" id="v-stage"><canvas class="view" id="v-canvas"></canvas></div>
+  <div class="bar">
+    <button class="vbtn nav" id="v-prev" aria-label="Previous map">←</button>
+    <div class="cap"><h3 id="v-title"></h3><p id="v-sub"></p></div>
+    <button class="vbtn nav" id="v-next" aria-label="Next map">→</button>
+    <button class="vbtn" id="v-fs">Full screen</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+   Atlas of Realms — procedural hand-drawn fantasy cartography.
+   One self-contained file: noise -> terrain -> ink & parchment.
+   ============================================================ */
+
+/* ---------- deterministic randomness ---------- */
+function xmur3(str) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return function () {
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^= h >>> 16) >>> 0;
+  };
+}
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/* ---------- gradient noise + fBm ---------- */
+function makeNoise2D(rand) {
+  const p = new Uint8Array(256);
+  for (let i = 0; i < 256; i++) p[i] = i;
+  for (let i = 255; i > 0; i--) {
+    const j = (rand() * (i + 1)) | 0;
+    const t = p[i]; p[i] = p[j]; p[j] = t;
+  }
+  const perm = new Uint8Array(512);
+  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  const grad = new Float32Array(512 * 2);
+  for (let i = 0; i < 512; i++) {
+    const a = (perm[i] / 255) * Math.PI * 2;
+    grad[i * 2] = Math.cos(a); grad[i * 2 + 1] = Math.sin(a);
+  }
+  const fade = t => t * t * t * (t * (t * 6 - 15) + 10);
+  const lerp = (a, b, t) => a + t * (b - a);
+  return function noise(x, y) {
+    const X = Math.floor(x), Y = Math.floor(y);
+    const xf = x - X, yf = y - Y;
+    const xi = X & 255, yi = Y & 255;
+    const g = (ix, iy, dx, dy) => {
+      const h = perm[(perm[ix & 255] + iy) & 255];
+      return grad[h * 2] * dx + grad[h * 2 + 1] * dy;
+    };
+    const u = fade(xf), v = fade(yf);
+    const n00 = g(xi, yi, xf, yf);
+    const n10 = g(xi + 1, yi, xf - 1, yf);
+    const n01 = g(xi, yi + 1, xf, yf - 1);
+    const n11 = g(xi + 1, yi + 1, xf - 1, yf - 1);
+    return lerp(lerp(n00, n10, u), lerp(n01, n11, u), v) * 1.42; // ~[-1,1]
+  };
+}
+function fbmFactory(noise) {
+  return function fbm(x, y, oct, lac, gain) {
+    let sum = 0, amp = 1, freq = 1, norm = 0;
+    for (let o = 0; o < oct; o++) {
+      sum += noise(x * freq, y * freq) * amp;
+      norm += amp; amp *= gain; freq *= lac;
+    }
+    return sum / norm;
+  };
+}
+
+/* ---------- invented names ---------- */
+const NAME = {
+  realmPrefix: ["Veyr", "Kor", "Thal", "Sel", "Mor", "Bran", "Cal", "Ost", "Aer", "Fen", "Tor", "Ulv", "Wyn", "Dra", "Hal", "Nym", "Vael", "Em", "Is", "Quess"],
+  realmMid: ["a", "e", "i", "o", "u", "ae", "ia", "ri", "la", "we", "mi", "ra", "ne", "ss", "qu"],
+  realmEnd: ["mora", "th", "reach", "wyn", "dor", "gar", "fell", "moor", "haven", "gard", "ness", "vain", "ric", "shal", "mere", "heim", "mark", "vale", "strand", "barren", "hollow", "drin", "var", "march", "wynne"],
+  cityPrefix: ["Thorn", "Ash", "Fen", "Raven", "Briar", "Stone", "Ember", "Mist", "Oak", "Salt", "Grey", "Lark", "Wolf", "Barrow", "Cinder", "Hollow", "Amber", "Crow", "Dusk", "Mill", "Thistle", "Wren", "Ivy", "Rook"],
+  cityEnd: ["wick", "ford", "by", "mouth", "stead", "holt", "gate", "field", "port", "fall", "crest", "bridge", "mere", "watch", "haven", "hold", "bury", "combe", "shaw", "thorpe"],
+  regionEnd: ["lands", "wood", "fells", "march", "reach", "heights", "lows", "coast", "weald", "moors", "downs", "vales", "wilds", "shore", "hills"],
+  sea: ["The Glimmerdeep", "The Morrow Sea", "Sea of Embers", "The Pale Gulf", "The Drowned Expanse", "The Whispering Deeps", "The Cinder Sea", "The Long Expanse", "The Ashen Water", "The Silent Deep"],
+  epithet: ["The Western Reach", "Crown of the North", "The Verdant Seat", "The Sundered Shore", "Heart of the Marches", "The Far Dominion", "The Ember Crown", "The Mist-Bound", "The Old Kingdom", "The Lonely Throne"],
+  year: ["the Waning Swan", "Three Comets", "the Salt Harvest", "the Long Frost", "the Broken Mast", "the Amber Tide", "Nine Winters", "the Silent Bell", "the Painted Moon", "the Last Voyage"]
+};
+function pick(rand, arr) { return arr[(rand() * arr.length) | 0]; }
+function realmName(rand) {
+  let n = pick(rand, NAME.realmPrefix);
+  if (rand() < 0.7) n += pick(rand, NAME.realmMid);
+  n += pick(rand, NAME.realmEnd);
+  return n.charAt(0).toUpperCase() + n.slice(1);
+}
+function cityName(rand) { return pick(rand, NAME.cityPrefix) + pick(rand, NAME.cityEnd); }
+function regionName(rand) {
+  const core = realmName(rand);
+  return rand() < 0.55 ? "The " + core + " " + pick(rand, NAME.regionEnd) : core + " " + pick(rand, NAME.regionEnd);
+}
+
+/* ---------- the ten realms (hand-picked titles, invented) ---------- */
+const REALMS = [
+  { name: "Isle of Veyrhollow", kind: "isle",      seed: "veyrhollow",  moisture: +0.10, heat:  0.0,  lobes: 1, label: "The Verdant Seat" },
+  { name: "Korvenmar",          kind: "mainland",  seed: "korvenmar",   moisture: +0.05, heat:  0.05, lobes: 1, label: "Crown of the North" },
+  { name: "The Emberstrand",    kind: "isle",      seed: "emberstrand", moisture: -0.22, heat:  0.22, lobes: 1, label: "The Ember Crown" },
+  { name: "Selquess Isles",     kind: "isles",     seed: "selquess",    moisture: +0.12, heat:  0.08, lobes: 4, label: "The Sundered Shore" },
+  { name: "Thaldruin",          kind: "mainland",  seed: "thaldruin",   moisture: +0.18, heat: -0.05, lobes: 1, label: "Heart of the Marches" },
+  { name: "The Mistral Coast",  kind: "coast",     seed: "mistral",     moisture: +0.02, heat:  0.0,  lobes: 2, label: "The Mist-Bound" },
+  { name: "Ostravar",           kind: "isle",      seed: "ostravar",    moisture: -0.05, heat:  0.12, lobes: 2, label: "The Far Dominion" },
+  { name: "Nymbarren",          kind: "mainland",  seed: "nymbarren",   moisture: -0.16, heat:  0.16, lobes: 1, label: "The Old Kingdom" },
+  { name: "The Hollow Marches", kind: "coast",     seed: "hollowmarch", moisture: +0.08, heat: -0.02, lobes: 2, label: "The Lonely Throne" },
+  { name: "Vaelstrond",         kind: "isle",      seed: "vaelstrond",  moisture: +0.14, heat: -0.08, lobes: 3, label: "The Western Reach" }
+];
+
+/* ---------- terrain generation ---------- */
+const GW = 240, GH = 180; // generation grid
+function generateWorld(cfg) {
+  const seedFn = xmur3("atlas-of-realms/" + cfg.seed);
+  const rand = mulberry32(seedFn());
+  const noiseA = makeNoise2D(mulberry32(seedFn()));
+  const noiseB = makeNoise2D(mulberry32(seedFn()));
+  const noiseC = makeNoise2D(mulberry32(seedFn()));
+  const fbmA = fbmFactory(noiseA), fbmB = fbmFactory(noiseB), fbmC = fbmFactory(noiseC);
+
+  const elev = new Float32Array(GW * GH);
+  const moist = new Float32Array(GW * GH);
+  const temp = new Float32Array(GW * GH);
+
+  // lobe centers for the landmass silhouette
+  const lobes = [];
+  const clobes = cfg.kind === "isles" ? 4 : cfg.lobes;
+  for (let i = 0; i < clobes; i++) {
+    const a = (i / clobes) * Math.PI * 2 + rand() * 1.2;
+    const r = clobes === 1 ? 0 : cfg.kind === "isles" ? 0.30 + rand() * 0.16 : 0.18 + rand() * 0.16;
+    lobes.push({
+      x: 0.5 + Math.cos(a) * r * (rand() * 0.5 + 0.75),
+      y: 0.5 + Math.sin(a) * r * (rand() * 0.5 + 0.75),
+      s: cfg.kind === "isles" ? 0.17 + rand() * 0.08 : 0.30 + rand() * 0.16 // lobe radius
+    });
+  }
+  const aspect = GH / GW;
+  for (let y = 0; y < GH; y++) {
+    for (let x = 0; x < GW; x++) {
+      const i = y * GW + x;
+      const nx = x / GW, ny = y / GH;
+      // domain-warped base elevation
+      const wx = fbmA(nx * 3.1 + 11.3, ny * 3.1 + 7.7, 4, 2.1, 0.55) * 0.16;
+      const wy = fbmA(nx * 3.1 + 4.9, ny * 3.1 + 19.1, 4, 2.1, 0.55) * 0.16;
+      let e = fbmB(nx * 4.2 + wx + 3.7, ny * 4.2 * aspect + wy + 9.2, 6, 2.05, 0.52) * 0.5 + 0.5;
+      // silhouette: max over lobes of radial falloff, coast kind keeps land to one side
+      let mask = -1e9;
+      for (const L of lobes) {
+        const dx = (nx - L.x), dy = (ny - L.y) / aspect;
+        const d = Math.sqrt(dx * dx + dy * dy) / L.s;
+        mask = Math.max(mask, 1 - d);
+      }
+      if (cfg.kind === "coast") mask = Math.max(mask, 0.85 - Math.abs(nx - 0.62) * 2.2);
+      if (cfg.kind === "mainland") mask = Math.max(mask, 0.62 - Math.abs(ny - 0.28) * 1.5);
+      e = cfg.kind === "isles" ? e * 0.60 + mask * 0.62 - 0.24 : e * 0.78 + mask * 0.55 - 0.18;
+      elev[i] = e;
+      moist[i] = fbmC(nx * 2.3 + 27.1, ny * 2.3 + 13.9, 4, 2.2, 0.55) + cfg.moisture;
+      // temperature: latitudinal with a per-realm skew + noise
+      temp[i] = (1 - Math.abs(ny - (0.52 + cfg.heat * 0.4)) * 1.9) + cfg.heat + noiseC(nx * 2, ny * 2) * 0.12;
+    }
+  }
+  // contrast curve above sea level: real highlands and ranges, coast unchanged
+  for (let i = 0; i < GW * GH; i++) {
+    const e = elev[i];
+    if (e > SEA_LEVEL) elev[i] = Math.min(1.14, SEA_LEVEL + (e - SEA_LEVEL) * 1.42);
+  }
+  return { rand, fbmA, fbmB, fbmC, elev, moist, temp, cfg };
+}
+
+const SEA_LEVEL = 0.22;
+function classify(world) {
+  const { elev, moist, temp } = world;
+  const cls = new Uint8Array(GW * GH); // 0 deep,1 shallow,2 beach,3 grass,4 forest,5 steppe,6 desert,7 hill,8 mountain,9 snow,10 lake
+  for (let i = 0; i < GW * GH; i++) {
+    const e = elev[i];
+    if (e < SEA_LEVEL - 0.10) { cls[i] = 0; continue; }
+    if (e < SEA_LEVEL) { cls[i] = 1; continue; }
+    if (e < SEA_LEVEL + 0.015) { cls[i] = 2; continue; }
+    if (e > 0.90) { cls[i] = temp[i] < 0.32 ? 9 : 8; continue; }
+    if (e > 0.78) { cls[i] = 7; continue; }
+    // lakes: low-frequency noise pocket in low-lying mid terrain
+    const x = i % GW, y = (i / GW) | 0;
+    const lk = world.fbmC(x / GW * 2.1 + 47.7, y / GH * 2.1 + 31.2, 3, 2.2, 0.55);
+    if (e < 0.52 && lk > 0.30) { cls[i] = 10; continue; }
+    const m = moist[i], t = temp[i];
+    if (t > 0.62 && m < -0.18) cls[i] = 6;        // desert
+    else if (t > 0.45 && m < 0.02) cls[i] = 5;    // steppe
+    else if (m > 0.10) cls[i] = 4;                // forest
+    else cls[i] = 3;                              // grass
+  }
+  // keep only lakes of a decent size, fully inland (connected-comp. via flood fill)
+  const seen = new Uint8Array(GW * GH);
+  for (let s = 0; s < GW * GH; s++) {
+    if (cls[s] !== 10 || seen[s]) continue;
+    const comp = [s]; seen[s] = 1;
+    let touchesSea = false;
+    for (let q = 0; q < comp.length; q++) {
+      const c = comp[q], cx = c % GW, cy = (c / GW) | 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        if (!dx && !dy) continue;
+        const nx2 = cx + dx, ny2 = cy + dy;
+        if (nx2 < 0 || ny2 < 0 || nx2 >= GW || ny2 >= GH) continue;
+        const n = ny2 * GW + nx2;
+        if (cls[n] === 0 || cls[n] === 1) touchesSea = true;
+        if (cls[n] === 10 && !seen[n]) { seen[n] = 1; comp.push(n); }
+      }
+    }
+    if (comp.length < 12 || touchesSea) for (const c of comp) cls[c] = 3;
+  }
+  return cls;
+}
+
+/* marching-squares polyline chains for a scalar field at a level */
+function contourChains(field, level) {
+  const segs = [];
+  const idx = (x, y) => y * (GW + 1) + x;
+  // sample field at grid nodes (cells are node-centered; treat field[i] as node value)
+  for (let y = 0; y < GH - 1; y++) {
+    for (let x = 0; x < GW - 1; x++) {
+      const a = field[y * GW + x], b = field[y * GW + x + 1];
+      const c = field[(y + 1) * GW + x + 1], d = field[(y + 1) * GW + x];
+      let code = 0;
+      if (a > level) code |= 8; if (b > level) code |= 4;
+      if (c > level) code |= 2; if (d > level) code |= 1;
+      if (code === 0 || code === 15) continue;
+      const ix = (v1, v2) => (level - v1) / (v2 - v1 || 1e-9);
+      const top = [x + ix(a, b), y], right = [x + 1, y + ix(b, c)];
+      const bottom = [x + ix(d, c), y + 1], left = [x, y + ix(a, d)];
+      const table = {
+        1: [left, bottom], 2: [bottom, right], 3: [left, right],
+        4: [top, right], 5: [top, left, bottom, right], 6: [top, bottom],
+        7: [top, left], 8: [top, left], 9: [top, bottom],
+        10: [top, right, left, bottom], 11: [top, right],
+        12: [left, right], 13: [bottom, right], 14: [left, bottom]
+      };
+      const pts = table[code];
+      for (let s = 0; s < pts.length; s += 2) segs.push([pts[s], pts[s + 1]]);
+    }
+  }
+  // chain segments by quantized endpoints
+  const key = p => p[0].toFixed(3) + "," + p[1].toFixed(3);
+  const byPt = new Map();
+  segs.forEach((s, i) => {
+    for (const p of s) {
+      const k = key(p);
+      if (!byPt.has(k)) byPt.set(k, []);
+      byPt.get(k).push(i);
+    }
+  });
+  const used = new Uint8Array(segs.length);
+  const chains = [];
+  for (let i = 0; i < segs.length; i++) {
+    if (used[i]) continue;
+    used[i] = 1;
+    const chain = [segs[i][0], segs[i][1]];
+    for (let pass = 0; pass < 2; pass++) { // extend tail, then head
+      for (;;) {
+        const endK = key(chain[chain.length - 1]);
+        const cands = (byPt.get(endK) || []).filter(j => !used[j]);
+        if (!cands.length) break;
+        const j = cands[0]; used[j] = 1;
+        const s = segs[j];
+        const next = key(s[0]) === endK ? s[1] : s[0];
+        chain.push(next);
+      }
+      chain.reverse();
+    }
+    chains.push(chain);
+  }
+  return chains;
+}
+
+/* ---------- palette (from the reference chart) ---------- */
+const PAL = {
+  seaDeep: "#8fadb2", sea: "#a7bec2", seaShallow: "#bccfc9",
+  beach: "#e6d9b4",
+  grass: "#b3c48b", grass2: "#a2b97e",
+  forest: "#8aa96b", treeInk: "#4e6740",
+  steppe: "#d6c67e",
+  desert: "#d6a273", desert2: "#c99a6b",
+  hill: "#c2b08b",
+  mtn: "#b49a80", mtnDark: "#8d6f57", snow: "#ede7d8",
+  lake: "#9dbcc4",
+  ink: "#4a3a2a", inkSoft: "rgba(74,58,42,0.55)",
+  red: "#a03b2e",
+  parch: "#eadcbc", parchDeep: "#dccb9f", ribbon: "#e6d5ae"
+};
+
+const MW = 1440, MH = 1080;      // canvas render size
+const MAPX = 64, MAPY = 64, MAPW = MW - 128, MAPH = MH - 128; // chart area inside frame
+
+/* ---------- tiny canvas text helpers ---------- */
+function drawSpaced(ctx, text, cx, y, spacing) {
+  const prev = ctx.textAlign; ctx.textAlign = "left";
+  const chars = [...text];
+  const widths = chars.map(ch => ctx.measureText(ch).width);
+  const total = widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1);
+  let x = cx - total / 2;
+  chars.forEach((ch, i) => { ctx.fillText(ch, x, y); x += widths[i] + spacing; });
+  ctx.textAlign = prev;
+}
+
+/* ---------- renderer ---------- */
+function renderMap(cfg) {
+  const world = generateWorld(cfg);
+  const cls = classify(world);
+  const { rand, elev } = world;
+  const cv = document.createElement("canvas");
+  cv.width = MW; cv.height = MH;
+  const ctx = cv.getContext("2d");
+  const cellW = MAPW / GW, cellH = MAPH / GH;
+  const px = gx => MAPX + (gx / GW) * MAPW;
+  const py = gy => MAPY + (gy / GH) * MAPH;
+
+  /* 1. parchment base + grain */
+  ctx.fillStyle = PAL.parch;
+  ctx.fillRect(0, 0, MW, MH);
+  const baseGrad = ctx.createRadialGradient(MW / 2, MH / 2, MH * 0.2, MW / 2, MH / 2, MH * 0.75);
+  baseGrad.addColorStop(0, "rgba(255,248,230,0.35)");
+  baseGrad.addColorStop(1, "rgba(120,95,60,0.28)");
+  ctx.fillStyle = baseGrad; ctx.fillRect(0, 0, MW, MH);
+  for (let i = 0; i < 5200; i++) {
+    const x = rand() * MW, y = rand() * MH, r = rand() * 1.6 + 0.3;
+    ctx.fillStyle = rand() < 0.5 ? "rgba(120,95,60,0.05)" : "rgba(255,250,235,0.06)";
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+  }
+  // faint blotches
+  for (let i = 0; i < 14; i++) {
+    const x = rand() * MW, y = rand() * MH, r = 40 + rand() * 130;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, "rgba(150,120,75,0.06)"); g.addColorStop(1, "rgba(150,120,75,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+  }
+
+  /* 2. clip to chart area; paint the world */
+  ctx.save();
+  ctx.beginPath(); ctx.rect(MAPX, MAPY, MAPW, MAPH); ctx.clip();
+
+  // classification raster, upscaled smooth -> watercolor fields
+  const raster = document.createElement("canvas");
+  raster.width = GW; raster.height = GH;
+  const rctx = raster.getContext("2d");
+  const img = rctx.createImageData(GW, GH);
+  const colors = {
+    0: PAL.seaDeep, 1: PAL.sea, 2: PAL.beach, 3: PAL.grass, 4: PAL.forest,
+    5: PAL.steppe, 6: PAL.desert, 7: PAL.hill, 8: PAL.mtn, 9: PAL.snow, 10: PAL.lake
+  };
+  for (let i = 0; i < GW * GH; i++) {
+    const hex = colors[cls[i]];
+    const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+    img.data[i * 4] = r; img.data[i * 4 + 1] = g; img.data[i * 4 + 2] = b; img.data[i * 4 + 3] = 255;
+  }
+  rctx.putImageData(img, 0, 0);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(raster, MAPX, MAPY, MAPW, MAPH);
+
+  // watercolor mottle: per-cell alpha noise, pigment pooling
+  for (let y = 0; y < GH; y += 1) {
+    for (let x = 0; x < GW; x += 1) {
+      const i = y * GW + x;
+      if (cls[i] === 0 || cls[i] === 1) continue;
+      const n = world.fbmC(x * 0.16 + 63.1, y * 0.16 + 17.7, 3, 2.3, 0.6);
+      if (n > 0.06) {
+        ctx.fillStyle = `rgba(255,252,240,${Math.min(0.28, n * 0.35)})`;
+        ctx.fillRect(px(x), py(y), cellW + 1, cellH + 1);
+      } else if (n < -0.10) {
+        ctx.fillStyle = `rgba(80,60,35,${Math.min(0.16, -n * 0.22)})`;
+        ctx.fillRect(px(x), py(y), cellW + 1, cellH + 1);
+      }
+    }
+  }
+
+  // hillshade (light from NW)
+  for (let y = 1; y < GH - 1; y += 1) {
+    for (let x = 1; x < GW - 1; x += 1) {
+      const i = y * GW + x;
+      if (elev[i] < SEA_LEVEL) continue;
+      const dx = elev[i + 1] - elev[i - 1], dy = elev[i + GW] - elev[i - GW];
+      const shade = (dx * -0.9 + dy * -0.9);
+      if (shade > 0.012) {
+        ctx.fillStyle = `rgba(60,45,25,${Math.min(0.30, shade * 2.4)})`;
+        ctx.fillRect(px(x), py(y), cellW + 1, cellH + 1);
+      } else if (shade < -0.012) {
+        ctx.fillStyle = `rgba(255,250,235,${Math.min(0.22, -shade * 2.0)})`;
+        ctx.fillRect(px(x), py(y), cellW + 1, cellH + 1);
+      }
+    }
+  }
+
+  /* 3. coastline: soft glow + ink contour + hatch ticks */
+  const coastField = elev;
+  // glow
+  ctx.save();
+  const coastChainsGlow = contourChains(coastField, SEA_LEVEL);
+  ctx.strokeStyle = "rgba(214,226,222,0.35)"; ctx.lineWidth = 4.5; ctx.lineJoin = "round";
+  for (const ch of coastChainsGlow) {
+    ctx.beginPath();
+    ch.forEach((p, k) => k ? ctx.lineTo(px(p[0]), py(p[1])) : ctx.moveTo(px(p[0]), py(p[1])));
+    ctx.stroke();
+  }
+  ctx.restore();
+  // ink line
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 2.1; ctx.lineJoin = "round";
+  for (const ch of coastChainsGlow) {
+    ctx.beginPath();
+    ch.forEach((p, k) => k ? ctx.lineTo(px(p[0]), py(p[1])) : ctx.moveTo(px(p[0]), py(p[1])));
+    ctx.stroke();
+  }
+  // coastal hatch ticks into the sea
+  ctx.strokeStyle = "rgba(74,58,42,0.35)"; ctx.lineWidth = 1;
+  for (const ch of coastChainsGlow) {
+    for (let k = 4; k < ch.length - 4; k += 6 + ((rand() * 6) | 0)) {
+      const p = ch[k], q = ch[k - 3];
+      let dx = p[0] - q[0], dy = p[1] - q[1];
+      const len = Math.hypot(dx, dy) || 1; dx /= len; dy /= len;
+      // normal pointing seaward: test a point slightly outside
+      let nxv = -dy, nyv = dx;
+      const sample = (mx, my) => {
+        const gx2 = Math.max(0, Math.min(GW - 1, Math.round(p[0] + mx)));
+        const gy2 = Math.max(0, Math.min(GH - 1, Math.round(p[1] + my)));
+        return elev[gy2 * GW + gx2];
+      };
+      const eA = sample(nxv * 3.0, nyv * 3.0), eB = sample(-nxv * 3.0, -nyv * 3.0);
+      if (eA < eB) { /* n already seaward */ } else { nxv = -nxv; nyv = -nyv; }
+      if (Math.min(eA, eB) > SEA_LEVEL + 0.005) continue;
+      const tl = 3.2 + rand() * 2.6;
+      ctx.beginPath();
+      ctx.moveTo(px(p[0] + nxv * 1.2), py(p[1] + nyv * 1.2));
+      ctx.lineTo(px(p[0] + nxv * (1.2 + tl)), py(p[1] + nyv * (1.2 + tl)));
+      ctx.stroke();
+    }
+  }
+
+  /* 4. lake outlines */
+  const lakeField = new Float32Array(GW * GH);
+  for (let i = 0; i < GW * GH; i++) lakeField[i] = cls[i] === 10 ? 1 : 0;
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.6;
+  for (const ch of contourChains(lakeField, 0.5)) {
+    ctx.beginPath();
+    ch.forEach((p, k) => k ? ctx.lineTo(px(p[0]), py(p[1])) : ctx.moveTo(px(p[0]), py(p[1])));
+    ctx.stroke();
+  }
+
+  /* 5. rivers: gradient descent from the high country */
+  const isWaterAt = i => cls[i] === 0 || cls[i] === 1 || cls[i] === 10;
+  let riverCount = 0, tries = 0;
+  while (riverCount < 5 && tries++ < 500) {
+    const x = 8 + ((rand() * (GW - 16)) | 0), y = 8 + ((rand() * (GH - 16)) | 0);
+    let i = y * GW + x;
+    if (elev[i] < 0.60 || elev[i] > 0.9) continue;
+    const path = [[x, y]];
+    let cx = x, cy = y, ok = false;
+    for (let step = 0; step < 300; step++) {
+      let bestE = elev[cy * GW + cx], bx = -1, by = -1;
+      const order = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]];
+      for (const [dx, dy] of order) {
+        const nxv = cx + dx, nyv = cy + dy;
+        if (nxv < 0 || nyv < 0 || nxv >= GW || nyv >= GH) continue;
+        const n = nyv * GW + nxv;
+        const ee = elev[n] + rand() * 0.012;
+        if (ee < bestE) { bestE = ee; bx = nxv; by = nyv; }
+      }
+      if (bx < 0) break;
+      cx = bx; cy = by;
+      path.push([cx, cy]);
+      if (isWaterAt(cy * GW + cx)) { ok = path.length > 12; break; }
+    }
+    if (!ok) continue;
+    riverCount++;
+    for (let k = 0; k < path.length - 1; k++) {
+      const t = k / path.length;
+      ctx.strokeStyle = "rgba(96,124,140,0.85)";
+      ctx.lineWidth = 0.8 + t * 2.1;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(px(path[k][0]) + cellW / 2, py(path[k][1]) + cellH / 2);
+      ctx.lineTo(px(path[k + 1][0]) + cellW / 2, py(path[k + 1][1]) + cellH / 2);
+      ctx.stroke();
+    }
+  }
+
+  /* 6. mountain glyphs along the high country */
+  function mountainGlyph(x, y, s) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.beginPath();
+    ctx.moveTo(-s, 0); ctx.lineTo(0, -s * 1.5); ctx.lineTo(s, 0); ctx.closePath();
+    ctx.fillStyle = "#c4ac92"; ctx.fill();
+    // shaded east slope
+    ctx.beginPath();
+    ctx.moveTo(0, -s * 1.5); ctx.lineTo(s, 0); ctx.lineTo(s * 0.25, 0); ctx.closePath();
+    ctx.fillStyle = "rgba(110,82,58,0.45)"; ctx.fill();
+    // snow cap on the high peaks
+    if (s > 10.5) {
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.28, -s * 1.08); ctx.lineTo(0, -s * 1.5); ctx.lineTo(s * 0.28, -s * 1.08);
+      ctx.lineTo(s * 0.1, -s * 0.98); ctx.lineTo(0, -s * 1.12); ctx.lineTo(-s * 0.1, -s * 0.98);
+      ctx.closePath();
+      ctx.fillStyle = PAL.snow; ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.moveTo(-s, 0); ctx.lineTo(0, -s * 1.5); ctx.lineTo(s, 0);
+    ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.1; ctx.stroke();
+    ctx.restore();
+  }
+  for (let gy = 2; gy < GH - 2; gy += 4) {
+    for (let gx = 2; gx < GW - 2; gx += 4) {
+      const jx = gx + (rand() - 0.5) * 2.6, jy = gy + (rand() - 0.5) * 2.6;
+      const i = Math.round(jy) * GW + Math.round(jx);
+      if (i < 0 || i >= GW * GH) continue;
+      const e = elev[i];
+      if (e > 0.82 && cls[i] !== 10 && rand() < 0.85) {
+        const sz = 7 + (e - 0.82) * 42 + rand() * 2.2;
+        mountainGlyph(px(jx), py(jy) + sz * 0.4, Math.min(19, sz));
+      }
+    }
+  }
+
+  /* 7. forest glyphs: clusters of small round trees */
+  function treeGlyph(x, y, r) {
+    ctx.save(); ctx.translate(x, y);
+    ctx.fillStyle = "#6d8a52";
+    ctx.beginPath(); ctx.arc(0, -r * 0.4, r, 0, 7); ctx.fill();
+    ctx.strokeStyle = "rgba(60,74,44,0.8)"; ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.arc(0, -r * 0.4, r, 0.2, Math.PI - 0.2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, r * 0.6); ctx.lineTo(0, r * 1.15); ctx.stroke();
+    ctx.restore();
+  }
+  for (let gy = 1; gy < GH - 1; gy += 2) {
+    for (let gx = 1; gx < GW - 1; gx += 2) {
+      const i = gy * GW + gx;
+      if (cls[i] !== 4) continue;
+      if (rand() < 0.42) continue;
+      const cxp = px(gx) + (rand() - 0.5) * cellW * 2.4;
+      const cyp = py(gy) + (rand() - 0.5) * cellH * 2.4;
+      const n = 1 + ((rand() * 3) | 0);
+      for (let t = 0; t < n; t++) {
+        treeGlyph(cxp + (rand() - 0.5) * 7, cyp + (rand() - 0.5) * 5, 2.1 + rand() * 1.5);
+      }
+    }
+  }
+
+  /* 8. regions (Voronoi over land) and their names */
+  const landCells = [];
+  for (let i = 0; i < GW * GH; i++) if (cls[i] >= 2 && cls[i] <= 9) landCells.push(i);
+  const regionCount = 3 + ((rand() * 3) | 0);
+  const regionSeeds = [];
+  if (landCells.length) {
+    regionSeeds.push(landCells[(rand() * landCells.length) | 0]);
+    while (regionSeeds.length < regionCount) {
+      let best = -1, bestD = -1;
+      for (let t = 0; t < 60; t++) {
+        const c = landCells[(rand() * landCells.length) | 0];
+        const cx = c % GW, cy = (c / GW) | 0;
+        let d = 1e9;
+        for (const s of regionSeeds) {
+          const sx = s % GW, sy = (s / GW) | 0;
+          d = Math.min(d, (cx - sx) ** 2 + (cy - sy) ** 2);
+        }
+        if (d > bestD) { bestD = d; best = c; }
+      }
+      regionSeeds.push(best);
+    }
+  }
+  const regionOf = new Int16Array(GW * GH).fill(-1);
+  const acc = regionSeeds.map(() => ({ x: 0, y: 0, n: 0 }));
+  for (const c of landCells) {
+    const cx = c % GW, cy = (c / GW) | 0;
+    let bi = 0, bd = 1e9;
+    regionSeeds.forEach((s, k) => {
+      const sx = s % GW, sy = (s / GW) | 0;
+      const d = (cx - sx) ** 2 + (cy - sy) ** 2;
+      if (d < bd) { bd = d; bi = k; }
+    });
+    regionOf[c] = bi;
+    acc[bi].x += cx; acc[bi].y += cy; acc[bi].n++;
+  }
+  const usedRegionNames = new Set();
+  const regionLabels = [];
+  acc.forEach((a, k) => {
+    if (a.n < 420) return;
+    let nm = regionName(rand);
+    while (usedRegionNames.has(nm)) nm = regionName(rand);
+    usedRegionNames.add(nm);
+    regionLabels.push({ name: nm, x: px(a.x / a.n), y: py(a.y / a.n), w: Math.sqrt(a.n) * cellW });
+  });
+
+  /* 9. cities: near coasts and rivers, well spread */
+  const candidates = [];
+  for (const c of landCells) {
+    const cx = c % GW, cy = (c / GW) | 0;
+    let nearSea = false;
+    for (let dy = -3; dy <= 3 && !nearSea; dy++) for (let dx = -3; dx <= 3; dx++) {
+      const nxv = cx + dx, nyv = cy + dy;
+      if (nxv < 0 || nyv < 0 || nxv >= GW || nyv >= GH) continue;
+      if (isWaterAt(nyv * GW + nxv)) { nearSea = true; break; }
+    }
+    if (nearSea && elev[c] < 0.6) candidates.push(c);
+  }
+  const cities = [];
+  const usedCityNames = new Set();
+  let guard = 0;
+  while (cities.length < 6 && guard++ < 500 && candidates.length) {
+    const c = candidates[(rand() * candidates.length) | 0];
+    const cx = c % GW, cy = (c / GW) | 0;
+    if (cities.some(o => (o.gx - cx) ** 2 + (o.gy - cy) ** 2 < 34 * 34)) continue;
+    let nm = cityName(rand);
+    while (usedCityNames.has(nm)) nm = cityName(rand);
+    usedCityNames.add(nm);
+    cities.push({ gx: cx, gy: cy, name: nm });
+  }
+  // city marks (capital = first, gets a star)
+  cities.forEach((c, k) => {
+    const x = px(c.gx), y = py(c.gy);
+    if (k === 0 && cities.length > 2) {
+      ctx.save(); ctx.translate(x, y);
+      ctx.fillStyle = PAL.red;
+      ctx.beginPath();
+      for (let p = 0; p < 10; p++) {
+        const a = -Math.PI / 2 + (p * Math.PI) / 5;
+        const r = p % 2 ? 3.2 : 7;
+        ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      }
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(255,240,220,0.9)"; ctx.lineWidth = 0.8; ctx.stroke();
+      ctx.restore();
+    } else {
+      ctx.fillStyle = PAL.red;
+      ctx.beginPath(); ctx.arc(x, y, 3.4, 0, 7); ctx.fill();
+      ctx.strokeStyle = "rgba(255,240,220,0.9)"; ctx.lineWidth = 1; ctx.stroke();
+    }
+    ctx.fillStyle = PAL.red;
+    ctx.font = "italic 600 15px 'Palatino Linotype', Palatino, Georgia, serif";
+    ctx.textAlign = "left";
+    ctx.shadowColor = "rgba(233,220,189,0.9)"; ctx.shadowBlur = 3;
+    ctx.fillText(c.name, x + 8, y + 5);
+    ctx.shadowBlur = 0;
+  });
+
+  /* 10. region names in spaced small caps */
+  ctx.fillStyle = "rgba(74,58,42,0.82)";
+  const placedText = [];
+  regionLabels.forEach(r => {
+    const size = Math.max(13, Math.min(21, r.w * 0.5));
+    ctx.font = `italic 500 ${size}px 'Palatino Linotype', Palatino, Georgia, serif`;
+    const label = r.name.toUpperCase();
+    const w = ctx.measureText(label).width + label.length * size * 0.32;
+    const box = { x0: r.x - w / 2 - 8, x1: r.x + w / 2 + 8, y0: r.y - size - 6, y1: r.y + 8 };
+    if (placedText.some(b => box.x0 < b.x1 && box.x1 > b.x0 && box.y0 < b.y1 && box.y1 > b.y0)) return;
+    placedText.push(box);
+    ctx.globalAlpha = 0.85;
+    drawSpaced(ctx, label, r.x, r.y, size * 0.32);
+    ctx.globalAlpha = 1;
+  });
+
+  /* 11. a named sea, a ship, a serpent */
+  const seaName = pick(rand, NAME.sea);
+  let seaSpot = null;
+  for (let t = 0; t < 400 && !seaSpot; t++) {
+    const x = 20 + ((rand() * (GW - 40)) | 0), y = 14 + ((rand() * (GH - 28)) | 0);
+    let clear = true;
+    for (let dy = -6; dy <= 6 && clear; dy++) for (let dx = -16; dx <= 16; dx++) {
+      const nxv = x + dx, nyv = y + dy;
+      if (nxv < 0 || nyv < 0 || nxv >= GW || nyv >= GH) { clear = false; break; }
+      if (elev[nyv * GW + nxv] >= SEA_LEVEL - 0.06) { clear = false; break; }
+    }
+    if (clear) seaSpot = [x, y];
+  }
+  if (seaSpot) {
+    ctx.save();
+    ctx.translate(px(seaSpot[0]), py(seaSpot[1]));
+    ctx.rotate((rand() - 0.5) * 0.16);
+    ctx.fillStyle = "rgba(58,70,78,0.6)";
+    ctx.font = "italic 500 19px 'Palatino Linotype', Palatino, Georgia, serif";
+    drawSpaced(ctx, seaName.toUpperCase(), 0, 0, 5.5);
+    ctx.restore();
+  }
+  // tiny ship
+  let shipPlaced = false;
+  for (let t = 0; t < 200 && !shipPlaced; t++) {
+    const x = 14 + ((rand() * (GW - 28)) | 0), y = 12 + ((rand() * (GH - 24)) | 0);
+    let clear = true;
+    for (let dy = -3; dy <= 3 && clear; dy++) for (let dx = -5; dx <= 5; dx++) {
+      const nxv = x + dx, nyv = y + dy;
+      if (nxv < 0 || nyv < 0 || nxv >= GW || nyv >= GH) { clear = false; break; }
+      if (elev[nyv * GW + nxv] >= SEA_LEVEL - 0.04) { clear = false; break; }
+    }
+    if (!clear) continue;
+    shipPlaced = true;
+    const sx = px(x), sy = py(y);
+    ctx.strokeStyle = PAL.ink; ctx.fillStyle = PAL.ink; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(sx - 7, sy + 3); ctx.quadraticCurveTo(sx, sy + 7, sx + 7, sy + 3); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx, sy + 3); ctx.lineTo(sx, sy - 8); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx, sy - 8); ctx.quadraticCurveTo(sx + 6, sy - 4, sx, sy + 1); ctx.closePath();
+    ctx.fillStyle = "rgba(74,58,42,0.75)"; ctx.fill();
+  }
+  ctx.restore(); // unclip chart area
+
+  /* 12. frame with rivets and corner florets */
+  const FX = MAPX - 18, FY = MAPY - 18, FW = MAPW + 36, FH = MAPH + 36;
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 3.5;
+  ctx.strokeRect(FX, FY, FW, FH);
+  ctx.lineWidth = 1.2;
+  ctx.strokeRect(FX + 8, FY + 8, FW - 16, FH - 16);
+  // rivets along the frame
+  ctx.fillStyle = PAL.ink;
+  const rivets = 26;
+  for (let i = 0; i <= rivets; i++) {
+    const t = i / rivets;
+    for (const [rx, ry] of [
+      [FX + t * FW, FY - 4], [FX + t * FW, FY + FH + 4],
+      [FX - 4, FY + t * FH], [FX + FW + 4, FY + t * FH]
+    ]) {
+      ctx.beginPath(); ctx.arc(rx, ry, 2.1, 0, 7); ctx.fill();
+    }
+  }
+  // corner florets
+  for (const [cx0, cy0] of [[FX, FY], [FX + FW, FY], [FX, FY + FH], [FX + FW, FY + FH]]) {
+    ctx.save(); ctx.translate(cx0, cy0);
+    ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.4;
+    for (let p = 0; p < 4; p++) {
+      ctx.save(); ctx.rotate((p * Math.PI) / 2 + Math.PI / 4);
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(7, -3, 13, 0); ctx.quadraticCurveTo(7, 3, 0, 0);
+      ctx.stroke(); ctx.restore();
+    }
+    ctx.beginPath(); ctx.arc(0, 0, 2.6, 0, 7); ctx.fill();
+    ctx.restore();
+  }
+
+  /* 13. title ribbon */
+  const ribbonW = Math.max(360, cfg.name.length * 22 + 120), ribbonH = 54;
+  const rx = MW / 2 - ribbonW / 2, ry = FY - 22;
+  // tails
+  ctx.fillStyle = PAL.parchDeep;
+  for (const dir of [-1, 1]) {
+    const bx = dir < 0 ? rx : rx + ribbonW;
+    ctx.beginPath();
+    ctx.moveTo(bx, ry + 12);
+    ctx.lineTo(bx + dir * 56, ry + 20);
+    ctx.lineTo(bx + dir * 44, ry + ribbonH / 2);
+    ctx.lineTo(bx + dir * 56, ry + ribbonH - 6);
+    ctx.lineTo(bx, ry + ribbonH - 12);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.6; ctx.stroke();
+  }
+  // main band
+  ctx.fillStyle = PAL.ribbon;
+  ctx.fillRect(rx, ry, ribbonW, ribbonH);
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.8;
+  ctx.strokeRect(rx, ry, ribbonW, ribbonH);
+  ctx.strokeRect(rx + 5, ry + 5, ribbonW - 10, ribbonH - 10);
+  ctx.fillStyle = PAL.ink;
+  ctx.font = "600 30px 'Palatino Linotype', Palatino, Georgia, serif";
+  drawSpaced(ctx, cfg.name, MW / 2, ry + 26, 2);
+  ctx.font = "italic 500 13px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.fillStyle = "rgba(74,58,42,0.75)";
+  drawSpaced(ctx, (cfg.label || pick(rand, NAME.epithet)).toUpperCase(), MW / 2, ry + 44, 3.4);
+
+  /* 14. compass rose */
+  const cxr = FX + FW - 108, cyr = FY + 118, CR = 44;
+  ctx.save(); ctx.translate(cxr, cyr);
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(0, 0, CR + 8, 0, 7); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, CR * 0.22, 0, 7); ctx.stroke();
+  for (let p = 0; p < 16; p++) {
+    const a = (p * Math.PI) / 8 - Math.PI / 2;
+    const long = p % 4 === 0, mid = p % 2 === 0;
+    const len = long ? CR : mid ? CR * 0.62 : CR * 0.4;
+    const w = long ? 7 : mid ? 5 : 3.4;
+    ctx.save(); ctx.rotate(a + Math.PI / 2);
+    for (const side of [-1, 1]) {
+      ctx.beginPath();
+      ctx.moveTo(0, -len); ctx.lineTo(side * w, 0); ctx.lineTo(0, 0); ctx.closePath();
+      ctx.fillStyle = side < 0 ? PAL.ink : (long && p === 0 ? PAL.red : PAL.red);
+      ctx.fillStyle = side < 0 ? PAL.ink : (p === 0 ? PAL.red : "#c8b690");
+      ctx.fill();
+      ctx.strokeStyle = PAL.ink; ctx.lineWidth = 0.7; ctx.stroke();
+    }
+    ctx.restore();
+  }
+  ctx.fillStyle = PAL.ink;
+  ctx.font = "600 15px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.textAlign = "center";
+  ctx.fillText("N", 0, -CR - 14);
+  ctx.restore();
+
+  /* 15. legend */
+  const lw = 168, lh = 148, lx = FX + FW - lw - 30, ly = FY + FH - lh - 30;
+  ctx.fillStyle = "rgba(233,220,189,0.88)";
+  ctx.fillRect(lx, ly, lw, lh);
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.6; ctx.strokeRect(lx, ly, lw, lh);
+  ctx.lineWidth = 0.9; ctx.strokeRect(lx + 4, ly + 4, lw - 8, lh - 8);
+  ctx.fillStyle = PAL.ink;
+  ctx.font = "600 14px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.textAlign = "center";
+  drawSpaced(ctx, "LEGEND", lx + lw / 2, ly + 22, 3);
+  ctx.textAlign = "left";
+  ctx.font = "italic 500 12.5px 'Palatino Linotype', Palatino, Georgia, serif";
+  const legendRows = [
+    ["★", "Capital city"], ["●", "Town or port"], ["♣", "Forest"],
+    ["▲", "Mountains"], ["〰", "River"], ["~", "Sea"]
+  ];
+  legendRows.forEach((row, k) => {
+    const yy = ly + 44 + k * 17.5;
+    ctx.fillStyle = k < 2 ? PAL.red : PAL.ink;
+    ctx.font = "13px 'Palatino Linotype', Palatino, Georgia, serif";
+    ctx.fillText(row[0], lx + 14, yy);
+    ctx.fillStyle = PAL.ink;
+    ctx.font = "italic 500 12.5px 'Palatino Linotype', Palatino, Georgia, serif";
+    ctx.fillText(row[1], lx + 34, yy);
+  });
+
+  /* 16. scale bar */
+  const sbx = FX + 34, sby = FY + FH - 46, seg = 34;
+  ctx.strokeStyle = PAL.ink; ctx.lineWidth = 1.2;
+  for (let s = 0; s < 4; s++) {
+    ctx.fillStyle = s % 2 ? PAL.parch : PAL.ink;
+    ctx.fillRect(sbx + s * seg, sby, seg, 7);
+    ctx.strokeRect(sbx + s * seg, sby, seg, 7);
+  }
+  ctx.fillStyle = PAL.ink;
+  ctx.font = "11px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.textAlign = "center";
+  for (let s = 0; s <= 4; s++) ctx.fillText(String(s * 50), sbx + s * seg, sby + 20);
+  ctx.font = "italic 500 11px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.fillText("leagues", sbx + 2 * seg, sby + 34);
+
+  /* 17. cartographer's mark */
+  ctx.textAlign = "right";
+  ctx.fillStyle = "rgba(74,58,42,0.55)";
+  ctx.font = "italic 500 12px 'Palatino Linotype', Palatino, Georgia, serif";
+  ctx.fillText(`Surveyed by the Guild of Unwritten Coasts, in the year of ${pick(rand, NAME.year)}`, FX + FW - 10, FY + FH + 30);
+
+  /* 18. vignette */
+  const vg = ctx.createRadialGradient(MW / 2, MH / 2, MH * 0.42, MW / 2, MH / 2, MH * 0.78);
+  vg.addColorStop(0, "rgba(70,52,28,0)");
+  vg.addColorStop(1, "rgba(70,52,28,0.30)");
+  ctx.fillStyle = vg; ctx.fillRect(0, 0, MW, MH);
+
+  return cv;
+}
+
+/* ---------- gallery + viewer ---------- */
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const grid = document.getElementById("grid");
+const viewer = document.getElementById("viewer");
+const vCanvas = document.getElementById("v-canvas");
+const vTitle = document.getElementById("v-title");
+const vSub = document.getElementById("v-sub");
+const vStage = document.getElementById("v-stage");
+const rendered = new Array(REALMS.length).fill(null);
+let current = -1;
+
+function buildCards() {
+  REALMS.forEach((cfg, i) => {
+    const btn = document.createElement("button");
+    btn.className = "card";
+    btn.setAttribute("aria-label", `Open map ${cfg.name} full screen`);
+    btn.innerHTML = `
+      <span class="frame"><span class="ph" data-i="${i}"></span></span>
+      <span class="meta">
+        <span><h2>${cfg.name}</h2><span class="kind">${cfg.label}</span></span>
+        <span class="no">CHART ${String(i + 1).padStart(2, "0")}</span>
+      </span>`;
+    btn.addEventListener("click", () => openViewer(i));
+    grid.appendChild(btn);
+  });
+}
+
+function renderIntoCard(i) {
+  if (rendered[i]) return;
+  const cv = renderMap(REALMS[i]);
+  rendered[i] = cv;
+  const ph = grid.querySelector(`.ph[data-i="${i}"]`);
+  if (ph) ph.replaceWith(cv);
+}
+
+/* progressive render so the page stays responsive */
+function renderAll() {
+  let i = 0;
+  const step = () => {
+    if (i >= REALMS.length) return;
+    renderIntoCard(i);
+    i++;
+    setTimeout(step, 30);
+  };
+  step();
+}
+
+function fitViewerCanvas() {
+  const cv = rendered[current];
+  if (!cv) return;
+  const r = vStage.getBoundingClientRect();
+  const scale = Math.min(r.width / cv.width, r.height / cv.height);
+  vCanvas.width = cv.width; vCanvas.height = cv.height;
+  vCanvas.style.width = Math.floor(cv.width * scale) + "px";
+  vCanvas.style.height = Math.floor(cv.height * scale) + "px";
+  vCanvas.getContext("2d").drawImage(cv, 0, 0);
+}
+
+function openViewer(i, push = true) {
+  renderIntoCard(i);
+  current = i;
+  const cfg = REALMS[i];
+  vTitle.textContent = cfg.name;
+  vSub.textContent = `Chart ${String(i + 1).padStart(2, "0")} of ${REALMS.length} — ${cfg.label}`;
+  viewer.classList.add("open");
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(fitViewerCanvas);
+  if (push) history.replaceState(null, "", `#/realm/${i + 1}`);
+  document.getElementById("v-close").focus({ preventScroll: true });
+}
+function closeViewer() {
+  viewer.classList.remove("open");
+  document.body.style.overflow = "";
+  history.replaceState(null, "", location.pathname);
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  const card = grid.children[current];
+  if (card) card.focus({ preventScroll: true });
+  current = -1;
+}
+function stepViewer(d) { openViewer((current + d + REALMS.length) % REALMS.length); }
+
+document.getElementById("v-close").addEventListener("click", closeViewer);
+document.getElementById("v-prev").addEventListener("click", () => stepViewer(-1));
+document.getElementById("v-next").addEventListener("click", () => stepViewer(1));
+document.getElementById("v-fs").addEventListener("click", () => {
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  else viewer.requestFullscreen?.().then(fitViewerCanvas).catch(() => {});
+});
+viewer.addEventListener("click", e => { if (e.target === viewer) closeViewer(); });
+document.addEventListener("fullscreenchange", fitViewerCanvas);
+window.addEventListener("resize", () => { if (current >= 0) fitViewerCanvas(); });
+document.addEventListener("keydown", e => {
+  if (current < 0) return;
+  if (e.key === "Escape") closeViewer();
+  else if (e.key === "ArrowLeft") stepViewer(-1);
+  else if (e.key === "ArrowRight") stepViewer(1);
+});
+/* touch swipe */
+let touchX = null;
+vStage.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+vStage.addEventListener("touchend", e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 48) stepViewer(dx < 0 ? 1 : -1);
+  touchX = null;
+}, { passive: true });
+
+/* init */
+buildCards();
+const m = location.hash.match(/#\/realm\/(\d+)/);
+if (m) {
+  const i = Math.min(REALMS.length, Math.max(1, +m[1])) - 1;
+  renderIntoCard(i);
+  openViewer(i, false);
+  renderAll();
+} else {
+  renderAll();
+}
+</script>
+</body>
+</html>
