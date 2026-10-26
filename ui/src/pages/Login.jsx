@@ -18,7 +18,9 @@ export default function Login() {
     setPending(true);
     try {
       await logIn(email, password);
-      window.history.pushState({}, "", "/apps/little-grains");
+      const next = new URLSearchParams(window.location.search).get("next");
+      const destination = next === "/apps/news" ? next : "/apps/little-grains";
+      window.history.pushState({}, "", destination);
       window.dispatchEvent(new PopStateEvent("popstate"));
       window.scrollTo(0, 0);
     } catch (err) {

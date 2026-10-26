@@ -4,6 +4,7 @@ import collectionArtwork from "../assets/genious-apps.png";
 import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
+  { slug: "news", name: "Daily Five", description: "Your Notion newsroom: daily stories, source notes and a searchable archive. Private account access required.", category: "News & ideas", icon: "▤" },
   {
     slug: "rust-learning-path",
     name: "Rust learning path",
