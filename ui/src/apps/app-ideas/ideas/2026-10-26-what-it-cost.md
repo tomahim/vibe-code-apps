@@ -4,6 +4,7 @@ tagline: A Chicken in 1350, a Radio in 1930 - What Things Actually Cost in the M
 pitch: Explore historical prices and wages translated into what they meant - hours of work, shares of income - so the past's economy becomes feelable.
 domains: [HIST, LEARN]
 created: 2026-10-26T06:02:49Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
