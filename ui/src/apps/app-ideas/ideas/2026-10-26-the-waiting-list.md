@@ -4,6 +4,7 @@ tagline: Everything You're Waiting On, In One Place - Who, What, and Since When
 pitch: A calm tracker for open loops that live in other people's hands: replies, deliveries, decisions and promises, with gentle nudge suggestions when the wait runs long.
 domains: [PROD]
 created: 2026-10-26T06:03:08Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
