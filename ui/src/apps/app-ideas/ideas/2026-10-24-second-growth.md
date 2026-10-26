@@ -4,6 +4,7 @@ tagline: The Fire Already Came - Now You Watch What Grows Back, and What the Bur
 pitch: A first-person narrative game about a lookout posted to a burned forest to chart its regrowth, slowly uncovering what the fire revealed and why nobody talks about the last lookout.
 domains: [GAME, HIST]
 created: 2026-10-24T03:16:41Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
