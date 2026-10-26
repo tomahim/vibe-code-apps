@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """PR recap tool: build/open locally; publish/fetch recaps on a recaps branch via git. No AI calls."""
 import argparse, hashlib, json, pathlib, re, subprocess, sys, tempfile, webbrowser
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-TEMPLATE = ROOT / '.claude/assets/pr-review-template.html'
+SKILL_DIR = pathlib.Path(__file__).resolve().parents[1]
+TEMPLATE = SKILL_DIR / 'assets/pr-review-template.html'
 
 def validate(data):
     def text(v, name, maximum=10000):

@@ -4,9 +4,9 @@ Two Claude Code skills and a fixed offline template that turn a pull request int
 
 - `/generate-pr-recap <PR>`: builds validated JSON (schema v2) from the live PR, then renders it with the fixed template. See `.claude/skills/generate-pr-recap/SKILL.md`.
 - `/open-pr-recap <PR>`: opens the recap for a PR, regenerating HTML locally from validated JSON with the trusted template. See `.claude/skills/open-pr-recap/SKILL.md`.
-- Template: `.claude/assets/pr-review-template.html` (template 0.2). Dark IDE-style by default, inline CSS/JS, no network.
-- Helper: `tools/recap.py` (`build`, `open`, `publish`, `fetch`, validation).
-- Example data: `docs/pr-review/examples/example.json` (small synthetic pull request). The skills above are self-contained and cite no external documents.
+- Template: `.claude/skills/generate-pr-recap/assets/pr-review-template.html` (template 0.2). Dark IDE-style by default, inline CSS/JS, no network.
+- Helper: `.claude/skills/generate-pr-recap/scripts/pr-recap-validate.py` (`build`, `open`, `publish`, `fetch`, validation).
+- Example data: `.claude/skills/generate-pr-recap/docs/examples/example.json` (small synthetic pull request). The skills above are self-contained and cite no external documents.
 
 ## Recap layout
 
@@ -15,14 +15,14 @@ A separate PR description tab holds the verbatim PR body and PR-wide context. Ea
 ## Try it
 
 ```
-python3 tools/recap.py build docs/pr-review/examples/example.json --output /tmp/review-example
-python3 tools/recap.py open /tmp/review-example/pr-1-<sha>.html
+python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py build .claude/skills/generate-pr-recap/docs/examples/example.json --output /tmp/review-example
+python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py open /tmp/review-example/pr-1-<sha>.html
 
 # publish/fetch against any git remote (use a throwaway bare repo to try):
 git init --bare /tmp/remote.git
-python3 tools/recap.py publish docs/pr-review/examples/example.json --remote /tmp/remote.git          # dry run
-python3 tools/recap.py publish docs/pr-review/examples/example.json --remote /tmp/remote.git --yes
-python3 tools/recap.py fetch 1 --remote /tmp/remote.git --current-head <sha> --output /tmp/fetched
+python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py publish .claude/skills/generate-pr-recap/docs/examples/example.json --remote /tmp/remote.git          # dry run
+python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py publish .claude/skills/generate-pr-recap/docs/examples/example.json --remote /tmp/remote.git --yes
+python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py fetch 1 --remote /tmp/remote.git --current-head <sha> --output /tmp/fetched
 ```
 
 ## What is automated and what is not

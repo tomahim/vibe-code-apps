@@ -49,7 +49,7 @@ The fixed template defaults to a dark IDE-like surface, muted borders, light cod
 
 ## Render, do not redesign
 
-Do not ask the model to regenerate HTML. Use the fixed versioned `.claude/assets/pr-review-template.html` and `python3 tools/recap.py build <data.json> --output pr-recaps`. CSS and JS are bundled, so output works offline without Tailwind/Alpine CDNs. The renderer escapes raw-text JSON terminators and writes text into the DOM, not HTML. Never interpolate PR data into executable code.
+Do not ask the model to regenerate HTML. Use the fixed versioned `.claude/skills/generate-pr-recap/assets/pr-review-template.html` and `python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py build <data.json> --output pr-recaps`. CSS and JS are bundled, so output works offline without Tailwind/Alpine CDNs. The renderer escapes raw-text JSON terminators and writes text into the DOM, not HTML. Never interpolate PR data into executable code.
 
 Inspect desktop and phone rendering, dedicated PR description tab, compact behavior/design/annex navigation, per-highlight comments and note jumps, dark default, highlights, all files, and unavailable-patch states. Note the template hash and captured SHA.
 
@@ -59,7 +59,7 @@ Preview exact recap and its audience before pushing. A repo branch is visible to
 
 Publish with the helper, which does the git work in a scratch clone and never touches the user's checkout or working branch:
 
-1. Dry run (prints what would be pushed, pushes nothing): `python3 tools/recap.py publish <data.json> --remote <remote name or URL> --current-head <full head SHA from gh pr view>`.
+1. Dry run (prints what would be pushed, pushes nothing): `python3 .claude/skills/generate-pr-recap/scripts/pr-recap-validate.py publish <data.json> --remote <remote name or URL> --current-head <full head SHA from gh pr view>`.
 2. After the user confirms the repository, branch and audience, repeat with `--yes`. If the head moved, the helper refuses; regenerate, or pass `--historical` only if the user wants a labeled historical recap.
 
 The helper creates a genuine orphan `recaps/pr-reviews` branch when absent (no project tree or history), otherwise fetches it. It writes root-level `pr-<number>-<full-head-sha>.html`, the JSON sidecar and `index.json` (PR/head to files, template version and hash), commits, and pushes normally (never force). If another writer wins, it refetches, re-adds its entry and retries once, then stops. An existing recap for the same PR/head is never overwritten; identical content is a no-op.
