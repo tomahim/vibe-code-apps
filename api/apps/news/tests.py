@@ -29,7 +29,7 @@ class AdapterTests(TestCase):
         self.assertIsNone(safe_url("https://user:pass@example.com"))
 
     @patch("apps.news.notion.requests.post")
-    def test_filter_order_pagination_and_cache(self, post):
+    def test_filter_order_and_pagination(self, post):
         post.return_value = Mock(status_code=200, json=lambda: {"results": [record()], "has_more": True, "next_cursor": "next"})
         result = read_news(None, False)
         self.assertEqual(result["next_cursor"], "next")
@@ -43,13 +43,25 @@ class AdapterTests(TestCase):
         self.assertEqual(kwargs["json"]["filter"]["and"][1], {"property": "Published", "date": {"is_not_empty": True}})
         self.assertEqual(kwargs["json"]["page_size"], 20)
         read_news(None, False)
-        self.assertEqual(post.call_count, 1)
+        self.assertEqual(post.call_count, 2)  # never served from a per-worker cache
         read_news("next", True, "Science", "particle")
         self.assertEqual(post.call_args.kwargs["json"]["start_cursor"], "next")
         filters = post.call_args.kwargs["json"]["filter"]["and"]
         self.assertTrue(filters[0]["checkbox"]["equals"])
         self.assertEqual(filters[2], {"property": "Topics", "multi_select": {"contains": "Science"}})
         self.assertEqual(filters[3]["or"][0], {"property": "Title", "title": {"contains": "particle"}})
+
+    @patch("apps.news.notion.requests.patch")
+    @patch("apps.news.notion.requests.get")
+    @patch("apps.news.notion.requests.post")
+    def test_list_after_archive_reflects_notion_immediately(self, post, get, patch_page):
+        get.return_value = Mock(status_code=200, json=lambda: {"parent": {"type": "data_source_id", "data_source_id": SOURCE}})
+        patch_page.return_value = Mock(status_code=200, json=lambda: {"properties": {"Archived": {"checkbox": True}}})
+        post.return_value = Mock(status_code=200, json=lambda: {"results": [record()], "has_more": False})
+        self.assertEqual(len(read_news(None, False)["items"]), 1)
+        set_archived(PAGE, True)
+        post.return_value = Mock(status_code=200, json=lambda: {"results": [], "has_more": False})
+        self.assertEqual(read_news(None, False)["items"], [])
 
     @patch("apps.news.notion.requests.post")
     def test_errors_do_not_return_upstream_secret_body(self, post):
