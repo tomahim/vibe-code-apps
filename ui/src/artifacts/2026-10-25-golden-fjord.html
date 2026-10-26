@@ -101,12 +101,15 @@ uniform vec3 uCamPos, uCamFwd, uCamRight, uCamUp;
 uniform vec3 uSunDir;
 out vec4 outColor;
 
-const float TMAX = 140.0;
+const float TMAX = 260.0;
 const vec2 CABIN = vec2(5.0, -13.0);
-const vec2 SUN_XZ = vec2(0.1772, -0.9843); // normalize(vec2(0.18, -1.0))
+const vec2 SUN_XZ = vec2(0.1772, -0.9843);
 float gCabinBase = 0.0;
+vec3 gTreeY = vec3(0.0);
+float gTreeSel = 0.0;
+const vec2 TREES[3] = vec2[3](vec2(1.8, -10.4), vec2(8.1, -11.6), vec2(7.2, -16.2));
+const float TREEH[3] = float[3](3.0, 3.8, 2.5);
 
-// ---------- noise ----------
 float hash1(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
 float noise(vec2 p){
   vec2 i = floor(p), f = fract(p);
@@ -137,24 +140,23 @@ float ridged(vec2 p){
   return v;
 }
 
-// ---------- terrain ----------
 float terrainH(vec2 p){
-  float back = smoothstep(18.0, 62.0, -p.y);
-  float side = smoothstep(26.0, 62.0, abs(p.x));
+  float back = smoothstep(30.0, 100.0, -p.y);
+  float side = smoothstep(38.0, 100.0, abs(p.x));
   float wall = max(back, side*0.85);
-  // a valley dip around the sun azimuth so the sun sits in the ridgeline
   vec2 dir = normalize(p + vec2(0.001, 0.0));
-  float gap = 1.0 - 0.72*pow(max(dot(dir, SUN_XZ), 0.0), 5.0)*smoothstep(20.0, 60.0, -p.y);
+  float gap = 1.0 - 0.72*pow(max(dot(dir, SUN_XZ), 0.0), 5.0)*smoothstep(36.0, 95.0, -p.y);
   float base = fbm(p*0.045)*1.6 + ridged(p*0.09)*0.9;
-  float h = -4.2 + base*(1.0 + 14.0*wall*gap);
+  float macro = 0.55 + 0.9*ridged(p*0.028 + 11.0);
+  float h = -4.2 + base*(1.0 + 18.0*wall*gap*macro);
+  h += wall*wall*gap*(ridged(p*0.16 + 3.7) - 0.55)*7.0;
   vec2 d = p - CABIN;
-  h += 3.8*exp(-dot(d,d)/30.0); // cabin knoll
-  h += (noise(p*0.55) - 0.5)*(0.55 + 1.8*wall); // mid detail
+  h += 3.8*exp(-dot(d,d)/30.0);
+  h += (noise(p*0.55) - 0.5)*(0.55 + 2.4*wall);
   return h;
 }
 float mapTerrain(vec3 p){ return (p.y - terrainH(p.xz))*0.45; }
 
-// ---------- objects ----------
 float sdBox(vec3 p, vec3 b){
   vec3 q = abs(p) - b;
   return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
@@ -165,24 +167,51 @@ float sdRoundCyl(vec3 p, float r, float h){
 }
 mat2 rot(float a){ float c=cos(a), s=sin(a); return mat2(c,-s,s,c); }
 
+float sdPine(vec3 p, float H, float R){
+  float t = clamp(p.y/H, 0.0, 1.0);
+  float r = R*(1.0 - t*0.92);
+  float dCanopy = max((length(p.xz) - r)*0.82, max(-p.y + 0.25, p.y - H));
+  float dTrunk = max(length(p.xz) - 0.09, max(-p.y - 0.35, p.y - 0.35));
+  return min(dCanopy, dTrunk)*0.8;
+}
+
 vec2 mapObjects(vec3 p){
   float best = 1e9; float id = 0.0;
   vec3 q = (p - vec3(CABIN.x, gCabinBase, CABIN.y))/1.3;
-  // cabin body
-  float d = sdBox(q - vec3(0.0, 0.75, 0.0), vec3(1.1, 0.75, 0.9));
+  float d = sdBox(q - vec3(0.0, 0.05, 0.0), vec3(1.22, 0.16, 1.02));
+  if(d*1.3 < best){ best = d*1.3; id = 6.0; }
+  d = sdBox(q - vec3(0.0, 0.75, 0.0), vec3(1.1, 0.75, 0.9));
   if(d*1.3 < best){ best = d*1.3; id = 2.0; }
-  // gable roof: ridge along z, sloped slabs + solid gable ends
+  vec3 sx = vec3(abs(q.x) - 1.12, mod(q.y - 0.05, 0.37) - 0.185, abs(q.z) - 0.94);
+  float dStub = sdBox(sx, vec3(0.12, 0.075, 0.10));
+  vec3 sz = vec3(abs(q.x) - 1.06, mod(q.y + 0.135, 0.37) - 0.185, abs(q.z) - 1.00);
+  dStub = min(dStub, sdBox(sz, vec3(0.10, 0.075, 0.12)));
+  dStub = max(dStub, q.y - 1.48);
+  if(dStub*1.3 < best){ best = dStub*1.3; id = 2.0; }
   float roofPlane = dot(vec2(abs(q.x), q.y - 1.5), vec2(0.7071, 0.7071)) - 0.905;
   float dR = abs(roofPlane) - 0.07;
   dR = max(dR, abs(q.z) - 1.15);
   dR = max(dR, 1.30 - q.y);
+  dR = min(dR, sdBox(q - vec3(0.0, 2.76, 0.0), vec3(0.10, 0.06, 1.16)));
   float dGable = max(max(roofPlane, 1.5 - q.y), abs(q.z) - 0.88);
   if(dR*1.3 < best){ best = dR*1.3; id = 3.0; }
   if(dGable*1.3 < best){ best = dGable*1.3; id = 2.0; }
-  // chimney
   float dC = sdBox(q - vec3(0.55, 2.15, 0.15), vec3(0.11, 0.5, 0.11));
+  dC = min(dC, sdBox(q - vec3(0.55, 2.68, 0.15), vec3(0.16, 0.05, 0.16)));
   if(dC*1.3 < best){ best = dC*1.3; id = 3.0; }
-  // dock toward the water (+z)
+  float dP = sdBox(q - vec3(0.0, 0.16, 1.30), vec3(0.60, 0.06, 0.42));
+  dP = min(dP, sdBox(q - vec3(0.50, 0.78, 1.60), vec3(0.05, 0.60, 0.05)));
+  dP = min(dP, sdBox(q - vec3(-0.50, 0.78, 1.60), vec3(0.05, 0.60, 0.05)));
+  float porchPlane = dot(vec2(q.z - 1.0, q.y - 1.55), vec2(0.3305, 0.9439));
+  float dPR = abs(porchPlane) - 0.045;
+  dPR = max(dPR, abs(q.x) - 0.66);
+  dPR = max(dPR, q.z - 1.75);
+  dPR = max(dPR, 0.95 - q.z);
+  dP = min(dP, dPR);
+  if(dP*1.3 < best){ best = dP*1.3; id = 2.0; }
+  if(dPR*1.3 < best){ best = dPR*1.3; id = 3.0; }
+  float dW = sdBox(q - vec3(1.85, 0.30, 0.35), vec3(0.32, 0.30, 0.55));
+  if(dW*1.3 < best){ best = dW*1.3; id = 2.0; }
   float dockY = (0.42 - gCabinBase)/1.3;
   float dD = sdBox(q - vec3(0.0, dockY, 4.4), vec3(0.5, 0.05, 1.6));
   for(int pi=0; pi<3; pi++){
@@ -191,7 +220,11 @@ vec2 mapObjects(vec3 p){
     dD = min(dD, sdBox(q - vec3(-0.36, dockY - 0.8, pz), vec3(0.05, 0.8, 0.05)));
   }
   if(dD*1.3 < best){ best = dD*1.3; id = 2.0; }
-  // drifting ice floes
+  for(int i=0;i<3;i++){
+    vec3 tp = p - vec3(TREES[i].x, gTreeY[i], TREES[i].y);
+    float dT = sdPine(tp, TREEH[i], TREEH[i]*0.34);
+    if(dT < best){ best = dT; id = 5.0; gTreeSel = float(i); }
+  }
   for(int i=0;i<6;i++){
     float fi = float(i);
     vec2 base = vec2(-9.0 + 3.4*fi + hash1(vec2(fi, 1.0))*2.0, -1.5 - hash1(vec2(fi, 7.0))*7.0);
@@ -210,7 +243,6 @@ vec2 map(vec3 p){
   return (o.x < dT) ? o : vec2(dT, 1.0);
 }
 
-// ---------- marching ----------
 vec2 march(vec3 ro, vec3 rd, float tmax, float epsScale, int steps){
   float t = 0.03;
   for(int i=0;i<260;i++){
@@ -225,7 +257,7 @@ vec2 march(vec3 ro, vec3 rd, float tmax, float epsScale, int steps){
 }
 float marchTerrain(vec3 ro, vec3 rd, float tmax, float epsScale, int steps){
   float t = 0.05 + 0.5*hash1(gl_FragCoord.xy*0.93);
-  for(int i=0;i<90;i++){
+  for(int i=0;i<110;i++){
     if(i >= steps) break;
     vec3 p = ro + rd*t;
     float h = mapTerrain(p);
@@ -242,20 +274,18 @@ float softShadow(vec3 ro, vec3 rd){
     float h = p.y - terrainH(p.xz);
     res = min(res, 9.0*h/t);
     t += clamp(h*0.7, 0.12, 2.5);
-    if(res < 0.01 || t > 70.0) break;
+    if(res < 0.01 || t > 90.0) break;
   }
   return clamp(res, 0.0, 1.0);
 }
 vec3 terrainNormal(vec3 p, float t){
   float e = 0.02 + 0.004*t;
-  float h = terrainH(p.xz);
   return normalize(vec3(
     terrainH(p.xz - vec2(e,0.0)) - terrainH(p.xz + vec2(e,0.0)),
     2.0*e,
     terrainH(p.xz - vec2(0.0,e)) - terrainH(p.xz + vec2(0.0,e))));
 }
 
-// ---------- sky ----------
 vec3 skyColor(vec3 rd){
   float sd = max(dot(rd, uSunDir), 0.0);
   float y = clamp(rd.y, 0.0, 1.0);
@@ -265,13 +295,11 @@ vec3 skyColor(vec3 rd){
   vec3 col = mix(hor, mid, smoothstep(0.0, 0.22, y));
   col = mix(col, zen, smoothstep(0.15, 0.75, y));
   col = mix(col, vec3(1.05, 0.52, 0.24), pow(sd, 4.0)*0.45*(1.0-y));
-  // sun disc + halos
   float disc = smoothstep(0.99890, 0.99940, sd);
   col = mix(col, vec3(1.9, 0.62, 0.12)*1.3, disc);
   col += vec3(1.4, 0.80, 0.40) * pow(sd, 350.0) * 0.55;
   col += vec3(1.2, 0.66, 0.32) * pow(sd, 90.0) * 0.55;
   col += vec3(1.0, 0.68, 0.38) * pow(sd, 6.0) * 0.15;
-  // clouds
   if(rd.y > 0.015){
     vec2 cuv = rd.xz/(rd.y + 0.14)*1.3 + vec2(uTime*0.006, uTime*0.002);
     float c = fbm(cuv*1.7);
@@ -282,43 +310,58 @@ vec3 skyColor(vec3 rd){
   return col;
 }
 vec3 haze(vec3 col, float t, vec3 rd){
-  float f = 1.0 - exp(-t*0.0042);
-  vec3 hazeCol = mix(vec3(0.52, 0.55, 0.62), vec3(1.05, 0.62, 0.34), pow(max(dot(rd, uSunDir), 0.0), 3.0));
+  float f = 1.0 - exp(-t*0.0038);
+  vec3 hazeCol = mix(vec3(0.55, 0.57, 0.64), vec3(1.05, 0.62, 0.34), pow(max(dot(rd, uSunDir), 0.0), 3.0));
   return mix(col, hazeCol, clamp(f, 0.0, 1.0));
 }
 
-// ---------- terrain shading ----------
-vec3 terrainAlbedo(vec3 p, vec3 n){
+vec3 terrainAlbedo(vec3 p, vec3 n, out float forestOut){
   float h = p.y;
   float slope = 1.0 - n.y;
   vec3 grass = vec3(0.15, 0.21, 0.12);
   vec3 rock  = vec3(0.30, 0.26, 0.24);
   vec3 snow  = vec3(0.92, 0.94, 0.99);
   vec3 col = mix(grass, rock, smoothstep(0.12, 0.45, slope));
-  col = mix(col, rock*0.85, smoothstep(3.5, 8.0, h));
-  float snowline = 6.0 + noise(p.xz*0.35)*2.0;
-  float sn = smoothstep(snowline, snowline + 1.6, h) * smoothstep(0.62, 0.30, slope);
+  col = mix(col, rock*0.85, smoothstep(6.0, 14.0, h));
+  float strata = sin(h*1.9 + noise(p.xz*0.7)*3.5);
+  col *= 1.0 - 0.14*smoothstep(0.30, 0.55, slope)*smoothstep(0.2, 0.9, strata);
+  col *= 0.88 + 0.24*noise(p.xz*8.0);
+  float treeBand = smoothstep(0.35, 1.2, h) * smoothstep(16.0, 8.0, h);
+  float gentle = smoothstep(0.80, 0.35, slope);
+  float clumps = fbm3(p.xz*0.12);
+  float speck = noise(p.xz*6.0)*0.6 + noise(p.xz*16.0)*0.4;
+  float belt = treeBand * gentle;
+  float cm = smoothstep(0.44, 0.51, clumps + speck*0.12);
+  float cedge = smoothstep(0.39, 0.44, clumps + speck*0.12) - cm;
+  float forest = belt * cm;
+  vec3 conifer = mix(vec3(0.012, 0.052, 0.020), vec3(0.045, 0.115, 0.038), noise(p.xz*27.0));
+  conifer *= 0.8 + 0.4*speck;
+  col = mix(col, conifer, forest*0.97);
+  col = mix(col, vec3(0.07, 0.15, 0.05), belt*cedge*0.6);
+  float snowline = 13.0 + noise(p.xz*0.3)*3.0;
+  float sn = smoothstep(snowline, snowline + 2.5, h) * smoothstep(0.62, 0.30, slope);
   col = mix(col, snow, sn);
-  // sandy shoreline, darker when wet
   float shore = smoothstep(0.7, 0.05, h);
   col = mix(col, vec3(0.52, 0.46, 0.35), shore*0.8);
   col *= mix(0.55, 1.0, smoothstep(-0.15, 0.45, h));
+  forestOut = forest;
   return col;
 }
 vec3 shadeTerrain(vec3 p, vec3 n, vec3 rd, float t, float shadowed){
-  vec3 alb = terrainAlbedo(p, n);
+  float forest;
+  vec3 alb = terrainAlbedo(p, n, forest);
   float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
   float sh = shadowed > 0.5 ? softShadow(p + n*0.06, uSunDir) : 1.0;
   vec3 sunCol = vec3(1.3, 0.68, 0.34)*3.0;
   vec3 amb = mix(vec3(0.08, 0.11, 0.18), vec3(0.26, 0.32, 0.46), 0.5 + 0.5*n.y);
   vec3 col = alb*(sunCol*dif*sh + amb);
-  // snow sparkle backscatter toward sun
   float rim = pow(1.0 - max(dot(n, -rd), 0.0), 3.0);
   col += vec3(1.0, 0.6, 0.35)*rim*pow(max(dot(rd, uSunDir), 0.0), 2.0)*0.25;
-  return haze(col, t, rd);
+  col = haze(col, t, rd);
+  col *= mix(vec3(1.0), vec3(0.34, 0.55, 0.34), forest*0.9);
+  return col;
 }
 
-// ---------- water ----------
 float swell(vec2 p, float t){
   return 0.11*sin(p.x*0.31 + p.y*0.29 + t*0.9)
        + 0.075*sin(-p.x*0.27 + p.y*0.36 + t*1.25)
@@ -334,7 +377,9 @@ vec3 waterNormal(vec2 p, float t){
 }
 vec3 cheapTerrainColor(vec3 p, float t){
   vec3 n = terrainNormal(p, t);
-  vec3 alb = terrainAlbedo(p, n);
+  float forest;
+  vec3 alb = terrainAlbedo(p, n, forest);
+  alb *= mix(vec3(1.0), vec3(0.45, 0.65, 0.45), forest*0.8);
   float dif = clamp(dot(n, uSunDir), 0.0, 1.0)*0.9 + 0.1;
   return alb*(vec3(1.25, 0.72, 0.40)*2.2*dif + vec3(0.3, 0.36, 0.5));
 }
@@ -344,7 +389,7 @@ vec3 shadeWater(vec3 p, vec3 rd, float t){
   r.y = abs(r.y) + 0.02;
   r = normalize(r);
   vec3 refl;
-  float rt = marchTerrain(p + vec3(0.0, 0.06, 0.0), r, 90.0, 0.008, 64);
+  float rt = marchTerrain(p + vec3(0.0, 0.06, 0.0), r, 130.0, 0.006, 80);
   if(rt > 0.0){
     vec3 rp = p + vec3(0.0, 0.06, 0.0) + r*rt;
     refl = rp.y > 0.02 ? haze(cheapTerrainColor(rp, rt), rt + t, r) : skyColor(r);
@@ -354,54 +399,133 @@ vec3 shadeWater(vec3 p, vec3 rd, float t){
   float fres = 0.025 + 0.975*pow(1.0 - max(dot(-rd, n), 0.0), 5.0);
   vec3 deep = vec3(0.020, 0.065, 0.085)*(0.6 + 0.4*clamp(dot(n, uSunDir), 0.0, 1.0));
   vec3 col = mix(deep, refl, clamp(fres*1.25, 0.0, 1.0));
-  // sun glitter path
   float g1 = pow(max(dot(r, uSunDir), 0.0), 800.0);
   float g2 = pow(max(dot(r, uSunDir), 0.0), 48.0);
   col += vec3(1.3, 0.75, 0.40)*(g1*7.0 + g2*0.35);
   return haze(col, t, rd);
 }
 
-// ---------- cabin / floe shading ----------
 float windowMask(vec3 q){
   float w = 0.0;
-  // front face (z+)
   if(q.z > 0.88){
     vec2 w1 = vec2(abs(q.x - 0.55), abs(q.y - 0.78));
     vec2 w2 = vec2(abs(q.x + 0.55), abs(q.y - 0.78));
     w = max(w, step(w1.x, 0.17)*step(w1.y, 0.22));
     w = max(w, step(w2.x, 0.17)*step(w2.y, 0.22));
   }
-  // side faces
   if(abs(q.x) > 1.08){
     vec2 ws = vec2(abs(q.z), abs(q.y - 0.78));
     w = max(w, step(ws.x, 0.17)*step(ws.y, 0.22));
   }
+  if(q.z > 0.80 && q.y > 1.45){
+    vec2 wg = vec2(abs(q.x), abs(q.y - 1.80));
+    w = max(w, step(wg.x, 0.12)*step(wg.y, 0.12));
+  }
   return w;
 }
-float doorMask(vec3 q){
-  return (q.z > 0.88 && abs(q.x) < 0.22 && q.y < 0.78) ? 1.0 : 0.0;
+float frameMask(vec3 q){
+  float f = 0.0;
+  if(q.z > 0.88){
+    vec2 w1 = vec2(abs(q.x - 0.55), abs(q.y - 0.78));
+    vec2 w2 = vec2(abs(q.x + 0.55), abs(q.y - 0.78));
+    f = max(f, step(w1.x, 0.22)*step(w1.y, 0.27));
+    f = max(f, step(w2.x, 0.22)*step(w2.y, 0.27));
+  }
+  if(abs(q.x) > 1.08){
+    vec2 ws = vec2(abs(q.z), abs(q.y - 0.78));
+    f = max(f, step(ws.x, 0.22)*step(ws.y, 0.27));
+  }
+  if(q.z > 0.80 && q.y > 1.45){
+    vec2 wg = vec2(abs(q.x), abs(q.y - 1.80));
+    f = max(f, step(wg.x, 0.17)*step(wg.y, 0.17));
+  }
+  return f;
 }
-vec3 shadeCabin(vec3 p, vec3 n, float id, float t, vec3 rd){
+float mullionMask(vec3 q){
+  float m = 0.0;
+  if(q.z > 0.88 && q.y < 1.4){
+    float c = min(abs(abs(q.x) - 0.55), abs(q.y - 0.78));
+    m = max(m, 1.0 - smoothstep(0.015, 0.045, c));
+  }
+  if(abs(q.x) > 1.08){
+    float c = min(abs(q.z), abs(q.y - 0.78));
+    m = max(m, 1.0 - smoothstep(0.015, 0.045, c));
+  }
+  return m;
+}
+float doorMask(vec3 q){
+  return (q.z > 0.88 && q.z < 1.05 && abs(q.x) < 0.22 && q.y > 0.05 && q.y < 0.78) ? 1.0 : 0.0;
+}
+
+vec3 shadeWood(vec3 p, vec3 n, float t, vec3 rd){
   vec3 q = (p - vec3(CABIN.x, gCabinBase, CABIN.y))/1.3;
+  float logRow = fract((q.y - 0.05)/0.37);
+  float gap = smoothstep(0.0, 0.10, logRow)*smoothstep(1.0, 0.90, logRow);
+  vec3 col = vec3(0.34, 0.235, 0.155)*(0.72 + 0.28*gap);
+  if(n.y > 0.6){
+    float plank = fract(q.z*2.6);
+    float pgap = smoothstep(0.0, 0.08, plank)*smoothstep(1.0, 0.92, plank);
+    col = vec3(0.36, 0.25, 0.16)*(0.78 + 0.22*pgap);
+  }
+  col *= 0.88 + 0.24*noise(q.xz*6.0 + q.y*3.0);
+  float frm = frameMask(q)*(1.0 - windowMask(q));
+  col = mix(col, vec3(0.26, 0.20, 0.14), frm);
+  if(doorMask(q) > 0.5){
+    col = vec3(0.16, 0.10, 0.07)*(0.9 + 0.1*sin(q.y*40.0));
+    col *= step(abs(q.x), 0.19)*step(0.03, q.y);
+  }
+  if(q.z > 0.86 && abs(q.x) < 0.30 && q.y > 0.70 && q.y < 0.80) col = vec3(0.24, 0.18, 0.12);
+  float w = windowMask(q);
+  float flicker = 1.0 + 0.06*sin(uTime*2.7 + q.x*9.0);
+  vec3 lit = vec3(1.0, 0.55, 0.20)*2.6*flicker;
+  lit = mix(lit, vec3(0.22, 0.13, 0.06), mullionMask(q));
+  col = mix(col, lit, w);
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float l = 0.35 + 0.65*dif;
+  if(w > 0.5) l = 1.0;
+  col *= vec3(1.25, 0.80, 0.5)*l + vec3(0.20, 0.25, 0.38)*(1.0 - l)*0.7;
+  return haze(col, t, rd);
+}
+vec3 shadeRoof(vec3 p, vec3 n, float t, vec3 rd){
+  vec3 q = (p - vec3(CABIN.x, gCabinBase, CABIN.y))/1.3;
+  vec3 col = vec3(0.55, 0.24, 0.12);
+  float seam = 0.85 + 0.15*smoothstep(0.0, 0.06, abs(fract(q.z*2.2) - 0.5));
+  col *= seam;
+  if(n.y > 0.70) col = mix(col, vec3(0.93, 0.95, 1.0), smoothstep(0.70, 0.90, n.y)*0.85);
+  if(abs(q.x - 0.55) < 0.17 && abs(q.z - 0.15) < 0.17 && q.y > 1.7) col = vec3(0.35, 0.33, 0.33);
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float l = 0.35 + 0.65*dif;
+  col *= vec3(1.25, 0.80, 0.5)*l + vec3(0.20, 0.25, 0.38)*(1.0 - l)*0.7;
+  return haze(col, t, rd);
+}
+vec3 shadeStone(vec3 p, vec3 n, float t, vec3 rd){
+  vec3 col = vec3(0.42, 0.40, 0.38)*(0.8 + 0.3*noise(p.xz*14.0 + p.y*10.0));
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float l = 0.30 + 0.70*dif;
+  col *= vec3(1.25, 0.80, 0.5)*l + vec3(0.20, 0.25, 0.38)*(1.0 - l)*0.7;
+  return haze(col, t, rd);
+}
+vec3 shadePine(vec3 p, vec3 n, float t, vec3 rd){
+  int ti = int(gTreeSel + 0.5);
+  vec3 q = p - vec3(TREES[ti].x, gTreeY[ti], TREES[ti].y);
   vec3 col;
-  if(id < 2.5){
-    // wood body + dock, plank striping
-    col = vec3(0.34, 0.235, 0.155)*(0.88 + 0.12*sin(q.y*34.0));
-    if(doorMask(q) > 0.5) col = vec3(0.16, 0.10, 0.07);
-    float w = windowMask(q);
-    float flicker = 1.0 + 0.06*sin(uTime*2.7 + q.x*9.0);
-    col = mix(col, vec3(1.0, 0.55, 0.20)*2.6*flicker, w);
+  if(q.y < 0.35){
+    col = vec3(0.16, 0.11, 0.07);
   } else {
-    // rusted roof + chimney, snow on upward faces
-    col = vec3(0.55, 0.24, 0.12);
-    if(n.y > 0.78) col = mix(col, vec3(0.93, 0.95, 1.0), smoothstep(0.78, 0.92, n.y)*0.85);
-    if(abs(q.x - 0.55) < 0.14 && abs(q.z - 0.15) < 0.14 && q.y > 1.7) col = vec3(0.35, 0.33, 0.33);
+    col = mix(vec3(0.05, 0.13, 0.055), vec3(0.12, 0.24, 0.09), noise(q.xz*9.0 + q.y*6.0));
+    if(n.y > 0.55) col = mix(col, vec3(0.85, 0.9, 0.95), smoothstep(0.55, 0.9, n.y)*0.35);
   }
   float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
-  float lit = 0.35 + 0.65*dif;
-  // emissive windows stay bright in shade
-  if(id < 2.5 && windowMask(q) > 0.5) lit = 1.0;
-  col *= vec3(1.25, 0.80, 0.5)*lit + vec3(0.20, 0.25, 0.38)*(1.0 - lit)*0.7;
+  float l = 0.30 + 0.70*dif;
+  col *= vec3(1.25, 0.80, 0.5)*l + vec3(0.20, 0.25, 0.38)*(1.0 - l)*0.7;
+  return haze(col, t, rd);
+}
+vec3 shadeBoat(vec3 p, vec3 n, float t, vec3 rd){
+  vec3 col = vec3(0.30, 0.19, 0.11)*(0.9 + 0.1*sin(p.z*24.0));
+  if(n.y > 0.6) col = vec3(0.36, 0.24, 0.15);
+  float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
+  float l = 0.35 + 0.65*dif;
+  col *= vec3(1.25, 0.80, 0.5)*l + vec3(0.20, 0.25, 0.38)*(1.0 - l)*0.7;
   return haze(col, t, rd);
 }
 vec3 shadeFloe(vec3 p, vec3 n, float t, vec3 rd){
@@ -410,7 +534,6 @@ vec3 shadeFloe(vec3 p, vec3 n, float t, vec3 rd){
   vec3 alb = mix(side, top, smoothstep(0.3, 0.75, n.y));
   float dif = clamp(dot(n, uSunDir), 0.0, 1.0);
   vec3 col = alb*(vec3(1.25, 0.75, 0.45)*2.0*dif + vec3(0.28, 0.34, 0.48));
-  // sparkle
   float sp = pow(noise(p.xz*24.0), 8.0)*1.5;
   col += vec3(1.0, 0.8, 0.55)*sp*dif;
   return haze(col, t, rd);
@@ -430,6 +553,7 @@ vec3 aces(vec3 x){
 
 void main(){
   gCabinBase = terrainH(CABIN);
+  for(int i=0;i<3;i++) gTreeY[i] = terrainH(TREES[i]);
   vec2 uv = (gl_FragCoord.xy*2.0 - uRes)/uRes.y;
   vec3 ro = uCamPos;
   vec3 rd = normalize(uCamFwd*1.55 + uv.x*uCamRight + uv.y*uCamUp);
@@ -440,14 +564,19 @@ void main(){
   if(hit.x > 0.0){
     vec3 p = ro + rd*hit.x;
     if(hit.y < 1.5){
-      vec3 n = terrainNormal(p, hit.x);
-      col = shadeTerrain(p, n, rd, hit.x, 1.0);
+      col = shadeTerrain(p, terrainNormal(p, hit.x), rd, hit.x, 1.0);
+    } else if(hit.y < 2.5){
+      col = shadeWood(p, objectNormal(p), hit.x, rd);
     } else if(hit.y < 3.5){
-      vec3 n = objectNormal(p);
-      col = shadeCabin(p, n, hit.y, hit.x, rd);
+      col = shadeRoof(p, objectNormal(p), hit.x, rd);
+    } else if(hit.y < 4.5){
+      col = shadeFloe(p, objectNormal(p), hit.x, rd);
+    } else if(hit.y < 5.5){
+      col = shadePine(p, objectNormal(p), hit.x, rd);
+    } else if(hit.y < 6.5){
+      col = shadeStone(p, objectNormal(p), hit.x, rd);
     } else {
-      vec3 n = objectNormal(p);
-      col = shadeFloe(p, n, hit.x, rd);
+      col = shadeBoat(p, objectNormal(p), hit.x, rd);
     }
   } else if(tWater < TMAX){
     col = shadeWater(ro + rd*tWater, rd, tWater);
@@ -455,7 +584,28 @@ void main(){
     col = skyColor(rd);
   }
 
-  col += (hash1(gl_FragCoord.xy*1.37) - 0.5) * 0.008; // debanding dither
+  // chimney smoke: a thin noise-scrolled column above the chimney
+  {
+    vec3 sro = vec3(CABIN.x + 0.715, gCabinBase + 3.42, CABIN.y + 0.195);
+    float hitT = hit.x > 0.0 ? hit.x : (tWater < TMAX ? tWater : TMAX);
+    float t0 = max(0.0, dot(sro - ro, rd) - 0.4);
+    for(int i=0;i<3;i++){
+      float ts = t0 + 0.3 + 0.45*float(i);
+      if(ts < hitT){
+        vec3 sp = ro + rd*ts;
+        float hgt = sp.y - sro.y;
+        float lat = length(sp.xz - sro.xz - vec2(0.12, 0.05)*hgt);
+        vec2 suv = sp.xz*2.6 + vec2(uTime*0.10, uTime*0.07) + sp.y*1.1 - uTime*0.55;
+        float d = fbm3(suv);
+        float a = smoothstep(0.50, 0.75, d)
+                * smoothstep(1.1, 0.25, lat)
+                * smoothstep(0.0, 0.5, hgt) * exp(-hgt*0.55) * 0.12;
+        col = mix(col, vec3(1.0, 0.72, 0.45)*(0.6 + 0.8*pow(max(dot(rd, uSunDir), 0.0), 2.0)), a);
+      }
+    }
+  }
+
+  col += (hash1(gl_FragCoord.xy*1.37) - 0.5) * 0.008;
   col = aces(col*1.05);
   col = pow(col, vec3(0.4545));
   vec2 vuv = gl_FragCoord.xy/uRes*2.0 - 1.0;
