@@ -4,7 +4,9 @@ const path = '/apps/app-ideas';
 const slug = '048-hindsight-league';
 const name = 'Hindsight League';
 const card = (page) => page.locator('.idea-card').filter({ hasText: name });
-// Inbox defaults to the full-screen swipe deck; exit it to reach tabs and the grid.
+// Existing swipe/rating scenarios exercise the mobile default.
+test.use({ viewport: { width: 390, height: 844 } });
+// Exit the full-screen swipe deck to reach tabs and the grid.
 // The List button exists both on the deck top bar and in the list toolbar.
 const exitSwipe = (page) => page.getByRole('button', { name: 'List', exact: true }).click();
 
@@ -178,4 +180,46 @@ test('Inbox swipe deck: a pointer swipe down archives the card', async ({ page }
   await exitSwipe(page);
   await page.getByRole('button', { name: /^Archive/ }).click();
   await expect(page.locator('.idea-card').first()).toContainText(firstName);
+});
+
+for (const [width, mode] of [[390, 'swipe'], [700, 'swipe'], [701, 'list'], [1440, 'list']]) {
+  test(`Inbox defaults to ${mode} at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await ratings(page);
+    await page.goto(path);
+    await expect(page.locator(mode === 'swipe' ? '.swipe-deck' : '.ideas-grid')).toBeVisible();
+    if (width === 390 || width === 1440) await page.screenshot({ path: `/tmp/ideas-default-${width}.png` });
+    if (mode === 'swipe') {
+      await expect(page.locator('.swipe-deck')).toBeVisible();
+      await page.getByRole('button', { name: 'List', exact: true }).click();
+      await expect(page.locator('.ideas-grid')).toBeVisible();
+    } else {
+      await expect(page.locator('.ideas-grid')).toBeVisible();
+      await page.getByRole('button', { name: 'Swipe', exact: true }).click();
+      await expect(page.locator('.swipe-deck')).toBeVisible();
+    }
+    await page.reload();
+    await expect(page.locator(mode === 'swipe' ? '.swipe-deck' : '.ideas-grid')).toBeVisible();
+  });
+}
+
+test('automatic default follows resize until a manual choice, which survives tabs and resize', async ({ page }) => {
+  await ratings(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(path);
+  await expect(page.locator('.ideas-grid')).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.swipe-deck')).toBeVisible();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.locator('.ideas-grid')).toBeVisible();
+  await page.getByRole('button', { name: 'Swipe', exact: true }).click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.locator('.swipe-deck')).toBeVisible();
+  await page.getByRole('button', { name: 'List', exact: true }).click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.ideas-grid')).toBeVisible();
+  await page.getByRole('button', { name: /^Promising/ }).click();
+  await page.getByRole('button', { name: /^Inbox/ }).click();
+  await expect(page.locator('.ideas-grid')).toBeVisible();
 });

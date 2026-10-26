@@ -37,7 +37,14 @@ The list, search, domain filters and detail view update automatically at build t
 
 ## Inbox swipe deck
 
-The Inbox defaults to a swipe deck: one card at a time showing only the pitch, with
+The Inbox defaults to the list on screens wider than 700 CSS pixels, and to the
+swipe deck at 700px or narrower (the existing mobile layout breakpoint). Before
+a manual choice, resizing across that breakpoint updates the default. The existing
+Swipe/List switch overrides the default for the current visit, including across
+resizes and tab changes. Nothing is persisted; reopening or refreshing the page
+uses the screen width again.
+
+The swipe deck shows one card at a time showing only the pitch, with
 a Details button that expands the full spec (Back returns to the card). Swipe to
 rate: **up = 3 stars, left = 2 stars, down = 1 star**; **right skips** the card
 without rating it (no API call, no commit) and sends it to the back of the deck,
