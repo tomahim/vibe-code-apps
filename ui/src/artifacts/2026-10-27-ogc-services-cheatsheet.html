@@ -155,7 +155,8 @@ h1 span { color: var(--muted); font-weight: 500; }
 .link-btn:hover { color: var(--ink); }
 
 /* ---------- sections ---------- */
-main { padding-block: 28px 64px; display: grid; gap: 48px; }
+main { padding-block: 28px 64px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
+main > * { min-width: 0; }
 .sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin-bottom: 14px; }
 h2 {
   font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
@@ -279,6 +280,9 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px
 footer .wrap { padding-block: 22px 40px; display: grid; gap: 6px; }
 footer p { margin: 0; max-width: 90ch; }
 
+@media (max-width: 700px) {
+  .toolbar { position: static; }
+}
 @media (max-width: 560px) {
   .params { grid-template-columns: 1fr; }
   .params dt { border-bottom: 0; padding-bottom: 0; }
