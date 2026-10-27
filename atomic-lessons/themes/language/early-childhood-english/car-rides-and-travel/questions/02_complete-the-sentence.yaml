@@ -1,0 +1,22 @@
+id: 777d41b3-5ac2-492f-b189-f8431e0b8122
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais te détacher. »
+
+
+  I''m going to ____ you.'
+choices:
+- id: 977c060e-1405-4530-81e9-63a80ea5eaec
+  text: buckle
+- id: 6c8e9a77-17b2-4a78-afdb-6a594f4feb15
+  text: bundle up
+- id: 076dd38c-95b7-410c-b1d3-063819a0ac05
+  text: unbuckle
+- id: 4a38fcfd-3994-4766-a685-ab75eca24add
+  text: buckle up
+correct_choice_ids:
+- 076dd38c-95b7-410c-b1d3-063819a0ac05
+explanation: « Unbuckle » signifie détacher la ceinture. « Buckle/buckle up » renvoient à l’attacher et « bundle up » à emmitoufler.
+archived: false

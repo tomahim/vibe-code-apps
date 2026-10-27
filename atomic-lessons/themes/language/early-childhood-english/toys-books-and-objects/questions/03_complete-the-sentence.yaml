@@ -1,0 +1,22 @@
+id: 58029e58-49cc-46e5-9e39-7fb59411fd93
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu veux qu''on la lise encore une fois ? »
+
+
+  Do you want to read it ____ time?'
+choices:
+- id: c6957825-a011-469e-99fa-3df6e99274df
+  text: no more
+- id: 66354335-d0f9-494c-b9de-b7c608c5c8b6
+  text: one less
+- id: b8f655a4-6edc-41a7-b5e5-0eb7072367c7
+  text: any less
+- id: e239049f-7a45-4eb0-843a-96ef72f246ab
+  text: one more
+correct_choice_ids:
+- e239049f-7a45-4eb0-843a-96ef72f246ab
+explanation: « One more time » signifie encore une fois. « One less » évoque une unité de moins ; « no more » signifie plus aucun.
+archived: false

@@ -1,0 +1,22 @@
+id: edc568f4-7826-48a5-8ed1-aa906df6d9b7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu peux me regarder cuisiner. »
+
+
+  You can ____ me cook.'
+choices:
+- id: 897e9983-8418-4121-9de6-9ccad0ac8e7e
+  text: watch
+- id: 7f5eaae9-723a-482c-a3ef-1973a8524637
+  text: watches
+- id: d7d92bef-54ab-458c-a43a-f92a756a1936
+  text: watched
+- id: 0b1ceff7-67c6-4fd2-821c-a1f74782d5a8
+  text: watching
+correct_choice_ids:
+- 897e9983-8418-4121-9de6-9ccad0ac8e7e
+explanation: 'Après « can », on utilise la base verbale : « watch ». Le -ing, le -s et le passé ne conviennent pas.'
+archived: false

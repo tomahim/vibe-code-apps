@@ -1,0 +1,22 @@
+id: 21631a18-b2d2-40b5-9403-b438bf9c7ea6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais te poser doucement. »
+
+
+  I''m going to put you ____ gently.'
+choices:
+- id: 1a507433-5410-4d2c-a4d3-ee07961f3bac
+  text: up
+- id: 59e14100-a306-4ade-822a-48e5ef929181
+  text: down
+- id: 66433077-994b-4484-863f-bb9340151a3d
+  text: out
+- id: dab2a018-f702-41b1-bce4-54b9a57f3e76
+  text: away
+correct_choice_ids:
+- 59e14100-a306-4ade-822a-48e5ef929181
+explanation: « Put you down » signifie te poser. « Up », « away » et « out » changent le sens du groupe verbal.
+archived: false

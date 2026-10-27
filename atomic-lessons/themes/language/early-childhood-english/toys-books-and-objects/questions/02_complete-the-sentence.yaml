@@ -1,0 +1,22 @@
+id: 476066eb-e6ce-4b5a-87bd-3d89041863d6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « On va tourner la page. »
+
+
+  Let''s ____ the page.'
+choices:
+- id: cf756ac5-e72d-4297-89b4-8d2b1e0586d3
+  text: tear
+- id: 6e985bb5-0e81-40f3-9b96-ef59baf16523
+  text: fold
+- id: 97c92c47-0ede-4274-ad3c-11ab1763737e
+  text: turn
+- id: b754224d-a689-448d-8a69-d8216ac6f56b
+  text: touch
+correct_choice_ids:
+- 97c92c47-0ede-4274-ad3c-11ab1763737e
+explanation: « Turn the page » signifie tourner la page. « Tear » = déchirer, « touch » = toucher et « fold » = plier.
+archived: false

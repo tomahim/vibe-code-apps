@@ -1,0 +1,22 @@
+id: 2b173e29-4adb-484b-bdee-6df6a228c1c3
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu entends le camion ? »
+
+
+  Can you ____ the truck?'
+choices:
+- id: b8e2087b-5cca-48fc-9b4a-aeb7231523a6
+  text: hearing
+- id: f9b639f8-fa30-4863-bf18-1489b0c3bd52
+  text: hear
+- id: 6bf6d407-01c2-4bc4-ac12-5422aaba3f5a
+  text: here
+- id: 96fd2554-c38d-4c62-8d5a-94f05f96b0b4
+  text: hears
+correct_choice_ids:
+- f9b639f8-fa30-4863-bf18-1489b0c3bd52
+explanation: Après « can you », la base verbale est « hear » (entendre). « Here » signifie ici ; les formes en -s et -ing ne conviennent pas.
+archived: false

@@ -1,0 +1,22 @@
+id: 23b2bdfa-8991-4bb1-a0a8-ad9965c4a4d5
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Ton lit est prêt. »
+
+
+  Your ____ is ready.'
+choices:
+- id: 471165cd-7fd6-4258-ad27-6a61b3227181
+  text: crib
+- id: 9c9a6d01-d42f-428a-98bb-0d82830dad32
+  text: high chair
+- id: 0d4147cd-8369-4cde-be02-c2bb3db86f2f
+  text: stroller
+- id: d10eaf18-3c35-43ee-8877-5c98eb49344c
+  text: car seat
+correct_choice_ids:
+- 471165cd-7fd6-4258-ad27-6a61b3227181
+explanation: « Crib » est un lit de bébé. Les autres mots désignent une poussette, un siège-auto et une chaise haute.
+archived: false

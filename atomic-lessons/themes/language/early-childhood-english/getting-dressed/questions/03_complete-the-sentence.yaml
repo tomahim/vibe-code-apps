@@ -1,0 +1,22 @@
+id: 4f2c23ff-0f62-4b35-bc80-3e14c2d82d94
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais fermer ton pyjama. »
+
+
+  I''m going to ____ your pajamas.'
+choices:
+- id: 4e00e1cc-649f-4eba-bd73-e9ace669ae2c
+  text: unzip
+- id: 8663693b-56c5-449f-aa9d-a7ee70e8074f
+  text: zip up
+- id: 3fc35e5d-15d1-4481-a78d-e5cdd15fda95
+  text: put away
+- id: bcee6e8b-a42e-4352-88d3-46683bd610fc
+  text: take off
+correct_choice_ids:
+- 8663693b-56c5-449f-aa9d-a7ee70e8074f
+explanation: « Zip up » signifie fermer la fermeture éclair. « Unzip » = l’ouvrir, « take off » = enlever et « put away » = ranger.
+archived: false

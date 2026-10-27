@@ -1,0 +1,22 @@
+id: d812c452-7eec-4deb-9503-b6e5bb3cda3a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu as l''air très sérieux. »
+
+
+  You ____ very serious.'
+choices:
+- id: adbd7f0f-a115-4f01-bc62-858cc32bb2c3
+  text: look
+- id: 2733de67-e7c3-44e7-a389-9e1a098d68db
+  text: looking
+- id: 2624039f-fd09-4981-bf2f-e9059d1d2135
+  text: looked
+- id: 4dd4de98-be61-4b48-9fb0-3833ed514601
+  text: looks
+correct_choice_ids:
+- adbd7f0f-a115-4f01-bc62-858cc32bb2c3
+explanation: Avec « you », le présent simple est « look ». « Looks » va avec he/she/it, « looking » demande un auxiliaire et « looked » est au passé.
+archived: false

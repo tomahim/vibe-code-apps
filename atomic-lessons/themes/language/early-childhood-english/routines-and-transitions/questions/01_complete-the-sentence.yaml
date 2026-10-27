@@ -1,0 +1,22 @@
+id: 34c3809d-f878-4ff6-823c-1638529ccb7e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Ensuite, on fera ça. »
+
+
+  ____ we''ll do this.'
+choices:
+- id: 0742f6ee-f5fd-4de3-89ce-0545f2676269
+  text: Before
+- id: f6675b9d-824b-4d52-b93d-9ed1be7029d9
+  text: First
+- id: 11c6b2c9-684b-4b32-8037-7762f2f973d0
+  text: Until
+- id: 78c36455-5c74-4bc1-9f53-a3685b3470fd
+  text: Then
+correct_choice_ids:
+- 78c36455-5c74-4bc1-9f53-a3685b3470fd
+explanation: « Then » signifie ensuite. « First » = d’abord, « before » = avant et « until » = jusqu’à.
+archived: false

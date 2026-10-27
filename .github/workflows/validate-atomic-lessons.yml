@@ -1,0 +1,32 @@
+name: Atomic lessons UUID checks
+
+on:
+  pull_request:
+    paths:
+      - 'atomic-lessons/**'
+      - '.github/workflows/validate-atomic-lessons.yml'
+  push:
+    paths:
+      - 'atomic-lessons/**'
+      - '.github/workflows/validate-atomic-lessons.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  uuids:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: atomic-lessons/requirements.txt
+      - name: Install the YAML parser
+        run: python -m pip install -r atomic-lessons/requirements.txt
+      - name: Test the UUID checker
+        run: python -m unittest discover -s atomic-lessons -p 'test_*.py'
+      - name: Require globally unique UUIDv4 IDs on every content element
+        run: python atomic-lessons/check_uuids.py

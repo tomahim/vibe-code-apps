@@ -1,0 +1,22 @@
+id: f9a47c49-4630-4607-9210-61eeeb692dca
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu tiens ta tête de mieux en mieux. »
+
+
+  You''re holding your head up ____.'
+choices:
+- id: 9b63a097-b136-42bf-abdc-f87bd771340f
+  text: best and best
+- id: 8b555e2f-c2ce-4aa5-a777-25b9b0b2e9c4
+  text: better and better
+- id: 0077a49e-fb8b-4c35-9f47-00d3b959514f
+  text: gooder and gooder
+- id: 9d437836-fc60-45a3-8f4e-13b4a89fb3ab
+  text: more and more good
+correct_choice_ids:
+- 8b555e2f-c2ce-4aa5-a777-25b9b0b2e9c4
+explanation: 'Le comparatif de « well » est « better ». Sa répétition exprime une progression : « better and better », de mieux en mieux.'
+archived: false

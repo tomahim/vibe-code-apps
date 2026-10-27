@@ -1,0 +1,22 @@
+id: 599f9b09-af1a-4d57-86a1-77430854850d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « J''ai fait tomber quelque chose. »
+
+
+  I ____ something.'
+choices:
+- id: 89edfa73-fca9-4f69-be73-88af9988dc8b
+  text: caught
+- id: 14752ae9-54f2-4ba6-839b-ba1022a4211a
+  text: picked up
+- id: 1488bb97-b4d9-4745-ac70-ed5922a75421
+  text: held
+- id: dcde4b88-9e44-4c34-8ebd-239866a5420e
+  text: dropped
+correct_choice_ids:
+- dcde4b88-9e44-4c34-8ebd-239866a5420e
+explanation: « Dropped » signifie fait tomber. « Picked up » = ramassé, « held » = tenu et « caught » = attrapé.
+archived: false

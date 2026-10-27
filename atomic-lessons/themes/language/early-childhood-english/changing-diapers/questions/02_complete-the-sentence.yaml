@@ -1,0 +1,22 @@
+id: 592f1b55-bfda-4174-881f-fbeb20d4299d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais remettre tes vêtements. »
+
+
+  I''m going to put your clothes ____.'
+choices:
+- id: e0e84996-66ef-4846-9103-34e8023ad7e2
+  text: out
+- id: d81b55b1-1383-4be2-bac7-c663772c26fd
+  text: back on
+- id: 17d4d695-9bab-47f7-ac00-8a042351894b
+  text: away
+- id: cb868e2e-9a71-4a2b-9a9e-8056420683ec
+  text: back off
+correct_choice_ids:
+- d81b55b1-1383-4be2-bac7-c663772c26fd
+explanation: « Put your clothes back on » signifie remettre tes vêtements. « Off » renvoie au retrait et « put away » au rangement.
+archived: false

@@ -1,0 +1,22 @@
+id: b0668eba-6228-4a27-b6db-c27486627a69
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « On va traverser la rue. »
+
+
+  We''re going to ____ the street.'
+choices:
+- id: 88ac85e5-f2ad-440d-b6f0-352b235694ed
+  text: crossing
+- id: 613a6532-5bbf-42a3-8cfa-6e215196bb80
+  text: crosses
+- id: 9f1cefbe-6299-4894-b720-ca3097f469ab
+  text: cross
+- id: 210bf7d9-55b5-43c6-ba1e-85c79991a847
+  text: crossed
+correct_choice_ids:
+- 9f1cefbe-6299-4894-b720-ca3097f469ab
+explanation: 'Après « going to », le verbe reste à sa base : « cross », traverser.'
+archived: false

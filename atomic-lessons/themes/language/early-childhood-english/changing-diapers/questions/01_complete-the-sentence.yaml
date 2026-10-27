@@ -1,0 +1,22 @@
+id: c9ec9458-2804-4aba-9a1e-9ddaa8d3f44a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je crois que ta couche est mouillée. »
+
+
+  I think your diaper is ____.'
+choices:
+- id: 93f003e3-312a-485b-9b60-a36ed3bf9b5c
+  text: dry
+- id: beabe461-6ef7-45dd-8dce-44fb57eebf44
+  text: warm
+- id: 4776d8ee-4f18-4395-90c4-3892c6270c90
+  text: wet
+- id: 9525b9ea-dc06-48e3-8437-0a86acd98629
+  text: clean
+correct_choice_ids:
+- 4776d8ee-4f18-4395-90c4-3892c6270c90
+explanation: « Wet » signifie mouillé. « Dry » = sec, « clean » = propre et « warm » = chaud. Le sens français impose « wet ».
+archived: false

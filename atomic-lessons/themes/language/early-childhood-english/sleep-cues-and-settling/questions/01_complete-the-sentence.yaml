@@ -1,0 +1,22 @@
+id: aea27e82-3f04-41e9-8cdb-bbb9a060c71a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais fermer les rideaux. »
+
+
+  I''m going to ____ the curtains.'
+choices:
+- id: 3200cbd6-1246-467a-8087-1c98e1684fc7
+  text: wash
+- id: 9f5e32c0-74e4-48b1-bdeb-14bca6b21b77
+  text: close
+- id: 754944d6-b4b6-44d2-b5df-d578e4de68d9
+  text: clean
+- id: ab1fdc1f-ff2b-43d6-b184-f05aa60ffc6f
+  text: open
+correct_choice_ids:
+- 9f5e32c0-74e4-48b1-bdeb-14bca6b21b77
+explanation: « Close the curtains » signifie fermer les rideaux. « Open » = ouvrir ; « clean/wash » renvoient au nettoyage.
+archived: false

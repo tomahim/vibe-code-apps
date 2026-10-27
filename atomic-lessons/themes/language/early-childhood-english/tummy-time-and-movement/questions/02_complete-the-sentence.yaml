@@ -1,0 +1,22 @@
+id: 8bbf13bf-9d36-4b35-88bf-1a58a674a6f8
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu as besoin d''une pause ? »
+
+
+  Do you ____ a break?'
+choices:
+- id: 260dd945-5d35-4c6c-87b2-1f1629466eb1
+  text: needed
+- id: 0824fb05-e752-4293-9a5a-399028e7eced
+  text: needing
+- id: 0c181f68-ad2f-4bd2-bae9-b2fa4d094b42
+  text: needs
+- id: 88e4ceed-9212-48df-b973-b9fcbf8f881d
+  text: need
+correct_choice_ids:
+- 88e4ceed-9212-48df-b973-b9fcbf8f881d
+explanation: 'Après « do you », le verbe reste à sa base : « need ». Les autres formes ne conviennent pas après cet auxiliaire.'
+archived: false

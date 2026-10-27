@@ -1,0 +1,22 @@
+id: 21a92a12-e24a-4539-afe4-acfb361e4928
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « La pluie tape contre la fenêtre. »
+
+
+  The rain is ____ against the window.'
+choices:
+- id: 5401e8f7-7452-484c-be55-1ce19d1cce08
+  text: tapped
+- id: 9ea5260a-4280-4445-bddb-e86adff65427
+  text: taps
+- id: 7ada2a7d-e82a-4a2a-9df4-9c83e07b5589
+  text: tap
+- id: 50e2a055-3405-4412-bcf1-3fd57ff3e9ab
+  text: tapping
+correct_choice_ids:
+- 50e2a055-3405-4412-bcf1-3fd57ff3e9ab
+explanation: 'Après « is », on utilise la forme en -ing pour l’action en cours : « is tapping ».'
+archived: false

@@ -1,0 +1,22 @@
+id: 43c3bae7-b164-4f63-bb47-68d10f1394dc
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va mettre ce body. »
+
+
+  Let''s put this onesie ____.'
+choices:
+- id: 6d20bb66-6fee-46ec-8171-775bae8194a6
+  text: out
+- id: 1808df51-91de-4ac2-b59a-fd6a2fefdc09
+  text: 'on'
+- id: a6424414-65fe-4f3c-bdc0-21443859b9b7
+  text: 'off'
+- id: a315b10b-0f1c-4d9a-bf29-56f23ea7da63
+  text: away
+correct_choice_ids:
+- 1808df51-91de-4ac2-b59a-fd6a2fefdc09
+explanation: Pour mettre un vêtement, on utilise « put on ». « Take off » signifie l’enlever et « put away » le ranger.
+archived: false

@@ -1,0 +1,22 @@
+id: ae2f5e18-5662-4b5f-a9a2-97034e4b5a48
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « C''est rond. »
+
+
+  It''s ____.'
+choices:
+- id: 1adc05ca-7d39-4a41-a6f1-660a65946c44
+  text: flat
+- id: bcccb8ec-574a-4928-a962-64fc27931c62
+  text: round
+- id: b1a22b4d-7c0c-4de6-a1b5-447586b4e2d6
+  text: straight
+- id: 870ae093-7a7c-4598-98c6-c59986e15ba2
+  text: square
+correct_choice_ids:
+- bcccb8ec-574a-4928-a962-64fc27931c62
+explanation: « Round » signifie rond. « Flat » = plat, « square » = carré et « straight » = droit.
+archived: false
