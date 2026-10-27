@@ -4,6 +4,7 @@ tagline: End Your Workday Like a Keeper Ending a Watch - Log It, Seal It, Ring t
 pitch: A two-minute end-of-shift ritual that parks your open loops in a shift log and writes tomorrow's first move, so the day actually ends and tomorrow starts fast.
 domains: [PROD, WRITE]
 created: 2026-10-27T06:03:19Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
