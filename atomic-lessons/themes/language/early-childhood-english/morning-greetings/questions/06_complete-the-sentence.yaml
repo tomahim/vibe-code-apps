@@ -1,7 +1,6 @@
 id: 99e77574-e55b-478a-ad5d-68048c3d8739
 position: 6
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « On va commencer la journée tranquillement. »
 

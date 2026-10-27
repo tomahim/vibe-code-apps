@@ -1,7 +1,6 @@
 id: f7bfcf50-a268-4f9c-8db5-ee206ebff46a
 position: 9
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Tu peux réessayer. »
 

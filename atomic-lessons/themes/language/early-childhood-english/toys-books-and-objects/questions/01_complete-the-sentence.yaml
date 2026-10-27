@@ -1,7 +1,6 @@
 id: ae2f5e18-5662-4b5f-a9a2-97034e4b5a48
 position: 1
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « C''est rond. »
 

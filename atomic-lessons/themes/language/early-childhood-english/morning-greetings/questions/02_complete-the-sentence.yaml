@@ -1,7 +1,6 @@
 id: bf4c5dcf-fe31-4e84-94b4-f5ccdb7f09ca
 position: 2
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Qu''est-ce que tu regardes ? »
 

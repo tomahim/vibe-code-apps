@@ -1,7 +1,6 @@
 id: 8bbf13bf-9d36-4b35-88bf-1a58a674a6f8
 position: 2
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Tu as besoin d''une pause ? »
 

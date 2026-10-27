@@ -1,7 +1,6 @@
 id: d99992bf-16ec-43a6-af30-d4cf9395dd2f
 position: 5
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Il y a beaucoup de soleil. »
 

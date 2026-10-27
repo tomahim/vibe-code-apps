@@ -1,7 +1,6 @@
 id: 6ed515df-0fb5-405b-9122-2b4dc364db1b
 position: 1
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Je vais ouvrir le frigo. »
 

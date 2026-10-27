@@ -1,7 +1,6 @@
 id: d5898ef2-3643-41af-ac5a-204849b8f926
 position: 5
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu as faim ? »
 

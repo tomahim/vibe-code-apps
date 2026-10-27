@@ -1,7 +1,6 @@
 id: 4052afda-d1b2-4b95-99fb-a75b1f513d4f
 position: 3
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Voilà un oiseau. »
 

@@ -1,7 +1,6 @@
 id: 60a4100c-e2ed-43c1-b467-087996e2a0c1
 position: 3
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Attends, je vais chercher une lingette. »
 

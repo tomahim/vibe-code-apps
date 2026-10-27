@@ -1,7 +1,6 @@
 id: 99db7ad0-30b2-43b9-beef-8f91e57df0aa
 position: 4
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu vois les arbres ? »
 

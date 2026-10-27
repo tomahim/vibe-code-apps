@@ -1,7 +1,6 @@
 id: b0668eba-6228-4a27-b6db-c27486627a69
 position: 3
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « On va traverser la rue. »
 

@@ -1,7 +1,6 @@
 id: b3d06c16-38b5-48bd-8aa8-0df74a63b0fa
 position: 4
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Je suis tellement heureuse d''être ta maman. »
 

@@ -1,7 +1,6 @@
 id: 23b2bdfa-8991-4bb1-a0a8-ad9965c4a4d5
 position: 3
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Ton lit est prêt. »
 

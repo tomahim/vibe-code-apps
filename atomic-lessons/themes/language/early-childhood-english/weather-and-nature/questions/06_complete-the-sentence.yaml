@@ -1,7 +1,6 @@
 id: 0e3a81c9-b275-4385-a68d-77fb75c66c8f
 position: 6
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « L''oiseau vole. »
 

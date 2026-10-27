@@ -1,7 +1,6 @@
 id: 2f2822db-9558-4c5c-983f-a1ba48cfaec2
 position: 4
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu commences à être fatigué. »
 

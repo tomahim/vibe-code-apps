@@ -1,7 +1,6 @@
 id: 0f9b59ac-2c01-4107-bbc8-09a255f6c892
 position: 6
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Je vais vérifier l''heure. »
 

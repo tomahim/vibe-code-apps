@@ -1,7 +1,6 @@
 id: 8083daaf-e4d9-42aa-8ea6-cd05133b4bd5
 position: 5
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu y arrives. »
 

@@ -1,7 +1,6 @@
 id: 5cb83f46-09ee-4fb3-86cc-082bfd12e4c9
 position: 3
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu es bien installé ? »
 

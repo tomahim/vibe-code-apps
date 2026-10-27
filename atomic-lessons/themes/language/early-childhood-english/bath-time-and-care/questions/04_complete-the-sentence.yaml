@@ -1,7 +1,6 @@
 id: 8e722efc-64f2-4313-bf3c-5737fa36ad7e
 position: 4
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Ferme les yeux. »
 

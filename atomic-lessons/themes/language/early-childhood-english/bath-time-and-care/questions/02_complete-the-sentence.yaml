@@ -1,7 +1,6 @@
 id: a20aa7bd-561d-4be0-b864-7f28bae79f8a
 position: 2
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « On va te sécher. »
 

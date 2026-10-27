@@ -1,7 +1,6 @@
 id: 1c315c72-df8e-46ed-b657-d1b7a995ad2c
 position: 9
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Je vais apporter ta couverture. »
 

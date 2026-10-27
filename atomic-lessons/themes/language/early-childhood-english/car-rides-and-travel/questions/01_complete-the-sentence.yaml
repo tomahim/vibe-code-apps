@@ -1,7 +1,6 @@
 id: 485cec35-ce47-4216-a405-ed807876b7fc
 position: 1
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Je vais attacher ta ceinture. »
 

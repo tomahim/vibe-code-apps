@@ -1,7 +1,6 @@
 id: 891d267f-ef5a-47bd-88e3-5dcc9527e65c
 position: 9
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Tu tournes la tête vers le son. »
 

@@ -1,7 +1,6 @@
 id: 8c14c052-4ade-4391-8300-83324ebf5452
 position: 8
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Il y a un chien sur cette page. »
 

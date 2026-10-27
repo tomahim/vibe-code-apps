@@ -1,7 +1,6 @@
 id: 8b345154-4807-4c28-894b-d253f0ce07ce
 position: 8
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « Essaie d''attraper le jouet. »
 

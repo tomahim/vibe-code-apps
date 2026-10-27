@@ -68,7 +68,7 @@ Use at most six cards per lesson. Keep card counts even so a question follows ea
 
 ## Lesson questions
 
-Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type: multiple_choice`, `selection: single`, `after_card_position`, `prompt`, four `choices` (each with `id` and `text`), one `correct_choice_ids` reference, `explanation`, and `archived`.
+Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type: multiple_choice`, `after_card_position`, `prompt`, four `choices` (each with `id` and `text`), one `correct_choice_ids` reference, `explanation`, and `archived`.
 
 For the current path, author three alternative questions for each checkpoint after cards 2 and 4, and after card 6 when present. This gives six questions for a four-card lesson and nine for a six-card lesson. Questions sharing `after_card_position` form a pool: choose one question from that pool for a checkpoint. Keep `position` unique within the lesson; `after_card_position` may repeat. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. Give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
 

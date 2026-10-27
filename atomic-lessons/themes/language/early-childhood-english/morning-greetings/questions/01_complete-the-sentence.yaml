@@ -1,7 +1,6 @@
 id: 121d0fd4-e5d3-4e94-a38e-3153d73e98d4
 position: 1
 type: multiple_choice
-selection: single
 after_card_position: 2
 prompt: 'Complétez pour dire : « Tu as bien dormi ? »
 

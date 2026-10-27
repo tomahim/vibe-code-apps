@@ -1,7 +1,6 @@
 id: 2b173e29-4adb-484b-bdee-6df6a228c1c3
 position: 2
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Tu entends le camion ? »
 

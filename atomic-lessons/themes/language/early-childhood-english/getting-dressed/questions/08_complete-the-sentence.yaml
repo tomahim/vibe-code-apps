@@ -1,7 +1,6 @@
 id: 7f0c2fd1-20b4-48b4-b40e-2712c4d9cf3e
 position: 8
 type: multiple_choice
-selection: single
 after_card_position: 6
 prompt: 'Complétez pour dire : « On va ajouter un gilet. »
 

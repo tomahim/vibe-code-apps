@@ -1,7 +1,6 @@
 id: 777d41b3-5ac2-492f-b189-f8431e0b8122
 position: 2
 type: multiple_choice
-selection: single
 after_card_position: 4
 prompt: 'Complétez pour dire : « Je vais te détacher. »
 
