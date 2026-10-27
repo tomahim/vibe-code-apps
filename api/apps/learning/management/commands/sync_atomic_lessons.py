@@ -281,8 +281,10 @@ class Command(BaseCommand):
 
     def sync_library(self, content_root, commit, stats):
         records_by_dir = {}
+        seen_ids = set()
         check_uuids = sys.modules["check_uuids"]
         for element in self.scan(content_root, check_uuids):
+            seen_ids.add(element["id"])
             element["provenance"]["last_changed_commit"] = self.last_changed_commit(
                 element["provenance"]["source_path"]
             )
@@ -342,6 +344,17 @@ class Command(BaseCommand):
             record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit)
             if element["kind"] in ("theme", "learning_path", "lesson"):
                 records_by_dir[element["directory"]] = record
+        # Database drift is reported, never repaired here: retirement is an
+        # explicit archived: true flag in the content, never an inferred delete.
+        unknown = list(ContentEntity.objects.exclude(pk__in=seen_ids))
+        if unknown:
+            listing = ", ".join(f"{entity.kind} {entity.pk}" for entity in unknown[:10])
+            self.stdout.write(
+                self.style.WARNING(
+                    f"{len(unknown)} database content ID(s) are not in the library and were left "
+                    f"untouched (no deletion, no auto-archive): {listing}"
+                )
+            )
 
     def sync_entity(self, element, archived):
         location = element["location"]

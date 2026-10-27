@@ -162,6 +162,18 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertEqual(ContentEntity.objects.count(), 0)
         self.assertEqual(SyncLog.objects.count(), 0)
 
+    def test_database_rows_missing_from_the_library_are_reported_not_touched(self):
+        orphan_id = uuid.uuid4()
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            run_sync(root, "2" * 40)
+            ContentEntity.objects.create(id=orphan_id, kind=ContentEntity.Kind.CARD, archived=False)
+            out = run_sync(root, "3" * 40)
+        self.assertIn("1 database content ID(s) are not in the library", out)
+        self.assertIn("left untouched", out)
+        # Still present afterwards: the sync never deletes or auto-archives.
+        self.assertTrue(ContentEntity.objects.filter(pk=orphan_id).exists())
+
     def test_invalid_content_aborts_without_writes(self):
         with TemporaryDirectory() as tmp:
             root = write_library(Path(tmp))
