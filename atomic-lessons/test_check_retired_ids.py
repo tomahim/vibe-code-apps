@@ -1,0 +1,96 @@
+"""Regression cases for the content-ID retirement gate."""
+
+from pathlib import Path
+import subprocess
+import tempfile
+import unittest
+import uuid
+
+import yaml
+
+from check_retired_ids import check_retirement
+
+
+class RetiredIDsCheckTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.repo = Path(self.temp.name)
+        self.root = self.repo / "atomic-lessons"
+        self.git("init", "-q")
+        self.git("config", "user.email", "ci@example.invalid")
+        self.git("config", "user.name", "CI")
+        self.card_id = str(uuid.uuid4())
+        self.card = self.root / "themes/language/path/lesson/cards/01.md"
+        for file in [
+            self.root / "themes/language/index.md",
+            self.root / "themes/language/path/index.md",
+            self.root / "themes/language/path/lesson/index.md",
+            self.card,
+        ]:
+            self.write(file, {"id": str(uuid.uuid4())} if file != self.card else {"id": self.card_id})
+        self.write(
+            self.root / "themes/language/path/lesson/questions/01.yaml",
+            {"id": str(uuid.uuid4()), "choices": [{"id": str(uuid.uuid4()), "text": "Did"}]},
+        )
+        self.git("add", ".")
+        self.git("commit", "-qm", "base")
+        self.base = self.git("rev-parse", "HEAD").stdout.strip()
+
+    def git(self, *args):
+        result = subprocess.run(["git", *args], cwd=self.repo, capture_output=True, text=True)
+        if result.returncode != 0:
+            raise AssertionError(f"git {' '.join(args)} failed: {result.stderr}")
+        return result
+
+    def write(self, path, data):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        content = yaml.safe_dump(data)
+        path.write_text(f"---\n{content}---\nBody\n" if path.suffix == ".md" else content)
+
+    def check(self):
+        return check_retirement(self.root, self.repo, self.base)
+
+    def test_unchanged_library_passes(self):
+        errors, count = self.check()
+        self.assertEqual(errors, [])
+        self.assertEqual(count, 5)
+
+    def test_new_content_passes(self):
+        self.write(self.root / "themes/language/path/lesson/cards/02.md", {"id": str(uuid.uuid4())})
+        errors, _ = self.check()
+        self.assertEqual(errors, [])
+
+    def test_deleting_a_card_is_rejected(self):
+        self.card.unlink()
+        errors, _ = self.check()
+        self.assertTrue(any(self.card_id in error and "archived: true" in error for error in errors), errors)
+
+    def test_moving_a_card_keeps_its_id_and_passes(self):
+        moved = self.root / "themes/language/path/lesson/cards/02_renamed.md"
+        self.card.rename(moved)
+        errors, _ = self.check()
+        self.assertEqual(errors, [])
+
+    def test_explicit_archive_passes(self):
+        self.write(self.card, {"id": self.card_id, "archived": True})
+        errors, _ = self.check()
+        self.assertEqual(errors, [])
+
+    def test_id_cannot_change_kind(self):
+        lesson = self.root / "themes/language/path/lesson/index.md"
+        original = lesson.read_text()
+        self.write(lesson, {"id": self.card_id})
+        self.card.unlink()
+        errors, _ = self.check()
+        self.assertTrue(any("cannot change kind" in error for error in errors), errors)
+        lesson.write_text(original)
+
+    def test_unknown_base_revision_is_an_error(self):
+        errors, count = check_retirement(self.root, self.repo, "does-not-exist")
+        self.assertEqual(count, 0)
+        self.assertTrue(any("cannot read the base revision" in error for error in errors), errors)
+
+
+if __name__ == "__main__":
+    unittest.main()
