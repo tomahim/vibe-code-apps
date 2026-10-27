@@ -4,6 +4,7 @@ tagline: A Murder in Five Daily Chapters - Your Table Votes the Theory Before Fr
 pitch: A serialized cozy mystery: one short chapter lands each weekday, your household or friends debate and vote a suspect, and Friday's finale grades every theory you floated.
 domains: [GAME, MEDIA, WRITE]
 created: 2026-10-24T03:09:55Z
+rating: 2
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
