@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the retirement gate reads the base revision's manifest
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -32,3 +34,6 @@ jobs:
         run: python atomic-lessons/check_uuids.py
       - name: Require an illustration for every learning path
         run: python atomic-lessons/check_images.py
+      - name: Reject removal of existing content IDs
+        # Content is retired with `archived: true`, never by deleting its ID.
+        run: python atomic-lessons/check_retired_ids.py
