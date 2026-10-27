@@ -4,6 +4,7 @@ tagline: Live One Historical Year Day by Day - Every Morning, That Day's Life Ar
 pitch: Subscribe to a year in history and receive its daily entries each morning - letters, prices, weather, news - experiencing the era at the pace it actually happened.
 domains: [HIST, MEDIA]
 created: 2026-10-25T06:03:55Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
