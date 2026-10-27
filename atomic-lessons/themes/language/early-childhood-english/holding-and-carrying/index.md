@@ -5,4 +5,4 @@ title: Holding and carrying your baby
 description: Talk about picking up, holding, carrying, and putting your baby down.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

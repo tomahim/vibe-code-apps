@@ -5,4 +5,4 @@ title: Morning greetings and reconnecting
 description: Greet your baby, ask about sleep, and reconnect at the start of the day.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

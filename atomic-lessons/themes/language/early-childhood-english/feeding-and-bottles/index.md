@@ -5,4 +5,4 @@ title: Feeding, bottles, and milk
 description: Talk through preparing milk, feeding, taking a break, and burping.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

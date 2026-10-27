@@ -5,4 +5,4 @@ title: Comforting a crying baby
 description: Ask what is wrong and use reassuring language.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

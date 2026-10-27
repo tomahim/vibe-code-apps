@@ -5,4 +5,4 @@ title: Exploring the home
 description: Talk about rooms, household activities, and familiar sounds.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.
