@@ -1,6 +1,12 @@
 {
-  "title": "OGC Services Cheatsheet",
-  "description": "Legacy OGC services (WMS, WFS, WMTS, WCS, WPS, CSW, SOS) next to their OGC API successors, with concrete requests and parameter explanations.",
+  "title": "Geospatial Service Atlas",
+  "description": "A geospatial service atlas across legacy OGC, OGC API, Esri and cloud-native ecosystems.",
   "date": "2026-10-27",
-  "tags": ["cheatsheet", "geospatial", "ogc", "reference"]
+  "tags": [
+    "atlas",
+    "geospatial",
+    "ogc",
+    "esri",
+    "reference"
+  ]
 }
