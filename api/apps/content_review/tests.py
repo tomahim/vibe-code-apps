@@ -68,3 +68,161 @@ class PullRequestListTests(TestCase):
     @mock.patch("apps.content_review.views.github.list_open_prs", side_effect=github.GitHubError("down"))
     def test_github_failure_is_a_502(self, _list):
         self.assertEqual(self.get().status_code, 502)
+
+
+THEME_INDEX = """---
+id: 11111111-1111-4111-8111-111111111111
+position: 1
+title: Language
+---
+Theme intro.
+"""
+PATH_INDEX = """---
+id: 22222222-2222-4222-8222-222222222222
+position: 1
+title: Early Childhood English
+image: ./cover.png
+---
+Path intro.
+"""
+LESSON_INDEX = """---
+id: 33333333-3333-4333-8333-333333333333
+position: 8
+title: Getting dressed
+description: Name clothes.
+archived: false
+---
+Learn English expressions step by step.
+"""
+CARD = """---
+id: 44444444-4444-4444-8444-444444444444
+position: 1
+title: Choose clothes
+archived: false
+---
+**Let's get you dressed.**
+
+> *On va s'habiller.*
+"""
+QUESTION = """id: 55555555-5555-4555-8555-555555555555
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: "Complétez : Let''s put this onesie ____."
+choices:
+- id: aaaa
+  text: out
+- id: bbbb
+  text: "on"
+correct_choice_ids:
+- bbbb
+explanation: On utilise « put on ».
+archived: false
+"""
+
+TEXTS = {
+    "atomic-lessons/themes/language/index.md": THEME_INDEX,
+    "atomic-lessons/themes/language/early-childhood-english/index.md": PATH_INDEX,
+    "atomic-lessons/themes/language/early-childhood-english/getting-dressed/index.md": LESSON_INDEX,
+    "atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md": CARD,
+    "atomic-lessons/themes/language/early-childhood-english/getting-dressed/questions/01_complete.yaml": QUESTION,
+}
+
+
+@override_settings(GITHUB_REVIEW_TOKEN="t", GITHUB_REVIEW_REPO="o/r")
+class PullRequestDetailTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
+        self.token = issue_token(self.user)
+
+    def url(self, number=7):
+        return f"/api/apps/content-review/prs/{number}"
+
+    def get(self, number=7):
+        return Client().get(self.url(number), HTTP_AUTHORIZATION=f"Bearer {self.token}")
+
+    def test_requires_a_token(self):
+        self.assertEqual(Client().get(self.url()).status_code, 401)
+
+    @override_settings(GITHUB_REVIEW_TOKEN="")
+    def test_not_configured(self):
+        self.assertEqual(self.get().status_code, 503)
+
+    def change(self, path, status="added", patch="@@ patch"):
+        return {"path": path, "status": status, "patch": patch, "previous_path": ""}
+
+    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.list_pr_files")
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
+    def test_builds_units_with_breadcrumbs(self, _pr, list_files, fetch_tree):
+        list_files.return_value = [
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/index.md", "modified"),
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"),
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/questions/01_complete.yaml"),
+            self.change("atomic-lessons/themes/language/early-childhood-english/cover.png", patch=""),
+            self.change("ui/src/App.jsx"),
+        ]
+        response = self.get()
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data["pr"]["number"], 7)
+        self.assertEqual(data["summary"], {"added": 2, "modified": 1, "removed": 0})
+        units = {u["path"]: u for u in data["units"]}
+        self.assertEqual(len(units), 3)
+
+        lesson = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/index.md"]
+        self.assertEqual(lesson["kind"], "lesson")
+        self.assertEqual(lesson["change"], "modified")
+        self.assertEqual(lesson["title"], "Getting dressed")
+        self.assertEqual(lesson["body"], "Learn English expressions step by step.")
+        self.assertEqual(lesson["breadcrumbs"], ["Language", "Early Childhood English"])
+
+        card = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"]
+        self.assertEqual(card["kind"], "card")
+        self.assertEqual(card["breadcrumbs"], ["Language", "Early Childhood English", "Getting dressed"])
+        self.assertIn("Let's get you dressed.", card["body"])
+
+        question = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/questions/01_complete.yaml"]
+        self.assertEqual(question["kind"], "question")
+        self.assertEqual(question["question"]["answer"], "bbbb")
+        self.assertEqual(question["question"]["after_card_position"], 2)
+        self.assertEqual(len(question["question"]["options"]), 2)
+
+        # Binary images and non-content files are visible but not units.
+        self.assertEqual(
+            data["other_changes"],
+            [{"path": "atomic-lessons/themes/language/early-childhood-english/cover.png", "change": "added", "patch": ""}],
+        )
+        fetch_tree.assert_called_once()
+
+    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.list_pr_files")
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
+    def test_removed_and_broken_files_do_not_crash(self, _pr, list_files, _tree):
+        list_files.return_value = [
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/02_expressions.md", "removed"),
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"),
+        ]
+        broken = dict(TEXTS)
+        broken["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"] = "no front matter"
+        with mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=broken):
+            data = self.get().json()
+        units = {u["path"]: u for u in data["units"]}
+        removed = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/02_expressions.md"]
+        self.assertEqual(removed["change"], "removed")
+        self.assertIsNone(removed["title"])
+        broken_card = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"]
+        self.assertIsNotNone(broken_card["parse_error"])
+
+    @mock.patch("apps.content_review.views.github.list_pr_files", return_value=[{"path": "ui/src/App.jsx", "status": "modified", "patch": "", "previous_path": ""}])
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
+    def test_pr_without_content_changes_skips_tree_fetch(self, _pr, _files):
+        with mock.patch("apps.content_review.views.github.fetch_tree_texts") as fetch_tree:
+            data = self.get().json()
+        self.assertEqual(data["units"], [])
+        self.assertEqual(data["other_changes"], [])
+        fetch_tree.assert_not_called()
+
+    @mock.patch("apps.content_review.views.github.get_pr", side_effect=github.NotFound("nope"))
+    def test_unknown_pr_is_a_404(self, _pr):
+        self.assertEqual(self.get(404).status_code, 404)

@@ -11,11 +11,9 @@ from django.views.decorators.http import require_GET, require_POST
 from apps.accounts.decorators import jwt_required
 
 from . import github
+from .review import CONTENT_ROOT, build_review
 
 logger = logging.getLogger(__name__)
-
-CONTENT_ROOT = "atomic-lessons"
-
 
 def error(message, status):
     return JsonResponse({"error": message}, status=status)
@@ -61,3 +59,32 @@ def pull_requests(request):
     except Exception:
         logger.exception("list review pull requests failed")
         return error("Could not load pull requests from GitHub.", 502)
+
+
+@never_cache
+@require_GET
+@jwt_required
+def pull_request_detail(request, number):
+    """Every atomic-lessons unit changed by the pull request, parsed from the
+    PR head tree (never from the database), with its diff patch."""
+    token, repo = review_settings()
+    if not token:
+        return error("Content review is not configured (GITHUB_REVIEW_TOKEN is not set on the api service).", 503)
+    try:
+        pr = github.get_pr(token, repo, number)
+        files = github.list_pr_files(token, repo, number)
+        content_files = [f for f in files if f["path"].startswith(f"{CONTENT_ROOT}/")]
+        texts = (
+            github.fetch_tree_texts(token, repo, pr["head_sha"], CONTENT_ROOT)
+            if content_files
+            else {}
+        )
+        return JsonResponse({"pr": pr, **build_review(texts, content_files)})
+    except github.NotFound:
+        return error("Unknown pull request.", 404)
+    except github.GitHubError as exc:
+        logger.warning("review detail for PR %s failed: %s", number, exc)
+        return error("Could not load the pull request from GitHub.", 502)
+    except Exception:
+        logger.exception("review detail for PR %s failed", number)
+        return error("Could not load the pull request from GitHub.", 502)
