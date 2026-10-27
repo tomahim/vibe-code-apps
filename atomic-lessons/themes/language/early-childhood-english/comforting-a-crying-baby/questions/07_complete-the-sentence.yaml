@@ -1,0 +1,21 @@
+id: ea953b98-f8e5-4a23-8467-140293dfdab1
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je reste avec toi. »
+
+
+  I''ll ____ with you.'
+choices:
+- id: 408b6acf-a79d-474d-a5f1-0c20e2e2d144
+  text: staying
+- id: dd47d3c9-fe0f-419d-9b0a-c613eee8608c
+  text: stay
+- id: 1b1ba31c-c507-4b9b-a573-74ab68f47865
+  text: stayed
+- id: fb4925cb-9b62-47e2-8d8c-5a50cf51584d
+  text: stays
+correct_choice_ids:
+- dd47d3c9-fe0f-419d-9b0a-c613eee8608c
+explanation: Après « I'll », on utilise la base verbale « stay ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

@@ -1,0 +1,21 @@
+id: fbc85cad-85f6-4eb0-88ea-31759ff073a6
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Ce vêtement est un peu serré. »
+
+
+  This outfit is a little ____.'
+choices:
+- id: a9f0dc15-063b-4582-b893-bdb177820179
+  text: short
+- id: 8a2470e0-79c7-4e04-994b-1424002137d0
+  text: long
+- id: 09d7204d-fd27-41fa-af27-b2d74a4f8ebb
+  text: snug
+- id: 9d852b36-c0b9-4dfd-bf05-0b5539411072
+  text: loose
+correct_choice_ids:
+- 09d7204d-fd27-41fa-af27-b2d74a4f8ebb
+explanation: « Snug » veut dire ajusté ou un peu serré. « Loose » = ample, « short » = court et « long » = long.
+archived: false

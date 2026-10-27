@@ -1,0 +1,21 @@
+id: bf4c5dcf-fe31-4e84-94b4-f5ccdb7f09ca
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Qu''est-ce que tu regardes ? »
+
+
+  What are you ____?'
+choices:
+- id: a6fc8d95-7e1e-41a2-b5bc-54bc5a2d0c97
+  text: looking at
+- id: 7d9939c3-e3fb-4640-8255-6b7df48c3f64
+  text: looking after
+- id: b06f1f37-ed4f-4d32-b6f8-f58ae6f09328
+  text: looking into
+- id: ea04878b-6a39-4fe2-8624-fd8137e0c3d9
+  text: looking for
+correct_choice_ids:
+- a6fc8d95-7e1e-41a2-b5bc-54bc5a2d0c97
+explanation: « Look at » signifie regarder. « Look for » signifie chercher, « look after » s’occuper de quelqu’un et « look into » examiner une question.
+archived: false

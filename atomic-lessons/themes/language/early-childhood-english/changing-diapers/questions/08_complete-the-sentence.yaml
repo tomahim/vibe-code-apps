@@ -1,0 +1,21 @@
+id: a1d8c813-8dac-428b-bf60-e55988be1ec2
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais jeter cette couche. »
+
+
+  I''m going to throw this ____ away.'
+choices:
+- id: 4593a6d9-fdde-45d6-9b00-12977b42ac8f
+  text: towel
+- id: fe337ec8-ea01-462a-b622-38222525af51
+  text: diaper
+- id: fca6f204-a946-452f-913d-c21209776d59
+  text: bib
+- id: 8384640b-67db-405c-838f-3667f1b9fc4f
+  text: wipe
+correct_choice_ids:
+- fe337ec8-ea01-462a-b622-38222525af51
+explanation: La traduction demande « diaper » (couche). « wipe » signifie lingette; « bib » signifie bavoir; « towel » signifie serviette.
+archived: false

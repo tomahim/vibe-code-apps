@@ -1,0 +1,21 @@
+id: 597c89ed-cc70-44d4-ab00-40abd0d2d710
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu serres mon doigt. »
+
+
+  You''re ____ onto my finger.'
+choices:
+- id: 6e87ecf2-841c-4c07-bbae-62e5e7c477c9
+  text: holds
+- id: db92e210-3ec2-4165-847f-a92f39eda37e
+  text: holding
+- id: ee805425-7ddb-4b33-b0cc-26141b78fd99
+  text: held
+- id: 4c44c30c-aec5-4e82-92a1-9ec66ff82250
+  text: hold
+correct_choice_ids:
+- db92e210-3ec2-4165-847f-a92f39eda37e
+explanation: 'Après « you are », on décrit l’action en cours avec le verbe en -ing : « holding ». Les autres formes ne conviennent pas après « are ».'
+archived: false

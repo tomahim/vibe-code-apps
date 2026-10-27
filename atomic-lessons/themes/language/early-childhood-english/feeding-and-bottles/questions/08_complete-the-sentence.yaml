@@ -1,0 +1,21 @@
+id: 9379fb00-2016-4853-a68c-2de4ebacd62b
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu as régurgité un peu de lait. »
+
+
+  You spit up a little ____.'
+choices:
+- id: 022ed2d2-e18a-4857-a6b5-3f248686ba77
+  text: milk
+- id: e151f66d-6dad-4cac-95c6-a71a55d14369
+  text: juice
+- id: a6f5cd06-e396-4257-872f-3ddb1b7f7304
+  text: water
+- id: cf57a330-ae90-468f-b5a4-c0c2a967cb37
+  text: yogurt
+correct_choice_ids:
+- 022ed2d2-e18a-4857-a6b5-3f248686ba77
+explanation: La traduction demande « milk » (lait). « water » signifie eau; « juice » signifie jus; « yogurt » signifie yaourt.
+archived: false

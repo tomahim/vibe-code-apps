@@ -1,0 +1,21 @@
+id: 16d84f76-b7f3-4294-8858-7f05728780fb
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Lève un peu les jambes. »
+
+
+  Let''s ____ your legs up a little.'
+choices:
+- id: 2b060da9-889a-42ee-a783-f417a00fe565
+  text: lifted
+- id: dda79b6a-8ea2-4942-ab92-9ae79ff12024
+  text: lift
+- id: 1c71d9c1-7bb6-4257-a910-131d4f6e6470
+  text: lifting
+- id: 01bb69e7-5cdd-4f88-89c9-161e01508b09
+  text: lifts
+correct_choice_ids:
+- dda79b6a-8ea2-4942-ab92-9ae79ff12024
+explanation: Après « Let's », on utilise la base verbale « lift ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

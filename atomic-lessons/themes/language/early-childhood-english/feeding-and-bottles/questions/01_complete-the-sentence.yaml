@@ -1,0 +1,21 @@
+id: 13582e58-1683-4535-934c-a7823e9daa4f
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais préparer ton biberon. »
+
+
+  I''m going to ____ your bottle.'
+choices:
+- id: 52bc9516-a2e5-47e7-adf2-a3462c6e20c7
+  text: making
+- id: f04c0710-0af5-4fe4-a4f1-3df1949fb9c1
+  text: make
+- id: 36457f73-ef74-4993-837c-15ef65c30e6d
+  text: makes
+- id: 7beff2f9-ac90-4c8d-afdd-fe8e91e3c94f
+  text: made
+correct_choice_ids:
+- f04c0710-0af5-4fe4-a4f1-3df1949fb9c1
+explanation: 'Après « going to », on utilise la base verbale : « make ». Les formes au passé, en -ing ou en -s ne conviennent pas.'
+archived: false

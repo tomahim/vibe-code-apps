@@ -1,0 +1,21 @@
+id: 046a66f7-88d1-4d83-9ccf-304412b53a49
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je crois que quelque chose te gêne. »
+
+
+  I think something ____ you.'
+choices:
+- id: bfdc80ab-cf14-4c71-8dd6-0a32b7518ab7
+  text: bothered
+- id: 12690d03-d480-45d5-8078-8d58b1b82921
+  text: is bothering
+- id: 1fdbaa15-aa6b-4b22-94f9-e3d6a0dc7d5e
+  text: bother
+- id: 6e26b8da-06e5-4685-8487-5b42bd92a587
+  text: are bothering
+correct_choice_ids:
+- 12690d03-d480-45d5-8078-8d58b1b82921
+explanation: '« Something » est singulier : « is ». La gêne est en cours : « is bothering ». Les autres formes ne conviennent pas à cette phrase.'
+archived: false

@@ -1,0 +1,21 @@
+id: 8818b4d0-9716-46e2-b29a-bf67a2177b2f
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu es curieux. »
+
+
+  You''re ____.'
+choices:
+- id: a0e56eac-72b4-417d-9c3b-f996a642e543
+  text: tired
+- id: ffeb086c-fcd4-443c-b1e0-3f0ff81a3ea4
+  text: quiet
+- id: 105161cc-7775-4a14-844f-feb8c2077b76
+  text: curious
+- id: c4b7a065-c18d-4b65-a069-44f0ff2e8d4a
+  text: hungry
+correct_choice_ids:
+- 105161cc-7775-4a14-844f-feb8c2077b76
+explanation: La traduction demande « curious » (curieux). « tired » signifie fatigué; « hungry » signifie affamé; « quiet » signifie silencieux.
+archived: false

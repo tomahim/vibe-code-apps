@@ -1,0 +1,21 @@
+id: 5cb83f46-09ee-4fb3-86cc-082bfd12e4c9
+position: 3
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu es bien installé ? »
+
+
+  Are you ____?'
+choices:
+- id: 629ad01f-18b4-4b44-9397-e5e845b342c4
+  text: uncomfortable
+- id: 200ee70c-ef5a-4751-bb35-ac55dd028803
+  text: comfortable
+- id: e2d581d3-145e-40d8-9841-5f35d0b5b438
+  text: sleepy
+- id: d87581c5-de28-4a51-911a-247f6077157e
+  text: hungry
+correct_choice_ids:
+- 200ee70c-ef5a-4751-bb35-ac55dd028803
+explanation: La traduction demande « comfortable » (bien installé). « uncomfortable » signifie mal installé; « hungry » signifie affamé; « sleepy » signifie somnolent.
+archived: false

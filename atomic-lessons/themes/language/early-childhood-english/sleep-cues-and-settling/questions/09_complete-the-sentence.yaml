@@ -1,0 +1,21 @@
+id: 4071da82-7351-426c-9248-7aca65895fac
+position: 9
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu commences à t''endormir. »
+
+
+  You''re ____ to fall asleep.'
+choices:
+- id: a9a05130-ffee-4d5c-95b8-3173e98ba980
+  text: start
+- id: 6cedc54b-bb81-49d8-9a5b-b26a2bc4e81a
+  text: started
+- id: 93cf5442-248f-46e9-895d-1bdeb1b42544
+  text: starts
+- id: 391a78ff-21fd-4f4e-bb81-966ff45f004a
+  text: starting
+correct_choice_ids:
+- 391a78ff-21fd-4f4e-bb81-966ff45f004a
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « starting ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

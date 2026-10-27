@@ -1,0 +1,21 @@
+id: 06ad4f9a-9de6-4d1b-b5e3-14f7df72f037
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu rends mes journées plus belles. »
+
+
+  You ____ my days brighter.'
+choices:
+- id: 13bab358-1882-434e-ac82-2b1e084ca403
+  text: making
+- id: f3ab9582-6256-438c-b153-46c086a86fcd
+  text: made
+- id: e48ee101-0c16-4c99-8305-52b82dc90152
+  text: make
+- id: 66679ee4-8369-4365-be98-29797390decb
+  text: makes
+correct_choice_ids:
+- e48ee101-0c16-4c99-8305-52b82dc90152
+explanation: La phrase française est au présent. Avec « you », on emploie « make » ; « makes » va avec he/she/it et « made » est au passé.
+archived: false

@@ -1,0 +1,21 @@
+id: 163cb4fe-044a-4365-8863-e5da85466089
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je te verrai quand tu te réveilleras. »
+
+
+  I''ll see you when you ____ up.'
+choices:
+- id: 6700a87c-c0a2-4688-8270-1c21ca59e7a1
+  text: wake
+- id: eb2b2125-3578-476b-94ab-8b08210a1494
+  text: wakes
+- id: 6a35e0c2-7764-4245-b3c6-b0d8d3afe9d0
+  text: woke
+- id: 119317e3-a313-43fc-af6d-68ab67b6283b
+  text: waking
+correct_choice_ids:
+- 6700a87c-c0a2-4688-8270-1c21ca59e7a1
+explanation: 'Après « when » pour parler de ce futur, on utilise le présent : « when you wake up ». Avec « you », il n’y a pas de -s.'
+archived: false

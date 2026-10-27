@@ -1,0 +1,21 @@
+id: 8e722efc-64f2-4313-bf3c-5737fa36ad7e
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Ferme les yeux. »
+
+
+  Close your ____.'
+choices:
+- id: 78df5ce8-9f62-4ae7-bd2c-c867046e6deb
+  text: ears
+- id: df765e05-8450-41dd-b4b9-8cc8c5d645ae
+  text: arms
+- id: 5f0a3bd5-b8fa-4bc8-b97c-0168f8df43c9
+  text: eyes
+- id: ee8d71c6-0b9c-4c4e-bdd9-d8f53db4ab99
+  text: legs
+correct_choice_ids:
+- 5f0a3bd5-b8fa-4bc8-b97c-0168f8df43c9
+explanation: La traduction demande « eyes » (yeux). « ears » signifie oreilles; « arms » signifie bras; « legs » signifie jambes.
+archived: false

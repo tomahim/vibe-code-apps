@@ -1,0 +1,21 @@
+id: 6ed515df-0fb5-405b-9122-2b4dc364db1b
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais ouvrir le frigo. »
+
+
+  I''m going to ____ the fridge.'
+choices:
+- id: e4f75b05-aea9-464b-bf81-2fd7d0ff92dc
+  text: close
+- id: da9a122a-ea30-4647-9f27-7f942af47c4b
+  text: fill
+- id: a580032e-9510-4821-9964-c5f68ac06f66
+  text: clean
+- id: 76a85ab6-52e3-4624-b480-b7a2adf2cac8
+  text: open
+correct_choice_ids:
+- 76a85ab6-52e3-4624-b480-b7a2adf2cac8
+explanation: « Open » signifie ouvrir. « Close » = fermer, « fill » = remplir et « clean » = nettoyer.
+archived: false

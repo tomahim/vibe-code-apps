@@ -1,0 +1,21 @@
+id: 54a91aa9-5521-4f94-98cd-4e95dea79d03
+position: 5
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je cherche mes clés. »
+
+
+  I''m looking for my ____.'
+choices:
+- id: 53b00a5b-1b5d-4911-b493-9d4508a2d8aa
+  text: coins
+- id: 3a0aa150-f4ed-42ed-a959-3361cdc8efa4
+  text: locks
+- id: ce2fe378-22d3-404e-98a5-7bdbd2c47cee
+  text: keys
+- id: 668491a4-c83b-443d-8dbf-679b502b18fa
+  text: cards
+correct_choice_ids:
+- ce2fe378-22d3-404e-98a5-7bdbd2c47cee
+explanation: La traduction demande « keys » (clés). « coins » signifie pièces de monnaie; « cards » signifie cartes; « locks » signifie serrures.
+archived: false

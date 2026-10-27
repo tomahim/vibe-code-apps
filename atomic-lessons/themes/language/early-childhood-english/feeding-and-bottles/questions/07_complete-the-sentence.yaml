@@ -1,0 +1,21 @@
+id: fc38f0ea-b024-4420-8ce7-cd3cd3215ee4
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu en veux encore ? »
+
+
+  Do you ____ some more?'
+choices:
+- id: 1ff486d3-6791-4d05-bb85-c7fd10623925
+  text: wants
+- id: da2bb0de-1769-489d-adac-ac86de6fc65b
+  text: wanting
+- id: 972eb0c5-8359-4344-a0f4-9a0b3d02898e
+  text: wanted
+- id: 6664f150-966c-4133-8253-996e3580e605
+  text: want
+correct_choice_ids:
+- 6664f150-966c-4133-8253-996e3580e605
+explanation: Après « Do you », on utilise la base verbale « want ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

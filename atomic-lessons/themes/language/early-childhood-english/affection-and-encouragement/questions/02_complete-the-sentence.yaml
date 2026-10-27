@@ -1,0 +1,21 @@
+id: a11f3b61-2d8b-4d2d-b9b0-fd312a96af41
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je suis fière de toi. »
+
+
+  I''m proud ____ you.'
+choices:
+- id: 75da6a2a-e9f0-4937-9ac4-a832fd575d3f
+  text: for
+- id: 085d6113-15c0-4a8b-bc66-e99fca87e59d
+  text: with
+- id: 90b661e4-b2ef-4b73-9b1e-5aa43d23e5f3
+  text: of
+- id: c1c81c50-ba9b-479e-a291-8b87e8da44db
+  text: at
+correct_choice_ids:
+- 90b661e4-b2ef-4b73-9b1e-5aa43d23e5f3
+explanation: 'L’expression est « proud of someone » : être fier de quelqu’un. Les prépositions proposées ne remplacent pas « of » ici.'
+archived: false

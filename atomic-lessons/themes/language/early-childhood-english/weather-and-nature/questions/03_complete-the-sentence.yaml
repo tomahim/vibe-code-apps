@@ -1,0 +1,21 @@
+id: 4052afda-d1b2-4b95-99fb-a75b1f513d4f
+position: 3
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Voilà un oiseau. »
+
+
+  There''s a ____.'
+choices:
+- id: 290a6e20-6d63-4b7c-b9b8-25ed0b8458b2
+  text: cat
+- id: a9e14a41-6b40-45fc-aaa8-653014cfbf8a
+  text: tree
+- id: f719b9e3-aa51-46f1-817d-6749b4fce297
+  text: dog
+- id: 11f0892e-af67-4675-9439-6e53e5de6108
+  text: bird
+correct_choice_ids:
+- 11f0892e-af67-4675-9439-6e53e5de6108
+explanation: La traduction demande « bird » (oiseau). « dog » signifie chien; « cat » signifie chat; « tree » signifie arbre.
+archived: false

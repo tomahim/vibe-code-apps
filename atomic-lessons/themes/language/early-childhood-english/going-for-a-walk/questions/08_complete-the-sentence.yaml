@@ -1,0 +1,21 @@
+id: f4d873bc-86a8-4419-a803-5c135eaf0700
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais t''emmener dehors. »
+
+
+  I''m going to take you ____.'
+choices:
+- id: 8095417e-3365-4dfe-aad8-d1329b2686aa
+  text: upstairs
+- id: 43d4261e-6096-4618-b9ee-830c41b65186
+  text: inside
+- id: 9b70bf9c-7fb4-4a2f-965b-6ab97687b853
+  text: downstairs
+- id: b6717303-f7d0-4a60-ba9c-182023876071
+  text: outside
+correct_choice_ids:
+- b6717303-f7d0-4a60-ba9c-182023876071
+explanation: La traduction demande « outside » (dehors). « inside » signifie dedans; « upstairs » signifie à l’étage; « downstairs » signifie en bas.
+archived: false

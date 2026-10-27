@@ -1,0 +1,21 @@
+id: 8b345154-4807-4c28-894b-d253f0ce07ce
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Essaie d''attraper le jouet. »
+
+
+  Try to reach for the ____.'
+choices:
+- id: db66991b-5487-456e-8c48-534f48b4ce5f
+  text: bottle
+- id: 00b2c17c-98ec-46a8-be59-471a21e314fd
+  text: toy
+- id: 7ec2537e-44bd-4876-811e-ffc1c99a79bc
+  text: book
+- id: 79a686de-baaa-458f-aa9d-404b922a7167
+  text: blanket
+correct_choice_ids:
+- 00b2c17c-98ec-46a8-be59-471a21e314fd
+explanation: La traduction demande « toy » (jouet). « book » signifie livre; « blanket » signifie couverture; « bottle » signifie biberon.
+archived: false

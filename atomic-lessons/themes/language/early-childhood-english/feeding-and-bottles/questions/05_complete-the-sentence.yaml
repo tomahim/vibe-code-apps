@@ -1,0 +1,21 @@
+id: c52968a1-f788-4dc9-b485-f07753ea3dc6
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu veux du lait ? »
+
+
+  Do you ____ some milk?'
+choices:
+- id: 1cf1efa4-ae7b-4a65-9d9c-b2378c789579
+  text: wanted
+- id: f11583b6-330d-49f4-bb5a-56a740ecfd80
+  text: want
+- id: 07611b4a-5bce-4ee1-bee6-00cf7c99beb0
+  text: wanting
+- id: 33dd202c-e92c-44c5-a52c-9acf6e68446c
+  text: wants
+correct_choice_ids:
+- f11583b6-330d-49f4-bb5a-56a740ecfd80
+explanation: Après « Do you », on utilise la base verbale « want ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

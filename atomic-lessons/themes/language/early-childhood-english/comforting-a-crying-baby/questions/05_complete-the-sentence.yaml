@@ -1,0 +1,21 @@
+id: d5898ef2-3643-41af-ac5a-204849b8f926
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu as faim ? »
+
+
+  ____ you hungry?'
+choices:
+- id: 0416717d-edd1-4b62-8f2a-dfcbccb6dcec
+  text: Be
+- id: f8b5e26b-967b-47d3-a236-9d5202340ed0
+  text: Am
+- id: 2e8acd4d-be57-4a92-aa33-97ee4634f9a7
+  text: Are
+- id: d2c2eb78-003c-4bf2-9bd1-c890fc400b38
+  text: Is
+correct_choice_ids:
+- 2e8acd4d-be57-4a92-aa33-97ee4634f9a7
+explanation: Pour demander « Tu es… ? », on utilise « Are you…? ». « Is » va avec he/she/it et « am » avec I.
+archived: false

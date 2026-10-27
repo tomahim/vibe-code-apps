@@ -1,0 +1,21 @@
+id: 6f98cd26-5600-4b85-9a01-39a86386f7fb
+position: 5
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Quelqu''un sonne à la porte. »
+
+
+  Someone''s at the ____.'
+choices:
+- id: d9291c7a-c34f-42b0-9221-81fdc36b1167
+  text: floor
+- id: f957baa5-8c71-45b6-b7b1-58fe8c69e1d9
+  text: window
+- id: 5500237b-8660-4bfd-a3a2-7f99721c6f00
+  text: wall
+- id: 00b4406d-4895-4ff0-835d-90af3dfea2e0
+  text: door
+correct_choice_ids:
+- 00b4406d-4895-4ff0-835d-90af3dfea2e0
+explanation: La traduction demande « door » (porte). « window » signifie fenêtre; « wall » signifie mur; « floor » signifie sol.
+archived: false

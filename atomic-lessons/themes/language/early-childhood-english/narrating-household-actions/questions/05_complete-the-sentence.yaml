@@ -1,0 +1,21 @@
+id: e80b13c6-cac8-47dc-a077-53b35c981602
+position: 5
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais fermer la porte. »
+
+
+  I''m going to close the ____.'
+choices:
+- id: 1c11c1f5-58dc-4a6a-bf66-9ba8240574cc
+  text: window
+- id: d102078e-e884-4701-84d5-bf2f08202a62
+  text: wall
+- id: 08c788f5-3bb0-49ee-8d2b-eb89fdf7ff30
+  text: door
+- id: 290a20e1-bb45-4a33-846c-36f5a8ef3d5b
+  text: floor
+correct_choice_ids:
+- 08c788f5-3bb0-49ee-8d2b-eb89fdf7ff30
+explanation: La traduction demande « door » (porte). « window » signifie fenêtre; « wall » signifie mur; « floor » signifie sol.
+archived: false

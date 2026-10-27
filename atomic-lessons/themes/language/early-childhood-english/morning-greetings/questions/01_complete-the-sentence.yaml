@@ -1,0 +1,21 @@
+id: 121d0fd4-e5d3-4e94-a38e-3153d73e98d4
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu as bien dormi ? »
+
+
+  ____ you sleep well?'
+choices:
+- id: cc242f66-ea99-4cd1-aeb9-3b4c23be26a6
+  text: Do
+- id: 0a632405-f920-40dd-a146-ffc402fca39f
+  text: Are
+- id: 7dcbc692-47e4-44dc-bc90-f3f6effc9737
+  text: Did
+- id: 85719255-ffb7-4882-b414-1cb7c7be126d
+  text: Does
+correct_choice_ids:
+- 7dcbc692-47e4-44dc-bc90-f3f6effc9737
+explanation: '« Did » introduit une question au passé, puis le verbe reste à sa base : « sleep ». « Do/does » sont au présent ; « are » ne construit pas cette question.'
+archived: false

@@ -1,0 +1,21 @@
+id: b3d06c16-38b5-48bd-8aa8-0df74a63b0fa
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je suis tellement heureuse d''être ta maman. »
+
+
+  I''m so ____ to be your mom.'
+choices:
+- id: 241e8a0e-af49-497e-9cf8-121559a767f2
+  text: sad
+- id: f2781e61-b300-4021-9d92-5930864bec13
+  text: happy
+- id: 6d144ae8-8b2f-40cd-b3ca-2562b9f56734
+  text: angry
+- id: 7704f642-2a78-4d2f-96be-c91131d4e035
+  text: sleepy
+correct_choice_ids:
+- f2781e61-b300-4021-9d92-5930864bec13
+explanation: La traduction demande « happy » (heureux). « sad » signifie triste; « angry » signifie en colère; « sleepy » signifie somnolent.
+archived: false

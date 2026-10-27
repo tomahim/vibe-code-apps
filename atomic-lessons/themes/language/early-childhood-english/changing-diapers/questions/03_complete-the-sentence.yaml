@@ -1,0 +1,21 @@
+id: 60a4100c-e2ed-43c1-b467-087996e2a0c1
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Attends, je vais chercher une lingette. »
+
+
+  Hold on, I''m going to grab a ____.'
+choices:
+- id: 8ab6b678-84f5-4428-8456-4772fa2b2a10
+  text: bib
+- id: 4fedacad-e9ec-4422-aa39-6c51277e1cb5
+  text: diaper
+- id: d964bc40-90f8-400e-99d7-2656628138d3
+  text: wipe
+- id: 0830cfd7-1dee-47c1-820a-0c94fa0ef443
+  text: towel
+correct_choice_ids:
+- d964bc40-90f8-400e-99d7-2656628138d3
+explanation: « Wipe » est une lingette. « Diaper » = couche, « towel » = serviette et « bib » = bavoir.
+archived: false

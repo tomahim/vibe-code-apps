@@ -1,0 +1,21 @@
+id: 8417d741-eadd-4a0f-b772-623c17119268
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais rincer tes cheveux. »
+
+
+  I''m going to ____ your hair.'
+choices:
+- id: db9c4e58-ccd5-4b1e-8606-0b8182046fad
+  text: rinse
+- id: 753b206b-7240-434c-92b2-cb368dfb3aa8
+  text: wash
+- id: 3efaaa5a-f333-41d1-842f-00167b374f5f
+  text: dry
+- id: 8df3203f-f8a7-4bd4-94c0-dacbdfb606fe
+  text: brush
+correct_choice_ids:
+- db9c4e58-ccd5-4b1e-8606-0b8182046fad
+explanation: « Rinse » signifie rincer. « Wash » = laver, « dry » = sécher et « brush » = brosser.
+archived: false

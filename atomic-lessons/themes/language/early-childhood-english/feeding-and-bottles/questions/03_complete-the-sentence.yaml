@@ -1,0 +1,21 @@
+id: a694e1d9-bb6d-4b5f-8f96-9470c1ae6030
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Un peu de lait a coulé. »
+
+
+  A little milk ____ out.'
+choices:
+- id: 82f37b63-72ad-4a95-b647-0ace6969afa9
+  text: dribble
+- id: ce10311a-a864-4028-b319-8162518fcfae
+  text: dribbles
+- id: 3a1ebda5-a539-4f34-93b6-995cfdb335fb
+  text: dribbled
+- id: b69a107b-e7bd-4883-b199-e329f5635c02
+  text: dribbling
+correct_choice_ids:
+- 3a1ebda5-a539-4f34-93b6-995cfdb335fb
+explanation: '« A coulé » exprime ici une action passée : « dribbled ». « Dribbles » est au présent ; « dribbling » nécessiterait un auxiliaire.'
+archived: false

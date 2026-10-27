@@ -1,0 +1,21 @@
+id: 09791a54-b807-402f-9cf9-7b4653a68665
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu veux que je te prenne ? »
+
+
+  Do you want me ____ you?'
+choices:
+- id: 36026708-2a73-4d97-84d1-120a8c2b91d9
+  text: to hold
+- id: edeb4cbd-87c7-4952-9221-8fc2012be1f0
+  text: holds
+- id: 9e6f7385-3fc1-49c8-aaae-eea9a0e1a997
+  text: holding
+- id: a666d9c6-c7cb-4d07-aa1f-5b92dfd12800
+  text: held
+correct_choice_ids:
+- 36026708-2a73-4d97-84d1-120a8c2b91d9
+explanation: 'Après « want me », on utilise « to » suivi de la base verbale : « to hold ». Les autres formes ne conviennent pas ici.'
+archived: false

@@ -1,0 +1,21 @@
+id: c337a0e6-fe17-46c5-8275-879c302bd481
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu peux te blottir contre moi. »
+
+
+  You can ____ up against me.'
+choices:
+- id: 7d891977-91e9-4f5c-95f3-7b7ff057e073
+  text: snuggle
+- id: c8877cca-0b95-4c89-b4a8-1c9d68705d69
+  text: snuggled
+- id: c75d7627-49a6-4e24-a95d-ce188dccfb62
+  text: snuggles
+- id: 93ed100b-015d-4d10-ba7b-e46b5f24e4a6
+  text: snuggling
+correct_choice_ids:
+- 7d891977-91e9-4f5c-95f3-7b7ff057e073
+explanation: Après « You can », on utilise la base verbale « snuggle ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

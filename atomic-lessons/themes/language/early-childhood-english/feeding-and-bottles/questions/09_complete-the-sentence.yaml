@@ -1,0 +1,21 @@
+id: 905f53fc-3d75-4973-9c01-1709a5b2e1cd
+position: 9
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais essuyer ta bouche. »
+
+
+  I''m going to ____ your mouth.'
+choices:
+- id: ec33386f-57ca-438c-bb9d-13e3c98f53d2
+  text: wipe
+- id: bb680b9c-19f8-4f86-9426-36a3a51b1b1f
+  text: wipes
+- id: 38fcb4a5-5811-4dc5-b43a-48a822610812
+  text: wiped
+- id: da4675f6-6d11-4812-af0e-46046f21fc88
+  text: wiping
+correct_choice_ids:
+- ec33386f-57ca-438c-bb9d-13e3c98f53d2
+explanation: Après « going to », on utilise la base verbale « wipe ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

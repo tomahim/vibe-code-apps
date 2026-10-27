@@ -1,0 +1,21 @@
+id: a54c6f6d-9aec-40f8-9170-d894d1ab3382
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais te faire faire ton rot. »
+
+
+  I''m going to ____ you.'
+choices:
+- id: 3fbeb486-b301-4865-bb43-777532107a81
+  text: sip
+- id: 36c435d7-3f81-476a-a13d-ec5a5e5f53e4
+  text: spill
+- id: 4a0140f9-3ebe-4411-8827-7f82789d1de4
+  text: swallow
+- id: 3e0e1dd7-238d-4af0-aed3-412491a93d5a
+  text: burp
+correct_choice_ids:
+- 3e0e1dd7-238d-4af0-aed3-412491a93d5a
+explanation: « Burp you » signifie te faire faire ton rot. « Sip » = boire à petites gorgées, « swallow » = avaler et « spill » = renverser.
+archived: false

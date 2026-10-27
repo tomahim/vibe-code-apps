@@ -1,0 +1,21 @@
+id: 94ba4e64-0dcc-4b74-acd4-e7fdba163a8a
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais te mettre doucement dans l''eau. »
+
+
+  I''m going to lower you ____ the water nice and slowly.'
+choices:
+- id: b7cc0ba3-d3b9-4673-ac2a-03de736ce6a5
+  text: above
+- id: bbac9248-886b-4e43-a0fa-dbab943d30ba
+  text: into
+- id: 54bd6ad3-f644-492c-a83b-5fa453e5816a
+  text: beside
+- id: fe959532-79c9-4528-9526-11993971658e
+  text: out of
+correct_choice_ids:
+- bbac9248-886b-4e43-a0fa-dbab943d30ba
+explanation: « Into » décrit un mouvement vers l’intérieur. « Out of » signifie hors de, « above » au-dessus et « beside » à côté.
+archived: false

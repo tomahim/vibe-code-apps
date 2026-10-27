@@ -1,0 +1,21 @@
+id: 760a196e-fb59-4b79-bb72-36ffc752db83
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais laver ton visage. »
+
+
+  I''m going to ____ your face.'
+choices:
+- id: 05e04329-cf6f-4798-aaa3-f5bbff6441b4
+  text: wash
+- id: 120247ce-3278-4445-bb05-91cb0fe30944
+  text: washed
+- id: d2a9be84-791b-4df5-8778-2fd0b7da4eb6
+  text: washes
+- id: 237fcc05-9c64-47fa-a9f2-7d2ffaf1017a
+  text: washing
+correct_choice_ids:
+- 05e04329-cf6f-4798-aaa3-f5bbff6441b4
+explanation: Après « going to », on utilise la base verbale « wash ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

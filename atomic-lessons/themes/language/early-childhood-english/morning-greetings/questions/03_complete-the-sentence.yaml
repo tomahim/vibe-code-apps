@@ -1,0 +1,21 @@
+id: fb3540e2-06cf-48d6-9cf4-d31312f19370
+position: 3
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je suis tellement contente de te voir. »
+
+
+  I''m so ____ to see you.'
+choices:
+- id: 58ff9a87-f976-4465-972b-262edc8026dd
+  text: sad
+- id: 85d79717-7efa-41ab-9b07-596744ebfda1
+  text: angry
+- id: 18cedd7a-1315-4581-aaaf-00e7082ab21b
+  text: happy
+- id: a1de22b7-9aed-46f4-8935-105e3e6deead
+  text: sleepy
+correct_choice_ids:
+- 18cedd7a-1315-4581-aaaf-00e7082ab21b
+explanation: La traduction demande « happy » (heureux). « sad » signifie triste; « angry » signifie en colère; « sleepy » signifie somnolent.
+archived: false

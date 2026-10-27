@@ -1,0 +1,21 @@
+id: 8773193b-ae45-452a-b549-b95edf2fbb47
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais te mettre dans la poussette. »
+
+
+  I''m going to put you in the ____.'
+choices:
+- id: de3d6796-b367-42da-8311-ee14114b855c
+  text: crib
+- id: 124348ee-d824-41e7-8f35-a0cd6434be4e
+  text: stroller
+- id: 26ab037f-d361-4ee8-b5d1-4e8dfe447d6a
+  text: high chair
+- id: a35a0413-d233-4da5-b680-82ff59a24c70
+  text: car seat
+correct_choice_ids:
+- 124348ee-d824-41e7-8f35-a0cd6434be4e
+explanation: « Stroller » est une poussette. « Crib » = lit de bébé, « car seat » = siège-auto et « high chair » = chaise haute.
+archived: false

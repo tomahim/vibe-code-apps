@@ -1,0 +1,21 @@
+id: 8083daaf-e4d9-42aa-8ea6-cd05133b4bd5
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu y arrives. »
+
+
+  You''re ____ it.'
+choices:
+- id: d4621f8c-8729-402b-a312-7a8855f5fe78
+  text: does
+- id: 1ed3a032-4142-430b-ac4e-c096bd06c7a6
+  text: did
+- id: 50365aea-bfbd-44bf-bca7-39d2085f71da
+  text: doing
+- id: 2e7859f3-b511-4704-b47a-b0bf6f8d6572
+  text: do
+correct_choice_ids:
+- 50365aea-bfbd-44bf-bca7-39d2085f71da
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « doing ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

@@ -1,0 +1,21 @@
+id: d17ed257-1a02-4586-8a4e-8064d0277f94
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais m''occuper de toi. »
+
+
+  I''m going to ____ you.'
+choices:
+- id: c302f81d-6f5c-4b2e-bc50-6306f46b2c02
+  text: take over for
+- id: 164ff9e2-9487-4519-83d1-002daba25e7b
+  text: take away from
+- id: 37235c67-bf17-448f-b0b2-260198762e27
+  text: take after
+- id: ca11db9f-f631-45ce-8948-2a6aa18ac6fa
+  text: take care of
+correct_choice_ids:
+- ca11db9f-f631-45ce-8948-2a6aa18ac6fa
+explanation: « Take care of you » signifie m’occuper de toi. « Take away from » = enlever à, « take over for » = remplacer, « take after » = ressembler à.
+archived: false

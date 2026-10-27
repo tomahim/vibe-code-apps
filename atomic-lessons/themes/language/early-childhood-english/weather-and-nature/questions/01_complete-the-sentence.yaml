@@ -1,0 +1,21 @@
+id: 31b5840b-0c02-4cfb-901d-34621f145a62
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Les feuilles bougent. »
+
+
+  The leaves ____.'
+choices:
+- id: 586f17ba-b203-4fcc-bcc5-f1245ee75b84
+  text: is moving
+- id: 0ea6f497-f946-4434-9aa8-602163d67fe7
+  text: are moving
+- id: f0d02446-2095-43ef-8c21-3be9e9a123bb
+  text: moves
+- id: e79f50e4-1829-442c-b57a-893ac98b25f3
+  text: moving
+correct_choice_ids:
+- 0ea6f497-f946-4434-9aa8-602163d67fe7
+explanation: '« Leaves » est pluriel. Pour une action en cours : « are moving ». « Is » et « moves » sont singuliers ; « moving » seul manque d’auxiliaire.'
+archived: false

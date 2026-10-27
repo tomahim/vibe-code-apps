@@ -1,0 +1,21 @@
+id: 53e6b892-6654-46f1-8127-b21f84607056
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais secouer le hochet. »
+
+
+  I''m going to ____ the rattle.'
+choices:
+- id: 7c1be6dc-e0b5-466c-af48-5db61a0c6f51
+  text: shake
+- id: 3f388642-2f31-4dc5-8a66-372574366a9d
+  text: shakes
+- id: 79017489-5187-4428-9ac1-f98a77f76366
+  text: shook
+- id: 9cd6c675-703d-404d-99f1-0da10f62d8f6
+  text: shaking
+correct_choice_ids:
+- 7c1be6dc-e0b5-466c-af48-5db61a0c6f51
+explanation: Après « going to », on utilise la base verbale « shake ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

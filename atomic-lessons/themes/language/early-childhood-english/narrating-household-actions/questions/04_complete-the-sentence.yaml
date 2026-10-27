@@ -1,0 +1,21 @@
+id: 0ca9921d-d548-4cae-9dee-a9d5af8ce754
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais le déplacer. »
+
+
+  I''m going to ____ it.'
+choices:
+- id: 07210c41-d6c7-468d-9d71-983b3c01549c
+  text: moving
+- id: 9590d0d4-3202-4f1c-8da1-e6531b9fde51
+  text: moves
+- id: ad8f1275-ddd1-47ae-90df-09c46cf85600
+  text: moved
+- id: 1f4c811d-ed1a-41ee-9f26-dc466ab83d43
+  text: move
+correct_choice_ids:
+- 1f4c811d-ed1a-41ee-9f26-dc466ab83d43
+explanation: Après « going to », on utilise la base verbale « move ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

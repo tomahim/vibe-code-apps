@@ -1,0 +1,21 @@
+id: f95b014b-bf60-4637-82d0-900815678e18
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va sortir un peu. »
+
+
+  We''re going to ____ outside for a little while.'
+choices:
+- id: d5455a77-89f4-4810-a342-ba32a266d643
+  text: goes
+- id: d58eb1d5-6ff5-40fe-87f0-90f3567380c4
+  text: going
+- id: 0e875eb9-d1a4-467b-a3b7-8793919c2929
+  text: went
+- id: 671b1632-fff0-4efe-ba62-2ca5a2e44e78
+  text: go
+correct_choice_ids:
+- 671b1632-fff0-4efe-ba62-2ca5a2e44e78
+explanation: Après « going to », on utilise la base verbale « go ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

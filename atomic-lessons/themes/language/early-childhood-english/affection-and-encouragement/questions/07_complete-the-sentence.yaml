@@ -1,0 +1,21 @@
+id: 0c824cde-7c44-446b-9acb-e1cb996b6f65
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu t''en sors très bien. »
+
+
+  You''re ____ such a good job.'
+choices:
+- id: edcbec68-8bcd-4b11-ad5b-1c866ca684f4
+  text: doing
+- id: 161b8b66-675d-4ca8-85f6-e71b286bb801
+  text: did
+- id: a4d3bd10-d4d1-4ff2-a244-c5104999dffb
+  text: does
+- id: 296e382f-fce7-4761-ad14-d521e9b9b53e
+  text: do
+correct_choice_ids:
+- edcbec68-8bcd-4b11-ad5b-1c866ca684f4
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « doing ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

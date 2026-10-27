@@ -1,0 +1,21 @@
+id: 61de8080-1e59-46f2-9dca-8263a6887576
+position: 5
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « La route est un peu cahoteuse. »
+
+
+  The road is a little ____.'
+choices:
+- id: 0e7c07b7-a6ce-41d5-acda-f4be56169c0a
+  text: slippery
+- id: 09c78eba-8679-439d-a599-3c95dcf396d6
+  text: steep
+- id: 29bbd0d1-3483-4092-9c19-6e882e5642bb
+  text: bumpy
+- id: 1fdc4b10-ff8b-463f-b277-afc907326175
+  text: smooth
+correct_choice_ids:
+- 29bbd0d1-3483-4092-9c19-6e882e5642bb
+explanation: La traduction demande « bumpy » (cahoteux). « smooth » signifie lisse; « slippery » signifie glissant; « steep » signifie pentu.
+archived: false

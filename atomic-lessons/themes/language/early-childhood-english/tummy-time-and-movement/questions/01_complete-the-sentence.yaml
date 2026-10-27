@@ -1,0 +1,21 @@
+id: a3708b30-7b38-4073-aa87-87f649253a41
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Essaie de lever la tête. »
+
+
+  Try to ____ your head.'
+choices:
+- id: 87dc3d45-d087-4c34-8c97-d28f0ca05544
+  text: lower
+- id: b9426b3f-b37a-4bad-a997-eb837412ca42
+  text: turn
+- id: 87129a59-2cf1-4a56-afa9-ed452d16d661
+  text: lift
+- id: 86c0d95c-f03c-41d8-b4a2-0efb61ded201
+  text: rest
+correct_choice_ids:
+- 87129a59-2cf1-4a56-afa9-ed452d16d661
+explanation: « Lift » signifie lever. « Lower » = baisser, « turn » = tourner et « rest » = reposer.
+archived: false

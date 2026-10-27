@@ -1,0 +1,21 @@
+id: a20aa7bd-561d-4be0-b864-7f28bae79f8a
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « On va te sécher. »
+
+
+  Let''s ____ you off.'
+choices:
+- id: 61a5803c-5882-4bda-8da9-a08e3eaba7a8
+  text: rinse
+- id: ed7f64c6-7027-446a-8e98-57b0de4755f3
+  text: dry
+- id: ff2fc9ba-d60a-492c-bd46-711112c34392
+  text: wash
+- id: 734433bc-ad50-46e0-9abc-c6ee2fabb606
+  text: soak
+correct_choice_ids:
+- ed7f64c6-7027-446a-8e98-57b0de4755f3
+explanation: « Dry you off » signifie te sécher. « Rinse » = rincer, « wash » = laver et « soak » = faire tremper.
+archived: false

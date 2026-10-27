@@ -1,0 +1,21 @@
+id: 99db7ad0-30b2-43b9-beef-8f91e57df0aa
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu vois les arbres ? »
+
+
+  Can you ____ the trees?'
+choices:
+- id: 5c6fd626-178b-45f0-9d1f-5271b673829b
+  text: sees
+- id: a5f7b83f-4d06-4543-9c19-31455a916b0c
+  text: see
+- id: 50c5eb8e-c4d7-4855-9209-0d1817a1d8a4
+  text: saw
+- id: 3af6f572-de1f-49d4-95c7-ebf793b091af
+  text: seeing
+correct_choice_ids:
+- a5f7b83f-4d06-4543-9c19-31455a916b0c
+explanation: Après « Can you », on utilise la base verbale « see ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

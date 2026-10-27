@@ -1,0 +1,21 @@
+id: c559b486-4b6a-4318-ad78-d2e75b13c2fa
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Attention à ta tête. »
+
+
+  Careful with your ____.'
+choices:
+- id: 742102e0-8c2e-4f03-b5b1-c127398c749f
+  text: face
+- id: 13096c34-d960-4850-93b4-32d1412c9de6
+  text: back
+- id: 4dff7fe0-020c-4fe8-9bb9-c2ab0e217176
+  text: head
+- id: a6a902dc-62e2-427a-84de-85453e1c4343
+  text: hand
+correct_choice_ids:
+- 4dff7fe0-020c-4fe8-9bb9-c2ab0e217176
+explanation: La traduction demande « head » (tête). « hand » signifie main; « face » signifie visage; « back » signifie dos.
+archived: false

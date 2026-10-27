@@ -1,0 +1,21 @@
+id: 4c0acda9-5733-4f53-beb8-44f60876980c
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « C''est doux. »
+
+
+  ____ soft.'
+choices:
+- id: aff657f8-73fb-4e20-9238-2b8f82d24d74
+  text: It's
+- id: f64a7fbd-ace0-4f57-93e3-9a438c6ec4ea
+  text: It has
+- id: b922e3c8-54ab-4b04-af76-beb0d8914e93
+  text: It
+- id: eeae98ca-01ca-4f6e-9fba-46f5af84d5c5
+  text: Its
+correct_choice_ids:
+- aff657f8-73fb-4e20-9238-2b8f82d24d74
+explanation: « It’s » signifie ici « it is ». « Its » est possessif, « it » seul n’a pas de verbe et « it has » signifie « il/elle a ».
+archived: false

@@ -1,0 +1,21 @@
+id: dba4ef79-440d-475e-999a-0946e2aa0495
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je verse de l''eau dans le verre. »
+
+
+  I''m ____ water into the cup.'
+choices:
+- id: 4e6320e3-efdf-4943-b6a4-05e07d6f2be5
+  text: poured
+- id: 629dcff2-6f38-400b-aa77-7de3a92f330a
+  text: pouring
+- id: a9eda16d-9902-4d28-96f7-791baefde5d2
+  text: pours
+- id: f5aef2a0-338f-4fdc-ad94-96177ae21cf3
+  text: pour
+correct_choice_ids:
+- 629dcff2-6f38-400b-aa77-7de3a92f330a
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « pouring ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

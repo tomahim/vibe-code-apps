@@ -1,0 +1,21 @@
+id: d981c0d6-91a8-415c-8fac-c0ae8eafc5e8
+position: 3
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu suis le mouvement des yeux. »
+
+
+  You''re following it with your ____.'
+choices:
+- id: 0ffedbce-4650-47d6-b93b-9e551650c4b0
+  text: ears
+- id: d49df438-65e5-4340-85ba-d1f214cd866b
+  text: arms
+- id: 8030af50-3cbb-445b-b4e4-45502f38e26c
+  text: legs
+- id: 7d22b32d-e454-4fa1-a077-1e2a77f44461
+  text: eyes
+correct_choice_ids:
+- 7d22b32d-e454-4fa1-a077-1e2a77f44461
+explanation: 'La phrase parle de suivre du regard : « eyes » signifie yeux. « Ears » = oreilles, « arms » = bras et « legs » = jambes.'
+archived: false

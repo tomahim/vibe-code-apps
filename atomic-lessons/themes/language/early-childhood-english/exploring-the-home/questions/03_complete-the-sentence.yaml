@@ -1,0 +1,21 @@
+id: 92297950-7057-451c-85b3-23de4a71ed29
+position: 3
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va dans la cuisine. »
+
+
+  Let''s go to the ____.'
+choices:
+- id: c0f82875-d6df-48fc-a572-055dcc66cf41
+  text: kitchen
+- id: fc39cc0f-8e3b-47d9-a10c-0a3014504754
+  text: living room
+- id: bc99c459-22ee-401f-9d76-56bbf3f0fd8d
+  text: bathroom
+- id: c118132d-81a1-452a-b843-e91640283dca
+  text: bedroom
+correct_choice_ids:
+- c0f82875-d6df-48fc-a572-055dcc66cf41
+explanation: La traduction demande « kitchen » (cuisine). « bedroom » signifie chambre; « bathroom » signifie salle de bains; « living room » signifie salon.
+archived: false

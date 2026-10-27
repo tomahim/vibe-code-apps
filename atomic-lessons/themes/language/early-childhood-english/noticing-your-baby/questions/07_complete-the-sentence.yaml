@@ -1,0 +1,21 @@
+id: 2f1b0dcc-f4ec-476a-9897-2208c3035daa
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu bâilles. »
+
+
+  You''re ____.'
+choices:
+- id: 64c01c34-09f2-4cab-81ea-862282e695a3
+  text: yawn
+- id: 5dbfdf4f-bb0f-4942-bebc-efd3cf540ee0
+  text: yawned
+- id: 98a55994-0ca0-4d2c-8558-6ecaa4908faf
+  text: yawns
+- id: d58c60c4-b65a-40c1-8c33-6cf497d513e3
+  text: yawning
+correct_choice_ids:
+- d58c60c4-b65a-40c1-8c33-6cf497d513e3
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « yawning ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

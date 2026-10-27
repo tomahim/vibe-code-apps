@@ -1,0 +1,21 @@
+id: 25763fb2-e639-4bfd-97ec-a5100a638fc5
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « On attend au feu rouge. »
+
+
+  We''re ____ at a red light.'
+choices:
+- id: 7f5ee1be-866a-40a4-956f-78f728aed1aa
+  text: waiting
+- id: b2d6be64-3ad5-41fe-87f4-a5f6689b2b08
+  text: waits
+- id: 5e7250de-5282-49bc-b3a8-afbdc6aeb8e1
+  text: wait
+- id: d8730944-b9bd-4f8d-a1a9-489dad28fe07
+  text: waited
+correct_choice_ids:
+- 7f5ee1be-866a-40a4-956f-78f728aed1aa
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « waiting ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

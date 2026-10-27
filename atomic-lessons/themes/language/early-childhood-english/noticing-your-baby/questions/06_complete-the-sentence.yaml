@@ -1,0 +1,21 @@
+id: f4891c90-33e7-4c0f-b4ac-514cffb836a5
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu fais une drôle de tête. »
+
+
+  You''re making a funny ____.'
+choices:
+- id: a3d08c6e-4d48-494d-ae95-ffc7602f3688
+  text: hands
+- id: 28f544cb-276e-4b30-8634-5d9e33383ce3
+  text: back
+- id: be4ee49a-143e-4141-acf5-306322ebc6b5
+  text: face
+- id: 8f8720d3-e2f7-4ce1-8bdb-bdb22f19981d
+  text: hair
+correct_choice_ids:
+- be4ee49a-143e-4141-acf5-306322ebc6b5
+explanation: La traduction demande « face » (visage). « hair » signifie cheveux; « back » signifie dos; « hands » signifie mains.
+archived: false

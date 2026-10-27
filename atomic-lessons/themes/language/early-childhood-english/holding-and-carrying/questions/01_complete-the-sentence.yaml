@@ -1,0 +1,21 @@
+id: f05dde55-c19e-49cf-b7c6-f3b1e9de38f4
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais te prendre. »
+
+
+  I''m going to ____.'
+choices:
+- id: 38f53e43-5fa9-4210-bb38-ad807d828d55
+  text: put you up
+- id: 132678ce-5d6c-41fc-9c46-4574a70c4362
+  text: put you down
+- id: 1e6fa017-ea83-4c4c-8289-5c27a068759e
+  text: pick it up
+- id: a261fa7c-2888-4d62-8c71-2c2e0cafdbab
+  text: pick you up
+correct_choice_ids:
+- a261fa7c-2888-4d62-8c71-2c2e0cafdbab
+explanation: « Pick you up » signifie te prendre ou te soulever. « Put you down » signifie te poser ; « it » désigne une chose et « put you up » peut signifier t’héberger.
+archived: false

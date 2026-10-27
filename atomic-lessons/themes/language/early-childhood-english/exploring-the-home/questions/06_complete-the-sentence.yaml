@@ -1,0 +1,21 @@
+id: 67de97a1-8d39-4a9a-a228-242f920a2072
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais plier le linge. »
+
+
+  I''m going to ____ the laundry.'
+choices:
+- id: 68283d8a-a6c5-418e-9d67-0642f8351e0d
+  text: folding
+- id: d8b17fa4-c5d7-4875-ba04-cbb42a817dd8
+  text: fold
+- id: 06bc782d-639b-4a80-b027-6fd69f64f597
+  text: folded
+- id: 976c4590-d4c2-4e5c-b266-162ff9d969e0
+  text: folds
+correct_choice_ids:
+- d8b17fa4-c5d7-4875-ba04-cbb42a817dd8
+explanation: Après « going to », on utilise la base verbale « fold ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

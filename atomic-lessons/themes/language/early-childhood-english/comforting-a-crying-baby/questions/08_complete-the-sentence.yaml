@@ -1,0 +1,21 @@
+id: 23a5775e-be93-4580-986b-663bb72bb034
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu n''es pas tout seul. »
+
+
+  You''re not ____.'
+choices:
+- id: 57375c94-20de-45f3-8ccf-d799aae9b6f9
+  text: together
+- id: 1297a7c1-54a4-4d5b-96b4-bbe18aa930d0
+  text: apart
+- id: fd1cf098-7e23-46cf-be32-b1d13add4481
+  text: alone
+- id: b0527830-bedd-48f3-96f2-7e72c9635771
+  text: nearby
+correct_choice_ids:
+- fd1cf098-7e23-46cf-be32-b1d13add4481
+explanation: La traduction demande « alone » (seul). « together » signifie ensemble; « nearby » signifie tout près; « apart » signifie séparé.
+archived: false

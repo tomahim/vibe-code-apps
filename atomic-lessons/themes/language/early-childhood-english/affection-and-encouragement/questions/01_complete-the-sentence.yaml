@@ -1,0 +1,21 @@
+id: be283beb-35e5-48b1-a116-d55224895e02
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « J''adore passer du temps avec toi. »
+
+
+  I love ____ time with you.'
+choices:
+- id: d35d60ea-ba82-49d5-a9a8-5b0aae7446ac
+  text: spending
+- id: c63e2acb-aac6-43ff-a677-18c9d1f3f7dc
+  text: spent
+- id: 6cc0cc79-a51b-4cb8-b956-b71b0324ac7b
+  text: spend
+- id: 177850c5-60a9-4954-bc30-32ac672911f5
+  text: spends
+correct_choice_ids:
+- d35d60ea-ba82-49d5-a9a8-5b0aae7446ac
+explanation: '« Love » peut être suivi de la forme en -ing : « love spending time ». Pour la base verbale, il faudrait « love to spend ».'
+archived: false

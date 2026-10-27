@@ -1,0 +1,21 @@
+id: 485cec35-ce47-4216-a405-ed807876b7fc
+position: 1
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais attacher ta ceinture. »
+
+
+  I''m going to ____ you in.'
+choices:
+- id: 9a4a4c15-e293-481b-9524-b002a774fe83
+  text: button
+- id: 49c9f405-668d-4b3f-962f-6eea629b3dc7
+  text: bundle
+- id: 6a73f6db-0243-48aa-8fb5-1b338567f155
+  text: unbuckle
+- id: 9c3b7972-d6a1-45a4-af56-6ccb2030d7ef
+  text: buckle
+correct_choice_ids:
+- 9c3b7972-d6a1-45a4-af56-6ccb2030d7ef
+explanation: « Buckle you in » signifie t’attacher avec une ceinture. « Unbuckle » = détacher, « bundle » = emmitoufler et « button » = boutonner.
+archived: false

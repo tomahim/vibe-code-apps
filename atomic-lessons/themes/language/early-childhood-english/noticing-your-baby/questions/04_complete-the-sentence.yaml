@@ -1,0 +1,21 @@
+id: aad6ee40-b50f-4989-b2ed-bddd1042a6a2
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Regarde tes petites mains. »
+
+
+  Look at your little ____.'
+choices:
+- id: 8dc36272-5526-4d39-b0a5-1024ecc3c4b5
+  text: hands
+- id: 5f59e2c6-d4f1-4f32-9d21-6e25606b6903
+  text: fingers
+- id: 90970852-cfb4-42ba-866e-fc658896a09b
+  text: feet
+- id: dd28ff1d-1724-4dcd-bee5-aca4e6c67c10
+  text: arms
+correct_choice_ids:
+- 8dc36272-5526-4d39-b0a5-1024ecc3c4b5
+explanation: La traduction demande « hands » (mains). « feet » signifie pieds; « arms » signifie bras; « fingers » signifie doigts.
+archived: false

@@ -1,0 +1,21 @@
+id: 7f5199f6-b7f2-474e-a8b4-51819d1b455e
+position: 9
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu t''agrippes à mon doigt. »
+
+
+  You''re ____ on to my finger.'
+choices:
+- id: a99eda2f-3473-475e-9d7f-19afa605a445
+  text: holding
+- id: e820f800-cd4d-4576-a448-ed7c37a03c13
+  text: holds
+- id: 39496ad1-c1ed-4962-9d7d-3b8a0cd1c0bc
+  text: hold
+- id: 76d6969b-72d5-4484-a7f0-ba1e96c21a02
+  text: held
+correct_choice_ids:
+- a99eda2f-3473-475e-9d7f-19afa605a445
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « holding ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

@@ -1,0 +1,21 @@
+id: 538ad6f2-6a56-4f8e-a7aa-cf133a7082ad
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais t''envelopper dans ta serviette. »
+
+
+  I''m going to wrap you in your ____.'
+choices:
+- id: 3e87c56b-0281-4300-accd-24d389a56ace
+  text: blanket
+- id: 8bd25ccd-fced-426f-923c-3884d3c17d60
+  text: wipe
+- id: 23a7f1ea-0595-482b-abe9-7a56762403ed
+  text: towel
+- id: 51c7a776-0e99-41e0-bc83-b40a8b8442d9
+  text: bib
+correct_choice_ids:
+- 23a7f1ea-0595-482b-abe9-7a56762403ed
+explanation: La traduction demande « towel » (serviette). « blanket » signifie couverture; « wipe » signifie lingette; « bib » signifie bavoir.
+archived: false

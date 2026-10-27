@@ -1,0 +1,21 @@
+id: 337967d6-bf31-4736-acf0-94a49ae0edf2
+position: 9
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « On va lever tes jambes. »
+
+
+  Let''s ____ your legs.'
+choices:
+- id: 4ab2a3c2-a078-4a47-a7b1-922ca93db60b
+  text: lifted
+- id: 670b5fe5-4f38-4449-9cda-d6f815747a87
+  text: lift
+- id: b83a839a-7730-4ea1-b276-b345118f4db1
+  text: lifts
+- id: e5689a6e-cbb7-4e4a-bffd-ad0b19ca8aa7
+  text: lifting
+correct_choice_ids:
+- 670b5fe5-4f38-4449-9cda-d6f815747a87
+explanation: Après « Let's », on utilise la base verbale « lift ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

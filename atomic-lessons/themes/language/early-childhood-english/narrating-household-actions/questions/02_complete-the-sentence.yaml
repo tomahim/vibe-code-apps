@@ -1,0 +1,21 @@
+id: 76cf0c3c-ae0a-4b9d-9db3-096b889d9624
+position: 2
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais ranger ça. »
+
+
+  I''m going to put this ____.'
+choices:
+- id: f7edad2f-3f98-46d7-9a88-0904200ee9c2
+  text: away
+- id: a7df0813-ac35-4482-8577-243354145aa1
+  text: down
+- id: a5a496ea-06d4-4218-b67b-a39c677f052a
+  text: 'off'
+- id: d4e6ccb6-08c8-41c4-ac93-bfc4f290d181
+  text: 'on'
+correct_choice_ids:
+- f7edad2f-3f98-46d7-9a88-0904200ee9c2
+explanation: « Put this away » signifie ranger cela. « Put down » = poser ; « on » et « off » donnent d’autres sens.
+archived: false

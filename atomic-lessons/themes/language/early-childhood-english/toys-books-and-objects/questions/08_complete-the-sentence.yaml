@@ -1,0 +1,21 @@
+id: 8c14c052-4ade-4391-8300-83324ebf5452
+position: 8
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Il y a un chien sur cette page. »
+
+
+  There''s a dog on this ____.'
+choices:
+- id: c0a080b0-a19e-4089-8718-1b63cb0c9cc2
+  text: page
+- id: 77fdd435-a0fb-4c02-93c0-bb3ff9028b21
+  text: picture
+- id: ee3b82be-5a73-4d95-a36d-00d339a54c7b
+  text: cover
+- id: 8563ae96-dd4a-494b-9c05-71d6d5ec58f1
+  text: book
+correct_choice_ids:
+- c0a080b0-a19e-4089-8718-1b63cb0c9cc2
+explanation: La traduction demande « page » (page). « cover » signifie couverture du livre; « picture » signifie image; « book » signifie livre.
+archived: false

@@ -1,0 +1,21 @@
+id: c758c0f3-3d0b-4807-80fc-aa4c5c9d0995
+position: 4
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « Voici ton jouet. »
+
+
+  Here''s your ____.'
+choices:
+- id: 50357819-c91e-4581-a12e-a7c6f911882c
+  text: blanket
+- id: a6a92fe5-0a6f-4199-86a3-d0d18baded99
+  text: book
+- id: 1716189a-cb2e-4d15-8846-9263357119df
+  text: toy
+- id: 61883622-00db-459d-9c4c-e55db3a32137
+  text: bottle
+correct_choice_ids:
+- 1716189a-cb2e-4d15-8846-9263357119df
+explanation: La traduction demande « toy » (jouet). « book » signifie livre; « blanket » signifie couverture; « bottle » signifie biberon.
+archived: false

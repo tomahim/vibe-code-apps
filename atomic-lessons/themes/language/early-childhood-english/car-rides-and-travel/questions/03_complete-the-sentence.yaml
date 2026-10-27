@@ -1,0 +1,21 @@
+id: 47cccb63-20cf-4861-83bb-5926afc5f5f8
+position: 3
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « On est prêts à partir. »
+
+
+  We''re ____ to go.'
+choices:
+- id: 5eaaf35e-83ce-4888-a682-4b4d5f68952e
+  text: ready
+- id: 22b1f1dc-4b28-475d-ab87-279530840c58
+  text: asleep
+- id: 1cc3837d-3db9-4d78-a047-2240091bf1d5
+  text: tired
+- id: ee02de5a-6d50-4a2f-9bd2-b1dc34a6a862
+  text: hungry
+correct_choice_ids:
+- 5eaaf35e-83ce-4888-a682-4b4d5f68952e
+explanation: La traduction demande « ready » (prêt). « tired » signifie fatigué; « hungry » signifie affamé; « asleep » signifie endormi.
+archived: false

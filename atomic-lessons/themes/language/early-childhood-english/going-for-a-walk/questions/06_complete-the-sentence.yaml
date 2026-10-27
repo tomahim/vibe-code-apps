@@ -1,0 +1,21 @@
+id: b61e3e75-4fd5-49a5-98ad-54491cc6fa0d
+position: 6
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Nous voilà presque arrivés. »
+
+
+  We''re ____ there.'
+choices:
+- id: 59d72609-4049-4463-8394-411d6c6b8bb6
+  text: almost
+- id: 356104ae-d1f5-44a3-82f8-c4e582f32628
+  text: already
+- id: 9fbba543-f0ff-4f61-a9e5-7d7990dba69c
+  text: always
+- id: 1e742141-7330-4662-a315-a11c1170244c
+  text: still
+correct_choice_ids:
+- 59d72609-4049-4463-8394-411d6c6b8bb6
+explanation: La traduction demande « almost » (presque). « already » signifie déjà; « still » signifie encore ou toujours; « always » signifie toujours.
+archived: false

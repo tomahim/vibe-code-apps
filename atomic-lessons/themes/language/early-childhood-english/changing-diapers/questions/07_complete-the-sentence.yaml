@@ -1,0 +1,21 @@
+id: 57d26c48-10d0-4517-8403-ee1e20d6a40f
+position: 7
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais mettre de la crème. »
+
+
+  I''m going to ____ some cream on.'
+choices:
+- id: 9eb61239-fd31-4230-a9c1-bb001882d40d
+  text: puts
+- id: c42b8bf0-330c-4f10-8dd9-49cc70291747
+  text: to put
+- id: 9e2b304f-36e6-459f-9900-d4bdde2c2050
+  text: put
+- id: d21f9483-ad47-47ad-9953-84b92ab0a44e
+  text: putting
+correct_choice_ids:
+- 9e2b304f-36e6-459f-9900-d4bdde2c2050
+explanation: Après « going to », on utilise la base verbale « put ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

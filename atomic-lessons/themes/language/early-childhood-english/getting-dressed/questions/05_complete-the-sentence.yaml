@@ -1,0 +1,21 @@
+id: 15bf7eb9-95ba-4928-836d-cc19e9f2c0e9
+position: 5
+type: multiple_choice
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va s''habiller. »
+
+
+  Let''s ____ you dressed.'
+choices:
+- id: e60d7e4e-2158-4b61-9d3c-0ff39cedece2
+  text: get
+- id: 05fe1a31-1ae8-4f09-ac3f-1ced71098a62
+  text: gets
+- id: 4463ea4d-e6fb-40f8-abca-63bdbd49b26e
+  text: got
+- id: a39d8f83-8abd-4d8f-bd2d-f2b600448bfa
+  text: getting
+correct_choice_ids:
+- e60d7e4e-2158-4b61-9d3c-0ff39cedece2
+explanation: Après « Let's », on utilise la base verbale « get ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

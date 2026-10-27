@@ -1,0 +1,21 @@
+id: f8835ca5-b2f4-4f54-9f73-ff3ef4186ac0
+position: 5
+type: multiple_choice
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu es bien au chaud contre moi. »
+
+
+  You''re nice and ____ against me.'
+choices:
+- id: 4fe60d8b-256c-4c1d-947e-a068560095df
+  text: hot
+- id: e4da4cc1-86a8-4ab9-9b5f-4a53ac339153
+  text: cool
+- id: cd4ca78e-5818-49d5-973c-8861e6be0147
+  text: warm
+- id: c463175a-4169-4475-bc16-d176776ae709
+  text: cold
+correct_choice_ids:
+- cd4ca78e-5818-49d5-973c-8861e6be0147
+explanation: La traduction demande « warm » (chaud). « cold » signifie froid; « cool » signifie frais; « hot » signifie très chaud.
+archived: false

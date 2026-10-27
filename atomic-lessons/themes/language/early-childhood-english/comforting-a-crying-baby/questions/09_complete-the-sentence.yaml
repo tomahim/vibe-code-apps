@@ -1,0 +1,21 @@
+id: b18779b4-3bd4-41fc-8d80-dc7adabd6d2a
+position: 9
+type: multiple_choice
+after_card_position: 6
+prompt: 'Complétez pour dire : « Ton corps commence à se calmer. »
+
+
+  Your body is ____ to calm down.'
+choices:
+- id: 103b621c-e18d-4901-86ad-8c7d5aaadaf3
+  text: starting
+- id: 134da5ba-e7a7-412a-9974-9c70d01cb22b
+  text: started
+- id: ce06eaa3-81d7-4bc3-8575-b970cc0ad0b9
+  text: start
+- id: bc785c7a-6b35-4cfe-ba4b-294d2400ecbf
+  text: starts
+correct_choice_ids:
+- 103b621c-e18d-4901-86ad-8c7d5aaadaf3
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « starting ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false
