@@ -4,6 +4,7 @@ tagline: A Monthly Evidence Pack, a Corkboard, and a Case Nobody Solved
 pitch: Each month a fictional cold case arrives as an evidence pack - letters, photos, transcripts - and you pin connections on a corkboard before submitting your theory against the buried truth.
 domains: [GAME, LEARN]
 created: 2026-10-24T03:09:38Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
