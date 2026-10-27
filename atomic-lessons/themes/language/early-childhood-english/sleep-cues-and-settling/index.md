@@ -5,4 +5,4 @@ title: Sleep cues and settling
 description: Notice tiredness and talk through preparing for sleep.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

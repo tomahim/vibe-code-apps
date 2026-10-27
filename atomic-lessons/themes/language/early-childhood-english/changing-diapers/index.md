@@ -5,4 +5,4 @@ title: Changing diapers
 description: Describe each part of a diaper change and getting clean again.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

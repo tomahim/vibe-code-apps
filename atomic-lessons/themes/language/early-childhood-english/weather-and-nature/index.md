@@ -5,4 +5,4 @@ title: Weather and nature
 description: Draw attention to trees, animals, weather, and changing light.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

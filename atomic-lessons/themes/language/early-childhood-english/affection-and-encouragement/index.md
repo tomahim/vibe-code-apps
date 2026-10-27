@@ -5,4 +5,4 @@ title: Affection and encouragement
 description: Express affection, notice effort, and encourage another try.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

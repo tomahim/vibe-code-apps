@@ -5,4 +5,4 @@ title: Narrating household actions
 description: Announce simple actions involving everyday objects.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.

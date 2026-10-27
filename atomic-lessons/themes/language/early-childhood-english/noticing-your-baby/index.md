@@ -5,4 +5,4 @@ title: Noticing and commenting on your baby
 description: Describe small movements, expressions, and moments of attention.
 archived: false
 ---
-Read the English expressions and their French meanings. After every two cards, complete a sentence using the meaning given in French.
+Learn English expressions step by step.
