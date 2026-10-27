@@ -66,3 +66,12 @@ class LearningAPITests(TestCase):
         self.path.entity.save()
         self.assertEqual(self.client.get(url).json()["learning_paths"], [])
         self.assertEqual(self.client.get(f"/api/learning/themes/{uuid4()}/").status_code, 404)
+
+    def test_path_detail_and_lesson_order(self):
+        url = f"/api/learning/paths/{self.path.pk}/"
+        result = self.client.get(url).json()
+        self.assertEqual(result["lessons"][0]["id"], str(self.lesson.pk))
+        self.assertEqual(result["next_lesson_id"], str(self.lesson.pk))
+        self.assertEqual(result["theme"]["id"], str(self.theme.pk))
+        Theme.objects.filter(pk=self.theme.pk).update(published=False)
+        self.assertEqual(self.client.get(url).status_code, 404)

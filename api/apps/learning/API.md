@@ -15,3 +15,7 @@ Images remain canonical repository-relative paths, as in the models. Hosting/res
 ## GET themes/<uuid>/
 
 Returns `{theme, learning_paths}` in position order, with learner progress per path. Hidden or unknown IDs return 404.
+
+## GET paths/<uuid>/
+
+Returns `{learning_path, theme, lessons, next_lesson_id}`. Lessons are ordered for the trail, include current-user completion, and remain visible even if not yet started. The next lesson is the first incomplete lesson, not a hard path unlock rule.

@@ -37,3 +37,20 @@ def theme_detail(request, theme_id):
          "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
         for path in visible(LearningPath).filter(theme=theme)
     ]})
+
+
+@never_cache
+@require_GET
+@jwt_required
+def path_detail(request, path_id):
+    from django.shortcuts import get_object_or_404
+    from .api import lesson_summary
+    path = get_object_or_404(visible(LearningPath).select_related("theme"), pk=path_id)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson).filter(learning_path=path))
+    return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
+                                          "progress": state.progress(lessons)},
+                         "theme": described(path.theme),
+                         "lessons": [lesson_summary(l, state) for l in lessons],
+                         "next_lesson_id": next((str(l.pk) for l in lessons
+                                                 if not state.progress([l])["completed"]), None)})
