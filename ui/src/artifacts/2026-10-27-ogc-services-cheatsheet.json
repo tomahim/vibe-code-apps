@@ -1,0 +1,6 @@
+{
+  "title": "OGC Services Cheatsheet",
+  "description": "Legacy OGC services (WMS, WFS, WMTS, WCS, WPS, CSW, SOS) next to their OGC API successors, with concrete requests and parameter explanations.",
+  "date": "2026-10-27",
+  "tags": ["cheatsheet", "geospatial", "ogc", "reference"]
+}

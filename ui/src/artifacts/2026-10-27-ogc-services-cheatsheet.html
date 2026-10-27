@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual cheat sheet of OGC web services (WMS, WFS, WMTS, WCS, WPS, CSW, SOS...), their OGC API successors, and concrete example requests.">
+<title>OGC Services Cheatsheet</title>
+<style>
+  :root { --paper:#fbf1d9; --card:#fff9ea; --ink:#16120f; --muted:#5b5247; --red:#d62a1c; --teal:#0f6b5c; --orange:#e8841a; --blue:#2458b8; --green:#1f8a4c; --grey:#8b8378; --code:#1b1a22; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif; }
+  a { color:var(--blue); }
+  :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  .wrap { max-width:1500px; margin:0 auto; padding:28px clamp(14px,3vw,40px) 60px; }
+  h1 { margin:0 0 6px; text-align:center; font-size:clamp(30px,5.2vw,58px); line-height:1.05; color:var(--teal); letter-spacing:-1px; font-weight:900; }
+  h1 em { color:var(--red); font-style:normal; }
+  .sub { text-align:center; color:var(--muted); max-width:820px; margin:0 auto 26px; font-size:16px; }
+  .box { background:var(--card); border:3px solid var(--ink); border-radius:6px; padding:16px 18px; }
+  .box h2 { margin:0 0 8px; font-size:19px; }
+  .intro { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); margin-bottom:18px; }
+  .intro p { margin:0 0 6px; }
+  .intro code, p code, li code, td code { background:#efe2bd; padding:1px 5px; border-radius:3px; font-size:.9em; font-family:ui-monospace,Menlo,Consolas,monospace; }
+  .legend { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; margin:0 0 16px; font-size:13px; color:var(--muted); }
+  .chip { display:inline-block; font-size:11.5px; font-weight:700; padding:2px 9px; border-radius:99px; border:2px solid currentColor; white-space:nowrap; letter-spacing:.2px; }
+  .chip { white-space:normal; }
+  code { overflow-wrap:anywhere; }
+  .chip.ok { color:var(--green); } .chip.wip { color:var(--orange); } .chip.none { color:var(--grey); } .chip.rel { color:var(--blue); }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; position:sticky; top:0; background:var(--paper); padding:8px 0; z-index:5; border-bottom:2px dashed #cdbf98; }
+  .filters button { font:inherit; font-weight:700; font-size:13px; padding:6px 13px; background:var(--card); border:2px solid var(--ink); border-radius:99px; cursor:pointer; }
+  .filters button[aria-pressed=true] { background:var(--ink); color:var(--paper); }
+  .grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr)); align-items:start; }
+  .card { background:var(--card); border:3px solid var(--ink); border-radius:6px; padding:16px 18px 18px; position:relative; }
+  .card[hidden] { display:none; }
+  .card header { display:flex; gap:12px; align-items:flex-start; margin-bottom:8px; }
+  .num { flex:none; width:30px; height:30px; border-radius:50%; background:var(--red); color:#fff; font-weight:800; font-size:13px; display:grid; place-items:center; margin-top:2px; }
+  .card h3 { margin:0; font-size:21px; line-height:1.2; }
+  .card h3 small { display:block; font-weight:600; font-size:13px; color:var(--muted); margin-top:2px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+  dl.dau { margin:0 0 12px; }
+  dl.dau div { margin-bottom:5px; }
+  dl.dau dt { display:inline; color:var(--red); font-weight:800; }
+  dl.dau dt::after { content:": "; }
+  dl.dau dd { display:inline; margin:0; }
+  .note { font-size:13.5px; background:#fff1c9; border-left:5px solid var(--orange); padding:7px 10px; margin:0 0 12px; }
+  .tabs { display:flex; gap:0; margin-top:4px; }
+  .tabs button { font:inherit; font-weight:800; font-size:13px; padding:7px 14px; border:2px solid var(--ink); background:#eadcb5; cursor:pointer; }
+  .tabs button:first-child { border-radius:6px 0 0 0; } .tabs button:last-child { border-radius:0 6px 0 0; margin-left:-2px; }
+  .tabs button[aria-selected=true] { background:var(--ink); color:var(--paper); }
+  .panel { border:2px solid var(--ink); border-radius:0 6px 6px 6px; padding:10px; background:#fff; }
+  .ex { margin:0 0 12px; } .ex:last-child { margin-bottom:0; }
+  .ex-head { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; align-items:center; font-weight:700; font-size:13.5px; margin-bottom:4px; }
+  .badge { font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px; }
+  .badge.tested { background:#d9f2e2; color:#0d5a2e; } .badge.illus { background:#ffe6c2; color:#8a4b00; }
+  pre.req { margin:0; background:var(--code); color:#e8e6f0; border-radius:5px; padding:10px 12px; overflow-x:auto; font:12.5px/1.65 ui-monospace,Menlo,Consolas,monospace; white-space:pre-wrap; word-break:break-all; }
+  pre.req .m { color:#ffb86b; font-weight:700; }
+  .p { cursor:pointer; border-radius:3px; padding:0 1px; border:0; background:none; font:inherit; color:#8fd3ff; text-align:left; }
+  .p:hover, .p.on { background:#3a4a78; color:#fff; }
+  .p.k { color:#ffd27f; }
+  .explain { margin-top:6px; min-height:22px; font-size:13px; color:var(--muted); }
+  .explain b { color:var(--ink); }
+  .resp { margin-top:6px; font-size:12.5px; color:var(--muted); }
+  .resp code { background:#efe2bd; padding:1px 4px; border-radius:3px; }
+  .copy { font:inherit; font-size:11.5px; font-weight:700; border:2px solid var(--ink); background:var(--card); border-radius:4px; padding:1px 8px; cursor:pointer; }
+  section.band { margin-top:34px; }
+  section.band > h2 { font-size:clamp(22px,3vw,32px); margin:0 0 12px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border:3px solid var(--ink); font-size:14px; }
+  th, td { border:2px solid var(--ink); padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--ink); color:var(--paper); }
+  .tablewrap { overflow-x:auto; }
+  .two { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  ul.tight { margin:0; padding-left:20px; } ul.tight li { margin-bottom:5px; }
+  footer { margin-top:34px; font-size:13px; color:var(--muted); }
+  footer li { margin-bottom:3px; word-break:break-all; }
+  @media (max-width:700px) { .filters { position:static; flex-wrap:nowrap; overflow-x:auto; padding-bottom:10px; } .filters button { flex:none; } }
+  @media (max-width:600px) { .wrap { padding-top:18px; } .card { padding:12px; } th,td { padding:5px 6px; font-size:13px; } }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>OGC Services <em>Cheatsheet</em></h1>
+  <p class="sub">OGC is the <b>Open Geospatial Consortium</b>, the body that writes the open standards behind web maps, geodata services and sensor feeds. Below: each legacy "OWS" service, its newer <b>OGC API</b> counterpart, and example requests for both. Each request is labelled <b>TESTED</b> (run against a public server on 27 Oct 2026) or <b>ILLUSTRATIVE</b> (right shape, placeholder host, not run). Tap any highlighted parameter to see what it does.</p>
+
+  <div class="intro">
+    <div class="box"><h2>Legacy: OGC Web Services (OWS)</h2>
+      <p>One endpoint per service, verbs in the query string: <code>?SERVICE=WMS&amp;REQUEST=GetMap</code>. Discover with <code>GetCapabilities</code> (a big XML document). Mostly XML replies, GML for features, and a lot of CRS and axis-order traps.</p>
+      <p><b>Still everywhere:</b> GeoServer, MapServer, QGIS Server, ArcGIS Server, national SDIs (INSPIRE).</p></div>
+    <div class="box"><h2>New: OGC API family</h2>
+      <p>Resource-oriented URLs and plain HTTP: <code>/collections/{id}/items?bbox=...</code>. JSON first, described by OpenAPI, with a landing page, <code>/conformance</code> and <code>/collections</code> instead of GetCapabilities. Built from shared "building blocks" so parts combine.</p>
+      <p><b>Implementations:</b> pygeoapi, GeoServer, MapServer, pg_featureserv, ldproxy and others. Which parts each supports varies.</p></div>
+    <div class="box"><h2>Reading the mappings</h2>
+      <p>A newer API is not always a 1:1 replacement. <span class="chip rel">direct</span> covers the same job. <span class="chip rel">partial</span> covers some of it. <span class="chip none">no twin</span> means new ground or no single successor.</p>
+      <p>Status follows OGC's own pages as checked on <b>27 Oct 2026</b>. Drafts and public-comment specs are labelled, since they can still change.</p></div>
+  </div>
+
+  <div class="legend" aria-label="Legend">
+    <span><span class="chip ok">Published standard</span> adopted by OGC</span>
+    <span><span class="chip wip">Not final</span> draft, candidate or comment period</span>
+    <span><span class="badge tested">TESTED</span> run against a public server on 27 Oct 2026</span>
+    <span><span class="badge illus">ILLUSTRATIVE</span> correct shape, placeholder host, not run</span>
+  </div>
+
+  <div class="filters" id="filters" role="group" aria-label="Filter by theme"></div>
+  <div class="grid" id="grid"></div>
+
+  <section class="band" id="notwin">
+    <h2>New ground: OGC APIs with no legacy twin</h2>
+    <div class="two">
+      <div class="box"><h2>Environmental Data Retrieval (EDR)</h2><p>Query a data cube by <b>position, area, radius, cube, trajectory, corridor or locations</b>. See card 9. <span class="chip ok">Published (v1.2)</span></p></div>
+      <div class="box"><h2>Discrete Global Grid Systems (DGGS)</h2><p>Access data organised on a global hierarchical grid of zones. <span class="chip ok">Part 1 approved Oct 2025</span></p></div>
+      <div class="box"><h2>Moving Features</h2><p>Trajectories of things that move as rigid bodies (ships, vehicles, drones). <span class="chip ok">Part 1 approved Oct 2025</span></p></div>
+      <div class="box"><h2>Connected Systems</h2><p>Sensors, platforms, actuators, deployments, observations and commands. Covers part of what SOS did. <span class="chip ok">Parts 1 and 2 published</span></p></div>
+      <div class="box"><h2>3D GeoVolumes and Routes</h2><p>3D content by volume of space, and route requests independent of the routing engine. <span class="chip wip">No "Approved Standard" badge on ogcapi.ogc.org</span></p></div>
+      <div class="box"><h2>OGC API - Common</h2><p>The shared plumbing: landing page, conformance, collections, OpenAPI. <span class="chip ok">Approved</span></p></div>
+    </div>
+  </section>
+
+  <section class="band" id="encodings">
+    <h2>Encodings are not services</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Legacy encoding</th><th>What it is</th><th>In the OGC API world</th></tr>
+      <tr><td>GML 3.2 / 3.3</td><td>XML encoding of features and geometry. The default reply of WFS.</td><td>Features Part 1 centres on <b>GeoJSON</b> (HTML for humans). GML can be offered as an extra, not required.</td></tr>
+      <tr><td>Filter Encoding 2.0 (<code>fes:</code> XML)</td><td>Query predicates inside a WFS request.</td><td><b>CQL2</b>, as text or JSON, used through Features Part 3. See card 10.</td></tr>
+      <tr><td>KML 2.2 / 2.3</td><td>Earth-browser oriented XML. Still a published OGC standard.</td><td>Not replaced. Not part of the OGC API building blocks.</td></tr>
+    </table></div>
+  </section>
+
+  <section class="band" id="gotchas">
+    <h2>Traps that waste an afternoon</h2>
+    <div class="two">
+      <div class="box"><h2>Axis order</h2><ul class="tight">
+        <li>WMS 1.3.0 with <code>CRS=EPSG:4326</code> wants <code>BBOX=minLat,minLon,maxLat,maxLon</code>. The request on card 2 uses this and returns a correct world map.</li>
+        <li>Want lon,lat? Use <code>CRS=CRS:84</code>.</li>
+        <li>OGC API <code>bbox</code> is <code>minLon,minLat,maxLon,maxLat</code> (CRS84) unless you pass <code>bbox-crs</code>.</li></ul></div>
+      <div class="box"><h2>Renamed parameters</h2><ul class="tight">
+        <li>WMS 1.1.1 to 1.3.0: <code>SRS</code> becomes <code>CRS</code>, <code>X/Y</code> become <code>I/J</code>.</li>
+        <li>WFS 1.x to 2.0: <code>TYPENAME</code> becomes <code>TYPENAMES</code>, <code>MAXFEATURES</code> becomes <code>COUNT</code>, and <code>STARTINDEX</code> pages.</li></ul></div>
+      <div class="box"><h2>Paging and formats</h2><ul class="tight">
+        <li>OGC API: follow the <code>rel="next"</code> link in the response instead of computing offsets.</li>
+        <li><code>f=json</code> is a convenience many servers offer (pygeoapi does). The portable way is the <code>Accept</code> header.</li></ul></div>
+      <div class="box"><h2>Check what the server supports</h2><ul class="tight">
+        <li>Legacy: read <code>GetCapabilities</code> (layers, formats, CRS, limits).</li>
+        <li>OGC API: read <code>/conformance</code> and <code>/collections/{id}</code>. Optional parts such as CQL2 filtering, CRS or tiles only work if listed there.</li>
+        <li>Property selection and sorting on Features are still drafts, so some servers differ.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="band" id="decide">
+    <h2>Which one do I need?</h2>
+    <div class="tablewrap"><table>
+      <tr><th>I want to...</th><th>Legacy</th><th>OGC API</th></tr>
+      <tr><td>Get a rendered map image</td><td>WMS</td><td>Maps</td></tr>
+      <tr><td>Serve fast cached maps or vector tiles</td><td>WMTS</td><td>Tiles</td></tr>
+      <tr><td>Read, filter or edit vector features</td><td>WFS (WFS-T to edit)</td><td>Features (editing: Part 4, draft)</td></tr>
+      <tr><td>Extract raster or gridded values</td><td>WCS</td><td>Coverages (draft) or EDR for point/area queries</td></tr>
+      <tr><td>Run a computation on the server</td><td>WPS</td><td>Processes</td></tr>
+      <tr><td>Search a metadata catalogue</td><td>CSW</td><td>Records</td></tr>
+      <tr><td>Read sensor observations</td><td>SOS</td><td>SensorThings API or Connected Systems</td></tr>
+      <tr><td>Control how a map looks</td><td>SLD / SE</td><td>Styles (not confirmed final)</td></tr>
+    </table></div>
+  </section>
+
+  <footer>
+    <h2 style="font-size:18px;color:var(--ink)">Sources (checked 27 Oct 2026)</h2>
+    <ul>
+      <li>OGC API overview and per-API status badges: https://ogcapi.ogc.org/</li>
+      <li>Standard pages (document lists and versions) on ogc.org: /standards/wms, wfs, wmts, wcs, wps, cat (CSW), sos, sld, filter, tjs, ogcapi-features, ogcapi-maps, ogcapi-tiles, ogcapi-processes, ogcapi-records, ogcapi-edr, sensorthings, ogc-api-connected-systems</li>
+      <li>Coverages Part 1 public comment (15 Sep to 15 Oct 2026): https://www.ogc.org/requests/ogc-seeks-public-comment-on-proposed-ogc-api-coverages-part-1-core/</li>
+      <li>Processes v2, Parts 1 and 2, public comment (6 Aug to 5 Sep 2026): https://www.ogc.org/requests/ogc-api-processes-standard-version-2-public-comment/</li>
+      <li>Joins candidate standard, comment closed 7 Feb 2026: https://www.ogc.org/requests/ogc-seeks-public-comment-on-candidate-ogc-api-joins-standards/</li>
+      <li>Features Part 4 draft: https://docs.ogc.org/DRAFTS/20-002r1.html</li>
+      <li>Approvals: Records Part 1 (Jul 2025), DGGS Part 1 and Moving Features Part 1 (Oct 2025), Maps Part 1 (Mar 2025), announced on ogc.org</li>
+      <li>Parameters: Maps https://docs.ogc.org/is/20-058/20-058.html, EDR https://docs.ogc.org/is/19-086r6/19-086r6.html</li>
+      <li>Live test servers: https://demo.pygeoapi.io/master (OGC API) and https://demo.mapserver.org/cgi-bin/wms and /wfs (legacy). Public demos can change or go offline.</li>
+    </ul>
+    <p>Hosts like <code>example.org</code> are placeholders. Status can change after the check date above, so confirm on ogc.org before relying on a draft.</p>
+  </footer>
+</div>
+<script>
+(function(){
+var PY='https://demo.pygeoapi.io/master', MS='https://demo.mapserver.org/cgi-bin';
+var CARDS=[
+{n:1,theme:'start',title:'GetCapabilities',to:'Landing page + /conformance + /collections',rel:'direct',st:'ok',stl:'Common: approved',
+ d:'Ask a server what it offers before you query it.',a:'The legacy reply is one large XML document. The new one is a few small JSON documents you can follow by links.',u:'First call to any unknown server.',
+ legacy:[{t:'Capabilities of a WMS',tested:1,u:MS+'/wms?[[SERVICE=WMS|Which OWS service you are talking to: WMS, WFS, WCS, WPS, CSW, SOS...]]&[[VERSION=1.3.0|Protocol version. Servers negotiate down if they lack it.]]&[[REQUEST=GetCapabilities|The operation. Every OWS service has this one.]]',
+   resp:'XML: layers, CRS, formats, bounding boxes, limits. Same call works with SERVICE=WFS&VERSION=2.0.0 on a WFS.'}],
+ api:[{t:'Landing page, then what it conforms to, then datasets',tested:1,u:PY+'/[[?f=json|f=json asks for JSON. Without it a browser gets an HTML page.]]',
+   resp:'JSON with links: <code>conformance</code>, <code>data</code> (collections), <code>service-desc</code> (OpenAPI).'},
+  {t:'Conformance classes',tested:1,u:PY+'/[[conformance|Lists the conformance classes this server implements, such as CQL2 or Tiles. Check it before relying on optional features.]]?f=json'},
+  {t:'Collections (the datasets)',tested:1,u:PY+'/[[collections|Every dataset the server publishes. Each has an id, extent and links to its items, tiles, map...]]?f=json',
+   resp:'Public demo returned collections such as <code>lakes</code>, <code>obs</code>, <code>icoads-sst</code>.'}]},
+
+{n:2,theme:'maps',title:'WMS',to:'OGC API - Maps',rel:'direct',st:'ok',stl:'Maps Part 1 v1.0: published',
+ d:'A server draws a ready-made map image for a bounding box.',a:'Maps wraps the same idea in a URL per dataset, with the style and size as plain parameters.',u:'Backgrounds, thumbnails, rendered styled layers where you do not need the raw data.',
+ legacy:[{t:'GetMap (a world map, 600 x 300 PNG)',tested:1,u:MS+'/wms?SERVICE=WMS&VERSION=1.3.0&[[REQUEST=GetMap|Returns an image.]]&[[LAYERS=bluemarble|Comma list of layer names from GetCapabilities.]]&[[STYLES=|Style per layer. Empty means default.]]&[[CRS=EPSG:4326|Coordinate reference system. 1.3.0 uses CRS (1.1.1 used SRS).]]&[[BBOX=-90,-180,90,180|For EPSG:4326 in WMS 1.3.0 the order is minLat,minLon,maxLat,maxLon.]]&[[WIDTH=600|Output width in pixels.]]&[[HEIGHT=300|Output height in pixels.]]&[[FORMAT=image/png|Output MIME type.]]',
+   resp:'Returned a 600 x 300 PNG in my test.'},
+  {t:'GetFeatureInfo (what is at pixel I,J)',u:'https://example.org/wms?SERVICE=WMS&VERSION=1.3.0&[[REQUEST=GetFeatureInfo|Asks about the data under a clicked pixel.]]&LAYERS=countries&[[QUERY_LAYERS=countries|Which layers to inspect. The layer must be queryable.]]&STYLES=&CRS=EPSG:4326&BBOX=-90,-180,90,180&WIDTH=600&HEIGHT=300&[[I=300|Pixel column of the click (1.1.1 used X).]]&[[J=100|Pixel row of the click (1.1.1 used Y).]]&[[INFO_FORMAT=application/json|Reply format. Support varies, so check GetCapabilities.]]',
+   resp:'Needs a queryable layer. The demo layer I tried returned an exception, so this one stays illustrative.'}],
+ api:[{t:'Map image for one collection',tested:1,u:PY+'/collections/[[mapserver_world_map|Collection id.]]/[[map|The Maps resource of a collection.]]?[[f=png|Image format. Portable alternative: Accept: image/png.]]&[[bbox=-180,-90,180,90|minLon,minLat,maxLon,maxLat in CRS84 unless you set bbox-crs.]]&[[width=400|Pixel width. Height follows the aspect ratio if omitted.]]',
+   resp:'Returned a PNG (HTTP 200). Other Maps Part 1 parameters include <code>height</code>, <code>bbox-crs</code>, <code>datetime</code>, <code>transparent</code>, <code>bgcolor</code>, <code>center</code> and <code>scale-denominator</code>. Support depends on the server.'}]},
+
+{n:3,theme:'features',title:'WFS',to:'OGC API - Features',rel:'direct',st:'ok',stl:'Parts 1, 2, 3, 5: published. Part 4 (write): draft',
+ d:'Fetch the actual vector features (geometry plus attributes), not a picture.',a:'Features returns GeoJSON by default and pages with links. Filtering lives in Part 3 (CQL2).',u:'Feed a web map, pull data into a script, query by area, edit a layer.',
+ note:'Editing: WFS-T <code>Transaction</code> maps to Features Part 4 (POST/PUT/PATCH/DELETE on items). Part 4 is not in the list of published Features documents on ogc.org, only as a draft.',
+ legacy:[{t:'GetFeature (2 cities in a bbox, WFS 2.0)',tested:1,u:MS+'/wfs?SERVICE=WFS&[[VERSION=2.0.0|WFS 2.0 is the current version.]]&[[REQUEST=GetFeature|Returns features.]]&[[TYPENAMES=ms:cities|Feature type from GetCapabilities. 1.x called it TYPENAME.]]&[[COUNT=2|Max features. 1.x called it MAXFEATURES. Add STARTINDEX to page.]]&[[BBOX=40,-10,52,10,urn:ogc:def:crs:EPSG::4326|Spatial filter. With an EPSG:4326 URN the order is lat,lon. Optional 5th value is the CRS.]]',
+   resp:'Returned a GML 3.2 FeatureCollection. My attempt with OUTPUTFORMAT=application/json was rejected by this server, so JSON output is server-specific.'},
+  {t:'Attribute filter as XML (Filter Encoding)',u:'https://example.org/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=ns:cities&[[FILTER=<fes:Filter xmlns:fes="http://www.opengis.net/fes/2.0"><fes:PropertyIsGreaterThan><fes:ValueReference>population</fes:ValueReference><fes:Literal>1000000</fes:Literal></fes:PropertyIsGreaterThan></fes:Filter>|FES XML predicate (URL-encode it in practice). Replaced by CQL2 in the new API. Property names are layer specific.]]'}],
+ api:[{t:'Items of a collection: paging, bbox, equality filter',tested:1,u:PY+'/collections/[[lakes|Collection id.]]/[[items|The features of the collection.]]?[[limit=2|Page size. Follow rel=next in the reply to get the rest.]]&[[bbox=-10,35,30,60|minLon,minLat,maxLon,maxLat (CRS84).]]&[[f=json|GeoJSON.]]',
+   resp:'GeoJSON FeatureCollection with <code>numberMatched</code>, <code>numberReturned</code> and <code>links</code> (<code>self</code>, plus <code>next</code> when more pages exist).'},
+  {t:'Filter by a property value',tested:1,u:PY+'/collections/lakes/items?[[name=Lake%20Baikal|Any queryable property can be used as a parameter. Names come from /collections/{id}/queryables.]]&[[properties=name|Return only these properties. Property selection is not in Part 1, pygeoapi supports it as an extra.]]&f=json',
+   resp:'Returned the single matching feature with only its <code>name</code>.'},
+  {t:'One feature by id, and the queryables list',tested:1,u:PY+'/collections/lakes/[[queryables|Lists filterable properties and types as JSON Schema.]]?f=json',
+   resp:'Single feature: <code>/collections/lakes/items/{featureId}</code>.'},
+  {t:'Create a feature (Part 4, draft)',u:'POST https://example.org/collections/lakes/items\nContent-Type: application/geo+json\n\n[[{"type":"Feature","properties":{"name":"New Lake"},"geometry":{"type":"Point","coordinates":[6.1,46.2]}}|A GeoJSON feature in the body. The server answers 201 with a Location header. Draft spec, server support varies.]]'}]},
+
+{n:4,theme:'maps',title:'WMTS',to:'OGC API - Tiles',rel:'direct',st:'ok',stl:'Tiles Part 1 v1.0: published',
+ d:'Pre-cut map or data tiles on a fixed grid, fetched by zoom, row and column.',a:'Tiles is not limited to map images: also vector tiles and coverages. It uses OGC Two Dimensional Tile Matrix Set definitions.',u:'Web maps with MapLibre, Leaflet or OpenLayers.',
+ legacy:[{t:'GetTile (KVP)',u:'https://example.org/wmts?SERVICE=WMTS&VERSION=1.0.0&[[REQUEST=GetTile|Returns one tile.]]&[[LAYER=ortho|Layer id from GetCapabilities.]]&STYLE=default&[[TILEMATRIXSET=PM|A tile grid defined in capabilities (PM is a common id for web mercator).]]&[[TILEMATRIX=12|Zoom level id.]]&[[TILEROW=1409|Row in the grid.]]&[[TILECOL=2073|Column in the grid.]]&[[FORMAT=image/png|Tile image type.]]',
+   resp:'WMTS also has a RESTful form: <code>/{layer}/{style}/{tileMatrixSet}/{tileMatrix}/{row}/{col}.png</code>.'}],
+ api:[{t:'Which tilesets exist for a collection',tested:1,u:PY+'/collections/lakes/[[tiles|Lists tilesets: tile matrix sets and formats available.]]?f=json'},
+  {t:'One vector tile (level 0)',tested:1,u:PY+'/collections/lakes/tiles/[[WorldCRS84Quad|Tile matrix set id. WebMercatorQuad is the usual web-map grid.]]/[[0|Tile matrix (zoom level).]]/[[0|Tile row.]]/[[0|Tile column.]]?[[f=mvt|Mapbox Vector Tile. Portable alternative: Accept: application/vnd.mapbox-vector-tile.]]',
+   resp:'Returned a binary MVT (HTTP 200) with layer <code>ne_110m_lakes</code>.'}]},
+
+{n:5,theme:'rasters',title:'WCS',to:'OGC API - Coverages',rel:'partial',st:'wip',stl:'Coverages Part 1: public comment closed 15 Oct 2026, adoption not confirmed',
+ d:'Fetch raster or grid values (elevation, temperature, satellite bands), subsetted by space, time or band.',a:'Coverages aims to do the same with plain URLs. WCS 2.0.1 is the stable, widely deployed option today.',u:'Pull a DEM clip, a time slice of a climate grid, selected bands.',
+ note:'The OGC API - Coverages request below is a sketch of the draft. Axis names are dataset specific: my test with <code>lat</code>/<code>long</code> on a public demo returned "Invalid axis name".',
+ legacy:[{t:'GetCoverage with spatial subset (WCS 2.0.1)',u:'https://example.org/wcs?SERVICE=WCS&[[VERSION=2.0.1|WCS 2.x. Subsets use SUBSET, not BBOX.]]&[[REQUEST=GetCoverage|Returns grid data.]]&[[COVERAGEID=dem|Coverage id from GetCapabilities.]]&[[SUBSET=Lat(40,50)|Trim an axis. Axis labels come from DescribeCoverage.]]&[[SUBSET=Long(0,10)|Repeat SUBSET for each axis.]]&[[FORMAT=image/tiff|Output encoding, if the server supports it.]]&[[SCALEFACTOR=0.5|Downsample. SCALESIZE and SCALEAXES are alternatives.]]'}],
+ api:[{t:'Coverage subset (draft)',u:'https://example.org/collections/dem/[[coverage|The coverage resource of a collection.]]?[[subset=Lat(40:50),Lon(0:10)|Trim by axis. Draft syntax uses a colon between bounds.]]&[[f=image/tiff|Output format, or use Accept.]]'}]},
+
+{n:6,theme:'processing',title:'WPS',to:'OGC API - Processes',rel:'direct',st:'ok',stl:'Part 1 v1.0: published. Version 2 and Part 2 (deploy): comment closed 5 Sep 2026',
+ d:'Call a server-side algorithm with inputs, get outputs, run it asynchronously if it is long.',a:'Plain JSON in and out, jobs as resources. OGC states Processes covers all WPS use cases.',u:'Buffer, clip, zonal stats, model runs, anything you wrap as a process.',
+ legacy:[{t:'Execute (WPS 2.0, XML over POST)',u:'POST https://example.org/wps\nContent-Type: application/xml\n\n[[<wps:Execute xmlns:wps="http://www.opengis.net/wps/2.0" xmlns:ows="http://www.opengis.net/ows/2.0" service="WPS" version="2.0.0" response="document" mode="sync"><ows:Identifier>buffer</ows:Identifier><wps:Input id="distance"><wps:Data><wps:LiteralValue>100</wps:LiteralValue></wps:Data></wps:Input><wps:Output id="result" transmission="value"/></wps:Execute>|XML body: process identifier, inputs, requested outputs, sync or async mode. Names are process specific.]]',
+   resp:'Capabilities and DescribeProcess work as GET. Execute is POST.'}],
+ api:[{t:'List processes',tested:1,u:PY+'/[[processes|Every process the server exposes.]]?f=json'},
+  {t:'Execute a process',tested:1,u:'POST '+PY+'/processes/[[hello-world|Process id.]]/[[execution|Run it.]]\nContent-Type: application/json\n\n[[{"inputs":{"name":"Thomas"}}|Inputs by name. Shapes come from GET /processes/{id}.]]',
+   resp:'Returned <code>{"id":"echo","value":"Hello Thomas!"}</code> (HTTP 200).'},
+  {t:'Run it asynchronously (job pattern)',u:'POST https://example.org/processes/long-job/execution\n[[Prefer: respond-async|Asks for a job instead of waiting. The server answers 201 with a Location header.]]\nContent-Type: application/json\n\n{"inputs":{"x":1}}\n\nthen: GET [[/jobs/{jobId}|Poll the job status. When successful, follow its results link or GET /jobs/{jobId}/results.]]'}]},
+
+{n:7,theme:'catalog',title:'CSW',to:'OGC API - Records',rel:'direct',st:'ok',stl:'Records Part 1 v1.0: published',
+ d:'Search a catalogue of metadata about datasets, services and more.',a:'Records items are searchable like features, with simple parameters instead of XML queries.',u:'Data portals, find-a-dataset search.',
+ legacy:[{t:'GetRecords with a text constraint (CSW 2.0.2)',u:'https://example.org/csw?SERVICE=CSW&[[VERSION=2.0.2|2.0.2 is the widely used one.]]&[[REQUEST=GetRecords|Search.]]&[[TYPENAMES=csw:Record|The record type (Dublin Core based).]]&[[RESULTTYPE=results|results returns records, hits only counts.]]&[[ELEMENTSETNAME=summary|brief, summary or full.]]&[[CONSTRAINTLANGUAGE=CQL_TEXT|Language of CONSTRAINT.]]&CONSTRAINT_LANGUAGE_VERSION=1.1.0&[[CONSTRAINT=AnyText%20LIKE%20%27%25rivers%25%27|AnyText LIKE \'%rivers%\' (URL-encoded).]]&[[MAXRECORDS=10|Page size. Use STARTPOSITION to page.]]'}],
+ api:[{t:'Records of a catalogue',tested:1,u:PY+'/collections/[[dutch-metadata|A collection of type record.]]/items?[[limit=1|Page size.]]&f=json',
+   resp:'Returned HTTP 200 with one record (309 matched) in this demo catalogue.'},
+  {t:'Free-text and spatial search',u:'https://example.org/collections/catalog/items?[[q=rivers|Free-text search.]]&[[bbox=2,48,3,49|Records whose extent intersects this box.]]&[[datetime=2020-01-01/..|Open-ended time interval.]]&[[sortby=-created|Sort. Minus means descending. Sortable fields come from /sortables.]]&limit=10'}]},
+
+{n:8,theme:'sensors',title:'SOS',to:'SensorThings API or Connected Systems',rel:'partial',st:'ok',stl:'SensorThings 1.1 and Connected Systems 1.0 parts: published',
+ d:'Read time series of sensor observations and the description of the sensors.',a:'No single OGC API replaces SOS. SensorThings is REST/OData style for IoT. Connected Systems also covers systems, deployments, and commands.',u:'Weather stations, water gauges, IoT fleets.',
+ legacy:[{t:'GetObservation (SOS 2.0, KVP)',u:'https://example.org/sos?SERVICE=SOS&[[VERSION=2.0.0|SOS 2.0 (OGC 12-006).]]&[[REQUEST=GetObservation|Returns observations.]]&[[OFFERING=station-12|A group of observations, from capabilities.]]&[[OBSERVEDPROPERTY=temperature|The measured variable.]]&[[TEMPORALFILTER=om:phenomenonTime,2026-10-01T00:00:00Z/2026-10-02T00:00:00Z|Time window, format: property,interval.]]'}],
+ api:[{t:'SensorThings: latest observations of a datastream',u:'https://example.org/v1.1/Datastreams(12)/[[Observations|Related entity.]]?[[$orderby=phenomenonTime desc|OData-style sort, newest first.]]&[[$top=5|Number of results.]]&[[$select=result,phenomenonTime|Return only these fields.]]'},
+  {t:'Connected Systems: browse systems',u:'https://example.org/[[systems|System resources (sensors, platforms, ...). Related: /datastreams, /observations, /controlstreams, /commands.]]?limit=10',
+   resp:'Resource names follow the CS API Part 1 and 2 documents. Not run against a live server.'}]},
+
+{n:9,theme:'rasters',title:'No legacy twin',to:'OGC API - EDR (Environmental Data Retrieval)',rel:'none',st:'ok',stl:'EDR v1.2: published',
+ d:'Ask a gridded dataset (weather, ocean) for a value at a point, in an area, along a trajectory...',a:'Small answers (often CoverageJSON) instead of downloading a whole raster.',u:'Forecast at a location, sea-surface temperature series, corridor queries.',
+ api:[{t:'Position query: time series at one point',tested:1,u:PY+'/collections/[[icoads-sst|An EDR collection.]]/[[position|Query pattern. Others: area, radius, cube, trajectory, corridor, locations, items.]]?[[coords=POINT(-30 20)|Well-known text point, lon lat.]]&[[f=json|CoverageJSON in this server.]]',
+   resp:'Returned a CoverageJSON <code>PointSeries</code> (HTTP 200). Also useful: <code>parameter-name</code> to pick variables and <code>datetime</code> to restrict time.'}]},
+
+{n:10,theme:'features',title:'Filter Encoding 2.0',to:'CQL2 (Common Query Language 2)',rel:'direct',st:'ok',stl:'CQL2 1.0.0: published',
+ d:'The language for "give me features where...".',a:'CQL2 has a readable text form and a JSON form. Used with Features Part 3 through <code>filter</code> and <code>filter-lang</code>.',u:'Attribute, spatial and temporal predicates in one expression.',
+ note:'The CQL2 requests below are illustrative. The public demo accepted the <code>filter</code> parameter but I could not confirm that it applied the filter, so check <code>/conformance</code> on your server first.',
+ legacy:[{t:'Same idea in WFS: XML predicate',u:'...&FILTER=[[<fes:Filter><fes:PropertyIsGreaterThan>...|See card 3 for the full XML.]]'}],
+ api:[{t:'CQL2 text, attribute + spatial',u:'https://example.org/collections/cities/items?[[filter-lang=cql2-text|Filter language: cql2-text or cql2-json.]]&[[filter=population > 1000000 AND S_INTERSECTS(geometry, BBOX(-10,35,30,60))|Attribute comparison combined with a spatial predicate. Spaces are URL-encoded in practice.]]'},
+  {t:'Time and string predicates',u:'https://example.org/collections/obs/items?filter-lang=cql2-text&filter=[[name LIKE \'Lake%\' AND T_AFTER(observed, TIMESTAMP(\'2026-01-01T00:00:00Z\'))|LIKE for patterns, T_AFTER for time.]]'}]},
+
+{n:11,theme:'style',title:'SLD / Symbology Encoding',to:'OGC API - Styles',rel:'partial',st:'wip',stl:'Styles: no "Approved Standard" badge on ogcapi.ogc.org',
+ d:'Describe how a layer should be drawn (colours, strokes, labels).',a:'Styles manages and fetches styles as resources, so map servers, clients and editors can share them.',u:'A style editor talking to a map server.',
+ note:'Mapping is partial. Legacy SLD 1.1 is a profile of WMS and travels inside WMS requests. Status of Styles is not confirmed final in the pages I read.',
+ legacy:[{t:'Ask a WMS to draw with an external SLD',u:'https://example.org/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=roads&CRS=EPSG:4326&BBOX=40,-10,52,10&WIDTH=800&HEIGHT=600&FORMAT=image/png&[[SLD=https://example.org/styles/roads.sld|URL of an SLD document. SLD_BODY passes the XML inline.]]'}],
+ api:[{t:'List and fetch styles (draft shape)',u:'https://example.org/[[styles|Style collection.]]\nhttps://example.org/styles/roads?[[f=sld10|Ask for a particular encoding, such as SLD 1.0, Mapbox style or another the server offers.]]'}]},
+
+{n:12,theme:'features',title:'TJS (Table Joining Service)',to:'OGC API - Joins',rel:'direct',st:'wip',stl:'Joins: comment closed 7 Feb 2026, adoption not confirmed',
+ d:'Join your own table (for example statistics by region code) onto geographic features by a shared key.',a:'OGC says Joins addresses many of the same use cases as TJS (2010), with an OpenAPI-described interface.',u:'Statistical offices, choropleth data prep.',
+ legacy:[],api:[]}
+];
+
+var THEMES=[['all','All'],['maps','Maps and tiles'],['features','Features and queries'],['rasters','Rasters and data cubes'],['processing','Processing'],['catalog','Catalog'],['sensors','Sensors'],['style','Styling']];
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function chipFor(c){return '<span class="chip '+(c.st==='ok'?'ok':'wip')+'">'+esc(c.stl)+'</span>';}
+function relChip(r){return '<span class="chip '+(r==='none'?'none':'rel')+'">'+(r==='none'?'no twin':r)+'</span>';}
+var uid=0;
+function renderReq(u){
+  var id='x'+(++uid), out='', re=/\[\[([\s\S]+?)\|([\s\S]+?)\]\]/g, last=0, m, plain='';
+  var probe=u.replace(/^(GET|POST) /,'');
+  var verb=/^POST /.test(u)?'POST ':'GET ';
+  var body=/^(GET|POST) /.test(u)?probe:u;
+  var isUrl=/^https?:/.test(body.trim());
+  out+= isUrl||/^POST /.test(u)?'<span class="m">'+verb+'</span>':'';
+  if(!/^POST /.test(u)&&!isUrl) out='';
+  while((m=re.exec(body))){
+    out+=esc(body.slice(last,m.index));
+    plain+=body.slice(last,m.index)+m[1];
+    out+='<button type="button" class="p" data-note="'+esc(m[2]).replace(/"/g,'&quot;')+'" data-name="'+esc(m[1]).replace(/"/g,'&quot;')+'">'+esc(m[1])+'</button>';
+    last=re.lastIndex;
+  }
+  out+=esc(body.slice(last)); plain+=body.slice(last);
+  return {html:out, plain:(/^POST /.test(u)?'POST ':'')+plain.replace(/\n\n$/,'')};
+}
+function exHtml(e){
+  var r=renderReq(e.u);
+  var h='<div class="ex"><div class="ex-head"><span>'+esc(e.t)+'</span><span><span class="badge '+(e.tested?'tested':'illus')+'">'+(e.tested?'TESTED 27 OCT 2026':'ILLUSTRATIVE')+'</span> <button type="button" class="copy" data-copy="'+esc(r.plain).replace(/"/g,'&quot;')+'">Copy</button></span></div>';
+  h+='<pre class="req">'+r.html+'</pre><div class="explain" aria-live="polite">Tap a highlighted part.</div>';
+  if(e.resp) h+='<div class="resp">'+e.resp+'</div>';
+  return h+'</div>';
+}
+function cardHtml(c){
+  var h='<article class="card" data-theme="'+c.theme+'" id="c'+c.n+'"><header><span class="num">'+String(c.n).padStart(2,'0')+'</span><h3>'+esc(c.title)+' <span style="color:var(--red)">&rarr;</span> '+esc(c.to)+'</h3></header>';
+  h+='<div class="chips">'+relChip(c.rel)+chipFor(c)+'</div>';
+  h+='<dl class="dau"><div><dt>Description</dt><dd>'+c.d+'</dd></div><div><dt>Advantage</dt><dd>'+c.a+'</dd></div><div><dt>Use case</dt><dd>'+c.u+'</dd></div></dl>';
+  if(c.note) h+='<p class="note">'+c.note+'</p>';
+  var hasL=c.legacy&&c.legacy.length, hasA=c.api&&c.api.length;
+  if(!hasL&&!hasA) h+='<div class="panel" style="border-radius:6px;background:#fff1c9"><b>No request example for this one.</b> The OGC API - Joins spec is not confirmed final, so any endpoint I showed could be wrong. Check the current draft on ogc.org before building on it.</div>';
+  if(hasL||hasA){
+    var first=hasL?'legacy':'api';
+    h+='<div class="tabs" role="tablist">';
+    if(hasL) h+='<button type="button" role="tab" data-tab="legacy" aria-selected="'+(first==='legacy')+'">Legacy request</button>';
+    if(hasA) h+='<button type="button" role="tab" data-tab="api" aria-selected="'+(first==='api')+'">OGC API request</button>';
+    h+='</div>';
+    if(hasL) h+='<div class="panel" role="tabpanel" data-panel="legacy"'+(first==='legacy'?'':' hidden')+'>'+c.legacy.map(exHtml).join('')+'</div>';
+    if(hasA) h+='<div class="panel" role="tabpanel" data-panel="api"'+(first==='api'?'':' hidden')+'>'+c.api.map(exHtml).join('')+'</div>';
+  }
+  return h+'</article>';
+}
+document.getElementById('grid').innerHTML=CARDS.map(cardHtml).join('');
+var f=document.getElementById('filters');
+f.innerHTML=THEMES.map(function(t,i){return '<button type="button" data-f="'+t[0]+'" aria-pressed="'+(i===0)+'">'+t[1]+'</button>';}).join('');
+f.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  [].forEach.call(f.children,function(x){x.setAttribute('aria-pressed',x===b);});
+  var k=b.dataset.f;
+  [].forEach.call(document.querySelectorAll('.card'),function(c){c.hidden=!(k==='all'||c.dataset.theme===k||c.dataset.theme==='start');});
+});
+document.getElementById('grid').addEventListener('click',function(e){
+  var t=e.target.closest('[data-tab]');
+  if(t){var card=t.closest('.card');
+    [].forEach.call(card.querySelectorAll('[data-tab]'),function(x){x.setAttribute('aria-selected',x===t);});
+    [].forEach.call(card.querySelectorAll('[data-panel]'),function(p){p.hidden=p.dataset.panel!==t.dataset.tab;});return;}
+  var p=e.target.closest('.p');
+  if(p){var ex=p.closest('.ex');
+    [].forEach.call(ex.querySelectorAll('.p'),function(x){x.classList.toggle('on',x===p);});
+    ex.querySelector('.explain').innerHTML='<b>'+esc(p.dataset.name)+'</b> &mdash; '+esc(p.dataset.note);return;}
+  var c=e.target.closest('.copy');
+  if(c){var txt=c.dataset.copy, done=function(){var o=c.textContent;c.textContent='Copied';setTimeout(function(){c.textContent=o;},1200);};
+    var fallback=function(){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){c.textContent='Select + copy';}document.body.removeChild(ta);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}}
+});
+})();
+</script>
+</body>
+</html>
