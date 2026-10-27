@@ -72,6 +72,7 @@
   ul.tight { margin:0; padding-left:20px; } ul.tight li { margin-bottom:5px; }
   footer { margin-top:34px; font-size:13px; color:var(--muted); }
   footer li { margin-bottom:3px; word-break:break-all; }
+  @media (max-width:700px) { .filters { position:static; flex-wrap:nowrap; overflow-x:auto; padding-bottom:10px; } .filters button { flex:none; } }
   @media (max-width:600px) { .wrap { padding-top:18px; } .card { padding:12px; } th,td { padding:5px 6px; font-size:13px; } }
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
 </style>
@@ -270,7 +271,6 @@ var CARDS=[
 
 {n:12,theme:'features',title:'TJS (Table Joining Service)',to:'OGC API - Joins',rel:'direct',st:'wip',stl:'Joins: comment closed 7 Feb 2026, adoption not confirmed',
  d:'Join your own table (for example statistics by region code) onto geographic features by a shared key.',a:'OGC says Joins addresses many of the same use cases as TJS (2010), with an OpenAPI-described interface.',u:'Statistical offices, choropleth data prep.',
- note:'No request example here on purpose: the spec was still a candidate in the pages I could check, and endpoints may change.',
  legacy:[],api:[]}
 ];
 
