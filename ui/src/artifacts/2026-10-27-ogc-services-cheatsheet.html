@@ -79,7 +79,7 @@
 <body>
 <div class="wrap">
   <h1>OGC Services <em>Cheatsheet</em></h1>
-  <p class="sub">OGC is the <b>Open Geospatial Consortium</b>, the body that writes the open standards behind web maps, geodata services and sensor feeds. Below: each legacy "OWS" service, its newer <b>OGC API</b> counterpart, and a real request for both. Tap any highlighted parameter to see what it does.</p>
+  <p class="sub">OGC is the <b>Open Geospatial Consortium</b>, the body that writes the open standards behind web maps, geodata services and sensor feeds. Below: each legacy "OWS" service, its newer <b>OGC API</b> counterpart, and example requests for both. Each request is labelled <b>TESTED</b> (run against a public server on 27 Oct 2026) or <b>ILLUSTRATIVE</b> (right shape, placeholder host, not run). Tap any highlighted parameter to see what it does.</p>
 
   <div class="intro">
     <div class="box"><h2>Legacy: OGC Web Services (OWS)</h2>
@@ -309,6 +309,7 @@ function cardHtml(c){
   h+='<dl class="dau"><div><dt>Description</dt><dd>'+c.d+'</dd></div><div><dt>Advantage</dt><dd>'+c.a+'</dd></div><div><dt>Use case</dt><dd>'+c.u+'</dd></div></dl>';
   if(c.note) h+='<p class="note">'+c.note+'</p>';
   var hasL=c.legacy&&c.legacy.length, hasA=c.api&&c.api.length;
+  if(!hasL&&!hasA) h+='<div class="panel" style="border-radius:6px;background:#fff1c9"><b>No request example for this one.</b> The OGC API - Joins spec is not confirmed final, so any endpoint I showed could be wrong. Check the current draft on ogc.org before building on it.</div>';
   if(hasL||hasA){
     var first=hasL?'legacy':'api';
     h+='<div class="tabs" role="tablist">';
