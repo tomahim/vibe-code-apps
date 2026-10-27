@@ -117,6 +117,35 @@ def _expected_files(theme: Path):
                     yield question, "question"
 
 
+def resolve_base(repo_root: Path, supplied: str | None) -> str:
+    """Pick the base revision: the argument, else the CI context, else master."""
+    if supplied:
+        return supplied
+    import json
+    import os
+
+    def merge_base(ref: str) -> str:
+        result = subprocess.run(
+            ["git", "merge-base", ref, "HEAD"], cwd=repo_root, capture_output=True, text=True
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            raise SystemExit(f"Cannot resolve a merge-base against {ref}: {result.stderr.strip()}")
+        return result.stdout.strip()
+
+    pull_request_base = os.environ.get("GITHUB_BASE_REF", "").strip()
+    if pull_request_base:
+        return merge_base(f"origin/{pull_request_base}")
+    event_path = os.environ.get("GITHUB_EVENT_PATH", "").strip()
+    if os.environ.get("GITHUB_EVENT_NAME") == "push" and event_path:
+        try:
+            before = json.loads(Path(event_path).read_text(encoding="utf-8")).get("before", "")
+        except (OSError, json.JSONDecodeError):
+            before = ""
+        if before and set(before) != {"0"}:
+            return before
+    return merge_base("origin/master")
+
+
 def check_retirement(root: Path, repo_root: Path, base: str) -> tuple[list[str], int]:
     base_ids, errors = base_manifest(root, repo_root, base)
     if errors:
@@ -143,18 +172,20 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument(
         "--base",
-        required=True,
-        help="Base git revision holding the IDs to protect (merge-base for PRs, previous commit for pushes).",
+        default=None,
+        help="Base git revision holding the IDs to protect. Defaults to the CI context "
+        "(pull request merge-base or the push's previous commit), then the master merge-base.",
     )
     arguments = parser.parse_args()
     root = arguments.root.resolve()
-    errors, count = check_retirement(root, root.parent, arguments.base)
+    base = resolve_base(root.parent, arguments.base)
+    errors, count = check_retirement(root, root.parent, base)
     if errors:
         print("Atomic lessons content-retirement check failed:", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print(f"Atomic lessons: all {count} content IDs from {arguments.base} are still declared.")
+    print(f"Atomic lessons: all {count} content IDs from {base} are still declared.")
     return 0
 
 

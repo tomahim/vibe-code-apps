@@ -36,6 +36,10 @@ jobs:
             api/requirements.txt
             atomic-lessons/requirements.txt
       - run: python -m pip install -r api/requirements.txt -r atomic-lessons/requirements.txt
+      - name: Reject removal of existing content IDs
+        # Publishing must never race a destroyed ID: the retirement gate is part
+        # of the chain that gates the production sync below.
+        run: python atomic-lessons/check_retired_ids.py
       - name: Prove the full library imports into a scratch database
         working-directory: api
         run: |

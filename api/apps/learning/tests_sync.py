@@ -8,12 +8,15 @@ from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
+from django.utils import timezone
 
 from apps.learning.models import (
     Card,
+    CardProgress,
     ContentEntity,
     LearningPath,
     Lesson,
@@ -212,17 +215,72 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertEqual(Question.objects.count(), 0)
         self.assertEqual(SyncLog.objects.count(), 0)
 
-    def test_database_rows_missing_from_the_library_are_reported_not_touched(self):
-        orphan_id = uuid.uuid4()
+    def test_position_swaps_apply_and_preserve_identity_and_progress(self):
+        second_card_id = str(uuid.uuid4())
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            cards = root / "themes/language/early-english/greetings/cards"
+            (cards / "02_expressions.md").write_text(
+                f"---\nid: {second_card_id}\nposition: 2\ntitle: Evening\narchived: false\n---\n\n**Good night.**\n",
+                encoding="utf-8",
+            )
+            run_sync(root, "9" * 40)
+            user = get_user_model().objects.create(username="learner")
+            CardProgress.objects.create(user=user, card_id=CARD_ID, completed_at=timezone.now())
+            first = cards / "01_expressions.md"
+            first.write_text(
+                first.read_text(encoding="utf-8").replace("position: 1", "position: 2"), encoding="utf-8"
+            )
+            second = cards / "02_expressions.md"
+            second.write_text(
+                second.read_text(encoding="utf-8").replace("position: 2", "position: 1"), encoding="utf-8"
+            )
+            run_sync(root, "8" * 40)
+        self.assertEqual(Card.objects.get(pk=CARD_ID).position, 2)
+        self.assertEqual(Card.objects.get(pk=second_card_id).position, 1)
+        # Identity and learner progress survive the reorder.
+        progress = CardProgress.objects.get()
+        self.assertEqual(str(progress.card_id), CARD_ID)
+        self.assertEqual(Card.objects.count(), 2)
+
+    def test_duplicate_sibling_positions_in_the_manifest_abort(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            cards = root / "themes/language/early-english/greetings/cards"
+            (cards / "02_expressions.md").write_text(
+                f"---\nid: {uuid.uuid4()}\nposition: 1\ntitle: Duplicate\narchived: false\n---\n\n**Oops.**\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(CommandError) as caught:
+                run_sync(root, "7" * 40)
+        self.assertIn("position 1 is already used", str(caught.exception))
+        self.assertEqual(SyncLog.objects.count(), 0)
+
+    def test_disappearing_published_content_aborts_the_sync(self):
         with TemporaryDirectory() as tmp:
             root = write_library(Path(tmp))
             run_sync(root, "2" * 40)
-            ContentEntity.objects.create(id=orphan_id, kind=ContentEntity.Kind.CARD, archived=False)
-            out = run_sync(root, "3" * 40)
-        self.assertIn("1 database content ID(s) are not in the library", out)
+            (root / "themes/language/early-english/greetings/cards/01_expressions.md").unlink()
+            with self.assertRaises(CommandError) as caught:
+                run_sync(root, "3" * 40)
+        message = str(caught.exception)
+        self.assertIn("1 published content ID(s)", message)
+        self.assertIn(CARD_ID, message)
+        self.assertIn("archived: true", message)
+        # The abort preserved everything: the row is still published, no new SyncLog.
+        self.assertTrue(Card.objects.get(pk=CARD_ID).published)
+        self.assertEqual(SyncLog.objects.count(), 1)
+
+    def test_missing_but_already_retired_rows_only_warn(self):
+        orphan_id = uuid.uuid4()
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            run_sync(root, "4" * 40)
+            ContentEntity.objects.create(id=orphan_id, kind=ContentEntity.Kind.CARD, archived=True)
+            out = run_sync(root, "5" * 40)
         self.assertIn("left untouched", out)
-        # Still present afterwards: the sync never deletes or auto-archives.
         self.assertTrue(ContentEntity.objects.filter(pk=orphan_id).exists())
+        self.assertEqual(SyncLog.objects.count(), 2)
 
     def test_invalid_content_aborts_without_writes(self):
         with TemporaryDirectory() as tmp:

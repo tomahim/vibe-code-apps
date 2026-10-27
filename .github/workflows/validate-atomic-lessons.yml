@@ -36,12 +36,4 @@ jobs:
         run: python atomic-lessons/check_images.py
       - name: Reject removal of existing content IDs
         # Content is retired with `archived: true`, never by deleting its ID.
-        run: |
-          if [ -n "${{ github.event.pull_request.base.ref }}" ]; then
-            BASE="$(git merge-base "origin/${{ github.event.pull_request.base.ref }}" HEAD)"
-          elif [ -n "${{ github.event.before }}" ]; then
-            BASE="${{ github.event.before }}"
-          else
-            BASE="$(git merge-base origin/master HEAD)"
-          fi
-          python atomic-lessons/check_retired_ids.py --base "$BASE"
+        run: python atomic-lessons/check_retired_ids.py

@@ -36,6 +36,14 @@ from apps.learning.models import (
 
 REPO_ROOT = Path(settings.BASE_DIR).resolve().parent
 DEFAULT_CONTENT_ROOT = REPO_ROOT / "atomic-lessons"
+TEMP_POSITION_OFFSET = 1_000_000_000
+SCOPE_FIELDS = {
+    "theme": (),
+    "learning_path": ("theme",),
+    "lesson": ("learning_path",),
+    "card": ("lesson",),
+    "question": ("lesson",),
+}
 KINDS = {
     "theme": ContentEntity.Kind.THEME,
     "learning_path": ContentEntity.Kind.LEARNING_PATH,
@@ -285,10 +293,11 @@ class Command(BaseCommand):
 
     def sync_library(self, content_root, commit, stats):
         records_by_dir = {}
-        seen_ids = set()
+        positions_seen = {}
         check_uuids = sys.modules["check_uuids"]
-        for element in self.scan(content_root, check_uuids):
-            seen_ids.add(element["id"])
+        elements = list(self.scan(content_root, check_uuids))
+        seen_ids = {element["id"] for element in elements}
+        for element in elements:
             element["provenance"]["last_changed_commit"] = self.last_changed_commit(
                 element["provenance"]["source_path"]
             )
@@ -349,19 +358,61 @@ class Command(BaseCommand):
                 "card": Card,
                 "question": Question,
             }[element["kind"]]
-            record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit)
+            # Reject duplicate sibling positions in the manifest itself; the
+            # two-phase move below handles valid reorders against existing rows.
+            scope_key = (element["kind"], None if element["kind"] == "theme" else str(element["parent_dir"]))
+            siblings = positions_seen.setdefault(scope_key, {})
+            if desired["position"] in siblings:
+                raise CommandError(
+                    f"{location}: position {desired['position']} is already used by "
+                    f"{siblings[desired['position']]} under the same parent"
+                )
+            siblings[desired["position"]] = location
+            record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit, seen_ids)
             if element["kind"] in ("theme", "learning_path", "lesson"):
                 records_by_dir[element["directory"]] = record
-        # Database drift is reported, never repaired here: retirement is an
-        # explicit archived: true flag in the content, never an inferred delete.
+        self.enforce_retirement(seen_ids)
+
+    def enforce_retirement(self, seen_ids):
+        """Block publishing when live database content vanishes from the library.
+
+        Rows and learner history are never repaired or deleted here: retirement
+        is an explicit `archived: true` flag in the content. A missing ID whose
+        content is still published aborts the sync (the surrounding transaction
+        rolls every write back); already-retired or unpublished leftovers are
+        only reported.
+        """
         unknown = list(ContentEntity.objects.exclude(pk__in=seen_ids))
-        if unknown:
-            listing = ", ".join(f"{entity.kind} {entity.pk}" for entity in unknown[:10])
+        if not unknown:
+            return
+        unknown_ids = [entity.pk for entity in unknown]
+        published_ids = set()
+        recorded_ids = set()
+        for model in (Theme, LearningPath, Lesson, Card, Question):
+            published_ids.update(
+                model.objects.filter(pk__in=unknown_ids, published=True).values_list("pk", flat=True)
+            )
+            recorded_ids.update(model.objects.filter(pk__in=unknown_ids).values_list("pk", flat=True))
+        live = [
+            entity
+            for entity in unknown
+            if not entity.archived and (entity.pk in published_ids or entity.pk not in recorded_ids)
+        ]
+        retired = [entity for entity in unknown if entity not in live]
+        if retired:
+            listing = ", ".join(f"{entity.kind} {entity.pk}" for entity in retired[:10])
             self.stdout.write(
                 self.style.WARNING(
-                    f"{len(unknown)} database content ID(s) are not in the library and were left "
-                    f"untouched (no deletion, no auto-archive): {listing}"
+                    f"{len(retired)} retired/unpublished database content ID(s) are not in the "
+                    f"library and were left untouched (no deletion, no auto-archive): {listing}"
                 )
+            )
+        if live:
+            listing = ", ".join(f"{entity.kind} {entity.pk}" for entity in live[:10])
+            raise CommandError(
+                f"{len(live)} published content ID(s) exist in the database but are missing from "
+                f"the library: {listing}. Restore their files or retire them explicitly with "
+                "archived: true. The sync was aborted; no rows were changed."
             )
 
     def sync_entity(self, element, archived):
@@ -382,7 +433,7 @@ class Command(BaseCommand):
             self.validated_save(entity, location)
         return entity
 
-    def upsert_record(self, model, entity, desired, location, stats, kind_label, commit):
+    def upsert_record(self, model, entity, desired, location, stats, kind_label, commit, syncing_ids):
         record = model.objects.filter(pk=entity.pk).first()
         if desired["last_changed_commit"] is None:
             # Without git history, keep the recorded commit for untouched files
@@ -391,6 +442,7 @@ class Command(BaseCommand):
                 desired["last_changed_commit"] = record.last_changed_commit
             else:
                 desired["last_changed_commit"] = commit
+        self.free_position(model, entity.pk, desired, location, syncing_ids)
         if record is None:
             record = model(entity=entity, **desired)
             self.validated_save(record, location)
@@ -405,6 +457,39 @@ class Command(BaseCommand):
         self.validated_save(record, location)
         stats[kind_label]["updated"] += 1
         return record
+
+    def free_position(self, model, own_pk, desired, location, syncing_ids):
+        """Move a synced sibling out of the target slot so reorders never collide.
+
+        Sibling-position uniqueness is enforced immediately by the database, so
+        swapping two rows needs a two-phase move: the occupant parks at a
+        temporary position and receives its final slot when its own element is
+        processed. Rows outside this sync keep their reserved positions; a
+        target slot held by one of them is a real conflict, not a reorder.
+        """
+        scope = {field: desired[field] for field in SCOPE_FIELDS[self.kind_label(model)]}
+        occupant = (
+            model.objects.filter(position=desired["position"], **scope).exclude(pk=own_pk).first()
+        )
+        if occupant is None:
+            return
+        if occupant.pk not in syncing_ids:
+            raise CommandError(
+                f"{location}: position {desired['position']} is already reserved by "
+                f"{occupant.pk}, which is not part of this sync"
+            )
+        occupant.position = TEMP_POSITION_OFFSET + occupant.position
+        occupant.save(update_fields=["position"])
+
+    @staticmethod
+    def kind_label(model):
+        return {
+            Theme: "theme",
+            LearningPath: "learning_path",
+            Lesson: "lesson",
+            Card: "card",
+            Question: "question",
+        }[model]
 
     @staticmethod
     def validated_save(instance, location):
