@@ -4,6 +4,7 @@ tagline: A Census of One Household, Kept in a Ledger That Ages Like 1901
 pitch: Answer one census-style question about your life each day and watch the answers fill a beautifully aged enumeration ledger you can compare across the years.
 domains: [HIST, PROD]
 created: 2026-10-27T06:02:47Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
