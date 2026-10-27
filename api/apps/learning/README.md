@@ -26,9 +26,11 @@ Content primary keys are one-to-one references to the UUID registry (`entity`, s
 - Foreign keys use `PROTECT` throughout, including users, so deleting a parent cannot cascade into learner history. Explicit archival, rather than deletion, is the intended workflow. This does not create a database-level append-only or deletion-permission system.
 - Theme positions are globally unique. Other positions are unique per parent; card and question sequences are separate. Positivity, sibling uniqueness, completion uniqueness and valid enum values are database constraints.
 - Every content row has source path, content hash and last-changed commit, including cards/questions, to honor the overview's general provenance requirement. Lesson introduction is `introduction_markdown`. Images remain repository-relative path strings, not uploaded files.
+- Theme, learning path, and lesson Markdown introductions use `introduction_markdown`; the field is optional. Cards have a required `title` (up to 255 characters) alongside `body_markdown`.
+- Questions have a required positive `after_card_position`, copied from GitHub metadata. `full_clean()` checks that the card position exists in the same lesson. Several questions can share this checkpoint to form an alternative pool; their own `position` remains unique within the lesson. An index on `(lesson, after_card_position)` supports fetching a pool. The same-lesson reference is model validation, not a database foreign key; bulk writes must perform that validation too.
 - Multiple-choice `options` is a list of four `{id, text}` objects. Choice IDs and `answer` are strings; `submitted_answer` stores a choice ID. No question revisions or answer snapshots are added.
 - `completed_at` and `answered_at` are explicit timestamps supplied by the future caller. `SyncLog.updated_at` records insertion time; unique `commit_sha` supports one successful log per commit. `changes` is an object for the future publisher's added/updated summary.
-- Model `full_clean()` validates registry kind immutability, subtype-kind matching, archive/publication consistency, useful image alt text, and the four-choice/answer shape. Django does **not** call `full_clean()` on `save()`, and bulk writes bypass it. These cross-table/JSON rules are **not database constraints**; the future publisher must validate the complete manifest and call validation inside its transaction. No publishing service or triggers are included in this table-only PR.
+- Model `full_clean()` validates registry kind immutability, subtype-kind matching, archive/publication consistency, useful image alt text, same-lesson question checkpoints, and the four-choice/answer shape. Django does **not** call `full_clean()` on `save()`, and bulk writes bypass it. These cross-table/JSON rules are **not database constraints**; the future publisher must validate the complete manifest and call validation inside its transaction. No publishing service or triggers are included in this table-only PR.
 - The schema stores completion and answer history only. Lesson completion/review due dates must later be derived as specified; no lesson-progress or review-schedule tables are added.
 
 ## Content synchronization
@@ -47,3 +49,4 @@ python manage.py test apps.learning
 ```
 
 The initial migration depends on the configured user model. It is additive and reversible. No production database is needed to generate/test it. The existing API deployment runs migrations on merge/startup; this PR must remain unmerged until approved.
+
