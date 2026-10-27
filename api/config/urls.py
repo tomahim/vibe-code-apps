@@ -8,6 +8,7 @@ from .views import app_gallery, health
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("health/", health, name="health"),
+    path("api/learning/", include("apps.learning.urls")),
     path("api/apps/", app_gallery, name="app-gallery"),
     path("api/apps/news/", include("apps.news.urls")),
     path("api/auth/", include("apps.accounts.urls")),
