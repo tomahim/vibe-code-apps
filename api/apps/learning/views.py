@@ -22,3 +22,18 @@ def themes(request):
          "progress": state.progress([l for l in lessons if l.learning_path.theme_id == theme.pk])}
         for theme in visible(Theme)
     ]})
+
+
+@never_cache
+@require_GET
+@jwt_required
+def theme_detail(request, theme_id):
+    from django.shortcuts import get_object_or_404
+    theme = get_object_or_404(visible(Theme), pk=theme_id)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson))
+    return JsonResponse({"theme": described(theme), "learning_paths": [
+        {**described(path), "theme_id": str(theme.pk),
+         "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
+        for path in visible(LearningPath).filter(theme=theme)
+    ]})

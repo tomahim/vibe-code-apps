@@ -11,3 +11,7 @@ Sources read 2026-10-27:
 Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `started`, `completed`. All correct alternatives at one checkpoint count once, never as separate required questions. A lesson requires all its visible cards and successful checkpoints; empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
 Images remain canonical repository-relative paths, as in the models. Hosting/resolving them is a frontend/content-delivery concern, not a fabricated asset URL.
+
+## GET themes/<uuid>/
+
+Returns `{theme, learning_paths}` in position order, with learner progress per path. Hidden or unknown IDs return 404.

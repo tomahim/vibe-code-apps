@@ -56,3 +56,13 @@ class LearningAPITests(TestCase):
         self.theme.entity.archived = True
         self.theme.entity.save()
         self.assertEqual(self.client.get("/api/learning/themes/").json()["themes"], [])
+
+    def test_theme_detail_paths_and_hidden_ancestors(self):
+        url = f"/api/learning/themes/{self.theme.pk}/"
+        result = self.client.get(url)
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.json()["learning_paths"][0]["id"], str(self.path.pk))
+        self.path.entity.archived = True
+        self.path.entity.save()
+        self.assertEqual(self.client.get(url).json()["learning_paths"], [])
+        self.assertEqual(self.client.get(f"/api/learning/themes/{uuid4()}/").status_code, 404)
