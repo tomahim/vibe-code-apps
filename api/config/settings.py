@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "apps.admin_ui",
     "apps.accounts",
     "apps.little_grains",
+    "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
     "apps.recipes",
     "apps.rust_learning_path",
