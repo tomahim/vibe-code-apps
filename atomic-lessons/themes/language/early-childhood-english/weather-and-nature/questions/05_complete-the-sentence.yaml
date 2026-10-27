@@ -1,0 +1,22 @@
+id: d99992bf-16ec-43a6-af30-d4cf9395dd2f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Il y a beaucoup de soleil. »
+
+
+  It''s really ____.'
+choices:
+- id: a956701a-7ac9-414d-97a6-2342889dad9f
+  text: rainy
+- id: 3bd483ed-bbe1-4b27-b915-669c19a63ff7
+  text: windy
+- id: d8673764-bbb7-41f4-a3bd-8fc0e9fcc4ff
+  text: cloudy
+- id: 0bce4f71-8308-48ce-8475-4a3e5b7aef98
+  text: sunny
+correct_choice_ids:
+- 0bce4f71-8308-48ce-8475-4a3e5b7aef98
+explanation: La traduction demande « sunny » (ensoleillé). « windy » signifie venteux; « rainy » signifie pluvieux; « cloudy » signifie nuageux.
+archived: false

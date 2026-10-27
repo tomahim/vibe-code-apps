@@ -1,0 +1,22 @@
+id: 0f9b59ac-2c01-4107-bbc8-09a255f6c892
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais vérifier l''heure. »
+
+
+  I''m going to ____ the time.'
+choices:
+- id: 37385c97-0183-4fe4-89a8-5868b903787d
+  text: check
+- id: 5a881aec-ed4d-4ea2-8485-2be63b974d21
+  text: checked
+- id: d9017687-9a87-488c-9d4e-3bbb676e0d1a
+  text: checks
+- id: 9c18bf2c-9e46-421c-bd36-6ab344519f25
+  text: checking
+correct_choice_ids:
+- 37385c97-0183-4fe4-89a8-5868b903787d
+explanation: Après « going to », on utilise la base verbale « check ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

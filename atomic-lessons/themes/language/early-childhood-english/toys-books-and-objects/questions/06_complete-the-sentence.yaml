@@ -1,0 +1,22 @@
+id: 9bb8499f-e9d7-446f-9920-493d25c71074
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « C''est grand. »
+
+
+  It''s ____.'
+choices:
+- id: 7b62cb83-4936-4b7a-9787-a595ebfc9086
+  text: narrow
+- id: 4bad8841-4d2c-4998-b625-8c13c6e4b87a
+  text: tiny
+- id: f30ddeae-1ccb-401b-87e6-9d663f088210
+  text: small
+- id: 6d51a9ca-09b2-4d87-8b76-9e700b73e212
+  text: big
+correct_choice_ids:
+- 6d51a9ca-09b2-4d87-8b76-9e700b73e212
+explanation: La traduction demande « big » (grand). « small » signifie petit; « tiny » signifie minuscule; « narrow » signifie étroit.
+archived: false

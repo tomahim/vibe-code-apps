@@ -1,0 +1,22 @@
+id: e301687b-56e7-407d-9cf3-4b99df6e8b25
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Ton ventre est plein maintenant. »
+
+
+  Your ____ is full now.'
+choices:
+- id: ebe5fd6e-6192-49d5-8b0d-9a6698cab490
+  text: head
+- id: f8b77992-c248-4436-a5d9-5a8b31316359
+  text: back
+- id: eb3fb3a8-c535-430f-ab0c-861d4b6182ea
+  text: tummy
+- id: 9d7d9192-665c-4bed-9b58-40913724aa93
+  text: chest
+correct_choice_ids:
+- eb3fb3a8-c535-430f-ab0c-861d4b6182ea
+explanation: La traduction demande « tummy » (ventre). « back » signifie dos; « head » signifie tête; « chest » signifie poitrine.
+archived: false

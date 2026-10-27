@@ -1,0 +1,22 @@
+id: 22f891a0-1d4b-4af7-b75b-f353b6bcf694
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais te mettre sur le ventre. »
+
+
+  I''m going to put you on your ____.'
+choices:
+- id: ab41538e-56bd-450f-90a0-62bf90bbe53c
+  text: tummy
+- id: 97f27812-a664-4a0b-b777-3b50fe953766
+  text: back
+- id: 3da33497-fdd8-4364-80d9-548bbf3b315c
+  text: chest
+- id: 6501700b-60e0-4d72-a3d9-cbdb94118ef1
+  text: head
+correct_choice_ids:
+- ab41538e-56bd-450f-90a0-62bf90bbe53c
+explanation: La traduction demande « tummy » (ventre). « back » signifie dos; « head » signifie tête; « chest » signifie poitrine.
+archived: false

@@ -1,0 +1,22 @@
+id: 3298a232-4b0e-4c11-9bc2-e3d512202f39
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu grandis tellement vite. »
+
+
+  You''re ____ so fast.'
+choices:
+- id: 95e29ae3-9cf0-44b9-b897-7796f21d811c
+  text: growing
+- id: 3ce72095-94f8-4d43-b017-429a6a55f07a
+  text: grow
+- id: a6651efa-0d4b-4d26-a276-ab523d401965
+  text: grew
+- id: 5c300776-1dce-4f04-beb5-148d31fa7e6c
+  text: grows
+correct_choice_ids:
+- 95e29ae3-9cf0-44b9-b897-7796f21d811c
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « growing ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

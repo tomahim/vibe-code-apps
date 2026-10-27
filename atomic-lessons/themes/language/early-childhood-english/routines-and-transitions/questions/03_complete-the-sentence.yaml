@@ -1,0 +1,22 @@
+id: 2558cefd-d63a-4bb2-bb93-6aa270cfcc65
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais juste chercher ton biberon. »
+
+
+  I''m just going to get your ____.'
+choices:
+- id: 124f2cd9-715e-4248-bd2c-6a4381f44733
+  text: plate
+- id: e26b2279-b5fb-4513-8c41-542b7f9e3132
+  text: cup
+- id: 04f5fd7a-47a2-41dd-8f6a-59851a68a40c
+  text: bottle
+- id: 11a94a00-f670-4f25-8e86-df11c0b05ddd
+  text: bowl
+correct_choice_ids:
+- 04f5fd7a-47a2-41dd-8f6a-59851a68a40c
+explanation: La traduction demande « bottle » (biberon dans ce contexte). « cup » signifie tasse; « bowl » signifie bol; « plate » signifie assiette.
+archived: false

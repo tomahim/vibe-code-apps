@@ -1,0 +1,22 @@
+id: ed82500b-83e9-4885-b6ba-ab253352711f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu as fait une bonne sieste ? »
+
+
+  Did you ____ a good nap?'
+choices:
+- id: b784c920-487c-45a6-ad50-8984ca27abbf
+  text: had
+- id: e8caccc9-6baf-4b36-b9fb-df6385e11329
+  text: having
+- id: 1b20191f-09bf-49f0-8340-8433c83e91ff
+  text: have
+- id: 12123ef0-1bbd-4f46-96b5-b555587f5b1a
+  text: has
+correct_choice_ids:
+- 1b20191f-09bf-49f0-8340-8433c83e91ff
+explanation: Après « Did you », on utilise la base verbale « have ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

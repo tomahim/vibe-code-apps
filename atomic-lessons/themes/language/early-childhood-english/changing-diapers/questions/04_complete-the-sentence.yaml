@@ -1,0 +1,22 @@
+id: b9aa97fa-eb27-457d-b0c7-525705dd80b9
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Une couche toute propre. »
+
+
+  A nice ____ diaper.'
+choices:
+- id: ed2529d8-506f-4f31-b11d-09bb6aca216f
+  text: clean
+- id: 52260f19-0912-4815-8102-3cad334e385e
+  text: wet
+- id: c352975a-bfcd-4891-86a2-1fb0a321c758
+  text: dry
+- id: 78780f1b-2aab-42ce-bc6a-3e2aad3a4c55
+  text: dirty
+correct_choice_ids:
+- ed2529d8-506f-4f31-b11d-09bb6aca216f
+explanation: La traduction demande « clean » (propre). « dirty » signifie sale; « wet » signifie mouillé; « dry » signifie sec.
+archived: false

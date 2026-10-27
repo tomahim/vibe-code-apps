@@ -1,0 +1,22 @@
+id: cdddae06-3903-4e26-8f9e-51559a4e6f1d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Voilà, tu es propre. »
+
+
+  There you go, you''re all ____.'
+choices:
+- id: b0672f63-f0e2-42d8-9a28-443a4bb1c352
+  text: dry
+- id: 8eefb965-ee8d-448c-9992-3905d4e572d1
+  text: wet
+- id: eeef2f98-d56d-4a1b-b2db-62cdc17ba813
+  text: clean
+- id: 9b9a99db-ef08-4ef4-ac9f-a1b57d03d6f6
+  text: dirty
+correct_choice_ids:
+- eeef2f98-d56d-4a1b-b2db-62cdc17ba813
+explanation: La traduction demande « clean » (propre). « dirty » signifie sale; « wet » signifie mouillé; « dry » signifie sec.
+archived: false

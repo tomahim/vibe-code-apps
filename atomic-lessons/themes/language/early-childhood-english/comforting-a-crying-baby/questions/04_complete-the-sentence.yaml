@@ -1,0 +1,22 @@
+id: 2ea28819-1097-4d9f-9252-5207f5e288ba
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu es fatigué ? »
+
+
+  Are you ____?'
+choices:
+- id: 4b04f2ca-2057-4e32-9c3c-040c1bbf663a
+  text: tired
+- id: 0a6a1eb7-35f7-4282-a1e6-5c2c282c7b5a
+  text: awake
+- id: 72ac7246-b25e-42f6-9d8f-83fcdcce42cc
+  text: hungry
+- id: 251afcdf-8836-4507-aa71-004adcb423dc
+  text: rested
+correct_choice_ids:
+- 4b04f2ca-2057-4e32-9c3c-040c1bbf663a
+explanation: La traduction demande « tired » (fatigué). « awake » signifie réveillé; « rested » signifie reposé; « hungry » signifie affamé.
+archived: false

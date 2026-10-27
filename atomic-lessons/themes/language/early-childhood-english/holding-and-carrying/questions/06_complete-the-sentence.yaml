@@ -1,0 +1,22 @@
+id: d5f205c9-72a4-4d2b-b50b-186a4765554e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je te porte jusqu''à la chambre. »
+
+
+  I''m ____ you to the bedroom.'
+choices:
+- id: 28bac5a4-cb03-4445-b534-20f27e4b4916
+  text: carrying
+- id: a0a8a731-9c17-4390-a42c-fa372fef374a
+  text: carried
+- id: 54e4463b-c7ec-4d01-a146-04b825625a23
+  text: carry
+- id: 169b7589-8066-4b93-8376-c80ae7aef174
+  text: carries
+correct_choice_ids:
+- 28bac5a4-cb03-4445-b534-20f27e4b4916
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « carrying ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

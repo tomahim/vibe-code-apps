@@ -1,0 +1,22 @@
+id: 95cc04e2-d740-47d3-afcd-e9317f1a7d0c
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vois tes beaux yeux. »
+
+
+  I can see your beautiful ____.'
+choices:
+- id: 199b4cff-bb49-4c9d-8322-778a6bf38fd3
+  text: ears
+- id: 8ed91cab-12cd-445e-a6e7-e46192cd7ec1
+  text: eyes
+- id: 4ae780c9-ea1a-4a4c-8a47-643fab275f21
+  text: arms
+- id: 7a50bf83-2dee-4774-8c39-7eb262b51fe8
+  text: legs
+correct_choice_ids:
+- 8ed91cab-12cd-445e-a6e7-e46192cd7ec1
+explanation: La traduction demande « eyes » (yeux). « ears » signifie oreilles; « arms » signifie bras; « legs » signifie jambes.
+archived: false

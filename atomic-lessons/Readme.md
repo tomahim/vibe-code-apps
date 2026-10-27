@@ -70,7 +70,7 @@ Use at most six cards per lesson. Keep card counts even so a question follows ea
 
 Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type: multiple_choice`, `selection: single`, `after_card_position`, `prompt`, four `choices` (each with `id` and `text`), one `correct_choice_ids` reference, `explanation`, and `archived`.
 
-For the current path, place one question after cards 2 and 4, and after card 6 when present. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. Give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
+For the current path, author three alternative questions for each checkpoint after cards 2 and 4, and after card 6 when present. This gives six questions for a four-card lesson and nine for a six-card lesson. Questions sharing `after_card_position` form a pool: choose one question from that pool for a checkpoint. Keep `position` unique within the lesson; `after_card_position` may repeat. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. Give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
 
 ## Validation before committing
 
@@ -86,27 +86,27 @@ The UUID check scans the entire library, requires IDs on all content elements an
 
 ## Early Childhood English inventory and provenance
 
-The Language theme's first path contains 18 lessons, 94 cards, 47 questions, and 376 expression pairs. All 318 rows from the workbook's `Phrases du quotidien` sheet are preserved once. Supporting examples from `Verbes utiles` and `Structures clés`, plus explicitly recorded authored variants, complete the cards. `source-map.csv` records the origin of every expression, including workbook sheet/row or an adaptation note. Keep that map current when editing this path.
+The Language theme's first path contains 18 lessons, 94 cards, 141 questions, and 376 expression pairs. All 318 rows from the workbook's `Phrases du quotidien` sheet are preserved once. Supporting examples from `Verbes utiles` and `Structures clés`, plus explicitly recorded authored variants, complete the cards. `source-map.csv` records the origin of every expression, including workbook sheet/row or an adaptation note. Keep that map current when editing this path.
 
 Source workbook: `Anglais_americain_avec_bebe.xlsx` (SHA-256 `b40b2466b417c4cbfd29b31ca0ec23b1882a980573996d35a47237aa667f4a88`). It is source material only and is not committed here. The translations and expressions are for adult language practice.
 
 | Lesson | Cards | Questions |
 | --- | ---: | ---: |
-| 1. [Morning greetings and reconnecting](themes/language/early-childhood-english/morning-greetings/index.md) | 4 | 2 |
-| 2. [Noticing and commenting on your baby](themes/language/early-childhood-english/noticing-your-baby/index.md) | 6 | 3 |
-| 3. [Holding and carrying your baby](themes/language/early-childhood-english/holding-and-carrying/index.md) | 4 | 2 |
-| 4. [Comforting a crying baby](themes/language/early-childhood-english/comforting-a-crying-baby/index.md) | 6 | 3 |
-| 5. [Affection and encouragement](themes/language/early-childhood-english/affection-and-encouragement/index.md) | 6 | 3 |
-| 6. [Feeding, bottles, and milk](themes/language/early-childhood-english/feeding-and-bottles/index.md) | 6 | 3 |
-| 7. [Changing diapers](themes/language/early-childhood-english/changing-diapers/index.md) | 6 | 3 |
-| 8. [Getting dressed](themes/language/early-childhood-english/getting-dressed/index.md) | 6 | 3 |
-| 9. [Bath time and care](themes/language/early-childhood-english/bath-time-and-care/index.md) | 6 | 3 |
-| 10. [Tummy time and movement](themes/language/early-childhood-english/tummy-time-and-movement/index.md) | 6 | 3 |
-| 11. [Toys, books, and objects](themes/language/early-childhood-english/toys-books-and-objects/index.md) | 6 | 3 |
-| 12. [Exploring the home](themes/language/early-childhood-english/exploring-the-home/index.md) | 4 | 2 |
-| 13. [Narrating household actions](themes/language/early-childhood-english/narrating-household-actions/index.md) | 4 | 2 |
-| 14. [Narrating routines and transitions](themes/language/early-childhood-english/routines-and-transitions/index.md) | 4 | 2 |
-| 15. [Weather and nature](themes/language/early-childhood-english/weather-and-nature/index.md) | 4 | 2 |
-| 16. [Going for a walk](themes/language/early-childhood-english/going-for-a-walk/index.md) | 6 | 3 |
-| 17. [Car rides and travel](themes/language/early-childhood-english/car-rides-and-travel/index.md) | 4 | 2 |
-| 18. [Sleep cues and settling](themes/language/early-childhood-english/sleep-cues-and-settling/index.md) | 6 | 3 |
+| 1. [Morning greetings and reconnecting](themes/language/early-childhood-english/morning-greetings/index.md) | 4 | 6 |
+| 2. [Noticing and commenting on your baby](themes/language/early-childhood-english/noticing-your-baby/index.md) | 6 | 9 |
+| 3. [Holding and carrying your baby](themes/language/early-childhood-english/holding-and-carrying/index.md) | 4 | 6 |
+| 4. [Comforting a crying baby](themes/language/early-childhood-english/comforting-a-crying-baby/index.md) | 6 | 9 |
+| 5. [Affection and encouragement](themes/language/early-childhood-english/affection-and-encouragement/index.md) | 6 | 9 |
+| 6. [Feeding, bottles, and milk](themes/language/early-childhood-english/feeding-and-bottles/index.md) | 6 | 9 |
+| 7. [Changing diapers](themes/language/early-childhood-english/changing-diapers/index.md) | 6 | 9 |
+| 8. [Getting dressed](themes/language/early-childhood-english/getting-dressed/index.md) | 6 | 9 |
+| 9. [Bath time and care](themes/language/early-childhood-english/bath-time-and-care/index.md) | 6 | 9 |
+| 10. [Tummy time and movement](themes/language/early-childhood-english/tummy-time-and-movement/index.md) | 6 | 9 |
+| 11. [Toys, books, and objects](themes/language/early-childhood-english/toys-books-and-objects/index.md) | 6 | 9 |
+| 12. [Exploring the home](themes/language/early-childhood-english/exploring-the-home/index.md) | 4 | 6 |
+| 13. [Narrating household actions](themes/language/early-childhood-english/narrating-household-actions/index.md) | 4 | 6 |
+| 14. [Narrating routines and transitions](themes/language/early-childhood-english/routines-and-transitions/index.md) | 4 | 6 |
+| 15. [Weather and nature](themes/language/early-childhood-english/weather-and-nature/index.md) | 4 | 6 |
+| 16. [Going for a walk](themes/language/early-childhood-english/going-for-a-walk/index.md) | 6 | 9 |
+| 17. [Car rides and travel](themes/language/early-childhood-english/car-rides-and-travel/index.md) | 4 | 6 |
+| 18. [Sleep cues and settling](themes/language/early-childhood-english/sleep-cues-and-settling/index.md) | 6 | 9 |

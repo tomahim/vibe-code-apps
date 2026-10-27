@@ -1,0 +1,22 @@
+id: 711faf78-5a16-4eef-a401-8c060c29099b
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu es prêt ? »
+
+
+  Are you ____?'
+choices:
+- id: 0edf14f6-9651-4510-bb41-dd2b71684e20
+  text: hungry
+- id: 9e844306-6876-4fde-9df9-7754f140cb4d
+  text: asleep
+- id: 6788f419-ec2b-47bd-bec1-d6bf236532bc
+  text: tired
+- id: e1547521-e8e7-4064-9606-0e1f4bc66705
+  text: ready
+correct_choice_ids:
+- e1547521-e8e7-4064-9606-0e1f4bc66705
+explanation: La traduction demande « ready » (prêt). « tired » signifie fatigué; « hungry » signifie affamé; « asleep » signifie endormi.
+archived: false

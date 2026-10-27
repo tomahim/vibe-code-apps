@@ -1,0 +1,22 @@
+id: f10260dd-de1f-4176-9e60-22cb88ba7f3e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu te frottes les yeux. »
+
+
+  You''re ____ your eyes.'
+choices:
+- id: 9641b339-19df-4f24-9af3-6e1097f0eb7f
+  text: rub
+- id: 1a6f2dcd-3bda-4c7d-877d-b696e0be6bdf
+  text: rubbing
+- id: be16f999-66af-4d80-af89-7b1deec359fc
+  text: rubs
+- id: 4a4d61e2-9076-4ec7-98f3-7326d129e360
+  text: rubbed
+correct_choice_ids:
+- 1a6f2dcd-3bda-4c7d-877d-b696e0be6bdf
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « rubbing ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

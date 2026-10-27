@@ -1,0 +1,22 @@
+id: f4157815-a27c-4e64-a085-1f5d7b2d86a2
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu suis le jouet des yeux. »
+
+
+  You''re following the ____ with your eyes.'
+choices:
+- id: 193de902-6646-4dca-b127-0eb81e75273e
+  text: book
+- id: f23a2db2-825b-419c-a68d-0f75eacd2824
+  text: toy
+- id: 8959d274-ff09-4bcf-bd2f-2db9fa71fb4f
+  text: blanket
+- id: df139314-8baf-4ca7-be5f-4c275edd234b
+  text: bottle
+correct_choice_ids:
+- f23a2db2-825b-419c-a68d-0f75eacd2824
+explanation: La traduction demande « toy » (jouet). « book » signifie livre; « blanket » signifie couverture; « bottle » signifie biberon.
+archived: false

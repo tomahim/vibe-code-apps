@@ -1,0 +1,22 @@
+id: 35164094-d09b-4d55-a45e-bdde1be20b63
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va faire un petit tour en voiture. »
+
+
+  We''re ____ for a little car ride.'
+choices:
+- id: cb671ad3-56e7-4f35-a9a9-b2f759609b9f
+  text: go
+- id: 27b8b4f2-aac7-4e0c-9f82-ee7f6fa955a0
+  text: going
+- id: e25b2e28-cdbd-47ec-8d77-8be53c6d2b5a
+  text: went
+- id: 08ec0aee-5072-407f-897e-7f76eece9461
+  text: goes
+correct_choice_ids:
+- 27b8b4f2-aac7-4e0c-9f82-ee7f6fa955a0
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « going ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

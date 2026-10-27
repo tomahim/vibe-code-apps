@@ -1,0 +1,22 @@
+id: cbfc0751-e662-4d6c-9167-2aef6f8a1318
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais t''envelopper dans la serviette. »
+
+
+  I''m going to ____ you in the towel.'
+choices:
+- id: 59b16969-5587-47cf-ad18-147627d9571e
+  text: wrapped
+- id: 6fc54357-3a40-4b32-bc53-b0ebc8483cb8
+  text: wraps
+- id: 9c6cce84-67de-49f9-9c67-1bbb9869c2c6
+  text: wrapping
+- id: 8281ec8b-4197-4d2f-9d99-e2c6bdafbe5a
+  text: wrap
+correct_choice_ids:
+- 8281ec8b-4197-4d2f-9d99-e2c6bdafbe5a
+explanation: Après « going to », on utilise la base verbale « wrap ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

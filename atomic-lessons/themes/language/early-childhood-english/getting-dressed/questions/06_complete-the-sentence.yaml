@@ -1,0 +1,22 @@
+id: 8f49b462-7e8d-4af6-8330-66945f2fcb9d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « On va mettre tes chaussettes. »
+
+
+  Let''s put your ____ on.'
+choices:
+- id: 66a4afd7-5300-4a81-bb16-6f9ae546e82a
+  text: socks
+- id: 4b2d0052-880a-4275-9ae6-1f5b2fce700c
+  text: shoes
+- id: 58edf42a-5086-42a2-8b41-639b245f42a6
+  text: mittens
+- id: 70424557-f142-4860-a46c-db0021850602
+  text: pants
+correct_choice_ids:
+- 66a4afd7-5300-4a81-bb16-6f9ae546e82a
+explanation: La traduction demande « socks » (chaussettes). « shoes » signifie chaussures; « mittens » signifie moufles; « pants » signifie pantalon.
+archived: false

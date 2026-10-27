@@ -1,0 +1,22 @@
+id: e1370db4-5a9d-4dbf-880e-937cc7150d06
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je suis contente qu''on passe ce moment ensemble. »
+
+
+  I''m glad we get to spend this time ____.'
+choices:
+- id: 4daaa073-3656-443d-bac8-771b2c1a302f
+  text: alone
+- id: d379e47d-1a36-4e03-b1f8-f87b80a00f1d
+  text: together
+- id: fdb8edd8-7d68-443a-bc68-fb60b4a01b52
+  text: apart
+- id: d3b3e2da-0c69-44e6-bed4-2b08421dc80c
+  text: separately
+correct_choice_ids:
+- d379e47d-1a36-4e03-b1f8-f87b80a00f1d
+explanation: La traduction demande « together » (ensemble). « apart » signifie séparément; « alone » signifie seul; « separately » signifie séparément.
+archived: false

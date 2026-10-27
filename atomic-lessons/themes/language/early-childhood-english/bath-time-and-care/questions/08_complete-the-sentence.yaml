@@ -1,0 +1,22 @@
+id: 8216a1bf-8ab9-4337-b618-69991dbca4bc
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Lavons tes mains. »
+
+
+  Let''s wash your ____.'
+choices:
+- id: 19429533-e560-4c1f-8f44-d33354f0eb1c
+  text: fingers
+- id: 46861ed6-2633-4e0d-a5c6-1ebc3dbdbe4a
+  text: hands
+- id: 53774646-c9e2-4345-89f3-b989c585c2b9
+  text: feet
+- id: 83f8c469-61bd-401c-8568-c042e9d7a8a4
+  text: arms
+correct_choice_ids:
+- 46861ed6-2633-4e0d-a5c6-1ebc3dbdbe4a
+explanation: La traduction demande « hands » (mains). « feet » signifie pieds; « arms » signifie bras; « fingers » signifie doigts.
+archived: false

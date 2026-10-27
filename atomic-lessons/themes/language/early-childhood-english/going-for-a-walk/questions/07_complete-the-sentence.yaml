@@ -1,0 +1,22 @@
+id: 8f5055a3-75c8-4e60-950e-69a050689ccb
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Le soleil brille. »
+
+
+  The sun is ____.'
+choices:
+- id: 18690a08-0ce3-4dcd-b179-83395c5a7b9c
+  text: shines
+- id: 41cf1401-16b9-492e-8b51-c0fcc0be3578
+  text: shone
+- id: 9633abce-3272-4bdb-b200-bd0b76cc0b9c
+  text: shining
+- id: 8e298bea-68b0-484f-a904-151ae0c63dff
+  text: shine
+correct_choice_ids:
+- 9633abce-3272-4bdb-b200-bd0b76cc0b9c
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « shining ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

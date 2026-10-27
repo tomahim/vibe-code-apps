@@ -1,0 +1,22 @@
+id: 7f0c2fd1-20b4-48b4-b40e-2712c4d9cf3e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « On va ajouter un gilet. »
+
+
+  Let''s add a ____.'
+choices:
+- id: 7cbe47f5-31d8-40c8-92d8-d958d0326c90
+  text: blanket
+- id: e0e5cbea-444a-4971-93e2-a224347f5bc6
+  text: towel
+- id: e6157102-d5ff-471b-8223-695768281f2e
+  text: onesie
+- id: e065870b-182c-49b6-9531-3eb12f4efc35
+  text: sweater
+correct_choice_ids:
+- e065870b-182c-49b6-9531-3eb12f4efc35
+explanation: La traduction demande « sweater » (pull ou gilet dans ce contexte). « onesie » signifie body; « blanket » signifie couverture; « towel » signifie serviette.
+archived: false

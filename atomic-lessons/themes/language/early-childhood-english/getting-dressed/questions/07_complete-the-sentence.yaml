@@ -1,0 +1,22 @@
+id: 1c20c7f6-1367-45dd-b091-40a0ae700045
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais remonter la fermeture éclair. »
+
+
+  I''m going to ____ this up.'
+choices:
+- id: 977d8ce7-e416-44de-9f74-e3310b626abd
+  text: zipping
+- id: cfad8cba-9358-44ea-b1d1-46f3fcacf898
+  text: zipped
+- id: 519cdf02-f361-4f6a-95c7-c1855ff09223
+  text: zip
+- id: 3a6ed95b-bfd1-4d79-a081-55568c7591cb
+  text: zips
+correct_choice_ids:
+- 519cdf02-f361-4f6a-95c7-c1855ff09223
+explanation: Après « going to », on utilise la base verbale « zip ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

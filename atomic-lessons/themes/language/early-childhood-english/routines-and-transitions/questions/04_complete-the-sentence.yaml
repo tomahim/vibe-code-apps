@@ -1,0 +1,22 @@
+id: c7c3d1d5-b25c-4654-8a14-5f54deae9e59
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va faire ça ensemble. »
+
+
+  We''re going to ____ this together.'
+choices:
+- id: 3546af25-7c55-4ad3-b597-9320720dcc3e
+  text: doing
+- id: bccc0cfa-6726-4a86-90d1-e921186e4eef
+  text: do
+- id: d1059f4f-3f88-4500-9251-66ce3ad798a8
+  text: did
+- id: a21aee75-3c7e-41f9-b6b7-0eca0278e406
+  text: does
+correct_choice_ids:
+- bccc0cfa-6726-4a86-90d1-e921186e4eef
+explanation: Après « going to », on utilise la base verbale « do ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

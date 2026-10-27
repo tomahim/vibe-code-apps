@@ -1,0 +1,22 @@
+id: ecfbceb7-b0f3-485b-8dfa-5812748f7863
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Je vais te coucher doucement. »
+
+
+  I''m going to ____ you down gently.'
+choices:
+- id: bddedb5e-6791-407e-ad68-c2effb6eb54d
+  text: laid
+- id: 1b1ffa61-a9a0-4f00-892d-fbef4906be10
+  text: lays
+- id: 92c5e1f3-07f9-4903-8bf0-b5bfa6aa0ba8
+  text: laying
+- id: 19519323-90e8-4f1f-a9d0-0e6e81ab029d
+  text: lay
+correct_choice_ids:
+- 19519323-90e8-4f1f-a9d0-0e6e81ab029d
+explanation: Après « going to », on utilise la base verbale « lay ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

@@ -1,0 +1,22 @@
+id: 5386264e-13a4-401f-8f87-92cda3db9b86
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu t''étires. »
+
+
+  You''re ____.'
+choices:
+- id: 0e18c3e7-2871-4bf3-ac00-2502ef54631a
+  text: stretched
+- id: 02c5c74d-f3a7-41d7-96b1-08069e731200
+  text: stretching
+- id: ee48abad-14f1-40e1-9fde-6d0c24f8dd7d
+  text: stretch
+- id: df83f414-b6fd-4b96-bc62-0f1d76ee511d
+  text: stretches
+correct_choice_ids:
+- 02c5c74d-f3a7-41d7-96b1-08069e731200
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « stretching ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

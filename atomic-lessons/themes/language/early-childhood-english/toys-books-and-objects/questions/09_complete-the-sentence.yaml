@@ -1,0 +1,22 @@
+id: 256e0a8e-9cf0-49bd-b47e-c393dc058d6a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Essaie d''attraper le jouet. »
+
+
+  Try to ____ for the toy.'
+choices:
+- id: 2e3bc424-7c76-420e-98ca-0bbd4a39aca0
+  text: reached
+- id: d8425bb0-37b1-4054-bda7-c42d95a47605
+  text: reaching
+- id: e056e012-ff47-4f58-aa39-f6b0bc7103dd
+  text: reach
+- id: 041df638-32ca-4d44-acaf-0f41f3b1e9cf
+  text: reaches
+correct_choice_ids:
+- e056e012-ff47-4f58-aa39-f6b0bc7103dd
+explanation: Après « Try to », on utilise la base verbale « reach ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

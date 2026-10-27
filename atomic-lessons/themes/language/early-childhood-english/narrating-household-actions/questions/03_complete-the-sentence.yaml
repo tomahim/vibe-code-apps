@@ -1,0 +1,22 @@
+id: 3824096a-5ef7-4a38-9cd8-ba468c173813
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais ouvrir ça. »
+
+
+  I''m going to ____ this.'
+choices:
+- id: 669c3d1b-df6f-4514-a5a6-98c2b8206e41
+  text: open
+- id: b04e2981-02c1-4075-8d88-226ec544209b
+  text: opened
+- id: 32d6e63d-bd67-4048-86df-0ec3821717aa
+  text: opening
+- id: 8c445432-479b-4805-91ab-229d46b1ff83
+  text: opens
+correct_choice_ids:
+- 669c3d1b-df6f-4514-a5a6-98c2b8206e41
+explanation: Après « going to », on utilise la base verbale « open ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

@@ -1,0 +1,22 @@
+id: 5ea3fd82-b9cf-4ad4-bb8c-98c093eeaee3
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « On va boutonner ton body. »
+
+
+  Let''s ____ up your onesie.'
+choices:
+- id: caae77ef-94e3-4d87-bdb8-5dbef53aa01c
+  text: buttons
+- id: e47a58f7-86da-42dd-bf29-a9319d6f0b98
+  text: buttoned
+- id: 1c9be0dc-5386-44e7-a510-ae3fd09151af
+  text: button
+- id: 3e76ebcb-b169-4a57-9fd9-72cf311a5884
+  text: buttoning
+correct_choice_ids:
+- 1c9be0dc-5386-44e7-a510-ae3fd09151af
+explanation: Après « Let's », on utilise la base verbale « button ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

@@ -1,0 +1,22 @@
+id: 26744504-5acc-4984-b033-be27786b22ce
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « La pièce est calme maintenant. »
+
+
+  The room is ____ now.'
+choices:
+- id: 6f6c7132-42e7-4088-aca5-777abcba01a7
+  text: dark
+- id: 33e201fe-1c3c-4840-8d2b-623c287d88b6
+  text: noisy
+- id: 61557525-27a5-4cab-a0f5-9ca29e6d71aa
+  text: bright
+- id: 00bb5cac-711f-4e58-aa0d-54bb56e30bb2
+  text: quiet
+correct_choice_ids:
+- 00bb5cac-711f-4e58-aa0d-54bb56e30bb2
+explanation: La traduction demande « quiet » (calme ou silencieux). « noisy » signifie bruyant; « bright » signifie lumineux; « dark » signifie sombre.
+archived: false

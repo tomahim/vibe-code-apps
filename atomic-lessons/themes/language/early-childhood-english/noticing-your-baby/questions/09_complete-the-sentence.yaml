@@ -1,0 +1,22 @@
+id: 891d267f-ef5a-47bd-88e3-5dcc9527e65c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu tournes la tête vers le son. »
+
+
+  You''re ____ your head toward the sound.'
+choices:
+- id: 5f9c02b9-2f5b-4cd9-9431-b2fa1bfc8170
+  text: turning
+- id: 9553f51f-756d-4eed-b875-6dd9e19f70cc
+  text: turns
+- id: 8a8f63d2-e4de-4b34-ad9a-4b2559d5245e
+  text: turned
+- id: 8019f3e7-8d03-4b1c-b575-38d7f64d983c
+  text: turn
+correct_choice_ids:
+- 5f9c02b9-2f5b-4cd9-9431-b2fa1bfc8170
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « turning ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

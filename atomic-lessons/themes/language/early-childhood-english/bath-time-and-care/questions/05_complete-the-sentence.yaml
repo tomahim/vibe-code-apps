@@ -1,0 +1,22 @@
+id: 7ab9795a-eca4-4d2c-a404-f6729d317829
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « On va prendre un bain. »
+
+
+  We''re going to ____ a bath.'
+choices:
+- id: e59ca188-8a8a-4275-bd0d-a717facd0a1f
+  text: took
+- id: cc71c9dd-7d9c-43c7-b414-d341d19fc487
+  text: take
+- id: 4997edbd-14e0-4a7f-997c-eebcac6a7ab2
+  text: takes
+- id: 7b7c210f-b8c8-4167-925c-5df1eb6a918b
+  text: taking
+correct_choice_ids:
+- cc71c9dd-7d9c-43c7-b414-d341d19fc487
+explanation: Après « going to », on utilise la base verbale « take ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

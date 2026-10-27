@@ -1,0 +1,22 @@
+id: fdd74c27-6f73-433a-adbe-35a8d080194a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Ton lait est presque prêt. »
+
+
+  Your milk is ____ ready.'
+choices:
+- id: da6b0f08-ae0e-407a-8803-c08648c3fab2
+  text: always
+- id: 81f7538a-2630-4b42-aa26-28453258dd3e
+  text: already
+- id: 46673eb9-09fc-4a81-81f1-9a2f0f78dd58
+  text: almost
+- id: 76abadc1-b40a-476b-af9f-26b2c0ab121f
+  text: still
+correct_choice_ids:
+- 46673eb9-09fc-4a81-81f1-9a2f0f78dd58
+explanation: La traduction demande « almost » (presque). « already » signifie déjà; « still » signifie encore ou toujours; « always » signifie toujours.
+archived: false

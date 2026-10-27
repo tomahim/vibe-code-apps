@@ -1,0 +1,22 @@
+id: 16eb68be-1ab8-4fd9-a8c5-6377f36d1249
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tourne la tête de ce côté. »
+
+
+  Turn your ____ this way.'
+choices:
+- id: 6a266f93-6cd3-4bc5-b286-add2cde75d61
+  text: back
+- id: 2d1f75c9-34e1-49bf-8025-8b1817ecba5c
+  text: head
+- id: 5764a960-358b-46c7-9e02-1dc029e5b049
+  text: hand
+- id: 3ba8d946-252b-44b2-b585-5b3999e17ef6
+  text: face
+correct_choice_ids:
+- 2d1f75c9-34e1-49bf-8025-8b1817ecba5c
+explanation: La traduction demande « head » (tête). « hand » signifie main; « face » signifie visage; « back » signifie dos.
+archived: false

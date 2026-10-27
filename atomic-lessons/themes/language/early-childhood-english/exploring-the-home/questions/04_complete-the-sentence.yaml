@@ -1,0 +1,22 @@
+id: 4efd7792-3d56-4eb2-be14-b11507f7541c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Je vais fermer la porte. »
+
+
+  I''m going to ____ the door.'
+choices:
+- id: 4f427958-30c4-4571-ace4-c214d0c0d59b
+  text: close
+- id: f8986af1-8a44-487a-a56f-e083f8617386
+  text: closing
+- id: 843d1747-1348-4482-b96d-640199de9efc
+  text: closes
+- id: 980fc1d5-a989-44a2-8b71-1fe43e37bf82
+  text: closed
+correct_choice_ids:
+- 4f427958-30c4-4571-ace4-c214d0c0d59b
+explanation: Après « going to », on utilise la base verbale « close ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

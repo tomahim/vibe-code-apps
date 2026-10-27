@@ -1,0 +1,22 @@
+id: 260449d7-a45d-4db2-9194-8c7403637472
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu es en sécurité. »
+
+
+  You''re ____.'
+choices:
+- id: 4cae7d2e-1dcc-4441-aaae-e2d37ca6eb3d
+  text: unsafe
+- id: 2b23276a-016c-4e47-8f18-3fbff0435f16
+  text: afraid
+- id: f8a63401-5383-4072-ab17-00b2f074acaf
+  text: safe
+- id: fc6bb432-e698-40a4-bdfe-fde54d99967f
+  text: alone
+correct_choice_ids:
+- f8a63401-5383-4072-ab17-00b2f074acaf
+explanation: La traduction demande « safe » (en sécurité). « unsafe » signifie en danger; « afraid » signifie effrayé; « alone » signifie seul.
+archived: false

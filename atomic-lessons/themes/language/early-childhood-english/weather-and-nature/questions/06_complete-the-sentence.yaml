@@ -1,0 +1,22 @@
+id: 0e3a81c9-b275-4385-a68d-77fb75c66c8f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « L''oiseau vole. »
+
+
+  The bird is ____.'
+choices:
+- id: 75154ebe-88b2-4455-a190-6dfd0bb03cec
+  text: flies
+- id: 7a269c6d-2978-4fe8-ad1e-4f6fc251f312
+  text: flying
+- id: d6ebda93-b831-4029-9413-c3c6bc75d6f0
+  text: fly
+- id: a38ea0f7-7a9a-4546-abf9-07f9c6ebe556
+  text: flew
+correct_choice_ids:
+- 7a269c6d-2978-4fe8-ad1e-4f6fc251f312
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « flying ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

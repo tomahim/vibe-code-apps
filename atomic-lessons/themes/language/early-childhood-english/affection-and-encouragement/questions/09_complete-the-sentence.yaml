@@ -1,0 +1,22 @@
+id: f7bfcf50-a268-4f9c-8db5-ee206ebff46a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Tu peux réessayer. »
+
+
+  You can ____ again.'
+choices:
+- id: 9adf6825-3274-4643-9309-39a93749a412
+  text: trying
+- id: de8d8b1c-c14c-4a5b-9762-40c5ebf3de9f
+  text: tries
+- id: 3bd9986d-7ced-4cef-bd5a-06e4f1e68cfa
+  text: tried
+- id: c7ef5c3f-962a-4b96-b71d-4dcb51660f9b
+  text: try
+correct_choice_ids:
+- c7ef5c3f-962a-4b96-b71d-4dcb51660f9b
+explanation: Après « You can », on utilise la base verbale « try ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false

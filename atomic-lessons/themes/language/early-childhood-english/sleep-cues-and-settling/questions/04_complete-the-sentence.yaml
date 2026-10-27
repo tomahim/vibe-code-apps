@@ -1,0 +1,22 @@
+id: 2f2822db-9558-4c5c-983f-a1ba48cfaec2
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Complétez pour dire : « Tu commences à être fatigué. »
+
+
+  You''re starting to get ____.'
+choices:
+- id: f4a7c5ee-f7fa-4fdd-8e51-77283434f745
+  text: awake
+- id: de230cb8-e98b-47b5-b59e-7a13efefe7b1
+  text: rested
+- id: 035b5620-3cf2-4035-9fb8-3c7f7f254f61
+  text: hungry
+- id: 3e507abe-35ba-4f64-a26e-5a4ca3135ba9
+  text: tired
+correct_choice_ids:
+- 3e507abe-35ba-4f64-a26e-5a4ca3135ba9
+explanation: La traduction demande « tired » (fatigué). « awake » signifie réveillé; « rested » signifie reposé; « hungry » signifie affamé.
+archived: false

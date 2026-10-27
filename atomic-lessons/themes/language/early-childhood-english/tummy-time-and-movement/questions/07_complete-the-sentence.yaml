@@ -1,0 +1,22 @@
+id: b7c6a76f-0662-4a4e-b997-577cfe7d147d
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Complétez pour dire : « Tu deviens fort. »
+
+
+  You''re ____ stronger.'
+choices:
+- id: d443c21f-59e4-47e5-afd3-548f2ef4a2e5
+  text: got
+- id: 78a500fa-10ec-43d4-8ee2-9c8fca5fd489
+  text: getting
+- id: 515215bc-4633-4f4f-a20d-8c0db3d4692f
+  text: gets
+- id: ed1ba7ad-3b35-4ca1-93cb-76458012b921
+  text: get
+correct_choice_ids:
+- 78a500fa-10ec-43d4-8ee2-9c8fca5fd489
+explanation: 'Pour décrire l’action en cours après « am/is/are », on utilise la forme en -ing : « getting ». Les autres formes ne construisent pas ce présent progressif.'
+archived: false

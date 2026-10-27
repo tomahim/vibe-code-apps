@@ -1,0 +1,22 @@
+id: 1c315c72-df8e-46ed-b657-d1b7a995ad2c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Complétez pour dire : « Je vais apporter ta couverture. »
+
+
+  I''m going to ____ your blanket.'
+choices:
+- id: 3c9634f1-0dd1-4d63-8300-d77baa1c6a66
+  text: brought
+- id: e834a4d5-2496-482e-84d9-3fcd2376b1e5
+  text: bringing
+- id: 840396f0-915d-4c33-bb1b-519121b8e6f0
+  text: bring
+- id: 7e668e1e-8332-450d-8257-ab811de48e6c
+  text: brings
+correct_choice_ids:
+- 840396f0-915d-4c33-bb1b-519121b8e6f0
+explanation: Après « going to », on utilise la base verbale « bring ». Les formes fléchies ou un second « to » ne conviennent pas ici.
+archived: false
