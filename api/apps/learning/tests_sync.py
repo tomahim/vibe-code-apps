@@ -102,11 +102,14 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertEqual(lesson.introduction_markdown, "Lesson intro.")
         card = Card.objects.get()
         self.assertEqual(card.lesson, lesson)
+        self.assertEqual(card.title, "Wake up")
         self.assertIn("**Good morning.**", card.body_markdown)
         self.assertEqual(len(card.content_hash), 64)
         self.assertTrue(card.source_path.endswith("cards/01_expressions.md"))
+        self.assertEqual(learning_path.introduction_markdown, "Intro body.")
         question = Question.objects.get()
         self.assertEqual(question.lesson, lesson)
+        self.assertEqual(question.after_card_position, 1)
         self.assertEqual(len(question.options), 4)
         self.assertEqual(question.answer, CHOICE_IDS[0])
         log = SyncLog.objects.get()
@@ -195,6 +198,19 @@ class SyncAtomicLessonsTests(TestCase):
             run_sync(root, "7" * 40)
         self.assertTrue(LearningPath.objects.get().published)
         self.assertFalse(Card.objects.get().published)
+
+    def test_question_checkpoint_must_reference_a_card_in_the_lesson(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            question_file = root / "themes/language/early-english/greetings/questions/01_complete.yaml"
+            question_file.write_text(
+                question_file.read_text(encoding="utf-8").replace("after_card_position: 1", "after_card_position: 5"),
+                encoding="utf-8",
+            )
+            with self.assertRaises(CommandError):
+                run_sync(root, "8" * 40)
+        self.assertEqual(Question.objects.count(), 0)
+        self.assertEqual(SyncLog.objects.count(), 0)
 
     def test_database_rows_missing_from_the_library_are_reported_not_touched(self):
         orphan_id = uuid.uuid4()

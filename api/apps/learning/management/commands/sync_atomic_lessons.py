@@ -269,8 +269,12 @@ class Command(BaseCommand):
             if not isinstance(choice, dict) or "id" not in choice or "text" not in choice:
                 raise CommandError(f"{location}.choices[{index}]: each choice needs id and text")
             options.append({"id": str(choice["id"]), "text": str(choice["text"])})
+        checkpoint = metadata.get("after_card_position")
+        if not isinstance(checkpoint, int) or isinstance(checkpoint, bool) or checkpoint < 1:
+            raise CommandError(f"{location}.after_card_position: expected a positive integer, got {checkpoint!r}")
         return {
             "type": Question.Type.MULTIPLE_CHOICE,
+            "after_card_position": checkpoint,
             "prompt": str(self.require(metadata, "prompt", location)),
             "options": options,
             "answer": str(correct[0]),
@@ -304,6 +308,7 @@ class Command(BaseCommand):
             if element["kind"] in ("theme", "learning_path", "lesson"):
                 desired["title"] = str(self.require(metadata, "title", location))
                 desired["description"] = str(metadata.get("description") or "")
+                desired["introduction_markdown"] = element["body"]
                 desired.update(
                     self.image_fields(
                         metadata,
@@ -318,11 +323,11 @@ class Command(BaseCommand):
                 desired["theme"] = parent
             elif element["kind"] == "lesson":
                 desired["learning_path"] = parent
-                desired["introduction_markdown"] = element["body"]
             elif element["kind"] == "card":
                 if not element["body"]:
                     raise CommandError(f"{location}: card body is empty")
                 desired["lesson"] = parent
+                desired["title"] = str(self.require(metadata, "title", location))
                 desired["body_markdown"] = element["body"]
                 desired.update(
                     self.image_fields(

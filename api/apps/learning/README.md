@@ -37,7 +37,7 @@ Content primary keys are one-to-one references to the UUID registry (`entity`, s
 
 `python manage.py sync_atomic_lessons` upserts the `atomic-lessons/` library into these tables. It reuses the content checkers, validates every row with `full_clean()` inside one transaction, keys rows by the metadata UUIDs, records provenance (source path, SHA-256, last-changed commit) and writes one `SyncLog` row per synced commit. Re-running the same commit is a no-op; `--dry-run` validates and rolls back. The `Sync atomic lessons to the database` workflow dry-runs the import on pull requests and publishes to Neon on merges to `master` using the `DATABASE_URL` Actions secret. Retired content keeps its row with `archived: true`; nothing is deleted. Publication is effective down the hierarchy: an element is `published` only when neither it nor its parent is archived, so retiring a path or lesson makes its whole subtree unavailable while children keep their own archive flags.
 
-Not mapped by the schema, therefore not imported: card `title`, question `after_card_position`/`selection`, and theme/learning-path Markdown bodies.
+All authored metadata is imported: card `title`, theme/path/lesson introductions, and question checkpoints (`after_card_position`). Question `selection` must be `single` (the schema stores one answer per question) and is not stored.
 
 ## Checks
 
