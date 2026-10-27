@@ -54,3 +54,27 @@ def path_detail(request, path_id):
                          "lessons": [lesson_summary(l, state) for l in lessons],
                          "next_lesson_id": next((str(l.pk) for l in lessons
                                                  if not state.progress([l])["completed"]), None)})
+
+
+@never_cache
+@require_GET
+@jwt_required
+def lesson_detail(request, lesson_id):
+    from django.shortcuts import get_object_or_404
+    from .api import checkpoint_questions, lesson_summary, next_step, public_question
+    lesson = get_object_or_404(visible(Lesson).select_related("learning_path__theme"), pk=lesson_id)
+    state = LearnerState(request.user)
+    return JsonResponse({"lesson": lesson_summary(lesson, state),
+                         "learning_path": described(lesson.learning_path),
+                         "theme": described(lesson.learning_path.theme),
+                         "cards": [{"id": str(c.pk), "position": c.position, "title": c.title,
+                                    "body_markdown": c.body_markdown,
+                                    "illustration_path": c.illustration_path,
+                                    "illustration_alt": c.illustration_alt,
+                                    "completed_at": state.completed[c.pk].isoformat()
+                                    if c.pk in state.completed else None}
+                                   for c in state.cards if c.lesson_id == lesson.pk],
+                         "questions": [{**public_question(q),
+                                        "completed": (lesson.pk, q.after_card_position) in state.passed}
+                                       for q in checkpoint_questions(state, lesson)],
+                         "next_step": next_step(state, lesson)})

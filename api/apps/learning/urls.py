@@ -6,4 +6,5 @@ urlpatterns = [
     path("themes/", views.themes, name="learning-themes"),
     path("themes/<uuid:theme_id>/", views.theme_detail, name="learning-theme"),
     path("paths/<uuid:path_id>/", views.path_detail, name="learning-path"),
+    path("lessons/<uuid:lesson_id>/", views.lesson_detail, name="learning-lesson"),
 ]

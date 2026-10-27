@@ -29,6 +29,7 @@ def described(row):
 class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
     def __init__(self, user):
+        self.user_id = user.pk
         self.cards = list(visible(Card))
         self.questions = list(visible(Question))
         self.completed = dict(CardProgress.objects.filter(
@@ -57,3 +58,32 @@ class LearnerState:
 def lesson_summary(lesson, state):
     return {**described(lesson), "learning_path_id": str(lesson.learning_path_id),
             "progress": state.progress([lesson])}
+
+
+def checkpoint_questions(state, lesson):
+    """Stable selection per learner/checkpoint; no answer-key-dependent selection."""
+    import hashlib
+    pools = {}
+    for question in state.questions:
+        if question.lesson_id == lesson.pk:
+            pools.setdefault(question.after_card_position, []).append(question)
+    return [min(pool, key=lambda q: hashlib.sha256(
+        f"{state.user_id}:{lesson.pk}:{position}:{q.pk}".encode(),
+    ).digest()) for position, pool in sorted(pools.items())]
+
+
+def public_question(question):
+    return {"id": str(question.pk), "lesson_id": str(question.lesson_id),
+            "position": question.position, "after_card_position": question.after_card_position,
+            "type": question.type, "prompt": question.prompt,
+            "options": [{"id": o["id"], "text": o["text"]} for o in question.options]}
+
+
+def next_step(state, lesson):
+    questions = {q.after_card_position: q for q in checkpoint_questions(state, lesson)}
+    for card in (c for c in state.cards if c.lesson_id == lesson.pk):
+        if card.pk not in state.completed:
+            return {"type": "card", "id": str(card.pk)}
+        if card.position in questions and (lesson.pk, card.position) not in state.passed:
+            return {"type": "question", "id": str(questions[card.position].pk)}
+    return None

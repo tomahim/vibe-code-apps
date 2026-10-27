@@ -75,3 +75,19 @@ class LearningAPITests(TestCase):
         self.assertEqual(result["theme"]["id"], str(self.theme.pk))
         Theme.objects.filter(pk=self.theme.pk).update(published=False)
         self.assertEqual(self.client.get(url).status_code, 404)
+
+    def test_lesson_content_pool_selection_and_answer_safety(self):
+        self.question.options[0]["correct"] = True
+        self.question.save()
+        url = f"/api/learning/lessons/{self.lesson.pk}/"
+        result = self.client.get(url).json()
+        self.assertEqual(result["cards"][0]["body_markdown"], "Hello")
+        self.assertEqual(len(result["questions"]), 1)
+        self.assertNotIn("answer", result["questions"][0])
+        self.assertNotIn("explanation", result["questions"][0])
+        self.assertNotIn("correct", result["questions"][0]["options"][0])
+        self.assertEqual(result["next_step"], {"type": "card", "id": str(self.card.pk)})
+        self.assertEqual(result, self.client.get(url).json())
+        self.theme.entity.archived = True
+        self.theme.entity.save()
+        self.assertEqual(self.client.get(url).status_code, 404)

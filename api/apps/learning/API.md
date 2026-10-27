@@ -19,3 +19,7 @@ Returns `{theme, learning_paths}` in position order, with learner progress per p
 ## GET paths/<uuid>/
 
 Returns `{learning_path, theme, lessons, next_lesson_id}`. Lessons are ordered for the trail, include current-user completion, and remain visible even if not yet started. The next lesson is the first incomplete lesson, not a hard path unlock rule.
+
+## GET lessons/<uuid>/
+
+Returns `{lesson, learning_path, theme, cards, questions, next_step}` for introduction, breadcrumbs, reading and resume. Cards include body, artwork and this user's completion timestamp. Questions include prompt and four `{id,text}` options, never answers or explanations. Exactly one alternative per checkpoint is selected deterministically from a hash of learner/lesson/checkpoint/question IDs. This stays stable across resume, while changes to pool membership may change selection. Completion is per checkpoint, independent of alternative. `next_step` is `{type: "card"|"question", id}` or null on completion. The frontend should refetch on resume and after writes.
