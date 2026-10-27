@@ -1,5 +1,6 @@
 import json
 import logging
+from functools import wraps
 from urllib.parse import urlsplit
 
 from django.conf import settings
@@ -24,6 +25,33 @@ def review_settings():
     return token, settings.GITHUB_REVIEW_REPO
 
 
+def staff_required(view):
+    """Limit the review app to staff reviewers.
+
+    Commenting publishes through the repo owner's server-side GitHub token and
+    the repo may go private, so every endpoint (reads included) requires a
+    staff account, not just any signed-in learner account.
+    """
+
+    @wraps(view)
+    def wrapped(request, *args, **kwargs):
+        if not request.user.is_staff:
+            return error("Content review is limited to reviewers.", 403)
+        return view(request, *args, **kwargs)
+
+    return wrapped
+
+
+def valid_content_path(path):
+    """Confinement check that rejects traversal, not just foreign prefixes."""
+    parts = path.split("/")
+    return (
+        len(parts) > 1
+        and parts[0] == CONTENT_ROOT
+        and all(part not in ("", ".", "..") for part in parts)
+    )
+
+
 def same_origin(request):
     """Browsers always send Origin on cross-site POSTs; reject a mismatching one."""
     origin = request.headers.get("Origin")
@@ -33,6 +61,7 @@ def same_origin(request):
 @never_cache
 @require_GET
 @jwt_required
+@staff_required
 def pull_requests(request):
     """Open pull requests, annotated with their atomic-lessons change counts."""
     token, repo = review_settings()
@@ -64,6 +93,7 @@ def pull_requests(request):
 @never_cache
 @require_GET
 @jwt_required
+@staff_required
 def pull_request_detail(request, number):
     """Every atomic-lessons unit changed by the pull request, parsed from the
     PR head tree (never from the database), with its diff patch."""
@@ -97,6 +127,7 @@ MAX_COMMENT_LENGTH = 5000
 @csrf_exempt
 @require_POST
 @jwt_required
+@staff_required
 def post_comment(request, number):
     """Post the reviewer's feedback as a comment on the pull request.
 
@@ -124,7 +155,7 @@ def post_comment(request, number):
     kind = data.get("kind") if isinstance(data.get("kind"), str) else ""
     title = data.get("title") if isinstance(data.get("title"), str) else ""
     path = data.get("path") if isinstance(data.get("path"), str) else ""
-    if path and not path.startswith(f"{CONTENT_ROOT}/"):
+    if path and not valid_content_path(path):
         return error("path must point into the atomic-lessons library.", 400)
 
     subject = "Pull request"

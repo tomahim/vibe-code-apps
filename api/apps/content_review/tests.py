@@ -25,7 +25,7 @@ class PullRequestListTests(TestCase):
     url = "/api/apps/content-review/prs"
 
     def setUp(self):
-        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
+        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password", is_staff=True)
         self.token = issue_token(self.user)
 
     def get(self, token=None):
@@ -133,7 +133,7 @@ TEXTS = {
 @override_settings(GITHUB_REVIEW_TOKEN="t", GITHUB_REVIEW_REPO="o/r")
 class PullRequestDetailTests(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
+        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password", is_staff=True)
         self.token = issue_token(self.user)
 
     def url(self, number=7):
@@ -144,6 +144,11 @@ class PullRequestDetailTests(TestCase):
 
     def test_requires_a_token(self):
         self.assertEqual(Client().get(self.url()).status_code, 401)
+
+    def test_non_staff_users_cannot_read_detail(self):
+        learner = get_user_model().objects.create_user("learner", "l@example.com", "test-only-password")
+        response = Client().get(self.url(), HTTP_AUTHORIZATION=f"Bearer {issue_token(learner)}")
+        self.assertEqual(response.status_code, 403)
 
     @override_settings(GITHUB_REVIEW_TOKEN="")
     def test_not_configured(self):
@@ -228,13 +233,32 @@ class PullRequestDetailTests(TestCase):
     def test_unknown_pr_is_a_404(self, _pr):
         self.assertEqual(self.get(404).status_code, 404)
 
+    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.list_pr_files")
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
+    def test_changed_file_missing_from_head_tree_is_tolerated(self, _pr, list_files, _tree):
+        # Stale diff data: GitHub lists the file but the head tree no longer has it.
+        list_files.return_value = [
+            self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/09_gone.md", "modified"),
+        ]
+        data = self.get().json()
+        unit = data["units"][0]
+        self.assertEqual(unit["change"], "modified")
+        self.assertIsNone(unit["title"])
+        self.assertIsNone(unit["parse_error"])
+
+    @mock.patch("apps.content_review.views.github.list_pr_files", side_effect=github.GitHubError("down"))
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
+    def test_github_failure_is_a_502(self, _pr, _files):
+        self.assertEqual(self.get().status_code, 502)
+
 
 @override_settings(GITHUB_REVIEW_TOKEN="t", GITHUB_REVIEW_REPO="o/r")
 class PostCommentTests(TestCase):
     url = "/api/apps/content-review/prs/7/comments"
 
     def setUp(self):
-        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
+        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password", is_staff=True)
         self.token = issue_token(self.user)
 
     def post(self, data, token=None, **extra):
@@ -244,6 +268,14 @@ class PostCommentTests(TestCase):
     def test_requires_a_token(self):
         response = Client().post(self.url, '{"text": "hi"}', content_type="application/json")
         self.assertEqual(response.status_code, 401)
+
+    def test_non_staff_users_cannot_comment(self):
+        learner = get_user_model().objects.create_user("learner", "l@example.com", "test-only-password")
+        response = Client().post(
+            self.url, '{"text": "hi"}', content_type="application/json",
+            HTTP_AUTHORIZATION=f"Bearer {issue_token(learner)}",
+        )
+        self.assertEqual(response.status_code, 403)
 
     @override_settings(GITHUB_REVIEW_TOKEN="")
     def test_not_configured(self):
@@ -256,6 +288,8 @@ class PostCommentTests(TestCase):
         self.assertEqual(self.post({}).status_code, 400)
         self.assertEqual(self.post({"text": "x" * 5001}).status_code, 400)
         self.assertEqual(self.post({"text": "ok", "path": "ui/src/App.jsx"}).status_code, 400)
+        self.assertEqual(self.post({"text": "ok", "path": "atomic-lessons/../api/config/settings.py"}).status_code, 400)
+        self.assertEqual(self.post({"text": "ok", "path": "atomic-lessons/"}).status_code, 400)
         response = Client().post(
             self.url, "x", content_type="text/plain",
             HTTP_AUTHORIZATION=f"Bearer {self.token}",
@@ -295,3 +329,7 @@ class PostCommentTests(TestCase):
     @mock.patch("apps.content_review.views.github.post_pr_comment", side_effect=github.NotFound("nope"))
     def test_unknown_pr_is_a_404(self, _post):
         self.assertEqual(self.post({"text": "hi"}, HTTP_ORIGIN="http://testserver").status_code, 404)
+
+    @mock.patch("apps.content_review.views.github.post_pr_comment", side_effect=github.GitHubError("down"))
+    def test_github_failure_is_a_502(self, _post):
+        self.assertEqual(self.post({"text": "hi"}, HTTP_ORIGIN="http://testserver").status_code, 502)
