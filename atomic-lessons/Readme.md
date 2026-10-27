@@ -1,6 +1,6 @@
 # Atomic lessons authoring guide
 
-This folder is the canonical source for learning content. Themes contain learning paths, paths contain lessons, and each lesson owns cards and questions. Content is authored here and can later be imported into Neon; this PR does not implement that importer.
+This folder is the canonical source for learning content. Themes contain learning paths, paths contain lessons, and each lesson owns cards and questions. Content is authored here and synchronized into the Neon database: every merge to `master` that changes this folder runs the `Sync atomic lessons to the database` workflow, which upserts the library into the `lg_` tables via `api/apps/learning/management/commands/sync_atomic_lessons.py` (one SyncLog row per commit, nothing is ever deleted - retiring content uses `archived: true`). The workflow authenticates with the repository's `DATABASE_URL` Actions secret.
 
 ## Folder structure
 

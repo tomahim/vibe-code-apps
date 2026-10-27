@@ -31,6 +31,12 @@ Content primary keys are one-to-one references to the UUID registry (`entity`, s
 - Model `full_clean()` validates registry kind immutability, subtype-kind matching, archive/publication consistency, useful image alt text, and the four-choice/answer shape. Django does **not** call `full_clean()` on `save()`, and bulk writes bypass it. These cross-table/JSON rules are **not database constraints**; the future publisher must validate the complete manifest and call validation inside its transaction. No publishing service or triggers are included in this table-only PR.
 - The schema stores completion and answer history only. Lesson completion/review due dates must later be derived as specified; no lesson-progress or review-schedule tables are added.
 
+## Content synchronization
+
+`python manage.py sync_atomic_lessons` upserts the `atomic-lessons/` library into these tables. It reuses the content checkers, validates every row with `full_clean()` inside one transaction, keys rows by the metadata UUIDs, records provenance (source path, SHA-256, last-changed commit) and writes one `SyncLog` row per synced commit. Re-running the same commit is a no-op; `--dry-run` validates and rolls back. The `Sync atomic lessons to the database` workflow dry-runs the import on pull requests and publishes to Neon on merges to `master` using the `DATABASE_URL` Actions secret. Retired content keeps its row with `archived: true`; nothing is deleted.
+
+Not mapped by the schema, therefore not imported: card `title`, question `after_card_position`/`selection`, and theme/learning-path Markdown bodies.
+
 ## Checks
 
 ```sh

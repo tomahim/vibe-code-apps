@@ -1,0 +1,67 @@
+name: Sync atomic lessons to the database
+
+on:
+  pull_request:
+    paths:
+      - 'atomic-lessons/**'
+      - 'api/apps/learning/**'
+      - '.github/workflows/sync-atomic-lessons.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'atomic-lessons/**'
+      - 'api/apps/learning/**'
+      - '.github/workflows/sync-atomic-lessons.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atomic-lessons-sync
+  cancel-in-progress: false
+
+jobs:
+  import-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # provenance reads each file's last-changed commit
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            api/requirements.txt
+            atomic-lessons/requirements.txt
+      - run: python -m pip install -r api/requirements.txt -r atomic-lessons/requirements.txt
+      - name: Prove the full library imports into a scratch database
+        working-directory: api
+        run: |
+          python manage.py migrate --noinput
+          python manage.py sync_atomic_lessons --commit "${{ github.sha }}" --dry-run
+
+  sync:
+    # Push to master (and manual dispatch on master) publishes content to Neon.
+    # The lg_ tables are created by the API deployment, which runs migrations.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: import-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            api/requirements.txt
+            atomic-lessons/requirements.txt
+      - run: python -m pip install -r api/requirements.txt -r atomic-lessons/requirements.txt
+      - name: Sync content to the Neon database
+        working-directory: api
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python manage.py sync_atomic_lessons --commit "${{ github.sha }}"
