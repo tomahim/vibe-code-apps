@@ -156,7 +156,6 @@ function UnitDetail({ unit, onFeedback }) {
           <ChangeChip change={unit.change} />
           {unit.archived && <span className="kind-chip kind-archived">archived</span>}
           <h2>{unit.title || unit.path.split("/").pop()}</h2>
-          <p className="unit-path">{unit.path}</p>
         </div>
         <div className="view-toggle" role="tablist">
           <button type="button" className={view === "preview" ? "active" : ""} onClick={() => setView("preview")}>
@@ -167,6 +166,7 @@ function UnitDetail({ unit, onFeedback }) {
           </button>
         </div>
       </header>
+      <p className="unit-path">{unit.path}</p>
 
       {unit.change === "removed" && <p className="unit-banner">This file is removed by the pull request.</p>}
       {unit.parse_error && <p className="unit-banner unit-banner-warning">Could not parse the metadata: {unit.parse_error}</p>}

@@ -248,7 +248,9 @@
 }
 
 .unit-path {
-  margin: 0;
+  /* Full content width below the header: long paths must not squeeze into
+     the column shared with the Preview/Changes toggle on narrow screens. */
+  margin: -6px 0 14px;
   font-family: ui-monospace, monospace;
   font-size: 12px;
   color: #9a9587;
