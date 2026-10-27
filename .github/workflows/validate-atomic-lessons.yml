@@ -1,4 +1,4 @@
-name: Atomic lessons UUID checks
+name: Atomic lessons content checks
 
 on:
   pull_request:
@@ -26,7 +26,9 @@ jobs:
           cache-dependency-path: atomic-lessons/requirements.txt
       - name: Install the YAML parser
         run: python -m pip install -r atomic-lessons/requirements.txt
-      - name: Test the UUID checker
+      - name: Test the content checkers
         run: python -m unittest discover -s atomic-lessons -p 'test_*.py'
       - name: Require globally unique UUIDv4 IDs on every content element
         run: python atomic-lessons/check_uuids.py
+      - name: Require an illustration for every learning path
+        run: python atomic-lessons/check_images.py

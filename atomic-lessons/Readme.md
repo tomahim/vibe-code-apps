@@ -12,6 +12,7 @@ atomic-lessons/
       index.md
       early-childhood-english/
         index.md
+        cover.png                         # required learning-path illustration
         morning-greetings/
           index.md
           cards/
@@ -44,7 +45,16 @@ archived: false
 ---
 ```
 
-Cards use the same front matter. Optional `image` and `image_alt` fields may reference a real repository-local asset; always supply useful alt text. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
+Every learning path's `index.md` must have an `image` filename and useful `image_alt` text. The image file must sit directly beside that index, for example:
+
+```yaml
+image: cover.png
+image_alt: A caregiver sharing a picture book with a baby.
+```
+
+Use PNG, JPEG, WebP, GIF, or SVG. Commit the image alongside the index; URLs, parent paths, nested asset paths, and links outside the learning path folder are not accepted. Other content elements may use optional repository-local images with alt text.
+
+Cards use the same front matter. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
 
 For expression lessons, put exactly four expression pairs in each card. Write the English in bold followed by its French translation as an italic blockquote. Keep translations precise and American English natural:
 
@@ -68,10 +78,11 @@ Install `PyYAML==6.0.2`, then run from the repository root:
 
 ```sh
 python atomic-lessons/check_uuids.py
+python atomic-lessons/check_images.py
 python -m unittest discover -s atomic-lessons -p 'test_*.py'
 ```
 
-The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
+The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. The image check requires an existing sibling image and alt text for every learning path, checks the image header, and rejects paths outside that folder. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
 
 ## Early Childhood English inventory and provenance
 
