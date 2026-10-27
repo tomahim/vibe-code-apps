@@ -1,3 +1,4 @@
+import json
 from unittest import mock
 
 from django.contrib.auth import get_user_model
@@ -226,3 +227,71 @@ class PullRequestDetailTests(TestCase):
     @mock.patch("apps.content_review.views.github.get_pr", side_effect=github.NotFound("nope"))
     def test_unknown_pr_is_a_404(self, _pr):
         self.assertEqual(self.get(404).status_code, 404)
+
+
+@override_settings(GITHUB_REVIEW_TOKEN="t", GITHUB_REVIEW_REPO="o/r")
+class PostCommentTests(TestCase):
+    url = "/api/apps/content-review/prs/7/comments"
+
+    def setUp(self):
+        self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
+        self.token = issue_token(self.user)
+
+    def post(self, data, token=None, **extra):
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {token if token is not None else self.token}"}
+        return Client().post(self.url, json.dumps(data), content_type="application/json", **headers, **extra)
+
+    def test_requires_a_token(self):
+        response = Client().post(self.url, '{"text": "hi"}', content_type="application/json")
+        self.assertEqual(response.status_code, 401)
+
+    @override_settings(GITHUB_REVIEW_TOKEN="")
+    def test_not_configured(self):
+        self.assertEqual(self.post({"text": "hi"}).status_code, 503)
+
+    def test_rejects_bad_input(self):
+        self.assertEqual(self.post({"text": ""}).status_code, 400)
+        self.assertEqual(self.post({"text": "   "}).status_code, 400)
+        self.assertEqual(self.post({"text": 3}).status_code, 400)
+        self.assertEqual(self.post({}).status_code, 400)
+        self.assertEqual(self.post({"text": "x" * 5001}).status_code, 400)
+        self.assertEqual(self.post({"text": "ok", "path": "ui/src/App.jsx"}).status_code, 400)
+        response = Client().post(
+            self.url, "x", content_type="text/plain",
+            HTTP_AUTHORIZATION=f"Bearer {self.token}",
+        )
+        self.assertEqual(response.status_code, 415)
+
+    def test_rejects_cross_origin(self):
+        self.assertEqual(self.post({"text": "hi"}, HTTP_ORIGIN="https://evil.example").status_code, 403)
+
+    @mock.patch("apps.content_review.views.github.post_pr_comment")
+    def test_posts_unit_comment_with_context(self, post_comment):
+        post_comment.return_value = {"id": 42, "url": "https://github.com/o/r/pull/7#issuecomment-42"}
+        response = self.post(
+            {
+                "text": "Typo in the French translation.",
+                "kind": "card",
+                "title": "Choose clothes",
+                "path": "atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md",
+            },
+            HTTP_ORIGIN="http://testserver",
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["comment"]["url"], "https://github.com/o/r/pull/7#issuecomment-42")
+        body = post_comment.call_args.args[3]
+        self.assertIn('card "Choose clothes"', body)
+        self.assertIn("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md", body)
+        self.assertIn("Typo in the French translation.", body)
+
+    @mock.patch("apps.content_review.views.github.post_pr_comment")
+    def test_posts_general_comment_without_unit(self, post_comment):
+        post_comment.return_value = {"id": 43, "url": "https://github.com/o/r/pull/7#issuecomment-43"}
+        response = self.post({"text": "Looks good overall."}, HTTP_ORIGIN="http://testserver")
+        self.assertEqual(response.status_code, 201)
+        body = post_comment.call_args.args[3]
+        self.assertEqual(body, "**Content review** - Pull request\n\nLooks good overall.")
+
+    @mock.patch("apps.content_review.views.github.post_pr_comment", side_effect=github.NotFound("nope"))
+    def test_unknown_pr_is_a_404(self, _post):
+        self.assertEqual(self.post({"text": "hi"}, HTTP_ORIGIN="http://testserver").status_code, 404)

@@ -88,3 +88,58 @@ def pull_request_detail(request, number):
     except Exception:
         logger.exception("review detail for PR %s failed", number)
         return error("Could not load the pull request from GitHub.", 502)
+
+
+MAX_COMMENT_LENGTH = 5000
+
+
+@never_cache
+@csrf_exempt
+@require_POST
+@jwt_required
+def post_comment(request, number):
+    """Post the reviewer's feedback as a comment on the pull request.
+
+    The comment is published by the GitHub account behind GITHUB_REVIEW_TOKEN,
+    with the reviewed unit's kind, title and file path quoted for context.
+    """
+    token, repo = review_settings()
+    if not token:
+        return error("Content review is not configured (GITHUB_REVIEW_TOKEN is not set on the api service).", 503)
+    if not same_origin(request):
+        return error("Cross-origin request refused.", 403)
+    if request.content_type != "application/json":
+        return error("Use application/json.", 415)
+    try:
+        data = json.loads(request.body)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return error("Invalid JSON.", 400)
+    text = data.get("text") if isinstance(data, dict) else None
+    if not isinstance(text, str) or not text.strip():
+        return error("text is required.", 400)
+    text = text.strip()
+    if len(text) > MAX_COMMENT_LENGTH:
+        return error(f"text must be at most {MAX_COMMENT_LENGTH} characters.", 400)
+
+    kind = data.get("kind") if isinstance(data.get("kind"), str) else ""
+    title = data.get("title") if isinstance(data.get("title"), str) else ""
+    path = data.get("path") if isinstance(data.get("path"), str) else ""
+    if path and not path.startswith(f"{CONTENT_ROOT}/"):
+        return error("path must point into the atomic-lessons library.", 400)
+
+    subject = "Pull request"
+    if path:
+        label = f'{kind} "{title}"' if kind and title else (title or kind or "file")
+        subject = f"{label} - `{path}`"
+    body = f"**Content review** - {subject}\n\n{text}"
+    try:
+        comment = github.post_pr_comment(token, repo, number, body)
+        return JsonResponse({"comment": comment}, status=201)
+    except github.NotFound:
+        return error("Unknown pull request.", 404)
+    except github.GitHubError as exc:
+        logger.warning("comment on PR %s failed: %s", number, exc)
+        return error("Could not post the comment to GitHub.", 502)
+    except Exception:
+        logger.exception("comment on PR %s failed", number)
+        return error("Could not post the comment to GitHub.", 502)
