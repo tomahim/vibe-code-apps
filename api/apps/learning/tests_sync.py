@@ -162,6 +162,40 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertEqual(ContentEntity.objects.count(), 0)
         self.assertEqual(SyncLog.objects.count(), 0)
 
+    def test_archiving_a_parent_unpublishes_the_whole_subtree(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            run_sync(root, "4" * 40)
+            path_index = root / "themes/language/early-english/index.md"
+            original = path_index.read_text(encoding="utf-8")
+            path_index.write_text(original.replace("archived: false", "archived: true"), encoding="utf-8")
+            run_sync(root, "5" * 40)
+            self.assertFalse(LearningPath.objects.get().published)
+            self.assertFalse(Lesson.objects.get().published)
+            self.assertFalse(Card.objects.get().published)
+            self.assertFalse(Question.objects.get().published)
+            # The children keep their own archive flags; only publication propagates.
+            self.assertFalse(ContentEntity.objects.get(pk=CARD_ID).archived)
+            self.assertFalse(ContentEntity.objects.get(pk=LESSON_ID).archived)
+            # Un-archiving the parent republishes the subtree.
+            path_index.write_text(original, encoding="utf-8")
+            run_sync(root, "6" * 40)
+        self.assertTrue(LearningPath.objects.get().published)
+        self.assertTrue(Card.objects.get().published)
+        self.assertTrue(Question.objects.get().published)
+
+    def test_archived_card_stays_unpublished_under_a_live_parent(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            card_file = root / "themes/language/early-english/greetings/cards/01_expressions.md"
+            card_file.write_text(
+                card_file.read_text(encoding="utf-8").replace("archived: false", "archived: true"),
+                encoding="utf-8",
+            )
+            run_sync(root, "7" * 40)
+        self.assertTrue(LearningPath.objects.get().published)
+        self.assertFalse(Card.objects.get().published)
+
     def test_database_rows_missing_from_the_library_are_reported_not_touched(self):
         orphan_id = uuid.uuid4()
         with TemporaryDirectory() as tmp:

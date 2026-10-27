@@ -293,9 +293,12 @@ class Command(BaseCommand):
             archived = bool(metadata.get("archived", False))
             entity = self.sync_entity(element, archived)
             parent = records_by_dir.get(element["parent_dir"]) if element["kind"] != "theme" else None
+            # Retiring a parent makes its whole subtree unavailable: effective
+            # publication needs the element's own flag AND the parent's state.
+            published = not archived and (parent is None or parent.published)
             desired = {
                 "position": self.position(metadata, location),
-                "published": not archived,
+                "published": published,
                 **element["provenance"],
             }
             if element["kind"] in ("theme", "learning_path", "lesson"):
