@@ -119,3 +119,57 @@ class LearningAPITests(TestCase):
         self.theme.entity.save()
         self.assertEqual(self.post(url, {}).status_code, 404)
         self.assertEqual(CardProgress.objects.count(), 0)
+
+    def test_answers_grade_server_side_retry_then_complete(self):
+        url = "/api/learning/question-attempts/"
+        body = {"question_id": str(self.question.pk), "answer": "0"}
+        self.assertEqual(self.post(url, body).status_code, 409)
+        self.assertEqual(QuestionAttempt.objects.count(), 0)
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        wrong = self.post(url, {**body, "answer": "1"})
+        self.assertEqual(wrong.status_code, 201)
+        self.assertFalse(wrong.json()["correct"])
+        self.assertEqual(wrong.json()["attempt_type"], "initial")
+        self.assertEqual(wrong.json()["explanation"], self.question.explanation)
+        correct = self.post(url, body)
+        self.assertEqual(correct.status_code, 201)
+        self.assertTrue(correct.json()["correct"])
+        self.assertEqual(correct.json()["attempt_type"], "retry")
+        self.assertTrue(correct.json()["progress"]["completed"])
+        self.assertIsNone(correct.json()["next_step"])
+        self.assertEqual(self.post(url, body).status_code, 409)
+        self.assertEqual(QuestionAttempt.objects.count(), 2)
+        self.assertEqual(QuestionAttempt.objects.filter(user=self.other).count(), 0)
+        lesson = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
+        self.assertTrue(lesson["questions"][0]["completed"])
+        self.assertNotIn("explanation", lesson["questions"][0])
+
+    def test_question_request_validation(self):
+        url = "/api/learning/question-attempts/"
+        for body in ([], {}, {"question_id": "bad", "answer": "0"},
+                     {"question_id": str(self.question.pk), "answer": True},
+                     {"question_id": str(self.question.pk), "answer": "invalid"},
+                     {"question_id": str(self.question.pk), "answer": "0", "correct": True},
+                     {"question_id": str(self.question.pk), "answer": "0", "attempt_type": "review"}):
+            self.assertEqual(self.post(url, body).status_code, 400)
+        self.assertEqual(self.post(url, {"question_id": str(uuid4()), "answer": "0"}).status_code, 404)
+        self.assertEqual(QuestionAttempt.objects.count(), 0)
+
+    def test_alternative_pool_is_one_checkpoint_and_unselected_question_is_rejected(self):
+        entity = ContentEntity.objects.create(id=uuid4(), kind="question")
+        alt = Question.objects.create(entity=entity, position=2, published=True, lesson=self.lesson,
+                                     after_card_position=1, prompt="Alt", options=self.question.options,
+                                     answer="1", explanation="Other", source_path="alt", last_changed_commit="a" * 40)
+        lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
+        data = self.client.get(lesson_url).json()
+        selected = data["questions"][0]["id"]
+        other = alt if selected == str(self.question.pk) else self.question
+        self.assertEqual(len(data["questions"]), 1)
+        self.assertEqual(data["lesson"]["progress"]["checkpoints_total"], 1)
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.post("/api/learning/question-attempts/", {
+            "question_id": str(other.pk), "answer": other.answer}).status_code, 409)
+        chosen = Question.objects.get(pk=selected)
+        response = self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
+        self.assertTrue(response.json()["progress"]["completed"])
+        self.assertEqual(response.json()["progress"]["checkpoints_correct"], 1)

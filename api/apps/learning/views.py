@@ -113,3 +113,48 @@ def complete_card(request, card_id):
         return JsonResponse({"card_id": str(card.pk), "completed_at": progress.completed_at.isoformat(),
                              "created": created, "progress": state.progress([card.lesson]),
                              "next_step": next_step(state, card.lesson)}, status=201 if created else 200)
+
+
+@never_cache
+@csrf_exempt  # Only the existing verified Bearer token sets the learner identity.
+@require_POST
+@jwt_required
+def question_attempts(request):
+    from uuid import UUID
+    from .api import checkpoint_questions
+    from .models import Question, QuestionAttempt
+    try:
+        data = json_object(request, ["question_id", "answer"])
+        if not isinstance(data.get("question_id"), str) or not isinstance(data.get("answer"), str):
+            raise ValidationError("Provide question_id and answer choice ID as strings.")
+        try:
+            question_id = UUID(data["question_id"])
+        except ValueError:
+            raise ValidationError("Invalid question UUID.") from None
+        if not data["answer"] or len(data["answer"]) > 255:
+            raise ValidationError("Invalid answer choice ID.")
+    except ValidationError as exc:
+        return input_error(exc)
+    with transaction.atomic():
+        lock_learner(request.user)
+        question = get_object_or_404(visible(Question).select_related("lesson"), pk=question_id)
+        if data["answer"] not in {o["id"] for o in question.options}:
+            return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
+        state = LearnerState(request.user)
+        if next_step(state, question.lesson) != {"type": "question", "id": str(question.pk)}:
+            return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
+        checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
+                          and q.after_card_position == question.after_card_position]
+        retry = QuestionAttempt.objects.filter(user=request.user, question_id__in=checkpoint_ids,
+                                               attempt_type__in=["initial", "retry"]).exists()
+        attempt = QuestionAttempt.objects.create(
+            user=request.user, question=question,
+            attempt_type="retry" if retry else "initial", submitted_answer=data["answer"],
+            correct=data["answer"] == question.answer, answered_at=timezone.now(),
+        )
+        state = LearnerState(request.user)
+        return JsonResponse({"attempt_id": attempt.pk, "question_id": str(question.pk),
+                             "attempt_type": attempt.attempt_type, "correct": attempt.correct,
+                             "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
+                             "progress": state.progress([question.lesson]),
+                             "next_step": next_step(state, question.lesson)}, status=201)
