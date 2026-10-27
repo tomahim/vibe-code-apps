@@ -12,7 +12,7 @@ class LearningAPITests(TestCase):
     def row(self, model, **fields):
         return model.objects.create(
             entity=ContentEntity.objects.create(id=uuid4(), kind=model.CONTENT_KIND),
-            position=1, published=True, source_path="example", last_changed_commit="a" * 40,
+            position=fields.pop("position", 1), published=True, source_path="example", last_changed_commit="a" * 40,
             **({"title": model.__name__} if model != Question else {}), **fields,
         )
 
@@ -173,3 +173,123 @@ class LearningAPITests(TestCase):
         response = self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
         self.assertTrue(response.json()["progress"]["completed"])
         self.assertEqual(response.json()["progress"]["checkpoints_correct"], 1)
+
+    def test_progress_is_private_persistent_and_has_unique_counts(self):
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        response = self.client.get("/api/learning/progress/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["progress"]["cards_completed"], 1)
+        self.assertEqual(response.json()["progress"]["checkpoints_correct"], 1)
+        self.assertEqual(response.json()["progress"]["lessons_completed"], 1)
+        self.assertTrue(response.json()["learning_paths"][0]["progress"]["completed"])
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
+        other = self.client.get("/api/learning/progress/").json()["progress"]
+        self.assertEqual(other["cards_completed"], 0)
+        self.assertEqual(other["checkpoints_correct"], 0)
+        self.assertFalse(other["started"])
+
+    def test_cannot_skip_cards_or_checkpoints_and_resume_after_pass(self):
+        second = self.row(Card, lesson=self.lesson, position=2, body_markdown="Next")
+        url = f"/api/learning/cards/{second.pk}/complete/"
+        self.assertEqual(self.post(url, {}).status_code, 409)
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.post(url, {}).status_code, 409)
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        self.assertEqual(self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["next_step"],
+                         {"type": "card", "id": str(second.pk)})
+        self.assertTrue(self.post(url, {}).json()["progress"]["completed"])
+        self.assertIsNone(self.client.get(f"/api/learning/paths/{self.path.pk}/").json()["next_lesson_id"])
+
+    def test_hidden_checkpoint_card_hides_question_and_empty_lessons_do_not_complete(self):
+        Card.objects.filter(pk=self.card.pk).update(published=False)
+        result = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
+        self.assertEqual(result["cards"], [])
+        self.assertEqual(result["questions"], [])
+        self.assertFalse(result["lesson"]["progress"]["completed"])
+        self.assertEqual(self.post("/api/learning/question-attempts/", {
+            "question_id": str(self.question.pk), "answer": "0"}).status_code, 404)
+
+    def test_all_endpoints_require_bearer_not_session_auth(self):
+        self.client.defaults.clear()
+        self.client.force_login(self.user)
+        for url in ("/api/learning/themes/", f"/api/learning/themes/{self.theme.pk}/",
+                    f"/api/learning/paths/{self.path.pk}/", f"/api/learning/lessons/{self.lesson.pk}/",
+                    "/api/learning/progress/"):
+            self.assertEqual(self.client.get(url).status_code, 401)
+        for url in (f"/api/learning/cards/{self.card.pk}/complete/", "/api/learning/question-attempts/"):
+            self.assertEqual(self.post(url, {}).status_code, 401)
+
+    def test_ordering_and_query_count_does_not_grow_with_card_count(self):
+        second = self.row(Lesson, learning_path=self.path, position=2)
+        for position in range(2, 12):
+            self.row(Card, lesson=second, position=position, body_markdown="More")
+        with self.assertNumQueries(8):
+            result = self.client.get("/api/learning/themes/")
+        self.assertEqual(result.status_code, 200)
+        lessons = self.client.get(f"/api/learning/paths/{self.path.pk}/").json()["lessons"]
+        self.assertEqual([l["id"] for l in lessons], [str(self.lesson.pk), str(second.pk)])
+
+    def test_get_methods_reject_writes_and_large_or_cross_origin_answers_fail(self):
+        self.assertEqual(self.post("/api/learning/progress/", {}).status_code, 405)
+        self.assertEqual(self.client.post("/api/learning/question-attempts/", "{}", content_type="application/json",
+                                         HTTP_ORIGIN="https://untrusted.invalid").status_code, 403)
+        self.assertEqual(self.client.post("/api/learning/question-attempts/", " " * 4097,
+                                         content_type="application/json").status_code, 400)
+
+
+    def test_empty_lesson_keeps_parent_incomplete(self):
+        self.row(Lesson, learning_path=self.path, position=2)
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        data = self.client.get(f"/api/learning/paths/{self.path.pk}/").json()
+        self.assertFalse(data["learning_path"]["progress"]["completed"])
+        self.assertEqual(data["learning_path"]["progress"]["lessons_completed"], 1)
+
+
+from concurrent.futures import ThreadPoolExecutor
+from unittest import skipUnless
+
+from django.db import close_old_connections, connection
+from django.test import Client, TransactionTestCase
+
+
+@skipUnless(connection.vendor == "postgresql", "Production row-lock concurrency requires PostgreSQL")
+class LearningConcurrencyTests(TransactionTestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username="concurrent")
+        self.token = issue_token(self.user)
+        def row(model, **fields):
+            return model.objects.create(
+                entity=ContentEntity.objects.create(id=uuid4(), kind=model.CONTENT_KIND),
+                position=1, published=True, source_path="example", last_changed_commit="a" * 40,
+                **({"title": model.__name__} if model != Question else {}), **fields,
+            )
+        theme = row(Theme)
+        path = row(LearningPath, theme=theme)
+        lesson = row(Lesson, learning_path=path)
+        self.card = row(Card, lesson=lesson, body_markdown="Read")
+        self.question = row(Question, lesson=lesson, after_card_position=1,
+                            prompt="Choose", options=[{"id": str(i), "text": str(i)} for i in range(4)],
+                            answer="0", explanation="Yes")
+
+    def parallel_posts(self, url, body):
+        from threading import Barrier
+        barrier = Barrier(2)
+        def post(_):
+            close_old_connections()
+            try:
+                client = Client(HTTP_AUTHORIZATION=f"Bearer {self.token}")
+                barrier.wait(timeout=10)
+                return client.post(url, json.dumps(body), content_type="application/json").status_code
+            finally:
+                close_old_connections()
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            return sorted(pool.map(post, range(2)))
+
+    def test_concurrent_completions_and_correct_attempts_are_unique(self):
+        self.assertEqual(self.parallel_posts(f"/api/learning/cards/{self.card.pk}/complete/", {}), [200, 201])
+        self.assertEqual(CardProgress.objects.filter(user=self.user).count(), 1)
+        self.assertEqual(self.parallel_posts("/api/learning/question-attempts/", {
+            "question_id": str(self.question.pk), "answer": "0"}), [201, 409])
+        self.assertEqual(QuestionAttempt.objects.filter(user=self.user).count(), 1)

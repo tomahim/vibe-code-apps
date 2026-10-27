@@ -1,11 +1,21 @@
+from uuid import UUID
+
+from django.core.exceptions import ValidationError
+from django.db import transaction
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 
 from apps.accounts.decorators import jwt_required
 
-from .api import LearnerState, described, visible
-from .models import LearningPath, Lesson, Theme
+from .api import (
+    LearnerState, checkpoint_questions, described, input_error, json_object,
+    lesson_summary, lock_learner, next_step, public_question, visible,
+)
+from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
 
 
 @never_cache
@@ -28,7 +38,6 @@ def themes(request):
 @require_GET
 @jwt_required
 def theme_detail(request, theme_id):
-    from django.shortcuts import get_object_or_404
     theme = get_object_or_404(visible(Theme), pk=theme_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson))
@@ -43,8 +52,6 @@ def theme_detail(request, theme_id):
 @require_GET
 @jwt_required
 def path_detail(request, path_id):
-    from django.shortcuts import get_object_or_404
-    from .api import lesson_summary
     path = get_object_or_404(visible(LearningPath).select_related("theme"), pk=path_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
@@ -60,8 +67,6 @@ def path_detail(request, path_id):
 @require_GET
 @jwt_required
 def lesson_detail(request, lesson_id):
-    from django.shortcuts import get_object_or_404
-    from .api import checkpoint_questions, lesson_summary, next_step, public_question
     lesson = get_object_or_404(visible(Lesson).select_related("learning_path__theme"), pk=lesson_id)
     state = LearnerState(request.user)
     return JsonResponse({"lesson": lesson_summary(lesson, state),
@@ -78,17 +83,6 @@ def lesson_detail(request, lesson_id):
                                         "completed": (lesson.pk, q.after_card_position) in state.passed}
                                        for q in checkpoint_questions(state, lesson)],
                          "next_step": next_step(state, lesson)})
-
-
-from django.core.exceptions import ValidationError
-from django.db import transaction
-from django.shortcuts import get_object_or_404
-from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-
-from .api import input_error, json_object, lock_learner, next_step
-from .models import Card, CardProgress
 
 
 @never_cache
@@ -120,9 +114,6 @@ def complete_card(request, card_id):
 @require_POST
 @jwt_required
 def question_attempts(request):
-    from uuid import UUID
-    from .api import checkpoint_questions
-    from .models import Question, QuestionAttempt
     try:
         data = json_object(request, ["question_id", "answer"])
         if not isinstance(data.get("question_id"), str) or not isinstance(data.get("answer"), str):
@@ -158,3 +149,17 @@ def question_attempts(request):
                              "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
                              "progress": state.progress([question.lesson]),
                              "next_step": next_step(state, question.lesson)}, status=201)
+
+
+@never_cache
+@require_GET
+@jwt_required
+def progress(request):
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson))
+    return JsonResponse({"progress": state.progress(lessons),
+                         "learning_paths": [
+                             {"id": str(path.pk), "theme_id": str(path.theme_id),
+                              "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
+                             for path in visible(LearningPath)],
+                         "lessons": [lesson_summary(lesson, state) for lesson in lessons]})

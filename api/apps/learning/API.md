@@ -35,3 +35,13 @@ All writes are bearer-only, JSON-only, reject mismatching browser Origin, and ru
 Send `{"question_id":"<uuid>","answer":"<choice-id>"}`. Only the current selected checkpoint question is accepted after its cards have been completed. Returns 201 with `attempt_id`, `question_id`, `attempt_type`, server-graded `correct`, `explanation`, server `answered_at`, lesson `progress` and `next_step`. Normal reads never disclose the answer key or explanation. Invalid choices/fields: 400; hidden/unknown question: 404; unselected, premature or already-completed checkpoint: 409.
 
 **MVP retry assumption for review:** a wrong answer is recorded, returns its explanation and leaves the same checkpoint open for another attempt; initial/retry is inferred by the server, not supplied by the learner. A correct answer satisfies the checkpoint once. Repeating a successful submission returns 409, not a duplicate reward. Wrong submissions are append-only attempts, so clients should not auto-retry an ambiguous network failure without refetching. No retry penalties, leaderboard scoring, reward economy, review attempts or review scheduling are implemented. The design board explicitly leaves those production rules undecided. Existing review records, if any, do not grant initial completion.
+
+## GET progress/
+
+Returns `{progress, learning_paths, lessons}` for the current user only. Aggregates include unique card/checkpoint completion and lesson totals/completed counts. There is no user-ID parameter, raw answer history, leaderboard, or another learner's data. Completion is derived, never separately stored; archived/unpublished content and questions whose checkpoint card is hidden are excluded. History rows are retained across content retirement. A content edit can change derived requirements, consistent with the existing no-revisions schema.
+
+## Scope and integration
+
+Seven endpoints, seven commits. No new models/migrations, admin publishing, content sync, UI changes, review scheduling or production writes. The earlier sample `/api/apps/little-grains/lessons` stays unchanged; a future frontend should use this DB-backed API. `today/` and the spaced review ladder remain separate follow-up work.
+
+For this initial library the API returns complete ordered collections. Query count does not grow per card, but collection size is not paginated; add pagination/scoped state loading before scaling far beyond the current small curated library. A correct attempt is final for initial checkpoint completion; intentional repeated practice/review needs an explicit future contract. These assumptions are reviewable in this PR, not new product policy.

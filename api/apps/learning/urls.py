@@ -9,4 +9,5 @@ urlpatterns = [
     path("lessons/<uuid:lesson_id>/", views.lesson_detail, name="learning-lesson"),
     path("cards/<uuid:card_id>/complete/", views.complete_card, name="learning-complete-card"),
     path("question-attempts/", views.question_attempts, name="learning-question-attempts"),
+    path("progress/", views.progress, name="learning-progress"),
 ]

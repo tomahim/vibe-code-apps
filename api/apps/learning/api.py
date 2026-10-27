@@ -15,7 +15,13 @@ def visible(model):
     for parent in PARENTS[model]:
         filters[f"{parent}__published"] = True
         filters[f"{parent}__entity__archived"] = False
-    return model.objects.filter(**filters)
+    rows = model.objects.filter(**filters)
+    if model == Question:
+        from django.db.models import Exists, OuterRef
+        rows = rows.filter(Exists(visible(Card).filter(
+            lesson_id=OuterRef("lesson_id"), position=OuterRef("after_card_position"),
+        )))
+    return rows
 
 
 def described(row):
@@ -49,10 +55,17 @@ class LearnerState:
         checkpoints = {(q.lesson_id, q.after_card_position) for q in self.questions if q.lesson_id in ids}
         done = sum(c.pk in self.completed for c in cards)
         correct = len(checkpoints & self.passed)
-        return {"cards_completed": done, "cards_total": len(cards),
+        completed_lessons = sum(
+            bool(lesson_cards := [c for c in cards if c.lesson_id == lesson.pk])
+            and all(c.pk in self.completed for c in lesson_cards)
+            and all(checkpoint in self.passed for checkpoint in checkpoints if checkpoint[0] == lesson.pk)
+            for lesson in lessons
+        )
+        return {"lessons_completed": completed_lessons, "lessons_total": len(ids),
+                "cards_completed": done, "cards_total": len(cards),
                 "checkpoints_correct": correct, "checkpoints_total": len(checkpoints),
                 "started": bool(done or ids & self.attempted),
-                "completed": bool(cards) and done == len(cards) and correct == len(checkpoints)}
+                "completed": bool(ids) and completed_lessons == len(ids)}
 
 
 def lesson_summary(lesson, state):
