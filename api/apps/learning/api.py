@@ -87,3 +87,34 @@ def next_step(state, lesson):
         if card.position in questions and (lesson.pk, card.position) not in state.passed:
             return {"type": "question", "id": str(questions[card.position].pk)}
     return None
+
+
+def json_object(request, allowed):
+    import json
+    from django.core.exceptions import RequestDataTooBig, ValidationError
+    from apps.accounts.views import same_origin
+    if not same_origin(request):
+        raise ValidationError("Cross-origin request refused.", code="origin")
+    if request.content_type != "application/json":
+        raise ValidationError("Use application/json.", code="media")
+    try:
+        body = request.body
+        if len(body) > 4096:
+            raise ValidationError("Request body is too large.")
+        data = json.loads(body)
+    except (ValueError, UnicodeDecodeError, RequestDataTooBig):
+        raise ValidationError("Invalid JSON.") from None
+    if not isinstance(data, dict) or set(data) - set(allowed):
+        raise ValidationError("Provide a JSON object with only the documented fields.")
+    return data
+
+
+def input_error(exc):
+    from django.http import JsonResponse
+    return JsonResponse({"error": exc.messages[0]}, status={"origin": 403, "media": 415}.get(exc.code, 400))
+
+
+def lock_learner(user):
+    # Serialize writes by learner, including first attempts with no existing rows.
+    # PostgreSQL row locks, unlike process-local locks, work across API workers.
+    type(user).objects.select_for_update().get(pk=user.pk)

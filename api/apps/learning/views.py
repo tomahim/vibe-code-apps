@@ -78,3 +78,38 @@ def lesson_detail(request, lesson_id):
                                         "completed": (lesson.pk, q.after_card_position) in state.passed}
                                        for q in checkpoint_questions(state, lesson)],
                          "next_step": next_step(state, lesson)})
+
+
+from django.core.exceptions import ValidationError
+from django.db import transaction
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from .api import input_error, json_object, lock_learner, next_step
+from .models import Card, CardProgress
+
+
+@never_cache
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
+@require_POST
+@jwt_required
+def complete_card(request, card_id):
+    try:
+        json_object(request, [])
+    except ValidationError as exc:
+        return input_error(exc)
+    with transaction.atomic():
+        lock_learner(request.user)
+        card = get_object_or_404(visible(Card).select_related("lesson"), pk=card_id)
+        state = LearnerState(request.user)
+        if card.pk not in state.completed and next_step(state, card.lesson) != {"type": "card", "id": str(card.pk)}:
+            return JsonResponse({"error": "Complete the preceding cards and checkpoint first."}, status=409)
+        progress, created = CardProgress.objects.get_or_create(
+            user=request.user, card=card, defaults={"completed_at": timezone.now()},
+        )
+        state = LearnerState(request.user)
+        return JsonResponse({"card_id": str(card.pk), "completed_at": progress.completed_at.isoformat(),
+                             "created": created, "progress": state.progress([card.lesson]),
+                             "next_step": next_step(state, card.lesson)}, status=201 if created else 200)

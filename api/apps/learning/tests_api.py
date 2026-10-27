@@ -91,3 +91,31 @@ class LearningAPITests(TestCase):
         self.theme.entity.archived = True
         self.theme.entity.save()
         self.assertEqual(self.client.get(url).status_code, 404)
+
+    def test_complete_card_idempotent_and_user_owned(self):
+        url = f"/api/learning/cards/{self.card.pk}/complete/"
+        response = self.post(url, {})
+        self.assertEqual(response.status_code, 201)
+        first = response.json()["completed_at"]
+        repeat = self.post(url, {})
+        self.assertEqual(repeat.status_code, 200)
+        self.assertEqual(repeat.json()["completed_at"], first)
+        self.assertEqual(CardProgress.objects.count(), 1)
+        self.assertEqual(CardProgress.objects.get().user, self.user)
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
+        self.assertIsNone(self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["cards"][0]["completed_at"])
+        self.assertEqual(self.post(url, {}).status_code, 201)
+
+    def test_card_write_validation_and_visibility(self):
+        url = f"/api/learning/cards/{self.card.pk}/complete/"
+        self.assertEqual(self.post(url, {"user_id": self.other.pk}).status_code, 400)
+        self.assertEqual(self.post(url, {"completed_at": "2000-01-01"}).status_code, 400)
+        self.assertEqual(self.client.post(url, "bad", content_type="application/json").status_code, 400)
+        self.assertEqual(self.client.post(url, "{}", content_type="text/plain").status_code, 415)
+        self.assertEqual(self.client.post(url, "{}", content_type="application/json",
+                                         HTTP_ORIGIN="https://elsewhere.invalid").status_code, 403)
+        self.assertEqual(self.client.get(url).status_code, 405)
+        self.theme.entity.archived = True
+        self.theme.entity.save()
+        self.assertEqual(self.post(url, {}).status_code, 404)
+        self.assertEqual(CardProgress.objects.count(), 0)
