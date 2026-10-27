@@ -96,6 +96,7 @@ class DescribedContent(ProvenancedContent):
 
 class Theme(DescribedContent):
     CONTENT_KIND = ContentEntity.Kind.THEME
+    introduction_markdown = models.TextField(blank=True)
 
     class Meta(DescribedContent.Meta):
         db_table = "lg_theme"
@@ -107,6 +108,7 @@ class Theme(DescribedContent):
 class LearningPath(DescribedContent):
     CONTENT_KIND = ContentEntity.Kind.LEARNING_PATH
     theme = models.ForeignKey(Theme, on_delete=models.PROTECT, related_name="learning_paths")
+    introduction_markdown = models.TextField(blank=True)
 
     class Meta(DescribedContent.Meta):
         db_table = "lg_learning_path"
@@ -130,6 +132,7 @@ class Lesson(DescribedContent):
 class Card(ProvenancedContent):
     CONTENT_KIND = ContentEntity.Kind.CARD
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="cards")
+    title = models.CharField(max_length=255)
     body_markdown = models.TextField()
     illustration_path = models.CharField(max_length=1024, blank=True)
     illustration_alt = models.TextField(blank=True)
@@ -152,6 +155,7 @@ class Question(ProvenancedContent):
 
     CONTENT_KIND = ContentEntity.Kind.QUESTION
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="questions")
+    after_card_position = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     type = models.CharField(max_length=32, choices=Type.choices, default=Type.MULTIPLE_CHOICE)
     prompt = models.TextField()
     # [{"id": "stable-choice-id", "text": "Choice text"}, ...]; answer stores one ID.
@@ -164,10 +168,23 @@ class Question(ProvenancedContent):
         constraints = ContentRecord.Meta.constraints + [
             models.UniqueConstraint(fields=["lesson", "position"], name="lg_question_unique_position"),
             models.CheckConstraint(condition=Q(type="multiple_choice"), name="lg_question_valid_type"),
+            models.CheckConstraint(condition=Q(after_card_position__gte=1), name="lg_question_positive_checkpoint"),
         ]
+        indexes = [models.Index(fields=["lesson", "after_card_position"], name="lg_question_checkpoint_idx")]
 
     def clean(self):
         super().clean()
+        if (
+            self.lesson_id
+            and isinstance(self.after_card_position, int)
+            and self.after_card_position >= 1
+            and not Card.objects.filter(
+                lesson_id=self.lesson_id, position=self.after_card_position,
+            ).exists()
+        ):
+            raise ValidationError({
+                "after_card_position": "Checkpoint must reference a card position in the same lesson.",
+            })
         if self.type != self.Type.MULTIPLE_CHOICE:
             return
         options = self.options
@@ -229,3 +246,4 @@ class QuestionAttempt(models.Model):
             condition=Q(attempt_type__in=["initial", "retry", "review"]), name="lg_attempt_valid_type",
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
+
