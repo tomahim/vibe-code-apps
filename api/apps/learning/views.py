@@ -120,14 +120,20 @@ def complete_card(request, card_id):
     with transaction.atomic():
         lock_learner(request.user)
         card = get_object_or_404(visible(Card).select_related("lesson"), pk=card_id)
-        state = LearnerState(request.user)
+        state = LearnerState(request.user, lesson=card.lesson)
         if card.pk not in state.completed and next_step(state, card.lesson) != {"type": "card", "id": str(card.pk)}:
             return JsonResponse({"error": "Complete the preceding cards and checkpoint first."}, status=409)
-        progress, created = CardProgress.objects.get_or_create(
-            user=request.user, card=card, defaults={"completed_at": timezone.now()},
-        )
-        state = LearnerState(request.user)
-        return JsonResponse({"card_id": str(card.pk), "completed_at": progress.completed_at.isoformat(),
+        created = card.pk not in state.completed
+        if created:
+            completed_at = timezone.now()
+            CardProgress.objects.create(user=request.user, card=card, completed_at=completed_at)
+        else:
+            completed_at = state.completed[card.pk]
+        # The row lock serializes this learner, so the state we already loaded
+        # plus this write is the post-write state. Avoid reloading every card,
+        # question, progress row and attempt a second time on each completion.
+        state.completed[card.pk] = completed_at
+        return JsonResponse({"card_id": str(card.pk), "completed_at": completed_at.isoformat(),
                              "created": created, "progress": state.progress([card.lesson]),
                              "next_step": next_step(state, card.lesson)}, status=201 if created else 200)
 
