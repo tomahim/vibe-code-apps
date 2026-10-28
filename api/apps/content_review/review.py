@@ -19,7 +19,6 @@ KIND_PATTERNS = [
     ("learning_path", re.compile(r"^atomic-lessons/themes/(?P<theme>[^/]+)/(?P<path>[^/]+)/index\.md$")),
     ("theme", re.compile(r"^atomic-lessons/themes/(?P<theme>[^/]+)/index\.md$")),
 ]
-KIND_ORDER = {kind: rank for rank, kind in enumerate(["theme", "learning_path", "lesson", "card", "question"])}
 
 
 def classify(path):
@@ -41,6 +40,19 @@ def title_of(texts, path):
         return None
     title = metadata.get("title")
     return str(title) if title else None
+
+
+def _position_of(texts, path):
+    """The `position` declared by an index.md, or 0 when unavailable."""
+    text = texts.get(path)
+    if text is None:
+        return 0
+    try:
+        metadata, _ = parse_unit(path, text)
+    except (ValueError, yaml.YAMLError):
+        return 0
+    position = metadata.get("position")
+    return position if isinstance(position, int) else 0
 
 
 def question_fields(metadata):
@@ -143,16 +155,39 @@ def build_review(texts, files):
             other.append({"path": path, "change": change["status"], "patch": change["patch"]})
             continue
         units.append(build_unit(change, texts))
-    units.sort(
-        key=lambda u: (
-            u["slugs"].get("theme", ""),
-            u["slugs"].get("path") or "",
-            u["slugs"].get("lesson") or "",
-            KIND_ORDER[u["kind"]],
-            u["position"] if isinstance(u["position"], int) else 0,
-            u["path"],
-        )
-    )
+    positions = {
+        path: _position_of(texts, path)
+        for path in {
+            f"{CONTENT_ROOT}/themes/{u['slugs']['theme']}/{u['slugs']['path']}/index.md"
+            for u in units
+            if u["slugs"].get("path")
+        }
+        | {
+            f"{CONTENT_ROOT}/themes/{u['slugs']['theme']}/{u['slugs']['path']}/{u['slugs']['lesson']}/index.md"
+            for u in units
+            if u["slugs"].get("lesson")
+        }
+    }
+
+    def sort_key(unit):
+        slugs = unit["slugs"]
+        base = f"{CONTENT_ROOT}/themes/{slugs['theme']}"
+        path_slug = slugs.get("path") or ""
+        lesson_slug = slugs.get("lesson") or ""
+        path_pos = positions.get(f"{base}/{path_slug}/index.md", 0) if path_slug else -1
+        lesson_pos = positions.get(f"{base}/{path_slug}/{lesson_slug}/index.md", 0) if lesson_slug else -1
+        # Inside a lesson: the lesson itself, then cards in order, each
+        # followed by the questions that come after it.
+        if unit["kind"] == "question":
+            after = (unit["question"] or {}).get("after_card_position")
+            inner = (after if isinstance(after, int) else 0, 1, unit["position"] if isinstance(unit["position"], int) else 0)
+        elif unit["kind"] == "card":
+            inner = (unit["position"] if isinstance(unit["position"], int) else 0, 0, 0)
+        else:
+            inner = (-1, 0, 0)
+        return (slugs.get("theme", ""), path_pos, path_slug, lesson_pos, lesson_slug, inner, unit["path"])
+
+    units.sort(key=sort_key)
     for unit in units:
         unit.pop("slugs", None)
     return {

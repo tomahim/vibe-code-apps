@@ -56,6 +56,31 @@ export function unitSections(units) {
   return sections;
 }
 
+const KIND_DEPTH = { theme: 0, learning_path: 1, lesson: 2, card: 3, question: 3 };
+
+// Flat, ordered sidebar rows: each unit is indented by its level, so cards and
+// questions sit under their lesson. Ancestors that are not changed themselves
+// get a plain heading row so the nesting stays readable.
+export function treeRows(units) {
+  const rows = [];
+  const seen = new Set();
+  for (const unit of units) {
+    const crumbs = unit.breadcrumbs || [];
+    crumbs.forEach((title, level) => {
+      const key = crumbs.slice(0, level + 1).join("\u0001");
+      if (seen.has(key)) return;
+      seen.add(key);
+      const owns = unit.kind in KIND_DEPTH && KIND_DEPTH[unit.kind] === level && (unit.title || "") === title;
+      if (!owns) rows.push({ type: "heading", key: `heading:${key}`, title, depth: level });
+    });
+    if (["theme", "learning_path", "lesson"].includes(unit.kind)) {
+      seen.add([...crumbs, unit.title || ""].join("\u0001"));
+    }
+    rows.push({ type: "unit", key: unit.key, unit, depth: KIND_DEPTH[unit.kind] ?? crumbs.length });
+  }
+  return rows;
+}
+
 export const CHANGE_LABELS = { added: "+", modified: "~", removed: "−", renamed: "→" };
 export const KIND_LABELS = {
   theme: "Theme",
