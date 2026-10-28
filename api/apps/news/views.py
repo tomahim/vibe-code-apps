@@ -9,7 +9,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from apps.accounts.decorators import jwt_required
 from apps.accounts.views import same_origin
-from .notion import NewsUnavailable, read_news, set_archived, set_category
+from .notion import NewsUnavailable, canonical_url, read_news, set_archived, set_category
 
 
 def allowed(request):
@@ -44,23 +44,37 @@ def news(request):
         except (signing.BadSignature, KeyError, TypeError):
             return JsonResponse({"error": "Page link expired. Refresh the feed."}, status=400)
     try:
-        result = dict(read_news(cursor, archived, topic, query, undated, category))
-        # Exhaust known publication dates first. Then page undated entries by
-        # saved date / creation time, with no assumption about Notion null order.
-        if not undated and not result["items"] and not result["next_cursor"]:
-            undated = True
-            result = dict(read_news(None, archived, topic, query, True, category))
+        # Fill a logical page across the dated/undated boundary. Request only
+        # the remaining capacity so an upstream page never drops any links.
+        items, seen = [], set()
+        has_more = False
+        for _ in range(10):  # bound work even if upstream returns duplicate pages
+            result = read_news(cursor, archived, topic, query, undated, category,
+                               page_size=20 - len(items))
+            for item in result["items"]:
+                key = canonical_url(item["url"]) if item.get("url") else item["id"]
+                if key not in seen:
+                    seen.add(key)
+                    items.append(item)
+            cursor = result["next_cursor"]
+            has_more = bool(cursor)
+            if not cursor:
+                if undated:
+                    break
+                undated = True
+                has_more = True
+                if len(items) == 20:
+                    # Check for a real next page rather than offering an empty one.
+                    has_more = bool(read_news(None, archived, topic, query, True, category,
+                                              page_size=1)["items"])
+                    break
+            if len(items) == 20:
+                break
+        result = {"items": items, "fetched_at": result["fetched_at"],
+                  "next_cursor": signing.dumps({"cursor": cursor, "undated": undated}, salt=salt)
+                  if has_more else None}
     except NewsUnavailable as error:
         return JsonResponse({"error": str(error)}, status=503)
-    if result["next_cursor"]:
-        result["next_cursor"] = signing.dumps({"cursor": result["next_cursor"], "undated": undated}, salt=salt)
-    elif not undated:
-        try:
-            has_undated = read_news(None, archived, topic, query, True, category)["items"]
-        except NewsUnavailable as error:
-            return JsonResponse({"error": str(error)}, status=503)
-        if has_undated:
-            result["next_cursor"] = signing.dumps({"cursor": None, "undated": True}, salt=salt)
     return JsonResponse(result)
 
 
