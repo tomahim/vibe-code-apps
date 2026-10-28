@@ -1,0 +1,19 @@
+id: 2c094246-2401-42c8-bae0-2adae136a49e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Naming what the baby is already looking at works better than redirecting because:"
+choices:
+  - id: 918fbd5b-d6a5-43fe-b2c3-98e9a3ae382b
+    text: "The baby's attention is already engaged on that target"
+  - id: c1cfeb65-8a8c-4496-ac36-3df01234165f
+    text: "It uses longer words"
+  - id: 75c5e2dd-45ad-430e-8558-7f2fe942da20
+    text: "It prevents crying"
+  - id: cf296d76-a61a-4ff0-b0b6-90981b371cc1
+    text: "It saves time"
+correct_choice_ids:
+  - 918fbd5b-d6a5-43fe-b2c3-98e9a3ae382b
+explanation: "Following the baby's serve leverages existing attention, the core of serve-and-return learning."
+archived: false

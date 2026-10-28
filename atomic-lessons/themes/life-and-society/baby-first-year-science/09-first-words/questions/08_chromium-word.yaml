@@ -1,0 +1,12 @@
+id: 989e7338-cb2f-4a14-9017-1a89a455c444
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In the classic fast-mapping study, chromium turned out to be an unfamiliar word for what?"
+accepted_answers:
+  - "a color"
+  - "color"
+  - "a colour"
+  - "colour"
+explanation: "Asked for the chromium tray, children inferred chromium was a color different from red, from one exposure."
+archived: false

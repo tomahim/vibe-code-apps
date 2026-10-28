@@ -1,0 +1,19 @@
+id: 771a7ed8-4b56-43ab-9b07-951e4e642169
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "The general pattern of sensory development is best summarized as:"
+choices:
+  - id: 9383c7e8-d971-41a4-bb59-65583a1925e6
+    text: "The senses develop together and supply each other with evidence"
+  - id: 196b3a47-639e-4076-84f7-716c6e96615a
+    text: "Each sense develops fully alone"
+  - id: 5bf89e4a-0b82-411a-943a-af29573944fa
+    text: "Hearing finishes before it begins"
+  - id: 340d4d4a-0f09-4468-a8f0-317e7321d244
+    text: "Vision drives all other senses"
+correct_choice_ids:
+  - 9383c7e8-d971-41a4-bb59-65583a1925e6
+explanation: "Sound invites looking, looking invites reaching; the brain assembles one world from combined evidence."
+archived: false

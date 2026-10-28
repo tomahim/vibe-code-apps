@@ -1,0 +1,19 @@
+id: ff0aacc2-12f2-42e0-81a8-2e1a8cd41d1a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "The CDC says its milestone checklists are designed to be:"
+choices:
+  - id: 56953923-e640-4378-bc2c-f9dcb889fe0c
+    text: "Communication tools for families and professionals"
+  - id: c61f94dd-a347-4861-b406-da13a7dc112c
+    text: "Diagnostic tests for delays"
+  - id: 47302eab-e8d1-4440-91e2-cac36f2c523e
+    text: "Rankings of child intelligence"
+  - id: ebaff344-4b91-44e1-82ee-f0be9d7ce264
+    text: "Training programs for parents"
+correct_choice_ids:
+  - 56953923-e640-4378-bc2c-f9dcb889fe0c
+explanation: "They are explicitly not screening or diagnostic tools; they prompt conversations and, when needed, formal screening."
+archived: false

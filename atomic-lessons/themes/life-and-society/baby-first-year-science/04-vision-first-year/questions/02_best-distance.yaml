@@ -1,0 +1,19 @@
+id: 7c24dc13-3972-4eee-b1f2-09341b150719
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "A newborn sees most clearly at about:"
+choices:
+  - id: ed3e7cac-c80c-4f13-913e-d8bc6926c23f
+    text: "The distance to a caregiver's face during feeding"
+  - id: 150f5041-2bd5-456a-96af-639781d26d12
+    text: "Across a room"
+  - id: 3c56069e-afb8-4db3-ab8a-25bddd6a80b9
+    text: "About 10 meters"
+  - id: e0b64455-1a15-48f2-a8ac-fc514a3909f3
+    text: "Only a few centimeters"
+correct_choice_ids:
+  - ed3e7cac-c80c-4f13-913e-d8bc6926c23f
+explanation: "Newborn vision is tuned to close range, roughly the feeding distance to a caregiver's face."
+archived: false

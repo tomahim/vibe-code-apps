@@ -1,0 +1,12 @@
+id: a7d3e170-7647-4db5-9601-02cd534e29ff
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Around how many weeks does normal infant crying typically peak?"
+accepted_answers:
+  - "6 to 8 weeks"
+  - "6-8 weeks"
+  - "about 6 weeks"
+  - "around 6-8 weeks"
+explanation: "The crying curve peaks around six to eight weeks and then declines toward three to four months."
+archived: false

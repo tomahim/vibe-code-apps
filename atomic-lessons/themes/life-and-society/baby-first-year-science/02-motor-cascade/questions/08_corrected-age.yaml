@@ -1,0 +1,10 @@
+id: 3e1b0b48-cef8-4a9a-a6dd-2f92f9a288ea
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the term for counting a premature baby's age from the due date rather than the birth date?"
+accepted_answers:
+  - "corrected age"
+  - "adjusted age"
+explanation: "Corrected (or adjusted) age is used until about two years so prematurity does not make milestones look late."
+archived: false

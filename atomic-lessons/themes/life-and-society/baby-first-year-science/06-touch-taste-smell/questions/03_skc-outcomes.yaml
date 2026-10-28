@@ -1,0 +1,19 @@
+id: dc395cea-e459-41e1-b845-94fc9cffdd76
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Skin-to-skin care after birth is associated with:"
+choices:
+  - id: e217a05f-0400-4524-a20a-34f58b63569e
+    text: "More stable heart rate, temperature and less crying"
+  - id: 7d06deee-6e0b-4982-a1d3-df42c4ec30da
+    text: "Faster walking"
+  - id: 945a9037-1d5e-4cf8-ac4a-7ce009c67a88
+    text: "Improved vision"
+  - id: e60d5aba-9d37-4bd7-a61b-ee639b3c8778
+    text: "Earlier talking"
+correct_choice_ids:
+  - e217a05f-0400-4524-a20a-34f58b63569e
+explanation: "Close contact externally regulates a newborn's immature physiological systems."
+archived: false

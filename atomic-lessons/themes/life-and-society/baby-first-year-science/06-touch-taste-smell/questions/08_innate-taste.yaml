@@ -1,0 +1,11 @@
+id: fdfa7870-7adf-49d9-84cf-01cff3724c5c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which taste are newborns born preferring, likely an ancient energy-seeking bias?"
+accepted_answers:
+  - "sweet"
+  - "sweetness"
+  - "Sweet"
+explanation: "Sweet preference and bitter aversion come preloaded; most other flavor acceptance is learned."
+archived: false

@@ -1,0 +1,12 @@
+id: 70af0120-73ce-407a-a6de-fdb16c2d2056
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "In the WHO windows, by about how many months do nearly all healthy babies (99th percentile) sit without support?"
+accepted_answers:
+  - "about 9 months"
+  - "9.2 months"
+  - "about 9.2 months"
+  - "9 months"
+explanation: "Sitting without support has the narrowest WHO window: 3.8 to 9.2 months."
+archived: false

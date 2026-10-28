@@ -1,0 +1,19 @@
+id: d6be1e5a-ebf1-4d17-b105-4dbcfdeb6eaf
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Experience-expectant plasticity refers to development counting on:"
+choices:
+  - id: d96b4dc5-9282-4fde-ba50-5b9f83da1942
+    text: "Near-universal inputs like faces, voices and movement"
+  - id: 7e8a297a-aa5d-4436-b777-9362eb34af74
+    text: "Only rare special training"
+  - id: 049545a3-8c4b-4e89-b778-0a13fc07a8c3
+    text: "No input at all"
+  - id: 0503b02a-1ad7-48a3-8991-001601a74515
+    text: "Adult teaching"
+correct_choice_ids:
+  - d96b4dc5-9282-4fde-ba50-5b9f83da1942
+explanation: "Some systems expect the universal environment; experience-dependent plasticity tunes to the particular one."
+archived: false

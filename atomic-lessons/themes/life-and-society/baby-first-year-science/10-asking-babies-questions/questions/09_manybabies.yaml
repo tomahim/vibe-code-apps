@@ -1,0 +1,19 @@
+id: e0c92242-5327-4bd6-9580-9bf09c8542b3
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "ManyBabies is:"
+choices:
+  - id: 4ebd04ac-1b47-49d3-9708-85a5dadc22af
+    text: "A global consortium re-running pre-registered infant experiments across many labs"
+  - id: 2c65fff0-c797-4460-aeb5-67d41e66e3bf
+    text: "A parenting app"
+  - id: d178ca78-f2f5-47c6-9ce7-93ea3672a1bd
+    text: "A single large nursery"
+  - id: 71ebcfb8-ba80-48d5-ba8e-31ab6bb047ab
+    text: "A toy company study"
+correct_choice_ids:
+  - 4ebd04ac-1b47-49d3-9708-85a5dadc22af
+explanation: "Dozens of labs test the same question with large diverse samples, the field's answer to the replication crisis."
+archived: false

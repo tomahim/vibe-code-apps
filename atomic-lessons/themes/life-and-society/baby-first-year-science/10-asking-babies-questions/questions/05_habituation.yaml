@@ -1,0 +1,19 @@
+id: 97037f45-5df3-4df9-818e-8008bb39c565
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Habituation means a baby shown the same stimulus repeatedly:"
+choices:
+  - id: 9bbd8329-7bdc-4692-9ce8-ece0abeef5d1
+    text: "Looks less over time, then perks up for something new"
+  - id: 16463053-a37d-4346-8fe9-e872ef057688
+    text: "Looks longer each time"
+  - id: 47a3cfa6-4208-4131-9554-088fb735dbc2
+    text: "Falls asleep immediately"
+  - id: e5183b23-2520-4147-86b1-5149f2620c72
+    text: "Cries increasingly"
+correct_choice_ids:
+  - 9bbd8329-7bdc-4692-9ce8-ece0abeef5d1
+explanation: "Declining looking time shows boredom; the rebound for a changed stimulus reveals discrimination."
+archived: false

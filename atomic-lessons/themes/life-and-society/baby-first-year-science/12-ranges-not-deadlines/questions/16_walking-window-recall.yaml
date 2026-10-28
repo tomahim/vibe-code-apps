@@ -1,0 +1,12 @@
+id: 9b732472-1da0-4382-859a-5bf2349fdc95
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Recall the WHO window for walking alone, in months (approximate)."
+accepted_answers:
+  - "8 to 18 months"
+  - "8-18 months"
+  - "8.2 to 17.6 months"
+  - "about 8 to 18 months"
+explanation: "Walking alone: 8.2 to 17.6 months by the WHO windows - the course's emblem of normal range."
+archived: false

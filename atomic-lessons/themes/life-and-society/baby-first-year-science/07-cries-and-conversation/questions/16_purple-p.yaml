@@ -1,0 +1,11 @@
+id: c3166bbd-6a36-4975-8f4c-22fa8a05f3a0
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In the PURPLE acronym, what does the first P (the timing feature) stand for?"
+accepted_answers:
+  - "Peak"
+  - "peak of crying"
+  - "Peak of crying"
+explanation: "PURPLE begins with the Peak of crying around two months, followed by Unexpected, Resists soothing, Pain-like face, Long-lasting, Evening."
+archived: false

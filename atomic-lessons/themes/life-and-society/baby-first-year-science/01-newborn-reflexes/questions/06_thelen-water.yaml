@@ -1,0 +1,19 @@
+id: 71555347-d88f-49d3-b472-3b3072049196
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did Thelen's water experiment show about newborn stepping?"
+choices:
+  - id: 2aeaa506-7d31-40bb-9cf5-c29e5a0508ef
+    text: "Stepping continues when the legs are buoyed, so leg weight matters"
+  - id: 1b2a04bd-8157-4489-922b-5de5f4768cb8
+    text: "Stepping is controlled mainly by vision"
+  - id: 3dda426b-81d6-494a-aef2-a46cb1820963
+    text: "Stepping stops because babies lose interest"
+  - id: 72297f62-2aff-4bc8-9089-0bf47e015156
+    text: "Stepping appears only after crawling begins"
+correct_choice_ids:
+  - 2aeaa506-7d31-40bb-9cf5-c29e5a0508ef
+explanation: "Babies held in water keep stepping, showing the reflex fades partly because legs gain weight faster than strength."
+archived: false

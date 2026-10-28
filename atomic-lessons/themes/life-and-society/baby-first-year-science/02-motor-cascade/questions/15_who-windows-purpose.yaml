@@ -1,0 +1,19 @@
+id: 72e260f0-2301-4b80-b245-1cf4b4f8ce6e
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "The WHO windows of achievement were designed mainly to:"
+choices:
+  - id: 4f9a9ae7-18af-412d-95e3-45d91dbc4507
+    text: "Describe normal variation in healthy children"
+  - id: d3acc179-2407-467c-b6e3-4c39d6f14863
+    text: "Set legal deadlines for walking"
+  - id: 0325b8ec-4dfe-407b-899d-86bc3cc0c537
+    text: "Rank countries by infant development"
+  - id: 06c2eb77-2367-48f0-8787-6a6cc4575336
+    text: "Replace pediatric checkups"
+correct_choice_ids:
+  - 4f9a9ae7-18af-412d-95e3-45d91dbc4507
+explanation: "The windows describe the 1st-to-99th-percentile range of healthy development, not deadlines or rankings."
+archived: false

@@ -1,0 +1,19 @@
+id: ff4e86b3-004d-4be1-9f79-42c784939c9e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In DeCasper and Fifer's 1980 study, newborns controlled recordings by:"
+choices:
+  - id: e0741808-053e-4b56-aa56-f4c651128a3b
+    text: "Adjusting their sucking rhythm on a pacifier"
+  - id: ee6292dc-3ef6-438e-820f-4124949bcddb
+    text: "Pointing at speakers"
+  - id: b48ffdab-3ec9-4928-b479-e26ce8dc0b9a
+    text: "Pressing buttons"
+  - id: 3d1809bc-26f9-4738-92e4-14f5e28e8f17
+    text: "Kicking in patterns"
+correct_choice_ids:
+  - e0741808-053e-4b56-aa56-f4c651128a3b
+explanation: "Days-old infants changed sucking patterns to hear their mother's voice, showing prenatal voice learning."
+archived: false

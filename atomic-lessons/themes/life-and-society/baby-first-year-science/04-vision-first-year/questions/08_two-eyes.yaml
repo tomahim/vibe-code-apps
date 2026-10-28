@@ -1,0 +1,11 @@
+id: 276bc6d8-6588-41a4-9a62-96a4b358eb50
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the term for depth perception from fusing the two eyes' slightly different images?"
+accepted_answers:
+  - "stereopsis"
+  - "binocular stereopsis"
+  - "Stereopsis"
+explanation: "Stereopsis emerges around three to four months and feeds reaching and navigation."
+archived: false

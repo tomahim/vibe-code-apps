@@ -1,0 +1,19 @@
+id: 17a7086f-072c-4221-adac-247f36814ac5
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "This course's one-line summary of the first year is:"
+choices:
+  - id: 8a781f80-2cb8-4efb-9271-20818857b283
+    text: "Ranges, not deadlines"
+  - id: d9c50e84-eeb1-4115-bdda-60685ae6dbff
+    text: "Earlier is better"
+  - id: 9c81af89-581a-4035-a94c-522a0228949f
+    text: "Milestones are promises"
+  - id: 190896be-5174-48e7-bf53-51a469c11937
+    text: "Babies develop identically"
+correct_choice_ids:
+  - 8a781f80-2cb8-4efb-9271-20818857b283
+explanation: "The architecture is universal, the timetable is not - the course's closing message."
+archived: false

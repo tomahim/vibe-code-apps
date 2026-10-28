@@ -1,0 +1,19 @@
+id: 37d5923b-cbf5-4e60-9012-c98d0b238bf9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Calling all four-legged animals dog is an example of:"
+choices:
+  - id: ce7121c5-2463-463c-8df3-7394883c8c59
+    text: "Overextension: a first-draft category theory"
+  - id: 78a128b6-06e4-4cfd-84ee-6c5082489103
+    text: "A hearing problem"
+  - id: 12b6198c-966f-41db-b6f2-fde875c21659
+    text: "Regression"
+  - id: 3a44044e-5e17-4775-98c3-4716bdd4989f
+    text: "Babbling"
+correct_choice_ids:
+  - ce7121c5-2463-463c-8df3-7394883c8c59
+explanation: "Overextensions are systematic hypotheses about word boundaries, corrected as vocabulary grows."
+archived: false

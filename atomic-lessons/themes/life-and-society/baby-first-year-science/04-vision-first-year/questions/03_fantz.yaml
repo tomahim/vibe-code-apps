@@ -1,0 +1,19 @@
+id: 32bb1773-b541-48e1-a761-bce6ad42b74e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Robert Fantz showed that newborns look longer at:"
+choices:
+  - id: f6955635-8c30-4fb0-a158-a483a2460b56
+    text: "Patterned images, especially face-like ones"
+  - id: c2057a3c-303e-4a15-b5d3-18a3f134f0c0
+    text: "Blank gray cards"
+  - id: 663097e4-5eaf-447e-aa48-c2454fdf7a9f
+    text: "Only moving dots"
+  - id: 8b4b1775-f350-4e5e-a356-8df766322f08
+    text: "Only colored lights"
+correct_choice_ids:
+  - f6955635-8c30-4fb0-a158-a483a2460b56
+explanation: "Fantz's preferential-looking studies in the 1960s launched the modern study of infant perception."
+archived: false

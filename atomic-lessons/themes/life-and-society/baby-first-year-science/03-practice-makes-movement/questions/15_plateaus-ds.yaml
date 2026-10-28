@@ -1,0 +1,19 @@
+id: 4dad3a9b-c668-4ca6-a655-6f50d8734c00
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Dynamic systems theory explains bursts and plateaus as:"
+choices:
+  - id: 6f8c5aff-783a-4381-809f-89eb8e546b10
+    text: "Components reaching workable combinations at different times"
+  - id: 87c18da8-b3dc-4404-8a78-736c288160bf
+    text: "Errors in measurement"
+  - id: 0d7bfae6-378e-4376-8dae-fefa3abff116
+    text: "Proof of a genetic clock"
+  - id: 03b0ea43-0751-4916-9e49-945049cae488
+    text: "Random noise"
+correct_choice_ids:
+  - 6f8c5aff-783a-4381-809f-89eb8e546b10
+explanation: "A skill assembles when its components align, so progress comes in jumps after quiet periods."
+archived: false

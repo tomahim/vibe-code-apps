@@ -1,0 +1,19 @@
+id: 02fc19b9-a255-4c1b-9425-2b3743727419
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In developmental science, wide variation in timing is:"
+choices:
+  - id: 3a0725d0-5e4c-4c82-8aac-b1eed4614d59
+    text: "The normal product of a self-assembling system"
+  - id: be99ae57-0bb1-4807-aad4-888dea216a07
+    text: "Noise to ignore"
+  - id: 175c2263-0df0-4976-9b65-ce8933a6a383
+    text: "Usually pathology"
+  - id: cb78149e-b51b-4e73-ad5e-63795ee9a0cb
+    text: "A measurement error"
+correct_choice_ids:
+  - 3a0725d0-5e4c-4c82-8aac-b1eed4614d59
+explanation: "Variation is not noise around a true schedule; it is the expected output across bodies, families and cultures."
+archived: false

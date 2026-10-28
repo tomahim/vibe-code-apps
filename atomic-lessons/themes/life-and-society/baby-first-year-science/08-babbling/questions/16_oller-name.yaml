@@ -1,0 +1,10 @@
+id: 73321131-138e-4b35-8b18-2e3e21104c82
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the surname of the speech scientist known for establishing canonical babbling's schedule?"
+accepted_answers:
+  - "Oller"
+  - "oller"
+explanation: "Kimbrough Oller's work showed canonical babbling, unlike earlier vocal play, follows a tight timetable."
+archived: false

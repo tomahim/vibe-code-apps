@@ -1,0 +1,19 @@
+id: 5d698f25-8bae-42aa-92b3-1763090553ec
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Daily treadmill practice in Thelen's studies led to:"
+choices:
+  - id: b3cd4e16-3384-49f2-841f-c2fdc72d0623
+    text: "Stepping preserved and earlier independent walking"
+  - id: 255e613e-7904-4661-8feb-0d4ffdcb70ce
+    text: "No measurable effect"
+  - id: 3519fc8f-4a82-4158-8aa8-f3815eb27ddf
+    text: "Later walking and weaker legs"
+  - id: 487dbfc9-30a6-4859-93c6-8fda7fe5e555
+    text: "Permanent reflexes"
+correct_choice_ids:
+  - b3cd4e16-3384-49f2-841f-c2fdc72d0623
+explanation: "A few minutes of daily stepping practice kept the pattern alive and advanced walking, contradicting a fixed clock."
+archived: false

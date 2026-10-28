@@ -1,0 +1,19 @@
+id: 3361ef2f-9167-48a8-bd22-9c8b3c56df5a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In the WHO study, what share of children never crawled on hands and knees yet developed typically?"
+choices:
+  - id: cc311f70-2de1-4bfe-ad30-bca385fc755c
+    text: "About 4.3%"
+  - id: 75226dd8-8b29-4dc2-8333-3e3ea07230fa
+    text: "About 40%"
+  - id: adad9a60-0ec5-40b2-a2b8-cfbaaac60633
+    text: "About 0.1%"
+  - id: 36c8257e-168f-41dd-80ce-3d17fd9ae7fc
+    text: "About 25%"
+correct_choice_ids:
+  - cc311f70-2de1-4bfe-ad30-bca385fc755c
+explanation: "4.3% skipped hands-and-knees crawling entirely and walked normally; the sequence is a tendency, not a law."
+archived: false

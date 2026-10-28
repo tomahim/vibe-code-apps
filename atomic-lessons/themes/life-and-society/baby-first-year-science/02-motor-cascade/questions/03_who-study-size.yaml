@@ -1,0 +1,19 @@
+id: 9a51913b-db6e-453c-bbed-cfee1e1d5056
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The WHO Motor Development Study followed about how many children?"
+choices:
+  - id: 659cc166-8b88-40d5-b51c-2b6e93e0ac99
+    text: "816 children in five countries"
+  - id: da5622c7-7d9a-495d-b69f-2078c4909745
+    text: "80 children in one clinic"
+  - id: 69d99dce-1b34-4ee3-bc76-9f5a3438d2e6
+    text: "8,000 children online"
+  - id: 24a575f1-6543-4212-b4fb-1e25868ff112
+    text: "16 children in a laboratory"
+correct_choice_ids:
+  - 659cc166-8b88-40d5-b51c-2b6e93e0ac99
+explanation: "816 children in Ghana, India, Norway, Oman and the USA were assessed longitudinally from 4 to 24 months."
+archived: false

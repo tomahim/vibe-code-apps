@@ -1,0 +1,19 @@
+id: 3f7e723d-29f4-48ca-8913-c28499dcc2db
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Newborn hearing screening commonly measures:"
+choices:
+  - id: c1b1f69c-56b7-4892-8747-2cb2e39868e8
+    text: "Otoacoustic emissions: faint echoes from the healthy inner ear"
+  - id: feec5d4d-f9f9-415c-b849-acdde8c2681c
+    text: "Whether the baby startles to clapping"
+  - id: 7d7148d4-818f-4c19-b238-660de63352f7
+    text: "Pupil dilation to sound"
+  - id: 7f7f1e76-59ba-44c8-ae32-7b9d6b47c9f8
+    text: "Sucking speed during music"
+correct_choice_ids:
+  - c1b1f69c-56b7-4892-8747-2cb2e39868e8
+explanation: "Objective screening in the first days identifies hearing loss before behavioral signs would be reliable."
+archived: false

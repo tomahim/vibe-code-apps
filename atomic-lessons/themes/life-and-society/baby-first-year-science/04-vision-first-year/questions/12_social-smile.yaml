@@ -1,0 +1,12 @@
+id: 0d5547b6-7e99-48e9-ba68-1202aa0bf219
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Around how many months does social smiling typically arrive alongside more sustained eye contact?"
+accepted_answers:
+  - "2 to 3 months"
+  - "about 2 months"
+  - "2-3 months"
+  - "about 2-3 months"
+explanation: "Social smiling and mutual gaze typically emerge together around two to three months."
+archived: false

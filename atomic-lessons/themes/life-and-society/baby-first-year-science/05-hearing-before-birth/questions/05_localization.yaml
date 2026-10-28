@@ -1,0 +1,19 @@
+id: 42d18348-7447-493a-bad3-61d471461466
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Turning precisely toward a sound source typically becomes reliable around:"
+choices:
+  - id: 01882d97-d1a3-4fa8-961e-6db48e802c57
+    text: "4 to 6 months"
+  - id: df0fb340-b2af-4a5c-8ab1-30a224131957
+    text: "1 week"
+  - id: 64c76923-2d2f-4dad-a22a-c00c47602da4
+    text: "12 months"
+  - id: d08d19c6-64a4-4c03-a0bd-7c4d16b92f1d
+    text: "2 years"
+correct_choice_ids:
+  - 01882d97-d1a3-4fa8-961e-6db48e802c57
+explanation: "Sound localization matures over the first months as the brain learns to compare the two ears' signals."
+archived: false

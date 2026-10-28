@@ -1,0 +1,19 @@
+id: 1a37a9e0-a36a-4dea-aef9-e20427f91683
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Adolph's measurements of new walkers found roughly:"
+choices:
+  - id: 75b75466-2bdf-4876-954d-4cd27684065c
+    text: "Thousands of steps and dozens of falls per day"
+  - id: ef8297fd-9bee-4fa0-aab9-f7a65a6397f0
+    text: "Ten steps and one fall per day"
+  - id: dee7f546-a50f-4556-9c05-17f7c0f5295e
+    text: "A hundred steps per week"
+  - id: 25c4c4cf-8a81-4bf1-b107-6c0395b0dd7c
+    text: "No falls once walking starts"
+correct_choice_ids:
+  - 75b75466-2bdf-4876-954d-4cd27684065c
+explanation: "The volume of self-generated practice is enormous, which is exactly what calibrates the new skill."
+archived: false

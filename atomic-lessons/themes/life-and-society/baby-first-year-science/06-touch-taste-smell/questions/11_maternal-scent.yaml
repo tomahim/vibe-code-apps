@@ -1,0 +1,19 @@
+id: aacbc63a-e52a-4dba-b269-6e8c0620c956
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "A familiar maternal scent on bedding tends to make babies:"
+choices:
+  - id: ecd29585-1ebb-4d2e-9cc7-3a241c528ed5
+    text: "Settle faster and cry less"
+  - id: f844e838-885a-4313-aaee-371b4b84cd08
+    text: "More alert at night"
+  - id: 6a43f176-8fa4-400b-9bad-86cae360380d
+    text: "Hungrier"
+  - id: 3f0badc1-3c64-46da-99a9-cc457f8471bf
+    text: "No measurable difference"
+correct_choice_ids:
+  - ecd29585-1ebb-4d2e-9cc7-3a241c528ed5
+explanation: "Familiar odor is a calming signal; smell is a primary identity channel for a baby lying in arms."
+archived: false

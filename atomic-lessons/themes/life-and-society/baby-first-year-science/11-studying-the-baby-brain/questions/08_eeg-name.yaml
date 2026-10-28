@@ -1,0 +1,10 @@
+id: 20b889b6-5d76-431b-85dd-c3e260676e7a
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What three-letter abbreviation names the scalp-recorded electrical measure of brain activity?"
+accepted_answers:
+  - "EEG"
+  - "eeg"
+explanation: "EEG is the workhorse of infant brain research: precise in time, coarse in location."
+archived: false

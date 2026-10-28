@@ -1,0 +1,11 @@
+id: 6f84fe62-2cc7-40c7-9606-519b87f86986
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the two-word tennis metaphor for responsive baby-caregiver exchanges?"
+accepted_answers:
+  - "serve and return"
+  - "Serve and return"
+  - "serve & return"
+explanation: "The baby's serve - a coo, look or gesture - is answered by the caregiver's return, thousands of times."
+archived: false

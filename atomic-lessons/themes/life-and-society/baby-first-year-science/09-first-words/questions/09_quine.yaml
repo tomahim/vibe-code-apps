@@ -1,0 +1,19 @@
+id: 1f77728d-f205-47c1-afbd-3b17b00402e7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Quine's indeterminacy puzzle is that a heard word could refer to:"
+choices:
+  - id: 2f8838ea-defb-4703-a08b-a97d0195d76e
+    text: "The object, its color, its action or almost anything"
+  - id: f61a25c2-8cbf-48c8-b21a-0daa350af419
+    text: "Only whole objects"
+  - id: 2f5a12a6-3fe2-428f-b980-34f7f58fa5cb
+    text: "Only colors"
+  - id: 7ed4d905-c3af-49bd-9d05-39cf41ec7a4f
+    text: "Nothing at all"
+correct_choice_ids:
+  - 2f8838ea-defb-4703-a08b-a97d0195d76e
+explanation: "Children solve the ambiguity with default assumptions plus social cues like gaze and pointing."
+archived: false

@@ -1,0 +1,19 @@
+id: 848fb020-c26b-44c4-a6a2-05afb373379c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Fetuses begin responding to sound at roughly:"
+choices:
+  - id: 5f75eb3b-28c7-4ace-b3cf-66ace4e32a04
+    text: "25 to 27 weeks of gestation"
+  - id: b263aa8e-2c83-4af0-958b-32ed964d0dae
+    text: "8 weeks of gestation"
+  - id: 1952aa0f-700c-4779-9085-5409a95e2e3d
+    text: "Only after birth"
+  - id: c7e59177-35ee-45be-a9ad-d870412bbc0e
+    text: "40 weeks of gestation"
+correct_choice_ids:
+  - 5f75eb3b-28c7-4ace-b3cf-66ace4e32a04
+explanation: "Heart-rate and movement studies show auditory responses from about 25-27 weeks, in the third trimester."
+archived: false

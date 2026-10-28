@@ -1,0 +1,19 @@
+id: 75e96905-097c-42a2-a078-f56191f71080
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Cross-cultural research on milestones shows:"
+choices:
+  - id: ef38cbb1-b0e0-4373-858c-b5e1ee79c81d
+    text: "What counts as a milestone, and its timing, partly reflects caregiving practices"
+  - id: decf12e6-717d-4464-8eef-0e374ed24301
+    text: "Timing is identical everywhere"
+  - id: 0623e752-23a1-4b70-96f1-788f9913ba36
+    text: "Culture affects nothing"
+  - id: eb42a7cf-c8c6-4784-bb36-9f942e13d548
+    text: "Only Western norms are healthy"
+correct_choice_ids:
+  - ef38cbb1-b0e0-4373-858c-b5e1ee79c81d
+explanation: "Handling routines shift timing, and cultures differ in which skills they prioritize."
+archived: false

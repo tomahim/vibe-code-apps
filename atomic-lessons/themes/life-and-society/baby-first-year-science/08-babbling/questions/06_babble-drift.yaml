@@ -1,0 +1,19 @@
+id: 03a075db-009d-4631-b1ca-7d6df714bedc
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Babble drift means that late in the first year, babbling:"
+choices:
+  - id: 919644a3-ab96-4817-8e77-ebad25d673ec
+    text: "Increasingly matches the surrounding language's sounds and melody"
+  - id: 7670d835-0b9c-4bb4-98fd-d33b250ec016
+    text: "Sounds identical in all cultures"
+  - id: 967d1966-63af-4993-bb09-7427a12206a5
+    text: "Stops completely"
+  - id: e3e0aac5-54b1-4c13-b840-fb198a6b1931
+    text: "Switches to whispering"
+correct_choice_ids:
+  - 919644a3-ab96-4817-8e77-ebad25d673ec
+explanation: "Production follows perception: babies average the speech they hear into the speech they attempt."
+archived: false

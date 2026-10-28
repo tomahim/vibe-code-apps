@@ -1,0 +1,19 @@
+id: 9633821e-3328-4caa-b133-6e8f1e5e950b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Two-word combinations like more juice typically emerge around:"
+choices:
+  - id: de8637fd-402b-4266-ac4c-91b2b49cae01
+    text: "18 to 24 months, after roughly 50 words"
+  - id: 277c31b0-591f-4d34-9015-1575199cfc42
+    text: "6 months"
+  - id: 3d373921-02ba-4295-a811-23232c32a510
+    text: "3 years"
+  - id: 6d53e390-c597-4063-819c-29dce82eab44
+    text: "10 months"
+correct_choice_ids:
+  - de8637fd-402b-4266-ac4c-91b2b49cae01
+explanation: "Combining words is a grammar threshold that usually follows a base of about 50 words."
+archived: false

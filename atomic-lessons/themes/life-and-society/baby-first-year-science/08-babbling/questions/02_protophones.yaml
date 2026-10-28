@@ -1,0 +1,19 @@
+id: ebef9e9a-f743-42ce-8387-91e92f53046c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Squeals, growls and vowel play before canonical babbling are called:"
+choices:
+  - id: 5322a33b-b55e-4975-ba1c-6f429995894c
+    text: "Protophones"
+  - id: 2586c702-2406-4a10-84d7-c1de46e0a287
+    text: "Words"
+  - id: b12e2c61-1826-4e0a-8062-e8726cf58485
+    text: "Jargon"
+  - id: aab61637-f4ef-460d-894e-3489080d7f17
+    text: "Cooing"
+correct_choice_ids:
+  - 5322a33b-b55e-4975-ba1c-6f429995894c
+explanation: "Protophones are vocal experiments that exercise the speech machinery before true syllables appear."
+archived: false

@@ -1,0 +1,10 @@
+id: 082fd675-592f-4b0a-bd55-0474deaaf317
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Surveillance, screening and what third term names the full evaluation that actually concludes something?"
+accepted_answers:
+  - "diagnosis"
+  - "Diagnosis"
+explanation: "Checklists support surveillance, standardized screens flag risk, and only diagnostic evaluation concludes."
+archived: false

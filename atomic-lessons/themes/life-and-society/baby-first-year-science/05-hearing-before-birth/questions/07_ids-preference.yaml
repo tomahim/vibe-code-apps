@@ -1,0 +1,19 @@
+id: fa929416-5fbf-40d3-8225-2a9fd6913640
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Infant-directed speech is best described as:"
+choices:
+  - id: 55a3424c-dc2a-411a-a91a-a72d16749172
+    text: "Higher-pitched, slower, exaggerated speech babies prefer"
+  - id: 0b2af80c-754b-4926-af84-a2e6777aa459
+    text: "Nonsense syllables"
+  - id: 4d49f243-20f2-4403-9a04-ed43876df4c3
+    text: "Whispering only"
+  - id: 1cd68acb-1379-4527-991d-fbdf465430fc
+    text: "Adult speech read faster"
+correct_choice_ids:
+  - 55a3424c-dc2a-411a-a91a-a72d16749172
+explanation: "Fernald's experiments showed infants prefer this register, which carries emotion and clarifies speech sounds."
+archived: false

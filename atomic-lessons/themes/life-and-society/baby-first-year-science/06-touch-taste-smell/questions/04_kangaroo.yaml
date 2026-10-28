@@ -1,0 +1,11 @@
+id: aa15e80f-fdc7-47b2-b299-616d0ed3f105
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What is the name of the WHO-recommended extended skin-to-skin practice for preterm and low-birth-weight infants?"
+accepted_answers:
+  - "kangaroo care"
+  - "Kangaroo care"
+  - "kangaroo mother care"
+explanation: "Kangaroo care showed such clear benefits for vulnerable newborns that it became standard care."
+archived: false

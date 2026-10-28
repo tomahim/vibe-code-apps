@@ -1,0 +1,19 @@
+id: 49df053f-6d2c-44fd-8318-df0e4bfd6866
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Cooing and the social smile arriving together around two months signal:"
+choices:
+  - id: d48c3712-0e10-4d7b-836c-4f94fd03984d
+    text: "The start of two-way social exchange"
+  - id: d70daa8f-b00b-49c8-bed3-b8bbbe6fb1f0
+    text: "Teething"
+  - id: 3fda1ffa-aea4-4dcb-a7a0-f0a44d3358fd
+    text: "Hearing loss"
+  - id: 066f8e52-bc7d-488e-a91d-6f1c95d2c6a9
+    text: "Hunger"
+correct_choice_ids:
+  - d48c3712-0e10-4d7b-836c-4f94fd03984d
+explanation: "Together they transform one-way care into protoconversation."
+archived: false

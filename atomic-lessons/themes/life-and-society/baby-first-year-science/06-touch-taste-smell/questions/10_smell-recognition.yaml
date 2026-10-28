@@ -1,0 +1,19 @@
+id: 251e519f-31a1-4ae2-9aca-a17cc5fe736b
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Within the first days, breastfed newborns can:"
+choices:
+  - id: 0e386049-5084-4dce-b683-9c4eafcd22df
+    text: "Turn toward their own mother's breast odor"
+  - id: 0333101f-62cc-469c-b974-22f257b59220
+    text: "Identify their father by voice alone"
+  - id: f5f2d24c-97e0-412f-a7aa-dafe676753ce
+    text: "Smell only strong perfumes"
+  - id: 9bc9db94-89b5-481c-bcb9-a5e34d7144f0
+    text: "Not yet use smell"
+correct_choice_ids:
+  - 0e386049-5084-4dce-b683-9c4eafcd22df
+explanation: "Odor recognition begins prenatally and helps the newborn locate the nipple and settle."
+archived: false

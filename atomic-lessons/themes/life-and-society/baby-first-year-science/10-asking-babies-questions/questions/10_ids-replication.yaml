@@ -1,0 +1,19 @@
+id: 08a9de45-8dd9-42bb-9a09-2da59ded0ced
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "ManyBabies' test of infant-directed speech preference found that it:"
+choices:
+  - id: e83b8836-85e5-4f3b-b098-361591f00c97
+    text: "Replicated robustly"
+  - id: 512eb2c4-78b3-492c-9b3b-09455d4370a4
+    text: "Failed completely"
+  - id: 938e65c0-7c73-412e-93e6-a68f9f5298bc
+    text: "Only exists in the USA"
+  - id: 9740808a-6bd3-41f3-888c-a864fb97a147
+    text: "Was never tested"
+correct_choice_ids:
+  - e83b8836-85e5-4f3b-b098-361591f00c97
+explanation: "The preference for infant-directed speech is one of the field's best-replicated findings."
+archived: false

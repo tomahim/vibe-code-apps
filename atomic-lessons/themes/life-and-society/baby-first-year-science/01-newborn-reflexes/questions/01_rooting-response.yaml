@@ -1,0 +1,19 @@
+id: 71a9ba4d-6072-42bd-b5ff-f0880d613e51
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does a newborn do when you stroke the corner of the mouth?"
+choices:
+  - id: 670c146a-2ec4-4f50-ac87-02fe92a5c170
+    text: "Turns toward the touch with an open mouth"
+  - id: 89846e76-1271-483a-8ab8-d1c8fb300799
+    text: "Turns away and closes the eyes"
+  - id: 76e35bbd-08fc-4db4-bd11-0862e34d10d6
+    text: "Throws both arms outward"
+  - id: 683db903-7120-46c0-a7ba-561be9910e3a
+    text: "Kicks both legs together"
+correct_choice_ids:
+  - 670c146a-2ec4-4f50-ac87-02fe92a5c170
+explanation: "That is the rooting reflex: it helps the baby find a nipple, and it pairs with the sucking reflex for feeding."
+archived: false

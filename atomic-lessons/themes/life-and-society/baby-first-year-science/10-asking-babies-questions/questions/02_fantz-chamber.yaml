@@ -1,0 +1,19 @@
+id: 047ed2ec-7219-4333-a4bc-9bb5864eef8f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Fantz's looking chamber measured:"
+choices:
+  - id: 5408596e-de85-45d8-bd41-0b8f34e506b0
+    text: "Which of two images a baby looked at longer"
+  - id: bc78324d-ee12-4124-9b6c-0cafc616f519
+    text: "How fast babies crawl"
+  - id: 326782da-6182-48fc-83bf-62919b21e8ca
+    text: "Cry pitch"
+  - id: 24b56aaf-0281-4d42-908f-8057dafbb0d2
+    text: "Sleep duration"
+correct_choice_ids:
+  - 5408596e-de85-45d8-bd41-0b8f34e506b0
+explanation: "Preferential looking turned gaze choice into data about discrimination and preference."
+archived: false

@@ -1,0 +1,19 @@
+id: 433a034d-0ea1-4a3d-89b0-0961c5b8add7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Perceptual narrowing refers to:"
+choices:
+  - id: b8c29ddd-302b-4d67-9db1-5abf2d78994a
+    text: "Declining sensitivity to non-native speech contrasts as native perception sharpens"
+  - id: 5e13bc16-f915-45bb-810d-ea62dcef4f93
+    text: "Losing all hearing of high tones"
+  - id: dbf02b2d-b29d-45e5-a789-0696c268d358
+    text: "The ear canal narrowing with age"
+  - id: 47e3c4f6-7b4b-4b5d-81fe-b2fc2daf9ff4
+    text: "Preferring quiet rooms"
+correct_choice_ids:
+  - b8c29ddd-302b-4d67-9db1-5abf2d78994a
+explanation: "Across the second half of the first year, the brain specializes for the sound system it actually hears."
+archived: false

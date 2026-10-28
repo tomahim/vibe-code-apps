@@ -1,0 +1,19 @@
+id: 300fcad9-01b0-499b-b5c8-ae0ff6cdbdae
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which pair of reflexes most directly supports feeding?"
+choices:
+  - id: 30149ba9-d47f-4d37-89b5-ba6b1b8b8485
+    text: "Rooting and sucking"
+  - id: d5bb7007-d77b-4364-b6c3-96fb4cf09c1c
+    text: "Moro and stepping"
+  - id: 9f2cd0ea-e656-4546-bda2-49ecc2fa426d
+    text: "Grasp and plantar"
+  - id: 33706837-37bb-4c87-ac14-3cc8b67a6c57
+    text: "Stepping and Moro"
+correct_choice_ids:
+  - 30149ba9-d47f-4d37-89b5-ba6b1b8b8485
+explanation: "Rooting finds the nipple and sucking draws milk; Moro, grasp and stepping serve other purposes."
+archived: false

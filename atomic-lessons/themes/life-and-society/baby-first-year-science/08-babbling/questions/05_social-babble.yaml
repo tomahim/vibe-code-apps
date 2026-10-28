@@ -1,0 +1,19 @@
+id: f7b8e613-db8e-4c7b-94cf-83f5da74610b
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Babies babble most when:"
+choices:
+  - id: d41cbdeb-c8da-4192-bf06-21acb529b8fe
+    text: "Engaged with responsive partners"
+  - id: aa51eae2-23f4-4204-89ff-2de18f7c5a9f
+    text: "Alone and silent"
+  - id: 9609e508-acca-483d-8ed8-b4413e0dae9a
+    text: "Asleep"
+  - id: ddd7acc7-6e04-4309-9bd8-eed4b8b1e81e
+    text: "Watching screens"
+correct_choice_ids:
+  - d41cbdeb-c8da-4192-bf06-21acb529b8fe
+explanation: "Babbling is social; contingent caregiver replies push vocalizations toward more mature forms."
+archived: false

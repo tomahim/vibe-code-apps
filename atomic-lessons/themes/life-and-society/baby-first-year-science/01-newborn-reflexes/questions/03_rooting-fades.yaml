@@ -1,0 +1,19 @@
+id: c8d76727-73cb-4a4d-a7c0-1498af753ab2
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Around what age does the rooting reflex typically fade as voluntary control takes over?"
+choices:
+  - id: c14c7473-83ab-4d0b-bf36-ee69e911e919
+    text: "About 4 months"
+  - id: 948a0c17-8460-49f0-b315-c773e73ddd56
+    text: "About 2 weeks"
+  - id: fddb98b3-5e4f-4644-bf23-e9d92e8144c5
+    text: "About 9 months"
+  - id: 2ae44d5d-ae28-4ba3-aa31-1f3ee24bf256
+    text: "About 12 months"
+correct_choice_ids:
+  - c14c7473-83ab-4d0b-bf36-ee69e911e919
+explanation: "Rooting usually integrates around four months, when purposeful head-turning and reaching replace the automatic search."
+archived: false

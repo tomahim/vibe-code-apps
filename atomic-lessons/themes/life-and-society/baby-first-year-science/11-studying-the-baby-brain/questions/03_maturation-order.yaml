@@ -1,0 +1,19 @@
+id: 174ce65f-1b65-47c7-97a1-de67ac054d21
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Brain systems mature in which general order?"
+choices:
+  - id: 4020d431-03b2-4c04-8fbd-5b4ebb4caef9
+    text: "Basic sensory areas first, prefrontal circuits much later"
+  - id: 76115555-ff79-4db0-b69b-1552ef2132fc
+    text: "Prefrontal first, sensory last"
+  - id: f17fb37f-61dd-4091-998f-17ce3f8c7597
+    text: "All at once"
+  - id: 6cb783f6-7c99-4de6-803a-c4cb8d17957e
+    text: "Randomly per baby"
+correct_choice_ids:
+  - 4020d431-03b2-4c04-8fbd-5b4ebb4caef9
+explanation: "Sensory regions mature early; planning and control networks develop over many years."
+archived: false

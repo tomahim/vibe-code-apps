@@ -1,0 +1,19 @@
+id: 4611714d-9a3a-46d1-a3f9-86d053c9734c
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Protoconversation refers to:"
+choices:
+  - id: 2e197de7-b17c-466e-bb7a-861c20301a36
+    text: "Turn-taking bouts of sounds and expressions before words"
+  - id: 2a6ae751-50af-489a-9a0b-75b0300f43a0
+    text: "A baby's first sentence"
+  - id: f14f0e79-7e02-4044-98e9-ee08b224a7fd
+    text: "Reading to infants"
+  - id: 93eb6552-7539-4008-9cdd-a6a0889a4ff5
+    text: "Crying in dialogue"
+correct_choice_ids:
+  - 2e197de7-b17c-466e-bb7a-861c20301a36
+explanation: "Baby and caregiver alternate vocalizations with conversational rhythm months before speech."
+archived: false

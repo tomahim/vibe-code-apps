@@ -1,0 +1,19 @@
+id: 04b82038-a1d3-4530-ace3-86202ed00c92
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "The visual cliff experiment mainly showed that babies of crawling age:"
+choices:
+  - id: 0f565ca8-2e05-4aa1-8332-401e65134180
+    text: "Perceive an apparent drop and hesitate to cross it"
+  - id: 76670d32-8469-4cff-8120-d087ff8ac1d5
+    text: "Cannot see depth at all"
+  - id: 28021912-c471-4691-82ee-8902ccd853ec
+    text: "Always cross without fear"
+  - id: 3716fe69-1802-4883-89e4-d21ff1608d7e
+    text: "Are born afraid of heights"
+correct_choice_ids:
+  - 0f565ca8-2e05-4aa1-8332-401e65134180
+explanation: "Gibson and Walk's glass platform tested crawling-age babies, revealing perceived depth, not an innate fear."
+archived: false

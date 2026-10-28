@@ -1,0 +1,11 @@
+id: 86886a6e-bac8-4958-ae96-299fe5c8e416
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "From about how many months do babies gain enough hand control to deliberately mouth-explore objects?"
+accepted_answers:
+  - "3 to 4 months"
+  - "about 3-4 months"
+  - "3-4 months"
+explanation: "Reliable hand-to-mouth delivery around 3-4 months turns the mouth into the main exploration tool."
+archived: false

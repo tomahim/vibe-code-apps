@@ -1,0 +1,19 @@
+id: 499c698f-e8e1-43ce-b106-24e351d89622
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "According to Adolph's research, frequent falls in new walkers are:"
+choices:
+  - id: acd97d05-d2ce-4727-a97a-28bfdf8bc2af
+    text: "Part of how balance is calibrated through practice"
+  - id: e6d00d89-8a3f-4ef2-a09f-96a4b47d8124
+    text: "Evidence the child should stop walking practice"
+  - id: be3de1a4-4441-4fb8-ab1d-a2c615b812e5
+    text: "A sign of weak bones"
+  - id: e9c4ba7a-b35e-41d6-aa08-7a008f91be02
+    text: "Rare events, a few per week"
+correct_choice_ids:
+  - acd97d05-d2ce-4727-a97a-28bfdf8bc2af
+explanation: "New walkers take thousands of steps and fall dozens of times a day; falling is information for the balance system."
+archived: false

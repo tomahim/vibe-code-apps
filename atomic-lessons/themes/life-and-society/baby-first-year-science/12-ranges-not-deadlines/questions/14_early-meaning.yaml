@@ -1,0 +1,19 @@
+id: 146708e5-09d4-4524-9074-61d9652b1266
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Crossing a milestone early is best read as:"
+choices:
+  - id: 552142ea-ca67-4a29-94a7-6a595a27d36d
+    text: "Normal variation, not a prediction of future advantage"
+  - id: 5d0862cc-4f50-4acb-8586-e3d595860306
+    text: "Guaranteed giftedness"
+  - id: ddbcc51c-87f5-4af2-b677-0958082f4212
+    text: "A reason to skip checkups"
+  - id: 78683a72-0b3c-48db-9cb6-e2d2dd69d902
+    text: "A problem to slow down"
+correct_choice_ids:
+  - 552142ea-ca67-4a29-94a7-6a595a27d36d
+explanation: "Early arrival is part of the range; it is not a scholarship, just as late arrival is not a verdict."
+archived: false

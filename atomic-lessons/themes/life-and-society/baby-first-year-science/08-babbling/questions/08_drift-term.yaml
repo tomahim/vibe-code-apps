@@ -1,0 +1,11 @@
+id: 36d3c204-2c4e-4081-adf4-81b5935d06f3
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What do researchers call babbling's gradual shift toward the home language's sound pattern?"
+accepted_answers:
+  - "babble drift"
+  - "babbling drift"
+  - "drift"
+explanation: "Babble drift is production catching up with the perceptual narrowing described for hearing."
+archived: false

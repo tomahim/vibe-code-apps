@@ -1,0 +1,19 @@
+id: 8b5ae5df-8d01-4c6d-b97b-3f0728f86f9a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Newborn acuity was estimated by finding:"
+choices:
+  - id: 0e03eea5-ae92-4074-92cc-3072459f8b0e
+    text: "The finest stripe pattern a baby still preferred over plain gray"
+  - id: 29afc9bd-3582-4589-bfee-157e241dd6c6
+    text: "The brightest light tolerated"
+  - id: 56743ab9-d4a9-48c6-a1f5-1035bc486c9b
+    text: "The smallest toy reached"
+  - id: f10fbd4f-636a-4581-951d-6615e548b1ed
+    text: "The fastest eye blink"
+correct_choice_ids:
+  - 0e03eea5-ae92-4074-92cc-3072459f8b0e
+explanation: "Preferential looking over gratings of increasing fineness produced the classic acuity estimates."
+archived: false

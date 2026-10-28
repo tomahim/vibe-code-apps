@@ -1,0 +1,10 @@
+id: e10f5ec6-e3f3-418a-ab37-6b1dc36689b0
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Fill in the blank: development emerges from the body, brain and what third element negotiating in real time?"
+accepted_answers:
+  - "environment"
+  - "the environment"
+explanation: "The modern view: body, brain and environment together assemble each skill, which is why practice and context matter."
+archived: false

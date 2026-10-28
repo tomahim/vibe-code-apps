@@ -1,0 +1,19 @@
+id: 6afe8219-0eb7-4d80-9697-7b29e50399c1
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When the grasp reflex fades, what happens to its circuitry?"
+choices:
+  - id: cd05617c-9555-4737-b7b9-4d117a1bc154
+    text: "It is integrated into voluntary reaching and grasping"
+  - id: 1593a8af-e168-4186-8a15-7ae472905961
+    text: "It is deleted from the nervous system"
+  - id: 40f635ae-3728-42d1-bca3-84f13ffeca38
+    text: "It moves from the brain to the spinal cord"
+  - id: e70428d4-cb07-4806-8d03-95e9021cf24b
+    text: "It is replaced by the Moro reflex"
+correct_choice_ids:
+  - cd05617c-9555-4737-b7b9-4d117a1bc154
+explanation: "Fading reflexes are absorbed into purposeful movement; the automatic grasp becomes deliberate reaching and releasing."
+archived: false
