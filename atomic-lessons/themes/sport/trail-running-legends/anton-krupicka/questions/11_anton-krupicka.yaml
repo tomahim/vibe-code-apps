@@ -4,17 +4,17 @@ position: 11
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Which loop in Colorado did he record an FKT on in 2009?"
+prompt: "What is an FKT record set on?"
 choices:
   - id: 7daa65ee-e7e5-4677-bb10-3882c82c84da
-    text: "Maroon Bells 4 Passes Loop"
+    text: "A specific route"
   - id: 07b51563-87c4-445c-84c2-521c4450e9c9
-    text: "Hardrock loop"
+    text: "A track"
   - id: 40d24c95-eec2-4279-a8bb-492b58920b18
-    text: "Pikes Peak"
+    text: "A treadmill"
   - id: 22f80eac-e656-47f3-82df-0b8aa7a9a118
-    text: "Mount Elbert"
+    text: "An Olympic course"
 correct_choice_ids:
   - 7daa65ee-e7e5-4677-bb10-3882c82c84da
-explanation: "The loop is 28 miles."
+explanation: "An FKT is a record on a specific route, not in a race."
 archived: false

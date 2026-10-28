@@ -6,6 +6,6 @@ archived: false
 ---
 **1. Minimalism became a movement.** Krupicka's light shoes and simple style inspired many runners.
 
-**2. FKTs are routes, not races.** He set 28 of them, including the Maroon Bells 4 Passes Loop in 2009.
+**2. FKTs are routes, not races.** He and Stefan Griebel set the Longs Peak Triathlon FKT in 2016.
 
 **3. Careers have chapters.** Injuries led him to other sports, and in 2024 he returned to qualify for UTMB.

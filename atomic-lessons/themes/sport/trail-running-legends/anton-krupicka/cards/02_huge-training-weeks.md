@@ -4,7 +4,7 @@ position: 2
 title: "Huge training weeks"
 archived: false
 ---
-During college and in his early twenties Krupicka often ran more than 200 miles a week. That is far more than almost any runner would train today, and it was a sign of his obsessive commitment.
+In his college years and early twenties Krupicka became known for very high training volume, which was part of his reputation for obsessive commitment.
 
 The film Indulgence: 1000 Miles Under the Colorado Sky follows his summer 2007 training for the Leadville Trail 100. It shows daily runs in the Rocky Mountains and his minimalist way of living. The film helped make him known beyond the ultrarunning community.
 

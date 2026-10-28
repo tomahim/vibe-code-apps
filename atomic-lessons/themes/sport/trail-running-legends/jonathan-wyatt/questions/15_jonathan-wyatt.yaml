@@ -2,8 +2,9 @@ id: fbb553e9-082a-42f4-9210-32e47a754f58
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: "Which medal did Wyatt win at the 2010 Snowshoe Running World Championships? Give the colour."
+prompt: "Which series did Wyatt win eight times? Give the first two words of its name."
 accepted_answers:
-  - "bronze"
-explanation: "He was third overall in Vancouver."
+  - "Grand Prix"
+  - "World Mountain Running Grand Prix"
+explanation: "He is an eight time winner of the world mountain running Grand Prix series."
 archived: false

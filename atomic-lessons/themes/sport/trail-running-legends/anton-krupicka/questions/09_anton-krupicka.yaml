@@ -4,7 +4,7 @@ position: 9
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Which race did he finish second in during 2010 in 15:13:53?"
+prompt: "Which race did he finish second in during 2010 in about 15 hours 13 minutes?"
 choices:
   - id: fd711260-cb29-4954-9281-0015b58e770a
     text: "UTMB"
@@ -16,5 +16,5 @@ choices:
     text: "Leadville"
 correct_choice_ids:
   - 59e3a881-2627-4edb-99fd-579d89af2f07
-explanation: "He was second at Western States in 2010."
+explanation: "He finished second at the 2010 Western States."
 archived: false

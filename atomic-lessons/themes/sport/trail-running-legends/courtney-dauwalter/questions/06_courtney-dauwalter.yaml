@@ -4,17 +4,17 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: "What was her 2017 24 hour distance?"
+prompt: "Which 240 mile race did she win in 2017?"
 choices:
   - id: 24eef8e0-ddd1-4e74-a5e3-25541fb66ecd
-    text: "200 miles"
+    text: "Moab 240"
   - id: f4394c98-966e-4994-be3e-d8fd406ebe6e
-    text: "240 miles"
+    text: "Tor des Géants"
   - id: e8496531-404d-4d89-9067-08f9dc8b6529
-    text: "155.391 miles"
+    text: "Western States"
   - id: a19659ca-f451-45a2-9c05-c8ca1ff82e11
-    text: "100 miles"
+    text: "Badwater 135"
 correct_choice_ids:
-  - e8496531-404d-4d89-9067-08f9dc8b6529
-explanation: "It was a record at the time."
+  - 24eef8e0-ddd1-4e74-a5e3-25541fb66ecd
+explanation: "She won the Moab 240 in 2017."
 archived: false

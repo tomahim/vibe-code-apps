@@ -2,8 +2,8 @@ id: 9f482d59-8145-4131-a513-7220bb8d58b1
 position: 8
 type: type_answer_question
 after_card_position: 4
-prompt: "What was his 2010 White River 50 course record time? Give it as h:mm:ss."
+prompt: "In which year did Krupicka finish second at Western States? Give the year."
 accepted_answers:
-  - "6:25:29"
-explanation: "He set a course record of 6:25:29."
+  - "2010"
+explanation: "He was second in 2010."
 archived: false

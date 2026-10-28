@@ -6,7 +6,7 @@ archived: false
 ---
 Dauwalter is known for her positive attitude and sense of humour during races. She wears baggy long shorts for comfort and follows a relaxed approach to nutrition. She also talks about the Pain Cave, the mental space she enters in the hardest parts of a race.
 
-She says she has reframed the Pain Cave as somewhere she wants to go, because it is where real growth happens. In 2024 she kept winning, with Mt. Fuji 100 Mile in 19:21:22 (third overall) and Transgrancanaria 126 km in 15:14:54.
+She says she has reframed the Pain Cave as somewhere she wants to go, because it is where real growth happens.
 
 Baggy shorts and a calm attitude are part of why Dauwalter became a popular figure outside of the ultra running world. Her message is that hard efforts can be enjoyable and that the mind can be trained like the body.
 

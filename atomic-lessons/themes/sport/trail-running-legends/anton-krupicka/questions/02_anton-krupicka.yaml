@@ -4,17 +4,17 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "How old was Krupicka when he ran his first marathon?"
+prompt: "Which race was Krupicka training for in the film about summer 2007?"
 choices:
   - id: afc44709-13ea-4038-9c11-5cfe3fd2b7dc
-    text: "18"
+    text: "Leadville Trail 100"
   - id: 8a2d439a-52b2-4001-b446-cda942e0ad18
-    text: "25"
+    text: "Western States"
   - id: 287da6cb-5834-4ed7-b80c-57674b263d75
-    text: "8"
+    text: "Hardrock 100"
   - id: ed7bb137-089c-44c1-aae6-f92faab90fa0
-    text: "12"
+    text: "Badwater"
 correct_choice_ids:
-  - ed7bb137-089c-44c1-aae6-f92faab90fa0
-explanation: "He ran his first marathon when he was twelve."
+  - afc44709-13ea-4038-9c11-5cfe3fd2b7dc
+explanation: "The film follows his 2007 training for the Leadville Trail 100."
 archived: false
