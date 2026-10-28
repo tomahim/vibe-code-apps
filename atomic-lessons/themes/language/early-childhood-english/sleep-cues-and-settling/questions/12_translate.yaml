@@ -1,0 +1,10 @@
+id: 2c330795-b306-431f-96cc-51dbaf162755
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Repose-toi. »'
+accepted_answers:
+- Get some rest.
+explanation: La phrase du cours est « Get some rest. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

@@ -1,0 +1,11 @@
+id: a2f2bb21-b736-4a08-8306-6de10028b1e7
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « On va mettre ce body. »'
+accepted_answers:
+- Let's put this onesie on.
+- Let us put this onesie on.
+explanation: La phrase du cours est « Let's put this onesie on. ». Comparez le sens
+  et la structure de votre réponse.
+archived: false

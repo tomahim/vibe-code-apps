@@ -1,0 +1,10 @@
+id: cb13fb86-655d-4f34-afb1-d2b565641655
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Fais de beaux rêves. »'
+accepted_answers:
+- Sweet dreams.
+explanation: La phrase du cours est « Sweet dreams. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

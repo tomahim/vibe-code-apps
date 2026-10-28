@@ -1,0 +1,11 @@
+id: 8f78d8dc-4a4b-44f7-9b6f-9b0a14c09cd3
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « On va te retourner. »'
+accepted_answers:
+- Let's turn you over.
+- Let us turn you over.
+explanation: La phrase du cours est « Let's turn you over. ». Comparez le sens et
+  la structure de votre réponse.
+archived: false

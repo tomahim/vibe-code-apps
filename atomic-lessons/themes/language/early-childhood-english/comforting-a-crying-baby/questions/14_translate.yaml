@@ -1,0 +1,11 @@
+id: 91e95dce-2fbe-4270-8814-56250d1cd3c5
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Tu n''es pas tout seul. »'
+accepted_answers:
+- You're not alone.
+- You are not alone.
+explanation: La phrase du cours est « You're not alone. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

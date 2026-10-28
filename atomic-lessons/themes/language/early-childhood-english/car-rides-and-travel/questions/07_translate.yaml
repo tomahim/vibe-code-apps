@@ -1,0 +1,11 @@
+id: 23bc8b9d-7e84-4b91-bcf3-f3684f17c974
+position: 7
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais attacher ta ceinture. »'
+accepted_answers:
+- I'm going to buckle you in.
+- I am going to buckle you in.
+explanation: La phrase du cours est « I'm going to buckle you in. ». Comparez le sens
+  et la structure de votre réponse.
+archived: false

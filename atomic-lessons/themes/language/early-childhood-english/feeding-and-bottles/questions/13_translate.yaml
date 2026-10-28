@@ -1,0 +1,11 @@
+id: e5fb3591-bf06-461c-a0d6-a2d9718410d8
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Il est temps de faire un rot. »'
+accepted_answers:
+- It's time to burp.
+- It is time to burp.
+explanation: La phrase du cours est « It's time to burp. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

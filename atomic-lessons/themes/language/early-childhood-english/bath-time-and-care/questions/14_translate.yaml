@@ -1,0 +1,11 @@
+id: ea85b1ca-8b24-4a49-839c-d2d27a4d0215
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Lavons tes mains. »'
+accepted_answers:
+- Let's wash your hands.
+- Let us wash your hands.
+explanation: La phrase du cours est « Let's wash your hands. ». Comparez le sens et
+  la structure de votre réponse.
+archived: false

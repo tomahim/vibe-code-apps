@@ -1,0 +1,10 @@
+id: 5bcd8099-e9e3-42b3-9fcd-2da9db7179c8
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Le soleil brille. »'
+accepted_answers:
+- The sun is shining.
+explanation: La phrase du cours est « The sun is shining. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

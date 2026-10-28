@@ -1,0 +1,10 @@
+id: b4e90418-fd19-4d12-8390-126e0bc68096
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Dis-moi ce dont tu as besoin. »'
+accepted_answers:
+- Tell me what you need.
+explanation: La phrase du cours est « Tell me what you need. ». Comparez le sens et
+  la structure de votre réponse.
+archived: false

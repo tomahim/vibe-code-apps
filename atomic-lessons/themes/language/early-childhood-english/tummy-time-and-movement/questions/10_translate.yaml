@@ -1,0 +1,10 @@
+id: f9424434-b6b4-4098-a79f-c8b573d032b3
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Essaie de lever la tête. »'
+accepted_answers:
+- Try to lift your head.
+explanation: La phrase du cours est « Try to lift your head. ». Comparez le sens et
+  la structure de votre réponse.
+archived: false

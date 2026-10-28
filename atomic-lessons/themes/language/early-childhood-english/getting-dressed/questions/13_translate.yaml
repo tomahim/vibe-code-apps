@@ -1,0 +1,10 @@
+id: 1ac6724b-340b-48ae-b3a3-b7e7fd40669f
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu as l''air bien confortable. »'
+accepted_answers:
+- You look nice and comfy.
+explanation: La phrase du cours est « You look nice and comfy. ». Comparez le sens
+  et la structure de votre réponse.
+archived: false

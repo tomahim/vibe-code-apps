@@ -1,0 +1,11 @@
+id: 086f8e8f-93b2-4f8c-bf68-45d4902bdfc4
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Je vais t''habiller. »'
+accepted_answers:
+- I'm going to get you dressed.
+- I am going to get you dressed.
+explanation: La phrase du cours est « I'm going to get you dressed. ». Comparez le
+  sens et la structure de votre réponse.
+archived: false

@@ -1,0 +1,10 @@
+id: e00c17c2-ce89-4e15-ab93-857e926213a6
+position: 15
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Tu sens le savon ? »'
+accepted_answers:
+- Can you smell the soap?
+explanation: La phrase du cours est « Can you smell the soap? ». Comparez le sens
+  et la structure de votre réponse.
+archived: false

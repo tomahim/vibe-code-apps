@@ -1,0 +1,10 @@
+id: 8083d444-a90a-49ae-a9fb-63aba7da9d04
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Écoute le bruit que ça fait. »'
+accepted_answers:
+- Listen to the sound it makes.
+explanation: La phrase du cours est « Listen to the sound it makes. ». Comparez le
+  sens et la structure de votre réponse.
+archived: false

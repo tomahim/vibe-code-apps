@@ -1,0 +1,10 @@
+id: 2f678107-a2ff-4788-bd45-293e1abbd7db
+position: 15
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Tu entends ce bruit ? »'
+accepted_answers:
+- Can you hear that sound?
+explanation: La phrase du cours est « Can you hear that sound? ». Comparez le sens
+  et la structure de votre réponse.
+archived: false
