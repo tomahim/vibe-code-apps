@@ -17,6 +17,7 @@ from .api import (
 )
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
 from .images import image_url
+from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
 
 @never_cache
@@ -160,9 +161,46 @@ def progress(request):
     state = LearnerState(request.user)
     lessons = list(visible(Lesson))
     return JsonResponse({"progress": state.progress(lessons),
+                         "rewards": reward_totals(reward_events().get(request.user.pk, [])),
                          "learning_paths": [
                              {"id": str(path.pk), "theme_id": str(path.theme_id),
                               "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
                              for path in visible(LearningPath)],
                          "lessons": [lesson_summary(lesson, state) for lesson in lessons]})
+
+
+@never_cache
+@require_GET
+@jwt_required
+def garden(request):
+    """One snapshot for the garden scene, with published hierarchy and real progress."""
+    state = LearnerState(request.user)
+    themes_list = list(visible(Theme))
+    paths = list(visible(LearningPath))
+    lessons = list(visible(Lesson))
+    events = reward_events().get(request.user.pk, [])
+    return JsonResponse({
+        "themes": [{
+            **described(theme),
+            "progress": state.progress([lesson for lesson in lessons if
+                                        any(path.pk == lesson.learning_path_id and path.theme_id == theme.pk for path in paths)]),
+            "learning_paths": [{
+                **described(path), "theme_id": str(theme.pk),
+                "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
+                "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
+            } for path in paths if path.theme_id == theme.pk],
+        } for theme in themes_list],
+        "rewards": reward_totals(events),
+    })
+
+
+@never_cache
+@require_GET
+@jwt_required
+def leaderboard(request):
+    currency = request.GET.get('currency', 'drops')
+    period = request.GET.get('period', 'weekly')
+    if currency not in ('drops', 'carrots') or period not in ('weekly', 'monthly', 'overall'):
+        return JsonResponse({"error": "Choose drops or carrots and weekly, monthly or overall."}, status=400)
+    return JsonResponse(ranking(request.user, currency, period))
 

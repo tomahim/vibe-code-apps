@@ -2,7 +2,7 @@
 
 Source: [current project overview](https://linear.app/tomahim/project/little-grains-atomic-learning-ac2cbdcff98c/overview), read 2026-10-27. This replaces the older TOM-8 model proposal, not its entire feature scope.
 
-This app contains published content models, the content sync command and authenticated learner APIs. See [API.md](API.md) for the seven DB-backed navigation/progress endpoints and their contracts. It does not add review scheduling or a leaderboard. The existing `apps.little_grains` sample endpoint is unchanged.
+This app contains published content models, the content sync command and authenticated learner APIs. See [API.md](API.md) for the DB-backed navigation, progress, rewards and leaderboard endpoints. It does not add review scheduling. The existing `apps.little_grains` sample endpoint is unchanged.
 
 ## Tables
 

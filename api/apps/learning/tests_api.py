@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -6,6 +7,7 @@ from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .rewards import totals
 
 
 class LearningAPITests(TestCase):
@@ -189,6 +191,45 @@ class LearningAPITests(TestCase):
         self.assertEqual(other["checkpoints_correct"], 0)
         self.assertFalse(other["started"])
 
+    def test_garden_rewards_and_separate_rankings_use_saved_progress(self):
+        garden_url = "/api/learning/garden/"
+        garden = self.client.get(garden_url)
+        self.assertEqual(garden.status_code, 200)
+        path = garden.json()["themes"][0]["learning_paths"][0]
+        self.assertEqual(path["lessons"][0]["id"], str(self.lesson.pk))
+        self.assertEqual(garden.json()["rewards"], {"drops": 0, "carrots": 0})
+        self.assertNotIn("answer", garden.content.decode())
+
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 1, "carrots": 0})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "1"})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 1, "carrots": 0})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
+        self.assertEqual(self.client.get("/api/learning/progress/").json()["rewards"], {"drops": 106, "carrots": 1})
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
+
+        drops = self.client.get("/api/learning/leaderboard/?currency=drops&period=overall").json()
+        carrots = self.client.get("/api/learning/leaderboard/?currency=carrots&period=overall").json()
+        self.assertEqual(drops["rows"][0]["score"], 106)
+        self.assertEqual(carrots["rows"][0]["score"], 1)
+        self.assertTrue(drops["self"]["is_self"])
+        self.assertEqual(self.client.get("/api/learning/leaderboard/?currency=invalid").status_code, 400)
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 0, "carrots": 0})
+
+    def test_reward_periods_reset_at_utc_boundaries(self):
+        now = datetime(2026, 10, 28, 12, tzinfo=timezone.utc)
+        events = [
+            ("drops", 1, datetime(2026, 10, 26, 0, tzinfo=timezone.utc)),
+            ("drops", 5, datetime(2026, 10, 25, 23, 59, tzinfo=timezone.utc)),
+            ("carrots", 1, datetime(2026, 9, 30, 23, 59, tzinfo=timezone.utc)),
+        ]
+        self.assertEqual(totals(events, "weekly", now), {"drops": 1, "carrots": 0})
+        self.assertEqual(totals(events, "monthly", now), {"drops": 6, "carrots": 0})
+        self.assertEqual(totals(events, "overall", now), {"drops": 6, "carrots": 1})
+
     def test_cannot_skip_cards_or_checkpoints_and_resume_after_pass(self):
         second = self.row(Card, lesson=self.lesson, position=2, body_markdown="Next")
         url = f"/api/learning/cards/{second.pk}/complete/"
@@ -215,7 +256,7 @@ class LearningAPITests(TestCase):
         self.client.force_login(self.user)
         for url in ("/api/learning/themes/", f"/api/learning/themes/{self.theme.pk}/",
                     f"/api/learning/paths/{self.path.pk}/", f"/api/learning/lessons/{self.lesson.pk}/",
-                    "/api/learning/progress/"):
+                    "/api/learning/progress/", "/api/learning/garden/", "/api/learning/leaderboard/"):
             self.assertEqual(self.client.get(url).status_code, 401)
         for url in (f"/api/learning/cards/{self.card.pk}/complete/", "/api/learning/question-attempts/"):
             self.assertEqual(self.post(url, {}).status_code, 401)

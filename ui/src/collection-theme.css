@@ -1,6 +1,6 @@
 /* The collection's dark ink/ivory/periwinkle palette is shared by Gallery and Artifacts.
    App-specific pages and standalone experiments retain their own themes. */
-.gallery-page, .artifacts-page, .artifact-viewer, .login-page, .little-grains-page, .profile-page {
+.gallery-page, .artifacts-page, .artifact-viewer, .login-page, .profile-page {
   --ink: #e9e8e1;
   --muted: #acb1c1;
   --green: #a8b0ff;
@@ -13,10 +13,10 @@
   background: var(--paper);
   font-family: system-ui, sans-serif;
 }
-body:has(.gallery-page), body:has(.artifacts-page), body:has(.artifact-viewer), body:has(.login-page), body:has(.little-grains-page), body:has(.profile-page) { background: #141723; }
+body:has(.gallery-page), body:has(.artifacts-page), body:has(.artifact-viewer), body:has(.login-page), body:has(.profile-page) { background: #141723; }
 .gallery-page, .artifacts-page { min-height: 100vh; }
-.gallery-page .brand-mark, .artifacts-page .brand-mark, .login-page .brand-mark, .little-grains-page .brand-mark, .profile-page .brand-mark { border-radius: 5px; background: #252dcc; color: #fff; }
-.gallery-page .eyebrow, .artifacts-page .eyebrow, .login-page .eyebrow, .little-grains-page .eyebrow, .profile-page .eyebrow { color: var(--muted); font: 10px ui-monospace, monospace; letter-spacing: .12em; }
+.gallery-page .brand-mark, .artifacts-page .brand-mark, .login-page .brand-mark, .profile-page .brand-mark { border-radius: 5px; background: #252dcc; color: #fff; }
+.gallery-page .eyebrow, .artifacts-page .eyebrow, .login-page .eyebrow, .profile-page .eyebrow { color: var(--muted); font: 10px ui-monospace, monospace; letter-spacing: .12em; }
 .gallery-page .gallery-intro { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 60px; align-items: center; max-width: none; padding: 70px 0 48px; }
 .gallery-page .gallery-intro h1 { max-width: 650px; font-family: system-ui, sans-serif; font-weight: 650; }
 .gallery-page .gallery-intro > div > p:last-child { max-width: 560px; margin: 18px 0 0; font-size: 15px; line-height: 1.75; color: var(--muted); }

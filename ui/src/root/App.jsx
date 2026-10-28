@@ -3,9 +3,9 @@ import Gallery from "../pages/Gallery.jsx";
 import Login from "../pages/Login.jsx";
 import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
-import LittleGrains from "../apps/little-grains/LittleGrains.jsx";
 
 const News = lazy(() => import("../apps/news/News.jsx"));
+const LittleGrains = lazy(() => import("../apps/little-grains/LittleGrains.jsx"));
 
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 
@@ -47,7 +47,7 @@ export default function App() {
   }
 
   if (path.startsWith("/apps/little-grains")) {
-    return <LittleGrains />;
+    return <Suspense fallback={<div>Opening the garden…</div>}><LittleGrains /></Suspense>;
   }
 
   if (path.startsWith("/apps/livetrail-scrap")) {
