@@ -434,9 +434,12 @@ class LearningConcurrencyTests(TransactionTestCase):
         with ThreadPoolExecutor(max_workers=2) as pool:
             return sorted(pool.map(post, range(2)))
 
-    def test_concurrent_completions_and_correct_attempts_are_unique(self):
+    def test_concurrent_completions_and_correct_attempts_reward_once(self):
         self.assertEqual(self.parallel_posts(f"/api/learning/cards/{self.card.pk}/complete/", {}), [200, 201])
         self.assertEqual(CardProgress.objects.filter(user=self.user).count(), 1)
         self.assertEqual(self.parallel_posts("/api/learning/question-attempts/", {
-            "question_id": str(self.question.pk), "answer": "0"}), [201, 409])
-        self.assertEqual(QuestionAttempt.objects.filter(user=self.user).count(), 1)
+            "question_id": str(self.question.pk), "answer": "0"}), [201, 201])
+        self.assertEqual(list(QuestionAttempt.objects.filter(user=self.user)
+                              .values_list("attempt_type", flat=True)), ["initial", "review"])
+        garden = Client(HTTP_AUTHORIZATION=f"Bearer {self.token}").get("/api/learning/garden/").json()
+        self.assertEqual(garden["rewards"], {"drops": 106, "carrots": 1})
