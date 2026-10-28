@@ -159,8 +159,9 @@ class PullRequestDetailTests(TestCase):
 
     @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
     @mock.patch("apps.content_review.views.github.list_pr_files")
-    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
-    def test_builds_units_with_breadcrumbs(self, _pr, list_files, fetch_tree):
+    @mock.patch("apps.content_review.views.github.get_branch_head", return_value="fresh789")
+    @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR, head_repo="o/r"))
+    def test_builds_units_with_breadcrumbs(self, _pr, _head, list_files, fetch_tree):
         list_files.return_value = [
             self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/index.md", "modified"),
             self.change("atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"),
@@ -172,6 +173,7 @@ class PullRequestDetailTests(TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data["pr"]["number"], 7)
+        self.assertEqual(data["pr"]["head_sha"], "fresh789")  # branch ref, not the lagging PR object
         self.assertEqual(data["summary"], {"added": 2, "modified": 1, "removed": 0})
         units = {u["path"]: u for u in data["units"]}
         self.assertEqual(len(units), 3)

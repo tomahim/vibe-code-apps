@@ -114,7 +114,7 @@ GITHUB_IDEAS_BRANCH = os.environ.get("GITHUB_IDEAS_BRANCH", "master")
 IDEAS_RATE_REQUIRE_STAFF = os.environ.get("IDEAS_RATE_REQUIRE_STAFF", "false").lower() == "true"
 
 # Little Grains content review: read open PRs/content trees and post review
-# comments on the one repo. Fine-grained GitHub token, contents:read +
+# comments on the one repo and commit quick content edits to PR branches. Fine-grained GitHub token, contents:write (quick edits commit on the PR branch) +
 # pull-requests:read + issues:write on this repo. Unset disables the app (503).
 GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
 GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
