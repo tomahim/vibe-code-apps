@@ -1,0 +1,14 @@
+id: 8b904744-2b94-41b4-8ea5-51c7a8790018
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu es curieux. »'
+accepted_answers:
+- You're curious.
+- You are curious.
+- You're so curious.
+- You are so curious.
+- You're very curious.
+- You are very curious.
+explanation: La phrase du cours est « You're curious. ». Comparez le sens et la structure de votre réponse.
+archived: false

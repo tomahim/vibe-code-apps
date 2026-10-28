@@ -1,0 +1,21 @@
+id: 0812c581-6201-4974-b270-8eb12a417e3c
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je suis tellement heureuse d''être ta maman. »'
+accepted_answers:
+- I'm so happy to be your mom.
+- I am so happy to be your mom.
+- I'm so glad to be your mom.
+- I am so glad to be your mom.
+- I'm so happy to be your mommy.
+- I am so happy to be your mommy.
+- I'm so happy to be your mum.
+- I am so happy to be your mum.
+- I'm so glad to be your mum.
+- I am so glad to be your mum.
+- I'm really happy to be your mom.
+- I am really happy to be your mom.
+explanation: La phrase du cours est « I'm so happy to be your mom. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

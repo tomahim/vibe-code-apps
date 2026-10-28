@@ -1,0 +1,19 @@
+id: 12072dcf-5b44-4e3f-be33-792fa725d49d
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « On va te sécher. »'
+accepted_answers:
+- Let's dry you off.
+- Let us dry you off.
+- Let's dry you.
+- Let us dry you.
+- Let's get you dry.
+- Let us get you dry.
+- We're going to dry you off.
+- We are going to dry you off.
+- Let's towel you off.
+- Let us towel you off.
+explanation: La phrase du cours est « Let's dry you off. ». Comparez le sens et la structure de votre
+  réponse.
+archived: false

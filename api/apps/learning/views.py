@@ -17,6 +17,7 @@ from .api import (
 )
 from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .images import image_url
+from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
 
@@ -139,19 +140,19 @@ def question_attempts(request):
     try:
         data = json_object(request, ["question_id", "answer"])
         if not isinstance(data.get("question_id"), str) or not isinstance(data.get("answer"), str):
-            raise ValidationError("Provide question_id and answer choice ID as strings.")
+            raise ValidationError("Provide question_id and answer as strings.")
         try:
             question_id = UUID(data["question_id"])
         except ValueError:
             raise ValidationError("Invalid question UUID.") from None
-        if not data["answer"] or len(data["answer"]) > 255:
-            raise ValidationError("Invalid answer choice ID.")
+        if not data["answer"].strip() or len(data["answer"]) > 255:
+            raise ValidationError("Answer must be between 1 and 255 characters.")
     except ValidationError as exc:
         return input_error(exc)
     with transaction.atomic():
         lock_learner(request.user)
         question = get_object_or_404(visible(Question).select_related("lesson"), pk=question_id)
-        if data["answer"] not in {o["id"] for o in question.options}:
+        if question.type == Question.Type.MULTIPLE_CHOICE and data["answer"] not in {o["id"] for o in question.options}:
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
         checkpoint = (question.lesson_id, question.after_card_position)
@@ -170,11 +171,15 @@ def question_attempts(request):
                           and q.after_card_position == question.after_card_position]
         retry = QuestionAttempt.objects.filter(user=request.user, question_id__in=checkpoint_ids,
                                                attempt_type__in=["initial", "retry"]).exists()
+        correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
+                   else normalize_typed_answer(data["answer"]) in {
+                       normalize_typed_answer(answer) for answer in question.accepted_answers
+                   })
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
             attempt_type=("review" if review else "retry" if retry else "initial"),
             submitted_answer=data["answer"],
-            correct=data["answer"] == question.answer, answered_at=timezone.now(),
+            correct=correct, answered_at=timezone.now(),
         )
         state = LearnerState(request.user)
         if review:
@@ -188,6 +193,7 @@ def question_attempts(request):
         return JsonResponse({"attempt_id": attempt.pk, "question_id": str(question.pk),
                              "attempt_type": attempt.attempt_type, "correct": attempt.correct,
                              "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
+                             "correct_answer": question.answer if question.type == Question.Type.TYPE_ANSWER_QUESTION else None,
                              "progress": state.progress([question.lesson]),
                              "next_step": following}, status=201)
 

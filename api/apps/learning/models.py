@@ -152,22 +152,25 @@ class Card(ProvenancedContent):
 class Question(ProvenancedContent):
     class Type(models.TextChoices):
         MULTIPLE_CHOICE = "multiple_choice", "Multiple choice"
+        TYPE_ANSWER_QUESTION = "type_answer_question", "Type your answer"
 
     CONTENT_KIND = ContentEntity.Kind.QUESTION
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="questions")
     after_card_position = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     type = models.CharField(max_length=32, choices=Type.choices, default=Type.MULTIPLE_CHOICE)
     prompt = models.TextField()
-    # [{"id": "stable-choice-id", "text": "Choice text"}, ...]; answer stores one ID.
-    options = models.JSONField()
+    # Choice questions store four options and an answer ID. Typed questions
+    # store no options and an authored canonical answer plus accepted variants.
+    options = models.JSONField(default=list, blank=True)
     answer = models.CharField(max_length=255)
+    accepted_answers = models.JSONField(default=list, blank=True)
     explanation = models.TextField()
 
     class Meta(ContentRecord.Meta):
         db_table = "lg_question"
         constraints = ContentRecord.Meta.constraints + [
             models.UniqueConstraint(fields=["lesson", "position"], name="lg_question_unique_position"),
-            models.CheckConstraint(condition=Q(type="multiple_choice"), name="lg_question_valid_type"),
+            models.CheckConstraint(condition=Q(type__in=["multiple_choice", "type_answer_question"]), name="lg_question_valid_type"),
             models.CheckConstraint(condition=Q(after_card_position__gte=1), name="lg_question_positive_checkpoint"),
         ]
         indexes = [models.Index(fields=["lesson", "after_card_position"], name="lg_question_checkpoint_idx")]
@@ -185,8 +188,27 @@ class Question(ProvenancedContent):
             raise ValidationError({
                 "after_card_position": "Checkpoint must reference a card position in the same lesson.",
             })
+        if self.type == self.Type.TYPE_ANSWER_QUESTION:
+            from .grading import normalize_typed_answer
+
+            if self.options:
+                raise ValidationError({"options": "Typed-answer questions cannot have choices."})
+            answers = self.accepted_answers
+            if not isinstance(answers, list) or not answers or any(
+                not isinstance(answer, str) or not answer.strip() or len(answer) > 255
+                for answer in answers
+            ):
+                raise ValidationError({"accepted_answers": "Provide nonempty answers up to 255 characters."})
+            if self.answer != answers[0]:
+                raise ValidationError({"answer": "The first accepted answer must be the canonical answer."})
+            normalized = [normalize_typed_answer(answer) for answer in answers]
+            if any(not answer for answer in normalized) or len(set(normalized)) != len(normalized):
+                raise ValidationError({"accepted_answers": "Accepted answers must be distinct after normalization."})
+            return
         if self.type != self.Type.MULTIPLE_CHOICE:
             return
+        if self.accepted_answers:
+            raise ValidationError({"accepted_answers": "Choice questions cannot have typed answers."})
         options = self.options
         valid = isinstance(options, list) and len(options) == 4
         if valid:

@@ -1,0 +1,13 @@
+id: 30ed5c00-051c-4684-a191-598fed740e65
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu entends le camion ? »'
+accepted_answers:
+- Can you hear the truck?
+- Do you hear the truck?
+- Can you hear the lorry?
+- Do you hear the lorry?
+explanation: La phrase du cours est « Can you hear the truck? ». Comparez le sens et la structure de votre
+  réponse.
+archived: false

@@ -90,6 +90,15 @@ class UUIDCheckTests(unittest.TestCase):
         self.write(self.question, self.question_data)
         self.assert_failure("must resolve to a choice")
 
+    def test_translation_has_no_choice_ids_and_requires_accepted_sentences(self):
+        self.question_data = {"id": str(uuid.uuid4()), "type": "type_answer_question",
+                              "accepted_answers": ["Good morning.", "Hello."]}
+        self.write(self.question, self.question_data)
+        self.assertEqual(check_library(self.root), ([], 5))
+        self.question_data["accepted_answers"] = []
+        self.write(self.question, self.question_data)
+        self.assert_failure("expected nonempty answers")
+
     def test_misplaced_content_is_not_skipped(self):
         self.write(self.lesson / "misplaced.md", {"id": str(uuid.uuid4())})
         self.assert_failure("unexpected content location")

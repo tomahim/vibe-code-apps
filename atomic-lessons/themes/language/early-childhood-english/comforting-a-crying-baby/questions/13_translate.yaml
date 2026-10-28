@@ -1,0 +1,14 @@
+id: bb17fa62-a38e-4ad3-915d-22f1bd65d93d
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu as eu une longue journée. »'
+accepted_answers:
+- You've had a long day.
+- You have had a long day.
+- You had a long day.
+- You've had a very long day.
+- You have had a very long day.
+explanation: La phrase du cours est « You've had a long day. ». Comparez le sens et la structure de votre
+  réponse.
+archived: false

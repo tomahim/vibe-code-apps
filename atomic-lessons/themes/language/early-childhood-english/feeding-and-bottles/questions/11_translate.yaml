@@ -1,0 +1,13 @@
+id: e3af80d9-1004-4566-a52d-f0bcc8aafcf7
+position: 11
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Voilà ton lait. »'
+accepted_answers:
+- Here's your milk.
+- Here is your milk.
+- There's your milk.
+- There is your milk.
+- Here is the milk.
+explanation: La phrase du cours est « Here's your milk. ». Comparez le sens et la structure de votre réponse.
+archived: false

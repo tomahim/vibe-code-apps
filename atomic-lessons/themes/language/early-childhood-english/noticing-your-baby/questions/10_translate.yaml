@@ -1,0 +1,25 @@
+id: 0a9a1db2-4890-4a74-a3a2-885aca59c5f3
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Tu serres mon doigt. »'
+accepted_answers:
+- You're holding onto my finger.
+- You are holding onto my finger.
+- You're holding on to my finger.
+- You are holding on to my finger.
+- You're holding my finger.
+- You are holding my finger.
+- You're gripping my finger.
+- You are gripping my finger.
+- You're squeezing my finger.
+- You are squeezing my finger.
+- You're holding my finger tight.
+- You are holding my finger tight.
+- You're holding my finger tightly.
+- You are holding my finger tightly.
+- You're clutching my finger.
+- You are clutching my finger.
+explanation: La phrase du cours est « You're holding onto my finger. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

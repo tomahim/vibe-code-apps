@@ -1,0 +1,15 @@
+id: 455dec0a-3e91-45c4-b9a5-32a9f8d10ea2
+position: 15
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Je vais te bercer doucement. »'
+accepted_answers:
+- I'm going to rock you gently.
+- I am going to rock you gently.
+- I'm going to rock you softly.
+- I am going to rock you softly.
+- I'm going to gently rock you.
+- I am going to gently rock you.
+explanation: La phrase du cours est « I'm going to rock you gently. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

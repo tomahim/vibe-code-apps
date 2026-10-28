@@ -1,0 +1,19 @@
+id: 53b33727-11d9-4d91-9102-b616d864e20f
+position: 10
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Je vais déplacer cette chaise. »'
+accepted_answers:
+- I'm going to move this chair.
+- I am going to move this chair.
+- I'm going to move that chair.
+- I am going to move that chair.
+- I'm going to shift this chair.
+- I am going to shift this chair.
+- I'm going to move the chair.
+- I am going to move the chair.
+- I'm going to move this chair over.
+- I am going to move this chair over.
+explanation: La phrase du cours est « I'm going to move this chair. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

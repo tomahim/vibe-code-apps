@@ -1,0 +1,23 @@
+id: 4a10aad8-ae07-49eb-bc59-51a33f450c3a
+position: 8
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais te rapprocher un peu. »'
+accepted_answers:
+- I'm going to bring you a little closer.
+- I am going to bring you a little closer.
+- I'm going to bring you a bit closer.
+- I am going to bring you a bit closer.
+- I'm going to pull you a little closer.
+- I am going to pull you a little closer.
+- I'm going to pull you a bit closer.
+- I am going to pull you a bit closer.
+- I'm going to move you a little closer.
+- I am going to move you a little closer.
+- I'm going to move you a bit closer.
+- I am going to move you a bit closer.
+- I'm going to bring you slightly closer.
+- I am going to bring you slightly closer.
+explanation: La phrase du cours est « I'm going to bring you a little closer. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

@@ -1,0 +1,21 @@
+id: f2606d8d-b5e3-432f-819f-8cf1152ba850
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais préparer ton biberon. »'
+accepted_answers:
+- I'm going to make your bottle.
+- I am going to make your bottle.
+- I'm going to prepare your bottle.
+- I am going to prepare your bottle.
+- I'm going to get your bottle ready.
+- I am going to get your bottle ready.
+- I'm going to fix your bottle.
+- I am going to fix your bottle.
+- I'm going to make you a bottle.
+- I am going to make you a bottle.
+- I'm going to prepare you a bottle.
+- I am going to prepare you a bottle.
+explanation: La phrase du cours est « I'm going to make your bottle. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

@@ -1,0 +1,17 @@
+id: abe87690-cc4f-4913-beab-3004d7ba785d
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Je vais remettre tes vêtements. »'
+accepted_answers:
+- I'm going to put your clothes back on.
+- I am going to put your clothes back on.
+- I'm going to put your clothes on again.
+- I am going to put your clothes on again.
+- I'm going to dress you again.
+- I am going to dress you again.
+- I'm going to get your clothes back on.
+- I am going to get your clothes back on.
+explanation: La phrase du cours est « I'm going to put your clothes back on. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

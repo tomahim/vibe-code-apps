@@ -51,7 +51,8 @@ class LearnerState:
                         questions[a["question_id"]].after_card_position)
                        for a in attempts if a["correct"] and a["attempt_type"] != "review"}
         self.wrong_counts = Counter(
-            (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position)
+            (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position,
+             questions[a["question_id"]].type)
             for a in attempts if not a["correct"]
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
@@ -83,16 +84,23 @@ def lesson_summary(lesson, state):
 def checkpoint_questions(state, lesson):
     """Rotate alternatives after wrong attempts, stably across requests."""
     import hashlib
+    lesson_completed = state.progress([lesson])["completed"]
     pools = {}
     for question in state.questions:
         if question.lesson_id == lesson.pk:
             pools.setdefault(question.after_card_position, []).append(question)
     selected = []
     for position, pool in sorted(pools.items()):
+        types = {question.type for question in pool}
+        preferred = (Question.Type.TYPE_ANSWER_QUESTION
+                     if lesson_completed and Question.Type.TYPE_ANSWER_QUESTION in types
+                     else Question.Type.MULTIPLE_CHOICE if Question.Type.MULTIPLE_CHOICE in types
+                     else Question.Type.TYPE_ANSWER_QUESTION)
+        pool = [question for question in pool if question.type == preferred]
         ranked = sorted(pool, key=lambda q: hashlib.sha256(
             f"{state.user_id}:{lesson.pk}:{position}:{q.pk}".encode(),
         ).digest())
-        selected.append(ranked[state.wrong_counts[lesson.pk, position] % len(ranked)])
+        selected.append(ranked[state.wrong_counts[lesson.pk, position, preferred] % len(ranked)])
     return selected
 
 

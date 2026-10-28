@@ -1,0 +1,21 @@
+id: 10ed62d1-7617-42b4-924d-4f9a4762abdd
+position: 15
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Je vais apporter ta couverture. »'
+accepted_answers:
+- I'm going to bring your blanket.
+- I am going to bring your blanket.
+- I'm going to bring you your blanket.
+- I am going to bring you your blanket.
+- I'm going to get your blanket.
+- I am going to get your blanket.
+- I'm going to fetch your blanket.
+- I am going to fetch your blanket.
+- I'm going to bring you the blanket.
+- I am going to bring you the blanket.
+- I'm going to bring your blanket over.
+- I am going to bring your blanket over.
+explanation: La phrase du cours est « I'm going to bring your blanket. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

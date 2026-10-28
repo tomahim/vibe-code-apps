@@ -1,0 +1,25 @@
+id: 65320004-3f64-40f7-8ba0-da0a4788dec1
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Je vais prendre une couche propre. »'
+accepted_answers:
+- I'm going to grab a clean diaper.
+- I am going to grab a clean diaper.
+- I'm going to get a clean diaper.
+- I am going to get a clean diaper.
+- I'm going to take a clean diaper.
+- I am going to take a clean diaper.
+- I'm going to get a fresh diaper.
+- I am going to get a fresh diaper.
+- I'm going to grab a fresh diaper.
+- I am going to grab a fresh diaper.
+- I'm going to grab a clean nappy.
+- I am going to grab a clean nappy.
+- I'm going to get a clean nappy.
+- I am going to get a clean nappy.
+- I'm going to grab a new diaper.
+- I am going to grab a new diaper.
+explanation: La phrase du cours est « I'm going to grab a clean diaper. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false
