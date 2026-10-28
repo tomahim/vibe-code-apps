@@ -1,0 +1,19 @@
+id: 9338fccf-f5ce-42d3-b379-4a25e08968bf
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year was Leadville founded?"
+choices:
+  - id: 275c3054-66f3-42e7-9405-262e51759483
+    text: "1877"
+  - id: 34efc41d-93a6-4d20-a62d-35804853db18
+    text: "1920"
+  - id: e7c9885f-1ae0-465e-a521-6f970afadd21
+    text: "1983"
+  - id: bad83939-6c08-45d6-a592-86b762247e89
+    text: "1783"
+correct_choice_ids:
+  - 275c3054-66f3-42e7-9405-262e51759483
+explanation: "Leadville was founded in 1877 during the Silver Boom."
+archived: false

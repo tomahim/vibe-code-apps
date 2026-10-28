@@ -1,0 +1,9 @@
+id: 3f70d623-eb16-489b-a81a-39587c1e2f23
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which woman was co-winner of the first Wasatch? (first and last name)"
+accepted_answers:
+  - "Laurie Staton"
+explanation: "Laurie Staton and Greg Rollins arrived together."
+archived: false

@@ -1,0 +1,19 @@
+id: 7ccf2390-3d30-4bac-914d-e5a13d6e7ff2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who was the first woman to finish the race in 1978?"
+choices:
+  - id: a8dd6043-145b-4c12-8f8b-4846c055255a
+    text: "Shannon Weil"
+  - id: 6856de7f-8a4e-44a8-a649-718df7b8a189
+    text: "Pat Smythe"
+  - id: 818a82ac-d3e7-4951-88db-e309bd73791a
+    text: "Drucilla Barner"
+  - id: a730f4f0-c157-4568-b212-1effbc00b5d9
+    text: "Mo Livermore"
+correct_choice_ids:
+  - 6856de7f-8a4e-44a8-a649-718df7b8a189
+explanation: "Pat Smythe finished in 29 hours 34 minutes."
+archived: false

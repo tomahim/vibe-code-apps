@@ -1,0 +1,19 @@
+id: e321f469-065e-47cc-aac1-77ea21dac2d4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When did UNESCO induct the Dolomites?"
+choices:
+  - id: b7f0960f-5ed8-4389-8f79-dcfd66d5b4a8
+    text: "2007"
+  - id: e601e696-8284-4ff5-8917-c2dcbc8cc550
+    text: "1995"
+  - id: e4514e20-d3e0-481f-8027-d3b0670a9139
+    text: "2009"
+  - id: 1c472343-9dfb-4ae7-8f86-71b3d8949d41
+    text: "2018"
+correct_choice_ids:
+  - e4514e20-d3e0-481f-8027-d3b0670a9139
+explanation: "Two years after the race began."
+archived: false

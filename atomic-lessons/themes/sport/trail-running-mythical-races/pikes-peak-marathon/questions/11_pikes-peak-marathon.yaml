@@ -1,0 +1,19 @@
+id: 1fd2cbd8-58c4-4c8e-9e0d-8da044c97307
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the difference between the Ascent and the Marathon?"
+choices:
+  - id: 3282d35e-ff36-4b87-b388-45d3993fc806
+    text: "The Ascent is longer"
+  - id: 29dca5da-d458-4250-b5ed-066848339b74
+    text: "The Ascent is run at night"
+  - id: 0aabfba9-941c-4f58-a85f-5510ee7a3d39
+    text: "The Marathon adds the descent"
+  - id: 780dce87-7d7a-41dd-aa89-a824807c61c3
+    text: "The Marathon starts at the summit"
+correct_choice_ids:
+  - 0aabfba9-941c-4f58-a85f-5510ee7a3d39
+explanation: "The Ascent only goes up; the Marathon goes up and back down."
+archived: false

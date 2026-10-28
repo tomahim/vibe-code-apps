@@ -1,0 +1,19 @@
+id: 6d4cba3b-ba34-4426-810a-ae755f4292ca
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year was it born?"
+choices:
+  - id: 38c9f493-88c0-4500-8cf5-296aa27deac3
+    text: "1983"
+  - id: 9c4ac682-5a59-4918-adfd-0323ba770257
+    text: "1995"
+  - id: 05775591-929c-4cb2-ab47-d16a894e33db
+    text: "2003"
+  - id: 4612af66-1cc4-4bee-a35b-e2abf49c7736
+    text: "2012"
+correct_choice_ids:
+  - 05775591-929c-4cb2-ab47-d16a894e33db
+explanation: "It was born in October 2003."
+archived: false

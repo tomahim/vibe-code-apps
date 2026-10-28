@@ -1,0 +1,9 @@
+id: 5476eb14-cf24-4cb7-b652-efeba4ee9214
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the page on the official site that lists the changes? (three words, begins with Course)"
+accepted_answers:
+  - "Course History and Changes"
+explanation: "The page is titled Course History and Changes."
+archived: false

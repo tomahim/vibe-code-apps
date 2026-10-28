@@ -1,0 +1,19 @@
+id: 60189d90-9328-4ae1-bcd6-ffd6cc19f142
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What problem did the race want to help with?"
+choices:
+  - id: 44c37f23-7e74-43ee-ab35-ecb093ef487c
+    text: "Pollution"
+  - id: a470b184-6959-4c56-bb33-616f0213c1c1
+    text: "Rural depopulation"
+  - id: cbcb4cd8-77fb-4859-9561-3904e397f1c1
+    text: "Floods"
+  - id: cfe6f7b7-2169-4f91-ad00-a5788a600c37
+    text: "Traffic"
+correct_choice_ids:
+  - a470b184-6959-4c56-bb33-616f0213c1c1
+explanation: "It aimed to give new life to a village facing depopulation."
+archived: false

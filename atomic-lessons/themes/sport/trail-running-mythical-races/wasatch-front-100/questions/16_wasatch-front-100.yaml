@@ -1,0 +1,9 @@
+id: f5513b91-363f-4b43-a013-db2d685533fb
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which US state is the Wasatch 100 held?"
+accepted_answers:
+  - "Utah"
+explanation: "The Wasatch Mountains are in Utah."
+archived: false

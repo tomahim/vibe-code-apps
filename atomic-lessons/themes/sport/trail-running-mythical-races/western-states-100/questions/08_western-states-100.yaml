@@ -1,0 +1,10 @@
+id: f5c35192-3a44-4548-95ab-c362c3661791
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many runners finished the 1977 race?"
+accepted_answers:
+  - "3"
+  - "three"
+explanation: "Three finished: Andy Gonzales, Peter Mattei and Ralph Paffenbarger."
+archived: false

@@ -1,0 +1,9 @@
+id: bb841c70-eff7-466b-896d-138c98bdd521
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Where did the first race finish? (one word)"
+accepted_answers:
+  - "Planpraz"
+explanation: "Runners finished at Planpraz."
+archived: false

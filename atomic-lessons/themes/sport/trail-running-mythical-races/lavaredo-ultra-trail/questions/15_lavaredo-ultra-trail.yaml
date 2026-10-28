@@ -1,0 +1,19 @@
+id: 61c248c2-8d59-4218-bdb3-dbf38706d7fa
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the main idea of the race?"
+choices:
+  - id: 376cea29-9e75-4b1a-9d95-970989346b50
+    text: "Underground tunnels"
+  - id: 72a66075-3b3b-4a37-a030-dd138fe5b202
+    text: "Flat road racing"
+  - id: 9151f476-b073-4187-9d9e-620a81cdb332
+    text: "Desert stages"
+  - id: a2d2529b-1fa4-4aec-84b6-73bdcc59dea2
+    text: "Scenery and technical mountain trails"
+correct_choice_ids:
+  - a2d2529b-1fa4-4aec-84b6-73bdcc59dea2
+explanation: "The event is defined by the Dolomites."
+archived: false

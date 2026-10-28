@@ -1,0 +1,19 @@
+id: eae302b0-1af4-41ac-8ab6-ea191d1d0ec2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long did Prosperi wander?"
+choices:
+  - id: 43323876-ec40-46dc-8520-c132f6e6ba25
+    text: "9 hours"
+  - id: 6a24891d-7c20-4a7e-a00b-223acbe3f340
+    text: "9 days"
+  - id: 0550f584-5246-45aa-b98d-9d2c9d01f339
+    text: "2 days"
+  - id: 0fc4f3f5-fb9d-47eb-a5d7-8d4e8e9b13b8
+    text: "30 days"
+correct_choice_ids:
+  - 6a24891d-7c20-4a7e-a00b-223acbe3f340
+explanation: "He wandered alone for nine days."
+archived: false

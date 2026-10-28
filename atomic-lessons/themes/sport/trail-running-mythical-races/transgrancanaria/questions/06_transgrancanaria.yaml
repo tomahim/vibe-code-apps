@@ -1,0 +1,19 @@
+id: 6b13d167-718f-4489-bd1a-291b34744b9a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long was the first course, according to the recap?"
+choices:
+  - id: 6c2af591-4239-44d8-87ab-145e68c27acd
+    text: "42 km"
+  - id: 6772dacd-0e9f-4f9d-bdb6-f81cdbc0fba5
+    text: "170 km"
+  - id: dc9aff3a-6bbe-4551-a502-5ec93d678a46
+    text: "100 km"
+  - id: 817afa78-b791-4e06-9e82-4a4176d5135e
+    text: "64 km"
+correct_choice_ids:
+  - 817afa78-b791-4e06-9e82-4a4176d5135e
+explanation: "It was 64 km."
+archived: false

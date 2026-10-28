@@ -1,0 +1,19 @@
+id: a89aadf8-438d-42c9-9ede-50257cd0f99c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the high point of the course?"
+choices:
+  - id: f552e71b-9c68-4b6c-b2bc-af36da747b5b
+    text: "11,800 feet"
+  - id: 5032a9a3-837b-4377-bf61-4c5ef3d8e092
+    text: "8,420 feet"
+  - id: e5664794-42a3-4e35-be8b-3558c0c31026
+    text: "14,048 feet"
+  - id: 6fed30d7-023a-4334-afe5-e1fdcd535344
+    text: "11,000 feet"
+correct_choice_ids:
+  - e5664794-42a3-4e35-be8b-3558c0c31026
+explanation: "The high point is 14,048 feet."
+archived: false

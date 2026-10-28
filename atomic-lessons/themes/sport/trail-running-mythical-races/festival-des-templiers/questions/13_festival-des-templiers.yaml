@@ -1,0 +1,19 @@
+id: 311ba887-0ee3-4e4b-a61b-9afc43b60657
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many races did the festival include in 2024, according to franceinfo?"
+choices:
+  - id: 2ad122e5-6c2e-4bb6-ae99-00f818183849
+    text: "13"
+  - id: 340e4da8-a2f7-4931-b7f1-dd2e33f0c844
+    text: "3"
+  - id: dc3889d7-43f4-438d-a5bc-a5c096ec84b5
+    text: "30"
+  - id: aa8bb76e-a60b-4336-98b8-15ff48457874
+    text: "130"
+correct_choice_ids:
+  - 2ad122e5-6c2e-4bb6-ae99-00f818183849
+explanation: "Thirteen races over three days."
+archived: false

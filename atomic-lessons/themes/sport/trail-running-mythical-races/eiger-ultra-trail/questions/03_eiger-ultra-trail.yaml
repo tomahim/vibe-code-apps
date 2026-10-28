@@ -1,0 +1,19 @@
+id: 228e2d85-2a93-45a4-ad25-e01de89590cc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year was the North Face conquered?"
+choices:
+  - id: cf064c30-bca9-4b56-a150-59e85bf8f947
+    text: "2013"
+  - id: 6f705dc7-b6e4-442c-93eb-63f9faf5a347
+    text: "1988"
+  - id: 5d942b57-80a7-4908-a621-b50e8851e7a9
+    text: "1888"
+  - id: 65354917-5b6d-4376-9e0c-4af03fb41132
+    text: "1938"
+correct_choice_ids:
+  - 65354917-5b6d-4376-9e0c-4af03fb41132
+explanation: "It was conquered in 1938 in a four-day battle."
+archived: false

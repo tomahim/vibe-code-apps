@@ -1,0 +1,19 @@
+id: 794b3996-ce19-46ba-b38d-c5ba88ccea78
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What happened in 2009?"
+choices:
+  - id: a2c27726-13c9-4c3a-b4d9-d1a18b08d578
+    text: "The race moved to Jordan"
+  - id: 0c6f3b01-3c22-4df5-93f7-b8a257a96cf5
+    text: "A record number of finishers"
+  - id: 833a9200-f572-46d3-a027-9d3fe218dd96
+    text: "A sandstorm ended the race"
+  - id: 80347d36-4188-4bb0-a477-9aa78a283049
+    text: "Floods cancelled the first stage"
+correct_choice_ids:
+  - 80347d36-4188-4bb0-a477-9aa78a283049
+explanation: "Unprecedented rainfall submerged the bivouac."
+archived: false

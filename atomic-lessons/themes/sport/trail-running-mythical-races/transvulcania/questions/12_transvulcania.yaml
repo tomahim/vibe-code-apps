@@ -1,0 +1,10 @@
+id: fe6eb101-0c59-4163-83d0-4752dc0fae40
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the altitude of the Las Deseadas aid station in metres? (number)"
+accepted_answers:
+  - "1827"
+  - "1,827"
+explanation: "The official table lists 1,827 metres."
+archived: false

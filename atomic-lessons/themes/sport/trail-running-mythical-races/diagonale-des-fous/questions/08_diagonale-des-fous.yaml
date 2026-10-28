@@ -1,0 +1,10 @@
+id: c15c961a-51b0-4d0f-8dbc-b9b7cad14209
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "From which town did the course start from 2013 to the late 2010s? (town)"
+accepted_answers:
+  - "Saint-Pierre"
+  - "St Pierre"
+explanation: "The table shows St Pierre as the start."
+archived: false

@@ -1,0 +1,10 @@
+id: 1759c1ed-fac2-45fa-a940-31ce1145ab70
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which river valley is overlooked on the descent to Peyreleau? (name)"
+accepted_answers:
+  - "Tarn"
+  - "the Tarn"
+explanation: "The descent overlooks the Tarn valley."
+archived: false

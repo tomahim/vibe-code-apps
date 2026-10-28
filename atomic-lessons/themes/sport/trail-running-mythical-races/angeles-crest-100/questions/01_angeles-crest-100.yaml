@@ -1,0 +1,19 @@
+id: 075d6e5c-7e3d-4f7d-8bed-39a796ba3eb4
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which month and year was the first AC100?"
+choices:
+  - id: baa30bc7-c787-4068-8806-9a8f4cfd16ee
+    text: "October 2008"
+  - id: 61b726c9-6bf7-43bd-b1f9-85e79c1c4247
+    text: "June 1976"
+  - id: 60ff7bff-e5f2-4225-b55c-fe70c547632a
+    text: "March 1998"
+  - id: bdc336e3-f653-46fc-8a3f-f0c769b11e84
+    text: "September 1986"
+correct_choice_ids:
+  - bdc336e3-f653-46fc-8a3f-f0c769b11e84
+explanation: "The first race was in September 1986."
+archived: false

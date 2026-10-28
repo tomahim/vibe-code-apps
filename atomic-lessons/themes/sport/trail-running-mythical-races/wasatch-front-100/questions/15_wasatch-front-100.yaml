@@ -1,0 +1,19 @@
+id: 685b9272-2083-4d7b-8894-243ab8251cea
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which magazine published the annual race articles?"
+choices:
+  - id: 682b1d25-3488-4bfd-905c-9ed71c818ab3
+    text: "Outside"
+  - id: 7a887a6a-3819-4ed0-a5af-08cf8a07a813
+    text: "Runner's World"
+  - id: a7aca474-df9f-41a8-bb7d-6f40ba869134
+    text: "Ultrarunning"
+  - id: 495dacdf-bd70-443c-8d4f-45e5583f3fc8
+    text: "Trail Runner"
+correct_choice_ids:
+  - a7aca474-df9f-41a8-bb7d-6f40ba869134
+explanation: "The articles appeared in Ultrarunning magazine with its permission."
+archived: false

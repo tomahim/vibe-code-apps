@@ -1,0 +1,19 @@
+id: 7e52d8b9-08bb-4b37-beb6-1f354a385d30
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many runners applied in 2018?"
+choices:
+  - id: b3397bfd-5573-4e5f-b82f-38e1b0b6ff12
+    text: "130"
+  - id: af909b34-2d63-4176-b1fc-bad7a47ec10d
+    text: "40"
+  - id: 39b38a9e-9fe5-41b5-9210-cbd4c32e345c
+    text: "1,300"
+  - id: aa72ea7f-374d-4364-921c-0a55a6953bbd
+    text: "13,000"
+correct_choice_ids:
+  - 39b38a9e-9fe5-41b5-9210-cbd4c32e345c
+explanation: "1,300 applied and only 40 were selected."
+archived: false

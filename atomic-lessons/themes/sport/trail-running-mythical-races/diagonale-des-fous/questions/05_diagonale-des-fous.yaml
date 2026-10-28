@@ -1,0 +1,19 @@
+id: 3c226fd4-d5ff-460d-8240-1315b084388d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many finished in 1989?"
+choices:
+  - id: 1169948c-4b9d-4a7a-b034-277c3bdc009c
+    text: "314"
+  - id: 9e3ab9dc-53e6-415d-9782-0aa9d645cad7
+    text: "1,830"
+  - id: 23edbfaf-5743-40bc-b8e1-b71e8f942efc
+    text: "62"
+  - id: fb465f34-73f4-4f80-9ade-5afa11ddc731
+    text: "500"
+correct_choice_ids:
+  - 1169948c-4b9d-4a7a-b034-277c3bdc009c
+explanation: "314 finished."
+archived: false

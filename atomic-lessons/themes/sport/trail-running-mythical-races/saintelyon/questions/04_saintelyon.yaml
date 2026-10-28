@@ -1,0 +1,9 @@
+id: e4daa521-33c7-400d-b64a-70f15648ca24
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the first edition? (year)"
+accepted_answers:
+  - "1952"
+explanation: "The first raid took place on January 26, 1952."
+archived: false

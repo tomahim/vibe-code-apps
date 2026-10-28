@@ -1,0 +1,9 @@
+id: 7d27d961-9816-4cbf-9a02-fd419f448d47
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the first Sierre-Zinal?"
+accepted_answers:
+  - "1974"
+explanation: "The race was first run in 1974."
+archived: false

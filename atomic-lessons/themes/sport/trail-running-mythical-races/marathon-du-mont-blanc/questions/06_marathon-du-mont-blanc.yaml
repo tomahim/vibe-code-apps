@@ -1,0 +1,19 @@
+id: 92ef0c63-78b6-4241-93ea-261e7d72e2af
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which distance joined the 23 km in 2003?"
+choices:
+  - id: fe8b5d73-6edf-45f9-9f7d-6934cd441d32
+    text: "42 km"
+  - id: fd1b6b67-3f25-4bea-9d66-709fb08bd519
+    text: "10 km"
+  - id: d0ac0ee2-aaf7-44d5-aa4a-a0ea386e377f
+    text: "100 km"
+  - id: 317fdfc8-ae94-48ed-9cae-18b52ff62206
+    text: "80 km"
+correct_choice_ids:
+  - fe8b5d73-6edf-45f9-9f7d-6934cd441d32
+explanation: "The 42 km was added in 2003."
+archived: false

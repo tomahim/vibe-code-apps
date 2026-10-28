@@ -1,0 +1,19 @@
+id: eeaa195a-e8bf-4a94-9867-6fb4b857e381
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the island's highest point on the route?"
+choices:
+  - id: fde8a19d-533a-4ec7-9b77-c274e942f938
+    text: "Mont Blanc"
+  - id: 7566c51b-fbbf-49f6-953b-3dbc6228d5d7
+    text: "Roque de los Muchachos"
+  - id: dbbed658-e19f-496f-ac13-2e873584a72d
+    text: "Handies Peak"
+  - id: d3a0ea30-5b23-434a-9ffe-f0f1b97f8bfd
+    text: "Mount Fuji"
+correct_choice_ids:
+  - 7566c51b-fbbf-49f6-953b-3dbc6228d5d7
+explanation: "The course climbs up to the Roque de los Muchachos."
+archived: false

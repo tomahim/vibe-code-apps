@@ -1,0 +1,19 @@
+id: 4065a2c2-885a-4d98-b5d0-aebe053ab5a6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "On which island does the race take place?"
+choices:
+  - id: 51658140-3f86-456e-9f5b-142ce01bb6ff
+    text: "La Palma"
+  - id: 70cd151c-0bd6-4e4d-a2aa-d997e9fa4fca
+    text: "Corsica"
+  - id: 7e1e5a57-3d6b-49d7-8b8e-a4b03c33136a
+    text: "Reunion"
+  - id: 0dd96157-3cab-42ff-9100-76c16f4b2ba1
+    text: "Gran Canaria"
+correct_choice_ids:
+  - 51658140-3f86-456e-9f5b-142ce01bb6ff
+explanation: "It is held on La Palma in the Canary Islands."
+archived: false

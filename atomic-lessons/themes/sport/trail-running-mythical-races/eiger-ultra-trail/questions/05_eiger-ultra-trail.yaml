@@ -1,0 +1,19 @@
+id: f7b60e73-c560-476d-a7a4-d3485b1bc539
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which year was the first Eiger Ultra Trail?"
+choices:
+  - id: c1eaf461-65a7-4280-b3f1-52a6ddb4641c
+    text: "2013"
+  - id: c2e78595-285b-4e64-b016-68414332f089
+    text: "2003"
+  - id: 08176ad2-9881-4ea1-9af8-482e229d037c
+    text: "2023"
+  - id: cab81bc2-447b-4784-9ade-b0f8d6773e79
+    text: "1983"
+correct_choice_ids:
+  - c1eaf461-65a7-4280-b3f1-52a6ddb4641c
+explanation: "It was held on July 20 and 21, 2013."
+archived: false

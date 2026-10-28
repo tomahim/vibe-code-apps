@@ -1,0 +1,19 @@
+id: b6afc688-4762-4318-97e2-b090bab1af5d
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "On what scale was the first route drawn?"
+choices:
+  - id: 8e85be76-7015-46e9-b00c-4d3373f52694
+    text: "1:25,000"
+  - id: 9860d958-6b2f-4cc7-a4b5-40b8fbe92ad1
+    text: "1:2,500"
+  - id: 735d5b1b-302e-4cfb-afaf-e579b2d03276
+    text: "1:25"
+  - id: 1fb1fb41-79d2-4c81-ac67-71ddb4c14d7c
+    text: "1:250,000"
+correct_choice_ids:
+  - 8e85be76-7015-46e9-b00c-4d3373f52694
+explanation: "It was a hand-drawn map at 1:25,000."
+archived: false

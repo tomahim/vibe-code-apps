@@ -1,0 +1,19 @@
+id: 097f68eb-4dc6-4c59-b1e7-b4c0b5df2e4c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how much positive elevation gain?"
+choices:
+  - id: e82ae9de-3713-4589-aa01-c3a10ef849a8
+    text: "1,000 metres"
+  - id: 0ebb8965-651e-45dd-921f-5564b59041ed
+    text: "10,000 metres"
+  - id: 50ea9bab-fa6c-41e6-b184-e05be71ab086
+    text: "5,800 metres"
+  - id: 382d2386-d301-4b64-a671-222c9fb51378
+    text: "24,000 metres"
+correct_choice_ids:
+  - 0ebb8965-651e-45dd-921f-5564b59041ed
+explanation: "It says 10,000 metres."
+archived: false

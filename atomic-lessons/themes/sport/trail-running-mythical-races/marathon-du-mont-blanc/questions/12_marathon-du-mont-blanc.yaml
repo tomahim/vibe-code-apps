@@ -1,0 +1,9 @@
+id: 2ab1cecf-0258-44fa-9f6e-d4152fe9564c
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which company created the Golden Trail World Series? (one word)"
+accepted_answers:
+  - "Salomon"
+explanation: "Salomon created it in 2018."
+archived: false

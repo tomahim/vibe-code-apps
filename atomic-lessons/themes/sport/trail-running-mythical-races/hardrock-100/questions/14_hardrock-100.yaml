@@ -1,0 +1,19 @@
+id: 641ba8dd-cc30-45a5-849c-310bcee58c4c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "About how high is the average elevation?"
+choices:
+  - id: 5e40ec3d-7f54-43f3-9761-d390cc6aad54
+    text: "About 3,000 feet"
+  - id: 67be21a2-fdb5-48e8-9f4d-1051b914f7dc
+    text: "About 11,000 feet"
+  - id: 6fc7cd2f-f0f2-457c-9f4a-9b17bc98be25
+    text: "About 5,000 feet"
+  - id: b0824320-9838-4b13-ac93-552ca047c440
+    text: "About 14,000 feet"
+correct_choice_ids:
+  - 67be21a2-fdb5-48e8-9f4d-1051b914f7dc
+explanation: "The average elevation is about 11,000 feet."
+archived: false

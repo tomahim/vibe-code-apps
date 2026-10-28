@@ -1,0 +1,19 @@
+id: 0b0a1d57-133b-4db4-a3fc-cdf76432c2b7
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many race distances does the event offer?"
+choices:
+  - id: 70c53ec6-ff79-4017-b78a-546de11bb34d
+    text: "Five"
+  - id: 42a07f5f-cb28-4f8e-8965-72c047a05b3f
+    text: "Ten"
+  - id: 7e76aabb-2640-470e-b2ae-d3da0b552215
+    text: "Three"
+  - id: 0fd6d61d-30a2-403e-b351-4ea3ca20d820
+    text: "One"
+correct_choice_ids:
+  - 70c53ec6-ff79-4017-b78a-546de11bb34d
+explanation: "It offers 5 race distances."
+archived: false

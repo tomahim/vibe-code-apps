@@ -1,0 +1,19 @@
+id: 2c50ba11-f799-43a8-aac4-3cc2571b4168
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many were selected in 2018?"
+choices:
+  - id: f48260d9-1bd1-4b45-b521-eb66e3e80240
+    text: "1,300"
+  - id: 6001a08f-e1aa-4ffd-892c-00fa69560ece
+    text: "400"
+  - id: 62b967a4-71b1-4bac-a509-69da2b200866
+    text: "4"
+  - id: dd67a2e5-0afe-4656-870b-c4ffc432b319
+    text: "40"
+correct_choice_ids:
+  - dd67a2e5-0afe-4656-870b-c4ffc432b319
+explanation: "Only 40 were selected."
+archived: false

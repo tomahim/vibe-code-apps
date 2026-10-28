@@ -1,0 +1,19 @@
+id: 5bf9861e-8b72-4902-a921-f1cf75f9d0aa
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was discovered in 1878 that put Leadville on the map?"
+choices:
+  - id: 12c1f9ed-c073-4676-acb4-a6492c16a1ea
+    text: "Oil"
+  - id: 6753f92d-6af4-4f92-81ba-02bc85cdaed7
+    text: "Copper"
+  - id: 502984cd-dfdc-491f-8759-729ed3fbede0
+    text: "Silver"
+  - id: c395f8de-4559-479d-8a1e-0f8d94f0a730
+    text: "Gold"
+correct_choice_ids:
+  - 502984cd-dfdc-491f-8759-729ed3fbede0
+explanation: "The discovery of silver in 1878 made Leadville famous."
+archived: false

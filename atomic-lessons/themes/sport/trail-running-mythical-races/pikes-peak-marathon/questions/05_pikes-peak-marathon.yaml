@@ -1,0 +1,19 @@
+id: 1104c43a-70d9-4403-9468-228c9ac51c9e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did Arlene Pieper do in 1959?"
+choices:
+  - id: 22b6cdd6-e17a-4956-9af4-d501c9894cfb
+    text: "Won the overall race"
+  - id: a915a496-9302-4a4c-a6ce-bb9818fb78a0
+    text: "Ran the race for the tenth time"
+  - id: 95f2fa4c-f3a5-4afa-b3c1-53fc75e70d8c
+    text: "Became the first woman to officially finish a US marathon"
+  - id: ac66dfa2-858d-4bf6-bc3d-f2f8e45ce1b2
+    text: "Set the Ascent record"
+correct_choice_ids:
+  - 95f2fa4c-f3a5-4afa-b3c1-53fc75e70d8c
+explanation: "She ran the full marathon in 1959 after being disqualified for stopping at the top in 1958."
+archived: false

@@ -1,0 +1,19 @@
+id: aeb84926-f3d6-4fe5-bfc5-1c7ee42854c7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the length of the E101?"
+choices:
+  - id: 1602aa8c-6bd8-4915-98b0-fd7ac85a62c5
+    text: "35 km"
+  - id: 3141c7b2-262c-4154-baef-a0f854069421
+    text: "101 km"
+  - id: 834fb15a-34b0-438c-89d4-d1a48e49bd78
+    text: "16 km"
+  - id: 394af65b-7add-4b37-b5df-aac9f8f3c8c8
+    text: "261 km"
+correct_choice_ids:
+  - 3141c7b2-262c-4154-baef-a0f854069421
+explanation: "The E101 is 101 km."
+archived: false

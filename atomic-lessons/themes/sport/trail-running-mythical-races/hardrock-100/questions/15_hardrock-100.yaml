@@ -1,0 +1,19 @@
+id: 72762d9f-6f9f-44a5-b386-3917f5120e0e
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What does closed course mean?"
+choices:
+  - id: 5d5dd7a3-2dab-4e26-9738-a344563a85ab
+    text: "The course is closed to the public"
+  - id: 7b719aec-daf8-4392-979f-00aa8b17c829
+    text: "The course closes at noon"
+  - id: 8df48e39-dfed-4410-a5d2-1153b3cf12cc
+    text: "Runners choose any route"
+  - id: 0d062b4a-88dc-4e70-b9cf-7045961d7914
+    text: "Runners must follow the specified route"
+correct_choice_ids:
+  - 0d062b4a-88dc-4e70-b9cf-7045961d7914
+explanation: "The official page says runners are required to follow the specified route."
+archived: false

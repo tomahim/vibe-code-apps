@@ -1,0 +1,19 @@
+id: a4ff7161-766c-4771-ad76-e81bdc85aa03
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the Advanced?"
+choices:
+  - id: c4827412-ab2b-48e4-8164-cb353eae094e
+    text: "21 km"
+  - id: 766bd419-9405-428c-8ba7-59f240aa7475
+    text: "12 km"
+  - id: e6893305-4b9c-4a2b-b3e1-6ddc84b285c9
+    text: "120 km"
+  - id: f9921992-0a95-436e-8669-6d90484d0b67
+    text: "81 km"
+correct_choice_ids:
+  - f9921992-0a95-436e-8669-6d90484d0b67
+explanation: "The Advanced is 81 km."
+archived: false

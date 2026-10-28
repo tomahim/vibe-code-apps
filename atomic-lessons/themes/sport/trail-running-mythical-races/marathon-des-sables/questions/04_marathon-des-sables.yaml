@@ -1,0 +1,9 @@
+id: 67d442d5-5c0c-451b-a706-8940d8541c26
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In which country is the original Sahara race held? (one word)"
+accepted_answers:
+  - "Morocco"
+explanation: "The original MDS takes place in the Moroccan Sahara."
+archived: false

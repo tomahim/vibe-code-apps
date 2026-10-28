@@ -1,0 +1,19 @@
+id: 329500bb-d433-44f4-9848-d50bfaaeff92
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how many inhabitants does Zegama have?"
+choices:
+  - id: 74771caa-ae42-42e0-90a6-968ac0fb3e99
+    text: "150"
+  - id: 3e3f48c7-eb9b-466a-a51b-4e725f6c93b4
+    text: "150,000"
+  - id: 4ea03188-440d-4e91-ae64-f5679cc8510a
+    text: "1,500"
+  - id: 3c3d98d4-04c7-4177-b44c-b349d3a24275
+    text: "15,000"
+correct_choice_ids:
+  - 4ea03188-440d-4e91-ae64-f5679cc8510a
+explanation: "The village has barely 1,500 inhabitants."
+archived: false

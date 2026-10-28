@@ -1,0 +1,9 @@
+id: 2aa216f2-38c4-4f11-870c-6df42c989776
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the 1977 Western States fastest finisher? (first and last name)"
+accepted_answers:
+  - "Andy Gonzales"
+explanation: "Andy Gonzales finished in 22:57."
+archived: false

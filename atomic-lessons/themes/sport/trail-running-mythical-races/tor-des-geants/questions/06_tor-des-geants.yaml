@@ -1,0 +1,19 @@
+id: aabc9edf-bfed-40cb-9a4e-9313e734df3c
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how much elevation gain?"
+choices:
+  - id: 087b0238-071b-4706-84da-d7241a1c15ba
+    text: "240 metres"
+  - id: 9e7f5589-f551-41e9-a600-10e4265c969f
+    text: "2,400 metres"
+  - id: bf15af3b-3c1c-442c-9ea2-e1518fe59925
+    text: "240,000 metres"
+  - id: 1c6c86f4-6929-4d20-a971-77f79f52626b
+    text: "24,000 metres"
+correct_choice_ids:
+  - 1c6c86f4-6929-4d20-a971-77f79f52626b
+explanation: "About 24,000 metres."
+archived: false

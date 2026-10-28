@@ -1,0 +1,19 @@
+id: ea337a4e-d468-4b43-bf2e-149c8b8c4ef7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which region of France is the race held?"
+choices:
+  - id: dbdc3ccf-90bd-47e3-b361-d7f88684c6c4
+    text: "Normandy"
+  - id: c2da458e-1404-4188-b9f4-682cae848cc2
+    text: "The Aveyron"
+  - id: 4423b485-c390-4268-811f-020a808bbd7b
+    text: "Brittany"
+  - id: 36e3bbc7-fac3-4f17-a1b7-13d94953f098
+    text: "Alsace"
+correct_choice_ids:
+  - c2da458e-1404-4188-b9f4-682cae848cc2
+explanation: "The race is in the Aveyron, in the Parc naturel regional des Grands Causses."
+archived: false

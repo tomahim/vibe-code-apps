@@ -1,0 +1,11 @@
+id: e0da4992-3eda-4377-836a-adcc3fb8c50d
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which type of beach is mentioned in the island history? (colour and one word)"
+accepted_answers:
+  - "black sand"
+  - "black sand beaches"
+  - "black"
+explanation: "The history mentions black sand beaches."
+archived: false

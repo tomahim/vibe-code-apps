@@ -1,0 +1,19 @@
+id: b2dfe60d-4845-4024-bda0-1263247232d3
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does the race start and finish?"
+choices:
+  - id: 6e10a5f6-04de-4e86-bba7-e38e4864dc7b
+    text: "Chamonix"
+  - id: ecf9d989-542d-404c-aff0-96a2258b7f21
+    text: "Cortina"
+  - id: 729c4d02-264e-4370-9de5-368b9b8c62ff
+    text: "Courmayeur"
+  - id: d56d5b3a-e43e-4f9c-95e0-c8a5777ca26c
+    text: "Aosta"
+correct_choice_ids:
+  - 729c4d02-264e-4370-9de5-368b9b8c62ff
+explanation: "The finish is in Courmayeur."
+archived: false

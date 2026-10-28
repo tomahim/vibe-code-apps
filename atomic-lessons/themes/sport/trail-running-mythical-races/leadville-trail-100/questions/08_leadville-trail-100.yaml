@@ -1,0 +1,9 @@
+id: be95f03b-94a0-488d-90cc-93e672318461
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In what year was the Leadville Trail 100 Run founded?"
+accepted_answers:
+  - "1983"
+explanation: "The race was founded in 1983."
+archived: false

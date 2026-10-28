@@ -1,0 +1,10 @@
+id: ecbb8627-2fef-4070-9d97-67305e978713
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which country is Zegama? (one word)"
+accepted_answers:
+  - "Spain"
+  - "Basque Country"
+explanation: "Zegama is in the Basque Country, in Spain."
+archived: false

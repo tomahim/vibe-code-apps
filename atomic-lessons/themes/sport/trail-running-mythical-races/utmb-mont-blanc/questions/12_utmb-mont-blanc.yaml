@@ -1,0 +1,9 @@
+id: eaba9096-c616-4814-9c99-98e2c0d61160
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What platform lets millions of fans follow the race? (two words)"
+accepted_answers:
+  - "UTMB Live"
+explanation: "UTMB Live."
+archived: false

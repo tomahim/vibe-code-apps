@@ -1,0 +1,19 @@
+id: 2d17dfec-f425-422e-8852-115d2366462d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why is the SaintéLyon not a pure mountain trail?"
+choices:
+  - id: 7a5488ed-2d1b-41ab-880c-e400c7a24248
+    text: "It is run on snow only"
+  - id: 37ac7184-63e2-40ba-8038-0bedac5ab28f
+    text: "It is run on a track"
+  - id: a240b8d1-1b46-4b78-96c9-2a610aaa9aa7
+    text: "It is entirely in a city"
+  - id: 0766da92-4b41-4b89-a6c4-1a4f97c55eb4
+    text: "It mixes paths with a lot of asphalt"
+correct_choice_ids:
+  - 0766da92-4b41-4b89-a6c4-1a4f97c55eb4
+explanation: "About a third of the course is on asphalt."
+archived: false

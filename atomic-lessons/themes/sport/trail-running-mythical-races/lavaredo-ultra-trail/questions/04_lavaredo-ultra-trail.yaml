@@ -1,0 +1,11 @@
+id: 1c439731-a461-4202-afd3-c1e64e0bb544
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Which Winter Games did Cortina host in 2026? (one word)"
+accepted_answers:
+  - "Olympics"
+  - "Olympic"
+  - "Winter Olympics"
+explanation: "Cortina hosted the 2026 Winter Olympics."
+archived: false

@@ -1,0 +1,11 @@
+id: 810f1b0f-e247-48cd-81ac-c367a51d6ad8
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was his prize? (two words)"
+accepted_answers:
+  - "shepherd's bag"
+  - "a shepherd's bag"
+  - "sac de berger"
+explanation: "He won a shepherd's bag."
+archived: false

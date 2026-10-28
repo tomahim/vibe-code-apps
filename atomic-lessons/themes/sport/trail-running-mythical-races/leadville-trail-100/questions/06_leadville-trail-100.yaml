@@ -1,0 +1,19 @@
+id: 1e93c42f-5929-4527-8baf-38d0d963f8a8
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who partnered with him to found the race?"
+choices:
+  - id: ce206e5a-3b24-4549-bf8e-af7ce9bcf85d
+    text: "Laurie Staton"
+  - id: bcafc0cb-cda9-4f4f-9377-d1a5fbf4070e
+    text: "Pat Smythe"
+  - id: 8acb0bb2-897e-414d-819e-a4a160a1dacf
+    text: "Mo Livermore"
+  - id: 0272a170-ef6b-4bd6-8f26-90764e150594
+    text: "Merilee Maupin"
+correct_choice_ids:
+  - 0272a170-ef6b-4bd6-8f26-90764e150594
+explanation: "The race was founded with Merilee Maupin."
+archived: false

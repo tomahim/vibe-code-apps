@@ -1,0 +1,19 @@
+id: 643426c3-6478-42cf-a32c-ec8238468a61
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why did organisers expect better performance in 2026?"
+choices:
+  - id: 6e249347-e97b-49dd-87dc-0c783cbb8ced
+    text: "Cooler temperatures"
+  - id: 37d33397-8a65-4b24-a899-767bb5e30497
+    text: "A flat course"
+  - id: 31e6f72d-86d6-4e51-a053-97f8a9b329ad
+    text: "Less climbing"
+  - id: 0197f8c4-fd4e-4b9c-9bbe-85d3ae72647e
+    text: "Shorter distance"
+correct_choice_ids:
+  - 6e249347-e97b-49dd-87dc-0c783cbb8ced
+explanation: "October is cooler."
+archived: false

@@ -1,0 +1,19 @@
+id: 6454631d-1b43-4845-a4c8-f9f096a71982
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When is the race held each year?"
+choices:
+  - id: ce75a3ef-eae0-4dd5-8586-eb9a0f1e4756
+    text: "In March"
+  - id: 280d8866-530b-4d2e-b852-009f36a55346
+    text: "At the end of October"
+  - id: 272c03dd-05c3-444a-9766-16084338a287
+    text: "In January"
+  - id: a9d98377-756d-4775-ab3e-a72dd3dac98f
+    text: "In July"
+correct_choice_ids:
+  - 280d8866-530b-4d2e-b852-009f36a55346
+explanation: "It is held every year at the end of October."
+archived: false

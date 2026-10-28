@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="A mountain trail winding to a summit under a rising sun, with a runner on the path">
+<rect width="960" height="600" rx="40" fill="#f6e7cf"/>
+<circle cx="740" cy="170" r="70" fill="#f2a541"/>
+<polygon points="40,520 300,200 430,330 560,140 920,520" fill="#6b8fb5"/>
+<polygon points="560,140 640,250 600,240 560,300 520,230 500,250" fill="#ffffff"/>
+<polygon points="40,520 220,330 360,520" fill="#4c6f94"/>
+<path d="M120 540 C260 470 360 500 450 430 C540 360 520 300 600 260" fill="none" stroke="#fff5e1" stroke-width="14" stroke-linecap="round" stroke-dasharray="26 18"/>
+<circle cx="470" cy="412" r="14" fill="#3b2f2f"/>
+<path d="M470 426 L455 462 M470 426 L492 452 M462 440 L440 430 M470 436 L496 424" stroke="#3b2f2f" stroke-width="9" stroke-linecap="round" fill="none"/>
+<rect x="0" y="520" width="960" height="80" rx="40" fill="#3f5a3a"/>
+</svg>

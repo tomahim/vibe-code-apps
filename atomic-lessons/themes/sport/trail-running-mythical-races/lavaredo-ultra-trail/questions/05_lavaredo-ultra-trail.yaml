@@ -1,0 +1,19 @@
+id: d7ffb73f-9788-40e3-a9ca-0ca5f2ac2bab
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who launched the event, according to iRunFar?"
+choices:
+  - id: efa59ceb-4af4-427b-8c71-8e0da02b8800
+    text: "Luis Alberto Hernando"
+  - id: 3d31dff7-d3d0-4916-8773-877618341c4d
+    text: "Michel Poletti"
+  - id: 79963f10-609f-4800-8a25-ade6c858ee9f
+    text: "Simone Brogioni"
+  - id: 94556a4c-b684-4cf6-9b25-78474f566194
+    text: "Kilian Jornet"
+correct_choice_ids:
+  - 79963f10-609f-4800-8a25-ade6c858ee9f
+explanation: "Brogioni launched it and met Cristina Murgia."
+archived: false

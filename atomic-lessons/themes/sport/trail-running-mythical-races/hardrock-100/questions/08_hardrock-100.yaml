@@ -1,0 +1,9 @@
+id: 399f0147-45f4-4a02-ba4f-44a7deffe87c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What section was added one week before the first run? (three words)"
+accepted_answers:
+  - "Dives Little Giant"
+explanation: "The Dives Little Giant section was added a week before."
+archived: false

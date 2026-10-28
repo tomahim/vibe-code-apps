@@ -1,0 +1,19 @@
+id: 9d9269e5-d148-4578-a7e2-be44d7053333
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which race is a Western States qualifier?"
+choices:
+  - id: e9047382-ea8e-490b-8910-b839ecf73172
+    text: "The KAI 70K only"
+  - id: fb8b83a5-4033-408b-9fbe-89e03bb6e2a5
+    text: "The SAKUYA"
+  - id: f9d1d702-5eb5-49b1-b60b-d9b9a0cc9c92
+    text: "None"
+  - id: 29f1989e-9863-4853-b4f1-80a73b9bbaa8
+    text: "The main FUJI race"
+correct_choice_ids:
+  - 29f1989e-9863-4853-b4f1-80a73b9bbaa8
+explanation: "The information lists it as a qualifier."
+archived: false

@@ -1,0 +1,9 @@
+id: cffe4b3c-7953-4d8e-920b-45c539acea98
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which Spanish runner won at least seven times between 2009 and 2019? (first and last name)"
+accepted_answers:
+  - "Kilian Jornet"
+explanation: "Jornet's wins appear in 2009, 2010, 2014, 2015, 2017, 2018 and 2019."
+archived: false

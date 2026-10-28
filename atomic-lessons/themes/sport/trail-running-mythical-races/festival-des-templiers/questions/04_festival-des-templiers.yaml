@@ -1,0 +1,9 @@
+id: 167c8711-d3f8-4622-ab5d-cc9cf20207a7
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the first race? (year)"
+accepted_answers:
+  - "1995"
+explanation: "The first Templiers was in 1995."
+archived: false

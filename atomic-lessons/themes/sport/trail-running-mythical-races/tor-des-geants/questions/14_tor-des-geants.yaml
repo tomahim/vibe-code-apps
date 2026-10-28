@@ -1,0 +1,19 @@
+id: 268a8e58-90cc-4cce-8518-36a0a3f6e418
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the TORX family?"
+choices:
+  - id: 393e8bfa-7454-4307-bc19-18957a524994
+    text: "A shoe brand"
+  - id: bd78d4f0-92ef-4c31-b17e-ad479e568eff
+    text: "A hotel chain"
+  - id: d3d1dca6-d0e9-41b0-a2ad-d9c4cba9e2f8
+    text: "A mountain hut"
+  - id: 735092f7-14df-43b1-9438-9d810584ef0a
+    text: "A group of races with shared values"
+correct_choice_ids:
+  - 735092f7-14df-43b1-9438-9d810584ef0a
+explanation: "They are races united by the experience and values."
+archived: false

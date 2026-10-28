@@ -1,0 +1,9 @@
+id: 2738e88b-6bc3-416d-aa7f-8437e82690a3
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What disease did Peter Strudwick's mother have before he was born? (it is also called German measles)"
+accepted_answers:
+  - "rubella"
+explanation: "The race history says his mother caught rubella."
+archived: false

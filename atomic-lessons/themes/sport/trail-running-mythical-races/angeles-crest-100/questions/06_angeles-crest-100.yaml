@@ -1,0 +1,19 @@
+id: 5b780fb2-e506-4b0c-ab51-7b2efa7db4a3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What replaced the Rose Bowl finish in 1992?"
+choices:
+  - id: 020d6864-3291-4c84-9e61-eb0519a8cec5
+    text: "Chilao"
+  - id: 14fe28ae-b433-4105-8a05-289f8f6d1ea6
+    text: "Newcomb"
+  - id: 84ba3360-40d5-4121-bced-dc8881b5543a
+    text: "Loma Alta Park"
+  - id: 38293628-3d74-4aa7-ac20-b7b29b26f0cf
+    text: "Johnson Field"
+correct_choice_ids:
+  - 38293628-3d74-4aa7-ac20-b7b29b26f0cf
+explanation: "Johnson Field replaced it in 1992."
+archived: false

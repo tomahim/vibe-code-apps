@@ -1,0 +1,19 @@
+id: ee2c58e2-fccc-4df4-be41-86690557d9d2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does the Advanced start?"
+choices:
+  - id: 4ea17005-fcb7-46c9-a8dd-1d1421b59a61
+    text: "Teror"
+  - id: e49ba3cb-37a5-4751-83e9-78142c79c2c6
+    text: "Maspalomas"
+  - id: 008b67b1-c4d3-4ef9-833b-746cc73c626c
+    text: "Agaete"
+  - id: 15db3cfd-5da1-477c-a8a6-924f877e2d82
+    text: "Artenara"
+correct_choice_ids:
+  - 4ea17005-fcb7-46c9-a8dd-1d1421b59a61
+explanation: "It runs from Teror to Maspalomas."
+archived: false

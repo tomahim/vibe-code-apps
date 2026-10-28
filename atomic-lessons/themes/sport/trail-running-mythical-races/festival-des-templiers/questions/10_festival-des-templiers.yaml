@@ -1,0 +1,19 @@
+id: cec94c55-96ca-4dd6-b9e2-2ec3687c0082
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "About how many headlamps are seen on the Carbassas hill?"
+choices:
+  - id: 21a336ab-3ef3-44fd-9c4e-227d5edb761a
+    text: "250"
+  - id: be64de28-c607-4773-a7e7-db4094b5810b
+    text: "2,500"
+  - id: 00f1c9a3-24a7-44e3-b314-c8fe6b8d2c0d
+    text: "25,000"
+  - id: f8fb6379-33b0-47aa-b000-3e1c6c791111
+    text: "25"
+correct_choice_ids:
+  - be64de28-c607-4773-a7e7-db4094b5810b
+explanation: "The official page mentions 2,500 headlamps."
+archived: false

@@ -1,0 +1,19 @@
+id: ce43f69e-9fda-41b0-851d-cf755f64e318
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which language of the valley does the name come from?"
+choices:
+  - id: 5b90daaf-263c-45cc-b995-05ec76990a76
+    text: "Patois"
+  - id: 02e5f12e-f29c-4f60-a3f1-4407f3c616e8
+    text: "Romansh"
+  - id: f176f702-fec4-4ac9-bd25-f9dea771c670
+    text: "German"
+  - id: 9d7dc0b5-3c77-43d7-8028-4c6081faabd7
+    text: "Latin"
+correct_choice_ids:
+  - 5b90daaf-263c-45cc-b995-05ec76990a76
+explanation: "It comes from the valley's patois."
+archived: false

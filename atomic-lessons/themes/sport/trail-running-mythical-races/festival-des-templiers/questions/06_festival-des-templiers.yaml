@@ -1,0 +1,19 @@
+id: 1b10a8ac-2679-4e29-a225-5792f294cc7d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long was the first course?"
+choices:
+  - id: 24a2bb84-7dd8-4f6a-a1dd-6726baf44b23
+    text: "100 km"
+  - id: 63bff870-926e-4ee8-a50d-6dbc96770488
+    text: "42 km"
+  - id: 76cdd99d-29d4-4126-bd52-40983723e4d5
+    text: "65 km"
+  - id: 4066fb9b-75b5-4caf-b7a5-685fc798a8fe
+    text: "171 km"
+correct_choice_ids:
+  - 76cdd99d-29d4-4126-bd52-40983723e4d5
+explanation: "The first race was 65 km."
+archived: false

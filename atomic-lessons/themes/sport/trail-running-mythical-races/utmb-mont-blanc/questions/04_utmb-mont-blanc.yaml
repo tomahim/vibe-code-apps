@@ -1,0 +1,9 @@
+id: 20de4288-aa26-4443-9104-2d2fd1b0ebf0
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Around which mountain does the race run? (two words)"
+accepted_answers:
+  - "Mont Blanc"
+explanation: "The loop circles Mont Blanc."
+archived: false

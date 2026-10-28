@@ -1,0 +1,19 @@
+id: c2a30ce5-d53b-4d45-a258-538455c42aaa
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which two cities does the race link?"
+choices:
+  - id: 19ac75f9-d375-4260-81fe-e1ba329318dc
+    text: "Paris and Lyon"
+  - id: 00e3ef2f-5a80-4185-94d0-47c131edbfef
+    text: "Annecy and Geneva"
+  - id: f0cb9494-e10b-4b56-b9b6-5aafa87c9f03
+    text: "Marseille and Nice"
+  - id: 5c4e4cab-ca0f-4ed7-acfb-5dc861a536fc
+    text: "Saint-Étienne and Lyon"
+correct_choice_ids:
+  - 5c4e4cab-ca0f-4ed7-acfb-5dc861a536fc
+explanation: "The race goes between Saint-Étienne and Lyon."
+archived: false

@@ -1,0 +1,19 @@
+id: cde0e853-4c38-4368-9ae7-c95ac7cc1f50
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many runners started in 1995?"
+choices:
+  - id: cac9b5a0-e71f-4656-9979-70900ca35ff8
+    text: "About 500"
+  - id: 37daa456-4aa6-41be-a2da-c3edbfb7ac98
+    text: "About 50"
+  - id: bb8fbb1a-9417-463a-9e2e-d7ec2c574c52
+    text: "About 5,000"
+  - id: fff844a9-a189-482e-a15d-0f6a7f6c7231
+    text: "About 50,000"
+correct_choice_ids:
+  - cac9b5a0-e71f-4656-9979-70900ca35ff8
+explanation: "The start was given to 500 runners."
+archived: false

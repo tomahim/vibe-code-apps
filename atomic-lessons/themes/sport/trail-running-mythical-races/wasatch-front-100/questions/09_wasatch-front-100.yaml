@@ -1,0 +1,19 @@
+id: 4b7e7de6-9523-450b-bb2b-9d61b2a96ccf
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does the history call 1981?"
+choices:
+  - id: dcb02932-d4e0-46c4-a603-df6eda6478fe
+    text: "The year of the flood"
+  - id: 47bcd8a2-9e0a-4fe3-9901-c77a5dcc3a79
+    text: "The year of the record"
+  - id: 4d0f8434-b95b-4704-ae04-50830218474c
+    text: "The first Grand Slam"
+  - id: 0efae016-2d81-481e-8b4f-83c081a0300d
+    text: "The year no one finished"
+correct_choice_ids:
+  - 0efae016-2d81-481e-8b4f-83c081a0300d
+explanation: "The 1981 article is titled that way."
+archived: false

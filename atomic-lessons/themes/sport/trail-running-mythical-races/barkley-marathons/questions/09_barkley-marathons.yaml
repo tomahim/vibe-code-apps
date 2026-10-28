@@ -1,0 +1,19 @@
+id: 9c50d22b-7b66-4473-8790-ba3bdb860526
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Whose 1977 escape inspired the race?"
+choices:
+  - id: dee06f76-1c69-4a29-aea0-27977b047cf1
+    text: "Gary Cantrell"
+  - id: e02871e8-f31b-452c-a13a-8cc5fbb46bbb
+    text: "Gordy Ainsleigh"
+  - id: 285c2cce-a11f-4267-97cf-9285f863e928
+    text: "Karl Henn"
+  - id: 19975b1d-c20d-44e6-b43f-04a02b8ea127
+    text: "James Earl Ray"
+correct_choice_ids:
+  - 19975b1d-c20d-44e6-b43f-04a02b8ea127
+explanation: "Ray escaped from Brushy Mountain State Prison."
+archived: false

@@ -1,0 +1,19 @@
+id: 980a48d4-24ab-4553-bf7d-4cc31c33932b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did the founders want to celebrate?"
+choices:
+  - id: bbfddbef-e25a-4e42-aadc-fb2b790fdc9f
+    text: "A famous horse"
+  - id: 42cf6264-ac48-418f-a369-adb8501d23a0
+    text: "A national park"
+  - id: f75b3d9d-1c59-4075-9a9d-566af2191389
+    text: "A railway"
+  - id: af96b8d5-f3fd-4a01-8222-5002fc9bf1bf
+    text: "The miners who made the area"
+correct_choice_ids:
+  - af96b8d5-f3fd-4a01-8222-5002fc9bf1bf
+explanation: "It was a celebration of the miners."
+archived: false

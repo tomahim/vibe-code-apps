@@ -1,0 +1,19 @@
+id: 462f722c-0d32-480c-a74a-c8a33cf0ad96
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the maximum race time for the 42 km?"
+choices:
+  - id: cc005f7d-4e6a-4c28-8796-4fb68bcc2e91
+    text: "3 hours"
+  - id: 8da353a3-5402-478a-8bfc-5143511c450d
+    text: "24 hours"
+  - id: 5a317ca2-654a-444a-8563-afbe645b3ced
+    text: "10 hours"
+  - id: 5242a96d-1aa9-4fef-8a31-ace2a3ad924c
+    text: "45 hours"
+correct_choice_ids:
+  - 5a317ca2-654a-444a-8563-afbe645b3ced
+explanation: "Maximum race time is 10:00."
+archived: false

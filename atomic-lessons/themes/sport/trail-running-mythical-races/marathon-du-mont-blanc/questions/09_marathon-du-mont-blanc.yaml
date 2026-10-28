@@ -1,0 +1,19 @@
+id: 05a328ba-728b-4d4e-9adb-e18da39ccac8
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many races does the event include today?"
+choices:
+  - id: e4fa6033-8eb8-498c-8ce0-a3289eb0186f
+    text: "Twenty"
+  - id: 990318db-7ae8-410d-b4cd-c62dc122670a
+    text: "Eight"
+  - id: fc336470-ac38-4848-8434-76af7b3ecc06
+    text: "Two"
+  - id: de6f75db-f983-4b80-b26b-86ea8a7d35a9
+    text: "Twelve"
+correct_choice_ids:
+  - 990318db-7ae8-410d-b4cd-c62dc122670a
+explanation: "Eight races in the Mont-Blanc massif."
+archived: false

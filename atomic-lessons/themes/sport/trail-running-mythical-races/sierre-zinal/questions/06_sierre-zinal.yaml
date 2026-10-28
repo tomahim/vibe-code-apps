@@ -1,0 +1,19 @@
+id: 84ebb3fc-36cf-468b-a370-2feb53fd4ac9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which peak at 4,478 m is among them?"
+choices:
+  - id: b482f305-5699-4fae-93c5-7a16ac8b4f62
+    text: "The Eiger"
+  - id: d8d42c71-ad87-4227-94f5-d17a70bad5df
+    text: "Mont Blanc"
+  - id: 5012bded-bb8d-4429-a105-5509a098d7c5
+    text: "Monte Rosa"
+  - id: 972e1e7f-9ff3-406b-bfaa-a27c94756a53
+    text: "The Matterhorn"
+correct_choice_ids:
+  - 972e1e7f-9ff3-406b-bfaa-a27c94756a53
+explanation: "The Matterhorn is 4,478 metres."
+archived: false

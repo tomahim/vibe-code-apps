@@ -1,0 +1,19 @@
+id: a733c18e-32f2-451a-8f08-4594ad6dee8d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Why was Arlene Pieper disqualified in 1958?"
+choices:
+  - id: b71eb100-b5d6-4508-ab24-a2ae7f955c56
+    text: "She stopped at the top"
+  - id: 29366db4-ab3d-4a1f-a8ba-098aef0d5b8e
+    text: "She used a horse"
+  - id: 61482030-7b48-4865-b32b-f219b44f405c
+    text: "She skipped a checkpoint"
+  - id: 3b0b6052-87a6-47f4-9011-e5297d26404e
+    text: "She started early"
+correct_choice_ids:
+  - b71eb100-b5d6-4508-ab24-a2ae7f955c56
+explanation: "In 1958 she stopped at the summit instead of completing the marathon."
+archived: false

@@ -1,0 +1,19 @@
+id: a6ac11b7-239e-47a2-9b3c-ac7893917c81
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How far from the official route was he found?"
+choices:
+  - id: 3f279df3-d3aa-4489-86a4-edc60cb5c9fb
+    text: "About 2,000 km"
+  - id: cb1350e9-2f5c-4636-9766-ec71c5842990
+    text: "About 20 km"
+  - id: 8a845fef-f49d-46ef-a3d6-d89e0334a963
+    text: "About 2 km"
+  - id: 0ef6044f-8f06-4812-a758-3e75afeb1c28
+    text: "More than 200 km"
+correct_choice_ids:
+  - 0ef6044f-8f06-4812-a758-3e75afeb1c28
+explanation: "A nomadic family found him over 200 km away."
+archived: false

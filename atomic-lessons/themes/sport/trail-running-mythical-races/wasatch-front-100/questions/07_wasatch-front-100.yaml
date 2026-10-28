@@ -1,0 +1,19 @@
+id: a6491a08-9681-472c-b337-687b0327f8a9
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long did the first race take for the finishers?"
+choices:
+  - id: 1b87eb4c-9a42-468f-9cbc-46f4d8d85695
+    text: "35 hours 1 minute 21 seconds"
+  - id: 22b2b5d5-d349-4ce0-af26-6ec28231cda1
+    text: "48 hours"
+  - id: db52bf3c-7f08-4694-81a0-6d0ec27728da
+    text: "28 hours 36 minutes"
+  - id: 9075c818-5eab-45c7-908f-92503ffc044f
+    text: "23 hours 42 minutes"
+correct_choice_ids:
+  - 1b87eb4c-9a42-468f-9cbc-46f4d8d85695
+explanation: "Richard declared the race finished after that time."
+archived: false

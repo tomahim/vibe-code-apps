@@ -1,0 +1,19 @@
+id: 1596abfa-6977-4aeb-b126-ef12ee2ee9cf
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many acres did the state buy for coal mining?"
+choices:
+  - id: 38d23da4-2708-431b-851f-b54f57d1babf
+    text: "1,300"
+  - id: 930f455a-e8a3-45ef-be51-8e3f8b6aa643
+    text: "130"
+  - id: 722d170f-4280-4fba-87f8-7d2c6493f9b5
+    text: "13,000"
+  - id: bf677c74-bbc2-4b5d-bf98-49320566e526
+    text: "130,000"
+correct_choice_ids:
+  - 722d170f-4280-4fba-87f8-7d2c6493f9b5
+explanation: "The state purchased 13,000 acres."
+archived: false

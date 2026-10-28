@@ -1,0 +1,19 @@
+id: 3b71b138-afa7-4c8f-bc59-b03ecc346aee
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who launched it?"
+choices:
+  - id: f4b98726-8c81-4d84-b5ea-c89629097b8b
+    text: "Richard Barnum-Reece"
+  - id: 8cc11adb-7e4c-4e49-8f05-5dc4132eaba7
+    text: "Ken Chlouber and Merilee Maupin"
+  - id: 3ecf67dd-7c4f-4084-a1a7-9faf0e3a8142
+    text: "Gilles Bertrand and Odile Baudrier"
+  - id: 265ea43b-c3ff-41a2-8f86-bdbb06c2c4a5
+    text: "Catherine and Michel Poletti"
+correct_choice_ids:
+  - 265ea43b-c3ff-41a2-8f86-bdbb06c2c4a5
+explanation: "The Polettis and friends launched it."
+archived: false

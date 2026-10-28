@@ -1,0 +1,19 @@
+id: df000821-0684-475a-a8fb-1386c0f752b5
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who proposed the race idea in 2008?"
+choices:
+  - id: 96e63cc2-a81b-4125-b6f2-2f8634bb4fc2
+    text: "Marco Olmo"
+  - id: 217e4390-1f65-4a43-ae41-c7a0713b3c5d
+    text: "Kilian Jornet"
+  - id: 3dea563b-bc31-4014-8af2-b4fc2256fab7
+    text: "Julio Cabrera"
+  - id: da77cf23-87c6-4fd2-9f18-1809c541ab5a
+    text: "Simone Brogioni"
+correct_choice_ids:
+  - 3dea563b-bc31-4014-8af2-b4fc2256fab7
+explanation: "He met the authorities."
+archived: false

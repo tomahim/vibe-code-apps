@@ -1,0 +1,9 @@
+id: d69896f3-4daf-419d-a936-db29cf92f7aa
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the first Hardrock 100? (year)"
+accepted_answers:
+  - "1992"
+explanation: "The first race was in summer 1992."
+archived: false

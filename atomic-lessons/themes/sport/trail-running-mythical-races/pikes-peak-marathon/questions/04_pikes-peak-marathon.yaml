@@ -1,0 +1,9 @@
+id: 36865d59-01a9-45c7-a4f1-2d57d64cebbb
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the Pikes Peak Marathon officially founded?"
+accepted_answers:
+  - "1956"
+explanation: "The race history says it was officially founded in 1956."
+archived: false

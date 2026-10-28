@@ -1,0 +1,19 @@
+id: 2ad46af2-4173-429a-aad4-37368b3f4eb0
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long is the official route?"
+choices:
+  - id: ea493a9b-a63d-4605-ac37-50c97e1a9a95
+    text: "42 km"
+  - id: 0e996e8f-6a98-40fb-8d32-6e912c0be1e3
+    text: "73.06 km"
+  - id: 40828a38-d3fe-4f21-aaaf-2553ab716756
+    text: "330 km"
+  - id: 319099f3-565f-45cf-97a4-a7089030bdc5
+    text: "171 km"
+correct_choice_ids:
+  - 0e996e8f-6a98-40fb-8d32-6e912c0be1e3
+explanation: "The official page says 73.06 km."
+archived: false

@@ -1,0 +1,19 @@
+id: 8d8dcd78-7b7b-42b5-9194-e969e54517f4
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does the organisers' claim about the race say?"
+choices:
+  - id: 7c3189f0-c2c3-42cd-ba9b-6ce6d0e1d715
+    text: "It is the oldest in the world"
+  - id: 2d7ffd73-b954-4568-b9d4-629a2278957f
+    text: "It is the shortest in the world"
+  - id: f5f88970-9ffa-4cd1-b53d-f7a19a62b971
+    text: "It is often cited as the hardest in the world"
+  - id: f868be50-1921-4637-9551-f2135c06d3ef
+    text: "It is the flattest in the world"
+correct_choice_ids:
+  - f5f88970-9ffa-4cd1-b53d-f7a19a62b971
+explanation: "The organisers say it is often cited as the hardest race."
+archived: false

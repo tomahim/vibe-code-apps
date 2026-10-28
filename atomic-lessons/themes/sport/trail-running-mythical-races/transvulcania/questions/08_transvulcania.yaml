@@ -1,0 +1,10 @@
+id: 04a180cf-6179-4b86-ac58-e1a9756a8370
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the GR 131 also called? (two words)"
+accepted_answers:
+  - "Ruta del Baston"
+  - "Ruta del Bastón"
+explanation: "The GR 131 is the Ruta del Baston."
+archived: false

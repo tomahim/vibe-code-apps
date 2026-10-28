@@ -1,0 +1,19 @@
+id: 3e4dfdee-5ec2-4b2b-9fa3-edb4fd5b8612
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year was UTMB created?"
+choices:
+  - id: 1a773ffa-ea5f-4b98-b96c-56d4934a7ab2
+    text: "2014"
+  - id: 55dcfed6-a408-494b-9be8-f990c891c3b6
+    text: "2003"
+  - id: caa7e549-f4bd-4333-a44d-d19024b8d461
+    text: "1995"
+  - id: f0bf1ce5-7a8d-470a-81d6-328a56f94fb6
+    text: "1983"
+correct_choice_ids:
+  - 55dcfed6-a408-494b-9be8-f990c891c3b6
+explanation: "The story began in 2003."
+archived: false

@@ -1,0 +1,19 @@
+id: bd009b37-a6b2-4043-ba02-8d8d746a189e
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "About how many runners start the main race?"
+choices:
+  - id: 1ee35266-e4bc-4966-b587-9af966c9bf87
+    text: "About 80,000"
+  - id: 166e2d1e-3cc3-443d-a94c-a2a8d0cd843b
+    text: "About 800"
+  - id: 2382d397-533e-4a3e-a438-c98986e7b90d
+    text: "About 80"
+  - id: 748e70aa-76a2-4ce1-b79a-a28031d11d8d
+    text: "Nearly 8,000"
+correct_choice_ids:
+  - 748e70aa-76a2-4ce1-b79a-a28031d11d8d
+explanation: "The official site says nearly 8,000 at the start."
+archived: false

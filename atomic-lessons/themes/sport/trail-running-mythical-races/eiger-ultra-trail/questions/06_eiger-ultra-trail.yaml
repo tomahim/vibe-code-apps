@@ -1,0 +1,19 @@
+id: 7999efe9-62af-4397-80b8-4f535cac41ab
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which village is the start and finish?"
+choices:
+  - id: fbaef232-3025-4621-8d72-9923116f7865
+    text: "Cortina"
+  - id: 046ad37d-9133-4dcc-8023-7da0a3003043
+    text: "Chamonix"
+  - id: 6cd03c5e-9dbb-4ef7-86fe-78d4b01443f7
+    text: "Grindelwald"
+  - id: ecb542d0-c2b5-4513-832c-3470b423d847
+    text: "Zermatt"
+correct_choice_ids:
+  - 6cd03c5e-9dbb-4ef7-86fe-78d4b01443f7
+explanation: "Grindelwald is the gateway to a UNESCO site."
+archived: false

@@ -1,0 +1,10 @@
+id: 0288c4d6-d021-459a-bfc9-0f7f4f753ce1
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "How many runners started the first race? (number)"
+accepted_answers:
+  - "5"
+  - "five"
+explanation: "Five experienced local trail runners planned to run."
+archived: false

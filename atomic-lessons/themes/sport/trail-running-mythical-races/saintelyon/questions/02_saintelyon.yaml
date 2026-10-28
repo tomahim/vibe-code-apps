@@ -1,0 +1,19 @@
+id: ec99d659-f763-436f-ac4e-b94703b4377f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which long-distance path did the first raid follow?"
+choices:
+  - id: 1d8ba3fa-f88d-42b4-9e2d-76c4119735ae
+    text: "The GR 131"
+  - id: 9471d1d1-b008-4b69-bb1c-7e3fc569c597
+    text: "The Alta Via 2"
+  - id: b6e2de71-e518-4661-b5d3-2c66483b7e10
+    text: "The GR 7"
+  - id: 0c32fc8f-b254-4ddb-8512-89d4f48412a4
+    text: "The Tour du Mont Blanc"
+correct_choice_ids:
+  - b6e2de71-e518-4661-b5d3-2c66483b7e10
+explanation: "The walk followed the GR 7."
+archived: false

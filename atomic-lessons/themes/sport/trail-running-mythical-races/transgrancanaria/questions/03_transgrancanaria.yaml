@@ -1,0 +1,19 @@
+id: f2b368cb-4ad9-47e7-bb8d-4a34f3bb10b1
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which organiser has run it from the first edition?"
+choices:
+  - id: d1a90f71-b2c5-4634-b488-0b62a6b416d2
+    text: "Club des Sports"
+  - id: b6e20314-6c27-4f3b-b5fe-09d78026c8f0
+    text: "TORX"
+  - id: 82aaadf8-0380-4f63-a4f5-42f5cc3b70c4
+    text: "UTMB Group"
+  - id: c5c3180e-caeb-470d-bf37-09664fb42f7c
+    text: "Arista Eventos"
+correct_choice_ids:
+  - c5c3180e-caeb-470d-bf37-09664fb42f7c
+explanation: "Arista Eventos has organised it."
+archived: false
