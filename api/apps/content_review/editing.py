@@ -17,6 +17,7 @@ from .review import classify
 # Editable fields per unit kind. Ids, positions, images and the archive flag
 # are never editable here: ids are the stable identity the importer keys on.
 EDITABLE = {
+    "theme": {"description"},
     "card": {"title", "body"},
     "lesson": {"title", "description", "body"},
     "learning_path": {"title", "description", "body"},

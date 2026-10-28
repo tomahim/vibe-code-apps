@@ -57,6 +57,20 @@ class EditingTests(TestCase):
         bare = LESSON_INDEX.replace("description: Name clothes.\n", "")
         self.assertIn("description: New one\n", apply_edit(LESSON_PATH, bare, {"description": "New one"}))
 
+    def test_theme_description_preserves_every_other_byte(self):
+        path = "atomic-lessons/themes/technology/index.md"
+        text = "---\nid: theme-uuid\ntitle: Technology\ndescription: Short, sourced lessons about technology and artificial intelligence.\nposition: 3\narchived: false\nimage: tech.webp\n---\nIntro stays.\n"
+        new = apply_edit(path, text, {"description": "Technology: explained."})
+        self.assertEqual(new, text.replace(
+            "description: Short, sourced lessons about technology and artificial intelligence.",
+            "description: 'Technology: explained.'"))
+        for changes in ({"title": "No"}, {"body": "No"}, {"id": "No"}, {"description": "x" * 1001}):
+            with self.assertRaises(EditError):
+                apply_edit(path, text, changes)
+        self.assertIn("description: ''", apply_edit(path, text, {"description": ""}))
+        missing = text.replace("description: Short, sourced lessons about technology and artificial intelligence.\n", "")
+        self.assertIn("description: New\n", apply_edit(path, missing, {"description": "New"}))
+
     def test_question_edit_keeps_ids_and_other_fields(self):
         changes = {
             "prompt": "Put this onesie ____.",
@@ -153,6 +167,16 @@ class EditEndpointTests(TestCase):
         self.assertIn("Pull request #7", args[6])
         self.mocks["get_file"].assert_called_once_with("t", "o/r", CARD_PATH, "abc123")
 
+    def test_theme_description_commits_to_pr_branch(self):
+        path = "atomic-lessons/themes/technology/index.md"
+        self.mocks["get_file"].return_value = (LESSON_INDEX, "theme-blob")
+        response = self.post({"path": path, "changes": {"description": "Technology: explained."}})
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["unit"]["description"], "Technology: explained.")
+        args = self.mocks["put_file"].call_args.args
+        self.assertEqual(args[2:4], (path, "feat/bath-time"))
+        self.assertEqual(args[5], "theme-blob")
+
     def test_access_and_origin(self):
         self.assertEqual(Client().post(self.url, data="{}", content_type="application/json").status_code, 401)
         learner = get_user_model().objects.create_user("l", "l@example.com", "test-only-password")
@@ -168,7 +192,6 @@ class EditEndpointTests(TestCase):
         for body in (
             {"path": "ui/src/App.jsx"},
             {"path": "atomic-lessons/../ui/x.md"},
-            {"path": "atomic-lessons/themes/language/index.md"},  # theme: not editable
             {"head_sha": ""},
             {"changes": {"id": "x"}},
             {"changes": {}},

@@ -497,3 +497,9 @@ button.back-link {
   background: #e8f4ea;
   color: #1f5a2b;
 }
+
+.unit-description {
+  color: #6b675a;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}

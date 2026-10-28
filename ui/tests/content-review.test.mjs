@@ -57,7 +57,7 @@ test('canEdit allows content kinds that parse and are not removed', () => {
   assert.equal(canEdit(lesson), true);
   assert.equal(canEdit({ ...lesson, change: 'removed' }), false);
   assert.equal(canEdit({ ...lesson, parse_error: 'bad' }), false);
-  assert.equal(canEdit({ ...lesson, kind: 'theme' }), false);
+  assert.equal(canEdit({ ...lesson, kind: 'theme' }), true);
   assert.equal(canEdit({ ...question, question: { ...question.question, options: [] } }), false);
 });
 
@@ -79,4 +79,14 @@ test('mergeSavedUnit keeps breadcrumbs and diff', () => {
   assert.equal(merged.title, 'N');
   assert.deepEqual(merged.breadcrumbs, ['x']);
   assert.equal(merged.patch, 'p');
+});
+
+
+test('theme drafts and changes contain only the description', () => {
+  const theme = { ...lesson, kind: 'theme' };
+  assert.deepEqual(draftFromUnit(theme), { description: 'D' });
+  assert.deepEqual(editChanges(theme, draftFromUnit(theme)), {});
+  assert.deepEqual(editChanges(theme, { description: 'New summary' }), { description: 'New summary' });
+  assert.equal(canEdit({ ...theme, change: 'removed' }), false);
+  assert.equal(canEdit({ ...theme, parse_error: 'bad' }), false);
 });

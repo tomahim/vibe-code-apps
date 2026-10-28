@@ -153,7 +153,8 @@ function UnitEditor({ unit, onSave, onCancel, onReload }) {
   const [state, setState] = useState({ status: "idle", message: "", conflict: false });
   const changes = editChanges(unit, draft);
   const isQuestion = unit.kind === "question";
-  const hasDescription = unit.kind === "lesson" || unit.kind === "learning_path";
+  const isTheme = unit.kind === "theme";
+  const hasDescription = isTheme || unit.kind === "lesson" || unit.kind === "learning_path";
 
   function set(key, value) {
     setDraft((current) => ({ ...current, [key]: value }));
@@ -182,7 +183,7 @@ function UnitEditor({ unit, onSave, onCancel, onReload }) {
 
   return (
     <div className="unit-editor">
-      {!isQuestion && (
+      {!isQuestion && !isTheme && (
         <label>
           Title
           <input type="text" value={draft.title} maxLength={200} onChange={(e) => set("title", e.target.value)} />
@@ -191,10 +192,10 @@ function UnitEditor({ unit, onSave, onCancel, onReload }) {
       {hasDescription && (
         <label>
           Description
-          <textarea rows={2} value={draft.description} onChange={(e) => set("description", e.target.value)} />
+          <textarea aria-label="Description" rows={3} maxLength={1000} value={draft.description} onChange={(e) => set("description", e.target.value)} />
         </label>
       )}
-      {!isQuestion && (
+      {!isQuestion && !isTheme && (
         <label>
           {unit.kind === "card" ? "Card text" : "Intro text"}
           <textarea rows={unit.kind === "card" ? 10 : 4} value={draft.body} onChange={(e) => set("body", e.target.value)} />
@@ -298,6 +299,10 @@ function UnitDetail({ unit, onFeedback, onSave, onReload }) {
         </p>
       )}
 
+      {view === "preview" && !editing && unit.description && (
+        <p className="unit-description">{unit.description}</p>
+      )}
+
       {view === "preview" && editing ? (
         <UnitEditor
           unit={unit}
@@ -315,7 +320,7 @@ function UnitDetail({ unit, onFeedback, onSave, onReload }) {
       ) : unit.body ? (
         <BodyPreview body={unit.body} />
       ) : (
-        <p className="diff-empty">Nothing to preview for this file.</p>
+        !unit.description && <p className="diff-empty">Nothing to preview for this file.</p>
       )}
 
       {view === "preview" && !editing && canEdit(unit) && (
