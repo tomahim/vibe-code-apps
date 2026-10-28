@@ -5,7 +5,6 @@ after_card_position: 6
 prompt: "What is the name of the multi-lab consortium that replicates infant findings?"
 accepted_answers:
   - "ManyBabies"
-  - "manybabies"
   - "Many Babies"
 explanation: "ManyBabies coordinates dozens of infant labs running identical pre-registered studies."
 archived: false

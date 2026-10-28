@@ -5,7 +5,6 @@ after_card_position: 4
 prompt: "Anne Fernald's classic research showed infants prefer which speech register?"
 accepted_answers:
   - "infant-directed speech"
-  - "infant directed speech"
   - "baby talk"
   - "motherese"
 explanation: "Infant-directed speech - higher pitch, wider melody, slower tempo - wins infant attention across cultures."

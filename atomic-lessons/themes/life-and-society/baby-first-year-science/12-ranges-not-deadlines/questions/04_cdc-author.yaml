@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "What is the surname of the pediatrician who led the CDC's evidence-based milestone revision?"
 accepted_answers:
   - "Zubler"
-  - "zubler"
 explanation: "Jennifer Zubler's team reviewed the literature and placed milestones at the 75% line."
 archived: false

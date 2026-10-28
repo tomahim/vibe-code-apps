@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "What do researchers call the decline in sensitivity to speech contrasts not used in the baby's native language?"
 accepted_answers:
   - "perceptual narrowing"
-  - "Perceptual narrowing"
 explanation: "Perceptual narrowing trades universal sensitivity for expert precision in the heard language."
 archived: false

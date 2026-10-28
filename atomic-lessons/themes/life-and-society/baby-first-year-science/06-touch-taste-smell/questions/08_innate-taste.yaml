@@ -6,6 +6,5 @@ prompt: "Which taste are newborns born preferring, likely an ancient energy-seek
 accepted_answers:
   - "sweet"
   - "sweetness"
-  - "Sweet"
 explanation: "Sweet preference and bitter aversion come preloaded; most other flavor acceptance is learned."
 archived: false

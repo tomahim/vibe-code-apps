@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "What is the term for declining response to a repeated stimulus, used as a discrimination tool?"
 accepted_answers:
   - "habituation"
-  - "Habituation"
 explanation: "Habituation, plus its rebound, is the workhorse for showing what babies can tell apart."
 archived: false

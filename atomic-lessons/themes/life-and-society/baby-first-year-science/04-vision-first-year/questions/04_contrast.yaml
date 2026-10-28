@@ -5,7 +5,5 @@ after_card_position: 2
 prompt: "Newborns see boldest what kind of patterns best: high or low contrast?"
 accepted_answers:
   - "high contrast"
-  - "High contrast"
-  - "high-contrast"
 explanation: "Blurry young vision carries strong edges and high contrast best, which is why high-contrast toys exist."
 archived: false

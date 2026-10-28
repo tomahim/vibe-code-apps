@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "What is the surname of the psychologist who pioneered preferential looking in the 1960s?"
 accepted_answers:
   - "Fantz"
-  - "fantz"
 explanation: "Robert Fantz's preferential-looking method launched the experimental study of infant perception."
 archived: false

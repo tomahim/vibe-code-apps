@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "What is the technical name for the babbling stage with well-formed consonant-vowel syllables?"
 accepted_answers:
   - "canonical babbling"
-  - "Canonical babbling"
 explanation: "Canonical babbling, starting around 6-9 months, is the stage whose timing is clinically informative."
 archived: false

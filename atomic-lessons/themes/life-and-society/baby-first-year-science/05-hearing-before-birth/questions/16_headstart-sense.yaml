@@ -5,7 +5,6 @@ after_card_position: 8
 prompt: "Which sense has the longest head start, already learning in the womb?"
 accepted_answers:
   - "hearing"
-  - "Hearing"
   - "the sense of hearing"
 explanation: "Hearing is functional from the third trimester, unlike vision, which is the least mature sense at birth."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "What is the surname of the researcher famous for violation-of-expectation studies of infant object knowledge?"
 accepted_answers:
   - "Baillargeon"
-  - "baillargeon"
 explanation: "Renee Baillargeon's 1980s studies argued young infants expect hidden objects to persist."
 archived: false
