@@ -17,14 +17,14 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false }
     if (url.pathname.endsWith(`/cards/${id.card}/complete/`)) { read = true; return route.fulfill({ status: 201, json: { created: true } }); }
     if (url.pathname.endsWith(`/cards/${id.card2}/complete/`)) { readSecond = true; return route.fulfill({ status: 201, json: { created: true } }); }
     if (url.pathname.endsWith('/question-attempts/')) { answered = JSON.parse(route.request().postData()).answer === 'warm'; wrong = !answered; return route.fulfill({ status: 201, json: { correct: answered, explanation: 'Warm means pleasantly heated.', next_step: answered ? null : { type: 'question', id: id.alternative } } }); }
-    if (url.pathname.endsWith('/leaderboard/')) return route.fulfill({ json: { rows: [{ rank: 1, name: 'Learner', score: 106, is_self: true }], self: { rank: 1, score: 106, is_self: true } } });
+    if (url.pathname.endsWith('/leaderboard/')) { const score = url.searchParams.get('currency') === 'carrots' ? 1 : 106; return route.fulfill({ json: { rows: [{ rank: 1, name: 'Learner', score, is_self: true }], self: { rank: 1, score, is_self: true } } }); }
   });
 }
 
 test('Little Grains requires sign-in', async ({ page }) => {
   await page.route('**/api/apps/', route => route.fulfill({ json: { apps: [] } }));
   await page.goto('/');
-  await page.getByRole('button', { name: /Little Grains/ }).click();
+  await page.locator('.app-card').filter({ has: page.locator('.app-card-title').getByText('Little Grains', { exact: true }) }).click();
   await page.waitForURL('**/login?next=/apps/little-grains');
 });
 
@@ -53,6 +53,34 @@ test('garden, lesson progress and leaderboard use the API', async ({ page }) => 
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
   await expect(page.getByRole('dialog', { name: 'Leaderboard' }).getByText('Learner')).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-desktop.png' });
+});
+
+test('reward totals and leaderboard explain the same Drops and Carrots rules', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page);
+  await page.goto('/apps/little-grains');
+
+  await page.getByRole('button', { name: /How Drops are earned/ }).click();
+  const dropInfo = page.getByRole('dialog', { name: 'How Drops are earned' });
+  await expect(dropInfo).toBeVisible();
+  const dropDescription = await dropInfo.locator('p').textContent();
+  expect(dropDescription).toContain('100 more when you complete a learning path');
+  await page.screenshot({ path: '/tmp/little-grains-drops-info.png' });
+  await dropInfo.getByRole('button', { name: 'Close reward information' }).click();
+
+  await page.getByRole('button', { name: /How Carrots are earned/ }).click();
+  const carrotInfo = page.getByRole('dialog', { name: 'How Carrots are earned' });
+  await expect(carrotInfo).toBeVisible();
+  const carrotDescription = await carrotInfo.locator('p').textContent();
+  expect(carrotDescription).toContain('first time you answer a checkpoint correctly');
+  await carrotInfo.getByRole('button', { name: 'Close reward information' }).click();
+
+  await page.getByRole('button', { name: 'Open leaderboard' }).click();
+  const leaderboard = page.getByRole('dialog', { name: 'Leaderboard' });
+  await expect(leaderboard.locator('.grains-reward-description')).toHaveText(dropDescription);
+  await leaderboard.getByRole('button', { name: /Carrots/ }).click();
+  await expect(leaderboard.locator('.grains-reward-description')).toHaveText(carrotDescription);
+  await page.screenshot({ path: '/tmp/little-grains-leaderboard-carrots.png' });
 });
 
 test('a wrong answer opens another question at the checkpoint', async ({ page }) => {
@@ -141,6 +169,9 @@ test('phone garden keeps the path list and leaderboard usable', async ({ page })
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
   await expect(page.getByRole('dialog', { name: 'Leaderboard' }).getByText('Learner')).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-mobile.png' });
+  await page.getByRole('dialog', { name: 'Leaderboard' }).getByRole('button', { name: 'Close leaderboard' }).click();
+  await page.getByRole('button', { name: /How Drops are earned/ }).click();
+  await expect(page.getByRole('dialog', { name: 'How Drops are earned' })).toBeInViewport();
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(390);
 });

@@ -71,7 +71,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -500,7 +500,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   }
   function renderStats() {
     const t = totals();
-    statsEl.innerHTML = `<span class="chip drop" title="Cards completed">${ICON.drop}<b>${t.drops}</b><small>drops</small></span><span class="chip carrot" title="Questions answered correctly">${ICON.carrot}<b>${t.carrots}</b><small>carrots</small></span>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
+    statsEl.innerHTML = `<button class="chip drop" data-reward="drops" aria-label="${t.drops} Drops. How Drops are earned">${ICON.drop}<b>${t.drops}</b><small>drops</small><span class="info" aria-hidden="true">ⓘ</span></button><button class="chip carrot" data-reward="carrots" aria-label="${t.carrots} Carrots. How Carrots are earned">${ICON.carrot}<b>${t.carrots}</b><small>carrots</small><span class="info" aria-hidden="true">ⓘ</span></button>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
   }
   function renderUI() { renderCrumbs(); renderPanel(); renderStats(); buildLabels(); }
   root.addEventListener('click', (e) => {
@@ -511,6 +511,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
     else if (b.dataset.start) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.start)].id);
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
+    else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
   });
