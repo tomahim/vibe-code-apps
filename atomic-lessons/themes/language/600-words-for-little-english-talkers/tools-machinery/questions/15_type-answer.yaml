@@ -1,0 +1,10 @@
+id: e3a5ec74-e973-441a-bdf3-9f2424d46906
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Ciseaux » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Scissors"
+  - "scissors"
+explanation: "Le mot du cours est « Scissors »."
+archived: false

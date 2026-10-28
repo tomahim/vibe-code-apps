@@ -1,0 +1,10 @@
+id: 8a7a90e0-e5aa-4955-b753-2c771197418e
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Couverture » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Blanket"
+  - "blanket"
+explanation: "Le mot du cours est « Blanket »."
+archived: false

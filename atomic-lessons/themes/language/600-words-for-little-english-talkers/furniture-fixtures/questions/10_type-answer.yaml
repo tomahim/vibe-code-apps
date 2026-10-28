@@ -1,0 +1,10 @@
+id: 8b132d17-e44f-46ac-9edc-cef31dc53631
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Banc » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Bench"
+  - "bench"
+explanation: "Le mot du cours est « Bench »."
+archived: false

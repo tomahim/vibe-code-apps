@@ -1,0 +1,10 @@
+id: 94c80afa-084d-4e48-a059-cd5c6fae9741
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Chaussures » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Shoes"
+  - "shoes"
+explanation: "Le mot du cours est « Shoes »."
+archived: false

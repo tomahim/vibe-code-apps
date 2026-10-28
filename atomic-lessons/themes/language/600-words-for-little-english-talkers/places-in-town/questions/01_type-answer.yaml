@@ -1,0 +1,10 @@
+id: 3c3788f6-d3fc-4889-a013-086fade0d926
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Parc » (thème : Places in Town)."
+accepted_answers:
+  - "Park"
+  - "park"
+explanation: "Le mot du cours est « Park »."
+archived: false

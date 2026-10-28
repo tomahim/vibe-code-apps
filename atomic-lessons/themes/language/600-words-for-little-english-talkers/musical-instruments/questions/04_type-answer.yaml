@@ -1,0 +1,10 @@
+id: b9736de1-7927-4857-939a-7796ef89d1af
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Violon » (thème : Musical Instruments)."
+accepted_answers:
+  - "Violin"
+  - "violin"
+explanation: "Le mot du cours est « Violin »."
+archived: false

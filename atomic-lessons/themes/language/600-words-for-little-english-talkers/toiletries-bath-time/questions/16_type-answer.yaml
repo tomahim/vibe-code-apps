@@ -1,0 +1,10 @@
+id: c5512b0b-edfd-4181-9d19-17a3af17eb85
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Bonnet de douche » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Cap"
+  - "cap"
+explanation: "Le mot du cours est « Cap »."
+archived: false

@@ -1,0 +1,10 @@
+id: d617f807-8e8b-4833-9c6d-808b24789ee2
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Cœur » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Heart"
+  - "heart"
+explanation: "Le mot du cours est « Heart »."
+archived: false

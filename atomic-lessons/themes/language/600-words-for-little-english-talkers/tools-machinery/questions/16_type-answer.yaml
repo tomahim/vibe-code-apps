@@ -1,0 +1,10 @@
+id: 76862361-011d-43ce-b7a1-63fa4ab2e3d2
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pince à épiler » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Tweezers"
+  - "tweezers"
+explanation: "Le mot du cours est « Tweezers »."
+archived: false

@@ -1,0 +1,10 @@
+id: e2126ec4-d5d3-4950-b02b-5675fc2ad65f
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Tonnerre » (thème : Weather & Sky)."
+accepted_answers:
+  - "Thunder"
+  - "thunder"
+explanation: "Le mot du cours est « Thunder »."
+archived: false

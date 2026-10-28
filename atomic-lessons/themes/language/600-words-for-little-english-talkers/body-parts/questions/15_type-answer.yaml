@@ -1,0 +1,10 @@
+id: 3ca169ea-b25f-47cb-928b-848fe83fad7d
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Ongle » (thème : Body Parts)."
+accepted_answers:
+  - "Nail"
+  - "nail"
+explanation: "Le mot du cours est « Nail »."
+archived: false

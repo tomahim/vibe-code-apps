@@ -1,0 +1,10 @@
+id: bf06dbce-5459-4616-ae4f-2c9fca46f429
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Genou » (thème : Body Parts)."
+accepted_answers:
+  - "Knee"
+  - "knee"
+explanation: "Le mot du cours est « Knee »."
+archived: false

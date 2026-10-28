@@ -1,0 +1,10 @@
+id: 3dde8266-8c92-4c6f-ab66-1c2fcc896244
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Baskets » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Sneakers"
+  - "sneakers"
+explanation: "Le mot du cours est « Sneakers »."
+archived: false

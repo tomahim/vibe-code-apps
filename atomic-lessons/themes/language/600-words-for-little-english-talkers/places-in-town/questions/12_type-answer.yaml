@@ -1,0 +1,10 @@
+id: f22fa274-c69e-4a36-8fca-302be23e2853
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Plage » (thème : Places in Town)."
+accepted_answers:
+  - "Beach"
+  - "beach"
+explanation: "Le mot du cours est « Beach »."
+archived: false

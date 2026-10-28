@@ -1,0 +1,10 @@
+id: fe736f95-acda-4ccb-b793-23ef7738d6c4
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Chips » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Chips"
+  - "chips"
+explanation: "Le mot du cours est « Chips »."
+archived: false

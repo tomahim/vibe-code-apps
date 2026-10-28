@@ -1,0 +1,10 @@
+id: 455d2f8d-79c5-46d8-956e-03397dfb0819
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Agent de circulation » (thème : Community Helpers)."
+accepted_answers:
+  - "Crossing guard"
+  - "crossing guard"
+explanation: "Le mot du cours est « Crossing guard »."
+archived: false

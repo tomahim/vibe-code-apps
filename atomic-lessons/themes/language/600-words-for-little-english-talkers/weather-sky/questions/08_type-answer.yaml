@@ -1,0 +1,10 @@
+id: ed4e1922-79a6-4a74-9ffb-76c91cf52857
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Ciel » (thème : Weather & Sky)."
+accepted_answers:
+  - "Sky"
+  - "sky"
+explanation: "Le mot du cours est « Sky »."
+archived: false

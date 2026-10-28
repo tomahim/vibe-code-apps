@@ -1,0 +1,10 @@
+id: d2023e17-e584-48c6-b692-3e67219d70ac
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Graine de tournesol » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Sunflower seed"
+  - "sunflower seed"
+explanation: "Le mot du cours est « Sunflower seed »."
+archived: false

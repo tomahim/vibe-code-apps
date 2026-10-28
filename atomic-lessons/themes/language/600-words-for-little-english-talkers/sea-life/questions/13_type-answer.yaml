@@ -1,0 +1,10 @@
+id: 5fd4b6c5-d9c9-46d9-8e79-bca3d485c14f
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Sous-marin » (thème : Sea Life)."
+accepted_answers:
+  - "Submarine"
+  - "submarine"
+explanation: "Le mot du cours est « Submarine »."
+archived: false

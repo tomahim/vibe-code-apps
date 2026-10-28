@@ -1,0 +1,10 @@
+id: c2306f9d-16ac-42e8-9e4a-65602e0486a6
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Cerf-volant » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Kite"
+  - "kite"
+explanation: "Le mot du cours est « Kite »."
+archived: false

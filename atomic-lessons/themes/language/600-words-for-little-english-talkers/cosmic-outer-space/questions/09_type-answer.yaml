@@ -1,0 +1,10 @@
+id: d1ffe35f-44de-4f58-b0be-bfd6d0403efd
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Combinaison spatiale » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Space suit"
+  - "space suit"
+explanation: "Le mot du cours est « Space suit »."
+archived: false

@@ -1,0 +1,10 @@
+id: 5a73a40a-a5ed-484c-937e-d6ac4c9dc326
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Arche » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Arch"
+  - "arch"
+explanation: "Le mot du cours est « Arch »."
+archived: false

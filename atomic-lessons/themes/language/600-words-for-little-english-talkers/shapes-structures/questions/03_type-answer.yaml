@@ -1,0 +1,10 @@
+id: bab18e8b-fab7-45ac-b476-bf132e2bd3bb
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Tour » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Tower"
+  - "tower"
+explanation: "Le mot du cours est « Tower »."
+archived: false

@@ -1,0 +1,10 @@
+id: 5f3e0631-a43c-4c47-91ee-6d018471a6c4
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Escargot » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Snail"
+  - "snail"
+explanation: "Le mot du cours est « Snail »."
+archived: false

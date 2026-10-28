@@ -1,0 +1,10 @@
+id: 589d9207-c2b2-4348-a375-fbddbdd0f596
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Bouton » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Button"
+  - "button"
+explanation: "Le mot du cours est « Button »."
+archived: false

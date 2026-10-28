@@ -1,0 +1,10 @@
+id: e7ea627c-1e11-46cb-a034-8d297af40683
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Mante religieuse » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Mantid"
+  - "mantid"
+explanation: "Le mot du cours est « Mantid »."
+archived: false

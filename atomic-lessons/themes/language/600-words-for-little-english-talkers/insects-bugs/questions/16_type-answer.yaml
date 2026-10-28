@@ -1,0 +1,10 @@
+id: 09a9d82c-1330-4055-8a26-e9cff7d91e2e
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Coquille » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Shell"
+  - "shell"
+explanation: "Le mot du cours est « Shell »."
+archived: false

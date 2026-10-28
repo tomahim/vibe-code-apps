@@ -1,0 +1,10 @@
+id: 77634b48-d8a2-4460-935a-eaca0f2e5a8b
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Aimant » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Magnet"
+  - "magnet"
+explanation: "Le mot du cours est « Magnet »."
+archived: false

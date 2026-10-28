@@ -1,0 +1,10 @@
+id: 6b90b453-a3df-423e-bb05-8a59be3141b6
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Ceinture » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Belt"
+  - "belt"
+explanation: "Le mot du cours est « Belt »."
+archived: false

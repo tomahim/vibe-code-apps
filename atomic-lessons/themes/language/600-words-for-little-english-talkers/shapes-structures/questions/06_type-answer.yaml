@@ -1,0 +1,10 @@
+id: c3a91c97-4e94-46dd-87d5-1d9ea3be8c81
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Losange » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Diamond"
+  - "diamond"
+explanation: "Le mot du cours est « Diamond »."
+archived: false

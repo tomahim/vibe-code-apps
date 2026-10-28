@@ -1,0 +1,10 @@
+id: 5296f4d5-9461-4674-9705-8516e26172d3
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Glaçon » (thème : Weather & Sky)."
+accepted_answers:
+  - "Icicle"
+  - "icicle"
+explanation: "Le mot du cours est « Icicle »."
+archived: false

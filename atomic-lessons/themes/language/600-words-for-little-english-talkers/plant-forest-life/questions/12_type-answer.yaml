@@ -1,0 +1,10 @@
+id: 6a62102f-0449-4d47-ac88-e0996d76b2a0
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Ronce » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Bramble"
+  - "bramble"
+explanation: "Le mot du cours est « Bramble »."
+archived: false

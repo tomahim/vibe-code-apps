@@ -1,0 +1,10 @@
+id: c0bae5ba-bd60-4fc4-8906-62f4f8a75070
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Allée » (thème : Parts of a House)."
+accepted_answers:
+  - "Path"
+  - "path"
+explanation: "Le mot du cours est « Path »."
+archived: false

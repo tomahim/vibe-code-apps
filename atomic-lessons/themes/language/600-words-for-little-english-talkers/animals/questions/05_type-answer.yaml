@@ -1,0 +1,10 @@
+id: 7714206b-b943-4f0d-a6c5-02189d034206
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Quelle phrase anglaise correspond à « Le canard cancane. » ?"
+accepted_answers:
+  - "The duck quacks."
+  - "The duck quacks"
+explanation: "La phrase du cours est « The duck quacks. »."
+archived: false

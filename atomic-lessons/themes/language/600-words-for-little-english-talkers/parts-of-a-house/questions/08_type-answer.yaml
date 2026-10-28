@@ -1,0 +1,10 @@
+id: 7752d8a6-855b-475e-b845-b487367cfa3b
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Cuisine » (thème : Parts of a House)."
+accepted_answers:
+  - "Kitchen"
+  - "kitchen"
+explanation: "Le mot du cours est « Kitchen »."
+archived: false

@@ -1,0 +1,10 @@
+id: c81ea14c-f530-4413-a6e7-35f4b03afe87
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Marteau » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Hammer"
+  - "hammer"
+explanation: "Le mot du cours est « Hammer »."
+archived: false

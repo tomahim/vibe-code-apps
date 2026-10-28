@@ -1,0 +1,10 @@
+id: 0c5aca29-7fe0-4e6d-9dd9-5bbd61de6cb6
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Dentiste » (thème : Community Helpers)."
+accepted_answers:
+  - "Dentist"
+  - "dentist"
+explanation: "Le mot du cours est « Dentist »."
+archived: false

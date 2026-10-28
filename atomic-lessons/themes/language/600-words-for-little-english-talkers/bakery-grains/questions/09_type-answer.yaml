@@ -1,0 +1,10 @@
+id: 13f2370e-eb8d-4485-8b00-20cdccb80fcb
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Baguette » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Baguette"
+  - "baguette"
+explanation: "Le mot du cours est « Baguette »."
+archived: false

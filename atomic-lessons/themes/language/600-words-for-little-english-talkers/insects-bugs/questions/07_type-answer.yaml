@@ -1,0 +1,10 @@
+id: 0fc22ed4-f9b5-4122-a7cb-60f3f8908c69
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Quelle phrase anglaise correspond à « Le grillon stridule. » ?"
+accepted_answers:
+  - "The cricket chirps."
+  - "The cricket chirps"
+explanation: "La phrase du cours est « The cricket chirps. »."
+archived: false

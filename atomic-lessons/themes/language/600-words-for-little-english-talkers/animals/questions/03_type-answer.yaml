@@ -1,0 +1,10 @@
+id: 966acd46-5e96-4fe2-ae7c-0355e0a8be7a
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Tortue » (thème : Animals)."
+accepted_answers:
+  - "Turtle"
+  - "turtle"
+explanation: "Le mot du cours est « Turtle »."
+archived: false

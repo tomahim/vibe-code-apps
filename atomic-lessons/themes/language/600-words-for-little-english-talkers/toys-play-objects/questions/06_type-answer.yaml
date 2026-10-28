@@ -1,0 +1,10 @@
+id: 05866656-b0cd-4fbe-9a2b-950f1080a3cf
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Hochet » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Rattle"
+  - "rattle"
+explanation: "Le mot du cours est « Rattle »."
+archived: false

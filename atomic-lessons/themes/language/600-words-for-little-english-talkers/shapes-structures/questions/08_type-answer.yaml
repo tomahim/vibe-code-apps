@@ -1,0 +1,10 @@
+id: df832125-38ae-4188-95bb-1cc099a3d92a
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Cylindre » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Cylinder"
+  - "cylinder"
+explanation: "Le mot du cours est « Cylinder »."
+archived: false

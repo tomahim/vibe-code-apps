@@ -1,0 +1,10 @@
+id: 9cf29994-b7c1-402b-abb4-6390f4cc7ffb
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Boîte » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Box"
+  - "box"
+explanation: "Le mot du cours est « Box »."
+archived: false

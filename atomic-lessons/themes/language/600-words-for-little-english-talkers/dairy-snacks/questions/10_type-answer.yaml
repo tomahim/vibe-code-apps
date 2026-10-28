@@ -1,0 +1,10 @@
+id: ccf9a403-5d75-49ed-9caf-820932788f85
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Milk-shake » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Milkshake"
+  - "milkshake"
+explanation: "Le mot du cours est « Milkshake »."
+archived: false

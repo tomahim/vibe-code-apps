@@ -1,0 +1,10 @@
+id: 04d6a80e-bf75-4f40-a96b-2f8b3c44c2f6
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pigeon » (thème : Animals)."
+accepted_answers:
+  - "Pigeon"
+  - "pigeon"
+explanation: "Le mot du cours est « Pigeon »."
+archived: false

@@ -1,0 +1,10 @@
+id: 6cff326c-5b86-4122-8ec1-04fd1fac32f1
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Beurre » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Butter"
+  - "butter"
+explanation: "Le mot du cours est « Butter »."
+archived: false

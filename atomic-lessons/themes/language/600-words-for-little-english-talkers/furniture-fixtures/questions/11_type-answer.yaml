@@ -1,0 +1,10 @@
+id: 693bdb6f-466c-4615-bcfe-17604255ecc4
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Armoire » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Wardrobe"
+  - "wardrobe"
+explanation: "Le mot du cours est « Wardrobe »."
+archived: false

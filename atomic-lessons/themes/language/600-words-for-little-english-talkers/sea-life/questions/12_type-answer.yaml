@@ -1,0 +1,10 @@
+id: b6bccd24-4f23-4bc4-9ece-305a4ba817de
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Quelle phrase anglaise correspond à « Le manchot criaille. » ?"
+accepted_answers:
+  - "The penguin squawks."
+  - "The penguin squawks"
+explanation: "La phrase du cours est « The penguin squawks. »."
+archived: false

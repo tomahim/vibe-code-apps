@@ -1,0 +1,10 @@
+id: 0a735c3f-127f-4e4f-a217-83857f315fe0
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Lavabo » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Basin"
+  - "basin"
+explanation: "Le mot du cours est « Basin »."
+archived: false

@@ -1,0 +1,10 @@
+id: 3a888ca4-24e3-45ac-beec-2bd0e34ad4b2
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Piano » (thème : Musical Instruments)."
+accepted_answers:
+  - "Piano"
+  - "piano"
+explanation: "Le mot du cours est « Piano »."
+archived: false

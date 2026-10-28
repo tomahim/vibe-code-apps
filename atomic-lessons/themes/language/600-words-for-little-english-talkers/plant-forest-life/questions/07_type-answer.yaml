@@ -1,0 +1,10 @@
+id: 5a869756-4fe0-4d4c-a562-ceced7f4e68a
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Mousse » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Moss"
+  - "moss"
+explanation: "Le mot du cours est « Moss »."
+archived: false

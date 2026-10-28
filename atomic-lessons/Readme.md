@@ -72,6 +72,8 @@ For expression lessons, use at most six cards. Keep card counts even so a questi
 
 Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type: multiple_choice`, `after_card_position`, `prompt`, four `choices` (each with `id` and `text`), one `correct_choice_ids` reference, `explanation`, and `archived`.
 
+Typed translation questions use `type: type_answer_question` and a nonempty `accepted_answers` list instead of choices or `correct_choice_ids`. Each answer is an English spelling or sentence the grader should accept. The importer and learner UI must support this type before a path containing it can be published.
+
 For the current path, author three alternative questions for each checkpoint after cards 2 and 4, and after card 6 when present. This gives six questions for a four-card lesson and nine for a six-card lesson. Questions sharing `after_card_position` form a pool: choose one question from that pool for a checkpoint. Keep `position` unique within the lesson; `after_card_position` may repeat. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. Give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
 
 ## Validation before committing
@@ -125,3 +127,11 @@ card 7. Selected cards include optional deeper-reading links.
 The essay's GPT-2 and GPT-3 dimensions are historical examples, not current ChatGPT specifications.
 Wolfram's ideas about semantic laws and computational irreducibility are presented as his
 interpretations or open questions, not established descriptions of every language model.
+
+## Language: 600 words for little english talkers
+
+The [vocabulary path](themes/language/600-words-for-little-english-talkers/index.md) follows the 21 workbook categories, one lesson per category. Each category has 30 distinct workbook items across eight cards of four entries. The final card revisits two earlier entries to fill its four slots. Workbook animal sound sentences remain with their animal word, including sounds under Sea Life and Insects & Bugs. **Space questions every two cards:** each lesson has 16 typed-answer questions in four pools of four, after cards 2, 4, 6, and 8. The learner answers one question from each pool, for four questions per lesson.
+
+The uncommitted source workbook is `English_French_Vocabulary_With_Sound_Rows-v2.xlsx` (SHA-256 `bdc9b651c24fbe524fce5e3918114a365983480827c40e1422c7fdc98c72cb52`). [source-map.csv](themes/language/600-words-for-little-english-talkers/source-map.csv) records the original workbook row, category, item number, word or sound, and lesson/card location for all 671 data rows. The path title says “600 words”; the supplied workbook actually contains 630 vocabulary entries and 41 additional sound sentences.
+
+Card translations clarify the workbook's ambiguous “Biscuit” (American savory biscuit versus sweet cookie) and generic “Nut” (fruit à coque). Animal sentences use “gronde” for the bear and “aboie” for the seal; they remove the workbook's incorrect “meugle” alternatives. The source map retains the workbook's original wording for provenance.

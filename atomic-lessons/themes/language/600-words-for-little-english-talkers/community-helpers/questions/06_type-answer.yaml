@@ -1,0 +1,10 @@
+id: 89a7cdf9-c214-4a45-b249-a808d42cccaf
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Chauffeur » (thème : Community Helpers)."
+accepted_answers:
+  - "Driver"
+  - "driver"
+explanation: "Le mot du cours est « Driver »."
+archived: false

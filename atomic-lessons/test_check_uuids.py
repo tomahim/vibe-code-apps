@@ -52,6 +52,17 @@ class UUIDCheckTests(unittest.TestCase):
         self.write(self.question, self.question_data)
         self.assert_failure("answer choice is missing id")
 
+    def test_typed_question_uses_answers_instead_of_choices(self):
+        self.question_data = {
+            "id": str(uuid.uuid4()), "type": "type_answer_question",
+            "accepted_answers": ["The dog barks.", "The dog barks"],
+        }
+        self.write(self.question, self.question_data)
+        self.assertEqual(check_library(self.root), ([], 5))
+        self.question_data["accepted_answers"] = []
+        self.write(self.question, self.question_data)
+        self.assert_failure("expected a nonempty list of answers")
+
     def test_bad_format_and_non_v4_uuids(self):
         for value in ["not-a-uuid", str(uuid.uuid1()), str(uuid.uuid5(uuid.NAMESPACE_DNS, "example.org")), str(uuid.uuid4()).upper(), 42]:
             with self.subTest(value=value):

@@ -1,0 +1,10 @@
+id: 1f38a8a7-1195-4601-a417-8e7775233f88
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Écrou » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Nut"
+  - "nut"
+explanation: "Le mot du cours est « Nut »."
+archived: false

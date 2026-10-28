@@ -1,0 +1,10 @@
+id: 036af4eb-9e19-463a-8fb9-ca596c79cf07
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Rideau » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Curtain"
+  - "curtain"
+explanation: "Le mot du cours est « Curtain »."
+archived: false

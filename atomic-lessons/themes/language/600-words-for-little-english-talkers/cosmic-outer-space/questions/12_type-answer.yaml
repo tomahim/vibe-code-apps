@@ -1,0 +1,10 @@
+id: 6c182cfc-949b-465d-bac5-bc0c5e1939a7
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Jupiter » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Jupiter"
+  - "jupiter"
+explanation: "Le mot du cours est « Jupiter »."
+archived: false

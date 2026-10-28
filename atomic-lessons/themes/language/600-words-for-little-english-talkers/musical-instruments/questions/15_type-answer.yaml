@@ -1,0 +1,10 @@
+id: 90f74314-acd5-4e30-b665-9a8d1c11a9b5
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Castagnettes » (thème : Musical Instruments)."
+accepted_answers:
+  - "Castanets"
+  - "castanets"
+explanation: "Le mot du cours est « Castanets »."
+archived: false

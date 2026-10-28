@@ -1,0 +1,10 @@
+id: 329ede06-e4ef-4c33-b2bb-129a3d1c7f67
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Araignée » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Spider"
+  - "spider"
+explanation: "Le mot du cours est « Spider »."
+archived: false

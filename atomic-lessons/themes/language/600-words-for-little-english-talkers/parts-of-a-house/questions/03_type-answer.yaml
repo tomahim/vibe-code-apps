@@ -1,0 +1,10 @@
+id: 35d5f3dd-2567-4374-9a81-58b70944be3d
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Clôture » (thème : Parts of a House)."
+accepted_answers:
+  - "Fence"
+  - "fence"
+explanation: "Le mot du cours est « Fence »."
+archived: false

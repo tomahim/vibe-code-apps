@@ -1,0 +1,10 @@
+id: 514e3eb5-ae16-48c6-af45-c9ce1371ae04
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Grenier » (thème : Parts of a House)."
+accepted_answers:
+  - "Attic"
+  - "attic"
+explanation: "Le mot du cours est « Attic »."
+archived: false

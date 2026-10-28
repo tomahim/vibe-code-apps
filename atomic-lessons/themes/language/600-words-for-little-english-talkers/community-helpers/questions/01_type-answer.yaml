@@ -1,0 +1,10 @@
+id: 39664d5b-254b-44f9-b89b-04aeda88c68e
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Médecin » (thème : Community Helpers)."
+accepted_answers:
+  - "Doctor"
+  - "doctor"
+explanation: "Le mot du cours est « Doctor »."
+archived: false

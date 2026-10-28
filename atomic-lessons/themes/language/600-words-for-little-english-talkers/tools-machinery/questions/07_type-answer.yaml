@@ -1,0 +1,10 @@
+id: ed92ee5d-0e76-4325-b6fc-f518ab6c321f
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Seau » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Bucket"
+  - "bucket"
+explanation: "Le mot du cours est « Bucket »."
+archived: false

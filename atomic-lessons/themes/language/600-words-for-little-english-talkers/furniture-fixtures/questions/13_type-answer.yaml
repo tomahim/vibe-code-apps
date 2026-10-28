@@ -1,0 +1,10 @@
+id: d9481ab4-d2ad-4bfb-823b-e4be7e47cec5
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Cadre photo » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Framed photo"
+  - "framed photo"
+explanation: "Le mot du cours est « Framed photo »."
+archived: false

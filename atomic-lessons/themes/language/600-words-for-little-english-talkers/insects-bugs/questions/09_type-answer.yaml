@@ -1,0 +1,10 @@
+id: 5979c8ca-0dc7-4836-a308-f34f9fa6ba6e
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Ver » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Worm"
+  - "worm"
+explanation: "Le mot du cours est « Worm »."
+archived: false

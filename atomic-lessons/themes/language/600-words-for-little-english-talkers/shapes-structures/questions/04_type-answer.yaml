@@ -1,0 +1,10 @@
+id: c64bd391-fdd9-430b-862a-a01539fba4ca
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Triangle » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Triangle"
+  - "triangle"
+explanation: "Le mot du cours est « Triangle »."
+archived: false

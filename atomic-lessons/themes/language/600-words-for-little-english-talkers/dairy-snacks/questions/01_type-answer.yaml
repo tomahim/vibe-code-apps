@@ -1,0 +1,10 @@
+id: 0345097f-b7b2-43cc-873e-edbb6ac4acda
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Fromage » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Cheese"
+  - "cheese"
+explanation: "Le mot du cours est « Cheese »."
+archived: false

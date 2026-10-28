@@ -1,0 +1,10 @@
+id: ae2017b4-5fc9-4cce-9ee1-d4ef9970a6ea
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Vache » (thème : Animals)."
+accepted_answers:
+  - "Cow"
+  - "cow"
+explanation: "Le mot du cours est « Cow »."
+archived: false

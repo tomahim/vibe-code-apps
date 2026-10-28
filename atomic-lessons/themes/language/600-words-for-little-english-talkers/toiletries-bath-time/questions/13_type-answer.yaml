@@ -1,0 +1,10 @@
+id: 35b2b52b-569d-49e3-abd6-25d2fb37b273
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Éclaboussure » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Splash"
+  - "splash"
+explanation: "Le mot du cours est « Splash »."
+archived: false

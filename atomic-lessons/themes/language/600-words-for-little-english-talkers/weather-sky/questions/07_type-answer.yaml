@@ -1,0 +1,10 @@
+id: ad71ba81-3dc0-4a48-bbaa-92259de950b6
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Tempête » (thème : Weather & Sky)."
+accepted_answers:
+  - "Storm"
+  - "storm"
+explanation: "Le mot du cours est « Storm »."
+archived: false

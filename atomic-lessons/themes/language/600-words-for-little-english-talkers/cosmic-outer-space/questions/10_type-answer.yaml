@@ -1,0 +1,10 @@
+id: 2bb6f13d-a548-49f1-a1bc-3ef5fac671d4
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Astéroïde » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Asteroid"
+  - "asteroid"
+explanation: "Le mot du cours est « Asteroid »."
+archived: false

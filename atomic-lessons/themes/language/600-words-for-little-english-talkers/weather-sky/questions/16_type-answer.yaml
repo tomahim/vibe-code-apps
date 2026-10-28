@@ -1,0 +1,10 @@
+id: 1b84f597-210c-40e4-bd20-cce80f52a947
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Bourrasque » (thème : Weather & Sky)."
+accepted_answers:
+  - "Gale"
+  - "gale"
+explanation: "Le mot du cours est « Gale »."
+archived: false

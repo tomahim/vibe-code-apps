@@ -1,0 +1,10 @@
+id: d041a1a6-8e10-4ac0-b3c6-d903f9ba6bb3
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Fil / Laine » (thème : Art Supplies)."
+accepted_answers:
+  - "Yarn"
+  - "yarn"
+explanation: "Le mot du cours est « Yarn »."
+archived: false

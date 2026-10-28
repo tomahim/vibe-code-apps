@@ -1,0 +1,10 @@
+id: 363f1983-2ea4-4d89-bb8e-dceedc6a7a97
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Cou » (thème : Body Parts)."
+accepted_answers:
+  - "Neck"
+  - "neck"
+explanation: "Le mot du cours est « Neck »."
+archived: false

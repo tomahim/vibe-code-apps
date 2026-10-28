@@ -1,0 +1,10 @@
+id: 71f01e28-edfa-4d76-873b-ce7c2a0bcb71
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Craie » (thème : Art Supplies)."
+accepted_answers:
+  - "Chalk"
+  - "chalk"
+explanation: "Le mot du cours est « Chalk »."
+archived: false

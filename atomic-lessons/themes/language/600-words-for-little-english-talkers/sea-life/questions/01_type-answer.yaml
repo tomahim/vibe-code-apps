@@ -1,0 +1,10 @@
+id: f5ed4970-dbcd-4ce1-ba13-155fd2beb8c7
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Quelle phrase anglaise correspond à « Le dauphin cliquette. » ?"
+accepted_answers:
+  - "The dolphin clicks."
+  - "The dolphin clicks"
+explanation: "La phrase du cours est « The dolphin clicks. »."
+archived: false

@@ -1,0 +1,10 @@
+id: c136f63a-619a-4cf4-88de-de1f3b6c52d8
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Tique » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Tick"
+  - "tick"
+explanation: "Le mot du cours est « Tick »."
+archived: false

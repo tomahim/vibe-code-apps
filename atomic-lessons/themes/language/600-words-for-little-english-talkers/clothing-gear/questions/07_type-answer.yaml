@@ -1,0 +1,10 @@
+id: 6eb11314-cd31-420b-9c7b-6333d8179115
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Robe » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Dress"
+  - "dress"
+explanation: "Le mot du cours est « Dress »."
+archived: false

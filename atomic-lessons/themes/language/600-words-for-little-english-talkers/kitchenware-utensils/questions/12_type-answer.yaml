@@ -1,0 +1,10 @@
+id: b072c402-0f7f-4300-abe6-a77635ce0618
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Râpe » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Grater"
+  - "grater"
+explanation: "Le mot du cours est « Grater »."
+archived: false

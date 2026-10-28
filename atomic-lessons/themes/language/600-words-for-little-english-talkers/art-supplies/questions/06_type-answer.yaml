@@ -1,0 +1,10 @@
+id: 421fc761-6323-4b07-964d-767c559eeb1b
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Toile » (thème : Art Supplies)."
+accepted_answers:
+  - "Canvas"
+  - "canvas"
+explanation: "Le mot du cours est « Canvas »."
+archived: false

@@ -1,0 +1,10 @@
+id: a8968175-6e43-453f-8d0f-341634f9e8a2
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Serpent » (thème : Animals)."
+accepted_answers:
+  - "Snake"
+  - "snake"
+explanation: "Le mot du cours est « Snake »."
+archived: false

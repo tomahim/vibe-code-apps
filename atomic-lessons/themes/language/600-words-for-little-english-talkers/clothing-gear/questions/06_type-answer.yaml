@@ -1,0 +1,10 @@
+id: e99bcbf3-cfa6-4c51-8ee3-39a2f468f2ba
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Manteau » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Coat"
+  - "coat"
+explanation: "Le mot du cours est « Coat »."
+archived: false

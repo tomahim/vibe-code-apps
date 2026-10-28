@@ -1,0 +1,10 @@
+id: 8e6f2481-a237-441b-93f3-e5529eeaa657
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Lit » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Bed"
+  - "bed"
+explanation: "Le mot du cours est « Bed »."
+archived: false

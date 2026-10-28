@@ -1,0 +1,10 @@
+id: 26c0c144-35c5-40c2-8d96-3435eb995e1b
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Air » (thème : Weather & Sky)."
+accepted_answers:
+  - "Air"
+  - "air"
+explanation: "Le mot du cours est « Air »."
+archived: false

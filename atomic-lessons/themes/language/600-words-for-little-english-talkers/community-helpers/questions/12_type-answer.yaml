@@ -1,0 +1,10 @@
+id: 07834fdb-3e14-4ac4-a12c-5c05bc716834
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Plombier » (thème : Community Helpers)."
+accepted_answers:
+  - "Plumber"
+  - "plumber"
+explanation: "Le mot du cours est « Plumber »."
+archived: false

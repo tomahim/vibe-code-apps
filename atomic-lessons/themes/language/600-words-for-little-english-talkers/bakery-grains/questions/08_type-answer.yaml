@@ -1,0 +1,10 @@
+id: a52b0095-2de4-4692-8ec1-302ec137308c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez le mot américain du cours pour « petit pain salé » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Biscuit"
+  - "biscuit"
+explanation: "En anglais américain, « Biscuit » désigne ici un petit pain salé, différent du cookie sucré."
+archived: false

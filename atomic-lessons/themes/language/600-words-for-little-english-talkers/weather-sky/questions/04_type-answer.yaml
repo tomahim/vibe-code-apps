@@ -1,0 +1,10 @@
+id: 97c90627-7024-4302-b953-6d023f722e6a
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Flaque d'eau » (thème : Weather & Sky)."
+accepted_answers:
+  - "Puddle"
+  - "puddle"
+explanation: "Le mot du cours est « Puddle »."
+archived: false

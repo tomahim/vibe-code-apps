@@ -1,0 +1,10 @@
+id: 1d8747a9-0fae-46c3-afe8-cb310c6865be
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Sonde spatiale » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Probe"
+  - "probe"
+explanation: "Le mot du cours est « Probe »."
+archived: false

@@ -1,0 +1,10 @@
+id: f9609a6d-2b8a-4b5a-bcf8-9cda3d2a2014
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Brosse » (thème : Art Supplies)."
+accepted_answers:
+  - "Brush"
+  - "brush"
+explanation: "Le mot du cours est « Brush »."
+archived: false

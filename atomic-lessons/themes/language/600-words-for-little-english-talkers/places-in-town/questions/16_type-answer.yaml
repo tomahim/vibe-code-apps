@@ -1,0 +1,10 @@
+id: ab6b20ad-fc0c-40ba-8620-75e39965d2cb
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Tour » (thème : Places in Town)."
+accepted_answers:
+  - "Tower"
+  - "tower"
+explanation: "Le mot du cours est « Tower »."
+archived: false

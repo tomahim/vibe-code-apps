@@ -1,0 +1,10 @@
+id: 14c10448-0c4e-4b2f-b323-9a1bcfee66b1
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Casque » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Helmet"
+  - "helmet"
+explanation: "Le mot du cours est « Helmet »."
+archived: false

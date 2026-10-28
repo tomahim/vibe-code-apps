@@ -1,0 +1,10 @@
+id: 2ed11a51-d102-44d5-a96e-08e74851e136
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Levier » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Lever"
+  - "lever"
+explanation: "Le mot du cours est « Lever »."
+archived: false

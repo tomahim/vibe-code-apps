@@ -1,0 +1,10 @@
+id: 72e59d51-7056-4802-8f50-fd5243f952f6
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Point de couture » (thème : Art Supplies)."
+accepted_answers:
+  - "Stitch"
+  - "stitch"
+explanation: "Le mot du cours est « Stitch »."
+archived: false

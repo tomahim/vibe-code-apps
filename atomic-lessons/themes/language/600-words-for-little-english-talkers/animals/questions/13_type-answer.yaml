@@ -1,0 +1,10 @@
+id: 24f5c79f-8173-45f2-9dde-943e147b8305
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Quelle phrase anglaise correspond à « Le singe bavarde. » ?"
+accepted_answers:
+  - "The monkey chatters."
+  - "The monkey chatters"
+explanation: "La phrase du cours est « The monkey chatters. »."
+archived: false

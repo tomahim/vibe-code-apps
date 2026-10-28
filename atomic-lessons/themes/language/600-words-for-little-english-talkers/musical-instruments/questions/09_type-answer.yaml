@@ -1,0 +1,10 @@
+id: 3b0a007f-3237-4ce4-8ad8-12f738d760ae
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Harpe » (thème : Musical Instruments)."
+accepted_answers:
+  - "Harp"
+  - "harp"
+explanation: "Le mot du cours est « Harp »."
+archived: false

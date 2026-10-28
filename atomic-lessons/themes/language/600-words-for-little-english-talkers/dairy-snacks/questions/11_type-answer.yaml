@@ -1,0 +1,10 @@
+id: e3beeb57-bf9b-444b-ae08-051369199f60
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Noix de cajou » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Cashew"
+  - "cashew"
+explanation: "Le mot du cours est « Cashew »."
+archived: false

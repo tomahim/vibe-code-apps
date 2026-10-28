@@ -1,0 +1,10 @@
+id: 76b11c5a-2e2b-4785-9eb3-dc5fa694e552
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Tarte » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Pie"
+  - "pie"
+explanation: "Le mot du cours est « Pie »."
+archived: false

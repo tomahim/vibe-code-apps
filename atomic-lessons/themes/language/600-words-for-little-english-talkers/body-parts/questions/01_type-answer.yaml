@@ -1,0 +1,10 @@
+id: 8ef26cfa-5e3d-41f5-8b27-36c707cbf5d4
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Coude » (thème : Body Parts)."
+accepted_answers:
+  - "Elbow"
+  - "elbow"
+explanation: "Le mot du cours est « Elbow »."
+archived: false

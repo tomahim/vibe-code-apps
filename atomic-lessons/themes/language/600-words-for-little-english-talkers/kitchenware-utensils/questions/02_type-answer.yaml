@@ -1,0 +1,10 @@
+id: 08354f46-f224-4e3f-bda5-046b525d1792
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Couteau » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Knife"
+  - "knife"
+explanation: "Le mot du cours est « Knife »."
+archived: false

@@ -1,0 +1,10 @@
+id: d9fd34cb-fddc-4283-bae1-9c291839935a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Balance » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Scales"
+  - "scales"
+explanation: "Le mot du cours est « Scales »."
+archived: false

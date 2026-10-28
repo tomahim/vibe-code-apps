@@ -1,0 +1,10 @@
+id: 298b8ea5-c1ff-457a-a756-d8d7ddf7fcd4
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Baignoire » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Tub"
+  - "tub"
+explanation: "Le mot du cours est « Tub »."
+archived: false

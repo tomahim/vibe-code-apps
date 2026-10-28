@@ -1,0 +1,10 @@
+id: 7c570583-8f99-471b-93d6-efe0029d50d5
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Monument » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Monument"
+  - "monument"
+explanation: "Le mot du cours est « Monument »."
+archived: false

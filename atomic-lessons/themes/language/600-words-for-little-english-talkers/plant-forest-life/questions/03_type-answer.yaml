@@ -1,0 +1,10 @@
+id: e31e9d30-6c99-4391-9405-7718b63d40c8
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Fleur » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Flower"
+  - "flower"
+explanation: "Le mot du cours est « Flower »."
+archived: false

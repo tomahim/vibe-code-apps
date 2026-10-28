@@ -112,6 +112,15 @@ def check_library(root: Path) -> tuple[list[str], int]:
             errors.append(f"{relative}: {kind} is missing id")
         walk(data, relative)
         if kind == "question":
+            if data.get("type") == "type_answer_question":
+                answers = data.get("accepted_answers")
+                if not isinstance(answers, list) or not answers or any(
+                    not isinstance(answer, str) or not answer.strip() for answer in answers
+                ):
+                    errors.append(f"{relative}.accepted_answers: expected a nonempty list of answers")
+                if "choices" in data or "correct_choice_ids" in data:
+                    errors.append(f"{relative}: typed questions cannot declare answer choices")
+                continue
             choices = data.get("choices")
             if not isinstance(choices, list) or len(choices) != 4:
                 errors.append(f"{relative}.choices: expected exactly four answer choices")

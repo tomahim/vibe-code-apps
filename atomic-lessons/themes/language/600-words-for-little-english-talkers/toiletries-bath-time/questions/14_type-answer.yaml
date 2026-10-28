@@ -1,0 +1,10 @@
+id: 12f73132-a9ca-4309-90f9-fd80d98a9e6e
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Flacon » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Bottle"
+  - "bottle"
+explanation: "Le mot du cours est « Bottle »."
+archived: false

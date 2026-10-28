@@ -1,0 +1,10 @@
+id: 825234f3-4dfb-4d7b-ac97-f06e9c73ed4f
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Tortue de mer » (thème : Sea Life)."
+accepted_answers:
+  - "Turtle"
+  - "turtle"
+explanation: "Le mot du cours est « Turtle »."
+archived: false

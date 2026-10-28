@@ -1,0 +1,10 @@
+id: d7248e15-b142-4606-9673-e5df1168b41d
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Crabe » (thème : Sea Life)."
+accepted_answers:
+  - "Crab"
+  - "crab"
+explanation: "Le mot du cours est « Crab »."
+archived: false

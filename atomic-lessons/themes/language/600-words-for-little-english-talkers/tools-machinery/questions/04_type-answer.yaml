@@ -1,0 +1,10 @@
+id: b8184db5-cbd3-4f7a-9ded-0f5339b20588
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Clé à Molette » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Wrench"
+  - "wrench"
+explanation: "Le mot du cours est « Wrench »."
+archived: false

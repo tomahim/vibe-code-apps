@@ -1,0 +1,10 @@
+id: 15cfe1bb-078e-4469-809c-0ab22fb4cc82
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Meuble » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Cabinet"
+  - "cabinet"
+explanation: "Le mot du cours est « Cabinet »."
+archived: false

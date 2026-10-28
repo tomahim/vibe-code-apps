@@ -1,0 +1,10 @@
+id: a96769d6-7280-4614-bab8-611018cf695d
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pont » (thème : Places in Town)."
+accepted_answers:
+  - "Bridge"
+  - "bridge"
+explanation: "Le mot du cours est « Bridge »."
+archived: false

@@ -1,0 +1,10 @@
+id: fc99847e-23ce-4907-9dcc-b02b9f301697
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Moteur » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Engine"
+  - "engine"
+explanation: "Le mot du cours est « Engine »."
+archived: false

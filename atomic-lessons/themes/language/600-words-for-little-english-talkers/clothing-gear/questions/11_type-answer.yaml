@@ -1,0 +1,10 @@
+id: 55583cba-6c3a-4553-94fb-5cc5fa0be107
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Salopette » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Overalls"
+  - "overalls"
+explanation: "Le mot du cours est « Overalls »."
+archived: false

@@ -1,0 +1,10 @@
+id: b1fd1550-22d1-4a4a-9c63-88adaec7250e
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Noix » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Nut"
+  - "nut"
+explanation: "Le mot du cours est « Nut »."
+archived: false

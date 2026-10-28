@@ -1,0 +1,10 @@
+id: ee62f87b-a0ca-4d70-ab65-1de367b9ee41
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Chariot » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Cart"
+  - "cart"
+explanation: "Le mot du cours est « Cart »."
+archived: false

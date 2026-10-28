@@ -1,0 +1,10 @@
+id: af910989-ef99-4983-97fa-ee92eeb98aa4
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Graine » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Seed"
+  - "seed"
+explanation: "Le mot du cours est « Seed »."
+archived: false

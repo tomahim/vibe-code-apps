@@ -1,0 +1,10 @@
+id: d5d57251-e677-4085-ad8e-6f696603a9db
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Antenne » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Antenna"
+  - "antenna"
+explanation: "Le mot du cours est « Antenna »."
+archived: false

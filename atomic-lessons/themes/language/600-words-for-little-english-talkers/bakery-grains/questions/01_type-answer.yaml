@@ -1,0 +1,10 @@
+id: 0667d276-65b2-4b0d-9eb0-b8ed24918387
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Pain » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Bread"
+  - "bread"
+explanation: "Le mot du cours est « Bread »."
+archived: false

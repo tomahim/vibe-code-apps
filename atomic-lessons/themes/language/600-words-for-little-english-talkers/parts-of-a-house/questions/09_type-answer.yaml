@@ -1,0 +1,10 @@
+id: 5b606408-0fff-498f-9730-abd4e1533157
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Salle de bain » (thème : Parts of a House)."
+accepted_answers:
+  - "Bathroom"
+  - "bathroom"
+explanation: "Le mot du cours est « Bathroom »."
+archived: false

@@ -1,0 +1,10 @@
+id: 3ad7b1cd-f035-4282-b6f7-22cc3b520fb0
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Main » (thème : Body Parts)."
+accepted_answers:
+  - "Hand"
+  - "hand"
+explanation: "Le mot du cours est « Hand »."
+archived: false

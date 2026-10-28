@@ -1,0 +1,10 @@
+id: b0d84856-711e-4002-88ec-f58c61af9157
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Croissant » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Croissant"
+  - "croissant"
+explanation: "Le mot du cours est « Croissant »."
+archived: false

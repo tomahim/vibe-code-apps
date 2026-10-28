@@ -1,0 +1,10 @@
+id: 4776c269-6d0d-4238-a990-9616d52d063a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Artiste » (thème : Community Helpers)."
+accepted_answers:
+  - "Artist"
+  - "artist"
+explanation: "Le mot du cours est « Artist »."
+archived: false

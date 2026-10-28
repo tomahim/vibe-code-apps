@@ -1,0 +1,10 @@
+id: e0e6b29a-bf1b-46a0-8ee7-b37aa4652f80
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Tambour » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Drum"
+  - "drum"
+explanation: "Le mot du cours est « Drum »."
+archived: false

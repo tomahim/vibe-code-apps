@@ -1,0 +1,10 @@
+id: a221374c-339d-4089-bc77-8172df1b5b22
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Violoncelle » (thème : Musical Instruments)."
+accepted_answers:
+  - "Cello"
+  - "cello"
+explanation: "Le mot du cours est « Cello »."
+archived: false

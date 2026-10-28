@@ -1,0 +1,10 @@
+id: 7a8abac1-4792-4280-9a29-dd8db34e5055
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Cacahuète » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Peanut"
+  - "peanut"
+explanation: "Le mot du cours est « Peanut »."
+archived: false

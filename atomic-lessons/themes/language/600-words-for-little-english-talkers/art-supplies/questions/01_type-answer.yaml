@@ -1,0 +1,10 @@
+id: c30b347a-5559-479d-acef-73d49b8f2b89
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Crayon de cire » (thème : Art Supplies)."
+accepted_answers:
+  - "Crayon"
+  - "crayon"
+explanation: "Le mot du cours est « Crayon »."
+archived: false

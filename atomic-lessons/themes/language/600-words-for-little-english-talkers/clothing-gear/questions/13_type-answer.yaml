@@ -1,0 +1,10 @@
+id: f875277e-d109-4082-aa3f-9d3d8878b615
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Chaussons » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Slippers"
+  - "slippers"
+explanation: "Le mot du cours est « Slippers »."
+archived: false

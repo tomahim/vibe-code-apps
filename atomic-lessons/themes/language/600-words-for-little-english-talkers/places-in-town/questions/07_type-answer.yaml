@@ -1,0 +1,10 @@
+id: f04125bd-0dd5-4a94-89ca-066357fe0c96
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Caserne de pompiers » (thème : Places in Town)."
+accepted_answers:
+  - "Fire station"
+  - "fire station"
+explanation: "Le mot du cours est « Fire station »."
+archived: false

@@ -1,0 +1,10 @@
+id: e06dfdaf-2bc4-4d63-aa30-afcfb46643a1
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Banque » (thème : Places in Town)."
+accepted_answers:
+  - "Bank"
+  - "bank"
+explanation: "Le mot du cours est « Bank »."
+archived: false

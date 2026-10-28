@@ -1,0 +1,10 @@
+id: 72d70c40-d58b-47de-882f-eba9aa839e7c
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Clairon » (thème : Musical Instruments)."
+accepted_answers:
+  - "Bugle"
+  - "bugle"
+explanation: "Le mot du cours est « Bugle »."
+archived: false

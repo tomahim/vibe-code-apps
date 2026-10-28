@@ -1,0 +1,10 @@
+id: e47decb0-189b-4d98-8fb2-90540e799fc7
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Fleur d'arbre » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Blossom"
+  - "blossom"
+explanation: "Le mot du cours est « Blossom »."
+archived: false

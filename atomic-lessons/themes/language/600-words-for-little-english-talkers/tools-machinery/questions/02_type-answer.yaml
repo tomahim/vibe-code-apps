@@ -1,0 +1,10 @@
+id: 61518be3-8eff-41be-94a1-1af73d3e082f
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Lampe de poche » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Flashlight"
+  - "flashlight"
+explanation: "Le mot du cours est « Flashlight »."
+archived: false

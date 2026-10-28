@@ -1,0 +1,10 @@
+id: c9be6fd0-0abc-496b-acee-c4d0c7c1f2ce
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Accordéon » (thème : Musical Instruments)."
+accepted_answers:
+  - "Accordion"
+  - "accordion"
+explanation: "Le mot du cours est « Accordion »."
+archived: false

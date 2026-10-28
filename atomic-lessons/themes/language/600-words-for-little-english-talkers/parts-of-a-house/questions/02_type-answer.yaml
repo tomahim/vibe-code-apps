@@ -1,0 +1,10 @@
+id: 395c2f3e-a17f-4669-beee-36ddfb239a80
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Toit » (thème : Parts of a House)."
+accepted_answers:
+  - "Roof"
+  - "roof"
+explanation: "Le mot du cours est « Roof »."
+archived: false

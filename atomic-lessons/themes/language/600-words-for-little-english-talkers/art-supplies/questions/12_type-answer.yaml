@@ -1,0 +1,10 @@
+id: 345fdda6-d82e-4c7e-82e6-5d949bd3d519
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Chevalet » (thème : Art Supplies)."
+accepted_answers:
+  - "Easel"
+  - "easel"
+explanation: "Le mot du cours est « Easel »."
+archived: false

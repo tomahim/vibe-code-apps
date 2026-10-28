@@ -1,0 +1,10 @@
+id: 3af800d1-0975-4330-af0f-5be9ff8604fa
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Œil » (thème : Body Parts)."
+accepted_answers:
+  - "Eye"
+  - "eye"
+explanation: "Le mot du cours est « Eye »."
+archived: false
