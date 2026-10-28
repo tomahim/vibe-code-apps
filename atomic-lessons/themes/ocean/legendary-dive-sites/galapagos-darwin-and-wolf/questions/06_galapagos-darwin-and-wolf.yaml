@@ -1,0 +1,19 @@
+id: 86420b61-66db-41e0-8398-37aae2b1d248
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What are visitors not allowed to do on Darwin Island?"
+choices:
+  - id: 76561f11-3d3a-4242-b90e-25e513143f57
+    text: "Photograph it"
+  - id: b22e2807-0264-4b2b-8e0e-dfa370d558bd
+    text: "See it from a boat"
+  - id: a8095b1c-25dd-45c4-adf7-a67d75393c1f
+    text: "Name it"
+  - id: 01ad4d20-2ccb-471e-8599-28a6584830cb
+    text: "Set foot on it"
+correct_choice_ids:
+  - 01ad4d20-2ccb-471e-8599-28a6584830cb
+explanation: "The island is uninhabited and closed to visitors."
+archived: false

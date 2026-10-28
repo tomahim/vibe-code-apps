@@ -1,0 +1,19 @@
+id: 1935ba0b-3c54-43e5-a480-a3aa687e4472
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What best describes the shape of the Great Blue Hole?"
+choices:
+  - id: a0798051-6517-4f6c-b6a4-a6bc416e0890
+    text: "A long straight canyon"
+  - id: 3c5078c1-c72e-4830-9f33-c0bacee70ec8
+    text: "A triangle"
+  - id: 7e85af6e-d308-4dbd-ab47-f7593d419d67
+    text: "A star shape"
+  - id: 92962072-3899-45ae-b625-ca5db7781fab
+    text: "Almost a perfect circle"
+correct_choice_ids:
+  - 92962072-3899-45ae-b625-ca5db7781fab
+explanation: "It is a circular sinkhole with vertical limestone walls."
+archived: false

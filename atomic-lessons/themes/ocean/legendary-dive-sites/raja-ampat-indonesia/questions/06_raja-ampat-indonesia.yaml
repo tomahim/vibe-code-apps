@@ -1,0 +1,19 @@
+id: 2944b8ee-0802-4482-b979-256ca2555e2c
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About what share of known hard coral species live in Raja Ampat?"
+choices:
+  - id: 9cf44e95-ed65-4e22-84ef-93d7d582a8e3
+    text: "About 7%"
+  - id: c475c04d-707a-4ae2-8476-7e3d6f9ece8a
+    text: "About 25%"
+  - id: 9b0a85fd-6a4a-401c-80ca-f8207e955fe1
+    text: "About 100%"
+  - id: ac05ce7b-eb74-4c8b-81ac-26c211e88125
+    text: "About 75%"
+correct_choice_ids:
+  - ac05ce7b-eb74-4c8b-81ac-26c211e88125
+explanation: "More than 600 hard coral species, about 75% of the world's known species."
+archived: false

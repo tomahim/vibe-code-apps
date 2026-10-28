@@ -1,0 +1,9 @@
+id: 2c8d369c-585b-4976-8734-139b0703c650
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What name was given to the teenage girl whose skeleton was found in the cave?"
+accepted_answers:
+  - "Naia"
+explanation: "Naia lived about 12,000 years ago."
+archived: false

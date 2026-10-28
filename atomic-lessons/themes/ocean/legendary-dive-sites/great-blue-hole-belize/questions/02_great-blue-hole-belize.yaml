@@ -1,0 +1,19 @@
+id: f60463dc-c31d-4657-a4d7-acd06c0cea5d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Roughly how deep is the Great Blue Hole?"
+choices:
+  - id: 83b29824-8d3f-41d3-b98a-394b0258a807
+    text: "24 m"
+  - id: b5c7f6f5-8830-4332-b546-725d77242256
+    text: "350 m"
+  - id: f5b1fb2d-c0c2-4aa0-9034-6e743478bb6c
+    text: "1,000 m"
+  - id: 8c24910f-5681-4793-b174-8d89f79eee03
+    text: "124 m"
+correct_choice_ids:
+  - 8c24910f-5681-4793-b174-8d89f79eee03
+explanation: "It is about 124 m (407 ft) deep and 318 m across."
+archived: false

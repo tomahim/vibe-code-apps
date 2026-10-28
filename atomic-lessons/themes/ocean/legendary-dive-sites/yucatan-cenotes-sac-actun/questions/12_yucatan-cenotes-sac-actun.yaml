@@ -1,0 +1,19 @@
+id: 267c33a8-ff5b-4e0d-8841-29fc074cfede
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was found at Hoyo Negro at about 60 m?"
+choices:
+  - id: 9287cba3-cde2-487f-bc3d-a0d43674044e
+    text: "A Spanish galleon"
+  - id: 828e2022-3134-4e1b-9e1d-132d35e2212e
+    text: "A coral garden"
+  - id: 16e49116-e61e-4135-94b1-ab46e37ee39c
+    text: "A steam locomotive"
+  - id: af3f9cdc-8ea0-434b-b434-c85eb1590afe
+    text: "The remains of a mastodon"
+correct_choice_ids:
+  - af3f9cdc-8ea0-434b-b434-c85eb1590afe
+explanation: "A human skull was found at about 43 m."
+archived: false

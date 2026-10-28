@@ -1,0 +1,19 @@
+id: 47ca0b37-ff3b-4b97-8756-927966466c88
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who commanded the interned fleet?"
+choices:
+  - id: 073c6e46-e329-4077-a901-bdd1b21ad764
+    text: "Ernest Cox"
+  - id: b677a04d-9013-4368-9a40-b3b4775f4a99
+    text: "Claude Choules"
+  - id: ac7a9f6b-f685-4be4-b175-fb592b0e4d44
+    text: "Jacques Cousteau"
+  - id: feb318f2-1e79-4b74-98a6-250165d7a7a1
+    text: "Rear-Admiral Ludwig von Reuter"
+correct_choice_ids:
+  - feb318f2-1e79-4b74-98a6-250165d7a7a1
+explanation: "Reuter was in command and he gave the signal to scuttle."
+archived: false

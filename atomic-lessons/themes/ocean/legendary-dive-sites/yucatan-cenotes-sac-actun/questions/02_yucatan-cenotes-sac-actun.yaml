@@ -1,0 +1,19 @@
+id: f72d8288-bc8c-452c-97b6-ae728b3d0f92
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What dissolves the limestone?"
+choices:
+  - id: cd9c654f-0dd4-44dc-ba0e-535ccb46572c
+    text: "Boiling lava"
+  - id: b3072d5e-0c22-49ff-926c-d4da3a7b4d22
+    text: "Seawater only"
+  - id: 08ea7a3c-f832-43a3-b1f0-b8c27e1125b2
+    text: "Ice"
+  - id: 27caa93c-334d-4e37-9b28-64f533f642d4
+    text: "Slightly acidic rainwater"
+correct_choice_ids:
+  - 27caa93c-334d-4e37-9b28-64f533f642d4
+explanation: "Rain absorbs carbon dioxide and forms weak carbonic acid."
+archived: false

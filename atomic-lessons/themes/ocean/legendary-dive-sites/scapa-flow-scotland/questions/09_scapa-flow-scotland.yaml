@@ -1,0 +1,19 @@
+id: 37bc7124-2f07-43e9-8229-c393a7aeae79
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many of the 74 ships sank?"
+choices:
+  - id: d0709640-4b7e-4c9e-b325-bb57cfe2e6ff
+    text: "15"
+  - id: c9ede99b-e8c1-42a5-8306-9f9393febd00
+    text: "52"
+  - id: 7a8f274e-c7d6-414f-8a0a-9034fd8715e5
+    text: "32"
+  - id: 504e0588-5cbe-4f8e-bc73-bb2bc0eebaf3
+    text: "74"
+correct_choice_ids:
+  - c9ede99b-e8c1-42a5-8306-9f9393febd00
+explanation: "52 of 74 sank, while British guard ships beached some of the others."
+archived: false

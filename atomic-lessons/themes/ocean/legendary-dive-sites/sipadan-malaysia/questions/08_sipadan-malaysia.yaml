@@ -1,0 +1,9 @@
+id: 838b4b82-43c9-4431-b01c-4f830ac7b3d9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Malaysian state does Sipadan belong to?"
+accepted_answers:
+  - "Sabah"
+explanation: "The island is off the east coast of Sabah on Borneo."
+archived: false

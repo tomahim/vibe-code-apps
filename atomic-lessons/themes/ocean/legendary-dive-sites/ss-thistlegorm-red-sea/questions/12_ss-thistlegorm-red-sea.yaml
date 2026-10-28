@@ -1,0 +1,19 @@
+id: 74ce6523-d62f-4a55-987a-84285e4f5ca4
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What happened to the HEPCA mooring buoys installed in 2007?"
+choices:
+  - id: dfe1a8cf-411b-4d89-b276-e141ec1097f3
+    text: "They are still in place"
+  - id: acc43753-5434-49a2-95db-f7f0afce4d3d
+    text: "They were replaced by a lighthouse"
+  - id: f6c19131-3f59-4cd6-882e-2323219337b8
+    text: "They were bought by a museum"
+  - id: 158145c8-2339-4eda-93ca-cdd71cb23e66
+    text: "They were too light and were gone by 2009"
+correct_choice_ids:
+  - 158145c8-2339-4eda-93ca-cdd71cb23e66
+explanation: "Currents and moored boats dragged them away and boats now moor to the wreck again."
+archived: false

@@ -1,0 +1,10 @@
+id: e91036c8-8cc1-471a-9405-eb074c1aeb06
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was the name of the British cruiser that picked up the survivors?"
+accepted_answers:
+  - "HMS Carlisle"
+  - "Carlisle"
+explanation: "HMS Carlisle was moored in the same anchorage."
+archived: false

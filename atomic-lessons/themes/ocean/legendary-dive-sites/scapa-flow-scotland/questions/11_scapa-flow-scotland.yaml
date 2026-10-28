@@ -1,0 +1,19 @@
+id: 0b72f4ee-9a16-407c-97b7-122696d7d500
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How did Cox's divers help raise the ships?"
+choices:
+  - id: c8e8a029-fd8e-4fdb-bcbf-a3fde56f5386
+    text: "They dragged them with horses"
+  - id: 9152d4cd-8764-46d8-ab2c-9ee0c09cdc65
+    text: "They patched the holes so the hulls could be refloated"
+  - id: 9e929fa5-d7d7-42c9-885c-c8f1f3b7e922
+    text: "They blew them up"
+  - id: eaf2d352-ebbe-4375-95f9-e0675d053798
+    text: "They sold them as they were"
+correct_choice_ids:
+  - 9152d4cd-8764-46d8-ab2c-9ee0c09cdc65
+explanation: "The ships were made watertight and then raised."
+archived: false

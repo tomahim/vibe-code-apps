@@ -1,0 +1,19 @@
+id: 95c844e8-abd7-42a6-a1f0-5caa4c0621d1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Roughly how long does the water take to travel through the lava?"
+choices:
+  - id: 9c8c4915-443d-4256-833c-c5c800bdfca3
+    text: "A few hours"
+  - id: aa4cfca5-b881-40e8-91f6-d47a47ee36f5
+    text: "From about thirty to a hundred years"
+  - id: de61b77b-42b7-419f-b7dc-9f0ca864f1bd
+    text: "A few weeks"
+  - id: ed46d7a5-0fcb-4287-9080-92bb79435554
+    text: "About one million years"
+correct_choice_ids:
+  - aa4cfca5-b881-40e8-91f6-d47a47ee36f5
+explanation: "The aquifer is slow, which is why the water is so clear."
+archived: false

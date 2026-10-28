@@ -1,0 +1,9 @@
+id: e1cbf651-035b-4aab-8c3a-637b647224b3
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Darwin's Arch collapse?"
+accepted_answers:
+  - "2021"
+explanation: "It collapsed on 17 May 2021."
+archived: false

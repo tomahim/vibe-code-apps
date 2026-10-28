@@ -1,0 +1,19 @@
+id: 7c1b5f57-6bbc-4b45-a1e3-3e034ea91fbd
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What share of the Palau National Marine Sanctuary is closed to extractive activities?"
+choices:
+  - id: dbcc9cc8-7e87-4450-9339-2e581480b78c
+    text: "8%"
+  - id: 6f7fef56-a86a-4d30-a92e-37ec4dc33043
+    text: "80%"
+  - id: 1180462c-27f6-4d3d-88f6-b224204207ca
+    text: "20%"
+  - id: f08522c7-1d86-4de8-aa6c-d0ae25bf04dd
+    text: "100%"
+correct_choice_ids:
+  - 6f7fef56-a86a-4d30-a92e-37ec4dc33043
+explanation: "Domestic fishing is allowed in the remaining 20%."
+archived: false

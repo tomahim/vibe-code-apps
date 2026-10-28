@@ -1,0 +1,19 @@
+id: f14ab8a1-d679-4489-8bcc-0b78af557f29
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What is the Coral Triangle?"
+choices:
+  - id: 413f6201-9247-48ed-a2fd-32d35085da53
+    text: "A shipwreck zone"
+  - id: 7833b928-6992-4701-9357-6491ac9cb0b5
+    text: "An area of Southeast Asian seas with the richest marine biodiversity"
+  - id: 964f9d66-620b-4ffb-bf67-ec3e80ac01be
+    text: "A region of Caribbean reefs"
+  - id: 4f122836-6111-4f68-9e94-e193cdac47d8
+    text: "A type of coral"
+correct_choice_ids:
+  - 7833b928-6992-4701-9357-6491ac9cb0b5
+explanation: "Raja Ampat forms part of it."
+archived: false

@@ -1,0 +1,19 @@
+id: 7a4a1091-4f7b-4900-bf6a-7290ee73b90e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is one reason divers are asked not to remove objects from the wreck?"
+choices:
+  - id: 44c00afa-8532-41f6-9f99-2fefd9eb8534
+    text: "Objects are always cursed"
+  - id: 498d0cc9-eecc-4115-8bf7-2cce6da4db84
+    text: "The objects are made of gold"
+  - id: 6b5e14a4-18cf-47a3-85a3-1c45d7b6fc51
+    text: "It is legal only on Tuesdays"
+  - id: d526abab-cd90-4f87-9ccf-c10c9bb321da
+    text: "It is a war grave and removing things erases the historical context"
+correct_choice_ids:
+  - d526abab-cd90-4f87-9ccf-c10c9bb321da
+explanation: "Nine people died when she sank and the cargo's position tells the story."
+archived: false

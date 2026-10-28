@@ -1,0 +1,15 @@
+id: a8187af6-a01a-45f5-a2a3-318833c6f516
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which nation's navy attacked the lagoon in 1944?"
+accepted_answers:
+  - "United States"
+  - "United States Navy"
+  - "US Navy"
+  - "USA"
+  - "America"
+  - "US"
+  - "American"
+explanation: "Task Force 58 of the US Navy launched the attack."
+archived: false

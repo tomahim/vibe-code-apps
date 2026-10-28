@@ -1,0 +1,19 @@
+id: 926c8cea-5153-4cc4-910b-d2e9d510ab33
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did the crews do to sink the ships?"
+choices:
+  - id: 3508c4e7-8f19-4830-be58-394340317532
+    text: "Used torpedoes"
+  - id: 4aeaad06-23c1-45ac-b658-a76b77ea9377
+    text: "Fired at them with cannons"
+  - id: e586e67e-62e0-40e5-af62-22487f0f57d0
+    text: "Set them on fire"
+  - id: 29eacecc-c76d-48dc-bfb3-e9be51622ed3
+    text: "Opened valves and smashed pipes to flood them"
+correct_choice_ids:
+  - 29eacecc-c76d-48dc-bfb3-e9be51622ed3
+explanation: "They opened seacocks and flood valves and smashed internal water pipes."
+archived: false

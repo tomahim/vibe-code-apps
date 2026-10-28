@@ -1,0 +1,19 @@
+id: f4d860fd-3499-4942-8adc-40969fe07453
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How shallow are some of the wrecks?"
+choices:
+  - id: e36192e3-7c90-42a2-bdd1-02abbb0a4b3d
+    text: "More than 500 m deep"
+  - id: 09915e1b-0534-4643-a380-32881c0659d3
+    text: "Less than 15 m below the surface"
+  - id: 0a9e0e95-ff37-41e8-bc35-2617019f4605
+    text: "Exactly at 100 m"
+  - id: 525af5ff-8b73-4dc9-893a-a92926b2d5fe
+    text: "They are all above water"
+correct_choice_ids:
+  - 09915e1b-0534-4643-a380-32881c0659d3
+explanation: "Some shipwrecks lie in crystal clear water less than 15 m deep."
+archived: false

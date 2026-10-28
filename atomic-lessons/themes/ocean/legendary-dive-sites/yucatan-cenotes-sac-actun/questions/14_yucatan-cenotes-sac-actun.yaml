@@ -1,0 +1,19 @@
+id: 5db524dc-8aa9-4b3a-8d63-b0e70ee15b33
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why is cave diving described as an overhead environment?"
+choices:
+  - id: e9395fda-c5ef-477c-abf5-bf683a86e8bc
+    text: "It happens at night"
+  - id: 220f5572-5a4d-4126-97e5-0e5b8d28ec14
+    text: "It happens in space"
+  - id: 597d9b34-1b5d-4153-85d9-9e0d4a670d24
+    text: "It happens only in winter"
+  - id: 925235e6-782c-40a2-a8df-b592abb1cc7f
+    text: "A diver cannot go straight to the surface"
+correct_choice_ids:
+  - 925235e6-782c-40a2-a8df-b592abb1cc7f
+explanation: "Rock overhead means the exit is along the passage, not up."
+archived: false

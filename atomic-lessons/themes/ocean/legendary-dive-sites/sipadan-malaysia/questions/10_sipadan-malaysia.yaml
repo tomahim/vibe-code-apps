@@ -1,0 +1,19 @@
+id: e368c93b-4ee9-4ada-a252-bc6910fa771e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What happened to the six resorts on the island in 2004?"
+choices:
+  - id: 3e0ce8c6-3d01-4776-9be2-852ee3d19da8
+    text: "They were given a new name"
+  - id: 180fc30c-0ee1-463f-81c4-2dd0785f8cd2
+    text: "They were enlarged"
+  - id: fa042d87-af7b-4f43-992d-70563e4cdb06
+    text: "They were turned into a museum"
+  - id: 574f3162-5f6f-4820-b253-dd3bb4f081b7
+    text: "They were closed and moved to nearby islands"
+correct_choice_ids:
+  - 574f3162-5f6f-4820-b253-dd3bb4f081b7
+explanation: "Sabah Parks declared a marine park and relocated the resorts."
+archived: false

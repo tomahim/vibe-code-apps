@@ -1,0 +1,12 @@
+id: 049f78fc-0500-482e-b5de-cf321738206a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Name one of the four main islands of Raja Ampat."
+accepted_answers:
+  - "Misool"
+  - "Salawati"
+  - "Batanta"
+  - "Waigeo"
+explanation: "The four main islands are Misool, Salawati, Batanta and Waigeo."
+archived: false

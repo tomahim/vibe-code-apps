@@ -1,0 +1,13 @@
+id: 272fecd3-14d8-44d9-8da6-5a677444d29a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Which kind of shark gathers in large schools at Darwin and Wolf? Give the species name."
+accepted_answers:
+  - "scalloped hammerhead"
+  - "scalloped hammerhead shark"
+  - "scalloped hammerheads"
+  - "hammerhead"
+  - "hammerhead shark"
+explanation: "Scalloped hammerhead sharks are the famous visitors."
+archived: false

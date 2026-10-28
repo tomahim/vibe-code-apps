@@ -1,0 +1,19 @@
+id: c6a77f6f-abaa-4bd2-bd96-e2da6e6b192c
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where had the Japanese moved their larger warships before Hailstone?"
+choices:
+  - id: fa4e7ca5-89b8-4d70-bc14-69b8a00a2146
+    text: "Tokyo"
+  - id: f90b29d1-5a37-4984-b32f-6ebc44654793
+    text: "Hawaii"
+  - id: d419ece2-3699-443b-9d37-0973e32f90d9
+    text: "Australia"
+  - id: 1dd227e6-eec2-4028-bcd9-dba3a31096ee
+    text: "Palau"
+correct_choice_ids:
+  - 1dd227e6-eec2-4028-bcd9-dba3a31096ee
+explanation: "They withdrew heavy cruisers, battleships and carriers a week before the raid."
+archived: false

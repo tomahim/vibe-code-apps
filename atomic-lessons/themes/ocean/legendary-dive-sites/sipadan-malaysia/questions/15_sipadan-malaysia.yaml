@@ -1,0 +1,9 @@
+id: 9df0c4c6-296d-48a7-b6fe-7265ddb9309d
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did the first resort open on Sipadan?"
+accepted_answers:
+  - "1984"
+explanation: "Diving became popular in the 1980s and the first resort opened in 1984."
+archived: false

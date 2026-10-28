@@ -1,0 +1,10 @@
+id: 20c16d6b-1fd5-45be-9e0b-0b959dcd01ec
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the name of the largest known concentration of marine biodiversity that Raja Ampat belongs to? Give two words."
+accepted_answers:
+  - "Coral Triangle"
+  - "The Coral Triangle"
+explanation: "The Coral Triangle is an area of Southeast Asian seas."
+archived: false

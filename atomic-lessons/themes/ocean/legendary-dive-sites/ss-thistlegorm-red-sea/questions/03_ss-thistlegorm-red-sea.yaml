@@ -1,0 +1,19 @@
+id: 156bac38-47ff-4994-96ef-84629cd17eaf
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where did the Thistlegorm start her fourth and last voyage?"
+choices:
+  - id: e7e08a58-f8a3-459e-82ce-301f20e58651
+    text: "Alexandria"
+  - id: 9493e41c-62ba-4e31-bc46-09ef7ea7c60a
+    text: "Glasgow"
+  - id: 87e4b699-0e53-4b83-9a1b-0b94e72a9cff
+    text: "Cape Town"
+  - id: 0e1c9d34-51b1-4b5e-aa01-28a890b3c065
+    text: "Sunderland"
+correct_choice_ids:
+  - 9493e41c-62ba-4e31-bc46-09ef7ea7c60a
+explanation: "She left Glasgow on 2 June 1941, bound for Alexandria."
+archived: false

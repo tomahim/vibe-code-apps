@@ -1,0 +1,19 @@
+id: 4a42eb6f-82e1-403c-8274-53946dabf8b4
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why did her convoy go round Africa via Cape Town?"
+choices:
+  - id: 9f901257-355d-425e-9df4-aad2d453a79f
+    text: "The Suez Canal had not been built"
+  - id: 8fdb31b7-3622-40ec-b5d3-dee09b4630ef
+    text: "She was too wide for the Mediterranean"
+  - id: b6700197-acd1-459e-93b9-1b7e23fc2853
+    text: "The crew wanted to visit South Africa"
+  - id: e9e8aecd-afa7-439e-9594-bddea4212195
+    text: "German and Italian forces made the Mediterranean dangerous"
+correct_choice_ids:
+  - e9e8aecd-afa7-439e-9594-bddea4212195
+explanation: "Naval and air activity in the Mediterranean pushed the convoy onto the long route."
+archived: false

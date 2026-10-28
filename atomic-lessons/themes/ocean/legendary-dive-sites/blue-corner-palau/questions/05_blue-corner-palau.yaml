@@ -1,0 +1,19 @@
+id: 6d7e43cc-5f61-46ba-bb04-aa26d4075e1e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What is the top of Blue Corner like?"
+choices:
+  - id: 058034a5-7182-48f5-8279-393147e638c9
+    text: "A deep trench at 100 m"
+  - id: e5641f23-eb75-451e-812b-957d3b5e0ac6
+    text: "A sloping plateau about 15 to 25 m deep"
+  - id: d8dcc151-142f-4880-a987-d2b5a86a89a9
+    text: "A flat sandy desert at 3 m"
+  - id: 4828c7aa-68e0-40ae-b62e-b17103eceb8f
+    text: "A tower rising above the surface"
+correct_choice_ids:
+  - e5641f23-eb75-451e-812b-957d3b5e0ac6
+explanation: "The plateau has steep drop-offs on both sides."
+archived: false

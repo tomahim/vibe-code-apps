@@ -1,0 +1,19 @@
+id: 63124d8f-e13e-488d-9265-2d8a98a0f34d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which two turtles mate and nest at Sipadan?"
+choices:
+  - id: 4282e7b1-ee5d-485a-9b57-77053199e99a
+    text: "Leatherback and loggerhead turtles"
+  - id: 8a4ce9f2-9618-4d0d-a805-1fd335678891
+    text: "Snapping turtles"
+  - id: c7f04568-f76a-4e9f-8aef-6dddfc230f6d
+    text: "Box turtles"
+  - id: 249c3b5d-c2f7-4683-810e-ba4564015309
+    text: "Green and hawksbill turtles"
+correct_choice_ids:
+  - 249c3b5d-c2f7-4683-810e-ba4564015309
+explanation: "Green and hawksbill turtles are frequently seen around the island."
+archived: false

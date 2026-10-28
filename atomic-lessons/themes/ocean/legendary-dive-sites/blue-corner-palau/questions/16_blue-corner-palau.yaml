@@ -1,0 +1,11 @@
+id: 1633ddc4-3220-4f79-ae44-70846539e400
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What do divers call the drift dive at the southern tip of Peleliu? Give the first word of its name."
+accepted_answers:
+  - "Peleliu"
+  - "Peleliu Corner"
+  - "Peleliu Express"
+explanation: "It is called Peleliu Corner or Peleliu Express."
+archived: false

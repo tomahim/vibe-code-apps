@@ -1,0 +1,19 @@
+id: e3757bea-447d-4784-a10c-43f4d1f4fffe
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What did Sabah Parks do in November 2023?"
+choices:
+  - id: a3378830-cd66-4702-b7b9-3b545242767b
+    text: "Opened a new resort"
+  - id: 487e540e-785b-4456-afce-3faa3e7a69bd
+    text: "Closed the island for one month for recovery"
+  - id: 9eec4666-7d8f-4406-b60c-199cc12cac20
+    text: "Hosted a film festival"
+  - id: 90edaebb-a53a-41b6-a00c-df8931ae1d2c
+    text: "Moved the island"
+correct_choice_ids:
+  - 487e540e-785b-4456-afce-3faa3e7a69bd
+explanation: "The closure let the ecosystem recover from human disturbance."
+archived: false

@@ -1,0 +1,10 @@
+id: a0fa3a03-69cb-48ce-89cb-4f02346e0d54
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What was the name of the businessman who raised many of the wrecks? Give his surname."
+accepted_answers:
+  - "Cox"
+  - "Ernest Cox"
+explanation: "Ernest Cox bought and raised 24 of 26 destroyers."
+archived: false

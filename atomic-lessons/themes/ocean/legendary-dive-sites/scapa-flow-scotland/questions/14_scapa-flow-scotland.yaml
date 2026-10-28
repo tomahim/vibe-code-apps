@@ -1,0 +1,19 @@
+id: ce1de12d-39e7-41b3-bfa6-51b6ad6e824d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the maximum depth of the remaining wrecks?"
+choices:
+  - id: cf66ca34-7af1-4b39-bc7d-7c6cad541670
+    text: "About 4 m"
+  - id: 1455c790-86b7-426c-add0-9314ee6a3bad
+    text: "About 400 m"
+  - id: b74ab10c-9d3f-47ac-8a06-d58b8b24d60a
+    text: "About 4,000 m"
+  - id: c4747a0b-ca96-440c-8cda-5a4725232387
+    text: "About 47 m"
+correct_choice_ids:
+  - c4747a0b-ca96-440c-8cda-5a4725232387
+explanation: "The remaining wrecks lie in waters up to 47 m deep."
+archived: false

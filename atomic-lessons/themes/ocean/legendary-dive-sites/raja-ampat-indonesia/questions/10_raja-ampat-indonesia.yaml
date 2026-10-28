@@ -1,0 +1,19 @@
+id: baa52795-8c53-4603-8005-3486b2074047
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is a mesophotic reef?"
+choices:
+  - id: 02dc6e0d-0d3d-41c0-8da4-f9fdabc2921c
+    text: "A reef above water"
+  - id: 23a2466e-34c9-4fb5-8b49-fbcc618d4975
+    text: "A reef made of shipwrecks"
+  - id: a420fd4b-adb5-4229-9bb3-af73ab1644bd
+    text: "A reef of ice"
+  - id: 765a7c78-7bba-41da-9f52-082d3eef5486
+    text: "A deeper reef that gets less light"
+correct_choice_ids:
+  - 765a7c78-7bba-41da-9f52-082d3eef5486
+explanation: "Mesophotic reefs lie deeper than the shallow reef."
+archived: false

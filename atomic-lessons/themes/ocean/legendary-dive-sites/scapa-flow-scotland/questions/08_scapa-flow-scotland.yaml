@@ -1,0 +1,11 @@
+id: 3c52208a-b20a-4ae2-bba6-b1bc20e6bc40
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was the name of the German admiral who gave the scuttling order? Give his surname."
+accepted_answers:
+  - "Reuter"
+  - "von Reuter"
+  - "Ludwig von Reuter"
+explanation: "Rear-Admiral Ludwig von Reuter gave the signal."
+archived: false

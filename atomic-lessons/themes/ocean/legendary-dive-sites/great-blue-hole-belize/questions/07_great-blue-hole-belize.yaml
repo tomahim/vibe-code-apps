@@ -1,0 +1,11 @@
+id: b13a5294-74c1-43fe-a709-e06b3fb4a3cf
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Name the French ocean explorer who brought the Calypso to the Blue Hole in 1971."
+accepted_answers:
+  - "Jacques Cousteau"
+  - "Cousteau"
+  - "Jacques-Yves Cousteau"
+explanation: "Jacques Cousteau charted the hole in 1971 and declared it one of the top five dive sites in the world."
+archived: false

@@ -1,0 +1,19 @@
+id: 00c668af-67df-434a-b0cd-53dcf4730e7a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many German ships were interned there?"
+choices:
+  - id: c9f94461-d18b-4107-9f78-b70fadd1e493
+    text: "7"
+  - id: 3c7a934c-27ae-45cd-abee-8f56ea7ace42
+    text: "74"
+  - id: 50da4f91-b373-49ac-bb4f-1c34557cb36c
+    text: "24"
+  - id: 04c96772-8518-450b-870e-70f38d11df8b
+    text: "174"
+correct_choice_ids:
+  - 3c7a934c-27ae-45cd-abee-8f56ea7ace42
+explanation: "A total of 74 ships were interned."
+archived: false

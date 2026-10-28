@@ -1,0 +1,19 @@
+id: bab67db3-9651-46f0-b9fe-99527ab9bb6a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When did the earthquakes that opened the Silfra area fissures happen?"
+choices:
+  - id: a5db0231-d760-43c4-802d-9c5414c15ba9
+    text: "930"
+  - id: bec1f481-6e2a-4dd3-b6ee-056b2c2b252d
+    text: "1500"
+  - id: 646185af-8eee-4111-b573-0003d8036e5b
+    text: "1971"
+  - id: baa288fc-f943-4ad2-b88f-964f163aaf65
+    text: "1789"
+correct_choice_ids:
+  - baa288fc-f943-4ad2-b88f-964f163aaf65
+explanation: "Earthquakes in 1789 opened several fissures, and Silfra cut into an underground spring."
+archived: false

@@ -1,0 +1,19 @@
+id: d1650014-ddb4-4140-bf3d-e30fb7ef5785
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country is Raja Ampat?"
+choices:
+  - id: f6b6f940-56b1-44b0-a3d3-47c301d1d917
+    text: "Malaysia"
+  - id: 1bcad3cb-7f83-4f7a-9552-34b68d830152
+    text: "Indonesia"
+  - id: f34c5b26-8d2d-4fb0-855b-c9bb0efff8f8
+    text: "Belize"
+  - id: 984d4b30-ea69-42fb-bd08-be14af2c9db3
+    text: "Palau"
+correct_choice_ids:
+  - 1bcad3cb-7f83-4f7a-9552-34b68d830152
+explanation: "It lies in Southwest Papua province."
+archived: false

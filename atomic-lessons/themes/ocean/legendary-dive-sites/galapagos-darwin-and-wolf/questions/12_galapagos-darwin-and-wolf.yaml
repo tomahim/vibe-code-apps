@@ -1,0 +1,19 @@
+id: e293c6d8-611d-44a8-b68e-3a0a72e260d0
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What nickname do locals give the remaining columns?"
+choices:
+  - id: 721214a9-c59d-4c22-a0ab-f2a0327320bc
+    text: "The Two Sisters"
+  - id: bf0dbea6-c7d8-4c44-bbdd-38c00ff6e2b5
+    text: "The Cathedral"
+  - id: 3ec03c87-696b-403f-a98f-064dab78cfb7
+    text: "The Silver Gate"
+  - id: 5f6836b5-dd14-4a87-b57b-906cd771685b
+    text: "The Pillars of Evolution"
+correct_choice_ids:
+  - 5f6836b5-dd14-4a87-b57b-906cd771685b
+explanation: "The nickname nods to Darwin's work."
+archived: false

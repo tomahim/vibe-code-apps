@@ -1,0 +1,19 @@
+id: c8be6809-6bf3-4fbe-9f97-ff42681a01ba
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is the underwater cavern in the north of Blue Corner called?"
+choices:
+  - id: bab0e4b4-6e06-44e2-9056-3620d104309a
+    text: "Turtle Tomb"
+  - id: 4e1a7537-152f-4cc3-885c-387294c219c4
+    text: "Blue Holes"
+  - id: 107fb07c-7893-476b-91df-658b8c89cf81
+    text: "Cathedral"
+  - id: 040898b1-b6e6-4248-b995-801ee2076ebf
+    text: "The Toilet"
+correct_choice_ids:
+  - 4e1a7537-152f-4cc3-885c-387294c219c4
+explanation: "Blue Holes is a large cavern in the northern part."
+archived: false

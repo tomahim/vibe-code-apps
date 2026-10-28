@@ -1,0 +1,19 @@
+id: 8d2037a1-f49d-43b8-935a-2b2e58166d11
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Why is Silfra a cold-water dive?"
+choices:
+  - id: c3b6364f-d96e-4f29-a307-093a9baae33c
+    text: "It is next to a volcano"
+  - id: 8b2f35cb-1966-498c-a3de-2deb589e3337
+    text: "It is the Arctic Ocean"
+  - id: ac22caa0-a84b-4967-ba32-3df3cb33ddca
+    text: "It is a swimming pool"
+  - id: 3fd1f78d-b638-44c9-9c6a-36da27bc44f0
+    text: "The water is glacial meltwater and very cold"
+correct_choice_ids:
+  - 3fd1f78d-b638-44c9-9c6a-36da27bc44f0
+explanation: "The same glacial source that makes it clear makes it cold."
+archived: false

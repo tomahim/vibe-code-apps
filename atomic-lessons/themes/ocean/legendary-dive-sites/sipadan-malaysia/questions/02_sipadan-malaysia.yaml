@@ -1,0 +1,19 @@
+id: bfd70a00-7cfe-48bb-9eac-c7466455d649
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is special about Sipadan in Malaysia?"
+choices:
+  - id: fae34634-d67b-482c-ae67-c2d6a3b83f06
+    text: "It is the largest island"
+  - id: 98f287ba-807b-4ac1-bf44-af09549ad76e
+    text: "It is the only island with a volcano erupting"
+  - id: 458070e5-7ab8-4399-be88-669a5676a6c5
+    text: "It is the oldest city"
+  - id: 1d11528a-51d5-4e24-ab3d-9b458f8fa0b4
+    text: "It is the country's only oceanic island"
+correct_choice_ids:
+  - 1d11528a-51d5-4e24-ab3d-9b458f8fa0b4
+explanation: "Sipadan rises about 600 m from the seabed and is Malaysia's only oceanic island."
+archived: false

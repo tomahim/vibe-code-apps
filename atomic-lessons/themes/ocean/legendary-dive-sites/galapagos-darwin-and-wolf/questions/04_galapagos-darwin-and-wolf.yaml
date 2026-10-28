@@ -1,0 +1,19 @@
+id: 3723223c-1753-4971-8a7d-f191db0c7607
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why is the marine life so diverse?"
+choices:
+  - id: 413a3b45-d4da-4290-9588-2e9ab8ce0ebf
+    text: "There is a coral reef the size of Europe"
+  - id: 5f0c8cb3-51a0-4fe9-8e91-36d12b8f14af
+    text: "The sea is frozen"
+  - id: 957e7a9a-4105-4f48-b529-a0acd3599d6b
+    text: "Warm water only"
+  - id: 2aee867c-fee6-42b3-bb23-9f9a408c42ee
+    text: "Different ocean currents meet there"
+correct_choice_ids:
+  - 2aee867c-fee6-42b3-bb23-9f9a408c42ee
+explanation: "Cold, warm and hot currents mix."
+archived: false

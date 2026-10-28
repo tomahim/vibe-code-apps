@@ -1,0 +1,19 @@
+id: 2c6af0e7-11bd-4d50-849d-d01910611f30
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which creature lives in Silfra all year round?"
+choices:
+  - id: d24dc7c7-a181-4ffc-89a8-15b38cad4cf1
+    text: "Whale sharks"
+  - id: 92680500-916d-4055-aec4-4dabc5a92ecd
+    text: "Dwarf char"
+  - id: a9562847-ce72-41ec-834a-070afb62e330
+    text: "Reef sharks"
+  - id: cb4c1d61-94b4-4d9f-baaf-08ee74e53f98
+    text: "Sea turtles"
+correct_choice_ids:
+  - 92680500-916d-4055-aec4-4dabc5a92ecd
+explanation: "Dwarf char are a subspecies of Arctic char and rarely seen."
+archived: false

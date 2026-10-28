@@ -1,0 +1,19 @@
+id: 44b26b72-f84c-46c4-a65d-024dea06b0bb
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "About how far does the seabed drop next to the island?"
+choices:
+  - id: a0aa9a11-53d3-49a4-b00e-e1baf661eb73
+    text: "About 6 m"
+  - id: 29f1fafc-5cab-4dc3-9cc5-bb5f7c0a4eb5
+    text: "About 60 m"
+  - id: 42d971a5-b3fa-49dc-acbb-f63904db3765
+    text: "About 60 km"
+  - id: 50554076-40f2-41b1-b219-78c60f5aad28
+    text: "About 600 m"
+correct_choice_ids:
+  - 50554076-40f2-41b1-b219-78c60f5aad28
+explanation: "The island is the top of a sea mountain rising from around 600 m."
+archived: false

@@ -1,0 +1,10 @@
+id: 04651040-a1ba-462a-950e-df5f316e5dd4
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which air force sank the Thistlegorm in October 1941? Give its country."
+accepted_answers:
+  - "Germany"
+  - "German"
+explanation: "Two German Heinkel He 111 bombers attacked from Crete."
+archived: false

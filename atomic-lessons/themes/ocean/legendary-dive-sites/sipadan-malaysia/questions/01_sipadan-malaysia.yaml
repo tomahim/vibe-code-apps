@@ -1,0 +1,19 @@
+id: 44b1f834-af62-422b-bd3d-67ebd46fa0cd
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which sea surrounds Sipadan?"
+choices:
+  - id: 2a5ae779-5791-40d6-a3a9-73694e090b99
+    text: "The Red Sea"
+  - id: 3fd1158c-5df8-4a81-a2ed-b87032aa8e16
+    text: "The Celebes Sea"
+  - id: 675a1b47-f29a-4d35-969b-2ed31b7b6d22
+    text: "The Caribbean Sea"
+  - id: 8e6ff361-2b3a-4a1c-832c-291d371ea18c
+    text: "The Baltic Sea"
+correct_choice_ids:
+  - 3fd1158c-5df8-4a81-a2ed-b87032aa8e16
+explanation: "Sipadan lies in the Celebes Sea, off the east coast of Sabah."
+archived: false

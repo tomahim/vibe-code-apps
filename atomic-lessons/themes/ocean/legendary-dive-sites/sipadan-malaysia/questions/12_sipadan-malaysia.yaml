@@ -1,0 +1,19 @@
+id: edaf6b98-3d2f-4f62-a857-9da9b791ef66
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did the ICJ decide in 2002?"
+choices:
+  - id: 4ae6f002-2ef0-4472-99a9-7cfe6b1ba3b7
+    text: "Sipadan belongs to Indonesia"
+  - id: 3a01ae94-00c8-4277-a479-00bb2caabb01
+    text: "Sipadan is international territory"
+  - id: 4316b7df-55e5-4b9e-8a4b-d64a33d72d47
+    text: "Both islands go to the Philippines"
+  - id: f85e9092-36f4-4a1b-aae1-276dc17baa10
+    text: "Sipadan and Ligitan belong to Malaysia"
+correct_choice_ids:
+  - f85e9092-36f4-4a1b-aae1-276dc17baa10
+explanation: "The Court relied on effective occupation by Malaysia's predecessor."
+archived: false

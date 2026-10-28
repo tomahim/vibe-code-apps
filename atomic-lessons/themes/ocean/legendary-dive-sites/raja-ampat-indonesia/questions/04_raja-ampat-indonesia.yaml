@@ -1,0 +1,19 @@
+id: ece661f3-7f38-418f-b088-210d6bfc340a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "About how many small islands, cays and shoals are there?"
+choices:
+  - id: 467a6d9f-8f07-424c-9dd6-d557aa273023
+    text: "About 15"
+  - id: d617b31e-561d-430f-b138-629b6aac2a46
+    text: "About 150"
+  - id: 3684a451-8062-4e0c-9095-a20d56a24cad
+    text: "About 150,000"
+  - id: 103ef6d0-a8e5-4e33-a01f-696c3dc919d4
+    text: "Over 1,500"
+correct_choice_ids:
+  - 103ef6d0-a8e5-4e33-a01f-696c3dc919d4
+explanation: "The archipelago has over 1,500 islands, cays and shoals."
+archived: false

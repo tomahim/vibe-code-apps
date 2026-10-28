@@ -1,0 +1,19 @@
+id: b8ed612c-00a1-40e9-8e8a-ae8b4f85fe86
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "About how fast do the plates move apart at Silfra?"
+choices:
+  - id: 766dc624-fcc6-4ff3-88b3-19a0964bddd4
+    text: "About 2 m per year"
+  - id: 7686e54a-dc7e-4d06-bca3-43420065dc38
+    text: "About 20 m per year"
+  - id: 63fa128f-71f0-4426-a99d-12a50e66bee3
+    text: "They do not move"
+  - id: dadb2b9c-429a-4e38-b3e8-c21ce3f60f6d
+    text: "About 2 cm per year"
+correct_choice_ids:
+  - dadb2b9c-429a-4e38-b3e8-c21ce3f60f6d
+explanation: "The drift is slow, about 2 cm a year, but it builds up tension."
+archived: false

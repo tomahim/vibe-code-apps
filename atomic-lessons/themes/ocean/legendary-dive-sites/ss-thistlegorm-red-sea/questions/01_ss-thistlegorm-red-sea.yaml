@@ -1,0 +1,19 @@
+id: 0575fafd-0ba5-401d-a819-4a7e5593c256
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which sea does the Thistlegorm lie?"
+choices:
+  - id: 3e99e29b-3f65-49da-ae16-507b0981e597
+    text: "The Mediterranean Sea"
+  - id: c5667432-57ae-4bd5-8f93-08066f3f619b
+    text: "The Red Sea"
+  - id: 8430c1e0-bdb9-4b63-963c-6095b4a0235b
+    text: "The Baltic Sea"
+  - id: 587d3b96-3799-4a1b-8ae3-3c75c64ac05e
+    text: "The Caribbean Sea"
+correct_choice_ids:
+  - c5667432-57ae-4bd5-8f93-08066f3f619b
+explanation: "She sank at Safe Anchorage F in the Red Sea, near Ras Mohammed National Park."
+archived: false

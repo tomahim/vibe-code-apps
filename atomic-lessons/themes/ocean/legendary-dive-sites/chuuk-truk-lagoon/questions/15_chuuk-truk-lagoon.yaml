@@ -1,0 +1,11 @@
+id: 97c6667d-d005-4e9c-bf3a-8286292a3f53
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Truk Lagoon is part of which country's territory? Name the federation."
+accepted_answers:
+  - "Federated States of Micronesia"
+  - "Micronesia"
+  - "FSM"
+explanation: "Chuuk is a state of the Federated States of Micronesia."
+archived: false

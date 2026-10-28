@@ -1,0 +1,10 @@
+id: 5d128fc7-f9cd-4894-a628-69b3da404faa
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What gas forms a lifeless layer at about 91 m in the Blue Hole? Give its name."
+accepted_answers:
+  - "hydrogen sulfide"
+  - "Hydrogen sulphide"
+explanation: "Sonar and submarines in 2018 found this layer, below which the water is anoxic."
+archived: false

@@ -1,0 +1,12 @@
+id: 95512905-9853-45cc-a61a-6a0f04a28c83
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which type of shark is commonly seen patrolling Blue Corner? Name the species."
+accepted_answers:
+  - "grey reef shark"
+  - "gray reef shark"
+  - "grey reef sharks"
+  - "gray reef sharks"
+explanation: "Grey reef sharks are seen along the reef wall."
+archived: false

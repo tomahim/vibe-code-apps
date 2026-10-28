@@ -1,0 +1,19 @@
+id: 11e5b954-0c8e-4e67-86f4-e0396dce96d9
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which are the four main islands?"
+choices:
+  - id: 7da9a4c7-f735-405d-a922-a1fefd09505f
+    text: "Sipadan, Mabul, Kapalai and Ligitan"
+  - id: ebca38b7-bb22-4368-a756-10bed5ef94ce
+    text: "Misool, Salawati, Batanta and Waigeo"
+  - id: bc78f449-8430-4531-8837-08f599b84e54
+    text: "Dublon, Eten, Fefan and Uman"
+  - id: c52af974-555d-4fd6-a662-58271fe5f99d
+    text: "Peleliu, Koror, Babeldaob and Angaur"
+correct_choice_ids:
+  - ebca38b7-bb22-4368-a756-10bed5ef94ce
+explanation: "Kofiau is a smaller fifth island."
+archived: false

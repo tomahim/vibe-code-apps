@@ -1,0 +1,19 @@
+id: 74b1bbee-f7be-4f79-8708-a69feddfda2d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What do the stalactites in the Blue Hole prove?"
+choices:
+  - id: 9003f4ca-6456-416f-88a7-f4d09ede9dcc
+    text: "The hole was dug by people"
+  - id: 608de3a9-0ecd-4fd8-8ab4-3d4c5a67ff7d
+    text: "The space was once a dry cave above sea level"
+  - id: c1cfc2cd-38e1-48f9-ab5a-289bc5a215aa
+    text: "The hole was formed by a meteor"
+  - id: e19d20d7-544d-41bb-a34b-10fff957d20c
+    text: "The water is freshwater"
+correct_choice_ids:
+  - 608de3a9-0ecd-4fd8-8ab4-3d4c5a67ff7d
+explanation: "Stalactites only grow in air, so they show the cave formed before the sea rose."
+archived: false

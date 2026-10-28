@@ -1,0 +1,19 @@
+id: 06046453-c33d-42a6-b9d6-a8b0ed04fc01
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who first located the wreck in the early 1950s?"
+choices:
+  - id: 77ff9ab6-13a3-448e-807b-3a2d3f39eb34
+    text: "Simon Brown"
+  - id: 1449fe5d-3551-431d-a33f-70a0c4bc19f6
+    text: "Jacques Cousteau"
+  - id: c7a04742-a0ed-40f7-8f02-c48c0ab05f4f
+    text: "William Ellis"
+  - id: f4005734-e5f5-4a0c-8def-062097531d3f
+    text: "Angus McLeay"
+correct_choice_ids:
+  - 1449fe5d-3551-431d-a33f-70a0c4bc19f6
+explanation: "He used information from local fishermen and brought up the ship's bell and the captain's safe."
+archived: false

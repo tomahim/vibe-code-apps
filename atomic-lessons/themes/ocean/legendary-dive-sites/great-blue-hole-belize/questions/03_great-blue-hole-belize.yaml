@@ -1,0 +1,19 @@
+id: 02696280-68e7-4f38-be3d-dd93f9085f1a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why does the water inside the hole look darker blue than the reef around it?"
+choices:
+  - id: d7770b01-bbc7-416e-a200-b5401e696af8
+    text: "The water is polluted"
+  - id: fd5b6734-8d51-4750-8b86-7574ed4b0eed
+    text: "The bottom drops far deeper than the shallow reef flat"
+  - id: 1e295cc1-db53-4ef5-9a7f-427e86290d4d
+    text: "It is covered in seaweed"
+  - id: b0366e64-83de-4874-916f-5b930940c839
+    text: "The hole is painted by minerals on the surface"
+correct_choice_ids:
+  - fd5b6734-8d51-4750-8b86-7574ed4b0eed
+explanation: "Shallow reef looks turquoise because the bottom is close. Depth makes the water look deep blue."
+archived: false

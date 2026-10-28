@@ -1,0 +1,19 @@
+id: 176528bf-eed0-4a1e-8c5b-e538f4200ab8
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What threat has increased since 2019?"
+choices:
+  - id: 7e758242-ccf6-4bcd-a5a5-5c352545c239
+    text: "Volcanic eruptions"
+  - id: 6a8782b7-d1fa-4f08-bf1b-23afa737ed38
+    text: "Iceberg collisions"
+  - id: dbfb2852-1586-4f66-91cd-7b1797e03033
+    text: "Oil spills from the Thistlegorm"
+  - id: 86fed045-9759-4194-a99e-0166f16145ba
+    text: "Illegal mining such as for nickel"
+correct_choice_ids:
+  - 86fed045-9759-4194-a99e-0166f16145ba
+explanation: "Mining on land can send sediment into the sea and harm corals."
+archived: false

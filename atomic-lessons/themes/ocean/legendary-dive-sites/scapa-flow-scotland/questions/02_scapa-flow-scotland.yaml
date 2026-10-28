@@ -1,0 +1,19 @@
+id: fc6bf1bf-089e-48c7-8766-ffb748387514
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why was the German fleet at Scapa Flow?"
+choices:
+  - id: 5d2d945c-d7f5-4e32-a933-5e05eb698169
+    text: "It was visiting for a festival"
+  - id: 8c883dce-0661-4a24-ae25-8ca8b8017ac3
+    text: "It had been defeated in a battle there"
+  - id: 88ff0305-405a-4217-b93c-0793d10ac997
+    text: "It was on a training exercise"
+  - id: c703cd9e-c152-415c-ae88-99d3e13b1f7c
+    text: "It was interned there after the Armistice"
+correct_choice_ids:
+  - c703cd9e-c152-415c-ae88-99d3e13b1f7c
+explanation: "The ships were held while the peace terms were negotiated."
+archived: false

@@ -1,0 +1,19 @@
+id: 3f382bac-0c1f-4f7e-98ce-7f3644e26eb9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did the off-vertical stalactites reveal?"
+choices:
+  - id: 36845bec-10f8-4274-837c-2000f2d10c2e
+    text: "The stalactites were made by divers"
+  - id: e660e964-c524-40e0-9d29-5ff538367d82
+    text: "The plateau tilted after they formed"
+  - id: a8240fc3-917c-4e21-8b9c-85bf518e8fd5
+    text: "Sea level never changed"
+  - id: 0d6f7d37-122e-4997-9085-1260573c209e
+    text: "The hole is shrinking quickly"
+correct_choice_ids:
+  - e660e964-c524-40e0-9d29-5ff538367d82
+explanation: "A consistent lean of about 5 degrees means the rock itself moved."
+archived: false

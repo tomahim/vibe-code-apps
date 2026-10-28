@@ -1,0 +1,19 @@
+id: c0dab505-5897-4bdf-8687-beba8b1d5b42
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the halocline?"
+choices:
+  - id: be8c3de1-ca58-4c4a-83d6-2fec2e09d73a
+    text: "A kind of cave fish"
+  - id: 1a6e895e-27d5-4a63-b67a-d1c5a557cc58
+    text: "A diver's tool"
+  - id: 7657bc9e-1627-48b3-9654-33bd9a655fb2
+    text: "A type of stalactite"
+  - id: e59384db-6f01-4e16-b741-f36cc682a87c
+    text: "The boundary between fresh and salt water"
+correct_choice_ids:
+  - e59384db-6f01-4e16-b741-f36cc682a87c
+explanation: "Fresh water sits on denser salt water, and the layer between is the halocline."
+archived: false

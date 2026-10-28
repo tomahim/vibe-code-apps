@@ -1,0 +1,19 @@
+id: 52d53a37-c629-48a1-bc9c-3140887b3658
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is required to dive at Sipadan?"
+choices:
+  - id: ccd7dc22-dd6c-406b-95d2-a8892b43b340
+    text: "Nothing"
+  - id: 4703f720-a229-4057-9455-a429a8218305
+    text: "A boat only"
+  - id: f9d7cfc7-c5cb-4ac8-b2cb-637e533327fa
+    text: "A passport stamp from Indonesia"
+  - id: 70cae9f0-f394-4978-bba0-794d99840d2f
+    text: "A permit issued by Sabah Parks"
+correct_choice_ids:
+  - 70cae9f0-f394-4978-bba0-794d99840d2f
+explanation: "Daily permits are limited and divided between operators."
+archived: false

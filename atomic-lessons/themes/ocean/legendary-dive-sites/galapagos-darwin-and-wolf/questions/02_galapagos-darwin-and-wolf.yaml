@@ -1,0 +1,19 @@
+id: 36a89afc-1eec-4ac8-ac2f-c575f879bc07
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did UNESCO list the Gal\u00e1pagos as a World Heritage Site?"
+choices:
+  - id: 01aa8ecc-b663-4303-a4a1-1acd1e07972d
+    text: "1778"
+  - id: dbcebd93-fcd7-4537-937b-83a393fd1d86
+    text: "1878"
+  - id: 04e0d480-464b-431b-8733-a833e28520be
+    text: "2021"
+  - id: fe56849a-cc45-46a7-b52d-88d811d9ed2f
+    text: "1978"
+correct_choice_ids:
+  - fe56849a-cc45-46a7-b52d-88d811d9ed2f
+explanation: "The Gal\u00e1pagos were listed in 1978."
+archived: false

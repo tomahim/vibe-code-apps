@@ -1,0 +1,9 @@
+id: c325149a-013e-4755-bd75-3d10c023dd51
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did the Thistlegorm sink? Give the year."
+accepted_answers:
+  - "1941"
+explanation: "She sank at about 1:30 am on 6 October 1941."
+archived: false

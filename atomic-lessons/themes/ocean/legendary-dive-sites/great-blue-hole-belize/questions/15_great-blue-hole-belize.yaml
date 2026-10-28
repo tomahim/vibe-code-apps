@@ -1,0 +1,10 @@
+id: 8dc8be7f-37d7-47a4-843c-b04b0cf282a0
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the reef atoll that contains the Great Blue Hole?"
+accepted_answers:
+  - "Lighthouse Reef"
+  - "Lighthouse Reef Atoll"
+explanation: "The hole lies near the centre of Lighthouse Reef."
+archived: false
