@@ -5,4 +5,4 @@ title: "From letter counts to language patterns"
 description: "Build intuition for probabilities using letters and n-grams."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

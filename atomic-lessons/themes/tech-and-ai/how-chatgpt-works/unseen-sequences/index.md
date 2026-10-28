@@ -5,4 +5,4 @@ title: "Predicting sequences we have never seen"
 description: "Understand why a language model must generalize."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

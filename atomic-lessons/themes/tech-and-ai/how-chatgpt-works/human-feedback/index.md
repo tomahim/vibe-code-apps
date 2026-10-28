@@ -5,4 +5,4 @@ title: "Learning to be a useful assistant"
 description: "See why human feedback follows basic pretraining."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

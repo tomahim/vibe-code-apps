@@ -5,4 +5,4 @@ title: "The complete generation loop"
 description: "Put the model's parts together."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

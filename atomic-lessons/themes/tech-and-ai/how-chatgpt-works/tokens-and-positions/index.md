@@ -5,4 +5,4 @@ title: "Preparing text for the model"
 description: "Trace tokens, IDs, embeddings, and positions."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

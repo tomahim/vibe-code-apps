@@ -5,4 +5,4 @@ title: "Learning from enormous amounts of text"
 description: "Understand the pretraining objective and its limits."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

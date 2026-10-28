@@ -5,4 +5,4 @@ title: "How attention looks back"
 description: "Understand the transformer's central mechanism."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

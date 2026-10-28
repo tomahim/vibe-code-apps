@@ -5,4 +5,4 @@ title: "The practical craft of training"
 description: "See the decisions behind a successful training run."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

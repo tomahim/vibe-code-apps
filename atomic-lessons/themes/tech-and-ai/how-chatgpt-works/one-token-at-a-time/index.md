@@ -5,4 +5,4 @@ title: "A sentence, one token at a time"
 description: "See how a language model builds a response from a prompt."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

@@ -5,4 +5,4 @@ title: "What ChatGPT explains—and what it doesn't"
 description: "Finish with semantic grammar, computation, and practical judgment."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

@@ -5,4 +5,4 @@ title: "Putting meaning into numbers"
 description: "Learn what embeddings represent and where they come from."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

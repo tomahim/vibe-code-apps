@@ -5,4 +5,4 @@ title: "What makes something a model?"
 description: "Use a simple science example to understand parameters."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

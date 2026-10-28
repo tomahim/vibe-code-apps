@@ -5,4 +5,4 @@ title: "Inside a neural network"
 description: "Follow numbers through neurons and layers."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

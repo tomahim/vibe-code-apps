@@ -5,4 +5,4 @@ title: "Teaching a machine a human-like task"
 description: "Use handwritten digits as an analogy for language."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

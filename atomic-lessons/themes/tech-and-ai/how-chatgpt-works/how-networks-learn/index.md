@@ -5,4 +5,4 @@ title: "How a neural network learns"
 description: "Connect examples, loss, and weight updates."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT

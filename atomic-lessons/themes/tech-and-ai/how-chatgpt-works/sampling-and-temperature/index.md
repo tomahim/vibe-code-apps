@@ -5,4 +5,4 @@ title: "Why the same prompt gets different answers"
 description: "Explore probability, sampling, and temperature."
 archived: false
 ---
-Read six short cards, review three key learnings, then answer two questions selected from six alternatives.
+Learn internals about ChatGPT
