@@ -139,12 +139,49 @@ class LearningAPITests(TestCase):
         self.assertEqual(correct.json()["attempt_type"], "retry")
         self.assertTrue(correct.json()["progress"]["completed"])
         self.assertIsNone(correct.json()["next_step"])
-        self.assertEqual(self.post(url, body).status_code, 409)
-        self.assertEqual(QuestionAttempt.objects.count(), 2)
+        review = self.post(url, body)
+        self.assertEqual(review.status_code, 201)
+        self.assertEqual(review.json()["attempt_type"], "review")
+        self.assertTrue(review.json()["progress"]["completed"])
+        self.assertIsNone(review.json()["next_step"])
+        self.assertEqual(QuestionAttempt.objects.count(), 3)
         self.assertEqual(QuestionAttempt.objects.filter(user=self.other).count(), 0)
         lesson = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
         self.assertTrue(lesson["questions"][0]["completed"])
         self.assertNotIn("explanation", lesson["questions"][0])
+
+    def test_review_attempts_rotate_questions_without_changing_progress_or_rewards(self):
+        alternative = self.row(Question, lesson=self.lesson, position=2, after_card_position=1,
+                               prompt="Alternative", options=self.question.options, answer="1")
+        lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
+        attempt_url = "/api/learning/question-attempts/"
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        first_id = self.client.get(lesson_url).json()["questions"][0]["id"]
+        first = Question.objects.get(pk=first_id)
+        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()["attempt_type"], "initial")
+        before = self.client.get(lesson_url).json()
+        reward_before = self.client.get("/api/learning/garden/").json()["rewards"]
+        card_completed_at = before["cards"][0]["completed_at"]
+        wrong_choice = next(option["id"] for option in first.options if option["id"] != first.answer)
+        wrong = self.post(attempt_url, {"question_id": first_id, "answer": wrong_choice})
+        self.assertEqual(wrong.status_code, 201)
+        self.assertEqual(wrong.json()["attempt_type"], "review")
+        self.assertFalse(wrong.json()["correct"])
+        self.assertNotEqual(wrong.json()["next_step"]["id"], first_id)
+        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).status_code, 409)
+        next_id = wrong.json()["next_step"]["id"]
+        self.assertEqual(next_id, str(alternative.pk) if first_id == str(self.question.pk) else str(self.question.pk))
+        correct = self.post(attempt_url, {"question_id": next_id,
+                                          "answer": Question.objects.get(pk=next_id).answer})
+        self.assertEqual(correct.json()["attempt_type"], "review")
+        self.assertTrue(correct.json()["correct"])
+        self.assertIsNone(correct.json()["next_step"])
+        after = self.client.get(lesson_url).json()
+        self.assertEqual(after["lesson"]["progress"], before["lesson"]["progress"])
+        self.assertEqual(after["cards"][0]["completed_at"], card_completed_at)
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"], reward_before)
+        self.assertEqual(list(QuestionAttempt.objects.values_list("attempt_type", flat=True)),
+                         ["initial", "review", "review"])
 
     def test_question_request_validation(self):
         url = "/api/learning/question-attempts/"
@@ -397,9 +434,12 @@ class LearningConcurrencyTests(TransactionTestCase):
         with ThreadPoolExecutor(max_workers=2) as pool:
             return sorted(pool.map(post, range(2)))
 
-    def test_concurrent_completions_and_correct_attempts_are_unique(self):
+    def test_concurrent_completions_and_correct_attempts_reward_once(self):
         self.assertEqual(self.parallel_posts(f"/api/learning/cards/{self.card.pk}/complete/", {}), [200, 201])
         self.assertEqual(CardProgress.objects.filter(user=self.user).count(), 1)
         self.assertEqual(self.parallel_posts("/api/learning/question-attempts/", {
-            "question_id": str(self.question.pk), "answer": "0"}), [201, 409])
-        self.assertEqual(QuestionAttempt.objects.filter(user=self.user).count(), 1)
+            "question_id": str(self.question.pk), "answer": "0"}), [201, 201])
+        self.assertEqual(list(QuestionAttempt.objects.filter(user=self.user)
+                              .values_list("attempt_type", flat=True)), ["initial", "review"])
+        garden = Client(HTTP_AUTHORIZATION=f"Bearer {self.token}").get("/api/learning/garden/").json()
+        self.assertEqual(garden["rewards"], {"drops": 106, "carrots": 1})

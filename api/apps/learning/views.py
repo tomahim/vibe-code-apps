@@ -154,7 +154,17 @@ def question_attempts(request):
         if data["answer"] not in {o["id"] for o in question.options}:
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
-        if next_step(state, question.lesson) != {"type": "question", "id": str(question.pk)}:
+        checkpoint = (question.lesson_id, question.after_card_position)
+        review = checkpoint in state.passed
+        if review:
+            selected = next((q for q in checkpoint_questions(state, question.lesson)
+                             if q.after_card_position == question.after_card_position), None)
+            current = selected is not None and selected.pk == question.pk and any(
+                card.lesson_id == question.lesson_id and card.position == question.after_card_position
+                and card.pk in state.completed for card in state.cards)
+        else:
+            current = next_step(state, question.lesson) == {"type": "question", "id": str(question.pk)}
+        if not current:
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
         checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
                           and q.after_card_position == question.after_card_position]
@@ -162,15 +172,24 @@ def question_attempts(request):
                                                attempt_type__in=["initial", "retry"]).exists()
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
-            attempt_type="retry" if retry else "initial", submitted_answer=data["answer"],
+            attempt_type=("review" if review else "retry" if retry else "initial"),
+            submitted_answer=data["answer"],
             correct=data["answer"] == question.answer, answered_at=timezone.now(),
         )
         state = LearnerState(request.user)
+        if review:
+            following = None
+            if not attempt.correct:
+                selected = next(q for q in checkpoint_questions(state, question.lesson)
+                                if q.after_card_position == question.after_card_position)
+                following = {"type": "question", "id": str(selected.pk)}
+        else:
+            following = next_step(state, question.lesson)
         return JsonResponse({"attempt_id": attempt.pk, "question_id": str(question.pk),
                              "attempt_type": attempt.attempt_type, "correct": attempt.correct,
                              "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
                              "progress": state.progress([question.lesson]),
-                             "next_step": next_step(state, question.lesson)}, status=201)
+                             "next_step": following}, status=201)
 
 
 @never_cache

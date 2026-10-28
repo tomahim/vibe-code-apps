@@ -5,8 +5,8 @@ const id = {
   lesson: 'ef40c724-a882-4798-949b-1bf950471d9b', card: '8f8b4671-3e2d-4c7f-a3c7-eb207401bb40', card2: '925a9b78-0546-44bf-a8bb-bb02fb6d7aca', question: 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', alternative: 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3',
 };
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
-function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false } = {}) {
-  let read = false, readSecond = false, answered = false, wrong = false;
+function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false } = {}) {
+  let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
   page.route('**/api/learning/**', route => {
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
@@ -16,7 +16,7 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false }
     if (url.pathname.endsWith(`/lessons/${id.lesson}/open/`)) return route.fulfill({ json: { lesson_id: id.lesson } });
     if (url.pathname.endsWith(`/cards/${id.card}/complete/`)) { read = true; return route.fulfill({ status: 201, json: { created: true } }); }
     if (url.pathname.endsWith(`/cards/${id.card2}/complete/`)) { readSecond = true; return route.fulfill({ status: 201, json: { created: true } }); }
-    if (url.pathname.endsWith('/question-attempts/')) { answered = JSON.parse(route.request().postData()).answer === 'warm'; wrong = !answered; return route.fulfill({ status: 201, json: { correct: answered, explanation: 'Warm means pleasantly heated.', next_step: answered ? null : { type: 'question', id: id.alternative } } }); }
+    if (url.pathname.endsWith('/question-attempts/')) { const review = answered; const correct = JSON.parse(route.request().postData()).answer === 'warm'; if (correct) answered = true; else wrong = true; return route.fulfill({ status: 201, json: { correct, attempt_type: review ? 'review' : 'initial', explanation: 'Warm means pleasantly heated.', next_step: correct ? null : { type: 'question', id: id.alternative } } }); }
     if (url.pathname.endsWith('/leaderboard/')) { const score = url.searchParams.get('currency') === 'carrots' ? 1 : 106; return route.fulfill({ json: { rows: [{ rank: 1, name: 'Learner', score, is_self: true }], self: { rank: 1, score, is_self: true } } }); }
   });
 }
@@ -145,6 +145,44 @@ test('previous cards are read-only and return to the current step', async ({ pag
   await reader.getByRole('button', { name: 'Return to next step' }).click();
   await expect(reader.getByText('Dry gently')).toBeVisible();
   expect(firstCardCompletions).toBe(1);
+});
+
+test('a completed lesson replays cards and questions without rereading progress', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, 1, { twoCards: true, completed: true });
+  const cardWrites = [];
+  const attempts = [];
+  page.on('request', (request) => {
+    if (request.url().includes('/cards/') && request.url().endsWith('/complete/')) cardWrites.push(request.url());
+    if (request.url().endsWith('/question-attempts/')) attempts.push(JSON.parse(request.postData()));
+  });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  await panel.getByRole('button', { name: /Bath time and care/ }).click();
+  await panel.getByRole('button', { name: /Read lesson/ }).click();
+  const reader = page.getByRole('dialog', { name: 'Bath time and care' });
+  await expect(reader.getByText('Warm water')).toBeVisible();
+  await expect(reader.getByText('3 of 3 steps complete')).toBeVisible();
+  await page.screenshot({ path: '/tmp/little-grains-lesson-replay.png' });
+  await reader.getByRole('button', { name: /I’ve read this card/ }).click();
+  await expect(reader.getByText('Dry gently')).toBeVisible();
+  await reader.getByRole('button', { name: /I’ve read this card/ }).click();
+  await expect(reader.getByText('What is the water like?')).toBeVisible();
+  await reader.getByLabel('Cold', { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer' }).click();
+  await reader.getByRole('button', { name: 'Try another question' }).click();
+  await expect(reader.getByText('How should the water feel?')).toBeVisible();
+  await page.screenshot({ path: '/tmp/little-grains-lesson-replay-question.png' });
+  await reader.getByLabel('Warm', { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer' }).click();
+  await expect(reader.getByText('That’s right!', { exact: true })).toBeVisible();
+  await expect(reader.getByText('+1 carrot')).toHaveCount(0);
+  await reader.getByRole('button', { name: 'Continue →' }).click();
+  await expect(reader.getByText('Lesson in bloom')).toBeVisible();
+  expect(cardWrites).toHaveLength(0);
+  expect(attempts).toHaveLength(2);
 });
 
 test('expired token is cleared', async ({ page }) => {
