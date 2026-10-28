@@ -1,3 +1,4 @@
+"""Structure checks for the Legendary dive sites path."""
 import unittest
 from pathlib import Path
 
