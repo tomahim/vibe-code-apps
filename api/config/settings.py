@@ -98,6 +98,10 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES
 DATA_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES + 1024 * 1024
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Public canonical content repository. Images are proxied by the API from the
+# latest successful SyncLog commit; clients never need to access GitHub.
+LEARNING_CONTENT_REPOSITORY = os.environ.get("LEARNING_CONTENT_REPOSITORY", "tomahim/vibe-code-apps")
+
 # Empty means recipe writes are disabled; separate from the Telegram bot token.
 BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
 
@@ -118,3 +122,4 @@ NOTION_NEWS_DATA_SOURCE_ID = os.environ.get("NOTION_NEWS_DATA_SOURCE_ID", "")
 NOTION_NEWS_ALLOWED_USER_IDS = {
     value.strip() for value in os.environ.get("NOTION_NEWS_ALLOWED_USER_IDS", "").split(",") if value.strip()
 }
+
