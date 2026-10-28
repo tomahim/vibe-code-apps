@@ -11,7 +11,7 @@ import {
   editChanges,
   diffLines,
   mergeSavedUnit,
-  unitSections,
+  treeRows,
 } from "./review-utils.js";
 import "./content-review.css";
 
@@ -427,7 +427,7 @@ function ReviewView({ prNumber, onBack }) {
   }
 
   const { pr, units, other_changes: otherChanges, summary } = detail;
-  const sections = unitSections(units);
+  const rows = treeRows(units);
   const selected = units.find((unit) => unit.key === selectedKey);
 
   return (
@@ -454,23 +454,25 @@ function ReviewView({ prNumber, onBack }) {
           </div>
 
           <nav className="unit-tree" aria-label="Changed content">
-            {sections.map((section) => (
-              <div key={section.key} className={`tree-section tree-depth-${section.depth}`}>
-                <p className="tree-section-title">{section.title}</p>
-                {section.units.map((unit) => (
-                  <button
-                    key={unit.key}
-                    type="button"
-                    className={`tree-unit ${unit.key === selectedKey ? "selected" : ""}`}
-                    onClick={() => setSelectedKey(unit.key)}
-                  >
-                    <ChangeChip change={unit.change} />
-                    <span className="tree-unit-title">{unit.title || unit.path.split("/").pop()}</span>
-                    <span className="tree-unit-kind">{KIND_LABELS[unit.kind]}</span>
-                  </button>
-                ))}
-              </div>
-            ))}
+            {rows.map((row) =>
+              row.type === "heading" ? (
+                <p key={row.key} className="tree-heading" style={{ paddingLeft: row.depth * 14 }}>
+                  {row.title}
+                </p>
+              ) : (
+                <button
+                  key={row.key}
+                  type="button"
+                  className={`tree-unit tree-kind-${row.unit.kind} ${row.unit.key === selectedKey ? "selected" : ""}`}
+                  style={{ marginLeft: row.depth * 14, width: `calc(100% - ${row.depth * 14}px)` }}
+                  onClick={() => setSelectedKey(row.unit.key)}
+                >
+                  <ChangeChip change={row.unit.change} />
+                  <span className="tree-unit-title">{row.unit.title || row.unit.path.split("/").pop()}</span>
+                  <span className="tree-unit-kind">{KIND_LABELS[row.unit.kind]}</span>
+                </button>
+              ),
+            )}
             {otherChanges.length > 0 && (
               <div className="tree-section tree-depth-1">
                 <p className="tree-section-title">Other library files</p>

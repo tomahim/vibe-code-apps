@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { bodyLines, canEdit, diffLines, draftFromUnit, editChanges, inlineSegments, mergeSavedUnit, unitSections } from '../src/apps/content-review/review-utils.js';
+import { bodyLines, canEdit, diffLines, draftFromUnit, editChanges, inlineSegments, mergeSavedUnit, treeRows, unitSections } from '../src/apps/content-review/review-utils.js';
 
 test('inlineSegments splits bold markers', () => {
   assert.deepEqual(inlineSegments("**Let's go.** Slowly"), [
@@ -89,4 +89,24 @@ test('theme drafts and changes contain only the description', () => {
   assert.deepEqual(editChanges(theme, { description: 'New summary' }), { description: 'New summary' });
   assert.equal(canEdit({ ...theme, change: 'removed' }), false);
   assert.equal(canEdit({ ...theme, parse_error: 'bad' }), false);
+});
+
+test('treeRows nests cards and questions under their lesson', () => {
+  const crumbs = ['Language', 'English'];
+  const units = [
+    { key: 'l', kind: 'lesson', title: 'Bath', breadcrumbs: crumbs },
+    { key: 'c', kind: 'card', title: 'Card 1', breadcrumbs: [...crumbs, 'Bath'] },
+    { key: 'q', kind: 'question', title: 'Q', breadcrumbs: [...crumbs, 'Bath'] },
+    { key: 'c2', kind: 'card', title: 'Card', breadcrumbs: [...crumbs, 'Sleep'] },
+  ];
+  const rows = treeRows(units);
+  assert.deepEqual(rows.map((r) => [r.type, r.key, r.depth]), [
+    ['heading', 'heading:Language', 0],
+    ['heading', 'heading:Language\u0001English', 1],
+    ['unit', 'l', 2],
+    ['unit', 'c', 3],
+    ['unit', 'q', 3],
+    ['heading', 'heading:Language\u0001English\u0001Sleep', 2],
+    ['unit', 'c2', 3],
+  ]);
 });
