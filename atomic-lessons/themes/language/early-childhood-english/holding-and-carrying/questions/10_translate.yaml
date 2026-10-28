@@ -1,0 +1,10 @@
+id: 933b7996-4fc6-4905-a5e3-29048d14dd8c
+position: 10
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Faisons un câlin un instant. »'
+accepted_answers:
+- Let's snuggle for a minute.
+- Let us snuggle for a minute.
+explanation: La phrase du cours est « Let's snuggle for a minute. ». Comparez le sens et la structure de votre réponse.
+archived: false

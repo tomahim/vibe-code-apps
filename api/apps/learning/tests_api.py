@@ -183,6 +183,80 @@ class LearningAPITests(TestCase):
         self.assertEqual(list(QuestionAttempt.objects.values_list("attempt_type", flat=True)),
                          ["initial", "review", "review"])
 
+    def test_completed_checkpoint_uses_typed_translation_on_review(self):
+        translations = [
+            self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
+                     type=Question.Type.TYPE_ANSWER_QUESTION, prompt=prompt, options=[],
+                     answer=answers[0], accepted_answers=answers, explanation="Compare the full sentence.")
+            for position, prompt, answers in [
+                (2, "Je suis juste ici.", ["I'm right here.", "I am right here."]),
+                (3, "Regarde-moi.", ["Look at me.", "Please look at me."]),
+            ]
+        ]
+        lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
+        attempt_url = "/api/learning/question-attempts/"
+        self.assertEqual(self.client.get(lesson_url).json()["questions"][0]["type"], "multiple_choice")
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"}).status_code, 201)
+        before = self.client.get(lesson_url).json()
+        self.assertTrue(before["lesson"]["progress"]["completed"])
+        self.assertEqual(before["questions"][0]["type"], "type_answer_question")
+        self.assertEqual(before["questions"][0]["options"], [])
+        self.assertNotIn("answer", before["questions"][0])
+        self.assertNotIn("accepted_answers", before["questions"][0])
+        rewards = self.client.get("/api/learning/garden/").json()["rewards"]
+
+        first_id = before["questions"][0]["id"]
+        first = Question.objects.get(pk=first_id)
+        wrong = self.post(attempt_url, {"question_id": first_id, "answer": "This is not the sentence."})
+        self.assertEqual(wrong.status_code, 201)
+        self.assertEqual(wrong.json()["attempt_type"], "review")
+        self.assertFalse(wrong.json()["correct"])
+        self.assertEqual(wrong.json()["correct_answer"], first.answer)
+        next_id = wrong.json()["next_step"]["id"]
+        self.assertNotEqual(first_id, next_id)
+        self.assertIn(next_id, {str(question.pk) for question in translations})
+        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).status_code, 409)
+
+        next_question = Question.objects.get(pk=next_id)
+        variant = next_question.accepted_answers[-1].upper().replace("'", "’") + "  !!"
+        correct = self.post(attempt_url, {"question_id": next_id, "answer": variant})
+        self.assertEqual(correct.status_code, 201)
+        self.assertEqual(correct.json()["attempt_type"], "review")
+        self.assertTrue(correct.json()["correct"])
+        self.assertIsNone(correct.json()["next_step"])
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"], rewards)
+        self.assertEqual(self.client.get(lesson_url).json()["lesson"]["progress"], before["lesson"]["progress"])
+
+    def test_typed_question_waits_until_whole_lesson_is_complete(self):
+        self.row(Card, lesson=self.lesson, position=2, body_markdown="Next card")
+        self.row(Question, lesson=self.lesson, position=2, after_card_position=1,
+                 type=Question.Type.TYPE_ANSWER_QUESTION, prompt="Translate this", options=[],
+                 answer="Hello there", accepted_answers=["Hello there"], explanation="Greeting")
+        lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post("/api/learning/question-attempts/", {
+            "question_id": str(self.question.pk), "answer": self.question.answer,
+        })
+        lesson = self.client.get(lesson_url).json()
+        self.assertFalse(lesson["lesson"]["progress"]["completed"])
+        self.assertEqual(lesson["questions"][0]["type"], "multiple_choice")
+
+    def test_typed_only_checkpoint_can_be_completed_on_first_read(self):
+        self.question.published = False
+        self.question.save()
+        typed = self.row(Question, lesson=self.lesson, position=2, after_card_position=1,
+                         type=Question.Type.TYPE_ANSWER_QUESTION, prompt="What is a young cat called?", options=[],
+                         answer="A kitten", accepted_answers=["A kitten", "Kitten"],
+                         explanation="A young cat is a kitten.")
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        response = self.post("/api/learning/question-attempts/", {
+            "question_id": str(typed.pk), "answer": "  KITTEN!!  "})
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["attempt_type"], "initial")
+        self.assertTrue(response.json()["correct"])
+        self.assertTrue(response.json()["progress"]["completed"])
+
     def test_question_request_validation(self):
         url = "/api/learning/question-attempts/"
         for body in ([], {}, {"question_id": "bad", "answer": "0"},

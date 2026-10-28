@@ -8,6 +8,7 @@ from django.db.models.deletion import ProtectedError
 from django.test import TestCase
 from django.utils import timezone
 
+from .grading import normalize_typed_answer
 from .models import (
     Card, CardProgress, ContentEntity, LearningPath, Lesson, Question,
     QuestionAttempt, SyncLog, Theme,
@@ -15,6 +16,10 @@ from .models import (
 
 
 class LearningSchemaTests(TestCase):
+    def test_typed_answer_normalizes_case_punctuation_spacing_and_apostrophes(self):
+        self.assertEqual(normalize_typed_answer("  I’M  RIGHT_here!! "), "im right here")
+        self.assertEqual(normalize_typed_answer("I'm right here."), "im right here")
+
     def entity(self, kind):
         return ContentEntity.objects.create(id=uuid4(), kind=kind)
 
@@ -215,6 +220,21 @@ class LearningSchemaTests(TestCase):
                 self.question.options, self.question.answer = options, answer
                 self.question.full_clean()
         self.assert_database_rejects(lambda: Question.objects.filter(pk=self.question.pk).update(type="unknown"))
+
+    def test_translation_question_validation(self):
+        self.question.type = Question.Type.TYPE_ANSWER_QUESTION
+        self.question.options = []
+        self.question.answer = "I'm right here."
+        self.question.accepted_answers = ["I'm right here.", "I am right here."]
+        self.question.full_clean()
+        for answers in ([], [""], ["I'm right here.", "i’m right here!"], [123]):
+            with self.subTest(answers=answers), self.assertRaises(ValidationError):
+                self.question.accepted_answers = answers
+                self.question.full_clean()
+        self.question.accepted_answers = ["I'm right here."]
+        self.question.options = [{"id": "x", "text": "Wrong"}]
+        with self.assertRaises(ValidationError):
+            self.question.full_clean()
 
     def test_images_need_alt_text(self):
         self.lesson.image_path = "assets/example.webp"

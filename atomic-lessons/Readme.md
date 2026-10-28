@@ -70,9 +70,26 @@ For expression lessons, use at most six cards. Keep card counts even so a questi
 
 ## Lesson questions
 
-Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type: multiple_choice`, `after_card_position`, `prompt`, four `choices` (each with `id` and `text`), one `correct_choice_ids` reference, `explanation`, and `archived`.
+Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type`, `after_card_position`, `prompt`, `explanation`, and `archived`. A `multiple_choice` question has four `choices` (each with `id` and `text`) and one `correct_choice_ids` reference.
 
-For the current path, author three alternative questions for each checkpoint after cards 2 and 4, and after card 6 when present. This gives six questions for a four-card lesson and nine for a six-card lesson. Questions sharing `after_card_position` form a pool: choose one question from that pool for a checkpoint. Keep `position` unique within the lesson; `after_card_position` may repeat. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. Give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
+A `type_answer_question` can ask for any typed response. It has `accepted_answers` instead of choices or `correct_choice_ids`; the first answer is the canonical feedback answer, and later entries are valid authored alternatives. Keep each answer under 256 characters. The server compares after normalizing case, punctuation, apostrophes, and spacing. Typos and unlisted paraphrases count as wrong and show the canonical answer. This keeps grading predictable for short answers where a one-letter change can change meaning. For lessons with both types at a checkpoint, multiple choice is used until the whole lesson is complete; later reviews use typed questions. Author at least two typed alternatives at each such checkpoint so a wrong answer can move to another question.
+
+For example, an English translation question in `questions/08_translate.yaml` has this shape:
+
+```yaml
+id: 0bd5df4e-408f-4c47-95f7-83820cfaead7
+position: 8
+type: type_answer_question
+after_card_position: 2
+prompt: "Traduisez en anglais : « Je suis tellement contente de te voir. »"
+accepted_answers:
+  - "I'm so happy to see you."
+  - "I am so happy to see you."
+explanation: "La phrase du cours est « I'm so happy to see you. ». Comparez le sens et la structure de votre réponse."
+archived: false
+```
+
+For the current path, author three alternative multiple-choice questions for each checkpoint after cards 2 and 4, and after card 6 when present. Questions sharing `after_card_position` form a pool: choose one question from the preferred type's pool for a checkpoint. Keep `position` unique within the lesson; `after_card_position` may repeat. `after_card_position` expresses that placement while the question remains a lesson child. Use a phrase taught in the preceding pair. For multiple-choice questions, give a French meaning cue and an English sentence with `____` for the missing part. The French cue must make the intended meaning unambiguous. Distractors should be close conjugations, particles, or related words with different meanings; avoid unrelated filler or multiple valid answers. Explain the correct form and the relevant contrasts. Store question content directly; there are no revisions.
 
 ## Validation before committing
 
@@ -88,15 +105,15 @@ The UUID check scans the entire library, requires IDs on all content elements an
 
 ## Early Childhood English inventory and provenance
 
-The Language theme's first path contains 18 lessons, 94 cards, 141 questions, and 376 expression pairs. All 318 rows from the workbook's `Phrases du quotidien` sheet are preserved once. Supporting examples from `Verbes utiles` and `Structures clés`, plus explicitly recorded authored variants, complete the cards. `source-map.csv` records the origin of every expression, including workbook sheet/row or an adaptation note. Keep that map current when editing this path.
+The Language theme's first path contains 18 lessons, 94 cards, 155 questions, and 376 expression pairs. All 318 rows from the workbook's `Phrases du quotidien` sheet are preserved once. Supporting examples from `Verbes utiles` and `Structures clés`, plus explicitly recorded authored variants, complete the cards. `source-map.csv` records the origin of every expression, including workbook sheet/row or an adaptation note. Keep that map current when editing this path.
 
 Source workbook: `Anglais_americain_avec_bebe.xlsx` (SHA-256 `b40b2466b417c4cbfd29b31ca0ec23b1882a980573996d35a47237aa667f4a88`). It is source material only and is not committed here. The translations and expressions are for adult language practice.
 
 | Lesson | Cards | Questions |
 | --- | ---: | ---: |
-| 1. [Morning greetings and reconnecting](themes/language/early-childhood-english/morning-greetings/index.md) | 4 | 6 |
-| 2. [Noticing and commenting on your baby](themes/language/early-childhood-english/noticing-your-baby/index.md) | 6 | 9 |
-| 3. [Holding and carrying your baby](themes/language/early-childhood-english/holding-and-carrying/index.md) | 4 | 6 |
+| 1. [Morning greetings and reconnecting](themes/language/early-childhood-english/morning-greetings/index.md) | 4 | 10 |
+| 2. [Noticing and commenting on your baby](themes/language/early-childhood-english/noticing-your-baby/index.md) | 6 | 15 |
+| 3. [Holding and carrying your baby](themes/language/early-childhood-english/holding-and-carrying/index.md) | 4 | 10 |
 | 4. [Comforting a crying baby](themes/language/early-childhood-english/comforting-a-crying-baby/index.md) | 6 | 9 |
 | 5. [Affection and encouragement](themes/language/early-childhood-english/affection-and-encouragement/index.md) | 6 | 9 |
 | 6. [Feeding, bottles, and milk](themes/language/early-childhood-english/feeding-and-bottles/index.md) | 6 | 9 |

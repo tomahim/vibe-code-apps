@@ -1,0 +1,10 @@
+id: fabd3115-ff60-4687-8a91-b1724512d1f7
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Tu étires tes bras. »'
+accepted_answers:
+- You're stretching your arms.
+- You are stretching your arms.
+explanation: La phrase du cours est « You're stretching your arms. ». Comparez le sens et la structure de votre réponse.
+archived: false

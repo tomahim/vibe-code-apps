@@ -1,0 +1,10 @@
+id: 04bfb015-7d94-4942-bff2-2f90c904e21d
+position: 9
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Je vais te poser doucement. »'
+accepted_answers:
+- I'm going to put you down gently.
+- I am going to put you down gently.
+explanation: La phrase du cours est « I'm going to put you down gently. ». Comparez le sens et la structure de votre réponse.
+archived: false

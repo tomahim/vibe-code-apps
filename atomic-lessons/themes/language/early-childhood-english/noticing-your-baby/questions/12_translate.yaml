@@ -1,0 +1,10 @@
+id: 962d2c8b-8dc1-45bb-956a-a6ebe9cb61b0
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu fais une drôle de tête. »'
+accepted_answers:
+- You're making a funny face.
+- You are making a funny face.
+explanation: La phrase du cours est « You're making a funny face. ». Comparez le sens et la structure de votre réponse.
+archived: false
