@@ -8,4 +8,4 @@ At the 1998 Nagano Olympics, Hasek led the Czech Republic to gold. He made 38 sa
 
 He later won the Stanley Cup with Detroit in 2002, setting a record with six playoff shutouts, and again in 2008. He finished with 389 wins and 81 shutouts, was inducted into the Hall of Fame in 2014, and had won six Vezina Trophies and two Hart Trophies.
 
-Source: [Hockey Hall of Fame, Dominik Hasek](https://www.hhof.com/induction_archives/ind14Hasek.shtml).
+Sources: [Hockey Hall of Fame, Dominik Hasek](https://www.hhof.com/induction_archives/ind14Hasek.shtml) and [BBC Sport, Nagano 1998](http://news.bbc.co.uk/2/hi/sport/winter_olympics_98/58990.stm).

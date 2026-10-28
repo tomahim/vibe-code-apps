@@ -4,7 +4,7 @@ position: 7
 title: "A nation's memory"
 archived: false
 ---
-For Eruzione, who scored the winning goal, the memory is still vivid. Eruzione scored the winning goal against the USSR.
+Eruzione, the captain who scored the winning goal against the USSR, can still take himself back in an instant to what happened that day, as he told Olympics.com.
 
 Members of the 1980 team lit the torch at the opening of the Salt Lake City Winter Games in 2002. The Miracle remains a reminder that preparation, belief and teamwork can beat a more talented opponent. The torch lighting in 2002 showed how the team had become a symbol that the whole nation shared. For hockey, the lesson is that a well-prepared team that works together can beat a more talented opponent when it believes in a clear plan, as Brooks's players did.
 

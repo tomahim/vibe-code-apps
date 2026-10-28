@@ -4,8 +4,8 @@ position: 7
 title: "How the series changed hockey"
 archived: false
 ---
-The Summit Series showed Canadians that the Soviets played a strong, skilled game based on skating, passing and conditioning. NHL players started training harder in the off-season. At the same time, Soviet hockey learned that its stars could compete against pros.
+The Summit Series ended Canada's belief that its professionals would win easily. HHOF notes that Canadians expected a one-sided win, and that the Soviets, amateurs on paper, were supremely fit and played a smooth, skating and passing game that made Canada's rugged style look graceless.
 
-The series also started a long period of exchange between the two hockey worlds. Orr missed it because of a knee injury, but players like Esposito, Henderson and Tretiak became lasting symbols of it. The Hockey Hall of Fame still keeps the series in its exhibits as a turning point. It is remembered as a defining event in the sport.
+Few Canadians knew the names Kharlamov and Tretiak at the start of September. By the end of the month they were as familiar as Esposito, Henderson, Cournoyer and Dryden. Esposito's speech in Vancouver and Henderson's three straight winners are still among the most remembered moments in Canadian hockey.
 
 Source: [Hockey Hall of Fame, Summit Series](https://hhof.com/hockeypedia/summitseries.html).

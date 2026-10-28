@@ -5,15 +5,15 @@ selection: single
 after_card_position: 2
 prompt: "Why did Bowman's playing career end?"
 choices:
-  - id: 72dc7717-5bb7-4a1d-967c-70961212df44
-    text: "A coaching offer"
-  - id: be278fed-29a3-4cd5-bced-0a5bd5994fd9
-    text: "A severe head injury in junior hockey"
-  - id: b8a586cd-df3f-4602-bf1c-eb8f5bfec4c4
-    text: "A contract dispute"
-  - id: fa0880c6-25cd-47ae-ba8a-01e488f915e3
-    text: "A knee operation"
+  - id: c0bb6ba8-5ec2-4d9f-9556-d46a7667d5cc
+    text: "He was suspended"
+  - id: 2cc09ffc-f7f3-4a67-b4bc-a5290856e544
+    text: "An injury cut it short"
+  - id: 8558a0c3-2d83-483c-9d50-e7006c3cdb70
+    text: "He moved to Europe"
+  - id: a3508470-9024-479a-9bf5-8cb85c3446c4
+    text: "He became a referee"
 correct_choice_ids:
-  - be278fed-29a3-4cd5-bced-0a5bd5994fd9
-explanation: "He then began coaching."
+  - 2cc09ffc-f7f3-4a67-b4bc-a5290856e544
+explanation: "NHL.com says his playing career was cut short by injury, and he turned to coaching."
 archived: false

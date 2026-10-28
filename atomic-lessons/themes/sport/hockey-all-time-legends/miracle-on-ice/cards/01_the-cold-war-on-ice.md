@@ -4,6 +4,6 @@ position: 1
 title: "The Cold War on ice"
 archived: false
 ---
-Between 1952 and 1992 the Soviet hockey team enjoyed a near monopoly on Olympic success. The only nation to break its grip was its Cold War rival, the United States, which pulled off the Miracle on Ice at the 1980 Winter Games in Lake Placid, New York.
+The 1980 Winter Games in Lake Placid, New York, took place during the Cold War. The Soviet Union was the powerhouse of international hockey, and the United States team that faced it was a group of college players and amateurs, coached by Herb Brooks. The Olympic medal round was where the two met.
 
-Before the Games, the Soviets were firm favourites. They were full-time players who did nothing but play hockey, and their squad, led by coach Viktor Tikhonov, is widely considered one of the finest ever assembled. The American team was a patchwork of college players and amateurs. Captain Mike Eruzione said they were supposed to finish somewhere between seventh and tenth place.
+Olympics.com describes the US team as a seemingly ragtag bunch of college players and amateurs, led by captain Mike Eruzione, a Boston University graduate. In Eruzione's words, nobody thought they could win a medal, let alone beat the Soviets. The Soviet coach was Viktor Tikhonov, and the Soviets were seen as the team to beat.

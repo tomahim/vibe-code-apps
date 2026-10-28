@@ -3,17 +3,17 @@ position: 11
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "How many saves did Jim Craig make in the game?"
+prompt: "Who scored the power-play goal that tied the game 3-3?"
 choices:
-  - id: 62119963-402b-4484-98ef-33544c71e71f
-    text: "39"
-  - id: ff515d9e-fbbd-435d-a2ce-3b84ac804ffc
-    text: "12"
-  - id: bebf3c38-deda-4863-93eb-4f033d153bd5
-    text: "25"
-  - id: 004c5f79-9ed2-45de-a8dd-f29e0ab6d06e
-    text: "60"
+  - id: 6a4555b8-a76a-4e98-8e63-364c65bd95b7
+    text: "Mark Johnson"
+  - id: 91a098ab-157f-41f4-a3bd-c224e66c6afc
+    text: "Jim Craig"
+  - id: 9c13d7c1-f3b7-47f8-b87a-fb9f698ecc16
+    text: "Mike Eruzione"
+  - id: 646e4323-d0c4-45cc-8ade-f3e9a5cf64f8
+    text: "Herb Brooks"
 correct_choice_ids:
-  - 62119963-402b-4484-98ef-33544c71e71f
-explanation: "Olympics.com says Craig made 39 saves."
+  - 6a4555b8-a76a-4e98-8e63-364c65bd95b7
+explanation: "Johnson tied it, and Eruzione scored the winner."
 archived: false
