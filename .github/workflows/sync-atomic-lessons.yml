@@ -48,7 +48,7 @@ jobs:
 
   sync:
     # Push to master (and manual dispatch on master) publishes content to Neon.
-    # The lg_ tables are created by the API deployment, which runs migrations.
+    # Migrate here as well so publishing new question fields cannot race the API deployment.
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     needs: import-check
     runs-on: ubuntu-latest
@@ -64,6 +64,11 @@ jobs:
             api/requirements.txt
             atomic-lessons/requirements.txt
       - run: python -m pip install -r api/requirements.txt -r atomic-lessons/requirements.txt
+      - name: Migrate the content database
+        working-directory: api
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python manage.py migrate --noinput
       - name: Sync content to the Neon database
         working-directory: api
         env:

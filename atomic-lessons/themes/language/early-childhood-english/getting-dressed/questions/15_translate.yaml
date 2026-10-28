@@ -1,0 +1,23 @@
+id: ec866def-91fe-4b7f-ab3c-a77ebc3930d8
+position: 15
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « On va boutonner ton body. »'
+accepted_answers:
+- Let's button up your onesie.
+- Let us button up your onesie.
+- Let's button your onesie.
+- Let us button your onesie.
+- Let's button up your bodysuit.
+- Let us button up your bodysuit.
+- Let's button your bodysuit.
+- Let us button your bodysuit.
+- Let's do up your onesie.
+- Let us do up your onesie.
+- Let's do up your bodysuit.
+- Let us do up your bodysuit.
+- We're going to button up your onesie.
+- We are going to button up your onesie.
+explanation: La phrase du cours est « Let's button up your onesie. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

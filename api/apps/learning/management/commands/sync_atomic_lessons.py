@@ -261,8 +261,26 @@ class Command(BaseCommand):
 
     def question_fields(self, metadata, location):
         question_type = metadata.get("type")
+        checkpoint = metadata.get("after_card_position")
+        if not isinstance(checkpoint, int) or isinstance(checkpoint, bool) or checkpoint < 1:
+            raise CommandError(f"{location}.after_card_position: expected a positive integer, got {checkpoint!r}")
+        common = {
+            "after_card_position": checkpoint,
+            "prompt": str(self.require(metadata, "prompt", location)),
+            "explanation": str(self.require(metadata, "explanation", location)),
+        }
+        if question_type == "type_answer_question":
+            if any(key in metadata for key in ("choices", "correct_choice_ids", "selection")):
+                raise CommandError(f"{location}: typed-answer questions use accepted_answers, not choices")
+            answers = metadata.get("accepted_answers")
+            if not isinstance(answers, list) or not answers or any(not isinstance(value, str) for value in answers):
+                raise CommandError(f"{location}.accepted_answers: expected a nonempty list of answers")
+            return {**common, "type": Question.Type.TYPE_ANSWER_QUESTION, "options": [],
+                    "answer": answers[0], "accepted_answers": answers}
         if question_type != "multiple_choice":
-            raise CommandError(f"{location}.type: only multiple_choice is supported, got {question_type!r}")
+            raise CommandError(f"{location}.type: unsupported question type {question_type!r}")
+        if "accepted_answers" in metadata:
+            raise CommandError(f"{location}.accepted_answers: choice questions do not use typed answers")
         selection = metadata.get("selection", "single")
         if selection != "single":
             raise CommandError(f"{location}.selection: only single-answer questions are supported, got {selection!r}")
@@ -277,17 +295,8 @@ class Command(BaseCommand):
             if not isinstance(choice, dict) or "id" not in choice or "text" not in choice:
                 raise CommandError(f"{location}.choices[{index}]: each choice needs id and text")
             options.append({"id": str(choice["id"]), "text": str(choice["text"])})
-        checkpoint = metadata.get("after_card_position")
-        if not isinstance(checkpoint, int) or isinstance(checkpoint, bool) or checkpoint < 1:
-            raise CommandError(f"{location}.after_card_position: expected a positive integer, got {checkpoint!r}")
-        return {
-            "type": Question.Type.MULTIPLE_CHOICE,
-            "after_card_position": checkpoint,
-            "prompt": str(self.require(metadata, "prompt", location)),
-            "options": options,
-            "answer": str(correct[0]),
-            "explanation": str(self.require(metadata, "explanation", location)),
-        }
+        return {**common, "type": Question.Type.MULTIPLE_CHOICE, "options": options,
+                "answer": str(correct[0]), "accepted_answers": []}
 
     # --- Writing ----------------------------------------------------------
 

@@ -1,0 +1,16 @@
+id: 86d60665-48f1-4d02-b6f0-86d89d423a0c
+position: 11
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Ça risque d''être un peu froid. »'
+accepted_answers:
+- This might feel a little cold.
+- This may feel a little cold.
+- This could feel a little cold.
+- This might feel a bit cold.
+- This may feel a bit cold.
+- It might feel a little cold.
+- It may feel a little cold.
+explanation: La phrase du cours est « This might feel a little cold. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

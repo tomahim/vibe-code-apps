@@ -1,0 +1,14 @@
+id: 843ef262-4e11-4670-a508-0bb204f9b7cb
+position: 11
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « J''adore passer du temps avec toi. »'
+accepted_answers:
+- I love spending time with you.
+- I love being with you.
+- I love to spend time with you.
+- I really love spending time with you.
+- I enjoy spending time with you.
+explanation: La phrase du cours est « I love spending time with you. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

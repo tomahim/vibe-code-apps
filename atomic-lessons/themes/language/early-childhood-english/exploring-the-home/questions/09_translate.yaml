@@ -1,0 +1,17 @@
+id: d262b170-c437-4921-9518-023a0b7eee68
+position: 9
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Je vais ranger la vaisselle. »'
+accepted_answers:
+- I'm going to put the dishes away.
+- I am going to put the dishes away.
+- I'm going to put away the dishes.
+- I am going to put away the dishes.
+- I'm going to tidy the dishes.
+- I am going to tidy the dishes.
+- I'm going to tidy up the dishes.
+- I am going to tidy up the dishes.
+explanation: La phrase du cours est « I'm going to put the dishes away. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

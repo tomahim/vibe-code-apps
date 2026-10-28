@@ -1,0 +1,15 @@
+id: 7e4078d8-c667-4642-9da2-4d4d440b2018
+position: 8
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais ouvrir le frigo. »'
+accepted_answers:
+- I'm going to open the fridge.
+- I am going to open the fridge.
+- I'm going to open the refrigerator.
+- I am going to open the refrigerator.
+- I'm going to open up the fridge.
+- I am going to open up the fridge.
+explanation: La phrase du cours est « I'm going to open the fridge. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

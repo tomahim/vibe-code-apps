@@ -129,6 +129,25 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertEqual(SyncLog.objects.count(), 1)
         self.assertEqual(Card.objects.count(), 1)
 
+    def test_translation_question_imports_without_choices(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            question_file = root / "themes/language/early-english/greetings/questions/02_translate.yaml"
+            translation_id = uuid.uuid4()
+            question_file.write_text(
+                f"id: {translation_id}\nposition: 2\ntype: type_answer_question\n"
+                "after_card_position: 1\nprompt: Bonjour.\n"
+                "accepted_answers:\n- Good morning.\n- Hello.\n"
+                "explanation: Both are natural greetings.\narchived: false\n",
+                encoding="utf-8",
+            )
+            run_sync(root, "7" * 40)
+        question = Question.objects.get(pk=translation_id)
+        self.assertEqual(question.type, Question.Type.TYPE_ANSWER_QUESTION)
+        self.assertEqual(question.options, [])
+        self.assertEqual(question.answer, "Good morning.")
+        self.assertEqual(question.accepted_answers, ["Good morning.", "Hello."])
+
     def test_second_commit_updates_changed_content(self):
         with TemporaryDirectory() as tmp:
             root = write_library(Path(tmp))

@@ -1,0 +1,19 @@
+id: 963aea12-3e2d-4fb3-b09f-7511428bf213
+position: 11
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Tu donnes des coups de pied. »'
+accepted_answers:
+- You're kicking your legs.
+- You are kicking your legs.
+- You're kicking your feet.
+- You are kicking your feet.
+- You're kicking with your legs.
+- You are kicking with your legs.
+- You're kicking your little legs.
+- You are kicking your little legs.
+- You're kicking your legs around.
+- You are kicking your legs around.
+explanation: La phrase du cours est « You're kicking your legs. ». Comparez le sens et la structure de
+  votre réponse.
+archived: false

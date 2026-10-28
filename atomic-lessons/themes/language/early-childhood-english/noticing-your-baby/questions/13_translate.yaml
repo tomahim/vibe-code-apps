@@ -1,0 +1,21 @@
+id: 8ff53406-2441-475e-941b-34b910f36be2
+position: 13
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Tu découvres le monde. »'
+accepted_answers:
+- You're discovering the world.
+- You are discovering the world.
+- You're exploring the world.
+- You are exploring the world.
+- You're discovering the world around you.
+- You are discovering the world around you.
+- You're exploring the world around you.
+- You are exploring the world around you.
+- You're discovering your world.
+- You are discovering your world.
+- You're exploring your world.
+- You are exploring your world.
+explanation: La phrase du cours est « You're discovering the world. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

@@ -1,0 +1,25 @@
+id: e5e6d55f-4655-48c1-a66c-8e7a206e5a3c
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais te mettre dans la poussette. »'
+accepted_answers:
+- I'm going to put you in the stroller.
+- I am going to put you in the stroller.
+- I'm going to put you in the pram.
+- I am going to put you in the pram.
+- I'm going to put you in the pushchair.
+- I am going to put you in the pushchair.
+- I'm going to put you in the buggy.
+- I am going to put you in the buggy.
+- I'm going to put you into the stroller.
+- I am going to put you into the stroller.
+- I'm going to put you in your stroller.
+- I am going to put you in your stroller.
+- I'm going to place you in the stroller.
+- I am going to place you in the stroller.
+- I'm going to sit you in the stroller.
+- I am going to sit you in the stroller.
+explanation: La phrase du cours est « I'm going to put you in the stroller. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

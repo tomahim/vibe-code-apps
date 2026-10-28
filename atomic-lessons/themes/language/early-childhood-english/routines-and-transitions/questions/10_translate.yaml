@@ -1,0 +1,17 @@
+id: eadeee14-7274-4078-9670-bf49e60547c7
+position: 10
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Je vais le ramasser. »'
+accepted_answers:
+- I'm going to pick it up.
+- I am going to pick it up.
+- I'm going to pick that up.
+- I am going to pick that up.
+- I'm going to pick this up.
+- I am going to pick this up.
+- I'm going to grab it.
+- I am going to grab it.
+explanation: La phrase du cours est « I'm going to pick it up. ». Comparez le sens et la structure de
+  votre réponse.
+archived: false

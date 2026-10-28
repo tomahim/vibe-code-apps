@@ -1,0 +1,17 @@
+id: f20e1316-1a7d-4319-9576-b84ebca55d8d
+position: 7
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Je vais te montrer la maison. »'
+accepted_answers:
+- I'm going to show you around the house.
+- I am going to show you around the house.
+- I'm going to show you the house.
+- I am going to show you the house.
+- I'm going to show you around the home.
+- I am going to show you around the home.
+- I'm going to give you a tour of the house.
+- I am going to give you a tour of the house.
+explanation: La phrase du cours est « I'm going to show you around the house. ». Comparez le sens et la
+  structure de votre réponse.
+archived: false

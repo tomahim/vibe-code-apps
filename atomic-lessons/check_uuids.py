@@ -113,13 +113,14 @@ def check_library(root: Path) -> tuple[list[str], int]:
         walk(data, relative)
         if kind == "question":
             if data.get("type") == "type_answer_question":
+                if any(key in data for key in ("choices", "correct_choice_ids", "selection")):
+                    errors.append(f"{relative}: typed-answer questions use accepted_answers, not choices")
                 answers = data.get("accepted_answers")
                 if not isinstance(answers, list) or not answers or any(
-                    not isinstance(answer, str) or not answer.strip() for answer in answers
+                    not isinstance(answer, str) or not answer.strip() or len(answer) > 255
+                    for answer in answers
                 ):
-                    errors.append(f"{relative}.accepted_answers: expected a nonempty list of answers")
-                if "choices" in data or "correct_choice_ids" in data:
-                    errors.append(f"{relative}: typed questions cannot declare answer choices")
+                    errors.append(f"{relative}.accepted_answers: expected nonempty answers up to 255 characters")
                 continue
             choices = data.get("choices")
             if not isinstance(choices, list) or len(choices) != 4:

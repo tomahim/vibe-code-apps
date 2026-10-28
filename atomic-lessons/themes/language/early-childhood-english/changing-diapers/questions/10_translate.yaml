@@ -1,0 +1,17 @@
+id: 7b856ec8-98c4-4e3a-bb1b-40abfa152aca
+position: 10
+type: type_answer_question
+after_card_position: 2
+prompt: 'Traduisez en anglais : « Voyons voir. »'
+accepted_answers:
+- Let's take a look.
+- Let us take a look.
+- Let's have a look.
+- Let us have a look.
+- Let's see.
+- Let us see.
+- Let's check.
+- Let us check.
+explanation: La phrase du cours est « Let's take a look. ». Comparez le sens et la structure de votre
+  réponse.
+archived: false

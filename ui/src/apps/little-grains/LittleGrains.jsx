@@ -98,6 +98,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
 
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
+  const typedQuestion = question?.type === "type_answer_question";
   const reviewCard = data?.cards.find((item) => viewStep?.type === "revisit" && item.id === viewStep.id);
   const cardIndex = data?.cards.findIndex((item) => item.id === (card || reviewCard)?.id) ?? -1;
   const previousCard = question
@@ -123,7 +124,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   }
 
   async function submitAnswer() {
-    if (!question || !choice || busy) return;
+    if (!question || !choice.trim() || busy) return;
     setBusy(true); setError("");
     try {
       const result = await api("question-attempts/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer: choice }) });
@@ -159,7 +160,24 @@ function LessonReader({ lessonId, onClose, onProgress }) {
           {data.lesson.image_url && <img className="grains-lesson-image" src={data.lesson.image_url} alt={data.lesson.image_alt} />}
           {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
           {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
-          {question && <div className="grains-question">{previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CHECK YOUR UNDERSTANDING</p><h3>{question.prompt}</h3><div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>{feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status"><strong>{feedback.correct ? feedback.attempt_type === "review" ? "That’s right!" : "That’s right! +1 carrot" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong><Markdown source={feedback.explanation} /><button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button></div> : <button className="grains-primary" disabled={!choice || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}</div>}
+          {question && <div className="grains-question">
+            {previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={openPreviousCard}>← Previous card</button>}
+            <p className="grains-card-index">{typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
+            <h3>{question.prompt}</h3>
+            {typedQuestion ? <div className="grains-typed-answer">
+              <label htmlFor={`grains-answer-${question.id}`}>Your answer</label>
+              <textarea id={`grains-answer-${question.id}`} rows={3} maxLength={255} value={choice}
+                onChange={(event) => setChoice(event.target.value)} disabled={!!feedback}
+                autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
+              <p>Capitalization and punctuation do not have to match.</p>
+            </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
+            {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
+              <strong>{feedback.correct ? feedback.attempt_type === "review" ? "That’s right!" : "That’s right! +1 carrot" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
+              {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
+              <Markdown source={feedback.explanation} />
+              <button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button>
+            </div> : <button className="grains-primary" disabled={!choice.trim() || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}
+          </div>}
           {!viewStep && <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>All cards read and questions answered. Your garden has grown.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>}
           {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3>{reviewCard.illustration_url && <img src={reviewCard.illustration_url} alt={reviewCard.illustration_alt} />}<Markdown source={reviewCard.body_markdown} /></article>}
         </div>

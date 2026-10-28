@@ -1,0 +1,13 @@
+id: 8c086665-d144-4b0d-b3ad-635ed5b08b87
+position: 10
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « On attend au feu rouge. »'
+accepted_answers:
+- We're waiting at a red light.
+- We are waiting at a red light.
+- We're waiting at the red light.
+- We are waiting at the red light.
+explanation: La phrase du cours est « We're waiting at a red light. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

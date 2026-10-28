@@ -1,0 +1,20 @@
+id: 8c458201-afd0-40bd-bcfb-944d57c61b66
+position: 14
+type: type_answer_question
+after_card_position: 6
+prompt: 'Traduisez en anglais : « Un peu de lait a coulé. »'
+accepted_answers:
+- A little milk dribbled out.
+- A little milk spilled out.
+- A little milk came out.
+- A little milk leaked out.
+- A bit of milk dribbled out.
+- A bit of milk spilled out.
+- A bit of milk came out.
+- A bit of milk leaked out.
+- Some milk dribbled out.
+- A little milk spilled.
+- A little milk leaked.
+explanation: La phrase du cours est « A little milk dribbled out. ». Comparez le sens et la structure
+  de votre réponse.
+archived: false

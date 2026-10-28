@@ -1,0 +1,22 @@
+id: 4171816f-a9ce-467f-935b-9648baef5882
+position: 12
+type: type_answer_question
+after_card_position: 4
+prompt: 'Traduisez en anglais : « Ça va aller. »'
+accepted_answers:
+- It's going to be okay.
+- It is going to be okay.
+- It's going to be OK.
+- It is going to be OK.
+- It's going to be all right.
+- It is going to be all right.
+- It's going to be alright.
+- It is going to be alright.
+- It's going to be fine.
+- It is going to be fine.
+- It will be okay.
+- It will be all right.
+- It will be fine.
+explanation: La phrase du cours est « It's going to be okay. ». Comparez le sens et la structure de votre
+  réponse.
+archived: false
