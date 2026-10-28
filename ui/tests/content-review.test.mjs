@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { bodyLines, diffLines, inlineSegments, unitSections } from '../src/apps/content-review/review-utils.js';
+import { bodyLines, canEdit, diffLines, draftFromUnit, editChanges, inlineSegments, mergeSavedUnit, unitSections } from '../src/apps/content-review/review-utils.js';
 
 test('inlineSegments splits bold markers', () => {
   assert.deepEqual(inlineSegments("**Let's go.** Slowly"), [
@@ -37,4 +37,46 @@ test('unitSections groups units by breadcrumb chain', () => {
   assert.equal(sections[1].title, 'Bath time');
   assert.equal(sections[1].depth, 3);
   assert.deepEqual(sections[1].units.map((u) => u.key), ['b', 'c']);
+});
+
+const question = {
+  kind: 'question',
+  change: 'added',
+  parse_error: null,
+  question: {
+    prompt: 'Q?',
+    explanation: 'Because.',
+    answer: 'b',
+    options: ['a', 'b', 'c', 'd'].map((id) => ({ id, text: `opt ${id}` })),
+  },
+};
+const lesson = { kind: 'lesson', change: 'modified', parse_error: null, title: 'T', description: 'D', body: 'B' };
+
+test('canEdit allows content kinds that parse and are not removed', () => {
+  assert.equal(canEdit(question), true);
+  assert.equal(canEdit(lesson), true);
+  assert.equal(canEdit({ ...lesson, change: 'removed' }), false);
+  assert.equal(canEdit({ ...lesson, parse_error: 'bad' }), false);
+  assert.equal(canEdit({ ...lesson, kind: 'theme' }), false);
+  assert.equal(canEdit({ ...question, question: { ...question.question, options: [] } }), false);
+});
+
+test('editChanges sends only changed fields', () => {
+  assert.deepEqual(editChanges(lesson, draftFromUnit(lesson)), {});
+  assert.deepEqual(editChanges(lesson, { ...draftFromUnit(lesson), title: 'New', body: 'B ' }), { title: 'New' });
+  const draft = draftFromUnit(question);
+  assert.deepEqual(editChanges(question, draft), {});
+  draft.options[2].text = 'changed';
+  draft.answer = 'c';
+  const changes = editChanges(question, draft);
+  assert.deepEqual(Object.keys(changes).sort(), ['choices', 'correct_choice_id']);
+  assert.equal(changes.choices.length, 4);
+  assert.equal(changes.choices[0].id, 'a');
+});
+
+test('mergeSavedUnit keeps breadcrumbs and diff', () => {
+  const merged = mergeSavedUnit({ ...lesson, breadcrumbs: ['x'], patch: 'p' }, { title: 'N', description: 'd', body: 'b', question: null, parse_error: null });
+  assert.equal(merged.title, 'N');
+  assert.deepEqual(merged.breadcrumbs, ['x']);
+  assert.equal(merged.patch, 'p');
 });

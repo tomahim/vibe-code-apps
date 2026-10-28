@@ -6,7 +6,11 @@ import {
   CHANGE_LABELS,
   KIND_LABELS,
   bodyLines,
+  canEdit,
+  draftFromUnit,
+  editChanges,
   diffLines,
+  mergeSavedUnit,
   unitSections,
 } from "./review-utils.js";
 import "./content-review.css";
@@ -144,9 +148,118 @@ function FeedbackBox({ onSend, compact }) {
   );
 }
 
-function UnitDetail({ unit, onFeedback }) {
+function UnitEditor({ unit, onSave, onCancel, onReload }) {
+  const [draft, setDraft] = useState(() => draftFromUnit(unit));
+  const [state, setState] = useState({ status: "idle", message: "", conflict: false });
+  const changes = editChanges(unit, draft);
+  const isQuestion = unit.kind === "question";
+  const hasDescription = unit.kind === "lesson" || unit.kind === "learning_path";
+
+  function set(key, value) {
+    setDraft((current) => ({ ...current, [key]: value }));
+    if (state.status === "failed") setState({ status: "idle", message: "", conflict: false });
+  }
+
+  function setOption(index, text) {
+    set("options", draft.options.map((option, i) => (i === index ? { ...option, text } : option)));
+  }
+
+  async function save() {
+    setState({ status: "saving", message: "", conflict: false });
+    try {
+      const response = await onSave(unit, changes);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const error = new Error(data.error || "Could not save the edit.");
+        error.conflict = response.status === 409;
+        throw error;
+      }
+      onCancel(data);
+    } catch (err) {
+      setState({ status: "failed", message: err.message || "Could not save the edit.", conflict: Boolean(err.conflict) });
+    }
+  }
+
+  return (
+    <div className="unit-editor">
+      {!isQuestion && (
+        <label>
+          Title
+          <input type="text" value={draft.title} maxLength={200} onChange={(e) => set("title", e.target.value)} />
+        </label>
+      )}
+      {hasDescription && (
+        <label>
+          Description
+          <textarea rows={2} value={draft.description} onChange={(e) => set("description", e.target.value)} />
+        </label>
+      )}
+      {!isQuestion && (
+        <label>
+          {unit.kind === "card" ? "Card text" : "Intro text"}
+          <textarea rows={unit.kind === "card" ? 10 : 4} value={draft.body} onChange={(e) => set("body", e.target.value)} />
+        </label>
+      )}
+      {isQuestion && (
+        <>
+          <label>
+            Question
+            <textarea rows={3} value={draft.prompt} onChange={(e) => set("prompt", e.target.value)} />
+          </label>
+          <fieldset className="editor-choices">
+            <legend>Choices - select the correct one</legend>
+            {draft.options.map((option, index) => (
+              <div key={option.id} className="editor-choice">
+                <input
+                  type="radio"
+                  name="correct-choice"
+                  aria-label={`Choice ${index + 1} is correct`}
+                  checked={draft.answer === option.id}
+                  onChange={() => set("answer", option.id)}
+                />
+                <input
+                  type="text"
+                  aria-label={`Choice ${index + 1}`}
+                  value={option.text}
+                  onChange={(e) => setOption(index, e.target.value)}
+                />
+              </div>
+            ))}
+          </fieldset>
+          <label>
+            Explanation
+            <textarea rows={3} value={draft.explanation} onChange={(e) => set("explanation", e.target.value)} />
+          </label>
+        </>
+      )}
+      <p className="editor-note">Saving commits this file to the pull request branch.</p>
+      <div className="feedback-actions">
+        <button type="button" disabled={!Object.keys(changes).length || state.status === "saving"} onClick={save}>
+          {state.status === "saving" ? "Committing…" : "Save as commit"}
+        </button>
+        <button type="button" className="secondary" disabled={state.status === "saving"} onClick={() => onCancel(null)}>
+          Cancel
+        </button>
+        {state.status === "failed" && <span className="feedback-error">{state.message}</span>}
+        {state.conflict && (
+          <button type="button" className="secondary" onClick={onReload}>
+            Reload the pull request
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function UnitDetail({ unit, onFeedback, onSave, onReload }) {
   const [view, setView] = useState("preview");
-  useEffect(() => setView("preview"), [unit.key]);
+  const [editing, setEditing] = useState(false);
+  const [saved, setSaved] = useState(null);
+  useEffect(() => {
+    setView("preview");
+    setEditing(false);
+    setSaved(null);
+  }, [unit.key]);
 
   return (
     <article className="unit-detail">
@@ -171,7 +284,31 @@ function UnitDetail({ unit, onFeedback }) {
       {unit.change === "removed" && <p className="unit-banner">This file is removed by the pull request.</p>}
       {unit.parse_error && <p className="unit-banner unit-banner-warning">Could not parse the metadata: {unit.parse_error}</p>}
 
-      {view === "changes" ? (
+      {saved && (
+        <p className="unit-banner unit-banner-saved">
+          Committed to the pull request branch
+          {saved.url && (
+            <>
+              {" - "}
+              <a href={saved.url} target="_blank" rel="noreferrer">
+                see the commit
+              </a>
+            </>
+          )}
+        </p>
+      )}
+
+      {view === "preview" && editing ? (
+        <UnitEditor
+          unit={unit}
+          onSave={onSave}
+          onReload={onReload}
+          onCancel={(result) => {
+            setEditing(false);
+            if (result) setSaved(result.commit);
+          }}
+        />
+      ) : view === "changes" ? (
         <DiffView patch={unit.patch} />
       ) : unit.kind === "question" && unit.question ? (
         <QuestionPreview question={unit.question} />
@@ -179,6 +316,12 @@ function UnitDetail({ unit, onFeedback }) {
         <BodyPreview body={unit.body} />
       ) : (
         <p className="diff-empty">Nothing to preview for this file.</p>
+      )}
+
+      {view === "preview" && !editing && canEdit(unit) && (
+        <button type="button" className="edit-button" onClick={() => setEditing(true)}>
+          Edit
+        </button>
       )}
 
       <FeedbackBox compact onSend={(text) => onFeedback(text, unit)} />
@@ -208,24 +351,50 @@ function ReviewView({ prNumber, onBack }) {
   const [error, setError] = useState("");
   const [selectedKey, setSelectedKey] = useState("");
 
+  // Loads the PR. A reload keeps the current selection; the first load picks one.
+  async function load(keepSelection, isCancelled = () => false) {
+    try {
+      const response = await reviewFetch(`/api/apps/content-review/prs/${prNumber}`);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Could not load the pull request.");
+      if (isCancelled()) return;
+      setDetail(data);
+      if (keepSelection) return;
+      if (data.units.length) setSelectedKey(data.units[0].key);
+      else if (data.other_changes.length) setSelectedKey(`other:${data.other_changes[0].path}`);
+    } catch (err) {
+      if (!isCancelled() && err.message !== "signed out") setError(err.message);
+    }
+  }
+
   useEffect(() => {
     let cancelled = false;
-    reviewFetch(`/api/apps/content-review/prs/${prNumber}`)
-      .then(async (response) => {
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.error || "Could not load the pull request.");
-        if (cancelled) return;
-        setDetail(data);
-        if (data.units.length) setSelectedKey(data.units[0].key);
-        else if (data.other_changes.length) setSelectedKey(`other:${data.other_changes[0].path}`);
-      })
-      .catch((err) => {
-        if (!cancelled && err.message !== "signed out") setError(err.message);
-      });
+    load(false, () => cancelled);
     return () => {
       cancelled = true;
     };
   }, [prNumber]);
+
+  // Commit one quick edit on the PR branch; head_sha is the head the reviewer is looking at.
+  async function saveEdit(unit, changes) {
+    const response = await reviewFetch(`/api/apps/content-review/prs/${prNumber}/edits`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: unit.path, head_sha: detail.pr.head_sha, changes }),
+    });
+    if (response.ok) {
+      const data = await response.clone().json().catch(() => null);
+      if (data) {
+        setDetail((current) => ({
+          ...current,
+          pr: { ...current.pr, head_sha: data.head_sha },
+          units: current.units.map((u) => (u.key === unit.key ? mergeSavedUnit(u, data.unit) : u)),
+        }));
+        load(true); // refresh diffs and titles from GitHub, keeping the selection
+      }
+    }
+    return response;
+  }
 
   function sendFeedback(text, unit) {
     return reviewFetch(`/api/apps/content-review/prs/${prNumber}/comments`, {
@@ -325,7 +494,7 @@ function ReviewView({ prNumber, onBack }) {
         </aside>
 
         <section className="review-main">
-          {selected && <UnitDetail unit={selected} onFeedback={sendFeedback} />}
+          {selected && <UnitDetail unit={selected} onFeedback={sendFeedback} onSave={saveEdit} onReload={() => load(true)} />}
           {!selected && selectedKey.startsWith("other:") && (
             <OtherChange
               change={otherChanges.find((change) => `other:${change.path}` === selectedKey)}
