@@ -4,17 +4,17 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "At what age did she leave school?"
+prompt: "How did Rai describe village life in Bhojpur?"
 choices:
   - id: 0235926a-f30f-4b45-a76d-ae3d67e9b191
-    text: "12"
+    text: "Subsistence farming and carrying heavy loads"
   - id: 8fbd47ae-4f9e-47ac-be65-e189cc07dbb0
-    text: "6"
+    text: "Running races"
   - id: 52ffcee5-d8a0-4175-b46a-e0b47ee554d2
-    text: "16"
+    text: "Guiding trekkers"
   - id: 61871a36-1a98-4a95-930e-46019d54c97b
-    text: "18"
+    text: "Working in a factory"
 correct_choice_ids:
   - 0235926a-f30f-4b45-a76d-ae3d67e9b191
-explanation: "She left school to help her parents."
+explanation: "She said it was little more than subsistence farming and carrying loads."
 archived: false

@@ -4,8 +4,8 @@ position: 1
 title: "From Auburn to the trails"
 archived: false
 ---
-Ann Trason was born on August 30, 1960, and comes from Auburn, California, the town where the Western States 100 finishes. She was a good runner in high school, but a knee injury kept her from competing in college, and injuries followed her through her whole career. Her ultra story began late, in 1985, when she entered the American River 50 Mile at age 24.
+Ann Trason was born on August 30, 1960. She was a top runner at Pacific Grove High School on the Monterey Peninsula in California, but a knee injury cost her the chance to run for the University of New Mexico, where she had a scholarship. Her first ultra attempt was the American River 50 Mile in 1981, at age 20, and she dropped out early.
 
-She won that first ultra and set a course record in it. It was a sign of what was coming. Over her career she set 20 world records, which is why many people consider her the most successful female ultrarunner of all time.
+In 1985 she ran the same race again in hot weather. This time she won and set the women's course record of 7:09:01, according to the Ultrarunning Hall of Fame. Over her career she set 20 world records, which is why many people consider her the most successful female ultrarunner of all time.
 
-Auburn sits in the Sierra Nevada foothills of Northern California, so Trason grew up close to the trails and canyons that the race follows. Knowing local terrain and heat gave her a real advantage when she finally started racing there.
+The American River 50 Mile is held in northern California on a mix of road and trail. Trason came back to lower her own record there, first to 6:23 two years later and then to 6:09:08 eight years after her win.

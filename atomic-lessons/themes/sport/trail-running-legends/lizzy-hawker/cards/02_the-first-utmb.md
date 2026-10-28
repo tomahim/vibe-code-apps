@@ -4,8 +4,8 @@ position: 2
 title: "The first UTMB"
 archived: false
 ---
-Hawker first ran the Ultra-Trail du Mont-Blanc in 2005. She had never owned a pair of trail running shoes until 10 days before the race, yet she won it at her first attempt. The North Face began sponsoring her the same year.
+Hawker first ran the Ultra-Trail du Mont-Blanc in 2005. National Geographic reports that the race was an afterthought to a ten day climbing vacation, and that she decided to buy trail running shoes just ten days before the start. It was her first mountain race, and she won it.
 
-UTMB is a loop of about 170 kilometres around Mont Blanc through France, Italy and Switzerland. Winning it on a first attempt, with almost no trail experience, was a surprise. It started a career in which she became one of the most successful athletes ever to run it.
+UTMB is a loop of about 170 kilometres around Mont Blanc through France, Italy and Switzerland. National Geographic described it as 103 miles with more than 31,000 feet of uphill running. Winning it on a first attempt, with almost no trail experience, was a surprise.
 
-UTMB passes through three countries and climbs about 10,000 metres in total. Starting with almost no trail experience and winning is extremely rare, which is why the story of the borrowed first shoes is still told often.
+It started a career in which she became one of the most successful athletes ever to run the race, with five wins in total. The story of the new shoes is still told often because it is so unusual for a first mountain race to end in a win.

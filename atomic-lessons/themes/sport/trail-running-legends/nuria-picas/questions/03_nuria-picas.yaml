@@ -4,17 +4,17 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "Which series title did she win in 2012?"
+prompt: "Which Australian race did Picas win in 2014, according to Marca?"
 choices:
   - id: cdfc381b-1e82-4f21-b422-85f14beca903
-    text: "Golden Trail Series"
+    text: "The North Face 100"
   - id: 9655afd2-a541-4718-b52a-739794522e84
-    text: "Western States"
+    text: "Tarawera Ultra"
   - id: 8e1b14dd-32d5-42a3-a6f1-374898439a62
-    text: "UTMB"
+    text: "Hardrock 100"
   - id: a91ef9e5-9912-4dc7-b0d2-75ea4e827514
-    text: "Skyrunner World Series SkyUltra"
+    text: "Comrades"
 correct_choice_ids:
-  - a91ef9e5-9912-4dc7-b0d2-75ea4e827514
-explanation: "She won the SkyUltra title."
+  - cdfc381b-1e82-4f21-b422-85f14beca903
+explanation: "Her 2014 wins included the North Face 100 in Australia."
 archived: false

@@ -4,7 +4,7 @@ position: 5
 title: "What the win meant"
 archived: false
 ---
-In an iRunFar interview after the race, Picas talked about why winning UTMB was a dream come true, what went wrong late in the race and what she felt when she finished. The interviewers noted that she had been second twice, and had also tried twice without finishing.
+In an iRunFar interview after the race, Picas talked about why winning UTMB was a dream come true, what went wrong late in the race and what she felt when she finished. The interviewers noted that she had been second twice at UTMB.
 
 For many fans her win was special because of the history behind it. It felt earned. Persistence is a theme that connects many of the runners in this path, from Meltzer's 100 mile streak to Dauwalter's comeback from a DNF at Hardrock.
 

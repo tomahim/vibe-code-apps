@@ -4,17 +4,17 @@ position: 4
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "Where did he live in a cave for ten months?"
+prompt: "What was the name of True's dog?"
 choices:
   - id: c85719aa-2612-4a46-88ae-6e2fe7e572c7
-    text: "Hawaii"
+    text: "True"
   - id: 90c51838-e85a-494c-87f1-7f190ad692bb
-    text: "Mexico"
+    text: "Max"
   - id: a6883dd8-4691-4011-9a6e-a5815d575009
-    text: "Colorado"
+    text: "Korima"
   - id: 69b24400-b672-4e5d-a91c-4e2a2d5e0465
-    text: "Alaska"
+    text: "Blanco"
 correct_choice_ids:
   - c85719aa-2612-4a46-88ae-6e2fe7e572c7
-explanation: "He lived in a cave in Hawaii."
+explanation: "The dog was called True."
 archived: false

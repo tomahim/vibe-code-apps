@@ -4,17 +4,17 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "In which year did Trason begin her ultra career with the American River 50 Mile?"
+prompt: "In which year did Trason win the American River 50 Mile in a record time?"
 choices:
   - id: 323e4b87-3e80-4500-9ca6-638ea34a5327
-    text: "1975"
+    text: "1981"
   - id: 630f00ef-7c2a-427a-a9c6-d40b1481b72f
     text: "1985"
   - id: f067ece6-5e38-4ce0-91bb-c6025e3c5075
-    text: "1992"
+    text: "1989"
   - id: a3651b01-6a26-4c46-a54a-c4d6de7de23b
-    text: "2003"
+    text: "1994"
 correct_choice_ids:
   - 630f00ef-7c2a-427a-a9c6-d40b1481b72f
-explanation: "She entered the American River 50 Miler in 1985 at age 24."
+explanation: "She won in 7:09:01 in 1985, a record."
 archived: false

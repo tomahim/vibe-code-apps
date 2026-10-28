@@ -4,8 +4,8 @@ position: 6
 title: "Catalonia and the sport"
 archived: false
 ---
-Picas belongs to a strong group of Catalan athletes in mountain running. Kilian Jornet and Picas both come from Catalonia, and both have won at the highest level of the sport.
+Picas and Kilian Jornet both come from Catalonia, and both have won at the highest level of the sport. Her UTMB profile introduces her as a Catalan runner, and her own biography lists victories at races close to home, including the Salomon Ultra Pirineu in the Pyrenees, which her own biography lists among her victories.
 
-Catalonia has high mountains in the Pyrenees, a strong culture of hiking and mountaineering, and many local races. That environment helps young athletes grow up with trails nearby and gives them role models.
+The Pyrenees form the border between Spain and France and stretch from the Atlantic to the Mediterranean. Catalonia has high mountains in the Pyrenees, and its mountain runners have followed one another to international success.
 
-The Pyrenees form the border between Spain and France and stretch from the Atlantic to the Mediterranean. Their trails, villages and mountain huts give Catalan athletes natural places to train from a young age, and the region has a strong tradition of mountain races.
+Looking at Jornet and Picas together shows two different careers from the same region: one built on speed and records on big mountains, the other on consistency across a whole season and on persistence at one race.

@@ -4,17 +4,17 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "What did Forsberg do at the Storulvån Mountain Lodge?"
+prompt: "In which Swedish region did Forsberg grow up?"
 choices:
   - id: 4f49517b-b4e1-4046-a07c-b461f3586492
-    text: "Taught skiing"
+    text: "High Coast"
   - id: 2e50785e-3bc8-42a6-93de-7effca2593ee
-    text: "Worked as a waitress"
+    text: "Lapland"
   - id: ef5459fa-f753-4049-8b92-88147518f889
-    text: "Cleaned trails"
+    text: "Skåne"
   - id: 989fb64b-e96f-4ef5-a6b6-1f4ee71a6af9
-    text: "Guided climbers"
+    text: "Dalarna"
 correct_choice_ids:
-  - 2e50785e-3bc8-42a6-93de-7effca2593ee
-explanation: "She worked there at age 18."
+  - 4f49517b-b4e1-4046-a07c-b461f3586492
+explanation: "She grew up in Noraström on Sweden's High Coast."
 archived: false

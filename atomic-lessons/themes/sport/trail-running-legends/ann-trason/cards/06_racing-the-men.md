@@ -4,8 +4,8 @@ position: 6
 title: "Racing the men"
 archived: false
 ---
-Trason raced in the 1990s, when ultrarunning was small and few people outside the sport knew its stars. Christopher McDougall's 2009 book Born to Run describes the Leadville Trail 100 in the 1990s, and Trason is one of the characters who appears in his account of those races.
+In 1994, four weeks after her Western States record, Trason raced the Leadville 100 against a group of Tarahumara runners from Mexico. She led the race late but had stomach trouble and finished second overall in 18:06:24, the only American in the top five. According to the Ultrarunning Hall of Fame, that time is still the women's course record at Leadville.
 
-That matters because it made her story reach people outside ultrarunning. Readers who had never heard of ultrarunning met one of its best athletes in a popular book, which helped bring the sport to a wider audience.
+That race appears in Christopher McDougall's 2009 book Born to Run, which describes the Leadville Trail 100 in the 1990s. Trason is one of the real athletes in his account.
 
-Born to Run helped introduce a very wide audience to ultrarunning. Trason appears there as one of the sport's real stars, so many readers first heard of Western States, Leadville and ultra racing through a story that included her.
+That matters because it made her story reach people outside ultrarunning. Readers who had never heard of ultrarunning met one of its best athletes in a popular book.

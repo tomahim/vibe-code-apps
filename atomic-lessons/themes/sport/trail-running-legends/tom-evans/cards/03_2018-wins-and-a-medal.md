@@ -4,7 +4,7 @@ position: 3
 title: "2018: wins and a medal"
 archived: false
 ---
-In 2018 Evans won The Coastal Challenge in Costa Rica and the South Downs Way 50. He took an individual bronze medal at the Trail World Championships in Penyagolosa, Spain, and Great Britain won team silver in the men's race.
+In 2018 Evans won The Coastal Challenge in Costa Rica and the South Downs Way 50.
 
 Later that year he won the CCC at UTMB in 10:44:32, passing the leaders late in the race. A strong finish like that shows good pacing and the ability to keep pushing at the end of a hard race, skills that he later used in 100 mile events.
 

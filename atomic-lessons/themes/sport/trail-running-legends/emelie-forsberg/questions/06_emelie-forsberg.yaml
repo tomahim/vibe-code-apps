@@ -4,17 +4,17 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: "By how much did she improve her time in 2011?"
+prompt: "In which year did she win the Fjällmaraton again?"
 choices:
   - id: 1353d6e9-0323-47a2-bf20-5caab38c13a7
-    text: "5 minutes"
+    text: "2010"
   - id: bcd53ac5-24cf-4d17-ae81-e9f28b7c17cb
-    text: "30 minutes"
+    text: "2011"
   - id: 5f09a57b-46d9-4bba-abaa-b2515f925988
-    text: "1 minute"
+    text: "2012"
   - id: 846a1dae-94dd-47d5-b95f-ce9fd99b1b66
-    text: "2 hours"
+    text: "2013"
 correct_choice_ids:
   - bcd53ac5-24cf-4d17-ae81-e9f28b7c17cb
-explanation: "She improved her time by 30 minutes."
+explanation: "She won the race again in 2011."
 archived: false

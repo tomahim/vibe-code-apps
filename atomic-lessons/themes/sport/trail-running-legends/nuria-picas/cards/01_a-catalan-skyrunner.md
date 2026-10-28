@@ -4,8 +4,8 @@ position: 1
 title: "A Catalan skyrunner"
 archived: false
 ---
-Núria Picas was born on November 2, 1976, and is a Spanish sky runner and trail runner from Catalonia. In 2012 she won the Skyrunner World Series title in SkyUltra, the series for the longest skyrunning races.
+Núria Picas was born in 1976 and is a Spanish sky runner and trail runner from Catalonia. Her own biography describes her as a world champion of ultra trails and a double champion of the Ultra Trail World Tour, with victories and podiums on five continents.
 
-She came to the top of the sport in her mid thirties, which is later than many athletes. Her story shows that endurance running is a sport where experience and patience can be very valuable, and that many top runners reach their peak after years of training.
+Those include Zegama-Aizkorri, Transgrancanaria, Transvulcania, the Festival des Templiers, the Four Trails Mount Fuji and the Tarawera Ultra, among others. Her UTMB profile calls her a Catalan runner and the winner of UTMB 2017.
 
-Skyrunning started in the Alps and the Pyrenees as a way to measure speed and skill on steep, high ground. SkyUltra events are the longest category, so winning that series shows endurance as well as technical climbing.
+Skyrunning started in the Alps and the Pyrenees as a way to measure speed and skill on steep, high ground. Picas is one of many athletes who came to ultra distance racing from mountain running and became known for strong results at the longest and hardest races.

@@ -4,17 +4,17 @@ position: 10
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Where were the 2018 Trail World Championships held?"
+prompt: "What was Evans's winning time at the 2018 CCC?"
 choices:
   - id: 37e2a492-0cc8-45a3-850b-36faf279cfd6
-    text: "Chamonix"
+    text: "10:44:32"
   - id: 71c1df4c-894c-4ad1-ad39-ac3f6531e51c
-    text: "Penyagolosa, Spain"
+    text: "9:15:00"
   - id: 52586c55-caf8-4b55-be11-cfdd5060d850
-    text: "Italy"
+    text: "12:30:10"
   - id: 0c1bcf56-10b0-42ef-839f-c87f31df6bb0
-    text: "Portugal"
+    text: "14:59:44"
 correct_choice_ids:
-  - 71c1df4c-894c-4ad1-ad39-ac3f6531e51c
-explanation: "They were held in Penyagolosa."
+  - 37e2a492-0cc8-45a3-850b-36faf279cfd6
+explanation: "He won in 10:44:32."
 archived: false

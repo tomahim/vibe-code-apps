@@ -4,17 +4,17 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "Which sport did he do professionally in the 1970s and early 1980s?"
+prompt: "What job did True do in Colorado to pay his way?"
 choices:
   - id: a397d1ef-b852-49ef-9965-8466553700c8
-    text: "Wrestling"
+    text: "Furniture mover"
   - id: d477d6a1-2507-4f4f-bd7a-bfc3b9149c33
-    text: "Football"
+    text: "Teacher"
   - id: 377bb36c-736e-4718-bd08-0828b1d3c0d2
-    text: "Cycling"
+    text: "Bus driver"
   - id: 6ff0be2e-0569-472d-9c1e-4c780de6ce2c
-    text: "Boxing"
+    text: "Chef"
 correct_choice_ids:
-  - 6ff0be2e-0569-472d-9c1e-4c780de6ce2c
-explanation: "He was a middleweight boxer."
+  - a397d1ef-b852-49ef-9965-8466553700c8
+explanation: "He moved furniture."
 archived: false

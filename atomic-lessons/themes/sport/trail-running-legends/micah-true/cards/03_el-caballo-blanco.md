@@ -4,8 +4,8 @@ position: 3
 title: "El Caballo Blanco"
 archived: false
 ---
-In the villages where he ran, True became known as El Caballo Blanco, the White Horse, because of his long blond hair and pale skin. The name stayed with him for the rest of his life.
+In the villages where he ran, True became known as El Caballo Blanco, the White Horse. The name stayed with him for the rest of his life. Christopher McDougall wrote that he was a talismanic figure for ultra runners, a man who befriended an enigmatic tribe of super athletes.
 
 He lived simply and valued friendship, nature and generosity more than money. He is a good example of a runner who did not chase titles. He ran for the joy of moving through wild places and meeting the people who lived there.
 
-Nicknames often grow from small details, and the White Horse fits his appearance and his habit of running with a long, loose stride. In the canyons, he became part of the local community, not just a visitor.
+Another journalist, who met him in 2005, wrote that True had gone for an easy hike that morning from Creel, a Mexican town on the edge of the canyons, then got sidetracked by a tasty trail and ended up running through the Copper Canyons until nightfall.

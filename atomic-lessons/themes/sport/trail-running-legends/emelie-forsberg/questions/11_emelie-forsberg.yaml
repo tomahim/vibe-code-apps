@@ -4,17 +4,17 @@ position: 11
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Which Skyrunner World Series title did she win in 2012?"
+prompt: "Which US race did Forsberg win in 2012?"
 choices:
   - id: 2a9b8c02-60f1-450c-b976-a58363023ee6
-    text: "Sky only"
+    text: "Pikes Peak Marathon"
   - id: 9e2086ea-9ca4-4a15-9ba9-2474549eae12
-    text: "Combined"
+    text: "Leadville Marathon"
   - id: 7f351863-f30c-4404-8ce8-16824b544a5f
-    text: "Vertical"
+    text: "Mount Washington Road Race"
   - id: d5153d7a-4e91-49ce-8625-27c51edaef46
-    text: "Ultra only"
+    text: "Boston Marathon"
 correct_choice_ids:
-  - 9e2086ea-9ca4-4a15-9ba9-2474549eae12
-explanation: "She won the Combined title in 2012."
+  - 2a9b8c02-60f1-450c-b976-a58363023ee6
+explanation: "In 2012 she won the Pikes Peak Marathon."
 archived: false

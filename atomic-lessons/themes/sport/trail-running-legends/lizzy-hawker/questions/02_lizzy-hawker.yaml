@@ -4,7 +4,7 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "At which university did Hawker complete her PhD?"
+prompt: "At which university did Hawker study Natural Sciences?"
 choices:
   - id: 8259b63b-6d8a-49a4-95ca-2d90f1a68c31
     text: "Edinburgh"
@@ -15,6 +15,6 @@ choices:
   - id: bfe2ef09-03ba-4473-8ee5-aca4a1903694
     text: "Cambridge"
 correct_choice_ids:
-  - cab5fa2f-37c2-4d53-bbd9-ee889be6211e
-explanation: "She finished it in 2005."
+  - bfe2ef09-03ba-4473-8ee5-aca4a1903694
+explanation: "She studied Natural Sciences at Cambridge before her PhD in physical oceanography."
 archived: false

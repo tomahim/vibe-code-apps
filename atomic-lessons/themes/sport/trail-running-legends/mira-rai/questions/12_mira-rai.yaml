@@ -4,17 +4,17 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "What did she do while recovering?"
+prompt: "How many girls does the Mira Rai Initiative select each year?"
 choices:
   - id: 4440a7e6-5764-4d9a-bdf0-1191dc8cd67c
-    text: "Retired from sport"
+    text: "Five"
   - id: 1d15684c-fa58-44bc-94a3-4c0e951b7ccf
-    text: "Moved to Europe"
+    text: "Fifty"
   - id: 70b1d63b-49e5-409c-b4a5-3d7496dc79ca
-    text: "Became a pilot"
+    text: "Two"
   - id: a3f60d3c-ac88-4fbf-a824-0b73810b8105
-    text: "Promoted trail running in Nepal"
+    text: "Twenty"
 correct_choice_ids:
-  - a3f60d3c-ac88-4fbf-a824-0b73810b8105
-explanation: "She also trained young women from rural areas."
+  - 4440a7e6-5764-4d9a-bdf0-1191dc8cd67c
+explanation: "Five girls are selected every year."
 archived: false

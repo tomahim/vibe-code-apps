@@ -4,17 +4,17 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: "Who won the first men's Ultra-Trail World Tour in 2014?"
+prompt: "By about how long did Picas win UTMB 2017?"
 choices:
   - id: c2d680cd-68fb-4185-9abc-30397968f22a
-    text: "Xavier Thévenard"
+    text: "2.5 minutes"
   - id: 6d452929-6ad9-4912-92ab-1359d720fe17
-    text: "Kilian Jornet"
+    text: "25 minutes"
   - id: ddae7d96-be58-489f-b8ea-0822f3335a11
-    text: "Jim Walmsley"
+    text: "2 hours"
   - id: 2a3c4d0a-37c0-4fbe-bb1c-b4e0bf94de23
-    text: "François D'Haene"
+    text: "30 seconds"
 correct_choice_ids:
-  - 2a3c4d0a-37c0-4fbe-bb1c-b4e0bf94de23
-explanation: "D'Haene won the first men's title."
+  - c2d680cd-68fb-4185-9abc-30397968f22a
+explanation: "She won by two and a half minutes."
 archived: false

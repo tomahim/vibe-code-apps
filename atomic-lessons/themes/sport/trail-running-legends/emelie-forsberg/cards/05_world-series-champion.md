@@ -4,8 +4,8 @@ position: 5
 title: "World Series champion"
 archived: false
 ---
-Forsberg won the Skyrunner World Series Combined title in 2012. She then won the Ultra title in 2013, 2014 and 2015, three years in a row. She also took the Sky silver in 2013 and Ultra bronze in 2012.
+Between 2013 and 2015 Forsberg won every race in the Skyrunner World Series Ultra division except one, according to iRunFar. The exception was the 2014 Trofeo Kima, where she took a wrong turn, lost an hour and worked her way back to second place.
 
-The Skyrunner World Series was the top international series for mountain racing at that time. Winning the Ultra title three times means she was strong over many different courses, from steep short races to long mountain ultras. It shows she was a consistent champion, not a one season surprise.
+Suunto described her as a three time Sky Running World Series champion for 2012 to 2014. For three summers she travelled the international circuit and produced top performances in Italy, Spain, the USA, France, Norway and the Canary Islands. She also set a number of fastest known times.
 
-The Skyrunner World Series ranked athletes across many races each season. A Combined title rewarded runners who did well in both vertical and long events, while Ultra titles focused on the longest and most demanding races.
+The Skyrunner World Series ranked athletes across many races each season. Winning so many of its Ultra races means she was strong over many different courses, from steep short races to long mountain ultras, and a consistent champion rather than a one season surprise.

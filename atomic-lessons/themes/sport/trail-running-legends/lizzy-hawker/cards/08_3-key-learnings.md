@@ -8,4 +8,4 @@ archived: false
 
 **2. Variety builds a legacy.** She won UTMB five times, a 100 km world title and a 24 hour world record.
 
-**3. Setbacks can create something new.** After stress fractures she helped create the Ultra Tour Monte Rosa.
+**3. Setbacks can create something new.** She later helped create the Ultra Tour Monte Rosa, a 93 mile loop.

@@ -4,17 +4,17 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: "Why was she discharged after the civil war ended?"
+prompt: "How long did she spend with the army, according to NPR?"
 choices:
   - id: 39f78224-f257-48e5-8fad-f7213991d730
-    text: "She was a minor"
+    text: "Three years"
   - id: 56dc2ad0-42ec-4d17-bd08-5d1c141c3ffa
-    text: "She was too old"
+    text: "One year"
   - id: 0c498ed9-a227-42b4-8f6d-7a5b1b5c17c2
-    text: "She was injured"
+    text: "Seven years"
   - id: 297f04fc-03f3-4229-8cb3-8c9a88d40ca6
-    text: "She asked to leave"
+    text: "Ten years"
 correct_choice_ids:
   - 39f78224-f257-48e5-8fad-f7213991d730
-explanation: "She was not eligible to join the Nepal Army."
+explanation: "NPR reported three years, without combat."
 archived: false

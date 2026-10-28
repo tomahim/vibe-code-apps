@@ -4,8 +4,8 @@ position: 1
 title: "A village in Bhojpur"
 archived: false
 ---
-Mira Rai was born on December 31, 1988, in a remote village in Bhojpur, in eastern Nepal. Her family struggled to meet everyday needs through farming. She left school at age 12 to help her parents with household chores, because the family could not afford her education.
+Mira Rai was born and raised in Sanodumma, in Bhojpur, a remote hill district of eastern Nepal. In her own words, life there was not much more than subsistence farming and carrying heavy loads for long distances. She wanted to break free from village life and explore the wider world.
 
-She often walked up and down the mountainous terrain to collect water and go to the market. These walks gave her strong legs, though she did not think of them as training. They simply were part of daily life in the hills.
+Those long walks carrying loads in the hills gave her strong legs, though she did not think of them as training. They were simply part of daily life. National Geographic wrote that she once hauled rice sacks through the Himalaya before she won international trail races.
 
-Bhojpur is a hill district in eastern Nepal, with steep valleys and terraced fields. Life there often means long walks on foot, because roads are few, so children grow up used to climbing and carrying loads.
+Bhojpur is a hill district with steep valleys and terraced fields. Life there often means long walks on foot, and children grow up used to climbing and carrying loads.

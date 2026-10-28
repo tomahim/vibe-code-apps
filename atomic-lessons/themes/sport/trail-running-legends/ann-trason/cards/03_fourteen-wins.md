@@ -4,8 +4,8 @@ position: 3
 title: "Fourteen wins"
 archived: false
 ---
-Ann Trason won Western States 14 times, with her most recent win in 2003. A win at this race means running through mountain canyons and heat for around a day, so repeating it year after year takes more than speed. It takes careful pacing, good health and a lot of patience.
+Ann Trason won Western States 14 times. Her last win came on June 28, 2003, when she took her 14th women's title in 18:36 and placed eighth overall, according to the Western States Endurance Run's own history. That was the 13th time she had finished in the top ten overall, including the men.
 
-Her wins also showed how far the sport had grown. When she started, ultrarunning had few professionals. By the time she finished winning, Western States was one of the best known races in the world, and she was one of the names that helped make it so.
+A win at this race means running through mountain canyons and heat for around a day, so repeating it year after year takes more than speed. It takes careful pacing, good health and a lot of patience.
 
-To put 14 wins in context, a runner would need to finish the course in top form for well over a decade, through different weather, injuries and rivals. Few athletes in any sport keep winning one event for so long.
+The Hall of Fame notes that from 1988 until she stepped back in 2004, Trason finished twenty seven 100 milers and was the women's winner of every one. To put 14 wins in context, a runner needs to finish the course in top form through different weather, injuries and rivals for well over a decade.

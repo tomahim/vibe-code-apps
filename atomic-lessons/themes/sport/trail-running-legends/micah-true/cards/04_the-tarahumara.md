@@ -4,8 +4,8 @@ position: 4
 title: "The Tarahumara"
 archived: false
 ---
-In 1993 True came into contact with the Tarahumara, also called the Rarámuri, runners from Chihuahua in Mexico. In 1994 he began spending his winters running in the Copper Canyons, where he built a hut and developed a relationship with the Tarahumara.
+True made friends with the Tarahumara, also called the Rarámuri, runners who live in the Sierra Tarahumara in Chihuahua, Mexico. The Ultra Marathon Caballo Blanco's own page says that he started the race to introduce international athletes to the beauty of the Rarámuri people, their culture and their lands.
 
-The Tarahumara are known for running long distances in simple sandals across rugged canyon terrain. True admired their running culture and wanted to help protect it. He saw running as part of their identity, not just sport.
+Canyon country is large and remote: the Copper Canyons form a huge system of canyons in Mexico's Sierra Madre. The Rarámuri are known for running long distances across rugged terrain, and True admired their running culture and wanted to help protect it.
 
-The Copper Canyons form a huge system of canyons in Mexico's Sierra Madre, deeper than the Grand Canyon in some places. The Tarahumara live in remote villages there and are known for running long distances in simple sandals.
+He saw their running as part of their identity, not just a sport. The race that he started put that idea into practice, with prizes designed to help Rarámuri families, as the next cards explain.

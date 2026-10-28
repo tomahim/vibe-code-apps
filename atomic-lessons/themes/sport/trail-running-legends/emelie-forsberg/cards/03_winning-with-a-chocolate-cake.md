@@ -4,8 +4,8 @@ position: 3
 title: "Winning with a chocolate cake"
 archived: false
 ---
-Her first serious trail race was the Swedish Fjällmaraton in 2009. She borrowed a backpack from a friend and brought a chocolate mud cake that she had baked. Before the last big climb she stopped for 20 minutes, ate the cake, felt new energy and won the race.
+Her first serious trail race was the Fjällmaraton, a 27 mile mountain marathon in Sweden, in 2009. She borrowed a backpack from a friend and baked a mud cake as race fuel. When she felt very hungry she stopped on the side of the trail and ate the cake. She offered it to the runners around her, but they said they could not stop.
 
-Two years later she came back, did not stop to eat on the way and improved her time by 30 minutes. In 2014, as an established world class runner, she returned again, improved by another 30 minutes and set a new course record. The story is a charming example of how fast she improved.
+She passed them on the last downhill and won the race. CNN reported that she spent 20 minutes at the summit eating the cake before she finished. The race win did not feel big to her at the time, she told iRunFar.
 
-The chocolate cake story has become famous because it shows a relaxed attitude to racing. Forsberg has often said that enjoying the day matters to her, and that she wants to keep running connected to joy and nature.
+She won the Fjällmaraton again in 2011 and then became a member of Team Salomon Sweden. A year later she joined their international team. The cake story has become famous because it shows a relaxed attitude to racing.

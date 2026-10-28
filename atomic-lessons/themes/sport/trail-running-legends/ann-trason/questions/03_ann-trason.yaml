@@ -4,17 +4,17 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "How did Trason do in her first ultra, the American River 50 Mile?"
+prompt: "How did Trason do in her first American River 50 Mile in 1981?"
 choices:
   - id: 2eafd84a-24a6-4776-8d42-fd88a4a77715
-    text: "She finished second"
+    text: "She did not finish"
   - id: 465eabc3-dee6-46cd-ac0e-bd101a3cda75
-    text: "She won it and set a course record"
+    text: "She won it"
   - id: 53e210c5-0441-4978-a2ac-1a1fd5be84cb
-    text: "She finished last"
+    text: "She finished second"
   - id: 382b65a6-0c40-4f5a-9824-bed2f6ab6f65
-    text: "She dropped out"
+    text: "She set a course record"
 correct_choice_ids:
-  - 465eabc3-dee6-46cd-ac0e-bd101a3cda75
-explanation: "She both won and set a course record."
+  - 2eafd84a-24a6-4776-8d42-fd88a4a77715
+explanation: "She dropped out in 1981 and won four years later."
 archived: false

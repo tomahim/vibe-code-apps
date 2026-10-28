@@ -4,8 +4,8 @@ position: 3
 title: "The first race"
 archived: false
 ---
-Rai did not know what ultra running was when she entered her first ultramarathon, the 50 kilometre Himalayan Outdoor Festival trail race. One morning, when she was running in the hills around Kathmandu, she met a group training on the same trails. They invited her to run again the following week.
+After her time in the army Rai finished an agricultural science degree and then moved to Kathmandu. Richard Bull of Trail Running Nepal helped her stay there and pursue running as a career, and she has described him as a friend and supporter since the beginning.
 
-When she arrived she found it was the start of the 50 kilometre race. She was unprepared, without proper food, water or technical clothing, but she won. Her positive attitude and dedication caught the attention of race organisers.
+Trail Running Nepal's own blog first described her as a young runner from Bhojpur who played mainly in 5 km and 10 km races in Kathmandu, where Nepali races are called games and runners are called players. Less than three years after her first trail race, NPR wrote, she was earning titles in mountain races up to 110 kilometres long.
 
-The Himalayan Outdoor Festival is a trail race held near Kathmandu, with steep forest paths in the hills around the valley. Winning with no special gear or preparation shows how much natural talent and strength she had.
+A mentor can open doors to coaching, visas, equipment and invitations, which are often more difficult to find than talent itself.

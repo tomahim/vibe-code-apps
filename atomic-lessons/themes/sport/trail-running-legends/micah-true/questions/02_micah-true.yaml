@@ -4,17 +4,17 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: "In which US city was he born?"
+prompt: "How did Micah True get his new name?"
 choices:
   - id: 2e7b1588-46a5-43c3-a405-52df89719817
-    text: "Oakland"
+    text: "From the Bible and a dog named True"
   - id: e1b638cb-7c01-4093-a807-a8031b40159f
-    text: "Denver"
+    text: "From his school"
   - id: 66d95b45-4b6b-4cce-b643-9b40a29e8edc
-    text: "Boulder"
+    text: "From a race director"
   - id: 7bf8ce98-639f-4ad6-9164-7d569bd89b19
-    text: "Houston"
+    text: "From a film"
 correct_choice_ids:
   - 2e7b1588-46a5-43c3-a405-52df89719817
-explanation: "He was born in Oakland, California."
+explanation: "He took it from the Bible and from his dog True."
 archived: false

@@ -4,8 +4,8 @@ position: 4
 title: "Going international"
 archived: false
 ---
-After more intensive training with her mentor Richard Bull of Trail Running Nepal, Rai began to travel overseas to compete in international ultra trail events. She quickly became a well known name, winning one race after another and breaking several records.
+After her international debut in races in Italy and France, Salomon signed Rai as a sponsored athlete. She says it seems like yesterday that she approached the finish line of the Vibram Hong Kong 100 km in 2016 as the first Nepalese woman to win an international ultra race.
 
-This was a huge change. Many athletes from richer countries have access to coaches, shoes and travel from a young age. Rai started late, with few resources, and still reached the front of international fields. Her success showed other Nepali runners a path to international racing.
+This was a huge change. Many athletes from richer countries have access to coaches, shoes and travel from a young age. Rai started late, with few resources, and still reached the front of international fields. NPR noted that she had earned titles in mountain races across the globe by early 2017.
 
-Trail Running Nepal is an organisation that helps local runners prepare for races and travel abroad. A mentor can open doors to coaching, visas, equipment and invitations, which are often more difficult to find than talent itself.
+Her success showed other Nepali runners a path to international racing, and it led to her work for young women in the sport in the following years.

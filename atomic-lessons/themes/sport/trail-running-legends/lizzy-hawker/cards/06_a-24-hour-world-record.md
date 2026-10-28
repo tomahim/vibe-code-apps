@@ -4,8 +4,8 @@ position: 6
 title: "A 24 hour world record"
 archived: false
 ---
-In 2011 Hawker set the women's 24 hour world record by running 153.5 miles in Llandudno, Wales. This is a very different kind of effort from a mountain race. It is run on a short loop, so the key skills are pacing, steady fuelling and mental focus.
+In September 2011 Hawker set the women's world best for 24 hours on the road. She ran 247.076 kilometres, or about 153.5 miles, at the Commonwealth Mountain and Ultradistance Championships in Llandudno, Wales. She also covered more distance than all the men in the race, and the record was ratified by the IAAF.
 
-Having UTMB wins, a 100 km world title, an Everest to Kathmandu record and a 24 hour record on one record makes her career unusually varied. Few athletes have achieved top results in such different challenges.
+This was less than a month after she won UTMB in 2011. A 24 hour road race is a very different kind of effort from a mountain race. It is run on a short loop, so the key skills are pacing, steady fuelling and mental focus.
 
-In a 24 hour race on a short loop, the runner who covers the most distance wins. Pace and consistency matter more than hills, and the athlete must keep fuelling and thinking clearly through the night.
+Having UTMB wins, a 100 km world title, an Everest to Kathmandu record and a 24 hour record on one record makes her career unusually varied. The record stood until May 2013.

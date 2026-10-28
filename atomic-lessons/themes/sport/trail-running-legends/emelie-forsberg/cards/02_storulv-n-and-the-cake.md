@@ -1,11 +1,11 @@
 ---
 id: 859d3f54-7e8c-42f3-a5d3-f1d760fe8689
 position: 2
-title: "Storulvån and the cake"
+title: "The mountain lodge and the baking course"
 archived: false
 ---
-At 18 Forsberg moved to the Swedish mountains and worked as a waitress at the Storulvån Mountain Lodge in the Åre ski area. She convinced her boss to send her on a baking course. In her free time she ran in the mountains for the love of nature, for fun and as a way to get around.
+At 18 Forsberg moved to the Swedish mountains and worked as a waitress in a mountain lodge. She also completed a baking course. In every spare hour she climbed and ran in the mountains.
 
-She was not training for races. Running was simply part of living in the mountains. That attitude, curiosity first and results second, has stayed with her and is one reason many fans enjoy her story so much.
+In 2005 she started studying to become a forester, then changed to biology. She says she has always done things she finds meaningful and that make her happy, and she did not have a clear career plan. She was not training for races. Running was simply part of living in the mountains.
 
-Åre is Sweden's best known ski resort, and its mountain lodges are places where hikers and skiers stay overnight. Working in one gave her time to explore the hills and a simple, active daily routine away from big cities.
+That attitude, curiosity first and results second, has stayed with her and is one reason many fans enjoy her story. Baking has stayed part of her life too: CNN reported that her personal website mixes running stories with recipes for cinnamon cakes and apple pie.
