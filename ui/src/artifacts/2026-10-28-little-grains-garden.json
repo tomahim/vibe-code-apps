@@ -1,0 +1,6 @@
+{
+  "title": "Little Grains: Hex Garden",
+  "description": "A 3D garden of learning themes. Enter a theme to see one hexagon per learning path, then follow a path's tiles lesson by lesson with a dot per card. Plants grow with fake study progress. Detailed desktop tab, simplified mobile tab.",
+  "date": "2026-10-28",
+  "tags": ["little grains", "3d", "three.js", "hexagons", "garden", "learning", "interactive"]
+}
