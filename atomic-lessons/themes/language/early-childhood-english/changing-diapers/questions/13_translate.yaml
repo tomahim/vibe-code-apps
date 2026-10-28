@@ -6,6 +6,14 @@ prompt: 'Traduisez en anglais : « Passe ton bras ici. »'
 accepted_answers:
 - Let's put your arm through here.
 - Let us put your arm through here.
-explanation: La phrase du cours est « Let's put your arm through here. ». Comparez
-  le sens et la structure de votre réponse.
+- Let's put your arm in here.
+- Let us put your arm in here.
+- Put your arm through here.
+- Put your arm in here.
+- Let's slide your arm through here.
+- Let us slide your arm through here.
+- Let's pass your arm through here.
+- Let us pass your arm through here.
+explanation: La phrase du cours est « Let's put your arm through here. ». Comparez le sens et la structure
+  de votre réponse.
 archived: false

@@ -5,6 +5,8 @@ after_card_position: 2
 prompt: 'Traduisez en anglais : « Celui-ci est rouge. »'
 accepted_answers:
 - This one is red.
-explanation: La phrase du cours est « This one is red. ». Comparez le sens et la structure
-  de votre réponse.
+- This one's red.
+- This one is the red one.
+- This one is a red one.
+explanation: La phrase du cours est « This one is red. ». Comparez le sens et la structure de votre réponse.
 archived: false

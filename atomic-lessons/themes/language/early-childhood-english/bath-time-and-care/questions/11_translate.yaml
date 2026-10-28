@@ -5,6 +5,9 @@ after_card_position: 2
 prompt: 'Traduisez en anglais : « Tu aimes l''eau ? »'
 accepted_answers:
 - Do you like the water?
-explanation: La phrase du cours est « Do you like the water? ». Comparez le sens et
-  la structure de votre réponse.
+- Do you enjoy the water?
+- Do you love the water?
+- Do you like water?
+explanation: La phrase du cours est « Do you like the water? ». Comparez le sens et la structure de votre
+  réponse.
 archived: false

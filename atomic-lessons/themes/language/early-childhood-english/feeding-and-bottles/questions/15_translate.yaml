@@ -6,6 +6,13 @@ prompt: 'Traduisez en anglais : « Tu bois à ton rythme. »'
 accepted_answers:
 - You're drinking at your own pace.
 - You are drinking at your own pace.
-explanation: La phrase du cours est « You're drinking at your own pace. ». Comparez
-  le sens et la structure de votre réponse.
+- You're drinking at your own speed.
+- You are drinking at your own speed.
+- You drink at your own pace.
+- You're drinking at your own rhythm.
+- You are drinking at your own rhythm.
+- You're drinking in your own time.
+- You are drinking in your own time.
+explanation: La phrase du cours est « You're drinking at your own pace. ». Comparez le sens et la structure
+  de votre réponse.
 archived: false

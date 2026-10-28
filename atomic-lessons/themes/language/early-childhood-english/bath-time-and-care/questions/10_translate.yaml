@@ -5,6 +5,10 @@ after_card_position: 2
 prompt: 'Traduisez en anglais : « L''eau est bien chaude. »'
 accepted_answers:
 - The water is nice and warm.
-explanation: La phrase du cours est « The water is nice and warm. ». Comparez le sens
-  et la structure de votre réponse.
+- The water is nice and hot.
+- The water is really warm.
+- The water is very warm.
+- The water is pleasantly warm.
+explanation: La phrase du cours est « The water is nice and warm. ». Comparez le sens et la structure
+  de votre réponse.
 archived: false

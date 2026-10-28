@@ -6,5 +6,14 @@ prompt: 'Traduisez en anglais : « Tu observes tout autour de toi. »'
 accepted_answers:
 - You're looking all around.
 - You are looking all around.
-explanation: La phrase du cours est « You're looking all around. ». Comparez le sens et la structure de votre réponse.
+- You're looking everywhere.
+- You are looking everywhere.
+- You're looking all around you.
+- You are looking all around you.
+- You're looking at everything around you.
+- You are looking at everything around you.
+- You're looking around.
+- You are looking around.
+explanation: La phrase du cours est « You're looking all around. ». Comparez le sens et la structure de
+  votre réponse.
 archived: false

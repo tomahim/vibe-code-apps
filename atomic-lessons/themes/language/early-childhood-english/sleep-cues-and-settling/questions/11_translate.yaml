@@ -6,6 +6,25 @@ prompt: 'Traduisez en anglais : « On va se préparer pour dormir. »'
 accepted_answers:
 - Let's get ready for bed.
 - Let us get ready for bed.
-explanation: La phrase du cours est « Let's get ready for bed. ». Comparez le sens
-  et la structure de votre réponse.
+- Let's get ready for sleep.
+- Let us get ready for sleep.
+- Let's get ready to sleep.
+- Let us get ready to sleep.
+- Let's get ready to go to bed.
+- Let us get ready to go to bed.
+- Let's get ready for bedtime.
+- Let us get ready for bedtime.
+- Let's get you ready for bed.
+- Let us get you ready for bed.
+- Let's get you ready for sleep.
+- Let us get you ready for sleep.
+- Let's prepare for bed.
+- Let us prepare for bed.
+- We're going to get ready for bed.
+- We are going to get ready for bed.
+- We're getting ready for bed.
+- We are getting ready for bed.
+- Time to get ready for bed.
+explanation: La phrase du cours est « Let's get ready for bed. ». Comparez le sens et la structure de
+  votre réponse.
 archived: false

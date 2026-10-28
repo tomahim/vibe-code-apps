@@ -5,6 +5,9 @@ after_card_position: 6
 prompt: 'Traduisez en anglais : « Tu sens le savon ? »'
 accepted_answers:
 - Can you smell the soap?
-explanation: La phrase du cours est « Can you smell the soap? ». Comparez le sens
-  et la structure de votre réponse.
+- Do you smell the soap?
+- Can you smell that soap?
+- Do you smell that soap?
+explanation: La phrase du cours est « Can you smell the soap? ». Comparez le sens et la structure de votre
+  réponse.
 archived: false

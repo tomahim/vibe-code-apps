@@ -6,6 +6,19 @@ prompt: 'Traduisez en anglais : « Il pleut aujourd''hui. »'
 accepted_answers:
 - It's raining today.
 - It is raining today.
-explanation: La phrase du cours est « It's raining today. ». Comparez le sens et la
-  structure de votre réponse.
+- It rains today.
+- It's raining out today.
+- It is raining out today.
+- It's a rainy day.
+- It is a rainy day.
+- It's a rainy day today.
+- It is a rainy day today.
+- It's rainy today.
+- It is rainy today.
+- It's raining outside today.
+- It is raining outside today.
+- Today it's raining.
+- Today it is raining.
+explanation: La phrase du cours est « It's raining today. ». Comparez le sens et la structure de votre
+  réponse.
 archived: false

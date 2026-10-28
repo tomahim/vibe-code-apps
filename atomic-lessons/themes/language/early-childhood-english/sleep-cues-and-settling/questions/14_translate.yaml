@@ -5,6 +5,13 @@ after_card_position: 6
 prompt: 'Traduisez en anglais : « Ton lit est prêt. »'
 accepted_answers:
 - Your crib is ready.
-explanation: La phrase du cours est « Your crib is ready. ». Comparez le sens et la
-  structure de votre réponse.
+- Your crib's ready.
+- Your cot is ready.
+- Your cot's ready.
+- Your crib is ready for you.
+- Your crib's ready for you.
+- Your cot is ready for you.
+- Your cot's ready for you.
+explanation: La phrase du cours est « Your crib is ready. ». Comparez le sens et la structure de votre
+  réponse.
 archived: false

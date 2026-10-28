@@ -6,6 +6,16 @@ prompt: 'Traduisez en anglais : « Je vais attacher ta ceinture. »'
 accepted_answers:
 - I'm going to buckle you in.
 - I am going to buckle you in.
-explanation: La phrase du cours est « I'm going to buckle you in. ». Comparez le sens
-  et la structure de votre réponse.
+- I'm going to fasten your seat belt.
+- I am going to fasten your seat belt.
+- I'm going to buckle your seat belt.
+- I am going to buckle your seat belt.
+- I'm going to strap you in.
+- I am going to strap you in.
+- I'm going to put your seat belt on.
+- I am going to put your seat belt on.
+- I'm going to fasten your belt.
+- I am going to fasten your belt.
+explanation: La phrase du cours est « I'm going to buckle you in. ». Comparez le sens et la structure
+  de votre réponse.
 archived: false

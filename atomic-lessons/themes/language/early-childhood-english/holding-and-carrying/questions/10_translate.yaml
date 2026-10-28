@@ -6,5 +6,22 @@ prompt: 'Traduisez en anglais : « Faisons un câlin un instant. »'
 accepted_answers:
 - Let's snuggle for a minute.
 - Let us snuggle for a minute.
-explanation: La phrase du cours est « Let's snuggle for a minute. ». Comparez le sens et la structure de votre réponse.
+- Let's cuddle for a minute.
+- Let us cuddle for a minute.
+- Let's snuggle for a moment.
+- Let us snuggle for a moment.
+- Let's cuddle for a moment.
+- Let us cuddle for a moment.
+- Let's snuggle for a bit.
+- Let us snuggle for a bit.
+- Let's cuddle for a bit.
+- Let us cuddle for a bit.
+- Let's have a cuddle for a minute.
+- Let us have a cuddle for a minute.
+- Let's have a snuggle for a minute.
+- Let us have a snuggle for a minute.
+- Let's hug for a minute.
+- Let us hug for a minute.
+explanation: La phrase du cours est « Let's snuggle for a minute. ». Comparez le sens et la structure
+  de votre réponse.
 archived: false

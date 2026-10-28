@@ -5,6 +5,15 @@ after_card_position: 6
 prompt: 'Traduisez en anglais : « Tu entends ce bruit ? »'
 accepted_answers:
 - Can you hear that sound?
-explanation: La phrase du cours est « Can you hear that sound? ». Comparez le sens
-  et la structure de votre réponse.
+- Do you hear that sound?
+- Can you hear that noise?
+- Do you hear that noise?
+- Can you hear this sound?
+- Do you hear this sound?
+- Can you hear the sound?
+- Do you hear the sound?
+- Do you hear this noise?
+- Can you hear this noise?
+explanation: La phrase du cours est « Can you hear that sound? ». Comparez le sens et la structure de
+  votre réponse.
 archived: false

@@ -6,6 +6,32 @@ prompt: 'Traduisez en anglais : « On va faire une pause. »'
 accepted_answers:
 - Let's take a break.
 - Let us take a break.
-explanation: La phrase du cours est « Let's take a break. ». Comparez le sens et la
-  structure de votre réponse.
+- Let's take a rest.
+- Let us take a rest.
+- Let's have a break.
+- Let us have a break.
+- Let's have a rest.
+- Let us have a rest.
+- Let's pause.
+- Let us pause.
+- Let's take a little break.
+- Let us take a little break.
+- Let's take a short break.
+- Let us take a short break.
+- Let's take a pause.
+- Let us take a pause.
+- Let's rest.
+- Let us rest.
+- Let's rest for a bit.
+- Let us rest for a bit.
+- Let's rest for a moment.
+- Let us rest for a moment.
+- Let's take a quick break.
+- Let us take a quick break.
+- We're going to take a break.
+- We are going to take a break.
+- We're going to take a rest.
+- We are going to take a rest.
+explanation: La phrase du cours est « Let's take a break. ». Comparez le sens et la structure de votre
+  réponse.
 archived: false

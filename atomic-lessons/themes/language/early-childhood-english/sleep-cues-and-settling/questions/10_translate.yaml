@@ -6,6 +6,14 @@ prompt: 'Traduisez en anglais : « Tu te frottes les yeux. »'
 accepted_answers:
 - You're rubbing your eyes.
 - You are rubbing your eyes.
-explanation: La phrase du cours est « You're rubbing your eyes. ». Comparez le sens
-  et la structure de votre réponse.
+- You're rubbing your little eyes.
+- You are rubbing your little eyes.
+- You're rubbing your eye.
+- You are rubbing your eye.
+- You're wiping your eyes.
+- You are wiping your eyes.
+- You're rubbing at your eyes.
+- You are rubbing at your eyes.
+explanation: La phrase du cours est « You're rubbing your eyes. ». Comparez le sens et la structure de
+  votre réponse.
 archived: false

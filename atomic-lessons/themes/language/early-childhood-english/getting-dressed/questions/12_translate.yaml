@@ -5,6 +5,14 @@ after_card_position: 4
 prompt: 'Traduisez en anglais : « Voilà ton petit pied. »'
 accepted_answers:
 - There's your little foot.
-explanation: La phrase du cours est « There's your little foot. ». Comparez le sens
-  et la structure de votre réponse.
+- There is your little foot.
+- Here's your little foot.
+- Here is your little foot.
+- There's your tiny foot.
+- There is your tiny foot.
+- Here's your tiny foot.
+- Here is your tiny foot.
+- There it is, your little foot.
+explanation: La phrase du cours est « There's your little foot. ». Comparez le sens et la structure de
+  votre réponse.
 archived: false
