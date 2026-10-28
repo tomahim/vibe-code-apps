@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
+from .api import LearnerState
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .rewards import totals
 
@@ -107,6 +108,32 @@ class LearningAPITests(TestCase):
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
         self.assertIsNone(self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["cards"][0]["completed_at"])
         self.assertEqual(self.post(url, {}).status_code, 201)
+
+    def test_complete_card_repeat_uses_bounded_lesson_state(self):
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        other_card = self.row(Card, lesson=other_lesson, body_markdown="Unrelated")
+        other_question = self.row(Question, lesson=other_lesson, after_card_position=1,
+                                  prompt="Unrelated", options=[{"id": str(i), "text": str(i)} for i in range(4)],
+                                  answer="0", explanation="Unrelated")
+        CardProgress.objects.create(user=self.user, card=other_card,
+                                    completed_at=datetime.now(timezone.utc))
+        QuestionAttempt.objects.create(user=self.user, question=other_question, attempt_type="initial",
+                                       submitted_answer="1", correct=False,
+                                       answered_at=datetime.now(timezone.utc))
+
+        url = f"/api/learning/cards/{self.card.pk}/complete/"
+        with self.assertNumQueries(10):
+            first = self.post(url, {})
+        self.assertEqual(first.status_code, 201)
+        state = LearnerState(self.user, lesson=self.lesson)
+        self.assertEqual([card.pk for card in state.cards], [self.card.pk])
+        self.assertEqual([question.pk for question in state.questions], [self.question.pk])
+        self.assertEqual(set(state.completed), {self.card.pk})
+        self.assertFalse(state.attempted)
+
+        with self.assertNumQueries(9):
+            repeat = self.post(url, {})
+        self.assertEqual(repeat.status_code, 200)
 
     def test_card_write_validation_and_visibility(self):
         url = f"/api/learning/cards/{self.card.pk}/complete/"

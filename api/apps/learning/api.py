@@ -37,10 +37,15 @@ def described(row):
 
 class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
-    def __init__(self, user):
+    def __init__(self, user, lesson=None):
         self.user_id = user.pk
-        self.cards = list(visible(Card))
-        self.questions = list(visible(Question))
+        cards = visible(Card)
+        questions = visible(Question)
+        if lesson is not None:
+            cards = cards.filter(lesson=lesson)
+            questions = questions.filter(lesson=lesson)
+        self.cards = list(cards)
+        self.questions = list(questions)
         self.completed = dict(CardProgress.objects.filter(
             user=user, card__in=self.cards,
         ).values_list("card_id", "completed_at"))
