@@ -8,6 +8,17 @@ import { createGarden } from "./garden/garden.js";
 import "./garden/garden.css";
 import "./little-grains.css";
 
+const REWARD_COPY = {
+  drops: {
+    title: "How Drops are earned",
+    description: "You earn 1 Drop when you first finish a card, 5 more when you complete a lesson, and 100 more when you complete a learning path. Each reward is earned once.",
+  },
+  carrots: {
+    title: "How Carrots are earned",
+    description: "You earn 1 Carrot the first time you answer a checkpoint correctly. Wrong answers and repeated correct answers earn no extra Carrots.",
+  },
+};
+
 function redirectToLogin() {
   clearToken();
   window.history.replaceState({}, "", "/login?next=/apps/little-grains");
@@ -132,6 +143,16 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   </div>;
 }
 
+function RewardInfo({ currency, onClose }) {
+  const reward = REWARD_COPY[currency];
+  return <div className="grains-reward-dismiss" onClick={onClose}>
+    <section className="grains-reward-popover" role="dialog" aria-label={reward.title} onClick={(event) => event.stopPropagation()}>
+      <div><span aria-hidden="true">{currency === "drops" ? "💧" : "🥕"}</span><h2>{reward.title}</h2><button onClick={onClose} aria-label="Close reward information">×</button></div>
+      <p>{reward.description}</p>
+    </section>
+  </div>;
+}
+
 function Leaderboard({ onClose }) {
   const [currency, setCurrency] = useState("drops");
   const [period, setPeriod] = useState("weekly");
@@ -145,6 +166,7 @@ function Leaderboard({ onClose }) {
   return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <aside className="grains-leaderboard" role="dialog" aria-modal="true" aria-label="Leaderboard"><div className="grains-leaderboard-head"><div><p>THE GARDEN GROWS TOGETHER</p><h2>Leaderboard</h2></div><button className="grains-close" onClick={onClose} aria-label="Close leaderboard">×</button></div>
       <div className="grains-segment" aria-label="Ranking type"><button className={currency === "drops" ? "active" : ""} onClick={() => setCurrency("drops")}>💧 Drops</button><button className={currency === "carrots" ? "active" : ""} onClick={() => setCurrency("carrots")}>🥕 Carrots</button></div>
+      <p className="grains-reward-description">{REWARD_COPY[currency].description}</p>
       <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => setPeriod(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>
       {error && <p className="grains-error" role="alert">{error}</p>}
       {!data && !error && <p className="grains-loading">Gathering the rankings…</p>}
@@ -161,6 +183,7 @@ export default function LittleGrains() {
   const [error, setError] = useState("");
   const [lessonId, setLessonId] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [rewardInfo, setRewardInfo] = useState(null);
   const profile = window.matchMedia("(max-width: 760px)").matches ? "mobile" : "desktop";
   const refresh = useCallback(async () => { const result = await api("garden/"); setGarden(result); return result; }, []);
 
@@ -173,7 +196,7 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (!garden || !mount.current) return;
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -187,12 +210,12 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (lessonId) setLessonId(null); else if (showLeaderboard) setShowLeaderboard(false); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (lessonId) setLessonId(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [lessonId, showLeaderboard]);
+  }, [lessonId, showLeaderboard, rewardInfo]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
-    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}</section>
+    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {lessonId && <LessonReader key={lessonId} lessonId={lessonId} onClose={() => setLessonId(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
   </main>;
