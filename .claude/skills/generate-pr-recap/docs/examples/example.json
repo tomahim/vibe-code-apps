@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "template_version": "0.2",
+  "repo": "example/hello",
+  "number": 1,
+  "title": "Add a greeting helper",
+  "author": "example",
+  "base": "main",
+  "head": "example/greeting",
+  "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "head_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "additions": 8,
+  "deletions": 0,
+  "provenance": "Synthetic example for testing the renderer and validator. Not a real pull request.",
+  "description": {
+    "body": "Adds a small greeting helper and logs it at startup.",
+    "summary": "Adds a pure greet helper with an empty-name fallback and calls it once during startup.",
+    "source_url": "https://github.com/example/hello/pull/1",
+    "attention": ["Example data only; every field is synthetic."]
+  },
+  "files": [
+    {
+      "path": "src/greet.js",
+      "status": "added",
+      "additions": 6,
+      "deletions": 0,
+      "patch": "@@ -0,0 +1,6 @@\n+export function greet(name) {\n+  const cleaned = name.trim();\n+  if (!cleaned) return \"Hello, world!\";\n+  return `Hello, ${cleaned}!`;\n+}\n+",
+      "reason": ""
+    },
+    {
+      "path": "src/app.js",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "patch": "@@ -1,5 +1,7 @@\n import { start } from \"./server\";\n+import { greet } from \"./greet\";\n \n export function main() {\n+  console.log(greet(\"reader\"));\n   start();\n }",
+      "reason": ""
+    }
+  ],
+  "layers": [
+    {
+      "type": "behavior",
+      "title": "Startup prints a greeting",
+      "description": "Behavior change: starting the app now logs a greeting built from the new helper before the server starts.",
+      "refs": [
+        {"path": "src/app.js", "highlights": [
+          {"side": "new", "start": 5, "end": 5, "comment": "Logs the greeting once during startup."}
+        ]},
+        {"path": "src/greet.js", "highlights": [
+          {"side": "new", "start": 3, "end": 3, "comment": "Blank names fall back to a generic greeting."}
+        ]}
+      ]
+    },
+    {
+      "type": "design",
+      "title": "Greeting logic in a pure helper",
+      "description": "Design choice: the greeting rules live in a small pure function, keeping the startup wiring trivial.",
+      "refs": [
+        {"path": "src/greet.js", "highlights": [
+          {"side": "new", "start": 1, "end": 5, "comment": "Pure exported function, easy to unit test."}
+        ]}
+      ]
+    }
+  ]
+}
