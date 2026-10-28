@@ -4,7 +4,7 @@ position: 3
 title: "Big's Backyard Ultra"
 archived: false
 ---
-In 2018 Dauwalter competed at Big's Backyard Ultra, a race where runners complete one 4.17 mile loop every hour until only one person is left. She finished second overall after completing 67 laps, which set the women's course record at 279.268 miles.
+In 2018 Dauwalter competed at Big's Backyard Ultra, a race where runners complete one 4.17 mile loop every hour until only one person is left. She finished second overall after completing 67 laps, which was about 279 miles.
 
 Backyard races test endurance and mental focus more than speed.
 
