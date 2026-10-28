@@ -66,7 +66,7 @@ export const KIND_LABELS = {
 };
 
 // Kinds the quick editor can commit (mirrors the api's editable fields).
-export const EDITABLE_KINDS = ["card", "lesson", "learning_path", "question"];
+export const EDITABLE_KINDS = ["theme", "card", "lesson", "learning_path", "question"];
 
 export function canEdit(unit) {
   return (
@@ -88,6 +88,7 @@ export function draftFromUnit(unit) {
       explanation: q.explanation,
     };
   }
+  if (unit.kind === "theme") return { description: unit.description || "" };
   const draft = { title: unit.title || "", body: unit.body || "" };
   if (unit.kind === "lesson" || unit.kind === "learning_path") draft.description = unit.description || "";
   return draft;
