@@ -15,5 +15,5 @@ choices:
     text: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer."
 correct_choice_ids:
   - d567b761-c9c8-440f-93c4-3b829a7ff68a
-explanation: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer. Other layers and learned weights also matter."
+explanation: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer. Other layers and learned weights also matter. An attention diagram may show that a token strongly weights a previous noun. That is evidence about one part of information flow, but it does not show the whole calculation."
 archived: false

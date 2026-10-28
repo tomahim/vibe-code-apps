@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. Simple counts miss dependence.** The letter u is especially likely after q, a fact hidden by a table of overall letter frequencies. The next symbol depends on what has already appeared.
 
-- Independent frequency counts miss context.
-- N-grams capture local patterns.
-- Long sequences become too numerous to count directly.
+**2. N-grams add local context.** Counting pairs or triples makes generated text more realistic than drawing each letter or word independently. “Coffee cup” has a relationship that separate counts for “coffee” and “cup” cannot capture.
+
+**3. Exact counting eventually runs out.** Long word sequences multiply so quickly that most possible phrases are never observed. A useful language model must estimate beyond the combinations it has counted directly. This is why the essay turns from direct counting to a learned model.

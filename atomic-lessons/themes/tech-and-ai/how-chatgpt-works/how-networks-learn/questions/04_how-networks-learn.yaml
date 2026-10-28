@@ -15,5 +15,5 @@ choices:
     text: "Many updates across many examples gradually shape the network."
 correct_choice_ids:
   - 47b4be7f-d375-45db-bc70-c646ab7949e8
-explanation: "Optimization changes weights in directions expected to reduce loss. Gradient-based methods calculate how each weight affects the result."
+explanation: "Optimization changes weights in directions expected to reduce loss. Gradient-based methods calculate how each weight affects the result. Picture a landscape where height represents loss and each coordinate represents a weight. Optimization tries to move toward lower ground."
 archived: false

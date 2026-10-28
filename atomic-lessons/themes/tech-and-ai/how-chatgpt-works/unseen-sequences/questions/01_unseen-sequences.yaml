@@ -15,5 +15,5 @@ choices:
     text: "A language model maps the current context to a distribution over possible next tokens."
 correct_choice_ids:
   - 0440a837-6dac-4e01-8a3b-8cf20e87fabf
-explanation: "A vocabulary can be combined into vastly more phrases than any dataset contains. Exact lookup cannot cover every useful continuation."
+explanation: "A vocabulary can be combined into vastly more phrases than any dataset contains. Exact lookup cannot cover every useful continuation. Consider the phrase “a green bicycle under a purple moon.” It is easy to understand, but it may never have appeared in the training text exactly. A system that only searches for matching phrases would find no entry and have little basis for continuing."
 archived: false

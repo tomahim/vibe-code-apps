@@ -15,5 +15,5 @@ choices:
     text: "Tokenization divides input text into model-sized pieces."
 correct_choice_ids:
   - 2e524cfd-484c-4764-bf64-aafd5f7a96f4
-explanation: "An embedding table maps token IDs to learned vectors. These vectors provide numerical features for later layers."
+explanation: "An embedding table maps token IDs to learned vectors. These vectors provide numerical features for later layers. An embedding table can be pictured as one learned row of numbers per token ID. Looking up ID 417 returns a vector used as input to later layers."
 archived: false

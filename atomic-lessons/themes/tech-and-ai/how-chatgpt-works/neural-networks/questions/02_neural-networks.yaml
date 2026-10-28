@@ -15,5 +15,5 @@ choices:
     text: "Weights control how strongly inputs contribute, and a bias shifts the result."
 correct_choice_ids:
   - b2e678cb-0d6d-4bee-82bf-a3adf94c16fe
-explanation: "Weights control how strongly inputs contribute, and a bias shifts the result. Training changes these numbers."
+explanation: "Weights control how strongly inputs contribute, and a bias shifts the result. Training changes these numbers. Consider a neuron with inputs x and y. A positive weight on x makes larger x values push the result up; a negative weight on y pushes it down."
 archived: false

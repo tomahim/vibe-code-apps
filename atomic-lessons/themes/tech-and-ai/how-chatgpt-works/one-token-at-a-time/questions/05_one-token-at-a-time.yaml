@@ -15,5 +15,5 @@ choices:
     text: "A paragraph is the result of many successive token choices."
 correct_choice_ids:
   - 42ead419-2b70-4cdf-9092-e06cca9582ff
-explanation: "After selecting a token, the model includes it in the context for the next prediction. Every new piece changes what can plausibly follow."
+explanation: "After selecting a token, the model includes it in the context for the next prediction. Every new piece changes what can plausibly follow. Imagine the model selects “small” after “She saw a.” The next prediction is made for “She saw a small,” where nouns such as “bird” or “box” may now be more likely. If it had selected “strange” instead, the later wording could diverge."
 archived: false

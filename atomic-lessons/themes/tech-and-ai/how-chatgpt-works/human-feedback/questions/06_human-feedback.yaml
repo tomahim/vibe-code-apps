@@ -12,8 +12,8 @@ choices:
   - id: c30a44bb-09de-4a26-a345-98dc90fc8275
     text: "The linked InstructGPT paper describes a historical human-feedback training method."
   - id: 0970899d-fd55-47b1-8509-96d2701d73e9
-    text: "Predicting likely text and answering a user's request well are related but different objectives."
+    text: "Helpfulness asks whether the answer serves the user's task; text prediction scores likely continuations."
 correct_choice_ids:
   - 0970899d-fd55-47b1-8509-96d2701d73e9
-explanation: "Predicting likely text and answering a user's request well are related but different objectives. Post-training tries to move behavior toward the latter."
+explanation: "Helpfulness asks whether the answer serves the user's task; text prediction scores likely continuations. Predicting likely text and answering a user's request well are related but different objectives. Post-training tries to move behavior toward the latter. Predicting the most likely continuation of “The answer is” can produce a plausible sentence, but the user may need a justified answer with a certain format and level of detail. Helpfulness asks whether the response advances that task."
 archived: false

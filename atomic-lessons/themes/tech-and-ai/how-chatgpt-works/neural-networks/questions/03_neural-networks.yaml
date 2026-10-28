@@ -15,5 +15,5 @@ choices:
     text: "An artificial neuron combines several numerical inputs into one output."
 correct_choice_ids:
   - 1a963fe1-54bd-4843-b37e-29918ac7b07e
-explanation: "An activation function adds nonlinearity after the weighted sum. Without nonlinear steps, stacked layers would have much less expressive power."
+explanation: "An activation function adds nonlinearity after the weighted sum. Without nonlinear steps, stacked layers would have much less expressive power. If every layer only performed a weighted sum, stacking layers would still amount to one larger linear transformation. An activation such as ReLU changes the shape of the function: it can keep positive values and turn negative ones to zero."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "Greedy decoding always takes the highest-scored option."
 correct_choice_ids:
   - 1f52832e-5725-4117-a1af-9486c05baf8b
-explanation: "Greedy decoding always takes the highest-scored option. In the essay's examples, this often makes longer passages repetitive or flat."
+explanation: "Greedy decoding always takes the highest-scored option. In the essay's examples, this often makes longer passages repetitive or flat. Consider repeatedly choosing the top-ranked word in a story. A locally safe word can be selected at every step, but the chain may settle into generic phrasing or repeat itself."
 archived: false

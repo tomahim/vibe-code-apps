@@ -15,5 +15,5 @@ choices:
     text: "Words used in similar contexts can receive related representations."
 correct_choice_ids:
   - e1381935-a699-4798-8ddc-e5553982eba0
-explanation: "Words used in similar contexts can receive related representations. Nearness is useful but does not give a complete definition of meaning."
+explanation: "Words used in similar contexts can receive related representations. Nearness is useful but does not give a complete definition of meaning. The words “alligator” and “crocodile” can occur in similar sentences about rivers, scales, and wildlife. A learning task may therefore place their representations near each other."
 archived: false

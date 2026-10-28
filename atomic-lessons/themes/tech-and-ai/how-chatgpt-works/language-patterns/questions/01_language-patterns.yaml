@@ -15,5 +15,5 @@ choices:
     text: "An n-gram is a run of n adjacent items, such as letters or words."
 correct_choice_ids:
   - 559649c4-2dc7-42d8-8843-c606c376c2de
-explanation: "A text sample lets us estimate how often each letter appears. A larger and more representative sample usually gives more stable estimates."
+explanation: "A text sample lets us estimate how often each letter appears. A larger and more representative sample usually gives more stable estimates. Take two short articles, one about cats and one about dogs, and count each letter. The counts will be similar in broad strokes, but the topic words change the details: “dog” increases the letter o in the second sample."
 archived: false

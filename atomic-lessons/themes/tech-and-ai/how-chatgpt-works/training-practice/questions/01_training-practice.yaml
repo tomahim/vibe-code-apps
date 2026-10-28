@@ -15,5 +15,5 @@ choices:
     text: "A batch is a group of examples used for an update."
 correct_choice_ids:
   - c3793f0e-86b7-43e5-89cb-cf6288247594
-explanation: "Architecture defines the broad arrangement of computation before training begins. The same broad design can sometimes work across different tasks."
+explanation: "Architecture defines the broad arrangement of computation before training begins. The same broad design can sometimes work across different tasks. Before any examples are shown, builders decide whether a network will use an image-focused design, a transformer for sequences, or another architecture. That choice fixes broad paths along which information can flow."
 archived: false

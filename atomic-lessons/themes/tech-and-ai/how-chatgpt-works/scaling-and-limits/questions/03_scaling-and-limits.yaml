@@ -15,5 +15,5 @@ choices:
     text: "Larger networks and more data can improve performance on many tasks."
 correct_choice_ids:
   - d4c4df5a-7415-4f73-995c-d3b6a47f073a
-explanation: "Wolfram argues that some processes require following their steps to know the result. He uses this idea to discuss limits of pattern-based shortcuts."
+explanation: "Wolfram argues that some processes require following their steps to know the result. He uses this idea to discuss limits of pattern-based shortcuts. Some processes have no general shortcut that predicts their result without effectively following the computation. Wolfram calls this computational irreducibility and uses it to argue against assuming that pattern recognition can replace all explicit calculation."
 archived: false

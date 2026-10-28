@@ -7,7 +7,7 @@ A collection of small applications. The reusable web platform lives in two proje
 
 ## Atomic lesson authoring
 
-Keep each teaching card focused and generally no longer than two short paragraphs. Concept lessons have 6–10 cards, including a three-key-learnings recap card, and a bank of six questions. Put three alternatives at each of two checkpoints so the learner answers two questions per lesson. See [the content guide](atomic-lessons/Readme.md).
+Keep each concept card focused, at least 100 words long, and split into two or three paragraphs with concrete explanations and examples. Concept lessons have 6–10 cards, including a three-key-learnings recap card, and a bank of six questions. Put three alternatives at each of two checkpoints so the learner answers two questions per lesson. See [the content guide](atomic-lessons/Readme.md).
 
 ## Run locally
 

@@ -15,5 +15,5 @@ choices:
     text: "Books, pages, and other text expose many examples of language use."
 correct_choice_ids:
   - e777ef26-e5a7-4cf5-a409-49b26d2cac80
-explanation: "Books, pages, and other text expose many examples of language use. The essay discusses their scale without making every source equally reliable."
+explanation: "Books, pages, and other text expose many examples of language use. The essay discusses their scale without making every source equally reliable. Books and webpages contain many examples of grammar, facts, stories, mistakes, and conflicting opinions. Predicting tokens across them gives the model a broad signal about how people write."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "The network computes an output from numerical pixel values."
 correct_choice_ids:
   - 265a9d2d-5909-4a5b-81ac-46f1001f09f0
-explanation: "A digit recognizer maps image pixels to a digit label. It offers a simpler example of learning from human-produced data."
+explanation: "A digit recognizer maps image pixels to a digit label. It offers a simpler example of learning from human-produced data. Give a recognizer a grid of grayscale values from a handwritten “2,” and ask it to output a label from 0 to 9. A person can usually do this even when the handwriting is unfamiliar."
 archived: false

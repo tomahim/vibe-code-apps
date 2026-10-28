@@ -15,5 +15,5 @@ choices:
     text: "He asks whether meaningful paths follow discoverable constraints, like laws of motion."
 correct_choice_ids:
   - d46ecb25-d6a2-4afd-9023-4c3c4e6f1a7a
-explanation: "Wolfram imagines generated text tracing a path through a space of linguistic features. This is an interpretation of model behavior."
+explanation: "Wolfram imagines generated text tracing a path through a space of linguistic features. This is an interpretation of model behavior. Imagine each newly generated token changing the model's representation of the growing sentence. If we drew a point for each step, the answer would trace a path through a high-dimensional feature space."
 archived: false

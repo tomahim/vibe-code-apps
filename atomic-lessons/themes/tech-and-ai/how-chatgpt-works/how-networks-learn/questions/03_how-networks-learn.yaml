@@ -15,5 +15,5 @@ choices:
     text: "Training presents inputs together with a target outcome or other learning signal."
 correct_choice_ids:
   - f749ee36-d0e6-4295-9092-aa0fc67bb181
-explanation: "A loss function turns mismatch into a number to reduce. Different tasks can use different loss functions."
+explanation: "A loss function turns mismatch into a number to reduce. Different tasks can use different loss functions. A loss function converts model error into a number that optimization can work to reduce. In a simple numerical task, we might square the difference between a predicted value and the true value."
 archived: false

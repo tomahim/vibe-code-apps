@@ -15,5 +15,5 @@ choices:
     text: "A prompt supplies the text and instructions the model can use as context."
 correct_choice_ids:
   - 71dfabdd-83f4-4628-9c3d-ada4c615793c
-explanation: "A token can be a whole word, part of a word, punctuation, or another text piece. Calling the process “next-word prediction” is a helpful simplification."
+explanation: "A token can be a whole word, part of a word, punctuation, or another text piece. Calling the process “next-word prediction” is a helpful simplification. For example, a tokenizer might split an uncommon name into several pieces while keeping a common word as one piece. Punctuation and leading spaces can also be represented separately or together, depending on the tokenizer."
 archived: false

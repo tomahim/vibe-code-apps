@@ -15,5 +15,5 @@ choices:
     text: "A layer transforms its inputs and passes the results to the next layer."
 correct_choice_ids:
   - 17713085-0f46-46c5-9ec5-4b1693690a8f
-explanation: "An artificial neuron combines several numerical inputs into one output. It is a simplified mathematical component, not a biological brain cell."
+explanation: "An artificial neuron combines several numerical inputs into one output. It is a simplified mathematical component, not a biological brain cell. A toy artificial neuron might receive two numbers, multiply each by a weight, add the results and a bias, then apply an activation function. If the inputs represented brightness at two pixels, changing the weights would change which brightness patterns produce a strong output."
 archived: false

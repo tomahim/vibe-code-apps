@@ -15,5 +15,5 @@ choices:
     text: "Information supplied in a prompt can guide the current answer."
 correct_choice_ids:
   - a3fc1206-6f18-47fb-b459-a756b0d38bd6
-explanation: "The words of a prompt become part of the input the model processes. Their wording can change the distribution of likely responses."
+explanation: "The words of a prompt become part of the input the model processes. Their wording can change the distribution of likely responses. Compare “Describe a bicycle” with “Describe a bicycle to a six-year-old in two sentences.” The second prompt supplies an audience and length constraint, changing which responses fit the context. The model processes those instructions as input tokens along with any earlier conversation."
 archived: false

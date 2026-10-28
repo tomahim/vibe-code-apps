@@ -15,5 +15,5 @@ choices:
     text: "Neural networks perform many array calculations that GPUs can run in parallel."
 correct_choice_ids:
   - a1f418f9-403e-4957-aace-9f3dc5695741
-explanation: "Neural networks perform many array calculations that GPUs can run in parallel. This makes compute capacity a practical constraint."
+explanation: "Neural networks perform many array calculations that GPUs can run in parallel. This makes compute capacity a practical constraint. The dominant operations in many neural networks are large matrix and vector calculations. A GPU can carry out many parts of these calculations in parallel, speeding up both training and inference."
 archived: false

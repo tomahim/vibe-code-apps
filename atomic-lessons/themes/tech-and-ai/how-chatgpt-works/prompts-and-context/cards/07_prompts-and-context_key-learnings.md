@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. A prompt shapes the current answer.** “Describe a bicycle to a six-year-old in two sentences” provides audience and length cues. Those tokens influence generation without changing the model's weights.
 
-- Prompts steer the current computation.
-- Examples can teach a temporary pattern.
-- Prompting does not automatically retrain the model.
+**2. Examples can establish a temporary pattern.** Showing “cat → animal” and “oak → plant” may help the model answer “sparrow → ?” in the same format. This is in-context learning, not permanent retraining.
+
+**3. Clear instructions still need verification.** A model may follow the format of a twelve-number addition request while making a carrying error. Use a calculator or other checkable process when the task demands exactness. Prompting sets up the task; it does not certify the result.

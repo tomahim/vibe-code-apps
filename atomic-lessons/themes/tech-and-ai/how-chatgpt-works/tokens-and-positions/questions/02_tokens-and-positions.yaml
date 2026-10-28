@@ -12,8 +12,8 @@ choices:
   - id: 879b5384-19f8-47f3-8c81-42db162bd48e
     text: "A sequence needs position information so the model can distinguish token order."
   - id: 26132f7b-b047-4a5c-b240-63980d9ad107
-    text: "Each token in a model's vocabulary has a numerical ID."
+    text: "No. A token ID is a label; its numerical size does not encode meaning."
 correct_choice_ids:
   - 26132f7b-b047-4a5c-b240-63980d9ad107
-explanation: "Each token in a model's vocabulary has a numerical ID. The ID identifies the token; its magnitude does not measure meaning."
+explanation: "No. A token ID is a label; its numerical size does not encode meaning. Each token in a model's vocabulary has a numerical ID. The ID identifies the token; its magnitude does not measure meaning. Imagine a vocabulary where “cat” has ID 417 and “dog” has ID 982. Those numbers are labels, like catalog numbers, rather than a scale on which 982 means “more dog.” To compare meanings, the model needs learned vectors associated with the IDs."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "A model can fit known examples yet fail on new ones."
 correct_choice_ids:
   - adf24dea-2adc-43fb-8980-ce50ba344e76
-explanation: "A model can fit known examples yet fail on new ones. Testing beyond its training examples is necessary to judge usefulness."
+explanation: "A model can fit known examples yet fail on new ones. Testing beyond its training examples is necessary to judge usefulness. Picture a curve that passes exactly through five measured points but swings wildly between them. Its training fit is perfect while its predictions are poor."
 archived: false

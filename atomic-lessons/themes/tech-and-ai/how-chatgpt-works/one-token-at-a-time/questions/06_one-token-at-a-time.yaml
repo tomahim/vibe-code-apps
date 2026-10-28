@@ -15,5 +15,5 @@ choices:
     text: "A paragraph is the result of many successive token choices."
 correct_choice_ids:
   - 32efc76c-fd1e-4966-bb5c-ef4ee32257bf
-explanation: "A paragraph is the result of many successive token choices. Local predictions can produce a coherent-looking whole, although coherence alone does not prove accuracy."
+explanation: "A paragraph is the result of many successive token choices. Local predictions can produce a coherent-looking whole, although coherence alone does not prove accuracy. Take a short answer of fifty tokens. The model has run its next-token calculation about fifty times, each time reading the available context and adding one selection."
 archived: false

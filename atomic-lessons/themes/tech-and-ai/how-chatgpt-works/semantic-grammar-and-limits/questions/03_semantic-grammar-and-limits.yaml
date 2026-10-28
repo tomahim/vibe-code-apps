@@ -15,5 +15,5 @@ choices:
     text: "Wolfram proposes rules about which concepts can sensibly combine."
 correct_choice_ids:
   - d2953d6e-d635-4a75-a53c-a9c851075382
-explanation: "Wolfram contrasts flexible human language with precise forms that a computer can execute. This is part of his proposed way to connect text with exact reasoning."
+explanation: "Wolfram contrasts flexible human language with precise forms that a computer can execute. This is part of his proposed way to connect text with exact reasoning. Wolfram describes computational language as a precise symbolic way to represent things and operations so they can be executed unambiguously. For example, a structured expression for a quantity of apples could support a calculation, whereas the ordinary sentence “I bought some apples” leaves details open."
 archived: false

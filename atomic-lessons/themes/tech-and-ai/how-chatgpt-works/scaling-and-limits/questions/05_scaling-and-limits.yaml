@@ -15,5 +15,5 @@ choices:
     text: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result."
 correct_choice_ids:
   - de84145f-e1be-45c0-9185-d620ae785063
-explanation: "Matching long nested parentheses tests whether a model tracks exact structure. The essay uses it as an example of where approximate pattern learning may fail."
+explanation: "Matching long nested parentheses tests whether a model tracks exact structure. The essay uses it as an example of where approximate pattern learning may fail. For the sequence “((()))” we can count openings and closings to verify balance. Short examples may be easy to recognize by pattern, but long nested strings require keeping track of exact depth at each point."
 archived: false

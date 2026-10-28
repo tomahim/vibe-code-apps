@@ -15,5 +15,5 @@ choices:
     text: "Attention can connect a later position with earlier context."
 correct_choice_ids:
   - ed00c55f-cfdb-40d1-9506-9982aa18da70
-explanation: "Human language contains recurring arrangements of words and phrases. Training text gives a model many examples of these regularities."
+explanation: "Human language contains recurring arrangements of words and phrases. Training text gives a model many examples of these regularities. A text collection contains repeated patterns such as subjects before verbs in many English statements and phrases nested inside larger phrases. A language model can learn these regularities because they help predict later tokens."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "The context changes what the model computes for this request, while training changes model parameters."
 correct_choice_ids:
   - 7d29f99a-6a1e-4cb2-a6db-1ef1c0eeb345
-explanation: "The context changes what the model computes for this request, while training changes model parameters. Keeping the two separate avoids a common misconception."
+explanation: "The context changes what the model computes for this request, while training changes model parameters. Keeping the two separate avoids a common misconception. Training changes the weights through an optimization process across many examples. Prompting supplies tokens that influence one run of the trained model."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "Correct-looking grammar and coherent wording can coexist with factual error."
 correct_choice_ids:
   - 02a75521-0628-4753-956c-3a60e2ad59b7
-explanation: "Long balanced parentheses demand exact tracking of nesting. The essay uses this to contrast approximate language patterns with precise algorithms."
+explanation: "Long balanced parentheses demand exact tracking of nesting. The essay uses this to contrast approximate language patterns with precise algorithms. For “(()())” we can track a running count: add one for each opening parenthesis, subtract one for each closing one, and never let the count go negative. That explicit algorithm decides balance for any length the computer can handle."
 archived: false

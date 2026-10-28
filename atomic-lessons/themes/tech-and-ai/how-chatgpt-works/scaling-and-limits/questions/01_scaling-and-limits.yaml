@@ -15,5 +15,5 @@ choices:
     text: "Exact arithmetic and program execution can require a definite procedure."
 correct_choice_ids:
   - 08e150a7-8506-4dbf-b1be-3d458c92f2da
-explanation: "Larger networks and more data can improve performance on many tasks. Size alone does not establish that every task is solved."
+explanation: "Larger networks and more data can improve performance on many tasks. Size alone does not establish that every task is solved. A larger network may represent more complex patterns, and more training examples may expose those patterns more clearly. The essay points out that this can improve writing-like tasks dramatically."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "The approach works when patterns learned from past text help predict new text."
 correct_choice_ids:
   - ceae13be-b05e-4b57-9415-58bff264fee8
-explanation: "The approach works when patterns learned from past text help predict new text. That empirical success is the essay's starting puzzle."
+explanation: "The approach works when patterns learned from past text help predict new text. That empirical success is the essay's starting puzzle. The essay asks why a finite neural network can produce text that often resembles human writing. One answer is that language has reusable structure: the same grammar, topic relationships, and rhetorical patterns appear in many places."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "Early image layers may respond to edges or shapes, while later representations are harder to name."
 correct_choice_ids:
   - 81167baf-a53c-4375-9642-d60dbc37270c
-explanation: "A layer transforms its inputs and passes the results to the next layer. Many simple operations together form a complicated function."
+explanation: "A layer transforms its inputs and passes the results to the next layer. Many simple operations together form a complicated function. Imagine an assembly line where the first station detects short edges, later stations combine them into strokes, and a final station helps score digit labels. Each station receives numbers from earlier ones and passes new numbers onward."
 archived: false

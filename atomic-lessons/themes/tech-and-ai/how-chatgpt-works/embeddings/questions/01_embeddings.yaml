@@ -15,5 +15,5 @@ choices:
     text: "A digit network can form internal representations before choosing a final label."
 correct_choice_ids:
   - 144ee3ec-fa25-4f55-997f-5b6046901973
-explanation: "An embedding is an array of numbers used to represent an item. It lets a neural network work with text in numerical form."
+explanation: "An embedding is an array of numbers used to represent an item. It lets a neural network work with text in numerical form. Imagine giving the word “crocodile” a list of several hundred numbers. No one coordinate needs to mean “reptile”; the full pattern can place it near related uses of “alligator.” A network can compare and transform these lists mathematically, which it cannot do directly with the printed letters of a word."
 archived: false

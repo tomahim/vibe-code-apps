@@ -15,5 +15,5 @@ choices:
     text: "Architecture defines the broad arrangement of computation before training begins."
 correct_choice_ids:
   - d6c8fe0b-11ce-4401-a057-f32a43a43475
-explanation: "Training may revisit examples over multiple epochs and use altered versions where appropriate. Repetition and variation can improve learning."
+explanation: "Training may revisit examples over multiple epochs and use altered versions where appropriate. Repetition and variation can improve learning. An epoch means showing the training set again, not because the network forgot every example but because its weights have changed since the previous pass. With images, a small rotation or crop can create a variation that teaches the model not to depend on one exact pixel arrangement."
 archived: false

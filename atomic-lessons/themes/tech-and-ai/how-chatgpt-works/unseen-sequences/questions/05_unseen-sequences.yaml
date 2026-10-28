@@ -15,5 +15,5 @@ choices:
     text: "The approach works when patterns learned from past text help predict new text."
 correct_choice_ids:
   - 79da9356-27ee-4d2d-a32c-ad32106a8fd7
-explanation: "Generalization means using learned patterns on a new case. It can be useful, but a plausible prediction can still be wrong."
+explanation: "Generalization means using learned patterns on a new case. It can be useful, but a plausible prediction can still be wrong. A child who learns that “the red kite flew” is grammatical can also understand “the blue kite flew” without seeing that sentence before. A language model's generalization is different from a child's understanding, but the analogy illustrates reuse of patterns across examples."
 archived: false

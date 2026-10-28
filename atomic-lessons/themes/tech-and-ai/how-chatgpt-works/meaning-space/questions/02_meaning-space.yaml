@@ -15,5 +15,5 @@ choices:
     text: "A word such as crane can name a bird or a machine."
 correct_choice_ids:
   - ab19f14f-1051-4756-9918-894503b5a078
-explanation: "A word such as crane can name a bird or a machine. Surrounding context can help separate those uses."
+explanation: "A word such as crane can name a bird or a machine. Surrounding context can help separate those uses. In “The crane lifted the steel beam,” nearby words favor the machine sense; in “The crane spread its wings,” they favor the bird. Plotting sentence-level or contextual representations can reveal those uses as separate regions even though the printed word is identical."
 archived: false

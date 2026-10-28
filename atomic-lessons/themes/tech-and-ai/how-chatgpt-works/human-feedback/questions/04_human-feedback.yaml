@@ -15,5 +15,5 @@ choices:
     text: "The linked InstructGPT paper describes a historical human-feedback training method."
 correct_choice_ids:
   - 7ef1c86a-a75e-4407-b6e3-ea1e8db80a33
-explanation: "A separate preference model can learn from ranked answers. Its signal can then help tune the assistant's responses."
+explanation: "A separate preference model can learn from ranked answers. Its signal can then help tune the assistant's responses. Suppose reviewers rank several candidate answers to the same prompt. A separate model can learn to predict which answer they would prefer, providing a reusable training signal."
 archived: false

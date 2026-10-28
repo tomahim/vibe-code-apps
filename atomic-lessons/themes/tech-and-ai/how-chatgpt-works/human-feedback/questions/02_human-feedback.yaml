@@ -15,5 +15,5 @@ choices:
     text: "Human reviewers can compare or rate model outputs."
 correct_choice_ids:
   - e3e88e35-38f5-424e-aa92-06661d1292ed
-explanation: "Human reviewers can compare or rate model outputs. Their judgments provide a signal about which responses are preferred."
+explanation: "Human reviewers can compare or rate model outputs. Their judgments provide a signal about which responses are preferred. Imagine showing reviewers two answers to “Explain photosynthesis to a child.” One is short and accurate; the other is needlessly technical or wrong. Their comparison says which output better serves the request."
 archived: false

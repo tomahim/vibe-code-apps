@@ -15,5 +15,5 @@ choices:
     text: "Human language contains recurring arrangements of words and phrases."
 correct_choice_ids:
   - c171532f-5682-401e-bc05-c1efaedd962f
-explanation: "Clauses and phrases can depend on earlier parts of a sentence. A model must track more than adjacent word pairs to handle them."
+explanation: "Clauses and phrases can depend on earlier parts of a sentence. A model must track more than adjacent word pairs to handle them. In “The report that the scientist revised was published,” the main subject “report” connects to “was published” across an intervening clause. An n-gram that sees only nearby words has a limited view of this structure."
 archived: false

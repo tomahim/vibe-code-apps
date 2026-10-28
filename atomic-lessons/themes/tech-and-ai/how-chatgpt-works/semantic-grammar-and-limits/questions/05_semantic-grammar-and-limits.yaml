@@ -15,5 +15,5 @@ choices:
     text: "Treat generated prose as a useful proposal that may need verification."
 correct_choice_ids:
   - c468ff9c-b743-4503-9b30-7f2fd8375508
-explanation: "The core mechanism is repeated next-token prediction by a trained neural network. Large-scale learning and later tuning make its outputs more useful."
+explanation: "The core mechanism is repeated next-token prediction by a trained neural network. Large-scale learning and later tuning make its outputs more useful. The central account begins with lots of human-created text and a network trained to predict what token comes next. Repeating that prediction from a prompt can produce coherent responses."
 archived: false

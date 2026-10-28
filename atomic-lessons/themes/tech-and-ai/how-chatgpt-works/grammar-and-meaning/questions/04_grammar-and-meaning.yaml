@@ -15,5 +15,5 @@ choices:
     text: "Long balanced parentheses demand exact tracking of nesting."
 correct_choice_ids:
   - 812d28c2-3da4-466d-90ac-1ddab412cb4e
-explanation: "Attention can connect a later position with earlier context. This helps a transformer represent relationships across a sentence."
+explanation: "Attention can connect a later position with earlier context. This helps a transformer represent relationships across a sentence. When the model reaches “was published” in the report sentence, it can draw on earlier representations of “report” and the intervening phrase. Attention supplies weighted routes for this information to influence the current position."
 archived: false

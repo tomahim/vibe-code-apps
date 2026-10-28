@@ -15,5 +15,5 @@ choices:
     text: "Attention lets a position combine information from earlier positions."
 correct_choice_ids:
   - 175c1a74-b95e-41ab-a7db-fa72829b0a98
-explanation: "Attention lets a position combine information from earlier positions. For next-token generation, the model must not look ahead at text it has yet to produce."
+explanation: "Attention lets a position combine information from earlier positions. For next-token generation, the model must not look ahead at text it has yet to produce. Picture the model processing the word “it” in the scientist sentence. Attention can build a new representation for that position using information from earlier words such as “report.” During next-token generation, a causal model can only use tokens already present, not a future word it has yet to write."
 archived: false

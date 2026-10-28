@@ -15,5 +15,5 @@ choices:
     text: "A tool can perform an explicit calculation or retrieve checkable evidence."
 correct_choice_ids:
   - 1d61a819-6b54-4cfe-84b6-e23944851bf2
-explanation: "Wolfram proposes rules about which concepts can sensibly combine. This goes beyond the syntax that says which word orders are grammatical."
+explanation: "Wolfram proposes rules about which concepts can sensibly combine. This goes beyond the syntax that says which word orders are grammatical. Syntactic grammar can say that “the elephant traveled” has a normal English structure. Semantic grammar, in Wolfram's proposed sense, would help describe which concepts can combine into a plausible meaning: objects can move, people can buy things, and quantities can measure them."
 archived: false

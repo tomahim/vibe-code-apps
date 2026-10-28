@@ -15,5 +15,5 @@ choices:
     text: "Models can represent a token in the context of a whole sequence."
 correct_choice_ids:
   - 63c5be9c-2d53-46e0-920c-4d83b7de0361
-explanation: "One word may have several meanings, and a single fixed vector cannot fully express every use. Contextual representations help distinguish uses."
+explanation: "One word may have several meanings, and a single fixed vector cannot fully express every use. Contextual representations help distinguish uses. Consider the sentence “The crane lifted the beam” and then “The crane stood by the marsh.” A fixed representation for the printed word “crane” cannot by itself say whether it refers to machinery or a bird. Contextual representations can incorporate the neighboring words and make the two uses different."
 archived: false

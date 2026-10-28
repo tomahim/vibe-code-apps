@@ -15,5 +15,5 @@ choices:
     text: "After selecting a token, the model includes it in the context for the next prediction."
 correct_choice_ids:
   - cf98d57c-4f02-4a05-bc74-8f45683f931d
-explanation: "The model gives many candidate next tokens different scores that become probabilities. It does not retrieve one fixed continuation from a stored page."
+explanation: "The model gives many candidate next tokens different scores that become probabilities. It does not retrieve one fixed continuation from a stored page. Suppose the prompt ends “She opened the door and saw a.” The candidates “dog,” “garden,” and “stranger” could all fit, though with different scores. Turning those scores into probabilities gives a distribution, not a single fact about what must come next."
 archived: false

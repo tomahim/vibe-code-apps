@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. Meaningful form is not factual evidence.** Semantic grammar asks which concepts combine plausibly; “I bought two pounds of apples” can be intelligible whether it is a real report or fiction.
 
-- ChatGPT builds responses through repeated prediction.
-- Meaningful prose and factual correctness differ.
-- Use evidence and tools when correctness matters.
+**2. Precise tools can support exact answers.** A structured calculation, a database, or a reliable source can check a claim that the language model could otherwise only phrase convincingly. Verify tool inputs as well as outputs.
+
+**3. Keep mechanism and interpretation separate.** Repeated next-token prediction by a trained network is the central mechanism. Wolfram's ideas about semantic grammar and computational limits help frame questions about it, while each factual answer still needs task-appropriate checking.

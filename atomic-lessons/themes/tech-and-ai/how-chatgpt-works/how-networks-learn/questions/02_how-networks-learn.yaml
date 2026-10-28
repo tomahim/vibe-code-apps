@@ -15,5 +15,5 @@ choices:
     text: "A training step measures how different the model's result is from what was wanted."
 correct_choice_ids:
   - 101dc8fc-dbca-496a-8776-958df51f883a
-explanation: "A training step measures how different the model's result is from what was wanted. The comparison guides the next adjustment."
+explanation: "A training step measures how different the model's result is from what was wanted. The comparison guides the next adjustment. If the network assigns a high score to “8” for a clear image of a “3,” we need a way to say how far it missed. The target label supplies that comparison."
 archived: false

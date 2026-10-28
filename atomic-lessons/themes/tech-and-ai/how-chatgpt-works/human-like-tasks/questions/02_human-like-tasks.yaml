@@ -15,5 +15,5 @@ choices:
     text: "The same digit can appear in many shapes and positions."
 correct_choice_ids:
   - d7fad62c-1e88-4b7f-adaa-5214e0d07758
-explanation: "The same digit can appear in many shapes and positions. Exact pixel comparison cannot reliably recognize every variation."
+explanation: "The same digit can appear in many shapes and positions. Exact pixel comparison cannot reliably recognize every variation. Two people can write the digit 4 with different angles, line widths, and positions on a page. A pixel-by-pixel lookup would need separate stored examples for many tiny changes."
 archived: false

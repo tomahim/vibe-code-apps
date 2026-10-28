@@ -15,5 +15,5 @@ choices:
     text: "The model processes a sequence of token representations, not just an isolated last word."
 correct_choice_ids:
   - 24b45768-b0e5-48e4-98eb-f6fd9db1b465
-explanation: "A sequence needs position information so the model can distinguish token order. The essay illustrates this with GPT-2's learned position embeddings."
+explanation: "A sequence needs position information so the model can distinguish token order. The essay illustrates this with GPT-2's learned position embeddings. “Dog bites man” and “Man bites dog” contain nearly the same words but have different meanings because the order changes. If the model only received a bag of token vectors, it could lose that distinction."
 archived: false

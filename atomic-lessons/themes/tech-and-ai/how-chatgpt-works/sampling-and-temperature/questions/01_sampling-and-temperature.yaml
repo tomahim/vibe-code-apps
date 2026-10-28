@@ -15,5 +15,5 @@ choices:
     text: "Temperature changes how strongly decoding favors high-scored tokens."
 correct_choice_ids:
   - 4461fb98-5d74-4ccf-b144-44a03ebaf667
-explanation: "Several next tokens can be plausible at once. A decoding rule decides which of those candidates becomes the next visible token."
+explanation: "Several next tokens can be plausible at once. A decoding rule decides which of those candidates becomes the next visible token. After “The weather tomorrow will be,” both “sunny” and “rainy” are linguistically possible, even if one has a much higher score in a given context. The model supplies a distribution over candidates; the application chooses how to turn it into a token."
 archived: false

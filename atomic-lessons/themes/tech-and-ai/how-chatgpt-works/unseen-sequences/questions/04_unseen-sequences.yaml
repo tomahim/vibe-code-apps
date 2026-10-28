@@ -15,5 +15,5 @@ choices:
     text: "Generalization means using learned patterns on a new case."
 correct_choice_ids:
   - f059b48d-81dd-45f2-b4b8-0f01a18ed43c
-explanation: "A language model maps the current context to a distribution over possible next tokens. The same mechanism can be applied repeatedly."
+explanation: "A language model maps the current context to a distribution over possible next tokens. The same mechanism can be applied repeatedly. Given “Please describe the room: A lamp stood beside the,” a language model returns scores for possible next tokens such as “bed,” “desk,” or “door.” It does not directly return a verified description of a real room. After one token is chosen, the same model can be applied again to the enlarged context."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "Correct-looking grammar and coherent wording can coexist with factual error."
 correct_choice_ids:
   - 13a0dbcf-1f19-48e4-9a56-17a3cd809469
-explanation: "Correct-looking grammar and coherent wording can coexist with factual error. Checking the claim requires evidence beyond its style."
+explanation: "Correct-looking grammar and coherent wording can coexist with factual error. Checking the claim requires evidence beyond its style. An answer can maintain subject-verb agreement, use elegant transitions, and still invent an event. The model's command of syntax makes the false claim easier to read, which can increase misplaced trust."
 archived: false

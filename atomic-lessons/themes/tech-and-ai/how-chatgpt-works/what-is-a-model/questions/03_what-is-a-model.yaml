@@ -15,5 +15,5 @@ choices:
     text: "A table records answers already measured, while a model gives a procedure for estimating new answers."
 correct_choice_ids:
   - 6b6eab0c-8ea5-457d-a87f-e69a8018e157
-explanation: "A straight line may fit some observations but miss their shape. A more suitable curve can improve estimates between measured points."
+explanation: "A straight line may fit some observations but miss their shape. A more suitable curve can improve estimates between measured points. Imagine points that curve upward when plotted against height. A straight line may pass near the middle points but systematically miss the ends."
 archived: false

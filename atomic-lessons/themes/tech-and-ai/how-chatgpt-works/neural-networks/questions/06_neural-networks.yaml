@@ -15,5 +15,5 @@ choices:
     text: "Inspecting every weight does not automatically reveal a short human explanation."
 correct_choice_ids:
   - 554b968d-ee0c-4d21-af56-d8fe57bda1b7
-explanation: "Inspecting every weight does not automatically reveal a short human explanation. The network's useful behavior and our understanding of it are separate questions."
+explanation: "Inspecting every weight does not automatically reveal a short human explanation. The network's useful behavior and our understanding of it are separate questions. Suppose a classifier correctly labels a cat photo. We could inspect all its intermediate numbers and weights, yet still struggle to answer which combination caused the final choice."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation."
 correct_choice_ids:
   - ec6d884d-0623-435d-9ad3-fb193938f8b8
-explanation: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation. They should not be read as specifications for today's ChatGPT."
+explanation: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation. They should not be read as specifications for today's ChatGPT. The essay names GPT-2 and GPT-3 dimensions to make an otherwise abstract architecture tangible. Those values describe the particular historical examples Wolfram discussed in 2023."
 archived: false

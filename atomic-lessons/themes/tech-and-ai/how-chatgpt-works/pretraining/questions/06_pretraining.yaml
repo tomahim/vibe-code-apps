@@ -15,5 +15,5 @@ choices:
     text: "A model trained to continue text can produce a convincing false statement."
 correct_choice_ids:
   - fbb8537e-195f-4333-8250-585637b05895
-explanation: "A model trained to continue text can produce a convincing false statement. Plausibility is a different test from factual verification."
+explanation: "A model trained to continue text can produce a convincing false statement. Plausibility is a different test from factual verification. Imagine asking for the year of an obscure event. A pretrained model may produce a confident date because it has learned the style of encyclopedia answers and associations with the topic."
 archived: false

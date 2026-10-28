@@ -15,5 +15,5 @@ choices:
     text: "The chosen token joins the visible sequence and the next prediction begins."
 correct_choice_ids:
   - 59903fcc-fbc0-4fac-88e9-61773524c0f7
-explanation: "A decoding rule selects one token from that distribution. The selection may be deterministic or involve sampling."
+explanation: "A decoding rule selects one token from that distribution. The selection may be deterministic or involve sampling. If decoding takes the highest-ranked token, the next piece is chosen deterministically under those conditions. If it samples, another plausible token may appear."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "The current context is turned into token representations."
 correct_choice_ids:
   - 7f5f299a-902e-4dd7-97ec-697b5b7959ad
-explanation: "For a next-token prediction, the final position's representation is used to score possible continuations. Earlier positions helped form it."
+explanation: "For a next-token prediction, the final position's representation is used to score possible continuations. Earlier positions helped form it. In a causal language model, the representation at the final input position summarizes information available for predicting what follows. Earlier positions matter because their information can be mixed into that representation through the network."
 archived: false

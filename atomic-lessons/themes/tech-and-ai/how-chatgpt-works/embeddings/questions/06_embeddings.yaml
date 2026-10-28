@@ -15,5 +15,5 @@ choices:
     text: "Models can represent a token in the context of a whole sequence."
 correct_choice_ids:
   - 217c8ac3-25f7-4430-bfa3-8f012863eccd
-explanation: "Models can represent a token in the context of a whole sequence. Those changing representations help predict what comes next."
+explanation: "Models can represent a token in the context of a whole sequence. Those changing representations help predict what comes next. The model can represent “apple” differently in “apple pie” and “Apple released a device” because the surrounding tokens change the computation. As text passes through layers, representations combine information from several positions."
 archived: false

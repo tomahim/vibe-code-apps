@@ -56,7 +56,7 @@ Use PNG, JPEG, WebP, GIF, or SVG. Commit the image alongside the index; URLs, pa
 
 Cards use the same front matter. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
 
-For concept lessons, use 6–10 cards including a final **3 key learnings** card. Keep each teaching card focused and generally no longer than two short paragraphs. Add a source or optional deeper-reading link directly to selected cards. Author six multiple-choice questions per lesson as two pools of three alternatives: one checkpoint midway through the teaching cards and one after the recap, so the learner answers exactly two.
+For concept lessons, use 6–10 cards including a final **3 key learnings** card. Keep each concept card at least 100 words long in two or three paragraphs. Explain the mechanism with a concrete example when relevant; avoid cards made only of definitions or broad claims. Add a source or optional deeper-reading link directly to selected cards. Author six multiple-choice questions per lesson as two pools of three alternatives: one checkpoint midway through the teaching cards and one after the recap, so the learner answers exactly two.
 
 For expression lessons, put exactly four expression pairs in each card. Write the English in bold followed by its French translation as an italic blockquote. Keep translations precise and American English natural:
 

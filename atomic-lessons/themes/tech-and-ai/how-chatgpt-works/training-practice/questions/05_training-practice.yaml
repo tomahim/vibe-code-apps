@@ -6,7 +6,7 @@ after_card_position: 7
 prompt: "What can a stalled learning curve signal?"
 choices:
   - id: b80121d2-bb4d-4470-b2b1-0124db4fc1e1
-    text: "Loss commonly falls and then levels off during training."
+    text: "A plateau can indicate limits in the architecture, data, or optimization settings."
   - id: 086823ef-6325-4ae1-b377-fac7e1f4784a
     text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
   - id: 2aa154e2-9c3a-4442-a22d-bd777e4de3fd
@@ -15,5 +15,5 @@ choices:
     text: "Neural networks perform many array calculations that GPUs can run in parallel."
 correct_choice_ids:
   - b80121d2-bb4d-4470-b2b1-0124db4fc1e1
-explanation: "Loss commonly falls and then levels off during training. A stalled or high loss can point to problems with data, settings, or architecture."
+explanation: "A plateau can indicate limits in the architecture, data, or optimization settings. Loss commonly falls and then levels off during training. A stalled or high loss can point to problems with data, settings, or architecture. Plot loss against training steps. It may fall quickly, then flatten as progress slows."
 archived: false

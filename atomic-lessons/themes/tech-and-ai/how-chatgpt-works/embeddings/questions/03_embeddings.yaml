@@ -15,5 +15,5 @@ choices:
     text: "An embedding is an array of numbers used to represent an item."
 correct_choice_ids:
   - 38ea7cb4-9f84-45bf-9cbf-05ad49fa2071
-explanation: "The surrounding words provide clues about how a word is used. Similar surroundings can help a model learn useful relationships."
+explanation: "The surrounding words provide clues about how a word is used. Similar surroundings can help a model learn useful relationships. Suppose a model sees “The ___ swam across the river” in many examples. The words that fit the blank help reveal which terms behave similarly in context."
 archived: false

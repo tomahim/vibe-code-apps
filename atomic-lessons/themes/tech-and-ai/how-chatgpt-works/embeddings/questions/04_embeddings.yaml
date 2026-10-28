@@ -15,5 +15,5 @@ choices:
     text: "One word may have several meanings, and a single fixed vector cannot fully express every use."
 correct_choice_ids:
   - 3e87cdcf-5008-4533-a1fe-a97ebaf460cb
-explanation: "A digit network can form internal representations before choosing a final label. An embedding can use such intermediate features."
+explanation: "A digit network can form internal representations before choosing a final label. An embedding can use such intermediate features. In a digit classifier, the final output may be a label such as “4.” Just before that decision, internal numbers may encode details like the shape and slant of the strokes. Taking those intermediate numbers as a representation can let us compare two images more richly than the final labels alone."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "A text sample lets us estimate how often each letter appears."
 correct_choice_ids:
   - aaa36109-babf-48bf-a607-ac17fb568b6c
-explanation: "The letter after q in English is very often u. This shows why the previous character changes the next character's probability."
+explanation: "The letter after q in English is very often u. This shows why the previous character changes the next character's probability. Seeing q makes u much more likely in ordinary English than it is after most other letters. A table of single-letter frequencies cannot express that conditional relationship, but a table of letter pairs can."
 archived: false

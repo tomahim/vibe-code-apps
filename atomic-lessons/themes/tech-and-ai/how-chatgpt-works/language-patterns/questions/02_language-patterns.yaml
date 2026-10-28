@@ -15,5 +15,5 @@ choices:
     text: "Choosing each letter independently ignores how letters fit together."
 correct_choice_ids:
   - cb66035f-ab85-4318-8d99-5bef912b8a76
-explanation: "Choosing each letter independently ignores how letters fit together. The resulting strings rarely resemble useful words."
+explanation: "Choosing each letter independently ignores how letters fit together. The resulting strings rarely resemble useful words. If we draw letters using only their overall frequencies, we may see many e's and t's, but the result will look like noise. The choice after a letter is not independent of what came before."
 archived: false

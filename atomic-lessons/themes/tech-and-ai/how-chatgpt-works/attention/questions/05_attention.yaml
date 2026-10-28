@@ -15,5 +15,5 @@ choices:
     text: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer."
 correct_choice_ids:
   - e0607948-77d1-4f38-b498-265b6c664e67
-explanation: "A transformer stacks attention with other learned transformations. The architecture was introduced in the 2017 paper linked below."
+explanation: "A transformer stacks attention with other learned transformations. The architecture was introduced in the 2017 paper linked below. A transformer block does more than look back. It combines attention with learned transformations at each position, and the model stacks many blocks so later representations can use information processed earlier."
 archived: false

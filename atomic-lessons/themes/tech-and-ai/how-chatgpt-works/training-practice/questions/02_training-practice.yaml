@@ -15,5 +15,5 @@ choices:
     text: "Useful examples must be collected and prepared for the learning objective."
 correct_choice_ids:
   - 3563eb03-3e15-4c3c-a441-4ae8e1b4d43f
-explanation: "Useful examples must be collected and prepared for the learning objective. Data quality and coverage affect the result."
+explanation: "Useful examples must be collected and prepared for the learning objective. Data quality and coverage affect the result. Imagine teaching a digit model with only neat printed numbers, then testing it on shaky handwritten notes. The training data did not cover the intended situation, so weak performance would be unsurprising."
 archived: false

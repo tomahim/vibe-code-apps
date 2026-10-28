@@ -15,5 +15,5 @@ choices:
     text: "Possible word sequences multiply rapidly as their length grows."
 correct_choice_ids:
   - f246b9af-7952-4a12-b4b7-97d915c10aad
-explanation: "Possible word sequences multiply rapidly as their length grows. Even a huge collection of text leaves most long sequences unseen."
+explanation: "Possible word sequences multiply rapidly as their length grows. Even a huge collection of text leaves most long sequences unseen. With a vocabulary of tens of thousands of words, the number of possible two-word pairs is already enormous. Add a third word and the space grows again by the vocabulary size."
 archived: false

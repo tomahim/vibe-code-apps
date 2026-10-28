@@ -15,5 +15,5 @@ choices:
     text: "Predicting likely text and answering a user's request well are related but different objectives."
 correct_choice_ids:
   - aa570dda-a799-4196-a586-395ad9e34d1e
-explanation: "The linked InstructGPT paper describes a historical human-feedback training method. It is an example, not a complete description of current ChatGPT training."
+explanation: "The linked InstructGPT paper describes a historical human-feedback training method. It is an example, not a complete description of current ChatGPT training. The InstructGPT research linked from the card describes a specific historical approach using demonstrations, comparisons, and reinforcement learning from human feedback. It helps explain why an instruction-following assistant differs from a raw completion model of similar size."
 archived: false

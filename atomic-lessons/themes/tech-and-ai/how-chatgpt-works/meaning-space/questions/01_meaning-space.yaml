@@ -15,5 +15,5 @@ choices:
     text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
 correct_choice_ids:
   - 89f9acb7-d659-40cc-bdd7-c169f970422e
-explanation: "Numerical representations can place related uses of words near one another. A two-dimensional plot is only a projection of a larger space."
+explanation: "Numerical representations can place related uses of words near one another. A two-dimensional plot is only a projection of a larger space. A word vector may have hundreds or thousands of coordinates, too many to draw directly. A two-dimensional plot compresses that information so nearby points can be shown on a page."
 archived: false

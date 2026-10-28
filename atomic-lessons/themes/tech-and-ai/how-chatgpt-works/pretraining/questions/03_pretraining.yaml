@@ -10,10 +10,10 @@ choices:
   - id: 2d02b49e-748a-4e29-80da-516e30d4cc2a
     text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
   - id: fca99de5-014c-4376-a055-d5724ef78022
-    text: "During training, predicted token probabilities are compared with the actual next token."
+    text: "Optimization updates weights after comparing predicted probabilities with the observed next token."
   - id: 39faabac-0dd0-444e-ad35-b0132741a2cd
     text: "A language model can learn by predicting missing next tokens in text."
 correct_choice_ids:
   - fca99de5-014c-4376-a055-d5724ef78022
-explanation: "During training, predicted token probabilities are compared with the actual next token. Optimization updates weights to improve future predictions."
+explanation: "Optimization updates weights after comparing predicted probabilities with the observed next token. During training, predicted token probabilities are compared with the actual next token. Optimization updates weights to improve future predictions. Suppose the observed next token is “nests,” but the model assigned most probability to “homes.” Training computes a loss based on that mismatch and adjusts weights so similar examples are better predicted in future. One update is tiny relative to the full training process."
 archived: false

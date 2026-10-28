@@ -15,5 +15,5 @@ choices:
     text: "Matching long nested parentheses tests whether a model tracks exact structure."
 correct_choice_ids:
   - 0ca96c3a-38fe-4528-9bba-7568e8b9c0a2
-explanation: "Exact arithmetic and program execution can require a definite procedure. A prediction from patterns is not a substitute for verifying the computation."
+explanation: "Exact arithmetic and program execution can require a definite procedure. A prediction from patterns is not a substitute for verifying the computation. Consider adding a long column of numbers. A plausible-looking total can be generated from language patterns, but a reliable result requires carrying the digits or using a calculator and checking the input."
 archived: false

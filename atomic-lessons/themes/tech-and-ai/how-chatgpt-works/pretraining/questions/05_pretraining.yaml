@@ -15,5 +15,5 @@ choices:
     text: "A model trained to continue text can produce a convincing false statement."
 correct_choice_ids:
   - cdd51f11-7405-45d7-ae34-668abfdd286b
-explanation: "More useful data and model capacity can improve predictions and generated text. The relationship is empirical and depends on training choices."
+explanation: "More useful data and model capacity can improve predictions and generated text. The relationship is empirical and depends on training choices. More varied, relevant examples can improve a model's ability to recognize recurring structures; more capacity can let it represent richer patterns. That helps explain why larger pretraining efforts often improved language generation."
 archived: false

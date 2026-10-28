@@ -15,5 +15,5 @@ choices:
     text: "Successive blocks transform and combine information across positions."
 correct_choice_ids:
   - 184e1aa9-c258-43c5-b1cc-a1a18578dafc
-explanation: "Successive blocks transform and combine information across positions. The resulting representation reflects the context processed so far."
+explanation: "Successive blocks transform and combine information across positions. The resulting representation reflects the context processed so far. Each transformer block changes the token representations using attention and other learned operations. A later block receives the results of earlier blocks, so it can combine local and more distant information."
 archived: false

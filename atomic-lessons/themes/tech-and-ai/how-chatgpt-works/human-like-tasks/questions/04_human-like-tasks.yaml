@@ -15,5 +15,5 @@ choices:
     text: "Some images do not have an obvious label even for people."
 correct_choice_ids:
   - 171e1121-b94d-4f87-af72-6aaa233c558f
-explanation: "The network computes an output from numerical pixel values. Training determines the parameters of that function."
+explanation: "The network computes an output from numerical pixel values. Training determines the parameters of that function. In a simplified recognizer, each pixel's brightness becomes an input number. A trained network transforms the collection of numbers through many weighted operations and produces scores for digit labels."
 archived: false

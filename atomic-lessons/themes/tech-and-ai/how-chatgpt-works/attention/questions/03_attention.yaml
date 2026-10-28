@@ -15,5 +15,5 @@ choices:
     text: "A later word may depend on a much earlier one."
 correct_choice_ids:
   - 170bbebd-a4cb-4391-a6e2-8bf76e52fe1d
-explanation: "Attention gives different previous positions different weights for the current calculation. The weights depend on the current input."
+explanation: "Attention gives different previous positions different weights for the current calculation. The weights depend on the current input. For a current token, attention assigns numerical weights to earlier token representations and combines them. A large weight can make one earlier position contribute more to that calculation, though the meaning of the weight depends on the surrounding transformations."
 archived: false

@@ -8,12 +8,12 @@ choices:
   - id: 7e778a2b-4004-4052-a56a-ef66f508ca7e
     text: "The context changes what the model computes for this request, while training changes model parameters."
   - id: f43bb6df-4597-404e-b245-e5fabce3fa1e
-    text: "Information supplied in a prompt can guide the current answer."
+    text: "No. Prompt information can guide the current answer without automatically updating model weights."
   - id: 434bc296-4a33-438f-a0a7-cc19ddde0fc0
     text: "A few examples can establish a pattern for the next response."
   - id: 20e2fd37-dea6-4373-a3af-8ecaf0c550ac
     text: "A prompt may ask for a long exact procedure or a fact the model cannot verify."
 correct_choice_ids:
   - f43bb6df-4597-404e-b245-e5fabce3fa1e
-explanation: "Information supplied in a prompt can guide the current answer. It is not automatically a permanent update to the model."
+explanation: "No. Prompt information can guide the current answer without automatically updating model weights. Information supplied in a prompt can guide the current answer. It is not automatically a permanent update to the model. If you paste a temporary meeting agenda and ask for a summary, the model can use that agenda while it remains in the available context. That does not mean the agenda has been added to the model's general training data or stored permanently as a weight."
 archived: false

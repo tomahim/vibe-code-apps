@@ -15,5 +15,5 @@ choices:
     text: "For a human-like task, a useful test is whether outputs usually match what people would say."
 correct_choice_ids:
   - baf3d1cb-ea65-4c9d-bd30-bf5383e0a155
-explanation: "For a human-like task, a useful test is whether outputs usually match what people would say. Such agreement is empirical, not a mathematical guarantee."
+explanation: "For a human-like task, a useful test is whether outputs usually match what people would say. Such agreement is empirical, not a mathematical guarantee. Suppose a digit model gets 98 of 100 ordinary handwritten examples right. That is useful evidence, though we would still test different handwriting styles and poor scans."
 archived: false

@@ -15,5 +15,5 @@ choices:
     text: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result."
 correct_choice_ids:
   - c027655c-3b05-4de7-a777-d5d359f3b03f
-explanation: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result. Tool use changes what an assistant can reliably do."
+explanation: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result. Tool use changes what an assistant can reliably do. A calculator can return the exact product of two large integers; an interpreter can run a program; a database query can retrieve a record. If an assistant uses one of these tools correctly and reports the result, its answer can be grounded in a process beyond text prediction."
 archived: false

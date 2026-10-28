@@ -15,5 +15,5 @@ choices:
     text: "Remembering examples is different from carrying out a new sequence of exact steps."
 correct_choice_ids:
   - b0f5eef3-0d8c-4274-8165-6d113a258e2b
-explanation: "Remembering examples is different from carrying out a new sequence of exact steps. A fluent answer can hide this distinction."
+explanation: "Remembering examples is different from carrying out a new sequence of exact steps. A fluent answer can hide this distinction. If you have seen the answers to several multiplication problems, you may remember them without knowing a general multiplication procedure. A new problem with unfamiliar numbers exposes the difference."
 archived: false

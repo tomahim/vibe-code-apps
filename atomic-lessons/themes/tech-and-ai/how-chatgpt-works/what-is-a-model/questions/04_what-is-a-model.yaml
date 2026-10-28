@@ -15,5 +15,5 @@ choices:
     text: "Training adjusts parameters inside a structure selected beforehand."
 correct_choice_ids:
   - f96f4c1e-93cc-4c7b-a846-dfdce8d16d87
-explanation: "Parameters are numerical values chosen to fit the model to data. A neural network can have a very large number of such weights."
+explanation: "Parameters are numerical values chosen to fit the model to data. A neural network can have a very large number of such weights. In the simple line y = a + bx, the numbers a and b are parameters. Changing b tilts the line; changing a moves it up or down."
 archived: false

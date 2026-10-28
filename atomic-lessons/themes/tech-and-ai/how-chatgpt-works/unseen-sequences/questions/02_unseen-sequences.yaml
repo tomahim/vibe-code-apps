@@ -12,8 +12,8 @@ choices:
   - id: 9d64d3b7-8d39-4b09-bab6-39c31d3d104f
     text: "A language model maps the current context to a distribution over possible next tokens."
   - id: 1b88a664-7e5d-4929-b0d6-490aa675e800
-    text: "Many plausible sequences will be absent from training text."
+    text: "It can still be a plausible sequence; absence from a finite corpus does not make it impossible."
 correct_choice_ids:
   - 1b88a664-7e5d-4929-b0d6-490aa675e800
-explanation: "Many plausible sequences will be absent from training text. Absence from the sample does not make a sequence impossible."
+explanation: "It can still be a plausible sequence; absence from a finite corpus does not make it impossible. Many plausible sequences will be absent from training text. Absence from the sample does not make a sequence impossible. A new phrase can be absent simply because the corpus is finite. It might be grammatical, meaningful, and useful even if no one has written it before."
 archived: false

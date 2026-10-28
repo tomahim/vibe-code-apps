@@ -15,5 +15,5 @@ choices:
     text: "The chosen token joins the visible sequence and the next prediction begins."
 correct_choice_ids:
   - 2a7efbb1-41c0-4ae8-a1d3-7396eeea87c4
-explanation: "The chosen token joins the visible sequence and the next prediction begins. Repeating this loop creates the response."
+explanation: "The chosen token joins the visible sequence and the next prediction begins. Repeating this loop creates the response. After “hills” is emitted, the next input context includes “The moon rose above the hills.” A new prediction may add a period or continue the scene. Repeat this process enough times and a paragraph appears."
 archived: false

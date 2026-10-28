@@ -15,5 +15,5 @@ choices:
     text: "Several next tokens can be plausible at once."
 correct_choice_ids:
   - 41a1c68e-bcb8-4256-b7b8-933bfef0c998
-explanation: "Sampling sometimes chooses a lower-ranked but plausible option. This introduces variation while still using the model's estimated probabilities."
+explanation: "Sampling sometimes chooses a lower-ranked but plausible option. This introduces variation while still using the model's estimated probabilities. Suppose the model gives “sofa” a high probability and “windowsill” a smaller but still reasonable one. Sampling may choose either according to the configured distribution, leading to two different stories."
 archived: false

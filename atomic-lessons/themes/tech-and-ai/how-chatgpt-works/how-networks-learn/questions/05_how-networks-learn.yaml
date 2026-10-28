@@ -15,5 +15,5 @@ choices:
     text: "A separate evaluation checks performance on examples not used for training."
 correct_choice_ids:
   - 259509fb-8b71-467a-8086-3cd05d89b216
-explanation: "Many updates across many examples gradually shape the network. One example alone rarely gives a useful general rule."
+explanation: "Many updates across many examples gradually shape the network. One example alone rarely gives a useful general rule. If a model sees only one handwritten 2, it might adapt to that exact stroke pattern and fail on another person's handwriting. Repeated examples expose variation in size, angle, and style."
 archived: false

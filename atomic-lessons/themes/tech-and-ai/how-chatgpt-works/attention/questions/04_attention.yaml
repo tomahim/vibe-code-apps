@@ -15,5 +15,5 @@ choices:
     text: "A transformer stacks attention with other learned transformations."
 correct_choice_ids:
   - 14a2ac95-80af-4333-ab14-89cd952e732d
-explanation: "Several heads can form different weighted combinations in parallel. Their exact internal roles are often hard to label."
+explanation: "Several heads can form different weighted combinations in parallel. Their exact internal roles are often hard to label. Imagine several heads processing the same sentence in parallel. One may emphasize a nearby phrase while another emphasizes a more distant noun; their outputs are then combined with other network operations."
 archived: false

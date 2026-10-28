@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. Predicting text is not the same as assisting a person.** A raw continuation model might imitate a forum thread when asked for help. Demonstrations and preference feedback can encourage a direct, useful answer instead.
 
-- Pretraining alone does not define assistant behavior.
-- Human demonstrations and preferences can guide responses.
-- The linked method is a historical example.
+**2. Human judgments provide a training signal.** Reviewers can compare two explanations of photosynthesis, while a learned preference model helps reuse many such rankings. This signal reflects specific reviewers and criteria, so independent checks still matter.
+
+**3. Historical methods need context.** The linked InstructGPT paper illustrates an influential approach to post-training. It is useful for understanding the idea, but it is not a complete public specification of all later ChatGPT models.

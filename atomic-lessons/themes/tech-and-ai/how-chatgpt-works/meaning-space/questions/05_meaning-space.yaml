@@ -6,7 +6,7 @@ after_card_position: 7
 prompt: "Are semantic laws of motion established by the essay?"
 choices:
   - id: 1a2d3c28-cf90-42a5-9c26-59c6ec77bfeb
-    text: "He asks whether meaningful paths follow discoverable constraints, like laws of motion."
+    text: "No. Wolfram proposes semantic laws as an open research question."
   - id: 63bf294c-5d52-495d-adc2-c08dcb4727a4
     text: "Some relationships between words appear as geometric patterns in embeddings."
   - id: d342d456-714b-446f-9166-0f54caa7c7a0
@@ -15,5 +15,5 @@ choices:
     text: "The plotted trajectories do not reveal a simple, established law of meaning."
 correct_choice_ids:
   - 1a2d3c28-cf90-42a5-9c26-59c6ec77bfeb
-explanation: "He asks whether meaningful paths follow discoverable constraints, like laws of motion. The essay presents this as an open research idea."
+explanation: "No. Wolfram proposes semantic laws as an open research question. He asks whether meaningful paths follow discoverable constraints, like laws of motion. The essay presents this as an open research idea. In physics, a law of motion can constrain where an object goes next. Wolfram asks whether there might be analogous constraints on how meaningful text moves through a representation space."
 archived: false

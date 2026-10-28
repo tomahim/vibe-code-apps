@@ -15,5 +15,5 @@ choices:
     text: "A sequence needs position information so the model can distinguish token order."
 correct_choice_ids:
   - 24f156c1-d7fa-43de-b12c-4a2337567db0
-explanation: "Tokenization divides input text into model-sized pieces. Different tokenizers may split the same phrase differently."
+explanation: "Tokenization divides input text into model-sized pieces. Different tokenizers may split the same phrase differently. A tokenizer may keep “book” as one token while splitting a rare technical term into several fragments. Spaces and punctuation can affect the split too."
 archived: false

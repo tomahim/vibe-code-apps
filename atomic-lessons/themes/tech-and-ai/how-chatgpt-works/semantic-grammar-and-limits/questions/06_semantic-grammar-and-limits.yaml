@@ -15,5 +15,5 @@ choices:
     text: "Treat generated prose as a useful proposal that may need verification."
 correct_choice_ids:
   - 34b83f54-f26a-4cb5-ba5e-3c27708888ad
-explanation: "Treat generated prose as a useful proposal that may need verification. Ask for sources, use appropriate tools, and check consequential claims."
+explanation: "Treat generated prose as a useful proposal that may need verification. Ask for sources, use appropriate tools, and check consequential claims. Use the model to draft, explain, compare, and explore, then choose checks that fit the claim. For a historical date, consult a source; for a numerical result, run the calculation; for a code change, execute relevant tests."
 archived: false

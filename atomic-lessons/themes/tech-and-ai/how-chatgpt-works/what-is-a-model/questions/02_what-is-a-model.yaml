@@ -15,5 +15,5 @@ choices:
     text: "Wolfram uses falling objects to show how a model can estimate a value between observations."
 correct_choice_ids:
   - 43840910-79db-4cce-bf13-98f7a842c669
-explanation: "Wolfram uses falling objects to show how a model can estimate a value between observations. The example is an analogy for prediction, not a language-model algorithm."
+explanation: "Wolfram uses falling objects to show how a model can estimate a value between observations. The example is an analogy for prediction, not a language-model algorithm. The falling-ball example strips away most of language's complexity so we can focus on prediction beyond observations. If we have measurements from a few heights, we can compare candidate rules for the gaps between them."
 archived: false

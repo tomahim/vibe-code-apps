@@ -15,5 +15,5 @@ choices:
     text: "A statement can sound meaningful and still be false in the world."
 correct_choice_ids:
   - 138771bd-42e3-49b2-b6e9-8636c1c65326
-explanation: "A statement can sound meaningful and still be false in the world. A language model's text alone cannot settle that distinction."
+explanation: "A statement can sound meaningful and still be false in the world. A language model's text alone cannot settle that distinction. “I bought two pounds of apples” is a plausible sentence, but a model cannot infer from its wording alone whether you really bought them. It could appear in a shopping diary, a fictional story, or a false statement."
 archived: false

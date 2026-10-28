@@ -15,5 +15,5 @@ choices:
     text: "Two runs can diverge because early token choices affect later probabilities."
 correct_choice_ids:
   - 96858104-eda8-4ad2-9a28-60308f60cd0d
-explanation: "Two runs can diverge because early token choices affect later probabilities. Different wording does not necessarily mean the model learned between runs."
+explanation: "Two runs can diverge because early token choices affect later probabilities. Different wording does not necessarily mean the model learned between runs. Run “Write a one-sentence story about a lighthouse” twice with sampling enabled. One answer might feature a keeper, another a ship."
 archived: false

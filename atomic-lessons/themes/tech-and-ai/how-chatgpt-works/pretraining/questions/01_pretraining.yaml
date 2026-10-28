@@ -15,5 +15,5 @@ choices:
     text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
 correct_choice_ids:
   - 658b1182-5842-4ed8-ad31-3d6c3da9c15f
-explanation: "A language model can learn by predicting missing next tokens in text. The text itself supplies targets for this training task."
+explanation: "A language model can learn by predicting missing next tokens in text. The text itself supplies targets for this training task. Take the sentence “Birds build nests in trees.” A training example can hide “nests” as the next token after “Birds build” and ask the model to score it highly. Other positions in the same text provide more examples."
 archived: false

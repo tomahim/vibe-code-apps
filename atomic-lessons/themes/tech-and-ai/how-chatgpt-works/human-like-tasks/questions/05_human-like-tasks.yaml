@@ -15,5 +15,5 @@ choices:
     text: "For a human-like task, a useful test is whether outputs usually match what people would say."
 correct_choice_ids:
   - 38a38e36-838f-43b3-bff0-f71944b233ba
-explanation: "Some images do not have an obvious label even for people. Agreement with human judgments matters more than pretending every boundary is perfectly defined."
+explanation: "Some images do not have an obvious label even for people. Agreement with human judgments matters more than pretending every boundary is perfectly defined. Imagine a hastily written symbol that could be a 1 or a 7. Two careful readers may disagree, so there is no simple pixel rule that settles the intended label."
 archived: false

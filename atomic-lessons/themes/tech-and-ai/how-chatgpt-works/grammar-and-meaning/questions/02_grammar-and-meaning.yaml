@@ -15,5 +15,5 @@ choices:
     text: "A sentence can follow grammar rules yet be nonsensical or false."
 correct_choice_ids:
   - f88ead7b-08fc-44e2-9746-a6c30d877f57
-explanation: "A sentence can follow grammar rules yet be nonsensical or false. Syntactic fit is only one constraint on a useful answer."
+explanation: "A sentence can follow grammar rules yet be nonsensical or false. Syntactic fit is only one constraint on a useful answer. “The blue idea ate breakfast” follows a familiar sentence pattern, but its ordinary meaning is strange. “Paris is the capital of Germany” is grammatically smooth and meaningful as a claim, yet factually false."
 archived: false

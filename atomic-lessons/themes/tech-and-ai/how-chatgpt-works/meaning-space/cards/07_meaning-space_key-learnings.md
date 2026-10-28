@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. Numerical representations reveal relationships.** Related words may cluster in a projected embedding plot, while context can separate the bird and machine senses of “crane.” The plot is a simplified view of a larger space.
 
-- Embeddings can reveal useful semantic patterns.
-- Wolfram proposes a trajectory view of text.
-- No simple semantic law is established in the essay.
+**2. Wolfram proposes a trajectory picture.** As generated text grows, its representations change, suggesting a path through feature space. This is a way to investigate coherent meaning, not a literal plan the model follows.
+
+**3. A simple semantic law remains unproven.** Suggestive clusters or analogy directions are not enough to establish a universal equation. The essay leaves this as an open question about language and model behavior.

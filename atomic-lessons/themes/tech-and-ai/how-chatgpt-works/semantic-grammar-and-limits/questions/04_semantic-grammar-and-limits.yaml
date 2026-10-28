@@ -15,5 +15,5 @@ choices:
     text: "The core mechanism is repeated next-token prediction by a trained neural network."
 correct_choice_ids:
   - 9d126a62-1120-4046-990c-ae1a3d52de64
-explanation: "A tool can perform an explicit calculation or retrieve checkable evidence. Such work can ground an answer that text prediction alone might only make plausible."
+explanation: "A tool can perform an explicit calculation or retrieve checkable evidence. Such work can ground an answer that text prediction alone might only make plausible. If a question asks for the sum of invoice lines, an exact calculator or spreadsheet formula can perform the arithmetic and expose intermediate values. A language model can help translate the request, explain the result, or catch an odd input, but it should not substitute a plausible-looking total for the calculation."
 archived: false

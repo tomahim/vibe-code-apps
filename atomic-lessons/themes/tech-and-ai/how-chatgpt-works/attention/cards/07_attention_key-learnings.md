@@ -4,8 +4,8 @@ position: 7
 title: "3 key learnings"
 archived: false
 ---
-Three key learnings to remember:
+**1. Earlier words can matter.** In a sentence with an aside, a pronoun may refer to a noun many tokens back. Attention gives a current position a way to combine information from those earlier positions.
 
-- Attention mixes information from earlier tokens.
-- Transformers stack attention with other layers.
-- Attention maps alone are not full explanations.
+**2. Transformers stack several operations.** Multiple heads form different weighted combinations, and other learned transformations process their results across layers. The final prediction reflects the whole network, not one visible connection.
+
+**3. Attention maps require caution.** A diagram can show where a head placed weight, but it does not by itself prove why a particular answer appeared. Other heads, layers, and output steps may also contribute.

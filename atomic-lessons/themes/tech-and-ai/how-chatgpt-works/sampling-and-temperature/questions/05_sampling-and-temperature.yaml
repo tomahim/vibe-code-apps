@@ -15,5 +15,5 @@ choices:
     text: "Two runs can diverge because early token choices affect later probabilities."
 correct_choice_ids:
   - 6e6fa4f0-7077-469c-9378-5b429323d239
-explanation: "Too little variation can repeat patterns, while too much can make text wander. The useful balance depends on the task and model."
+explanation: "Too little variation can repeat patterns, while too much can make text wander. The useful balance depends on the task and model. A poem that repeats the same phrase on every line may feel stuck, while a paragraph that suddenly changes characters and setting may feel incoherent. Decoding choices influence this balance, but the prompt and the trained model matter too."
 archived: false

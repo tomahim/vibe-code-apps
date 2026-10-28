@@ -15,5 +15,5 @@ choices:
     text: "The model gives many candidate next tokens different scores that become probabilities."
 correct_choice_ids:
   - bb5badb9-9e64-4ed7-b322-b71040c20dcf
-explanation: "A prompt supplies the text and instructions the model can use as context. The model continues from that context rather than starting with a finished answer."
+explanation: "A prompt supplies the text and instructions the model can use as context. The model continues from that context rather than starting with a finished answer. Imagine typing “The cat slept on the” and asking for a continuation. The model sees those words and any instruction such as “finish this as a bedtime story.” It does not first create a hidden, fully written story and then reveal it."
 archived: false
