@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "apps.admin_ui",
     "apps.accounts",
     "apps.little_grains",
+    "apps.content_review",
     "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
     "apps.recipes",
@@ -115,6 +116,12 @@ GITHUB_IDEAS_REPO = os.environ.get("GITHUB_IDEAS_REPO", "tomahim/vibe-code-apps"
 GITHUB_IDEAS_BRANCH = os.environ.get("GITHUB_IDEAS_BRANCH", "master")
 # Optional extra guard: require a logged-in Django staff session to rate.
 IDEAS_RATE_REQUIRE_STAFF = os.environ.get("IDEAS_RATE_REQUIRE_STAFF", "false").lower() == "true"
+
+# Little Grains content review: read open PRs/content trees and post review
+# comments on the one repo and commit quick content edits to PR branches. Fine-grained GitHub token, contents:write (quick edits commit on the PR branch) +
+# pull-requests:read + issues:write on this repo. Unset disables the app (503).
+GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
+GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
 
 # Personal Notion news reader: backend-only, narrow archive-checkbox writes. Fail closed.
 NOTION_NEWS_TOKEN = os.environ.get("NOTION_NEWS_TOKEN", "")

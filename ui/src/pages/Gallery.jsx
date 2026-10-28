@@ -41,6 +41,13 @@ const initialApps = [
     icon: "🌾",
   },
   {
+    slug: "content-review",
+    name: "Content Review",
+    description: "Review Little Grains lessons while they are still pull requests: see exactly what changed and send feedback straight to GitHub.",
+    category: "Learn",
+    icon: "🔍",
+  },
+  {
     slug: "livetrail-scrap",
     name: "LiveTrail Scraper",
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",
