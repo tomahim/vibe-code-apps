@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5a5ef249-60cd-46bb-8530-7b392901e9fb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which of these was one of Olmo's jobs?"
+choices:
+  - id: 821bcc83-8f0f-4f09-906e-1b18c248be81
+    text: "Lorry driver"
+  - id: 8f4d7a37-f49a-4fd7-b44d-ad6d42a33311
+    text: "Teacher"
+  - id: 4c2a9234-902f-4384-b610-fa61de1fba74
+    text: "Doctor"
+  - id: d4d2f35e-168d-454a-bcd2-9c143241e05a
+    text: "Pilot"
+correct_choice_ids:
+  - 821bcc83-8f0f-4f09-906e-1b18c248be81
+explanation: "He worked as a lorry driver."
+archived: false

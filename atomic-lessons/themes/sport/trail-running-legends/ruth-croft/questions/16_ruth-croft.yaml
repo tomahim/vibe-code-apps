@@ -1,0 +1,9 @@
+id: f13fc63b-8764-424b-9a14-c75bb6c874cc
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which African city is Ultra Trail Cape Town held? Give the city."
+accepted_answers:
+  - "Cape Town"
+explanation: "She won the 100 km race in November 2023."
+archived: false

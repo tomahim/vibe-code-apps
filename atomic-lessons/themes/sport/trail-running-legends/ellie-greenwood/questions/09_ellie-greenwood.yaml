@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2e025f06-ad88-4adc-80ba-088ecf8c6032
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who had set the Western States women's record before Greenwood?"
+choices:
+  - id: b0ebc776-1495-4bcb-9392-9120db21ebd8
+    text: "Ann Trason"
+  - id: 18a134e5-e7c4-475e-882c-2310b9af0230
+    text: "Courtney Dauwalter"
+  - id: 8544dc80-4f4e-42d6-aebf-c38b256e0bf8
+    text: "Ruth Croft"
+  - id: a29e0996-2c6b-474d-aa71-2c958efcb217
+    text: "Scott Jurek"
+correct_choice_ids:
+  - b0ebc776-1495-4bcb-9392-9120db21ebd8
+explanation: "Trason ran 17:37:51 in 1994."
+archived: false

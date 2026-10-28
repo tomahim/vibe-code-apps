@@ -1,0 +1,20 @@
+schema_version: 1
+id: 43bdf6c1-880f-4cc7-8ed0-c06cdd074bce
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many stress fractures did Hawker suffer in the two years up to 2015?"
+choices:
+  - id: 1b02e61f-899c-45ea-baa9-a764b05923f5
+    text: "10"
+  - id: 774d216d-7f74-4174-8707-85992a4a4014
+    text: "1"
+  - id: 4742d442-50de-4e12-8912-373e3eb62e24
+    text: "6"
+  - id: e73183db-e520-42fe-9211-15b47670cbcd
+    text: "3"
+correct_choice_ids:
+  - 4742d442-50de-4e12-8912-373e3eb62e24
+explanation: "She suffered six."
+archived: false

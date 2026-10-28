@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7983a671-d3d2-4fd6-bd28-42e2dbe83785
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which brand does Wyatt work for?"
+choices:
+  - id: f0119ccf-2125-4474-bb7c-d5ac11bdf4c6
+    text: "Hoka"
+  - id: 016a7a0e-fa61-4c88-aee8-c4d2dbf1a475
+    text: "Salomon"
+  - id: 4d2022dd-3e5b-4c11-bd85-f7bda2477455
+    text: "Nike"
+  - id: 3afaf9a1-a54c-45d0-8f47-e55a3612613d
+    text: "La Sportiva"
+correct_choice_ids:
+  - 3afaf9a1-a54c-45d0-8f47-e55a3612613d
+explanation: "Wyatt works for La Sportiva."
+archived: false

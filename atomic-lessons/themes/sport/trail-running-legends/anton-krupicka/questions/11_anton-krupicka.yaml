@@ -1,0 +1,20 @@
+schema_version: 1
+id: 81c83d1d-b5f0-4465-abb7-3f409725fbe1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which loop in Colorado did he record an FKT on in 2009?"
+choices:
+  - id: 7daa65ee-e7e5-4677-bb10-3882c82c84da
+    text: "Maroon Bells 4 Passes Loop"
+  - id: 07b51563-87c4-445c-84c2-521c4450e9c9
+    text: "Hardrock loop"
+  - id: 40d24c95-eec2-4279-a8bb-492b58920b18
+    text: "Pikes Peak"
+  - id: 22f80eac-e656-47f3-82df-0b8aa7a9a118
+    text: "Mount Elbert"
+correct_choice_ids:
+  - 7daa65ee-e7e5-4677-bb10-3882c82c84da
+explanation: "The loop is 28 miles."
+archived: false

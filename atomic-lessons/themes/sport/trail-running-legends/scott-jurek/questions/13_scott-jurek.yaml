@@ -1,0 +1,20 @@
+schema_version: 1
+id: c303ffef-9d84-4768-9ba2-e03d2a16f6a0
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How far did Jurek run in the 2010 24 hour championship in France?"
+choices:
+  - id: 6f90f4ba-2baa-4aff-b47f-2cec1b0418ce
+    text: "165.7 miles"
+  - id: ad9854da-2947-462c-8a04-fba6fb81cbaa
+    text: "124 miles"
+  - id: 70c8df03-b6e0-45bd-8c71-33941c0fff49
+    text: "100 miles"
+  - id: 48246668-5d17-4d66-8666-8eab6141efc7
+    text: "210 miles"
+correct_choice_ids:
+  - 6f90f4ba-2baa-4aff-b47f-2cec1b0418ce
+explanation: "The distance was a United States record at the time."
+archived: false

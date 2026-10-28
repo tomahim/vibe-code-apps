@@ -1,0 +1,20 @@
+schema_version: 1
+id: 3ce743ce-5405-417a-a622-f2cb8f753789
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was Dauwalter's job before turning professional?"
+choices:
+  - id: 42b47811-f8be-4990-b7e3-8ba306d9c5de
+    text: "Science teacher"
+  - id: f102bae8-113d-4d95-a765-1c364934e4dc
+    text: "Lawyer"
+  - id: ad83110a-3ed6-4924-83e9-0233e9deb7cf
+    text: "Chef"
+  - id: 3361e5da-fa51-43ce-a1f6-da33aa02448d
+    text: "Nurse"
+correct_choice_ids:
+  - 42b47811-f8be-4990-b7e3-8ba306d9c5de
+explanation: "She taught biology, chemistry and physical science."
+archived: false

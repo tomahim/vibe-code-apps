@@ -1,0 +1,20 @@
+schema_version: 1
+id: fe848282-85e4-4398-b364-dafb0d395127
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was historic about Croft's 2019 medal?"
+choices:
+  - id: ae836a58-1348-4e3d-8c0d-223b7a75b4f7
+    text: "First in Asia"
+  - id: b4eb7fce-0179-45a6-aaf0-7f41bbdd775a
+    text: "First over 100 miles"
+  - id: 5a08b6b8-f23d-448b-b0aa-f6558da1e7c5
+    text: "First for a woman ever"
+  - id: 4dbe4ae3-78d2-414e-bc22-64b6e70e8580
+    text: "First for New Zealand"
+correct_choice_ids:
+  - 4dbe4ae3-78d2-414e-bc22-64b6e70e8580
+explanation: "It was New Zealand's first Trail World Championships medal."
+archived: false

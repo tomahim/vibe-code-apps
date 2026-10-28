@@ -1,0 +1,20 @@
+schema_version: 1
+id: ee6cbf01-c17c-40de-8832-61436962880f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is Karl Meltzer's nickname?"
+choices:
+  - id: ccb294a6-cca6-4b1d-b58b-81234be33e24
+    text: "Iron Karl"
+  - id: 8376fb7c-f942-49d5-9419-d5fd5c76a4a6
+    text: "The Eagle"
+  - id: eb99c187-cb51-4562-9f42-e7f9301f85e1
+    text: "Mountain Man"
+  - id: 3ebe214e-d86a-46bd-ab04-0f19351bcf08
+    text: "Speedgoat Karl"
+correct_choice_ids:
+  - 3ebe214e-d86a-46bd-ab04-0f19351bcf08
+explanation: "He is nicknamed Speedgoat Karl."
+archived: false

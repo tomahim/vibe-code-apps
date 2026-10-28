@@ -1,0 +1,10 @@
+id: a2c7d243-d615-403c-80c5-4bf8b600bd0c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many consecutive years did Meltzer win at least one 100 miler through 2020? Give the number."
+accepted_answers:
+  - "19"
+  - "nineteen"
+explanation: "He won in 19 consecutive years."
+archived: false

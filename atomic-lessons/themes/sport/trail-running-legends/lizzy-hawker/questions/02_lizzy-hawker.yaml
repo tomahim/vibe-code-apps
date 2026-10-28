@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0240cbb6-c3bf-4dd8-9ea1-b333e280985e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "At which university did Hawker complete her PhD?"
+choices:
+  - id: 8259b63b-6d8a-49a4-95ca-2d90f1a68c31
+    text: "Edinburgh"
+  - id: cab5fa2f-37c2-4d53-bbd9-ee889be6211e
+    text: "Southampton"
+  - id: 5f9c89a3-c10c-4d06-8ecd-634c9d5a2985
+    text: "Oxford"
+  - id: bfe2ef09-03ba-4473-8ee5-aca4a1903694
+    text: "Cambridge"
+correct_choice_ids:
+  - cab5fa2f-37c2-4d53-bbd9-ee889be6211e
+explanation: "She finished it in 2005."
+archived: false

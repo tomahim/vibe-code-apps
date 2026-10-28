@@ -1,0 +1,10 @@
+id: 4d4f9d17-b3ed-443a-91f0-658d74b14bb1
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Where did Picas finish at UTMB twice before her 2017 win? Say the position as a word."
+accepted_answers:
+  - "second"
+  - "2nd"
+explanation: "She finished second twice."
+archived: false

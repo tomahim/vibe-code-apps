@@ -1,0 +1,20 @@
+schema_version: 1
+id: f6cf0a93-0a77-450d-afba-56378e148c98
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many fastest known times has Krupicka set?"
+choices:
+  - id: 7767e6a7-d8ab-4496-9601-c7b223b18c8e
+    text: "5"
+  - id: e918d5cb-7409-4e0c-9554-29f31fb1d8ea
+    text: "12"
+  - id: 57c93f08-43ed-4902-b105-f703f4ca0c63
+    text: "28"
+  - id: 1dc88089-712b-46cc-9928-50fe14ab3577
+    text: "100"
+correct_choice_ids:
+  - 57c93f08-43ed-4902-b105-f703f4ca0c63
+explanation: "He has set 28 FKT records."
+archived: false

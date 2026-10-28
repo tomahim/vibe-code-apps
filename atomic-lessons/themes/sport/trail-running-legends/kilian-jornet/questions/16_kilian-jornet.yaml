@@ -1,0 +1,10 @@
+id: bef92ef5-d3f4-498a-aa3e-35c6c77b17c1
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which country is Zegama-Aizkorri held?"
+accepted_answers:
+  - "Spain"
+  - "Basque Country"
+explanation: "It is held in the Basque Country, Spain."
+archived: false

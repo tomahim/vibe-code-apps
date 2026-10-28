@@ -1,0 +1,20 @@
+schema_version: 1
+id: 368d3a8a-7a35-45da-bed2-04a21fe79ce2
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which Grand Canyon route did he set an FKT on in 2016?"
+choices:
+  - id: e6c3d21d-c7fe-4773-92b6-5c7a29472553
+    text: "Bright Angel loop"
+  - id: 5e27ca59-cbbb-4d68-8032-cc5df6db909d
+    text: "Havasu Falls"
+  - id: b73667a5-de74-4f7b-ad99-f561f59e0cf6
+    text: "Rim to Rim to Rim"
+  - id: 10cc2a21-4e56-41e8-bc9c-4e4c5b37f6fb
+    text: "South Kaibab loop"
+correct_choice_ids:
+  - b73667a5-de74-4f7b-ad99-f561f59e0cf6
+explanation: "The route is 44 miles."
+archived: false

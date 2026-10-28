@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0c964b33-e156-4935-84cd-51a566951c2c
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which two cities does the Spartathlon connect?"
+choices:
+  - id: 4ffd1da1-d174-4620-8e70-0508f0f9dee7
+    text: "Sparta and Olympia"
+  - id: 983daeff-1abd-486c-8049-31b6931efc17
+    text: "Athens and Sparta"
+  - id: 71523159-e0ce-4022-a516-57060a0f3dc1
+    text: "Athens and Corinth"
+  - id: aa0f6566-ec13-4bc5-85f2-ac7451a51224
+    text: "Athens and Thessaloniki"
+correct_choice_ids:
+  - 983daeff-1abd-486c-8049-31b6931efc17
+explanation: "The route is Athens to Sparta."
+archived: false

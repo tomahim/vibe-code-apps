@@ -1,0 +1,20 @@
+schema_version: 1
+id: 6d6718a9-d04a-4773-9b4a-687a392afdbd
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Whose Western States women's record did she break in 2023?"
+choices:
+  - id: 74355a20-56a7-47aa-b2af-ed77bd1a8166
+    text: "Ruth Croft"
+  - id: 8dbb1bc9-7701-46cd-93aa-a3a2b16175d9
+    text: "Lizzy Hawker"
+  - id: 0daf0466-a101-4ae2-a6c5-aacc7ad0ff25
+    text: "Ann Trason"
+  - id: 86927d2c-c547-437e-976e-ecf909c7b8e4
+    text: "Ellie Greenwood"
+correct_choice_ids:
+  - 86927d2c-c547-437e-976e-ecf909c7b8e4
+explanation: "Greenwood set it in 2012."
+archived: false

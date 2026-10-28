@@ -1,0 +1,9 @@
+id: ef7bcae6-8f48-487a-8465-04388aa15865
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did True organise the first race for the Tarahumara?"
+accepted_answers:
+  - "2003"
+explanation: "The first race was on March 23, 2003."
+archived: false

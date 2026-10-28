@@ -1,0 +1,20 @@
+schema_version: 1
+id: cc56c00e-975a-488e-9799-b1a517515a2e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How old was Olmo when he won UTMB in 2006?"
+choices:
+  - id: fa8a107a-f462-4236-87c0-3dacfa1c758a
+    text: "58"
+  - id: 3a4ac66a-4110-4675-98f4-eb0c419e7be1
+    text: "48"
+  - id: 84addc09-2e4c-4fba-977f-eab39665f0a9
+    text: "65"
+  - id: 3efc504a-a6d1-4d3e-b529-ea59f8d07711
+    text: "35"
+correct_choice_ids:
+  - fa8a107a-f462-4236-87c0-3dacfa1c758a
+explanation: "He was 58."
+archived: false

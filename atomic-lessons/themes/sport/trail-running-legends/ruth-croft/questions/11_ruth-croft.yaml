@@ -1,0 +1,20 @@
+schema_version: 1
+id: 3c130799-a329-41ca-a965-33decc136781
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who beat Croft at Western States 2021?"
+choices:
+  - id: eda5f863-1a1a-419f-badb-1eaa45005c91
+    text: "Lizzy Hawker"
+  - id: a2d6bd01-1adb-4a7e-8d39-5381533f2dcf
+    text: "Beth Pascall"
+  - id: 694d98b0-64cb-4740-9710-a73f2eeafb0d
+    text: "Ellie Greenwood"
+  - id: 14a1245f-3123-4bd1-bb00-9a09e55ad993
+    text: "Courtney Dauwalter"
+correct_choice_ids:
+  - a2d6bd01-1adb-4a7e-8d39-5381533f2dcf
+explanation: "Croft was second in her 100 mile debut."
+archived: false

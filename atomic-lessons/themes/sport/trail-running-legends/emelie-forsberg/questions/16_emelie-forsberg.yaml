@@ -1,0 +1,9 @@
+id: 25af84db-00b6-4e19-baea-dfdcc4258157
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did she set a course record at the Fjällmaraton?"
+accepted_answers:
+  - "2014"
+explanation: "She improved by another 30 minutes in 2014."
+archived: false

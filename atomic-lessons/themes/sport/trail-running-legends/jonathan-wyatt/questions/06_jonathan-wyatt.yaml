@@ -1,0 +1,20 @@
+schema_version: 1
+id: e29756f0-2558-463e-bb94-4c8ab1a59d38
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where did Wyatt win the long race in 2002?"
+choices:
+  - id: 73f26a62-bbae-4c1c-a566-c702e9195652
+    text: "Innsbruck"
+  - id: 72e0767c-e4d0-4241-9027-c313ac080aad
+    text: "Dimitile"
+  - id: 5a1ebf22-3c4a-49a4-b083-2297149b5636
+    text: "Bergen"
+  - id: e2bb2436-8aca-4f96-a970-9b9cf12b8880
+    text: "Crans-Montana"
+correct_choice_ids:
+  - 73f26a62-bbae-4c1c-a566-c702e9195652
+explanation: "He won in Innsbruck in 2002."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: e6d9774d-8396-45ef-9b49-14d641cc97dd
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "By how much did Greenwood lose Comrades 2012?"
+choices:
+  - id: 2f8e4e38-0935-4d2f-a282-6b297a92d085
+    text: "72 minutes"
+  - id: d419be1b-d284-4424-9a56-4138de25219b
+    text: "12 minutes"
+  - id: a32b8c3d-65c4-41ae-bfe7-7a20987df005
+    text: "72 seconds"
+  - id: 20d3a85a-e1ad-400e-83f0-40120865eda5
+    text: "7 seconds"
+correct_choice_ids:
+  - a32b8c3d-65c4-41ae-bfe7-7a20987df005
+explanation: "She was second, 72 seconds behind the winner."
+archived: false

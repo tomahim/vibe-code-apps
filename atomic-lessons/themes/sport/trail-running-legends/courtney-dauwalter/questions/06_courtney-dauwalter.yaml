@@ -1,0 +1,20 @@
+schema_version: 1
+id: 84c6cf80-a6ef-4961-9ddd-06a1e5b64cf0
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was her 2017 24 hour distance?"
+choices:
+  - id: 24eef8e0-ddd1-4e74-a5e3-25541fb66ecd
+    text: "200 miles"
+  - id: f4394c98-966e-4994-be3e-d8fd406ebe6e
+    text: "240 miles"
+  - id: e8496531-404d-4d89-9067-08f9dc8b6529
+    text: "155.391 miles"
+  - id: a19659ca-f451-45a2-9c05-c8ca1ff82e11
+    text: "100 miles"
+correct_choice_ids:
+  - e8496531-404d-4d89-9067-08f9dc8b6529
+explanation: "It was a record at the time."
+archived: false

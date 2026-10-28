@@ -1,0 +1,20 @@
+schema_version: 1
+id: 404c7141-c950-4ab3-a7fc-bf2726823556
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who holds the current Appalachian Trail fastest known time listed for 2024?"
+choices:
+  - id: 6d7786da-0ea4-4d48-bfc0-515088b20686
+    text: "Joe McConaughy"
+  - id: a243c53c-4495-4e51-8156-37cd14f81dfd
+    text: "Karl Meltzer"
+  - id: 64359f46-020b-4285-8915-8cb825fa67e1
+    text: "Mira Rai"
+  - id: 7467834e-51e6-4cd1-aa5a-b911b6e6f574
+    text: "Tara Dower"
+correct_choice_ids:
+  - 7467834e-51e6-4cd1-aa5a-b911b6e6f574
+explanation: "The current record was set by Dower in 2024."
+archived: false

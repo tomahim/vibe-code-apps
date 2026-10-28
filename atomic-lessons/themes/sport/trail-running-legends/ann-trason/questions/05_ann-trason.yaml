@@ -1,0 +1,20 @@
+schema_version: 1
+id: b747d63b-e8f9-470d-a099-4f111ca53830
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times did Trason win Western States?"
+choices:
+  - id: 81ae6f96-f7be-4962-b9f7-2cc372bbbfd3
+    text: "20"
+  - id: 0e9b4f9d-9120-4a5e-b5a0-3685a953620b
+    text: "10"
+  - id: fb8cd3c0-4e26-449f-a11c-2b8301477b0c
+    text: "7"
+  - id: f622b697-b7cb-4a83-971c-010f66c6f62e
+    text: "14"
+correct_choice_ids:
+  - f622b697-b7cb-4a83-971c-010f66c6f62e
+explanation: "She won Western States 14 times."
+archived: false

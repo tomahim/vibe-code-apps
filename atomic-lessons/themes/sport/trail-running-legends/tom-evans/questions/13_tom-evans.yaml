@@ -1,0 +1,20 @@
+schema_version: 1
+id: c35f5e6f-e361-4af2-9db2-65fc4a384963
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What surgery did Evans have in 2021?"
+choices:
+  - id: c2819c50-c4d6-40e7-a389-d17ce90950cc
+    text: "Hip surgery"
+  - id: c9924fee-4065-4fbd-aec1-3772b3e52d61
+    text: "Shoulder surgery"
+  - id: 7b94f0b9-25d8-46f9-ba5f-1ab59fe84b0a
+    text: "Heart surgery"
+  - id: 2cbaded5-22ce-44c7-b228-2e2942d32b2e
+    text: "Knee surgery"
+correct_choice_ids:
+  - 2cbaded5-22ce-44c7-b228-2e2942d32b2e
+explanation: "He returned in 2022."
+archived: false

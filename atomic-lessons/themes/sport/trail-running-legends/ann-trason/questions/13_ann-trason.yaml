@@ -1,0 +1,20 @@
+schema_version: 1
+id: 96310454-f9aa-4926-9a51-8fd5057d0a4b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year was Trason inducted into the Ultrarunning Hall of Fame?"
+choices:
+  - id: 5796d098-40d1-4631-a356-05fa0cefb38a
+    text: "2003"
+  - id: eb609e5d-736c-48a7-b8f8-1c38f0459628
+    text: "1994"
+  - id: 75367115-a72d-4734-912b-83da4b79e3cf
+    text: "2020"
+  - id: 6b21f8e0-0241-4cb9-86ed-0e9b644055b8
+    text: "2012"
+correct_choice_ids:
+  - 75367115-a72d-4734-912b-83da4b79e3cf
+explanation: "She was inducted in 2020."
+archived: false

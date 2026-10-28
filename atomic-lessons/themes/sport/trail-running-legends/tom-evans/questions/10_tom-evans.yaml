@@ -1,0 +1,20 @@
+schema_version: 1
+id: a3065a9d-e682-47fe-bac9-1c84f7140d49
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where were the 2018 Trail World Championships held?"
+choices:
+  - id: 37e2a492-0cc8-45a3-850b-36faf279cfd6
+    text: "Chamonix"
+  - id: 71c1df4c-894c-4ad1-ad39-ac3f6531e51c
+    text: "Penyagolosa, Spain"
+  - id: 52586c55-caf8-4b55-be11-cfdd5060d850
+    text: "Italy"
+  - id: 0c1bcf56-10b0-42ef-839f-c87f31df6bb0
+    text: "Portugal"
+correct_choice_ids:
+  - 71c1df4c-894c-4ad1-ad39-ac3f6531e51c
+explanation: "They were held in Penyagolosa."
+archived: false

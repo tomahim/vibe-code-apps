@@ -1,0 +1,20 @@
+schema_version: 1
+id: fae43ef4-f91a-4202-849c-f90d7131acf4
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how many miles a week did Krupicka often run in college?"
+choices:
+  - id: e581fa5a-6648-4ab4-b23a-d2f0e1d22088
+    text: "About 100"
+  - id: b0287ca9-edba-468b-bd12-e49cd43a4f0d
+    text: "About 70"
+  - id: 7f27ee79-703e-4b4b-93be-2a9f27a0b43e
+    text: "More than 200"
+  - id: 546add37-fbb4-441e-9ad1-eb7f72e7ade1
+    text: "About 30"
+correct_choice_ids:
+  - 7f27ee79-703e-4b4b-93be-2a9f27a0b43e
+explanation: "He often ran upwards of 200 miles a week."
+archived: false

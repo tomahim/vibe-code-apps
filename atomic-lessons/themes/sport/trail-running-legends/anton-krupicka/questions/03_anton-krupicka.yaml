@@ -1,0 +1,20 @@
+schema_version: 1
+id: 51e9ba3b-8893-4aa7-90df-2f5137c8441d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What did Krupicka study for his first degree at Colorado College?"
+choices:
+  - id: 621dafe3-3279-4d6c-b366-22d927f65bc0
+    text: "Law and history"
+  - id: 36fc9227-8c4f-4358-9342-77083275a18b
+    text: "Biology and art"
+  - id: 54d43b89-072c-4e10-af10-e11b946b1af9
+    text: "Physics and philosophy"
+  - id: e70326a4-2487-4375-b5b1-8873b1ad77ff
+    text: "Economics"
+correct_choice_ids:
+  - 54d43b89-072c-4e10-af10-e11b946b1af9
+explanation: "He earned a BA in physics and philosophy in 2005."
+archived: false

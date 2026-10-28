@@ -1,0 +1,9 @@
+id: 748f523c-faae-43f9-9444-535e31256b96
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Evans win the CCC at UTMB?"
+accepted_answers:
+  - "2018"
+explanation: "He won in 10:44:32."
+archived: false

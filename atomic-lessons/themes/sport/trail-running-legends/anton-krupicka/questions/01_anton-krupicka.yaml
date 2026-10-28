@@ -1,0 +1,20 @@
+schema_version: 1
+id: 30eac66f-3c70-4e9c-8b81-3cfff7b9bc8f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which US state did Krupicka grow up?"
+choices:
+  - id: e64de330-cb31-44e0-b881-bfb7e0555fff
+    text: "Nebraska"
+  - id: 181007b2-6984-4f47-a47d-3f620550a4bd
+    text: "Utah"
+  - id: 3aa5f334-b509-464d-bfdc-46d97e07fc68
+    text: "Oregon"
+  - id: cf62aefc-0840-4e18-a85d-40d0e9c12c25
+    text: "Colorado"
+correct_choice_ids:
+  - e64de330-cb31-44e0-b881-bfb7e0555fff
+explanation: "He grew up near Niobrara, Nebraska."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: a8d038bb-8b80-4259-9a77-c0846eb6122e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Spanish region was Jornet born?"
+choices:
+  - id: 8d1bdf38-1548-436f-a588-bf746e71d452
+    text: "Galicia"
+  - id: 54fa873a-ca4e-49e8-9c97-a3404b8f15c5
+    text: "Catalonia"
+  - id: 24eac1d4-dbbf-46b7-9cea-a5704d52b764
+    text: "Andalusia"
+  - id: b61d2746-70a3-4d6f-a5eb-6922795d6216
+    text: "Madrid"
+correct_choice_ids:
+  - 54fa873a-ca4e-49e8-9c97-a3404b8f15c5
+explanation: "He was born in Sabadell, Catalonia."
+archived: false

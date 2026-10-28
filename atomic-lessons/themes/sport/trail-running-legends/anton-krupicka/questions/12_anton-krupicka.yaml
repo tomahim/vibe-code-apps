@@ -1,0 +1,20 @@
+schema_version: 1
+id: c9041fac-5a67-4642-9f07-cc2b522d98ce
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does FKT stand for?"
+choices:
+  - id: 3117c019-c0f6-4148-93f0-af0d902a6bc8
+    text: "Fastest known time"
+  - id: 7ab02c6a-255a-4e85-a2bb-3dcb0d3d0b41
+    text: "Full kit trial"
+  - id: 64a9ded7-4c53-4629-966b-e338d5007e13
+    text: "Fast kilometre test"
+  - id: c2c29469-6796-4c28-8e7d-643b922f95c4
+    text: "First known trail"
+correct_choice_ids:
+  - 3117c019-c0f6-4148-93f0-af0d902a6bc8
+explanation: "It is a record on a specific route."
+archived: false

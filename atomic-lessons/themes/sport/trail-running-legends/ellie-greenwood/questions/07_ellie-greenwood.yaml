@@ -1,0 +1,9 @@
+id: b94ead27-ed80-49f0-ae13-bd39ad940bf7
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Greenwood win Western States for the first time?"
+accepted_answers:
+  - "2011"
+explanation: "She won her first Western States in 2011."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: e9dc4f89-975f-4513-a22b-dc34ab0abd9f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which film followed his 2007 training for Leadville?"
+choices:
+  - id: bf04e8d5-b407-4e17-b6ca-dfeed2c42739
+    text: "Meru"
+  - id: e7eaa77e-fdf6-4366-83fa-91dd5cb040a7
+    text: "Unbreakable"
+  - id: 9461482a-46cd-46ac-ace0-7ec924affb42
+    text: "Indulgence: 1000 Miles Under the Colorado Sky"
+  - id: 54aefc04-b3a4-40fb-a96b-6e9a4bf42a99
+    text: "Run Free"
+correct_choice_ids:
+  - 9461482a-46cd-46ac-ace0-7ec924affb42
+explanation: "The film chronicles his summer 2007 training."
+archived: false

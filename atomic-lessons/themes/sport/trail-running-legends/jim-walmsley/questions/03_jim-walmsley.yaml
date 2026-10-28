@@ -1,0 +1,20 @@
+schema_version: 1
+id: ab266900-3eb8-4b42-82e5-2c83f3d3d614
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was his best mile time?"
+choices:
+  - id: 1d909d22-7fcb-4313-b11a-8ea007628c76
+    text: "4:04"
+  - id: 0a3c58ed-a8d6-44a0-bdf1-935839c73420
+    text: "4:30"
+  - id: a5806029-763f-4403-ac80-bfc483e449d5
+    text: "3:45"
+  - id: 2a473e1d-c6db-4115-95bd-3b0e3a121443
+    text: "5:00"
+correct_choice_ids:
+  - 1d909d22-7fcb-4313-b11a-8ea007628c76
+explanation: "His best mile was 4:04."
+archived: false

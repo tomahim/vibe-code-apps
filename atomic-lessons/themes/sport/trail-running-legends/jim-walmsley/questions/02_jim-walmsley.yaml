@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2e2f2e93-f210-4166-9483-3b3435e94609
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which institution did he attend from 2008 to 2012?"
+choices:
+  - id: 4bad8b26-d69d-48dd-bef6-49e84f74369e
+    text: "Georgetown"
+  - id: d0ddbdb4-3eef-42e1-80b7-3cb04b4fae5e
+    text: "Iona College"
+  - id: 858a5265-b5b6-45e4-ae0a-52f7c0b3da6b
+    text: "Stanford"
+  - id: 94938621-4230-470b-9a25-961bb4941aaa
+    text: "The Air Force Academy"
+correct_choice_ids:
+  - 94938621-4230-470b-9a25-961bb4941aaa
+explanation: "He captained the cross country and distance teams."
+archived: false

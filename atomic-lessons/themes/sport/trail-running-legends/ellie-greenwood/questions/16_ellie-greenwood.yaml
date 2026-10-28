@@ -1,0 +1,10 @@
+id: 21d6fc65-3b1a-428c-b27a-3fa569b96ccf
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many times has Greenwood been 100 km world champion? Give the number."
+accepted_answers:
+  - "4"
+  - "four"
+explanation: "She won individual and team titles in 2010 and 2014."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 509d5d89-294c-4ce9-9961-eabe0bd2c712
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Skyrunner World Series title did she win in 2012?"
+choices:
+  - id: 2a9b8c02-60f1-450c-b976-a58363023ee6
+    text: "Sky only"
+  - id: 9e2086ea-9ca4-4a15-9ba9-2474549eae12
+    text: "Combined"
+  - id: 7f351863-f30c-4404-8ce8-16824b544a5f
+    text: "Vertical"
+  - id: d5153d7a-4e91-49ce-8625-27c51edaef46
+    text: "Ultra only"
+correct_choice_ids:
+  - 9e2086ea-9ca4-4a15-9ba9-2474549eae12
+explanation: "She won the Combined title in 2012."
+archived: false

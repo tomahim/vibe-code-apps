@@ -1,0 +1,20 @@
+schema_version: 1
+id: 85a48ace-cfbe-4606-b5d4-1893961c064f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year did Wyatt become president of the World Mountain Running Association council?"
+choices:
+  - id: 160f8c5d-537d-4475-b534-5149931871e7
+    text: "2008"
+  - id: 0f970fba-ba33-43ad-8311-11ecefe3793a
+    text: "1998"
+  - id: 44b64306-7702-417f-a214-1ec1faaf29eb
+    text: "2017"
+  - id: 77ab9c6e-4218-4b21-acd1-aad3e8f3ae3d
+    text: "2023"
+correct_choice_ids:
+  - 44b64306-7702-417f-a214-1ec1faaf29eb
+explanation: "He took the role in 2017."
+archived: false

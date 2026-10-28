@@ -1,0 +1,20 @@
+schema_version: 1
+id: fc847338-ea57-4930-840e-a95b919499c1
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times did D'Haene win UTMB by 2021?"
+choices:
+  - id: 99f1cd8e-1e21-4302-b8b2-a694360238bd
+    text: "7"
+  - id: 2e0779d9-8473-4601-ae28-281cf57a0405
+    text: "2"
+  - id: 87ff69ac-8f49-45b6-b7bf-18d6b7bfb172
+    text: "1"
+  - id: 60df2f13-167f-4bb5-9e30-94416d15135f
+    text: "4"
+correct_choice_ids:
+  - 60df2f13-167f-4bb5-9e30-94416d15135f
+explanation: "He won in 2012, 2014, 2017 and 2021."
+archived: false

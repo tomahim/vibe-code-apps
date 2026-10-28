@@ -1,0 +1,9 @@
+id: a9b72eb5-54f5-4977-979f-de78e591b0b0
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which Spanish race did Forsberg finish third in May 2012? Give the first word of its name."
+accepted_answers:
+  - "Zegama"
+explanation: "She finished third at Zegama-Aizkorri."
+archived: false

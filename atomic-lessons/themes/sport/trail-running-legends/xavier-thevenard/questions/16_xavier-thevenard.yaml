@@ -1,0 +1,9 @@
+id: 36491894-b13a-43b2-ba9c-9ec50151e7e2
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Thévenard win his second UTMB?"
+accepted_answers:
+  - "2015"
+explanation: "He won in 2013, 2015 and 2018."
+archived: false

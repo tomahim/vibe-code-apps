@@ -1,0 +1,20 @@
+schema_version: 1
+id: 835b9e49-0b79-4828-ad98-58145c5fbd9a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Basque mountain marathon has Jornet won more than ten times?"
+choices:
+  - id: 90eb6e53-1110-4dfa-8ce1-5a04fd8753b0
+    text: "Lavaredo"
+  - id: f38c3fd8-f030-4e8b-bee5-7194a43049f8
+    text: "Zegama-Aizkorri"
+  - id: f3a9d4f7-8d1d-465c-8ba4-bc5ec9c5b3a9
+    text: "Transvulcania"
+  - id: 07485539-b72d-4b40-a444-f314c3a2cb60
+    text: "Sierre-Zinal"
+correct_choice_ids:
+  - f38c3fd8-f030-4e8b-bee5-7194a43049f8
+explanation: "His record lists an eleventh victory at Zegama."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 095b27cc-3988-46a5-b280-d560caf6ee90
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which kind of company did he work in a quarry?"
+choices:
+  - id: 21fd1175-dc77-4462-9232-252f74d0ae3f
+    text: "A mining bank"
+  - id: bbf31cfe-1654-433d-a70a-3854da7084ac
+    text: "A farm"
+  - id: 83ab8229-0b49-42d9-b14c-8790dbb356d7
+    text: "A cement company"
+  - id: a45c1af6-eb99-4fe8-a17b-444059778bfa
+    text: "A film studio"
+correct_choice_ids:
+  - 83ab8229-0b49-42d9-b14c-8790dbb356d7
+explanation: "He worked for Buzzi Unicem."
+archived: false

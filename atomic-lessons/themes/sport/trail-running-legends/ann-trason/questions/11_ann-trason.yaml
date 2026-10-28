@@ -1,0 +1,20 @@
+schema_version: 1
+id: 4e1e3299-97ee-407d-afe3-23a77ba0cac1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Trason world record stood from 1991 until 2015?"
+choices:
+  - id: 493340e7-4836-4eb4-8021-e2ed07d6cf65
+    text: "100 miles"
+  - id: 798ef926-212a-4640-a68f-868006b1b898
+    text: "50 miles"
+  - id: 144b468c-fb23-4bde-b932-42925dc68ff8
+    text: "10 kilometres"
+  - id: 7a65d98f-6d98-4c38-8c20-aa22c52e1d1f
+    text: "24 hours"
+correct_choice_ids:
+  - 798ef926-212a-4640-a68f-868006b1b898
+explanation: "Her 5:40:18 for 50 miles was unbeaten until 2015."
+archived: false

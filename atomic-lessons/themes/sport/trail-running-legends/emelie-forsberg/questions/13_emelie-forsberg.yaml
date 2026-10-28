@@ -1,0 +1,20 @@
+schema_version: 1
+id: 42059b12-8d2d-496c-9c4c-6f225e4eac2d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which city did she win the 2014 world championship Ultra SkyMarathon?"
+choices:
+  - id: 0ecf98ef-328f-49e2-a938-7c0a19a9301f
+    text: "Vicenza"
+  - id: 0076b222-32c8-4b11-b15f-7dd89517da4a
+    text: "Chamonix"
+  - id: 37346d9d-3ff8-46eb-96dd-ba0432116efc
+    text: "Zermatt"
+  - id: a3c366fc-938f-4717-9d67-c9aa8658542c
+    text: "Canazei"
+correct_choice_ids:
+  - 0076b222-32c8-4b11-b15f-7dd89517da4a
+explanation: "She won gold in Chamonix."
+archived: false

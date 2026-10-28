@@ -1,0 +1,20 @@
+schema_version: 1
+id: d558eb64-eb93-4554-90ad-e5691360865a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where did he live in a cave for ten months?"
+choices:
+  - id: c85719aa-2612-4a46-88ae-6e2fe7e572c7
+    text: "Hawaii"
+  - id: 90c51838-e85a-494c-87f1-7f190ad692bb
+    text: "Mexico"
+  - id: a6883dd8-4691-4011-9a6e-a5815d575009
+    text: "Colorado"
+  - id: 69b24400-b672-4e5d-a91c-4e2a2d5e0465
+    text: "Alaska"
+correct_choice_ids:
+  - c85719aa-2612-4a46-88ae-6e2fe7e572c7
+explanation: "He lived in a cave in Hawaii."
+archived: false

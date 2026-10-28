@@ -1,0 +1,20 @@
+schema_version: 1
+id: b057adc7-45c0-4b86-9818-b7c359a28422
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What is unusual about the Hardrock 100 course?"
+choices:
+  - id: b0759c5f-0460-43bf-978a-f0537a1653da
+    text: "It is run only at night"
+  - id: 38736091-670f-47dd-a872-cc18715b56fa
+    text: "It is a single flat loop"
+  - id: ed6ab715-dda4-4733-97d5-11b6524beff2
+    text: "It has no climbing"
+  - id: 82fee194-59a0-4af9-9af1-55bdea66fcd7
+    text: "It reverses direction each year"
+correct_choice_ids:
+  - 82fee194-59a0-4af9-9af1-55bdea66fcd7
+explanation: "Hardrock alternates clockwise and counter-clockwise."
+archived: false

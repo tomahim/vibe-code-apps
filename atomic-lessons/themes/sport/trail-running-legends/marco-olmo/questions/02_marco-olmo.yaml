@@ -1,0 +1,20 @@
+schema_version: 1
+id: b191b25b-09c6-426c-9449-4c9628d80259
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year was Olmo born?"
+choices:
+  - id: 363951fa-ab5f-41eb-9f79-678e9d5389ba
+    text: "1965"
+  - id: d45a958a-05f9-43c0-b2b1-d3cac04e7de0
+    text: "1975"
+  - id: 11fa67e3-4bb1-4f03-b2a3-1653cbc3bdc2
+    text: "1948"
+  - id: f49d75cf-8194-43a9-8c86-323e3302ad25
+    text: "1930"
+correct_choice_ids:
+  - 11fa67e3-4bb1-4f03-b2a3-1653cbc3bdc2
+explanation: "He was born on October 8, 1948."
+archived: false

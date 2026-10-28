@@ -1,0 +1,9 @@
+id: 703692f0-8fbb-45dd-a7a9-a6de902258ac
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Hawker win the IAU 100 km World Championships?"
+accepted_answers:
+  - "2006"
+explanation: "She won the title in 2006."
+archived: false

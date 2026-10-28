@@ -1,0 +1,9 @@
+id: 2060c90c-cb5e-4ccd-8c22-a699e8892662
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Trason win Western States for the last time?"
+accepted_answers:
+  - "2003"
+explanation: "Her most recent win came in 2003."
+archived: false

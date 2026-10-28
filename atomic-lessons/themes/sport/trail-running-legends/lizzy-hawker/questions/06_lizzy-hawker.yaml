@@ -1,0 +1,20 @@
+schema_version: 1
+id: e7fe1c96-7edf-4d90-b5e2-ed72df4e96ad
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which mountain does the UTMB circle?"
+choices:
+  - id: 5e5ea349-8e92-46d5-b062-c4c9ab5f2cd4
+    text: "The Eiger"
+  - id: fd7c9444-ba66-4681-817f-8bb7c9e3ce85
+    text: "Mont Blanc"
+  - id: 905d6b23-f892-4f22-9426-8e762eaa4f71
+    text: "Monte Rosa"
+  - id: aa78391f-f622-43c5-a2de-a9e001486517
+    text: "The Matterhorn"
+correct_choice_ids:
+  - fd7c9444-ba66-4681-817f-8bb7c9e3ce85
+explanation: "UTMB loops around Mont Blanc."
+archived: false

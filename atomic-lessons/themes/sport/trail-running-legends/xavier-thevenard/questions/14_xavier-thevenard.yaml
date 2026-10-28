@@ -1,0 +1,20 @@
+schema_version: 1
+id: a4666d68-9a8a-4f7d-91f3-a171102a5d87
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who won UTMB in 2019 in the second fastest time ever?"
+choices:
+  - id: b138a3d7-e173-42d2-b675-84fd5f3d8b84
+    text: "François D'Haene"
+  - id: f06da80a-c07e-4e68-b283-66e590aa2c41
+    text: "Xavier Thévenard"
+  - id: 68236e35-c2b1-4b42-ba8c-35d022a7599f
+    text: "Pau Capell"
+  - id: 5b7c7c91-d58e-4207-b489-587370030cdc
+    text: "Jim Walmsley"
+correct_choice_ids:
+  - 68236e35-c2b1-4b42-ba8c-35d022a7599f
+explanation: "Capell finished in 20:19:07."
+archived: false

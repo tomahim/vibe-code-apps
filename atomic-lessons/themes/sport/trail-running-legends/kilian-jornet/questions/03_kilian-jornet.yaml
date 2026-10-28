@@ -1,0 +1,20 @@
+schema_version: 1
+id: 38edfe12-e507-4f36-bf8f-fa508488183d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What did Jornet's family live in when he was a child?"
+choices:
+  - id: 5a3d0fa6-d440-43ca-90f8-a9eeec4352ff
+    text: "An apartment in Barcelona"
+  - id: 5d1c60d5-d463-4575-97fd-1a5780b94417
+    text: "A farmhouse"
+  - id: 9d178ab9-8688-4edb-8331-841fc024a181
+    text: "A lighthouse"
+  - id: aae70e1c-53bf-4980-83d3-fe0d3767dee2
+    text: "A mountain hut"
+correct_choice_ids:
+  - aae70e1c-53bf-4980-83d3-fe0d3767dee2
+explanation: "The Refugi de Cap de Rec sits at 2,000 metres."
+archived: false

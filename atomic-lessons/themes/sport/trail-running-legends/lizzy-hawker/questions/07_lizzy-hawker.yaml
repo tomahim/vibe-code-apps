@@ -1,0 +1,10 @@
+id: 3007a30d-bc4a-4608-9677-a1d002dd0e6d
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many times did Hawker win UTMB? Give the number."
+accepted_answers:
+  - "5"
+  - "five"
+explanation: "Five wins is a record for either women or men."
+archived: false

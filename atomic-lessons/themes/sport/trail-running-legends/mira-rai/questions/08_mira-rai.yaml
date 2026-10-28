@@ -1,0 +1,9 @@
+id: 567832e2-726b-4fea-b7a9-be5cb04e1693
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many kilometres was her first ultramarathon? Give the number."
+accepted_answers:
+  - "50"
+explanation: "She won the 50 km Himalayan Outdoor Festival race."
+archived: false

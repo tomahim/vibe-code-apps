@@ -1,0 +1,20 @@
+schema_version: 1
+id: 231d29e6-51b9-4caa-b242-299cae625b23
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What distance has Meltzer won more often than anyone?"
+choices:
+  - id: a4c3ec91-f563-4621-8864-a0fa1318a006
+    text: "50 kilometres"
+  - id: 36b03b65-7631-4035-893a-fc60322f7241
+    text: "100 miles"
+  - id: 87bffd3b-f847-4f24-9925-f3bb59b4e165
+    text: "Marathon"
+  - id: ef0ca3cc-9460-420f-b17a-21370b591054
+    text: "24 hours"
+correct_choice_ids:
+  - 36b03b65-7631-4035-893a-fc60322f7241
+explanation: "He holds the record for 100 mile wins."
+archived: false

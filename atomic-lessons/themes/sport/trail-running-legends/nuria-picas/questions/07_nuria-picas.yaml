@@ -1,0 +1,11 @@
+id: 45f66138-0ed0-4030-b1ef-ae4b6912c175
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many times did Picas finish second at UTMB before winning? Give the number."
+accepted_answers:
+  - "2"
+  - "two"
+  - "twice"
+explanation: "She was second twice."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 161b0121-d454-4399-a5f1-2db7d6ef570d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which series title did she win in 2012?"
+choices:
+  - id: cdfc381b-1e82-4f21-b422-85f14beca903
+    text: "Golden Trail Series"
+  - id: 9655afd2-a541-4718-b52a-739794522e84
+    text: "Western States"
+  - id: 8e1b14dd-32d5-42a3-a6f1-374898439a62
+    text: "UTMB"
+  - id: a91ef9e5-9912-4dc7-b0d2-75ea4e827514
+    text: "Skyrunner World Series SkyUltra"
+correct_choice_ids:
+  - a91ef9e5-9912-4dc7-b0d2-75ea4e827514
+explanation: "She won the SkyUltra title."
+archived: false

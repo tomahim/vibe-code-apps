@@ -1,0 +1,20 @@
+schema_version: 1
+id: 9d363e6c-62d2-4bfb-8741-f192bf925219
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is Wyatt's New Zealand national record time for 5 kilometres?"
+choices:
+  - id: 4a50ccc9-5e36-4ed8-b2f4-c971d20fa909
+    text: "13:46"
+  - id: e7f24d66-f1b4-4161-868c-fe838f8ccf55
+    text: "14:20"
+  - id: 9d6ff2fd-8d42-4049-8413-8b0fd43ddff5
+    text: "15:05"
+  - id: bd086573-f395-4c3f-b6fe-e8339d60eaab
+    text: "12:30"
+correct_choice_ids:
+  - 4a50ccc9-5e36-4ed8-b2f4-c971d20fa909
+explanation: "He holds the 5K record at 13:46."
+archived: false

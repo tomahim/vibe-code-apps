@@ -1,0 +1,20 @@
+schema_version: 1
+id: f2c709a5-660a-4ba6-a25a-97ad41cb634c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did he enter his first ultra running competitions?"
+choices:
+  - id: f772a571-7c17-4318-bbd1-c134cdbe412e
+    text: "2019"
+  - id: 5f9e485f-4912-42fe-af40-3408ff1e8072
+    text: "1998"
+  - id: 3a683b40-db9a-474f-aa97-57046bcc97eb
+    text: "2010"
+  - id: d98e9e1d-d53c-4ede-a93c-cd7cc745a423
+    text: "2013"
+correct_choice_ids:
+  - 3a683b40-db9a-474f-aa97-57046bcc97eb
+explanation: "He started ultras in 2010."
+archived: false

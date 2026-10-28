@@ -1,0 +1,20 @@
+schema_version: 1
+id: 1afe9efb-8707-47cd-a1ba-4335d4e9f7da
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Alpine peak did Jornet climb and descend from Chamonix in 4 hours 57 minutes in 2013?"
+choices:
+  - id: 6732f234-02e9-4258-b96b-fa82a37dbdfb
+    text: "Eiger"
+  - id: c7a128cd-ab1d-4324-8a4d-fc846f8c0fb1
+    text: "Mont Ventoux"
+  - id: 8a57efaf-109b-46e8-9669-a3bab729bb34
+    text: "Monte Rosa"
+  - id: 65786b75-026e-4b56-8cc0-65ea56dcbb77
+    text: "Mont Blanc"
+correct_choice_ids:
+  - 65786b75-026e-4b56-8cc0-65ea56dcbb77
+explanation: "This was a fastest known time in July 2013."
+archived: false

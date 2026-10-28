@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0c0192ec-0555-42dc-b849-80ab91896af2
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which race did she win at her first attempt at 100K in 2010?"
+choices:
+  - id: 97e5927d-f4fe-4b7b-a667-dfbc5dd7c554
+    text: "Western States"
+  - id: 80879653-e359-4800-9b17-01db3da9fe69
+    text: "JFK 50"
+  - id: 8bfd4f27-bbc6-4e94-8e04-f9be03c1111c
+    text: "Elk Beaver 100k"
+  - id: 538207e1-4cbd-46df-842b-e26ec73441b1
+    text: "Comrades"
+correct_choice_ids:
+  - 8bfd4f27-bbc6-4e94-8e04-f9be03c1111c
+explanation: "She set a course record of 7:36."
+archived: false

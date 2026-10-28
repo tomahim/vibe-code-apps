@@ -1,0 +1,20 @@
+schema_version: 1
+id: d9533810-ef73-4926-94d9-dcdd96a662a8
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Capell start competing regularly in ultras?"
+choices:
+  - id: b2155bba-b623-4660-b37f-db1043fbc96f
+    text: "2010"
+  - id: bff532ec-0801-4053-a62b-db591e657f89
+    text: "2014"
+  - id: bcebc8a9-9058-4965-bf73-3787f1aac174
+    text: "2019"
+  - id: 91164f05-108f-4283-8115-eb414b98180a
+    text: "2005"
+correct_choice_ids:
+  - bff532ec-0801-4053-a62b-db591e657f89
+explanation: "He started in 2014."
+archived: false

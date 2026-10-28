@@ -1,0 +1,20 @@
+schema_version: 1
+id: 006af223-7523-40b7-ae07-a4f4e346d7b3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which French wine region does he live?"
+choices:
+  - id: 4037d5ea-ecc7-4bb4-9be5-226bc17f400b
+    text: "Bordeaux"
+  - id: 5d290c1c-3e56-4bb9-a786-6d2b30e2052a
+    text: "Alsace"
+  - id: 4a2d2768-56ac-4007-b461-5f987ff99a95
+    text: "Beaujolais"
+  - id: 357cfb16-0f8b-4043-991c-5960b36597b2
+    text: "Champagne"
+correct_choice_ids:
+  - 4a2d2768-56ac-4007-b461-5f987ff99a95
+explanation: "He lives in Beaujolais."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 36f917f7-ec11-4c51-a48b-44c5621fb14d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is a Grand Prix series in mountain running?"
+choices:
+  - id: 1d6f1276-c3ad-45d3-a98b-ed4087cfe2b2
+    text: "A stair climb"
+  - id: 97c5cf46-a3a9-4bca-8154-96aa264131ac
+    text: "A season long competition across several races"
+  - id: dcf167c9-9c72-409f-b0b0-db4a89495c4a
+    text: "A team relay"
+  - id: be172873-764e-4bac-8707-cab62d84fcef
+    text: "A single world final"
+correct_choice_ids:
+  - 97c5cf46-a3a9-4bca-8154-96aa264131ac
+explanation: "It rewards consistency across a season."
+archived: false

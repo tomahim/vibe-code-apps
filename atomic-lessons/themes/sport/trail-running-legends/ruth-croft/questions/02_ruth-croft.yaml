@@ -1,0 +1,20 @@
+schema_version: 1
+id: 72581982-5f10-4130-8851-679c9c0dc767
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which event did she run at the 2006 World Junior Championships?"
+choices:
+  - id: 93304500-5021-4d57-8c6e-761372ebdd16
+    text: "High jump"
+  - id: b3b11ae5-c443-4f62-b962-46429570676a
+    text: "Marathon"
+  - id: 4c1bbdfd-4762-412e-bd13-02d116d0164a
+    text: "100 metres"
+  - id: a94112ec-8778-41ae-9439-b8c112cfb144
+    text: "3,000 metres steeplechase"
+correct_choice_ids:
+  - a94112ec-8778-41ae-9439-b8c112cfb144
+explanation: "She competed for New Zealand."
+archived: false

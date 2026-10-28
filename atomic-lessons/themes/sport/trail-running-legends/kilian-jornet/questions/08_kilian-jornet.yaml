@@ -1,0 +1,10 @@
+id: 8ecab988-3666-4c04-8aeb-1ee8f5ead5ac
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which mountain's Lion Ridge did Jornet run in 2 hours 52 minutes in 2013? Give the mountain's name."
+accepted_answers:
+  - "Matterhorn"
+  - "The Matterhorn"
+explanation: "He improved Bruno Brunod's 1995 time by more than 20 minutes."
+archived: false

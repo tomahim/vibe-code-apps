@@ -1,0 +1,20 @@
+schema_version: 1
+id: f2b68d91-a5a8-40cc-8361-268caaf1ec66
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who is Wyatt's wife, an Italian sky runner?"
+choices:
+  - id: 2b7e6755-0ce2-4cd1-b229-11940cccdcf2
+    text: "Mira Rai"
+  - id: ff19f90e-f38f-45cc-a1a6-ccab789c2102
+    text: "Núria Picas"
+  - id: 48812e6f-33a6-4735-8ca8-d39f0d77bdbe
+    text: "Antonella Confortola"
+  - id: 27447a3d-79ed-4a71-8669-d4b514c8236d
+    text: "Emelie Forsberg"
+correct_choice_ids:
+  - 48812e6f-33a6-4735-8ca8-d39f0d77bdbe
+explanation: "They live in northern Italy."
+archived: false

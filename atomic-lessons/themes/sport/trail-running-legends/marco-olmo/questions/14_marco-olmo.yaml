@@ -1,0 +1,20 @@
+schema_version: 1
+id: c297e071-10ea-48f3-8515-c67002b01244
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which town finishes UTMB?"
+choices:
+  - id: a67659e9-5a03-4f8b-bb0c-ef4eb15881da
+    text: "Courmayeur"
+  - id: cbbd996e-a190-41e0-9057-61fe7c211799
+    text: "Aosta"
+  - id: f030971e-a435-46fe-815a-262e51524bb9
+    text: "Chamonix"
+  - id: e0590e67-bf88-49b9-8a89-465db18765c7
+    text: "Zermatt"
+correct_choice_ids:
+  - f030971e-a435-46fe-815a-262e51524bb9
+explanation: "UTMB starts and finishes in Chamonix."
+archived: false

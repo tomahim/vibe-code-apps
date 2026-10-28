@@ -1,0 +1,20 @@
+schema_version: 1
+id: dfbeefef-6795-463f-93be-856818461e66
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What stopped Trason from competing in college?"
+choices:
+  - id: 2b8e208f-ed71-4d2b-b11a-ce5b2e412587
+    text: "A knee injury"
+  - id: d8d3ff9d-51db-4218-9f31-f4f3699d716a
+    text: "A shoulder injury"
+  - id: 156805fa-8853-48b9-8868-d0ed1aaa7bea
+    text: "A move abroad"
+  - id: 32ecb940-43e2-4385-bd2a-7475129971b0
+    text: "A lack of funding"
+correct_choice_ids:
+  - 2b8e208f-ed71-4d2b-b11a-ce5b2e412587
+explanation: "A knee injury kept her out of college competition."
+archived: false

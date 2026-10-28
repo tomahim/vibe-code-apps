@@ -1,0 +1,20 @@
+schema_version: 1
+id: aa5afb2d-7b8a-4d05-a43d-a9366fce9452
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which US state did Jurek grow up?"
+choices:
+  - id: c320bd87-8d6f-4a62-84a2-c8827c5e92f9
+    text: "Minnesota"
+  - id: 8d3d9e46-1cd0-4680-a56f-e2022b598cb3
+    text: "Colorado"
+  - id: c20d8cd5-fc98-4a51-a90e-609e08bb4fa2
+    text: "Utah"
+  - id: 1af2008b-6f3f-422c-8cb4-c2ba43587239
+    text: "California"
+correct_choice_ids:
+  - c320bd87-8d6f-4a62-84a2-c8827c5e92f9
+explanation: "He was born in Duluth and raised in Proctor, Minnesota."
+archived: false

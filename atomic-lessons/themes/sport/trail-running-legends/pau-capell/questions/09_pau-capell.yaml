@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5190ff3b-7772-4f93-b014-df1cf9b585b6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long was the UTMB 2019 course?"
+choices:
+  - id: 6eaf3334-550f-442c-813a-109419be3132
+    text: "About 171 kilometres"
+  - id: 9d6b5594-8827-4419-971d-f12674ebd980
+    text: "About 300 kilometres"
+  - id: 67dd65c5-60c1-471b-a231-f8e573ce3ce2
+    text: "About 55 kilometres"
+  - id: 2dd7fb83-b8b9-4fc8-9e1a-13315d5448c4
+    text: "About 42 kilometres"
+correct_choice_ids:
+  - 6eaf3334-550f-442c-813a-109419be3132
+explanation: "It was 171.1 km with 10,210 m of climbing."
+archived: false

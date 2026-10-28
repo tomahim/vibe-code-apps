@@ -1,0 +1,20 @@
+schema_version: 1
+id: eff223ae-70df-42a8-a3e3-64498d11c7fa
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which distance is the UTMB main race, roughly?"
+choices:
+  - id: 796aa1c4-9b66-4c2a-b6e3-9bdabb46999b
+    text: "170 kilometres"
+  - id: 2a7a3452-9323-4151-928a-4bf7c354ccda
+    text: "42 kilometres"
+  - id: 201c2e06-150f-4f5b-a13c-e776f5e57d4d
+    text: "55 kilometres"
+  - id: 1878ce4d-a760-4bac-b710-542b9c8f8caf
+    text: "300 kilometres"
+correct_choice_ids:
+  - 796aa1c4-9b66-4c2a-b6e3-9bdabb46999b
+explanation: "The UTMB is about 170 kilometres around Mont Blanc."
+archived: false

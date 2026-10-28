@@ -1,0 +1,20 @@
+schema_version: 1
+id: dd4c6643-dad9-4ba1-a7c4-e8daac04f7f6
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which award did she win in 2017?"
+choices:
+  - id: 55587655-93c7-4b2d-be21-0c28d1dd18c1
+    text: "Olympic gold"
+  - id: e36d7d5c-a22d-4c90-909c-e6a1bb2429b2
+    text: "Golden Trail champion"
+  - id: 47aa8266-70e7-4541-bf90-fb375884e6ff
+    text: "National Geographic Adventurer of the Year"
+  - id: 83a74307-63d9-4bb2-87d3-c857ef11106d
+    text: "UTMB champion"
+correct_choice_ids:
+  - 47aa8266-70e7-4541-bf90-fb375884e6ff
+explanation: "She won the 2017 award."
+archived: false

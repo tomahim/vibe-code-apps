@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5696d09c-5b1b-4b57-845c-1c4a9591a196
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many times did Picas win the Ultra-Trail World Tour?"
+choices:
+  - id: c8063da4-3f9b-414a-a303-1afa5485da74
+    text: "1"
+  - id: 0cf833ad-f59d-4f7c-8311-921a449ae550
+    text: "3"
+  - id: 9f4a2b47-1764-4218-9c6e-77324f1e8134
+    text: "5"
+  - id: c5edde88-756f-4680-a53b-f5c87e86cfe9
+    text: "2"
+correct_choice_ids:
+  - c5edde88-756f-4680-a53b-f5c87e86cfe9
+explanation: "She won in 2014 and 2015."
+archived: false

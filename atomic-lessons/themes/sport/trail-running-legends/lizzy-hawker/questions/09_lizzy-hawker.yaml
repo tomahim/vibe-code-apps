@@ -1,0 +1,20 @@
+schema_version: 1
+id: 96762404-7fce-42db-b614-9e8ad7c05970
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which medal did Hawker win at the 2010 100 km World Championships?"
+choices:
+  - id: 28b73913-4d78-4f88-9e25-1bf7b5575c3e
+    text: "Silver"
+  - id: ce3dc942-c618-4e30-ad5a-cc2b9fd472a5
+    text: "Gold"
+  - id: da6b2f4b-44db-40cf-b80f-171c122ad295
+    text: "Bronze"
+  - id: d7551060-b72d-4810-87a1-1ea46359049c
+    text: "No medal"
+correct_choice_ids:
+  - da6b2f4b-44db-40cf-b80f-171c122ad295
+explanation: "She finished behind Ellie Greenwood and Monica Carlin."
+archived: false

@@ -1,0 +1,9 @@
+id: 37e47d4c-9795-4df2-8110-d5d8cc514f07
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many laps did Dauwalter run in the 2018 Big's Backyard Ultra? Give the number."
+accepted_answers:
+  - "67"
+explanation: "She completed 67 laps."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: dbe6ec0a-2e9b-4288-a8a4-2a1c44850764
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How much did Jurek beat the Appalachian Trail supported record by in 2015?"
+choices:
+  - id: 40ba8771-f784-46e4-97bf-1e076be58984
+    text: "About thirty minutes"
+  - id: c61efb9e-a7a3-40ef-a8a2-a9f3a9f9fdd3
+    text: "About three days"
+  - id: 3356b28f-e237-4d91-9dfe-ad8d16040fd1
+    text: "About three hours"
+  - id: 7e7c4d14-2d8b-4599-80dd-887e6cde62fc
+    text: "About one week"
+correct_choice_ids:
+  - 3356b28f-e237-4d91-9dfe-ad8d16040fd1
+explanation: "He beat the previous record by about three hours."
+archived: false

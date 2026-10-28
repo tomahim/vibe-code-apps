@@ -1,0 +1,9 @@
+id: 3120259c-4697-4bfb-92ca-320eb6d9c98d
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Picas win UTMB?"
+accepted_answers:
+  - "2017"
+explanation: "She finally won in 2017."
+archived: false

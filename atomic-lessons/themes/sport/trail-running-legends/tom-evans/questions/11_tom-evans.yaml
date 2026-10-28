@@ -1,0 +1,20 @@
+schema_version: 1
+id: cb58a831-ba6e-4e50-bfb6-065e63caea45
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was his place at Western States 2019?"
+choices:
+  - id: 760b3dba-9851-4695-a94b-203abea4087d
+    text: "Second"
+  - id: 71920e61-d39e-47c4-a06e-1eb854e50310
+    text: "Tenth"
+  - id: f6c0e67b-af1a-44a6-8eec-12b4a2a94813
+    text: "Third"
+  - id: 563ad3ec-89c1-4c14-8750-3e0a0ff626ac
+    text: "First"
+correct_choice_ids:
+  - f6c0e67b-af1a-44a6-8eec-12b4a2a94813
+explanation: "He ran 14:59:44."
+archived: false

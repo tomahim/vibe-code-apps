@@ -1,0 +1,20 @@
+schema_version: 1
+id: 203ffaaa-99e6-482b-9c78-dc4ca9131555
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What course did she take thanks to her boss?"
+choices:
+  - id: 2b7c8c2b-ffa5-447f-b648-f10c0f8f8a2a
+    text: "A baking course"
+  - id: 955937da-ad51-491b-a655-6c9660fc7384
+    text: "A first aid course"
+  - id: 78c864ca-dbc9-4578-b462-c25c6746699e
+    text: "A climbing course"
+  - id: c3455d5a-e1de-4127-bcb3-9d7c2b58e238
+    text: "A language course"
+correct_choice_ids:
+  - 2b7c8c2b-ffa5-447f-b648-f10c0f8f8a2a
+explanation: "She convinced him to send her on a baking course."
+archived: false

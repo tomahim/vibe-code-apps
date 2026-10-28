@@ -1,0 +1,9 @@
+id: 002498c0-9a7f-4731-b2f2-3ab284d6e9f1
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many miles long is the Ultra Tour Monte Rosa? Give the number."
+accepted_answers:
+  - "93"
+explanation: "It runs for 93 miles."
+archived: false

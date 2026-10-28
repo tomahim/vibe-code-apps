@@ -1,0 +1,10 @@
+id: 8107bdce-afa2-4ad4-81d3-ff080bf68a9a
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What does Dauwalter call the mental space of the hardest parts of a race? Give the two words."
+accepted_answers:
+  - "Pain Cave"
+  - "The Pain Cave"
+explanation: "She calls it the Pain Cave."
+archived: false

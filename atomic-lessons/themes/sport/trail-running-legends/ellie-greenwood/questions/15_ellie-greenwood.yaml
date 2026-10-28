@@ -1,0 +1,9 @@
+id: bc0e1ffb-69d6-4540-90c7-52a8f9a871b9
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Greenwood win Comrades?"
+accepted_answers:
+  - "2014"
+explanation: "She won in 2014."
+archived: false

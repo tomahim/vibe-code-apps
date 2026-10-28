@@ -1,0 +1,20 @@
+schema_version: 1
+id: bd69282c-d3cd-443c-8a77-1e2d60884d9c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did D'Haene become a wine grower?"
+choices:
+  - id: b1efc98a-b055-4f57-b66d-dbd554026633
+    text: "2017"
+  - id: 86758a50-f9e1-438f-9951-7e124fa84357
+    text: "1999"
+  - id: 9eabb91b-530e-4a4f-ac1e-7da11a26b114
+    text: "2012"
+  - id: 11c4a558-0fff-4736-8331-ef544a434af5
+    text: "2021"
+correct_choice_ids:
+  - 9eabb91b-530e-4a4f-ac1e-7da11a26b114
+explanation: "He became a wine grower in 2012."
+archived: false

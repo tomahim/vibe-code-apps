@@ -1,0 +1,9 @@
+id: cf8c649f-cb86-4a83-9b86-3c63c318c644
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did he win UTMB for the third time?"
+accepted_answers:
+  - "2018"
+explanation: "His third win came in 2018."
+archived: false

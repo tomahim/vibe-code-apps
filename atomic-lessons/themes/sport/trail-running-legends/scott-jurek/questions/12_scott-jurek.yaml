@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7bf7d651-3835-424e-9338-27bf476c516e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which book made Jurek's Copper Canyon race famous?"
+choices:
+  - id: ed9d0988-5489-46ff-96a9-72aa275a46e8
+    text: "Natural Born Heroes"
+  - id: 0e357a4f-a595-4b30-9d29-40be6b37c920
+    text: "Ultramarathon Man"
+  - id: 8b4335e8-2e46-4d72-803c-93ed4942e47f
+    text: "Born to Run"
+  - id: a454997f-b51e-433f-ad7f-f0116602d2de
+    text: "Eat and Run"
+correct_choice_ids:
+  - 8b4335e8-2e46-4d72-803c-93ed4942e47f
+explanation: "Born to Run by Christopher McDougall told the story."
+archived: false

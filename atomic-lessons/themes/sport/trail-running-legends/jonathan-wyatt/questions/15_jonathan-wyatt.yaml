@@ -1,0 +1,9 @@
+id: fbb553e9-082a-42f4-9210-32e47a754f58
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Which medal did Wyatt win at the 2010 Snowshoe Running World Championships? Give the colour."
+accepted_answers:
+  - "bronze"
+explanation: "He was third overall in Vancouver."
+archived: false

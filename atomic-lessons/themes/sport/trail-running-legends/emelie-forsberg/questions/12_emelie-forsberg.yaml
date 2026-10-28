@@ -1,0 +1,20 @@
+schema_version: 1
+id: 60a48ffc-6c11-47b2-a17b-d1b3d14dbfae
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many years in a row did she win the Ultra title from 2013?"
+choices:
+  - id: f00852aa-8d76-4e93-9e0e-1275c3ff4644
+    text: "7"
+  - id: 90cd8764-0231-4b8b-9606-ca1ead7685fb
+    text: "5"
+  - id: 668e1ea1-34ba-4af1-a646-facda8c3c78d
+    text: "1"
+  - id: 444d88d6-b36b-421c-b09d-4c935391b1c6
+    text: "3"
+correct_choice_ids:
+  - 444d88d6-b36b-421c-b09d-4c935391b1c6
+explanation: "She won in 2013, 2014 and 2015."
+archived: false

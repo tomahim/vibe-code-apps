@@ -1,0 +1,20 @@
+schema_version: 1
+id: 85f01a09-9f81-492e-8468-06c33f0c713c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was D'Haene's job before becoming a wine grower?"
+choices:
+  - id: f36d4fae-f22b-46c0-89bc-9a75bc67685c
+    text: "Physiotherapist"
+  - id: db0ba1b0-4739-48de-b8d7-58613377dd0a
+    text: "Teacher"
+  - id: cf919152-0731-4a14-ad16-b01ee7912d27
+    text: "Pilot"
+  - id: ecc60a36-ee69-4ecc-93c3-617030196730
+    text: "Chef"
+correct_choice_ids:
+  - f36d4fae-f22b-46c0-89bc-9a75bc67685c
+explanation: "He used to be a physiotherapist."
+archived: false

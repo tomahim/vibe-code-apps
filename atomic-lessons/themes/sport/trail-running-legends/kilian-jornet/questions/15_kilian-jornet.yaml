@@ -1,0 +1,9 @@
+id: 49c979fa-72ea-41c2-9d70-8160b52de993
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Jornet win the first of his Skyrunner World Series titles?"
+accepted_answers:
+  - "2007"
+explanation: "He won in 2007, 2008 and 2009."
+archived: false

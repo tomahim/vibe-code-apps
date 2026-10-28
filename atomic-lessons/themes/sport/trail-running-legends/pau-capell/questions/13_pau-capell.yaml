@@ -1,0 +1,20 @@
+schema_version: 1
+id: 4425b321-6796-435b-b3aa-102e9f012c48
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Whose 19:01:32 was the faster UTMB time before Capell's win?"
+choices:
+  - id: ade15626-fd43-427e-8a72-f49aab9df2b3
+    text: "Xavier Thévenard"
+  - id: 982ecbe2-d7ec-4bed-a974-86955404e54a
+    text: "François D'Haene"
+  - id: a81a4c57-99e8-49c4-9bf9-dc77dc071ab0
+    text: "Kilian Jornet"
+  - id: 5aba2fbb-11fa-43cf-b663-88c78f2b09b2
+    text: "Jim Walmsley"
+correct_choice_ids:
+  - 982ecbe2-d7ec-4bed-a974-86955404e54a
+explanation: "D'Haene ran 19:01:32 in 2017."
+archived: false

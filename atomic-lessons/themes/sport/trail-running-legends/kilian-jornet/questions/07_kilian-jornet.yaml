@@ -1,0 +1,9 @@
+id: 6484e507-701b-4057-ac2f-813b9014fe07
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Jornet win UTMB in a course record of 19:49:30?"
+accepted_answers:
+  - "2022"
+explanation: "The record was later lowered by Jim Walmsley in 2023."
+archived: false

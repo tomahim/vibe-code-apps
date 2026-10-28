@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2a028f27-cde0-401e-bbac-9e5f89454620
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "To which country did Greenwood move in 2001?"
+choices:
+  - id: 38fec2d7-f06a-488b-8696-be4f0b11dbd9
+    text: "New Zealand"
+  - id: 740a5840-dac9-4a1a-9c7d-72c4f3859839
+    text: "South Africa"
+  - id: de18c329-59b7-40e6-b736-b4cec448de92
+    text: "Canada"
+  - id: e4664032-5d73-4c7f-9d63-0f75f771824d
+    text: "Australia"
+correct_choice_ids:
+  - de18c329-59b7-40e6-b736-b4cec448de92
+explanation: "She moved for work at a ski tour operator."
+archived: false

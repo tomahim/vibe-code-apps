@@ -1,0 +1,9 @@
+id: cde3591c-bc40-4f35-9857-f25f9cbaa4f9
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which Italian province is Robilante? Give the city near it."
+accepted_answers:
+  - "Cuneo"
+explanation: "Robilante is near Cuneo."
+archived: false

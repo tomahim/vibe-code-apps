@@ -1,0 +1,20 @@
+schema_version: 1
+id: f150a1e5-834d-42cc-add0-c25661d1d0d5
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did she become a full time professional runner?"
+choices:
+  - id: 0727617c-96f7-457b-9fbe-46503a769d7f
+    text: "2017"
+  - id: 9d7613be-5ece-49bd-ab56-56b34e292820
+    text: "2023"
+  - id: ebff6807-f69a-4fbe-9dcd-00dd407fe449
+    text: "2010"
+  - id: f1a21cf9-b118-4e37-b953-72dc1094939c
+    text: "2019"
+correct_choice_ids:
+  - 0727617c-96f7-457b-9fbe-46503a769d7f
+explanation: "She turned professional in 2017."
+archived: false

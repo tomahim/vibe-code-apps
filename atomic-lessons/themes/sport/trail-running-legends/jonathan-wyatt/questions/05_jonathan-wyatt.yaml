@@ -1,0 +1,20 @@
+schema_version: 1
+id: d5a2a383-e380-42dd-a2f3-5df81542b069
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which city did Wyatt win the 2005 world mountain running title?"
+choices:
+  - id: df1fdfbc-fac1-46dd-8288-6b9aa71b0d26
+    text: "Wellington"
+  - id: 92c1196b-2ef2-4781-80ff-4943a806d93d
+    text: "Innsbruck"
+  - id: 5157ef46-9565-4e67-a71e-7216853b2ac0
+    text: "Bergen"
+  - id: 7328557f-5f18-4540-9a0a-774851229f9b
+    text: "Bursa"
+correct_choice_ids:
+  - df1fdfbc-fac1-46dd-8288-6b9aa71b0d26
+explanation: "The 2005 championships were in Wellington."
+archived: false

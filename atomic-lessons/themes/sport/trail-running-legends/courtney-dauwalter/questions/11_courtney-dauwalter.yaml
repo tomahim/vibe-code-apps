@@ -1,0 +1,20 @@
+schema_version: 1
+id: be1b1640-ac54-434b-aea6-1e8afc3ec1e3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did she do at the 2021 Hardrock 100?"
+choices:
+  - id: 48c7d6bf-001e-46d6-9599-b6cca22c0aad
+    text: "Did not finish"
+  - id: 0509f0a9-ffd1-4594-a8c3-8399fd7a30fc
+    text: "Won"
+  - id: 655def45-ec45-4a97-8604-c2827c041206
+    text: "Set a record"
+  - id: f8314a1c-a9b6-4ebe-a8df-d35f54fa0ce9
+    text: "Did not start"
+correct_choice_ids:
+  - 48c7d6bf-001e-46d6-9599-b6cca22c0aad
+explanation: "She returned and won in 2022."
+archived: false

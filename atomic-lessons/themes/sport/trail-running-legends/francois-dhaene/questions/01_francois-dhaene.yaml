@@ -1,0 +1,20 @@
+schema_version: 1
+id: 6401c0d1-d4c2-42df-8120-d90f054ae252
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which French city was D'Haene born?"
+choices:
+  - id: 226d0068-214f-409c-8017-087682d105b3
+    text: "Lyon"
+  - id: c0ffc175-94fe-4128-a9ef-d76e3615f614
+    text: "Lille"
+  - id: 31903200-e73c-4f48-9d6f-d3f46bd05689
+    text: "Chamonix"
+  - id: c7d681ee-b5a0-4f0a-9137-a6f537f74d59
+    text: "Marseille"
+correct_choice_ids:
+  - c0ffc175-94fe-4128-a9ef-d76e3615f614
+explanation: "He was born in Lille in 1985."
+archived: false

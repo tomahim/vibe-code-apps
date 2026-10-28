@@ -1,0 +1,10 @@
+id: c773bd73-054a-417a-a655-0822cf34e5d0
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many major races make up the Triple Crown she completed in 2023? Give the number."
+accepted_answers:
+  - "3"
+  - "three"
+explanation: "Western States, Hardrock and UTMB."
+archived: false

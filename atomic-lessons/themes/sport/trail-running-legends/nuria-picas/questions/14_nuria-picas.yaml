@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2b76d740-78aa-4c23-878e-23ee303c64bd
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which mountain range lies in Catalonia?"
+choices:
+  - id: 412303e2-529d-4347-8bbc-8a0d452fcc76
+    text: "The Alps"
+  - id: 0022152c-1401-4092-9abb-74c66830e76b
+    text: "The Carpathians"
+  - id: 72d847c8-4014-4513-b0cf-3cef506f5f2e
+    text: "The Andes"
+  - id: 5298d390-37e0-4484-b6ca-3d96efec2e6f
+    text: "The Pyrenees"
+correct_choice_ids:
+  - 5298d390-37e0-4484-b6ca-3d96efec2e6f
+explanation: "Catalonia includes part of the Pyrenees."
+archived: false

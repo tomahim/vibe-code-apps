@@ -1,0 +1,9 @@
+id: 610d33cf-1417-4c3e-bde8-2ef87ee8274f
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Micah True die?"
+accepted_answers:
+  - "2012"
+explanation: "He died on March 27, 2012."
+archived: false

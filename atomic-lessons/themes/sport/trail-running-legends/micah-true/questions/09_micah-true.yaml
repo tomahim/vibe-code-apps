@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2ad3568a-9987-4628-8e89-716f320d5f19
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is another name for the Tarahumara?"
+choices:
+  - id: afa3af20-a7bc-41f6-bebc-b359a0bfdb2c
+    text: "Maya"
+  - id: fa477156-8a46-4b21-81de-85f4d4cc15b8
+    text: "Rarámuri"
+  - id: 1e5f6036-360f-4521-98d5-b5b8ecd16a7b
+    text: "Apache"
+  - id: cc5d707d-6262-4ff6-92b9-c623fc3eb293
+    text: "Navajo"
+correct_choice_ids:
+  - fa477156-8a46-4b21-81de-85f4d4cc15b8
+explanation: "The Tarahumara are also called the Rarámuri."
+archived: false

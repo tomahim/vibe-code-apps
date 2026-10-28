@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8cfaeacf-cefe-4064-b7e8-50e4c0f9c3f7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country is Capell from?"
+choices:
+  - id: a968bf8d-62c3-42ba-a9f3-db0ad06b9b8b
+    text: "Spain"
+  - id: 2b6efe1c-da60-490b-b0dc-a512f60144b2
+    text: "Portugal"
+  - id: b1adf362-b7f0-43d6-945a-b3b7709e01d6
+    text: "Italy"
+  - id: 9dac35c9-5738-47a2-af92-06946210807e
+    text: "France"
+correct_choice_ids:
+  - a968bf8d-62c3-42ba-a9f3-db0ad06b9b8b
+explanation: "Capell is a Spanish runner."
+archived: false

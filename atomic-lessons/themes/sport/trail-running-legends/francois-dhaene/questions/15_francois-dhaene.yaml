@@ -1,0 +1,9 @@
+id: b203115a-681f-422f-a34b-40f248c5db11
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Whose Hardrock records did D'Haene break in 2021? Give the last name."
+accepted_answers:
+  - "Jornet"
+explanation: "He broke counter clockwise and overall records held by Kilian Jornet."
+archived: false

@@ -1,0 +1,9 @@
+id: e50535af-9545-4aa5-917f-893ff77b9afe
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What colour medal did she win at the 2019 Trail World Championships? Give the colour."
+accepted_answers:
+  - "silver"
+explanation: "She finished behind Blandine L'Hirondel."
+archived: false

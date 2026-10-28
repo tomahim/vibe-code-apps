@@ -1,0 +1,9 @@
+id: 65a18fa6-1b86-4766-9c58-3f13c4c8f854
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is Meltzer's coaching start year?"
+accepted_answers:
+  - "2007"
+explanation: "He has coached since 2007."
+archived: false

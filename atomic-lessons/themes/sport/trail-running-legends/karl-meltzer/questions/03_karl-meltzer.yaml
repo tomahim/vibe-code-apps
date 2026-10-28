@@ -1,0 +1,20 @@
+schema_version: 1
+id: d3453007-ab44-4d88-997d-01c976f47050
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Meltzer become a professional ultramarathoner?"
+choices:
+  - id: 2fe2d633-687d-42c8-bc8a-8439141875dc
+    text: "1999"
+  - id: d5a63236-f0c9-460e-9eec-e0a5159066b2
+    text: "2007"
+  - id: af7e9c07-95e1-47ee-9399-323cba62d699
+    text: "2016"
+  - id: 83f4e38f-cb7c-450a-90cd-f25abec93bcd
+    text: "1985"
+correct_choice_ids:
+  - 2fe2d633-687d-42c8-bc8a-8439141875dc
+explanation: "He has been a professional since 1999."
+archived: false

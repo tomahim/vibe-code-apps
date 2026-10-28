@@ -1,0 +1,20 @@
+schema_version: 1
+id: 3cfc400c-097d-4a50-b869-ef9486565fba
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many years did Trason's record last before Greenwood broke it?"
+choices:
+  - id: 327d4b7f-e5ca-42d1-ad5c-50465262608e
+    text: "30"
+  - id: d063822c-beab-4ff8-accd-ac8e69c179c7
+    text: "8"
+  - id: dc614b09-493f-4849-97c7-c8461f26e000
+    text: "18"
+  - id: 14a669e3-6c68-4322-974d-3d845ed6ace5
+    text: "3"
+correct_choice_ids:
+  - dc614b09-493f-4849-97c7-c8461f26e000
+explanation: "1994 to 2012 is 18 years."
+archived: false

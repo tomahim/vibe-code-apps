@@ -1,0 +1,10 @@
+id: d8e6fcd6-666d-4a2d-a1b0-7a205cadcd82
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What gesture does Evans make at the finish line of major races? Give the one word."
+accepted_answers:
+  - "salute"
+  - "a salute"
+explanation: "He salutes."
+archived: false

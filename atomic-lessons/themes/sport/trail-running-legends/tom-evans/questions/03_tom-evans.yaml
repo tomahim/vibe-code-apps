@@ -1,0 +1,20 @@
+schema_version: 1
+id: 913715a5-e4a4-4b8e-b12e-1f8437e0d59b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which military academy did he train at?"
+choices:
+  - id: ff665053-36c2-4719-aded-0229db93eaf7
+    text: "Annapolis"
+  - id: 712990bf-0458-4cf8-a4b5-ea02516ae596
+    text: "West Point"
+  - id: 6eb03afc-5cf3-4829-8426-97d8a74fbc44
+    text: "Sandhurst"
+  - id: 2452fdfb-bca8-4c76-942e-a61d9b9cb2fc
+    text: "Saint-Cyr"
+correct_choice_ids:
+  - 6eb03afc-5cf3-4829-8426-97d8a74fbc44
+explanation: "He trained at the Royal Military Academy Sandhurst."
+archived: false

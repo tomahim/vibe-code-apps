@@ -1,0 +1,9 @@
+id: d851c4ee-705a-44dd-83f3-877b066a1fbc
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Krupicka place second at Grindstone? Give the year."
+accepted_answers:
+  - "2024"
+explanation: "He earned a spot at the 2025 UTMB final."
+archived: false

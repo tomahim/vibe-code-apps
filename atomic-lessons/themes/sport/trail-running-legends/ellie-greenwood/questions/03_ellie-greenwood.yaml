@@ -1,0 +1,20 @@
+schema_version: 1
+id: c0f680f7-18b2-4472-8e21-33883e7d1c32
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which sponsor began supporting her in 2005?"
+choices:
+  - id: 8b37348d-69b2-4aef-a54c-eef93927482d
+    text: "Montrail"
+  - id: 6856dbcb-36a1-4caf-9a9f-4d385f559caf
+    text: "Salomon"
+  - id: 46c8338a-0fe3-4e7c-a808-ec54263b0755
+    text: "Adidas"
+  - id: e5a34536-9946-4ef7-b2f8-eb6a6f2bf1cf
+    text: "Hoka"
+correct_choice_ids:
+  - 8b37348d-69b2-4aef-a54c-eef93927482d
+explanation: "Montrail began sponsoring her in 2005."
+archived: false

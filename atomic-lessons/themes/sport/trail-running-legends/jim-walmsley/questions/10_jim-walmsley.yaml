@@ -1,0 +1,20 @@
+schema_version: 1
+id: cc46d29b-edcf-4b98-a67e-121c1abd7ef2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Whose 36 year old 50 mile record did he beat by 14 seconds?"
+choices:
+  - id: 910f3b0d-ceca-4aa8-9f9b-560fb224d2d3
+    text: "Karl Meltzer"
+  - id: 067084d5-5813-4fc1-91d1-090dfabb0450
+    text: "Bruce Fordyce"
+  - id: 3203e6e8-bd23-444a-ada9-3185df298dfe
+    text: "Jonathan Wyatt"
+  - id: 97f6d969-b934-408a-864b-5dbad6f8eef7
+    text: "Scott Jurek"
+correct_choice_ids:
+  - 067084d5-5813-4fc1-91d1-090dfabb0450
+explanation: "Fordyce set the previous record."
+archived: false
