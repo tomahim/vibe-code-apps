@@ -4,7 +4,7 @@ position: 6
 title: "Racing in the Capell era"
 archived: false
 ---
-In 2019, Pau Capell won UTMB in the second fastest time ever, and Thévenard was among the elite runners in the field. Race reports of that edition noted that he had previously won UTMB three times.
+In 2019, Pau Capell won UTMB in 20:19:07, then the second fastest time ever, and Thévenard finished second after chasing him all day, according to iRunFar. Race reports noted that he had previously won UTMB three times.
 
 His career shows how a strong group of athletes pushes the sport forward. Each fast result raises expectations and training standards. Thévenard's wins from 2013 to 2018 came when the field was becoming deeper and faster every year.
 

@@ -2,11 +2,13 @@
 
 Main sources: Wikipedia profiles (fetched 2026-10-28) for biography and results, plus the sources linked on each lesson's seventh card, listed below. Race results and records are as of 2026-10-28 and should be re-checked before edits.
 
-Review notes:
-- Lesson 3 (Jornet): the 2017 Everest claim is mentioned only as disputed by other mountain runners. UTMB course record 19:49:30 is his 2022 win; Walmsley lowered it in 2023 (19:37:43).
-- Lesson 7 (Meltzer): 100 mile win count uses 45 (Wikipedia, as of December 2021), not the 50 in the issue draft.
-- Lesson 11 (Croft): source for the 2025 UTMB title is The Guardian; check the race results page when editing.
-- Lesson 15 (Capell) and 16 (Evans): UTMB 2019 time from the UTMB results page; Evans's 2023 Western States and 2025 UTMB wins from Wikipedia.
+Review notes (fact-check pass, 2026-10-28):
+- Race results, times and years were checked against official or strong sources where available: Western States results and year-by-year pages (wser.org: Evans 2019 third in 14:59:44 and 2023 win, Walmsley 2024 win, Greenwood 2012 record, Krupicka 2010 second in 15:13:52, Jornet 2010 third and 2011 win, Croft 2021 second and 2022 win), UTMB results on utmb.world and ITRA (Evans 2018 CCC 10:44:32, 2020 Tarawera 8:03:29, 2025 UTMB 19:18:58; Croft 2025 UTMB 22:56:23; Olmo 2006 and 2007; Thévenard UTMF 2019 19:36:26 and OCC 2016), Hardrock official results (Jornet 21:36:24 in 2022), Guinness World Records (Thévenard Grand Slam, Hawker five UTMB wins, Wyatt six mountain running world titles, Dauwalter Triple Crown), iRunFar (Croft 2019 Trail World Championships silver, 2024 and 2025 Tarawera, Capell 2019 with Thévenard second, D'Haene 2017) and the Hardrock 2016 tie between Jornet and Schlarb (Durango Herald, Trail Runner).
+- Lesson 3 (Jornet): the 2017 Everest claim is mentioned only as disputed by other mountain runners. UTMB reported the 2022 win in 19:49:30 as a record and the first finish under 20 hours. Because routes change in many years, later faster times (D'Haene 2017, Walmsley 2023, Evans 2025, Dhiman 2026) were run on modified routes, and UTMB lists Jornet's time as the record on the full route (cimalp.com summary, updated 31 August 2026). The lessons avoid calling later times records.
+- Lesson 7 (Meltzer): 100 mile win count uses 45 (reported at the time of his 45th win in December 2021, also Wikipedia) because his official site lists 50 with no date. The 2006 six-win year, 2016 Appalachian Trail time and 2010 Pony Express run are from his official site. The 2008 Appalachian Trail time is from the KSL report of his finish. McConaughy's 2017 time is from fastestknowntime.com.
+- Lesson 16 (Evans): Marathon des Sables 2017 third place is from Forces News and Precision Hydration; the 19:49:33 time is from Wikipedia only.
+- Lesson 17 (Croft): the 2025 UTMB title is confirmed by the UTMB press release and Runner's World. CCC 2015 (12:54:53) and OCC 2018 and 2019 are confirmed by u-trail.com, SCMP and the sport-histoire honours table.
+- Items still supported only by Wikipedia (minor): Croft's 2017 wins and North Face 50 fourth place, Evans's 2017 CCC fourth place and Trail World Championships 2018 bronze, Thévenard's 2017 and 2019 Mont-Blanc 80 km and 90 km wins and CCC 2010, Forsberg's 2012 Zegama third place and Skyrunner World Series titles, and Mira Rai's 2016 injury. Explanatory sentences added to reach the 100 word card length are general background, not individually sourced.
 - Lesson 20 (True): first-race date from Micah True's own post at truemessages.org.
 
 Per lesson main source:

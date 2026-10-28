@@ -4,7 +4,7 @@ position: 2
 title: "The most 100 mile wins"
 archived: false
 ---
-Meltzer has won more 100 mile ultramarathons than any other runner. As of December 11, 2021, he had won at the 100 mile distance 45 times, which is the all time record. As of March 7, 2010, he had 53 ultra wins in 105 starts.
+Meltzer has won more 100 mile ultramarathons than any other runner. As of December 11, 2021, he had won at the 100 mile distance 45 times, which is the all time record. His official site lists a higher total of 50 wins at the distance, but it gives no date, so this lesson uses the dated figure of 45.
 
 Winning a 100 mile race means running for around a day, usually through the night, on mountain trails. Doing that more than 40 times means staying healthy for years, choosing the right races and managing every hard patch. His record shows endurance, but also patience and planning.
 

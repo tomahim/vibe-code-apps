@@ -4,7 +4,7 @@ position: 4
 title: "Second at Western States"
 archived: false
 ---
-In 2010 Krupicka finished second at the Western States Endurance Run, with a time of 15 hours, 13 minutes and 53 seconds. That time would have been a course record in many earlier years.
+In 2010 Krupicka finished second at the Western States Endurance Run, with a time of 15 hours, 13 minutes and 52 seconds. That time would have been a course record in many earlier years.
 
 Second place at Western States did not lead to a win, but it showed his range. He was a mountain runner who could also do very well on a fast, runnable 100 mile course. It was one of the best results of his career.
 

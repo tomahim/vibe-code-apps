@@ -4,7 +4,7 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: "In which year was UTMB course record 19:37:43 set?"
+prompt: "In which year did Walmsley win UTMB in 19:37:43?"
 choices:
   - id: 6416938b-bf3b-4fb6-bdf8-b17c54547728
     text: "2021"

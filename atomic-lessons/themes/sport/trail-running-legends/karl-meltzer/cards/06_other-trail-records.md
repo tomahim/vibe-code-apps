@@ -4,7 +4,7 @@ position: 6
 title: "Other trail records"
 archived: false
 ---
-Meltzer has also held speed records on other major American trails, including the Pony Express Trail. His records show that he liked both racing and long routes where he made his own pace.
+Meltzer has also held speed records on other major American trails, including the Pony Express Trail, which he ran in 2010 over more than 2,100 miles in about 40 days. His records show that he liked both racing and long routes where he made his own pace.
 
 As a coach since 2007 he also helps other runners prepare for 100 mile races. His mix of results, humour and an easy going attitude has made him one of the best known characters in the sport.
 

@@ -4,7 +4,7 @@ position: 2
 title: "Three UTMB wins"
 archived: false
 ---
-Thévenard won the Ultra-Trail du Mont-Blanc in 2013, 2015 and 2018. The UTMB is a loop of around 170 kilometres around Mont Blanc through France, Italy and Switzerland, and winning it three times is a major feat.
+Thévenard won the Ultra-Trail du Mont-Blanc in 2013, 2015 and 2018, according to Guinness World Records. The UTMB is a loop of around 170 kilometres around Mont Blanc through France, Italy and Switzerland, and winning it three times is a major feat.
 
 His wins came across five years, which shows that he stayed at the top while the sport became more competitive. Many strong runners who start UTMB as favourites do not finish, so a record of three wins also says that he could manage the race's long night and hard descents.
 

@@ -4,7 +4,7 @@ position: 4
 title: "A fast 100 mile debut"
 archived: false
 ---
-Evans made his 100 mile debut at Western States in 2019. He finished third in 14:59:44. The performance was widely reported as the fastest overseas time at Western States at that point and placed him among the fastest finishers in race history.
+Evans made his 100 mile debut at Western States in 2019. He finished third in 14:59:44. The Western States results list him third, and a debut in under 15 hours placed him among the fastest finishers in race history.
 
 In 2020 he won the Tarawera Ultramarathon in New Zealand in 8:03:29, setting a course record. He also competed at the 2020 World Athletics Half Marathon Championships in Gdynia, Poland, which shows his range from road racing to ultras.
 

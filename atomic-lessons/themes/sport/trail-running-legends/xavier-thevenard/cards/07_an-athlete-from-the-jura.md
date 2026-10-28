@@ -4,7 +4,7 @@ position: 7
 title: "An athlete from the Jura"
 archived: false
 ---
-Thévenard's story is about local roots and long term development. A skier from a small village became the only person to win every individual UTMB race.
+Thévenard's story is about local roots and long term development. A skier from a small village became the first person to win every individual UTMB race.
 
 His career also shows that talent often starts in another sport. Skiing and biathlon taught him how to push hard in cold, steep terrain and manage effort. Many trail runners have winter sports in their background.
 

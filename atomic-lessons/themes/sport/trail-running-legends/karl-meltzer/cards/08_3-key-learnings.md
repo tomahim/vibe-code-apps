@@ -8,4 +8,4 @@ archived: false
 
 **2. Long trails reward planning.** He set an Appalachian Trail record of 45 days, 22 hours and 38 minutes in 2016.
 
-**3. Records get beaten.** Joe McConaughy and later Tara Dower took the fastest known time after him.
+**3. Records get beaten.** Joe McConaughy took the fastest known time from him in 2017.

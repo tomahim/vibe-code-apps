@@ -4,7 +4,7 @@ position: 4
 title: "UTMB: from 21st overall to a record"
 archived: false
 ---
-In 2019 Dauwalter won the Ultra-Trail du Mont-Blanc in 24 hours, 34 minutes and 26 seconds, finishing 21st overall. In 2021 she returned and set the women's course record.
+In 2019 Dauwalter won the Ultra-Trail du Mont-Blanc in 24 hours, 34 minutes and 26 seconds, finishing 21st overall. In 2021 she returned, led from start to finish and set a women's course record of 22:30:54, finishing seventh overall.
 
 In September 2023 she won UTMB again. Finishing among the top 25 overall in a race with thousands of starters means that she beat many of the best men in the world, which is one reason she has become so famous outside ultrarunning.
 

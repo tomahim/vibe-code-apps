@@ -6,6 +6,6 @@ archived: false
 ---
 **1. Winter sport helps.** Thévenard was a cross country skier and biathlete before ultras.
 
-**2. Range is rare.** He is the only runner to have won all four individual UTMB week races.
+**2. Range is rare.** He was the first runner to win all four individual UTMB week races.
 
 **3. Wins span years.** His UTMB titles came in 2013, 2015 and 2018.
