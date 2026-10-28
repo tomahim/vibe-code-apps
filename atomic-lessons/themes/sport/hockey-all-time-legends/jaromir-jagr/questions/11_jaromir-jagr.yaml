@@ -1,0 +1,19 @@
+id: fcf4a61f-8221-444c-9068-37fb2e0101bc
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Against which country did Jagr score his only goal at the 1998 Olympics?"
+choices:
+  - id: ad9b3efb-31da-44fa-bcd6-8f6acac0f779
+    text: "Russia"
+  - id: 23334883-668e-4bc7-a450-d940bf7ac8a2
+    text: "United States"
+  - id: 08d77337-6b88-4a8c-a6a9-856746d459a1
+    text: "Finland"
+  - id: 55074ff5-1cb2-49a5-adec-4ab392d5fbef
+    text: "Canada"
+correct_choice_ids:
+  - 23334883-668e-4bc7-a450-d940bf7ac8a2
+explanation: "It was the game winner against the United States."
+archived: false

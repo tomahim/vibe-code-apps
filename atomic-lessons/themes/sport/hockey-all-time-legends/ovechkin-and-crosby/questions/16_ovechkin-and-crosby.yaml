@@ -1,0 +1,10 @@
+id: 660f1271-37a9-49fe-94cc-3da59562f0ad
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many Stanley Cups has Crosby won with the Penguins?"
+accepted_answers:
+  - "3"
+  - "three"
+explanation: "He won the Cup in 2009, 2016 and 2017."
+archived: false

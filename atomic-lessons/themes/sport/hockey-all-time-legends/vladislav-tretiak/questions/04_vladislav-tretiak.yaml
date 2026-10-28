@@ -1,0 +1,19 @@
+id: 706dbfdc-8bce-4792-89a8-931e3315acbd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Tretiak first face the NHL's best in the Summit Series?"
+choices:
+  - id: b51efca3-b075-4874-a2d0-366a79f35c0b
+    text: "1972"
+  - id: 787079bc-a664-4e6a-83d9-510d2dac1ee3
+    text: "1994"
+  - id: 42c88c0d-b869-4f11-9401-996c622b7d24
+    text: "1980"
+  - id: f842dbd4-3f48-4e08-951b-5a1e13b3b309
+    text: "1960"
+correct_choice_ids:
+  - b51efca3-b075-4874-a2d0-366a79f35c0b
+explanation: "He played all eight games."
+archived: false

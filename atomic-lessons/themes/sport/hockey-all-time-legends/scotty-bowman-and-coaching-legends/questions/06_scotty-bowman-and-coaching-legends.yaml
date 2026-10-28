@@ -1,0 +1,19 @@
+id: 289be130-e391-4a64-a35a-69718217c491
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Buffalo role did Bowman hold from 1979 to 1987?"
+choices:
+  - id: 190077ca-53ee-4170-831a-49efbda31f9f
+    text: "Scout"
+  - id: 143f4640-7d9f-40ee-a890-8acbf156c5ea
+    text: "Team doctor"
+  - id: ec8e6472-985f-4ec5-b109-571c6292fd91
+    text: "Goalie coach"
+  - id: 92bc685f-b888-48df-b4bc-3b90591435cd
+    text: "Coach"
+correct_choice_ids:
+  - 92bc685f-b888-48df-b4bc-3b90591435cd
+explanation: "He also served as general manager."
+archived: false

@@ -1,0 +1,10 @@
+id: 3afe8252-3bb9-4ac3-8acd-4a400bc32070
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which American coach beat Tikhonov's team in 1980? Give the last name."
+accepted_answers:
+  - "Brooks"
+  - "Herb Brooks"
+explanation: "Herb Brooks led the US to the Miracle on Ice."
+archived: false

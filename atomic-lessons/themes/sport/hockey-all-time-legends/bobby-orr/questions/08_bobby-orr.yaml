@@ -1,0 +1,10 @@
+id: bb215973-1294-4e42-b3ba-2dd6f07ce6c4
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which forward arrived from Chicago early in Orr's second season? Give the last name."
+accepted_answers:
+  - "Esposito"
+  - "Phil Esposito"
+explanation: "Phil Esposito was traded by Chicago to Boston."
+archived: false

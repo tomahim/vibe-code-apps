@@ -1,0 +1,19 @@
+id: a016ea28-e637-4049-9e8e-435b6adcc4f3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times did Hull win the Art Ross Trophy?"
+choices:
+  - id: 7cac8460-d7eb-4763-88de-4bc52a83561f
+    text: "One"
+  - id: 7cb10915-ff32-4051-9130-18ed6cdc6cb9
+    text: "Seven"
+  - id: f2668000-b1c0-4fa4-8f9b-fbf1a3c511c7
+    text: "Three"
+  - id: 3e6170ae-ee74-495b-9bb9-6749ce4fa2cd
+    text: "Five"
+correct_choice_ids:
+  - f2668000-b1c0-4fa4-8f9b-fbf1a3c511c7
+explanation: "He won it in 1959-60, 1961-62 and 1965-66."
+archived: false

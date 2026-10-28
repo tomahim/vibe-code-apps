@@ -1,0 +1,19 @@
+id: d9de95a7-7809-486d-8c91-021d6f86d0dc
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which junior team did Lemieux dominate in the Quebec league?"
+choices:
+  - id: b858d63d-3f66-4f22-8840-543f532a9a25
+    text: "Quebec"
+  - id: aa8bea90-2677-47a2-b41f-bc097ef432dd
+    text: "Granby"
+  - id: b1ebef8c-fda0-4a0c-a804-585712ec69f1
+    text: "Laval"
+  - id: c8da4232-2d7a-48cd-8dc9-4b7649f32cba
+    text: "Rimouski"
+correct_choice_ids:
+  - b1ebef8c-fda0-4a0c-a804-585712ec69f1
+explanation: "He starred for Laval and scored 282 points in 1983-84."
+archived: false

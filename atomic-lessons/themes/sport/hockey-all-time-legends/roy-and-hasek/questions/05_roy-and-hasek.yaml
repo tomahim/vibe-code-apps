@@ -1,0 +1,19 @@
+id: 8d092cc7-88c8-40e3-a4d3-b78b0c89de4f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What nickname did Montreal fans give Roy?"
+choices:
+  - id: 9a502c49-a35e-4637-8be5-e33b4ca3b61c
+    text: "The Butterfly"
+  - id: a2f20ac6-82ca-429a-aaf5-78d4ed8d801b
+    text: "Saint Patrick"
+  - id: 7c1b2bd3-a4cb-4604-9a51-5995e9812a01
+    text: "The Dominator"
+  - id: 42b51b14-0edd-4c5e-9060-b7d13b68791a
+    text: "The Wall"
+correct_choice_ids:
+  - a2f20ac6-82ca-429a-aaf5-78d4ed8d801b
+explanation: "Fans called him Saint Patrick for his playoff heroics."
+archived: false

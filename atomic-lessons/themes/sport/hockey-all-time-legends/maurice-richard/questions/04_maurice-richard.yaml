@@ -1,0 +1,19 @@
+id: 86eb8c09-20d0-40db-8d99-1ebb30d9e2a8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who nicknamed him the Rocket?"
+choices:
+  - id: 10606eeb-3cc6-409c-8c02-7eaf5215eacf
+    text: "Teammates first, then the press"
+  - id: 2db72178-8e02-433d-aaf2-3911f9f4be46
+    text: "The Forum organist"
+  - id: f3c357a4-df6b-46ac-83b0-5a4159699143
+    text: "His coach Dick Irvin only"
+  - id: 061faf6b-b820-4fad-bc10-dac9b4b35f6d
+    text: "The NHL president"
+correct_choice_ids:
+  - 10606eeb-3cc6-409c-8c02-7eaf5215eacf
+explanation: "Teammates gave him the name before the press picked it up."
+archived: false

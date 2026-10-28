@@ -1,0 +1,9 @@
+id: 7336a7bc-f1c8-4e52-a785-c6538414f78e
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "At what age did Orr retire?"
+accepted_answers:
+  - "30"
+explanation: "Orr retired at age 30 because of knee injuries."
+archived: false

@@ -1,0 +1,9 @@
+id: 9665bb16-1af1-46d5-be69-7fa300626e42
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Hasek's Czech team win Olympic gold in Nagano?"
+accepted_answers:
+  - "1998"
+explanation: "The Czech Republic beat Russia 1-0 in the final."
+archived: false

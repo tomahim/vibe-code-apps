@@ -1,0 +1,10 @@
+id: 694dfb3e-d82d-4d55-97f6-5f2262fa3af3
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Oilers teammate shares Gretzky's era and later captained the Rangers to the 1994 Cup? Give the last name."
+accepted_answers:
+  - "Messier"
+  - "Mark Messier"
+explanation: "Mark Messier played with Gretzky in Edmonton and led the Rangers to the Cup in 1994."
+archived: false

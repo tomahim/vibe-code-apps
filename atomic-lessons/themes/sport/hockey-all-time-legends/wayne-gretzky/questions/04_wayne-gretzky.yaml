@@ -1,0 +1,19 @@
+id: 77419f4f-73db-44bc-b0bf-36a3eb6ffd1f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which major junior team did Gretzky play for?"
+choices:
+  - id: 8f3ee9f1-d388-40ea-a4d3-17154ffdbb7c
+    text: "Sault Ste. Marie Greyhounds"
+  - id: bbf73a9f-0ea5-49f5-aec3-6fb81d4928b8
+    text: "Kitchener Rangers"
+  - id: 872ae45e-d970-4755-8fb3-d692409924f8
+    text: "Quebec Remparts"
+  - id: 967ebcb4-5b0f-46d3-b430-cd2b2f461789
+    text: "Oshawa Generals"
+correct_choice_ids:
+  - 8f3ee9f1-d388-40ea-a4d3-17154ffdbb7c
+explanation: "He spent one season with the Soo Greyhounds."
+archived: false

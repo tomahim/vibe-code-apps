@@ -1,0 +1,19 @@
+id: fbce5388-8436-4c00-a732-9be3cfe267db
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Canadiens coach did Toe Blake replace in 1955?"
+choices:
+  - id: 20de1a81-6d23-41e1-91cb-39052b5ffd54
+    text: "Dick Irvin"
+  - id: d11d49f1-8e71-42cd-8b06-e2b4990f55c0
+    text: "Scotty Bowman"
+  - id: 9b508ae9-8b57-4542-a10c-e4b2bb38364b
+    text: "Sam Pollock"
+  - id: f7357214-97e2-4554-9f9c-c07f1c780f61
+    text: "Pat Burns"
+correct_choice_ids:
+  - 20de1a81-6d23-41e1-91cb-39052b5ffd54
+explanation: "Blake took over on June 8, 1955."
+archived: false

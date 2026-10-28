@@ -1,0 +1,9 @@
+id: 61b387e3-5cab-4c39-9c10-1b9162cd1a6c
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which magazine named the game the greatest moment in sporting history in 2016? Give the name in two words."
+accepted_answers:
+  - "Sports Illustrated"
+explanation: "Sports Illustrated made that declaration in 2016."
+archived: false

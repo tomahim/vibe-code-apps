@@ -1,0 +1,19 @@
+id: 9277e9d8-0f27-4066-a94a-fdf228aa8a6f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team drafted Roy in 1984?"
+choices:
+  - id: a83a6a8b-8f4c-48e2-b2d1-18b00f4f26be
+    text: "Montreal Canadiens"
+  - id: 6fe98498-303f-4cc5-b247-8ea2d81bdfc4
+    text: "Buffalo Sabres"
+  - id: a183b252-21a7-416b-9873-a0cc666e0b43
+    text: "Quebec Nordiques"
+  - id: aca489ea-14a8-4db4-b0bc-0c62c98ddf41
+    text: "Colorado Avalanche"
+correct_choice_ids:
+  - a83a6a8b-8f4c-48e2-b2d1-18b00f4f26be
+explanation: "Montreal took him 51st overall."
+archived: false

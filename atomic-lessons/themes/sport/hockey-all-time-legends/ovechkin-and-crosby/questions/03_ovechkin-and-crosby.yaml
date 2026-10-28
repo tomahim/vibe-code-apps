@@ -1,0 +1,19 @@
+id: c01e640a-0fa2-4b49-b8f6-f5f5b01d9dce
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many goals did Ovechkin score as a rookie in 2005-06?"
+choices:
+  - id: 483b8ea1-22dc-40d9-9866-2a57fad82739
+    text: "30"
+  - id: 71c28e68-ad5f-4f30-a286-4bb57c34a310
+    text: "71"
+  - id: 2b8d503d-32d0-4fd6-9705-7b3afa83e3ca
+    text: "92"
+  - id: ec151525-351e-4690-8352-1c229b2a602b
+    text: "52"
+correct_choice_ids:
+  - ec151525-351e-4690-8352-1c229b2a602b
+explanation: "He won the Calder Trophy."
+archived: false

@@ -1,0 +1,19 @@
+id: ceacd104-4208-442f-a703-58d3c938ee79
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team drafted Crosby first overall in 2005?"
+choices:
+  - id: 8cab48ee-f394-4977-97ea-d526105a0d4b
+    text: "Pittsburgh Penguins"
+  - id: 152a6681-bf52-41f5-ad5f-d90e8a413c81
+    text: "Boston Bruins"
+  - id: 7ad7c749-3dc7-4155-8e44-be4b07c8efe1
+    text: "Montreal Canadiens"
+  - id: b695c5d5-3f36-46b0-ad72-42703f166acc
+    text: "Washington Capitals"
+correct_choice_ids:
+  - 8cab48ee-f394-4977-97ea-d526105a0d4b
+explanation: "The Penguins were coming out of bankruptcy and picked Crosby first."
+archived: false

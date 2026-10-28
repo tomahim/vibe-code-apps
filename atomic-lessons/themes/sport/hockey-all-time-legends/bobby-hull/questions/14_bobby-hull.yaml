@@ -1,0 +1,19 @@
+id: 1b60d8e5-6335-4400-8088-0166eaa611ab
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How large was the WHA bonus check Hull first received?"
+choices:
+  - id: 409d9784-aff2-4f3e-a604-a8841f91c9b7
+    text: "250,000 dollars"
+  - id: 9c358867-0f0e-4493-b79b-a66a65cb816c
+    text: "10 million dollars"
+  - id: f04d744b-33ad-4bbc-8469-260a09e3453a
+    text: "1 million dollars"
+  - id: a41cc24e-3463-4b35-bec0-9f5a21a27084
+    text: "50,000 dollars"
+correct_choice_ids:
+  - f04d744b-33ad-4bbc-8469-260a09e3453a
+explanation: "The New York Times reported a bonus check of 1 million dollars."
+archived: false

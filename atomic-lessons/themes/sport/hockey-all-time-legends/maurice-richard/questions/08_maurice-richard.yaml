@@ -1,0 +1,10 @@
+id: 15a592a6-2bbc-4313-a0b1-623b622c6dc9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which season did Richard score 50 goals in 50 games?"
+accepted_answers:
+  - "1944-45"
+  - "1944-1945"
+explanation: "He did it in 1944-45."
+archived: false

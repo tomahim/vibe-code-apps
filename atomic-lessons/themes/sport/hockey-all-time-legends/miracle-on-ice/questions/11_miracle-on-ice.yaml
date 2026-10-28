@@ -1,0 +1,19 @@
+id: 88c4d11c-0b2c-4352-9be7-33e6f2a641aa
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many saves did Jim Craig make in the game?"
+choices:
+  - id: 62119963-402b-4484-98ef-33544c71e71f
+    text: "39"
+  - id: ff515d9e-fbbd-435d-a2ce-3b84ac804ffc
+    text: "12"
+  - id: bebf3c38-deda-4863-93eb-4f033d153bd5
+    text: "25"
+  - id: 004c5f79-9ed2-45de-a8dd-f29e0ab6d06e
+    text: "60"
+correct_choice_ids:
+  - 62119963-402b-4484-98ef-33544c71e71f
+explanation: "Olympics.com says Craig made 39 saves."
+archived: false

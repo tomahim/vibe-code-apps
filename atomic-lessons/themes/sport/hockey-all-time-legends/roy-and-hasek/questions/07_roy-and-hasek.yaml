@@ -1,0 +1,11 @@
+id: 385950f6-5ec2-4e29-8412-0315a96e6466
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "To which team was Roy traded in December 1995? Give the city or team."
+accepted_answers:
+  - "Colorado"
+  - "Avalanche"
+  - "Colorado Avalanche"
+explanation: "He was traded to Colorado on December 6, 1995."
+archived: false

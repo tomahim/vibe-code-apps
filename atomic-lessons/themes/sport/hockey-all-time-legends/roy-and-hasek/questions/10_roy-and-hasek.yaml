@@ -1,0 +1,19 @@
+id: 97184e45-e74e-4794-9349-f13c749be441
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What milestone did Roy reach in 2002-03?"
+choices:
+  - id: 015c071b-bfab-4a5a-a416-4409f06bfccb
+    text: "First goalie to score a goal"
+  - id: ce3e983b-7fa7-4e48-8148-e19426ae1143
+    text: "First goalie to win ten Cups"
+  - id: a33526e5-f121-43d4-8208-d85cdffe80fb
+    text: "First goalie to play 1,000 NHL games"
+  - id: b7cc472b-42c8-4ef0-a323-3b93893d570c
+    text: "First goalie to win the Hart"
+correct_choice_ids:
+  - a33526e5-f121-43d4-8208-d85cdffe80fb
+explanation: "He played in his 1,000th game."
+archived: false

@@ -1,0 +1,19 @@
+id: c3dc26df-8ec0-4e0c-82b4-21a40041aa8e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What position did coaches move Orr to from forward?"
+choices:
+  - id: 96694f47-dd9b-4df7-8aef-0024a01e7647
+    text: "Right wing"
+  - id: 9e4f5ee3-e909-404b-b8f1-c6690b8e3d36
+    text: "Goal"
+  - id: 0338ea40-3645-4cb7-b1b9-b11d17abe497
+    text: "Centre"
+  - id: c0790481-b07d-414d-bf95-472f5dc29ab8
+    text: "Defence"
+correct_choice_ids:
+  - c0790481-b07d-414d-bf95-472f5dc29ab8
+explanation: "His speed and stickhandling convinced his coaches to move him back."
+archived: false

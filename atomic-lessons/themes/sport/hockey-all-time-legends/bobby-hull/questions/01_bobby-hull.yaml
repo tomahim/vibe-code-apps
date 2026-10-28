@@ -1,0 +1,19 @@
+id: d9385f1b-3ad5-44eb-8b13-843f3aba21bb
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which NHL team did Hull join in 1957?"
+choices:
+  - id: 91013cda-4ff1-4501-be82-d4a6d791c5f3
+    text: "Detroit Red Wings"
+  - id: f4414261-3c14-4fd1-90f9-88378d84a691
+    text: "Chicago Blackhawks"
+  - id: 84c22245-5e7c-42a4-9fec-babd29000b91
+    text: "Boston Bruins"
+  - id: 1eb9ca43-eef0-40fc-83f8-b04a15e7d940
+    text: "Montreal Canadiens"
+correct_choice_ids:
+  - f4414261-3c14-4fd1-90f9-88378d84a691
+explanation: "He played 15 seasons for Chicago, until 1972."
+archived: false

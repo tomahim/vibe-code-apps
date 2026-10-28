@@ -1,0 +1,19 @@
+id: d9ae74b2-3252-4479-b974-1d4b96d9af08
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where was Lemieux selected in the 1984 NHL Draft?"
+choices:
+  - id: fa454bdc-5ad0-439d-b3ec-14f8c14ec289
+    text: "Fifth overall"
+  - id: bd9f366e-2c82-432b-bc0d-d25a85d2bc17
+    text: "First overall"
+  - id: af50834f-7287-4aac-b915-9d227e6a4d98
+    text: "Second overall"
+  - id: c1c8b46e-d867-458f-9c92-d54c77c27c60
+    text: "In the third round"
+correct_choice_ids:
+  - bd9f366e-2c82-432b-bc0d-d25a85d2bc17
+explanation: "Pittsburgh never considered anyone else with the first pick."
+archived: false

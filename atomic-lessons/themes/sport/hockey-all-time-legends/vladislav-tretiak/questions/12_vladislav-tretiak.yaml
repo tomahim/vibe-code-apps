@@ -1,0 +1,19 @@
+id: 13b567ab-4c39-45ed-b8fd-9cf40dcf5191
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which NHL team drafted Tretiak in 1983?"
+choices:
+  - id: 78014406-3bf8-4d2c-bf31-0d90fc11da3d
+    text: "Boston Bruins"
+  - id: 834c976c-7fce-4785-a8fb-ae0835609727
+    text: "Chicago Black Hawks"
+  - id: fb360df5-c8c2-4d97-bd9f-e4d6ccaea813
+    text: "Detroit Red Wings"
+  - id: 5d91f167-3969-481b-939a-a133a49f00cd
+    text: "Montreal Canadiens"
+correct_choice_ids:
+  - 5d91f167-3969-481b-939a-a133a49f00cd
+explanation: "Soviet authorities never let him go."
+archived: false

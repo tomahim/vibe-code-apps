@@ -1,0 +1,19 @@
+id: 966050a7-59b5-4ebf-bc5b-60e6873a0f7b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "At what age did Tretiak retire?"
+choices:
+  - id: f4baf962-2869-4770-8d01-a82730f1f242
+    text: "45"
+  - id: 39a9c84b-de27-4467-95e8-4b2b2bc4adcb
+    text: "32"
+  - id: 493d553e-f6a6-4100-a5b6-20d7e63beedc
+    text: "40"
+  - id: 3eedb05c-ad72-46f4-8780-ab065d96919f
+    text: "25"
+correct_choice_ids:
+  - 39a9c84b-de27-4467-95e8-4b2b2bc4adcb
+explanation: "He retired in 1984."
+archived: false

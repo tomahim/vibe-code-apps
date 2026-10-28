@@ -1,0 +1,19 @@
+id: ec701750-4b1a-4e50-8190-a856b8a2abd2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Whose record of 1,606 games coached did Bowman pass in 1995-96?"
+choices:
+  - id: e5b02d2e-c6d4-4fe7-be68-4a310253f271
+    text: "Al Arbour's"
+  - id: 0b70dadf-05b2-453f-8b0f-a895c0aafd97
+    text: "Dick Irvin's"
+  - id: 16256e0e-ec4a-4a46-80f4-7037053f3770
+    text: "Toe Blake's"
+  - id: 2d1bd75b-0b95-4496-a37e-140fbc542a36
+    text: "Don Cherry's"
+correct_choice_ids:
+  - e5b02d2e-c6d4-4fe7-be68-4a310253f271
+explanation: "He broke Arbour's mark."
+archived: false

@@ -1,0 +1,9 @@
+id: a5d20da3-a9bc-480a-b6b9-71c714ff9780
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What was the name of Richard's younger brother, who won 11 Cups? Give the first name."
+accepted_answers:
+  - "Henri"
+explanation: "Henri Richard, the Pocket Rocket, joined the Canadiens in 1955."
+archived: false

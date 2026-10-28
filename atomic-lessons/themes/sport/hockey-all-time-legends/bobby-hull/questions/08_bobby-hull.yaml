@@ -1,0 +1,9 @@
+id: 4ad1c69c-1c6a-4794-a286-d33fbf27e7d8
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many goals did Hull score in 1965-66?"
+accepted_answers:
+  - "54"
+explanation: "He finished that season with 54 goals."
+archived: false

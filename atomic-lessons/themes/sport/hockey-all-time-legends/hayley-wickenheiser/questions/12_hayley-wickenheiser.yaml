@@ -1,0 +1,19 @@
+id: b22e8709-b06f-44ad-b616-1620c48a8f2c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Wickenheiser study after retiring in 2017?"
+choices:
+  - id: acae7149-7003-4d97-9ff4-79170511e072
+    text: "Architecture"
+  - id: 486902c7-1bcc-45d4-80a7-aec223e70dd0
+    text: "Law"
+  - id: a43ec0eb-b706-4947-935c-ef4799d47723
+    text: "Journalism"
+  - id: b3a5a133-b184-461c-a40d-323c7e2f0b4a
+    text: "Medicine"
+correct_choice_ids:
+  - b3a5a133-b184-461c-a40d-323c7e2f0b4a
+explanation: "She returned to university for a medical degree."
+archived: false

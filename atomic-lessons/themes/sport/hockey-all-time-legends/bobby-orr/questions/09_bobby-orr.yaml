@@ -1,0 +1,19 @@
+id: 6ac1e438-c13f-4897-b588-15f7e6cfb34e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Against which team did Orr score The Goal in 1970?"
+choices:
+  - id: 330207b3-bc46-4a11-bd35-69a04f48a2d7
+    text: "St. Louis Blues"
+  - id: 5b8768ae-56aa-4601-b188-8fc5d85f8b45
+    text: "New York Rangers"
+  - id: dcd4e0c5-aa8d-4e5c-9bb3-1c35bafaa8b7
+    text: "Chicago Blackhawks"
+  - id: 514ea4ac-a096-4677-8dfd-fabd57c96f72
+    text: "Montreal Canadiens"
+correct_choice_ids:
+  - 330207b3-bc46-4a11-bd35-69a04f48a2d7
+explanation: "The Goal came in overtime of Game 4 of the Final against St. Louis."
+archived: false

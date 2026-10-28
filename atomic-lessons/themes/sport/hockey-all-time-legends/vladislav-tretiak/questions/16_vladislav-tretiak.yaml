@@ -1,0 +1,10 @@
+id: ef14438e-93cf-4225-8397-f28844027c16
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What did Tretiak become in 2006, leading Russian hockey? Give his role in one word."
+accepted_answers:
+  - "president"
+  - "Federation president"
+explanation: "He was elected president of the Russian Ice Hockey Federation."
+archived: false

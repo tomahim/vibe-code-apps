@@ -1,0 +1,19 @@
+id: 8bd73e3d-b071-4fb4-a9bd-f9ab11c0a926
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was the result of Game 1?"
+choices:
+  - id: c9da2e40-c166-4b4a-803c-b9345f911384
+    text: "USSR 7, Canada 3"
+  - id: 1958436f-d7dd-458f-821f-8485dc258bcf
+    text: "Canada 7, USSR 3"
+  - id: 954b1bbc-23ea-4f99-88c2-14e25e9f3ac8
+    text: "4-4 tie"
+  - id: 9eaa8dcd-55ae-4007-a023-e32ac57210fa
+    text: "Canada 6, USSR 5"
+correct_choice_ids:
+  - c9da2e40-c166-4b4a-803c-b9345f911384
+explanation: "The Soviets won 7-3."
+archived: false

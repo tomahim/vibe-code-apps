@@ -1,0 +1,19 @@
+id: d9a279a6-9c8c-472e-a834-34be7d7e4367
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which goalie did Hasek back up when he first reached the NHL in Chicago?"
+choices:
+  - id: b798c049-a0d4-41f8-a055-2199c697112a
+    text: "Ed Belfour"
+  - id: ed83f024-9de3-4304-9d11-429511d92e45
+    text: "Patrick Roy"
+  - id: a68b1c68-3485-4752-b588-45c0db8e4e41
+    text: "Martin Brodeur"
+  - id: be667162-fab8-4980-a769-6eb5ab2531c6
+    text: "Grant Fuhr"
+correct_choice_ids:
+  - b798c049-a0d4-41f8-a055-2199c697112a
+explanation: "He debuted in 1990-91 behind Ed Belfour."
+archived: false

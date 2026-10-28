@@ -1,0 +1,19 @@
+id: 01ef1965-8736-4d57-92b6-f2767f9ba616
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which WHA team signed Messier as a free agent after the Indianapolis tryout?"
+choices:
+  - id: 24f17785-2474-48a6-ac0c-77dedd5ffc8f
+    text: "New England Whalers"
+  - id: a9a24f93-2902-4ed8-a226-f0b3f5c44f7d
+    text: "Winnipeg Jets"
+  - id: ffd2d0ce-7484-4756-af11-4fd49db0f670
+    text: "Houston Aeros"
+  - id: d69d3f00-3753-46b9-8df9-5fac30fc9c16
+    text: "Cincinnati Stingers"
+correct_choice_ids:
+  - d69d3f00-3753-46b9-8df9-5fac30fc9c16
+explanation: "He played 47 games with the Stingers."
+archived: false

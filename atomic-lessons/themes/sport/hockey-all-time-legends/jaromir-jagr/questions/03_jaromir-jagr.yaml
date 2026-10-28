@@ -1,0 +1,19 @@
+id: 47777315-4b5d-4696-874a-5ebf2b5ca07d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where did Pittsburgh select Jagr in the 1990 draft?"
+choices:
+  - id: e4d5933f-1708-4a40-b4fc-c8d199a302b1
+    text: "Twelfth overall"
+  - id: 3b11d1c6-d098-4709-bca4-5a9654859667
+    text: "In the fourth round"
+  - id: 4fe3ff36-6a4b-4e79-a31d-d77fc3d44812
+    text: "Fifth overall"
+  - id: 8fa12dd8-3395-464a-8a85-9207be2e599b
+    text: "First overall"
+correct_choice_ids:
+  - 4fe3ff36-6a4b-4e79-a31d-d77fc3d44812
+explanation: "The IIHF says Pittsburgh drafted him fifth overall."
+archived: false

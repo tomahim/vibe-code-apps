@@ -1,0 +1,19 @@
+id: f09691c4-fc0b-4fa2-8e40-612af43731cf
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which team did Gretzky join after the Oilers traded him in 1988?"
+choices:
+  - id: f2286fce-5cdc-40f3-a5ac-643bacc32c36
+    text: "Detroit Red Wings"
+  - id: 45d82893-c5a7-41d2-bf08-50197724602e
+    text: "New York Rangers"
+  - id: 80af2d7b-8a42-4e38-89f2-9cc2d75a1922
+    text: "Los Angeles Kings"
+  - id: 63a5b22a-37b2-477d-953b-80ec6f8f9a50
+    text: "St. Louis Blues"
+correct_choice_ids:
+  - 80af2d7b-8a42-4e38-89f2-9cc2d75a1922
+explanation: "The trade on August 9, 1988 sent him to Los Angeles."
+archived: false

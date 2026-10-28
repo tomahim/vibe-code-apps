@@ -1,0 +1,11 @@
+id: ca39edea-31ac-4249-b273-a888f90d10e2
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which NHL season did Jagr become the first European-born and trained scoring champion?"
+accepted_answers:
+  - "1994-95"
+  - "1994-1995"
+  - "1995"
+explanation: "That was his first Art Ross Trophy."
+archived: false

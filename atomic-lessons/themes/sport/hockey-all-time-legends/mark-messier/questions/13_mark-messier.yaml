@@ -1,0 +1,19 @@
+id: 988644c7-700b-43e0-93f4-79163f727b28
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How long had it been since the Rangers last won the Stanley Cup in 1994?"
+choices:
+  - id: 226dc212-d48c-4acf-9dd5-be3e1f3bb902
+    text: "54 years"
+  - id: 618942b2-d881-4b68-91bf-e88d117a44b3
+    text: "12 years"
+  - id: b13b4dd7-8183-4b6c-ac54-24b4d7564f70
+    text: "25 years"
+  - id: bea5b916-3b75-41ab-8bc3-113314d65609
+    text: "75 years"
+correct_choice_ids:
+  - 226dc212-d48c-4acf-9dd5-be3e1f3bb902
+explanation: "It was the franchise's first title in 54 years."
+archived: false

@@ -1,0 +1,9 @@
+id: 1c2d26b2-0146-4b4a-ae84-4fcdb0bc2223
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Beliveau enter the Hockey Hall of Fame?"
+accepted_answers:
+  - "1972"
+explanation: "He was inducted in 1972 alongside Gordie Howe, with the waiting period waived."
+archived: false

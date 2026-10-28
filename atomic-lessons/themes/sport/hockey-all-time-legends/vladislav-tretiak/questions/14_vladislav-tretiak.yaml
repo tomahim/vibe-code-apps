@@ -1,0 +1,19 @@
+id: 4fbfda9f-5897-49c7-a389-4ece005ae86d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which team hired Tretiak as a goalie coach in 1990?"
+choices:
+  - id: b3feb5bf-2e70-4d9f-a7cc-095733296c38
+    text: "Chicago Black Hawks"
+  - id: 0f958042-fefd-4c34-b2ad-81af37156352
+    text: "Montreal Canadiens"
+  - id: 2a472641-d386-4613-91e9-9abc6f86a35e
+    text: "New Jersey Devils"
+  - id: 81c0234e-0d76-4022-97d7-4b82255bc13d
+    text: "Buffalo Sabres"
+correct_choice_ids:
+  - b3feb5bf-2e70-4d9f-a7cc-095733296c38
+explanation: "He coached Belfour, Hasek, Thibault and Brodeur."
+archived: false

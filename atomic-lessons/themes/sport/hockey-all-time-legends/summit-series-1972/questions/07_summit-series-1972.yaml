@@ -1,0 +1,9 @@
+id: a834e115-5d31-427f-8a24-101f9d81a2c0
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which city did fans boo Team Canada after Game 4?"
+accepted_answers:
+  - "Vancouver"
+explanation: "Game 4 in Vancouver was a 5-3 Soviet win."
+archived: false

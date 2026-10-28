@@ -1,0 +1,19 @@
+id: 9c5abe65-baca-47fe-89b4-a7086f0aae29
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many Stanley Cups did Howe win with Detroit?"
+choices:
+  - id: 53cd253a-c915-4ebc-a187-e548c11a3008
+    text: "Two"
+  - id: 6052a9b3-fbbf-4e1c-9fa4-356803a26657
+    text: "Four"
+  - id: 1cb170fd-4f02-4af8-bad4-7db513a3435c
+    text: "Nine"
+  - id: 0be5d5a9-1ce2-4086-a314-c206a245d1fc
+    text: "Six"
+correct_choice_ids:
+  - 6052a9b3-fbbf-4e1c-9fa4-356803a26657
+explanation: "Detroit won in 1950, 1952, 1954 and 1955 with Howe."
+archived: false

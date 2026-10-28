@@ -1,0 +1,19 @@
+id: 57e41c5c-ff55-4113-b28e-9c824c6d1822
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does a Gordie Howe hat trick consist of?"
+choices:
+  - id: 98dc175f-6ac6-47c9-85eb-5f63a8878f19
+    text: "A goal, an assist and a fight"
+  - id: 9d818033-47fa-4149-8080-9de901c9179e
+    text: "Three goals in one game"
+  - id: d45a180b-e79a-4ae3-9e3e-45484794ecdc
+    text: "A shutout and a goal"
+  - id: b9abdd50-d832-417a-ad83-637ab3b107bf
+    text: "Three assists in a period"
+correct_choice_ids:
+  - 98dc175f-6ac6-47c9-85eb-5f63a8878f19
+explanation: "It is an informal term for a goal, an assist and a fight in one game."
+archived: false

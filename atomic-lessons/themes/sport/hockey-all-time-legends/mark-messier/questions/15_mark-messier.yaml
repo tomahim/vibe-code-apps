@@ -1,0 +1,10 @@
+id: 5f3b1b0d-c52b-4443-8ff8-676c0b9448d7
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What number did both the Rangers and Oilers retire for Messier?"
+accepted_answers:
+  - "11"
+  - "eleven"
+explanation: "They retired number 11 in 2006."
+archived: false

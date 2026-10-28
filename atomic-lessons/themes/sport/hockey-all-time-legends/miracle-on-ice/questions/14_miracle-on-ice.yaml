@@ -1,0 +1,19 @@
+id: a2b564a0-fc04-43e2-96b7-f779dafe1b9c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Whom did the USA beat in the gold-medal game?"
+choices:
+  - id: 4aacd4b8-8b3f-42d4-ac10-8ca9c55e4a4a
+    text: "West Germany"
+  - id: ff3f6954-db44-489c-b3ca-71eb35698e0c
+    text: "Finland"
+  - id: 6f946568-fa3a-442d-b0e3-880e182961e0
+    text: "Sweden"
+  - id: 332fee94-c43d-4edc-81c0-cb314b136161
+    text: "Czechoslovakia"
+correct_choice_ids:
+  - ff3f6954-db44-489c-b3ca-71eb35698e0c
+explanation: "The Americans won 4-2."
+archived: false

@@ -1,0 +1,19 @@
+id: 5674feda-d3af-4d6c-8873-dff8f0ca56c8
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which future coach played left wing on the Punch Line?"
+choices:
+  - id: a42a21e6-084b-4922-a7be-4309a7d53223
+    text: "Herb Brooks"
+  - id: 77ea0420-f897-43b7-87c3-30f4df618313
+    text: "Scotty Bowman"
+  - id: 20934489-d220-450b-a444-038f47f58eaf
+    text: "Dick Irvin"
+  - id: 3f71a034-3a71-4fb4-8451-4bea6f13d4b5
+    text: "Toe Blake"
+correct_choice_ids:
+  - 3f71a034-3a71-4fb4-8451-4bea6f13d4b5
+explanation: "Toe Blake later coached the Canadiens to eight Stanley Cups."
+archived: false

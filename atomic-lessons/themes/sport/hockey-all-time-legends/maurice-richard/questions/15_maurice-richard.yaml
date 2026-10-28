@@ -1,0 +1,10 @@
+id: 6f189510-1eda-41ab-b6a5-c851d67d206e
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many Stanley Cups did Richard win?"
+accepted_answers:
+  - "8"
+  - "eight"
+explanation: "He won eight Cups, including five in a row from 1956 to 1960."
+archived: false

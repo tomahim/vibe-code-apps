@@ -1,0 +1,19 @@
+id: d069d279-1a0d-4247-b9ce-ca4ef47820c3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which star defenceman did Lemieux take the puck from before scoring on his first shot?"
+choices:
+  - id: e75bfcf9-376b-429e-aaca-0a5d55303f13
+    text: "Larry Robinson"
+  - id: ba8bbe17-8360-4675-a3d0-bcb926ecd806
+    text: "Bobby Orr"
+  - id: 1b319abd-41f0-437b-bdd2-f93f0a6650a3
+    text: "Paul Coffey"
+  - id: 7250f4f4-4115-4351-9a5b-efd89168cb5f
+    text: "Ray Bourque"
+correct_choice_ids:
+  - 7250f4f4-4115-4351-9a5b-efd89168cb5f
+explanation: "He stripped Ray Bourque of the Boston Bruins on his first shift."
+archived: false

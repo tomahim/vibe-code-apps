@@ -1,0 +1,19 @@
+id: cb7d7823-9361-46d2-953f-0b45c68e1320
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which two seasons did Jagr win the Stanley Cup?"
+choices:
+  - id: f612ebc5-4ea4-42e4-a95f-dfa31a7828c9
+    text: "1990 and 1991"
+  - id: 16882b6a-fcaf-4d3e-a886-a91832a95a43
+    text: "1991 and 1992"
+  - id: 1e3e5435-15ab-42dd-a468-ef3937c11666
+    text: "1995 and 1996"
+  - id: b26dbb55-67ae-43d9-aa42-bd144689e84b
+    text: "1998 and 1999"
+correct_choice_ids:
+  - 16882b6a-fcaf-4d3e-a886-a91832a95a43
+explanation: "Those were his only two Cups, both with Pittsburgh."
+archived: false

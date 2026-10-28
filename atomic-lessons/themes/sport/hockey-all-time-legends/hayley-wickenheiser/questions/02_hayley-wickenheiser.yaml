@@ -1,0 +1,19 @@
+id: ca4dd8a7-649f-41a0-a4ab-83376038451e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "At what age did Wickenheiser join Canada's national women's team?"
+choices:
+  - id: 5e57192c-5437-4862-a1ee-d98c22d7dfc1
+    text: "18"
+  - id: a3885fb9-740b-4a5d-9122-33e5fa8fcdc0
+    text: "15"
+  - id: a62ec8a6-237b-4887-9ed2-407f82776e6e
+    text: "11"
+  - id: 5a2453ce-9b3e-412b-9cb3-06eb88fabc75
+    text: "22"
+correct_choice_ids:
+  - a3885fb9-740b-4a5d-9122-33e5fa8fcdc0
+explanation: "She debuted at the 1994 World Championship at 15."
+archived: false

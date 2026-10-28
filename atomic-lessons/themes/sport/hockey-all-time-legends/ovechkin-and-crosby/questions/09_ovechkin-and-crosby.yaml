@@ -1,0 +1,19 @@
+id: 1ea68649-2f6b-4ead-aa9a-0c859e0ba5e1
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Ovechkin become the first Russia-born player to do, in 2015-16?"
+choices:
+  - id: 2dfefdcd-6c19-40c7-98ab-505af3b27870
+    text: "Score 500 NHL goals"
+  - id: c7db6052-071e-4405-9aed-2b3548073644
+    text: "Win the Hart Trophy"
+  - id: bc856392-88c9-42b5-a4bb-76950db989a4
+    text: "Play 1,000 games"
+  - id: 508de1bf-e12c-42ca-be19-5ecd1488d69f
+    text: "Win the Art Ross"
+correct_choice_ids:
+  - 2dfefdcd-6c19-40c7-98ab-505af3b27870
+explanation: "NHL.com notes that milestone."
+archived: false

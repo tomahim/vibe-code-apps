@@ -1,0 +1,9 @@
+id: 2448181c-7fe7-4c8f-b135-c04e292f3558
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year did Lemieux win Olympic gold with Canada?"
+accepted_answers:
+  - "2002"
+explanation: "He won Olympic gold in 2002, after returning in 2000."
+archived: false

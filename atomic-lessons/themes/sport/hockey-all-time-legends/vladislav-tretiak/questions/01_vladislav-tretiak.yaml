@@ -1,0 +1,19 @@
+id: 087df2f9-8484-406f-8b09-78f474c32b8c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which club did Tretiak play for throughout his career?"
+choices:
+  - id: 92965449-8156-4981-9012-9c5cc8e5bdbe
+    text: "CSKA Moscow (Central Red Army)"
+  - id: 0ada3c63-af8a-4bfd-9250-72932022e5d7
+    text: "Spartak Moscow"
+  - id: dfce724c-3042-4def-a5ab-c0fd81ba79bf
+    text: "Dynamo Moscow"
+  - id: f0d89433-cb17-4eca-8ed3-d7ef736155e7
+    text: "SKA Leningrad"
+correct_choice_ids:
+  - 92965449-8156-4981-9012-9c5cc8e5bdbe
+explanation: "He played for CSKA from 1969 to 1984."
+archived: false

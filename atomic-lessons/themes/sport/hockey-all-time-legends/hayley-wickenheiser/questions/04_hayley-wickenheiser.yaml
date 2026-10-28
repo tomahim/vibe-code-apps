@@ -1,0 +1,19 @@
+id: c9231fa4-28f9-4858-9e46-879526e2be6f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which medal did the first Olympic women's team in 1998 win for Canada?"
+choices:
+  - id: fe3e75b5-b915-48e2-b5f4-9c25b31e2dbf
+    text: "Silver"
+  - id: a138a821-4810-4ea5-ba22-1c69796006a3
+    text: "Gold"
+  - id: 18375be0-269c-4989-aa77-3a3ba9b28723
+    text: "No medal"
+  - id: d4c11338-9415-4978-821d-75454376a774
+    text: "Bronze"
+correct_choice_ids:
+  - fe3e75b5-b915-48e2-b5f4-9c25b31e2dbf
+explanation: "Canada took silver in 1998."
+archived: false

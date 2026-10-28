@@ -1,0 +1,19 @@
+id: 2819cd89-809c-4427-84e4-61af7fd37fbb
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team drafted Ovechkin first overall in 2004?"
+choices:
+  - id: a8136f2f-a7e7-4efd-9410-4ce1ffcb2570
+    text: "New York Rangers"
+  - id: 8740689e-526b-4cab-988c-5d30aec4b127
+    text: "Washington Capitals"
+  - id: 5902216c-2506-44ae-8bce-8384c3d4b838
+    text: "Chicago Blackhawks"
+  - id: 5b36e4a0-9ffc-4b15-a786-fcda16d2adf6
+    text: "Pittsburgh Penguins"
+correct_choice_ids:
+  - 8740689e-526b-4cab-988c-5d30aec4b127
+explanation: "The Capitals selected him in Raleigh."
+archived: false

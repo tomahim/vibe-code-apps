@@ -1,0 +1,19 @@
+id: 17036a45-b082-42e1-b3b8-1ce24996eab1
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many goals did Richard score on December 28, 1944, after moving house all day?"
+choices:
+  - id: 958a24ec-4037-42f8-9c26-30339189485d
+    text: "Two"
+  - id: 88ddb569-13f2-415b-ad2b-4316a521e198
+    text: "Three"
+  - id: 406162c4-6111-441d-9d85-87d9606c2be2
+    text: "Five"
+  - id: febbcbe2-85fe-497f-aec8-1a49975aead7
+    text: "Seven"
+correct_choice_ids:
+  - 406162c4-6111-441d-9d85-87d9606c2be2
+explanation: "He scored five goals and added three assists in a 9-1 win."
+archived: false

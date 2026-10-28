@@ -1,0 +1,19 @@
+id: 9367e017-3aa6-47e2-8012-3f818f789bf2
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which two years did Crosby win both the Cup and the Conn Smythe Trophy?"
+choices:
+  - id: 74a82fa0-e008-44bf-92ba-4ed2fed31187
+    text: "2012 and 2013"
+  - id: dc24fdbd-0352-4943-b8c5-00d52106500d
+    text: "2016 and 2017"
+  - id: be66e6b7-7b72-4b2c-9cc3-71b29c029247
+    text: "2018 and 2019"
+  - id: 159b390a-7e71-454f-ac8a-5e3455b8e62e
+    text: "2009 and 2010"
+correct_choice_ids:
+  - dc24fdbd-0352-4943-b8c5-00d52106500d
+explanation: "He was playoff MVP in both years."
+archived: false

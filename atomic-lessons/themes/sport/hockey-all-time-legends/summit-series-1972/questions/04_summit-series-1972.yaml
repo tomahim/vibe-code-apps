@@ -1,0 +1,19 @@
+id: f0057849-a5fc-42f6-b2ad-f727d29286ea
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why had Canada's best amateurs withdrawn from international hockey in 1970?"
+choices:
+  - id: 0769fcc4-6fa0-45fe-9525-bd4fa4ed1521
+    text: "The IIHF would not allow professional players"
+  - id: 2843ced6-1409-4032-a461-97a48c9650d1
+    text: "Canada lacked arenas"
+  - id: dc284595-e44f-40ac-baa3-8f50e16cc8e0
+    text: "The Soviets refused to play"
+  - id: b446d879-73e4-46ab-990e-b4b8d0821614
+    text: "The Olympics were cancelled"
+correct_choice_ids:
+  - 0769fcc4-6fa0-45fe-9525-bd4fa4ed1521
+explanation: "Canada withdrew when the IIHF denied the use of professionals."
+archived: false

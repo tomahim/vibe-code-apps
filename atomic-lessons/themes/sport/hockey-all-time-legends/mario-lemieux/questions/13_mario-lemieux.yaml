@@ -1,0 +1,19 @@
+id: ca3125b3-78bc-4757-ac35-24ed4994ecc6
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How did Lemieux become the owner of the Penguins?"
+choices:
+  - id: 0f1a56d2-dbf0-4477-a346-cc18b9badf24
+    text: "By inheriting them from the previous owner"
+  - id: 045b5482-897a-4d92-81b7-db3a3ae4e6b1
+    text: "By buying them with endorsement money"
+  - id: cf1c5467-ba72-4479-9487-4908ae959217
+    text: "By converting deferred salary into a share of the team"
+  - id: 41d53665-fab6-4765-9127-33cf75325512
+    text: "By winning an auction against the NHL"
+correct_choice_ids:
+  - cf1c5467-ba72-4479-9487-4908ae959217
+explanation: "The club was bankrupt and Lemieux was owed deferred salary."
+archived: false

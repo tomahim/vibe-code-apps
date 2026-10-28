@@ -1,0 +1,19 @@
+id: f9552eac-a686-4dfe-898b-295abd8c9429
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Roy win his first Stanley Cup and Conn Smythe Trophy?"
+choices:
+  - id: 501aae4d-3fdd-4deb-8c74-6ce5d8dffbb8
+    text: "2001"
+  - id: 871b34a4-7f44-4bd9-8b36-12b84784952f
+    text: "1993"
+  - id: 2629a13e-cb19-4b47-b524-09a19e5666fc
+    text: "1986"
+  - id: 049a396a-4a7f-4611-a28f-bb8cf893e6ff
+    text: "1980"
+correct_choice_ids:
+  - 2629a13e-cb19-4b47-b524-09a19e5666fc
+explanation: "He was 20 years old."
+archived: false

@@ -1,0 +1,19 @@
+id: 3bf4f021-d9f9-4595-a99b-e7ec89f5c2d6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which junior team did Roy play for?"
+choices:
+  - id: d52c4a2b-11b8-4789-a030-08e375cb65f3
+    text: "Quebec Remparts"
+  - id: 9f1a3122-2b4e-4623-81eb-902443a2b341
+    text: "Laval Voisins"
+  - id: 26cabf60-5822-4865-8b9b-f9423b0ef1d1
+    text: "Rimouski Oceanic"
+  - id: 00a2a470-b3b3-4b0d-a8ef-7705547133cf
+    text: "Granby Bisons"
+correct_choice_ids:
+  - 00a2a470-b3b3-4b0d-a8ef-7705547133cf
+explanation: "He played in the QMJHL with Granby."
+archived: false

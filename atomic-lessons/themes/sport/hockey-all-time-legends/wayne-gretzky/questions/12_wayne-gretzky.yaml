@@ -1,0 +1,19 @@
+id: 9dd78f15-437b-4093-9684-44424ec7b1be
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which star ended the 1987 Canada Cup final series by scoring on Gretzky's pass?"
+choices:
+  - id: 46f1c0e0-d102-4362-83c1-93ac2c6a5dd1
+    text: "Mark Messier"
+  - id: a80aa8dc-5731-401c-a84e-63d2aca95857
+    text: "Mario Lemieux"
+  - id: 461c1c0d-a263-4264-9eb7-6b7edbee6637
+    text: "Bobby Hull"
+  - id: b381a28f-f604-4e55-adb0-7fd48b7c0a5e
+    text: "Jari Kurri"
+correct_choice_ids:
+  - a80aa8dc-5731-401c-a84e-63d2aca95857
+explanation: "Lemieux scored with 1:26 left in game three on a pass from Gretzky."
+archived: false

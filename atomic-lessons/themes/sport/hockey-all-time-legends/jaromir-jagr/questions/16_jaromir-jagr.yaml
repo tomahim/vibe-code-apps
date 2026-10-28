@@ -1,0 +1,9 @@
+id: cde74b27-4e71-494a-8ba4-ad78b43973c1
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year was Jagr inducted into the IIHF Hall of Fame?"
+accepted_answers:
+  - "2024"
+explanation: "The IIHF inducted him in 2024."
+archived: false

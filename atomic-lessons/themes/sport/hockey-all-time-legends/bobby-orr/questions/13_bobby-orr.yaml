@@ -1,0 +1,19 @@
+id: c609ba3f-eb5f-49fa-948c-c50d073a330f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What did Orr achieve in 1969-70 that no other defenceman has?"
+choices:
+  - id: 8e6d22b3-1079-4933-aaaf-8b33e36f0d43
+    text: "Won the Art Ross Trophy as top scorer"
+  - id: f611b995-5300-4f0c-b150-0eb428e016ed
+    text: "Scored 100 goals"
+  - id: da81bbd0-e19a-46a4-b6ed-d7028348a9ce
+    text: "Won the Calder and the Lady Byng"
+  - id: 84d55000-f90f-48db-9d82-441940b642e9
+    text: "Won the Vezina Trophy"
+correct_choice_ids:
+  - 8e6d22b3-1079-4933-aaaf-8b33e36f0d43
+explanation: "He won the scoring title in 1969-70 and again in 1974-75, the only defenceman ever to do so."
+archived: false

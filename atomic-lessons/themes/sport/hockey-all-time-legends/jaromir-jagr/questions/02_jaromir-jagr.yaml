@@ -1,0 +1,19 @@
+id: 03deb6cb-7ea1-4ac5-80fe-28df1bbd5ab9
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which hometown club did Jagr develop and later play and own?"
+choices:
+  - id: 41f3e502-98bb-46ba-9abb-430ad960838f
+    text: "Pardubice"
+  - id: 4b3afa6f-7459-4c1d-930f-9067a1182a27
+    text: "Kladno"
+  - id: 5729f4d0-7e2e-49bd-a171-decbf49ee4cc
+    text: "Brno"
+  - id: 1e6daa46-37ca-4350-b00d-4637ced47130
+    text: "Prague"
+correct_choice_ids:
+  - 4b3afa6f-7459-4c1d-930f-9067a1182a27
+explanation: "Kladno is his home city and the club he still supports."
+archived: false

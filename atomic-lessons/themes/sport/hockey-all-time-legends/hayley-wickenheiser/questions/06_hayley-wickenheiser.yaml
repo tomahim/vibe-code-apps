@@ -1,0 +1,19 @@
+id: 153400cd-d6d6-4276-a428-adea1daeb8ac
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Olympic gold streak did Canada start with her in 2002?"
+choices:
+  - id: c3ea9db1-5266-4f20-9525-fd4f0f378a27
+    text: "Four in a row"
+  - id: 81cf20dd-62e1-4037-8b2c-c22400d7746c
+    text: "Six in a row"
+  - id: bade736d-6bc1-4c5e-b8a1-4b6c7606d044
+    text: "One"
+  - id: d46fe2ec-2769-4bf9-ae0a-86632bffa787
+    text: "Two in a row"
+correct_choice_ids:
+  - c3ea9db1-5266-4f20-9525-fd4f0f378a27
+explanation: "Canada won in 2002, 2006, 2010 and 2014."
+archived: false

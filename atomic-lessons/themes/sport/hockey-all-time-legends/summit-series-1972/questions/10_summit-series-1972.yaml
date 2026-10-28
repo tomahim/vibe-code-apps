@@ -1,0 +1,19 @@
+id: 3a5e9dae-3a68-44fd-8aa9-020dee50d7b2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What happened in Game 5 after Canada led 4-1?"
+choices:
+  - id: b9dd2272-454a-48c6-aab1-770826c8a461
+    text: "Canada won 8-1"
+  - id: df3650b7-6ae7-44a9-9c06-8c25b2360acd
+    text: "It ended 4-4"
+  - id: 7562aa07-ebbc-4d53-a4a6-9794dae122dc
+    text: "The game was cancelled"
+  - id: 1e9c23b9-9528-4ea6-98c9-da5c8ea99611
+    text: "The Soviets rallied to win 5-4"
+correct_choice_ids:
+  - 1e9c23b9-9528-4ea6-98c9-da5c8ea99611
+explanation: "Canada lost 5-4 on September 22."
+archived: false

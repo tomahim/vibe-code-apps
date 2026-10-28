@@ -1,0 +1,19 @@
+id: 1e1c1bd6-f282-401e-9cb3-6cfdecb89708
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Until what age did she play on boys' teams?"
+choices:
+  - id: 1b880a14-37af-496c-ae56-3b796fd9988c
+    text: "8"
+  - id: 83056e4a-b394-4edc-8cc2-c0ce6e964257
+    text: "20"
+  - id: 50389d84-57d3-4d56-8ac5-85399b341490
+    text: "13"
+  - id: b35ce396-7122-4c05-bf69-39a0c62bc310
+    text: "16"
+correct_choice_ids:
+  - 50389d84-57d3-4d56-8ac5-85399b341490
+explanation: "She played with boys until 13."
+archived: false

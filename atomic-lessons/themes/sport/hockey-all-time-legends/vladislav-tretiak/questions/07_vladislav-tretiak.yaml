@@ -1,0 +1,9 @@
+id: 10f6db6f-7e53-4941-9571-679e88f7e7d1
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Tretiak win his first Olympic gold?"
+accepted_answers:
+  - "1972"
+explanation: "He won golds in 1972, 1976 and 1984."
+archived: false

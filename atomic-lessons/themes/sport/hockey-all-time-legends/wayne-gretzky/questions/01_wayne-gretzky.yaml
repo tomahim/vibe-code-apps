@@ -1,0 +1,19 @@
+id: d9c53694-7dfd-4e03-ada5-faacbf228fed
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Whose number 9 did Gretzky wear in his last peewee seasons, before he became number 99?"
+choices:
+  - id: d6068b4e-da53-4cec-b0e8-f44d106d6d76
+    text: "Gordie Howe's"
+  - id: 9f1ee4bd-b7b3-430d-aa4a-81726ad5c30f
+    text: "Jean Beliveau's"
+  - id: 4ad3448a-8849-479e-9037-258c3dca17a3
+    text: "Bobby Orr's"
+  - id: ef2cc770-6742-4c1a-aa71-50e249e89c20
+    text: "Maurice Richard's"
+correct_choice_ids:
+  - d6068b4e-da53-4cec-b0e8-f44d106d6d76
+explanation: "Gretzky wore Gordie Howe's number 9 in peewee, and later added a second 9 in junior because 9 was taken."
+archived: false

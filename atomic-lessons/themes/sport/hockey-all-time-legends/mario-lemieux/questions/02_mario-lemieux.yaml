@@ -1,0 +1,19 @@
+id: 215e586f-7417-42bb-8e01-b9b1c0cc7f85
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What number did Lemieux wear in junior hockey?"
+choices:
+  - id: d3a585b9-1b32-4775-805b-5475025146f0
+    text: "99"
+  - id: c0828137-81dc-4291-9bad-b009aa8b5dfa
+    text: "66"
+  - id: 71f9e156-43f9-49d9-8a93-b703e17ac3d2
+    text: "87"
+  - id: 156a1dfc-8a42-4648-aa50-d4c74f669210
+    text: "68"
+correct_choice_ids:
+  - c0828137-81dc-4291-9bad-b009aa8b5dfa
+explanation: "He wore 66, an inversion of Gretzky's 99."
+archived: false

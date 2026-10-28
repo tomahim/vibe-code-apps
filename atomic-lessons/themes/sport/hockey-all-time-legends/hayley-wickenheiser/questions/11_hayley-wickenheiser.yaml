@@ -1,0 +1,19 @@
+id: af8bd543-895e-4536-b6c8-d288ef9bfc12
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which university team did she play for in 2010-11?"
+choices:
+  - id: 32700bdb-a4e9-4485-945c-5e9ecc696615
+    text: "McGill Martlets"
+  - id: 0af387e8-41af-477b-825c-f2dd6df7fe51
+    text: "Toronto Varsity Blues"
+  - id: 2d14a09c-0b10-46fe-bd91-1b99cb3889b8
+    text: "Alberta Pandas"
+  - id: 07129613-4fd4-45c0-a407-d823664bb784
+    text: "Calgary Dinos"
+correct_choice_ids:
+  - 07129613-4fd4-45c0-a407-d823664bb784
+explanation: "She won the Brodrick Trophy."
+archived: false

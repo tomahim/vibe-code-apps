@@ -1,0 +1,19 @@
+id: 323a4a00-67f1-4e8b-a8d9-b03ce3766cd0
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Whose team did Jagr join as the youngest player in the league?"
+choices:
+  - id: 924fe81b-ff3d-4953-bb94-1af9fe53ed44
+    text: "Mark Messier's Oilers"
+  - id: d0bf4729-e91c-4e86-9093-97b4d0905182
+    text: "Mario Lemieux's Penguins"
+  - id: dc25886c-7a5b-414d-a2ba-79bc48bf23d0
+    text: "Wayne Gretzky's Kings"
+  - id: bebe9f91-b8ae-439f-9830-6df7a2406b3c
+    text: "Bobby Orr's Bruins"
+correct_choice_ids:
+  - d0bf4729-e91c-4e86-9093-97b4d0905182
+explanation: "He joined Lemieux's Penguins."
+archived: false

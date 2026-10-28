@@ -1,0 +1,19 @@
+id: a3022a4c-93aa-49ab-9227-caa613b6665a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was Gretzky's NHL career goals record that Ovechkin chased?"
+choices:
+  - id: f1cbe76f-24a6-4abc-99f1-ef13dde5dc55
+    text: "610"
+  - id: 855a7295-e5d3-40b5-ad96-811ca8508f34
+    text: "801"
+  - id: 8160bf51-295d-4dcf-9bf5-f9281e57868e
+    text: "802"
+  - id: abffdf9c-e095-4d2c-9da0-780a83ba0a8c
+    text: "894"
+correct_choice_ids:
+  - abffdf9c-e095-4d2c-9da0-780a83ba0a8c
+explanation: "Gretzky finished with 894 goals."
+archived: false

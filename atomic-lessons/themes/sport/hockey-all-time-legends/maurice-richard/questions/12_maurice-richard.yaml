@@ -1,0 +1,19 @@
+id: a8c7c5f2-9a69-4ff5-9674-3620a872b32b
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Against which team did Richard score the famous Game 7 goal in 1952?"
+choices:
+  - id: cd049409-bc9d-4b89-bef3-7c885cacb3f4
+    text: "Toronto Maple Leafs"
+  - id: d6932817-613e-4012-b789-fe00ad86c06f
+    text: "Detroit Red Wings"
+  - id: be1e43b3-f53e-464d-84aa-493e5fd7272e
+    text: "Boston Bruins"
+  - id: 723a3686-c3e9-4db4-8c0c-73398dfb9a4e
+    text: "Chicago Blackhawks"
+correct_choice_ids:
+  - be1e43b3-f53e-464d-84aa-493e5fd7272e
+explanation: "He scored the winner against Boston after a concussion."
+archived: false

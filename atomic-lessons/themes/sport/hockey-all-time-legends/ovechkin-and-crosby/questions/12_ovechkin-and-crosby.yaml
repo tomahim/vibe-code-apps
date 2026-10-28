@@ -1,0 +1,19 @@
+id: 4c55170d-dd20-4d19-a092-e3e64bff5433
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was Ovechkin's nickname for the chase?"
+choices:
+  - id: ba318d0b-0731-49de-a150-41cd8d9acd03
+    text: "The Great Chase"
+  - id: 0e3528dc-ce57-4745-a681-2515db251451
+    text: "The Rocket Run"
+  - id: aab21117-215b-4b3d-91d0-7f74d1106bb7
+    text: "The Golden Jet"
+  - id: edaca384-d7e7-4b35-992a-0398f161aab9
+    text: "The Gr8 Chase"
+correct_choice_ids:
+  - edaca384-d7e7-4b35-992a-0398f161aab9
+explanation: "It referred to his number 8."
+archived: false

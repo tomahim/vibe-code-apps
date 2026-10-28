@@ -1,0 +1,19 @@
+id: 1de7f5aa-8ffb-40c0-ada3-887d2ea4d6d9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which two seasons did Roy win Cups with Montreal?"
+choices:
+  - id: ea3fe414-19ac-4df9-9832-64dc4402c283
+    text: "1990 and 1993"
+  - id: 1ab78a28-1ce1-4aab-97cf-c7e8ff54f2dd
+    text: "1976 and 1979"
+  - id: 48e6f21c-b770-4dd6-bc01-69422fb9f142
+    text: "1993 and 1996"
+  - id: 7ccdf06c-8ca6-4e2b-ba1d-8b188eaec0be
+    text: "1986 and 1993"
+correct_choice_ids:
+  - 7ccdf06c-8ca6-4e2b-ba1d-8b188eaec0be
+explanation: "He won with Montreal in 1986 and 1993."
+archived: false

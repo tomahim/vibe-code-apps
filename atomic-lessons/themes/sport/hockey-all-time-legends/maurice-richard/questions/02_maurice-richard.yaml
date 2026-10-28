@@ -1,0 +1,19 @@
+id: c51b302e-a9fa-42f8-8fd2-fc8bdd804ba5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which sport was Richard better at as a boy?"
+choices:
+  - id: 16f9d8b8-21f0-45d8-8d7e-518f250707cd
+    text: "Football"
+  - id: a923e6e8-86ae-40a0-882d-98811c4a0d48
+    text: "Lacrosse"
+  - id: 19e563c7-032d-4011-87ca-2c8027bdd9bf
+    text: "Baseball"
+  - id: 27cc6c5f-8034-4310-b679-d9f9ce0f78b0
+    text: "Golf"
+correct_choice_ids:
+  - 19e563c7-032d-4011-87ca-2c8027bdd9bf
+explanation: "As a youngster, he was a better baseball player than hockey player."
+archived: false

@@ -1,0 +1,19 @@
+id: 662e1f6a-1f21-4aea-9a1d-97d94a20e84b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team did Howe play for during his first 25 NHL seasons?"
+choices:
+  - id: c753450b-919b-4316-8743-2695c4bcd931
+    text: "Boston Bruins"
+  - id: 309f9de2-3f9f-4a2e-be2e-72fa24e7b956
+    text: "Chicago Blackhawks"
+  - id: ba64ecea-4ab3-4d8d-945c-8ec15e422ac7
+    text: "Montreal Canadiens"
+  - id: 8f678a6f-f70f-46f5-8b54-c45a9aee071f
+    text: "Detroit Red Wings"
+correct_choice_ids:
+  - 8f678a6f-f70f-46f5-8b54-c45a9aee071f
+explanation: "Howe joined Detroit in 1946 and stayed 25 seasons."
+archived: false

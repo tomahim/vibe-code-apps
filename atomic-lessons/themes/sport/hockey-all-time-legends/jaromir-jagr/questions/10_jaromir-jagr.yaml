@@ -1,0 +1,19 @@
+id: d4c52e5b-823c-4a54-9b6e-bce9f69e374a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many Penguins playoff game-winning goals does Jagr hold as a club record?"
+choices:
+  - id: 198e7e24-66aa-4577-bc53-ccb3021f018e
+    text: "14"
+  - id: c5f222b6-acef-4889-9380-939e7c80dba3
+    text: "9"
+  - id: 53652dd3-7113-4e3f-ba9e-095692076da0
+    text: "3"
+  - id: 0eaf4195-3761-43eb-87c8-275ddabf6f42
+    text: "25"
+correct_choice_ids:
+  - 198e7e24-66aa-4577-bc53-ccb3021f018e
+explanation: "He holds club records with 14 playoff game-winning goals and four overtime goals."
+archived: false

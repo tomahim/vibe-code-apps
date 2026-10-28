@@ -1,0 +1,19 @@
+id: 9a4afb63-1675-414b-b2a6-d39c65db6a4e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What had the Bruins failed to do for seven seasons before Orr arrived?"
+choices:
+  - id: 90541812-7d3d-449b-981a-bb967c4a9bfc
+    text: "Draft a first-round pick"
+  - id: e878e644-88c5-44c9-9ef5-cb8b538a1f2d
+    text: "Make the playoffs"
+  - id: f7690434-3c51-44a6-8df0-af7a7714a684
+    text: "Win a game in Montreal"
+  - id: ec336c6e-58fc-433b-920e-e683a5fc3a5a
+    text: "Sell out their arena"
+correct_choice_ids:
+  - e878e644-88c5-44c9-9ef5-cb8b538a1f2d
+explanation: "They had missed the playoffs seven years in a row."
+archived: false

@@ -1,0 +1,19 @@
+id: dc368434-911a-475e-8911-0899b578b50e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country was Jagr born?"
+choices:
+  - id: ce54d8f2-a2e9-4678-b1f3-ed950764e9a1
+    text: "Slovakia"
+  - id: dbb1766a-62e8-4099-9df5-2b426470bda6
+    text: "Russia"
+  - id: 269aea3e-72ff-42b1-82b7-52d57ba21a68
+    text: "Sweden"
+  - id: addc8535-f3a9-4120-8979-c8d457bf18db
+    text: "Czechoslovakia (now Czechia)"
+correct_choice_ids:
+  - addc8535-f3a9-4120-8979-c8d457bf18db
+explanation: "He was born in Kladno, in what was then Czechoslovakia."
+archived: false

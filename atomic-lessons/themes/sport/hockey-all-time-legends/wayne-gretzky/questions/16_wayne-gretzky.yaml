@@ -1,0 +1,10 @@
+id: bea2fdd9-1d5d-4135-9b0c-efa636ef1998
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many Hart Trophies did Gretzky win as league MVP?"
+accepted_answers:
+  - "9"
+  - "nine"
+explanation: "Gretzky won nine Hart Trophies, eight in a row and a ninth in 1988-89."
+archived: false

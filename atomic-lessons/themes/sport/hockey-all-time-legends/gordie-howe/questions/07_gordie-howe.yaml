@@ -1,0 +1,10 @@
+id: 2eec1f6b-6482-4003-946b-d98e9dffa63c
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Detroit left winger completed the Production Line? Give the last name."
+accepted_answers:
+  - "Lindsay"
+  - "Ted Lindsay"
+explanation: "Ted Lindsay played left wing on the Production Line."
+archived: false

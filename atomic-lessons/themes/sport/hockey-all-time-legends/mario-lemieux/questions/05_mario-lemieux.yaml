@@ -1,0 +1,19 @@
+id: 3b777fe3-1052-4b26-8863-7af2764564dc
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which two trophies did Lemieux win for the first time in 1987-88?"
+choices:
+  - id: 49361bd4-e8b5-4e60-abe3-6fdece6b20f5
+    text: "Art Ross and Hart"
+  - id: 8f12e2bc-cc26-408d-bb6a-a3c1b35bbda2
+    text: "Lady Byng and Selke"
+  - id: 1634eec2-4551-4c62-925d-b5f1316e1405
+    text: "Calder and Conn Smythe"
+  - id: 86ef725d-3c1d-435f-97a9-5093fcdfb5c4
+    text: "Vezina and Norris"
+correct_choice_ids:
+  - 49361bd4-e8b5-4e60-abe3-6fdece6b20f5
+explanation: "NHL.com and the Hall of Fame list those as his first scoring title and MVP award."
+archived: false

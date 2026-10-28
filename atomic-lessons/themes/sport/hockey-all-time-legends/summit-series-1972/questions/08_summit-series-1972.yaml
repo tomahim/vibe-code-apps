@@ -1,0 +1,10 @@
+id: f13efcd4-714b-4ca1-ac85-55c23a665a47
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Canadian forward gave the post-game speech after Game 4? Give the last name."
+accepted_answers:
+  - "Esposito"
+  - "Phil Esposito"
+explanation: "Phil Esposito delivered the speech."
+archived: false

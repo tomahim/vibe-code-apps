@@ -1,0 +1,9 @@
+id: 568766bc-2d18-45a8-93ac-82318b7dd412
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many NHL goals did Howe finish with?"
+accepted_answers:
+  - "801"
+explanation: "Howe finished with 801 goals and 1,850 points before Gretzky passed them."
+archived: false

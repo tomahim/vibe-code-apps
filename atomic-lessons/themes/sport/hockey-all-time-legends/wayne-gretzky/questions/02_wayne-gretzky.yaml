@@ -1,0 +1,19 @@
+id: 088d3189-812d-4188-a40d-5e2244e6e663
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How did Gretzky first come to wear the number 99?"
+choices:
+  - id: 41b9730d-0c46-4e46-b492-bb0c3b2c3c11
+    text: "Number 9 was taken, so his junior coach suggested two nines"
+  - id: cbbc5fd9-d215-4730-93fc-5f79dda709d2
+    text: "It was his birth year"
+  - id: 9b6d2405-91bd-4921-a527-978963d68bed
+    text: "The Oilers assigned it to him"
+  - id: 2fd60a41-be51-42c6-af68-219849e9af25
+    text: "It honoured his father"
+correct_choice_ids:
+  - 41b9730d-0c46-4e46-b492-bb0c3b2c3c11
+explanation: "At the Sault Ste. Marie Greyhounds, a veteran had number 9, so coach Muzz MacPherson suggested 99."
+archived: false

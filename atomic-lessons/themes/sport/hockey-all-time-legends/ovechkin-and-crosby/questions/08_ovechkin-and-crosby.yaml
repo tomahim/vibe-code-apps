@@ -1,0 +1,9 @@
+id: 9b586b81-1f7e-49e8-a6bc-479808d7aeb9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which city did Crosby captain Canada to a second Olympic gold in 2014? Give the city."
+accepted_answers:
+  - "Sochi"
+explanation: "Canada won gold again at the 2014 Sochi Games."
+archived: false

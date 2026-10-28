@@ -1,0 +1,19 @@
+id: 23470a33-a32c-4f53-a731-e117dad1131a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which city was Hasek born?"
+choices:
+  - id: 9f898653-81cb-4ed5-8acc-83a38107e968
+    text: "Pardubice"
+  - id: cc38f51c-94b4-4bed-b21a-b1f7a11334c2
+    text: "Prague"
+  - id: 20985987-ab5e-4758-bb00-c145ca733b3a
+    text: "Brno"
+  - id: 8a82b77a-5919-4cd3-96f3-a35c205dc138
+    text: "Kladno"
+correct_choice_ids:
+  - 9f898653-81cb-4ed5-8acc-83a38107e968
+explanation: "He was born in Pardubice, Czechoslovakia."
+archived: false

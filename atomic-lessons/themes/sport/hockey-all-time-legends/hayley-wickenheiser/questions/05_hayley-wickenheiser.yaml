@@ -1,0 +1,19 @@
+id: bede139f-36de-409c-ad4b-8b89f6552daa
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many Winter Olympics did Wickenheiser compete in?"
+choices:
+  - id: 520bd388-a455-4984-a3d5-bf754b352f73
+    text: "Seven"
+  - id: 02c63a59-264c-4bd3-90d9-a53214f80624
+    text: "Three"
+  - id: ef498f7d-d876-4c9c-bb3f-4f16b14c6927
+    text: "Five"
+  - id: d7d4567c-66bc-4942-996e-4998450cea31
+    text: "Two"
+correct_choice_ids:
+  - ef498f7d-d876-4c9c-bb3f-4f16b14c6927
+explanation: "No athlete has appeared at more Winter Olympics than her five."
+archived: false

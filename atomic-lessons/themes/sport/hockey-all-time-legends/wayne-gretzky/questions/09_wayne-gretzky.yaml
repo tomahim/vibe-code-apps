@@ -1,0 +1,19 @@
+id: 939ecf99-9646-4e0a-984e-34f4858faa07
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was Gretzky's nickname for the space where he liked to work?"
+choices:
+  - id: 488dfc8b-1a7b-43d7-a2be-f34d0f6e9953
+    text: "The corner, along the boards"
+  - id: dbc13353-bead-4d46-86ac-032907f2329b
+    text: "The slot, in front of the net"
+  - id: 6fa0c2ef-260d-41ee-b0e8-a710185a226a
+    text: "His office, behind the net"
+  - id: df965f0d-ce53-4d5c-8a39-d55e9636bb19
+    text: "The point, at the blue line"
+correct_choice_ids:
+  - 6fa0c2ef-260d-41ee-b0e8-a710185a226a
+explanation: "Gretzky ran plays from behind the opponent's net, which people called his office."
+archived: false

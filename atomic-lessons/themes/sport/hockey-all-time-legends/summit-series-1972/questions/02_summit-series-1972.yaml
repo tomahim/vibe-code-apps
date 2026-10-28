@@ -1,0 +1,19 @@
+id: 2f1d13ae-90d0-450a-b77c-676855d0d2b3
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where was Game 1 played?"
+choices:
+  - id: 6447b6ee-991c-4fcb-9584-4c549ec44b55
+    text: "Maple Leaf Gardens"
+  - id: d4812096-b27f-4db8-a1ae-d6a061584b65
+    text: "Montreal Forum"
+  - id: 326c3086-5af9-4982-8af4-8673c8e0b0a9
+    text: "Winnipeg Arena"
+  - id: 2d631b44-7161-4492-8b8b-0a19fdc295e6
+    text: "Luzhniki Arena"
+correct_choice_ids:
+  - d4812096-b27f-4db8-a1ae-d6a061584b65
+explanation: "Game 1 was at the Montreal Forum on September 2, 1972."
+archived: false

@@ -1,0 +1,19 @@
+id: 2a979b73-6593-447b-b0c5-00b80e8c4b02
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who broadcast the famous call, Do you believe in miracles?"
+choices:
+  - id: af42345c-f2bc-4922-ad79-df6acb1c0f9c
+    text: "Foster Hewitt"
+  - id: deab5e71-c88c-4770-8912-cb679eb81603
+    text: "Al Michaels"
+  - id: 6260321a-883f-44b4-b2c4-d785453a37ee
+    text: "Jim McKay"
+  - id: 825c1ac7-f161-42ed-a24e-460b680d996a
+    text: "Bob Costas"
+correct_choice_ids:
+  - deab5e71-c88c-4770-8912-cb679eb81603
+explanation: "Michaels delivered the line."
+archived: false

@@ -1,0 +1,19 @@
+id: 60da1ec8-61a8-4343-a5c8-e6e49c705e56
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was the score of the 1980 game that the USA won?"
+choices:
+  - id: 2ef13499-99c7-4e04-8f28-aca2378ec237
+    text: "7-3"
+  - id: 6801485e-680d-487e-abf6-2989c2073066
+    text: "2-1"
+  - id: caedad03-cc18-4ad8-828e-799fa0622857
+    text: "4-3"
+  - id: 8630b713-d9d1-4cbd-ac98-d95b7e1d55e5
+    text: "6-5"
+correct_choice_ids:
+  - caedad03-cc18-4ad8-828e-799fa0622857
+explanation: "The US won 4-3 at Lake Placid."
+archived: false

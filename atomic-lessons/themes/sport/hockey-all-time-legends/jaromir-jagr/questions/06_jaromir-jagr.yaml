@@ -1,0 +1,19 @@
+id: dce899f9-10c6-4f10-9671-a0da38aece7d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many goals did Jagr score in the 1992 playoffs while Lemieux was absent for five games?"
+choices:
+  - id: 3060a705-66b6-4f55-8d80-1be74cc08006
+    text: "Four"
+  - id: 5c9b67e5-e4fa-4d20-a9f9-3ffa0112cd54
+    text: "One"
+  - id: 2b8cdcba-11db-4f5e-b083-06aa1f8d3e43
+    text: "Seven"
+  - id: 8f242502-27b7-4c8d-911f-5c943f10a3ea
+    text: "Ten"
+correct_choice_ids:
+  - 3060a705-66b6-4f55-8d80-1be74cc08006
+explanation: "He scored four goals and seven points, including three game-winners."
+archived: false

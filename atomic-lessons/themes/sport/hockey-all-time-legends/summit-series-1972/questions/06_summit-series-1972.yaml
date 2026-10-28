@@ -1,0 +1,19 @@
+id: a5f8ef99-fd15-44bc-99ab-960981c92453
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Soviet goalie played in all eight games?"
+choices:
+  - id: 35f8698d-dbd4-4a5b-9877-9c9377d9f09d
+    text: "Tony Esposito"
+  - id: 98e02a63-8f5e-46e7-b7cc-91afad399f7f
+    text: "Ken Dryden"
+  - id: 7c5b9244-3dd0-4cfe-b811-a67bbbf36b45
+    text: "Vladimir Myshkin"
+  - id: dea37834-3d4a-48c8-8af7-48ed9fb1d9a7
+    text: "Vladislav Tretiak"
+correct_choice_ids:
+  - dea37834-3d4a-48c8-8af7-48ed9fb1d9a7
+explanation: "Tretiak was in goal for every game."
+archived: false

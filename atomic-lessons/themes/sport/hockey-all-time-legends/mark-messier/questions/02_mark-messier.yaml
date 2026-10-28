@@ -1,0 +1,19 @@
+id: 5d915b26-16ea-4efb-9e9d-5bfb75b1abf5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is Messier's nickname?"
+choices:
+  - id: 48113101-6790-4b81-8ec2-5d7eaaba497f
+    text: "The Golden Jet"
+  - id: a1f47bdb-1a1a-4f19-8bc0-2dd4e0f9a31f
+    text: "The Rocket"
+  - id: a010ec27-e882-454c-b9a2-9a5a1ce85465
+    text: "The Moose"
+  - id: 710a7993-30bc-491c-baed-762c20d195e2
+    text: "The Great One"
+correct_choice_ids:
+  - a010ec27-e882-454c-b9a2-9a5a1ce85465
+explanation: "The Moose refers to his size, strength and determination."
+archived: false

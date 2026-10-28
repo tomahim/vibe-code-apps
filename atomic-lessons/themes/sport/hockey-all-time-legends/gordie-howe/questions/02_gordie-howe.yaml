@@ -1,0 +1,19 @@
+id: 3d9850b6-e349-4028-a6f1-f9d60b9c979c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Canadian province was Howe born?"
+choices:
+  - id: 315a9801-795c-4d80-b3a0-e768721636c9
+    text: "Manitoba"
+  - id: 4615ed21-64f7-4b50-a960-246b170819d0
+    text: "Quebec"
+  - id: 62003161-7059-46d2-b041-5e5723401708
+    text: "Alberta"
+  - id: e1c61e21-d948-445a-8467-25ca2fa64c59
+    text: "Saskatchewan"
+correct_choice_ids:
+  - e1c61e21-d948-445a-8467-25ca2fa64c59
+explanation: "He was born in Floral, Saskatchewan."
+archived: false

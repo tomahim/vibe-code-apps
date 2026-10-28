@@ -1,0 +1,19 @@
+id: 49505d52-e83e-4040-92ec-96d5da2278c6
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which year did Beliveau sign with the Canadiens?"
+choices:
+  - id: bf45055e-9846-4bb3-9a81-4fae5876a332
+    text: "1949"
+  - id: da7b6a64-d896-4a15-8d57-28db11ba1a80
+    text: "1946"
+  - id: e5df8895-9617-4503-b88d-8b8ecaba239e
+    text: "1960"
+  - id: 25c86919-589f-47c0-928a-3fc492eea8f5
+    text: "1953"
+correct_choice_ids:
+  - 25c86919-589f-47c0-928a-3fc492eea8f5
+explanation: "He signed on October 3, 1953."
+archived: false

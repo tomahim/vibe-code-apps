@@ -1,0 +1,19 @@
+id: ae41ba0c-788e-47da-9b1e-8e2237a96be0
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long did Beliveau captain the Canadiens?"
+choices:
+  - id: e3fefbb4-2cd2-42d3-92b9-2e47b6e8beea
+    text: "Three seasons"
+  - id: 7ee4558b-69ba-4d4b-8a08-33340c8c7bc2
+    text: "A decade"
+  - id: 7511f877-2fdc-46a8-90b4-955481c1abcb
+    text: "One season"
+  - id: 077ebeed-27d8-4040-b79c-8974dbb619af
+    text: "Twenty years"
+correct_choice_ids:
+  - 7ee4558b-69ba-4d4b-8a08-33340c8c7bc2
+explanation: "He captained the team until his retirement."
+archived: false

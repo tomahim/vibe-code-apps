@@ -1,0 +1,19 @@
+id: ba717d14-32f0-413a-986a-aa89451f8aa5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which season did Beliveau miss the playoffs, once in 18 seasons?"
+choices:
+  - id: 12a580cd-a190-4de9-89f8-48c7691ea92a
+    text: "1955-56"
+  - id: 8240216c-f211-483e-aa77-febf692d8c9b
+    text: "1965-66"
+  - id: 9bdd5a10-d745-4658-820f-60978e43e21c
+    text: "1969-70"
+  - id: b922f353-e9e7-44d8-b00e-8babd787e037
+    text: "1963-64"
+correct_choice_ids:
+  - 9bdd5a10-d745-4658-820f-60978e43e21c
+explanation: "It was his second-to-last NHL season."
+archived: false

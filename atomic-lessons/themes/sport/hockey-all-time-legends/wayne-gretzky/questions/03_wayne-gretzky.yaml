@@ -1,0 +1,19 @@
+id: c9591fbd-32fc-4721-ad42-13c66bed0b3f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which league did Gretzky play in right before joining the Edmonton Oilers in the NHL?"
+choices:
+  - id: 890585c5-24d4-4057-99ad-9333791f3bad
+    text: "World Hockey Association"
+  - id: 2fcd869e-ab99-4f4d-9eea-e8d21310720b
+    text: "Western Hockey League"
+  - id: ff8d322e-5d49-44d7-9b35-2d1ec5c76edb
+    text: "Swiss National League"
+  - id: 591bf7d1-cdcd-4a8a-b840-d70715af77ce
+    text: "American Hockey League"
+correct_choice_ids:
+  - 890585c5-24d4-4057-99ad-9333791f3bad
+explanation: "He turned pro at 17 with the Indianapolis Racers and the Oilers in the WHA, before Edmonton joined the NHL in 1979."
+archived: false

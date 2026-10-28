@@ -1,0 +1,19 @@
+id: 61176100-d919-4bb6-b152-b476e54067a4
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many seconds were left when Henderson scored the series winner?"
+choices:
+  - id: e5143275-fce7-4da9-b2dd-7a08db72f2fe
+    text: "34"
+  - id: 96559d61-7d90-4387-a00b-951fcccf8ac8
+    text: "60"
+  - id: 6ce2cbe0-1f5a-46cb-97da-0bbc10e47a7e
+    text: "19"
+  - id: 96dd1aff-ec0b-4247-9638-03560e821d05
+    text: "5"
+correct_choice_ids:
+  - e5143275-fce7-4da9-b2dd-7a08db72f2fe
+explanation: "He scored with 34 seconds left."
+archived: false

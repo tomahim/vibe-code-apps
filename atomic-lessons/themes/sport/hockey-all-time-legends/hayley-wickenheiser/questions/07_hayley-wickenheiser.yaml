@@ -1,0 +1,9 @@
+id: 8ea0b42e-f15a-4e7d-b646-b3a0e1bc87d3
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Wickenheiser win her first Olympic gold?"
+accepted_answers:
+  - "2002"
+explanation: "She won gold in 2002."
+archived: false

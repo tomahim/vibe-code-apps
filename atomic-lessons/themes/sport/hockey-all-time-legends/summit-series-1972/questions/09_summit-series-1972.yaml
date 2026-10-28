@@ -1,0 +1,19 @@
+id: 31683a4c-f600-426f-a280-a69feacb3ed0
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where were Games 5 to 8 played?"
+choices:
+  - id: 846dd8ea-8efe-43e5-bb05-f9837c274107
+    text: "Stockholm"
+  - id: b845e399-e385-4977-b976-d2c4b5e209f7
+    text: "Moscow"
+  - id: cc9a80c4-c09f-4d96-862e-0447e62dd93d
+    text: "Prague"
+  - id: f9c62bca-c3ac-436a-a1d6-45c2ffbaf619
+    text: "Helsinki"
+correct_choice_ids:
+  - b845e399-e385-4977-b976-d2c4b5e209f7
+explanation: "Canada played the last four games in Moscow."
+archived: false

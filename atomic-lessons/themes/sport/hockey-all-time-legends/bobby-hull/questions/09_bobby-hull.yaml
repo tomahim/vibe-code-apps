@@ -1,0 +1,19 @@
+id: 8a785cd9-edfd-4192-94d1-cbabe2fc7a06
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Against which team did Hull score his 51st goal in 1966?"
+choices:
+  - id: a30f6311-d31d-4d7b-b9c2-bc1ba3a41bd7
+    text: "Detroit Red Wings"
+  - id: 30a1de9d-a7ec-44c9-bb57-86d3ce3dea2c
+    text: "New York Rangers"
+  - id: f5563837-8341-42a5-a623-9c06f5b338a6
+    text: "Boston Bruins"
+  - id: 04d738c3-bd42-47a6-a08f-429ddc91ce41
+    text: "Toronto Maple Leafs"
+correct_choice_ids:
+  - 30a1de9d-a7ec-44c9-bb57-86d3ce3dea2c
+explanation: "He scored the record goal at Chicago Stadium against the Rangers."
+archived: false

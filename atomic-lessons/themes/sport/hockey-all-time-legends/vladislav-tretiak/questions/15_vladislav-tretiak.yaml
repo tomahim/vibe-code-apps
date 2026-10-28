@@ -1,0 +1,9 @@
+id: 2d954119-6c54-45a2-b71f-585afb69b0c7
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year was Tretiak inducted into the Hockey Hall of Fame?"
+accepted_answers:
+  - "1989"
+explanation: "He was the first Soviet player inducted."
+archived: false

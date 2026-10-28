@@ -1,0 +1,19 @@
+id: 2e845040-35e6-4fe8-9d98-94707076d722
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many Soviet league titles did Tretiak win with CSKA?"
+choices:
+  - id: 5befc778-43af-4c22-bba6-69d76a9590dc
+    text: "20"
+  - id: 1f4c89bb-d920-4396-8dd3-7664d13c3b4a
+    text: "3"
+  - id: 0e643cb1-c6e4-4a78-bbf4-d27ec86cc6ef
+    text: "7"
+  - id: c4617404-aa60-4df3-a786-f64347d0d0f3
+    text: "13"
+correct_choice_ids:
+  - c4617404-aa60-4df3-a786-f64347d0d0f3
+explanation: "That is a record he shares with Viktor Kuzkin."
+archived: false

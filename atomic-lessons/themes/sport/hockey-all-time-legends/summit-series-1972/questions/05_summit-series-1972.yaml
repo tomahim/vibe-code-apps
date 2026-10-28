@@ -1,0 +1,19 @@
+id: 6b0379ae-593e-4686-b338-ecb126a4bae0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Canadian coach changed the lineup for Game 2?"
+choices:
+  - id: d5e31566-1f50-4a3b-9ea9-44a690bd40d2
+    text: "Roger Neilson"
+  - id: 9f710430-cf93-4c99-93bb-d39769e1e87f
+    text: "Harry Sinden"
+  - id: 0f3d696d-3e32-4114-96ad-48535db6a82a
+    text: "Scotty Bowman"
+  - id: 42b945f9-554f-411b-b877-aa1c61afcad9
+    text: "Don Cherry"
+correct_choice_ids:
+  - 9f710430-cf93-4c99-93bb-d39769e1e87f
+explanation: "Game 2 in Toronto was a 4-1 Canadian win."
+archived: false

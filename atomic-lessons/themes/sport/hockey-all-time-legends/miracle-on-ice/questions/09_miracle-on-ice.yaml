@@ -1,0 +1,19 @@
+id: 0e18a16c-de3a-4b89-8259-85fa29d42425
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which goalie did Tikhonov replace after the first period?"
+choices:
+  - id: 32f05851-afb1-48b3-be58-5dafb7e53428
+    text: "Ken Dryden"
+  - id: 893a5097-da18-416d-b4b9-6f5ced1c92ce
+    text: "Vladislav Tretiak"
+  - id: 4c4aa0c3-c1db-40e9-b48e-763b381a6f84
+    text: "Vladimir Myshkin"
+  - id: 01df6eac-7a10-40aa-9485-2becbf44c471
+    text: "Jim Craig"
+correct_choice_ids:
+  - 893a5097-da18-416d-b4b9-6f5ced1c92ce
+explanation: "He replaced Tretiak with Myshkin."
+archived: false

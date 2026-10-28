@@ -1,0 +1,19 @@
+id: 20a5f80e-363d-4060-95dd-f048f93ac79c
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Canadiens legend praised Beliveau's shot after a 1952-53 call-up?"
+choices:
+  - id: a3868209-be59-4116-a019-eded2a2ab3de
+    text: "Bernie Geoffrion"
+  - id: 7a28d387-d729-4b68-a7ee-5e87e392875e
+    text: "Elmer Lach"
+  - id: 26436c75-0a49-4dac-976c-00ddc5fe2341
+    text: "Toe Blake"
+  - id: 51acd419-306f-4506-bb15-f14268b12de4
+    text: "Maurice Richard"
+correct_choice_ids:
+  - 51acd419-306f-4506-bb15-f14268b12de4
+explanation: "Richard said he had the greatest shot he had ever seen."
+archived: false

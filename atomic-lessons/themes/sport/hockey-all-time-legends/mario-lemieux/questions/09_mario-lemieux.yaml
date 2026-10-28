@@ -1,0 +1,19 @@
+id: 12dc98cc-8407-4dd7-928e-943a9d3aad00
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What illness was Lemieux diagnosed with in January 1993?"
+choices:
+  - id: f488d934-5c9f-4c5a-bf21-8777b289fcf0
+    text: "Leukemia"
+  - id: 1aaf2d83-eacc-4b17-8fcc-fb36422783e5
+    text: "Mononucleosis"
+  - id: 2ba28ba1-a552-4521-8530-431bd7d70c9d
+    text: "Hodgkin's lymphoma"
+  - id: 8ad7e80d-9a97-437e-b0b8-edb965e3ee2f
+    text: "Pneumonia"
+correct_choice_ids:
+  - 2ba28ba1-a552-4521-8530-431bd7d70c9d
+explanation: "Hodgkin's lymphoma is a cancer of the lymphatic system."
+archived: false

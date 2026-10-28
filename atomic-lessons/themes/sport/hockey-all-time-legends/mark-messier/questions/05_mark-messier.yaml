@@ -1,0 +1,19 @@
+id: 8062d6de-392e-44df-ad71-aba5b54d466a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Oilers season brought Messier the Conn Smythe Trophy?"
+choices:
+  - id: 301c6060-9523-4887-ba5c-002e999b368b
+    text: "1987"
+  - id: 65bb6b07-1b55-452a-94b0-5874c03b878d
+    text: "1984"
+  - id: 141eab42-3319-4b78-89c1-b23392d128c5
+    text: "1990"
+  - id: 0df94cf0-2ef4-4398-89e2-228a5c49bed5
+    text: "1980"
+correct_choice_ids:
+  - 65bb6b07-1b55-452a-94b0-5874c03b878d
+explanation: "He was playoff MVP in the team's first Cup year, 1984."
+archived: false

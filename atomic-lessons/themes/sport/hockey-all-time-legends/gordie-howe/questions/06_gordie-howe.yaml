@@ -1,0 +1,19 @@
+id: 2bffb6c2-a4da-47a6-90f7-86f912894da4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who played centre on the Production Line?"
+choices:
+  - id: 47c1d9be-de9b-45c0-8b40-e5c3b220d4b1
+    text: "Ted Lindsay"
+  - id: 11b2c8b9-17bf-4296-b4fe-97e37f47d303
+    text: "Gordie Howe"
+  - id: c7e50111-5361-4196-8b11-ded3583d4c50
+    text: "Gilbert Perreault"
+  - id: c930e1a9-a67e-4e90-b9be-d0c63a163eff
+    text: "Sid Abel"
+correct_choice_ids:
+  - c930e1a9-a67e-4e90-b9be-d0c63a163eff
+explanation: "Sid Abel was the centre, with Ted Lindsay and Howe on the wings."
+archived: false

@@ -1,0 +1,19 @@
+id: 27e98dc9-1422-4a92-ba9d-9513f3982ac6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the score when the USA beat Czechoslovakia?"
+choices:
+  - id: 8e4fa198-84d9-4479-a298-6d8bdfe6b895
+    text: "7-3"
+  - id: 3e18e255-e2b7-4b55-879e-9fed9d2cf56a
+    text: "4-0"
+  - id: d93d67fc-7874-4dcd-abc7-85af13b44da8
+    text: "5-5"
+  - id: 305a85d3-2bf1-4304-8d87-9a7d3cf466e7
+    text: "2-1"
+correct_choice_ids:
+  - 8e4fa198-84d9-4479-a298-6d8bdfe6b895
+explanation: "The 7-3 win made the media take notice."
+archived: false

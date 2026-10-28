@@ -1,0 +1,19 @@
+id: 98efaa4f-a82f-4f09-bc3e-d3e09a1c2bf1
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who coached the Oilers dynasty teams of the 1980s?"
+choices:
+  - id: d97b2951-ccf3-40d7-bd51-88afd9d4372f
+    text: "Herb Brooks"
+  - id: 26f45c64-f0f9-41da-aae5-df151fa7e27d
+    text: "Don Cherry"
+  - id: fcafb957-5b3a-4a71-b95a-1f74a485d7cd
+    text: "Scotty Bowman"
+  - id: c3785ea9-7b08-4395-a64c-53d0b06e46dc
+    text: "Glen Sather"
+correct_choice_ids:
+  - c3785ea9-7b08-4395-a64c-53d0b06e46dc
+explanation: "Glen Sather coached Gretzky's Oilers and compared hitting him to hitting confetti."
+archived: false

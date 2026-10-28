@@ -1,0 +1,10 @@
+id: f40dadce-cde0-40cf-bde5-38fd3b5c29b6
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which player centred the Punch Line? Give the last name."
+accepted_answers:
+  - "Lach"
+  - "Elmer Lach"
+explanation: "Elmer Lach was the centre."
+archived: false

@@ -1,0 +1,9 @@
+id: 2f0be46a-cb5c-4fd6-b73d-267929554061
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year was Wickenheiser inducted into the Hockey Hall of Fame?"
+accepted_answers:
+  - "2019"
+explanation: "She was inducted in 2019."
+archived: false

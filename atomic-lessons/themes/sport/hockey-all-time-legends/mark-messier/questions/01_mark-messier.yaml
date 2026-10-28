@@ -1,0 +1,19 @@
+id: a130cbd1-3e28-44e2-a82d-e074d6e4791f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which NHL team drafted Messier in 1979?"
+choices:
+  - id: 6e8f081a-60fb-475c-b722-e345edf8a109
+    text: "Vancouver Canucks"
+  - id: 30d36c9d-efc6-43ae-8c19-027039e30b14
+    text: "Edmonton Oilers"
+  - id: cee25899-c2c7-496e-8bf6-c4e117c25113
+    text: "New York Rangers"
+  - id: 4d7aa5b3-1414-40a7-9dcd-a9ba6c3e29bb
+    text: "Cincinnati Stingers"
+correct_choice_ids:
+  - 30d36c9d-efc6-43ae-8c19-027039e30b14
+explanation: "The Oilers chose him in the third round, 48th overall."
+archived: false

@@ -1,0 +1,19 @@
+id: 2383f4d2-3163-4447-bbf1-6b7cdfc53442
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was the immediate cause of the March 1955 suspension?"
+choices:
+  - id: 5defd945-0020-47fa-b453-02096c587a52
+    text: "He injured a goalie"
+  - id: 1372f739-5000-47d2-b227-0a45536dfd12
+    text: "He skipped a playoff game"
+  - id: 4f215740-4e3d-4ce4-a258-101affc5bea8
+    text: "He punched a linesman"
+  - id: 244b888c-4e8d-48f0-9b28-42556fed2fda
+    text: "He insulted the owner"
+correct_choice_ids:
+  - 4f215740-4e3d-4ce4-a258-101affc5bea8
+explanation: "He punched a linesman during a melee against Boston."
+archived: false
