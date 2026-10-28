@@ -4,8 +4,8 @@ position: 7
 title: "Memory and the last witness"
 archived: false
 ---
-The scuttling was remembered in many ways. In the 1930s the event became a symbol of defiance for new recruits in the German navy. In 1921 von Reuter published a memoir called Scapa Flow: the Grave of the German Fleet.
+The scuttling is remembered through the people who were there. The German commander, Rear Admiral Ludwig von Reuter, ordered the interned fleet to be scuttled on 21 June 1919. The Imperial War Museums describe how he had struggled to keep control of crews who were unsettled and uncertain about the fate of their ships while the peace terms were still being decided.
 
-The last living military witness to the scuttling was Claude Choules, who died on 5 May 2011 aged 110, and who was the last known living combat veteran of the First World War. In 2019, on the 100th anniversary, two remembrance ceremonies were held, including a service in the middle of the Flow attended by dive charter boats. Von Reuter's grandson and great-grandsons were there. A song by Kris Drever, Scapa Flow 1919, also tells the story from a German sailor's point of view.
+The last living military witness was Claude Choules, a Royal Navy sailor who was present at Scapa Flow on 21 June 1919. The Guardian's obituary reports that he died on 5 May 2011 aged 110 and was the last known combat veteran of the First World War. A witness like him turns a date in a textbook into something a person saw. Today the wrecks are the remaining physical witness, which is one reason they are now protected.
 
-Learn more: [Wikipedia - Scuttling of the German fleet in Scapa Flow](https://en.wikipedia.org/wiki/Scuttling_of_the_German_fleet_in_Scapa_Flow)
+Learn more: [Imperial War Museums - The scuttling of the German fleet, 1919](https://www.iwm.org.uk/history/first-world-war/armistice/scuttling-of-the-german-fleet-1919)

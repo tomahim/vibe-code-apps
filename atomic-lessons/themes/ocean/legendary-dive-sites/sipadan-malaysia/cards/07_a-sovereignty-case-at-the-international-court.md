@@ -4,8 +4,8 @@ position: 7
 title: "A sovereignty case at the International Court"
 archived: false
 ---
-Sipadan also has a place in international law. For years Malaysia and Indonesia both claimed the island. The dispute was brought to the International Court of Justice, which at the end of 2002 awarded Sipadan and the nearby island of Ligitan to Malaysia.
+Sipadan also has a place in international law. For years Malaysia and Indonesia both claimed the island. The dispute was brought to the International Court of Justice, which ruled in its judgment of 17 December 2002 that Sipadan and the nearby island of Ligitan belong to Malaysia.
 
-The Court based its decision on effective occupation, meaning the administration shown by Malaysia's predecessor, the United Kingdom, and the absence of any stronger title. The Philippines had asked to take part in the proceedings, on the basis of a claim to northern Borneo, but the Court refused the request in 2001. For the dive world the ruling settled which government was responsible for managing the reef. The case is a reminder that even a tiny island can matter greatly when the surrounding reef is valuable.
+The Court based its decision on effective occupation, meaning the administration shown by Malaysia's predecessor, the United Kingdom, and the absence of any stronger title. The Philippines had asked to take part in the proceedings, on the basis of a claim to northern Borneo, but the Court rejected that request in a separate judgment on 23 October 2001. For the dive world the ruling settled which government was responsible for managing the reef. The case is a reminder that even a tiny island can matter greatly when the surrounding reef is valuable.
 
 Learn more: [Sabah Parks - Sipadan Island Park](https://www.sabahparks.org.my/sipadan-island-park)

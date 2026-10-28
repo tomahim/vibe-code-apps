@@ -4,6 +4,6 @@ position: 2
 title: "The signal of 21 June 1919"
 archived: false
 ---
-The Treaty of Versailles was due to be signed at noon on 21 June 1919. Reuter feared that the British would take the ships, or that the peace talks would fail and war would resume, and he did not want the fleet to fall into Allied hands. That morning he sent a coded flag signal to all commanding officers to begin scuttling.
+The Treaty of Versailles called for the surrender of the interned ships by 21 June 1919. Unknown to the German commander, Rear Admiral Ludwig von Reuter, the deadline had been extended to 23 June, and the British admiral at Scapa Flow had planned to seize the ships on that day. On the morning of 21 June the British fleet left for exercises, and von Reuter saw his chance. He did not want the fleet to fall into Allied hands, so he sent a coded flag signal to all commanding officers to begin scuttling.
 
-Crews opened seacocks and flood valves, smashed internal water pipes and opened drain valves. For a while there was no visible effect. At noon the battleship Friedrich der Grosse began to list heavily, and the ships hoisted the German ensign as the crews abandoned them. The British naval forces at the Flow were small, and most of the battle fleet was away on exercise at that moment.
+Crews opened valves and seacocks to flood the ships. The British naval forces at the Flow were small, and most of the battle fleet was away on exercise at that moment, so the sinking could not be stopped in time.

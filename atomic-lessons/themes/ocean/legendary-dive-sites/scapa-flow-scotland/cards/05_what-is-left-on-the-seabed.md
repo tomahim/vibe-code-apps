@@ -4,6 +4,6 @@ position: 5
 title: "What is left on the seabed"
 archived: false
 ---
-The remaining wrecks lie in deeper water. They were not worth the cost of raising, and they have changed owners several times. Minor salvage continues to recover small pieces of steel. Because the wrecks have changed hands several times, the question of who owns them and who protects them has had a long history of its own.
+Of the 52 ships that sank, salvage companies raised most. A survey of the salvage sites by Orkney researchers counts 45 of the 52 as recovered, which leaves seven wrecks on the seabed. These are the three battleships and four light cruisers that Historic Environment Scotland now protects as scheduled monuments.
 
-That steel has an unexpected use. It was made before the nuclear age, so it is not contaminated with radioisotopes, and it is called low-background steel. It is used in sensitive equipment such as Geiger counters, which need materials with very little background radiation. So the ships built for war in the early 1900s are now a source of material for scientific instruments.
+They remain because they were the hardest and least profitable to raise. The remaining wrecks lie in deeper water, and the work of lifting a battleship was far greater than lifting a destroyer. What is left on the seabed is therefore the part of the story that industry could not remove, and it is now cared for as heritage.

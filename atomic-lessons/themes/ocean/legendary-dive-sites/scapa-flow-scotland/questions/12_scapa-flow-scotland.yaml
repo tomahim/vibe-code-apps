@@ -3,17 +3,17 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "What is low-background steel used for?"
+prompt: "How many of the 52 sunken ships were raised by salvage companies?"
 choices:
   - id: bb66f070-b35d-4a08-824a-3d65f0551465
-    text: "Making coins"
+    text: "None of them"
   - id: 24c81f8c-f729-4b40-88d8-01f1e9197cb7
-    text: "Building bridges"
+    text: "About 5"
   - id: 75a87447-e41a-4d8d-b75d-55ce8ec78445
-    text: "Making cutlery"
+    text: "About 15"
   - id: ca6a5cc4-ceed-4647-8834-22ab3dc42485
-    text: "Radiation-sensitive devices such as Geiger counters"
+    text: "45 of them, leaving seven wrecks"
 correct_choice_ids:
   - ca6a5cc4-ceed-4647-8834-22ab3dc42485
-explanation: "It was made before nuclear contamination."
+explanation: "Seven wrecks remain on the seabed."
 archived: false

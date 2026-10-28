@@ -2,10 +2,10 @@ id: 43668e5e-64c0-4163-ac2b-27ccc0fb4031
 position: 16
 type: type_answer_question
 after_card_position: 8
-prompt: "Which treaty was due to be signed on 21 June 1919?"
+prompt: "Which treaty called for the interned German ships to be surrendered by 21 June 1919?"
 accepted_answers:
   - "Treaty of Versailles"
   - "Versailles"
   - "The Treaty of Versailles"
-explanation: "Reuter acted on the day the Treaty of Versailles was scheduled for signing."
+explanation: "The treaty set 21 June as the surrender deadline, and Reuter acted that morning."
 archived: false
