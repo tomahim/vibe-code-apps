@@ -6,5 +6,5 @@ prompt: "Which Icelandic glacier supplies Silfra's meltwater?"
 accepted_answers:
   - "Langj\u00f6kull"
   - "Langjokull"
-explanation: "Langj\u00f6kull is Iceland's second largest glacier, about 50 km north."
+explanation: "Langj\u00f6kull is Iceland's second largest glacier."
 archived: false

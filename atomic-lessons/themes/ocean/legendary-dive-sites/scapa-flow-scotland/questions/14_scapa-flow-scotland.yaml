@@ -3,17 +3,17 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: "What is the maximum depth of the remaining wrecks?"
+prompt: "Where do the remaining wrecks lie?"
 choices:
   - id: cf66ca34-7af1-4b39-bc7d-7c6cad541670
-    text: "About 4 m"
+    text: "On dry land in Orkney"
   - id: 1455c790-86b7-426c-add0-9314ee6a3bad
-    text: "About 400 m"
+    text: "Floating at the surface"
   - id: b74ab10c-9d3f-47ac-8a06-d58b8b24d60a
-    text: "About 4,000 m"
+    text: "Inside a museum"
   - id: c4747a0b-ca96-440c-8cda-5a4725232387
-    text: "About 47 m"
+    text: "On the seabed, some in deeper water"
 correct_choice_ids:
   - c4747a0b-ca96-440c-8cda-5a4725232387
-explanation: "The remaining wrecks lie in waters up to 47 m deep."
+explanation: "The remaining wrecks lie on the seabed of the Flow."
 archived: false

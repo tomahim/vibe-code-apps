@@ -3,7 +3,7 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Why did the 1997 core-sample expedition need cave-certified divers on mixed gases?"
+prompt: "Why do scientific dives in the Blue Hole need cave-certified divers on mixed gases?"
 choices:
   - id: 808d5222-806c-4cfd-9dfd-692c22782747
     text: "The water is full of sharks"

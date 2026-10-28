@@ -3,17 +3,17 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: "How long can whale sharks seen at Darwin's Arch be?"
+prompt: "Which animals gather in big schools around Darwin's Arch?"
 choices:
   - id: 65acaafa-3abc-4335-b5ad-e5212c97e38d
-    text: "Up to 1.4 m"
+    text: "Emperor penguins"
   - id: c252421d-51a1-4fc6-9403-1aa86b107c17
-    text: "Up to 140 m"
+    text: "Polar bears"
   - id: 90b390cd-c260-413f-a775-d56da8d2cee0
-    text: "Up to 4 cm"
+    text: "Crocodiles"
   - id: a99a801b-025b-43ba-8b8e-505ea311636f
-    text: "Up to about 14 m"
+    text: "Scalloped hammerhead sharks"
 correct_choice_ids:
   - a99a801b-025b-43ba-8b8e-505ea311636f
-explanation: "They are found there from early July."
+explanation: "Hammerheads gather in big schools there."
 archived: false

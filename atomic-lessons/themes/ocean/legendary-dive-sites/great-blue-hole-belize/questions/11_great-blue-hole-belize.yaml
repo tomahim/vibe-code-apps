@@ -15,5 +15,5 @@ choices:
     text: "The hole is shrinking quickly"
 correct_choice_ids:
   - e660e964-c524-40e0-9d29-5ff538367d82
-explanation: "A consistent lean of about 5 degrees means the rock itself moved."
+explanation: "A consistent lean means the rock itself moved."
 archived: false

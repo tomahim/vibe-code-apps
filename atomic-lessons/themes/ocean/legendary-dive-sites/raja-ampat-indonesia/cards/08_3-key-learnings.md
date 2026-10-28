@@ -4,7 +4,7 @@ position: 8
 title: "3 key learnings"
 archived: false
 ---
-**1. A huge archipelago.** Raja Ampat has over 1,500 small islands around Misool, Salawati, Batanta and Waigeo, just south of the equator.
+**1. A huge archipelago.** Raja Ampat spans roughly 610 islands, atolls and takas, around Misool, Salawati, Batanta and Waigeo, just south of the equator.
 
 **2. Record diversity.** It holds more than 600 hard coral species, about 75% of the world's known species, and more than 1,600 reef fish.
 

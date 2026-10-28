@@ -3,17 +3,17 @@ position: 13
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: "When was the Raja Ampat Marine Recreation Park designated?"
+prompt: "Who protects turtle nests in north-east Waigeo?"
 choices:
   - id: 43c63554-b77e-43b3-af37-078810cf39e2
-    text: "1933"
+    text: "Visiting cruise ships"
   - id: 644b4df7-2724-42e5-8b94-08ed9d7a6012
-    text: "2009"
+    text: "Villagers, with help from the local government and groups"
   - id: 5e1b1bc7-9c27-4451-84e0-4d5d5093acf0
-    text: "1971"
+    text: "Nobody"
   - id: 0f9a3226-bef4-4e66-ac4a-84ae659dcc32
-    text: "2025"
+    text: "Only the army"
 correct_choice_ids:
   - 644b4df7-2724-42e5-8b94-08ed9d7a6012
-explanation: "It is made up of four marine areas."
+explanation: "Local communities take part in conservation."
 archived: false

@@ -3,17 +3,17 @@ position: 10
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "At about which depth is the deepest ledge on the walls?"
+prompt: "What lives on the shallow reef rim around the hole?"
 choices:
   - id: 362510f4-c32c-4d76-b5c8-0ccb8ceed54f
-    text: "5 m"
+    text: "Nothing at all"
   - id: e3cea631-b26f-4004-ac25-d1029e49e30f
-    text: "21 m"
+    text: "Only deep-sea sharks"
   - id: 92f37016-bb6d-4fb0-87a7-28b7790821fc
-    text: "124 m"
+    text: "Only seabirds"
   - id: 69879801-f88c-4df1-bd21-2562f336b948
-    text: "91 m"
+    text: "Corals and tropical fish"
 correct_choice_ids:
   - 69879801-f88c-4df1-bd21-2562f336b948
-explanation: "Ledges lie at about 21 m, 49 m and 91 m."
+explanation: "The rim supports corals and tropical fish."
 archived: false

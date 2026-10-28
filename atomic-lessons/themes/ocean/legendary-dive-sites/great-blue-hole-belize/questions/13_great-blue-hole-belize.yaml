@@ -3,7 +3,7 @@ position: 13
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: "What did the 2018 submarine survey find at about 91 m?"
+prompt: "What did the 2018 submarine survey find deep inside the hole?"
 choices:
   - id: e223a9c1-a003-4a94-ac51-c99409e6699f
     text: "A sunken Spanish ship"

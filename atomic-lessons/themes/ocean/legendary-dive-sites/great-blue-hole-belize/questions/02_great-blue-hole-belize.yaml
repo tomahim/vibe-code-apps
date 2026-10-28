@@ -12,8 +12,8 @@ choices:
   - id: f5b1fb2d-c0c2-4aa0-9034-6e743478bb6c
     text: "1,000 m"
   - id: 8c24910f-5681-4793-b174-8d89f79eee03
-    text: "124 m"
+    text: "125 m"
 correct_choice_ids:
   - 8c24910f-5681-4793-b174-8d89f79eee03
-explanation: "It is about 124 m (407 ft) deep and 318 m across."
+explanation: "It is about 125 m deep and more than 300 m across."
 archived: false

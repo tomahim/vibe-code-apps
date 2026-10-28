@@ -15,5 +15,5 @@ choices:
     text: "The sea"
 correct_choice_ids:
   - b49daa12-0e0a-44f7-a4a1-5a43452594c7
-explanation: "The glacier is about 50 km north of the lake."
+explanation: "The glacier lies north of the lake."
 archived: false

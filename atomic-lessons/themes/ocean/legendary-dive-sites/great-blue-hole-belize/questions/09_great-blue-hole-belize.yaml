@@ -3,7 +3,7 @@ position: 9
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: "Which ship did Jacques Cousteau bring to the Blue Hole in 1971?"
+prompt: "Which ship did Jacques Cousteau bring to the Blue Hole in the early 1970s?"
 choices:
   - id: d0cb2b57-cff7-4665-97a3-d63c26c1d637
     text: "Thistlegorm"
