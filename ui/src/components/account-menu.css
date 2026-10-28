@@ -1,6 +1,9 @@
+/* Follow the owning page's palette: collection pages provide a dark wash,
+   while light apps use their paper surface. Keep surfaces and text paired. */
 .account-menu { position: relative; display: inline-flex; }
-.account-avatar { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--green, #a8b0ff); border-radius: 50%; background: var(--collection-wash, #20263c); color: var(--green-bright, #c8cdff); font: 600 14px/1 system-ui, sans-serif; cursor: pointer; transition: background .15s ease, transform .15s ease; }
-.account-avatar:hover { background: #2b3350; transform: translateY(-1px); }
-.account-dropdown { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; display: flex; flex-direction: column; min-width: 150px; padding: 6px; border: 1px solid var(--line, #363d52); border-radius: 10px; background: var(--collection-wash, #20263c); box-shadow: 0 8px 24px #0008; }
-.account-dropdown button { padding: 9px 10px; border: 0; border-radius: 6px; background: transparent; color: var(--ink, #e9e8e1); font: 500 13px system-ui, sans-serif; text-align: left; cursor: pointer; }
-.account-dropdown button:hover { background: var(--paper, #141723); }
+.account-avatar { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--green, #294e3c); border-radius: 50%; background: var(--collection-wash, var(--paper, #fff)); color: var(--green-bright, #46765b); font: 600 14px/1 system-ui, sans-serif; cursor: pointer; transition: background .15s ease, transform .15s ease; }
+.account-avatar:hover { background: var(--paper, #fff); transform: translateY(-1px); }
+.account-dropdown { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; display: flex; flex-direction: column; min-width: 150px; padding: 6px; border: 1px solid var(--line, #e6e9e3); border-radius: 10px; background: var(--collection-wash, var(--paper, #fff)); box-shadow: 0 8px 24px #0003; }
+.account-dropdown button { padding: 9px 10px; border: 0; border-radius: 6px; background: transparent; color: var(--ink, #1c2923); font: 500 13px system-ui, sans-serif; text-align: left; cursor: pointer; }
+.account-dropdown button:hover, .account-dropdown button:focus-visible { background: var(--line, #e6e9e3); }
+.account-avatar:focus-visible, .account-dropdown button:focus-visible { outline: 2px solid var(--ink, #1c2923); outline-offset: 2px; }
