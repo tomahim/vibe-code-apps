@@ -48,9 +48,17 @@ Send `{"question_id":"<uuid>","answer":"<choice-id>"}`. Only the current selecte
 
 Returns `{progress, learning_paths, lessons}` for the current user only. Aggregates include unique card/checkpoint completion and lesson totals/completed counts. There is no user-ID parameter, raw answer history, leaderboard, or another learner's data. Completion is derived, never separately stored; archived/unpublished content and questions whose checkpoint card is hidden are excluded. History rows are retained across content retirement. A content edit can change derived requirements, consistent with the existing no-revisions schema.
 
+## Garden rewards and rankings
+
+`GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level and `rewards: {drops, carrots}`. The frontend uses this snapshot to build the 3D scene and refreshes it after card and answer writes.
+
+`GET leaderboard/?currency=drops|carrots&period=weekly|monthly|overall` returns a ranking for one currency and period, plus the learner's own row. The top 20 and personal rank are computed independently for Drops and Carrots. Only learners with a positive score in the selected currency and period are ranked. Weekly periods start Monday 00:00 UTC; monthly periods start on the 1st at 00:00 UTC; overall is cumulative. Ties are ordered by user ID. This first version uses a global ranking.
+
+Rewards are derived from persisted learner history: 1 Drop for a card's first completion, 1 Carrot for the first correct answer at a checkpoint, 5 Drops when all visible cards and checkpoints in a lesson are complete, and 100 Drops when all visible lessons in a path are complete. Bonuses are additive. Wrong attempts and repeated card completion do not add rewards. Completion bonuses belong to the period in which the final required item was completed. No spendable balance or new reward table is created. Since scores are derived from the currently published hierarchy, archive or content edits can change historical totals; pinning an immutable economy would require a reward event ledger.
+
 ## Scope and integration
 
-Seven learner endpoints plus published-image delivery. No new models/migrations, admin publishing, content sync, UI changes, review scheduling or production writes. The earlier sample `/api/apps/little-grains/lessons` stays unchanged; a future frontend should use this DB-backed API. `today/` and the spaced review ladder remain separate follow-up work.
+The earlier sample `/api/apps/little-grains/lessons` remains for compatibility; the garden frontend uses the DB-backed API. `today/` and the spaced review ladder remain separate follow-up work.
 
 For this initial library the API returns complete ordered collections. Query count does not grow per card, but collection size is not paginated; add pagination/scoped state loading before scaling far beyond the current small curated library. A correct attempt is final for initial checkpoint completion; intentional repeated practice/review needs an explicit future contract. These assumptions are reviewable in this PR, not new product policy.
 
