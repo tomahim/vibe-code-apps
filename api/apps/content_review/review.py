@@ -70,6 +70,7 @@ def build_unit(change, texts):
         "patch": change["patch"],
         "id": None,
         "title": None,
+        "description": "",
         "position": None,
         "archived": False,
         "body": "",
@@ -84,6 +85,7 @@ def build_unit(change, texts):
             metadata, body = parse_unit(path, text)
             unit["id"] = str(metadata.get("id") or "") or None
             unit["title"] = str(metadata.get("title") or "") or None
+            unit["description"] = str(metadata.get("description") or "")
             unit["position"] = metadata.get("position")
             unit["archived"] = bool(metadata.get("archived", False))
             if kind == "question":

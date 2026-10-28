@@ -2,7 +2,11 @@
 
 Read calls target pull requests and file trees; the only write is posting a
 review comment on a pull request. The token never leaves the api service.
+Edits are single-file commits on the pull request branch (Contents: write).
 """
+
+import base64
+from urllib.parse import quote
 
 import requests
 
@@ -44,6 +48,8 @@ def describe_pr(data):
         "state": data["state"],
         "head_ref": data["head"]["ref"],
         "head_sha": data["head"]["sha"],
+        "head_repo": ((data["head"].get("repo") or {}).get("full_name") or ""),
+        "base_ref": (data.get("base") or {}).get("ref", ""),
         "updated_at": data.get("updated_at", ""),
     }
 
@@ -154,3 +160,47 @@ def fetch_tree_texts(token, repo, ref, root):
 
     walk(tree["entries"], root)
     return texts
+
+
+def get_branch_head(token, repo, branch):
+    """Commit sha the branch points at right now (fresher than the PR object)."""
+    data = _get(token, f"{API}/repos/{repo}/git/ref/heads/{quote(branch, safe='/')}")
+    return data["object"]["sha"]
+
+
+def get_file(token, repo, path, ref):
+    """(text, blob sha) of one file at a commit."""
+    data = _get(token, f"{API}/repos/{repo}/contents/{quote(path)}", params={"ref": ref})
+    if isinstance(data, list) or data.get("encoding") != "base64":
+        raise GitHubError("Not a regular file.")
+    return base64.b64decode(data["content"]).decode("utf-8"), data["sha"]
+
+
+class Conflict(GitHubError):
+    """The branch or file moved since the reviewer loaded it."""
+
+
+def put_file(token, repo, path, branch, text, blob_sha, message):
+    """Commit new file text on `branch`; `blob_sha` makes GitHub reject the write
+    when the file changed after it was read."""
+    response = requests.put(
+        f"{API}/repos/{repo}/contents/{quote(path)}",
+        headers=_headers(token),
+        json={
+            "message": message,
+            "content": base64.b64encode(text.encode("utf-8")).decode("ascii"),
+            "sha": blob_sha,
+            "branch": branch,
+        },
+        timeout=20,
+    )
+    if response.status_code in (409, 422):
+        raise Conflict(path)
+    if response.status_code == 404:
+        raise NotFound(path)
+    if response.status_code == 403:
+        raise GitHubError("GitHub refused the commit: the review token needs Contents: write.")
+    if response.status_code not in (200, 201):
+        raise GitHubError(f"GitHub commit failed ({response.status_code}).")
+    commit = response.json()["commit"]
+    return {"sha": commit["sha"], "url": commit["html_url"]}
