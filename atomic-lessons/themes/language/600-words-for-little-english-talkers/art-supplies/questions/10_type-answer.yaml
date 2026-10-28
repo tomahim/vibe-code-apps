@@ -1,0 +1,9 @@
+id: 0c27adf5-b3d9-49c8-bc75-b337a6105bae
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Argile » (thème : Art Supplies)."
+accepted_answers:
+  - "Clay"
+explanation: "Le mot du cours est « Clay »."
+archived: false

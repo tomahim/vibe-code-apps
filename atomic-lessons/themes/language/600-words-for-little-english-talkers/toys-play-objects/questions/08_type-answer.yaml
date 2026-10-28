@@ -1,0 +1,9 @@
+id: c0693a3d-b5e2-40c2-abef-2f2e718ec628
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Frisbee » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Frisbee"
+explanation: "Le mot du cours est « Frisbee »."
+archived: false

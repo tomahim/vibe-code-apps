@@ -1,0 +1,9 @@
+id: 8d62bd62-2f82-46a1-9447-17ee893ea95e
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Robinet » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Faucet"
+explanation: "Le mot du cours est « Faucet »."
+archived: false

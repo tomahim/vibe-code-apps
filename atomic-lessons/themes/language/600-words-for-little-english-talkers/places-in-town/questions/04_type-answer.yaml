@@ -1,0 +1,9 @@
+id: 66f9acad-5f17-4ed7-a4ae-932eecd77064
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Magasin » (thème : Places in Town)."
+accepted_answers:
+  - "Store"
+explanation: "Le mot du cours est « Store »."
+archived: false

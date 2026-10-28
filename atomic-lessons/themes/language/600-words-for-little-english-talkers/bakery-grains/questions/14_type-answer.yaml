@@ -1,0 +1,9 @@
+id: 61d23b97-e4eb-4bce-b4dc-334d8ab7f59c
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Brioche / Pain burger » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Bun"
+explanation: "Le mot du cours est « Bun »."
+archived: false

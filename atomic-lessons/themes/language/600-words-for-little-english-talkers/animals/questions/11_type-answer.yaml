@@ -1,0 +1,9 @@
+id: 60a10fdb-77fa-4529-b0d3-bb96fe8386bf
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Âne » (thème : Animals)."
+accepted_answers:
+  - "Donkey"
+explanation: "Le mot du cours est « Donkey »."
+archived: false

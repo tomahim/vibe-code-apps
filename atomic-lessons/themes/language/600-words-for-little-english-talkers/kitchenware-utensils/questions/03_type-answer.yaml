@@ -1,0 +1,9 @@
+id: fd95cae3-d5ed-45dd-bc91-fe05f04bcdd2
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Bol » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Bowl"
+explanation: "Le mot du cours est « Bowl »."
+archived: false

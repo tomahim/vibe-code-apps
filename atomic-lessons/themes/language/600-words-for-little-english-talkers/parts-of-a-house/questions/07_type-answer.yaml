@@ -1,0 +1,9 @@
+id: 91df2693-a255-4457-a958-b7d085d5a3d0
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Jardin » (thème : Parts of a House)."
+accepted_answers:
+  - "Garden"
+explanation: "Le mot du cours est « Garden »."
+archived: false

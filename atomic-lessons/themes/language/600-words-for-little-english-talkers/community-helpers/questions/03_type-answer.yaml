@@ -1,0 +1,9 @@
+id: bc6a4fec-ebae-4c6f-a196-be7384cba997
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Pilote » (thème : Community Helpers)."
+accepted_answers:
+  - "Pilot"
+explanation: "Le mot du cours est « Pilot »."
+archived: false

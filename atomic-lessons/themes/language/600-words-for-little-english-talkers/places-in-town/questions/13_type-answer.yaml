@@ -1,0 +1,9 @@
+id: 9a061ae1-d3c4-4be2-9961-0dc29f60211a
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Gymnase » (thème : Places in Town)."
+accepted_answers:
+  - "Gym"
+explanation: "Le mot du cours est « Gym »."
+archived: false

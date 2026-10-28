@@ -1,0 +1,9 @@
+id: bee49fd2-4407-4deb-9c60-0d1bf548e4dd
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Pouce » (thème : Body Parts)."
+accepted_answers:
+  - "Thumb"
+explanation: "Le mot du cours est « Thumb »."
+archived: false

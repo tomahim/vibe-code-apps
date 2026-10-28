@@ -1,0 +1,9 @@
+id: 1db179bb-18ae-40da-84c9-4f505d687c85
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Peintre » (thème : Community Helpers)."
+accepted_answers:
+  - "Painter"
+explanation: "Le mot du cours est « Painter »."
+archived: false

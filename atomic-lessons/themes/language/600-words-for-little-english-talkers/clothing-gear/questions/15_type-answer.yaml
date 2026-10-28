@@ -1,0 +1,9 @@
+id: 5294ef79-8816-4709-af42-b24bc8884f72
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Badge » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Badge"
+explanation: "Le mot du cours est « Badge »."
+archived: false

@@ -1,0 +1,9 @@
+id: b07393de-1bb6-47bd-b3f0-1a2aeff503a7
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Tronc » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Trunk"
+explanation: "Le mot du cours est « Trunk »."
+archived: false

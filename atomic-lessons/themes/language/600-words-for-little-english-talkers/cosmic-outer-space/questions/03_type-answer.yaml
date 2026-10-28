@@ -1,0 +1,9 @@
+id: c4a4c426-4e41-420b-a9d6-621d00607746
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Comète » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Comet"
+explanation: "Le mot du cours est « Comet »."
+archived: false

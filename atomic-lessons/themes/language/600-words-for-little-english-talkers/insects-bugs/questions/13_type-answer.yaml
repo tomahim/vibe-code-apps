@@ -1,0 +1,9 @@
+id: 814bb9dc-fa72-4ab6-8288-4e1e0185b61c
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Ruche » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Hive"
+explanation: "Le mot du cours est « Hive »."
+archived: false

@@ -1,0 +1,9 @@
+id: 73d9ce5b-ee76-45af-acd3-c7c5167323a0
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Lustre » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Chandelier"
+explanation: "Le mot du cours est « Chandelier »."
+archived: false

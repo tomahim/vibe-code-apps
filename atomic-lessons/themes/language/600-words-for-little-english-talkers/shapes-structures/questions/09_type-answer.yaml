@@ -1,0 +1,9 @@
+id: f043adfb-e125-4247-af6c-b1be220b3ac2
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Dôme » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Dome"
+explanation: "Le mot du cours est « Dome »."
+archived: false

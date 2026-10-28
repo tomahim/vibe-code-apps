@@ -1,0 +1,9 @@
+id: e99436fc-fc95-4cbc-b090-b0e9c349a064
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Orteils » (thème : Body Parts)."
+accepted_answers:
+  - "Toes"
+explanation: "Le mot du cours est « Toes »."
+archived: false

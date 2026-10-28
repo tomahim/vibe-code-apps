@@ -1,0 +1,9 @@
+id: 0ca5d900-a9ef-424c-824f-037125ac44ec
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Atterrisseur » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Lander"
+explanation: "Le mot du cours est « Lander »."
+archived: false

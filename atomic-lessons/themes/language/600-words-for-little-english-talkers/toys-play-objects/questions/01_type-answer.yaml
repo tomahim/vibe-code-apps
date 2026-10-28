@@ -1,0 +1,9 @@
+id: ec4946e5-8268-4888-a3b4-5012a6453988
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Cube de construction » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Block"
+explanation: "Le mot du cours est « Block »."
+archived: false

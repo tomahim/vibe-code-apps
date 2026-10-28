@@ -1,0 +1,9 @@
+id: d00b987c-cc51-4032-9228-6e5aa597c759
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Carillon » (thème : Musical Instruments)."
+accepted_answers:
+  - "Chimes"
+explanation: "Le mot du cours est « Chimes »."
+archived: false

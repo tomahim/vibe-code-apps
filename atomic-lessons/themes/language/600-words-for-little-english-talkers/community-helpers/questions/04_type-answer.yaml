@@ -1,0 +1,9 @@
+id: 6483e80e-63e2-436f-a1fe-afae2abef8de
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Infirmier(ère) » (thème : Community Helpers)."
+accepted_answers:
+  - "Nurse"
+explanation: "Le mot du cours est « Nurse »."
+archived: false

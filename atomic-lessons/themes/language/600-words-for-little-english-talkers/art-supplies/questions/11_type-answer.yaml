@@ -1,0 +1,9 @@
+id: 40d507ba-68fd-4c29-a218-43d9320306f6
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Cahier » (thème : Art Supplies)."
+accepted_answers:
+  - "Notebook"
+explanation: "Le mot du cours est « Notebook »."
+archived: false

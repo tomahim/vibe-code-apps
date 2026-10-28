@@ -1,0 +1,9 @@
+id: 95c78feb-38c8-4d6d-b8ab-18a8353cf6bc
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Pomme de pin » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Pinecone"
+explanation: "Le mot du cours est « Pinecone »."
+archived: false

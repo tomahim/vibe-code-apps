@@ -1,0 +1,9 @@
+id: a9aa6c3d-0278-4a8c-8c8d-343f96861391
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Zoo » (thème : Places in Town)."
+accepted_answers:
+  - "Zoo"
+explanation: "Le mot du cours est « Zoo »."
+archived: false

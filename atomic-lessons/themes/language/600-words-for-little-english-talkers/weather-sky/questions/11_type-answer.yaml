@@ -1,0 +1,9 @@
+id: 9ccac8fe-255a-40f4-848b-9401be162d31
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Comète » (thème : Weather & Sky)."
+accepted_answers:
+  - "Comet"
+explanation: "Le mot du cours est « Comet »."
+archived: false

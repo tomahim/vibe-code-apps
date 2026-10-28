@@ -1,0 +1,9 @@
+id: e021c5aa-52e7-4348-9dda-750604eb3e7d
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Cuillère » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Spoon"
+explanation: "Le mot du cours est « Spoon »."
+archived: false

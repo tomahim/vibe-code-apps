@@ -1,0 +1,9 @@
+id: 8751a636-1cbb-440e-9974-69ce5272701b
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Seuil » (thème : Parts of a House)."
+accepted_answers:
+  - "Threshold"
+explanation: "Le mot du cours est « Threshold »."
+archived: false

@@ -1,0 +1,9 @@
+id: c02870e6-27e6-486d-8302-e8604fb18d83
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Requin » (thème : Sea Life)."
+accepted_answers:
+  - "Shark"
+explanation: "Le mot du cours est « Shark »."
+archived: false

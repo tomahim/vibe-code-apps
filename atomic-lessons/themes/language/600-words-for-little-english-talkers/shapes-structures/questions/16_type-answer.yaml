@@ -1,0 +1,9 @@
+id: 0ec035af-e6cd-4ad1-8f1f-a8c8b4e1ea5b
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Zigzag » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Zigzag"
+explanation: "Le mot du cours est « Zigzag »."
+archived: false

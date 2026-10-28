@@ -1,0 +1,9 @@
+id: 0e8f9e42-45aa-451b-9dd3-23db8cb5bd91
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Morse » (thème : Sea Life)."
+accepted_answers:
+  - "Walrus"
+explanation: "Le mot du cours est « Walrus »."
+archived: false

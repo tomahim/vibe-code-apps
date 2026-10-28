@@ -1,0 +1,9 @@
+id: b64f8a91-aeb6-483c-b51f-f8759f70c9c7
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Nuage » (thème : Weather & Sky)."
+accepted_answers:
+  - "Cloud"
+explanation: "Le mot du cours est « Cloud »."
+archived: false

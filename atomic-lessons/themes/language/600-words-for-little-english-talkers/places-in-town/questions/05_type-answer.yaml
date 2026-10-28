@@ -1,0 +1,9 @@
+id: b48b1bdf-68d9-4184-8f61-9fb228b9f8b8
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Gare » (thème : Places in Town)."
+accepted_answers:
+  - "Station"
+explanation: "Le mot du cours est « Station »."
+archived: false

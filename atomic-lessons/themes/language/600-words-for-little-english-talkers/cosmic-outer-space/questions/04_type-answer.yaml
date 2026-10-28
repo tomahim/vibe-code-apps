@@ -1,0 +1,9 @@
+id: 408941ce-021a-463f-8b4b-9a35633e214e
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Soleil » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Sun"
+explanation: "Le mot du cours est « Sun »."
+archived: false

@@ -1,0 +1,9 @@
+id: 362734ea-1aea-4347-b890-9d650f669466
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Ruban » (thème : Art Supplies)."
+accepted_answers:
+  - "Ribbon"
+explanation: "Le mot du cours est « Ribbon »."
+archived: false

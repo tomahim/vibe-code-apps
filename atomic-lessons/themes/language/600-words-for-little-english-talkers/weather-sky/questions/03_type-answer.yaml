@@ -1,0 +1,9 @@
+id: cd96fda2-899c-4f69-a9ab-b29eede4115a
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Étoile » (thème : Weather & Sky)."
+accepted_answers:
+  - "Star"
+explanation: "Le mot du cours est « Star »."
+archived: false

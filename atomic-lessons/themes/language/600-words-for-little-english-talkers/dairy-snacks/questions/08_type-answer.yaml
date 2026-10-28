@@ -1,0 +1,9 @@
+id: c4052b9c-fa3f-4495-abc2-325c3322f5e3
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Bretzel salé » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Pretzel"
+explanation: "Le mot du cours est « Pretzel »."
+archived: false

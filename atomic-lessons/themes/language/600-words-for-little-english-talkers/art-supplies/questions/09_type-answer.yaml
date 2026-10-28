@@ -1,0 +1,9 @@
+id: 4dfbedb2-1e60-4c6b-8bf8-1ad77a2c35b4
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Paillettes » (thème : Art Supplies)."
+accepted_answers:
+  - "Glitter"
+explanation: "Le mot du cours est « Glitter »."
+archived: false

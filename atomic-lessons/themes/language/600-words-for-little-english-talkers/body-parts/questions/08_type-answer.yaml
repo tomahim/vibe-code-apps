@@ -1,0 +1,9 @@
+id: fd4afa07-97e9-4e5a-9690-1645377ee717
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Jambe » (thème : Body Parts)."
+accepted_answers:
+  - "Leg"
+explanation: "Le mot du cours est « Leg »."
+archived: false

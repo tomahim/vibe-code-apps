@@ -1,0 +1,9 @@
+id: c5b771c7-93e8-48c9-8946-cf5de4179378
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Cheval » (thème : Animals)."
+accepted_answers:
+  - "Horse"
+explanation: "Le mot du cours est « Horse »."
+archived: false

@@ -1,0 +1,9 @@
+id: 086ffd23-9d5d-4af4-be19-3d7ed23de390
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Brise » (thème : Weather & Sky)."
+accepted_answers:
+  - "Breeze"
+explanation: "Le mot du cours est « Breeze »."
+archived: false

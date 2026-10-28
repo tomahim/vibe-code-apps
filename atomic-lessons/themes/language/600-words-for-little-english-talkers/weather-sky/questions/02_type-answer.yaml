@@ -1,0 +1,9 @@
+id: 3dfeb71b-35cb-4e0d-8219-844af1219c6b
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Pluie » (thème : Weather & Sky)."
+accepted_answers:
+  - "Rain"
+explanation: "Le mot du cours est « Rain »."
+archived: false

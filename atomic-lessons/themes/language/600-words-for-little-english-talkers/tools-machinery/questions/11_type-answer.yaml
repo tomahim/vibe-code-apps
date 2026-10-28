@@ -1,0 +1,9 @@
+id: 334f291b-5272-4868-99e6-e53e72eb5126
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Grue » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Crane"
+explanation: "Le mot du cours est « Crane »."
+archived: false

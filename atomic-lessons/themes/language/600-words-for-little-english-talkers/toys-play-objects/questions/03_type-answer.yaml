@@ -1,0 +1,9 @@
+id: 072f598f-03c2-4fb3-bdc0-ace6069a0a96
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Poupée » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Doll"
+explanation: "Le mot du cours est « Doll »."
+archived: false

@@ -1,0 +1,9 @@
+id: 48b49a20-aae8-4ed1-892a-8860bfa81017
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Aéroport » (thème : Places in Town)."
+accepted_answers:
+  - "Airport"
+explanation: "Le mot du cours est « Airport »."
+archived: false

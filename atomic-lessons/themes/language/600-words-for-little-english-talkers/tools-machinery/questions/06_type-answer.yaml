@@ -1,0 +1,9 @@
+id: e2acb403-2a71-44d5-9ff3-fb3545dd5d10
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Balai » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Broom"
+explanation: "Le mot du cours est « Broom »."
+archived: false

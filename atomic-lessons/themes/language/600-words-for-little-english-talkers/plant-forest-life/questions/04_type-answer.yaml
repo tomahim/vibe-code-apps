@@ -1,0 +1,9 @@
+id: 96d8ca72-5c07-4c9a-ab61-bcb7df7055d6
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Branche » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Branch"
+explanation: "Le mot du cours est « Branch »."
+archived: false

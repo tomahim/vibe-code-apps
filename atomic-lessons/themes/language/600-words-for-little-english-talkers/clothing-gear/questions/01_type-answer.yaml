@@ -1,0 +1,9 @@
+id: c6dc82ff-baa7-499e-81c6-c7360842b7f9
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Bottes » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Boots"
+explanation: "Le mot du cours est « Boots »."
+archived: false

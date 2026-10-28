@@ -1,0 +1,9 @@
+id: 884d2ed5-4e48-46c6-97a3-758c900f1e1f
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Front » (thème : Body Parts)."
+accepted_answers:
+  - "Forehead"
+explanation: "Le mot du cours est « Forehead »."
+archived: false

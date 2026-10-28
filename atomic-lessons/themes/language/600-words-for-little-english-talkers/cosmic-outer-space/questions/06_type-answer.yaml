@@ -1,0 +1,9 @@
+id: 1f3c9e1f-4653-44da-b029-7bd5df8efd72
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Galaxie » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Galaxy"
+explanation: "Le mot du cours est « Galaxy »."
+archived: false

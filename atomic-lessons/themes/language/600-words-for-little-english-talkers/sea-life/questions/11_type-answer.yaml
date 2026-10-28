@@ -1,0 +1,9 @@
+id: 023e07ee-daca-44e6-b4f5-44fedff6ef59
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Raie » (thème : Sea Life)."
+accepted_answers:
+  - "Ray"
+explanation: "Le mot du cours est « Ray »."
+archived: false

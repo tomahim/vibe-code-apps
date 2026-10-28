@@ -1,0 +1,9 @@
+id: 4d7d2fb7-d80b-484a-bca1-1cac0e262b91
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Pop-corn » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Popcorn"
+explanation: "Le mot du cours est « Popcorn »."
+archived: false

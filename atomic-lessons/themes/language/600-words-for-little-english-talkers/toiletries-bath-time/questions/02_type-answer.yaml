@@ -1,0 +1,9 @@
+id: 0529cde2-f258-4eef-ac3e-6d74ecff9475
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Brosse à dents » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Toothbrush"
+explanation: "Le mot du cours est « Toothbrush »."
+archived: false

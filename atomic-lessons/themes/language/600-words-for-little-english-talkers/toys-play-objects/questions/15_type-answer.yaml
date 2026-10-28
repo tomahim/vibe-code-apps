@@ -1,0 +1,9 @@
+id: da199740-7d9e-4c05-b9e6-c3e14ba9499d
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Cerceau » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Hoop"
+explanation: "Le mot du cours est « Hoop »."
+archived: false

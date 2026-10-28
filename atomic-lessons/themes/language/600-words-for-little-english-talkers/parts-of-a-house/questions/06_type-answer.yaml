@@ -1,0 +1,9 @@
+id: 59ae2d5e-a3a5-4df6-bb81-cb3f5791e2b4
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Balcon » (thème : Parts of a House)."
+accepted_answers:
+  - "Balcony"
+explanation: "Le mot du cours est « Balcony »."
+archived: false

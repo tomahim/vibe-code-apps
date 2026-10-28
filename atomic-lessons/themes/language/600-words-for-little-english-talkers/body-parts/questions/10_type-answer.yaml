@@ -1,0 +1,9 @@
+id: a815e29a-ba4c-4dab-8c0f-0a141671e130
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Dents » (thème : Body Parts)."
+accepted_answers:
+  - "Teeth"
+explanation: "Le mot du cours est « Teeth »."
+archived: false

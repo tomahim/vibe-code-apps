@@ -1,0 +1,9 @@
+id: 6597d9b5-9f55-4c05-a8a5-c818c34ef42f
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Anatife » (thème : Sea Life)."
+accepted_answers:
+  - "Barnacle"
+explanation: "Le mot du cours est « Barnacle »."
+archived: false

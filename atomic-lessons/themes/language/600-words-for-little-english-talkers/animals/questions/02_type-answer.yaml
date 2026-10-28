@@ -1,0 +1,9 @@
+id: b01143fb-c378-4c93-bd05-f61275007593
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Papillon » (thème : Animals)."
+accepted_answers:
+  - "Butterfly"
+explanation: "Le mot du cours est « Butterfly »."
+archived: false

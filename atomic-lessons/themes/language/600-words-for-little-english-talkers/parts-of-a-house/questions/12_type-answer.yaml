@@ -1,0 +1,9 @@
+id: 0499f824-0e27-494d-93d9-e24e28817a6f
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Marche » (thème : Parts of a House)."
+accepted_answers:
+  - "Step"
+explanation: "Le mot du cours est « Step »."
+archived: false

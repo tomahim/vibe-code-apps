@@ -1,0 +1,9 @@
+id: f66e2cee-f7c2-4e65-ad31-7c2e22f4cbee
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pin » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Pine"
+explanation: "Le mot du cours est « Pine »."
+archived: false

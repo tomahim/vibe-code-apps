@@ -1,0 +1,9 @@
+id: 4e1d57bf-fce7-4f5e-963d-404ad947593b
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Pousse » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Sprout"
+explanation: "Le mot du cours est « Sprout »."
+archived: false

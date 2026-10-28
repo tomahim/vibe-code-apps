@@ -1,0 +1,9 @@
+id: 7f5b1165-8d9e-4ecd-8ec9-721d80d137ed
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Matelas » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Mattress"
+explanation: "Le mot du cours est « Mattress »."
+archived: false

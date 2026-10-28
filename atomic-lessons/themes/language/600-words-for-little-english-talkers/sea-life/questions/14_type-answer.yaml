@@ -1,0 +1,9 @@
+id: 75630261-4d09-46a8-b94d-2dd150f0ba14
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Vague » (thème : Sea Life)."
+accepted_answers:
+  - "Wave"
+explanation: "Le mot du cours est « Wave »."
+archived: false

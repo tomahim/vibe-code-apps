@@ -1,0 +1,9 @@
+id: d572d9c9-6a83-4e05-8f0a-5efb7b92055d
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Tambour » (thème : Musical Instruments)."
+accepted_answers:
+  - "Drum"
+explanation: "Le mot du cours est « Drum »."
+archived: false

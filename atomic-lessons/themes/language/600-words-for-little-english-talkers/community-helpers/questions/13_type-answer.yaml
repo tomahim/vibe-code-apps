@@ -1,0 +1,9 @@
+id: 65e37e31-4cea-4ce8-9db5-0c124475adb1
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Tailleur / Couturier » (thème : Community Helpers)."
+accepted_answers:
+  - "Tailor"
+explanation: "Le mot du cours est « Tailor »."
+archived: false

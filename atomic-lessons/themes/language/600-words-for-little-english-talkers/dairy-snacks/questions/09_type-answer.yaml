@@ -1,0 +1,9 @@
+id: 3a99d7d3-825d-4a65-af5b-1ced2b1a7331
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Barre aux fruits » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Fruit bar"
+explanation: "Le mot du cours est « Fruit bar »."
+archived: false

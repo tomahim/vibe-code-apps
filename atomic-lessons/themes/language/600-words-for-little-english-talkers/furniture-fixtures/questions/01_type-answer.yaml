@@ -1,0 +1,9 @@
+id: ca8f35ab-edfc-40a4-ac07-55e91d74592c
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Oreiller » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Pillow"
+explanation: "Le mot du cours est « Pillow »."
+archived: false

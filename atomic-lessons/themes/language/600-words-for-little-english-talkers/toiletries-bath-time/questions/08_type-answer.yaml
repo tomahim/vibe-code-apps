@@ -1,0 +1,9 @@
+id: fb630ab9-1ca7-4e52-8fda-9ac1b88dbd9e
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Fleur de douche » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Loofah"
+explanation: "Le mot du cours est « Loofah »."
+archived: false

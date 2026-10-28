@@ -1,0 +1,9 @@
+id: 7e5cb0fe-7486-4b85-a40f-135bd1e3b9ea
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Rouleau à pâtisserie » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Rolling pin"
+explanation: "Le mot du cours est « Rolling pin »."
+archived: false

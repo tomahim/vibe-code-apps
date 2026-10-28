@@ -1,0 +1,9 @@
+id: 9fa43b25-9507-4fd8-b6a3-269fff610cdb
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Tapis de bain » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Mat"
+explanation: "Le mot du cours est « Mat »."
+archived: false

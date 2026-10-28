@@ -1,0 +1,9 @@
+id: d8245b46-99ce-481e-a8eb-2d7c50be59fd
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Sifflet » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Whistle"
+explanation: "Le mot du cours est « Whistle »."
+archived: false

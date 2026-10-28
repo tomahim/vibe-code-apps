@@ -1,0 +1,9 @@
+id: beb4544b-5228-4c6f-901d-10fa00ec046a
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Phoque » (thème : Animals)."
+accepted_answers:
+  - "Seal"
+explanation: "Le mot du cours est « Seal »."
+archived: false

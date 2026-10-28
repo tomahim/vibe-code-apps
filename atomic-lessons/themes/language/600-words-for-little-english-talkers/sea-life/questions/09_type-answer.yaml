@@ -1,0 +1,9 @@
+id: 83cfbbee-f0a6-421a-a634-a1cb212155a5
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Loutre » (thème : Sea Life)."
+accepted_answers:
+  - "Otter"
+explanation: "Le mot du cours est « Otter »."
+archived: false

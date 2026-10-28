@@ -1,0 +1,9 @@
+id: ae46c8f1-2351-4804-a267-c05045bda508
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Petite voiture » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Car"
+explanation: "Le mot du cours est « Car »."
+archived: false

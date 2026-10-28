@@ -1,0 +1,9 @@
+id: fb1fe51f-7caa-4a54-8d9b-3b3733e758fb
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Constellation » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Constellation"
+explanation: "Le mot du cours est « Constellation »."
+archived: false

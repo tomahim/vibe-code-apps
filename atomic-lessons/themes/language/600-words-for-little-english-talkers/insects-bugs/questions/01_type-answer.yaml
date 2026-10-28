@@ -1,0 +1,9 @@
+id: 07b14c18-bb11-421a-afc7-7b221ef2f39f
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Coccinelle » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Ladybug"
+explanation: "Le mot du cours est « Ladybug »."
+archived: false

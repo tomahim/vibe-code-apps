@@ -1,0 +1,9 @@
+id: 0ce5d76f-3ee9-4bd6-9ea7-04da1519edac
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pâte » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Dough"
+explanation: "Le mot du cours est « Dough »."
+archived: false

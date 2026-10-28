@@ -1,0 +1,9 @@
+id: 18f76b9a-f948-4cc9-b115-c4a41d999517
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Place » (thème : Places in Town)."
+accepted_answers:
+  - "Square"
+explanation: "Le mot du cours est « Square »."
+archived: false

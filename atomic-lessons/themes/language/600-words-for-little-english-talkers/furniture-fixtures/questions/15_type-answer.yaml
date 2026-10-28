@@ -1,0 +1,9 @@
+id: 8ed122b6-3ca5-44c2-9344-4f641ebd1e6a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Porte-manteau » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Coat rack"
+explanation: "Le mot du cours est « Coat rack »."
+archived: false

@@ -1,0 +1,9 @@
+id: 2feb3f83-5888-4cdd-9001-01e77f944bed
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Bûche » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Log"
+explanation: "Le mot du cours est « Log »."
+archived: false

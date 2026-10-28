@@ -1,0 +1,672 @@
+workbook_row,category,item_number,kind,english,french,lesson_slug,card_position
+4,Animals,1,word,Elephant,Éléphant,animals,1
+5,Animals,1 (sound),sound,The elephant trumpets.,L'éléphant barrit.,animals,1
+6,Animals,2,word,Penguin,Manchot,animals,1
+7,Animals,2 (sound),sound,The penguin squawks.,Le manchot criaille.,animals,1
+8,Animals,3,word,Butterfly,Papillon,animals,1
+9,Animals,3 (sound),sound,The butterfly flutters silently.,Le papillon voltige silencieusement.,animals,1
+10,Animals,4,word,Squirrel,Écureuil,animals,1
+11,Animals,4 (sound),sound,The squirrel chitters.,L'écureuil bavarde.,animals,1
+12,Animals,5,word,Turtle,Tortue,animals,2
+13,Animals,5 (sound),sound,The turtle glides quietly.,La tortue glisse silencieusement.,animals,2
+14,Animals,6,word,Dog,Chien,animals,2
+15,Animals,6 (sound),sound,The dog barks.,Le chien aboie.,animals,2
+16,Animals,7,word,Cat,Chat,animals,2
+17,Animals,7 (sound),sound,The cat meows.,Le chat miaule.,animals,2
+18,Animals,8,word,Lion,Lion,animals,2
+19,Animals,8 (sound),sound,The lion roars.,Le lion rugit.,animals,2
+20,Animals,9,word,Duck,Canard,animals,3
+21,Animals,9 (sound),sound,The duck quacks.,Le canard cancane.,animals,3
+22,Animals,10,word,Frog,Grenouille,animals,3
+23,Animals,10 (sound),sound,The frog croaks.,La grenouille coasse.,animals,3
+24,Animals,11,word,Cow,Vache,animals,3
+25,Animals,11 (sound),sound,The cow moos.,La vache meugle.,animals,3
+26,Animals,12,word,Sheep,Mouton,animals,3
+27,Animals,12 (sound),sound,The sheep baas.,Le mouton bêle.,animals,3
+28,Animals,13,word,Rooster,Coq,animals,4
+29,Animals,13 (sound),sound,The rooster crows.,Le coq chante.,animals,4
+30,Animals,14,word,Pig,Cochon,animals,4
+31,Animals,14 (sound),sound,The pig oinks.,Le cochon grogne.,animals,4
+32,Animals,15,word,Horse,Cheval,animals,4
+33,Animals,15 (sound),sound,The horse neighs.,Le cheval hennit.,animals,4
+34,Animals,16,word,Owl,Hibou,animals,4
+35,Animals,16 (sound),sound,The owl hoots.,Le hibou hule.,animals,4
+36,Animals,17,word,Bee,Abeille,animals,5
+37,Animals,17 (sound),sound,The bee buzzes.,L'abeille bourdonne.,animals,5
+38,Animals,18,word,Wolf,Loup,animals,5
+39,Animals,18 (sound),sound,The wolf howls.,Le loup hurle.,animals,5
+40,Animals,19,word,Snake,Serpent,animals,5
+41,Animals,19 (sound),sound,The snake hisses.,Le serpent siffle.,animals,5
+42,Animals,20,word,Bear,Ours,animals,5
+43,Animals,20 (sound),sound,The bear growls.,L'ours meugle / gronde.,animals,5
+44,Animals,21,word,Donkey,Âne,animals,6
+45,Animals,21 (sound),sound,The donkey brays.,L'âne brait.,animals,6
+46,Animals,22,word,Goat,Chèvre,animals,6
+47,Animals,22 (sound),sound,The goat bleats.,La chèvre bêle.,animals,6
+48,Animals,23,word,Mouse,Souris,animals,6
+49,Animals,23 (sound),sound,The mouse squeaks.,La souris chicote / couine.,animals,6
+50,Animals,24,word,Crow,Corbeau,animals,6
+51,Animals,24 (sound),sound,The crow caws.,Le corbeau croasse.,animals,6
+52,Animals,25,word,Monkey,Singe,animals,7
+53,Animals,25 (sound),sound,The monkey chatters.,Le singe crie / bavarde.,animals,7
+54,Animals,26,word,Turkey,Dindon,animals,7
+55,Animals,26 (sound),sound,The turkey gobbles.,Le dindon glougloute.,animals,7
+56,Animals,27,word,Pigeon,Pigeon,animals,7
+57,Animals,27 (sound),sound,The pigeon coos.,Le pigeon roucoule.,animals,7
+58,Animals,28,word,Whale,Baleine,animals,7
+59,Animals,28 (sound),sound,The whale sings.,La baleine chante.,animals,7
+60,Animals,29,word,Tiger,Tigre,animals,8
+61,Animals,29 (sound),sound,The tiger roars.,Le tigre rugit.,animals,8
+62,Animals,30,word,Seal,Phoque,animals,8
+63,Animals,30 (sound),sound,The seal barks.,Le phoque meugle / aboie.,animals,8
+64,Weather & Sky,1,word,Cloud,Nuage,weather-sky,1
+65,Weather & Sky,2,word,Sun,Soleil,weather-sky,1
+66,Weather & Sky,3,word,Rain,Pluie,weather-sky,1
+67,Weather & Sky,4,word,Rainbow,Arc-en-ciel,weather-sky,1
+68,Weather & Sky,5,word,Star,Étoile,weather-sky,2
+69,Weather & Sky,6,word,Moon,Lune,weather-sky,2
+70,Weather & Sky,7,word,Puddle,Flaque d'eau,weather-sky,2
+71,Weather & Sky,8,word,Lightning,Éclair,weather-sky,2
+72,Weather & Sky,9,word,Thunder,Tonnerre,weather-sky,3
+73,Weather & Sky,10,word,Snow,Neige,weather-sky,3
+74,Weather & Sky,11,word,Snowflake,Flocon de neige,weather-sky,3
+75,Weather & Sky,12,word,Wind,Vent,weather-sky,3
+76,Weather & Sky,13,word,Storm,Tempête,weather-sky,4
+77,Weather & Sky,14,word,Fog,Brouillard,weather-sky,4
+78,Weather & Sky,15,word,Sky,Ciel,weather-sky,4
+79,Weather & Sky,16,word,Sunrise,Lever de soleil,weather-sky,4
+80,Weather & Sky,17,word,Sunset,Coucher de soleil,weather-sky,5
+81,Weather & Sky,18,word,Hail,Grêle,weather-sky,5
+82,Weather & Sky,19,word,Breeze,Brise,weather-sky,5
+83,Weather & Sky,20,word,Shadow,Ombre,weather-sky,5
+84,Weather & Sky,21,word,Comet,Comète,weather-sky,6
+85,Weather & Sky,22,word,Meteor,Météore,weather-sky,6
+86,Weather & Sky,23,word,Air,Air,weather-sky,6
+87,Weather & Sky,24,word,Frost,Givre,weather-sky,6
+88,Weather & Sky,25,word,Icicle,Glaçon,weather-sky,7
+89,Weather & Sky,26,word,Dewdrop,Goutte de rosée,weather-sky,7
+90,Weather & Sky,27,word,Tornado,Tornade,weather-sky,7
+91,Weather & Sky,28,word,Overcast,Ciel couvert,weather-sky,7
+92,Weather & Sky,29,word,Ray,Rayon,weather-sky,8
+93,Weather & Sky,30,word,Gale,Bourrasque,weather-sky,8
+94,Sea Life,1,word,Dolphin,Dauphin,sea-life,1
+95,Sea Life,1 (sound),sound,The dolphin clicks.,Le dauphin cliquette.,sea-life,1
+96,Sea Life,2,word,Starfish,Étoile de mer,sea-life,1
+97,Sea Life,3,word,Crab,Crabe,sea-life,1
+98,Sea Life,4,word,Octopus,Pieuvre,sea-life,1
+99,Sea Life,5,word,Seashell,Coquillage,sea-life,2
+100,Sea Life,6,word,Whale,Baleine,sea-life,2
+101,Sea Life,6 (sound),sound,The whale sings.,La baleine chante.,sea-life,2
+102,Sea Life,7,word,Shark,Requin,sea-life,2
+103,Sea Life,8,word,Jellyfish,Méduse,sea-life,2
+104,Sea Life,9,word,Turtle,Tortue de mer,sea-life,3
+105,Sea Life,10,word,Seaweed,Algue,sea-life,3
+106,Sea Life,11,word,Coral,Corail,sea-life,3
+107,Sea Life,12,word,Seahorse,Hippocampe,sea-life,3
+108,Sea Life,13,word,Lobster,Homard,sea-life,4
+109,Sea Life,14,word,Seal,Phoque,sea-life,4
+110,Sea Life,14 (sound),sound,The seal barks.,Le phoque aboie.,sea-life,4
+111,Sea Life,15,word,Walrus,Morse,sea-life,4
+112,Sea Life,16,word,Squid,Calmar,sea-life,4
+113,Sea Life,17,word,Otter,Loutre,sea-life,5
+114,Sea Life,18,word,Shrimp,Crevette,sea-life,5
+115,Sea Life,19,word,Clam,Palourde,sea-life,5
+116,Sea Life,20,word,Oyster,Huître,sea-life,5
+117,Sea Life,21,word,Ray,Raie,sea-life,6
+118,Sea Life,22,word,Eel,Anguille,sea-life,6
+119,Sea Life,23,word,Penguin,Manchot,sea-life,6
+120,Sea Life,23 (sound),sound,The penguin squawks.,Le manchot criaille.,sea-life,6
+121,Sea Life,24,word,Anchor,Ancre,sea-life,6
+122,Sea Life,25,word,Submarine,Sous-marin,sea-life,7
+123,Sea Life,26,word,Island,Île,sea-life,7
+124,Sea Life,27,word,Wave,Vague,sea-life,7
+125,Sea Life,28,word,Reef,Récif,sea-life,7
+126,Sea Life,29,word,Barnacle,Anatife,sea-life,8
+127,Sea Life,30,word,Sponge,Éponge,sea-life,8
+128,Insects & Bugs,1,word,Ladybug,Coccinelle,insects-bugs,1
+129,Insects & Bugs,2,word,Caterpillar,Chenille,insects-bugs,1
+130,Insects & Bugs,3,word,Bee,Abeille,insects-bugs,1
+131,Insects & Bugs,3 (sound),sound,The bee buzzes.,L'abeille bourdonne.,insects-bugs,1
+132,Insects & Bugs,4,word,Ant,Fourmi,insects-bugs,1
+133,Insects & Bugs,5,word,Snail,Escargot,insects-bugs,2
+134,Insects & Bugs,6,word,Butterfly,Papillon,insects-bugs,2
+135,Insects & Bugs,7,word,Dragonfly,Libellule,insects-bugs,2
+136,Insects & Bugs,8,word,Grasshopper,Sauterelle,insects-bugs,2
+137,Insects & Bugs,8 (sound),sound,The grasshopper chirps.,La sauterelle stridule.,insects-bugs,2
+138,Insects & Bugs,9,word,Spider,Araignée,insects-bugs,3
+139,Insects & Bugs,10,word,Beetle,Mape,insects-bugs,3
+140,Insects & Bugs,11,word,Firefly,Luciole,insects-bugs,3
+141,Insects & Bugs,12,word,Mosquito,Moustique,insects-bugs,3
+142,Insects & Bugs,12 (sound),sound,The mosquito whines.,Le moustique bourdonne.,insects-bugs,3
+143,Insects & Bugs,13,word,Cricket,Grillon,insects-bugs,4
+144,Insects & Bugs,13 (sound),sound,The cricket chirps.,Le grillon stridule.,insects-bugs,4
+145,Insects & Bugs,14,word,Fly,Mouche,insects-bugs,4
+146,Insects & Bugs,14 (sound),sound,The fly buzzes.,La mouche bourdonne.,insects-bugs,4
+147,Insects & Bugs,15,word,Wasp,Guêpe,insects-bugs,4
+148,Insects & Bugs,15 (sound),sound,The wasp buzzes.,La guêpe bourdonne.,insects-bugs,4
+149,Insects & Bugs,16,word,Moth,Papillon de nuit,insects-bugs,4
+150,Insects & Bugs,17,word,Worm,Ver,insects-bugs,5
+151,Insects & Bugs,18,word,Centipede,Mille-pattes,insects-bugs,5
+152,Insects & Bugs,19,word,Slug,Limace,insects-bugs,5
+153,Insects & Bugs,20,word,Bumblebee,Bourdon,insects-bugs,5
+154,Insects & Bugs,20 (sound),sound,The bumblebee hums.,Le bourdon bourdonne.,insects-bugs,5
+155,Insects & Bugs,21,word,Mantid,Mante religieuse,insects-bugs,6
+156,Insects & Bugs,22,word,Flea,Puce,insects-bugs,6
+157,Insects & Bugs,23,word,Tick,Tique,insects-bugs,6
+158,Insects & Bugs,24,word,Cocoon,Cocon,insects-bugs,6
+159,Insects & Bugs,25,word,Hive,Ruche,insects-bugs,7
+160,Insects & Bugs,26,word,Web,Toile d'araignée,insects-bugs,7
+161,Insects & Bugs,27,word,Antenna,Antenne,insects-bugs,7
+162,Insects & Bugs,28,word,Grub,Larve,insects-bugs,7
+163,Insects & Bugs,29,word,Gnat,Moucheron,insects-bugs,8
+164,Insects & Bugs,30,word,Shell,Coquille,insects-bugs,8
+165,Plant & Forest Life,1,word,Leaf,Feuille,plant-forest-life,1
+166,Plant & Forest Life,2,word,Acorn,Gland,plant-forest-life,1
+167,Plant & Forest Life,3,word,Pinecone,Pomme de pin,plant-forest-life,1
+168,Plant & Forest Life,4,word,Mushroom,Champignon,plant-forest-life,1
+169,Plant & Forest Life,5,word,Flower,Fleur,plant-forest-life,2
+170,Plant & Forest Life,6,word,Tree,Arbre,plant-forest-life,2
+171,Plant & Forest Life,7,word,Branch,Branche,plant-forest-life,2
+172,Plant & Forest Life,8,word,Bark,Écorce,plant-forest-life,2
+173,Plant & Forest Life,9,word,Root,Racine,plant-forest-life,3
+174,Plant & Forest Life,10,word,Twig,Brindille,plant-forest-life,3
+175,Plant & Forest Life,11,word,Sprout,Pousse,plant-forest-life,3
+176,Plant & Forest Life,12,word,Bush,Buisson,plant-forest-life,3
+177,Plant & Forest Life,13,word,Moss,Mousse,plant-forest-life,4
+178,Plant & Forest Life,14,word,Fern,Fougère,plant-forest-life,4
+179,Plant & Forest Life,15,word,Seed,Graine,plant-forest-life,4
+180,Plant & Forest Life,16,word,Thorn,Épine,plant-forest-life,4
+181,Plant & Forest Life,17,word,Log,Bûche,plant-forest-life,5
+182,Plant & Forest Life,18,word,Stump,Souche,plant-forest-life,5
+183,Plant & Forest Life,19,word,Trunk,Tronc,plant-forest-life,5
+184,Plant & Forest Life,20,word,Petal,Pétale,plant-forest-life,5
+185,Plant & Forest Life,21,word,Stem,Tige,plant-forest-life,6
+186,Plant & Forest Life,22,word,Vine,Vigne,plant-forest-life,6
+187,Plant & Forest Life,23,word,Bramble,Ronce,plant-forest-life,6
+188,Plant & Forest Life,24,word,Grass,Herbe,plant-forest-life,6
+189,Plant & Forest Life,25,word,Clover,Trèfle,plant-forest-life,7
+190,Plant & Forest Life,26,word,Berry,Baie,plant-forest-life,7
+191,Plant & Forest Life,27,word,Nut,Noix,plant-forest-life,7
+192,Plant & Forest Life,28,word,Evergreen,Arbre à feuilles persistantes,plant-forest-life,7
+193,Plant & Forest Life,29,word,Pine,Pin,plant-forest-life,8
+194,Plant & Forest Life,30,word,Blossom,Fleur d'arbre,plant-forest-life,8
+195,Kitchenware & Utensils,1,word,Spoon,Cuillère,kitchenware-utensils,1
+196,Kitchenware & Utensils,2,word,Fork,Fourchette,kitchenware-utensils,1
+197,Kitchenware & Utensils,3,word,Knife,Couteau,kitchenware-utensils,1
+198,Kitchenware & Utensils,4,word,Mug,Tasse,kitchenware-utensils,1
+199,Kitchenware & Utensils,5,word,Bowl,Bol,kitchenware-utensils,2
+200,Kitchenware & Utensils,6,word,Teapot,Théière,kitchenware-utensils,2
+201,Kitchenware & Utensils,7,word,Napkin,Serviette,kitchenware-utensils,2
+202,Kitchenware & Utensils,8,word,Plate,Assiette,kitchenware-utensils,2
+203,Kitchenware & Utensils,9,word,Cup,Gobelet,kitchenware-utensils,3
+204,Kitchenware & Utensils,10,word,Glass,Verre,kitchenware-utensils,3
+205,Kitchenware & Utensils,11,word,Pot,Faitout,kitchenware-utensils,3
+206,Kitchenware & Utensils,12,word,Pan,Poêle,kitchenware-utensils,3
+207,Kitchenware & Utensils,13,word,Kettle,Bouilloire,kitchenware-utensils,4
+208,Kitchenware & Utensils,14,word,Ladle,Louche,kitchenware-utensils,4
+209,Kitchenware & Utensils,15,word,Spatula,Spatule,kitchenware-utensils,4
+210,Kitchenware & Utensils,16,word,Whisk,Fouet,kitchenware-utensils,4
+211,Kitchenware & Utensils,17,word,Pitcher,Carafe,kitchenware-utensils,5
+212,Kitchenware & Utensils,18,word,Tray,Plateau,kitchenware-utensils,5
+213,Kitchenware & Utensils,19,word,Jar,Bocal,kitchenware-utensils,5
+214,Kitchenware & Utensils,20,word,Bottle,Bouteille,kitchenware-utensils,5
+215,Kitchenware & Utensils,21,word,Rolling pin,Rouleau à pâtisserie,kitchenware-utensils,6
+216,Kitchenware & Utensils,22,word,Peeler,Éplucheur,kitchenware-utensils,6
+217,Kitchenware & Utensils,23,word,Grater,Râpe,kitchenware-utensils,6
+218,Kitchenware & Utensils,24,word,Colander,Passoire,kitchenware-utensils,6
+219,Kitchenware & Utensils,25,word,Funnel,Entonnoir,kitchenware-utensils,7
+220,Kitchenware & Utensils,26,word,Apron,Tablier,kitchenware-utensils,7
+221,Kitchenware & Utensils,27,word,Tongs,Pince,kitchenware-utensils,7
+222,Kitchenware & Utensils,28,word,Timer,Minuteur,kitchenware-utensils,7
+223,Kitchenware & Utensils,29,word,Scales,Balance,kitchenware-utensils,8
+224,Kitchenware & Utensils,30,word,Straw,Paille,kitchenware-utensils,8
+225,Clothing & Gear,1,word,Boots,Bottes,clothing-gear,1
+226,Clothing & Gear,2,word,Mittens,Moufles,clothing-gear,1
+227,Clothing & Gear,3,word,Hat,Chapeau,clothing-gear,1
+228,Clothing & Gear,4,word,Apron,Tablier,clothing-gear,1
+229,Clothing & Gear,5,word,Umbrella,Parapluie,clothing-gear,2
+230,Clothing & Gear,6,word,Socks,Chaussettes,clothing-gear,2
+231,Clothing & Gear,7,word,Shoes,Chaussures,clothing-gear,2
+232,Clothing & Gear,8,word,Pants,Pantalon,clothing-gear,2
+233,Clothing & Gear,9,word,Shirt,Chemise,clothing-gear,3
+234,Clothing & Gear,10,word,Jacket,Veste,clothing-gear,3
+235,Clothing & Gear,11,word,Coat,Manteau,clothing-gear,3
+236,Clothing & Gear,12,word,Sweater,Pull,clothing-gear,3
+237,Clothing & Gear,13,word,Dress,Robe,clothing-gear,4
+238,Clothing & Gear,14,word,Skirt,Jupe,clothing-gear,4
+239,Clothing & Gear,15,word,Scarf,Écharpe,clothing-gear,4
+240,Clothing & Gear,16,word,Gloves,Gants,clothing-gear,4
+241,Clothing & Gear,17,word,Belt,Ceinture,clothing-gear,5
+242,Clothing & Gear,18,word,Pajamas,Pyjama,clothing-gear,5
+243,Clothing & Gear,19,word,Cap,Casquette,clothing-gear,5
+244,Clothing & Gear,20,word,Vest,Gilet,clothing-gear,5
+245,Clothing & Gear,21,word,Overalls,Salopette,clothing-gear,6
+246,Clothing & Gear,22,word,Raincoat,Imperméable,clothing-gear,6
+247,Clothing & Gear,23,word,Sneakers,Baskets,clothing-gear,6
+248,Clothing & Gear,24,word,Sandal,Sandale,clothing-gear,6
+249,Clothing & Gear,25,word,Slippers,Chaussons,clothing-gear,7
+250,Clothing & Gear,26,word,Zip,Fermeture éclair,clothing-gear,7
+251,Clothing & Gear,27,word,Button,Bouton,clothing-gear,7
+252,Clothing & Gear,28,word,Pocket,Poche,clothing-gear,7
+253,Clothing & Gear,29,word,Badge,Badge,clothing-gear,8
+254,Clothing & Gear,30,word,Helmet,Casque,clothing-gear,8
+255,Furniture & Fixtures,1,word,Pillow,Oreiller,furniture-fixtures,1
+256,Furniture & Fixtures,2,word,Rug,Tapis,furniture-fixtures,1
+257,Furniture & Fixtures,3,word,Lamp,Lampe,furniture-fixtures,1
+258,Furniture & Fixtures,4,word,Mirror,Miroir,furniture-fixtures,1
+259,Furniture & Fixtures,5,word,Chair,Chaise,furniture-fixtures,2
+260,Furniture & Fixtures,6,word,Table,Table,furniture-fixtures,2
+261,Furniture & Fixtures,7,word,Bed,Lit,furniture-fixtures,2
+262,Furniture & Fixtures,8,word,Sofa,Canapé,furniture-fixtures,2
+263,Furniture & Fixtures,9,word,Desk,Bureau,furniture-fixtures,3
+264,Furniture & Fixtures,10,word,Shelf,Étagère,furniture-fixtures,3
+265,Furniture & Fixtures,11,word,Cabinet,Meuble,furniture-fixtures,3
+266,Furniture & Fixtures,12,word,Clock,Horloge,furniture-fixtures,3
+267,Furniture & Fixtures,13,word,Curtain,Rideau,furniture-fixtures,4
+268,Furniture & Fixtures,14,word,Cushion,Coussin,furniture-fixtures,4
+269,Furniture & Fixtures,15,word,Blanket,Couverture,furniture-fixtures,4
+270,Furniture & Fixtures,16,word,Drawer,Tiroir,furniture-fixtures,4
+271,Furniture & Fixtures,17,word,Door,Porte,furniture-fixtures,5
+272,Furniture & Fixtures,18,word,Window,Fenêtre,furniture-fixtures,5
+273,Furniture & Fixtures,19,word,Bench,Banc,furniture-fixtures,5
+274,Furniture & Fixtures,20,word,Stool,Tabouret,furniture-fixtures,5
+275,Furniture & Fixtures,21,word,Wardrobe,Armoire,furniture-fixtures,6
+276,Furniture & Fixtures,22,word,Bookcase,Bibliothèque,furniture-fixtures,6
+277,Furniture & Fixtures,23,word,Mattress,Matelas,furniture-fixtures,6
+278,Furniture & Fixtures,24,word,Hanger,Cintre,furniture-fixtures,6
+279,Furniture & Fixtures,25,word,Framed photo,Cadre photo,furniture-fixtures,7
+280,Furniture & Fixtures,26,word,Vase,Vase,furniture-fixtures,7
+281,Furniture & Fixtures,27,word,Chandelier,Lustre,furniture-fixtures,7
+282,Furniture & Fixtures,28,word,Fireplace,Cheminée,furniture-fixtures,7
+283,Furniture & Fixtures,29,word,Coat rack,Porte-manteau,furniture-fixtures,8
+284,Furniture & Fixtures,30,word,Tub,Baignoire,furniture-fixtures,8
+285,Toiletries & Bath Time,1,word,Soap,Savon,toiletries-bath-time,1
+286,Toiletries & Bath Time,2,word,Towel,Serviette de bain,toiletries-bath-time,1
+287,Toiletries & Bath Time,3,word,Toothbrush,Brosse à dents,toiletries-bath-time,1
+288,Toiletries & Bath Time,4,word,Bubble,Bulle,toiletries-bath-time,1
+289,Toiletries & Bath Time,5,word,Sponge,Éponge,toiletries-bath-time,2
+290,Toiletries & Bath Time,6,word,Shampoo,Shampooing,toiletries-bath-time,2
+291,Toiletries & Bath Time,7,word,Comb,Peigne,toiletries-bath-time,2
+292,Toiletries & Bath Time,8,word,Brush,Brosse,toiletries-bath-time,2
+293,Toiletries & Bath Time,9,word,Toothpaste,Dentifrice,toiletries-bath-time,3
+294,Toiletries & Bath Time,10,word,Bathtub,Baignoire,toiletries-bath-time,3
+295,Toiletries & Bath Time,11,word,Faucet,Robinet,toiletries-bath-time,3
+296,Toiletries & Bath Time,12,word,Duckie,Canard en plastique,toiletries-bath-time,3
+297,Toiletries & Bath Time,13,word,Washcloth,Gant de toilette,toiletries-bath-time,4
+298,Toiletries & Bath Time,14,word,Tissue,Mouchoir,toiletries-bath-time,4
+299,Toiletries & Bath Time,15,word,Loofah,Fleur de douche,toiletries-bath-time,4
+300,Toiletries & Bath Time,16,word,Floss,Fil dentaire,toiletries-bath-time,4
+301,Toiletries & Bath Time,17,word,Basin,Lavabo,toiletries-bath-time,5
+302,Toiletries & Bath Time,18,word,Drain,Siphon,toiletries-bath-time,5
+303,Toiletries & Bath Time,19,word,Mat,Tapis de bain,toiletries-bath-time,5
+304,Toiletries & Bath Time,20,word,Robe,Peignoir,toiletries-bath-time,5
+305,Toiletries & Bath Time,21,word,Powder,Poudre,toiletries-bath-time,6
+306,Toiletries & Bath Time,22,word,Lotion,Lotion,toiletries-bath-time,6
+307,Toiletries & Bath Time,23,word,Cup,Gobelet,toiletries-bath-time,6
+308,Toiletries & Bath Time,24,word,Ring,Anneau,toiletries-bath-time,6
+309,Toiletries & Bath Time,25,word,Splash,Éclaboussure,toiletries-bath-time,7
+310,Toiletries & Bath Time,26,word,Mirror,Miroir,toiletries-bath-time,7
+311,Toiletries & Bath Time,27,word,Bottle,Flacon,toiletries-bath-time,7
+312,Toiletries & Bath Time,28,word,Pump,Pompe,toiletries-bath-time,7
+313,Toiletries & Bath Time,29,word,Slippers,Chaussons,toiletries-bath-time,8
+314,Toiletries & Bath Time,30,word,Cap,Bonnet de douche,toiletries-bath-time,8
+315,Toys & Play Objects,1,word,Block,Cube de construction,toys-play-objects,1
+316,Toys & Play Objects,2,word,Marble,Bille,toys-play-objects,1
+317,Toys & Play Objects,3,word,Kite,Cerf-volant,toys-play-objects,1
+318,Toys & Play Objects,4,word,Balloon,Ballon,toys-play-objects,1
+319,Toys & Play Objects,5,word,Doll,Poupée,toys-play-objects,2
+320,Toys & Play Objects,6,word,Teddy bear,Ours en peluche,toys-play-objects,2
+321,Toys & Play Objects,7,word,Puzzle,Puzzle,toys-play-objects,2
+322,Toys & Play Objects,8,word,Robot,Robot,toys-play-objects,2
+323,Toys & Play Objects,9,word,Yo-yo,Yo-yo,toys-play-objects,3
+324,Toys & Play Objects,10,word,Top,Toupie,toys-play-objects,3
+325,Toys & Play Objects,11,word,Rattle,Hochet,toys-play-objects,3
+326,Toys & Play Objects,12,word,Train,Petit train,toys-play-objects,3
+327,Toys & Play Objects,13,word,Car,Petite voiture,toys-play-objects,4
+328,Toys & Play Objects,14,word,Ball,Balle,toys-play-objects,4
+329,Toys & Play Objects,15,word,Frisbee,Frisbee,toys-play-objects,4
+330,Toys & Play Objects,16,word,Domino,Domino,toys-play-objects,4
+331,Toys & Play Objects,17,word,Puppet,Marionnette,toys-play-objects,5
+332,Toys & Play Objects,18,word,Dice,Dé,toys-play-objects,5
+333,Toys & Play Objects,19,word,Whistle,Sifflet,toys-play-objects,5
+334,Toys & Play Objects,20,word,Pinwheel,Moulin à vent,toys-play-objects,5
+335,Toys & Play Objects,21,word,Drum,Tambour,toys-play-objects,6
+336,Toys & Play Objects,22,word,Slinky,Ondamania / Onduleux,toys-play-objects,6
+337,Toys & Play Objects,23,word,Clay,Pâte à modeler,toys-play-objects,6
+338,Toys & Play Objects,24,word,Crayon,Crayon de couleur,toys-play-objects,6
+339,Toys & Play Objects,25,word,Dollhouse,Maison de poupée,toys-play-objects,7
+340,Toys & Play Objects,26,word,Figurine,Figurine,toys-play-objects,7
+341,Toys & Play Objects,27,word,Cart,Chariot,toys-play-objects,7
+342,Toys & Play Objects,28,word,Scooter,Trottinette,toys-play-objects,7
+343,Toys & Play Objects,29,word,Hoop,Cerceau,toys-play-objects,8
+344,Toys & Play Objects,30,word,Cards,Cartes,toys-play-objects,8
+345,Musical Instruments,1,word,Drum,Tambour,musical-instruments,1
+346,Musical Instruments,2,word,Bell,Cloche,musical-instruments,1
+347,Musical Instruments,3,word,Flute,Flûte,musical-instruments,1
+348,Musical Instruments,4,word,Shaker,Maracas / Shaker,musical-instruments,1
+349,Musical Instruments,5,word,Piano,Piano,musical-instruments,2
+350,Musical Instruments,6,word,Guitar,Guitare,musical-instruments,2
+351,Musical Instruments,7,word,Violin,Violon,musical-instruments,2
+352,Musical Instruments,8,word,Trumpet,Trompette,musical-instruments,2
+353,Musical Instruments,9,word,Xylophone,Xylophone,musical-instruments,3
+354,Musical Instruments,10,word,Tambourine,Tambour de basque,musical-instruments,3
+355,Musical Instruments,11,word,Triangle,Triangle,musical-instruments,3
+356,Musical Instruments,12,word,Maracas,Maracas,musical-instruments,3
+357,Musical Instruments,13,word,Saxophone,Saxophone,musical-instruments,4
+358,Musical Instruments,14,word,Harmonica,Harmonica,musical-instruments,4
+359,Musical Instruments,15,word,Ukulele,Ukulélé,musical-instruments,4
+360,Musical Instruments,16,word,Cymbal,Cymbale,musical-instruments,4
+361,Musical Instruments,17,word,Harp,Harpe,musical-instruments,5
+362,Musical Instruments,18,word,Clarinet,Clarinette,musical-instruments,5
+363,Musical Instruments,19,word,Accordion,Accordéon,musical-instruments,5
+364,Musical Instruments,20,word,Banjo,Banjo,musical-instruments,5
+365,Musical Instruments,21,word,Bugle,Clairon,musical-instruments,6
+366,Musical Instruments,22,word,Gong,Gong,musical-instruments,6
+367,Musical Instruments,23,word,Whistle,Sifflet,musical-instruments,6
+368,Musical Instruments,24,word,Keyboard,Clavier synthétiseur,musical-instruments,6
+369,Musical Instruments,25,word,Cello,Violoncelle,musical-instruments,7
+370,Musical Instruments,26,word,Tuba,Tuba,musical-instruments,7
+371,Musical Instruments,27,word,Organ,Orgue,musical-instruments,7
+372,Musical Instruments,28,word,Recorder,Flûte à bec,musical-instruments,7
+373,Musical Instruments,29,word,Castanets,Castagnettes,musical-instruments,8
+374,Musical Instruments,30,word,Chimes,Carillon,musical-instruments,8
+375,Art Supplies,1,word,Crayon,Crayon de cire,art-supplies,1
+376,Art Supplies,2,word,Paintbrush,Pinceau,art-supplies,1
+377,Art Supplies,3,word,Chalk,Craie,art-supplies,1
+378,Art Supplies,4,word,Sticker,Autocollant,art-supplies,1
+379,Art Supplies,5,word,Ribbon,Ruban,art-supplies,2
+380,Art Supplies,6,word,Paint,Peinture,art-supplies,2
+381,Art Supplies,7,word,Paper,Papier,art-supplies,2
+382,Art Supplies,8,word,Pencil,Crayon à papier,art-supplies,2
+383,Art Supplies,9,word,Scissors,Ciseaux,art-supplies,3
+384,Art Supplies,10,word,Glue,Colle,art-supplies,3
+385,Art Supplies,11,word,Canvas,Toile,art-supplies,3
+386,Art Supplies,12,word,Marker,Feutre,art-supplies,3
+387,Art Supplies,13,word,Eraser,Gomme,art-supplies,4
+388,Art Supplies,14,word,Ruler,Règle,art-supplies,4
+389,Art Supplies,15,word,Tape,Ruban adhésif,art-supplies,4
+390,Art Supplies,16,word,Palette,Palette,art-supplies,4
+391,Art Supplies,17,word,Glitter,Paillettes,art-supplies,5
+392,Art Supplies,18,word,Stamp,Tampon,art-supplies,5
+393,Art Supplies,19,word,Clay,Argile,art-supplies,5
+394,Art Supplies,20,word,Folder,Pochette,art-supplies,5
+395,Art Supplies,21,word,Notebook,Cahier,art-supplies,6
+396,Art Supplies,22,word,Pen,Stylo,art-supplies,6
+397,Art Supplies,23,word,Easel,Chevalet,art-supplies,6
+398,Art Supplies,24,word,Charcoal,Fusain,art-supplies,6
+399,Art Supplies,25,word,Stencil,Pochoir,art-supplies,7
+400,Art Supplies,26,word,Feather,Plume,art-supplies,7
+401,Art Supplies,27,word,Yarn,Fil / Laine,art-supplies,7
+402,Art Supplies,28,word,Bead,Perle,art-supplies,7
+403,Art Supplies,29,word,Brush,Brosse,art-supplies,8
+404,Art Supplies,30,word,Stitch,Point de couture,art-supplies,8
+405,Bakery & Grains,1,word,Bread,Pain,bakery-grains,1
+406,Bakery & Grains,2,word,Pancake,Pancake,bakery-grains,1
+407,Bakery & Grains,3,word,Cookie,Biscuit,bakery-grains,1
+408,Bakery & Grains,4,word,Muffin,Muffin,bakery-grains,1
+409,Bakery & Grains,5,word,Pretzel,Bretzel,bakery-grains,2
+410,Bakery & Grains,6,word,Cake,Gâteau,bakery-grains,2
+411,Bakery & Grains,7,word,Pie,Tarte,bakery-grains,2
+412,Bakery & Grains,8,word,Bagel,Bagel,bakery-grains,2
+413,Bakery & Grains,9,word,Toast,Pain grillé,bakery-grains,3
+414,Bakery & Grains,10,word,Roll,Petit pain,bakery-grains,3
+415,Bakery & Grains,11,word,Croissant,Croissant,bakery-grains,3
+416,Bakery & Grains,12,word,Waffle,Gaufre,bakery-grains,3
+417,Bakery & Grains,13,word,Donut,Beignet,bakery-grains,4
+418,Bakery & Grains,14,word,Cracker,Crackers,bakery-grains,4
+419,Bakery & Grains,15,word,Biscuit,Biscuit,bakery-grains,4
+420,Bakery & Grains,16,word,Tart,Tartelette,bakery-grains,4
+421,Bakery & Grains,17,word,Baguette,Baguette,bakery-grains,5
+422,Bakery & Grains,18,word,Loaf,Miche de pain,bakery-grains,5
+423,Bakery & Grains,19,word,Oatmeal,Flocons d'avoine,bakery-grains,5
+424,Bakery & Grains,20,word,Cereal,Céréales,bakery-grains,5
+425,Bakery & Grains,21,word,Noodle,Nouille,bakery-grains,6
+426,Bakery & Grains,22,word,Pasta,Pâtes,bakery-grains,6
+427,Bakery & Grains,23,word,Rice,Riz,bakery-grains,6
+428,Bakery & Grains,24,word,Flour,Farine,bakery-grains,6
+429,Bakery & Grains,25,word,Dough,Pâte,bakery-grains,7
+430,Bakery & Grains,26,word,Cupcake,Cupcake,bakery-grains,7
+431,Bakery & Grains,27,word,Bun,Brioche / Pain burger,bakery-grains,7
+432,Bakery & Grains,28,word,Scone,Scone,bakery-grains,7
+433,Bakery & Grains,29,word,Crust,Croûte,bakery-grains,8
+434,Bakery & Grains,30,word,Crumpet,Crumpet,bakery-grains,8
+435,Dairy & Snacks,1,word,Cheese,Fromage,dairy-snacks,1
+436,Dairy & Snacks,2,word,Yogurt,Yaourt,dairy-snacks,1
+437,Dairy & Snacks,3,word,Popcorn,Pop-corn,dairy-snacks,1
+438,Dairy & Snacks,4,word,Cracker,Biscuit salé,dairy-snacks,1
+439,Dairy & Snacks,5,word,Nut,Noix,dairy-snacks,2
+440,Dairy & Snacks,6,word,Milk,Lait,dairy-snacks,2
+441,Dairy & Snacks,7,word,Butter,Beurre,dairy-snacks,2
+442,Dairy & Snacks,8,word,Ice cream,Glace,dairy-snacks,2
+443,Dairy & Snacks,9,word,Cream,Crème,dairy-snacks,3
+444,Dairy & Snacks,10,word,Pudding,Crème dessert,dairy-snacks,3
+445,Dairy & Snacks,11,word,Custard,Flan,dairy-snacks,3
+446,Dairy & Snacks,12,word,Dip,Sauce à tremper,dairy-snacks,3
+447,Dairy & Snacks,13,word,Chips,Chips,dairy-snacks,4
+448,Dairy & Snacks,14,word,Raisin,Raisin sec,dairy-snacks,4
+449,Dairy & Snacks,15,word,Pretzel,Bretzel salé,dairy-snacks,4
+450,Dairy & Snacks,16,word,Granola,Muesli croustillant,dairy-snacks,4
+451,Dairy & Snacks,17,word,Fruit bar,Barre aux fruits,dairy-snacks,5
+452,Dairy & Snacks,18,word,Smoothie,Smoothie,dairy-snacks,5
+453,Dairy & Snacks,19,word,Milkshake,Milk-shake,dairy-snacks,5
+454,Dairy & Snacks,20,word,Cheese stick,Bâtonnet de fromage,dairy-snacks,5
+455,Dairy & Snacks,21,word,Cashew,Noix de cajou,dairy-snacks,6
+456,Dairy & Snacks,22,word,Almond,Amande,dairy-snacks,6
+457,Dairy & Snacks,23,word,Peanut,Cacahuète,dairy-snacks,6
+458,Dairy & Snacks,24,word,Walnut,Noix,dairy-snacks,6
+459,Dairy & Snacks,25,word,Sunflower seed,Graine de tournesol,dairy-snacks,7
+460,Dairy & Snacks,26,word,Curd,Caillé,dairy-snacks,7
+461,Dairy & Snacks,27,word,Whipped cream,Crème chantilly,dairy-snacks,7
+462,Dairy & Snacks,28,word,Slice,Tranche,dairy-snacks,7
+463,Dairy & Snacks,29,word,Bite,Bouchée,dairy-snacks,8
+464,Dairy & Snacks,30,word,Cube,Dé de fromage,dairy-snacks,8
+465,Places in Town,1,word,Park,Parc,places-in-town,1
+466,Places in Town,2,word,Library,Bibliothèque,places-in-town,1
+467,Places in Town,3,word,Bakery,Boulangerie,places-in-town,1
+468,Places in Town,4,word,Farm,Ferme,places-in-town,1
+469,Places in Town,5,word,Zoo,Zoo,places-in-town,2
+470,Places in Town,6,word,School,École,places-in-town,2
+471,Places in Town,7,word,Store,Magasin,places-in-town,2
+472,Places in Town,8,word,Hospital,Hôpital,places-in-town,2
+473,Places in Town,9,word,Station,Gare,places-in-town,3
+474,Places in Town,10,word,Museum,Musée,places-in-town,3
+475,Places in Town,11,word,Market,Marché,places-in-town,3
+476,Places in Town,12,word,Playground,Aire de jeux,places-in-town,3
+477,Places in Town,13,word,Fire station,Caserne de pompiers,places-in-town,4
+478,Places in Town,14,word,Police station,Commissariat,places-in-town,4
+479,Places in Town,15,word,Post office,Bureau de poste,places-in-town,4
+480,Places in Town,16,word,Cafe,Café,places-in-town,4
+481,Places in Town,17,word,Restaurant,Restaurant,places-in-town,5
+482,Places in Town,18,word,Cinema,Cinéma,places-in-town,5
+483,Places in Town,19,word,Bank,Banque,places-in-town,5
+484,Places in Town,20,word,Hotel,Hôtel,places-in-town,5
+485,Places in Town,21,word,Airport,Aéroport,places-in-town,6
+486,Places in Town,22,word,Garden,Jardin,places-in-town,6
+487,Places in Town,23,word,Beach,Plage,places-in-town,6
+488,Places in Town,24,word,Pool,Piscine,places-in-town,6
+489,Places in Town,25,word,Gym,Gymnase,places-in-town,7
+490,Places in Town,26,word,Shop,Boutique,places-in-town,7
+491,Places in Town,27,word,Bridge,Pont,places-in-town,7
+492,Places in Town,28,word,Street,Rue,places-in-town,7
+493,Places in Town,29,word,Square,Place,places-in-town,8
+494,Places in Town,30,word,Tower,Tour,places-in-town,8
+495,Community Helpers,1,word,Doctor,Médecin,community-helpers,1
+496,Community Helpers,2,word,Firefighter,Pompier,community-helpers,1
+497,Community Helpers,3,word,Baker,Boulanger,community-helpers,1
+498,Community Helpers,4,word,Gardener,Jardinier,community-helpers,1
+499,Community Helpers,5,word,Pilot,Pilote,community-helpers,2
+500,Community Helpers,6,word,Teacher,Enseignant(e),community-helpers,2
+501,Community Helpers,7,word,Nurse,Infirmier(ère),community-helpers,2
+502,Community Helpers,8,word,Police officer,Policier(ère),community-helpers,2
+503,Community Helpers,9,word,Farmer,Agriculteur(trice),community-helpers,3
+504,Community Helpers,10,word,Vet,Vétérinaire,community-helpers,3
+505,Community Helpers,11,word,Driver,Chauffeur,community-helpers,3
+506,Community Helpers,12,word,Postal worker,Facteur(trice),community-helpers,3
+507,Community Helpers,13,word,Chef,Chef cuisinier,community-helpers,4
+508,Community Helpers,14,word,Builder,Constructeur,community-helpers,4
+509,Community Helpers,15,word,Dentist,Dentiste,community-helpers,4
+510,Community Helpers,16,word,Mechanic,Mécanicien(ne),community-helpers,4
+511,Community Helpers,17,word,Painter,Peintre,community-helpers,5
+512,Community Helpers,18,word,Lifeguard,Maître-nageur,community-helpers,5
+513,Community Helpers,19,word,Astronaut,Astronaute,community-helpers,5
+514,Community Helpers,20,word,Librarian,Bibliothécaire,community-helpers,5
+515,Community Helpers,21,word,Captain,Capitaine,community-helpers,6
+516,Community Helpers,22,word,Trash collector,Éboueur,community-helpers,6
+517,Community Helpers,23,word,Plumber,Plombier,community-helpers,6
+518,Community Helpers,24,word,Electrician,Électricien,community-helpers,6
+519,Community Helpers,25,word,Tailor,Tailleur / Couturier,community-helpers,7
+520,Community Helpers,26,word,Barber,Coiffeur,community-helpers,7
+521,Community Helpers,27,word,Crossing guard,Agent de circulation,community-helpers,7
+522,Community Helpers,28,word,Scientist,Scientifique,community-helpers,7
+523,Community Helpers,29,word,Artist,Artiste,community-helpers,8
+524,Community Helpers,30,word,Musician,Musicien(ne),community-helpers,8
+525,Parts of a House,1,word,Door,Porte,parts-of-a-house,1
+526,Parts of a House,2,word,Window,Fenêtre,parts-of-a-house,1
+527,Parts of a House,3,word,Roof,Toit,parts-of-a-house,1
+528,Parts of a House,4,word,Stairs,Escalier,parts-of-a-house,1
+529,Parts of a House,5,word,Fence,Clôture,parts-of-a-house,2
+530,Parts of a House,6,word,Wall,Mur,parts-of-a-house,2
+531,Parts of a House,7,word,Floor,Sol,parts-of-a-house,2
+532,Parts of a House,8,word,Ceiling,Plafond,parts-of-a-house,2
+533,Parts of a House,9,word,Porch,Perron,parts-of-a-house,3
+534,Parts of a House,10,word,Chimney,Cheminée,parts-of-a-house,3
+535,Parts of a House,11,word,Balcony,Balcon,parts-of-a-house,3
+536,Parts of a House,12,word,Garage,Garage,parts-of-a-house,3
+537,Parts of a House,13,word,Garden,Jardin,parts-of-a-house,4
+538,Parts of a House,14,word,Gate,Portail,parts-of-a-house,4
+539,Parts of a House,15,word,Kitchen,Cuisine,parts-of-a-house,4
+540,Parts of a House,16,word,Bedroom,Chambre,parts-of-a-house,4
+541,Parts of a House,17,word,Bathroom,Salle de bain,parts-of-a-house,5
+542,Parts of a House,18,word,Hallway,Couloir,parts-of-a-house,5
+543,Parts of a House,19,word,Attic,Grenier,parts-of-a-house,5
+544,Parts of a House,20,word,Basement,Cave / Sous-sol,parts-of-a-house,5
+545,Parts of a House,21,word,Knob,Poignée de porte,parts-of-a-house,6
+546,Parts of a House,22,word,Lock,Serrure,parts-of-a-house,6
+547,Parts of a House,23,word,Step,Marche,parts-of-a-house,6
+548,Parts of a House,24,word,Patio,Patio,parts-of-a-house,6
+549,Parts of a House,25,word,Yard,Cour / Jardin,parts-of-a-house,7
+550,Parts of a House,26,word,Mailbox,Boîte aux lettres,parts-of-a-house,7
+551,Parts of a House,27,word,Shutters,Volets,parts-of-a-house,7
+552,Parts of a House,28,word,Gutter,Gouttière,parts-of-a-house,7
+553,Parts of a House,29,word,Path,Allée,parts-of-a-house,8
+554,Parts of a House,30,word,Threshold,Seuil,parts-of-a-house,8
+555,Body Parts,1,word,Elbow,Coude,body-parts,1
+556,Body Parts,2,word,Tummy,Ventre,body-parts,1
+557,Body Parts,3,word,Toes,Orteils,body-parts,1
+558,Body Parts,4,word,Chin,Menton,body-parts,1
+559,Body Parts,5,word,Knee,Genou,body-parts,2
+560,Body Parts,6,word,Head,Tête,body-parts,2
+561,Body Parts,7,word,Eye,Œil,body-parts,2
+562,Body Parts,8,word,Ear,Oreille,body-parts,2
+563,Body Parts,9,word,Nose,Nez,body-parts,3
+564,Body Parts,10,word,Mouth,Bouche,body-parts,3
+565,Body Parts,11,word,Hand,Main,body-parts,3
+566,Body Parts,12,word,Foot,Pied,body-parts,3
+567,Body Parts,13,word,Finger,Doigt,body-parts,4
+568,Body Parts,14,word,Arm,Bras,body-parts,4
+569,Body Parts,15,word,Leg,Jambe,body-parts,4
+570,Body Parts,16,word,Shoulder,Épaule,body-parts,4
+571,Body Parts,17,word,Cheek,Joue,body-parts,5
+572,Body Parts,18,word,Tongue,Langue,body-parts,5
+573,Body Parts,19,word,Teeth,Dents,body-parts,5
+574,Body Parts,20,word,Hair,Cheveux,body-parts,5
+575,Body Parts,21,word,Thumb,Pouce,body-parts,6
+576,Body Parts,22,word,Back,Dos,body-parts,6
+577,Body Parts,23,word,Neck,Cou,body-parts,6
+578,Body Parts,24,word,Belly button,Nombril,body-parts,6
+579,Body Parts,25,word,Wrist,Poignet,body-parts,7
+580,Body Parts,26,word,Ankle,Cheville,body-parts,7
+581,Body Parts,27,word,Forehead,Front,body-parts,7
+582,Body Parts,28,word,Eyelash,Cil,body-parts,7
+583,Body Parts,29,word,Nail,Ongle,body-parts,8
+584,Body Parts,30,word,Lip,Lèvre,body-parts,8
+585,Shapes & Structures,1,word,Circle,Cercle,shapes-structures,1
+586,Shapes & Structures,2,word,Pyramid,Pyramide,shapes-structures,1
+587,Shapes & Structures,3,word,Arch,Arche,shapes-structures,1
+588,Shapes & Structures,4,word,Bridge,Pont,shapes-structures,1
+589,Shapes & Structures,5,word,Tower,Tour,shapes-structures,2
+590,Shapes & Structures,6,word,Square,Carré,shapes-structures,2
+591,Shapes & Structures,7,word,Triangle,Triangle,shapes-structures,2
+592,Shapes & Structures,8,word,Star,Étoile,shapes-structures,2
+593,Shapes & Structures,9,word,Heart,Cœur,shapes-structures,3
+594,Shapes & Structures,10,word,Oval,Ovale,shapes-structures,3
+595,Shapes & Structures,11,word,Diamond,Losange,shapes-structures,3
+596,Shapes & Structures,12,word,Cube,Cube,shapes-structures,3
+597,Shapes & Structures,13,word,Sphere,Sphère,shapes-structures,4
+598,Shapes & Structures,14,word,Cone,Cône,shapes-structures,4
+599,Shapes & Structures,15,word,Cylinder,Cylindre,shapes-structures,4
+600,Shapes & Structures,16,word,Rectangle,Rectangle,shapes-structures,4
+601,Shapes & Structures,17,word,Dome,Dôme,shapes-structures,5
+602,Shapes & Structures,18,word,Wall,Mur,shapes-structures,5
+603,Shapes & Structures,19,word,Pillar,Pilier,shapes-structures,5
+604,Shapes & Structures,20,word,Tunnel,Tunnel,shapes-structures,5
+605,Shapes & Structures,21,word,Castle,Château,shapes-structures,6
+606,Shapes & Structures,22,word,House,Maison,shapes-structures,6
+607,Shapes & Structures,23,word,Monument,Monument,shapes-structures,6
+608,Shapes & Structures,24,word,Cross,Croix,shapes-structures,6
+609,Shapes & Structures,25,word,Spiral,Spirale,shapes-structures,7
+610,Shapes & Structures,26,word,Crescent,Croissant,shapes-structures,7
+611,Shapes & Structures,27,word,Box,Boîte,shapes-structures,7
+612,Shapes & Structures,28,word,Block,Bloc,shapes-structures,7
+613,Shapes & Structures,29,word,Ring,Anneau,shapes-structures,8
+614,Shapes & Structures,30,word,Zigzag,Zigzag,shapes-structures,8
+615,Tools & Machinery,1,word,Hammer,Marteau,tools-machinery,1
+616,Tools & Machinery,2,word,Shovel,Pelle,tools-machinery,1
+617,Tools & Machinery,3,word,Flashlight,Lampe de poche,tools-machinery,1
+618,Tools & Machinery,4,word,Wheel,Roue,tools-machinery,1
+619,Tools & Machinery,5,word,Magnet,Aimant,tools-machinery,2
+620,Tools & Machinery,6,word,Screwdriver,Tournevis,tools-machinery,2
+621,Tools & Machinery,7,word,Wrench,Clé à Molette,tools-machinery,2
+622,Tools & Machinery,8,word,Saw,Scie,tools-machinery,2
+623,Tools & Machinery,9,word,Pliers,Pince,tools-machinery,3
+624,Tools & Machinery,10,word,Rake,Râteau,tools-machinery,3
+625,Tools & Machinery,11,word,Broom,Balai,tools-machinery,3
+626,Tools & Machinery,12,word,Mop,Balai serpillère,tools-machinery,3
+627,Tools & Machinery,13,word,Bucket,Seau,tools-machinery,4
+628,Tools & Machinery,14,word,Ladder,Échelle,tools-machinery,4
+629,Tools & Machinery,15,word,Nail,Clou,tools-machinery,4
+630,Tools & Machinery,16,word,Screw,Vis,tools-machinery,4
+631,Tools & Machinery,17,word,Nut,Écrou,tools-machinery,5
+632,Tools & Machinery,18,word,Bolt,Boulon,tools-machinery,5
+633,Tools & Machinery,19,word,Drill,Perceuse,tools-machinery,5
+634,Tools & Machinery,20,word,Tape measure,Mètre ruban,tools-machinery,5
+635,Tools & Machinery,21,word,Crane,Grue,tools-machinery,6
+636,Tools & Machinery,22,word,Digger,Pelle mécanique,tools-machinery,6
+637,Tools & Machinery,23,word,Engine,Moteur,tools-machinery,6
+638,Tools & Machinery,24,word,Gear,Engrenage,tools-machinery,6
+639,Tools & Machinery,25,word,Lever,Levier,tools-machinery,7
+640,Tools & Machinery,26,word,Pulley,Poulie,tools-machinery,7
+641,Tools & Machinery,27,word,Pump,Pompe,tools-machinery,7
+642,Tools & Machinery,28,word,Scale,Balance,tools-machinery,7
+643,Tools & Machinery,29,word,Scissors,Ciseaux,tools-machinery,8
+644,Tools & Machinery,30,word,Tweezers,Pince à épiler,tools-machinery,8
+645,Cosmic & Outer Space,1,word,Moon,Lune,cosmic-outer-space,1
+646,Cosmic & Outer Space,2,word,Rocket,Fusée,cosmic-outer-space,1
+647,Cosmic & Outer Space,3,word,Planet,Planète,cosmic-outer-space,1
+648,Cosmic & Outer Space,4,word,Astronaut,Astronaute,cosmic-outer-space,1
+649,Cosmic & Outer Space,5,word,Comet,Comète,cosmic-outer-space,2
+650,Cosmic & Outer Space,6,word,Star,Étoile,cosmic-outer-space,2
+651,Cosmic & Outer Space,7,word,Sun,Soleil,cosmic-outer-space,2
+652,Cosmic & Outer Space,8,word,Spaceship,Vaisseau spatial,cosmic-outer-space,2
+653,Cosmic & Outer Space,9,word,Satellite,Satellite,cosmic-outer-space,3
+654,Cosmic & Outer Space,10,word,Telescope,Télescope,cosmic-outer-space,3
+655,Cosmic & Outer Space,11,word,Galaxy,Galaxie,cosmic-outer-space,3
+656,Cosmic & Outer Space,12,word,Meteor,Météorite,cosmic-outer-space,3
+657,Cosmic & Outer Space,13,word,Alien,Extraterrestre,cosmic-outer-space,4
+658,Cosmic & Outer Space,14,word,Crater,Cratère,cosmic-outer-space,4
+659,Cosmic & Outer Space,15,word,Orbit,Orbite,cosmic-outer-space,4
+660,Cosmic & Outer Space,16,word,Gravity,Gravité,cosmic-outer-space,4
+661,Cosmic & Outer Space,17,word,Space suit,Combinaison spatiale,cosmic-outer-space,5
+662,Cosmic & Outer Space,18,word,Rover,Astromobile / Rover,cosmic-outer-space,5
+663,Cosmic & Outer Space,19,word,Asteroid,Astéroïde,cosmic-outer-space,5
+664,Cosmic & Outer Space,20,word,Nebula,Nébuleuse,cosmic-outer-space,5
+665,Cosmic & Outer Space,21,word,Earth,Terre,cosmic-outer-space,6
+666,Cosmic & Outer Space,22,word,Mars,Mars,cosmic-outer-space,6
+667,Cosmic & Outer Space,23,word,Jupiter,Jupiter,cosmic-outer-space,6
+668,Cosmic & Outer Space,24,word,Saturn,Saturne,cosmic-outer-space,6
+669,Cosmic & Outer Space,25,word,Sky,Ciel,cosmic-outer-space,7
+670,Cosmic & Outer Space,26,word,Universe,Univers,cosmic-outer-space,7
+671,Cosmic & Outer Space,27,word,Constellation,Constellation,cosmic-outer-space,7
+672,Cosmic & Outer Space,28,word,Eclipse,Éclipse,cosmic-outer-space,7
+673,Cosmic & Outer Space,29,word,Lander,Atterrisseur,cosmic-outer-space,8
+674,Cosmic & Outer Space,30,word,Probe,Sonde spatiale,cosmic-outer-space,8

@@ -1,0 +1,9 @@
+id: 6a4bb270-b3ac-4834-9fd9-e65d6b05393f
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Lampe » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Lamp"
+explanation: "Le mot du cours est « Lamp »."
+archived: false

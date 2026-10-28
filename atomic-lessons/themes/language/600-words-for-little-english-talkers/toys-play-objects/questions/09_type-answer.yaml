@@ -1,0 +1,9 @@
+id: b1770f0c-7d48-4e8c-9580-38660f8255c7
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Marionnette » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Puppet"
+explanation: "Le mot du cours est « Puppet »."
+archived: false

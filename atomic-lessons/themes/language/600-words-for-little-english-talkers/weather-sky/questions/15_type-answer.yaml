@@ -1,0 +1,9 @@
+id: e727ebcc-389e-4568-bd94-014e63c4c10b
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Rayon » (thème : Weather & Sky)."
+accepted_answers:
+  - "Ray"
+explanation: "Le mot du cours est « Ray »."
+archived: false

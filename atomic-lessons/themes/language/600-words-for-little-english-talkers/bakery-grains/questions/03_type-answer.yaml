@@ -1,0 +1,9 @@
+id: 7b9c58ee-345d-49e7-86d6-df6098eb5624
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Bretzel » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Pretzel"
+explanation: "Le mot du cours est « Pretzel »."
+archived: false

@@ -1,0 +1,9 @@
+id: 9bbf53f7-0b66-4204-bac8-eb982b43b646
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Poignet » (thème : Body Parts)."
+accepted_answers:
+  - "Wrist"
+explanation: "Le mot du cours est « Wrist »."
+archived: false

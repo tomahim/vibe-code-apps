@@ -1,0 +1,9 @@
+id: 8ffcc7f2-e7e4-4652-9f96-66baf9679a25
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Restaurant » (thème : Places in Town)."
+accepted_answers:
+  - "Restaurant"
+explanation: "Le mot du cours est « Restaurant »."
+archived: false

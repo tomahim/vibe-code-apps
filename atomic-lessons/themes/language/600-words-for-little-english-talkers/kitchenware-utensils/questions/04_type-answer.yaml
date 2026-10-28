@@ -1,0 +1,9 @@
+id: 0f3e1f27-d69c-4f43-b4c5-aae944d8e06b
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Serviette » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Napkin"
+explanation: "Le mot du cours est « Napkin »."
+archived: false

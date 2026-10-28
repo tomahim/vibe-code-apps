@@ -1,0 +1,9 @@
+id: 7061bc99-13bc-43f0-b6a9-0d19dfa1dca1
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Chapeau » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Hat"
+explanation: "Le mot du cours est « Hat »."
+archived: false

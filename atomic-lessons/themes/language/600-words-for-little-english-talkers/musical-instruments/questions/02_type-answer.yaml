@@ -1,0 +1,9 @@
+id: 8ff83b55-7e88-4059-a6ea-a24f3d416784
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Flûte » (thème : Musical Instruments)."
+accepted_answers:
+  - "Flute"
+explanation: "Le mot du cours est « Flute »."
+archived: false

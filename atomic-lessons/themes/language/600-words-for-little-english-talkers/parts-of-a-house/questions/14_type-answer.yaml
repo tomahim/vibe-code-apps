@@ -1,0 +1,9 @@
+id: 80c7ba4f-7fcd-4957-96a2-8d665e9e8345
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Volets » (thème : Parts of a House)."
+accepted_answers:
+  - "Shutters"
+explanation: "Le mot du cours est « Shutters »."
+archived: false

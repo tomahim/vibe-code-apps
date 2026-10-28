@@ -1,0 +1,9 @@
+id: 18efb83e-2c59-467a-ae8e-a37fdb3a5918
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Limace » (thème : Insects & Bugs)."
+accepted_answers:
+  - "Slug"
+explanation: "Le mot du cours est « Slug »."
+archived: false

@@ -1,0 +1,9 @@
+id: de52051a-0c13-48fb-b655-33c4f82458aa
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Porte » (thème : Parts of a House)."
+accepted_answers:
+  - "Door"
+explanation: "Le mot du cours est « Door »."
+archived: false

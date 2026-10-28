@@ -1,0 +1,9 @@
+id: 0e326e23-fbd6-4d82-938b-94f2a285abc0
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pince » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Tongs"
+explanation: "Le mot du cours est « Tongs »."
+archived: false

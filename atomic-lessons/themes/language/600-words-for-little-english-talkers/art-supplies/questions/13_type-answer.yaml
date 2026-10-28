@@ -1,0 +1,9 @@
+id: 33526ff7-7b54-46c9-aa48-a278b610feb8
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pochoir » (thème : Art Supplies)."
+accepted_answers:
+  - "Stencil"
+explanation: "Le mot du cours est « Stencil »."
+archived: false

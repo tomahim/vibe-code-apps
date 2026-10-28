@@ -1,0 +1,9 @@
+id: 453414a5-08f1-4b33-b812-7a4c6e0fc24a
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Astronaute » (thème : Community Helpers)."
+accepted_answers:
+  - "Astronaut"
+explanation: "Le mot du cours est « Astronaut »."
+archived: false

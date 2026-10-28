@@ -1,0 +1,9 @@
+id: 26817ede-f38a-4c8e-ba48-bb38cbecc862
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Quelle phrase anglaise correspond à « L'abeille bourdonne. » ?"
+accepted_answers:
+  - "The bee buzzes."
+explanation: "La phrase du cours est « The bee buzzes. »."
+archived: false

@@ -1,0 +1,9 @@
+id: a4b89b76-7507-4e6a-b3c4-ee9bdab0323a
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Flocon de neige » (thème : Weather & Sky)."
+accepted_answers:
+  - "Snowflake"
+explanation: "Le mot du cours est « Snowflake »."
+archived: false

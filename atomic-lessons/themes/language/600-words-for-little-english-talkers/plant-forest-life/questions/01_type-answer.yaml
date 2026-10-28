@@ -1,0 +1,9 @@
+id: 060b6b83-7dbc-48ec-9bb7-e3ba2fcd61df
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Feuille » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Leaf"
+explanation: "Le mot du cours est « Leaf »."
+archived: false

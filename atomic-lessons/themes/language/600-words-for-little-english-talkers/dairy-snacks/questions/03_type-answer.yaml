@@ -1,0 +1,9 @@
+id: 90ac3b2a-efc3-4012-bea9-5fea6cedff7e
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez le mot anglais générique pour « fruit à coque » (thème : Dairy & Snacks)."
+accepted_answers:
+  - "Nut"
+explanation: "Le mot du cours est « Nut »."
+archived: false

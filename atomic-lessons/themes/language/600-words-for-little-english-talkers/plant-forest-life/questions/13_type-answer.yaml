@@ -1,0 +1,9 @@
+id: d6e88172-b9b8-430c-8242-e60284fc0554
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Trèfle » (thème : Plant & Forest Life)."
+accepted_answers:
+  - "Clover"
+explanation: "Le mot du cours est « Clover »."
+archived: false

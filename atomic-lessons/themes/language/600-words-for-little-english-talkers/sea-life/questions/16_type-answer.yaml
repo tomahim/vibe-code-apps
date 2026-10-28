@@ -1,0 +1,9 @@
+id: a8c16da9-adb8-4190-afbb-80b3ef75d2d5
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Éponge » (thème : Sea Life)."
+accepted_answers:
+  - "Sponge"
+explanation: "Le mot du cours est « Sponge »."
+archived: false

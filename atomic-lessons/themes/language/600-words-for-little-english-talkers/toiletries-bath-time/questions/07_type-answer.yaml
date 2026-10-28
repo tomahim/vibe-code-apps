@@ -1,0 +1,9 @@
+id: 7dcd6d59-b147-4a7e-8327-bb562c494d75
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Gant de toilette » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Washcloth"
+explanation: "Le mot du cours est « Washcloth »."
+archived: false

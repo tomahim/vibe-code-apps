@@ -1,0 +1,9 @@
+id: a5ca2ef5-a964-4494-9e66-f304093a8aa2
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Coucher de soleil » (thème : Weather & Sky)."
+accepted_answers:
+  - "Sunset"
+explanation: "Le mot du cours est « Sunset »."
+archived: false

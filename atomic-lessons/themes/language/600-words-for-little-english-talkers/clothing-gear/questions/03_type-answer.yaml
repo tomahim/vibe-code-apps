@@ -1,0 +1,9 @@
+id: b91fbcb5-1239-4f48-af2b-dcb77aeec5df
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Parapluie » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Umbrella"
+explanation: "Le mot du cours est « Umbrella »."
+archived: false

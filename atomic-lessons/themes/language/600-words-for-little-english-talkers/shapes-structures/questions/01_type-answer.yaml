@@ -1,0 +1,9 @@
+id: b5e82abb-e1ec-49c6-9bea-27d4b3a8ceac
+position: 1
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Cercle » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Circle"
+explanation: "Le mot du cours est « Circle »."
+archived: false

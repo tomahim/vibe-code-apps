@@ -1,0 +1,9 @@
+id: dadb5e3b-1c7f-46cb-ac3b-2840635ee3d3
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Coquillage » (thème : Sea Life)."
+accepted_answers:
+  - "Seashell"
+explanation: "Le mot du cours est « Seashell »."
+archived: false

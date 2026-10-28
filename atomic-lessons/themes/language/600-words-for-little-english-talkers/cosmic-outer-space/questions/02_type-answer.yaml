@@ -1,0 +1,9 @@
+id: 43b08491-7237-4786-9a2c-8729eb4f1bfa
+position: 2
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Planète » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Planet"
+explanation: "Le mot du cours est « Planet »."
+archived: false

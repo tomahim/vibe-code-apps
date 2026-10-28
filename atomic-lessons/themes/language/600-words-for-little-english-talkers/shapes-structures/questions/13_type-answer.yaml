@@ -1,0 +1,9 @@
+id: 8147d09a-c3ab-45b8-ba51-428116e0c27b
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Spirale » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Spiral"
+explanation: "Le mot du cours est « Spiral »."
+archived: false

@@ -1,0 +1,9 @@
+id: 456d232e-3146-47f2-9608-62f29b38d8b5
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Anneau » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Ring"
+explanation: "Le mot du cours est « Ring »."
+archived: false

@@ -1,0 +1,9 @@
+id: 864a9272-8d2b-4c06-8e74-ceacde4326dd
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Lèvre » (thème : Body Parts)."
+accepted_answers:
+  - "Lip"
+explanation: "Le mot du cours est « Lip »."
+archived: false

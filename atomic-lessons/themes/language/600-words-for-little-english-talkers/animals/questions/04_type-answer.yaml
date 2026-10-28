@@ -1,0 +1,9 @@
+id: 070a92ca-f367-4a74-81e8-d2df87a130bf
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Chat » (thème : Animals)."
+accepted_answers:
+  - "Cat"
+explanation: "Le mot du cours est « Cat »."
+archived: false

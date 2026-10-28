@@ -1,0 +1,9 @@
+id: d649badf-0eed-4a62-84e7-105514eb74f7
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Porte » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Door"
+explanation: "Le mot du cours est « Door »."
+archived: false

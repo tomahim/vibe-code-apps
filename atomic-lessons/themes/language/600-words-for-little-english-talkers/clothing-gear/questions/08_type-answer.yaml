@@ -1,0 +1,9 @@
+id: 9a53a301-d322-4d17-bbe8-0fb5151fefd6
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Écharpe » (thème : Clothing & Gear)."
+accepted_answers:
+  - "Scarf"
+explanation: "Le mot du cours est « Scarf »."
+archived: false

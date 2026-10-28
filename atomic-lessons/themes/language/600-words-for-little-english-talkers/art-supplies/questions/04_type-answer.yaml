@@ -1,0 +1,9 @@
+id: 86c6612d-2d5f-4823-98ed-142fa70de5bc
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Papier » (thème : Art Supplies)."
+accepted_answers:
+  - "Paper"
+explanation: "Le mot du cours est « Paper »."
+archived: false

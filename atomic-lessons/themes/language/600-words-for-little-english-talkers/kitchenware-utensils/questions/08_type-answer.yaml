@@ -1,0 +1,9 @@
+id: 983b0de9-253c-47ca-a74b-57729a4fce0c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Spatule » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Spatula"
+explanation: "Le mot du cours est « Spatula »."
+archived: false

@@ -1,0 +1,9 @@
+id: 94e975c8-a2ce-4ffd-b1b1-ac8f2b1b78f8
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Orbite » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Orbit"
+explanation: "Le mot du cours est « Orbit »."
+archived: false

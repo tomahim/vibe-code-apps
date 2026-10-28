@@ -1,0 +1,9 @@
+id: 6f81e477-6116-4118-9482-0fe1c5ac8dc6
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Bureau de poste » (thème : Places in Town)."
+accepted_answers:
+  - "Post office"
+explanation: "Le mot du cours est « Post office »."
+archived: false

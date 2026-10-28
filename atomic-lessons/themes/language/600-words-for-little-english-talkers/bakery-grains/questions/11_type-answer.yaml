@@ -1,0 +1,9 @@
+id: 81eba5d5-e4d3-492a-b23a-4c5306c25f5a
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Nouille » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Noodle"
+explanation: "Le mot du cours est « Noodle »."
+archived: false

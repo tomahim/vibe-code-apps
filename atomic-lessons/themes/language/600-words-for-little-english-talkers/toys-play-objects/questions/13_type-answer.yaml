@@ -1,0 +1,9 @@
+id: d639ac3c-193c-4e71-b2b7-c507217369dc
+position: 13
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Maison de poupée » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Dollhouse"
+explanation: "Le mot du cours est « Dollhouse »."
+archived: false

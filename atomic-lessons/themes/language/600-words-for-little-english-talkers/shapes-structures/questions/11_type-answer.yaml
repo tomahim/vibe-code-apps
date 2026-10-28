@@ -1,0 +1,9 @@
+id: baf26190-1096-4c41-b7bc-8ec5cadfec6b
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Château » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Castle"
+explanation: "Le mot du cours est « Castle »."
+archived: false

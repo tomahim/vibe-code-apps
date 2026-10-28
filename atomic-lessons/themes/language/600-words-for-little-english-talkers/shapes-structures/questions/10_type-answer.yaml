@@ -1,0 +1,9 @@
+id: cc834db8-4880-4e05-aaab-5ecd51bec7b7
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Pilier » (thème : Shapes & Structures)."
+accepted_answers:
+  - "Pillar"
+explanation: "Le mot du cours est « Pillar »."
+archived: false

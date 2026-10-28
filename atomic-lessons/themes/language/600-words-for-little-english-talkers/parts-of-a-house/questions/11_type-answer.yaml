@@ -1,0 +1,9 @@
+id: bf4a783f-ceac-466c-af8c-dee02f1a0b53
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Poignée de porte » (thème : Parts of a House)."
+accepted_answers:
+  - "Knob"
+explanation: "Le mot du cours est « Knob »."
+archived: false

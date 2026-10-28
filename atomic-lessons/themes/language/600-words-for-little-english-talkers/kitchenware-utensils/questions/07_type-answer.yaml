@@ -1,0 +1,9 @@
+id: 12db3260-d2fb-4192-8d0a-4f5791802bb1
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Bouilloire » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Kettle"
+explanation: "Le mot du cours est « Kettle »."
+archived: false

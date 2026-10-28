@@ -1,0 +1,9 @@
+id: d82fbf3b-9f2d-4f78-a485-a39e8e5cba88
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Palourde » (thème : Sea Life)."
+accepted_answers:
+  - "Clam"
+explanation: "Le mot du cours est « Clam »."
+archived: false

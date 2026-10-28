@@ -1,0 +1,9 @@
+id: 5c9887c6-97a2-4145-9d56-e0190614e027
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Pâte à modeler » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Clay"
+explanation: "Le mot du cours est « Clay »."
+archived: false

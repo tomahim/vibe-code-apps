@@ -1,0 +1,9 @@
+id: b02b0704-e933-4f90-ba8a-412aaac38853
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Riz » (thème : Bakery & Grains)."
+accepted_answers:
+  - "Rice"
+explanation: "Le mot du cours est « Rice »."
+archived: false

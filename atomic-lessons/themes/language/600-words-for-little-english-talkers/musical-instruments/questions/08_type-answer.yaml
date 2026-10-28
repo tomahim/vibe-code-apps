@@ -1,0 +1,9 @@
+id: 4c07abb3-6226-4449-a266-1d41761184eb
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Ukulélé » (thème : Musical Instruments)."
+accepted_answers:
+  - "Ukulele"
+explanation: "Le mot du cours est « Ukulele »."
+archived: false

@@ -1,0 +1,9 @@
+id: ccb13e6f-23a2-4b9a-8ef9-894c9b8f07f4
+position: 5
+type: type_answer_question
+after_card_position: 4
+prompt: "Écrivez en anglais le mot « Bureau » (thème : Furniture & Fixtures)."
+accepted_answers:
+  - "Desk"
+explanation: "Le mot du cours est « Desk »."
+archived: false

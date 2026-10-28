@@ -1,0 +1,9 @@
+id: be672bcb-e9e7-4dd7-a8c2-7b1986214fa8
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Musicien(ne) » (thème : Community Helpers)."
+accepted_answers:
+  - "Musician"
+explanation: "Le mot du cours est « Musician »."
+archived: false

@@ -1,0 +1,9 @@
+id: 5c65335b-7ed2-496d-9096-bde5eeb6a2ee
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Joue » (thème : Body Parts)."
+accepted_answers:
+  - "Cheek"
+explanation: "Le mot du cours est « Cheek »."
+archived: false

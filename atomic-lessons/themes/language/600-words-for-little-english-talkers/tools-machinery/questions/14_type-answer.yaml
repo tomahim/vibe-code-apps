@@ -1,0 +1,9 @@
+id: 92617de6-88c2-458b-9f9f-30b739f7d4c1
+position: 14
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Pompe » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Pump"
+explanation: "Le mot du cours est « Pump »."
+archived: false

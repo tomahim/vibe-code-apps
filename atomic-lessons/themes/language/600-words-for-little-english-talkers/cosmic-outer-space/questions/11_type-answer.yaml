@@ -1,0 +1,9 @@
+id: d5786bda-1249-4d6e-a116-075ff0c44040
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Terre » (thème : Cosmic & Outer Space)."
+accepted_answers:
+  - "Earth"
+explanation: "Le mot du cours est « Earth »."
+archived: false

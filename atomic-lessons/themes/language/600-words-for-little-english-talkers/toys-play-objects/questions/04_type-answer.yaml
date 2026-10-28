@@ -1,0 +1,9 @@
+id: 2250d100-927a-4bec-8c1d-5578f2b8dfd8
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Écrivez en anglais le mot « Puzzle » (thème : Toys & Play Objects)."
+accepted_answers:
+  - "Puzzle"
+explanation: "Le mot du cours est « Puzzle »."
+archived: false

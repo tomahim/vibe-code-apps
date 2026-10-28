@@ -1,0 +1,9 @@
+id: cc76af07-1bb4-479b-b21b-74c66f8ce16a
+position: 10
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Perceuse » (thème : Tools & Machinery)."
+accepted_answers:
+  - "Drill"
+explanation: "Le mot du cours est « Drill »."
+archived: false

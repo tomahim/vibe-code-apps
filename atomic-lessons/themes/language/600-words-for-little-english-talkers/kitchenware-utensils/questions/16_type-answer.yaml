@@ -1,0 +1,9 @@
+id: 6b803359-d085-47dd-ad0e-a49884ecb6ee
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Écrivez en anglais le mot « Paille » (thème : Kitchenware & Utensils)."
+accepted_answers:
+  - "Straw"
+explanation: "Le mot du cours est « Straw »."
+archived: false

@@ -1,0 +1,9 @@
+id: 3521a4c0-0b00-42d9-9680-7741ab9aec04
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Gobelet » (thème : Toiletries & Bath Time)."
+accepted_answers:
+  - "Cup"
+explanation: "Le mot du cours est « Cup »."
+archived: false

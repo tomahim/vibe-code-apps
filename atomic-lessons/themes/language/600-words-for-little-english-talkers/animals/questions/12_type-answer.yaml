@@ -1,0 +1,9 @@
+id: b26fb024-d452-446d-8d34-34ea210a386e
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Écrivez en anglais le mot « Souris » (thème : Animals)."
+accepted_answers:
+  - "Mouse"
+explanation: "Le mot du cours est « Mouse »."
+archived: false
