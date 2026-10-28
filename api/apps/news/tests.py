@@ -42,7 +42,8 @@ class AdapterTests(TestCase):
         ])
         self.assertEqual(kwargs["json"]["filter"]["and"][1], {"property": "Published", "date": {"is_not_empty": True}})
         self.assertEqual(kwargs["json"]["page_size"], 20)
-        read_news(None, False)
+        read_news(None, False, page_size=17)
+        self.assertEqual(post.call_args.kwargs["json"]["page_size"], 17)
         self.assertEqual(post.call_count, 2)  # never served from a per-worker cache
         read_news("next", True, "Science", "particle")
         self.assertEqual(post.call_args.kwargs["json"]["start_cursor"], "next")
@@ -133,21 +134,49 @@ class ViewTests(TestCase):
         first = self.client.get("/", **self.auth).json()["next_cursor"]
         self.assertNotEqual(first, "opaque")
         self.assertEqual(self.client.get("/", {"cursor": first}, **self.auth).status_code, 200)
-        read.assert_called_with("opaque", False, "", "", False, "News")
+        read.assert_called_with("opaque", False, "", "", False, "News", page_size=20)
         self.assertEqual(self.client.get("/", {"cursor": first, "view": "archive"}, **self.auth).status_code, 400)
         self.assertEqual(self.client.get("/", {"cursor": "forged"}, **self.auth).status_code, 400)
 
     @patch("apps.news.views.read_news")
-    def test_undated_phase_has_deterministic_filter_and_cursor(self, read):
+    def test_short_dated_page_fills_from_undated_and_continues(self, read):
+        def item(i):
+            return {"id": str(i)}
         read.side_effect = [
-            {"items": [{"id": PAGE}], "next_cursor": None, "fetched_at": "now"},
-            {"items": [{"id": "unknown-date"}], "next_cursor": None, "fetched_at": "now"},
-            {"items": [{"id": "unknown-date"}], "next_cursor": None, "fetched_at": "now"},
+            {"items": [item(i) for i in range(3)], "next_cursor": None, "fetched_at": "now"},
+            {"items": [item(i) for i in range(3, 20)], "next_cursor": "undated-next", "fetched_at": "now"},
+            {"items": [item(i) for i in range(20, 25)], "next_cursor": None, "fetched_at": "now"},
+        ]
+        first = self.client.get("/", {"view": "inbox"}, **self.auth).json()
+        self.assertEqual(len(first["items"]), 20)
+        self.assertIsNotNone(first["next_cursor"])
+        read.assert_called_with(None, False, "", "", True, "Inbox", page_size=17)
+        second = self.client.get("/", {"view": "inbox", "cursor": first["next_cursor"]}, **self.auth).json()
+        read.assert_called_with("undated-next", False, "", "", True, "Inbox", page_size=20)
+        self.assertEqual([x["id"] for x in first["items"] + second["items"]], [str(i) for i in range(25)])
+        self.assertIsNone(second["next_cursor"])
+
+    @patch("apps.news.views.read_news")
+    def test_exact_full_undated_page_has_no_empty_next(self, read):
+        read.side_effect = [
+            {"items": [], "next_cursor": None, "fetched_at": "now"},
+            {"items": [{"id": str(i)} for i in range(20)], "next_cursor": None, "fetched_at": "now"},
+        ]
+        result = self.client.get("/", **self.auth).json()
+        self.assertEqual(len(result["items"]), 20)
+        self.assertIsNone(result["next_cursor"])
+
+    @patch("apps.news.views.read_news")
+    def test_full_dated_page_continuation_enters_undated(self, read):
+        read.side_effect = [
+            {"items": [{"id": str(i)} for i in range(20)], "next_cursor": None, "fetched_at": "now"},
+            {"items": [{"id": "unknown"}], "next_cursor": None, "fetched_at": "now"},
+            {"items": [{"id": "unknown"}], "next_cursor": None, "fetched_at": "now"},
         ]
         first = self.client.get("/", **self.auth).json()
-        self.assertIsNotNone(first["next_cursor"])
         second = self.client.get("/", {"cursor": first["next_cursor"]}, **self.auth).json()
-        read.assert_called_with(None, False, "", "", True, "News")
+        read.assert_called_with(None, False, "", "", True, "News", page_size=20)
+        self.assertEqual(second["items"], [{"id": "unknown"}])
         self.assertIsNone(second["next_cursor"])
 
     @patch("apps.news.views.set_archived")

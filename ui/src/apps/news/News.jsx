@@ -5,6 +5,9 @@ import "./news.css";
 
 export default function News({ onHome }) {
   const requestSequence = useRef(0);
+  // Session-only, bounded cache. Refresh always goes back to Notion.
+  const feedCache = useRef(new Map());
+  const cacheKey = (nextCursor = null, selectedView = view) => JSON.stringify([selectedView, topic, query, nextCursor]);
   const [items, setItems] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [pages, setPages] = useState([null]);
@@ -19,10 +22,17 @@ export default function News({ onHome }) {
   const archive = view === "archive";
   const categories = ["Inbox", "News", "Favorite", "Inspiration", "Archive"];
 
-  async function load(nextCursor = null, selectedView = view) {
+  async function load(nextCursor = null, selectedView = view, force = false) {
     const sequence = ++requestSequence.current;
-    setPending(true);
+    const key = cacheKey(nextCursor, selectedView);
+    const cached = feedCache.current.get(key);
     setError(null);
+    if (!force && cached && Date.now() - cached.savedAt < 120000) {
+      setItems(cached.items); setCursor(cached.next_cursor); setFetched(cached.fetched_at);
+      setPending(false);
+      return;
+    }
+    setPending(true);
     setItems([]);
     try {
       const response = await authFetch(`/api/apps/news/?view=${selectedView}${nextCursor ? `&cursor=${encodeURIComponent(nextCursor)}` : ""}&topic=${encodeURIComponent(topic)}&q=${encodeURIComponent(query)}`);
@@ -30,7 +40,11 @@ export default function News({ onHome }) {
       if (sequence !== requestSequence.current) return;
       if (!response.ok) throw { status: response.status, message: data.error || "Could not load the briefing. Try again." };
       if (!Array.isArray(data.items)) throw new Error("Unexpected feed response. Try again.");
-      setItems(uniqueItems(data.items));
+      data.items = uniqueItems(data.items);
+      data.next_cursor = data.next_cursor || null;
+      if (feedCache.current.size >= 40) feedCache.current.delete(feedCache.current.keys().next().value);
+      feedCache.current.set(key, { ...data, savedAt: Date.now() });
+      setItems(data.items);
       setCursor(data.next_cursor || null);
       setFetched(data.fetched_at);
     } catch (err) {
@@ -40,18 +54,38 @@ export default function News({ onHome }) {
   }
 
   useEffect(() => {
+    const cached = feedCache.current.get(cacheKey());
+    if (cached && Date.now() - cached.savedAt < 120000) {
+      setPages([null]); setPageIndex(0); load();
+      return () => { ++requestSequence.current; };
+    }
+    setPending(true);
     const timer = setTimeout(() => { setPages([null]); setPageIndex(0); load(); }, 250);
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); ++requestSequence.current; };
   }, [topic, query, view]);
-  function switchView(view) {
-    setView(view); setPages([null]); setPageIndex(0); setItems([]);
+  function switchView(nextView) {
+    if (nextView === view) return;
+    setView(nextView); setPages([null]); setPageIndex(0); setItems([]);
 
   }
-  function refresh() { setPages([null]); setPageIndex(0); load(); }
+  function refresh() { feedCache.current.clear(); setPages([null]); setPageIndex(0); load(null, view, true); }
   function changePage(index) {
     const nextPages = index > pageIndex ? [...pages.slice(0, index), cursor] : pages;
     setPages(nextPages); setPageIndex(index); load(nextPages[index]);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function applySavedItem(item, changes) {
+    const updated = { ...item, archived: archive, ...changes };
+    const remains = Boolean(updated.archived) === archive && (archive || updated.category.toLowerCase() === view);
+    const update = list => remains ? list.map(story => story.id === item.id ? updated : story) : list.filter(story => story.id !== item.id);
+    setItems(update);
+    // Opaque Notion cursors point after records, not numeric offsets. Keep the
+    // current page/history and untouched cards; discard other snapshots so a
+    // destination tab reads its new membership and ordering from Notion.
+    const key = cacheKey(pages[pageIndex]);
+    const current = feedCache.current.get(key);
+    feedCache.current.clear();
+    if (current) feedCache.current.set(key, { ...current, items: update(current.items) });
   }
   async function archiveStory(item) {
     setSaving(item.id); setError(null);
@@ -59,8 +93,7 @@ export default function News({ onHome }) {
       const response = await authFetch(`/api/apps/news/${item.id}/archive/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ archived: !archive }) });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "Could not save reading state.");
-      // Changing membership invalidates pagination offsets. Return to page one.
-      setPages([null]); setPageIndex(0); await load();
+      applySavedItem(item, { archived: !archive });
     } catch (err) { setError({ message: err.message }); }
     finally { setSaving(null); }
   }
@@ -70,7 +103,7 @@ export default function News({ onHome }) {
       const response = await authFetch(`/api/apps/news/${item.id}/category/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category }) });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "Could not save category.");
-      setPages([null]); setPageIndex(0); await load();
+      applySavedItem(item, { category });
     } catch (err) { setError({ message: err.message }); }
     finally { setSaving(null); }
   }
@@ -100,22 +133,22 @@ export default function News({ onHome }) {
           <div className="news-tabs" aria-label="Library categories">
             {categories.map((name) => <button key={name} disabled={saving !== null} aria-pressed={view === name.toLowerCase()} onClick={() => switchView(name.toLowerCase())}>{name}</button>)}
           </div>
-          <button className="news-refresh" onClick={refresh} disabled={pending}>{pending ? "Reading Notion..." : "↻ Refresh"}</button>
+          <button className="news-refresh" onClick={refresh} disabled={pending || saving !== null}>{pending ? "Reading Notion..." : "↻ Refresh"}</button>
         </div>
         {!error && <>
           <label className="news-search">Search this list
-            <input type="search" placeholder="A model, an idea, a source..." value={query} onChange={(event) => setQuery(event.target.value)} />
+            <input type="search" placeholder="A model, an idea, a source..." value={query} disabled={saving !== null} onChange={(event) => setQuery(event.target.value)} />
           </label>
           <div className="news-topics" aria-label="Filter by topic">
-            <button aria-pressed={!topic} onClick={() => setTopic("")}>All topics</button>
-            {topics.map((tag) => <button key={tag} aria-pressed={topic === tag} onClick={() => setTopic(tag)}>{tag}</button>)}
+            <button aria-pressed={!topic} disabled={saving !== null} onClick={() => setTopic("")}>All topics</button>
+            {topics.map((tag) => <button key={tag} aria-pressed={topic === tag} disabled={saving !== null} onClick={() => setTopic(tag)}>{tag}</button>)}
           </div>
           {latest && latest < today && <p className="news-freshness">The newest story on this page was saved before today. New stories appear after they are added to Notion.</p>}
         </>}
         {error && <section className="news-notice" role="alert">
           <h2>{error.status === 401 ? "Your library is private." : error.status === 403 ? "An invitation-only reading room." : "The library is unavailable."}</h2>
           <p>{error.message}</p>
-          {error.status === 401 ? <a href="/login?next=%2Fapps%2Fnews">Sign in to read →</a> : <button onClick={refresh} disabled={pending}>Try again</button>}
+          {error.status === 401 ? <a href="/login?next=%2Fapps%2Fnews">Sign in to read →</a> : <button onClick={refresh} disabled={pending || saving !== null}>Try again</button>}
           {error.status === 503 && <p className="news-caption">The server needs a Notion connection with Read content and Update content, shared with the news database. No token belongs in this browser.</p>}
         </section>}
         {pending && !items.length && <p className="news-status" role="status">Opening the reading room...</p>}
@@ -139,9 +172,9 @@ export default function News({ onHome }) {
           </article>)}</div>
         </section>
         <nav className="news-pagination" aria-label={archive ? "Archived news pages" : "Inbox pages"}>
-          <button onClick={() => changePage(pageIndex - 1)} disabled={pending || pageIndex === 0}>← Previous</button>
+          <button onClick={() => changePage(pageIndex - 1)} disabled={saving !== null || pending || pageIndex === 0}>← Previous</button>
           <span>Page {pageIndex + 1} · Newest first</span>
-          <button onClick={() => changePage(pageIndex + 1)} disabled={pending || !cursor}>Next →</button>
+          <button onClick={() => changePage(pageIndex + 1)} disabled={saving !== null || pending || !cursor}>Next →</button>
         </nav>
         <p className="news-page-note">Up to 20 stories per page. Search and topic filters cover this entire list. {cursor ? "More stories are available on the next page." : "You have reached the end of this list."}</p>
         <footer className="news-footer"><span>Keep what catches your eye.</span><span>{fetched ? `Read from Notion ${new Intl.DateTimeFormat("en-GB", { timeStyle: "short", timeZone: "Europe/Paris" }).format(new Date(fetched))} Paris time` : "Notion is the source of truth."}</span></footer>

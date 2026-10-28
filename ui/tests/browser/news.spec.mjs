@@ -99,3 +99,58 @@ test('private and setup states, keyboard and mobile layout', async ({ page }) =>
   await page.getByRole('button', { name: 'News', exact: true }).click();
   await expect(page.locator('.news-story')).toHaveCount(0);
  });
+
+for (const width of [390, 1440]) test(`full page and local saves without list reload at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 844 });
+  const full = Array.from({length: 20}, (_, i) => ({ ...items[i % 5], id: `id-${i}`, title: `Saved link ${i+1}`, url: `https://example.com/full/${i}`, archived: false }));
+  let gets = 0, fail = false;
+  const updated = new Map();
+  await page.route('**/api/apps/news/**', async route => {
+    const req = route.request(), url = new URL(req.url());
+    if (req.method() === 'POST') {
+      const changes = req.postDataJSON();
+      if (fail) return route.fulfill({status:503,json:{error:'Save failed. Try again.'}});
+      updated.set(url.pathname.split('/')[4], changes);
+      return route.fulfill({json:changes});
+    }
+    ++gets;
+    const category = url.searchParams.get('view');
+    const visible = full.map(x => ({...x, ...updated.get(x.id)})).filter(x => category === 'archive' ? x.archived : !x.archived && x.category.toLowerCase() === category);
+    return route.fulfill({json:{items:visible, next_cursor: null, fetched_at:'2026-10-28T17:00:00Z'}});
+  });
+  await page.goto('/apps/news');
+  await expect(page.locator('.news-story')).toHaveCount(20);
+  await expect(page.locator('.news-count')).toContainText('20 stories');
+  await page.screenshot({path:`/downloads/link-keeper-initial-${width}.png`,fullPage:false});
+  await page.locator('.news-story').first().scrollIntoViewIfNeeded();
+  await page.screenshot({path:`/downloads/link-keeper-cards-${width}.png`,fullPage:false});
+  const untouched = await page.locator('.news-story').nth(5).elementHandle();
+  await page.getByRole('combobox').first().selectOption('Favorite');
+  await expect(page.locator('.news-story')).toHaveCount(19);
+  expect(gets).toBe(1);
+  expect(await untouched.evaluate(el => el.isConnected)).toBe(true);
+  await page.getByRole('button',{name:'✓ Archive',exact:true}).first().click();
+  await expect(page.locator('.news-story')).toHaveCount(18);
+  expect(gets).toBe(1);
+  expect(await untouched.evaluate(el => el.isConnected)).toBe(true);
+  await page.getByRole('button',{name:'Favorite',exact:true}).click();
+  await expect(page.locator('.news-story')).toHaveCount(1);
+  await page.getByRole('button',{name:'Inbox',exact:true}).click();
+  await expect(page.locator('.news-story')).toHaveCount(18);
+  const before = gets;
+  await page.getByRole('button',{name:'Favorite',exact:true}).click();
+  await expect(page.locator('.news-story')).toHaveCount(1);
+  expect(gets).toBe(before); // session cache, not another Notion read
+  fail = true;
+  await page.getByRole('button',{name:'✓ Archive',exact:true}).click();
+  await expect(page.getByRole('alert')).toContainText('Save failed');
+  await expect(page.locator('.news-story')).toHaveCount(1);
+  fail = false;
+  await page.getByRole('button',{name:'Inbox',exact:true}).click();
+  await expect(page.locator('.news-story')).toHaveCount(18);
+  await page.getByRole('button',{name:'↻ Refresh',exact:true}).click();
+  await expect(page.locator('.news-story')).toHaveCount(18);
+  expect(gets).toBe(before + 1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.screenshot({path:`/downloads/link-keeper-${width}.png`,fullPage:false});
+});

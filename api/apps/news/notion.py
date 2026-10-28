@@ -64,7 +64,7 @@ def normalize(page):
     }
 
 
-def read_news(cursor=None, archived=False, topic="", query="", undated=False, category="News"):
+def read_news(cursor=None, archived=False, topic="", query="", undated=False, category="News", page_size=20):
     try:
         source = str(uuid.UUID(settings.NOTION_NEWS_DATA_SOURCE_ID))
     except (ValueError, AttributeError):
@@ -82,7 +82,7 @@ def read_news(cursor=None, archived=False, topic="", query="", undated=False, ca
             {"property": "Title", "title": {"contains": query}},
             *[{"property": name, "rich_text": {"contains": query}} for name in ("Why it matters", "Author", "Source")],
         ]})
-    body = {"page_size": 20, "filter": {"and": filters}, "sorts": [
+    body = {"page_size": page_size, "filter": {"and": filters}, "sorts": [
         {"property": "Published", "direction": "descending"},
         {"property": "Added", "direction": "descending"},
         {"timestamp": "created_time", "direction": "descending"},
