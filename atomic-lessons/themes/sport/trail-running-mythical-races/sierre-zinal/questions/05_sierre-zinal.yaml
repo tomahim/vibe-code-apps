@@ -1,0 +1,19 @@
+id: b3f76f80-5cec-44b3-bedf-0a14cbc208c5
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many 4000 m peaks give the race its name?"
+choices:
+  - id: 2274a48f-73fa-46d6-8f65-a55a5e7c80d1
+    text: "Five"
+  - id: 5ec0b137-74f7-4fe6-a85a-d0be8c3b7f71
+    text: "Four"
+  - id: 619dc007-17c4-4a36-8e9a-0e70504fd372
+    text: "Three"
+  - id: e03cc276-ed7c-4bfb-bc69-bfd425a74341
+    text: "Seven"
+correct_choice_ids:
+  - 2274a48f-73fa-46d6-8f65-a55a5e7c80d1
+explanation: "It is the race of the five 4000ers."
+archived: false

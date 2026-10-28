@@ -1,0 +1,10 @@
+id: 0bce8e5e-c383-4bc7-833b-01e748c7ff08
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which series did the 25th edition open in 2026? (three words)"
+accepted_answers:
+  - "Golden Trail World Series"
+  - "Golden Trail Series"
+explanation: "It opened the 2026 Golden Trail World Series."
+archived: false

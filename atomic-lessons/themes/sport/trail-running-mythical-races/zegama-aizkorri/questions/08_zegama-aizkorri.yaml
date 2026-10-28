@@ -1,0 +1,9 @@
+id: d8dc7b3f-889c-4e5f-8ed3-b634266f4939
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How long was the first route in km? (number)"
+accepted_answers:
+  - "35"
+explanation: "The original route was 35 km."
+archived: false

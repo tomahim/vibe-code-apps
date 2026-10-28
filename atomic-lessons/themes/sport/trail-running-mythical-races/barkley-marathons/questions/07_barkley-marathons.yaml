@@ -1,0 +1,19 @@
+id: 062ea9a9-2c71-41ed-9589-430382ca2268
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How do runners prove they followed the course?"
+choices:
+  - id: 77bb955b-6aaa-4358-a559-97e2309b5b3c
+    text: "They tear a page out of books matching their bib number"
+  - id: d88fe06a-9d63-4861-abdc-fbea19b3ff11
+    text: "They get stamps"
+  - id: b5142757-b20d-4737-831c-1fc656cf6f02
+    text: "They carry a GPS"
+  - id: 71d0c659-07cc-4951-9ec9-e1e49b4736fb
+    text: "They take photos"
+correct_choice_ids:
+  - 77bb955b-6aaa-4358-a559-97e2309b5b3c
+explanation: "Books are placed at points on the course."
+archived: false

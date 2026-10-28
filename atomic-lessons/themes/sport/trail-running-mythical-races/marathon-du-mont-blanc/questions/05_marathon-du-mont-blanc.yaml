@@ -1,0 +1,19 @@
+id: b7575b52-32b7-4a11-8d53-41a1b661a86a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When did the race become the Mont-Blanc Marathon?"
+choices:
+  - id: ac63d1f4-d421-43de-8a78-52f4fca8464d
+    text: "2018"
+  - id: 6e58c130-9c81-4e4b-b67f-a2143bfb7dec
+    text: "2011"
+  - id: 9fbc2335-0aa0-41bc-b829-18ddc0b501c7
+    text: "2003"
+  - id: e91ec8bd-8443-4e6d-b7b4-3962ea8d931a
+    text: "1979"
+correct_choice_ids:
+  - 9fbc2335-0aa0-41bc-b829-18ddc0b501c7
+explanation: "In 2003 the 42 km joined the 23 km."
+archived: false

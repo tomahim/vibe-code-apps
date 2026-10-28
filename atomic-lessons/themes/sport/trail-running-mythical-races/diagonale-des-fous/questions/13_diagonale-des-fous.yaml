@@ -1,0 +1,19 @@
+id: 072c89e0-8865-4e11-a576-3a0eae6abc67
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which part of the island's course was missing in 2026?"
+choices:
+  - id: 135aa2e5-811b-4963-bb79-75f3556c1336
+    text: "The finish"
+  - id: a9810b98-5aaa-45cb-af6e-bf9913d65c71
+    text: "The Cilaos cirque"
+  - id: 2d4f54e5-7c5a-4a8e-ab4b-c2c4bc4a4b04
+    text: "The start"
+  - id: 5a0528fa-860f-472f-aab2-b7421ee4d847
+    text: "The seafront"
+correct_choice_ids:
+  - a9810b98-5aaa-45cb-af6e-bf9913d65c71
+explanation: "The 2026 route had no passage through Cilaos."
+archived: false

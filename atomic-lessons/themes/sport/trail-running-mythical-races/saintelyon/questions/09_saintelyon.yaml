@@ -1,0 +1,19 @@
+id: fdc9072b-d7ca-4f10-8ce3-279594689c6a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the route called by the organisers?"
+choices:
+  - id: de464a3a-6005-403a-94e9-dbae746a4476
+    text: "The crazy ones"
+  - id: 04552693-2786-401f-b1a1-e5630a3c1df7
+    text: "The golden loop"
+  - id: 947d2392-84a7-4080-83ac-030130b9fbe4
+    text: "The giant tour"
+  - id: e89fbe28-3fb3-460e-9412-ab71145e4a48
+    text: "The mythical diagonal"
+correct_choice_ids:
+  - e89fbe28-3fb3-460e-9412-ab71145e4a48
+explanation: "The organisers call it La diagonale mythique."
+archived: false

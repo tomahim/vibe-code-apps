@@ -1,0 +1,19 @@
+id: 4d27897d-06a5-410f-ae1e-dd9a352cf6c3
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many miles was the 1981 Idiot's Run?"
+choices:
+  - id: 3344c21f-973c-4710-98ad-9b895d76d2eb
+    text: "26"
+  - id: 09453743-9058-4b49-a537-6f41be22f3cd
+    text: "76"
+  - id: 4630e620-1c54-4721-98f5-f8cda0b47dcd
+    text: "40"
+  - id: fdf2a286-ab27-4106-b6aa-dbaee3cc962e
+    text: "115"
+correct_choice_ids:
+  - 09453743-9058-4b49-a537-6f41be22f3cd
+explanation: "It was 76 miles with 37 significant hills."
+archived: false

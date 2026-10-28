@@ -1,0 +1,19 @@
+id: 13103221-e8d9-40ed-bbe0-8bc123dac108
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What does PAX refer to?"
+choices:
+  - id: d0ef21d1-a339-43fc-839c-46bdfe10d3b9
+    text: "Points given to TORX finishers"
+  - id: ea24cf06-2eb7-4edd-95ee-c35fdb1c2f0b
+    text: "Pasta"
+  - id: 355ffbe1-d3bb-4c23-8568-419a4b05d768
+    text: "Prize money"
+  - id: c0dcb299-700a-4239-863a-87832d15792a
+    text: "Passport"
+correct_choice_ids:
+  - d0ef21d1-a339-43fc-839c-46bdfe10d3b9
+explanation: "TORX provides PAX to finishers."
+archived: false

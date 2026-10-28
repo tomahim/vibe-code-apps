@@ -1,0 +1,19 @@
+id: 09be6ae7-172e-4d86-9a28-b011408af050
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When is the race held?"
+choices:
+  - id: 4ca839b4-55df-4309-ad2a-50cb355be51f
+    text: "Late January"
+  - id: 255c2699-0458-4717-bb12-0ab85d9f9ac1
+    text: "November"
+  - id: 9ac20986-b573-4888-b58c-35a0082447eb
+    text: "Late June"
+  - id: b9666b81-e0b7-4ea7-874c-b72f58e33ba1
+    text: "Mid August"
+correct_choice_ids:
+  - 9ac20986-b573-4888-b58c-35a0082447eb
+explanation: "It is held in late June."
+archived: false

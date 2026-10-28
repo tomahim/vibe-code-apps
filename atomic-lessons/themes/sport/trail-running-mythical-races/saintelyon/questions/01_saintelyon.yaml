@@ -1,0 +1,19 @@
+id: f09e5bd4-15f6-4ffa-b258-3a0d44a6f4bb
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who created the SaintéLyon?"
+choices:
+  - id: 66bfdcfa-9e95-4e14-b510-cd4d13e76c13
+    text: "Cyclotourists from Lyon and Saint-Étienne"
+  - id: 7bc2deaa-6125-47f3-a335-0ec29d4cfc97
+    text: "Mountain guides"
+  - id: 075c9bee-163c-4f34-92cf-2c3436a8dc0e
+    text: "Marathon runners from Paris"
+  - id: 05801cca-297c-494f-aa45-dd43f194231e
+    text: "Ski patrollers"
+correct_choice_ids:
+  - 66bfdcfa-9e95-4e14-b510-cd4d13e76c13
+explanation: "The idea came from cyclists in both cities."
+archived: false

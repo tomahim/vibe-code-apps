@@ -1,0 +1,19 @@
+id: 196ce46c-5ce5-4ddc-b8fd-8ff3c7dd8d68
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who encouraged Ainsleigh to try the trail on foot?"
+choices:
+  - id: 0292c40a-a78c-4a1e-81ce-c833120c1095
+    text: "Drucilla Barner"
+  - id: 6f2936c0-dcca-4744-bf74-56254d1b35bf
+    text: "Mo Livermore"
+  - id: bbdf5afa-f015-459e-9ccd-213a8e240459
+    text: "Shannon Weil"
+  - id: 4e71a540-2a1c-4b07-aed6-3eb77028e51d
+    text: "Pat Smythe"
+correct_choice_ids:
+  - 0292c40a-a78c-4a1e-81ce-c833120c1095
+explanation: "Barner was the first woman to win the Tevis Cup and encouraged him."
+archived: false

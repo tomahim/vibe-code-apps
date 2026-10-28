@@ -1,0 +1,19 @@
+id: 62d5c5d7-4a3f-4e9d-99d0-2f5a9335baaf
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How was Peter Strudwick born, according to the race history?"
+choices:
+  - id: 8ace6922-6d20-4b5d-bfd6-2714bf58a28c
+    text: "Without hearing"
+  - id: b45762b7-a420-4f61-94fa-56c57c4b2d74
+    text: "Without sight"
+  - id: 94d384aa-0b48-40f4-bd26-bae2b460ef6d
+    text: "With a heart condition"
+  - id: 4773a99c-72d0-462f-8102-e89d2f0197ee
+    text: "With legs ending in stumps just past the ankles"
+correct_choice_ids:
+  - 4773a99c-72d0-462f-8102-e89d2f0197ee
+explanation: "Rubella affected his mother, and he was born with limb differences."
+archived: false

@@ -1,0 +1,9 @@
+id: 77d08caf-ad62-4c85-9a37-76e5e02159f9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In what year was the current finish line at Loma Alta Park adopted? (year)"
+accepted_answers:
+  - "1998"
+explanation: "The Loma Alta Park finish was adopted in 1998."
+archived: false

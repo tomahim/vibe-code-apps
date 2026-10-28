@@ -1,0 +1,19 @@
+id: c638701c-0486-4e40-8df6-4fb116ec69f5
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many participants ran the first race?"
+choices:
+  - id: 04079ff7-f942-4af9-8a75-43bb6241c01f
+    text: "4,500"
+  - id: 163a0b1c-d93c-4334-8191-6a9e33418f00
+    text: "450"
+  - id: e08287a5-26a4-4f86-8300-5a7be2f0c91a
+    text: "45"
+  - id: 0f37bb51-212c-46a5-bca8-ba9e7ac3ba76
+    text: "45,000"
+correct_choice_ids:
+  - 163a0b1c-d93c-4334-8191-6a9e33418f00
+explanation: "450 took part."
+archived: false

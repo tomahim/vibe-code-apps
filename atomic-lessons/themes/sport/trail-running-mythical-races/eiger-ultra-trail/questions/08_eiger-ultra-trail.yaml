@@ -1,0 +1,10 @@
+id: 7d072163-33f1-442b-812a-31a4769a34a7
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Who is credited for the organisation of the first edition? (first and last name)"
+accepted_answers:
+  - "Ralf Naf"
+  - "Ralf Näf"
+explanation: "A runner credited Ralf Naf and his team."
+archived: false

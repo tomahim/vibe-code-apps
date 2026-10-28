@@ -1,0 +1,19 @@
+id: 1c7dc7d8-5fe9-4511-91e6-e1c170ce251e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many finished the first edition?"
+choices:
+  - id: ab724c68-e8b2-4830-b16b-d47c4d993af1
+    text: "179"
+  - id: e1e56812-1cd1-4f18-9473-753090aa4ec3
+    text: "300"
+  - id: f803eb00-b669-4948-b321-4690a343c6fc
+    text: "1,830"
+  - id: 975db18d-7222-4dc3-b868-277eaaeb29c0
+    text: "30"
+correct_choice_ids:
+  - ab724c68-e8b2-4830-b16b-d47c4d993af1
+explanation: "179 finished, 164 men and 15 women."
+archived: false

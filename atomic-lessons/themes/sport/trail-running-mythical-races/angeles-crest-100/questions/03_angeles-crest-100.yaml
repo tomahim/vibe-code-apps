@@ -1,0 +1,19 @@
+id: 42fcff64-029e-43fe-80c4-8b2f26658fc2
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does point-to-point mean?"
+choices:
+  - id: 09680446-d682-4ebc-835b-15b62b4a37c2
+    text: "Runners meet at points"
+  - id: 6fb91ac7-12ae-49bc-a479-16cac8e69e3e
+    text: "Runners must carry points"
+  - id: a92af2e2-a735-46f0-9b67-0b5590a4eaff
+    text: "The course is a loop"
+  - id: bf210428-b6fe-4ce3-99d2-76a4037e0388
+    text: "Start and finish are in different places"
+correct_choice_ids:
+  - bf210428-b6fe-4ce3-99d2-76a4037e0388
+explanation: "The route goes from one town to another."
+archived: false

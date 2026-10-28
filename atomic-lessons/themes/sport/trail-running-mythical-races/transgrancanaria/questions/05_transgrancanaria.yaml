@@ -1,0 +1,19 @@
+id: f766fb85-ee16-46ae-9660-ac28d5cf774d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many participants did the first edition have, according to the recap?"
+choices:
+  - id: 66a7f237-8ba5-4414-9a26-689dfa0b7420
+    text: "8"
+  - id: f48fe956-fc0d-4ee4-a18f-abdc1543662e
+    text: "7,800"
+  - id: 778c5091-e495-4e1a-b812-7d9837b87429
+    text: "780"
+  - id: 054d4342-d034-4e8f-bfe8-9080e9021d0f
+    text: "78"
+correct_choice_ids:
+  - 054d4342-d034-4e8f-bfe8-9080e9021d0f
+explanation: "The recap says 78 participants."
+archived: false

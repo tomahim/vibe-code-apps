@@ -1,0 +1,9 @@
+id: 46e88596-dd47-4a05-ad2c-662156c5c046
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year did Gordy Ainsleigh run the trail on foot?"
+accepted_answers:
+  - "1974"
+explanation: "Ainsleigh joined the horses on August 3, 1974."
+archived: false

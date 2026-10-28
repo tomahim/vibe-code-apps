@@ -1,0 +1,19 @@
+id: 08010a0f-7d9b-4512-8f00-b12f027cd2e7
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many men took part in the first official run in 1977?"
+choices:
+  - id: 2d388659-40b5-4228-9f3f-e7279f1d76cf
+    text: "3"
+  - id: 14468072-c842-4312-8279-423a702331a7
+    text: "143"
+  - id: 34c5d6a8-33f1-4de2-b14f-641c3061ea64
+    text: "63"
+  - id: e8462fe3-abaa-4997-b601-2d68ce4cb4bf
+    text: "14"
+correct_choice_ids:
+  - e8462fe3-abaa-4997-b601-2d68ce4cb4bf
+explanation: "Fourteen men from four states took part."
+archived: false

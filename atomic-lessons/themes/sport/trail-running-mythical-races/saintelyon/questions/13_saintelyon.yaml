@@ -1,0 +1,19 @@
+id: 974525ed-b346-4670-a1b4-4681ef0bb43e
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What share of the course is paths, according to CTLyon?"
+choices:
+  - id: e5922998-6a97-4332-bc94-9264f00c5cbc
+    text: "35 percent"
+  - id: b0ea4199-2faa-4ef0-9f63-0288b82e351c
+    text: "10 percent"
+  - id: c0585c0e-f943-4e84-8111-abaaa60b66b7
+    text: "100 percent"
+  - id: c82fc654-d61f-49f2-a3f7-7e5c9a47aa7e
+    text: "65 percent"
+correct_choice_ids:
+  - c82fc654-d61f-49f2-a3f7-7e5c9a47aa7e
+explanation: "CTLyon says 65 percent paths and 35 percent asphalt."
+archived: false

@@ -1,0 +1,9 @@
+id: d3d65ece-fa0b-4499-b865-f7426376c81e
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "How many aid stations does the course have? (number)"
+accepted_answers:
+  - "14"
+explanation: "There are 14 aid stations."
+archived: false

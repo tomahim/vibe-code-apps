@@ -1,0 +1,19 @@
+id: c07522e0-fd70-41de-bb08-bcefd001b7f5
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What does food self-sufficiency mean?"
+choices:
+  - id: 3b99847e-fa4c-40f2-a06e-bfebbd059479
+    text: "Runners may not eat"
+  - id: 64e3a65b-1310-4aee-91df-444011ddb071
+    text: "Only water is carried"
+  - id: ff0a851e-002c-4312-a29b-e4a14a756c53
+    text: "Food is served at every stage"
+  - id: 6e76b8ee-be65-4a93-b20c-d385ed7d0d95
+    text: "Runners carry their own food"
+correct_choice_ids:
+  - 6e76b8ee-be65-4a93-b20c-d385ed7d0d95
+explanation: "The runners carry food for the whole race."
+archived: false

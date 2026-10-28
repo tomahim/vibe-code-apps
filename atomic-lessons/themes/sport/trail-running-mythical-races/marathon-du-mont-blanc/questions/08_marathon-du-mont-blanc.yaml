@@ -1,0 +1,9 @@
+id: e612a4dd-efe9-4ab7-a5c7-c6762122c1fa
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In what year was the Vertical Kilometer created? (year)"
+accepted_answers:
+  - "2011"
+explanation: "The VK was created in 2011."
+archived: false

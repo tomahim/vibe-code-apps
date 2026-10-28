@@ -1,0 +1,9 @@
+id: 59f72bb3-8645-4ef4-b928-edde6aad71e7
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What was the first date of the race in 2009? (month)"
+accepted_answers:
+  - "July"
+explanation: "The first race was planned for July 25."
+archived: false

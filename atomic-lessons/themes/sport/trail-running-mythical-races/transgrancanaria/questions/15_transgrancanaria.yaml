@@ -1,0 +1,19 @@
+id: 53a78337-953d-4465-894c-8898e8af8724
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "When does the new Open Agaldar debut?"
+choices:
+  - id: c53ea758-9de4-4d0f-b53f-ac33b0c7c39a
+    text: "2027"
+  - id: d9dfdfb2-d0f4-4e1b-a4c7-85038cfa8bc8
+    text: "2020"
+  - id: e23acfc5-fa30-41fb-8286-3037107e9fc8
+    text: "2016"
+  - id: 7e59da14-a472-4045-aa10-e9ba754ea5fc
+    text: "2003"
+correct_choice_ids:
+  - c53ea758-9de4-4d0f-b53f-ac33b0c7c39a
+explanation: "It debuts in 2027."
+archived: false

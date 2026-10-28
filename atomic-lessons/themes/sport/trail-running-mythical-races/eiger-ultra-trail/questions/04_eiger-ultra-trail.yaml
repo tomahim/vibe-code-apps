@@ -1,0 +1,10 @@
+id: 11e7f45d-018a-4f28-998a-37e1fbf2f121
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "How many days did the 1938 climb take? (number)"
+accepted_answers:
+  - "4"
+  - "four"
+explanation: "A battle waged over four days."
+archived: false

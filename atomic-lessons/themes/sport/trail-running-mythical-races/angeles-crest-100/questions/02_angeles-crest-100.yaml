@@ -1,0 +1,19 @@
+id: c9dd4d5d-a527-4d14-88a4-6bbf38e0391d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Between which towns does the original course run?"
+choices:
+  - id: 908b5ce0-f181-43f0-a1b4-e6ae5de89ded
+    text: "Chamonix and Courmayeur"
+  - id: aebf682e-35cd-4fe2-bc1d-feac4faa78e7
+    text: "Sierre and Zinal"
+  - id: d28026e3-0538-4ec8-b583-650637d48dc2
+    text: "Leadville and Silverton"
+  - id: fa5ff2fb-2447-4cde-904d-0f1a73c6f2e4
+    text: "Wrightwood and Altadena"
+correct_choice_ids:
+  - fa5ff2fb-2447-4cde-904d-0f1a73c6f2e4
+explanation: "The traditional route is point-to-point from Wrightwood to Altadena."
+archived: false

@@ -1,0 +1,19 @@
+id: 66a9cb65-7dd8-4a17-9fc7-2c77dea7e4a4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the first course length?"
+choices:
+  - id: fc30fdb0-336e-41e0-a633-8fdafbdfe8db
+    text: "98.8 miles"
+  - id: c060bc2e-946b-48d8-8cd0-f25500fab18b
+    text: "50 miles"
+  - id: 255d9905-6bf9-44d7-b7f4-eafae579b40a
+    text: "100.2 miles"
+  - id: 707a1460-420f-44a8-9eee-96f243afd765
+    text: "101.8 miles"
+correct_choice_ids:
+  - fc30fdb0-336e-41e0-a633-8fdafbdfe8db
+explanation: "The first course was nominally 98.8 miles."
+archived: false

@@ -1,0 +1,9 @@
+id: c71f63f4-b7c5-41b6-abf1-40e8270e5dce
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what year was the first edition? (year)"
+accepted_answers:
+  - "2002"
+explanation: "The first race was in 2002."
+archived: false

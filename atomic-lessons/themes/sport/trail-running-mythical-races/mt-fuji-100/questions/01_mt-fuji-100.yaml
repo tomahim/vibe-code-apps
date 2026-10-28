@@ -1,0 +1,19 @@
+id: 1ba22e55-e8bf-49a5-90ca-6c0d86d553e8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who created the UTMF?"
+choices:
+  - id: 603fee5d-6d34-46ac-9085-a4c2e5efd327
+    text: "Gilles Bertrand"
+  - id: 81cdc065-de4c-4b46-9a43-9be186895628
+    text: "Tsuyoshi Kaburaki"
+  - id: 70fd5ad8-872a-4a22-a5f3-e7b9b0f34604
+    text: "Kilian Jornet"
+  - id: 84c764d2-0143-4247-af4e-a9e24c6a4845
+    text: "Gordy Ainsleigh"
+correct_choice_ids:
+  - 81cdc065-de4c-4b46-9a43-9be186895628
+explanation: "He was a Japanese ultrarunner."
+archived: false

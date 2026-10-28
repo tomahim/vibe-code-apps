@@ -1,0 +1,19 @@
+id: ff58f328-a57c-4d9a-94e2-fd607de9eaf4
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the organisers' number one priority?"
+choices:
+  - id: 8bcb95a3-d2ff-4017-a319-95fa2addaf9f
+    text: "Safety"
+  - id: 895b517c-5d46-4de1-af55-afec5eeb3f6d
+    text: "Prizes"
+  - id: f2506e5d-4893-48c4-9703-f23630aafe7f
+    text: "Speed"
+  - id: 043e4200-d164-43d0-802a-a26d30d52387
+    text: "Media"
+correct_choice_ids:
+  - 8bcb95a3-d2ff-4017-a319-95fa2addaf9f
+explanation: "Safety is the number one priority."
+archived: false

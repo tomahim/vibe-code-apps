@@ -1,0 +1,19 @@
+id: 611254bd-78e3-4709-bca4-c39adce92c8c
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which year was the Barkley created?"
+choices:
+  - id: b5a058ae-2d83-423e-a21e-cc51a511ce67
+    text: "1996"
+  - id: 4feb6209-c2d8-45c5-9c09-ef8157664617
+    text: "2018"
+  - id: dd70baf4-2988-4543-b0d3-7849bb31be71
+    text: "1977"
+  - id: b4757ab3-8e8c-4468-a5be-0feb79b07240
+    text: "1986"
+correct_choice_ids:
+  - b4757ab3-8e8c-4468-a5be-0feb79b07240
+explanation: "The article says 1986."
+archived: false

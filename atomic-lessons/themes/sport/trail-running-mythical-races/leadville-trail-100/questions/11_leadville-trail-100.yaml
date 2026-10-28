@@ -1,0 +1,19 @@
+id: d4322b66-02cb-45df-9da2-8c2a6d878998
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the main goal of the Legacy Foundation?"
+choices:
+  - id: c8e41371-f6ea-4365-8a65-1eb0a150e34f
+    text: "Selling merchandise"
+  - id: 2f1bceea-bea9-406c-bf65-cfb0f6b6a04b
+    text: "Addressing local community needs"
+  - id: 079c34dc-9911-46c6-a6a3-b7aa1d8644c2
+    text: "Building a stadium"
+  - id: 79d927b0-42d6-4e48-b018-0f7c688e2a34
+    text: "Training elite runners"
+correct_choice_ids:
+  - 2f1bceea-bea9-406c-bf65-cfb0f6b6a04b
+explanation: "It supports Leadville and Lake County."
+archived: false

@@ -1,0 +1,19 @@
+id: 02cad5a4-b470-484e-8e15-f0d2514bb511
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "At what altitude is most of the race run, according to the WMRA 2004 report?"
+choices:
+  - id: 620b19c9-9071-410c-a57d-cc0ff590000d
+    text: "Around 3,500 metres"
+  - id: 82910519-01c4-4ca9-922e-2f9e339db671
+    text: "Between 500 and 800 metres"
+  - id: 4387d1e8-78f8-4def-a2c6-dab01c9be9c9
+    text: "Below 1,000 metres"
+  - id: b9e52ba7-024d-4fa3-a87d-1653f0ba6ba9
+    text: "Between 2,000 and 2,500 metres"
+correct_choice_ids:
+  - b9e52ba7-024d-4fa3-a87d-1653f0ba6ba9
+explanation: "The report says almost all the course is between 2,000 and 2,500 metres."
+archived: false

@@ -1,0 +1,10 @@
+id: 61dd3071-880f-499e-a8c3-72e1fb6b802e
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which Dolomites town hosted the 2026 Winter Olympics? (name from the lesson)"
+accepted_answers:
+  - "Cortina d'Ampezzo"
+  - "Cortina"
+explanation: "The official page notes Cortina d'Ampezzo hosted them."
+archived: false

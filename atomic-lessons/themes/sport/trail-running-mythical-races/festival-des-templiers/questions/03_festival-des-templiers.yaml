@@ -1,0 +1,19 @@
+id: 3f1aec5d-423e-4d17-8557-a89107a5d034
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which two American races inspired it?"
+choices:
+  - id: 32bd1693-c7c4-4744-a28a-e3e82ddf9c6b
+    text: "Pikes Peak and Barkley"
+  - id: 513944ce-6bab-40dc-b490-0c73e8e2e803
+    text: "Angeles Crest and Vermont"
+  - id: 9195880a-cc15-4314-b0f9-77ba498ee10d
+    text: "Hardrock and Wasatch"
+  - id: 66a80baa-eabb-45f4-bb49-9cd38d74383d
+    text: "Western States and Leadville"
+correct_choice_ids:
+  - 66a80baa-eabb-45f4-bb49-9cd38d74383d
+explanation: "The founders used these two as models."
+archived: false

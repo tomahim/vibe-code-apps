@@ -1,0 +1,19 @@
+id: 8b625ae4-575c-4d05-8014-01f590d4b38f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "When was the scholarship programme created?"
+choices:
+  - id: adf6249a-d7e4-4176-8812-bad1f2f38aad
+    text: "1983"
+  - id: cd725338-e341-4cf3-b5af-61cbe1a2147c
+    text: "2020"
+  - id: f3e280d3-83f8-47bc-8750-1e1710a8c8d8
+    text: "2009"
+  - id: 1ee6cfd5-cbfb-4608-bde8-28af7a0fbbd8
+    text: "2002"
+correct_choice_ids:
+  - f3e280d3-83f8-47bc-8750-1e1710a8c8d8
+explanation: "The Trail 100 Scholarship Program was created in 2009."
+archived: false

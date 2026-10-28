@@ -1,0 +1,19 @@
+id: 0c6b026f-d5b7-4a77-871c-c546f199c206
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who was the only mobile aid station?"
+choices:
+  - id: a02a2e3a-5d86-4c70-9cda-fd7d3ba0d701
+    text: "Evelyn Baugh"
+  - id: 296dfd3b-a113-4169-918f-bc8f976c2bdf
+    text: "Laurie Staton"
+  - id: 9801677f-8f90-44dd-9b9d-8c7386df2e06
+    text: "Jan Cheney"
+  - id: 2e8f73a9-f12b-4927-b834-10d6ddb5a4a5
+    text: "Greg Rollins"
+correct_choice_ids:
+  - a02a2e3a-5d86-4c70-9cda-fd7d3ba0d701
+explanation: "Evelyn Baugh drove the family's aging vehicle to meet runners."
+archived: false

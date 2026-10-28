@@ -1,0 +1,19 @@
+id: e680cca9-1f51-42cc-a5fe-8afa4151ebf6
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What did the 1993 result sheet show about climbing versus descending?"
+choices:
+  - id: 3f18dd6f-549e-49ad-acd7-86882baca781
+    text: "The climb was faster"
+  - id: 132cf489-8ed1-41e7-851b-7dc8c806630e
+    text: "Even the winner climbed much slower than he descended"
+  - id: 4a55cabd-0a9e-4179-b9b8-3334851244e6
+    text: "They took the same time"
+  - id: 5f111c17-cbc8-4580-9b99-9e18483ee1db
+    text: "The descent was not timed"
+correct_choice_ids:
+  - 132cf489-8ed1-41e7-851b-7dc8c806630e
+explanation: "Carpenter took 2:01:06 up and 1:15:33 down."
+archived: false

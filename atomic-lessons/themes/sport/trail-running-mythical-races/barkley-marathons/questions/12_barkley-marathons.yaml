@@ -1,0 +1,9 @@
+id: 7cfd7ff7-9b54-4a5c-afbc-7857e57f91d7
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Who created the Barkley? (first and last name)"
+accepted_answers:
+  - "Gary Cantrell"
+explanation: "Gary Cantrell."
+archived: false

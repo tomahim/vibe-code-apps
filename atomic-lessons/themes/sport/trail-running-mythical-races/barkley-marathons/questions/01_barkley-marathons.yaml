@@ -1,0 +1,19 @@
+id: 3da283f7-9907-434e-87fe-c055868bbc89
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which state is the Barkley held?"
+choices:
+  - id: b85ea0c5-38ef-4e5c-add0-eb7aa0113d31
+    text: "Colorado"
+  - id: 6210b773-4e31-4f7d-9381-941894d1acea
+    text: "Tennessee"
+  - id: 44789cd0-9872-4ce6-b1c2-8d15d3eb1995
+    text: "Utah"
+  - id: b581725d-ee8d-4c82-b7dc-fea1d9b8c06d
+    text: "California"
+correct_choice_ids:
+  - 6210b773-4e31-4f7d-9381-941894d1acea
+explanation: "It is in and near Frozen Head State Park in Tennessee."
+archived: false

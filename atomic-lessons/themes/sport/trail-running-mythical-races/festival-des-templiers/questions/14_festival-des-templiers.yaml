@@ -1,0 +1,19 @@
+id: 8df1c0ad-a105-44fb-9c46-8edfa79c9983
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many participants gathered in 2024?"
+choices:
+  - id: e3937fb4-6d4d-4852-bd8c-c7ea69751c7d
+    text: "110"
+  - id: 0ee3673e-c89b-4a00-9d18-cd37758a5ee1
+    text: "11,000"
+  - id: f9c7fdfe-221f-48bc-b1cb-7317ccef89a8
+    text: "1,100"
+  - id: e274cc8f-ca69-49bf-8066-48a9d691b76e
+    text: "110,000"
+correct_choice_ids:
+  - 0ee3673e-c89b-4a00-9d18-cd37758a5ee1
+explanation: "11,000 participants were counted."
+archived: false

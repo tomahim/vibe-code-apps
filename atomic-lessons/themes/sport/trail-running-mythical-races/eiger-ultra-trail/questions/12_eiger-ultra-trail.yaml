@@ -1,0 +1,10 @@
+id: 9b939d2d-27ae-4903-b179-d10942706254
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "How much elevation does the E250 listing show? (number)"
+accepted_answers:
+  - "18000"
+  - "18,000"
+explanation: "18,000 metres of gain."
+archived: false

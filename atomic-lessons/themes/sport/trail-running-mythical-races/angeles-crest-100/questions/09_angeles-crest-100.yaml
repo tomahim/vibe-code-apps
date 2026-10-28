@@ -1,0 +1,19 @@
+id: 3b37fbd6-bd9a-48c4-9f71-ccbe1d11e087
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which fire closed trails near Altadena?"
+choices:
+  - id: 9dac687f-b61a-40ab-b018-942c839c0cee
+    text: "The Eaton Fire"
+  - id: a3caad28-d305-49ea-9c44-584846bad54f
+    text: "The Bridge Fire"
+  - id: 34191edc-7aca-4f9e-ac63-0d20c6e7bb0b
+    text: "The Station Fire"
+  - id: 42a56198-a80e-45bd-897e-a375c2bab505
+    text: "The Camp Fire"
+correct_choice_ids:
+  - 9dac687f-b61a-40ab-b018-942c839c0cee
+explanation: "The Eaton Fire closed trails near Altadena."
+archived: false

@@ -1,0 +1,19 @@
+id: 859242a1-4587-46d1-9e3b-f68889275e83
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What changes every year?"
+choices:
+  - id: f4a3d1aa-418a-499d-9024-937a9df1bc4f
+    text: "The number of aid stations"
+  - id: 92da1e02-53ca-4088-a498-58da8fec0ce4
+    text: "The month"
+  - id: 3553d477-c78f-4415-ad1b-8555fc1f5c98
+    text: "The start town"
+  - id: b88843d1-82f8-48f6-89eb-121373aee270
+    text: "The direction of the loop"
+correct_choice_ids:
+  - b88843d1-82f8-48f6-89eb-121373aee270
+explanation: "The direction reverses each year."
+archived: false

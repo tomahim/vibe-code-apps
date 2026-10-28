@@ -1,0 +1,19 @@
+id: 35f6a1fb-1e9b-4f5c-8322-fdacb1742c86
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What is the main point of the 1989 logo?"
+choices:
+  - id: e3dcfd3e-de3c-45e7-b82e-22c0b75aaed9
+    text: "A camel"
+  - id: 06347785-72ed-49a7-ae1b-85d51672dfb5
+    text: "A mountain"
+  - id: 9b33e737-c71a-454c-8816-c2518b4c4a5f
+    text: "A compass"
+  - id: 99dd1fe7-ef07-4ab7-acb2-0ad65a1a1222
+    text: "A runner in a cheche with a water bottle pipette in the mouth"
+correct_choice_ids:
+  - 99dd1fe7-ef07-4ab7-acb2-0ad65a1a1222
+explanation: "The logo shows a runner wrapped in a cheche."
+archived: false

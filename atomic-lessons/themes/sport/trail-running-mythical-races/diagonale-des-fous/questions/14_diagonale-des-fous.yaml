@@ -1,0 +1,19 @@
+id: f173355d-d179-42ed-b473-92a874fe1fde
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Where did the 2026 race start?"
+choices:
+  - id: 80c0ff5d-208d-44ee-b5f9-c455c8deec20
+    text: "Le Tremblet"
+  - id: 4ce891a1-997f-4902-92d7-8f47c060d8ca
+    text: "The seafront of Saint-Pierre"
+  - id: 750494fc-8111-4365-86c0-2dc7ada4ac2f
+    text: "Cilaos"
+  - id: c4181f67-cdc4-4653-8dea-740ccfa4c96f
+    text: "Saint-Denis"
+correct_choice_ids:
+  - 4ce891a1-997f-4902-92d7-8f47c060d8ca
+explanation: "The runners started from the seafront of Saint-Pierre."
+archived: false

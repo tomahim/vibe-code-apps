@@ -1,0 +1,19 @@
+id: 5b5fe23f-9697-4986-af1b-9ff2bd76a7e8
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which place is on the south coast and finishes the Advanced?"
+choices:
+  - id: ea63c7a2-8df0-4c35-9409-492b0ebba4fb
+    text: "Teror"
+  - id: dc6fb853-942e-435f-ba03-7b26ed9b77a7
+    text: "Tejeda"
+  - id: c9b24851-46b5-48cf-b4ef-50e7ba12f2a0
+    text: "Agaete"
+  - id: 12b36f95-6bfc-4449-8951-d21fc753ac8d
+    text: "Maspalomas"
+correct_choice_ids:
+  - 12b36f95-6bfc-4449-8951-d21fc753ac8d
+explanation: "Maspalomas is the finish."
+archived: false

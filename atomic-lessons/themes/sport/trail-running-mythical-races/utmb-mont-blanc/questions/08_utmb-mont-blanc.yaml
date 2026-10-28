@@ -1,0 +1,11 @@
+id: 47b377ed-1ee3-4bd5-8321-59dd420fa6ff
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How long is the maximum time in the 2026 listing? (hours and minutes)"
+accepted_answers:
+  - "45 hours 30 minutes"
+  - "45h30"
+  - "45:30"
+explanation: "The listing shows 45 hours 30 minutes."
+archived: false

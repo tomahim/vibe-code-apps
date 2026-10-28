@@ -1,0 +1,19 @@
+id: ff4c7c2c-fdde-44c9-b7c9-fba87b6fd456
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many countries were represented in 2016?"
+choices:
+  - id: 80547f3f-c58c-439a-8217-f4d5e3bd2489
+    text: "700"
+  - id: 5916e261-7c37-431b-8f4c-fed598574911
+    text: "70"
+  - id: 90fee4a8-e3ed-4fc4-9cdc-8da31ad7865f
+    text: "7"
+  - id: b7e26ec9-6a24-4e29-8427-751376e1245d
+    text: "17"
+correct_choice_ids:
+  - 5916e261-7c37-431b-8f4c-fed598574911
+explanation: "Runners came from 70 countries."
+archived: false

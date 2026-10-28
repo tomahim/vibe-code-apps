@@ -1,0 +1,19 @@
+id: d68429a9-075a-44be-8c76-1c4ce50b285c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which decade did the race begin?"
+choices:
+  - id: 37e5c9a8-f0aa-41c9-bd6d-27a4e7cc62bc
+    text: "The 2010s"
+  - id: fa438e77-122b-4a90-9aab-9b9f6b570035
+    text: "The 1950s"
+  - id: fd6ec206-d331-440b-89c0-2eccf1d67c6f
+    text: "The 1970s"
+  - id: 715f6800-82b1-4c2e-b45b-86dd1dc6f1d6
+    text: "The 1990s"
+correct_choice_ids:
+  - fd6ec206-d331-440b-89c0-2eccf1d67c6f
+explanation: "The first race was in 1974."
+archived: false

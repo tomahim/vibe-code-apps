@@ -1,0 +1,19 @@
+id: ca265a66-6e39-4766-9bf1-82d7270ef8c1
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the 2012 distance?"
+choices:
+  - id: c1a4132c-f48a-4b27-92ec-11eceadb1d92
+    text: "112 km"
+  - id: 6efafc8b-02fd-427e-808d-a721832df7a9
+    text: "148 km"
+  - id: 85175295-b9ac-44a4-899f-1c0078a59cca
+    text: "170 km"
+  - id: 05e8e46e-20c8-436b-9739-7ee60cef0768
+    text: "126 km"
+correct_choice_ids:
+  - 85175295-b9ac-44a4-899f-1c0078a59cca
+explanation: "The 2012 course was 170 km with 10,800 m."
+archived: false

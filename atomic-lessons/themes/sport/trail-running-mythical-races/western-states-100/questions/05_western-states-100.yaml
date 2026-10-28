@@ -1,0 +1,19 @@
+id: 5b01e60c-3554-43e7-917c-ca07c17d38bd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long did Gordy Ainsleigh take in 1974?"
+choices:
+  - id: f42f4d9b-a8c3-4e78-923a-d5c798066f35
+    text: "19 hours 10 minutes"
+  - id: eef33ad0-7481-4fc6-99ed-7069e39911f5
+    text: "23 hours 42 minutes"
+  - id: caa10d9a-f2cd-4607-88b0-ba7be3029d81
+    text: "28 hours 36 minutes"
+  - id: 81435c9b-95dd-473f-ad7e-74a8bcb5b049
+    text: "35 hours 1 minute"
+correct_choice_ids:
+  - eef33ad0-7481-4fc6-99ed-7069e39911f5
+explanation: "He arrived in Auburn 23 hours and 42 minutes later."
+archived: false

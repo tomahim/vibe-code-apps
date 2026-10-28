@@ -1,0 +1,19 @@
+id: d19540c7-3475-4fed-bf9d-0aec41040f8d
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which year had a finish rate of 52.26 percent?"
+choices:
+  - id: d5f62aae-f914-42c8-af2e-608d4c388e87
+    text: "1996"
+  - id: f59fe378-0902-4352-b32c-98b218c81a24
+    text: "1989"
+  - id: 02e50ae8-0e5f-4207-a54f-2ec5d23ba303
+    text: "2011"
+  - id: 177015d2-cc00-421a-92be-f2725df9065c
+    text: "2017"
+correct_choice_ids:
+  - 02e50ae8-0e5f-4207-a54f-2ec5d23ba303
+explanation: "In 2011, 1,228 of 2,350 starters finished."
+archived: false

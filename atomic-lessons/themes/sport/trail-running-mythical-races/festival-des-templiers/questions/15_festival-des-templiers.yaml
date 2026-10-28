@@ -1,0 +1,19 @@
+id: 36a5ad2d-282f-4990-9f21-7ecbbb15a9f4
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the festival's new name for its 30th edition?"
+choices:
+  - id: bd509791-28f6-4857-b91a-be43561be176
+    text: "Grand Raid"
+  - id: 28005504-fed6-446d-8225-c7a8398f7a29
+    text: "Hoka Les Templiers"
+  - id: c4e0d39a-3343-4f98-bfaf-16dd2d779114
+    text: "Les Causses"
+  - id: 05bddea6-b4b3-4760-bd75-a718fcbab678
+    text: "Millau Cup"
+correct_choice_ids:
+  - 28005504-fed6-446d-8225-c7a8398f7a29
+explanation: "It was renamed Hoka Les Templiers."
+archived: false

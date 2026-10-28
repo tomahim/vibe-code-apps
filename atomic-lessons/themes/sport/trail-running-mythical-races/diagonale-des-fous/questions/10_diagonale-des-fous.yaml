@@ -1,0 +1,19 @@
+id: 52fd95e6-c44f-4bef-b39e-873b020e66ac
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many finished in 2017?"
+choices:
+  - id: 641a38fd-bd7f-495b-92cb-41198c616878
+    text: "1,228"
+  - id: 751d42fa-dc10-4e12-802e-d759eb22020a
+    text: "1,830"
+  - id: d84889d1-ff02-4c46-a42a-29bcd02fcd97
+    text: "2,573"
+  - id: f50b0326-9a03-4fdf-80bf-614f5d3edc2c
+    text: "314"
+correct_choice_ids:
+  - 751d42fa-dc10-4e12-802e-d759eb22020a
+explanation: "1,830 finished out of 2,573."
+archived: false

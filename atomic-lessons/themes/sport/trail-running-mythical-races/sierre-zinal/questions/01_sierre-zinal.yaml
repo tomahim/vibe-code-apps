@@ -1,0 +1,19 @@
+id: 4280a2a7-5ba5-457f-a5fc-38cc2b3bc762
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who imagined Sierre-Zinal?"
+choices:
+  - id: b553cfda-9890-4645-af67-9bb775fc074d
+    text: "Jean-Claude Pont"
+  - id: 7b9e3148-13e7-4e40-b69d-6e1be2db9938
+    text: "Jonathan Wyatt"
+  - id: 7ae0899c-24e6-43b3-8289-4df7c83442f5
+    text: "Ricardo Mejia"
+  - id: 0bf03a3a-147a-42dd-955d-2b9d890a6b97
+    text: "Kilian Jornet"
+correct_choice_ids:
+  - b553cfda-9890-4645-af67-9bb775fc074d
+explanation: "Pont was a mathematician, professor and mountain guide."
+archived: false

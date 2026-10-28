@@ -1,0 +1,19 @@
+id: 89e5531b-a350-42e6-8a65-c104b9347f0e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year was the first edition?"
+choices:
+  - id: 740727b2-fdcf-4de3-b201-661e9bfacd46
+    text: "1979"
+  - id: d60773d3-c396-4f60-b5c5-3afd5d8b2cb1
+    text: "1999"
+  - id: 355c4b82-37a0-45eb-b1f1-87f3bb36fb3f
+    text: "2009"
+  - id: 0bde187a-5c66-41cb-b618-269a7bd90c5a
+    text: "1989"
+correct_choice_ids:
+  - 0bde187a-5c66-41cb-b618-269a7bd90c5a
+explanation: "The first edition took place in 1989."
+archived: false

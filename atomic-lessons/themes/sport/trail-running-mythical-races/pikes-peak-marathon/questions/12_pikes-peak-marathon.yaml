@@ -1,0 +1,9 @@
+id: 3086c757-318e-4ac3-a78c-c1bbfbb600f2
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the name of the Colorado town where the race is based?"
+accepted_answers:
+  - "Manitou Springs"
+explanation: "The race office address is in Manitou Springs, Colorado."
+archived: false

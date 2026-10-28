@@ -1,0 +1,10 @@
+id: a1bd8176-6876-4f7f-bf3e-f73afcac6cdc
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which French runner who won in 2014 appears in the runner path? (first and last name)"
+accepted_answers:
+  - "Francois D'Haene"
+  - "François D'Haene"
+explanation: "The 2014 winner was Francois D'Haene."
+archived: false

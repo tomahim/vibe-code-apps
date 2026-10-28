@@ -1,0 +1,9 @@
+id: a0616eae-af31-4811-a23b-28a581fa61f1
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the maximum time for the 2026 race in hours? (number)"
+accepted_answers:
+  - "150"
+explanation: "The finish must be reached within 150 hours."
+archived: false

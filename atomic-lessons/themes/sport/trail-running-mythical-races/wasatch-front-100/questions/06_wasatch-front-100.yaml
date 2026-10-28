@@ -1,0 +1,19 @@
+id: e67e30b5-0fb7-45be-a753-2f1120ef40fc
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What type of maps were used?"
+choices:
+  - id: 197b202b-6c06-49fa-85c5-ad442b57564e
+    text: "GPS tracks"
+  - id: 300a76b7-4303-4270-ad36-c81bca41e602
+    text: "Forest Service 1:24,000 quadrangle maps"
+  - id: 8ad51bf0-c3e1-4bec-9bdb-160226070134
+    text: "Hand sketches"
+  - id: 1eeb51b7-f216-4d30-bf00-610e9d499dde
+    text: "Satellite images"
+correct_choice_ids:
+  - 300a76b7-4303-4270-ad36-c81bca41e602
+explanation: "Steve Baugh highlighted the route on those maps."
+archived: false

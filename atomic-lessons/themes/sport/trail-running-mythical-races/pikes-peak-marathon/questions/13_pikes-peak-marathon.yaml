@@ -1,0 +1,19 @@
+id: 104498d3-8e15-4d0c-a4ec-18ed3fc6cf3e
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which kinds of weather are recorded in the race's history?"
+choices:
+  - id: 8b36f7e8-f64e-4f87-a71f-6d5f3c3a912e
+    text: "Heat waves, lightning and blizzards"
+  - id: e3e41dc7-10e7-4254-bca0-7fd531eefb26
+    text: "Only fog"
+  - id: c0e14f77-8c00-4b39-82c3-a065f47d69e4
+    text: "Only rain"
+  - id: 011a55ed-5cf2-4134-afc2-c23d29399b91
+    text: "Only wind"
+correct_choice_ids:
+  - 8b36f7e8-f64e-4f87-a71f-6d5f3c3a912e
+explanation: "The history lists heat waves, lightning strikes and blizzards."
+archived: false

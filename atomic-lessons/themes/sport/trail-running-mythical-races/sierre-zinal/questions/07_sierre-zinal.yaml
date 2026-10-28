@@ -1,0 +1,19 @@
+id: 212ffbb3-a4f3-42fb-976e-22b17ff67d4c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What is the official distance?"
+choices:
+  - id: 9c0a2c36-362a-43ec-8fda-c1fc41eee940
+    text: "31 km"
+  - id: fd9c9f45-14f3-4135-b81f-cf9be07b5421
+    text: "100 km"
+  - id: c16f5e63-f763-43c5-977f-3856b6bb16bc
+    text: "42 km"
+  - id: 586bba75-43d4-4d89-b03d-91b3337dc35a
+    text: "21 km"
+correct_choice_ids:
+  - 9c0a2c36-362a-43ec-8fda-c1fc41eee940
+explanation: "The official site describes a 31 km mountain trail."
+archived: false

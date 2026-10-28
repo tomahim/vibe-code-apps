@@ -1,0 +1,19 @@
+id: ec2f9b46-14b1-4c5e-a41e-0df2de0cdede
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "When was the first Mont-Blanc Cross?"
+choices:
+  - id: 637e19c3-2181-483c-8529-0f31acd91aaf
+    text: "August 7, 1959"
+  - id: 52d60ffe-7d6c-452b-8fed-6817a072e522
+    text: "October 28, 1995"
+  - id: c0283c55-ed52-4641-ac78-e11dfd4d47b4
+    text: "July 1, 1979"
+  - id: 986b91a0-77cc-4ddb-b813-fdfc632eaeeb
+    text: "June 1, 2003"
+correct_choice_ids:
+  - c0283c55-ed52-4641-ac78-e11dfd4d47b4
+explanation: "The race was launched on July 1, 1979."
+archived: false

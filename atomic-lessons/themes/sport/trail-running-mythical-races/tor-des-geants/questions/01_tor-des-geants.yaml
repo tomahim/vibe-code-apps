@@ -1,0 +1,19 @@
+id: 5ff68d18-68f8-40da-80bc-d7e5a919dcc8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does Tor des Geants mean?"
+choices:
+  - id: e6a62b66-ed09-467e-b03c-ba43f7ef99a4
+    text: "Trail of Gold"
+  - id: 7c241d22-7bce-45bd-969d-254f2e120537
+    text: "Tower of Giants"
+  - id: 415050fc-d53a-44f4-acb4-1875a7c7b865
+    text: "Tour of the Lakes"
+  - id: 283cd338-0133-4e32-aeed-d9c1bac0410b
+    text: "Tour of the Giants"
+correct_choice_ids:
+  - 283cd338-0133-4e32-aeed-d9c1bac0410b
+explanation: "The press kit translates it as Giro dei Giganti."
+archived: false

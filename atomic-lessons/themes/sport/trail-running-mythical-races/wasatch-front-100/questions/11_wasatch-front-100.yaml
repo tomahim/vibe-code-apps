@@ -1,0 +1,19 @@
+id: a1418fcd-bca0-4861-b4c2-86f65ff54bb9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Whose attempt in 1982 ended at mile 73?"
+choices:
+  - id: a0585b0d-9d57-4e0d-ad74-67309a7d3187
+    text: "Laurie Staton"
+  - id: 73ee71fc-194d-4913-acc2-52f0e7164ac6
+    text: "Ultrarunning magazine founders Pilon and Gagarin"
+  - id: 00e608ea-e524-413d-99d8-da16063633e4
+    text: "Dana Miller"
+  - id: f2a753b7-2045-40d5-8cc9-899041c78934
+    text: "Steve Baugh"
+correct_choice_ids:
+  - 73ee71fc-194d-4913-acc2-52f0e7164ac6
+explanation: "They dropped at mile 73."
+archived: false

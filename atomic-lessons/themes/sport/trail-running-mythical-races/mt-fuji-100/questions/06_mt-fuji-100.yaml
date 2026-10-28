@@ -1,0 +1,19 @@
+id: db3fbef8-47f2-4bb0-80c5-c4a4930984a6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was his time?"
+choices:
+  - id: 61c6a95e-f157-4f92-8c93-cfba0e27827b
+    text: "35:01:21"
+  - id: f0e1ca7a-8aa7-47ee-ba55-8dc8430e1875
+    text: "24:05:04"
+  - id: db1fa20a-0d41-44e9-8d34-537f21d9788b
+    text: "19:39:48"
+  - id: 447f5ccc-e09e-4734-bf0b-d356c6c0bdb4
+    text: "18:53:12"
+correct_choice_ids:
+  - 447f5ccc-e09e-4734-bf0b-d356c6c0bdb4
+explanation: "The official list shows 18:53:12."
+archived: false

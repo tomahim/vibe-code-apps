@@ -1,0 +1,19 @@
+id: 8551b416-01bd-411b-8aee-caf6aedd5edd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how many pioneers started the first edition?"
+choices:
+  - id: b39f2c6e-7773-4b78-8085-e6ff1be0d868
+    text: "Fifteen"
+  - id: 90459f82-3994-474b-b611-801b59d60bff
+    text: "Fifty"
+  - id: d0b6c27e-02ba-4fef-82cb-fcb6129bb483
+    text: "Five"
+  - id: 0bad414d-080d-480b-b049-9daa63af5658
+    text: "Five hundred"
+correct_choice_ids:
+  - b39f2c6e-7773-4b78-8085-e6ff1be0d868
+explanation: "CTLyon says fifteen pioneers set off."
+archived: false

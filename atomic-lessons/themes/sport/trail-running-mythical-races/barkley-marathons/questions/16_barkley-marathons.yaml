@@ -1,0 +1,10 @@
+id: f10eca13-ca7a-4c57-9f9d-3ea3022c0767
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the state park where the race is held? (two words plus Park)"
+accepted_answers:
+  - "Frozen Head State Park"
+  - "Frozen Head"
+explanation: "The race is held in and near Frozen Head State Park."
+archived: false

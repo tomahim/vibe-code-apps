@@ -1,0 +1,10 @@
+id: ebeb1f14-da5e-474a-8df0-5c2e0cb75ac7
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was installed in 1995 for a village? (one word)"
+accepted_answers:
+  - "pump"
+  - "water pump"
+explanation: "A water pump was installed at the initiative of Gilles Flamant."
+archived: false

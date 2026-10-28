@@ -1,0 +1,11 @@
+id: daab2613-b2dd-4e53-b81c-e71a247a245d
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which Italian region is the race held? (name, two words)"
+accepted_answers:
+  - "Valle d'Aosta"
+  - "Valle d Aosta"
+  - "Aosta Valley"
+explanation: "The race is in the Valle d'Aosta."
+archived: false

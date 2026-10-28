@@ -1,0 +1,19 @@
+id: dd65123d-ebd4-4e51-bdfa-17035a17239d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many pioneers took part in the first race?"
+choices:
+  - id: a49461a7-92e7-4024-b0df-3ed074e6aeb3
+    text: "23"
+  - id: f9f4d842-6ce8-405b-844c-ff615a7e10f6
+    text: "2"
+  - id: 2e67497f-d759-4ed5-810a-dc7f601c8feb
+    text: "230"
+  - id: 83b407fc-9232-45b3-a9a4-b4197be26737
+    text: "1,000"
+correct_choice_ids:
+  - a49461a7-92e7-4024-b0df-3ed074e6aeb3
+explanation: "It was born with 23 pioneers."
+archived: false

@@ -1,0 +1,10 @@
+id: b6779de9-c221-4bb4-8863-faebf2df7e44
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "How many metres of elevation gain does the 120K have? (number)"
+accepted_answers:
+  - "5800"
+  - "5,800"
+explanation: "The official page lists 5,800 metres."
+archived: false

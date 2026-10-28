@@ -1,0 +1,19 @@
+id: 7a68b155-66a0-4e63-ac51-f64ca0c2ec4d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many of 19 starters survived in 1982?"
+choices:
+  - id: 33de2e5e-97f9-4b0e-b3a5-8f796f6fef8e
+    text: "2"
+  - id: 22216cb3-586b-4fcf-b8b3-cfc419cc373e
+    text: "11"
+  - id: f14015f6-4913-42c3-8c16-b74ea61b4de5
+    text: "3"
+  - id: 662b98f7-ad37-48f6-9c21-c280be3cb807
+    text: "19"
+correct_choice_ids:
+  - f14015f6-4913-42c3-8c16-b74ea61b4de5
+explanation: "The history lists 3 of 19 survivors."
+archived: false

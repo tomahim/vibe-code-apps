@@ -1,0 +1,19 @@
+id: 86501298-ff0e-4434-978d-dcf402bfd74b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Whom did Suominen challenge to race him up and down the peak?"
+choices:
+  - id: f6e10c47-6e91-4f28-9112-cbd602558b9a
+    text: "Local soldiers"
+  - id: f1bc1322-6492-496a-b24d-47184d4ea709
+    text: "Cigarette smokers"
+  - id: 692e4245-d8a2-47e5-afeb-3735269ccece
+    text: "Marathon champions"
+  - id: 15af9274-4aa3-4b90-b0f6-743ae0a0858e
+    text: "Mountain guides"
+correct_choice_ids:
+  - f1bc1322-6492-496a-b24d-47184d4ea709
+explanation: "He wrote to the Colorado Springs Chamber of Commerce and challenged smokers."
+archived: false

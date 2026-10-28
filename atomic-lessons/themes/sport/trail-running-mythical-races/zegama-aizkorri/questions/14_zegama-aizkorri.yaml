@@ -1,0 +1,19 @@
+id: 867f996e-3af2-4ac9-acba-a250d7b6860b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How much vertical gain does the Golden Trail World Series give for the 42 km?"
+choices:
+  - id: a320bf8e-da24-4052-aa76-99ae0dc8ad1a
+    text: "24,000 metres"
+  - id: b95e5544-150e-48d3-9969-ef9c766d05f1
+    text: "273 metres"
+  - id: 2cd78014-d4cb-40dd-82d1-0f1426cddf94
+    text: "2,736 metres"
+  - id: 67a0f187-6bbd-4af0-96bb-4f0f3c6deb1a
+    text: "10,000 metres"
+correct_choice_ids:
+  - 2cd78014-d4cb-40dd-82d1-0f1426cddf94
+explanation: "The GTWS article lists 42 kilometres and 2,736 metres of vertical gain."
+archived: false

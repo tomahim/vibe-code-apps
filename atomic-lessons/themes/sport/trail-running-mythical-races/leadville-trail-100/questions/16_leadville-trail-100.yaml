@@ -1,0 +1,9 @@
+id: 59b112ce-33c7-4b0b-a991-9808a8cf620d
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which US state is Leadville in?"
+accepted_answers:
+  - "Colorado"
+explanation: "Leadville is in Colorado."
+archived: false

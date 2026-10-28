@@ -1,0 +1,19 @@
+id: e1f53ac4-c4e4-408c-a270-1e7f665d425e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long is the course?"
+choices:
+  - id: 1f13bb22-e14b-4de8-82f7-6ccca6d54aa0
+    text: "330 km"
+  - id: eb2ced0c-3f7d-4d54-9be6-d310a3743a2a
+    text: "42 km"
+  - id: ac5b41ec-ce83-4314-8ec2-428473f1b68c
+    text: "73 km"
+  - id: d55965d7-42a7-4d28-a848-944a92d37b20
+    text: "100 km"
+correct_choice_ids:
+  - 1f13bb22-e14b-4de8-82f7-6ccca6d54aa0
+explanation: "The course is 330 km."
+archived: false

@@ -1,0 +1,19 @@
+id: a53e799e-53a8-4457-9213-17b824c98ba0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why was the 2011 edition cancelled?"
+choices:
+  - id: 8b4628c0-2bcf-4a69-b985-b36a019dd70d
+    text: "Snow"
+  - id: 13cc28c1-5f65-4f61-92ee-432717e58a9d
+    text: "The tsunami"
+  - id: ba2f375f-7a2c-479d-bc6f-4b61997e41af
+    text: "A strike"
+  - id: 392651b8-3c45-457e-99e7-ece35428bbbd
+    text: "A volcano"
+correct_choice_ids:
+  - 13cc28c1-5f65-4f61-92ee-432717e58a9d
+explanation: "The tsunami forced a cancellation."
+archived: false

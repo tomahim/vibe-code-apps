@@ -1,0 +1,19 @@
+id: c613f14b-422f-4507-a3d7-c6801cf67360
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which series did the 42 km join in 2018?"
+choices:
+  - id: 0bd74e83-15c7-4505-b257-13fab8a6ffd9
+    text: "UTMB World Series"
+  - id: 5fa3cea1-2fd1-4757-91d6-ee0be5d4733a
+    text: "World Trail Majors"
+  - id: 0b3ee6eb-740e-4557-92ba-24964367487a
+    text: "The Olympic Games"
+  - id: 6bbeeaaf-aa17-4a14-a1d3-273136d06ed2
+    text: "The Golden Trail World Series"
+correct_choice_ids:
+  - 6bbeeaaf-aa17-4a14-a1d3-273136d06ed2
+explanation: "It was part of the series through 2024."
+archived: false

@@ -1,0 +1,9 @@
+id: be244863-8e7d-4c2d-96c2-8942823faad4
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In which year was the Edition Zero? (year)"
+accepted_answers:
+  - "2009"
+explanation: "The test edition was in 2009."
+archived: false

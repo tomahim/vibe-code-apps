@@ -1,0 +1,19 @@
+id: b6e773d1-3b75-4e94-b9f2-276da2ae7ebd
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Where is the start line relative to the sea?"
+choices:
+  - id: 9a410def-a276-4f0c-8ebc-0abb0ab9ddc7
+    text: "At 3,000 metres"
+  - id: 5465f891-f899-4f5e-b326-7fb4c0d736e7
+    text: "In a cave"
+  - id: f2ed5d5c-f7f6-49f6-81ea-c5ffb90e0cee
+    text: "At 1,000 metres"
+  - id: 17e8d27b-2338-4bf2-a21a-7b5d6a730389
+    text: "At sea level"
+correct_choice_ids:
+  - 17e8d27b-2338-4bf2-a21a-7b5d6a730389
+explanation: "The start line is at sea level."
+archived: false

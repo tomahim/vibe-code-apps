@@ -1,0 +1,19 @@
+id: 03cfaf93-65ee-4dce-a183-e2c4c539f74e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who challenged the villagers to make a mountain marathon?"
+choices:
+  - id: 43cb98e4-7c35-4dea-9fa8-37cbb49c1668
+    text: "A school"
+  - id: 8ef862b3-ef22-4579-a62d-71a3a5420044
+    text: "The regional mountain federation"
+  - id: 27c2ee46-965d-4f62-b8ba-82827cc4f607
+    text: "The Olympic committee"
+  - id: 4ccde90a-17ff-43f6-bc83-2556863c8e78
+    text: "A sports brand"
+correct_choice_ids:
+  - 8ef862b3-ef22-4579-a62d-71a3a5420044
+explanation: "The federation asked why not organise a mountain marathon."
+archived: false

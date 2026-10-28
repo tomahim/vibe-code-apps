@@ -1,0 +1,19 @@
+id: bcfa9203-ec9c-4c83-b7e3-720a1ed37cd8
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What are the start and finish venues?"
+choices:
+  - id: 41c032e4-73e5-48e0-988e-dcf87e419a86
+    text: "Chamonix and Courmayeur"
+  - id: c7bb867a-f5a5-489c-9d8e-84adfe33fbb4
+    text: "Mount Fuji Children's World and Fuji Hokuroku Park"
+  - id: e63a6b19-779d-48c8-8354-4cf628790f03
+    text: "Wrightwood and Altadena"
+  - id: 0158900b-a615-4cd3-8be9-8ab9029b7d1f
+    text: "Teror and Maspalomas"
+correct_choice_ids:
+  - c7bb867a-f5a5-489c-9d8e-84adfe33fbb4
+explanation: "The start is at Mount Fuji Children's World."
+archived: false

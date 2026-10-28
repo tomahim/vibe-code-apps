@@ -1,0 +1,10 @@
+id: dd73a37b-c2ae-4384-b58f-0897cad0d259
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many feet of total vertical gain does the official page give? (number)"
+accepted_answers:
+  - "33441"
+  - "33,441"
+explanation: "The course has 33,441 feet of climbing."
+archived: false

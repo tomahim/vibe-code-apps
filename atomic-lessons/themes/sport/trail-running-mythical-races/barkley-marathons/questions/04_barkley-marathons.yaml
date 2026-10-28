@@ -1,0 +1,10 @@
+id: b48a8b93-4527-4615-b612-f10f43c76ced
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What must applicants submit? (one word)"
+accepted_answers:
+  - "essay"
+  - "an essay"
+explanation: "Entrants must submit an essay."
+archived: false

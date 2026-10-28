@@ -1,0 +1,10 @@
+id: 664413d3-0c58-4803-9781-598172b41bb3
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "How many metres of gain does the main race list? (number)"
+accepted_answers:
+  - "6463"
+  - "6,463"
+explanation: "6,463 metres."
+archived: false

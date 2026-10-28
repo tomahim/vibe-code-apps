@@ -1,0 +1,19 @@
+id: 61a8fc40-7ca1-40a4-9535-24b9e456acf6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "About how long is the course, according to the official page?"
+choices:
+  - id: 079f8c14-8f57-4d06-8ddd-4f37d7545b62
+    text: "170 km"
+  - id: 62d965ec-976a-4007-8e26-2601d90b4e5a
+    text: "81 km"
+  - id: e4079b39-8949-460d-b9b3-d5d228f743d9
+    text: "42 km"
+  - id: 35c441ad-3d3d-4423-987e-f674ef2a1d09
+    text: "330 km"
+correct_choice_ids:
+  - 079f8c14-8f57-4d06-8ddd-4f37d7545b62
+explanation: "The official page says approximately 170 km."
+archived: false

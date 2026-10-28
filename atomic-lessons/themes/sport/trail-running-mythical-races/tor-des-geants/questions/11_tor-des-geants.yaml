@@ -1,0 +1,19 @@
+id: 1f42dc50-3a22-4a36-b0c4-a1d06607f1e4
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many municipalities were involved in the first edition?"
+choices:
+  - id: e889c740-5488-4147-b401-0114fab5d395
+    text: "34"
+  - id: b3f2b73b-43fe-4d1f-b542-a98e185f0a20
+    text: "3"
+  - id: 89487411-6595-44f7-9179-bff74915991d
+    text: "4"
+  - id: 6539a4d7-15ca-40bd-87c8-b28a7f5ee872
+    text: "340"
+correct_choice_ids:
+  - e889c740-5488-4147-b401-0114fab5d395
+explanation: "The 2010 press kit lists 34."
+archived: false

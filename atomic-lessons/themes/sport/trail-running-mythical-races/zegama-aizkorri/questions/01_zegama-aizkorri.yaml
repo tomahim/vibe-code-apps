@@ -1,0 +1,19 @@
+id: 08b8ea59-5ce8-4658-a30f-9609f7034208
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where did the idea come from?"
+choices:
+  - id: ce956fad-5bf1-43fe-908e-3dfc45231331
+    text: "A government plan"
+  - id: fca5845d-53b4-43b0-a86c-aef342546a93
+    text: "A sports shop"
+  - id: 794eb8c5-7900-432e-b732-879058090723
+    text: "A picnic in the mountains"
+  - id: c3195c5c-7de0-4713-b85e-e1defafe2d75
+    text: "A TV show"
+correct_choice_ids:
+  - 794eb8c5-7900-432e-b732-879058090723
+explanation: "Villagers organised a picnic first."
+archived: false

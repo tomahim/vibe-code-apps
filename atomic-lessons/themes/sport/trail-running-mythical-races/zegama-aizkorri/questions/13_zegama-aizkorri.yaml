@@ -1,0 +1,19 @@
+id: 1237da65-cd4e-4b99-98d6-45e92bacbab2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "On what date was the 25th edition?"
+choices:
+  - id: 86350028-f160-47f6-8b3a-e10fb1d308ee
+    text: "August 7, 1959"
+  - id: f4294863-5099-420c-81f5-c16af1ba4bed
+    text: "October 28, 1995"
+  - id: 56cab1f5-026a-4a0d-94e9-2803d637075c
+    text: "May 17, 2002"
+  - id: a8450f85-b66b-4896-943c-ee8a4e861322
+    text: "May 17, 2026"
+correct_choice_ids:
+  - a8450f85-b66b-4896-943c-ee8a4e861322
+explanation: "The 25th edition took place on May 17."
+archived: false

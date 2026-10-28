@@ -1,0 +1,19 @@
+id: 32b56a37-6e91-4e67-a466-2dd168536af1
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the race's nickname?"
+choices:
+  - id: 3dc7de85-ed4d-4fa5-979b-667111dcab11
+    text: "Race to Silver"
+  - id: 1bb7b7fa-bce1-4a48-9ee2-5af01e64753f
+    text: "The Town Run"
+  - id: 49dd6c61-ea5c-47bb-a9a2-0c8ca550fc35
+    text: "The Mine Run"
+  - id: 36faecd6-d68d-49b0-a7b4-de21608b8541
+    text: "Race Across the Sky"
+correct_choice_ids:
+  - 36faecd6-d68d-49b0-a7b4-de21608b8541
+explanation: "It is called the Race Across the Sky."
+archived: false

@@ -1,0 +1,19 @@
+id: 1c5d69e6-d507-45f7-a283-88981ff66923
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which Kenyan woman won repeatedly, including in 2015, 2017 and 2018?"
+choices:
+  - id: ee0c9ae2-b422-4734-bd7a-f061f2b00223
+    text: "Elisa Desco"
+  - id: 09da4d89-311e-4dc7-a909-528513ed4ca0
+    text: "Maude Mathys"
+  - id: ffc29742-b88c-4cd2-a63c-27d700b5c756
+    text: "Lucy Wambui Murigi"
+  - id: 406b342c-61db-43a7-8c60-6877dd1c232f
+    text: "Anna Pichrtova"
+correct_choice_ids:
+  - ffc29742-b88c-4cd2-a63c-27d700b5c756
+explanation: "The women's winners table lists Murigi."
+archived: false

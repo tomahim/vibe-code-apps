@@ -1,0 +1,19 @@
+id: 1f10a11d-a3e3-4f16-9f78-13e4d7f845b0
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who conceived the first Wasatch 100?"
+choices:
+  - id: fc56e634-60e3-41fd-88b9-f8356716df58
+    text: "Richard Barnum-Reece"
+  - id: 3680291a-e9a4-4037-9e5a-7382149eb7b4
+    text: "Dana Miller"
+  - id: 9695ff18-967d-4ffe-97cd-ab25d060b78b
+    text: "Steve Baugh"
+  - id: e5c5b9c4-6b5b-46a5-a634-267e28fb2daa
+    text: "Peter Gagarin"
+correct_choice_ids:
+  - fc56e634-60e3-41fd-88b9-f8356716df58
+explanation: "He came up with the race in summer 1980."
+archived: false

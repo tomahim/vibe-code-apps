@@ -1,0 +1,19 @@
+id: c49600c2-723d-4c94-961a-5096b879e534
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which fire affected the Acorn Trail near Wrightwood?"
+choices:
+  - id: d4f87ad8-9100-4b8d-ae0f-4d87d11483ce
+    text: "The Dixie Fire"
+  - id: 4bbad59b-f063-4b59-8a41-e37346d2875a
+    text: "The Creek Fire"
+  - id: c59c584a-e4b0-47b3-8978-d8accbc2832f
+    text: "The Eaton Fire"
+  - id: e235dbbe-05e6-4752-bbba-d174b31f0883
+    text: "The Bridge Fire"
+correct_choice_ids:
+  - e235dbbe-05e6-4752-bbba-d174b31f0883
+explanation: "The Bridge Fire impacted the Acorn Trail and Blue Ridge."
+archived: false

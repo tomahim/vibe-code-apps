@@ -1,0 +1,19 @@
+id: 9dfa17e4-649f-4058-8021-1464b6eb7abd
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the race now?"
+choices:
+  - id: 28fbd4b9-9b70-4e34-9520-e9d0ae646b3f
+    text: "35 km"
+  - id: ba62535c-bf23-4e3d-b96f-35bbd2c3caa4
+    text: "21 km"
+  - id: 9b2e5d16-698e-4520-9e00-ae1d7e487371
+    text: "100 km"
+  - id: f626953d-98fb-4ca1-8a08-3400ade06a80
+    text: "42 km"
+correct_choice_ids:
+  - f626953d-98fb-4ca1-8a08-3400ade06a80
+explanation: "It evolved into the 42 km course."
+archived: false

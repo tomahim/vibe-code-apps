@@ -1,0 +1,19 @@
+id: 45056d6d-9d15-4985-9360-318298b6ba82
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who volunteered to lay out the first course?"
+choices:
+  - id: 2471dac5-795d-4303-8964-867fe32c199e
+    text: "Laurie Staton"
+  - id: 6e3795ff-c0b4-4cb1-b59c-6f1e7799ce45
+    text: "Gary Cantrell"
+  - id: 3857482a-a429-4323-97a3-8f62f123901b
+    text: "John Cappis"
+  - id: 0bde5566-79f8-44e6-b9a6-3b4928bb49ea
+    text: "Gordon Hardman"
+correct_choice_ids:
+  - 3857482a-a429-4323-97a3-8f62f123901b
+explanation: "Cappis laid out the course."
+archived: false
