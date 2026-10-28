@@ -1,0 +1,19 @@
+id: 36b74c08-23a7-4f9d-9266-31381314f926
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What does the trained digit network compute?"
+choices:
+  - id: 65509a9e-10bb-4c5d-9d78-9ad9994baf51
+    text: "For a human-like task, a useful test is whether outputs usually match what people would say."
+  - id: 171e1121-b94d-4f87-af72-6aaa233c558f
+    text: "The network computes an output from numerical pixel values."
+  - id: 5ebdd301-1c39-45b2-93dd-a9b134987b89
+    text: "A recognizer may still classify a blurred or altered digit."
+  - id: dc20386c-4ac0-42b6-aa3a-535ad74ba78c
+    text: "Some images do not have an obvious label even for people."
+correct_choice_ids:
+  - 171e1121-b94d-4f87-af72-6aaa233c558f
+explanation: "The network computes an output from numerical pixel values. Training determines the parameters of that function."
+archived: false

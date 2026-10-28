@@ -1,0 +1,19 @@
+id: 654206b1-bebf-4747-bcf1-f16b8600036b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Does a token ID's numerical size express its meaning?"
+choices:
+  - id: 0083518f-81ff-4db4-a102-bdf97fead318
+    text: "Tokenization divides input text into model-sized pieces."
+  - id: 1e3c7dd7-9030-473a-88a7-f67a0134867d
+    text: "An embedding table maps token IDs to learned vectors."
+  - id: 879b5384-19f8-47f3-8c81-42db162bd48e
+    text: "A sequence needs position information so the model can distinguish token order."
+  - id: 26132f7b-b047-4a5c-b240-63980d9ad107
+    text: "Each token in a model's vocabulary has a numerical ID."
+correct_choice_ids:
+  - 26132f7b-b047-4a5c-b240-63980d9ad107
+explanation: "Each token in a model's vocabulary has a numerical ID. The ID identifies the token; its magnitude does not measure meaning."
+archived: false

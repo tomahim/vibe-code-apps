@@ -1,0 +1,19 @@
+id: 0fe1663d-fd85-4c83-ac2f-4fcb6ad332cc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What happens to weights after a prediction is compared with the target?"
+choices:
+  - id: 6c73d5a8-fa2a-418a-8928-f6febc6d795e
+    text: "Books, pages, and other text expose many examples of language use."
+  - id: 2d02b49e-748a-4e29-80da-516e30d4cc2a
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+  - id: fca99de5-014c-4376-a055-d5724ef78022
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: 39faabac-0dd0-444e-ad35-b0132741a2cd
+    text: "A language model can learn by predicting missing next tokens in text."
+correct_choice_ids:
+  - fca99de5-014c-4376-a055-d5724ef78022
+explanation: "During training, predicted token probabilities are compared with the actual next token. Optimization updates weights to improve future predictions."
+archived: false

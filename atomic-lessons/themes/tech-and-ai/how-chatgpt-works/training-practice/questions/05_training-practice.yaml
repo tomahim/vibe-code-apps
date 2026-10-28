@@ -1,0 +1,19 @@
+id: 225d8eae-3342-4db1-812f-0fef82ac78b7
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What can a stalled learning curve signal?"
+choices:
+  - id: b80121d2-bb4d-4470-b2b1-0124db4fc1e1
+    text: "Loss commonly falls and then levels off during training."
+  - id: 086823ef-6325-4ae1-b377-fac7e1f4784a
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: 2aa154e2-9c3a-4442-a22d-bd777e4de3fd
+    text: "A batch is a group of examples used for an update."
+  - id: caae0400-70f5-438d-b292-e76742fc997d
+    text: "Neural networks perform many array calculations that GPUs can run in parallel."
+correct_choice_ids:
+  - b80121d2-bb4d-4470-b2b1-0124db4fc1e1
+explanation: "Loss commonly falls and then levels off during training. A stalled or high loss can point to problems with data, settings, or architecture."
+archived: false

@@ -1,0 +1,19 @@
+id: 8a9bc374-dad6-4bdb-ba3d-2bcf7218c807
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why do independently sampled letters rarely form useful text?"
+choices:
+  - id: 87240ded-d9ee-4abe-8d76-f0c7fe060805
+    text: "A text sample lets us estimate how often each letter appears."
+  - id: cdc436b8-d280-4352-9cf8-b63a041d4f99
+    text: "The letter after q in English is very often u."
+  - id: 6280a356-5d86-4d09-ad49-175863283d02
+    text: "An n-gram is a run of n adjacent items, such as letters or words."
+  - id: cb66035f-ab85-4318-8d99-5bef912b8a76
+    text: "Choosing each letter independently ignores how letters fit together."
+correct_choice_ids:
+  - cb66035f-ab85-4318-8d99-5bef912b8a76
+explanation: "Choosing each letter independently ignores how letters fit together. The resulting strings rarely resemble useful words."
+archived: false

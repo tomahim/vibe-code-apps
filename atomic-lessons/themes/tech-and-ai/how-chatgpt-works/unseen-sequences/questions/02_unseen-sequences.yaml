@@ -1,0 +1,19 @@
+id: a2a4e860-d927-4d60-aa9d-ec076a25beec
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does it mean when a plausible sequence is absent from training text?"
+choices:
+  - id: 69c1e72f-cc4c-4b8f-936d-105754ec7a25
+    text: "A vocabulary can be combined into vastly more phrases than any dataset contains."
+  - id: 2e28b4ad-c278-4b7f-84e1-78378ca19229
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: 9d64d3b7-8d39-4b09-bab6-39c31d3d104f
+    text: "A language model maps the current context to a distribution over possible next tokens."
+  - id: 1b88a664-7e5d-4929-b0d6-490aa675e800
+    text: "Many plausible sequences will be absent from training text."
+correct_choice_ids:
+  - 1b88a664-7e5d-4929-b0d6-490aa675e800
+explanation: "Many plausible sequences will be absent from training text. Absence from the sample does not make a sequence impossible."
+archived: false

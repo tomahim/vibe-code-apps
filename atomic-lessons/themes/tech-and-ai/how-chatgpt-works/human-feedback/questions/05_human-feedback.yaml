@@ -1,0 +1,19 @@
+id: 9fa46bc0-b89b-4b5f-8893-8ed25220377f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is the linked InstructGPT paper an example of?"
+choices:
+  - id: aa570dda-a799-4196-a586-395ad9e34d1e
+    text: "The linked InstructGPT paper describes a historical human-feedback training method."
+  - id: b1eca3c4-b6fd-4adc-b943-55b8814e351d
+    text: "Example answers can show a model what following an instruction looks like."
+  - id: a27575a0-2192-4f2a-89fd-98333f014dbc
+    text: "A separate preference model can learn from ranked answers."
+  - id: 56008936-6884-4b1e-afd3-b6be1c87f59f
+    text: "Predicting likely text and answering a user's request well are related but different objectives."
+correct_choice_ids:
+  - aa570dda-a799-4196-a586-395ad9e34d1e
+explanation: "The linked InstructGPT paper describes a historical human-feedback training method. It is an example, not a complete description of current ChatGPT training."
+archived: false

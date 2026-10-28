@@ -1,0 +1,19 @@
+id: ee5ccf4d-2dcf-40d4-9b9f-84c3c48f082d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Which representation is used to score a continuation?"
+choices:
+  - id: 5945b8a8-c1ff-449b-b51e-98ade3a993a3
+    text: "Successive blocks transform and combine information across positions."
+  - id: db71a0b3-efd4-40fa-95d6-fd0b9264f937
+    text: "The model produces scores over its token vocabulary."
+  - id: 7f5f299a-902e-4dd7-97ec-697b5b7959ad
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 7569dbea-cf0a-405e-a836-6ed6748a0244
+    text: "The current context is turned into token representations."
+correct_choice_ids:
+  - 7f5f299a-902e-4dd7-97ec-697b5b7959ad
+explanation: "For a next-token prediction, the final position's representation is used to score possible continuations. Earlier positions helped form it."
+archived: false

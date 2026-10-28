@@ -1,0 +1,19 @@
+id: 35363811-1a3f-4ea7-b7da-b29a1c5de7a6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Which description of a token is accurate?"
+choices:
+  - id: b5e7c20b-5942-4969-8583-d91f91dfbb3e
+    text: "At each step, a language model estimates which text piece could come next."
+  - id: 8916fd47-ca88-4c91-a632-9549eab8f155
+    text: "The model gives many candidate next tokens different scores that become probabilities."
+  - id: 71dfabdd-83f4-4628-9c3d-ada4c615793c
+    text: "A token can be a whole word, part of a word, punctuation, or another text piece."
+  - id: f72e6db5-8fa5-47e0-be64-af12f8537ab3
+    text: "A prompt supplies the text and instructions the model can use as context."
+correct_choice_ids:
+  - 71dfabdd-83f4-4628-9c3d-ada4c615793c
+explanation: "A token can be a whole word, part of a word, punctuation, or another text piece. Calling the process “next-word prediction” is a helpful simplification."
+archived: false

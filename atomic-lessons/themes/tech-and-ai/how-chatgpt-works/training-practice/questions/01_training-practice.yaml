@@ -1,0 +1,19 @@
+id: 5953925e-69c6-4685-92da-2be5e76a2154
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does choosing an architecture decide?"
+choices:
+  - id: c3793f0e-86b7-43e5-89cb-cf6288247594
+    text: "Architecture defines the broad arrangement of computation before training begins."
+  - id: 903476f4-9bf0-49fe-b531-a8bc743c0a38
+    text: "Useful examples must be collected and prepared for the learning objective."
+  - id: f85dd601-21bd-4d8b-8585-bb5d7b4b22fb
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: 90556430-3774-4f63-9444-3d155819879f
+    text: "A batch is a group of examples used for an update."
+correct_choice_ids:
+  - c3793f0e-86b7-43e5-89cb-cf6288247594
+explanation: "Architecture defines the broad arrangement of computation before training begins. The same broad design can sometimes work across different tasks."
+archived: false

@@ -1,0 +1,19 @@
+id: d723cf32-4180-497f-9001-0a857a34d806
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can attention help with earlier sentence context?"
+choices:
+  - id: cf1b47e9-dc4d-4cb6-a626-ed0afbb3f1c2
+    text: "Correct-looking grammar and coherent wording can coexist with factual error."
+  - id: 812d28c2-3da4-466d-90ac-1ddab412cb4e
+    text: "Attention can connect a later position with earlier context."
+  - id: 52172c1a-abf1-42d5-9059-7bafff4275ec
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: d8f5c089-b86b-43ac-9d9b-790e6596e566
+    text: "Long balanced parentheses demand exact tracking of nesting."
+correct_choice_ids:
+  - 812d28c2-3da4-466d-90ac-1ddab412cb4e
+explanation: "Attention can connect a later position with earlier context. This helps a transformer represent relationships across a sentence."
+archived: false

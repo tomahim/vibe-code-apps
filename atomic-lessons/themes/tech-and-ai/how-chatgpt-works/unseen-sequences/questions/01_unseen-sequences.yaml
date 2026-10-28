@@ -1,0 +1,19 @@
+id: 39be2d5e-c1a8-4c30-a647-f23e6f62d8fa
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why is exact phrase lookup insufficient for new text?"
+choices:
+  - id: 0440a837-6dac-4e01-8a3b-8cf20e87fabf
+    text: "A vocabulary can be combined into vastly more phrases than any dataset contains."
+  - id: 9cbc34c5-e3d4-47b4-8c96-07c683d9536f
+    text: "Many plausible sequences will be absent from training text."
+  - id: 7b2be5e2-a387-4956-aaab-d5d3507433ea
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: 4f5cfcb4-9957-41b1-9bf3-a90fe6def2f3
+    text: "A language model maps the current context to a distribution over possible next tokens."
+correct_choice_ids:
+  - 0440a837-6dac-4e01-8a3b-8cf20e87fabf
+explanation: "A vocabulary can be combined into vastly more phrases than any dataset contains. Exact lookup cannot cover every useful continuation."
+archived: false

@@ -1,0 +1,19 @@
+id: 7d231ca6-8b59-4fde-9338-44aa768ac074
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What happens after the new token is emitted?"
+choices:
+  - id: b3569e22-85e4-4e2c-b193-ffd7d172ea30
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 1216fa07-4432-4d24-8d65-6d71035d2ba7
+    text: "The model produces scores over its token vocabulary."
+  - id: b46ff6f8-2033-442d-8f70-7ddf50801435
+    text: "A decoding rule selects one token from that distribution."
+  - id: 2a7efbb1-41c0-4ae8-a1d3-7396eeea87c4
+    text: "The chosen token joins the visible sequence and the next prediction begins."
+correct_choice_ids:
+  - 2a7efbb1-41c0-4ae8-a1d3-7396eeea87c4
+explanation: "The chosen token joins the visible sequence and the next prediction begins. Repeating this loop creates the response."
+archived: false

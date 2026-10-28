@@ -1,0 +1,19 @@
+id: 8116257c-80fb-4916-ad2a-376b96dfd540
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can an image network illustrate intermediate representations?"
+choices:
+  - id: 8c2dbe9e-7e7c-4262-8f8c-137ab285d96d
+    text: "Models can represent a token in the context of a whole sequence."
+  - id: 3e87cdcf-5008-4533-a1fe-a97ebaf460cb
+    text: "A digit network can form internal representations before choosing a final label."
+  - id: a40f9a75-2617-46ed-9b9a-ccb024d1dbb2
+    text: "The surrounding words provide clues about how a word is used."
+  - id: 1498cda8-41c6-49ec-b9f9-35385d06ba2a
+    text: "One word may have several meanings, and a single fixed vector cannot fully express every use."
+correct_choice_ids:
+  - 3e87cdcf-5008-4533-a1fe-a97ebaf460cb
+explanation: "A digit network can form internal representations before choosing a final label. An embedding can use such intermediate features."
+archived: false

@@ -1,0 +1,19 @@
+id: 0b2cc26c-f193-4a90-a53b-97cd7a84b485
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What do trained weights primarily encode?"
+choices:
+  - id: dd57fba0-6882-4ad3-abbc-2cc7baed8630
+    text: "A model trained to continue text can produce a convincing false statement."
+  - id: 10465344-66f2-4000-87ad-ea8cd26ffc76
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+  - id: 44dcc27a-9b67-4c7b-ab49-7b1e4814add3
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: 69a55d9b-9c36-4296-9cfd-81b881e4255c
+    text: "More useful data and model capacity can improve predictions and generated text."
+correct_choice_ids:
+  - 10465344-66f2-4000-87ad-ea8cd26ffc76
+explanation: "Weights encode patterns learned across examples rather than a tidy database of cited facts. Specific remembered passages and broad patterns can both affect behavior."
+archived: false

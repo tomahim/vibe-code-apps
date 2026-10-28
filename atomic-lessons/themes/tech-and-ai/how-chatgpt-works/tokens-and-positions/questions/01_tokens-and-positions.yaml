@@ -1,0 +1,19 @@
+id: 09e440a1-36c2-4d50-b380-736348391bd9
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does a tokenizer do to input text?"
+choices:
+  - id: 24f156c1-d7fa-43de-b12c-4a2337567db0
+    text: "Tokenization divides input text into model-sized pieces."
+  - id: 7d8f423f-fb27-4972-93eb-11a302dd3fe1
+    text: "Each token in a model's vocabulary has a numerical ID."
+  - id: f9a94f14-9063-4c52-896c-a54b9505fc6b
+    text: "An embedding table maps token IDs to learned vectors."
+  - id: 25cae6ae-d8d5-468b-928c-286020c88bd0
+    text: "A sequence needs position information so the model can distinguish token order."
+correct_choice_ids:
+  - 24f156c1-d7fa-43de-b12c-4a2337567db0
+explanation: "Tokenization divides input text into model-sized pieces. Different tokenizers may split the same phrase differently."
+archived: false

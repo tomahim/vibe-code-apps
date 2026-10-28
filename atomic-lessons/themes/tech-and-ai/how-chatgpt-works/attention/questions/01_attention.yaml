@@ -1,0 +1,19 @@
+id: ef813464-06b2-44f9-aaf3-ea95817ccf2e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why can immediate-neighbor context be insufficient?"
+choices:
+  - id: daf4262e-2372-4e78-a531-03a446294ef9
+    text: "A later word may depend on a much earlier one."
+  - id: 4cd2e8d6-0db2-4512-87d6-5cc3923bb773
+    text: "Attention lets a position combine information from earlier positions."
+  - id: da00270f-b04e-4e35-81aa-1dba8ba0e4ba
+    text: "Attention gives different previous positions different weights for the current calculation."
+  - id: a773e1db-0913-420d-a191-f90c18440d24
+    text: "Several heads can form different weighted combinations in parallel."
+correct_choice_ids:
+  - daf4262e-2372-4e78-a531-03a446294ef9
+explanation: "A later word may depend on a much earlier one. Looking only at an immediate neighbor misses some useful relationships."
+archived: false

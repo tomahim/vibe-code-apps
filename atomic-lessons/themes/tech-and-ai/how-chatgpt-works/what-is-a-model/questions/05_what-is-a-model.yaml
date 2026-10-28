@@ -1,0 +1,19 @@
+id: 4fd19f1b-71d9-481c-ab73-e6e63e826aec
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Can training weights compensate for every bad architecture choice?"
+choices:
+  - id: 98dd0e0b-9f4e-4e1b-a29a-f04434ba38ce
+    text: "Training adjusts parameters inside a structure selected beforehand."
+  - id: caf4e483-6b5a-43d0-87e5-8902eeffa49d
+    text: "A straight line may fit some observations but miss their shape."
+  - id: 058722ec-1c52-4f97-9454-9ad4fd88695d
+    text: "Parameters are numerical values chosen to fit the model to data."
+  - id: 79a45235-4a7c-4b14-a9e9-f4ba161bc102
+    text: "A model can fit known examples yet fail on new ones."
+correct_choice_ids:
+  - 98dd0e0b-9f4e-4e1b-a29a-f04434ba38ce
+explanation: "Training adjusts parameters inside a structure selected beforehand. A poor structure can limit what the model learns."
+archived: false

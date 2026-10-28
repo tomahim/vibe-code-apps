@@ -1,0 +1,19 @@
+id: 8235ebd7-5381-46a3-8d62-1aab4e851f94
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What controls the contribution of a neuron's inputs?"
+choices:
+  - id: f80560ac-c905-462e-9e0d-a3449401611d
+    text: "An artificial neuron combines several numerical inputs into one output."
+  - id: f6d19b3f-fea8-4351-9a3f-a3edaa4ecfbe
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: 84ecf289-0088-4bc3-bd0c-3dd8821c1848
+    text: "A layer transforms its inputs and passes the results to the next layer."
+  - id: b2e678cb-0d6d-4bee-82bf-a3adf94c16fe
+    text: "Weights control how strongly inputs contribute, and a bias shifts the result."
+correct_choice_ids:
+  - b2e678cb-0d6d-4bee-82bf-a3adf94c16fe
+explanation: "Weights control how strongly inputs contribute, and a bias shifts the result. Training changes these numbers."
+archived: false

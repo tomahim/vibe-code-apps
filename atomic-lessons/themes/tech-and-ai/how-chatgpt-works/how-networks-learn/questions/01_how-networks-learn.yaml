@@ -1,0 +1,19 @@
+id: 39605e3e-8aa7-4717-9dd0-4a6502187872
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What information is presented during a training example?"
+choices:
+  - id: a37cb229-c933-45a9-adfb-671fe785adcc
+    text: "Training presents inputs together with a target outcome or other learning signal."
+  - id: 90f4dc0a-9233-41dd-af9b-1db36483cd0e
+    text: "A training step measures how different the model's result is from what was wanted."
+  - id: f2b7b59e-c2a6-40a5-8827-6472b7e168cc
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: 825f46c2-a3b0-47c7-a9ed-7505ad6c9ecd
+    text: "Optimization changes weights in directions expected to reduce loss."
+correct_choice_ids:
+  - a37cb229-c933-45a9-adfb-671fe785adcc
+explanation: "Training presents inputs together with a target outcome or other learning signal. The network's current output is compared with that target."
+archived: false

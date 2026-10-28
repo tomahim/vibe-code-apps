@@ -1,0 +1,19 @@
+id: ff82c500-fddd-4f2a-a8bb-4d0bd0a9cae4
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why can a large text collection act as a learning signal?"
+choices:
+  - id: c8c8c92e-facd-4f92-8f79-e5dcf7b3f763
+    text: "A language model can learn by predicting missing next tokens in text."
+  - id: 1eb5dfe0-e01c-4fa6-bcd3-04c6059ca123
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: b13ac848-1d72-4367-a75d-de3c6fa4f6ba
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+  - id: e777ef26-e5a7-4cf5-a409-49b26d2cac80
+    text: "Books, pages, and other text expose many examples of language use."
+correct_choice_ids:
+  - e777ef26-e5a7-4cf5-a409-49b26d2cac80
+explanation: "Books, pages, and other text expose many examples of language use. The essay discusses their scale without making every source equally reliable."
+archived: false

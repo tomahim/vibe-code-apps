@@ -1,0 +1,19 @@
+id: bf8d60c2-6f9a-4d74-8887-106dbea53679
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Can a grammatical sentence still be nonsensical?"
+choices:
+  - id: fa169590-fc8d-45b3-9077-0db1daf537ce
+    text: "Human language contains recurring arrangements of words and phrases."
+  - id: e07a281f-b230-44f8-9574-d464ee38034c
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: b1b250dc-a54f-48da-8039-5bf964cec926
+    text: "Attention can connect a later position with earlier context."
+  - id: f88ead7b-08fc-44e2-9746-a6c30d877f57
+    text: "A sentence can follow grammar rules yet be nonsensical or false."
+correct_choice_ids:
+  - f88ead7b-08fc-44e2-9746-a6c30d877f57
+explanation: "A sentence can follow grammar rules yet be nonsensical or false. Syntactic fit is only one constraint on a useful answer."
+archived: false

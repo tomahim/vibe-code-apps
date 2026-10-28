@@ -1,0 +1,19 @@
+id: 90db1617-c11a-4342-bfa9-16dd2c6dc541
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How can prompt wording affect a response?"
+choices:
+  - id: a3fc1206-6f18-47fb-b459-a756b0d38bd6
+    text: "The words of a prompt become part of the input the model processes."
+  - id: 190c6141-3949-404f-bb79-ea18e3bc79d6
+    text: "A capable pretrained model may follow a task described in a single prompt."
+  - id: d03a9b13-47a8-4e2b-824a-051861618894
+    text: "A few examples can establish a pattern for the next response."
+  - id: 9b8b1ba6-c18f-4ea2-a953-d65c0fea8829
+    text: "Information supplied in a prompt can guide the current answer."
+correct_choice_ids:
+  - a3fc1206-6f18-47fb-b459-a756b0d38bd6
+explanation: "The words of a prompt become part of the input the model processes. Their wording can change the distribution of likely responses."
+archived: false

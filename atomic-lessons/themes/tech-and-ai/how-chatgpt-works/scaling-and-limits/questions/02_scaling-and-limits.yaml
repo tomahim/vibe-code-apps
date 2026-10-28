@@ -1,0 +1,19 @@
+id: 0afb7cc8-c3fe-4067-900c-cb790976aae9
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How does doing a calculation differ from remembering examples?"
+choices:
+  - id: c31db245-9049-4066-92fd-529f70ae942c
+    text: "Larger networks and more data can improve performance on many tasks."
+  - id: 94f4efae-2fb7-4e28-a0f2-7b582eb9f015
+    text: "Wolfram argues that some processes require following their steps to know the result."
+  - id: a508f15d-f023-453f-aee3-06bd59594552
+    text: "Exact arithmetic and program execution can require a definite procedure."
+  - id: b0f5eef3-0d8c-4274-8165-6d113a258e2b
+    text: "Remembering examples is different from carrying out a new sequence of exact steps."
+correct_choice_ids:
+  - b0f5eef3-0d8c-4274-8165-6d113a258e2b
+explanation: "Remembering examples is different from carrying out a new sequence of exact steps. A fluent answer can hide this distinction."
+archived: false

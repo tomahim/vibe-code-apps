@@ -1,0 +1,19 @@
+id: bbc6c1bd-36de-4d3b-bdc1-ea6ee3f513ea
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why is neither maximum repetition nor maximum variation ideal?"
+choices:
+  - id: 6e6fa4f0-7077-469c-9378-5b429323d239
+    text: "Too little variation can repeat patterns, while too much can make text wander."
+  - id: 83c2dda8-3e91-4e25-826f-a2e6a0c1040f
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: 1e9dddf0-10d9-4859-89c3-a6bbde7a68d4
+    text: "Temperature changes how strongly decoding favors high-scored tokens."
+  - id: 61f6d2b2-8e3f-4aae-bb39-5e568407507d
+    text: "Two runs can diverge because early token choices affect later probabilities."
+correct_choice_ids:
+  - 6e6fa4f0-7077-469c-9378-5b429323d239
+explanation: "Too little variation can repeat patterns, while too much can make text wander. The useful balance depends on the task and model."
+archived: false

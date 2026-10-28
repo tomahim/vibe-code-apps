@@ -1,0 +1,19 @@
+id: db886832-01aa-4c21-a6bb-b5f108f6d755
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What prediction task can train a language model on text?"
+choices:
+  - id: 658b1182-5842-4ed8-ad31-3d6c3da9c15f
+    text: "A language model can learn by predicting missing next tokens in text."
+  - id: 3b2754bd-ac61-4b37-bbf4-bacfc513225b
+    text: "Books, pages, and other text expose many examples of language use."
+  - id: 75131bcf-29d7-4be7-99f8-b81adcafacac
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: 24100ee9-f2a5-497a-b703-f85d93ca4121
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+correct_choice_ids:
+  - 658b1182-5842-4ed8-ad31-3d6c3da9c15f
+explanation: "A language model can learn by predicting missing next tokens in text. The text itself supplies targets for this training task."
+archived: false

@@ -1,0 +1,19 @@
+id: 5cc9822f-58dd-4fb9-a356-b84349392b41
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why are many training examples needed?"
+choices:
+  - id: 259509fb-8b71-467a-8086-3cd05d89b216
+    text: "Many updates across many examples gradually shape the network."
+  - id: 75b8ef2b-f8e2-4adc-9214-feff74a83186
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: 877b4770-6179-4433-a0c8-b8ec9b3462dc
+    text: "Optimization changes weights in directions expected to reduce loss."
+  - id: dc797bc7-3c1e-432f-be82-ba2b523c9f0e
+    text: "A separate evaluation checks performance on examples not used for training."
+correct_choice_ids:
+  - 259509fb-8b71-467a-8086-3cd05d89b216
+explanation: "Many updates across many examples gradually shape the network. One example alone rarely gives a useful general rule."
+archived: false

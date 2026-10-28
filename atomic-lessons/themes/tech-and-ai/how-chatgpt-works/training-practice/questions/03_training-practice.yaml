@@ -1,0 +1,19 @@
+id: 5a908246-6e23-4eaf-a37b-be9c2ff7a3a0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why might a training run revisit or vary examples?"
+choices:
+  - id: 585bd262-a0d8-40d3-9952-451360e7840b
+    text: "Useful examples must be collected and prepared for the learning objective."
+  - id: f9988436-8423-4f40-99bf-077358a6adce
+    text: "A batch is a group of examples used for an update."
+  - id: d6c8fe0b-11ce-4401-a057-f32a43a43475
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: a41cb05f-b905-479f-8aee-5ee8b18d60e1
+    text: "Architecture defines the broad arrangement of computation before training begins."
+correct_choice_ids:
+  - d6c8fe0b-11ce-4401-a057-f32a43a43475
+explanation: "Training may revisit examples over multiple epochs and use altered versions where appropriate. Repetition and variation can improve learning."
+archived: false

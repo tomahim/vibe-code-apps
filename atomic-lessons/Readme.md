@@ -56,6 +56,8 @@ Use PNG, JPEG, WebP, GIF, or SVG. Commit the image alongside the index; URLs, pa
 
 Cards use the same front matter. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
 
+For concept lessons, use 6–10 cards including a final **3 key learnings** card. Keep each teaching card focused and generally no longer than two short paragraphs. Add a source or optional deeper-reading link directly to selected cards. Author six multiple-choice questions per lesson as two pools of three alternatives: one checkpoint midway through the teaching cards and one after the recap, so the learner answers exactly two.
+
 For expression lessons, put exactly four expression pairs in each card. Write the English in bold followed by its French translation as an italic blockquote. Keep translations precise and American English natural:
 
 ```markdown
@@ -64,7 +66,7 @@ For expression lessons, put exactly four expression pairs in each card. Write th
 > *Bonjour mon cœur.*
 ```
 
-Use at most six cards per lesson. Keep card counts even so a question follows each pair. Split an oversized subject into another lesson. A translation pair is one expression, even when its English contains two short sentences.
+For expression lessons, use at most six cards. Keep card counts even so a question follows each pair. Split an oversized subject into another lesson. A translation pair is one expression, even when its English contains two short sentences.
 
 ## Lesson questions
 
@@ -110,3 +112,16 @@ Source workbook: `Anglais_americain_avec_bebe.xlsx` (SHA-256 `b40b2466b417c4cbfd
 | 16. [Going for a walk](themes/language/early-childhood-english/going-for-a-walk/index.md) | 6 | 9 |
 | 17. [Car rides and travel](themes/language/early-childhood-english/car-rides-and-travel/index.md) | 4 | 6 |
 | 18. [Sleep cues and settling](themes/language/early-childhood-english/sleep-cues-and-settling/index.md) | 6 | 9 |
+
+
+## Tech & AI: How ChatGPT works
+
+The [How ChatGPT works](themes/tech-and-ai/how-chatgpt-works/index.md) path adapts
+[Stephen Wolfram's 2023 essay](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
+into 20 concept lessons. Each lesson has six teaching cards and a final **3 key learnings** recap card.
+Each also has six questions in two pools of three: one question is selected after card 3 and one after
+card 7. Selected cards include optional deeper-reading links.
+
+The essay's GPT-2 and GPT-3 dimensions are historical examples, not current ChatGPT specifications.
+Wolfram's ideas about semantic laws and computational irreducibility are presented as his
+interpretations or open questions, not established descriptions of every language model.

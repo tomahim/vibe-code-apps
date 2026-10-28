@@ -1,0 +1,19 @@
+id: ad757627-658f-4b74-9a69-77e535f09802
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can one fixed word vector miss part of its meaning?"
+choices:
+  - id: 63c5be9c-2d53-46e0-920c-4d83b7de0361
+    text: "One word may have several meanings, and a single fixed vector cannot fully express every use."
+  - id: 0d29b402-9679-4a4d-a7f4-8f20a6de1f1e
+    text: "The surrounding words provide clues about how a word is used."
+  - id: 3100f677-ebed-45e5-8792-189846ec8010
+    text: "A digit network can form internal representations before choosing a final label."
+  - id: c3559282-f4f7-4968-815e-46ab2cff76bb
+    text: "Models can represent a token in the context of a whole sequence."
+correct_choice_ids:
+  - 63c5be9c-2d53-46e0-920c-4d83b7de0361
+explanation: "One word may have several meanings, and a single fixed vector cannot fully express every use. Contextual representations help distinguish uses."
+archived: false

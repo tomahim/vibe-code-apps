@@ -1,0 +1,19 @@
+id: 6c214d42-8cb7-4ad7-b6c4-8017f39561f6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Does fluent grammar prove a claim is true?"
+choices:
+  - id: 3c6c0aa0-846d-40a0-b665-86ca9400d463
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: 2f1b5090-87e4-48be-a974-c0a0cb76c31f
+    text: "Attention can connect a later position with earlier context."
+  - id: 7a60d905-1700-4953-9733-09d540270022
+    text: "Long balanced parentheses demand exact tracking of nesting."
+  - id: 13a0dbcf-1f19-48e4-9a56-17a3cd809469
+    text: "Correct-looking grammar and coherent wording can coexist with factual error."
+correct_choice_ids:
+  - 13a0dbcf-1f19-48e4-9a56-17a3cd809469
+explanation: "Correct-looking grammar and coherent wording can coexist with factual error. Checking the claim requires evidence beyond its style."
+archived: false

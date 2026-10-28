@@ -1,0 +1,19 @@
+id: 37235589-c884-4537-a64d-b5df63d8b053
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does one artificial neuron compute?"
+choices:
+  - id: 17713085-0f46-46c5-9ec5-4b1693690a8f
+    text: "An artificial neuron combines several numerical inputs into one output."
+  - id: c87b3d5d-9859-4ac5-bb2c-dd63e23145f1
+    text: "Weights control how strongly inputs contribute, and a bias shifts the result."
+  - id: 127e3e3c-ebb3-4fde-b69d-49ca9c4bb1c1
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: fa00d4f6-3158-4453-93b7-613f4cdf552f
+    text: "A layer transforms its inputs and passes the results to the next layer."
+correct_choice_ids:
+  - 17713085-0f46-46c5-9ec5-4b1693690a8f
+explanation: "An artificial neuron combines several numerical inputs into one output. It is a simplified mathematical component, not a biological brain cell."
+archived: false

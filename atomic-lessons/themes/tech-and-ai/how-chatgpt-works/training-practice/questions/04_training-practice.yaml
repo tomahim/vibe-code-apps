@@ -1,0 +1,19 @@
+id: 8f6f7718-15d6-49c4-809f-10c2928f6c14
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is a batch in training?"
+choices:
+  - id: a80b9bba-02ec-4d63-91b5-51236b2a6fcc
+    text: "Neural networks perform many array calculations that GPUs can run in parallel."
+  - id: 1fd79d7a-805e-4675-952d-d5495720d5a8
+    text: "A batch is a group of examples used for an update."
+  - id: 5ff688aa-ba37-4d7d-87f4-ce204505812b
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: f5929913-2f98-439b-b97c-aef19076fb52
+    text: "Loss commonly falls and then levels off during training."
+correct_choice_ids:
+  - 1fd79d7a-805e-4675-952d-d5495720d5a8
+explanation: "A batch is a group of examples used for an update. Batch size and other training settings influence speed and behavior."
+archived: false

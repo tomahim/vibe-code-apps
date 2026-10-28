@@ -1,0 +1,19 @@
+id: 13f42c4f-c838-4d11-9b84-d1b786a594ef
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can a paragraph arise from the model's operation?"
+choices:
+  - id: 375d5754-1831-4a44-9791-32b3518d446a
+    text: "A token can be a whole word, part of a word, punctuation, or another text piece."
+  - id: b2edd102-e811-470e-88b7-b94ebaa00608
+    text: "The model gives many candidate next tokens different scores that become probabilities."
+  - id: 411215d2-0725-44aa-8eea-70d91422586f
+    text: "After selecting a token, the model includes it in the context for the next prediction."
+  - id: 32efc76c-fd1e-4966-bb5c-ef4ee32257bf
+    text: "A paragraph is the result of many successive token choices."
+correct_choice_ids:
+  - 32efc76c-fd1e-4966-bb5c-ef4ee32257bf
+explanation: "A paragraph is the result of many successive token choices. Local predictions can produce a coherent-looking whole, although coherence alone does not prove accuracy."
+archived: false

@@ -1,0 +1,19 @@
+id: 62851ef8-b883-45f3-a6e6-0c14a7a479c5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does training text reveal about sentence structure?"
+choices:
+  - id: ed00c55f-cfdb-40d1-9506-9982aa18da70
+    text: "Human language contains recurring arrangements of words and phrases."
+  - id: 37cecd59-d77c-4a1e-8863-9ee2a03ad6b3
+    text: "A sentence can follow grammar rules yet be nonsensical or false."
+  - id: 59c5674c-0272-4726-89a7-9121eec44e59
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: bc04cfc6-af90-4e5d-80e6-5269baefbb35
+    text: "Attention can connect a later position with earlier context."
+correct_choice_ids:
+  - ed00c55f-cfdb-40d1-9506-9982aa18da70
+explanation: "Human language contains recurring arrangements of words and phrases. Training text gives a model many examples of these regularities."
+archived: false

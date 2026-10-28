@@ -1,0 +1,19 @@
+id: 9c09facd-d3bb-49f8-b9a6-0518f91402f5
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How do vocabulary scores become usable for decoding?"
+choices:
+  - id: eec60ed0-ce97-46dc-8d4d-6328250ad72e
+    text: "The chosen token joins the visible sequence and the next prediction begins."
+  - id: 680e3683-81b7-4c63-9535-0035a3f076a9
+    text: "The model produces scores over its token vocabulary."
+  - id: 9d7a8ebe-59c1-444c-aab8-28499b3e82ea
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 535ef80f-e95a-4e5e-a3e2-f7e29a09efa5
+    text: "A decoding rule selects one token from that distribution."
+correct_choice_ids:
+  - 680e3683-81b7-4c63-9535-0035a3f076a9
+explanation: "The model produces scores over its token vocabulary. A conversion turns those scores into a distribution used by decoding."
+archived: false

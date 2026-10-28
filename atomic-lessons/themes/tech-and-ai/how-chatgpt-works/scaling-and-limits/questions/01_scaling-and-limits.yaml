@@ -1,0 +1,19 @@
+id: 587f395b-273e-4683-b493-1a621e0e0662
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What can increasing network size improve?"
+choices:
+  - id: 08e150a7-8506-4dbf-b1be-3d458c92f2da
+    text: "Larger networks and more data can improve performance on many tasks."
+  - id: 6755ca7a-5b6e-4fba-a2d9-ebd3d1c25799
+    text: "Remembering examples is different from carrying out a new sequence of exact steps."
+  - id: 9e49ca39-fa25-4301-91d1-ab8649e8c5d6
+    text: "Wolfram argues that some processes require following their steps to know the result."
+  - id: 469411d2-35ca-4e3f-b90e-6bbf130ccd8b
+    text: "Exact arithmetic and program execution can require a definite procedure."
+correct_choice_ids:
+  - 08e150a7-8506-4dbf-b1be-3d458c92f2da
+explanation: "Larger networks and more data can improve performance on many tasks. Size alone does not establish that every task is solved."
+archived: false

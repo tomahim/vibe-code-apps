@@ -1,0 +1,19 @@
+id: 54e643dc-5e96-444b-a39d-8fc7af6416ae
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why use a tool for a task needing exact calculation?"
+choices:
+  - id: 1a79916f-2be4-432e-8204-e8125e75e25f
+    text: "Treat generated prose as a useful proposal that may need verification."
+  - id: 9d126a62-1120-4046-990c-ae1a3d52de64
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+  - id: abea649a-6be8-43a7-a879-28e618929c4c
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: 6f0051be-f95b-4d66-9707-9dcf27284923
+    text: "The core mechanism is repeated next-token prediction by a trained neural network."
+correct_choice_ids:
+  - 9d126a62-1120-4046-990c-ae1a3d52de64
+explanation: "A tool can perform an explicit calculation or retrieve checkable evidence. Such work can ground an answer that text prediction alone might only make plausible."
+archived: false

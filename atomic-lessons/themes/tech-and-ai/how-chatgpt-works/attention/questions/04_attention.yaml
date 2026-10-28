@@ -1,0 +1,19 @@
+id: 1f078450-2bd2-4c02-8b9e-07b97a420252
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why use multiple attention heads?"
+choices:
+  - id: d99e4a9c-f991-48c5-9121-ed941522981a
+    text: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer."
+  - id: 14a2ac95-80af-4333-ab14-89cd952e732d
+    text: "Several heads can form different weighted combinations in parallel."
+  - id: 31eb5e09-675b-4210-9c3b-42c950fcea21
+    text: "Attention gives different previous positions different weights for the current calculation."
+  - id: aaf64fc6-8c37-4ec5-a04f-bc2c7c903cb5
+    text: "A transformer stacks attention with other learned transformations."
+correct_choice_ids:
+  - 14a2ac95-80af-4333-ab14-89cd952e732d
+explanation: "Several heads can form different weighted combinations in parallel. Their exact internal roles are often hard to label."
+archived: false

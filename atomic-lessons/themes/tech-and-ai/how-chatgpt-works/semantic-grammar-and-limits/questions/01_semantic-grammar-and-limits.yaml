@@ -1,0 +1,19 @@
+id: 24968ebd-8a0f-4bb9-9431-37e604ab39ae
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does semantic grammar try to describe?"
+choices:
+  - id: 1d61a819-6b54-4cfe-84b6-e23944851bf2
+    text: "Wolfram proposes rules about which concepts can sensibly combine."
+  - id: 8f15b1ed-3fb4-476a-a442-43851c7e3467
+    text: "A statement can sound meaningful and still be false in the world."
+  - id: ef5c8a2a-c353-4aca-a220-409c710c0abb
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: b76cf406-8048-4703-bc14-877c7fe6fb6a
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+correct_choice_ids:
+  - 1d61a819-6b54-4cfe-84b6-e23944851bf2
+explanation: "Wolfram proposes rules about which concepts can sensibly combine. This goes beyond the syntax that says which word orders are grammatical."
+archived: false

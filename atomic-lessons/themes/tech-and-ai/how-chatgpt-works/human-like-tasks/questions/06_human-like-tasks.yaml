@@ -1,0 +1,19 @@
+id: a00ca089-caa9-486c-a3d0-64f8503f28f7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How does the essay suggest judging a human-like recognizer?"
+choices:
+  - id: 195d56f8-c761-43d6-b4a6-a289d95fa57a
+    text: "A recognizer may still classify a blurred or altered digit."
+  - id: ee809303-e021-4416-8187-c203d69738cd
+    text: "The network computes an output from numerical pixel values."
+  - id: 1f139b94-3b82-468b-9abb-141b5772346b
+    text: "Some images do not have an obvious label even for people."
+  - id: baf3d1cb-ea65-4c9d-bd30-bf5383e0a155
+    text: "For a human-like task, a useful test is whether outputs usually match what people would say."
+correct_choice_ids:
+  - baf3d1cb-ea65-4c9d-bd30-bf5383e0a155
+explanation: "For a human-like task, a useful test is whether outputs usually match what people would say. Such agreement is empirical, not a mathematical guarantee."
+archived: false

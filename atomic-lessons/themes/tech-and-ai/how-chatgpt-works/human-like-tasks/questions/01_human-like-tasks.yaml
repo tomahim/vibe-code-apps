@@ -1,0 +1,19 @@
+id: fec4d7a1-02da-46c9-b70b-52aadffbdf7f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What input and output define the digit-recognition example?"
+choices:
+  - id: 265a9d2d-5909-4a5b-81ac-46f1001f09f0
+    text: "A digit recognizer maps image pixels to a digit label."
+  - id: a811e9b4-5ad8-4bcf-aa25-36514e60282f
+    text: "The same digit can appear in many shapes and positions."
+  - id: ad45754b-13e6-4fbb-b217-6a0e2a7d0c06
+    text: "A recognizer may still classify a blurred or altered digit."
+  - id: 0665af0e-6eda-4ec1-a4b6-29ccb6aa02c5
+    text: "The network computes an output from numerical pixel values."
+correct_choice_ids:
+  - 265a9d2d-5909-4a5b-81ac-46f1001f09f0
+explanation: "A digit recognizer maps image pixels to a digit label. It offers a simpler example of learning from human-produced data."
+archived: false

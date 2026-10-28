@@ -1,0 +1,19 @@
+id: 213832d2-0def-40cd-ab5e-cdbc79e62887
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Can a plausible statement be factually false?"
+choices:
+  - id: 9c37a484-4813-482d-bb7d-13f00ee3b4df
+    text: "Wolfram proposes rules about which concepts can sensibly combine."
+  - id: 3e382baf-b937-4771-9e11-4bd9de0876c1
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: a50a1d08-12dd-4f37-9eac-d20c2ce9992a
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+  - id: 138771bd-42e3-49b2-b6e9-8636c1c65326
+    text: "A statement can sound meaningful and still be false in the world."
+correct_choice_ids:
+  - 138771bd-42e3-49b2-b6e9-8636c1c65326
+explanation: "A statement can sound meaningful and still be false in the world. A language model's text alone cannot settle that distinction."
+archived: false

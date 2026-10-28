@@ -1,0 +1,19 @@
+id: 89f7e4d7-a9ec-4e3d-9b65-09c88e498b35
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can two runs of the same prompt diverge?"
+choices:
+  - id: 44013437-8f74-4a01-93d3-a2ef9004f382
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: 74d12742-e5f6-47ba-ba63-05df62cccf1f
+    text: "Temperature changes how strongly decoding favors high-scored tokens."
+  - id: 1fc78a81-ce0d-414d-b907-fb561584306b
+    text: "Too little variation can repeat patterns, while too much can make text wander."
+  - id: 96858104-eda8-4ad2-9a28-60308f60cd0d
+    text: "Two runs can diverge because early token choices affect later probabilities."
+correct_choice_ids:
+  - 96858104-eda8-4ad2-9a28-60308f60cd0d
+explanation: "Two runs can diverge because early token choices affect later probabilities. Different wording does not necessarily mean the model learned between runs."
+archived: false

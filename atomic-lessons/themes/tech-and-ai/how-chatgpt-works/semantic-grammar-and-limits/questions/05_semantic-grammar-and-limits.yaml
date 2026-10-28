@@ -1,0 +1,19 @@
+id: 78898dd6-e712-4ed0-97d9-fdb30bee9447
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is the essay's core account of text generation?"
+choices:
+  - id: c468ff9c-b743-4503-9b30-7f2fd8375508
+    text: "The core mechanism is repeated next-token prediction by a trained neural network."
+  - id: 04dcbc68-e0c6-41a7-84c0-4ba895f90533
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: 5db42c6d-36ce-47ed-9328-fcede20a086a
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+  - id: 8f02c100-51fe-4d27-8485-ac301b68ea3e
+    text: "Treat generated prose as a useful proposal that may need verification."
+correct_choice_ids:
+  - c468ff9c-b743-4503-9b30-7f2fd8375508
+explanation: "The core mechanism is repeated next-token prediction by a trained neural network. Large-scale learning and later tuning make its outputs more useful."
+archived: false

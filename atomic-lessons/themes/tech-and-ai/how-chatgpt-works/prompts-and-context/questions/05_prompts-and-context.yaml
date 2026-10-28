@@ -1,0 +1,19 @@
+id: 61af3aee-3956-478e-a4bf-b54ac0793833
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can even a clear prompt fail on an exact task?"
+choices:
+  - id: 2f3fd3fb-915b-4b42-9a56-42bd804efc9c
+    text: "A prompt may ask for a long exact procedure or a fact the model cannot verify."
+  - id: f6fc482a-8eeb-4cf6-92b9-6969228474b9
+    text: "A few examples can establish a pattern for the next response."
+  - id: 7832ae0b-2901-48fc-af80-ee53864d5d77
+    text: "Information supplied in a prompt can guide the current answer."
+  - id: 6dab7dd4-bfcb-4989-a9c6-a18e71303f6e
+    text: "The context changes what the model computes for this request, while training changes model parameters."
+correct_choice_ids:
+  - 2f3fd3fb-915b-4b42-9a56-42bd804efc9c
+explanation: "A prompt may ask for a long exact procedure or a fact the model cannot verify. Clear instructions help, but do not guarantee correctness."
+archived: false

@@ -1,0 +1,19 @@
+id: 63142c52-85cd-4016-b865-7d3c60cebded
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why are long balanced parentheses a useful test?"
+choices:
+  - id: 02a75521-0628-4753-956c-3a60e2ad59b7
+    text: "Long balanced parentheses demand exact tracking of nesting."
+  - id: abf9f7a1-0430-49ac-ad8c-f1f0353691bd
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: 5d1cea8c-3b47-4c92-b0fa-94da18c236dd
+    text: "Attention can connect a later position with earlier context."
+  - id: 63df4877-c88c-424c-b50e-a8a535080b30
+    text: "Correct-looking grammar and coherent wording can coexist with factual error."
+correct_choice_ids:
+  - 02a75521-0628-4753-956c-3a60e2ad59b7
+explanation: "Long balanced parentheses demand exact tracking of nesting. The essay uses this to contrast approximate language patterns with precise algorithms."
+archived: false

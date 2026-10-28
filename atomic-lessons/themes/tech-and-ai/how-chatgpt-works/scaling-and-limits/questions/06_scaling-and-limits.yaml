@@ -1,0 +1,19 @@
+id: 6dec0fea-e22b-4a24-abb9-8195086f7a9e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can an external tool improve a computational answer?"
+choices:
+  - id: 894abf41-a71c-4381-830c-f137f849c5e4
+    text: "Wolfram argues that some processes require following their steps to know the result."
+  - id: efbdc8f4-2680-44fe-89b9-89fcf942460b
+    text: "Exact arithmetic and program execution can require a definite procedure."
+  - id: 9a15c360-0585-45c3-8f61-1a3c6dadabcf
+    text: "Matching long nested parentheses tests whether a model tracks exact structure."
+  - id: c027655c-3b05-4de7-a777-d5d359f3b03f
+    text: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result."
+correct_choice_ids:
+  - c027655c-3b05-4de7-a777-d5d359f3b03f
+explanation: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result. Tool use changes what an assistant can reliably do."
+archived: false

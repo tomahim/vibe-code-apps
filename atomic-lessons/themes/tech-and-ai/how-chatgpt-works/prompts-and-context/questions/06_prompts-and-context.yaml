@@ -1,0 +1,19 @@
+id: 4a66076d-73a0-47e2-88a9-59003d899b3d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What distinguishes prompting from training?"
+choices:
+  - id: 1a02d01f-69e8-424b-8d92-a112315d4ae8
+    text: "A few examples can establish a pattern for the next response."
+  - id: 815d1284-f581-4cfe-b7ad-594798b04446
+    text: "Information supplied in a prompt can guide the current answer."
+  - id: 1253d0c3-6425-47d8-9378-1d32c899a446
+    text: "A prompt may ask for a long exact procedure or a fact the model cannot verify."
+  - id: 7d29f99a-6a1e-4cb2-a6db-1ef1c0eeb345
+    text: "The context changes what the model computes for this request, while training changes model parameters."
+correct_choice_ids:
+  - 7d29f99a-6a1e-4cb2-a6db-1ef1c0eeb345
+explanation: "The context changes what the model computes for this request, while training changes model parameters. Keeping the two separate avoids a common misconception."
+archived: false

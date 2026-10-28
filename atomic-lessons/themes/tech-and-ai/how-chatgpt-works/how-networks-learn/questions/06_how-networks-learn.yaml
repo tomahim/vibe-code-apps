@@ -1,0 +1,19 @@
+id: c01e8272-dd57-466b-b3ac-804a1f414811
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can we check whether learning extends to new cases?"
+choices:
+  - id: bebeb756-d2d5-421c-bd2a-7208e5f3e4c7
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: 345170d9-9e2b-4af2-9bf8-866e8740f0fb
+    text: "Optimization changes weights in directions expected to reduce loss."
+  - id: a5cd7e9d-8b50-470a-8ecb-7c61a4ab123c
+    text: "Many updates across many examples gradually shape the network."
+  - id: 881c8447-0f68-417c-a5b6-93854950c55d
+    text: "A separate evaluation checks performance on examples not used for training."
+correct_choice_ids:
+  - 881c8447-0f68-417c-a5b6-93854950c55d
+explanation: "A separate evaluation checks performance on examples not used for training. Lower training loss is not the whole goal."
+archived: false

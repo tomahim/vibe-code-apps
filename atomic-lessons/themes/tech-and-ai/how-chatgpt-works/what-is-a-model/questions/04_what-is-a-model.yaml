@@ -1,0 +1,19 @@
+id: 775b8415-0633-4a66-9901-b64aff753429
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What are a model's parameters?"
+choices:
+  - id: 0b840ce7-a999-4dc5-a477-cf413900936e
+    text: "A model can fit known examples yet fail on new ones."
+  - id: f96f4c1e-93cc-4c7b-a846-dfdce8d16d87
+    text: "Parameters are numerical values chosen to fit the model to data."
+  - id: 33143b5a-21d8-460b-bcf3-1f25dc020934
+    text: "A straight line may fit some observations but miss their shape."
+  - id: 80d0e664-17e7-4be5-a5ea-f4d0169e6e18
+    text: "Training adjusts parameters inside a structure selected beforehand."
+correct_choice_ids:
+  - f96f4c1e-93cc-4c7b-a846-dfdce8d16d87
+explanation: "Parameters are numerical values chosen to fit the model to data. A neural network can have a very large number of such weights."
+archived: false

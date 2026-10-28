@@ -1,0 +1,19 @@
+id: b1e719fa-4102-47a1-8127-03183243c59e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why might a straight-line fit be inadequate?"
+choices:
+  - id: 52b106f4-e7d9-46db-b6ac-b3bb819e314c
+    text: "Wolfram uses falling objects to show how a model can estimate a value between observations."
+  - id: f17227a9-131a-4c45-be68-f673d2dde776
+    text: "Parameters are numerical values chosen to fit the model to data."
+  - id: 6b6eab0c-8ea5-457d-a87f-e69a8018e157
+    text: "A straight line may fit some observations but miss their shape."
+  - id: e69f2dd1-10a9-40b4-9601-cba5d6138048
+    text: "A table records answers already measured, while a model gives a procedure for estimating new answers."
+correct_choice_ids:
+  - 6b6eab0c-8ea5-457d-a87f-e69a8018e157
+explanation: "A straight line may fit some observations but miss their shape. A more suitable curve can improve estimates between measured points."
+archived: false

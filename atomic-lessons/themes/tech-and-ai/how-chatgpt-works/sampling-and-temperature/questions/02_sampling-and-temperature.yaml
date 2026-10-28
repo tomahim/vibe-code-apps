@@ -1,0 +1,19 @@
+id: 2adf831f-0aec-4b2f-bd13-3f4b0a713dbe
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does greedy decoding do?"
+choices:
+  - id: 608af706-666b-46f0-8524-dfefe9b8db6f
+    text: "Several next tokens can be plausible at once."
+  - id: 6b74556c-9be3-4527-bf60-59998789cc04
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: 9dd903b2-32e3-45fa-8564-4d74c48224df
+    text: "Temperature changes how strongly decoding favors high-scored tokens."
+  - id: 1f52832e-5725-4117-a1af-9486c05baf8b
+    text: "Greedy decoding always takes the highest-scored option."
+correct_choice_ids:
+  - 1f52832e-5725-4117-a1af-9486c05baf8b
+explanation: "Greedy decoding always takes the highest-scored option. In the essay's examples, this often makes longer passages repetitive or flat."
+archived: false

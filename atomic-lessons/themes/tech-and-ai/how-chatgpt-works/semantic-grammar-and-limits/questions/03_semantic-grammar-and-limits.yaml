@@ -1,0 +1,19 @@
+id: 5761845f-dd52-496f-a1e7-e863be69bd4d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How does Wolfram characterize computational language?"
+choices:
+  - id: d804e713-2164-4896-bec0-9f2e18e6a6dc
+    text: "A statement can sound meaningful and still be false in the world."
+  - id: 0e908dd8-d036-4a8e-858b-fc216fc89b25
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+  - id: d2953d6e-d635-4a75-a53c-a9c851075382
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: bec3c915-63eb-41b9-8325-f9e52495314a
+    text: "Wolfram proposes rules about which concepts can sensibly combine."
+correct_choice_ids:
+  - d2953d6e-d635-4a75-a53c-a9c851075382
+explanation: "Wolfram contrasts flexible human language with precise forms that a computer can execute. This is part of his proposed way to connect text with exact reasoning."
+archived: false

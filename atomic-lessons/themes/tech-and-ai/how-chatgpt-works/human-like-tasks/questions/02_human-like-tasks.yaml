@@ -1,0 +1,19 @@
+id: 80a85a56-beab-4540-b7d0-f8cb0ebb2f8a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why is exact pixel matching brittle?"
+choices:
+  - id: 4d528002-2d28-4acb-a651-015644f85cd8
+    text: "A digit recognizer maps image pixels to a digit label."
+  - id: 6890f619-7fdd-4e53-b0ae-5425111d3fd4
+    text: "A recognizer may still classify a blurred or altered digit."
+  - id: b3b36ab2-2e51-442e-a40e-2f4a34f1b5f1
+    text: "The network computes an output from numerical pixel values."
+  - id: d7fad62c-1e88-4b7f-adaa-5214e0d07758
+    text: "The same digit can appear in many shapes and positions."
+correct_choice_ids:
+  - d7fad62c-1e88-4b7f-adaa-5214e0d07758
+explanation: "The same digit can appear in many shapes and positions. Exact pixel comparison cannot reliably recognize every variation."
+archived: false

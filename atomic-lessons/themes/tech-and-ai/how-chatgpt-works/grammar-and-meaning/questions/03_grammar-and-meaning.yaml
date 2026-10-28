@@ -1,0 +1,19 @@
+id: cfdc127f-9f77-4087-98e6-6fbddef343fc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why must a model handle nested relationships?"
+choices:
+  - id: 13c60670-3151-4ad9-8083-7af299a0aac0
+    text: "A sentence can follow grammar rules yet be nonsensical or false."
+  - id: c271d5ff-3a97-4083-ba0e-a08443f64ceb
+    text: "Attention can connect a later position with earlier context."
+  - id: c171532f-5682-401e-bc05-c1efaedd962f
+    text: "Clauses and phrases can depend on earlier parts of a sentence."
+  - id: 104a0f4c-5ff2-4f56-a7f1-fe758ef065d0
+    text: "Human language contains recurring arrangements of words and phrases."
+correct_choice_ids:
+  - c171532f-5682-401e-bc05-c1efaedd962f
+explanation: "Clauses and phrases can depend on earlier parts of a sentence. A model must track more than adjacent word pairs to handle them."
+archived: false

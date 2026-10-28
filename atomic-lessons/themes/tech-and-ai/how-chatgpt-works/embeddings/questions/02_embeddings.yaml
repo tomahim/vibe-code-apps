@@ -1,0 +1,19 @@
+id: d0c4f87d-7d80-4ef6-89b0-06eea866e596
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why might related words have nearby vectors?"
+choices:
+  - id: 405cf317-fba1-4f59-915e-3520c0451e4e
+    text: "An embedding is an array of numbers used to represent an item."
+  - id: 903a0100-e92b-43a4-931d-3cf0dd320eed
+    text: "The surrounding words provide clues about how a word is used."
+  - id: 219981ae-1ccc-4e5d-b877-2e408e97e7d7
+    text: "A digit network can form internal representations before choosing a final label."
+  - id: e1381935-a699-4798-8ddc-e5553982eba0
+    text: "Words used in similar contexts can receive related representations."
+correct_choice_ids:
+  - e1381935-a699-4798-8ddc-e5553982eba0
+explanation: "Words used in similar contexts can receive related representations. Nearness is useful but does not give a complete definition of meaning."
+archived: false
