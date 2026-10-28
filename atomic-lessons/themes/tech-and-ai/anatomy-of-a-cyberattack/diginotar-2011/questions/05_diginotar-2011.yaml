@@ -1,0 +1,19 @@
+id: a9eda9df-b6b0-4dc9-b6cb-ae7b1510d27e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What did Certificate Transparency introduce?"
+choices:
+  - id: 632c8eef-5286-475f-845e-b7eebdd47f9f
+    text: "Public logs of issued certificates so mis-issuance can be detected"
+  - id: 804daa61-bcd0-4f5a-aca0-a88d93aaa725
+    text: "A ban on the use of passwords"
+  - id: d7a34c0f-eae3-409d-8e3f-f22d233e815f
+    text: "Automatic payment for each certificate"
+  - id: f15090ad-8c92-4cba-8130-96566d7048ff
+    text: "A new kind of antivirus"
+correct_choice_ids:
+  - 632c8eef-5286-475f-845e-b7eebdd47f9f
+explanation: "Anyone can monitor the logs for unexpected certificates for their domains."
+archived: false

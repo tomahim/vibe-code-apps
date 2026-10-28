@@ -1,0 +1,19 @@
+id: b205934b-b706-496b-8a42-c57d6007dd5b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How did the incident come to light for users?"
+choices:
+  - id: a530821b-0028-43b9-a9b7-b8d6bb51e7d0
+    text: "A browser maker discovered it during a routine update"
+  - id: ab8d5cc6-0981-4fd2-a2c6-ea73b78a9d02
+    text: "A court issued a public ruling"
+  - id: 68499554-9ad4-48c8-8ce8-c210b0929dde
+    text: "A bank announced a new product"
+  - id: e0a42703-ab22-4bfa-858e-09f861516b24
+    text: "An Iranian user reported a browser warning about a fraudulent Google certificate"
+correct_choice_ids:
+  - e0a42703-ab22-4bfa-858e-09f861516b24
+explanation: "The report spread quickly and prompted investigation."
+archived: false

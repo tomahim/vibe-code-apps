@@ -1,0 +1,19 @@
+id: 85ec0f2b-53ab-4a48-94c9-f1fe63f6f8a5
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What helped the attackers reach more databases?
+choices:
+- id: 5b1c324d-3cc3-45b2-a5ab-6b4e117eb93f
+  text: Unencrypted credentials found in a file
+- id: 7386966c-5f7a-482e-ab36-c5e86a330359
+  text: A fake invoice
+- id: d5431c92-f51f-488b-925a-9c26c27d88b1
+  text: A phone call to the support desk
+- id: 9a5b0441-de6d-41db-a5ca-d39ca0918506
+  text: A physical USB drive
+correct_choice_ids:
+- 5b1c324d-3cc3-45b2-a5ab-6b4e117eb93f
+explanation: They used found credentials to reach many databases.
+archived: false

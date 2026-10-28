@@ -1,0 +1,19 @@
+id: f4b7dd0c-001b-49c7-9280-78e646f48fe9
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How did the malware keep operators from noticing a problem?"
+choices:
+  - id: 5f7aa7d2-f3ba-4f29-8cdb-3c4f1e1258dd
+    text: "It deleted the logs every night"
+  - id: bcb37c5d-0f3d-4e39-ae4c-cd420df7cda4
+    text: "It hid its changes and replayed normal-looking readings"
+  - id: 8deca65a-6452-49f0-8940-c1be20e2a23c
+    text: "It switched off all monitoring screens"
+  - id: d97b9d61-a0b5-4516-8174-52bbb73e3c5c
+    text: "It sent alert emails to the wrong address"
+correct_choice_ids:
+  - bcb37c5d-0f3d-4e39-ae4c-cd420df7cda4
+explanation: "Operators saw normal values while equipment was being stressed."
+archived: false

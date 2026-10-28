@@ -1,0 +1,19 @@
+id: b015a133-c82f-4cd1-8c7b-780703d14d70
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why was the activity hard to notice, according to CISA?
+choices:
+- id: c70bc61d-8257-4f98-a0f7-0cabbdd1347f
+  text: The adversary showed patience, operational security and complex tradecraft
+- id: 3db0aa42-a21d-41ef-ad55-43e07a4c20ee
+  text: It displayed a large red warning
+- id: 45f7087e-ec48-4c71-9db3-77120d6050fc
+  text: It disabled the internet worldwide
+- id: d7be4066-e505-4d03-a1e6-7e33b10e1c94
+  text: It was written on paper
+correct_choice_ids:
+- c70bc61d-8257-4f98-a0f7-0cabbdd1347f
+explanation: CISA's alert describes patience, operational security and complex tradecraft.
+archived: false

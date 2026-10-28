@@ -1,0 +1,19 @@
+id: e8cc4589-9614-4c16-a51c-0956621eed3e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why did Colonial disconnect operational systems?
+choices:
+- id: 6aac664c-d6c9-4285-a6e2-af504d4f6761
+  text: The pipeline broke from pressure
+- id: ca51c75a-3d1b-494d-8b84-6deb998f99c7
+  text: To contain the attack, even though CISA saw no lateral movement to them
+- id: e1e5e65e-4bf2-42b6-aeee-26f1e8b4b3c5
+  text: A law required it that day
+- id: 951ed1fe-daad-4c86-b218-dc0ad6cc59b5
+  text: Fuel ran out in Texas
+correct_choice_ids:
+- ca51c75a-3d1b-494d-8b84-6deb998f99c7
+explanation: CISA says Colonial proactively disconnected certain systems.
+archived: false

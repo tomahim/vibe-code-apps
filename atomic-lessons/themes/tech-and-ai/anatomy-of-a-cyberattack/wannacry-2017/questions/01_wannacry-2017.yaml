@@ -1,0 +1,19 @@
+id: 480b325d-1a0e-4673-a10e-5717bb4805fd
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What made WannaCry spread so quickly?"
+choices:
+  - id: 386ed447-3052-4733-9369-19630008f75c
+    text: "It spread only through USB drives"
+  - id: 398dfb68-dac7-4a5b-95db-fbc7104892d1
+    text: "It acted like a worm using a Windows file-sharing flaw"
+  - id: 1d0d0ffb-82bd-497c-9645-2ab1e4506061
+    text: "It required users to open an email attachment"
+  - id: 0df4277c-fa89-4248-ae00-47757a31144b
+    text: "It was installed by a software update"
+correct_choice_ids:
+  - 398dfb68-dac7-4a5b-95db-fbc7104892d1
+explanation: "It could spread between machines without user action."
+archived: false

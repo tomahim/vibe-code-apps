@@ -1,0 +1,19 @@
+id: 4c3fc6b7-9f75-491f-895f-27e7d6b8dbea
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How is Log4Shell different from other cases here?"
+choices:
+  - id: bf69f28e-9c76-477c-8b12-62c7d27031d3
+    text: "It was a data leak from a single retailer"
+  - id: 9d56f871-7049-4b2e-a7f5-73811c1148db
+    text: "It was a bank heist"
+  - id: f5ae5abf-b580-4d92-9b2e-6ca52d75226d
+    text: "It was a ransomware attack on one hospital"
+  - id: e84968d3-c73b-40e4-94d8-31d9c1f99853
+    text: "It is a widely exploited vulnerability, not a single attributed operation"
+correct_choice_ids:
+  - e84968d3-c73b-40e4-94d8-31d9c1f99853
+explanation: "Many different actors used the flaw."
+archived: false

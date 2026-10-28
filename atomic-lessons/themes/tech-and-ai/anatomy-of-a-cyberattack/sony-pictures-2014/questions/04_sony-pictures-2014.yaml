@@ -1,0 +1,19 @@
+id: 1fbe719e-5798-4b8f-a9b7-3c902aa664bd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should the attribution be described?
+choices:
+- id: 7a98987a-c8ec-4eb1-9a49-25980d416eae
+  text: A rumor with no official source
+- id: 071624c0-772d-4795-9b8c-9d630d30300f
+  text: A US government conclusion with partial public evidence
+- id: 04a1138c-0c7b-494b-a3a5-fe9fc4271e9f
+  text: An unquestionable fact with full public proof
+- id: 55eba2af-e0d5-415e-b069-f7c84f47e373
+  text: A decision by the United Nations
+correct_choice_ids:
+- 071624c0-772d-4795-9b8c-9d630d30300f
+explanation: The FBI listed some reasons and said it could not share all information.
+archived: false

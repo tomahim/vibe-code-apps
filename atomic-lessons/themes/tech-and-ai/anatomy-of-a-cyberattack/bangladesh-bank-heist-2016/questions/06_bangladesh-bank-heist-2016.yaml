@@ -1,0 +1,19 @@
+id: f8537c47-d996-4dcb-bd9b-e411d8482b39
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which response best improves resilience?"
+choices:
+  - id: a1c0cb41-3dd9-4380-8052-3855b7114a1c
+    text: "Ignoring weekend activity"
+  - id: b50c7be6-49f6-44ab-9731-1839fb132c9c
+    text: "Independent approval and monitoring of payment messages"
+  - id: 126ae055-5c17-41b0-9ca1-30df342fbb1b
+    text: "Letting one operator approve everything"
+  - id: b518f7e5-e87e-44cf-9425-6ec1a05f02cc
+    text: "Printing fewer records"
+correct_choice_ids:
+  - b50c7be6-49f6-44ab-9731-1839fb132c9c
+explanation: "Independent controls make it harder for one compromise to hide fraud."
+archived: false

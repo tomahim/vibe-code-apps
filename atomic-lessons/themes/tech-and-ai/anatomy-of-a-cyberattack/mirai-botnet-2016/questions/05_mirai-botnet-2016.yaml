@@ -1,0 +1,19 @@
+id: a51aa713-2319-41f1-b8bd-6d1a9f9b48fb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What does the USENIX paper discuss as a response?
+choices:
+- id: ff7a5ba6-b90b-4248-b150-aa31f8e69707
+  text: Technical interventions such as removing default credentials and patching
+- id: 1397e2f9-b4d9-4df4-b945-eb4927dab8b8
+  text: A ban on all cameras
+- id: da9048dd-f968-4df1-84ef-0b4b94557bfd
+  text: A requirement to use only one DNS provider
+- id: 58b217e1-8524-44c4-8a94-8d2016da011e
+  text: A tax on routers
+correct_choice_ids:
+- ff7a5ba6-b90b-4248-b150-aa31f8e69707
+explanation: The paper discusses technical interventions and cooperation among stakeholders.
+archived: false

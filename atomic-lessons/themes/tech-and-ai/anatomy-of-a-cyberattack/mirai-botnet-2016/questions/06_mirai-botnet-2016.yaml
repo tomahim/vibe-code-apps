@@ -1,0 +1,19 @@
+id: 2c38ab2e-a977-472e-8d13-194533575d45
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which design principle does Mirai support?"
+choices:
+  - id: 57fe7f7f-742a-4d73-b9ad-91ab35b761f2
+    text: "Default passwords are safe if short"
+  - id: 5784422e-420a-4ad9-8c18-fe948c56e17e
+    text: "Secure by default"
+  - id: 557ad7d9-e0a5-475b-b274-37635da26b7f
+    text: "Security can be added only after the sale"
+  - id: 6ef1a5ab-6ed7-4cc8-91d5-98766d768a72
+    text: "Users should be blamed for all infections"
+correct_choice_ids:
+  - 5784422e-420a-4ad9-8c18-fe948c56e17e
+explanation: "Manufacturers should remove predictable credentials and provide updates."
+archived: false

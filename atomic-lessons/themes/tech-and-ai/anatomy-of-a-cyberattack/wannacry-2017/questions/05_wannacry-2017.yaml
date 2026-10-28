@@ -1,0 +1,19 @@
+id: e9202072-4a00-40e8-ac64-c264f9551d00
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which defensive control best limits worm spread?"
+choices:
+  - id: d56b501d-66d0-4128-94d1-2bed1d54bb04
+    text: "More colorful logos"
+  - id: 227813b0-4a6f-4f49-a751-967d59c6461e
+    text: "Shorter email subject lines"
+  - id: 2c829bac-449e-4bfd-8b90-b477809a5404
+    text: "Brighter screens"
+  - id: 9b4ed80f-c701-435c-b9e6-7259a37402a2
+    text: "Network segmentation"
+correct_choice_ids:
+  - 9b4ed80f-c701-435c-b9e6-7259a37402a2
+explanation: "Segmentation prevents one infected computer from reaching all others."
+archived: false

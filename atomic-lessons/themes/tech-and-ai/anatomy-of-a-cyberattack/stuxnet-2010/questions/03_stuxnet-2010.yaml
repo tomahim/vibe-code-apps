@@ -1,0 +1,19 @@
+id: 0dc7793e-36e6-462a-bdef-9bec08ac385d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why did stolen digital certificates matter?"
+choices:
+  - id: 58e6cbff-17de-4341-863c-f41c8028260e
+    text: "They allowed the worm to run without electricity"
+  - id: ba5024e8-93c0-40f8-ba01-18c4b8a24355
+    text: "They made malicious drivers look trusted by the operating system"
+  - id: 9ddff88b-94b1-45a2-9519-dd5a6ef4df7d
+    text: "They encrypted the controller's memory"
+  - id: 2ca22772-0db5-422a-bebd-f0c45fa9d5d3
+    text: "They gave access to the plant's bank account"
+correct_choice_ids:
+  - ba5024e8-93c0-40f8-ba01-18c4b8a24355
+explanation: "Signed code is trusted more, so stolen certificates helped the malware avoid suspicion."
+archived: false

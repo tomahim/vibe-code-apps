@@ -1,0 +1,19 @@
+id: 9d87a75d-4e6f-4f8d-903a-b5decfb4d18f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What did the FBI say the Sony attack did to Sony's computers?
+choices:
+- id: 7081f2d0-a795-4f12-a445-05facde57452
+  text: It left them unaffected
+- id: 4ebb6163-fe3b-4e40-8f75-99432d26e311
+  text: It rendered thousands of them inoperable
+- id: 94923b83-88dc-4680-a41b-90ff3ca97605
+  text: It only slowed down the website
+- id: afa31c6f-408d-4ee7-ad90-dae3b981e940
+  text: It only showed advertisements
+correct_choice_ids:
+- 4ebb6163-fe3b-4e40-8f75-99432d26e311
+explanation: The FBI said thousands of computers were rendered inoperable and the network was taken offline.
+archived: false

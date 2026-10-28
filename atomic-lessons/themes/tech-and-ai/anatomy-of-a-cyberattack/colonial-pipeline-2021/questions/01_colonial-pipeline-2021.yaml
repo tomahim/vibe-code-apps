@@ -1,0 +1,19 @@
+id: 65b2fad2-0942-448e-a81a-76335c0f8c8d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Which systems did the ransomware attack, according to Colonial?"
+choices:
+  - id: 593bed66-aa44-43c0-903c-edeb42e6d53b
+    text: "Customers' cars"
+  - id: 7b5e186d-2e1e-4500-828c-afc9d20eb0d7
+    text: "The fuel itself"
+  - id: b2ca4ae2-e566-4975-bd5a-a22443594ef6
+    text: "The pipeline's steel"
+  - id: e654fb0b-3870-4d6b-84a8-1b8ab1824156
+    text: "Business IT systems"
+correct_choice_ids:
+  - e654fb0b-3870-4d6b-84a8-1b8ab1824156
+explanation: "The pipeline was shut down as a precaution and because business processes were affected."
+archived: false

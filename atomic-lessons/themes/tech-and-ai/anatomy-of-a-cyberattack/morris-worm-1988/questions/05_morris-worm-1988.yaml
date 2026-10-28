@@ -1,0 +1,19 @@
+id: 0d31f2f5-5ffb-4876-8045-74b643b2c8fb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What was Robert Tappan Morris's legal outcome?
+choices:
+- id: 2948a401-7d57-493a-a898-209b25bac41d
+  text: No charges were ever brought
+- id: 8d055c9d-a82d-4829-b669-ecab6069acf3
+  text: He was extradited to another country
+- id: 2ebb5a22-5912-480c-a2c2-acc6b69873ef
+  text: A ten-year prison sentence
+- id: 0d1969d8-a832-460b-95ca-e621d22cacde
+  text: First conviction under the Computer Fraud and Abuse Act, with probation, community service and a fine
+correct_choice_ids:
+- 0d1969d8-a832-460b-95ca-e621d22cacde
+explanation: His 1990 conviction was the first under that law. He received probation, 400 hours of community service and a fine.
+archived: false

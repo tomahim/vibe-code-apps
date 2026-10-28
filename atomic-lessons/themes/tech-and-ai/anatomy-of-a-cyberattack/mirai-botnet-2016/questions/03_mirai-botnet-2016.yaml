@@ -1,0 +1,19 @@
+id: 79cd31d5-7a5d-40e1-b8f4-611c0d196c37
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why did the Dyn attack affect many websites?"
+choices:
+  - id: 40ae47ea-98c0-480e-8f20-0493fbcbeed4
+    text: "Mirai changed web pages"
+  - id: ffc6ff3f-2285-4063-992b-0df62ae667d6
+    text: "Dyn owned all websites"
+  - id: 02bec195-db21-4d7f-8fe9-323d4aa728d5
+    text: "Every site was hosted on Dyn's disks"
+  - id: 97026770-b291-48da-a7e8-bf7661cca03b
+    text: "Dyn provided DNS services that many sites relied on"
+correct_choice_ids:
+  - 97026770-b291-48da-a7e8-bf7661cca03b
+explanation: "DNS is the internet's address book, so many sites became hard to reach."
+archived: false

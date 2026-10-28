@@ -1,0 +1,19 @@
+id: 90658637-b4a8-43bb-8cdf-81a7879dc18a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What recovery lesson follows?"
+choices:
+  - id: 4b970345-5a8f-4d08-ac54-ba26f714cf25
+    text: "Keep offline backups and test rebuilding from scratch"
+  - id: 1cf90337-4282-4a05-91da-6ea50e56f68e
+    text: "Keep backups on the same network"
+  - id: c7fcad8c-eac2-402b-b78e-6981ea475eea
+    text: "Always pay the ransom"
+  - id: bf396f83-7f03-460b-9a95-10e00ecc7f68
+    text: "Avoid updating software"
+correct_choice_ids:
+  - 4b970345-5a8f-4d08-ac54-ba26f714cf25
+explanation: "A rebuild plan does not depend on attackers providing keys."
+archived: false

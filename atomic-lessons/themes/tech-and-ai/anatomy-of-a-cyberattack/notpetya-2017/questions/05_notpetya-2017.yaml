@@ -1,0 +1,19 @@
+id: aaf9672e-e49b-4958-8206-21808839bc31
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did the US government say in February 2018?
+choices:
+- id: 8212cd17-14aa-41e8-8458-67795491b988
+  text: The author was an anonymous student
+- id: 85744dce-1cfe-4c98-a700-3e64aa9bc9b9
+  text: The attack was an accident
+- id: dbd378b0-5db8-45ed-99bc-d66d3f961f81
+  text: The Russian military was responsible
+- id: 5a73bbad-d045-4450-95c5-c9b7e0778b8a
+  text: A Chinese bank was responsible
+correct_choice_ids:
+- dbd378b0-5db8-45ed-99bc-d66d3f961f81
+explanation: The White House attributed it to the Russian military on 15 February 2018.
+archived: false

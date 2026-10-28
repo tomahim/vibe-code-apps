@@ -1,0 +1,19 @@
+id: 3d42b1c2-252e-4923-ad70-b2da75443ac0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Which recommendation did the House committee make?
+choices:
+- id: 95c732e1-2093-49ca-9d4b-5f622fe304e5
+  text: Store all records in one system
+- id: 0d9c86f2-0ad5-4e6d-97b7-c9441ce33d7c
+  text: Remove the Inspector General
+- id: 2373ba95-4351-411b-a88f-003411170a00
+  text: Move toward zero trust and reduce use of Social Security numbers
+- id: 8ebea914-7efd-4e12-8939-3107ca708aa2
+  text: Stop background investigations
+correct_choice_ids:
+- 2373ba95-4351-411b-a88f-003411170a00
+explanation: These were among the committee's key recommendations.
+archived: false

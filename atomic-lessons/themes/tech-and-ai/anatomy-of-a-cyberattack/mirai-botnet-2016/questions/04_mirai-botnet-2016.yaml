@@ -1,0 +1,19 @@
+id: 2493f912-3934-4e50-8aea-6866185fc7db
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What happened after the source code was released?
+choices:
+- id: 32869baa-faa8-452f-869b-a5d0048218a8
+  text: All devices were patched
+- id: e76528e4-7919-403d-b84f-3b99d56d0c2a
+  text: The botnet disappeared immediately
+- id: 0beb0bb0-4f8b-4f07-b574-e23644983346
+  text: Governments ended all IoT sales
+- id: a7121bdb-72d0-4057-96f5-08f12b314628
+  text: Other operators could run botnets of their own with it
+correct_choice_ids:
+- a7121bdb-72d0-4057-96f5-08f12b314628
+explanation: The source code was released on 30 September 2016.
+archived: false

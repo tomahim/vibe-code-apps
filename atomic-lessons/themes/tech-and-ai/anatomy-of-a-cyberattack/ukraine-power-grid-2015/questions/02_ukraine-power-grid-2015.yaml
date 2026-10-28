@@ -1,0 +1,19 @@
+id: 1011c80e-2cd7-40bd-bcb2-1cfa035761ac
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What did the interagency team conclude from its interviews?"
+choices:
+  - id: 40b38d99-b156-469e-9a03-5ea2e1345185
+    text: "An employee made a billing error"
+  - id: df78b251-d2b7-4733-a192-ff35f2b10973
+    text: "The outages were caused by external cyber attackers"
+  - id: 72f2c62f-fb61-400d-a953-f457071b9f47
+    text: "A satellite failed"
+  - id: da0f37bd-28fa-43e2-95e2-9b552ac5c434
+    text: "The grid failed from a snowstorm"
+correct_choice_ids:
+  - df78b251-d2b7-4733-a192-ff35f2b10973
+explanation: "The report assessed that external attackers caused the outages."
+archived: false

@@ -1,0 +1,19 @@
+id: 08eb3eda-0284-4545-931c-7f39498846d2
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What was a main entry route for Mirai?
+choices:
+- id: 6729a991-7d71-4963-8eeb-b0edd9abb2af
+  text: Calling the owners on the phone
+- id: 10cded25-2b06-49b3-bf3c-f486585d8edd
+  text: Trying common factory usernames and passwords on exposed devices
+- id: 71099ea5-dd95-41a6-93a8-920e735d244b
+  text: Breaking into the manufacturer's building
+- id: 7413ff18-8c29-482a-9c72-ba9ec85f30bb
+  text: Using a new zero-day in every device
+correct_choice_ids:
+- 10cded25-2b06-49b3-bf3c-f486585d8edd
+explanation: Mirai tried default credentials on exposed Telnet services.
+archived: false

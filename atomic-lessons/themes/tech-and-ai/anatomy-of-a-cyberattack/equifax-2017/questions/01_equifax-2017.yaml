@@ -1,0 +1,19 @@
+id: 346fd89a-4989-4644-8a5e-d584025082be
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What software flaw gave the initial access?
+choices:
+- id: 0308ea09-7f45-4890-bbcf-3213e85b7e58
+  text: A flaw in a game console
+- id: 70a2d89c-0061-455a-a411-a920a0a86fb8
+  text: A leaked Windows flaw named EternalBlue
+- id: ba6ad59a-1ed1-45bb-bb63-06d6e3a570e8
+  text: A vulnerability in Apache Struts
+- id: 931208c6-941c-4d80-abc6-c5d80c133642
+  text: A hardware flaw in laptops
+correct_choice_ids:
+- ba6ad59a-1ed1-45bb-bb63-06d6e3a570e8
+explanation: The flaw was disclosed in March 2017.
+archived: false
