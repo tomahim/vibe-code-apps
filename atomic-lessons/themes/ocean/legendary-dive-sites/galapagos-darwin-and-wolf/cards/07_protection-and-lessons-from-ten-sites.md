@@ -8,4 +8,4 @@ The Galápagos Marine Reserve protects the waters around the islands. Tourists a
 
 Across this course the same ideas keep coming back. Geology makes the site, water movement feeds it, history adds meaning, and human rules decide whether it survives. A Blue Hole, a wreck, a rift between continents or a reef wall are each different, but a careful visitor reads them all in the same way: what is this place made of, what moves through it and who looks after it?
 
-Learn more: [Wikipedia - Darwin's Arch](https://en.wikipedia.org/wiki/Darwin%27s_Arch)
+Learn more: [UNESCO - Galápagos Islands](https://whc.unesco.org/en/list/1/)

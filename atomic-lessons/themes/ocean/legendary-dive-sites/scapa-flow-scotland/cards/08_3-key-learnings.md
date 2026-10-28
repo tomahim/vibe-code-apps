@@ -8,4 +8,4 @@ archived: false
 
 **2. Most were raised, but not all.** Ernest Cox and later salvors lifted many wrecks; the deepest remain, down to about 47 m.
 
-**3. Now they are protected heritage.** Seven wrecks were scheduled in 2001 and the whole site became a marine protected area in 2025.
+**3. Now they are protected heritage.** Seven wrecks are scheduled monuments and the whole site became a Historic Marine Protected Area in 2025.

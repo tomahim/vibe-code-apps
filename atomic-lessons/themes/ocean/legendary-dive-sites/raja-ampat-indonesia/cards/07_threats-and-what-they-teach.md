@@ -8,4 +8,4 @@ Since 2019 the islands have faced a new threat: illegal mining, for example for 
 
 The lesson is that a place with record biodiversity is not automatically safe. Its protection depends on laws, enforcement and local support. For visitors, the best response is to choose operators who follow park rules, never touch coral, and respect community areas. Raja Ampat is both a reminder of how rich the ocean can be, and a test of whether people can protect it.
 
-Learn more: [Wikipedia - Raja Ampat Islands](https://en.wikipedia.org/wiki/Raja_Ampat_Islands)
+Learn more: [UNESCO - Raja Ampat Biosphere Reserve](https://www.unesco.org/en/mab/raja-ampat)
