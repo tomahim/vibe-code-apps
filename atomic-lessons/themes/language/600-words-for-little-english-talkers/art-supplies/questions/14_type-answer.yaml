@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Fil / Laine » (thème : Art Supplies)."
 accepted_answers:
   - "Yarn"
-  - "yarn"
 explanation: "Le mot du cours est « Yarn »."
 archived: false

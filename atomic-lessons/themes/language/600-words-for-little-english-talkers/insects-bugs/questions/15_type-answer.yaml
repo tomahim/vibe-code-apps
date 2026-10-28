@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Moucheron » (thème : Insects & Bugs)."
 accepted_answers:
   - "Gnat"
-  - "gnat"
 explanation: "Le mot du cours est « Gnat »."
 archived: false

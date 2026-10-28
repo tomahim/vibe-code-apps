@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Lavabo » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Basin"
-  - "basin"
 explanation: "Le mot du cours est « Basin »."
 archived: false

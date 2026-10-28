@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Satellite » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Satellite"
-  - "satellite"
 explanation: "Le mot du cours est « Satellite »."
 archived: false

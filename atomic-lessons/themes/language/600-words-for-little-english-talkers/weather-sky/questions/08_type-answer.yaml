@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Ciel » (thème : Weather & Sky)."
 accepted_answers:
   - "Sky"
-  - "sky"
 explanation: "Le mot du cours est « Sky »."
 archived: false

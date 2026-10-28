@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Chat » (thème : Animals)."
 accepted_answers:
   - "Cat"
-  - "cat"
 explanation: "Le mot du cours est « Cat »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Baguette » (thème : Bakery & Grains)."
 accepted_answers:
   - "Baguette"
-  - "baguette"
 explanation: "Le mot du cours est « Baguette »."
 archived: false

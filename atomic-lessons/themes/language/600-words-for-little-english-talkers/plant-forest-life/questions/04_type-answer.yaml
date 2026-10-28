@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Branche » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Branch"
-  - "branch"
 explanation: "Le mot du cours est « Branch »."
 archived: false

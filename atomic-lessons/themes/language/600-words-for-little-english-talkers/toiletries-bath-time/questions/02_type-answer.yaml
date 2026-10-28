@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Brosse à dents » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Toothbrush"
-  - "toothbrush"
 explanation: "Le mot du cours est « Toothbrush »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Main » (thème : Body Parts)."
 accepted_answers:
   - "Hand"
-  - "hand"
 explanation: "Le mot du cours est « Hand »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Clairon » (thème : Musical Instruments)."
 accepted_answers:
   - "Bugle"
-  - "bugle"
 explanation: "Le mot du cours est « Bugle »."
 archived: false

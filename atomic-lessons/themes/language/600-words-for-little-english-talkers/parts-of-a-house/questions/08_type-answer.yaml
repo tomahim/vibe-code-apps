@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Cuisine » (thème : Parts of a House)."
 accepted_answers:
   - "Kitchen"
-  - "kitchen"
 explanation: "Le mot du cours est « Kitchen »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Tortue » (thème : Animals)."
 accepted_answers:
   - "Turtle"
-  - "turtle"
 explanation: "Le mot du cours est « Turtle »."
 archived: false

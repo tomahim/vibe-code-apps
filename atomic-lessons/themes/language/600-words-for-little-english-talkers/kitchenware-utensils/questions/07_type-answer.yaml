@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Bouilloire » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Kettle"
-  - "kettle"
 explanation: "Le mot du cours est « Kettle »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Parc » (thème : Places in Town)."
 accepted_answers:
   - "Park"
-  - "park"
 explanation: "Le mot du cours est « Park »."
 archived: false

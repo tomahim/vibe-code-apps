@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Pouce » (thème : Body Parts)."
 accepted_answers:
   - "Thumb"
-  - "thumb"
 explanation: "Le mot du cours est « Thumb »."
 archived: false

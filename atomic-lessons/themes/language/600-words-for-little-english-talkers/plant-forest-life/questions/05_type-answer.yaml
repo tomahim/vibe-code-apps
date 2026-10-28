@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Racine » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Root"
-  - "root"
 explanation: "Le mot du cours est « Root »."
 archived: false

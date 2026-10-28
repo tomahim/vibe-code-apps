@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Corail » (thème : Sea Life)."
 accepted_answers:
   - "Coral"
-  - "coral"
 explanation: "Le mot du cours est « Coral »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Fleur d'arbre » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Blossom"
-  - "blossom"
 explanation: "Le mot du cours est « Blossom »."
 archived: false

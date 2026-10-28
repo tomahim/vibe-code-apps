@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Seuil » (thème : Parts of a House)."
 accepted_answers:
   - "Threshold"
-  - "threshold"
 explanation: "Le mot du cours est « Threshold »."
 archived: false

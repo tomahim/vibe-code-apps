@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Flûte » (thème : Musical Instruments)."
 accepted_answers:
   - "Flute"
-  - "flute"
 explanation: "Le mot du cours est « Flute »."
 archived: false

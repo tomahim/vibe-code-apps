@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Entonnoir » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Funnel"
-  - "funnel"
 explanation: "Le mot du cours est « Funnel »."
 archived: false

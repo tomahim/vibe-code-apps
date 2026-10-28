@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Sifflet » (thème : Musical Instruments)."
 accepted_answers:
   - "Whistle"
-  - "whistle"
 explanation: "Le mot du cours est « Whistle »."
 archived: false

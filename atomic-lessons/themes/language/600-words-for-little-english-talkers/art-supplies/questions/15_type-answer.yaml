@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Brosse » (thème : Art Supplies)."
 accepted_answers:
   - "Brush"
-  - "brush"
 explanation: "Le mot du cours est « Brush »."
 archived: false

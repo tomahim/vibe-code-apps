@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Bourrasque » (thème : Weather & Sky)."
 accepted_answers:
   - "Gale"
-  - "gale"
 explanation: "Le mot du cours est « Gale »."
 archived: false

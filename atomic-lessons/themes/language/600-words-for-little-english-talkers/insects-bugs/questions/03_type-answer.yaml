@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Escargot » (thème : Insects & Bugs)."
 accepted_answers:
   - "Snail"
-  - "snail"
 explanation: "Le mot du cours est « Snail »."
 archived: false

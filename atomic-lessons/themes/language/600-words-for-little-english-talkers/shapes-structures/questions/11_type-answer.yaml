@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Château » (thème : Shapes & Structures)."
 accepted_answers:
   - "Castle"
-  - "castle"
 explanation: "Le mot du cours est « Castle »."
 archived: false

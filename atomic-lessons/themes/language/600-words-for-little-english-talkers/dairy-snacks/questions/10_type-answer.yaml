@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Milk-shake » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Milkshake"
-  - "milkshake"
 explanation: "Le mot du cours est « Milkshake »."
 archived: false

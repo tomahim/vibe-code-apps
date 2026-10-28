@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Triangle » (thème : Shapes & Structures)."
 accepted_answers:
   - "Triangle"
-  - "triangle"
 explanation: "Le mot du cours est « Triangle »."
 archived: false

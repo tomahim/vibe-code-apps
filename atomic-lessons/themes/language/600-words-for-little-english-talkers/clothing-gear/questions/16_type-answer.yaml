@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Casque » (thème : Clothing & Gear)."
 accepted_answers:
   - "Helmet"
-  - "helmet"
 explanation: "Le mot du cours est « Helmet »."
 archived: false

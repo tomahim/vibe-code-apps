@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Sous-marin » (thème : Sea Life)."
 accepted_answers:
   - "Submarine"
-  - "submarine"
 explanation: "Le mot du cours est « Submarine »."
 archived: false

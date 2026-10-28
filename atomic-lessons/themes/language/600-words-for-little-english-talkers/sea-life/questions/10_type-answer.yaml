@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Palourde » (thème : Sea Life)."
 accepted_answers:
   - "Clam"
-  - "clam"
 explanation: "Le mot du cours est « Clam »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Rayon » (thème : Weather & Sky)."
 accepted_answers:
   - "Ray"
-  - "ray"
 explanation: "Le mot du cours est « Ray »."
 archived: false

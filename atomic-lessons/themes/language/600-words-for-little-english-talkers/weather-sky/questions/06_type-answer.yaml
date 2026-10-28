@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Flocon de neige » (thème : Weather & Sky)."
 accepted_answers:
   - "Snowflake"
-  - "snowflake"
 explanation: "Le mot du cours est « Snowflake »."
 archived: false

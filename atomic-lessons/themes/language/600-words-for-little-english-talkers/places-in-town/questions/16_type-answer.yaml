@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Tour » (thème : Places in Town)."
 accepted_answers:
   - "Tower"
-  - "tower"
 explanation: "Le mot du cours est « Tower »."
 archived: false

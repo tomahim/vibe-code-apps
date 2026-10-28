@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Requin » (thème : Sea Life)."
 accepted_answers:
   - "Shark"
-  - "shark"
 explanation: "Le mot du cours est « Shark »."
 archived: false

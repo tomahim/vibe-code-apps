@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Chef cuisinier » (thème : Community Helpers)."
 accepted_answers:
   - "Chef"
-  - "chef"
 explanation: "Le mot du cours est « Chef »."
 archived: false

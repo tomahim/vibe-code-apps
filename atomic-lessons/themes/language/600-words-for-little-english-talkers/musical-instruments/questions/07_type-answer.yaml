@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Saxophone » (thème : Musical Instruments)."
 accepted_answers:
   - "Saxophone"
-  - "saxophone"
 explanation: "Le mot du cours est « Saxophone »."
 archived: false

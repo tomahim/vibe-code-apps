@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Tailleur / Couturier » (thème : Community Helpers)."
 accepted_answers:
   - "Tailor"
-  - "tailor"
 explanation: "Le mot du cours est « Tailor »."
 archived: false

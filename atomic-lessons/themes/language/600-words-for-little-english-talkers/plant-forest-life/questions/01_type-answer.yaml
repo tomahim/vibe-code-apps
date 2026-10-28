@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Feuille » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Leaf"
-  - "leaf"
 explanation: "Le mot du cours est « Leaf »."
 archived: false

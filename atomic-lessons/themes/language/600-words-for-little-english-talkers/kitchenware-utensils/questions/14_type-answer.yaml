@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Pince » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Tongs"
-  - "tongs"
 explanation: "Le mot du cours est « Tongs »."
 archived: false

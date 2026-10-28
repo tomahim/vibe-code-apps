@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Xylophone » (thème : Musical Instruments)."
 accepted_answers:
   - "Xylophone"
-  - "xylophone"
 explanation: "Le mot du cours est « Xylophone »."
 archived: false

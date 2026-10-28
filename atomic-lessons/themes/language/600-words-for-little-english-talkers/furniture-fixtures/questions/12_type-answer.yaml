@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Matelas » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Mattress"
-  - "mattress"
 explanation: "Le mot du cours est « Mattress »."
 archived: false

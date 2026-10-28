@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Castagnettes » (thème : Musical Instruments)."
 accepted_answers:
   - "Castanets"
-  - "castanets"
 explanation: "Le mot du cours est « Castanets »."
 archived: false

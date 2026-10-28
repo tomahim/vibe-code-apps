@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Toit » (thème : Parts of a House)."
 accepted_answers:
   - "Roof"
-  - "roof"
 explanation: "Le mot du cours est « Roof »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Tarte » (thème : Bakery & Grains)."
 accepted_answers:
   - "Pie"
-  - "pie"
 explanation: "Le mot du cours est « Pie »."
 archived: false

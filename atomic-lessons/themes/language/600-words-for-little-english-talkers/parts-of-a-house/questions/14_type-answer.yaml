@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Volets » (thème : Parts of a House)."
 accepted_answers:
   - "Shutters"
-  - "shutters"
 explanation: "Le mot du cours est « Shutters »."
 archived: false

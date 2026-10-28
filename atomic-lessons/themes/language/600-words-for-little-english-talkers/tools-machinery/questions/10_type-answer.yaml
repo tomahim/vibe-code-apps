@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Perceuse » (thème : Tools & Machinery)."
 accepted_answers:
   - "Drill"
-  - "drill"
 explanation: "Le mot du cours est « Drill »."
 archived: false

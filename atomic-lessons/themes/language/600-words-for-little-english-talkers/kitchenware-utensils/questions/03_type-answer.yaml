@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Bol » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Bowl"
-  - "bowl"
 explanation: "Le mot du cours est « Bowl »."
 archived: false

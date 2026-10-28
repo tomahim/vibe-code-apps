@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Gymnase » (thème : Places in Town)."
 accepted_answers:
   - "Gym"
-  - "gym"
 explanation: "Le mot du cours est « Gym »."
 archived: false

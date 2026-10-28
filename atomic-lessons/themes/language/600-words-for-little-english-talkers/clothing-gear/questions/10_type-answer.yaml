@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Casquette » (thème : Clothing & Gear)."
 accepted_answers:
   - "Cap"
-  - "cap"
 explanation: "Le mot du cours est « Cap »."
 archived: false

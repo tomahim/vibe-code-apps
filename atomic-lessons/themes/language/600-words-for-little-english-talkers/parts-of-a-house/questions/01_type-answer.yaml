@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Porte » (thème : Parts of a House)."
 accepted_answers:
   - "Door"
-  - "door"
 explanation: "Le mot du cours est « Door »."
 archived: false

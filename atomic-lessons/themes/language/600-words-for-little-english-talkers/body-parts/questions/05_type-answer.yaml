@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Nez » (thème : Body Parts)."
 accepted_answers:
   - "Nose"
-  - "nose"
 explanation: "Le mot du cours est « Nose »."
 archived: false

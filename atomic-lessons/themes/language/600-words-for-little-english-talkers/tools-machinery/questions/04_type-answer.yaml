@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Clé à Molette » (thème : Tools & Machinery)."
 accepted_answers:
   - "Wrench"
-  - "wrench"
 explanation: "Le mot du cours est « Wrench »."
 archived: false

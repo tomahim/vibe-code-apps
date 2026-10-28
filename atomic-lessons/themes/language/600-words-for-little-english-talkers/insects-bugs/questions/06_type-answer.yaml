@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Luciole » (thème : Insects & Bugs)."
 accepted_answers:
   - "Firefly"
-  - "firefly"
 explanation: "Le mot du cours est « Firefly »."
 archived: false

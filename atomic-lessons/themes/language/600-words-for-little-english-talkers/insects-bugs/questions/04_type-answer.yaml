@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Libellule » (thème : Insects & Bugs)."
 accepted_answers:
   - "Dragonfly"
-  - "dragonfly"
 explanation: "Le mot du cours est « Dragonfly »."
 archived: false

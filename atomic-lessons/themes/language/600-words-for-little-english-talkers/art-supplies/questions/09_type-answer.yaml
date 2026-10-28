@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Paillettes » (thème : Art Supplies)."
 accepted_answers:
   - "Glitter"
-  - "glitter"
 explanation: "Le mot du cours est « Glitter »."
 archived: false

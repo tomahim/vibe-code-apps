@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Boîte » (thème : Shapes & Structures)."
 accepted_answers:
   - "Box"
-  - "box"
 explanation: "Le mot du cours est « Box »."
 archived: false

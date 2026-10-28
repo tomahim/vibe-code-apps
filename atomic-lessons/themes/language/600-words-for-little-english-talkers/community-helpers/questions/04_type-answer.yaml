@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Infirmier(ère) » (thème : Community Helpers)."
 accepted_answers:
   - "Nurse"
-  - "nurse"
 explanation: "Le mot du cours est « Nurse »."
 archived: false

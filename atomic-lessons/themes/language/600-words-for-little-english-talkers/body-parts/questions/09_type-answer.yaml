@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Joue » (thème : Body Parts)."
 accepted_answers:
   - "Cheek"
-  - "cheek"
 explanation: "Le mot du cours est « Cheek »."
 archived: false

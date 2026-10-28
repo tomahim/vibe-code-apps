@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Marteau » (thème : Tools & Machinery)."
 accepted_answers:
   - "Hammer"
-  - "hammer"
 explanation: "Le mot du cours est « Hammer »."
 archived: false

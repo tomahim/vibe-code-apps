@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Éponge » (thème : Sea Life)."
 accepted_answers:
   - "Sponge"
-  - "sponge"
 explanation: "Le mot du cours est « Sponge »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Crabe » (thème : Sea Life)."
 accepted_answers:
   - "Crab"
-  - "crab"
 explanation: "Le mot du cours est « Crab »."
 archived: false

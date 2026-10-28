@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Meuble » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Cabinet"
-  - "cabinet"
 explanation: "Le mot du cours est « Cabinet »."
 archived: false

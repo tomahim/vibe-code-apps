@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Pop-corn » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Popcorn"
-  - "popcorn"
 explanation: "Le mot du cours est « Popcorn »."
 archived: false

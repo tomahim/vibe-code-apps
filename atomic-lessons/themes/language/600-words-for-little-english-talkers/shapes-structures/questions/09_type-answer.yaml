@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Dôme » (thème : Shapes & Structures)."
 accepted_answers:
   - "Dome"
-  - "dome"
 explanation: "Le mot du cours est « Dome »."
 archived: false

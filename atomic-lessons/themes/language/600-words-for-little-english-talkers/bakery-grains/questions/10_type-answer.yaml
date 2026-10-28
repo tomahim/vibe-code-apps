@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Flocons d'avoine » (thème : Bakery & Grains)."
 accepted_answers:
   - "Oatmeal"
-  - "oatmeal"
 explanation: "Le mot du cours est « Oatmeal »."
 archived: false

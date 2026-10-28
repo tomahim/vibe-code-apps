@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Pluie » (thème : Weather & Sky)."
 accepted_answers:
   - "Rain"
-  - "rain"
 explanation: "Le mot du cours est « Rain »."
 archived: false

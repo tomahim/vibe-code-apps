@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Lampe » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Lamp"
-  - "lamp"
 explanation: "Le mot du cours est « Lamp »."
 archived: false

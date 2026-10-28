@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Chaussons » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Slippers"
-  - "slippers"
 explanation: "Le mot du cours est « Slippers »."
 archived: false

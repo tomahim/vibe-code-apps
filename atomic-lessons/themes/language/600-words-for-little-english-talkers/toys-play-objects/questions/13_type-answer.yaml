@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Maison de poupée » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Dollhouse"
-  - "dollhouse"
 explanation: "Le mot du cours est « Dollhouse »."
 archived: false

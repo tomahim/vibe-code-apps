@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Gant de toilette » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Washcloth"
-  - "washcloth"
 explanation: "Le mot du cours est « Washcloth »."
 archived: false

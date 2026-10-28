@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Lit » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Bed"
-  - "bed"
 explanation: "Le mot du cours est « Bed »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Ver » (thème : Insects & Bugs)."
 accepted_answers:
   - "Worm"
-  - "worm"
 explanation: "Le mot du cours est « Worm »."
 archived: false

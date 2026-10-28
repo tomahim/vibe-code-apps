@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Clôture » (thème : Parts of a House)."
 accepted_answers:
   - "Fence"
-  - "fence"
 explanation: "Le mot du cours est « Fence »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Gomme » (thème : Art Supplies)."
 accepted_answers:
   - "Eraser"
-  - "eraser"
 explanation: "Le mot du cours est « Eraser »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Gare » (thème : Places in Town)."
 accepted_answers:
   - "Station"
-  - "station"
 explanation: "Le mot du cours est « Station »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Médecin » (thème : Community Helpers)."
 accepted_answers:
   - "Doctor"
-  - "doctor"
 explanation: "Le mot du cours est « Doctor »."
 archived: false

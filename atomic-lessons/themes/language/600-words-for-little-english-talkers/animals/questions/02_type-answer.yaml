@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Papillon » (thème : Animals)."
 accepted_answers:
   - "Butterfly"
-  - "butterfly"
 explanation: "Le mot du cours est « Butterfly »."
 archived: false

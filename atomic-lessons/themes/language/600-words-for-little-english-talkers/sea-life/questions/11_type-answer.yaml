@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Raie » (thème : Sea Life)."
 accepted_answers:
   - "Ray"
-  - "ray"
 explanation: "Le mot du cours est « Ray »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Monument » (thème : Shapes & Structures)."
 accepted_answers:
   - "Monument"
-  - "monument"
 explanation: "Le mot du cours est « Monument »."
 archived: false

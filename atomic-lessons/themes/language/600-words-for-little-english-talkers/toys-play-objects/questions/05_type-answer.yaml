@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Yo-yo » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Yo-yo"
-  - "yo-yo"
 explanation: "Le mot du cours est « Yo-yo »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Pince » (thème : Tools & Machinery)."
 accepted_answers:
   - "Pliers"
-  - "pliers"
 explanation: "Le mot du cours est « Pliers »."
 archived: false

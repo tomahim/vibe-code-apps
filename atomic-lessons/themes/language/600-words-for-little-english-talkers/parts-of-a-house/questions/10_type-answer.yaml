@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Grenier » (thème : Parts of a House)."
 accepted_answers:
   - "Attic"
-  - "attic"
 explanation: "Le mot du cours est « Attic »."
 archived: false

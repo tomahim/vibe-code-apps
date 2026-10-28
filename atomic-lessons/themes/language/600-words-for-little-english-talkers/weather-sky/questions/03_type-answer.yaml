@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Étoile » (thème : Weather & Sky)."
 accepted_answers:
   - "Star"
-  - "star"
 explanation: "Le mot du cours est « Star »."
 archived: false

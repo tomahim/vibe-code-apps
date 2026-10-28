@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Comète » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Comet"
-  - "comet"
 explanation: "Le mot du cours est « Comet »."
 archived: false

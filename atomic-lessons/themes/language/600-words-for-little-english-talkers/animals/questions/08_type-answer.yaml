@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Cheval » (thème : Animals)."
 accepted_answers:
   - "Horse"
-  - "horse"
 explanation: "Le mot du cours est « Horse »."
 archived: false

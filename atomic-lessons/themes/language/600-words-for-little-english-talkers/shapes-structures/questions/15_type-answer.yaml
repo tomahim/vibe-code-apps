@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Anneau » (thème : Shapes & Structures)."
 accepted_answers:
   - "Ring"
-  - "ring"
 explanation: "Le mot du cours est « Ring »."
 archived: false

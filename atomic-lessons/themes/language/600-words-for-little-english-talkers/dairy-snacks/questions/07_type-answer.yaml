@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Chips » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Chips"
-  - "chips"
 explanation: "Le mot du cours est « Chips »."
 archived: false

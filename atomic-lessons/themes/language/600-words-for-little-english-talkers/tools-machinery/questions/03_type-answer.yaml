@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Aimant » (thème : Tools & Machinery)."
 accepted_answers:
   - "Magnet"
-  - "magnet"
 explanation: "Le mot du cours est « Magnet »."
 archived: false

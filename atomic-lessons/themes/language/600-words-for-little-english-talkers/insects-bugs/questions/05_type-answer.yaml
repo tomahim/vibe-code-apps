@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Araignée » (thème : Insects & Bugs)."
 accepted_answers:
   - "Spider"
-  - "spider"
 explanation: "Le mot du cours est « Spider »."
 archived: false

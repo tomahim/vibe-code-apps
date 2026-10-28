@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Balcon » (thème : Parts of a House)."
 accepted_answers:
   - "Balcony"
-  - "balcony"
 explanation: "Le mot du cours est « Balcony »."
 archived: false

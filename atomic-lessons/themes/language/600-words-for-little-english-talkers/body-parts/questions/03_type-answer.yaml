@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Genou » (thème : Body Parts)."
 accepted_answers:
   - "Knee"
-  - "knee"
 explanation: "Le mot du cours est « Knee »."
 archived: false

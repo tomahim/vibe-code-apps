@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Tempête » (thème : Weather & Sky)."
 accepted_answers:
   - "Storm"
-  - "storm"
 explanation: "Le mot du cours est « Storm »."
 archived: false

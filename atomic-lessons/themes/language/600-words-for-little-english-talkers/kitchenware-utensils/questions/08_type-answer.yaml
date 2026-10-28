@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Spatule » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Spatula"
-  - "spatula"
 explanation: "Le mot du cours est « Spatula »."
 archived: false

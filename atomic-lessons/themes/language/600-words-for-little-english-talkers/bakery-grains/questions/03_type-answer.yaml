@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Bretzel » (thème : Bakery & Grains)."
 accepted_answers:
   - "Pretzel"
-  - "pretzel"
 explanation: "Le mot du cours est « Pretzel »."
 archived: false

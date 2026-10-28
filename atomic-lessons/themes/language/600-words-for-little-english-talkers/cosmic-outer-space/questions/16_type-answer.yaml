@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Sonde spatiale » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Probe"
-  - "probe"
 explanation: "Le mot du cours est « Probe »."
 archived: false

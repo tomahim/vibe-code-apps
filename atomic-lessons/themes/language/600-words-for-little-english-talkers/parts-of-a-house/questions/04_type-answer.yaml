@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Sol » (thème : Parts of a House)."
 accepted_answers:
   - "Floor"
-  - "floor"
 explanation: "Le mot du cours est « Floor »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Cacahuète » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Peanut"
-  - "peanut"
 explanation: "Le mot du cours est « Peanut »."
 archived: false

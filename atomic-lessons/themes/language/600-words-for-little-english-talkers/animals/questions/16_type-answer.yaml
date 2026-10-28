@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Phoque » (thème : Animals)."
 accepted_answers:
   - "Seal"
-  - "seal"
 explanation: "Le mot du cours est « Seal »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Pompe » (thème : Tools & Machinery)."
 accepted_answers:
   - "Pump"
-  - "pump"
 explanation: "Le mot du cours est « Pump »."
 archived: false

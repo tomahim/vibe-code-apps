@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Aéroport » (thème : Places in Town)."
 accepted_answers:
   - "Airport"
-  - "airport"
 explanation: "Le mot du cours est « Airport »."
 archived: false

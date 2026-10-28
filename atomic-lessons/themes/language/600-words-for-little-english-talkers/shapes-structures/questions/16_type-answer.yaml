@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Zigzag » (thème : Shapes & Structures)."
 accepted_answers:
   - "Zigzag"
-  - "zigzag"
 explanation: "Le mot du cours est « Zigzag »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Frisbee » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Frisbee"
-  - "frisbee"
 explanation: "Le mot du cours est « Frisbee »."
 archived: false

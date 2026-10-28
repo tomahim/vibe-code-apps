@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Tornade » (thème : Weather & Sky)."
 accepted_answers:
   - "Tornado"
-  - "tornado"
 explanation: "Le mot du cours est « Tornado »."
 archived: false

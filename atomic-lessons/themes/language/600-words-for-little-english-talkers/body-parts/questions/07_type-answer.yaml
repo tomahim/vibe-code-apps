@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Doigt » (thème : Body Parts)."
 accepted_answers:
   - "Finger"
-  - "finger"
 explanation: "Le mot du cours est « Finger »."
 archived: false

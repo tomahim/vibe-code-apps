@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Nouille » (thème : Bakery & Grains)."
 accepted_answers:
   - "Noodle"
-  - "noodle"
 explanation: "Le mot du cours est « Noodle »."
 archived: false

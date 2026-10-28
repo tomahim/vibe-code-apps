@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Planète » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Planet"
-  - "planet"
 explanation: "Le mot du cours est « Planet »."
 archived: false

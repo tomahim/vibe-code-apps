@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Trèfle » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Clover"
-  - "clover"
 explanation: "Le mot du cours est « Clover »."
 archived: false

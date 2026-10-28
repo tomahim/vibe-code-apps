@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Cylindre » (thème : Shapes & Structures)."
 accepted_answers:
   - "Cylinder"
-  - "cylinder"
 explanation: "Le mot du cours est « Cylinder »."
 archived: false

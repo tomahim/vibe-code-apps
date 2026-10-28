@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Dé de fromage » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Cube"
-  - "cube"
 explanation: "Le mot du cours est « Cube »."
 archived: false

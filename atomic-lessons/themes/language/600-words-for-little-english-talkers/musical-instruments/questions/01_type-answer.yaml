@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Tambour » (thème : Musical Instruments)."
 accepted_answers:
   - "Drum"
-  - "drum"
 explanation: "Le mot du cours est « Drum »."
 archived: false

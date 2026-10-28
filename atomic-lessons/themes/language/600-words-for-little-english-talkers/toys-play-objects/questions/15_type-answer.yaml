@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Cerceau » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Hoop"
-  - "hoop"
 explanation: "Le mot du cours est « Hoop »."
 archived: false

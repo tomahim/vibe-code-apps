@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Chauffeur » (thème : Community Helpers)."
 accepted_answers:
   - "Driver"
-  - "driver"
 explanation: "Le mot du cours est « Driver »."
 archived: false

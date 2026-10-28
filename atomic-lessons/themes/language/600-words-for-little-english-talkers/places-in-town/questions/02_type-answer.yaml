@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Boulangerie » (thème : Places in Town)."
 accepted_answers:
   - "Bakery"
-  - "bakery"
 explanation: "Le mot du cours est « Bakery »."
 archived: false

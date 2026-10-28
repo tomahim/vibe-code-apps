@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Quelle phrase anglaise correspond à « L'abeille bourdonne. » ?"
 accepted_answers:
   - "The bee buzzes."
-  - "The bee buzzes"
 explanation: "La phrase du cours est « The bee buzzes. »."
 archived: false

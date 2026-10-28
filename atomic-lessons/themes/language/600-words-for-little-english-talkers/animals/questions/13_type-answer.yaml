@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Quelle phrase anglaise correspond à « Le singe bavarde. » ?"
 accepted_answers:
   - "The monkey chatters."
-  - "The monkey chatters"
 explanation: "La phrase du cours est « The monkey chatters. »."
 archived: false

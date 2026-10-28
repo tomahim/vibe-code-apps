@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Place » (thème : Places in Town)."
 accepted_answers:
   - "Square"
-  - "square"
 explanation: "Le mot du cours est « Square »."
 archived: false

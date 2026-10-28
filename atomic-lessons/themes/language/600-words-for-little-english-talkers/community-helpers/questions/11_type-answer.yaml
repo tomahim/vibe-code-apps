@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Capitaine » (thème : Community Helpers)."
 accepted_answers:
   - "Captain"
-  - "captain"
 explanation: "Le mot du cours est « Captain »."
 archived: false

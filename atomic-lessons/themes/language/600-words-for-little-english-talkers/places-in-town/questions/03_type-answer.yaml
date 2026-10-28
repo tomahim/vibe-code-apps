@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Zoo » (thème : Places in Town)."
 accepted_answers:
   - "Zoo"
-  - "zoo"
 explanation: "Le mot du cours est « Zoo »."
 archived: false

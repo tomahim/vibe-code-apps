@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Peigne » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Comb"
-  - "comb"
 explanation: "Le mot du cours est « Comb »."
 archived: false

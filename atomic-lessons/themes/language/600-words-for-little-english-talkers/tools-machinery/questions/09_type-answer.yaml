@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Écrou » (thème : Tools & Machinery)."
 accepted_answers:
   - "Nut"
-  - "nut"
 explanation: "Le mot du cours est « Nut »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Lèvre » (thème : Body Parts)."
 accepted_answers:
   - "Lip"
-  - "lip"
 explanation: "Le mot du cours est « Lip »."
 archived: false

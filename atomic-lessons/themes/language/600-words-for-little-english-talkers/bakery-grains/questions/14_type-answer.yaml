@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Brioche / Pain burger » (thème : Bakery & Grains)."
 accepted_answers:
   - "Bun"
-  - "bun"
 explanation: "Le mot du cours est « Bun »."
 archived: false

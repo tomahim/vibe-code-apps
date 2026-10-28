@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Puzzle » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Puzzle"
-  - "puzzle"
 explanation: "Le mot du cours est « Puzzle »."
 archived: false

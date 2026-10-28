@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Magasin » (thème : Places in Town)."
 accepted_answers:
   - "Store"
-  - "store"
 explanation: "Le mot du cours est « Store »."
 archived: false

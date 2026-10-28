@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Artiste » (thème : Community Helpers)."
 accepted_answers:
   - "Artist"
-  - "artist"
 explanation: "Le mot du cours est « Artist »."
 archived: false

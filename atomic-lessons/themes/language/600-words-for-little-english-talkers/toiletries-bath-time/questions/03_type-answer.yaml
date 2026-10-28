@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Éponge » (thème : Toiletries & Bath Time)."
 accepted_answers:
   - "Sponge"
-  - "sponge"
 explanation: "Le mot du cours est « Sponge »."
 archived: false

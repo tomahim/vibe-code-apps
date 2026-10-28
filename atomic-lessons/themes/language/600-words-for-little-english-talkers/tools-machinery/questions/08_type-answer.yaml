@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Clou » (thème : Tools & Machinery)."
 accepted_answers:
   - "Nail"
-  - "nail"
 explanation: "Le mot du cours est « Nail »."
 archived: false

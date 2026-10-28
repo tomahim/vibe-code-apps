@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Papier » (thème : Art Supplies)."
 accepted_answers:
   - "Paper"
-  - "paper"
 explanation: "Le mot du cours est « Paper »."
 archived: false

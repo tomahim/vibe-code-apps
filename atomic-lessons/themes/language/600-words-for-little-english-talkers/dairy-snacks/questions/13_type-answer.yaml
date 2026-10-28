@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Graine de tournesol » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Sunflower seed"
-  - "sunflower seed"
 explanation: "Le mot du cours est « Sunflower seed »."
 archived: false

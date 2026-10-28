@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Armoire » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Wardrobe"
-  - "wardrobe"
 explanation: "Le mot du cours est « Wardrobe »."
 archived: false

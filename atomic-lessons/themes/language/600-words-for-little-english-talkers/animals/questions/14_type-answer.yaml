@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Pigeon » (thème : Animals)."
 accepted_answers:
   - "Pigeon"
-  - "pigeon"
 explanation: "Le mot du cours est « Pigeon »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Extraterrestre » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Alien"
-  - "alien"
 explanation: "Le mot du cours est « Alien »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Comète » (thème : Weather & Sky)."
 accepted_answers:
   - "Comet"
-  - "comet"
 explanation: "Le mot du cours est « Comet »."
 archived: false

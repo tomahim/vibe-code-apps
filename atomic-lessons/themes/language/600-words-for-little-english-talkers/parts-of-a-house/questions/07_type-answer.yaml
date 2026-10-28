@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Jardin » (thème : Parts of a House)."
 accepted_answers:
   - "Garden"
-  - "garden"
 explanation: "Le mot du cours est « Garden »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Accordéon » (thème : Musical Instruments)."
 accepted_answers:
   - "Accordion"
-  - "accordion"
 explanation: "Le mot du cours est « Accordion »."
 archived: false

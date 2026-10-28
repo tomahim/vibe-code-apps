@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Terre » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Earth"
-  - "earth"
 explanation: "Le mot du cours est « Earth »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Restaurant » (thème : Places in Town)."
 accepted_answers:
   - "Restaurant"
-  - "restaurant"
 explanation: "Le mot du cours est « Restaurant »."
 archived: false

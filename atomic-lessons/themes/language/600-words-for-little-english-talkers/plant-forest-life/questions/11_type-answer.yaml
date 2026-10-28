@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Tige » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Stem"
-  - "stem"
 explanation: "Le mot du cours est « Stem »."
 archived: false

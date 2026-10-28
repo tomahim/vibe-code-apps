@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Piano » (thème : Musical Instruments)."
 accepted_answers:
   - "Piano"
-  - "piano"
 explanation: "Le mot du cours est « Piano »."
 archived: false

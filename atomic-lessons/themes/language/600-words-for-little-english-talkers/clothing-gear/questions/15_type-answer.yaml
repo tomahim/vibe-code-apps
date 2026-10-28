@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Badge » (thème : Clothing & Gear)."
 accepted_answers:
   - "Badge"
-  - "badge"
 explanation: "Le mot du cours est « Badge »."
 archived: false

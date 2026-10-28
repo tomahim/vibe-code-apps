@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Coude » (thème : Body Parts)."
 accepted_answers:
   - "Elbow"
-  - "elbow"
 explanation: "Le mot du cours est « Elbow »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Pin » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Pine"
-  - "pine"
 explanation: "Le mot du cours est « Pine »."
 archived: false

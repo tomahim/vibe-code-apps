@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Serviette » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Napkin"
-  - "napkin"
 explanation: "Le mot du cours est « Napkin »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Carillon » (thème : Musical Instruments)."
 accepted_answers:
   - "Chimes"
-  - "chimes"
 explanation: "Le mot du cours est « Chimes »."
 archived: false

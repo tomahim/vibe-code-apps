@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Pousse » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Sprout"
-  - "sprout"
 explanation: "Le mot du cours est « Sprout »."
 archived: false

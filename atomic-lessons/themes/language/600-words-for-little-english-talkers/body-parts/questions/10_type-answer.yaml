@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Dents » (thème : Body Parts)."
 accepted_answers:
   - "Teeth"
-  - "teeth"
 explanation: "Le mot du cours est « Teeth »."
 archived: false

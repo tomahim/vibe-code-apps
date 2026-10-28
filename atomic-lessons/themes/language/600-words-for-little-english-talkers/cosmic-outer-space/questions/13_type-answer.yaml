@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Ciel » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Sky"
-  - "sky"
 explanation: "Le mot du cours est « Sky »."
 archived: false

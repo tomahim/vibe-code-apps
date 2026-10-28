@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Quelle phrase anglaise correspond à « Le canard cancane. » ?"
 accepted_answers:
   - "The duck quacks."
-  - "The duck quacks"
 explanation: "La phrase du cours est « The duck quacks. »."
 archived: false

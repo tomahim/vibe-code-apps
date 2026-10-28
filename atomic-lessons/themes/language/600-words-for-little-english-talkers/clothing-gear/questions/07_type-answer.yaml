@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Robe » (thème : Clothing & Gear)."
 accepted_answers:
   - "Dress"
-  - "dress"
 explanation: "Le mot du cours est « Dress »."
 archived: false

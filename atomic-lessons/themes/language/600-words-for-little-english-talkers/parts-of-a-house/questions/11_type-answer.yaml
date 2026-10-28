@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Poignée de porte » (thème : Parts of a House)."
 accepted_answers:
   - "Knob"
-  - "knob"
 explanation: "Le mot du cours est « Knob »."
 archived: false

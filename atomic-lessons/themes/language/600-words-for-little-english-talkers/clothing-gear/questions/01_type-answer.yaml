@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Bottes » (thème : Clothing & Gear)."
 accepted_answers:
   - "Boots"
-  - "boots"
 explanation: "Le mot du cours est « Boots »."
 archived: false

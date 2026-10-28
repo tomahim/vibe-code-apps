@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Air » (thème : Weather & Sky)."
 accepted_answers:
   - "Air"
-  - "air"
 explanation: "Le mot du cours est « Air »."
 archived: false

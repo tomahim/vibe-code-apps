@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez le mot anglais du cours pour « biscuit sucré » (thème : Bakery & Grains)."
 accepted_answers:
   - "Cookie"
-  - "cookie"
 explanation: "Le mot du cours est « Cookie »."
 archived: false

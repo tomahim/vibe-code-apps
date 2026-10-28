@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Œil » (thème : Body Parts)."
 accepted_answers:
   - "Eye"
-  - "eye"
 explanation: "Le mot du cours est « Eye »."
 archived: false

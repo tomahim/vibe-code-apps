@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Morse » (thème : Sea Life)."
 accepted_answers:
   - "Walrus"
-  - "walrus"
 explanation: "Le mot du cours est « Walrus »."
 archived: false

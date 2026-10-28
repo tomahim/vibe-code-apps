@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Tour » (thème : Shapes & Structures)."
 accepted_answers:
   - "Tower"
-  - "tower"
 explanation: "Le mot du cours est « Tower »."
 archived: false

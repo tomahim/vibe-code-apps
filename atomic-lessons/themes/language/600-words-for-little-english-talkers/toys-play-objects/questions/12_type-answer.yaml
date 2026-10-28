@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Pâte à modeler » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Clay"
-  - "clay"
 explanation: "Le mot du cours est « Clay »."
 archived: false

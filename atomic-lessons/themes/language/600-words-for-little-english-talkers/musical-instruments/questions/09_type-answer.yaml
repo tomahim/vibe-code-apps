@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Harpe » (thème : Musical Instruments)."
 accepted_answers:
   - "Harp"
-  - "harp"
 explanation: "Le mot du cours est « Harp »."
 archived: false

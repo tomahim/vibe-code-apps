@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Coucher de soleil » (thème : Weather & Sky)."
 accepted_answers:
   - "Sunset"
-  - "sunset"
 explanation: "Le mot du cours est « Sunset »."
 archived: false

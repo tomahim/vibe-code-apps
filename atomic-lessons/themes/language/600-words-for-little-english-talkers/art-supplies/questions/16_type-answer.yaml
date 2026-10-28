@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Point de couture » (thème : Art Supplies)."
 accepted_answers:
   - "Stitch"
-  - "stitch"
 explanation: "Le mot du cours est « Stitch »."
 archived: false

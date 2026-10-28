@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Riz » (thème : Bakery & Grains)."
 accepted_answers:
   - "Rice"
-  - "rice"
 explanation: "Le mot du cours est « Rice »."
 archived: false

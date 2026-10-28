@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Banque » (thème : Places in Town)."
 accepted_answers:
   - "Bank"
-  - "bank"
 explanation: "Le mot du cours est « Bank »."
 archived: false

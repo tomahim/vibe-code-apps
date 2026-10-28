@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Soleil » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Sun"
-  - "sun"
 explanation: "Le mot du cours est « Sun »."
 archived: false

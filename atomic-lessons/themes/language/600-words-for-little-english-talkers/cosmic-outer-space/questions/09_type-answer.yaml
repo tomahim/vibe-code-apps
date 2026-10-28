@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Combinaison spatiale » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Space suit"
-  - "space suit"
 explanation: "Le mot du cours est « Space suit »."
 archived: false

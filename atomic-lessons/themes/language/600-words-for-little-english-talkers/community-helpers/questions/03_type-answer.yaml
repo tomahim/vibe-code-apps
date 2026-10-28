@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Pilote » (thème : Community Helpers)."
 accepted_answers:
   - "Pilot"
-  - "pilot"
 explanation: "Le mot du cours est « Pilot »."
 archived: false

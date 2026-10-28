@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Front » (thème : Body Parts)."
 accepted_answers:
   - "Forehead"
-  - "forehead"
 explanation: "Le mot du cours est « Forehead »."
 archived: false

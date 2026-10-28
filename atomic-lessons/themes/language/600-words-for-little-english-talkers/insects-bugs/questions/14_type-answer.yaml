@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Antenne » (thème : Insects & Bugs)."
 accepted_answers:
   - "Antenna"
-  - "antenna"
 explanation: "Le mot du cours est « Antenna »."
 archived: false

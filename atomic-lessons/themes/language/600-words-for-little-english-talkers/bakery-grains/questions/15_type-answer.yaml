@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Croûte » (thème : Bakery & Grains)."
 accepted_answers:
   - "Crust"
-  - "crust"
 explanation: "Le mot du cours est « Crust »."
 archived: false

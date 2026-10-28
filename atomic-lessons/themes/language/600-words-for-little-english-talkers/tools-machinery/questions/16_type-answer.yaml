@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Pince à épiler » (thème : Tools & Machinery)."
 accepted_answers:
   - "Tweezers"
-  - "tweezers"
 explanation: "Le mot du cours est « Tweezers »."
 archived: false

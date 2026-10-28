@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Astronaute » (thème : Community Helpers)."
 accepted_answers:
   - "Astronaut"
-  - "astronaut"
 explanation: "Le mot du cours est « Astronaut »."
 archived: false

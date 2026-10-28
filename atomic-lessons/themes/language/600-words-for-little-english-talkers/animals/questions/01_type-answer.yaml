@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Quelle phrase anglaise correspond à « L'éléphant barrit. » ?"
 accepted_answers:
   - "The elephant trumpets."
-  - "The elephant trumpets"
 explanation: "La phrase du cours est « The elephant trumpets. »."
 archived: false

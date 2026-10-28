@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Tonnerre » (thème : Weather & Sky)."
 accepted_answers:
   - "Thunder"
-  - "thunder"
 explanation: "Le mot du cours est « Thunder »."
 archived: false

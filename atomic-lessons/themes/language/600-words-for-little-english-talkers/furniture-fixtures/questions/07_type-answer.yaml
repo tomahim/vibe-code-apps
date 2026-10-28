@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Rideau » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Curtain"
-  - "curtain"
 explanation: "Le mot du cours est « Curtain »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Lampe de poche » (thème : Tools & Machinery)."
 accepted_answers:
   - "Flashlight"
-  - "flashlight"
 explanation: "Le mot du cours est « Flashlight »."
 archived: false

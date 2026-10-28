@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Porte-manteau » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Coat rack"
-  - "coat rack"
 explanation: "Le mot du cours est « Coat rack »."
 archived: false

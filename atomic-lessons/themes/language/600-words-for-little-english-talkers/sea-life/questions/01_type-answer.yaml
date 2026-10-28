@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Quelle phrase anglaise correspond à « Le dauphin cliquette. » ?"
 accepted_answers:
   - "The dolphin clicks."
-  - "The dolphin clicks"
 explanation: "La phrase du cours est « The dolphin clicks. »."
 archived: false

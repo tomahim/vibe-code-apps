@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Chapeau » (thème : Clothing & Gear)."
 accepted_answers:
   - "Hat"
-  - "hat"
 explanation: "Le mot du cours est « Hat »."
 archived: false

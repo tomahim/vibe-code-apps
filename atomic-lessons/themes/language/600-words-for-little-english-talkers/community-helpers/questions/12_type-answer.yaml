@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Plombier » (thème : Community Helpers)."
 accepted_answers:
   - "Plumber"
-  - "plumber"
 explanation: "Le mot du cours est « Plumber »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Bouton » (thème : Clothing & Gear)."
 accepted_answers:
   - "Button"
-  - "button"
 explanation: "Le mot du cours est « Button »."
 archived: false

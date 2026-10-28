@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Pain » (thème : Bakery & Grains)."
 accepted_answers:
   - "Bread"
-  - "bread"
 explanation: "Le mot du cours est « Bread »."
 archived: false

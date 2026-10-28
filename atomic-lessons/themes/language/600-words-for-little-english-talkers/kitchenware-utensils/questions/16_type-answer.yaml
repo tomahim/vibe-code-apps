@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Paille » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Straw"
-  - "straw"
 explanation: "Le mot du cours est « Straw »."
 archived: false

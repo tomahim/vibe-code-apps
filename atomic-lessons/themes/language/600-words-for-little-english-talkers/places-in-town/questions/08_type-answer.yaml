@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Bureau de poste » (thème : Places in Town)."
 accepted_answers:
   - "Post office"
-  - "post office"
 explanation: "Le mot du cours est « Post office »."
 archived: false

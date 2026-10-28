@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Ruche » (thème : Insects & Bugs)."
 accepted_answers:
   - "Hive"
-  - "hive"
 explanation: "Le mot du cours est « Hive »."
 archived: false

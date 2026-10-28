@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Crayon de cire » (thème : Art Supplies)."
 accepted_answers:
   - "Crayon"
-  - "crayon"
 explanation: "Le mot du cours est « Crayon »."
 archived: false

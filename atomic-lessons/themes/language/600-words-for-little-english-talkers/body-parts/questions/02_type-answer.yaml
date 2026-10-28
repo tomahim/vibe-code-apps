@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Orteils » (thème : Body Parts)."
 accepted_answers:
   - "Toes"
-  - "toes"
 explanation: "Le mot du cours est « Toes »."
 archived: false

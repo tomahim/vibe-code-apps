@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Quelle phrase anglaise correspond à « Le grillon stridule. » ?"
 accepted_answers:
   - "The cricket chirps."
-  - "The cricket chirps"
 explanation: "La phrase du cours est « The cricket chirps. »."
 archived: false

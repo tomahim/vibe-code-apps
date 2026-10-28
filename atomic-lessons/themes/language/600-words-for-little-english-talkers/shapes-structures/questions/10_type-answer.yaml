@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Pilier » (thème : Shapes & Structures)."
 accepted_answers:
   - "Pillar"
-  - "pillar"
 explanation: "Le mot du cours est « Pillar »."
 archived: false

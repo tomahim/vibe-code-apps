@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Agent de circulation » (thème : Community Helpers)."
 accepted_answers:
   - "Crossing guard"
-  - "crossing guard"
 explanation: "Le mot du cours est « Crossing guard »."
 archived: false

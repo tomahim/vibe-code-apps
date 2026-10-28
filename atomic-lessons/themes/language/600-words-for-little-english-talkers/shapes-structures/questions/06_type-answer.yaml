@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Losange » (thème : Shapes & Structures)."
 accepted_answers:
   - "Diamond"
-  - "diamond"
 explanation: "Le mot du cours est « Diamond »."
 archived: false

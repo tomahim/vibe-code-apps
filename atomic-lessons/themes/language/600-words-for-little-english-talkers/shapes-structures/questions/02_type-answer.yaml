@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Arche » (thème : Shapes & Structures)."
 accepted_answers:
   - "Arch"
-  - "arch"
 explanation: "Le mot du cours est « Arch »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Brise » (thème : Weather & Sky)."
 accepted_answers:
   - "Breeze"
-  - "breeze"
 explanation: "Le mot du cours est « Breeze »."
 archived: false

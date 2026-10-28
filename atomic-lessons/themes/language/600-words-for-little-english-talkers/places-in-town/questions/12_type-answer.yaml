@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Plage » (thème : Places in Town)."
 accepted_answers:
   - "Beach"
-  - "beach"
 explanation: "Le mot du cours est « Beach »."
 archived: false

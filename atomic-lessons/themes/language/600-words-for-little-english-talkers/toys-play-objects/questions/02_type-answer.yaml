@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Cerf-volant » (thème : Toys & Play Objects)."
 accepted_answers:
   - "Kite"
-  - "kite"
 explanation: "Le mot du cours est « Kite »."
 archived: false

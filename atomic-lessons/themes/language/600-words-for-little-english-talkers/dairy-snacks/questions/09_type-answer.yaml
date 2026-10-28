@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Barre aux fruits » (thème : Dairy & Snacks)."
 accepted_answers:
   - "Fruit bar"
-  - "fruit bar"
 explanation: "Le mot du cours est « Fruit bar »."
 archived: false

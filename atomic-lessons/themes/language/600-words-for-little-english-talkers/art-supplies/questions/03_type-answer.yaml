@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Ruban » (thème : Art Supplies)."
 accepted_answers:
   - "Ribbon"
-  - "ribbon"
 explanation: "Le mot du cours est « Ribbon »."
 archived: false

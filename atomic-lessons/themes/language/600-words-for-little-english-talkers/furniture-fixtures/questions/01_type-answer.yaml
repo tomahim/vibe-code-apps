@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Oreiller » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Pillow"
-  - "pillow"
 explanation: "Le mot du cours est « Pillow »."
 archived: false

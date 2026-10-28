@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Cahier » (thème : Art Supplies)."
 accepted_answers:
   - "Notebook"
-  - "notebook"
 explanation: "Le mot du cours est « Notebook »."
 archived: false

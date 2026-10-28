@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Mousse » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Moss"
-  - "moss"
 explanation: "Le mot du cours est « Moss »."
 archived: false

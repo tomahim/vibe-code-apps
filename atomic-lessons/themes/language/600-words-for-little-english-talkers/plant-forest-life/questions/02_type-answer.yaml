@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Pomme de pin » (thème : Plant & Forest Life)."
 accepted_answers:
   - "Pinecone"
-  - "pinecone"
 explanation: "Le mot du cours est « Pinecone »."
 archived: false

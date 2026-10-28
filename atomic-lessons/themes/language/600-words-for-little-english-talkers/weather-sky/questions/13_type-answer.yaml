@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Glaçon » (thème : Weather & Sky)."
 accepted_answers:
   - "Icicle"
-  - "icicle"
 explanation: "Le mot du cours est « Icicle »."
 archived: false

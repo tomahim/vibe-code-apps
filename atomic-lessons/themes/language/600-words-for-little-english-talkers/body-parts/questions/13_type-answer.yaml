@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Poignet » (thème : Body Parts)."
 accepted_answers:
   - "Wrist"
-  - "wrist"
 explanation: "Le mot du cours est « Wrist »."
 archived: false

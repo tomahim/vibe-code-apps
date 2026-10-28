@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Craie » (thème : Art Supplies)."
 accepted_answers:
   - "Chalk"
-  - "chalk"
 explanation: "Le mot du cours est « Chalk »."
 archived: false

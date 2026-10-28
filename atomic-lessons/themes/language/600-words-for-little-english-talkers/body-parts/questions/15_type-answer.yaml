@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Ongle » (thème : Body Parts)."
 accepted_answers:
   - "Nail"
-  - "nail"
 explanation: "Le mot du cours est « Nail »."
 archived: false

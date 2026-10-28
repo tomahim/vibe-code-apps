@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Manteau » (thème : Clothing & Gear)."
 accepted_answers:
   - "Coat"
-  - "coat"
 explanation: "Le mot du cours est « Coat »."
 archived: false

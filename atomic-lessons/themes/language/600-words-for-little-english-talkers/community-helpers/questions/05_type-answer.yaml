@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Agriculteur(trice) » (thème : Community Helpers)."
 accepted_answers:
   - "Farmer"
-  - "farmer"
 explanation: "Le mot du cours est « Farmer »."
 archived: false

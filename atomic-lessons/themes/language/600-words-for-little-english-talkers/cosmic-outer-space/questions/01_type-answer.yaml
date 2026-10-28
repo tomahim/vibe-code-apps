@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Lune » (thème : Cosmic & Outer Space)."
 accepted_answers:
   - "Moon"
-  - "moon"
 explanation: "Le mot du cours est « Moon »."
 archived: false

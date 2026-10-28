@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: "Écrivez en anglais le mot « Lustre » (thème : Furniture & Fixtures)."
 accepted_answers:
   - "Chandelier"
-  - "chandelier"
 explanation: "Le mot du cours est « Chandelier »."
 archived: false

@@ -5,6 +5,5 @@ after_card_position: 2
 prompt: "Écrivez en anglais le mot « Parapluie » (thème : Clothing & Gear)."
 accepted_answers:
   - "Umbrella"
-  - "umbrella"
 explanation: "Le mot du cours est « Umbrella »."
 archived: false

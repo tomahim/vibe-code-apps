@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Cou » (thème : Body Parts)."
 accepted_answers:
   - "Neck"
-  - "neck"
 explanation: "Le mot du cours est « Neck »."
 archived: false

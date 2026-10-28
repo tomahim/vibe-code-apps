@@ -5,6 +5,5 @@ after_card_position: 4
 prompt: "Écrivez en anglais le mot « Caserne de pompiers » (thème : Places in Town)."
 accepted_answers:
   - "Fire station"
-  - "fire station"
 explanation: "Le mot du cours est « Fire station »."
 archived: false

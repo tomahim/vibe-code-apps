@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Âne » (thème : Animals)."
 accepted_answers:
   - "Donkey"
-  - "donkey"
 explanation: "Le mot du cours est « Donkey »."
 archived: false

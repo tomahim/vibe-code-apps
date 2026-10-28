@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Rouleau à pâtisserie » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Rolling pin"
-  - "rolling pin"
 explanation: "Le mot du cours est « Rolling pin »."
 archived: false

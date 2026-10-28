@@ -5,6 +5,5 @@ after_card_position: 6
 prompt: "Écrivez en anglais le mot « Carafe » (thème : Kitchenware & Utensils)."
 accepted_answers:
   - "Pitcher"
-  - "pitcher"
 explanation: "Le mot du cours est « Pitcher »."
 archived: false
