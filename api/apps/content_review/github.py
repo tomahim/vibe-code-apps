@@ -6,6 +6,8 @@ Edits are single-file commits on the pull request branch (Contents: write).
 """
 
 import base64
+import json
+from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import quote
 
 import requests
@@ -102,63 +104,48 @@ def post_pr_comment(token, repo, number, body):
     return {"id": data["id"], "url": data["html_url"]}
 
 
-def _tree_fragment(depth):
-    """Nested GraphQL fragment covering `depth` levels of directory entries."""
-    fragment = "... on Blob { text }"
-    for _ in range(depth):
-        fragment = (
-            "... on Blob { text } ... on Tree { entries { name type object { "
-            + fragment
-            + " } } }"
-        )
-    return fragment
+TEXT_BATCH = 40
 
 
-def fetch_tree_texts(token, repo, ref, root):
-    """Read every text file under `root` at `ref` in one GraphQL request.
+def fetch_texts(token, repo, ref, paths):
+    """Read the text of specific files at `ref`, in batched GraphQL requests.
 
-    Binary blobs (images) come back with text=None and are skipped. GitHub
-    returns at most 100 entries per directory level; the content library is
-    far below that at every level today (largest: the lessons of one path).
+    Reading the whole content tree in one query made GitHub answer 502 once the
+    library grew, so only the files the review needs are requested. Missing
+    files and binary blobs are left out of the result.
     """
     owner, name = repo.split("/", 1)
-    query = (
-        "query($owner:String!,$name:String!,$expression:String!){"
-        "repository(owner:$owner,name:$name){object(expression:$expression){"
-        f"... on Tree {{ entries {{ name type object {{ {_tree_fragment(5)} }} }} }}"
-        "}}}"
-    )
-    response = requests.post(
-        f"{API}/graphql",
-        headers=_headers(token),
-        json={
-            "query": query,
-            "variables": {"owner": owner, "name": name, "expression": f"{ref}:{root}"},
-        },
-        timeout=30,
-    )
-    if response.status_code != 200:
-        raise GitHubError(f"GitHub tree read failed ({response.status_code}).")
-    data = response.json()
-    if data.get("errors"):
-        raise GitHubError("GitHub tree query failed.")
-    tree = ((data.get("data") or {}).get("repository") or {}).get("object")
-    if not tree or "entries" not in tree:
-        raise NotFound(root)
+    paths = sorted(set(paths))
+    batches = [paths[start : start + TEXT_BATCH] for start in range(0, len(paths), TEXT_BATCH)]
+
+    def read(batch):
+        fields = " ".join(
+            f"f{i}: object(expression: {json.dumps(f'{ref}:{path}')}) {{ ... on Blob {{ text }} }}"
+            for i, path in enumerate(batch)
+        )
+        query = f"query($owner:String!,$name:String!){{repository(owner:$owner,name:$name){{{fields}}}}}"
+        response = requests.post(
+            f"{API}/graphql",
+            headers=_headers(token),
+            json={"query": query, "variables": {"owner": owner, "name": name}},
+            timeout=30,
+        )
+        if response.status_code != 200:
+            raise GitHubError(f"GitHub file read failed ({response.status_code}).")
+        data = response.json()
+        if data.get("errors"):
+            raise GitHubError("GitHub file query failed.")
+        repository = (data.get("data") or {}).get("repository") or {}
+        return {
+            path: repository[f"f{i}"]["text"]
+            for i, path in enumerate(batch)
+            if (repository.get(f"f{i}") or {}).get("text") is not None
+        }
+
     texts = {}
-
-    def walk(entries, prefix):
-        for entry in entries:
-            path = f"{prefix}/{entry['name']}" if prefix else entry["name"]
-            obj = entry.get("object") or {}
-            if entry["type"] == "blob":
-                text = obj.get("text")
-                if text is not None:
-                    texts[path] = text
-            elif entry["type"] == "tree":
-                walk(obj.get("entries") or [], path)
-
-    walk(tree["entries"], root)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for part in pool.map(read, batches):
+            texts.update(part)
     return texts
 
 

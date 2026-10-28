@@ -58,6 +58,25 @@ def question_fields(metadata):
     }
 
 
+def needed_paths(files):
+    """Files whose text the review reads: each changed unit plus the index.md
+    of every ancestor, which supply the breadcrumb titles."""
+    paths = set()
+    for change in files:
+        kind, groups = classify(change["path"])
+        if kind is None:
+            continue
+        if change["status"] != "removed":
+            paths.add(change["path"])
+        base = f"{CONTENT_ROOT}/themes/{groups['theme']}"
+        paths.add(f"{base}/index.md")
+        if groups.get("path"):
+            paths.add(f"{base}/{groups['path']}/index.md")
+            if groups.get("lesson"):
+                paths.add(f"{base}/{groups['path']}/{groups['lesson']}/index.md")
+    return paths
+
+
 def build_unit(change, texts):
     path = change["path"]
     kind, groups = classify(path)

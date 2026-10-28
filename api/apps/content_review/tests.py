@@ -157,7 +157,7 @@ class PullRequestDetailTests(TestCase):
     def change(self, path, status="added", patch="@@ patch"):
         return {"path": path, "status": status, "patch": patch, "previous_path": ""}
 
-    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.fetch_texts", return_value=TEXTS)
     @mock.patch("apps.content_review.views.github.list_pr_files")
     @mock.patch("apps.content_review.views.github.get_branch_head", return_value="fresh789")
     @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR, head_repo="o/r"))
@@ -203,7 +203,7 @@ class PullRequestDetailTests(TestCase):
         )
         fetch_tree.assert_called_once()
 
-    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.fetch_texts", return_value=TEXTS)
     @mock.patch("apps.content_review.views.github.list_pr_files")
     @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
     def test_removed_and_broken_files_do_not_crash(self, _pr, list_files, _tree):
@@ -213,7 +213,7 @@ class PullRequestDetailTests(TestCase):
         ]
         broken = dict(TEXTS)
         broken["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/01_expressions.md"] = "no front matter"
-        with mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=broken):
+        with mock.patch("apps.content_review.views.github.fetch_texts", return_value=broken):
             data = self.get().json()
         units = {u["path"]: u for u in data["units"]}
         removed = units["atomic-lessons/themes/language/early-childhood-english/getting-dressed/cards/02_expressions.md"]
@@ -225,7 +225,7 @@ class PullRequestDetailTests(TestCase):
     @mock.patch("apps.content_review.views.github.list_pr_files", return_value=[{"path": "ui/src/App.jsx", "status": "modified", "patch": "", "previous_path": ""}])
     @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
     def test_pr_without_content_changes_skips_tree_fetch(self, _pr, _files):
-        with mock.patch("apps.content_review.views.github.fetch_tree_texts") as fetch_tree:
+        with mock.patch("apps.content_review.views.github.fetch_texts") as fetch_tree:
             data = self.get().json()
         self.assertEqual(data["units"], [])
         self.assertEqual(data["other_changes"], [])
@@ -235,7 +235,7 @@ class PullRequestDetailTests(TestCase):
     def test_unknown_pr_is_a_404(self, _pr):
         self.assertEqual(self.get(404).status_code, 404)
 
-    @mock.patch("apps.content_review.views.github.fetch_tree_texts", return_value=TEXTS)
+    @mock.patch("apps.content_review.views.github.fetch_texts", return_value=TEXTS)
     @mock.patch("apps.content_review.views.github.list_pr_files")
     @mock.patch("apps.content_review.views.github.get_pr", return_value=dict(PR))
     def test_changed_file_missing_from_head_tree_is_tolerated(self, _pr, list_files, _tree):
@@ -335,3 +335,35 @@ class PostCommentTests(TestCase):
     @mock.patch("apps.content_review.views.github.post_pr_comment", side_effect=github.GitHubError("down"))
     def test_github_failure_is_a_502(self, _post):
         self.assertEqual(self.post({"text": "hi"}, HTTP_ORIGIN="http://testserver").status_code, 502)
+
+
+class FetchTextsTests(TestCase):
+    def test_requests_only_needed_paths_in_batches(self):
+        from .review import needed_paths
+
+        base = "atomic-lessons/themes/t/p/l"
+        files = [
+            {"path": f"{base}/cards/{i:02d}.md", "status": "added", "patch": "", "previous_path": ""}
+            for i in range(50)
+        ] + [
+            {"path": f"{base}/cards/gone.md", "status": "removed", "patch": "", "previous_path": ""},
+            {"path": "atomic-lessons/themes/t/p/cover.png", "status": "added", "patch": "", "previous_path": ""},
+        ]
+        paths = needed_paths(files)
+        self.assertIn("atomic-lessons/themes/t/index.md", paths)
+        self.assertIn("atomic-lessons/themes/t/p/index.md", paths)
+        self.assertIn(f"{base}/index.md", paths)
+        self.assertNotIn(f"{base}/cards/gone.md", paths)
+        self.assertEqual(len(paths), 53)
+
+        def fake_post(url, **kwargs):
+            query = kwargs["json"]["query"]
+            count = query.count("object(expression")
+            self.assertLessEqual(count, github.TEXT_BATCH)
+            body = {"data": {"repository": {f"f{i}": {"text": f"t{i}"} for i in range(count)}}}
+            return mock.Mock(status_code=200, json=lambda: body)
+
+        with mock.patch("apps.content_review.github.requests.post", side_effect=fake_post) as post:
+            texts = github.fetch_texts("tok", "o/r", "abc", paths)
+        self.assertEqual(post.call_count, 2)
+        self.assertTrue(texts)

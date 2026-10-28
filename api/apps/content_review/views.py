@@ -13,7 +13,7 @@ from apps.accounts.decorators import jwt_required
 
 from . import github
 from .editing import EDITABLE, EditError, apply_edit
-from .review import CONTENT_ROOT, build_review, build_unit, classify
+from .review import CONTENT_ROOT, build_review, build_unit, classify, needed_paths
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +110,7 @@ def pull_request_detail(request, number):
         files = github.list_pr_files(token, repo, number)
         content_files = [f for f in files if f["path"].startswith(f"{CONTENT_ROOT}/")]
         texts = (
-            github.fetch_tree_texts(token, repo, pr["head_sha"], CONTENT_ROOT)
+            github.fetch_texts(token, repo, pr["head_sha"], needed_paths(content_files))
             if content_files
             else {}
         )
