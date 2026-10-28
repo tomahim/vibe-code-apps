@@ -1,0 +1,19 @@
+id: e99038c9-5aee-4a40-8708-279980889d82
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How does assistant helpfulness differ from likely text continuation?"
+choices:
+  - id: e59d6cc3-9990-4e0a-b347-22901fd2df72
+    text: "Example answers can show a model what following an instruction looks like."
+  - id: 192f9064-f3d9-48c7-bff8-fb2812e683b1
+    text: "A separate preference model can learn from ranked answers."
+  - id: c30a44bb-09de-4a26-a345-98dc90fc8275
+    text: "The linked InstructGPT paper describes a historical human-feedback training method."
+  - id: 0970899d-fd55-47b1-8509-96d2701d73e9
+    text: "Helpfulness asks whether the answer serves the user's task; text prediction scores likely continuations."
+correct_choice_ids:
+  - 0970899d-fd55-47b1-8509-96d2701d73e9
+explanation: "Helpfulness asks whether the answer serves the user's task; text prediction scores likely continuations. Predicting likely text and answering a user's request well are related but different objectives. Post-training tries to move behavior toward the latter. Predicting the most likely continuation of “The answer is” can produce a plausible sentence, but the user may need a justified answer with a certain format and level of detail. Helpfulness asks whether the response advances that task."
+archived: false

@@ -1,0 +1,19 @@
+id: 2917f459-c06d-4016-9de7-c376c6d5c49c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why should exact arithmetic be verified by a procedure?"
+choices:
+  - id: 2ff67cff-715b-46e4-b6bd-747bfbf8ebc3
+    text: "A calculator, interpreter, or other tool can carry out explicit computation and return a checkable result."
+  - id: 0ca96c3a-38fe-4528-9bba-7568e8b9c0a2
+    text: "Exact arithmetic and program execution can require a definite procedure."
+  - id: 041730c1-049e-4380-a015-1890c88c17de
+    text: "Wolfram argues that some processes require following their steps to know the result."
+  - id: 0197cd38-89da-477c-852e-0fb0b5f004a8
+    text: "Matching long nested parentheses tests whether a model tracks exact structure."
+correct_choice_ids:
+  - 0ca96c3a-38fe-4528-9bba-7568e8b9c0a2
+explanation: "Exact arithmetic and program execution can require a definite procedure. A prediction from patterns is not a substitute for verifying the computation. Consider adding a long column of numbers. A plausible-looking total can be generated from language patterns, but a reliable result requires carrying the digits or using a calculator and checking the input."
+archived: false

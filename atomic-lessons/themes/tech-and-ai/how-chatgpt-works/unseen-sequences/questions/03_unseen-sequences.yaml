@@ -1,0 +1,19 @@
+id: 26fa5e05-7f21-476e-8db7-59d423e9d649
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How can a model handle a sequence it has never seen exactly?"
+choices:
+  - id: 3ed74830-cf3e-49d8-9346-b0c7985a4b02
+    text: "Many plausible sequences will be absent from training text."
+  - id: 055c24fb-1bb9-469e-9e6e-c787da7d5c12
+    text: "A language model maps the current context to a distribution over possible next tokens."
+  - id: b1472da9-aeba-46b9-b506-1e7be72cf6b3
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: 1d43cb83-ffb6-4f2b-85a0-51cbc6003e65
+    text: "A vocabulary can be combined into vastly more phrases than any dataset contains."
+correct_choice_ids:
+  - b1472da9-aeba-46b9-b506-1e7be72cf6b3
+explanation: "A model estimates probabilities for sequences it has never seen exactly. It does this by learning patterns that apply across examples. Suppose the model has seen many sentences about bicycles and many about purple moons, but never their exact combination. Shared representations and learned weights can still assign probabilities to words following “the bicycle under the purple moon.” This is an estimate produced by the model's structure, not a measured count for that full phrase."
+archived: false

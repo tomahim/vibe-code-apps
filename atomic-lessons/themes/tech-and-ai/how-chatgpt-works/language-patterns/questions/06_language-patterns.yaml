@@ -1,0 +1,19 @@
+id: f9e0aec4-7777-4003-96d6-fa1580f883a9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can a corpus not supply counts for every long word sequence?"
+choices:
+  - id: ba1ff97a-0616-4e03-9d2e-2e1377fac894
+    text: "The letter after q in English is very often u."
+  - id: 1e4897e2-c26e-4871-833b-f42449339653
+    text: "An n-gram is a run of n adjacent items, such as letters or words."
+  - id: 4a1067cd-36a5-4dc1-a04c-2c6b129bc5e3
+    text: "Using longer n-grams can make generated strings look more natural."
+  - id: f246b9af-7952-4a12-b4b7-97d915c10aad
+    text: "Possible word sequences multiply rapidly as their length grows."
+correct_choice_ids:
+  - f246b9af-7952-4a12-b4b7-97d915c10aad
+explanation: "Possible word sequences multiply rapidly as their length grows. Even a huge collection of text leaves most long sequences unseen. With a vocabulary of tens of thousands of words, the number of possible two-word pairs is already enormous. Add a third word and the space grows again by the vocabulary size."
+archived: false

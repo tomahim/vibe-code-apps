@@ -1,0 +1,19 @@
+id: 65511ce1-ffb2-42b0-8775-3d577680e7e6
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Does the model process only the final word of a prompt?"
+choices:
+  - id: 440132f3-3659-4908-9a3b-b20cc39581cc
+    text: "The model processes a sequence of token representations, not just an isolated last word."
+  - id: cf338abe-193a-4e76-b4dd-e2bb7461677d
+    text: "An embedding table maps token IDs to learned vectors."
+  - id: b5ec0c0e-9053-43fa-a2bb-9ba7260f4beb
+    text: "A sequence needs position information so the model can distinguish token order."
+  - id: 9d45b33b-3842-4f55-88e0-7d8de512adc7
+    text: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation."
+correct_choice_ids:
+  - 440132f3-3659-4908-9a3b-b20cc39581cc
+explanation: "The model processes a sequence of token representations, not just an isolated last word. Earlier tokens can influence later predictions. To continue “The keys are on the table because I left them there,” the model can use more than the last word “there.” Earlier tokens establish what “them” refers to and what setting is being described. The input is a sequence of token representations with positions, and later layers combine information across that sequence."
+archived: false

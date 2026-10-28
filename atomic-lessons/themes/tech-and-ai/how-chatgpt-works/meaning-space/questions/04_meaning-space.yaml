@@ -1,0 +1,19 @@
+id: 1bad8838-e5df-40b1-9ca5-49284ede3b62
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How does Wolfram picture generated text in feature space?"
+choices:
+  - id: a2c779f2-ffbd-48b1-8ff7-9885ee8dc2f1
+    text: "The plotted trajectories do not reveal a simple, established law of meaning."
+  - id: d46ecb25-d6a2-4afd-9023-4c3c4e6f1a7a
+    text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
+  - id: dc2c27ea-be09-4ef8-9605-8d0c993d1377
+    text: "Some relationships between words appear as geometric patterns in embeddings."
+  - id: c32b716c-3744-4bbb-ab56-adbf3e5c5c12
+    text: "He asks whether meaningful paths follow discoverable constraints, like laws of motion."
+correct_choice_ids:
+  - d46ecb25-d6a2-4afd-9023-4c3c4e6f1a7a
+explanation: "Wolfram imagines generated text tracing a path through a space of linguistic features. This is an interpretation of model behavior. Imagine each newly generated token changing the model's representation of the growing sentence. If we drew a point for each step, the answer would trace a path through a high-dimensional feature space."
+archived: false

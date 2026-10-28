@@ -1,0 +1,19 @@
+id: 4e460ac5-1a46-4f11-b653-4b48d7f1d3fc
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why are GPUs useful for neural-network training?"
+choices:
+  - id: 125edbb4-37bc-41e4-ba76-ba45837b44a6
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: 5a0217c3-b463-43e4-85a1-9d8e49e9d59b
+    text: "A batch is a group of examples used for an update."
+  - id: ed942e81-3ce1-42ed-a2ad-c0ac9f5c0fe1
+    text: "Loss commonly falls and then levels off during training."
+  - id: a1f418f9-403e-4957-aace-9f3dc5695741
+    text: "Neural networks perform many array calculations that GPUs can run in parallel."
+correct_choice_ids:
+  - a1f418f9-403e-4957-aace-9f3dc5695741
+explanation: "Neural networks perform many array calculations that GPUs can run in parallel. This makes compute capacity a practical constraint. The dominant operations in many neural networks are large matrix and vector calculations. A GPU can carry out many parts of these calculations in parallel, speeding up both training and inference."
+archived: false

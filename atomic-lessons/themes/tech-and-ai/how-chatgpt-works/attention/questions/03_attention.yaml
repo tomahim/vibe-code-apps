@@ -1,0 +1,19 @@
+id: e92a339e-0c37-4dbd-88a6-f62f5863a643
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What varies across earlier positions in attention?"
+choices:
+  - id: 54bf11d0-3146-419f-8a46-81cb5f9a3487
+    text: "Attention lets a position combine information from earlier positions."
+  - id: b900b8a4-2fcf-4d36-b3f4-8d2a25a3a15e
+    text: "Several heads can form different weighted combinations in parallel."
+  - id: 170bbebd-a4cb-4391-a6e2-8bf76e52fe1d
+    text: "Attention gives different previous positions different weights for the current calculation."
+  - id: 2174d372-bfde-47ea-93aa-878f8548db89
+    text: "A later word may depend on a much earlier one."
+correct_choice_ids:
+  - 170bbebd-a4cb-4391-a6e2-8bf76e52fe1d
+explanation: "Attention gives different previous positions different weights for the current calculation. The weights depend on the current input. For a current token, attention assigns numerical weights to earlier token representations and combines them. A large weight can make one earlier position contribute more to that calculation, though the meaning of the weight depends on the surrounding transformations."
+archived: false

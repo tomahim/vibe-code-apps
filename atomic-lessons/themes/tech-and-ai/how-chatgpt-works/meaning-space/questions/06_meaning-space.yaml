@@ -1,0 +1,19 @@
+id: c9049fdc-9ec6-4b16-abcc-077b19e78113
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What do the plotted trajectories fail to prove?"
+choices:
+  - id: daa98b27-846f-4469-9b6f-0767354f246e
+    text: "Some relationships between words appear as geometric patterns in embeddings."
+  - id: 71bf5ec4-42a2-4f14-ac0a-267d60428b57
+    text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
+  - id: c20d214a-9054-4149-a396-1d5c41b6d509
+    text: "He asks whether meaningful paths follow discoverable constraints, like laws of motion."
+  - id: 48437ab8-c1f7-4655-a31d-c4fa9e7510b2
+    text: "The plotted trajectories do not reveal a simple, established law of meaning."
+correct_choice_ids:
+  - 48437ab8-c1f7-4655-a31d-c4fa9e7510b2
+explanation: "The plotted trajectories do not reveal a simple, established law of meaning. We should distinguish the visualization from a proven explanation. The displayed paths and clusters are suggestive, but they do not reveal a universal coordinate system or an equation for meaning. Changing the projection may alter apparent shapes, and language itself has ambiguity, metaphor, and context shifts."
+archived: false

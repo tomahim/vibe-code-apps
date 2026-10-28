@@ -1,0 +1,19 @@
+id: 5183e9a3-2bcc-4b8f-88de-f95885132749
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What does increasing temperature generally affect?"
+choices:
+  - id: dd417b44-1f7f-43e2-b0d9-b1fa17492eab
+    text: "Two runs can diverge because early token choices affect later probabilities."
+  - id: a6a9e781-ce49-40fe-8da2-aecc4f80f8df
+    text: "Higher temperature gives lower-ranked alternatives more chance and usually increases variation."
+  - id: 914612bc-6eff-4f71-bf16-2e1f35189d93
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: c03a86ce-6d19-4596-9f22-67b3137bfe04
+    text: "Too little variation can repeat patterns, while too much can make text wander."
+correct_choice_ids:
+  - a6a9e781-ce49-40fe-8da2-aecc4f80f8df
+explanation: "Higher temperature gives lower-ranked alternatives more chance and usually increases variation. Temperature changes how strongly decoding favors high-scored tokens. Higher temperature generally allows more variety; it does not add knowledge. Think of temperature as changing how sharp the candidate distribution is before selection. Lower settings concentrate probability on leading choices; higher settings spread more weight to alternatives."
+archived: false

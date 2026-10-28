@@ -1,0 +1,19 @@
+id: f7c251c9-b2e9-44c9-adc9-4d8b4644a79b
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What extra information does an n-gram capture?"
+choices:
+  - id: c2cd7eab-8c02-4a7f-96e0-6e39943ded30
+    text: "Possible word sequences multiply rapidly as their length grows."
+  - id: a0311cc9-a785-4201-b80f-322b2a076ab5
+    text: "It records adjacent items, adding local context that single-item frequencies miss."
+  - id: 580f151a-b1d8-4d10-84c7-98deab4dca67
+    text: "The letter after q in English is very often u."
+  - id: 80d0785f-d767-4624-a61f-699b41c1123c
+    text: "Using longer n-grams can make generated strings look more natural."
+correct_choice_ids:
+  - a0311cc9-a785-4201-b80f-322b2a076ab5
+explanation: "It records adjacent items, adding local context that single-item frequencies miss. An n-gram is a run of n adjacent items, such as letters or words. Counting these runs captures local context that single-item counts miss. For a two-gram of words, we count pairs such as “coffee cup” or “cup broke.” A three-gram records triples and can distinguish more local situations. These tables improve on treating every word as an isolated draw."
+archived: false

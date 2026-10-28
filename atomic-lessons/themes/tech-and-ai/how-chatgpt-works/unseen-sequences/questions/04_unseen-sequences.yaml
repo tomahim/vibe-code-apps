@@ -1,0 +1,19 @@
+id: 79f0e0d9-3f0d-40cb-a8fd-ddb1a3b362bb
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What does a language model return for the current context?"
+choices:
+  - id: 0c61902c-7348-477f-b4a8-e4ac3d2a1ff8
+    text: "The approach works when patterns learned from past text help predict new text."
+  - id: f059b48d-81dd-45f2-b4b8-0f01a18ed43c
+    text: "A language model maps the current context to a distribution over possible next tokens."
+  - id: 99ddadda-abc2-4cf0-a90a-178cd9316e30
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: d6a61401-50b2-46a8-81f1-2737a8ca70ad
+    text: "Generalization means using learned patterns on a new case."
+correct_choice_ids:
+  - f059b48d-81dd-45f2-b4b8-0f01a18ed43c
+explanation: "A language model maps the current context to a distribution over possible next tokens. The same mechanism can be applied repeatedly. Given “Please describe the room: A lamp stood beside the,” a language model returns scores for possible next tokens such as “bed,” “desk,” or “door.” It does not directly return a verified description of a real room. After one token is chosen, the same model can be applied again to the enlarged context."
+archived: false

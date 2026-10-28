@@ -1,0 +1,19 @@
+id: 7c8e4489-2530-4da9-9d3f-911de02dfc53
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What is a loss function used for?"
+choices:
+  - id: 7308d67e-e912-4035-aedd-ae6f0ed4536b
+    text: "A training step measures how different the model's result is from what was wanted."
+  - id: 0feda0ee-015a-4948-810b-49b384205727
+    text: "Optimization changes weights in directions expected to reduce loss."
+  - id: f749ee36-d0e6-4295-9092-aa0fc67bb181
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: 67cb8ff6-c6c7-4bb5-8397-3bd7b36bb599
+    text: "Training presents inputs together with a target outcome or other learning signal."
+correct_choice_ids:
+  - f749ee36-d0e6-4295-9092-aa0fc67bb181
+explanation: "A loss function turns mismatch into a number to reduce. Different tasks can use different loss functions. A loss function converts model error into a number that optimization can work to reduce. In a simple numerical task, we might square the difference between a predicted value and the true value."
+archived: false

@@ -1,0 +1,19 @@
+id: df377a12-93ef-4215-ae38-a8f4b5652584
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What changes after a token is selected?"
+choices:
+  - id: 42ead419-2b70-4cdf-9092-e06cca9582ff
+    text: "After selecting a token, the model includes it in the context for the next prediction."
+  - id: 5bd658bd-2429-42d5-aaaa-6da9716fcb62
+    text: "A token can be a whole word, part of a word, punctuation, or another text piece."
+  - id: e2ca98c0-6be7-4c82-8804-8ad9fa8f231f
+    text: "The model gives many candidate next tokens different scores that become probabilities."
+  - id: a5f021e8-348d-4225-8bdd-3c4f7db13ac7
+    text: "A paragraph is the result of many successive token choices."
+correct_choice_ids:
+  - 42ead419-2b70-4cdf-9092-e06cca9582ff
+explanation: "After selecting a token, the model includes it in the context for the next prediction. Every new piece changes what can plausibly follow. Imagine the model selects “small” after “She saw a.” The next prediction is made for “She saw a small,” where nouns such as “bird” or “box” may now be more likely. If it had selected “strange” instead, the later wording could diverge."
+archived: false

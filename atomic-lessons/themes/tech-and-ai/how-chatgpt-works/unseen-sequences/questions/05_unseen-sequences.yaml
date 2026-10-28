@@ -1,0 +1,19 @@
+id: a3097b48-519d-427a-b625-2af502431328
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is generalization in this setting?"
+choices:
+  - id: 79da9356-27ee-4d2d-a32c-ad32106a8fd7
+    text: "Generalization means using learned patterns on a new case."
+  - id: 69ce6e74-a313-4528-827d-bc3b3d008479
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: 5f1fd8b9-59cb-437d-a7bc-fad45b03e451
+    text: "A language model maps the current context to a distribution over possible next tokens."
+  - id: d2aad160-b8a3-4c31-859b-67809cbe8550
+    text: "The approach works when patterns learned from past text help predict new text."
+correct_choice_ids:
+  - 79da9356-27ee-4d2d-a32c-ad32106a8fd7
+explanation: "Generalization means using learned patterns on a new case. It can be useful, but a plausible prediction can still be wrong. A child who learns that “the red kite flew” is grammatical can also understand “the blue kite flew” without seeing that sentence before. A language model's generalization is different from a child's understanding, but the analogy illustrates reuse of patterns across examples."
+archived: false

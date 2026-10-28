@@ -5,6 +5,10 @@ A collection of small applications. The reusable web platform lives in two proje
 - `api/` is the shared Django API. Each feature is a Django app under `api/apps/`; `livetrail_scrap` is the first one.
 - `ui/` is the shared React app gallery. Each frontend app lives under `ui/src/apps/`; LiveTrail Scraper is the first card.
 
+## Atomic lesson authoring
+
+Keep each concept card focused, at least 100 words long, and split into two or three paragraphs with concrete explanations and examples. Concept lessons have 6–10 cards, including a three-key-learnings recap card, and a bank of six questions. Put three alternatives at each of two checkpoints so the learner answers two questions per lesson. See [the content guide](atomic-lessons/Readme.md).
+
 ## Run locally
 
 Start the Django API:

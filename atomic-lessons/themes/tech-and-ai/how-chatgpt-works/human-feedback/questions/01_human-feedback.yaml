@@ -1,0 +1,19 @@
+id: 4b25fca6-2a4f-42a3-9a02-90dc39c9b4b3
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why might a raw text predictor make a poor assistant?"
+choices:
+  - id: b16dfb87-8d97-491e-914c-2277f072c288
+    text: "A model trained only to continue text may imitate unhelpful or wandering passages."
+  - id: 635c719e-8386-420d-84ca-7ca2c9798a47
+    text: "Human reviewers can compare or rate model outputs."
+  - id: 08a6c1cb-aec4-4a96-9a4d-d6912614f404
+    text: "Example answers can show a model what following an instruction looks like."
+  - id: 18e782db-ab3c-4f9c-ae75-f1db7db40240
+    text: "A separate preference model can learn from ranked answers."
+correct_choice_ids:
+  - b16dfb87-8d97-491e-914c-2277f072c288
+explanation: "A model trained only to continue text may imitate unhelpful or wandering passages. A useful assistant needs a more specific behavior target. A raw model trained to continue text may treat “How do I fix this?” as the start of a forum thread, a joke, or an unrelated article. It has learned many writing patterns but not necessarily the assistant behavior a user wants."
+archived: false

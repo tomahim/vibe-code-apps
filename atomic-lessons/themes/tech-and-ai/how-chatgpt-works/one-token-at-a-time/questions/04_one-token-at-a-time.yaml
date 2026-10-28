@@ -1,0 +1,19 @@
+id: ae0988b1-68be-41d2-af38-2d0a1d22bdda
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What does the model produce before a decoding choice is made?"
+choices:
+  - id: f8f47293-45b8-4d5d-acce-11355ff121ee
+    text: "A paragraph is the result of many successive token choices."
+  - id: cf98d57c-4f02-4a05-bc74-8f45683f931d
+    text: "The model gives many candidate next tokens different scores that become probabilities."
+  - id: 49c75656-d369-4b7b-ab84-862227742b2a
+    text: "A token can be a whole word, part of a word, punctuation, or another text piece."
+  - id: a34ef0d2-ae1a-4bf1-a634-f8cfa65e467e
+    text: "After selecting a token, the model includes it in the context for the next prediction."
+correct_choice_ids:
+  - cf98d57c-4f02-4a05-bc74-8f45683f931d
+explanation: "The model gives many candidate next tokens different scores that become probabilities. It does not retrieve one fixed continuation from a stored page. Suppose the prompt ends “She opened the door and saw a.” The candidates “dog,” “garden,” and “stranger” could all fit, though with different scores. Turning those scores into probabilities gives a distribution, not a single fact about what must come next."
+archived: false

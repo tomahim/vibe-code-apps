@@ -1,0 +1,19 @@
+id: 9762ce85-7acd-4d2d-bdfb-90479eafba71
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can more useful data and capacity help?"
+choices:
+  - id: cdd51f11-7405-45d7-ae34-668abfdd286b
+    text: "More useful data and model capacity can improve predictions and generated text."
+  - id: 8706b9ca-1328-4a59-9a9c-dae76ee6bcbd
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: 2a22b912-ca5b-4086-9638-af9400e21340
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+  - id: 749d0b8d-6692-492a-8f4d-513f440f9f91
+    text: "A model trained to continue text can produce a convincing false statement."
+correct_choice_ids:
+  - cdd51f11-7405-45d7-ae34-668abfdd286b
+explanation: "More useful data and model capacity can improve predictions and generated text. The relationship is empirical and depends on training choices. More varied, relevant examples can improve a model's ability to recognize recurring structures; more capacity can let it represent richer patterns. That helps explain why larger pretraining efforts often improved language generation."
+archived: false

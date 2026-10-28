@@ -1,0 +1,19 @@
+id: c7fab073-0995-4a2f-b9e3-db044744889f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does a two-dimensional embedding plot show?"
+choices:
+  - id: 89f9acb7-d659-40cc-bdd7-c169f970422e
+    text: "Numerical representations can place related uses of words near one another."
+  - id: 2d050413-dc1d-42be-9324-89f7b3c259ad
+    text: "A word such as crane can name a bird or a machine."
+  - id: 980a1237-b5f5-4200-b13e-affa47706c03
+    text: "Some relationships between words appear as geometric patterns in embeddings."
+  - id: dfe9a31a-2a65-4f53-9f70-03456ceceef5
+    text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
+correct_choice_ids:
+  - 89f9acb7-d659-40cc-bdd7-c169f970422e
+explanation: "Numerical representations can place related uses of words near one another. A two-dimensional plot is only a projection of a larger space. A word vector may have hundreds or thousands of coordinates, too many to draw directly. A two-dimensional plot compresses that information so nearby points can be shown on a page."
+archived: false

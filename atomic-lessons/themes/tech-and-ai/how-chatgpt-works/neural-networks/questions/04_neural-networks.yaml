@@ -1,0 +1,19 @@
+id: bc977d0a-7de9-45ad-8ce6-e15096b3dd5d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How do layers build a larger function?"
+choices:
+  - id: 58895388-75eb-4067-b9eb-b56ee0faa4ca
+    text: "Inspecting every weight does not automatically reveal a short human explanation."
+  - id: 81167baf-a53c-4375-9642-d60dbc37270c
+    text: "A layer transforms its inputs and passes the results to the next layer."
+  - id: cb938b2c-612f-431f-a949-a614207a7f3d
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: 310dcc8b-92a7-42cd-b539-ca58767315cc
+    text: "Early image layers may respond to edges or shapes, while later representations are harder to name."
+correct_choice_ids:
+  - 81167baf-a53c-4375-9642-d60dbc37270c
+explanation: "A layer transforms its inputs and passes the results to the next layer. Many simple operations together form a complicated function. Imagine an assembly line where the first station detects short edges, later stations combine them into strokes, and a final station helps score digit labels. Each station receives numbers from earlier ones and passes new numbers onward."
+archived: false

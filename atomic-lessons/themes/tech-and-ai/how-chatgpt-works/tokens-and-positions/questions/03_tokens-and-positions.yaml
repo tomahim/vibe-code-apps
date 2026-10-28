@@ -1,0 +1,19 @@
+id: f493b463-29a3-4897-af1b-ce495b96fcaa
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How does a token ID become useful to a neural network?"
+choices:
+  - id: 46d30987-6b75-40c9-b293-9adde932a4f9
+    text: "Each token in a model's vocabulary has a numerical ID."
+  - id: e0bb2a28-c5dc-4b98-a8b0-47642d989bdd
+    text: "A sequence needs position information so the model can distinguish token order."
+  - id: 2e524cfd-484c-4764-bf64-aafd5f7a96f4
+    text: "An embedding table maps token IDs to learned vectors."
+  - id: fb5caaff-a804-45f2-9a72-2c61f970b2c2
+    text: "Tokenization divides input text into model-sized pieces."
+correct_choice_ids:
+  - 2e524cfd-484c-4764-bf64-aafd5f7a96f4
+explanation: "An embedding table maps token IDs to learned vectors. These vectors provide numerical features for later layers. An embedding table can be pictured as one learned row of numbers per token ID. Looking up ID 417 returns a vector used as input to later layers."
+archived: false

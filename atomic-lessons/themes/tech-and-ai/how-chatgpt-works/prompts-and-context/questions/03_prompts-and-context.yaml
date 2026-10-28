@@ -1,0 +1,19 @@
+id: 7757fb85-aa1e-409e-8656-658af5a44952
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What can a few examples in a prompt establish?"
+choices:
+  - id: 3a61e632-8cfc-4c39-86fb-8280a529020b
+    text: "A capable pretrained model may follow a task described in a single prompt."
+  - id: 4ae416f0-fa1c-4ae7-90b8-9b5692133107
+    text: "Information supplied in a prompt can guide the current answer."
+  - id: ef8537a2-14ff-44b0-9c56-26565acaa573
+    text: "A few examples can establish a pattern for the next response."
+  - id: 647725a8-aed4-4164-9f31-0fde690dc8d3
+    text: "The words of a prompt become part of the input the model processes."
+correct_choice_ids:
+  - ef8537a2-14ff-44b0-9c56-26565acaa573
+explanation: "A few examples can establish a pattern for the next response. This is often called in-context learning. You can show “cat → animal” and “oak → plant,” then ask for “sparrow → ?” The examples suggest the desired mapping and answer format without a long instruction. This is a simple form of in-context learning: the model infers a pattern from examples included in the prompt."
+archived: false

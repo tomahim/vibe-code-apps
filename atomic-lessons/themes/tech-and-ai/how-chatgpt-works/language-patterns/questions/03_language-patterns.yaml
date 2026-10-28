@@ -1,0 +1,19 @@
+id: 9233c4ab-29c4-4f6f-9cee-c9092171d1ae
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does the usual letter after q demonstrate?"
+choices:
+  - id: 62a5c051-2d5f-4faf-893f-c145df767ca0
+    text: "Choosing each letter independently ignores how letters fit together."
+  - id: a924113f-b6f0-4df3-be5c-d8b4c153ed23
+    text: "An n-gram is a run of n adjacent items, such as letters or words."
+  - id: aaa36109-babf-48bf-a607-ac17fb568b6c
+    text: "The letter after q in English is very often u."
+  - id: 4fa47e02-1486-4083-8ab3-bc620f06c2f9
+    text: "A text sample lets us estimate how often each letter appears."
+correct_choice_ids:
+  - aaa36109-babf-48bf-a607-ac17fb568b6c
+explanation: "The letter after q in English is very often u. This shows why the previous character changes the next character's probability. Seeing q makes u much more likely in ordinary English than it is after most other letters. A table of single-letter frequencies cannot express that conditional relationship, but a table of letter pairs can."
+archived: false

@@ -1,0 +1,19 @@
+id: 0a973eab-7dc1-48b3-afbd-e1753e5c8cd2
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How are weights changed during optimization?"
+choices:
+  - id: 886d27d9-284e-40dd-84be-18a59928ada1
+    text: "A separate evaluation checks performance on examples not used for training."
+  - id: 47b4be7f-d375-45db-bc70-c646ab7949e8
+    text: "Optimization changes weights in directions expected to reduce loss."
+  - id: f96f046f-35ed-4800-b66a-ec9fe1a79c4a
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: a2fe75aa-cdf8-49cf-890b-f6d9d0360141
+    text: "Many updates across many examples gradually shape the network."
+correct_choice_ids:
+  - 47b4be7f-d375-45db-bc70-c646ab7949e8
+explanation: "Optimization changes weights in directions expected to reduce loss. Gradient-based methods calculate how each weight affects the result. Picture a landscape where height represents loss and each coordinate represents a weight. Optimization tries to move toward lower ground."
+archived: false

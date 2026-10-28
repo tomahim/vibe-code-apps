@@ -1,0 +1,19 @@
+id: c0486de4-398d-4358-9486-07cff767a23b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why is an attention map not a full explanation?"
+choices:
+  - id: 1f2ab1b0-a669-4f02-9f49-33e6e81b61da
+    text: "Attention gives different previous positions different weights for the current calculation."
+  - id: 5142b070-3a3a-40ce-b4fe-bd25eb5bbaa9
+    text: "Several heads can form different weighted combinations in parallel."
+  - id: 33f70ca3-daaf-47de-8321-1017d443962c
+    text: "A transformer stacks attention with other learned transformations."
+  - id: d567b761-c9c8-440f-93c4-3b829a7ff68a
+    text: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer."
+correct_choice_ids:
+  - d567b761-c9c8-440f-93c4-3b829a7ff68a
+explanation: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer. Other layers and learned weights also matter. An attention diagram may show that a token strongly weights a previous noun. That is evidence about one part of information flow, but it does not show the whole calculation."
+archived: false

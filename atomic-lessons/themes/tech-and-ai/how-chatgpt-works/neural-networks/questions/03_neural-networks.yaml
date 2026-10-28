@@ -1,0 +1,19 @@
+id: b6490115-b1e6-4d65-94ca-71a6e3b79c05
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does an activation function add?"
+choices:
+  - id: 86141ab4-2561-4e04-8288-0d9d9235062f
+    text: "Weights control how strongly inputs contribute, and a bias shifts the result."
+  - id: 4fa058f7-d72b-43b6-bc3f-c4bdc9089866
+    text: "A layer transforms its inputs and passes the results to the next layer."
+  - id: 1a963fe1-54bd-4843-b37e-29918ac7b07e
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: 7c89f854-85d8-43ef-a47f-d1e0a4d7a408
+    text: "An artificial neuron combines several numerical inputs into one output."
+correct_choice_ids:
+  - 1a963fe1-54bd-4843-b37e-29918ac7b07e
+explanation: "An activation function adds nonlinearity after the weighted sum. Without nonlinear steps, stacked layers would have much less expressive power. If every layer only performed a weighted sum, stacking layers would still amount to one larger linear transformation. An activation such as ReLU changes the shape of the function: it can keep positive values and turn negative ones to zero."
+archived: false

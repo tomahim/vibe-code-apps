@@ -1,0 +1,19 @@
+id: 934dbcc6-0e45-48bf-baa2-f32ab8f746e7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Does inspecting every weight automatically explain a network?"
+choices:
+  - id: d02c0a91-6258-4e59-a4ff-473e99bb5da1
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: ab90b411-be2f-4c99-a42d-48001085d28d
+    text: "A layer transforms its inputs and passes the results to the next layer."
+  - id: a71d501e-6b85-45b7-aaa9-68ceaf27b12f
+    text: "Early image layers may respond to edges or shapes, while later representations are harder to name."
+  - id: 554b968d-ee0c-4d21-af56-d8fe57bda1b7
+    text: "Inspecting every weight does not automatically reveal a short human explanation."
+correct_choice_ids:
+  - 554b968d-ee0c-4d21-af56-d8fe57bda1b7
+explanation: "Inspecting every weight does not automatically reveal a short human explanation. The network's useful behavior and our understanding of it are separate questions. Suppose a classifier correctly labels a cat photo. We could inspect all its intermediate numbers and weights, yet still struggle to answer which combination caused the final choice."
+archived: false

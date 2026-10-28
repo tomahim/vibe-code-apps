@@ -1,0 +1,19 @@
+id: 02e9428b-6482-4a9b-a7f2-4cd5c8378c7d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why do internal features become harder to name in later layers?"
+choices:
+  - id: 77ddc410-b3d3-465c-a5c0-b978c6698024
+    text: "Early image layers may respond to edges or shapes, while later representations are harder to name."
+  - id: c0d9be4f-d460-4e96-881a-5fdbfe2105ba
+    text: "An activation function adds nonlinearity after the weighted sum."
+  - id: 045c4092-6ed3-4dd9-9283-d6d5877837ef
+    text: "A layer transforms its inputs and passes the results to the next layer."
+  - id: 4602af02-861c-4c3c-8102-8de41c5084c9
+    text: "Inspecting every weight does not automatically reveal a short human explanation."
+correct_choice_ids:
+  - 77ddc410-b3d3-465c-a5c0-b978c6698024
+explanation: "Early image layers may respond to edges or shapes, while later representations are harder to name. Language models also develop internal features that are difficult to interpret. For an image, early internal patterns may resemble edges or color regions, which a person can recognize. Later patterns might mix many features and no longer look like a familiar object."
+archived: false

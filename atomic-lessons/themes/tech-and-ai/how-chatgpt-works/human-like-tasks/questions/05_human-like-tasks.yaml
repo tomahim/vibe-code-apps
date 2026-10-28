@@ -1,0 +1,19 @@
+id: cf150466-50b6-4caf-92b6-3bc9fe0c8431
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why is a digit label not always objectively obvious?"
+choices:
+  - id: 38a38e36-838f-43b3-bff0-f71944b233ba
+    text: "Some images do not have an obvious label even for people."
+  - id: 11010507-bdd8-4f1b-8771-d865b603acf7
+    text: "A recognizer may still classify a blurred or altered digit."
+  - id: 6cc6f64b-f574-4178-ab73-0d7d547e881e
+    text: "The network computes an output from numerical pixel values."
+  - id: 387aa2b6-56df-4b98-b4dd-daa380711630
+    text: "For a human-like task, a useful test is whether outputs usually match what people would say."
+correct_choice_ids:
+  - 38a38e36-838f-43b3-bff0-f71944b233ba
+explanation: "Some images do not have an obvious label even for people. Agreement with human judgments matters more than pretending every boundary is perfectly defined. Imagine a hastily written symbol that could be a 1 or a 7. Two careful readers may disagree, so there is no simple pixel rule that settles the intended label."
+archived: false

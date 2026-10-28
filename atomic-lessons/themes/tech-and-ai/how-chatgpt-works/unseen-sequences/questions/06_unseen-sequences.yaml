@@ -1,0 +1,19 @@
+id: cb2eba8f-d4fc-405b-aff1-4fc209868cad
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "On what empirical assumption does language modeling rely?"
+choices:
+  - id: fc507ebc-13e9-4d72-bfce-929a9b9693e4
+    text: "A model estimates probabilities for sequences it has never seen exactly."
+  - id: b76a4878-112a-4249-9e47-969ec2583ee1
+    text: "A language model maps the current context to a distribution over possible next tokens."
+  - id: 8a71fa27-f671-44cc-a945-2536e27375ef
+    text: "Generalization means using learned patterns on a new case."
+  - id: ceae13be-b05e-4b57-9415-58bff264fee8
+    text: "The approach works when patterns learned from past text help predict new text."
+correct_choice_ids:
+  - ceae13be-b05e-4b57-9415-58bff264fee8
+explanation: "The approach works when patterns learned from past text help predict new text. That empirical success is the essay's starting puzzle. The essay asks why a finite neural network can produce text that often resembles human writing. One answer is that language has reusable structure: the same grammar, topic relationships, and rhetorical patterns appear in many places."
+archived: false

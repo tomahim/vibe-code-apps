@@ -1,0 +1,19 @@
+id: 42aa9c2e-d7d2-4cf0-9818-55acfbf86267
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How does a model differ from a table of measurements?"
+choices:
+  - id: 54e7e5ae-fe40-4061-ac82-42329f246292
+    text: "A table records answers already measured, while a model gives a procedure for estimating new answers."
+  - id: 039fa92b-b976-428e-b0b3-83f6694649d2
+    text: "Wolfram uses falling objects to show how a model can estimate a value between observations."
+  - id: 7678b92e-3861-4bbf-bc8d-8ec494530620
+    text: "A straight line may fit some observations but miss their shape."
+  - id: f8c745b1-25cd-4f00-a283-9a58e2beda76
+    text: "Parameters are numerical values chosen to fit the model to data."
+correct_choice_ids:
+  - 54e7e5ae-fe40-4061-ac82-42329f246292
+explanation: "A table records answers already measured, while a model gives a procedure for estimating new answers. The procedure has a chosen structure. A table might list the measured travel time for a ball dropped from floors 1, 2, and 3. If you ask about floor 2.5, the table alone has no entry."
+archived: false

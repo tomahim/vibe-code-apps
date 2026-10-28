@@ -1,0 +1,19 @@
+id: 71b5a8cb-dffa-4a19-b830-cbe353ab27b7
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does Wolfram mean by computational irreducibility?"
+choices:
+  - id: 885be41c-1139-4c33-9195-cf1f72543706
+    text: "Remembering examples is different from carrying out a new sequence of exact steps."
+  - id: 9075acdd-6ad1-4246-815d-99909379784d
+    text: "Exact arithmetic and program execution can require a definite procedure."
+  - id: d4c4df5a-7415-4f73-995c-d3b6a47f073a
+    text: "Wolfram argues that some processes require following their steps to know the result."
+  - id: cd076eb7-fb49-4738-89d1-d0b5f0d88784
+    text: "Larger networks and more data can improve performance on many tasks."
+correct_choice_ids:
+  - d4c4df5a-7415-4f73-995c-d3b6a47f073a
+explanation: "Wolfram argues that some processes require following their steps to know the result. He uses this idea to discuss limits of pattern-based shortcuts. Some processes have no general shortcut that predicts their result without effectively following the computation. Wolfram calls this computational irreducibility and uses it to argue against assuming that pattern recognition can replace all explicit calculation."
+archived: false

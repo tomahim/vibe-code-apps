@@ -1,0 +1,19 @@
+id: 44f48ff4-a647-4465-82a6-5fca324997f2
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What do successive transformer blocks do?"
+choices:
+  - id: 574e4e06-5ee3-45a9-a126-7de172ec48d3
+    text: "The current context is turned into token representations."
+  - id: d0716553-803a-4737-92ea-b562d8915f36
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 3caf6f1d-b15a-4e0e-a844-e58f2f3e6375
+    text: "The model produces scores over its token vocabulary."
+  - id: 184e1aa9-c258-43c5-b1cc-a1a18578dafc
+    text: "Successive blocks transform and combine information across positions."
+correct_choice_ids:
+  - 184e1aa9-c258-43c5-b1cc-a1a18578dafc
+explanation: "Successive blocks transform and combine information across positions. The resulting representation reflects the context processed so far. Each transformer block changes the token representations using attention and other learned operations. A later block receives the results of earlier blocks, so it can combine local and more distant information."
+archived: false

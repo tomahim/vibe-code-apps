@@ -1,0 +1,19 @@
+id: e2329e5d-07db-4d4d-93bb-f469bff5cf5d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How can ranked responses guide tuning?"
+choices:
+  - id: 81dc27da-7d78-44bf-be9c-2c6a38cdd56e
+    text: "Predicting likely text and answering a user's request well are related but different objectives."
+  - id: 7ef1c86a-a75e-4407-b6e3-ea1e8db80a33
+    text: "A separate preference model can learn from ranked answers."
+  - id: a50b9524-3b87-4ed8-a034-e151df1b65f1
+    text: "Example answers can show a model what following an instruction looks like."
+  - id: c03c9e8f-ad66-4c3c-a9ed-e46052789fb1
+    text: "The linked InstructGPT paper describes a historical human-feedback training method."
+correct_choice_ids:
+  - 7ef1c86a-a75e-4407-b6e3-ea1e8db80a33
+explanation: "A separate preference model can learn from ranked answers. Its signal can then help tune the assistant's responses. Suppose reviewers rank several candidate answers to the same prompt. A separate model can learn to predict which answer they would prefer, providing a reusable training signal."
+archived: false

@@ -1,0 +1,19 @@
+id: b345d29b-181d-4f4f-95a8-4df9d62fd9ba
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "How does a model represent more than an isolated word?"
+choices:
+  - id: d778a0d3-6bd7-427b-b6a0-fdb07425b0e8
+    text: "The surrounding words provide clues about how a word is used."
+  - id: 3b279e97-26c3-4ecb-be13-09b46324fbb4
+    text: "A digit network can form internal representations before choosing a final label."
+  - id: 3ff1ac55-8b8b-45bd-8bd0-7cccc0fb6b0c
+    text: "One word may have several meanings, and a single fixed vector cannot fully express every use."
+  - id: 217c8ac3-25f7-4430-bfa3-8f012863eccd
+    text: "Models can represent a token in the context of a whole sequence."
+correct_choice_ids:
+  - 217c8ac3-25f7-4430-bfa3-8f012863eccd
+explanation: "Models can represent a token in the context of a whole sequence. Those changing representations help predict what comes next. The model can represent “apple” differently in “apple pie” and “Apple released a device” because the surrounding tokens change the computation. As text passes through layers, representations combine information from several positions."
+archived: false

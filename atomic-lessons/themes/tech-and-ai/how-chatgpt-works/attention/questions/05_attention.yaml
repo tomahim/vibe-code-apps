@@ -1,0 +1,19 @@
+id: 8595a362-fde2-4064-a39f-015c63c77805
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What does the transformer architecture stack?"
+choices:
+  - id: e0607948-77d1-4f38-b498-265b6c664e67
+    text: "A transformer stacks attention with other learned transformations."
+  - id: dac4bee5-a578-4866-8063-a1f1e43ad370
+    text: "Attention gives different previous positions different weights for the current calculation."
+  - id: 0c6d019f-85a7-4ac5-9667-8954d918435f
+    text: "Several heads can form different weighted combinations in parallel."
+  - id: 5d0026e6-8e4d-43e1-a209-6290ee42b5bd
+    text: "An attention pattern is a clue about information flow, not a complete explanation of a model's answer."
+correct_choice_ids:
+  - e0607948-77d1-4f38-b498-265b6c664e67
+explanation: "A transformer stacks attention with other learned transformations. The architecture was introduced in the 2017 paper linked below. A transformer block does more than look back. It combines attention with learned transformations at each position, and the model stacks many blocks so later representations can use information processed earlier."
+archived: false

@@ -1,0 +1,19 @@
+id: 9efd5f7c-2ae4-4620-8af7-219f8c3cb576
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does the model estimate at each generation step?"
+choices:
+  - id: 87e772e5-e276-4f38-861c-c804d9719c9c
+    text: "A prompt supplies the text and instructions the model can use as context."
+  - id: 6f4abb29-09b0-4ef9-b222-26043a5a366b
+    text: "A token can be a whole word, part of a word, punctuation, or another text piece."
+  - id: 43e78c52-4c84-402d-84d9-90ffab31b8ee
+    text: "The model gives many candidate next tokens different scores that become probabilities."
+  - id: 379e4980-dad2-41c5-80e9-a2f194d4c0f5
+    text: "At each step, a language model estimates which text piece could come next."
+correct_choice_ids:
+  - 379e4980-dad2-41c5-80e9-a2f194d4c0f5
+explanation: "At each step, a language model estimates which text piece could come next. This is the central mechanism behind its generated response. In the toy opening “The cat slept on the,” a candidate such as “sofa” may be more plausible than “telescope.” The model is making this kind of comparison before the sentence is complete. Once “sofa” is emitted, the relevant question changes to what might follow “The cat slept on the sofa.” This is why a response can be produced incrementally, even when the finished paragraph seems planned."
+archived: false

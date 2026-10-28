@@ -1,0 +1,19 @@
+id: 9e5ec952-0bc0-4140-a9ec-d7e013c65814
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why does a sequence need position information?"
+choices:
+  - id: 4255de21-19e7-461e-bdf1-1626a2286e24
+    text: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation."
+  - id: 24b45768-b0e5-48e4-98eb-f6fd9db1b465
+    text: "A sequence needs position information so the model can distinguish token order."
+  - id: d10dd6c1-da27-4433-9d7c-c07015df3c3c
+    text: "An embedding table maps token IDs to learned vectors."
+  - id: c49376b7-08c5-4eaf-b7c7-6654c663f65e
+    text: "The model processes a sequence of token representations, not just an isolated last word."
+correct_choice_ids:
+  - 24b45768-b0e5-48e4-98eb-f6fd9db1b465
+explanation: "A sequence needs position information so the model can distinguish token order. The essay illustrates this with GPT-2's learned position embeddings. “Dog bites man” and “Man bites dog” contain nearly the same words but have different meanings because the order changes. If the model only received a bag of token vectors, it could lose that distinction."
+archived: false

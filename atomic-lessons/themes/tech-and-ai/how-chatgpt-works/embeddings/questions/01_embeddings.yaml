@@ -1,0 +1,19 @@
+id: 3275f909-4c2c-430e-8d59-42988fc6a35e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What is an embedding?"
+choices:
+  - id: 144ee3ec-fa25-4f55-997f-5b6046901973
+    text: "An embedding is an array of numbers used to represent an item."
+  - id: 81c14a79-f781-440d-acd7-b7813fe5befd
+    text: "Words used in similar contexts can receive related representations."
+  - id: 9cffe0e6-922e-4fe8-9c2d-bb3c007ff3b9
+    text: "The surrounding words provide clues about how a word is used."
+  - id: cd623d97-03e9-439c-8bd0-14ffb8f8ec84
+    text: "A digit network can form internal representations before choosing a final label."
+correct_choice_ids:
+  - 144ee3ec-fa25-4f55-997f-5b6046901973
+explanation: "An embedding is an array of numbers used to represent an item. It lets a neural network work with text in numerical form. Imagine giving the word “crocodile” a list of several hundred numbers. No one coordinate needs to mean “reptile”; the full pattern can place it near related uses of “alligator.” A network can compare and transform these lists mathematically, which it cannot do directly with the printed letters of a word."
+archived: false

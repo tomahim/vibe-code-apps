@@ -1,0 +1,19 @@
+id: c58b36e9-98fe-4a9c-9bb9-9fb1369aefb0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What can example answers teach during post-training?"
+choices:
+  - id: a762ae95-cb92-4f2a-a7e5-361f8ebca0c7
+    text: "Human reviewers can compare or rate model outputs."
+  - id: f06132be-cb4e-43aa-9a8c-aaa26cf337a4
+    text: "A separate preference model can learn from ranked answers."
+  - id: baf41a39-aaa2-46cf-8dc8-faa6e13d1588
+    text: "Example answers can show a model what following an instruction looks like."
+  - id: b2e3469c-a546-402e-822e-d6049ac12b85
+    text: "A model trained only to continue text may imitate unhelpful or wandering passages."
+correct_choice_ids:
+  - baf41a39-aaa2-46cf-8dc8-faa6e13d1588
+explanation: "Example answers can show a model what following an instruction looks like. This is a different training signal from ordinary next-token prediction. A demonstration might pair “Summarize this paragraph in one sentence” with a concise example summary. Training on such pairs shows the model the desired input-output pattern."
+archived: false

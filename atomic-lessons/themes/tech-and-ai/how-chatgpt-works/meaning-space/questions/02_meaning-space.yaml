@@ -1,0 +1,19 @@
+id: b9f9a220-90b1-4a6e-9419-eaff49dfe8ca
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How can the same word have separated meanings?"
+choices:
+  - id: d1e0d2f6-ff75-407b-b0de-526b35870cf3
+    text: "Numerical representations can place related uses of words near one another."
+  - id: 1be135db-286d-4843-9303-586b8c4c8008
+    text: "Some relationships between words appear as geometric patterns in embeddings."
+  - id: 14ebb577-ddbe-4155-adc9-09264b998e22
+    text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
+  - id: ab19f14f-1051-4756-9918-894503b5a078
+    text: "A word such as crane can name a bird or a machine."
+correct_choice_ids:
+  - ab19f14f-1051-4756-9918-894503b5a078
+explanation: "A word such as crane can name a bird or a machine. Surrounding context can help separate those uses. In “The crane lifted the steel beam,” nearby words favor the machine sense; in “The crane spread its wings,” they favor the bird. Plotting sentence-level or contextual representations can reveal those uses as separate regions even though the printed word is identical."
+archived: false

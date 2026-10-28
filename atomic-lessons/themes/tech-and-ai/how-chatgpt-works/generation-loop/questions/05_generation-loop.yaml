@@ -1,0 +1,19 @@
+id: d2c8d5dd-8a6a-44be-ace1-bcecce8c0d97
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What determines the token chosen from the distribution?"
+choices:
+  - id: 59903fcc-fbc0-4fac-88e9-61773524c0f7
+    text: "A decoding rule selects one token from that distribution."
+  - id: f408a2c3-b1e3-4048-aed6-18c85ca64dfe
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 3c432e8c-4cd4-4b0b-bc41-1bdb13aa3a5e
+    text: "The model produces scores over its token vocabulary."
+  - id: ce92f70d-266f-4efc-a190-efa64989ff81
+    text: "The chosen token joins the visible sequence and the next prediction begins."
+correct_choice_ids:
+  - 59903fcc-fbc0-4fac-88e9-61773524c0f7
+explanation: "A decoding rule selects one token from that distribution. The selection may be deterministic or involve sampling. If decoding takes the highest-ranked token, the next piece is chosen deterministically under those conditions. If it samples, another plausible token may appear."
+archived: false

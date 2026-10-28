@@ -1,0 +1,19 @@
+id: 4b5a2839-c53d-4a68-a28d-7e882b1d5e70
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is a sound way to use a fluent generated answer?"
+choices:
+  - id: 3682b17b-9628-45cc-9ec1-d47740974fda
+    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+  - id: 8b1604d2-cbf0-4139-9ca9-252bf8ed3de5
+    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+  - id: 5d86d0b8-2b36-4bf8-9a71-500bc4888cd2
+    text: "The core mechanism is repeated next-token prediction by a trained neural network."
+  - id: 34b83f54-f26a-4cb5-ba5e-3c27708888ad
+    text: "Treat generated prose as a useful proposal that may need verification."
+correct_choice_ids:
+  - 34b83f54-f26a-4cb5-ba5e-3c27708888ad
+explanation: "Treat generated prose as a useful proposal that may need verification. Ask for sources, use appropriate tools, and check consequential claims. Use the model to draft, explain, compare, and explore, then choose checks that fit the claim. For a historical date, consult a source; for a numerical result, run the calculation; for a code change, execute relevant tests."
+archived: false

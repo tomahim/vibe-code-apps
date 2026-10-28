@@ -1,0 +1,19 @@
+id: aae29366-0f6e-4678-8bcf-b6fa0a9760ca
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What can counting letters in a text sample estimate?"
+choices:
+  - id: 559649c4-2dc7-42d8-8843-c606c376c2de
+    text: "A text sample lets us estimate how often each letter appears."
+  - id: adb24653-4732-4a44-8b97-55a5c2a9cc2e
+    text: "Choosing each letter independently ignores how letters fit together."
+  - id: 5726f7a2-4602-44c7-9d9b-98b4c752ff8a
+    text: "The letter after q in English is very often u."
+  - id: f8d6dbc6-fdef-458a-bafe-66b5bfa5243d
+    text: "An n-gram is a run of n adjacent items, such as letters or words."
+correct_choice_ids:
+  - 559649c4-2dc7-42d8-8843-c606c376c2de
+explanation: "A text sample lets us estimate how often each letter appears. A larger and more representative sample usually gives more stable estimates. Take two short articles, one about cats and one about dogs, and count each letter. The counts will be similar in broad strokes, but the topic words change the details: “dog” increases the letter o in the second sample."
+archived: false

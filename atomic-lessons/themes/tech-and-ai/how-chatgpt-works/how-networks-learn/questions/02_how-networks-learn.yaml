@@ -1,0 +1,19 @@
+id: d9a39f81-05bd-410b-99e8-89bed1c38e19
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why compare the current result with a target?"
+choices:
+  - id: bb915f9a-4ad6-4fbf-a6ff-4b8c572dbb43
+    text: "Training presents inputs together with a target outcome or other learning signal."
+  - id: d6939697-caeb-4300-b4fb-cab7ebef1f40
+    text: "A loss function turns mismatch into a number to reduce."
+  - id: fbe4bf44-322c-4cc8-a635-93e1d60aa5c0
+    text: "Optimization changes weights in directions expected to reduce loss."
+  - id: 101dc8fc-dbca-496a-8776-958df51f883a
+    text: "A training step measures how different the model's result is from what was wanted."
+correct_choice_ids:
+  - 101dc8fc-dbca-496a-8776-958df51f883a
+explanation: "A training step measures how different the model's result is from what was wanted. The comparison guides the next adjustment. If the network assigns a high score to “8” for a clear image of a “3,” we need a way to say how far it missed. The target label supplies that comparison."
+archived: false

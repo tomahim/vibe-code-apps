@@ -1,0 +1,19 @@
+id: b0006564-1a5d-4fc3-b142-6ae27ed7b8ad
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What do analogy patterns in embeddings suggest?"
+choices:
+  - id: 48a411a7-3f49-4613-bba5-a5905a0859e4
+    text: "A word such as crane can name a bird or a machine."
+  - id: 9c30cb03-5c91-4bdb-8197-9bfa52becf58
+    text: "Wolfram imagines generated text tracing a path through a space of linguistic features."
+  - id: 8544d109-4259-44b8-aa9f-1a592d753b95
+    text: "Some relationships between words appear as geometric patterns in embeddings."
+  - id: 9054fd9b-1bac-41dd-ade5-5a81cc5b0262
+    text: "Numerical representations can place related uses of words near one another."
+correct_choice_ids:
+  - 8544d109-4259-44b8-aa9f-1a592d753b95
+explanation: "Some relationships between words appear as geometric patterns in embeddings. The patterns are suggestive rather than universal laws. Some embeddings make relationships look like directions: a movement from one term to another resembles a movement between a different related pair. This can be a striking visualization of learned regularities."
+archived: false

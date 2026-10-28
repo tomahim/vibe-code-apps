@@ -1,0 +1,19 @@
+id: b7d076b3-3119-4f56-b550-5e23c263656d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why can more than one next token be considered?"
+choices:
+  - id: 4461fb98-5d74-4ccf-b144-44a03ebaf667
+    text: "Several next tokens can be plausible at once."
+  - id: 10447c22-15ae-4c4c-ad11-17804247d75a
+    text: "Greedy decoding always takes the highest-scored option."
+  - id: 46e50db9-faee-42dc-9d54-483800dd6b68
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: 6b5c7934-4bc6-447d-9cda-b046c86f74cd
+    text: "Temperature changes how strongly decoding favors high-scored tokens."
+correct_choice_ids:
+  - 4461fb98-5d74-4ccf-b144-44a03ebaf667
+explanation: "Several next tokens can be plausible at once. A decoding rule decides which of those candidates becomes the next visible token. After “The weather tomorrow will be,” both “sunny” and “rainy” are linguistically possible, even if one has a much higher score in a given context. The model supplies a distribution over candidates; the application chooses how to turn it into a token."
+archived: false

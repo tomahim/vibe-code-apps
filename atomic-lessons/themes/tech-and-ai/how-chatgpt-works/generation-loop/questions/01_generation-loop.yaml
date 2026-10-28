@@ -1,0 +1,19 @@
+id: 61421f02-57d9-4b3f-b99b-0be68e343b51
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What enters a transformer for a next-token prediction?"
+choices:
+  - id: e78ee8a0-fc64-484a-a0d1-c5c2eeee0f76
+    text: "The current context is turned into token representations."
+  - id: 5ef73a83-4da4-453d-aa83-47878f52223b
+    text: "Successive blocks transform and combine information across positions."
+  - id: 73bd77f1-8638-4e60-beaa-65ed91522182
+    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+  - id: 08e21082-b734-46b2-b1f8-f30398b52ac6
+    text: "The model produces scores over its token vocabulary."
+correct_choice_ids:
+  - e78ee8a0-fc64-484a-a0d1-c5c2eeee0f76
+explanation: "The current context is turned into token representations. These form the input to a pass through the network. Suppose the prompt is “The moon rose above the.” The tokenizer supplies a sequence of IDs, and the embedding stage turns them into numerical vectors with order information. Those vectors enter the transformer for a pass through its layers."
+archived: false

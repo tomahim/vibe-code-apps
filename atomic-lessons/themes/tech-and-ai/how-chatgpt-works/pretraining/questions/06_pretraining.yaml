@@ -1,0 +1,19 @@
+id: dada28ee-9313-40e6-86d9-25ab07a2fb74
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Why can pretrained output be fluent yet false?"
+choices:
+  - id: 7f0cebe1-c2e7-4fad-99b3-c8c717f9148b
+    text: "During training, predicted token probabilities are compared with the actual next token."
+  - id: 3df1650a-4d2c-4334-9f1d-23bb065b67a6
+    text: "Weights encode patterns learned across examples rather than a tidy database of cited facts."
+  - id: 4a6e4171-ffaf-4488-a102-8eb9f23b431e
+    text: "More useful data and model capacity can improve predictions and generated text."
+  - id: fbb8537e-195f-4333-8250-585637b05895
+    text: "A model trained to continue text can produce a convincing false statement."
+correct_choice_ids:
+  - fbb8537e-195f-4333-8250-585637b05895
+explanation: "A model trained to continue text can produce a convincing false statement. Plausibility is a different test from factual verification. Imagine asking for the year of an obscure event. A pretrained model may produce a confident date because it has learned the style of encyclopedia answers and associations with the topic."
+archived: false

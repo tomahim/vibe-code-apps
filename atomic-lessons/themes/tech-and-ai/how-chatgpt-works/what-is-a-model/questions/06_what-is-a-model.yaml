@@ -1,0 +1,19 @@
+id: ee7305b0-52c9-462a-a5a5-8a17c0edbd2f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What must be checked beyond fit on known examples?"
+choices:
+  - id: c87f5a6e-0504-4261-ba01-425fa1cbeb25
+    text: "A straight line may fit some observations but miss their shape."
+  - id: 5551d743-24b8-43a7-b5f4-7f1153da5771
+    text: "Parameters are numerical values chosen to fit the model to data."
+  - id: 39b566c7-450f-476a-b7c3-ce479e3d711f
+    text: "Training adjusts parameters inside a structure selected beforehand."
+  - id: adf24dea-2adc-43fb-8980-ce50ba344e76
+    text: "A model can fit known examples yet fail on new ones."
+correct_choice_ids:
+  - adf24dea-2adc-43fb-8980-ce50ba344e76
+explanation: "A model can fit known examples yet fail on new ones. Testing beyond its training examples is necessary to judge usefulness. Picture a curve that passes exactly through five measured points but swings wildly between them. Its training fit is perfect while its predictions are poor."
+archived: false

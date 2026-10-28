@@ -1,0 +1,19 @@
+id: 54774830-2e8e-4255-bc11-816bd94a400e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why does training-data preparation matter?"
+choices:
+  - id: 6cfdb7a1-62da-4045-87ae-2cc6acedf99e
+    text: "Architecture defines the broad arrangement of computation before training begins."
+  - id: 0f5316a7-46de-4499-8c40-c6028488b6fd
+    text: "Training may revisit examples over multiple epochs and use altered versions where appropriate."
+  - id: dc7e1d6f-4563-4638-a89a-99003bb4e3ba
+    text: "A batch is a group of examples used for an update."
+  - id: 3563eb03-3e15-4c3c-a441-4ae8e1b4d43f
+    text: "Useful examples must be collected and prepared for the learning objective."
+correct_choice_ids:
+  - 3563eb03-3e15-4c3c-a441-4ae8e1b4d43f
+explanation: "Useful examples must be collected and prepared for the learning objective. Data quality and coverage affect the result. Imagine teaching a digit model with only neat printed numbers, then testing it on shaky handwritten notes. The training data did not cover the intended situation, so weak performance would be unsurprising."
+archived: false

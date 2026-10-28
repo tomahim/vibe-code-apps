@@ -1,0 +1,19 @@
+id: d4f47242-4573-4577-8d28-bddfb1b423fc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What makes sampling different from always taking the top choice?"
+choices:
+  - id: 4514a7bc-5c78-4ed7-ae5e-84b65a4ebdf2
+    text: "Greedy decoding always takes the highest-scored option."
+  - id: 523d335c-4b32-4a9c-b144-3458418e313f
+    text: "Temperature changes how strongly decoding favors high-scored tokens."
+  - id: 41a1c68e-bcb8-4256-b7b8-933bfef0c998
+    text: "Sampling sometimes chooses a lower-ranked but plausible option."
+  - id: b6b27239-d188-46bc-ac53-cd106d3f8dfb
+    text: "Several next tokens can be plausible at once."
+correct_choice_ids:
+  - 41a1c68e-bcb8-4256-b7b8-933bfef0c998
+explanation: "Sampling sometimes chooses a lower-ranked but plausible option. This introduces variation while still using the model's estimated probabilities. Suppose the model gives “sofa” a high probability and “windowsill” a smaller but still reasonable one. Sampling may choose either according to the configured distribution, leading to two different stories."
+archived: false

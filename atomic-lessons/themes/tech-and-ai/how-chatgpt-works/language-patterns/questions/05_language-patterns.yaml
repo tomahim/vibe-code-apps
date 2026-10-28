@@ -1,0 +1,19 @@
+id: 80d00cc7-95e9-4696-9e7a-33bfcf1850e4
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is the tradeoff of using longer n-grams?"
+choices:
+  - id: cbe0ecdf-7b54-4f1d-87a9-1d31751d617e
+    text: "Longer n-grams can look more natural but need counts for many more combinations."
+  - id: 3d67946a-ce35-44ac-b385-e445d4845380
+    text: "The letter after q in English is very often u."
+  - id: d47f45ea-c2a7-41bf-a281-08573207acd0
+    text: "An n-gram is a run of n adjacent items, such as letters or words."
+  - id: 08d72514-14d1-4c3c-93f5-32c96dae1352
+    text: "Possible word sequences multiply rapidly as their length grows."
+correct_choice_ids:
+  - cbe0ecdf-7b54-4f1d-87a9-1d31751d617e
+explanation: "Longer n-grams can look more natural but need counts for many more combinations. Using longer n-grams can make generated strings look more natural. It also demands observations of many more possible combinations. Imagine generating a word one letter at a time. A model that uses the last three letters can avoid many impossible spellings that a single-letter model produces."
+archived: false

@@ -1,0 +1,19 @@
+id: 12bc2d01-b32a-48c9-a1c2-cf1d590e32de
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What evidence can surrounding words provide?"
+choices:
+  - id: f57d473c-319d-42e9-b04e-94934fb3ccab
+    text: "Words used in similar contexts can receive related representations."
+  - id: 039c1365-8728-405d-be10-b712b04fd3fd
+    text: "A digit network can form internal representations before choosing a final label."
+  - id: 38ea7cb4-9f84-45bf-9cbf-05ad49fa2071
+    text: "The surrounding words provide clues about how a word is used."
+  - id: df1d685d-04bb-4c99-a3b8-067f7e12cacf
+    text: "An embedding is an array of numbers used to represent an item."
+correct_choice_ids:
+  - 38ea7cb4-9f84-45bf-9cbf-05ad49fa2071
+explanation: "The surrounding words provide clues about how a word is used. Similar surroundings can help a model learn useful relationships. Suppose a model sees “The ___ swam across the river” in many examples. The words that fit the blank help reveal which terms behave similarly in context."
+archived: false

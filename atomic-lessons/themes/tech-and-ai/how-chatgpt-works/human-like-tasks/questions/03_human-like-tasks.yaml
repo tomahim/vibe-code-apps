@@ -1,0 +1,19 @@
+id: 6915f32f-50a9-434a-94c7-02b9cb773c93
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What happens as a digit image becomes more ambiguous?"
+choices:
+  - id: 261da968-b7da-4f84-8018-b068688079ed
+    text: "The same digit can appear in many shapes and positions."
+  - id: f342cfac-0a3d-44de-8fbc-9ca63f51063f
+    text: "The network computes an output from numerical pixel values."
+  - id: e477f92a-7028-418b-b4b5-21dc1d8bc760
+    text: "It may keep the original label at first, then change its answer as the image becomes ambiguous."
+  - id: a50adc56-e2ec-4869-913c-630ac01def3f
+    text: "A digit recognizer maps image pixels to a digit label."
+correct_choice_ids:
+  - e477f92a-7028-418b-b4b5-21dc1d8bc760
+explanation: "It may keep the original label at first, then change its answer as the image becomes ambiguous. A recognizer may still classify a blurred or altered digit. Its behavior eventually changes when the image becomes too ambiguous. Start with a clear image of a “2” and progressively blur it. At first, both a person and a model may still say “2.” After enough blurring, the same image may look like another digit or no digit at all."
+archived: false
