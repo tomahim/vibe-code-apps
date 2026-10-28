@@ -1,6 +1,6 @@
 # Little Grains learner API
 
-All routes live under `/api/learning/`. The seven learner endpoints require the existing `Authorization: Bearer <token>` from `/api/auth/login` and return private, non-cacheable JSON. Published artwork has a separate public image route, described below. UUIDs are the published content IDs. Only published, unarchived content with a visible ancestry is readable or writable. Publishing provenance, answer keys and pre-answer explanations are not returned. No production DB access is needed to test this API.
+All routes live under `/api/learning/`. Learner endpoints require the existing `Authorization: Bearer <token>` from `/api/auth/login` and return private, non-cacheable JSON. Published artwork has a separate public image route, described below. UUIDs are the published content IDs. Only published, unarchived content with a visible ancestry is readable or writable. Publishing provenance, answer keys and pre-answer explanations are not returned. No production DB access is needed to test this API.
 
 Sources read 2026-10-27:
 - [Garden design board](https://linear.app/tomahim/document/little-grains-garden-design-board-6dd69300c9a6)
@@ -30,7 +30,11 @@ Returns `{learning_path, theme, lessons, next_lesson_id}`. Lessons are ordered f
 
 ## GET lessons/<uuid>/
 
-Returns `{lesson, learning_path, theme, cards, questions, next_step}` for introduction, breadcrumbs, reading and resume. Cards include body, artwork and this user's completion timestamp. Questions include prompt and four `{id,text}` options, never answers or explanations. Exactly one alternative per checkpoint is selected deterministically from a hash of learner/lesson/checkpoint/question IDs. This stays stable across resume, while changes to pool membership may change selection. Completion is per checkpoint, independent of alternative. `next_step` is `{type: "card"|"question", id}` or null on completion. The frontend should refetch on resume and after writes.
+Returns `{lesson, learning_path, theme, cards, questions, next_step}` for introduction, breadcrumbs, reading and resume. Cards include body, artwork and this user's completion timestamp. Questions include prompt and four `{id,text}` options, never answers or explanations. Exactly one alternative per checkpoint is selected from a deterministic learner-specific ordering. Each wrong attempt advances to the next alternative, wrapping around after the pool is exhausted; a single-question pool necessarily repeats its only question. The selection stays stable across resume, while changes to pool membership may change it. Completion is per checkpoint, independent of alternative. `next_step` is `{type: "card"|"question", id}` or null on completion. The frontend should refetch on resume and after writes.
+
+## POST lessons/<uuid>/open/
+
+Send `{}` with `Content-Type: application/json` when the reader opens. This updates the authenticated learner's most recent open time for that lesson without changing card or question progress. The garden uses distinct recent opens to offer up to three unfinished lesson shortcuts. Hidden or unknown lessons return 404; invalid or extra fields return 400.
 
 ## POST cards/<uuid>/complete/
 
@@ -42,7 +46,7 @@ All writes are bearer-only, JSON-only, reject mismatching browser Origin, and ru
 
 Send `{"question_id":"<uuid>","answer":"<choice-id>"}`. Only the current selected checkpoint question is accepted after its cards have been completed. Returns 201 with `attempt_id`, `question_id`, `attempt_type`, server-graded `correct`, `explanation`, server `answered_at`, lesson `progress` and `next_step`. Normal reads never disclose the answer key or explanation. Invalid choices/fields: 400; hidden/unknown question: 404; unselected, premature or already-completed checkpoint: 409.
 
-**MVP retry assumption for review:** a wrong answer is recorded, returns its explanation and leaves the same checkpoint open for another attempt; initial/retry is inferred by the server, not supplied by the learner. A correct answer satisfies the checkpoint once. Repeating a successful submission returns 409, not a duplicate reward. Wrong submissions are append-only attempts, so clients should not auto-retry an ambiguous network failure without refetching. No retry penalties, leaderboard scoring, reward economy, review attempts or review scheduling are implemented. The design board explicitly leaves those production rules undecided. Existing review records, if any, do not grant initial completion.
+**Retry behavior:** a wrong answer is recorded, returns its explanation and selects another question at the same checkpoint when the pool has alternatives. The response's `next_step` identifies the newly selected question. Initial/retry is inferred by the server, not supplied by the learner. A correct answer satisfies the checkpoint once. Repeating a successful submission returns 409, not a duplicate reward. Wrong submissions are append-only attempts, so clients should not auto-retry an ambiguous network failure without refetching. Review attempts do not advance the initial-question rotation or grant initial completion.
 
 ## GET progress/
 
@@ -50,7 +54,7 @@ Returns `{progress, learning_paths, lessons}` for the current user only. Aggrega
 
 ## Garden rewards and rankings
 
-`GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level and `rewards: {drops, carrots}`. The frontend uses this snapshot to build the 3D scene and refreshes it after card and answer writes.
+`GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level, `rewards: {drops, carrots}`, and `recent_lessons`. Recent lessons are the three most recently opened, still unfinished, visible lessons. Each shortcut includes the lesson and path titles, progress and its authoritative `next_step`; completed lessons are omitted. The frontend uses this snapshot to build the 3D scene and refreshes it after opening lessons and recording progress.
 
 `GET leaderboard/?currency=drops|carrots&period=weekly|monthly|overall` returns a ranking for one currency and period, plus the learner's own row. The top 20 and personal rank are computed independently for Drops and Carrots. Only learners with a positive score in the selected currency and period are ranked. Weekly periods start Monday 00:00 UTC; monthly periods start on the 1st at 00:00 UTC; overall is cumulative. Ties are ordered by user ID. This first version uses a global ranking.
 

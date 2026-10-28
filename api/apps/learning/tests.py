@@ -47,15 +47,15 @@ class LearningSchemaTests(TestCase):
         with self.assertRaises(IntegrityError), transaction.atomic():
             operation()
 
-    def test_exact_nine_tables_use_lg_prefix_and_no_extra_state_tables(self):
+    def test_learning_tables_use_lg_prefix(self):
         models = list(apps.get_app_config("learning").get_models())
         self.assertEqual({model._meta.db_table for model in models}, {
             "lg_content_entity", "lg_theme", "lg_learning_path", "lg_lesson", "lg_card",
-            "lg_question", "lg_sync_log", "lg_card_progress", "lg_question_attempt",
+            "lg_question", "lg_sync_log", "lg_card_progress", "lg_question_attempt", "lg_lesson_open",
         })
         tables = set(connection.introspection.table_names())
         self.assertTrue(all(model._meta.db_table in tables for model in models))
-        self.assertEqual(len(models), 9)
+        self.assertEqual(len(models), 10)
 
     def test_content_uuid_is_both_registry_id_and_content_primary_key(self):
         for record in (self.theme, self.path, self.lesson, self.card, self.question):

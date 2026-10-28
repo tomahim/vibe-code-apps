@@ -1,4 +1,5 @@
 """Learner-facing representations. Answer keys and publishing metadata stay private."""
+from collections import Counter
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
 from .images import image_url
 
@@ -49,6 +50,10 @@ class LearnerState:
         self.passed = {(questions[a["question_id"]].lesson_id,
                         questions[a["question_id"]].after_card_position)
                        for a in attempts if a["correct"] and a["attempt_type"] != "review"}
+        self.wrong_counts = Counter(
+            (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position)
+            for a in attempts if not a["correct"] and a["attempt_type"] != "review"
+        )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
 
     def progress(self, lessons):
@@ -76,15 +81,19 @@ def lesson_summary(lesson, state):
 
 
 def checkpoint_questions(state, lesson):
-    """Stable selection per learner/checkpoint; no answer-key-dependent selection."""
+    """Rotate alternatives after wrong attempts, stably across requests."""
     import hashlib
     pools = {}
     for question in state.questions:
         if question.lesson_id == lesson.pk:
             pools.setdefault(question.after_card_position, []).append(question)
-    return [min(pool, key=lambda q: hashlib.sha256(
-        f"{state.user_id}:{lesson.pk}:{position}:{q.pk}".encode(),
-    ).digest()) for position, pool in sorted(pools.items())]
+    selected = []
+    for position, pool in sorted(pools.items()):
+        ranked = sorted(pool, key=lambda q: hashlib.sha256(
+            f"{state.user_id}:{lesson.pk}:{position}:{q.pk}".encode(),
+        ).digest())
+        selected.append(ranked[state.wrong_counts[lesson.pk, position] % len(ranked)])
+    return selected
 
 
 def public_question(question):

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
-from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .rewards import totals
 
 
@@ -176,6 +176,38 @@ class LearningAPITests(TestCase):
         self.assertTrue(response.json()["progress"]["completed"])
         self.assertEqual(response.json()["progress"]["checkpoints_correct"], 1)
 
+    def test_wrong_answers_rotate_questions_and_resume_the_same_alternative(self):
+        for position in (2, 3):
+            self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
+                     prompt=f"Alternative {position}", options=self.question.options,
+                     answer=str(position - 1), explanation="Try another one")
+        lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
+        attempt_url = "/api/learning/question-attempts/"
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+
+        question_ids = []
+        for _ in range(4):
+            current = self.client.get(lesson_url).json()
+            question_id = current["next_step"]["id"]
+            self.assertEqual(current["questions"][0]["id"], question_id)
+            question_ids.append(question_id)
+            question = Question.objects.get(pk=question_id)
+            wrong_answer = next(option["id"] for option in question.options if option["id"] != question.answer)
+            wrong = self.post(attempt_url, {"question_id": question_id, "answer": wrong_answer})
+            self.assertEqual(wrong.status_code, 201)
+            self.assertFalse(wrong.json()["correct"])
+            self.assertEqual(wrong.json()["next_step"], self.client.get(lesson_url).json()["next_step"])
+            self.assertNotEqual(wrong.json()["next_step"]["id"], question_id)
+
+        self.assertEqual(len(set(question_ids[:3])), 3)
+        self.assertEqual(question_ids[3], question_ids[0])
+        selected = self.client.get(lesson_url).json()["next_step"]["id"]
+        self.assertEqual(self.post(attempt_url, {"question_id": question_ids[3], "answer": "0"}).status_code, 409)
+        current = Question.objects.get(pk=selected)
+        correct = self.post(attempt_url, {"question_id": selected, "answer": current.answer})
+        self.assertTrue(correct.json()["progress"]["completed"])
+        self.assertIsNone(correct.json()["next_step"])
+
     def test_progress_is_private_persistent_and_has_unique_counts(self):
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
@@ -190,6 +222,43 @@ class LearningAPITests(TestCase):
         self.assertEqual(other["cards_completed"], 0)
         self.assertEqual(other["checkpoints_correct"], 0)
         self.assertFalse(other["started"])
+
+    def test_garden_returns_three_recent_unfinished_lessons(self):
+        lessons = [self.lesson]
+        for position in (2, 3, 4):
+            lesson = self.row(Lesson, learning_path=self.path, position=position)
+            self.row(Card, lesson=lesson, body_markdown=f"Card {position}")
+            lessons.append(lesson)
+        open_url = lambda lesson: f"/api/learning/lessons/{lesson.pk}/open/"
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
+        for lesson in lessons:
+            self.assertEqual(self.post(open_url(lesson), {}).status_code, 200)
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(lesson.pk) for lesson in reversed(lessons[1:])])
+        self.assertEqual(recent[0]["next_step"]["type"], "card")
+        self.assertEqual(recent[0]["learning_path_title"], self.path.title)
+
+        self.assertEqual(self.post(open_url(self.lesson), {}).status_code, 200)
+        self.assertEqual(LessonOpen.objects.filter(user=self.user).count(), 4)
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk), str(lessons[3].pk), str(lessons[2].pk)])
+
+        last_card = Card.objects.get(lesson=lessons[3])
+        self.post(f"/api/learning/cards/{last_card.pk}/complete/", {})
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk), str(lessons[2].pk), str(lessons[1].pk)])
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
+
+    def test_open_lesson_validates_request_and_visibility(self):
+        url = f"/api/learning/lessons/{self.lesson.pk}/open/"
+        self.assertEqual(self.client.get(url).status_code, 405)
+        self.assertEqual(self.post(url, {"user_id": self.other.pk}).status_code, 400)
+        self.assertEqual(LessonOpen.objects.count(), 0)
+        self.lesson.published = False
+        self.lesson.save()
+        self.assertEqual(self.post(url, {}).status_code, 404)
+        self.assertEqual(LessonOpen.objects.count(), 0)
 
     def test_garden_rewards_and_separate_rankings_use_saved_progress(self):
         garden_url = "/api/learning/garden/"
