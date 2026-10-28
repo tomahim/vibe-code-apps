@@ -71,8 +71,8 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, onOpenLesson, reduced = false }) {
-  const state = { rewards };
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, reduced = false }) {
+  const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
   const root = document.createElement('div');
@@ -470,18 +470,26 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, o
     if (view.level === 'path') h += `<span class="sep">›</span><button data-go="path"${cur('path')}>${esc(THEMES[view.ti].paths[view.pi].title)}</button>`;
     crumbs.innerHTML = h;
   }
+  function renderRecent() {
+    if (!state.recentLessons.length) return '';
+    return `<section class="lg-recent" aria-label="Recent lessons"><p class="eyebrow">Pick up where you left off</p><ul>${state.recentLessons.map((lesson) => {
+      const progress = lesson.progress || {};
+      const step = lesson.next_step?.type === 'question' ? 'Next question' : `Next card · ${progress.cards_completed || 0}/${progress.cards_total || 0} read`;
+      return `<li><button data-recent="${esc(lesson.id)}" aria-label="Continue ${esc(lesson.title)}"><span class="lg-recent-icon" aria-hidden="true">↗</span><span class="lg-recent-copy"><b>${esc(lesson.title)}</b><small>${esc(lesson.learning_path_title)}</small><em>${step}</em></span><span class="lg-recent-arrow" aria-hidden="true">→</span></button></li>`;
+    }).join('')}</ul></section>`;
+  }
   function renderPanel() {
     let h = '';
     if (view.level === 'garden') {
-      h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p><ul class="lg-list">` +
+      h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>${renderRecent()}<ul class="lg-list">` +
         THEMES.map((t, i) => { const started = t.paths.filter((p) => p.progress.started).length, avg = fraction(t.progress); return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
-      h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p><ul class="lg-list">` +
+      h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p>${renderRecent()}<ul class="lg-list">` +
         t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${dots(p.lessons.length, li.cur)}</span></span><span class="pc">${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
-      h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
+      h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>${renderRecent()}`;
       if (sel >= 0) {
         const lesson = trail.path.lessonData[sel], prog = lesson.progress, st = prog.completed ? 'done' : prog.started ? 'cur' : 'todo';
         h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(prog.cards_total, prog.cards_completed)}</p><p>${prog.cards_completed} of ${prog.cards_total} cards · ${prog.checkpoints_correct} of ${prog.checkpoints_total} questions</p><button class="primary" data-start="${sel}">${st === 'done' ? 'Read lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson'}</button></div>`;
@@ -502,6 +510,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, o
     else if (b.dataset.path) goPath(view.ti, Number(b.dataset.path));
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
     else if (b.dataset.start) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.start)].id);
+    else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
   });
@@ -594,7 +603,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, o
   return {
     root, view, state, prof, failed: false, camera, controls,
     goGarden, goTheme, goPath, selectLesson, back,
-    updateData(nextThemes, nextRewards) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
+    updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
     dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },

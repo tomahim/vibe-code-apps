@@ -17,6 +17,7 @@ This app contains published content models, the content sync command and authent
 | SyncLog | `lg_sync_log` |
 | CardProgress | `lg_card_progress` |
 | QuestionAttempt | `lg_question_attempt` |
+| LessonOpen | `lg_lesson_open` |
 
 Content primary keys are one-to-one references to the UUID registry (`entity`, stored in SQL column `id`). Use `pk` / `entity_id` for ORM lookups; `id` is a read-only UUID convenience property. UUIDs come from content metadata, with no generated fallback. Learner/log rows use the platform's BigAutoField default. User references use `AUTH_USER_MODEL`.
 
@@ -31,7 +32,7 @@ Content primary keys are one-to-one references to the UUID registry (`entity`, s
 - Multiple-choice `options` is a list of four `{id, text}` objects. Choice IDs and `answer` are strings; `submitted_answer` stores a choice ID. No question revisions or answer snapshots are added.
 - `completed_at` and `answered_at` are explicit timestamps; learner API writes always supply server time. `SyncLog.updated_at` records insertion time; unique `commit_sha` supports one successful log per commit. `changes` is an object for the publisher's added/updated summary.
 - Model `full_clean()` validates registry kind immutability, subtype-kind matching, archive/publication consistency, useful image alt text, same-lesson question checkpoints, and the four-choice/answer shape. Django does **not** call `full_clean()` on `save()`, and bulk writes bypass it. These cross-table/JSON rules are **not database constraints**; the future publisher must validate the complete manifest and call validation inside its transaction. No publishing service or triggers are included in this table-only PR.
-- The schema stores completion and answer history only. Lesson completion/review due dates must later be derived as specified; no lesson-progress or review-schedule tables are added.
+- The schema stores completion and answer history plus the last time each learner opened a lesson. This supports recent lesson shortcuts without changing completion. Lesson completion/review due dates must later be derived as specified; no lesson-progress or review-schedule tables are added.
 
 ## Content synchronization
 

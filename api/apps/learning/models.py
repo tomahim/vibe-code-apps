@@ -226,6 +226,17 @@ class CardProgress(models.Model):
         constraints = [models.UniqueConstraint(fields=["user", "card"], name="lg_progress_unique_user_card")]
 
 
+class LessonOpen(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="lg_opened_lessons")
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="opens")
+    opened_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "lg_lesson_open"
+        constraints = [models.UniqueConstraint(fields=["user", "lesson"], name="lg_open_unique_user_lesson")]
+        indexes = [models.Index(fields=["user", "-opened_at"], name="lg_open_recent_idx")]
+
+
 class QuestionAttempt(models.Model):
     class AttemptType(models.TextChoices):
         INITIAL = "initial", "Initial"

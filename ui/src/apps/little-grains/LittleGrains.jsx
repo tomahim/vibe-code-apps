@@ -63,13 +63,21 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   useEffect(() => {
     let active = true;
     setData(null); setFeedback(null); setChoice(""); setError("");
+    api(`lessons/${lessonId}/open/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
+      .then(onProgress).catch(() => {});
     api(`lessons/${lessonId}/`).then((result) => { if (active) { setData(result); setViewStep(result.next_step); } })
       .catch((err) => { if (active) setError(err.message); });
     return () => { active = false; };
-  }, [lessonId]);
+  }, [lessonId, onProgress]);
 
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
+  const reviewCard = data?.cards.find((item) => viewStep?.type === "revisit" && item.id === viewStep.id);
+  const cardIndex = data?.cards.findIndex((item) => item.id === (card || reviewCard)?.id) ?? -1;
+  const previousCard = question
+    ? data?.cards.find((item) => item.position === question.after_card_position && item.completed_at)
+    : cardIndex > 0 && data.cards[cardIndex - 1].completed_at ? data.cards[cardIndex - 1] : null;
+  const nextReviewCard = reviewCard && data.cards[cardIndex + 1]?.completed_at ? data.cards[cardIndex + 1] : null;
   const totalSteps = (data?.cards.length || 0) + (data?.questions.length || 0);
   const completedSteps = (data?.lesson.progress.cards_completed || 0) + (data?.lesson.progress.checkpoints_correct || 0);
 
@@ -94,9 +102,14 @@ function LessonReader({ lessonId, onClose, onProgress }) {
     finally { setBusy(false); }
   }
 
-  function continueAfterAnswer() {
-    setFeedback(null); setChoice("");
-    if (feedback?.correct) setViewStep(data?.next_step || null);
+  async function continueAfterAnswer() {
+    if (busy) return;
+    setBusy(true); setError("");
+    try {
+      await load();
+      setFeedback(null); setChoice("");
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
   }
 
   return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
@@ -109,10 +122,10 @@ function LessonReader({ lessonId, onClose, onProgress }) {
         <div className="grains-reader-content">
           {data.lesson.image_url && <img className="grains-lesson-image" src={data.lesson.image_url} alt={data.lesson.image_alt} />}
           {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
-          {card && <article className="grains-study-card"><p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
-          {question && <div className="grains-question"><p className="grains-card-index">CHECK YOUR UNDERSTANDING</p><h3>{question.prompt}</h3><div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>{feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status"><strong>{feedback.correct ? "That’s right! +1 carrot" : "Not quite. Try again."}</strong><Markdown source={feedback.explanation} /><button className="grains-primary" onClick={continueAfterAnswer}>{feedback.correct ? "Continue →" : "Try another answer"}</button></div> : <button className="grains-primary" disabled={!choice || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}</div>}
-          {!viewStep && <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>All cards read and questions answered. Your garden has grown.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button><div className="grains-revisit"><p>Read again</p>{data.cards.map((item) => <button key={item.id} onClick={() => setViewStep({ type: "revisit", id: item.id })}>{item.title}</button>)}</div></div>}
-          {viewStep?.type === "revisit" && <article className="grains-study-card"><button className="grains-text-button" onClick={() => setViewStep(null)}>← Lesson complete</button><h3>{data.cards.find((item) => item.id === viewStep.id)?.title}</h3><Markdown source={data.cards.find((item) => item.id === viewStep.id)?.body_markdown} /></article>}
+          {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={() => setViewStep({ type: "revisit", id: previousCard.id })}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
+          {question && <div className="grains-question">{previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={() => setViewStep({ type: "revisit", id: previousCard.id })}>← Previous card</button>}<p className="grains-card-index">CHECK YOUR UNDERSTANDING</p><h3>{question.prompt}</h3><div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>{feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status"><strong>{feedback.correct ? "That’s right! +1 carrot" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong><Markdown source={feedback.explanation} /><button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button></div> : <button className="grains-primary" disabled={!choice || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}</div>}
+          {!viewStep && <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>All cards read and questions answered. Your garden has grown.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button><div className="grains-revisit"><p>Review cards</p>{data.cards.map((item) => <button key={item.id} onClick={() => setViewStep({ type: "revisit", id: item.id })}>{item.title}</button>)}</div></div>}
+          {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={() => setViewStep({ type: "revisit", id: previousCard.id })}>← Previous card</button>}<button className="grains-text-button" onClick={() => setViewStep(nextReviewCard ? { type: "revisit", id: nextReviewCard.id } : data.next_step)}>{nextReviewCard ? "Next card →" : data.next_step ? "Return to next step →" : "Lesson complete →"}</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3>{reviewCard.illustration_url && <img src={reviewCard.illustration_url} alt={reviewCard.illustration_alt} />}<Markdown source={reviewCard.body_markdown} /></article>}
         </div>
       </>}
     </section>
@@ -160,7 +173,7 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (!garden || !mount.current) return;
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, onOpenLesson: setLessonId, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -168,7 +181,7 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (garden && garden !== lastGarden.current && scene.current && !scene.current.failed) {
-      scene.current.updateData(adaptGarden(garden), garden.rewards);
+      scene.current.updateData(adaptGarden(garden), garden.rewards, garden.recent_lessons || []);
       lastGarden.current = garden;
     }
   }, [garden]);

@@ -15,7 +15,7 @@ from .api import (
     LearnerState, checkpoint_questions, described, input_error, json_object,
     lesson_summary, lock_learner, next_step, public_question, visible,
 )
-from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .images import image_url
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
@@ -86,6 +86,25 @@ def lesson_detail(request, lesson_id):
                                         "completed": (lesson.pk, q.after_card_position) in state.passed}
                                        for q in checkpoint_questions(state, lesson)],
                          "next_step": next_step(state, lesson)})
+
+
+@never_cache
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
+@require_POST
+@jwt_required
+def open_lesson(request, lesson_id):
+    try:
+        json_object(request, [])
+    except ValidationError as exc:
+        return input_error(exc)
+    with transaction.atomic():
+        lock_learner(request.user)
+        lesson = get_object_or_404(visible(Lesson), pk=lesson_id)
+        opened_at = timezone.now()
+        LessonOpen.objects.update_or_create(
+            user=request.user, lesson=lesson, defaults={"opened_at": opened_at},
+        )
+    return JsonResponse({"lesson_id": str(lesson.pk), "opened_at": opened_at.isoformat()})
 
 
 @never_cache
@@ -179,6 +198,22 @@ def garden(request):
     paths = list(visible(LearningPath))
     lessons = list(visible(Lesson))
     events = reward_events().get(request.user.pk, [])
+    recent_lessons = []
+    for opened in LessonOpen.objects.filter(user=request.user, lesson__in=lessons).select_related(
+        "lesson__learning_path__theme",
+    ).order_by("-opened_at", "-pk"):
+        lesson = opened.lesson
+        step = next_step(state, lesson)
+        if step is None:
+            continue
+        recent_lessons.append({
+            "id": str(lesson.pk), "title": lesson.title,
+            "learning_path_title": lesson.learning_path.title,
+            "theme_title": lesson.learning_path.theme.title,
+            "next_step": step, "progress": state.progress([lesson]),
+        })
+        if len(recent_lessons) == 3:
+            break
     return JsonResponse({
         "themes": [{
             **described(theme),
@@ -191,6 +226,7 @@ def garden(request):
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],
         "rewards": reward_totals(events),
+        "recent_lessons": recent_lessons,
     })
 
 
