@@ -5,8 +5,6 @@ after_card_position: 6
 prompt: 'Traduisez en anglais : « Tu rends mes journées plus belles. »'
 accepted_answers:
 - You make my days brighter.
-- You make my days better.
-- You make my days nicer.
 - You brighten my days.
 - You make my days so much brighter.
 explanation: La phrase du cours est « You make my days brighter. ». Comparez le sens et la structure de

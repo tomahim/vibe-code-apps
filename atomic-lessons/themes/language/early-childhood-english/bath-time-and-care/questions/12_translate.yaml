@@ -6,7 +6,5 @@ prompt: 'Traduisez en anglais : « Maintenant tes jambes. »'
 accepted_answers:
 - Now your legs.
 - Now for your legs.
-- Next, your legs.
-- Now let's do your legs.
 explanation: La phrase du cours est « Now your legs. ». Comparez le sens et la structure de votre réponse.
 archived: false

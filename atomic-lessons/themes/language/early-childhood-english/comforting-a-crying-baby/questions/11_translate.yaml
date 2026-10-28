@@ -6,10 +6,8 @@ prompt: 'Traduisez en anglais : « Tu veux que je te prenne ? »'
 accepted_answers:
 - Do you want me to hold you?
 - Do you want me to pick you up?
-- Do you want me to carry you?
 - Would you like me to hold you?
 - Would you like me to pick you up?
-- Would you like me to carry you?
 explanation: La phrase du cours est « Do you want me to hold you? ». Comparez le sens et la structure
   de votre réponse.
 archived: false
