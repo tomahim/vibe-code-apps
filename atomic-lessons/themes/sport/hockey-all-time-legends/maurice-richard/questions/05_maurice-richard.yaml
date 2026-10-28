@@ -1,0 +1,19 @@
+id: 1689d35f-6cb9-46dc-a35d-b557417d77f4
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the name of Richard's line in the 1940s?"
+choices:
+  - id: 28bbf46b-0bc8-45a7-b408-4ce24cd03c34
+    text: "The French Connection"
+  - id: 3e9a18dc-40ba-44a5-9861-458763144dc6
+    text: "The Punch Line"
+  - id: b8ef6b2f-5107-4df2-bfd2-a743d9030b9a
+    text: "The Kid Line"
+  - id: c17edc7f-12c6-4c63-bf11-ade3942429c0
+    text: "The Production Line"
+correct_choice_ids:
+  - 3e9a18dc-40ba-44a5-9861-458763144dc6
+explanation: "Richard played with Elmer Lach and Toe Blake."
+archived: false

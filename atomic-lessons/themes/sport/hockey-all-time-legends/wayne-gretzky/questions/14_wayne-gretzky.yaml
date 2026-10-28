@@ -1,0 +1,19 @@
+id: 173139e4-3844-4984-939d-58e531a7e5cf
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What happened to number 99 in 2000?"
+choices:
+  - id: 916fe045-3618-4976-a036-6c50cb865e5f
+    text: "The NHL retired it for every team"
+  - id: 8a060726-3595-4e23-9889-f0fb8399f4ae
+    text: "It was given to a Kings rookie"
+  - id: 4524ef7e-3268-42a6-bb63-2f02d08e5aad
+    text: "It was banned"
+  - id: b2ae796b-17fa-4f91-bf37-2475ca74d554
+    text: "It was retired in Edmonton only"
+correct_choice_ids:
+  - 916fe045-3618-4976-a036-6c50cb865e5f
+explanation: "The NHL retired 99 league-wide on February 6, 2000."
+archived: false

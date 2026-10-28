@@ -1,0 +1,9 @@
+id: e929dcf6-bc86-4cd1-a306-80afb1cca387
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Gretzky retire from the NHL?"
+accepted_answers:
+  - "1999"
+explanation: "He played his final game on April 18, 1999 at Madison Square Garden."
+archived: false

@@ -1,0 +1,19 @@
+id: 85667651-a7d8-4749-94fe-15216ee916d3
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why was Hull called the Golden Jet?"
+choices:
+  - id: 5c0ad1bb-aeeb-405c-84b0-28c1da4a4ae2
+    text: "Because he played for the Winnipeg Jets first"
+  - id: 51fa1e78-1a0f-4ff4-b470-906944e3a8bf
+    text: "For his golden skates"
+  - id: b73fbd5e-b267-4bcc-9635-ac927cacf067
+    text: "For his blond hair and speed"
+  - id: 028558b2-5e00-41e8-822e-a9a233b755f8
+    text: "For winning an Olympic gold"
+correct_choice_ids:
+  - b73fbd5e-b267-4bcc-9635-ac927cacf067
+explanation: "The nickname referred to his blond hair and his blazing speed."
+archived: false

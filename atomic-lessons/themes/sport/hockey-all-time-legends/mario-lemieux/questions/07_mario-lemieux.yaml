@@ -1,0 +1,10 @@
+id: 654f7f50-d830-423e-992a-62a224925019
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many goals did Lemieux score in his New Year's Eve game against New Jersey?"
+accepted_answers:
+  - "5"
+  - "five"
+explanation: "He scored five goals, each of a different type."
+archived: false

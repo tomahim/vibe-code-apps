@@ -1,0 +1,19 @@
+id: cded2f1d-9506-4303-afc0-1e90b9094c61
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who was the Canadiens general manager who finally signed Beliveau?"
+choices:
+  - id: 81a10c6d-c61b-47f8-8b7f-4b4a73fdcd36
+    text: "Sam Pollock"
+  - id: d27b93d2-2e28-4102-ace8-1e512a4901ec
+    text: "Clarence Campbell"
+  - id: 4daacd90-77ff-4cf8-bc3e-33eb17ceb8e3
+    text: "Conn Smythe"
+  - id: 09cdff66-a01d-4344-9b1d-8a5e956722c0
+    text: "Frank Selke"
+correct_choice_ids:
+  - 09cdff66-a01d-4344-9b1d-8a5e956722c0
+explanation: "Selke joked that all he did was open the Forum vault."
+archived: false

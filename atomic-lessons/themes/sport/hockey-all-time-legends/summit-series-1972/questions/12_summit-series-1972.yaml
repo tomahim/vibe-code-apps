@@ -1,0 +1,19 @@
+id: a21ee874-7573-4637-baa4-c919ace63b46
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who scored the winner in Games 6 and 7 for Canada?"
+choices:
+  - id: 1b69de08-6b0e-43fb-aed3-0daf48cca6eb
+    text: "Yvan Cournoyer"
+  - id: b3b6b69f-3720-4ec0-9aed-ac2766af3f31
+    text: "Paul Henderson"
+  - id: 7433e0de-3d7d-4a9c-be24-40eecdd55e0c
+    text: "Bobby Orr"
+  - id: 223953f4-4fe2-484a-bf05-61fb91ef35a4
+    text: "Phil Esposito"
+correct_choice_ids:
+  - b3b6b69f-3720-4ec0-9aed-ac2766af3f31
+explanation: "Henderson scored all three winning goals at the end."
+archived: false

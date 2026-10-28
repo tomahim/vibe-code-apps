@@ -1,0 +1,19 @@
+id: 5d22746c-4cb6-44c2-a5c6-777b4b92216c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was Orr's plus-minus rating in the record 1970-71 season?"
+choices:
+  - id: 9c43f799-266f-4591-bb46-30e73982091e
+    text: "Plus-200"
+  - id: 4581d827-ed48-4c32-b226-c3abf4bbb430
+    text: "Plus-60"
+  - id: 650e7e01-362e-4c1f-922b-cf629eff6984
+    text: "Plus-124"
+  - id: 4d309932-60a7-410e-b512-789230d75c97
+    text: "Plus-30"
+correct_choice_ids:
+  - 650e7e01-362e-4c1f-922b-cf629eff6984
+explanation: "His rating of plus-124 is an NHL record."
+archived: false

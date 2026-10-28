@@ -1,0 +1,19 @@
+id: 8703a162-9183-48d6-9de1-2a4e95e0725b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many points did he score in 1988-89?"
+choices:
+  - id: 7d024c2b-a2f7-4118-b79d-008659f23ebd
+    text: "215"
+  - id: 25228da3-9e78-48e6-bb0e-4b32734ca3c6
+    text: "120"
+  - id: 1425bb9c-2ad8-40a2-a69a-6f82d5e3da9c
+    text: "199"
+  - id: 112996f2-550e-4aa0-930c-04d8bae3ed6b
+    text: "160"
+correct_choice_ids:
+  - 1425bb9c-2ad8-40a2-a69a-6f82d5e3da9c
+explanation: "He had 85 goals and 114 assists for 199 points."
+archived: false

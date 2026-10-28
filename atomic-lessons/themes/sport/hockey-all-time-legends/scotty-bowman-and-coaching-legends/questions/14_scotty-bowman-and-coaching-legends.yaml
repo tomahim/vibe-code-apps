@@ -1,0 +1,19 @@
+id: abef851c-c6cb-4540-b0f1-0d383a9b80f0
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year did Bowman break Blake's record of eight Cups?"
+choices:
+  - id: 239cb54c-8169-4fa9-b81c-e27ef5675862
+    text: "1992"
+  - id: 7e5e69de-97c7-4f8f-844e-10155e203e4f
+    text: "2002"
+  - id: e19e0677-5d30-473e-8ae3-5357dd0ae8d8
+    text: "2008"
+  - id: 85e928f1-aae3-486b-9ae7-3e53315fc7bf
+    text: "1979"
+correct_choice_ids:
+  - 7e5e69de-97c7-4f8f-844e-10155e203e4f
+explanation: "He did it with Detroit."
+archived: false

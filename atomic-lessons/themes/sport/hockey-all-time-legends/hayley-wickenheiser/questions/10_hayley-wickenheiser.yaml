@@ -1,0 +1,19 @@
+id: ad1aaaf6-6ded-4c32-94f1-cac4abf494d7
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which men's league did she try out in Sweden in 2007?"
+choices:
+  - id: b900d8a6-8a38-4930-8b00-f11093cbadf7
+    text: "The Elite League"
+  - id: 10c82552-7ebc-4dbb-aea4-e25da1d2e886
+    text: "Third division (IFK Arboga)"
+  - id: 413faa14-6407-43da-a4f1-7ab548ed1be0
+    text: "The Junior league"
+  - id: 21e00e5b-d7e7-4dc6-8cbc-74c73577c82c
+    text: "The Swedish Hockey League"
+correct_choice_ids:
+  - 10c82552-7ebc-4dbb-aea4-e25da1d2e886
+explanation: "She tried out with IFK Arboga."
+archived: false

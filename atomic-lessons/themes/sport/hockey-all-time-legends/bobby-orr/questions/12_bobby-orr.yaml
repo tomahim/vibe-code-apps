@@ -1,0 +1,19 @@
+id: 7f35cd73-956f-43a6-b064-f1df8e561aa3
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many consecutive Norris Trophies did Orr win?"
+choices:
+  - id: 7f55fb1a-9d80-4ff0-ab01-ccb4a1af782d
+    text: "Eleven"
+  - id: 4a00f28f-d592-455e-abde-61946d39c135
+    text: "Three"
+  - id: 01998399-8f25-4180-8070-56eb5c8cb8d2
+    text: "Five"
+  - id: 3265f430-796b-4eab-911f-75a428e8a9ac
+    text: "Eight"
+correct_choice_ids:
+  - 3265f430-796b-4eab-911f-75a428e8a9ac
+explanation: "He won eight in a row from 1967-68 through 1974-75."
+archived: false

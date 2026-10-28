@@ -1,0 +1,19 @@
+id: 88c4d11c-0b2c-4352-9be7-33e6f2a641aa
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who scored the power-play goal that tied the game 3-3?"
+choices:
+  - id: 6a4555b8-a76a-4e98-8e63-364c65bd95b7
+    text: "Mark Johnson"
+  - id: 91a098ab-157f-41f4-a3bd-c224e66c6afc
+    text: "Jim Craig"
+  - id: 9c13d7c1-f3b7-47f8-b87a-fb9f698ecc16
+    text: "Mike Eruzione"
+  - id: 646e4323-d0c4-45cc-8ade-f3e9a5cf64f8
+    text: "Herb Brooks"
+correct_choice_ids:
+  - 6a4555b8-a76a-4e98-8e63-364c65bd95b7
+explanation: "Johnson tied it, and Eruzione scored the winner."
+archived: false

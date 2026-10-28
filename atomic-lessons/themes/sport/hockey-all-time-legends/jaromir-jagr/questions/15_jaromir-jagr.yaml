@@ -1,0 +1,9 @@
+id: 4cc3f11d-06bb-4296-b23c-46f9cd2fd3d5
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did the Czech Republic win its first Olympic ice hockey gold?"
+accepted_answers:
+  - "1998"
+explanation: "The Czechs won in Nagano in 1998."
+archived: false

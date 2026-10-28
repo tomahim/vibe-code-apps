@@ -1,0 +1,19 @@
+id: d7a146c5-43b7-48bc-b68d-52f1396acc35
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was the score after two periods in Game 8?"
+choices:
+  - id: 32a1fa96-a504-44e2-b7e5-2d68ab4f09f8
+    text: "USSR 5, Canada 3"
+  - id: f2de9711-809e-426a-be74-ff39fb8c3571
+    text: "Canada 4, USSR 4"
+  - id: eb932a7d-0800-4ac4-853a-62f025773c93
+    text: "Canada 3, USSR 2"
+  - id: b30a0153-8771-4f95-a024-36dc8fa40e90
+    text: "USSR 2, Canada 1"
+correct_choice_ids:
+  - 32a1fa96-a504-44e2-b7e5-2d68ab4f09f8
+explanation: "Canada trailed by two goals."
+archived: false

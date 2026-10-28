@@ -1,0 +1,9 @@
+id: fee8f6e5-0577-4016-ac09-459a5d65cfc2
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Crosby score the overtime gold-medal goal in Vancouver?"
+accepted_answers:
+  - "2010"
+explanation: "He scored it on February 28, 2010."
+archived: false

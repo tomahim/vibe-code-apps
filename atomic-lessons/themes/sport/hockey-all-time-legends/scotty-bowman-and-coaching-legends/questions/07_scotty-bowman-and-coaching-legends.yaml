@@ -1,0 +1,9 @@
+id: 423e2743-af1e-4944-8b5f-5ae0affa7157
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did the Penguins win the Cup with Bowman as coach after Bob Johnson fell ill?"
+accepted_answers:
+  - "1992"
+explanation: "Pittsburgh repeated in 1992."
+archived: false

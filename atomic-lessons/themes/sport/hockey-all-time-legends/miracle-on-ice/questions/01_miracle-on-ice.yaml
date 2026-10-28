@@ -1,0 +1,19 @@
+id: 54a8f2d0-0418-493d-8b08-a381a76dfd06
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where were the 1980 Winter Olympics held?"
+choices:
+  - id: dac1b6a0-004d-4c94-ac0b-5c22e981e3ae
+    text: "Lake Placid, New York"
+  - id: 3b6fe4fd-359e-4c13-b73e-fd127083a354
+    text: "Squaw Valley, California"
+  - id: 629cecd7-222c-4e08-89ce-069af9eb90df
+    text: "Calgary, Alberta"
+  - id: d170d199-5be9-4922-8119-85b692bb4d55
+    text: "Sapporo, Japan"
+correct_choice_ids:
+  - dac1b6a0-004d-4c94-ac0b-5c22e981e3ae
+explanation: "The Miracle on Ice happened at the Lake Placid Games."
+archived: false

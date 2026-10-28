@@ -1,0 +1,19 @@
+id: 858a95cf-c2d8-44d2-9dcd-9d209a5638ed
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How old was Howe when he scored 103 points in 1968-69?"
+choices:
+  - id: 0e100dcf-dd48-4275-9fba-695ecff84437
+    text: "40"
+  - id: 9c95c235-a0a4-4c80-8f63-198c024ee954
+    text: "25"
+  - id: 30e7c191-daa6-4d95-afc4-4102d7cc7c13
+    text: "33"
+  - id: c02fdc63-1da7-4d1e-b685-e222853ae419
+    text: "47"
+correct_choice_ids:
+  - 0e100dcf-dd48-4275-9fba-695ecff84437
+explanation: "He was 40 in 1968-69, the apex of a long career according to Britannica."
+archived: false

@@ -1,0 +1,10 @@
+id: 95811e84-3d6f-4c27-a233-9545c6944594
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many Hart Trophies did Hasek win?"
+accepted_answers:
+  - "2"
+  - "two"
+explanation: "He won in 1997 and 1998, the only goalie to win twice."
+archived: false

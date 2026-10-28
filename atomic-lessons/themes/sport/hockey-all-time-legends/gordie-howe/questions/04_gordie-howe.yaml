@@ -1,0 +1,19 @@
+id: 309ec4c0-ccc3-44a6-a0f9-202900c5320a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Roughly when did Howe's NHL career begin?"
+choices:
+  - id: 07609f4d-a256-41b1-a023-832f4f1cd3ef
+    text: "1970"
+  - id: eaad232c-5723-4064-87a2-05bfff3c9a95
+    text: "1932"
+  - id: 024797eb-09a9-449c-a8fd-cda687865122
+    text: "1946"
+  - id: 16696c5a-5c20-404e-8ea3-3a3367e3b236
+    text: "1958"
+correct_choice_ids:
+  - 024797eb-09a9-449c-a8fd-cda687865122
+explanation: "He joined Detroit in 1946, at age 18."
+archived: false

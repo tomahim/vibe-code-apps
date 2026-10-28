@@ -1,0 +1,19 @@
+id: 0b8475d3-9315-4e93-8653-ed2c2c845ef5
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many goals did Beliveau score in his NHL regular-season career?"
+choices:
+  - id: 97919c70-c65b-4630-bee7-d741a8c15559
+    text: "801"
+  - id: 826639c9-d3b3-4a88-afa7-a1047c7692ea
+    text: "400"
+  - id: e97ccd1d-c8e1-44e0-ac53-a74997643e93
+    text: "650"
+  - id: 9e41b2cd-c9db-4b18-894d-82d363144f63
+    text: "507"
+correct_choice_ids:
+  - 9e41b2cd-c9db-4b18-894d-82d363144f63
+explanation: "He scored 507 goals and 1,219 points."
+archived: false

@@ -1,0 +1,19 @@
+id: b9441ee4-ea3f-458a-a224-72e912ad131c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which country did she play for the men's team HC Salamat?"
+choices:
+  - id: 86f38e58-82af-4fe8-9ea2-e0d36c25dfd4
+    text: "Switzerland"
+  - id: a21860e5-7e1c-4224-9d60-84d7ee2d05ae
+    text: "Sweden"
+  - id: 2d0aae47-8478-48b1-8f13-3f08860f99cd
+    text: "Russia"
+  - id: 68b06a0d-eebe-4633-952c-eec2107c02fe
+    text: "Finland"
+correct_choice_ids:
+  - 68b06a0d-eebe-4633-952c-eec2107c02fe
+explanation: "She was the first woman to play full-time pro hockey outside goal."
+archived: false

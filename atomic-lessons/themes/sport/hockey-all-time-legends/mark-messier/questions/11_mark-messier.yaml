@@ -1,0 +1,19 @@
+id: cedc1f29-6e18-43c1-9988-bce1e41a44ac
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Messier score in Game 6 after his guarantee?"
+choices:
+  - id: d7e36baa-81f9-4ecc-a608-6cf85f42418e
+    text: "A penalty shot"
+  - id: 77365919-68c0-489e-b963-b6dd40e95488
+    text: "A third-period hat trick"
+  - id: c6602156-76ea-464e-8e99-c932ba295c0c
+    text: "Two shorthanded goals"
+  - id: 14507e0c-29d1-4fdb-9a30-97455d662daf
+    text: "An overtime winner"
+correct_choice_ids:
+  - 77365919-68c0-489e-b963-b6dd40e95488
+explanation: "He scored three goals in the third period."
+archived: false

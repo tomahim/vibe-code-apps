@@ -1,0 +1,19 @@
+id: 54c464af-0bd7-43bc-ba1d-06cf2c345651
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Canadiens captain appeared in a famous photo standing in front of a Hull slap shot?"
+choices:
+  - id: 2209a590-beab-441e-a5e2-01acdd19afc6
+    text: "Maurice Richard"
+  - id: 36aaafd9-41c2-4e0b-80c6-e592064fb2d7
+    text: "Yvan Cournoyer"
+  - id: 4fc6cb18-aed4-4cd4-8f3c-33bffe67d072
+    text: "Henri Richard"
+  - id: 5fa3eb6a-42fa-4f8f-95b7-6008d2ee0727
+    text: "Jean Beliveau"
+correct_choice_ids:
+  - 5fa3eb6a-42fa-4f8f-95b7-6008d2ee0727
+explanation: "Beliveau later joked that he was trying to get as thin as he could."
+archived: false

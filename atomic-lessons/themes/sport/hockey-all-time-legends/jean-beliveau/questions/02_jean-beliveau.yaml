@@ -1,0 +1,19 @@
+id: e4c57109-3828-4ab1-a4a0-8a47d3be4b8f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What sport was Beliveau offered a minor-league contract in at 16?"
+choices:
+  - id: c952f8c9-c55e-411a-b69f-3f6c683b0d76
+    text: "Baseball"
+  - id: a9f207c6-010d-4c7d-986e-7a34a1c81c6a
+    text: "Basketball"
+  - id: 7c9d9539-3148-43bc-9ee1-f0a789b8be1b
+    text: "Boxing"
+  - id: 51256398-0dcf-4c90-925f-be6f65d37aaa
+    text: "Football"
+correct_choice_ids:
+  - c952f8c9-c55e-411a-b69f-3f6c683b0d76
+explanation: "His mother declined the baseball offer on his behalf."
+archived: false

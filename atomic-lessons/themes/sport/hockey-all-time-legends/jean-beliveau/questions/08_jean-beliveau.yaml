@@ -1,0 +1,10 @@
+id: 9a0bb166-4eaa-4d2f-8d2c-f9a211fd7a9b
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which trophy did Beliveau win first in 1965?"
+accepted_answers:
+  - "Conn Smythe"
+  - "Conn Smythe Trophy"
+explanation: "He was awarded the inaugural Conn Smythe Trophy in 1965."
+archived: false

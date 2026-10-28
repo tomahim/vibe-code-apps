@@ -1,0 +1,19 @@
+id: 0fb1e837-523e-4948-a1e3-40fb443a37dd
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What effect of the radiation therapy did Lemieux suffer afterward?"
+choices:
+  - id: 1acd9a7d-52c8-4189-9805-e77a10e8d159
+    text: "Loss of vision"
+  - id: 98661f38-921f-4c80-9211-5176df3c3f3f
+    text: "Memory loss"
+  - id: 45e7fe42-4dcd-4a79-8c8a-e630a58f8639
+    text: "Loss of speed"
+  - id: 89eeefe7-2c2d-4ff5-9fd0-857d5da9d007
+    text: "Anemia and fatigue"
+correct_choice_ids:
+  - 89eeefe7-2c2d-4ff5-9fd0-857d5da9d007
+explanation: "The radiation caused anemia and fatigue, so he sat out 1994-95."
+archived: false

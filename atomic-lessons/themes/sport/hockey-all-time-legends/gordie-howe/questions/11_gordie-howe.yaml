@@ -1,0 +1,19 @@
+id: 9a45064c-26d2-4059-96d5-f3c1429f6691
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which statement about Howe's shooting is true?"
+choices:
+  - id: 7b4b4335-8bad-44f2-8dcf-0d1f1af60cd9
+    text: "He mainly used slap shots from the point"
+  - id: ea4536a4-e9f0-43ee-96bd-1abcd0c46c83
+    text: "He could shoot hard wrist shots with either hand"
+  - id: 20d6c242-9424-4771-a4b5-8e3cedc9a299
+    text: "He never scored from the left side"
+  - id: fdb53fd7-e683-4773-9f3c-82024b02f724
+    text: "He only shot left-handed"
+correct_choice_ids:
+  - ea4536a4-e9f0-43ee-96bd-1abcd0c46c83
+explanation: "Britannica notes skillful wrist shots he could make with either hand."
+archived: false

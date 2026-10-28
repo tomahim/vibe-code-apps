@@ -1,0 +1,19 @@
+id: 75c824b9-210d-4239-a58d-a5b11d489f08
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Whose career wins record did Roy pass in 2000-01?"
+choices:
+  - id: 04f4496e-5ef8-47f5-a668-6b432400d6b1
+    text: "Terry Sawchuk's"
+  - id: e34a82af-62fe-4b4e-83f0-2c9af4190028
+    text: "Ken Dryden's"
+  - id: efb2d9af-5549-428a-92c2-0bea290e5e06
+    text: "Martin Brodeur's"
+  - id: 3fed5230-0b3c-4e1f-8c63-e4b2a360a701
+    text: "Jacques Plante's"
+correct_choice_ids:
+  - 04f4496e-5ef8-47f5-a668-6b432400d6b1
+explanation: "He passed Sawchuk's 447 wins."
+archived: false

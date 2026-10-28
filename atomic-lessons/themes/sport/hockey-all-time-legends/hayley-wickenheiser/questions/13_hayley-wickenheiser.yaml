@@ -1,0 +1,19 @@
+id: 0ea88984-819c-45ff-8813-c4f6cb5d5068
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which NHL team hired her in 2018 in player development?"
+choices:
+  - id: b8287929-c6ae-40fd-9383-7496865b8bd5
+    text: "Toronto Maple Leafs"
+  - id: 88c1b4ec-2c7f-4fc2-82f9-ea675099a14f
+    text: "Edmonton Oilers"
+  - id: f8da1e04-bfeb-49c3-8afc-857c382429ff
+    text: "Calgary Flames"
+  - id: 84516012-5418-4272-91f1-3449e20d44b1
+    text: "Montreal Canadiens"
+correct_choice_ids:
+  - b8287929-c6ae-40fd-9383-7496865b8bd5
+explanation: "She became Assistant Director of Player Development."
+archived: false

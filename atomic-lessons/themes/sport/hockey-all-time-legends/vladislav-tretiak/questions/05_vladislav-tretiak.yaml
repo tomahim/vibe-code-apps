@@ -1,0 +1,19 @@
+id: e1eb9f6c-d9d4-4e5e-8a11-6e2d0259b457
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the result of Game 1 of the Summit Series in Montreal?"
+choices:
+  - id: f71e5d70-1c0c-4afe-94cb-5e1ee496088d
+    text: "Canada won 5-0"
+  - id: 3e6596af-fa9c-4567-9be6-6179f9082850
+    text: "Canada won 7-3"
+  - id: f207871e-61f2-47af-88b9-a0b7bc1b20d9
+    text: "USSR won 7-3"
+  - id: d9d9dad0-f215-4338-a3a1-67b88e6d5f59
+    text: "The game ended 4-4"
+correct_choice_ids:
+  - f207871e-61f2-47af-88b9-a0b7bc1b20d9
+explanation: "Tretiak made 29 saves in the Soviet win."
+archived: false

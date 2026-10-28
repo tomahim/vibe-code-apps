@@ -1,0 +1,19 @@
+id: b0697960-a5ee-40dd-8cf5-745688925f63
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What kind of player was Messier on those Oilers teams?"
+choices:
+  - id: 1b2cac22-3557-41aa-b0ed-b517a988f742
+    text: "Fast, powerful and good at both ends of the ice"
+  - id: cfe10921-08f3-450b-8883-38c568007583
+    text: "A goalie coach"
+  - id: 1ae66c5c-df8d-40f2-806b-40fcdc40df03
+    text: "A defensive specialist"
+  - id: 85014e3e-74e4-496c-a7ca-d62508a55bdf
+    text: "Only a goal scorer"
+correct_choice_ids:
+  - 1b2cac22-3557-41aa-b0ed-b517a988f742
+explanation: "HHOF calls him a two-way player who excelled at both ends of the ice."
+archived: false

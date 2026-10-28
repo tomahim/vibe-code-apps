@@ -1,0 +1,19 @@
+id: 2478af55-66fe-46bd-ae2c-c7fe18956787
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was the score after two periods?"
+choices:
+  - id: 58781436-6717-4ee2-93c6-910d26ecc7be
+    text: "USSR 4, USA 1"
+  - id: e0e71c83-3914-42ee-bda2-65b981206f79
+    text: "USSR 3, USA 2"
+  - id: be9a1adf-93e7-4a67-827a-018452228e03
+    text: "USA 3, USSR 2"
+  - id: 9e1d81d4-0016-45b8-ad83-228ed06c4068
+    text: "2-2"
+correct_choice_ids:
+  - e0e71c83-3914-42ee-bda2-65b981206f79
+explanation: "The Soviets led 3-2 going into the third."
+archived: false

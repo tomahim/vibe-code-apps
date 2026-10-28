@@ -1,0 +1,19 @@
+id: 0345f2f3-d86c-4cd4-afd9-1e2d8577920b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which Soviet legend was a goaltending coach in Chicago during Hasek's early NHL years?"
+choices:
+  - id: 2099a689-91e0-436e-84ec-5b8e6eb637d2
+    text: "Anatoli Tarasov"
+  - id: 807be510-fd25-44af-973d-31e974a7a943
+    text: "Vladimir Myshkin"
+  - id: 5ab54e48-7ccf-47b2-a8ce-a8467375b93d
+    text: "Vladislav Tretiak"
+  - id: 87d923cd-18d4-499c-9735-3ffcc9c793b4
+    text: "Viktor Tikhonov"
+correct_choice_ids:
+  - 5ab54e48-7ccf-47b2-a8ce-a8467375b93d
+explanation: "Tretiak coached goalies for the Blackhawks."
+archived: false

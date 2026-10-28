@@ -1,0 +1,10 @@
+id: 64c9a5e9-6800-4f22-8656-56c1d48fa64e
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Olympic gold medals did Wickenheiser win?"
+accepted_answers:
+  - "4"
+  - "four"
+explanation: "She won four golds and one silver."
+archived: false

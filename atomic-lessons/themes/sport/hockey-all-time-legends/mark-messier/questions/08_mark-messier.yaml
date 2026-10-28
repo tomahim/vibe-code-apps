@@ -1,0 +1,10 @@
+id: 74519657-2c54-40c6-a3f9-71d4666a0a07
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Messier win the Hart Trophy with Edmonton and lead them to their fifth Cup?"
+accepted_answers:
+  - "1990"
+  - "1989-90"
+explanation: "He had 129 points in 1989-90."
+archived: false

@@ -1,0 +1,19 @@
+id: 26ddea13-a7ce-4b4c-bbca-72556331a1d0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "From which university did most of the American players come?"
+choices:
+  - id: 374276c3-c489-4a2d-aac6-8ff38638125e
+    text: "Harvard"
+  - id: 3dae5337-2f7e-4385-bc40-10fea333967a
+    text: "University of Minnesota"
+  - id: a7354b6b-f699-498d-8f09-796238606e69
+    text: "University of Michigan"
+  - id: 6d44bea5-a851-47d5-b5b8-70fdac969040
+    text: "Boston University"
+correct_choice_ids:
+  - 3dae5337-2f7e-4385-bc40-10fea333967a
+explanation: "Most were drawn from Minnesota."
+archived: false

@@ -1,0 +1,19 @@
+id: 28ac9cf2-ff1b-4da2-82e6-146f7211c0e5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many regular-season wins did Bowman have?"
+choices:
+  - id: 410ab4bc-ca41-4a0e-a948-365057435e07
+    text: "1,000"
+  - id: 48f4df6b-9e1f-47a3-aa82-2b3fc0e91f2a
+    text: "1,606"
+  - id: 9225baa2-18f8-43bf-a0e4-9c1e25f04557
+    text: "801"
+  - id: ab048167-42c2-4379-b89f-e17de6081885
+    text: "1,244"
+correct_choice_ids:
+  - ab048167-42c2-4379-b89f-e17de6081885
+explanation: "Bowman holds the NHL record with 1,244."
+archived: false

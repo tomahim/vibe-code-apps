@@ -1,0 +1,19 @@
+id: 4342b6fd-7d6c-4950-8429-5243f12fb3e2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "With which league's Houston Aeros did Howe return in 1973?"
+choices:
+  - id: 89d2aa9e-93fd-4bb9-b224-5c3ea51235d4
+    text: "International Hockey League"
+  - id: cd2bddbf-8e22-48d8-a280-d1414efec332
+    text: "Central Hockey League"
+  - id: 2b8747e9-5ae9-4312-8a43-ae63e5404475
+    text: "World Hockey Association"
+  - id: a5fcca74-7552-4d31-b303-823dd8e4b890
+    text: "American Hockey League"
+correct_choice_ids:
+  - 2b8747e9-5ae9-4312-8a43-ae63e5404475
+explanation: "Howe joined the WHA's Houston Aeros to play with his sons Mark and Marty."
+archived: false

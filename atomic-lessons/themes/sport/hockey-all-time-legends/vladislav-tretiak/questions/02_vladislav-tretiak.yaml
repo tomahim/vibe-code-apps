@@ -1,0 +1,19 @@
+id: 23569aad-a6d3-47b2-a64a-c2a8b6e271e2
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "At what age did Tretiak first practice with CSKA?"
+choices:
+  - id: 7442c2f1-edc5-49b1-9452-70b7e7b250cc
+    text: "15"
+  - id: dcd16997-4631-4c8a-a673-99fdad4b4ce1
+    text: "11"
+  - id: 8a706d46-f46d-48a3-bc9f-8e92ffae1637
+    text: "8"
+  - id: 84c4fdfc-fee1-4db4-a82c-e060c3d7ac4c
+    text: "20"
+correct_choice_ids:
+  - 7442c2f1-edc5-49b1-9452-70b7e7b250cc
+explanation: "He joined practice at 15 and the roster two years later."
+archived: false

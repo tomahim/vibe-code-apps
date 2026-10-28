@@ -1,0 +1,19 @@
+id: 79ee8a4b-bd70-4831-ae04-27c9149fa3bd
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long into overtime did The Goal come?"
+choices:
+  - id: 5d637922-e8dc-4426-87d0-892c6521f696
+    text: "12 seconds"
+  - id: 3c7daa41-bbbf-49f8-8b2d-3ca110dc6dc8
+    text: "4 minutes"
+  - id: d83da9ab-ffe3-4abf-8851-e2944b46aa86
+    text: "40 seconds"
+  - id: 13242c19-674f-43bb-b962-e7f55d6ef12b
+    text: "10 minutes"
+correct_choice_ids:
+  - d83da9ab-ffe3-4abf-8851-e2944b46aa86
+explanation: "Orr scored 40 seconds into overtime."
+archived: false

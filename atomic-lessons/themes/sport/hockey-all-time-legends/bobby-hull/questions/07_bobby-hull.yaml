@@ -1,0 +1,11 @@
+id: 26a349f3-13e9-4372-8cc5-73fd136423a5
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which player's record of 50 goals did Hull tie in 1961-62? Give the last name."
+accepted_answers:
+  - "Richard"
+  - "Rocket Richard"
+  - "Maurice Richard"
+explanation: "He tied the mark held by Maurice Richard and Bernie Geoffrion."
+archived: false

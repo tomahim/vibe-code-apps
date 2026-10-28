@@ -1,0 +1,9 @@
+id: 1c68453e-d5a0-4a12-9bde-d28ac5a83596
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What was the final score of Game 8? Give it like 6-5 (Canada first)."
+accepted_answers:
+  - "6-5"
+explanation: "Canada won 6-5."
+archived: false

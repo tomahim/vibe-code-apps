@@ -1,0 +1,19 @@
+id: 59550d28-5f49-43bc-9d60-8b16dc9ab17e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which senior team did Beliveau play for from 1951 to 1953?"
+choices:
+  - id: c02128ad-d32b-40d0-aca8-fce844c69e34
+    text: "Montreal Royals"
+  - id: aad22e82-6eaa-43ad-a9df-fc8fa728e99c
+    text: "Trois-Rivieres Reds"
+  - id: a45e1952-26be-4273-a823-2570f21fffb4
+    text: "Quebec Aces"
+  - id: 7b10e51f-89a5-4a11-adf8-baa5ee2f30b1
+    text: "Ottawa Senators"
+correct_choice_ids:
+  - a45e1952-26be-4273-a823-2570f21fffb4
+explanation: "He played for the Quebec Aces before signing with Montreal."
+archived: false

@@ -1,0 +1,10 @@
+id: ed7fd322-764e-426a-a48c-121f4b2d6b6e
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Who was the American captain who scored the winning goal against the USSR? Give the last name."
+accepted_answers:
+  - "Eruzione"
+  - "Mike Eruzione"
+explanation: "Mike Eruzione scored with about ten minutes left."
+archived: false

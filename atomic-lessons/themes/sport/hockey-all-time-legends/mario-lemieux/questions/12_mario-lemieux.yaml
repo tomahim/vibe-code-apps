@@ -1,0 +1,19 @@
+id: de75939e-c2fa-4f61-a380-ccc379f2dac1
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which two seasons did the Penguins win the Cup with Lemieux?"
+choices:
+  - id: 50fef6c2-df4b-41af-be74-a0e5203fc240
+    text: "1988 and 1989"
+  - id: 4b8d9369-8221-4b26-ac66-d15961f5108f
+    text: "1993 and 1994"
+  - id: 2a2c4cd9-1a26-442c-8f52-6efc88881481
+    text: "1991 and 1992"
+  - id: b005ff89-5172-4bd3-a489-528c03895cf4
+    text: "1996 and 1997"
+correct_choice_ids:
+  - 2a2c4cd9-1a26-442c-8f52-6efc88881481
+explanation: "He won the Conn Smythe Trophy both years."
+archived: false

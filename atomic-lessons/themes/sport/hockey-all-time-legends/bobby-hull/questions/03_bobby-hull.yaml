@@ -1,0 +1,19 @@
+id: 38f62d53-1c99-453e-91aa-3c4689079da3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which star retired in 1960, leaving the league searching for a new headliner?"
+choices:
+  - id: 2ecb2677-608b-4377-ba55-963b87ed46d7
+    text: "Maurice Richard"
+  - id: 79f6418d-555c-41b6-bbe6-ba638ee9eaa3
+    text: "Jean Beliveau"
+  - id: e4412022-253e-4bff-85d0-50342bb06037
+    text: "Gordie Howe"
+  - id: 43d5d7c4-cb4a-4877-9489-4d3ac16f9566
+    text: "Bobby Orr"
+correct_choice_ids:
+  - 2ecb2677-608b-4377-ba55-963b87ed46d7
+explanation: "Dave Keon said Hull carried the NHL after the Rocket retired."
+archived: false

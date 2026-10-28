@@ -1,0 +1,10 @@
+id: 3ec34a23-7608-43da-b842-fef00d69419c
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many consecutive Stanley Cups did Montreal win from 1956 to 1960?"
+accepted_answers:
+  - "5"
+  - "five"
+explanation: "Montreal won five in a row."
+archived: false

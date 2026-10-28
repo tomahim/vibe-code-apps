@@ -1,0 +1,19 @@
+id: d96bdc62-a9f0-4094-b720-d53308b44165
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Ontario town did Orr start organized hockey at age 8?"
+choices:
+  - id: ef320d21-39b0-42b5-a84a-0325d7bf9c54
+    text: "Sudbury"
+  - id: 8460b260-7156-4eeb-b8b1-3f0fa29bc33e
+    text: "Parry Sound"
+  - id: a07a7e43-bcbb-4a75-950c-b823415c48a4
+    text: "Peterborough"
+  - id: 19c2fb08-a1a2-4ed9-9470-3dc44bfc3c5f
+    text: "Brantford"
+correct_choice_ids:
+  - 8460b260-7156-4eeb-b8b1-3f0fa29bc33e
+explanation: "Orr grew up in Parry Sound, Ontario."
+archived: false

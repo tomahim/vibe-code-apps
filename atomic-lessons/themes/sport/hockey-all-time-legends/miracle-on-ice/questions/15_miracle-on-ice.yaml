@@ -1,0 +1,9 @@
+id: 96f13a3f-1f49-4a47-8d4d-3d55702ce4a7
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What was the score of the gold-medal game? Give it like 4-2 (USA first)."
+accepted_answers:
+  - "4-2"
+explanation: "The USA beat Finland 4-2."
+archived: false

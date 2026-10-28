@@ -1,0 +1,19 @@
+id: a2b76cb3-608d-496a-b020-873269a75e78
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Canadian slashed Valeri Kharlamov's ankle in Game 6?"
+choices:
+  - id: 8531b210-8cdf-4e3d-9694-9aaa0208430d
+    text: "Yvan Cournoyer"
+  - id: 1f34bd50-57a6-4e34-b596-c62ffb62ac5d
+    text: "Brad Park"
+  - id: 4c9b5ae5-150d-4aa9-a32b-60ed0557c2ec
+    text: "Phil Esposito"
+  - id: 065d33d0-352f-412e-9610-f57f9196ec1b
+    text: "Bobby Clarke"
+correct_choice_ids:
+  - 065d33d0-352f-412e-9610-f57f9196ec1b
+explanation: "Clarke's slash was the series' most controversial moment."
+archived: false

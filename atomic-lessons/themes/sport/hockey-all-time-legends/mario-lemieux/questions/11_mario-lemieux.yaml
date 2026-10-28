@@ -1,0 +1,19 @@
+id: 043ee199-5eb4-47aa-a73b-b4e2956cab92
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "At what age did he retire for the first time, in 1997?"
+choices:
+  - id: bdb3bdcc-c818-4891-915a-8b2414b8f9ba
+    text: "40"
+  - id: 0924bebd-3756-4bb7-af32-c47d1f3a8c04
+    text: "31"
+  - id: da2dabb6-0787-4ce9-ab1a-f5eb13b935c3
+    text: "27"
+  - id: 4c7b77d7-d4db-415e-b57f-c3f5e1adfaff
+    text: "35"
+correct_choice_ids:
+  - 0924bebd-3756-4bb7-af32-c47d1f3a8c04
+explanation: "Lemieux was 31 when he announced his retirement before the 1997 playoffs."
+archived: false

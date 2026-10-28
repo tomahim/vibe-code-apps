@@ -1,0 +1,19 @@
+id: 17678b03-9cf5-493a-bffd-a6ecbe8e485e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who finished second to Ovechkin for the 2005-06 Calder Trophy?"
+choices:
+  - id: 96d1a566-dc9a-4ec4-9777-66b22684d560
+    text: "Evgeni Malkin"
+  - id: c45e2e87-f6f7-4090-96de-a4afc0931261
+    text: "Sidney Crosby"
+  - id: f46ce4f3-505b-4cba-a5a1-4a972d20a868
+    text: "Patrick Kane"
+  - id: 339a0004-2594-400a-806e-44f0992c3865
+    text: "Jonathan Toews"
+correct_choice_ids:
+  - c45e2e87-f6f7-4090-96de-a4afc0931261
+explanation: "Crosby had 102 points and was runner-up."
+archived: false

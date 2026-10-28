@@ -1,0 +1,19 @@
+id: e2b6c911-0ea4-4549-9162-a377340cf35e
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does the statue inspired by The Goal photograph stand?"
+choices:
+  - id: 7dbccd37-caa4-407f-b15e-0e1d6514e17c
+    text: "Outside Chicago's United Center"
+  - id: d6f56c96-12f7-4423-8087-b6b4432383a2
+    text: "Outside Boston's TD Garden"
+  - id: ffc88894-8a64-441c-84e2-40d87c23dd5d
+    text: "At the Hockey Hall of Fame entrance"
+  - id: 9fe58519-b8c0-43de-a822-1208a58d3331
+    text: "In Parry Sound's town hall"
+correct_choice_ids:
+  - d6f56c96-12f7-4423-8087-b6b4432383a2
+explanation: "A statue of the flying Orr stands outside TD Garden."
+archived: false

@@ -1,0 +1,19 @@
+id: 32e478a1-2f09-4688-8f55-931977544b95
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What milestone did Richard reach first in NHL history?"
+choices:
+  - id: ce445dc3-a95a-4692-a049-f859fbede0e9
+    text: "500 career goals"
+  - id: 72962a11-c12d-4640-bbae-bf0acc96a884
+    text: "100 assists in a season"
+  - id: 15bd7d91-089b-40e1-bdaf-1e8bbb4b7c0e
+    text: "300 wins"
+  - id: 7f0514bd-4eab-4980-9a5c-f7421c366a1b
+    text: "1,000 points"
+correct_choice_ids:
+  - ce445dc3-a95a-4692-a049-f859fbede0e9
+explanation: "He was also first with 50 goals in 50 games."
+archived: false

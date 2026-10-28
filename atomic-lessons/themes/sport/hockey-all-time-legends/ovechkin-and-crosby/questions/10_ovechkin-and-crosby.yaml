@@ -1,0 +1,19 @@
+id: fba28a95-52ed-44f0-b5d7-ad06c0878b4d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which season did Ovechkin win his Cup and Conn Smythe?"
+choices:
+  - id: cbe26141-77d3-44ce-a67d-e3f4de044ea1
+    text: "2008-09"
+  - id: fa1d9b5d-f230-4afe-965d-977b4e0d1804
+    text: "2017-18"
+  - id: cbda1f75-b2f2-48f1-bc0a-db75ca813f3f
+    text: "2013-14"
+  - id: 4311104c-824a-4e07-bd93-db7073b20bf5
+    text: "2021-22"
+correct_choice_ids:
+  - fa1d9b5d-f230-4afe-965d-977b4e0d1804
+explanation: "He led the Capitals to their first Stanley Cup."
+archived: false

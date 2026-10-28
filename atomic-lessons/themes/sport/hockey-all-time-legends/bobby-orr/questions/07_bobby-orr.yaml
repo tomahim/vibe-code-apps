@@ -1,0 +1,9 @@
+id: f54cb3b9-a02d-411b-ba99-246a4e08b67b
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Orr and the Bruins win their first Stanley Cup together?"
+accepted_answers:
+  - "1970"
+explanation: "Boston won in 1970 and again in 1972."
+archived: false

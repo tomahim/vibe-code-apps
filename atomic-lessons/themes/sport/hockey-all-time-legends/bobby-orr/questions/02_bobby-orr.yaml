@@ -1,0 +1,19 @@
+id: 62fb6127-cbaa-4fae-a7ac-c47abdddea7f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which junior team did Orr join at age 14?"
+choices:
+  - id: 8f6731b7-893f-44db-a226-8c2aaf5e7444
+    text: "London Knights"
+  - id: 15ece8fc-3a2e-4ae8-b0dc-4af9ea5ab0a9
+    text: "Sault Ste. Marie Greyhounds"
+  - id: 15751eed-f1f6-4277-b71d-e0b0a8ac3276
+    text: "Kitchener Rangers"
+  - id: 6f119e8a-dc52-4cd5-90d2-2febe9d9741b
+    text: "Oshawa Generals"
+correct_choice_ids:
+  - 6f119e8a-dc52-4cd5-90d2-2febe9d9741b
+explanation: "In 1962-63 he played with the Oshawa Generals, against players up to six years older."
+archived: false

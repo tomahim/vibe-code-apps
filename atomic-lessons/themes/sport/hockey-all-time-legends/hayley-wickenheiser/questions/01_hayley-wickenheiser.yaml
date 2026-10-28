@@ -1,0 +1,19 @@
+id: 19723356-7ee0-4ce4-affb-f5afb172ec08
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Saskatchewan town was Wickenheiser born?"
+choices:
+  - id: 1490af1b-8e44-48d1-b738-e07f82339bbf
+    text: "Floral"
+  - id: 0bd5c753-9ccb-42de-b6df-1923ca3c2976
+    text: "Moose Jaw"
+  - id: 86b511e5-ceec-4cbd-afed-7cc99d6c733e
+    text: "Regina"
+  - id: 5466e266-36c5-4235-b651-15f1389a1b7c
+    text: "Shaunavon"
+correct_choice_ids:
+  - 5466e266-36c5-4235-b651-15f1389a1b7c
+explanation: "She was born on August 12, 1978, in Shaunavon."
+archived: false

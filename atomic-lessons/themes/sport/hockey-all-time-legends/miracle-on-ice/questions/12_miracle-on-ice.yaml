@@ -1,0 +1,19 @@
+id: 3a26c05e-5f0f-41cf-af68-4e8edc96d4f2
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was the final score?"
+choices:
+  - id: bf7fe503-0995-4849-bb86-32f4a44ffeeb
+    text: "USSR 4, USA 3"
+  - id: 3ef28e2f-db36-43d4-a36e-cd4b76e08acc
+    text: "USA 5, USSR 3"
+  - id: 690cf313-c979-4ef6-a281-da89c4d4a13d
+    text: "USA 3, USSR 2"
+  - id: 8dd68965-9ca9-41a1-91e0-c16b224b894c
+    text: "USA 4, USSR 3"
+correct_choice_ids:
+  - 8dd68965-9ca9-41a1-91e0-c16b224b894c
+explanation: "The Americans led 4-3 at the final horn."
+archived: false

@@ -1,0 +1,19 @@
+id: 3849627f-6579-4ad4-8df4-7fad3d762af0
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which international body elected her to its Athletes' Commission in 2014?"
+choices:
+  - id: f6f125ac-b6da-4e70-b935-4e658d561a38
+    text: "IIHF"
+  - id: b3ecb072-5517-45ab-a0d0-c502adc2447a
+    text: "International Olympic Committee"
+  - id: 0407088d-6111-44fb-a576-021ffb5d62e1
+    text: "Hockey Canada"
+  - id: 316b5941-d003-4a8f-9ee1-40454ac1f1b2
+    text: "FIFA"
+correct_choice_ids:
+  - b3ecb072-5517-45ab-a0d0-c502adc2447a
+explanation: "She was elected to the IOC Athletes' Commission in 2014."
+archived: false

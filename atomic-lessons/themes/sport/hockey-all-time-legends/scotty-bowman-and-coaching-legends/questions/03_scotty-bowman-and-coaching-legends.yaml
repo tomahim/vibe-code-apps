@@ -1,0 +1,19 @@
+id: dd506ef7-5e1a-4f61-9301-54715e0a7f01
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team did Bowman first coach in the NHL?"
+choices:
+  - id: 7ba1ea03-9c2d-4a8c-aac6-cd169a5a5742
+    text: "St. Louis Blues"
+  - id: 61c41c94-bd7b-462b-b14a-e333b156b1ad
+    text: "Montreal Canadiens"
+  - id: 146a5aa0-5e8c-49e0-be7b-22e0496a9fec
+    text: "Detroit Red Wings"
+  - id: 46196028-ed08-4637-aa67-26b809cb06b7
+    text: "Buffalo Sabres"
+correct_choice_ids:
+  - 7ba1ea03-9c2d-4a8c-aac6-cd169a5a5742
+explanation: "He coached the expansion Blues."
+archived: false

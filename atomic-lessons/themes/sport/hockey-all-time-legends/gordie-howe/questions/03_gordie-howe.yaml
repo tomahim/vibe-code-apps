@@ -1,0 +1,19 @@
+id: f3824ba0-61c4-4e96-948a-2cc3cb3f8ffe
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which number did Howe wear?"
+choices:
+  - id: 9234e390-d00e-4551-8f5e-060403b29477
+    text: "19"
+  - id: 321ffcdf-cac4-4f2a-98e7-0adfe084bfd0
+    text: "4"
+  - id: 37a326e4-c367-4bd6-a567-bf97d07012f5
+    text: "9"
+  - id: 6fb05a94-6876-43ea-b018-453614d809aa
+    text: "99"
+correct_choice_ids:
+  - 37a326e4-c367-4bd6-a567-bf97d07012f5
+explanation: "Howe wore number 9, which Gretzky later admired in his own youth."
+archived: false

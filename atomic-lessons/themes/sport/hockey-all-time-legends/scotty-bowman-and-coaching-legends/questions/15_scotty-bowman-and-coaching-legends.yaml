@@ -1,0 +1,9 @@
+id: c06ba0d4-5cb9-41c8-866e-8218f56216a8
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Viktor Tikhonov's Soviet team win its first Olympic gold from the list 1984, 1988, 1992?"
+accepted_answers:
+  - "1984"
+explanation: "Tikhonov won gold in 1984, 1988 and 1992."
+archived: false

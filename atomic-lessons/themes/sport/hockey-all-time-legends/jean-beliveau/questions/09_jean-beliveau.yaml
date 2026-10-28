@@ -1,0 +1,19 @@
+id: c0892534-5fa6-42d1-8a05-aafaec5183d2
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who praised Beliveau in 1956 as the greatest thing that could happen to the modern game?"
+choices:
+  - id: 8ddc5360-ef91-40c2-a501-fdd62b05e546
+    text: "Detroit's Jack Adams"
+  - id: 18a19fe2-c593-43d5-8b34-f4259f2a22e3
+    text: "Rocket Richard"
+  - id: 8747c8e5-20a3-4ebb-bbae-61752f0ab3d5
+    text: "Toronto owner Conn Smythe"
+  - id: 9df80959-fcc4-4b42-bf28-32c8d4be576e
+    text: "Referee King Clancy"
+correct_choice_ids:
+  - 8747c8e5-20a3-4ebb-bbae-61752f0ab3d5
+explanation: "Conn Smythe said it in a 1956 magazine profile."
+archived: false

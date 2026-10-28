@@ -1,0 +1,9 @@
+id: 19eb5e4b-01e4-4bd6-b5f9-438480decf1f
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many NHL goals did Bobby Hull score in total?"
+accepted_answers:
+  - "610"
+explanation: "He scored 610 goals, third all-time when he retired in 1980."
+archived: false

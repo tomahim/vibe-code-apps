@@ -1,0 +1,19 @@
+id: 0c3e52f1-2c9a-4cf6-a5b6-6154830d83d6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why did Bowman's playing career end?"
+choices:
+  - id: c0bb6ba8-5ec2-4d9f-9556-d46a7667d5cc
+    text: "He was suspended"
+  - id: 2cc09ffc-f7f3-4a67-b4bc-a5290856e544
+    text: "An injury cut it short"
+  - id: 8558a0c3-2d83-483c-9d50-e7006c3cdb70
+    text: "He moved to Europe"
+  - id: a3508470-9024-479a-9bf5-8cb85c3446c4
+    text: "He became a referee"
+correct_choice_ids:
+  - 2cc09ffc-f7f3-4a67-b4bc-a5290856e544
+explanation: "NHL.com says his playing career was cut short by injury, and he turned to coaching."
+archived: false

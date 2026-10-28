@@ -1,0 +1,19 @@
+id: bd0c5918-8264-4961-9533-ec92a761b3de
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Hall of Fame coach compared watching Orr to seeing Secretariat?"
+choices:
+  - id: 9f77d408-524e-4bb6-aa10-83702511dfc5
+    text: "Don Cherry"
+  - id: 0e4c6e44-0999-4a65-b09d-cebf2368f08b
+    text: "Herb Brooks"
+  - id: d645525d-7f5d-49e4-8ffc-853bcf07161a
+    text: "Toe Blake"
+  - id: da7074b5-0395-4f34-9b4b-db082139bfd0
+    text: "Scotty Bowman"
+correct_choice_ids:
+  - 9f77d408-524e-4bb6-aa10-83702511dfc5
+explanation: "Don Cherry coached Orr in 1974-75 and 1975-76."
+archived: false

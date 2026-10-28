@@ -1,0 +1,9 @@
+id: d2f81024-2b0b-4478-a46a-60c784c29e5d
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year did Ovechkin pass Gretzky for the all-time goals record?"
+accepted_answers:
+  - "2025"
+explanation: "The goal was scored on April 6, 2025."
+archived: false

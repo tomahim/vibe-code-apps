@@ -1,0 +1,19 @@
+id: 2ae7d97d-e9cc-4404-ac0d-e76df090d983
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In what year did the Oilers win their first Stanley Cup with Gretzky?"
+choices:
+  - id: d49ee71a-1bb3-4d00-8a85-a064158f0814
+    text: "1982"
+  - id: 80371efe-39bc-4a52-be61-a1d0615a2922
+    text: "1986"
+  - id: 81144b48-3e61-4b05-badb-0825ac31e312
+    text: "1980"
+  - id: e9f1a4f6-0d70-4bd0-849a-51adf83b2857
+    text: "1984"
+correct_choice_ids:
+  - e9f1a4f6-0d70-4bd0-849a-51adf83b2857
+explanation: "The Oilers won in 1984, 1985, 1987 and 1988."
+archived: false

@@ -1,0 +1,19 @@
+id: 69827f1e-7c33-4854-b8ce-d307c4610563
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many NHL seasons did Jagr play?"
+choices:
+  - id: 33f2c110-ed3d-40c6-a66f-a20012380b3d
+    text: "12"
+  - id: 21eb468b-9000-4929-b7b3-4ad33694c96f
+    text: "17"
+  - id: ac87b1b6-4654-4a47-9ae1-656f491befba
+    text: "31"
+  - id: 636a0d10-8ff3-4bc0-bf23-b38b7a712176
+    text: "24"
+correct_choice_ids:
+  - 636a0d10-8ff3-4bc0-bf23-b38b7a712176
+explanation: "He recorded 1,921 points in 24 seasons."
+archived: false

@@ -1,0 +1,19 @@
+id: aae52800-6558-4588-bcea-62f0c4b0c376
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Quebec city was Beliveau born?"
+choices:
+  - id: a662d5dc-3e8e-4b34-be02-7b9f627a276e
+    text: "Montreal"
+  - id: 52e31999-fa85-45bc-8bdf-9ad1327cd18b
+    text: "Quebec City"
+  - id: 92c39f9e-c9a0-4caf-baa6-d66eae01c8a9
+    text: "Trois-Rivieres"
+  - id: 2869dcf9-f98a-4f1b-8ad6-7c85c0026a74
+    text: "Sherbrooke"
+correct_choice_ids:
+  - 92c39f9e-c9a0-4caf-baa6-d66eae01c8a9
+explanation: "He was born on August 31, 1931 in Trois-Rivieres."
+archived: false

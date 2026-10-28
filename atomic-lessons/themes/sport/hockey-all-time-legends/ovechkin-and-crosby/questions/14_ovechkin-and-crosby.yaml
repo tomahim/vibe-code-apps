@@ -1,0 +1,19 @@
+id: 5d27a3ff-ec25-4c97-8973-c64bae9a4bd1
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How did Ovechkin score his 895th goal?"
+choices:
+  - id: cafff4ac-2b0b-4c3f-93b6-a5851edb2601
+    text: "On the power play"
+  - id: f9b09b55-53a9-4b7c-9c67-530e5ec90c59
+    text: "Shorthanded"
+  - id: 85417e80-d908-4395-864a-4b2b6edd1a41
+    text: "Into an empty net"
+  - id: 5228d9f8-ebeb-4a41-b80b-3de7ca7f9457
+    text: "On a penalty shot"
+correct_choice_ids:
+  - cafff4ac-2b0b-4c3f-93b6-a5851edb2601
+explanation: "Dylan Strome and Tom Wilson set him up on the power play."
+archived: false

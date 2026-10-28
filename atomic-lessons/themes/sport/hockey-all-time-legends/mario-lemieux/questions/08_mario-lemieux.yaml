@@ -1,0 +1,10 @@
+id: 8c9fb8dc-b317-4b67-9536-caa1bb0b8da9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which tournament in 1987 gave him confidence, playing with Gretzky for Canada? Give the two-word name."
+accepted_answers:
+  - "Canada Cup"
+  - "the Canada Cup"
+explanation: "Lemieux scored 11 goals at the 1987 Canada Cup, including the winner in the final."
+archived: false

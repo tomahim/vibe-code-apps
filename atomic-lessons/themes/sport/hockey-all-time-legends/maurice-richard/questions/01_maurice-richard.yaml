@@ -1,0 +1,19 @@
+id: 0a83b180-d271-41e7-b019-bff016e5abe1
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which city did Richard grow up?"
+choices:
+  - id: 87fda980-5018-44a6-b96f-2fac849447b5
+    text: "Montreal"
+  - id: 191a7a71-5aa9-4f58-8253-dd68d5912b6c
+    text: "Quebec City"
+  - id: e1e4014e-69fc-44a7-ab08-53d811208aa2
+    text: "Trois-Rivieres"
+  - id: 29566a87-4ce1-448c-8571-4a8cb7803190
+    text: "Ottawa"
+correct_choice_ids:
+  - 87fda980-5018-44a6-b96f-2fac849447b5
+explanation: "Richard grew up in the north end of Montreal."
+archived: false

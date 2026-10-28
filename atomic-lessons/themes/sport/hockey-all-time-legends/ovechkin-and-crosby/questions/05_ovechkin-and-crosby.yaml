@@ -1,0 +1,19 @@
+id: d5001a46-dfdf-40cd-9ab4-788cd9d40a3f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did Crosby become in 2009?"
+choices:
+  - id: f18feeef-3ddf-4c0f-b664-e2c1da2cd02d
+    text: "The youngest captain to win the Stanley Cup"
+  - id: 579b8f51-c8de-459e-8fa6-7775741f36eb
+    text: "The oldest MVP"
+  - id: 552cbae7-6fb5-4cfe-b08d-0dc6fe47683a
+    text: "A coach"
+  - id: 1e483fde-230a-48d6-9a9d-1d89bbae9532
+    text: "The first European Cup winner"
+correct_choice_ids:
+  - f18feeef-3ddf-4c0f-b664-e2c1da2cd02d
+explanation: "He was 21 when he won the Cup as captain."
+archived: false

@@ -1,0 +1,19 @@
+id: 59686dfd-45fe-4bc5-9fb4-5f2d66be83a0
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which record does Jagr hold among NHL players?"
+choices:
+  - id: 42fc4856-37d6-47b5-a9cd-c4e34734e22c
+    text: "Most shutouts"
+  - id: 7885a733-25ec-42a8-aeaf-bd26b72d93b2
+    text: "Most game-winning goals"
+  - id: 02ea511e-50cc-4958-af34-5baaba50a293
+    text: "Most hat tricks"
+  - id: ad3fc0ff-1a6b-4fef-b46c-5dbc10fa55b0
+    text: "Most penalty minutes"
+correct_choice_ids:
+  - 7885a733-25ec-42a8-aeaf-bd26b72d93b2
+explanation: "He has 135 game-winning goals."
+archived: false

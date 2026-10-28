@@ -1,0 +1,9 @@
+id: bafe4ed6-6140-43d2-aeb6-777ac0f5caef
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Howe play one game for the Detroit Vipers?"
+accepted_answers:
+  - "1997"
+explanation: "He signed a one-game contract with the Detroit Vipers in September 1997, at age 69."
+archived: false

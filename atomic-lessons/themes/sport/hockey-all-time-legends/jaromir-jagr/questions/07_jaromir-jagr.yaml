@@ -1,0 +1,10 @@
+id: 43c7a910-3725-42cd-bc7e-00226b244e01
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Art Ross Trophies did Jagr win?"
+accepted_answers:
+  - "5"
+  - "five"
+explanation: "He was one of six players with five or more scoring titles."
+archived: false

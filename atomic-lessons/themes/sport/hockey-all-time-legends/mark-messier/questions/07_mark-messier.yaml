@@ -1,0 +1,10 @@
+id: 79b48de6-02e3-4a7e-951f-d25c0fe2b7c1
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Oilers superstar was traded to Los Angeles in 1988? Give the last name."
+accepted_answers:
+  - "Gretzky"
+  - "Wayne Gretzky"
+explanation: "Gretzky was traded on August 9, 1988."
+archived: false

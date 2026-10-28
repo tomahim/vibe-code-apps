@@ -1,0 +1,19 @@
+id: 4eed2cd4-9c52-4a30-82c8-ccb6acc57f48
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many Cups did Blake win in 13 seasons as Montreal's coach?"
+choices:
+  - id: 5e80f621-160b-42d2-9546-6147514865e6
+    text: "Five"
+  - id: b91be818-f1db-4c5d-ac80-1416e54ad959
+    text: "Eight"
+  - id: 9f4133d5-9ce6-4060-b9f5-3f3543607dd7
+    text: "Three"
+  - id: 0681febe-e356-4d35-9e26-0c2d0600de41
+    text: "Eleven"
+correct_choice_ids:
+  - b91be818-f1db-4c5d-ac80-1416e54ad959
+explanation: "Five of them were consecutive."
+archived: false

@@ -1,0 +1,10 @@
+id: 08c4956f-21fe-4eee-ac26-fdc2c2dfeb39
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Conn Smythe Trophies did Roy win?"
+accepted_answers:
+  - "3"
+  - "three"
+explanation: "He won in 1986, 1993 and 2001."
+archived: false

@@ -1,0 +1,19 @@
+id: 76c9b47e-0daa-44a1-a00b-c20e96589d23
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In what year did Chicago win the Stanley Cup with Hull?"
+choices:
+  - id: 89a5abba-4636-4787-9a99-148bf0e75d01
+    text: "1970"
+  - id: ce1dd760-e56c-4fe6-9da0-9d0218b2983d
+    text: "1965"
+  - id: 6341d5d5-144d-45ca-a6d7-4ffa39a1b0bb
+    text: "1961"
+  - id: 25121739-730b-4e12-b7b7-1e15dfc42909
+    text: "1952"
+correct_choice_ids:
+  - 6341d5d5-144d-45ca-a6d7-4ffa39a1b0bb
+explanation: "It was Chicago's first Cup in 23 years."
+archived: false

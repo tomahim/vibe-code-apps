@@ -1,0 +1,19 @@
+id: 0bfb9a0f-5769-4499-867a-7ef9a613b43d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What happened in Roy's first NHL game?"
+choices:
+  - id: 8b975e7e-a09f-444a-8fee-6bc9841aa9c4
+    text: "He scored a goal"
+  - id: f936d3a3-2afe-4085-9c90-1977666fd5ed
+    text: "He lost 10-0"
+  - id: 426db26e-52ae-4907-b58b-edbbc3948bb6
+    text: "He recorded a shutout"
+  - id: 1c384037-6a8e-4e5d-ba0d-cc27168039bb
+    text: "He came on in relief and won"
+correct_choice_ids:
+  - 1c384037-6a8e-4e5d-ba0d-cc27168039bb
+explanation: "He took over at 4-4 and Montreal won 6-4."
+archived: false

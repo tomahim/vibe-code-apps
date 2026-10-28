@@ -1,0 +1,19 @@
+id: 9a9d7cb2-26e6-40c7-84e3-481a2f2bb822
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Gretzky's late-man trick along the boards involve?"
+choices:
+  - id: e5ef6885-bda6-4b2f-a043-fc39c8dc8afe
+    text: "Shooting from the red line"
+  - id: 1ab3ba13-379e-4578-8512-3e8dd10503fd
+    text: "Passing only to defencemen"
+  - id: ac608120-6137-48fb-bb18-9f4553971357
+    text: "Skating backwards at full speed"
+  - id: c105a6e5-2033-4b85-8ebf-17e783444b02
+    text: "Racing in, then braking so teammates could catch up"
+correct_choice_ids:
+  - c105a6e5-2033-4b85-8ebf-17e783444b02
+explanation: "Harry Sinden said Gretzky made the late man into the zone the most dangerous man."
+archived: false

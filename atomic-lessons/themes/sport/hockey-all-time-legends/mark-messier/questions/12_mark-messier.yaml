@@ -1,0 +1,19 @@
+id: 06f9d1d1-aaf7-487b-b16b-3704c0bccdc5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which player did the Rangers face, and beat, in the 1994 Final?"
+choices:
+  - id: 195ab19c-c7d1-43f8-8726-db0f5c1fd809
+    text: "Patrick Roy and the Canadiens"
+  - id: e506f82e-07e9-47a9-b71b-da08e87c03ad
+    text: "Mario Lemieux and the Penguins"
+  - id: 03b98fd2-a7ef-4ac0-b7f5-dabba0856de5
+    text: "Pavel Bure and the Vancouver Canucks"
+  - id: fbf09f6e-f3a3-4eb7-8479-39a116771abf
+    text: "Jaromir Jagr and the Penguins"
+correct_choice_ids:
+  - 03b98fd2-a7ef-4ac0-b7f5-dabba0856de5
+explanation: "The Rangers beat Vancouver in seven games."
+archived: false

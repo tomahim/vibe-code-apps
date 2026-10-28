@@ -1,0 +1,19 @@
+id: cf54c4f2-ed04-4a8f-94be-b66fda5d5366
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Against which team did Ovechkin score goal 895?"
+choices:
+  - id: 73ec07e7-019b-42e2-b769-4b71c526e008
+    text: "Pittsburgh Penguins"
+  - id: 372c7e17-78d4-4e77-a8f1-769182c508a4
+    text: "New York Islanders"
+  - id: 17390aec-89ad-4e5a-add3-94d8b3aefbc4
+    text: "Montreal Canadiens"
+  - id: 55879310-cf24-4ae6-9cf4-c194efc7f265
+    text: "Boston Bruins"
+correct_choice_ids:
+  - 372c7e17-78d4-4e77-a8f1-769182c508a4
+explanation: "He scored on April 6, 2025."
+archived: false

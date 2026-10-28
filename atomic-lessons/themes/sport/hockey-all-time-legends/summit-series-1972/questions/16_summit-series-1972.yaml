@@ -1,0 +1,10 @@
+id: 6431f35f-72b6-496a-8b61-ee1c5009fd7b
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many goals did Phil Esposito score in the series?"
+accepted_answers:
+  - "7"
+  - "seven"
+explanation: "He led Canada with seven goals and 13 points."
+archived: false

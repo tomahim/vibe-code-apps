@@ -1,0 +1,19 @@
+id: 7f69dd08-b94d-411e-be62-a8393d69f381
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Ontario community was Hull born?"
+choices:
+  - id: 3a85d0df-7e96-42da-92b4-846427a53eb5
+    text: "Sarnia"
+  - id: b033e4b5-3809-457b-a124-58d5475b7263
+    text: "Brantford"
+  - id: 179b56cf-2ef7-432b-a74c-363996f9357f
+    text: "Parry Sound"
+  - id: 2352bc90-5330-4cc6-bf43-4085fe1e45d5
+    text: "Point Anne"
+correct_choice_ids:
+  - 2352bc90-5330-4cc6-bf43-4085fe1e45d5
+explanation: "Hull took his first strides on an open-air rink near the family home in Point Anne."
+archived: false

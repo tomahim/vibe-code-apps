@@ -1,0 +1,19 @@
+id: 4a932613-551e-4974-aabc-bd41940c5aed
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who replaced Tretiak after the first period against the USA in 1980?"
+choices:
+  - id: 037aabee-2e4c-40ab-9b4a-11653405203f
+    text: "Viktor Tikhonov"
+  - id: f58bd505-6ac9-49ea-8101-0df48c08cdb7
+    text: "Valeri Kharlamov"
+  - id: 6734040f-0a6b-482f-8156-0453ee79aa8c
+    text: "Vladimir Myshkin"
+  - id: 0d808d40-72c7-41c7-a20d-1b5d6db2e5c4
+    text: "Boris Mikhailov"
+correct_choice_ids:
+  - 6734040f-0a6b-482f-8156-0453ee79aa8c
+explanation: "Coach Tikhonov made the change."
+archived: false

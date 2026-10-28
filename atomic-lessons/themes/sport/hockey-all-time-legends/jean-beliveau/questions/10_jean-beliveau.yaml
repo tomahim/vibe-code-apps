@@ -1,0 +1,19 @@
+id: 358e4c30-ec20-41f2-b628-251ca008bef4
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Beliveau won the Hart Trophy in 1956 and which other year?"
+choices:
+  - id: 6b6fe732-b1c2-4c74-befb-6c7a1b28ba35
+    text: "1968"
+  - id: 8628fb78-7574-412c-8d3e-4913195d98f3
+    text: "1960"
+  - id: 3bb12df6-9f74-499e-b773-c064f2b89610
+    text: "1971"
+  - id: 8251d3cd-dee7-4ef3-a083-5166bda18fd9
+    text: "1964"
+correct_choice_ids:
+  - 8251d3cd-dee7-4ef3-a083-5166bda18fd9
+explanation: "He was MVP in 1956 and 1964."
+archived: false

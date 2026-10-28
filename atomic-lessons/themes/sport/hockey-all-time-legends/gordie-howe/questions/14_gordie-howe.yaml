@@ -1,0 +1,19 @@
+id: c8b982b4-1a15-48dc-a6a8-457d72f033a6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How old was Howe when he played all 80 games for Hartford in 1979-80?"
+choices:
+  - id: b6f270c7-d1b7-4007-9924-9d5c26b71885
+    text: "60"
+  - id: 6eae87dc-31a4-4299-b402-c93e22348688
+    text: "39"
+  - id: 6948ecd8-3295-43cd-a264-7d7ac175f10a
+    text: "44"
+  - id: b7cac44d-b809-473c-afe5-7d86d5b2195d
+    text: "51"
+correct_choice_ids:
+  - b7cac44d-b809-473c-afe5-7d86d5b2195d
+explanation: "He played the full 1979-80 season at 51."
+archived: false

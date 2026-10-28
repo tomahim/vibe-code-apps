@@ -1,0 +1,19 @@
+id: 1097d3d9-7d62-4472-8159-b33d8a3cfd45
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many goals did Messier score in his third NHL season, 1981-82?"
+choices:
+  - id: b870a02d-25ff-4ca4-9a23-2e5f84f45477
+    text: "71"
+  - id: 986678ec-950c-46d6-b0a5-fec9750543aa
+    text: "50"
+  - id: aa54b18f-2313-437c-9aa3-619aeb266da5
+    text: "25"
+  - id: 456336f5-1360-42e4-9e4c-9d62d456b05f
+    text: "35"
+correct_choice_ids:
+  - 986678ec-950c-46d6-b0a5-fec9750543aa
+explanation: "He doubled his previous total with 50 goals."
+archived: false

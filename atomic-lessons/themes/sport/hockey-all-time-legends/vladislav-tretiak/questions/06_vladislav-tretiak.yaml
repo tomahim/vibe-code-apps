@@ -1,0 +1,19 @@
+id: ec1339f9-f339-41cd-90c7-d10571b185a7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was the final result of the 1972 series?"
+choices:
+  - id: 4523bf92-fe14-486a-8a73-4904ef37d6e6
+    text: "USSR won 5-3"
+  - id: 7c8d7d8a-e3d5-4ef5-9066-9eb10bd814ee
+    text: "USSR won 4-3-1"
+  - id: a3c7a792-c1d6-4d40-a415-d92b57d5dabe
+    text: "Canada won 4-3-1"
+  - id: 3817f85c-1a44-41ec-b46a-77d6146ec91c
+    text: "Canada won 8-0"
+correct_choice_ids:
+  - a3c7a792-c1d6-4d40-a415-d92b57d5dabe
+explanation: "Canada won four, lost three and tied one."
+archived: false

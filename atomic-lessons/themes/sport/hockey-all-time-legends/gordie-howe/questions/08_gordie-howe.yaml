@@ -1,0 +1,10 @@
+id: 57d6a4fa-7498-42b9-b9f0-f288cbceff4c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Hart Trophies did Howe win?"
+accepted_answers:
+  - "6"
+  - "six"
+explanation: "Howe won six Hart Trophies and six Art Ross Trophies."
+archived: false

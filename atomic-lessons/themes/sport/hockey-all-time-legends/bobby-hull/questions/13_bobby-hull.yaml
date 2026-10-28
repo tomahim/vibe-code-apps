@@ -1,0 +1,19 @@
+id: a749fdb1-ad3a-4048-a1eb-f5c500bcd5dc
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which league did Hull join in 1972?"
+choices:
+  - id: 317d97c8-d283-4207-8dc1-a3d196656269
+    text: "Swiss National League"
+  - id: 4b9e36d1-397c-4c7a-8089-08ae01f81635
+    text: "American Hockey League"
+  - id: 36e718ba-574d-4c1d-9b9a-f80546664a07
+    text: "International Hockey League"
+  - id: a0341d49-be1d-4965-89ab-e1370036e575
+    text: "World Hockey Association"
+correct_choice_ids:
+  - a0341d49-be1d-4965-89ab-e1370036e575
+explanation: "He left Chicago for the Winnipeg Jets of the WHA."
+archived: false

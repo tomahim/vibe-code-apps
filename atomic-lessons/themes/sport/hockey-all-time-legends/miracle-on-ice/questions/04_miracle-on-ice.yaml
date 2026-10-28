@@ -1,0 +1,19 @@
+id: 1f498e52-2ddf-434b-82ec-eb2b0c5dfe5e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which team had beaten the USA 10-3 in an exhibition days before the Games?"
+choices:
+  - id: b648765d-0d83-485e-bbf6-833cb257e1e5
+    text: "Czechoslovakia"
+  - id: bee09711-e5da-4063-b9ab-46430855e82c
+    text: "The Soviet Union"
+  - id: 5ac75e31-7767-4ed1-b0a6-3586e522f643
+    text: "Canada"
+  - id: c6cfb2c2-2e3e-493d-af47-935ef992806e
+    text: "Sweden"
+correct_choice_ids:
+  - bee09711-e5da-4063-b9ab-46430855e82c
+explanation: "The USSR won the game at Madison Square Garden."
+archived: false

@@ -1,0 +1,11 @@
+id: f246f9b1-4af2-4987-afe4-0086275ce4aa
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "On what date in February did the USA beat the USSR? Give the day of the month."
+accepted_answers:
+  - "22"
+  - "22nd"
+  - "February 22"
+explanation: "The game was on February 22, 1980."
+archived: false

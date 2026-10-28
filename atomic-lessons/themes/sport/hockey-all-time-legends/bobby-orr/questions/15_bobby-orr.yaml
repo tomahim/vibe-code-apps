@@ -1,0 +1,9 @@
+id: fa7a99d6-a39b-48b2-9663-26ca93b875c5
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Orr sign with the Chicago Black Hawks as a free agent?"
+accepted_answers:
+  - "1976"
+explanation: "He signed on June 24, 1976."
+archived: false

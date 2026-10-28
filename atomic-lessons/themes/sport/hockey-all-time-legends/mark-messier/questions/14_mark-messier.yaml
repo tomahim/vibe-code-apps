@@ -1,0 +1,19 @@
+id: fef14ce7-30ae-409f-a86c-e354bf801c71
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What did Messier become the first player to do?"
+choices:
+  - id: b719b250-31f6-4bd2-ad7e-8864c7673736
+    text: "Play in six decades"
+  - id: 384a478b-df2d-4450-9d80-1293fa6aec35
+    text: "Score 100 goals"
+  - id: 59ef8551-54dc-4339-9830-297037e46b86
+    text: "Captain two different teams to Stanley Cup titles"
+  - id: 2d65a855-f68d-4c18-9414-8fdfad7cad44
+    text: "Win a Cup with three teams"
+correct_choice_ids:
+  - 59ef8551-54dc-4339-9830-297037e46b86
+explanation: "He captained the Oilers and the Rangers to Cups."
+archived: false

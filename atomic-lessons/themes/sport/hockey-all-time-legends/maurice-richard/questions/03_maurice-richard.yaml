@@ -1,0 +1,19 @@
+id: e3b1368a-4038-4fad-865c-94c7791707f0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Richard join the Canadiens?"
+choices:
+  - id: 362bfd1e-0720-412f-9603-1498236ada84
+    text: "1960"
+  - id: 1eae70b2-9b5a-4ddd-8590-77d7dc1e93c4
+    text: "1931"
+  - id: ad251d1a-1660-4bc9-909c-59754eb15560
+    text: "1942"
+  - id: cfac93a4-c901-4c6f-8b77-2a54dcb937ee
+    text: "1950"
+correct_choice_ids:
+  - ad251d1a-1660-4bc9-909c-59754eb15560
+explanation: "He pulled on a Canadiens sweater for the first time in 1942."
+archived: false

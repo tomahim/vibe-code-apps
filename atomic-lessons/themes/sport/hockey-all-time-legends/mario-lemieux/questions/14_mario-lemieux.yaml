@@ -1,0 +1,19 @@
+id: c71af371-0564-4bd8-bad5-16e08070d3bb
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which young star lived in Lemieux's house after the 2005 draft?"
+choices:
+  - id: bbf2d8eb-e775-4ddf-b021-76cead84e530
+    text: "Jaromir Jagr"
+  - id: ca772eee-0f5a-497b-bf34-554b53825f5e
+    text: "Sidney Crosby"
+  - id: a7e71f83-11a7-4e1e-ad04-626f6077e9e0
+    text: "Evgeni Malkin"
+  - id: 791c21ac-18bd-4957-a58b-2431f9ba217a
+    text: "Alex Ovechkin"
+correct_choice_ids:
+  - ca772eee-0f5a-497b-bf34-554b53825f5e
+explanation: "Crosby lived in Lemieux's guest house as an 18-year-old rookie."
+archived: false

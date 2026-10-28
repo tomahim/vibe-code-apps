@@ -1,0 +1,9 @@
+id: 58636efe-a2a9-419a-81df-e1cbd0798a5b
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many goals did Gretzky score in 1981-82, still the single-season record?"
+accepted_answers:
+  - "92"
+explanation: "He scored 92 goals in 1981-82."
+archived: false

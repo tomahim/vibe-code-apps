@@ -1,0 +1,19 @@
+id: 970836d9-311d-4c92-9633-4be2b85890e9
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did Bowman become an NHL head coach?"
+choices:
+  - id: 65b14352-6d49-45cc-ae09-286484fa0535
+    text: "1967"
+  - id: 695ff8d7-8346-40be-9206-2b101ff519ea
+    text: "1971"
+  - id: 59b8921a-a484-4a20-9d1c-c0233b3ba9c5
+    text: "1993"
+  - id: 7fa77ddf-f458-4542-b3ba-91e31a1b2f4a
+    text: "1950"
+correct_choice_ids:
+  - 65b14352-6d49-45cc-ae09-286484fa0535
+explanation: "He started with the St. Louis Blues in 1967."
+archived: false

@@ -1,0 +1,19 @@
+id: c114c167-0215-4874-9816-fd0a829504af
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many Cups did Montreal win under Bowman in the 1970s?"
+choices:
+  - id: 600dcae3-9eb4-4dfa-aa9f-ed7fe2519fd4
+    text: "Five"
+  - id: 936cc45a-e6d9-43b2-8142-c6432ba324e2
+    text: "Eight"
+  - id: 33f54c0c-bc1a-4e17-9a14-8aad01cb7d81
+    text: "One"
+  - id: 00845d4c-341e-4ff8-9da7-fd2943698abb
+    text: "Three"
+correct_choice_ids:
+  - 600dcae3-9eb4-4dfa-aa9f-ed7fe2519fd4
+explanation: "They won in 1973 and 1976 to 1979."
+archived: false

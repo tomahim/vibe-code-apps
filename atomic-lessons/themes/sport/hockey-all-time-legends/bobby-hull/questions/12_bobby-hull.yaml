@@ -1,0 +1,19 @@
+id: 9d9bd0ea-2050-475f-9992-614c32ef7504
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which year was Hull elected to the Hockey Hall of Fame?"
+choices:
+  - id: 646aaefc-289e-43bb-abce-95b390a2ab01
+    text: "1972"
+  - id: a7714ddc-9452-4835-aa9e-904e1dcb5478
+    text: "1983"
+  - id: 1b47085e-d056-4916-b80b-d98a979860f3
+    text: "2009"
+  - id: 6026dd1c-d976-48f7-a08a-cfc7d8e5ddfe
+    text: "1991"
+correct_choice_ids:
+  - a7714ddc-9452-4835-aa9e-904e1dcb5478
+explanation: "He entered the Hall in 1983."
+archived: false

@@ -1,0 +1,19 @@
+id: 79343517-f2d5-4033-aa29-0ee1de89689c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which trophy did Hull win in 1964-65 and 1965-66?"
+choices:
+  - id: 7a3712fb-40ad-4fc7-af36-ee4b0fbdc04d
+    text: "Norris Trophy"
+  - id: 8040f028-385a-4351-8dc9-64b885312951
+    text: "Conn Smythe Trophy"
+  - id: 8291ce32-8b5d-40e9-ba99-636b99a0c48e
+    text: "Hart Trophy"
+  - id: a102efa0-d6ea-471b-bec5-691bc44f7d54
+    text: "Calder Trophy"
+correct_choice_ids:
+  - 8291ce32-8b5d-40e9-ba99-636b99a0c48e
+explanation: "He was voted the league's most valuable player twice."
+archived: false

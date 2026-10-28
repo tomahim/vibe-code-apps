@@ -1,0 +1,10 @@
+id: 3fbd7e2d-2e52-4202-89cb-5194ba4fa186
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Olympic gold medals did Tretiak win?"
+accepted_answers:
+  - "3"
+  - "three"
+explanation: "He won three golds and one silver."
+archived: false

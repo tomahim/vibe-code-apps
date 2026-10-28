@@ -1,0 +1,9 @@
+id: fb180470-3f2d-4f55-8565-b4c1efbb016a
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "On which date did the first PWHL season begin: give the year."
+accepted_answers:
+  - "2024"
+explanation: "The PWHL played its first game on January 1, 2024."
+archived: false

@@ -1,0 +1,19 @@
+id: 03a7543c-c109-4790-bd13-54167f87c39b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which month and year was the Summit Series played?"
+choices:
+  - id: 7f5533f4-6c2e-47ca-adf1-8a9aabd35ae0
+    text: "March 1970"
+  - id: 4965617d-db63-493c-a87e-37fa9989c117
+    text: "May 1980"
+  - id: 4a86d6d8-df86-4340-a219-cb27e39c17e2
+    text: "September 1972"
+  - id: 6b379a3c-657e-49f3-a1da-d09d3818a0c5
+    text: "December 1976"
+correct_choice_ids:
+  - 4a86d6d8-df86-4340-a219-cb27e39c17e2
+explanation: "The series took place in September 1972."
+archived: false

@@ -1,0 +1,19 @@
+id: e6212ca6-08bd-4e45-9cc9-bce67556eff0
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many wins did Roy finish with in the NHL?"
+choices:
+  - id: 3fb88206-6912-4dae-b16b-5b312bd8bbd0
+    text: "700"
+  - id: 1ef12d46-0933-4161-89b2-09c30342964b
+    text: "551"
+  - id: 4fe98a74-a089-43a0-ad7a-a77e1dd16268
+    text: "389"
+  - id: a6cfaa91-c45c-4acf-9486-4d99de1ef1d9
+    text: "447"
+correct_choice_ids:
+  - 1ef12d46-0933-4161-89b2-09c30342964b
+explanation: "He retired on May 28, 2003, as the winningest goalie."
+archived: false

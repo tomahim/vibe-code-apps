@@ -1,0 +1,19 @@
+id: 140ce258-c08d-4689-a0f4-a8875c8f629f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How did earlier defencemen typically play, compared to Orr?"
+choices:
+  - id: f935de5c-a8ac-4840-a238-64522d236801
+    text: "Mainly as extra forwards"
+  - id: 77140ad8-457a-4584-a19a-4ae17bf93d17
+    text: "Big and slow, clearing the front of the net"
+  - id: 2d0c9ec8-77da-4ab5-9f87-ca06a9fa7e64
+    text: "Only on the power play"
+  - id: 51fa76df-ef82-47f1-bced-4a8fad57d143
+    text: "Small and fast, carrying the puck"
+correct_choice_ids:
+  - 77140ad8-457a-4584-a19a-4ae17bf93d17
+explanation: "Cherry said defencemen before Orr were big, slow players who cleared opponents and moved the puck up."
+archived: false

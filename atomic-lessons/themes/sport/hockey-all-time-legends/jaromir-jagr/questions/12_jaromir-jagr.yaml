@@ -1,0 +1,19 @@
+id: 63083dac-84e4-4866-ad04-85cb7d915c0c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which medal did the Czech team win at the 2006 Olympics?"
+choices:
+  - id: 22d64be8-06b3-4935-908a-e3461a683710
+    text: "Gold"
+  - id: db96277e-c170-4ae4-8187-1f63ea2c1bdd
+    text: "Silver"
+  - id: 5ff97b3d-9995-4aa7-92e4-7518baaa54c2
+    text: "No medal"
+  - id: 7a35a283-719a-48dd-9751-514780b91a02
+    text: "Bronze"
+correct_choice_ids:
+  - 7a35a283-719a-48dd-9751-514780b91a02
+explanation: "They beat Russia 3-0 for bronze."
+archived: false
