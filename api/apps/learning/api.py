@@ -52,7 +52,7 @@ class LearnerState:
                        for a in attempts if a["correct"] and a["attempt_type"] != "review"}
         self.wrong_counts = Counter(
             (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position)
-            for a in attempts if not a["correct"] and a["attempt_type"] != "review"
+            for a in attempts if not a["correct"]
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
 
