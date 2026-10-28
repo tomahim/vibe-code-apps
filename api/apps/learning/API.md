@@ -1,6 +1,6 @@
 # Little Grains learner API
 
-All routes live under `/api/learning/`, require the existing `Authorization: Bearer <token>` from `/api/auth/login`, and return private, non-cacheable JSON. UUIDs are the published content IDs. Only published, unarchived content with a visible ancestry is readable or writable. Publishing provenance, answer keys and pre-answer explanations are not returned. No production DB access is needed to test this API.
+All routes live under `/api/learning/`. The seven learner endpoints require the existing `Authorization: Bearer <token>` from `/api/auth/login` and return private, non-cacheable JSON. Published artwork has a separate public image route, described below. UUIDs are the published content IDs. Only published, unarchived content with a visible ancestry is readable or writable. Publishing provenance, answer keys and pre-answer explanations are not returned. No production DB access is needed to test this API.
 
 Sources read 2026-10-27:
 - [Garden design board](https://linear.app/tomahim/document/little-grains-garden-design-board-6dd69300c9a6)
@@ -10,7 +10,15 @@ Sources read 2026-10-27:
 
 Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `started`, `completed`. All correct alternatives at one checkpoint count once, never as separate required questions. A lesson requires all its visible cards and successful checkpoints; empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
-Images remain canonical repository-relative paths, as in the models. Hosting/resolving them is a frontend/content-delivery concern, not a fabricated asset URL.
+Theme, path and lesson objects include `image_url`; cards include `illustration_url`. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
+
+## GET images/<kind>/<uuid>/
+
+Serves only the referenced artwork of a published, unarchived theme, learning path, lesson or card, with the same ancestry checks as content reads. `kind` is `theme`, `learning_path`, `lesson` or `card`. Published artwork is public so a browser image element does not need a Bearer header; this route never exposes learner state, Markdown or question files. Unknown, hidden or missing image references return 404.
+
+The backend fetches bytes from `LEARNING_CONTENT_REPOSITORY` (default `tomahim/vibe-code-apps`, a public GitHub repository), pinned to the latest successful `SyncLog.commit_sha`. This uses the publication snapshot rather than the index file's last-changed commit, so an image-only replacement is picked up. The existing `/api/` UI proxy handles delivery; neither the frontend nor its Docker image needs GitHub access or a copy of the content tree. Private source repositories require a separate delivery implementation.
+
+PNG, JPEG, WebP, GIF and SVG are supported, with a 10 MiB delivery limit. Upstream bytes are cached in the backend for an hour per repository/commit/path; publication visibility is checked on every request before consulting that cache. Browser responses are non-cacheable, use an explicit image MIME type and `nosniff`, and sandbox SVG active content. Missing publication configuration returns 503; upstream failures, empty files or oversized responses return 502. Runtime access to `raw.githubusercontent.com` is required. No production sync or data migration is needed for already-published repository paths.
 
 ## GET themes/<uuid>/
 
@@ -42,6 +50,7 @@ Returns `{progress, learning_paths, lessons}` for the current user only. Aggrega
 
 ## Scope and integration
 
-Seven endpoints, seven commits. No new models/migrations, admin publishing, content sync, UI changes, review scheduling or production writes. The earlier sample `/api/apps/little-grains/lessons` stays unchanged; a future frontend should use this DB-backed API. `today/` and the spaced review ladder remain separate follow-up work.
+Seven learner endpoints plus published-image delivery. No new models/migrations, admin publishing, content sync, UI changes, review scheduling or production writes. The earlier sample `/api/apps/little-grains/lessons` stays unchanged; a future frontend should use this DB-backed API. `today/` and the spaced review ladder remain separate follow-up work.
 
 For this initial library the API returns complete ordered collections. Query count does not grow per card, but collection size is not paginated; add pagination/scoped state loading before scaling far beyond the current small curated library. A correct attempt is final for initial checkpoint completion; intentional repeated practice/review needs an explicit future contract. These assumptions are reviewable in this PR, not new product policy.
+

@@ -16,6 +16,7 @@ from .api import (
     lesson_summary, lock_learner, next_step, public_question, visible,
 )
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .images import image_url
 
 
 @never_cache
@@ -75,6 +76,7 @@ def lesson_detail(request, lesson_id):
                          "cards": [{"id": str(c.pk), "position": c.position, "title": c.title,
                                     "body_markdown": c.body_markdown,
                                     "illustration_path": c.illustration_path,
+                                    "illustration_url": image_url(c),
                                     "illustration_alt": c.illustration_alt,
                                     "completed_at": state.completed[c.pk].isoformat()
                                     if c.pk in state.completed else None}
@@ -163,3 +165,4 @@ def progress(request):
                               "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
                              for path in visible(LearningPath)],
                          "lessons": [lesson_summary(lesson, state) for lesson in lessons]})
+

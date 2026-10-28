@@ -1,5 +1,6 @@
 """Learner-facing representations. Answer keys and publishing metadata stay private."""
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .images import image_url
 
 
 PARENTS = {
@@ -28,6 +29,7 @@ def described(row):
     return {
         "id": str(row.pk), "title": row.title, "description": row.description,
         "position": row.position, "image_path": row.image_path, "image_alt": row.image_alt,
+        "image_url": image_url(row),
         "introduction_markdown": row.introduction_markdown,
     }
 
@@ -131,3 +133,4 @@ def lock_learner(user):
     # Serialize writes by learner, including first attempts with no existing rows.
     # PostgreSQL row locks, unlike process-local locks, work across API workers.
     type(user).objects.select_for_update().get(pk=user.pk)
+
