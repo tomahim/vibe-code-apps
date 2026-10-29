@@ -47,10 +47,9 @@ def write_library(root: Path) -> Path:
         encoding="utf-8",
     )
     lesson_dir.mkdir(parents=True)
-    (path_dir / "cover.png").write_bytes(PNG_1X1)
     (path_dir / "index.md").write_text(
         f"---\nid: {PATH_ID}\nposition: 1\ntitle: Early English\ndescription: Baby talk.\n"
-        f"image: cover.png\nimage_alt: A caregiver and a baby.\narchived: false\n---\n\nIntro body.\n",
+        f"archived: false\n---\n\nIntro body.\n",
         encoding="utf-8",
     )
     (lesson_dir / "index.md").write_text(
@@ -99,7 +98,8 @@ class SyncAtomicLessonsTests(TestCase):
         self.assertTrue(theme.published)
         learning_path = LearningPath.objects.get()
         self.assertEqual(learning_path.theme, theme)
-        self.assertTrue(learning_path.image_path.endswith("cover.png"))
+        self.assertEqual(learning_path.image_path, "")
+        self.assertEqual(learning_path.image_alt, "")
         lesson = Lesson.objects.get()
         self.assertEqual(lesson.learning_path, learning_path)
         self.assertEqual(lesson.introduction_markdown, "Lesson intro.")

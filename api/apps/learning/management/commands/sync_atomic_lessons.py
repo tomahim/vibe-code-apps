@@ -242,11 +242,9 @@ class Command(BaseCommand):
             raise CommandError(f"{location}.position: expected a positive integer, got {value!r}")
         return value
 
-    def image_fields(self, metadata, directory, location, *, required, path_key, alt_key):
+    def image_fields(self, metadata, directory, location, *, path_key, alt_key):
         image = metadata.get("image")
         if image is None or not str(image).strip():
-            if required:
-                raise CommandError(f"{location}.image: every learning path needs an image filename")
             return {path_key: "", alt_key: ""}
         filename = str(image)
         filename = filename[2:] if filename.startswith("./") else filename
@@ -327,16 +325,10 @@ class Command(BaseCommand):
                 desired["title"] = str(self.require(metadata, "title", location))
                 desired["description"] = str(metadata.get("description") or "")
                 desired["introduction_markdown"] = element["body"]
-                desired.update(
-                    self.image_fields(
-                        metadata,
-                        element["directory"],
-                        location,
-                        required=element["kind"] == "learning_path",
-                        path_key="image_path",
-                        alt_key="image_alt",
-                    )
-                )
+                # Path and lesson covers were removed (#195): illustrations live
+                # on cards only, so stale cover references are cleared on sync.
+                desired["image_path"] = ""
+                desired["image_alt"] = ""
             if element["kind"] == "learning_path":
                 desired["theme"] = parent
             elif element["kind"] == "lesson":
@@ -352,7 +344,6 @@ class Command(BaseCommand):
                         metadata,
                         element["directory"],
                         location,
-                        required=False,
                         path_key="illustration_path",
                         alt_key="illustration_alt",
                     )

@@ -157,7 +157,6 @@ function LessonReader({ lessonId, onClose, onProgress }) {
         <div className="grains-reader-head"><p>LESSON {data.lesson.position}</p><h2>{data.lesson.title}</h2><span>{completedSteps} of {totalSteps} steps complete</span></div>
         <div className="grains-progress-track" aria-label={`${completedSteps} of ${totalSteps} steps complete`}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>
         <div className="grains-reader-content">
-          {data.lesson.image_url && <img className="grains-lesson-image" src={data.lesson.image_url} alt={data.lesson.image_alt} />}
           {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
           {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
           {question && <div className="grains-question">

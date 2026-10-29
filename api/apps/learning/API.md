@@ -10,7 +10,7 @@ Sources read 2026-10-27:
 
 Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
-Theme, path and lesson objects include `image_url`; cards include `illustration_url`. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
+Theme, path and lesson objects still include `image_url`, but learning path and lesson images were removed (#195), so it is empty for them; only cards carry images, through `illustration_url`. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
 
 ## GET images/<kind>/<uuid>/
 
