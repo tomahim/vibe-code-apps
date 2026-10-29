@@ -206,16 +206,24 @@ function niceCeil(value) {
 function EvolutionChart({ chart, currency }) {
   if (!chart || !chart.buckets?.length || !chart.series?.length) return null;
   const width = 360, height = 190, padL = 30, padR = 34, padT = 14, padB = 26;
-  const max = niceCeil(Math.max(1, ...chart.series.flatMap((s) => s.points)));
-  const n = chart.buckets.length;
+  const now = Date.now();
+  // Never plot the future, and skip leading buckets where nobody had earned
+  // anything yet - even if the API still sends the full calendar window.
+  let end = chart.buckets.findIndex((b) => Date.parse(b.start) > now);
+  if (end === -1) end = chart.buckets.length;
+  let first = 0;
+  while (first < end - 1 && chart.series.every((s) => !s.points[first])) first++;
+  const buckets = chart.buckets.slice(first, end);
+  const n = buckets.length;
+  const pointsOf = (s) => s.points.slice(first, end);
+  const max = niceCeil(Math.max(1, ...chart.series.flatMap((s) => pointsOf(s))));
   const x = (i) => padL + (n === 1 ? (width - padL - padR) / 2 : (i * (width - padL - padR)) / (n - 1));
   const y = (v) => padT + (1 - v / max) * (height - padT - padB);
   // Thomas's steering: the signed-in learner is always the blue line, every
   // other learner a thinner continuous orange one.
   const accent = "var(--blue)";
   const line = (points) => points.map((v, i) => `${x(i)},${y(v)}`).join(" ");
-  const now = Date.now();
-  const current = chart.buckets.findIndex((b) => Date.parse(b.start) <= now && now < Date.parse(b.end));
+  const current = buckets.findIndex((b) => Date.parse(b.start) <= now && now < Date.parse(b.end));
   const self = chart.series.find((s) => s.is_self);
   const others = chart.series.filter((s) => !s.is_self);
   const ordered = [...others, ...(self ? [self] : [])];
@@ -233,14 +241,13 @@ function EvolutionChart({ chart, currency }) {
         <text x={padL - 6} y={y(max * f) + 3} className="grains-chart-y" textAnchor="end">{gridValue(f)}</text>
       </g>)}
       {current >= 0 && <line x1={x(current)} x2={x(current)} y1={padT} y2={height - padB} className="grains-chart-today" />}
-      {self && <polygon className="grains-chart-area" points={`${x(0)},${y(0)} ${line(self.points)} ${x(n - 1)},${y(0)}`} />}
-      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(s.points)} strokeWidth={s.is_self ? 2.6 : 1.4} strokeLinecap="round" fill="none" />)}
-      {self && self.points.map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r={i === n - 1 ? 4 : 2.4} className="grains-chart-dot" style={{ color: accent }} />)}
-      {others.map((s) => <circle key={`${s.name}-latest`} cx={x(n - 1)} cy={y(s.points[n - 1])} r={2.6} className="grains-chart-dot" style={{ color: colorOf(s) }} />)}
-      {self && <text x={x(n - 1) + 7} y={y(self.points[n - 1]) + 3} className="grains-chart-total" style={{ color: accent }}>{self.points[n - 1]}</text>}
-      {chart.buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{b.label}</text>)}
+      {self && <polygon className="grains-chart-area" points={`${x(0)},${y(0)} ${line(pointsOf(self))} ${x(n - 1)},${y(0)}`} />}
+      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(pointsOf(s))} strokeWidth={s.is_self ? 2.6 : 1.4} strokeLinecap="round" fill="none" />)}
+      {self && pointsOf(self).map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r={i === n - 1 ? 4 : 2.4} className="grains-chart-dot" style={{ color: accent }} />)}
+      {others.map((s) => <circle key={`${s.name}-latest`} cx={x(n - 1)} cy={y(pointsOf(s)[n - 1])} r={2.6} className="grains-chart-dot" style={{ color: colorOf(s) }} />)}
+      {self && <text x={x(n - 1) + 7} y={y(pointsOf(self)[n - 1]) + 3} className="grains-chart-total" style={{ color: accent }}>{pointsOf(self)[n - 1]}</text>}
+      {buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{b.label}</text>)}
     </svg>
-    {current >= 0 && <p className="grains-chart-note">Counts through {new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" })} · {chart.period === "weekly" ? "today" : chart.period === "monthly" ? "this week" : "this month"} still in progress</p>}
     <ul className="grains-chart-legend">{ordered.map((s) => <li key={s.name}><span aria-hidden="true" style={{ background: colorOf(s) }}></span>{s.name}{s.is_self && <small>YOU</small>}</li>)}</ul>
   </section>;
 }

@@ -17,7 +17,6 @@
 .grains-chart-grid{stroke:#e3d9c4;stroke-width:1}
 .grains-chart-y{fill:#a9a48f;font-size:9px;font-variant-numeric:tabular-nums}
 .grains-chart-x{fill:#8a806b;font-size:9px;font-weight:600}
-.grains-chart-note{margin:-6px 0 0;font-size:.7rem;color:var(--dim);text-align:center}
 .grains-chart-today{stroke:#c9bfa6;stroke-width:1;stroke-dasharray:3 3}
 .grains-chart-area{fill:url(#grains-chart-fill)}
 .grains-chart-line{stroke:currentColor}
