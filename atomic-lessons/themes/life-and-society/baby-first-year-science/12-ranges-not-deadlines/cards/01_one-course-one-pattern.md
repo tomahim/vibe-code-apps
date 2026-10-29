@@ -2,12 +2,12 @@
 id: 00984e6f-1f7c-4d1b-a30d-5e04075dde6a
 position: 1
 title: "One course, one pattern"
-image: mothers-and-babies.jpg
-image_alt: "Several mothers posed together, each holding a baby of a slightly different age."
-image_caption: "Mothers and babies in a group photo, 1990."
-image_credit: "Seppo Konstig"
-image_license: "CC BY 4.0"
-image_source_url: https://commons.wikimedia.org/wiki/File:Mothers_and_babies_in_a_group_picture_1990_(JOKASEK5A05A-1).tif
+image: diaper-derby.jpg
+image_alt: "Babies at the start of a crawling race: one already crawling down its lane, one sitting, others held at the starting line."
+image_caption: "A diaper derby: same ten-foot race, every baby on their own schedule."
+image_credit: "Cpl. Damien Gutierrez, U.S. Marine Corps"
+image_license: "Public domain"
+image_source_url: https://commons.wikimedia.org/wiki/File:USMC-110813-M-6664G-424.jpg
 archived: false
 ---
 Every subtheme in this course landed on the same discovery. Movement: WHO windows spanning months, with 4.3% of healthy children skipping crawling. Senses: vision sharpening over a year, hearing tuned by whatever language happened to surround the baby. Language: first words anywhere from about 10 to 15 months, vocabularies at age two ranging from a handful to hundreds.
