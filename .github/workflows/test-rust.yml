@@ -3,13 +3,19 @@ on:
   pull_request:
     branches: [master]
     paths:
-      - 'ui/**'
+      - 'ui/src/apps/rust-learning-path/**'
+      - 'ui/scripts/check-rust-curriculum.mjs'
+      - 'ui/tests/rust-curriculum.test.mjs'
+      - 'ui/tests/rust-progress.test.mjs'
       - 'api/apps/rust_learning_path/**'
       - '.github/workflows/test-rust.yml'
   push:
     branches: [master]
     paths:
-      - 'ui/**'
+      - 'ui/src/apps/rust-learning-path/**'
+      - 'ui/scripts/check-rust-curriculum.mjs'
+      - 'ui/tests/rust-curriculum.test.mjs'
+      - 'ui/tests/rust-progress.test.mjs'
       - 'api/apps/rust_learning_path/**'
       - '.github/workflows/test-rust.yml'
 permissions:
