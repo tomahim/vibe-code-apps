@@ -51,9 +51,9 @@ function mockChart(currency, period) {
     start: new Date(now - (labels.length - i) * stepDays * 864e5).toISOString(),
     end: new Date(now - (labels.length - 1 - i) * stepDays * 864e5).toISOString(),
   }));
-  const shape = [0, 0.2, 0.45, 0.55, 0.75, 0.9, 1];
-  const points = (total) => labels.map((_, i) => Math.round(shape[Math.min(i, shape.length - 1)] * total));
-  const totals = currency === 'carrots' ? { self: 3, other: 4 } : { self: 106, other: 140 };
+  const totals = currency === 'carrots' ? { self: 1, other: 3 } : { self: 106, other: 140 };
+  // Cumulative series that always end exactly on the leaderboard scores.
+  const points = (total) => labels.map((_, i) => Math.round((total * i) / (labels.length - 1)));
   return { period, buckets, series: [
     { name: 'aurore', is_self: false, points: points(totals.other) },
     { name: 'Learner', is_self: true, points: points(totals.self) },
@@ -301,16 +301,18 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   await expect(chart.locator('.grains-chart-legend')).toContainText('aurore');
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-weekly-mobile.png' });
-  await chart.screenshot({ path: '/tmp/little-grains-chart-weekly.png' });
   await leaderboard.getByRole('button', { name: 'Monthly' }).click();
   await expect(chart.getByRole('img', { name: 'drops growth, week by week' })).toBeVisible({ timeout: 20000 });
   await expect(chart.locator('.grains-chart-x')).toHaveCount(5);
   await expect(chart.locator('.grains-chart-x').first()).toHaveText('W1');
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-monthly-mobile.png' });
   await leaderboard.getByRole('button', { name: 'Overall' }).click();
   await expect(chart.getByRole('img', { name: 'drops growth, month by month' })).toBeVisible({ timeout: 20000 });
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-overall-mobile.png' });
   await leaderboard.getByRole('button', { name: /Carrots/ }).click();
   await expect(chart.getByRole('img', { name: 'carrots growth, month by month' })).toBeVisible({ timeout: 20000 });
-  await chart.screenshot({ path: '/tmp/little-grains-chart-carrots.png' });
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-carrots-mobile.png' });
 });
