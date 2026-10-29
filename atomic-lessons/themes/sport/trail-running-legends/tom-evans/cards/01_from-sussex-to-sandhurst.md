@@ -2,6 +2,12 @@
 id: 84bc5a80-f392-4048-a422-d7e05dc994d3
 position: 1
 title: "From Sussex to Sandhurst"
+image: champex-see.jpg
+image_alt: "Lake Champex in the Swiss Alps, with mountains reflected in the water."
+image_caption: "Lake Champex in the Swiss Alps, on the route of the Alpine ultras where Tom Evans made his name."
+image_credit: "X-Weinzar"
+image_license: "CC BY-SA 3.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Champex_See.jpg
 archived: false
 ---
 Tom Evans was born on February 3, 1992, and grew up in Sussex, England. He was active in sport from a young age, running in national school competitions and playing rugby. At 18 he joined the British Army and trained at the Royal Military Academy Sandhurst.

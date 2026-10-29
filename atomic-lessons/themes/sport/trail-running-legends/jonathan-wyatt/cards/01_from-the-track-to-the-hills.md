@@ -2,6 +2,12 @@
 id: 5818ca7b-003b-4067-bbd6-2aeed7ae2c89
 position: 1
 title: "From the track to the hills"
+image: jonathan-wyatt-2-beim-schneeberglauf-2008.jpg
+image_alt: "Jonathan Wyatt racing uphill at the 2008 Schneeberglauf mountain race in Austria."
+image_caption: "Jonathan Wyatt at the Schneeberglauf mountain race, 2008."
+image_credit: "Steindy"
+image_license: "CC BY-SA 2.0 de"
+image_source_url: https://commons.wikimedia.org/wiki/File:Jonathan_Wyatt_%28-2%29_beim_Schneeberglauf_2008.jpg
 archived: false
 ---
 Jonathan Wyatt was born on December 20, 1972, and runs for New Zealand. He started as a track and road runner.

@@ -2,6 +2,12 @@
 id: dbc6aeab-262b-43c8-b372-a18cea8305cb
 position: 1
 title: "From Dundee to Vancouver"
+image: eleanor-greenwood-comrades-2012.jpg
+image_alt: "Ellie Greenwood running on the road during the 2012 Comrades Marathon in South Africa."
+image_caption: "Ellie Greenwood racing the Comrades Marathon in 2012."
+image_credit: "Ben Zengerink"
+image_license: "CC BY-SA 3.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Eleanor_Greenwood%2C_Comrades_2012.jpg
 archived: false
 ---
 Ellie Greenwood was born on March 14, 1979, in Dundee, Scotland. When she was eight her family moved to Norfolk, England. After university she moved to Canada in 2001 to work for a ski tour operator, and she has lived there since. She is both British and Canadian.

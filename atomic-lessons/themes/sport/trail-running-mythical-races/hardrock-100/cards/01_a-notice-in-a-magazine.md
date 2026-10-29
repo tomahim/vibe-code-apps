@@ -2,6 +2,12 @@
 id: 8daebb08-e9f6-4370-9dd9-c0fa99fb06e3
 position: 1
 title: "A notice in a magazine"
+image: san-juan-mountains-colorado.jpg
+image_alt: "Jagged peaks of the San Juan Mountains in Colorado."
+image_caption: "The San Juan Mountains of Colorado, crossed by the Hardrock 100."
+image_credit: "Ken Lund"
+image_license: "CC BY-SA 2.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:San_Juan_Mountains%2C_Colorado_%287235123354%29.jpg
 archived: false
 ---
 The story of Hardrock begins in the fall of 1991, when Gordon Hardman placed a notice in Ultrarunning magazine announcing that there would be a 100-mile run in the San Juan Mountains of southwestern Colorado in summer 1992. John Cappis contacted him and asked about the course.
