@@ -196,6 +196,54 @@ function RewardInfo({ currency, onClose }) {
   </div>;
 }
 
+
+const CHART_COLORS = ["#b3a284", "#9fb3c8", "#c9a2a0", "#a3b89a"];
+
+function niceCeil(value) {
+  if (value <= 1) return 1;
+  const pow = Math.pow(10, Math.floor(Math.log10(value)));
+  for (const step of [1, 2, 2.5, 5, 10]) { if (step * pow >= value) return step * pow; }
+  return 10 * pow;
+}
+
+function EvolutionChart({ chart, currency }) {
+  if (!chart || !chart.buckets?.length || !chart.series?.length) return null;
+  const width = 360, height = 190, padL = 30, padR = 34, padT = 14, padB = 26;
+  const max = niceCeil(Math.max(1, ...chart.series.flatMap((s) => s.points)));
+  const n = chart.buckets.length;
+  const x = (i) => padL + (n === 1 ? (width - padL - padR) / 2 : (i * (width - padL - padR)) / (n - 1));
+  const y = (v) => padT + (1 - v / max) * (height - padT - padB);
+  const accent = currency === "drops" ? "var(--blue)" : "var(--orange)";
+  const line = (points) => points.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+  const now = Date.now();
+  const current = chart.buckets.findIndex((b) => Date.parse(b.start) <= now && now < Date.parse(b.end));
+  const self = chart.series.find((s) => s.is_self);
+  const others = chart.series.filter((s) => !s.is_self);
+  const ordered = [...others, ...(self ? [self] : [])];
+  const colorOf = (s) => (s.is_self ? accent : CHART_COLORS[others.indexOf(s) % CHART_COLORS.length]);
+  const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
+  const gridValue = (f) => { const v = max * f; return v >= 10 ? Math.round(v) : Math.round(v * 10) / 10; };
+  return <section className="grains-chart">
+    <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : "🥕"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
+    <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
+      <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
+      </linearGradient></defs>
+      {[0, 0.5, 1].map((f) => <g key={f}>
+        <line x1={padL} x2={width - padR} y1={y(max * f)} y2={y(max * f)} className="grains-chart-grid" />
+        <text x={padL - 6} y={y(max * f) + 3} className="grains-chart-y" textAnchor="end">{gridValue(f)}</text>
+      </g>)}
+      {current >= 0 && <line x1={x(current)} x2={x(current)} y1={padT} y2={height - padB} className="grains-chart-today" />}
+      {self && <polygon className="grains-chart-area" points={`${x(0)},${y(0)} ${line(self.points)} ${x(n - 1)},${y(0)}`} />}
+      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(s.points)} strokeWidth={s.is_self ? 2.6 : 1.6} strokeDasharray={s.is_self ? undefined : "1 4"} strokeLinecap="round" fill="none" />)}
+      {self && self.points.map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r={i === n - 1 ? 4 : 2.4} className="grains-chart-dot" style={{ color: accent }} />)}
+      {self && <text x={x(n - 1) + 7} y={y(self.points[n - 1]) + 3} className="grains-chart-total" style={{ color: accent }}>{self.points[n - 1]}</text>}
+      {chart.buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{chart.period === "monthly" ? b.label.replace("Week ", "W") : b.label}</text>)}
+    </svg>
+    <ul className="grains-chart-legend">{ordered.map((s) => <li key={s.name}><span aria-hidden="true" style={{ background: colorOf(s) }}></span>{s.name}{s.is_self && <small>YOU</small>}</li>)}</ul>
+  </section>;
+}
+
 function Leaderboard({ onClose }) {
   const [currency, setCurrency] = useState("drops");
   const [period, setPeriod] = useState("weekly");
@@ -213,7 +261,7 @@ function Leaderboard({ onClose }) {
       <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => setPeriod(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>
       {error && <p className="grains-error" role="alert">{error}</p>}
       {!data && !error && <p className="grains-loading">Gathering the rankings…</p>}
-      {data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : period === "weekly" ? "Resets every Monday" : "Resets on the 1st"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">The first spot is waiting for you.</p>}<div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
+      {data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : period === "weekly" ? "Resets every Monday" : "Resets on the 1st"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">The first spot is waiting for you.</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
     </aside>
   </div>;
 }
