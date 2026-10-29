@@ -4,7 +4,7 @@ position: 1
 title: "A dark circle in a turquoise reef"
 image: great-blue-hole-aerial.jpg
 image_alt: "Aerial view of the Great Blue Hole: a dark blue circle ringed by pale turquoise reef flats."
-image_caption: "Aerial view of the Great Blue Hole, Lighthouse Reef, Belize, 2008."
+image_caption: "Aerial view of the Great Blue Hole off Belize, 2008."
 image_credit: "The TerraMar Project"
 image_license: "CC BY 2.0"
 image_source_url: https://commons.wikimedia.org/wiki/File:Belize_Blue_Hole_(TMP)_(16912331906).jpg
