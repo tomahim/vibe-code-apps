@@ -1,0 +1,19 @@
+id: 741e2f1d-62a6-4e1f-90e2-046b062e4353
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What do coral and sponges do to the wrecks over time?"
+choices:
+  - id: 0d3ca3c1-7c15-4098-9ee0-65d3d6226386
+    text: "They dissolve them in a week"
+  - id: 18806fd7-869a-42bc-b901-f83e9538e9a4
+    text: "They turn them into artificial reefs"
+  - id: 5bb80802-2194-4e78-8f23-d3e78315b280
+    text: "They have no effect"
+  - id: 7ceb6a58-aebf-436c-bf23-04b4da321e9e
+    text: "They paint them gold"
+correct_choice_ids:
+  - 18806fd7-869a-42bc-b901-f83e9538e9a4
+explanation: "Marine life covers the steel and attracts reef fish, rays, turtles and sharks."
+archived: false

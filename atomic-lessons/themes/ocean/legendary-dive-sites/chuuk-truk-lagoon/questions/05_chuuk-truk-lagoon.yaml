@@ -1,0 +1,19 @@
+id: 3e67efbc-17e2-4e4b-8af6-7a107a5b1c56
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When did Operation Hailstone begin?"
+choices:
+  - id: a6e2acc0-4b42-4534-8c4e-fc68d2b3c12f
+    text: "7 December 1941"
+  - id: 6035386e-2729-46c6-8a7b-52855db0d43f
+    text: "17 February 1944"
+  - id: a7d72354-a428-46e2-8d40-5962b1590cfb
+    text: "6 June 1944"
+  - id: 2da3e2c1-f54e-469a-9bcc-fda78d10e25f
+    text: "21 June 1919"
+correct_choice_ids:
+  - 6035386e-2729-46c6-8a7b-52855db0d43f
+explanation: "The attack began on 17 February 1944."
+archived: false

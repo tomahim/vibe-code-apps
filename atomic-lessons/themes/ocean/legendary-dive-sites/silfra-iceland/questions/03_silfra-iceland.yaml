@@ -1,0 +1,19 @@
+id: 22882acb-22b1-4b3f-9725-f8989f9306ab
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which national park is Silfra?"
+choices:
+  - id: 20233e2e-c631-4046-bc5d-af8381615dc5
+    text: "Vatnaj\u00f6kull National Park"
+  - id: 562940bd-afe3-4989-a3d7-ea9c8c64176a
+    text: "\u00deingvellir National Park"
+  - id: c13ca5e8-041e-4c35-8b91-3b58adfde629
+    text: "Yellowstone National Park"
+  - id: ab288562-b19c-4c26-b92f-a55044be0348
+    text: "Snaefellsj\u00f6kull National Park"
+correct_choice_ids:
+  - 562940bd-afe3-4989-a3d7-ea9c8c64176a
+explanation: "Silfra lies in the \u00deingvallavatn lake within \u00deingvellir National Park."
+archived: false

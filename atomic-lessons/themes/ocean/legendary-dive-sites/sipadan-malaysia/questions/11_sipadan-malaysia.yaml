@@ -1,0 +1,19 @@
+id: ebd454fb-174a-4b8e-9162-5633b62d89ba
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What year was Sipadan declared a bird sanctuary?"
+choices:
+  - id: 535ae853-5eb5-44bd-9ad1-13e574af335b
+    text: "1963"
+  - id: 2c053488-90f2-4376-9008-13f903616dc0
+    text: "1933"
+  - id: 6dc75cde-3b0b-4397-8b29-af486b97648b
+    text: "1984"
+  - id: 184751cd-b8b2-47bb-87f3-5efdc4368f2b
+    text: "2002"
+correct_choice_ids:
+  - 2c053488-90f2-4376-9008-13f903616dc0
+explanation: "The colonial government of North Borneo declared it a bird sanctuary in 1933."
+archived: false

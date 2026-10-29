@@ -1,0 +1,19 @@
+id: e041eb0c-82a7-4d61-996d-3d83969c48e4
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What name is given to this kind of landscape?"
+choices:
+  - id: e4458f2f-9183-4873-a459-3887055a6d55
+    text: "Tundra"
+  - id: d3f65b00-9613-4e41-afe5-b85146a50296
+    text: "Karst"
+  - id: e89ac724-9e9a-49fb-8492-ab22b6c9cbed
+    text: "Savanna"
+  - id: 7467484f-57a6-4f31-a014-15073af99b2f
+    text: "Delta"
+correct_choice_ids:
+  - d3f65b00-9613-4e41-afe5-b85146a50296
+explanation: "Karst is a landscape shaped by dissolving rock."
+archived: false

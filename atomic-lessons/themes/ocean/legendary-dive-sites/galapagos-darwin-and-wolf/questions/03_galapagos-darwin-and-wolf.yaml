@@ -1,0 +1,19 @@
+id: 7f01c5fa-e76c-4ec2-a4ac-d683bbaf4cdf
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "About how large was the Gal\u00e1pagos Marine Reserve before the 2021 expansion plan?"
+choices:
+  - id: aa4541a7-11e3-47e0-9be8-4c10e31528b9
+    text: "About 133 square kilometres"
+  - id: 38828317-4e39-46a2-80f1-8f5c29b20a64
+    text: "About 133,000 square kilometres"
+  - id: 20b6ff6d-5128-4407-a7c1-29ecb1eef970
+    text: "About 1,330 square kilometres"
+  - id: e845d3c4-96b3-4b95-b049-6d60674436cf
+    text: "About 13 million square kilometres"
+correct_choice_ids:
+  - 38828317-4e39-46a2-80f1-8f5c29b20a64
+explanation: "It is one of the largest marine reserves in the world."
+archived: false

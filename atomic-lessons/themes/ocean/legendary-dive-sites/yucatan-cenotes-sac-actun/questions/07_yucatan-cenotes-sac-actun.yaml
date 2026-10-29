@@ -1,0 +1,9 @@
+id: 4bddbc27-2477-4be1-ba21-7324e49933e3
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which Mexican state is Tulum and the Sac Actun system? Give the state."
+accepted_answers:
+  - "Quintana Roo"
+explanation: "The system lies in the municipality of Tulum, in Quintana Roo."
+archived: false

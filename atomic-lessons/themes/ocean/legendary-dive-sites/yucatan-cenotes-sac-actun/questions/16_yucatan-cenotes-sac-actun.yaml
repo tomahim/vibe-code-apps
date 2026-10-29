@@ -1,0 +1,10 @@
+id: eab87469-d192-41a4-87bb-fdab94bd6413
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which layer of water floats on top of salt water in the caves? Give the word."
+accepted_answers:
+  - "fresh water"
+  - "fresh"
+explanation: "Fresh water is lighter than salt water, so it floats on top."
+archived: false

@@ -1,0 +1,19 @@
+id: d2cba0df-feed-490f-b80e-7b38a4bba96b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What happened at \u00deingvellir in the year 930?"
+choices:
+  - id: 8703bc43-6b6c-465c-b632-ad2ff4172722
+    text: "The fissure formed"
+  - id: 2d797115-f78a-4224-8a25-6c8d349e10e0
+    text: "A volcano erupted"
+  - id: 28f6d175-daf7-45ba-ae21-cff82b75b7e3
+    text: "A glacier melted"
+  - id: b8a569d4-a9fa-4809-928d-8365f2a11c61
+    text: "Iceland's first parliamentary assembly, the Althing, met"
+correct_choice_ids:
+  - b8a569d4-a9fa-4809-928d-8365f2a11c61
+explanation: "The first meeting took place in June 930 and is taken as Iceland's birth."
+archived: false

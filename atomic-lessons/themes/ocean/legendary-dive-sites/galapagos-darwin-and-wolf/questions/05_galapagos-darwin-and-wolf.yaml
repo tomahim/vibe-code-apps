@@ -1,0 +1,19 @@
+id: 835f9f7a-ffd1-4178-9e1d-9e2e2c30c98b
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "After whom is Darwin Island named?"
+choices:
+  - id: b6499eb8-70f5-41eb-a0a9-a08a8b27e0f5
+    text: "Jacques Cousteau"
+  - id: 6cecadb4-4b99-4349-99e3-e43df4868155
+    text: "Charles Darwin"
+  - id: 3249e562-ccf9-4f25-bd6c-4f0fdd27be7e
+    text: "Ernest Cox"
+  - id: fd110c6e-41cc-4eb4-ae74-a100e936a617
+    text: "William Dampier"
+correct_choice_ids:
+  - 6cecadb4-4b99-4349-99e3-e43df4868155
+explanation: "Darwin's studies in the Gal\u00e1pagos helped him form his theory of evolution."
+archived: false

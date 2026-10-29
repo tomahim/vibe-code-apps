@@ -1,0 +1,10 @@
+id: 49740c24-f4ac-4b86-afc4-7007a2284e6a
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Name the operation of February 1944 that sank the ships. One word."
+accepted_answers:
+  - "Hailstone"
+  - "Operation Hailstone"
+explanation: "Operation Hailstone began on 17 February 1944."
+archived: false

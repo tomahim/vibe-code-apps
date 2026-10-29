@@ -1,0 +1,11 @@
+id: fafb5d9b-3bd2-458d-9886-38ff392c4890
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which peninsula is Raja Ampat located off? Give the name."
+accepted_answers:
+  - "Bird's Head"
+  - "Bird's Head Peninsula"
+  - "Vogelkop"
+explanation: "It lies off the north-west tip of the Bird's Head Peninsula on New Guinea."
+archived: false

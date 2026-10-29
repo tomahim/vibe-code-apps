@@ -1,0 +1,19 @@
+id: 8320ced9-1829-4956-9001-e65568625572
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Why are there many turtle skeletons in the cave below the island?"
+choices:
+  - id: b4063c80-ef86-46f4-b7c7-890f51ca4ba9
+    text: "Turtles are buried there by divers"
+  - id: 17fdae45-fe18-4ae9-92b3-0093fa10d9cb
+    text: "Lost turtles drown before finding the surface"
+  - id: 24b5c832-d35c-48e9-9583-bd453dd87baf
+    text: "Sharks bring them"
+  - id: b725fe90-319c-4d9d-8c69-fffbb5d2a0d9
+    text: "They nest in the cave"
+correct_choice_ids:
+  - 17fdae45-fe18-4ae9-92b3-0093fa10d9cb
+explanation: "Turtles breathe air, so those that get lost in the tunnels drown."
+archived: false

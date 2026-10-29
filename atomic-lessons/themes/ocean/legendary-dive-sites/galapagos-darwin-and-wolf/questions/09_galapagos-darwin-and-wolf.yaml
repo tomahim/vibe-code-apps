@@ -1,0 +1,19 @@
+id: 3ec73589-e8e1-42af-a7d2-ba80a02f16f6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was Darwin's Arch?"
+choices:
+  - id: 8436ed08-23b6-4d2d-9dd7-e5fce983f2ed
+    text: "A shipwreck"
+  - id: 68662f22-5c95-472f-a054-72b382b98c67
+    text: "A natural rock arch shaped by erosion"
+  - id: 213381b9-d863-4de2-8498-f955d88d8aad
+    text: "A coral reef"
+  - id: 0a70ce34-d6f6-4481-97eb-53498689c37a
+    text: "A volcano"
+correct_choice_ids:
+  - 68662f22-5c95-472f-a054-72b382b98c67
+explanation: "It stood out in the open ocean near Darwin Island."
+archived: false

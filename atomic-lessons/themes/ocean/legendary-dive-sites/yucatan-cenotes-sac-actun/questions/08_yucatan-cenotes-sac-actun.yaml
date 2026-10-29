@@ -1,0 +1,10 @@
+id: c4032b2d-a87b-4a18-9803-68ed33276237
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the name of the pit where a mastodon and a human skull were found?"
+accepted_answers:
+  - "Hoyo Negro"
+  - "Hoyo Negro pit"
+explanation: "Hoyo Negro means black hole in Spanish."
+archived: false

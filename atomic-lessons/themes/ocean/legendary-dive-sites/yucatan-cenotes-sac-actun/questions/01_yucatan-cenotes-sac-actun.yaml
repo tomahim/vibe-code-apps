@@ -1,0 +1,19 @@
+id: 7a86f974-540f-4ca3-8ff0-ea7f22fd0716
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What rock is the Yucat\u00e1n Peninsula mostly made of?"
+choices:
+  - id: 7ee96b38-2b9e-4389-a9ff-bdc9fedffc02
+    text: "Granite"
+  - id: d858b90d-434c-4eea-a71d-9a56136bdd52
+    text: "Limestone"
+  - id: a570a81c-ed3b-4b7c-9e74-93d41122102f
+    text: "Basalt"
+  - id: 05252a87-6482-43db-a8ef-c2b01055f3aa
+    text: "Sandstone"
+correct_choice_ids:
+  - d858b90d-434c-4eea-a71d-9a56136bdd52
+explanation: "Limestone is porous and soluble, which allows caves to form."
+archived: false

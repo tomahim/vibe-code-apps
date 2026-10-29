@@ -1,0 +1,19 @@
+id: 5e021851-504b-4660-bd16-07962b05410a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did the 2018 discovery connect?"
+choices:
+  - id: 581e82a6-3b22-4194-bd8b-2e8f271af638
+    text: "Sac Actun and Silfra"
+  - id: 9086950f-6824-469d-beb1-a37f484ed63d
+    text: "Sac Actun and Dos Ojos"
+  - id: 20688f02-d9ac-4610-9411-ca5d3ba9c1ca
+    text: "Dos Ojos and the Red Sea"
+  - id: 2aa8c7f4-4c89-484c-8f60-b51b633a73cb
+    text: "Sac Actun and Palau"
+correct_choice_ids:
+  - 9086950f-6824-469d-beb1-a37f484ed63d
+explanation: "A link was found between the two systems by the Gran Maya Aquifer project."
+archived: false

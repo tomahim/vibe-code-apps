@@ -1,0 +1,19 @@
+id: a2e45f6f-4f09-4f24-ae55-311c16bf27ef
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the name of the demanding drift dive at the southern tip of Peleliu?"
+choices:
+  - id: 9fe60bd0-a84e-4e19-9eaa-a9090419cba8
+    text: "Great Blue Hole"
+  - id: 49992aa9-9319-407f-98d4-f5bbb929d48f
+    text: "Peleliu Corner"
+  - id: fc1bcb0b-1e3d-41f0-b238-6eb8ea332dea
+    text: "Silfra Hall"
+  - id: 4d808e5b-9a5d-4760-ba62-83699943702c
+    text: "Darwin's Arch"
+correct_choice_ids:
+  - 49992aa9-9319-407f-98d4-f5bbb929d48f
+explanation: "It is also called Peleliu Express."
+archived: false

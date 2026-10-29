@@ -1,0 +1,19 @@
+id: 419afbfc-ccab-4e28-8ed3-346382df5163
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which ocean is Chuuk Lagoon?"
+choices:
+  - id: 3fab8927-7978-4b16-adae-7c72a40a54b3
+    text: "The Atlantic Ocean"
+  - id: 4596b1c0-bf95-40f3-9fb2-9265239ffdbe
+    text: "The Pacific Ocean"
+  - id: ec886745-6d75-485d-8584-edf93722dbf2
+    text: "The Indian Ocean"
+  - id: 7a1cc9b7-7f77-417c-8395-910cbc91962b
+    text: "The Arctic Ocean"
+correct_choice_ids:
+  - 4596b1c0-bf95-40f3-9fb2-9265239ffdbe
+explanation: "It is an atoll in the central Pacific, part of the Federated States of Micronesia."
+archived: false

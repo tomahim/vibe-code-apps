@@ -1,0 +1,19 @@
+id: fcdaa407-78b9-4231-8a3a-9ba9effce531
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What cargo was carried on deck and blown off by the explosion?"
+choices:
+  - id: e8254db8-2fb4-43ed-b050-cbf5293cc181
+    text: "Two tanks"
+  - id: 9b28fdfe-9398-4627-a843-51006575621b
+    text: "Two aircraft"
+  - id: a25d7be4-0c40-44fc-b17d-38aecffc17fa
+    text: "Two lifeboats"
+  - id: 6bef407b-c388-4d96-b2a3-da8b361e8561
+    text: "Two steam locomotives"
+correct_choice_ids:
+  - 6bef407b-c388-4d96-b2a3-da8b361e8561
+explanation: "The locomotives were deck cargo for Egyptian railways."
+archived: false

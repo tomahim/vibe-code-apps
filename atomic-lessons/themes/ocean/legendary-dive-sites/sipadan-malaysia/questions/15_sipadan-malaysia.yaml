@@ -1,0 +1,9 @@
+id: 9df0c4c6-296d-48a7-b6fe-7265ddb9309d
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Sabah Parks declare Sipadan a marine park and close the resorts?"
+accepted_answers:
+  - "2004"
+explanation: "Sabah Parks declared the island a marine park in 2004 and closed the resorts."
+archived: false

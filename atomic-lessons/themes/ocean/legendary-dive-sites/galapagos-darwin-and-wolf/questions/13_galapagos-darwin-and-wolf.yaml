@@ -1,0 +1,19 @@
+id: 64522e0d-78ba-4f6f-821e-6dd3e95f5756
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which large fish is famous for gathering in schools near Darwin and Wolf?"
+choices:
+  - id: bd83048e-0c78-40e8-b948-0b1d7d0b35d3
+    text: "Great white sharks"
+  - id: d5c523bd-45cf-46a9-bab8-26df92aa038b
+    text: "Scalloped hammerhead sharks"
+  - id: befbd13e-d6ef-46b6-ac3b-fc7d3a4faea7
+    text: "Goldfish"
+  - id: bfab835e-9c2a-492f-9ed9-9c258c9bd12b
+    text: "Sunfish only"
+correct_choice_ids:
+  - d5c523bd-45cf-46a9-bab8-26df92aa038b
+explanation: "Big schools gather at both islands."
+archived: false

@@ -1,0 +1,19 @@
+id: 3cbed4c2-9c14-499e-a845-9618c4285431
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What did the German bombers hit?"
+choices:
+  - id: f2f29498-1f4a-475a-85b1-cf872b042e8a
+    text: "The bridge"
+  - id: bc3e29f1-ccf1-415c-9835-50b581027c57
+    text: "Hold 4, which held ammunition"
+  - id: 9e53b64f-1e1a-4313-9ee6-505da00cdac6
+    text: "The engine room only"
+  - id: 6e9abd33-005b-41fb-9b37-25d4453eaefd
+    text: "The anchor"
+correct_choice_ids:
+  - bc3e29f1-ccf1-415c-9835-50b581027c57
+explanation: "The bombs struck hold 4 near the stern and the ammunition exploded."
+archived: false

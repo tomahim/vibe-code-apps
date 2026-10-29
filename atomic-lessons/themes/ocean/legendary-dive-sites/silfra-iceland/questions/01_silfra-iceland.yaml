@@ -1,0 +1,19 @@
+id: ddec1b46-abb1-49b8-9b86-0270115cabc6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which two tectonic plates meet at Silfra?"
+choices:
+  - id: fd5ad9da-e4d8-4d44-b346-226bc5588e47
+    text: "African and South American"
+  - id: 08b1693a-5507-4c19-8fc9-6bad83a74a39
+    text: "North American and Eurasian"
+  - id: c096d6a8-d350-4d6f-8306-47810fe274ca
+    text: "Pacific and Antarctic"
+  - id: 85279843-975e-4e83-833c-4e70cf297058
+    text: "Indian and Arabian"
+correct_choice_ids:
+  - 08b1693a-5507-4c19-8fc9-6bad83a74a39
+explanation: "Silfra lies on the Mid-Atlantic Ridge between the North American and Eurasian plates."
+archived: false

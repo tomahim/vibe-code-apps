@@ -1,0 +1,19 @@
+id: d207dcb2-cd55-4304-a540-e34e50f52b6f
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What happened aboard the Aikoku Maru?"
+choices:
+  - id: 78265b8c-b896-4ca4-ac02-acbec0a06df8
+    text: "It sailed to safety"
+  - id: 607e889d-dbda-4a71-83b3-16333fd6143e
+    text: "It was captured intact"
+  - id: 5b94920f-c259-4f2e-9fa1-20971155601f
+    text: "It hit a coral reef and was saved"
+  - id: a2e08c2c-4b4c-425d-8730-e8f4a7a98006
+    text: "A torpedo hit set off its ammunition in a huge explosion"
+correct_choice_ids:
+  - a2e08c2c-4b4c-425d-8730-e8f4a7a98006
+explanation: "The torpedo detonated ammunition carried near the bow."
+archived: false

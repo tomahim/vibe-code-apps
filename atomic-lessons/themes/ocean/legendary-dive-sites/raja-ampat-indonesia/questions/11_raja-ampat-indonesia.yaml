@@ -1,0 +1,19 @@
+id: 3dc4a79b-6966-4fcc-81db-4558d2516a49
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which animals do villagers protect on Waigeo's north-east coast?"
+choices:
+  - id: 086001e0-7215-4388-98a8-78290342c787
+    text: "Sharks, by feeding them"
+  - id: 76c55ded-f2d3-4071-a417-8f0793f796f7
+    text: "Turtles, by protecting nests and relocating eggs"
+  - id: 9cd1e246-d6bf-4b31-bb5e-9f28531d305a
+    text: "Birds, by building cages"
+  - id: bff3a896-cd02-4a40-a54f-56f3331ad5ba
+    text: "Whales, by tagging them"
+correct_choice_ids:
+  - 76c55ded-f2d3-4071-a417-8f0793f796f7
+explanation: "They work with the government and non-governmental groups."
+archived: false

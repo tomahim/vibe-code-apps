@@ -1,0 +1,10 @@
+id: bd27b7c0-7b82-4cf4-a509-eb5748065465
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which French explorer made the 1989 film about Sipadan? Give his surname."
+accepted_answers:
+  - "Cousteau"
+  - "Jacques Cousteau"
+explanation: "Borneo: The Ghost of the Sea Turtle was made by Cousteau."
+archived: false

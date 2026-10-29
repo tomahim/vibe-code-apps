@@ -1,0 +1,19 @@
+id: 72ea2f88-3350-4aaf-98d4-34877208e28f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does Raja Ampat mean?"
+choices:
+  - id: 3bff0a06-b064-4495-bb99-6742cd419324
+    text: "Four seas"
+  - id: 6c6ff359-ce8a-4d0d-b03a-07c420abafff
+    text: "Hundred islands"
+  - id: dbbb5337-26e5-4ac7-9db1-6ee850fe892d
+    text: "Blue water"
+  - id: d5d32edd-6128-4b0c-9f3c-ff8cde76a236
+    text: "Four kings"
+correct_choice_ids:
+  - d5d32edd-6128-4b0c-9f3c-ff8cde76a236
+explanation: "Raja means king and empat means four."
+archived: false

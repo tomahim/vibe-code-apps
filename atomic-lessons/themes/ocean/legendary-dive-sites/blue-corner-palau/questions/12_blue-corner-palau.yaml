@@ -1,0 +1,19 @@
+id: 304657b5-6ba9-4d70-a089-4081de28cd13
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Palau announce at the UN in September 2009?"
+choices:
+  - id: 5d490174-1ebb-4a87-9e1d-7f54b7465a05
+    text: "A new airline"
+  - id: c20c6137-e92d-4f4c-98a9-fba3af106037
+    text: "A ban on tourism"
+  - id: 7ab6443b-39e6-4fb7-82b5-a555849bac61
+    text: "A new capital city"
+  - id: b7cae9c1-297d-48f8-8861-7e2c96b87e01
+    text: "The world's first national shark sanctuary"
+correct_choice_ids:
+  - b7cae9c1-297d-48f8-8861-7e2c96b87e01
+explanation: "Commercial shark fishing was banned in its territorial waters."
+archived: false

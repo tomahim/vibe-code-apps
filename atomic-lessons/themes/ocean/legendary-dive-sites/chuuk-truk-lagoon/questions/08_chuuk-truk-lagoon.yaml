@@ -1,0 +1,10 @@
+id: 469d759b-3d97-4a8b-ab60-4014c6c7a34a
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which French explorer's 1971 documentary drew wreck divers to Truk? Give his surname."
+accepted_answers:
+  - "Cousteau"
+  - "Jacques Cousteau"
+explanation: "His film showed the lagoon's ghostly remains."
+archived: false

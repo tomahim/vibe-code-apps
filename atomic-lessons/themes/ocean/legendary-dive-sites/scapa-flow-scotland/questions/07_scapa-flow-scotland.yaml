@@ -1,0 +1,9 @@
+id: f69fe2f9-3bd1-4c9f-840f-037c7fcbe3c6
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year was the German fleet scuttled at Scapa Flow?"
+accepted_answers:
+  - "1919"
+explanation: "The fleet was scuttled on 21 June 1919."
+archived: false

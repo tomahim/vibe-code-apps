@@ -1,0 +1,19 @@
+id: 004f4df3-6d11-48d6-a330-3f3eaf3db03a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does the name Silfra mean in English?"
+choices:
+  - id: 88f5a07b-6a1b-4fbf-b486-d6f0c43a4286
+    text: "Ice"
+  - id: 4b39797a-623f-429c-9762-dffc3521b373
+    text: "Crack"
+  - id: 23d0d5ae-8817-47ad-9c4c-0a62cf050270
+    text: "Mirror"
+  - id: 66abc03b-4848-494b-b4c8-38754fc016fc
+    text: "Silver"
+correct_choice_ids:
+  - 66abc03b-4848-494b-b4c8-38754fc016fc
+explanation: "The name refers to the silvery clarity of the water."
+archived: false

@@ -1,0 +1,19 @@
+id: 981640fd-7837-416c-8f53-3df3e893a000
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which of these animals is listed among the Thistlegorm's regular visitors?"
+choices:
+  - id: d7df9a1d-3e0c-420f-800f-fa71b3e138d8
+    text: "Polar bears"
+  - id: 19f6b4b7-d589-4b5f-a921-c8883c78f7d1
+    text: "Barracuda"
+  - id: cd321c25-b1b3-4da1-8020-bc99d2d6eb3a
+    text: "Blue whales"
+  - id: fc69d915-6cb9-45f7-86dd-388f0039379b
+    text: "Penguins"
+correct_choice_ids:
+  - 19f6b4b7-d589-4b5f-a921-c8883c78f7d1
+explanation: "Tuna, barracuda, batfish, morays, lionfish and turtles are all common there."
+archived: false

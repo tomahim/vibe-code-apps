@@ -1,0 +1,19 @@
+id: f9ee3399-fbdf-4e0e-8b9f-516499a018c6
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What made the lagoon a good naval base?"
+choices:
+  - id: 80ba20e4-773f-48ab-8143-c2af2efb442f
+    text: "It was close to Japan"
+  - id: d3c13765-8233-469c-8148-1627358c4025
+    text: "It had no storms ever"
+  - id: 65048842-53c0-48e9-a7a5-ea07884698b5
+    text: "It was ice-free polar water"
+  - id: 908ef05a-fdf8-4cbd-bc76-62527ec3bb1e
+    text: "A protective reef enclosed a large sheltered harbour"
+correct_choice_ids:
+  - 908ef05a-fdf8-4cbd-bc76-62527ec3bb1e
+explanation: "A reef encloses a very large natural harbour."
+archived: false

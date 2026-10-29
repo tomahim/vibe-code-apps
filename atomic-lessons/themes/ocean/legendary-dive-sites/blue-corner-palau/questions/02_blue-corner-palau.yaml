@@ -1,0 +1,19 @@
+id: f5062828-ce50-4f50-81ad-c16e86fbddd5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What shape does Blue Corner have?"
+choices:
+  - id: 465644cb-2f4f-461c-84f6-8948875797aa
+    text: "A perfect circle"
+  - id: 3b808cf4-1904-4963-a268-8e7b695aa246
+    text: "A long straight line"
+  - id: 4ff9db2c-024c-43de-9205-8f3b4e836d59
+    text: "A ring around a lagoon"
+  - id: f4ef2cf0-3c5a-4e0d-99d0-d265ae4be4ff
+    text: "Triangular, like a submerged peninsula"
+correct_choice_ids:
+  - f4ef2cf0-3c5a-4e0d-99d0-d265ae4be4ff
+explanation: "It has stepped walls on the Pacific sides."
+archived: false

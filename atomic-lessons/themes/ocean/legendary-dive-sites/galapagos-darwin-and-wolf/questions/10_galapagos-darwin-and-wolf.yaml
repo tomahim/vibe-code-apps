@@ -1,0 +1,19 @@
+id: 349de966-5b45-463c-9dd5-90952564e91e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When did Darwin's Arch collapse?"
+choices:
+  - id: f46fc34f-6d9f-4e46-a6c2-8566a9db2ca7
+    text: "17 February 1944"
+  - id: e4921c76-2a14-43e7-a21f-c270575b1a6a
+    text: "6 October 1941"
+  - id: f6ad6965-817d-426c-a4f5-fb2f2c68b28f
+    text: "21 June 1919"
+  - id: 2e349232-76a5-436a-ab3e-c10ee8a7bf77
+    text: "17 May 2021"
+correct_choice_ids:
+  - 2e349232-76a5-436a-ab3e-c10ee8a7bf77
+explanation: "It fell into the sea after natural erosion."
+archived: false

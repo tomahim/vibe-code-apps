@@ -1,0 +1,19 @@
+id: fa5d1905-3e21-49bf-872f-bb419690c7a0
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Why did recreational diving on the wreck only start in the early 1990s?"
+choices:
+  - id: 8878cca6-cd26-4c5a-a323-68712dbdf9a1
+    text: "It was built then"
+  - id: ad576ef6-5a79-4087-b678-b2ea416ce558
+    text: "It was closed by the army"
+  - id: 543e8451-5976-4844-8312-e3265c854134
+    text: "It was moved by a salvage company"
+  - id: f994e991-d0e5-4025-97b0-dead22b55034
+    text: "The wreck was forgotten until a dive boat found it again"
+correct_choice_ids:
+  - f994e991-d0e5-4025-97b0-dead22b55034
+explanation: "After Cousteau, the site was forgotten except by fishermen until the dive boat Poolster revisited it."
+archived: false

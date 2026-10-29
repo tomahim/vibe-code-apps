@@ -1,0 +1,19 @@
+id: 2fd6ed00-41a9-4308-8488-204461d8f9fe
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does the assessment of Ngemelis say about grey reef sharks?"
+choices:
+  - id: 7795ca76-259e-4b10-bb79-301eb9d31235
+    text: "They never visit"
+  - id: fdebe3be-11d2-480b-a194-ecdf0dd28845
+    text: "They are extinct there"
+  - id: 9de81fba-ba9b-4a12-ad66-73f27b279a1e
+    text: "They are only fed by tourists"
+  - id: b4bffad3-c857-4922-94bb-6dd6593351e3
+    text: "It is a feeding and reproductive area for them"
+correct_choice_ids:
+  - b4bffad3-c857-4922-94bb-6dd6593351e3
+explanation: "The area is important for feeding and reproduction."
+archived: false

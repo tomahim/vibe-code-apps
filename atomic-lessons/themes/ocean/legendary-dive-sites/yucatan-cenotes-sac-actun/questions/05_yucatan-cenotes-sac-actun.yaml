@@ -1,0 +1,19 @@
+id: 2e30db97-09dc-4b89-986a-e9def843b3d1
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where did exploration of Sac Actun start?"
+choices:
+  - id: 7af187ad-5454-4de5-91b0-52fc4e2e6ae1
+    text: "Silfra in Iceland"
+  - id: 22b9c732-bcb1-412e-864f-d4506bcda326
+    text: "Gran Cenote near Tulum"
+  - id: 2c5445f2-a5b9-4db1-8b61-4bc42867a76a
+    text: "Blue Corner in Palau"
+  - id: 962307dc-a8a2-4d60-bb1c-03c477b77ab3
+    text: "Scapa Flow in Orkney"
+correct_choice_ids:
+  - 22b9c732-bcb1-412e-864f-d4506bcda326
+explanation: "Gran Cenote is near the town of Tulum."
+archived: false

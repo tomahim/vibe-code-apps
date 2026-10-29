@@ -1,0 +1,19 @@
+id: 9b77f234-aa4f-400f-819d-f091fdb60d53
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "When did the no-take rule come into effect?"
+choices:
+  - id: 6ffe3673-f6dd-4d02-9cf0-f56595980d3a
+    text: "1909"
+  - id: b1ce5cab-6825-4af4-89f8-2abb38e0d5e4
+    text: "2009"
+  - id: c3dad517-cb0d-48a1-9894-fad86447c036
+    text: "2015, immediately"
+  - id: 5ada2a35-36d3-43cd-b35a-62c9c789475e
+    text: "2020, after a five-year phase-out"
+correct_choice_ids:
+  - 5ada2a35-36d3-43cd-b35a-62c9c789475e
+explanation: "The sanctuary was created in 2015 and the rule started in 2020."
+archived: false

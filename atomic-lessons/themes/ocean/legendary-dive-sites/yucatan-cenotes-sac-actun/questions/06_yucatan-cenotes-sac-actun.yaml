@@ -1,0 +1,19 @@
+id: c2ecfb1e-8840-43b3-b2d5-44c5574a8db2
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What does Sac Actun mean in Yucatec Maya?"
+choices:
+  - id: 6960e549-5cb5-4852-9cac-82e887eec324
+    text: "Black pit"
+  - id: 80f5fd5c-4c8a-4cfb-92ad-99f0c2b11cef
+    text: "Blue river"
+  - id: 4e32bee5-1ef6-4daa-8654-9573c11319a0
+    text: "Deep sea"
+  - id: cba96df2-491a-4eb3-bda7-5cc60b2d2d20
+    text: "White cave"
+correct_choice_ids:
+  - cba96df2-491a-4eb3-bda7-5cc60b2d2d20
+explanation: "The name means white cave."
+archived: false

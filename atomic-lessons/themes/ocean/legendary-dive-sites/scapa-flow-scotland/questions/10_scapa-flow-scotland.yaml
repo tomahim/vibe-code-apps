@@ -1,0 +1,19 @@
+id: 00682e89-da65-4b00-b3c6-738b80a33a0e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What did Ernest Cox buy for \u00a3250 in the early 1920s?"
+choices:
+  - id: 0a98b408-c2e6-4671-b203-10cb2fc50889
+    text: "A battleship called Hindenburg only"
+  - id: 2de98239-32cc-4414-ab35-775c54694d25
+    text: "The whole island"
+  - id: d0f5f969-5c4a-40e5-a2bc-6252d3e2d5a0
+    text: "A lighthouse"
+  - id: 6189dee5-cc44-4fe6-9a53-46c5944c2319
+    text: "26 destroyers"
+correct_choice_ids:
+  - 6189dee5-cc44-4fe6-9a53-46c5944c2319
+explanation: "He also bought the larger ships Seydlitz and Hindenburg."
+archived: false

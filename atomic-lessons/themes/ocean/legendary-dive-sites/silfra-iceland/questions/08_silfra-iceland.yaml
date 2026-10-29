@@ -1,0 +1,10 @@
+id: ecd07315-5831-46e2-bc30-8bd205b66e68
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Icelandic glacier supplies Silfra's meltwater?"
+accepted_answers:
+  - "Langj\u00f6kull"
+  - "Langjokull"
+explanation: "Langj\u00f6kull is Iceland's second largest glacier."
+archived: false

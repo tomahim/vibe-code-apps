@@ -1,0 +1,9 @@
+id: ac3b18f2-687a-4270-9e85-6bb34d5ff1e4
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "The Great Blue Hole sits in which country?"
+accepted_answers:
+  - "Belize"
+explanation: "It is part of the Belize Barrier Reef Reserve System."
+archived: false

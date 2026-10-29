@@ -1,0 +1,19 @@
+id: d55be603-bcb3-4549-a286-0d9c8fc67fbb
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What happens to visibility when a diver crosses the halocline?"
+choices:
+  - id: aa8795f6-40a8-4e79-8225-6e84a7a45b9c
+    text: "It becomes perfect"
+  - id: da672e77-575c-4397-85bf-90935cf20877
+    text: "It becomes blurry"
+  - id: edccd23b-7d06-4a78-bece-dba6a292738f
+    text: "It disappears for ever"
+  - id: e31a6967-9320-467c-8c36-7bc5eb38234b
+    text: "It turns red"
+correct_choice_ids:
+  - da672e77-575c-4397-85bf-90935cf20877
+explanation: "The mixing of waters bends light."
+archived: false

@@ -1,0 +1,19 @@
+id: 7bf62e33-c8a0-4b74-9d5a-4ba4acf950a5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What bird is found on Waigeo, Gam and Batanta?"
+choices:
+  - id: 6c3ca9de-a8ed-4f4e-a280-64c727fbd6da
+    text: "Penguin"
+  - id: 1d8d147b-85f4-43a2-9c9a-1b13982cf973
+    text: "Albatross"
+  - id: b239f9eb-20fa-4b65-8580-33ba38aad7da
+    text: "Sooty tern"
+  - id: 93b1de2d-4f71-4897-9b40-0602105da77f
+    text: "Red bird-of-paradise"
+correct_choice_ids:
+  - 93b1de2d-4f71-4897-9b40-0602105da77f
+explanation: "Both the red and Wilson's bird-of-paradise live there."
+archived: false

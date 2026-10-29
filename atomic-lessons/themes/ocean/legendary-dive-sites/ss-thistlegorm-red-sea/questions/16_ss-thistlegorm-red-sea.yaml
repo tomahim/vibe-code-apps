@@ -1,0 +1,11 @@
+id: 40b0f078-b60d-4106-b376-12563b4d7fdc
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Name the French explorer who found the wreck in the early 1950s."
+accepted_answers:
+  - "Jacques Cousteau"
+  - "Cousteau"
+  - "Jacques-Yves Cousteau"
+explanation: "He raised items including a motorcycle and the ship's bell."
+archived: false

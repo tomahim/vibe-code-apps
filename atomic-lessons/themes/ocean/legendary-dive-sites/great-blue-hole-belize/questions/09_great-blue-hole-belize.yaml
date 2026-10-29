@@ -1,0 +1,19 @@
+id: 2acefc92-6e4b-4920-aed4-a990a9a07fb6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which ship did Jacques Cousteau bring to the Blue Hole in the early 1970s?"
+choices:
+  - id: d0cb2b57-cff7-4665-97a3-d63c26c1d637
+    text: "Thistlegorm"
+  - id: 8f6fd454-bd7b-41ff-877d-8d8e38935af8
+    text: "Calypso"
+  - id: c50c1c37-db6c-4ca8-82fb-e16a0686fb60
+    text: "Pitt"
+  - id: 18dbb398-9f52-4e35-9084-ad13e2cd82b0
+    text: "Poolster"
+correct_choice_ids:
+  - 8f6fd454-bd7b-41ff-877d-8d8e38935af8
+explanation: "Cousteau charted the hole from his research vessel Calypso."
+archived: false

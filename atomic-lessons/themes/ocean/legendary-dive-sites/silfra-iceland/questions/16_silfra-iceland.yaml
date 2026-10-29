@@ -1,0 +1,12 @@
+id: f87785fc-c8d3-4dbe-adf0-1fe7b938a2e1
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the parliament that first met at \u00deingvellir in 930?"
+accepted_answers:
+  - "Althing"
+  - "The Althing"
+  - "Al\u00feingi"
+  - "Althingi"
+explanation: "The Althing is Iceland's first parliamentary assembly."
+archived: false

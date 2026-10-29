@@ -1,0 +1,10 @@
+id: 0d655a5e-d329-422a-ae58-0dee0411737e
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the nearby island that the ICJ also awarded to Malaysia in 2002?"
+accepted_answers:
+  - "Ligitan"
+  - "Pulau Ligitan"
+explanation: "Sipadan and Ligitan were awarded together."
+archived: false

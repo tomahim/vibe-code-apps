@@ -1,0 +1,19 @@
+id: efddda0b-2f58-4685-a064-d212eef6cc4b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which country governs the Gal\u00e1pagos Islands?"
+choices:
+  - id: 75364d48-8ac2-4ac6-be52-c3be62c9055d
+    text: "Peru"
+  - id: 20648cca-a379-4fe8-b1ed-1b006633d7f6
+    text: "Ecuador"
+  - id: c477502b-ba96-48ec-92f9-352bbb1240d6
+    text: "Mexico"
+  - id: 62c57945-715e-4f8b-9654-ce604033444b
+    text: "Chile"
+correct_choice_ids:
+  - 20648cca-a379-4fe8-b1ed-1b006633d7f6
+explanation: "The islands lie about a thousand kilometres from mainland Ecuador."
+archived: false

@@ -1,0 +1,19 @@
+id: b44fe19d-b911-4fe8-bd97-26256d540e5f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What are tornado-like formations at Sipadan made of?"
+choices:
+  - id: 9e1415b8-01b5-4d45-b5e4-b93caf9caeea
+    text: "Sea turtles"
+  - id: 3a161226-4750-4bfc-937b-4dc3781995be
+    text: "Schools of barracuda"
+  - id: 95c300c3-dc39-457e-9825-c84882e956ef
+    text: "Manta rays"
+  - id: 5372fa83-9b57-4bf7-89a3-70c02bddb509
+    text: "Jellyfish"
+correct_choice_ids:
+  - 3a161226-4750-4bfc-937b-4dc3781995be
+explanation: "Barracuda gather in huge swirling schools."
+archived: false

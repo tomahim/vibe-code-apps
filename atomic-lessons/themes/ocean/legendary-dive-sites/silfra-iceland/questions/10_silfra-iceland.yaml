@@ -1,0 +1,19 @@
+id: fdc312da-547f-4279-8ac8-eebc57161025
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Why is the water so clear?"
+choices:
+  - id: 6487ba36-db14-472b-ad1f-b2d03706be82
+    text: "It is distilled in a factory"
+  - id: f8d1a19b-ee16-4ca2-bb65-7dd35afec99e
+    text: "It is treated with chemicals"
+  - id: ef99c908-3ac8-45af-8bfe-8b01f9e11952
+    text: "It is moving fast from the sea"
+  - id: 9ffc57fa-3082-41ed-9f7e-9ddbe6c5939f
+    text: "It is filtered through porous lava rock for decades"
+correct_choice_ids:
+  - 9ffc57fa-3082-41ed-9f7e-9ddbe6c5939f
+explanation: "The lava acts as a natural filter."
+archived: false

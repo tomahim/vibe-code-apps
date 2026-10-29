@@ -1,0 +1,10 @@
+id: a9c73aa5-aa69-4ae2-bf29-50b67cf8d1c4
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What does the name Raja Ampat mean in English?"
+accepted_answers:
+  - "four kings"
+  - "the four kings"
+explanation: "Raja Ampat means four kings."
+archived: false

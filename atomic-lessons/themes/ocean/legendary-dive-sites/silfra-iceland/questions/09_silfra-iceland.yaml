@@ -1,0 +1,19 @@
+id: a281b610-7bf1-458d-9f5a-ba945131be1e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does Silfra's water originally come from?"
+choices:
+  - id: 0240c9ea-dd16-4981-9210-21c20dc70419
+    text: "Rainwater from the Atlantic"
+  - id: b49daa12-0e0a-44f7-a4a1-5a43452594c7
+    text: "Meltwater from the Langj\u00f6kull glacier"
+  - id: 030b36e4-2d52-4049-9c53-a00eeacbee7e
+    text: "Hot springs under a volcano"
+  - id: f2970270-efa8-45ae-9a4f-073a00cc5c2e
+    text: "The sea"
+correct_choice_ids:
+  - b49daa12-0e0a-44f7-a4a1-5a43452594c7
+explanation: "The glacier lies north of the lake."
+archived: false

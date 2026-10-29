@@ -1,0 +1,19 @@
+id: f2874b3f-270a-477e-9ed3-95d30c1f3103
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Why do scientific dives in the Blue Hole need cave-certified divers on mixed gases?"
+choices:
+  - id: 808d5222-806c-4cfd-9dfd-692c22782747
+    text: "The water is full of sharks"
+  - id: 978b6b14-baed-4482-907c-33fbff0b5644
+    text: "Permits require them for tourists"
+  - id: 4ec58648-46b9-46fc-bef4-fb446e3af451
+    text: "The air in Belize is thin"
+  - id: 0d0d5c93-40bc-4abc-9a97-7db3c5416469
+    text: "The work was far deeper than recreational limits and in an overhead cave environment"
+correct_choice_ids:
+  - 0d0d5c93-40bc-4abc-9a97-7db3c5416469
+explanation: "Deep cave work is technical diving, not casual recreational diving."
+archived: false

@@ -1,0 +1,19 @@
+id: 22ed23dd-5ac8-4c30-8084-77db9f83ff87
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why is oil a concern for the future?"
+choices:
+  - id: 9a998496-0e79-4a36-8183-92e21fe638f3
+    text: "Oil makes the water clearer"
+  - id: 69bc2f19-6100-47e5-b176-29973dbf6ad2
+    text: "Oil is used to light the wrecks"
+  - id: 83e66671-c610-41b4-b64b-76b4445de16d
+    text: "Wrecks are floating again"
+  - id: a6e0ec4f-bea9-4ea7-8d5f-7a03f3e37052
+    text: "Rusting hulls may leak fuel into the reef"
+correct_choice_ids:
+  - a6e0ec4f-bea9-4ea7-8d5f-7a03f3e37052
+explanation: "Surveys aim to estimate how much oil remains in the hulls."
+archived: false

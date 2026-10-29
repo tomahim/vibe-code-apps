@@ -1,0 +1,19 @@
+id: 7d870125-ed60-4bf7-9116-3e2b702bd382
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the approximate maximum depth of the wreck?"
+choices:
+  - id: 23c8fc32-2185-4d03-8d08-057413300b4e
+    text: "About 5 m"
+  - id: 8cf57558-b1df-47a4-855e-bf276b48885d
+    text: "About 30 m"
+  - id: 4b97dc0b-ea07-42d0-8e9d-b6ffb584b666
+    text: "About 150 m"
+  - id: 201b7689-3b83-463b-ae9d-bc5e7c7f168d
+    text: "About 400 m"
+correct_choice_ids:
+  - 8cf57558-b1df-47a4-855e-bf276b48885d
+explanation: "The depth of around 30 m is shallower than many famous wrecks."
+archived: false

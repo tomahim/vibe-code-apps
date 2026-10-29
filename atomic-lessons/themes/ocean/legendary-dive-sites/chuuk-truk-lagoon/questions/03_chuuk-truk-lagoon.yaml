@@ -1,0 +1,19 @@
+id: ca66f52a-99ba-4034-83d3-0917d7e52d52
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What does Chuuk mean in the Chuukese language?"
+choices:
+  - id: e2ceef7c-6bb5-400f-b709-e8bb039d1efa
+    text: "Lagoon"
+  - id: 66a202f2-57ed-48fb-81d1-47aeb5c3cee8
+    text: "Mountain"
+  - id: fe59d18d-39c0-4c6a-a46f-322879ba2e64
+    text: "Fish"
+  - id: db044319-825d-4ee9-af3a-ece9498e4a2b
+    text: "Ship"
+correct_choice_ids:
+  - 66a202f2-57ed-48fb-81d1-47aeb5c3cee8
+explanation: "The name means mountain."
+archived: false

@@ -1,0 +1,19 @@
+id: 23cffda2-626b-424b-ac3d-ded4afa32826
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was Chuuk Lagoon called formerly?"
+choices:
+  - id: f95391c0-578a-4587-9111-7bddbb490c1b
+    text: "Palau"
+  - id: bdd70169-bf54-4794-af48-90cbf9e87adb
+    text: "Guam"
+  - id: 695ed4bd-b851-496b-baa9-97ca0df1b666
+    text: "Yap"
+  - id: e7c44de1-9e5e-4d83-8da7-7bd6290e8ae2
+    text: "Truk"
+correct_choice_ids:
+  - e7c44de1-9e5e-4d83-8da7-7bd6290e8ae2
+explanation: "The lagoon was known mainly as Truk late in the twentieth century."
+archived: false

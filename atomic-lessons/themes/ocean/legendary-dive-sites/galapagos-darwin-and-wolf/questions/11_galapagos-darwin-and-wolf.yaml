@@ -1,0 +1,19 @@
+id: 9a6bb98f-69a2-442b-8e7a-269e3e856523
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What caused the collapse?"
+choices:
+  - id: 7983243b-4302-41a5-aa1a-cf4e0c3c9d4d
+    text: "A tourist boat"
+  - id: 93c81553-dbaa-40af-8be9-678001310e9f
+    text: "Natural erosion"
+  - id: 0323a688-f48a-4bd8-94e8-0334f9b35226
+    text: "An earthquake that day"
+  - id: 0e704d59-d13d-418c-8b20-0b74e88bce7a
+    text: "A bomb"
+correct_choice_ids:
+  - 93c81553-dbaa-40af-8be9-678001310e9f
+explanation: "Ecuador's Ministry of Environment said it was natural erosion."
+archived: false

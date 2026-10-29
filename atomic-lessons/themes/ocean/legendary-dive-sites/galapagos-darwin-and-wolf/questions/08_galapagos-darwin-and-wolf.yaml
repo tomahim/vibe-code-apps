@@ -1,0 +1,10 @@
+id: c4fe7b81-1947-45b3-929c-3cced17a31f8
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the name of the English naturalist the island is named after? Give his surname."
+accepted_answers:
+  - "Darwin"
+  - "Charles Darwin"
+explanation: "His studies in the Gal\u00e1pagos helped form his theory."
+archived: false

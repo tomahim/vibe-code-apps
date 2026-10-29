@@ -1,0 +1,12 @@
+id: b77733b1-abd6-42e2-ba30-8a9dcab14f50
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What Ecuadorian archipelago do Darwin and Wolf belong to?"
+accepted_answers:
+  - "Gal\u00e1pagos"
+  - "Galapagos"
+  - "Gal\u00e1pagos Islands"
+  - "Galapagos Islands"
+explanation: "They belong to the Gal\u00e1pagos archipelago."
+archived: false

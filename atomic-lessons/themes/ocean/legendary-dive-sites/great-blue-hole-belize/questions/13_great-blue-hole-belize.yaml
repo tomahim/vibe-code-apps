@@ -1,0 +1,19 @@
+id: c3e92bde-4b00-4c49-91ab-12b3a8657f2f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What did the 2018 submarine survey find deep inside the hole?"
+choices:
+  - id: e223a9c1-a003-4a94-ac51-c99409e6699f
+    text: "A sunken Spanish ship"
+  - id: 5fdf352f-eb45-4692-9b9f-5798654f2e90
+    text: "A hydrogen sulfide layer"
+  - id: e2e0390b-c989-4c10-a1f3-668f9a42ce92
+    text: "A coral garden"
+  - id: cbcd628d-72be-4385-b59e-bb604b44573e
+    text: "A fresh spring"
+correct_choice_ids:
+  - 5fdf352f-eb45-4692-9b9f-5798654f2e90
+explanation: "Below the layer the water is dark, anoxic and without life."
+archived: false

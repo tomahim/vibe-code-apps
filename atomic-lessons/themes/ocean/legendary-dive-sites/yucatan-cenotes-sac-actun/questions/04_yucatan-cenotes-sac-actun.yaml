@@ -1,0 +1,19 @@
+id: 0a3fb660-0a7b-4169-aada-397109e93002
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is a cenote?"
+choices:
+  - id: 931a56ed-d038-426b-bc3e-8ba07785e79a
+    text: "A type of fish"
+  - id: 4980639e-48d2-45d2-9265-eb48735ff1c0
+    text: "A Mayan temple"
+  - id: 3bb3d88e-9128-440c-b83f-64153e264420
+    text: "A volcano"
+  - id: 2b10b097-b8d1-4590-8e55-0a66dc99fb7f
+    text: "A sinkhole giving access to flooded caves"
+correct_choice_ids:
+  - 2b10b097-b8d1-4590-8e55-0a66dc99fb7f
+explanation: "It forms when a cave roof collapses or opens to the surface."
+archived: false

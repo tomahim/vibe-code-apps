@@ -1,0 +1,9 @@
+id: 9a331108-08d6-4ebc-a44d-799149260cff
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year was the Palau National Marine Sanctuary established?"
+accepted_answers:
+  - "2015"
+explanation: "It was established in 2015 under President Remengesau."
+archived: false

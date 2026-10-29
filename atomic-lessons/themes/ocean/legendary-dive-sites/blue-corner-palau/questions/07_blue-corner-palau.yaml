@@ -1,0 +1,10 @@
+id: 691d73a8-7f61-442e-b63a-7bbdd2e227da
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Which country's waters were declared the world's first shark sanctuary in 2009?"
+accepted_answers:
+  - "Palau"
+  - "Republic of Palau"
+explanation: "Palau announced it at the UN General Assembly on 25 September 2009."
+archived: false

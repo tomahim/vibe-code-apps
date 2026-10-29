@@ -1,0 +1,19 @@
+id: 04736584-c8db-4c34-bc58-21248b8e564f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What kind of ship was the Thistlegorm?"
+choices:
+  - id: d34de850-4236-4cfd-9510-a175d3c28453
+    text: "A German battleship"
+  - id: 7812e2dc-a052-4645-ae08-cefbda19e21a
+    text: "A passenger liner"
+  - id: 9ff4ddb7-5fcf-441b-ac57-608c3f3b5c9c
+    text: "A fishing trawler"
+  - id: 9e14fdda-bc21-4382-b6b9-9cad5741b904
+    text: "A British cargo steamship"
+correct_choice_ids:
+  - 9e14fdda-bc21-4382-b6b9-9cad5741b904
+explanation: "She was a merchant ship built in Sunderland in 1940."
+archived: false

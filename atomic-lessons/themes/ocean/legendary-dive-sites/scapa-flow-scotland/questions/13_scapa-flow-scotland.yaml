@@ -1,0 +1,19 @@
+id: 15f0320c-2782-48a8-ba4c-2138ca3dafbf
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What happened in 2025 at Scapa Flow?"
+choices:
+  - id: 0e6602ff-2e9b-4270-875a-4677d25498a3
+    text: "The wrecks were all raised"
+  - id: fce1712c-eaa2-45d5-a33e-ae4ce95a24ee
+    text: "The whole site became a marine protected area"
+  - id: b0bd1274-fbb0-4b3c-a103-fd3ca618f090
+    text: "The last wreck was sold"
+  - id: fa3d66f4-6b23-455f-942d-977b20027490
+    text: "A museum ship arrived"
+correct_choice_ids:
+  - fce1712c-eaa2-45d5-a33e-ae4ce95a24ee
+explanation: "Protection was extended to the entire site."
+archived: false

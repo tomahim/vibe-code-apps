@@ -1,0 +1,10 @@
+id: ae9f06e5-9497-4ecd-925b-bda3b7bdfb57
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "Name the ridge that crosses Iceland and forms the boundary at Silfra."
+accepted_answers:
+  - "Mid-Atlantic Ridge"
+  - "The Mid-Atlantic Ridge"
+explanation: "It is the divergent boundary between the North American and Eurasian plates."
+archived: false

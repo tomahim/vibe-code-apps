@@ -1,0 +1,19 @@
+id: 7033e3b0-a16c-4d01-bf4d-0f6a86346390
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which shark is often seen patrolling the wall?"
+choices:
+  - id: 777dc9ba-b5fe-41e6-8a83-fefe1769051a
+    text: "Great white shark"
+  - id: fc5efbfd-5cb5-4ad5-9cc6-2e92e3b60061
+    text: "Grey reef shark"
+  - id: 48b231ab-13f5-4173-95b0-bbce8e3b1d65
+    text: "Whale shark only"
+  - id: 0ffad14f-4f84-44e6-b8ee-643d4a0af81c
+    text: "Greenland shark"
+correct_choice_ids:
+  - fc5efbfd-5cb5-4ad5-9cc6-2e92e3b60061
+explanation: "Grey reef sharks use the wall and currents."
+archived: false

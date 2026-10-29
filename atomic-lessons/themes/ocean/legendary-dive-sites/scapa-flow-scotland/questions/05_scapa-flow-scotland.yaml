@@ -1,0 +1,19 @@
+id: 887536fc-93ee-40c1-95fd-1a39873292fe
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When was the signal to scuttle given?"
+choices:
+  - id: 7a072e8b-fa53-408d-91ee-d9dcc8e523ac
+    text: "11 November 1918"
+  - id: 5959a779-be9e-459c-a57b-a5e4aed9909e
+    text: "21 June 1919"
+  - id: 2e9fae4a-256c-4743-a936-8f4d81c3dd11
+    text: "6 October 1941"
+  - id: 7fb3de40-425d-4dc4-8b7c-62138e2363fa
+    text: "17 February 1944"
+correct_choice_ids:
+  - 5959a779-be9e-459c-a57b-a5e4aed9909e
+explanation: "It was sent on the morning of 21 June 1919, when the British fleet was away on exercises."
+archived: false

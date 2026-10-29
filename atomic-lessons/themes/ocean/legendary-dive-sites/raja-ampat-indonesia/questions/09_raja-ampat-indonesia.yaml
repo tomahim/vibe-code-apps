@@ -1,0 +1,19 @@
+id: ad1c9ec0-1fb9-4aac-b953-f5cb7f7931a7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many reef fish species are recorded?"
+choices:
+  - id: 4691443f-8d7a-4afc-b797-9ef0c5bd01ab
+    text: "More than 17"
+  - id: 25740de5-b451-4f95-8b15-902b82ee120b
+    text: "More than 1,600"
+  - id: 6c3af1a9-d648-4e12-9108-772476033fa2
+    text: "About 170"
+  - id: a48447ec-a0f9-4e1e-9a29-7539a20acedf
+    text: "About 17,000"
+correct_choice_ids:
+  - 25740de5-b451-4f95-8b15-902b82ee120b
+explanation: "More than 1,600 species of reef fish are recorded in the Bird's Head Seascape."
+archived: false

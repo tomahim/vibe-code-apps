@@ -1,0 +1,19 @@
+id: b704edeb-cc39-4ddd-b0aa-d616122c909f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Where is Scapa Flow?"
+choices:
+  - id: 9303f8e6-0a04-4e6f-a7ea-ee40770a0f7a
+    text: "On the coast of Germany"
+  - id: 1152dd53-e0f4-42c7-b6db-6bc2d0964255
+    text: "In the Orkney Islands, Scotland"
+  - id: a38743c3-5ec3-4ac1-a863-4252b37868e2
+    text: "In the Red Sea"
+  - id: e2e35c19-6e29-44a5-9bd9-49b566953029
+    text: "In Iceland"
+correct_choice_ids:
+  - 1152dd53-e0f4-42c7-b6db-6bc2d0964255
+explanation: "It is a sheltered natural harbour in Orkney."
+archived: false

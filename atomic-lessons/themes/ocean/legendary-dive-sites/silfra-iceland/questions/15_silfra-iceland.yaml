@@ -1,0 +1,9 @@
+id: 71d215de-a95d-47fd-b14a-92628293e8f1
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What does Silfra's name mean in English?"
+accepted_answers:
+  - "silver"
+explanation: "The name describes the clarity and shine of the water."
+archived: false

@@ -1,0 +1,19 @@
+id: f24b0e25-8468-4951-b866-224966f42dcb
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country is Blue Corner?"
+choices:
+  - id: f477f521-839c-42ef-8296-9ed8a16aaad8
+    text: "Belize"
+  - id: 7eae2c5a-2195-470a-b0ee-4b71b661a890
+    text: "Palau"
+  - id: d7765f45-9e29-481d-92f5-99f12bf6a842
+    text: "Iceland"
+  - id: 7ae82b26-ad38-4c68-aea8-8e80a8b03c53
+    text: "Malaysia"
+correct_choice_ids:
+  - 7eae2c5a-2195-470a-b0ee-4b71b661a890
+explanation: "Blue Corner is a section of Palau's barrier reef near Koror."
+archived: false

@@ -1,0 +1,19 @@
+id: 34e4344e-8ae3-4b9d-809e-fa07edfa1fc2
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which kind of landscape formed the cave?"
+choices:
+  - id: cc1cfa58-ddc6-4f34-a2b9-7d02febd64a0
+    text: "Volcanic lava tubes"
+  - id: d7180e63-32d7-429a-856d-84a3aa4150d0
+    text: "Glacial ice tunnels"
+  - id: b8e12a27-da37-44bf-9a2e-db23b26be197
+    text: "Coral growing over a crater"
+  - id: 1efa2eba-08a5-40db-81a2-836d22c3162e
+    text: "Karst limestone dissolved by rain"
+correct_choice_ids:
+  - 1efa2eba-08a5-40db-81a2-836d22c3162e
+explanation: "Slightly acidic rainwater dissolves limestone and carves cavities."
+archived: false

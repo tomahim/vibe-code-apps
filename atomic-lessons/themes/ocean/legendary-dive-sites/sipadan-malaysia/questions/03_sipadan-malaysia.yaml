@@ -1,0 +1,19 @@
+id: a1792c77-a34b-4639-bde3-c3afa40e1a9e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What formed the island?"
+choices:
+  - id: 39410ef3-7c1d-4ff2-8927-e2f9eb7961b6
+    text: "A meteor crater"
+  - id: cc3a08f1-642b-4cbc-b45a-4be98d9f5941
+    text: "Living corals growing on an extinct volcanic cone"
+  - id: 8c2df9e1-783a-4ce2-ac8e-815c1299c8a5
+    text: "Sand deposited by a river"
+  - id: 5e2a5f93-eccd-4435-b4f4-4f8fea5a6e43
+    text: "A collapsed cave"
+correct_choice_ids:
+  - cc3a08f1-642b-4cbc-b45a-4be98d9f5941
+explanation: "Corals built limestone on top of an old volcano over thousands of years."
+archived: false
