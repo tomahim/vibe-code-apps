@@ -4,13 +4,19 @@ on:
   pull_request:
     paths:
       - 'atomic-lessons/**'
-      - 'api/apps/learning/**'
+      # Only what the importer reads or writes: not the learner API, rewards or their tests.
+      - 'api/apps/learning/models.py'
+      - 'api/apps/learning/migrations/**'
+      - 'api/apps/learning/management/**'
       - '.github/workflows/sync-atomic-lessons.yml'
   push:
     branches: [master]
     paths:
       - 'atomic-lessons/**'
-      - 'api/apps/learning/**'
+      # Only what the importer reads or writes: not the learner API, rewards or their tests.
+      - 'api/apps/learning/models.py'
+      - 'api/apps/learning/migrations/**'
+      - 'api/apps/learning/management/**'
       - '.github/workflows/sync-atomic-lessons.yml'
   workflow_dispatch:
 
