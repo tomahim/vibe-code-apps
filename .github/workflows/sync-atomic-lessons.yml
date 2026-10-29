@@ -79,4 +79,13 @@ jobs:
         working-directory: api
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # Optional card-illustration pipeline (#195): with the media bucket
+          # secrets set, changed card images are resized to WebP variants and
+          # uploaded before the content transaction. Without them the sync
+          # skips variant processing and images stay on the repository fallback.
+          AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+          AWS_S3_ENDPOINT_URL: ${{ secrets.AWS_S3_ENDPOINT_URL }}
+          AWS_S3_REGION_NAME: ${{ secrets.AWS_S3_REGION_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: python manage.py sync_atomic_lessons --commit "${{ github.sha }}"
