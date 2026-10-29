@@ -152,12 +152,9 @@ def complete_card(request, card_id):
 @jwt_required
 def question_attempts(request):
     try:
-        data = json_object(request, ["question_id", "answer", "attempt_type"])
+        data = json_object(request, ["question_id", "answer"])
         if not isinstance(data.get("question_id"), str) or not isinstance(data.get("answer"), str):
             raise ValidationError("Provide question_id and answer as strings.")
-        quiz = "attempt_type" in data
-        if quiz and data["attempt_type"] != QuestionAttempt.AttemptType.QUIZ:
-            raise ValidationError('The only accepted attempt_type is "quiz"; other types are derived.')
         try:
             question_id = UUID(data["question_id"])
         except ValueError:
@@ -172,17 +169,14 @@ def question_attempts(request):
         if question.type == Question.Type.MULTIPLE_CHOICE and data["answer"] not in {o["id"] for o in question.options}:
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
-        if quiz:
-            # Catch-up quiz answers bypass the current-checkpoint rule: their
-            # pool is fully read lessons and never-correctly-answered questions.
-            if not state.lesson_fully_read(question.lesson_id):
-                return JsonResponse({"error": "Read every card of this lesson before its catch-up questions."},
-                                    status=409)
-            if question.pk in state.correct_questions:
-                return JsonResponse({"error": "You already answered this question correctly."}, status=409)
         checkpoint = (question.lesson_id, question.after_card_position)
-        review = checkpoint in state.passed
-        if quiz:
+        fully_read = state.lesson_fully_read(question.lesson_id)
+        catch_up = fully_read and question.pk not in state.correct_questions
+        review = checkpoint in state.passed and not catch_up
+        if fully_read:
+            # Once the cards are read every question is answerable (#204): a
+            # gap behaves like a first-run attempt (initial/retry, usual
+            # carrot), an already-correct question is ordinary review practice.
             current = True
         elif review:
             selected = next((q for q in checkpoint_questions(state, question.lesson)
@@ -196,7 +190,7 @@ def question_attempts(request):
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
         checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
                           and q.after_card_position == question.after_card_position]
-        retry = not quiz and QuestionAttempt.objects.filter(
+        retry = QuestionAttempt.objects.filter(
             user=request.user, question_id__in=checkpoint_ids,
             attempt_type__in=["initial", "retry"]).exists()
         correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
@@ -205,14 +199,12 @@ def question_attempts(request):
                    })
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
-            attempt_type=("quiz" if quiz else "review" if review else "retry" if retry else "initial"),
+            attempt_type=("review" if review else "retry" if retry else "initial"),
             submitted_answer=data["answer"],
             correct=correct, answered_at=timezone.now(),
         )
         state = LearnerState(request.user)
-        if quiz:
-            following = None  # The quiz session queues its own next question.
-        elif review:
+        if review:
             following = None
             if not attempt.correct:
                 selected = next(q for q in checkpoint_questions(state, question.lesson)
@@ -232,19 +224,37 @@ def question_attempts(request):
 @require_GET
 @jwt_required
 def catch_up(request, path_id):
-    """The shuffled catch-up quiz pool of one learning path (#204): every
-    question of a fully read lesson that has no correct answer yet."""
+    """One quiz session for a learning path (#204): ten random questions.
+    While gaps remain they come from the catch-up pool - questions of fully
+    read lessons with no correct answer yet; once none remain, the session is
+    review practice over already-answered questions. `remaining` always counts
+    the gap pool, so the gauge and the button never confuse the two."""
     path = get_object_or_404(visible(LearningPath), pk=path_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     titles = {lesson.pk: lesson.title for lesson in lessons}
-    pool = state.catch_up_questions(lessons)
-    random.shuffle(pool)
-    return JsonResponse({"learning_path_id": str(path.pk),
+    gaps = state.catch_up_questions(lessons)
+    mode = "catch_up"
+    pool = gaps
+    if not gaps:
+        mode = "review"
+        pool = [q for lesson in lessons if state.lesson_fully_read(lesson.pk)
+                for q in state.questions
+                if q.lesson_id == lesson.pk and q.pk in state.correct_questions]
+    # Session mix (#204): up to 6 questions whose latest attempt is oldest -
+    # they are due for review - filled to 10 with random picks of the rest.
+    # Never-attempted catch-up questions have no attempt yet: they are randoms.
+    old = sorted((q for q in pool if q.pk in state.last_attempt),
+                 key=lambda q: state.last_attempt[q.pk])[:6]
+    rest = [q for q in pool if q.pk not in {q.pk for q in old}]
+    random.shuffle(rest)
+    session = old + rest[:10 - len(old)]
+    random.shuffle(session)
+    return JsonResponse({"learning_path_id": str(path.pk), "mode": mode,
                          "eligible": any(state.lesson_fully_read(lesson.pk) for lesson in lessons),
-                         "remaining": len(pool),
+                         "remaining": len(gaps),
                          "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
-                                       for q in pool]})
+                                       for q in session]})
 
 
 @never_cache

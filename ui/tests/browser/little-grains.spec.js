@@ -392,13 +392,16 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await page.route('**/api/learning/**', route => {
     const url = new URL(route.request().url());
     if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson()] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
-    if (url.pathname.endsWith('/catch-up/')) return route.fulfill({ json: { learning_path_id: id.path, eligible: true, remaining: quizQuestions.length, questions: quizQuestions } });
+    if (url.pathname.endsWith('/catch-up/')) {
+      const done = solved.size === 2;
+      return route.fulfill({ json: { learning_path_id: id.path, mode: done ? 'review' : 'catch_up', eligible: true, remaining: done ? 0 : quizQuestions.length, questions: quizQuestions } });
+    }
     if (url.pathname.endsWith('/question-attempts/')) {
       const body = JSON.parse(route.request().postData());
-      expect(body.attempt_type).toBe('quiz');
+      expect(body.attempt_type).toBeUndefined(); // No quiz type: the server derives initial/retry/review.
       const correct = body.answer === 'few' || body.answer.toLowerCase().includes('moistur');
       if (correct) solved.add(body.question_id);
-      return route.fulfill({ status: 201, json: { correct, attempt_type: 'quiz', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
+      return route.fulfill({ status: 201, json: { correct, attempt_type: 'retry', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
     }
     return route.fulfill({ json: {} });
   });
@@ -440,9 +443,16 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await expect(quiz.getByText('2 of 2 answered correctly')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-204-quiz-summary-mobile.png' });
   await quiz.getByRole('button', { name: 'Back to the garden' }).click();
-  // The garden refreshed: nothing left, the button becomes the done state.
-  await expect(panel.locator('.lg-quiz-done')).toHaveText('All questions answered ✓');
+  // The garden refreshed: nothing left, the button becomes the review quiz.
+  await expect(panel.locator('.lg-quiz-hint')).toHaveText('All questions answered ✓');
   await expect(panel.locator('.lg-gauge')).toContainText('100%');
   await expect(panel.locator('.lg-lessons .pc')).toHaveCount(0);
   await page.screenshot({ path: '/tmp/lg-204-gauge-complete-mobile.png' });
+
+  // At 100% the quiz stays available as review practice.
+  await panel.getByRole('button', { name: '🌱 Review quiz' }).click();
+  const review = page.getByRole('dialog', { name: 'Review quiz - English for babies' });
+  await expect(review.getByText('REVIEW QUIZ', { exact: true })).toBeVisible();
+  await expect(review.getByText('How often should you bathe a newborn?')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-204-review-quiz-mobile.png' });
 });

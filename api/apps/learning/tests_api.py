@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -198,12 +198,16 @@ class LearningAPITests(TestCase):
         self.assertEqual(wrong.json()["attempt_type"], "review")
         self.assertFalse(wrong.json()["correct"])
         self.assertNotEqual(wrong.json()["next_step"]["id"], first_id)
-        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).status_code, 409)
+        # The lesson is fully read: every question stays answerable, and an
+        # already-correct one is an ordinary review.
+        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()["attempt_type"], "review")
         next_id = wrong.json()["next_step"]["id"]
         self.assertEqual(next_id, str(alternative.pk) if first_id == str(self.question.pk) else str(self.question.pk))
         correct = self.post(attempt_url, {"question_id": next_id,
                                           "answer": Question.objects.get(pk=next_id).answer})
-        self.assertEqual(correct.json()["attempt_type"], "review")
+        # The alternative was never answered correctly: its first correct is a
+        # first-run retry, even reached through the review rotation.
+        self.assertEqual(correct.json()["attempt_type"], "retry")
         self.assertTrue(correct.json()["correct"])
         self.assertIsNone(correct.json()["next_step"])
         # A first correct answer counts toward completion even in review: the
@@ -231,7 +235,7 @@ class LearningAPITests(TestCase):
         self.assertEqual(final["lesson"]["progress"], after["lesson"]["progress"])
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"], completed_rewards)
         self.assertEqual(list(QuestionAttempt.objects.values_list("attempt_type", flat=True)),
-                         ["initial", "review", "review", "review", "review"])
+                         ["initial", "review", "review", "retry", "review", "review"])
 
     def test_completed_lesson_uses_typed_translation_on_review(self):
         translations = [
@@ -246,23 +250,23 @@ class LearningAPITests(TestCase):
         lesson_url = f"/api/learning/lessons/{self.lesson.pk}/"
         attempt_url = "/api/learning/question-attempts/"
         self.assertEqual(self.client.get(lesson_url).json()["questions"][0]["type"], "multiple_choice")
+        # While the lesson is unread the typed alternatives are not answerable.
+        self.assertEqual(self.post(attempt_url, {"question_id": str(translations[0].pk),
+                                                 "answer": translations[0].answer}).status_code, 409)
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.assertEqual(self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"}).status_code, 201)
-        # One of three questions answered correctly: not complete yet, and the
-        # typed alternatives stay out of the lesson flow. The catch-up quiz is
-        # how they are answered for the first time.
+        # One of three questions answered correctly: not complete yet. The
+        # catch-up quiz is how the typed alternatives get their first answer.
         before = self.client.get(lesson_url).json()
         self.assertFalse(before["lesson"]["progress"]["completed"])
         self.assertEqual(before["questions"][0]["type"], "multiple_choice")
-        self.assertEqual(self.post(attempt_url, {"question_id": str(translations[0].pk),
-                                                 "answer": translations[0].answer}).status_code, 409)
         pool = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
         self.assertEqual({q["id"] for q in pool["questions"]}, {str(q.pk) for q in translations})
         for typed in translations:
-            quiz = self.post(attempt_url, {"question_id": str(typed.pk), "answer": typed.answer,
-                                           "attempt_type": "quiz"})
+            quiz = self.post(attempt_url, {"question_id": str(typed.pk), "answer": typed.answer})
             self.assertEqual(quiz.status_code, 201)
-            self.assertEqual(quiz.json()["attempt_type"], "quiz")
+            # A normal retry: the checkpoint already saw a first attempt.
+            self.assertEqual(quiz.json()["attempt_type"], "retry")
         before = self.client.get(lesson_url).json()
         self.assertTrue(before["lesson"]["progress"]["completed"])
         self.assertEqual(before["questions"][0]["type"], "type_answer_question")
@@ -281,7 +285,9 @@ class LearningAPITests(TestCase):
         next_id = wrong.json()["next_step"]["id"]
         self.assertNotEqual(first_id, next_id)
         self.assertIn(next_id, {str(question.pk) for question in translations})
-        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).status_code, 409)
+        # The lesson is fully read: every question stays answerable, and an
+        # already-correct one is an ordinary review.
+        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()["attempt_type"], "review")
 
         next_question = Question.objects.get(pk=next_id)
         variant = next_question.accepted_answers[-1].upper().replace("'", "’") + "  !!"
@@ -344,9 +350,11 @@ class LearningAPITests(TestCase):
         other = alt if selected == str(self.question.pk) else self.question
         self.assertEqual(len(data["questions"]), 1)
         self.assertEqual(data["lesson"]["progress"]["checkpoints_total"], 1)
-        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        # The unselected alternative is rejected while the lesson is unread;
+        # once every card is read it joins the catch-up pool.
         self.assertEqual(self.post("/api/learning/question-attempts/", {
             "question_id": str(other.pk), "answer": other.answer}).status_code, 409)
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         chosen = Question.objects.get(pk=selected)
         response = self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
         progress = response.json()["progress"]
@@ -354,11 +362,12 @@ class LearningAPITests(TestCase):
         self.assertEqual(progress["checkpoints_correct"], 1)
         self.assertEqual(progress["questions_correct"], 1)
         self.assertEqual(progress["questions_total"], 2)
-        # The unselected alternative is exactly what the catch-up quiz serves.
+        # The unselected alternative is exactly what the catch-up quiz serves:
+        # a normal retry, the checkpoint already saw the selected attempt.
         quiz = self.post("/api/learning/question-attempts/", {"question_id": str(other.pk),
-                                                              "answer": other.answer, "attempt_type": "quiz"})
+                                                              "answer": other.answer})
         self.assertEqual(quiz.status_code, 201)
-        self.assertEqual(quiz.json()["attempt_type"], "quiz")
+        self.assertEqual(quiz.json()["attempt_type"], "retry")
         self.assertTrue(quiz.json()["progress"]["completed"])
 
     def test_wrong_answers_rotate_questions_and_resume_the_same_alternative(self):
@@ -387,7 +396,10 @@ class LearningAPITests(TestCase):
         self.assertEqual(len(set(question_ids[:3])), 3)
         self.assertEqual(question_ids[3], question_ids[0])
         selected = self.client.get(lesson_url).json()["next_step"]["id"]
-        self.assertEqual(self.post(attempt_url, {"question_id": question_ids[3], "answer": "0"}).status_code, 409)
+        # Fully read lesson: alternatives stay answerable (catch-up pool).
+        resumed = Question.objects.get(pk=question_ids[3])
+        wrong_resumed = next(option["id"] for option in resumed.options if option["id"] != resumed.answer)
+        self.assertEqual(self.post(attempt_url, {"question_id": question_ids[3], "answer": wrong_resumed}).status_code, 201)
         current = Question.objects.get(pk=selected)
         correct = self.post(attempt_url, {"question_id": selected, "answer": current.answer})
         # One of three alternatives answered correctly: the catch-up quiz
@@ -399,8 +411,7 @@ class LearningAPITests(TestCase):
         self.assertNotIn(selected, [q["id"] for q in pool["questions"]])
         for item in pool["questions"]:
             question = Question.objects.get(pk=item["id"])
-            quiz = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer,
-                                           "attempt_type": "quiz"})
+            quiz = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer})
             self.assertEqual(quiz.status_code, 201)
         final = self.client.get(lesson_url).json()
         self.assertTrue(final["lesson"]["progress"]["completed"])
@@ -664,9 +675,9 @@ class LearningAPITests(TestCase):
         self.assertEqual(path["progress"]["questions_correct"], 0)
         self.assertEqual(path["progress"]["questions_total"], 4)
         self.assertEqual(self.client.get(catch_up_url).json(), {
-            "learning_path_id": str(self.path.pk), "eligible": False, "remaining": 0, "questions": []})
-        refused = self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0",
-                                          "attempt_type": "quiz"})
+            "learning_path_id": str(self.path.pk), "mode": "review", "eligible": False,
+            "remaining": 0, "questions": []})
+        refused = self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"})
         self.assertEqual(refused.status_code, 409)
 
         # One correct answer, one only ever wrong, one never attempted; the
@@ -686,26 +697,73 @@ class LearningAPITests(TestCase):
         self.assertEqual(path["progress"]["questions_correct"], 1)
         self.assertFalse(path["progress"]["completed"])
 
-        # Answering the pool through the quiz closes the gaps, once each.
+        # Answering the pool closes the gaps: ordinary retries, no quiz type.
         for item in pool["questions"]:
             question = Question.objects.get(pk=item["id"])
-            response = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer,
-                                               "attempt_type": "quiz"})
+            response = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer})
             self.assertEqual(response.status_code, 201)
-            self.assertEqual(response.json()["attempt_type"], "quiz")
+            self.assertEqual(response.json()["attempt_type"], "retry")
             self.assertIsNone(response.json()["next_step"])
-        self.assertEqual(self.client.get(catch_up_url).json()["questions"], [])
-        repeated = self.post(attempt_url, {"question_id": str(second.pk), "answer": second.answer,
-                                           "attempt_type": "quiz"})
-        self.assertEqual(repeated.status_code, 409)
+        # No gaps left: the endpoint switches to review practice over the
+        # already-answered questions, and re-answering one records a review.
+        done = self.client.get(catch_up_url).json()
+        self.assertEqual(done["mode"], "review")
+        self.assertEqual(done["remaining"], 0)
+        self.assertEqual(len(done["questions"]), 3)
+        selected = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["questions"][0]
+        current = Question.objects.get(pk=selected["id"])
+        repeated = self.post(attempt_url, {"question_id": selected["id"], "answer": current.answer})
+        self.assertEqual(repeated.status_code, 201)
+        self.assertEqual(repeated.json()["attempt_type"], "review")
         progress = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["lesson"]["progress"]
         self.assertTrue(progress["completed"])
         self.assertEqual(progress["questions_correct"], 3)
-        # The checkpoint carrot came from the first correct answer; quiz answers
-        # add none. The lesson bonus follows the new completion rule, and the
-        # path bonus waits for the unread lesson.
+        # The checkpoint carrot came from the first correct answer; retries
+        # and reviews add none. The lesson bonus follows the new completion
+        # rule, and the path bonus waits for the unread lesson.
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"],
                          {"drops": 6, "carrots": 1})
+
+    def test_catch_up_session_caps_at_ten_questions(self):
+        for position in range(2, 14):
+            self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
+                     prompt=f"Extra {position}", options=self.question.options, answer="1")
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        data = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
+        selected = data["questions"][0]["id"]
+        chosen = Question.objects.get(pk=selected)
+        self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
+        result = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
+        self.assertEqual(result["mode"], "catch_up")
+        self.assertEqual(result["remaining"], 12)
+        self.assertEqual(len(result["questions"]), 10)
+        pool_ids = {str(q.pk) for q in Question.objects.filter(lesson=self.lesson)} - {selected}
+        self.assertLessEqual({q["id"] for q in result["questions"]}, pool_ids)
+        # The garden gauge still counts the whole pool, not one session.
+        path = self.client.get("/api/learning/garden/").json()["themes"][0]["learning_paths"][0]
+        self.assertEqual(path["catch_up"], {"eligible": True, "remaining": 12})
+
+    def test_quiz_session_prioritizes_the_oldest_attempts_then_random(self):
+        old = [self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
+                        prompt=f"Old {position}", options=self.question.options, answer="1")
+               for position in range(2, 10)]
+        fresh = [self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
+                          prompt=f"Fresh {position}", options=self.question.options, answer="1")
+                 for position in range(10, 15)]
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        now = datetime.now(timezone.utc)
+        # Eight questions only ever answered wrong; the older the last wrong
+        # attempt, the more due the question. Five more were never attempted.
+        for days, question in enumerate(old):
+            QuestionAttempt.objects.create(user=self.user, question=question, attempt_type="initial",
+                                           submitted_answer="0", correct=False,
+                                           answered_at=now - timedelta(days=10 - days))
+        result = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
+        self.assertEqual(result["remaining"], 14)  # self.question is a gap too
+        served = [q["id"] for q in result["questions"]]
+        self.assertEqual(len(served), 10)
+        # The six oldest wrong-only questions are all in the session.
+        self.assertLessEqual({str(q.pk) for q in old[:6]}, set(served))
 
 from concurrent.futures import ThreadPoolExecutor
 from unittest import skipUnless

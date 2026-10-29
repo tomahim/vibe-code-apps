@@ -50,13 +50,13 @@ class LearnerState:
             user=user, card__in=self.cards,
         ).values_list("card_id", "completed_at"))
         attempts = list(QuestionAttempt.objects.filter(user=user, question__in=self.questions)
-                        .values("question_id", "correct", "attempt_type"))
+                        .values("question_id", "correct", "attempt_type", "answered_at"))
         questions = {q.pk: q for q in self.questions}
         self.passed = {(questions[a["question_id"]].lesson_id,
                         questions[a["question_id"]].after_card_position)
                        for a in attempts if a["correct"] and a["attempt_type"] != "review"}
         # A question counts as answered once it has one correct attempt of any
-        # type, quiz and review included: the gauge means "ever answered correctly".
+        # type, review included: the gauge means "ever answered correctly".
         self.correct_questions = {a["question_id"] for a in attempts if a["correct"]}
         self.wrong_counts = Counter(
             (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position,
@@ -64,6 +64,9 @@ class LearnerState:
             for a in attempts if not a["correct"]
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
+        self.last_attempt = {}
+        for a in attempts:  # ordered by answered_at: the last write wins
+            self.last_attempt[a["question_id"]] = a["answered_at"]
 
     def progress(self, lessons):
         ids = {lesson.pk for lesson in lessons}

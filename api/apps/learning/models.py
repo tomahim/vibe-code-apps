@@ -264,7 +264,6 @@ class QuestionAttempt(models.Model):
         INITIAL = "initial", "Initial"
         RETRY = "retry", "Retry"
         REVIEW = "review", "Review"
-        QUIZ = "quiz", "Catch-up quiz"
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="lg_question_attempts")
     question = models.ForeignKey(Question, on_delete=models.PROTECT, related_name="attempts")
@@ -277,7 +276,7 @@ class QuestionAttempt(models.Model):
         db_table = "lg_question_attempt"
         ordering = ["answered_at", "pk"]
         constraints = [models.CheckConstraint(
-            condition=Q(attempt_type__in=["initial", "retry", "review", "quiz"]), name="lg_attempt_valid_type",
+            condition=Q(attempt_type__in=["initial", "retry", "review"]), name="lg_attempt_valid_type",
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
 

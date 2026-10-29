@@ -494,7 +494,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
       h += `<div class="lg-gauge"><p class="lg-gauge-head"><span>Questions answered correctly</span><b>${qp}%</b></p><span class="bar"><i style="width:${qp}%"></i></span><p class="lg-gauge-count">${qc} of ${qt} questions on this path</p></div>`;
       if (cu.eligible && cu.remaining > 0) h += `<button class="primary lg-quiz" data-quiz="1">🌱 Catch-up quiz · ${cu.remaining} question${cu.remaining === 1 ? '' : 's'} to go</button>`;
-      else if (cu.eligible) h += '<p class="lg-quiz-done">All questions answered ✓</p>';
+      else if (cu.eligible) h += '<button class="primary lg-quiz" data-quiz="1">🌱 Review quiz</button><p class="lg-quiz-hint">All questions answered ✓</p>';
       else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Catch-up quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
       h += renderRecent();
       if (sel >= 0) {

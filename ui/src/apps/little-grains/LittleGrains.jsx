@@ -212,7 +212,7 @@ function CatchUpQuiz({ pathId, pathTitle, onClose, onProgress }) {
     if (!question || !choice.trim() || busy) return;
     setBusy(true); setError("");
     try {
-      const result = await api("question-attempts/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer: choice, attempt_type: "quiz" }) });
+      const result = await api("question-attempts/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer: choice }) });
       setFeedback(result);
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
@@ -232,13 +232,13 @@ function CatchUpQuiz({ pathId, pathTitle, onClose, onProgress }) {
 
   const left = total - solved;
   return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) finish(); }}>
-    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`Catch-up quiz - ${pathTitle}`}>
-      <div className="grains-reader-top"><span className="grains-reader-kicker">Catch-up quiz · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
+    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`${data?.mode === "review" ? "Review quiz" : "Catch-up quiz"} - ${pathTitle}`}>
+      <div className="grains-reader-top"><span className="grains-reader-kicker">{data?.mode === "review" ? "Review quiz" : "Catch-up quiz"} · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
       {error && <p className="grains-error" role="alert">{error}</p>}
       {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>All questions answered</h3><p>Every question of this path has a correct answer. Well grown.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
-        : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+        : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}{data.mode === "catch_up" && data.remaining > total ? ` · ${data.remaining - total} more for your next quiz` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : <>
-          <div className="grains-reader-head"><p>CATCH-UP QUIZ</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
+          <div className="grains-reader-head"><p>{data.mode === "review" ? "REVIEW QUIZ" : "CATCH-UP QUIZ"}</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
           <div className="grains-progress-track" aria-label={`${solved} of ${total} questions answered correctly`}><span style={{ width: `${total ? (solved / total) * 100 : 0}%` }} /></div>
           <div className="grains-reader-content">
             <div className="grains-question">
