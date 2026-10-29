@@ -142,3 +142,95 @@ class LearningImageTests(TestCase):
         self.assertEqual(response["Content-Type"], "image/svg+xml")
         self.assertEqual(response["X-Content-Type-Options"], "nosniff")
         self.assertIn("sandbox", response["Content-Security-Policy"])
+
+
+@override_settings(LEARNING_CONTENT_REPOSITORY="tomahim/vibe-code-apps", MEDIA_URL="/media/")
+class CardIllustrationVariantTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.addCleanup(cache.clear)
+        self.user = get_user_model().objects.create_user(username="variant-learner")
+
+        def row(model, **fields):
+            return model.objects.create(
+                entity=ContentEntity.objects.create(id=uuid4(), kind=model.CONTENT_KIND),
+                position=1, published=True, title=model.__name__,
+                source_path="atomic-lessons/example/index.md", last_changed_commit="a" * 40,
+                **fields,
+            )
+
+        self.theme = row(Theme)
+        self.path = row(LearningPath, theme=self.theme)
+        self.lesson = row(Lesson, learning_path=self.path)
+        sha = "d" * 64
+        self.card = row(
+            Card, lesson=self.lesson, body_markdown="Read",
+            illustration_path="atomic-lessons/example/cards/reef.png",
+            illustration_alt="A coral reef.", illustration_credit="Jane Doe",
+            illustration_license="CC BY 4.0", illustration_width=1600, illustration_height=1200,
+            illustration_source_hash=sha,
+            illustration_variants={
+                "640": f"learning/{None}/{sha}-640.webp",
+                "1280": f"learning/{None}/{sha}-1280.webp",
+            },
+        )
+        self.card.illustration_variants = {
+            "640": f"learning/{self.card.pk}/{sha}-640.webp",
+            "1280": f"learning/{self.card.pk}/{sha}-1280.webp",
+        }
+        self.card.save()
+        SyncLog.objects.create(commit_sha="b" * 40)
+
+    def url(self, row, query=""):
+        return f"/api/learning/images/{row.CONTENT_KIND}/{row.pk}/{query}"
+
+    def test_card_with_variants_redirects_to_a_fresh_signed_url(self):
+        response = self.client.get(self.url(self.card))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response["Location"].endswith(f"learning/{self.card.pk}/{'d' * 64}-640.webp"))
+        self.assertIn("max-age=3000", response["Cache-Control"])
+        self.assertNotIn("no-store", response["Cache-Control"])
+
+    def test_width_parameter_selects_the_variant(self):
+        response = self.client.get(self.url(self.card, "?w=1280"))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response["Location"].endswith("-1280.webp"))
+
+    @patch("apps.learning.images.requests.get")
+    def test_foreign_variant_key_is_never_served(self, get):
+        self.card.illustration_variants = {"640": "learning/other-card/x-640.webp"}
+        self.card.save()
+        upstream = MagicMock()
+        upstream.__enter__.return_value = upstream
+        upstream.status_code = 404
+        get.return_value = upstream
+        response = self.client.get(self.url(self.card, "?w=640"))
+        # The mismatched key is rejected; the safe fallback is the proxy path.
+        self.assertEqual(response.status_code, 404)
+
+    def test_lesson_payload_carries_the_full_illustration(self):
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.user)}"
+        payload = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
+        card = payload["cards"][0]
+        self.assertEqual(card["illustration_width"], 1600)
+        self.assertEqual(card["illustration_credit"], "Jane Doe")
+        self.assertEqual(
+            card["illustration_srcset"],
+            [
+                {"url": f"/api/learning/images/card/{self.card.pk}/?w=640", "width": 640},
+                {"url": f"/api/learning/images/card/{self.card.pk}/?w=1280", "width": 1280},
+            ],
+        )
+
+    def test_card_without_variants_keeps_the_repository_fallback(self):
+        self.card.illustration_variants = {}
+        self.card.save()
+        with patch("apps.learning.images.requests.get") as get:
+            upstream = MagicMock()
+            upstream.__enter__.return_value = upstream
+            upstream.status_code = 200
+            upstream.iter_content.return_value = [b"\x89PNG\r\n\x1a\nexample"]
+            get.return_value = upstream
+            response = self.client.get(self.url(self.card))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "image/png")
