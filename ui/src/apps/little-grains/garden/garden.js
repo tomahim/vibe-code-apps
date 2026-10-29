@@ -459,6 +459,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     replay: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 0 5.4 6.5h-1.7A3.8 3.8 0 1 1 8 4.2c1 0 1.9.4 2.6 1L8.7 7H14V1.7l-1.8 1.8A5.500 5.500 0 0 0 8 2.5z" fill="currentColor"/></svg>',
   };
   const dots = (n, on) => Array.from({ length: n }, (_, i) => `<i class="dot ${i < on ? 'on' : ''}"></i>`).join('');
+  // Progress dots for paths (per lesson) and themes (per path): filled green only when complete, thicker border while in progress.
+  const stateDots = (states) => states.map((st) => `<i class="dot ${st}"></i>`).join('');
+  const pathState = (p) => (p.progress.completed ? 'done' : p.progress.started ? 'cur' : '');
+  const lessonStates = (path) => path.lessonData.map((l) => (l.progress.completed ? 'done' : l.progress.started ? 'cur' : ''));
   const pct = (p) => `${Math.round(p * 100)}%`;
   const toast = (m) => { toastEl.textContent = m; toastEl.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => toastEl.classList.remove('on'), 2600); };
 
@@ -486,7 +490,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p>${renderRecent()}<ul class="lg-list">` +
-        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${dots(p.lessons.length, li.cur)}</span></span><span class="pc">${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
+        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${stateDots(lessonStates(p))}</span></span><span class="pc">${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
       const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
@@ -531,27 +535,40 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   function buildLabels() {
     labelsEl.innerHTML = ''; labelDefs = [];
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
-    if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true }));
-    if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => mobile ? add('lesson', `<i class="n">${pi + 1}</i>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28))) : add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
+    if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b><span class="dots"></span>`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true }));
+    if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
     if (view.level === 'path' && trail) trail.nodes.forEach((n) => add('lesson', `<i class="n">${n.i + 1}</i>${mobile || trail.n > 8 ? '' : `<b>${esc(trail.path.lessons[n.i])}</b>`}`, n.pos.clone().add(new THREE.Vector3(0, mobile ? 1.35 : 1.5, 0)), { i: n.i }));
+    refreshLabelDots();
   }
   const hint = $('.lg-hint'); hint.textContent = mobile ? 'Drag to move · pinch to zoom · two fingers to turn' : 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn'; setTimeout(() => hint.classList.add('gone'), 9000);
   const tv = new THREE.Vector3();
   function placeLabels() {
-    const w = root.clientWidth, h = root.clientHeight;
+    const w = root.clientWidth, h = root.clientHeight, shown = [];
     for (const L of labelDefs) {
       tv.copy(L.anchor).project(camera);
       const vis = tv.z < 1 && Math.abs(tv.x) < 1.1 && Math.abs(tv.y) < 1.1 && !switching;
       L.el.style.opacity = vis ? 1 : 0;
-      if (vis) L.el.style.transform = `translate(-50%,-100%) translate(${((tv.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-tv.y * 0.5 + 0.5) * h).toFixed(1)}px)`;
+      if (vis) shown.push({ L, x: (tv.x * 0.5 + 0.5) * w, y: (-tv.y * 0.5 + 0.5) * h });
     }
+    // Name + dots labels must stay readable: lift a label above any label it would cover.
+    const named = shown.filter((e) => e.L.el.classList.contains('theme') || e.L.el.classList.contains('cell')).sort((a, b) => b.y - a.y), placed = [];
+    for (const e of named) {
+      e.w = e.L.el.offsetWidth; e.h = e.L.el.offsetHeight;
+      for (let guard = 0; guard < 8; guard++) {
+        const hit = placed.find((p) => Math.abs(p.x - e.x) < (p.w + e.w) / 2 + 4 && e.y > p.y - p.h - 4 && p.y > e.y - e.h - 4);
+        if (!hit) break;
+        e.y = hit.y - hit.h - 6;
+      }
+      placed.push(e);
+    }
+    for (const e of shown) e.L.el.style.transform = `translate(-50%,-100%) translate(${e.x.toFixed(1)}px,${e.y.toFixed(1)}px)`;
   }
   function refreshLabelDots() {
     for (const L of labelDefs) {
       if (L.dots) {
         const host = L.el.querySelector('.dots'); if (!host) continue;
-        if (L.cell) { const path = THEMES[L.ti].paths[L.pi], li = lessonInfo(path), k = `${li.cur}/${li.n}`; if (L.k !== k) { L.k = k; host.innerHTML = dots(li.n, li.cur); } }
-        else { const th = THEMES[L.ti], on = th.paths.filter((path) => path.progress.started).length; if (L.k !== on) { L.k = on; host.innerHTML = dots(th.paths.length, on); } }
+        if (L.cell) { const sts = lessonStates(THEMES[L.ti].paths[L.pi]), k = sts.join(','); if (L.k !== k) { L.k = k; host.innerHTML = stateDots(sts); } }
+        else { const sts = THEMES[L.ti].paths.map(pathState), k = sts.join(','); if (L.k !== k) { L.k = k; host.innerHTML = stateDots(sts); } }
       }
       if (L.i != null && trail) { const f = targetOf(`L${L.i}`); L.el.dataset.state = f >= 0.995 ? 'done' : f > 0.01 ? 'cur' : 'todo'; }
     }
