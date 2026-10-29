@@ -257,7 +257,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const tileCol = [new THREE.Color(1, 1, 1), new THREE.Color(0.95, 0.9, 0.78), new THREE.Color(0.83, 0.79, 0.68)];
   function disposeTrail() {
     if (!trailGroup) return;
-    trailGroup.traverse((o) => { o.geometry?.dispose?.(); if (o.userData.own) o.material?.dispose?.(); });
+    trailGroup.traverse((o) => { o.geometry?.dispose?.(); if (o.userData.own) { o.material?.map?.dispose?.(); o.material?.dispose?.(); } });
     trail?.plants.dispose(); scene.remove(trailGroup); trailGroup = null; trail = null;
     [...disp.keys()].filter((k) => k[0] === 'T' || k[0] === 'L').forEach((k) => disp.delete(k));
   }
@@ -289,8 +289,6 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       for (let k = 0; k < (mobile ? 3 : 6); k++) { const a = (k / 6) * 6.28 + i * 0.7, d = 0.55 + (k % 2) * 0.08; plants.add(mix.flower, { x: x + Math.cos(a) * d, y: tTop + 0.01, z: z - 0.1 + Math.sin(a) * d * 0.7, rot: r() * 6, s: 1.1 + r() * 0.3, thr: 0.8 + k * 0.025, w: 0.18, key }); }
       nodes.push({ i, pos: new THREE.Vector3(x, tTop, z), ring, stone: tile, dotMat });
     });
-    const fp = new THREE.Vector3(nodes[0].pos.x - 1.55, top, nodes[0].pos.z + 0.1);
-    plants.add('flag', { x: fp.x, y: top, z: fp.z, rot: 0.3, s: 1.6, thr: 0, w: 0.001, key: 'T', min: 1 });
     const inside = (x, z) => inHex(z, x, TRAIL_R - 0.5) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 3.4);
     scatter(r, prof.trailPlants, inside, mobile ? 0.8 : 0.5, TRAIL_R).forEach((pt, i, arr) => {
       const u = i / arr.length, tier = u < 0.3 ? 'sig' : u < 0.65 ? 'mid' : 'low', lst = mix[tier], name = lst[Math.floor(r() * lst.length)], sr = SIG_SCALE[name];
@@ -298,11 +296,31 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       plants.add(name, { x: pt[0], y: top + 0.03, z: pt[1], rot: r() * 6.28, s, thr: tier === 'sig' ? 0.3 + r() * 0.5 : tier === 'mid' ? 0.1 + r() * 0.4 : r() * 0.25, w: 0.3, key: 'T', grow: true, tint: new THREE.Color().setScalar(0.9 + r() * 0.2) });
     });
     plants.build(g);
+    // Next-lesson marker: a gold pennant, a soft halo and a budding orange flower, moved onto the next lesson tile.
+    const nextMark = new THREE.Group();
+    {
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.95, 5).translate(0, 0.475, 0), new THREE.MeshStandardMaterial({ color: '#d9cdb8', roughness: 0.9 }));
+      pole.userData.own = true;
+      const clothGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0.95, 0), new THREE.Vector3(0.36, 0.84, 0), new THREE.Vector3(0, 0.72, 0)]).setIndex([0, 1, 2, 0, 2, 1]);
+      clothGeo.computeVertexNormals();
+      const cloth = new THREE.Mesh(clothGeo, new THREE.MeshStandardMaterial({ color: '#e3a83c', roughness: 0.6, side: THREE.DoubleSide, emissive: '#6b4a0e', emissiveIntensity: 0.3 }));
+      cloth.userData.own = true;
+      const pennant = new THREE.Group(); pennant.add(pole, cloth); pennant.position.set(-0.62, 0, 0.42); pennant.rotation.y = 0.3;
+      const hc = document.createElement('canvas'); hc.width = hc.height = 128; const hx = hc.getContext('2d');
+      const hg = hx.createRadialGradient(64, 64, 8, 64, 64, 64);
+      hg.addColorStop(0, 'rgba(232,179,75,.5)'); hg.addColorStop(0.55, 'rgba(232,179,75,.18)'); hg.addColorStop(1, 'rgba(232,179,75,0)');
+      hx.fillStyle = hg; hx.fillRect(0, 0, 128, 128);
+      const halo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(hc), transparent: true, depthWrite: false }));
+      halo.scale.setScalar(3.6); halo.position.y = 0.015; halo.renderOrder = 4; halo.userData.own = true;
+      const bud = new THREE.Mesh(species.flowerOrange.clone(), plantMat); bud.scale.setScalar(1.6); bud.position.set(0.3, 0.012, 0.26); bud.rotation.y = 0.7;
+      nextMark.add(pennant, halo, bud); nextMark.userData = { halo, pennant };
+    }
+    g.add(nextMark);
     const gl = [], gt = new THREE.Color(theme.top);
     scatter(r, prof.trailGrass, (x, z) => inHex(z, x, TRAIL_R - 0.35) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 1.5), 0, TRAIL_R)
       .forEach((pt) => gl.push({ x: pt[0], y: top, z: pt[1], s: 0.22 + r() * 0.25, rot: r() * 6.28, key: 'T', v: r(), tint: gt.clone().offsetHSL((r() - 0.5) * 0.03, 0, (r() - 0.5) * 0.2).addScalar(0.45) }));
     const tg = makeGrass(gl, g);
-    trail = { ti, pi, theme, path, n, nodes, plants, grass: tg };
+    trail = { ti, pi, theme, path, n, nodes, plants, grass: tg, nextMark };
     scene.add(g); trailGroup = g; g.visible = false;
     ['T', ...nodes.map((x) => `L${x.i}`)].forEach((k) => disp.set(k, 0));
     return trail;
@@ -402,10 +420,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       fade.classList.remove('on'); switching = false; next?.();
     }, reduced ? 0 : 340);
   }
-  function selectLesson(i) { if (view.level !== 'path' || !trail) return; view.lesson = view.lesson === i ? -1 : i; flyTo(viewSpec(), 800); renderUI(); }
+  function selectLesson(i) { if (view.level !== 'path' || !trail) return; view.lesson = view.lesson === i ? -1 : i; dirty = true; flyTo(viewSpec(), 800); renderUI(); }
   function back() {
     if (switching) return;
-    if (view.level === 'path') { if (view.lesson >= 0) { view.lesson = -1; flyTo(viewSpec(), 700); renderUI(); } else exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); }
+    if (view.level === 'path') { if (view.lesson >= 0) { view.lesson = -1; dirty = true; flyTo(viewSpec(), 700); renderUI(); } else exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); }
     else if (view.level === 'theme') goGarden();
   }
 
@@ -537,7 +555,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
     if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b><span class="dots"></span>`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true }));
     if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
-    if (view.level === 'path' && trail) trail.nodes.forEach((n) => add('lesson', `<i class="n">${n.i + 1}</i>${mobile || trail.n > 8 ? '' : `<b>${esc(trail.path.lessons[n.i])}</b>`}`, n.pos.clone().add(new THREE.Vector3(0, mobile ? 1.35 : 1.5, 0)), { i: n.i }));
+    if (view.level === 'path' && trail && !mobile && trail.n <= 8) trail.nodes.forEach((n) => add('lesson', `<b>${esc(trail.path.lessons[n.i])}</b>`, n.pos.clone().add(new THREE.Vector3(0, 1.5, 0))));
     refreshLabelDots();
   }
   const hint = $('.lg-hint'); hint.textContent = mobile ? 'Drag to move · pinch to zoom · two fingers to turn' : 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn'; setTimeout(() => hint.classList.add('gone'), 9000);
@@ -567,16 +585,16 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     for (const L of labelDefs) {
       if (L.dots) {
         const host = L.el.querySelector('.dots'); if (!host) continue;
-        if (L.cell) { const sts = lessonStates(THEMES[L.ti].paths[L.pi]), k = sts.join(','); if (L.k !== k) { L.k = k; host.innerHTML = stateDots(sts); } }
-        else { const sts = THEMES[L.ti].paths.map(pathState), k = sts.join(','); if (L.k !== k) { L.k = k; host.innerHTML = stateDots(sts); } }
+        const sts = L.cell ? lessonStates(THEMES[L.ti].paths[L.pi]) : THEMES[L.ti].paths.map(pathState);
+        const html = mobile ? `<span class="count">(${sts.filter((s) => s === 'done').length} / ${sts.length})</span>` : stateDots(sts);
+        if (L.k !== html) { L.k = html; host.innerHTML = html; }
       }
-      if (L.i != null && trail) { const f = targetOf(`L${L.i}`); L.el.dataset.state = f >= 0.995 ? 'done' : f > 0.01 ? 'cur' : 'todo'; }
     }
   }
 
   // ----- Loop -----
   let raf = 0, last = performance.now(), time = 0, rainT = 0, dirty = true, alive = true, panelKey = '', resized = false;
-  const TRAIL_DONE = new THREE.Color('#5fa84a'), TRAIL_CUR = new THREE.Color(TERRACOTTA), TRAIL_TODO = new THREE.Color('#b9b3a2'), DROP = new THREE.Color('#3f8fd2'), EMPTY = new THREE.Color('#e9e1cd');
+  const TRAIL_DONE = new THREE.Color('#5fa84a'), TRAIL_NEXT = new THREE.Color('#e3a83c'), TRAIL_TODO = new THREE.Color('#b9b3a2'), DROP = new THREE.Color('#3f8fd2'), EMPTY = new THREE.Color('#e9e1cd');
   function resize() {
     const w = Math.max(1, root.clientWidth), h = Math.max(1, root.clientHeight);
     renderer.setSize(w, h, false); camera.aspect = w / h;
@@ -603,7 +621,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         trail.plants.update(disp); updateGrass(trail.grass, disp);
         trail.nodes.forEach((n) => {
           const f = disp.get(`L${n.i}`) ?? 0, tf = targetOf(`L${n.i}`), st = tf >= 0.995 ? 0 : tf > 0.01 ? 1 : 2;
-          n.ring.material.color.copy(st === 0 ? TRAIL_DONE : st === 1 ? TRAIL_CUR : TRAIL_TODO); n.stone.material.color.copy(tileCol[st]);
+          n.ring.material.color.copy(st === 0 ? TRAIL_DONE : TRAIL_TODO); n.stone.material.color.copy(tileCol[st]);
+          if (view.lesson === n.i) n.stone.material.color.multiplyScalar(0.6);
           const filled = trail.path.lessonData[n.i]?.progress.cards_completed || 0; n.dotMat.forEach((m, k) => m.color.copy(k < filled ? DROP : EMPTY));
         });
       }
@@ -613,7 +632,16 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (pk !== panelKey) { panelKey = pk; if (!panel.matches(':hover')) renderPanel(); else panelKey = ''; }
     if (trail && trailGroup.visible) {
       const next = trail.path.lessonData.findIndex((lesson) => !lesson.progress.completed);
-      trail.nodes.forEach((n) => { const active = n.i === next || view.lesson === n.i; n.ring.scale.setScalar(active ? 1 + Math.sin(time * 3) * 0.05 : 1); if (active) n.ring.material.color.copy(TRAIL_CUR); });
+      trail.nodes.forEach((n) => { const isNext = n.i === next; n.ring.scale.setScalar(isNext ? 1 + Math.sin(time * 3) * 0.05 : 1); if (isNext) n.ring.material.color.copy(TRAIL_NEXT); });
+      const mark = trail.nextMark;
+      if (mark) {
+        mark.visible = next >= 0;
+        if (next >= 0) {
+          const np = trail.nodes[next].pos; mark.position.set(np.x, np.y + 0.004, np.z);
+          mark.userData.halo.material.opacity = 0.8 + Math.sin(time * 2.2) * 0.2;
+          mark.userData.pennant.rotation.y = 0.3 + Math.sin(time * 1.4) * 0.12;
+        }
+      }
     }
     outlineMat.opacity = 0.75 + Math.sin(time * 5) * 0.2;
     grassUniforms.uTime.value = time;
