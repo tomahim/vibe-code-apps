@@ -599,7 +599,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       if (L.dots) {
         const host = L.el.querySelector('.dots'); if (!host) continue;
         const sts = L.cell ? lessonStates(THEMES[L.ti].paths[L.pi]) : THEMES[L.ti].paths.map(pathState);
-        const html = mobile ? `<span class="count">(${sts.filter((s) => s === 'done').length} / ${sts.length})</span>` : stateDots(sts);
+        const html = mobile && L.cell ? `<span class="count">(${sts.filter((s) => s === 'done').length} / ${sts.length})</span>` : stateDots(sts);
         if (L.k !== html) { L.k = html; host.innerHTML = html; }
       }
     }
