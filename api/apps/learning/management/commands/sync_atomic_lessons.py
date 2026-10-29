@@ -294,7 +294,8 @@ class Command(BaseCommand):
                 "skipping WebP variant processing (repository fallback keeps serving them)."
             )
             return {}
-        prepared = {}
+        to_process = []
+        unchanged = 0
         for element in cards:
             candidate = self.image_file(element["metadata"], element["directory"], element["location"])
             if not illustrations.raster_image(candidate):
@@ -302,9 +303,18 @@ class Command(BaseCommand):
             sha = illustrations.source_hash(candidate)
             row = Card.objects.filter(pk=element["id"]).first()
             if row is not None and row.illustration_source_hash == sha and row.illustration_variants:
-                continue  # unchanged source: no decode, resize or upload
-            self.stdout.write(f"Processing card image {element['location']} (sha256 {sha[:12]}…)")
+                unchanged += 1  # unchanged source: no decode, resize or upload
+                continue
+            to_process.append((element, candidate))
+        if unchanged:
+            self.stdout.write(f"Illustrations: {unchanged} unchanged (source hash match), no reprocessing.")
+        prepared = {}
+        total = len(to_process)
+        for index, (element, candidate) in enumerate(to_process, start=1):
+            self.stdout.write(f"Illustrations: processing {index}/{total} - {element['location']}")
             prepared[str(element["id"])] = illustrations.process_card_image(element["id"], candidate)
+        if total:
+            self.stdout.write(f"Illustrations: {total}/{total} processed.")
         return prepared
 
     @staticmethod
@@ -374,7 +384,11 @@ class Command(BaseCommand):
         records_by_dir = {}
         positions_seen = {}
         seen_ids = {element["id"] for element in elements}
-        for element in elements:
+        # Periodic one-line progress so CI logs show the import advancing
+        # through themes, paths, lessons, cards and questions (#195).
+        total = len(elements)
+        progress_step = max(1, min(100, total // 25)) if total else 1
+        for index, element in enumerate(elements, start=1):
             element["provenance"]["last_changed_commit"] = self.last_changed_commit(
                 element["provenance"]["source_path"]
             )
@@ -448,6 +462,8 @@ class Command(BaseCommand):
             record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit, seen_ids)
             if element["kind"] in ("theme", "learning_path", "lesson"):
                 records_by_dir[element["directory"]] = record
+            if index % progress_step == 0 or index == total:
+                self.stdout.write(f"Content: {index}/{total} elements processed.")
         self.enforce_retirement(seen_ids)
 
     def enforce_retirement(self, seen_ids):
