@@ -2,8 +2,10 @@
 
 Learning paths and lessons carry no images (#195): only cards may declare an
 optional sibling image with alt text. When a card declares one, the file must
-sit beside the card's Markdown file, use a supported format with a matching
-header, and come with useful alt text.
+sit beside the card's Markdown file, use an optimized raster format (PNG,
+JPEG or WebP, at most 400 KB and 1600 px wide so sync-time WebP variants stay
+cheap), and come with useful alt text plus credit and license metadata.
+Original artwork is exempt from the credit rule with `image_license: original`.
 """
 
 from __future__ import annotations
@@ -14,11 +16,16 @@ import sys
 import xml.etree.ElementTree as ET
 
 import yaml
+from PIL import Image, UnidentifiedImageError
 
 from check_uuids import child_directories, load_metadata
 
 
-IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
+# Raster formats only: the sync turns card images into WebP variants with
+# Pillow, which cannot rasterize SVG. Sources are optimized before commit.
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
+MAX_IMAGE_BYTES = 400 * 1024
+MAX_IMAGE_WIDTH = 1600
 
 
 def has_image_header(path: Path) -> bool:
@@ -48,6 +55,14 @@ def card_files(root: Path):
         for learning_path in child_directories(theme):
             for lesson in child_directories(learning_path):
                 yield from sorted((lesson / "cards").glob("*.md"))
+
+
+def image_dimensions(path: Path) -> tuple[int, int]:
+    """Real pixel dimensions; rejects files Pillow cannot decode."""
+    with Image.open(path) as image:
+        image.verify()
+    with Image.open(path) as image:
+        return image.size
 
 
 def check_card_image(root: Path, card: Path, data: dict) -> list[str]:
@@ -80,9 +95,23 @@ def check_card_image(root: Path, card: Path, data: dict) -> list[str]:
         return [f"{relative}.image: cannot read image: {error}"]
     if not valid:
         return [f"{relative}.image: file does not have a matching image header: {filename}"]
+    if candidate.stat().st_size > MAX_IMAGE_BYTES:
+        return [f"{relative}.image: source image exceeds {MAX_IMAGE_BYTES // 1024} KB; optimize it before committing"]
+    try:
+        width, _ = image_dimensions(candidate)
+    except (UnidentifiedImageError, OSError, SyntaxError) as error:
+        return [f"{relative}.image: cannot decode image: {error}"]
+    if width > MAX_IMAGE_WIDTH:
+        return [f"{relative}.image: source image is {width} px wide; keep it at {MAX_IMAGE_WIDTH} px or less"]
     alt = data.get("image_alt")
     if not isinstance(alt, str) or not alt.strip():
         return [f"{relative}.image_alt: provide a nonempty description of the illustration"]
+    license_value = str(data.get("image_license") or "").strip()
+    if license_value != "original":
+        if not str(data.get("image_credit") or "").strip():
+            return [f"{relative}.image_credit: credit the author, or use image_license: original for your own artwork"]
+        if not license_value:
+            return [f"{relative}.image_license: name the license (for example 'CC BY-SA 4.0'), or 'original'"]
     return []
 
 

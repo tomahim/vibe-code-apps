@@ -45,14 +45,18 @@ archived: false
 ---
 ```
 
-Learning paths and lessons carry no images: illustrations belong to individual cards (#195). A card's Markdown file may declare an optional sibling image with useful `image_alt` text, for example:
+Learning paths and lessons carry no images: illustrations belong to individual cards (#195). A card's Markdown file may declare an optional sibling image, for example:
 
 ```yaml
 image: blue-hole.png
 image_alt: Divers floating over the deep blue sinkhole of the Blue Hole.
+image_caption: The Great Blue Hole drops straight into darkness.
+image_credit: U.S. Geological Survey
+image_license: CC BY 4.0
+image_source_url: https://commons.wikimedia.org/wiki/File:Great_Blue_Hole.jpg
 ```
 
-Use PNG, JPEG, WebP, GIF, or SVG. Commit the image beside the card file; URLs, parent paths, nested asset paths, and links outside the card folder are not accepted.
+Commit the image beside the card file; URLs, parent paths, nested asset paths, and links outside the card folder are not accepted. Use an optimized PNG, JPEG or WebP source: at most 400 KB and 1600 px wide, because the sync decodes it and publishes 640 and 1280 px WebP variants to the media bucket. `image_alt` is required and describes the picture to someone who cannot see it. `image_credit` and `image_license` are required for photos and other reused material so the app can attribute them; your own artwork uses `image_license: original` and needs no credit. `image_caption` and `image_source_url` are optional. Replacing the file re-publishes the variants; an unchanged file is not processed again.
 
 Cards use the same front matter. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
 
@@ -101,7 +105,7 @@ python atomic-lessons/check_images.py
 python -m unittest discover -s atomic-lessons -p 'test_*.py'
 ```
 
-The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. The image check validates every card illustration that is declared: the sibling image must exist, its header must match its extension, alt text is required, and paths outside the card folder are rejected. The retirement check (`check_retired_ids.py`) compares the branch against its base revision and rejects any content ID that disappeared or changed kind: retire content with `archived: true`, never by deleting its file or recycling its ID. Moving or renaming a file is fine while its ID survives. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
+The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. The image check validates every card illustration that is declared: the sibling image must exist as an optimized PNG, JPEG or WebP (400 KB, 1600 px), its header must match its extension, alt text is required, credit and license are required unless the license is `original`, and paths outside the card folder are rejected. The retirement check (`check_retired_ids.py`) compares the branch against its base revision and rejects any content ID that disappeared or changed kind: retire content with `archived: true`, never by deleting its file or recycling its ID. Moving or renaming a file is fine while its ID survives. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
 
 ## Early Childhood English inventory and provenance
 
