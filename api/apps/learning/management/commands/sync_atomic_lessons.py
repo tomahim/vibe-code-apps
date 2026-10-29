@@ -319,7 +319,12 @@ class Command(BaseCommand):
         # what actually reached the bucket.
         total = len(to_process)
         for index, (element, candidate) in enumerate(to_process, start=1):
-            prepared[str(element["id"])] = illustrations.process_card_image(element["id"], candidate)
+            result = illustrations.process_card_image(element["id"], candidate)
+            if not result or not result.get("illustration_variants"):
+                raise CommandError(
+                    f"{element['location']}: illustration processing returned no uploaded variants"
+                )
+            prepared[str(element["id"])] = result
             self.stdout.write(f"Illustrations: uploaded {index}/{total} - {element['location']}")
         if total:
             self.stdout.write(f"Illustrations: all {total} changed source image(s) uploaded successfully.")
