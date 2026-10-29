@@ -4,7 +4,7 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).parent / "themes" / "ocean" / "legendary-dive-sites"
+ROOT = Path(__file__).parent / "themes" / "sport" / "legendary-dive-sites"
 
 
 def front(path):
@@ -12,6 +12,12 @@ def front(path):
 
 
 class DiveSitesTests(unittest.TestCase):
+    def test_sport_location_and_identity(self):
+        metadata = front(ROOT / "index.md")
+        self.assertEqual(metadata["id"], "c1946f94-caf7-4152-840a-31d11c16be8d")
+        self.assertEqual(metadata["position"], 4)
+        self.assertFalse((ROOT.parent.parent / "ocean" / ROOT.name).exists())
+
     def test_structure(self):
         lessons = sorted(p for p in ROOT.iterdir() if p.is_dir())
         self.assertEqual(len(lessons), 10)
