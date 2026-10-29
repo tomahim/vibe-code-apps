@@ -8,7 +8,7 @@ Sources read 2026-10-27:
 
 ## GET themes/
 
-Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `started`, `completed`. All correct alternatives at one checkpoint count once, never as separate required questions. A lesson requires all its visible cards and successful checkpoints; empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
+Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
 Theme, path and lesson objects include `image_url`; cards include `illustration_url`. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
 
@@ -42,11 +42,17 @@ Send `{}` with `Content-Type: application/json`. Marks only the authenticated us
 
 All writes are bearer-only, JSON-only, reject mismatching browser Origin, and run atomically. A user-row lock serializes concurrent progress writes across production PostgreSQL workers. No publishing/content data is modified.
 
+## GET paths/<uuid>/catch-up/
+
+Returns `{learning_path_id, eligible, remaining, questions}`: the shuffled catch-up quiz pool of one learning path (#204). The pool holds every visible question of a lesson whose cards are all read that this learner has never answered correctly — never attempted or only answered wrong. `eligible` is false until at least one lesson of the path is fully read. Questions are the public question shape plus `lesson_title`; answers and explanations stay server-side.
+
 ## POST question-attempts/
 
 Send `{"question_id":"<uuid>","answer":"<choice-id-or-typed-response>"}`. Only the current selected checkpoint question is accepted after its card has been completed. Returns 201 with `attempt_id`, `question_id`, server-inferred `attempt_type` (`initial`, `retry`, or `review`), server-graded `correct`, `explanation`, server `answered_at`, lesson `progress` and `next_step`. A typed-answer response also includes `correct_answer`, the authored canonical response, after submission. The server accepts any authored variant after normalizing case, punctuation, apostrophes, and spacing; typos and unlisted paraphrases remain incorrect. Invalid choices/fields: 400; hidden/unknown question: 404; unselected or premature checkpoint: 409.
 
-**Retry and review behavior:** a wrong answer is recorded, returns its explanation and selects another question at the same checkpoint when the pool has alternatives. The response's `next_step` identifies the newly selected question. The server uses `initial` for the first answer at a checkpoint, `retry` for later answers before the first correct one, and `review` for every answer after that checkpoint was completed. A review answer adds an attempt row but does not change completion or rewards; its `next_step` is the next alternative after a wrong answer, or null after a correct one. Wrong submissions are append-only attempts, so clients should not auto-retry an ambiguous network failure without refetching.
+**Retry and review behavior:** a wrong answer is recorded, returns its explanation and selects another question at the same checkpoint when the pool has alternatives. The response's `next_step` identifies the newly selected question. The server uses `initial` for the first answer at a checkpoint, `retry` for later answers before the first correct one, and `review` for every answer after that checkpoint was completed. A review answer adds an attempt row; its `next_step` is the next alternative after a wrong answer, or null after a correct one. Review answers never earn carrots, but a first correct answer on a question counts toward question completion in review too, so replaying a lesson can close gauge gaps. Wrong submissions are append-only attempts, so clients should not auto-retry an ambiguous network failure without refetching.
+
+**Catch-up quiz answers:** sending `"attempt_type":"quiz"` answers one question of the catch-up pool instead of the current checkpoint. The question's lesson must be fully read and the question must have no correct answer yet, otherwise 409. Quiz attempts are recorded as `quiz`, return `next_step: null` (the quiz session queues its own questions), and count toward the gauge and lesson completion exactly like first-run answers. Other client-supplied `attempt_type` values are rejected with 400.
 
 ## GET progress/
 
@@ -54,7 +60,7 @@ Returns `{progress, learning_paths, lessons}` for the current user only. Aggrega
 
 ## Garden rewards and rankings
 
-`GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level, `rewards: {drops, carrots}`, and `recent_lessons`. Recent lessons are the three most recently opened, still unfinished, visible lessons. Each shortcut includes the lesson and path titles, progress and its authoritative `next_step`; completed lessons are omitted. The frontend uses this snapshot to build the 3D scene and refreshes it after opening lessons and recording progress.
+`GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level, `rewards: {drops, carrots}`, and `recent_lessons`. Each learning path also carries `catch_up: {eligible, remaining}` for the gauge and quiz button. Recent lessons are the three most recently opened, still unfinished, visible lessons. Each shortcut includes the lesson and path titles, progress and its authoritative `next_step`; completed lessons are omitted. The frontend uses this snapshot to build the 3D scene and refreshes it after opening lessons and recording progress.
 
 `GET leaderboard/?currency=drops|carrots&period=weekly|monthly|overall` returns a ranking for one currency and period, plus the learner's own row. The top 20 and personal rank are computed independently for Drops and Carrots. Only learners with a positive score in the selected currency and period are ranked. Weekly periods start Monday 00:00 UTC; monthly periods start on the 1st at 00:00 UTC; overall is cumulative. Ties are ordered by user ID. This first version uses a global ranking.
 

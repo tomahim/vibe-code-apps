@@ -1,3 +1,4 @@
+import random
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
@@ -19,6 +20,12 @@ from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Questi
 from .images import image_url
 from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
+
+
+def catch_up_payload(state, path_lessons):
+    """Gauge context for the path panel: is the quiz unlocked, and how big is the pool."""
+    return {"eligible": any(state.lesson_fully_read(lesson.pk) for lesson in path_lessons),
+            "remaining": len(state.catch_up_questions(path_lessons))}
 
 
 @never_cache
@@ -59,7 +66,8 @@ def path_detail(request, path_id):
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
-                                          "progress": state.progress(lessons)},
+                                          "progress": state.progress(lessons),
+                                          "catch_up": catch_up_payload(state, lessons)},
                          "theme": described(path.theme),
                          "lessons": [lesson_summary(l, state) for l in lessons],
                          "next_lesson_id": next((str(l.pk) for l in lessons
@@ -144,9 +152,12 @@ def complete_card(request, card_id):
 @jwt_required
 def question_attempts(request):
     try:
-        data = json_object(request, ["question_id", "answer"])
+        data = json_object(request, ["question_id", "answer", "attempt_type"])
         if not isinstance(data.get("question_id"), str) or not isinstance(data.get("answer"), str):
             raise ValidationError("Provide question_id and answer as strings.")
+        quiz = "attempt_type" in data
+        if quiz and data["attempt_type"] != QuestionAttempt.AttemptType.QUIZ:
+            raise ValidationError('The only accepted attempt_type is "quiz"; other types are derived.')
         try:
             question_id = UUID(data["question_id"])
         except ValueError:
@@ -161,9 +172,19 @@ def question_attempts(request):
         if question.type == Question.Type.MULTIPLE_CHOICE and data["answer"] not in {o["id"] for o in question.options}:
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
+        if quiz:
+            # Catch-up quiz answers bypass the current-checkpoint rule: their
+            # pool is fully read lessons and never-correctly-answered questions.
+            if not state.lesson_fully_read(question.lesson_id):
+                return JsonResponse({"error": "Read every card of this lesson before its catch-up questions."},
+                                    status=409)
+            if question.pk in state.correct_questions:
+                return JsonResponse({"error": "You already answered this question correctly."}, status=409)
         checkpoint = (question.lesson_id, question.after_card_position)
         review = checkpoint in state.passed
-        if review:
+        if quiz:
+            current = True
+        elif review:
             selected = next((q for q in checkpoint_questions(state, question.lesson)
                              if q.after_card_position == question.after_card_position), None)
             current = selected is not None and selected.pk == question.pk and any(
@@ -175,20 +196,23 @@ def question_attempts(request):
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
         checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
                           and q.after_card_position == question.after_card_position]
-        retry = QuestionAttempt.objects.filter(user=request.user, question_id__in=checkpoint_ids,
-                                               attempt_type__in=["initial", "retry"]).exists()
+        retry = not quiz and QuestionAttempt.objects.filter(
+            user=request.user, question_id__in=checkpoint_ids,
+            attempt_type__in=["initial", "retry"]).exists()
         correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
                    else normalize_typed_answer(data["answer"]) in {
                        normalize_typed_answer(answer) for answer in question.accepted_answers
                    })
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
-            attempt_type=("review" if review else "retry" if retry else "initial"),
+            attempt_type=("quiz" if quiz else "review" if review else "retry" if retry else "initial"),
             submitted_answer=data["answer"],
             correct=correct, answered_at=timezone.now(),
         )
         state = LearnerState(request.user)
-        if review:
+        if quiz:
+            following = None  # The quiz session queues its own next question.
+        elif review:
             following = None
             if not attempt.correct:
                 selected = next(q for q in checkpoint_questions(state, question.lesson)
@@ -202,6 +226,25 @@ def question_attempts(request):
                              "correct_answer": question.answer if question.type == Question.Type.TYPE_ANSWER_QUESTION else None,
                              "progress": state.progress([question.lesson]),
                              "next_step": following}, status=201)
+
+
+@never_cache
+@require_GET
+@jwt_required
+def catch_up(request, path_id):
+    """The shuffled catch-up quiz pool of one learning path (#204): every
+    question of a fully read lesson that has no correct answer yet."""
+    path = get_object_or_404(visible(LearningPath), pk=path_id)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson).filter(learning_path=path))
+    titles = {lesson.pk: lesson.title for lesson in lessons}
+    pool = state.catch_up_questions(lessons)
+    random.shuffle(pool)
+    return JsonResponse({"learning_path_id": str(path.pk),
+                         "eligible": any(state.lesson_fully_read(lesson.pk) for lesson in lessons),
+                         "remaining": len(pool),
+                         "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
+                                       for q in pool]})
 
 
 @never_cache
@@ -253,6 +296,8 @@ def garden(request):
             "learning_paths": [{
                 **described(path), "theme_id": str(theme.pk),
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
+                "catch_up": catch_up_payload(state, [lesson for lesson in lessons
+                                                     if lesson.learning_path_id == path.pk]),
                 "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],

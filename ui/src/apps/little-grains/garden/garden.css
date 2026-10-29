@@ -47,3 +47,17 @@
 .lg-hint{position:absolute;left:50%;bottom:68px;transform:translateX(-50%);font-size:12px;color:var(--dim);background:rgba(255,253,248,.85);border-radius:999px;padding:5px 12px;white-space:nowrap;transition:opacity .6s;pointer-events:none}.lg-hint.gone{opacity:0}
 .lg-mobile .lg-zoom{right:10px;bottom:auto;top:96px}.lg-mobile .lg-zoom button{width:44px;height:44px}.lg-mobile .lg-hint{bottom:auto;top:96px;left:10px;transform:none;white-space:normal;max-width:60%;border-radius:10px}
 @media(prefers-reduced-motion:reduce){.lg-fade,.lg-label,.lg-toast,.lg-panel{transition:none}}
+/* Question gauge + catch-up quiz (#204) */
+.lg-gauge{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fffaf0}
+.lg-gauge-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 7px;font:700 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.lg-gauge-head b{font:700 18px var(--serif);color:var(--ink);letter-spacing:0;text-transform:none}
+.lg-gauge .bar{display:block;width:100%;height:8px;border-radius:4px;background:#ece3d1;overflow:hidden}
+.lg-gauge .bar i{display:block;height:100%;background:var(--green);border-radius:4px}
+.lg-gauge-count{margin:7px 0 0;font-size:12px;color:var(--dim)}
+.lg-root .lg-quiz{margin:0 0 12px}
+.lg-root .primary:disabled{opacity:.55;cursor:not-allowed}
+.lg-root .primary:disabled:hover{background:var(--terra)}
+.lg-quiz-hint{margin:-6px 0 12px;font-size:11.5px;color:var(--dim);text-align:center}
+.lg-quiz-done{margin:0 0 12px;padding:10px;border-radius:12px;background:#e3f1dc;border:1px solid #c9e2bd;font-weight:700;font-size:13px;text-align:center}
+.lg-lesson .bar.wide{display:block;width:100%;margin:0 0 6px}
+.lg-lessons .pc{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}

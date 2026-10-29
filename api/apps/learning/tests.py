@@ -205,7 +205,7 @@ class LearningSchemaTests(TestCase):
         self.card.entity.archived = True
         self.card.entity.save()
         self.assertTrue(CardProgress.objects.filter(pk=progress.pk).exists())
-        self.assertEqual(QuestionAttempt.objects.count(), 3)
+        self.assertEqual(QuestionAttempt.objects.count(), 4)
         self.assert_database_rejects(lambda: QuestionAttempt.objects.all().update(attempt_type="invalid"))
 
     def test_multiple_choice_validation(self):
