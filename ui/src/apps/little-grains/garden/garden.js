@@ -13,7 +13,13 @@ const ORDER = [0, 1, 3, 5, 2, 4, 6];
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smooth = (x) => { x = clamp(x); return x * x * (3 - 2 * x); };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const fraction = (progress) => { const total = (progress?.cards_total || 0) + (progress?.checkpoints_total || 0); return total ? ((progress.cards_completed || 0) + (progress.checkpoints_correct || 0)) / total : 0; };
+// A lesson is finished once every card is read; questions are optional
+// practice, tracked on their own gauge. Progress and growth are cards-based.
+const fraction = (progress) => { const total = progress?.cards_total || 0; return total ? (progress.cards_completed || 0) / total : 0; };
+// Finished = every card read. The stricter server "completed" gauge also
+// wants every pooled question answered correctly (#204), which is practice
+// that happens later, so the flag, dots and panels must not wait for it.
+const lessonFinished = (progress) => !!progress && (progress.completed || ((progress.cards_total || 0) > 0 && (progress.cards_completed || 0) >= progress.cards_total));
 const spiral = (n) => { const out = [[0, 0]]; for (let radius = 1; out.length < n; radius++) { let q = -radius, r = radius; for (const [dq, dr] of [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]) for (let i = 0; i < radius && out.length < n; i++) { out.push([q, r]); q += dq; r += dr; } } return out; };
 // Successive hex tiles of a learning path, as axial steps (a gentle zigzag).
 const CHAIN = [[1, 0], [0, 1], [1, 0], [1, -1], [1, 0], [0, 1]];
@@ -248,8 +254,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   };
   const pathP = (ti, pi) => disp.get(`c${ti}.${pi}`) ?? 0;
   const lessonInfo = (path) => {
-    const n = path.lessonData.length, cur = path.lessonData.filter((lesson) => lesson.progress.completed).length;
-    return { n, cur, cards: path.lessonData[cur]?.progress.cards_completed || 0, done: !!path.progress.completed };
+    const n = path.lessonData.length, cur = path.lessonData.filter((lesson) => lessonFinished(lesson.progress)).length;
+    return { n, cur, cards: path.lessonData[cur]?.progress.cards_completed || 0, done: n > 0 && cur === n };
   };
   const totals = () => ({ ...state.rewards, started: THEMES.reduce((n, t) => n + t.paths.filter((p) => p.progress.started).length, 0), paths: THEMES.reduce((n,t) => n + t.paths.length, 0) });
 
@@ -479,8 +485,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const dots = (n, on) => Array.from({ length: n }, (_, i) => `<i class="dot ${i < on ? 'on' : ''}"></i>`).join('');
   // Progress dots for paths (per lesson) and themes (per path): filled green only when complete, thicker border while in progress.
   const stateDots = (states) => states.map((st) => `<i class="dot ${st}"></i>`).join('');
-  const pathState = (p) => (p.progress.completed ? 'done' : p.progress.started ? 'cur' : '');
-  const lessonStates = (path) => path.lessonData.map((l) => (l.progress.completed ? 'done' : l.progress.started ? 'cur' : ''));
+  const pathState = (p) => (lessonFinished(p.progress) ? 'done' : p.progress.started ? 'cur' : '');
+  const lessonStates = (path) => path.lessonData.map((l) => (lessonFinished(l.progress) ? 'done' : l.progress.started ? 'cur' : ''));
   const pct = (p) => `${Math.round(p * 100)}%`;
   const toast = (m) => { toastEl.textContent = m; toastEl.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => toastEl.classList.remove('on'), 2600); };
 
@@ -528,14 +534,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Practice quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
       h += renderRecent();
       if (sel >= 0) {
-        const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lp.completed ? 'done' : lp.started ? 'cur' : 'todo';
-        const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0, lqp = lqt ? Math.round((lqc / lqt) * 100) : 0;
-        h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(lp.cards_total, lp.cards_completed)}</p><p>${lp.cards_completed} of ${lp.cards_total} cards · ${lqc} of ${lqt} questions (${lqp}%)</p><span class="bar wide"><i style="width:${lqp}%"></i></span><button class="primary" data-start="${sel}">${st === 'done' ? 'Read lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson'}</button></div>`;
+        const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
+        const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0;
+        h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(lp.cards_total, lp.cards_completed)}</p><p>${lp.cards_completed} of ${lp.cards_total} cards read${lqt ? ` · ${lqc} of ${lqt} questions correct` : ''}</p><span class="bar wide"><i style="width:${pct(fraction(lp))}"></i></span><button class="primary" data-start="${sel}">${st === 'done' ? 'Review lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson'}</button></div>`;
       }
-      h += '<ol class="lg-lessons">' + trail.path.lessonData.map((lesson, i) => { const lp = lesson.progress, st = lp.completed ? 'done' : lp.started ? 'cur' : 'todo';
-        const gap = lp.cards_total > 0 && lp.cards_completed === lp.cards_total && (lp.questions_total || 0) > 0 && (lp.questions_correct || 0) < lp.questions_total;
-        const lqp = lp.questions_total ? Math.round(((lp.questions_correct || 0) / lp.questions_total) * 100) : 0;
-        return `<li><button data-lesson="${i}" class="${st} ${i === sel ? 'sel' : ''}"><span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(lp.cards_total, lp.cards_completed)}</span>${gap ? `<span class="pc">${lqp}%</span>` : ''}</button></li>`; }).join('') + '</ol>';
+      h += '<ol class="lg-lessons">' + trail.path.lessonData.map((lesson, i) => { const lp = lesson.progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
+        return `<li><button data-lesson="${i}" class="${st} ${i === sel ? 'sel' : ''}"><span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(lp.cards_total, lp.cards_completed)}</span></button></li>`; }).join('') + '</ol>';
     }
     panelBody.innerHTML = h;
     panel.scrollTop = keepTop;
@@ -644,7 +648,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     const pk = `${view.level}.${view.ti}.${view.pi}.${view.lesson}.${state.version || 0}`;
     if (pk !== panelKey) { panelKey = pk; if (!panel.matches(':hover')) renderPanel(); else panelKey = ''; }
     if (trail && trailGroup.visible) {
-      const next = trail.path.lessonData.findIndex((lesson) => !lesson.progress.completed);
+      const next = trail.path.lessonData.findIndex((lesson) => !lessonFinished(lesson.progress));
       trail.nodes.forEach((n) => { const isNext = n.i === next; n.ring.scale.setScalar(isNext ? 1 + Math.sin(time * 3) * 0.05 : 1); if (isNext) n.ring.material.color.copy(TRAIL_NEXT); });
       const mark = trail.nextMark;
       if (mark) {

@@ -93,6 +93,27 @@ function nextReplayStep(data, step) {
   return nextCard ? { type: "card", id: nextCard.id } : null;
 }
 
+function LessonComplete({ kind, onDone }) {
+  useEffect(() => {
+    const timer = setTimeout(onDone, 3400);
+    return () => clearTimeout(timer);
+  }, [onDone]);
+  if (kind === "drops") {
+    return <div className="grains-celebration drops" onClick={onDone} role="status">
+      <div className="grains-rain" aria-hidden="true">{[0, 1, 2, 3, 4, 5, 6].map((i) => <span key={i} style={{ "--i": i }} />)}</div>
+      <div className="grains-drop-badge" aria-hidden="true"><span className="grains-drop-ripple" /><span className="grains-drop-ripple two" /><span className="grains-drop-glyph" /></div>
+      <p className="grains-celebration-count">+5 drops</p>
+      <h3>Lesson finished!</h3>
+      <p className="grains-celebration-sub">Every card read - your garden just grew.</p>
+    </div>;
+  }
+  return <div className="grains-celebration reviewed" onClick={onDone} role="status">
+    <span className="grains-bloom" aria-hidden="true">✿</span>
+    <h3>Lesson reviewed!</h3>
+    <p className="grains-celebration-sub">Nice refresher - this one stays in bloom.</p>
+  </div>;
+}
+
 function LessonReader({ lessonId, onClose, onProgress }) {
   const [data, setData] = useState(null);
   const [viewStep, setViewStep] = useState(null);
@@ -102,9 +123,17 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   const [feedback, setFeedback] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  // Snapshot at open: was every card already read? Drives which celebration
+  // plays at the end - the +5 drops bonus is earned exactly once, by the
+  // session that finishes reading the cards.
+  const fullyReadAtOpen = useRef(null);
+  const noteFullyRead = (result) => {
+    if (fullyReadAtOpen.current === null) fullyReadAtOpen.current = result.cards.length > 0 && result.cards.every((item) => item.completed_at);
+  };
 
   const load = useCallback(async (preserveStep = false) => {
     const result = await api(`lessons/${lessonId}/`);
+    noteFullyRead(result);
     setData(result);
     if (!preserveStep) setViewStep(result.next_step);
     return result;
@@ -115,7 +144,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
     setData(null); setReplay(false); setReturnStep(null); setFeedback(null); setChoice(""); setError("");
     api(`lessons/${lessonId}/open/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
       .then(onProgress).catch(() => {});
-    api(`lessons/${lessonId}/`).then((result) => { if (active) { setData(result); setReplay(result.lesson.progress.completed); setViewStep(result.lesson.progress.completed && result.cards.length ? { type: "card", id: result.cards[0].id } : result.next_step); } })
+    api(`lessons/${lessonId}/`).then((result) => { if (active) { noteFullyRead(result); setData(result); setReplay(fullyReadAtOpen.current); setViewStep(fullyReadAtOpen.current && result.cards.length ? { type: "card", id: result.cards[0].id } : result.next_step); } })
       .catch((err) => { if (active) setError(err.message); });
     return () => { active = false; };
   }, [lessonId, onProgress]);
@@ -141,8 +170,12 @@ function LessonReader({ lessonId, onClose, onProgress }) {
     if (replay) { setViewStep(nextReplayStep(data, viewStep)); return; }
     setBusy(true); setError("");
     try {
-      await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
-      await load(); await onProgress();
+      const result = await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+      // Reading every card finishes the lesson (+5 drops, earned once).
+      // Questions left unanswered stay as practice in the quiz and reviews.
+      const finishedReading = !fullyReadAtOpen.current && (result.progress.cards_completed || 0) >= (result.progress.cards_total || 0);
+      await load(finishedReading); await onProgress();
+      if (finishedReading) setViewStep(null);
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
@@ -201,7 +234,9 @@ function LessonReader({ lessonId, onClose, onProgress }) {
               <button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button>
             </div> : <button className="grains-primary" disabled={!choice.trim() || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}
           </div>}
-          {!viewStep && <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>All cards read and questions answered. Your garden has grown.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>}
+          {!viewStep && (data.cards.length
+            ? <LessonComplete kind={fullyReadAtOpen.current ? "reviewed" : "drops"} onDone={onClose} />
+            : <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>This lesson has no cards yet.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>)}
           {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
         </div>
       </>}
