@@ -675,7 +675,7 @@ class LearningAPITests(TestCase):
         self.assertEqual(path["progress"]["questions_correct"], 0)
         self.assertEqual(path["progress"]["questions_total"], 4)
         self.assertEqual(self.client.get(catch_up_url).json(), {
-            "learning_path_id": str(self.path.pk), "mode": "review", "eligible": False,
+            "learning_path_id": str(self.path.pk), "mode": "catch_up", "eligible": False,
             "remaining": 0, "questions": []})
         refused = self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"})
         self.assertEqual(refused.status_code, 409)
@@ -704,12 +704,20 @@ class LearningAPITests(TestCase):
             self.assertEqual(response.status_code, 201)
             self.assertEqual(response.json()["attempt_type"], "retry")
             self.assertIsNone(response.json()["next_step"])
-        # No gaps left: the endpoint switches to review practice over the
-        # already-answered questions, and re-answering one records a review.
+        # Gaps closed but the other lesson is still unread: the review quiz
+        # waits for the whole path to be complete.
+        waiting = self.client.get(catch_up_url).json()
+        self.assertEqual(waiting["mode"], "catch_up")
+        self.assertEqual(waiting["questions"], [])
+        other = Question.objects.get(lesson=other_lesson)
+        self.post(f"/api/learning/cards/{other_lesson.cards.get().pk}/complete/", {})
+        self.post(attempt_url, {"question_id": str(other.pk), "answer": other.answer})
+        # Path complete: review practice over the already-answered questions,
+        # and re-answering one records a review.
         done = self.client.get(catch_up_url).json()
         self.assertEqual(done["mode"], "review")
         self.assertEqual(done["remaining"], 0)
-        self.assertEqual(len(done["questions"]), 3)
+        self.assertEqual(len(done["questions"]), 4)
         selected = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["questions"][0]
         current = Question.objects.get(pk=selected["id"])
         repeated = self.post(attempt_url, {"question_id": selected["id"], "answer": current.answer})
@@ -718,11 +726,25 @@ class LearningAPITests(TestCase):
         progress = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["lesson"]["progress"]
         self.assertTrue(progress["completed"])
         self.assertEqual(progress["questions_correct"], 3)
-        # The checkpoint carrot came from the first correct answer; retries
-        # and reviews add none. The lesson bonus follows the new completion
-        # rule, and the path bonus waits for the unread lesson.
+        # The first checkpoint's carrot came from its first correct answer;
+        # retries and reviews added none. Completing the other lesson earned
+        # its own drops, checkpoint carrot and the one-time path bonus.
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"],
-                         {"drops": 6, "carrots": 1})
+                         {"drops": 112, "carrots": 2})
+
+    def test_review_quiz_unlocks_only_at_path_completion(self):
+        unread = self.row(Lesson, learning_path=self.path, position=2)
+        self.row(Card, lesson=unread, body_markdown="Unread")
+        self.row(Question, lesson=unread, after_card_position=1,
+                 prompt="Other", options=self.question.options, answer="0")
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        # Every question of the read lesson is answered but the path is not
+        # complete: nothing to catch up, and no review quiz yet.
+        result = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
+        self.assertEqual(result["mode"], "catch_up")
+        self.assertEqual(result["remaining"], 0)
+        self.assertEqual(result["questions"], [])
 
     def test_catch_up_session_caps_at_ten_questions(self):
         for position in range(2, 14):

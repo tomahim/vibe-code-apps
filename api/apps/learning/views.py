@@ -226,21 +226,25 @@ def question_attempts(request):
 def catch_up(request, path_id):
     """One quiz session for a learning path (#204): ten random questions.
     While gaps remain they come from the catch-up pool - questions of fully
-    read lessons with no correct answer yet; once none remain, the session is
-    review practice over already-answered questions. `remaining` always counts
-    the gap pool, so the gauge and the button never confuse the two."""
+    read lessons with no correct answer yet. Review practice unlocks only once
+    the whole path is complete (every card read, every question correct) and
+    draws from the answered questions. `remaining` always counts the gap pool,
+    so the gauge and the button never confuse a session with the pool."""
     path = get_object_or_404(visible(LearningPath), pk=path_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     titles = {lesson.pk: lesson.title for lesson in lessons}
     gaps = state.catch_up_questions(lessons)
-    mode = "catch_up"
-    pool = gaps
-    if not gaps:
+    if gaps:
+        mode, pool = "catch_up", gaps
+    elif lessons and all(state.lesson_fully_read(lesson.pk) for lesson in lessons):
         mode = "review"
-        pool = [q for lesson in lessons if state.lesson_fully_read(lesson.pk)
+        pool = [q for lesson in lessons
                 for q in state.questions
                 if q.lesson_id == lesson.pk and q.pk in state.correct_questions]
+    else:
+        # Read lessons have no gaps but another lesson is still unread.
+        mode, pool = "catch_up", []
     # Session mix (#204): up to 6 questions whose latest attempt is oldest -
     # they are due for review - filled to 10 with random picks of the rest.
     # Never-attempted catch-up questions have no attempt yet: they are randoms.
