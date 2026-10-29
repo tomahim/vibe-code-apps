@@ -56,26 +56,28 @@ def reward_events():
             events[row['user_id']].append(('carrots', 1, at))
 
     for user_id in set(card_times) | set(question_times):
-        lesson_times = {}
+        completion_times = {}
         for lesson in lessons:
             lesson_id = lesson['pk']
             required_cards = cards_by_lesson[lesson_id]
             required_questions = questions_by_lesson[lesson_id]
             if not required_cards or not required_cards.issubset(card_times[user_id]):
                 continue
-            # Completion needs every question answered correctly once (#204),
-            # not only one per checkpoint.
-            if not required_questions.issubset(question_times[user_id]):
-                continue
-            at = max([card_times[user_id][card_id] for card_id in required_cards] + [
-                question_times[user_id][question_id] for question_id in required_questions
-            ])
-            lesson_times[lesson_id] = at
-            events[user_id].append(('drops', 5, at))
+            # The lesson bonus is earned once every card is read, whatever the
+            # question results: question completion drives the gauge and the
+            # catch-up quiz (#204), not this reward.
+            cards_done_at = max(card_times[user_id][card_id] for card_id in required_cards)
+            events[user_id].append(('drops', 5, cards_done_at))
+            # The path bonus still needs full lesson completion: every question
+            # answered correctly once (#204), not only one per checkpoint.
+            if required_questions.issubset(question_times[user_id]):
+                completion_times[lesson_id] = max([cards_done_at] + [
+                    question_times[user_id][question_id] for question_id in required_questions
+                ])
         for path in paths:
             required_lessons = lessons_by_path[path['pk']]
-            if required_lessons and required_lessons.issubset(lesson_times):
-                events[user_id].append(('drops', 100, max(lesson_times[lesson_id] for lesson_id in required_lessons)))
+            if required_lessons and required_lessons.issubset(completion_times):
+                events[user_id].append(('drops', 100, max(completion_times[lesson_id] for lesson_id in required_lessons)))
     return events
 
 

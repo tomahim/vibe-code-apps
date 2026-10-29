@@ -479,10 +479,12 @@ class LearningAPITests(TestCase):
         self.assertNotIn("answer", garden.content.decode())
 
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
-        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 1, "carrots": 0})
+        # Reading every card earns the lesson bonus without any correct answer.
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 6, "carrots": 0})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "1"})
-        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 1, "carrots": 0})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 6, "carrots": 0})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        # The path bonus still waits for every question answered correctly.
         self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
         self.assertEqual(self.client.get("/api/learning/progress/").json()["rewards"], {"drops": 106, "carrots": 1})
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
