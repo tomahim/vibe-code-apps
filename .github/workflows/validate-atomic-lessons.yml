@@ -32,7 +32,7 @@ jobs:
         run: python -m unittest discover -s atomic-lessons -p 'test_*.py'
       - name: Require globally unique UUIDv4 IDs on every content element
         run: python atomic-lessons/check_uuids.py
-      - name: Require an illustration for every learning path
+      - name: Validate card illustrations
         run: python atomic-lessons/check_images.py
       - name: Reject removal of existing content IDs
         # Content is retired with `archived: true`, never by deleting its ID.

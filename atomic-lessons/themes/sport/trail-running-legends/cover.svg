@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="A runner on a mountain ridge under a gold sun with a mountain range behind">
-<rect width="960" height="600" rx="40" fill="#e3eef6"/>
-<circle cx="740" cy="170" r="70" fill="#f2b84b"/>
-<path d="M0 470 L170 250 L270 360 L400 190 L560 400 L690 290 L960 470 L960 600 L0 600 Z" fill="#8fb0c8"/>
-<path d="M0 520 L200 360 L330 450 L500 320 L700 480 L860 400 L960 470 L960 600 L0 600 Z" fill="#4f7a64"/>
-<path d="M120 560 C300 500 420 540 520 470" fill="none" stroke="#f6f1e4" stroke-width="10" stroke-dasharray="22 16" stroke-linecap="round"/>
-<circle cx="520" cy="318" r="18" fill="#2c3e50"/>
-<path d="M520 336 L506 396 L478 430 M520 350 L552 372 L580 360 M506 396 L536 420 L548 462" fill="none" stroke="#2c3e50" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>

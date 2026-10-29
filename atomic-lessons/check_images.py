@@ -1,4 +1,10 @@
-"""Require a sibling illustration for every learning path."""
+"""Validate optional card illustrations in the atomic-lessons library.
+
+Learning paths and lessons carry no images (#195): only cards may declare an
+optional sibling image with alt text. When a card declares one, the file must
+sit beside the card's Markdown file, use a supported format with a matching
+header, and come with useful alt text.
+"""
 
 from __future__ import annotations
 
@@ -36,54 +42,62 @@ def has_image_header(path: Path) -> bool:
     return False
 
 
+def card_files(root: Path):
+    """Yield every card Markdown file in parent-before-child order."""
+    for theme in child_directories(root / "themes"):
+        for learning_path in child_directories(theme):
+            for lesson in child_directories(learning_path):
+                yield from sorted((lesson / "cards").glob("*.md"))
+
+
+def check_card_image(root: Path, card: Path, data: dict) -> list[str]:
+    """Validate one card's optional image declaration."""
+    image = data.get("image")
+    if image is None or (isinstance(image, str) and not image.strip()):
+        return []
+    relative = card.relative_to(root).as_posix()
+    if not isinstance(image, str):
+        return [f"{relative}.image: expected a sibling image filename, got {image!r}"]
+    # Accept a sibling filename, optionally prefixed with './'.
+    filename = image[2:] if image.startswith("./") else image
+    if (
+        not filename
+        or image != image.strip()
+        or any(c in filename for c in ("/", "\\", ":"))
+        or filename in (".", "..")
+    ):
+        return [f"{relative}.image: use a relative filename in the same folder as the card"]
+    candidate = card.parent / filename
+    if candidate.resolve().parent != card.parent.resolve():
+        return [f"{relative}.image: image must remain in the same folder as the card"]
+    if not candidate.is_file():
+        return [f"{relative}.image: image file does not exist: {filename}"]
+    if candidate.suffix.lower() not in IMAGE_EXTENSIONS:
+        return [f"{relative}.image: unsupported image extension: {candidate.suffix}"]
+    try:
+        valid = has_image_header(candidate)
+    except OSError as error:
+        return [f"{relative}.image: cannot read image: {error}"]
+    if not valid:
+        return [f"{relative}.image: file does not have a matching image header: {filename}"]
+    alt = data.get("image_alt")
+    if not isinstance(alt, str) or not alt.strip():
+        return [f"{relative}.image_alt: provide a nonempty description of the illustration"]
+    return []
+
+
 def check_images(root: Path) -> tuple[list[str], int]:
     errors = []
     count = 0
-    for theme in child_directories(root / "themes"):
-        for learning_path in child_directories(theme):
-            index = learning_path / "index.md"
-            relative = index.relative_to(root).as_posix()
-            try:
-                data = load_metadata(index)
-            except (ValueError, OSError, yaml.YAMLError) as error:
-                errors.append(f"{relative}: {error}")
-                continue
-            image = data.get("image")
-            if not isinstance(image, str) or not image.strip():
-                errors.append(f"{relative}.image: every learning path needs an image filename")
-                continue
-            # Accept a sibling filename, optionally prefixed with './'.
-            filename = image[2:] if image.startswith("./") else image
-            if (
-                not filename
-                or image != image.strip()
-                or any(c in filename for c in ("/", "\\", ":"))
-                or filename in (".", "..")
-            ):
-                errors.append(f"{relative}.image: use a relative filename in the same folder as index.md")
-                continue
-            candidate = learning_path / filename
-            if candidate.resolve().parent != learning_path.resolve():
-                errors.append(f"{relative}.image: image must remain in the same folder as index.md")
-                continue
-            if not candidate.is_file():
-                errors.append(f"{relative}.image: image file does not exist: {filename}")
-                continue
-            if candidate.suffix.lower() not in IMAGE_EXTENSIONS:
-                errors.append(f"{relative}.image: unsupported image extension: {candidate.suffix}")
-                continue
-            try:
-                valid = has_image_header(candidate)
-            except OSError as error:
-                errors.append(f"{relative}.image: cannot read image: {error}")
-                continue
-            if not valid:
-                errors.append(f"{relative}.image: file does not have a matching image header: {filename}")
-                continue
-            alt = data.get("image_alt")
-            if not isinstance(alt, str) or not alt.strip():
-                errors.append(f"{relative}.image_alt: provide a nonempty description of the illustration")
-                continue
+    for card in card_files(root):
+        try:
+            data = load_metadata(card)
+        except (ValueError, OSError, yaml.YAMLError) as error:
+            errors.append(f"{card.relative_to(root).as_posix()}: {error}")
+            continue
+        card_errors = check_card_image(root, card, data)
+        errors.extend(card_errors)
+        if not card_errors and str(data.get("image") or "").strip():
             count += 1
     if not child_directories(root / "themes"):
         errors.append("themes/: no theme folders found")
@@ -96,11 +110,11 @@ def main() -> int:
     arguments = parser.parse_args()
     errors, count = check_images(arguments.root.resolve())
     if errors:
-        print("Learning path image check failed:", file=sys.stderr)
+        print("Card image check failed:", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print(f"Atomic lessons: {count} learning paths have a local illustration and alt text.")
+    print(f"Atomic lessons: {count} cards declare a valid local illustration and alt text.")
     return 0
 
 

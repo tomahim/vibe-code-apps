@@ -45,14 +45,14 @@ archived: false
 ---
 ```
 
-Every learning path's `index.md` must have an `image` filename and useful `image_alt` text. The image file must sit directly beside that index, for example:
+Learning paths and lessons carry no images: illustrations belong to individual cards (#195). A card's Markdown file may declare an optional sibling image with useful `image_alt` text, for example:
 
 ```yaml
-image: cover.png
-image_alt: A caregiver sharing a picture book with a baby.
+image: blue-hole.png
+image_alt: Divers floating over the deep blue sinkhole of the Blue Hole.
 ```
 
-Use PNG, JPEG, WebP, GIF, or SVG. Commit the image alongside the index; URLs, parent paths, nested asset paths, and links outside the learning path folder are not accepted. Other content elements may use optional repository-local images with alt text.
+Use PNG, JPEG, WebP, GIF, or SVG. Commit the image beside the card file; URLs, parent paths, nested asset paths, and links outside the card folder are not accepted.
 
 Cards use the same front matter. Use positive sibling positions, unique within the parent. Gaps are allowed. Cards and questions have separate position sequences. If a filename has a numeric prefix, keep it aligned with `position`.
 
@@ -101,7 +101,7 @@ python atomic-lessons/check_images.py
 python -m unittest discover -s atomic-lessons -p 'test_*.py'
 ```
 
-The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. The image check requires an existing sibling image and alt text for every learning path, checks the image header, and rejects paths outside that folder. The retirement check (`check_retired_ids.py`) compares the branch against its base revision and rejects any content ID that disappeared or changed kind: retire content with `archived: true`, never by deleting its file or recycling its ID. Moving or renaming a file is fine while its ID survives. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
+The UUID check scans the entire library, requires IDs on all content elements and choices, and rejects malformed UUIDs, non-v4 UUIDs, duplicate declarations, missing index files, and duplicate YAML keys. Correct-answer references must resolve to choices in the same question. The image check validates every card illustration that is declared: the sibling image must exist, its header must match its extension, alt text is required, and paths outside the card folder are rejected. The retirement check (`check_retired_ids.py`) compares the branch against its base revision and rejects any content ID that disappeared or changed kind: retire content with `archived: true`, never by deleting its file or recycling its ID. Moving or renaming a file is fine while its ID survives. CI runs these checks on pull requests and pushes affecting this folder or its workflow.
 
 ## Early Childhood English inventory and provenance
 
