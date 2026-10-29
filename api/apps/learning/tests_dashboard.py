@@ -88,6 +88,13 @@ class LearningProgressDashboardTests(TestCase):
         self.client.force_login(self.staff)
         response = self.client.get("/admin/")
         self.assertContains(response, 'href="/admin/learning/progress/"')
+        # The regular per-app navigation is kept, not collapsed away.
+        self.assertContains(response, 'href="/admin/recipes/recipe/"')
+
+    def test_sidebar_hides_dashboard_link_without_permission(self):
+        staff = get_user_model().objects.create_user(username="staffer", password="pw", is_staff=True)
+        self.client.force_login(staff)
+        self.assertNotContains(self.client.get("/admin/"), "/admin/learning/progress/")
 
     def test_dashboard_renders_selected_learner_stats(self):
         self.client.force_login(self.staff)
