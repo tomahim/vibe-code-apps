@@ -382,6 +382,8 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
   const q1 = 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', q2 = 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3';
+  const q3 = 'c7b0a1d2-1111-4e2a-9c3d-555555555555';
+  const lessonQuestion = { id: q3, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 3, after_card_position: 1, type: 'multiple_choice', prompt: 'When can a newborn have a first bath?', options: [{ id: 'now', text: 'Right after birth' }, { id: 'cord', text: 'Once the cord has fallen' }] };
   const quizQuestions = [
     { id: q1, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 1, after_card_position: 1, type: 'multiple_choice', prompt: 'How often should you bathe a newborn?', options: [{ id: 'daily', text: 'Every day' }, { id: 'few', text: 'Two or three times a week' }] },
     { id: q2, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 2, after_card_position: 1, type: 'type_answer_question', prompt: 'Translate: « La crème hydratante. »', options: [] },
@@ -394,7 +396,8 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
     if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson()] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
     if (url.pathname.endsWith('/catch-up/')) {
       const done = solved.size === 2;
-      return route.fulfill({ json: { learning_path_id: id.path, mode: done ? 'review' : 'catch_up', eligible: true, remaining: done ? 0 : quizQuestions.length, questions: quizQuestions } });
+      // Review mode serves every answered question (the whole pool when under 10).
+      return route.fulfill({ json: { learning_path_id: id.path, mode: done ? 'review' : 'catch_up', eligible: true, remaining: done ? 0 : quizQuestions.length, questions: done ? [lessonQuestion, ...quizQuestions] : quizQuestions } });
     }
     if (url.pathname.endsWith('/question-attempts/')) {
       const body = JSON.parse(route.request().postData());
@@ -453,6 +456,7 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await panel.getByRole('button', { name: '🌱 Review quiz' }).click();
   const review = page.getByRole('dialog', { name: 'Review quiz - English for babies' });
   await expect(review.getByText('REVIEW QUIZ', { exact: true })).toBeVisible();
-  await expect(review.getByText('How often should you bathe a newborn?')).toBeVisible();
+  await expect(review.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
+  await expect(review.getByText('When can a newborn have a first bath?')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-204-review-quiz-mobile.png' });
 });
