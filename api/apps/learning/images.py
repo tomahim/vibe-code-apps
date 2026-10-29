@@ -47,9 +47,11 @@ def illustration_srcset(card):
     ]
 
 
-# Redirects must be re-requested before the bucket's signed URLs expire
-# (genious-media is private, AWS_QUERYSTRING_EXPIRE defaults to one hour).
-SIGNED_REDIRECT_CACHE_SECONDS = 3000
+# Redirects must be re-requested well before the bucket's signed URLs expire
+# (genious-media is private; AWS_QUERYSTRING_EXPIRE defaults to one hour).
+REDIRECT_CACHE_SECONDS = 3000
+# Never cache a redirect closer than this to the signature's expiry.
+SIGNED_URL_EXPIRY_MARGIN_SECONDS = 600
 
 
 def variant_redirect(request, card):
@@ -69,12 +71,16 @@ def variant_redirect(request, card):
     key = next((c for c in candidates if isinstance(c, str) and c.startswith(prefix)), None)
     if key is None:
         return None
+    expire = int(getattr(default_storage, "querystring_expire", 3600) or 3600)
+    max_age = min(REDIRECT_CACHE_SECONDS, expire - SIGNED_URL_EXPIRY_MARGIN_SECONDS)
+    if max_age < 60:
+        return None  # signatures too short-lived to redirect safely; proxy instead
     try:
         signed = default_storage.url(key)
     except Exception:
         return None
     response = HttpResponseRedirect(signed)
-    response["Cache-Control"] = f"public, max-age={SIGNED_REDIRECT_CACHE_SECONDS}"
+    response["Cache-Control"] = f"public, max-age={max_age}"
     return response
 
 
