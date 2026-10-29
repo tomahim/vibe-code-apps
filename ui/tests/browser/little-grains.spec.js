@@ -40,20 +40,42 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
   });
 }
 
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// Buckets covering yesterday and today, the way the API windows the chart:
+// activity started yesterday, and no bucket starts in the future.
+function historyWindow(period, now = new Date()) {
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const yesterday = today - 864e5;
+  const monthStart = (ms) => { const d = new Date(ms); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1); };
+  let starts;
+  if (period === 'weekly') {
+    const monday = today - ((now.getUTCDay() + 6) % 7) * 864e5;
+    starts = [...new Set([Math.max(monday, yesterday), today])];
+  } else if (period === 'monthly') {
+    const weekStart = (ms) => { const d = new Date(ms); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1 + Math.floor((d.getUTCDate() - 1) / 7) * 7); };
+    starts = [...new Set([yesterday, today].map(weekStart))].filter((start) => start >= monthStart(today));
+  } else {
+    starts = [...new Set([yesterday, today].map(monthStart))];
+  }
+  return starts.map((start) => {
+    const d = new Date(start);
+    const end = period === 'weekly' ? start + 864e5
+      : period === 'monthly' ? Math.min(start + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1))
+      : Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
+    const label = period === 'weekly' ? DAYS[(d.getUTCDay() + 6) % 7]
+      : period === 'monthly' ? `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}\u2013${new Date(end - 864e5).getUTCDate()}`
+      : d.getUTCFullYear() === now.getUTCFullYear() ? MONTHS[d.getUTCMonth()]
+      : `${MONTHS[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`;
+    return { label, start: new Date(start).toISOString(), end: new Date(end).toISOString(), current: start <= now.getTime() && now.getTime() < end };
+  });
+}
+
 function mockChart(currency, period) {
-  const labels = period === 'weekly' ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    : period === 'monthly' ? ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5']
-    : ['Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
-  const stepDays = period === 'weekly' ? 1 : period === 'monthly' ? 7 : 30;
-  const now = Date.now();
-  const buckets = labels.map((label, i) => ({
-    label,
-    start: new Date(now - (labels.length - i) * stepDays * 864e5).toISOString(),
-    end: new Date(now - (labels.length - 1 - i) * stepDays * 864e5).toISOString(),
-  }));
+  const buckets = historyWindow(period);
   const totals = currency === 'carrots' ? { self: 1, other: 3 } : { self: 106, other: 140 };
   // Cumulative series that always end exactly on the leaderboard scores.
-  const points = (total) => labels.map((_, i) => Math.round((total * i) / (labels.length - 1)));
+  const points = (total) => buckets.map((_, i) => Math.round((total * (4 + i)) / (buckets.length + 3)));
   return { period, buckets, series: [
     { name: 'aurore', is_self: false, points: points(totals.other) },
     { name: 'Learner', is_self: true, points: points(totals.self) },
@@ -296,19 +318,37 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
   const leaderboard = page.getByRole('dialog', { name: 'Leaderboard' });
   const chart = leaderboard.locator('.grains-chart');
+  // The mock records activity since yesterday only: the chart must cover
+  // exactly that window, with no future or empty leading buckets.
+  const now = new Date();
+  const yesterday = new Date(now.getTime() - 864e5);
+  const weekday = (now.getUTCDay() + 6) % 7; // Monday = 0
+  const weeklyLabels = DAYS.slice(Math.max(0, weekday - 1), weekday + 1);
+  const weekLabel = (d) => {
+    const start = 1 + Math.floor((d.getUTCDate() - 1) / 7) * 7;
+    const end = Math.min(start + 6, new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate());
+    return `${MONTHS[d.getUTCMonth()]} ${start}\u2013${end}`;
+  };
+  const monthlyLabels = yesterday.getUTCMonth() === now.getUTCMonth()
+    ? [...new Set([weekLabel(yesterday), weekLabel(now)])]
+    : [weekLabel(now)];
+  const monthLabel = (d) => (d.getUTCFullYear() === now.getUTCFullYear() ? MONTHS[d.getUTCMonth()] : `${MONTHS[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`);
+  const overallLabels = [...new Set([yesterday, now].map(monthLabel))];
   await expect(chart.getByRole('img', { name: 'drops growth, day by day' })).toBeVisible({ timeout: 20000 });
-  await expect(chart.locator('.grains-chart-x')).toHaveCount(7);
+  await expect(chart.locator('.grains-chart-x')).toHaveText(weeklyLabels);
+  await expect(chart.locator('.grains-chart-note')).toContainText('today still in progress');
   await expect(chart.locator('.grains-chart-legend')).toContainText('aurore');
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-weekly-mobile.png' });
   await leaderboard.getByRole('button', { name: 'Monthly' }).click();
   await expect(chart.getByRole('img', { name: 'drops growth, week by week' })).toBeVisible({ timeout: 20000 });
-  await expect(chart.locator('.grains-chart-x')).toHaveCount(5);
-  await expect(chart.locator('.grains-chart-x').first()).toHaveText('W1');
+  await expect(chart.locator('.grains-chart-x')).toHaveText(monthlyLabels);
+  await expect(chart.locator('.grains-chart-note')).toContainText('this week still in progress');
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-monthly-mobile.png' });
   await leaderboard.getByRole('button', { name: 'Overall' }).click();
   await expect(chart.getByRole('img', { name: 'drops growth, month by month' })).toBeVisible({ timeout: 20000 });
+  await expect(chart.locator('.grains-chart-x')).toHaveText(overallLabels);
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-overall-mobile.png' });
   await leaderboard.getByRole('button', { name: /Carrots/ }).click();

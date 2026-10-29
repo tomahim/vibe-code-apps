@@ -88,39 +88,54 @@ def totals(events, period='overall', now=None):
 
 
 def chart_buckets(period, now=None, events=None):
-    """Calendar buckets for the growth chart: days (weekly), weeks (monthly), months (overall)."""
+    """Calendar buckets for the growth chart: days (weekly), weeks (monthly), months (overall).
+
+    The window never plots the future: it stops at the bucket containing
+    ``now``. It also starts at the first bucket holding a reward event, so a
+    young history is not padded with empty leading buckets.
+    """
     now = now or datetime.now(dt_timezone.utc)
+    starts = [at for user_events in (events or {}).values() for _, _, at in user_events]
     if period == 'weekly':
         start = period_start('weekly', now)
-        return [(start + timedelta(days=i), start + timedelta(days=i + 1),
-                 (start + timedelta(days=i)).strftime('%a')) for i in range(7)]
-    if period == 'monthly':
+        buckets = []
+        day = start
+        while day <= now:
+            buckets.append((day, day + timedelta(days=1), day.strftime('%a')))
+            day += timedelta(days=1)
+    elif period == 'monthly':
         start = period_start('monthly', now)
         month_end = (start.replace(day=28) + timedelta(days=7)).replace(day=1)
         buckets = []
         cursor = start
-        while cursor < month_end:
+        while cursor < month_end and cursor <= now:
             end = min(cursor + timedelta(days=7), month_end)
-            buckets.append((cursor, end, f"Week {len(buckets) + 1}"))
+            last_day = end - timedelta(days=1)
+            buckets.append((cursor, end, f"{cursor.strftime('%b')} {cursor.day}\u2013{last_day.day}"))
             cursor = end
-        return buckets
-    starts = [at for user_events in (events or {}).values() for _, _, at in user_events]
-    first = min(starts).replace(day=1, hour=0, minute=0, second=0, microsecond=0) if starts else period_start('monthly', now)
-    buckets = []
-    cursor = first
-    current_month = period_start('monthly', now)
-    while cursor <= current_month:
-        end = (cursor.replace(day=28) + timedelta(days=7)).replace(day=1)
-        label = cursor.strftime('%b') if cursor.year == now.year else cursor.strftime("%b '%y")
-        buckets.append((cursor, end, label))
-        cursor = end
+    else:
+        first = min(starts).replace(day=1, hour=0, minute=0, second=0, microsecond=0) if starts else period_start('monthly', now)
+        buckets = []
+        cursor = first
+        current_month = period_start('monthly', now)
+        while cursor <= current_month:
+            end = (cursor.replace(day=28) + timedelta(days=7)).replace(day=1)
+            label = cursor.strftime('%b') if cursor.year == now.year else cursor.strftime("%b '%y")
+            buckets.append((cursor, end, label))
+            cursor = end
+    if period != 'overall' and starts:
+        first_in_window = min((at for at in starts if at >= buckets[0][0]), default=None)
+        while first_in_window is not None and len(buckets) > 1 and buckets[0][1] <= first_in_window:
+            buckets.pop(0)
     return buckets
 
 
 def chart(events, currency, period, rows, now=None, limit=5):
     """Cumulative growth per bucket for the top rows (self included even below the limit)."""
     now = now or datetime.now(dt_timezone.utc)
-    buckets = chart_buckets(period, now, events)
+    currency_events = {user_id: [event for event in user_events if event[0] == currency]
+                       for user_id, user_events in events.items()}
+    buckets = chart_buckets(period, now, currency_events)
     series_rows = list(rows[:limit])
     self_row = next((row for row in rows if row['is_self']), None)
     if self_row and self_row not in series_rows:
@@ -141,7 +156,8 @@ def chart(events, currency, period, rows, now=None, limit=5):
             points.append(total)
         series.append({'name': row['name'], 'is_self': row['is_self'], 'points': points})
     return {'period': period,
-            'buckets': [{'label': label, 'start': begin.isoformat(), 'end': end.isoformat()}
+            'buckets': [{'label': label, 'start': begin.isoformat(), 'end': end.isoformat(),
+                         'current': begin <= now < end}
                         for begin, end, label in buckets],
             'series': series}
 

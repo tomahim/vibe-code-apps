@@ -197,8 +197,6 @@ function RewardInfo({ currency, onClose }) {
 }
 
 
-const CHART_COLORS = ["#b3a284", "#9fb3c8", "#c9a2a0", "#a3b89a"];
-
 function niceCeil(value) {
   // Even maximum so the 0/mid/max gridlines always land on integers.
   const max = Math.max(2, Math.ceil(value));
@@ -212,14 +210,16 @@ function EvolutionChart({ chart, currency }) {
   const n = chart.buckets.length;
   const x = (i) => padL + (n === 1 ? (width - padL - padR) / 2 : (i * (width - padL - padR)) / (n - 1));
   const y = (v) => padT + (1 - v / max) * (height - padT - padB);
-  const accent = currency === "drops" ? "var(--blue)" : "var(--orange)";
+  // Thomas's steering: the signed-in learner is always the blue line, every
+  // other learner a thinner continuous orange one.
+  const accent = "var(--blue)";
   const line = (points) => points.map((v, i) => `${x(i)},${y(v)}`).join(" ");
   const now = Date.now();
   const current = chart.buckets.findIndex((b) => Date.parse(b.start) <= now && now < Date.parse(b.end));
   const self = chart.series.find((s) => s.is_self);
   const others = chart.series.filter((s) => !s.is_self);
   const ordered = [...others, ...(self ? [self] : [])];
-  const colorOf = (s) => (s.is_self ? accent : CHART_COLORS[others.indexOf(s) % CHART_COLORS.length]);
+  const colorOf = (s) => (s.is_self ? "var(--blue)" : "var(--orange)");
   const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
   const gridValue = (f) => max * f;
   return <section className="grains-chart">
@@ -234,11 +234,13 @@ function EvolutionChart({ chart, currency }) {
       </g>)}
       {current >= 0 && <line x1={x(current)} x2={x(current)} y1={padT} y2={height - padB} className="grains-chart-today" />}
       {self && <polygon className="grains-chart-area" points={`${x(0)},${y(0)} ${line(self.points)} ${x(n - 1)},${y(0)}`} />}
-      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(s.points)} strokeWidth={s.is_self ? 2.6 : 1.6} strokeDasharray={s.is_self ? undefined : "1 4"} strokeLinecap="round" fill="none" />)}
+      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(s.points)} strokeWidth={s.is_self ? 2.6 : 1.4} strokeLinecap="round" fill="none" />)}
       {self && self.points.map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r={i === n - 1 ? 4 : 2.4} className="grains-chart-dot" style={{ color: accent }} />)}
+      {others.map((s) => <circle key={`${s.name}-latest`} cx={x(n - 1)} cy={y(s.points[n - 1])} r={2.6} className="grains-chart-dot" style={{ color: colorOf(s) }} />)}
       {self && <text x={x(n - 1) + 7} y={y(self.points[n - 1]) + 3} className="grains-chart-total" style={{ color: accent }}>{self.points[n - 1]}</text>}
-      {chart.buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{chart.period === "monthly" ? b.label.replace("Week ", "W") : b.label}</text>)}
+      {chart.buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{b.label}</text>)}
     </svg>
+    {current >= 0 && <p className="grains-chart-note">Counts through {new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" })} · {chart.period === "weekly" ? "today" : chart.period === "monthly" ? "this week" : "this month"} still in progress</p>}
     <ul className="grains-chart-legend">{ordered.map((s) => <li key={s.name}><span aria-hidden="true" style={{ background: colorOf(s) }}></span>{s.name}{s.is_self && <small>YOU</small>}</li>)}</ul>
   </section>;
 }
