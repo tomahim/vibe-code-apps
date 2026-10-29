@@ -465,3 +465,27 @@ test('phone practice quiz stays open at zero gaps with unread lessons', async ({
   await expect(review.getByText('When can a newborn have a first bath?')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-unified-practice-mobile.png' });
 });
+
+test('the side panel keeps the selected lesson row in view', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, 17);
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  await expect(panel.locator('.lg-lessons button')).toHaveCount(17);
+  const inView = (selector) => panel.evaluate((el, sel) => {
+    const row = el.querySelector(sel); if (!row) return false;
+    const p = el.getBoundingClientRect(), r = row.getBoundingClientRect();
+    return r.top >= p.top - 1 && r.bottom <= p.bottom + 1;
+  }, selector);
+  for (const n of [17, 1, 9]) {
+    await panel.evaluate((el) => { el.scrollTop = 0; });
+    await panel.locator('.lg-lessons button').nth(n - 1).evaluate((b) => b.click());
+    await page.mouse.move(900, 500); // leave the panel so the scene re-renders it too
+    await page.waitForTimeout(400);
+    await expect(panel.locator('.lg-lessons button.sel')).toHaveCount(1);
+    expect(await inView('.lg-lessons button.sel')).toBe(true);
+  }
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+});

@@ -500,7 +500,16 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       return `<li><button data-recent="${esc(lesson.id)}" aria-label="Continue ${esc(lesson.title)}"><span class="lg-recent-icon" aria-hidden="true">↗</span><span class="lg-recent-copy"><b>${esc(lesson.title)}</b><small>${esc(lesson.learning_path_title)}</small><em>${step}</em></span><span class="lg-recent-arrow" aria-hidden="true">→</span></button></li>`;
     }).join('')}</ul></section>`;
   }
+  let revealedLesson = null, panelCtx = '';
+  function revealSelectedLesson() {
+    const row = panelBody.querySelector('.lg-lessons button.sel');
+    if (!row) return;
+    const pr = panel.getBoundingClientRect(), rr = row.getBoundingClientRect();
+    panel.scrollTop += rr.top - pr.top - (pr.height - rr.height) / 2;
+  }
   function renderPanel() {
+    const ctx = `${view.level}.${view.ti}.${view.pi}`, keepTop = ctx === panelCtx ? panel.scrollTop : 0;
+    panelCtx = ctx;
     let h = '';
     if (view.level === 'garden') {
       h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>${renderRecent()}<ul class="lg-list">` +
@@ -529,6 +538,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         return `<li><button data-lesson="${i}" class="${st} ${i === sel ? 'sel' : ''}"><span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(lp.cards_total, lp.cards_completed)}</span>${gap ? `<span class="pc">${lqp}%</span>` : ''}</button></li>`; }).join('') + '</ol>';
     }
     panelBody.innerHTML = h;
+    panel.scrollTop = keepTop;
+    const revealKey = view.level === 'path' && trail && view.lesson >= 0 ? `${view.ti}.${view.pi}.${view.lesson}` : null;
+    if (revealKey && revealKey !== revealedLesson) { revealedLesson = revealKey; revealSelectedLesson(); }
+    else if (!revealKey) revealedLesson = null;
   }
   function renderStats() {
     const t = totals();
