@@ -2,6 +2,12 @@
 id: e6e39d87-fa6d-44b3-b539-897541c0f258
 position: 1
 title: "The old story: development as a program"
+image: baby-crawling-grass.jpg
+image_alt: "A baby in a striped hoodie crawling on all fours across a lawn and smiling at the camera."
+image_caption: "A nine-month-old baby crawling on the grass."
+image_credit: "Tehila Hertz"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:9_Monate_altes_Baby_-_Krabbelalter.jpg
 archived: false
 ---
 For much of the twentieth century, motor development was explained as maturation. Arnold Gesell and his contemporaries documented the orderly sequence of skills - head control, sitting, crawling, walking - and concluded that the nervous system simply ripens on a fixed timetable, the way a flower opens. Practice and experience were considered almost irrelevant decorations on a genetic program.

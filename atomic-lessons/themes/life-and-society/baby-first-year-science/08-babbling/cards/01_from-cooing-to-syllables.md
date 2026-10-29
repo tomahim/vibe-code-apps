@@ -2,6 +2,12 @@
 id: d457ef8f-d123-4e1e-ba7f-859f28ecf6f8
 position: 1
 title: "From cooing to syllables"
+image: babies-talking.jpg
+image_alt: "Two babies sitting on the floor facing each other while adults sit nearby, one baby reaching out."
+image_caption: "Two babies \"talking\" to each other."
+image_credit: "Patrick W."
+image_license: "CC BY 2.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Baby_conversation.jpg
 archived: false
 ---
 After the cooing phase, vocal play expands: squeals, growls, raspberries and long vowel explorations fill the middle of the first year. Researchers call these protophones - vocal experiments that are not yet speech but exercise all its machinery.

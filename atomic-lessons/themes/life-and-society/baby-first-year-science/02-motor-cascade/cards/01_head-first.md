@@ -2,6 +2,12 @@
 id: bcf7d1d4-87f7-4e8b-bb3a-a04a3558552c
 position: 1
 title: "Head first: the top-down rule"
+image: tummy-time.jpg
+image_alt: "A newborn lying on their tummy on a blanket, head lifted slightly and looking at the camera."
+image_caption: "An infant doing tummy time."
+image_credit: "george ruiz"
+image_license: "CC BY 2.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Tummy_time.jpg
 archived: false
 ---
 Watch a newborn and then a nine-month-old, and you can read the direction of development. Newborns can barely lift their heads; older babies sit, crawl and pull to stand. Motor control spreads from head to tail, a pattern researchers call cephalocaudal: babies stabilize the head first, then the trunk, then the legs.
