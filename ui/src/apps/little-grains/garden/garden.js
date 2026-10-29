@@ -89,6 +89,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   <div class="lg-stats" aria-label="Progress totals"></div>
   <aside class="lg-panel" aria-live="polite"><button class="lg-handle" aria-label="Expand or collapse details"><span></span></button><div class="lg-panel-body"></div></aside>
   <button class="lg-fab" type="button" hidden></button>
+  <div class="lg-practice" hidden></div>
   <div class="lg-zoom"><button data-zoom="in" aria-label="Zoom in">+</button><button data-zoom="out" aria-label="Zoom out">−</button></div><div class="lg-hint"></div><div class="lg-toast" role="status"></div><div class="lg-error" hidden>This garden needs WebGL. Open it in a browser with hardware acceleration enabled.</div>`;
   container.appendChild(root);
   const $ = (s) => root.querySelector(s);
@@ -481,7 +482,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   }
   function activate(p) {
     if (!p) return;
-    if (view.level === 'path') { if (p.kind === 'lesson') selectLesson(p.i); return; }
+    if (view.level === 'path') {
+      // A tap selects; a second tap on the already-selected tile opens the
+      // lesson directly, so starting works from the scene alone.
+      if (p.kind === 'lesson') { if (p.i === view.lesson) onOpenLesson?.(trail.path.lessonData[p.i].id); else selectLesson(p.i); }
+      return;
+    }
     if (view.level === 'garden' || p.ti !== view.ti) return goTheme(p.ti);
     if (p.kind === 'path') goPath(p.ti, p.pi);
   }
@@ -510,6 +516,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     play: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>',
     pause: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z" fill="currentColor"/></svg>',
     replay: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 0 5.4 6.5h-1.7A3.8 3.8 0 1 1 8 4.2c1 0 1.9.4 2.6 1L8.7 7H14V1.7l-1.8 1.8A5.500 5.500 0 0 0 8 2.5z" fill="currentColor"/></svg>',
+    sprout: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 14V8.5" stroke="#5ea84a" stroke-width="1.6" stroke-linecap="round"/><path d="M8 8.5C8 5.6 5.6 3.5 2.2 3.5c0 3 2.4 5 5.8 5z" fill="#5ea84a"/><path d="M8 7C8 4.2 10.2 2.5 13.8 2.5c0 2.8-2.2 4.5-5.8 4.5z" fill="#7fb877"/></svg>',
   };
   const dots = (n, on) => Array.from({ length: n }, (_, i) => `<i class="dot ${i < on ? 'on' : ''}"></i>`).join('');
   // Progress dots for paths (per lesson) and themes (per path): filled green only when complete, thicker border while in progress.
@@ -583,11 +590,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
       const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
-      const cu = trail.path.catch_up || {};
       h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
-      h += `<div class="lg-gauge"><p class="lg-gauge-head"><span>Questions answered correctly</span><b>${qp}%</b></p><span class="bar"><i style="width:${qp}%"></i></span><p class="lg-gauge-count">${qc} of ${qt} questions on this path</p></div>`;
-      if (cu.eligible) h += `<button class="primary lg-quiz" data-quiz="1">🌱 Practice quiz</button><p class="lg-quiz-hint">${cu.remaining > 0 ? `${cu.remaining} question${cu.remaining === 1 ? '' : 's'} still to answer correctly in read lessons` : 'Keep practicing questions from your read lessons'}</p>`;
-      else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Practice quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
+      // The question gauge shrinks to a slim strip: the practice quiz floats
+      // outside the panel, so the lessons stay the panel's focus.
+      h += `<p class="lg-strip"><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><span class="lg-strip-count">${qc} of ${qt} questions correct</span></p>`;
       if (sel >= 0) {
         const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
         const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0;
@@ -614,11 +620,36 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (!revealKey) revealedLesson = null;
     placeFab();
   }
+  // Practice leaves the panel: a floating pill above the sheet on phones, a
+  // compact card pinned under the reward chips on desktop. Eligibility and
+  // the quiz itself are unchanged; only its entry point moves out.
+  const practiceEl = $('.lg-practice');
+  function renderPractice() {
+    if (view.level !== 'path' || !trail) { practiceEl.hidden = true; practiceEl.innerHTML = ''; return; }
+    const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
+    const cu = trail.path.catch_up || {}, remaining = cu.remaining || 0;
+    if (mobile) {
+      practiceEl.innerHTML = cu.eligible
+        ? `<button class="lg-practice-pill" data-quiz="1">${ICON.sprout} Practice${remaining > 0 ? ` <small>· ${remaining} to go</small>` : ''}</button>`
+        : `<button class="lg-practice-pill" disabled aria-disabled="true" title="Finish a lesson's cards first">${ICON.sprout} Practice</button>`;
+    } else {
+      practiceEl.innerHTML = `<div class="lg-practice-card"><h3>Practice quiz</h3><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><p>${qc} of ${qt} questions</p>` +
+        (cu.eligible ? `<button class="primary" data-quiz="1">${ICON.sprout} Start practice</button>` : '<button class="primary" disabled aria-disabled="true">Start practice</button><p class="lg-practice-note">Finish a lesson\'s cards first</p>') + '</div>';
+    }
+    practiceEl.hidden = false;
+    placePractice();
+  }
+  // The phone pill rides the sheet's top edge as it expands and collapses.
+  function placePractice() {
+    if (!mobile || practiceEl.hidden) return;
+    const pr = panel.getBoundingClientRect(), rr = root.getBoundingClientRect();
+    practiceEl.style.bottom = `${Math.max(0, Math.round(rr.bottom - pr.top)) + 10}px`;
+  }
   function renderStats() {
     const t = totals();
     statsEl.innerHTML = `<button class="chip drop" data-reward="drops" aria-label="${t.drops} Drops. How Drops are earned">${ICON.drop}<b>${t.drops}</b><small>drops</small><span class="info" aria-hidden="true">ⓘ</span></button><button class="chip carrot" data-reward="carrots" aria-label="${t.carrots} Carrots. How Carrots are earned">${ICON.carrot}<b>${t.carrots}</b><small>carrots</small><span class="info" aria-hidden="true">ⓘ</span></button>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
   }
-  function renderUI() { renderCrumbs(); renderPanel(); renderStats(); buildLabels(); }
+  function renderUI() { renderCrumbs(); renderPanel(); renderPractice(); renderStats(); buildLabels(); }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); notifyView(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
@@ -737,17 +768,26 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (rainT > 0) rainT -= dt;
     const raining = rainT > 0; rain.visible = raining;
     if (raining) { const R = Math.min(9, camera.position.distanceTo(ctr) * 0.5); for (let i = 0; i < RAIN_N; i++) { const s0 = rainSeed[i * 3], s1 = rainSeed[i * 3 + 1], s2 = rainSeed[i * 3 + 2], y = (((s1 - time * 0.9 * (0.8 + s0 * 0.2)) % 1) + 1) % 1, x = ctr.x + s0 * R, z = ctr.z + s2 * R, yy = ctr.y + y * 9 - 1; rainArr.set([x, yy, z, x - 0.02, yy - 0.34, z], i * 6); } rain.geometry.attributes.position.needsUpdate = true; }
-    stepFly(now); controls.update(); placeLabels();
+    stepFly(now); controls.update(); placeLabels(); placePractice();
     renderer.render(scene, camera);
   }
   resize(); renderUI(); setVisibility(); if (initialView && (initialView.ti >= 0 || initialView.pi >= 0)) applyView(initialView); raf = requestAnimationFrame(frame);
 
-  return {
+  const api = {
     root, view, state, prof, failed: false, camera, controls,
     goGarden, goTheme, goPath, selectLesson, back, applyView,
+    goGarden, goTheme, goPath, selectLesson, back,
+    // Screen position of a lesson tile, for browser tests driving the scene.
+    lessonScreenPos(i) {
+      if (!trail || !trail.nodes[i]) return null;
+      const v = trail.nodes[i].pos.clone().project(camera), rr = root.getBoundingClientRect();
+      return { x: (v.x * 0.5 + 0.5) * rr.width, y: (-v.y * 0.5 + 0.5) * rr.height };
+    },
     updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, catch_up: path.catch_up, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
     dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },
   };
+  if (import.meta.env?.DEV) root.__garden = api;
+  return api;
 }

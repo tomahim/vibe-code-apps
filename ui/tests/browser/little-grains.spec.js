@@ -461,16 +461,20 @@ test('phone practice quiz stays open at zero gaps with unread lessons', async ({
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /English for babies/ }).click();
   await expect(panel.getByRole('heading', { name: 'English for babies' })).toBeVisible();
-  // The path gauge includes the unread lesson: 1 of 4 questions correct.
-  const gauge = panel.locator('.lg-gauge');
-  await expect(gauge).toContainText('Questions answered correctly');
-  await expect(gauge).toContainText('25%');
-  await expect(gauge).toContainText('1 of 4 questions on this path');
-  // The lesson row is fully read but below 100%: it carries its percentage.
-  await expect(panel.locator('.lg-lessons .pc')).toHaveText('33%');
+  // The path gauge includes the unread lesson: 1 of 4 questions correct. It is
+  // a slim strip now; the practice quiz floats outside the panel.
+  const strip = panel.locator('.lg-strip');
+  await expect(strip).toContainText('1 of 4 questions correct');
+  await expect(strip.locator('.bar')).toHaveAttribute('aria-label', '25% of questions answered correctly');
+  await expect(panel.getByRole('button', { name: /Practice/ })).toHaveCount(0);
+  const pill = page.locator('.lg-practice-pill');
+  await expect(pill).toBeVisible();
+  await expect(pill).toContainText('2 to go');
+  // The lesson row is fully read: all four card dots are filled.
+  await expect(panel.locator('.lg-lessons li').first().locator('.dot.on')).toHaveCount(4);
   await page.screenshot({ path: '/tmp/lg-204-gauge-mobile.png' });
 
-  await panel.getByRole('button', { name: /Practice quiz/ }).click();
+  await pill.click();
   const quiz = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
   await expect(quiz.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
   await expect(quiz.getByText('How often should you bathe a newborn?')).toBeVisible();
@@ -500,13 +504,15 @@ test('phone practice quiz stays open at zero gaps with unread lessons', async ({
   await page.screenshot({ path: '/tmp/lg-204-quiz-summary-mobile.png' });
   await quiz.getByRole('button', { name: 'Back to the garden' }).click();
   // Read-lesson gaps are closed, but another lesson is unread. Practice stays open.
-  await expect(panel.locator('.lg-quiz-hint')).toHaveText('Keep practicing questions from your read lessons');
-  await expect(panel.locator('.lg-gauge')).toContainText('75%');
-  await expect(panel.locator('.lg-lessons .pc')).toHaveCount(0);
+  await expect(pill).toBeEnabled();
+  await expect(pill).not.toContainText('to go');
+  await expect(strip).toContainText('3 of 4 questions correct');
+  await expect(strip.locator('.bar')).toHaveAttribute('aria-label', '75% of questions answered correctly');
+  await expect(panel.locator('.lg-lessons button').first()).toHaveClass(/done/);
   await page.screenshot({ path: '/tmp/lg-unified-zero-gaps-mobile.png' });
 
   // At zero eligible gaps the quiz still serves answered questions.
-  await panel.getByRole('button', { name: '🌱 Practice quiz' }).click();
+  await pill.click();
   const review = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
   await expect(review.getByText('PRACTICE QUIZ', { exact: true })).toBeVisible();
   await expect(review.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
@@ -629,3 +635,100 @@ test('a deep link survives the login redirect', async ({ page }) => {
   const next = new URL(page.url()).searchParams.get('next');
   expect(next).toBe(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
 });
+for (const [name, vp, mobile] of [['phone', { width: 390, height: 844 }, true], ['desktop', { width: 1440, height: 900 }, false]]) {
+  test(`${name}: practice quiz floats outside the lesson panel, disabled until a lesson is read`, async ({ page }) => {
+    await page.setViewportSize(vp);
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 3); // no catch_up on the path: practice is not eligible yet
+    await page.goto('/apps/little-grains');
+    const panel = page.locator('.lg-panel');
+    await panel.getByRole('button', { name: /Language/ }).click();
+    await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+    await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+    // The panel keeps only the title, the slim strip and the lessons.
+    await expect(panel.locator('.lg-strip')).toBeVisible();
+    await expect(panel.getByRole('button', { name: /Practice/ })).toHaveCount(0);
+    // Practice floats over the garden, disabled until a lesson's cards are read.
+    const control = page.locator(mobile ? '.lg-practice-pill' : '.lg-practice-card');
+    await expect(control).toBeVisible();
+    const action = mobile ? control : control.getByRole('button', { name: /practice/i });
+    await expect(action).toBeDisabled();
+    // Wait for the garden scene itself before judging the visual state.
+    await page.waitForFunction(() => document.querySelector('.lg-root')?.__garden?.ready?.());
+    await page.waitForTimeout(1200);
+    await page.screenshot({ path: `/tmp/lg-practice-outside-panel-disabled-${name}.png` });
+    if (mobile) {
+      // The pill rides the sheet's top edge, collapsed or expanded.
+      const above = async () => {
+        const p = await page.locator('.lg-practice-pill').boundingBox(), sh = await panel.boundingBox();
+        return p && sh && p.y + p.height <= sh.y + 2;
+      };
+      expect(await above()).toBe(true);
+      await panel.locator('.lg-handle').click();
+      await page.waitForTimeout(500);
+      expect(await above()).toBe(true);
+      await page.screenshot({ path: '/tmp/lg-practice-pill-sheet-open-phone.png' });
+    } else {
+      // The card is pinned top-right, under the drops and carrots chips.
+      const c = await control.boundingBox(), stats = await page.locator('.lg-stats').boundingBox();
+      expect(c.y).toBeGreaterThanOrEqual(stats.y + stats.height - 2);
+      expect(c.x + c.width).toBeGreaterThan(stats.x);
+    }
+  });
+}
+
+test('desktop: eligible practice card opens the quiz from outside the panel', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const q1 = 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50';
+  const progress = { cards_completed: 1, cards_total: 1, checkpoints_correct: 0, checkpoints_total: 1, questions_correct: 0, questions_total: 1, lessons_completed: 0, lessons_total: 1, started: true, completed: false };
+  await page.route('**/api/learning/**', route => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress, learning_paths: [{ ...row(id.path, 'Early Childhood English'), progress, catch_up: { eligible: true, remaining: 1 }, lessons: [{ ...row(id.lesson, 'Bath time and care'), progress }] }] }], rewards: { drops: 1, carrots: 0 }, recent_lessons: [] } });
+    if (url.pathname.endsWith('/catch-up/')) return route.fulfill({ json: { learning_path_id: id.path, eligible: true, remaining: 1, questions: [{ id: q1, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 1, after_card_position: 1, type: 'multiple_choice', prompt: 'What is the water like?', options: [{ id: 'warm', text: 'Warm' }, { id: 'cold', text: 'Cold' }] }] } });
+    return route.fulfill({ json: {} });
+  });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+  const card = page.locator('.lg-practice-card');
+  await expect(card).toBeVisible();
+  await expect(card).toContainText('Practice quiz');
+  await expect(card).toContainText('0 of 1 questions');
+  await card.getByRole('button', { name: 'Start practice' }).click();
+  const quiz = page.getByRole('dialog', { name: 'Practice quiz - Early Childhood English' });
+  await expect(quiz.getByRole('heading', { name: '1 question to go' })).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-practice-card-quiz-desktop.png' });
+});
+
+for (const [name, vp] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1440, height: 900 }]]) {
+  test(`${name}: a second tap on the selected garden tile opens the lesson`, async ({ page }) => {
+    await page.setViewportSize(vp);
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 3);
+    await page.goto('/apps/little-grains');
+    const panel = page.locator('.lg-panel');
+    await panel.getByRole('button', { name: /Language/ }).click();
+    await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+    await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+    await page.waitForFunction(() => document.querySelector('.lg-root')?.__garden?.ready?.());
+    const canvas = page.locator('.lg-canvas');
+    const tapTile = async (i) => {
+      const pt = await page.evaluate((idx) => document.querySelector('.lg-root').__garden.lessonScreenPos(idx), i);
+      expect(pt).not.toBeNull();
+      const box = await canvas.boundingBox();
+      await page.mouse.click(box.x + pt.x, box.y + pt.y);
+    };
+    // First tap only selects the tile; no lesson opens.
+    await tapTile(0);
+    await expect(panel.locator('.lg-lessons button.sel')).toHaveCount(1);
+    await expect(panel.locator('.lg-lessons button.sel .nm')).toHaveText('Bath time and care');
+    await expect(page.getByRole('dialog', { name: 'Bath time and care' })).toHaveCount(0);
+    // The repeat tap opens the lesson straight from the scene.
+    await tapTile(0);
+    await expect(page.getByRole('dialog', { name: 'Bath time and care' })).toBeVisible();
+    await page.screenshot({ path: `/tmp/lg-tile-tap-open-${name}.png` });
+  });
+}
