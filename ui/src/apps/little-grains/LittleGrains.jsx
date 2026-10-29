@@ -200,10 +200,9 @@ function RewardInfo({ currency, onClose }) {
 const CHART_COLORS = ["#b3a284", "#9fb3c8", "#c9a2a0", "#a3b89a"];
 
 function niceCeil(value) {
-  if (value <= 1) return 1;
-  const pow = Math.pow(10, Math.floor(Math.log10(value)));
-  for (const step of [1, 2, 2.5, 5, 10]) { if (step * pow >= value) return step * pow; }
-  return 10 * pow;
+  // Even maximum so the 0/mid/max gridlines always land on integers.
+  const max = Math.max(2, Math.ceil(value));
+  return max % 2 ? max + 1 : max;
 }
 
 function EvolutionChart({ chart, currency }) {
@@ -222,7 +221,7 @@ function EvolutionChart({ chart, currency }) {
   const ordered = [...others, ...(self ? [self] : [])];
   const colorOf = (s) => (s.is_self ? accent : CHART_COLORS[others.indexOf(s) % CHART_COLORS.length]);
   const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
-  const gridValue = (f) => { const v = max * f; return v >= 10 ? Math.round(v) : Math.round(v * 10) / 10; };
+  const gridValue = (f) => max * f;
   return <section className="grains-chart">
     <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : "🥕"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
     <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
