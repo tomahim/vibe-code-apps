@@ -296,10 +296,12 @@ class Command(BaseCommand):
             return {}
         to_process = []
         unchanged = 0
+        non_raster = 0
         for element in cards:
             candidate = self.image_file(element["metadata"], element["directory"], element["location"])
             if not illustrations.raster_image(candidate):
-                continue  # SVG and friends are served as-is through the fallback
+                non_raster += 1  # SVG and friends are served as-is through the fallback
+                continue
             sha = illustrations.source_hash(candidate)
             row = Card.objects.filter(pk=element["id"]).first()
             if row is not None and row.illustration_source_hash == sha and row.illustration_variants:
@@ -308,13 +310,19 @@ class Command(BaseCommand):
             to_process.append((element, candidate))
         if unchanged:
             self.stdout.write(f"Illustrations: {unchanged} unchanged (source hash match), no reprocessing.")
+        if non_raster:
+            self.stdout.write(f"Illustrations: {non_raster} non-raster image(s) served as-is via the repository fallback.")
         prepared = {}
+        # Units are source illustrations; each uploads its 640/1280 WebP
+        # variants. The counter advances only after a successful upload, and a
+        # failure aborts the sync, so the last line printed is never ahead of
+        # what actually reached the bucket.
         total = len(to_process)
         for index, (element, candidate) in enumerate(to_process, start=1):
-            self.stdout.write(f"Illustrations: processing {index}/{total} - {element['location']}")
             prepared[str(element["id"])] = illustrations.process_card_image(element["id"], candidate)
+            self.stdout.write(f"Illustrations: uploaded {index}/{total} - {element['location']}")
         if total:
-            self.stdout.write(f"Illustrations: {total}/{total} processed.")
+            self.stdout.write(f"Illustrations: all {total} changed source image(s) uploaded successfully.")
         return prepared
 
     @staticmethod
