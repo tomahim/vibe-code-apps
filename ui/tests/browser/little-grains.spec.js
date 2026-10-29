@@ -489,3 +489,24 @@ test('the side panel keeps the selected lesson row in view', async ({ page }) =>
   }
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
 });
+
+for (const [name, vp, mobile] of [['phone', { width: 390, height: 844 }, true], ['desktop', { width: 1440, height: 900 }, false]]) {
+  test(`${name}: themes overview shows dots, lesson counts only inside a theme on phones`, async ({ page }) => {
+    await page.setViewportSize(vp);
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 3);
+    await page.goto('/apps/little-grains');
+    const themeLabel = page.locator('.lg-label.theme').first();
+    await expect(themeLabel).toBeAttached();
+    await expect(themeLabel.locator('.dots .count')).toHaveCount(0);
+    await expect(themeLabel.locator('.dots > *')).not.toHaveCount(0);
+    await page.screenshot({ path: `/tmp/little-grains-overview-${name}.png` });
+    await page.locator('.lg-panel').getByRole('button', { name: /Language/ }).click();
+    const cellLabel = page.locator('.lg-label.cell').first();
+    await expect(cellLabel).toBeAttached();
+    await expect(cellLabel.locator('.dots .count')).toHaveCount(mobile ? 1 : 0);
+    if (mobile) await expect(cellLabel.locator('.dots .count')).toHaveText(/^\(\d+ \/ 3\)$/);
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: `/tmp/little-grains-theme-${name}.png` });
+  });
+}
