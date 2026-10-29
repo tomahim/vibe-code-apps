@@ -54,7 +54,7 @@ function adaptGarden(data) {
 function CardIllustration({ card }) {
   if (!card.illustration_url) return null;
   const srcset = (card.illustration_srcset || []).map((variant) => `${variant.url} ${variant.width}w`).join(", ");
-  const credit = [card.illustration_credit, card.illustration_license].filter(Boolean).join(", ");
+  const credit = card.illustration_credit ? [card.illustration_credit, card.illustration_license].filter(Boolean).join(", ") : "";
   return <figure className="grains-illustration">
     <img
       src={card.illustration_url}
