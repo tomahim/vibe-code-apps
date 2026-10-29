@@ -17,7 +17,7 @@ from .api import (
     lesson_summary, lock_learner, next_step, public_question, visible,
 )
 from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
-from .images import image_url
+from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
@@ -88,6 +88,13 @@ def lesson_detail(request, lesson_id):
                                     "illustration_path": c.illustration_path,
                                     "illustration_url": image_url(c),
                                     "illustration_alt": c.illustration_alt,
+                                    "illustration_srcset": illustration_srcset(c),
+                                    "illustration_width": c.illustration_width,
+                                    "illustration_height": c.illustration_height,
+                                    "illustration_caption": c.illustration_caption,
+                                    "illustration_credit": c.illustration_credit,
+                                    "illustration_license": c.illustration_license,
+                                    "illustration_source_url": c.illustration_source_url,
                                     "completed_at": state.completed[c.pk].isoformat()
                                     if c.pk in state.completed else None}
                                    for c in state.cards if c.lesson_id == lesson.pk],
