@@ -186,7 +186,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   </div>;
 }
 
-function CatchUpQuiz({ pathId, pathTitle, onClose, onProgress }) {
+function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
   const [data, setData] = useState(null);
   const [queue, setQueue] = useState([]);
   const [tries, setTries] = useState({});
@@ -232,13 +232,13 @@ function CatchUpQuiz({ pathId, pathTitle, onClose, onProgress }) {
 
   const left = total - solved;
   return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) finish(); }}>
-    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`${data?.mode === "review" ? "Review quiz" : "Catch-up quiz"} - ${pathTitle}`}>
-      <div className="grains-reader-top"><span className="grains-reader-kicker">{data?.mode === "review" ? "Review quiz" : "Catch-up quiz"} · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
+    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`Practice quiz - ${pathTitle}`}>
+      <div className="grains-reader-top"><span className="grains-reader-kicker">Practice quiz · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
       {error && <p className="grains-error" role="alert">{error}</p>}
-      {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>All questions answered</h3><p>Every question of this path has a correct answer. Well grown.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
-        : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}{data.mode === "catch_up" && data.remaining > total ? ` · ${data.remaining - total} more for your next quiz` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+      {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>No questions available yet</h3><p>Read every card in a lesson to practice its questions.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+        : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : <>
-          <div className="grains-reader-head"><p>{data.mode === "review" ? "REVIEW QUIZ" : "CATCH-UP QUIZ"}</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
+          <div className="grains-reader-head"><p>PRACTICE QUIZ</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
           <div className="grains-progress-track" aria-label={`${solved} of ${total} questions answered correctly`}><span style={{ width: `${total ? (solved / total) * 100 : 0}%` }} /></div>
           <div className="grains-reader-content">
             <div className="grains-question">
@@ -374,7 +374,7 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (!garden || !mount.current) return;
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, onCatchUpQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -395,7 +395,7 @@ export default function LittleGrains() {
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {lessonId && <LessonReader key={lessonId} lessonId={lessonId} onClose={() => setLessonId(null)} onProgress={refresh} />}
-    {catchUp && <CatchUpQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
   </main>;
 }

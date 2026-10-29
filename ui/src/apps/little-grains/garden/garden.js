@@ -71,7 +71,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onCatchUpQuiz, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -493,10 +493,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       const cu = trail.path.catch_up || {};
       h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
       h += `<div class="lg-gauge"><p class="lg-gauge-head"><span>Questions answered correctly</span><b>${qp}%</b></p><span class="bar"><i style="width:${qp}%"></i></span><p class="lg-gauge-count">${qc} of ${qt} questions on this path</p></div>`;
-      if (cu.eligible && cu.remaining > 0) h += `<button class="primary lg-quiz" data-quiz="1">🌱 Catch-up quiz · ${cu.remaining} question${cu.remaining === 1 ? '' : 's'} to go</button>`;
-      else if (cu.eligible && prog.completed) h += '<button class="primary lg-quiz" data-quiz="1">🌱 Review quiz</button><p class="lg-quiz-hint">All questions answered ✓</p>';
-      else if (cu.eligible) h += '<button class="primary lg-quiz" disabled aria-disabled="true">Catch-up quiz</button><p class="lg-quiz-hint">Read another lesson to keep growing this path</p>';
-      else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Catch-up quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
+      if (cu.eligible) h += `<button class="primary lg-quiz" data-quiz="1">🌱 Practice quiz</button><p class="lg-quiz-hint">${cu.remaining > 0 ? `${cu.remaining} question${cu.remaining === 1 ? '' : 's'} still to answer correctly in read lessons` : 'Keep practicing questions from your read lessons'}</p>`;
+      else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Practice quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
       h += renderRecent();
       if (sel >= 0) {
         const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lp.completed ? 'done' : lp.started ? 'cur' : 'todo';
@@ -524,7 +522,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.start) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.start)].id);
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
     else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
-    else if (b.dataset.quiz) onCatchUpQuiz?.(trail.path.id, trail.path.title);
+    else if (b.dataset.quiz) onPracticeQuiz?.(trail.path.id, trail.path.title);
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
   });

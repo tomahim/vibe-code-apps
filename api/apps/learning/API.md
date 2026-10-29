@@ -44,7 +44,14 @@ All writes are bearer-only, JSON-only, reject mismatching browser Origin, and ru
 
 ## GET paths/<uuid>/catch-up/
 
-Returns `{learning_path_id, mode, eligible, remaining, questions}`: one quiz session of at most 10 questions for a learning path (#204). While gaps remain, `mode` is `catch_up` and the session draws from the catch-up pool: every visible question of a fully read lesson that this learner has never answered correctly — never attempted or only answered wrong. Once no gap remains, `mode` is `review` and the session draws from the already-answered questions of fully read lessons for practice. Each session mixes up to 6 questions whose latest attempt is oldest (due for review) with random picks of the rest up to 10; never-attempted questions have no attempt and count as random picks. `remaining` always counts the whole gap pool, never one session. `eligible` is false until at least one lesson of the path is fully read. Questions are the public question shape plus `lesson_title`; answers and explanations stay server-side.
+Returns `{learning_path_id, eligible, remaining, questions}`: one shared practice quiz of at most 10 unique questions for a learning path. The historical `/catch-up/` route remains, but there is no backend catch-up/review mode or path-completion gate. Only visible questions from lessons whose visible cards have all been read are eligible, even when unread lessons remain elsewhere in the path. Selection priority:
+
+1. Questions whose latest attempt failed, random within this tier. A later correct answer clears this priority.
+2. Questions with no stored attempts, random within this tier.
+3. Of the slots left after 1 and 2, 60% (nearest whole question, half up) come from the answered questions whose latest attempt is oldest.
+4. The remaining slots are random picks from the other eligible answered questions, excluding every question already selected.
+
+The session keeps this priority order and contains fewer than 10 questions only when the eligible pool is smaller. `remaining` still counts all eligible questions never answered correctly, not session size; it can be zero while practice remains available. `eligible` is false until at least one lesson is fully read. Questions are the public question shape plus `lesson_title`; answers and explanations stay server-side.
 
 ## POST question-attempts/
 
