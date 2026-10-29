@@ -1,0 +1,19 @@
+id: 59884791-9ff0-45cc-a6e1-7322cae1f699
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should the North Korea link be described?
+choices:
+- id: 64026f1c-75cd-4f29-80ea-2670e0f4eb35
+  text: A claim made by the bank's customers
+- id: 5c9f4460-ad6a-43f9-9575-c0d958f973c7
+  text: A confession by the attackers
+- id: c1252e84-1951-45bf-b695-2c8d5140e922
+  text: A US criminal complaint alleging state involvement, backed by private technical analysis
+- id: 208510cb-4445-45bb-b799-407301de2bdd
+  text: A final court verdict
+correct_choice_ids:
+- c1252e84-1951-45bf-b695-2c8d5140e922
+explanation: A criminal complaint is an allegation, not a trial result.
+archived: false

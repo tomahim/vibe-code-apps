@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8358442d-05d9-4303-a93d-d93a7895edcf
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How long had Hawker owned trail running shoes before UTMB 2005?"
+choices:
+  - id: a8ed5930-82fb-4123-8981-78eea574cbbc
+    text: "2 months"
+  - id: 44386a80-d499-49df-ab66-3e62f2415713
+    text: "10 years"
+  - id: 7a8601ad-b4a4-4a2f-a280-b1db64c3530a
+    text: "10 days"
+  - id: 15369775-474a-479a-9924-c7ba6f393bd6
+    text: "1 day"
+correct_choice_ids:
+  - 7a8601ad-b4a4-4a2f-a280-b1db64c3530a
+explanation: "She had never owned trail shoes until 10 days before."
+archived: false

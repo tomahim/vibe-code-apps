@@ -1,0 +1,20 @@
+schema_version: 1
+id: 08e2e152-f771-40ee-ae63-66e9bfbadefb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where does she live and train above 10,000 feet?"
+choices:
+  - id: 2235f102-76b1-43e2-9679-68ac1432f536
+    text: "Salt Lake City"
+  - id: b972120d-f61b-4c28-9c29-cf9f66f140b2
+    text: "Leadville, Colorado"
+  - id: d627900c-e597-4283-a644-b7ebe297de73
+    text: "Boulder"
+  - id: 0f8e65f2-6312-48af-a97d-e5e0eeae4705
+    text: "Chamonix"
+correct_choice_ids:
+  - b972120d-f61b-4c28-9c29-cf9f66f140b2
+explanation: "She lives in Leadville."
+archived: false

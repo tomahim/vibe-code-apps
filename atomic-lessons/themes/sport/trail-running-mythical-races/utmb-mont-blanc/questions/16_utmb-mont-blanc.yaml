@@ -1,0 +1,10 @@
+id: c9635bae-73bd-4706-b02e-c0ce8c5e94fd
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How are runners selected for places? (one word)"
+accepted_answers:
+  - "ballot"
+  - "a ballot"
+explanation: "Runners are selected by ballot."
+archived: false

@@ -1,0 +1,19 @@
+id: b2dd2ec7-4f51-4e6e-9daf-6a0725147bf2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many entrants are allowed each year today?"
+choices:
+  - id: 0304dcec-a08b-4855-9fbd-3dd0b9916936
+    text: "1,000"
+  - id: 0aef2ab7-6fef-416f-be8d-70f774876c19
+    text: "198"
+  - id: 9f2fe3a8-0202-44fc-ba69-6f3fffb612ec
+    text: "143"
+  - id: 4fba994e-5e5d-4eff-aca8-8faa66d770ed
+    text: "369"
+correct_choice_ids:
+  - 4fba994e-5e5d-4eff-aca8-8faa66d770ed
+explanation: "Demand far exceeds the 369 entrants allowed each year."
+archived: false

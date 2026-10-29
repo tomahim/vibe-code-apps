@@ -1,0 +1,10 @@
+id: 27a7a46c-c6dd-4078-a831-94688619e8fa
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the first name of the researcher whose lab measured thousands of daily steps and dozens of falls in new walkers?"
+accepted_answers:
+  - "Karen"
+  - "Karen Adolph"
+explanation: "Karen Adolph's lab documented the scale and posture-specificity of infant motor practice."
+archived: false

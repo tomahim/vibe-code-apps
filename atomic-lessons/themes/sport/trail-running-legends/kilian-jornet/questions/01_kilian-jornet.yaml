@@ -1,0 +1,20 @@
+schema_version: 1
+id: 9ebc9117-acc3-45fb-b729-1d5822292bd7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which mountain range did Jornet grow up?"
+choices:
+  - id: 753c9549-2ddc-4df3-b0ac-f2951eb459aa
+    text: "The Rockies"
+  - id: 42dd38ed-de7f-47e7-836e-86c7d7381894
+    text: "The Andes"
+  - id: 45438a82-b562-411f-ba7c-9a036185a820
+    text: "The Alps"
+  - id: 70696f1b-611f-4c30-866f-b01c08c608f1
+    text: "The Pyrenees"
+correct_choice_ids:
+  - 70696f1b-611f-4c30-866f-b01c08c608f1
+explanation: "He grew up in a hut at 2,000 metres in the Pyrenees."
+archived: false

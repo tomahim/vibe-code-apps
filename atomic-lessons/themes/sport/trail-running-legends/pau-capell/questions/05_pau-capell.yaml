@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2bc2ca23-bca5-4df4-ae36-62c8c71e7264
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times has Capell won the Transgrancanaria Classic?"
+choices:
+  - id: 573ee634-e106-4905-9a88-59b0cfb9a480
+    text: "4"
+  - id: 7474e0e5-d638-4dc7-9fc9-04b68695bd12
+    text: "2"
+  - id: 43c451fd-62a2-4f73-b45e-204241448ec6
+    text: "1"
+  - id: e78fd02a-84cc-468c-999d-bf6f9a698a5b
+    text: "7"
+correct_choice_ids:
+  - 573ee634-e106-4905-9a88-59b0cfb9a480
+explanation: "He has won it four times."
+archived: false

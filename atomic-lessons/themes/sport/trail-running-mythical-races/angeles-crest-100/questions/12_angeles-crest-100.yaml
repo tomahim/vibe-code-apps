@@ -1,0 +1,11 @@
+id: cc90683f-37f2-4030-a766-7dadf4d3ebc2
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which peak does the 3D terrain map highlight for its climb? (name)"
+accepted_answers:
+  - "Mt. Baden-Powell"
+  - "Mount Baden-Powell"
+  - "Baden-Powell"
+explanation: "The map starts zoomed in on the climb of Mt. Baden-Powell."
+archived: false

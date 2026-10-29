@@ -1,0 +1,20 @@
+schema_version: 1
+id: 6a2739f0-5210-4ea5-95c1-5613ac517dce
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year did Jornet and Forsberg need alpine rescue on the Aiguille du Midi?"
+choices:
+  - id: c5a031b0-614d-4b32-889e-85d7cc5cf5b4
+    text: "2013"
+  - id: c1e46231-8912-4250-be7b-f674714c8046
+    text: "2017"
+  - id: 92a389e5-4fbe-4308-b2d7-3a68a40be90f
+    text: "2021"
+  - id: 8c65e3bb-1430-42e9-aa77-ee3fa7e1b472
+    text: "2007"
+correct_choice_ids:
+  - c5a031b0-614d-4b32-889e-85d7cc5cf5b4
+explanation: "They needed rescue on September 7, 2013."
+archived: false

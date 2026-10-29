@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7f04dbb6-fb36-4cbc-a6e9-d51e94a5aa4f
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who broke Trason's Western States women's record in 2012?"
+choices:
+  - id: c076b277-2550-49c8-9276-762bf7c22bcc
+    text: "Mira Rai"
+  - id: 388b67d7-b361-4f94-9899-e759405f804c
+    text: "Ellie Greenwood"
+  - id: deba5123-ebc7-4142-b84a-5b0290db2c27
+    text: "Courtney Dauwalter"
+  - id: c7da81be-4da8-4b69-9d45-815d11ee041b
+    text: "Lizzy Hawker"
+correct_choice_ids:
+  - 388b67d7-b361-4f94-9899-e759405f804c
+explanation: "Greenwood ran 16:47:19 in 2012."
+archived: false

@@ -1,0 +1,19 @@
+id: f2d065d1-a59a-4209-92d7-8229e025fc83
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which month of 1980 was the first race?"
+choices:
+  - id: 9f3a4793-e83b-409a-b99f-13b998a72bf3
+    text: "June"
+  - id: 36a83c61-64d3-44f0-8fc0-312fa58f5ff0
+    text: "March"
+  - id: 17939a4a-9d0a-4167-b399-9709d19f3c69
+    text: "December"
+  - id: 566bb862-4d8d-45be-a853-5bfc91683bea
+    text: "September"
+correct_choice_ids:
+  - 566bb862-4d8d-45be-a853-5bfc91683bea
+explanation: "It was set for September 27 and 28, 1980."
+archived: false

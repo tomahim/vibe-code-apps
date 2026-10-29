@@ -1,0 +1,20 @@
+schema_version: 1
+id: 43445893-2eb7-4332-91ff-e6e67f3309f4
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What did Forsberg eat before the last big climb of her first serious race?"
+choices:
+  - id: 247e7e58-87dd-425b-9043-be99220ac4b9
+    text: "A sandwich"
+  - id: 42700fdb-72d6-472c-8040-e70fcd00bebb
+    text: "A banana"
+  - id: bcaa32b9-d16a-41fe-ad68-563169204870
+    text: "An energy bar"
+  - id: 45e620f2-ff2b-4eb7-8dad-0c3837d617af
+    text: "A chocolate mud cake"
+correct_choice_ids:
+  - 45e620f2-ff2b-4eb7-8dad-0c3837d617af
+explanation: "She stopped for 20 minutes to eat the cake."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 12f4f5fe-eb74-4b4c-9c74-03167b40abdb
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which Mediterranean island hosts the Ultra Trail Mallorca?"
+choices:
+  - id: 57a88d20-1718-468a-8b47-253686a095cc
+    text: "Corsica"
+  - id: 39a08ef1-2663-42a5-9f96-547695eff2fa
+    text: "Sicily"
+  - id: acc47615-771c-45a8-83fa-2b6855871382
+    text: "Mallorca"
+  - id: 041bb359-5b1d-473f-a463-93f86878f2ca
+    text: "Crete"
+correct_choice_ids:
+  - acc47615-771c-45a8-83fa-2b6855871382
+explanation: "Capell won that 112 km race in 2014."
+archived: false

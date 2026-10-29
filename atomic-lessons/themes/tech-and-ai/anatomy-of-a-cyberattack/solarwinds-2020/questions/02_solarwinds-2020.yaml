@@ -1,0 +1,19 @@
+id: 6c6d8a22-b5f2-42c7-9cff-bdcb8799bfc1
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Roughly how many customers received affected versions?
+choices:
+- id: 8c77ef6c-b429-492b-8e5f-b2f40f065e0a
+  text: None
+- id: bc22e919-ffd7-4a83-a832-9d28039b2b52
+  text: About 180 million
+- id: ef1fe532-d077-4c58-87cf-42c07a24b085
+  text: Fewer than 18,000
+- id: c425f2b9-ca90-4c6f-8433-34d62f88b8df
+  text: About 18
+correct_choice_ids:
+- ef1fe532-d077-4c58-87cf-42c07a24b085
+explanation: SolarWinds told the SEC that fewer than 18,000 customers had installed the affected updates.
+archived: false

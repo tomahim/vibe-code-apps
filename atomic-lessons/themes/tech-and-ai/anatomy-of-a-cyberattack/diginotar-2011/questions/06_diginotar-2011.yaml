@@ -1,0 +1,19 @@
+id: 2d9306b1-df25-4474-a118-fae9282ea01b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How does the Fox-IT interim report treat the attackers' identity?
+choices:
+- id: d6167f04-2ffe-4e8c-8c56-9388c992a7e8
+  text: It names a government as the proven culprit
+- id: d2614543-c7a9-4db5-9d68-5a405b4b6914
+  text: It says the attackers were DigiNotar staff
+- id: ceb1b96a-9fa3-453b-916d-2af5a78125a8
+  text: It says no attacker was involved
+- id: e4cf6290-da12-4a2a-9ea6-1a359583d085
+  text: It describes their likely goal but does not prove who they were
+correct_choice_ids:
+- e4cf6290-da12-4a2a-9ea6-1a359583d085
+explanation: The report suggests interception of communication in Iran as the aim, but does not prove who was responsible.
+archived: false

@@ -1,0 +1,19 @@
+id: 7b350647-3145-4a0e-bfd4-7ee9c460915f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who founded the modern Pikes Peak races in 1956?"
+choices:
+  - id: 1a8e4db6-b384-4df9-a41c-b71673d5f337
+    text: "Zebulon Pike"
+  - id: 23ef54ca-c399-47df-a575-a6579e166c04
+    text: "Matt Carpenter"
+  - id: 905bb8ec-cd22-41e8-8351-6de2bc913508
+    text: "Dr. Arne Suominen"
+  - id: e82df69a-1e1c-40e2-a1ab-70c287b419fd
+    text: "Gordy Ainsleigh"
+correct_choice_ids:
+  - 905bb8ec-cd22-41e8-8351-6de2bc913508
+explanation: "A tobacco-hating physician, Dr. Arne Suominen, challenged smokers to race him."
+archived: false

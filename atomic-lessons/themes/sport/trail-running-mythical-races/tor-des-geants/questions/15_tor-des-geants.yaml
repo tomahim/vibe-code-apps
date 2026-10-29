@@ -1,0 +1,19 @@
+id: 3aaf77d4-d86f-41c5-90eb-893755efdcd2
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why does the race promote tourism?"
+choices:
+  - id: 2ddb0ec2-9d0c-4d3b-bf1c-10bddc820c66
+    text: "To hide the route"
+  - id: 0172279f-3940-4ac4-bbee-3e771ee7d22b
+    text: "To help the municipalities of the Valle d'Aosta"
+  - id: f76ff95b-0517-439d-8e4f-b92dc2d4e487
+    text: "To raise taxes"
+  - id: c23b11f4-3277-4a3c-b8b1-1ed6109969ee
+    text: "To close roads"
+correct_choice_ids:
+  - 0172279f-3940-4ac4-bbee-3e771ee7d22b
+explanation: "The official page says it promotes tourism."
+archived: false

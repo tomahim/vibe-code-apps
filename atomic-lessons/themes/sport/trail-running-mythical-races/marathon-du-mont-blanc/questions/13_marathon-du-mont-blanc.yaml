@@ -1,0 +1,19 @@
+id: 2da963ce-6a33-418d-a7ed-f55ba6eb62a4
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which club organises the marathon?"
+choices:
+  - id: 8f6e7192-fba0-40b0-9044-4a1d97e9038b
+    text: "Arista Eventos"
+  - id: 4a19d5bd-12ce-4e84-8f63-12d8665f6c42
+    text: "TORX"
+  - id: ba0a62ad-00d0-4f02-81ed-6d9424b7f044
+    text: "Club des Sports de Chamonix"
+  - id: 9d21a983-d958-4d75-8d04-d20e230948b9
+    text: "UTMB Group"
+correct_choice_ids:
+  - ba0a62ad-00d0-4f02-81ed-6d9424b7f044
+explanation: "The club was founded in 1905."
+archived: false

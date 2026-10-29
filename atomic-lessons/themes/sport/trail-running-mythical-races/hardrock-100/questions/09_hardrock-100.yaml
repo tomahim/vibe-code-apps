@@ -1,0 +1,19 @@
+id: c4dfca71-007c-4f3e-b98c-58c605477ddd
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does the race permanently start and finish?"
+choices:
+  - id: b7092e9f-fc5d-4fc8-a669-a86a3451ec03
+    text: "Lake City"
+  - id: 6c5ba25c-1f5c-4233-84b8-62bf00b021a6
+    text: "Telluride"
+  - id: 08e700a5-e70d-46df-bbf6-6ac7474f4ecd
+    text: "Silverton"
+  - id: cde98295-f256-4727-b013-aee8885b8770
+    text: "Ouray"
+correct_choice_ids:
+  - 08e700a5-e70d-46df-bbf6-6ac7474f4ecd
+explanation: "After the first year it was kept in Silverton."
+archived: false

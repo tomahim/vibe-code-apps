@@ -1,0 +1,19 @@
+id: 358f1b1b-8c81-4316-b7c1-26995291b2ca
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What helps organisations answer 'are we affected?' fast?"
+choices:
+  - id: af1e0eae-cb17-4b79-a359-2c135e153bb8
+    text: "A new logo"
+  - id: 5d825cc7-784e-4cc7-8bec-940b07c2613c
+    text: "A software bill of materials and dependency inventory"
+  - id: ca4e8658-2c0a-4108-afe7-38d3ae57cd56
+    text: "A larger office"
+  - id: 4b8595eb-6c17-4770-8bc6-eae6f3631199
+    text: "More email accounts"
+correct_choice_ids:
+  - 5d825cc7-784e-4cc7-8bec-940b07c2613c
+explanation: "Component lists can be searched quickly when a flaw is announced."
+archived: false

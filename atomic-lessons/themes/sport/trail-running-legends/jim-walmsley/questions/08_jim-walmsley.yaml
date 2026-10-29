@@ -1,0 +1,9 @@
+id: c5b1b8bc-de67-4ecd-a3b3-1d44baec62cb
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did he win UTMB?"
+accepted_answers:
+  - "2023"
+explanation: "He became the first American man to win."
+archived: false

@@ -1,0 +1,9 @@
+id: 61f5f020-a3f7-46e6-83d7-de8b25b46656
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year was the MDS cancelled for the first and only time? (year)"
+accepted_answers:
+  - "2020"
+explanation: "Covid-19 cancelled the 2020 edition."
+archived: false

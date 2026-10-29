@@ -1,0 +1,19 @@
+id: 5671db92-4f7d-42c8-a437-ac230e668f8f
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many nationalities are represented?"
+choices:
+  - id: 6b63f6ea-0ccb-4a49-b69b-13f961ba7da0
+    text: "About 50"
+  - id: deceee15-218a-4694-b9c0-8202c0690985
+    text: "About 20"
+  - id: c29abfb5-c47e-4f72-bec1-2528bf4c26fe
+    text: "More than 100"
+  - id: 8d803c13-b415-4a18-8f15-350fed61be04
+    text: "About 5"
+correct_choice_ids:
+  - c29abfb5-c47e-4f72-bec1-2528bf4c26fe
+explanation: "Over 100 nationalities."
+archived: false

@@ -1,0 +1,19 @@
+id: 69050f3a-c6e5-4cf1-b549-fd42487e26a5
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "About how high is the summit of Pikes Peak?"
+choices:
+  - id: 073686f3-280f-45bf-a464-1a844741052f
+    text: "About 2,000 metres"
+  - id: c3b5b97d-d018-43a9-baf1-13ac2596ec07
+    text: "About 3,000 metres"
+  - id: 7b4318b1-d5b6-411f-b27d-4457a123e2e5
+    text: "About 4,300 metres"
+  - id: df1fb10b-53b7-429d-86f0-f2c4e07f0fe9
+    text: "About 6,000 metres"
+correct_choice_ids:
+  - 7b4318b1-d5b6-411f-b27d-4457a123e2e5
+explanation: "The peak reaches about 4,300 metres, or 14,115 feet."
+archived: false

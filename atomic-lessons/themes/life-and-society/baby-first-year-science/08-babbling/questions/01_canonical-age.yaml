@@ -1,0 +1,19 @@
+id: 814383eb-0532-4396-a9b5-ef6842b5de36
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Canonical babbling (well-formed syllables like baba) typically begins around:"
+choices:
+  - id: 16eaa3e0-3eae-4124-bafa-f4cd1a164d01
+    text: "6 to 9 months"
+  - id: 29e5d73e-a83a-4417-b8ee-5f96ee4eab1c
+    text: "6 to 9 weeks"
+  - id: ae9676a7-024b-4d8d-a0bb-bd9be2f68116
+    text: "12 to 15 months"
+  - id: e9a33f23-a02e-48d2-9541-4303681b95b7
+    text: "2 months"
+correct_choice_ids:
+  - 16eaa3e0-3eae-4124-bafa-f4cd1a164d01
+explanation: "Oller established that canonical babbling follows a fairly tight schedule in the second half of the first year."
+archived: false

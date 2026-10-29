@@ -1,0 +1,11 @@
+id: b9fe741a-0144-467b-920e-8621b62d9eb6
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which develops first in the first year: understanding words or saying them?"
+accepted_answers:
+  - "understanding"
+  - "understanding words"
+  - "comprehension"
+explanation: "Receptive language runs well ahead of production; one-year-olds understand dozens of words while saying few."
+archived: false

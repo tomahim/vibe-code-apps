@@ -1,0 +1,19 @@
+id: b81a0ee6-e32d-4c94-bf98-003caaec3c2b
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "About how many starters did the 2026 Diagonale have?"
+choices:
+  - id: 21fd4e19-b687-4ecd-b9af-35ad816374ca
+    text: "2,839"
+  - id: a0ef40d1-0fa7-43a7-9296-88197010d8b2
+    text: "283"
+  - id: ac4901cd-ceed-4ccc-ad7f-5943ad837e8a
+    text: "500"
+  - id: 1651abd3-420f-4974-91a8-36605980419c
+    text: "28,390"
+correct_choice_ids:
+  - 21fd4e19-b687-4ecd-b9af-35ad816374ca
+explanation: "A local report says 2,839 runners."
+archived: false

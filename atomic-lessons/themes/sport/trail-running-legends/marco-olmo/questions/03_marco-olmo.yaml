@@ -1,0 +1,20 @@
+schema_version: 1
+id: 951cc2ca-7f6d-46f4-a84d-0d6f30cec9d2
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What tree did his family rely on?"
+choices:
+  - id: 3c338334-2089-4af3-a084-a982d3e12b29
+    text: "The apple tree"
+  - id: 789568d6-dbdf-4ed9-b88a-ab39cc797fb7
+    text: "The olive tree"
+  - id: f36553c6-3a4e-4528-85c3-6b14df2a2735
+    text: "The pine tree"
+  - id: 0e564f6c-22ec-45c6-8662-723d8f414fed
+    text: "The chestnut tree"
+correct_choice_ids:
+  - 0e564f6c-22ec-45c6-8662-723d8f414fed
+explanation: "The chestnut tree was simply called the tree."
+archived: false

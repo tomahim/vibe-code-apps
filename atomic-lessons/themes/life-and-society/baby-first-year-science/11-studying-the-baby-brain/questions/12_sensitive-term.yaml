@@ -1,0 +1,11 @@
+id: d2a30c80-9c7b-45a3-b793-9800579a9731
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What term describes a window when experience has outsized but gradually closing effects?"
+accepted_answers:
+  - "sensitive period"
+  - "a sensitive period"
+  - "sensitive periods"
+explanation: "Sensitive periods fit most of development; strict critical periods are the exception."
+archived: false

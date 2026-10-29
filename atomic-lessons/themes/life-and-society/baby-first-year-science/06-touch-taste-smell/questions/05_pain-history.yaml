@@ -1,0 +1,19 @@
+id: b0e43014-9e05-4ff6-bf96-cdf284e522d8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Modern science's position on newborn pain is that:"
+choices:
+  - id: e5885489-f66b-4140-bbf9-0660c1777ffb
+    text: "Newborns show full physiological pain signatures and need pain management"
+  - id: 3c36627b-00c2-4bd3-bf5f-fa2f4e4ba926
+    text: "Newborns cannot feel pain"
+  - id: 62b5a26f-509b-4075-bb8c-fdd3b53116ed
+    text: "Pain starts at six months"
+  - id: a34cdd92-83e4-45f5-8244-ee2728061dd5
+    text: "Only premature babies feel pain"
+correct_choice_ids:
+  - e5885489-f66b-4140-bbf9-0660c1777ffb
+explanation: "Stress hormones, heart-rate changes and facial responses show functional pain pathways from birth."
+archived: false

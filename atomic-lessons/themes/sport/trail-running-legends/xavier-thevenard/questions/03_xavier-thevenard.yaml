@@ -1,0 +1,20 @@
+schema_version: 1
+id: 1a13f42c-f891-4bd0-b5d5-7af32eeb8e68
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which winter sport combines skiing and shooting?"
+choices:
+  - id: afdc8e1d-326d-4c17-a4c4-c5c1995251b4
+    text: "Biathlon"
+  - id: 59f4dd48-20ea-426d-a79a-7f06c91169b2
+    text: "Curling"
+  - id: 8fed723a-fa12-4380-9f8f-f31be67df2e5
+    text: "Bobsleigh"
+  - id: 29f9fa80-def8-4b42-aae5-54596d10bd42
+    text: "Slalom"
+correct_choice_ids:
+  - afdc8e1d-326d-4c17-a4c4-c5c1995251b4
+explanation: "Thévenard was a biathlete."
+archived: false

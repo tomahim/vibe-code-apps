@@ -1,0 +1,19 @@
+id: 88737ba1-18d4-45b5-bfc4-892ac9ae9906
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who won in 2003 in 2:29:12?"
+choices:
+  - id: 22a67e36-ffcc-4fd3-8803-9940c13d2385
+    text: "Ricardo Mejia"
+  - id: c0dcac26-2eb4-49b1-9730-57f07a1eee9d
+    text: "Jonathan Wyatt"
+  - id: 80c3c1c8-0dc3-40c9-929f-99e635349dee
+    text: "Marco De Gasperi"
+  - id: c76efb2f-d29e-411f-b1e4-9413c32b27cd
+    text: "Kilian Jornet"
+correct_choice_ids:
+  - c0dcac26-2eb4-49b1-9730-57f07a1eee9d
+explanation: "The winners table lists Wyatt of New Zealand for 2003."
+archived: false

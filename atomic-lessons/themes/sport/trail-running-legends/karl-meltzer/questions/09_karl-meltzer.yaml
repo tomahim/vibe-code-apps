@@ -1,0 +1,20 @@
+schema_version: 1
+id: c3a06c66-99ed-4421-915b-d827ad27560d
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long was Meltzer's 2008 Appalachian Trail run?"
+choices:
+  - id: 04133bf2-16b8-4bff-a9a0-35ce32cfcc78
+    text: "90 days"
+  - id: 11df93ab-7788-49a1-99a1-924d723a3ca0
+    text: "54 days, 21 hours, 12 minutes"
+  - id: 302431ec-207d-40b9-b93d-da2a7309a0e9
+    text: "45 days, 22 hours, 38 minutes"
+  - id: 44fdf957-43a9-4d86-a6b8-8366582d9612
+    text: "30 days"
+correct_choice_ids:
+  - 11df93ab-7788-49a1-99a1-924d723a3ca0
+explanation: "It was the fourth fastest thru hike at the time, reported when he finished."
+archived: false

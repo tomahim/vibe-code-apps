@@ -1,0 +1,19 @@
+id: 09127e4e-6058-4ce0-b720-4cadd103aaa9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Kuhl's foreign-language exposure study found learning at 9 months occurred:"
+choices:
+  - id: 241bd47e-0e4d-4fba-b5b0-2e19d5308e87
+    text: "Only with a live person, not identical video or audio"
+  - id: 4ac18bb1-f5c4-464b-a168-e4741a81d580
+    text: "Equally from video"
+  - id: b503c558-efe7-4df5-a3a2-6725dc19b19c
+    text: "Only from audio recordings"
+  - id: fb341251-a0af-42f8-8d65-4ef2183aecfa
+    text: "Only during sleep"
+correct_choice_ids:
+  - 241bd47e-0e4d-4fba-b5b0-2e19d5308e87
+explanation: "Live responsive interaction produced measurable learning; the same material on screens did not."
+archived: false

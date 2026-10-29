@@ -1,0 +1,19 @@
+id: 1725d878-6adc-468b-8204-41d51f128a34
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which course did 2025 return to?"
+choices:
+  - id: 04cdc7d5-21da-4c3e-9ce7-3b31b4b23b83
+    text: "A one-mile loop"
+  - id: 20d56d21-2871-4a4c-9834-a3a528846045
+    text: "The out-and-back course first used in 2022"
+  - id: 8dd8eb25-40f7-438e-b730-dc122b7e65df
+    text: "A track course"
+  - id: 476bd225-473a-49fc-b679-5be32f56cab3
+    text: "A road course"
+correct_choice_ids:
+  - 20d56d21-2871-4a4c-9834-a3a528846045
+explanation: "The 2025 race used the out-and-back course."
+archived: false

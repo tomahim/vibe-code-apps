@@ -11,11 +11,11 @@ import "./little-grains.css";
 const REWARD_COPY = {
   drops: {
     title: "How Drops are earned",
-    description: "You earn 1 Drop when you first finish a card, 5 more when you complete a lesson, and 100 more when you complete a learning path. Each reward is earned once.",
+    description: "You earn 1 Drop when you first finish a card, 5 more when you have read every card in a lesson, and 100 more when you complete a learning path. Each reward is earned once.",
   },
   carrots: {
     title: "How Carrots are earned",
-    description: "You earn 1 Carrot the first time you answer a checkpoint correctly. Wrong answers and repeated correct answers earn no extra Carrots.",
+    description: "You earn 1 Carrot the first time you answer each question correctly, in a lesson or a Practice quiz. Wrong answers and repeated correct answers earn no extra Carrots.",
   },
 };
 
@@ -157,7 +157,6 @@ function LessonReader({ lessonId, onClose, onProgress }) {
         <div className="grains-reader-head"><p>LESSON {data.lesson.position}</p><h2>{data.lesson.title}</h2><span>{completedSteps} of {totalSteps} steps complete</span></div>
         <div className="grains-progress-track" aria-label={`${completedSteps} of ${totalSteps} steps complete`}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>
         <div className="grains-reader-content">
-          {data.lesson.image_url && <img className="grains-lesson-image" src={data.lesson.image_url} alt={data.lesson.image_alt} />}
           {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
           {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
           {question && <div className="grains-question">
@@ -172,7 +171,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
               <p>Capitalization and punctuation do not have to match.</p>
             </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
             {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
-              <strong>{feedback.correct ? feedback.attempt_type === "review" ? "That’s right!" : "That’s right! +1 carrot" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
+              <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
               {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
               <Markdown source={feedback.explanation} />
               <button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button>
@@ -186,6 +185,84 @@ function LessonReader({ lessonId, onClose, onProgress }) {
   </div>;
 }
 
+function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
+  const [data, setData] = useState(null);
+  const [queue, setQueue] = useState([]);
+  const [tries, setTries] = useState({});
+  const [solved, setSolved] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [choice, setChoice] = useState("");
+  const [feedback, setFeedback] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    api(`paths/${pathId}/catch-up/`)
+      .then((result) => { if (active) { setData(result); setQueue(result.questions); setTotal(result.questions.length); } })
+      .catch((err) => { if (active) setError(err.message); });
+    return () => { active = false; };
+  }, [pathId]);
+
+  const question = queue[0] || null;
+  const typedQuestion = question?.type === "type_answer_question";
+
+  async function submitAnswer() {
+    if (!question || !choice.trim() || busy) return;
+    setBusy(true); setError("");
+    try {
+      const result = await api("question-attempts/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer: choice }) });
+      setFeedback(result);
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+
+  function advance() {
+    if (!question || !feedback) return;
+    const used = (tries[question.id] || 0) + 1;
+    setTries((current) => ({ ...current, [question.id]: used }));
+    const rest = queue.slice(1);
+    if (feedback.correct) { setSolved((n) => n + 1); setQueue(rest); }
+    else setQueue(used < 2 ? [...rest, question] : rest); // One re-queue; after two wrong passes it waits for next time.
+    setFeedback(null); setChoice("");
+  }
+
+  function finish() { onProgress(); onClose(); }
+
+  const left = total - solved;
+  return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) finish(); }}>
+    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`Practice quiz - ${pathTitle}`}>
+      <div className="grains-reader-top"><span className="grains-reader-kicker">Practice quiz · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
+      {error && <p className="grains-error" role="alert">{error}</p>}
+      {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>No questions available yet</h3><p>Read every card in a lesson to practice its questions.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+        : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+        : <>
+          <div className="grains-reader-head"><p>PRACTICE QUIZ</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
+          <div className="grains-progress-track" aria-label={`${solved} of ${total} questions answered correctly`}><span style={{ width: `${total ? (solved / total) * 100 : 0}%` }} /></div>
+          <div className="grains-reader-content">
+            <div className="grains-question">
+              <p className="grains-card-index">{question.lesson_title} · {typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
+              <h3>{question.prompt}</h3>
+              {typedQuestion ? <div className="grains-typed-answer">
+                <label htmlFor={`grains-quiz-answer-${question.id}`}>Your answer</label>
+                <textarea id={`grains-quiz-answer-${question.id}`} rows={3} maxLength={255} value={choice}
+                  onChange={(event) => setChoice(event.target.value)} disabled={!!feedback}
+                  autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
+                <p>Capitalization and punctuation do not have to match.</p>
+              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`quiz-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
+              {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
+                <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : (tries[question.id] || 0) >= 1 ? "Not quite. It will wait for the next quiz." : "Not quite. It comes back at the end of this quiz."}</strong>
+                {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
+                <Markdown source={feedback.explanation} />
+                <button className="grains-primary" onClick={advance}>Continue →</button>
+              </div> : <button className="grains-primary" disabled={!choice.trim() || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}
+            </div>
+          </div>
+        </>}
+    </section>
+  </div>;
+}
+
 function RewardInfo({ currency, onClose }) {
   const reward = REWARD_COPY[currency];
   return <div className="grains-reward-dismiss" onClick={onClose}>
@@ -194,6 +271,62 @@ function RewardInfo({ currency, onClose }) {
       <p>{reward.description}</p>
     </section>
   </div>;
+}
+
+
+function niceCeil(value) {
+  // Even maximum so the 0/mid/max gridlines always land on integers.
+  const max = Math.max(2, Math.ceil(value));
+  return max % 2 ? max + 1 : max;
+}
+
+function EvolutionChart({ chart, currency }) {
+  if (!chart || !chart.buckets?.length || !chart.series?.length) return null;
+  const width = 360, height = 190, padL = 30, padR = 34, padT = 14, padB = 26;
+  const now = Date.now();
+  // Never plot the future, and skip leading buckets where nobody had earned
+  // anything yet - even if the API still sends the full calendar window.
+  let end = chart.buckets.findIndex((b) => Date.parse(b.start) > now);
+  if (end === -1) end = chart.buckets.length;
+  let first = 0;
+  while (first < end - 1 && chart.series.every((s) => !s.points[first])) first++;
+  const buckets = chart.buckets.slice(first, end);
+  const n = buckets.length;
+  const pointsOf = (s) => s.points.slice(first, end);
+  const max = niceCeil(Math.max(1, ...chart.series.flatMap((s) => pointsOf(s))));
+  const x = (i) => padL + (n === 1 ? (width - padL - padR) / 2 : (i * (width - padL - padR)) / (n - 1));
+  const y = (v) => padT + (1 - v / max) * (height - padT - padB);
+  // Thomas's steering: the signed-in learner is always the blue line, every
+  // other learner a thinner continuous orange one.
+  const accent = "var(--blue)";
+  const line = (points) => points.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+  const current = buckets.findIndex((b) => Date.parse(b.start) <= now && now < Date.parse(b.end));
+  const self = chart.series.find((s) => s.is_self);
+  const others = chart.series.filter((s) => !s.is_self);
+  const ordered = [...others, ...(self ? [self] : [])];
+  const colorOf = (s) => (s.is_self ? "var(--blue)" : "var(--orange)");
+  const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
+  const gridValue = (f) => max * f;
+  return <section className="grains-chart">
+    <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : "🥕"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
+    <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
+      <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
+      </linearGradient></defs>
+      {[0, 0.5, 1].map((f) => <g key={f}>
+        <line x1={padL} x2={width - padR} y1={y(max * f)} y2={y(max * f)} className="grains-chart-grid" />
+        <text x={padL - 6} y={y(max * f) + 3} className="grains-chart-y" textAnchor="end">{gridValue(f)}</text>
+      </g>)}
+      {current >= 0 && <line x1={x(current)} x2={x(current)} y1={padT} y2={height - padB} className="grains-chart-today" />}
+      {self && <polygon className="grains-chart-area" points={`${x(0)},${y(0)} ${line(pointsOf(self))} ${x(n - 1)},${y(0)}`} />}
+      {ordered.map((s) => <polyline key={s.name} className="grains-chart-line" style={{ color: colorOf(s) }} points={line(pointsOf(s))} strokeWidth={s.is_self ? 2.6 : 1.4} strokeLinecap="round" fill="none" />)}
+      {self && pointsOf(self).map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r={i === n - 1 ? 4 : 2.4} className="grains-chart-dot" style={{ color: accent }} />)}
+      {others.map((s) => <circle key={`${s.name}-latest`} cx={x(n - 1)} cy={y(pointsOf(s)[n - 1])} r={2.6} className="grains-chart-dot" style={{ color: colorOf(s) }} />)}
+      {self && <text x={x(n - 1) + 7} y={y(pointsOf(self)[n - 1]) + 3} className="grains-chart-total" style={{ color: accent }}>{pointsOf(self)[n - 1]}</text>}
+      {buckets.map((b, i) => (n <= 8 || i % Math.ceil(n / 6) === 0 || i === n - 1) && <text key={`${b.label}-${i}`} x={x(i)} y={height - 8} className="grains-chart-x" textAnchor="middle">{b.label}</text>)}
+    </svg>
+    <ul className="grains-chart-legend">{ordered.map((s) => <li key={s.name}><span aria-hidden="true" style={{ background: colorOf(s) }}></span>{s.name}{s.is_self && <small>YOU</small>}</li>)}</ul>
+  </section>;
 }
 
 function Leaderboard({ onClose }) {
@@ -213,7 +346,7 @@ function Leaderboard({ onClose }) {
       <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => setPeriod(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>
       {error && <p className="grains-error" role="alert">{error}</p>}
       {!data && !error && <p className="grains-loading">Gathering the rankings…</p>}
-      {data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : period === "weekly" ? "Resets every Monday" : "Resets on the 1st"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">The first spot is waiting for you.</p>}<div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
+      {data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : period === "weekly" ? "Resets every Monday" : "Resets on the 1st"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">The first spot is waiting for you.</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
     </aside>
   </div>;
 }
@@ -225,6 +358,7 @@ export default function LittleGrains() {
   const [garden, setGarden] = useState(null);
   const [error, setError] = useState("");
   const [lessonId, setLessonId] = useState(null);
+  const [catchUp, setCatchUp] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [rewardInfo, setRewardInfo] = useState(null);
   const profile = window.matchMedia("(max-width: 760px)").matches ? "mobile" : "desktop";
@@ -239,7 +373,7 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (!garden || !mount.current) return;
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -253,13 +387,14 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (lessonId) setLessonId(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (lessonId) setLessonId(null); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [lessonId, showLeaderboard, rewardInfo]);
+  }, [lessonId, catchUp, showLeaderboard, rewardInfo]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {lessonId && <LessonReader key={lessonId} lessonId={lessonId} onClose={() => setLessonId(null)} onProgress={refresh} />}
+    {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
   </main>;
 }

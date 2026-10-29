@@ -1,0 +1,9 @@
+id: 9f482d59-8145-4131-a513-7220bb8d58b1
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Krupicka finish second at Western States? Give the year."
+accepted_answers:
+  - "2010"
+explanation: "He was second in 2010."
+archived: false

@@ -1,0 +1,19 @@
+id: e59dcc89-7bdf-44fc-b66e-429557a06594
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year was Lavaredo born?"
+choices:
+  - id: 2a91b133-bc52-483e-a0f3-aa359301daa0
+    text: "1997"
+  - id: 02a0a11d-1671-4dac-8c57-5aa5a200d060
+    text: "2017"
+  - id: 0bf916f7-4497-4d16-9d13-66037dcfa8cf
+    text: "2007"
+  - id: df3cf9b7-4578-4a56-9b34-298cd5718a5a
+    text: "1987"
+correct_choice_ids:
+  - 0bf916f7-4497-4d16-9d13-66037dcfa8cf
+explanation: "The official page says born in 2007."
+archived: false

@@ -1,0 +1,19 @@
+id: d87dce94-8af9-42a9-b7e1-2265080d00d8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Placing a milestone at the 75% line means:"
+choices:
+  - id: 4fe20f4a-00bf-4455-b62a-a9d07c1265d6
+    text: "Absence is more actionable, yet some typical children still fall short"
+  - id: 490243c8-f664-4908-8a0b-1123d2000180
+    text: "75% is the average"
+  - id: e78deac8-4277-452c-859a-68c038b5bcc4
+    text: "25% of children are delayed"
+  - id: 451793d1-bc00-476c-8abe-091b63ed6430
+    text: "The skill is universal by then"
+correct_choice_ids:
+  - 4fe20f4a-00bf-4455-b62a-a9d07c1265d6
+explanation: "The line makes a missing milestone worth a conversation while still including a minority of typical children."
+archived: false

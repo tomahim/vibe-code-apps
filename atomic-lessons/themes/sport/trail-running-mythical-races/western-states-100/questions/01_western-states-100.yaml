@@ -1,0 +1,19 @@
+id: 4a81bec1-549c-4a3b-9fff-e8ee9e526d7c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who rode the Western States Trail with five horsemen in 1955?"
+choices:
+  - id: 605641ed-dd55-4f16-951e-9e3bf1b79705
+    text: "Gordy Ainsleigh"
+  - id: 9c447025-499f-49e7-a16c-137ebe1e2edf
+    text: "Wendell T. Robie"
+  - id: 27eabaff-fb73-492c-9c9f-1b67933bba34
+    text: "Ken Shirk"
+  - id: 95e2a34f-c1dd-4640-b21e-0e967d1c2451
+    text: "Jim Larimer"
+correct_choice_ids:
+  - 9c447025-499f-49e7-a16c-137ebe1e2edf
+explanation: "Robie's ride proved horses could cover 100 miles in one day."
+archived: false

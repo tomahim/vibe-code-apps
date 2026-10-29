@@ -1,0 +1,19 @@
+id: 747c5a6b-3ef3-4ba6-968a-b972fb062a1d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What did the Justice Department announce in June 2021?"
+choices:
+  - id: 22b30f17-1d22-45ce-846d-5c1e92681394
+    text: "It arrested the whole DarkSide group"
+  - id: df83ddbf-0721-40b0-bcad-d7d03991dc83
+    text: "It closed the pipeline"
+  - id: f72c48d7-bcfa-412e-a8c0-7066f2f12087
+    text: "It paid a larger ransom"
+  - id: 4c000034-e76e-4595-8ce0-f7b33d8e5225
+    text: "It recovered about 63.7 Bitcoin of the ransom"
+correct_choice_ids:
+  - 4c000034-e76e-4595-8ce0-f7b33d8e5225
+explanation: "It was a partial recovery of about $2.3 million."
+archived: false

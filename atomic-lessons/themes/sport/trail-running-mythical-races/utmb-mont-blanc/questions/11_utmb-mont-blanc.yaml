@@ -1,0 +1,19 @@
+id: 452e4d9e-e5d3-4ad5-8d39-243601467a2e
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the 100 km UTMB race called?"
+choices:
+  - id: 1b7195c1-5c4a-4efd-a504-4bb4d0a07c98
+    text: "UTWT"
+  - id: 32b9c46d-f038-44bf-b219-f435edb47a1d
+    text: "MDS"
+  - id: 07b24753-0cb9-47f1-a096-a23d3e4cc154
+    text: "OCC"
+  - id: de157526-d504-42d2-96a0-41e81fe225bd
+    text: "CCC"
+correct_choice_ids:
+  - de157526-d504-42d2-96a0-41e81fe225bd
+explanation: "The CCC is the 100K."
+archived: false

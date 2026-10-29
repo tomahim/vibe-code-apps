@@ -1,0 +1,19 @@
+id: a5a97c40-f3c7-4480-a3eb-1426090b50f6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Perception-action coupling means babies learn to read the world as:"
+choices:
+  - id: 1a651069-0b01-4523-8b68-bd541da2cd04
+    text: "What their current body can do in it"
+  - id: b0850ea2-128a-4a2b-9c03-3982179f211f
+    text: "A set of colors and shapes only"
+  - id: 84964a98-6bde-4b26-99bd-6d5cab06e3f3
+    text: "A list of rules to memorize"
+  - id: 7689f4fc-1485-4c2f-a5a5-9a1b27eedd9b
+    text: "Identical each day"
+correct_choice_ids:
+  - 1a651069-0b01-4523-8b68-bd541da2cd04
+explanation: "A slope is perceived as climbable or risky given today's strength and balance; perception and action develop together."
+archived: false

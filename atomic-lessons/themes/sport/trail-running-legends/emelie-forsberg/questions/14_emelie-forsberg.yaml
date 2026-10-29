@@ -1,0 +1,20 @@
+schema_version: 1
+id: f8f5a2ca-80a4-4371-aabf-1379001f74d9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which famous mountain runner is Forsberg's partner?"
+choices:
+  - id: 38ff57bd-b726-4c1a-85a0-116d17e4e759
+    text: "Karl Meltzer"
+  - id: 5dec8011-4a4f-411b-b685-cf7f392b0ae6
+    text: "Kilian Jornet"
+  - id: 96b76dd9-f48b-4269-a40a-afff23969809
+    text: "Jim Walmsley"
+  - id: 734aa8cb-472b-45a6-8c55-475cde86c729
+    text: "Jonathan Wyatt"
+correct_choice_ids:
+  - 5dec8011-4a4f-411b-b685-cf7f392b0ae6
+explanation: "Both compete in skyrunning and ski mountaineering."
+archived: false

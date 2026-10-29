@@ -1,0 +1,20 @@
+schema_version: 1
+id: 1d02da93-9f09-4ce7-b734-9f37b9204854
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which regiment did he serve as an officer?"
+choices:
+  - id: 69836cb5-2600-4cc6-b35d-6aec867b5b2b
+    text: "Coldstream Guards"
+  - id: 5141739c-2ac2-484c-856d-5c9cc006c216
+    text: "Royal Marines"
+  - id: 8c6e4eed-37b9-4d3d-a22d-fc4e84a6b008
+    text: "Scots Guards"
+  - id: d8b07438-483a-4ba3-bfb4-f4edb4e1c194
+    text: "Welsh Guards"
+correct_choice_ids:
+  - d8b07438-483a-4ba3-bfb4-f4edb4e1c194
+explanation: "He served in the Welsh Guards."
+archived: false

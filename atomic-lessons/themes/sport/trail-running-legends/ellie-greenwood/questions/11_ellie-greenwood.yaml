@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8f1ace3e-fae1-4287-a17b-3f6da3274594
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who broke Greenwood's record in 2023?"
+choices:
+  - id: e402582c-9c83-45b7-b3c2-1ec3fd8e5a0c
+    text: "Ann Trason"
+  - id: aff6283a-1212-4ce2-a054-14e27c57fcc6
+    text: "Ruth Croft"
+  - id: 693182aa-8ada-495b-a172-0841a3f164d1
+    text: "Courtney Dauwalter"
+  - id: 8175c88e-7263-4788-9e9e-ff0c74bfd508
+    text: "Lizzy Hawker"
+correct_choice_ids:
+  - 693182aa-8ada-495b-a172-0841a3f164d1
+explanation: "Dauwalter ran 15:29:34."
+archived: false

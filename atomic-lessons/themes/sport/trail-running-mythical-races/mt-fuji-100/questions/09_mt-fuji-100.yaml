@@ -1,0 +1,19 @@
+id: 08b1b618-9959-4b02-b1b3-6848cfe5f1fe
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does the concept say about sleep?"
+choices:
+  - id: 9040a67b-7512-4d86-a6f3-b5f09f43023f
+    text: "The race is split in stages"
+  - id: 4b831df2-3651-43c8-965c-dda3493d1e86
+    text: "Sleep is compulsory"
+  - id: e3e6bef4-7096-44ea-b223-65a6f109e1e3
+    text: "Runners sleep at night"
+  - id: 0061a699-7557-474a-82e7-4b8566757fa7
+    text: "The race goes on day and night without breaks"
+correct_choice_ids:
+  - 0061a699-7557-474a-82e7-4b8566757fa7
+explanation: "There are no breaks for sleep or rest."
+archived: false

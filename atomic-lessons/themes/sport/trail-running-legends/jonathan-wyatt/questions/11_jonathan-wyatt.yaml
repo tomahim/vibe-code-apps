@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2b7f7b10-a2af-491f-a1db-b88d1817fa69
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which skyscraper run-up did Wyatt take part in?"
+choices:
+  - id: cd3d9175-14af-4b83-8d69-2157b6842f7d
+    text: "Taipei 101"
+  - id: 9a31ec9d-11e2-409d-8f5b-1f2cd08b6c11
+    text: "Empire State Building"
+  - id: bd775c4b-960f-4e53-8014-3997683da135
+    text: "Eiffel Tower"
+  - id: b101444d-fb6d-47d9-b1e7-9c280febf8e4
+    text: "Burj Khalifa"
+correct_choice_ids:
+  - cd3d9175-14af-4b83-8d69-2157b6842f7d
+explanation: "He appears in a photo from the 2010 Taipei 101 Run Up."
+archived: false

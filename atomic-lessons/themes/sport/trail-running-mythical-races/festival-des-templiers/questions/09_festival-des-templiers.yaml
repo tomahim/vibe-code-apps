@@ -1,0 +1,19 @@
+id: 8b543508-c46e-42f6-8828-3c30d28cd076
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When does the Grand Trail start?"
+choices:
+  - id: d5773a76-ad60-4d80-84ec-440ddfec5f40
+    text: "At 3 pm"
+  - id: eb8c5e6d-687c-4acf-916e-25a618cce909
+    text: "At sunset"
+  - id: 1b6375c2-469e-4c02-943a-351154c9c9b9
+    text: "In the dark of night"
+  - id: 05c75c4d-b56c-488e-81b5-45f2eaabddcb
+    text: "At noon"
+correct_choice_ids:
+  - 1b6375c2-469e-4c02-943a-351154c9c9b9
+explanation: "The start is unique and emotional in the dark night."
+archived: false

@@ -1,0 +1,19 @@
+id: 109fd21b-4f26-4653-a3c2-bd89af42bfce
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When was the independent race held in 1978?"
+choices:
+  - id: b9978979-40c1-4945-89ab-5ff27be69b94
+    text: "In September"
+  - id: 4657b70b-57f2-4f51-872b-c6f348e41b63
+    text: "In January"
+  - id: 0673b448-94c9-4324-add9-5fcb2f71303d
+    text: "In June, a month before the Tevis Cup"
+  - id: d9aa852d-3e97-40ef-8e09-6acd1943f669
+    text: "In July with the horses"
+correct_choice_ids:
+  - 0673b448-94c9-4324-add9-5fcb2f71303d
+explanation: "The race was held a month earlier than the Tevis Cup."
+archived: false

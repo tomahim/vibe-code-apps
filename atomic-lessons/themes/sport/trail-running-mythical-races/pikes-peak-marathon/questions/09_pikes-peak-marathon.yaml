@@ -1,0 +1,19 @@
+id: e0b05c07-db09-4039-9ea9-132c97d0dba5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which runner won the 1993 marathon in 3:16:39?"
+choices:
+  - id: 823b9400-03f9-4c0a-a556-02c29313c9c1
+    text: "Arne Suominen"
+  - id: e4c21230-d0e1-4bb9-95ad-37985663d6e1
+    text: "Matt Carpenter"
+  - id: c5d54f66-188a-403f-862a-56922c6304ed
+    text: "Ricardo Mejia"
+  - id: 11c09fe9-b8db-43ad-ba39-fcc1202f5641
+    text: "Peter Strudwick"
+correct_choice_ids:
+  - e4c21230-d0e1-4bb9-95ad-37985663d6e1
+explanation: "The official results archive shows Carpenter first in 3:16:39."
+archived: false

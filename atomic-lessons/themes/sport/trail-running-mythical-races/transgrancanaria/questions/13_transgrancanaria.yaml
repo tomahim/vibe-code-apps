@@ -1,0 +1,19 @@
+id: f7ab962b-e2a5-4382-8336-9172f890e990
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the KV El Gigante?"
+choices:
+  - id: 208441c7-fb88-4822-9959-8d4958ff88af
+    text: "A swimming race"
+  - id: 7d57e0e9-9f7c-4414-a07e-beeb4c4cddc7
+    text: "An uphill race of 5.5 km"
+  - id: ecc65d7a-8768-4e1f-90a1-62096147167d
+    text: "A flat 42 km"
+  - id: 56b6fe66-882c-41d1-a53f-9be553520a52
+    text: "A night race"
+correct_choice_ids:
+  - 7d57e0e9-9f7c-4414-a07e-beeb4c4cddc7
+explanation: "The vertical kilometre has 1,090 metres of gain."
+archived: false

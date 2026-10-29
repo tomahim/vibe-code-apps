@@ -1,0 +1,19 @@
+id: 29fb0971-9c50-41e6-a7f4-89b06a1c443c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Gesell's maturation theory claimed motor skills appear mainly because:"
+choices:
+  - id: 29fb0a21-e301-431b-a079-a844ca94e233
+    text: "The nervous system ripens on a fixed timetable"
+  - id: 7f5d759e-7370-461a-9192-5f53873ad737
+    text: "Babies imitate adults"
+  - id: 3b3ebbcc-899c-4c3d-9b7d-e5148f8a599a
+    text: "Reflexes never fade"
+  - id: f2274858-164e-4b5e-b212-5d24e95f78da
+    text: "Caregivers train each skill"
+correct_choice_ids:
+  - 29fb0a21-e301-431b-a079-a844ca94e233
+explanation: "Maturation theory described an orderly sequence driven by neural ripening, with practice nearly irrelevant."
+archived: false

@@ -1,0 +1,10 @@
+id: 58d966be-42f4-4f1e-9492-338cdfa9a3a9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many world records did Trason set during her career? Give the number."
+accepted_answers:
+  - "20"
+  - "twenty"
+explanation: "She set 20 world records."
+archived: false

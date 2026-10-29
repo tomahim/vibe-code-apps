@@ -1,0 +1,19 @@
+id: 708d5107-018a-4e6e-a46b-c6c848848340
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How do the men's and women's distances compare?"
+choices:
+  - id: c5378b8c-45e8-49fc-8278-9b689a48b4db
+    text: "Women race half"
+  - id: 17bb803f-03ac-4043-9878-7c5e20ae1b1c
+    text: "They have always raced the same distance"
+  - id: 68b6999b-faa9-4617-8d1e-0aae1db7ac9d
+    text: "Women have a separate course"
+  - id: c59b9465-10ae-4f53-951c-251b9c6e8d60
+    text: "Women start later"
+correct_choice_ids:
+  - 17bb803f-03ac-4043-9878-7c5e20ae1b1c
+explanation: "The WMRA notes men and women have always raced over the same distance."
+archived: false

@@ -1,0 +1,19 @@
+id: d61bddc0-5041-4a60-9f78-fa35577c49d0
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why were OPM background investigation files so sensitive?
+choices:
+- id: 61624c7d-b65c-47d0-b274-b407374c4756
+  text: They only contained public job ads
+- id: d7413e8c-96b0-40e0-bb07-84d52cc5de49
+  text: They contained detailed personal histories used for security clearances
+- id: 47049a7d-6e42-4708-a1ba-8cfaeaedf0d8
+  text: They were mostly empty forms
+- id: e76d2748-1500-4c2e-883b-3b0d23da0a34
+  text: They held only payroll tables
+correct_choice_ids:
+- d7413e8c-96b0-40e0-bb07-84d52cc5de49
+explanation: Background investigation records hold deep personal detail useful to an intelligence service.
+archived: false

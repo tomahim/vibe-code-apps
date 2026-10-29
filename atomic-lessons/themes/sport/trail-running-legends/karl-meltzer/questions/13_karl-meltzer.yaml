@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8bb4c20c-cb57-4433-ae99-96d42b4f4230
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who beat his record in September 2017?"
+choices:
+  - id: 34b70fee-b2a3-4d67-b3dd-e55c2fce8995
+    text: "Joe McConaughy"
+  - id: a96ace22-c14e-4af3-968f-c2fa5d093d35
+    text: "Tara Dower"
+  - id: ad41030f-224d-4333-9a47-0f2cdc616908
+    text: "Scott Jurek"
+  - id: 21f3f526-6054-4e58-bd7d-1b66be9ba8d0
+    text: "Anton Krupicka"
+correct_choice_ids:
+  - 34b70fee-b2a3-4d67-b3dd-e55c2fce8995
+explanation: "McConaughy finished in 45 days, 12 hours and 15 minutes."
+archived: false

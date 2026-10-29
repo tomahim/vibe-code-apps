@@ -1,0 +1,19 @@
+id: 669dc953-90f6-4226-8413-d05064fd0ee5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who created the Templiers?"
+choices:
+  - id: e09d2b8b-5cb3-45b3-8fba-dceab0200b9a
+    text: "Gilles Bertrand and Odile Baudrier"
+  - id: 3d01a5d6-944f-491e-bfc1-14cb817e6744
+    text: "Poletti and Poletti"
+  - id: 140b21f8-eca0-458b-a5f0-98efe3fe0c15
+    text: "Gordy Ainsleigh and Ken Chlouber"
+  - id: 8d4bfbaf-9fce-4d9b-b98a-fac22e535dba
+    text: "Laz and Karl"
+correct_choice_ids:
+  - e09d2b8b-5cb3-45b3-8fba-dceab0200b9a
+explanation: "They were the founding couple."
+archived: false

@@ -1,0 +1,19 @@
+id: 58d43b57-f676-4ac7-b054-4855ae8fda0d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Where does the race start today?"
+choices:
+  - id: 51c97d80-300a-4eaa-a70c-5bba513b6d4f
+    text: "Auburn"
+  - id: 9349c8b9-db5b-43e1-88aa-1e186581e052
+    text: "Fort Riley"
+  - id: 8b439047-8f00-450a-89e4-d43f31c27c36
+    text: "Tahoe City"
+  - id: c12fd7c2-b791-4a3a-befa-7eff0787d472
+    text: "Olympic Valley"
+correct_choice_ids:
+  - c12fd7c2-b791-4a3a-befa-7eff0787d472
+explanation: "Athletes arrive in Olympic Valley on the last weekend in June."
+archived: false

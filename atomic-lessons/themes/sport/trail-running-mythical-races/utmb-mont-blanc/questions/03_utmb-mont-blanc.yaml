@@ -1,0 +1,19 @@
+id: 8a6a5e5c-be37-4b42-88a6-2296fbf3f0d3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which valley is the starting point?"
+choices:
+  - id: cb6d128f-5bb6-415d-b867-3636d2bc36d6
+    text: "Aosta"
+  - id: 73108a75-3079-4a84-ad9a-7e1461fbaabc
+    text: "Grindelwald"
+  - id: 362fd23c-0522-4734-b702-e6f10a5083f0
+    text: "Chamonix"
+  - id: ec9e45b0-9d71-4f25-b199-ab0f647a5c15
+    text: "Cortina"
+correct_choice_ids:
+  - 362fd23c-0522-4734-b702-e6f10a5083f0
+explanation: "The story began in the Chamonix valley."
+archived: false

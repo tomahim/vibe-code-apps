@@ -1,0 +1,9 @@
+id: 71ba8485-3f76-46f7-9923-54e05ff95076
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What was her American River 50 Mile course record, written as hours:minutes?"
+accepted_answers:
+  - "6:09"
+explanation: "She dropped her time by an hour to set a 6:09 record."
+archived: false

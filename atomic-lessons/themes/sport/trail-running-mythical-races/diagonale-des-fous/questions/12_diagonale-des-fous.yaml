@@ -1,0 +1,12 @@
+id: 26eb399e-8e79-4f4f-b129-bf4348cb1875
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the island called where the race takes place? (one word)"
+accepted_answers:
+  - "Reunion"
+  - "Réunion"
+  - "La Reunion"
+  - "La Réunion"
+explanation: "The race is held on Reunion Island."
+archived: false

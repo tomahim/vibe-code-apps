@@ -1,0 +1,19 @@
+id: 17d98a57-c9ac-4422-9800-b020f6879185
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Studies of children treated late for dense congenital cataracts show:"
+choices:
+  - id: adb6ce03-9d63-4590-bf8b-3a2617d62722
+    text: "Early visual input matters, though some recovery is possible"
+  - id: 101baaba-e498-45c2-8c06-f2a927a3b8aa
+    text: "Vision needs no input to develop"
+  - id: b1fe33f4-736c-4aee-8338-833bcdf6d892
+    text: "Recovery is never possible"
+  - id: 1afcaa44-d6e9-48fd-bbcd-8fd34e60505a
+    text: "Only color vision is affected"
+correct_choice_ids:
+  - adb6ce03-9d63-4590-bf8b-3a2617d62722
+explanation: "Deprivation cases reveal both the importance of early input and a degree of later plasticity."
+archived: false

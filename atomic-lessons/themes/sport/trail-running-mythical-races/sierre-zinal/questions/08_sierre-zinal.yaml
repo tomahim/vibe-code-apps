@@ -1,0 +1,10 @@
+id: eadae810-1a6e-49b1-bb6f-8be4f9656589
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many metres of elevation gain does the official site give? (number)"
+accepted_answers:
+  - "2200"
+  - "2,200"
+explanation: "The site says 2,200 metres of elevation gain."
+archived: false

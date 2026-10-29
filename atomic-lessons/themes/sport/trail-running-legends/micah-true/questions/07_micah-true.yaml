@@ -1,0 +1,10 @@
+id: 682deb39-6c6d-4a25-a2dd-e045cc4ec1d0
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "What does Caballo Blanco mean in English? Give the animal."
+accepted_answers:
+  - "horse"
+  - "white horse"
+explanation: "It means White Horse."
+archived: false

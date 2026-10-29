@@ -1,0 +1,20 @@
+schema_version: 1
+id: b0b2c84a-7de9-404d-9104-65f6e827f7d1
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year did he begin working as a coach?"
+choices:
+  - id: 3c8d4e12-f04f-4fb4-aa14-87854244fcb9
+    text: "2021"
+  - id: 6a2518fd-0fc4-4a8d-9fde-61879c744421
+    text: "1999"
+  - id: 01e6e2e2-77bd-4628-8c91-ba68dd9ae60d
+    text: "2007"
+  - id: 761b35bb-2779-49d9-aac0-de35adbd63ee
+    text: "2016"
+correct_choice_ids:
+  - 01e6e2e2-77bd-4628-8c91-ba68dd9ae60d
+explanation: "He has coached since 2007."
+archived: false

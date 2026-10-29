@@ -1,0 +1,9 @@
+id: 8ba9ee5f-6012-4a6d-b12b-4f7d356c6885
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which Italian ultrarunner played a role in making it popular? (first and last name)"
+accepted_answers:
+  - "Marco Olmo"
+explanation: "The recap credits Marco Olmo."
+archived: false

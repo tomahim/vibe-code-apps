@@ -1,0 +1,19 @@
+id: 72160b6a-366e-4f00-831c-bffc0f6d50b4
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was the race called in 1989?"
+choices:
+  - id: c69ab1e0-35b6-49d3-9de6-b4c7850c2af4
+    text: "La marche des Cimes"
+  - id: a999961a-e6a4-49ea-a3df-6a345cce2acf
+    text: "La Diagonale"
+  - id: cd5fa302-9699-4d42-be0e-dd75163a9c2b
+    text: "Grand Raid"
+  - id: ecbd181f-6ad0-472e-bbc2-822e34854d7f
+    text: "Le Tour"
+correct_choice_ids:
+  - c69ab1e0-35b6-49d3-9de6-b4c7850c2af4
+explanation: "It was called the march of the summits."
+archived: false

@@ -10,6 +10,7 @@ urlpatterns = [
     path("themes/", views.themes, name="learning-themes"),
     path("themes/<uuid:theme_id>/", views.theme_detail, name="learning-theme"),
     path("paths/<uuid:path_id>/", views.path_detail, name="learning-path"),
+    path("paths/<uuid:path_id>/catch-up/", views.catch_up, name="learning-catch-up"),
     path("lessons/<uuid:lesson_id>/", views.lesson_detail, name="learning-lesson"),
     path("lessons/<uuid:lesson_id>/open/", views.open_lesson, name="learning-open-lesson"),
     path("cards/<uuid:card_id>/complete/", views.complete_card, name="learning-complete-card"),

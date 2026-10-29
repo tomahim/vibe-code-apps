@@ -1,0 +1,19 @@
+id: ca50407c-2c2c-4845-a4bb-26107b0cbdc9
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Research on distinct cry types (hunger vs pain) finds:"
+choices:
+  - id: 19d8b9bd-5077-4dc0-b278-8a76f3ea8ec3
+    text: "Weak support; context and intensity are more informative"
+  - id: 4912c4af-e8b4-4524-9c03-9afec972489a
+    text: "Parents always distinguish them"
+  - id: 6c17b620-1071-4e36-b4e8-3aca7adb169b
+    text: "Five universal cry words"
+  - id: 3b3d35fb-31b6-4846-a4c2-d667963b4029
+    text: "Cries carry no information"
+correct_choice_ids:
+  - 19d8b9bd-5077-4dc0-b278-8a76f3ea8ec3
+explanation: "Cries are graded signals; the situation tells caregivers far more than acoustic categories."
+archived: false

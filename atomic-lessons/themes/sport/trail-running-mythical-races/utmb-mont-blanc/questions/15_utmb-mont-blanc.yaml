@@ -1,0 +1,19 @@
+id: 6e11dc24-a153-4dd7-87fd-807b9aff3895
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What is the name of the group's digital tracking platform?"
+choices:
+  - id: 72b5cce9-dd68-467f-befe-152f38a5b71b
+    text: "Livetrail"
+  - id: 81891a29-2fdb-4b65-b998-67ab2d4668e8
+    text: "Garmin"
+  - id: 2eb76bbb-cc8a-4aa8-848b-17bf5fb76af6
+    text: "Strava"
+  - id: 8397b57d-80c4-4cd6-809d-b7584ca43a3e
+    text: "Komoot"
+correct_choice_ids:
+  - 72b5cce9-dd68-467f-befe-152f38a5b71b
+explanation: "Livetrail handles race tracking."
+archived: false

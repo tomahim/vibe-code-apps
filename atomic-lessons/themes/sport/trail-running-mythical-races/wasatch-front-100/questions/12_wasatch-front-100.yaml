@@ -1,0 +1,9 @@
+id: aadc6c59-f683-4dee-b782-67ff40bf888c
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Who finished the race 20 times and wrote its history? (first and last name)"
+accepted_answers:
+  - "Dana Miller"
+explanation: "Dana Miller wrote the history and finished 20 times."
+archived: false

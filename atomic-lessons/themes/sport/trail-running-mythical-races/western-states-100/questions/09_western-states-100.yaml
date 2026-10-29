@@ -1,0 +1,19 @@
+id: 7bae3247-408b-402c-b818-61a2c2e3dcb6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What award was born from the 1977 tie of Mattei and Paffenbarger?"
+choices:
+  - id: 062348e7-47c7-48f6-a7cd-5f9d4d5cc6bc
+    text: "The Auburn belt"
+  - id: 5570c8ef-4907-43cc-bde9-822fcf127de5
+    text: "The Tevis award"
+  - id: 5767e116-eadc-451d-8821-a9bc62dd3bce
+    text: "The 24-hour award"
+  - id: e331affe-d27a-4bea-8099-d32fb33331e3
+    text: "The 30-hour award"
+correct_choice_ids:
+  - e331affe-d27a-4bea-8099-d32fb33331e3
+explanation: "Their 28:36 tie led to the 30-hour award."
+archived: false

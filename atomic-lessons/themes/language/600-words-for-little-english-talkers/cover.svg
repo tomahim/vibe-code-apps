@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="Colorful English word speech bubbles">
-<rect width="960" height="600" rx="40" fill="#f7f1d9"/>
-<circle cx="164" cy="156" r="88" fill="#ffd47b"/><circle cx="785" cy="425" r="112" fill="#a8d9c0"/>
-<path d="M124 383c0-86 70-156 156-156h384c86 0 156 70 156 156s-70 156-156 156H373l-83 51 14-54c-102-1-180-67-180-153z" fill="#fff" stroke="#243746" stroke-width="10"/>
-<text x="472" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="70" font-weight="bold" fill="#243746">Hello!</text>
-<path d="M673 80h145c45 0 81 36 81 81s-36 81-81 81h-56l-33 28 5-32c-36-7-61-38-61-77 0-45 36-81 81-81z" fill="#ef8c85"/>
-<text x="786" y="176" text-anchor="middle" font-family="Arial,sans-serif" font-size="44" fill="#243746">Hi!</text>
-</svg>

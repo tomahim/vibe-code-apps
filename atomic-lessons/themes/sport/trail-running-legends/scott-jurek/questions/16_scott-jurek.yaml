@@ -1,0 +1,9 @@
+id: c0bf985d-96c1-4339-b9d7-3f55ad40eec5
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which state was the Badwater race Jurek won in 2005 and 2006 held? Give the state."
+accepted_answers:
+  - "California"
+explanation: "Death Valley is in California."
+archived: false

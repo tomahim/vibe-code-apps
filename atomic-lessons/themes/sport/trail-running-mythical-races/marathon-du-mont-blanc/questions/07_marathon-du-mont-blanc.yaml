@@ -1,0 +1,19 @@
+id: 2abaa17e-5567-4734-9cdf-c2cf96563065
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "From which year were registrations limited?"
+choices:
+  - id: b45e3cfe-dfeb-49f3-9422-6ab717335f0b
+    text: "1979"
+  - id: 7064bc07-badc-4a9f-bc21-139ac725f4f0
+    text: "2010"
+  - id: 87af624a-a937-43be-b6d4-b85fec4038ca
+    text: "2018"
+  - id: d5f4cc47-ceca-4e08-b920-7c8b47713bda
+    text: "2003"
+correct_choice_ids:
+  - 7064bc07-badc-4a9f-bc21-139ac725f4f0
+explanation: "Organisers limited entries starting in 2010."
+archived: false

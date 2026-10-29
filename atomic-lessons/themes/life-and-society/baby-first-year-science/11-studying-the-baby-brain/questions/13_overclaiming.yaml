@@ -1,0 +1,19 @@
+id: 5372f671-a431-4c55-8ae4-5a2b33e8489c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A brain region lighting up during peekaboo by itself:"
+choices:
+  - id: a1b4bf9e-6615-419d-a612-42025a20228d
+    text: "Is a measurement, not an explanation of peekaboo"
+  - id: 7bfbd93a-03b9-4d02-8578-dbaaf3ec04fb
+    text: "Explains peekaboo completely"
+  - id: 015fda49-ee67-4d5b-9ae1-d00417f2c6f8
+    text: "Proves parenting quality"
+  - id: a8a6e95a-b699-43cb-a27f-016ff5ff257c
+    text: "Shows the baby is gifted"
+correct_choice_ids:
+  - a1b4bf9e-6615-419d-a612-42025a20228d
+explanation: "Activation maps do not explain mechanisms; correlation in time is not causation."
+archived: false

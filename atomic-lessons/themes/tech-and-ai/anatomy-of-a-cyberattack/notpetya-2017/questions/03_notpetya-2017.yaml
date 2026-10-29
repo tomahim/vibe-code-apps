@@ -1,0 +1,19 @@
+id: d4b05378-e63c-4299-9df7-43efeeb588fd
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What helped it move between machines?"
+choices:
+  - id: 04d97bd9-9a15-4a8e-b0aa-b482bb50998a
+    text: "Only physical access"
+  - id: 99374c66-e093-4040-975f-5729e856ce6f
+    text: "A leaked Windows exploit and stolen administrator credentials"
+  - id: 4616599e-2ff0-47f8-b2ae-7a578fde4d14
+    text: "Faxes"
+  - id: 181f89e2-7714-4d89-adae-09403f99d069
+    text: "Only guessing passwords by hand"
+correct_choice_ids:
+  - 99374c66-e093-4040-975f-5729e856ce6f
+explanation: "It combined an exploit with credential theft."
+archived: false

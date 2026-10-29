@@ -1,0 +1,19 @@
+id: c2eb7db8-6007-41cc-912d-674d1069fc6b
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which circuit is it part of?"
+choices:
+  - id: ec684267-708c-40c7-9c9d-900c0949fd1f
+    text: "The Spanish Cup"
+  - id: 56c3affd-8e5b-45d6-bda4-1621e262c9c0
+    text: "Golden Trail"
+  - id: 27123cca-eb1f-43e6-bf3c-99e4e85fb89d
+    text: "The Olympic Games"
+  - id: aa7f34ad-2b14-4676-a6f4-9c1cd58ccba4
+    text: "The UTMB World Series"
+correct_choice_ids:
+  - aa7f34ad-2b14-4676-a6f4-9c1cd58ccba4
+explanation: "It is by UTMB."
+archived: false

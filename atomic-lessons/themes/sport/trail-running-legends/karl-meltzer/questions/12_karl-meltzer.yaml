@@ -1,0 +1,20 @@
+schema_version: 1
+id: d99d987b-42dc-4e76-a5c2-317caa15a262
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which 2017 documentary followed his record run?"
+choices:
+  - id: e20e6a65-c5fd-4d80-959e-aadd8fb541a6
+    text: "Born to Run"
+  - id: 4272d21f-f46d-4c91-8e60-32602152cde9
+    text: "Made to Be Broken"
+  - id: a677550c-ca94-4f9a-adc1-37fa3af3cdd7
+    text: "Unbreakable"
+  - id: 98f96918-c921-4f71-b076-6de03875373d
+    text: "Finding Traction"
+correct_choice_ids:
+  - 4272d21f-f46d-4c91-8e60-32602152cde9
+explanation: "It was released in 2017."
+archived: false

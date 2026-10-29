@@ -1,0 +1,9 @@
+id: a1c0bfd3-5067-4785-8731-e11aca22619f
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "How many square miles does the Dolomites site span? (number)"
+accepted_answers:
+  - "550"
+explanation: "The area spans 550 square miles."
+archived: false

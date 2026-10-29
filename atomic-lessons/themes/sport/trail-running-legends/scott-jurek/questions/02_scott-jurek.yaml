@@ -1,0 +1,20 @@
+schema_version: 1
+id: d1f71d6a-8541-4219-8b79-65ee93d46bca
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which sport led Jurek to start running longer distances?"
+choices:
+  - id: 3fa55ca4-49bb-4b8b-a34a-1cf753e21680
+    text: "Football"
+  - id: 7d9509aa-69d3-4c40-872d-0d7b82f3dbe2
+    text: "Swimming"
+  - id: 7b0f1ed4-556e-44d3-bdea-e04d7257c544
+    text: "Boxing"
+  - id: 9e47ba5d-8a42-4663-97e2-0ed67a30a656
+    text: "Nordic skiing"
+correct_choice_ids:
+  - 9e47ba5d-8a42-4663-97e2-0ed67a30a656
+explanation: "He used running as cross training for Nordic skiing."
+archived: false

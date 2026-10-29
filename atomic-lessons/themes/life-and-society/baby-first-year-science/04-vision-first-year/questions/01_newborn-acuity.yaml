@@ -1,0 +1,19 @@
+id: c2108bad-cf3b-4f4e-9cf4-b6ac1ed9b3ef
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Newborn visual acuity is approximately:"
+choices:
+  - id: dc269dd6-05a5-4399-ac01-de09543b3b77
+    text: "20/400"
+  - id: c278deac-1afc-46a2-9505-17e10e358292
+    text: "20/20"
+  - id: 95599714-8c37-4537-9101-c34b85db435a
+    text: "20/40"
+  - id: 1f2a3b9f-6f68-4a4b-95f0-3e089b077bef
+    text: "20/2000"
+correct_choice_ids:
+  - dc269dd6-05a5-4399-ac01-de09543b3b77
+explanation: "Standard estimates put newborn acuity near 20/400; it improves steeply over the first year."
+archived: false

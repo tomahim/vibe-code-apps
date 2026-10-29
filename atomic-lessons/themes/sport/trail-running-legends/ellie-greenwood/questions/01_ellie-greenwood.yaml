@@ -1,0 +1,20 @@
+schema_version: 1
+id: d0b273da-d0d2-4d11-9ebc-c7934fe141de
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Scottish city was Greenwood born?"
+choices:
+  - id: de4d85a6-e7b6-40e1-bb7f-7833ad1ecd17
+    text: "Glasgow"
+  - id: c1dacb20-3967-475d-86ea-0d0e6824b849
+    text: "Aberdeen"
+  - id: 8b658482-f2ad-4cbd-a843-160e00a2b0e9
+    text: "Dundee"
+  - id: 7d480543-4b1d-47cd-80ce-9a31bd6513a4
+    text: "Edinburgh"
+correct_choice_ids:
+  - 8b658482-f2ad-4cbd-a843-160e00a2b0e9
+explanation: "She was born in Dundee in 1979."
+archived: false

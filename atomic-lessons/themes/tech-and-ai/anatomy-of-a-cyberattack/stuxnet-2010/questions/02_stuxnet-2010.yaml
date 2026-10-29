@@ -1,0 +1,19 @@
+id: 6969c1f3-f82d-4b07-a3bb-c90ca927d870
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How did Stuxnet commonly cross into networks without internet access?"
+choices:
+  - id: b30ad7d1-1d11-4297-9e1f-9c64fc7ea25a
+    text: "Through removable USB drives and local networks"
+  - id: 2eda7bbe-3aef-4581-b452-2e4d43c4254b
+    text: "By hacking the electricity grid itself"
+  - id: 29db6791-8907-4d22-bd59-f3dfd8214e22
+    text: "By direct satellite links"
+  - id: bffdf466-71b4-4fda-8141-9947d8d40db8
+    text: "By phone calls to operators"
+correct_choice_ids:
+  - b30ad7d1-1d11-4297-9e1f-9c64fc7ea25a
+explanation: "Removable media can bypass an air gap, which is why isolation alone is not enough."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: a73000d1-b28a-4d49-a3ab-6e3df4a78aaf
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which other race, at the foot of the Eiger, has Capell won?"
+choices:
+  - id: 14c35d5b-bd8e-45c9-849b-8dd71a4bcebf
+    text: "Sierre-Zinal"
+  - id: ab2dbd04-3f5f-458b-b6e6-56a4e79c06b1
+    text: "Zegama"
+  - id: 6361f784-f309-4ff0-87df-66ad1e7cf926
+    text: "Pikes Peak"
+  - id: 300f703c-200b-414d-bc49-187c87379863
+    text: "Eiger Ultra Trail"
+correct_choice_ids:
+  - 300f703c-200b-414d-bc49-187c87379863
+explanation: "He won the Eiger Ultra Trail."
+archived: false

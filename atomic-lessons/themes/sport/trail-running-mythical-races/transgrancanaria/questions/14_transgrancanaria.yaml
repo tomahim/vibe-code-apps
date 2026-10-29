@@ -1,0 +1,19 @@
+id: d8eb160c-3bc0-43b5-88ee-d38fb4b79a7f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How long is the Promo?"
+choices:
+  - id: 012eb4c3-e549-4b49-a99f-2b80fceca9b2
+    text: "12 km"
+  - id: a58a1355-e594-41f7-86ce-2bc4ef1f8f2b
+    text: "5.5 km"
+  - id: 380a905d-274d-48c1-9e56-a713c0887f09
+    text: "21 km"
+  - id: c3ca812a-e524-4be4-b15e-78332c8d94d1
+    text: "81 km"
+correct_choice_ids:
+  - 012eb4c3-e549-4b49-a99f-2b80fceca9b2
+explanation: "The Promo runs 12 km between Artenara and Tejeda."
+archived: false

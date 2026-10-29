@@ -1,0 +1,19 @@
+id: 357a00c0-4af2-4bc2-87d6-d20760a9b49b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What time limit did the Tevis Cup have?"
+choices:
+  - id: 19273eaf-f91d-491d-a514-636470c91c54
+    text: "24 hours"
+  - id: 783d7146-5629-4588-ac1e-c1877a73e5c1
+    text: "36 hours"
+  - id: 0c36729e-2394-4ed8-86db-bb3fd511d44d
+    text: "12 hours"
+  - id: 9de74ac2-8966-460b-b217-3ec5e35aa617
+    text: "48 hours"
+correct_choice_ids:
+  - 19273eaf-f91d-491d-a514-636470c91c54
+explanation: "The limit was 24 hours."
+archived: false

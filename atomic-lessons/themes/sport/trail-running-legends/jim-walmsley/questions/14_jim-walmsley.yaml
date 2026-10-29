@@ -1,0 +1,20 @@
+schema_version: 1
+id: c26bf2af-be31-47ca-8705-eea69d4f12e1
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year did Walmsley win UTMB in 19:37:43?"
+choices:
+  - id: 6416938b-bf3b-4fb6-bdf8-b17c54547728
+    text: "2021"
+  - id: a2d8655b-2a9d-47f7-8f63-45704bebf608
+    text: "2023"
+  - id: eecb6b45-b599-44bf-bb0a-06785e181a0d
+    text: "2019"
+  - id: 3549c00f-09bc-475c-8439-3e91d27e52e0
+    text: "2017"
+correct_choice_ids:
+  - a2d8655b-2a9d-47f7-8f63-45704bebf608
+explanation: "Walmsley set it in 2023."
+archived: false

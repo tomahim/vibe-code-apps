@@ -1,0 +1,19 @@
+id: 09087d64-0d7b-4bf0-b5bd-5d0593ce90ff
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many Running Stones does the 120K give?"
+choices:
+  - id: 873957c6-16c0-41d4-89ce-11329d34d583
+    text: "4"
+  - id: 44cd17e2-427a-4459-9ebd-6c884f3fb6fe
+    text: "10"
+  - id: f0ad8609-929a-4080-bfc9-b04467e8b54b
+    text: "40"
+  - id: be0b2360-9399-4ce1-bd7d-d6757b4a61e7
+    text: "1"
+correct_choice_ids:
+  - 873957c6-16c0-41d4-89ce-11329d34d583
+explanation: "The listing says 4 Running Stones."
+archived: false

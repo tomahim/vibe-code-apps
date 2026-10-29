@@ -71,7 +71,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -489,12 +489,22 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${dots(p.lessons.length, li.cur)}</span></span><span class="pc">${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
-      h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>${renderRecent()}`;
+      const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
+      const cu = trail.path.catch_up || {};
+      h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
+      h += `<div class="lg-gauge"><p class="lg-gauge-head"><span>Questions answered correctly</span><b>${qp}%</b></p><span class="bar"><i style="width:${qp}%"></i></span><p class="lg-gauge-count">${qc} of ${qt} questions on this path</p></div>`;
+      if (cu.eligible) h += `<button class="primary lg-quiz" data-quiz="1">🌱 Practice quiz</button><p class="lg-quiz-hint">${cu.remaining > 0 ? `${cu.remaining} question${cu.remaining === 1 ? '' : 's'} still to answer correctly in read lessons` : 'Keep practicing questions from your read lessons'}</p>`;
+      else h += '<button class="primary lg-quiz" disabled aria-disabled="true">Practice quiz</button><p class="lg-quiz-hint">Finish a lesson\'s cards first</p>';
+      h += renderRecent();
       if (sel >= 0) {
-        const lesson = trail.path.lessonData[sel], prog = lesson.progress, st = prog.completed ? 'done' : prog.started ? 'cur' : 'todo';
-        h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(prog.cards_total, prog.cards_completed)}</p><p>${prog.cards_completed} of ${prog.cards_total} cards · ${prog.checkpoints_correct} of ${prog.checkpoints_total} questions</p><button class="primary" data-start="${sel}">${st === 'done' ? 'Read lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson'}</button></div>`;
+        const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lp.completed ? 'done' : lp.started ? 'cur' : 'todo';
+        const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0, lqp = lqt ? Math.round((lqc / lqt) * 100) : 0;
+        h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(lp.cards_total, lp.cards_completed)}</p><p>${lp.cards_completed} of ${lp.cards_total} cards · ${lqc} of ${lqt} questions (${lqp}%)</p><span class="bar wide"><i style="width:${lqp}%"></i></span><button class="primary" data-start="${sel}">${st === 'done' ? 'Read lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson'}</button></div>`;
       }
-      h += '<ol class="lg-lessons">' + trail.path.lessonData.map((lesson, i) => { const prog = lesson.progress, st = prog.completed ? 'done' : prog.started ? 'cur' : 'todo'; return `<li><button data-lesson="${i}" class="${st} ${i === sel ? 'sel' : ''}"><span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(prog.cards_total, prog.cards_completed)}</span></button></li>`; }).join('') + '</ol>';
+      h += '<ol class="lg-lessons">' + trail.path.lessonData.map((lesson, i) => { const lp = lesson.progress, st = lp.completed ? 'done' : lp.started ? 'cur' : 'todo';
+        const gap = lp.cards_total > 0 && lp.cards_completed === lp.cards_total && (lp.questions_total || 0) > 0 && (lp.questions_correct || 0) < lp.questions_total;
+        const lqp = lp.questions_total ? Math.round(((lp.questions_correct || 0) / lp.questions_total) * 100) : 0;
+        return `<li><button data-lesson="${i}" class="${st} ${i === sel ? 'sel' : ''}"><span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(lp.cards_total, lp.cards_completed)}</span>${gap ? `<span class="pc">${lqp}%</span>` : ''}</button></li>`; }).join('') + '</ol>';
     }
     panelBody.innerHTML = h;
   }
@@ -512,6 +522,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.start) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.start)].id);
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
     else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
+    else if (b.dataset.quiz) onPracticeQuiz?.(trail.path.id, trail.path.title);
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
   });
@@ -604,7 +615,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   return {
     root, view, state, prof, failed: false, camera, controls,
     goGarden, goTheme, goPath, selectLesson, back,
-    updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
+    updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, catch_up: path.catch_up, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
     dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },

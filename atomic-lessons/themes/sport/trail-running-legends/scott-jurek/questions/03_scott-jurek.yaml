@@ -1,0 +1,20 @@
+schema_version: 1
+id: edda21cc-429f-42aa-b76d-f3916d2336b8
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which race was Jurek's first ultramarathon in 1994?"
+choices:
+  - id: 186d242e-85af-4235-93cb-e31c35a86594
+    text: "Western States 100"
+  - id: 82e17824-9923-44b3-a65d-88e02a490fb2
+    text: "Hardrock"
+  - id: ba0aac97-19a6-4e67-a50b-c710d8da3289
+    text: "Minnesota Voyageur 50 Mile"
+  - id: 405c75d4-9484-482c-add3-d5a5451a2d19
+    text: "Badwater"
+correct_choice_ids:
+  - ba0aac97-19a6-4e67-a50b-c710d8da3289
+explanation: "He placed second in his first attempt."
+archived: false

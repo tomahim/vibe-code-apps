@@ -1,0 +1,19 @@
+id: d8525344-bc8a-4439-be8a-208373149496
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does SWIFT do?"
+choices:
+  - id: 9029a81d-2532-4ef7-8e67-5e1cf1d390c6
+    text: "It issues bank cards"
+  - id: f6e87c08-6e73-4c8b-a33c-3b6e412262cd
+    text: "It sets interest rates"
+  - id: 5ed65118-96c0-4a49-a312-40a9f825c29f
+    text: "It carries payment instructions between banks"
+  - id: 47478d1c-a2ce-4ce4-a8a8-5ad49fb853b9
+    text: "It stores all banks' money"
+correct_choice_ids:
+  - 5ed65118-96c0-4a49-a312-40a9f825c29f
+explanation: "SWIFT is a messaging network, and banks execute the instructions."
+archived: false

@@ -1,0 +1,19 @@
+id: 3d63a65f-7237-442f-9e2c-be8bcb7590f6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Which committee finding is correct?"
+choices:
+  - id: b65bdc42-0613-4a27-9065-f2e51b1d2b21
+    text: "It happened because of a software update from a vendor"
+  - id: fe5bf9d7-81d3-4465-b4c9-7dd469133de4
+    text: "It was caused by a natural disaster"
+  - id: 5f94f4c2-3bd6-481a-86ae-7dc1d4f902d8
+    text: "It could not have been prevented by any means"
+  - id: 6039a35c-e45f-46eb-89b5-f998e227c50c
+    text: "The breach was preventable"
+correct_choice_ids:
+  - 6039a35c-e45f-46eb-89b5-f998e227c50c
+explanation: "The House Oversight report concluded it was preventable."
+archived: false

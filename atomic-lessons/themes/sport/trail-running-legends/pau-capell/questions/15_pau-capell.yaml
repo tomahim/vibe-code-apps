@@ -1,0 +1,10 @@
+id: c552d23e-c7d2-469f-86d0-4f2a686c11fd
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the first name of the French runner who ran 19:01:32 in 2017?"
+accepted_answers:
+  - "François"
+  - "Francois"
+explanation: "D'Haene ran it in 2017."
+archived: false

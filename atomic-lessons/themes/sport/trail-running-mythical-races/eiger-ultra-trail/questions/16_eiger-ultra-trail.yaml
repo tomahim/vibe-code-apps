@@ -1,0 +1,10 @@
+id: d7b1fb28-4f53-42fa-af6c-b45c8753b035
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which Swiss region is the first ultra trail in? (two words)"
+accepted_answers:
+  - "Bernese Oberland"
+  - "Berner Oberland"
+explanation: "It was the first ultra trail in the Bernese Oberland."
+archived: false

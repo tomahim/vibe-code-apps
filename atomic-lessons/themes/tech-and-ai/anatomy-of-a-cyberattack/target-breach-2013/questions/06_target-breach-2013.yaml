@@ -1,0 +1,19 @@
+id: cfa722e9-a9e1-42b6-ad33-1adfeef8bcf3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which kind of source is the Senate Commerce report?"
+choices:
+  - id: 7423391a-57bc-4860-8723-f946cd38f8a5
+    text: "A majority staff analysis, not a court finding"
+  - id: 21523969-bab1-424a-93a7-af9491d84e38
+    text: "A criminal verdict"
+  - id: c48bf467-cfc7-464f-b292-e325e00d3cba
+    text: "An anonymous blog post"
+  - id: 05310e98-563a-4493-8578-cb9731dd6e33
+    text: "A forensic report written by Target"
+correct_choice_ids:
+  - 7423391a-57bc-4860-8723-f946cd38f8a5
+explanation: "It is valuable evidence but should be labelled as a staff report."
+archived: false

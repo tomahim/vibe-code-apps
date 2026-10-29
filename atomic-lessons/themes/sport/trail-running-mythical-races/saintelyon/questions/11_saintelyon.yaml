@@ -1,0 +1,19 @@
+id: c6d43f1b-22b1-470b-92a4-5845b34c9e2c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where does the main race finish?"
+choices:
+  - id: 8aa9cd21-d594-460f-87f8-5eb980ab993c
+    text: "Place Bellecour"
+  - id: 7ac514e6-1c8f-4186-802b-d94b6d6923db
+    text: "Fourviere"
+  - id: cc0cc808-a722-4978-aac6-f8b077dd940d
+    text: "Halle Tony Garnier in Lyon"
+  - id: 81325d6e-dc7d-4960-b12a-9d5fcc969f70
+    text: "Parc des Expositions in Saint-Étienne"
+correct_choice_ids:
+  - cc0cc808-a722-4978-aac6-f8b077dd940d
+explanation: "The finish is at the Halle Tony Garnier."
+archived: false

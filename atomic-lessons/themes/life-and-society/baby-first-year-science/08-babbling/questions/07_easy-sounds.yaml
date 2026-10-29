@@ -1,0 +1,19 @@
+id: ee2951cc-d76a-4e0b-9529-abe19d677842
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Early words across languages lean on sounds like ma, da, ba because:"
+choices:
+  - id: 78d62d9b-8c14-40c9-9f3c-34181602b9f2
+    text: "They are the easy syllables rehearsed most in babbling"
+  - id: d5902839-7d74-433a-8bd7-47acb3f500af
+    text: "Parents teach them first"
+  - id: db7a2d95-8530-4357-84ff-3116879d74a1
+    text: "They name mothers everywhere"
+  - id: 6ccc40aa-8740-4569-abbc-6bd7df57c3f9
+    text: "They are reflexes"
+correct_choice_ids:
+  - 78d62d9b-8c14-40c9-9f3c-34181602b9f2
+explanation: "First words are built from the baby's most-practiced babble syllables."
+archived: false

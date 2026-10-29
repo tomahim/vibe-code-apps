@@ -1,0 +1,20 @@
+schema_version: 1
+id: 240d5fd4-ec68-4ad7-bc1f-4d41f53c6fbf
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "On which American mountain did Jornet set a fastest known time of 11:48 in 2014?"
+choices:
+  - id: 4fb414f1-91a5-4bfa-9680-d2d0287ad157
+    text: "Pikes Peak"
+  - id: 9f0281bc-04b4-4b02-b5e0-b2de4364ba27
+    text: "Mount Whitney"
+  - id: 03b8a826-0ad1-4f1c-9508-b74bd7cf41d1
+    text: "Mount Rainier"
+  - id: 31426964-63f4-467f-a167-df88155ad087
+    text: "Denali"
+correct_choice_ids:
+  - 31426964-63f4-467f-a167-df88155ad087
+explanation: "He used both skis and crampons."
+archived: false

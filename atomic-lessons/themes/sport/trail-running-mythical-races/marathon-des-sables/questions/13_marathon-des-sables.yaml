@@ -1,0 +1,19 @@
+id: c8f56409-eada-4997-ad74-07d95b56a5c2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Where was the Desert Cup held from 2001?"
+choices:
+  - id: 0175dd9d-c959-4bf8-9d93-51b15a8cd905
+    text: "Chile"
+  - id: 9a42fa05-08e6-4998-ac67-162cb38642ba
+    text: "Jordan"
+  - id: a7302cab-da1c-46df-8f8e-be41e756a9a6
+    text: "Egypt"
+  - id: db9ea023-3d30-4568-81c3-3665914d5a53
+    text: "Peru"
+correct_choice_ids:
+  - 9a42fa05-08e6-4998-ac67-162cb38642ba
+explanation: "It ran from Petra to Wadi Rum."
+archived: false

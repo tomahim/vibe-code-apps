@@ -1,0 +1,9 @@
+id: 3f12d7dc-7a26-4e50-9fa6-efd741e4bd91
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What did the early single-stage runs have for a start time? (one word)"
+accepted_answers:
+  - "midnight"
+explanation: "Seven pioneers made the trip in one stage with a midnight start."
+archived: false

@@ -1,0 +1,9 @@
+id: e0d7207a-7133-4d72-a76f-5baccc717c80
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "How many people started in 1989? (number)"
+accepted_answers:
+  - "500"
+explanation: "The official table lists 500 starters."
+archived: false

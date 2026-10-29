@@ -1,0 +1,19 @@
+id: e18d50b2-e1c1-49a9-81c0-e34eb2ba6a12
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How is the start announced?"
+choices:
+  - id: 1ae56adc-a588-4f74-a29b-efe79506cf23
+    text: "A text message"
+  - id: 4fcfb642-f199-4194-a872-9d5da57cc7c2
+    text: "A gun"
+  - id: f9e84458-2984-45be-a9bb-acffd151d7da
+    text: "A bell at noon"
+  - id: e736eceb-333f-4f7f-b0d3-8bb6bfe76740
+    text: "A conch is blown one hour before"
+correct_choice_ids:
+  - e736eceb-333f-4f7f-b0d3-8bb6bfe76740
+explanation: "Runners get a one-hour warning when the conch is blown."
+archived: false

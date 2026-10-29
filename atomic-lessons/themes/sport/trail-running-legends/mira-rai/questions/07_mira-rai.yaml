@@ -1,0 +1,9 @@
+id: 2a75b99f-5e13-4e24-a84e-343f77c465d2
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which city did she go to pursue karate and running?"
+accepted_answers:
+  - "Kathmandu"
+explanation: "She travelled to Kathmandu."
+archived: false

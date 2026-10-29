@@ -1,0 +1,9 @@
+id: 8b75d947-96af-41a5-8777-da6e9a76119e
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the first name of the runner who broke Trason's Western States record in 2012?"
+accepted_answers:
+  - "Ellie"
+explanation: "Ellie Greenwood broke the record in 2012."
+archived: false

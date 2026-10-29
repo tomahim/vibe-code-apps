@@ -1,0 +1,19 @@
+id: 3dce5beb-fb11-47f7-9496-6cbc3943ff6a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where in the nervous system are newborn reflexes mainly organized?"
+choices:
+  - id: 1c845a81-4624-4b7c-978e-53026964f729
+    text: "Brainstem and spinal cord"
+  - id: 589303b8-2df4-489d-b706-f468b4d89439
+    text: "Motor cortex"
+  - id: 970c460f-e373-4db9-ac88-09297a44edc9
+    text: "Hippocampus"
+  - id: 17dcd48a-8605-4db0-a143-7037f75a3e0e
+    text: "Prefrontal cortex"
+correct_choice_ids:
+  - 1c845a81-4624-4b7c-978e-53026964f729
+explanation: "Early reflexes are low-level circuits; the maturing cortex later layers voluntary control on top."
+archived: false

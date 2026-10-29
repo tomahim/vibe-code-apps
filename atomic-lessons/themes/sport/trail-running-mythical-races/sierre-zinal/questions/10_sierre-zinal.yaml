@@ -1,0 +1,19 @@
+id: 8ab8de24-57f4-4ee0-a255-f615f878d782
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the race philosophy summed up as?"
+choices:
+  - id: 91dbd7ee-9eae-48d4-a44f-877e63656c89
+    text: "Race the clock"
+  - id: 9e86cadb-d25d-4eaa-a0d3-9ae3e2c3536b
+    text: "The heart before the watch"
+  - id: 8d77cc42-2c43-4555-bbec-3780c3315f58
+    text: "Fast or nothing"
+  - id: b4be9dd3-fb02-4aa0-a20d-399ea1a1b5b2
+    text: "Winner takes all"
+correct_choice_ids:
+  - 9e86cadb-d25d-4eaa-a0d3-9ae3e2c3536b
+explanation: "The motto puts people and the experience before time."
+archived: false

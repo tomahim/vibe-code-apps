@@ -1,0 +1,19 @@
+id: 70918bf5-cfc1-4962-bb97-75dd3db02470
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Roughly how much of the then-connected internet did the Morris Worm hit within 24 hours, according to the FBI?"
+choices:
+  - id: e255b3ba-7806-4453-8a0f-b8bb9eb68fd4
+    text: "About 60,000 of roughly 600,000 computers"
+  - id: bab01cd5-c088-4e90-b038-e290fd6673a4
+    text: "Almost every computer on the internet"
+  - id: 32f997de-cb90-4f48-9f52-642230aace91
+    text: "About 600 of roughly 6,000 computers"
+  - id: 36542699-b57e-4d19-b171-9b5e8c831667
+    text: "About 6,000 of roughly 60,000 computers"
+correct_choice_ids:
+  - 36542699-b57e-4d19-b171-9b5e8c831667
+explanation: "The FBI estimates that about 6,000 of the roughly 60,000 connected computers were hit within a day."
+archived: false

@@ -1,0 +1,19 @@
+id: d973354a-f411-4949-a3fc-5ced3066377e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How high is the Eiger?"
+choices:
+  - id: 934b4667-8baa-4ed1-ba07-7f6dd34915d2
+    text: "2,567 metres"
+  - id: 310239aa-ef0d-4c18-a570-09df480077b4
+    text: "1,970 metres"
+  - id: edd130e8-2a86-4467-a680-e1db279883ac
+    text: "3,970 metres"
+  - id: 7694bfb3-03af-4c28-8b9e-25fac543737e
+    text: "4,478 metres"
+correct_choice_ids:
+  - edd130e8-2a86-4467-a680-e1db279883ac
+explanation: "The official page says 3,970 m."
+archived: false

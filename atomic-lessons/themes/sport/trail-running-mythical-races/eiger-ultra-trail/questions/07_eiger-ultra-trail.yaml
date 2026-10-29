@@ -1,0 +1,19 @@
+id: 1c5a6f12-745d-441a-aa31-a15842169e25
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which three mountains are mentioned near the start?"
+choices:
+  - id: 4638dc59-ab44-4d7d-9440-f547a2a0b33e
+    text: "Eiger, Monch and Jungfrau"
+  - id: 06d92c15-a4ee-4a00-91b8-2e15f0c5b387
+    text: "Tre Cime, Cristallo and Tofane"
+  - id: 6543aa09-0efd-4623-9bd2-7a8d4c3b1cbf
+    text: "Mont Blanc, Aiguille and Dru"
+  - id: 497bc396-1ceb-44ad-95af-e58623330568
+    text: "Matterhorn, Weisshorn and Dom"
+correct_choice_ids:
+  - 4638dc59-ab44-4d7d-9440-f547a2a0b33e
+explanation: "The press release names those three."
+archived: false

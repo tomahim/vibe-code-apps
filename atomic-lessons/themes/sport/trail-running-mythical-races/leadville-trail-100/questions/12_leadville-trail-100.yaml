@@ -1,0 +1,9 @@
+id: c656de6c-fdfa-4aa8-8b4b-a8747e422c08
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "In what year was the Legacy Foundation created? (year)"
+accepted_answers:
+  - "2002"
+explanation: "Ken and Merilee created it in 2002."
+archived: false

@@ -1,0 +1,19 @@
+id: 0311f019-bcda-4e7e-9272-2e2c329b8afd
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was the horse ride on the trail called?"
+choices:
+  - id: 87e1d10b-ad7d-44eb-a9cb-bc9347a7e379
+    text: "The Tevis Cup"
+  - id: b6758143-406a-467b-ade2-9c7dbeb2c3ea
+    text: "The Robie Run"
+  - id: 0aa92c51-dd98-4905-9e2f-71fdc38f80b1
+    text: "The Sierra Ride"
+  - id: c19673b9-ffdc-49f5-b3fb-ca4c884a1b44
+    text: "The Auburn Cup"
+correct_choice_ids:
+  - 87e1d10b-ad7d-44eb-a9cb-bc9347a7e379
+explanation: "The Western States Trail Ride is also known as the Tevis Cup."
+archived: false

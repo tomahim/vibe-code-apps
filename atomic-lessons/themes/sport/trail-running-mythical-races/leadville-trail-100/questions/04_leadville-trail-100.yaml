@@ -1,0 +1,10 @@
+id: 82edf3ef-e8f6-4cae-a9a5-a85f59349aca
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "Which mine closure in the 1980s hit the town hard? (two words)"
+accepted_answers:
+  - "Climax Mine"
+  - "Climax"
+explanation: "The closure of the Climax Mine was devastating."
+archived: false

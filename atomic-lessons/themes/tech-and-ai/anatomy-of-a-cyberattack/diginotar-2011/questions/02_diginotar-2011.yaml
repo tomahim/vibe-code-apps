@@ -1,0 +1,19 @@
+id: 7540850e-a088-48d2-87ef-890906fc3e0e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why was the DigiNotar breach so serious?
+choices:
+- id: d3052280-ea02-452b-bac9-385a1e267900
+  text: It deleted browser software
+- id: 9e9f0fe9-1c3e-44c8-bbe0-e2066e60b64b
+  text: It broke all encryption mathematics
+- id: cb444945-d050-4f2f-8af0-a28419232dd9
+  text: It exposed every user's browsing history to DigiNotar
+- id: c5371a12-f598-448c-90ac-74f99a5b2241
+  text: Rogue certificates could let attackers impersonate real sites such as Google
+correct_choice_ids:
+- c5371a12-f598-448c-90ac-74f99a5b2241
+explanation: A fraudulent but trusted certificate allows an interception attack without a browser warning. Fox-IT counted 531 fraudulent certificates.
+archived: false

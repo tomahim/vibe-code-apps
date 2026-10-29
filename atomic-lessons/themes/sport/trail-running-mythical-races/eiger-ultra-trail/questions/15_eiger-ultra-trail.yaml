@@ -1,0 +1,19 @@
+id: 894e3cc1-4819-4d06-9364-74c466380cb5
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who runs the team, according to the values page?"
+choices:
+  - id: d6f20299-227c-49d5-add9-d2794478e973
+    text: "The army"
+  - id: 2b6b0aaf-6f54-440a-b4e0-00759d277063
+    text: "Only paid staff"
+  - id: 915691f2-95b7-43ac-a65f-adb9857a70f2
+    text: "A single company"
+  - id: 7a115453-b1bd-461c-8d6b-09d9fa4dd4c0
+    text: "Volunteers with a continuous core team"
+correct_choice_ids:
+  - 7a115453-b1bd-461c-8d6b-09d9fa4dd4c0
+explanation: "They stress continuity in the core team and volunteers."
+archived: false

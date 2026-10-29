@@ -1,0 +1,19 @@
+id: 0a4c8b0a-0e54-496a-a6ec-861c822aeb34
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "When did the outages occur?"
+choices:
+  - id: c4a4f321-4676-48ae-b877-8630c4ef8064
+    text: "23 December 2015"
+  - id: c9cd9105-bd4f-49ca-a3df-5db60eeb747e
+    text: "14 July 2020"
+  - id: cddf7ebd-994a-455c-a238-219e6bca1a71
+    text: "1 January 1999"
+  - id: 28a839e3-644d-4922-83f6-a08cba9df9bd
+    text: "23 December 2005"
+correct_choice_ids:
+  - c4a4f321-4676-48ae-b877-8630c4ef8064
+explanation: "The attack on Ukrainian distribution companies took place on 23 December 2015."
+archived: false

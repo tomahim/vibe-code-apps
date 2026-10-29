@@ -1,0 +1,19 @@
+id: a896a68c-2d88-4335-bc39-6a3a6a26f3e7
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where does the race start?"
+choices:
+  - id: ab0c5379-6a86-47e4-900b-9b1ef6135cfc
+    text: "Roque de los Muchachos"
+  - id: a2bbd4c3-e0d2-4d8f-8bfb-078aa0868d9b
+    text: "Tazacorte"
+  - id: f7c5ff61-3623-4f0c-a185-0f6bc67df06d
+    text: "The Fuencaliente lighthouse"
+  - id: 0c588e30-3825-4432-924a-a0a954b53b8d
+    text: "Los Llanos de Aridane"
+correct_choice_ids:
+  - f7c5ff61-3623-4f0c-a185-0f6bc67df06d
+explanation: "It starts at the Faro de Fuencaliente."
+archived: false

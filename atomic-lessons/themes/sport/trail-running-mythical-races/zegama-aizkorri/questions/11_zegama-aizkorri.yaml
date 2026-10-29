@@ -1,0 +1,19 @@
+id: c8f28bbc-5102-4560-86cc-90ac364c63d9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who coined 'Zegama is Zegama'?"
+choices:
+  - id: e94ae94c-d8d6-4b32-8195-4c0dec605853
+    text: "Marco Olmo"
+  - id: d48cef39-fafa-429b-b1a9-026f28ca4855
+    text: "Kilian Jornet"
+  - id: e6cc6367-f71b-4586-bfa2-c9c7783fe2cf
+    text: "Patrick Renard"
+  - id: 4de5e305-b4ee-4ccc-b243-f44d8448bbc3
+    text: "Gary Cantrell"
+correct_choice_ids:
+  - d48cef39-fafa-429b-b1a9-026f28ca4855
+explanation: "The Golden Trail World Series credits Jornet."
+archived: false

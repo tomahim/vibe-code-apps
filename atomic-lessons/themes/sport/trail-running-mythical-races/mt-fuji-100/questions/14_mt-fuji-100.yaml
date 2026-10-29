@@ -1,0 +1,19 @@
+id: cde6c80a-7187-4701-af43-3b8893489c0e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How long is the KAI race?"
+choices:
+  - id: 8707e09e-3660-48c7-b10b-7eba8d206143
+    text: "67.9 km"
+  - id: 4e0db59a-76db-472e-af87-6d4e608868f0
+    text: "5.7 km"
+  - id: f3a5abd8-f199-4cb4-af4f-61b6be320fc5
+    text: "165.3 km"
+  - id: 660d0b9e-d143-4f08-b9ed-2b3593a9f2ba
+    text: "38.5 km"
+correct_choice_ids:
+  - 8707e09e-3660-48c7-b10b-7eba8d206143
+explanation: "KAI 70K is 67.9 km."
+archived: false

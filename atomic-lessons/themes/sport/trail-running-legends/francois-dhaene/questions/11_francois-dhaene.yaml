@@ -1,0 +1,20 @@
+schema_version: 1
+id: 51e267a8-8528-444a-a27a-bcb811c55477
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which nickname is given to the Réunion race?"
+choices:
+  - id: 08828de6-be03-4eb6-b2a1-7a640bd8d77f
+    text: "Race of Fire"
+  - id: a50f549e-69f4-4996-ba4c-cb0bfa407424
+    text: "Tour de Réunion"
+  - id: 18c435ba-d1ca-49a4-b83e-380e4c294a19
+    text: "Diagonale des Fous"
+  - id: 973ec264-01c9-4e56-bedd-a33f93d87d70
+    text: "Volcano Trail"
+correct_choice_ids:
+  - 18c435ba-d1ca-49a4-b83e-380e4c294a19
+explanation: "It is also known as the Diagonale des Fous."
+archived: false

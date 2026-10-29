@@ -1,0 +1,19 @@
+id: 55be69da-a388-4d97-a6f0-16099293c05c
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which landmark is still visible in Leadville today?"
+choices:
+  - id: 4d9de5f1-f1c0-49cd-b78c-cc3f9d49a9a6
+    text: "The Tabor Opera House"
+  - id: 0e76ed93-d68a-43e0-a727-5ceb5f1ea7bb
+    text: "The Eiffel Tower"
+  - id: f6664d3f-1d98-4ae5-a01b-a66b7c1f26a3
+    text: "The Rose Bowl"
+  - id: f7bc0b94-5204-46fd-84c9-66246916b62f
+    text: "The Matterhorn"
+correct_choice_ids:
+  - 4d9de5f1-f1c0-49cd-b78c-cc3f9d49a9a6
+explanation: "The history names the Tabor Opera House."
+archived: false

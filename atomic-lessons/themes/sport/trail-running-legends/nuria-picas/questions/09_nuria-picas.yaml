@@ -1,0 +1,20 @@
+schema_version: 1
+id: 44d2ee67-767d-4ec5-b231-1898b0cc0592
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which medical problem hit Picas during the 2017 race?"
+choices:
+  - id: c29ce875-cd0b-4aed-8147-20c3c040596b
+    text: "Food poisoning"
+  - id: 3572f370-2b0f-420c-9e26-f9e172476393
+    text: "Altitude sickness"
+  - id: 9e159074-cc3b-4650-8310-bfe050bffc2b
+    text: "A broken ankle"
+  - id: b4f2d461-4853-476a-b980-7755995eafaa
+    text: "An asthma attack"
+correct_choice_ids:
+  - b4f2d461-4853-476a-b980-7755995eafaa
+explanation: "It happened on the climb to La Flégère."
+archived: false

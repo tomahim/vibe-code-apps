@@ -1,0 +1,19 @@
+id: 19517613-e954-41dd-bb67-6d3c729758b9
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the elevation gain of the E101 in 2027?"
+choices:
+  - id: 322affc5-37ab-4d22-bc5d-b786855f3d55
+    text: "6,700 metres"
+  - id: 31b03fdc-2bec-48f0-a420-4a90dab2f0a0
+    text: "2,500 metres"
+  - id: 007f3740-28f5-46db-90e0-80e3b983f20f
+    text: "18,000 metres"
+  - id: 311f7e2a-c811-4e6a-849b-46dc055a1936
+    text: "670 metres"
+correct_choice_ids:
+  - 322affc5-37ab-4d22-bc5d-b786855f3d55
+explanation: "The listing shows 6,700 metres."
+archived: false

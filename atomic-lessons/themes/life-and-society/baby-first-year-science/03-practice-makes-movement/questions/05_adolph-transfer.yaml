@@ -1,0 +1,19 @@
+id: bbfd0623-75da-414d-91fb-cf5b614054cb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "When experienced crawlers in Adolph's studies began walking, their slope judgments:"
+choices:
+  - id: 1fd648e8-3de3-4716-a095-7c2163c6d351
+    text: "Did not transfer; they misjudged slopes again as walkers"
+  - id: c819bd7b-3ecd-4228-bcde-6a588b2a2420
+    text: "Transferred perfectly to the new posture"
+  - id: 878f9599-66ee-41b4-8022-5d5ab2d1702b
+    text: "Made them fearless on all surfaces"
+  - id: 46cb74f5-6af1-4a2b-8516-9d9b60ed3f4d
+    text: "Only worked on stairs"
+correct_choice_ids:
+  - 1fd648e8-3de3-4716-a095-7c2163c6d351
+explanation: "Each posture changes the body's physics, so calibration must be rebuilt for crawling, cruising and walking separately."
+archived: false

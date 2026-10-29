@@ -1,0 +1,9 @@
+id: 1d44111c-259b-47e8-bfda-bc95b98194ad
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Croft win UTMB?"
+accepted_answers:
+  - "2025"
+explanation: "She won the main UTMB title in 2025."
+archived: false

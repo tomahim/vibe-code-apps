@@ -1,0 +1,20 @@
+schema_version: 1
+id: bce42584-25c8-4de5-9924-9590115e38fa
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What is the name of his achievement of winning all four individual UTMB races?"
+choices:
+  - id: edd4c716-06e9-4c86-bb25-a564042ae1a0
+    text: "The Triple Crown"
+  - id: d94675ed-45cf-4717-871f-a01b38fcc019
+    text: "The Golden Trail"
+  - id: 0bd63182-73d3-4a2b-9ab9-1e7ea602983d
+    text: "The UTMB Grand Slam"
+  - id: d3f18296-052d-46c9-84f6-0038c497adfd
+    text: "The Four Peaks"
+correct_choice_ids:
+  - 0bd63182-73d3-4a2b-9ab9-1e7ea602983d
+explanation: "He was the first athlete to complete it."
+archived: false

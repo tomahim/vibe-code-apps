@@ -1,0 +1,19 @@
+id: 8f39d993-f4fb-4aec-9019-ebad4135e7de
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "The flavor bridge described in this lesson runs from:"
+choices:
+  - id: 6239fcd4-df26-4b07-b9da-088c93f3a926
+    text: "Amniotic fluid to milk to the family table"
+  - id: 8d4e08ce-bad0-4b97-93d4-67b28ef9020e
+    text: "Formula to juice to soda"
+  - id: 0bbc3c08-cf54-47d0-98a4-68e6df7b5e42
+    text: "Vitamins to medicine"
+  - id: 9bce3a35-c60b-4e8c-ac74-42c63a12b3ce
+    text: "Water to milk to water"
+correct_choice_ids:
+  - 6239fcd4-df26-4b07-b9da-088c93f3a926
+explanation: "Prenatal exposure, then milk flavors, then first foods form a continuous flavor education."
+archived: false

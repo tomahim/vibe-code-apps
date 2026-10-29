@@ -1,0 +1,19 @@
+id: aa460489-4e53-4d2b-8b0b-838f396abed8
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Touch, taste and smell are called quiet senses here because they:"
+choices:
+  - id: 7638ace8-bc7e-4603-8fea-a96f5c024d32
+    text: "Develop first and do regulatory and recognition work without much notice"
+  - id: cb61ac83-3a4f-42dc-a81e-708bcbb7bf7d
+    text: "Are unimportant"
+  - id: 3e70ba51-90b2-4eb9-9d91-006add92d3c5
+    text: "Only work during sleep"
+  - id: cd8c1a5c-e0db-4ae5-9c89-8cd866edcb15
+    text: "Disappear after birth"
+correct_choice_ids:
+  - 7638ace8-bc7e-4603-8fea-a96f5c024d32
+explanation: "They come online earliest, regulate physiology, and carry early social recognition."
+archived: false

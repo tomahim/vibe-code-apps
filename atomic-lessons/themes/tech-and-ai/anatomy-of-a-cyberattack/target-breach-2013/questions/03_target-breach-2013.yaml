@@ -1,0 +1,19 @@
+id: 0daf5b9a-4c09-45e9-93f9-37f762e4ec67
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why is a memory-scraping approach effective against checkout terminals?"
+choices:
+  - id: 9689c298-6166-48bd-b829-ccf51b006b93
+    text: "Terminals store all cards in a public file"
+  - id: ff31e073-ef82-41ff-8e91-77b8ee06f935
+    text: "Cards cannot be encrypted"
+  - id: a7b64ea5-2996-4216-9674-19888345a4f4
+    text: "Card data is briefly readable in memory while a payment is processed"
+  - id: 705e89ab-5786-4118-bbc1-01e1eb03b1bc
+    text: "Terminals always have no passwords"
+correct_choice_ids:
+  - a7b64ea5-2996-4216-9674-19888345a4f4
+explanation: "Data can be exposed in memory even when it is encrypted elsewhere."
+archived: false

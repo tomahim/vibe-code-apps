@@ -1,0 +1,19 @@
+id: d2120569-69e4-4433-adbd-d8ea9b6e28db
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The PURPLE program's main message to caregivers is that peak crying is:"
+choices:
+  - id: ebe41db3-9ab0-44c9-82c2-e74e204679c8
+    text: "A normal, temporary developmental phase to endure safely"
+  - id: f6cb16cb-493c-4fb4-8ee1-e7e6063c2f9f
+    text: "Proof of illness"
+  - id: db82b8a4-69b8-42d9-81bd-c441055edd4b
+    text: "Caused by parenting mistakes"
+  - id: 926c74b8-f771-41f2-aab5-26d47daa7291
+    text: "A reason to stop soothing attempts"
+correct_choice_ids:
+  - ebe41db3-9ab0-44c9-82c2-e74e204679c8
+explanation: "Naming the pattern protects babies: exhausted caregivers who know it is normal and temporary cope more safely."
+archived: false

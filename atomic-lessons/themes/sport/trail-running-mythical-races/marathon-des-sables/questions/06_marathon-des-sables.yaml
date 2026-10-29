@@ -1,0 +1,19 @@
+id: ead7b595-c146-4264-a211-f04143bc49c7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long is the original race, according to the history?"
+choices:
+  - id: 2d6a071a-edb0-4c29-ac30-d113d08ad3e8
+    text: "About 42 km"
+  - id: 56d11379-614e-48ad-a178-39ecc8768d02
+    text: "About 100 km"
+  - id: 841da47c-66b5-4174-8d94-40dbb650a10e
+    text: "More than 250 km"
+  - id: 22c5c272-2f4c-4372-85c7-a8424315b589
+    text: "About 1,000 km"
+correct_choice_ids:
+  - 841da47c-66b5-4174-8d94-40dbb650a10e
+explanation: "It was designed for more than 250 km."
+archived: false

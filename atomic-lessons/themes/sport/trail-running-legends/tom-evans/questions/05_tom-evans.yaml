@@ -1,0 +1,20 @@
+schema_version: 1
+id: d99e2fb6-ab63-4dc9-a32b-3a3da2ee9d2e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which African country hosted his 2015 Army posting?"
+choices:
+  - id: 220981dd-7452-4d18-8ea3-9728d6486e4e
+    text: "South Africa"
+  - id: c74ca485-2731-43c9-984c-6ccb6eb1b3fb
+    text: "Kenya"
+  - id: a8ea4724-318f-4c93-8712-e671678aa91c
+    text: "Morocco"
+  - id: 2a2b2ed6-dbdd-449a-972e-faa561d828db
+    text: "Ethiopia"
+correct_choice_ids:
+  - c74ca485-2731-43c9-984c-6ccb6eb1b3fb
+explanation: "He returned to running there."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: c729f081-5667-4bd7-ac0c-9af88df6b5b9
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was Hawker's scientific field?"
+choices:
+  - id: 4b8e7ef5-3287-4264-b2ae-0d878a96a150
+    text: "Zoology"
+  - id: 8f048780-cec2-4972-8aa9-4cacb5ca443b
+    text: "Physical oceanography"
+  - id: 2a16d9bc-53c8-4e06-82ac-4a3158c80c19
+    text: "Astronomy"
+  - id: 571a6940-b404-4af0-9a0d-6b43ddfd7936
+    text: "Geology"
+correct_choice_ids:
+  - 8f048780-cec2-4972-8aa9-4cacb5ca443b
+explanation: "She earned a PhD in physical oceanography."
+archived: false

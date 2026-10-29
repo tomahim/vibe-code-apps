@@ -1,0 +1,19 @@
+id: 8efbeed6-9f77-484f-a344-826bf6d714f1
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The recurring pattern across movement, senses and language is:"
+choices:
+  - id: 47c8f54e-bd07-4a7f-9649-8e04930a7bdc
+    text: "Orderly sequences with wide timing variation"
+  - id: c279e1e7-096e-47b9-a41d-e9cfadeac096
+    text: "Fixed monthly deadlines"
+  - id: 32f27cd8-3da8-45e9-9e7a-10b2dc59bfbe
+    text: "Random development"
+  - id: 7650b68e-4753-4320-816b-17aa0bf5e4ca
+    text: "Identical timing worldwide"
+correct_choice_ids:
+  - 47c8f54e-bd07-4a7f-9649-8e04930a7bdc
+explanation: "Each domain shows a broadly ordered sequence assembled at widely varying speed."
+archived: false

@@ -1,0 +1,19 @@
+id: 1da8d6f9-75a3-4f0e-8007-a560dd43035f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was the name of his 1979 40-mile run?"
+choices:
+  - id: a5643396-d1ad-40eb-bfec-bc5d9b2104ec
+    text: "Brushy Run"
+  - id: d8840e6b-3c68-447a-a708-80f0016fe356
+    text: "Strolling Jim"
+  - id: f682ad5e-30e6-4321-920e-ea195ad48a33
+    text: "Horse Mountain"
+  - id: a140242c-4fd5-4781-986f-95d8732b0cbc
+    text: "The Idiot's Run"
+correct_choice_ids:
+  - d8840e6b-3c68-447a-a708-80f0016fe356
+explanation: "It was named after a famed horse."
+archived: false

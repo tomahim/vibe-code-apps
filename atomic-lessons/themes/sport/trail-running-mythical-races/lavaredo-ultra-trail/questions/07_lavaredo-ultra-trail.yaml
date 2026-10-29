@@ -1,0 +1,19 @@
+id: 8612afed-be2c-41df-b13e-1103457b7b9e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many mountain ranges does the protected area span?"
+choices:
+  - id: c88bedfc-20d9-4363-882f-e7c37b2d56c9
+    text: "Nine"
+  - id: 12b8aafe-aa6f-4672-838d-7d8e33332efc
+    text: "Five"
+  - id: 581f188f-d02e-44c0-b04c-ee84d22ca5be
+    text: "Two"
+  - id: e20020e0-d4ac-4d89-8175-18a4e977a610
+    text: "Fifty"
+correct_choice_ids:
+  - c88bedfc-20d9-4363-882f-e7c37b2d56c9
+explanation: "Nine mountain ranges and five provinces."
+archived: false

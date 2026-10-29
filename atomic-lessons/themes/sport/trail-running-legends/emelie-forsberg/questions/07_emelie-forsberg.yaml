@@ -1,0 +1,9 @@
+id: 74faec87-1787-4225-9afb-4ee81dd9b248
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year was Forsberg's first Fjällmaraton?"
+accepted_answers:
+  - "2009"
+explanation: "She won the race in 2009."
+archived: false

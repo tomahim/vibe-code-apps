@@ -1,0 +1,19 @@
+id: 6faf9786-1031-4635-870d-9f95169c2c44
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What kind of tourism do they want to be a model for?"
+choices:
+  - id: 0fd94acc-40ce-4c17-a673-a2e8831836a2
+    text: "Luxury tourism"
+  - id: f96e5d46-62a7-47e9-b6df-2d8dbab428b6
+    text: "Sustainable tourism"
+  - id: b5d2ea99-f211-4e68-8d40-b176c26cda89
+    text: "Mass tourism"
+  - id: d971855d-5652-4aa9-8b33-91f2bfcf8c94
+    text: "Winter tourism"
+correct_choice_ids:
+  - f96e5d46-62a7-47e9-b6df-2d8dbab428b6
+explanation: "They want to be a role model for sustainable tourism."
+archived: false

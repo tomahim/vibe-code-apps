@@ -1,0 +1,19 @@
+id: 4e8c8165-3c9c-4435-82cf-13f4c6f9a872
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year was the MDS born?"
+choices:
+  - id: 51849fd0-a940-46d9-9bc9-9153b58d0551
+    text: "1996"
+  - id: 5450d677-d159-40e1-b63a-d2b7fa9f5cc9
+    text: "1976"
+  - id: 0511749c-63a4-44c7-81b2-38007f8a39dd
+    text: "2006"
+  - id: f92ea7eb-c487-4e91-88f9-bc8a1ee04f78
+    text: "1986"
+correct_choice_ids:
+  - f92ea7eb-c487-4e91-88f9-bc8a1ee04f78
+explanation: "The official history says 1986."
+archived: false

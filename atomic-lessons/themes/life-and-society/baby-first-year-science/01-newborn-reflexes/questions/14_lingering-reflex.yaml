@@ -1,0 +1,19 @@
+id: 56038d73-5d17-4b32-9fe3-62a52446eb8d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A reflex that lingers far beyond its usual window is best read as:"
+choices:
+  - id: ab30fa1a-ce69-4de9-beb2-4ee646098e4f
+    text: "One signal among many for professionals to weigh"
+  - id: 8a973ef9-a811-4df6-a84c-4410752368fb
+    text: "Proof of a serious disorder"
+  - id: ba36de19-c9fc-40cc-89d8-8af4c35a72e9
+    text: "Completely meaningless"
+  - id: 33957739-075f-42fb-bd37-662cea4ae858
+    text: "A sign of advanced development"
+correct_choice_ids:
+  - ab30fa1a-ce69-4de9-beb2-4ee646098e4f
+explanation: "Timing deviations are cues for professional assessment alongside other signs, never a diagnosis on their own."
+archived: false

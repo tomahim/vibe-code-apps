@@ -1,0 +1,19 @@
+id: 54b3a049-c9bc-47c0-860d-26797b2cbbfc
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the FUJI main race in the current information?"
+choices:
+  - id: 6f7b05a0-fcec-458d-8edd-9f7993a059d2
+    text: "38.5 km"
+  - id: cfe5d83c-556b-459b-beab-40d3c61e5de2
+    text: "8.6 km"
+  - id: 01502db1-b997-486b-8300-f257217ce89d
+    text: "67.9 km"
+  - id: 3e7be0a9-e8b7-451d-8f31-26f95aa3768e
+    text: "165.3 km"
+correct_choice_ids:
+  - 3e7be0a9-e8b7-451d-8f31-26f95aa3768e
+explanation: "The main race is 165.3 km."
+archived: false

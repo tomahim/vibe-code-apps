@@ -1,0 +1,19 @@
+id: 70a38f2c-b1f8-4a9d-9131-77f9d29ca554
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Newborns preferring a story read aloud during pregnancy demonstrates:"
+choices:
+  - id: 5aaa9b0b-19f1-4902-a445-2781cc1dbfc6
+    text: "Prenatal hearing leaves memory traces"
+  - id: 512ff859-f958-429f-9c8a-aa2f7e3f73ff
+    text: "Newborns understand plots"
+  - id: b8167f1f-4fe3-4d67-bd69-4f84ec3691f4
+    text: "Mothers imagine preferences"
+  - id: ead16508-015c-4475-aa8f-90a18ff0759f
+    text: "Hearing starts at birth"
+correct_choice_ids:
+  - 5aaa9b0b-19f1-4902-a445-2781cc1dbfc6
+explanation: "Familiarity with a repeatedly heard story shows the prenatal auditory system already learns."
+archived: false

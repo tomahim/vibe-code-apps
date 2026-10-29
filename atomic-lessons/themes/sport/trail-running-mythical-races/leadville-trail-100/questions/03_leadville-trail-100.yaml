@@ -1,0 +1,19 @@
+id: 14eb1a3f-b975-4094-b419-2dd041b4d516
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "How many people lived in Leadville at its peak?"
+choices:
+  - id: b9b7d942-6b87-45d3-b5b3-d9f1b193df88
+    text: "About 300"
+  - id: e1c7b33f-9427-4080-9951-229ef65d7380
+    text: "About 3,000"
+  - id: bddad401-6938-4652-bcf7-56431f3eae8d
+    text: "About 3 million"
+  - id: be1953cb-6f4b-49a7-81be-b2de5a08220c
+    text: "More than 30,000"
+correct_choice_ids:
+  - be1953cb-6f4b-49a7-81be-b2de5a08220c
+explanation: "At its peak the town had more than 30,000 people."
+archived: false

@@ -1,0 +1,19 @@
+id: 44574837-73cb-40d7-bb02-89249306a068
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Violation-of-expectation studies infer expectation from:"
+choices:
+  - id: 195b9a2d-e2c6-4589-92ab-970654a2621c
+    text: "Longer looking at events that break the pattern"
+  - id: f2e5c9b1-756f-4a70-93a8-044750442368
+    text: "Faster sucking at normal events"
+  - id: 38bd767b-7b43-4388-ba91-5f3332b16a2b
+    text: "Smiling at toys"
+  - id: 0cce114d-d034-48e9-a98e-459620213d12
+    text: "Falling asleep"
+correct_choice_ids:
+  - 195b9a2d-e2c6-4589-92ab-970654a2621c
+explanation: "Babies look longer at impossible or surprising events, which researchers read as violated expectation."
+archived: false

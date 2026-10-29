@@ -1,0 +1,19 @@
+id: bd0d9eeb-bd1a-4b29-b917-b59867f13287
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A baby who cruises along furniture for two months before walking is:"
+choices:
+  - id: 8d58b5be-51e8-4401-909b-74013d51a4f2
+    text: "Showing a normal plateau between motor phases"
+  - id: 4728443a-7869-46a6-bc4d-047f2a707ef3
+    text: "Stuck in development"
+  - id: 162a7b80-b8eb-40d2-be14-586402c0c911
+    text: "Ready to run"
+  - id: 65cdd6a7-a899-4330-9904-fe6193c33c6f
+    text: "Skipping standing"
+correct_choice_ids:
+  - 8d58b5be-51e8-4401-909b-74013d51a4f2
+explanation: "Skills arrive in bursts separated by plateaus; long cruising phases are common and unremarkable."
+archived: false

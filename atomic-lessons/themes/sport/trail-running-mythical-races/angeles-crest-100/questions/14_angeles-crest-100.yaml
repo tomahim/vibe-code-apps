@@ -1,0 +1,19 @@
+id: a8056133-885a-48d3-a705-834b32a5c503
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In what month was the 2026 race, the first in that month since 2008?"
+choices:
+  - id: faa2ec1a-d107-479b-a643-e5d84a120d8f
+    text: "June"
+  - id: b466b40a-eb69-49c7-ae6c-b1d4ea0d3970
+    text: "August"
+  - id: 150f1913-0bda-4190-81be-b71c9dfa5cc1
+    text: "January"
+  - id: c567daf1-0659-4ab7-ae94-217b1e1ecc27
+    text: "October"
+correct_choice_ids:
+  - c567daf1-0659-4ab7-ae94-217b1e1ecc27
+explanation: "It was scheduled for October 3, 2026."
+archived: false

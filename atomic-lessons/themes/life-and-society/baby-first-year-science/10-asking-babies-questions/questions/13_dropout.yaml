@@ -1,0 +1,19 @@
+id: 5bbe359f-c6eb-4387-8138-a55544ce2e7b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A persistent interpretive challenge in infant studies is:"
+choices:
+  - id: e747445c-43dc-42ad-a3bd-628e4e55a7c4
+    text: "High dropout from fussiness and sleep can skew samples"
+  - id: 073a0d94-3d49-42de-8fc8-3cfd10d98846
+    text: "Babies lie"
+  - id: 27f4dd62-302b-4441-91eb-092ac26910c5
+    text: "Parents interfere constantly"
+  - id: adb76b05-271f-4384-8404-5ec03ada1a67
+    text: "Equipment is cheap"
+correct_choice_ids:
+  - e747445c-43dc-42ad-a3bd-628e4e55a7c4
+explanation: "Large attrition from crying or sleepiness means tested babies may not represent all babies."
+archived: false

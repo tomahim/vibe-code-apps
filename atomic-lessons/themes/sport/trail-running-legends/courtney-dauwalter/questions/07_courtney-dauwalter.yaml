@@ -1,0 +1,9 @@
+id: 1f6f31e8-8a7e-43cd-b91e-b1f05415d060
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Dauwalter win Western States for the first time?"
+accepted_answers:
+  - "2018"
+explanation: "She won in 17:27 in 2018."
+archived: false

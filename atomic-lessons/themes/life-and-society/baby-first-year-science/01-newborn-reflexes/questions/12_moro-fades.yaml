@@ -1,0 +1,11 @@
+id: 190d2f6c-7355-4589-897a-f3b5ce7a0543
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "By about how many months does the Moro reflex usually disappear?"
+accepted_answers:
+  - "6 months"
+  - "about six months"
+  - "by 6 months"
+explanation: "The Moro typically fades between two and six months as voluntary control matures."
+archived: false

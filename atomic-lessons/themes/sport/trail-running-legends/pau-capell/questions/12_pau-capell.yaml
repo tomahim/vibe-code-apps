@@ -1,0 +1,20 @@
+schema_version: 1
+id: b4089238-414f-44ce-a543-81a92357b94b
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which UTMB week race did Capell win?"
+choices:
+  - id: 7fb330e8-92af-40db-b930-b8919e9777dd
+    text: "OCC"
+  - id: 149645c7-785a-4096-afca-e527b0759e5b
+    text: "MCC"
+  - id: 578676aa-9947-4684-9447-bd8395447238
+    text: "TDS"
+  - id: c5d0636f-56db-438c-bb62-7d8d03e62bab
+    text: "YCC"
+correct_choice_ids:
+  - 578676aa-9947-4684-9447-bd8395447238
+explanation: "He also won TDS."
+archived: false

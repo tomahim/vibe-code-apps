@@ -1,0 +1,19 @@
+id: 5410cb55-f4ba-45cd-a971-588912880579
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which mountains is Hardrock held?"
+choices:
+  - id: a7dd50ce-c7af-40ae-9e00-1e89ca222059
+    text: "The Cumberland Mountains"
+  - id: cb3c5732-6bb3-4fc3-855b-c3866c9770a2
+    text: "The Alps"
+  - id: b37a6ca0-c923-463c-b8c7-339b7e13f25d
+    text: "The San Juan Mountains"
+  - id: c5646b25-50d3-4c9f-be1c-852a19fed40b
+    text: "The Sierra Nevada"
+correct_choice_ids:
+  - b37a6ca0-c923-463c-b8c7-339b7e13f25d
+explanation: "The race is in southwestern Colorado's San Juans."
+archived: false

@@ -1,0 +1,19 @@
+id: 7a5b18eb-d243-451a-81ee-6eed46fba764
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the E250 listing?"
+choices:
+  - id: ebeb6e43-6d63-4b93-881c-986658a0c148
+    text: "261 km"
+  - id: 8bf57016-1d72-4551-b3fb-0b25e3c7bb7f
+    text: "250 km"
+  - id: 097ed375-7738-484e-951e-d3eca5145a88
+    text: "101 km"
+  - id: 5d0eafd9-e67b-489e-b124-22ee1d880f49
+    text: "330 km"
+correct_choice_ids:
+  - ebeb6e43-6d63-4b93-881c-986658a0c148
+explanation: "The listing shows 261 km."
+archived: false

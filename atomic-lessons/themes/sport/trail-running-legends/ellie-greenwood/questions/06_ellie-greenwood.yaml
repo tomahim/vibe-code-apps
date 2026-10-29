@@ -1,0 +1,20 @@
+schema_version: 1
+id: 76c57cb9-154f-47b3-a896-7475d2d569d5
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "What was Greenwood's winning time at the 2010 world 100 km?"
+choices:
+  - id: 0886d5b4-56f8-4ae4-8138-be0f2c4c43af
+    text: "8:45:00"
+  - id: 6fef89dd-9471-4827-a13b-27cbf0d6dcb6
+    text: "6:18:15"
+  - id: 62610e8f-26d3-4af5-991c-273fb353baaa
+    text: "9:10:30"
+  - id: 42f7e37b-b340-43c4-8265-c91821235342
+    text: "7:29:05"
+correct_choice_ids:
+  - 42f7e37b-b340-43c4-8265-c91821235342
+explanation: "She won gold in 7:29:05."
+archived: false

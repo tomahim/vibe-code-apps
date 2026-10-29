@@ -1,0 +1,19 @@
+id: bc5531a9-690b-4fc5-8ac9-734d881e21e0
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who said 'I already have the route'?"
+choices:
+  - id: 35ec3f7c-51f4-4759-a792-ed8a7cf5f53f
+    text: "Kilian Jornet"
+  - id: 688fc96a-b4fa-433a-82d3-92110c6004a2
+    text: "Jean-Claude Pont"
+  - id: 167f393e-3f51-420d-aff8-0082b55e24c0
+    text: "Gordy Ainsleigh"
+  - id: 380ec661-a3ae-43b7-9045-56f5036db1e7
+    text: "Alberto Aierbe"
+correct_choice_ids:
+  - 380ec661-a3ae-43b7-9045-56f5036db1e7
+explanation: "Aierbe was one of the driving forces."
+archived: false

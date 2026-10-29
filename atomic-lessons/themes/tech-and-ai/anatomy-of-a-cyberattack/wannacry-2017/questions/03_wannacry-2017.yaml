@@ -1,0 +1,19 @@
+id: 9f4900fe-77d6-4b3b-bd9d-9068421f8b5b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What did the kill switch do?
+choices:
+- id: 7f6b3ccc-8c80-4b62-9ccf-257a1e4877a4
+  text: Registering a domain the malware checked stopped many infections from spreading
+- id: 67d779c9-9b27-463d-9957-c7cb635f2808
+  text: It decrypted all files
+- id: 1640d059-d0ad-491a-be1b-eb01e9a7a19b
+  text: It identified the attackers
+- id: c45c723d-c673-4c0a-a4ad-3b01dbf2289b
+  text: It switched off Windows
+correct_choice_ids:
+- 7f6b3ccc-8c80-4b62-9ccf-257a1e4877a4
+explanation: The NAO reports a researcher activated a kill switch on the evening of 12 May.
+archived: false

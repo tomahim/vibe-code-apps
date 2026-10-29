@@ -1,0 +1,9 @@
+id: 184b487a-d263-4a78-8282-84a7473c9b2b
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Thévenard win UTMB for the first time?"
+accepted_answers:
+  - "2013"
+explanation: "His first UTMB win was in 2013."
+archived: false

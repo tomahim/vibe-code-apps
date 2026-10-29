@@ -1,0 +1,19 @@
+id: bffd1b68-9682-4632-ac8d-4188d91b6940
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Where was the original finish line?"
+choices:
+  - id: 2156c559-2e57-4889-9b93-465d7a3f6a15
+    text: "Johnson Field"
+  - id: 69875f73-f622-4a68-a4f6-af74e1c79577
+    text: "Chantry"
+  - id: 7bdaced7-fe1d-46a5-88a6-2e3c429f3258
+    text: "Loma Alta Park"
+  - id: fa4c4412-d800-4098-828e-5632760c0f66
+    text: "The Rose Bowl"
+correct_choice_ids:
+  - fa4c4412-d800-4098-828e-5632760c0f66
+explanation: "The original finish was at the Rose Bowl."
+archived: false

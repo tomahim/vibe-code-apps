@@ -1,0 +1,19 @@
+id: 45c90e21-f5fe-4ea5-9f01-560abecdf69a
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was new in the 2026 course?"
+choices:
+  - id: 6741a94a-b453-4dca-a713-572a135751bd
+    text: "It started and finished in Altadena"
+  - id: 96b92e98-cb22-4a38-a440-d1ede775e7ee
+    text: "It was held in July"
+  - id: 0340b31e-77f4-4e12-b43c-144bed74660a
+    text: "It was cancelled"
+  - id: 7fb17b1d-a5d9-47d8-97a4-5f4dedd347b6
+    text: "It was held in Utah"
+correct_choice_ids:
+  - 6741a94a-b453-4dca-a713-572a135751bd
+explanation: "For the first time it started and finished at Loma Alta Park."
+archived: false

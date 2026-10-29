@@ -1,0 +1,20 @@
+schema_version: 1
+id: d4a7ba53-5219-4b3a-b39c-cb78d6abe581
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Spanish region is Picas from?"
+choices:
+  - id: 7838f039-4fed-4586-8c0a-1f0305d853fd
+    text: "Catalonia"
+  - id: 3aabbc78-4d3a-4e7b-b3c1-a17a733a2aca
+    text: "Valencia"
+  - id: 1fb801d0-c879-401d-835d-26a437008735
+    text: "Andalusia"
+  - id: 47e4433d-a821-439e-b29c-f9a395e80e8e
+    text: "Galicia"
+correct_choice_ids:
+  - 7838f039-4fed-4586-8c0a-1f0305d853fd
+explanation: "She is a Catalan runner."
+archived: false

@@ -1,0 +1,19 @@
+id: 3bc8c2b9-63a5-4f6a-b84e-d10659c9f98c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Italian runner was lost in 1994?"
+choices:
+  - id: f4baa6d9-c7c3-40ef-a6e9-1e15c9aeb098
+    text: "Gilles Flamant"
+  - id: f0a80d67-13c9-4d26-a568-1fe5b19f0d07
+    text: "Mauro Prosperi"
+  - id: a916e697-81f8-4912-9eae-57bb4c9768ed
+    text: "Marco De Gasperi"
+  - id: d8bee62d-57fa-43ed-88f6-9af697a1c364
+    text: "Marco Olmo"
+correct_choice_ids:
+  - f0a80d67-13c9-4d26-a568-1fe5b19f0d07
+explanation: "Prosperi wandered alone for nine days."
+archived: false

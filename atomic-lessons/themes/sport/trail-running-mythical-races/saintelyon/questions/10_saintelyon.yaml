@@ -1,0 +1,19 @@
+id: bb25e7b4-d805-406c-8d71-372d9628efd7
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which hills does the course cross?"
+choices:
+  - id: cd4b8a0a-3924-4901-b877-35c293c099be
+    text: "The Alps"
+  - id: 80646392-1000-4b22-9f42-ebea26e5626a
+    text: "The Vosges"
+  - id: cfd688ab-648f-4c29-8653-f5d75fcae689
+    text: "The Monts du Lyonnais"
+  - id: 8d95df70-e4b1-4d89-b356-97ae8d5a2c64
+    text: "The Pyrenees"
+correct_choice_ids:
+  - cfd688ab-648f-4c29-8653-f5d75fcae689
+explanation: "The route goes via the crests of the Monts du Lyonnais."
+archived: false

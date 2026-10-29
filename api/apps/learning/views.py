@@ -1,3 +1,4 @@
+import random
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
@@ -19,6 +20,12 @@ from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Questi
 from .images import image_url
 from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
+
+
+def catch_up_payload(state, path_lessons):
+    """Gauge context for the path panel: is the quiz unlocked, and how big is the pool."""
+    return {"eligible": any(state.lesson_fully_read(lesson.pk) for lesson in path_lessons),
+            "remaining": len(state.catch_up_questions(path_lessons))}
 
 
 @never_cache
@@ -59,7 +66,8 @@ def path_detail(request, path_id):
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
-                                          "progress": state.progress(lessons)},
+                                          "progress": state.progress(lessons),
+                                          "catch_up": catch_up_payload(state, lessons)},
                          "theme": described(path.theme),
                          "lessons": [lesson_summary(l, state) for l in lessons],
                          "next_lesson_id": next((str(l.pk) for l in lessons
@@ -162,8 +170,15 @@ def question_attempts(request):
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
         checkpoint = (question.lesson_id, question.after_card_position)
-        review = checkpoint in state.passed
-        if review:
+        fully_read = state.lesson_fully_read(question.lesson_id)
+        catch_up = fully_read and question.pk not in state.correct_questions
+        review = checkpoint in state.passed and not catch_up
+        if fully_read:
+            # Once the cards are read every question is answerable (#204): a
+            # gap behaves like a first-run attempt (initial/retry), an
+            # already-correct question is ordinary review practice.
+            current = True
+        elif review:
             selected = next((q for q in checkpoint_questions(state, question.lesson)
                              if q.after_card_position == question.after_card_position), None)
             current = selected is not None and selected.pk == question.pk and any(
@@ -175,12 +190,15 @@ def question_attempts(request):
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
         checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
                           and q.after_card_position == question.after_card_position]
-        retry = QuestionAttempt.objects.filter(user=request.user, question_id__in=checkpoint_ids,
-                                               attempt_type__in=["initial", "retry"]).exists()
+        retry = QuestionAttempt.objects.filter(
+            user=request.user, question_id__in=checkpoint_ids,
+            attempt_type__in=["initial", "retry"]).exists()
         correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
                    else normalize_typed_answer(data["answer"]) in {
                        normalize_typed_answer(answer) for answer in question.accepted_answers
                    })
+        first_correct = correct and not QuestionAttempt.objects.filter(
+            user=request.user, question=question, correct=True).exists()
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
             attempt_type=("review" if review else "retry" if retry else "initial"),
@@ -198,10 +216,62 @@ def question_attempts(request):
             following = next_step(state, question.lesson)
         return JsonResponse({"attempt_id": attempt.pk, "question_id": str(question.pk),
                              "attempt_type": attempt.attempt_type, "correct": attempt.correct,
+                             "carrot_earned": first_correct,
                              "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
                              "correct_answer": question.answer if question.type == Question.Type.TYPE_ANSWER_QUESTION else None,
                              "progress": state.progress([question.lesson]),
                              "next_step": following}, status=201)
+
+
+@never_cache
+@require_GET
+@jwt_required
+def catch_up(request, path_id):
+    """One shared quiz over visible questions of fully read lessons.
+
+    Keep the historical endpoint name; there is no catch-up/review mode gate.
+    The gauge's remaining count is independent of session selection.
+    """
+    path = get_object_or_404(visible(LearningPath), pk=path_id)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson).filter(learning_path=path))
+    titles = {lesson.pk: lesson.title for lesson in lessons}
+    read_ids = {lesson.pk for lesson in lessons if state.lesson_fully_read(lesson.pk)}
+    pool = [q for q in state.questions if q.lesson_id in read_ids]
+    session = quiz_session(state, pool)
+    return JsonResponse({"learning_path_id": str(path.pk),
+                         "eligible": bool(read_ids),
+                         "remaining": len(state.catch_up_questions(lessons)),
+                         "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
+                                       for q in session]})
+
+
+def quiz_session(state, pool, limit=10):
+    """Failed latest answers, unseen questions, then 60% oldest / 40% random.
+
+    Each question appears once. Priority buckets are random within their tier;
+    oldest means time of the latest answer. Round 60% to the nearest whole
+    question (half up); the random tail fills every remaining available slot.
+    """
+    failed = [q for q in pool if state.last_correct.get(q.pk) is False]
+    unseen = [q for q in pool if q.pk not in state.last_attempt]
+    random.shuffle(failed)
+    random.shuffle(unseen)
+    session = (failed + unseen)[:limit]
+    selected = {q.pk for q in session}
+    slots = limit - len(session)
+    if not slots:
+        return session
+    answered = [q for q in pool if q.pk not in selected and q.pk in state.last_attempt]
+    answered.sort(key=lambda q: (state.last_attempt[q.pk], str(q.pk)))
+    oldest_count = (slots * 6 + 5) // 10
+    old = answered[:oldest_count]
+    session.extend(old)
+    selected.update(q.pk for q in old)
+    rest = [q for q in answered if q.pk not in selected]
+    random.shuffle(rest)
+    session.extend(rest[:limit - len(session)])
+    return session
 
 
 @never_cache
@@ -253,6 +323,8 @@ def garden(request):
             "learning_paths": [{
                 **described(path), "theme_id": str(theme.pk),
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
+                "catch_up": catch_up_payload(state, [lesson for lesson in lessons
+                                                     if lesson.learning_path_id == path.pk]),
                 "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],

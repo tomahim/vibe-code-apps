@@ -1,0 +1,19 @@
+id: 2529563e-407b-465a-8d15-62062c0bb2c9
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What kind of devices formed the botnet?"
+choices:
+  - id: c815a6ee-c083-4d2d-bb73-997cdc700ead
+    text: "Only mobile phones"
+  - id: 4c3a8f61-aa06-4c71-b22e-0c07dda6dee4
+    text: "Only printers in offices"
+  - id: fad2553c-2ea3-48c5-8ebb-dfd75d130c7c
+    text: "Only supercomputers"
+  - id: dd82f4b2-ad12-44b3-8d1a-6c61cd130aab
+    text: "Cameras, video recorders and routers"
+correct_choice_ids:
+  - dd82f4b2-ad12-44b3-8d1a-6c61cd130aab
+explanation: "Internet-connected consumer devices were the main victims."
+archived: false

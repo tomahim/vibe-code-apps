@@ -1,0 +1,19 @@
+id: 024ce0d7-f7c2-458a-9a9d-ab371348e703
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which factor can shift when a baby walks?"
+choices:
+  - id: 8052b43b-8963-456c-93ee-60b5da772cd7
+    text: "Body build, temperament and daily practice opportunities"
+  - id: 8b3a1f86-dd3a-46a5-9638-cdc88d5aec16
+    text: "Eye color"
+  - id: 2e5844a0-ef61-4d5e-b495-d4d53ec1a4ab
+    text: "Birth order only"
+  - id: 0410c65f-43ce-4000-9471-2934d1c717ac
+    text: "Nothing; timing is fully fixed by genes"
+correct_choice_ids:
+  - 8052b43b-8963-456c-93ee-60b5da772cd7
+explanation: "Heavier builds, cautious temperaments and fewer floor-play opportunities can each shift timing by months."
+archived: false

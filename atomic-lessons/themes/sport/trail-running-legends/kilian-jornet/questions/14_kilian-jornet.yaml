@@ -1,0 +1,20 @@
+schema_version: 1
+id: bc6b221c-c725-40e3-8e60-34dc0bc424a9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which two tools did Jornet use on Denali in 2014?"
+choices:
+  - id: e049f1d0-7790-4bc4-86a2-89c6a7a0d502
+    text: "Snowshoes and poles"
+  - id: f407cb31-741e-461b-9f2d-a4c064763afb
+    text: "Ropes and ice screws"
+  - id: eb1d717c-f4d8-4c4e-b3ef-e636e8d7b4af
+    text: "Skis and crampons"
+  - id: 725eaecb-2c26-4cf4-a3e6-c596afc252f9
+    text: "A sled and a tent"
+correct_choice_ids:
+  - eb1d717c-f4d8-4c4e-b3ef-e636e8d7b4af
+explanation: "He used both skis and crampons."
+archived: false

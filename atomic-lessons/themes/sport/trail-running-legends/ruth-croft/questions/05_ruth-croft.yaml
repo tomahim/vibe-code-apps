@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2e8de310-0feb-4d5f-b35b-e464d8c3468a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which technology company sponsored her early in her trail career?"
+choices:
+  - id: 07c998ac-9e93-485f-80ae-a5dca7a5111f
+    text: "Garmin"
+  - id: fb312758-d16c-48c9-bb40-0d1b9ac2cd32
+    text: "Sony"
+  - id: afaf13c8-46ef-4724-b863-f2cc79483e88
+    text: "Samsung"
+  - id: 7b633058-ecf3-47a6-8a95-85744abb7b6a
+    text: "Apple"
+correct_choice_ids:
+  - 07c998ac-9e93-485f-80ae-a5dca7a5111f
+explanation: "She worked in marketing for Garmin."
+archived: false

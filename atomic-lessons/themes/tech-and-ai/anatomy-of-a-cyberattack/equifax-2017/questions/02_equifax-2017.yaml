@@ -1,0 +1,19 @@
+id: 3cfe71f7-271a-41df-9aaa-f9c0c0cb198c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Roughly how many people were affected, according to GAO?
+choices:
+- id: f39e3a75-33de-40a8-9ed8-7314ced9c007
+  text: About 20 billion
+- id: 7ca9214d-fad4-43d1-a71c-40674b6859a1
+  text: About 1,000
+- id: f9c3fa2b-761c-43d4-87ed-dfe467716256
+  text: At least 145 million
+- id: 8267d2dd-c4a1-4a87-b837-e3768dafb70b
+  text: About 50,000
+correct_choice_ids:
+- f9c3fa2b-761c-43d4-87ed-dfe467716256
+explanation: GAO reported at least 145.5 million people, with other counts slightly higher.
+archived: false

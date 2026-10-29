@@ -1,0 +1,19 @@
+id: 416c7137-37dc-4f64-b771-b884b83024cf
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Where was the weakness in the Bangladesh Bank case?
+choices:
+- id: b7a0c776-c096-4e91-93ab-3b9fa26efdcc
+  text: In the central bank law
+- id: 73270693-98b0-426c-8354-853c4b4d39fa
+  text: In the Federal Reserve building
+- id: 48a9424d-c0ca-4c12-b963-1d44662a01e6
+  text: At the bank's own end of the payment connection, where attackers could send authentic messages
+- id: a3981ce1-bb64-4a45-a0d7-bcb516a66134
+  text: In every ATM worldwide
+correct_choice_ids:
+- 48a9424d-c0ca-4c12-b963-1d44662a01e6
+explanation: BAE describes attackers sending authentic messages from the bank's own systems.
+archived: false

@@ -1,0 +1,11 @@
+id: e0e717fb-2e99-4583-bcc1-8262d1aa5ad1
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the name of the Spanish region Picas comes from?"
+accepted_answers:
+  - "Catalonia"
+  - "Catalunya"
+  - "Cataluña"
+explanation: "She is a Spanish runner from Catalonia."
+archived: false

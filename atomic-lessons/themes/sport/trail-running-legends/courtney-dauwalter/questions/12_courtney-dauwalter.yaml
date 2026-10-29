@@ -1,0 +1,20 @@
+schema_version: 1
+id: 453bda74-ad1c-44c2-84e0-a4c951a79880
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was Dauwalter's 2023 Hardrock winning time?"
+choices:
+  - id: 013bf6ea-066e-46da-ab37-67f0b8510b15
+    text: "26:14:08"
+  - id: f30629c9-2950-4b16-9ae8-f792fc4136c9
+    text: "29:00:00"
+  - id: 6c5c17cd-9eb4-4742-a197-f47cdbe97763
+    text: "21:45:51"
+  - id: 4479bc4a-16a3-4fb6-a83c-8a23f1a1a1fb
+    text: "24:00:00"
+correct_choice_ids:
+  - 013bf6ea-066e-46da-ab37-67f0b8510b15
+explanation: "It beat the counter clockwise women's record."
+archived: false

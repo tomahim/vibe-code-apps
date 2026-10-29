@@ -1,0 +1,20 @@
+schema_version: 1
+id: cdd5d1d5-cf6d-4b8d-a611-a5a37fd6e7ff
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which subject was his second BA from Colorado College?"
+choices:
+  - id: 23b29d6f-59a0-46eb-9ea6-0f90a325de16
+    text: "Music"
+  - id: 61d7e460-6eea-49df-b77d-28e6cdf9aa57
+    text: "Chemistry"
+  - id: a131ea70-0db6-422d-a54a-f129f3be60c5
+    text: "Geology"
+  - id: 77201d13-ff57-4c55-9e3f-2808081b4d79
+    text: "Astronomy"
+correct_choice_ids:
+  - a131ea70-0db6-422d-a54a-f129f3be60c5
+explanation: "He completed a BA in geology in 2006."
+archived: false

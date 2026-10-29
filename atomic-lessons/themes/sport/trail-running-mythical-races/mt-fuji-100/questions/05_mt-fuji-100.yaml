@@ -1,0 +1,19 @@
+id: a5c2f5a6-4cc8-4a44-a69d-7a6158c9708e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who won the first race in 2012?"
+choices:
+  - id: d210108d-1730-4986-b623-b8c275b82b97
+    text: "Julien Chorier"
+  - id: f6ec0bcd-a5bc-4d9b-bf24-66a423def594
+    text: "Kilian Jornet"
+  - id: da566692-42fa-47b5-9d5b-ce1163d4ef3d
+    text: "Yoshikazu Hara"
+  - id: b5be7638-5dbf-467a-8742-9bf9866d01dd
+    text: "Francois D'Haene"
+correct_choice_ids:
+  - d210108d-1730-4986-b623-b8c275b82b97
+explanation: "Julien Chorier of France won."
+archived: false

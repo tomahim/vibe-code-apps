@@ -1,0 +1,19 @@
+id: 21522da0-d83f-4013-95e3-007e87df981a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Who placed the notice in Ultrarunning magazine?"
+choices:
+  - id: 8bb15f17-979d-4570-90a5-cf1ebe751bb9
+    text: "Rick Trujillo"
+  - id: e5d5897e-4d35-4c22-929f-44c418fcc66e
+    text: "John Cappis"
+  - id: 99ede639-13b3-4cde-b3f9-fc0a0131ba53
+    text: "Gordon Hardman"
+  - id: f158cf9e-8049-4a2d-8ce3-ce7c351ed2ce
+    text: "Charlie Thorn"
+correct_choice_ids:
+  - 99ede639-13b3-4cde-b3f9-fc0a0131ba53
+explanation: "Hardman announced the race in fall 1991."
+archived: false

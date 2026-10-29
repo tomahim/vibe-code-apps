@@ -1,0 +1,19 @@
+id: 07d25653-c8cb-4b97-985e-9ddcedd9ff83
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Why was Zebulon Pike turned back from the mountain?"
+choices:
+  - id: ea364872-944e-4f90-9dc7-6731ca95fcdb
+    text: "A broken compass"
+  - id: 6bca2de9-ff00-43b6-a10e-9965230ef518
+    text: "Harsh weather, deep snow and no food"
+  - id: 2f2e7793-7a33-4272-b2ef-084525cc1096
+    text: "A war with local tribes"
+  - id: 2730a67f-e255-4295-b104-63274fdfdf8e
+    text: "A rockfall on the summit"
+correct_choice_ids:
+  - 6bca2de9-ff00-43b6-a10e-9965230ef518
+explanation: "The snow was waist deep, his men were not dressed for it and they were out of food."
+archived: false

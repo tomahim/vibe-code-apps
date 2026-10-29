@@ -1,0 +1,19 @@
+id: 12cc74d0-ec94-4ded-a82f-a22fbd81fe6e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should the attribution be described?
+choices:
+- id: f671499d-ba68-4a7b-887f-fa457a1c115d
+  text: A court verdict against North Korea
+- id: 5dd01bf0-ef2e-4700-a52c-56937d1c5f37
+  text: A proven confession
+- id: b7e31665-706b-4bdf-9814-06815643eda2
+  text: An unverified social media rumor
+- id: 168b2301-b4d5-45d9-9246-9510166c0f5b
+  text: A US and UK government assessment, with a 2018 DOJ complaint alleging North Korean involvement
+correct_choice_ids:
+- 168b2301-b4d5-45d9-9246-9510166c0f5b
+explanation: The governments announced their assessment in December 2017.
+archived: false

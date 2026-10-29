@@ -1,0 +1,19 @@
+id: 30795860-176b-433e-8bbc-e76858c1e731
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "For bilingual toddlers, the fair vocabulary measure is:"
+choices:
+  - id: 2414c384-2f42-44d9-93a9-06352de63110
+    text: "Total words known across both languages"
+  - id: fa62d395-2345-4ba1-b6ef-f1a96473b5ca
+    text: "Words in the majority language only"
+  - id: a887c90e-9193-4d63-ab3f-08330f2696a0
+    text: "Words in each language separately, judged alone"
+  - id: 9ff4382b-1d4b-41b2-94ee-9e6fbe83b47f
+    text: "Gestures only"
+correct_choice_ids:
+  - 2414c384-2f42-44d9-93a9-06352de63110
+explanation: "Each single-language count underestimates knowledge; combined conceptual vocabulary is the fair yardstick."
+archived: false

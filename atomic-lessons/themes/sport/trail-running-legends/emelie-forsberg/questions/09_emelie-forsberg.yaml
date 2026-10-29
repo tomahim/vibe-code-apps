@@ -1,0 +1,20 @@
+schema_version: 1
+id: cf8224e4-58b8-463a-ba8a-bbf5f90fc480
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which skyrace did Forsberg win in July 2012?"
+choices:
+  - id: 17fb45b7-0617-47c5-9bd8-13ac69e3deae
+    text: "The Matterhorn Run"
+  - id: 554f3396-a2c3-4fe7-b5d9-296ba3fd2991
+    text: "The Sierre-Zinal"
+  - id: 0abc3eb2-f7c0-4a3c-9614-86b63f4a7974
+    text: "The Pikes Peak Ascent"
+  - id: bed7a117-d84b-4771-a625-6b0e694fdc15
+    text: "The Dolomites Skyrace"
+correct_choice_ids:
+  - bed7a117-d84b-4771-a625-6b0e694fdc15
+explanation: "It was an early big international win."
+archived: false

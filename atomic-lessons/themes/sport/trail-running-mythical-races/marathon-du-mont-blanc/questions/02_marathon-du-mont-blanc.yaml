@@ -1,0 +1,19 @@
+id: 3b6131fe-6bb2-40d1-859a-c28b1e119bc7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which club launched it?"
+choices:
+  - id: 04b230be-6b0e-4935-9018-925d34f98d6b
+    text: "Leadville Legacy"
+  - id: d7badfde-64b3-42b0-9ade-7b39e97688c5
+    text: "The Poletti club"
+  - id: bcd8214c-cb15-47bc-9a3a-73eb4d6a215f
+    text: "Salomon"
+  - id: 1bc1d089-e3be-4783-96d7-0384b59c542e
+    text: "The French Alpine Club of Chamonix"
+correct_choice_ids:
+  - 1bc1d089-e3be-4783-96d7-0384b59c542e
+explanation: "It was launched by the Club alpin francais de Chamonix."
+archived: false

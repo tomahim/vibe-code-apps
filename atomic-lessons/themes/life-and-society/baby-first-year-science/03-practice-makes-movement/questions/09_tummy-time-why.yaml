@@ -1,0 +1,19 @@
+id: a0283bbb-18bb-4b51-8273-b1dc15095af3
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Tummy time trains muscles and balance systems needed for:"
+choices:
+  - id: 039d9cd1-0611-421b-8e52-5d6592690fb2
+    text: "Rolling, crawling and later milestones"
+  - id: 7e89d4f1-0fbc-45d1-be84-1bbdae9ac2d4
+    text: "Sleeping through the night"
+  - id: cc39662b-5b58-4f5a-9dc5-985b4e8d0bc9
+    text: "Digestion only"
+  - id: 064676da-e266-4667-a1c6-633092874e9f
+    text: "Smiling"
+correct_choice_ids:
+  - 039d9cd1-0611-421b-8e52-5d6592690fb2
+explanation: "From the prone position, head lifting and pushing up build the strength later motor skills require."
+archived: false

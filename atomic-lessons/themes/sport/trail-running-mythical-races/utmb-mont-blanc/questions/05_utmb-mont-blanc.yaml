@@ -1,0 +1,19 @@
+id: 405dc1eb-7adb-4c5e-8b33-fb4b52860678
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many countries does the route cross?"
+choices:
+  - id: c8778a5b-80ea-4ef6-bc26-aa817e8bd88e
+    text: "Two"
+  - id: 62e6c0f2-fa38-4964-8116-7e36bd4be913
+    text: "Five"
+  - id: 011e09f8-f6fb-4e4f-9f04-42635079b411
+    text: "One"
+  - id: 494ee2cb-7291-49ae-87a9-2d621c30b9c8
+    text: "Three"
+correct_choice_ids:
+  - 494ee2cb-7291-49ae-87a9-2d621c30b9c8
+explanation: "France, Italy and Switzerland."
+archived: false

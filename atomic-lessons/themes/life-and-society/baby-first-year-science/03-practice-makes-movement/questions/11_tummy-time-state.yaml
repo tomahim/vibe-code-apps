@@ -1,0 +1,11 @@
+id: b6382eb2-c71a-4bf4-8c8a-44396b3a2a6d
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: "Tummy time is recommended only when the baby is in which two states?"
+accepted_answers:
+  - "awake and supervised"
+  - "awake and watched"
+  - "awake, supervised"
+explanation: "The safety boundary: prone play is for awake, watched babies; sleep always happens on the back."
+archived: false

@@ -1,0 +1,19 @@
+id: 478976b6-1839-49d4-972c-2acabfaa461a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which mountains does it take place?"
+choices:
+  - id: 4e86018b-5ac4-4412-9fa0-17ef1c8eb70d
+    text: "The Sierra Nevada"
+  - id: c91be2fb-013a-43df-a351-8e692fc18f07
+    text: "The Dolomites"
+  - id: 9896fef8-7de7-428c-af7f-1d0785928ecb
+    text: "The Andes"
+  - id: b0dc5044-4509-4894-83f0-fffd91190e21
+    text: "The Pyrenees"
+correct_choice_ids:
+  - c91be2fb-013a-43df-a351-8e692fc18f07
+explanation: "It takes place in the Dolomites."
+archived: false

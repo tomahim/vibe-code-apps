@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0a5ad5d2-d5e2-4178-9152-2a4b78bd6a44
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which years did she win the World Tour?"
+choices:
+  - id: 498dc153-a5e6-4252-8cb1-0c58fdcf70a9
+    text: "2014 and 2015"
+  - id: 123243b3-aebc-418c-b108-009bb03b4e14
+    text: "2012 and 2013"
+  - id: c0643d32-43f8-460b-a122-cc16d621ca0d
+    text: "2019 and 2020"
+  - id: d6dd2085-cd37-4248-ac91-84f33300ff34
+    text: "2016 and 2017"
+correct_choice_ids:
+  - 498dc153-a5e6-4252-8cb1-0c58fdcf70a9
+explanation: "She is a two time champion."
+archived: false

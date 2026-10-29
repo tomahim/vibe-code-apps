@@ -1,0 +1,19 @@
+id: be76c4b7-fd58-4e57-92ff-273732a8e9c3
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How did attackers enter, according to testimony?
+choices:
+- id: 4be16107-264c-44fe-888f-07a4e11611ec
+  text: Through an old VPN account without multifactor authentication
+- id: 8e0ffcfc-4631-4e33-b3f2-d30b3fc4f83f
+  text: Through a software update
+- id: 8ec71976-e084-4dd5-acb9-a44af64d4ee0
+  text: Through a satellite
+- id: 22079c6b-14e5-4320-b894-79e1e7e3ed04
+  text: Through a physical break-in
+correct_choice_ids:
+- 4be16107-264c-44fe-888f-07a4e11611ec
+explanation: The CEO described a legacy VPN profile not intended to be in use. Reuters reported no multifactor authentication.
+archived: false

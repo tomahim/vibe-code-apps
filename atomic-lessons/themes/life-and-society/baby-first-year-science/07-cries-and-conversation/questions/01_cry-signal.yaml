@@ -1,0 +1,19 @@
+id: 84b7582d-ed4e-415d-9be2-28595f836be4
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Infant crying is best described as:"
+choices:
+  - id: 0e529daa-ebd4-4ad8-94fd-04dd0d06a658
+    text: "A graded broadcast signal where intensity matters more than type"
+  - id: aa8962b6-c1d5-433d-84ea-6aec18683fc1
+    text: "A precise code with one cry per need"
+  - id: 084a9bdd-6466-4c80-a922-11b920ab65af
+    text: "A random noise"
+  - id: 12106ab3-b09c-4254-b470-dd285297f644
+    text: "A learned habit"
+correct_choice_ids:
+  - 0e529daa-ebd4-4ad8-94fd-04dd0d06a658
+explanation: "The hunger-cry vs pain-cry distinction has weak support; context and intensity carry the information."
+archived: false

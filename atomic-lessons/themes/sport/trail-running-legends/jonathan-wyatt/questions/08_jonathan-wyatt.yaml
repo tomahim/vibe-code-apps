@@ -1,0 +1,9 @@
+id: b69802e6-2602-40a8-ab2a-e6c5218b3417
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Wyatt win the long race in Crans-Montana?"
+accepted_answers:
+  - "2008"
+explanation: "His last world title came in 2008."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: d1e13049-460e-42ae-ad04-9de3109206f8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What is the name of Jornet's partner, who also competes in skyrunning?"
+choices:
+  - id: 10eb90e0-1162-4ed6-9ecd-dbd1d971f729
+    text: "Ruth Croft"
+  - id: a310314d-be8f-4b71-ab65-a009d07c4735
+    text: "Emelie Forsberg"
+  - id: 6b313dc0-2927-482c-b9d5-e9bbcf3989d1
+    text: "Lizzy Hawker"
+  - id: b6901a33-b995-4e24-af5c-700d6d4bad09
+    text: "Mira Rai"
+correct_choice_ids:
+  - a310314d-be8f-4b71-ab65-a009d07c4735
+explanation: "Forsberg is Swedish and competes in skyrunning and ski mountaineering."
+archived: false

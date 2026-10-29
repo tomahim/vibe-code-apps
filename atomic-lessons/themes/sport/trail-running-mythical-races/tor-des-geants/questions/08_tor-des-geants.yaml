@@ -1,0 +1,10 @@
+id: 1ce5a02f-be93-43e0-a005-35c9c2c26004
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "Which park is mentioned along with Mont Avic? (two words)"
+accepted_answers:
+  - "Gran Paradiso"
+  - "Gran Paradiso Natural Park"
+explanation: "The route goes through Gran Paradiso Natural Park."
+archived: false

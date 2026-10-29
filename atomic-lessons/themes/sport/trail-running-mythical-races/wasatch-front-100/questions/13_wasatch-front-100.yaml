@@ -1,0 +1,19 @@
+id: eefd30de-a1e4-4b32-9d50-0fddc5a32ec2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many of 298 starters finished in 2021?"
+choices:
+  - id: c7231c9b-ea5c-47cd-abb6-731c2f3e4824
+    text: "2"
+  - id: 573ff434-d815-42a0-950b-5243859e9b12
+    text: "165"
+  - id: c8343841-92b2-4dc3-b661-b83586960516
+    text: "11"
+  - id: 8f7bfd92-8989-4a11-a5d9-83b34392921b
+    text: "298"
+correct_choice_ids:
+  - 573ff434-d815-42a0-950b-5243859e9b12
+explanation: "In 2021, 165 of 298 starters finished."
+archived: false

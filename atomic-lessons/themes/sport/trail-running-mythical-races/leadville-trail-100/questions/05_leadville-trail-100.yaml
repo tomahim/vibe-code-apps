@@ -1,0 +1,19 @@
+id: a8095a08-0572-4e43-a631-ce5dc7e513b7
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who had the idea for the race?"
+choices:
+  - id: dc19ffc5-cf84-49fe-b70f-06ff2bfd147a
+    text: "Wendell Robie"
+  - id: fe3e7390-afa3-4d20-ad99-5ae545c3a795
+    text: "Ken Chlouber"
+  - id: 124a41ad-5832-4257-a62a-10917da23fc8
+    text: "Richard Barnum-Reece"
+  - id: ac539bd8-c930-45a5-b275-3801e7931113
+    text: "Gordy Ainsleigh"
+correct_choice_ids:
+  - fe3e7390-afa3-4d20-ad99-5ae545c3a795
+explanation: "Chlouber was a local miner and businessman."
+archived: false

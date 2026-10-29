@@ -1,0 +1,19 @@
+id: 8d7ec020-1116-48ac-aa2f-564203fb6282
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which of these peaks is on the route?"
+choices:
+  - id: 503bebdb-02f4-4678-a9b3-fb1b656ddba5
+    text: "The Three Peaks of Lavaredo"
+  - id: 65a9674d-8d93-4ebc-9e09-a342aca64914
+    text: "The Eiger"
+  - id: 0fd7184a-6650-40fc-a7ed-386f0943a5ac
+    text: "Mont Blanc"
+  - id: e3b96afc-41ce-43c2-b665-73b5b531c092
+    text: "Mount Fuji"
+correct_choice_ids:
+  - 503bebdb-02f4-4678-a9b3-fb1b656ddba5
+explanation: "It takes in the Three Peaks of Lavaredo."
+archived: false

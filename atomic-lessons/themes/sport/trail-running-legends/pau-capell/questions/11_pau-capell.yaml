@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5af65264-76ab-4e7e-829f-fbf7e16761ab
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which South American race has he won?"
+choices:
+  - id: b8da9124-e8a0-4488-8c4d-ca86becbe1bb
+    text: "Inca Trail Marathon"
+  - id: a0c53cc9-b388-4274-b432-94eae1ac71d0
+    text: "Amazon 200"
+  - id: 0953587f-f926-4483-a8e4-5069f6d5d02a
+    text: "Aconcagua Run"
+  - id: a2227176-1947-41f7-ad9f-c813a8039dbc
+    text: "Patagonia 100 Miler"
+correct_choice_ids:
+  - a2227176-1947-41f7-ad9f-c813a8039dbc
+explanation: "He won the Patagonia 100 Miler."
+archived: false

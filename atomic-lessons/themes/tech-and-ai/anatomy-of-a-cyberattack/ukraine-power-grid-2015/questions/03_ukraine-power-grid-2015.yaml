@@ -1,0 +1,19 @@
+id: 8c94cae0-9556-4ac1-8f4f-140874912df1
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What helped utilities restore power quickly?
+choices:
+- id: ab8987bb-28a8-4ca1-8bc8-5f3030bd1e66
+  text: The internet was switched off worldwide
+- id: 940866a7-7c68-439e-a8c1-182c95d27697
+  text: Attackers returned control
+- id: a4d7fb53-5330-40bd-a890-a363f8a054ae
+  text: Customers installed generators
+- id: 22acd0f8-d9d2-4ae3-b654-efccdcfa0884
+  text: Operators could switch equipment manually
+correct_choice_ids:
+- 22acd0f8-d9d2-4ae3-b654-efccdcfa0884
+explanation: E-ISAC/SANS reports that operators were forced to manual mode.
+archived: false

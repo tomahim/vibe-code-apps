@@ -1,0 +1,20 @@
+schema_version: 1
+id: f40b733e-833d-4a14-8aed-6ad1fd4e4307
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "On which trail did he set a record in October 2017?"
+choices:
+  - id: aacfbaeb-5529-4da5-8a30-c3ab0b6456a8
+    text: "Appalachian Trail"
+  - id: ae4b0307-4596-4207-bfe1-2488cd49df0b
+    text: "John Muir Trail"
+  - id: dfd204d1-e66f-4915-91ea-84192b5bff03
+    text: "Tour du Mont Blanc"
+  - id: f37d3ee7-3c4b-48c3-b863-91223fedbb8f
+    text: "Pacific Crest Trail"
+correct_choice_ids:
+  - ae4b0307-4596-4207-bfe1-2488cd49df0b
+explanation: "The John Muir Trail is in California's Sierra Nevada."
+archived: false

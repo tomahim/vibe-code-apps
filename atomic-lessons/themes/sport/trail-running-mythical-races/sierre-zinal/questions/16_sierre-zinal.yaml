@@ -1,0 +1,9 @@
+id: 31038f83-7968-4404-94b9-eab18890c9b3
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which Swiss canton is the race held?"
+accepted_answers:
+  - "Valais"
+explanation: "Sierre-Zinal takes place in the canton of Valais."
+archived: false

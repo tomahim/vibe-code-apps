@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2bbc741f-5228-4b9f-b9cd-a2075a272227
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Mexican town hosts the race he started?"
+choices:
+  - id: 6af2d190-80fb-4791-a805-0ef3e62735da
+    text: "Cancún"
+  - id: 051a57d6-1a86-4d57-a942-7d529d400039
+    text: "Oaxaca"
+  - id: b46283b5-e646-4b55-a521-96161c6b2bb3
+    text: "Tijuana"
+  - id: efdf123b-d10c-4db2-9a5c-e53c23cbe619
+    text: "Urique"
+correct_choice_ids:
+  - efdf123b-d10c-4db2-9a5c-e53c23cbe619
+explanation: "The race is held in Urique."
+archived: false

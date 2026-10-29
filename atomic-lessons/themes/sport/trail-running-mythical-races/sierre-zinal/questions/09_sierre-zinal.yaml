@@ -1,0 +1,19 @@
+id: 709678ab-3bf7-4b49-867e-0a0d2065ff0a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does the Tourist category receive?"
+choices:
+  - id: 6ac68d7d-bed1-4f02-9e6f-c2251995e80b
+    text: "A certificate with a time but no ranking"
+  - id: cdc96bf8-5362-4f74-89be-b56a21b330bd
+    text: "A medal for winning"
+  - id: 6ff85ed5-0e21-42e8-87fc-b4369e6fa93b
+    text: "A free entry for life"
+  - id: 645f2cbf-611e-4a66-9fc1-153dd3203368
+    text: "A cash prize"
+correct_choice_ids:
+  - 6ac68d7d-bed1-4f02-9e6f-c2251995e80b
+explanation: "Tourists get a certificate with their final time and no ranking."
+archived: false

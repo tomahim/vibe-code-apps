@@ -1,0 +1,20 @@
+schema_version: 1
+id: ad3385a5-271d-4345-a0ba-fa4f80c2f9fe
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What milestone did her 2016 Hong Kong win mark?"
+choices:
+  - id: 35b4ac63-f139-44bd-9f52-17edff827672
+    text: "First Nepalese woman to win an international ultra"
+  - id: fe5b4e37-5c2b-4d54-834e-5fc08f4301dc
+    text: "First woman to climb Everest"
+  - id: d7e177e7-34a2-4989-a1eb-5cf7210dde57
+    text: "First Olympic medal for Nepal"
+  - id: 20923b13-6e23-4c97-a237-8876d7e7c931
+    text: "First UTMB win"
+correct_choice_ids:
+  - 35b4ac63-f139-44bd-9f52-17edff827672
+explanation: "She was the first Nepalese woman to win an international ultra."
+archived: false

@@ -1,0 +1,19 @@
+id: 19984f55-9b6f-421b-b369-8c5f9efdb821
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is ransomware-as-a-service?
+choices:
+- id: e3f6a278-4cb1-45c9-8f33-84c33a12eaa8
+  text: A cloud backup service
+- id: 82a9b7ae-c5ad-4c36-b0a0-32670f4779ce
+  text: A software update channel
+- id: e7645b5d-5403-4dfa-82e4-629106185470
+  text: Developers rent malware to affiliates who share ransoms
+- id: b4b6f9d4-40b7-431c-aa63-37af886876f2
+  text: A bank loan
+correct_choice_ids:
+- e7645b5d-5403-4dfa-82e4-629106185470
+explanation: CISA's alert describes DarkSide as ransomware-as-a-service.
+archived: false

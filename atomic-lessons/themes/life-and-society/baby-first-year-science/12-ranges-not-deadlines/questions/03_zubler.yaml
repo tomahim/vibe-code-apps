@@ -1,0 +1,19 @@
+id: e91804f3-54de-4cf8-b1d9-ff62acbeac12
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The CDC's 2022 milestone placement was based on:"
+choices:
+  - id: 44482028-fa86-4b94-bd49-1847465d02df
+    text: "A published evidence review, placed where at least 75% of children show the skill"
+  - id: 5b6ac50a-1742-4c7d-a889-71edf1749c85
+    text: "Expert guesswork alone"
+  - id: 6662a9b8-4eb1-4e4b-96d8-24eca9534221
+    text: "A survey of parents' wishes"
+  - id: 91d2a273-25aa-4aee-96ef-649ac9c587d5
+    text: "The average age of achievement"
+correct_choice_ids:
+  - 44482028-fa86-4b94-bd49-1847465d02df
+explanation: "Zubler and colleagues' evidence review set each milestone at the 75% attainment line to make absence actionable."
+archived: false

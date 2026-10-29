@@ -1,0 +1,10 @@
+id: a2b9658c-86cb-4bf8-a75b-081ce82660af
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "How many litres of water must runners carry at minimum? (number)"
+accepted_answers:
+  - "1"
+  - "one"
+explanation: "At least 1 litre of water."
+archived: false

@@ -1,0 +1,19 @@
+id: 0a587d91-309d-4f70-ad5d-667fe68efd3f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What phrase does the history use for Wasatch's difficulty?"
+choices:
+  - id: 458ff62f-9a0b-45e6-b900-3c68714a18e6
+    text: "Short"
+  - id: 9e30db5b-cfd1-4c81-9ad0-2b2c30edb31e
+    text: "Gentle"
+  - id: c08f18df-5b6f-4fa4-b0c7-755089772e29
+    text: "Predictable"
+  - id: 06786339-91e6-4dfb-8e28-b606f9653343
+    text: "Mind-boggling"
+correct_choice_ids:
+  - 06786339-91e6-4dfb-8e28-b606f9653343
+explanation: "Miller says what has not changed is Wasatch's mind-boggling difficulty."
+archived: false

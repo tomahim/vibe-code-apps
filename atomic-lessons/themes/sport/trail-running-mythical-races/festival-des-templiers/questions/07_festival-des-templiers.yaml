@@ -1,0 +1,19 @@
+id: cbfeae33-d65a-4c46-856c-09ad21bc8e1b
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Who won the first race?"
+choices:
+  - id: 9a77f9cf-06f5-4551-b91f-31de543af3ba
+    text: "Patrick Renard"
+  - id: 3af122f8-27bd-4ee4-b473-7bc246defb69
+    text: "Gordy Ainsleigh"
+  - id: c3ec81b3-9f43-4b4f-845d-f873618c09a3
+    text: "Marco Olmo"
+  - id: 763190bc-5f5b-46c0-99dc-eae8e1e61fcd
+    text: "Kilian Jornet"
+correct_choice_ids:
+  - 9a77f9cf-06f5-4551-b91f-31de543af3ba
+explanation: "Patrick Renard opened the honour roll."
+archived: false

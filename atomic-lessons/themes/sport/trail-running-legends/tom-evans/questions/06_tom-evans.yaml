@@ -1,0 +1,20 @@
+schema_version: 1
+id: 827e07d5-1b8d-4fcb-a655-00d8b2fcf32f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which desert race gave Evans his breakthrough in 2017?"
+choices:
+  - id: 4a25e536-70d3-4300-9ffa-ca2d04e9e62e
+    text: "Marathon des Sables"
+  - id: 0a483125-e6de-449c-b6a6-45a3b1fe0464
+    text: "Atacama Crossing"
+  - id: f1751989-4c43-49df-8ab2-38e6e44a54f7
+    text: "Badwater"
+  - id: 7e466a05-bf46-4ab1-b3f7-f568d31bea60
+    text: "Gobi March"
+correct_choice_ids:
+  - 4a25e536-70d3-4300-9ffa-ca2d04e9e62e
+explanation: "He finished third overall."
+archived: false

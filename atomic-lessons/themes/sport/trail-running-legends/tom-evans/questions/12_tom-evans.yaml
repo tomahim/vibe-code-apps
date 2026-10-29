@@ -1,0 +1,20 @@
+schema_version: 1
+id: 69fbe2cc-7676-40f3-8591-61bd69b2b369
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which race did Evans win in New Zealand in 2020?"
+choices:
+  - id: fae4c9c7-a3f4-41a0-aeab-1c91f17fa22b
+    text: "Tarawera Ultramarathon"
+  - id: 87e28dd2-4816-4b5a-8a42-506607c6cea2
+    text: "Hillary Trail"
+  - id: 08caf10c-4df3-4a37-a653-230cd7d0f8a7
+    text: "Kepler Challenge"
+  - id: f4eadb35-fbb1-4fd8-8221-94df34db482a
+    text: "Routeburn Classic"
+correct_choice_ids:
+  - fae4c9c7-a3f4-41a0-aeab-1c91f17fa22b
+explanation: "He set a course record in 8:03:29."
+archived: false

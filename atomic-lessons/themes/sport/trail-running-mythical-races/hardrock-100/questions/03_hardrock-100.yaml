@@ -1,0 +1,19 @@
+id: 4b616279-c44f-4ed3-b3c0-f0046df9fbf1
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which town is not among the four mining towns?"
+choices:
+  - id: 0c92f9d9-eb97-43d8-ae28-6ea5207d2c0a
+    text: "Leadville"
+  - id: f7db6027-74ec-467e-86e6-871eb49faef6
+    text: "Telluride"
+  - id: 7cf354fa-1a70-46d7-9ca1-50aff10b5277
+    text: "Ouray"
+  - id: c53845ec-80c0-4c4b-bcf5-ad12985fdbae
+    text: "Silverton"
+correct_choice_ids:
+  - 0c92f9d9-eb97-43d8-ae28-6ea5207d2c0a
+explanation: "The four towns are Silverton, Lake City, Ouray and Telluride."
+archived: false

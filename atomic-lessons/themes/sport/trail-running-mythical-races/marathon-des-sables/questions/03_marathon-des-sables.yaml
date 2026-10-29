@@ -1,0 +1,19 @@
+id: cfc18e10-a226-4c74-973e-fb662109a69c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which desert is the original MDS?"
+choices:
+  - id: 04e1078e-f7d3-4546-8f73-1e099366d413
+    text: "The Gobi"
+  - id: 10e7ad43-cbf1-408e-b3a9-35185e5b31b5
+    text: "The Moroccan Sahara"
+  - id: b627fc60-3b58-415a-8486-d27a43096955
+    text: "The Mojave"
+  - id: 2ddc8511-20f4-47b5-b984-1abc1574ddc5
+    text: "The Atacama"
+correct_choice_ids:
+  - 10e7ad43-cbf1-408e-b3a9-35185e5b31b5
+explanation: "The original race is in the Moroccan Sahara."
+archived: false

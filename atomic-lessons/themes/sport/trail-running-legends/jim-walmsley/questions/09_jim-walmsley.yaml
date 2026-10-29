@@ -1,0 +1,20 @@
+schema_version: 1
+id: 9450d239-203e-4dcd-9e37-0ea848c5dc3c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What world best did he set on May 5, 2019?"
+choices:
+  - id: fc387d12-8d9a-42e7-be8b-6b06d2ac2145
+    text: "100 miles"
+  - id: ed0c6d77-d340-48a2-b86f-8eb41905a130
+    text: "50 miles"
+  - id: 8ee1e771-879f-4f66-9d5f-a23051118942
+    text: "24 hours"
+  - id: 2ef021bf-8f37-404b-9303-3efb37809ad6
+    text: "Marathon"
+correct_choice_ids:
+  - ed0c6d77-d340-48a2-b86f-8eb41905a130
+explanation: "He ran 4:50:07."
+archived: false

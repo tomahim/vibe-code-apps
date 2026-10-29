@@ -1,0 +1,20 @@
+schema_version: 1
+id: b33173fd-76aa-4aa6-88aa-97a2b8dd2ab9
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country was Croft born?"
+choices:
+  - id: 94dbc0e0-e52b-4b8d-8fcc-de0e3fbf9e2b
+    text: "New Zealand"
+  - id: 65107a47-f8d5-4830-b1d5-7227dd677ac1
+    text: "Australia"
+  - id: 581d05f7-bb82-487a-ae41-04aa62bca712
+    text: "Taiwan"
+  - id: 3d5faf2c-b52f-46a2-bbc9-a12718c273a9
+    text: "Canada"
+correct_choice_ids:
+  - 94dbc0e0-e52b-4b8d-8fcc-de0e3fbf9e2b
+explanation: "She was born in Greymouth, New Zealand."
+archived: false

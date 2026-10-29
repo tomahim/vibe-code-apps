@@ -1,0 +1,19 @@
+id: 0c175f0c-76ef-4264-bf4b-d2cd1eda3c17
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Why did they choose 100 miles?"
+choices:
+  - id: 8705c410-1aac-4868-8450-d11c3c30ca1c
+    text: "To match a horse race"
+  - id: 47c3c6f0-c0fd-45f0-a8f2-a229a49f3822
+    text: "For a world record"
+  - id: 1fdbea87-945f-4fbf-a2a9-4f8debeec8bc
+    text: "So visitors would stay overnight"
+  - id: 733a0bf9-ed24-4ffd-bd96-42cdb82cdaa8
+    text: "Because of the mine depth"
+correct_choice_ids:
+  - 1fdbea87-945f-4fbf-a2a9-4f8debeec8bc
+explanation: "If they were going to run 100 miles, they would stay overnight."
+archived: false

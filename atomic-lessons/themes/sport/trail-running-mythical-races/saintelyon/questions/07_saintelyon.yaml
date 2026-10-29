@@ -1,0 +1,19 @@
+id: f75d6f62-e0f1-4ec5-ab73-32dff827a838
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How is the race described in France?"
+choices:
+  - id: bbbcf237-2331-4a42-a2be-d46e81987f84
+    text: "The shortest race in France"
+  - id: a440c54c-a8c8-4fe8-93dc-c58b97a4be24
+    text: "A road cycling race"
+  - id: c5774443-7fe8-4338-b2dc-99e5c3381210
+    text: "The first marathon in France"
+  - id: 3ab1f28b-80ab-4712-9ba6-22a19d6f33ca
+    text: "The oldest ultra in France"
+correct_choice_ids:
+  - 3ab1f28b-80ab-4712-9ba6-22a19d6f33ca
+explanation: "Outside calls it the oldest ultra in France."
+archived: false

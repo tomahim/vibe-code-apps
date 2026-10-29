@@ -1,0 +1,19 @@
+id: d8c2897e-555b-4778-b29b-352272949e57
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Synaptic pruning refers to:"
+choices:
+  - id: c1d04ab2-7213-467c-99ee-525bbfa6498e
+    text: "Removing underused connections so efficient circuits remain"
+  - id: c6392e64-e08e-41af-8edc-5e9117e9ed72
+    text: "Adding myelin to axons"
+  - id: 9268d21a-f825-4196-a93e-db0e7680e9b4
+    text: "Growing new neurons"
+  - id: ce1b0c32-2944-44fa-91cb-eb50e4ca2736
+    text: "Cutting damaged tissue surgically"
+correct_choice_ids:
+  - c1d04ab2-7213-467c-99ee-525bbfa6498e
+explanation: "The young brain overproduces synapses, then use-dependent pruning keeps the active ones."
+archived: false

@@ -1,0 +1,19 @@
+id: c4e9c52a-b7ac-4fea-a285-2fcec37cafa5
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Fast mapping refers to:"
+choices:
+  - id: 6e5c6266-5201-4fee-88e4-202ebbf0289e
+    text: "Sketching a word's meaning from a single exposure"
+  - id: fec25a9d-8029-4ea3-be84-7c7a29e62892
+    text: "Memorizing dictionary definitions"
+  - id: a5d1e6f6-04f3-48b9-b177-4f0494ff858c
+    text: "Learning to read maps"
+  - id: d3cb1785-1af2-403c-bfa7-4a00a1f48a5b
+    text: "Speaking quickly"
+correct_choice_ids:
+  - 6e5c6266-5201-4fee-88e4-202ebbf0289e
+explanation: "Carey and Bartlett's chromium study showed children form usable partial meanings from one encounter."
+archived: false

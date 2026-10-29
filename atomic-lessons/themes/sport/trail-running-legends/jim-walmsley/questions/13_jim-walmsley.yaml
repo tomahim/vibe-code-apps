@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7592f468-78e7-4e5b-81e5-5b7a6a382be1
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which Olympic trials did he qualify for in 2019?"
+choices:
+  - id: 3bf9bf6f-8daa-49f3-a402-fc2486174eab
+    text: "The 2020 steeplechase trials"
+  - id: 591c188e-a692-4d74-b121-363fff58896a
+    text: "The 2020 marathon trials"
+  - id: 06b594cc-d185-488f-89fc-58eaf742a133
+    text: "The 2020 sprint trials"
+  - id: 72d18a96-0a01-492b-b532-6ffa0cf5865b
+    text: "The 2024 marathon trials"
+correct_choice_ids:
+  - 591c188e-a692-4d74-b121-363fff58896a
+explanation: "He qualified at the Houston Half Marathon."
+archived: false

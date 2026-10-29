@@ -1,0 +1,19 @@
+id: 31bd4eb8-4403-448f-9632-7f1a0d5a09e1
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How long did the course become after that change?"
+choices:
+  - id: 0d32c6d9-c7db-4811-8946-a03ec608a6d4
+    text: "101.9 miles"
+  - id: 5f35311f-920a-40c2-9daa-32dbf82f6628
+    text: "200 miles"
+  - id: 3b0a8e71-f7ac-409e-8275-d66566b285ee
+    text: "100.2 miles"
+  - id: ac714df9-f005-4ac2-be1e-ba8de67e2782
+    text: "98.8 miles"
+correct_choice_ids:
+  - 3b0a8e71-f7ac-409e-8275-d66566b285ee
+explanation: "The course was shortened from 101.9 miles to 100.2 miles."
+archived: false

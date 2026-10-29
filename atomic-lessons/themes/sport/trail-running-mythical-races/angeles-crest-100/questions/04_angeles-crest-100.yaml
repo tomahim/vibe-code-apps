@@ -1,0 +1,10 @@
+id: e861b499-7255-4e42-8cf8-8983fa757949
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In what mountains does the race take place? (name)"
+accepted_answers:
+  - "San Gabriel Mountains"
+  - "San Gabriel"
+explanation: "The race is in the San Gabriel Mountains."
+archived: false

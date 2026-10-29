@@ -1,0 +1,9 @@
+id: f0d65920-cb1b-4035-9f5d-a2d6d76ee95d
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "Which Netflix series told his story? (one word)"
+accepted_answers:
+  - "Losers"
+explanation: "The story was told in the series Losers."
+archived: false

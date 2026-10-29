@@ -1,0 +1,9 @@
+id: ac5901cb-e8a3-4ea8-b9ab-d17627a624c8
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In which country is Gran Canaria? (one word)"
+accepted_answers:
+  - "Spain"
+explanation: "The Canary Islands belong to Spain."
+archived: false

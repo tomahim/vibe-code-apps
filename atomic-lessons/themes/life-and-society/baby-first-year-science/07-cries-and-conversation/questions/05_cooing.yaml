@@ -1,0 +1,19 @@
+id: 5993355d-7e33-420b-bb82-675fabfba9f8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Cooing typically appears around:"
+choices:
+  - id: 0312a546-b0f5-4259-be5e-5340fede6632
+    text: "6 to 8 weeks, in calm social moments"
+  - id: a0633436-da44-48f7-a77d-31602f537677
+    text: "At birth"
+  - id: ac5fb5f9-ad51-48b2-8df6-f65eed894bc2
+    text: "6 months, during sleep"
+  - id: 077a3996-6019-48e8-88da-65a491f3ffc6
+    text: "12 months, with first words"
+correct_choice_ids:
+  - 0312a546-b0f5-4259-be5e-5340fede6632
+explanation: "Soft vowel-like coos emerge around 6-8 weeks, usually when the baby is calm and engaged."
+archived: false

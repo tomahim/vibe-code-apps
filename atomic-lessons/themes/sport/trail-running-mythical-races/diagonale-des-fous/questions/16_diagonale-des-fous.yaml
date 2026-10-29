@@ -1,0 +1,11 @@
+id: 14e4fcfb-fd7d-4718-ab59-9cdb8f857a0c
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What was the last finisher's time in 2011? (hours and minutes)"
+accepted_answers:
+  - "65h47"
+  - "65h 47"
+  - "65 hours 47 minutes"
+explanation: "The table lists 65h47 for the last finisher."
+archived: false

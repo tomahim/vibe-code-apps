@@ -1,0 +1,19 @@
+id: f1caafe1-bb3c-4854-811b-45dddbaacc3e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In what year did the race begin?"
+choices:
+  - id: e6fbfde8-aa3a-464d-97e2-fab96abdb2b5
+    text: "2009"
+  - id: b7c0635b-8f49-48a6-a791-141f58a22286
+    text: "1999"
+  - id: 695a3f10-d57a-450f-bddf-11bdedb46785
+    text: "2019"
+  - id: f0a0a156-9919-4162-889a-15a0b79881e4
+    text: "1989"
+correct_choice_ids:
+  - e6fbfde8-aa3a-464d-97e2-fab96abdb2b5
+explanation: "The race has taken place since 2009."
+archived: false

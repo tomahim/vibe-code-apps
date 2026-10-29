@@ -1,0 +1,19 @@
+id: f549b068-82a3-4148-b06f-13c89d21c1f6
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Babies commonly turn when their name is called from about:"
+choices:
+  - id: 72891b16-af76-439a-998d-a20dfd6f617f
+    text: "5 to 6 months"
+  - id: dd7af99d-13ca-45d6-8c14-ef86ca103757
+    text: "2 weeks"
+  - id: 7a7b6add-ad25-409b-bc97-8fd1dd9e90dc
+    text: "15 months"
+  - id: 9b31e5cc-fc74-4f02-97c3-648a8bbafa09
+    text: "2 years"
+correct_choice_ids:
+  - 72891b16-af76-439a-998d-a20dfd6f617f
+explanation: "Name response is an early, observable sign that comprehension is running ahead of speech."
+archived: false

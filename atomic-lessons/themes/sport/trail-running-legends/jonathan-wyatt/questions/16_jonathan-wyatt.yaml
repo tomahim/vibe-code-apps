@@ -1,0 +1,9 @@
+id: 1d152ba1-a15c-459d-b10e-e4ed1eafe188
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which Norwegian town do Wyatt and Confortola hold NutenOpp course records?"
+accepted_answers:
+  - "Rosendal"
+explanation: "The race is held in Rosendal."
+archived: false

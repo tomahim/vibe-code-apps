@@ -1,0 +1,19 @@
+id: ad504321-f95f-4121-851e-64b69e061629
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "By about four months, babies begin to:"
+choices:
+  - id: df35de3b-37df-44d3-9459-76d55dca99d3
+    text: "Match speech sounds to the lip movements that make them"
+  - id: 3890d9d5-3070-4074-9ec7-c61bad2e0b12
+    text: "Read full words"
+  - id: c082a837-babc-43ca-88fe-1a1c92e8c515
+    text: "Ignore faces while listening"
+  - id: 06617286-2f3a-4ab6-9994-d089d4c3163a
+    text: "Prefer silence"
+correct_choice_ids:
+  - df35de3b-37df-44d3-9459-76d55dca99d3
+explanation: "Cross-sense binding starts early: infants link the sound of speech to the sight of its production."
+archived: false

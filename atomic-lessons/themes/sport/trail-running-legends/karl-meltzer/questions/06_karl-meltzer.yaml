@@ -1,0 +1,20 @@
+schema_version: 1
+id: 6b9b9007-d6c9-4ca9-b330-d042636e6c5a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many 100 mile wins did Meltzer have as of December 2021?"
+choices:
+  - id: e75f5b01-3442-4263-8150-e8b31fcb6a23
+    text: "80"
+  - id: f1a9e805-143b-405c-a02d-1a2107e53dfb
+    text: "45"
+  - id: ce56ba03-1bc3-4ced-9576-9cec81797c54
+    text: "100"
+  - id: 2ca78205-360d-44e3-b2b3-86c7e84809e8
+    text: "12"
+correct_choice_ids:
+  - f1a9e805-143b-405c-a02d-1a2107e53dfb
+explanation: "He had 45 wins by December 11, 2021."
+archived: false

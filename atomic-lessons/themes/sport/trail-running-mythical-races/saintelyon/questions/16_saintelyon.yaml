@@ -1,0 +1,9 @@
+id: ff3fc59c-692f-4e40-9fd0-594949075519
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In what year was the Lyon SaintéLyon ultra formula created? (year)"
+accepted_answers:
+  - "2019"
+explanation: "The Lyon SaintéLyon has existed since 2019."
+archived: false

@@ -1,0 +1,19 @@
+id: 96bbb65c-7d6e-439f-b977-eeeb0ef76a4e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "All infant research conclusions ultimately rest on:"
+choices:
+  - id: 09f3de29-f45a-44ec-898a-e0b58525913b
+    text: "Inference from observable proxies like looking or sucking"
+  - id: 963f5d6f-b5d9-4fd7-a482-e2d7c0da73c1
+    text: "Direct verbal answers"
+  - id: 48ab57cd-8582-41c3-89f9-dac615cb5b10
+    text: "Brain scans alone"
+  - id: 9e8a058b-bb2a-4bd7-afbd-7120de73b76a
+    text: "Parent guesses"
+correct_choice_ids:
+  - 09f3de29-f45a-44ec-898a-e0b58525913b
+explanation: "Babies cannot report, so every claim is inferred from a measurable behavior or physiological signal."
+archived: false

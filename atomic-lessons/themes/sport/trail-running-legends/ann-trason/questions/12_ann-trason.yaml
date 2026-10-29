@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7468737c-8b52-427a-b444-5668ea232006
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which 2009 book describes Trason at the Leadville 100 in the 1990s?"
+choices:
+  - id: fcc7eac6-27c3-4498-9787-b91c6cc1736e
+    text: "The Long Run"
+  - id: 8992841b-dfd2-4a0b-a32a-495a1fcb66ba
+    text: "Eat and Run"
+  - id: cdf4ce29-15d9-4be8-b967-e16972a9fc19
+    text: "Ultramarathon Man"
+  - id: 505692a1-9e05-4f14-a083-68c86d1ae2fe
+    text: "Born to Run"
+correct_choice_ids:
+  - 505692a1-9e05-4f14-a083-68c86d1ae2fe
+explanation: "Christopher McDougall's Born to Run includes accounts of Leadville in the 1990s."
+archived: false

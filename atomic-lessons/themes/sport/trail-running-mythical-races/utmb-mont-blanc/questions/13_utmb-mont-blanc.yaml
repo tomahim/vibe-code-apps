@@ -1,0 +1,19 @@
+id: c6697726-840e-43b8-adc4-360339d8135d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "When did internationalisation begin?"
+choices:
+  - id: 4ab3398a-270a-4635-827a-7f30e563435b
+    text: "2014"
+  - id: 24a189bd-62a2-45d8-9241-b9af954e498f
+    text: "2020"
+  - id: b2dcbdd1-53b0-4865-9c67-d05a648418fd
+    text: "2003"
+  - id: 12097545-2600-4ffd-b196-09881fc453fb
+    text: "1986"
+correct_choice_ids:
+  - 4ab3398a-270a-4635-827a-7f30e563435b
+explanation: "The UTWT was created in 2014."
+archived: false

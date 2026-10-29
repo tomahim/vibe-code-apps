@@ -1,0 +1,9 @@
+id: 318a5399-378f-419e-9ea9-11178fc83b23
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In which year was the first UTMF held? (year)"
+accepted_answers:
+  - "2012"
+explanation: "The first UTMF was in 2012."
+archived: false

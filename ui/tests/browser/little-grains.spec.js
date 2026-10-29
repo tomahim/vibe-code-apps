@@ -7,7 +7,7 @@ const id = {
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
 function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false } = {}) {
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
-  const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
+  const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
   page.route('**/api/learning/**', route => {
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
     const url = new URL(route.request().url());
@@ -29,10 +29,76 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       const correctAnswer = wrong ? 'Use a soft towel.' : 'The bath water is warm.';
       const correct = typed ? answer.toLowerCase().replace(/[^a-z\s]/g, '').trim() === correctAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim() : answer === 'warm';
       if (correct) answered = true; else wrong = true;
-      return route.fulfill({ status: 201, json: { correct, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
+      return route.fulfill({ status: 201, json: { correct, carrot_earned: correct && !review, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
     }
-    if (url.pathname.endsWith('/leaderboard/')) { const score = url.searchParams.get('currency') === 'carrots' ? 1 : 106; return route.fulfill({ json: { rows: [{ rank: 1, name: 'Learner', score, is_self: true }], self: { rank: 1, score, is_self: true } } }); }
+    if (url.pathname.endsWith('/leaderboard/')) {
+      const currency = url.searchParams.get('currency') === 'carrots' ? 'carrots' : 'drops';
+      const period = url.searchParams.get('period') || 'weekly';
+      const score = currency === 'carrots' ? 1 : 106;
+      return route.fulfill({ json: { currency, period, timezone: 'UTC', rows: [{ rank: 1, name: 'aurore', score: currency === 'carrots' ? 3 : 140, is_self: false }, { rank: 2, name: 'Learner', score, is_self: true }], self: { rank: 2, score, is_self: true }, chart: mockChart(currency, period) } });
+    }
   });
+}
+
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// Buckets covering the full calendar window, the way the pre-fix API sent
+// them: future days and weeks included. Activity started yesterday, so the
+// chart must cut this down to recorded history on its own.
+function historyWindow(period, now = new Date()) {
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const yesterday = today - 864e5;
+  const monthStart = (ms) => { const d = new Date(ms); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1); };
+  let starts;
+  if (period === 'weekly') {
+    const monday = today - ((now.getUTCDay() + 6) % 7) * 864e5;
+    starts = Array.from({ length: 7 }, (_, i) => monday + i * 864e5);
+  } else if (period === 'monthly') {
+    // Monday-Sunday weeks clipped to the month, future weeks included.
+    const first = monthStart(today);
+    const monthEnd = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1);
+    const firstMonday = first - ((new Date(first).getUTCDay() + 6) % 7) * 864e5;
+    starts = [];
+    for (let monday = firstMonday; monday < monthEnd; monday += 7 * 864e5) starts.push(Math.max(monday, first));
+  } else {
+    starts = [...new Set([yesterday, today].map(monthStart))];
+  }
+  return starts.map((start) => {
+    const d = new Date(start);
+    const monday = start - ((d.getUTCDay() + 6) % 7) * 864e5;
+    const end = period === 'weekly' ? start + 864e5
+      : period === 'monthly' ? Math.min(monday + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1))
+      : Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
+    const lastDay = new Date(end - 864e5);
+    const label = period === 'weekly' ? DAYS[(d.getUTCDay() + 6) % 7]
+      : period === 'monthly' ? (d.getUTCDate() === lastDay.getUTCDate() ? `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}` : `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}\u2013${lastDay.getUTCDate()}`)
+      : d.getUTCFullYear() === now.getUTCFullYear() ? MONTHS[d.getUTCMonth()]
+      : `${MONTHS[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`;
+    return { label, start: new Date(start).toISOString(), end: new Date(end).toISOString(), current: start <= now.getTime() && now.getTime() < end };
+  });
+}
+
+function mockChart(currency, period) {
+  const buckets = historyWindow(period);
+  const totals = currency === 'carrots' ? { self: 1, other: 3 } : { self: 106, other: 140 };
+  const now = new Date();
+  const yesterday = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - 864e5;
+  // Cumulative series: nothing before yesterday, the rest earned between
+  // yesterday and today, flat into the future buckets, ending exactly on
+  // the leaderboard scores.
+  const today = yesterday + 864e5;
+  const points = (total) => buckets.map((b) => {
+    const start = Date.parse(b.start), end = Date.parse(b.end);
+    if (end <= yesterday) return 0;
+    const hasYesterday = start <= yesterday && yesterday < end;
+    const hasToday = start <= today && today < end;
+    if (hasYesterday && !hasToday) return Math.round((total * 4) / 5);
+    return total;
+  });
+  return { period, buckets, series: [
+    { name: 'aurore', is_self: false, points: points(totals.other) },
+    { name: 'Learner', is_self: true, points: points(totals.self) },
+  ]};
 }
 
 test('Little Grains requires sign-in', async ({ page }) => {
@@ -65,7 +131,7 @@ test('garden, lesson progress and leaderboard use the API', async ({ page }) => 
   await expect(reader.getByText('Lesson in bloom')).toBeVisible();
   await reader.getByRole('button', { name: 'Back to the garden' }).click();
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
-  await expect(page.getByRole('dialog', { name: 'Leaderboard' }).getByText('Learner')).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Leaderboard' }).locator('.grains-ranking .name').filter({ hasText: 'Learner' })).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-desktop.png' });
 });
 
@@ -86,7 +152,7 @@ test('reward totals and leaderboard explain the same Drops and Carrots rules', a
   const carrotInfo = page.getByRole('dialog', { name: 'How Carrots are earned' });
   await expect(carrotInfo).toBeVisible();
   const carrotDescription = await carrotInfo.locator('p').textContent();
-  expect(carrotDescription).toContain('first time you answer a checkpoint correctly');
+  expect(carrotDescription).toContain('first time you answer each question correctly');
   await carrotInfo.getByRole('button', { name: 'Close reward information' }).click();
 
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
@@ -252,11 +318,150 @@ test('phone garden keeps the path list and leaderboard usable', async ({ page })
   await expect(page.locator('.lg-panel').getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-path-mobile.png' });
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
-  await expect(page.getByRole('dialog', { name: 'Leaderboard' }).getByText('Learner')).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Leaderboard' }).locator('.grains-ranking .name').filter({ hasText: 'Learner' })).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-mobile.png' });
   await page.getByRole('dialog', { name: 'Leaderboard' }).getByRole('button', { name: 'Close leaderboard' }).click();
   await page.getByRole('button', { name: /How Drops are earned/ }).click();
   await expect(page.getByRole('dialog', { name: 'How Drops are earned' })).toBeInViewport();
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(390);
+});
+
+test('the leaderboard charts the growth of Drops and Carrots over time', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page);
+  // Keep this test fast: the chart does not depend on the 3D garden scene.
+  await page.route('**/api/learning/garden/', route => route.fulfill({ json: { themes: [], rewards: { drops: 0, carrots: 0 }, recent_lessons: [] } }));
+  await page.goto('/apps/little-grains');
+  await page.getByRole('button', { name: 'Open leaderboard' }).click();
+  const leaderboard = page.getByRole('dialog', { name: 'Leaderboard' });
+  const chart = leaderboard.locator('.grains-chart');
+  // The mock records activity since yesterday only: the chart must cover
+  // exactly that window, with no future or empty leading buckets.
+  const now = new Date();
+  const yesterday = new Date(now.getTime() - 864e5);
+  const weekday = (now.getUTCDay() + 6) % 7; // Monday = 0
+  const weeklyLabels = DAYS.slice(Math.max(0, weekday - 1), weekday + 1);
+  const weekLabel = (d) => {
+    const day = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+    const monday = day - ((d.getUTCDay() + 6) % 7) * 864e5;
+    const start = new Date(Math.max(monday, Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)));
+    const last = new Date(Math.min(monday + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1)) - 864e5);
+    return start.getUTCDate() === last.getUTCDate()
+      ? `${MONTHS[start.getUTCMonth()]} ${start.getUTCDate()}`
+      : `${MONTHS[start.getUTCMonth()]} ${start.getUTCDate()}\u2013${last.getUTCDate()}`;
+  };
+  const monthlyLabels = yesterday.getUTCMonth() === now.getUTCMonth()
+    ? [...new Set([weekLabel(yesterday), weekLabel(now)])]
+    : [weekLabel(now)];
+  const monthLabel = (d) => (d.getUTCFullYear() === now.getUTCFullYear() ? MONTHS[d.getUTCMonth()] : `${MONTHS[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`);
+  const overallLabels = [...new Set([yesterday, now].map(monthLabel))];
+  await expect(chart.getByRole('img', { name: 'drops growth, day by day' })).toBeVisible({ timeout: 20000 });
+  await expect(chart.locator('.grains-chart-x')).toHaveText(weeklyLabels);
+  await expect(chart.locator('.grains-chart-legend')).toContainText('aurore');
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-weekly-mobile.png' });
+  await leaderboard.getByRole('button', { name: 'Monthly' }).click();
+  await expect(chart.getByRole('img', { name: 'drops growth, week by week' })).toBeVisible({ timeout: 20000 });
+  await expect(chart.locator('.grains-chart-x')).toHaveText(monthlyLabels);
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-monthly-mobile.png' });
+  await leaderboard.getByRole('button', { name: 'Overall' }).click();
+  await expect(chart.getByRole('img', { name: 'drops growth, month by month' })).toBeVisible({ timeout: 20000 });
+  await expect(chart.locator('.grains-chart-x')).toHaveText(overallLabels);
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-overall-mobile.png' });
+  await leaderboard.getByRole('button', { name: /Carrots/ }).click();
+  await expect(chart.getByRole('img', { name: 'carrots growth, month by month' })).toBeVisible({ timeout: 20000 });
+  await chart.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '/tmp/little-grains-chart-carrots-mobile.png' });
+});
+
+test('phone practice quiz stays open at zero gaps with unread lessons', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const q1 = 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', q2 = 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3';
+  const q3 = 'c7b0a1d2-1111-4e2a-9c3d-555555555555';
+  const lessonQuestion = { id: q3, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 3, after_card_position: 1, type: 'multiple_choice', prompt: 'When can a newborn have a first bath?', options: [{ id: 'now', text: 'Right after birth' }, { id: 'cord', text: 'Once the cord has fallen' }] };
+  const quizQuestions = [
+    { id: q1, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 1, after_card_position: 1, type: 'multiple_choice', prompt: 'How often should you bathe a newborn?', options: [{ id: 'daily', text: 'Every day' }, { id: 'few', text: 'Two or three times a week' }] },
+    { id: q2, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 2, after_card_position: 1, type: 'type_answer_question', prompt: 'Translate: « La crème hydratante. »', options: [] },
+  ];
+  const solved = new Set();
+  const progress = () => ({ cards_completed: 4, cards_total: 5, checkpoints_correct: 1, checkpoints_total: 2, questions_correct: 1 + solved.size, questions_total: 4, lessons_completed: solved.size === 2 ? 1 : 0, lessons_total: 2, started: true, completed: false });
+  const lesson = () => ({ ...row(id.lesson, 'Bath time and care'), progress: { ...progress(), cards_total: 4, checkpoints_total: 1, questions_total: 3, lessons_total: 1, completed: solved.size === 2 } });
+  await page.route('**/api/learning/**', route => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson(), { ...row("unread-lesson", "Still unread"), position: 2, progress: { cards_completed: 0, cards_total: 1, questions_correct: 0, questions_total: 1, started: false, completed: false } }] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
+    if (url.pathname.endsWith('/catch-up/')) {
+      const done = solved.size === 2;
+      // One shared pool, even when gaps are zero and another lesson is unread.
+      return route.fulfill({ json: { learning_path_id: id.path, eligible: true, remaining: done ? 0 : quizQuestions.length, questions: done ? [lessonQuestion, ...quizQuestions] : [...quizQuestions, lessonQuestion] } });
+    }
+    if (url.pathname.endsWith('/question-attempts/')) {
+      const body = JSON.parse(route.request().postData());
+      expect(body.attempt_type).toBeUndefined(); // No quiz type: the server derives initial/retry/review.
+      const correct = body.answer === 'few' || body.answer === 'cord' || body.answer.toLowerCase().includes('moistur');
+      if (correct && body.question_id !== q3) solved.add(body.question_id);
+      return route.fulfill({ status: 201, json: { correct, carrot_earned: correct, attempt_type: 'retry', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
+    }
+    return route.fulfill({ json: {} });
+  });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await panel.getByRole('button', { name: /English for babies/ }).click();
+  await expect(panel.getByRole('heading', { name: 'English for babies' })).toBeVisible();
+  // The path gauge includes the unread lesson: 1 of 4 questions correct.
+  const gauge = panel.locator('.lg-gauge');
+  await expect(gauge).toContainText('Questions answered correctly');
+  await expect(gauge).toContainText('25%');
+  await expect(gauge).toContainText('1 of 4 questions on this path');
+  // The lesson row is fully read but below 100%: it carries its percentage.
+  await expect(panel.locator('.lg-lessons .pc')).toHaveText('33%');
+  await page.screenshot({ path: '/tmp/lg-204-gauge-mobile.png' });
+
+  await panel.getByRole('button', { name: /Practice quiz/ }).click();
+  const quiz = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
+  await expect(quiz.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
+  await expect(quiz.getByText('How often should you bathe a newborn?')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-204-quiz-question-mobile.png' });
+
+  // A wrong answer re-queues the question at the end of the session.
+  await quiz.getByLabel('Every day', { exact: true }).check();
+  await quiz.getByRole('button', { name: 'Check answer' }).click();
+  await expect(quiz.getByText('Not quite. It comes back at the end of this quiz.')).toBeVisible();
+  await quiz.getByRole('button', { name: 'Continue →' }).click();
+  await expect(quiz.getByText('Translate: « La crème hydratante. »')).toBeVisible();
+  await quiz.getByRole('textbox', { name: 'Your answer' }).fill('The moisturizer!');
+  await quiz.getByRole('button', { name: 'Check answer' }).click();
+  await expect(quiz.getByText('That’s right!')).toBeVisible();
+  await quiz.getByRole('button', { name: 'Continue →' }).click();
+  // The answered question is still in the shared pool, after the priority tiers.
+  await expect(quiz.getByText('When can a newborn have a first bath?')).toBeVisible();
+  await quiz.getByLabel('Once the cord has fallen', { exact: true }).check();
+  await quiz.getByRole('button', { name: 'Check answer' }).click();
+  await quiz.getByRole('button', { name: 'Continue →' }).click();
+  // The re-queued question is back; answer it correctly this time.
+  await expect(quiz.getByText('How often should you bathe a newborn?')).toBeVisible();
+  await quiz.getByLabel('Two or three times a week', { exact: true }).check();
+  await quiz.getByRole('button', { name: 'Check answer' }).click();
+  await quiz.getByRole('button', { name: 'Continue →' }).click();
+  await expect(quiz.getByText('3 of 3 answered correctly')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-204-quiz-summary-mobile.png' });
+  await quiz.getByRole('button', { name: 'Back to the garden' }).click();
+  // Read-lesson gaps are closed, but another lesson is unread. Practice stays open.
+  await expect(panel.locator('.lg-quiz-hint')).toHaveText('Keep practicing questions from your read lessons');
+  await expect(panel.locator('.lg-gauge')).toContainText('75%');
+  await expect(panel.locator('.lg-lessons .pc')).toHaveCount(0);
+  await page.screenshot({ path: '/tmp/lg-unified-zero-gaps-mobile.png' });
+
+  // At zero eligible gaps the quiz still serves answered questions.
+  await panel.getByRole('button', { name: '🌱 Practice quiz' }).click();
+  const review = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
+  await expect(review.getByText('PRACTICE QUIZ', { exact: true })).toBeVisible();
+  await expect(review.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
+  await expect(review.getByText('When can a newborn have a first bath?')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-unified-practice-mobile.png' });
 });

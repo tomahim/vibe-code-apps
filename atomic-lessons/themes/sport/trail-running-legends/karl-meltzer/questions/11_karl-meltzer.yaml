@@ -1,0 +1,20 @@
+schema_version: 1
+id: a3659aab-ce52-4eed-b8e7-bfe5395905d3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "On which date did Meltzer set the Appalachian Trail record in 2016?"
+choices:
+  - id: cdc000f9-27b2-49a8-b7c5-e1ecd8c3ff7e
+    text: "December 8"
+  - id: 7364c172-a4be-4195-8c95-5645bd5a2b77
+    text: "July 13"
+  - id: 9de9b65e-9ed1-495c-b878-3ba3ad036404
+    text: "September 18"
+  - id: 784c5fc4-c166-490c-a503-509215a31308
+    text: "June 1"
+correct_choice_ids:
+  - 9de9b65e-9ed1-495c-b878-3ba3ad036404
+explanation: "He finished on September 18, 2016."
+archived: false

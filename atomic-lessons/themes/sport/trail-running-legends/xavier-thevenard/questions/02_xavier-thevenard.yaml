@@ -1,0 +1,20 @@
+schema_version: 1
+id: bafaf0c4-ab64-4607-9c92-2f01104d05ea
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which ski resort is Thévenard's home?"
+choices:
+  - id: 67f2c70f-c686-4c2d-bf22-57b9427e881e
+    text: "Les Plans d'Hotonnes"
+  - id: a5f9e7eb-b164-43dd-a1a2-7088f217e822
+    text: "Courchevel"
+  - id: 428eb40a-32f0-47fc-8ddc-6ee577b1d213
+    text: "Chamonix"
+  - id: 6cb4f668-3d32-413f-86e3-497ee9c97319
+    text: "Val d'Isère"
+correct_choice_ids:
+  - 67f2c70f-c686-4c2d-bf22-57b9427e881e
+explanation: "It is in the Jura mountains."
+archived: false

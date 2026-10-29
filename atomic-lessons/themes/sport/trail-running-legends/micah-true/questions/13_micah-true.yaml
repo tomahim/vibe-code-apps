@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2903c4c4-d0ce-43a2-91b8-cecc4524bb2e
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which book made True famous?"
+choices:
+  - id: 2150bce4-2e81-4207-8704-a31032d95330
+    text: "Eat and Run"
+  - id: ce2ca549-3ffd-4c0c-9243-39d32007304a
+    text: "Born to Run"
+  - id: 3e225e68-e0ac-440b-8d56-051a4e6e5bff
+    text: "Once a Runner"
+  - id: 64fdfdd4-6d47-4865-bdf8-103ba948e1d3
+    text: "Running with the Kenyans"
+correct_choice_ids:
+  - ce2ca549-3ffd-4c0c-9243-39d32007304a
+explanation: "Christopher McDougall wrote it in 2009."
+archived: false

@@ -1,0 +1,19 @@
+id: 3d3db7ee-8e3d-4ccf-bf49-15e8d0d91d24
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Most infant MRI is done:"
+choices:
+  - id: d4cb1a2a-c06e-4815-a311-50d18c525e99
+    text: "During natural sleep with careful logistics"
+  - id: e0fccfc0-2eac-4218-8049-a05e7e01b901
+    text: "While babies play games"
+  - id: f6650ad9-c983-4c93-9179-656b31b9f8ba
+    text: "Under routine sedation for research"
+  - id: df5a47b3-8db7-4a45-870c-22a59b670ed8
+    text: "In five seconds"
+correct_choice_ids:
+  - d4cb1a2a-c06e-4815-a311-50d18c525e99
+explanation: "Motion rules out awake scanning; modern research avoids sedation and scans sleeping infants."
+archived: false

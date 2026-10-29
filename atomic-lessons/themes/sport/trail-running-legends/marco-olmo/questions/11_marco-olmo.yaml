@@ -1,0 +1,20 @@
+schema_version: 1
+id: cd33a72c-70db-4db9-8aa4-c936862c78c5
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How old was Olmo when he won UTMB in 2007?"
+choices:
+  - id: 8293b43d-5ec4-46ec-98ab-7115483c0d7f
+    text: "70"
+  - id: 95808612-2bc5-4cab-af9d-d81e76d7ac54
+    text: "40"
+  - id: e2b6441a-8b77-4209-bee0-16fe27a5babd
+    text: "59"
+  - id: c85e07f5-b526-48d8-8e85-5389f4ee7d03
+    text: "50"
+correct_choice_ids:
+  - e2b6441a-8b77-4209-bee0-16fe27a5babd
+explanation: "He won again aged 59."
+archived: false

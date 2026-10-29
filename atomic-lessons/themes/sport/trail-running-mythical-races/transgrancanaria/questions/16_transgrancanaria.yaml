@@ -1,0 +1,11 @@
+id: 3b225417-ba26-4120-9eeb-78acfa32d3ad
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What type of race is the Open Agaldar described as? (two words)"
+accepted_answers:
+  - "fast and runnable"
+  - "fast runnable"
+  - "runnable"
+explanation: "The site calls it fast and runnable."
+archived: false

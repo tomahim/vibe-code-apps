@@ -1,0 +1,19 @@
+id: 2fe77b99-b03a-4095-944c-c59f6eb58916
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why did the worm overload machines so badly?
+choices:
+- id: 6d969fa7-6825-43f7-a2cf-7f01f666cb43
+  text: A random decision let it reinfect machines that were already infected
+- id: 75d07b19-7bbd-47bb-95b6-8bd04a1a93dd
+  text: It encrypted disks and demanded payment
+- id: af615f31-3977-4d95-a2af-e6b7e693ca08
+  text: It sent large files to every user by email
+- id: a7a98356-0fb9-431d-a8b1-b2941048dbfe
+  text: It deleted the operating system on each host
+correct_choice_ids:
+- 6d969fa7-6825-43f7-a2cf-7f01f666cb43
+explanation: Spafford reports that a random choice could override the already-infected check, so copies piled up and used all resources. The worm did not destroy files.
+archived: false

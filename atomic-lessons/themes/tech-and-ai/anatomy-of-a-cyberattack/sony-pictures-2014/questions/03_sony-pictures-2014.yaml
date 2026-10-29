@@ -1,0 +1,19 @@
+id: 67b17593-4d75-4a9e-b6e0-4081367182e7
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What did the FBI say on 19 December 2014?"
+choices:
+  - id: 59bd24ab-b2f3-4d2f-b1d7-8f53fccb6120
+    text: "The culprit was a former employee, confirmed in court"
+  - id: 6cb5b045-ef05-43e3-8ca5-0cbecbeae579
+    text: "The attack was caused by a hardware fault"
+  - id: e05625e3-8f80-4b37-ab71-261fb8486427
+    text: "No conclusion could be reached"
+  - id: 1f7a0edb-0e15-4338-8ae6-bde0032f0a5e
+    text: "The North Korean government was responsible, based partly on shared evidence"
+correct_choice_ids:
+  - 1f7a0edb-0e15-4338-8ae6-bde0032f0a5e
+explanation: "The FBI made a public attribution and said it could not share all evidence."
+archived: false

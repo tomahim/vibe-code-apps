@@ -1,0 +1,19 @@
+id: 3ec9ad9c-08b2-4ccc-ba2c-1d2ec9aa8d01
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which lesson best fits this incident?"
+choices:
+  - id: 6126dc78-dac8-4ea3-b173-3991a36321ad
+    text: "Only large companies can be targeted"
+  - id: 07b23446-ab04-4204-89ec-c6ddc04c5102
+    text: "Keep all computers offline"
+  - id: 0e9dabac-8249-4ea9-9499-7172d42a79ba
+    text: "Plan for coordinated response before a crisis, because ad hoc effort does not scale"
+  - id: 9abec9cc-e4b2-4d9d-a9c9-2247a23e1550
+    text: "Passwords never matter if the network is private"
+correct_choice_ids:
+  - 0e9dabac-8249-4ea9-9499-7172d42a79ba
+explanation: "The community responded through personal contacts, which led to a permanent coordination team."
+archived: false

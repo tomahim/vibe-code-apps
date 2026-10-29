@@ -1,0 +1,19 @@
+id: 216341f3-b0ad-442e-b0cf-a204edb0750d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What is the status of Stuxnet attribution?"
+choices:
+  - id: 349cff85-24bc-47b8-80d1-d2dc86f248bf
+    text: "Claimed in a public statement by Siemens"
+  - id: c7c5ce10-6c44-47b6-883c-bbdb2d3d5069
+    text: "Officially confirmed by a court judgment"
+  - id: 5d2afe6e-d6fd-41a6-9f98-b87aea452194
+    text: "Reported by media as US and Israeli, but never officially confirmed"
+  - id: a9886dbe-88d1-40f9-9a8a-5f5cbdf85e4c
+    text: "Proven to be a criminal gang"
+correct_choice_ids:
+  - 5d2afe6e-d6fd-41a6-9f98-b87aea452194
+explanation: "Credible reporting names the US and Israel, but governments have not officially acknowledged it."
+archived: false

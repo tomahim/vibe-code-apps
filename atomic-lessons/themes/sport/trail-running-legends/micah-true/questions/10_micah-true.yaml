@@ -1,0 +1,20 @@
+schema_version: 1
+id: 695576fc-17e1-4749-a1d1-df1edd28a340
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which Mexican state do the Tarahumara live?"
+choices:
+  - id: 99a4b566-d0f3-4009-97cc-0e10ae06c63e
+    text: "Chihuahua"
+  - id: c59153fd-ed8e-4cca-8ef5-597bee294fdb
+    text: "Jalisco"
+  - id: ed7d59dc-d2c8-479e-9376-76a879e9239e
+    text: "Sonora"
+  - id: ffe747b1-e4de-4d79-a696-e5b9c5bb1b6f
+    text: "Yucatán"
+correct_choice_ids:
+  - 99a4b566-d0f3-4009-97cc-0e10ae06c63e
+explanation: "They are from Chihuahua."
+archived: false

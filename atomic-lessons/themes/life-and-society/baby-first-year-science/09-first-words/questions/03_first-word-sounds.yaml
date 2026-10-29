@@ -1,0 +1,19 @@
+id: 0aaaa0d5-84bf-4583-8d7b-7500bd886c8d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "First words across languages reuse mama, dada, baba because these are:"
+choices:
+  - id: f8a0f783-6e23-4569-a77b-244886c9ad32
+    text: "The easy syllables practiced most in babbling"
+  - id: c80779f0-e78c-4925-b23b-87ee6077217f
+    text: "Universal grammar rules"
+  - id: 598d03b4-ef5c-4b09-9f33-b6e53ffdaf09
+    text: "Taught by all parents"
+  - id: fa951ca5-9d62-4d1f-80bf-cd0f47f0a39e
+    text: "Genetic words"
+correct_choice_ids:
+  - f8a0f783-6e23-4569-a77b-244886c9ad32
+explanation: "First words assemble from the baby's most-rehearsed babble inventory."
+archived: false

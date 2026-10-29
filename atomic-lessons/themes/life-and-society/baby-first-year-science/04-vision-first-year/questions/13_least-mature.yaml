@@ -1,0 +1,19 @@
+id: b65801f9-062f-428a-be2e-cdd58d92a907
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why is vision called the least mature sense at birth?"
+choices:
+  - id: f63f4f76-528b-4dd6-9bbf-f1880a93357e
+    text: "Its optics and cortex are still developing, unlike hearing and touch"
+  - id: 8dcafeca-38c0-4d11-93fb-17be2ea87893
+    text: "Newborns cannot see at all"
+  - id: bcd55ac0-e1f4-4fe4-bec9-611b2afb04f4
+    text: "It develops only after walking"
+  - id: 145a4720-f89b-4c92-9f9b-f848bd71c209
+    text: "It requires language first"
+correct_choice_ids:
+  - f63f4f76-528b-4dd6-9bbf-f1880a93357e
+explanation: "Vision is functional but unfinished at birth; hearing, touch and the chemical senses began developing prenatally."
+archived: false

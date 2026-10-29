@@ -1,0 +1,20 @@
+schema_version: 1
+id: c37d5a28-c941-47c5-bc13-9e84814b77cc
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was the name of Meltzer's online campaign during the 2008 run?"
+choices:
+  - id: 4b9f182f-9361-4256-a6d6-0105d33f53fc
+    text: "Trail Karl"
+  - id: 8b44377a-f996-449d-895c-4e25b380f324
+    text: "Run Karl Run"
+  - id: 431a490f-c526-429c-b42c-aafe6831cd5d
+    text: "Where's Karl?"
+  - id: 24e15a0c-7923-4299-a4e9-bb10fcace86a
+    text: "Speedgoat Live"
+correct_choice_ids:
+  - 431a490f-c526-429c-b42c-aafe6831cd5d
+explanation: "It kept fans updated."
+archived: false

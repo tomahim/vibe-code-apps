@@ -1,0 +1,9 @@
+id: aed9a94a-8dc5-4573-b1f2-49a4b6497d19
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Jurek win Western States for the first time?"
+accepted_answers:
+  - "1999"
+explanation: "His streak ran from 1999 to 2005."
+archived: false

@@ -1,0 +1,19 @@
+id: 0456fa87-2733-4a1b-92ec-f9659779aadb
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was the distance in 1989?"
+choices:
+  - id: 8f59e96d-e01e-424f-9f4f-2327fe1b315f
+    text: "112 km"
+  - id: b6f91dfe-e360-4d8b-8ac1-27fe77ed38e2
+    text: "170 km"
+  - id: 64b96797-8063-4ee4-bfed-1ef2244cbbdd
+    text: "330 km"
+  - id: e1155a8d-7bc9-4b2d-b80c-8edb95cf777c
+    text: "42 km"
+correct_choice_ids:
+  - 8f59e96d-e01e-424f-9f4f-2327fe1b315f
+explanation: "The first race measured 112 km."
+archived: false

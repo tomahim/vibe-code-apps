@@ -1,0 +1,19 @@
+id: c4293c06-894e-495d-97f7-ebd03bba0f16
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What scholarship does every Lake County High School graduate receive?"
+choices:
+  - id: 420e68dd-cc40-4fb4-a43c-ae4751197ea2
+    text: "$3,000"
+  - id: 211dec3f-adea-4358-afb8-2016fc7b7824
+    text: "$300"
+  - id: 7afe19fa-2269-49ea-9aa3-ce5b1c484356
+    text: "$30,000"
+  - id: 991cb92c-c372-4e27-9fa2-dd6d26785e21
+    text: "$1,000,000"
+correct_choice_ids:
+  - 420e68dd-cc40-4fb4-a43c-ae4751197ea2
+explanation: "The foundation awards $3,000 to every graduating senior."
+archived: false

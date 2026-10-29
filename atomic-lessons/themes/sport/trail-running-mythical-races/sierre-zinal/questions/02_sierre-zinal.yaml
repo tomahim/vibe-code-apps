@@ -1,0 +1,19 @@
+id: bc52a7b2-8dfc-4526-9ccb-ae46d3b6e66d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which valley was the race imagined?"
+choices:
+  - id: 7bf086c3-ca4f-4d6a-b422-30d5543be3ac
+    text: "Anniviers"
+  - id: 03026bb6-39bd-4b75-b017-eef01ae99006
+    text: "Aosta"
+  - id: ab99f16e-5e85-4380-ad96-8ed276699c1e
+    text: "Zermatt"
+  - id: 46bd1104-3295-49ac-9b9a-a2d863d84d1a
+    text: "Chamonix"
+correct_choice_ids:
+  - 7bf086c3-ca4f-4d6a-b422-30d5543be3ac
+explanation: "Pont imagined the race in the mountains of Anniviers."
+archived: false

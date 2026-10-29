@@ -1,0 +1,19 @@
+id: a9ad32c7-63f1-4566-a28e-a6d9a82db34f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "The strongest conclusions in infant science come when:"
+choices:
+  - id: 798b9f86-3294-451f-84f3-012a75253347
+    text: "Several different proxies and labs agree"
+  - id: a7a91a26-4568-41db-94e0-c84a0f25a897
+    text: "One famous lab publishes once"
+  - id: 8fd48ae6-0801-4af2-8677-f76406b25a09
+    text: "The sample is smallest"
+  - id: 31457ea3-cc16-4baf-9fa8-652547779deb
+    text: "The method is newest"
+correct_choice_ids:
+  - 798b9f86-3294-451f-84f3-012a75253347
+explanation: "Convergence across methods, sites and replications is the field's confidence standard."
+archived: false

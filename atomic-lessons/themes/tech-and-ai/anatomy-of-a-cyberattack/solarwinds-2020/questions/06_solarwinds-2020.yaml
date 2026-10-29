@@ -1,0 +1,19 @@
+id: a7b1e9f1-4422-465f-a3a0-076871a5dba7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did CISA's alert say the attackers abused to reach cloud resources?
+choices:
+- id: e4a1264b-5ce1-406b-81eb-768ad9d0fc2a
+  text: A printer driver
+- id: 13b5080c-ac21-42f9-a1e7-1747df503c84
+  text: SAML tokens
+- id: a847e49c-bee1-4583-b73e-6307ea94d457
+  text: Physical badges
+- id: 5afc9669-5949-4b85-bee5-e860cda8c599
+  text: Customer phone numbers
+correct_choice_ids:
+- 13b5080c-ac21-42f9-a1e7-1747df503c84
+explanation: CISA AA20-352A describes SAML token abuse.
+archived: false

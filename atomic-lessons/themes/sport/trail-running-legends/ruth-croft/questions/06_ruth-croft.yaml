@@ -1,0 +1,20 @@
+schema_version: 1
+id: f62bb0d1-7dce-4f7a-a6ed-226929453b21
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which race did she win in 2015?"
+choices:
+  - id: e47ea092-7ecb-403a-8ced-43d3b49bfcfc
+    text: "UTMB"
+  - id: 34ecc531-0c96-4934-847d-71f72c96f39a
+    text: "TDS"
+  - id: 7481cc1e-3910-461b-ac9f-aaa6bf9c7295
+    text: "CCC"
+  - id: c86d96c6-6b50-4f97-b8c7-bcb86d36c0ce
+    text: "OCC"
+correct_choice_ids:
+  - 7481cc1e-3910-461b-ac9f-aaa6bf9c7295
+explanation: "She won the 100 km CCC."
+archived: false

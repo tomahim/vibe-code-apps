@@ -1,0 +1,9 @@
+id: 8291287f-7335-40cd-838e-fc4b27c82e4a
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year was Mira Rai named National Geographic Adventurer of the Year?"
+accepted_answers:
+  - "2017"
+explanation: "She won the title in 2017."
+archived: false

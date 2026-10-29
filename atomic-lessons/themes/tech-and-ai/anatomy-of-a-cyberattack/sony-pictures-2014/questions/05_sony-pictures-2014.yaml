@@ -1,0 +1,19 @@
+id: 31bd4d20-5139-46e1-9bab-89c9fb2d9ae2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What did Sony do that the FBI praised?"
+choices:
+  - id: 7edce7b1-892d-440f-ba23-19e42cd93f65
+    text: "It reported the incident within hours"
+  - id: 1955e17d-f2f6-417a-be7c-b464df3bd24b
+    text: "It paid the attackers"
+  - id: 944d2ac6-7205-4964-9c64-01a4adc378ec
+    text: "It kept the attack secret for a year"
+  - id: 003d3a31-aacd-447f-be6b-03ebf7e5544b
+    text: "It deleted all evidence"
+correct_choice_ids:
+  - 7edce7b1-892d-440f-ba23-19e42cd93f65
+explanation: "Fast reporting helped investigators."
+archived: false

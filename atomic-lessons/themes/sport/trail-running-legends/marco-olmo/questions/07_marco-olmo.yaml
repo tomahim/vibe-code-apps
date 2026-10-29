@@ -1,0 +1,9 @@
+id: 22142b2b-170f-4ac2-99d1-363bfc389ac5
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Olmo begin winning major ultra distance events?"
+accepted_answers:
+  - "1996"
+explanation: "He began winning in 1996."
+archived: false

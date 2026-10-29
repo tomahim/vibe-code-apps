@@ -1,0 +1,19 @@
+id: 815027b7-20a1-46e2-9cf2-55db66b5972f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Children losing an entire hemisphere early in childhood demonstrate:"
+choices:
+  - id: 57c39bd6-1e41-4508-966b-aeb3dd8bb05a
+    text: "Unusual young-brain plasticity and reorganization"
+  - id: 38be5e5d-c9e8-45dd-8454-e22ea91604ae
+    text: "That brains cannot change"
+  - id: f70d102c-82c5-4c6c-bba0-50fdfc452ed0
+    text: "That language is impossible afterward"
+  - id: 833ec404-550f-49dc-8e71-5b633905b17b
+    text: "Nothing about plasticity"
+correct_choice_ids:
+  - 57c39bd6-1e41-4508-966b-aeb3dd8bb05a
+explanation: "Early injury can be compensated to a degree impossible in adults, though plasticity is not limitless."
+archived: false

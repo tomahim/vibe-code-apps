@@ -1,0 +1,19 @@
+id: 7a4a3fe1-6180-4417-b2da-56cec8ed6c18
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which path links Tazacorte to the finish?"
+choices:
+  - id: d54b1431-d959-428f-b42a-9a42a9e97594
+    text: "The GR 130 Camino Real de la Costa"
+  - id: 5863c9d2-2465-4605-bc98-d06aa903925b
+    text: "The Alta Via 2"
+  - id: 9902e991-f03d-441d-bb1f-b82b631bcb21
+    text: "The GR 131"
+  - id: deb88955-88c5-421a-a17f-8d20f8ed4038
+    text: "The Tour du Mont Blanc"
+correct_choice_ids:
+  - d54b1431-d959-428f-b42a-9a42a9e97594
+explanation: "The GR 130 leads to Los Llanos."
+archived: false

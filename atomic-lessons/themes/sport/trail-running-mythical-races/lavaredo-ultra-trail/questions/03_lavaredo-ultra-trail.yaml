@@ -1,0 +1,19 @@
+id: 43870212-aa0c-4dd8-a6ff-a511bb06a523
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which town is the base?"
+choices:
+  - id: d2957a36-c263-4f3c-95bf-1e787822ee09
+    text: "Cortina d'Ampezzo"
+  - id: 03fb998c-edac-4444-91d5-a99f6d5dc847
+    text: "Grindelwald"
+  - id: b4b38ccc-bfa4-403f-90bc-e27dd1780993
+    text: "Courmayeur"
+  - id: d48c7250-2bcf-4891-aec7-437405be18c7
+    text: "Chamonix"
+correct_choice_ids:
+  - d2957a36-c263-4f3c-95bf-1e787822ee09
+explanation: "The race is around Cortina d'Ampezzo."
+archived: false

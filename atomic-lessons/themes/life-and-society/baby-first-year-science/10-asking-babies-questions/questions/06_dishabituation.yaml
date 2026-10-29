@@ -1,0 +1,19 @@
+id: 7592f22b-c336-4ef5-8331-0183e020405b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Dishabituation (looking rebounding when the stimulus changes) demonstrates that the baby:"
+choices:
+  - id: 440758ef-f6cb-4b74-b852-c1f8c0e638e4
+    text: "Registered the change"
+  - id: cc6f2fc7-a270-4372-8f8d-4b38b8aeb2a9
+    text: "Was asleep before"
+  - id: db642ee4-4251-4938-bbad-31890980f338
+    text: "Prefers old images"
+  - id: 195c8024-c0fb-4e46-96c1-b709ff852ef4
+    text: "Cannot discriminate"
+correct_choice_ids:
+  - 440758ef-f6cb-4b74-b852-c1f8c0e638e4
+explanation: "Recovery of looking after a change is the evidence that the difference was detected."
+archived: false

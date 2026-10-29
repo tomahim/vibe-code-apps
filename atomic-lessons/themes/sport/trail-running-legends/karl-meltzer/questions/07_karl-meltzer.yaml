@@ -1,0 +1,9 @@
+id: 588adef8-642d-41e9-a8e4-1d1fd81651b9
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Meltzer win six 100 milers?"
+accepted_answers:
+  - "2006"
+explanation: "Four of those wins were record performances."
+archived: false

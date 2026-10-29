@@ -1,0 +1,19 @@
+id: da9c2f7f-b8e3-467b-8d7f-51ba87889c53
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In the CDC's 2022 checklists, milestones were placed at ages where at least what share of children show the skill?"
+choices:
+  - id: 0e1cc70d-8cde-4542-805e-4e1589a3e125
+    text: "75%"
+  - id: 2cfe88a8-18ca-4c98-9d4c-8329acc0d82c
+    text: "25%"
+  - id: 94fc6cd8-d356-4074-91f0-f6bf8d1d2686
+    text: "50%"
+  - id: d3d32402-8a16-491b-aa11-c4dc9c9721e2
+    text: "99%"
+correct_choice_ids:
+  - 0e1cc70d-8cde-4542-805e-4e1589a3e125
+explanation: "The 75% threshold makes a missing milestone actionable while acknowledging that many typical children reach it earlier."
+archived: false

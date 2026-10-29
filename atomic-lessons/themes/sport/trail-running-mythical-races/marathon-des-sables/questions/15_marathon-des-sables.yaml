@@ -1,0 +1,19 @@
+id: 54db040a-a6e1-4d2b-9ce1-99ee88e4a527
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who was Cactus?"
+choices:
+  - id: 3bf8b328-0cf2-41f1-975d-ed460520f5cf
+    text: "A founder"
+  - id: 566922d5-d1f7-4fd4-85d4-7f74e3d0025b
+    text: "A winner in 1994"
+  - id: 5aca9861-4c95-42ad-a8e6-55a416aa7d95
+    text: "A dog who finished all 5 stages in 2019"
+  - id: c7e67899-5f6b-482f-b2b9-ad66efdc2a68
+    text: "A sponsor"
+correct_choice_ids:
+  - 5aca9861-4c95-42ad-a8e6-55a416aa7d95
+explanation: "A dog completed more than 200 km."
+archived: false

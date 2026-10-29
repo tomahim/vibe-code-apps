@@ -1,0 +1,20 @@
+schema_version: 1
+id: d3f8da6d-c13a-4094-884a-0efc0d00a810
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which climb was she on during the asthma attack?"
+choices:
+  - id: 6eb0d6e8-bdb1-404b-a85e-1fc5c8a4cd65
+    text: "Grand Col Ferret"
+  - id: a52ee81b-712f-4253-867c-ecd9728d8ee1
+    text: "La Flégère"
+  - id: 814a91e9-be44-4ca8-9f59-77a31a5a2c37
+    text: "Col de Balme"
+  - id: 99cba3e1-54f2-4c82-bb04-268ac8be5395
+    text: "Col de la Seigne"
+correct_choice_ids:
+  - a52ee81b-712f-4253-867c-ecd9728d8ee1
+explanation: "The climb to La Flégère was the key point."
+archived: false

@@ -1,0 +1,19 @@
+id: a5ffff09-6f98-4f2a-9320-aa8235e130c4
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why does a skilled crawler often become cautious again as a new walker?"
+choices:
+  - id: c2ee0859-8afa-441a-ad14-3352f26429d2
+    text: "A new posture changes balance physics, so judgments must be recalibrated"
+  - id: 1a0ff7c2-b4b9-4a74-bd36-1a77c8e21a44
+    text: "The baby forgets how to move"
+  - id: 395c2528-e651-43b2-bb7a-4da3107e4b1c
+    text: "Walkers cannot see slopes"
+  - id: c6807ba2-0a65-4233-adec-e1e320c69d76
+    text: "Muscles weaken at that age"
+correct_choice_ids:
+  - c2ee0859-8afa-441a-ad14-3352f26429d2
+explanation: "Each posture changes sway and center of gravity, so perception of what is safe must be relearned per posture."
+archived: false

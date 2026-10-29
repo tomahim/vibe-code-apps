@@ -1,0 +1,19 @@
+id: aee7903d-e634-4cad-a825-d2668e9e05df
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which cup did the race join in its second edition?"
+choices:
+  - id: adab1f7c-6f35-4c1e-bd46-557b7c9a5a4b
+    text: "The Tour de France"
+  - id: b9d93f32-7556-4d56-b58e-ae591ab3814b
+    text: "The Spanish Mountain Running Cup"
+  - id: d60249f7-9e78-4e11-b5ee-ebdd3bda2f2c
+    text: "The Olympic Cup"
+  - id: 0b53399e-24df-4d1e-847c-6b02b0e85788
+    text: "The UTMB"
+correct_choice_ids:
+  - b9d93f32-7556-4d56-b58e-ae591ab3814b
+explanation: "Aierbe says the second edition joined the Spanish Cup."
+archived: false

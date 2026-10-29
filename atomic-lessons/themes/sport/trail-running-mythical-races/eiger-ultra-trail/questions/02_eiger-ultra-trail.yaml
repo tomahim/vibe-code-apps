@@ -1,0 +1,19 @@
+id: 748ca62d-ebc0-4a27-b6e3-6de3509a9c52
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What nickname does the Eiger have?"
+choices:
+  - id: 0f0e57ed-4bd0-456a-bd57-14f1a317a351
+    text: "The roof of Europe"
+  - id: 12402fdf-fbfe-4f07-bd6c-aa2757f86d7c
+    text: "The silver peak"
+  - id: 43ce124e-8ee3-4ee4-976a-3ec6d52ae37e
+    text: "The last problem of the Alps"
+  - id: 5cbc547c-eeda-4049-9800-cba92794797f
+    text: "The white giant"
+correct_choice_ids:
+  - 43ce124e-8ee3-4ee4-976a-3ec6d52ae37e
+explanation: "It is known as the last problem of the Alps."
+archived: false

@@ -1,0 +1,11 @@
+id: eef92163-b1ff-47a8-90bf-4de7219ec22c
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "Which mountain does UTMF circle? Give the mountain's name."
+accepted_answers:
+  - "Fuji"
+  - "Mount Fuji"
+  - "Mt Fuji"
+explanation: "UTMF stands for Ultra-Trail Mt. Fuji."
+archived: false

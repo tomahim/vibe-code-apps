@@ -1,0 +1,20 @@
+schema_version: 1
+id: 61c4ffb0-400c-47b8-91f6-cbf1c065ba15
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which year did she win UTMB for the first time?"
+choices:
+  - id: 3f1fa1e5-3046-4d41-ae2a-d80e2bcec09a
+    text: "2021"
+  - id: 434f7c56-81c8-4fc6-9e4f-05d29a186d58
+    text: "2019"
+  - id: f254199b-dcde-44a4-ba49-3310ae3345c2
+    text: "2016"
+  - id: 718d99f3-725d-49a4-b1c1-d32706d0bba6
+    text: "2023"
+correct_choice_ids:
+  - 434f7c56-81c8-4fc6-9e4f-05d29a186d58
+explanation: "She won in 24:34:26."
+archived: false

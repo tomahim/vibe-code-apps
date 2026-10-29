@@ -1,0 +1,20 @@
+schema_version: 1
+id: 851a2596-c203-489d-95c2-276d12ca9509
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which Swedish region did Forsberg grow up?"
+choices:
+  - id: 4f49517b-b4e1-4046-a07c-b461f3586492
+    text: "High Coast"
+  - id: 2e50785e-3bc8-42a6-93de-7effca2593ee
+    text: "Lapland"
+  - id: ef5459fa-f753-4049-8b92-88147518f889
+    text: "Skåne"
+  - id: 989fb64b-e96f-4ef5-a6b6-1f4ee71a6af9
+    text: "Dalarna"
+correct_choice_ids:
+  - 4f49517b-b4e1-4046-a07c-b461f3586492
+explanation: "She grew up in Noraström on Sweden's High Coast."
+archived: false

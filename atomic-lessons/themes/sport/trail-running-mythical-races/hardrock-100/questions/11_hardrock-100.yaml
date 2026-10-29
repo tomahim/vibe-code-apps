@@ -1,0 +1,19 @@
+id: 31736ea3-0f83-4c82-b659-60ad14a9a47a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the current course?"
+choices:
+  - id: b5d5ad86-fa17-4395-80b4-269881046add
+    text: "200 miles"
+  - id: 299a1e66-2ec8-47a9-93ce-2a3db9ac0348
+    text: "26.2 miles"
+  - id: 299444bb-be46-4b6f-84ad-b15bc8206a9e
+    text: "98.8 miles"
+  - id: 9218a2b9-11df-4987-8d72-9a8b5319e524
+    text: "101.8 miles"
+correct_choice_ids:
+  - 9218a2b9-11df-4987-8d72-9a8b5319e524
+explanation: "The official page says 101.8 miles."
+archived: false

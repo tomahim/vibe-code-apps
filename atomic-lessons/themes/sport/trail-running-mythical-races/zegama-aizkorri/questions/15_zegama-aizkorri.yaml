@@ -1,0 +1,19 @@
+id: d6ff6086-0c6e-4205-8af0-7b36eb9fe77a
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which people organise the race?"
+choices:
+  - id: 5ba3c40e-9eaa-493a-98df-0ba6086bc618
+    text: "The army"
+  - id: e1222412-503b-471a-afc5-1ccacbf81058
+    text: "A university"
+  - id: c5ca73ec-edea-4daa-87d7-0c469c29acfa
+    text: "A multinational"
+  - id: f73dc1da-4f66-4ff7-9630-1c01f1cc5814
+    text: "A village and its volunteers"
+correct_choice_ids:
+  - f73dc1da-4f66-4ff7-9630-1c01f1cc5814
+explanation: "The village organises the race."
+archived: false

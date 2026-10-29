@@ -1,0 +1,19 @@
+id: b71e6393-bab5-4423-82d5-cb8aaa4cadfb
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What do clinicians mainly check when assessing newborn reflexes?"
+choices:
+  - id: f74c55c4-3154-4880-8e35-78999ac9fa3e
+    text: "Presence, strength and symmetry"
+  - id: e9dba395-df5a-4ba3-a977-7f55039084c6
+    text: "How quickly the baby crawls"
+  - id: 79d1d631-4538-4752-a2a7-ffcac0767d8e
+    text: "Whether the eyes change color"
+  - id: e90cb64e-0247-409b-826d-69a10410ceb0
+    text: "How varied the babbling sounds"
+correct_choice_ids:
+  - f74c55c4-3154-4880-8e35-78999ac9fa3e
+explanation: "The exam reads whether reflexes are present, how strong they are, and whether both sides of the body match."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: dd999541-c963-432c-9704-6a0b5fa9d8e9
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "According to National Geographic, what did she once haul through the Himalaya?"
+choices:
+  - id: d3fb0bb9-ffad-475e-9a13-941428e53ef5
+    text: "Rice sacks"
+  - id: 3de58188-23a5-43a7-9f6d-a7ebee9132aa
+    text: "Firewood"
+  - id: c26f83e5-81b9-4614-84a7-a9762fe688ce
+    text: "Tourist bags"
+  - id: 1c831041-e9c4-4423-b457-08f04a4707e2
+    text: "Stones"
+correct_choice_ids:
+  - d3fb0bb9-ffad-475e-9a13-941428e53ef5
+explanation: "National Geographic wrote that she hauled rice sacks."
+archived: false

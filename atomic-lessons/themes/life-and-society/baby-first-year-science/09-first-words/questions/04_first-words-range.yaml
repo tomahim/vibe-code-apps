@@ -1,0 +1,11 @@
+id: a4f33877-0c00-4783-ac6e-c10d4a64a24a
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What is the approximate normal range for first words, in months?"
+accepted_answers:
+  - "10 to 15 months"
+  - "about 10-15 months"
+  - "10-15 months"
+explanation: "Around the first birthday is typical, but roughly 10 to 15 months is within the normal range."
+archived: false

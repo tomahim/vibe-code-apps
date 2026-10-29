@@ -1,0 +1,20 @@
+schema_version: 1
+id: 53445265-ea9a-442f-bc60-14164b9f5a17
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who organized the Copper Canyon race that Jurek won in 2007?"
+choices:
+  - id: 2e97f354-0ba0-4b0b-b63e-4cb4b379626c
+    text: "Christopher McDougall"
+  - id: 50c88419-087d-4e1d-bb42-a14472bb3381
+    text: "Micah True"
+  - id: ca98a35c-2786-4109-855d-236fa83cdf12
+    text: "Karl Meltzer"
+  - id: 85850d41-bc20-4b52-98ae-a0d70fc2536d
+    text: "Anton Krupicka"
+correct_choice_ids:
+  - 50c88419-087d-4e1d-bb42-a14472bb3381
+explanation: "True, known as Caballo Blanco, organized it."
+archived: false

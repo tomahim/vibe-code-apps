@@ -1,0 +1,11 @@
+id: 4ce687cb-573e-4df2-9ef2-4c965df232fe
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What large project mapped babies' brain development from before term through infancy, named after the brain's wiring diagram?"
+accepted_answers:
+  - "Developing Human Connectome Project"
+  - "the Developing Human Connectome Project"
+  - "dHCP"
+explanation: "The Developing Human Connectome Project scanned fetal and infant brains to chart normal early development."
+archived: false

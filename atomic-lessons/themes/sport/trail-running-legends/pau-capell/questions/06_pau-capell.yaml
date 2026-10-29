@@ -1,0 +1,20 @@
+schema_version: 1
+id: 612db663-7a61-4503-ae29-4a2b4c6545d1
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which islands is Transgrancanaria held?"
+choices:
+  - id: 0297089d-d10d-4c66-9620-fcccb6af4ca2
+    text: "The Azores"
+  - id: faf1caf4-bceb-426b-8250-e7ee6c5b0605
+    text: "The Balearic Islands"
+  - id: 5e628ae4-cc24-41c4-bdf5-9d03eec01020
+    text: "The Canary Islands"
+  - id: cdace8f4-4466-4d51-af03-137c9324ac0b
+    text: "The Faroe Islands"
+correct_choice_ids:
+  - 5e628ae4-cc24-41c4-bdf5-9d03eec01020
+explanation: "It crosses Gran Canaria."
+archived: false

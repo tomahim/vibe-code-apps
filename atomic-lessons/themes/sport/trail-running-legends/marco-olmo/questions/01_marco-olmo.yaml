@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7846f37e-565b-442b-b7f0-2451a2a91a50
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country was Marco Olmo born?"
+choices:
+  - id: 39d7f650-fa01-498a-b34e-b643ef99f28f
+    text: "France"
+  - id: e5b2e648-04d9-4a0c-b6e9-79b1b445c374
+    text: "Switzerland"
+  - id: d64b4ee2-c6ef-4940-b650-726050a7724f
+    text: "Spain"
+  - id: 08d6c767-da84-4ab9-a05a-d0d8421cab98
+    text: "Italy"
+correct_choice_ids:
+  - 08d6c767-da84-4ab9-a05a-d0d8421cab98
+explanation: "He was born in Robilante, near Cuneo."
+archived: false

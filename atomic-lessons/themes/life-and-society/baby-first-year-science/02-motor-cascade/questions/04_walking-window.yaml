@@ -1,0 +1,12 @@
+id: 4202e243-e6fd-4edb-a6fa-c7c956058779
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "In the WHO study, what is the approximate window (1st to 99th percentile) for walking alone?"
+accepted_answers:
+  - "about 8 to 18 months"
+  - "8-18 months"
+  - "8.2 to 17.6 months"
+  - "about 8-18 months"
+explanation: "The WHO window for walking alone runs from 8.2 to 17.6 months; both edges are normal."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 54100328-4169-4553-b4bc-d2deaa189c50
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which French town was Thévenard born?"
+choices:
+  - id: 0a483822-63b3-4de9-9c75-f661a3553fce
+    text: "Annecy"
+  - id: f9b62658-2a4d-4ce8-afcb-505ed5fa8c6f
+    text: "Nantua"
+  - id: 9f04891e-60bf-4437-a5dc-5304b53888f0
+    text: "Lille"
+  - id: cddadd89-3829-43bb-8dde-7b28fce51837
+    text: "Lyon"
+correct_choice_ids:
+  - f9b62658-2a4d-4ce8-afcb-505ed5fa8c6f
+explanation: "He was born in Nantua in 1988."
+archived: false

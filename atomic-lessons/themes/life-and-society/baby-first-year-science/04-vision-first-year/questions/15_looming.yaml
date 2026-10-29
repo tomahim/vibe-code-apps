@@ -1,0 +1,19 @@
+id: cee6f907-9c33-4980-8f54-30b9acca37c0
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A baby blinking at a rapidly approaching object demonstrates early perception of:"
+choices:
+  - id: 32a56a23-6bed-464f-8ae8-8dc6195a1eb3
+    text: "Depth and trajectory from visual flow"
+  - id: 35ebf91d-7039-4295-8466-78515a85b964
+    text: "Color categories"
+  - id: fdcf5a26-e827-4ee6-bb11-8fe0aa4e8c64
+    text: "Faces"
+  - id: 7ce34673-911a-49dc-9673-1254a46574b1
+    text: "Written words"
+correct_choice_ids:
+  - 32a56a23-6bed-464f-8ae8-8dc6195a1eb3
+explanation: "Looming responses show the young visual system already extracts approach and collision information."
+archived: false

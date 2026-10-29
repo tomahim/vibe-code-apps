@@ -1,0 +1,20 @@
+schema_version: 1
+id: cf15959a-9308-476c-8227-793a6518e23d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was her 2023 Western States time?"
+choices:
+  - id: 83ce2558-b452-4c85-baf2-cdac2cd33ca3
+    text: "14:09:28"
+  - id: 7727fa64-b93d-48ee-a0d2-297f0ead4078
+    text: "16:47:19"
+  - id: cc9647cd-a904-40cc-be30-6993e18797db
+    text: "17:27:00"
+  - id: 5519ed36-fc0a-4780-8191-15c125746671
+    text: "15:29:34"
+correct_choice_ids:
+  - 5519ed36-fc0a-4780-8191-15c125746671
+explanation: "It was a course record."
+archived: false

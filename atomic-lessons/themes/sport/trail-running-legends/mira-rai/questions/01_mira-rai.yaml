@@ -1,0 +1,20 @@
+schema_version: 1
+id: d22e5c11-d137-4540-90a3-8763710951c7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country was Mira Rai born?"
+choices:
+  - id: 6aaef0e3-9532-438f-a0a7-5c6f88653b6e
+    text: "Bhutan"
+  - id: a079e1be-38e7-409d-a535-2d9a47b8c82c
+    text: "Tibet"
+  - id: cd5a254b-bcfc-4115-990d-f4abd8fe029a
+    text: "Nepal"
+  - id: ff6da5e5-5663-4d8a-b4ce-7fa23ed07efd
+    text: "India"
+correct_choice_ids:
+  - cd5a254b-bcfc-4115-990d-f4abd8fe029a
+explanation: "She is from Bhojpur in eastern Nepal."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5e57a205-54a9-4cf5-ac0e-ff186ddc7b20
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "For how many years did Trason's 1994 course record stand?"
+choices:
+  - id: 66606b08-1737-4bb8-bccf-03f737efe294
+    text: "40"
+  - id: 392a362c-6df8-4a64-953d-56d4f22ae23c
+    text: "18"
+  - id: 1f9b0d13-3bca-43af-b770-0881af7ca21b
+    text: "30"
+  - id: 80fef5b4-4316-4fd7-b36d-2ce76ca7db8c
+    text: "5"
+correct_choice_ids:
+  - 392a362c-6df8-4a64-953d-56d4f22ae23c
+explanation: "It stood from 1994 until 2012."
+archived: false

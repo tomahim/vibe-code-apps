@@ -1,0 +1,19 @@
+id: 0a364a07-819d-4592-973a-044fa876bebd
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year was the first edition?"
+choices:
+  - id: 261a7f59-4006-4a05-82e9-ae07e46d28fb
+    text: "2003"
+  - id: 773c8635-3636-4bd4-8389-a8752e95eb26
+    text: "2020"
+  - id: 51136e32-07a7-4171-b922-56575cf011f3
+    text: "2010"
+  - id: a93b0d45-2e62-41ef-bc47-4bd7c8c52461
+    text: "1990"
+correct_choice_ids:
+  - 51136e32-07a7-4171-b922-56575cf011f3
+explanation: "The first edition was in September 2010."
+archived: false

@@ -1,0 +1,19 @@
+id: c8b4200e-da9e-4b4e-be4d-26a559b08e56
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "On which island is Transgrancanaria held?"
+choices:
+  - id: 077d9db6-93bc-49f8-bc3a-e8808aa999e9
+    text: "Reunion"
+  - id: 2ad2990f-a937-4101-99ce-574aa1b11d8a
+    text: "La Palma"
+  - id: 91702af1-9709-4b25-81eb-e66497cfdc1a
+    text: "Gran Canaria"
+  - id: d1da99bc-e7ef-4fd6-8bdd-2e889d66057a
+    text: "Corsica"
+correct_choice_ids:
+  - 91702af1-9709-4b25-81eb-e66497cfdc1a
+explanation: "It is held on Gran Canaria."
+archived: false

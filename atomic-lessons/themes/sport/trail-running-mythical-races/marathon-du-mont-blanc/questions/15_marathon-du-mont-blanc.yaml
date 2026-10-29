@@ -1,0 +1,19 @@
+id: 211bb50a-6564-471b-94f8-ccad7357b953
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What happens to a runner arriving after a cut-off?"
+choices:
+  - id: 1866e8dd-db50-4891-a918-dd2db0f749ce
+    text: "They get extra time"
+  - id: 3ae3a454-a576-417b-8ad9-58d3d11130d6
+    text: "They get a medal"
+  - id: f5e815dd-d385-4bbf-84d2-6c20fd6e3a96
+    text: "They start again"
+  - id: 4e946803-795d-4cfc-95a5-5ff45e5c4ce1
+    text: "They are disqualified"
+correct_choice_ids:
+  - 4e946803-795d-4cfc-95a5-5ff45e5c4ce1
+explanation: "The bib corner is cut off."
+archived: false

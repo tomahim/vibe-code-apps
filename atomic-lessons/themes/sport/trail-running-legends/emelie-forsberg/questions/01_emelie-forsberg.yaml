@@ -1,0 +1,20 @@
+schema_version: 1
+id: 29103b3c-25f9-4c30-b6a4-7b2e6830fee5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country did Forsberg grow up?"
+choices:
+  - id: 2eaee124-f21f-4095-92f1-9594641b800d
+    text: "Sweden"
+  - id: 989163cd-4fe6-48fc-83aa-18e10773d69b
+    text: "Norway"
+  - id: 4017af96-d256-4f0d-a851-96d6c2539f58
+    text: "Switzerland"
+  - id: d38f985f-6c66-427f-ac2a-753d800c1c18
+    text: "Spain"
+correct_choice_ids:
+  - 2eaee124-f21f-4095-92f1-9594641b800d
+explanation: "Forsberg is Swedish."
+archived: false

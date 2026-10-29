@@ -1,0 +1,19 @@
+id: 80616147-9f42-4789-9533-27c02b62b521
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which natural arch is on the route?"
+choices:
+  - id: 97ffed0f-f7f8-479f-9fd8-761ac73337de
+    text: "Peyreleau"
+  - id: 1f72bfc1-08e3-41e2-8f52-db326e5c734e
+    text: "Millau"
+  - id: c7416a3a-da58-4507-a1ae-6a9dbf2ebe35
+    text: "Rajol"
+  - id: 100c69cf-97f4-4e92-b8f2-99e3e7ecfbe2
+    text: "Roquesaltes"
+correct_choice_ids:
+  - 100c69cf-97f4-4e92-b8f2-99e3e7ecfbe2
+explanation: "Roquesaltes has an emblematic arch."
+archived: false

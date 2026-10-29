@@ -1,0 +1,20 @@
+schema_version: 1
+id: 3b97f91e-ad88-457b-aacf-90bfe6360b57
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was her winning time at the 2021 Tarawera 100 km?"
+choices:
+  - id: 2afde431-da40-409f-bc9f-6669dfcc6a61
+    text: "9:21:03"
+  - id: 5d2c1efa-d230-4164-be41-657ed772ba4f
+    text: "12:00:00"
+  - id: b360cf18-b0ea-458f-ae2c-06e6eb880af9
+    text: "10:45:00"
+  - id: 2a3f1ebf-f374-4486-b777-c9e4aa687896
+    text: "8:00:00"
+correct_choice_ids:
+  - 2afde431-da40-409f-bc9f-6669dfcc6a61
+explanation: "She won in 9:21:03."
+archived: false

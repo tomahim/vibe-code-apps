@@ -1,0 +1,19 @@
+id: 1209aea6-eb83-446e-bfe9-9b2fc0ac877b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Which period did the Target checkout breach cover?
+choices:
+- id: 6300c151-2f6f-4020-9d05-37eee56fa118
+  text: June 2017
+- id: f7461e46-3f4e-4e59-ba80-98dde40f85e9
+  text: January 2020
+- id: 49d05414-b73f-41a1-ab98-46a46a725e6a
+  text: 27 November to mid-December 2013
+- id: 895422a5-c6d1-4a1a-a8fb-88ddc44328ec
+  text: March to April 2010
+correct_choice_ids:
+- 49d05414-b73f-41a1-ab98-46a46a725e6a
+explanation: The Senate report says the breach affected cards used from 27 November 2013; Target said the activity ended around 15 December.
+archived: false
