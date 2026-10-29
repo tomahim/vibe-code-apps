@@ -2,6 +2,12 @@
 id: 483f2e5a-9daf-4ecd-9fc3-b9de6c1f9801
 position: 1
 title: "A picnic in the mountains"
+image: 09-aizkorri.jpg
+image_alt: "The rocky summit ridge of Aizkorri in the Basque Country."
+image_caption: "The Aizkorri ridge in the Basque Country, the summit of the Zegama-Aizkorri marathon."
+image_credit: "Indalecio Ojanguren"
+image_license: "CC BY-SA 3.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:09_aizkorri.jpg
 archived: false
 ---
 Zegama-Aizkorri began in a surprising way. According to the Golden Trail World Series, everything started with a group of local inhabitants and a simple idea: organise a picnic in the mountains to bring people together. For the first picnic, they sent an invitation to everyone from Zegama living outside the village.

@@ -2,6 +2,12 @@
 id: 91882f6f-cc64-40b0-862b-472efaa31689
 position: 1
 title: "A trail made for horses"
+image: mountain-quarries-bridge-2012-09-16-16-32-00.jpg
+image_alt: "No Hands Bridge, a concrete bridge over the American River near Auburn, California."
+image_caption: "No Hands Bridge over the American River, near the finish of the Western States 100."
+image_credit: "liannadavis"
+image_license: "CC BY-SA 3.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Mountain_Quarries_Bridge_2012-09-16_16-32-00.jpg
 archived: false
 ---
 The Western States Trail runs through the Sierra Nevada of California from Tahoe City toward Auburn. In 1955 Wendell T. Robie and five horsemen rode it to prove that horses could cover 100 miles in one day. That ride led to the Western States Trail Foundation and the Western States Trail Ride, also called the Tevis Cup.

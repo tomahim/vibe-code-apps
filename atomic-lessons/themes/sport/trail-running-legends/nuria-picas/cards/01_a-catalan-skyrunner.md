@@ -2,6 +2,12 @@
 id: 78ebab20-cfe1-485f-a3fb-e79810bb7278
 position: 1
 title: "A Catalan skyrunner"
+image: n-ria-picas.jpg
+image_alt: "Nuria Picas, pictured in 2015."
+image_caption: "Nuria Picas in 2015."
+image_credit: "Juan Ramon Rodriguez Sosa"
+image_license: "CC BY-SA 2.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:N%C3%BAria_Picas_%282015%29.jpg
 archived: false
 ---
 Núria Picas was born in 1976 and is a Spanish sky runner and trail runner from Catalonia. Her own biography describes her as a world champion of ultra trails and a double champion of the Ultra Trail World Tour, with victories and podiums on five continents.

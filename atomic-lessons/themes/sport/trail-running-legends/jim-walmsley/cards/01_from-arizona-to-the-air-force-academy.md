@@ -2,6 +2,12 @@
 id: 3af27ca2-8caf-45bf-b6ae-a895b96685bb
 position: 1
 title: "From Arizona to the Air Force Academy"
+image: jim-walmsley-2014.jpg
+image_alt: "Jim Walmsley in U.S. Air Force colours, 2014."
+image_caption: "Jim Walmsley in 2014, during his time in the U.S. Air Force."
+image_credit: "U.S. Air Force photo/Airman 1st Class Joshua Smoot"
+image_license: "Public domain"
+image_source_url: https://commons.wikimedia.org/wiki/File:Jim_Walmsley_2014.jpg
 archived: false
 ---
 Jim Walmsley was born on January 17, 1990, and went to Horizon High School in Scottsdale, Arizona. In his senior year, 2007, he became the state champion in cross country for his division, winning every race he ran that season.

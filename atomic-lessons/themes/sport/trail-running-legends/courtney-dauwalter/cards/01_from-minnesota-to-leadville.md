@@ -2,6 +2,12 @@
 id: 0b3a707f-0b8f-44b7-a5af-15f377957f55
 position: 1
 title: "From Minnesota to Leadville"
+image: courtney-dauwalter.jpg
+image_alt: "Courtney Dauwalter smiling, pictured in 2019."
+image_caption: "Courtney Dauwalter in 2019."
+image_credit: "Heike Maria Seitz"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Courtney_Dauwalter_%282019%29.jpg
 archived: false
 ---
 Courtney Dauwalter was born on February 13, 1985, and grew up in Hopkins, Minnesota. In high school she competed in track, cross country and Nordic skiing, and Nordic skiing. She attended the University of Denver on a skiing scholarship and studied biology.

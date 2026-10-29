@@ -2,6 +2,12 @@
 id: 8b0b7e27-a167-4ac8-90d2-3e6f1a3728a9
 position: 1
 title: "A silver boom town"
+image: leadville-co-4.jpg
+image_alt: "Downtown Leadville, Colorado, with mountains behind."
+image_caption: "Leadville, Colorado, start and finish of the Leadville Trail 100."
+image_credit: "Daniel Schwen"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Leadville%2C_CO_4.jpg
 archived: false
 ---
 Leadville, Colorado, was founded in 1877 during the Colorado Silver Boom, when prospectors rushed to the mountains hoping to strike it rich. The town was named after lead deposits, but the discovery of silver in 1878 put it on the map. At its peak it had more than 30,000 people and was one of the wealthiest cities in the United States.
