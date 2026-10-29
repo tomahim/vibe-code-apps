@@ -65,11 +65,17 @@
 
 /* Lesson rows: name on one line, card dots on their own line below */
 .lg-lessons .tt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
-/* Selected row: the start action sits at the left of the lesson name */
-.lg-lessons li.lg-selrow{display:flex;gap:6px;align-items:stretch}
-.lg-lessons li.lg-selrow>button[data-lesson]{flex:1;min-width:0}
-.lg-lessons .lg-start{flex:none;width:auto;min-height:44px;margin:0;padding:6px 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;line-height:1.15;text-align:center;white-space:normal}
-.lg-lessons .lg-start svg{flex:none}
+/* Selected row: full width again, room reserved at the right for the fab */
+.lg-lessons li.lg-selrow>button[data-lesson]{padding-right:32px}
+.lg-mobile .lg-lessons li.lg-selrow>button[data-lesson]{padding-right:52px}
+/* Floating start action: raised pill poking out of the panel's right edge */
+.lg-fab{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;gap:6px;margin:0;border:2px solid #fffdf8;border-radius:999px;background:var(--terra);color:#fff;font:700 13px var(--sans);line-height:1;cursor:pointer;box-shadow:0 10px 22px -8px rgba(60,40,10,.6),0 3px 8px -2px rgba(60,40,10,.35)}
+.lg-fab:hover{background:var(--terra-d)}
+.lg-fab:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.lg-fab[hidden]{display:none}
+.lg-desktop .lg-fab{height:34px;padding:0 14px}
+.lg-mobile .lg-fab{width:44px;height:44px;padding:0}
+.lg-mobile .lg-fab .lg-fab-label{display:none}
 /* Root-only Last lessons menu */
 .lg-lastlessons{margin:0 0 12px}
 .lg-lastlessons-toggle{width:100%;min-height:44px;display:flex;align-items:center;gap:9px;border:1px solid #ecdfc9;border-radius:12px;background:#fffdf8;padding:8px 10px;font:700 13px var(--serif);text-align:left}

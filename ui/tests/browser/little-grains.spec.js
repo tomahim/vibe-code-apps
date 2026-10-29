@@ -119,7 +119,7 @@ test('garden, lesson progress and leaderboard use the API', async ({ page }) => 
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
   await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await panel.getByRole('button', { name: /Start lesson/ }).click();
+  await page.getByRole('button', { name: /Start lesson/ }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await expect(reader.getByText('The bath water is')).toBeVisible();
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
@@ -171,7 +171,7 @@ test('a wrong answer opens another question at the checkpoint', async ({ page })
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await panel.getByRole('button', { name: /Start lesson/ }).click();
+  await page.getByRole('button', { name: /Start lesson/ }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await reader.getByLabel('Cold', { exact: true }).check();
@@ -213,32 +213,40 @@ test('recent lessons open from a Last lessons menu at the garden root only', asy
   await expect(panel.locator('.lg-lastlessons-menu')).toHaveCount(0);
 });
 
-test('the selected lesson row carries its start action, dots below the name', async ({ page }) => {
+test('the selected lesson gets a floating start action at the panel right edge', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
   mockApi(page, 3);
   await page.goto('/apps/little-grains');
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  const fab = page.locator('.lg-fab');
   // No lesson is selected yet: no start action anywhere.
-  await expect(panel.getByRole('button', { name: /Start lesson/ })).toHaveCount(0);
+  await expect(fab).toBeHidden();
   await panel.locator('.lg-lessons button[data-lesson]').first().click();
   const selRow = panel.locator('.lg-lessons li.lg-selrow');
   await expect(selRow).toHaveCount(1);
-  const start = selRow.getByRole('button', { name: /Start lesson/ });
+  const start = page.getByRole('button', { name: 'Start lesson' });
   await expect(start).toBeVisible();
-  // The detail block no longer carries a detached copy of the action.
-  await expect(panel.locator('.lg-lesson button[data-start]')).toHaveCount(0);
-  // The button sits at the left of the lesson name, dots on their own line below.
-  const layout = await selRow.evaluate((li) => {
-    const btn = li.querySelector('.lg-start').getBoundingClientRect();
+  // The detail block and the row carry no detached copy of the action.
+  await expect(panel.locator('button[data-start]')).toHaveCount(0);
+  // The fab pokes out of the panel's right edge, centered on the selected
+  // row, never off screen; dots stay on their own line below the name.
+  const layout = await page.evaluate(() => {
+    const f = document.querySelector('.lg-fab').getBoundingClientRect();
+    const p = document.querySelector('.lg-panel').getBoundingClientRect();
+    const li = document.querySelector('.lg-lessons li.lg-selrow');
+    const r = li.querySelector('button[data-lesson]').getBoundingClientRect();
     const name = li.querySelector('.nm').getBoundingClientRect();
     const dots = li.querySelector('.dots').getBoundingClientRect();
-    return { btnRight: btn.right, nameLeft: name.left, nameBottom: name.bottom, dotsTop: dots.top };
+    return { fL: f.left, fR: f.right, fT: f.top, fB: f.bottom, pR: p.right, rT: r.top, rB: r.bottom, nameB: name.bottom, dotsT: dots.top, vw: innerWidth };
   });
-  expect(layout.btnRight).toBeLessThanOrEqual(layout.nameLeft + 1);
-  expect(layout.dotsTop).toBeGreaterThanOrEqual(layout.nameBottom - 1);
-  await page.screenshot({ path: '/tmp/little-grains-inline-start-desktop.png' });
+  expect(layout.fL).toBeLessThan(layout.pR);
+  expect(layout.fR).toBeGreaterThan(layout.pR - 30);
+  expect(layout.fR).toBeLessThanOrEqual(layout.vw + 1);
+  expect(Math.abs((layout.fT + layout.fB) / 2 - (layout.rT + layout.rB) / 2)).toBeLessThan(6);
+  expect(layout.dotsT).toBeGreaterThanOrEqual(layout.nameB - 1);
+  await page.screenshot({ path: '/tmp/little-grains-fab-start-desktop.png' });
   await start.click();
   await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByText('Warm water')).toBeVisible();
 });
@@ -253,7 +261,7 @@ test('previous cards are read-only and return to the current step', async ({ pag
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await panel.getByRole('button', { name: /Start lesson/ }).click();
+  await page.getByRole('button', { name: /Start lesson/ }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await expect(reader.getByText('Dry gently')).toBeVisible();
@@ -566,7 +574,7 @@ test('refresh restores the theme, path, selected lesson and card from the URL', 
   await panel.getByRole('button', { name: /Bath time and care/ }).click();
   await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}`);
   await page.reload();
-  await panel.getByRole('button', { name: 'Start lesson' }).click();
+  await page.getByRole('button', { name: 'Start lesson' }).click();
   await expect(page.locator('.grains-reader')).toBeVisible();
   await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
   await page.reload();

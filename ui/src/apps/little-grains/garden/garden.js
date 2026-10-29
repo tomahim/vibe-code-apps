@@ -88,6 +88,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   <nav class="lg-crumbs" aria-label="Garden location"></nav>
   <div class="lg-stats" aria-label="Progress totals"></div>
   <aside class="lg-panel" aria-live="polite"><button class="lg-handle" aria-label="Expand or collapse details"><span></span></button><div class="lg-panel-body"></div></aside>
+  <button class="lg-fab" type="button" hidden></button>
   <div class="lg-zoom"><button data-zoom="in" aria-label="Zoom in">+</button><button data-zoom="out" aria-label="Zoom out">−</button></div><div class="lg-hint"></div><div class="lg-toast" role="status"></div><div class="lg-error" hidden>This garden needs WebGL. Open it in a browser with hardware acceleration enabled.</div>`;
   container.appendChild(root);
   const $ = (s) => root.querySelector(s);
@@ -502,6 +503,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   // ----- UI -----
   const crumbs = $('.lg-crumbs'), panelBody = $('.lg-panel-body'), statsEl = $('.lg-stats'), labelsEl = $('.lg-labels'), toastEl = $('.lg-toast');
   const panel = $('.lg-panel');
+  const fab = $('.lg-fab');
   const ICON = {
     drop: '<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 1.5C6 5 3.6 7 3.6 10a4.4 4.4 0 0 0 8.8 0C12.4 7 10 5 8 1.5z" fill="#3f8fd2"/></svg>',
     carrot: '<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 13.2C4 9 8 5.4 11 5.8c.5 3-2.6 7.6-8 7.4z" fill="#f08a24"/><path d="M10.2 5.4 11.4 2m-.2 3.8L14 4m-3.2 2.6L14.2 7" stroke="#5ea84a" stroke-width="1.5" stroke-linecap="round"/></svg>',
@@ -544,9 +546,32 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     const pr = panel.getBoundingClientRect(), rr = row.getBoundingClientRect();
     panel.scrollTop += rr.top - pr.top - (pr.height - rr.height) / 2;
   }
+  // The start action floats at the panel's right edge, level with the
+  // selected lesson row; it follows the row as the panel scrolls.
+  function placeFab() {
+    if (fab.hidden) return;
+    const row = panelBody.querySelector('.lg-lessons li.lg-selrow button[data-lesson]');
+    if (!row) { fab.style.visibility = 'hidden'; return; }
+    const pr = panel.getBoundingClientRect(), rr = row.getBoundingClientRect();
+    if (rr.bottom < pr.top + 10 || rr.top > pr.bottom - 10) { fab.style.visibility = 'hidden'; return; }
+    fab.style.visibility = 'visible';
+    const fr = fab.getBoundingClientRect(), br = root.getBoundingClientRect();
+    const overlap = mobile ? 6 : Math.min(26, fr.width * 0.45);
+    fab.style.left = `${pr.right - br.left - fr.width + overlap}px`;
+    fab.style.top = `${rr.top - br.top + (rr.height - fr.height) / 2}px`;
+  }
+  function trackFab() {
+    const t0 = performance.now();
+    const step = () => { placeFab(); if (performance.now() - t0 < 350) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  panel.addEventListener('scroll', placeFab, { passive: true });
+  panel.addEventListener('transitionend', placeFab);
+  addEventListener('resize', placeFab);
   function renderPanel() {
     const ctx = `${view.level}.${view.ti}.${view.pi}`, keepTop = ctx === panelCtx ? panel.scrollTop : 0;
     panelCtx = ctx;
+    fab.hidden = true;
     let h = '';
     if (view.level === 'garden') {
       h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>${renderRecentMenu()}<ul class="lg-list">` +
@@ -568,19 +593,26 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0;
         h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(lp.cards_total, lp.cards_completed)}</p><p>${lp.cards_completed} of ${lp.cards_total} cards read${lqt ? ` · ${lqc} of ${lqt} questions correct` : ''}</p><span class="bar wide"><i style="width:${pct(fraction(lp))}"></i></span></div>`;
       }
-      // The selected lesson carries its own start action, right beside its
-      // name; card dots sit on their own line below the name in every row.
+      // Card dots sit on their own line below the name in every row; the
+      // selected lesson's start action is the floating button at the
+      // panel's right edge (wired below, positioned by placeFab).
       h += '<ol class="lg-lessons">' + trail.path.lessonData.map((lesson, i) => { const lp = lesson.progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
         const row = `<span class="num">${st === 'done' ? '✓' : i + 1}</span><span class="tt"><span class="nm">${esc(lesson.title)}</span><span class="dots">${dots(lp.cards_total, lp.cards_completed)}</span></span>`;
-        if (i !== sel) return `<li><button data-lesson="${i}" class="${st}">${row}</button></li>`;
-        const startLabel = st === 'done' ? 'Review lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson';
-        return `<li class="lg-selrow"><button class="primary lg-start" data-start="${i}">${st === 'done' ? ICON.replay : ICON.play}${startLabel}</button><button data-lesson="${i}" class="${st} sel">${row}</button></li>`; }).join('') + '</ol>';
+        return `<li${i === sel ? ' class="lg-selrow"' : ''}><button data-lesson="${i}" class="${st}${i === sel ? ' sel' : ''}">${row}</button></li>`; }).join('') + '</ol>';
+      if (sel >= 0) {
+        const lp = trail.path.lessonData[sel].progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
+        fab.dataset.start = sel;
+        fab.setAttribute('aria-label', st === 'done' ? 'Review lesson' : st === 'cur' ? 'Continue lesson' : 'Start lesson');
+        fab.innerHTML = (st === 'done' ? ICON.replay : ICON.play) + `<span class="lg-fab-label">${st === 'done' ? 'Review' : st === 'cur' ? 'Continue' : 'Start'}</span>`;
+        fab.hidden = false;
+      }
     }
     panelBody.innerHTML = h;
     panel.scrollTop = keepTop;
     const revealKey = view.level === 'path' && trail && view.lesson >= 0 ? `${view.ti}.${view.pi}.${view.lesson}` : null;
     if (revealKey && revealKey !== revealedLesson) { revealedLesson = revealKey; revealSelectedLesson(); }
     else if (!revealKey) revealedLesson = null;
+    placeFab();
   }
   function renderStats() {
     const t = totals();
@@ -599,7 +631,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
     else if (b.dataset.quiz) onPracticeQuiz?.(trail.path.id, trail.path.title);
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
-    else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
+    else if (b.classList.contains('lg-handle')) { panel.classList.toggle('open'); trackFab(); }
   });
 
   let labelDefs = [];
