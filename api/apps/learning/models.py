@@ -275,3 +275,11 @@ class QuestionAttempt(models.Model):
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
 
+
+class LearningProgress(LearningPath):
+    """Proxy giving the read-only admin progress dashboard its own sidebar entry."""
+
+    class Meta:
+        proxy = True
+        verbose_name = "learning progress"
+        verbose_name_plural = "Learning progress"

@@ -1,0 +1,129 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  .lg-wrap { max-width: 960px; margin: 0 auto; }
+  .lg-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  .lg-user-form { display: flex; align-items: center; gap: 8px; }
+  .lg-user-form label { font-size: 13px; font-weight: 600; color: var(--font-subtle-light, #6b7280); }
+  .lg-user-form select {
+    appearance: none; padding: 8px 32px 8px 12px; border-radius: 8px; font-size: 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    background: var(--body-bg, #fff) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center;
+    color: var(--font-color, #111827); cursor: pointer;
+  }
+  .lg-last-activity { font-size: 13px; color: var(--font-subtle-light, #6b7280); }
+  .lg-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .lg-stat {
+    border-radius: 12px; padding: 16px; border: 1px solid var(--border-color, #e5e7eb);
+    background: var(--body-bg, #fff); box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .lg-stat-value { font-size: 26px; font-weight: 700; line-height: 1.1; color: var(--font-color, #111827); }
+  .lg-stat-value small { font-size: 15px; font-weight: 500; color: var(--font-subtle-light, #6b7280); }
+  .lg-rewards { display: flex; flex-wrap: wrap; column-gap: 14px; font-size: 22px; }
+  .lg-rewards > span { white-space: nowrap; }
+  .lg-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+  .lg-dot-drops { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+  .lg-dot-carrots { background: linear-gradient(135deg, #fb923c, #ea580c); }
+  .lg-stat-label { font-size: 13px; font-weight: 600; margin-top: 4px; color: var(--font-color, #111827); }
+  .lg-stat-sub { font-size: 12px; color: var(--font-subtle-light, #6b7280); margin-top: 2px; }
+  .lg-theme { margin-bottom: 24px; }
+  .lg-theme-title { font-size: 15px; font-weight: 700; margin: 0 0 10px; color: var(--font-color, #111827); }
+  .lg-path {
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 10px;
+    border: 1px solid var(--border-color, #e5e7eb); background: var(--body-bg, #fff);
+  }
+  .lg-path-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+  .lg-path-title { font-size: 14px; font-weight: 600; color: var(--font-color, #111827); }
+  .lg-path-lessons { font-size: 12px; color: var(--font-subtle-light, #6b7280); white-space: nowrap; }
+  .lg-bars { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  @media (min-width: 640px) { .lg-bars { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .lg-bar-row { display: flex; align-items: center; gap: 10px; }
+  .lg-bar-label { font-size: 11px; font-weight: 600; width: 74px; flex: none; color: var(--font-subtle-light, #6b7280); text-transform: uppercase; letter-spacing: .03em; }
+  .lg-bar { flex: 1; height: 10px; border-radius: 999px; background: var(--darkened-bg, #f3f4f6); overflow: hidden; }
+  .lg-bar-fill { height: 100%; border-radius: 999px; transition: width .3s ease; min-width: 0; }
+  .lg-bar-cards { background: linear-gradient(90deg, #34d399, #059669); }
+  .lg-bar-questions { background: linear-gradient(90deg, #fbbf24, #d97706); }
+  .lg-bar-count { font-size: 12px; width: 64px; flex: none; text-align: right; color: var(--font-subtle-light, #6b7280); font-variant-numeric: tabular-nums; }
+  .lg-empty {
+    border-radius: 12px; padding: 40px 20px; text-align: center; font-size: 14px;
+    border: 1px dashed var(--border-color, #d1d5db); color: var(--font-subtle-light, #6b7280);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="lg-wrap">
+  <div class="lg-header">
+    <form method="get" class="lg-user-form" action="">
+      <label for="lg-user">Learner</label>
+      <select id="lg-user" name="user" onchange="this.form.submit()">
+        {% for u in users %}
+        <option value="{{ u.pk }}" {% if u.pk == selected_user.pk %}selected{% endif %}>
+          {{ u.get_full_name|default:u.username }}{% if u.pk == user.pk %} (you){% endif %}
+        </option>
+        {% endfor %}
+      </select>
+      <noscript><button type="submit">View</button></noscript>
+    </form>
+    <span class="lg-last-activity">
+      {% if last_activity %}Last activity: {{ last_activity|date:"j M Y, H:i" }}{% else %}No activity yet{% endif %}
+    </span>
+  </div>
+
+  <div class="lg-stats">
+    <div class="lg-stat">
+      <div class="lg-stat-value">{{ totals.cards_pct }}<small>%</small></div>
+      <div class="lg-stat-label">Cards read</div>
+      <div class="lg-stat-sub">{{ totals.cards_read }} / {{ totals.cards_total }} cards</div>
+    </div>
+    <div class="lg-stat">
+      <div class="lg-stat-value">{{ totals.questions_pct }}<small>%</small></div>
+      <div class="lg-stat-label">Questions correct</div>
+      <div class="lg-stat-sub">{{ totals.questions_correct }} / {{ totals.questions_total }} questions</div>
+    </div>
+    <div class="lg-stat">
+      <div class="lg-stat-value">{{ totals.lessons_read }}<small> / {{ totals.lessons_total }}</small></div>
+      <div class="lg-stat-label">Lessons finished</div>
+      <div class="lg-stat-sub">every card read</div>
+    </div>
+    <div class="lg-stat">
+      <div class="lg-stat-value lg-rewards"><span><span class="lg-dot lg-dot-drops"></span>{{ rewards.drops }} <small>drops</small></span><span><span class="lg-dot lg-dot-carrots"></span>{{ rewards.carrots }} <small>carrots</small></span></div>
+      <div class="lg-stat-label">Rewards earned</div>
+      <div class="lg-stat-sub">drops and carrots</div>
+    </div>
+  </div>
+
+  {% if themes %}
+    {% for group in themes %}
+    <section class="lg-theme">
+      <h2 class="lg-theme-title">{{ group.theme.title }}</h2>
+      {% for row in group.paths %}
+      <div class="lg-path">
+        <div class="lg-path-head">
+          <span class="lg-path-title">{{ row.path.title }}</span>
+          <span class="lg-path-lessons">{{ row.lessons_read }}/{{ row.lessons_total }} lessons finished</span>
+        </div>
+        <div class="lg-bars">
+          <div class="lg-bar-row">
+            <span class="lg-bar-label">Cards</span>
+            <div class="lg-bar"><div class="lg-bar-fill lg-bar-cards" style="width: {{ row.cards_pct }}%"></div></div>
+            <span class="lg-bar-count">{{ row.cards_read }}/{{ row.cards_total }}</span>
+          </div>
+          <div class="lg-bar-row">
+            <span class="lg-bar-label">Questions</span>
+            <div class="lg-bar"><div class="lg-bar-fill lg-bar-questions" style="width: {{ row.questions_pct }}%"></div></div>
+            <span class="lg-bar-count">{{ row.questions_correct }}/{{ row.questions_total }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    {% endfor %}
+  {% else %}
+    <div class="lg-empty">No published learning paths yet.</div>
+  {% endif %}
+</div>
+{% endblock %}
