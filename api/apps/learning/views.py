@@ -1,3 +1,4 @@
+import random
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
@@ -19,6 +20,12 @@ from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Questi
 from .images import image_url
 from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
+
+
+def catch_up_payload(state, path_lessons):
+    """Gauge context for the path panel: is the quiz unlocked, and how big is the pool."""
+    return {"eligible": any(state.lesson_fully_read(lesson.pk) for lesson in path_lessons),
+            "remaining": len(state.catch_up_questions(path_lessons))}
 
 
 @never_cache
@@ -59,7 +66,8 @@ def path_detail(request, path_id):
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
-                                          "progress": state.progress(lessons)},
+                                          "progress": state.progress(lessons),
+                                          "catch_up": catch_up_payload(state, lessons)},
                          "theme": described(path.theme),
                          "lessons": [lesson_summary(l, state) for l in lessons],
                          "next_lesson_id": next((str(l.pk) for l in lessons
@@ -162,8 +170,15 @@ def question_attempts(request):
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
         state = LearnerState(request.user)
         checkpoint = (question.lesson_id, question.after_card_position)
-        review = checkpoint in state.passed
-        if review:
+        fully_read = state.lesson_fully_read(question.lesson_id)
+        catch_up = fully_read and question.pk not in state.correct_questions
+        review = checkpoint in state.passed and not catch_up
+        if fully_read:
+            # Once the cards are read every question is answerable (#204): a
+            # gap behaves like a first-run attempt (initial/retry, usual
+            # carrot), an already-correct question is ordinary review practice.
+            current = True
+        elif review:
             selected = next((q for q in checkpoint_questions(state, question.lesson)
                              if q.after_card_position == question.after_card_position), None)
             current = selected is not None and selected.pk == question.pk and any(
@@ -175,8 +190,9 @@ def question_attempts(request):
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
         checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
                           and q.after_card_position == question.after_card_position]
-        retry = QuestionAttempt.objects.filter(user=request.user, question_id__in=checkpoint_ids,
-                                               attempt_type__in=["initial", "retry"]).exists()
+        retry = QuestionAttempt.objects.filter(
+            user=request.user, question_id__in=checkpoint_ids,
+            attempt_type__in=["initial", "retry"]).exists()
         correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
                    else normalize_typed_answer(data["answer"]) in {
                        normalize_typed_answer(answer) for answer in question.accepted_answers
@@ -202,6 +218,47 @@ def question_attempts(request):
                              "correct_answer": question.answer if question.type == Question.Type.TYPE_ANSWER_QUESTION else None,
                              "progress": state.progress([question.lesson]),
                              "next_step": following}, status=201)
+
+
+@never_cache
+@require_GET
+@jwt_required
+def catch_up(request, path_id):
+    """One quiz session for a learning path (#204): ten random questions.
+    While gaps remain they come from the catch-up pool - questions of fully
+    read lessons with no correct answer yet. Review practice unlocks only once
+    the whole path is complete (every card read, every question correct) and
+    draws from the answered questions. `remaining` always counts the gap pool,
+    so the gauge and the button never confuse a session with the pool."""
+    path = get_object_or_404(visible(LearningPath), pk=path_id)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson).filter(learning_path=path))
+    titles = {lesson.pk: lesson.title for lesson in lessons}
+    gaps = state.catch_up_questions(lessons)
+    if gaps:
+        mode, pool = "catch_up", gaps
+    elif lessons and all(state.lesson_fully_read(lesson.pk) for lesson in lessons):
+        mode = "review"
+        pool = [q for lesson in lessons
+                for q in state.questions
+                if q.lesson_id == lesson.pk and q.pk in state.correct_questions]
+    else:
+        # Read lessons have no gaps but another lesson is still unread.
+        mode, pool = "catch_up", []
+    # Session mix (#204): up to 6 questions whose latest attempt is oldest -
+    # they are due for review - filled to 10 with random picks of the rest.
+    # Never-attempted catch-up questions have no attempt yet: they are randoms.
+    old = sorted((q for q in pool if q.pk in state.last_attempt),
+                 key=lambda q: state.last_attempt[q.pk])[:6]
+    rest = [q for q in pool if q.pk not in {q.pk for q in old}]
+    random.shuffle(rest)
+    session = old + rest[:10 - len(old)]
+    random.shuffle(session)
+    return JsonResponse({"learning_path_id": str(path.pk), "mode": mode,
+                         "eligible": any(state.lesson_fully_read(lesson.pk) for lesson in lessons),
+                         "remaining": len(gaps),
+                         "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
+                                       for q in session]})
 
 
 @never_cache
@@ -253,6 +310,8 @@ def garden(request):
             "learning_paths": [{
                 **described(path), "theme_id": str(theme.pk),
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
+                "catch_up": catch_up_payload(state, [lesson for lesson in lessons
+                                                     if lesson.learning_path_id == path.pk]),
                 "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],

@@ -20,45 +20,55 @@ def reward_events():
     card_by_id = {card['pk']: card for card in cards}
     question_by_id = {question['pk']: question for question in questions}
     cards_by_lesson = defaultdict(set)
-    checkpoints_by_lesson = defaultdict(set)
     lessons_by_path = defaultdict(set)
     for card in cards:
         cards_by_lesson[card['lesson_id']].add(card['pk'])
-    for question in questions:
-        checkpoints_by_lesson[question['lesson_id']].add(question['after_card_position'])
     for lesson in lessons:
         lessons_by_path[lesson['learning_path_id']].add(lesson['pk'])
+
+    questions_by_lesson = defaultdict(set)
+    for question in questions:
+        questions_by_lesson[question['lesson_id']].add(question['pk'])
 
     events = defaultdict(list)
     card_times = defaultdict(dict)
     checkpoint_times = defaultdict(dict)
+    question_times = defaultdict(dict)
     for row in CardProgress.objects.filter(card_id__in=card_by_id).values('user_id', 'card_id', 'completed_at'):
         user_id, card_id, at = row['user_id'], row['card_id'], row['completed_at']
         card_times[user_id][card_id] = at
         events[user_id].append(('drops', 1, at))
-    attempts = QuestionAttempt.objects.filter(question_id__in=question_by_id, correct=True).exclude(
-        attempt_type=QuestionAttempt.AttemptType.REVIEW,
-    ).order_by('answered_at', 'pk').values('user_id', 'question_id', 'answered_at')
+    # Per-question first correct answers (quiz and review included) drive lesson
+    # completion; per-checkpoint first non-review correct answers drive carrots.
+    attempts = QuestionAttempt.objects.filter(question_id__in=question_by_id, correct=True).order_by(
+        'answered_at', 'pk',
+    ).values('user_id', 'question_id', 'attempt_type', 'answered_at')
     for row in attempts:
         question = question_by_id[row['question_id']]
+        if row['question_id'] not in question_times[row['user_id']]:
+            question_times[row['user_id']][row['question_id']] = row['answered_at']
+        if row['attempt_type'] == QuestionAttempt.AttemptType.REVIEW:
+            continue
         key = (question['lesson_id'], question['after_card_position'])
         if key not in checkpoint_times[row['user_id']]:
             at = row['answered_at']
             checkpoint_times[row['user_id']][key] = at
             events[row['user_id']].append(('carrots', 1, at))
 
-    for user_id in set(card_times) | set(checkpoint_times):
+    for user_id in set(card_times) | set(question_times):
         lesson_times = {}
         for lesson in lessons:
             lesson_id = lesson['pk']
             required_cards = cards_by_lesson[lesson_id]
-            required_checkpoints = checkpoints_by_lesson[lesson_id]
+            required_questions = questions_by_lesson[lesson_id]
             if not required_cards or not required_cards.issubset(card_times[user_id]):
                 continue
-            if not all((lesson_id, position) in checkpoint_times[user_id] for position in required_checkpoints):
+            # Completion needs every question answered correctly once (#204),
+            # not only one per checkpoint.
+            if not required_questions.issubset(question_times[user_id]):
                 continue
             at = max([card_times[user_id][card_id] for card_id in required_cards] + [
-                checkpoint_times[user_id][(lesson_id, position)] for position in required_checkpoints
+                question_times[user_id][question_id] for question_id in required_questions
             ])
             lesson_times[lesson_id] = at
             events[user_id].append(('drops', 5, at))

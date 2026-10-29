@@ -50,35 +50,57 @@ class LearnerState:
             user=user, card__in=self.cards,
         ).values_list("card_id", "completed_at"))
         attempts = list(QuestionAttempt.objects.filter(user=user, question__in=self.questions)
-                        .values("question_id", "correct", "attempt_type"))
+                        .values("question_id", "correct", "attempt_type", "answered_at"))
         questions = {q.pk: q for q in self.questions}
         self.passed = {(questions[a["question_id"]].lesson_id,
                         questions[a["question_id"]].after_card_position)
                        for a in attempts if a["correct"] and a["attempt_type"] != "review"}
+        # A question counts as answered once it has one correct attempt of any
+        # type, review included: the gauge means "ever answered correctly".
+        self.correct_questions = {a["question_id"] for a in attempts if a["correct"]}
         self.wrong_counts = Counter(
             (questions[a["question_id"]].lesson_id, questions[a["question_id"]].after_card_position,
              questions[a["question_id"]].type)
             for a in attempts if not a["correct"]
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
+        self.last_attempt = {}
+        for a in attempts:  # ordered by answered_at: the last write wins
+            self.last_attempt[a["question_id"]] = a["answered_at"]
 
     def progress(self, lessons):
         ids = {lesson.pk for lesson in lessons}
         cards = [c for c in self.cards if c.lesson_id in ids]
-        checkpoints = {(q.lesson_id, q.after_card_position) for q in self.questions if q.lesson_id in ids}
+        questions = [q for q in self.questions if q.lesson_id in ids]
+        checkpoints = {(q.lesson_id, q.after_card_position) for q in questions}
         done = sum(c.pk in self.completed for c in cards)
         correct = len(checkpoints & self.passed)
+        answered = sum(q.pk in self.correct_questions for q in questions)
+        # A lesson completes once every card is read and every question has one
+        # correct answer: rotation can leave pool alternatives unseen (#204).
         completed_lessons = sum(
             bool(lesson_cards := [c for c in cards if c.lesson_id == lesson.pk])
             and all(c.pk in self.completed for c in lesson_cards)
-            and all(checkpoint in self.passed for checkpoint in checkpoints if checkpoint[0] == lesson.pk)
+            and all(q.pk in self.correct_questions for q in questions if q.lesson_id == lesson.pk)
             for lesson in lessons
         )
         return {"lessons_completed": completed_lessons, "lessons_total": len(ids),
                 "cards_completed": done, "cards_total": len(cards),
                 "checkpoints_correct": correct, "checkpoints_total": len(checkpoints),
+                "questions_correct": answered, "questions_total": len(questions),
                 "started": bool(done or ids & self.attempted),
                 "completed": bool(ids) and completed_lessons == len(ids)}
+
+    def lesson_fully_read(self, lesson_id):
+        cards = [c for c in self.cards if c.lesson_id == lesson_id]
+        return bool(cards) and all(c.pk in self.completed for c in cards)
+
+    def catch_up_questions(self, lessons):
+        """Questions of fully read lessons with no correct answer yet: never
+        attempted or only answered wrong. The catch-up quiz closes those gaps."""
+        return [q for lesson in lessons if self.lesson_fully_read(lesson.pk)
+                for q in self.questions
+                if q.lesson_id == lesson.pk and q.pk not in self.correct_questions]
 
 
 def lesson_summary(lesson, state):
