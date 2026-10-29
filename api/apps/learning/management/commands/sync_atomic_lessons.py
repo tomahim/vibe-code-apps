@@ -294,17 +294,40 @@ class Command(BaseCommand):
                 "skipping WebP variant processing (repository fallback keeps serving them)."
             )
             return {}
-        prepared = {}
+        to_process = []
+        unchanged = 0
+        non_raster = 0
         for element in cards:
             candidate = self.image_file(element["metadata"], element["directory"], element["location"])
             if not illustrations.raster_image(candidate):
-                continue  # SVG and friends are served as-is through the fallback
+                non_raster += 1  # SVG and friends are served as-is through the fallback
+                continue
             sha = illustrations.source_hash(candidate)
             row = Card.objects.filter(pk=element["id"]).first()
             if row is not None and row.illustration_source_hash == sha and row.illustration_variants:
-                continue  # unchanged source: no decode, resize or upload
-            self.stdout.write(f"Processing card image {element['location']} (sha256 {sha[:12]}…)")
-            prepared[str(element["id"])] = illustrations.process_card_image(element["id"], candidate)
+                unchanged += 1  # unchanged source: no decode, resize or upload
+                continue
+            to_process.append((element, candidate))
+        if unchanged:
+            self.stdout.write(f"Illustrations: {unchanged} unchanged (source hash match), no reprocessing.")
+        if non_raster:
+            self.stdout.write(f"Illustrations: {non_raster} non-raster image(s) served as-is via the repository fallback.")
+        prepared = {}
+        # Units are source illustrations; each uploads its 640/1280 WebP
+        # variants. The counter advances only after a successful upload, and a
+        # failure aborts the sync, so the last line printed is never ahead of
+        # what actually reached the bucket.
+        total = len(to_process)
+        for index, (element, candidate) in enumerate(to_process, start=1):
+            result = illustrations.process_card_image(element["id"], candidate)
+            if not result or not result.get("illustration_variants"):
+                raise CommandError(
+                    f"{element['location']}: illustration processing returned no uploaded variants"
+                )
+            prepared[str(element["id"])] = result
+            self.stdout.write(f"Illustrations: uploaded {index}/{total} - {element['location']}")
+        if total:
+            self.stdout.write(f"Illustrations: all {total} changed source image(s) uploaded successfully.")
         return prepared
 
     @staticmethod
@@ -374,7 +397,11 @@ class Command(BaseCommand):
         records_by_dir = {}
         positions_seen = {}
         seen_ids = {element["id"] for element in elements}
-        for element in elements:
+        # Periodic one-line progress so CI logs show the import advancing
+        # through themes, paths, lessons, cards and questions (#195).
+        total = len(elements)
+        progress_step = max(1, min(100, total // 25)) if total else 1
+        for index, element in enumerate(elements, start=1):
             element["provenance"]["last_changed_commit"] = self.last_changed_commit(
                 element["provenance"]["source_path"]
             )
@@ -448,6 +475,8 @@ class Command(BaseCommand):
             record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit, seen_ids)
             if element["kind"] in ("theme", "learning_path", "lesson"):
                 records_by_dir[element["directory"]] = record
+            if index % progress_step == 0 or index == total:
+                self.stdout.write(f"Content: {index}/{total} elements processed.")
         self.enforce_retirement(seen_ids)
 
     def enforce_retirement(self, seen_ids):
