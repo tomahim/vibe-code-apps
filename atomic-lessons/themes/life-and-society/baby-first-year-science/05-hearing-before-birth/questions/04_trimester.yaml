@@ -1,0 +1,11 @@
+id: 7ee18574-58fb-4f32-879a-d82c4ae2d3dc
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "During which trimester does fetal hearing become functional?"
+accepted_answers:
+  - "third trimester"
+  - "the third trimester"
+  - "3rd trimester"
+explanation: "The auditory system is working by the third trimester, and prenatal listening leaves memory traces."
+archived: false

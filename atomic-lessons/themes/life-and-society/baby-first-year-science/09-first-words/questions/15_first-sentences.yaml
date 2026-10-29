@@ -1,0 +1,19 @@
+id: d595249a-bd15-449c-8358-ad7adafe8994
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Early two-word sentences across children and languages mostly express:"
+choices:
+  - id: 5d4838c5-e07c-4ecd-9915-4be105d3ae2f
+    text: "Agents, actions, possessions, locations and refusals"
+  - id: 237f7ddd-05a5-4887-9b36-ecd09d702997
+    text: "Abstract philosophy"
+  - id: e0b3caa8-ba41-4b7b-a7d1-eef2ec283059
+    text: "Past-tense narratives"
+  - id: 4e92abfd-e4dc-4d7e-a90a-827918082ca5
+    text: "Numbers and counting"
+correct_choice_ids:
+  - 5d4838c5-e07c-4ecd-9915-4be105d3ae2f
+explanation: "The semantic content of first sentences is remarkably consistent across children and languages."
+archived: false

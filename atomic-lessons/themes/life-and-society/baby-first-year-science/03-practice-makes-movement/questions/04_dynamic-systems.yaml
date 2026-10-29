@@ -1,0 +1,10 @@
+id: 53c53ccf-585a-49e1-beeb-57f1e424ecaf
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What is the name of Thelen's theory that motor skills are assembled from many interacting components?"
+accepted_answers:
+  - "dynamic systems theory"
+  - "dynamic systems"
+explanation: "Dynamic systems theory says walking appears when strength, balance, motivation and context reach a workable combination."
+archived: false

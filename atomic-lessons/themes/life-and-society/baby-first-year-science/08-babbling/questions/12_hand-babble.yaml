@@ -1,0 +1,11 @@
+id: 98ad7eb9-2044-4100-bde8-801a71937e82
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the informal name for the rhythmic, syllable-like manual babbling of signing babies?"
+accepted_answers:
+  - "hand babbling"
+  - "manual babbling"
+  - "hand babble"
+explanation: "Petitto's hand babbling demonstrates that babbling rehearses language structure, not just mouth movement."
+archived: false

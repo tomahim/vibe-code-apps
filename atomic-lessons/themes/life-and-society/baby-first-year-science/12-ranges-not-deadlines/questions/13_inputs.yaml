@@ -1,0 +1,19 @@
+id: 9439d7fa-4e51-43d9-a023-6e4b853f703e
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "The evidence-supported caregiver inputs are:"
+choices:
+  - id: 84a6f154-7f4b-4d69-9520-977f5deb4531
+    text: "Floor time, responsive talk, varied flavors, shared attention"
+  - id: 90a1e05a-ae20-49a5-887a-026644cdfa9f
+    text: "Flashcards and apps"
+  - id: e6d2188c-ef17-410b-a96e-1f7759afea2f
+    text: "Walkers and jumpers"
+  - id: 91651b18-543c-46d6-99fa-daba86f2345c
+    text: "Scheduled drills"
+correct_choice_ids:
+  - 84a6f154-7f4b-4d69-9520-977f5deb4531
+explanation: "Ordinary responsive care supplies the raw material; no product outperforms it."
+archived: false

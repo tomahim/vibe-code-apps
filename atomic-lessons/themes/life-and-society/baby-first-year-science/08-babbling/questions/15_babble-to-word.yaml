@@ -1,0 +1,19 @@
+id: 92a1d4d2-9641-4bba-b631-c61ef7bc5757
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "When does a baby's consistent ba used only for a ball arguably become a word?"
+choices:
+  - id: 397f94c5-ce11-49c6-9689-feb4997edf77
+    text: "When it forms a stable sound-meaning pairing"
+  - id: 1130ef97-35e4-4359-be01-9445094c2008
+    text: "After 20 uses"
+  - id: cf72dcce-cb2f-4b4e-abaa-2e17e643dbe1
+    text: "Only after 12 months"
+  - id: c52d4f84-288f-449b-82df-507d062da953
+    text: "When it is written down"
+correct_choice_ids:
+  - 397f94c5-ce11-49c6-9689-feb4997edf77
+explanation: "The babble-to-word boundary is blurry; a stable pairing of a sound with a meaning is what counts."
+archived: false

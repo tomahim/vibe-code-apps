@@ -1,0 +1,19 @@
+id: 57de0f7f-3dd8-47f0-984c-4c7a2dafe198
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Tummy time recommendations became prominent because:"
+choices:
+  - id: 26e6ebbf-5544-419b-be6e-e7c59b34a141
+    text: "Back-sleeping campaigns reduced infants' time on their stomachs"
+  - id: b74774e1-0b7c-4021-88fd-4e566f286b79
+    text: "Babies began walking later everywhere"
+  - id: 56ecaa20-b810-49e0-b7ff-7dfd1d64ae13
+    text: "Crawling was removed from milestone lists"
+  - id: d4993850-bfb1-41fc-8802-bf490a2ea90a
+    text: "Walkers became popular"
+correct_choice_ids:
+  - 26e6ebbf-5544-419b-be6e-e7c59b34a141
+explanation: "Back to Sleep cut infant deaths but reduced prone experience; supervised awake tummy time replaced it."
+archived: false

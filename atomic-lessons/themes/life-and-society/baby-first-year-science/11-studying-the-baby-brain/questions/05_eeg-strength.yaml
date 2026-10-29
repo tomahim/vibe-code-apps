@@ -1,0 +1,19 @@
+id: 56951c82-1f85-484b-be74-887def8fdec9
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "EEG's particular strength in infant research is:"
+choices:
+  - id: 0941580d-2266-4923-b656-625e733fdb91
+    text: "Millisecond timing of brain responses"
+  - id: 9cba3856-aaf2-4e07-b147-d9e982188cd7
+    text: "Precise deep-brain localization"
+  - id: 45d448a6-e66d-46a0-af88-a179d03f3b8c
+    text: "Detailed anatomy"
+  - id: 9c859935-c1f6-4092-80a7-33556dc2efda
+    text: "Measuring blood flow"
+correct_choice_ids:
+  - 0941580d-2266-4923-b656-625e733fdb91
+explanation: "Event-related potentials resolve when the brain responds; localization is the weak side."
+archived: false

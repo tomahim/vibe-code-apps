@@ -1,0 +1,10 @@
+id: 20877bc1-1582-41a9-88ad-1a4b77ed2619
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What is the name of the reflex that turns a baby's head toward a cheek stroke to search for the nipple?"
+accepted_answers:
+  - "rooting reflex"
+  - "rooting"
+explanation: "Rooting is the search-and-find reflex of feeding; stroking near the mouth triggers the head turn."
+archived: false

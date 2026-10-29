@@ -1,0 +1,19 @@
+id: 168fe3fb-2ff7-484d-82fe-bb410e93fb7d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Later research on the word gap confirmed that:"
+choices:
+  - id: 8a3eef8e-1363-41b6-9aa3-0eeceedbcbda
+    text: "Quantity and especially quality of child-directed talk predict vocabulary growth"
+  - id: 48e1040a-abe6-4159-b2c2-e3a9319441fc
+    text: "Only the number of books matters"
+  - id: 2e1d3cb2-0ba7-4efe-b366-2e9c773b7c77
+    text: "Income has no relation to input"
+  - id: 720fe403-8822-4d2b-921d-3eefc6518271
+    text: "Television closes the gap"
+correct_choice_ids:
+  - 8a3eef8e-1363-41b6-9aa3-0eeceedbcbda
+explanation: "Responsive conversational turns and shared reading predict growth better than raw word counts."
+archived: false

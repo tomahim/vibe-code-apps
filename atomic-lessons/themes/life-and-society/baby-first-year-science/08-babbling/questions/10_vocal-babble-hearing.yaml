@@ -1,0 +1,19 @@
+id: c005d2d0-bb6a-42fa-a911-aa476cd54850
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Deaf babies exposed only to spoken language show:"
+choices:
+  - id: 69be8c36-4895-4316-b7ca-4968836f837b
+    text: "Reduced and delayed vocal babbling"
+  - id: 6c86ef49-f668-47ef-b50b-f9a6900ba97f
+    text: "Normal vocal babbling"
+  - id: f33b4508-58a5-4582-a7cd-4ca7b9bfbe8d
+    text: "Earlier vocal babbling"
+  - id: 5748195b-12cb-4988-a213-be3d863615a7
+    text: "No difference from hearing babies"
+correct_choice_ids:
+  - 69be8c36-4895-4316-b7ca-4968836f837b
+explanation: "Auditory feedback from one's own voice and caregivers is necessary for vocal babble to take off."
+archived: false

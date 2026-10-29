@@ -1,0 +1,19 @@
+id: f83d8917-3647-4c2c-b5f1-1f197034575e
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Clinically, the absence of canonical babble by about 10 months is:"
+choices:
+  - id: 4fe236a1-5294-4b2f-a25c-b563fdfa729a
+    text: "A marker prompting professional assessment, including of hearing"
+  - id: 43e9fb1d-dc9c-4ff2-9825-4e734c58ae0b
+    text: "Always meaningless"
+  - id: 1c3a6c52-1357-4178-97ed-b19812dfa58f
+    text: "Proof of autism"
+  - id: c144e245-0616-4785-a184-1bdcf896978a
+    text: "A sign of intelligence"
+correct_choice_ids:
+  - 4fe236a1-5294-4b2f-a25c-b563fdfa729a
+explanation: "Tightly timed behaviors are informative when absent; it is a prompt for evaluation, never a diagnosis alone."
+archived: false

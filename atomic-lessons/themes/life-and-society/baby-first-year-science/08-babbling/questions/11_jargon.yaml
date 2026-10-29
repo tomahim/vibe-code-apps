@@ -1,0 +1,19 @@
+id: 9b075ca3-5444-4395-8cbe-4a26d8adaeba
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Jargon babbling is best described as:"
+choices:
+  - id: f4117c34-79bc-4355-a22c-90366b80c189
+    text: "Fluent syllable streams with real conversational melody but few or no words"
+  - id: 7ef6ffe3-f5d6-43f9-9dea-4825cfd3bca5
+    text: "Random noise"
+  - id: e52e3fd6-c777-49da-9a9e-dc2b85eb1f90
+    text: "Whispered words"
+  - id: 0632474e-fad4-4695-bc9f-f9977eb4c862
+    text: "A speech disorder"
+correct_choice_ids:
+  - f4117c34-79bc-4355-a22c-90366b80c189
+explanation: "The baby has captured the prosody of conversation - questions rise, statements fall - before the words arrive."
+archived: false

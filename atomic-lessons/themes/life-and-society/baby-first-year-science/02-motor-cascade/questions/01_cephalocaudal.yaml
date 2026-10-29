@@ -1,0 +1,19 @@
+id: 1d8bc0b5-d9ad-441b-a2b0-c5f38fa1ee69
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The cephalocaudal pattern means babies gain control:"
+choices:
+  - id: a7ea7f35-60b9-4a67-8a0b-98475acdc019
+    text: "From head to toe"
+  - id: 172913ca-1517-49ba-b850-6078e35cbd66
+    text: "From toe to head"
+  - id: bf4c8f1a-1d53-44b4-8bb3-e4dfca27a0be
+    text: "From fingers to shoulders"
+  - id: 763f782c-39f6-4cd3-8eaf-bb709bfa8a67
+    text: "All at once"
+correct_choice_ids:
+  - a7ea7f35-60b9-4a67-8a0b-98475acdc019
+explanation: "Head control comes first, then trunk, then legs - control spreads downward along the body."
+archived: false

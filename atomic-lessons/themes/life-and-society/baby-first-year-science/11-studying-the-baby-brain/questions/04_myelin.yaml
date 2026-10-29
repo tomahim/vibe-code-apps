@@ -1,0 +1,9 @@
+id: d50d5daa-c977-40e5-bf6a-c42df45d411b
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: "What is the name of the insulation that speeds signaling along axons?"
+accepted_answers:
+  - "myelin"
+explanation: "Myelination marches from sensory to association areas across development and speeds neural signaling."
+archived: false

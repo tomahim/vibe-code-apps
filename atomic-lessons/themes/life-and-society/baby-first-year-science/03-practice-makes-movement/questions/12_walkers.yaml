@@ -1,0 +1,19 @@
+id: 688263c9-0d53-458c-9fb5-e0055d2d1f6e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "The American Academy of Pediatrics discourages wheeled baby walkers because of:"
+choices:
+  - id: 854b79be-78af-43b9-857d-586940f1d22d
+    text: "Injury risk and no motor benefit"
+  - id: 3df72d14-e611-40f0-ae1f-93e0d72ce181
+    text: "High cost"
+  - id: 88977c3b-c959-44be-9fff-9f8f902c9cbe
+    text: "Noise"
+  - id: fd94d4c5-9480-4dd0-8322-a3d3cbdad61c
+    text: "Battery use"
+correct_choice_ids:
+  - 854b79be-78af-43b9-857d-586940f1d22d
+explanation: "Walkers cause injuries and are linked with slightly later walking; mobility without balance work does not build walking."
+archived: false

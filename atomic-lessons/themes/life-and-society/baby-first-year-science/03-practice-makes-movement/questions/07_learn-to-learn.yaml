@@ -1,0 +1,19 @@
+id: 7f6f7fde-9c47-48f1-9f17-fbe500ea526b
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Adolph's phrase learning to learn refers to babies acquiring:"
+choices:
+  - id: ec84407b-8007-4a43-9ce1-570968008eb2
+    text: "A flexible ability to read new movement situations"
+  - id: d3d6137d-fa1e-48ba-a9ab-905d85f3da43
+    text: "Adult walking technique"
+  - id: b4063382-a4b3-4e76-abdc-3c1d86e91362
+    text: "Language through movement"
+  - id: f2320952-273c-4792-bbf6-c6fdad5c0171
+    text: "A fixed walking program"
+correct_choice_ids:
+  - ec84407b-8007-4a43-9ce1-570968008eb2
+explanation: "What accumulates is not one rigid skill but the capacity to calibrate to new bodies, postures and surfaces."
+archived: false

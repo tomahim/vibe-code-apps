@@ -1,0 +1,19 @@
+id: 511288eb-094b-4e2c-b6b9-627bd98a6fc7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Compared with formula, breast milk flavors:"
+choices:
+  - id: 8f2c5fc0-95db-42d3-9382-50e6317d91dd
+    text: "Vary day to day with the mother's diet"
+  - id: 3d311465-c33d-4271-a7f0-3b0fc9284a70
+    text: "Are always identical"
+  - id: b78b8a07-0993-431a-a6c0-b1f84b6ff2e9
+    text: "Contain no flavors"
+  - id: 5261c7b5-956f-41dd-9680-c09b044525c4
+    text: "Are always sweet"
+correct_choice_ids:
+  - 8f2c5fc0-95db-42d3-9382-50e6317d91dd
+explanation: "This daily variety is one hypothesized reason breastfed babies accept more varied foods at weaning."
+archived: false

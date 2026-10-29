@@ -1,0 +1,10 @@
+id: ab03f08c-1e17-46b6-bd28-624b84ae1a83
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What is the first name of the researcher known for prenatal and milk flavor-learning studies?"
+accepted_answers:
+  - "Julie"
+  - "Julie Mennella"
+explanation: "Julie Mennella's work showed flavor learning through amniotic fluid and breast milk."
+archived: false

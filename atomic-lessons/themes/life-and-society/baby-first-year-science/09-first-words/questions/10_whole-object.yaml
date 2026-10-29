@@ -1,0 +1,19 @@
+id: 7e82dedf-d0ff-48aa-8cc6-0a408e16d23e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "When hearing a new word for an unfamiliar object, children tend to assume it names:"
+choices:
+  - id: 3eb23237-5803-4181-adfc-ef15fb0b7cf0
+    text: "The whole object"
+  - id: 878dc8f9-79c6-485d-9b25-74911aa9ee61
+    text: "A part of it"
+  - id: 5f6098a8-c6aa-4c4f-b39d-df7bd975d44c
+    text: "Its color"
+  - id: 3ca71242-9f63-4601-8cf4-9fa5ef0b57c7
+    text: "Its owner"
+correct_choice_ids:
+  - 3eb23237-5803-4181-adfc-ef15fb0b7cf0
+explanation: "The whole-object assumption is one of the default constraints that narrow a new word's meaning."
+archived: false

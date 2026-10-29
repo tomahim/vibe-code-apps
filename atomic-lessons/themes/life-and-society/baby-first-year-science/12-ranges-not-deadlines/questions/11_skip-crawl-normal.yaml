@@ -1,0 +1,19 @@
+id: b0400fad-a918-41bc-9457-dbd8358c4c35
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Skipping hands-and-knees crawling is best read as:"
+choices:
+  - id: 53659cd0-65ef-428c-8aee-da6d25b3d44b
+    text: "A documented normal variant seen in about 4.3% of the WHO sample"
+  - id: bb7e6727-4b64-4072-a8f2-99a52b4e44fd
+    text: "Always a red flag"
+  - id: d075735b-c6db-4d5b-b340-bd0f13b430d6
+    text: "Proof of high intelligence"
+  - id: 83dd95a9-5f62-41f6-988d-91df7fc4cf65
+    text: "A reason for therapy"
+correct_choice_ids:
+  - 53659cd0-65ef-428c-8aee-da6d25b3d44b
+explanation: "The WHO data show some typical babies never crawl on hands and knees and walk normally."
+archived: false

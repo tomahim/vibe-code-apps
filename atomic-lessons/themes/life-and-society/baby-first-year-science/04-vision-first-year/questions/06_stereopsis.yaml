@@ -1,0 +1,19 @@
+id: 1de7c530-6103-480c-8a27-6f03c827c09e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Stereopsis, the binocular depth signal, is shown by most infants by about:"
+choices:
+  - id: 8e222093-2132-44e6-a5c5-278b4ccff5ab
+    text: "4 months"
+  - id: f9aa3772-43ba-41be-bc3a-bd341d4d23b4
+    text: "At birth"
+  - id: 2e2abdca-55bd-41b5-9f5a-bd15bbf50ca0
+    text: "12 months"
+  - id: 5bda38b8-c470-47c5-a3f3-58339375129a
+    text: "2 years"
+correct_choice_ids:
+  - 8e222093-2132-44e6-a5c5-278b4ccff5ab
+explanation: "Preferential-looking studies find few infants show stereopsis before 4 months, most do by about 4 months, and nearly all by 5-6 months."
+archived: false

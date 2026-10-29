@@ -1,0 +1,19 @@
+id: 6bba8740-db13-46c3-a43c-70913c14e0db
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "fNIRS measures cortical activity by:"
+choices:
+  - id: 23ceef5d-8a3d-4342-8e50-cbcc3e565887
+    text: "Shining near-infrared light and reading oxygenation from returning light"
+  - id: d42f30a8-c24f-4015-b3b4-2f7a93a410c0
+    text: "Recording electrical rhythms"
+  - id: 7a786981-a209-4fdc-9fad-94f386f6bd45
+    text: "Injecting tracers"
+  - id: 31aa7ba5-5c5b-4f43-ba82-1fdb32ba3796
+    text: "Using magnetic resonance"
+correct_choice_ids:
+  - 23ceef5d-8a3d-4342-8e50-cbcc3e565887
+explanation: "fNIRS works on awake, lap-sitting babies and localizes activity to outer cortical regions."
+archived: false

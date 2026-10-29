@@ -1,0 +1,11 @@
+id: 6a4b83c0-5fbd-4a17-8c2e-524cdaa23050
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the common short name of the parent-report inventory used to map vocabulary variation?"
+accepted_answers:
+  - "CDI"
+  - "the CDI"
+  - "MacArthur-Bates CDI"
+explanation: "The MacArthur-Bates Communicative Development Inventories provide the percentile maps of early vocabulary."
+archived: false

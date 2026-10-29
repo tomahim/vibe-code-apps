@@ -1,0 +1,19 @@
+id: b4297047-2586-4a60-a6d7-c9da92cf7158
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why are reflexes especially useful at the newborn exam?"
+choices:
+  - id: 6a9640c8-1659-412a-8baa-c34377024d02
+    text: "They report on the nervous system without needing the baby's cooperation"
+  - id: a0ce0bbf-aae5-4a39-bb7a-2e1a690f66cf
+    text: "They predict future intelligence"
+  - id: 72ab53d2-e135-409c-8fc7-b623a314c670
+    text: "They show which parent the baby prefers"
+  - id: 654559dd-888b-4dbb-b530-e91ff7a9a7d7
+    text: "They measure how fast the baby will walk"
+correct_choice_ids:
+  - 6a9640c8-1659-412a-8baa-c34377024d02
+explanation: "An infant cannot follow instructions, but automatic responses give standardized information about neural wiring."
+archived: false

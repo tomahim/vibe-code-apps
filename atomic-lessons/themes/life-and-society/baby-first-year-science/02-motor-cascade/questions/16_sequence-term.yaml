@@ -1,0 +1,10 @@
+id: 65517a6d-f531-4d18-9a71-902ecca2c1da
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "What single word names the side-to-side walking babies do while holding onto furniture?"
+accepted_answers:
+  - "cruising"
+  - "cruise"
+explanation: "Cruising along furniture usually comes after pulling to stand and before independent steps."
+archived: false

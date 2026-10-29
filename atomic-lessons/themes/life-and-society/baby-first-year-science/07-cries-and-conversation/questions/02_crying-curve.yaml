@@ -1,0 +1,19 @@
+id: c5a4a855-df5f-44a1-9556-5785a3025b41
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The normal crying curve peaks at about:"
+choices:
+  - id: 6448499a-78a2-42fa-aaf0-dd15e4b4ad7a
+    text: "6 to 8 weeks"
+  - id: 7b8516d9-bb17-460c-9348-97a2dc3ba5de
+    text: "6 to 8 months"
+  - id: 4e7da421-e07c-4161-8fb4-cb1fd60a814b
+    text: "2 weeks"
+  - id: 487b2758-2338-4c60-8433-00339279f303
+    text: "6 months"
+correct_choice_ids:
+  - 6448499a-78a2-42fa-aaf0-dd15e4b4ad7a
+explanation: "Crying rises from birth, peaks around 6-8 weeks, and declines toward 3-4 months across cultures."
+archived: false

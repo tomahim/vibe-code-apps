@@ -1,0 +1,19 @@
+id: 4164be54-3e82-4167-a135-0689577cef30
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which sequence usually precedes independent walking?"
+choices:
+  - id: 5ec0cda2-0fbe-4107-b423-f02eecba2f89
+    text: "Pulling to stand, then cruising along furniture, then brief standing alone"
+  - id: b7d77c77-d1e2-4393-a0ce-42a964443886
+    text: "Crawling, then running, then walking"
+  - id: e10a10d6-948a-44b4-9bf6-52948b920a85
+    text: "Sitting, then immediately walking"
+  - id: aabd04dd-159b-44fc-bef8-eb32a440255a
+    text: "Rolling, then hopping, then walking"
+correct_choice_ids:
+  - 5ec0cda2-0fbe-4107-b423-f02eecba2f89
+explanation: "Babies typically pull to stand, cruise sideways holding furniture, stand alone briefly, then take first steps."
+archived: false

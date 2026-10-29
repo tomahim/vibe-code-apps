@@ -1,0 +1,19 @@
+id: a9d95f8b-5147-42b5-a4f3-1e3754ec3dd4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Compared with the CDC's single actionable lines, the WHO windows publish:"
+choices:
+  - id: 43c87a8e-f007-4675-befd-1e6c73a9ea0f
+    text: "The full 1st-to-99th-percentile normal spread"
+  - id: 95313da7-324b-4b83-8d99-8640a0f716d6
+    text: "Only averages"
+  - id: e40451fe-9007-4d53-9797-0f48338d11d0
+    text: "Only the latest ages"
+  - id: 560267c1-9ff3-45b6-851a-d94631d81281
+    text: "Only the earliest ages"
+correct_choice_ids:
+  - 43c87a8e-f007-4675-befd-1e6c73a9ea0f
+explanation: "The WHO approach describes variation directly; the CDC approach optimizes for actionability."
+archived: false

@@ -1,0 +1,10 @@
+id: 91dd19a1-9c8a-457e-820b-fefd5c95319a
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "What is the name of the multi-lab consortium that replicates infant findings?"
+accepted_answers:
+  - "ManyBabies"
+  - "Many Babies"
+explanation: "ManyBabies coordinates dozens of infant labs running identical pre-registered studies."
+archived: false

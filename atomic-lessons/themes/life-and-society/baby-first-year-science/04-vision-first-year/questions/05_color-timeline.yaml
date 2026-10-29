@@ -1,0 +1,19 @@
+id: 2cd237ec-2d74-4760-80f8-79ab13d9e4e0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "By about 2 to 4 months, infant color discrimination:"
+choices:
+  - id: 532d4df5-ed1d-4c4b-9aa2-1719852f5f4a
+    text: "Resembles adult color categories"
+  - id: e7664c07-cb1e-4d91-aa68-912a50cb6c51
+    text: "Does not exist yet"
+  - id: 19e6e950-8030-462f-bcdd-d407fedd1b7e
+    text: "Is limited to red only"
+  - id: 4352f53e-e2fb-41c2-bc33-a84b2cf44200
+    text: "Exceeds adult ability"
+correct_choice_ids:
+  - 532d4df5-ed1d-4c4b-9aa2-1719852f5f4a
+explanation: "By two to four months babies group colors into categories much as adults do."
+archived: false

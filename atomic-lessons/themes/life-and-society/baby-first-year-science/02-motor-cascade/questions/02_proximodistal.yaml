@@ -1,0 +1,19 @@
+id: 652f3ba7-72a0-46b6-997c-f6ef97795971
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "A baby batting at a toy before mastering the pincer grasp illustrates:"
+choices:
+  - id: d6549164-b13e-4272-9cf4-ad19f2ed6900
+    text: "Proximodistal development: shoulder control before finger control"
+  - id: 43a79edc-e720-4c65-8c9d-0ff13982b540
+    text: "Cephalocaudal development"
+  - id: eb7fbb48-bbf9-4182-aec2-cb10844d73f0
+    text: "A reflex that never fades"
+  - id: 0af04e80-516c-4924-95c0-2c35fd0bad05
+    text: "A delay in visual development"
+correct_choice_ids:
+  - d6549164-b13e-4272-9cf4-ad19f2ed6900
+explanation: "Control moves from the center of the body outward, so whole-arm movements precede fine finger work."
+archived: false

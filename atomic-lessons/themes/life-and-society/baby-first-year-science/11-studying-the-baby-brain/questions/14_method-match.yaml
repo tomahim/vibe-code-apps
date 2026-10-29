@@ -1,0 +1,19 @@
+id: 8d8cb271-00e2-4214-b18b-2b95e36f7148
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "A claim about precisely which deep-brain structure fired in an awake baby best matches which method's limits?"
+choices:
+  - id: 5c07af67-3929-47bc-81fe-4077d80e5918
+    text: "None of EEG, fNIRS or infant MRI can deliver that well"
+  - id: 9bc02b37-f041-44b5-922c-231b647f4630
+    text: "EEG alone"
+  - id: aee7cdb9-30d5-4549-b49a-36e1ac306454
+    text: "fNIRS alone"
+  - id: 1577e5b4-87c6-4eed-8510-ce66154ad524
+    text: "Standard awake infant MRI"
+correct_choice_ids:
+  - 5c07af67-3929-47bc-81fe-4077d80e5918
+explanation: "EEG localizes coarsely, fNIRS sees only outer cortex, and awake infant fMRI is rare and difficult."
+archived: false

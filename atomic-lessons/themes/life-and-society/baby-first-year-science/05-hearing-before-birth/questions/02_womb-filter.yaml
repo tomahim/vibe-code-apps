@@ -1,0 +1,19 @@
+id: d20ddfec-ef54-4a33-9511-2eb6bbd0abaf
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Through the mother's body, which part of her voice carries best to the fetus?"
+choices:
+  - id: f8e93240-f215-4564-b171-a1097bfce87c
+    text: "Low frequencies, melody and rhythm"
+  - id: ef4f8c52-1580-434f-bb37-0331ab7bffc2
+    text: "Consonant detail"
+  - id: c6ae8792-d49c-49f2-8954-399421fd90b8
+    text: "High-pitched whispers"
+  - id: cbd04d94-d23c-4b74-9af0-8ebd89a26365
+    text: "Individual phonemes"
+correct_choice_ids:
+  - f8e93240-f215-4564-b171-a1097bfce87c
+explanation: "Tissue and fluid filter the voice; the prosody survives far better than fine acoustic detail."
+archived: false

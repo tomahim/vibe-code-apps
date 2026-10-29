@@ -1,0 +1,19 @@
+id: 4094a07e-ca32-405a-a726-92bdee5670ce
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Declarative pointing (pointing to share interest) matters because it shows the baby understands:"
+choices:
+  - id: 4421de7c-5c8a-4939-bdd7-eab16eaa25c5
+    text: "Another mind's attention can be directed"
+  - id: ca1ded68-1409-443f-b255-2545e8ab00fa
+    text: "How to grasp small objects"
+  - id: 6b58aedc-19dc-484d-8452-427156204a66
+    text: "That objects are permanent"
+  - id: 972a1ced-9561-40af-9656-92b8f492417c
+    text: "How to walk"
+correct_choice_ids:
+  - 4421de7c-5c8a-4939-bdd7-eab16eaa25c5
+explanation: "Pointing to share attention is a foundation of communication, appearing around 9-10 months."
+archived: false

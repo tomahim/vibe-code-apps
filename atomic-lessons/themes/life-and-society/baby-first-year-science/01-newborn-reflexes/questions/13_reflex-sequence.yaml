@@ -1,0 +1,19 @@
+id: b6cf2afe-bdef-46ee-ab40-1759e2715d88
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which sequence best describes how reflexes develop?"
+choices:
+  - id: 5bcde1d1-ae4b-4c58-ad36-6aabde82290d
+    text: "Automatic reflexes are integrated into voluntary skills"
+  - id: d6503767-67c1-4dab-b09a-883bc480a341
+    text: "Voluntary skills turn into reflexes"
+  - id: ad8582ff-6cab-48cc-bfb3-8118a2c615f6
+    text: "Reflexes first appear around 12 months"
+  - id: 3adbf682-4703-4999-ae14-f10d4072a483
+    text: "Reflexes replace all learned movement"
+correct_choice_ids:
+  - 5bcde1d1-ae4b-4c58-ad36-6aabde82290d
+explanation: "Development layers flexible, voluntary control on top of early automatic patterns rather than discarding them."
+archived: false

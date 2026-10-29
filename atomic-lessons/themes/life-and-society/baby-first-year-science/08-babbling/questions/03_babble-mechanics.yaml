@@ -1,0 +1,19 @@
+id: cd7f354d-2010-4f56-8915-b31b53a0cc65
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Canonical babbling marks the moment when:"
+choices:
+  - id: 981eba1c-26f4-4403-8da9-a6f8c844fe12
+    text: "Rhythmic jaw movement sculpts sound into speech-like syllables"
+  - id: 157c2422-9bef-4542-8718-43e016bcf13f
+    text: "The baby understands grammar"
+  - id: 21d7b5f9-365a-4f37-aacc-7d5285186363
+    text: "Hearing first becomes functional"
+  - id: 564a9c5d-a281-4a60-a0c9-56a7601f27c7
+    text: "Teething begins"
+correct_choice_ids:
+  - 981eba1c-26f4-4403-8da9-a6f8c844fe12
+explanation: "The open-close jaw rhythm of canonical babble is mechanically the same motion later used for talking."
+archived: false

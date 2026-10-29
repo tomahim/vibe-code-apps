@@ -1,0 +1,19 @@
+id: c77c26b7-2c9d-4537-917e-206feda482fb
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "During minor painful procedures, studies support comfort from:"
+choices:
+  - id: 571efc91-6b47-4b51-9c91-1caaed2442eb
+    text: "Sucking, sweet tastes and being held skin-to-skin"
+  - id: 32633a17-73d0-4345-9fbf-3b8de275f1bc
+    text: "Complete silence only"
+  - id: e1cdbdb2-07bd-49d9-9fe2-c87b75f9e412
+    text: "Bright lights"
+  - id: 1fde0b81-e91d-4cd9-993d-6f7f3829d794
+    text: "Being left alone"
+correct_choice_ids:
+  - 571efc91-6b47-4b51-9c91-1caaed2442eb
+explanation: "Soothing systems are active from birth; containing, sucking and contact measurably lower pain responses."
+archived: false

@@ -1,0 +1,12 @@
+id: f18ee6c0-5ec9-4c96-a796-b5d790b3e62d
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Around how many months does the word-learning acceleration often called the vocabulary explosion begin?"
+accepted_answers:
+  - "about 18 months"
+  - "18 months"
+  - "around 18 months"
+  - "18"
+explanation: "The acceleration into daily word learning typically starts around 18 months, with wide individual variation."
+archived: false

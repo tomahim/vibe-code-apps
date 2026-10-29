@@ -1,0 +1,19 @@
+id: 01943186-cd16-4a95-824e-6ba81c11efde
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "By twelve months, the brain has grown to roughly:"
+choices:
+  - id: 06182e5e-2be2-4ed0-8fea-a20987113b24
+    text: "Double its birth size"
+  - id: fb84f759-7c4e-48b4-b822-3d7fd639ca66
+    text: "Ten times birth size"
+  - id: d9592544-b341-4d8a-aec5-8dd35b9da2a8
+    text: "Adult size exactly"
+  - id: 030e529e-0953-45b8-a8f7-e185b735ac32
+    text: "No change from birth"
+correct_choice_ids:
+  - 06182e5e-2be2-4ed0-8fea-a20987113b24
+explanation: "From about a third of adult volume at birth, the brain roughly doubles across the first year."
+archived: false

@@ -1,0 +1,19 @@
+id: f85eb682-7a9d-4fce-bf33-aff1441cfec2
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In serve and return, the adult's most valuable move is:"
+choices:
+  - id: 9dc6f553-6397-453a-ab8d-66f71ac87a07
+    text: "Noticing and responding to the baby's current focus"
+  - id: 80bd28b7-e3ef-4a61-8033-b3a19e42cd18
+    text: "Redirecting the baby to new objects"
+  - id: e15c8a7b-c1f6-4440-bd7b-5c2a2e8415e7
+    text: "Teaching turn order explicitly"
+  - id: 18e33f66-720b-456c-b6e4-bdfda99ee31c
+    text: "Correcting pronunciation"
+correct_choice_ids:
+  - 9dc6f553-6397-453a-ab8d-66f71ac87a07
+explanation: "Learning is fastest when adults follow the baby's attention rather than steering it."
+archived: false

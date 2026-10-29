@@ -1,0 +1,11 @@
+id: bcad2613-9b5d-4cbc-a797-250c0684a7d5
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "Which reflex makes a newborn held upright with feet on a surface appear to walk?"
+accepted_answers:
+  - "stepping reflex"
+  - "newborn stepping"
+  - "stepping"
+explanation: "Newborn stepping fades around two months, in part because legs grow heavier faster than they grow stronger."
+archived: false

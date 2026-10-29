@@ -1,0 +1,19 @@
+id: 6383be30-4bf8-488f-92e6-ede5ddade7c5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The first sense to begin developing is:"
+choices:
+  - id: 8cc2618a-aa27-4149-846f-780d6090c88a
+    text: "Touch"
+  - id: bb842c5d-a930-4be4-beaf-7292d8c406c3
+    text: "Vision"
+  - id: 2c4b4efb-23f4-41d8-bcdb-69702c636e76
+    text: "Hearing"
+  - id: 80cdc159-1c0a-47b1-8bfc-78c99604f2ce
+    text: "Taste"
+correct_choice_ids:
+  - 8cc2618a-aa27-4149-846f-780d6090c88a
+explanation: "Touch responses appear around the mouth by about eight weeks of gestation, before other senses come online."
+archived: false

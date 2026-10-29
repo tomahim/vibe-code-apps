@@ -1,0 +1,12 @@
+id: 173ca35d-6af9-46e7-a7ee-d368f9a195df
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What is the name of the reflex in which a startled baby flings the arms outward and then back in?"
+accepted_answers:
+  - "Moro reflex"
+  - "Moro"
+  - "startle reflex"
+  - "the Moro"
+explanation: "The Moro reflex is the classic newborn startle pattern and normally fades between about two and six months."
+archived: false

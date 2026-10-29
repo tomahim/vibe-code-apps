@@ -1,0 +1,19 @@
+id: cd30ef8e-f1a6-4ed9-b94d-b3f01367d830
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Rich babbling predicts early vocabulary because:"
+choices:
+  - id: a854c8a5-b825-4d48-9a9d-f41fd3d691fd
+    text: "First words are built from rehearsed babble syllables"
+  - id: f3392d10-3bcb-416c-804e-a9d9712a5275
+    text: "Babbling teaches grammar"
+  - id: edc834d8-49e1-46b2-9795-3b5ea888c32f
+    text: "Quiet babies talk later"
+  - id: 9c2e82a3-14cd-42d7-9da2-beb9c58ecec4
+    text: "Babble replaces listening"
+correct_choice_ids:
+  - a854c8a5-b825-4d48-9a9d-f41fd3d691fd
+explanation: "Rehearsal predicts repertoire: children say first words with the sounds they practiced."
+archived: false

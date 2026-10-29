@@ -1,0 +1,19 @@
+id: b959b451-aa38-4bcf-be52-d6bfb2dcb6a6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "The Goldilocks effect of attention means babies prefer stimuli that are:"
+choices:
+  - id: 4b47bcd1-a837-481b-a236-87bdeed4f4fc
+    text: "Moderately complex: neither too easy nor too hard"
+  - id: 9069ebcd-f6dd-40b6-a1c5-c7a8a93fc1b7
+    text: "Always the simplest available"
+  - id: 67634268-7ac3-409a-9620-20a2c5c5bf22
+    text: "Always the most complex available"
+  - id: 8cabc88e-d8e0-4168-b133-2d18b573cf47
+    text: "Completely random"
+correct_choice_ids:
+  - 4b47bcd1-a837-481b-a236-87bdeed4f4fc
+explanation: "Babies sample the world at the edge of their current ability, which steers their own learning."
+archived: false

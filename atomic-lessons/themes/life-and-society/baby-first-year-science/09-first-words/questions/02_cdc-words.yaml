@@ -1,0 +1,19 @@
+id: ec635f8c-276e-4716-9095-2c7b93f4f83d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "The CDC checklist places tries to say one or two words besides mama or dada at:"
+choices:
+  - id: b89ddff5-a90d-4308-9c4a-568dc26cda06
+    text: "15 months"
+  - id: 5f8a51ac-ccb9-48dd-941d-1860a3ac5abe
+    text: "6 months"
+  - id: 382fbae9-e463-4cdf-8d50-db45b032b7da
+    text: "12 months exactly"
+  - id: 82099cae-eb6e-40d9-9137-4e813c6d1e05
+    text: "24 months"
+correct_choice_ids:
+  - b89ddff5-a90d-4308-9c4a-568dc26cda06
+explanation: "CDC milestones sit where at least 75% of children show the skill; typical first words span roughly 10-15 months."
+archived: false

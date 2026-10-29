@@ -1,0 +1,19 @@
+id: 69a49540-0f22-4daa-826b-0bdc74632371
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Perceptual narrowing for speech is best described as:"
+choices:
+  - id: 2f60dde8-3b52-49e3-930d-4d60bab6c5de
+    text: "A sensitive period: powerful early tuning, later learning still possible"
+  - id: a527a0d9-82da-4b48-93a8-f6eb86464848
+    text: "A strict critical period"
+  - id: e9587702-dbe8-4654-8570-71b70bc6230b
+    text: "Unrelated to experience"
+  - id: 300d6d18-717b-4851-ae91-724493366438
+    text: "Complete at birth"
+correct_choice_ids:
+  - 2f60dde8-3b52-49e3-930d-4d60bab6c5de
+explanation: "Tuning is early and strong but the window closes gradually, not absolutely."
+archived: false

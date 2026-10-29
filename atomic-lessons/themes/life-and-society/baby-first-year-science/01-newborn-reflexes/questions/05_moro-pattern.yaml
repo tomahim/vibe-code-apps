@@ -1,0 +1,19 @@
+id: b53f2eb4-f872-464e-8daa-69049a1db248
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In the Moro reflex, the baby:"
+choices:
+  - id: 53c8a2c6-6757-4065-9998-8f4d67d750ca
+    text: "Throws the arms outward, then sweeps them back in"
+  - id: f6e569f5-dc75-42af-b20f-727bec84cf0c
+    text: "Curls the toes when the sole is pressed"
+  - id: 08c77cdc-da07-4dec-9b35-5bcb0e81b4be
+    text: "Turns the head toward a touch"
+  - id: a94e45dc-1442-4a8a-afe1-4abcef8db248
+    text: "Makes alternating stepping movements"
+correct_choice_ids:
+  - 53c8a2c6-6757-4065-9998-8f4d67d750ca
+explanation: "The Moro is a startle pattern: arms fling out and open, then come back toward the body, often with crying."
+archived: false

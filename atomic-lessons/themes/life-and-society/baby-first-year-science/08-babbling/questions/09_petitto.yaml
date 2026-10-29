@@ -1,0 +1,19 @@
+id: 235c3d86-7d31-4800-895a-90d3dc1f02dd
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Petitto's studies of deaf infants exposed to sign language found they:"
+choices:
+  - id: 0c862b6a-0fb6-4f1a-b746-5ca2355116ca
+    text: "Babble with their hands in syllable-like rhythms"
+  - id: 1e40fe45-798d-4cf2-9bf9-dce6c2a23d6f
+    text: "Do not babble at all"
+  - id: 22624247-e702-4c70-9686-03d842d91a72
+    text: "Babble vocally on schedule"
+  - id: 1fb0a317-3c60-49ea-9468-7aee3ac78cb0
+    text: "Only babble when hearing aids are on"
+correct_choice_ids:
+  - 0c862b6a-0fb6-4f1a-b746-5ca2355116ca
+explanation: "Hand babbling shows the drive to babble is linguistic, rehearsing language units in whatever channel exists."
+archived: false

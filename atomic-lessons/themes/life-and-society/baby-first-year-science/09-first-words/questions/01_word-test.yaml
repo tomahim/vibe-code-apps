@@ -1,0 +1,19 @@
+id: 24e14218-458b-49fa-b304-c0044458d7d8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "A sound counts as a first word when it is:"
+choices:
+  - id: 913a5bb5-a226-4bfb-81db-e2d710fba352
+    text: "Used consistently for a stable meaning"
+  - id: dafa5822-73a5-4043-994d-39f82f05341e
+    text: "Said loudly"
+  - id: 04a5a967-a4ee-468b-a436-575a9c3765f8
+    text: "A perfect adult pronunciation"
+  - id: c734a421-3170-4bd7-967e-145e03d11dbc
+    text: "Said before 9 months"
+correct_choice_ids:
+  - 913a5bb5-a226-4bfb-81db-e2d710fba352
+explanation: "The test is a stable sound-meaning pairing; babble-like strings without fixed meaning do not qualify."
+archived: false

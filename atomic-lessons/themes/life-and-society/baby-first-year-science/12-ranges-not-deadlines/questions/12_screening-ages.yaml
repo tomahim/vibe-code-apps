@@ -1,0 +1,11 @@
+id: 801ab81b-fd95-49ea-9b7d-6fc2c546b358
+position: 12
+type: type_answer_question
+after_card_position: 6
+prompt: "US guidance schedules standardized developmental screening for all children at 9, 18 and how many months?"
+accepted_answers:
+  - "30 months"
+  - "30"
+  - "thirty months"
+explanation: "Standardized screening at 9, 18 and 30 months sits between surveillance and diagnosis."
+archived: false

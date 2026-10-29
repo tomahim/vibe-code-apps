@@ -1,0 +1,19 @@
+id: a3a8cad6-5d1f-4378-9467-7537ff59ff39
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In Thelen's experiments, adding small weights to babies' ankles made stepping:"
+choices:
+  - id: 1fd0875f-7a3f-4bb0-8fc3-1865baf5ecec
+    text: "Stop earlier"
+  - id: 237f20ac-e0f4-418b-be0b-877f4a1d0c76
+    text: "Start earlier"
+  - id: 59dd8ad1-fa22-44cf-b302-8501c9f1315b
+    text: "Unchanged"
+  - id: bca6e88f-8029-4176-a769-25e0a33e2dbb
+    text: "Turn into crawling"
+correct_choice_ids:
+  - 1fd0875f-7a3f-4bb0-8fc3-1865baf5ecec
+explanation: "Heavier legs stopped stepping sooner, showing mechanics, not just neural switching, explains the reflex fading."
+archived: false

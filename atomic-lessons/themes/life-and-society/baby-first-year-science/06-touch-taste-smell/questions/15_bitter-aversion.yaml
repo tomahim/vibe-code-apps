@@ -1,0 +1,19 @@
+id: 3594f375-6427-4068-8eab-1adfca52680f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Newborns' built-in aversion to strong bitterness is interpreted as:"
+choices:
+  - id: 3f3527b8-8988-4f83-bca6-3cdaa8e4bce3
+    text: "An ancient protection against toxins"
+  - id: 0e4f7ccb-856a-459d-8de9-e926b25027ac
+    text: "A feeding disorder"
+  - id: 1f2b4272-3f49-43f2-8aee-7e948256a596
+    text: "Learned disgust"
+  - id: cbecf312-e6d9-4ae9-9747-0f5b42f0fec9
+    text: "A vitamin deficiency"
+correct_choice_ids:
+  - 3f3527b8-8988-4f83-bca6-3cdaa8e4bce3
+explanation: "Sweet preference and bitter aversion are the two preloaded flavor biases; the rest is educated taste."
+archived: false

@@ -1,0 +1,19 @@
+id: e43196c2-6f5a-46a3-b5c4-8964b29cb8f3
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Longer looking at a violation most directly proves:"
+choices:
+  - id: e9143f7a-c8c6-4b41-bb75-91dcdf1a5727
+    text: "That the baby detected a difference; richer interpretations need care"
+  - id: ad7b8144-6a54-43bb-9f77-9c0377fd920c
+    text: "Full adult-like understanding"
+  - id: e2f6444b-bb6a-4fc0-92a8-a653103d5b0e
+    text: "Intelligence"
+  - id: 328a47ac-b614-4b58-a034-fca872edb4cf
+    text: "Memory of the event"
+correct_choice_ids:
+  - e9143f7a-c8c6-4b41-bb75-91dcdf1a5727
+explanation: "Detection is solid; claims about concepts or knowledge are interpretations requiring extra caution."
+archived: false

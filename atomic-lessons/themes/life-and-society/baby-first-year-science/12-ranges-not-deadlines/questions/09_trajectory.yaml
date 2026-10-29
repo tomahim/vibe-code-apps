@@ -1,0 +1,19 @@
+id: bc946f14-1762-42dc-a642-4eea53cae0cd
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Professionals reading development care most about:"
+choices:
+  - id: cfbc4e70-648e-4779-b159-e3cfd1127aee
+    text: "The trajectory of skill-building over weeks, across domains"
+  - id: 16aece37-68dc-4750-97e0-9c94059f19ac
+    text: "Any single milestone date"
+  - id: bd121843-563e-40f3-bef8-eb86e91f2236
+    text: "Height percentiles"
+  - id: b55746dc-d994-4795-aa21-630050ae3fa5
+    text: "The exact day of first steps"
+correct_choice_ids:
+  - cfbc4e70-648e-4779-b159-e3cfd1127aee
+explanation: "Patterns over time and across domains separate typical variation from concern better than points."
+archived: false

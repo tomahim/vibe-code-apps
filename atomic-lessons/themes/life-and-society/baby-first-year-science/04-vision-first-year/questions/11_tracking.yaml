@@ -1,0 +1,19 @@
+id: f262664c-d158-401b-bef1-064f847c3dc9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Smooth visual tracking of a moving object:"
+choices:
+  - id: 15d7bd51-6cc5-4093-96d1-afd8d44bb87d
+    text: "Improves over the first months from jerky catch-up movements"
+  - id: 54ef5f67-002b-47e9-9159-d8b546155d7e
+    text: "Is perfect from birth"
+  - id: 8d07d227-f27c-43a1-ba12-1e78054db3f1
+    text: "Never develops in the first year"
+  - id: 8190999e-836d-40a0-bfea-abab72cedc7e
+    text: "Requires color vision first"
+correct_choice_ids:
+  - 15d7bd51-6cc5-4093-96d1-afd8d44bb87d
+explanation: "Early pursuit is a series of saccades; smooth tracking matures gradually over the first months."
+archived: false

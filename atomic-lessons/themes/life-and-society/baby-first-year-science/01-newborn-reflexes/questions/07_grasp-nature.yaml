@@ -1,0 +1,19 @@
+id: 5769f374-e333-43fa-935d-39de8c75abeb
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which statement about the newborn palmar grasp is correct?"
+choices:
+  - id: 825f9c4d-7e10-4a6f-827e-223ad0e77169
+    text: "It is automatic and can be strong, but it is not under voluntary control"
+  - id: dee89cb6-2857-4b3d-b02f-59be3aadaf99
+    text: "It is learned during the first week"
+  - id: 610a547f-4e04-41ef-8686-521ca555e7bf
+    text: "It is weaker than the Moro in every baby"
+  - id: 855c7fa0-b09b-481d-9c84-67d1e941f395
+    text: "It only appears after two months"
+correct_choice_ids:
+  - 825f9c4d-7e10-4a6f-827e-223ad0e77169
+explanation: "The grasp is a reflex present from birth; its strength is not deliberate, which is why it is never a safe handle."
+archived: false

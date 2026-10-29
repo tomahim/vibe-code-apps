@@ -1,0 +1,19 @@
+id: 92e57a58-1a20-4400-a3c9-4e1d54daeb68
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In high-amplitude sucking studies, a sound a baby detects as new produces:"
+choices:
+  - id: dad98d57-24d9-4268-8dfc-de6c95c37fc3
+    text: "A rebound in sucking rate"
+  - id: ac153ebe-3e58-46a8-9757-1e8f460445cf
+    text: "Sucking stopping forever"
+  - id: 494ca395-564a-4c72-817b-e9070efc796f
+    text: "Sleep"
+  - id: 5d971a2b-9a16-42b9-9f9d-aea9662583d2
+    text: "Head-turning to the left only"
+correct_choice_ids:
+  - dad98d57-24d9-4268-8dfc-de6c95c37fc3
+explanation: "Babies suck faster for novel sound and slow as they habituate; a rebound marks detected difference."
+archived: false
