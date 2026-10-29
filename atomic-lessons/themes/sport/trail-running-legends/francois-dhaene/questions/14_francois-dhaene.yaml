@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8d859c97-ad3b-4cb1-be6e-d0af6239789f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How long did his John Muir Trail record take?"
+choices:
+  - id: ede23984-731d-490f-b7cf-b47bc4ed2a40
+    text: "2 days, 19 hours, 26 minutes"
+  - id: 1138dcf2-a29b-44c7-82c8-c23b02131c2b
+    text: "1 day"
+  - id: a44dee25-a9fc-4a0d-ada2-6c18280a68e0
+    text: "5 days"
+  - id: 6be57c34-f324-4765-aaea-8d9a02d64b28
+    text: "8 hours"
+correct_choice_ids:
+  - ede23984-731d-490f-b7cf-b47bc4ed2a40
+explanation: "It took 2 days, 19 hours and 26 minutes."
+archived: false

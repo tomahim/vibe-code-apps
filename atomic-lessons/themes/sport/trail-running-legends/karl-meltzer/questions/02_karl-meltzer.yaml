@@ -1,0 +1,20 @@
+schema_version: 1
+id: f0fc0f39-7dc7-4050-b1bf-3f6bbeddab13
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which US state does Meltzer live?"
+choices:
+  - id: 32ff34f0-0228-4018-95fe-e82240d6f86d
+    text: "Colorado"
+  - id: 47419420-b790-48bb-b70e-14cca5e19036
+    text: "Montana"
+  - id: d9afbb2d-5be1-47da-939c-3277e06b802a
+    text: "Utah"
+  - id: 522c78d8-5c9f-4512-b08f-51ee2305e888
+    text: "Oregon"
+correct_choice_ids:
+  - d9afbb2d-5be1-47da-939c-3277e06b802a
+explanation: "He is based in Sandy, Utah."
+archived: false

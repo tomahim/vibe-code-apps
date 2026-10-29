@@ -1,0 +1,20 @@
+schema_version: 1
+id: 06b4b125-0d12-4c6f-9141-398a9f6d9f9f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which event did Wyatt compete at the 2004 Olympics?"
+choices:
+  - id: e6c4e4c9-bb39-4fab-8d70-594cff6f03cf
+    text: "The half marathon"
+  - id: 3661b110-279c-4a7f-bb82-b5cf49480248
+    text: "The marathon"
+  - id: 197dfcae-bd52-408d-9448-3b2ebdb9062d
+    text: "The 5,000 metres"
+  - id: 7c908548-3f5d-47af-8a8b-e7635ac1ed5d
+    text: "The steeplechase"
+correct_choice_ids:
+  - 3661b110-279c-4a7f-bb82-b5cf49480248
+explanation: "He ran the marathon in 2004."
+archived: false

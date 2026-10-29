@@ -1,0 +1,20 @@
+schema_version: 1
+id: c9ecbdc7-64b5-4e95-a36c-b2d64ccc7f60
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "From which Mexican town did True set out on a hike in 2005, according to one journalist?"
+choices:
+  - id: 93e91013-dee9-43de-8c1b-da76fea31963
+    text: "Creel"
+  - id: c8cd1139-5da5-40af-9b5d-c11c98c9207f
+    text: "Urique"
+  - id: 06fbc31e-a718-42e2-9fb3-9e65ac133da5
+    text: "Cancún"
+  - id: 6b2bc7a1-cd2c-4c21-a617-a5d6bbd7d53e
+    text: "Tijuana"
+correct_choice_ids:
+  - 93e91013-dee9-43de-8c1b-da76fea31963
+explanation: "He started from Creel."
+archived: false

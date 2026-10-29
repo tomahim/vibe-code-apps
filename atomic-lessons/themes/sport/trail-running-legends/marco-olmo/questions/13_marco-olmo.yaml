@@ -1,0 +1,20 @@
+schema_version: 1
+id: 188ce92f-1172-4356-a0bd-0f200e58e35b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How many UTMB wins did Olmo have?"
+choices:
+  - id: 342c3d2a-190b-419d-b27b-03268130c6d6
+    text: "1"
+  - id: 6b029fd0-fd78-4236-a3e6-f61360e4688f
+    text: "5"
+  - id: 807e96dc-6881-4fe4-b187-786d2dbce879
+    text: "3"
+  - id: fa0b4c11-cc05-4d8b-9058-427c97c9c3bf
+    text: "2"
+correct_choice_ids:
+  - fa0b4c11-cc05-4d8b-9058-427c97c9c3bf
+explanation: "He won in 2006 and 2007."
+archived: false

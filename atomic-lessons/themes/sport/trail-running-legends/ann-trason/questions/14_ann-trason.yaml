@@ -1,0 +1,20 @@
+schema_version: 1
+id: 25f1b4aa-c692-4e8e-91b8-9f080b42264f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Roughly how long did the 1991 world 50 mile record stand?"
+choices:
+  - id: 9199318b-efc3-48ce-9b4c-26f47a24d9ee
+    text: "50 years"
+  - id: 5f1bed25-63d4-4181-be3f-e39d88c82393
+    text: "10 years"
+  - id: 6b131754-07af-4ada-994c-3dd4480566ab
+    text: "3 years"
+  - id: 84f85bc6-3727-4fab-a5a7-027d2597d048
+    text: "24 years"
+correct_choice_ids:
+  - 84f85bc6-3727-4fab-a5a7-027d2597d048
+explanation: "From 1991 to 2015 it was unbeaten."
+archived: false

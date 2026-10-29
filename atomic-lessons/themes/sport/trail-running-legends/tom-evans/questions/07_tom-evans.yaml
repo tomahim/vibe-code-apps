@@ -1,0 +1,11 @@
+id: a3e5deb6-3273-474e-98d7-5522086dd9fb
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "What place did Evans take at the 2017 Marathon des Sables? Give the position as a number."
+accepted_answers:
+  - "3"
+  - "third"
+  - "3rd"
+explanation: "He finished third in 19:49:33."
+archived: false

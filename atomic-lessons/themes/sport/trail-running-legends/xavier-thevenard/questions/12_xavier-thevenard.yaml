@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8709a93b-a619-45c6-97fe-64a0f8e39dad
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Japanese race did he win in 2019?"
+choices:
+  - id: da529287-95be-4c46-9c30-7108af922607
+    text: "Mt. Fuji 100"
+  - id: 0db53528-dfc8-46ab-a43e-b249e32c58e2
+    text: "UTMF"
+  - id: bb7bfe87-b3a5-48b8-8e48-f6fa2c88649b
+    text: "Hakone Ekiden"
+  - id: c40d29ce-0144-4d00-98c3-33818b0e926d
+    text: "Tokyo Marathon"
+correct_choice_ids:
+  - 0db53528-dfc8-46ab-a43e-b249e32c58e2
+explanation: "UTMF is the Ultra-Trail Mt. Fuji."
+archived: false

@@ -1,0 +1,10 @@
+id: fed1193b-eedc-44a9-ae75-8da1ca21e8f8
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many times has Walmsley been named UltraRunner of the Year? Give the number."
+accepted_answers:
+  - "6"
+  - "six"
+explanation: "2016, 2017, 2018, 2019, 2023 and 2025."
+archived: false

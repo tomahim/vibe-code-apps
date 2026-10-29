@@ -1,0 +1,20 @@
+schema_version: 1
+id: bf78b352-54e4-478f-a06d-520a4e03d25b
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which race did he win in 2017 in Chamonix?"
+choices:
+  - id: c33f2476-cd16-4251-a5ef-f5c7c0e56e8a
+    text: "Zegama"
+  - id: 6935e4a4-ecc1-44fa-b9b0-91614f1339b8
+    text: "Mont-Blanc 80 km"
+  - id: 240c05f0-45f9-4f02-86bb-4368a1cf7d2d
+    text: "UTMF"
+  - id: d39f0f76-bd19-4200-9079-b1c6cdf2c386
+    text: "Mont-Blanc 90 km"
+correct_choice_ids:
+  - 6935e4a4-ecc1-44fa-b9b0-91614f1339b8
+explanation: "He won the 80 km in 2017."
+archived: false

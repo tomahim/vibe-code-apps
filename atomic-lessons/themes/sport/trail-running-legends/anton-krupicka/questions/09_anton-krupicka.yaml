@@ -1,0 +1,20 @@
+schema_version: 1
+id: 006ad1f3-c83b-42ab-978e-0c593479f5ac
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which race did he finish second in during 2010 in about 15 hours 13 minutes?"
+choices:
+  - id: fd711260-cb29-4954-9281-0015b58e770a
+    text: "UTMB"
+  - id: f3e7be5c-28e5-4e8a-80e7-4e9a112b8d56
+    text: "Hardrock"
+  - id: 59e3a881-2627-4edb-99fd-579d89af2f07
+    text: "Western States"
+  - id: 1e33d340-1945-4f25-811c-ca69920d6ffb
+    text: "Leadville"
+correct_choice_ids:
+  - 59e3a881-2627-4edb-99fd-579d89af2f07
+explanation: "He finished second at the 2010 Western States."
+archived: false

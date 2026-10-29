@@ -1,0 +1,9 @@
+id: 0f492e05-b523-4dd3-bdd8-4086d968f9a5
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was Greenwood's 2012 Western States record time? Give it as h:mm:ss."
+accepted_answers:
+  - "16:47:19"
+explanation: "It broke Trason's 17:37:51."
+archived: false

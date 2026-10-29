@@ -1,0 +1,20 @@
+schema_version: 1
+id: d218a65a-ec3d-4d27-a2b2-9a4f2f111204
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "In which year did Evans win Western States?"
+choices:
+  - id: 5a2cdf38-bf3f-40f0-b0cd-84b0bb1a5394
+    text: "2019"
+  - id: 6bc94cbb-f333-4b42-9130-1944a0c5cb2c
+    text: "2023"
+  - id: b12800bc-7074-440a-859c-006db02848c1
+    text: "2021"
+  - id: f0b24fac-33e9-4a97-9517-4285a185b1ee
+    text: "2025"
+correct_choice_ids:
+  - 6bc94cbb-f333-4b42-9130-1944a0c5cb2c
+explanation: "He won in 2023."
+archived: false

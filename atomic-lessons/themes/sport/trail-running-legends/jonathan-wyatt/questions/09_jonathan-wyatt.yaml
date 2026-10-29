@@ -1,0 +1,20 @@
+schema_version: 1
+id: 77ed29f4-bd7c-4eab-9368-811daa2e669d
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How many times did Wyatt win the world mountain running Grand Prix series?"
+choices:
+  - id: bb5b1caa-2938-417c-9686-751bac388c68
+    text: "8"
+  - id: c9e5b27a-392b-436a-a6f6-cb7531c3c8d2
+    text: "12"
+  - id: dc6bdf8b-2ba7-4c5d-b5b5-23711b24ca5f
+    text: "2"
+  - id: 2fcc8e01-d061-4979-8d8e-1c2c98255d45
+    text: "4"
+correct_choice_ids:
+  - bb5b1caa-2938-417c-9686-751bac388c68
+explanation: "He is an eight time winner."
+archived: false

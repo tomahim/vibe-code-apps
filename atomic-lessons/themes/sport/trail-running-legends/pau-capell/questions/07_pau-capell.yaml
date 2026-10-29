@@ -1,0 +1,9 @@
+id: ca0ca9c4-69cf-46d5-8f2f-6c28b9a29966
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Capell win UTMB?"
+accepted_answers:
+  - "2019"
+explanation: "He won in 20:19:07."
+archived: false

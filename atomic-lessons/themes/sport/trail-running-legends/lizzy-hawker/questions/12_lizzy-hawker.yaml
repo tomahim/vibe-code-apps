@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5cc3211d-1607-48de-998d-4e71f3173c1d
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where did Hawker set the women's 24 hour world record in 2011?"
+choices:
+  - id: 6abcbcfb-7268-4fea-8a69-c3a023fb2086
+    text: "Llandudno, Wales"
+  - id: eb1c56e8-8649-42f9-adc7-fb5bf549efa3
+    text: "Athens"
+  - id: d97c5a2e-bc8a-4620-ab65-570debbd9efa
+    text: "Brive, France"
+  - id: 81fec85c-56d9-49fb-ab5c-8bd51262fb72
+    text: "Chamonix"
+correct_choice_ids:
+  - 6abcbcfb-7268-4fea-8a69-c3a023fb2086
+explanation: "She ran 153.5 miles."
+archived: false

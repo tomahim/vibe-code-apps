@@ -1,0 +1,20 @@
+schema_version: 1
+id: 9109bcf3-af9d-4632-9095-71b2f4a1601d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times did he win JFK 50 between 2014 and 2016?"
+choices:
+  - id: bf2acc03-45d2-47f3-abbe-7053d73bebf4
+    text: "3"
+  - id: 5d512c62-e9f6-4a0f-8d52-6dd122fb6bf3
+    text: "5"
+  - id: 15876bcd-0a10-4183-8963-62a07af856d9
+    text: "1"
+  - id: 796b3d7a-cbea-45b7-8d9a-69c28f7658d1
+    text: "2"
+correct_choice_ids:
+  - bf2acc03-45d2-47f3-abbe-7053d73bebf4
+explanation: "He won in 2014, 2015 and 2016."
+archived: false

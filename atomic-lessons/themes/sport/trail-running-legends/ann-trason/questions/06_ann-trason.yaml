@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2bed37a9-ffed-4f47-b53a-37c55c17221e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which year did Trason win Western States for the first time?"
+choices:
+  - id: 1b8c2327-4476-4172-901b-bc6dae8b65a9
+    text: "1989"
+  - id: 45b29762-0752-4691-a485-5d86a070ab93
+    text: "2003"
+  - id: 2e186022-78cc-4415-b066-1f4c71598a67
+    text: "1994"
+  - id: a4321b5e-b53f-43fb-8551-f0bdd300b38e
+    text: "1985"
+correct_choice_ids:
+  - 1b8c2327-4476-4172-901b-bc6dae8b65a9
+explanation: "She first finished in 1989, as first female finisher."
+archived: false

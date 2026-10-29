@@ -1,0 +1,20 @@
+schema_version: 1
+id: ecd4701a-efb9-44c1-8cef-205797b790b8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How did Hawker do at her first UTMB?"
+choices:
+  - id: c8c489f7-f065-4f0c-8666-ee51891b57de
+    text: "She finished 10th"
+  - id: f9f67d98-c9c1-4af7-9738-3ddeb0770306
+    text: "She dropped out"
+  - id: 448375e7-a86b-4208-ba18-27d309d4adbc
+    text: "She finished second"
+  - id: 2d4d8166-e642-49d9-98d2-56b7d8148d51
+    text: "She won"
+correct_choice_ids:
+  - 2d4d8166-e642-49d9-98d2-56b7d8148d51
+explanation: "She won it at her first attempt in 2005."
+archived: false

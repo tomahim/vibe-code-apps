@@ -1,0 +1,20 @@
+schema_version: 1
+id: 9e57fbec-047a-4cb0-bb02-127058aa1f5c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which sport did she compete in at the University of Denver on a scholarship?"
+choices:
+  - id: 60eea0ae-182a-4d91-b1ff-6f9f1269122b
+    text: "Skiing"
+  - id: 1f8c5081-9e05-4a89-be60-5b5eef94ef96
+    text: "Swimming"
+  - id: 3543fc4a-f888-4738-9873-35b3f80c5fec
+    text: "Golf"
+  - id: 912c54c1-c48d-41c5-8ed9-42d1fd1990bc
+    text: "Rowing"
+correct_choice_ids:
+  - 60eea0ae-182a-4d91-b1ff-6f9f1269122b
+explanation: "She attended the University of Denver on a skiing scholarship."
+archived: false

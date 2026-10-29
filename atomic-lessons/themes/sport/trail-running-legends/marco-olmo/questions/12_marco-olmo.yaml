@@ -1,0 +1,20 @@
+schema_version: 1
+id: 151d39c0-c817-4d69-a978-b5b5f1f3fdf5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was his 2007 UTMB winning time?"
+choices:
+  - id: be6cdd69-eb47-4a6a-b32b-07b0804ca3f7
+    text: "20:19:07"
+  - id: 06384a6a-72d5-499e-b708-ae5d9952aef2
+    text: "25:00:00"
+  - id: a4c02e98-a559-49c7-bd82-9909c643b5a4
+    text: "22:30:00"
+  - id: 2bfbbb5c-4b9c-40dc-ac3f-a56eb86a554d
+    text: "21:31:58"
+correct_choice_ids:
+  - 2bfbbb5c-4b9c-40dc-ac3f-a56eb86a554d
+explanation: "He won in 21 hours 31 minutes 58 seconds."
+archived: false

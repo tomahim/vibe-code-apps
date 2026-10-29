@@ -1,0 +1,9 @@
+id: 2d6e6934-aaeb-4b1b-a146-1596db1ecc9b
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which US state did Micah True die? Give the state."
+accepted_answers:
+  - "New Mexico"
+explanation: "He died in southwestern New Mexico."
+archived: false

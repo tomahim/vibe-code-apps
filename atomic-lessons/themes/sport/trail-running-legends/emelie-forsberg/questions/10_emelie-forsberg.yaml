@@ -1,0 +1,20 @@
+schema_version: 1
+id: 22f370c0-1101-48f2-8b4b-a912e57aaa1a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "In which Norwegian city did she move to study?"
+choices:
+  - id: 8aeb8b3f-9552-433c-85e1-7411c383ca70
+    text: "Bergen"
+  - id: 0494104f-24c1-4d36-8fba-612fb5dfaa1f
+    text: "Oslo"
+  - id: f5482cc6-985d-47dc-a0a9-f23bb3f8754d
+    text: "Tromsø"
+  - id: 4ff9affb-d764-4d85-9654-a8e253a3f89b
+    text: "Trondheim"
+correct_choice_ids:
+  - f5482cc6-985d-47dc-a0a9-f23bb3f8754d
+explanation: "She moved from Storulvån to Tromsø."
+archived: false

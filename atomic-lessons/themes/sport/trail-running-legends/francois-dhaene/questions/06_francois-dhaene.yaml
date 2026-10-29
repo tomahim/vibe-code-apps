@@ -1,0 +1,20 @@
+schema_version: 1
+id: bb1646d9-ab75-498d-9471-130e405690cf
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Around which mountain does UTMB run?"
+choices:
+  - id: 1ebcf79c-90db-447d-8c72-e872c61d017f
+    text: "Matterhorn"
+  - id: 1a05de97-3e4a-48d9-8317-6bcec20c35c8
+    text: "Mont Blanc"
+  - id: 43a4018a-0a31-47cc-933b-32bc7f0a9de4
+    text: "Monte Rosa"
+  - id: 41911fc2-1d94-466e-a3b1-917ec5ea9dfe
+    text: "Mount Fuji"
+correct_choice_ids:
+  - 1a05de97-3e4a-48d9-8317-6bcec20c35c8
+explanation: "It is a loop around Mont Blanc."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0c44dc59-bece-4dc2-9e5c-2ef9226fddd7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which US state did Dauwalter grow up?"
+choices:
+  - id: e7074fbc-498a-4b57-b8ac-7c6d07ac67c9
+    text: "Colorado"
+  - id: 91320f34-f760-48c6-af0a-02b40c2bbd37
+    text: "Vermont"
+  - id: 8fe29661-91b7-4857-aac6-eec7b6eec34a
+    text: "Alaska"
+  - id: b8552c9c-28a4-47d8-a3e6-46df8dacc6e4
+    text: "Minnesota"
+correct_choice_ids:
+  - b8552c9c-28a4-47d8-a3e6-46df8dacc6e4
+explanation: "She grew up in Hopkins, Minnesota."
+archived: false

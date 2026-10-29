@@ -1,0 +1,20 @@
+schema_version: 1
+id: d81079d0-8e33-4d29-816c-92a04627b2cc
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was his 2006 UTMB winning time?"
+choices:
+  - id: c77b6d77-59f0-4f96-be53-6c43e74659e3
+    text: "19:01:32"
+  - id: a93edf15-0ae6-4509-a95f-647f8ab66e76
+    text: "24:34:26"
+  - id: f325f17f-2388-4c67-af06-f94946d1726c
+    text: "21:06:06"
+  - id: 23371623-df17-4dba-b4f8-74695161fd65
+    text: "30:00:00"
+correct_choice_ids:
+  - f325f17f-2388-4c67-af06-f94946d1726c
+explanation: "He won in 21 hours 6 minutes 6 seconds."
+archived: false

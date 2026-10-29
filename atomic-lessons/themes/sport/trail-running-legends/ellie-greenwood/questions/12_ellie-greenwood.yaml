@@ -1,0 +1,20 @@
+schema_version: 1
+id: 7cba7ef5-9b9c-4427-98a7-21136e2c1012
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How long is the Comrades Marathon?"
+choices:
+  - id: ff205d1b-68e9-4a3d-b275-3a0c235db955
+    text: "90 kilometres"
+  - id: f011a5eb-1b78-448c-a1ee-87db266c1c6e
+    text: "50 kilometres"
+  - id: fa716a58-3612-4af9-881e-d79a5889d770
+    text: "42 kilometres"
+  - id: 26426dcf-14ac-4576-b569-3ca8234e8e9d
+    text: "160 kilometres"
+correct_choice_ids:
+  - ff205d1b-68e9-4a3d-b275-3a0c235db955
+explanation: "Comrades is a 90 km road race in South Africa."
+archived: false

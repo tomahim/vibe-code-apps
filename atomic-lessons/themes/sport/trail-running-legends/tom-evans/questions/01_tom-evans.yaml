@@ -1,0 +1,20 @@
+schema_version: 1
+id: f860a5ab-9ae9-48c8-99f9-831df5c36666
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which English county did Evans grow up?"
+choices:
+  - id: 0f4efc83-7625-445f-9893-c5e510938fe7
+    text: "Kent"
+  - id: 1334b84e-733d-4e40-b8bd-97a74c363763
+    text: "Yorkshire"
+  - id: e33b7dd7-9117-4b80-b158-0d7983714c42
+    text: "Sussex"
+  - id: 799bd15c-8bda-4b55-aead-f60c340aaf79
+    text: "Cornwall"
+correct_choice_ids:
+  - e33b7dd7-9117-4b80-b158-0d7983714c42
+explanation: "He grew up in Sussex."
+archived: false

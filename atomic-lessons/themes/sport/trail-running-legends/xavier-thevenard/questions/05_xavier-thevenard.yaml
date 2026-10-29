@@ -1,0 +1,20 @@
+schema_version: 1
+id: 07ca4abd-d73b-45a7-8e55-0b3f2c7448b3
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "How many times did he win UTMB?"
+choices:
+  - id: e8830469-ea73-40f1-8e59-aba8efb1fc1f
+    text: "8"
+  - id: e31873ef-38c4-4205-958f-fd5a578bed79
+    text: "1"
+  - id: 42184a51-0cdd-459b-bde3-80592af44c3b
+    text: "5"
+  - id: c2dbe5b9-47da-4988-9810-fd06af6046ef
+    text: "3"
+correct_choice_ids:
+  - c2dbe5b9-47da-4988-9810-fd06af6046ef
+explanation: "He won in 2013, 2015 and 2018."
+archived: false

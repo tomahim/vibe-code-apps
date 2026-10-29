@@ -1,0 +1,20 @@
+schema_version: 1
+id: a5aac5b9-7d21-4486-b846-bfa881decd51
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Where did she finish overall at UTMB 2019?"
+choices:
+  - id: 39f61cd1-7690-4b2e-96a7-cea667adafa1
+    text: "50th"
+  - id: 29d1b3c7-2e94-49c9-bbdf-3e10cab08ce7
+    text: "21st"
+  - id: c78dac86-18de-4f0a-8aca-58c29845646d
+    text: "1st"
+  - id: d35faf7c-ecfc-4aa9-b50d-a0b115a5c19b
+    text: "100th"
+correct_choice_ids:
+  - 29d1b3c7-2e94-49c9-bbdf-3e10cab08ce7
+explanation: "She was the first woman and 21st overall."
+archived: false

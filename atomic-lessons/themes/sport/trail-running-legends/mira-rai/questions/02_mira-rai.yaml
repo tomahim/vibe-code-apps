@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8b3b660f-f0e3-4eee-a809-cbc69d01f25a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which district was she born?"
+choices:
+  - id: 06a935f5-8f99-48c0-9aa7-5208aa3a5f70
+    text: "Kathmandu"
+  - id: 0521f67a-0982-4b4d-a24b-1a4391e0c1d7
+    text: "Pokhara"
+  - id: 90918d7b-c0b3-40ff-94a8-04cdd23f9a78
+    text: "Bhojpur"
+  - id: 44b878cd-9fc4-4275-8d25-90752f94cd2b
+    text: "Solukhumbu"
+correct_choice_ids:
+  - 90918d7b-c0b3-40ff-94a8-04cdd23f9a78
+explanation: "She grew up in a remote village in Bhojpur."
+archived: false

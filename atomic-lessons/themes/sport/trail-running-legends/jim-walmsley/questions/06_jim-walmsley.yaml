@@ -1,0 +1,20 @@
+schema_version: 1
+id: 4df257d5-d71b-42b2-950b-b45f6a6e4fe1
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which New Zealand race did he win in 2017?"
+choices:
+  - id: 4136f6a1-75d2-4d3a-bf39-50615983bdd2
+    text: "Zegama"
+  - id: 54714b8f-4dba-4cd8-a28d-d13dd88dc7cb
+    text: "Tarawera Ultramarathon"
+  - id: 62530b03-d743-4e51-aae3-f2ac42950ef2
+    text: "Lavaredo"
+  - id: f8804544-4c79-4a26-9e06-6b5798de3d58
+    text: "Hardrock"
+correct_choice_ids:
+  - 54714b8f-4dba-4cd8-a28d-d13dd88dc7cb
+explanation: "He won Tarawera in 2017."
+archived: false

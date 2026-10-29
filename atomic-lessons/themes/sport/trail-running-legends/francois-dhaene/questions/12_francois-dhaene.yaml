@@ -1,0 +1,20 @@
+schema_version: 1
+id: fc76cf68-cd37-4f8c-826c-e0de3ebd26f8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was the first Ultra-Trail World Tour that D'Haene won?"
+choices:
+  - id: d5e29748-4292-41ff-81bd-003a79ed70bf
+    text: "2020"
+  - id: 4a4be918-8c52-48b8-84ea-defa7ee84965
+    text: "2017"
+  - id: aea9687c-f0b0-4c72-824d-c10a2ce95c72
+    text: "2012"
+  - id: db7414cd-059d-4a1a-95c3-65a6d6542de9
+    text: "2014"
+correct_choice_ids:
+  - db7414cd-059d-4a1a-95c3-65a6d6542de9
+explanation: "He won the first World Tour in 2014."
+archived: false

@@ -1,0 +1,10 @@
+id: a90a1311-5c2e-4194-8bb0-43e6efc5e7aa
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many world mountain running titles did Wyatt win? Give the number."
+accepted_answers:
+  - "6"
+  - "six"
+explanation: "He is a six time world champion."
+archived: false

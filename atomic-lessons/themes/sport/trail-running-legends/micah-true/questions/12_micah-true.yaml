@@ -1,0 +1,20 @@
+schema_version: 1
+id: 07f17a62-3b2d-4ba4-85e9-fe8820431872
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What does Korima mean in this story?"
+choices:
+  - id: 1a520686-4245-4049-9e17-c20c4e2356c6
+    text: "Sharing without expecting a return"
+  - id: 4c395272-6da8-4628-a764-1b4e28a94b8e
+    text: "A race prize"
+  - id: a7e55ad9-7fee-47e4-8d7f-2810a9f00cf0
+    text: "A canyon"
+  - id: ad30ec2d-ee22-4ffb-8186-5bb4982dc9da
+    text: "A running shoe"
+correct_choice_ids:
+  - 1a520686-4245-4049-9e17-c20c4e2356c6
+explanation: "It is the circle of sharing."
+archived: false

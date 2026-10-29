@@ -1,0 +1,20 @@
+schema_version: 1
+id: a7c448fe-790c-47cc-ac06-bfeb15f0602a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which website published the interview with Picas after her 2017 win?"
+choices:
+  - id: a5c2b2a5-9e8f-4a80-82c2-a7814060ecb1
+    text: "UTMB.world"
+  - id: c34d0bbf-420c-43eb-a480-aa0769fc966e
+    text: "iRunFar"
+  - id: 744d1ece-df4d-42b9-99e3-6faca564e275
+    text: "BBC Sport"
+  - id: 4e3317fa-9261-4af5-9f34-51d064c6b9fc
+    text: "Strava"
+correct_choice_ids:
+  - c34d0bbf-420c-43eb-a480-aa0769fc966e
+explanation: "The interview is on iRunFar."
+archived: false

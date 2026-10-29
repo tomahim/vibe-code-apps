@@ -1,0 +1,10 @@
+id: 7e5c4274-db77-4b87-9b9c-8aa10e4dd203
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many minutes did she stop to eat cake in her first race? Give the number."
+accepted_answers:
+  - "20"
+  - "twenty"
+explanation: "She stopped for 20 minutes."
+archived: false

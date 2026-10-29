@@ -1,0 +1,10 @@
+id: 8e334308-f4f0-4971-8742-0cbcd456ce18
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many Western States wins does Walmsley have, as of 2024? Give the number."
+accepted_answers:
+  - "4"
+  - "four"
+explanation: "He won in 2018, 2019, 2021 and 2024."
+archived: false

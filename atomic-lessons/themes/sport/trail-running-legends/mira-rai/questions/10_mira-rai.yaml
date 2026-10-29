@@ -1,0 +1,20 @@
+schema_version: 1
+id: 3a6c0bce-5669-45bb-a05d-b01e48c9c598
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Who is her mentor from Trail Running Nepal?"
+choices:
+  - id: 23ec9394-3cbb-44b6-ba5b-b27bd46007fe
+    text: "Karl Meltzer"
+  - id: 115e85fc-afd0-42cf-84ca-c7f381ffa1b8
+    text: "Scott Jurek"
+  - id: 05b1182a-68c5-4f32-ac96-bfb6fec0d947
+    text: "Marco Olmo"
+  - id: f71bc082-6d50-41bc-bd5f-6886fa5e2b9a
+    text: "Richard Bull"
+correct_choice_ids:
+  - f71bc082-6d50-41bc-bd5f-6886fa5e2b9a
+explanation: "Richard Bull helped her train."
+archived: false

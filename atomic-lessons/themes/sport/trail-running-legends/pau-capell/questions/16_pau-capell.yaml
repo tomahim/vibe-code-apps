@@ -1,0 +1,9 @@
+id: 00d41649-ded7-486a-84f3-2060f03073d4
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which country is the Eiger Ultra Trail held? Give the country."
+accepted_answers:
+  - "Switzerland"
+explanation: "It runs near the Eiger in the Swiss Alps."
+archived: false

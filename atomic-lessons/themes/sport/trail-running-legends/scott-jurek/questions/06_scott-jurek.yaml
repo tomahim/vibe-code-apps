@@ -1,0 +1,20 @@
+schema_version: 1
+id: c85c50e1-1e5f-4950-acc8-9cf94195a880
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "In which desert valley is the Badwater Ultramarathon held?"
+choices:
+  - id: 3166dcaf-fef7-4a3b-859f-9f0eef059f7a
+    text: "Sahara"
+  - id: 51e92ccc-64c2-473f-b93a-f37585fab1af
+    text: "Mojave Desert"
+  - id: 94c9817a-b4cd-4197-a606-70b1fc882f6d
+    text: "Atacama"
+  - id: 186e2d91-66b4-42a1-b0fd-48f462ee6ba6
+    text: "Death Valley"
+correct_choice_ids:
+  - 186e2d91-66b4-42a1-b0fd-48f462ee6ba6
+explanation: "Badwater is run in Death Valley."
+archived: false

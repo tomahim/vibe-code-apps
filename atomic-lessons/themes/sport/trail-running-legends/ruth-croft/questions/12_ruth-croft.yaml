@@ -1,0 +1,20 @@
+schema_version: 1
+id: c7e575f3-416f-4ac4-9a3c-e27c57246bdb
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was her 2022 Western States winning time?"
+choices:
+  - id: 1ae1c726-73cf-42e1-9bf8-8ad15849aa73
+    text: "18:00:00"
+  - id: b74a165b-7b93-4907-b5f3-7dde84e22b9b
+    text: "15:29:34"
+  - id: a5f5ced3-4592-47ee-84c3-4ffdb8c4bb5e
+    text: "16:47:19"
+  - id: d52b25aa-e53e-4fec-b09b-c59cd4a12687
+    text: "17:21:30"
+correct_choice_ids:
+  - d52b25aa-e53e-4fec-b09b-c59cd4a12687
+explanation: "She won in 2022."
+archived: false

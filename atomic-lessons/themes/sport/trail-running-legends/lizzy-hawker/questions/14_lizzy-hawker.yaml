@@ -1,0 +1,20 @@
+schema_version: 1
+id: 4a432433-59c9-4ad3-896f-8aac80f3762d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which race did Hawker create after training on the Tour de Monte Rosa?"
+choices:
+  - id: e3456087-7c11-4283-aae7-daeba3ac76e4
+    text: "UTMB Light"
+  - id: fcfec525-f39f-4ccc-8816-63e89061a6d2
+    text: "Ultra Tour Monte Rosa"
+  - id: f88680b3-5584-4d4f-8ad6-043c6f652d41
+    text: "Monte Rosa Vertical"
+  - id: b94b5c7f-ca48-497e-9869-29f331342b4a
+    text: "Ultra Tour Matterhorn"
+correct_choice_ids:
+  - fcfec525-f39f-4ccc-8816-63e89061a6d2
+explanation: "The route goes from Grächen to Zermatt and back."
+archived: false

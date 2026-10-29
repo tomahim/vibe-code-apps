@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0646c79c-e6f6-4989-8b70-200ab2efa5b3
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which country did Blandine L'Hirondel represent?"
+choices:
+  - id: 216367b0-a5e3-4090-8b56-c45aa637e5b6
+    text: "Spain"
+  - id: b3e4a610-fa10-4bd1-ba84-cc7d01808976
+    text: "Portugal"
+  - id: bd63bf6d-e004-4073-bde6-3f8cc65cc1ac
+    text: "Italy"
+  - id: 76bd9ea0-bc4d-4fef-8f2e-144a48f53744
+    text: "France"
+correct_choice_ids:
+  - 76bd9ea0-bc4d-4fef-8f2e-144a48f53744
+explanation: "She won gold in Portugal."
+archived: false

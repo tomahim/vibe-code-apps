@@ -1,0 +1,20 @@
+schema_version: 1
+id: 576c8bd3-4f6b-49e6-a213-1c73c8f60762
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which race did he win in 2014 over 103 kilometres?"
+choices:
+  - id: 7ee7c373-9f64-438c-865c-974e8b079116
+    text: "Ultra Sierra Nevada"
+  - id: 916a880b-6c89-4aeb-b74f-e38659dee2fe
+    text: "Transgrancanaria"
+  - id: 81186ff3-126e-48c5-b6ca-eed8ecf3afcd
+    text: "Eiger Ultra"
+  - id: 8feb3e78-6b22-462e-888f-f0cf504fdd6f
+    text: "TDS"
+correct_choice_ids:
+  - 7ee7c373-9f64-438c-865c-974e8b079116
+explanation: "He won Ultra Sierra Nevada in 2014."
+archived: false

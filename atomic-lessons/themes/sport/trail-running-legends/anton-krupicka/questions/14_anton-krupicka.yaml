@@ -1,0 +1,20 @@
+schema_version: 1
+id: 44e975b1-002c-4c72-bd58-29d88aadf811
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How long was the biking part of the Longs Peak Triathlon?"
+choices:
+  - id: df41a52c-c4e6-4c90-99e8-886b2cb7c964
+    text: "200 miles"
+  - id: d453222f-4e79-4a87-a1a6-99878687a1d5
+    text: "28 miles"
+  - id: 90cd5e69-ca09-4ee3-844f-6ceb7ec80320
+    text: "79 miles"
+  - id: 5e3b316f-50cd-4e1d-9c15-12cacf9f044a
+    text: "14 miles"
+correct_choice_ids:
+  - 90cd5e69-ca09-4ee3-844f-6ceb7ec80320
+explanation: "He cycled 79 miles from Boulder."
+archived: false

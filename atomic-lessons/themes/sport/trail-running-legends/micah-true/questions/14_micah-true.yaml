@@ -1,0 +1,20 @@
+schema_version: 1
+id: e8f2a098-0b08-48a9-8d5e-7e59c8d03abb
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who won the Copper Canyon race in 2007 after narrowly losing in 2006?"
+choices:
+  - id: 2d974116-46d7-4288-b5ae-cdc3d15f56f0
+    text: "Scott Jurek"
+  - id: ff8d4863-dcd5-4cf9-9620-0d35565fdec2
+    text: "Jim Walmsley"
+  - id: 339b6412-5c4c-4a95-89b2-4cbf9377f364
+    text: "Karl Meltzer"
+  - id: 96f94521-2d5a-47d9-acb5-2b70d12b83dc
+    text: "Marco Olmo"
+correct_choice_ids:
+  - 2d974116-46d7-4288-b5ae-cdc3d15f56f0
+explanation: "Jurek won in 2007."
+archived: false

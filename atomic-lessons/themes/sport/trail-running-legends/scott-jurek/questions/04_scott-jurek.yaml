@@ -1,0 +1,20 @@
+schema_version: 1
+id: 420c93ad-444b-4343-815a-af6d8387c498
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What did Jurek finish in 2004 by running four classic 100 milers?"
+choices:
+  - id: 150f3205-656e-4749-a3e3-c61748c2a749
+    text: "The Barkley Marathons"
+  - id: 279a4298-fc8b-4c1e-bcf1-97f4821d9604
+    text: "The Triple Crown"
+  - id: 0c8f6889-b185-4075-8bfa-11e0868b89f0
+    text: "The Ultra Running Grand Slam"
+  - id: 3944bd07-2734-42d1-8061-94c3184595ee
+    text: "The Seven Summits"
+correct_choice_ids:
+  - 0c8f6889-b185-4075-8bfa-11e0868b89f0
+explanation: "He completed Western States, Leadville, Vermont and Wasatch Front."
+archived: false

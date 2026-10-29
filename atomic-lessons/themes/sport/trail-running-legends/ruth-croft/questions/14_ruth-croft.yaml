@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2b011d06-5213-4ece-8b59-0a7cd789fc1a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who beat Croft at UTMB in 2024?"
+choices:
+  - id: 044677ad-11d1-4fff-a6af-e9e2fc8bbd12
+    text: "Tom Evans"
+  - id: 25d5c09b-2a4c-4f0a-ba7f-0d5cdffba737
+    text: "Mira Rai"
+  - id: b5252da1-473d-45c0-b311-09fb2941aa44
+    text: "Katie Schide"
+  - id: 395081a1-b824-46ad-9f41-8964cbee1fcb
+    text: "Courtney Dauwalter"
+correct_choice_ids:
+  - b5252da1-473d-45c0-b311-09fb2941aa44
+explanation: "Croft finished second."
+archived: false

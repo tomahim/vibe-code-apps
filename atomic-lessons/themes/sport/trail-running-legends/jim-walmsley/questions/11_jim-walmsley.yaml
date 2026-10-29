@@ -1,0 +1,20 @@
+schema_version: 1
+id: 740bb144-6cd3-413a-bd1a-002608bf36a3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was his 50 mile time?"
+choices:
+  - id: 872963f2-513d-4c65-9672-933d9157f9d1
+    text: "3:55:00"
+  - id: a379295a-6abb-4d06-9578-c6a2139045b1
+    text: "6:10:00"
+  - id: fb1c3c51-1d3d-4892-9623-6a9bd7d803e0
+    text: "5:30:00"
+  - id: 18240b1b-269e-41a1-9615-3284343d853f
+    text: "4:50:07"
+correct_choice_ids:
+  - 18240b1b-269e-41a1-9615-3284343d853f
+explanation: "He beat the record by 14 seconds."
+archived: false

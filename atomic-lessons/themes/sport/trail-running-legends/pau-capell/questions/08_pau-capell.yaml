@@ -1,0 +1,9 @@
+id: 83aca1b6-96c5-4a13-8b25-6c1f1a982500
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "What was Capell's UTMB 2019 winning time? Give it as hh:mm:ss."
+accepted_answers:
+  - "20:19:07"
+explanation: "It was the second fastest at the time."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 0b253533-721f-4c82-8135-ed41ff64784c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which year was Picas born?"
+choices:
+  - id: 1ead1c9d-253c-451d-aa47-db334eea8539
+    text: "1976"
+  - id: 98be3aaa-b4db-4d37-a3ed-4c05e04c8938
+    text: "1995"
+  - id: 5af02b66-d694-4392-b938-4143e8737358
+    text: "1960"
+  - id: f218323e-27ef-4e51-bf8c-aa5928f6a4d2
+    text: "1988"
+correct_choice_ids:
+  - 1ead1c9d-253c-451d-aa47-db334eea8539
+explanation: "She was born on November 2, 1976."
+archived: false

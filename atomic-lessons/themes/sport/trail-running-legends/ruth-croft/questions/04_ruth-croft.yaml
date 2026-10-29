@@ -1,0 +1,20 @@
+schema_version: 1
+id: afd63244-0c00-4589-a916-02d2cd6763f4
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "In which country did she teach English for five and a half years?"
+choices:
+  - id: 2fc49ade-3cfe-42b4-b093-cf627ca22fb4
+    text: "Taiwan"
+  - id: 9cfafb93-8022-4e4e-88bb-375a6e54a43e
+    text: "Japan"
+  - id: 84119802-55f0-42cc-9daa-f6f99a1a572e
+    text: "China"
+  - id: 38a5b2dd-8023-4a8c-8c0e-a729443e0887
+    text: "Malaysia"
+correct_choice_ids:
+  - 2fc49ade-3cfe-42b4-b093-cf627ca22fb4
+explanation: "She lived there before moving to Europe."
+archived: false

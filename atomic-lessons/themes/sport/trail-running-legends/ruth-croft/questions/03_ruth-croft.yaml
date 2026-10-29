@@ -1,0 +1,20 @@
+schema_version: 1
+id: 2197ba58-dfc3-4b58-98e8-2f8cdfd00854
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which US university gave her an athletic scholarship?"
+choices:
+  - id: 59963e89-84d7-4d6d-89d2-024d706f4ade
+    text: "University of Denver"
+  - id: 4fd77173-1a17-479d-9b99-c3e6fc895d46
+    text: "University of Portland"
+  - id: a9eb7506-4f03-4e42-bd8b-4ac00eb5f80a
+    text: "Stanford"
+  - id: 3e4dd496-97a5-4e5b-9209-e4ba5e8295d6
+    text: "Boston College"
+correct_choice_ids:
+  - 4fd77173-1a17-479d-9b99-c3e6fc895d46
+explanation: "It is in Oregon."
+archived: false

@@ -1,0 +1,10 @@
+id: d1a0b22e-c8b0-4a40-8b6a-a1615173fe4e
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "How many states does the Appalachian Trail cross? Give the number."
+accepted_answers:
+  - "14"
+  - "fourteen"
+explanation: "The 2016 record crossed 14 states."
+archived: false

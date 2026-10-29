@@ -1,0 +1,9 @@
+id: 33e1b3cb-ce64-4837-89c1-1479e8f31bd3
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did the Zero Edition of the Ultra Tour Monte Rosa take place?"
+accepted_answers:
+  - "2015"
+explanation: "The Zero Edition was in August 2015."
+archived: false

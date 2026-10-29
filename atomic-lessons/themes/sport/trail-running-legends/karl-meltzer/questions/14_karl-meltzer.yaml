@@ -1,0 +1,20 @@
+schema_version: 1
+id: 404c7141-c950-4ab3-a7fc-bf2726823556
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "About how many days did Meltzer's 2016 Appalachian Trail record run take?"
+choices:
+  - id: 6d7786da-0ea4-4d48-bfc0-515088b20686
+    text: "About 46 days"
+  - id: a243c53c-4495-4e51-8156-37cd14f81dfd
+    text: "About 30 days"
+  - id: 64359f46-020b-4285-8915-8cb825fa67e1
+    text: "About 60 days"
+  - id: 7467834e-51e6-4cd1-aa5a-b911b6e6f574
+    text: "About 90 days"
+correct_choice_ids:
+  - 7467834e-51e6-4cd1-aa5a-b911b6e6f574
+explanation: "It took 45 days, 22 hours and 38 minutes."
+archived: false

@@ -1,0 +1,9 @@
+id: 47e93b5e-413c-489e-b289-4c610f3c3146
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Evans win UTMB?"
+accepted_answers:
+  - "2025"
+explanation: "He won in 2025."
+archived: false

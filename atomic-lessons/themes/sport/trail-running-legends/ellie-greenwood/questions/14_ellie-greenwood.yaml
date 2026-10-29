@@ -1,0 +1,20 @@
+schema_version: 1
+id: 8d38cd6b-77a7-4f07-a7ac-b58c3423f852
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "What was her Comrades 2014 winning time?"
+choices:
+  - id: 0b0aed87-8208-468d-bdd2-f5896d2725f2
+    text: "5:30:00"
+  - id: 628ee792-3948-4b6e-b206-66b4a8eb0e6e
+    text: "8:00:00"
+  - id: b1826deb-0583-4730-9a63-3c12048a27cb
+    text: "6:18:15"
+  - id: ed06adaf-b8f3-4d59-b9d4-1a766505e39c
+    text: "7:10:00"
+correct_choice_ids:
+  - b1826deb-0583-4730-9a63-3c12048a27cb
+explanation: "She was the first British woman to win."
+archived: false

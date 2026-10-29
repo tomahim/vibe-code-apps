@@ -1,0 +1,20 @@
+schema_version: 1
+id: 21e230b0-5d9e-4cd3-aa23-3f32583e06e5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "How far did Jornet climb in his 24 hour uphill skiing record?"
+choices:
+  - id: aecb81d6-88d6-4cf8-ab70-065de30fbf41
+    text: "12,000 metres"
+  - id: 06fa2eef-20fb-41ba-b6b6-d6e0513c0571
+    text: "23,864 metres"
+  - id: 262584e8-4928-4818-bc53-1ea909e3b4aa
+    text: "30,000 metres"
+  - id: c0ca23a9-7d4d-4fa3-b708-38f572f420ef
+    text: "8,848 metres"
+correct_choice_ids:
+  - 06fa2eef-20fb-41ba-b6b6-d6e0513c0571
+explanation: "The record is 23,864 metres, or 78,274 feet."
+archived: false

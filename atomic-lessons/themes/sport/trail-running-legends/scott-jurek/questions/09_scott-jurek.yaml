@@ -1,0 +1,20 @@
+schema_version: 1
+id: fdf84fe4-bfaf-4531-9233-4603859149a6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which Greek race, 153 miles long, did Jurek win in 2006, 2007 and 2008?"
+choices:
+  - id: d914c0bd-e5f5-47fa-ae3c-abfe75a19236
+    text: "Marathon"
+  - id: cd17b4ba-ec71-4f66-a358-a7179e9e8534
+    text: "Olympia Ultra"
+  - id: 29cff071-d8c7-46f3-87d6-a3bbf10b6dd2
+    text: "Spartathlon"
+  - id: 834daec3-1169-4db4-9b0f-afbbb3af77a7
+    text: "Delphi 100"
+correct_choice_ids:
+  - 29cff071-d8c7-46f3-87d6-a3bbf10b6dd2
+explanation: "Spartathlon runs from Athens to Sparta."
+archived: false

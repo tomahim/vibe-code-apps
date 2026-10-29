@@ -1,0 +1,9 @@
+id: af342cc3-92c2-4df6-9453-1dce75d977fe
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did D'Haene run UTMB in 19:01:32?"
+accepted_answers:
+  - "2017"
+explanation: "He ran 170 kilometres in 19:01:32 in 2017."
+archived: false

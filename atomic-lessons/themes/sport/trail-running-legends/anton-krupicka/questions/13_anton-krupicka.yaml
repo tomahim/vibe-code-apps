@@ -1,0 +1,20 @@
+schema_version: 1
+id: 5bb833e7-8237-44ef-9057-285a5f17225d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Who did Krupicka set the 2016 Longs Peak Triathlon time with?"
+choices:
+  - id: 06eb925a-b86e-40b6-94af-bbf717f240a7
+    text: "Rickey Gates"
+  - id: 109274e2-5bfc-4217-99c1-01f1991eea57
+    text: "Karl Meltzer"
+  - id: 8eb68258-5976-48d6-b1f7-faeec2ee7448
+    text: "Kilian Jornet"
+  - id: f61c3293-3044-4eff-8d25-486fe3379026
+    text: "Stefan Griebel"
+correct_choice_ids:
+  - f61c3293-3044-4eff-8d25-486fe3379026
+explanation: "They finished in 9:06."
+archived: false

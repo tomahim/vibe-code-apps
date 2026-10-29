@@ -1,0 +1,20 @@
+schema_version: 1
+id: 31adb780-108b-4577-9cc6-1d387d1e9acd
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Why should a fast mountain race time be read with context?"
+choices:
+  - id: 6c4097f1-b3e1-40fd-9fd6-4865cf065ff7
+    text: "Winners choose the route"
+  - id: fb702674-b7cc-4f4d-995e-6ab5db99f89e
+    text: "Races are always identical"
+  - id: 3fd7f5c4-318f-4dbb-9d64-370fbaaea88b
+    text: "Times are random"
+  - id: 92cbbcf4-4ba9-433b-a5e9-074c29206fbf
+    text: "Conditions and course can change"
+correct_choice_ids:
+  - 92cbbcf4-4ba9-433b-a5e9-074c29206fbf
+explanation: "Weather and route changes affect times."
+archived: false

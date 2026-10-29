@@ -1,0 +1,20 @@
+schema_version: 1
+id: a5f2e95b-e082-4b4b-8b3c-ec070a3d4b27
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "What was her improved Everest to Kathmandu time in 2011?"
+choices:
+  - id: 3a230f16-924f-4c0e-bd9a-1ce3d06bd4ec
+    text: "100 hours"
+  - id: 5e13b2a5-3087-4b6b-a2bb-ddb876c134df
+    text: "71 hours 25 minutes"
+  - id: d98910e5-068e-4d3a-b952-a1598fa5cee8
+    text: "48 hours"
+  - id: 80dcf778-a9a2-401f-97c5-db573bc4411f
+    text: "77 hours 36 minutes"
+correct_choice_ids:
+  - 5e13b2a5-3087-4b6b-a2bb-ddb876c134df
+explanation: "She improved on her 2007 time."
+archived: false

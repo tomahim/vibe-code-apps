@@ -1,0 +1,20 @@
+schema_version: 1
+id: abe9a556-675b-43eb-9243-e3fa62be4c1a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "At what age did Evans join the British Army?"
+choices:
+  - id: fecb0c94-e63f-43c5-87a2-29224c20e2e4
+    text: "18"
+  - id: 837dc542-4788-43bc-b0e9-43064d42d379
+    text: "30"
+  - id: 0d14bd86-1097-4788-be26-65fcc97ebbd0
+    text: "14"
+  - id: fb6e2966-cf40-457c-8e81-0af8a1e122fe
+    text: "22"
+correct_choice_ids:
+  - fecb0c94-e63f-43c5-87a2-29224c20e2e4
+explanation: "He joined at 18."
+archived: false

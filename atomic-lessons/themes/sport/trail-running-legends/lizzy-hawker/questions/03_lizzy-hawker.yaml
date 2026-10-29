@@ -1,0 +1,20 @@
+schema_version: 1
+id: fb3932a0-f57f-47e2-80cd-d475f1fe6b35
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which organisation did Hawker work for as a researcher?"
+choices:
+  - id: 2d98908d-5b52-4ed9-949e-bbcd1ee5af4e
+    text: "The British Antarctic Survey"
+  - id: 1678d80f-9143-485a-ab7c-a62b395e4e46
+    text: "The BBC"
+  - id: dce35c0c-9a20-419e-bae8-b2a7ee92f816
+    text: "NASA"
+  - id: e19d5a3e-b618-425a-96ec-4d2b7c596b98
+    text: "The Met Office"
+correct_choice_ids:
+  - 2d98908d-5b52-4ed9-949e-bbcd1ee5af4e
+explanation: "She studied climate change along the Antarctic coast."
+archived: false

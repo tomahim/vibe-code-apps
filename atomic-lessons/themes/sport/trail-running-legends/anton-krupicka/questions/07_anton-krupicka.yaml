@@ -1,0 +1,11 @@
+id: deb2fcdc-6aac-491f-8cc1-c484f739f35d
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "How many times did Krupicka win the Leadville 100? Give the number."
+accepted_answers:
+  - "2"
+  - "two"
+  - "twice"
+explanation: "He won it twice."
+archived: false

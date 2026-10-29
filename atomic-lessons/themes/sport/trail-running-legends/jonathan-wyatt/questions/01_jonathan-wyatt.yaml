@@ -1,0 +1,20 @@
+schema_version: 1
+id: ed886d85-3403-43b2-b8b7-0f7f73cc8d9d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "Which country does Wyatt represent?"
+choices:
+  - id: 70c727d1-5e3c-46cd-b2e2-8f54fcfa1488
+    text: "Norway"
+  - id: b7a86a10-862e-44fb-af85-c11678bbadbe
+    text: "New Zealand"
+  - id: 20669f9a-3ff0-42f2-8348-6f8feda9e472
+    text: "Australia"
+  - id: b31e7a79-2feb-421f-8e52-b1a047241fa4
+    text: "Italy"
+correct_choice_ids:
+  - b7a86a10-862e-44fb-af85-c11678bbadbe
+explanation: "He is a New Zealand runner."
+archived: false

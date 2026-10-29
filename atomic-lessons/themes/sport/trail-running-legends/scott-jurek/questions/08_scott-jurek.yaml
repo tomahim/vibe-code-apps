@@ -1,0 +1,9 @@
+id: d4716bf4-7b88-4766-b823-7c46bc3cb9ac
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Jurek win the Hardrock Hundred in a course record?"
+accepted_answers:
+  - "2007"
+explanation: "He won Hardrock in 2007."
+archived: false

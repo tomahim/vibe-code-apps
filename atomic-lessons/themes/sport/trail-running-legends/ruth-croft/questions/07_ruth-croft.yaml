@@ -1,0 +1,9 @@
+id: 446b4a25-e826-4a66-a26a-8cc5781ff50e
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: "In which year did Croft first win OCC?"
+accepted_answers:
+  - "2018"
+explanation: "She won OCC in 2018 and 2019."
+archived: false

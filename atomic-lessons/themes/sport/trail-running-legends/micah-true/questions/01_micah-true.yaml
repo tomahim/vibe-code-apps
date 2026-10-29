@@ -1,0 +1,20 @@
+schema_version: 1
+id: a65e5556-9621-4ff7-a75c-d648a43a4a5c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: "What was Micah True's birth name?"
+choices:
+  - id: ae35bfee-87aa-402a-991e-6d73b821d26e
+    text: "Mike True"
+  - id: 3ae0f856-890f-4cfe-9c1a-20f4f9c5c4c5
+    text: "Michael Jordan"
+  - id: 0829231a-c02e-44e1-98e4-c4d7703a5afd
+    text: "Michael Randall Hickman"
+  - id: 2bd05d68-dd99-4346-8cbd-948a35dd9229
+    text: "Micah Randall"
+correct_choice_ids:
+  - 0829231a-c02e-44e1-98e4-c4d7703a5afd
+explanation: "He was born Michael Randall Hickman."
+archived: false

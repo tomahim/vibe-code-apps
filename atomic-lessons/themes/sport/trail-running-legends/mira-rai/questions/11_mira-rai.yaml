@@ -1,0 +1,20 @@
+schema_version: 1
+id: 48c1b03f-e46f-48dd-b052-3eff0abfc70a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: "Which degree did she finish after the army?"
+choices:
+  - id: 0123d578-952d-435f-ae1a-6e6dfa6fcc1f
+    text: "Agricultural science"
+  - id: 276d5889-c966-449f-a1de-63d8f0f81c1f
+    text: "Medicine"
+  - id: b7f51c04-a799-4158-8e82-7885d5b2ef7a
+    text: "Law"
+  - id: 299014e3-321d-42c3-b47b-d854ae877907
+    text: "Engineering"
+correct_choice_ids:
+  - 0123d578-952d-435f-ae1a-6e6dfa6fcc1f
+explanation: "She finished an agricultural science degree."
+archived: false

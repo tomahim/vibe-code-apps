@@ -1,0 +1,20 @@
+schema_version: 1
+id: 68f618be-f9d7-4474-a34a-a1f8eac7eb20
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: "Which Colorado city did he make his home in the summers?"
+choices:
+  - id: 2cc589e2-10e4-4011-b49e-1df500fceb99
+    text: "Boulder"
+  - id: 12055382-7f16-4fc3-be97-91434f1e8278
+    text: "Durango"
+  - id: 2ff7f450-b593-4e0b-90e0-29f68b116c9d
+    text: "Leadville"
+  - id: 947cf8dd-77b2-4f14-b9ab-d2c31b7c53ea
+    text: "Aspen"
+correct_choice_ids:
+  - 2cc589e2-10e4-4011-b49e-1df500fceb99
+explanation: "He moved to Boulder by 1982."
+archived: false

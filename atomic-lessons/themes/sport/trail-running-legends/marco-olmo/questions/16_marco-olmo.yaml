@@ -1,0 +1,9 @@
+id: 53eca060-4c30-4794-8426-85de8af42fdf
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Olmo win UTMB for the second time?"
+accepted_answers:
+  - "2007"
+explanation: "He won in 2007 aged 59."
+archived: false

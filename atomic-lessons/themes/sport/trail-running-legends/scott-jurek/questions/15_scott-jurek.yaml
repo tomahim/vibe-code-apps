@@ -1,0 +1,9 @@
+id: 44f60c93-022a-4d84-b848-c2ecc2b358f1
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: "In which year did Jurek set his Appalachian Trail record?"
+accepted_answers:
+  - "2015"
+explanation: "He finished on July 13, 2015."
+archived: false

@@ -1,0 +1,20 @@
+schema_version: 1
+id: 249e096f-768a-4a83-b77e-219101cc6494
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "Which Brazilian runner was second to Picas in the 2014 World Tour ranking?"
+choices:
+  - id: b90a91d9-cb7d-4887-b648-a917fbe0c83d
+    text: "Fernanda Maciel"
+  - id: 0652836b-c68b-4746-910f-be620110b840
+    text: "Mira Rai"
+  - id: 171b7864-33db-4b56-9a89-f70159e3b634
+    text: "Lizzy Hawker"
+  - id: 1707a0ab-2259-447c-b816-74940ce3dfe1
+    text: "Ann Trason"
+correct_choice_ids:
+  - b90a91d9-cb7d-4887-b648-a917fbe0c83d
+explanation: "The ranking shows Picas ahead of Fernanda Maciel."
+archived: false

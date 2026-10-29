@@ -1,0 +1,20 @@
+schema_version: 1
+id: 35ab4a39-c2b3-46e6-be3b-71aa5b8eb78e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: "How much did Nepal's ministry plan to award her in 2017?"
+choices:
+  - id: 86c95ff1-0c46-474c-b8fe-a35486ec6ebb
+    text: "3 million rupees"
+  - id: 751ba4eb-25de-4922-adcc-4c62cd16871b
+    text: "30 rupees"
+  - id: afa4ecaf-9094-4788-adad-d2539f28247b
+    text: "300 rupees"
+  - id: 77dad908-5af4-41f8-89ef-3ac1c37da898
+    text: "1 rupee"
+correct_choice_ids:
+  - 86c95ff1-0c46-474c-b8fe-a35486ec6ebb
+explanation: "NPR reported a plan to award her three million rupees."
+archived: false
