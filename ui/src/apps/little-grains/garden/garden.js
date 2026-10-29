@@ -543,13 +543,25 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const hint = $('.lg-hint'); hint.textContent = mobile ? 'Drag to move · pinch to zoom · two fingers to turn' : 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn'; setTimeout(() => hint.classList.add('gone'), 9000);
   const tv = new THREE.Vector3();
   function placeLabels() {
-    const w = root.clientWidth, h = root.clientHeight;
+    const w = root.clientWidth, h = root.clientHeight, shown = [];
     for (const L of labelDefs) {
       tv.copy(L.anchor).project(camera);
       const vis = tv.z < 1 && Math.abs(tv.x) < 1.1 && Math.abs(tv.y) < 1.1 && !switching;
       L.el.style.opacity = vis ? 1 : 0;
-      if (vis) L.el.style.transform = `translate(-50%,-100%) translate(${((tv.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-tv.y * 0.5 + 0.5) * h).toFixed(1)}px)`;
+      if (vis) shown.push({ L, x: (tv.x * 0.5 + 0.5) * w, y: (-tv.y * 0.5 + 0.5) * h });
     }
+    // Name + dots labels must stay readable: lift a label above any label it would cover.
+    const named = shown.filter((e) => e.L.el.classList.contains('theme') || e.L.el.classList.contains('cell')).sort((a, b) => b.y - a.y), placed = [];
+    for (const e of named) {
+      e.w = e.L.el.offsetWidth; e.h = e.L.el.offsetHeight;
+      for (let guard = 0; guard < 8; guard++) {
+        const hit = placed.find((p) => Math.abs(p.x - e.x) < (p.w + e.w) / 2 + 4 && e.y > p.y - p.h - 4 && p.y > e.y - e.h - 4);
+        if (!hit) break;
+        e.y = hit.y - hit.h - 6;
+      }
+      placed.push(e);
+    }
+    for (const e of shown) e.L.el.style.transform = `translate(-50%,-100%) translate(${e.x.toFixed(1)}px,${e.y.toFixed(1)}px)`;
   }
   function refreshLabelDots() {
     for (const L of labelDefs) {
