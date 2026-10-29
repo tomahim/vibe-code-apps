@@ -73,9 +73,12 @@ class LoginEndpointTests(TestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_rate_limits_repeated_attempts(self):
-        for _ in range(5):
-            self.post('{"email": "thomas@example.com", "password": "wrong-password"}')
-        response = self.post('{"email": "thomas@example.com", "password": "test-only-password"}')
+        # The limiter counts per wall-clock minute; pin the clock so a minute
+        # boundary mid-test cannot reset the count (flaky in CI).
+        with mock.patch("apps.accounts.views.time.time", return_value=1_000_000_020):
+            for _ in range(5):
+                self.post('{"email": "thomas@example.com", "password": "wrong-password"}')
+            response = self.post('{"email": "thomas@example.com", "password": "test-only-password"}')
         self.assertEqual(response.status_code, 429)
 
 
