@@ -11,7 +11,7 @@ import "./little-grains.css";
 const REWARD_COPY = {
   drops: {
     title: "How Drops are earned",
-    description: "You earn 1 Drop when you first finish a card, 5 more when you complete a lesson, and 100 more when you complete a learning path. Each reward is earned once.",
+    description: "You earn 1 Drop when you first finish a card, 5 more when you have read every card in a lesson, and 100 more when you complete a learning path. Each reward is earned once.",
   },
   carrots: {
     title: "How Carrots are earned",
