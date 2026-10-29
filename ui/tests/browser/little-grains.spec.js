@@ -550,3 +550,74 @@ for (const [name, vp, mobile] of [['phone', { width: 390, height: 844 }, true], 
     await page.screenshot({ path: `/tmp/little-grains-theme-${name}.png` });
   });
 }
+
+test('refresh restores the theme, path, selected lesson and card from the URL', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, 2, { twoCards: true });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`);
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  // The URL updates once the camera fly and fade settle (~1.1s; slower under software WebGL).
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}`, { timeout: 15000 });
+  await page.reload();
+  await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+  await panel.getByRole('button', { name: /Bath time and care/ }).click();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}`);
+  await page.reload();
+  await panel.getByRole('button', { name: 'Start lesson' }).click();
+  await expect(page.locator('.grains-reader')).toBeVisible();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
+  await page.reload();
+  await expect(page.locator('.grains-reader').getByRole('heading', { name: 'Warm water' })).toBeVisible();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
+});
+
+test('browser back and forward move between garden levels', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page);
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`);
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  // The URL updates once the camera fly and fade settle (~1.1s; slower under software WebGL).
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}`, { timeout: 15000 });
+  await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`);
+  await expect(panel.getByRole('heading', { name: 'Language' })).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL('/apps/little-grains');
+  await expect(panel.getByRole('heading', { name: 'The Garden' })).toBeVisible();
+  await page.goForward();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`);
+  await expect(panel.getByRole('heading', { name: 'Language' })).toBeVisible();
+});
+
+test('an unknown id in the URL falls back to the nearest valid level', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page);
+  await page.goto(`/apps/little-grains/theme/${id.theme}/path/not-a-path/lesson/not-a-lesson`);
+  const panel = page.locator('.lg-panel');
+  await expect(panel.getByRole('heading', { name: 'Language' })).toBeVisible();
+  await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`);
+  await page.goto('/apps/little-grains/theme/not-a-theme');
+  await expect(panel.getByRole('heading', { name: 'The Garden' })).toBeVisible();
+  await expect(page).toHaveURL('/apps/little-grains');
+});
+
+test('a question deep link opens the reader at that question', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page);
+  await page.goto(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/question/${id.question}`);
+  await expect(page.locator('.grains-reader').getByRole('heading', { name: 'What is the water like?' })).toBeVisible();
+});
+
+test('a deep link survives the login redirect', async ({ page }) => {
+  await page.goto(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
+  await page.waitForURL(/\/login\?next=/);
+  const next = new URL(page.url()).searchParams.get('next');
+  expect(next).toBe(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
+});

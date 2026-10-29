@@ -19,7 +19,8 @@ export default function Login() {
     try {
       await logIn(email, password);
       const next = new URLSearchParams(window.location.search).get("next");
-      const destination = next === "/apps/news" ? next : "/apps/little-grains";
+      // Deep links survive sign-in (#225); keep the allow-list same-origin.
+      const destination = next === "/apps/news" || next === "/apps/little-grains" || next?.startsWith("/apps/little-grains/") ? next : "/apps/little-grains";
       window.history.pushState({}, "", destination);
       window.dispatchEvent(new PopStateEvent("popstate"));
       window.scrollTo(0, 0);

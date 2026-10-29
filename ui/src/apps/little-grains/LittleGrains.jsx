@@ -21,8 +21,42 @@ const REWARD_COPY = {
 
 function redirectToLogin() {
   clearToken();
-  window.history.replaceState({}, "", "/login?next=/apps/little-grains");
+  const next = `${window.location.pathname}${window.location.search}`;
+  window.history.replaceState({}, "", `/login?next=${next}`);
   window.dispatchEvent(new PopStateEvent("popstate"));
+}
+
+// Path-based routing (#225): garden level, selected lesson and the card or
+// question being read all live in the URL, so refresh, back/forward and
+// copied links restore the same place.
+function parseRoute(pathname) {
+  const match = pathname.match(/^\/apps\/little-grains(?:\/theme\/([^/]+)(?:\/path\/([^/]+)(?:\/lesson\/([^/]+)(?:\/(card|question)\/([^/]+))?)?)?)?\/?$/);
+  if (!match) return {};
+  return { themeId: match[1] || null, pathId: match[2] || null, lessonId: match[3] || null, step: match[4] ? { type: match[4], id: match[5] } : null };
+}
+
+function routeUrl(route) {
+  let url = "/apps/little-grains";
+  if (route.themeId) url += `/theme/${route.themeId}`;
+  if (route.pathId) url += `/path/${route.pathId}`;
+  if (route.lessonId) url += `/lesson/${route.lessonId}`;
+  if (route.step) url += `/${route.step.type}/${route.step.id}`;
+  return url;
+}
+
+// Map URL ids to garden indices; an unknown or removed id falls back to the
+// nearest valid level (theme -> garden, path -> theme, lesson -> path).
+function locateRoute(gardenData, route) {
+  const themes = gardenData?.themes || [];
+  const ti = themes.findIndex((theme) => theme.id === route.themeId);
+  if (!route.themeId || ti < 0) return { view: { ti: -1, pi: -1, lesson: -1 }, route: {} };
+  const paths = themes[ti].learning_paths || [];
+  const pi = paths.findIndex((path) => path.id === route.pathId);
+  if (!route.pathId || pi < 0) return { view: { ti, pi: -1, lesson: -1 }, route: { themeId: route.themeId } };
+  const lessons = paths[pi].lessons || [];
+  const li = lessons.findIndex((lesson) => lesson.id === route.lessonId);
+  if (!route.lessonId || li < 0) return { view: { ti, pi, lesson: -1 }, route: { themeId: route.themeId, pathId: route.pathId } };
+  return { view: { ti, pi, lesson: li }, route: { themeId: route.themeId, pathId: route.pathId, lessonId: route.lessonId } };
 }
 
 async function api(path, options) {
@@ -114,7 +148,7 @@ function LessonComplete({ kind, onDone }) {
   </div>;
 }
 
-function LessonReader({ lessonId, onClose, onProgress }) {
+function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onStepChange }) {
   const [data, setData] = useState(null);
   const [viewStep, setViewStep] = useState(null);
   const [replay, setReplay] = useState(false);
@@ -144,10 +178,33 @@ function LessonReader({ lessonId, onClose, onProgress }) {
     setData(null); setReplay(false); setReturnStep(null); setFeedback(null); setChoice(""); setError("");
     api(`lessons/${lessonId}/open/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
       .then(onProgress).catch(() => {});
-    api(`lessons/${lessonId}/`).then((result) => { if (active) { noteFullyRead(result); setData(result); setReplay(fullyReadAtOpen.current); setViewStep(fullyReadAtOpen.current && result.cards.length ? { type: "card", id: result.cards[0].id } : result.next_step); } })
+    api(`lessons/${lessonId}/`).then((result) => {
+      if (!active) return;
+      noteFullyRead(result); setData(result); setReplay(fullyReadAtOpen.current);
+      // A deep-linked card/question id wins (#225). An already-read card
+      // opens read-only; an unknown id falls back to the current step.
+      let start = null;
+      if (initialStep?.type === "card") {
+        const linked = result.cards.find((item) => item.id === initialStep.id);
+        if (linked) { start = linked.completed_at ? { type: "revisit", id: linked.id } : { type: "card", id: linked.id }; if (linked.completed_at) setReturnStep(result.next_step); }
+      } else if (initialStep?.type === "question") {
+        if (result.questions.some((item) => item.id === initialStep.id)) start = { type: "question", id: initialStep.id };
+      }
+      setViewStep(start || (fullyReadAtOpen.current && result.cards.length ? { type: "card", id: result.cards[0].id } : result.next_step));
+    })
       .catch((err) => { if (active) setError(err.message); });
     return () => { active = false; };
+    // initialStep is a mount-time deep link only; step moves stay local.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lessonId, onProgress]);
+
+  // Keep the URL in sync with the reading step (#225): the parent pushes one
+  // history entry when the reader opens, then replaces it from step to step.
+  useEffect(() => {
+    if (!data || !onStepChange) return;
+    const step = !viewStep ? null : viewStep.type === "revisit" ? { type: "card", id: viewStep.id } : viewStep;
+    onStepChange({ themeId: data.theme.id, pathId: data.learning_path.id, lessonId }, step);
+  }, [data, viewStep, onStepChange, lessonId]);
 
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
@@ -416,12 +473,68 @@ export default function LittleGrains() {
   const lastGarden = useRef(null);
   const [garden, setGarden] = useState(null);
   const [error, setError] = useState("");
-  const [lessonId, setLessonId] = useState(null);
+  const [reader, setReader] = useState(() => {
+    const current = parseRoute(window.location.pathname);
+    return current.lessonId && current.step ? { lessonId: current.lessonId, step: current.step } : null;
+  });
+  // "none": opened by a click, the first step pushes one history entry.
+  // "pushed": that entry exists; step moves replace it, closing goes back.
+  // "landed": arrived on a step URL directly; step moves only replace it.
+  const readerHistory = useRef(parseRoute(window.location.pathname).step ? "landed" : "none");
+  const readerMeta = useRef(null);
+  const gardenData = useRef(null);
   const [catchUp, setCatchUp] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [rewardInfo, setRewardInfo] = useState(null);
   const profile = window.matchMedia("(max-width: 760px)").matches ? "mobile" : "desktop";
-  const refresh = useCallback(async () => { const result = await api("garden/"); setGarden(result); return result; }, []);
+  const refresh = useCallback(async () => { const result = await api("garden/"); gardenData.current = result; setGarden(result); return result; }, []);
+
+  const navigate = useCallback((next, { replace = false } = {}) => {
+    const url = routeUrl(next);
+    if (url !== window.location.pathname) window.history[replace ? "replaceState" : "pushState"]({}, "", url);
+  }, []);
+
+  const handleViewChange = useCallback((view) => {
+    navigate({ themeId: view.themeId, pathId: view.pathId, lessonId: view.lessonId });
+  }, [navigate]);
+
+  const openReader = useCallback((lessonId) => {
+    readerHistory.current = "none";
+    setReader({ lessonId, step: null });
+  }, []);
+
+  const handleReaderStep = useCallback((meta, step) => {
+    readerMeta.current = meta;
+    const next = { themeId: meta.themeId, pathId: meta.pathId, lessonId: meta.lessonId, step };
+    if (readerHistory.current === "none") { readerHistory.current = "pushed"; navigate(next); }
+    else navigate(next, { replace: true });
+  }, [navigate]);
+
+  const closeReader = useCallback(() => {
+    if (readerHistory.current === "pushed") { readerHistory.current = "none"; window.history.back(); return; }
+    readerHistory.current = "none";
+    setReader(null);
+    // Landed on a step URL: fold it back to the lesson level, not an error.
+    const current = parseRoute(window.location.pathname);
+    if (current.step) navigate({ themeId: readerMeta.current?.themeId || current.themeId, pathId: readerMeta.current?.pathId || current.pathId, lessonId: current.lessonId }, { replace: true });
+  }, [navigate]);
+
+  // Browser back/forward restores the garden level and reader from the URL.
+  useEffect(() => {
+    const onPopState = () => {
+      const next = parseRoute(window.location.pathname);
+      readerHistory.current = next.step ? "landed" : "none";
+      setReader(next.lessonId && next.step ? { lessonId: next.lessonId, step: next.step } : null);
+      if (gardenData.current && scene.current && !scene.current.failed) {
+        const located = locateRoute(gardenData.current, next);
+        scene.current.applyView(located.view);
+        const valid = routeUrl(next.step ? { ...located.route, step: located.route.lessonId ? next.step : null } : located.route);
+        if (valid !== window.location.pathname) window.history.replaceState({}, "", valid);
+      }
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   useEffect(() => {
     if (!getToken()) { const id = setTimeout(redirectToLogin, 0); return () => clearTimeout(id); }
@@ -432,7 +545,11 @@ export default function LittleGrains() {
 
   useEffect(() => {
     if (!garden || !mount.current) return;
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], onOpenLesson: setLessonId, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    // Restore the garden level from the URL and correct unknown ids (#225).
+    const current = parseRoute(window.location.pathname);
+    const located = locateRoute(garden, current);
+    if (!current.step) { const valid = routeUrl(located.route); if (valid !== window.location.pathname) window.history.replaceState({}, "", valid); }
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -446,13 +563,13 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (lessonId) setLessonId(null); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [lessonId, catchUp, showLeaderboard, rewardInfo]);
+  }, [reader, catchUp, showLeaderboard, rewardInfo, closeReader]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
-    {lessonId && <LessonReader key={lessonId} lessonId={lessonId} onClose={() => setLessonId(null)} onProgress={refresh} />}
+    {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
   </main>;
