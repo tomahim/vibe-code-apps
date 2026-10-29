@@ -1,0 +1,19 @@
+id: a6926dae-b10e-481e-852d-e29961c19b06
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "How did NotPetya first reach many victims?"
+choices:
+  - id: 77515346-2db7-44a9-b05b-a0a7dde9fc0b
+    text: "Through a phone call"
+  - id: a639ff13-82d8-4c78-9434-80107915e5a3
+    text: "Through a public Wi-Fi hotspot only"
+  - id: d6a7161b-b2fb-4fdd-896c-774f2bd0f3e7
+    text: "Through a printed letter"
+  - id: c43a65d3-7d47-4783-a86d-c43b9647ac52
+    text: "Through a compromised update of Ukrainian accounting software"
+correct_choice_ids:
+  - c43a65d3-7d47-4783-a86d-c43b9647ac52
+explanation: "The M.E.Doc update channel was used as a distribution route."
+archived: false

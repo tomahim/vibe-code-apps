@@ -1,0 +1,19 @@
+id: 4f48cd3e-710c-43ae-ba55-0f91a8a4d2ff
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does a certificate authority do?"
+choices:
+  - id: 627fd3b3-f4c9-4185-81d7-635f84ebdb27
+    text: "It issues certificates that vouch for a website's identity"
+  - id: caa15e38-867f-47fd-931b-7e8b3bab6e54
+    text: "It delivers email to the user"
+  - id: 753f6b1b-63fd-4147-8cae-d823695ab435
+    text: "It hosts the website's pages"
+  - id: 181717b0-ec31-4d0b-ac81-113b002850a4
+    text: "It stores the user's passwords"
+correct_choice_ids:
+  - 627fd3b3-f4c9-4185-81d7-635f84ebdb27
+explanation: "Browsers trust a list of CAs and accept the certificates they sign."
+archived: false

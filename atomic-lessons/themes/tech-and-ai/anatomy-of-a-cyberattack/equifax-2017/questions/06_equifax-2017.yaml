@@ -1,0 +1,19 @@
+id: 6418cd0e-e146-4f7b-aae7-996aaf81d2f0
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should the China-related charge be described?
+choices:
+- id: b175a5af-94a0-4b0b-b658-7404f2d01b27
+  text: A confession by Equifax
+- id: 631e2233-ddfe-4a76-aea1-08da5709d6f5
+  text: A 2020 US indictment alleging PLA members were responsible
+- id: f1ec0086-f8ad-42de-a4fc-00082e640524
+  text: A final verdict after trial
+- id: 1baaf7f6-e07b-4e45-8f6f-7d15f313aeca
+  text: A United Nations ruling
+correct_choice_ids:
+- 631e2233-ddfe-4a76-aea1-08da5709d6f5
+explanation: An indictment is an allegation until tried.
+archived: false

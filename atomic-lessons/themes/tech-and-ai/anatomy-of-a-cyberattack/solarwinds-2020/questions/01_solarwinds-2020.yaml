@@ -1,0 +1,19 @@
+id: 5061372d-0e47-46ea-b82c-db63bdfdb844
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What was compromised in SolarWinds' environment?"
+choices:
+  - id: 2e36cb37-ba65-4394-8085-ef9e5a5a0da8
+    text: "The company's coffee machine"
+  - id: 8064769c-1ed7-4e11-8be2-aa9991360538
+    text: "The domain of a newspaper"
+  - id: e4f163a4-3abe-4119-a3d7-94fa44c5b346
+    text: "The process that builds Orion updates"
+  - id: a5f39f09-68fa-4879-afc5-15536d30fdd5
+    text: "A customer's phone"
+correct_choice_ids:
+  - e4f163a4-3abe-4119-a3d7-94fa44c5b346
+explanation: "Malicious code was inserted during the build, so the update looked legitimate."
+archived: false

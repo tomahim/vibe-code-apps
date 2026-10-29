@@ -1,0 +1,19 @@
+id: 5f266cdf-b501-4d46-8d2d-dd9d4342b932
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did the CRS brief report about initial access?
+choices:
+- id: ea10e501-4cf1-48e2-bb8b-56f81f725e1c
+  text: A physical break-in
+- id: 9d833ae0-4891-49ea-834b-d516dd042f29
+  text: A leaked cryptographic key from a browser
+- id: 7e2e2308-5e15-4bbb-b3d9-5527545503f8
+  text: Hackers reportedly used credentials assigned to a background-check contractor's employee
+- id: da469e18-31a5-4263-bc99-daab42f874bf
+  text: An exploit sold at an auction
+correct_choice_ids:
+- 7e2e2308-5e15-4bbb-b3d9-5527545503f8
+explanation: The brief reports this as reported information, not a confirmed forensic finding.
+archived: false

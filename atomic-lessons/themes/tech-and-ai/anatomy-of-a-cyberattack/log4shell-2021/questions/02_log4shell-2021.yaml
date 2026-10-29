@@ -1,0 +1,19 @@
+id: 26422361-e279-416a-9220-85edc0ed3411
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why was Log4Shell rated so severe?
+choices:
+- id: dccef6d2-ba3c-444e-9c0f-08bb52e94b33
+  text: It only displayed a harmless warning
+- id: 59d47aef-3ea5-4e4f-b26e-256d37b304eb
+  text: It could be used remotely to run code, and Apache rated it critical
+- id: 18b3ce97-2d8f-4d82-b0fe-7447722c266c
+  text: It only affected old printers
+- id: b9e11cb3-0709-4989-8c3a-b5581a035c7a
+  text: It needed physical access
+correct_choice_ids:
+- 59d47aef-3ea5-4e4f-b26e-256d37b304eb
+explanation: CISA's advisory describes serious exploitation, and Apache rated the flaw critical.
+archived: false

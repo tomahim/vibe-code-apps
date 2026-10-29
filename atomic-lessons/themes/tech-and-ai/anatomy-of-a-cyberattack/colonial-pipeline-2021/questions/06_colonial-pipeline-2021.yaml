@@ -1,0 +1,19 @@
+id: f446cf97-6f5e-4f1f-9906-51b25f2b1af5
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Who published guidance on DarkSide ransomware?
+choices:
+- id: bb5f061e-da29-4acd-b5e4-896938aabdde
+  text: The fuel companies' marketing teams
+- id: ec4eaa28-4e2c-4ef3-aa26-5fb74db6e95b
+  text: A global airline
+- id: b5b85570-aaee-4fbe-b38b-9749427e75af
+  text: The pipeline's customers
+- id: 0fffe4d1-2db5-4463-8d17-b4d660168cf4
+  text: CISA and the FBI
+correct_choice_ids:
+- 0fffe4d1-2db5-4463-8d17-b4d660168cf4
+explanation: CISA's alert AA21-131A is a joint advisory with the FBI.
+archived: false

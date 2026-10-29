@@ -1,0 +1,19 @@
+id: 9e51f581-fef2-4ed3-a135-732eeaf11ae6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How did the malware weaken the bank's checks?
+choices:
+- id: 476a2deb-2449-404d-8fc5-4f7c7fe7f197
+  text: It locked the building doors
+- id: 72cdabba-74ca-4195-99f1-469bab0d7fc4
+  text: It interfered with records and printed confirmations used for reconciliation
+- id: 630033a0-88f7-4124-997c-aa3aa90c90b6
+  text: It switched off the internet in the country
+- id: eb95c6ce-246d-427f-bb13-96a00b35421b
+  text: It sent the money to a charity
+correct_choice_ids:
+- 72cdabba-74ca-4195-99f1-469bab0d7fc4
+explanation: BAE describes manipulation of the confirmation printing and records.
+archived: false

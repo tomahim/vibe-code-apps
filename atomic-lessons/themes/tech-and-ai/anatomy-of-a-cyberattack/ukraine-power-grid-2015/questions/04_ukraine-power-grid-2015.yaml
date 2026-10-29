@@ -1,0 +1,19 @@
+id: a09b8205-fa34-4e3d-a9a1-736d703520dd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did attackers do to slow the response?
+choices:
+- id: d2b59c0b-4487-4a30-ae46-344d4d303905
+  text: Closed all roads
+- id: 7c14ab26-114f-41a0-96db-7ae71e178b42
+  text: Bribed operators
+- id: dd061f7d-6852-48d5-99fa-e5a3100e7d89
+  text: Cut the telephone cables of customers' homes
+- id: 78aecdd5-d3e7-4241-a5c3-6e65a0abd67d
+  text: Used destructive malware, damaged some devices and flooded a call centre
+correct_choice_ids:
+- 78aecdd5-d3e7-4241-a5c3-6e65a0abd67d
+explanation: They tried to make recovery and reporting harder.
+archived: false

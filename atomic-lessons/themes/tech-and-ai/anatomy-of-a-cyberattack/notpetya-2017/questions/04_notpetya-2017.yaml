@@ -1,0 +1,19 @@
+id: 88623438-69d1-499b-b0a3-68bfced2fe9d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Which company reported a $200 to $300 million cost?
+choices:
+- id: 5ebed56d-ae04-4a77-a358-0ead36b3ae76
+  text: A tourism website
+- id: 56cd5df0-9ba2-42ec-8eee-2b625b9324f6
+  text: Maersk
+- id: 0b62ffa9-ad59-4318-9d52-d77fd092184e
+  text: A university football team
+- id: 89723abd-b3e7-4f1a-8638-75b037a1f56a
+  text: A local bakery
+correct_choice_ids:
+- 56cd5df0-9ba2-42ec-8eee-2b625b9324f6
+explanation: CNBC reported that Maersk estimated the cost at $200 to $300 million.
+archived: false

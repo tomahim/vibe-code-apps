@@ -1,0 +1,19 @@
+id: 7a5aeeb3-1f0c-4f9c-8b29-4625f7834759
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did the NAO find about the NHS?
+choices:
+- id: 253f9ab8-d4b5-42bd-a949-04f2c396e1aa
+  text: No hospital was affected
+- id: 8c2fd5c9-3cb7-4794-97f2-f637bd3f67a4
+  text: At least 80 of 236 trusts were affected and an estimated 19,000+ appointments were cancelled
+- id: cf15f65d-fdfb-4641-a30c-67df4e7e9f60
+  text: Only one clinic lost power
+- id: d3751e83-074b-4f21-99c0-e310eeb1c819
+  text: All data was permanently deleted
+correct_choice_ids:
+- 8c2fd5c9-3cb7-4794-97f2-f637bd3f67a4
+explanation: The NAO documented trusts, other organisations and cancelled appointments.
+archived: false

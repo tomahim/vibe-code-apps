@@ -1,0 +1,19 @@
+id: c1a070ac-3e97-49f2-b585-eace5004a932
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What was the decisive technical response?"
+choices:
+  - id: 9a00e4dd-1744-4d2e-8bd6-1c354fc8dda7
+    text: "Browsers removed DigiNotar from their trusted CA lists"
+  - id: 1a7264db-2386-47f1-8aa4-557ec9700216
+    text: "Users were told to switch off encryption"
+  - id: 9aedf7db-639b-4f52-bec1-418c13535828
+    text: "All websites were closed for a week"
+  - id: 8a2656d1-51e4-483d-8c1e-9f63060f363d
+    text: "Users changed their passwords only"
+correct_choice_ids:
+  - 9a00e4dd-1744-4d2e-8bd6-1c354fc8dda7
+explanation: "Removing the CA from trust stores invalidated its certificates."
+archived: false

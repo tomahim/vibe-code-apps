@@ -1,0 +1,19 @@
+id: 429958a9-8e4c-4739-af19-195c53e16be8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "What did CISA's Emergency Directive 21-01 order?"
+choices:
+  - id: 68207c46-e70e-4baf-8885-14c413c6f793
+    text: "Agencies to buy new software"
+  - id: 589c0036-31ce-455b-8b6e-f1e4b7f45b2f
+    text: "Federal civilian agencies to disconnect or power down Orion products"
+  - id: c20238e6-ee21-43ac-b6af-1f85283ffc37
+    text: "Citizens to change passwords"
+  - id: 06452edb-3ca6-4ef4-9201-7f1e50ae60b5
+    text: "A shutdown of the whole internet"
+correct_choice_ids:
+  - 589c0036-31ce-455b-8b6e-f1e4b7f45b2f
+explanation: "It was issued on 13 December 2020."
+archived: false

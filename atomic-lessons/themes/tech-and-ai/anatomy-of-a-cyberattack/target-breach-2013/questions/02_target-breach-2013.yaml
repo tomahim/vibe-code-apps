@@ -1,0 +1,19 @@
+id: f52ed120-9ab3-4e9a-98f8-14ceeb739165
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: According to investigators, how did attackers first get in?
+choices:
+- id: bc438c03-4698-43fd-8891-92974a0fb675
+  text: By guessing a customer's card PIN
+- id: e69537cf-ae0f-4723-9a76-fb0e089b0f26
+  text: Using credentials stolen from a heating and refrigeration contractor
+- id: f47b4d78-f042-4c38-b22d-4002bc88b5cf
+  text: By stealing a delivery truck
+- id: 9b2cf652-5383-4e98-bddf-c38865e18296
+  text: By physically entering the data center
+correct_choice_ids:
+- e69537cf-ae0f-4723-9a76-fb0e089b0f26
+explanation: The Senate report says the contractor's credentials were reportedly stolen via infected emails.
+archived: false

@@ -1,0 +1,19 @@
+id: 97a62966-cdcf-45e7-b36c-c30831c0e306
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should the attribution to China be classified?
+choices:
+- id: 895eaf3b-6207-4a36-b4b5-b0f7d9bba6b5
+  text: A proven fact signed by both countries
+- id: 6ae7684a-1a76-47dd-a7e1-7387e3998810
+  text: Cited by some officials and reports, without a full public evidence record
+- id: cbc18eb0-07fb-47a6-8666-cb409a5b0930
+  text: A confirmed court ruling
+- id: b8fe4006-0183-44aa-b2ae-b0691ae75c06
+  text: A rumor with no connection to officials
+correct_choice_ids:
+- 6ae7684a-1a76-47dd-a7e1-7387e3998810
+explanation: The public documents cited do not set out all evidence.
+archived: false

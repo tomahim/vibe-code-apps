@@ -1,0 +1,19 @@
+id: 04e8e6b7-65a5-4b13-bb32-b621249544ba
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What was the main difficulty for defenders?"
+choices:
+  - id: ae81813b-50ec-4cc4-9d0a-0857a1312ff9
+    text: "The flaw only existed in one country"
+  - id: 503ab914-09a1-494c-b87a-08e70b6a1987
+    text: "Finding everywhere the library was used"
+  - id: b497c296-44da-485f-be38-e594e0408b0c
+    text: "The library was too expensive"
+  - id: 2a5e2a55-e47e-460a-8db4-f9670b6ae5eb
+    text: "The patch could not be downloaded"
+correct_choice_ids:
+  - 503ab914-09a1-494c-b87a-08e70b6a1987
+explanation: "Log4j was often hidden inside other products."
+archived: false

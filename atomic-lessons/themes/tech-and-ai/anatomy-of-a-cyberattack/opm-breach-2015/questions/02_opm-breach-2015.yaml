@@ -1,0 +1,19 @@
+id: a9b51b4b-ab03-4dda-9e23-56b1236754e8
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Roughly how many people were affected in the background-investigation breach, according to OPM's later figure?
+choices:
+- id: 0ea84fe6-c9a8-43f2-9e49-b29507f75b28
+  text: About 21.5 million
+- id: 69e8ee74-fadf-4025-b7b2-51f4d269b6bd
+  text: About 1 billion
+- id: 94157a3f-be32-4d13-bc20-7ba48f7994e7
+  text: About 2,000
+- id: 0556e135-6475-4d01-bbde-10063feafd37
+  text: About 500,000
+correct_choice_ids:
+- 0ea84fe6-c9a8-43f2-9e49-b29507f75b28
+explanation: OPM said it concluded with high confidence that Social Security numbers of 21.5 million individuals were stolen.
+archived: false

@@ -1,0 +1,19 @@
+id: a44512f8-19af-45bb-9d6a-9f37534383b4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Which control would best reduce remote-access risk?
+choices:
+- id: c8f95801-50ab-4c2d-a937-7e306205d195
+  text: Strong authentication, monitoring and separated control networks
+- id: 9b15eecd-919a-41f6-a6fa-3ae2f0d4db53
+  text: Using the same password everywhere
+- id: 9904a409-29e3-45b0-a7c9-02e8cd55ffaa
+  text: Removing all monitoring
+- id: 5e8ac18d-fa7f-4489-b949-d4691d4349a4
+  text: Allowing remote access from any computer
+correct_choice_ids:
+- c8f95801-50ab-4c2d-a937-7e306205d195
+explanation: These controls limit stolen-credential use. In 2015 the attackers used legitimate credentials over a VPN.
+archived: false

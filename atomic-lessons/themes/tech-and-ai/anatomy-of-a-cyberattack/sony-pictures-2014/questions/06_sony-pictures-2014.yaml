@@ -1,0 +1,19 @@
+id: 417e3d50-2ba0-4903-9058-b19a1b2cb9b0
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which preparation does this case support?"
+choices:
+  - id: 044b66d2-f2f0-4a2a-a504-e3238be4e508
+    text: "Maintain tested backups and a communication plan for destructive attacks"
+  - id: f0bfcb2c-f16c-45d3-bf67-89482abe706f
+    text: "Store all data in one shared folder"
+  - id: 4d9eccf9-7a85-4233-a7ea-ff847c374dbc
+    text: "Rely only on antivirus"
+  - id: d81186c7-844c-4d54-a2ff-83957780b259
+    text: "Avoid telling employees anything"
+correct_choice_ids:
+  - 044b66d2-f2f0-4a2a-a504-e3238be4e508
+explanation: "Recovery and communications were major difficulties."
+archived: false

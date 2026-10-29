@@ -1,0 +1,19 @@
+id: 3026651f-79ba-4781-9749-bc49d63c49cd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What was reached in the 2019 settlement?
+choices:
+- id: ed410116-c572-4c45-a127-80750758c03c
+  text: No payment of any kind
+- id: e9e62f82-fb77-4866-8566-7961b4b8309b
+  text: A free vacation for customers
+- id: 60738672-840e-4de1-9ad6-a12c0eedb8f2
+  text: At least $575 million, up to $700 million, with US federal agencies and states
+- id: ba427f3a-983a-489f-be44-3fd70d91c12f
+  text: A ban on all credit reports
+correct_choice_ids:
+- 60738672-840e-4de1-9ad6-a12c0eedb8f2
+explanation: The settlement was with the FTC, the CFPB and 50 states and territories.
+archived: false

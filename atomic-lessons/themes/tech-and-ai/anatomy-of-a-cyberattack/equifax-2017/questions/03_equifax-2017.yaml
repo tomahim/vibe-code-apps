@@ -1,0 +1,19 @@
+id: d6a9e275-f2c3-47ec-a261-dbe92863670c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why did the detection tool miss the data theft for so long?
+choices:
+- id: 30818f77-8c69-40e6-8718-43a085cbd579
+  text: Its certificate had expired, so it could not inspect encrypted traffic
+- id: 88139924-9326-4c61-a69c-72eefbe15828
+  text: It was stolen
+- id: 4962e3c9-794f-4927-8d66-9e85f83efebf
+  text: It was never installed
+- id: 7f472f1f-2930-4076-adf8-01057365b3b4
+  text: It was switched off by the attackers
+correct_choice_ids:
+- 30818f77-8c69-40e6-8718-43a085cbd579
+explanation: The House report found the tool inactive for 19 months. GAO put the expiry at about 10 months before the breach.
+archived: false

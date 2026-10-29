@@ -1,0 +1,19 @@
+id: d475cdbe-ddff-4ea9-8866-810430122866
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: "Which defensive idea best follows from Stuxnet?"
+choices:
+  - id: 782fd8fd-cd28-4aa8-af0b-d20441a18ecc
+    text: "Never apply any updates to industrial systems"
+  - id: afecca04-5f99-4010-b956-125243c1a6b4
+    text: "Rely on a single dashboard for safety"
+  - id: 7aee01e4-ad5f-4243-bbf8-19267092d273
+    text: "Use independent checks, so a compromised system cannot vouch for itself"
+  - id: ea085f50-9432-4a67-85a0-d6cf83a630b2
+    text: "Trust all signed drivers automatically"
+correct_choice_ids:
+  - 7aee01e4-ad5f-4243-bbf8-19267092d273
+explanation: "Independent sensors and integrity checks catch the case where the main display is deceived."
+archived: false

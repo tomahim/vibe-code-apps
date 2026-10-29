@@ -1,0 +1,19 @@
+id: 92e8fec8-0682-4deb-9132-18c10c2134ce
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What was absent from the source repository, according to SolarWinds' SEC filing?
+choices:
+- id: 8a6f2268-ba3b-4b97-bcac-300c10648aeb
+  text: The Orion product itself
+- id: 0e686a69-7590-46d8-a4d6-8f0009d87442
+  text: All customer data
+- id: 284b59e6-2316-459b-ab4f-ab6394ddcd58
+  text: The company's name
+- id: 9bf81405-96b6-4483-8ff3-b5857ae4f29c
+  text: The vulnerability, which was inserted through the build system
+correct_choice_ids:
+- 9bf81405-96b6-4483-8ff3-b5857ae4f29c
+explanation: The filing says the vulnerability was not present in the source code repository.
+archived: false

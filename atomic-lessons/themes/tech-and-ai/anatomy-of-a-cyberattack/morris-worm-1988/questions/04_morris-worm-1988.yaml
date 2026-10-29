@@ -1,0 +1,19 @@
+id: e131174f-c0ff-41c9-b244-2cc736112370
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What institution followed within days of the incident?
+choices:
+- id: fbe1fa08-a44f-44a6-a27b-82a3af21cbeb
+  text: An international network police force
+- id: 02b07462-18b8-4df2-a066-e0a65e4f0db8
+  text: A mandatory antivirus program for universities
+- id: bc149c5f-988d-49d5-9014-7c4bf2932fae
+  text: The first computer emergency response team, created in Pittsburgh
+- id: afeec5b6-bd32-4040-8736-404940adcbfe
+  text: A global ban on Unix systems
+correct_choice_ids:
+- bc149c5f-988d-49d5-9014-7c4bf2932fae
+explanation: The FBI says the first computer emergency response team was created in Pittsburgh days after the attack, at the Department of Defense's direction.
+archived: false

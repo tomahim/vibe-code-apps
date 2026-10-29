@@ -1,0 +1,19 @@
+id: e6f7688c-0e47-4d94-94f0-084e5f35395f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "Why is it called a wiper in disguise?"
+choices:
+  - id: 01689089-3bb4-4094-9a55-e8cfd8a62f09
+    text: "It deleted only temporary files"
+  - id: 26127a31-363e-4b6f-8555-3aa5bb87af3e
+    text: "It showed a ransom note but could not provide a working decryption path"
+  - id: b528a6b5-bd0f-4747-b42a-ac3b7d9ba337
+    text: "It was a hardware device"
+  - id: 8ecfe98e-5724-49c8-aa9c-96f930664eb9
+    text: "It only showed advertisements"
+correct_choice_ids:
+  - 26127a31-363e-4b6f-8555-3aa5bb87af3e
+explanation: "Investigators concluded that recovery was not the purpose."
+archived: false

@@ -1,0 +1,19 @@
+id: 225a37ce-8cd4-4295-8c9f-825f369299f2
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: "What does the Log4j library do?"
+choices:
+  - id: 180d8016-ec0d-4338-8f62-55619686e302
+    text: "It sends email"
+  - id: af289b31-9013-4233-9f40-2219a2345454
+    text: "It encrypts hard disks"
+  - id: 06ea312c-b159-40ab-bf3e-6014c2bf356e
+    text: "It hosts websites"
+  - id: 05318d73-f89c-4e6c-80ce-bc192b4a26e2
+    text: "It records log messages for Java applications"
+correct_choice_ids:
+  - 05318d73-f89c-4e6c-80ce-bc192b4a26e2
+explanation: "Logging libraries record what a program is doing."
+archived: false
