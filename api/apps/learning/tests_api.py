@@ -200,7 +200,9 @@ class LearningAPITests(TestCase):
         self.assertNotEqual(wrong.json()["next_step"]["id"], first_id)
         # The lesson is fully read: every question stays answerable, and an
         # already-correct one is an ordinary review.
-        self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()["attempt_type"], "review")
+        repeat = self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()
+        self.assertEqual(repeat["attempt_type"], "review")
+        self.assertFalse(repeat["carrot_earned"])
         next_id = wrong.json()["next_step"]["id"]
         self.assertEqual(next_id, str(alternative.pk) if first_id == str(self.question.pk) else str(self.question.pk))
         correct = self.post(attempt_url, {"question_id": next_id,
@@ -209,15 +211,17 @@ class LearningAPITests(TestCase):
         # first-run retry, even reached through the review rotation.
         self.assertEqual(correct.json()["attempt_type"], "retry")
         self.assertTrue(correct.json()["correct"])
+        self.assertTrue(correct.json()["carrot_earned"])
         self.assertIsNone(correct.json()["next_step"])
         # A first correct answer counts toward completion even in review: the
-        # lesson completes and earns its drops once, with no review carrot.
+        # lesson completes and earns its drops once, and each of its two
+        # questions earned one carrot for its first correct answer.
         after = self.client.get(lesson_url).json()
         self.assertTrue(after["lesson"]["progress"]["completed"])
         self.assertEqual(after["lesson"]["progress"]["questions_correct"], 2)
         self.assertEqual(after["cards"][0]["completed_at"], card_completed_at)
         completed_rewards = self.client.get("/api/learning/garden/").json()["rewards"]
-        self.assertEqual(completed_rewards, {"drops": 106, "carrots": 1})
+        self.assertEqual(completed_rewards, {"drops": 106, "carrots": 2})
         # Once every question has a correct answer, review rounds change
         # neither progress nor rewards.
         next_question = Question.objects.get(pk=next_id)
@@ -726,14 +730,15 @@ class LearningAPITests(TestCase):
         repeated = self.post(attempt_url, {"question_id": selected["id"], "answer": current.answer})
         self.assertEqual(repeated.status_code, 201)
         self.assertEqual(repeated.json()["attempt_type"], "review")
+        self.assertFalse(repeated.json()["carrot_earned"])
         progress = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["lesson"]["progress"]
         self.assertTrue(progress["completed"])
         self.assertEqual(progress["questions_correct"], 3)
-        # The first checkpoint's carrot came from its first correct answer;
-        # retries and reviews added none. Completing the other lesson earned
-        # its own drops, checkpoint carrot and the one-time path bonus.
+        # Every distinct question answered correctly earned one carrot (three
+        # here, one in the other lesson); repeats and reviews added none. The
+        # other lesson also earned its own drops and the one-time path bonus.
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"],
-                         {"drops": 112, "carrots": 2})
+                         {"drops": 112, "carrots": 4})
 
     def test_practice_stays_open_at_zero_gaps_with_unread_lessons(self):
         unread = self.row(Lesson, learning_path=self.path, position=2)
