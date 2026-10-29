@@ -59,7 +59,7 @@ class LearningProgressDashboardTests(TestCase):
             submitted_answer="0", correct=True, answered_at=timezone.now(),
         )
         # other: no progress.
-        self.url = reverse("admin:learning_learningprogress_changelist")
+        self.url = reverse("admin-learning-progress")
 
     def test_anonymous_is_redirected_to_login(self):
         response = self.client.get(self.url)
@@ -71,6 +71,23 @@ class LearningProgressDashboardTests(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
         self.assertIn("/admin/login/", response["Location"])
+
+    def test_staff_without_learning_permission_is_forbidden(self):
+        staff = get_user_model().objects.create_user(username="staffer", password="pw", is_staff=True)
+        self.client.force_login(staff)
+        self.assertEqual(self.client.get(self.url).status_code, 403)
+
+    def test_staff_with_learning_permission_can_view(self):
+        from django.contrib.auth.models import Permission
+        staff = get_user_model().objects.create_user(username="staffer", password="pw", is_staff=True)
+        staff.user_permissions.add(Permission.objects.get(codename="view_learningpath"))
+        self.client.force_login(staff)
+        self.assertEqual(self.client.get(self.url).status_code, 200)
+
+    def test_sidebar_links_to_dashboard(self):
+        self.client.force_login(self.staff)
+        response = self.client.get("/admin/")
+        self.assertContains(response, 'href="/admin/learning/progress/"')
 
     def test_dashboard_renders_selected_learner_stats(self):
         self.client.force_login(self.staff)

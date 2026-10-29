@@ -1,17 +1,16 @@
-"""Staff-only learning-progress dashboard, registered as a read-only admin entry.
+"""Staff-only learning-progress dashboard, served as a custom admin page.
 
-The changelist of this view-only LearningPath admin renders the dashboard, so
-the page sits in the regular admin navigation without enabling content edits
-(content stays synced from GitHub).
+No model backs it: the page is wired in config/urls.py and linked from the
+admin sidebar (UNFOLD["SIDEBAR"] in settings). Content itself stays synced
+from GitHub, so there is nothing to edit here.
 """
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 
-from unfold.admin import ModelAdmin
-
 from .api import LearnerState, visible
-from .models import LearningPath, LearningProgress, Lesson
+from .models import LearningPath, Lesson
 from .rewards import reward_events, totals
 
 
@@ -87,30 +86,29 @@ def progress_dashboard_context(user):
     }
 
 
-@admin.register(LearningProgress)
-class LearningProgressAdmin(ModelAdmin):
-    """Read-only entry: the changelist renders the per-user progress dashboard."""
+def can_view_progress(request):
+    """Same permission as reading learning content in the admin; superusers pass."""
+    return request.user.has_perm("learning.view_learningpath")
 
-    def has_add_permission(self, request):
-        return False
 
-    def has_change_permission(self, request, obj=None):
-        return False
+def progress_dashboard(request):
+    """Per-user progress page, served inside the admin shell (see config/urls.py)."""
+    if not can_view_progress(request):
+        raise PermissionDenied
+    users = list(get_user_model().objects.filter(is_active=True).order_by("username"))
+    selected = request.user
+    user_param = request.GET.get("user", "")
+    if user_param.isdigit() and int(user_param) != request.user.pk:
+        selected = next((u for u in users if u.pk == int(user_param)), request.user)
+    context = {
+        **admin.site.each_context(request),
+        "title": "Learning progress",
+        "users": users,
+        "selected_user": selected,
+        **progress_dashboard_context(selected),
+    }
+    return render(request, "admin/learning/progress.html", context)
 
-    def has_delete_permission(self, request, obj=None):
-        return False
 
-    def changelist_view(self, request, extra_context=None):
-        users = list(get_user_model().objects.filter(is_active=True).order_by("username"))
-        selected = request.user
-        user_param = request.GET.get("user", "")
-        if user_param.isdigit() and int(user_param) != request.user.pk:
-            selected = next((u for u in users if u.pk == int(user_param)), request.user)
-        context = {
-            **self.admin_site.each_context(request),
-            "title": "Learning progress",
-            "users": users,
-            "selected_user": selected,
-            **progress_dashboard_context(selected),
-        }
-        return render(request, "admin/learning/progress.html", context)
+# Staff login required (admin_view); the view adds the permission check.
+progress_dashboard_view = admin.site.admin_view(progress_dashboard)

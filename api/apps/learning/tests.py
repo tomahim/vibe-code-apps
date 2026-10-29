@@ -53,7 +53,7 @@ class LearningSchemaTests(TestCase):
             operation()
 
     def test_learning_tables_use_lg_prefix(self):
-        models = [m for m in apps.get_app_config("learning").get_models() if not m._meta.proxy]
+        models = list(apps.get_app_config("learning").get_models())
         self.assertEqual({model._meta.db_table for model in models}, {
             "lg_content_entity", "lg_theme", "lg_learning_path", "lg_lesson", "lg_card",
             "lg_question", "lg_sync_log", "lg_card_progress", "lg_question_attempt", "lg_lesson_open",

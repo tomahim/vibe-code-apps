@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 from .database import database_config
 from .media import build_storages
 
@@ -42,6 +44,23 @@ UNFOLD = {
     "SITE_HEADER": "Vibe Code Apps",
     "SITE_SUBHEADER": "User management",
     "SITE_URL": "/",
+    # Custom group on top; every registered app stays reachable below it.
+    "SIDEBAR": {
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": "Little Grains learning",
+                "items": [
+                    {
+                        "title": "Learning progress",
+                        "icon": "monitoring",
+                        "link": reverse_lazy("admin-learning-progress"),
+                        "permission": "apps.learning.admin.can_view_progress",
+                    },
+                ],
+            },
+        ],
+    },
 }
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
