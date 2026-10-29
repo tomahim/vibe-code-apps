@@ -1,6 +1,6 @@
 ---
 id: c1946f94-caf7-4152-840a-31d11c16be8d
-position: 1
+position: 4
 title: "Legendary dive sites"
 description: "Ten of the world's most famous dive sites: how they formed, what lives there, and what happened in their past."
 archived: false
