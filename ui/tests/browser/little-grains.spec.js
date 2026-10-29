@@ -182,7 +182,7 @@ test('a wrong answer opens another question at the checkpoint', async ({ page })
   await expect(reader.getByText('What is the water like?')).toHaveCount(0);
 });
 
-test('the garden, theme and path offer three recent lesson shortcuts', async ({ page }) => {
+test('recent lessons open from a Last lessons menu at the garden root only', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
   const recentLessons = [
     { id: id.lesson, title: 'Bath time and care', learning_path_title: 'Early Childhood English', next_step: { type: 'card', id: id.card }, progress: { cards_completed: 0, cards_total: 1 } },
@@ -192,15 +192,55 @@ test('the garden, theme and path offer three recent lesson shortcuts', async ({ 
   mockApi(page, 1, { recentLessons });
   await page.goto('/apps/little-grains');
   const panel = page.locator('.lg-panel');
-  await expect(panel.locator('.lg-recent button')).toHaveCount(3);
+  // Root: the three shortcuts stay tucked behind a single button.
+  await expect(panel.locator('.lg-recent')).toHaveCount(0);
+  const toggle = panel.getByRole('button', { name: 'Last lessons' });
+  await expect(toggle).toBeVisible();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(panel.locator('.lg-lastlessons-menu button')).toHaveCount(3);
   await page.screenshot({ path: '/tmp/little-grains-recent-desktop.png' });
   await panel.getByRole('button', { name: 'Continue Bath time and care' }).click();
   await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByText('Warm water')).toBeVisible();
   await page.getByRole('dialog', { name: 'Bath time and care' }).getByRole('button', { name: 'Close lesson' }).click();
+  // Theme and path panels no longer mix in lessons from other paths.
   await panel.getByRole('button', { name: /Language/ }).click();
-  await expect(panel.locator('.lg-recent button')).toHaveCount(3);
+  await expect(panel.getByRole('button', { name: 'Last lessons' })).toHaveCount(0);
+  await expect(panel.locator('.lg-lastlessons-menu')).toHaveCount(0);
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await expect(panel.locator('.lg-recent button')).toHaveCount(3);
+  await expect(panel.getByRole('button', { name: 'Last lessons' })).toHaveCount(0);
+  await expect(panel.locator('.lg-lastlessons-menu')).toHaveCount(0);
+});
+
+test('the selected lesson row carries its start action, dots below the name', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, 3);
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Language/ }).click();
+  await panel.getByRole('button', { name: /Early Childhood English/ }).click();
+  // No lesson is selected yet: no start action anywhere.
+  await expect(panel.getByRole('button', { name: /Start lesson/ })).toHaveCount(0);
+  await panel.locator('.lg-lessons button[data-lesson]').first().click();
+  const selRow = panel.locator('.lg-lessons li.lg-selrow');
+  await expect(selRow).toHaveCount(1);
+  const start = selRow.getByRole('button', { name: /Start lesson/ });
+  await expect(start).toBeVisible();
+  // The detail block no longer carries a detached copy of the action.
+  await expect(panel.locator('.lg-lesson button[data-start]')).toHaveCount(0);
+  // The button sits at the left of the lesson name, dots on their own line below.
+  const layout = await selRow.evaluate((li) => {
+    const btn = li.querySelector('.lg-start').getBoundingClientRect();
+    const name = li.querySelector('.nm').getBoundingClientRect();
+    const dots = li.querySelector('.dots').getBoundingClientRect();
+    return { btnRight: btn.right, nameLeft: name.left, nameBottom: name.bottom, dotsTop: dots.top };
+  });
+  expect(layout.btnRight).toBeLessThanOrEqual(layout.nameLeft + 1);
+  expect(layout.dotsTop).toBeGreaterThanOrEqual(layout.nameBottom - 1);
+  await page.screenshot({ path: '/tmp/little-grains-inline-start-desktop.png' });
+  await start.click();
+  await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByText('Warm water')).toBeVisible();
 });
 
 test('previous cards are read-only and return to the current step', async ({ page }) => {
@@ -473,7 +513,7 @@ test('the side panel keeps the selected lesson row in view', async ({ page }) =>
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await expect(panel.locator('.lg-lessons button')).toHaveCount(17);
+  await expect(panel.locator('.lg-lessons button[data-lesson]')).toHaveCount(17);
   const inView = (selector) => panel.evaluate((el, sel) => {
     const row = el.querySelector(sel); if (!row) return false;
     const p = el.getBoundingClientRect(), r = row.getBoundingClientRect();
@@ -481,7 +521,7 @@ test('the side panel keeps the selected lesson row in view', async ({ page }) =>
   }, selector);
   for (const n of [17, 1, 9]) {
     await panel.evaluate((el) => { el.scrollTop = 0; });
-    await panel.locator('.lg-lessons button').nth(n - 1).evaluate((b) => b.click());
+    await panel.locator('.lg-lessons button[data-lesson]').nth(n - 1).evaluate((b) => b.click());
     await page.mouse.move(900, 500); // leave the panel so the scene re-renders it too
     await page.waitForTimeout(400);
     await expect(panel.locator('.lg-lessons button.sel')).toHaveCount(1);
