@@ -6,6 +6,8 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Q
 
+from apps.learning.mixins import IllustrationMixin
+
 
 class ContentEntity(models.Model):
     class Kind(models.TextChoices):
@@ -129,24 +131,17 @@ class Lesson(DescribedContent):
         )]
 
 
-class Card(ProvenancedContent):
+class Card(IllustrationMixin, ProvenancedContent):
     CONTENT_KIND = ContentEntity.Kind.CARD
     lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="cards")
     title = models.CharField(max_length=255)
     body_markdown = models.TextField()
-    illustration_path = models.CharField(max_length=1024, blank=True)
-    illustration_alt = models.TextField(blank=True)
 
     class Meta(ContentRecord.Meta):
         db_table = "lg_card"
         constraints = ContentRecord.Meta.constraints + [models.UniqueConstraint(
             fields=["lesson", "position"], name="lg_card_unique_position",
         )]
-
-    def clean(self):
-        super().clean()
-        if self.illustration_path and not self.illustration_alt.strip():
-            raise ValidationError({"illustration_alt": "Illustrations require useful alt text."})
 
 
 class Question(ProvenancedContent):

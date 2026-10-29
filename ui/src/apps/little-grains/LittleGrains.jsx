@@ -51,6 +51,30 @@ function adaptGarden(data) {
   }));
 }
 
+function CardIllustration({ card }) {
+  if (!card.illustration_url) return null;
+  const srcset = (card.illustration_srcset || []).map((variant) => `${variant.url} ${variant.width}w`).join(", ");
+  const credit = card.illustration_credit ? [card.illustration_credit, card.illustration_license].filter(Boolean).join(", ") : "";
+  return <figure className="grains-illustration">
+    <img
+      src={card.illustration_url}
+      srcSet={srcset || undefined}
+      sizes="(max-width: 660px) calc(100vw - 88px), 596px"
+      width={card.illustration_width || undefined}
+      height={card.illustration_height || undefined}
+      loading="lazy"
+      decoding="async"
+      alt={card.illustration_alt || ""}
+    />
+    {(card.illustration_caption || credit) && <figcaption>
+      {card.illustration_caption && <span className="grains-illustration-caption">{card.illustration_caption}</span>}
+      {credit && (card.illustration_source_url
+        ? <a className="grains-illustration-credit" href={card.illustration_source_url} target="_blank" rel="noopener noreferrer">Photo: {credit}</a>
+        : <span className="grains-illustration-credit">Photo: {credit}</span>)}
+    </figcaption>}
+  </figure>;
+}
+
 function Markdown({ source }) {
   const html = DOMPurify.sanitize(marked.parse(source || ""));
   return <div className="grain-markdown" dangerouslySetInnerHTML={{ __html: html }} />;
@@ -158,7 +182,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
         <div className="grains-progress-track" aria-label={`${completedSteps} of ${totalSteps} steps complete`}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>
         <div className="grains-reader-content">
           {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
-          {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3>{card.illustration_url && <img src={card.illustration_url} alt={card.illustration_alt} />}<Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
+          {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3><CardIllustration card={card} /><Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
           {question && <div className="grains-question">
             {previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={openPreviousCard}>← Previous card</button>}
             <p className="grains-card-index">{typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
@@ -178,7 +202,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
             </div> : <button className="grains-primary" disabled={!choice.trim() || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}
           </div>}
           {!viewStep && <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>All cards read and questions answered. Your garden has grown.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>}
-          {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3>{reviewCard.illustration_url && <img src={reviewCard.illustration_url} alt={reviewCard.illustration_alt} />}<Markdown source={reviewCard.body_markdown} /></article>}
+          {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
         </div>
       </>}
     </section>

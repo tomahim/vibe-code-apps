@@ -24,6 +24,7 @@ from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError, transaction
 
+from apps.learning import illustrations
 from apps.learning.models import (
     Card,
     ContentEntity,
@@ -87,8 +88,13 @@ class Command(BaseCommand):
             return
 
         stats = {kind: {"added": 0, "updated": 0, "unchanged": 0} for kind in KINDS}
+        elements = list(self.scan(content_root, check_uuids))
+        # Image processing and bucket uploads happen before the database
+        # transaction: no row ever points at an object that is not uploaded,
+        # and network calls never hold the transaction open (#195).
+        prepared_illustrations = self.prepare_illustrations(elements)
         with transaction.atomic():
-            self.sync_library(content_root, commit, stats)
+            self.sync_library(content_root, commit, stats, elements, prepared_illustrations)
             SyncLog.objects.create(commit_sha=commit, changes={"commit": commit, **stats})
             if options["dry_run"]:
                 transaction.set_rollback(True)
@@ -156,7 +162,8 @@ class Command(BaseCommand):
                 for lesson_dir in check_uuids.child_directories(path_dir):
                     yield self.describe_markdown(content_root, lesson_dir / "index.md", "lesson", lesson_dir, path_dir)
                     for card_file in sorted((lesson_dir / "cards").glob("*.md")):
-                        yield self.describe_markdown(content_root, card_file, "card", lesson_dir, lesson_dir)
+                        # Card images sit beside the card file itself (#195).
+                        yield self.describe_markdown(content_root, card_file, "card", card_file.parent, lesson_dir)
                     for pattern in ("*.yaml", "*.yml"):
                         for question_file in sorted((lesson_dir / "questions").glob(pattern)):
                             yield self.describe_question(content_root, question_file, lesson_dir)
@@ -242,20 +249,85 @@ class Command(BaseCommand):
             raise CommandError(f"{location}.position: expected a positive integer, got {value!r}")
         return value
 
-    def image_fields(self, metadata, directory, location, *, path_key, alt_key):
+    def image_file(self, metadata, directory, location):
+        """Resolve the optional sibling image of one content element."""
         image = metadata.get("image")
         if image is None or not str(image).strip():
-            return {path_key: "", alt_key: ""}
+            return None
         filename = str(image)
         filename = filename[2:] if filename.startswith("./") else filename
         candidate = directory / filename
         try:
             candidate.resolve().relative_to(directory.resolve())
         except ValueError:
-            raise CommandError(f"{location}.image: image must stay beside its index.md") from None
+            raise CommandError(f"{location}.image: image must stay beside its Markdown file") from None
         if not candidate.is_file():
             raise CommandError(f"{location}.image: image file does not exist: {filename}")
+        return candidate
+
+    def image_fields(self, metadata, directory, location, *, path_key, alt_key):
+        candidate = self.image_file(metadata, directory, location)
+        if candidate is None:
+            return {path_key: "", alt_key: ""}
         return {path_key: self.repo_relative(candidate, directory), alt_key: str(metadata.get("image_alt") or "")}
+
+    # --- Card illustrations ------------------------------------------------
+
+    def prepare_illustrations(self, elements):
+        """Hash, resize and upload changed card images before the DB transaction.
+
+        A stored source hash that still matches skips every decode, resize and
+        object write, so an unchanged re-sync does no image work. Without the
+        media bucket (local development, content CI) variant generation is
+        skipped and delivery stays on the repository fallback.
+        """
+        cards = [
+            element
+            for element in elements
+            if element["kind"] == "card" and str(element["metadata"].get("image") or "").strip()
+        ]
+        if not cards:
+            return {}
+        if not illustrations.bucket_available():
+            self.stdout.write(
+                f"{len(cards)} card image(s) present but the media bucket is not configured; "
+                "skipping WebP variant processing (repository fallback keeps serving them)."
+            )
+            return {}
+        prepared = {}
+        for element in cards:
+            candidate = self.image_file(element["metadata"], element["directory"], element["location"])
+            if not illustrations.raster_image(candidate):
+                continue  # SVG and friends are served as-is through the fallback
+            sha = illustrations.source_hash(candidate)
+            row = Card.objects.filter(pk=element["id"]).first()
+            if row is not None and row.illustration_source_hash == sha and row.illustration_variants:
+                continue  # unchanged source: no decode, resize or upload
+            self.stdout.write(f"Processing card image {element['location']} (sha256 {sha[:12]}…)")
+            prepared[str(element["id"])] = illustrations.process_card_image(element["id"], candidate)
+        return prepared
+
+    @staticmethod
+    def illustration_metadata_fields(metadata):
+        return {
+            "illustration_caption": str(metadata.get("image_caption") or ""),
+            "illustration_credit": str(metadata.get("image_credit") or ""),
+            "illustration_license": str(metadata.get("image_license") or ""),
+            "illustration_source_url": str(metadata.get("image_source_url") or ""),
+        }
+
+    @staticmethod
+    def empty_illustration_fields():
+        return {
+            "illustration_caption": "",
+            "illustration_credit": "",
+            "illustration_license": "",
+            "illustration_source_url": "",
+            "illustration_width": None,
+            "illustration_height": None,
+            "illustration_source_hash": "",
+            "illustration_variants": {},
+        }
 
     def question_fields(self, metadata, location):
         question_type = metadata.get("type")
@@ -298,11 +370,9 @@ class Command(BaseCommand):
 
     # --- Writing ----------------------------------------------------------
 
-    def sync_library(self, content_root, commit, stats):
+    def sync_library(self, content_root, commit, stats, elements, prepared_illustrations):
         records_by_dir = {}
         positions_seen = {}
-        check_uuids = sys.modules["check_uuids"]
-        elements = list(self.scan(content_root, check_uuids))
         seen_ids = {element["id"] for element in elements}
         for element in elements:
             element["provenance"]["last_changed_commit"] = self.last_changed_commit(
@@ -348,6 +418,13 @@ class Command(BaseCommand):
                         alt_key="illustration_alt",
                     )
                 )
+                if desired["illustration_path"]:
+                    desired.update(self.illustration_metadata_fields(metadata))
+                    # Freshly processed variants; an unchanged source hash keeps
+                    # the row's stored variants and dimensions untouched.
+                    desired.update(prepared_illustrations.get(str(element["id"]), {}))
+                else:
+                    desired.update(self.empty_illustration_fields())
             elif element["kind"] == "question":
                 desired["lesson"] = parent
                 desired.update(self.question_fields(metadata, location))

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import base64
 import uuid
+from unittest import mock
 from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -25,9 +25,14 @@ from apps.learning.models import (
     Theme,
 )
 
-PNG_1X1 = base64.b64decode(
-    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-)
+def make_png(width=800, height=600) -> bytes:
+    from io import BytesIO
+
+    from PIL import Image
+
+    buffer = BytesIO()
+    Image.new("RGB", (width, height), "white").save(buffer, "PNG")
+    return buffer.getvalue()
 
 THEME_ID = str(uuid.uuid4())
 PATH_ID = str(uuid.uuid4())
@@ -316,3 +321,106 @@ class SyncAtomicLessonsTests(TestCase):
                 run_sync(root, "1" * 40)
         self.assertEqual(ContentEntity.objects.count(), 0)
         self.assertEqual(SyncLog.objects.count(), 0)
+
+
+def illustrate_card(root: Path, extra: str = "") -> Path:
+    """Give the library's card a sibling image with credit metadata."""
+    card = root / "themes/language/early-english/greetings/cards/01_expressions.md"
+    text = card.read_text(encoding="utf-8")
+    text = text.replace(
+        "archived: false\n---",
+        "image: reef.png\nimage_alt: A coral reef seen from above.\n" + extra + "archived: false\n---",
+    )
+    card.write_text(text, encoding="utf-8")
+    (card.parent / "reef.png").write_bytes(make_png())
+    return root
+
+
+class CardIllustrationSyncTests(TestCase):
+    def test_card_image_metadata_synced_without_bucket(self):
+        with TemporaryDirectory() as tmp:
+            root = illustrate_card(
+                write_library(Path(tmp)),
+                "image_caption: Reef scene.\nimage_credit: Jane Doe\nimage_license: CC BY 4.0\n"
+                "image_source_url: https://commons.example.org/reef\n",
+            )
+            out = run_sync(root, "1" * 40)
+        self.assertIn("media bucket is not configured", out)
+        card = Card.objects.get()
+        self.assertTrue(card.illustration_path.endswith("reef.png"))
+        self.assertEqual(card.illustration_alt, "A coral reef seen from above.")
+        self.assertEqual(card.illustration_caption, "Reef scene.")
+        self.assertEqual(card.illustration_credit, "Jane Doe")
+        self.assertEqual(card.illustration_license, "CC BY 4.0")
+        self.assertEqual(card.illustration_source_url, "https://commons.example.org/reef")
+        # No bucket: no variants, no hash, delivery stays on the repository fallback.
+        self.assertEqual(card.illustration_variants, {})
+        self.assertEqual(card.illustration_source_hash, "")
+
+    def test_card_image_requires_credit_and_license_unless_original(self):
+        with TemporaryDirectory() as tmp:
+            root = illustrate_card(write_library(Path(tmp)))
+            with self.assertRaises(CommandError) as raised:
+                run_sync(root, "2" * 40)
+        self.assertIn("image_credit", str(raised.exception))
+
+    def test_original_artwork_needs_no_credit(self):
+        with TemporaryDirectory() as tmp:
+            root = illustrate_card(write_library(Path(tmp)), "image_license: original\n")
+            run_sync(root, "3" * 40)
+        card = Card.objects.get()
+        self.assertEqual(card.illustration_license, "original")
+        self.assertEqual(card.illustration_credit, "")
+
+    def test_bucket_processing_and_unchanged_hash_gate(self):
+        uploads = []
+
+        def fake_upload(card_id, sha, variants):
+            uploads.append((card_id, sha, sorted(variants)))
+            return {str(width): f"learning/{card_id}/{sha}-{width}.webp" for width in variants}
+
+        with TemporaryDirectory() as tmp:
+            root = illustrate_card(write_library(Path(tmp)), "image_license: original\n")
+            with mock.patch("apps.learning.illustrations.bucket_available", return_value=True), mock.patch(
+                "apps.learning.illustrations.upload_variants", side_effect=fake_upload
+            ):
+                run_sync(root, "8" * 40)
+                card = Card.objects.get()
+                self.assertEqual(len(uploads), 1)
+                self.assertEqual(card.illustration_width, 800)
+                self.assertEqual(card.illustration_height, 600)
+                self.assertEqual(len(card.illustration_source_hash), 64)
+                self.assertEqual(
+                    card.illustration_variants,
+                    {"640": f"learning/{card.pk}/{card.illustration_source_hash}-640.webp"},
+                )
+                # Re-sync of the unchanged image does no decode, resize or upload.
+                run_sync(root, "9" * 40)
+                self.assertEqual(len(uploads), 1)
+                # Replacing the source image processes and uploads again.
+                (root / "themes/language/early-english/greetings/cards/reef.png").write_bytes(
+                    make_png(1600, 1200)
+                )
+                run_sync(root, "a" * 40)
+                self.assertEqual(len(uploads), 2)
+                card.refresh_from_db()
+                self.assertEqual(card.illustration_width, 1600)
+                self.assertEqual(
+                    set(card.illustration_variants),
+                    {"640", "1280"},
+                )
+
+    def test_removing_the_image_blanks_every_illustration_field(self):
+        with TemporaryDirectory() as tmp:
+            root = illustrate_card(write_library(Path(tmp)), "image_license: original\n")
+            run_sync(root, "b" * 40)
+            card_file = root / "themes/language/early-english/greetings/cards/01_expressions.md"
+            text = card_file.read_text(encoding="utf-8")
+            for line in ("image: reef.png\n", "image_alt: A coral reef seen from above.\n", "image_license: original\n"):
+                text = text.replace(line, "")
+            card_file.write_text(text, encoding="utf-8")
+            run_sync(root, "c" * 40)
+        card = Card.objects.get()
+        self.assertEqual(card.illustration_path, "")
+        self.assertEqual(card.illustration_variants, {})
+        self.assertIsNone(card.illustration_width)
