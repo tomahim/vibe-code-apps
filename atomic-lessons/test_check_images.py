@@ -6,11 +6,19 @@ import tempfile
 import unittest
 
 import yaml
+from PIL import Image
 
-from check_images import check_images
+from check_images import MAX_IMAGE_BYTES, check_images
 
 
-PNG = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jB0cAAAAASUVORK5CYII=")
+def make_png(width=1, height=1) -> bytes:
+    import io
+    buffer = io.BytesIO()
+    Image.new("RGB", (width, height), "white").save(buffer, "PNG")
+    return buffer.getvalue()
+
+
+PNG = make_png()
 
 
 class CardImageTests(unittest.TestCase):
@@ -22,7 +30,12 @@ class CardImageTests(unittest.TestCase):
         self.cards = lesson / "cards"
         self.cards.mkdir(parents=True)
         self.card = self.cards / "01_hello.md"
-        self.metadata = {"image": "hello.png", "image_alt": "A child waving hello."}
+        self.metadata = {
+            "image": "hello.png",
+            "image_alt": "A child waving hello.",
+            "image_credit": "Jane Doe",
+            "image_license": "CC BY 4.0",
+        }
         (self.cards / "hello.png").write_bytes(PNG)
         self.write_card()
 
@@ -34,8 +47,8 @@ class CardImageTests(unittest.TestCase):
         self.assertTrue(any(text in error for error in errors), errors)
 
     def test_card_without_image_is_valid(self):
-        del self.metadata["image"]
-        del self.metadata["image_alt"]
+        for key in ("image", "image_alt", "image_credit", "image_license"):
+            del self.metadata[key]
         self.write_card()
         self.assertEqual(check_images(self.root), ([], 0))
 
@@ -76,11 +89,27 @@ class CardImageTests(unittest.TestCase):
         (self.cards / "hello.png").write_text("This is not an image.")
         self.assert_failure("matching image header")
 
-    def test_unsupported_extension_rejected(self):
-        self.metadata["image"] = "hello.txt"
-        (self.cards / "hello.txt").write_bytes(PNG)
-        self.write_card()
-        self.assert_failure("unsupported image extension")
+    def test_svg_and_gif_rejected(self):
+        for name, content in (
+            ("hello.svg", '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><circle r="1"/></svg>'),
+        ):
+            with self.subTest(name=name):
+                self.metadata["image"] = name
+                target = self.cards / name
+                if name.endswith(".svg"):
+                    target.write_text(content)
+                else:
+                    target.write_bytes(content)
+                self.write_card()
+                self.assert_failure("unsupported image extension")
+
+    def test_oversized_source_rejected(self):
+        (self.cards / "hello.png").write_bytes(PNG + b"0" * MAX_IMAGE_BYTES)
+        self.assert_failure("optimize it before committing")
+
+    def test_too_wide_source_rejected(self):
+        (self.cards / "hello.png").write_bytes(make_png(2000, 10))
+        self.assert_failure("1600 px or less")
 
     def test_alt_text_required(self):
         for value in (None, "", "   "):
@@ -89,23 +118,31 @@ class CardImageTests(unittest.TestCase):
                 self.write_card()
                 self.assert_failure("image_alt")
 
+    def test_credit_required_for_licensed_photos(self):
+        for value in (None, "", "   "):
+            with self.subTest(value=value):
+                self.metadata["image_credit"] = value
+                self.write_card()
+                self.assert_failure("image_credit")
+
+    def test_license_required(self):
+        for value in (None, "", "   "):
+            with self.subTest(value=value):
+                self.metadata["image_license"] = value
+                self.write_card()
+                self.assert_failure("image_license")
+
+    def test_original_artwork_needs_no_credit(self):
+        del self.metadata["image_credit"]
+        self.metadata["image_license"] = "original"
+        self.write_card()
+        self.assertEqual(check_images(self.root), ([], 1))
+
     def test_all_cards_are_checked(self):
         other = self.root / "themes" / "language" / "english" / "animals" / "cards"
         other.mkdir(parents=True)
         (other / "01_dog.md").write_text("---\nimage: missing.png\n---\n")
         self.assert_failure("01_dog.md.image")
-
-    def test_svg_is_valid(self):
-        self.metadata["image"] = "hello.svg"
-        (self.cards / "hello.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><circle r="1"/></svg>')
-        self.write_card()
-        self.assertEqual(check_images(self.root), ([], 1))
-
-    def test_malformed_svg_rejected(self):
-        self.metadata["image"] = "hello.svg"
-        (self.cards / "hello.svg").write_text("<svg>")
-        self.write_card()
-        self.assert_failure("matching image header")
 
 
 if __name__ == "__main__":
