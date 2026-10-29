@@ -32,27 +32,21 @@ def reward_events():
 
     events = defaultdict(list)
     card_times = defaultdict(dict)
-    checkpoint_times = defaultdict(dict)
     question_times = defaultdict(dict)
     for row in CardProgress.objects.filter(card_id__in=card_by_id).values('user_id', 'card_id', 'completed_at'):
         user_id, card_id, at = row['user_id'], row['card_id'], row['completed_at']
         card_times[user_id][card_id] = at
         events[user_id].append(('drops', 1, at))
-    # Per-question first correct answers (quiz and review included) drive lesson
-    # completion; per-checkpoint first non-review correct answers drive carrots.
+    # A question's first correct answer, whatever its attempt type (lesson,
+    # Practice quiz or review), earns one carrot and counts toward lesson
+    # completion. Repeating a correct answer earns nothing more.
     attempts = QuestionAttempt.objects.filter(question_id__in=question_by_id, correct=True).order_by(
         'answered_at', 'pk',
-    ).values('user_id', 'question_id', 'attempt_type', 'answered_at')
+    ).values('user_id', 'question_id', 'answered_at')
     for row in attempts:
-        question = question_by_id[row['question_id']]
         if row['question_id'] not in question_times[row['user_id']]:
-            question_times[row['user_id']][row['question_id']] = row['answered_at']
-        if row['attempt_type'] == QuestionAttempt.AttemptType.REVIEW:
-            continue
-        key = (question['lesson_id'], question['after_card_position'])
-        if key not in checkpoint_times[row['user_id']]:
             at = row['answered_at']
-            checkpoint_times[row['user_id']][key] = at
+            question_times[row['user_id']][row['question_id']] = at
             events[row['user_id']].append(('carrots', 1, at))
 
     for user_id in set(card_times) | set(question_times):

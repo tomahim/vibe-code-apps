@@ -15,7 +15,7 @@ const REWARD_COPY = {
   },
   carrots: {
     title: "How Carrots are earned",
-    description: "You earn 1 Carrot the first time you answer a checkpoint correctly. Wrong answers and repeated correct answers earn no extra Carrots.",
+    description: "You earn 1 Carrot the first time you answer each question correctly, in a lesson or a Practice quiz. Wrong answers and repeated correct answers earn no extra Carrots.",
   },
 };
 
@@ -172,7 +172,7 @@ function LessonReader({ lessonId, onClose, onProgress }) {
               <p>Capitalization and punctuation do not have to match.</p>
             </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
             {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
-              <strong>{feedback.correct ? feedback.attempt_type === "review" ? "That’s right!" : "That’s right! +1 carrot" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
+              <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
               {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
               <Markdown source={feedback.explanation} />
               <button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button>
@@ -252,7 +252,7 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
                 <p>Capitalization and punctuation do not have to match.</p>
               </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`quiz-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
               {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
-                <strong>{feedback.correct ? "That’s right!" : (tries[question.id] || 0) >= 1 ? "Not quite. It will wait for the next quiz." : "Not quite. It comes back at the end of this quiz."}</strong>
+                <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : (tries[question.id] || 0) >= 1 ? "Not quite. It will wait for the next quiz." : "Not quite. It comes back at the end of this quiz."}</strong>
                 {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
                 <Markdown source={feedback.explanation} />
                 <button className="grains-primary" onClick={advance}>Continue →</button>

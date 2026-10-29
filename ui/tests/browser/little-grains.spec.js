@@ -29,7 +29,7 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       const correctAnswer = wrong ? 'Use a soft towel.' : 'The bath water is warm.';
       const correct = typed ? answer.toLowerCase().replace(/[^a-z\s]/g, '').trim() === correctAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim() : answer === 'warm';
       if (correct) answered = true; else wrong = true;
-      return route.fulfill({ status: 201, json: { correct, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
+      return route.fulfill({ status: 201, json: { correct, carrot_earned: correct && !review, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
     }
     if (url.pathname.endsWith('/leaderboard/')) {
       const currency = url.searchParams.get('currency') === 'carrots' ? 'carrots' : 'drops';
@@ -152,7 +152,7 @@ test('reward totals and leaderboard explain the same Drops and Carrots rules', a
   const carrotInfo = page.getByRole('dialog', { name: 'How Carrots are earned' });
   await expect(carrotInfo).toBeVisible();
   const carrotDescription = await carrotInfo.locator('p').textContent();
-  expect(carrotDescription).toContain('first time you answer a checkpoint correctly');
+  expect(carrotDescription).toContain('first time you answer each question correctly');
   await carrotInfo.getByRole('button', { name: 'Close reward information' }).click();
 
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
@@ -404,7 +404,7 @@ test('phone practice quiz stays open at zero gaps with unread lessons', async ({
       expect(body.attempt_type).toBeUndefined(); // No quiz type: the server derives initial/retry/review.
       const correct = body.answer === 'few' || body.answer === 'cord' || body.answer.toLowerCase().includes('moistur');
       if (correct && body.question_id !== q3) solved.add(body.question_id);
-      return route.fulfill({ status: 201, json: { correct, attempt_type: 'retry', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
+      return route.fulfill({ status: 201, json: { correct, carrot_earned: correct, attempt_type: 'retry', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
     }
     return route.fulfill({ json: {} });
   });

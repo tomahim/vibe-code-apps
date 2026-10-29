@@ -175,8 +175,8 @@ def question_attempts(request):
         review = checkpoint in state.passed and not catch_up
         if fully_read:
             # Once the cards are read every question is answerable (#204): a
-            # gap behaves like a first-run attempt (initial/retry, usual
-            # carrot), an already-correct question is ordinary review practice.
+            # gap behaves like a first-run attempt (initial/retry), an
+            # already-correct question is ordinary review practice.
             current = True
         elif review:
             selected = next((q for q in checkpoint_questions(state, question.lesson)
@@ -197,6 +197,8 @@ def question_attempts(request):
                    else normalize_typed_answer(data["answer"]) in {
                        normalize_typed_answer(answer) for answer in question.accepted_answers
                    })
+        first_correct = correct and not QuestionAttempt.objects.filter(
+            user=request.user, question=question, correct=True).exists()
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
             attempt_type=("review" if review else "retry" if retry else "initial"),
@@ -214,6 +216,7 @@ def question_attempts(request):
             following = next_step(state, question.lesson)
         return JsonResponse({"attempt_id": attempt.pk, "question_id": str(question.pk),
                              "attempt_type": attempt.attempt_type, "correct": attempt.correct,
+                             "carrot_earned": first_correct,
                              "explanation": question.explanation, "answered_at": attempt.answered_at.isoformat(),
                              "correct_answer": question.answer if question.type == Question.Type.TYPE_ANSWER_QUESTION else None,
                              "progress": state.progress([question.lesson]),
