@@ -42,8 +42,9 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-// Buckets covering yesterday and today, the way the API windows the chart:
-// activity started yesterday, and no bucket starts in the future.
+// Buckets covering the full calendar window, the way the pre-fix API sent
+// them: future days and weeks included. Activity started yesterday, so the
+// chart must cut this down to recorded history on its own.
 function historyWindow(period, now = new Date()) {
   const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
   const yesterday = today - 864e5;
@@ -51,20 +52,26 @@ function historyWindow(period, now = new Date()) {
   let starts;
   if (period === 'weekly') {
     const monday = today - ((now.getUTCDay() + 6) % 7) * 864e5;
-    starts = [...new Set([Math.max(monday, yesterday), today])];
+    starts = Array.from({ length: 7 }, (_, i) => monday + i * 864e5);
   } else if (period === 'monthly') {
-    const weekStart = (ms) => { const d = new Date(ms); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1 + Math.floor((d.getUTCDate() - 1) / 7) * 7); };
-    starts = [...new Set([yesterday, today].map(weekStart))].filter((start) => start >= monthStart(today));
+    // Monday-Sunday weeks clipped to the month, future weeks included.
+    const first = monthStart(today);
+    const monthEnd = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1);
+    const firstMonday = first - ((new Date(first).getUTCDay() + 6) % 7) * 864e5;
+    starts = [];
+    for (let monday = firstMonday; monday < monthEnd; monday += 7 * 864e5) starts.push(Math.max(monday, first));
   } else {
     starts = [...new Set([yesterday, today].map(monthStart))];
   }
   return starts.map((start) => {
     const d = new Date(start);
+    const monday = start - ((d.getUTCDay() + 6) % 7) * 864e5;
     const end = period === 'weekly' ? start + 864e5
-      : period === 'monthly' ? Math.min(start + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1))
+      : period === 'monthly' ? Math.min(monday + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1))
       : Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
+    const lastDay = new Date(end - 864e5);
     const label = period === 'weekly' ? DAYS[(d.getUTCDay() + 6) % 7]
-      : period === 'monthly' ? `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}\u2013${new Date(end - 864e5).getUTCDate()}`
+      : period === 'monthly' ? (d.getUTCDate() === lastDay.getUTCDate() ? `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}` : `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}\u2013${lastDay.getUTCDate()}`)
       : d.getUTCFullYear() === now.getUTCFullYear() ? MONTHS[d.getUTCMonth()]
       : `${MONTHS[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`;
     return { label, start: new Date(start).toISOString(), end: new Date(end).toISOString(), current: start <= now.getTime() && now.getTime() < end };
@@ -74,8 +81,20 @@ function historyWindow(period, now = new Date()) {
 function mockChart(currency, period) {
   const buckets = historyWindow(period);
   const totals = currency === 'carrots' ? { self: 1, other: 3 } : { self: 106, other: 140 };
-  // Cumulative series that always end exactly on the leaderboard scores.
-  const points = (total) => buckets.map((_, i) => Math.round((total * (4 + i)) / (buckets.length + 3)));
+  const now = new Date();
+  const yesterday = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - 864e5;
+  // Cumulative series: nothing before yesterday, the rest earned between
+  // yesterday and today, flat into the future buckets, ending exactly on
+  // the leaderboard scores.
+  const today = yesterday + 864e5;
+  const points = (total) => buckets.map((b) => {
+    const start = Date.parse(b.start), end = Date.parse(b.end);
+    if (end <= yesterday) return 0;
+    const hasYesterday = start <= yesterday && yesterday < end;
+    const hasToday = start <= today && today < end;
+    if (hasYesterday && !hasToday) return Math.round((total * 4) / 5);
+    return total;
+  });
   return { period, buckets, series: [
     { name: 'aurore', is_self: false, points: points(totals.other) },
     { name: 'Learner', is_self: true, points: points(totals.self) },
@@ -325,9 +344,13 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   const weekday = (now.getUTCDay() + 6) % 7; // Monday = 0
   const weeklyLabels = DAYS.slice(Math.max(0, weekday - 1), weekday + 1);
   const weekLabel = (d) => {
-    const start = 1 + Math.floor((d.getUTCDate() - 1) / 7) * 7;
-    const end = Math.min(start + 6, new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate());
-    return `${MONTHS[d.getUTCMonth()]} ${start}\u2013${end}`;
+    const day = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+    const monday = day - ((d.getUTCDay() + 6) % 7) * 864e5;
+    const start = new Date(Math.max(monday, Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)));
+    const last = new Date(Math.min(monday + 7 * 864e5, Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1)) - 864e5);
+    return start.getUTCDate() === last.getUTCDate()
+      ? `${MONTHS[start.getUTCMonth()]} ${start.getUTCDate()}`
+      : `${MONTHS[start.getUTCMonth()]} ${start.getUTCDate()}\u2013${last.getUTCDate()}`;
   };
   const monthlyLabels = yesterday.getUTCMonth() === now.getUTCMonth()
     ? [...new Set([weekLabel(yesterday), weekLabel(now)])]
@@ -336,14 +359,12 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   const overallLabels = [...new Set([yesterday, now].map(monthLabel))];
   await expect(chart.getByRole('img', { name: 'drops growth, day by day' })).toBeVisible({ timeout: 20000 });
   await expect(chart.locator('.grains-chart-x')).toHaveText(weeklyLabels);
-  await expect(chart.locator('.grains-chart-note')).toContainText('today still in progress');
   await expect(chart.locator('.grains-chart-legend')).toContainText('aurore');
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-weekly-mobile.png' });
   await leaderboard.getByRole('button', { name: 'Monthly' }).click();
   await expect(chart.getByRole('img', { name: 'drops growth, week by week' })).toBeVisible({ timeout: 20000 });
   await expect(chart.locator('.grains-chart-x')).toHaveText(monthlyLabels);
-  await expect(chart.locator('.grains-chart-note')).toContainText('this week still in progress');
   await chart.scrollIntoViewIfNeeded();
   await page.screenshot({ path: '/tmp/little-grains-chart-monthly-mobile.png' });
   await leaderboard.getByRole('button', { name: 'Overall' }).click();

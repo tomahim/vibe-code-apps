@@ -107,12 +107,17 @@ def chart_buckets(period, now=None, events=None):
         start = period_start('monthly', now)
         month_end = (start.replace(day=28) + timedelta(days=7)).replace(day=1)
         buckets = []
-        cursor = start
+        # Calendar weeks run Monday to Sunday, clipped to the month.
+        monday = start - timedelta(days=start.weekday())
+        cursor = monday
         while cursor < month_end and cursor <= now:
             end = min(cursor + timedelta(days=7), month_end)
+            begin = max(cursor, start)
             last_day = end - timedelta(days=1)
-            buckets.append((cursor, end, f"{cursor.strftime('%b')} {cursor.day}\u2013{last_day.day}"))
-            cursor = end
+            label = (f"{begin.strftime('%b')} {begin.day}" if begin == last_day
+                     else f"{begin.strftime('%b')} {begin.day}\u2013{last_day.day}")
+            buckets.append((begin, end, label))
+            cursor += timedelta(days=7)
     else:
         first = min(starts).replace(day=1, hour=0, minute=0, second=0, microsecond=0) if starts else period_start('monthly', now)
         buckets = []

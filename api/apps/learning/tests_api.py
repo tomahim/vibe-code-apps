@@ -448,9 +448,9 @@ class LearningAPITests(TestCase):
         self.assertEqual(weekly["series"][1]["points"], [0, 1, 1])
 
         monthly = chart(events, "drops", "monthly", rows, now)
-        # No future weeks, empty weeks before the first reward are dropped, and
-        # buckets carry explicit date ranges instead of bare week numbers.
-        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Oct 22\u201328"])
+        # Weeks run Monday to Sunday clipped to the month: Oct 26 and 28 share
+        # the Oct 26-31 week, and empty weeks before the first reward go.
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Oct 26\u201331"])
         self.assertEqual(monthly["buckets"][0]["current"], True)
         self.assertEqual(monthly["series"][0]["points"], [6])
         self.assertEqual(monthly["series"][1]["points"], [1])
@@ -484,16 +484,37 @@ class LearningAPITests(TestCase):
         self.assertEqual(weekly["series"][1]["points"], [20, 25])
 
         monthly = chart(events, "drops", "monthly", rows, now)
-        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]],
-                         ["Oct 22\u201328", "Oct 29\u201331"])
-        self.assertEqual([bucket["current"] for bucket in monthly["buckets"]], [False, True])
-        self.assertEqual(monthly["series"][0]["points"], [0, 57])
-        self.assertEqual(monthly["series"][1]["points"], [20, 25])
+        # Wednesday Oct 28 and Thursday Oct 29 fall in the same Monday-Sunday
+        # week, so the monthly chart has a single bucket.
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Oct 26\u201331"])
+        self.assertEqual(monthly["buckets"][0]["current"], True)
+        self.assertEqual(monthly["series"][0]["points"], [57])
+        self.assertEqual(monthly["series"][1]["points"], [25])
 
         overall = chart(events, "drops", "overall", rows, now)
         self.assertEqual([bucket["label"] for bucket in overall["buckets"]], ["Oct"])
         self.assertEqual(overall["series"][0]["points"], [57])
         self.assertEqual(overall["series"][1]["points"], [25])
+
+    def test_leaderboard_chart_monthly_weeks_start_monday_at_month_edges(self):
+        rows = [{"user_id": self.user.pk, "name": "learner", "is_self": True}]
+
+        # June 2026 starts on a Monday: the first week is the full Jun 1-7.
+        now = datetime(2026, 6, 3, 12, tzinfo=timezone.utc)
+        events = {self.user.pk: [("drops", 3, datetime(2026, 6, 1, 8, tzinfo=timezone.utc))]}
+        monthly = chart(events, "drops", "monthly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Jun 1\u20137"])
+        self.assertEqual(monthly["series"][0]["points"], [3])
+
+        # November 2026 starts on a Sunday: the first clipped week is Nov 1
+        # alone, and an event on Oct 31 (same Monday-Sunday week) belongs to
+        # October, not to this month.
+        now = datetime(2026, 11, 1, 9, tzinfo=timezone.utc)
+        events = {self.user.pk: [("drops", 5, datetime(2026, 10, 31, 23, tzinfo=timezone.utc))]}
+        monthly = chart(events, "drops", "monthly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Nov 1"])
+        self.assertEqual(monthly["buckets"][0]["current"], True)
+        self.assertEqual(monthly["series"][0]["points"], [0])
 
     def test_reward_periods_reset_at_utc_boundaries(self):
         now = datetime(2026, 10, 28, 12, tzinfo=timezone.utc)
