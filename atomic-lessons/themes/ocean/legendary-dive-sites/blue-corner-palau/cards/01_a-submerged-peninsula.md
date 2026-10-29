@@ -2,6 +2,12 @@
 id: 0919d464-b526-4929-9d02-0f314974b915
 position: 1
 title: "A submerged peninsula"
+image: blue-corner-aerial.jpg
+image_alt: "Aerial view of Blue Corner: a tongue of pale reef flat narrowing into the deep blue open sea."
+image_caption: "Aerial view of Blue Corner on Palau's barrier reef, 2016."
+image_credit: "Luka Peternel"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Blue-Corner-2016-aerial-view-Luka-Peternel.jpg
 archived: false
 ---
 Blue Corner is a section of Palau's barrier reef in the south-east of Koror, close to Ngerukewid and German Channel. Its triangular shape, with stepped walls on the Pacific Ocean sides, resembles a submerged peninsula pointing out into the open sea.

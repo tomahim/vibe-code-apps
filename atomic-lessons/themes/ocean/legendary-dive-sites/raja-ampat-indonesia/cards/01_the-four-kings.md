@@ -2,6 +2,12 @@
 id: 2be6190a-666d-4e01-bc02-49979e0d487e
 position: 1
 title: "The Four Kings"
+image: wayag-islets.jpg
+image_alt: "Steep green limestone islets rising from a turquoise lagoon in Wayag, Raja Ampat."
+image_caption: "The limestone islets of Wayag in Raja Ampat."
+image_credit: "Rolandandika"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:Wayag_Island.jpg
 archived: false
 ---
 Raja Ampat is an archipelago off the north-west tip of the Bird's Head Peninsula on the island of New Guinea, in Southwest Papua province, Indonesia. It spans roughly 610 islands, atolls and takas, of which only 34 are inhabited, with four main islands: Misool, Salawati, Batanta and Waigeo.
