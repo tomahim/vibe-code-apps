@@ -442,15 +442,18 @@ class LearningAPITests(TestCase):
                 {"user_id": self.other.pk, "name": "other", "is_self": False}]
 
         weekly = chart(events, "drops", "weekly", rows, now)
-        self.assertEqual([bucket["label"] for bucket in weekly["buckets"]],
-                         ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])
-        self.assertEqual(weekly["series"][0]["points"], [1, 1, 6, 6, 6, 6, 6])
-        self.assertEqual(weekly["series"][1]["points"], [0, 1, 1, 1, 1, 1, 1])
+        # No future days: today is Wednesday, so the week stops there.
+        self.assertEqual([bucket["label"] for bucket in weekly["buckets"]], ["Mon", "Tue", "Wed"])
+        self.assertEqual(weekly["series"][0]["points"], [1, 1, 6])
+        self.assertEqual(weekly["series"][1]["points"], [0, 1, 1])
 
         monthly = chart(events, "drops", "monthly", rows, now)
-        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]],
-                         ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"])
-        self.assertEqual(monthly["series"][0]["points"], [0, 0, 0, 6, 6])
+        # No future weeks, empty weeks before the first reward are dropped, and
+        # buckets carry explicit date ranges instead of bare week numbers.
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]], ["Oct 22\u201328"])
+        self.assertEqual(monthly["buckets"][0]["current"], True)
+        self.assertEqual(monthly["series"][0]["points"], [6])
+        self.assertEqual(monthly["series"][1]["points"], [1])
 
         overall = chart(events, "drops", "overall", rows, now)
         self.assertEqual([bucket["label"] for bucket in overall["buckets"]], ["Sep", "Oct"])
@@ -458,8 +461,39 @@ class LearningAPITests(TestCase):
         self.assertEqual(overall["series"][1]["points"], [0, 1])
 
         carrots = chart(events, "carrots", "weekly", rows, now)
-        self.assertEqual(carrots["series"][0]["points"], [0, 1, 1, 1, 1, 1, 1])
-        self.assertEqual(carrots["series"][1]["points"], [0, 0, 0, 0, 0, 0, 0])
+        # The first carrot was earned on Tuesday, so Monday is not plotted.
+        self.assertEqual([bucket["label"] for bucket in carrots["buckets"]], ["Tue", "Wed"])
+        self.assertEqual(carrots["series"][0]["points"], [1, 1])
+        self.assertEqual(carrots["series"][1]["points"], [0, 0])
+
+    def test_leaderboard_chart_covers_only_recorded_history(self):
+        # Production report: activity started yesterday, today is Thursday.
+        now = datetime(2026, 10, 29, 9, tzinfo=timezone.utc)
+        events = {
+            self.user.pk: [("drops", 20, datetime(2026, 10, 28, 18, tzinfo=timezone.utc)),
+                           ("drops", 5, datetime(2026, 10, 29, 8, tzinfo=timezone.utc))],
+            self.other.pk: [("drops", 57, datetime(2026, 10, 29, 7, tzinfo=timezone.utc))],
+        }
+        rows = [{"user_id": self.other.pk, "name": "other", "is_self": False},
+                {"user_id": self.user.pk, "name": "learner", "is_self": True}]
+
+        weekly = chart(events, "drops", "weekly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in weekly["buckets"]], ["Wed", "Thu"])
+        self.assertEqual([bucket["current"] for bucket in weekly["buckets"]], [False, True])
+        self.assertEqual(weekly["series"][0]["points"], [0, 57])
+        self.assertEqual(weekly["series"][1]["points"], [20, 25])
+
+        monthly = chart(events, "drops", "monthly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]],
+                         ["Oct 22\u201328", "Oct 29\u201331"])
+        self.assertEqual([bucket["current"] for bucket in monthly["buckets"]], [False, True])
+        self.assertEqual(monthly["series"][0]["points"], [0, 57])
+        self.assertEqual(monthly["series"][1]["points"], [20, 25])
+
+        overall = chart(events, "drops", "overall", rows, now)
+        self.assertEqual([bucket["label"] for bucket in overall["buckets"]], ["Oct"])
+        self.assertEqual(overall["series"][0]["points"], [57])
+        self.assertEqual(overall["series"][1]["points"], [25])
 
     def test_reward_periods_reset_at_utc_boundaries(self):
         now = datetime(2026, 10, 28, 12, tzinfo=timezone.utc)
