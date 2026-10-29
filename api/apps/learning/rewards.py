@@ -87,6 +87,65 @@ def totals(events, period='overall', now=None):
     return result
 
 
+def chart_buckets(period, now=None, events=None):
+    """Calendar buckets for the growth chart: days (weekly), weeks (monthly), months (overall)."""
+    now = now or datetime.now(dt_timezone.utc)
+    if period == 'weekly':
+        start = period_start('weekly', now)
+        return [(start + timedelta(days=i), start + timedelta(days=i + 1),
+                 (start + timedelta(days=i)).strftime('%a')) for i in range(7)]
+    if period == 'monthly':
+        start = period_start('monthly', now)
+        month_end = (start.replace(day=28) + timedelta(days=7)).replace(day=1)
+        buckets = []
+        cursor = start
+        while cursor < month_end:
+            end = min(cursor + timedelta(days=7), month_end)
+            buckets.append((cursor, end, f"Week {len(buckets) + 1}"))
+            cursor = end
+        return buckets
+    starts = [at for user_events in (events or {}).values() for _, _, at in user_events]
+    first = min(starts).replace(day=1, hour=0, minute=0, second=0, microsecond=0) if starts else period_start('monthly', now)
+    buckets = []
+    cursor = first
+    current_month = period_start('monthly', now)
+    while cursor <= current_month:
+        end = (cursor.replace(day=28) + timedelta(days=7)).replace(day=1)
+        label = cursor.strftime('%b') if cursor.year == now.year else cursor.strftime("%b '%y")
+        buckets.append((cursor, end, label))
+        cursor = end
+    return buckets
+
+
+def chart(events, currency, period, rows, now=None, limit=5):
+    """Cumulative growth per bucket for the top rows (self included even below the limit)."""
+    now = now or datetime.now(dt_timezone.utc)
+    buckets = chart_buckets(period, now, events)
+    series_rows = list(rows[:limit])
+    self_row = next((row for row in rows if row['is_self']), None)
+    if self_row and self_row not in series_rows:
+        series_rows.append(self_row)
+    start = buckets[0][0]
+    series = []
+    for row in series_rows:
+        points = []
+        total = 0
+        ordered = sorted((at, amount) for kind, amount, at in events.get(row['user_id'], []) if kind == currency)
+        index = 0
+        for _, end, _ in buckets:
+            while index < len(ordered) and ordered[index][0] < end:
+                at, amount = ordered[index]
+                if at >= start:
+                    total += amount
+                index += 1
+            points.append(total)
+        series.append({'name': row['name'], 'is_self': row['is_self'], 'points': points})
+    return {'period': period,
+            'buckets': [{'label': label, 'start': begin.isoformat(), 'end': end.isoformat()}
+                        for begin, end, label in buckets],
+            'series': series}
+
+
 def leaderboard(user, currency, period, limit=20):
     events = reward_events()
     users = list(get_user_model().objects.filter(is_active=True).order_by('pk'))
@@ -103,6 +162,9 @@ def leaderboard(user, currency, period, limit=20):
     rows.sort(key=lambda row: (-row['score'], row['user_id']))
     for index, row in enumerate(rows):
         row['rank'] = index + 1
+    growth = chart(events, currency, period, rows)
+    for row in rows:
         row.pop('user_id')
     return {'currency': currency, 'period': period, 'timezone': 'UTC',
-            'rows': rows[:limit], 'self': next((row for row in rows if row['is_self']), None)}
+            'rows': rows[:limit], 'self': next((row for row in rows if row['is_self']), None),
+            'chart': growth}

@@ -8,7 +8,7 @@ from django.test import TestCase
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
-from .rewards import totals
+from .rewards import chart, totals
 
 
 class LearningAPITests(TestCase):
@@ -421,10 +421,45 @@ class LearningAPITests(TestCase):
         carrots = self.client.get("/api/learning/leaderboard/?currency=carrots&period=overall").json()
         self.assertEqual(drops["rows"][0]["score"], 106)
         self.assertEqual(carrots["rows"][0]["score"], 1)
+        self.assertEqual(drops["chart"]["series"][0]["is_self"], True)
+        self.assertEqual(drops["chart"]["series"][0]["points"][-1], 106)
+        self.assertEqual(carrots["chart"]["series"][0]["points"][-1], 1)
         self.assertTrue(drops["self"]["is_self"])
         self.assertEqual(self.client.get("/api/learning/leaderboard/?currency=invalid").status_code, 400)
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
         self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 0, "carrots": 0})
+
+    def test_leaderboard_chart_tracks_cumulative_totals_per_period(self):
+        now = datetime(2026, 10, 28, 15, tzinfo=timezone.utc)  # Wednesday of the week of Oct 26
+        events = {
+            self.user.pk: [("drops", 1, datetime(2026, 10, 26, 10, tzinfo=timezone.utc)),
+                           ("drops", 5, datetime(2026, 10, 28, 12, tzinfo=timezone.utc)),
+                           ("carrots", 1, datetime(2026, 10, 27, 9, tzinfo=timezone.utc)),
+                           ("drops", 100, datetime(2026, 9, 5, 12, tzinfo=timezone.utc))],
+            self.other.pk: [("drops", 1, datetime(2026, 10, 27, 10, tzinfo=timezone.utc))],
+        }
+        rows = [{"user_id": self.user.pk, "name": "learner", "is_self": True},
+                {"user_id": self.other.pk, "name": "other", "is_self": False}]
+
+        weekly = chart(events, "drops", "weekly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in weekly["buckets"]],
+                         ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])
+        self.assertEqual(weekly["series"][0]["points"], [1, 1, 6, 6, 6, 6, 6])
+        self.assertEqual(weekly["series"][1]["points"], [0, 1, 1, 1, 1, 1, 1])
+
+        monthly = chart(events, "drops", "monthly", rows, now)
+        self.assertEqual([bucket["label"] for bucket in monthly["buckets"]],
+                         ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"])
+        self.assertEqual(monthly["series"][0]["points"], [0, 0, 0, 6, 6])
+
+        overall = chart(events, "drops", "overall", rows, now)
+        self.assertEqual([bucket["label"] for bucket in overall["buckets"]], ["Sep", "Oct"])
+        self.assertEqual(overall["series"][0]["points"], [100, 106])
+        self.assertEqual(overall["series"][1]["points"], [0, 1])
+
+        carrots = chart(events, "carrots", "weekly", rows, now)
+        self.assertEqual(carrots["series"][0]["points"], [0, 1, 1, 1, 1, 1, 1])
+        self.assertEqual(carrots["series"][1]["points"], [0, 0, 0, 0, 0, 0, 0])
 
     def test_reward_periods_reset_at_utc_boundaries(self):
         now = datetime(2026, 10, 28, 12, tzinfo=timezone.utc)
