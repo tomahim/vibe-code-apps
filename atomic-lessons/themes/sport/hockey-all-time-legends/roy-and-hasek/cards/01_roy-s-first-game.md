@@ -2,6 +2,12 @@
 id: a166e1e6-7118-4038-8156-9bd9b0c366ff
 position: 1
 title: "Roy's first game"
+image: patrick-roy-hhof-locker.jpg
+image_alt: "Patrick Roy's white number 33 Montreal Canadiens jersey hanging in his locker display at the Hockey Hall of Fame."
+image_caption: "Patrick Roy's number 33 Canadiens locker display at the Hockey Hall of Fame, 2010."
+image_credit: "Michael Barera"
+image_license: "CC BY-SA 4.0"
+image_source_url: https://commons.wikimedia.org/wiki/File:HHOF_July_2010_Canadiens_locker_18_(Roy).JPG
 archived: false
 ---
 Patrick Roy was drafted 51st overall by the Montreal Canadiens in 1984, after playing for the Granby Bisons of the Quebec junior league. The Hall of Fame notes he came from the area of the Quebec Nordiques, Montreal's fierce rivals.
