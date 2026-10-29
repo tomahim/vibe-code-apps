@@ -378,7 +378,7 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   await page.screenshot({ path: '/tmp/little-grains-chart-carrots-mobile.png' });
 });
 
-test('phone path panel shows the question gauge and runs the catch-up quiz', async ({ page }) => {
+test('phone practice quiz stays open at zero gaps with unread lessons', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
   const q1 = 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', q2 = 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3';
@@ -389,21 +389,21 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
     { id: q2, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 2, after_card_position: 1, type: 'type_answer_question', prompt: 'Translate: « La crème hydratante. »', options: [] },
   ];
   const solved = new Set();
-  const progress = () => ({ cards_completed: 4, cards_total: 4, checkpoints_correct: 1, checkpoints_total: 1, questions_correct: 1 + solved.size, questions_total: 3, lessons_completed: 0, lessons_total: 1, started: true, completed: solved.size === 2 });
-  const lesson = () => ({ ...row(id.lesson, 'Bath time and care'), progress: progress() });
+  const progress = () => ({ cards_completed: 4, cards_total: 5, checkpoints_correct: 1, checkpoints_total: 2, questions_correct: 1 + solved.size, questions_total: 4, lessons_completed: solved.size === 2 ? 1 : 0, lessons_total: 2, started: true, completed: false });
+  const lesson = () => ({ ...row(id.lesson, 'Bath time and care'), progress: { ...progress(), cards_total: 4, checkpoints_total: 1, questions_total: 3, lessons_total: 1, completed: solved.size === 2 } });
   await page.route('**/api/learning/**', route => {
     const url = new URL(route.request().url());
-    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson()] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
+    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson(), { ...row("unread-lesson", "Still unread"), position: 2, progress: { cards_completed: 0, cards_total: 1, questions_correct: 0, questions_total: 1, started: false, completed: false } }] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
     if (url.pathname.endsWith('/catch-up/')) {
       const done = solved.size === 2;
-      // Review mode serves every answered question (the whole pool when under 10).
-      return route.fulfill({ json: { learning_path_id: id.path, mode: done ? 'review' : 'catch_up', eligible: true, remaining: done ? 0 : quizQuestions.length, questions: done ? [lessonQuestion, ...quizQuestions] : quizQuestions } });
+      // One shared pool, even when gaps are zero and another lesson is unread.
+      return route.fulfill({ json: { learning_path_id: id.path, eligible: true, remaining: done ? 0 : quizQuestions.length, questions: done ? [lessonQuestion, ...quizQuestions] : [...quizQuestions, lessonQuestion] } });
     }
     if (url.pathname.endsWith('/question-attempts/')) {
       const body = JSON.parse(route.request().postData());
       expect(body.attempt_type).toBeUndefined(); // No quiz type: the server derives initial/retry/review.
-      const correct = body.answer === 'few' || body.answer.toLowerCase().includes('moistur');
-      if (correct) solved.add(body.question_id);
+      const correct = body.answer === 'few' || body.answer === 'cord' || body.answer.toLowerCase().includes('moistur');
+      if (correct && body.question_id !== q3) solved.add(body.question_id);
       return route.fulfill({ status: 201, json: { correct, attempt_type: 'retry', explanation: 'Newborn skin does not need a daily bath.', correct_answer: body.question_id === q2 ? 'The moisturizer.' : null, next_step: null, progress: progress() } });
     }
     return route.fulfill({ json: {} });
@@ -413,18 +413,18 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /English for babies/ }).click();
   await expect(panel.getByRole('heading', { name: 'English for babies' })).toBeVisible();
-  // The gauge: 1 of 3 questions answered correctly.
+  // The path gauge includes the unread lesson: 1 of 4 questions correct.
   const gauge = panel.locator('.lg-gauge');
   await expect(gauge).toContainText('Questions answered correctly');
-  await expect(gauge).toContainText('33%');
-  await expect(gauge).toContainText('1 of 3 questions on this path');
+  await expect(gauge).toContainText('25%');
+  await expect(gauge).toContainText('1 of 4 questions on this path');
   // The lesson row is fully read but below 100%: it carries its percentage.
   await expect(panel.locator('.lg-lessons .pc')).toHaveText('33%');
   await page.screenshot({ path: '/tmp/lg-204-gauge-mobile.png' });
 
-  await panel.getByRole('button', { name: /Catch-up quiz · 2 questions to go/ }).click();
-  const quiz = page.getByRole('dialog', { name: 'Catch-up quiz - English for babies' });
-  await expect(quiz.getByRole('heading', { name: '2 questions to go' })).toBeVisible();
+  await panel.getByRole('button', { name: /Practice quiz/ }).click();
+  const quiz = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
+  await expect(quiz.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
   await expect(quiz.getByText('How often should you bathe a newborn?')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-204-quiz-question-mobile.png' });
 
@@ -438,25 +438,30 @@ test('phone path panel shows the question gauge and runs the catch-up quiz', asy
   await quiz.getByRole('button', { name: 'Check answer' }).click();
   await expect(quiz.getByText('That’s right!')).toBeVisible();
   await quiz.getByRole('button', { name: 'Continue →' }).click();
+  // The answered question is still in the shared pool, after the priority tiers.
+  await expect(quiz.getByText('When can a newborn have a first bath?')).toBeVisible();
+  await quiz.getByLabel('Once the cord has fallen', { exact: true }).check();
+  await quiz.getByRole('button', { name: 'Check answer' }).click();
+  await quiz.getByRole('button', { name: 'Continue →' }).click();
   // The re-queued question is back; answer it correctly this time.
   await expect(quiz.getByText('How often should you bathe a newborn?')).toBeVisible();
   await quiz.getByLabel('Two or three times a week', { exact: true }).check();
   await quiz.getByRole('button', { name: 'Check answer' }).click();
   await quiz.getByRole('button', { name: 'Continue →' }).click();
-  await expect(quiz.getByText('2 of 2 answered correctly')).toBeVisible();
+  await expect(quiz.getByText('3 of 3 answered correctly')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-204-quiz-summary-mobile.png' });
   await quiz.getByRole('button', { name: 'Back to the garden' }).click();
-  // The garden refreshed: nothing left, the button becomes the review quiz.
-  await expect(panel.locator('.lg-quiz-hint')).toHaveText('All questions answered ✓');
-  await expect(panel.locator('.lg-gauge')).toContainText('100%');
+  // Read-lesson gaps are closed, but another lesson is unread. Practice stays open.
+  await expect(panel.locator('.lg-quiz-hint')).toHaveText('Keep practicing questions from your read lessons');
+  await expect(panel.locator('.lg-gauge')).toContainText('75%');
   await expect(panel.locator('.lg-lessons .pc')).toHaveCount(0);
-  await page.screenshot({ path: '/tmp/lg-204-gauge-complete-mobile.png' });
+  await page.screenshot({ path: '/tmp/lg-unified-zero-gaps-mobile.png' });
 
-  // At 100% the quiz stays available as review practice.
-  await panel.getByRole('button', { name: '🌱 Review quiz' }).click();
-  const review = page.getByRole('dialog', { name: 'Review quiz - English for babies' });
-  await expect(review.getByText('REVIEW QUIZ', { exact: true })).toBeVisible();
+  // At zero eligible gaps the quiz still serves answered questions.
+  await panel.getByRole('button', { name: '🌱 Practice quiz' }).click();
+  const review = page.getByRole('dialog', { name: 'Practice quiz - English for babies' });
+  await expect(review.getByText('PRACTICE QUIZ', { exact: true })).toBeVisible();
   await expect(review.getByRole('heading', { name: '3 questions to go' })).toBeVisible();
   await expect(review.getByText('When can a newborn have a first bath?')).toBeVisible();
-  await page.screenshot({ path: '/tmp/lg-204-review-quiz-mobile.png' });
+  await page.screenshot({ path: '/tmp/lg-unified-practice-mobile.png' });
 });

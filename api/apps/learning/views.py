@@ -224,41 +224,51 @@ def question_attempts(request):
 @require_GET
 @jwt_required
 def catch_up(request, path_id):
-    """One quiz session for a learning path (#204): ten random questions.
-    While gaps remain they come from the catch-up pool - questions of fully
-    read lessons with no correct answer yet. Review practice unlocks only once
-    the whole path is complete (every card read, every question correct) and
-    draws from the answered questions. `remaining` always counts the gap pool,
-    so the gauge and the button never confuse a session with the pool."""
+    """One shared quiz over visible questions of fully read lessons.
+
+    Keep the historical endpoint name; there is no catch-up/review mode gate.
+    The gauge's remaining count is independent of session selection.
+    """
     path = get_object_or_404(visible(LearningPath), pk=path_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     titles = {lesson.pk: lesson.title for lesson in lessons}
-    gaps = state.catch_up_questions(lessons)
-    if gaps:
-        mode, pool = "catch_up", gaps
-    elif lessons and all(state.lesson_fully_read(lesson.pk) for lesson in lessons):
-        mode = "review"
-        pool = [q for lesson in lessons
-                for q in state.questions
-                if q.lesson_id == lesson.pk and q.pk in state.correct_questions]
-    else:
-        # Read lessons have no gaps but another lesson is still unread.
-        mode, pool = "catch_up", []
-    # Session mix (#204): up to 6 questions whose latest attempt is oldest -
-    # they are due for review - filled to 10 with random picks of the rest.
-    # Never-attempted catch-up questions have no attempt yet: they are randoms.
-    old = sorted((q for q in pool if q.pk in state.last_attempt),
-                 key=lambda q: state.last_attempt[q.pk])[:6]
-    rest = [q for q in pool if q.pk not in {q.pk for q in old}]
-    random.shuffle(rest)
-    session = old + rest[:10 - len(old)]
-    random.shuffle(session)
-    return JsonResponse({"learning_path_id": str(path.pk), "mode": mode,
-                         "eligible": any(state.lesson_fully_read(lesson.pk) for lesson in lessons),
-                         "remaining": len(gaps),
+    read_ids = {lesson.pk for lesson in lessons if state.lesson_fully_read(lesson.pk)}
+    pool = [q for q in state.questions if q.lesson_id in read_ids]
+    session = quiz_session(state, pool)
+    return JsonResponse({"learning_path_id": str(path.pk),
+                         "eligible": bool(read_ids),
+                         "remaining": len(state.catch_up_questions(lessons)),
                          "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
                                        for q in session]})
+
+
+def quiz_session(state, pool, limit=10):
+    """Failed latest answers, unseen questions, then 60% oldest / 40% random.
+
+    Each question appears once. Priority buckets are random within their tier;
+    oldest means time of the latest answer. Round 60% to the nearest whole
+    question (half up); the random tail fills every remaining available slot.
+    """
+    failed = [q for q in pool if state.last_correct.get(q.pk) is False]
+    unseen = [q for q in pool if q.pk not in state.last_attempt]
+    random.shuffle(failed)
+    random.shuffle(unseen)
+    session = (failed + unseen)[:limit]
+    selected = {q.pk for q in session}
+    slots = limit - len(session)
+    if not slots:
+        return session
+    answered = [q for q in pool if q.pk not in selected and q.pk in state.last_attempt]
+    answered.sort(key=lambda q: (state.last_attempt[q.pk], str(q.pk)))
+    oldest_count = (slots * 6 + 5) // 10
+    old = answered[:oldest_count]
+    session.extend(old)
+    selected.update(q.pk for q in old)
+    rest = [q for q in answered if q.pk not in selected]
+    random.shuffle(rest)
+    session.extend(rest[:limit - len(session)])
+    return session
 
 
 @never_cache

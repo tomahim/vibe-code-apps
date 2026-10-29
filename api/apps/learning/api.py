@@ -65,8 +65,10 @@ class LearnerState:
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
         self.last_attempt = {}
+        self.last_correct = {}
         for a in attempts:  # ordered by answered_at: the last write wins
             self.last_attempt[a["question_id"]] = a["answered_at"]
+            self.last_correct[a["question_id"]] = a["correct"]
 
     def progress(self, lessons):
         ids = {lesson.pk for lesson in lessons}

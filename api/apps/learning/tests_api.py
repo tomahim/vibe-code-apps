@@ -261,7 +261,7 @@ class LearningAPITests(TestCase):
         self.assertFalse(before["lesson"]["progress"]["completed"])
         self.assertEqual(before["questions"][0]["type"], "multiple_choice")
         pool = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
-        self.assertEqual({q["id"] for q in pool["questions"]}, {str(q.pk) for q in translations})
+        self.assertEqual({q["id"] for q in pool["questions"]}, {str(q.pk) for q in translations} | {str(self.question.pk)})
         for typed in translations:
             quiz = self.post(attempt_url, {"question_id": str(typed.pk), "answer": typed.answer})
             self.assertEqual(quiz.status_code, 201)
@@ -408,7 +408,7 @@ class LearningAPITests(TestCase):
         self.assertIsNone(correct.json()["next_step"])
         pool = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
         self.assertEqual(pool["remaining"], 2)
-        self.assertNotIn(selected, [q["id"] for q in pool["questions"]])
+        self.assertIn(selected, [q["id"] for q in pool["questions"]])
         for item in pool["questions"]:
             question = Question.objects.get(pk=item["id"])
             quiz = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer})
@@ -677,7 +677,7 @@ class LearningAPITests(TestCase):
         self.assertEqual(path["progress"]["questions_correct"], 0)
         self.assertEqual(path["progress"]["questions_total"], 4)
         self.assertEqual(self.client.get(catch_up_url).json(), {
-            "learning_path_id": str(self.path.pk), "mode": "catch_up", "eligible": False,
+            "learning_path_id": str(self.path.pk), "eligible": False,
             "remaining": 0, "questions": []})
         refused = self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"})
         self.assertEqual(refused.status_code, 409)
@@ -693,7 +693,7 @@ class LearningAPITests(TestCase):
         pool = self.client.get(catch_up_url).json()
         self.assertTrue(pool["eligible"])
         self.assertEqual(pool["remaining"], 2)
-        self.assertEqual({q["id"] for q in pool["questions"]}, {str(second.pk), str(third.pk)})
+        self.assertEqual({q["id"] for q in pool["questions"]}, {str(self.question.pk), str(second.pk), str(third.pk)})
         path = self.client.get("/api/learning/garden/").json()["themes"][0]["learning_paths"][0]
         self.assertEqual(path["catch_up"], {"eligible": True, "remaining": 2})
         self.assertEqual(path["progress"]["questions_correct"], 1)
@@ -704,20 +704,21 @@ class LearningAPITests(TestCase):
             question = Question.objects.get(pk=item["id"])
             response = self.post(attempt_url, {"question_id": item["id"], "answer": question.answer})
             self.assertEqual(response.status_code, 201)
-            self.assertEqual(response.json()["attempt_type"], "retry")
+            self.assertEqual(response.json()["attempt_type"],
+                             "review" if question.pk == self.question.pk else "retry")
             self.assertIsNone(response.json()["next_step"])
-        # Gaps closed but the other lesson is still unread: the review quiz
-        # waits for the whole path to be complete.
+        # Gaps closed but the other lesson is still unread: practice stays open.
         waiting = self.client.get(catch_up_url).json()
-        self.assertEqual(waiting["mode"], "catch_up")
-        self.assertEqual(waiting["questions"], [])
+        self.assertNotIn("mode", waiting)
+        self.assertEqual(waiting["remaining"], 0)
+        self.assertEqual(len(waiting["questions"]), 3)
         other = Question.objects.get(lesson=other_lesson)
         self.post(f"/api/learning/cards/{other_lesson.cards.get().pk}/complete/", {})
         self.post(attempt_url, {"question_id": str(other.pk), "answer": other.answer})
         # Path complete: review practice over the already-answered questions,
         # and re-answering one records a review.
         done = self.client.get(catch_up_url).json()
-        self.assertEqual(done["mode"], "review")
+        self.assertNotIn("mode", done)
         self.assertEqual(done["remaining"], 0)
         self.assertEqual(len(done["questions"]), 4)
         selected = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["questions"][0]
@@ -734,7 +735,7 @@ class LearningAPITests(TestCase):
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"],
                          {"drops": 112, "carrots": 2})
 
-    def test_review_quiz_unlocks_only_at_path_completion(self):
+    def test_practice_stays_open_at_zero_gaps_with_unread_lessons(self):
         unread = self.row(Lesson, learning_path=self.path, position=2)
         self.row(Card, lesson=unread, body_markdown="Unread")
         self.row(Question, lesson=unread, after_card_position=1,
@@ -742,11 +743,11 @@ class LearningAPITests(TestCase):
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
         # Every question of the read lesson is answered but the path is not
-        # complete: nothing to catch up, and no review quiz yet.
+        # complete: practice still serves the read lesson.
         result = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
-        self.assertEqual(result["mode"], "catch_up")
+        self.assertNotIn("mode", result)
         self.assertEqual(result["remaining"], 0)
-        self.assertEqual(result["questions"], [])
+        self.assertEqual([q["id"] for q in result["questions"]], [str(self.question.pk)])
 
     def test_catch_up_session_caps_at_ten_questions(self):
         for position in range(2, 14):
@@ -758,7 +759,7 @@ class LearningAPITests(TestCase):
         chosen = Question.objects.get(pk=selected)
         self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
         result = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
-        self.assertEqual(result["mode"], "catch_up")
+        self.assertNotIn("mode", result)
         self.assertEqual(result["remaining"], 12)
         self.assertEqual(len(result["questions"]), 10)
         pool_ids = {str(q.pk) for q in Question.objects.filter(lesson=self.lesson)} - {selected}
@@ -767,7 +768,7 @@ class LearningAPITests(TestCase):
         path = self.client.get("/api/learning/garden/").json()["themes"][0]["learning_paths"][0]
         self.assertEqual(path["catch_up"], {"eligible": True, "remaining": 12})
 
-    def test_quiz_session_prioritizes_the_oldest_attempts_then_random(self):
+    def test_quiz_session_prioritizes_all_latest_failures_before_unseen(self):
         old = [self.row(Question, lesson=self.lesson, position=position, after_card_position=1,
                         prompt=f"Old {position}", options=self.question.options, answer="1")
                for position in range(2, 10)]
@@ -786,14 +787,73 @@ class LearningAPITests(TestCase):
         self.assertEqual(result["remaining"], 14)  # self.question is a gap too
         served = [q["id"] for q in result["questions"]]
         self.assertEqual(len(served), 10)
-        # The six oldest wrong-only questions are all in the session.
-        self.assertLessEqual({str(q.pk) for q in old[:6]}, set(served))
+        # Every failed question precedes any never-attempted question.
+        self.assertEqual(set(served[:8]), {str(q.pk) for q in old})
+
+    def test_latest_failure_priority_and_later_success_clears_it(self):
+        from .views import quiz_session
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        now = datetime.now(timezone.utc)
+        for index, correct in enumerate([True, False, True]):
+            QuestionAttempt.objects.create(user=self.user, question=self.question,
+                attempt_type="review", submitted_answer="0", correct=correct,
+                answered_at=now + timedelta(seconds=index))
+            state = LearnerState(self.user)
+            self.assertEqual(state.last_correct[self.question.pk], correct)
+            self.assertEqual(state.last_attempt[self.question.pk], now + timedelta(seconds=index))
+            self.assertEqual(state.progress([self.lesson])["questions_correct"], 1)
+        # A historical failure is not failed-first after a subsequent success.
+        unseen = self.row(Question, lesson=self.lesson, position=2, after_card_position=1,
+                          prompt="New", options=self.question.options, answer="1")
+        state = LearnerState(self.user)
+        self.assertEqual(quiz_session(state, state.questions, limit=1), [unseen])
+        QuestionAttempt.objects.create(user=self.user, question=self.question,
+            attempt_type="review", submitted_answer="1", correct=False,
+            answered_at=now + timedelta(seconds=3))
+        state = LearnerState(self.user)
+        self.assertEqual(quiz_session(state, state.questions, limit=1), [self.question])
+
 
 from concurrent.futures import ThreadPoolExecutor
 from unittest import skipUnless
+from unittest.mock import patch
+from types import SimpleNamespace
+from django.test import SimpleTestCase
 
 from django.db import close_old_connections, connection
 from django.test import Client, TransactionTestCase
+
+
+class QuizSelectionTests(SimpleTestCase):
+    def session(self, failed=0, unseen=0, answered=0, limit=10):
+        from .views import quiz_session
+        pool = [SimpleNamespace(pk=i) for i in range(failed + unseen + answered)]
+        attempted = list(range(failed)) + list(range(failed + unseen, len(pool)))
+        state = SimpleNamespace(last_attempt={i: i for i in attempted},
+                                last_correct={i: i >= failed for i in attempted})
+        # Reverse random buckets to prove the random tail is not oldest-first.
+        with patch("apps.learning.views.random.shuffle", side_effect=lambda rows: rows.reverse()):
+            return [q.pk for q in quiz_session(state, pool, limit)]
+
+    def test_one_failed_one_unseen_leaves_five_oldest_and_three_random(self):
+        selected = self.session(failed=1, unseen=1, answered=20)
+        self.assertEqual(selected, [0, 1, 2, 3, 4, 5, 6, 21, 20, 19])
+        self.assertEqual(len(set(selected)), 10)
+
+    def test_failed_tier_fills_session_before_unseen_or_answered(self):
+        self.assertEqual(self.session(failed=12, unseen=12, answered=20), list(range(11, 1, -1)))
+
+    def test_unseen_fills_after_failed_before_any_review(self):
+        self.assertEqual(self.session(failed=2, unseen=12, answered=20), [1, 0] + list(range(13, 5, -1)))
+
+    def test_no_priority_questions_uses_six_oldest_four_random(self):
+        self.assertEqual(self.session(answered=20), list(range(6)) + [19, 18, 17, 16])
+
+    def test_rounding_small_pool_empty_pool_and_no_duplicates(self):
+        self.assertEqual(self.session(failed=1, unseen=2, answered=20),
+                         [0, 2, 1, 3, 4, 5, 6, 22, 21, 20])
+        self.assertEqual(self.session(failed=1, unseen=1, answered=1), [0, 1, 2])
+        self.assertEqual(self.session(), [])
 
 
 @skipUnless(connection.vendor == "postgresql", "Production row-lock concurrency requires PostgreSQL")
