@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+
+// The night-shift scene compiles many shaders on first render; under software
+// WebGL (CI / headless swiftshader) the main thread can stall for tens of
+// seconds, so give these tests headroom beyond the default 30s.
+test.setTimeout(90000);
 const path = '/artifacts/2026-10-30-repo-factory';
 async function ready(page) {
   const errors = [];

@@ -91,7 +91,7 @@ function wallTexture() {
 function buildHallShell(scene) {
   const g = new THREE.Group();
   const fw = HALL.x * 2, fd = HALL.zMax - HALL.zMin, cz = (HALL.zMin + HALL.zMax) / 2;
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(fw, fd), new THREE.MeshStandardMaterial({ map: floorTexture(), color: 0xbfc9d6, roughness: .55, metalness: .45 }));
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(fw, fd), new THREE.MeshStandardMaterial({ map: floorTexture(), color: 0xd4dce6, roughness: .38, metalness: .6 }));
   floor.rotation.x = -Math.PI / 2; floor.position.set(0, 0, cz); floor.receiveShadow = true; g.add(floor);
   const wTex = wallTexture(); wTex.wrapS = THREE.RepeatWrapping;
   const mkWall = (len, x, z, ry) => {
@@ -120,6 +120,18 @@ function buildHallShell(scene) {
   s2.position.set(-HALL.x + .12, 6.4, cz); g.add(s2);
   const s3 = new THREE.Mesh(new THREE.BoxGeometry(.07, .07, fd * .7), new THREE.MeshBasicMaterial({ color: 0x39d5ff }));
   s3.position.set(HALL.x - .12, 6.4, cz); g.add(s3);
+  // high windows: cool glow band that sells the hall's height
+  const winM = new THREE.MeshBasicMaterial({ color: 0xbfe0f5, transparent: true, opacity: .55, fog: false });
+  const winFrameM = new THREE.MeshStandardMaterial({ color: 0x141a23, roughness: .6, metalness: .6 });
+  for (let wx = -18; wx <= 18; wx += 6) {
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 1.5), winM);
+    win.position.set(wx, 10.2, HALL.zMin + .06); g.add(win);
+    const fr = new THREE.Mesh(new THREE.BoxGeometry(3.6, .12, .1), winFrameM);
+    fr.position.set(wx, 11.05, HALL.zMin + .08); g.add(fr);
+    const fr2 = fr.clone(); fr2.position.y = 9.35; g.add(fr2);
+    const mull = new THREE.Mesh(new THREE.BoxGeometry(.1, 1.7, .1), winFrameM);
+    mull.position.set(wx, 10.2, HALL.zMin + .08); g.add(mull);
+  }
   const sign = new THREE.Mesh(new THREE.PlaneGeometry(13, 1.7), new THREE.MeshBasicMaterial({
     map: textPlate('THE LITTLE FACTORY', { w: 1400, h: 180, bg: 'rgba(5,8,12,0)', fg: '#8fe8ff', border: null, font: '700 92px ui-monospace,monospace', sub: 'GENIOUS APPS · EST. MAR 2026', subFont: '600 40px ui-monospace,monospace' }),
     transparent: true,
@@ -238,13 +250,28 @@ class Belt {
 function makePlateTexture(num) {
   return textPlate('#' + num, { w: 128, h: 64, bg: 'rgba(6,12,20,0.9)', fg: '#8fe8ff', border: null, font: '700 40px ui-monospace,monospace' });
 }
+let _machineSkin = null;
+function machineSkin() {
+  if (_machineSkin) return _machineSkin;
+  _machineSkin = canvasTexture(128, 128, (g, w, h) => {
+    g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(0,0,0,0.35)'; g.lineWidth = 2;
+    g.strokeRect(8, 8, w - 16, h - 16);
+    g.beginPath(); g.moveTo(w / 2, 8); g.lineTo(w / 2, h - 8); g.stroke();
+    g.beginPath(); g.moveTo(8, h * .62); g.lineTo(w - 8, h * .62); g.stroke();
+    g.fillStyle = 'rgba(0,0,0,0.5)';
+    for (const [rx, ry] of [[14, 14], [w - 14, 14], [14, h - 14], [w - 14, h - 14]]) { g.beginPath(); g.arc(rx, ry, 3, 0, 7); g.fill(); }
+    g.fillStyle = 'rgba(0,0,0,0.18)'; g.fillRect(8, h * .62 + 6, w - 16, 8);
+  });
+  return _machineSkin;
+}
 export function buildMachine(pr) {
   const rand = seededRand(pr.n * 7919 + 13);
   const accent = ACCENTS[Math.floor(rand() * ACCENTS.length)];
   const g = new THREE.Group();
   const parts = [];
   const gun = new THREE.MeshStandardMaterial({ color: 0x333c48, roughness: .4, metalness: .75 });
-  const body = new THREE.MeshStandardMaterial({ color: 0x232b36, roughness: .5, metalness: .6 });
+  const body = new THREE.MeshStandardMaterial({ map: machineSkin(), color: 0x2c3540, roughness: .48, metalness: .6 });
   const dark = new THREE.MeshStandardMaterial({ color: C.gunD, roughness: .5, metalness: .7 });
   const glow = new THREE.MeshStandardMaterial({ color: accent, emissive: accent, emissiveIntensity: 1.5, roughness: .4 });
   const brass = new THREE.MeshStandardMaterial({ color: C.brass, roughness: .3, metalness: .8, emissive: C.brass, emissiveIntensity: .3 });
@@ -601,17 +628,29 @@ class WeldSparks extends Sparks {
   }
 }
 
-// ---------- dressing: pipes, fans, racks, barrels ----------
+// ---------- dressing: crane, pipes, fans, racks, barrels ----------
 function buildDressing(scene) {
   const g = new THREE.Group();
-  const pipeM = new THREE.MeshStandardMaterial({ color: 0x232b36, roughness: .45, metalness: .7 });
-  const pipes = [];
-  for (const [y, r] of [[3.2, .14], [3.7, .2], [4.15, .11]]) {
-    pipes.push(new THREE.CylinderGeometry(r, r, 46, 8).rotateZ(Math.PI / 2).translate(0, y, HALL.zMin + .5));
+  // overhead bridge crane spanning the hall over the line (scale cue)
+  const craneM = new THREE.MeshStandardMaterial({ color: 0x54431c, roughness: .55, metalness: .6, emissive: 0x8c6a1f, emissiveIntensity: .07 });
+  const craneD = new THREE.MeshStandardMaterial({ color: 0x232b36, roughness: .45, metalness: .7 });
+  const bridge = new THREE.Mesh(new THREE.BoxGeometry(1.8, .7, 22.5), craneM);
+  bridge.position.set(10.8, 10.3, -1); bridge.castShadow = true; g.add(bridge);
+  const bridgeStrip = new THREE.Mesh(new THREE.BoxGeometry(1.84, .08, 5.5), new THREE.MeshStandardMaterial({ color: 0xffd9a0, emissive: 0xffc978, emissiveIntensity: .9 }));
+  bridgeStrip.position.set(10.8, 9.9, -3); g.add(bridgeStrip);
+  const bridgeRib = new THREE.Mesh(new THREE.BoxGeometry(2, .16, 22.5), craneD);
+  bridgeRib.position.set(10.8, 10.75, -1); g.add(bridgeRib);
+  for (const rz of [10.4, -12.4]) {
+    const truck = new THREE.Mesh(new THREE.BoxGeometry(2.4, .55, 1.1), craneD);
+    truck.position.set(10.8, 9.85, rz); g.add(truck);
   }
-  for (const x of [-14, -2, 12]) pipes.push(new THREE.CylinderGeometry(.16, .16, 3.4, 8).translate(x, 1.6, HALL.zMin + .5));
-  for (const z of [-9, -3, 4]) pipes.push(new THREE.CylinderGeometry(.18, .18, 22, 8).rotateX(Math.PI / 2).translate(HALL.x - .5, 5.4, z - 2));
-  const pipeMesh = new THREE.Mesh(mergeGeometries(pipes), pipeM); pipeMesh.castShadow = true; g.add(pipeMesh);
+  const crab = new THREE.Mesh(new THREE.BoxGeometry(1.2, .8, 1.4), craneD);
+  crab.position.set(10.8, 9.7, -3.2); g.add(crab);
+  const hookCable = new THREE.Mesh(new THREE.CylinderGeometry(.03, .03, 3.2, 6), craneD);
+  hookCable.position.set(10.8, 7.9, -3.2); g.add(hookCable);
+  const hook = new THREE.Mesh(new THREE.BoxGeometry(.45, .45, .45), craneM);
+  hook.position.set(10.8, 6.2, -3.2); g.add(hook);
+  const pipeM = new THREE.MeshStandardMaterial({ color: 0x232b36, roughness: .5, metalness: .7 });
   // wall fans
   const fans = [];
   for (const fx of [-16, 16]) {
@@ -657,7 +696,7 @@ export function buildWorld(canvas, { lite = false } = {}) {
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.3;
+  renderer.toneMappingExposure = 1.45;
   renderer.shadowMap.enabled = !lite; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(C.bg);
@@ -671,9 +710,11 @@ export function buildWorld(canvas, { lite = false } = {}) {
   controls.maxPolarAngle = Math.PI * .53; controls.minPolarAngle = .12;
   controls.enablePan = true; controls.panSpeed = .7;
 
-  const hemi = new THREE.HemisphereLight(0x2e405c, 0x06080c, 1.0);
-  const fill1 = new THREE.PointLight(0x3a5a7c, 14, 26, 1.9); fill1.position.set(-6, 7, -4); scene.add(fill1);
-  const fill2 = new THREE.PointLight(0x3a5a7c, 12, 26, 1.9); fill2.position.set(8, 7, 4); scene.add(fill2); scene.add(hemi);
+  const hemi = new THREE.HemisphereLight(0x3a506e, 0x0a0e14, 1.3);
+  const fill1 = new THREE.PointLight(0x4a6a8c, 22, 28, 1.9); fill1.position.set(-6, 7, -4); scene.add(fill1);
+  const bayLight = new THREE.SpotLight(0xbfd9ea, 260, 26, .72, .9, 1.6); bayLight.position.set(-2, 11.4, -3.4); bayLight.target.position.set(-2, 0, -3.6); scene.add(bayLight); scene.add(bayLight.target);
+  const fill2 = new THREE.PointLight(0x4a6a8c, 18, 28, 1.9); fill2.position.set(8, 7, 4); scene.add(fill2); scene.add(hemi);
+  const wallWash = new THREE.PointLight(0x5a7ea6, 24, 22, 1.8); wallWash.position.set(14.5, 8.5, 6); scene.add(wallWash);
   const portalLight = new THREE.PointLight(0x4ade80, 30, 13, 1.8); portalLight.position.set(13.4, 2.6, 2); scene.add(portalLight);
   const intakeLight = new THREE.PointLight(0xf08a24, 26, 13, 1.8); intakeLight.position.set(-16.2, 2.6, 2); scene.add(intakeLight);
   const coreLight = new THREE.PointLight(0x39d5ff, 26, 14, 1.8); coreLight.position.set(18.2, 4, 7.5); scene.add(coreLight);
