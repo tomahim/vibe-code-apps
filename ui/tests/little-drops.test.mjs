@@ -4,3 +4,12 @@ import { pressureKpa, readDiscoveries, saveDiscoveries, stops, sources } from '.
 test('Little Drops pressure is linear and non-negative',()=>{assert.equal(pressureKpa(0),0);assert.equal(pressureKpa(20),196.20000000000002);assert.equal(pressureKpa(40),pressureKpa(20)*2);assert.equal(pressureKpa(-4),0);});
 test('Little Drops ignores damaged and unknown local progress',()=>{assert.deepEqual(readDiscoveries({getItem:()=>'{broken'}),[]);assert.deepEqual(readDiscoveries({getItem:()=>JSON.stringify(['source','unknown','source','tap'])}),['source','tap']);assert.deepEqual(readDiscoveries(null),[]);assert.doesNotThrow(()=>saveDiscoveries(null,['tap']));});
 test('Each journey stop has verified source metadata and a unique identifier',()=>{assert.equal(stops.length,5);assert.equal(new Set(stops.map(s=>s.id)).size,5);stops.forEach(s=>assert.ok(sources[s.source]?.url.startsWith('https://')));});
+import { reachableNodes, connectedEdges } from '../src/apps/little-drops/network.js';
+test('All eight valve combinations agree with the two-route connectivity rule',()=>{
+ for(const main of [false,true]) for(const home of [false,true]) for(const side of [false,true]) {
+  const valves={main,home,'loop-in':side}, reached=reachableNodes(valves),edges=connectedEdges(valves);
+  assert.equal(reached.has('house'),home&&(main||side));
+  assert.equal(reached.has('east'),main||side);
+  assert.equal(edges.has('main'),main);assert.equal(edges.has('home'),home&&(main||side));
+ }
+});
