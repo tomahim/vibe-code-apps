@@ -4,6 +4,8 @@ import Login from "../pages/Login.jsx";
 import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
+const StoryShelf = lazy(() => import("../apps/story-shelf/StoryShelf.jsx"));
+
 const News = lazy(() => import("../apps/news/News.jsx"));
 const LittleGrains = lazy(() => import("../apps/little-grains/LittleGrains.jsx"));
 
@@ -41,6 +43,10 @@ export default function App() {
 
   if (path === "/artifacts" || path.startsWith("/artifacts/")) {
     return <Suspense fallback={<div className="gallery-page">Opening the archive…</div>}><Artifacts path={path} /></Suspense>;
+  }
+
+  if (path === "/apps/story-shelf") {
+    return <Suspense fallback={<div>Opening the story room...</div>}><StoryShelf onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path === "/apps/news") {

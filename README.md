@@ -134,3 +134,10 @@ lists, archive/restore and newest-first pagination. Content **and archive state*
 stay in Notion. It requires an explicitly allowed signed-in account and a dedicated
 server-side Notion connection with Read content + Update content, never a browser
 token. See [setup, privacy and verification](docs/notion-news-reader.md).
+
+## The Story Room
+
+Open `/apps/story-shelf` from the gallery for a 3D bookshelf library with four
+original, five-page illustrated books about history, nature and mountains.
+Markdown and all pictures ship with the frontend; there is no new backend or
+service. See [content, sources, rendering and checks](ui/src/apps/story-shelf/README.md).

@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "the-printers-secret",
+    "title": "The Printer's Secret",
+    "category": "History",
+    "art": "printing",
+    "color": "#6a312c",
+    "subtitle": "A little letter. A very big change.",
+    "label": "Historical fiction \u00b7 Mainz, around 1450",
+    "model": "press"
+  },
+  {
+    "slug": "mary-and-the-stone-sea",
+    "title": "Mary & the Stone Sea",
+    "category": "History",
+    "art": "fossil",
+    "color": "#275d69",
+    "subtitle": "A shore full of questions.",
+    "label": "Historical fiction \u00b7 the world of Mary Anning",
+    "model": "fossil"
+  },
+  {
+    "slug": "the-acorns-big-adventure",
+    "title": "The Acorn's Big Adventure",
+    "category": "Nature",
+    "art": "forest",
+    "color": "#3c5940",
+    "subtitle": "Small things grow wonderful worlds.",
+    "label": "A woodland story \u00b7 oak life cycle",
+    "model": "tree"
+  },
+  {
+    "slug": "a-mountains-drop-of-water",
+    "title": "A Mountain's Drop of Water",
+    "category": "Mountains",
+    "art": "mountain",
+    "color": "#3d596e",
+    "subtitle": "From snowflake to stream, and home again.",
+    "label": "A nature journey \u00b7 the water cycle",
+    "model": "mountain"
+  }
+]
