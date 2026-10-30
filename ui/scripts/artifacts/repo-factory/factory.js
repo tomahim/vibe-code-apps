@@ -124,7 +124,7 @@ function buildHallShell(scene) {
     map: textPlate('THE LITTLE FACTORY', { w: 1400, h: 180, bg: 'rgba(5,8,12,0)', fg: '#8fe8ff', border: null, font: '700 92px ui-monospace,monospace', sub: 'GENIOUS APPS · EST. MAR 2026', subFont: '600 40px ui-monospace,monospace' }),
     transparent: true,
   }));
-  sign.position.set(7, 10.1, HALL.zMin + .1); g.add(sign);
+  sign.position.set(HALL.x - .12, 8.6, -3); sign.rotation.y = -Math.PI / 2; g.add(sign);
   // structural pillars with lit edges (front and back rows)
   const pilM = new THREE.MeshStandardMaterial({ color: 0x141a23, roughness: .55, metalness: .65 });
   const pilEdge = new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: 1.1 });
@@ -302,27 +302,44 @@ class RobotArm {
   constructor(scene, x, z, i) {
     this.i = i;
     const gun = new THREE.MeshStandardMaterial({ color: 0x2b333e, roughness: .35, metalness: .8 });
-    const accent = new THREE.MeshStandardMaterial({ color: C.orange, roughness: .4, metalness: .5, emissive: C.orange, emissiveIntensity: .6 });
-    const dark = new THREE.MeshStandardMaterial({ color: C.gunD, roughness: .5, metalness: .7 });
+    const gunD = new THREE.MeshStandardMaterial({ color: 0x1c232d, roughness: .45, metalness: .75 });
+    const accent = new THREE.MeshStandardMaterial({ color: 0xd97728, roughness: .45, metalness: .55, emissive: 0xd97728, emissiveIntensity: .5 });
+    const cableM = new THREE.MeshStandardMaterial({ color: 0x0c1016, roughness: .8, metalness: .3 });
     const g = this.group = new THREE.Group();
-    const base = new THREE.Mesh(new THREE.CylinderGeometry(.34, .42, .3, 10), dark); base.position.y = .15; g.add(base);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(.36, .035, 6, 20), new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: 1.2 }));
-    ring.rotation.x = Math.PI / 2; ring.position.y = .31; g.add(ring);
-    this.yaw = new THREE.Group(); this.yaw.position.y = .3; g.add(this.yaw);
-    const column = new THREE.Mesh(new THREE.CylinderGeometry(.16, .2, .9, 8), gun); column.position.y = .45; this.yaw.add(column);
-    const shoulder = new THREE.Mesh(new THREE.SphereGeometry(.2, 10, 8), accent); shoulder.position.y = .95; this.yaw.add(shoulder);
-    this.upper = new THREE.Group(); this.upper.position.y = .95; this.yaw.add(this.upper);
-    const ua = new THREE.Mesh(new THREE.BoxGeometry(1.15, .17, .17), gun); ua.position.x = .5; this.upper.add(ua);
-    const uaStrip = new THREE.Mesh(new THREE.BoxGeometry(1.1, .04, .04), new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: 1.6 })); uaStrip.position.set(.5, .1, 0); this.upper.add(uaStrip);
-    const elbow = new THREE.Mesh(new THREE.SphereGeometry(.15, 10, 8), accent); elbow.position.x = 1.05; this.upper.add(elbow);
-    this.fore = new THREE.Group(); this.fore.position.x = 1.05; this.upper.add(this.fore);
-    const fa = new THREE.Mesh(new THREE.BoxGeometry(.95, .13, .13), gun); fa.position.x = .42; this.fore.add(fa);
-    this.wrist = new THREE.Group(); this.wrist.position.x = .9; this.fore.add(this.wrist);
-    const tool = new THREE.Mesh(new THREE.CylinderGeometry(.05, .09, .3, 8), dark); tool.rotation.z = Math.PI / 2; tool.position.x = .12; this.wrist.add(tool);
+    // bolted pedestal
+    const plate = new THREE.Mesh(new THREE.CylinderGeometry(.52, .58, .12, 12), gunD); plate.position.y = .06; g.add(plate);
+    const ped = new THREE.Mesh(new THREE.CylinderGeometry(.34, .44, .5, 10), gun); ped.position.y = .36; g.add(ped);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(.46, .04, 6, 24), new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: 1.2 }));
+    ring.rotation.x = Math.PI / 2; ring.position.y = .13; g.add(ring);
+    // rotating turret with side motor
+    this.yaw = new THREE.Group(); this.yaw.position.y = .62; g.add(this.yaw);
+    const turret = new THREE.Mesh(new THREE.BoxGeometry(.62, .55, .62), accent); turret.position.y = .28; this.yaw.add(turret);
+    const motor = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, .34, 10), gunD); motor.rotation.z = Math.PI / 2; motor.position.set(-.4, .28, 0); this.yaw.add(motor);
+    const shoulder = new THREE.Mesh(new THREE.CylinderGeometry(.22, .22, .7, 10), gunD); shoulder.rotation.x = Math.PI / 2; shoulder.position.y = .62; this.yaw.add(shoulder);
+    // upper arm: tapered housing + piston
+    this.upper = new THREE.Group(); this.upper.position.y = .62; this.yaw.add(this.upper);
+    const ua = new THREE.Mesh(new THREE.BoxGeometry(1.5, .3, .26), gun); ua.position.x = .62; this.upper.add(ua);
+    const uaTop = new THREE.Mesh(new THREE.BoxGeometry(1.1, .12, .18), gunD); uaTop.position.set(.6, .22, 0); this.upper.add(uaTop);
+    const uaStrip = new THREE.Mesh(new THREE.BoxGeometry(1.3, .05, .05), new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: 1.6 }));
+    uaStrip.position.set(.62, -.17, 0); this.upper.add(uaStrip);
+    const piston = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, .9, 8), gunD); piston.rotation.z = 1.1; piston.position.set(.15, -.3, .18); this.upper.add(piston);
+    const elbow = new THREE.Mesh(new THREE.CylinderGeometry(.18, .18, .5, 10), gunD); elbow.rotation.x = Math.PI / 2; elbow.position.x = 1.42; this.upper.add(elbow);
+    const elbowCap = new THREE.Mesh(new THREE.SphereGeometry(.14, 10, 8), accent); elbowCap.position.set(1.42, 0, .26); this.upper.add(elbowCap);
+    // forearm with cable loop
+    this.fore = new THREE.Group(); this.fore.position.x = 1.42; this.upper.add(this.fore);
+    const fa = new THREE.Mesh(new THREE.BoxGeometry(1.1, .2, .18), gun); fa.position.x = .5; this.fore.add(fa);
+    const faGuard = new THREE.Mesh(new THREE.BoxGeometry(.7, .1, .24), accent); faGuard.position.set(.45, -.14, 0); this.fore.add(faGuard);
+    const cable = new THREE.Mesh(new THREE.TorusGeometry(.42, .035, 6, 14, Math.PI * 1.2), cableM);
+    cable.position.set(.3, .3, 0); cable.rotation.set(0, 0, .6); this.fore.add(cable);
+    // wrist + welding torch + gripper fingers
+    this.wrist = new THREE.Group(); this.wrist.position.x = 1.05; this.fore.add(this.wrist);
+    const wHub = new THREE.Mesh(new THREE.SphereGeometry(.13, 10, 8), gunD); this.wrist.add(wHub);
+    const torch = new THREE.Mesh(new THREE.CylinderGeometry(.035, .09, .42, 8), gun); torch.rotation.z = Math.PI / 2; torch.position.x = .24; this.wrist.add(torch);
+    for (const s of [-1, 1]) { const fing = new THREE.Mesh(new THREE.BoxGeometry(.22, .05, .05), gunD); fing.position.set(.3, s * .09, 0); this.wrist.add(fing); }
     this.tip = new THREE.Mesh(new THREE.SphereGeometry(.07, 8, 6), new THREE.MeshBasicMaterial({ color: 0x9feaff }));
-    this.tip.position.x = .3; this.wrist.add(this.tip);
+    this.tip.position.x = .48; this.wrist.add(this.tip);
     g.position.set(x, 0, z);
-    g.scale.setScalar(1.35);
+    g.scale.setScalar(1.45);
     g.traverse(o => { if (o.isMesh) o.castShadow = true; });
     scene.add(g);
     this._tipWorld = new THREE.Vector3();
@@ -332,9 +349,9 @@ class RobotArm {
     const sp = working ? 2.6 : 1;
     const i = this.i;
     this.yaw.rotation.y = Math.sin(t * .55 * sp + i * 1.7) * (working ? .85 : .35);
-    this.upper.rotation.z = .55 + Math.sin(t * .8 * sp + i * 2.3) * (working ? .38 : .12);
-    this.fore.rotation.z = -1.05 + Math.sin(t * 1.05 * sp + i * 3.1) * (working ? .45 : .15);
-    this.wrist.rotation.z = .5 + Math.sin(t * 1.6 * sp + i) * .3;
+    this.upper.rotation.z = .5 + Math.sin(t * .8 * sp + i * 2.3) * (working ? .34 : .1);
+    this.fore.rotation.z = -1 + Math.sin(t * 1.05 * sp + i * 3.1) * (working ? .42 : .13);
+    this.wrist.rotation.z = .45 + Math.sin(t * 1.6 * sp + i) * .3;
     this.tip.material.color.setHex(working && Math.sin(t * 9 + i * 2) > .2 ? 0xd8f6ff : 0x2a4a5a);
     this.tip.scale.setScalar(working && Math.sin(t * 9 + i * 2) > .2 ? 1.6 : 1);
   }
@@ -371,6 +388,17 @@ class Gantry {
 }
 
 // ---------- moving spotlights ----------
+let _beamGrad = null;
+function beamGradient() {
+  if (_beamGrad) return _beamGrad;
+  _beamGrad = canvasTexture(8, 128, (g, w, h) => {
+    const gr = g.createLinearGradient(0, 0, 0, h);
+    gr.addColorStop(0, '#ffffff'); gr.addColorStop(.55, '#999999'); gr.addColorStop(1, '#000000');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  });
+  _beamGrad.colorSpace = THREE.NoColorSpace;
+  return _beamGrad;
+}
 class SpotRig {
   constructor(scene, { x, z, color, phase, rangeX, rangeZ, cx, cz, shadow, lite }) {
     this.phase = phase; this.rangeX = rangeX; this.rangeZ = rangeZ; this.cx = cx; this.cz = cz;
@@ -381,7 +409,8 @@ class SpotRig {
     lamp.position.y = -.3; head.add(lamp);
     head.position.set(x, HALL.h - .8, z);
     scene.add(head);
-    const light = this.light = new THREE.SpotLight(color, lite ? 480 : 720, 42, .34, .5, 1.5);
+    const pivotAdd = [];
+    const light = this.light = new THREE.SpotLight(color, lite ? 480 : 640, 42, .3, .8, 1.5);
     light.position.copy(head.position).y -= .4;
     if (shadow) {
       light.castShadow = true;
@@ -394,12 +423,18 @@ class SpotRig {
     light.target = target;
     const len = HALL.h - 1.2;
     const cone = this.cone = new THREE.Mesh(
-      new THREE.CylinderGeometry(.12, 2.2, len, 20, 1, true),
-      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .05, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false }));
+      new THREE.CylinderGeometry(.12, 2.4, len, 20, 1, true),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .12, alphaMap: beamGradient(), blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false }));
     cone.position.y = -len / 2;
+    const core = new THREE.Mesh(
+      new THREE.CylinderGeometry(.06, 1.1, len, 14, 1, true),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .14, alphaMap: beamGradient(), blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false }));
+    core.position.y = -len / 2;
+    pivotAdd.push(core);
     const pivot = this.pivot = new THREE.Group();
     pivot.position.copy(light.position);
     pivot.add(cone);
+    for (const extra of pivotAdd) pivot.add(extra);
     scene.add(pivot);
     this.pool = new THREE.Mesh(new THREE.CircleGeometry(2.1, 24), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .16, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
     this.pool.rotation.x = -Math.PI / 2; this.pool.position.y = .04;
@@ -566,6 +601,56 @@ class WeldSparks extends Sparks {
   }
 }
 
+// ---------- dressing: pipes, fans, racks, barrels ----------
+function buildDressing(scene) {
+  const g = new THREE.Group();
+  const pipeM = new THREE.MeshStandardMaterial({ color: 0x232b36, roughness: .45, metalness: .7 });
+  const pipes = [];
+  for (const [y, r] of [[3.2, .14], [3.7, .2], [4.15, .11]]) {
+    pipes.push(new THREE.CylinderGeometry(r, r, 46, 8).rotateZ(Math.PI / 2).translate(0, y, HALL.zMin + .5));
+  }
+  for (const x of [-14, -2, 12]) pipes.push(new THREE.CylinderGeometry(.16, .16, 3.4, 8).translate(x, 1.6, HALL.zMin + .5));
+  for (const z of [-9, -3, 4]) pipes.push(new THREE.CylinderGeometry(.18, .18, 22, 8).rotateX(Math.PI / 2).translate(HALL.x - .5, 5.4, z - 2));
+  const pipeMesh = new THREE.Mesh(mergeGeometries(pipes), pipeM); pipeMesh.castShadow = true; g.add(pipeMesh);
+  // wall fans
+  const fans = [];
+  for (const fx of [-16, 16]) {
+    const fg = new THREE.Group();
+    const housing = new THREE.Mesh(new THREE.CylinderGeometry(.85, .85, .3, 16), pipeM);
+    housing.rotation.x = Math.PI / 2; fg.add(housing);
+    const rimF = new THREE.Mesh(new THREE.TorusGeometry(.85, .05, 6, 24), new THREE.MeshStandardMaterial({ color: C.cyan, emissive: C.cyan, emissiveIntensity: .9 }));
+    fg.add(rimF);
+    const blades = new THREE.Group();
+    for (let k = 0; k < 3; k++) { const bl = new THREE.Mesh(new THREE.BoxGeometry(.7, .18, .04), pipeM); bl.rotation.z = k * Math.PI * 2 / 3; blades.add(bl); }
+    blades.position.z = .18; fg.add(blades);
+    fg.position.set(fx, 8.6, HALL.zMin + .35);
+    g.add(fg); fans.push(blades);
+  }
+  // storage racks along the back wall corners
+  const rackM = new THREE.MeshStandardMaterial({ color: 0x1a222d, roughness: .5, metalness: .7 });
+  const boxM = new THREE.MeshStandardMaterial({ color: 0x35415a, roughness: .6, metalness: .5, emissive: 0x1a8fb8, emissiveIntensity: .18 });
+  const racks = [], boxes = [];
+  const rand = seededRand(77);
+  for (const rx of [-19.5, -16.5, 15, 18]) {
+    for (let lv = 0; lv < 3; lv++) {
+      racks.push(new THREE.BoxGeometry(2.4, .08, 1).translate(rx, .5 + lv * 1.05, -12.4));
+      for (let bx = 0; bx < 3; bx++) if (rand() > .3)
+        boxes.push(new THREE.BoxGeometry(.55 + rand() * .25, .5 + rand() * .3, .6).translate(rx - .8 + bx * .8, .83 + lv * 1.05, -12.4));
+    }
+    for (const px of [-1.15, 1.15]) racks.push(new THREE.BoxGeometry(.08, 3.3, 1).translate(rx + px, 1.65, -12.4));
+  }
+  const rackMesh = new THREE.Mesh(mergeGeometries(racks), rackM); rackMesh.castShadow = true; g.add(rackMesh);
+  const boxMesh = new THREE.Mesh(mergeGeometries(boxes), boxM); boxMesh.castShadow = true; g.add(boxMesh);
+  // barrel clusters
+  const barrelM = new THREE.MeshStandardMaterial({ color: 0x2c343f, roughness: .45, metalness: .7 });
+  const barrels = [];
+  for (const [bx, bz, n] of [[-21.5, -11, 4], [20.5, 2.5, 3], [-21, 8.5, 2]])
+    for (let i = 0; i < n; i++) barrels.push(new THREE.CylinderGeometry(.34, .34, .85, 10).translate(bx + (i % 2) * .75, .42, bz + Math.floor(i / 2) * .75));
+  const barrelMesh = new THREE.Mesh(mergeGeometries(barrels), barrelM); barrelMesh.castShadow = true; g.add(barrelMesh);
+  scene.add(g);
+  return { fans };
+}
+
 // ---------- world ----------
 export function buildWorld(canvas, { lite = false } = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: false });
@@ -578,15 +663,17 @@ export function buildWorld(canvas, { lite = false } = {}) {
   scene.background = new THREE.Color(C.bg);
   scene.fog = new THREE.FogExp2(C.bg, .026);
   const camera = new THREE.PerspectiveCamera(lite ? 50 : 44, 1, .1, 120);
-  camera.position.set(...(lite ? [-16, 9.5, 16] : [-19.5, 7.5, 14]));
+  camera.position.set(...(lite ? [-16, 9.5, 16] : [-19, 8, 15]));
   const controls = new OrbitControls(camera, canvas);
-  controls.target.set(...(lite ? [2, 2, -1] : [4.5, 1.8, -0.5]));
+  controls.target.set(...(lite ? [2, 2, -1] : [5, 2, -0.5]));
   controls.enableDamping = true; controls.dampingFactor = .08;
   controls.minDistance = 5; controls.maxDistance = 23;
   controls.maxPolarAngle = Math.PI * .53; controls.minPolarAngle = .12;
   controls.enablePan = true; controls.panSpeed = .7;
 
-  const hemi = new THREE.HemisphereLight(0x2a3c55, 0x05070a, .85); scene.add(hemi);
+  const hemi = new THREE.HemisphereLight(0x2e405c, 0x06080c, 1.0);
+  const fill1 = new THREE.PointLight(0x3a5a7c, 14, 26, 1.9); fill1.position.set(-6, 7, -4); scene.add(fill1);
+  const fill2 = new THREE.PointLight(0x3a5a7c, 12, 26, 1.9); fill2.position.set(8, 7, 4); scene.add(fill2); scene.add(hemi);
   const portalLight = new THREE.PointLight(0x4ade80, 30, 13, 1.8); portalLight.position.set(13.4, 2.6, 2); scene.add(portalLight);
   const intakeLight = new THREE.PointLight(0xf08a24, 26, 13, 1.8); intakeLight.position.set(-16.2, 2.6, 2); scene.add(intakeLight);
   const coreLight = new THREE.PointLight(0x39d5ff, 26, 14, 1.8); coreLight.position.set(18.2, 4, 7.5); scene.add(coreLight);
@@ -594,6 +681,7 @@ export function buildWorld(canvas, { lite = false } = {}) {
   const rim = new THREE.DirectionalLight(0x4a6a8c, .5); rim.position.set(-10, 18, -12); scene.add(rim);
 
   buildHallShell(scene);
+  const dressing = buildDressing(scene);
   const hall = { chimneyTop: new THREE.Vector3(13.6, 6.4, 2) };
 
   const sup = gateFrame('SUPPLIES', '#f08a24', 0xf08a24); sup.group.position.set(-16.4, 0, 2); scene.add(sup.group);
@@ -672,6 +760,7 @@ export function buildWorld(canvas, { lite = false } = {}) {
         if (b.busy && !welding) welding = b;
       }
       for (const gn of gantries) gn.update(dt, t);
+      for (const bl of dressing.fans) bl.rotation.z += dt * 2.4;
       for (const r of rigs) r.update(dt, t);
       monument.update(dt, t);
       smoke.update(dt); sparks.update(dt); weldSparks.update(dt);

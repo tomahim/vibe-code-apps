@@ -287,7 +287,7 @@ $('scrub').addEventListener('input', () => {
 });
 $('zoom-in').addEventListener('click', () => dolly(.8));
 $('zoom-out').addEventListener('click', () => dolly(1.25));
-$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [2, 2, -1] : [4.5, 1.8, -0.5])); introT = 0; });
+$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [2, 2, -1] : [5, 2, -0.5])); introT = 0; });
 function dolly(f) {
   const c = world.camera, t = world.controls.target;
   const v = c.position.clone().sub(t).multiplyScalar(f);
@@ -371,7 +371,7 @@ function setDataset(data) {
 }
 
 // ---------- main loop ----------
-const CAM0 = world.lite ? [-16, 9.5, 16] : [-19.5, 7.5, 14];
+const CAM0 = world.lite ? [-16, 9.5, 16] : [-19, 8, 15];
 let last = performance.now(), uiAccum = 0, introT = reducedMotion() ? 0 : 1;
 function frame(now) {
   requestAnimationFrame(frame);
