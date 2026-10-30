@@ -446,5 +446,8 @@ window.__factory = {
   stats: () => ({ calls: world.renderer.info.render.calls, triangles: world.renderer.info.render.triangles }),
   info(n) { const pr = ds.prs.find(p => p.n === n); if (pr) showInfo(pr); },
   guest: (name) => loadGuestRepo(name, () => {}).then(d => { setDataset(d); return d.prs.length; }),
-  ready: () => true,
+  ready: () => events.length > 0,
+  camera: () => world.camera.position.toArray(),
+  target: () => world.controls.target.toArray(),
+  view: (i) => flyTo(i),
 };
