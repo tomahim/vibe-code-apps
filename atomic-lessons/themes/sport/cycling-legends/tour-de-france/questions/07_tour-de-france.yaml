@@ -1,0 +1,19 @@
+id: 7e7a5364-32ff-430f-aa97-d9fb1a572af8
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who broke Merckx's record of 34 Tour stage wins?
+choices:
+- id: 80878b7a-f77c-4ed8-9c1e-3c31a9373705
+  text: Peter Sagan
+- id: 48336aaf-0db3-41e0-b91b-0a4786938cb4
+  text: Mark Cavendish
+- id: 9b97e3e8-1106-4401-99db-e9736c65caa1
+  text: André Greipel
+- id: 47a9cc8a-0109-4c87-b59a-5ce5036e0b38
+  text: Tadej Pogačar
+correct_choice_ids:
+- 48336aaf-0db3-41e0-b91b-0a4786938cb4
+explanation: Cavendish won his 35th stage in 2024.
+archived: false

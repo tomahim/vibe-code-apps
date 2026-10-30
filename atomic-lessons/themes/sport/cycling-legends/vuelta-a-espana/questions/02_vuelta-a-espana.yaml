@@ -1,0 +1,19 @@
+id: 63daf7a1-77d2-45e3-a3c4-7d553c317684
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Who won the first Vuelta?
+choices:
+- id: 53e22511-4763-4705-9278-67c4f2f00e58
+  text: Mariano Cañardo
+- id: 541661bb-98ca-4b32-af33-02f9f199e71d
+  text: Gustaaf Deloor
+- id: a4e21df3-83b3-4983-8d64-f3ef57c0735c
+  text: Julián Berrendero
+- id: cc0606d7-8b2b-4b83-9f36-53e05b6fda75
+  text: Federico Bahamontes
+correct_choice_ids:
+- 541661bb-98ca-4b32-af33-02f9f199e71d
+explanation: Belgium's Gustaaf Deloor beat Cañardo in the first duel.
+archived: false

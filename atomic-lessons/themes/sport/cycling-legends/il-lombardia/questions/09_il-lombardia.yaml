@@ -1,0 +1,9 @@
+id: d5bd1870-f00e-414a-8377-ca87eaa5f2b9
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: In which year did Pogačar win his first Lombardia?
+accepted_answers:
+- '2021'
+explanation: His streak ran 2021 through 2025.
+archived: false

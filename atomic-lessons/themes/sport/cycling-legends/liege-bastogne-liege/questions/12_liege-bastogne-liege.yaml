@@ -1,0 +1,11 @@
+id: 7b19e5c8-bbcb-49c0-8999-d1c36c599260
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Who won the first three editions of the race?
+accepted_answers:
+- Léon Houa
+- Leon Houa
+- Houa
+explanation: Léon Houa won in 1892, 1893 and 1894.
+archived: false

@@ -1,0 +1,10 @@
+id: ee6af324-7d6a-4c67-be0d-befd9e35ebdd
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: What two wars interrupted the early Vuelta? Answer with the first.
+accepted_answers:
+- Spanish Civil War
+- the Spanish Civil War
+explanation: The Civil War and then World War II stopped the race for years.
+archived: false

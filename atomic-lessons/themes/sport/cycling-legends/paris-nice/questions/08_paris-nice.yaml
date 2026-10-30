@@ -1,0 +1,19 @@
+id: 1b29170d-5852-46d4-bf3b-6e64f02e8f1e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What did the 2003 death of Andrey Kivilev lead to?
+choices:
+- id: d437cb62-534d-4a65-92ff-ff512cfd187e
+  text: Radio bans
+- id: df530129-e172-4d9a-8927-a4f0a5c37351
+  text: Compulsory helmets in pro racing
+- id: 170e42e2-6b75-4d74-b7dd-ab36e2ad126d
+  text: Shorter stages
+- id: d500c671-55b7-4941-b609-f66f70252dfd
+  text: Neutralised descents
+correct_choice_ids:
+- df530129-e172-4d9a-8927-a4f0a5c37351
+explanation: The UCI made helmets compulsory, a landmark safety change.
+archived: false

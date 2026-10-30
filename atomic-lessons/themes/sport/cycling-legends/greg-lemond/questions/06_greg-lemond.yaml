@@ -1,0 +1,10 @@
+id: 4f6fbe2f-c8eb-48c1-818e-14195c92ea20
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many Tours de France did LeMond miss after the shooting?
+accepted_answers:
+- '2'
+- two
+explanation: He missed the 1987 and 1988 Tours.
+archived: false

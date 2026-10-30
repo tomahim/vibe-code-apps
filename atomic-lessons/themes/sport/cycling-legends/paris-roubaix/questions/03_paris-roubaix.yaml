@@ -1,0 +1,10 @@
+id: a571fde9-4dce-48c5-a357-57787573c7b9
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: From which town has the race started since 1977?
+accepted_answers:
+- Compiègne
+- Compiegne
+explanation: Compiègne, north-east of Paris.
+archived: false

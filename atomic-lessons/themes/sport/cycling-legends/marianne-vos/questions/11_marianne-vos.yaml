@@ -1,0 +1,19 @@
+id: f41c62aa-51f9-4e6a-a7b0-381f62816164
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: To whom has Vos been compared as the finest cyclist of her generation?
+choices:
+- id: 72b18e4b-2b9a-4af7-914c-db6f52475331
+  text: Jacques Anquetil
+- id: dfa4b5c7-8c20-4405-9721-66b43af4cdfc
+  text: Eddy Merckx
+- id: eafd460a-a6f9-467a-b36d-df79fc0249a4
+  text: Bernard Hinault
+- id: 39f5892f-2651-4624-8f17-09d7512261b4
+  text: Fausto Coppi
+correct_choice_ids:
+- dfa4b5c7-8c20-4405-9721-66b43af4cdfc
+explanation: Commentators have compared her to Eddy Merckx.
+archived: false

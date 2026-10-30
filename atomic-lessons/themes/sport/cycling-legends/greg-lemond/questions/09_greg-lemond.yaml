@@ -1,0 +1,10 @@
+id: bb691322-b235-43ea-b97c-bd1757823deb
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: By how many seconds did LeMond win the 1989 Tour de France?
+accepted_answers:
+- '8'
+- eight
+explanation: Eight seconds, the smallest margin in Tour history.
+archived: false

@@ -1,0 +1,19 @@
+id: b8570678-eb90-4a43-87a2-775db3e1e925
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What was Pogačar's result at his first Grand Tour, the 2019 Vuelta?
+choices:
+- id: 6708e9ef-1ea4-4ae0-a77a-d4c41620d54a
+  text: He abandoned
+- id: 11634c98-03ee-4695-9699-c015713641d7
+  text: Third overall with three stage wins
+- id: af6c8946-a069-44e5-8e6f-6a04c77a28f2
+  text: 50th
+- id: c6662455-79ec-405f-bf92-886da6fd06aa
+  text: Second without stages
+correct_choice_ids:
+- 11634c98-03ee-4695-9699-c015713641d7
+explanation: Third at twenty years old, with three stage wins.
+archived: false

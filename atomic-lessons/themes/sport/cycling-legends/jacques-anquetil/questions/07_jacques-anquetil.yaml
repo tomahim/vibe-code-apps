@@ -1,0 +1,19 @@
+id: 6b9e9259-a6c6-47d8-a186-124ec78144eb
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How many times did Anquetil win the Grand Prix des Nations time trial?
+choices:
+- id: 97b8d8e4-e9d9-4926-9418-e4ca7bf3eb87
+  text: Five
+- id: 3d483542-910a-4f7c-ac94-37507cc16bda
+  text: Seven
+- id: fdcbef39-e94d-4152-b58b-52df8fc38b0c
+  text: Nine
+- id: dcb9c9ea-000e-417c-9cd3-66e8d83a767a
+  text: Twelve
+correct_choice_ids:
+- fdcbef39-e94d-4152-b58b-52df8fc38b0c
+explanation: Nine wins, a record for that prestigious time trial.
+archived: false

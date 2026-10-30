@@ -1,0 +1,19 @@
+id: 279c214a-18ea-4dd8-b8ef-93f00dcd908d
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What did Pogačar equal by winning the 2026 Tour de France?
+choices:
+- id: cf90d495-1cfc-4f14-8517-ba7dcbb91005
+  text: Merckx's eleven Grand Tours
+- id: bd3488d0-e4a2-46ae-b3f9-9cfca35f18e9
+  text: The record of five Tour wins
+- id: 815f37f5-e1a5-4ec3-80b0-5cfda8dc8512
+  text: Coppi's Lombardia record
+- id: 3afe64be-9ee5-4c82-b29a-c43f95003a68
+  text: The stage-win record
+correct_choice_ids:
+- bd3488d0-e4a2-46ae-b3f9-9cfca35f18e9
+explanation: 'Five Tours: Anquetil, Merckx, Hinault, Indurain, and now Pogačar.'
+archived: false

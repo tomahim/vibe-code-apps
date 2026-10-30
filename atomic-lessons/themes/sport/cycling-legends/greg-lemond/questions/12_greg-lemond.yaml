@@ -1,0 +1,9 @@
+id: 6d01213b-9ab3-4c7a-94d0-17ddaffd477a
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which year did LeMond win his third and final Tour?
+accepted_answers:
+- '1990'
+explanation: His last Tour victory came in 1990.
+archived: false

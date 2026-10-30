@@ -1,0 +1,19 @@
+id: 9628033e-a4e7-419e-92bc-02d97e404a7b
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What happened at the 1904 Tour?
+choices:
+- id: 8acd50c8-15b6-4de9-87b5-f65ec5563226
+  text: It was cancelled
+- id: 74342f49-2389-45a4-8a46-05c77cea0bcf
+  text: The first four finishers were disqualified for cheating
+- id: 3e43fd18-7265-450f-85cb-8f525985c115
+  text: It was won by a woman
+- id: 9393b23b-19c5-4fa0-a8d9-321b02a8da2e
+  text: It ended in a tie
+correct_choice_ids:
+- 74342f49-2389-45a4-8a46-05c77cea0bcf
+explanation: Cheating was so widespread that the top four were thrown out.
+archived: false

@@ -1,0 +1,19 @@
+id: a3d9759b-aecb-4d99-a19d-d9c180d72ed4
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What does the Tour record book show for 1999-2005?
+choices:
+- id: 0ccb9369-47b2-4b9c-ac8f-3c4950805c35
+  text: Armstrong as winner
+- id: 69bd01a4-bf73-4ba4-b5bd-8ad5f110f915
+  text: The runner-up as winner
+- id: 537d3719-957c-47fb-a977-9b896bb43d31
+  text: No official winner
+- id: bda09796-40b8-43ef-af9c-a43d3a1d9b69
+  text: Titles shared
+correct_choice_ids:
+- 537d3719-957c-47fb-a977-9b896bb43d31
+explanation: The stripped titles were deliberately not reallocated.
+archived: false

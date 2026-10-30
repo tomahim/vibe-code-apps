@@ -1,0 +1,19 @@
+id: fea9a4e6-f42f-483a-8120-146da4237980
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What did Hinault say about Roubaix despite winning it?
+choices:
+- id: 5bd0ca85-5b85-48da-a05b-33f65903eb2f
+  text: It is perfect
+- id: 6c2214c6-ebe0-4438-9ac3-6299b02285a9
+  text: He called it absurd and hated the cobbles
+- id: 8c24f140-724b-4eb8-870f-1f49a719c6dc
+  text: It is easy
+- id: b6e021f5-7f1b-455f-ac97-aede1804e1d9
+  text: Nothing
+correct_choice_ids:
+- 6c2214c6-ebe0-4438-9ac3-6299b02285a9
+explanation: He won in 1981 yet openly despised the race.
+archived: false

@@ -1,0 +1,19 @@
+id: 3b102183-0d3a-46ad-9ad6-3495718bf6fb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Who was Anquetil's great rival at the 1964 Tour?
+choices:
+- id: 2a93f9ee-31f1-41af-b416-f6dfc077f084
+  text: Federico Bahamontes
+- id: 736c2b4b-d1f3-4450-b568-02561e3f2a3a
+  text: Charly Gaul
+- id: 4365df09-7373-4812-8196-2c2ee4e89dba
+  text: Raymond Poulidor
+- id: ac9f749d-4114-4d52-a953-efa0503f231c
+  text: Rik Van Looy
+correct_choice_ids:
+- 4365df09-7373-4812-8196-2c2ee4e89dba
+explanation: Poulidor climbed the Puy-de-Dôme shoulder to shoulder with him and lost by 55 seconds.
+archived: false

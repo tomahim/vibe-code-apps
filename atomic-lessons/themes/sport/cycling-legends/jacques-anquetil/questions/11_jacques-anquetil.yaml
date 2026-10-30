@@ -1,0 +1,19 @@
+id: 84bafa1e-5376-4670-a4d3-bf95d426724f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which Grand Tour did Anquetil win in 1963?
+choices:
+- id: 26a87abb-c290-43d8-8022-47021659d8c1
+  text: The Tour de France
+- id: a6861ec4-3abb-4269-94f5-4776342264f5
+  text: The Giro d'Italia
+- id: 2393d490-7c32-46a7-a0ff-8f6ece1e85ba
+  text: The Vuelta a España
+- id: c92c4d6e-25e9-4baf-a6d5-721084611caf
+  text: None
+correct_choice_ids:
+- 2393d490-7c32-46a7-a0ff-8f6ece1e85ba
+explanation: He won the 1963 Vuelta a España; his Giros came in 1960 and 1964.
+archived: false

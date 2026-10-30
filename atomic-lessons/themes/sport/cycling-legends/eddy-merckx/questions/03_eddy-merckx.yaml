@@ -1,0 +1,19 @@
+id: e5e48bba-1963-4ed2-9a97-ae6c20dab2ab
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What nickname did Merckx earn for his refusal to let others win?
+choices:
+- id: f2f64b69-bb1d-4952-8b7d-6b965ec35ff6
+  text: The Badger
+- id: c1292e33-102b-4ae1-94e9-64284d844542
+  text: The Eagle
+- id: 43fafed9-7658-4d04-bb7e-10fccf08acb5
+  text: The Cannibal
+- id: 153b261d-233f-4021-901d-8feef9951e14
+  text: The Lion
+correct_choice_ids:
+- 43fafed9-7658-4d04-bb7e-10fccf08acb5
+explanation: A teammate's daughter called him the Cannibal, and it stuck.
+archived: false

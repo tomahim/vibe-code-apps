@@ -1,0 +1,11 @@
+id: e42453e7-8675-49fa-a59d-ef51413f77bc
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Which race did Pogačar win in 2018 that traditionally reveals future Tour champions?
+accepted_answers:
+- Tour de l'Avenir
+- the Tour de l'Avenir
+- Avenir
+explanation: The Tour de l'Avenir, the amateur Tour de France.
+archived: false

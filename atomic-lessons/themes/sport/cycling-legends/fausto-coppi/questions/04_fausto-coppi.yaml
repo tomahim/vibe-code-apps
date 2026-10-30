@@ -1,0 +1,19 @@
+id: 2b9f8c29-ea3f-4a7d-b472-afdeb273b40c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What record did Coppi set in Milan in November 1942?
+choices:
+- id: ca8cd97b-f123-464e-b7bf-cf8eea0082e4
+  text: The hour record
+- id: 6ce75958-daad-4da6-9ac3-32be154f25a3
+  text: The flying kilometre
+- id: 58e7532a-9c33-4217-bb78-3cde4f9fdd33
+  text: The 100 km record
+- id: f0c1573f-13a9-425e-b926-8634c1ccfeef
+  text: The pursuit record
+correct_choice_ids:
+- ca8cd97b-f123-464e-b7bf-cf8eea0082e4
+explanation: He rode 45.798 km in one hour, a record that lasted fourteen years.
+archived: false

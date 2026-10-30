@@ -1,0 +1,11 @@
+id: ed7cc74e-231f-45b6-8093-b577bf55a716
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: Who won three consecutive editions from 2024 to 2026?
+accepted_answers:
+- Tadej Pogačar
+- Pogačar
+- Pogacar
+explanation: Pogačar, attacking on La Redoute each time.
+archived: false

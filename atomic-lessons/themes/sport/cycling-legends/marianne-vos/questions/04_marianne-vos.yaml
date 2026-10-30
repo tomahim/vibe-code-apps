@@ -1,0 +1,19 @@
+id: 1fb66eb8-b49b-44b9-9882-8d757a447284
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How many cyclo-cross world titles has Vos won?
+choices:
+- id: 8e4a6f82-c33a-4eca-90fa-e48c3dc93d12
+  text: Five
+- id: 62c79fb3-c3b1-4f9d-96cd-89a6881f8386
+  text: Six
+- id: edd68c6d-4854-4cce-82bb-dc96f51c54b5
+  text: Seven
+- id: d4786d10-1982-40c5-b078-cb6c0cec08e2
+  text: Eight
+correct_choice_ids:
+- d4786d10-1982-40c5-b078-cb6c0cec08e2
+explanation: Eight, from 2006 to 2022.
+archived: false

@@ -1,0 +1,9 @@
+id: 49813d23-738f-4e59-8465-213948961bf7
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which year was the Tour de France Femmes relaunched?
+accepted_answers:
+- '2022'
+explanation: The women's Tour returned in 2022 as an eight-day race.
+archived: false

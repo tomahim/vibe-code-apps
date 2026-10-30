@@ -1,0 +1,19 @@
+id: 657905c0-ce57-4e87-8264-81c28cf90e88
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who joined the three-win club in 2026?
+choices:
+- id: 4af315b0-20e4-4807-b54f-867bf6a7fe7f
+  text: Mathieu van der Poel
+- id: bb6e0f50-976e-40d1-b4ad-36bc5e52071d
+  text: Tadej Pogačar
+- id: 88828c08-94bd-4b4a-8b2d-2eac92d7d193
+  text: Wout van Aert
+- id: d8dad5e1-b523-4388-b7a7-17b28ed95e93
+  text: Mads Pedersen
+correct_choice_ids:
+- bb6e0f50-976e-40d1-b4ad-36bc5e52071d
+explanation: Pogačar won his third Ronde in 2026.
+archived: false

@@ -1,0 +1,9 @@
+id: 7524dc9c-319f-4431-8e71-0944a3061b61
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which year did Pogačar win the Giro, Tour and Worlds Triple Crown?
+accepted_answers:
+- '2024'
+explanation: '2024: only Merckx (1974) and Roche (1987) had done it before.'
+archived: false

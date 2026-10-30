@@ -1,0 +1,9 @@
+id: 9b48bcdb-190a-429d-ad32-7f0a3b87b5a8
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: In which city did Indurain win his 1996 Olympic time-trial gold?
+accepted_answers:
+- Atlanta
+explanation: The 1996 Atlanta Olympics.
+archived: false

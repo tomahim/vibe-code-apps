@@ -1,0 +1,10 @@
+id: 90759988-789b-4b2a-97be-04b6a62a8596
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many times did Merckx win Liège-Bastogne-Liège?
+accepted_answers:
+- '5'
+- five
+explanation: Five, a record, including three in a row 1971-1973.
+archived: false

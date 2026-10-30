@@ -1,0 +1,19 @@
+id: 39ef0469-7d8d-4669-b422-117867781acd
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why did Vos first train with her brother's team?
+choices:
+- id: b076e548-adbc-40ed-8b28-ce2bf3daaf92
+  text: It was faster
+- id: 55d78250-46e7-4035-a425-f27bcc84d6d7
+  text: Girls were not allowed to enter races
+- id: 19b123ce-2477-484e-a044-8790426c6aa7
+  text: Her club closed
+- id: 3a1c3b9f-8ef6-4a42-a799-343f53c6f814
+  text: She was a triathlete
+correct_choice_ids:
+- 55d78250-46e7-4035-a425-f27bcc84d6d7
+explanation: She trained with the boys because girls could not race.
+archived: false

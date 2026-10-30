@@ -1,0 +1,12 @@
+id: d00d71a2-bfc0-40a2-afdf-37e2afb27495
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: What is the Vuelta's most feared steep climb in Asturias?
+accepted_answers:
+- Angliru
+- Alto de l'Angliru
+- l'Angliru
+- El Angliru
+explanation: The Alto de l'Angliru, with ramps beyond twenty percent.
+archived: false

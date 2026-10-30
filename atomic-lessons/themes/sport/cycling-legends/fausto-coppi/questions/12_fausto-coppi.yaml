@@ -1,0 +1,19 @@
+id: 4238d81c-e9f0-43ef-a501-fe672ffca6a2
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: In which year did Coppi become world champion?
+choices:
+- id: 0824694e-a456-4e33-8864-97bb887945bf
+  text: '1949'
+- id: aa1360f4-16e8-43e1-b5bf-6b24d154aea5
+  text: '1950'
+- id: 95fa47a1-85ae-4343-8316-26af8b619290
+  text: '1952'
+- id: 133e9f23-afa6-4d23-9af9-a467cd8c8d0e
+  text: '1953'
+correct_choice_ids:
+- 133e9f23-afa6-4d23-9af9-a467cd8c8d0e
+explanation: He won the 1953 World Championship road race, the year of his fifth Giro.
+archived: false

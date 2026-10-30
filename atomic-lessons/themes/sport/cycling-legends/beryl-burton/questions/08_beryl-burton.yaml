@@ -1,0 +1,19 @@
+id: 7a7e6e99-da39-497f-9ebc-dbf4759acde8
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why did Burton race mostly at dawn in club events?
+choices:
+- id: e5558cc2-858a-496f-a563-c5a76d0b0a88
+  text: She liked mornings
+- id: c9a3d72b-3656-4d82-a4d1-a56a2a78a51b
+  text: Women had no professional structure or major stage races
+- id: d95199cb-329e-4b5f-b3dc-049ae24d5643
+  text: It was a rule
+- id: ed456c9d-14a5-434f-98a4-01f7614d403d
+  text: Traffic only
+correct_choice_ids:
+- c9a3d72b-3656-4d82-a4d1-a56a2a78a51b
+explanation: In her era there was no women's Tour, Olympics road race or pro teams.
+archived: false

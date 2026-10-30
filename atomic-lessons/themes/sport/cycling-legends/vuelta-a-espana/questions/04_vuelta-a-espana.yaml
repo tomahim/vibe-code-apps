@@ -1,0 +1,19 @@
+id: d97c8ba2-7893-4215-8626-a08333e56e73
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What colour is the Vuelta leader's jersey?
+choices:
+- id: 9455e5e3-01c1-47fc-b779-7891d7ca8b34
+  text: Yellow
+- id: 23c842ea-9091-4a39-8c69-b669c8da9614
+  text: Pink
+- id: e926f6af-56be-45e4-9bb8-2daceef3b2fb
+  text: Red
+- id: d1314f60-a222-47a0-8ef8-3fc7393bbb89
+  text: Gold
+correct_choice_ids:
+- e926f6af-56be-45e4-9bb8-2daceef3b2fb
+explanation: Red, the maillot rojo, since 2010.
+archived: false

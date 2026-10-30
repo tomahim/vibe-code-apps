@@ -1,0 +1,19 @@
+id: d4995871-1021-4129-a1f9-90ae0c8b35e3
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which country does Tadej Pogačar race for?
+choices:
+- id: 3a07fa24-b52b-4cd9-8208-a8ea08f0bbf6
+  text: Slovakia
+- id: 6d849d70-a3c9-4b5c-af13-1a0d4cf56c46
+  text: Slovenia
+- id: d63a4f17-faab-4027-abaa-d3cba65fd01e
+  text: Croatia
+- id: 5fb6a7c9-66d0-42a0-a02c-ee6cb9520141
+  text: Serbia
+correct_choice_ids:
+- 6d849d70-a3c9-4b5c-af13-1a0d4cf56c46
+explanation: He is Slovenian, born in Komenda in 1998.
+archived: false

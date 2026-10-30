@@ -1,0 +1,19 @@
+id: f5de2303-34ec-42f5-bb63-d56de76e7328
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which region is the race held?
+choices:
+- id: e5f7517c-aada-475c-9848-33c31812acf7
+  text: Flanders
+- id: df327839-206e-44fb-b990-b9d1dc2a124e
+  text: The Ardennes
+- id: f2ed9e9d-a1c8-46e0-be2e-8870d8db732a
+  text: Provence
+- id: 31a9be14-06a4-4c6d-986d-931cc9935018
+  text: The Pyrenees
+correct_choice_ids:
+- df327839-206e-44fb-b990-b9d1dc2a124e
+explanation: The forested hills of the Belgian Ardennes, between Liège and Bastogne.
+archived: false

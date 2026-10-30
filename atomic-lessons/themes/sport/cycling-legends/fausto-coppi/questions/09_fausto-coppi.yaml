@@ -1,0 +1,19 @@
+id: fdc693f6-1fbb-48e5-a1b9-9dc262021c2a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who was Coppi's great rival who won the 1948 Tour de France?
+choices:
+- id: d93678be-9c73-4a90-ac8b-084b3258e0a8
+  text: Fiorenzo Magni
+- id: 4c0360f4-d3b5-4814-bfa4-92066c606db6
+  text: Gino Bartali
+- id: 8e5a3c5c-68f8-48a9-85ff-6493d0cde786
+  text: Hugo Koblet
+- id: ad4cf050-bcd4-4259-a241-a2a1cce40fad
+  text: Ferdy Kübler
+correct_choice_ids:
+- 4c0360f4-d3b5-4814-bfa4-92066c606db6
+explanation: Gino Bartali; their rivalry split Italy into two camps.
+archived: false

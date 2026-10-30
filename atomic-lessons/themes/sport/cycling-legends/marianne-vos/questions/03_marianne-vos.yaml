@@ -1,0 +1,10 @@
+id: 959ee010-bb54-4c6d-9e5a-bba29d34d45c
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: How old was Vos when she won her first two senior world titles in 2006?
+accepted_answers:
+- '19'
+- nineteen
+explanation: Cyclo-cross and road world champion at nineteen.
+archived: false

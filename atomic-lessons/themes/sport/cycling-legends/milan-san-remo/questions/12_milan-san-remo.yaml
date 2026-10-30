@@ -1,0 +1,9 @@
+id: 302fe457-447f-4628-9c9b-5b66beac7505
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which year did Milano-San Remo Donne join the Women's WorldTour?
+accepted_answers:
+- '2025'
+explanation: The women's race returned to the top calendar in 2025.
+archived: false

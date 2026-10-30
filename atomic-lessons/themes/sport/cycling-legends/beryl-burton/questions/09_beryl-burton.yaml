@@ -1,0 +1,9 @@
+id: 2eac98df-8ffa-4bc6-b7c7-d6dac39a595d
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: What is the first name of the daughter who beat Burton at the 1976 national championship?
+accepted_answers:
+- Denise
+explanation: Denise Burton; mother and daughter raced for the same title.
+archived: false

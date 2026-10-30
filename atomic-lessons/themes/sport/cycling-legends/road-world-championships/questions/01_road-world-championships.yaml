@@ -1,0 +1,19 @@
+id: 05b0fd64-e8c0-4c61-98b2-157d3b146710
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Who won the first professional road World Championship in 1927?
+choices:
+- id: 42846058-9250-4d8f-9d73-0ad2d3e37762
+  text: Learco Guerra
+- id: fb633427-1fcd-4b88-8e72-7f8f4a36c0e5
+  text: Alfredo Binda
+- id: db108a11-13b6-4c7b-afec-24b01ef6d6bc
+  text: Costante Girardengo
+- id: 567005fe-1ac5-4083-b2f3-162d4ed7f742
+  text: Henri Pélissier
+correct_choice_ids:
+- fb633427-1fcd-4b88-8e72-7f8f4a36c0e5
+explanation: Alfredo Binda, at the Nürburgring.
+archived: false

@@ -1,0 +1,10 @@
+id: 83ade61e-f7d6-4393-8d73-3b566c025205
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: On which street in Sanremo does the race finish?
+accepted_answers:
+- Via Roma
+- the Via Roma
+explanation: The finish line is on the Via Roma.
+archived: false

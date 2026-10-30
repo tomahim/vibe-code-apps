@@ -1,0 +1,19 @@
+id: dcb8cf04-086f-40cd-929e-858e68e1940a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why did Pogačar abandon the 2026 Vuelta a España?
+choices:
+- id: 7afc8615-32a8-4453-b471-31a87733098a
+  text: Illness
+- id: 4c8475a3-1656-46cb-bc36-fc6cd65cd295
+  text: Injuries from a crash
+- id: b6b9e768-e78b-435f-af01-3e5374c196e2
+  text: Team orders
+- id: 9161998a-cd41-4ed6-bcef-08557714823e
+  text: Fatigue
+correct_choice_ids:
+- 4c8475a3-1656-46cb-bc36-fc6cd65cd295
+explanation: A stage-8 crash left him with a concussion, broken collarbone and fractured vertebra.
+archived: false

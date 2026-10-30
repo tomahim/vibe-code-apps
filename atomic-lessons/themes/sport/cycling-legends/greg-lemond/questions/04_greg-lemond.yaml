@@ -1,0 +1,19 @@
+id: e487e368-2f66-42ca-93c0-fa08f27daf71
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Who was LeMond's teammate and rival at the 1986 Tour?
+choices:
+- id: 18420839-510d-4e73-8b6c-3331d638f8bb
+  text: Laurent Fignon
+- id: 9b2f52ca-90ea-40f7-bfa8-826f7ec91fab
+  text: Bernard Hinault
+- id: 809e8b0c-d29d-44ea-b0fe-0bc537c62abc
+  text: Stephen Roche
+- id: c78be0ab-c6d1-44af-b39e-a768e322328a
+  text: Sean Kelly
+correct_choice_ids:
+- 9b2f52ca-90ea-40f7-bfa8-826f7ec91fab
+explanation: Bernard Hinault attacked him all race; LeMond won with Hinault second.
+archived: false

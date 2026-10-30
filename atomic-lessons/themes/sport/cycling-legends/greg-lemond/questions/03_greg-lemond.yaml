@@ -1,0 +1,9 @@
+id: 88d2867a-8e0e-4adf-ba8e-bc2927738365
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: In which year did LeMond become the first American man to win the road World Championship?
+accepted_answers:
+- '1983'
+explanation: He won the 1983 Worlds in Altenrhein, Switzerland.
+archived: false

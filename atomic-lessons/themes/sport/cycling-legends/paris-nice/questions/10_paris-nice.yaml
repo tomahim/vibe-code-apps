@@ -1,0 +1,19 @@
+id: 2f420703-140e-433e-b0a2-40f382b5bd66
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What was unusual about the 2020 edition?
+choices:
+- id: 9a9baa85-fc83-4c77-af03-e81170a0737f
+  text: It had no fans ever
+- id: 8d3eac67-2b37-460a-b043-de8e5f2ce1d9
+  text: It was the last race standing before the pandemic shutdown
+- id: e5cdf5de-4fab-4e89-b053-d740732653be
+  text: It was held in June
+- id: badb3081-17ca-4a34-8e91-ed71d95703e3
+  text: It had no winner
+correct_choice_ids:
+- 8d3eac67-2b37-460a-b043-de8e5f2ce1d9
+explanation: It finished days before world sport stopped for COVID-19.
+archived: false

@@ -1,0 +1,19 @@
+id: 023211d7-88b4-487a-a465-8b870d2c7b61
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the Cima Coppi?
+choices:
+- id: 959f3419-187b-4190-a41c-e3469dd1e7e3
+  text: His birthplace
+- id: 6f36dfeb-3eba-46c2-93e0-21a48c7f6629
+  text: The highest point of each Giro d'Italia
+- id: 5605495b-2e34-4f70-aa4b-5409f5181f94
+  text: His training climb
+- id: 83e3f16c-891b-4774-ad9e-a2dc27a9481b
+  text: A trophy for sprinters
+correct_choice_ids:
+- 6f36dfeb-3eba-46c2-93e0-21a48c7f6629
+explanation: Since 1965 the Giro's highest summit has carried his name.
+archived: false

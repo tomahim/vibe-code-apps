@@ -1,0 +1,9 @@
+id: b53618e4-b1b2-47be-acb1-78e84bea9814
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Which city hosts the finish of the Race to the Sun?
+accepted_answers:
+- Nice
+explanation: Nice, on the Mediterranean.
+archived: false

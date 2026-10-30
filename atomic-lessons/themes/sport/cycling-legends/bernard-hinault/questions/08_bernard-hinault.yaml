@@ -1,0 +1,19 @@
+id: 46e84172-cf96-46e7-bec7-ed32889a5047
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who beat Hinault into second place at the 1986 Tour?
+choices:
+- id: ff94587c-17f3-4b74-b8a9-e592afd39872
+  text: Laurent Fignon
+- id: 01401c49-a8c2-47e0-8b24-191b78f0ea15
+  text: Greg LeMond
+- id: 32c0247a-e71a-454a-b0da-e86bfa9421c1
+  text: Stephen Roche
+- id: 897b1127-14ec-44f9-8194-0cb88df265a6
+  text: Pedro Delgado
+correct_choice_ids:
+- 01401c49-a8c2-47e0-8b24-191b78f0ea15
+explanation: His own teammate Greg LeMond, after a season-long intra-team duel.
+archived: false

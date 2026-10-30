@@ -1,0 +1,19 @@
+id: b3777160-854b-498a-8723-83bf737ae8e0
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What happened to 2011 Vuelta winner Juan José Cobo?
+choices:
+- id: 939c03a7-83b2-448d-b186-053b1c13e3ba
+  text: Nothing
+- id: 7cab34fc-eaf9-42e7-9ed1-b2d4fd2dbe0d
+  text: He was later stripped for doping and Froome became the winner
+- id: ed30f805-9940-440b-8ce3-6f9a508531e4
+  text: He retired the next day
+- id: 9ee38bbc-d2d6-456d-873e-549cfc11b85f
+  text: He was injured
+correct_choice_ids:
+- 7cab34fc-eaf9-42e7-9ed1-b2d4fd2dbe0d
+explanation: The title passed to Chris Froome years later.
+archived: false

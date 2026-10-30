@@ -1,0 +1,9 @@
+id: cddf01b0-bd7d-4384-a24a-f8012d514ce7
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: In which year was the Tour de France Femmes reborn, with Vos winning stages and wearing yellow?
+accepted_answers:
+- '2022'
+explanation: The Tour de France Femmes returned in 2022.
+archived: false

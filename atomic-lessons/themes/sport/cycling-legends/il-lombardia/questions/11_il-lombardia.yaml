@@ -1,0 +1,19 @@
+id: b98a512b-3e9e-495f-ab42-612967f4c21c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why did Pogačar miss the 2026 Lombardia?
+choices:
+- id: fc92d9e6-43e4-43ed-b132-25decf5b7531
+  text: Illness
+- id: 4c61365e-8142-4153-9d18-18613e45dfe0
+  text: Injuries from his Vuelta crash
+- id: 08e78ee1-589e-4f09-a867-bb974c3f29e7
+  text: A ban
+- id: 44a3ebba-94f0-453a-a3e8-db122169fae3
+  text: Retirement
+correct_choice_ids:
+- 4c61365e-8142-4153-9d18-18613e45dfe0
+explanation: His season ended after the 2026 Vuelta crash.
+archived: false

@@ -1,0 +1,19 @@
+id: 82808846-9625-43e5-ae0a-678254827456
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which sport did Armstrong first excel as a teenager?
+choices:
+- id: fc30e299-4c66-4f0f-ab81-c393fa868f2f
+  text: Swimming
+- id: c29290c4-356a-4701-adc6-0d7c18d5cfc8
+  text: Triathlon
+- id: d5b90122-1496-491b-96d7-63f991c86aea
+  text: Track cycling
+- id: f5037c59-4d46-45e5-bf00-e71d8380477b
+  text: Mountain biking
+correct_choice_ids:
+- c29290c4-356a-4701-adc6-0d7c18d5cfc8
+explanation: He was a champion triathlete before switching fully to road cycling.
+archived: false

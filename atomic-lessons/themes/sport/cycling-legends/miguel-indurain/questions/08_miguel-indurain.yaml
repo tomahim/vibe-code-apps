@@ -1,0 +1,19 @@
+id: 952628ac-ca2a-4ae3-b723-da974238c425
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What distance did Indurain ride for the 1994 hour record?
+choices:
+- id: 7d439c65-a7c1-44db-8678-755e5f804e90
+  text: 49.431 km
+- id: 61bac690-0c6b-462a-af47-5ce088eff171
+  text: 51.115 km
+- id: 83874422-418a-47cf-9d7f-93a8914463c1
+  text: 53.040 km
+- id: 4fa0ac27-bd26-46b6-b2e5-ea59b3e638db
+  text: 55.291 km
+correct_choice_ids:
+- 83874422-418a-47cf-9d7f-93a8914463c1
+explanation: 53.040 km in Bordeaux in September 1994.
+archived: false

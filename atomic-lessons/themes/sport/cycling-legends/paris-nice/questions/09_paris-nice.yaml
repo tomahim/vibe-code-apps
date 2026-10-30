@@ -1,0 +1,12 @@
+id: bba3e47d-c455-443c-9686-9181084280de
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: Which Grand Tour champion won Paris-Nice in 1989 and 1990 before his Tour streak?
+accepted_answers:
+- Miguel Indurain
+- Indurain
+- Miguel Induráin
+- Induráin
+explanation: Miguel Indurain won it in 1989 and 1990.
+archived: false

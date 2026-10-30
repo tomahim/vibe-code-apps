@@ -1,0 +1,19 @@
+id: 59ce6105-89fd-4d26-9a6a-f4f94330ce9c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which event exposed cycling's EPO culture just before Armstrong's first Tour win?
+choices:
+- id: aa054eef-af78-4936-9a12-32e401f92fae
+  text: The Festina affair of 1998
+- id: 3c94f975-6365-4d2c-a35a-51dd193f739c
+  text: The 1994 World Cup
+- id: 5bbd0a15-7469-4077-bf80-d1738548c2c1
+  text: The Puerta case
+- id: f66fc8c2-8c17-45ef-add8-80ab2ece872d
+  text: Operación Puerto of 1996
+correct_choice_ids:
+- aa054eef-af78-4936-9a12-32e401f92fae
+explanation: The 1998 Festina affair revealed systematic doping a year before his first win.
+archived: false

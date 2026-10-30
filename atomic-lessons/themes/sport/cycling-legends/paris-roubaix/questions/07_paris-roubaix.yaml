@@ -1,0 +1,19 @@
+id: 9c04387b-c8d8-4cd0-b312-7ea32148b8e4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who shares the record of four Paris-Roubaix wins?
+choices:
+- id: c67af562-18e3-4dd9-90db-de7dee89107f
+  text: Merckx and Museeuw
+- id: 04d8b9ff-97bd-4e98-9601-05068f5881dc
+  text: De Vlaeminck and Boonen
+- id: 8c5328db-6047-4dc3-af7a-30181dc9f1a5
+  text: Cancellara and Moser
+- id: f5579702-cc92-409d-90bd-047b55cbfe84
+  text: Van Looy and Van der Poel
+correct_choice_ids:
+- 04d8b9ff-97bd-4e98-9601-05068f5881dc
+explanation: Roger De Vlaeminck and Tom Boonen, four each.
+archived: false

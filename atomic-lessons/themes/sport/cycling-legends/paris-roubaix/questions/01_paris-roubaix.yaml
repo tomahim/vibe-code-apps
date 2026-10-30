@@ -1,0 +1,19 @@
+id: c9d4d1a9-2d8b-4a40-b2d3-2df807e5c983
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was Paris-Roubaix first run?
+choices:
+- id: 0b0a3a9a-1ed7-415e-89ac-89a4849c5562
+  text: '1892'
+- id: c589f3d9-4b1f-468b-b0fa-f22b031b9dbd
+  text: '1896'
+- id: c8f138a2-03f8-4d7e-bc83-673d6e6fcdfb
+  text: '1903'
+- id: bd502a38-418a-43ef-b97e-125d9f3c549e
+  text: '1907'
+correct_choice_ids:
+- c589f3d9-4b1f-468b-b0fa-f22b031b9dbd
+explanation: 1896, making it the oldest cobbled Monument.
+archived: false

@@ -1,0 +1,19 @@
+id: ccc2e87b-9b65-4ea0-abf3-29a88c4ae0ae
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Where in France was Anquetil born?
+choices:
+- id: b9f4aa18-63f9-440e-9268-f16283ae8b8a
+  text: Brittany
+- id: dc6b33c8-f90b-4e95-9a40-c0f99c50218f
+  text: Normandy
+- id: 347175bb-e2b8-4189-9fec-8c9af42bea73
+  text: Provence
+- id: 908a9bcf-2e87-49ab-ad39-4c2dd4f88359
+  text: The Alps
+correct_choice_ids:
+- dc6b33c8-f90b-4e95-9a40-c0f99c50218f
+explanation: He was born near Rouen, in Normandy, in 1934.
+archived: false

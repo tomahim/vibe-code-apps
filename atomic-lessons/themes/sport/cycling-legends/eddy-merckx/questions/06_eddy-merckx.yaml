@@ -1,0 +1,19 @@
+id: 7eeacde6-71de-407b-b9ce-433a7ca9435e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How many Tour de France stage wins did Merckx take, a record that stood until 2024?
+choices:
+- id: 664d254f-bf78-426f-af06-c1cb5232da66
+  text: '28'
+- id: ae71c6d2-e750-4d71-a1f4-55c7eb6eb81e
+  text: '30'
+- id: fbdaff79-dea7-4625-bf52-6ae72c4210e3
+  text: '34'
+- id: 6cc64100-bc1f-4adc-a2bd-8f923f9af9ab
+  text: '40'
+correct_choice_ids:
+- fbdaff79-dea7-4625-bf52-6ae72c4210e3
+explanation: He won 34 Tour stages; Mark Cavendish passed the mark in 2024.
+archived: false

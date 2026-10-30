@@ -1,0 +1,19 @@
+id: 001dfcc8-2c01-48b9-aecb-22835afd9051
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which discipline defined Burton's career?
+choices:
+- id: 1da79add-115e-487c-b180-e298a8e0d652
+  text: The sprint
+- id: a30f5fce-05dd-4ae4-9134-f10caefc0eb2
+  text: The time trial
+- id: e9f3a33f-ed42-4406-b1d5-0685e970642d
+  text: Cyclo-cross
+- id: 252e7912-ef98-46ca-964d-a0e4a1b97e10
+  text: Mountain biking
+correct_choice_ids:
+- a30f5fce-05dd-4ae4-9134-f10caefc0eb2
+explanation: 'British time trialling: racing alone against the clock on open roads.'
+archived: false

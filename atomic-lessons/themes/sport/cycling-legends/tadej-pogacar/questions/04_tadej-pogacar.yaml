@@ -1,0 +1,19 @@
+id: d0dc34bf-c2fe-4cd2-b0d8-318763781ab7
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How did Pogačar win the 2020 Tour de France?
+choices:
+- id: 78ca92b3-f239-4851-9c9d-3ecc8a933172
+  text: A final-day sprint
+- id: c458ca5f-1e9e-4240-9898-5d71efcd6574
+  text: A time-trial ambush at La Planche des Belles Filles
+- id: e17bf289-a558-4a2a-a59e-834dc3bcca46
+  text: Roglič crashed out
+- id: 3ba63d6d-9e1a-4e6d-aab1-ae005620cfa5
+  text: Bonus seconds
+correct_choice_ids:
+- c458ca5f-1e9e-4240-9898-5d71efcd6574
+explanation: He took almost two minutes from Roglič in the stage-20 time trial.
+archived: false
