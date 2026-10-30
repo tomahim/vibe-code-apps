@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { books, categories, illustration } from './content';
 import Diorama from './Diorama';
 import ShelfRoom from './ShelfRoom';
+import ImmersiveBook from './ImmersiveBook';
 import './story-shelf.css';
 
 function useReducedMotion() {
@@ -18,6 +19,10 @@ export default function StoryShelf({ onHome }) {
   const [filter, setFilter] = useState('All shelves');
   const [still, setStill] = useState(false);
   const [sources, setSources] = useState(false);
+  const [mode, setModeState] = useState(() => { try { return localStorage.getItem('ss-read-mode') === 'immersive' ? 'immersive' : 'readable'; } catch { return 'readable'; } });
+  const [modeNote, setModeNote] = useState('');
+  const immersive = mode === 'immersive';
+  function setMode(m) { setModeState(m); setModeNote(''); clearTimeout(timer.current); setTurn(null); setOpening(false); try { localStorage.setItem('ss-read-mode', m); } catch {} }
   const reduced = useReducedMotion();
   const timer=useRef(); const readerTitle=useRef(); const lastBook=useRef(); const start=useRef();
   const current = selected?.pages[page];
@@ -25,19 +30,24 @@ export default function StoryShelf({ onHome }) {
   function back() { clearTimeout(timer.current);setTurn(null);setSelected(null);setOpened(false);setSources(false); requestAnimationFrame(()=>document.querySelector(`[data-book="${lastBook.current}"]`)?.focus()); }
   function openBook() {
     if(opening) return;
-    if(reduced) { setOpened(true); return; }
+    if(reduced||immersive) { setOpened(true); return; }
     setOpening(true);
     timer.current=setTimeout(()=>{setOpening(false);setOpened(true);},720);
   }
   function flip(direction) {
     if(!opened || turn || page+direction<0 || page+direction>=selected.pages.length) return;
-    if(reduced) {setPage(p=>p+direction); return;}
+    if(reduced||immersive) {setPage(p=>p+direction); return;}
     setTurn(direction);
     timer.current=setTimeout(()=>{setPage(p=>p+direction);setTurn(null);},680);
   }
   useEffect(()=>()=>clearTimeout(timer.current),[]);
   useEffect(()=>{ if(selected) readerTitle.current?.focus(); },[selected,opened,page]);
   useEffect(()=>{ const key=e=>{ if(!selected || /INPUT|TEXTAREA/.test(e.target.tagName))return; if(e.key==='Escape'){e.preventDefault();back();} if(e.key==='ArrowRight'){e.preventDefault();flip(1);} if(e.key==='ArrowLeft'){e.preventDefault();flip(-1);} }; window.addEventListener('keydown',key); return()=>window.removeEventListener('keydown',key); });
+  const controls = selected && opened ? <>
+        <nav className="ss-page-controls" aria-label="Turn story pages"><button aria-label="Previous page" onClick={()=>flip(-1)} disabled={page===0||!!turn}>← <span>Previous</span></button><div className="ss-page-dots">{selected.pages.map((_,i)=><button key={i} aria-label={`Go to page ${i+1}`} aria-current={page===i?'page':undefined} disabled={!!turn} onClick={()=>{setPage(i);}}>{i+1}</button>)}</div><button aria-label={page===selected.pages.length-1?'Return to shelves':'Next page'} onClick={()=>page===selected.pages.length-1?back():flip(1)} disabled={!!turn}><span>{page===selected.pages.length-1?'The shelves':'Next page'}</span> →</button></nav>
+        <p className="ss-reading-hint">Arrow keys or swipe to turn · Escape to return · <button onClick={()=>{setOpened(false);setPage(0);}}>Close book</button></p>
+        <span className="ss-live" role="status" aria-live="polite">Page {page+1} of {selected.pages.length}: {current.title}</span>
+      </> : null;
   return <main className={`ss-app ${selected?'ss-reading':''}`}>
     <div className="ss-grain" aria-hidden="true" />
     <header className="ss-header"><button onClick={selected?back:onHome} className="ss-back">← <span>{selected?'The shelves':'Gallery'}</span></button><div className="ss-wordmark"><span aria-hidden="true">✳</span> THE STORY ROOM</div><button className="ss-about" onClick={()=>setSources(s=>!s)} aria-expanded={sources}>About & sources</button></header>
@@ -51,16 +61,20 @@ export default function StoryShelf({ onHome }) {
       <footer className="ss-library-footer"><span>ILLUSTRATED STORIES · CURIOUS MINDS</span><p>Nothing to download. Just turn the page.</p></footer>
     </> : <section className="ss-table-room" aria-label={`${selected.title} reading table`} style={{'--book-color':selected.color}}>
       <div className="ss-reader-heading"><p className="ss-eyebrow">{selected.label}</p><h1 tabIndex="-1" ref={readerTitle}>{opened?current.title:selected.title}</h1><p>{opened?`Page ${page+1} of ${selected.pages.length}`:selected.subtitle}</p></div>
-      {!opened ? <div className={`ss-closed-stage ${opening?'ss-opening':''}`}><div className="ss-table-light"/><button className="ss-closed-book" onClick={openBook} aria-label={`Open ${selected.title}`}><span className="ss-closed-pages"/><span className="ss-closed-cover"><img src={selected.cover} alt=""/><span><small>THE STORY ROOM · {selected.category.toUpperCase()}</small><strong>{selected.title}</strong><em>{selected.subtitle}</em><b>Open the book ↗</b></span></span></button><p className="ss-closed-note">A quiet moment before the first page.</p></div> : <>
+      <div className="ss-mode" role="group" aria-label="Reading mode"><span>Reading mode</span><button aria-pressed={!immersive} onClick={()=>setMode('readable')}>Readable</button><button aria-pressed={immersive} onClick={()=>setMode('immersive')}>Immersive 3D</button></div>
+      {modeNote && <p className="ss-mode-note" role="status">{modeNote}</p>}
+      {immersive ? <>
+        <ImmersiveBook key={selected.slug} book={selected} opened={opened} page={page} reduced={reduced} onOpen={openBook} onNext={()=>page<selected.pages.length-1&&flip(1)} onPrev={()=>flip(-1)} onUnavailable={()=>{setModeState('readable');setModeNote('Immersive 3D needs WebGL, which this browser could not start. Readable mode is on.');}}/>
+        {!opened ? <p className="ss-closed-note"><button className="ss-open-btn" onClick={openBook} aria-label={`Open ${selected.title}`}>Open the book ↗</button></p> : <div className="ss-immersive-text"><h2>{current.title}</h2>{current.paragraphs.map((p,i)=><p key={i}>{p}</p>)}<aside className="ss-field-note"><span>PAUSE & WONDER</span>{current.note}</aside></div>}
+        {opened && controls}
+      </> : !opened ? <div className={`ss-closed-stage ${opening?'ss-opening':''}`}><div className="ss-table-light"/><button className="ss-closed-book" onClick={openBook} aria-label={`Open ${selected.title}`}><span className="ss-closed-pages"/><span className="ss-closed-cover"><img src={selected.cover} alt=""/><span><small>THE STORY ROOM · {selected.category.toUpperCase()}</small><strong>{selected.title}</strong><em>{selected.subtitle}</em><b>Open the book ↗</b></span></span></button><p className="ss-closed-note">A quiet moment before the first page.</p></div> : <>
         <div className={`ss-open-book ${turn?'ss-turning':''}`} onTouchStart={e=>{if(e.target.tagName!=='CANVAS') start.current={x:e.touches[0].clientX,y:e.touches[0].clientY};}} onTouchEnd={e=>{const t=e.changedTouches[0];if(start.current && Math.abs(t.clientY-start.current.y)<65 && Math.abs(t.clientX-start.current.x)>65)flip(t.clientX<start.current.x?1:-1);start.current=null;}}>
           <article className="ss-text-leaf"><span className="ss-page-imprint">{selected.title} <i>✳</i></span><span className="ss-chapter-number">0{page+1}</span><h2>{current.title}</h2>{current.paragraphs.map((p,i)=><p key={i}>{p}</p>)}<aside className="ss-field-note"><span>PAUSE & WONDER</span>{current.note}</aside><span className="ss-page-number">{String(page*2+1).padStart(2,'0')}</span></article>
           <div className="ss-picture-leaf"><div className="ss-model-caption"><span>THE PAPER THEATRE</span><button onClick={()=>setStill(s=>!s)} aria-pressed={still}>{still?'Let it move':'Pause motion'}</button></div><Diorama kind={selected.model} page={page} reduced={reduced||still}/><p className="ss-drag-hint">Drag the sculpture to explore ↔</p><img className="ss-story-illustration" src={illustration(selected,page)} alt={`${selected.title}: ${current.title}, an original storybook illustration`}/><div className="ss-picture-caption"><span>AN IMAGINED WORLD, A REAL CURIOSITY</span><span>{String(page*2+2).padStart(2,'0')}</span></div></div>
           {turn && <div className={`ss-turn-leaf ${turn<0?'ss-turn-back':''}`} aria-hidden="true"><img src={illustration(selected,page)}/></div>}
           <span className="ss-book-ribbon" aria-hidden="true"/>
         </div>
-        <nav className="ss-page-controls" aria-label="Turn story pages"><button aria-label="Previous page" onClick={()=>flip(-1)} disabled={page===0||!!turn}>← <span>Previous</span></button><div className="ss-page-dots">{selected.pages.map((_,i)=><button key={i} aria-label={`Go to page ${i+1}`} aria-current={page===i?'page':undefined} disabled={!!turn} onClick={()=>{setPage(i);}}>{i+1}</button>)}</div><button aria-label={page===selected.pages.length-1?'Return to shelves':'Next page'} onClick={()=>page===selected.pages.length-1?back():flip(1)} disabled={!!turn}><span>{page===selected.pages.length-1?'The shelves':'Next page'}</span> →</button></nav>
-        <p className="ss-reading-hint">Arrow keys or swipe to turn · Escape to return · <button onClick={()=>{setOpened(false);setPage(0);}}>Close book</button></p>
-        <span className="ss-live" role="status" aria-live="polite">Page {page+1} of {selected.pages.length}: {current.title}</span>
+        {controls}
       </>}
     </section>}
   </main>;

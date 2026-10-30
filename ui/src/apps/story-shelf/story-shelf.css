@@ -15,3 +15,17 @@
 @media(max-width:560px){.ss-shelf-room{height:510px;width:94%;border-radius:60px 60px 4px 4px;margin-bottom:27px}.ss-room-note p{font-size:8px}.ss-room-note span{font-size:6px}.ss-collection-label{margin-bottom:19px}.ss-collection-label span{font-size:7px}.ss-collection-label p{font-size:10px}.ss-room-unavailable{height:auto}}
 
 @media(max-width:560px){.ss-page-controls{position:static;background:transparent;padding:0;border:0;backdrop-filter:none}}
+.ss-mode{display:flex;align-items:center;justify-content:center;gap:6px;margin:6px auto 12px;flex-wrap:wrap}
+.ss-mode span{font:600 11px/1 Georgia,serif;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-right:6px}
+.ss-mode button{font:600 14px/1 Georgia,serif;padding:10px 14px;min-height:40px;border-radius:999px;border:1px solid rgba(120,80,30,.5);background:transparent;color:inherit;cursor:pointer}
+.ss-mode button[aria-pressed="true"]{background:#2a1d12;color:#f4e2b4;border-color:#2a1d12}
+.ss-mode-note{text-align:center;font-size:14px;margin:0 12px 10px}
+.ss-immersive{position:relative;width:100%;max-width:1100px;margin:0 auto;height:clamp(300px,min(62vh,96vw),700px);border-radius:18px;overflow:hidden;background:#1b1410;box-shadow:0 18px 50px rgba(30,15,5,.35)}
+.ss-immersive canvas{display:block;width:100%;height:100%}
+.ss-open-btn{font:700 16px/1 Georgia,serif;padding:14px 22px;min-height:48px;border-radius:999px;border:0;background:#2a1d12;color:#f4e2b4;cursor:pointer}
+.ss-immersive-text{max-width:640px;margin:14px auto 0;padding:0 16px}
+.ss-immersive-text h2{font-size:22px;margin:0 0 8px}
+@media (min-width:900px){.ss-immersive-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:-1px;padding:0}}
+@media (min-width:900px){.ss-immersive{height:clamp(420px,66vh,720px)}}
+.ss-immersive-text,.ss-immersive-text .ss-field-note{color:#e8dcc0}.ss-immersive-text .ss-field-note span{display:block;font-size:11px;letter-spacing:.14em;color:#c9a96a;margin-bottom:4px}
+@media (max-width:480px){.ss-mode span{flex-basis:100%;text-align:center;margin:0}}

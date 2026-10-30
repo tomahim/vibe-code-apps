@@ -58,3 +58,11 @@ xvfb-run -a npx playwright test --config playwright.books-firefox.config.mjs
 Chromium and Firefox were checked at desktop, 390px mobile and 320px narrow widths. Firefox here needs a display for software WebGL: native headless Firefox cannot create a WebGL2 context on this host, so headed Firefox under Xvfb is the checked 3D route. This is desktop Firefox with a narrow viewport, not a claim of a physical Android-device test.
 
 Browser coverage: gallery route, category filtering, all four books/all 20 story pages, closed cover, opening transition, page animation, keyboard controls, return focus, real WebGL canvases, pointer picking on geometry, reduced motion and WebGL-unavailable fallback. Screenshots are actual local app renders, not proxy mockups. Private deployment was not changed or inspected.
+
+## Reading modes
+
+A **Reading mode** switch sits above the book (choice is remembered in `localStorage`).
+
+- **Readable** (default): the CSS 3D book with text, illustration and the draggable paper theatre.
+- **Immersive 3D**: `ImmersiveBook.jsx`, a full WebGL scene. A book lies on a wooden table; tapping the cover opens it, pages bend as they turn (a deforming strip with picture front and text back), and the paper sculpture for each page rises from the pages with drifting glints. Click or tap the right page for next and the left for previous; drag to look around. Page textures are drawn from the same Markdown and bundled images (`pageTextures.js`); sculptures come from `models.js`, shared with the readable theatre.
+- Text is always available as real HTML: below the canvas on narrow screens, visually hidden on wide ones. If WebGL fails, the app falls back to Readable with a note. Reduced motion shortens animation and stops bobbing and glints.
