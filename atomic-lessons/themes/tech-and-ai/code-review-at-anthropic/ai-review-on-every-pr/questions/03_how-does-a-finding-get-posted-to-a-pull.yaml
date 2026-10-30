@@ -1,0 +1,20 @@
+id: b72a5b7f-d7cc-43db-9b42-8ccccc3fc692
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How does a finding get posted to a pull request?
+choices:
+- id: 9cb645d9-207e-4989-aa52-907c3ae1a71d
+  text: Parallel agents hunt for bugs, and a separate group of verifiers votes on each finding first
+- id: 30c55343-9e82-41d7-bc19-ca78446f5b5e
+  text: The first agent's opinion posts instantly
+- id: c1eb8c61-3352-46af-ac6e-94364bb00b0e
+  text: A human posts every finding manually
+- id: 214192c2-3dee-427e-bb76-d7d81bd6cab2
+  text: Findings post only after the merge
+correct_choice_ids:
+- 9cb645d9-207e-4989-aa52-907c3ae1a71d
+explanation: Several agents hunt in parallel, then a separate group of verifier agents votes on each finding; it only posts
+  if enough agree it is real. Style-only findings are dropped.
+archived: false

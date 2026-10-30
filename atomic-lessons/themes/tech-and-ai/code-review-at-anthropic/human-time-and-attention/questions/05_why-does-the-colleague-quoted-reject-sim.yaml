@@ -1,0 +1,20 @@
+id: 6a3c9047-049d-414e-b0c3-88318f8767c2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Why does the colleague quoted reject simply slowing down?
+choices:
+- id: 75f154c7-7d98-4421-864f-2cf098035fd3
+  text: It lowers the error rate mostly because you do less of everything
+- id: 1934f87f-2b50-4ff1-92d2-f973ad98d976
+  text: It makes agents less accurate
+- id: d59ac36e-0194-4e2b-9ffe-4802bc61c1a6
+  text: It is impossible to slow agents down
+- id: 65fea5a0-3a79-48e3-8f6a-47b1d423501e
+  text: It increases the number of reviewers needed
+correct_choice_ids:
+- 75f154c7-7d98-4421-864f-2cf098035fd3
+explanation: Slowing down lowers your error rate mostly because you are doing less of everything. The team would rather get
+  faster at noticing and fixing problems.
+archived: false

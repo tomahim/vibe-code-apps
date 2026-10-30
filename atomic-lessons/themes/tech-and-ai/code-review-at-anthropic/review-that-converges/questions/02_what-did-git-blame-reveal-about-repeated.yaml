@@ -1,0 +1,20 @@
+id: ae57cf90-5f15-433f-bbd9-11aafcab9c56
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What did git blame reveal about repeatedly flagged code?
+choices:
+- id: 85b3c6e5-1e44-43d8-8e09-3139d7d0fd6d
+  text: About 59 percent had been there since the reviewer's first pass
+- id: 0ebd3c8d-fc8f-49e4-b148-21659532e227
+  text: All of it was brand new
+- id: b41da457-19d8-477a-b4f6-7b7b4bcf304b
+  text: It was mostly test code
+- id: f6ec7325-d7ee-4379-a444-b7ca2b35a58f
+  text: It had no history
+correct_choice_ids:
+- 85b3c6e5-1e44-43d8-8e09-3139d7d0fd6d
+explanation: 'About 59 percent of the flagged code had been there since the reviewer''s first pass: the reviewer was finding
+  a few more old bugs each round, not new ones from the latest fix.'
+archived: false

@@ -1,0 +1,20 @@
+id: 355e240b-0acd-49e2-82a5-4a356f57c807
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What should a team instrument before automating review?
+choices:
+- id: ba7731e1-0a99-452c-a12c-309e56d2200b
+  text: How much attention each change consumes and what escapes into incidents
+- id: 203d2db0-84e4-4361-8cd1-fed7dbf031cd
+  text: Only the number of open pull requests
+- id: 287fb851-c1b9-4466-9604-a594684dff61
+  text: Developer satisfaction surveys exclusively
+- id: d519ef8f-e40d-48ba-bd8e-c8e3d4484ed4
+  text: The token cost of each agent run
+correct_choice_ids:
+- ba7731e1-0a99-452c-a12c-309e56d2200b
+explanation: 'Measure both sides first: the attention each change consumes and the failures that escape into incidents. Only
+  then does automation have a target and a guardrail.'
+archived: false

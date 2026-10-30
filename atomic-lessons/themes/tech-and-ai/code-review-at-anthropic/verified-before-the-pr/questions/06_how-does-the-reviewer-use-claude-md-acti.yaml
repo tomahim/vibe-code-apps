@@ -1,0 +1,20 @@
+id: 818aa951-b9d5-4d22-9b80-f2e129a2a640
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How does the reviewer use CLAUDE.md actively?
+choices:
+- id: 1f1109f4-83a5-47e0-8e53-6796607d93fc
+  text: It flags code that breaks a written convention and changes that make a line in it out of date
+- id: 890a9d8e-fa90-46a6-ab9c-2dcc29d3eebc
+  text: It deletes CLAUDE.md when it disagrees
+- id: e51179ac-9a5d-4702-ae31-3ba4a400df23
+  text: It ignores documentation entirely
+- id: 2de650e5-91af-4d7a-b078-31199cf88f69
+  text: It only checks spelling in it
+correct_choice_ids:
+- 1f1109f4-83a5-47e0-8e53-6796607d93fc
+explanation: The reviewer flags code that breaks a convention in CLAUDE.md, and changes that make a line in it out of date,
+  which keeps the shared map of the project honest.
+archived: false

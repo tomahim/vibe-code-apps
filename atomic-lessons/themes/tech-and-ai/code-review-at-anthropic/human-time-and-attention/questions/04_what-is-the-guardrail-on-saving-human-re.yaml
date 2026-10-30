@@ -1,0 +1,20 @@
+id: 36be3dca-5c53-436f-8d8d-6c3fedc0b98c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is the guardrail on saving human review time?
+choices:
+- id: 18224256-dcec-4247-8544-da511c4e4794
+  text: Revert and incident rates must not rise
+- id: 9993683c-5d94-4a93-909e-8299ccb6687c
+  text: The PR template must stay short
+- id: 43925ee0-56eb-4cf7-94d6-cab28c50908e
+  text: Every PR must still be read twice
+- id: 29dbfb68-a31b-4616-a96c-514ab46fe266
+  text: Review rounds must always increase
+correct_choice_ids:
+- 18224256-dcec-4247-8544-da511c4e4794
+explanation: 'Revert and incident rates are the guardrail: if they rise, the team has not saved human time, only moved it
+  to cleanup.'
+archived: false

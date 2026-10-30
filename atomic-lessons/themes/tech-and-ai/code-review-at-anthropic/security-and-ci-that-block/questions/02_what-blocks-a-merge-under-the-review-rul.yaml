@@ -1,0 +1,19 @@
+id: 02f8c3e6-8f24-4ec5-909e-19b9ce3ee0dd
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What blocks a merge under the review rules?
+choices:
+- id: f8366260-02f0-4e5d-96ba-b4d328848f25
+  text: Any open finding from the bug review or the security review
+- id: 12f5e778-ae9b-4574-95bc-20ed0914cd85
+  text: Only red CI, findings never block
+- id: c426228a-08a5-4671-8cb5-61a2aefd8174
+  text: An odd number of commits
+- id: 0d6b6f37-7b25-41bf-835e-9a469960816b
+  text: Missing emojis in the description
+correct_choice_ids:
+- f8366260-02f0-4e5d-96ba-b4d328848f25
+explanation: A pull request cannot merge while any finding from the bug review or the security review is still open.
+archived: false

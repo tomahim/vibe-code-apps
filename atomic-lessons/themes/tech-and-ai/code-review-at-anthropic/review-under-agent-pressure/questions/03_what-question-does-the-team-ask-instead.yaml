@@ -1,0 +1,20 @@
+id: 09c617cc-734c-4347-b635-e7bf3fc95123
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What question does the team ask instead of “did a human read the code?”
+choices:
+- id: 29ff1261-bcc4-4a28-a48a-f7231fee79fc
+  text: What could go wrong with this change, and which check is the right one to catch it?
+- id: 50109156-1530-49f9-8328-0ba0966e3428
+  text: How many lines did the agent write without supervision?
+- id: ef59a504-27ce-412f-9d10-261fd31976ce
+  text: Was the author a person or an agent?
+- id: ba5af162-9548-45a3-8196-8d0465666d4d
+  text: Did at least two people approve every line?
+correct_choice_ids:
+- 29ff1261-bcc4-4a28-a48a-f7231fee79fc
+explanation: “Did a human read the code?” is an imprecise proxy. The sharper question asks what could go wrong and which check,
+  automated or human, is the right one to catch it.
+archived: false

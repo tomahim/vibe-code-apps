@@ -1,0 +1,20 @@
+id: 8066116b-cb61-4353-bf4a-b30c4520303a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Who runs new behavior first, and how?
+choices:
+- id: c4273435-2b12-4b27-b928-d5d6db8bddb1
+  text: Anthropic employees, behind a feature flag
+- id: b8774aa9-e79c-42d5-9638-12a79d27b257
+  text: All users at once
+- id: f8f8e5d8-8a36-45c9-844b-86a338eb777a
+  text: Only external beta testers
+- id: 9e9de111-74de-486c-97fd-024078fe573c
+  text: Nobody, it ships dark forever
+correct_choice_ids:
+- c4273435-2b12-4b27-b928-d5d6db8bddb1
+explanation: New behavior ships behind a flag to Anthropic employees first; their heavy internal use often surfaces regressions
+  before external users hit them.
+archived: false

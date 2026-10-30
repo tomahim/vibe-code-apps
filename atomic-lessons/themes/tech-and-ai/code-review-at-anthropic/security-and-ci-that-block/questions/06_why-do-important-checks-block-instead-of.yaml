@@ -1,0 +1,20 @@
+id: 6fdd2f68-17ea-4d15-97a0-5c88bd9854f6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Why do important checks block instead of advise?
+choices:
+- id: 69ade2fb-5631-4471-ab66-794cb87b9bb4
+  text: Advisory warnings decay into invisibility, and blocking power is rationed to precise checks
+- id: 82f08a5b-1245-415b-8e7c-3e82b322e4b0
+  text: Blocking is easier to implement
+- id: cf540e72-3647-4514-88cc-f54e5264db68
+  text: Advisory checks are illegal
+- id: 95ddb225-3b7f-4cd0-9412-165be58970d0
+  text: Blocking makes agents run faster
+correct_choice_ids:
+- 69ade2fb-5631-4471-ab66-794cb87b9bb4
+explanation: Advisory warnings get ignored over time. Blocking keeps signal high, and the team protects each blocking check's
+  precision so the layer keeps its authority.
+archived: false

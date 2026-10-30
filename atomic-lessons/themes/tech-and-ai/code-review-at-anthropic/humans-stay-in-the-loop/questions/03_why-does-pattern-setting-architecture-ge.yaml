@@ -1,0 +1,20 @@
+id: f18ee8da-2abb-447a-aac3-76d693452fdf
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why does pattern-setting architecture get human review?
+choices:
+- id: 5a7a00a9-65a6-42f6-b0dd-192abdc26259
+  text: The diff invites a hundred imitations, and judging whether the pattern is worth copying is a taste call
+- id: c1f0b5cb-d6d0-4ba9-8c1f-cd98b43e24b3
+  text: Architecture cannot be tested
+- id: d9a30380-3c61-4855-a291-26601352827e
+  text: Agents refuse to read it
+- id: 5c68d2b5-9ba9-41b0-acc5-c4115f754a61
+  text: It is always low risk
+correct_choice_ids:
+- 5a7a00a9-65a6-42f6-b0dd-192abdc26259
+explanation: Architecture diffs matter less for what they do today than for the imitations they invite. Whether the pattern
+  deserves copying is a judgment call with long consequences.
+archived: false

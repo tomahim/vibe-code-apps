@@ -1,0 +1,20 @@
+id: 879e6c75-834e-4def-8f91-00aa6954a68c
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What happened to merged PR volume and reverts between June and September?
+choices:
+- id: e790611f-d2ee-4bd1-8828-c5a76295b5f4
+  text: Merged PRs more than doubled while the revert share fell by more than 40 percent
+- id: 48a83472-ea5e-47f8-922b-074cf628d103
+  text: Volume doubled and reverts doubled too
+- id: 1db0cb1a-9cc7-4495-b677-f8747d513a35
+  text: Volume fell while reverts rose
+- id: 4b9fe762-642a-4c5c-a2b7-30c626b2a708
+  text: Both stayed flat
+correct_choice_ids:
+- e790611f-d2ee-4bd1-8828-c5a76295b5f4
+explanation: Merged pull requests to Claude Code's codebase more than doubled from June to September, while the share that
+  had to be reverted fell by more than 40 percent.
+archived: false

@@ -1,0 +1,20 @@
+id: f7d12a18-e9cc-482a-899b-00e40d1b0e9a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What does Boris Cherny say about giving Claude a way to verify its work?
+choices:
+- id: 979974ab-96de-4f7c-98fe-c010895b4de2
+  text: It is probably the most important thing for good results, making them two to three times better
+- id: f713466e-4006-439e-a8bf-0ab6cd33a650
+  text: It is a minor optimization
+- id: 5b023126-1b75-4919-8f56-f6213700bf19
+  text: It only matters for UI code
+- id: 774d9fba-ad8b-48db-9585-991bd3a85f0f
+  text: It slows agents down too much to be worth it
+correct_choice_ids:
+- 979974ab-96de-4f7c-98fe-c010895b4de2
+explanation: Cherny has called giving Claude a way to verify its work probably the most important thing for getting good results,
+  estimating it makes the final result two to three times better.
+archived: false

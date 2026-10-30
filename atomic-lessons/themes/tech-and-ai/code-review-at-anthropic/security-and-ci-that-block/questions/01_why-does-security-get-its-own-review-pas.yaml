@@ -1,0 +1,20 @@
+id: 26f9959e-734a-4bb8-9d18-2e4ee1c09d57
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why does security get its own review pass?
+choices:
+- id: c4a08147-c6df-4522-8bb3-fa3bba305a1a
+  text: A security reviewer asks what code allows that it should not, a different question from correctness
+- id: 09607048-204b-496c-be82-a93ad9a9789a
+  text: It is required by law
+- id: d00ee3eb-9d4b-4932-a2b8-559fce5c8401
+  text: The bug reviewer is too slow
+- id: 34dffe79-a83d-4f99-b7b4-9777ed46a27f
+  text: Security bugs only appear after release
+correct_choice_ids:
+- c4a08147-c6df-4522-8bb3-fa3bba305a1a
+explanation: A correctness reviewer asks whether code does what it should; a security reviewer asks what the code allows that
+  it should not. One pass doing both tends to do security badly.
+archived: false

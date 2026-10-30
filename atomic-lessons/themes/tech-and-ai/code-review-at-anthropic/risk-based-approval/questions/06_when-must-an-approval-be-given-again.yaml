@@ -1,0 +1,20 @@
+id: e2a62933-b483-4743-a402-22d091adc920
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: When must an approval be given again?
+choices:
+- id: 02c80370-a37c-496f-81d1-00e88d56a96a
+  text: When new commits land that the system cannot vouch for, like an agent's push or a hand-resolved merge
+- id: 5a41d065-6e19-42ed-9f59-4742fb0b63b0
+  text: Every Monday
+- id: 65c6a32a-caed-4bf1-a66c-642e94361d01
+  text: Only after a year
+- id: 5b09fafc-5267-49be-a968-39c043d321cf
+  text: Never, approvals are permanent
+correct_choice_ids:
+- 02c80370-a37c-496f-81d1-00e88d56a96a
+explanation: An approval covers one specific commit. If new commits land that the system cannot vouch for, like an agent's
+  push or a merge someone resolved by hand, approval has to be given again.
+archived: false

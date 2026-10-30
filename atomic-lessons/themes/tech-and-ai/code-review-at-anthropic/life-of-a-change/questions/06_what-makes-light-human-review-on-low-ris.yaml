@@ -1,0 +1,20 @@
+id: 7ff11240-c260-48c4-b9f2-ca0dee99885f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What makes light human review on low-risk changes rational?
+choices:
+- id: 7e1a777e-5f99-4cce-8190-f7554423f3cb
+  text: 'Fast recovery: flags turn off quickly, broken builds get reverted, and the blast radius stays small'
+- id: 569021c9-356c-4788-9774-3d4e4316ba88
+  text: Low-risk changes never break anything
+- id: 45e3f6cb-842d-4787-9286-7b901a3c6235
+  text: Users do not notice bugs
+- id: a178d277-810f-44c7-833c-da1d23f11ec0
+  text: Agents are never wrong on small diffs
+correct_choice_ids:
+- 7e1a777e-5f99-4cce-8190-f7554423f3cb
+explanation: When recovery takes minutes, a missed bug in a low-risk change is a small event. Flags, staged releases and quick
+  reverts are what allow lighter upstream scrutiny.
+archived: false

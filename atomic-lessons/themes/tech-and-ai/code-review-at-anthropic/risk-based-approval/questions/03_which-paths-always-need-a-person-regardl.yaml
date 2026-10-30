@@ -1,0 +1,20 @@
+id: c2c84a69-7cc0-42e8-bd8b-eee743deb683
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Which paths always need a person regardless of tier?
+choices:
+- id: 36f525d7-a403-478c-8b16-545fb828080e
+  text: Anything owners list as sensitive, and any CI workflow file
+- id: da93a2c9-2fd4-45dc-abe1-c2e7b16f66cc
+  text: Only the README
+- id: cd7937ce-7891-4f47-a697-a750f3c43708
+  text: Files under ten lines
+- id: fd8677ae-a752-4677-ad1f-b7c70d0cfa30
+  text: Test files only
+correct_choice_ids:
+- 36f525d7-a403-478c-8b16-545fb828080e
+explanation: 'Some paths always need a person: anything owners have listed as sensitive and any CI workflow file, because
+  a compromised workflow can poison future builds.'
+archived: false

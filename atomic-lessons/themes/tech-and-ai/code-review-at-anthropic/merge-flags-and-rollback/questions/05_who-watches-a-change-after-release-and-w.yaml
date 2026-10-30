@@ -1,0 +1,20 @@
+id: e18e2133-1481-4209-9cc9-5945c532b826
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Who watches a change after release, and what are the options?
+choices:
+- id: 5afcbae7-19b1-43db-bba6-5e65650d7cfb
+  text: The author and on-call watch, then fix forward or roll back; flags turn off in seconds
+- id: 42e50cf7-ec2f-4f10-99e7-7b2d9931c537
+  text: Only the QA team, and the only option is a full revert
+- id: d9a17ead-99e4-444e-b82e-9f0a97088bc1
+  text: Users report it, and nothing can be done
+- id: 0740f37f-7751-49b8-ab39-2ee8e751bf43
+  text: The merge queue keeps watching forever
+correct_choice_ids:
+- 5afcbae7-19b1-43db-bba6-5e65650d7cfb
+explanation: The author and the weekly on-call rotation watch the change, supported by revert and incident dashboards. Flags
+  turn behavior off without a deploy and broken builds get reverted.
+archived: false

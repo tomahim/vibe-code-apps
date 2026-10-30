@@ -1,0 +1,20 @@
+id: a87fc972-f6ca-4fb2-b8f5-e52b06a04e27
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What is the point of drawing holes in every layer of the stack?
+choices:
+- id: 50b6f1a5-2ce0-4455-87d1-5a7a09dce818
+  text: Each layer catches some problems and misses others, and few problems survive all six
+- id: fcaa0dea-5b0e-46a2-bd1a-72c743dfb8c8
+  text: To show the system is broken
+- id: 17840b57-568c-437b-871b-29812a6cf358
+  text: To argue for a single perfect gate
+- id: f3bd5cdc-5f9d-46b1-9222-39016626978e
+  text: To count how many bugs exist
+correct_choice_ids:
+- 50b6f1a5-2ce0-4455-87d1-5a7a09dce818
+explanation: No layer is expected to be perfect. Each catches some problems and misses others, the holes rarely line up, few
+  problems get through all of them, and rollback handles the rest.
+archived: false

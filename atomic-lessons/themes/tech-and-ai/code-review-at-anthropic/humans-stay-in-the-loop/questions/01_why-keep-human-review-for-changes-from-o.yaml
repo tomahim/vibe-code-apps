@@ -1,0 +1,20 @@
+id: 6944af69-363d-4cc1-b41e-bd09a279cebe
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why keep human review for changes from outside the team?
+choices:
+- id: 3dd7520f-b9eb-486d-aa21-93916ecb09c3
+  text: So someone asks whether the change should even be done
+- id: b25f58f5-cabc-464a-b82d-131e41b9ddd2
+  text: Outsiders write worse code
+- id: 668fc5fd-5ef2-4da8-bf09-62a5f63323cd
+  text: It is a legal requirement
+- id: 268d0d05-3917-40dc-825e-cec07b2933ff
+  text: To slow competitors down
+correct_choice_ids:
+- 3dd7520f-b9eb-486d-aa21-93916ecb09c3
+explanation: One team that declared its review bottleneck solved still kept human review for outside changes, so someone asks
+  “should we even do this?” Direction, taste and scope stay human.
+archived: false

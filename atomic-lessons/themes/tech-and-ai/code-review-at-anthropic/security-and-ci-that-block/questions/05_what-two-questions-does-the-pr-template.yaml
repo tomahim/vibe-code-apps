@@ -1,0 +1,20 @@
+id: 50f492fd-c59d-4d50-a9a8-3cf0ef8060bb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What two questions does the PR template ask?
+choices:
+- id: c5b2fd49-1a13-480b-846f-989228791466
+  text: How the change was tested and how to undo it
+- id: ef1a2c09-faa2-467b-8f73-c010c42be222
+  text: Who to blame and when to ship
+- id: 787a179b-cc7a-4548-980b-465813b933ef
+  text: The ticket cost and the sprint name
+- id: 9e531874-909b-4718-b267-b1b4cad361d6
+  text: Nothing, templates are forbidden
+correct_choice_ids:
+- c5b2fd49-1a13-480b-846f-989228791466
+explanation: The template asks how the change was tested and how to undo it. Claude can fill it in, but the person who asked
+  for the change signs off on it.
+archived: false

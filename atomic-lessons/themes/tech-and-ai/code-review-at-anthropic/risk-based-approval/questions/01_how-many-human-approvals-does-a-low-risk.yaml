@@ -1,0 +1,20 @@
+id: 8af08404-b879-4fde-9035-e2389caf0e6e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How many human approvals does a low-risk change need once automated checks are green?
+choices:
+- id: 03633ee2-09cb-40c0-a088-3b0108e1c06a
+  text: None
+- id: 0ef415a5-e8e4-4138-adfe-20b27b97636e
+  text: One
+- id: eedf248d-98d1-47a3-a0fa-1513a7bd03e4
+  text: Two
+- id: f7e7f194-fe23-45d2-8bce-d86e72be3bf2
+  text: Three
+correct_choice_ids:
+- 03633ee2-09cb-40c0-a088-3b0108e1c06a
+explanation: Low-risk changes, such as docs, copy, internal-only features and flagged additive changes, need no human approval
+  once automated review and security checks are green.
+archived: false

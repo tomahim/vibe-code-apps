@@ -1,0 +1,20 @@
+id: 0d869cfb-686d-4aed-bf27-fe2b481066b0
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How does the article describe review timing now compared with before?
+choices:
+- id: 3cca1060-b882-4349-bd82-cc99e8581d88
+  text: From a gate at the end of the road to a continuous spellcheck while you write
+- id: 6cceb452-90a6-48b9-8ab8-17b4f7dfd0a3
+  text: From weekly audits to monthly audits
+- id: d9ea2651-6268-41ea-b8a9-99191a0d0c33
+  text: From pair review to mob review
+- id: c6534c0e-c997-42d9-ae80-fe3878d00737
+  text: From no review to a final gate
+correct_choice_ids:
+- 3cca1060-b882-4349-bd82-cc99e8581d88
+explanation: Review used to be a gate after the code was written. It now runs continuously like spellcheck, and most changes
+  are reviewed and fixed by Claude at least once before a person looks.
+archived: false

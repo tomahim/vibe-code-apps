@@ -1,0 +1,20 @@
+id: 9d7adbcd-f677-4c99-9bf9-f184959ab96e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What sets a change's risk tier?
+choices:
+- id: a2bfc401-62c4-4cef-8543-19b1f3719b66
+  text: A classifier reads the change itself, not the author's seniority
+- id: 144e5804-5979-423d-a58a-449dd29dd505
+  text: Whoever opens the PR picks it
+- id: 84dbf868-32ff-4c51-8e1f-ff908743e14a
+  text: The day of the week
+- id: 36545d20-eba9-4360-bbe2-8ebd9d69c183
+  text: The size of the team
+correct_choice_ids:
+- a2bfc401-62c4-4cef-8543-19b1f3719b66
+explanation: 'The change sets the tier, not the author: a classifier reads the change and picks its risk tier, and a second
+  classifier asks whether this particular change needs a person anyway.'
+archived: false

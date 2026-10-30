@@ -1,0 +1,20 @@
+id: 3cd28af0-66bf-468f-9af1-f373f1575993
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What are the two sides of review's human cost?
+choices:
+- id: 1c05b31f-0e7a-4490-92d0-a9320aa9bb43
+  text: Time spent reviewing and time spent fixing what bad code breaks
+- id: 1415330b-728a-47e5-8d6d-b00d59e16814
+  text: Writing code and deleting code
+- id: 3b2adaa1-cc8a-4be2-994e-5cb31bd99322
+  text: Meetings and emails
+- id: b46bc826-bc63-4dd7-9c63-7a8b2ab88c0a
+  text: Hiring and onboarding reviewers
+correct_choice_ids:
+- 1c05b31f-0e7a-4490-92d0-a9320aa9bb43
+explanation: Human time covers both the time people spend reviewing and the time they spend fixing what bad code breaks. Cutting
+  the first does not help if the cost just reappears in the second.
+archived: false

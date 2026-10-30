@@ -1,0 +1,20 @@
+id: 56554bff-a702-4c4e-8770-a6f0bca83cdc
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is the public release order?
+choices:
+- id: 039e62a4-ddf6-4c93-bdb2-041068d97386
+  text: The latest channel first, with the stable channel trailing it
+- id: 515ac940-fbea-4925-a283-c36cd8d9f117
+  text: Stable first, latest second
+- id: 2f854690-7dd8-4426-8003-fa84434fb1ad
+  text: Everything simultaneously
+- id: 4fcea919-f8be-4b2d-a1f7-62785df05df1
+  text: Alphabetical by username
+correct_choice_ids:
+- 039e62a4-ddf6-4c93-bdb2-041068d97386
+explanation: Public releases go to the latest channel first, and the stable channel trails it, so problems surface with a
+  small, tolerant audience first.
+archived: false

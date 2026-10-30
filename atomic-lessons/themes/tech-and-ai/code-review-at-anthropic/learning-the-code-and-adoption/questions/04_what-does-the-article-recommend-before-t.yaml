@@ -1,0 +1,21 @@
+id: f30a9e77-7996-43ac-a350-146ad94f8b68
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What does the article recommend before the pull request?
+choices:
+- id: 035a453e-24bb-4224-80b7-d2bc8c483020
+  text: Checks the agent can run in a short CLAUDE.md, hooks for formatters and linters, local /code-review and /security-review,
+    and a REVIEW.md
+- id: ba3f386e-0c3f-43a8-ab2c-711637ce3265
+  text: A design document for every change
+- id: 5d8c9aec-6cbf-4762-b0b3-0d5723a6c7c7
+  text: Skipping local checks entirely
+- id: 75431dbc-86ca-4f10-989e-e3dd2470113e
+  text: Manual review only
+correct_choice_ids:
+- 035a453e-24bb-4224-80b7-d2bc8c483020
+explanation: Give the agent checks it can run listed in a short CLAUDE.md, add hooks that run formatters and linters, run
+  local review commands or a fresh-context subagent, and move repeated comments into REVIEW.md.
+archived: false

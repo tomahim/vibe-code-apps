@@ -1,0 +1,19 @@
+id: 57f79d6b-a9a8-49d8-bf04-cdfe03da384e
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Why is reviewer noise more expensive when the author is an agent?
+choices:
+- id: 6080900c-ad41-45c2-91a6-6d237e5e7b8b
+  text: An agent fixes the nit, costing another commit and another review round
+- id: 55e510a6-b7f5-4685-ae06-88cea11b2310
+  text: Agents complain more loudly
+- id: dfed38f0-9ac0-47f2-af71-37fb27e378a8
+  text: Agents ignore all comments
+- id: 5aa19467-8d3a-4350-b357-16d53f1ebb07
+  text: Noise only affects humans
+correct_choice_ids:
+- 6080900c-ad41-45c2-91a6-6d237e5e7b8b
+explanation: A person can wave off a nit in seconds. An agent fixes it, which means another commit and another round of review.
+archived: false

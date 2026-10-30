@@ -1,0 +1,20 @@
+id: d2e88f16-dfda-4531-9dc1-44c5ae93d492
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Which metrics track human time on review?
+choices:
+- id: 479c2660-711f-4034-87c7-0b410d4545a1
+  text: Human approvals per PR, human comments, and how long a PR waits on a person
+- id: e3b5d4e5-7540-48ee-b9b4-e27c6dfc7745
+  text: Lines of code per day
+- id: 52830742-52a2-45ad-9c3b-308f24cda001
+  text: Number of agents running
+- id: 8cd0404a-c72a-4798-a1a1-cef0ddc61cb3
+  text: Repository size and commit count
+correct_choice_ids:
+- 479c2660-711f-4034-87c7-0b410d4545a1
+explanation: The team tracks human approvals per PR (median and 95th percentile), human comments, and how long a PR waits
+  on a person.
+archived: false

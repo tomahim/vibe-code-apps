@@ -1,0 +1,20 @@
+id: 731492ad-efae-487a-97d6-fb13ee747318
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why do experts confirm each case?
+choices:
+- id: 71bb5a2b-6d73-4c55-83be-dec4b82a1cb9
+  text: So the eval tests the real bug a reviewer should have flagged, not noise from messy production events
+- id: d7745557-dd26-4414-b4f4-4da76a0fa176
+  text: To assign blame to authors
+- id: fa75c20d-967c-4b54-9f95-fb40022449b5
+  text: To make the set bigger
+- id: 8992ca05-305d-4c34-8ac4-eaa4f299d81d
+  text: Experts work for free
+correct_choice_ids:
+- 71bb5a2b-6d73-4c55-83be-dec4b82a1cb9
+explanation: 'Without expert checking the set drifts into noise: reverts of good code, symptom fixes. An expert label says
+  exactly what a good reviewer should have caught.'
+archived: false

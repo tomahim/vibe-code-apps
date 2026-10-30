@@ -1,0 +1,20 @@
+id: 1c9df61c-58bb-406d-8fbd-b70f6c48c7d2
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What happens after three review rounds?
+choices:
+- id: c7a365c6-b584-4566-9996-41f8cf501c53
+  text: The reviewer asks the author to step back and reconsider the approach
+- id: 0c1d67ad-d98a-4108-ad20-80a46cda59e6
+  text: The PR merges automatically
+- id: 717f9335-0855-4ee2-8aa7-0e2c19f99629
+  text: The author is removed from the trusted list
+- id: 334523ff-15ee-43fb-9881-12ceea191b95
+  text: Nothing, rounds are unlimited
+correct_choice_ids:
+- c7a365c6-b584-4566-9996-41f8cf501c53
+explanation: 'The round cap: after three rounds, the reviewer asks the author to step back and reconsider the approach, because
+  a fourth round often means a different design is needed.'
+archived: false

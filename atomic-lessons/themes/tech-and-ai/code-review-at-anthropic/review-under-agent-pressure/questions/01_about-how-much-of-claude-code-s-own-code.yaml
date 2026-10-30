@@ -1,0 +1,20 @@
+id: d43617ef-955b-4eb7-88bd-4be706e98c67
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: About how much of Claude Code's own code is written by Claude?
+choices:
+- id: eacf318f-fd2c-46e7-86a3-9a7df2a84ed2
+  text: About 90 percent
+- id: 274c5746-97b4-4bfc-95b4-a22b9e8a3a01
+  text: About 25 percent
+- id: 99e5ad35-110f-417d-9575-cef45d14f086
+  text: About 50 percent
+- id: 01f34457-cb4c-4033-8fa0-3fd00a1fac31
+  text: About 10 percent
+correct_choice_ids:
+- eacf318f-fd2c-46e7-86a3-9a7df2a84ed2
+explanation: 'The post opens with the figure: Claude writes about 90 percent of Claude Code''s own code, which is why review
+  had to change shape.'
+archived: false

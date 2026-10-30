@@ -1,0 +1,20 @@
+id: a7fba105-efdc-49bc-94e1-56f5e391b557
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Why does the merge queue re-run checks?
+choices:
+- id: 64eaa8f3-fb02-40f9-81ac-203a410f00c9
+  text: Two PRs that pass separately can combine into a broken main
+- id: 65ac88f3-6f1f-4c59-ba6a-ae309c4d4167
+  text: It gives agents extra practice
+- id: 90d4fe82-bc61-4129-8d33-813a14d1e446
+  text: It replaces the need for CI
+- id: 526792b8-b5e4-4c66-a5e4-b698b2c760e9
+  text: It delays releases on purpose
+correct_choice_ids:
+- 64eaa8f3-fb02-40f9-81ac-203a410f00c9
+explanation: The merge queue re-runs every check against the latest main with the change applied, so two pull requests that
+  pass separately cannot combine into a broken main.
+archived: false

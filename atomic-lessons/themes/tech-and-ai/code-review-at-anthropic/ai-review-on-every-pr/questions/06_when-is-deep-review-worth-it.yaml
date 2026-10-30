@@ -1,0 +1,20 @@
+id: f89a5a71-35ec-42be-8b85-f8abf0d1fe7d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: When is Deep review worth it?
+choices:
+- id: 5f64cb46-70fd-45cb-ae05-67ef2f3ff2e7
+  text: Where one missed bug costs more than the extra review time
+- id: 8d25f58a-463f-4530-a21e-0d02cf29d5c8
+  text: On every repository equally
+- id: 6748233e-3bf3-4299-b5ee-47070e841d2c
+  text: Only on documentation
+- id: 4605445e-83a2-4973-8ec3-61dcc1716e05
+  text: Never, it is always too slow
+correct_choice_ids:
+- 5f64cb46-70fd-45cb-ae05-67ef2f3ff2e7
+explanation: Admins set each repo to Quick, Standard, or Deep. Deep is worth it where one missed bug costs more than the extra
+  review time.
+archived: false

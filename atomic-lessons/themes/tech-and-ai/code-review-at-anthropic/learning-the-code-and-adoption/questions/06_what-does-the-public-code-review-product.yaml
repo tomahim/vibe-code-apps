@@ -1,0 +1,20 @@
+id: 006f97f8-6772-460f-8918-caebfb8edbfb
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What does the public Code Review product say about approvals?
+choices:
+- id: 7f32797a-0039-4c5d-89e8-d107eadb39d3
+  text: Approving a pull request is still a human call; the product posts findings, not approvals
+- id: 71245b42-5e83-4b7b-873b-bf8b56caa679
+  text: The product approves everything automatically
+- id: 660a1a2a-923b-4fc3-a40c-fb5870bff579
+  text: Approvals were removed entirely
+- id: a7c15a9d-a06b-4db7-92c0-d95b1130dee5
+  text: Only bots may approve
+correct_choice_ids:
+- 7f32797a-0039-4c5d-89e8-d107eadb39d3
+explanation: Code Review's announcement says approving a pull request is still a human call; the product posts findings, not
+  approvals, while Anthropic's own repos let owners decide which low-risk changes merge on automated checks alone.
+archived: false

@@ -1,0 +1,20 @@
+id: 64854253-85b7-4a7e-a67f-d7349fa92385
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Why are findings tagged Important, Nit, or Pre-existing?
+choices:
+- id: 2eb5d11f-81c6-4b93-9e77-625f6c0ca480
+  text: So a bug the PR did not introduce does not look like the author's fault, and severity guides attention
+- id: 1a88ac02-f8bb-4965-a5c7-f3bfa6553b67
+  text: To make the comment list longer
+- id: da933c5f-55cd-43ed-ab26-7cbc12c4756b
+  text: To bill authors per finding
+- id: eec8e357-a5da-41e4-8308-f32fc6ddf53c
+  text: To hide old bugs from everyone
+correct_choice_ids:
+- 2eb5d11f-81c6-4b93-9e77-625f6c0ca480
+explanation: 'The tags sort attention and keep blame honest: Pre-existing marks bugs the change did not introduce so they
+  do not look like the author''s fault.'
+archived: false

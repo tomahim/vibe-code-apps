@@ -1,0 +1,20 @@
+id: 382177e4-ede9-4306-804b-4be78d1ad3d8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How do engineers learn a part of the codebase now?
+choices:
+- id: 4af067aa-06c9-4bac-99c6-e36fb6ae8667
+  text: They ask Claude to write an explainer for exactly that slice, reflecting the code as it is today
+- id: 475a2803-c167-4cec-bf08-4e7ec55e5704
+  text: They read every merged diff each morning
+- id: 22ee0149-589b-44c6-9943-ba7f11585210
+  text: They memorize the architecture document
+- id: 0ce4ef3a-2491-48e2-8534-6812f6a67e42
+  text: They wait for the quarterly walkthrough
+correct_choice_ids:
+- 4af067aa-06c9-4bac-99c6-e36fb6ae8667
+explanation: When someone wants to understand a part of the codebase, they ask Claude to write an explainer for exactly that
+  slice. It takes minutes and reflects the code as it is today.
+archived: false
