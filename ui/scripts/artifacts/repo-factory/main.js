@@ -302,7 +302,29 @@ addEventListener('keydown', (e) => {
   else if (e.key === 'Home') { EP = 0; rebuild(EP); }
   else if (e.key === 'End') { EP = totalEvents(); rebuild(EP); maybeFinale(); }
   else if (e.key === '+') dolly(.8); else if (e.key === '-') dolly(1.25);
+  else if (e.key >= '1' && e.key <= '4') flyTo(+e.key - 1);
 });
+
+// ---------- viewpoints ----------
+const VIEWS = [
+  { pos: [-19, 8, 15], tgt: [5, 2, -0.5] },       // down the production line (default)
+  { pos: [-7.5, 3.2, 3.5], tgt: [-3.5, 1.8, -4] }, // robot arms at work
+  { pos: [10.5, 6, 13], tgt: [17.5, 5, 6] },       // gear tower + portal
+  { pos: [-2, 13, 17], tgt: [0, 1, -2] },          // hall overview
+];
+let camTween = null;
+function flyTo(i) {
+  const v = VIEWS[i]; if (!v) return;
+  const k = world.lite ? 1.18 : 1;
+  const p1 = new THREE.Vector3(v.pos[0] * k, v.pos[1] * k, v.pos[2] * k);
+  const t1 = new THREE.Vector3(...v.tgt);
+  document.querySelectorAll('.views button').forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', String(j === i)); });
+  introT = 0;
+  if (reducedMotion()) { world.camera.position.copy(p1); world.controls.target.copy(t1); camTween = null; return; }
+  camTween = { p0: world.camera.position.clone(), t0: world.controls.target.clone(), p1, t1, k: 0 };
+}
+document.querySelectorAll('.views button').forEach((b) => b.addEventListener('click', () => flyTo(+b.dataset.view)));
+world.controls.addEventListener('start', () => { camTween = null; });
 
 // ---------- picking ----------
 const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2();
@@ -385,6 +407,13 @@ function frame(now) {
     if (!scrubbing) $('scrub').value = String(Math.round(1000 * EP / Math.max(1, totalEvents())));
     uiAccum += dt;
     if (uiAccum > .25) { setStats(); uiAccum = 0; }
+  }
+  if (camTween) {
+    camTween.k = Math.min(1, camTween.k + dt / 1.1);
+    const e2 = 1 - Math.pow(1 - camTween.k, 3);
+    world.camera.position.lerpVectors(camTween.p0, camTween.p1, e2);
+    world.controls.target.lerpVectors(camTween.t0, camTween.t1, e2);
+    if (camTween.k >= 1) camTween = null;
   }
   if (introT) {
     introT = Math.max(0, introT - dt / 2.2);
