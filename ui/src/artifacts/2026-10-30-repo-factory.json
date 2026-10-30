@@ -1,0 +1,6 @@
+{
+  "title": "The Little Factory",
+  "description": "A paper-craft factory replaying a GitHub repo's history: branches feed assembly bays, commits arrive as crates, and merged PRs roll off the line as machines shipped to production. Scrub the timeline, or enter any public repo to visit its factory.",
+  "date": "2026-10-30",
+  "tags": ["github", "factory", "3d", "three.js", "history", "timeline", "interactive", "machines"]
+}
