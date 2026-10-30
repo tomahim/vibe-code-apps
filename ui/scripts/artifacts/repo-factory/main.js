@@ -310,7 +310,7 @@ const VIEWS = [
   { pos: [-13.5, 5, 6.5], tgt: [5, 1.8, -2] },   // down the production line (default)
   { pos: [-7.5, 3.2, 3.5], tgt: [-3.5, 1.8, -4] }, // robot arms at work
   { pos: [10.5, 6, 13], tgt: [17.5, 5, 6] },       // gear tower + portal
-  { pos: [-2, 13, 17], tgt: [0, 1, -2] },          // hall overview
+  { pos: [-6, 12, 9.5], tgt: [3, 1, -3.5] },     // hall overview
 ];
 let camTween = null;
 function flyTo(i) {
