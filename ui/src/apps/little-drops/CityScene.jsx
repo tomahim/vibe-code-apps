@@ -4,9 +4,9 @@ import { stops } from './content.js';
 
 const path = stops.map(s => new THREE.Vector3(...s.position));
 const colors = { soil: 0xd4bfa4, grass: 0xb5cab5, pipe: 0x266b73, water: 0x73d7df, cream: 0xf8ebd4, roof: 0xd77e60 };
-export default function CityScene({ selected, cutaway, playing, height, onSelect, onEnd }) {
-  const host = useRef(null), state = useRef({ selected, cutaway, playing, height, onSelect, onEnd });
-  state.current = { selected, cutaway, playing, height, onSelect, onEnd };
+export default function CityScene({ selected, cutaway, height, onSelect }) {
+  const host = useRef(null), state = useRef({ selected, cutaway, height, onSelect });
+  state.current = { selected, cutaway, height, onSelect };
   const [failed, setFailed] = useState(false), [turn, setTurn] = useState(0);
   const rotation = useRef(0); rotation.current = turn;
   useEffect(() => {
@@ -67,6 +67,20 @@ export default function CityScene({ selected, cutaway, playing, height, onSelect
     mesh(new THREE.TubeGeometry(curve,70,.105,10,false),colors.pipe,0,0,0,island);
     const pipeDrops=[];
     for(let i=0;i<16;i++) pipeDrops.push(mesh(new THREE.SphereGeometry(.062,10,8),0xb3f8ef,0,0,0,island));
+    const branches = new THREE.Group(); island.add(branches);
+    const branchRoutes = [
+      [[-5,.2,-.35],[-5,-.57,-.35],[-5,-.57,1.55]],
+      [[-2.2,.5,-.5],[-2.2,-.57,-.5],[-2.2,-.57,1.55]],
+      [[.6,2.45,-.8],[.6,-.57,-.8],[.6,-.57,1.55]],
+      [[3,-.57,1.55],[3,-.57,-1],[3,.12,-1]],
+      [[4.5,-.57,1.55],[4.5,-.57,-1.2],[4.5,.12,-1.2]],
+      [[5,-.57,1.55],[5,-.57,.35],[5,.12,.35]],
+    ];
+    branchRoutes.forEach(points => {
+      const c = new THREE.CurvePath();
+      for(let i=1;i<points.length;i++) c.add(new THREE.LineCurve3(new THREE.Vector3(...points[i-1]),new THREE.Vector3(...points[i])));
+      mesh(new THREE.TubeGeometry(c,24,.065,8,false),0x40868a,0,0,0,branches);
+    });
     const markerGeo = new THREE.SphereGeometry(.21,24,16);
     const markerMat = new THREE.MeshStandardMaterial({color:0x0e737f,emissive:0x166d76,emissiveIntensity:.25,roughness:.25}); resources.push(markerGeo,markerMat);
     const drop = new THREE.Mesh(markerGeo,markerMat); drop.scale.set(1,1.32,1); island.add(drop);
@@ -74,22 +88,21 @@ export default function CityScene({ selected, cutaway, playing, height, onSelect
     const hotspots=stops.map((s,i) => {const hit=mesh(new THREE.SphereGeometry(.43,12,8),0xffffff,...s.position,island); hit.material.transparent=true; hit.material.opacity=0; hit.userData.index=i;return hit;});
     const ring=mesh(new THREE.TorusGeometry(.37,.035,8,40),0xfef8e9,0,0,0,island);ring.rotation.x=-Math.PI/2;
     const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
-    function click(e){ const rect=el.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(hotspots)[0];if(hit)state.current.onSelect(hit.object.userData.index); }
+    function click(e){ const rect=el.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(hotspots)[0];if(hit){state.current.onSelect(hit.object.userData.index);}  }
     function lost(e){ e.preventDefault();setFailed(true); }
     renderer.domElement.addEventListener('click',click);renderer.domElement.addEventListener('webglcontextlost',lost);
     function resize(){const w=el.clientWidth,h=el.clientHeight; renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();} observer=new ResizeObserver(resize);observer.observe(el);resize();
-    let last=0,elapsed=0,journey=0,wasPlaying=false;
+    let last=0,elapsed=0;
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function draw(time){if(disposed)return;frame=requestAnimationFrame(draw);const dt=Math.min((time-last)/1000,.05);last=time;elapsed+=dt;
-      const s=state.current;const angle=rotation.current;
+      const s=state.current;const angle=rotation.current;branches.visible=s.cutaway;
+      if(document.hidden)return;
       const dist=camera.aspect>2?11.5:camera.aspect<1?23:18;
       camera.position.set(Math.sin(angle)*dist,dist*.63,Math.cos(angle)*dist);camera.lookAt(0,.35,0);
       verge.position.y=THREE.MathUtils.lerp(verge.position.y,s.cutaway?-.95:-.25,.12);verge.material.transparent=true;verge.material.opacity=s.cutaway?.14:1;
       const towerScale=.65+s.height/45;tank.position.y=2.45*towerScale;lid.position.y=tank.position.y+.5;waterBand.position.y=tank.position.y-.03;
       legs.forEach(l=>{l.scale.y=towerScale;l.position.y=towerScale;});
-      if(s.playing&&!wasPlaying)journey=s.selected;
-      if(s.playing){journey+=dt*.27;const n=Math.min(4,Math.floor(journey));if(n!==s.selected)s.onSelect(n);if(journey>=4.8){s.onEnd();journey=4;}}
-      wasPlaying=s.playing;
+      hotspots[2].position.y=tank.position.y+.35;hotspots[3].position.set(2.7,s.cutaway?-.25:.65,1.55);
       const target=path[s.selected].clone();if(s.selected===2)target.y=tank.position.y+.7;
       if(s.selected===3)target.set(2.7,s.cutaway?-.25:.65,1.55);
       drop.position.lerp(target,.08);drop.position.y+=reduced?0:Math.sin(elapsed*2.6)*.0015;

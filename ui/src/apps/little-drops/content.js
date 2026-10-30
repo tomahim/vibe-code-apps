@@ -1,4 +1,5 @@
 export const sources = {
+  network: { label: 'EPA · Drinking water distribution systems', url: 'https://www.epa.gov/dwreginfo/drinking-water-distribution-system-tools-and-resources' },
   treatment: { label: 'CDC · How water treatment works', url: 'https://www.cdc.gov/drinking-water/about/how-water-treatment-works.html' },
   supply: { label: 'USGS · How water reaches our homes', url: 'https://www.usgs.gov/water-science-school/science/water-qa-how-water-supplied-our-homes' },
   pressure: { label: 'OpenStax · Pressure with depth', url: 'https://openstax.org/books/college-physics-2e/pages/11-4-variation-of-pressure-with-depth-in-a-fluid' },

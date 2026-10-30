@@ -17,3 +17,6 @@ WebGL failure leaves all explanations and experiments available. Motion is reduc
 
 ## Development priorities
 Make mechanisms understandable and fun before adding more journeys. Next candidates: stronger visual branching in the pipe network, a demand/storage experiment, and a first original soundscape with opt-in audio. Backend remains out of scope until Thomas approves it.
+
+## Release 002
+Valves & routes is a graph-connectivity toy, not a hydraulic calculation. All eight valve combinations are unit-tested. SVG status, patterns and valve symbols work without color or WebGL. The city branches are illustrative and independent of the toy topology. Guided playback lives in React so it also works on the non-WebGL fallback, pauses in a hidden tab and stops on the final stop.
