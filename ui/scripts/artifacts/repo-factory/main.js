@@ -53,8 +53,8 @@ const tickBox = $('ticker');
 function tick(html, tone) {
   const d = document.createElement('div');
   d.className = 'tick'; d.innerHTML = html;
-  if (tone === 'merge') d.style.borderLeftColor = '#5fa84a';
-  if (tone === 'open') d.style.borderLeftColor = '#3f8fd2';
+  if (tone === 'merge') d.style.borderLeftColor = '#4ade80';
+  if (tone === 'open') d.style.borderLeftColor = '#39d5ff';
   if (tone === 'supply') d.style.borderLeftColor = '#f08a24';
   tickBox.appendChild(d);
   requestAnimationFrame(() => d.classList.add('on'));
@@ -287,11 +287,11 @@ $('scrub').addEventListener('input', () => {
 });
 $('zoom-in').addEventListener('click', () => dolly(.8));
 $('zoom-out').addEventListener('click', () => dolly(1.25));
-$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [0, 1.6, 0] : [-2, 1.6, -.5])); introT = 0; });
+$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [2, 2, -1] : [4.5, 1.8, -0.5])); introT = 0; });
 function dolly(f) {
   const c = world.camera, t = world.controls.target;
   const v = c.position.clone().sub(t).multiplyScalar(f);
-  const len = Math.min(62, Math.max(9, v.length())); v.setLength(len);
+  const len = Math.min(23, Math.max(5, v.length())); v.setLength(len);
   c.position.copy(t).add(v);
 }
 addEventListener('keydown', (e) => {
@@ -371,7 +371,7 @@ function setDataset(data) {
 }
 
 // ---------- main loop ----------
-const CAM0 = world.lite ? [33, 30, 40] : [25.5, 24.5, 31];
+const CAM0 = world.lite ? [-16, 9.5, 16] : [-19.5, 7.5, 14];
 let last = performance.now(), uiAccum = 0, introT = reducedMotion() ? 0 : 1;
 function frame(now) {
   requestAnimationFrame(frame);
@@ -389,7 +389,7 @@ function frame(now) {
   if (introT) {
     introT = Math.max(0, introT - dt / 2.2);
     const e = 1 - Math.pow(1 - (1 - introT), 3);
-    world.camera.position.set(CAM0[0] + 9 * (1 - e), CAM0[1] + 6 * (1 - e), CAM0[2] + 13 * (1 - e));
+    world.camera.position.set(CAM0[0] + 8 * (1 - e), CAM0[1] + 5 * (1 - e), CAM0[2] + 9 * (1 - e));
   }
   const backlog = queue.length + jobs.length;
   const animScale = Math.min(6, 1 + backlog * .3);
