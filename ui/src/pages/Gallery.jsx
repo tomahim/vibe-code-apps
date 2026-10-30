@@ -4,6 +4,7 @@ import collectionArtwork from "../assets/genious-apps.png";
 import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
+  { slug: "little-drops", name: "Little Drops", description: "Follow a water drop through a cutaway city. Play with the hidden mechanisms behind everyday life.", category: "Explore & learn", icon: "💧" },
   {
     slug: "little-factory",
     name: "The Little Factory",
