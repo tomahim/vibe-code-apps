@@ -4,6 +4,7 @@ import Login from "../pages/Login.jsx";
 import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
+const LittleDrops = lazy(() => import("../apps/little-drops/LittleDrops.jsx"));
 const News = lazy(() => import("../apps/news/News.jsx"));
 const LittleGrains = lazy(() => import("../apps/little-grains/LittleGrains.jsx"));
 
@@ -45,6 +46,10 @@ export default function App() {
 
   if (path === "/apps/news") {
     return <Suspense fallback={<div>Opening the briefing...</div>}><News onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path === "/apps/little-drops") {
+    return <Suspense fallback={<div>Following the drop...</div>}><LittleDrops onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/little-grains")) {
