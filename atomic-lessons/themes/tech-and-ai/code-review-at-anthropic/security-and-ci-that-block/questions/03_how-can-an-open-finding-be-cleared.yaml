@@ -1,0 +1,20 @@
+id: fbc738d5-3432-4aca-8add-2ba95f3b7214
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How can an open finding be cleared?
+choices:
+- id: 936536e5-2931-4e8d-ab3e-86710cea97fc
+  text: Fix it, close the thread with a short reason, or land a later commit that fixes it
+- id: a36b527c-22c3-4454-bd9f-f260311ec3b4
+  text: Only a manager can clear it
+- id: 528c1779-6d8a-4b9f-b053-2920ba1f1bb7
+  text: Wait thirty days
+- id: 09cdd4d0-91ef-4411-90bb-93b904afd3f1
+  text: Delete the pull request
+correct_choice_ids:
+- 936536e5-2931-4e8d-ab3e-86710cea97fc
+explanation: You fix the issue or close the thread with a short reason, which clears a false positive. If a later commit fixes
+  the issue, the finding clears on its own.
+archived: false

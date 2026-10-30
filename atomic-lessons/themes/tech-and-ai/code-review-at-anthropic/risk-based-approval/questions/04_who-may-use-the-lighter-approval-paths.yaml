@@ -1,0 +1,19 @@
+id: 82c89776-f80b-485b-8f0a-d744f2bcbaa7
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Who may use the lighter approval paths?
+choices:
+- id: b834cfa0-e992-4f82-b245-8e0ddfadd249
+  text: Only authors on the repo's trusted list, mostly the owning team
+- id: bfd9b9a9-903f-47ef-8532-f3e25fac6fd8
+  text: Anyone with a GitHub account
+- id: ef933bfd-b918-46cd-a8b6-ed30fe8528f6
+  text: Only agents
+- id: 50a32244-f6ba-4021-87da-0ec55c07a643
+  text: The loudest requester
+correct_choice_ids:
+- b834cfa0-e992-4f82-b245-8e0ddfadd249
+explanation: Only authors on the repository's trusted list get the lighter paths; everyone else needs a second person to approve.
+archived: false

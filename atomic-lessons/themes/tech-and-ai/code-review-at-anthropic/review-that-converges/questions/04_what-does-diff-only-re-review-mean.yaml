@@ -1,0 +1,20 @@
+id: 817c7878-b116-4aba-84dd-010d2ae6867a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What does diff-only re-review mean?
+choices:
+- id: 63b08201-8501-4564-a451-604096de7706
+  text: After the first few passes, the reviewer looks only at what changed since the last round
+- id: 048a522c-61b2-42f4-9d0b-76ca949c5901
+  text: The reviewer re-reads the entire repository
+- id: 8489cfc4-c413-4795-bdf4-b37f80bdd8ac
+  text: Only documentation is re-reviewed
+- id: 4bda19ad-fe1e-4257-ab3a-94c8b51ed9ea
+  text: The diff is hidden from the reviewer
+correct_choice_ids:
+- 63b08201-8501-4564-a451-604096de7706
+explanation: After the first few passes, re-review covers only the new diff, not the whole pull request again, which shrinks
+  each round's scope.
+archived: false

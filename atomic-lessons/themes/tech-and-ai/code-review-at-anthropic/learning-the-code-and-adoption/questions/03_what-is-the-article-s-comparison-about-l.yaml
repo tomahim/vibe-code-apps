@@ -1,0 +1,20 @@
+id: 12bb2966-bd42-4893-aeb6-e0cf4688f314
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What is the article's comparison about learning value?
+choices:
+- id: 3be11bd8-ffa5-44a9-8605-aa319ff7482e
+  text: A one-line copy change teaches almost nothing; an explainer for the module you are about to change teaches a lot
+- id: cdf411d9-384d-499f-a7c0-621f94d4fd81
+  text: All diffs teach equally
+- id: 8fd56abe-c990-4122-95b0-b9c68d7b3bcc
+  text: Reading code never teaches anything
+- id: 99fb180a-6bc1-4e79-921d-331633bcd5bc
+  text: Only postmortems teach
+correct_choice_ids:
+- 3be11bd8-ffa5-44a9-8605-aa319ff7482e
+explanation: Reading trivial diffs line by line teaches almost nothing. An explainer for the module you are about to change
+  teaches a lot, arriving exactly when needed.
+archived: false

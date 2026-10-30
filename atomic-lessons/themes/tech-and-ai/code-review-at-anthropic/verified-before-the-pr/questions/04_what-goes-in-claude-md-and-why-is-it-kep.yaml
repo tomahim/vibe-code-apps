@@ -1,0 +1,20 @@
+id: 4b4e645b-bcdd-4793-8fe7-860365143d4f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What goes in CLAUDE.md, and why is it kept short?
+choices:
+- id: 5f5e8a75-8c92-4b21-b79c-86ced3105b0b
+  text: The stack, conventions, goals and non-goals; every review loads it, so it points to other docs
+- id: cd124b3f-e407-48b8-bd39-93241d8dc12d
+  text: The full API reference; longer is always better
+- id: f3dc8fbd-3b97-4779-9a2e-82a8a6d62aa4
+  text: Personal coding preferences; it is never read
+- id: ae252b70-ef50-40bc-89cb-48ab2e59cf3b
+  text: Deployment secrets; it is encrypted
+correct_choice_ids:
+- 5f5e8a75-8c92-4b21-b79c-86ced3105b0b
+explanation: 'CLAUDE.md tells Claude what the project is: stack, conventions, goals and non-goals. Every review loads it,
+  so in a large codebase it stays short and points to other docs.'
+archived: false

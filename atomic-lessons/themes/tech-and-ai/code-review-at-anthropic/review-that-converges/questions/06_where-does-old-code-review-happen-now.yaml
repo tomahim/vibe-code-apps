@@ -1,0 +1,20 @@
+id: 6c67ae6c-0e39-4f1b-99ac-7eb516559cd2
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Where does old-code review happen now?
+choices:
+- id: dde5152c-20c3-4761-a3ad-7e87e2abe73f
+  text: Review agents run nightly over existing code, separate from pull request review
+- id: 3f185311-448d-49da-be7b-d576688d06f9
+  text: Only during someone else's PR
+- id: a9976084-059c-46b3-a441-9ccdbbe8c5f9
+  text: Never, old code is off limits
+- id: 87ce6d34-d537-4cbd-84ab-a57f10bde0cd
+  text: In the merge queue
+correct_choice_ids:
+- dde5152c-20c3-4761-a3ad-7e87e2abe73f
+explanation: Review agents run nightly over existing code, catching old bugs before they show up somewhere else, so pull request
+  review can focus on the change.
+archived: false

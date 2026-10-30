@@ -1,0 +1,20 @@
+id: d52eecfc-bfa8-47db-b1e4-4eda12cac2f3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What does required CI cover on a typical CLI pull request?
+choices:
+- id: f13f0a5a-747b-4e25-a1f2-50deda8c9778
+  text: Lint, type checks, tests on every platform, and a build, often dozens of checks
+- id: b3a9ac49-b7e5-4e4a-b77c-2a4c6f606731
+  text: A single unit test
+- id: 42b04513-c88c-4b4e-8376-af4f15b1af53
+  text: Only a style formatter
+- id: 9a0bc828-2014-4325-81a7-49aed024ef6d
+  text: A manual QA session
+correct_choice_ids:
+- f13f0a5a-747b-4e25-a1f2-50deda8c9778
+explanation: Required CI covers lint, types, tests across platforms, and build and packaging. A typical CLI pull request may
+  run dozens of checks, and red blocks the merge.
+archived: false

@@ -1,0 +1,20 @@
+id: c88e2b7d-7315-42ae-811f-cec888de846a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What does the AI reviewer read a diff against?
+choices:
+- id: 07c3c5db-63dd-4be2-a9fc-b62e29012119
+  text: The whole repository and the PR's stated intent
+- id: a8c3d257-ae69-438f-bce7-5aec48425a5e
+  text: Only the changed lines
+- id: 028413a3-f5c9-4cc4-9d1d-42a532441ce8
+  text: The author's commit history
+- id: 96b4c755-8844-4357-bcbe-26e28ce74d9b
+  text: The project's chat logs
+correct_choice_ids:
+- 07c3c5db-63dd-4be2-a9fc-b62e29012119
+explanation: The reviewer reads the diff against the whole repo and the PR's stated intent, asking whether the change solves
+  its problem, fits the system, or breaks something else.
+archived: false

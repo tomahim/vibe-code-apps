@@ -1,0 +1,20 @@
+id: 777e6b05-6319-4882-9466-e66bd4e16c76
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is the test of whether you are really reading the evidence?
+choices:
+- id: 64bcc936-679e-4ea0-8839-116e350802a1
+  text: You can say what the checks would miss; otherwise ask for a real review
+- id: 1df20aa9-3693-48cc-8968-cebc5f36e011
+  text: You read at least half the lines
+- id: 63b3403b-eb78-4266-add6-26e7270e3142
+  text: You approve within five minutes
+- id: 19f64ee4-4ced-4414-86b1-3feb264dc032
+  text: You re-run every test by hand
+correct_choice_ids:
+- 64bcc936-679e-4ea0-8839-116e350802a1
+explanation: If you cannot say what the checks would miss, ask for a real review rather than a quick approval. Verifying the
+  verification is the human job no layer can do for itself.
+archived: false

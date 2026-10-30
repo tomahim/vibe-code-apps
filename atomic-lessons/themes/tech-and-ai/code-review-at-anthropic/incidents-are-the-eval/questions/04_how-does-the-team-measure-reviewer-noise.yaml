@@ -1,0 +1,20 @@
+id: 7ad9a3b7-7469-4b9a-afc6-a95444c54026
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How does the team measure reviewer noise?
+choices:
+- id: 79899ca0-234f-4de5-87e9-5971e6e3e44e
+  text: By sorting comments by how the person responded, and running the reviewer on known-clean PRs
+- id: 131fb6fe-8aaa-48f3-9a9c-f8ef906d5a5f
+  text: By counting total comments only
+- id: d4fab283-88d0-468b-ab14-eb24ab28ec19
+  text: By asking the reviewer if it is noisy
+- id: 6f44131b-a5f9-49b9-b4b2-6eae7edd51a8
+  text: Noise cannot be measured
+correct_choice_ids:
+- 79899ca0-234f-4de5-87e9-5971e6e3e44e
+explanation: They sort every comment by the response (fixed, wrong, intentional, did not matter) and run the reviewer on PRs
+  known to be clean, counting reports that would have caused harmful changes.
+archived: false

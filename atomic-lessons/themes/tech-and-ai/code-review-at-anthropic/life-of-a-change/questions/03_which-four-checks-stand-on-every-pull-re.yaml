@@ -1,0 +1,20 @@
+id: c75c7971-c259-4e76-b5a8-fe5535516147
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Which four checks stand on every pull request?
+choices:
+- id: 6658e269-e524-4172-b539-8f2e5982dfb4
+  text: Required CI, Claude code review, security review, and risk-based approval
+- id: 6e781213-4d01-4c47-9a16-63534db9139b
+  text: Only a style linter and a human skim
+- id: 877c45be-99fc-4350-8bae-ebaa1afc51fb
+  text: Unit tests, manual QA, design review, and marketing sign-off
+- id: d2a2ca5e-65fb-4453-b643-8dd14a09f389
+  text: A vote, a coin flip, a quota, and a freeze
+correct_choice_ids:
+- 6658e269-e524-4172-b539-8f2e5982dfb4
+explanation: 'On every pull request: required CI (red blocks the merge), Claude code review with voting verifiers, a separate
+  security review, and risk-based approval setting the human tier.'
+archived: false

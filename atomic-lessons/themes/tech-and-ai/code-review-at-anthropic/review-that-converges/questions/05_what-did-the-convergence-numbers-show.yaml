@@ -1,0 +1,20 @@
+id: ba4a2068-3f3c-497d-91e3-bc4030816fb2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What did the convergence numbers show?
+choices:
+- id: c4921d52-a80c-4bca-affd-a41e434d94c7
+  text: Passing after one round rose from 65 to 78 percent, and five-or-more-round PRs fell from 8.9 to 1.5 percent
+- id: d4f46485-4bda-402c-b6d6-2e5ea7194385
+  text: Everything got slower
+- id: 565f6c80-30fb-4b63-8595-536c6864f5fe
+  text: Rounds doubled for every PR
+- id: ce4b2dd6-3174-4237-9bc2-aeed99144137
+  text: The metrics were unchanged
+correct_choice_ids:
+- c4921d52-a80c-4bca-affd-a41e434d94c7
+explanation: Passing after one review and fix round rose from 65 to 78 percent, five-or-more-round PRs fell from 8.9 to 1.5
+  percent, and mean reviews to pass fell from 2.08 to 1.32.
+archived: false

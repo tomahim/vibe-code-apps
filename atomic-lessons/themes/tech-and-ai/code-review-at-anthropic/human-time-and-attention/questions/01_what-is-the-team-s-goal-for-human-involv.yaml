@@ -1,0 +1,20 @@
+id: 64872cfc-893a-4512-a040-f4f6ab0c5cf6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What is the team's goal for human involvement on most pull requests?
+choices:
+- id: 74dfe776-2b22-4cbb-9554-496d047d8e2e
+  text: At most one human in the loop, who can be the author
+- id: 8043f679-10ef-46a7-9cfc-b707a6bbada3
+  text: Exactly three senior reviewers
+- id: fa804b21-ad11-40aa-b42f-901c1882eead
+  text: No humans under any circumstances
+- id: e1c8af0e-7524-48e5-83a3-a60d425712d3
+  text: Two humans on every change
+correct_choice_ids:
+- 74dfe776-2b22-4cbb-9554-496d047d8e2e
+explanation: The goal is that most pull requests in the Claude Code repos merge with at most one human in the loop, who can
+  be the author, with no increase in reverts or incidents.
+archived: false

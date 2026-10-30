@@ -1,0 +1,20 @@
+id: 57f339d7-2774-4383-ab59-8508f4303e72
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: On an agent-written PR, who counts as a required reviewer?
+choices:
+- id: 54280b3e-9e98-43c3-8f6f-472a5a4f7bec
+  text: The person directing the agent, as if they typed the code themselves
+- id: 392c082a-98b8-40e7-a76d-4bd7e1bb298c
+  text: The agent itself
+- id: 296bc06a-8183-4cf5-928e-8a6488296fd2
+  text: Nobody, agent PRs are exempt
+- id: 71154ae5-4bb7-4db5-bda1-fb99616e4389
+  text: A random teammate
+correct_choice_ids:
+- 54280b3e-9e98-43c3-8f6f-472a5a4f7bec
+explanation: 'An agent''s approval never counts as a person''s, and whoever prompted the change is on the hook: the person
+  directing the agent counts as one of the required reviewers.'
+archived: false

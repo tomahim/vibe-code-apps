@@ -1,0 +1,20 @@
+id: 118e74b1-d434-4efc-9c68-d2be6044f279
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is the trick to redirecting work that should not land?
+choices:
+- id: 3eb69fa1-db3b-4b58-9268-983b512f29d6
+  text: Raise a different direction early in the thread, not as a blocking comment on a finished PR
+- id: 0dcd0039-5c1a-4d28-a35f-9a513c20eb26
+  text: Reject it at the release stage
+- id: 206bbb11-5ecb-4477-8487-b337ada6887f
+  text: Say nothing and revert later
+- id: 3c5599cc-1960-4e14-bd89-c78bf26c405b
+  text: Close the PR without comment
+correct_choice_ids:
+- 3eb69fa1-db3b-4b58-9268-983b512f29d6
+explanation: Raise the redirection early, not as a blocking comment on a finished pull request. Since agent code is fast to
+  write, closing or reshaping the PR does not feel like a loss.
+archived: false

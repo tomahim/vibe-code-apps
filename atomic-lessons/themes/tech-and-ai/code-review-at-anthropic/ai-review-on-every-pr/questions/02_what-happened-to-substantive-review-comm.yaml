@@ -1,0 +1,20 @@
+id: fcb96c1d-8dce-41f1-aa5a-57a79d815837
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What happened to substantive review comments when the research preview launched?
+choices:
+- id: 22809fde-35bb-41ea-afa2-011bf0f469ad
+  text: The share of internal PRs getting them rose from 16 percent to 54 percent
+- id: ef03bfe0-7aac-43a7-9a4f-2669102d7be0
+  text: They fell to zero
+- id: cc5080b5-7bd4-4f2d-8e87-ab98d699a8c4
+  text: They stayed exactly flat
+- id: f49dc5bd-cbb2-43b4-9e18-eab55fbaca4f
+  text: They doubled the PR count instead
+correct_choice_ids:
+- 22809fde-35bb-41ea-afa2-011bf0f469ad
+explanation: The share of internal pull requests getting substantive review comments went from 16 percent to 54 percent after
+  the reviewer launched.
+archived: false

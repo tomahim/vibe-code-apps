@@ -1,0 +1,20 @@
+id: f1dc16b4-70ae-4d56-8fb4-9a895189e9b9
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What does the team do when the reviewer keeps flagging the same thing?
+choices:
+- id: f4c33116-58e7-435d-9438-d69727e96920
+  text: 'Fix it at the source: in the skill, a lint rule, or the instructional files'
+- id: b8dac903-10ec-4c13-89a8-e7c2316928a1
+  text: Ignore the finding forever
+- id: 726449a5-fb31-462c-abe4-9d3a30c091ba
+  text: Ban the reviewer from that file
+- id: 3757713b-a732-4cae-a437-5a418140e5ea
+  text: Add more human reviewers
+correct_choice_ids:
+- f4c33116-58e7-435d-9438-d69727e96920
+explanation: 'Repeated flags get fixed at the source: in the skill that guides the agent, with a lint rule, or with updates
+  to files like CLAUDE.md and REVIEW.md.'
+archived: false

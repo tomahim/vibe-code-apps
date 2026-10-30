@@ -1,0 +1,20 @@
+id: 6983ce5a-29b0-45fd-9ac1-e7d84e73a162
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What keeps “you land it, you own it” from going badly?
+choices:
+- id: 04922a9e-18a8-48c1-bf10-c1f6b0185a62
+  text: Small changes, full reversibility, blast-radius-based review, fast telemetry, and no blame
+- id: b9cf282e-5a56-4b9a-a78e-076e17919375
+  text: Strict punishment for mistakes
+- id: e39d3747-d7cd-4140-ac37-35d7952fcc51
+  text: Only seniors may land changes
+- id: 9b73d77a-0a99-4c60-ac98-4a255c5b0d29
+  text: Ownership rotates every hour
+correct_choice_ids:
+- 04922a9e-18a8-48c1-bf10-c1f6b0185a62
+explanation: Changes are small and reversible, blast radius sets the review bar, regressions surface fast, and owning a fix
+  is about context, not blame; incident reviews look at the system.
+archived: false

@@ -1,0 +1,20 @@
+id: 864ddb3d-797e-4f08-adcb-c2ea7d7e0265
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Why is the pre-PR diff review done by a second agent with fresh context?
+choices:
+- id: 3a72c640-ad8f-455d-a5df-194ce632e613
+  text: The writing agent shares the author's blind spots, so a cold reader spots what the code actually does
+- id: b3c11d61-152f-4c9b-a6dd-b1136f024462
+  text: It is cheaper than reusing the same agent
+- id: 9e35029f-d08f-46a2-9d7d-9ec106557039
+  text: Fresh context makes the agent slower and more careful
+- id: e7e719da-9e99-411e-8970-d55910e154b5
+  text: The first agent is deleted after writing code
+correct_choice_ids:
+- 3a72c640-ad8f-455d-a5df-194ce632e613
+explanation: The agent that wrote the code produced the same reasoning that produced the bugs. A second agent reading the
+  diff cold is more likely to notice what the code actually does.
+archived: false

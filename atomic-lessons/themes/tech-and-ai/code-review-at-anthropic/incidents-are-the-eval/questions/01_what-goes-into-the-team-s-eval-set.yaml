@@ -1,0 +1,20 @@
+id: e4919094-9286-4fbc-908c-de9c39bff056
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What goes into the team's eval set?
+choices:
+- id: 3bc886ed-d0df-4eca-9af7-a765731f5ec5
+  text: Past PRs that caused incidents, with fix-forwards and reverts, each bug confirmed by engineers who know the code
+- id: 86685a81-a4ef-44ad-af8a-c06ce1088013
+  text: Random open-source bugs
+- id: ea0f2f4a-87a5-4854-a073-1b31bd35fcff
+  text: Synthetic bugs invented by a model
+- id: cc13924f-0fd5-49b2-a841-0be5a4bb1701
+  text: Only style violations
+correct_choice_ids:
+- 3bc886ed-d0df-4eca-9af7-a765731f5ec5
+explanation: The team collected past pull requests that caused incidents, with their fix-forwards and reverts, and had engineers
+  who know that code confirm each bug and where it lived.
+archived: false

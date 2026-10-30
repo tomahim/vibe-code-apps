@@ -1,0 +1,20 @@
+id: abead09c-03de-4b09-bb06-4b21cd3dfa6f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What happened on the extreme CLI pull request the article mentions?
+choices:
+- id: bf44682b-d1de-4fd3-b634-f201c9423d7a
+  text: It went through more than fifty rounds of review and fixes overnight before the author stopped it
+- id: c4552092-528b-4dc7-a265-8f886b7ce0ef
+  text: It merged with no review at all
+- id: 567dc171-d4de-4de3-b109-9d421d45af72
+  text: It was reviewed by fifty humans
+- id: 48550142-6e91-4154-9422-b8e66223d58e
+  text: It deleted the repository
+correct_choice_ids:
+- bf44682b-d1de-4fd3-b634-f201c9423d7a
+explanation: One CLI pull request went through more than fifty rounds of review and fixes overnight before its author stopped
+  it, showing that two agents can keep each other busy indefinitely.
+archived: false

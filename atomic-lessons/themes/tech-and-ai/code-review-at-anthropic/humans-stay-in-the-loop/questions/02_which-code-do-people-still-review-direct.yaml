@@ -1,0 +1,20 @@
+id: 183a1415-1d18-4b7b-af6d-8000b81b4f23
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Which code do people still review directly?
+choices:
+- id: 2086e251-796d-4f59-b59e-0a4967dfb152
+  text: Risky code such as billing, the auto-updater and CI workflows
+- id: cec5cae5-2e10-4a4c-b683-f43181fe192d
+  text: Only CSS
+- id: 4e48dfd0-5165-4419-bc7c-5d71ab001727
+  text: Nothing at all
+- id: 784735bc-8fae-407a-97f4-626c8cc1c8c5
+  text: Code written last year
+correct_choice_ids:
+- 2086e251-796d-4f59-b59e-0a4967dfb152
+explanation: People review risky code such as billing, the auto-updater and CI workflows, plus architecture that sets a pattern
+  others will copy.
+archived: false

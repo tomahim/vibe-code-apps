@@ -1,0 +1,20 @@
+id: 46678d32-d4b1-4890-9476-d3209e4f1119
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What is the release order for new behavior?
+choices:
+- id: ffac531e-6737-4314-877e-bbf9dd18f8f7
+  text: Behind a flag to employees first, then the latest channel, with stable trailing
+- id: 6bde6787-12c5-4b1a-aa06-11ffe26aadc0
+  text: Straight to all users at once
+- id: e4ae081b-984c-4cca-b4aa-34763ce467ff
+  text: Stable channel first, latest later
+- id: 1047bbaa-4ebc-48c9-ae4b-1c5d35ee2d90
+  text: External beta users before employees
+correct_choice_ids:
+- ffac531e-6737-4314-877e-bbf9dd18f8f7
+explanation: New behavior ships behind a flag to Anthropic employees first, then public release goes to the latest channel
+  first while the stable channel trails it.
+archived: false

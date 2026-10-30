@@ -1,0 +1,20 @@
+id: 4ad3b80a-d911-43cc-a4d6-1f5cffba164b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: How often does the reviewer run against the set?
+choices:
+- id: 3266e8dc-0479-437c-8205-01977a8f5983
+  text: Daily, and on every change to its prompts, tools or model
+- id: 3c23ebef-c4ed-4302-b1dc-7b2530528557
+  text: Once a year
+- id: 371cd249-1e40-492d-b61c-4c08db424ea1
+  text: Only after an outage
+- id: c700050b-b9a7-48bb-be2f-75fc9c71b445
+  text: Never, the set is decorative
+correct_choice_ids:
+- 3266e8dc-0479-437c-8205-01977a8f5983
+explanation: 'The reviewer runs against the set daily. Every change to the reviewer is scored against all of it: if the score
+  went up they keep the change, otherwise they drop it.'
+archived: false

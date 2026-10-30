@@ -147,6 +147,16 @@ The essay's GPT-2 and GPT-3 dimensions are historical examples, not current Chat
 Wolfram's ideas about semantic laws and computational irreducibility are presented as his
 interpretations or open questions, not established descriptions of every language model.
 
+## Tech & AI: Code review at Anthropic
+
+The [Code review at Anthropic](themes/tech-and-ai/code-review-at-anthropic/index.md) path adapts
+[How the Claude Code team does code review](https://claude.dev/blog/solving-code-review-at-anthropic/)
+(claude.dev, October 2026) into 12 concept lessons. Each lesson has six teaching cards and a final
+**3 key learnings** recap card, plus six multiple-choice questions in two pools of three: one
+question is selected after card 3 and one after card 7. The article's five diagrams ship as card
+illustrations on the lessons they belong to (life of a change, layers, incident eval, convergence,
+and learning the code); they are credited to Anthropic.
+
 ## Language: 600 words for little english talkers
 
 The [vocabulary path](themes/language/600-words-for-little-english-talkers/index.md) follows the 21 workbook categories, one lesson per category. Each category has 30 distinct workbook items across eight cards of four entries. The final card revisits two earlier entries to fill its four slots. Workbook animal sound sentences remain with their animal word, including sounds under Sea Life and Insects & Bugs. **Space questions every two cards:** each lesson has 16 typed-answer questions in four pools of four, after cards 2, 4, 6, and 8. The learner answers one question from each pool, for four questions per lesson.

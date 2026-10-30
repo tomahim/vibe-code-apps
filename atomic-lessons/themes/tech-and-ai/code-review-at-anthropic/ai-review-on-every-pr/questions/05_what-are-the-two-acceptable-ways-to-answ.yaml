@@ -1,0 +1,20 @@
+id: 5321dd8e-4b57-4b0e-aa41-5ae3947e1637
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: What are the two acceptable ways to answer a finding?
+choices:
+- id: 75556c46-d40a-4503-9b8f-bda32eaeaad8
+  text: Fix it, or resolve the thread with a reason
+- id: 63e69673-e37c-410a-bd76-8628f5dbf1a9
+  text: Ignore it or delete it
+- id: 5efc2337-8632-4287-9c43-55e5f8c8454f
+  text: Close the PR or revert the repo
+- id: ea15bd3b-d4e9-4054-b803-8190116f6dfc
+  text: Argue in chat or postpone forever
+correct_choice_ids:
+- 75556c46-d40a-4503-9b8f-bda32eaeaad8
+explanation: 'Every finding has to be answered: either you fix it or you resolve the thread with a reason. Often an agent
+  picks up the fix overnight.'
+archived: false

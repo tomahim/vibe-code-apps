@@ -1,0 +1,20 @@
+id: d11ed593-e58c-480e-8c6d-d27741c7f414
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: What is the team's stance on keeping a complete mental model of Claude Code?
+choices:
+- id: b3f47a5a-98f1-438e-8615-48a483df72de
+  text: Nobody keeps one in their head, and they do not think anyone needs to
+- id: a7356350-c84a-441f-b063-6bf34040f092
+  text: Every engineer must maintain one
+- id: 65a60d71-cffb-4ba7-b509-1317ca72f82e
+  text: Only managers keep one
+- id: e1fff2a8-75d2-456c-bc14-3e9445ff2ea9
+  text: The model is printed on the wall
+correct_choice_ids:
+- b3f47a5a-98f1-438e-8615-48a483df72de
+explanation: Nobody on the team keeps a complete mental model of Claude Code in their head, and they do not think anyone needs
+  to; working knowledge of the slice you are touching is what matters.
+archived: false

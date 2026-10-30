@@ -1,0 +1,20 @@
+id: cbb62c6a-8a2b-4796-a902-dad43a8ff125
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: How should a team roll out an AI reviewer according to the article?
+choices:
+- id: b599e4d4-6110-4e2a-882d-3461c37a51c3
+  text: Start on one repository, tune REVIEW.md for a few weeks, then widen
+- id: 5fbbe34d-16cd-49a5-8a3b-4df25738e73b
+  text: Enable it everywhere at maximum depth on day one
+- id: d89034f9-ccb5-4d9f-82da-edd6a667e3f4
+  text: Never use one
+- id: ea5e936f-d2d3-4e11-8df5-a3a061408d6d
+  text: Only on archived repositories
+correct_choice_ids:
+- b599e4d4-6110-4e2a-882d-3461c37a51c3
+explanation: Add an AI reviewer on one repo, tune REVIEW.md for a few weeks, then widen. Match review effort to risk with
+  Quick, Standard or Deep settings.
+archived: false
