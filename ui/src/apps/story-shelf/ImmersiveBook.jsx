@@ -35,7 +35,7 @@ export default function ImmersiveBook({ book, opened, page, reduced, onNext, onP
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
       renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
     } catch { onUnavailable?.(); return undefined; }
     const dom = renderer.domElement; el.appendChild(dom);
     dom.setAttribute('role', 'img');
@@ -47,8 +47,8 @@ export default function ImmersiveBook({ book, opened, page, reduced, onNext, onP
     controls.minPolarAngle = .3; controls.maxPolarAngle = 1.15; controls.minAzimuthAngle = -.6; controls.maxAzimuthAngle = .6;
     controls.target.set(0, .15, .1); controls.autoRotate = false;
     dom.style.touchAction = 'pan-y';
-    scene.add(new THREE.HemisphereLight(0xfff0d0, 0x2a1d14, .9));
-    const lamp = new THREE.SpotLight(0xffd9a0, 62, 30, .7, .6, 1.4);
+    scene.add(new THREE.HemisphereLight(0xfff0d0, 0x2a1d14, .6));
+    const lamp = new THREE.SpotLight(0xffd9a0, 40, 30, .7, .6, 1.4);
     lamp.position.set(-3.5, 8, 4); lamp.castShadow = true; lamp.shadow.mapSize.set(1536, 1536); lamp.shadow.bias = -.0005;
     lamp.target.position.set(0, 0, 0); scene.add(lamp, lamp.target);
     const glow = new THREE.PointLight(0xffc880, 0, 9, 1.6); glow.position.set(0, 1.4, .2); scene.add(glow);
@@ -101,7 +101,7 @@ export default function ImmersiveBook({ book, opened, page, reduced, onNext, onP
     let model = null, modelKey = '', rise = 0, riseTarget = 0, sparkTime = 0;
     const sparkGeo = new THREE.BufferGeometry(); const SP = 70; const sp = new Float32Array(SP * 3);
     sparkGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-    const sparks = new THREE.Points(sparkGeo, new THREE.PointsMaterial({ color: 0xffe3a0, size: .05, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
+    const sparks = new THREE.Points(sparkGeo, new THREE.PointsMaterial({ color: 0xffe3a0, size: .035, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
     sparks.frustumCulled = false; bookRoot.add(sparks);
     function placeModel(key) {
       if (model) { bookRoot.remove(model); disposeTree(model); }
@@ -157,14 +157,14 @@ export default function ImmersiveBook({ book, opened, page, reduced, onNext, onP
       const speed = riseTarget ? dt / dur(1100) : dt / dur(260);
       rise = THREE.MathUtils.clamp(rise + (riseTarget > rise ? speed : -speed * 1.6), 0, 1);
       if (model) {
-        const e = riseTarget ? back(rise) : rise; const sc = .34 * Math.max(.001, e);
+        const e = riseTarget ? back(rise) : rise; const sc = .3 * Math.max(.001, e);
         model.scale.setScalar(sc); const bob = rm ? 0 : Math.sin(clock * 1.6) * .03 * rise;
-        model.position.set(.62, .2 + .5 * ease(rise) + bob, -.15); if (!rm) model.rotation.y += dt * .00035;
+        model.position.set(.62, .16 + .36 * ease(rise) + bob, -.15); if (!rm) model.rotation.y += dt * .00035;
       }
-      glow.intensity = 14 * rise; sparks.material.opacity = rm ? 0 : .85 * rise;
+      glow.intensity = 5 * rise; sparks.material.opacity = rm ? 0 : .85 * rise;
       sparkTime = clock;
       for (let i = 0; i < SP; i++) { const ph = (clock * .00022 + i / SP) % 1; const a = i * 2.4; const r = .25 + (i % 7) * .16;
-        sp[i * 3] = .62 + Math.cos(a + clock * .0004) * r; sp[i * 3 + 1] = .3 + ph * 1.5; sp[i * 3 + 2] = -.1 + Math.sin(a + clock * .0004) * r * .7; }
+        sp[i * 3] = .62 + Math.cos(a + clock * .0004) * r; sp[i * 3 + 1] = .25 + ph * 1.0; sp[i * 3 + 2] = -.1 + Math.sin(a + clock * .0004) * r * .7; }
       sparkGeo.attributes.position.needsUpdate = true;
       host.current?.setAttribute('data-open-t', S.openT.toFixed(2)); host.current?.setAttribute('data-flip-t', S.flip ? S.flip.t.toFixed(2) : '-'); host.current?.setAttribute('data-open', String(S.openT === 1)); host.current?.setAttribute('data-shown', String(S.shown));
       host.current?.setAttribute('data-flipping', String(!!S.flip)); host.current?.setAttribute('data-model', model ? String(rise > .95) : 'false');
@@ -186,7 +186,7 @@ export default function ImmersiveBook({ book, opened, page, reduced, onNext, onP
     const resize = () => {
       const w = el.clientWidth || 1, h = el.clientHeight || 1; renderer.setSize(w, h); camera.aspect = w / h;
       const tan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      const dist = Math.max(2.6 / (tan * camera.aspect), 1.5 / tan) * 1.02;
+      const dist = Math.max(2.6 / (tan * camera.aspect), 1.62 / tan) * 1.02;
       const dir = new THREE.Vector3().setFromSphericalCoords(1, .72, 0.0); camera.position.copy(controls.target).addScaledVector(dir, dist);
       camera.updateProjectionMatrix(); controls.update();
     };

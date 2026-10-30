@@ -3,7 +3,7 @@ import * as THREE from 'three';
 // Canvas textures for the immersive book: the same Markdown text and bundled
 // illustrations as the readable mode, drawn onto paper.
 export const PAGE_PX = { w: 1024, h: 1414 };
-const PAPER = '#f4ead2';
+const PAPER = '#f1e7cb';
 
 function paper(ctx, side) {
   const { w, h } = PAGE_PX;
@@ -91,14 +91,15 @@ export function drawCover(ctx, book, img, w, h) {
   ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
   ctx.strokeStyle = 'rgba(244,226,180,.7)'; ctx.lineWidth = 5; ctx.strokeRect(26, 26, w - 52, h - 52);
   ctx.fillStyle = '#f4e2b4'; ctx.textAlign = 'center';
-  ctx.font = '600 24px Georgia, serif'; ctx.fillText(`THE STORY ROOM · ${book.category.toUpperCase()}`, w / 2, h - 230);
-  ctx.font = '700 64px Georgia, serif';
-  const words = book.title.split(' '); let line = '', y = h - 160; const lines = [];
-  for (const word of words) { const t = line ? `${line} ${word}` : word; if (ctx.measureText(t).width > w - 120 && line) { lines.push(line); line = word; } else line = t; }
+  ctx.font = '700 60px Georgia, serif';
+  const lines = []; let line = '';
+  for (const word of book.title.split(' ')) { const t = line ? `${line} ${word}` : word; if (ctx.measureText(t).width > w - 120 && line) { lines.push(line); line = word; } else line = t; }
   lines.push(line);
-  y = h - 160 - (lines.length - 1) * 34;
-  for (const l of lines) { ctx.fillText(l, w / 2, y); y += 70; }
-  ctx.font = 'italic 28px Georgia, serif'; ctx.fillText(book.subtitle, w / 2, h - 52);
+  const first = h - 125 - (lines.length - 1) * 66;
+  ctx.font = '600 22px Georgia, serif'; ctx.fillText(`THE STORY ROOM · ${book.category.toUpperCase()}`, w / 2, first - 84);
+  ctx.font = '700 60px Georgia, serif';
+  lines.forEach((l, i) => ctx.fillText(l, w / 2, first + i * 66));
+  ctx.font = 'italic 27px Georgia, serif'; ctx.fillText(book.subtitle, w / 2, h - 62);
   ctx.textAlign = 'left';
 }
 
