@@ -4,6 +4,15 @@ import collectionArtwork from "../assets/genious-apps.png";
 import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
+  {
+    slug: "little-factory",
+    name: "The Little Factory",
+    description: "Step inside a dark futuristic factory where robot arms assemble a repo's merged PRs on the production line.",
+    category: "Creative coding",
+    icon: "🏭",
+    href: "/artifacts/2026-10-30-repo-factory",
+    action_label: "Enter the factory",
+  },
   { slug: "news", name: "Link Keeper", description: "Your Notion link library: inbox, news, favorites, inspiration and archive. Private account access required.", category: "News & ideas", icon: "▤" },
   {
     slug: "rust-learning-path",
@@ -143,7 +152,7 @@ export default function Gallery({ onOpenApp }) {
 
       <section id="app-gallery" className="app-grid" aria-label="App gallery">
         {filteredApps.map((app) => (
-          <button className="app-card" key={app.slug} onClick={() => app.href?.startsWith("/admin/") ? window.location.assign(app.href) : onOpenApp(app.slug)}>
+          <button className="app-card" key={app.slug} onClick={() => app.href ? window.location.assign(app.href) : onOpenApp(app.slug)}>
             <span className="app-card-icon" aria-hidden="true">{app.icon || "✦"}</span>
             <span className="app-card-category">{app.category}</span>
             <span className="app-card-title">{app.name}</span>
