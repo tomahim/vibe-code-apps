@@ -274,4 +274,3 @@ class QuestionAttempt(models.Model):
             condition=Q(attempt_type__in=["initial", "retry", "review"]), name="lg_attempt_valid_type",
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
-

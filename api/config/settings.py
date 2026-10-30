@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 from .database import database_config
 from .media import build_storages
 
@@ -42,6 +43,8 @@ UNFOLD = {
     "SITE_HEADER": "Vibe Code Apps",
     "SITE_SUBHEADER": "User management",
     "SITE_URL": "/",
+    # Default app list plus the learning dashboard link (see apps/admin_ui/sidebar.py).
+    "SIDEBAR": {"navigation": "apps.admin_ui.sidebar.navigation"},
 }
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

@@ -3,9 +3,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from apps.learning.admin import progress_dashboard_view
 from .views import app_gallery, health
 
 urlpatterns = [
+    path("admin/learning/progress/", progress_dashboard_view, name="admin-learning-progress"),
     path("admin/", admin.site.urls),
     path("health/", health, name="health"),
     path("api/learning/", include("apps.learning.urls")),
