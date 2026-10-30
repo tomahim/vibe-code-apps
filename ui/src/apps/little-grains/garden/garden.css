@@ -46,17 +46,31 @@
 .lg-hint{position:absolute;left:50%;bottom:68px;transform:translateX(-50%);font-size:12px;color:var(--dim);background:rgba(255,253,248,.85);border-radius:999px;padding:5px 12px;white-space:nowrap;transition:opacity .6s;pointer-events:none}.lg-hint.gone{opacity:0}
 .lg-mobile .lg-zoom{right:10px;bottom:auto;top:96px}.lg-mobile .lg-zoom button{width:44px;height:44px}.lg-mobile .lg-hint{bottom:auto;top:96px;left:10px;transform:none;white-space:normal;max-width:60%;border-radius:10px}
 @media(prefers-reduced-motion:reduce){.lg-fade,.lg-label,.lg-toast,.lg-panel{transition:none}}
-/* Question gauge + catch-up quiz (#204) */
-.lg-gauge{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fffaf0}
-.lg-gauge-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 7px;font:700 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.lg-gauge-head b{font:700 18px var(--serif);color:var(--ink);letter-spacing:0;text-transform:none}
-.lg-gauge .bar{display:block;width:100%;height:8px;border-radius:4px;background:#ece3d1;overflow:hidden}
-.lg-gauge .bar i{display:block;height:100%;background:var(--green);border-radius:4px}
-.lg-gauge-count{margin:7px 0 0;font-size:12px;color:var(--dim)}
-.lg-root .lg-quiz{margin:0 0 12px}
+/* Question gauge shrinks to a slim strip; the quiz floats outside (#204) */
+.lg-strip{display:flex;align-items:center;gap:9px;margin:0 0 10px}
+.lg-strip .bar{flex:1;display:block;height:5px;border-radius:3px;background:#ece3d1;overflow:hidden}
+.lg-strip .bar i{display:block;height:100%;background:var(--green);border-radius:3px}
+.lg-strip-count{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lg-root .primary:disabled{opacity:.55;cursor:not-allowed}
 .lg-root .primary:disabled:hover{background:var(--terra)}
-.lg-quiz-hint{margin:-6px 0 12px;font-size:11.5px;color:var(--dim);text-align:center}
+/* Practice quiz floats over the garden, outside the lesson panel */
+.lg-practice{position:absolute;z-index:2}
+.lg-practice[hidden]{display:none}
+.lg-desktop .lg-practice{top:64px;right:16px;width:224px}
+.lg-practice-card{background:rgba(255,253,248,.95);border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:0 14px 30px -18px rgba(60,40,10,.45);backdrop-filter:blur(8px)}
+.lg-practice-card h3{margin:0 0 8px;font:700 15px var(--serif)}
+.lg-practice-card .bar{display:block;height:5px;border-radius:3px;background:#ece3d1;overflow:hidden;margin:0 0 6px}
+.lg-practice-card .bar i{display:block;height:100%;background:var(--green);border-radius:3px}
+.lg-practice-card p{margin:0 0 8px;font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+.lg-practice-card .primary{margin:0;padding:8px 10px;font-size:13px}
+.lg-practice-card .lg-practice-note{margin:6px 0 0;font-size:11px;text-align:center}
+.lg-mobile .lg-practice{right:10px;bottom:calc(34% + 24px);transition:bottom .25s}
+.lg-practice-pill{display:inline-flex;align-items:center;gap:6px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,248,.95);box-shadow:0 10px 24px -10px rgba(60,40,10,.5);padding:8px 15px;font:700 13px var(--sans);color:var(--ink)}
+.lg-practice-pill svg{flex:none}.lg-practice-pill small{font:600 12px var(--sans);color:var(--dim)}
+.lg-practice-card .primary svg{vertical-align:-2px;margin-right:2px}
+.lg-practice-pill:hover{background:#fffaf0;border-color:var(--terra)}
+.lg-practice-pill:disabled{opacity:.6;cursor:not-allowed}
+.lg-practice-pill:disabled:hover{background:rgba(255,253,248,.95);border-color:var(--line)}
 .lg-lesson .bar.wide{display:block;width:100%;margin:0 0 6px}
 .lg-lessons .pc{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}
 
