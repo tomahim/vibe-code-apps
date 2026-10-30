@@ -1,0 +1,10 @@
+id: d13d4329-c0f3-4097-92fd-f8b476fbc97a
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: What distance did Burton ride for the 1967 12-hour record, in miles?
+accepted_answers:
+- '277.25'
+- 277.25 miles
+explanation: 277.25 miles, beating the men's record of the time.
+archived: false

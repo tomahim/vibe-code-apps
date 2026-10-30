@@ -1,0 +1,10 @@
+id: d4ecc53d-2dbd-48b3-934a-b6fc2c8f07b0
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Who won the first edition in 1905?
+accepted_answers:
+- Giovanni Gerbi
+- Gerbi
+explanation: Giovanni Gerbi, forty minutes ahead of his rivals.
+archived: false

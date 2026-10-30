@@ -1,0 +1,19 @@
+id: 63a6d8b7-fcc2-404b-ab2f-6abeb7d296f3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which sector is the feared forest trench where the race explodes?
+choices:
+- id: ff3127e8-d043-4a48-9aee-31365c9d17d6
+  text: Carrefour de l'Arbre
+- id: f3ab10af-5c2e-44a9-95ef-50eecda29cc5
+  text: Trouée d'Arenberg
+- id: 79b17492-235e-4af2-a3c0-2b009ee9df35
+  text: Mons-en-Pévèle
+- id: 6b413102-1f11-4377-90f0-7f6d7dec4816
+  text: Cysoing
+correct_choice_ids:
+- f3ab10af-5c2e-44a9-95ef-50eecda29cc5
+explanation: The Trouée d'Arenberg, about 100 km from the finish.
+archived: false

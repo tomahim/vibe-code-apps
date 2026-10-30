@@ -1,0 +1,19 @@
+id: b7e8e23d-7bfb-4afe-a217-bf3e3264b0c3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the film about the 1976 edition called?
+choices:
+- id: a3e3ce0f-5cdd-4770-af00-31c2ed224fc9
+  text: Hell on Wheels
+- id: 7ce364a6-8fdf-4cd4-b1a4-c45592ffb684
+  text: A Sunday in Hell
+- id: 7e6d1670-22eb-4b07-a544-75c84f850718
+  text: The Cobbled Classic
+- id: abac5daa-2a51-40ca-a858-d6a71d74e991
+  text: Stones
+correct_choice_ids:
+- 7ce364a6-8fdf-4cd4-b1a4-c45592ffb684
+explanation: A Sunday in Hell, the classic documentary.
+archived: false

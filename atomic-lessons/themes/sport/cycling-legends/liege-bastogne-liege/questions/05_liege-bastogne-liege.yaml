@@ -1,0 +1,19 @@
+id: 682f3ba2-447e-4ce2-a6bd-37fe7bef28d1
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is the last climb before the finish?
+choices:
+- id: 535a897e-4ab7-431b-92f7-4f1d5b1a90f8
+  text: La Roche-aux-Faucons
+- id: f0841e7c-7696-4111-97ff-e43d4f0c7d71
+  text: La Redoute
+- id: 45a4bcba-aee5-4f8b-a7b3-312fe99e39fc
+  text: The Côte des Forges
+- id: 686eb8ac-349a-4b3d-81c5-fab6a134a049
+  text: The Stockeu
+correct_choice_ids:
+- 535a897e-4ab7-431b-92f7-4f1d5b1a90f8
+explanation: The Côte de la Roche-aux-Faucons.
+archived: false

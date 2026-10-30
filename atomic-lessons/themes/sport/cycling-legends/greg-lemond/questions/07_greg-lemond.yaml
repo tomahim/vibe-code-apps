@@ -1,0 +1,19 @@
+id: 99feda2d-3d19-4409-8ace-7ca8343965c0
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How big was Fignon's lead before the final 1989 time trial?
+choices:
+- id: 50a414a4-2947-4c0e-8149-9361cb0c7d0d
+  text: 8 seconds
+- id: 06100035-b492-4f14-a649-fca563d104dd
+  text: 26 seconds
+- id: bd423912-5e7d-4ade-a887-675b58975ebe
+  text: 50 seconds
+- id: 76c737d4-86dd-44dc-899d-9139b93fb070
+  text: 1 minute 30
+correct_choice_ids:
+- bd423912-5e7d-4ade-a887-675b58975ebe
+explanation: LeMond started the 24.5 km stage 50 seconds down.
+archived: false

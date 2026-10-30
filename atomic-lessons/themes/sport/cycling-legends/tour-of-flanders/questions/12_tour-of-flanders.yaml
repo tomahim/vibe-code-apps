@@ -1,0 +1,11 @@
+id: 5de95cfd-b8d7-4675-8cf6-48e66346d163
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Merckx won the 1969 Ronde with a solo of about how many kilometres?
+accepted_answers:
+- '70'
+- 70 km
+- seventy
+explanation: A 70-kilometre solo through cold rain.
+archived: false

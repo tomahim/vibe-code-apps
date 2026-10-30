@@ -1,0 +1,19 @@
+id: 00a79e56-4ea1-4325-b3cb-b7e60e6ad009
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who won the 1988 Giro after the snowstorm on the Gavia?
+choices:
+- id: 041ea9fa-edd7-4f03-8589-a0ba5c9057b1
+  text: Steven Roche
+- id: 5bdfffdc-ad62-4002-ab46-e59e035d03fd
+  text: Andy Hampsten
+- id: 4a8c733b-f3ea-4a4f-bca9-f91924f27d42
+  text: Erik Breukink
+- id: 1b1fb1b6-85b2-463f-9b21-a0ed7027bf13
+  text: Franco Chioccioli
+correct_choice_ids:
+- 5bdfffdc-ad62-4002-ab46-e59e035d03fd
+explanation: Andy Hampsten took pink through the blizzard and won the race.
+archived: false

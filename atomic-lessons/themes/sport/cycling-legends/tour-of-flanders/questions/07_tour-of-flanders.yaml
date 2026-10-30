@@ -1,0 +1,19 @@
+id: baefc4e0-8923-4513-811f-19f820297d41
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the men's record for most Tour of Flanders wins?
+choices:
+- id: 4dec0485-0ddd-42a0-b2ce-593ac35c5fc1
+  text: Two
+- id: 07901148-fc02-4102-9f84-33aa5797e03c
+  text: Three
+- id: d179b630-d839-406e-b1a0-b08f2ce22447
+  text: Four
+- id: 2e2c4051-77e9-4d39-b409-eac47770a913
+  text: Five
+correct_choice_ids:
+- 07901148-fc02-4102-9f84-33aa5797e03c
+explanation: Three, shared by eight riders; no one has won four.
+archived: false

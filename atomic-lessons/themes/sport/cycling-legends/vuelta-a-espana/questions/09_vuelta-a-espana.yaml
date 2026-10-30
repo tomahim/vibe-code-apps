@@ -1,0 +1,10 @@
+id: befc5833-1ea4-4c0b-b61f-04aeb5f727b3
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many Vuelta titles does the record holder have?
+accepted_answers:
+- '4'
+- four
+explanation: Heras and Roglič share the record with four each.
+archived: false

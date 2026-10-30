@@ -1,0 +1,19 @@
+id: 11240087-d46e-4ff7-b58e-f3f393d399b4
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Roughly how many professional races did Merckx win in his career?
+choices:
+- id: 11eec4ad-47c5-4a1c-8410-2b910cf647f7
+  text: '325'
+- id: ce15acb0-ad75-4ca6-9c71-e641bd712188
+  text: '425'
+- id: 004639bb-b03b-4208-9ae0-dd00f9363ae8
+  text: '525'
+- id: 511aa7b7-55e6-4d33-95b9-010b32e19fa2
+  text: '625'
+correct_choice_ids:
+- 004639bb-b03b-4208-9ae0-dd00f9363ae8
+explanation: 525 victories over an eighteen-year career.
+archived: false

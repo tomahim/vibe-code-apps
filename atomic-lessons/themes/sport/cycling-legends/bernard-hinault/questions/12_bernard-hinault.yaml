@@ -1,0 +1,10 @@
+id: c95aada7-b776-4754-bdde-aba40026fa63
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: How many Tours de France did Hinault win?
+accepted_answers:
+- '5'
+- five
+explanation: 1978, 1979, 1981, 1982 and 1985.
+archived: false

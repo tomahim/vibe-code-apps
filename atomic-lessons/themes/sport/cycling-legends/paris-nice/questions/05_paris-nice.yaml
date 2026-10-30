@@ -1,0 +1,19 @@
+id: c189310b-09bd-4417-a7ba-7c0428d2db12
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Who holds the record of seven Paris-Nice wins?
+choices:
+- id: 2af1562d-6100-4f0d-a703-ad0fbf1cc357
+  text: Jacques Anquetil
+- id: 0adba885-0c07-481c-838d-0fdf875cf81c
+  text: Sean Kelly
+- id: 8617a10d-991b-4059-969d-dc99da922507
+  text: Eddy Merckx
+- id: 19f1343e-29c9-481f-9b89-1da9f495b997
+  text: Bernard Hinault
+correct_choice_ids:
+- 0adba885-0c07-481c-838d-0fdf875cf81c
+explanation: Ireland's Sean Kelly, 1982-1988, all consecutive.
+archived: false

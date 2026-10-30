@@ -1,0 +1,19 @@
+id: 6f73a174-c6b1-4de7-9bc5-bb9c858ad114
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What does Coppi's nickname Il Campionissimo mean?
+choices:
+- id: 75dc5654-2ca0-4faa-8e94-677c6b70cebf
+  text: The little prince
+- id: 4023142a-9f39-42d7-a2d6-5ecb232fb586
+  text: The champion of champions
+- id: 5040e757-f0b1-4207-a1fc-99d8913bbb20
+  text: The flying Italian
+- id: fb9f3bed-ca32-4af3-9cc3-5a22f5ba0e3e
+  text: The eternal second
+correct_choice_ids:
+- 4023142a-9f39-42d7-a2d6-5ecb232fb586
+explanation: Il Campionissimo translates as the champion of champions.
+archived: false

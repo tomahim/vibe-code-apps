@@ -1,0 +1,11 @@
+id: dde667aa-f7ac-4181-bbb4-e8d908f4b7b3
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: Which Monument did Pogačar win for the first time in 2026?
+accepted_answers:
+- Milan-San Remo
+- Milano-Sanremo
+- Sanremo
+explanation: Milan-San Remo, after several near misses.
+archived: false

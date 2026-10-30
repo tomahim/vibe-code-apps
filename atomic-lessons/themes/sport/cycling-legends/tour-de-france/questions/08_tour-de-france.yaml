@@ -1,0 +1,19 @@
+id: 186d9165-be79-47fc-93a1-59750a417548
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who is the only rider to win five consecutive Tours?
+choices:
+- id: 4f931bf4-8e80-4ae6-90d4-9a74bf248814
+  text: Eddy Merckx
+- id: 05bccbff-49b7-4b43-924c-ee8b2380ee1c
+  text: Bernard Hinault
+- id: f95dfa55-660a-40a6-a740-2899ebdfc59c
+  text: Miguel Indurain
+- id: 2e79d82f-c5be-4d08-a81f-56c803c44f5e
+  text: Jacques Anquetil
+correct_choice_ids:
+- f95dfa55-660a-40a6-a740-2899ebdfc59c
+explanation: Indurain, from 1991 to 1995.
+archived: false

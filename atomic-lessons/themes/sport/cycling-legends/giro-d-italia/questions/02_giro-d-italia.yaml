@@ -1,0 +1,19 @@
+id: 2acf22a6-406e-4cde-abb1-c25414918fe1
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Who won the first Giro?
+choices:
+- id: 28bb79a9-cac7-483e-94c5-75dc53f222c7
+  text: Alfredo Binda
+- id: 9f1b1bda-95db-4fee-b630-e8e57f12e6ae
+  text: Luigi Ganna
+- id: d241646c-b640-46ef-be99-662eaf65a1ee
+  text: Costante Girardengo
+- id: aebc157f-a24d-4981-9424-04a3273101b1
+  text: Learco Guerra
+correct_choice_ids:
+- 9f1b1bda-95db-4fee-b630-e8e57f12e6ae
+explanation: Luigi Ganna, a mason who also won three stages.
+archived: false

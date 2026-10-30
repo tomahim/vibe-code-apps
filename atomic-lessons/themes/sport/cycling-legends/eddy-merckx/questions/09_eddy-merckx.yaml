@@ -1,0 +1,19 @@
+id: 40e9a8c9-2e48-4ff7-8dba-49d8cd7b2dee
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What distance did Merckx cover for the hour record in Mexico City in 1972?
+choices:
+- id: 173de84c-b7cd-46fc-be3c-6d4f026eeea8
+  text: 45.798 km
+- id: 52b4c4a0-86d3-4942-9fa7-f8a2702b03df
+  text: 49.431 km
+- id: 143fc777-e481-4a69-a522-fc0b8375c68e
+  text: 53.040 km
+- id: cb60bad9-d989-42fa-8e2a-b9714d58f61d
+  text: 51.115 km
+correct_choice_ids:
+- 52b4c4a0-86d3-4942-9fa7-f8a2702b03df
+explanation: He rode 49.431 km in October 1972, almost 800 metres beyond the old record.
+archived: false

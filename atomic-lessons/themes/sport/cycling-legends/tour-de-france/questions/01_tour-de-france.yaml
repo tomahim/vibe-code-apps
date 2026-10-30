@@ -1,0 +1,19 @@
+id: ee6a2d9a-eb80-46f8-9aac-633fb7679678
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why was the Tour de France created in 1903?
+choices:
+- id: b9376142-eac0-4bcc-b5c3-048384754b32
+  text: For the Olympics
+- id: 5d6589c4-1b92-48e7-a6d2-1fe27e7e61ad
+  text: To sell the newspaper L'Auto
+- id: 1f02ab4d-4039-40c3-a88b-289b52975ecb
+  text: To honour a dead champion
+- id: a0692f8a-b1c2-4ac9-8b4a-f24976dfdb94
+  text: For tourism
+correct_choice_ids:
+- 5d6589c4-1b92-48e7-a6d2-1fe27e7e61ad
+explanation: Henri Desgrange's L'Auto needed a sensation to beat its rival.
+archived: false

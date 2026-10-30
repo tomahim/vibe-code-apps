@@ -1,0 +1,9 @@
+id: 5a756c6d-2690-4ccc-802d-5584ea3460c7
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Since which year has the Giro d'Italia Women been running? Answer with the decade if unsure.
+accepted_answers:
+- '1988'
+explanation: The women's Giro has run since 1988; Vos won it three times.
+archived: false

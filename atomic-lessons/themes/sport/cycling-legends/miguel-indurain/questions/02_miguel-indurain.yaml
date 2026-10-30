@@ -1,0 +1,19 @@
+id: 3419979f-17d4-4a9f-95f5-d98bcdacd70b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which team did Indurain turn professional with in 1984?
+choices:
+- id: 1d6bf856-7d2e-42f6-bf68-751e17ef610a
+  text: Banesto
+- id: 444dada7-37fa-4072-ab35-7bdc54d0370a
+  text: Reynolds
+- id: 388fa139-8809-4b45-9b96-71b5541d252a
+  text: ONCE
+- id: b9ff4ec7-2f4d-436a-b849-f61f99ba3809
+  text: Kelme
+correct_choice_ids:
+- 444dada7-37fa-4072-ab35-7bdc54d0370a
+explanation: He signed with Reynolds after riding the 1984 Los Angeles Olympics as an amateur.
+archived: false

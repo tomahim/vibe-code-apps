@@ -1,0 +1,19 @@
+id: 80b74ef5-a709-4c1c-9aa8-1b06fc9f124a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: In which discipline did Vos win world titles in 2024 and 2026?
+choices:
+- id: 8b447eff-2396-4f02-892a-23d99f816021
+  text: Road
+- id: 7b51dcc9-d0d0-429a-8552-5633dadd33bc
+  text: Gravel
+- id: b498c0e7-6715-4e9a-a93e-f11f222c09d7
+  text: Mountain bike
+- id: 7903c231-62ba-4982-811d-e9819cbb3a58
+  text: Track
+correct_choice_ids:
+- 7b51dcc9-d0d0-429a-8552-5633dadd33bc
+explanation: She won the World Gravel Championship twice.
+archived: false

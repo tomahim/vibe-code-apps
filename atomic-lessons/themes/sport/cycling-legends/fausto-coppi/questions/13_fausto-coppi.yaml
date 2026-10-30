@@ -1,0 +1,19 @@
+id: 27ffb1ff-b7a5-4c0b-a797-1817236c6722
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What caused Coppi's death in January 1960?
+choices:
+- id: 64eb7769-0948-4fa9-a3a9-a5a8f70172fd
+  text: A training crash
+- id: ecc284af-37a5-4ef8-98d5-24e3b70cb5f1
+  text: Malaria caught in Africa
+- id: 0a6b34e5-d5a1-4da4-ba65-cbab31643854
+  text: A heart attack
+- id: 93964d98-3092-4613-8f98-26d8387c398c
+  text: Pneumonia
+correct_choice_ids:
+- ecc284af-37a5-4ef8-98d5-24e3b70cb5f1
+explanation: He caught malaria on a trip to Upper Volta and died on 2 January 1960, aged forty.
+archived: false

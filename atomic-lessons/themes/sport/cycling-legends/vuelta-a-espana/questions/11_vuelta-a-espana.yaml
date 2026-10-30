@@ -1,0 +1,19 @@
+id: d66a859b-c082-418c-bb7b-2a6896d22c52
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What ended Pogačar's 2026 Vuelta while he was leading?
+choices:
+- id: c3da3026-7d0c-4160-bf16-e3a704f890a2
+  text: Illness
+- id: 42299fc5-986a-49df-9f0b-c7cbb4516056
+  text: A crash on stage eight
+- id: 38d24572-35df-4060-99a5-8e8402b65af2
+  text: A disqualification
+- id: 6e9eb726-2fa0-48bf-88c0-5c94f9079ebf
+  text: A positive test
+correct_choice_ids:
+- 42299fc5-986a-49df-9f0b-c7cbb4516056
+explanation: He crashed on stage 8 and abandoned a Grand Tour for the first time.
+archived: false

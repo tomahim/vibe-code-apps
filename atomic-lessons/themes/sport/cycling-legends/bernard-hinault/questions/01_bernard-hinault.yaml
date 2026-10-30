@@ -1,0 +1,19 @@
+id: 557d3bfd-da6d-4031-b35b-07b4b2751ed5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which region of France produced Bernard Hinault?
+choices:
+- id: a07cdf8f-5fec-4d68-8b29-c820501a2f26
+  text: Normandy
+- id: b4aa9939-3a61-4971-9751-95c1c8c5e758
+  text: Brittany
+- id: bdb2c0ab-7efb-4eb7-83f1-250c40b17fcc
+  text: Alsace
+- id: 24a1a685-b592-4c1f-a51e-4d6c7b82da0b
+  text: The Basque Country
+correct_choice_ids:
+- b4aa9939-3a61-4971-9751-95c1c8c5e758
+explanation: He was born in Yffiniac, Brittany, and grew up on the family farm.
+archived: false

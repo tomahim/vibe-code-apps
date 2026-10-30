@@ -1,0 +1,10 @@
+id: 28751995-0f14-43af-896c-5855c528ec90
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: How many times did Merckx win Milan-San Remo, the record for a single Monument?
+accepted_answers:
+- '7'
+- seven
+explanation: He won Milan-San Remo seven times.
+archived: false

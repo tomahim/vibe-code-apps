@@ -1,0 +1,19 @@
+id: c98454b7-aead-4009-bab6-e3a4a37a17d8
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What does La Classicissima mean?
+choices:
+- id: 49303b07-59a6-4ec0-ac65-2680a95dd936
+  text: The longest climb
+- id: 6917ee88-53ea-410b-96eb-30cdc48020cf
+  text: The classic of classics
+- id: 0b6d94c6-89ce-4cf4-ae08-7f36bb37b95a
+  text: The spring race
+- id: e09e1d52-038c-4b40-864a-1fa6fe70866a
+  text: The Italian championship
+correct_choice_ids:
+- 6917ee88-53ea-410b-96eb-30cdc48020cf
+explanation: 'The classic of classics: Italy''s beloved nickname for the race.'
+archived: false

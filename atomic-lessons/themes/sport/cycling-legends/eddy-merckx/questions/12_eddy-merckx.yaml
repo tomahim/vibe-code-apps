@@ -1,0 +1,19 @@
+id: df8f5d6d-01ae-4708-9ffc-6217ab783080
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What happened to Merckx on the Puy-de-Dôme at the 1975 Tour?
+choices:
+- id: 10e93e25-0202-4980-b59e-67607c9ee09c
+  text: He won the stage
+- id: a4d0f381-0437-47e8-8d24-7da3877eea53
+  text: A spectator punched him
+- id: 4e935164-197f-4009-a5be-9fe74f9bdbe7
+  text: He abandoned the race
+- id: 92e4d45a-64be-4d60-96a9-0d7baf21e80d
+  text: He took the yellow jersey
+correct_choice_ids:
+- a4d0f381-0437-47e8-8d24-7da3877eea53
+explanation: A spectator punched him; he later broke his cheekbone and finished second overall.
+archived: false

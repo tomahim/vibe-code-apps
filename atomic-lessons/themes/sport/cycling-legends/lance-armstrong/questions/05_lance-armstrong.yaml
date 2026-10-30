@@ -1,0 +1,19 @@
+id: d389a9b2-84cf-4352-a8a8-04d1177021fd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is Livestrong?
+choices:
+- id: 489e43c7-d97d-4d86-9f38-2cbea8acbcfa
+  text: Armstrong's team
+- id: 76343116-2a76-4797-b04a-3349d63cdf02
+  text: The cancer foundation he founded
+- id: d4867b23-a3e0-4c09-8db2-5e8f210bd67d
+  text: A bike brand
+- id: 5e7717fe-602c-42ce-b2e4-272f8303f56a
+  text: A training method
+correct_choice_ids:
+- 76343116-2a76-4797-b04a-3349d63cdf02
+explanation: Founded in 1997, it raised hundreds of millions for cancer support.
+archived: false

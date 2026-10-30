@@ -1,0 +1,10 @@
+id: a3b066a0-366f-4455-9cb3-b968a77e48f5
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: How many Giro d'Italia titles did Indurain win?
+accepted_answers:
+- '2'
+- two
+explanation: 1992 and 1993, both followed by Tour wins.
+archived: false

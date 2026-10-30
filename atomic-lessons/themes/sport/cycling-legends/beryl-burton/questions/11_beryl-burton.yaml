@@ -1,0 +1,19 @@
+id: 3a5c1416-959e-48c5-9951-ae9c8c40bb84
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How did Burton die in 1996?
+choices:
+- id: 0743f397-cf7d-43d1-9464-90e2aabe6de9
+  text: In a race crash
+- id: 3513424a-da8b-4507-bbe7-395c825c7ad1
+  text: Of heart failure while out riding
+- id: fbd4076a-900f-4340-b1a5-4f47859d909d
+  text: Of cancer
+- id: 11e5af7f-92f0-4048-8197-9f0d5425139a
+  text: In her sleep
+correct_choice_ids:
+- 3513424a-da8b-4507-bbe7-395c825c7ad1
+explanation: She died of heart failure while riding her bike, aged fifty-eight.
+archived: false

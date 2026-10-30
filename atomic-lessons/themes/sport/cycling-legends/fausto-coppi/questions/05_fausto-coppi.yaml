@@ -1,0 +1,19 @@
+id: c05a1b08-6f22-4458-aa20-3cd3d13e2398
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What happened to Coppi during the Second World War?
+choices:
+- id: 7169464b-1d80-4b16-a1b9-32d3424b64aa
+  text: He hid in the mountains
+- id: 8e02fbe3-105d-4c74-a05a-056ac84fd651
+  text: He became a prisoner of war in North Africa
+- id: 3b28e6ca-441b-4477-9bb7-753c4414ae20
+  text: He raced in Spain
+- id: 95e2febc-0c66-43a5-93ab-304f68e8e7a7
+  text: He retired
+correct_choice_ids:
+- 8e02fbe3-105d-4c74-a05a-056ac84fd651
+explanation: Captured in North Africa in 1943, he returned home in 1945.
+archived: false

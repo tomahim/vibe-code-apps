@@ -1,0 +1,19 @@
+id: b6ad9239-6a4f-4697-a22c-6474c2a1d4ee
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What job did the young Coppi do in Novi Ligure?
+choices:
+- id: 3d13b7ee-2532-4175-a714-f88a31c67900
+  text: Farm worker
+- id: 01ca0c0a-a1e3-4546-a16a-9b9f26c7992b
+  text: Delivery rider for a butcher
+- id: 8d32473f-7ca9-4a23-b976-a5b2c7399fa9
+  text: Apprentice mechanic
+- id: d913d9fe-ab5d-4f1d-80d3-f6307fa503c0
+  text: Shop keeper
+correct_choice_ids:
+- 01ca0c0a-a1e3-4546-a16a-9b9f26c7992b
+explanation: He left school at thirteen to work for a butcher, riding deliveries through the hills.
+archived: false

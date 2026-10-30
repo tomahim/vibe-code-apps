@@ -1,0 +1,10 @@
+id: bf7713b0-cdef-49c8-8370-184eef11caca
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: How many Grand Tours did Merckx win?
+accepted_answers:
+- '11'
+- eleven
+explanation: 'Eleven: five Tours, five Giros and one Vuelta.'
+archived: false

@@ -1,0 +1,19 @@
+id: a7688530-79bf-42aa-bb21-5098150b16ee
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How many world titles did Burton win in total?
+choices:
+- id: fbbdd3fe-06a4-4057-a5df-a9a826c45ac4
+  text: Three
+- id: 65db85ce-5c9d-4736-bc00-76495a37f0a3
+  text: Five
+- id: a90cc7a1-7434-48b4-8591-038e47c73d90
+  text: Seven
+- id: e2b45dba-de33-4bed-bcad-6df15bac3368
+  text: Nine
+correct_choice_ids:
+- a90cc7a1-7434-48b4-8591-038e47c73d90
+explanation: 'Two road, five pursuit: seven between 1959 and 1967.'
+archived: false

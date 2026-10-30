@@ -1,0 +1,9 @@
+id: 98b98c77-1f26-456b-92ef-16a87a72832a
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: In which year was the first professional edition held?
+accepted_answers:
+- '1894'
+explanation: Amateurs from 1892, professionals from 1894.
+archived: false

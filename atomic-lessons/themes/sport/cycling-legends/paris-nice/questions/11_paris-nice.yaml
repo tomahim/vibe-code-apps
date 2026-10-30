@@ -1,0 +1,19 @@
+id: 411746bc-5ec7-4bcf-8aeb-ba43ffa7cf7c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Who organises Paris-Nice?
+choices:
+- id: 527e520b-7b8d-4713-9fbf-80e8b8f3c58f
+  text: RCS Sport
+- id: dd3f92f8-bc68-4aea-8fc7-3c5ea714af90
+  text: ASO
+- id: 3346f97a-4fd9-48ff-b3ea-30b039b9ebfa
+  text: Flanders Classics
+- id: c898725b-cbc4-4570-860d-2aebd8678ad6
+  text: The UCI
+correct_choice_ids:
+- dd3f92f8-bc68-4aea-8fc7-3c5ea714af90
+explanation: ASO, the Tour de France company.
+archived: false

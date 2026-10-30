@@ -1,0 +1,19 @@
+id: 9e1ee9fd-74c2-46f8-b334-6573f8d1906d
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Who beat Pogačar at the 2022 and 2023 Tours?
+choices:
+- id: a8c8450c-f315-4ccd-bd09-12f3c97eb5e3
+  text: Remco Evenepoel
+- id: 1c5634fc-1ca3-4153-9baa-ec0d713ac2e9
+  text: Primož Roglič
+- id: ea9b5284-30ed-4ae4-8984-5cbb4a8629f8
+  text: Jonas Vingegaard
+- id: 67231652-96e6-418a-9340-5f992108883c
+  text: Geraint Thomas
+correct_choice_ids:
+- ea9b5284-30ed-4ae4-8984-5cbb4a8629f8
+explanation: Jonas Vingegaard won both years, with Pogačar second.
+archived: false

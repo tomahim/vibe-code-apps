@@ -1,0 +1,19 @@
+id: bed687ef-8f68-4920-9caa-b1326dc6e4b8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was the first Giro di Lombardia?
+choices:
+- id: f7bc8a9a-19f5-4456-aba1-e3ad90b22a07
+  text: '1892'
+- id: c11b936d-ed92-4ac6-8c35-791de194b574
+  text: '1905'
+- id: 5a029472-23f2-458c-bc43-faefa49e25a1
+  text: '1907'
+- id: 07b1fd77-bd27-48b4-8c4a-c3dcafc5cd29
+  text: '1909'
+correct_choice_ids:
+- c11b936d-ed92-4ac6-8c35-791de194b574
+explanation: 1905; Giovanni Gerbi won by forty minutes.
+archived: false

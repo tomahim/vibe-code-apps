@@ -1,0 +1,19 @@
+id: 90223aa8-a7cc-4d2f-83f3-032df7006914
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How many riders have won all five Monuments?
+choices:
+- id: 80386daf-5aaf-4f52-ac5e-dbaf139974a5
+  text: Only Merckx
+- id: 4b9c97f9-d1ef-439d-89a5-4ed600e0d59c
+  text: Two
+- id: 4839aea9-d073-42b8-81eb-4a36d66a75d4
+  text: Three
+- id: 75d9329a-5827-4187-8c17-15c592948323
+  text: Five
+correct_choice_ids:
+- 4839aea9-d073-42b8-81eb-4a36d66a75d4
+explanation: Merckx, Rik Van Looy and Roger De Vlaeminck, all Belgians.
+archived: false

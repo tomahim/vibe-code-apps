@@ -1,0 +1,10 @@
+id: ba4c6a9a-552b-4e8d-be09-5c083f2ec6dd
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: To whom did Armstrong confess doping on television in January 2013?
+accepted_answers:
+- Oprah Winfrey
+- Oprah
+explanation: A limited confession in an interview with Oprah Winfrey.
+archived: false

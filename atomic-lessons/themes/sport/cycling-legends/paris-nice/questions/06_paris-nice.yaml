@@ -1,0 +1,10 @@
+id: 235a851c-7a43-4904-aa27-536a5939d090
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many consecutive editions did Kelly win?
+accepted_answers:
+- '7'
+- seven
+explanation: Seven in a row, 1982 to 1988.
+archived: false

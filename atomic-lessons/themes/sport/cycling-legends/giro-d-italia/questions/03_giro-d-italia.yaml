@@ -1,0 +1,10 @@
+id: 9889ec7e-1c58-46d0-8446-ded68834d800
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: What colour is the Giro leader's jersey, in Italian?
+accepted_answers:
+- rosa
+- maglia rosa
+explanation: The maglia rosa, pink like the Gazzetta dello Sport's paper.
+archived: false

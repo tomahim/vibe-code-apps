@@ -1,0 +1,19 @@
+id: 2ed23b47-36fc-4738-8b5f-c2e3b577eafd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which climb overlooking Nice often decides the race?
+choices:
+- id: 62e85313-af00-4b38-9b7d-b5b3cb35e78d
+  text: The Col du Galibier
+- id: e4194fb3-8d11-4e57-904e-08e208cf93af
+  text: The Col d'Èze
+- id: d4b5b17b-107e-4a97-b7a6-d55c59aa642e
+  text: Mont Ventoux
+- id: 62cf821a-5604-44cb-b22b-6a21b077aec5
+  text: The Poggio
+correct_choice_ids:
+- e4194fb3-8d11-4e57-904e-08e208cf93af
+explanation: The Col d'Èze, often as a final uphill time trial.
+archived: false

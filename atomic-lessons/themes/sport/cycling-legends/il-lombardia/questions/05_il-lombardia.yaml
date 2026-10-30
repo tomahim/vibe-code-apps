@@ -1,0 +1,19 @@
+id: 14e63f70-507d-4563-a963-aaf6e77e06e2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Who declared the Madonna del Ghisallo patroness of cyclists?
+choices:
+- id: 513e506f-58a5-4e91-a848-070eab0ec306
+  text: The Giro director
+- id: c535d80d-1a45-4ef8-8e9c-fe36100da20f
+  text: Pope Pius XII
+- id: 9e0a5d3c-0c62-4f39-b886-c7270095ad3c
+  text: The mayor of Como
+- id: 6179205b-eeb4-4296-8583-4d9610279cf0
+  text: Coppi
+correct_choice_ids:
+- c535d80d-1a45-4ef8-8e9c-fe36100da20f
+explanation: Pope Pius XII, in 1949.
+archived: false

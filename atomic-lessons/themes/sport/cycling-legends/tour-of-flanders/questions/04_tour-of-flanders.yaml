@@ -1,0 +1,19 @@
+id: 7f06f051-5456-450c-8bff-caf5a9d632e4
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which pair of climbs decides the modern finale?
+choices:
+- id: b2a27dd0-f356-4b23-9d3f-46afebf16498
+  text: Koppenberg and Muur
+- id: c2016b3b-335e-4819-90d6-688afccef489
+  text: Oude Kwaremont and Paterberg
+- id: de7482aa-69e3-4068-bcb9-09cc5056602c
+  text: Muur and Bosberg
+- id: 393c6961-ae42-42b7-9f0e-a9bb3116073d
+  text: Taaienberg and Kruisberg
+correct_choice_ids:
+- c2016b3b-335e-4819-90d6-688afccef489
+explanation: The Oude Kwaremont and the Paterberg, before the run to Oudenaarde.
+archived: false

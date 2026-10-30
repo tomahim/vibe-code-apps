@@ -1,0 +1,19 @@
+id: 88d5792a-3537-4b9a-9f4f-527a4a57f3c9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What scandal consumed the 1998 Tour?
+choices:
+- id: 738fb6b6-ec39-4c0b-abe7-560ccd6f9a3d
+  text: The Festina affair
+- id: 91241c39-fb85-47b1-930e-e32125d2fac6
+  text: A bribery case
+- id: 22dcd3c5-a6c8-4f61-bc67-b7af68d48232
+  text: A motorised bike
+- id: 4b7947fa-5370-44ae-ba1b-d442c046808f
+  text: A fixed sprint
+correct_choice_ids:
+- 738fb6b6-ec39-4c0b-abe7-560ccd6f9a3d
+explanation: The Festina affair exposed systematic EPO doping.
+archived: false

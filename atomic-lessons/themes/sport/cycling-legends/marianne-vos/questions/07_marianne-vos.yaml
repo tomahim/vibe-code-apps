@@ -1,0 +1,19 @@
+id: ba0c635e-ec22-462b-958a-1476c2ae7142
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How many times has Vos won the Giro d'Italia Women overall?
+choices:
+- id: e4383220-fdc5-4afb-835d-9226eca68c22
+  text: Once
+- id: 4de2b137-eed9-48d3-b614-9b6adfe6580e
+  text: Twice
+- id: cc2d8eb7-f238-49dc-bf9f-6a8de31a8a28
+  text: Three times
+- id: e7d419ee-313f-4769-9a6d-2cd532b955ba
+  text: Five times
+correct_choice_ids:
+- cc2d8eb7-f238-49dc-bf9f-6a8de31a8a28
+explanation: Three overall titles in the women's Giro.
+archived: false

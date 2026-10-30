@@ -1,0 +1,19 @@
+id: 64e11101-2146-49c1-908c-7c2a3ed414d0
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Who won the first Tour de France?
+choices:
+- id: c8b9e9a3-dda0-4c80-be26-63669ee7ccf7
+  text: Henri Desgrange
+- id: bca3677a-8487-48f7-8000-c2a6d8949616
+  text: Maurice Garin
+- id: 645a4ac5-55b8-4c66-87eb-392d01ce38b6
+  text: Eugène Christophe
+- id: 2e23c5ec-ac85-40a2-8cf7-132b18286f61
+  text: Octave Lapize
+correct_choice_ids:
+- bca3677a-8487-48f7-8000-c2a6d8949616
+explanation: Maurice Garin, a former chimney sweep.
+archived: false

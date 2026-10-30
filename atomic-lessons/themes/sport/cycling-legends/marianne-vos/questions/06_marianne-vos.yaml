@@ -1,0 +1,10 @@
+id: 4f7ada5a-a55e-437f-80bd-95ffff2bfcf5
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many world championships has Vos won in total, across all disciplines?
+accepted_answers:
+- '15'
+- fifteen
+explanation: Fifteen, across road, cyclo-cross, track and gravel.
+archived: false

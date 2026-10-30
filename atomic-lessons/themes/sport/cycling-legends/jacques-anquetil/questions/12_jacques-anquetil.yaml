@@ -1,0 +1,10 @@
+id: 5103c74a-4c3e-4417-bc1e-942b1695bc54
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: By how many seconds did Anquetil beat Poulidor in the 1964 Tour?
+accepted_answers:
+- '55'
+- 55 seconds
+explanation: Just 55 seconds separated them in Paris.
+archived: false

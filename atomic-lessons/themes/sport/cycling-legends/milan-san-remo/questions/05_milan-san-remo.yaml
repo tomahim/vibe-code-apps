@@ -1,0 +1,19 @@
+id: 729b6e48-db87-45ec-91d3-b49fae586bfd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which climb was added to the finale in 1960?
+choices:
+- id: d00a1253-f496-44dc-a35d-9aaf17205856
+  text: The Cipressa
+- id: 9b3cd9ce-0bc9-4105-9594-c295c02256b1
+  text: The Poggio
+- id: d1406201-c4d3-47e3-adf0-45e8d2ced605
+  text: The Turchino
+- id: 29663473-63e5-43ae-b85d-57a6c1630b7e
+  text: The Berta
+correct_choice_ids:
+- 9b3cd9ce-0bc9-4105-9594-c295c02256b1
+explanation: Director Torriani added the Poggio; the Cipressa followed in 1982.
+archived: false

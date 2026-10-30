@@ -1,0 +1,19 @@
+id: 61fbb3d1-b88e-4ad7-9076-229f2b4df938
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: How old was Coppi when he won his first Giro d'Italia in 1940?
+choices:
+- id: 49b5972f-37f7-4097-b5ae-a4a46fe337d0
+  text: Twenty
+- id: e4353d63-191a-43af-929b-163849c8463a
+  text: Twenty-three
+- id: d5761017-a565-4ed1-a886-283de32a0fa5
+  text: Twenty-six
+- id: a3876a41-e49a-4088-b7c0-7faec63c2304
+  text: Thirty
+correct_choice_ids:
+- 49b5972f-37f7-4097-b5ae-a4a46fe337d0
+explanation: He was twenty, in his first Giro.
+archived: false

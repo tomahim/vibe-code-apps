@@ -1,0 +1,19 @@
+id: 3aed98ad-92f0-43b5-8ffc-18c4b138c1c9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What did Pogačar achieve with his 2025 Kigali win?
+choices:
+- id: d39f8bb4-f6be-4fd5-bf2a-86db015a0c72
+  text: His first world title
+- id: 7c91d2da-9bf7-4a60-bf04-775319b589e5
+  text: First rider to win Tour and Worlds in consecutive years
+- id: 51307805-8f31-400d-99c7-82775869bece
+  text: The Triple Crown
+- id: b2af66d8-adc7-4402-9084-727520e59a01
+  text: The hour record
+correct_choice_ids:
+- 7c91d2da-9bf7-4a60-bf04-775319b589e5
+explanation: He defended his 2024 title after winning the Tour both years.
+archived: false

@@ -1,0 +1,9 @@
+id: a248c3fa-6c46-475e-8aec-26220e08e3f0
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: In which two years did Coppi win the Tour de France? Answer with the first one.
+accepted_answers:
+- '1949'
+explanation: He won the Tour in 1949 and 1952.
+archived: false

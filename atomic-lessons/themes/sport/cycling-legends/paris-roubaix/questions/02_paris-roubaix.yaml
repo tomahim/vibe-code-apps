@@ -1,0 +1,19 @@
+id: b2af55b4-9f83-49fd-98a5-92e2a273aae4
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Where does the name Hell of the North come from?
+choices:
+- id: bcb2477f-f7ad-44c4-b289-35529e7f99fd
+  text: The weather
+- id: cfe69864-9ca3-4ee0-88ea-d16460c3a42e
+  text: Landscapes ruined by the First World War
+- id: dedc9ab9-fddc-41bd-87ba-427e00e6b10e
+  text: The coal mines
+- id: bf9047b6-595e-465b-9cd4-05b477d8eda7
+  text: A rider's quote
+correct_choice_ids:
+- cfe69864-9ca3-4ee0-88ea-d16460c3a42e
+explanation: Organisers touring the devastated post-war route gave it the name.
+archived: false

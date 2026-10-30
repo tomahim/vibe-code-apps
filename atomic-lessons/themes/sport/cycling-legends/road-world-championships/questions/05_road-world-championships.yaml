@@ -1,0 +1,19 @@
+id: 0dd6fbc1-f207-4163-9fb6-46b5e0a2a991
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is the supposed curse of the rainbow jersey?
+choices:
+- id: c267760f-5549-4c24-a4ce-3c3eff82202d
+  text: A fine for losing it
+- id: c5697d7f-0478-4239-bd32-e024390da2ae
+  text: Bad luck during the year as champion
+- id: 19122e22-ca57-4832-95d3-f94fa3d3fdb1
+  text: Losing it in a crash
+- id: 9eab8abc-9290-4ca1-bb77-33341838447d
+  text: Retirement after winning
+correct_choice_ids:
+- c5697d7f-0478-4239-bd32-e024390da2ae
+explanation: The myth that world champions suffer misfortune in their year in the bands.
+archived: false

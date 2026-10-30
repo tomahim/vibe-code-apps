@@ -1,0 +1,19 @@
+id: fdc845a2-d540-49cd-9570-22c114739ebc
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What does Vlaanderens Mooiste mean?
+choices:
+- id: 852935c4-1f9f-4c28-bf06-53a358eb6e71
+  text: Flanders' Finest
+- id: 2faf15bd-b45f-49cf-88b3-288018757393
+  text: The cobbled one
+- id: 2975f7d1-a825-45fe-9e72-69d6b8876b4a
+  text: The Belgian classic
+- id: 3d33dc63-9a2c-484d-8ac8-6cc07adf1b4a
+  text: The hardest race
+correct_choice_ids:
+- 852935c4-1f9f-4c28-bf06-53a358eb6e71
+explanation: The Ronde's nickname is Flanders' Finest.
+archived: false

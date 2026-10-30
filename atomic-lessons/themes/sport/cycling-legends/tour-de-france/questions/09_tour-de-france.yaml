@@ -1,0 +1,10 @@
+id: ab5a146b-af02-4202-a417-6dc71da5cda7
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many seconds separated LeMond and Fignon at the 1989 Tour?
+accepted_answers:
+- '8'
+- eight
+explanation: Eight seconds, the closest Tour in history.
+archived: false

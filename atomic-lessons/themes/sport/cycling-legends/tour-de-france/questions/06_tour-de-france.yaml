@@ -1,0 +1,9 @@
+id: 59a27a16-24df-4a85-a0d4-ad6a294e4572
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which year did the Tour first go into the Pyrenees?
+accepted_answers:
+- '1910'
+explanation: 1910; the Alps followed in 1911.
+archived: false

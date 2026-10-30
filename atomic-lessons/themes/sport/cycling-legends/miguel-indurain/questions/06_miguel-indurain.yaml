@@ -1,0 +1,9 @@
+id: e3be73c3-4698-4e7c-8a56-c7bee4e64afd
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which year did Indurain win his first Tour de France?
+accepted_answers:
+- '1991'
+explanation: His streak ran from 1991 to 1995.
+archived: false

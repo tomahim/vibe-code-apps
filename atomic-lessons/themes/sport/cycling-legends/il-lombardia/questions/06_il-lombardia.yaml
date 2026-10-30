@@ -1,0 +1,10 @@
+id: 9ff45832-992c-42fe-8f6d-e559638f3a71
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many times did Coppi win Il Lombardia?
+accepted_answers:
+- '5'
+- five
+explanation: Four in a row 1946-1949, then 1954.
+archived: false

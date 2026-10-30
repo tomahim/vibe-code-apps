@@ -1,0 +1,19 @@
+id: 37ab0273-af13-47ae-8fc1-703159d1fc0c
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What equipment gamble helped LeMond win the 1989 Tour?
+choices:
+- id: 3be8bfeb-5f7f-4bba-824c-be8b85ccead9
+  text: A lighter bike
+- id: f7fde3ee-8e2d-4a48-b8c0-7cae4c86e10c
+  text: Aerodynamic triathlon handlebars
+- id: c9d33d26-5791-4fd1-b5b2-6baa3fae71da
+  text: Disc wheels only
+- id: c301af23-6722-4a58-9863-d23e55003d8b
+  text: A motor
+correct_choice_ids:
+- f7fde3ee-8e2d-4a48-b8c0-7cae4c86e10c
+explanation: He rode aerobars and an aero helmet; Fignon rode a conventional setup.
+archived: false

@@ -1,0 +1,9 @@
+id: 0c4e7fe2-de81-4d11-8833-aeea2cb7fac5
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: What was Indurain's nickname?
+accepted_answers:
+- Big Mig
+explanation: Big Mig, for his size and engine.
+archived: false

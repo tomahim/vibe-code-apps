@@ -1,0 +1,19 @@
+id: 11b50079-f7a3-4659-895a-b4fd6446202d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is unique about Indurain's five Tour wins?
+choices:
+- id: b664a90e-c512-4743-834a-b180d5b15ecb
+  text: He won them all in the Alps
+- id: ec75ae7b-e91b-4e79-bfe6-4b76677d6e62
+  text: They are five consecutive wins
+- id: 0a71e9e5-ed0e-429e-9c13-6e82a27eb72e
+  text: He won without a team
+- id: 6a27f029-a7a1-4a7e-8c98-9f9cc54b9856
+  text: They came after age 35
+correct_choice_ids:
+- ec75ae7b-e91b-4e79-bfe6-4b76677d6e62
+explanation: '1991 to 1995: the only five-in-a-row in Tour history.'
+archived: false

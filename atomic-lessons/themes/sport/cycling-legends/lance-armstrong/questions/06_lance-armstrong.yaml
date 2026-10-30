@@ -1,0 +1,10 @@
+id: c5b4e23f-c331-4921-92b4-0b203390fb50
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many consecutive Tours de France did Armstrong win from 1999 to 2005?
+accepted_answers:
+- '7'
+- seven
+explanation: Seven, all later stripped.
+archived: false

@@ -1,0 +1,19 @@
+id: 5cb070c7-da73-41c9-86b9-9f0ad0234946
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who matched Coppi's record of five Lombardia wins?
+choices:
+- id: 51f32363-4e4a-4556-a676-27e48be6ba92
+  text: Vincenzo Nibali
+- id: cb87f48d-9455-46ca-ac6a-5f0264f5c6a5
+  text: Tadej Pogačar
+- id: c615395e-0540-47a3-b8cf-6ed3ede54b89
+  text: Damiano Cunego
+- id: 7c2e2f3b-28e2-43f5-89c0-8d4d033ca9e6
+  text: Paolo Bettini
+correct_choice_ids:
+- cb87f48d-9455-46ca-ac6a-5f0264f5c6a5
+explanation: Pogačar won five in a row from 2021 to 2025.
+archived: false

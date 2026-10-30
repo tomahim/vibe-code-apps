@@ -1,0 +1,11 @@
+id: 787d628e-fc1d-44ab-a932-05549c9092dd
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: Who won the first Paris-Roubaix Femmes in 2021?
+accepted_answers:
+- Lizzie Deignan
+- Deignan
+- Elizabeth Deignan
+explanation: Lizzie Deignan, with an 80 km solo.
+archived: false

@@ -1,0 +1,19 @@
+id: c3332222-bdc0-4d67-ad70-34f05b138748
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What did Coppi achieve in 1949 that no rider had done before?
+choices:
+- id: a04dae71-c56e-488a-aca2-cc6dff4b35a4
+  text: Three consecutive Giros
+- id: f03fecd7-8848-48a9-8b00-8fa1b59a2f4d
+  text: The Giro-Tour double in one season
+- id: 7a61a2fd-18b3-47fc-95c3-c6f8b9bc43e1
+  text: Winning all five Monuments
+- id: 53de9454-fcbc-4a48-ac1a-eaf4eb399411
+  text: A Tour without losing a stage
+correct_choice_ids:
+- f03fecd7-8848-48a9-8b00-8fa1b59a2f4d
+explanation: He won the Giro d'Italia and the Tour de France in the same year, repeated in 1952.
+archived: false

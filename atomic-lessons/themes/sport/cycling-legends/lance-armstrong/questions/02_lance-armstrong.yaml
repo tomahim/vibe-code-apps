@@ -1,0 +1,19 @@
+id: 33b9b256-da6c-42d4-bd40-27509a59eff0
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which team signed Armstrong as a professional in 1992?
+choices:
+- id: 0b8fa6f8-73be-47df-9f87-80f3ee5e519f
+  text: US Postal
+- id: 136ffb1e-b12b-4a19-bbcc-d46e1598a76d
+  text: Motorola
+- id: 69f7c026-8b72-434f-8225-6762fa1d0b8c
+  text: Discovery Channel
+- id: f7689ceb-9283-48b7-b1c7-12e92ae32791
+  text: Cofidis
+correct_choice_ids:
+- 136ffb1e-b12b-4a19-bbcc-d46e1598a76d
+explanation: Motorola; US Postal came later, in 1998.
+archived: false

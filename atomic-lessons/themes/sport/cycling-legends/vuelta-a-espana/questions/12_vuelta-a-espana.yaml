@@ -1,0 +1,9 @@
+id: ce96616d-0f2a-447a-ad08-8f10ed2e7d33
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which year did the women's La Vuelta Femenina join the Women's WorldTour?
+accepted_answers:
+- '2023'
+explanation: La Vuelta Femenina has run since 2023.
+archived: false

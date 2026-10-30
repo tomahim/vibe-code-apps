@@ -1,0 +1,10 @@
+id: 8c6321fe-49df-407f-a594-651b760a625a
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: How many riders finished the first Milan-San Remo in 1907?
+accepted_answers:
+- '14'
+- fourteen
+explanation: Only fourteen finished in brutal cold.
+archived: false

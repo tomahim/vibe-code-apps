@@ -1,0 +1,19 @@
+id: ad9b5f53-e302-4b41-a8af-c92f7940c598
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why is the leader's jersey yellow?
+choices:
+- id: 67b7a48b-643c-4baa-bf4f-d3e80b7778ac
+  text: For the sun
+- id: 37f79c5a-792c-437c-995e-d9bd0ffb0338
+  text: L'Auto was printed on yellow paper
+- id: 0e40743e-8120-4629-9445-1d8e5165e64f
+  text: For the French flag
+- id: b0a28b95-e04a-4368-8704-7bca43ef1cd3
+  text: For a sponsor's car
+correct_choice_ids:
+- 37f79c5a-792c-437c-995e-d9bd0ffb0338
+explanation: The newspaper behind the Tour was printed on yellow paper; the jersey dates from 1919.
+archived: false

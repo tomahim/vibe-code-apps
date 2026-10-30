@@ -1,0 +1,19 @@
+id: 0dec3dd7-2e16-4387-96db-6f46139c5274
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How did Mohorič win the 2022 edition?
+choices:
+- id: 806b3d1a-4cdf-4ed8-993b-2a5ff3c5a9ce
+  text: A bunch sprint
+- id: 70f36901-9f77-42d1-99e4-aa79e99b0989
+  text: A Poggio descent attack
+- id: ba42adc2-1834-4543-ad9d-b7299739035f
+  text: A solo from the Turchino
+- id: 9e0d03cd-dec8-4b53-a5bd-f6bab64b11a8
+  text: A crash by rivals
+correct_choice_ids:
+- 70f36901-9f77-42d1-99e4-aa79e99b0989
+explanation: He attacked on the Poggio descent with a dropper seatpost.
+archived: false

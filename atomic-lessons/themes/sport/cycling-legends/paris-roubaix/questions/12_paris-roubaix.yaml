@@ -1,0 +1,9 @@
+id: 55ee653b-ad05-4795-a85d-e9fe84519b5e
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which year was the first Paris-Roubaix Femmes held?
+accepted_answers:
+- '2021'
+explanation: 2021, 125 years after the men's first edition.
+archived: false

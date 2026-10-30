@@ -1,0 +1,19 @@
+id: ed7489cf-1dd3-4972-890e-6d3ad7d9cad8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Where did Vos win her 2012 Olympic gold?
+choices:
+- id: 50ad4ba3-9050-4d70-acd8-31a9aae88bac
+  text: The track
+- id: a7fbd24f-2982-4f53-a096-36214b3b3751
+  text: The women's road race in London
+- id: cfe74d2b-4afc-47e3-a8a5-d77932def8b0
+  text: The time trial
+- id: 786d083c-9f2f-404e-bb72-8679e5783519
+  text: The mountain bike race
+correct_choice_ids:
+- a7fbd24f-2982-4f53-a096-36214b3b3751
+explanation: She won the London 2012 road race in pouring rain.
+archived: false

@@ -1,0 +1,19 @@
+id: 240013a7-bb0e-4c25-88ac-f5afd18c5c1d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What did Chris Froome do at the 2018 Giro?
+choices:
+- id: d9db4750-05d5-4dfc-827e-d848f7fc607e
+  text: Won every time trial
+- id: 2f83e65e-8682-4350-bbd2-f336778a60d3
+  text: Attacked 80 km out on the Finestre to take the race
+- id: de6b91fe-f1e0-4fa5-8307-999fd1bbe7ac
+  text: Crashed out
+- id: 3d0b49e2-ae76-48fe-bc22-0367dce50a81
+  text: Won the points jersey
+correct_choice_ids:
+- 2f83e65e-8682-4350-bbd2-f336778a60d3
+explanation: An 80 km solo over the Colle delle Finestre overturned the race.
+archived: false

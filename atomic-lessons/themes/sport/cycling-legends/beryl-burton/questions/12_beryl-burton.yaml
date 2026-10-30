@@ -1,0 +1,9 @@
+id: 0fdc851d-81da-438e-b59e-a37a2898ef89
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: In which two years did Burton win the road World Championship? Answer with the first one.
+accepted_answers:
+- '1960'
+explanation: She was road world champion in 1960 and 1967.
+archived: false

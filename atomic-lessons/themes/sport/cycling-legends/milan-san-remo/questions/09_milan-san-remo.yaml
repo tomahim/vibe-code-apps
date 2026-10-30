@@ -1,0 +1,10 @@
+id: df78549e-3c77-42fe-a9bd-ff35ef8379c5
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many times did Girardengo win Milan-San Remo?
+accepted_answers:
+- '6'
+- six
+explanation: Six wins and eleven podiums between the wars.
+archived: false

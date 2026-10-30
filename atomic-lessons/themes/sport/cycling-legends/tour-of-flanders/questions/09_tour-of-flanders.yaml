@@ -1,0 +1,10 @@
+id: 751b69d5-5fa7-44f2-8a43-59568ba5b71c
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many riders share the men's record of three wins?
+accepted_answers:
+- '8'
+- eight
+explanation: 'From Buysse in the 1940s to Pogačar in 2026: eight.'
+archived: false

@@ -1,0 +1,19 @@
+id: f4dc28c9-dc6d-4889-ad2b-1c6f3586c16a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Where was Beryl Burton born?
+choices:
+- id: d19da048-726d-4474-9070-c683a24f8c1b
+  text: London
+- id: 5a3160b7-008a-44ea-b488-5d16111ee997
+  text: Leeds
+- id: cdd0b0df-3748-4d79-9d64-7371b646a1c8
+  text: Manchester
+- id: e35627b0-4f8c-4b0c-8755-6aa490471c25
+  text: Glasgow
+correct_choice_ids:
+- 5a3160b7-008a-44ea-b488-5d16111ee997
+explanation: She was born Beryl Charnock in the Halton area of Leeds in 1937.
+archived: false

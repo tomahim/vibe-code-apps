@@ -1,0 +1,19 @@
+id: 4eb3caac-1e4b-46cf-9516-8aeb1ddefdc7
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Since which year has Liège-Bastogne-Liège Femmes been held?
+choices:
+- id: c0299145-3ec4-48f8-a6b5-bc58ecbb2fe7
+  text: '2012'
+- id: abfc0352-3035-4cbf-a84b-96e6a393eda5
+  text: '2015'
+- id: 2d2cdbfc-be8d-43ef-891d-b39aea6d87b9
+  text: '2017'
+- id: f1722354-6ec6-4f32-81be-75e81e87a5a9
+  text: '2021'
+correct_choice_ids:
+- 2d2cdbfc-be8d-43ef-891d-b39aea6d87b9
+explanation: The women's race was inaugurated in 2017.
+archived: false

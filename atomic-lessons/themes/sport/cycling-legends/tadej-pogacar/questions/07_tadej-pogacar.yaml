@@ -1,0 +1,19 @@
+id: 7b509924-e357-4302-8fba-6d0ddcffa68f
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Where were the 2025 Worlds that Pogačar won, a first for Africa?
+choices:
+- id: 170f0e31-7bf0-4121-a602-791990f69977
+  text: Zurich
+- id: ff207454-78df-4652-acb4-7d8ddb9bc9b3
+  text: Kigali
+- id: a5517b72-88a1-4989-8534-2e350d1aa2d2
+  text: Glasgow
+- id: 71915972-50be-4241-be22-b33372c57977
+  text: Wollongong
+correct_choice_ids:
+- ff207454-78df-4652-acb4-7d8ddb9bc9b3
+explanation: 'Kigali, Rwanda: he attacked with 100 km to go and won solo.'
+archived: false
