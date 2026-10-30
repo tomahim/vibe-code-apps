@@ -53,8 +53,8 @@ const tickBox = $('ticker');
 function tick(html, tone) {
   const d = document.createElement('div');
   d.className = 'tick'; d.innerHTML = html;
-  if (tone === 'merge') d.style.borderLeftColor = '#5fa84a';
-  if (tone === 'open') d.style.borderLeftColor = '#3f8fd2';
+  if (tone === 'merge') d.style.borderLeftColor = '#4ade80';
+  if (tone === 'open') d.style.borderLeftColor = '#39d5ff';
   if (tone === 'supply') d.style.borderLeftColor = '#f08a24';
   tickBox.appendChild(d);
   requestAnimationFrame(() => d.classList.add('on'));
@@ -287,11 +287,11 @@ $('scrub').addEventListener('input', () => {
 });
 $('zoom-in').addEventListener('click', () => dolly(.8));
 $('zoom-out').addEventListener('click', () => dolly(1.25));
-$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [0, 1.6, 0] : [-2, 1.6, -.5])); introT = 0; });
+$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [2, 2, -1] : [5, 2, -0.5])); introT = 0; });
 function dolly(f) {
   const c = world.camera, t = world.controls.target;
   const v = c.position.clone().sub(t).multiplyScalar(f);
-  const len = Math.min(62, Math.max(9, v.length())); v.setLength(len);
+  const len = Math.min(23, Math.max(5, v.length())); v.setLength(len);
   c.position.copy(t).add(v);
 }
 addEventListener('keydown', (e) => {
@@ -302,7 +302,29 @@ addEventListener('keydown', (e) => {
   else if (e.key === 'Home') { EP = 0; rebuild(EP); }
   else if (e.key === 'End') { EP = totalEvents(); rebuild(EP); maybeFinale(); }
   else if (e.key === '+') dolly(.8); else if (e.key === '-') dolly(1.25);
+  else if (e.key >= '1' && e.key <= '4') flyTo(+e.key - 1);
 });
+
+// ---------- viewpoints ----------
+const VIEWS = [
+  { pos: [-19, 8, 15], tgt: [5, 2, -0.5] },       // down the production line (default)
+  { pos: [-7.5, 3.2, 3.5], tgt: [-3.5, 1.8, -4] }, // robot arms at work
+  { pos: [10.5, 6, 13], tgt: [17.5, 5, 6] },       // gear tower + portal
+  { pos: [-2, 13, 17], tgt: [0, 1, -2] },          // hall overview
+];
+let camTween = null;
+function flyTo(i) {
+  const v = VIEWS[i]; if (!v) return;
+  const k = world.lite ? 1.18 : 1;
+  const p1 = new THREE.Vector3(v.pos[0] * k, v.pos[1] * k, v.pos[2] * k);
+  const t1 = new THREE.Vector3(...v.tgt);
+  document.querySelectorAll('.views button').forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-pressed', String(j === i)); });
+  introT = 0;
+  if (reducedMotion()) { world.camera.position.copy(p1); world.controls.target.copy(t1); camTween = null; return; }
+  camTween = { p0: world.camera.position.clone(), t0: world.controls.target.clone(), p1, t1, k: 0 };
+}
+document.querySelectorAll('.views button').forEach((b) => b.addEventListener('click', () => flyTo(+b.dataset.view)));
+world.controls.addEventListener('start', () => { camTween = null; });
 
 // ---------- picking ----------
 const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2();
@@ -371,7 +393,7 @@ function setDataset(data) {
 }
 
 // ---------- main loop ----------
-const CAM0 = world.lite ? [33, 30, 40] : [25.5, 24.5, 31];
+const CAM0 = world.lite ? [-16, 9.5, 16] : [-19, 8, 15];
 let last = performance.now(), uiAccum = 0, introT = reducedMotion() ? 0 : 1;
 function frame(now) {
   requestAnimationFrame(frame);
@@ -386,10 +408,17 @@ function frame(now) {
     uiAccum += dt;
     if (uiAccum > .25) { setStats(); uiAccum = 0; }
   }
+  if (camTween) {
+    camTween.k = Math.min(1, camTween.k + dt / 1.1);
+    const e2 = 1 - Math.pow(1 - camTween.k, 3);
+    world.camera.position.lerpVectors(camTween.p0, camTween.p1, e2);
+    world.controls.target.lerpVectors(camTween.t0, camTween.t1, e2);
+    if (camTween.k >= 1) camTween = null;
+  }
   if (introT) {
     introT = Math.max(0, introT - dt / 2.2);
     const e = 1 - Math.pow(1 - (1 - introT), 3);
-    world.camera.position.set(CAM0[0] + 9 * (1 - e), CAM0[1] + 6 * (1 - e), CAM0[2] + 13 * (1 - e));
+    world.camera.position.set(CAM0[0] + 8 * (1 - e), CAM0[1] + 5 * (1 - e), CAM0[2] + 9 * (1 - e));
   }
   const backlog = queue.length + jobs.length;
   const animScale = Math.min(6, 1 + backlog * .3);
