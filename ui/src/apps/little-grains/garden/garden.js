@@ -77,7 +77,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onViewChange, initialView = null, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -393,12 +393,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const clearHover = () => { cellOutline.visible = slabOutline.visible = tileOutline.visible = false; };
   function goGarden(ms = 1000) {
     if (switching) return;
-    const go = () => { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms, 0.35); renderUI(); };
+    const go = () => { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms, 0.35); renderUI(); notifyView(); };
     if (view.level === 'path') exitPath(go); else go();
   }
   function goTheme(ti, ms = 1000) {
     if (switching) return;
-    const go = () => { view.level = 'theme'; view.ti = ti; view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms); renderUI(); };
+    const go = () => { view.level = 'theme'; view.ti = ti; view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms); renderUI(); notifyView(); };
     if (view.level === 'path') exitPath(go); else go();
   }
   function goPath(ti, pi) {
@@ -411,7 +411,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       setTimeout(() => {
         buildTrail(ti, pi); view.level = 'path'; selOutline.visible = false; setVisibility(); fly = null;
         const s = viewSpec(); flyTo({ ...s, dist: s.dist * 0.75 }, 0, 0.1); flyTo(s, reduced ? 0 : 1100, 0.1);
-        fade.classList.remove('on'); switching = false; dirty = true; renderUI();
+        fade.classList.remove('on'); switching = false; dirty = true; renderUI(); notifyView();
       }, reduced ? 0 : 360);
     };
     flyTo({ target: cell.center.clone(), dist: fitDist(1.3, 0.9), polar: 0.9, pan: 2 }, reduced ? 0 : 750);
@@ -426,11 +426,38 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       fade.classList.remove('on'); switching = false; next?.();
     }, reduced ? 0 : 340);
   }
-  function selectLesson(i) { if (view.level !== 'path' || !trail) return; view.lesson = view.lesson === i ? -1 : i; dirty = true; flyTo(viewSpec(), 800); renderUI(); }
+  function selectLesson(i) { if (view.level !== 'path' || !trail) return; view.lesson = view.lesson === i ? -1 : i; dirty = true; flyTo(viewSpec(), 800); renderUI(); notifyView(); }
   function back() {
     if (switching) return;
-    if (view.level === 'path') { if (view.lesson >= 0) { view.lesson = -1; dirty = true; flyTo(viewSpec(), 700); renderUI(); } else exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); }
+    if (view.level === 'path') { if (view.lesson >= 0) { view.lesson = -1; dirty = true; flyTo(viewSpec(), 700); renderUI(); notifyView(); } else exitPath(() => { flyTo(viewSpec(), 900); renderUI(); notifyView(); }); }
     else if (view.level === 'theme') goGarden();
+  }
+
+  // Reflect the current level in the URL (#225): fired on user navigation,
+  // never on applyView restores, so history entries come from real moves.
+  const notifyView = () => {
+    if (!onViewChange) return;
+    const theme = THEMES[view.ti], path = view.level === 'path' ? theme?.paths?.[view.pi] : null;
+    const lesson = view.level === 'path' && view.lesson >= 0 ? path?.lessonData?.[view.lesson] : null;
+    onViewChange({ level: view.level, themeId: view.level === 'garden' ? null : theme?.id || null, pathId: path?.id || null, lessonId: lesson?.id || null });
+  };
+
+  // Restore a level without animation: initial load and browser back/forward.
+  function applyView(target = {}) {
+    if (switching) { setTimeout(() => applyView(target), 420); return; }
+    const ti = target.ti ?? -1, pi = target.pi ?? -1, lesson = target.lesson ?? -1;
+    fly = null;
+    const samePath = view.level === 'path' && pi >= 0 && ti === view.ti && pi === view.pi;
+    if (!samePath) {
+      if (view.level === 'path') disposeTrail();
+      if (ti >= 0 && pi >= 0 && THEMES[ti]?.paths?.[pi]) { view.ti = ti; view.pi = pi; view.lesson = -1; buildTrail(ti, pi); view.level = 'path'; }
+      else if (ti >= 0 && THEMES[ti]) { view.ti = ti; view.pi = -1; view.lesson = -1; view.level = 'theme'; }
+      else { view.ti = view.pi = view.lesson = -1; view.level = 'garden'; }
+    }
+    if (view.level === 'path') view.lesson = lesson >= 0 && trail && lesson < trail.n ? lesson : -1;
+    selOutline.visible = false; clearHover(); setVisibility(); dirty = true;
+    flyTo(viewSpec(), 0, view.level === 'garden' ? 0.35 : undefined);
+    renderUI();
   }
 
   // ----- Picking -----
@@ -562,7 +589,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   function renderUI() { renderCrumbs(); renderPanel(); renderStats(); buildLabels(); }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
+    if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); notifyView(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
     else if (b.dataset.theme) goTheme(Number(b.dataset.theme));
     else if (b.dataset.path) goPath(view.ti, Number(b.dataset.path));
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
@@ -681,11 +708,11 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     stepFly(now); controls.update(); placeLabels();
     renderer.render(scene, camera);
   }
-  resize(); renderUI(); setVisibility(); raf = requestAnimationFrame(frame);
+  resize(); renderUI(); setVisibility(); if (initialView && (initialView.ti >= 0 || initialView.pi >= 0)) applyView(initialView); raf = requestAnimationFrame(frame);
 
   return {
     root, view, state, prof, failed: false, camera, controls,
-    goGarden, goTheme, goPath, selectLesson, back,
+    goGarden, goTheme, goPath, selectLesson, back, applyView,
     updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, catch_up: path.catch_up, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
