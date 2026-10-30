@@ -287,7 +287,7 @@ $('scrub').addEventListener('input', () => {
 });
 $('zoom-in').addEventListener('click', () => dolly(.8));
 $('zoom-out').addEventListener('click', () => dolly(1.25));
-$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [2, 2, -1] : [5, 2, -0.5])); introT = 0; });
+$('reset-view').addEventListener('click', () => { world.camera.position.set(...CAM0); world.controls.target.set(...(world.lite ? [4, 2, -1.5] : [5, 1.8, -2])); introT = 0; });
 function dolly(f) {
   const c = world.camera, t = world.controls.target;
   const v = c.position.clone().sub(t).multiplyScalar(f);
@@ -307,7 +307,7 @@ addEventListener('keydown', (e) => {
 
 // ---------- viewpoints ----------
 const VIEWS = [
-  { pos: [-19, 8, 15], tgt: [5, 2, -0.5] },       // down the production line (default)
+  { pos: [-13.5, 5, 6.5], tgt: [5, 1.8, -2] },   // down the production line (default)
   { pos: [-7.5, 3.2, 3.5], tgt: [-3.5, 1.8, -4] }, // robot arms at work
   { pos: [10.5, 6, 13], tgt: [17.5, 5, 6] },       // gear tower + portal
   { pos: [-2, 13, 17], tgt: [0, 1, -2] },          // hall overview
@@ -381,10 +381,11 @@ $('gate-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') goGu
 
 function setDataset(data) {
   ds = data;
-  $('factory-name').textContent = data.repo.replace('/', ' / ');
+  const compact = matchMedia('(max-width: 700px)').matches;
+  $('factory-name').textContent = compact ? data.repo.split('/').pop() : data.repo.replace('/', ' / ');
   $('factory-sub').textContent = data.guest
-    ? `Guest factory · ${data.prs.length} recent merged PRs${data.capped ? ' (capped)' : ''} · live anonymous API`
-    : 'Home factory · snapshot baked ' + data.snapshot;
+    ? (compact ? `Guest · ${data.prs.length} recent PRs${data.capped ? ' (capped)' : ''}` : `Guest factory · ${data.prs.length} recent merged PRs${data.capped ? ' (capped)' : ''} · live anonymous API`)
+    : (compact ? 'Home · baked ' + data.snapshot : 'Home factory · snapshot baked ' + data.snapshot);
   events = buildEvents(data);
   eventsPerSec = Math.max(3.5, events.length / 95);
   EP = 0; rebuild(EP);
@@ -393,7 +394,7 @@ function setDataset(data) {
 }
 
 // ---------- main loop ----------
-const CAM0 = world.lite ? [-16, 9.5, 16] : [-19, 8, 15];
+const CAM0 = world.lite ? [-13, 6, 8] : [-13.5, 5, 6.5];
 let last = performance.now(), uiAccum = 0, introT = reducedMotion() ? 0 : 1;
 function frame(now) {
   requestAnimationFrame(frame);
