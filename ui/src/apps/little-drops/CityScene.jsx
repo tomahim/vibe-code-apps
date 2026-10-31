@@ -7,11 +7,13 @@ const colors = { soil: 0xd4bfa4, grass: 0xb5cab5, pipe: 0x266b73, water: 0x73d7d
 export default function CityScene({ selected, cutaway, height, onSelect }) {
   const host = useRef(null), state = useRef({ selected, cutaway, height, onSelect });
   state.current = { selected, cutaway, height, onSelect };
-  const [failed, setFailed] = useState(false), [turn, setTurn] = useState(0);
+  const [failed, setFailed] = useState(false), [turn, setTurn] = useState(0), [dusk, setDusk] = useState(false);
+  const invalidate = useRef(() => {}), atmosphere = useRef(false); atmosphere.current = dusk;
+  useEffect(() => { invalidate.current(); }, [selected, cutaway, height, turn, dusk]);
   const rotation = useRef(0); rotation.current = turn;
   useEffect(() => {
     const el = host.current;
-    let renderer, frame, observer, disposed = false;
+    let renderer, frame = null, observer, intersection, disposed = false, visible = true, contextLost = false;
     const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe9eee4);
     const camera = new THREE.PerspectiveCamera(35, 1, .1, 100);
     const resources = [];
@@ -21,13 +23,13 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     }
     const box = (w,h,d,c,x,y,z,p) => mesh(new THREE.BoxGeometry(w,h,d),c,x,y,z,p);
     const cylinder = (r,h,c,x,y,z,p) => mesh(new THREE.CylinderGeometry(r,r,h,32),c,x,y,z,p);
-    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false }); }
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true }); }
     catch { setFailed(true); return; }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6)); renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0xe9eee4); el.appendChild(renderer.domElement);
     renderer.domElement.setAttribute('aria-label', 'Interactive cutaway city. Use the five stop buttons below to explore the same journey.');
     renderer.domElement.setAttribute('role', 'img');
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8c9c8c, 2.5));
+    const sky = new THREE.HemisphereLight(0xffffff, 0x8c9c8c, 2.5); scene.add(sky);
     const sun = new THREE.DirectionalLight(0xffefd8, 3.2); sun.position.set(-4,10,8); scene.add(sun);
     const island = new THREE.Group(); scene.add(island);
     box(13.2,1.1,3.65,colors.soil,0,-.8,-.825,island);
@@ -51,10 +53,11 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     const tank = cylinder(.7,.72,colors.cream,0,2.45,0,tower);
     const lid = mesh(new THREE.ConeGeometry(.74,.28,32),colors.roof,0,2.95,0,tower);
     const waterBand = cylinder(.704,.12,0x70bac2,0,2.42,0,tower);
+    const windows = [];
     for(const [x,z,h] of [[3,-1,1.3],[4.5,-1.2,1.7],[5,.35,1.05]]) {
       box(.95,h,.85,colors.cream,x,h/2,z,island);
       const roof = mesh(new THREE.ConeGeometry(.85,.55,4),colors.roof,x,h+.25,z,island); roof.rotation.y=Math.PI/4;
-      for(const wx of [-.22,.22]) box(.16,.25,.018,0x6c9290,x+wx,h*.64,z+.433,island);
+      for(const wx of [-.22,.22]) windows.push(box(.16,.25,.018,0x6c9290,x+wx,h*.64,z+.433,island));
       box(.22,.43,.02,0x4d7772,x,.215,z+.44,island);
     }
     for (const [x,z] of [[-5.8,-1.8],[-3.7,-1.85],[1.8,-1.8],[5.8,-1.7],[2.2,.35]]) {
@@ -89,33 +92,47 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     const ring=mesh(new THREE.TorusGeometry(.37,.035,8,40),0xfef8e9,0,0,0,island);ring.rotation.x=-Math.PI/2;
     const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
     function click(e){ const rect=el.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(hotspots)[0];if(hit){state.current.onSelect(hit.object.userData.index);}  }
-    function lost(e){ e.preventDefault();setFailed(true); }
+    function lost(e){ e.preventDefault();contextLost=true;cancelAnimationFrame(frame);frame=null;setFailed(true); }
     renderer.domElement.addEventListener('click',click);renderer.domElement.addEventListener('webglcontextlost',lost);
-    function resize(){const w=el.clientWidth,h=el.clientHeight; renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();} observer=new ResizeObserver(resize);observer.observe(el);resize();
     let last=0,elapsed=0;
-    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function draw(time){if(disposed)return;frame=requestAnimationFrame(draw);const dt=Math.min((time-last)/1000,.05);last=time;elapsed+=dt;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let reduced=motion.matches;
+    function requestDraw(){if(!disposed&&!contextLost&&visible&&!document.hidden&&frame===null)frame=requestAnimationFrame(draw);}
+    invalidate.current=requestDraw;
+    function resize(){const w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();requestDraw();}
+    observer=new ResizeObserver(resize);observer.observe(el);resize();
+    function visibility(){if(document.hidden||!visible){cancelAnimationFrame(frame);frame=null;last=0;}else requestDraw();}
+    intersection=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;visibility();},{rootMargin:'80px'});intersection.observe(el);
+    document.addEventListener('visibilitychange',visibility);
+    function motionChange(){reduced=motion.matches;requestDraw();}motion.addEventListener('change',motionChange);
+    function draw(time){frame=null;if(disposed||contextLost||!visible||document.hidden)return;const dt=last?Math.min((time-last)/1000,.05):0;last=time;elapsed+=dt;
       const s=state.current;const angle=rotation.current;branches.visible=s.cutaway;
-      if(document.hidden)return;
+      const night=atmosphere.current;
+      scene.background.set(night?0x263c50:0xe9eee4);
+      sky.color.set(night?0x9cb9df:0xffffff);sky.groundColor.set(night?0x7f887d:0x8c9c8c);sky.intensity=night?1.5:2.5;
+      sun.color.set(night?0xf6c397:0xffefd8);sun.intensity=night?1.8:3.2;
+      windows.forEach(w=>{w.material.color.set(night?0xffd99b:0x6c9290);w.material.emissive.set(night?0xf6aa53:0x000000);w.material.emissiveIntensity=night?.7:0;});
+      markerMat.color.set(night?0x72e1de:0x0e737f);markerMat.emissiveIntensity=night?.6:.25;
       const dist=camera.aspect>2?11.5:camera.aspect<1?23:18;
       camera.position.set(Math.sin(angle)*dist,dist*.63,Math.cos(angle)*dist);camera.lookAt(0,.35,0);
-      verge.position.y=THREE.MathUtils.lerp(verge.position.y,s.cutaway?-.95:-.25,.12);verge.material.transparent=true;verge.material.opacity=s.cutaway?.14:1;
+      verge.position.y=reduced?(s.cutaway?-.95:-.25):THREE.MathUtils.lerp(verge.position.y,s.cutaway?-.95:-.25,.12);verge.material.transparent=true;verge.material.opacity=s.cutaway?.14:1;
       const towerScale=.65+s.height/45;tank.position.y=2.45*towerScale;lid.position.y=tank.position.y+.5;waterBand.position.y=tank.position.y-.03;
       legs.forEach(l=>{l.scale.y=towerScale;l.position.y=towerScale;});
       hotspots[2].position.y=tank.position.y+.35;hotspots[3].position.set(2.7,s.cutaway?-.25:.65,1.55);
       const target=path[s.selected].clone();if(s.selected===2)target.y=tank.position.y+.7;
       if(s.selected===3)target.set(2.7,s.cutaway?-.25:.65,1.55);
-      drop.position.lerp(target,.08);drop.position.y+=reduced?0:Math.sin(elapsed*2.6)*.0015;
+      if(reduced)drop.position.copy(target);else drop.position.lerp(target,.08);drop.position.y+=reduced?0:Math.sin(elapsed*2.6)*.0015;
       ring.position.copy(drop.position);ring.position.y-=.35;
       pipeDrops.forEach((p,i)=>{p.position.copy(curve.getPointAt(((reduced?0:elapsed*.085)+i/16)%1));p.position.y+=.11;p.visible=s.cutaway;});
       renderer.render(scene,camera);
-    } frame=requestAnimationFrame(draw);
-    return ()=>{disposed=true;cancelAnimationFrame(frame);observer?.disconnect();renderer.domElement.removeEventListener('click',click);renderer.domElement.removeEventListener('webglcontextlost',lost);resources.forEach(r=>r.dispose());renderer.dispose();renderer.domElement.remove();};
+      if(!reduced)requestDraw();
+    } requestDraw();
+    return ()=>{disposed=true;cancelAnimationFrame(frame);observer?.disconnect();intersection?.disconnect();document.removeEventListener('visibilitychange',visibility);motion.removeEventListener('change',motionChange);invalidate.current=()=>{};renderer.domElement.removeEventListener('click',click);renderer.domElement.removeEventListener('webglcontextlost',lost);resources.forEach(r=>r.dispose());renderer.dispose();renderer.domElement.remove();};
   }, []);
-  return <div className="ld-scene-wrap">
+  return <div className={`ld-scene-wrap${dusk ? ' ld-dusk' : ''}`}>
     <div className="ld-scene" ref={host} hidden={failed}/>
     {failed&&<div className="ld-fallback"><span>◈</span><h3>The journey still works.</h3><p>3D is unavailable on this device. Use the stops below to explore every explanation and experiment.</p></div>}
     <div className="ld-scene-note">{cutaway?'BELOW THE SURFACE':'A SMALL CITY, A BIG JOURNEY'}<span>Illustrative model · not to scale</span></div>
-    {!failed&&<div className="ld-camera"><button aria-label="Rotate city left" onClick={()=>setTurn(v=>v-.3)}>↶</button><button aria-label="Reset city view" onClick={()=>setTurn(0)}>⌂</button><button aria-label="Rotate city right" onClick={()=>setTurn(v=>v+.3)}>↷</button></div>}
+    {!failed&&<><button className="ld-atmosphere" aria-pressed={dusk} onClick={()=>setDusk(v=>!v)}>{dusk?'☾ Dusk view':'☀ Daylight view'}</button><div className="ld-camera"><button aria-label="Rotate city left" onClick={()=>setTurn(v=>v-.3)}>↶</button><button aria-label="Reset city view" onClick={()=>setTurn(0)}>⌂</button><button aria-label="Rotate city right" onClick={()=>setTurn(v=>v+.3)}>↷</button></div></>}
   </div>;
 }
