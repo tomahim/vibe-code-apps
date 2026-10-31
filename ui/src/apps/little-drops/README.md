@@ -20,3 +20,6 @@ Make mechanisms understandable and fun before adding more journeys. Next candida
 
 ## Release 002
 Valves & routes is a graph-connectivity toy, not a hydraulic calculation. All eight valve combinations are unit-tested. SVG status, patterns and valve symbols work without color or WebGL. The city branches are illustrative and independent of the toy topology. Guided playback lives in React so it also works on the non-WebGL fallback, pauses in a hidden tab and stops on the final stop.
+
+## Release 003
+Storage & demand uses equal-duration fictional steps and arbitrary volume units. The pure model conserves water: previous storage + inflow = delivered + next storage + overflow. Capacity comparisons start half full, so the larger tank also has a larger starting reserve. No real demand, safety, engineering, pressure or energy prediction is made. The hand-stepped interface needs no animation or WebGL.
