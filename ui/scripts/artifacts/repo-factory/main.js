@@ -2,7 +2,10 @@
 import * as THREE from 'three';
 import { buildWorld, buildMachine, C } from './factory.js';
 import { loadGuestRepo } from './github.js';
-import homeData from './data.js';
+
+// The home factory loads live through the same anonymous GitHub API path as
+// guest factories - the home repo is just the default dataset.
+const HOME_REPO = 'tomahim/vibe-code-apps';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,7 +16,8 @@ try { world = buildWorld($('scene'), { lite: isMobile }); }
 catch (e) { $('loading').hidden = true; $('error').hidden = false; throw e; }
 
 // ---------- dataset ----------
-let ds = homeData;
+let ds = null;
+let homeCache = null;
 let events = [];
 let EP = 0;           // event position: float over the event list (event-index pacing)
 let appliedIdx = 0;
@@ -65,7 +69,6 @@ function setStats() {
   const d = fmtDate(displayTime());
   $('stat-date').textContent = d;
   $('stat-merged').textContent = String(mergedCount);
-  $('stat-supplies').textContent = String(suppliesCount);
   $('scrub-date').textContent = d;
 }
 
@@ -264,7 +267,7 @@ function maybeFinale() {
   world.smoke.puff(world.hall.chimneyTop, 8);
   world.sparks.burst(new THREE.Vector3(18.2, 8, 7.5), 60, 5, 6);
   world.sparks.burst(new THREE.Vector3(-3, 7, -2), 40, 6, 5);
-  const total = ds.guest ? `${mergedCount} recent machines` : `${mergedCount} machines · ${suppliesCount} supply runs`;
+  const total = suppliesCount ? `${mergedCount} machines · ${suppliesCount} supply runs` : `${mergedCount} machines`;
   tick(`<b>TODAY</b> — line complete: ${total} <span>${escapeHtml(ds.repo)}</span>`, 'merge');
   setPlaying(false);
 }
@@ -353,7 +356,7 @@ function showInfo(pr) {
   ];
   if (pr.c) rows.push(['Commits', String(pr.c)]);
   if (pr.add != null) rows.push(['Changes', `<span class="delta">+${pr.add}</span> / <span class="delta del">−${pr.dele}</span>`]);
-  else rows.push(['Details', 'not loaded for guest factories']);
+  else rows.push(['Details', 'not available in live mode']);
   $('info-dl').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
   $('info').hidden = false;
 }
@@ -363,7 +366,7 @@ $('info-close').addEventListener('click', () => $('info').hidden = true);
 const gate = $('gate');
 $('open-gate').addEventListener('click', () => { gate.hidden = false; $('gate-input').focus(); });
 $('gate-cancel').addEventListener('click', () => { gate.hidden = true; $('gate-msg').textContent = ''; });
-$('gate-home').addEventListener('click', () => { setDataset(homeData); gate.hidden = true; });
+$('gate-home').addEventListener('click', () => { if (homeCache) setDataset(homeCache); gate.hidden = true; });
 async function goGuest() {
   const val = $('gate-input').value;
   const btn = $('gate-go'); btn.disabled = true;
@@ -383,9 +386,10 @@ function setDataset(data) {
   ds = data;
   const compact = matchMedia('(max-width: 700px)').matches;
   $('factory-name').textContent = compact ? data.repo.split('/').pop() : data.repo.replace('/', ' / ');
-  $('factory-sub').textContent = data.guest
-    ? (compact ? `Guest · ${data.prs.length} recent PRs${data.capped ? ' (capped)' : ''}` : `Guest factory · ${data.prs.length} recent merged PRs${data.capped ? ' (capped)' : ''} · live anonymous API`)
-    : (compact ? 'Home · baked ' + data.snapshot : 'Home factory · snapshot baked ' + data.snapshot);
+  const what = data.home ? 'Home' : 'Guest';
+  $('factory-sub').textContent = compact
+    ? `${what} · ${data.prs.length} PRs · live`
+    : `${what} factory · ${data.prs.length} recent merged PRs${data.capped ? ' (capped)' : ''} · live from GitHub`;
   events = buildEvents(data);
   eventsPerSec = Math.max(3.5, events.length / 95);
   EP = 0; rebuild(EP);
@@ -432,15 +436,42 @@ function frame(now) {
 }
 
 // ---------- boot ----------
-// defer the auto-play decision to the first frame so an emulated or late-applied
-// reduced-motion preference is honored
-$('loading').hidden = true;
-requestAnimationFrame(() => { setDataset(homeData); requestAnimationFrame(frame); });
+async function boot() {
+  const msg = document.querySelector('#loading p');
+  try {
+    const data = await loadGuestRepo(HOME_REPO, (s) => { if (msg) msg.textContent = s; });
+    data.home = true;
+    homeCache = data;
+    $('loading').hidden = true;
+    // defer the auto-play decision to the first frame so an emulated or
+    // late-applied reduced-motion preference is honored
+    requestAnimationFrame(() => { setDataset(data); requestAnimationFrame(frame); });
+  } catch (err) {
+    $('loading').hidden = true;
+    const e = $('error');
+    e.innerHTML = '';
+    const box = document.createElement('div');
+    const h = document.createElement('h1');
+    h.textContent = "The factory couldn't reach GitHub.";
+    const p = document.createElement('p');
+    p.textContent = err.message;
+    const retry = document.createElement('button');
+    retry.id = 'error-retry';
+    retry.textContent = 'Try again';
+    retry.style.marginTop = '14px';
+    retry.style.padding = '0 22px';
+    retry.addEventListener('click', () => { e.hidden = true; $('loading').hidden = false; boot(); });
+    box.append(h, p, retry);
+    e.appendChild(box);
+    e.hidden = false;
+  }
+}
+boot();
 
 // test hook
 window.__world = world;
 window.__factory = {
-  get state() { return { EP, total: totalEvents(), date: fmtDate(displayTime()), merged: mergedCount, supplies: suppliesCount, active: jobs.length, queue: queue.length, gears: world.monument.count, repo: ds.repo, guest: !!ds.guest, finale: finaleShown }; },
+  get state() { return { EP, total: totalEvents(), date: fmtDate(displayTime()), merged: mergedCount, supplies: suppliesCount, active: jobs.length, queue: queue.length, gears: world.monument.count, repo: ds && ds.repo, guest: !!(ds && ds.guest), home: !!(ds && ds.home), finale: finaleShown }; },
   play: () => setPlaying(true), pause: () => setPlaying(false),
   scrubTo(frac) { EP = frac * totalEvents(); rebuild(EP); },
   finish() { EP = totalEvents(); rebuild(EP); maybeFinale(); },
