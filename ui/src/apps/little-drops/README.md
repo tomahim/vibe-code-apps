@@ -26,3 +26,6 @@ Storage & demand uses equal-duration fictional steps and arbitrary volume units.
 
 ## Release 004
 The pocket notebook lists all stops and revisits opened discoveries with focus returned to the explanation. Markdown export is generated locally from opened content and its existing source links; there is no upload, sync or new permission. Clearing discoveries requires confirmation and does not remove downloaded files. Failed storage writes return a visible in-memory-only warning. Browser tests inspect actual downloaded bytes and cover cancel/reset/persistence/storage failure.
+
+## Release 005
+Optional dusk lighting is decorative, not a time-of-day simulation. The renderer stops scheduling frames while hidden or outside an 80px viewport margin. Reduced motion draws only on changes and snaps the selected marker/cutaway instead of animating. Context loss cancels the loop and keeps the reading fallback. Visibility, intersection and media listeners are cleaned up on unmount. A preserved drawing buffer keeps single-frame renders visible/capturable between changes; no measured battery or Android frame-rate claim is made.
