@@ -13,8 +13,8 @@ test('journey, cutaway, discoveries and local persistence',async({page})=>{
 });
 test('pressure experiment and treatment sequence',async({page})=>{
   await page.locator('#ld-height').fill('40');await expect(page.locator('.ld-pressure-value strong')).toHaveText('392');
-  await page.getByText('Make a prediction').click();await page.getByRole('button',{name:'It doubles',exact:true}).click();await expect(page.locator('.ld-lab p[role=status]')).toContainText('Yes.');
-  await page.getByRole('button',{name:'Inside treatment'}).click();await page.getByRole('button',{name:'4. Disinfect'}).click();await expect(page.locator('.ld-lab')).toContainText('Disinfection kills remaining germs.');
+  await page.getByText('Make a prediction').click();await page.getByRole('button',{name:'It doubles',exact:true}).click();await expect(page.locator('#ld-panel-pressure p[role=status]')).toContainText('Yes.');
+  await page.getByRole('button',{name:'Inside treatment',exact:true}).click();await page.getByRole('button',{name:'4. Disinfect'}).click();await expect(page.locator('.ld-lab')).toContainText('Disinfection kills remaining germs.');
   await page.getByRole('button',{name:'Play journey'}).click();await expect(page.getByRole('button',{name:'Pause journey'})).toBeVisible();await page.getByRole('button',{name:'Pause journey'}).click();
 });
 test('mobile layout, keyboard access and no horizontal overflow',async({page})=>{

@@ -29,3 +29,6 @@ The pocket notebook lists all stops and revisits opened discoveries with focus r
 
 ## Release 005
 Optional dusk lighting is decorative, not a time-of-day simulation. The renderer stops scheduling frames while hidden or outside an 80px viewport margin. Reduced motion draws only on changes and snaps the selected marker/cutaway instead of animating. Context loss cancels the loop and keeps the reading fallback. Visibility, intersection and media listeners are cleaned up on unmount. A preserved drawing buffer keeps single-frame renders visible/capturable between changes; no measured battery or Android frame-rate claim is made.
+
+## Release 006
+The four experiment panels stay mounted for the current visit, with inactive panels `hidden` from keyboard/assistive-technology navigation. This preserves the storage cycle, valve challenge, treatment stage and prediction while switching. The choice group supports arrow/Home/End keys; story shortcuts focus/scroll the workbench. State is not saved across reload. No timers or network work run in hidden labs.

@@ -10,7 +10,7 @@ export default function NetworkLab() {
   const titleId = useId(), descId = useId();
   function toggle(id) { setValves(v => ({ ...v, [id]: !v[id] })); }
   return <>
-    <h2 id="ld-lab-heading">One closed valve. Another way around?</h2>
+    <h2>One closed valve. Another way around?</h2>
     <p>Open and close connections in a tiny network. Can you keep a route to the home when Main street is closed?</p>
     <div className="ld-network-key"><span>━ Connected to tower</span><span>┄ Not connected</span><span>× Closed valve</span></div>
     <svg className="ld-network-map" viewBox="0 0 400 235" role="img" aria-labelledby={`${titleId} ${descId}`}>
