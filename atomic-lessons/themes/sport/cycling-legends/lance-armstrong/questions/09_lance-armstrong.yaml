@@ -1,0 +1,9 @@
+id: 0e2d181a-24f5-45ca-9bd6-133e5c9a7ccc
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: In which year were Armstrong's seven Tour titles stripped?
+accepted_answers:
+- '2012'
+explanation: USADA and the UCI acted in 2012; he confessed on television in January 2013.
+archived: false

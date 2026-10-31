@@ -1,0 +1,9 @@
+id: 74aa04f8-e6c0-40a5-8256-7e582bfaca76
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: In which year was the first Tour de France held?
+accepted_answers:
+- '1903'
+explanation: The first Tour ran in 1903.
+archived: false

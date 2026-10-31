@@ -1,0 +1,10 @@
+id: 4b07e450-4171-41ac-a3b3-86fe3392836e
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: How many times did Coppi win the Giro d'Italia?
+accepted_answers:
+- '5'
+- five
+explanation: 1940, 1947, 1949, 1952 and 1953.
+archived: false

@@ -1,0 +1,19 @@
+id: ab4e03b8-1de0-4088-926c-d2bb3693cba7
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who led the investigation that stripped Armstrong's titles?
+choices:
+- id: 6c1adaf8-d50c-4e0d-bf97-212b67774f6c
+  text: The UCI alone
+- id: 384c9095-3286-4c33-a270-bc677aecbb4f
+  text: USADA
+- id: 41960aa8-d1ad-4d3e-9975-cf072119412f
+  text: WADA only
+- id: 9ed10557-d9e9-4701-8d24-0ef698c2b4d9
+  text: The FBI
+correct_choice_ids:
+- 384c9095-3286-4c33-a270-bc677aecbb4f
+explanation: The US Anti-Doping Agency, with testimony from eleven former teammates.
+archived: false

@@ -1,0 +1,9 @@
+id: 95ae8b90-de8a-4b7b-863d-28f24794f39c
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: Where was the 1980 World Championship that Hinault won with an 80 km solo?
+accepted_answers:
+- Sallanches
+explanation: Sallanches, on a course often called the hardest in Worlds history.
+archived: false

@@ -1,0 +1,12 @@
+id: cf52d67a-9f78-406d-b1c2-a20b4c67cfcb
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Which other Italian Monument joins Lombardia in the calendar?
+accepted_answers:
+- Milan-San Remo
+- Milano-Sanremo
+- San Remo
+- Sanremo
+explanation: Milan-San Remo in spring, Lombardia in autumn.
+archived: false

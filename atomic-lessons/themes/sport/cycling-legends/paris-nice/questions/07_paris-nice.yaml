@@ -1,0 +1,19 @@
+id: edffa615-6bfb-409b-8e94-fa68e2a8834c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why does Paris-Nice matter for the Tour de France?
+choices:
+- id: 0bde8b94-6f9e-41c2-b2a2-4606b8d39c5b
+  text: It offers wild cards
+- id: b66dc5b6-7e6b-49ca-8a08-573c3612ff04
+  text: It is the first form check for stage racers each March
+- id: ccebc303-588c-4152-ac70-2a9cee40a629
+  text: It has identical stages
+- id: 734ee283-abe8-4326-a2e5-30f794c7a9a3
+  text: Same organiser only
+correct_choice_ids:
+- b66dc5b6-7e6b-49ca-8a08-573c3612ff04
+explanation: It reveals Grand Tour form for the first time each year.
+archived: false

@@ -1,0 +1,19 @@
+id: fe8bce32-f7e4-4001-88b1-148590aadfae
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What did Pogačar do at the 2024 Giro?
+choices:
+- id: 918ae9b9-1b43-4511-95f8-2e59d905e499
+  text: Lost by a second
+- id: 7eb9aae6-8cef-477d-90df-7e31c2544dc7
+  text: Won on his debut by nearly ten minutes
+- id: af787291-9dfb-44f3-8d72-cc58441f8a39
+  text: Abandoned
+- id: 88c1bf5b-6838-4546-9a9e-6a6d3b0a63f3
+  text: Won one stage
+correct_choice_ids:
+- 7eb9aae6-8cef-477d-90df-7e31c2544dc7
+explanation: He won on his Giro debut by almost ten minutes.
+archived: false

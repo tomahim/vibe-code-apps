@@ -1,0 +1,10 @@
+id: bd339911-241f-4a04-baaa-12d7457d6af3
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Who created the race as a writer for Sportwereld?
+accepted_answers:
+- Karel Van Wijnendaele
+- Van Wijnendaele
+explanation: Karel Van Wijnendaele, a young cycling journalist.
+archived: false

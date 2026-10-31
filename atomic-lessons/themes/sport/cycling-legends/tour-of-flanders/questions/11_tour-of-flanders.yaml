@@ -1,0 +1,19 @@
+id: 967b385b-537c-4c70-bae3-88c2c67b0cb9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Who holds the women's record with three wins?
+choices:
+- id: 95ae83ba-1ff9-4e1a-ba9f-9598b1e3d674
+  text: Marianne Vos
+- id: 77e70fd9-f583-4e5e-95d3-11546a00653a
+  text: Lotte Kopecky
+- id: 30786e25-018c-48ba-a54d-bfad6da0af96
+  text: Annemiek van Vleuten
+- id: 2e1e452b-4d04-4f15-ac6a-50e02201f4d5
+  text: Elisa Longo Borghini
+correct_choice_ids:
+- 77e70fd9-f583-4e5e-95d3-11546a00653a
+explanation: Belgium's Lotte Kopecky.
+archived: false

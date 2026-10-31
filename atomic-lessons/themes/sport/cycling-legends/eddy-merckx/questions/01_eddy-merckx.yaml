@@ -1,0 +1,19 @@
+id: def68b8b-33b6-4962-8ff8-021cb520251b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which country was Eddy Merckx born?
+choices:
+- id: 18ff3584-8967-4640-8d89-700ba246787d
+  text: France
+- id: 73d34f25-bdc1-4111-b1dc-257f619d3ac0
+  text: Belgium
+- id: f9d31b2d-9bc8-4ae8-bfcd-a52e8e9b19e1
+  text: Italy
+- id: 46349573-67bc-4760-bd88-d362cbd06f95
+  text: The Netherlands
+correct_choice_ids:
+- f9d31b2d-9bc8-4ae8-bfcd-a52e8e9b19e1
+explanation: Merckx was born in Meensel-Kiezegem, Belgium, in 1945.
+archived: false

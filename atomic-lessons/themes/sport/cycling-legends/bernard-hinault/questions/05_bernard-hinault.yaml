@@ -1,0 +1,19 @@
+id: d7cefd9b-e6ee-4ca2-84db-0554df1ff587
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What happened to Hinault at the 1980 Tour de France?
+choices:
+- id: c603ae0f-3470-4a09-8103-6b8fc37e0e53
+  text: He won it
+- id: aa8dce21-3938-4403-bd4d-895cee038b15
+  text: He abandoned while leading with a knee injury
+- id: 75c68020-1de9-47c1-aae7-82368b6d56c5
+  text: He crashed out on stage 1
+- id: 6c86f8dc-f40b-44f4-b2e1-ab6956ee77b6
+  text: He was second
+correct_choice_ids:
+- aa8dce21-3938-4403-bd4d-895cee038b15
+explanation: A knee injury forced him out in yellow; he returned to win the Worlds that year.
+archived: false

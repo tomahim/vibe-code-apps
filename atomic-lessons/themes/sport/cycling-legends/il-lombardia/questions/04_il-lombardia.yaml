@@ -1,0 +1,19 @@
+id: cc1d2153-aa9c-4e30-9819-989a193be5cf
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What stands at the top of the Madonna del Ghisallo?
+choices:
+- id: 840e175e-6825-48fe-aecf-2ae77dad60f0
+  text: A castle
+- id: a2b3c161-1dd9-4fb8-a6a3-2dc9d73469c6
+  text: A church patroness of cyclists and a cycling museum
+- id: a3621176-1b3a-4597-bb86-6e88531c0d32
+  text: A radio mast
+- id: 658932dd-6ed3-4a12-ada6-54438dffcfde
+  text: A velodrome
+correct_choice_ids:
+- a2b3c161-1dd9-4fb8-a6a3-2dc9d73469c6
+explanation: The sanctuary of the Madonna del Ghisallo, patroness of cyclists, plus the museum.
+archived: false

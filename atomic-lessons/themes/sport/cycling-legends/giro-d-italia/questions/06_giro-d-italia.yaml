@@ -1,0 +1,9 @@
+id: 431839cb-9e34-48ad-bfbe-a6362c577647
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which year was the pink jersey introduced?
+accepted_answers:
+- '1931'
+explanation: 1931; Learco Guerra was the first to wear it.
+archived: false

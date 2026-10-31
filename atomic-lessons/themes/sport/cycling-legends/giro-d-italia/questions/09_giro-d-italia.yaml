@@ -1,0 +1,10 @@
+id: caab8f95-cf7c-4819-9ca8-376e06824328
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many times did Coppi win the Giro?
+accepted_answers:
+- '5'
+- five
+explanation: 1940, 1947, 1949, 1952 and 1953, a record shared with Merckx and Binda.
+archived: false

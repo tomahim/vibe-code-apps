@@ -1,0 +1,19 @@
+id: 24947d97-177e-4083-b1a6-e5021d3744e6
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How long did Burton's 12-hour record stay above the men's best?
+choices:
+- id: dce7c471-bb33-4322-b255-c071b3d4ed7a
+  text: Two months
+- id: f8d4bc8e-c87c-4996-97c4-6ff8164b890c
+  text: Two years
+- id: b98aef46-55c9-4572-b0bb-efa75bcea897
+  text: Ten years
+- id: c860628f-ea76-4a8d-bd27-531682a33338
+  text: It still stands
+correct_choice_ids:
+- f8d4bc8e-c87c-4996-97c4-6ff8164b890c
+explanation: No man bettered it until 1969, two years later.
+archived: false

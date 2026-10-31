@@ -1,0 +1,19 @@
+id: 2fa74e09-27fd-4b2f-8cd9-621760b27a11
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Roughly how long is Milan-San Remo?
+choices:
+- id: 449be28c-a8de-43df-a6dd-44f410731a63
+  text: 180 km
+- id: 3cedc9c8-cc66-4055-83c1-660ab2c72b23
+  text: 230 km
+- id: ae1ebd21-8cbc-40c1-b869-500d4144019a
+  text: 300 km
+- id: 69dfea3a-3522-408c-87f1-a33f8869dbb7
+  text: 350 km
+correct_choice_ids:
+- ae1ebd21-8cbc-40c1-b869-500d4144019a
+explanation: Around 290-300 km, the longest one-day Monument.
+archived: false

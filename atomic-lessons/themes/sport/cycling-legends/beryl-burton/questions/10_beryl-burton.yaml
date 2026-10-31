@@ -1,0 +1,19 @@
+id: 0bdad566-0ac7-47b3-bacd-d2e4cb29c84f
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What record did Burton and her daughter set together in 1982?
+choices:
+- id: 711b697c-ef21-447e-b08e-1591b134113d
+  text: The 24-hour record
+- id: 82328191-17cc-41e4-8ce8-d658e798e647
+  text: The women's 10-mile tandem record
+- id: a068bb00-40b3-4bfe-b68e-dbbf79421c90
+  text: The Lands End record
+- id: a485a72a-33f2-4255-a38d-53ea841b35f0
+  text: The pursuit record
+correct_choice_ids:
+- 82328191-17cc-41e4-8ce8-d658e798e647
+explanation: 21 minutes 25 seconds for 10 miles on a tandem.
+archived: false

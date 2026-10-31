@@ -1,0 +1,19 @@
+id: 46f81759-9e2e-4dd9-95fe-3158c36d921f
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Who won the 1996 Tour, ending Indurain's streak?
+choices:
+- id: 314d7ca7-3e43-4ac6-9715-e78de9026486
+  text: Jan Ullrich
+- id: b42a4f2a-e4e4-4fe0-86d1-f297edb75181
+  text: Bjarne Riis
+- id: aaaec2c6-7d49-4798-bfd5-ee5b5c72c3a0
+  text: Marco Pantani
+- id: bc44e999-d521-4935-9ae6-b6f820882e37
+  text: Alex Zülle
+correct_choice_ids:
+- b42a4f2a-e4e4-4fe0-86d1-f297edb75181
+explanation: Bjarne Riis of Denmark; Indurain finished outside the top ten.
+archived: false

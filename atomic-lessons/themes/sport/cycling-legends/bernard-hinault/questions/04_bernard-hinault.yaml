@@ -1,0 +1,19 @@
+id: e7bd0344-ab3a-43b4-9874-c1122fe227fa
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How many Grand Tours did Hinault win?
+choices:
+- id: 5e8f4415-0f3a-4500-9502-3534a9e30b20
+  text: Eight
+- id: 0617f4d2-4e58-4cac-af6f-3cddabaf6c82
+  text: Nine
+- id: 9966d38e-d2b8-4dd7-8344-29ee47c7110c
+  text: Ten
+- id: 179b51f9-c48b-4ec4-a70c-e4248d924358
+  text: Eleven
+correct_choice_ids:
+- 9966d38e-d2b8-4dd7-8344-29ee47c7110c
+explanation: 'Ten from thirteen starts: five Tours, three Giros, two Vueltas.'
+archived: false

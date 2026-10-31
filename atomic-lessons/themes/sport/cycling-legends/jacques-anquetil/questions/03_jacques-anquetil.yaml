@@ -1,0 +1,10 @@
+id: 6e3611fa-521b-4816-9cca-beb942a46b74
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Whose 1942 hour record did Anquetil beat in 1956?
+accepted_answers:
+- Fausto Coppi
+- Coppi
+explanation: He broke Fausto Coppi's 45.798 km mark with 46.159 km.
+archived: false

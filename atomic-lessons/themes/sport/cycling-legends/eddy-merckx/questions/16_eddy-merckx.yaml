@@ -1,0 +1,12 @@
+id: 768865c4-bcba-4807-8d89-ba28b6bb36f8
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: Which Grand Tour did Merckx win only once, in 1973?
+accepted_answers:
+- Vuelta a España
+- Vuelta
+- La Vuelta
+- the Vuelta
+explanation: His only Vuelta a España victory came in 1973.
+archived: false

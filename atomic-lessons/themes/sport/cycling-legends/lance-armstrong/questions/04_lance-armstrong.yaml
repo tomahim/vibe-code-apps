@@ -1,0 +1,19 @@
+id: 0876b2f2-798c-4864-ae6e-e10c73e78176
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What illness did Armstrong face in 1996?
+choices:
+- id: 5dc1a985-b3bb-4046-890a-699997f1d729
+  text: Bone cancer
+- id: ebe592f5-7439-405b-b9f1-cc64b61a522a
+  text: Metastatic testicular cancer
+- id: fe7d38b4-ed3f-4da0-b01c-4fcc0d599148
+  text: Leukaemia
+- id: 8b187fa4-65a2-41e1-a3b9-193a62169139
+  text: A brain tumour only
+correct_choice_ids:
+- ebe592f5-7439-405b-b9f1-cc64b61a522a
+explanation: Testicular cancer that had spread to his lungs and brain.
+archived: false

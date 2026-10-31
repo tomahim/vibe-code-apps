@@ -1,0 +1,19 @@
+id: 7345dc26-3ae0-4e2d-9717-d2a55bcf4b9f
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What was Anquetil's famous remark about doping?
+choices:
+- id: 8f6fee0c-65bf-402e-b367-25c62b4b79b1
+  text: Cyclists are saints
+- id: c8799104-013d-442f-9045-a4c3911a8ec8
+  text: You do not ride the Tour on mineral water
+- id: b333ac74-9e0d-4825-b3d6-a8d4fe602676
+  text: Everyone is tested
+- id: a7690ace-394f-49d3-b468-037ede9c539f
+  text: I never saw anything
+correct_choice_ids:
+- c8799104-013d-442f-9045-a4c3911a8ec8
+explanation: He said openly that the Tour was not ridden on mineral water.
+archived: false

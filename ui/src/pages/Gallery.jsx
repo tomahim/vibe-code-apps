@@ -5,6 +5,7 @@ import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
   { slug: "story-shelf", name: "The Story Room", description: "A little 3D library. Open illustrated books about history, nature and mountains.", category: "Stories & discovery", icon: "📚" },
+  { slug: "little-drops", name: "Little Drops", description: "Follow a water drop through a cutaway city. Play with the hidden mechanisms behind everyday life.", category: "Explore & learn", icon: "💧" },
   {
     slug: "little-factory",
     name: "The Little Factory",

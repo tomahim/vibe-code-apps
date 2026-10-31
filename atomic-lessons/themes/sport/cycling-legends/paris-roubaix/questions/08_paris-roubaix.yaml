@@ -1,0 +1,19 @@
+id: 7eee2d08-4271-4f52-810c-cf3ac0993c3c
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the traditional finish venue since 1943?
+choices:
+- id: f58df69b-fd54-48f9-b27e-f8b95e179c4f
+  text: A city-centre sprint
+- id: 827a5082-3804-47ab-8ff5-f1ee5d7b468b
+  text: The Roubaix velodrome
+- id: 067475cf-45c6-47d5-af15-c109179ab59e
+  text: The town hall square
+- id: 18dad83a-1cec-4dc9-9142-18818ed30534
+  text: An athletics stadium
+correct_choice_ids:
+- 827a5082-3804-47ab-8ff5-f1ee5d7b468b
+explanation: One and a half laps of the old Roubaix velodrome.
+archived: false

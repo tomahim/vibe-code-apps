@@ -1,0 +1,19 @@
+id: 04c69f57-056c-4de3-a6ea-7b17eb4bf838
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is Liège-Bastogne-Liège called La Doyenne?
+choices:
+- id: 12d3385b-49dc-49bc-a3f7-d086c3d8a314
+  text: After a queen
+- id: 8cb24e30-8b11-4314-a2d4-b330d9274187
+  text: It is the oldest Monument
+- id: e0633236-61d4-41d7-a5a4-8af7bfc34f5d
+  text: After its founder
+- id: 8c83a882-a844-455b-9cda-3349f40130d1
+  text: For its length
+correct_choice_ids:
+- 8cb24e30-8b11-4314-a2d4-b330d9274187
+explanation: 'La Doyenne, the Old Lady: first run in 1892.'
+archived: false

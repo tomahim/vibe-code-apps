@@ -1,0 +1,9 @@
+id: f1aaed79-2b66-40dd-818e-9976f6e9bb15
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which year were individual time trials added to the Worlds?
+accepted_answers:
+- '1994'
+explanation: Elite time trials date from 1994.
+archived: false

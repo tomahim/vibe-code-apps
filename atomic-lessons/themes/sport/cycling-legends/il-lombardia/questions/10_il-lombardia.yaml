@@ -1,0 +1,19 @@
+id: 7d2bb754-28d2-4b7d-8ba4-032e066c3de9
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why do rainbow jerseys often target Lombardia?
+choices:
+- id: 0989a251-bb9e-49c4-98da-e3761e2caf4c
+  text: It pays most
+- id: 4af3fac6-4fb1-4dfc-977d-abf4ec0f8bfa
+  text: It follows the Worlds, when new champions are flying
+- id: 653b3ced-029b-417f-8e60-c806bf170e4c
+  text: It is flat
+- id: 45210fbe-c98d-42d0-aeb2-c440b103fe16
+  text: It is short
+correct_choice_ids:
+- 4af3fac6-4fb1-4dfc-977d-abf4ec0f8bfa
+explanation: It traditionally comes a week after the World Championships.
+archived: false

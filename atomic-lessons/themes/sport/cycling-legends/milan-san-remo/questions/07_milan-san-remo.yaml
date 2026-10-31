@@ -1,0 +1,19 @@
+id: dc898254-bb98-4dda-8b01-db26cd3d91c4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who holds the record of seven Milan-San Remo wins?
+choices:
+- id: ba9412fa-4208-458c-bd6a-12788c978858
+  text: Costante Girardengo
+- id: 0cd05601-f4ca-49ed-8ccb-5b7b520b55f0
+  text: Eddy Merckx
+- id: 8f02e450-e941-4e3d-8e94-c7e3b1ad3308
+  text: Erik Zabel
+- id: d4da6efe-a421-4645-bf0c-5b4673631588
+  text: Fausto Coppi
+correct_choice_ids:
+- 0cd05601-f4ca-49ed-8ccb-5b7b520b55f0
+explanation: Merckx won seven between 1966 and 1978.
+archived: false

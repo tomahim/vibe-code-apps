@@ -1,0 +1,19 @@
+id: bd5473e1-e54e-4ff0-968e-84effc91327e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who won La Doyenne four times in the 2000s-2010s?
+choices:
+- id: 5eb0ebf7-a723-4310-8911-40a6a668587c
+  text: Alejandro Valverde
+- id: 83a3bbd8-bc03-4a8d-bc0d-c556b36c6eba
+  text: Philippe Gilbert
+- id: 12e4a235-2d09-490e-94e0-af411387f892
+  text: Joaquim Rodríguez
+- id: 7a955efd-4543-4933-ab3f-afe4b10b16bc
+  text: Dan Martin
+correct_choice_ids:
+- 5eb0ebf7-a723-4310-8911-40a6a668587c
+explanation: Valverde; Argentin also won four, in the 1980s-90s.
+archived: false

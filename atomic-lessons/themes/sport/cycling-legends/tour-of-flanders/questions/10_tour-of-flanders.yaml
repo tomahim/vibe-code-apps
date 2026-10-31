@@ -1,0 +1,19 @@
+id: 5fadd17b-6835-48fc-bbc2-d67a0eb2953e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Since which year has a women's Tour of Flanders been held?
+choices:
+- id: 27bef076-9963-4f84-bf98-9a3e789debdd
+  text: '1998'
+- id: 6de32fb3-9dca-465c-ae78-99e0362d8c80
+  text: '2004'
+- id: 49b74f73-5cea-4685-bcfe-832101fd64ee
+  text: '2012'
+- id: 6584fc85-ac5d-404a-86af-f144d860054b
+  text: '2020'
+correct_choice_ids:
+- 6de32fb3-9dca-465c-ae78-99e0362d8c80
+explanation: The women's Ronde has run since 2004.
+archived: false

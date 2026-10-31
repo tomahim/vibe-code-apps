@@ -1,0 +1,19 @@
+id: 48c33e45-4d1c-4cf2-b005-1287bd15197f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which race did Coppi win five times, besides the Giro?
+choices:
+- id: 895ce155-7a7e-4d94-aa8d-2a0cdfb6f160
+  text: Paris-Roubaix
+- id: e28ebd76-6443-49e4-adf0-1e2caf702a02
+  text: Milan-San Remo
+- id: 78c73c30-6a5f-4432-9deb-ceaab0e98c98
+  text: Il Lombardia
+- id: a3648c24-c42f-4851-a209-d6c8f5c0345a
+  text: The Tour of Flanders
+correct_choice_ids:
+- 78c73c30-6a5f-4432-9deb-ceaab0e98c98
+explanation: He won the Giro di Lombardia five times, plus three Milan-San Remo.
+archived: false

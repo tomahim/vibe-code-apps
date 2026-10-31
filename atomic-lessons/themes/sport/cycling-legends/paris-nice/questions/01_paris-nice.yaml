@@ -1,0 +1,19 @@
+id: 62b65561-a5e1-48a0-932e-ab2cfb8d3271
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Since which year has Paris-Nice been held?
+choices:
+- id: d6f60b2f-d72a-4c49-aad4-7e4787c876db
+  text: '1919'
+- id: 0042b485-c2f9-4049-a594-cec991ac6934
+  text: '1927'
+- id: f2db119a-66ad-49d5-9159-499e87a176c4
+  text: '1933'
+- id: 23df3f96-c0bb-4777-a472-738ad0d40c60
+  text: '1947'
+correct_choice_ids:
+- f2db119a-66ad-49d5-9159-499e87a176c4
+explanation: It has run annually since 1933.
+archived: false

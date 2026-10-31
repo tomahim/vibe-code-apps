@@ -1,0 +1,19 @@
+id: d9029b2a-d442-43a3-a94e-d847c6cfdf8e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was the first Tour of Flanders?
+choices:
+- id: 67ea2862-7ccb-4443-8bd3-5a475d35c475
+  text: '1903'
+- id: 892ef63f-5028-47c4-99d1-413b42c1926e
+  text: '1909'
+- id: a6966e2d-b8b3-4f5f-9009-dd9f098e2db6
+  text: '1913'
+- id: 535284e1-05dd-4222-a352-fbae25d26e0d
+  text: '1919'
+correct_choice_ids:
+- a6966e2d-b8b3-4f5f-9009-dd9f098e2db6
+explanation: 1913; Paul Deman won the first edition.
+archived: false

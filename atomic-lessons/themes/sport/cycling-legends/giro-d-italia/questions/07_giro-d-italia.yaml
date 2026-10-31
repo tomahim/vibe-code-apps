@@ -1,0 +1,19 @@
+id: aceaf4e6-69c9-4b6c-b6eb-c7cac179e7c2
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which pass at 2,757 m is the Giro's most famous climb?
+choices:
+- id: e5b7cccf-d95f-404f-8f7d-19685ffbba63
+  text: The Mortirolo
+- id: c4fb8414-293a-4e98-afe7-cab2e4a0ef27
+  text: The Zoncolan
+- id: 5bf0db50-3db8-417c-b530-6d270d39fe26
+  text: The Stelvio
+- id: 4545c8a0-daf3-455e-9af4-66f8ae0dee88
+  text: The Finestre
+correct_choice_ids:
+- 5bf0db50-3db8-417c-b530-6d270d39fe26
+explanation: The Passo dello Stelvio, with its walls of hairpins.
+archived: false

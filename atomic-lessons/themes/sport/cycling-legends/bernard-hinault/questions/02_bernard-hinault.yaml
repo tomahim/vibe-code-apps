@@ -1,0 +1,19 @@
+id: 75151b02-f0b8-439f-bd10-4db287d2ae89
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which two races did Hinault win as a breakthrough in 1977?
+choices:
+- id: 5fbe9f2c-e39c-4470-b81f-9d08cf5e7f7c
+  text: Tour and Roubaix
+- id: 51a01a54-7d30-4c6d-bb22-b8e192b172f1
+  text: Liège-Bastogne-Liège and the Dauphiné
+- id: 55444396-3461-456c-96ce-52ba3b39369c
+  text: Flanders and Lombardia
+- id: d3dba17e-b76c-4891-acb3-d9048fc30a80
+  text: Paris-Nice and MSR
+correct_choice_ids:
+- 51a01a54-7d30-4c6d-bb22-b8e192b172f1
+explanation: Liège-Bastogne-Liège and the Critérium du Dauphiné, both in 1977.
+archived: false

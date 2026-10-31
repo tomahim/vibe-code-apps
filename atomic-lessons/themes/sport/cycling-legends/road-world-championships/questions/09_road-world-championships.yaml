@@ -1,0 +1,10 @@
+id: 89c60ec6-66f9-4ceb-8810-7dfb5eeba158
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: How many road world titles did Jeannie Longo win, the record?
+accepted_answers:
+- '5'
+- five
+explanation: Five, between 1985 and 1995.
+archived: false

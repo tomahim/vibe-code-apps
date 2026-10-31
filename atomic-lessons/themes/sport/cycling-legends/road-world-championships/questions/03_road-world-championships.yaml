@@ -1,0 +1,9 @@
+id: c76c94ab-4ca0-4ce8-9007-a14ce2dc4090
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: In which year was the women's road race introduced at the Worlds?
+accepted_answers:
+- '1958'
+explanation: The women's road race dates from 1958.
+archived: false

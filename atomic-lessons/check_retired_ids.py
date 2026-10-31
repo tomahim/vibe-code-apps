@@ -117,6 +117,17 @@ def _expected_files(theme: Path):
                     yield question, "question"
 
 
+def revision_readable(repo_root: Path, revision: str) -> bool:
+    """Whether the clone actually holds the commit (a force push can orphan it)."""
+    result = subprocess.run(
+        ["git", "cat-file", "-e", f"{revision}^{{commit}}"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
 def resolve_base(repo_root: Path, supplied: str | None) -> str:
     """Pick the base revision: the argument, else the CI context, else master."""
     if supplied:
@@ -142,7 +153,16 @@ def resolve_base(repo_root: Path, supplied: str | None) -> str:
         except (OSError, json.JSONDecodeError):
             before = ""
         if before and set(before) != {"0"}:
-            return before
+            if revision_readable(repo_root, before):
+                return before
+            # actions/checkout fetches only history reachable from the pushed
+            # ref, so a force push leaves the event's before-commit unreadable.
+            # Compare against the master merge-base (the pull request gate's
+            # base) rather than crashing on a commit the clone cannot hold.
+            print(
+                f"Push base {before} is not readable in this clone "
+                "(force-pushed away?); using the master merge-base instead."
+            )
     return merge_base("origin/master")
 
 

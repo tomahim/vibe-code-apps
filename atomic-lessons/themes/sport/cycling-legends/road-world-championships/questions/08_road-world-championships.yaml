@@ -1,0 +1,19 @@
+id: eb62b0aa-fbd4-41d5-8027-93dca2bac974
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who won three consecutive world road titles from 2015 to 2017?
+choices:
+- id: f68fda18-4688-43dd-9334-b6b597f483b8
+  text: Alejandro Valverde
+- id: ef2acce4-0340-4394-a133-09e20d2f9849
+  text: Peter Sagan
+- id: 3eac91f8-fb8f-40c5-bc2b-a8b0d06b1602
+  text: Óscar Freire
+- id: 299e19b5-ab2d-4e28-aa4c-e8f3ecd6d5e9
+  text: Philippe Gilbert
+correct_choice_ids:
+- ef2acce4-0340-4394-a133-09e20d2f9849
+explanation: Peter Sagan, the only rider with three in a row.
+archived: false

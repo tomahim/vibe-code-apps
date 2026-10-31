@@ -1,0 +1,9 @@
+id: 909dd6a8-ce3b-417e-ac1f-4bc8770d6dce
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: What was the first name of Coppi's great rival Bartali?
+accepted_answers:
+- Gino
+explanation: Gino Bartali.
+archived: false

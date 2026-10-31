@@ -1,0 +1,19 @@
+id: 1929bd4a-1dc2-465b-b2bb-775419646b3f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was the Vuelta a España first organised?
+choices:
+- id: 752eda24-5a81-4089-91cd-13e1435ea464
+  text: '1909'
+- id: 3896a5e8-f606-4241-93ff-1eefb4aa74cb
+  text: '1927'
+- id: 17c9bf51-2016-4e2c-8772-314d5dcd1241
+  text: '1935'
+- id: 995cea81-899c-4f78-b87f-7f4962b9147e
+  text: '1947'
+correct_choice_ids:
+- 17c9bf51-2016-4e2c-8772-314d5dcd1241
+explanation: 1935, inspired by the Tour and the Giro.
+archived: false

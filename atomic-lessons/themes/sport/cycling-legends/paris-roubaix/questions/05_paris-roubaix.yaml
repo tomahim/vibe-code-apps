@@ -1,0 +1,19 @@
+id: 5ef2d53f-afad-4430-8997-fa61d3ce3946
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What does the winner receive as a trophy?
+choices:
+- id: 17dc66c9-52bf-4a31-a0cf-9f170a68f237
+  text: A granite cobble on a plinth
+- id: 60802879-2b6b-43be-a1bb-c5d98c701f28
+  text: A golden bike
+- id: 6a3dd894-3d90-413e-83a8-a10fd9f7f160
+  text: A yellow jersey
+- id: 23647274-c5e1-4f71-a6fe-67baa30ae567
+  text: A laurel wreath
+correct_choice_ids:
+- 17dc66c9-52bf-4a31-a0cf-9f170a68f237
+explanation: A sett from the pavé, the most coveted trophy in the sport.
+archived: false

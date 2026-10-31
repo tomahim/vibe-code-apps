@@ -1,0 +1,19 @@
+id: eaddca3d-f891-4eb4-b60c-8bb2b570bd08
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How did Pogačar's 2026 season end?
+choices:
+- id: 498681ac-cd21-4e1b-a7d6-28f0c592663c
+  text: With a worlds win
+- id: 7e49f361-8d1b-4fe6-811a-27e7e33be265
+  text: He was ruled out for the rest of the season
+- id: d4e33126-eec9-41c4-b198-00304bc2d672
+  text: With a Lombardia win
+- id: 8529212a-5e34-4b01-86dd-cc69800aad94
+  text: With the hour record
+correct_choice_ids:
+- 7e49f361-8d1b-4fe6-811a-27e7e33be265
+explanation: His Vuelta injuries ended his season; he targets a 2027 return.
+archived: false

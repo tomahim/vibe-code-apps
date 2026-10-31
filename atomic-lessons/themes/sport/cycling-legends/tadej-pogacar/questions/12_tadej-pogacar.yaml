@@ -1,0 +1,10 @@
+id: b44aa5a4-e46e-4ea8-9f6f-d18c92fb5d35
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: How many Tours de France had Pogačar won by the end of 2026?
+accepted_answers:
+- '5'
+- five
+explanation: 2020, 2021, 2024, 2025 and 2026.
+archived: false

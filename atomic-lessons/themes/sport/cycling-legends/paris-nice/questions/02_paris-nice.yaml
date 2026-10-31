@@ -1,0 +1,19 @@
+id: fb862339-9d25-433b-9b92-f21388ca7505
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is it called the Race to the Sun?
+choices:
+- id: 811f2238-ad1b-478c-8a48-db5a11adcb3a
+  text: It starts at dawn
+- id: d4d4971a-d4a9-454b-86af-c2f0741b2158
+  text: It runs from the cold north to the sunny Mediterranean
+- id: c720b3bb-5754-4e25-a67b-718330974419
+  text: It honours Apollo
+- id: 2130c25b-bc79-48f9-a106-b023270cb1a2
+  text: It is in July
+correct_choice_ids:
+- d4d4971a-d4a9-454b-86af-c2f0741b2158
+explanation: Eight days from the wintry Paris region to the Mediterranean.
+archived: false

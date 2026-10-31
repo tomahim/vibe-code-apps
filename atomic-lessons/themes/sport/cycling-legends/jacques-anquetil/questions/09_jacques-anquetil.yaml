@@ -1,0 +1,9 @@
+id: 182b044e-3231-471a-b281-fdf083ccefa0
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: Which race did Anquetil win the day after the 1965 Critérium du Dauphiné?
+accepted_answers:
+- Bordeaux-Paris
+explanation: He won the 557 km Bordeaux-Paris classic the day after the Dauphiné.
+archived: false

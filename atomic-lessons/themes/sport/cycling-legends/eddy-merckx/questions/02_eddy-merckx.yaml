@@ -1,0 +1,19 @@
+id: e5fa5f36-0e7e-4198-88ed-28d769cba331
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What was Merckx's first big professional win in 1966?
+choices:
+- id: ed1d25a0-8c5f-4b6c-b58d-deafc4ee9114
+  text: The Tour de France
+- id: 57457b3d-fa0b-44b0-8aa4-fd9f42f4cb05
+  text: Paris-Roubaix
+- id: fd87e4dc-c0cf-41b4-82db-9166093103e0
+  text: Milan-San Remo
+- id: 075b2c55-9475-4bf9-8311-0713762488ad
+  text: The Giro d'Italia
+correct_choice_ids:
+- fd87e4dc-c0cf-41b4-82db-9166093103e0
+explanation: He won Milan-San Remo in 1966, aged twenty, with Peugeot-BP-Michelin.
+archived: false

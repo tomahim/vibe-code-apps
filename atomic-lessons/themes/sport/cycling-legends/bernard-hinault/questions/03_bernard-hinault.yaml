@@ -1,0 +1,10 @@
+id: 9b79e489-dc90-4fa9-9315-98c05fec410f
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: What is Hinault's nickname, in English?
+accepted_answers:
+- The Badger
+- Badger
+explanation: Le Blaireau, the Badger, an animal whose aggression he admired.
+archived: false

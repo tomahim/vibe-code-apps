@@ -1,0 +1,10 @@
+id: e46df3ad-a271-4265-89f1-7649e76620a2
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many stars does the hardest category of cobbled sector carry?
+accepted_answers:
+- '5'
+- five
+explanation: Sectors are rated one to five stars; three sectors carry five.
+archived: false

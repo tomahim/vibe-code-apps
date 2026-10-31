@@ -1,0 +1,19 @@
+id: acf03da7-cd37-4446-bbd0-7eda1e3bc33e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Who was the first rider to win the Vuelta four times?
+choices:
+- id: e8883e3a-23d5-4ab4-86dd-d92dde75e81b
+  text: Primož Roglič
+- id: bc9c1bdc-90d4-423f-ad3d-dedf8e960d68
+  text: Roberto Heras
+- id: b5d504cc-fa27-47f8-b81a-e06ea17b3620
+  text: Tony Rominger
+- id: 76b868c3-c415-4ad6-ace6-85ff96e3b247
+  text: Alberto Contador
+correct_choice_ids:
+- bc9c1bdc-90d4-423f-ad3d-dedf8e960d68
+explanation: Roberto Heras, between 2000 and 2005.
+archived: false

@@ -1,0 +1,19 @@
+id: 581e3214-455c-4d93-b286-4bbf14d0dc6e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which Slovenian has won the Vuelta four times?
+choices:
+- id: e6c58bda-850a-4876-a37b-2ca23c93c876
+  text: Tadej Pogačar
+- id: 3bd9e1b3-3aae-4285-ae6b-e8d49e4aa032
+  text: Primož Roglič
+- id: 967b1f3d-5deb-4fee-8e9a-7c59059d2669
+  text: Jan Tratnik
+- id: 5eb01ea4-05ef-4995-b6c4-e2c7ffff61ed
+  text: Matej Mohorič
+correct_choice_ids:
+- 3bd9e1b3-3aae-4285-ae6b-e8d49e4aa032
+explanation: Roglič won in 2019, 2020, 2021 and 2024.
+archived: false

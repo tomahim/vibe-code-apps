@@ -1,0 +1,19 @@
+id: 0b64678d-2a63-4d0a-a528-d5daa84b827f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What happened to Armstrong's 2000 Olympic time-trial bronze?
+choices:
+- id: 7da154af-7769-45e0-973d-4d1d6f5c813e
+  text: He kept it
+- id: 8d389158-ea36-4d50-b3c1-70bdd791980a
+  text: It was stripped and he returned it
+- id: b40dd470-f2d5-4279-bbe4-b339d1025e68
+  text: It was upgraded to silver
+- id: 62bc016d-d5d9-4727-8c13-a6f5564dd613
+  text: Nothing
+correct_choice_ids:
+- 8d389158-ea36-4d50-b3c1-70bdd791980a
+explanation: The IOC stripped it in 2013; he returned the medal.
+archived: false

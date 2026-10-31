@@ -1,0 +1,19 @@
+id: 2b37d20f-98c8-4fcc-8bc3-63a4a3eb30ae
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: For which leader did Indurain work as a domestique early on?
+choices:
+- id: 0f879381-90e3-4145-95d1-4cd459cc169f
+  text: Laurent Fignon
+- id: 8f49d5fa-1841-460a-8124-5f6fa9ca2471
+  text: Pedro Delgado
+- id: 3350bf98-f603-47ba-8097-fd8e9c10afa8
+  text: Stephen Roche
+- id: 19d65312-3edd-4c0e-8002-f5859e8a949b
+  text: Charly Mottet
+correct_choice_ids:
+- 8f49d5fa-1841-460a-8124-5f6fa9ca2471
+explanation: He rode for Pedro Delgado at Reynolds before becoming leader.
+archived: false

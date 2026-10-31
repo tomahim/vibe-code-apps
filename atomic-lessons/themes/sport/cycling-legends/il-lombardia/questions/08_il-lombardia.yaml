@@ -1,0 +1,19 @@
+id: d0b4d5fe-3a75-4115-a204-648bef60eca7
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the Muro di Sormano?
+choices:
+- id: bca0e533-2d88-4c2c-a719-a5420e63e21c
+  text: The finish straight
+- id: d82c2d04-3d41-45b0-84d8-a7926ea7a922
+  text: A wall of a climb with gradients over twenty percent
+- id: 9dcd1638-bed5-41cc-ba44-cc7a8c72cee1
+  text: The start town
+- id: 56dae4b0-a25d-4612-bfc5-2acc485b5a61
+  text: A velodrome
+correct_choice_ids:
+- d82c2d04-3d41-45b0-84d8-a7926ea7a922
+explanation: A brutally steep climb added to the modern route.
+archived: false

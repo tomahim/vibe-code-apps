@@ -1,0 +1,19 @@
+id: a16b30e0-9d3d-4f78-97ee-bc9caa716704
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why is the Giro's leader jersey pink?
+choices:
+- id: aee8c339-aec5-4ee8-bd50-961754bbb289
+  text: For a sponsor
+- id: 9ef13e45-dfb2-4d5d-8121-a151ea7510a8
+  text: The Gazzetta is printed on pink paper
+- id: 1cdf7a6d-5239-4022-b8fb-9f8e9cb6c0c9
+  text: For spring blossom
+- id: c57e4d9f-e661-4d6c-b9a1-888a334603b3
+  text: For an Italian flag shade
+correct_choice_ids:
+- 9ef13e45-dfb2-4d5d-8121-a151ea7510a8
+explanation: La Gazzetta dello Sport has always been printed on pink paper.
+archived: false

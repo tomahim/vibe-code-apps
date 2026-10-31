@@ -1,0 +1,19 @@
+id: 8845e776-6fef-4c54-b968-45a48a08bc14
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How many consecutive years did Burton win the women's Best British All-Rounder?
+choices:
+- id: 183499b6-6664-4b4b-a983-b6fb95202be9
+  text: '10'
+- id: 6b2a4e76-132e-4e65-8697-32b7f4a6c118
+  text: '15'
+- id: ad2428e9-7620-4538-ace4-dd0b3ef4becc
+  text: '25'
+- id: 87d5db31-4070-46d7-9664-cd43d300ab0f
+  text: '30'
+correct_choice_ids:
+- ad2428e9-7620-4538-ace4-dd0b3ef4becc
+explanation: Twenty-five years, from 1959 to 1983.
+archived: false

@@ -1,0 +1,10 @@
+id: ea5dfb56-ebf5-4790-ba0b-cf1c8b0f50b9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: In which year did Merckx first win the Giro-Tour double plus the World Championship, the first
+  Triple Crown?
+accepted_answers:
+- '1974'
+explanation: Giro, Tour and Worlds all fell to him in 1974.
+archived: false

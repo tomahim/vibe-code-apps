@@ -1,0 +1,9 @@
+id: c30fa881-3b5e-4fd9-b158-14d9c88d1279
+position: 9
+type: type_answer_question
+after_card_position: 6
+prompt: In which year did Hinault win his fifth and final Tour de France?
+accepted_answers:
+- '1985'
+explanation: His fifth Tour came in 1985; no Frenchman has won it since.
+archived: false

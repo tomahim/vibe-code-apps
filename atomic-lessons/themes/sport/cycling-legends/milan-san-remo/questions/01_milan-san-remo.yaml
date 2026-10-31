@@ -1,0 +1,19 @@
+id: 4a8b70c8-664c-4420-92ea-0512cc5e7cb0
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was the first Milan-San Remo?
+choices:
+- id: 9efca3ad-3aec-46d4-ad62-b65f18b92475
+  text: '1896'
+- id: 1ee0d236-aa90-4a79-ab5f-d5701e160de9
+  text: '1905'
+- id: cf5a9115-6822-4f51-8d0f-073abf2e8c5a
+  text: '1907'
+- id: cc9548cd-656d-4072-be31-c4f179903cb9
+  text: '1909'
+correct_choice_ids:
+- cf5a9115-6822-4f51-8d0f-073abf2e8c5a
+explanation: 1907, won by Lucien Petit-Breton in the cold.
+archived: false

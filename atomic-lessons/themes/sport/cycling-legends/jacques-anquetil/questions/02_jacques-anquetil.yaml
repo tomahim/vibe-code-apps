@@ -1,0 +1,19 @@
+id: b430b4b1-a250-4bee-88c9-6fa194d5f52e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which discipline made Anquetil famous?
+choices:
+- id: c35cd6f2-1d25-4500-aeb5-95a605390181
+  text: Sprinting
+- id: 399d2ca4-a55a-422b-bd98-7aacb1424ef3
+  text: The individual time trial
+- id: 245ae189-54e8-45bd-b19e-56eefbeef098
+  text: Cyclo-cross
+- id: bdebb9be-5c08-41ad-945d-7faf6153297e
+  text: Track sprinting
+correct_choice_ids:
+- 399d2ca4-a55a-422b-bd98-7aacb1424ef3
+explanation: He was a time-trial specialist, nicknamed Monsieur Chrono.
+archived: false

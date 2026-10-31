@@ -1,0 +1,20 @@
+id: ce36a212-114a-483c-afab-4fd46be5ccee
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why was Merckx expelled from the 1969 Giro d'Italia while leading?
+choices:
+- id: 5bf6411d-8197-4986-b226-cbb9c4763e65
+  text: A crash
+- id: eaeead6b-b9da-43a1-95e7-0e5bc91899a9
+  text: A positive test for fencamfamine
+- id: 9ae4fc97-0b3e-4f0e-bb4a-af291e80acd0
+  text: A team dispute
+- id: 3b3c2876-ae98-4087-974c-003f45f5344d
+  text: Illness
+correct_choice_ids:
+- eaeead6b-b9da-43a1-95e7-0e5bc91899a9
+explanation: A doping control after stage 16 to Savona came back positive; he always denied doping in
+  that affair.
+archived: false

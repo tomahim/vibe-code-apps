@@ -1,0 +1,19 @@
+id: 951910b9-e0b9-4c51-bb9d-6d770acccbc1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which races form the Ardennes week with Liège?
+choices:
+- id: 95839ec7-67b3-4cdb-9de4-aaa2a6e58c2b
+  text: Flanders and Roubaix
+- id: bcee2571-0060-4210-a6f4-2e201b2a5932
+  text: Amstel Gold Race and Flèche Wallonne
+- id: 761ed798-9623-4cba-a87d-c0497e0c573a
+  text: San Remo and Lombardia
+- id: ac910b39-f933-483b-8c23-107328934209
+  text: The Dauphiné
+correct_choice_ids:
+- bcee2571-0060-4210-a6f4-2e201b2a5932
+explanation: Amstel Gold Race and La Flèche Wallonne precede it.
+archived: false

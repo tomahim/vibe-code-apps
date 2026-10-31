@@ -1,0 +1,19 @@
+id: 66f2cc49-e11e-41ed-916d-807b76b78fc5
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What did Indurain achieve in both 1992 and 1993?
+choices:
+- id: f112998f-1ef1-4ac1-afa9-5d4f9f24d858
+  text: The Tour-Vuelta double
+- id: 24930b9d-1183-41b6-94be-a8d87ce019a8
+  text: The Giro-Tour double
+- id: 25374a9f-fd0f-4861-be45-0afad0a1ea4a
+  text: The hour record
+- id: 71a0f57c-afc6-4c7b-bff3-9e7013ffb876
+  text: The world title
+correct_choice_ids:
+- 24930b9d-1183-41b6-94be-a8d87ce019a8
+explanation: He won the Giro d'Italia and the Tour de France in both years.
+archived: false

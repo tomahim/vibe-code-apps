@@ -1,0 +1,19 @@
+id: 5cb19c4e-8e23-4761-931f-715eb9bdf3f0
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which country is Marianne Vos from?
+choices:
+- id: 6416e4b8-59a7-4d2f-a9d4-6435470ec066
+  text: Belgium
+- id: 7c86bcb9-1bde-4e7c-b36a-ffd41685c036
+  text: The Netherlands
+- id: 6108c69f-7413-4637-a1e6-a88949994210
+  text: Germany
+- id: 3d81de3d-fdea-4d28-a8c7-f3e862e59cf0
+  text: Denmark
+correct_choice_ids:
+- 7c86bcb9-1bde-4e7c-b36a-ffd41685c036
+explanation: She is Dutch, from 's-Hertogenbosch.
+archived: false

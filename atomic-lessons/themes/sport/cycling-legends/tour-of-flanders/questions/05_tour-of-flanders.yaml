@@ -1,0 +1,19 @@
+id: da441db5-eb76-4347-b091-3cfaa21994fb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which climb returned to the course in 2017 after public demand?
+choices:
+- id: 8e09a7bf-9711-4422-b8e6-a94f32fe52c3
+  text: The Koppenberg
+- id: 6e7499f5-7580-4721-9d5a-79555d189793
+  text: The Muur van Geraardsbergen
+- id: 809dcc7f-d103-4199-8283-07a9b0f7ac35
+  text: The Paterberg
+- id: ba201036-c7ba-4573-930f-003871ce1bb5
+  text: The Kapelmuur only
+correct_choice_ids:
+- 6e7499f5-7580-4721-9d5a-79555d189793
+explanation: The Muur van Geraardsbergen, dropped when the finish moved in 2012.
+archived: false

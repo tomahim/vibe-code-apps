@@ -1,0 +1,19 @@
+id: 11b04477-b143-4e54-9416-bf4988753045
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is the Cima Coppi?
+choices:
+- id: 6ab9fab9-0aeb-4e45-82b8-3d585b87ace1
+  text: The first climb of the Giro
+- id: 70a36ad1-99b3-4d81-99be-f528e6f77ae7
+  text: The highest point of each Giro
+- id: 8aedd181-3e02-49b4-841b-f881a0887164
+  text: The final climb
+- id: d6ebef2c-6d43-4084-8533-3fa8097f583f
+  text: Coppi's training hill
+correct_choice_ids:
+- 70a36ad1-99b3-4d81-99be-f528e6f77ae7
+explanation: Since 1965 the Giro's highest summit honours Fausto Coppi.
+archived: false

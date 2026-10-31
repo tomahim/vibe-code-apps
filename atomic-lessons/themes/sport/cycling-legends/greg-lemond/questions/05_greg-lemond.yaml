@@ -1,0 +1,19 @@
+id: 3fc3ef0b-9ea4-4458-8544-835f3f152f0f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What happened to LeMond in April 1987?
+choices:
+- id: 6b940e64-e61c-4bd7-8469-416e2cc9c7a5
+  text: A training crash
+- id: 257c64b2-9176-4d18-afa3-0e0a56ed18f1
+  text: He was accidentally shot while hunting
+- id: a34f78ff-d71e-4742-bb83-c360e1dfef13
+  text: A car hit him
+- id: 4ad4ea58-9a5b-4eeb-9440-004dcc8c3a91
+  text: He had heart surgery
+correct_choice_ids:
+- 257c64b2-9176-4d18-afa3-0e0a56ed18f1
+explanation: A turkey-hunting accident left dozens of shotgun pellets in his body.
+archived: false

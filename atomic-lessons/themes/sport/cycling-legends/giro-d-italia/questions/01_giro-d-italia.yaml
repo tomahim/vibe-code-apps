@@ -1,0 +1,19 @@
+id: f7bc4040-8eea-4a9b-915d-ec0c601f188c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In which year was the first Giro d'Italia held?
+choices:
+- id: 9f2f4439-df49-4b9f-bea3-454e6331c2e3
+  text: '1903'
+- id: 841fdd44-9b2d-4f04-8f3f-9d424449b1b0
+  text: '1909'
+- id: 83b40a1e-a9d1-42d9-bd55-63613ce65a18
+  text: '1913'
+- id: 95f9f712-04f1-4ff0-b826-f1a86d9d2f30
+  text: '1921'
+correct_choice_ids:
+- 841fdd44-9b2d-4f04-8f3f-9d424449b1b0
+explanation: 1909, inspired by the Tour de France.
+archived: false

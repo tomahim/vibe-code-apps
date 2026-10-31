@@ -1,0 +1,19 @@
+id: 086ef857-a42b-4821-9cf8-c458578defa4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which three riders form the Triple Crown club?
+choices:
+- id: 467bd18e-f74b-4078-9d82-ea5adfc10d79
+  text: Merckx, Hinault, LeMond
+- id: 205ad773-9f50-4f4b-8ade-1cdd0bf49a84
+  text: Merckx, Roche, Pogačar
+- id: 11175f8e-a065-4111-90a8-c26985368087
+  text: Coppi, Anquetil, Indurain
+- id: 6e942c1b-6db2-4d93-98e8-f07958799fce
+  text: Binda, Bartali, Coppi
+correct_choice_ids:
+- 205ad773-9f50-4f4b-8ade-1cdd0bf49a84
+explanation: 'Giro, Tour and Worlds in one year: 1974, 1987 and 2024.'
+archived: false

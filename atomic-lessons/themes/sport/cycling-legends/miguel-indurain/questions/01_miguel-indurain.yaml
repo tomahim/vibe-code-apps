@@ -1,0 +1,19 @@
+id: 467fd083-bd40-48ed-9701-73c735f7a144
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Where was Miguel Indurain born?
+choices:
+- id: 47d7eb12-44f4-4b84-852f-2fd6059cb9a6
+  text: Catalonia
+- id: 742ab287-c24b-4846-88ac-42fe53ac7ee1
+  text: Navarra
+- id: 7941a9e5-a60b-469f-91d1-59e14b36ffa8
+  text: Andalusia
+- id: 3e182e34-9506-4f5c-9f84-0574c6d78d75
+  text: The Basque city of Bilbao
+correct_choice_ids:
+- 742ab287-c24b-4846-88ac-42fe53ac7ee1
+explanation: He was born in Villava, Navarra, in 1964.
+archived: false

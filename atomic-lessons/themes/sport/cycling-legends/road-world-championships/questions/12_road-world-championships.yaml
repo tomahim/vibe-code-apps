@@ -1,0 +1,9 @@
+id: f41c99c6-10a9-4878-b5de-af40dce9b0f0
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: Which country hosted the 2026 Road World Championships?
+accepted_answers:
+- Canada
+explanation: The 2026 edition moved to Canada.
+archived: false

@@ -1,0 +1,9 @@
+id: d95838ac-b208-43f7-8a04-79b05ab3a8e1
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: In which city does the race finish?
+accepted_answers:
+- Oudenaarde
+explanation: Oudenaarde, since 2012.
+archived: false

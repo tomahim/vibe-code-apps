@@ -1,0 +1,10 @@
+id: 335d0c1d-187f-4f42-a094-738002a894d3
+position: 6
+type: type_answer_question
+after_card_position: 4
+prompt: How many Tours de France did Anquetil win, a first in history?
+accepted_answers:
+- '5'
+- five
+explanation: '1957 and 1961 to 1964: five, a record at the time.'
+archived: false

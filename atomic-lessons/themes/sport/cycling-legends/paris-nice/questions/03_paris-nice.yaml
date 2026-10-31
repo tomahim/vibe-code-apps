@@ -1,0 +1,10 @@
+id: 317e8d7c-a7f9-4122-82e7-a1006dd68874
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: How many days does Paris-Nice last?
+accepted_answers:
+- '8'
+- eight
+explanation: Eight days of racing.
+archived: false

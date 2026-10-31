@@ -1,0 +1,19 @@
+id: f7a9ae32-ed2f-4d84-9070-8c591f380832
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What happened in the 2013 edition?
+choices:
+- id: c9ecdfc4-84b2-4ebf-9ec6-276a0c31ea77
+  text: Record heat
+- id: 9f06152c-a975-4e46-ac74-fc428f1d80b8
+  text: Snow forced a mid-race restart
+- id: 868e4630-30f5-4094-9480-b32eba99fe3c
+  text: It was cancelled
+- id: 98d61018-15e6-4abc-a0d1-c5ef4eec2121
+  text: A dead heat
+correct_choice_ids:
+- 9f06152c-a975-4e46-ac74-fc428f1d80b8
+explanation: Snow on the Turchino forced riders onto buses before a restart.
+archived: false

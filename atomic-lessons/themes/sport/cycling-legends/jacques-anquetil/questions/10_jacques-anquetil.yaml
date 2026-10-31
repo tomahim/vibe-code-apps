@@ -1,0 +1,19 @@
+id: 7e98adee-d9ec-4ddd-812b-ea174b708223
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How many Grand Tours did Anquetil win in total?
+choices:
+- id: db79f5ab-e0fb-46ef-a50f-a0e1748e15c3
+  text: Five
+- id: aad31e89-1e34-4ec9-b75e-65c8b0efcefa
+  text: Six
+- id: ac564434-9089-46f9-91c7-f7f4b106708b
+  text: Eight
+- id: c635aa25-890b-47c9-a05b-ef56e980f9a2
+  text: Eleven
+correct_choice_ids:
+- ac564434-9089-46f9-91c7-f7f4b106708b
+explanation: 'Five Tours, two Giros and one Vuelta: eight.'
+archived: false

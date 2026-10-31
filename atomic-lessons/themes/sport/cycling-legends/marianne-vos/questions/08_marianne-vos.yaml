@@ -1,0 +1,19 @@
+id: d85138d1-1cea-40f9-88e1-e2c6c1c0b177
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What was Le Tour Entier?
+choices:
+- id: 03eec97a-cee2-4320-bf28-02a48e24d66f
+  text: Her first team
+- id: dc63f798-475c-462f-ab22-b36bf177d724
+  text: A campaign for a women's Tour de France
+- id: 7b5f966e-86d7-4f28-a1ef-4561b3a1003d
+  text: A French stage race
+- id: e1684179-833a-49da-837a-c10e393c7532
+  text: A wheel sponsor
+correct_choice_ids:
+- dc63f798-475c-462f-ab22-b36bf177d724
+explanation: The campaign Vos co-founded that pushed for a women's Tour and better conditions.
+archived: false

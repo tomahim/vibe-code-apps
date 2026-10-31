@@ -1,0 +1,19 @@
+id: 50eb1763-d04e-4504-b5ce-21bc4053a08d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why is Milan-San Remo called the sprinters' classic?
+choices:
+- id: b4e64064-9b26-4d91-83e8-d6f4fc5b89e6
+  text: Only sprinters may enter
+- id: 48bc8c74-7e82-442c-ae83-d2b0ff58f132
+  text: Its mainly flat course suits them despite the final climbs
+- id: 3a5e0aba-8102-454c-8e07-69988edb45a5
+  text: It has no hills
+- id: de828633-dc00-44f3-9abb-e5e38c5decb3
+  text: It is the shortest Monument
+correct_choice_ids:
+- 48bc8c74-7e82-442c-ae83-d2b0ff58f132
+explanation: The flat 300 km favour a bunch finish unless the Cipressa or Poggio breaks it.
+archived: false

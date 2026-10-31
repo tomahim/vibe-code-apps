@@ -1,0 +1,19 @@
+id: 4f9c409b-d5b1-42cd-9e68-db33a204ec75
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which race did LeMond win by over ten minutes in 1982?
+choices:
+- id: 87ff3381-a476-4243-9e0c-4b179d07b0dd
+  text: The Tour of California
+- id: f0d76ada-cde1-4b06-987d-40318ae2b876
+  text: The Tour de l'Avenir
+- id: 16075582-f60a-4379-bfa4-60c3a07d6853
+  text: The Dauphiné
+- id: d48c7221-b388-4322-8db2-afc6cb0ba13a
+  text: The Giro
+correct_choice_ids:
+- f0d76ada-cde1-4b06-987d-40318ae2b876
+explanation: The Tour de l'Avenir, the amateur Tour de France, by a record 10'18".
+archived: false

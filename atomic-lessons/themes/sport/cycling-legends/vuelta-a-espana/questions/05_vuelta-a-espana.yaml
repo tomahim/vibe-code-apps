@@ -1,0 +1,19 @@
+id: 9163e1a0-9c7e-43e7-8c8f-0ddf5a3ca612
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: From which year did the Vuelta move to late August-September?
+choices:
+- id: 1ffbe5dd-a38b-4d39-a33f-0b3c91d4983a
+  text: '1985'
+- id: 4efea736-1d52-4028-8327-26f21341dff7
+  text: '1990'
+- id: 21456b55-7a2e-46ea-9921-7f4e26f2120d
+  text: '1995'
+- id: 9e667c01-1296-4a0c-9ae2-3a4683bfb6b9
+  text: '2000'
+correct_choice_ids:
+- 21456b55-7a2e-46ea-9921-7f4e26f2120d
+explanation: The 1995 move to late summer created the modern race.
+archived: false

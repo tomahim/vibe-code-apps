@@ -1,0 +1,19 @@
+id: ef9d986e-ba36-4cb1-8871-0951c8fde8e3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which was Merckx's first Grand Tour victory?
+choices:
+- id: a39c150b-cb79-4772-80a1-5c40db47b03f
+  text: The 1968 Giro d'Italia
+- id: 5e0f57e4-e00b-484c-bf63-29db4559bf22
+  text: The 1969 Tour de France
+- id: 450cee77-f2c0-4096-a901-d7c39e4cc8a0
+  text: The 1973 Vuelta
+- id: 62747730-2033-441b-a456-bb6b4be2c771
+  text: The 1967 Tour de France
+correct_choice_ids:
+- a39c150b-cb79-4772-80a1-5c40db47b03f
+explanation: He won the 1968 Giro d'Italia with Faema, a year before his first Tour.
+archived: false

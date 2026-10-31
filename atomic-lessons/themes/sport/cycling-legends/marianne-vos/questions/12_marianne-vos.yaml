@@ -1,0 +1,10 @@
+id: 9acd4c23-1751-4e59-b22d-a6a470575ddb
+position: 12
+type: type_answer_question
+after_card_position: 8
+prompt: How many times has Vos been road World Champion?
+accepted_answers:
+- '3'
+- three
+explanation: 2006, 2012 and 2013.
+archived: false

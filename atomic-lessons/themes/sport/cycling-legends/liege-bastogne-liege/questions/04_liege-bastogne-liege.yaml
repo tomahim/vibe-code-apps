@@ -1,0 +1,19 @@
+id: 9e0d5ebe-a11c-4c8f-a3c7-9ef5860f94cc
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which côte has become the race's signature launchpad?
+choices:
+- id: 590b4204-7f17-40a0-a447-6d0518e1e284
+  text: The Mur de Huy
+- id: 53c46550-dcef-4de1-98d7-b9a11179de29
+  text: La Redoute
+- id: 79541faa-8eb8-4044-86b7-3655f1b1666d
+  text: The Kwaremont
+- id: ad349798-cd8a-4380-95af-c42c054b9c82
+  text: The Poggio
+correct_choice_ids:
+- 53c46550-dcef-4de1-98d7-b9a11179de29
+explanation: The Côte de La Redoute, through Aywaille.
+archived: false

@@ -1,0 +1,19 @@
+id: 8de7cf5c-bfa9-4a95-ae9c-875312a64484
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What does the polka-dot jersey reward?
+choices:
+- id: d600120d-146c-4efe-b263-941fdc43dede
+  text: The best sprinter
+- id: cf4feb08-08e1-4746-871a-b0245fa75f05
+  text: The best climber
+- id: d37437af-b7c2-46d5-8456-60d4285a21bc
+  text: The best young rider
+- id: 1ac83627-8c4e-4570-a53f-e8281f663d2d
+  text: The lanterne rouge
+correct_choice_ids:
+- cf4feb08-08e1-4746-871a-b0245fa75f05
+explanation: The mountains classification; green is for points, white for young riders.
+archived: false

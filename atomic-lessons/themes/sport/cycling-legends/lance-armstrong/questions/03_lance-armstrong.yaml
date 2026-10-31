@@ -1,0 +1,9 @@
+id: 9dda541f-4b09-4e15-8c11-596314ffd946
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: In which city did Armstrong win the 1993 World Championship?
+accepted_answers:
+- Oslo
+explanation: He won the 1993 Worlds road race in Oslo, aged twenty-one.
+archived: false

@@ -1,0 +1,19 @@
+id: 0a589766-f757-45c4-aed2-9751e47358bb
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why were the 2025 Worlds in Kigali historic?
+choices:
+- id: 039e99fc-0813-4a49-92e6-a31ec3ffe4fd
+  text: First in Asia
+- id: 683ba309-ca8d-469e-9ad4-ab637ae91abd
+  text: First Road Worlds held in Africa
+- id: 7926f2c2-1e21-4f43-a82b-46b4cf21a5ac
+  text: First with e-bikes
+- id: 30c0ce18-5eaf-4d20-8667-343d017d6d05
+  text: First indoors
+correct_choice_ids:
+- 683ba309-ca8d-469e-9ad4-ab637ae91abd
+explanation: Kigali, Rwanda, hosted the first Road Worlds in Africa.
+archived: false
