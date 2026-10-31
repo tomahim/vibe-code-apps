@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "the-printers-secret",
+    "title": "The Printer's Secret",
+    "category": "History",
+    "art": "printing",
+    "color": "#6a312c",
+    "subtitle": "A little letter. A very big change.",
+    "label": "Historical fiction · Mainz, around 1450",
+    "model": "press"
+  },
+  {
+    "slug": "mary-and-the-stone-sea",
+    "title": "Mary & the Stone Sea",
+    "category": "History",
+    "art": "fossil",
+    "color": "#275d69",
+    "subtitle": "A shore full of questions.",
+    "label": "Historical fiction · the world of Mary Anning",
+    "model": "fossil"
+  },
+  {
+    "slug": "the-acorns-big-adventure",
+    "title": "The Acorn's Big Adventure",
+    "category": "Nature",
+    "art": "forest",
+    "color": "#3c5940",
+    "subtitle": "Small things grow wonderful worlds.",
+    "label": "A woodland story · oak life cycle",
+    "model": "tree"
+  },
+  {
+    "slug": "a-mountains-drop-of-water",
+    "title": "A Mountain's Drop of Water",
+    "category": "Mountains",
+    "art": "mountain",
+    "color": "#3d596e",
+    "subtitle": "From snowflake to stream, and home again.",
+    "label": "A nature journey · the water cycle",
+    "model": "mountain"
+  },
+  {
+    "slug": "footprints-on-the-moon",
+    "title": "Footprints on the Moon",
+    "category": "History",
+    "art": "moon",
+    "color": "#2c3557",
+    "subtitle": "One small step, watched by the whole world.",
+    "label": "True story, imagined family · July 1969",
+    "model": "rocket"
+  },
+  {
+    "slug": "the-boy-kings-tomb",
+    "title": "The Boy King's Tomb",
+    "category": "History",
+    "art": "tomb",
+    "color": "#7c4f24",
+    "subtitle": "Sealed for three thousand years.",
+    "label": "True story, imagined helper · Egypt, 1922",
+    "model": "tomb"
+  },
+  {
+    "slug": "twelve-seconds-in-the-air",
+    "title": "Twelve Seconds in the Air",
+    "category": "History",
+    "art": "plane",
+    "color": "#3e6b8c",
+    "subtitle": "A bicycle dream learns to fly.",
+    "label": "True story, imagined neighbor · Kitty Hawk, 1903",
+    "model": "plane"
+  }
+]
