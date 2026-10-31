@@ -23,4 +23,4 @@ const key = 'little-drops:v1:discoveries';
 export function readDiscoveries(storage) {
   try { const v = JSON.parse(storage.getItem(key)); return Array.isArray(v) ? [...new Set(v.filter(id => stops.some(s => s.id === id)))] : []; } catch { return []; }
 }
-export function saveDiscoveries(storage, values) { try { storage.setItem(key, JSON.stringify(values)); } catch { /* Private mode or full storage: the visit still works. */ } }
+export function saveDiscoveries(storage, values) { try { storage.setItem(key, JSON.stringify(values)); return true; } catch { return false; } }

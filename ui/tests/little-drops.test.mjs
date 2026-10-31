@@ -23,3 +23,7 @@ test('Storage balance conserves water, counts shortages and clips overflow',()=>
  assert.ok(runStorageCycle(4,5).some(r=>r.shortage>0));assert.ok(runStorageCycle(12,5).every(r=>r.shortage===0));
  assert.throws(()=>storageStep(-1,2,3,4),RangeError);assert.throws(()=>storageStep(5,2,3,4),RangeError);assert.throws(()=>storageStep(1,NaN,3,4),RangeError);
 });
+import { notebookMarkdown } from '../src/apps/little-drops/notebook.js';
+test('Notebook exports only opened discoveries, canonical order, sources and honest scope',()=>{
+ const md=notebookMarkdown(['tap','source','source','unknown']);assert.match(md,/2 of 5/);assert.ok(md.indexOf('## A city takes a sip')<md.indexOf('## An ordinary little miracle'));assert.ok(!md.includes('## Give gravity a job'));assert.match(md,/https:\/\/www.cdc.gov/);assert.match(md,/No account or cloud sync/);assert.equal(saveDiscoveries({setItem(){throw Error('quota');}},['tap']),false);assert.equal(saveDiscoveries({setItem(){}},[]),true);
+});
