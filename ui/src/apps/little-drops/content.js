@@ -1,4 +1,5 @@
 export const sources = {
+  storage: { label: 'EPA · Water availability and variability', url: 'https://www.epa.gov/system/files/documents/2021-11/water-availabity-guidance_508_final11921.pdf' },
   network: { label: 'EPA · Drinking water distribution systems', url: 'https://www.epa.gov/dwreginfo/drinking-water-distribution-system-tools-and-resources' },
   treatment: { label: 'CDC · How water treatment works', url: 'https://www.cdc.gov/drinking-water/about/how-water-treatment-works.html' },
   supply: { label: 'USGS · How water reaches our homes', url: 'https://www.usgs.gov/water-science-school/science/water-qa-how-water-supplied-our-homes' },
