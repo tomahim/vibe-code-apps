@@ -36,6 +36,68 @@ export function buildModel(kind, page) {
     box(1.35,.17,1.1,0x65442c,0,1.1,0);
     box(2,.09,.09,0x7c5735,.25,2.03,0);
     for(let i=0;i<8;i++) box(.16,.08,.12,0x4c5051,-.45+(i%4)*.25,.88,-.2+Math.floor(i/4)*.26);
+  } else if(kind === 'rocket') {
+    if (page < 2) {
+      // A Saturn V-style moon rocket climbing away from its pad.
+      mesh(new THREE.CylinderGeometry(.52,.56,.35,20),0x40444c,0,.3,0);
+      mesh(new THREE.CylinderGeometry(.42,.42,1.5,20),0xf1ead9,0,1.2,0);
+      mesh(new THREE.CylinderGeometry(.28,.28,.5,18),0xdcd4c0,0,2.15,0);
+      mesh(new THREE.ConeGeometry(.28,.5,18),0xe6ddc9,0,2.65,0);
+      mesh(new THREE.CylinderGeometry(.04,.04,.35,8),0xb8b2a2,0,3,0);
+      for(let i=0;i<4;i++){const a=i/4*Math.PI*2;mesh(new THREE.BoxGeometry(.1,.5,.4),0x40444c,Math.cos(a)*.5,.28,Math.sin(a)*.5);}
+      mesh(new THREE.ConeGeometry(.4,.8,18),0xe07f3e,0,-.1,0).rotation.x=Math.PI;
+      mesh(new THREE.ConeGeometry(.22,.5,14),0xf3c14f,0,-.02,0).rotation.x=Math.PI;
+    } else {
+      // The lander, the flag and the grey moon dust of the later pages.
+      mesh(new THREE.CylinderGeometry(2,2.1,.12,40),0x94928e,0,-.02,0);
+      mesh(new THREE.BoxGeometry(1.2,.8,1.2),0xcfa23f,0,1,0);
+      mesh(new THREE.BoxGeometry(.8,.5,.8),0x8f9296,0,1.65,0);
+      for(let i=0;i<4;i++){const a=i/4*Math.PI*2+Math.PI/4;const leg=mesh(new THREE.CylinderGeometry(.05,.05,1.3,8),0xb9b4a6,Math.cos(a)*.7,.45,Math.sin(a)*.7);leg.rotation.z=Math.cos(a)*.5;leg.rotation.x=-Math.sin(a)*.5;}
+      mesh(new THREE.CylinderGeometry(.03,.03,1.5,8),0xd8d3c4,1.4,.8,.6);
+      mesh(new THREE.BoxGeometry(.6,.4,.04),0xcf5b4e,1.72,1.35,.6);
+      for(let i=0;i<6;i++) mesh(new THREE.SphereGeometry(.1+(i%3)*.05,7,5),0x7d7b77,Math.sin(i*2.7)*1.6,.02,Math.cos(i*2.7)*1.6);
+    }
+  } else if(kind === 'tomb') {
+    // A rock-cut staircase and a sealed royal doorway in the Valley of the Kings.
+    mesh(new THREE.BoxGeometry(4,2.6,.9),0xb08052,0,1.3,-.55);
+    for(let i=0;i<4;i++) mesh(new THREE.BoxGeometry(1.5,.13,.5),0xc79a63,0,.07+i*.16,.8-i*.35);
+    mesh(new THREE.BoxGeometry(1,1.4,.14),0x6e4f30,0,.9,-.06);
+    for(let i=0;i<3;i++) mesh(new THREE.SphereGeometry(.11,10,8),0xd9b877,-.28+i*.28,1.05,.02).scale.set(1,1.25,.4);
+    mesh(new THREE.SphereGeometry(.55,16,10),0xe8b23f,-1.55,2.2,-.9);
+    if (page >= 3) {
+      // The treasures of the antechamber appear beside the doorway.
+      mesh(new THREE.BoxGeometry(.85,.5,.5),0xd8a83e,1.35,.32,.55);
+      mesh(new THREE.BoxGeometry(.9,.1,.55),0xb5822c,1.35,.62,.55);
+      mesh(new THREE.CylinderGeometry(.16,.22,.5,12),0xd8a83e,2,.3,.2);
+      mesh(new THREE.CylinderGeometry(.14,.2,.42,12),0xc79a35,1.9,.26,.85);
+    }
+    if (page >= 4) {
+      // A gilded pharaoh bust stands for the famous mask found in the coffins.
+      mesh(new THREE.BoxGeometry(.5,.5,.5),0x8a5f36,-1.35,.3,.6);
+      mesh(new THREE.SphereGeometry(.34,16,12),0xe8b23f,-1.35,.85,.6).scale.set(1,1.15,.85);
+      const band=mesh(new THREE.TorusGeometry(.3,.07,6,18),0x2e4d8f,-1.35,1.02,.6);band.rotation.x=Math.PI/2;
+    }
+  } else if(kind === 'plane') {
+    // A Wright Flyer: twin cloth wings, wooden struts, skids and pusher propellers.
+    const flyer=new THREE.Group(); model.add(flyer);
+    const fmesh=(g,c,x,y,z)=>{const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:c,roughness:.85,flatShading:true}));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;flyer.add(m);return m;};
+    fmesh(new THREE.BoxGeometry(3.6,.07,1),0xd9c9a8,0,.75,0);
+    fmesh(new THREE.BoxGeometry(3.6,.07,1),0xd9c9a8,0,1.45,0);
+    for(let i=0;i<6;i++) fmesh(new THREE.BoxGeometry(.05,.7,.05),0x8a6b44,-1.5+i*.6,1.1,.38);
+    for(let i=0;i<6;i++) fmesh(new THREE.BoxGeometry(.05,.7,.05),0x8a6b44,-1.5+i*.6,1.1,-.38);
+    for(const side of [-1,1]) fmesh(new THREE.BoxGeometry(2.4,.08,.14),0x8a6b44,.2,.3,side*.4);
+    fmesh(new THREE.BoxGeometry(.9,.06,.6),0xcdbb96,-2,1.1,0);
+    for(const side of [-1,1]) {
+      const prop=fmesh(new THREE.BoxGeometry(1,.07,.07),0x6e5638,.75,1.1,side*.55);
+      fmesh(new THREE.BoxGeometry(.07,1,.07),0x6e5638,.75,1.1,side*.55);
+      prop.rotation.z=.5;
+    }
+    fmesh(new THREE.BoxGeometry(.7,.16,.3),0x54442e,-.35,.82,0);
+    if (page >= 3) {
+      // December 17: the Flyer lifts above the sand.
+      flyer.position.y=.55; flyer.rotation.z=-.06;
+      for(let i=0;i<5;i++) mesh(new THREE.SphereGeometry(.12+(i%2)*.05,7,5),0xe4d9bd,-1.2+i*.6,.08,1+Math.sin(i*2)*.2);
+    }
   } else {
     const points=[];
     for(let i=0;i<170;i++) { const a=i/169*Math.PI*5.5; const r=.12+a*.085; points.push(new THREE.Vector3(Math.cos(a)*r,1.25+Math.sin(a)*r,0)); }

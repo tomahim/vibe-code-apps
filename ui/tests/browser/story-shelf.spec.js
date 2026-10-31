@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.setTimeout(180000);
+
 test('story room gallery, category shelves, closed book and complete reader', async ({ page, browserName }) => {
   const errors=[]; page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/api/apps/',r=>r.fulfill({json:{apps:[]}}));
@@ -7,7 +9,7 @@ test('story room gallery, category shelves, closed book and complete reader', as
   await page.getByRole('button',{name:/The Story Room/}).click();
   await expect(page).toHaveURL(/\/apps\/story-shelf/);
   await expect(page.getByRole('heading',{name:'Every spine.'})).toBeVisible();
-  await expect(page.getByRole('button',{name:/^Read /})).toHaveCount(4);
+  await expect(page.getByRole('button',{name:/^Read /})).toHaveCount(7);
   await expect(page.locator('.ss-room-canvas canvas')).toHaveAttribute('data-ready','true');
   await page.screenshot({path:`/downloads/${browserName}-story-room-desktop-shelves.png`,fullPage:true});
   await page.getByRole('button',{name:'Nature',exact:true}).click();
@@ -33,11 +35,11 @@ test('story room gallery, category shelves, closed book and complete reader', as
 test('mobile reading, every book and no horizontal overflow', async ({ page, browserName }) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto('/apps/story-shelf');
-  await expect(page.getByRole('button',{name:/^Read /})).toHaveCount(4);
+  await expect(page.getByRole('button',{name:/^Read /})).toHaveCount(7);
   await expect(page.locator('.ss-room-canvas canvas')).toHaveAttribute('data-ready','true');
   await page.screenshot({path:`/downloads/${browserName}-story-room-mobile-shelves.png`,fullPage:true});
   const names=await page.getByRole('button',{name:/^Read /}).allTextContents();
-  for(let i=0;i<4;i++) {
+  for(let i=0;i<7;i++) {
     await page.getByRole('button',{name:/^Read /}).nth(i).click();
     if(i===0) await page.screenshot({path:`/downloads/${browserName}-story-room-mobile-closed.png`,fullPage:true});
     await page.locator('.ss-closed-book').click();
@@ -52,7 +54,7 @@ test('mobile reading, every book and no horizontal overflow', async ({ page, bro
     }
     await page.keyboard.press('Escape');
   }
-  expect(names.length).toBe(4);
+  expect(names.length).toBe(7);
 });
 
 test('reduced motion and WebGL unavailable preserve the whole story', async ({page})=>{
@@ -83,7 +85,7 @@ test('real 3D shelf book can be picked with pointer raycasting', async({page})=>
   await expect(canvas).toHaveAttribute('data-ready','true');
   await canvas.scrollIntoViewIfNeeded();
   const box=await canvas.boundingBox();
-  // First book on the upper shelf, from the visually checked fixed camera.
-  await page.mouse.click(box.x+box.width*.345,box.y+box.height*.22);
-  await expect(page.getByRole('button',{name:/Open The Printer/})).toBeVisible();
+  // Middle book on the upper shelf, from the visually checked fixed camera.
+  await page.mouse.click(box.x+box.width*.5,box.y+box.height*.22);
+  await expect(page.getByRole('button',{name:/Open Footprints/})).toBeVisible();
 });

@@ -6,7 +6,7 @@
     "art": "printing",
     "color": "#6a312c",
     "subtitle": "A little letter. A very big change.",
-    "label": "Historical fiction \u00b7 Mainz, around 1450",
+    "label": "Historical fiction · Mainz, around 1450",
     "model": "press"
   },
   {
@@ -16,7 +16,7 @@
     "art": "fossil",
     "color": "#275d69",
     "subtitle": "A shore full of questions.",
-    "label": "Historical fiction \u00b7 the world of Mary Anning",
+    "label": "Historical fiction · the world of Mary Anning",
     "model": "fossil"
   },
   {
@@ -26,7 +26,7 @@
     "art": "forest",
     "color": "#3c5940",
     "subtitle": "Small things grow wonderful worlds.",
-    "label": "A woodland story \u00b7 oak life cycle",
+    "label": "A woodland story · oak life cycle",
     "model": "tree"
   },
   {
@@ -36,7 +36,37 @@
     "art": "mountain",
     "color": "#3d596e",
     "subtitle": "From snowflake to stream, and home again.",
-    "label": "A nature journey \u00b7 the water cycle",
+    "label": "A nature journey · the water cycle",
     "model": "mountain"
+  },
+  {
+    "slug": "footprints-on-the-moon",
+    "title": "Footprints on the Moon",
+    "category": "History",
+    "art": "moon",
+    "color": "#2c3557",
+    "subtitle": "One small step, watched by the whole world.",
+    "label": "True story, imagined family · July 1969",
+    "model": "rocket"
+  },
+  {
+    "slug": "the-boy-kings-tomb",
+    "title": "The Boy King's Tomb",
+    "category": "History",
+    "art": "tomb",
+    "color": "#7c4f24",
+    "subtitle": "Sealed for three thousand years.",
+    "label": "True story, imagined helper · Egypt, 1922",
+    "model": "tomb"
+  },
+  {
+    "slug": "twelve-seconds-in-the-air",
+    "title": "Twelve Seconds in the Air",
+    "category": "History",
+    "art": "plane",
+    "color": "#3e6b8c",
+    "subtitle": "A bicycle dream learns to fly.",
+    "label": "True story, imagined neighbor · Kitty Hawk, 1903",
+    "model": "plane"
   }
 ]

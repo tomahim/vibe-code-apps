@@ -46,8 +46,9 @@ export default function ShelfRoom({ category, onChoose, reduced }) {
       ['History','Nature','Mountains'].forEach((cat,row)=>{
         const y=2.7-row*2.7;
         box(10,.18,1.8,timber,0,y-.12,.1);box(9.8,.13,.09,plain(0xb58b51),0,y-.04,.99);label(cat,3.3,y-.12);
-        books.filter(b=>b.category===cat).forEach((b,i)=>{
-          const x=-2.9+i*2.6, volume=new THREE.Group();volume.position.set(x,y+1.05,.15);volume.rotation.y=.17+(i*.1);volume.rotation.z=i?-.04:.04;group.add(volume);
+        books.filter(b=>b.category===cat).forEach((b,i,row)=>{
+          const n=row.length, spacing=Math.min(2.6, n>1?7.6/(n-1):2.6);
+          const x=n>2 ? -(n-1)*spacing/2+i*spacing : -2.9+i*2.6, volume=new THREE.Group();volume.position.set(x,y+1.05,.15);volume.rotation.y=.17+(i*.1);volume.rotation.z=i?-.04:.04;group.add(volume);
           const mat=plain(b.color);const body=new THREE.Mesh(new THREE.BoxGeometry(1.7,2.1,.32),mat);body.castShadow=true;body.userData.book=b;volume.add(body);hit.push(body);
           const paper=new THREE.Mesh(new THREE.BoxGeometry(1.57,1.95,.29),plain(0xe7d9b8));paper.position.z=.035;volume.add(paper);
           const cover=new THREE.Mesh(new THREE.PlaneGeometry(1.7,2.1),mat.clone());cover.position.z=.205;cover.userData.book=b;volume.add(cover);hit.push(cover);

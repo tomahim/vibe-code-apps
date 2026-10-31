@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const base=new URL('../src/apps/story-shelf/',import.meta.url);
 const manifest=JSON.parse(fs.readFileSync(new URL('manifest.json',base)));
-test('four unique books across three shelves, each with five complete Markdown pages and six local pictures',()=>{
-  assert.equal(manifest.length,4);assert.equal(new Set(manifest.map(b=>b.slug)).size,4);
+test('seven unique books across three shelves, each with five complete Markdown pages and six local pictures',()=>{
+  assert.equal(manifest.length,7);assert.equal(new Set(manifest.map(b=>b.slug)).size,7);
   assert.deepEqual([...new Set(manifest.map(b=>b.category))],['History','Nature','Mountains']);
   for(const b of manifest){
     const md=fs.readFileSync(new URL(`books/${b.slug}.md`,base),'utf8');
