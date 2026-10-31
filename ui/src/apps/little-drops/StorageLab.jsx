@@ -12,7 +12,7 @@ export default function StorageLab() {
   const chartTitle = useId(), chartDesc = useId();
   function configure(setter, value) { setter(value); setStep(0); }
   return <>
-    <h2 id="ld-lab-heading">The city wakes. The tank steps in.</h2>
+    <h2>The city wakes. The tank steps in.</h2>
     <p>A pump adds the same amount each step. The city does not use the same amount. What happens during the morning rush?</p>
     <div className="ld-storage-controls">
       <label htmlFor="ld-capacity">Tank capacity <output>{capacity} units</output></label><input id="ld-capacity" type="range" min="4" max="20" step="2" value={capacity} onChange={e => configure(setCapacity, Number(e.target.value))}/>
