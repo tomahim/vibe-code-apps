@@ -23,3 +23,6 @@ Valves & routes is a graph-connectivity toy, not a hydraulic calculation. All ei
 
 ## Release 003
 Storage & demand uses equal-duration fictional steps and arbitrary volume units. The pure model conserves water: previous storage + inflow = delivered + next storage + overflow. Capacity comparisons start half full, so the larger tank also has a larger starting reserve. No real demand, safety, engineering, pressure or energy prediction is made. The hand-stepped interface needs no animation or WebGL.
+
+## Release 004
+The pocket notebook lists all stops and revisits opened discoveries with focus returned to the explanation. Markdown export is generated locally from opened content and its existing source links; there is no upload, sync or new permission. Clearing discoveries requires confirmation and does not remove downloaded files. Failed storage writes return a visible in-memory-only warning. Browser tests inspect actual downloaded bytes and cover cancel/reset/persistence/storage failure.

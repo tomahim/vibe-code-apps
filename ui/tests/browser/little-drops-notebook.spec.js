@@ -1,0 +1,13 @@
+import {test,expect} from '@playwright/test';
+import {readFile} from 'node:fs/promises';
+test('notebook revisits opened entries, exports only those entries and confirms clearing',async({page})=>{
+ await page.setViewportSize({width:393,height:851});await page.goto('/apps/little-drops');await page.getByRole('button',{name:'Look a little closer'}).click();await page.getByRole('button',{name:'03 The tower'}).click();await page.getByRole('button',{name:'Look a little closer'}).click();
+ await page.getByRole('button',{name:'Revisit The source'}).click();await expect(page.locator('.ld-detail')).toBeVisible();await expect(page.locator('.ld-story h2')).toBeFocused();await expect(page.locator('.ld-story h2')).toHaveText('A city takes a sip');
+ const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Download notebook .md'}).click();const download=await downloadPromise;expect(download.suggestedFilename()).toBe('little-drops-notebook.md');const text=await readFile(await download.path(),'utf8');expect(text).toContain('2 of 5');expect(text).toContain('## Give gravity a job');expect(text).not.toContain('## An ordinary little miracle');
+ await page.getByRole('button',{name:'Clear discoveries',exact:true}).click();await expect(page.getByRole('button',{name:'Yes, clear discoveries'})).toBeFocused();await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'Clear discoveries',exact:true})).toBeFocused();await expect(page.getByText('2 of 5 discoveries opened.')).toBeVisible();
+ await page.screenshot({path:'/downloads/little-drops-notebook-mobile.png',fullPage:true});await page.setViewportSize({width:1440,height:1100});await page.screenshot({path:'/downloads/little-drops-notebook-desktop.png',fullPage:true});
+ await page.getByRole('button',{name:'Clear discoveries',exact:true}).click();await page.getByRole('button',{name:'Yes, clear discoveries'}).click();await expect(page.getByText('0 of 5 discoveries opened.')).toBeVisible();await page.reload();await expect(page.getByText('0 of 5 discoveries opened.')).toBeVisible();
+});
+test('failed browser save is disclosed and leaves discovery readable',async({page})=>{
+ await page.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('No space','QuotaExceededError');};});await page.goto('/apps/little-drops');await page.getByRole('button',{name:'Look a little closer'}).click();await expect(page.locator('.ld-detail')).toBeVisible();await expect(page.locator('.ld-notebook-save')).toContainText('Not saved:');await expect(page.getByText('1 of 5 discoveries opened.')).toBeVisible();
+});
