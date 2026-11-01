@@ -32,3 +32,6 @@ Optional dusk lighting is decorative, not a time-of-day simulation. The renderer
 
 ## Release 006
 The four experiment panels stay mounted for the current visit, with inactive panels `hidden` from keyboard/assistive-technology navigation. This preserves the storage cycle, valve challenge, treatment stage and prediction while switching. The choice group supports arrow/Home/End keys; story shortcuts focus/scroll the workbench. State is not saved across reload. No timers or network work run in hidden labs.
+
+## Release 007
+The optional route trace shows an ordered tower-to-home path and outlines its edges without animation. A deterministic breadth-first search chooses one path through open connections; this is not a hydraulic shortest/best-route recommendation or a flow-split calculation. Valve changes immediately update the route and its accessible text list, including a disconnected state. Existing challenge/reset behavior is unchanged.

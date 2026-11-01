@@ -1,11 +1,14 @@
 import { useId, useState } from 'react';
-import { networkNodes, networkEdges, initialValves, reachableNodes, connectedEdges } from './network.js';
+import { networkNodes, networkEdges, initialValves, reachableNodes, connectedEdges, findOpenRoute } from './network.js';
 import { sources } from './content.js';
 const valveLabels = { main: 'Main street', home: 'Home connection', 'loop-in': 'Side street' };
 export default function NetworkLab() {
   const [valves, setValves] = useState({ ...initialValves });
+  const [tracing, setTracing] = useState(false);
   const [challenge, setChallenge] = useState(false);
   const reached = reachableNodes(valves), connected = connectedEdges(valves, reached);
+  const route = findOpenRoute(valves);
+  const routeEdges = new Set(tracing && route ? route.edges : []);
   const supplied = reached.has('house'), solved = challenge && !valves.main && supplied;
   const titleId = useId(), descId = useId();
   function toggle(id) { setValves(v => ({ ...v, [id]: !v[id] })); }
@@ -21,7 +24,7 @@ export default function NetworkLab() {
         const open = !edge.valve || valves[edge.id];
         const x = (a.x + b.x) / 2, y = (a.y + b.y) / 2;
         return <g key={edge.id} className={connected.has(edge.id) ? 'ld-net-connected' : 'ld-net-off'}>
-          <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} className="ld-net-pipe" />
+          <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} className={`ld-net-pipe ${routeEdges.has(edge.id) ? 'ld-net-traced' : ''}`}  />
           {edge.valve && <g className={open ? 'ld-net-valve open' : 'ld-net-valve closed'}><circle cx={x} cy={y} r="10"/><path d={open ? `M${x-4},${y}h8` : `M${x-4},${y-4}l8,8m-8,0l8,-8`}/></g>}
         </g>;
       })}
@@ -29,6 +32,10 @@ export default function NetworkLab() {
     </svg>
     <div className="ld-valves" role="group" aria-label="Network valves">{Object.keys(initialValves).map(id => <button key={id} aria-pressed={valves[id]} aria-label={`${valveLabels[id]} valve`} onClick={() => toggle(id)}><span className="ld-valve-icon" aria-hidden="true">{valves[id] ? '−' : '×'}</span><span>{valveLabels[id]}<small>{valves[id] ? 'Open' : 'Closed'}</small></span></button>)}</div>
     <p className={`ld-network-status ${supplied ? 'connected' : ''}`} role="status">{supplied ? '✓ Home connected: an open route reaches the tower.' : '× Home disconnected: no open route reaches the tower.'}</p>
+    <div className="ld-route-explainer">
+      <button className="ld-trace-toggle" aria-pressed={tracing} onClick={() => setTracing(v => !v)}>Trace an open route</button>
+      {tracing && <div className="ld-route-result" role="status">{route ? <><p>One open route from tower to home:</p><ol aria-label="Open route">{route.nodes.map((id, i) => <li key={id}><span aria-hidden="true">{i + 1}</span>{networkNodes.find(n => n.id === id).label}</li>)}</ol><p className="ld-model-note">The outlined route updates as you change valves. It is one possible connection, not a prediction of how water splits between pipes.</p></> : <p>No open route reaches the home. Change a valve to reconnect it.</p>}</div>}
+    </div>
     <div className="ld-network-challenge"><button className="ld-discover" onClick={() => { setChallenge(true); setValves({ main: false, home: true, 'loop-in': false }); }}>Try a street closure <span>↗</span></button>{challenge && <p role="status">{solved ? 'Route found. The side street connects the home while Main street stays closed.' : 'Challenge: leave Main street closed and find a route to the home.'}</p>}<button className="ld-network-reset" onClick={() => { setValves({ ...initialValves }); setChallenge(false); }}>Reset valves</button></div>
     <p className="ld-model-note">Connectivity only: an open route is not proof of enough pressure, flow or safe water. No pipe resistance, demand, pumps or water quality are calculated. This is a fictional puzzle, not advice for operating a real network.</p>
     <a className="ld-source" href={sources.network.url} target="_blank" rel="noreferrer">How real distribution networks work · EPA ↗</a>
