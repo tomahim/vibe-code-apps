@@ -1,14 +1,17 @@
 import { useId, useMemo, useState } from 'react';
-import { demandCycle, runStorageCycle } from './storage.js';
+import { demandCycle, runStorageCycle, storageSummary } from './storage.js';
 import { sources } from './content.js';
 export default function StorageLab() {
   const [capacity, setCapacity] = useState(12), [pump, setPump] = useState(5), [step, setStep] = useState(0);
+  const [baseline, setBaseline] = useState(null);
   const cycle = useMemo(() => runStorageCycle(capacity, pump), [capacity, pump]);
   const result = step ? cycle[step - 1] : null;
   const level = result ? result.level : capacity / 2;
   const totalShortage = cycle.slice(0, step).reduce((sum, row) => sum + row.shortage, 0);
   const totalOverflow = cycle.slice(0, step).reduce((sum, row) => sum + row.overflow, 0);
   const done = step === demandCycle.length;
+  const current = done ? storageSummary(capacity, pump) : null;
+  const metrics = [['capacity','Tank capacity'],['inflow','Pump per step'],['starting','Starting reserve'],['delivered','Delivered'],['shortage','Unmet demand'],['overflow','Overflow'],['final','Final reserve']];
   const chartTitle = useId(), chartDesc = useId();
   function configure(setter, value) { setter(value); setStep(0); }
   return <>
@@ -32,6 +35,12 @@ export default function StorageLab() {
     <details className="ld-storage-details"><summary>Show the balance, step by step</summary><p>Next storage = previous storage + pump inflow − delivered water − overflow. Unmet demand = requested − delivered. Water is never created by the tank.</p><div className="ld-storage-table-scroll"><table><caption>Completed steps in this fictional cycle</caption><thead><tr><th scope="col">Step</th><th scope="col">Demand</th><th scope="col">Stored</th><th scope="col">Unmet</th><th scope="col">Overflow</th></tr></thead><tbody>{cycle.slice(0,step).map((r,i)=><tr key={r.label}><th scope="row">{i+1}. {r.label}</th><td>{r.demand}</td><td>{r.level}</td><td>{r.shortage}</td><td>{r.overflow}</td></tr>)}</tbody></table></div></details>
     <div className="ld-storage-presets"><p>Compare two half-full tanks with the same pump:</p><button onClick={()=>{setCapacity(4);setPump(5);setStep(0);}}>Small tank · 4 units</button><button onClick={()=>{setCapacity(12);setPump(5);setStep(0);}}>Larger tank · 12 units</button></div>
     {done&&<p className="ld-storage-conclusion">{totalShortage ? 'This reserve could not cover every shortfall. Try more storage, or compare a different pump setting.' : 'The stored reserve covered the peaks in this particular cycle.'} A bigger tank cannot fix a permanent supply deficit.</p>}
+    <section className="ld-storage-compare" aria-label="Compare completed cycles">
+      <h3>Keep one result. Try another.</h3><p>Complete a cycle, keep its result here, then change a setting and run again. Same six demands. Each tank starts at 50% of its capacity. Changing capacity also changes the starting reserve.</p>
+      <button className="ld-keep-result" disabled={!done} onClick={() => setBaseline(storageSummary(capacity, pump))}>{baseline ? 'Replace saved result with this cycle' : 'Keep this completed result'}</button>
+      {baseline ? <><p className="ld-comparison-status" role="status">{done ? 'Both completed cycles are ready to compare.' : 'Saved result kept. Complete the current cycle to compare.'}</p><div className="ld-storage-table-scroll"><table><caption>Completed fictional cycles, in arbitrary water units</caption><thead><tr><th scope="col">Measure</th><th scope="col">Saved result</th><th scope="col">{done ? 'Current result' : 'Current: not complete'}</th></tr></thead><tbody>{metrics.map(([key,label]) => <tr key={key}><th scope="row">{label}</th><td>{baseline[key]}</td><td>{current ? current[key] : 'Pending'}</td></tr>)}</tbody></table></div>{current && <p className="ld-comparison-difference">{current.shortage === baseline.shortage ? 'Both cycles have the same unmet demand.' : `The current cycle has ${Math.abs(current.shortage-baseline.shortage)} ${Math.abs(current.shortage-baseline.shortage)===1?'unit':'units'} ${current.shortage < baseline.shortage ? 'less' : 'more'} unmet demand than the saved result.`} Compare overflow and starting reserve too, not only unmet demand.</p>}<button className="ld-clear-result" onClick={() => setBaseline(null)}>Clear saved comparison</button></> : <p className="ld-comparison-status" role="status">No saved comparison. Results stay only during this visit.</p>}
+      <p className="ld-model-note">This compares volume balances, not a best design. Neither tank size nor pump setting here is a recommendation for a real system.</p>
+    </section>
     <p className="ld-model-note">Invented demand and arbitrary water units, not household measurements. Each step has equal duration. A simple volume balance, not a pressure, energy, water-quality or engineering model. Overflow is counted as discarded water. Real systems use controls and operating limits that are not simulated here.</p>
     <a className="ld-source" href={sources.storage.url} target="_blank" rel="noreferrer">Why systems store finished water · EPA ↗</a>
   </>;
