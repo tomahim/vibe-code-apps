@@ -35,3 +35,6 @@ The four experiment panels stay mounted for the current visit, with inactive pan
 
 ## Release 007
 The optional route trace shows an ordered tower-to-home path and outlines its edges without animation. A deterministic breadth-first search chooses one path through open connections; this is not a hydraulic shortest/best-route recommendation or a flow-split calculation. Valve changes immediately update the route and its accessible text list, including a disconnected state. Existing challenge/reset behavior is unchanged.
+
+## Release 008
+A completed storage cycle can be kept as a comparison snapshot during the visit. Settings, starting reserve, delivered volume, unmet demand, overflow and final reserve are shown together. The current column stays Pending until all six steps complete. Reconfiguring/restarting does not erase the saved snapshot; replacement and clearing are explicit. Nothing is persisted across reload. Capacity comparisons change initial reserve because each tank starts half full; the UI names this confound and makes no design recommendation.

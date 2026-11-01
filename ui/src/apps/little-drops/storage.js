@@ -24,3 +24,15 @@ export function runStorageCycle(capacity, inflow) {
     return { ...period, before, inflow, ...result };
   });
 }
+
+// A fresh, self-contained result for a completed fictional cycle.
+export function storageSummary(capacity, inflow) {
+  const rows = runStorageCycle(capacity, inflow);
+  return {
+    capacity, inflow, starting: capacity / 2,
+    delivered: rows.reduce((sum, row) => sum + row.delivered, 0),
+    shortage: rows.reduce((sum, row) => sum + row.shortage, 0),
+    overflow: rows.reduce((sum, row) => sum + row.overflow, 0),
+    final: rows.at(-1).level,
+  };
+}
