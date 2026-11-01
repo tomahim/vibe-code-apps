@@ -7,9 +7,11 @@ const colors = { soil: 0xd4bfa4, grass: 0xb5cab5, pipe: 0x266b73, water: 0x73d7d
 export default function CityScene({ selected, cutaway, height, onSelect }) {
   const host = useRef(null), state = useRef({ selected, cutaway, height, onSelect });
   state.current = { selected, cutaway, height, onSelect };
+  const [paused, setPaused] = useState(false), [systemReduced, setSystemReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const pause = useRef(false); pause.current = paused;
   const [failed, setFailed] = useState(false), [turn, setTurn] = useState(0), [dusk, setDusk] = useState(false);
   const invalidate = useRef(() => {}), atmosphere = useRef(false); atmosphere.current = dusk;
-  useEffect(() => { invalidate.current(); }, [selected, cutaway, height, turn, dusk]);
+  useEffect(() => { invalidate.current(); }, [selected, cutaway, height, turn, dusk, paused]);
   const rotation = useRef(0); rotation.current = turn;
   useEffect(() => {
     const el = host.current;
@@ -104,9 +106,9 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     function visibility(){if(document.hidden||!visible){cancelAnimationFrame(frame);frame=null;last=0;}else requestDraw();}
     intersection=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;visibility();},{rootMargin:'80px'});intersection.observe(el);
     document.addEventListener('visibilitychange',visibility);
-    function motionChange(){reduced=motion.matches;requestDraw();}motion.addEventListener('change',motionChange);
+    function motionChange(){reduced=motion.matches;setSystemReduced(reduced);requestDraw();}motion.addEventListener('change',motionChange);
     function draw(time){frame=null;if(disposed||contextLost||!visible||document.hidden)return;const dt=last?Math.min((time-last)/1000,.05):0;last=time;elapsed+=dt;
-      const s=state.current;const angle=rotation.current;branches.visible=s.cutaway;
+      const s=state.current;const still=reduced||pause.current;const angle=rotation.current;branches.visible=s.cutaway;
       const night=atmosphere.current;
       scene.background.set(night?0x263c50:0xe9eee4);
       sky.color.set(night?0x9cb9df:0xffffff);sky.groundColor.set(night?0x7f887d:0x8c9c8c);sky.intensity=night?1.5:2.5;
@@ -115,24 +117,24 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
       markerMat.color.set(night?0x72e1de:0x0e737f);markerMat.emissiveIntensity=night?.6:.25;
       const dist=camera.aspect>2?11.5:camera.aspect<1?23:18;
       camera.position.set(Math.sin(angle)*dist,dist*.63,Math.cos(angle)*dist);camera.lookAt(0,.35,0);
-      verge.position.y=reduced?(s.cutaway?-.95:-.25):THREE.MathUtils.lerp(verge.position.y,s.cutaway?-.95:-.25,.12);verge.material.transparent=true;verge.material.opacity=s.cutaway?.14:1;
+      verge.position.y=still?(s.cutaway?-.95:-.25):THREE.MathUtils.lerp(verge.position.y,s.cutaway?-.95:-.25,.12);verge.material.transparent=true;verge.material.opacity=s.cutaway?.14:1;
       const towerScale=.65+s.height/45;tank.position.y=2.45*towerScale;lid.position.y=tank.position.y+.5;waterBand.position.y=tank.position.y-.03;
       legs.forEach(l=>{l.scale.y=towerScale;l.position.y=towerScale;});
       hotspots[2].position.y=tank.position.y+.35;hotspots[3].position.set(2.7,s.cutaway?-.25:.65,1.55);
       const target=path[s.selected].clone();if(s.selected===2)target.y=tank.position.y+.7;
       if(s.selected===3)target.set(2.7,s.cutaway?-.25:.65,1.55);
-      if(reduced)drop.position.copy(target);else drop.position.lerp(target,.08);drop.position.y+=reduced?0:Math.sin(elapsed*2.6)*.0015;
+      if(still)drop.position.copy(target);else drop.position.lerp(target,.08);drop.position.y+=still?0:Math.sin(elapsed*2.6)*.0015;
       ring.position.copy(drop.position);ring.position.y-=.35;
-      pipeDrops.forEach((p,i)=>{p.position.copy(curve.getPointAt(((reduced?0:elapsed*.085)+i/16)%1));p.position.y+=.11;p.visible=s.cutaway;});
+      pipeDrops.forEach((p,i)=>{p.position.copy(curve.getPointAt(((still?0:elapsed*.085)+i/16)%1));p.position.y+=.11;p.visible=s.cutaway;});
       renderer.render(scene,camera);
-      if(!reduced)requestDraw();
+      if(!still)requestDraw();
     } requestDraw();
     return ()=>{disposed=true;cancelAnimationFrame(frame);observer?.disconnect();intersection?.disconnect();document.removeEventListener('visibilitychange',visibility);motion.removeEventListener('change',motionChange);invalidate.current=()=>{};renderer.domElement.removeEventListener('click',click);renderer.domElement.removeEventListener('webglcontextlost',lost);resources.forEach(r=>r.dispose());renderer.dispose();renderer.domElement.remove();};
   }, []);
-  return <div className={`ld-scene-wrap${dusk ? ' ld-dusk' : ''}`}>
+  return <><div className={`ld-scene-wrap${dusk ? ' ld-dusk' : ''}`}>
     <div className="ld-scene" ref={host} hidden={failed}/>
     {failed&&<div className="ld-fallback"><span>◈</span><h3>The journey still works.</h3><p>3D is unavailable on this device. Use the stops below to explore every explanation and experiment.</p></div>}
     <div className="ld-scene-note">{cutaway?'BELOW THE SURFACE':'A SMALL CITY, A BIG JOURNEY'}<span>Illustrative model · not to scale</span></div>
     {!failed&&<><button className="ld-atmosphere" aria-pressed={dusk} onClick={()=>setDusk(v=>!v)}>{dusk?'☾ Dusk view':'☀ Daylight view'}</button><div className="ld-camera"><button aria-label="Rotate city left" onClick={()=>setTurn(v=>v-.3)}>↶</button><button aria-label="Reset city view" onClick={()=>setTurn(0)}>⌂</button><button aria-label="Rotate city right" onClick={()=>setTurn(v=>v+.3)}>↷</button></div></>}
-  </div>;
+  </div>{!failed&&<div className="ld-motion-controls"><button aria-pressed={paused} disabled={systemReduced} onClick={()=>setPaused(v=>!v)}>{systemReduced ? 'System reduced motion' : paused ? 'Resume city motion' : 'Pause city motion'}</button><p>{systemReduced ? 'Your device requests reduced motion. The city stays still.' : paused ? 'City motion paused. You can still explore each stop.' : 'Pause decorative city motion while you read.'} Journey playback is controlled separately below.</p></div>}</>;
 }
