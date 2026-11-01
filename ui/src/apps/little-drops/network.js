@@ -30,3 +30,21 @@ export function reachableNodes(valves) {
 export function connectedEdges(valves, reached = reachableNodes(valves)) {
   return new Set(networkEdges.filter(e => (!e.valve || valves[e.id]) && reached.has(e.from) && reached.has(e.to)).map(e => e.id));
 }
+
+// One deterministic route through open connections, not a hydraulic preference.
+export function findOpenRoute(valves, start = 'tower', target = 'house') {
+  if (!networkNodes.some(n => n.id === start) || !networkNodes.some(n => n.id === target)) return null;
+  const queue = [{ nodes: [start], edges: [] }], seen = new Set([start]);
+  while (queue.length) {
+    const route = queue.shift(), current = route.nodes.at(-1);
+    if (current === target) return route;
+    for (const edge of networkEdges) {
+      if (edge.valve && !valves[edge.id]) continue;
+      const next = edge.from === current ? edge.to : edge.to === current ? edge.from : null;
+      if (!next || seen.has(next)) continue;
+      seen.add(next);
+      queue.push({ nodes: [...route.nodes, next], edges: [...route.edges, edge.id] });
+    }
+  }
+  return null;
+}
