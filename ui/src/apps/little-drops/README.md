@@ -38,3 +38,6 @@ The optional route trace shows an ordered tower-to-home path and outlines its ed
 
 ## Release 008
 A completed storage cycle can be kept as a comparison snapshot during the visit. Settings, starting reserve, delivered volume, unmet demand, overflow and final reserve are shown together. The current column stays Pending until all six steps complete. Reconfiguring/restarting does not erase the saved snapshot; replacement and clearing are explicit. Nothing is persisted across reload. Capacity comparisons change initial reserve because each tank starts half full; the UI names this confound and makes no design recommendation.
+
+## Release 009
+Explicit city-motion pause is visit-only and independent of journey playback. Paused scenes snap to the selected stop/cutaway and draw only on changes; camera, light and pressure changes still work. The system reduced-motion preference always wins, and its live changes update the control. No battery or physical Android performance claim. No WebGL means no misleading motion control.
