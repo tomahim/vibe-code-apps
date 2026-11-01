@@ -54,6 +54,9 @@ main{max-width:1060px;margin:0 auto;padding:8px 20px 120px}
 .role.undermine{color:var(--blood);border-color:#6e4238;background:#271a17}
 .role.limit{color:var(--indigo);border-color:#454e78;background:#1b1d2b}
 .src{display:inline-block;margin-top:6px;font-size:11px;color:var(--faint);font-style:italic}
+.srclink{display:block;margin-top:3px;font-size:10.5px;line-height:1.45;word-break:break-all;user-select:text;-webkit-user-select:text}
+.srclink a{color:#8aa3d8;text-decoration:underline;text-underline-offset:2px}
+.fold{display:block;margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
 .realchip{display:inline-block;margin-left:8px;padding:2px 8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--jade);border:1px solid #2e5546;border-radius:20px;vertical-align:middle}
 .verdict-btn{flex:1 1 45%;display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:52px;padding:9px 6px;font-weight:700;font-size:13px}
 .verdict-btn small{font-weight:600;font-size:10px;color:var(--faint);letter-spacing:.05em}
@@ -129,13 +132,17 @@ main{max-width:1060px;margin:0 auto;padding:8px 20px 120px}
 .ecard{flex:0 0 176px;height:248px;perspective:800px}
 .ecard .inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
 .ecard.up .inner{transform:rotateY(180deg)}
-.ecard button{position:absolute;inset:0;width:100%;height:100%;border-radius:12px;border:1px solid var(--line);padding:11px;display:flex;flex-direction:column;gap:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:left}
+.ecard .back,.ecard .front{position:absolute;inset:0;width:100%;height:100%;cursor:pointer;font:inherit;color:inherit;border-radius:12px;border:1px solid var(--line);padding:11px;display:flex;flex-direction:column;gap:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:left}
 .ecard .back{background:repeating-linear-gradient(45deg,#20263f,#20263f 8px,#252c48 8px,#252c48 16px);align-items:center;justify-content:center;color:var(--indigo);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .ecard .back .q{font-size:30px;line-height:1}
 .ecard .front{background:var(--panel);transform:rotateY(180deg);color:var(--ink);font-size:12px}
 .ecard .front b{font-size:12.5px;line-height:1.3}
 .ecard .front .fd{color:var(--muted);font-size:11.5px;flex:1;overflow-y:auto;scrollbar-width:none;min-height:0}
 .ecard .front .src{margin-top:0;font-size:10px}
+.ecard.open{height:auto}
+.ecard.open .inner{transform:none;height:auto}
+.ecard.open .back{display:none}
+.ecard.open .front{position:relative;transform:none;height:auto;min-height:248px;cursor:pointer}
 .dragzone{margin-top:10px;border:1px dashed #3c4670;border-radius:14px;padding:12px;position:relative}
 .belief-chip{display:inline-block;background:linear-gradient(180deg,#2b3358,#232a44);border:1px solid var(--indigo);border-radius:12px;padding:10px 14px;font-weight:700;font-size:13.5px;color:#dfe5ff;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;max-width:100%}
 .belief-chip.dragging{opacity:.85;cursor:grabbing;box-shadow:0 10px 24px rgba(0,0,0,.5);position:fixed;z-index:60;margin:0;pointer-events:none}
@@ -4199,13 +4206,13 @@ const CASES=[
   verdict:'myth',
   charge:'Accused of being an old wives\u2019 tale that survived on repetition alone.',
   cards:[
-   {t:'The 50-year one-hand experiment', role:'undermine', src:'Unger, Arthritis & Rheumatism, 1998',
+   {t:'The 50-year one-hand experiment', role:'undermine', src:'Unger, Arthritis & Rheumatism, 1998', url:'https://onlinelibrary.wiley.com/doi/10.1002/1529-0131(199805)41:5%3C949::AID-ART36%3E3.0.CO;2-3',
     d:'Dr. Donald Unger cracked the knuckles of his left hand at least twice a day for over 50 years and never his right. After five decades, the two hands were identical: no arthritis in either.'},
-   {t:'A 2016 evidence review', role:'undermine', src:'Powers, Kelsberg & Safranek, J Fam Pract, 2016',
+   {t:'A 2016 evidence review', role:'undermine', src:'Powers, Kelsberg & Safranek, J Fam Pract, 2016', url:'https://pubmed.ncbi.nlm.nih.gov/27846331/',
     d:'Reviewing the available studies, the authors conclude that habitual knuckle popping over several decades is not associated with clinical or radiographic evidence of osteoarthritis.'},
-   {t:'The grip-strength caveat', role:'limit', src:'Castellanos & Axelrod, Annals of the Rheumatic Diseases, 1990',
+   {t:'The grip-strength caveat', role:'limit', src:'Castellanos & Axelrod, Annals of the Rheumatic Diseases, 1990', url:'https://ard.bmj.com/content/49/5/308',
     d:'Among 300 adults over 45, habitual crackers had no more arthritis - but they did show more hand swelling (84% vs 6%) and weaker grip. The same group also did more manual labour and smoked more, which may explain the gap.'},
-   {t:'What makes the pop', role:'limit', src:'Unsworth, Dowson & Wright, Annals of the Rheumatic Diseases, 1971',
+   {t:'What makes the pop', role:'limit', src:'Unsworth, Dowson & Wright, Annals of the Rheumatic Diseases, 1971', url:'https://doi.org/10.1136/ard.30.4.348',
     d:'The sound comes from cavitation: gas bubbles forming and collapsing in the synovial fluid that cushions the joint. A mechanical pop, not bones grinding.'}],
   reveal:{movedBy:[0,1],
    text:'No study links knuckle cracking to arthritis: the 50-year self-experiment and the 2016 review both come up empty. The honest caveat is the 1990 finding of more swelling and weaker grip among crackers - so "completely harmless" is not proven either. As stated, the belief does not survive.',
@@ -4215,13 +4222,13 @@ const CASES=[
   verdict:'myth',
   charge:'Accused of being a self-help slogan dressed up as neuroscience.',
   cards:[
-   {t:'No silent 90%', role:'undermine', src:'Beyerstein, Scientific American, 2004',
+   {t:'No silent 90%', role:'undermine', src:'Beyerstein, Scientific American, 2004', url:'https://www.scientificamerican.com/article/do-we-really-use-only-10/',
     d:'Damage to even small brain areas causes real deficits, and electrical stimulation during neurosurgery has never found a dormant zone. The brain is 2% of body weight but burns about 20% of our energy - a costly organ to leave idle.'},
-   {t:'Awake or asleep, all of it works', role:'undermine', src:'MIT McGovern Institute, 2024',
+   {t:'Awake or asleep, all of it works', role:'undermine', src:'MIT McGovern Institute, 2024', url:'https://mcgovern.mit.edu/2024/01/26/do-we-use-only-10-percent-of-our-brain/',
     d:'Neuroscientists at MIT\u2019s McGovern Institute put it plainly: all of the brain is constantly in use, even during sleep. Some neurons fire rarely, but that is not the same as 90% sitting unused.'},
-   {t:'A misquote that grew legs', role:'limit', src:'William James, "The Energies of Men", 1907; Lowell Thomas, 1936',
+   {t:'A misquote that grew legs', role:'limit', src:'William James, "The Energies of Men", 1907; Lowell Thomas, 1936', url:'https://www.scientificamerican.com/article/do-we-really-use-only-10/',
     d:'James wrote only that we use "a small part of our possible mental and physical resources" - no percentage. Lowell Thomas\u2019s 1936 preface to Dale Carnegie\u2019s bestseller inflated it into "10 percent of the brain", and the Einstein attribution was never documented.'},
-   {t:'Why it sells', role:'limit', src:'Nature Neuroscience, "Brain myths", 2003',
+   {t:'Why it sells', role:'limit', src:'Nature Neuroscience, "Brain myths", 2003', url:'https://www.nature.com/articles/nn0203-99',
     d:'The myth endures because untapped potential is an appealing story - self-help gurus and paranormal claims both lean on the mysterious 90%.'}],
   reveal:{movedBy:[0,1],
    text:'Every line of evidence - imaging, lesion studies, neurosurgery, energy budget - says the whole brain is active. The 10% figure traces to a misquote, not a measurement. As stated, the belief does not survive.',
@@ -4231,13 +4238,13 @@ const CASES=[
   verdict:'myth',
   charge:'Accused of confusing a memorable exception for a rule of human attraction.',
   cards:[
-   {t:'313 studies, one direction', role:'undermine', src:'Montoya, Horton & Kirchner, J Soc Pers Relat, 2008',
+   {t:'313 studies, one direction', role:'undermine', src:'Montoya, Horton & Kirchner, J Soc Pers Relat, 2008', url:'https://doi.org/10.1177/0265407508096700',
     d:'A meta-analysis of 460 effect sizes found similarity and attraction strongly linked (actual similarity r = .47, perceived r = .39). The complementarity idea - that opposites pair up - was not supported.'},
-   {t:'The other "law of attraction"', role:'undermine', src:'Byrne, 1971 (reinforcement model)',
+   {t:'The other "law of attraction"', role:'undermine', src:'Byrne, 1971 (reinforcement model)', url:'https://doi.org/10.1177/0265407512452989',
     d:'In classic experiments, attraction grew in a straight line with the proportion of attitudes a stranger shared with you. Agreement validates us; disagreement repels.'},
-   {t:'Lab vs real life', role:'limit', src:'Montoya & Horton, field-vs-lab synthesis',
+   {t:'Lab vs real life', role:'limit', src:'Montoya & Horton, field-vs-lab synthesis', url:'http://persweb.wabash.edu/facstaff/hortonr/pubs/Montoya,%20Horton,%20&%20Kirchner,%202008,%20JSPR%20similarity%20effect%20meta%20analysis.pdf',
     d:'The similarity effect is strong in the lab but much weaker once people actually interact - so real couples are not sorted by similarity as neatly as experiments suggest.'},
-   {t:'Perception beats reality', role:'limit', src:'Montoya, Horton & Kirchner, 2008',
+   {t:'Perception beats reality', role:'limit', src:'Montoya, Horton & Kirchner, 2008', url:'https://doi.org/10.1177/0265407508096700',
     d:'In existing relationships, perceived similarity predicts attraction better than actual similarity. Couples who feel alike thrive - whether or not they objectively are.'}],
   reveal:{movedBy:[0,1],
    text:'Across hundreds of studies, birds of a feather flock together; the opposites-attract idea has no solid evidence behind it. The nuance worth keeping: feeling similar matters more than being similar, and lab effects shrink in the wild. As stated, the belief does not survive.',
@@ -4247,13 +4254,13 @@ const CASES=[
   verdict:'myth',
   charge:'Accused of being a dangerous myth imported from TV crime dramas.',
   cards:[
-   {t:'Police Scotland: immediately', role:'undermine', src:'Police Scotland, official guidance',
+   {t:'Police Scotland: immediately', role:'undermine', src:'Police Scotland, official guidance', url:'https://www.scotland.police.uk/what-s-happening/missing-persons/reporting-a-missing-person/',
     d:'"If you have established that someone is missing and you are concerned, report this immediately - you do not have to wait 24hrs before reporting them missing."'},
-   {t:'Victoria Police: no time limit', role:'undermine', src:'Victoria Police (Australia), official guidance',
+   {t:'Victoria Police: no time limit', role:'undermine', src:'Victoria Police (Australia), official guidance', url:'https://www.police.vic.gov.au/report-missing-person',
     d:'"You can report someone as missing at any time. There is no time limit or period to wait." The force takes over 8,000 reports a year; about 44% of people are found within 48 hours.'},
-   {t:'United States: no waiting period', role:'undermine', src:'Maryland State Police, official guidance',
+   {t:'United States: no waiting period', role:'undermine', src:'Maryland State Police, official guidance', url:'https://mdsp.maryland.gov/community-services/education-and-outreach/report-missing-or-unidentified-person',
     d:'"Get help immediately. There is no waiting period to report someone missing." US police must take an initial report without delay, whatever the person\u2019s age.'},
-   {t:'The first hours matter most', role:'limit', src:'UK police national FAQ (askthe.police.uk)',
+   {t:'The first hours matter most', role:'limit', src:'UK police national FAQ (askthe.police.uk)', url:'https://www.askthe.police.uk/faq/?id=376b8f38-12db-eb11-bacb-0022483f57c9',
     d:'Children, elderly people and anyone vulnerable should be reported straight away. For an adult who is simply late, making your own enquiries first is sensible - but there is no rule that makes you wait.'}],
   reveal:{movedBy:[0,1,2],
    text:'Police guidance on three continents says the same thing: report as soon as you are concerned. The 24-hour rule is fiction, and acting on it wastes the hours that matter most. As stated, the belief does not survive.',
@@ -4263,13 +4270,13 @@ const CASES=[
   verdict:'partly',
   charge:'Accused of ignoring the famous "jam study" - but the counter-evidence is shakier than its reputation.',
   cards:[
-   {t:'The famous jam study', role:'undermine', src:'Iyengar & Lepper, JPSP, 2000',
+   {t:'The famous jam study', role:'undermine', src:'Iyengar & Lepper, JPSP, 2000', url:'https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20%26%20Lepper%20(2000).pdf',
     d:'A tasting table with 24 jams drew more shoppers than one with 6 - but 30% of those who saw the small display bought a jam, versus only 3% of those who saw the big one.'},
-   {t:'Chocolates and satisfaction', role:'undermine', src:'Iyengar & Lepper, 2000',
+   {t:'Chocolates and satisfaction', role:'undermine', src:'Iyengar & Lepper, 2000', url:'https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20%26%20Lepper%20(2000).pdf',
     d:'Choosing from 30 chocolates felt more enjoyable but less satisfying (5.5 vs 6.3 out of 7). Only 12% of the large-choice group took chocolates instead of cash as payment, versus 48% of the small-choice group.'},
-   {t:'The meta-analysis that flattened it', role:'limit', src:'Scheibehenne, Greifeneder & Todd, J Consumer Research, 2010',
+   {t:'The meta-analysis that flattened it', role:'limit', src:'Scheibehenne, Greifeneder & Todd, J Consumer Research, 2010', url:'https://doi.org/10.1086/651235',
     d:'Across 63 experimental conditions (5,036 participants), the average choice-overload effect was virtually zero, with big variance between studies and no reliable conditions found for when overload strikes.'},
-   {t:'When more choice does help', role:'support', src:'Scheibehenne et al., 2010',
+   {t:'When more choice does help', role:'support', src:'Scheibehenne et al., 2010', url:'https://academic.oup.com/jcr/article/37/3/409/1821130',
     d:'The same meta-analysis confirmed more choice is better when people already know what they want, and it does increase how much people consume.'}],
   reveal:{movedBy:[2,3],
    text:'Choice overload is real in specific settings but failed to replicate as a general law: the average effect across dozens of experiments is near zero. More choice attracts us and helps when preferences are clear - so "always better" is too strong, and "overload always hurts" is too.',
@@ -4305,7 +4312,7 @@ function cabRenderCase(i){
   const dos=$('#cab-dossier');dos.innerHTML='';
   c.cards.forEach((card,j)=>{
     const d=h(`<div class="dcard"><div class="dt"><b>${esc(card.t)}</b><button class="open" aria-expanded="false" aria-label="Open evidence card ${j+1}">+</button></div>
-      <div class="dd"><span class="role ${ROLE[card.role].cls}">${ROLE[card.role].label}</span><p style="margin:8px 0 0">${card.d}</p><span class="src">Source: ${esc(card.src)}</span></div></div>`);
+      <div class="dd"><span class="role ${ROLE[card.role].cls}">${ROLE[card.role].label}</span><p style="margin:8px 0 0">${card.d}</p><span class="src">Source: ${esc(card.src)}</span><span class="srclink"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.url}</a></span></div></div>`);
     d.querySelector('.open').addEventListener('click',()=>{
       const open=d.classList.toggle('open');
       d.querySelector('.open').textContent=open?'\u2212':'+';
@@ -4357,7 +4364,7 @@ function triRenderCase(i){
       <span class="wn"><b>Witness ${j+1}: ${esc(card.t)}</b><span>${esc(card.src)}</span></span>
       <span class="care">▸</span></button>
       <span class="called role ${ROLE[card.role].cls}">${calledBy}</span>
-      <div class="wbody"><p style="margin:8px 0 4px">"${card.d}"</p><span class="src">Testimony based on: ${esc(card.src)}</span></div></div>`);
+      <div class="wbody"><p style="margin:8px 0 4px">"${card.d}"</p><span class="src">Testimony based on: ${esc(card.src)}</span><span class="srclink"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.url}</a></span></div></div>`);
     w.querySelector('.whead').addEventListener('click',()=>{
       const open=w.classList.toggle('open');
       w.querySelector('.whead').setAttribute('aria-expanded',open);
@@ -4419,12 +4426,20 @@ function dskRenderCase(i){
   const deck=$('#desk-deck');deck.innerHTML='';
   c.cards.forEach((card,j)=>{
     const e=h(`<div class="ecard"><div class="inner">
-      <button class="back" aria-label="Flip evidence card ${j+1}"><span class="q">?</span>Evidence ${j+1}<span style="font-size:10px;color:#8f9bd0">tap to flip</span></button>
-      <button class="front" aria-label="Evidence card ${j+1}, flipped"><span class="role ${ROLE[card.role].cls}">${ROLE[card.role].label}</span><b>${esc(card.t)}</b><span class="fd">${card.d}</span><span class="src">Source: ${esc(card.src)}</span></button>
+      <div class="back" role="button" tabindex="0" aria-label="Flip evidence card ${j+1}"><span class="q">?</span>Evidence ${j+1}<span style="font-size:10px;color:#8f9bd0">tap to flip</span></div>
+      <div class="front" role="button" tabindex="0" aria-label="Evidence card ${j+1}, flipped"><span class="role ${ROLE[card.role].cls}">${ROLE[card.role].label}</span><b>${esc(card.t)}</b><span class="fd">${card.d}</span><span class="src">Source: ${esc(card.src)}</span><span class="srclink"><a href="${card.url}" target="_blank" rel="noopener noreferrer">${card.url}</a></span><span class="fold">tap to fold back</span></div>
     </div></div>`);
-    const flip=()=>{e.classList.toggle('up');if(e.classList.contains('up'))dsk.flipped.add(j);else dsk.flipped.delete(j);beamUpdate();};
+    const flip=ev=>{
+      if(ev.target.closest('a'))return; // let source links be selected/followed
+      if(e.classList.contains('up')){e.classList.remove('up','open');dsk.flipped.delete(j);}
+      else{e.classList.add('up');dsk.flipped.add(j);setTimeout(()=>{if(e.classList.contains('up'))e.classList.add('open');},580);}
+      beamUpdate();
+    };
+    const key=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();flip(ev);}};
     e.querySelector('.back').addEventListener('click',flip);
     e.querySelector('.front').addEventListener('click',flip);
+    e.querySelector('.back').addEventListener('keydown',key);
+    e.querySelector('.front').addEventListener('keydown',key);
     deck.appendChild(e);
   });
   const home=$('#desk-dragzone');
