@@ -41,3 +41,6 @@ A completed storage cycle can be kept as a comparison snapshot during the visit.
 
 ## Release 009
 Explicit city-motion pause is visit-only and independent of journey playback. Paused scenes snap to the selected stop/cutaway and draw only on changes; camera, light and pressure changes still work. The system reduced-motion preference always wins, and its live changes update the control. No battery or physical Android performance claim. No WebGL means no misleading motion control.
+
+## Release 010
+Thomas requested a more immersive, interactive perspective close to water flow. Optional water-level mode enters a separate open-topped fictional 3D pipe section with ribs, a water ribbon and beads. A keyboard/touch range moves the camera along the section; overview returns without losing story or labs. This is deliberately illustrative, not a hydraulic/quality/speed simulation or a literal full-city first-person route. System reduced motion/manual pause keep beads still; changing the range still redraws. Geometry shares the existing renderer and is disposed on unmount.
