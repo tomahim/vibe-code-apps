@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'"><title>Review Accelerators</title>
+<style>
+*{box-sizing:border-box}body{--ink:#d4d4d4;--muted:#9a9a9a;--line:#343434;--accent:#a5c9b6;--warn:#d7ba7d;--bad:#cf8a8a;--ok:#8fbf9f;margin:0;background:#181818;color:var(--ink);font:14px/1.55 system-ui,sans-serif;color-scheme:dark}button{font:inherit;cursor:pointer;min-height:44px;padding:7px 12px;color:var(--ink);background:#202020;border:1px solid var(--line);border-radius:6px}button:hover{background:#2c2c2c}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header.page{padding:16px 18px;border-bottom:1px solid var(--line)}header.page h1{margin:0;font:600 21px/1.3 system-ui,sans-serif}header.page p{margin:6px 0 0;font-size:12.5px;color:var(--muted);max-width:70ch}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;border-bottom:1px solid var(--line);background:#1c1c1c;scrollbar-width:thin}nav.tabs button{flex:0 0 auto;min-height:44px;padding:6px 10px;font-size:12px;border-radius:20px;white-space:nowrap}nav.tabs button b{font:600 10px/1 ui-monospace,monospace;color:var(--muted);margin-right:6px}nav.tabs button.active{background:#293a32;border-color:#698c79;color:#d5e9dc}nav.tabs button.active b{color:#a5c9b6}
+main{padding:16px 18px;max-width:980px;margin:0 auto}.pitch{font-size:13.5px;margin:0 0 4px}.based{font-size:11.5px;color:var(--muted);margin:0 0 14px}.based code{font:11px ui-monospace,monospace;background:#222;padding:1px 5px;border-radius:4px}
+.demo{border:1px solid var(--line);border-radius:8px;background:#1e1e1e;padding:14px;margin:0 0 14px;min-width:0}.demo h3{margin:0 0 10px;font:600 13px/1.4 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.value{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}.value span{font-size:12px;border:1px solid #3d4a42;background:#22302a;color:#cfe3d5;padding:5px 10px;border-radius:16px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.muted{color:var(--muted)}.small{font-size:12px}
+ul.steps{list-style:none;margin:12px 0;padding:0;display:grid;gap:7px}ul.steps li{display:flex;gap:9px;align-items:center;font-size:13px;background:#232323;border:1px solid var(--line);border-radius:6px;padding:8px 10px}.dot{width:9px;height:9px;border-radius:50%;background:#555;flex:0 0 auto}.dot.run{background:var(--warn);animation:pulse 1s infinite}.dot.ok{background:var(--ok)}@keyframes pulse{50%{opacity:.4}}@media (prefers-reduced-motion:reduce){.dot.run{animation:none}}
+.tag{font:600 10px/1 ui-monospace,monospace;padding:3px 6px;border-radius:4px;letter-spacing:.04em}.tag.imp{background:#4a3030;color:#e8b4b4}.tag.nit{background:#3a3a2c;color:#d7cba0}.tag.pre{background:#2c3844;color:#a9c4da}.tag.sec{background:#4a2c3c;color:#e0aec8}
+.finding{display:grid;gap:4px;background:#232323;border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin:8px 0}.finding .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.finding .file{font:11px ui-monospace,monospace;color:var(--muted)}.finding .acts{display:flex;gap:6px;margin-top:4px}.finding .acts button{min-height:38px;font-size:12px;padding:5px 10px}.finding.done{opacity:.55}.finding.dropped{opacity:.45}.verdict{font-size:11.5px;color:var(--muted)}
+table.votes{width:100%;border-collapse:collapse;font-size:12px}table.votes th,table.votes td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:center}table.votes th:first-child,table.votes td:first-child{text-align:left;max-width:34ch}table.votes th{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.vote-y{color:var(--ok)}.vote-n{color:var(--bad)}
+.card{background:#232323;border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:8px 0}.card .tier{font:600 10.5px/1 ui-monospace,monospace;padding:3px 7px;border-radius:4px}.tier.low{background:#263a2c;color:#a9d3b4}.tier.med{background:#3f3a26;color:#e0cf9a}.tier.high{background:#462a2a;color:#e6aaaa}
+.bar{display:flex;height:26px;border-radius:5px;overflow:hidden;border:1px solid var(--line);margin:5px 0 12px}.bar div{display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#181818;min-width:0;overflow:hidden;white-space:nowrap}.seg-fixed{background:#8fbf9f}.seg-wrong{background:#cf8a8a}.seg-int{background:#d7ba7d}.seg-dnm{background:#7d8a96}
+.metric{background:#232323;border:1px solid var(--line);border-radius:8px;padding:12px;flex:1 1 140px;min-width:130px}.metric b{display:block;font:600 22px/1.2 system-ui,sans-serif}.metric span{font-size:11.5px;color:var(--muted)}.metric.good b{color:var(--ok)}
+.queue{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.qitem{border:1px solid var(--line);border-radius:6px;padding:8px 12px;background:#232323;font:12px ui-monospace,monospace}.qitem.ok{border-color:#4c6b57}.qitem.fail{border-color:#7a4a4a;background:#2c2020}
+footer.page{padding:14px 18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}.banner{border:1px solid #6b5a34;background:#2c2718;color:#e0cf9a;font-size:12.5px;border-radius:6px;padding:9px 12px;margin:10px 0}.banner.red{border-color:#7a4a4a;background:#2c2020;color:#e6aaaa}.banner.green{border-color:#4c6b57;background:#20302a;color:#b9d9c2}
+@media(max-width:640px){main{padding:14px}.metric b{font-size:19px}table.votes{font-size:11px}}
+</style></head><body>
+<header class="page"><h1>Review Accelerators</h1><p>Ten tool concepts that cut the human time a pull request needs, each running below on fictional data. Grounded in "How the Claude Code team does code review" (claude.dev, Oct 2026) and the Little Grains learning path built from it. Every repo, PR, finding and metric here is invented for the demo.</p></header>
+<nav class="tabs" role="tablist" aria-label="Review tools" id="tabs"></nav>
+<main id="view"></main>
+<footer class="page">Fictional demo data throughout. No repository was queried, no check was really run, nothing leaves this page. Source article: claude.dev/blog/solving-code-review-at-anthropic. Companion learning path: Little Grains, "Code review at Anthropic" (12 lessons).</footer>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n};
+const chip=(t)=>el('span',t);
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- demo renderers ---------- */
+
+function evidenceGate(box){
+  const checks=[['Tests','52 passed, 0 failed - src/sync/*.test.js'],['Build','vite build ok in 41s'],['Types','tsc --noEmit clean'],['Visual','screenshot matches design mock (2px tolerance)']];
+  const run=el('button','Run self-checks');const ask=el('button','Request human review');ask.disabled=true;
+  const list=el('ul',undefined,'steps');const note=el('p','Before a PR exists, the agent runs what it can run and attaches the output. Reviewers read evidence, not claims.','small muted');
+  const status=el('div');const btnrow=el('div',undefined,'row');btnrow.append(run,ask);box.append(note,btnrow,list,status);
+  run.onclick=()=>{run.disabled=true;list.replaceChildren();status.replaceChildren();let i=0;
+    const step=()=>{if(i>=checks.length){status.replaceChildren(el('div','Evidence attached. A human now reviews judgment calls, not typos.','banner green'));ask.disabled=false;return}
+      const li=el('li');const d=el('span',undefined,'dot run');li.append(d,el('span',checks[i][0]+' - running...','mono small'));list.append(li);i++;
+      setTimeout(()=>{d.className='dot ok';li.lastChild.textContent=checks[i-1][0]+' - '+checks[i-1][1];step()},reduced?60:650)};
+    step()};
+}
+
+function aiFirstPass(box){
+  const findings=[
+    {tag:'imp',label:'Important',file:'src/sync/queue.js:31',text:'flush() drops a queued note when send() throws synchronously; the catch never runs for sync errors.'},
+    {tag:'imp',label:'Important',file:'src/sync/conflict.js:4',text:'Equal updatedAt values keep the local copy, so two devices saving in the same second always lose the remote edit.'},
+    {tag:'nit',label:'Nit',file:'src/ui/NoteEditor.jsx:24',text:'setQueued(true) is also called on the online path via markClean(); consider moving it into the offline branch.'},
+    {tag:'pre',label:'Pre-existing',file:'src/sync/queue.js:9',text:'JSON.parse can throw on a corrupted queue. Existed before this PR; flagged so it does not look like your bug.'}];
+  box.append(el('p','Every PR gets a machine review before a person looks. Findings land as inline comments, tagged by severity. Each one must be answered: fix it, or resolve the thread with a reason.','small muted'));
+  const left=el('p',undefined,'small');const list=el('div');box.append(left,list);let open=findings.length;
+  const upd=()=>{left.textContent=open?open+' finding'+(open>1?'s':'')+' waiting for an answer':'All findings answered - the PR is ready for a human.'};
+  findings.forEach(f=>{const d=el('div',undefined,'finding');const h=el('div',undefined,'head');h.append(el('span',f.label,'tag '+f.tag),el('span',f.file,'file'));d.append(h,el('span',f.text,'small'));
+    const acts=el('div',undefined,'acts');const fix=el('button','Fix');const res=el('button','Resolve with reason');
+    const done=v=>{if(d.classList.contains('done'))return;d.classList.add('done');open--;acts.replaceChildren(el('span',v,'verdict'));upd()};
+    fix.onclick=()=>done('Marked fixed - a follow-up commit clears it automatically.');res.onclick=()=>done('Resolved: "accepted risk, conflicts are rare in single-user use."');
+    acts.append(fix,res);d.append(acts);list.append(d)});
+  upd();
+}
+
+function verifierVoting(box){
+  const cands=[
+    {t:'Sync throw in flush() loses queued notes',v:[1,1,1,1,1],real:true},
+    {t:'Equal-timestamp conflict always favors local',v:[1,1,0,1,1],real:true},
+    {t:'Variable name "q" is unclear',v:[0,1,0,0,1],real:false,why:'style-only, dropped'},
+    {t:'localStorage may be unavailable in private mode',v:[1,0,1,0,0],real:false,why:'not reproducible, dropped'},
+    {t:'Missing retry jitter could hammer the API',v:[1,1,1,0,1],real:true},
+    {t:'Comment wording could be clearer',v:[0,0,1,0,0],real:false,why:'style-only, dropped'}];
+  box.append(el('p','Several agents propose findings; a separate panel votes on each before it is posted. Only findings enough verifiers agree are real reach the author. Toggle to compare what the author sees.','small muted'));
+  let filtered=true;const wrap=el('div');const tgl=el('button','Show unfiltered (all 6 candidates)');box.append(tgl,wrap);
+  const render=()=>{wrap.replaceChildren();const shown=cands.filter(c=>!filtered||c.real);
+    const tab=el('table',undefined,'votes');const hr=el('tr');hr.append(el('th','Candidate finding'));for(let i=1;i<=5;i++)hr.append(el('th','V'+i));hr.append(el('th','Posted?'));tab.append(hr);
+    shown.forEach(c=>{const r=el('tr');r.append(el('td',c.t));c.v.forEach(x=>r.append(el('td',x?'yes':'no','vote '+(x?'vote-y':'vote-n'))));const votes=c.v.reduce((a,b)=>a+b,0);
+      r.append(el('td',c.real?votes+'/5 posted':votes+'/5 - '+(c.why||'dropped'),c.real?'vote-y':'vote-n'));if(!c.real&&filtered)r.style.display='none';tab.append(r)});
+    wrap.append(el('p',filtered?'3 findings reach the author. 3 were voted out before costing anyone time.':'All 6 candidates shown. Without voting, the author answers style nits and ghosts too.','small muted'),tab)};
+  tgl.onclick=()=>{filtered=!filtered;tgl.textContent=filtered?'Show unfiltered (all 6 candidates)':'Show filtered (what the author sees)';render()};render();
+}
+
+function securityGate(box){
+  const finds=[{f:'config/deploy.js:12',t:'Credential-shaped string literal committed next to a deploy hook.'},{f:'src/ui/render.js:48',t:'User comment HTML injected without sanitizing; script tags survive.'}];
+  box.append(el('p','Security review runs separately and can block. A PR cannot merge while a finding is open - fix it, or close the thread with a short reason.','small muted'));
+  const merge=el('button','Merge PR');merge.disabled=true;const status=el('div');const list=el('div');const mrow=el('div',undefined,'row');mrow.append(merge);box.append(list,status,mrow);let open=finds.length;
+  const upd=()=>{status.replaceChildren();status.append(el('div',open?'Blocked: '+open+' open security finding'+(open>1?'s':'')+'.':'Security review clear. Merge unblocked.',open?'banner red':'banner green'));merge.disabled=open>0};
+  finds.forEach(f=>{const d=el('div',undefined,'finding');const h=el('div',undefined,'head');h.append(el('span','Security','tag sec'),el('span',f.f,'file'));d.append(h,el('span',f.t,'small'));
+    const acts=el('div',undefined,'acts');const fix=el('button','Fix in follow-up commit');const dismiss=el('button','Close with reason');
+    fix.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');open--;acts.replaceChildren(el('span','Fixed - the finding cleared itself when the fixing commit landed.','verdict'));upd()};
+    dismiss.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');open--;acts.replaceChildren(el('span','Closed: "string is a placeholder, real secret comes from CI env." Recorded, not hidden.','verdict'));upd()};
+    acts.append(fix,dismiss);d.append(acts);list.append(d)});
+  merge.onclick=()=>{status.replaceChildren(el('div','Merged. (In the demo. Nothing happened anywhere.)','banner green'))};upd();
+}
+
+function riskRouter(box){
+  const prs=[
+    {n:'PR #101',t:'Fix typo in onboarding copy',paths:['docs/onboarding.md'],tier:'low',appr:'No human approval needed once checks are green'},
+    {n:'PR #102',t:'Add dark mode toggle',paths:['src/ui/theme.js','src/ui/Toggle.jsx'],tier:'low',appr:'No human approval needed once checks are green'},
+    {n:'PR #103',t:'Rewrite response caching layer',paths:['src/cache/store.js'],tier:'med',appr:'1 human approval - sensitive area: caching'},
+    {n:'PR #104',t:'Update deploy workflow',paths:['.github/workflows/deploy.yml'],tier:'high',appr:'2 human approvals - CI workflow files always need people'}];
+  box.append(el('p','A classifier reads the change (not the author) and picks a risk tier. A second classifier asks: does this specific change still need a person even if its tier says no? Sensitive paths are hard-listed by owners.','small muted'));
+  const go=el('button','Classify the queue');const wrap=el('div');box.append(go,wrap);let i=0;
+  go.onclick=()=>{go.disabled=true;i=0;wrap.replaceChildren();
+    const next=()=>{if(i>=prs.length){wrap.append(el('div','Human attention went to 2 of 4 PRs. The typo fix never interrupted anyone.','banner green'));return}
+      const p=prs[i++];const c=el('div',undefined,'card');c.append(el('b',p.n+' - '+p.t),el('div','touching '+p.paths.join(', '),'small muted'));wrap.append(c);
+      setTimeout(()=>{const r=el('div',undefined,'row');r.append(el('span',p.tier.toUpperCase(),'tier '+p.tier),el('span',p.appr,'small'));c.append(r);next()},reduced?60:500)};
+    next()};
+}
+
+function roundCap(box){
+  box.append(el('p','An agent author and an agent reviewer can keep each other busy forever. The cap: after 3 rounds, the reviewer asks the author to step back and reconsider the approach; re-review then covers only the new diff, and findings never repeat.','small muted'));
+  const data=[5,3,1,1,0,1,0,0,1,0];let round=0;const wrap=el('div');const btn=el('button','Run next review round');const hist=el('div');const note=el('div');box.append(btn,hist,note,wrap);
+  btn.onclick=()=>{if(round>=3)return;const f=data[round];round++;
+    hist.append(el('div','Round '+round+': '+f+' new finding'+(f===1?'':'s')+(round>1?' (diff-only re-review, no repeats)':''),'card small'));
+    if(round>=3){btn.disabled=true;note.replaceChildren(el('div','Round cap reached. Reviewer to author: "Three rounds in - step back and check the approach, not just the lines." 59% of what it kept flagging was old code anyway.','banner'))}};
+}
+
+function noiseTracker(box){
+  const weeks=[
+    {w:'Week 1',fixed:41,wrong:12,int:9,dnm:6},
+    {w:'Week 2',fixed:38,wrong:14,int:8,dnm:9},
+    {w:'Week 3',fixed:44,wrong:7,int:8,dnm:4,note:'style-only findings dropped from posting'},
+    {w:'Week 4',fixed:47,wrong:5,int:6,dnm:3}];
+  box.append(el('p','Every reviewer comment is sorted by what the author did with it: fixed it, said it was wrong, said it was intentional, or said it did not matter. Noise is measured, not vibes.','small muted'));
+  const labels=[['fixed','Fixed','seg-fixed'],['wrong','Said wrong','seg-wrong'],['int','Intentional','seg-int'],['dnm','Did not matter','seg-dnm']];
+  weeks.forEach(w=>{const total=w.fixed+w.wrong+w.int+w.dnm;box.append(el('div',w.w+(w.note?' - '+w.note:''),'small muted'));const b=el('div',undefined,'bar');
+    labels.forEach(([k,,cls])=>{const v=w[k];const s=el('div',Math.round(v/total*100)+'%',cls);s.style.width=(v/total*100)+'%';b.append(s)});box.append(b)});
+  const leg=el('div',undefined,'row small');labels.forEach(([,l,cls])=>{const s=el('span',undefined,cls);s.style.cssText='width:12px;height:12px;border-radius:3px;display:inline-block';const w=el('span',undefined,'row');w.style.gap='5px';w.append(s,el('span',l));leg.append(w)});box.append(leg);
+  box.append(el('p','Noise share fell from 40% to 22% in four weeks while real catches rose. Flagging more is easy; this dashboard is what keeps "more" honest.','small'));
+}
+
+function incidentEval(box){
+  const cases=[
+    ['INC-041','PR #88 - retry loop without backoff took the API down','confirmed by on-call'],
+    ['INC-052','PR #130 - cache key collision served stale dashboards','confirmed by reviewer'],
+    ['INC-057','PR #141 - timezone bug published posts a day early','confirmed by author'],
+    ['INC-063','PR #167 - migration locked the table for 9 minutes','confirmed by DBA'],
+    ['INC-071','PR #190 - feature flag default enabled unfinished flow','confirmed by on-call']];
+  const scores={'Reviewer v1.1':[3,'catches INC-052, INC-063, INC-071'],'Reviewer v1.2':[5,'catches all five, incl. the retry loop it missed last month']};
+  box.append(el('p','Past incident PRs, with their fix-forwards, become an eval set confirmed by the engineers who know the code. The reviewer runs against it daily; every prompt or model change is rescored against all of it.','small muted'));
+  const tab=el('table',undefined,'votes');const hr=el('tr');['Eval case','What went wrong','Confirmed'].forEach(h=>hr.append(el('th',h)));tab.append(hr);
+  cases.forEach(c=>{const r=el('tr');c.forEach(x=>{const td=el('td',x);td.style.textAlign='left';r.append(td)});tab.append(r)});box.append(tab);
+  const wrap=el('div',undefined,'row');const out=el('div');Object.keys(scores).forEach(k=>{const b=el('button','Score '+k);b.onclick=()=>{out.replaceChildren(el('div',k+': '+scores[k][0]+'/5 incident bugs caught - '+scores[k][1]+'.','banner '+(scores[k][0]===5?'green':'')))};wrap.append(b)});box.append(wrap,out);
+}
+
+function mergeQueue(box){
+  box.append(el('p','Two PRs that each pass on their own can break main together. The queue re-runs every check against main with the changes combined, so the conflict is caught before anyone sees it.','small muted'));
+  const a=el('span','PR A: renames getConfig() -> loadConfig()','qitem');const b=el('span','PR B: adds a call to getConfig()','qitem');const q=el('div',undefined,'queue');q.append(a,el('span','+','muted'),b);
+  const direct=el('button','Merge both directly');const queued=el('button','Use the merge queue');const reset=el('button','Reset');const out=el('div');const qrow=el('div',undefined,'row');qrow.append(direct,queued,reset);box.append(q,qrow,out);
+  const clear=()=>{a.className='qitem';b.className='qitem';out.replaceChildren();direct.disabled=queued.disabled=false};
+  direct.onclick=()=>{clear();direct.disabled=queued.disabled=true;a.classList.add('ok');b.classList.add('ok');
+    setTimeout(()=>{out.replaceChildren(el('div','main is broken: B calls a function A just renamed. Both were green alone. Revert starts now.','banner red'))},reduced?60:600)};
+  queued.onclick=()=>{clear();direct.disabled=queued.disabled=true;
+    setTimeout(()=>{a.classList.add('ok');out.replaceChildren(el('div','Queue: A lands. Combined check for B fails - B is bounced back for a rebase, main stays green.','banner green'));b.classList.add('fail')},reduced?60:600)};
+  reset.onclick=clear;
+}
+
+function timeGuardrail(box){
+  box.append(el('p','The whole point is less human time per change, with reverts and incidents as the guardrail. If those rise, time was not saved - it was moved to fixing.','small muted'));
+  const before=[['2.1','Human approvals per PR (median)',''],['3.9','Human approvals per PR (p95)',''],['114 min','Median wait on a person',''],['100','Revert rate index','']];
+  const after=[['0.4','Human approvals per PR (median)','good'],['1.0','Human approvals per PR (p95)',''],['26 min','Median wait on a person','good'],['58','Revert rate index (-42%)','good']];
+  const wrap=el('div');const tgl=el('button','Show after adoption');let aft=false;box.append(tgl,wrap);
+  const render=()=>{wrap.replaceChildren();const row=el('div',undefined,'row');(aft?after:before).forEach(m=>{const d=el('div',undefined,'metric '+m[2]);d.append(el('b',m[0]),el('span',m[1]));row.append(d)});wrap.append(row);
+    wrap.append(el('p',aft?'PRs merged doubled, reverts fell. The guardrail says the saved time is real.':'Before: every PR waited on a person, and people were the bottleneck.','small'))};
+  tgl.onclick=()=>{aft=!aft;tgl.textContent=aft?'Show before adoption':'Show after adoption';render()};render();
+}
+
+/* ---------- tool catalog ---------- */
+const TOOLS=[
+ {n:'Evidence Gate',pitch:'Nothing reaches review until the author-agent attaches proof: tests, build, types, a screenshot. "Show the output" replaces "trust me, done".',lesson:'verified-before-the-pr',render:evidenceGate,
+  value:['Catches routine mistakes before any human is involved','The article credits verification with 2-3x better agent results']},
+ {n:'AI First Pass',pitch:'A machine review on every PR before a person looks: does it solve the problem, fit the system, break something else? Findings arrive tagged and must all be answered.',lesson:'ai-review-on-every-pr',
+  render:aiFirstPass,value:['PRs with substantive review comments: 16% -> 54%','Most small PRs come back clean in minutes']},
+ {n:'Verifier Voting',pitch:'Candidate findings are voted on by a separate panel of agents. Only consensus-real bugs are posted; style, diagnostics and ghosts are dropped first.',lesson:'ai-review-on-every-pr',render:verifierVoting,
+  value:['False positives never cost the author a round','Filters were A/B tested on real PRs before being kept']},
+ {n:'Security Gate',pitch:'A dedicated security pass whose open findings block merge. Fix it, or close the thread with a recorded reason; a fixing commit clears it automatically.',lesson:'security-and-ci-that-block',render:securityGate,
+  value:['No silent merges over an open security finding','False positives are cleared with a reason, not ignored']},
+ {n:'Risk Router',pitch:'A classifier tiers each change low/medium/high and sets how many humans must approve. Owners hard-list paths (CI, billing) that always need people.',lesson:'risk-based-approval',render:riskRouter,
+  value:['A docs fix never pulls a senior out of deep work','The change sets the tier, not the author']},
+ {n:'Round Cap',pitch:'Review must converge: max 3 rounds, then the reviewer asks for a rethink; re-review is diff-only and never repeats a posted finding.',lesson:'review-that-converges',render:roundCap,
+  value:['One uncapped PR ran 50+ rounds overnight','59% of repeat flags were pre-existing code, not new bugs']},
+ {n:'Noise Tracker',pitch:'Every posted finding is scored by what the author did with it - fixed, wrong, intentional, or did not matter - so reviewer precision is a measured number.',lesson:'human-time-and-attention',render:noiseTracker,
+  value:['Noise is expensive with agent authors: they fix every nit','Priorities written down: real bugs first, fewer rounds second']},
+ {n:'Incident Eval',pitch:'Incidents and reverts become a confirmed eval set. The reviewer runs against it daily; any prompt, tool or model change is rescored before it ships.',lesson:'incidents-are-the-eval',render:incidentEval,
+  value:['Every outage makes the reviewer permanently smarter','Regression in recall is caught before users are']},
+ {n:'Merge Queue',pitch:'Checks re-run against main with pending changes combined, so two individually-green PRs cannot land a broken main. Flags and fast rollback sit under it.',lesson:'merge-flags-and-rollback',render:mergeQueue,
+  value:['"Few get through all layers; rollback handles the rest"','Flags turn bad behavior off without a deploy']},
+ {n:'Time Guardrail',pitch:'The scoreboard: human approvals per PR, wait-on-person time, and the revert/incident rate that decides whether saved time is real.',lesson:'human-time-and-attention',render:timeGuardrail,
+  value:['Median human approvals per PR fell to 0.4','Reverts down 40%+ while merged PRs doubled']}
+];
+
+let cur=0;
+function nav(){const t=$('tabs');t.replaceChildren();TOOLS.forEach((tool,i)=>{const b=el('button');b.setAttribute('role','tab');b.setAttribute('aria-selected',String(i===cur));b.className=i===cur?'active':'';b.append(el('b',String(i+1).padStart(2,'0')),el('span',tool.n));b.onclick=()=>{cur=i;render();t.children[i].scrollIntoView({inline:'center',block:'nearest',behavior:reduced?'auto':'smooth'})};t.append(b)})}
+function render(){nav();const v=$('view');v.replaceChildren();const tool=TOOLS[cur];
+  v.append(el('h2',tool.n,'pitch'),el('p',tool.pitch,'based'));v.querySelector('h2').style.margin='0 0 8px';
+  const val=el('div',undefined,'value');tool.value.forEach(x=>val.append(chip(x)));v.append(val);
+  const demo=el('div',undefined,'demo');demo.append(el('h3','Live demo - fictional data'));tool.render(demo);v.append(demo);
+  const src=el('p','Learning-path lesson: ','based');src.append(el('code','code-review-at-anthropic/'+tool.lesson));v.append(src)}
+render();
+</script></body></html>
