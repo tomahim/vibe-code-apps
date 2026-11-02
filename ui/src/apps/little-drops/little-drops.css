@@ -24,3 +24,5 @@
 .ld-closeup .ld-scene{touch-action:pan-y;cursor:ew-resize}.ld-closeup .ld-scene:active{cursor:grabbing}
 
 .ld-gate-controls{margin-top:16px;padding:15px;border:1px solid #a8bfae;background:#f2f1e3;border-radius:7px}.ld-gate-controls button{min-height:44px;padding:11px 14px;border:1px solid #a87b50;border-radius:5px;background:#fbf3de;color:#6b482b;font-size:12px}.ld-gate-controls button[aria-pressed=true]{background:#795234;color:#fff}.ld-gate-controls p{margin-bottom:0}
+
+.ld-pipe-orientation{margin-top:16px}.ld-pipe-orientation button{min-height:44px;padding:10px 13px;border:1px solid #8eafa7;border-radius:5px;background:#f5f8ed;color:#285d59;font-size:12px}.ld-pipe-orientation button[aria-pressed=true]{background:#285e61;color:#fff}.ld-pipe-locator{display:block;width:100%;max-width:480px;height:auto;margin:10px 0}.ld-pipe-locator text{font:11px system-ui;fill:#42665e}

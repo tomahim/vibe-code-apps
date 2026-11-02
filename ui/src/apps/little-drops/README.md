@@ -53,3 +53,6 @@ The water-level pipe now has a manipulable 3D demonstration gate: opening turns 
 
 ## Release 013
 Travel now passes the demonstration gate into the far end of the section. A closed gate clamps the camera upstream without changing the requested slider position; opening continues at that position. Closing after passing relocates the view upstream, named by the live status. This is a navigation rule for the fictional toy, not a real valve behavior. A pure clamped camera helper and boundary tests keep the plate from being crossed while closed.
+
+## Release 014
+Water-level navigation gains an explicit look-back toggle and an accessible pipe locator showing the actual camera position, gate and viewing direction. Requested travel remains distinct from a view held before a closed gate. Looking back changes view only, never travel or gate state; no automatic spinning or extra animation. Pipe geometry extends on both sides so the reversed view stays within the section. This is orientation in a fictional toy, not a distribution map or hydraulic measurement.
