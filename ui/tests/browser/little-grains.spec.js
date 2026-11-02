@@ -9,6 +9,7 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
   page.route('**/api/learning/**', route => {
+    if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
     const url = new URL(route.request().url());
     if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), description: 'Everyday language', progress: progress(), learning_paths: [{ ...row(id.path, 'Early Childhood English'), progress: progress(), lessons: Array.from({ length: lessonCount }, (_, i) => ({ ...row(i ? `lesson-${i}` : id.lesson, i ? `Everyday phrase ${i + 1}` : 'Bath time and care'), progress: progress() })) }] }], rewards: { drops: Number(read) + Number(readSecond) + Number(answered) * 105, carrots: Number(answered) }, recent_lessons: recentLessons } });
@@ -349,6 +350,7 @@ test('phone replay asks for a full typed answer and rotates after a wrong answer
 test('expired token is cleared', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('genious_token', 'stale-jwt'));
   await page.route('**/api/learning/garden/', route => route.fulfill({ status: 401, json: { error: 'Expired' } }));
+  await page.route('**/api/learning/health/', route => route.fulfill({ json: { status: 'ok', database: 'ok' } }));
   await page.goto('/apps/little-grains');
   await page.waitForURL('**/login?next=/apps/little-grains');
   expect(await page.evaluate(() => localStorage.getItem('genious_token'))).toBeNull();
@@ -381,6 +383,7 @@ test('the leaderboard charts the growth of Drops and Carrots over time', async (
   mockApi(page);
   // Keep this test fast: the chart does not depend on the 3D garden scene.
   await page.route('**/api/learning/garden/', route => route.fulfill({ json: { themes: [], rewards: { drops: 0, carrots: 0 }, recent_lessons: [] } }));
+  await page.route('**/api/learning/health/', route => route.fulfill({ json: { status: 'ok', database: 'ok' } }));
   await page.goto('/apps/little-grains');
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
   const leaderboard = page.getByRole('dialog', { name: 'Leaderboard' });
@@ -441,6 +444,7 @@ test('phone practice quiz stays open at zero gaps with unread lessons', async ({
   const lesson = () => ({ ...row(id.lesson, 'Bath time and care'), progress: { ...progress(), cards_total: 4, checkpoints_total: 1, questions_total: 3, lessons_total: 1, completed: solved.size === 2 } });
   await page.route('**/api/learning/**', route => {
     const url = new URL(route.request().url());
+    if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress: progress(), learning_paths: [{ ...row(id.path, 'English for babies'), progress: progress(), catch_up: { eligible: true, remaining: 2 - solved.size }, lessons: [lesson(), { ...row("unread-lesson", "Still unread"), position: 2, progress: { cards_completed: 0, cards_total: 1, questions_correct: 0, questions_total: 1, started: false, completed: false } }] }] }], rewards: { drops: 4, carrots: 1 }, recent_lessons: [] } });
     if (url.pathname.endsWith('/catch-up/')) {
       const done = solved.size === 2;
@@ -684,6 +688,7 @@ test('desktop: eligible practice card opens the quiz from outside the panel', as
   const progress = { cards_completed: 1, cards_total: 1, checkpoints_correct: 0, checkpoints_total: 1, questions_correct: 0, questions_total: 1, lessons_completed: 0, lessons_total: 1, started: true, completed: false };
   await page.route('**/api/learning/**', route => {
     const url = new URL(route.request().url());
+    if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), progress, learning_paths: [{ ...row(id.path, 'Early Childhood English'), progress, catch_up: { eligible: true, remaining: 1 }, lessons: [{ ...row(id.lesson, 'Bath time and care'), progress }] }] }], rewards: { drops: 1, carrots: 0 }, recent_lessons: [] } });
     if (url.pathname.endsWith('/catch-up/')) return route.fulfill({ json: { learning_path_id: id.path, eligible: true, remaining: 1, questions: [{ id: q1, lesson_id: id.lesson, lesson_title: 'Bath time and care', position: 1, after_card_position: 1, type: 'multiple_choice', prompt: 'What is the water like?', options: [{ id: 'warm', text: 'Warm' }, { id: 'cold', text: 'Cold' }] }] } });
     return route.fulfill({ json: {} });

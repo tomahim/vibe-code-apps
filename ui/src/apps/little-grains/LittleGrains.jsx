@@ -19,6 +19,57 @@ const REWARD_COPY = {
   },
 };
 
+// Cold start: Railway puts the api to sleep after a quiet spell, and the
+// first request can fail before it is awake. Wait on a real database health
+// check before loading the garden, then keep pinging it while this tab is
+// visible so the api stays awake during the session.
+const HEALTH_URL = "/api/learning/health/";
+const HEALTH_TIMEOUT_MS = 10000;
+const HEALTH_MAX_ATTEMPTS = 24;
+const HEALTH_WAIT_BUDGET_MS = 120000; // Total cap: attempts alone could stretch much longer.
+const HEALTH_RETRY_BASE_MS = 1500;
+const HEALTH_RETRY_CAP_MS = 5000;
+const KEEP_AWAKE_INTERVAL_MS = 10000;
+
+// Window overrides let browser tests run the retry loop fast.
+function healthMaxAttempts() { return window.__GRAINS_HEALTH_MAX_ATTEMPTS__ ?? HEALTH_MAX_ATTEMPTS; }
+function healthWaitBudget() { return window.__GRAINS_HEALTH_BUDGET_MS__ ?? HEALTH_WAIT_BUDGET_MS; }
+function healthRetryDelay(attempt) { return window.__GRAINS_HEALTH_RETRY_MS__ ?? Math.min(HEALTH_RETRY_BASE_MS * attempt, HEALTH_RETRY_CAP_MS); }
+function keepAwakeInterval() { return window.__GRAINS_KEEP_AWAKE_MS__ ?? KEEP_AWAKE_INTERVAL_MS; }
+
+async function pingHealth() {
+  const response = await fetch(HEALTH_URL, { cache: "no-store", signal: AbortSignal.timeout(HEALTH_TIMEOUT_MS) });
+  if (!response.ok) return false;
+  const data = await response.json().catch(() => ({}));
+  return data.status === "ok";
+}
+
+// The carton fills and empties in a loop on purpose: readiness is unknown,
+// so the animation must not pretend to be determinate progress.
+function WakeUpLoader({ attempt, exhausted, onRetry }) {
+  const message = exhausted
+    ? "The garden is taking too long to wake up."
+    : attempt <= 2 ? "Waking up the garden…"
+    : attempt <= 6 ? "The server is still waking up…"
+    : "Almost there, still starting…";
+  const detail = exhausted
+    ? "The server did not answer in time. Check your connection, then try again."
+    : "The server sleeps after a quiet spell - the first load can take a minute or two.";
+  return <div className="grains-loader" role="status" aria-live="polite">
+    <div className="grains-carton" aria-hidden="true">
+      <span className="grains-carton-flap left" />
+      <span className="grains-carton-flap right" />
+      <span className="grains-carton-fill" />
+      <span className="grains-carton-body" />
+    </div>
+    <h2>{message}</h2>
+    <p>{detail}</p>
+    {exhausted
+      ? <button className="grains-loader-retry" onClick={onRetry}>Try again</button>
+      : <span className="grains-loader-attempt">Checking the server · attempt {attempt}</span>}
+  </div>;
+}
+
 function redirectToLogin() {
   clearToken();
   const next = `${window.location.pathname}${window.location.search}`;
@@ -480,6 +531,8 @@ export default function LittleGrains() {
   const lastGarden = useRef(null);
   const [garden, setGarden] = useState(null);
   const [error, setError] = useState("");
+  const [startup, setStartup] = useState({ phase: "waking", attempt: 1 });
+  const [wakeRun, setWakeRun] = useState(0);
   const [reader, setReader] = useState(() => {
     const current = parseRoute(window.location.pathname);
     return current.lessonId && current.step ? { lessonId: current.lessonId, step: current.step } : null;
@@ -546,9 +599,41 @@ export default function LittleGrains() {
   useEffect(() => {
     if (!getToken()) { const id = setTimeout(redirectToLogin, 0); return () => clearTimeout(id); }
     let active = true;
-    refresh().catch((err) => { if (active) setError(err.message); });
+    setStartup({ phase: "waking", attempt: 1 });
+    (async () => {
+      const maxAttempts = healthMaxAttempts();
+      const deadline = Date.now() + healthWaitBudget();
+      for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+        setStartup({ phase: "waking", attempt });
+        let ready = false;
+        try { ready = await pingHealth(); } catch { ready = false; }
+        if (!active) return;
+        if (ready) break;
+        if (attempt >= maxAttempts || Date.now() >= deadline) { setStartup({ phase: "exhausted", attempt }); return; }
+        await new Promise((resolve) => { setTimeout(resolve, healthRetryDelay(attempt)); });
+      }
+      if (!active) return;
+      setStartup({ phase: "ready", attempt: 0 });
+      refresh().catch((err) => { if (active) setError(err.message); });
+    })();
     return () => { active = false; };
-  }, [refresh]);
+  }, [refresh, wakeRun]);
+
+  // Keep the api awake while this tab is in front: one health ping every
+  // 10s, paused whenever the tab is hidden so background tabs stay quiet.
+  useEffect(() => {
+    if (startup.phase !== "ready") return undefined;
+    let timer = null;
+    const ping = () => { pingHealth().catch(() => {}); };
+    const stop = () => { if (timer !== null) { clearInterval(timer); timer = null; } };
+    const start = () => { if (timer === null) timer = setInterval(ping, keepAwakeInterval()); };
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") { ping(); start(); } else stop();
+    };
+    if (document.visibilityState === "visible") start();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => { stop(); document.removeEventListener("visibilitychange", onVisibility); };
+  }, [startup.phase]);
 
   useEffect(() => {
     if (!garden || !mount.current) return;
@@ -575,7 +660,9 @@ export default function LittleGrains() {
   }, [reader, catchUp, showLeaderboard, rewardInfo, closeReader]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
-    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{!garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
+    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{startup.phase !== "ready"
+        ? <WakeUpLoader attempt={startup.attempt} exhausted={startup.phase === "exhausted"} onRetry={() => setWakeRun((run) => run + 1)} />
+        : !garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}

@@ -2,7 +2,7 @@ import random
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
-from django.db import transaction
+from django.db import DatabaseError, connection, transaction
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -20,6 +20,25 @@ from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Questi
 from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
+
+
+@never_cache
+@require_GET
+def health(request):
+    """Cold-start probe for the Little Grains loader.
+
+    Deliberately unauthenticated: the app polls this before it knows whether
+    the API is awake, and it must answer even before a learner signs in. A
+    real database round-trip is what "ready" means here - a plain 200 from
+    Django would not prove the API can serve garden data yet.
+    """
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            cursor.fetchone()
+    except DatabaseError:
+        return JsonResponse({"status": "error", "database": "unreachable"}, status=503)
+    return JsonResponse({"status": "ok", "database": "ok"})
 
 
 def catch_up_payload(state, path_lessons):

@@ -2,13 +2,34 @@ import json
 from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 
+from unittest import mock
+
 from django.contrib.auth import get_user_model
+from django.db import DatabaseError
 from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .rewards import chart, totals
+
+
+class LearningHealthTests(TestCase):
+    """The cold-start loader depends on this probe: it must answer without
+    authentication and fail loudly when the database cannot be reached."""
+
+    def test_health_reports_database_roundtrip_without_authentication(self):
+        response = self.client.get("/api/learning/health/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"status": "ok", "database": "ok"})
+        self.assertIn("no-store", response["Cache-Control"])
+
+    def test_health_returns_503_when_the_database_is_unreachable(self):
+        with mock.patch("apps.learning.views.connection") as connection:
+            connection.cursor.side_effect = DatabaseError("connection refused")
+            response = self.client.get("/api/learning/health/")
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.json(), {"status": "error", "database": "unreachable"})
 
 
 class LearningAPITests(TestCase):

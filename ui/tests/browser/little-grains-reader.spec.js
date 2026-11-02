@@ -22,6 +22,7 @@ async function fixture(page, { delay = false, fail = false, empty = false } = {}
   const progress = () => ({ cards_completed: Number(read), cards_total: cards.length, checkpoints_correct: Number(answered) });
   await page.route('**/api/learning/**', async route => {
     const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (path.endsWith('/garden/')) return route.fulfill({ json: { themes: [], rewards: {} } });
     if (path.endsWith('/open/')) return route.fulfill({ json: {} });
     if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { progress: progress() } }); }
