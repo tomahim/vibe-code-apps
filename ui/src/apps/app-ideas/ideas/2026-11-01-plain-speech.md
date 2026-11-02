@@ -4,6 +4,7 @@ tagline: Take One Piece of Jargon a Day and Rewrite It So a Tired Reader Gets It
 pitch: A daily rewriting exercise that hands you dense professional prose (legal, medical, corporate) and coaches you to make it plain, concrete and human.
 domains: [WRITE, LEARN]
 created: 2026-11-01T06:02:14Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
