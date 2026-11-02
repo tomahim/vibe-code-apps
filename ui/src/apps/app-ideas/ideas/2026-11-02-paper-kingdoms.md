@@ -4,6 +4,7 @@ tagline: Sealand, Hutt River, Christiania - A Gazetteer of the Countries That Al
 pitch: Explore the world's micronations and unrecognized states through sourced dossiers - founders, constitutions, stamps, currencies and fates - pinned to the map.
 domains: [HIST, LEARN]
 created: 2026-11-02T06:02:53Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
