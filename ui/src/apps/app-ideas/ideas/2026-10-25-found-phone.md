@@ -4,6 +4,7 @@ tagline: A Story Told Through Someone Else's Phone - Read the Thread, Find the T
 pitch: Short fiction experienced inside a found phone: scroll messages, photos and notes left by a stranger, and piece together what happened from what they typed and what they didn't.
 domains: [WRITE, MEDIA]
 created: 2026-10-25T06:04:13Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
