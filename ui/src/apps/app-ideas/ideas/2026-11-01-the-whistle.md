@@ -4,6 +4,7 @@ tagline: You Are the Referee - Real Incidents, Three Seconds to Decide, the Laws
 pitch: Watch real amateur football incidents, make the call under time pressure, and get the verdict from the Laws of the Game with the reasoning referees actually use.
 domains: [SPORT, LEARN]
 created: 2026-11-01T06:03:26Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
