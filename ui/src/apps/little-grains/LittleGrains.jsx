@@ -5,6 +5,7 @@ import { BRAND_BADGE } from "../../config/brand.js";
 import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
+import { GrainsLoader } from "./Loader.jsx";
 import "./garden/garden.css";
 import "./little-grains.css";
 
@@ -42,32 +43,6 @@ async function pingHealth() {
   if (!response.ok) return false;
   const data = await response.json().catch(() => ({}));
   return data.status === "ok";
-}
-
-// The carton fills and empties in a loop on purpose: readiness is unknown,
-// so the animation must not pretend to be determinate progress.
-function WakeUpLoader({ attempt, exhausted, onRetry }) {
-  const message = exhausted
-    ? "The garden is taking too long to wake up."
-    : attempt <= 2 ? "Waking up the garden…"
-    : attempt <= 6 ? "The server is still waking up…"
-    : "Almost there, still starting…";
-  const detail = exhausted
-    ? "The server did not answer in time. Check your connection, then try again."
-    : "The server sleeps after a quiet spell - the first load can take a minute or two.";
-  return <div className="grains-loader" role="status" aria-live="polite">
-    <div className="grains-carton" aria-hidden="true">
-      <span className="grains-carton-flap left" />
-      <span className="grains-carton-flap right" />
-      <span className="grains-carton-fill" />
-      <span className="grains-carton-body" />
-    </div>
-    <h2>{message}</h2>
-    <p>{detail}</p>
-    {exhausted
-      ? <button className="grains-loader-retry" onClick={onRetry}>Try again</button>
-      : <span className="grains-loader-attempt">Checking the server · attempt {attempt}</span>}
-  </div>;
 }
 
 function redirectToLogin() {
@@ -660,9 +635,11 @@ export default function LittleGrains() {
   }, [reader, catchUp, showLeaderboard, rewardInfo, closeReader]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
-    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{startup.phase !== "ready"
-        ? <WakeUpLoader attempt={startup.attempt} exhausted={startup.phase === "exhausted"} onRetry={() => setWakeRun((run) => run + 1)} />
-        : !garden && !error && <div className="grains-stage-message" role="status">Planting your garden…</div>}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
+    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
+        ? <GrainsLoader exhausted onRetry={() => setWakeRun((run) => run + 1)} />
+        : startup.phase !== "ready"
+          ? <GrainsLoader attempt={startup.attempt} />
+          : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}

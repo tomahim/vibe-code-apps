@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
+import { GrainsBootLoader } from "../apps/little-grains/Loader.jsx";
 import Gallery from "../pages/Gallery.jsx";
 import Login from "../pages/Login.jsx";
 import Profile from "../pages/Profile.jsx";
@@ -58,7 +59,7 @@ export default function App() {
   }
 
   if (path.startsWith("/apps/little-grains")) {
-    return <Suspense fallback={<div>Opening the garden…</div>}><LittleGrains /></Suspense>;
+    return <Suspense fallback={<GrainsBootLoader />}><LittleGrains /></Suspense>;
   }
 
   if (path.startsWith("/apps/livetrail-scrap")) {

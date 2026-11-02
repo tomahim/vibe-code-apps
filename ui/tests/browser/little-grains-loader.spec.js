@@ -87,3 +87,30 @@ test('keep-alive pings every interval while visible, pauses when hidden', async 
   await setVisibility(page, 'visible');
   await expect.poll(() => state.calls, { timeout: 3000 }).toBeGreaterThan(hiddenCalls + 1);
 });
+
+test('the carton is the only loader through the whole startup', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const state = await fixture(page, { maxAttempts: 4, retryMs: 200 });
+  state.failCount = 2; // spend a moment in the waking phase
+  // Hold the garden response back so the data-loading phase is observable.
+  let releaseGarden;
+  const gardenGate = new Promise((resolve) => { releaseGarden = resolve; });
+  await page.route('**/api/learning/garden/', async (route) => {
+    await gardenGate;
+    return route.fulfill({ json: { themes: [], rewards: {}, recent_lessons: [] } });
+  });
+  await page.goto('/apps/little-grains');
+  const loader = page.locator('.grains-loader');
+  await expect(loader).toBeVisible(); // waking phase: carton plus messages
+  await expect(loader).toHaveCount(1);
+  await expect(loader.getByText(/attempt/)).toBeVisible();
+  // Api awake, garden fetch still in flight: the same loader, now bare.
+  await expect(loader.getByText(/attempt/)).toHaveCount(0, { timeout: 5000 });
+  await expect(loader).toHaveCount(1);
+  await expect(loader.locator('.grains-carton')).toBeVisible();
+  await expect(page.getByText(/opening the garden/i)).toHaveCount(0);
+  await expect(page.getByText(/planting your garden/i)).toHaveCount(0);
+  releaseGarden();
+  await expect(page.getByText('Your garden is ready')).toBeVisible({ timeout: 10000 });
+  await expect(loader).toHaveCount(0);
+});
