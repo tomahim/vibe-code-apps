@@ -7,6 +7,28 @@ const colors = { soil: 0xd4bfa4, grass: 0xb5cab5, pipe: 0x266b73, water: 0x73d7d
 export default function CityScene({ selected, cutaway, height, onSelect }) {
   const [closeup, setCloseup] = useState(false), [travel, setTravel] = useState(35);
   const immersion = useRef({closeup,travel}); immersion.current={closeup,travel};
+  const drag = useRef(null);
+  function startTravel(event) {
+    if (!closeup || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, value: travel, active: false };
+  }
+  function moveTravel(event) {
+    const gesture = drag.current;
+    if (!gesture || gesture.id !== event.pointerId) return;
+    const dx = event.clientX - gesture.x, dy = event.clientY - gesture.y;
+    if (!gesture.active) {
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) { drag.current = null; return; }
+      if (Math.abs(dx) < 8) return;
+      gesture.active = true;
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+    setTravel(Math.max(0, Math.min(100, Math.round(gesture.value + dx / event.currentTarget.clientWidth * 100))));
+  }
+  function endTravel(event) {
+    if (drag.current?.id !== event.pointerId) return;
+    drag.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  }
   const host = useRef(null), state = useRef({ selected, cutaway, height, onSelect });
   state.current = { selected, cutaway, height, onSelect };
   const [paused, setPaused] = useState(false), [systemReduced, setSystemReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -156,9 +178,9 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     return ()=>{disposed=true;cancelAnimationFrame(frame);observer?.disconnect();intersection?.disconnect();document.removeEventListener('visibilitychange',visibility);motion.removeEventListener('change',motionChange);invalidate.current=()=>{};renderer.domElement.removeEventListener('click',click);renderer.domElement.removeEventListener('webglcontextlost',lost);resources.forEach(r=>r.dispose());renderer.dispose();renderer.domElement.remove();};
   }, []);
   return <><div className={`ld-scene-wrap${dusk ? ' ld-dusk' : ''}${closeup ? ' ld-closeup' : ''}`}>
-    <div className="ld-scene" ref={host} hidden={failed}/>
+    <div className="ld-scene" ref={host} hidden={failed} onPointerDown={startTravel} onPointerMove={moveTravel} onPointerUp={endTravel} onPointerCancel={endTravel} onLostPointerCapture={()=>{drag.current=null;}}/>
     {failed&&<div className="ld-fallback"><span>◈</span><h3>The journey still works.</h3><p>3D is unavailable on this device. Use the stops below to explore every explanation and experiment.</p></div>}
     <div className="ld-scene-note">{closeup?'AT WATER LEVEL':cutaway?'BELOW THE SURFACE':'A SMALL CITY, A BIG JOURNEY'}<span>Illustrative model · not to scale</span></div>
     {!failed&&<><button className="ld-atmosphere" aria-pressed={dusk} onClick={()=>setDusk(v=>!v)}>{dusk?'☾ Dusk view':'☀ Daylight view'}</button><div className="ld-camera"><button aria-label="Rotate city left" onClick={()=>setTurn(v=>v-.3)}>↶</button><button aria-label="Reset city view" onClick={()=>setTurn(0)}>⌂</button><button aria-label="Rotate city right" onClick={()=>setTurn(v=>v+.3)}>↷</button></div></>}
-  </div>{!failed&&<div className="ld-immersion-controls"><button aria-pressed={closeup} onClick={()=>setCloseup(v=>!v)}>{closeup?'Return to city overview':'Get close to the flow'}</button>{closeup&&<div><label htmlFor="ld-travel">Move through the pipe <output>{travel}%</output></label><input id="ld-travel" type="range" min="0" max="100" value={travel} onChange={e=>setTravel(Number(e.target.value))}/><p>An open-topped fictional pipe at water level. Drag to move closer. Beads suggest movement, not measured speed, pressure or a water-quality view. The story stops below still control the city journey.</p></div>}</div>}{!failed&&<div className="ld-motion-controls"><button aria-pressed={paused} disabled={systemReduced} onClick={()=>setPaused(v=>!v)}>{systemReduced ? 'System reduced motion' : paused ? 'Resume city motion' : 'Pause city motion'}</button><p>{systemReduced ? 'Your device requests reduced motion. The city stays still.' : paused ? 'City motion paused. You can still explore each stop.' : 'Pause decorative city motion while you read.'} Journey playback is controlled separately below.</p></div>}</>;
+  </div>{!failed&&<div className="ld-immersion-controls"><button aria-pressed={closeup} onClick={()=>setCloseup(v=>!v)}>{closeup?'Return to city overview':'Get close to the flow'}</button>{closeup&&<div><label htmlFor="ld-travel">Move through the pipe <output>{travel}%</output></label><input id="ld-travel" type="range" min="0" max="100" value={travel} onChange={e=>setTravel(Number(e.target.value))}/><p>An open-topped fictional pipe at water level. Swipe sideways on the water or use the slider to travel. Scroll vertically to keep reading. Beads suggest movement, not measured speed, pressure or a water-quality view. The story stops below still control the city journey.</p></div>}</div>}{!failed&&<div className="ld-motion-controls"><button aria-pressed={paused} disabled={systemReduced} onClick={()=>setPaused(v=>!v)}>{systemReduced ? 'System reduced motion' : paused ? 'Resume city motion' : 'Pause city motion'}</button><p>{systemReduced ? 'Your device requests reduced motion. The city stays still.' : paused ? 'City motion paused. You can still explore each stop.' : 'Pause decorative city motion while you read.'} Journey playback is controlled separately below.</p></div>}</>;
 }

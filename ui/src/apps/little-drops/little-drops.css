@@ -20,3 +20,5 @@
 
 .ld-immersion-controls{padding:14px 24px;border-top:1px solid #c1d2c1;background:#e1ece3}.ld-immersion-controls>button{min-height:44px;padding:11px 15px;border:1px solid #799e95;border-radius:6px;background:#285e61;color:#fff;font-size:12px}.ld-immersion-controls label{display:flex;justify-content:space-between;font-size:12px;margin:18px 0 10px}.ld-immersion-controls p{font-size:11px;line-height:1.7;color:#4d6b61;max-width:650px}.ld-closeup .ld-scene-note{color:#234e58}.ld-closeup.ld-dusk .ld-scene-note{color:#e1e7dc}@media(max-width:760px){.ld-immersion-controls{padding:12px}.ld-closeup .ld-scene{height:380px}}
 .ld-immersion-controls input[type=range]{display:block;width:100%;accent-color:#286f74;min-height:32px;margin:0}
+
+.ld-closeup .ld-scene{touch-action:pan-y;cursor:ew-resize}.ld-closeup .ld-scene:active{cursor:grabbing}
