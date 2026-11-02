@@ -4,6 +4,7 @@ tagline: Letters That Wait - Seal One Today, and the Post Holds It Until the Dat
 pitch: Write letters to your future self or to someone you love, sealed until a date you set, kept in an archive of waiting envelopes with countdowns.
 domains: [HIST, WRITE]
 created: 2026-11-01T06:02:49Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
