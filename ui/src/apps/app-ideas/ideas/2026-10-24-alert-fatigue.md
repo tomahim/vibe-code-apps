@@ -4,6 +4,7 @@ tagline: You Are the Night-Shift SOC - Five Hundred Alerts, Three Are Real
 pitch: A triage arcade where security alerts stream in all night; decide fast what to ignore, investigate or escalate before the real breach slips through your queue.
 domains: [GAME, LEARN, PROD]
 created: 2026-10-24T03:13:31Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
