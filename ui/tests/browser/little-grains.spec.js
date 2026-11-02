@@ -737,3 +737,28 @@ for (const [name, vp] of [['phone', { width: 390, height: 844 }], ['desktop', { 
     await page.screenshot({ path: `/tmp/lg-tile-tap-open-${name}.png` });
   });
 }
+
+for (const [name, vp] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1440, height: 900 }]]) {
+  test(`${name}: tapping a floating label opens the same thing as its tile, dragging over it does not`, async ({ page }) => {
+    await page.setViewportSize(vp);
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 3);
+    await page.goto('/apps/little-grains');
+    const panel = page.locator('.lg-panel');
+    await page.waitForFunction(() => document.querySelector('.lg-root')?.__garden?.ready?.());
+    const centre = async (sel) => { await page.waitForTimeout(1200); const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+    // A drag that starts on a label only moves the camera.
+    let p = await centre('.lg-label.theme');
+    await page.mouse.move(p.x, p.y); await page.mouse.down(); await page.mouse.move(p.x + 40, p.y + 25, { steps: 6 }); await page.mouse.up();
+    await expect(page).toHaveURL('/apps/little-grains');
+    p = await centre('.lg-label.theme');
+    await page.mouse.click(p.x, p.y);
+    await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}`, { timeout: 15000 });
+    await expect(page.locator('.lg-label.cell').first()).toBeAttached();
+    p = await centre('.lg-label.cell');
+    await page.screenshot({ path: `/tmp/lg-label-theme-${name}.png` });
+    await page.mouse.click(p.x, p.y);
+    await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}`, { timeout: 15000 });
+    await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
+  });
+}
