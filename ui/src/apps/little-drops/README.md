@@ -47,3 +47,6 @@ Thomas requested a more immersive, interactive perspective close to water flow. 
 
 ## Release 011
 Water-level mode now supports direct sideways drag on the 3D view to scrub travel, alongside the existing labelled keyboard range. A movement threshold ignores taps; vertical-first gestures remain reading/scroll gestures through touch-action pan-y. Pointer capture keeps horizontal travel continuous outside the scene; release, cancellation and lost capture clear gesture state. Values clamp to0-100; no camera inertia or new motion against paused/reduced-motion settings.
+
+## Release 012
+The water-level pipe now has a manipulable 3D demonstration gate: opening turns the plate along the pipe; closing puts it across the section and rearranges beads upstream. This is a visual toy, not a valve/hydraulic/pressure model. Downstream residual water and real operating behavior are explicitly not simulated. Gate state lasts during the visit and survives overview switches. Motion pause and system reduced motion still suppress continuous frames.
