@@ -4,6 +4,7 @@ tagline: Learn Synthesis One Knob at a Time, Proving Each Lesson by Ear
 pitch: Atomic synthesis lessons on a vintage-synth replica - one knob, one sound goal per lesson - with ear-matching exams where you recreate a target sound blind.
 domains: [LEARN, MEDIA]
 created: 2026-10-24T03:02:06Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
