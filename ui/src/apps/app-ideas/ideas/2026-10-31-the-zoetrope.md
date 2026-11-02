@@ -4,6 +4,7 @@ tagline: Draw Twelve Frames, Spin the Drum, and Watch 1834 Do What No Screen Can
 pitch: Create short frame-by-frame loops on a virtual 3D zoetrope, learning real animation principles by making drawings move inside a spinning drum.
 domains: [3D, LEARN]
 created: 2026-10-31T06:03:35Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
