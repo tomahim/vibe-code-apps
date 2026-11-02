@@ -4,6 +4,7 @@ tagline: A Calder in Your Pocket - Each Focused Session Adds One Piece, and You 
 pitch: Build a hanging 3D mobile one element at a time through focused work sessions, then tune its arms and weights until it hangs true.
 domains: [3D, PROD]
 created: 2026-10-30T06:03:31Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
