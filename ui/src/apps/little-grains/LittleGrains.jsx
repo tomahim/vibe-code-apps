@@ -263,15 +263,22 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     finally { setBusy(false); }
   }
 
-  return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={data?.lesson.title || "Lesson"}>
-      <div className="grains-reader-top"><span className="grains-reader-kicker">{data?.theme.title || "Little Grains"} / {data?.learning_path.title || "Lesson"}</span><button className="grains-close" onClick={onClose} aria-label="Close lesson">×</button></div>
-      {error && <p className="grains-error" role="alert">{error}</p>}
-      {!data ? <p className="grains-loading">Opening lesson…</p> : <>
-        <div className="grains-reader-head"><p>LESSON {data.lesson.position}</p><h2>{data.lesson.title}</h2><span>{completedSteps} of {totalSteps} steps complete</span></div>
-        <div className="grains-progress-track" aria-label={`${completedSteps} of ${totalSteps} steps complete`}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>
-        <div className="grains-reader-content">
-          {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
+  return <div className="grains-modal-backdrop grains-lesson-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+    <section className="grains-reader grains-lesson-reader" role="dialog" aria-modal="true" aria-label={data?.lesson.title || "Lesson"}>
+      <div className="grains-reader-top">
+        <strong className="grains-lesson-number">{data ? `Lesson ${data.lesson.position}` : "Little Grains"}</strong>
+        {data && <span className="grains-reader-count" aria-label={`${completedSteps} of ${totalSteps} steps complete`}>{completedSteps} / {totalSteps} steps</span>}
+        <button className="grains-close" onClick={onClose} aria-label="Close lesson">×</button>
+      </div>
+      {data && <div className="grains-progress-track" role="progressbar" aria-label="Lesson progress" aria-valuemin={0} aria-valuemax={totalSteps} aria-valuenow={completedSteps}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>}
+      <div className="grains-reader-content">
+        {error && <p className="grains-error" role="alert">{error}</p>}
+        {!data ? <p className="grains-loading">Opening lesson…</p> : <>
+          <div className="grains-reader-head">
+            <p className="grains-reader-kicker">{data.theme.title} / {data.learning_path.title}</p>
+            <h2>{data.lesson.title}</h2>
+            {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
+          </div>
           {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3><CardIllustration card={card} /><Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
           {question && <div className="grains-question">
             {previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={openPreviousCard}>← Previous card</button>}
@@ -295,8 +302,8 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
             ? <LessonComplete kind={fullyReadAtOpen.current ? "reviewed" : "drops"} onDone={onClose} />
             : <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>This lesson has no cards yet.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>)}
           {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
-        </div>
-      </>}
+        </>}
+      </div>
     </section>
   </div>;
 }
