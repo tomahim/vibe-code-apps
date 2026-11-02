@@ -4,6 +4,7 @@ tagline: Find the Physical Cloud - Spot Data Centers From Open Satellite Imagery
 pitch: A map that hunts data centers in open satellite imagery, scores each candidate's confidence, and turns verification into a game.
 domains: [LEARN, GAME]
 created: 2026-10-23T06:57:21Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
