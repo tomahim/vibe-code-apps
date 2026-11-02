@@ -466,7 +466,19 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
   let hover = null;
   const pickables = () => switching ? [] : view.level === 'path' ? (trail ? trail.nodes.map((n) => n.stone) : []) : [...cellMeshes, ...themeMeshes];
+  // Floating labels are pointer-events:none so every gesture reaches the canvas;
+  // a tap inside a visible label resolves to the same pick as its tile.
+  function labelAt(cx, cy) {
+    if (switching) return null;
+    for (let k = labelDefs.length - 1; k >= 0; k--) {
+      const L = labelDefs[k]; if (L.pick === undefined || L.el.style.opacity === '0') continue;
+      const r = L.el.getBoundingClientRect();
+      if (cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom) return L.pick;
+    }
+    return null;
+  }
   function pickAt(cx, cy) {
+    const lp = labelAt(cx, cy); if (lp) return lp;
     const rc = canvas.getBoundingClientRect(); ptr.set(((cx - rc.left) / rc.width) * 2 - 1, -((cy - rc.top) / rc.height) * 2 + 1);
     ray.setFromCamera(ptr, camera); const hit = ray.intersectObjects(pickables(), false)[0];
     return hit ? hit.object.userData.pick : null;
@@ -669,9 +681,9 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   function buildLabels() {
     labelsEl.innerHTML = ''; labelDefs = [];
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
-    if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b><span class="dots"></span>`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true }));
-    if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
-    if (view.level === 'path' && trail && !mobile && trail.n <= 8) trail.nodes.forEach((n) => add('lesson', `<b>${esc(trail.path.lessons[n.i])}</b>`, n.pos.clone().add(new THREE.Vector3(0, 1.5, 0))));
+    if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b><span class="dots"></span>`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true, pick: { kind: 'theme', ti } }));
+    if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true, pick: { kind: 'path', ti: view.ti, pi } }));
+    if (view.level === 'path' && trail && !mobile && trail.n <= 8) trail.nodes.forEach((n) => add('lesson', `<b>${esc(trail.path.lessons[n.i])}</b>`, n.pos.clone().add(new THREE.Vector3(0, 1.5, 0)), { pick: { kind: 'lesson', i: n.i } }));
     refreshLabelDots();
   }
   const hint = $('.lg-hint'); hint.textContent = mobile ? 'Drag to move · pinch to zoom · two fingers to turn' : 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn'; setTimeout(() => hint.classList.add('gone'), 9000);
