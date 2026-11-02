@@ -4,6 +4,7 @@ tagline: A Two-Person Browser DAW Where You Pass the Song Like a Relay Baton
 pitch: An asynchronous collaborative DAW in the browser: one friend lays a drum loop and sends a link, the other adds bass and sends it back, and the project grows a branch tree of every pass like git for songs.
 domains: [MEDIA, GAME]
 created: 2026-10-24T03:02:08Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
