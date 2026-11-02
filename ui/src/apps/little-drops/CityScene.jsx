@@ -5,8 +5,9 @@ import { stops } from './content.js';
 const path = stops.map(s => new THREE.Vector3(...s.position));
 const colors = { soil: 0xd4bfa4, grass: 0xb5cab5, pipe: 0x266b73, water: 0x73d7df, cream: 0xf8ebd4, roof: 0xd77e60 };
 export default function CityScene({ selected, cutaway, height, onSelect }) {
+  const [gateOpen, setGateOpen] = useState(true);
   const [closeup, setCloseup] = useState(false), [travel, setTravel] = useState(35);
-  const immersion = useRef({closeup,travel}); immersion.current={closeup,travel};
+  const immersion = useRef({closeup,travel,gateOpen}); immersion.current={closeup,travel,gateOpen};
   const drag = useRef(null);
   function startTravel(event) {
     if (!closeup || (event.pointerType === 'mouse' && event.button !== 0)) return;
@@ -35,7 +36,7 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
   const pause = useRef(false); pause.current = paused;
   const [failed, setFailed] = useState(false), [turn, setTurn] = useState(0), [dusk, setDusk] = useState(false);
   const invalidate = useRef(() => {}), atmosphere = useRef(false); atmosphere.current = dusk;
-  useEffect(() => { invalidate.current(); }, [selected, cutaway, height, turn, dusk, paused, closeup, travel]);
+  useEffect(() => { invalidate.current(); }, [selected, cutaway, height, turn, dusk, paused, closeup, travel, gateOpen]);
   const rotation = useRef(0); rotation.current = turn;
   useEffect(() => {
     const el = host.current;
@@ -122,6 +123,11 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     const shell=mesh(shellGeo,0x346d76,0,0,0,pipeWorld);shell.material.side=THREE.DoubleSide;
     for(let z=-12;z<=12;z+=3){const rib=mesh(new THREE.TorusGeometry(2.38,.045,8,48,Math.PI),0x9ec2bb,0,0,z,pipeWorld);rib.rotation.z=Math.PI;}
     const ribbon=box(3.6,.025,28,0x4fa9b6,0,-1.5,0,pipeWorld);ribbon.material.transparent=true;ribbon.material.opacity=.6;
+    const gate = new THREE.Group();gate.position.set(0,0,-5);pipeWorld.add(gate);
+    const plate=mesh(new THREE.CircleGeometry(2.25,48,Math.PI,Math.PI),0xc9874f,0,0,0,gate);plate.material.side=THREE.DoubleSide;
+    const spindle=cylinder(.07,3.8,0xd8ae76,0,-.3,0,gate);
+    const wheel=mesh(new THREE.TorusGeometry(.45,.07,8,32),0xb96b3f,0,1.6,-5,pipeWorld);wheel.rotation.x=Math.PI/2;
+    let flowElapsed=0;
     const nearDrops=[];
     for(let i=0;i<30;i++){const bead=mesh(new THREE.SphereGeometry(.10+(i%3)*.035,12,8),0xb9fff1,((i*7)%11-5)*.27,-1.2+(i%4)*.12,0,pipeWorld);nearDrops.push(bead);}
     const markerGeo = new THREE.SphereGeometry(.21,24,16);
@@ -170,7 +176,10 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
         scene.background.set(night?0x142d40:0xc2dfe0);
         const advance=view.travel/100*10;
         camera.position.set(Math.sin(angle)*.75,.05,10-advance);camera.lookAt(Math.sin(angle)*.35,-.8,-12);
-        nearDrops.forEach((p,i)=>{p.position.z=14-((i*28/30+(still?0:elapsed*2)+advance)%28);});
+        if(view.gateOpen&&!still)flowElapsed+=dt;
+        gate.rotation.y=view.gateOpen?Math.PI/2:0;
+        wheel.rotation.z=view.gateOpen?Math.PI/2:0;
+        nearDrops.forEach((p,i)=>{p.position.z=view.gateOpen?14-((i*28/30+flowElapsed*2+advance)%28):-3.4+(i/30)*16;});
       }
       renderer.render(scene,camera);
       if(!still)requestDraw();
@@ -182,5 +191,5 @@ export default function CityScene({ selected, cutaway, height, onSelect }) {
     {failed&&<div className="ld-fallback"><span>◈</span><h3>The journey still works.</h3><p>3D is unavailable on this device. Use the stops below to explore every explanation and experiment.</p></div>}
     <div className="ld-scene-note">{closeup?'AT WATER LEVEL':cutaway?'BELOW THE SURFACE':'A SMALL CITY, A BIG JOURNEY'}<span>Illustrative model · not to scale</span></div>
     {!failed&&<><button className="ld-atmosphere" aria-pressed={dusk} onClick={()=>setDusk(v=>!v)}>{dusk?'☾ Dusk view':'☀ Daylight view'}</button><div className="ld-camera"><button aria-label="Rotate city left" onClick={()=>setTurn(v=>v-.3)}>↶</button><button aria-label="Reset city view" onClick={()=>setTurn(0)}>⌂</button><button aria-label="Rotate city right" onClick={()=>setTurn(v=>v+.3)}>↷</button></div></>}
-  </div>{!failed&&<div className="ld-immersion-controls"><button aria-pressed={closeup} onClick={()=>setCloseup(v=>!v)}>{closeup?'Return to city overview':'Get close to the flow'}</button>{closeup&&<div><label htmlFor="ld-travel">Move through the pipe <output>{travel}%</output></label><input id="ld-travel" type="range" min="0" max="100" value={travel} onChange={e=>setTravel(Number(e.target.value))}/><p>An open-topped fictional pipe at water level. Swipe sideways on the water or use the slider to travel. Scroll vertically to keep reading. Beads suggest movement, not measured speed, pressure or a water-quality view. The story stops below still control the city journey.</p></div>}</div>}{!failed&&<div className="ld-motion-controls"><button aria-pressed={paused} disabled={systemReduced} onClick={()=>setPaused(v=>!v)}>{systemReduced ? 'System reduced motion' : paused ? 'Resume city motion' : 'Pause city motion'}</button><p>{systemReduced ? 'Your device requests reduced motion. The city stays still.' : paused ? 'City motion paused. You can still explore each stop.' : 'Pause decorative city motion while you read.'} Journey playback is controlled separately below.</p></div>}</>;
+  </div>{!failed&&<div className="ld-immersion-controls"><button aria-pressed={closeup} onClick={()=>setCloseup(v=>!v)}>{closeup?'Return to city overview':'Get close to the flow'}</button>{closeup&&<div><label htmlFor="ld-travel">Move through the pipe <output>{travel}%</output></label><input id="ld-travel" type="range" min="0" max="100" value={travel} onChange={e=>setTravel(Number(e.target.value))}/><p>An open-topped fictional pipe at water level. Swipe sideways on the water or use the slider to travel. Scroll vertically to keep reading. Beads suggest movement, not measured speed, pressure or a water-quality view. The story stops below still control the city journey.</p><div className="ld-gate-controls"><button aria-pressed={!gateOpen} onClick={()=>setGateOpen(v=>!v)}>{gateOpen?'Close demonstration gate':'Open demonstration gate'}</button><p role="status">{gateOpen?'Gate open: the plate turns along the pipe and beads can pass.':'Gate closed: the plate crosses the pipe and beads stop upstream.'}</p><p>A visual toy, not a valve design. Closing instantly rearranges beads; pressure, remaining downstream water and real operating behavior are not simulated.</p></div></div>}</div>}{!failed&&<div className="ld-motion-controls"><button aria-pressed={paused} disabled={systemReduced} onClick={()=>setPaused(v=>!v)}>{systemReduced ? 'System reduced motion' : paused ? 'Resume city motion' : 'Pause city motion'}</button><p>{systemReduced ? 'Your device requests reduced motion. The city stays still.' : paused ? 'City motion paused. You can still explore each stop.' : 'Pause decorative city motion while you read.'} Journey playback is controlled separately below.</p></div>}</>;
 }

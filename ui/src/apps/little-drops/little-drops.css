@@ -22,3 +22,5 @@
 .ld-immersion-controls input[type=range]{display:block;width:100%;accent-color:#286f74;min-height:32px;margin:0}
 
 .ld-closeup .ld-scene{touch-action:pan-y;cursor:ew-resize}.ld-closeup .ld-scene:active{cursor:grabbing}
+
+.ld-gate-controls{margin-top:16px;padding:15px;border:1px solid #a8bfae;background:#f2f1e3;border-radius:7px}.ld-gate-controls button{min-height:44px;padding:11px 14px;border:1px solid #a87b50;border-radius:5px;background:#fbf3de;color:#6b482b;font-size:12px}.ld-gate-controls button[aria-pressed=true]{background:#795234;color:#fff}.ld-gate-controls p{margin-bottom:0}
