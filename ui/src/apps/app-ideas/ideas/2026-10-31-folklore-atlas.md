@@ -4,6 +4,7 @@ tagline: Every Place Has a Story - Map the Legends, Ghosts and Odd Customs Where
 pitch: A map of local folklore where each tale is pinned to the place it happened, sourced and labeled, so a walk anywhere becomes a guided tour of its stories.
 domains: [HIST, MEDIA]
 created: 2026-10-31T06:02:57Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
