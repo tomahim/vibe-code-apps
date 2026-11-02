@@ -4,6 +4,7 @@ tagline: Point at Any Corner of the Web, Get Told the Moment It Moves
 pitch: A visual change monitor: mark the exact region of any page you care about, and keep a browsable timeline gallery of every change it ever spots.
 domains: [PROD, MEDIA]
 created: 2026-10-24T03:11:26Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
