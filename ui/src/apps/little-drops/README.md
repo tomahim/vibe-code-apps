@@ -50,3 +50,6 @@ Water-level mode now supports direct sideways drag on the 3D view to scrub trave
 
 ## Release 012
 The water-level pipe now has a manipulable 3D demonstration gate: opening turns the plate along the pipe; closing puts it across the section and rearranges beads upstream. This is a visual toy, not a valve/hydraulic/pressure model. Downstream residual water and real operating behavior are explicitly not simulated. Gate state lasts during the visit and survives overview switches. Motion pause and system reduced motion still suppress continuous frames.
+
+## Release 013
+Travel now passes the demonstration gate into the far end of the section. A closed gate clamps the camera upstream without changing the requested slider position; opening continues at that position. Closing after passing relocates the view upstream, named by the live status. This is a navigation rule for the fictional toy, not a real valve behavior. A pure clamped camera helper and boundary tests keep the plate from being crossed while closed.
