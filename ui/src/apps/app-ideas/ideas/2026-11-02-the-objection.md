@@ -4,6 +4,7 @@ tagline: Your Strongest Take, Argued Against - By You, Before Anyone Else Gets t
 pitch: A daily steelmanning practice that takes your own published opinion and trains you to write the strongest possible case against it.
 domains: [WRITE, LEARN]
 created: 2026-11-02T06:02:18Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
