@@ -4,6 +4,7 @@ tagline: One Prompted Question a Week, Recorded With a Grandparent, Bound Into a
 pitch: Every week the app hands you one question to ask an elder; the recorded answers become a private family audio archive.
 domains: [MEDIA, HIST]
 created: 2026-10-23T05:03:13Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
