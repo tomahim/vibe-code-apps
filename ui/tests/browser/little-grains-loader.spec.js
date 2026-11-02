@@ -36,7 +36,7 @@ test('loader waits out a sleeping api, then loads the garden', async ({ page }) 
   const loader = page.locator('.grains-loader');
   await expect(loader).toBeVisible();
   await expect(loader.getByRole('heading')).toHaveText(/waking up/i);
-  await expect(loader.locator('.grains-carton')).toBeVisible();
+  await expect(loader.locator('.grains-carrot')).toBeVisible();
   await expect(page.getByText('Your garden is ready')).toBeVisible({ timeout: 10000 });
   await expect(loader).toHaveCount(0);
   expect(state.calls).toBeGreaterThanOrEqual(4); // 3 failed attempts + the successful one
@@ -50,14 +50,14 @@ test('exhausted retries show Try again, which recovers', async ({ page }) => {
   await expect(page.getByText('The garden is taking too long to wake up.')).toBeVisible({ timeout: 10000 });
   const retry = page.getByRole('button', { name: 'Try again' });
   await expect(page.locator('.grains-loader')).toHaveCSS('opacity', '1'); // Past the fade-in delay, so the shot is real.
-  await page.addStyleTag({ content: '.grains-carton-fill{animation:none!important;height:38px!important;opacity:1!important}' }); // Freeze a real mid-fill frame for a stable capture.
+  await page.addStyleTag({ content: '.grains-carrot,.grains-carrot-leaves .leaf{animation:none!important}' }); // Freeze a real grown-carrot frame for a stable capture.
   await page.screenshot({ path: '/tmp/lg-loader-exhausted.png' });
   state.failCount = 0;
   await retry.click();
   await expect(page.getByText('Your garden is ready')).toBeVisible({ timeout: 10000 });
 });
 
-test('waking loader is mobile-friendly and shows the filling carton', async ({ page }) => {
+test('waking loader is mobile-friendly and shows the growing carrot', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const state = await fixture(page, { maxAttempts: 50, retryMs: 300 });
   state.failCount = 9999;
@@ -66,9 +66,9 @@ test('waking loader is mobile-friendly and shows the filling carton', async ({ p
   await expect(loader).toBeVisible();
   await expect(loader.getByText(/attempt 1/)).toBeVisible();
   await expect(loader).toHaveCSS('opacity', '1'); // Past the fade-in delay, so the shot is real.
-  await page.addStyleTag({ content: '.grains-carton-fill{animation:none!important;height:38px!important;opacity:1!important}' }); // Freeze a real mid-fill frame for a stable capture.
+  await page.addStyleTag({ content: '.grains-carrot,.grains-carrot-leaves .leaf{animation:none!important}' }); // Freeze a real grown-carrot frame for a stable capture.
   await page.screenshot({ path: '/tmp/lg-loader-waking.png' });
-  // No sideways scrolling, carton stays centered.
+  // No sideways scrolling, garden scene stays centered.
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
   expect(state.calls).toBeGreaterThan(0);
 });
@@ -88,7 +88,7 @@ test('keep-alive pings every interval while visible, pauses when hidden', async 
   await expect.poll(() => state.calls, { timeout: 3000 }).toBeGreaterThan(hiddenCalls + 1);
 });
 
-test('the carton is the only loader through the whole startup', async ({ page }) => {
+test('the garden scene is the only loader through the whole startup', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const state = await fixture(page, { maxAttempts: 4, retryMs: 200 });
   state.failCount = 2; // spend a moment in the waking phase
@@ -101,13 +101,14 @@ test('the carton is the only loader through the whole startup', async ({ page })
   });
   await page.goto('/apps/little-grains');
   const loader = page.locator('.grains-loader');
-  await expect(loader).toBeVisible(); // waking phase: carton plus messages
+  await expect(loader).toBeVisible(); // waking phase: garden scene plus messages
   await expect(loader).toHaveCount(1);
   await expect(loader.getByText(/attempt/)).toBeVisible();
   // Api awake, garden fetch still in flight: the same loader, now bare.
   await expect(loader.getByText(/attempt/)).toHaveCount(0, { timeout: 5000 });
   await expect(loader).toHaveCount(1);
-  await expect(loader.locator('.grains-carton')).toBeVisible();
+  await expect(loader.locator('.grains-carrot')).toBeVisible();
+  await expect(loader.getByText('Little Grains, strong growth...')).toBeVisible();
   await expect(page.getByText(/opening the garden/i)).toHaveCount(0);
   await expect(page.getByText(/planting your garden/i)).toHaveCount(0);
   releaseGarden();
