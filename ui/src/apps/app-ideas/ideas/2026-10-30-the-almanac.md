@@ -4,6 +4,7 @@ tagline: First Frost, First Swim, First Ripe Tomato - Keep the Year's Firsts, Co
 pitch: Log the seasonal firsts of your year in a personal almanac and build multi-year comparison tables that turn your life into phenology.
 domains: [HIST, LEARN]
 created: 2026-10-30T06:02:52Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
