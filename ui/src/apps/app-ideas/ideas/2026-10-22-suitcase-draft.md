@@ -4,6 +4,7 @@ tagline: Family Packing as a Snake Draft, With a Weight Budget and a Referee
 pitch: Draft who packs what for a family trip, flag the duplicates, and close each bag with a photo.
 domains: [GAME, PROD]
 created: 2026-10-22T05:02:31Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
