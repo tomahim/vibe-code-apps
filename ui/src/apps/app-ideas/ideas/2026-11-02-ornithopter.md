@@ -4,6 +4,7 @@ tagline: Build History's Doomed Flying Machines, Fly Them, and Learn Exactly Why
 pitch: Assemble historical aircraft designs (da Vinci's flapper, Lilienthal's glider, early failures and first successes) in 3D, test-fly them in a gentle physics sandbox, and discover the engineering each one taught.
 domains: [3D, HIST]
 created: 2026-11-02T06:03:31Z
+rating: 3
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
