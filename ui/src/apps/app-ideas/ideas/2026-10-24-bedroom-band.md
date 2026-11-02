@@ -4,6 +4,7 @@ tagline: Hum a Melody, Get a Band That Jams Along With You
 pitch: Hum a tune into your phone and a cast of stylized band characters builds an arrangement around it - swap members, deal style cards, and conduct the mix by tapping people in and out.
 domains: [MEDIA, GAME]
 created: 2026-10-24T03:02:02Z
+rating: 1
 ---
 
 #### 1. CREATIVE CONCEPT & PROBLEM STATEMENT
