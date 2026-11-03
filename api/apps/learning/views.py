@@ -19,6 +19,7 @@ from .api import (
 from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
 from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
+from .badges import check as check_badges
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
 
@@ -383,3 +384,17 @@ def leaderboard(request):
         return JsonResponse({"error": "Offset goes 0-520 periods back; overall is all time and takes no offset."}, status=400)
     return JsonResponse(ranking(request.user, currency, period, offset=offset))
 
+
+
+@never_cache
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
+@require_POST
+@jwt_required
+def badges_check(request):
+    """Award what the learner has newly earned and return their collection.
+    The client calls this on app load, after leaving a lesson or quiz and when
+    opening the badges tab; nothing runs on card or answer writes."""
+    # No learner lock: the evaluation only reads, and the award insert is
+    # idempotent (unique user+badge), so a check never makes card or answer
+    # saves wait while it evaluates.
+    return JsonResponse(check_badges(request.user))

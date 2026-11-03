@@ -18,6 +18,7 @@ This app contains published content models, the content sync command and authent
 | CardProgress | `lg_card_progress` |
 | QuestionAttempt | `lg_question_attempt` |
 | LessonOpen | `lg_lesson_open` |
+| BadgeAward | `lg_badge_award` |
 
 Content primary keys are one-to-one references to the UUID registry (`entity`, stored in SQL column `id`). Use `pk` / `entity_id` for ORM lookups; `id` is a read-only UUID convenience property. UUIDs come from content metadata, with no generated fallback. Learner/log rows use the platform's BigAutoField default. User references use `AUTH_USER_MODEL`.
 
@@ -51,3 +52,7 @@ python manage.py test apps.learning
 
 The initial migration depends on the configured user model. It is additive and reversible. No production database is needed to generate/test it. The existing API deployment runs migrations on merge/startup; this PR must remain unmerged until approved.
 
+
+## Badges
+
+`badge_catalog.py` lists every badge, one `Badge(...)` entry each. To add a badge that uses an existing rule `kind`: add one entry and drop its art at `ui/src/apps/little-grains/badge-art/<slug>.svg` (the catalogue test fails if either is missing). Never rename or reuse a shipped slug: awards are stored by slug in `lg_badge_award`. A new kind of rule is one method on `History` in `badges.py` returning sorted `(time, reference)` events, plus tests. The UI lists badges and families straight from the API, so it needs no change. A newly added badge is awarded, with its real qualifying date, at each learner's next check if their history already qualifies.

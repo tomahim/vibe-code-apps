@@ -1,0 +1,16 @@
+.grains-badges-button{position:relative;flex:none;width:42px;height:42px;display:grid;place-items:center;border:1px solid #dac9ac;border-radius:50%;padding:0;background:#f6ecda;color:#69512f}
+.grains-badges-button svg{width:23px;height:23px}
+.grains-badge-count{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--terra);color:#fff;font:800 11px/20px var(--sans);text-align:center;border:2px solid var(--paper);box-sizing:content-box}
+.grains-badges-summary{margin:4px 0 6px;font-size:14px;color:var(--dim)}.grains-badges-summary strong{color:var(--ink)}.grains-badges-summary .new-note{color:var(--terra-d);font-weight:700}
+.grains-badge-family h3{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 10px;font:700 17px var(--serif)}.grains-badge-family h3 small{font:600 12px var(--sans);color:var(--dim)}
+.grains-badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grains-badge-tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 9px;border:1px solid var(--line);border-radius:14px;background:#fffefa;color:var(--ink)}.grains-badge-tile.earned{border-color:#cbb98e;background:#fbf5e6}
+.grains-badge-name{font-size:12px;font-weight:700;line-height:1.2;text-align:center;min-height:2.4em;display:flex;align-items:center}
+.badge-art{width:100%;max-width:84px;height:auto;display:block}.badge-art.locked{filter:grayscale(1);opacity:.4}
+.grains-new-sticker{position:absolute;top:5px;right:5px;padding:2px 7px;border-radius:999px;background:var(--terra);color:#fff;font:800 10px/1.5 var(--sans);letter-spacing:.06em;transform:rotate(6deg);box-shadow:0 2px 5px #7a3a2a40}
+.grains-badge-detail{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}.grains-badge-back{align-self:flex-start;border:0;background:transparent;padding:8px 4px;color:var(--terra-d);font-weight:700;font-size:14px}
+.grains-badge-hero{position:relative;width:190px;margin:6px 0 4px}.grains-badge-hero .badge-art{max-width:190px}.grains-badge-hero .grains-new-sticker{top:8px;right:-6px;font-size:12px;padding:3px 10px}
+.grains-badge-meta{margin:8px 0 0;font-size:11px;letter-spacing:.1em;color:var(--dim);font-weight:700}.grains-badge-detail h2{font:700 30px/1.15 var(--serif);margin:4px 0 14px}
+.grains-badge-detail section{width:100%;text-align:left;margin-top:10px}.grains-badge-detail h3{font:700 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 0 4px}.grains-badge-detail section p{margin:0;font-size:15px;line-height:1.55}
+.grains-badge-status{display:flex;flex-direction:column;gap:2px;padding:13px 15px;border-radius:14px;background:#f1ece0}.grains-badge-status.earned{background:#e8f1e1}.grains-badge-status span{font-size:13px;color:var(--dim)}
+.grains-badge-evidence{margin:0;padding-left:20px;font-size:15px;line-height:1.5}.grains-badge-evidence li{margin-top:2px}
