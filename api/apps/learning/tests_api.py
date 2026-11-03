@@ -721,6 +721,39 @@ class LearningAPITests(TestCase):
         self.assertEqual(self.client.get("/api/learning/leaderboard/?offset=later").status_code, 400)
         self.assertEqual(self.client.get("/api/learning/leaderboard/?period=overall&offset=1").status_code, 400)
 
+    def test_leaderboard_stats_count_activity_not_reward_points(self):
+        # One card read and two attempts (one wrong, one correct) seven days
+        # ago: the counts land in last week's window, and Drops bonuses never
+        # inflate the card count.
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "1"})
+        self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
+        earned_at = datetime.now(timezone.utc) - timedelta(days=7)
+        CardProgress.objects.filter(user=self.user).update(completed_at=earned_at)
+        QuestionAttempt.objects.filter(user=self.user).update(answered_at=earned_at)
+
+        drops = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=1").json()
+        own = drops["self"]
+        # 106 Drops (1 + 5 lesson + 100 path bonus) but exactly one card read.
+        self.assertEqual(own["score"], 106)
+        self.assertEqual(own["stats"]["cards_read"], 1)
+        # Stats ride the self row only: other learners' detail is not shared.
+        for row in drops["rows"]:
+            self.assertEqual("stats" in row, row["is_self"])
+
+        carrots = self.client.get("/api/learning/leaderboard/?currency=carrots&period=weekly&offset=1").json()
+        self.assertEqual(carrots["self"]["score"], 1)
+        self.assertEqual(carrots["self"]["stats"],
+                         {"cards_read": 1, "attempts": 2, "correct": 1, "wrong": 1})
+
+        # The current week shows no activity for these events.
+        current = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly").json()
+        self.assertIsNone(current["self"])
+
+        # Overall is unbounded.
+        overall = self.client.get("/api/learning/leaderboard/?currency=carrots&period=overall").json()
+        self.assertEqual(overall["self"]["stats"]["attempts"], 2)
+
     def test_period_window_offsets_follow_calendar_boundaries(self):
         now = datetime(2026, 11, 3, 12, tzinfo=timezone.utc)  # Tuesday of the Nov 2-8 week
         self.assertEqual(period_window("weekly", 0, now),
