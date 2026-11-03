@@ -7,6 +7,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone as dt_timezone
 
 from django.contrib.auth import get_user_model
+from django.db.models import Count
 
 from .api import visible
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt
@@ -73,6 +74,30 @@ def reward_events():
             if required_lessons and required_lessons.issubset(completion_times):
                 events[user_id].append(('drops', 100, max(completion_times[lesson_id] for lesson_id in required_lessons)))
     return events
+
+
+def activity_stats(window_start, window_end):
+    """Per-user activity counts inside [window_start, window_end).
+
+    Counted from the recorded history itself: Cards read are CardProgress
+    rows (never derived from Drops, which include lesson/path bonuses) and
+    question figures count every QuestionAttempt (Carrots only count the
+    first correct answer, so they cannot stand in for attempts).
+    """
+    card_ids = [card['pk'] for card in visible(Card).values('pk')]
+    question_ids = [question['pk'] for question in visible(Question).values('pk')]
+    progress = CardProgress.objects.filter(card_id__in=card_ids)
+    attempts = QuestionAttempt.objects.filter(question_id__in=question_ids)
+    if window_start is not None:
+        progress = progress.filter(completed_at__gte=window_start, completed_at__lt=window_end)
+        attempts = attempts.filter(answered_at__gte=window_start, answered_at__lt=window_end)
+    stats = defaultdict(lambda: {'cards_read': 0, 'attempts': 0, 'correct': 0, 'wrong': 0})
+    for row in progress.values('user_id').annotate(n=Count('pk')):
+        stats[row['user_id']]['cards_read'] = row['n']
+    for row in attempts.values('user_id', 'correct').annotate(n=Count('pk')):
+        stats[row['user_id']]['attempts'] += row['n']
+        stats[row['user_id']]['correct' if row['correct'] else 'wrong'] += row['n']
+    return stats
 
 
 def period_start(period, now=None):
@@ -220,6 +245,14 @@ def leaderboard(user, currency, period, limit=20, offset=0):
     for row in rows:
         row.pop('user_id')
     window_start, window_end = period_window(period, offset, now)
+    # Detail counts are attached to the learner's own row only: Thomas asked
+    # for them under his own name, and other learners' attempt detail is not
+    # part of the shared ranking today.
+    self_stats = activity_stats(window_start, window_end).get(
+        user.pk, {'cards_read': 0, 'attempts': 0, 'correct': 0, 'wrong': 0})
+    for row in rows:
+        if row['is_self']:
+            row['stats'] = self_stats
     window = None
     if window_start is not None:
         window = {'start': window_start.isoformat(), 'end': window_end.isoformat(),

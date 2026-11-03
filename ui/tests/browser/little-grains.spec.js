@@ -40,9 +40,10 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       // Two past periods of mocked history, then nothing older.
       const score = currency === 'carrots' ? [1, 1][offset] : [106, 40][offset];
       const other = currency === 'carrots' ? [3, 2][offset] : [140, 58][offset];
-      const rows = offset < 2 ? [{ rank: 1, name: 'aurore', score: other, is_self: false }, { rank: 2, name: 'Learner', score, is_self: true }] : [];
+      const stats = currency === 'carrots' ? { cards_read: 7, attempts: 21, correct: 16, wrong: 5 } : { cards_read: 12, attempts: 21, correct: 16, wrong: 5 };
+      const rows = offset < 2 ? [{ rank: 1, name: 'aurore', score: other, is_self: false }, { rank: 2, name: 'Learner', score, is_self: true, stats }] : [];
       const window = period === 'overall' ? null : leaderboardWindow(period, offset);
-      return route.fulfill({ json: { currency, period, timezone: 'UTC', offset, window, has_earlier: period !== 'overall' && offset < 2, rows, self: rows.length ? { rank: 2, score, is_self: true } : null, chart: mockChart(currency, period) } });
+      return route.fulfill({ json: { currency, period, timezone: 'UTC', offset, window, has_earlier: period !== 'overall' && offset < 2, rows, self: rows.length ? { rank: 2, score, is_self: true, stats } : null, chart: mockChart(currency, period) } });
     }
   });
 }
@@ -212,6 +213,9 @@ test('leaderboard arrows navigate previous weeks and months of history', async (
   await expect(newer).toBeDisabled();
   await expect(older).toBeEnabled();
   await expect(leaderboard.locator('.grains-leaderboard-note')).toHaveText('Resets every Monday \u00b7 UTC');
+  // Drops: the learner's own row details the week's cards read, in gray.
+  await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('12 cards read');
+  await expect(leaderboard.locator('.grains-ranking li:not(.self) .detail')).toHaveCount(0);
   await page.screenshot({ path: '/tmp/little-grains-leaderboard-current-mobile.png' });
 
   await older.click();
@@ -240,6 +244,13 @@ test('leaderboard arrows navigate previous weeks and months of history', async (
   const lastMonth = await settledLabel(currentMonth, '\u2026');
   expect(lastMonth).not.toEqual(currentMonth);
   await page.screenshot({ path: '/tmp/little-grains-leaderboard-last-month-mobile.png' });
+
+  // Carrots: attempted, correct and wrong counts under the learner's name.
+  await leaderboard.getByRole('button', { name: /Carrots/ }).click();
+  await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('21 attempted \u00b7 16 correct \u00b7 5 wrong');
+  await page.screenshot({ path: '/tmp/little-grains-leaderboard-carrot-stats-mobile.png' });
+  await leaderboard.getByRole('button', { name: /Drops/ }).click();
+  await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('12 cards read');
 
   // Overall is all time: no navigation arrows.
   await leaderboard.getByRole('button', { name: 'Overall' }).click();
