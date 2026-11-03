@@ -117,3 +117,42 @@ test('multiple-choice options display in shuffled order', async ({ page }) => {
   await expect(reader.getByRole('status')).toContainText('right');
   await page.screenshot({ path: '/tmp/lg-question-shuffled.png' });
 });
+
+test('a checkpoint after the last card is served before the celebration', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'reader-layout-fixture'));
+  let read = false, answered = false;
+  const progress = () => ({ cards_completed: 1 + Number(read), cards_total: 2, checkpoints_correct: Number(answered) });
+  const payload = () => ({
+    theme: { id: 'life', title: 'Life & Society' }, learning_path: { id: 'baby', title: "A baby's first year through science" },
+    lesson: { ...lesson, introduction_markdown: '', progress: progress() },
+    cards: [
+      { ...cards[0], completed_at: '2026-11-03T20:00:00Z' },
+      { ...cards[1], completed_at: read ? '2026-11-03T21:00:00Z' : null },
+    ],
+    questions: [{ id: 'final-question', type: 'multiple_choice', after_card_position: cards[1].position, prompt: 'What comes last?', options: [{ id: 'a', text: 'The celebration' }, { id: 'b', text: 'Another card' }] }],
+    next_step: !read ? { type: 'card', id: cards[1].id } : answered ? null : { type: 'question', id: 'final-question' },
+  });
+  await page.route('**/api/learning/**', async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
+    if (path.endsWith('/garden/')) return route.fulfill({ json: { themes: [], rewards: {} } });
+    if (path.endsWith('/open/')) return route.fulfill({ json: {} });
+    if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { progress: progress() } }); }
+    if (path.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { correct: true, carrot_earned: true, explanation: 'Correct.', next_step: null } }); }
+    return route.fulfill({ json: payload() });
+  });
+  await page.goto(`/apps/little-grains/theme/life/path/baby/lesson/${lesson.id}/card/${cards[1].id}`);
+  const reader = page.getByRole('dialog', { name: title });
+  await reader.getByRole('button', { name: /read this card/ }).click();
+  // Reading the last card leads to its checkpoint question, not the celebration.
+  await expect(reader.getByRole('heading', { name: 'What comes last?' })).toBeVisible();
+  await expect(reader.getByText('2 / 3 steps', { exact: true })).toBeVisible();
+  await reader.getByLabel('The celebration', { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer', exact: true }).click();
+  await reader.getByRole('button', { name: 'Continue →', exact: true }).click();
+  await expect(reader.getByText('Lesson finished!')).toBeVisible();
+  await expect(reader.getByText('3 / 3 steps', { exact: true })).toBeVisible();
+  await page.waitForTimeout(1200); // Let the celebration animation settle for the screenshot.
+  await page.screenshot({ path: '/tmp/lg-final-checkpoint.png' });
+});

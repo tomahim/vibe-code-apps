@@ -257,12 +257,11 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     if (replay) { setViewStep(nextReplayStep(data, viewStep)); return; }
     setBusy(true); setError("");
     try {
-      const result = await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
-      // Reading every card finishes the lesson (+5 drops, earned once).
-      // Questions left unanswered stay as practice in the quiz and reviews.
-      const finishedReading = !fullyReadAtOpen.current && (result.progress.cards_completed || 0) >= (result.progress.cards_total || 0);
-      await load(finishedReading); await onProgress();
-      if (finishedReading) setViewStep(null);
+      await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+      // Reading every card finishes the lesson (+5 drops, earned once), but a
+      // checkpoint after the last card is still a lesson step: let next_step
+      // serve it before the celebration, so the steps counter reaches the total.
+      await load(); await onProgress();
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
