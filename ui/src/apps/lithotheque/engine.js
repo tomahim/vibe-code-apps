@@ -95,30 +95,45 @@ function rockGeo(r, seed, squashY = 0.62) {
 // Realistic kyanite blade: parametric, gently curved, tapered to a chisel tip.
 // Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides
 // (kyanite's deep blue runs lengthwise down the centre, paling to the edges).
-function bladeGeo(len, w, t, seed) {
-    const segs = 26, ring = 10;
-    const bendX = noise3(seed, 0.3, 1.7) * 0.22 * len;
-    const bendZ = noise3(1.1, seed, 0.6) * 0.14 * len;
+// Realistic kyanite blade: parametric slab with mostly parallel edges, a thick
+// bevel-edged cross-section, lengthwise cleavage steps on the flat faces, and an
+// abrupt termination (slanted chisel cut or flat break) - never a spear point.
+// Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides.
+// term: 0 = flat break, >0 = slant height of a diagonal cut across the width.
+function bladeGeo(len, w, t, seed, term) {
+    const segs = 26, ring = 12;
+    const bendX = noise3(seed, 0.3, 1.7) * 0.18 * len;
+    const bendZ = noise3(1.1, seed, 0.6) * 0.12 * len;
     const positions = []; const zone = []; const idx = [];
+    // rounded-rectangle template: broad flat faces, narrow bevelled long edges
     const ringPts = [];
     for (let i = 0; i < ring; i++) {
         const a = (i / ring) * Math.PI * 2;
-        // flattened superellipse: wide across X (width), thin across Z (thickness)
-        const cx = Math.sign(Math.cos(a)) * Math.pow(Math.abs(Math.cos(a)), 0.5);
-        const cz = Math.sign(Math.sin(a)) * Math.pow(Math.abs(Math.sin(a)), 0.5);
+        const cx = Math.sign(Math.cos(a)) * Math.pow(Math.abs(Math.cos(a)), 0.30);
+        const cz = Math.sign(Math.sin(a)) * Math.pow(Math.abs(Math.sin(a)), 0.55);
         ringPts.push([cx, cz]);
     }
+    // lengthwise cleavage steps across the width (two grooves)
+    const stepAt = (px) => {
+        const s1 = Math.abs(px - 0.35) < 0.06 ? 0.16 : 0;
+        const s2 = Math.abs(px + 0.42) < 0.05 ? -0.13 : 0;
+        return s1 + s2;
+    };
     for (let s = 0; s <= segs; s++) {
         const u = s / segs;
-        const taper = u < 0.72 ? 1 - 0.1 * u : Math.max(0.16, 1 - 0.1 * u - Math.pow((u - 0.72) / 0.28, 1.5) * 0.78);
-        const thick = 1 - 0.3 * u;
-        const wob = 1 + 0.09 * fbm(u * 5 + seed, seed * 0.7, 0, 2);
-        const y = u * len;
+        // parallel edges for most of the length, slight wobble, mild narrowing only at the very top
+        const taper = u < 0.9 ? 1 : 1 - (u - 0.9) * 2.0;
+        const wob = 1 + 0.05 * fbm(u * 4 + seed, seed * 0.7, 0, 2);
         const cx0 = bendX * u * u;
-        const cz0 = bendZ * Math.sin(u * 2.1);
+        const cz0 = bendZ * Math.sin(u * 1.9);
         for (let i = 0; i < ring; i++) {
             const px = ringPts[i][0], pz = ringPts[i][1];
-            positions.push(cx0 + px * w * 0.5 * taper * wob, y, cz0 + pz * t * 0.5 * taper * thick);
+            // stepped face relief only on the broad faces (|pz| large)
+            const relief = stepAt(px) * Math.abs(pz) * t * 0.5;
+            // slanted termination: top of the blade drops across the width
+            const cut = u > 0.9 && term > 0 ? term * (px * 0.5 + 0.5) * ((u - 0.9) / 0.1) : 0;
+            const y = u * len - cut;
+            positions.push(cx0 + px * w * 0.5 * taper * wob, y, cz0 + (pz * t * 0.5 + relief) * (1 - 0.25 * u));
             zone.push(Math.abs(px));
         }
     }
@@ -129,13 +144,14 @@ function bladeGeo(len, w, t, seed) {
             idx.push(a, c, b, b, c, d);
         }
     }
-    // chisel-tip apex, slightly off centre
+    // top cap: centre vertex at the average cut height
+    const topAvg = term > 0 ? len - term * 0.5 : len;
     const apex = positions.length / 3;
-    positions.push(bendX + w * 0.06, len * 1.045, 0);
+    positions.push(bendX, topAvg, bendZ * Math.sin(1.9));
     zone.push(0.5);
     const lastRing = segs * ring;
     for (let i = 0; i < ring; i++) idx.push(lastRing + i, apex, lastRing + (i + 1) % ring);
-    // base cap (buried in matrix, but close the solid)
+    // base cap (buried in matrix)
     const base = positions.length / 3;
     positions.push(0, 0, 0); zone.push(0);
     for (let i = 0; i < ring; i++) idx.push(base, (i + 1) % ring, i);
@@ -173,21 +189,23 @@ function mineralSurface(mat, mode) {
         return mix(mix(mix(hashStone(i),hashStone(i+vec3(1,0,0)),f.x),mix(hashStone(i+vec3(0,1,0)),hashStone(i+vec3(1,1,0)),f.x),f.y),mix(mix(hashStone(i+vec3(0,0,1)),hashStone(i+vec3(1,0,1)),f.x),mix(hashStone(i+vec3(0,1,1)),hashStone(i+vec3(1,1,1)),f.x),f.y),f.z);}
       ` + shader.fragmentShader;
         const detail = isBlade ? `
-      // colour zoning: deep blue core paling to silvery edges
-      float zone = smoothstep(.02, .92, vZone + (stoneNoise(vStone*9.)-.5)*.25);
-      vec3 deep = vec3(.045,.115,.38);
-      vec3 mid  = vec3(.13,.27,.58);
-      vec3 pale = vec3(.42,.52,.72);
-      vec3 col = mix(deep, mid, smoothstep(.0,.55,zone));
-      col = mix(col, pale, smoothstep(.5,1.,zone)*.85);
-      // lengthwise striations and cleavage steps
-      float stripe = sin(vStone.y*330. + stoneNoise(vec3(vStone.x*55.,0.,vStone.z*55.))*6.);
-      col *= .93 + .07*smoothstep(-.6,.9,stripe);
-      float step_ = stoneNoise(vec3(floor(vStone.y*14.)*7.3, vStone.x*30., vStone.z*30.));
-      col *= .94 + .1*step_;
+      // bold lengthwise colour bands across the width (cobalt vs pale blue-grey)
+      float wob = stoneNoise(vStone*vec3(4.,1.2,4.))*3.5;
+      float band = .5+.5*sin(vStone.x*85. + wob);
+      vec3 deep = vec3(.055,.14,.42);
+      vec3 midb = vec3(.16,.30,.58);
+      vec3 pale = vec3(.42,.50,.67);
+      vec3 col = mix(deep, midb, smoothstep(.05,.45,band));
+      col = mix(col, pale, smoothstep(.6,.95,band)*.75);
+      // blades pale toward their side edges and tips
+      col = mix(col, pale, smoothstep(.6,1.,vZone)*.45);
+      col = mix(col, pale*.92, smoothstep(.78,1.,vStone.y)*.25);
+      // fine lengthwise striations
+      float stripe = sin(vStone.y*290. + stoneNoise(vec3(vStone.x*50.,0.,vStone.z*50.))*5.);
+      col *= .95 + .05*smoothstep(-.6,.9,stripe);
       // pearly lustre patches
-      float pearl = stoneNoise(vStone*vec3(22.,5.,22.));
-      col = mix(col, col*vec3(1.07,1.09,1.16), smoothstep(.55,.92,pearl)*.55);
+      float pearl = stoneNoise(vStone*vec3(20.,4.5,20.));
+      col = mix(col, col*vec3(1.06,1.08,1.14), smoothstep(.6,.92,pearl)*.4);
       diffuseColor.rgb = col;
       ` : `
       // foliated mica schist: warped light/dark bands with glinting flakes
@@ -217,9 +235,9 @@ function makeMats(kind) {
             color: '#ffffff', roughness: 0.94, metalness: 0.04,
         }), 'schist');
         return { matrix: schist, crystal: () => mineralSurface(new THREE.MeshPhysicalMaterial({
-            color: '#ffffff', roughness: 0.34, metalness: 0,
-            clearcoat: 0.35, clearcoatRoughness: 0.35,
-            sheen: 0.6, sheenRoughness: 0.55, sheenColor: new THREE.Color('#c9d6f2'),
+            color: '#ffffff', roughness: 0.38, metalness: 0,
+            clearcoat: 0.25, clearcoatRoughness: 0.4,
+            sheen: 0.35, sheenRoughness: 0.6, sheenColor: new THREE.Color('#bcccea'),
         }), 'kyanite') };
     }
     const matrix = new THREE.MeshStandardMaterial({
@@ -299,18 +317,19 @@ export function buildSpecimen(kind, uv) {
         vein.scale.set(3.2, 1, 1.4);
         vein.castShadow = true;
         g.add(vein);
-        // spray of intergrown blades rising from the matrix
+        // sub-parallel stacked cluster of thick blades (bent, fanned, some crossing)
+        // [len, w, t, x, z, rx, rz, ry, term]
         const blades = [
-            [2.0, 0.30, 0.06, 0.0, 0.0, 0.05, -0.10, 0.2],
-            [1.7, 0.26, 0.055, 0.16, 0.10, -0.05, 0.26, -0.5],
-            [1.85, 0.24, 0.05, -0.17, 0.07, 0.08, -0.33, 0.9],
-            [1.35, 0.20, 0.045, 0.06, -0.13, 0.2, 0.48, 2.0],
-            [1.1, 0.17, 0.04, -0.06, 0.2, -0.12, -0.55, -1.2],
-            [0.8, 0.14, 0.035, 0.28, -0.05, 0.1, 0.72, 1.4],
+            [1.5, 0.30, 0.085, 0.0, 0.0, 0.04, -0.22, 0.2, 0.16],
+            [1.3, 0.26, 0.075, 0.14, 0.08, -0.03, -0.34, -0.4, 0.0],
+            [1.42, 0.24, 0.07, -0.15, 0.05, 0.06, -0.13, 0.8, 0.22],
+            [1.05, 0.20, 0.06, 0.05, -0.12, 0.14, -0.42, 1.9, 0.12],
+            [0.85, 0.17, 0.05, -0.08, 0.16, -0.08, 0.18, -1.1, 0.0],
+            [0.62, 0.14, 0.045, 0.24, -0.04, 0.05, -0.55, 1.3, 0.1],
         ];
-        for (const [len, w, t, x, z, rx, rz, ry] of blades) {
-            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 13.7), cm);
-            b.position.set(x, -0.52, z);
+        for (const [len, w, t, x, z, rx, rz, ry, term] of blades) {
+            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 13.7, term), cm);
+            b.position.set(x, -0.5, z);
             b.rotation.set(rx, ry, rz);
             b.castShadow = true;
             g.add(b);
