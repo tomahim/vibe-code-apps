@@ -59,3 +59,6 @@ Water-level navigation gains an explicit look-back toggle and an accessible pipe
 
 ## Release 015
 Gate and look-direction quick controls now sit on the water-level scene so mobile visitors can manipulate them while seeing the result. Existing detailed controls remain synchronized below. Overlay buttons do not start travel gestures; the scene's accessible label follows view/gate/direction rather than always describing the city. Quick controls hide with WebGL failure/overview. No new animation or physics.
+
+## Release 016
+A compact in-scene travel rail adds keyboard/tap steps toward the entrance or far end, requested travel percentage and actual gate-side status. It stays independent of look direction, shares state with drag/slider controls and clamps at both ends. A closed gate explicitly reports a held view rather than pretending requested travel was reached. This is navigation inside the existing fictional toy, with no automatic motion or new hydraulic claims.
