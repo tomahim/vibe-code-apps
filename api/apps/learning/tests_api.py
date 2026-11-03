@@ -484,6 +484,28 @@ class LearningAPITests(TestCase):
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
         self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
 
+    def test_garden_recent_lessons_excludes_lessons_with_all_cards_read(self):
+        # Finished for this list means every card read, even when questions
+        # remain open: only still-unread lessons get a shortcut.
+        self.post(f"/api/learning/lessons/{self.lesson.pk}/open/", {})
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk)])
+        self.assertEqual(recent[0]["next_step"]["type"], "card")
+
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
+
+        # A partially read lesson with an unanswered checkpoint stays listed.
+        second = self.row(Lesson, learning_path=self.path, position=2)
+        first_card = self.row(Card, lesson=second, body_markdown="First")
+        self.row(Question, lesson=second, after_card_position=1)
+        self.row(Card, lesson=second, position=2, body_markdown="Second")
+        self.post(f"/api/learning/lessons/{second.pk}/open/", {})
+        self.post(f"/api/learning/cards/{first_card.pk}/complete/", {})
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(second.pk)])
+        self.assertEqual(recent[0]["next_step"]["type"], "question")
+
     def test_open_lesson_validates_request_and_visibility(self):
         url = f"/api/learning/lessons/{self.lesson.pk}/open/"
         self.assertEqual(self.client.get(url).status_code, 405)
