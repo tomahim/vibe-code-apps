@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { BRAND_BADGE } from "../../config/brand.js";
@@ -6,6 +6,7 @@ import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
 import { GrainsLoader } from "./Loader.jsx";
+import { shuffled } from "./shuffle.js";
 import { BadgeButton, BadgeCollection } from "./Badges.jsx";
 import "./garden/garden.css";
 import "./little-grains.css";
@@ -235,6 +236,8 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
 
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
+  // Shuffled once per question so the order stays stable while it is on screen.
+  const questionOptions = useMemo(() => shuffled(question?.options ?? []), [question]);
   const typedQuestion = question?.type === "type_answer_question";
   const reviewCard = data?.cards.find((item) => viewStep?.type === "revisit" && item.id === viewStep.id);
   const cardIndex = data?.cards.findIndex((item) => item.id === (card || reviewCard)?.id) ?? -1;
@@ -317,7 +320,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
                 onChange={(event) => setChoice(event.target.value)} disabled={!!feedback}
                 autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
               <p>Capitalization and punctuation do not have to match.</p>
-            </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
+            </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{questionOptions.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`question-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
             {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
               <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : feedback.next_step?.id !== question.id ? "Not quite. Let’s try another question." : "Not quite. Try again."}</strong>
               {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
@@ -356,6 +359,8 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
 
   const question = queue[0] || null;
   const typedQuestion = question?.type === "type_answer_question";
+  // Shuffled once per question so the order stays stable while it is on screen.
+  const questionOptions = useMemo(() => shuffled(question?.options ?? []), [question]);
 
   async function submitAnswer() {
     if (!question || !choice.trim() || busy) return;
@@ -399,7 +404,7 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
                   onChange={(event) => setChoice(event.target.value)} disabled={!!feedback}
                   autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
                 <p>Capitalization and punctuation do not have to match.</p>
-              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`quiz-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
+              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{questionOptions.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`quiz-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span></label>)}</div>}
               {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
                 <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : (tries[question.id] || 0) >= 1 ? "Not quite. It will wait for the next quiz." : "Not quite. It comes back at the end of this quiz."}</strong>
                 {!feedback.correct && feedback.correct_answer && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}

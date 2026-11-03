@@ -102,3 +102,18 @@ for (const state of ['loading', 'error', 'empty']) {
     await expect(page.getByRole('dialog')).toHaveCount(0);
   });
 }
+
+test('multiple-choice options display in shuffled order', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => { Math.random = () => 0; }); // Deterministic: reverses a two-option list.
+  await fixture(page);
+  await page.goto(url);
+  const reader = page.getByRole('dialog', { name: title });
+  await reader.getByRole('button', { name: /read this card/ }).click();
+  await expect(reader.getByRole('heading', { name: 'Which direction develops first?' })).toBeVisible();
+  await expect(reader.locator('.grains-options label span')).toHaveText(['Tail to head', 'Head to tail']);
+  await reader.getByLabel('Head to tail', { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer', exact: true }).click();
+  await expect(reader.getByRole('status')).toContainText('right');
+  await page.screenshot({ path: '/tmp/lg-question-shuffled.png' });
+});
