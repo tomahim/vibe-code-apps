@@ -6,16 +6,6 @@ import './lithotheque.css';
 const GROUPS = ['All', ...new Set(MINERALS.map((m) => m.group))];
 const TABS = ['Identity', 'Geology', 'Occurrence', 'Story', 'Resources'];
 
-function HonestNote() {
-    return (
-        <p className="litho-honest">
-            Original Three.js study models, never scans or measured specimens: every species is a
-            higher-detail procedural rebuild of its classic habit. Instrument readouts are
-            published reference values for the species, never measurements of a specific sample.
-        </p>
-    );
-}
-
 function FactGrid({ m }) {
     const rows = [
         ['Formula', m.formula], ['Crystal system', m.system], ['Hardness', m.hardness],
@@ -85,7 +75,6 @@ export default function Lithotheque({ onHome }) {
                             </button>
                         ))}
                     </div>
-                    <HonestNote />
                 </main>
             ) : (
                 <main className="litho-detail">
@@ -123,7 +112,6 @@ export default function Lithotheque({ onHome }) {
                             {tab === 'Story' && <p className="litho-prose">{sel.story}</p>}
                             {tab === 'Resources' && <SourceList m={sel} />}
                         </div>
-                        <HonestNote />
                     </section>
                 </main>
             )}

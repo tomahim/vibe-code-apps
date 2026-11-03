@@ -20,11 +20,9 @@ test('six unique specimens with complete dossiers and reference-labelled readout
   }
 });
 
-test('app labels its models as original study models and ships no remote content', () => {
+test('app omits the requested model and readout disclaimer and ships no remote content', () => {
   const app = fs.readFileSync(new URL('Lithotheque.jsx', base), 'utf8');
-  assert.match(app, /study models/i);
-  assert.match(app, /never scans or measured specimens/);
-  assert.match(app, /never measurements\s+of a specific sample/);
+  assert.doesNotMatch(app, /HonestNote|Original Three\.js study models|never scans or measured specimens|published reference values for the species/);
   assert.doesNotMatch(app, /fetch\(/);
   const engine = fs.readFileSync(new URL('engine.js', base), 'utf8');
   assert.match(engine, /three/);
