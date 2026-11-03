@@ -5,7 +5,7 @@ const id = {
   lesson: 'ef40c724-a882-4798-949b-1bf950471d9b', card: '8f8b4671-3e2d-4c7f-a3c7-eb207401bb40', card2: '925a9b78-0546-44bf-a8bb-bb02fb6d7aca', question: 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', alternative: 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3',
 };
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
-function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null } = {}) {
+function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null, badgeLog = null } = {}) {
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
   page.route('**/api/learning/**', route => {
@@ -32,6 +32,7 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       if (correct) answered = true; else wrong = true;
       return route.fulfill({ status: 201, json: { correct, carrot_earned: correct && !review, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
     }
+    if (url.pathname.endsWith('/badges/check/')) { if (badgeLog) badgeLog.push(route.request().method()); return route.fulfill({ json: mockBadges() }); }
     if (url.pathname.endsWith('/leaderboard/')) {
       const currency = url.searchParams.get('currency') === 'carrots' ? 'carrots' : 'drops';
       const period = url.searchParams.get('period') || 'weekly';
@@ -47,6 +48,23 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       return route.fulfill({ json: { currency, period, timezone: 'UTC', offset, window, has_earlier: period !== 'overall' && offset < 2, rows, self: rows.length ? { rank: 2, score, is_self: true, stats } : null, chart: mockChart(currency, period) } });
     }
   });
+}
+
+// A small slice of the real collection: one earned this week (new), one
+// earned long ago, the rest still locked.
+function mockBadges() {
+  const day = 864e5, at = (days) => new Date(Date.now() - days * day).toISOString();
+  const badge = (slug, name, family, tier, explanation, target, progress, earnedDays, evidence = []) => ({ evidence, evidence_is_last: target > 3, slug, name, family, tier, explanation, target, progress, earned: earnedDays != null, earned_at: earnedDays == null ? null : at(earnedDays), new: earnedDays != null && earnedDays <= 7 });
+  const badges = [
+    badge('first-sprout', 'First sprout', 'Reading', 1, 'Read your first card.', 1, 1, 2),
+    badge('book-beetle', 'Book beetle', 'Reading', 1, 'Read 100 different cards.', 100, 100, 20, ['Warm baths and gentle care']),
+    badge('wise-oak', 'Wise oak', 'Reading', 2, 'Read 300 different cards.', 300, 140, null),
+    badge('busy-bee', 'Busy bee', 'Answers', 1, 'Answer 100 different questions correctly.', 100, 37, null),
+    badge('second-spring', 'Second spring', 'Comebacks', 1, 'Get 5 different questions right after having got each one wrong.', 5, 2, null),
+    badge('branch-hopper', 'Branch hopper', 'Exploring', 1, 'Read at least 10 cards in each of 3 different learning paths.', 3, 1, null),
+    badge('clean-patch', 'Clean patch', 'Finishing', 1, 'Read every card in one lesson and answer every question in it correctly at least once.', 1, 0, null),
+  ];
+  return { badges, earned_count: 2, new_count: 1 };
 }
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -867,3 +885,58 @@ for (const [name, vp] of [['phone', { width: 390, height: 844 }], ['desktop', { 
     await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
   });
 }
+
+test.describe('badges on a phone', () => {
+  test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+  test('header counter, NEW sticker and badge detail', async ({ page }) => {
+    const badgeLog = [];
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 1, { badgeLog });
+    await page.goto('/apps/little-grains');
+    const open = page.getByRole('button', { name: 'Open badges, 1 new in the last 7 days' });
+    await expect(open).toBeVisible();
+    await expect(open.locator('.grains-badge-count')).toHaveText('1');
+    expect(badgeLog).toEqual(['POST']); // one check on first load
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({ path: '/tmp/little-grains-badges-header.png' });
+    await open.click();
+    await expect.poll(() => badgeLog.length).toBe(2); // and one when the tab opens
+    const dialog = page.getByRole('dialog', { name: 'Badges' });
+    await expect(dialog.getByText('2 of 7 collected')).toBeVisible();
+    await expect(dialog.locator('.grains-new-sticker')).toHaveCount(1);
+    await expect(dialog.getByRole('button', { name: 'First sprout, earned, new' }).locator('.grains-new-sticker')).toBeVisible();
+    await expect(dialog.getByRole('button', { name: 'Book beetle, earned' }).locator('.grains-new-sticker')).toHaveCount(0);
+    await page.screenshot({ path: '/tmp/little-grains-badges-list.png' });
+    await dialog.getByRole('button', { name: 'Book beetle, earned' }).click();
+    await expect(dialog.getByRole('heading', { name: 'Book beetle' })).toBeVisible();
+    await expect(dialog.getByText('Read 100 different cards.')).toBeVisible();
+    await expect(dialog.getByText('The one that completed it')).toBeVisible();
+    await expect(dialog.getByText('Warm baths and gentle care')).toBeVisible();
+    await expect(dialog.getByText(/^Earned on /)).toBeVisible();
+    await page.screenshot({ path: '/tmp/little-grains-badges-detail.png' });
+    await dialog.getByRole('button', { name: '‹ All badges' }).click();
+    await dialog.getByRole('button', { name: 'Wise oak, not earned yet' }).click();
+    await expect(dialog.getByText('Not earned yet')).toBeVisible();
+    await expect(dialog.getByText('140 of 300 so far')).toBeVisible();
+    await page.screenshot({ path: '/tmp/little-grains-badges-locked.png' });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.getByRole('button', { name: 'Close badges' }).click();
+    await expect(dialog).toHaveCount(0);
+    expect(badgeLog.length).toBe(2); // closing the tab or reading nothing triggers no more checks
+  });
+
+  test('a check runs when a lesson is left, never per card', async ({ page }) => {
+    const badgeLog = [];
+    await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+    mockApi(page, 1, { badgeLog });
+    await page.goto(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
+    const reader = page.getByRole('dialog', { name: 'Bath time and care' });
+    await expect(reader.getByText('The bath water is')).toBeVisible();
+    await expect.poll(() => badgeLog.length).toBe(1); // first load
+    await reader.getByRole('button', { name: /I’ve read this card/ }).click();
+    await page.waitForTimeout(500);
+    expect(badgeLog.length).toBe(1); // reading a card triggers no check
+    await reader.getByRole('button', { name: 'Close lesson' }).click();
+    await expect.poll(() => badgeLog.length).toBe(2); // leaving the lesson does
+  });
+});

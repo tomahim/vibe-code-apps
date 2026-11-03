@@ -6,6 +6,7 @@ import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
 import { GrainsLoader } from "./Loader.jsx";
+import { BadgeButton, BadgeCollection } from "./Badges.jsx";
 import "./garden/garden.css";
 import "./little-grains.css";
 
@@ -527,8 +528,14 @@ export default function LittleGrains() {
   const gardenData = useRef(null);
   const [catchUp, setCatchUp] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showBadges, setShowBadges] = useState(false);
+  const [badges, setBadges] = useState(null);
+  const [badgesError, setBadgesError] = useState("");
   const [rewardInfo, setRewardInfo] = useState(null);
   const profile = window.matchMedia("(max-width: 760px)").matches ? "mobile" : "desktop";
+  // The api awards badges when asked: on first load, after leaving a lesson or
+  // quiz and when the badges tab opens. Never per card or answer, never polled.
+  const checkBadges = useCallback(() => api("badges/check/", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).then((result) => { setBadges(result); setBadgesError(""); }).catch((err) => setBadgesError(err.message)), []);
   const refresh = useCallback(async () => { const result = await api("garden/"); gardenData.current = result; setGarden(result); return result; }, []);
 
   const navigate = useCallback((next, { replace = false } = {}) => {
@@ -578,6 +585,15 @@ export default function LittleGrains() {
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
+  // Leaving a lesson or a Practice quiz, by any route (close, back, finish),
+  // is the moment to look for new badges.
+  const inSession = Boolean(reader || catchUp);
+  const wasInSession = useRef(false);
+  useEffect(() => {
+    if (wasInSession.current && !inSession) checkBadges();
+    wasInSession.current = inSession;
+  }, [inSession, checkBadges]);
+
   useEffect(() => {
     if (!getToken()) { const id = setTimeout(redirectToLogin, 0); return () => clearTimeout(id); }
     let active = true;
@@ -597,6 +613,7 @@ export default function LittleGrains() {
       if (!active) return;
       setStartup({ phase: "ready", attempt: 0 });
       refresh().catch((err) => { if (active) setError(err.message); });
+      checkBadges();
     })();
     return () => { active = false; };
   }, [refresh, wakeRun]);
@@ -637,11 +654,11 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (showBadges) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [reader, catchUp, showLeaderboard, rewardInfo, closeReader]);
+  }, [reader, catchUp, showLeaderboard, showBadges, rewardInfo, closeReader]);
 
-  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><AccountMenu /></div></header>
+  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
         ? <GrainsLoader exhausted onRetry={() => setWakeRun((run) => run + 1)} />
         : startup.phase !== "ready"
@@ -650,5 +667,6 @@ export default function LittleGrains() {
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
+    {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
   </main>;
 }

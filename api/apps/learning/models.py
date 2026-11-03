@@ -274,3 +274,17 @@ class QuestionAttempt(models.Model):
             condition=Q(attempt_type__in=["initial", "retry", "review"]), name="lg_attempt_valid_type",
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
+
+
+class BadgeAward(models.Model):
+    """A badge a learner has earned. Written once by the first check that sees
+    it earned; earned_at is the qualifying event's time, evidence the titles
+    that qualified it. Never updated, so content changes cannot take it away."""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="lg_badge_awards")
+    badge = models.CharField(max_length=64)  # catalogue slug
+    earned_at = models.DateTimeField()
+    evidence = models.JSONField(default=list, blank=True)
+
+    class Meta:
+        db_table = "lg_badge_award"
+        constraints = [models.UniqueConstraint(fields=["user", "badge"], name="lg_badge_award_unique_user_badge")]

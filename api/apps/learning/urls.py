@@ -6,6 +6,7 @@ from .images import content_image
 urlpatterns = [
     path("health/", views.health, name="learning-health"),
     path("garden/", views.garden, name="learning-garden"),
+    path("badges/check/", views.badges_check, name="learning-badges-check"),
     path("leaderboard/", views.leaderboard, name="learning-leaderboard"),
     path("images/<str:kind>/<uuid:content_id>/", content_image, name="learning-image"),
     path("themes/", views.themes, name="learning-themes"),
