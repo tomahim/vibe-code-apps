@@ -606,11 +606,6 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       // The question gauge shrinks to a slim strip: the practice quiz floats
       // outside the panel, so the lessons stay the panel's focus.
       h += `<p class="lg-strip"><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><span class="lg-strip-count">${qc} of ${qt} questions correct</span></p>`;
-      if (sel >= 0) {
-        const lesson = trail.path.lessonData[sel], lp = lesson.progress, st = lessonFinished(lp) ? 'done' : lp.started ? 'cur' : 'todo';
-        const lqt = lp.questions_total || 0, lqc = lp.questions_correct || 0;
-        h += `<div class="lg-lesson"><span class="chip ${st}">${st === 'done' ? 'Bloomed' : st === 'cur' ? 'In progress' : 'Not started'}</span><h3>${sel + 1}. ${esc(lesson.title)}</h3><p class="dots big">${dots(lp.cards_total, lp.cards_completed)}</p><p>${lp.cards_completed} of ${lp.cards_total} cards read${lqt ? ` · ${lqc} of ${lqt} questions correct` : ''}</p><span class="bar wide"><i style="width:${pct(fraction(lp))}"></i></span></div>`;
-      }
       // Card dots sit on their own line below the name in every row; the
       // selected lesson's start action is the floating button at the
       // panel's right edge (wired below, positioned by placeFab).
