@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {pipeView} from '../src/apps/little-drops/flow-view.js';
+import {pipeView} from '../src/artifacts/little-drops-source/flow-view.js';
 test('open travel spans the pipe and closed travel never crosses the gate',()=>{
  assert.deepEqual(pipeView(0,true),{z:10,blocked:false});assert.deepEqual(pipeView(100,true),{z:-12,blocked:false});
  for(let t=0;t<=100;t++){const v=pipeView(t,false);assert.ok(v.z>=1);assert.equal(v.blocked,10-t*.22 < 1);}

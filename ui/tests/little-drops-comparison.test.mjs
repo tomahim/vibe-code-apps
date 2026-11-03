@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {storageSummary} from '../src/apps/little-drops/storage.js';
+import {storageSummary} from '../src/artifacts/little-drops-source/storage.js';
 test('completed comparison conserves volumes for every supported setting',()=>{
  for(let capacity=4;capacity<=20;capacity+=2)for(let inflow=0;inflow<=8;inflow++){
   const s=storageSummary(capacity,inflow);assert.equal(s.starting+6*inflow,s.delivered+s.overflow+s.final);assert.equal(s.delivered+s.shortage,27);assert.equal(s.capacity,capacity);assert.equal(s.inflow,inflow);

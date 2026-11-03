@@ -13,7 +13,7 @@ export function notebookMarkdown(ids) {
       `Source: [${sources[s.source].label}](${sources[s.source].url})`, '',
     ]),
     '---',
-    'Exported from the discoveries opened in this browser. No account or cloud sync.',
+    'Exported from the discoveries opened in this browser. Archived artifact. Visit-only discoveries; no account or cloud sync.',
     '',
   ].join('\n');
 }

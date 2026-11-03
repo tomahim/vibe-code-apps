@@ -1,6 +1,6 @@
 # Little Drops
 
-Independent, front-end-only exploration app at `/apps/little-drops`. No Little Grains imports, API, analytics, account or server state. Gallery metadata and route live in the existing UI shell.
+Frozen artifact archived on 3 November 2026 at `/artifacts/2026-11-03-little-drops`. Autonomous iteration stopped at Thomas's request. The standalone app entry/route is removed. No backend or infrastructure was created or deleted.
 
 ## First journey
 A fictional reservoir-to-tap supply system with five stops, a real Three.js city/cutaway, guided playback, height/pressure lab, treatment-sequence lab, source links and browser-local discovery notebook (`little-drops:v1:discoveries`). No water-safety or engineering claims about any real city.
@@ -12,11 +12,11 @@ WebGL failure leaves all explanations and experiments available. Motion is reduc
 ## Verification
 - `npm test`
 - `npm run build`
-- `npx playwright test little-drops.spec.js gallery-search.spec.js`
-- Firefox: `xvfb-run -a npx playwright test little-drops.spec.js --config=playwright.firefox.config.js`. Software WebGL under Xvfb is tested, not physical Android hardware.
+- `npx playwright test tests/browser/little-drops-archive.spec.js`
+- `xvfb-run -a npx playwright test --config playwright.firefox.config.js tests/browser/little-drops-archive.spec.js`
 
-## Development priorities
-Make mechanisms understandable and fun before adding more journeys. Next candidates: stronger visual branching in the pipe network, a demand/storage experiment, and a first original soundscape with opt-in audio. Backend remains out of scope until Thomas approves it.
+## Archive maintenance
+Source is retained here solely to reproduce the frozen HTML. Run `node scripts/artifacts/build-little-drops.mjs` from `ui/`. It bundles the existing React/Three.js dependencies inline, with no runtime network dependency. The gallery discovers only the matching HTML/JSON directly in its artifacts folder. Sandbox interactions are visit-only; notebook Markdown can be selected/copied, not downloaded. No ongoing development cadence.
 
 ## Release 002
 Valves & routes is a graph-connectivity toy, not a hydraulic calculation. All eight valve combinations are unit-tested. SVG status, patterns and valve symbols work without color or WebGL. The city branches are illustrative and independent of the toy topology. Guided playback lives in React so it also works on the non-WebGL fallback, pauses in a hidden tab and stops on the final stop.
