@@ -14,6 +14,13 @@ const initialApps = [
     href: "/artifacts/2026-10-30-repo-factory",
     action_label: "Enter the factory",
   },
+  {
+    slug: "lithotheque",
+    name: "Lithothèque",
+    description: "A dark mineralogist's bench: turn 3D study models, check species reference readouts and read each stone's dossier.",
+    category: "Collection",
+    icon: "⛏",
+  },
   { slug: "news", name: "Link Keeper", description: "Your Notion link library: inbox, news, favorites, inspiration and archive. Private account access required.", category: "News & ideas", icon: "▤" },
   {
     slug: "rust-learning-path",

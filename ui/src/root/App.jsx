@@ -17,6 +17,7 @@ const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/Three
 const AppIdeas = lazy(() => import("../apps/app-ideas/AppIdeas.jsx"));
 const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
 const ContentReview = lazy(() => import("../apps/content-review/ContentReview.jsx"));
+const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -71,6 +72,10 @@ export default function App() {
 
   if (path.startsWith("/apps/content-review")) {
     return <Suspense fallback={<div className="review-page" style={{ paddingTop: 40 }}>Opening the review bench…</div>}><ContentReview /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/lithotheque")) {
+    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#14171b", color: "#e8e4dd", display: "grid", placeItems: "center" }}>Opening the bench…</div>}><Lithotheque onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/recipes")) {

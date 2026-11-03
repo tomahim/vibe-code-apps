@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const base = new URL('../src/apps/lithotheque/', import.meta.url);
+const { MINERALS } = await import(new URL('minerals.js', base));
+
+test('six unique specimens with complete dossiers and reference-labelled readouts', () => {
+  assert.equal(MINERALS.length, 6);
+  assert.equal(new Set(MINERALS.map((m) => m.id)).size, 6);
+  assert.equal(new Set(MINERALS.map((m) => m.no)).size, 6);
+  for (const m of MINERALS) {
+    for (const field of ['name', 'formula', 'system', 'hardness', 'sg', 'streak', 'luster', 'group', 'habit', 'typical', 'geology', 'story']) {
+      assert.ok(m[field] && m[field].length > 0, `${m.id}: missing ${field}`);
+    }
+    assert.equal(m.readouts.length, 4, m.id);
+    for (const r of m.readouts) assert.match(r.result, /^Reference: /, `${m.id}: readout not labelled as reference`);
+    assert.ok(m.readouts.some((r) => r.tool === 'UV lamp'), `${m.id}: no UV lamp readout`);
+    assert.ok(m.sources.length >= 1, `${m.id}: no sources`);
+    for (const s of m.sources) assert.ok(s.url.startsWith('https://'), `${m.id}: insecure source ${s.url}`);
+  }
+});
+
+test('app labels its models as placeholders and ships no remote content', () => {
+  const app = fs.readFileSync(new URL('Lithotheque.jsx', base), 'utf8');
+  assert.match(app, /placeholder/i);
+  assert.match(app, /never measurements\s+of a specific sample/);
+  assert.doesNotMatch(app, /fetch\(/);
+  const engine = fs.readFileSync(new URL('engine.js', base), 'utf8');
+  assert.match(engine, /three/);
+  assert.doesNotMatch(engine, /fetch\(|https?:\/\//);
+});
