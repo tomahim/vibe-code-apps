@@ -242,17 +242,15 @@ def leaderboard(user, currency, period, limit=20, offset=0):
     for index, row in enumerate(rows):
         row['rank'] = index + 1
     growth = chart(events, currency, period, rows, offset=offset)
-    for row in rows:
-        row.pop('user_id')
     window_start, window_end = period_window(period, offset, now)
-    # Detail counts are attached to the learner's own row only: Thomas asked
-    # for them under his own name, and other learners' attempt detail is not
-    # part of the shared ranking today.
-    self_stats = activity_stats(window_start, window_end).get(
-        user.pk, {'cards_read': 0, 'attempts': 0, 'correct': 0, 'wrong': 0})
+    # Every ranked row carries the same aggregated activity detail for the
+    # selected window: Thomas asked to see the stats of all players, not only
+    # his own. These are aggregates only; raw attempt history stays private.
+    stats_by_user = activity_stats(window_start, window_end)
     for row in rows:
-        if row['is_self']:
-            row['stats'] = self_stats
+        row['stats'] = stats_by_user.get(
+            row['user_id'], {'cards_read': 0, 'attempts': 0, 'correct': 0, 'wrong': 0})
+        row.pop('user_id')
     window = None
     if window_start is not None:
         window = {'start': window_start.isoformat(), 'end': window_end.isoformat(),

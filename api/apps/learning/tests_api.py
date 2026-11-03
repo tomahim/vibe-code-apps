@@ -732,16 +732,29 @@ class LearningAPITests(TestCase):
         CardProgress.objects.filter(user=self.user).update(completed_at=earned_at)
         QuestionAttempt.objects.filter(user=self.user).update(answered_at=earned_at)
 
+        # Another learner's activity in the same window: one card read and one
+        # correct attempt, seven days ago as well.
+        CardProgress.objects.create(user=self.other, card=self.card, completed_at=earned_at)
+        QuestionAttempt.objects.create(user=self.other, question=self.question,
+                                       attempt_type="initial", submitted_answer="0",
+                                       correct=True, answered_at=earned_at)
+
         drops = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=1").json()
         own = drops["self"]
         # 106 Drops (1 + 5 lesson + 100 path bonus) but exactly one card read.
         self.assertEqual(own["score"], 106)
         self.assertEqual(own["stats"]["cards_read"], 1)
-        # Stats ride the self row only: other learners' detail is not shared.
+        # Every ranked row carries the same aggregated stats, not only self.
         for row in drops["rows"]:
-            self.assertEqual("stats" in row, row["is_self"])
+            self.assertIn("stats", row)
+        other_row = next(row for row in drops["rows"] if not row["is_self"])
+        self.assertEqual(other_row["stats"]["cards_read"], 1)
 
         carrots = self.client.get("/api/learning/leaderboard/?currency=carrots&period=weekly&offset=1").json()
+        other_carrots = next(row for row in carrots["rows"] if not row["is_self"])
+        self.assertEqual(other_carrots["stats"],
+                         {"cards_read": 1, "attempts": 1, "correct": 1, "wrong": 0})
+
         self.assertEqual(carrots["self"]["score"], 1)
         self.assertEqual(carrots["self"]["stats"],
                          {"cards_read": 1, "attempts": 2, "correct": 1, "wrong": 1})
