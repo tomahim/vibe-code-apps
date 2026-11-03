@@ -92,15 +92,61 @@ function rockGeo(r, seed, squashY = 0.62) {
     g.setAttribute('normal', new THREE.BufferAttribute(n, 3));
     return g;
 }
-function bladeGeo(w, h, t) {
-    const sh = new THREE.Shape();
-    sh.moveTo(-w * .5, -h * .5); sh.lineTo(w * .49, -h * .5);
-    sh.lineTo(w * .44, h * .3); sh.lineTo(w * .28, h * .47);
-    sh.lineTo(-w * .08, h * .5); sh.lineTo(-w * .38, h * .42); sh.closePath();
-    const g = new THREE.ExtrudeGeometry(sh, { depth: t, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: .012, bevelThickness: .008 });
-    g.translate(0, 0, -t * .5);
+// Realistic kyanite blade: parametric, gently curved, tapered to a chisel tip.
+// Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides
+// (kyanite's deep blue runs lengthwise down the centre, paling to the edges).
+function bladeGeo(len, w, t, seed) {
+    const segs = 26, ring = 10;
+    const bendX = noise3(seed, 0.3, 1.7) * 0.22 * len;
+    const bendZ = noise3(1.1, seed, 0.6) * 0.14 * len;
+    const positions = []; const zone = []; const idx = [];
+    const ringPts = [];
+    for (let i = 0; i < ring; i++) {
+        const a = (i / ring) * Math.PI * 2;
+        // flattened superellipse: wide across X (width), thin across Z (thickness)
+        const cx = Math.sign(Math.cos(a)) * Math.pow(Math.abs(Math.cos(a)), 0.5);
+        const cz = Math.sign(Math.sin(a)) * Math.pow(Math.abs(Math.sin(a)), 0.5);
+        ringPts.push([cx, cz]);
+    }
+    for (let s = 0; s <= segs; s++) {
+        const u = s / segs;
+        const taper = u < 0.72 ? 1 - 0.1 * u : Math.max(0.16, 1 - 0.1 * u - Math.pow((u - 0.72) / 0.28, 1.5) * 0.78);
+        const thick = 1 - 0.3 * u;
+        const wob = 1 + 0.09 * fbm(u * 5 + seed, seed * 0.7, 0, 2);
+        const y = u * len;
+        const cx0 = bendX * u * u;
+        const cz0 = bendZ * Math.sin(u * 2.1);
+        for (let i = 0; i < ring; i++) {
+            const px = ringPts[i][0], pz = ringPts[i][1];
+            positions.push(cx0 + px * w * 0.5 * taper * wob, y, cz0 + pz * t * 0.5 * taper * thick);
+            zone.push(Math.abs(px));
+        }
+    }
+    for (let s = 0; s < segs; s++) {
+        for (let i = 0; i < ring; i++) {
+            const a = s * ring + i, b = s * ring + (i + 1) % ring;
+            const c = a + ring, d = b + ring;
+            idx.push(a, c, b, b, c, d);
+        }
+    }
+    // chisel-tip apex, slightly off centre
+    const apex = positions.length / 3;
+    positions.push(bendX + w * 0.06, len * 1.045, 0);
+    zone.push(0.5);
+    const lastRing = segs * ring;
+    for (let i = 0; i < ring; i++) idx.push(lastRing + i, apex, lastRing + (i + 1) % ring);
+    // base cap (buried in matrix, but close the solid)
+    const base = positions.length / 3;
+    positions.push(0, 0, 0); zone.push(0);
+    for (let i = 0; i < ring; i++) idx.push(base, (i + 1) % ring, i);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    g.setAttribute('aZone', new THREE.Float32BufferAttribute(zone, 1));
+    g.setIndex(idx);
+    g.computeVertexNormals();
     return g;
 }
+
 function prismGeo(r, h, seed, sides = 6) {
     const g = new THREE.CylinderGeometry(r, r * 1.04, h, sides, 4);
     const pos = g.attributes.position;
@@ -116,46 +162,71 @@ function prismGeo(r, h, seed, sides = 6) {
 function mineralSurface(mat, mode) {
     mat.customProgramCacheKey = () => mode;
     mat.onBeforeCompile = (shader) => {
-        shader.vertexShader = 'varying vec3 vStone;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvStone=position;');
+        const isBlade = mode === 'kyanite';
+        shader.vertexShader = (isBlade ? 'attribute float aZone; varying float vZone;\n' : '')
+            + 'varying vec3 vStone;\n' + shader.vertexShader.replace('#include <begin_vertex>',
+            '#include <begin_vertex>\nvStone=position;' + (isBlade ? 'vZone=aZone;' : ''));
         shader.fragmentShader = `varying vec3 vStone;
+      ${isBlade ? 'varying float vZone;' : ''}
       float hashStone(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
       float stoneNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
         return mix(mix(mix(hashStone(i),hashStone(i+vec3(1,0,0)),f.x),mix(hashStone(i+vec3(0,1,0)),hashStone(i+vec3(1,1,0)),f.x),f.y),mix(mix(hashStone(i+vec3(0,0,1)),hashStone(i+vec3(1,0,1)),f.x),mix(hashStone(i+vec3(0,1,1)),hashStone(i+vec3(1,1,1)),f.x),f.y),f.z);}
       ` + shader.fragmentShader;
-        const detail = mode === 'matrix' ? `
-      float grain=stoneNoise(vStone*135.);
-      float patch=stoneNoise(vStone*18.)*.55+stoneNoise(vStone*51.)*.25;
-      diffuseColor.rgb *= .52+patch*.75+grain*.35;
-      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.56,.51,.43),smoothstep(.86,.97,grain)*.5);
-      ` : mode === 'blade' ? `
-      float stripe=pow(.5+.5*sin(vStone.x*430.+stoneNoise(vStone*30.)*1.7),8.);
-      float zone=stoneNoise(vec3(vStone.x*38.,vStone.y*2.,vStone.z*15.));
-      diffuseColor.rgb*=.67+zone*.48+stripe*.16;
-      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.61,.7,.81),smoothstep(.66,.83,zone)*.35);
-      ` : `float grains=stoneNoise(vStone*85.);float cloud=stoneNoise(vStone*8.);
-      diffuseColor.rgb *= .78+cloud*.3+grains*.1;`;
+        const detail = isBlade ? `
+      // colour zoning: deep blue core paling to silvery edges
+      float zone = smoothstep(.02, .92, vZone + (stoneNoise(vStone*9.)-.5)*.25);
+      vec3 deep = vec3(.045,.115,.38);
+      vec3 mid  = vec3(.13,.27,.58);
+      vec3 pale = vec3(.42,.52,.72);
+      vec3 col = mix(deep, mid, smoothstep(.0,.55,zone));
+      col = mix(col, pale, smoothstep(.5,1.,zone)*.85);
+      // lengthwise striations and cleavage steps
+      float stripe = sin(vStone.y*330. + stoneNoise(vec3(vStone.x*55.,0.,vStone.z*55.))*6.);
+      col *= .93 + .07*smoothstep(-.6,.9,stripe);
+      float step_ = stoneNoise(vec3(floor(vStone.y*14.)*7.3, vStone.x*30., vStone.z*30.));
+      col *= .94 + .1*step_;
+      // pearly lustre patches
+      float pearl = stoneNoise(vStone*vec3(22.,5.,22.));
+      col = mix(col, col*vec3(1.07,1.09,1.16), smoothstep(.55,.92,pearl)*.55);
+      diffuseColor.rgb = col;
+      ` : `
+      // foliated mica schist: warped light/dark bands with glinting flakes
+      float warp = (stoneNoise(vStone*2.6)-.5)*5.;
+      float band = .5+.5*sin(vStone.x*20. + vStone.y*4. + warp);
+      vec3 dark = vec3(.085,.08,.075);
+      vec3 light = vec3(.17,.158,.142);
+      vec3 col = mix(dark, light, smoothstep(.25,.75,band));
+      float grain = stoneNoise(vStone*130.);
+      col *= .68 + grain*.55;
+      float glint = step(.984, stoneNoise(vStone*300.));
+      col += glint * vec3(.13,.125,.115);
+      diffuseColor.rgb = col;
+      `;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\n' + detail);
-        if (mode === 'matrix') shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+        if (!isBlade) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
       float b=stoneNoise(vStone*110.); vec3 q0=dFdx(vStone),q1=dFdy(vStone);
-      vec3 sn=normalize(cross(q0,q1));
-      normal=normalize(normal + (dFdx(b)*normalize(q0)+dFdy(b)*normalize(q1))*.45);`);
+      normal=normalize(normal + (dFdx(b)*normalize(q0)+dFdy(b)*normalize(q1))*.5);`);
     };
     return mat;
 }
 
 // ---- materials ----
 function makeMats(kind) {
+    if (kind === 'kyanite') {
+        const schist = mineralSurface(new THREE.MeshStandardMaterial({
+            color: '#ffffff', roughness: 0.94, metalness: 0.04,
+        }), 'schist');
+        return { matrix: schist, crystal: () => mineralSurface(new THREE.MeshPhysicalMaterial({
+            color: '#ffffff', roughness: 0.34, metalness: 0,
+            clearcoat: 0.35, clearcoatRoughness: 0.35,
+            sheen: 0.6, sheenRoughness: 0.55, sheenColor: new THREE.Color('#c9d6f2'),
+        }), 'kyanite') };
+    }
     const matrix = new THREE.MeshStandardMaterial({
         color: '#6f6a62', roughness: 0.96, metalness: 0,
         map: speckleTex('#6f6a62', ['#5d5850', '#7d7870', '#857f75'], 900, 11),
         bumpScale: 0.012,
     });
-    if (kind === 'kyanite') {
-        return { matrix, crystal: () => mineralSurface(new THREE.MeshPhysicalMaterial({
-            color: '#3d5da8', roughness: 0.38, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.45,
-            flatShading: false,
-        }), 'blade') };
-    }
     if (kind === 'nepheline') {
         return { matrix, crystal: () => new THREE.MeshPhysicalMaterial({
             color: '#a0a28c', roughness: 0.36, metalness: 0, clearcoat: 0.7, clearcoatRoughness: 0.25,
@@ -209,20 +280,42 @@ export function buildSpecimen(kind, uv) {
         put(rockGeo(.12 + (i % 3) * .05, i + 36, .45), mats.matrix, Math.cos(a) * rad, -.66 + (i % 3) * .055, Math.sin(a) * rad, .3 * i, .7 * i, .2 * i);
     }
     if (kind === 'kyanite') {
-        const mica = new THREE.MeshStandardMaterial({ color: '#aaa99d', metalness: .48, roughness: .36, side: THREE.DoubleSide });
-        for (let i = 0; i < 45; i++) {
-            const a = i * 2.399, rad = .2 + (i % 9) * .07;
-            put(new THREE.CircleGeometry(.025 + (i % 4) * .012, 5), mica, Math.cos(a) * rad, -.43 + Math.sin(i) * .09, Math.sin(a) * rad, -1.15 + i * .17, i * .3, i * .2);
+        // mica flakes lying along the foliation, silvery and thin
+        const mica = new THREE.MeshStandardMaterial({ color: '#c2bcb0', metalness: .6, roughness: .28, side: THREE.DoubleSide });
+        for (let i = 0; i < 70; i++) {
+            const a = i * 2.399, rad = .15 + (i % 10) * .065;
+            const fl = new THREE.Mesh(new THREE.CircleGeometry(.028 + (i % 4) * .014, 6), mica);
+            fl.position.set(Math.cos(a) * rad, -.5 + (i % 5) * .045, Math.sin(a) * rad * .8);
+            fl.rotation.set(-1.45 + (i % 7) * .05, i * .9, (i % 5) * .12);
+            fl.scale.set(1, 1.5, 1);
+            fl.castShadow = true;
+            g.add(fl);
         }
+        // milky quartz vein crossing the schist
+        const veinMat = new THREE.MeshPhysicalMaterial({ color: '#ece9e2', roughness: .38, metalness: 0, clearcoat: .5, clearcoatRoughness: .3, transparent: true, opacity: .96 });
+        const vein = new THREE.Mesh(rockGeo(0.15, 77, 0.55), veinMat);
+        vein.position.set(-0.05, -0.42, 0.12);
+        vein.rotation.set(0.15, 0, 0.85);
+        vein.scale.set(3.2, 1, 1.4);
+        vein.castShadow = true;
+        g.add(vein);
+        // spray of intergrown blades rising from the matrix
         const blades = [
-            [0.34, 1.7, 0.09, -0.12, 0.28, 0.02, 0.1, 0.22],
-            [0.3, 1.45, 0.08, 0.22, 0.1, 0.12, -0.08, -0.3],
-            [0.4, 1.9, 0.1, 0.02, 0.42, -0.1, 0.18, 0.05],
-            [0.26, 1.1, 0.07, -0.34, 0.02, 0.16, -0.14, 0.5],
-            [0.28, 1.35, 0.08, 0.4, 0.18, -0.06, 0.06, -0.62],
+            [2.0, 0.30, 0.06, 0.0, 0.0, 0.05, -0.10, 0.2],
+            [1.7, 0.26, 0.055, 0.16, 0.10, -0.05, 0.26, -0.5],
+            [1.85, 0.24, 0.05, -0.17, 0.07, 0.08, -0.33, 0.9],
+            [1.35, 0.20, 0.045, 0.06, -0.13, 0.2, 0.48, 2.0],
+            [1.1, 0.17, 0.04, -0.06, 0.2, -0.12, -0.55, -1.2],
+            [0.8, 0.14, 0.035, 0.28, -0.05, 0.1, 0.72, 1.4],
         ];
-        for (const [w, h, t, x, y, z, rx, rz] of blades) put(bladeGeo(w, h, t), cm, x, y, z, rx, 0, rz);
-    } else if (kind === 'nepheline') {
+        for (const [len, w, t, x, z, rx, rz, ry] of blades) {
+            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 13.7), cm);
+            b.position.set(x, -0.52, z);
+            b.rotation.set(rx, ry, rz);
+            b.castShadow = true;
+            g.add(b);
+        }
+        } else if (kind === 'nepheline') {
         put(prismGeo(0.34, 0.95, 5), cm, -0.22, 0.05, 0.06, 0.14, 0.3, 0.1);
         put(prismGeo(0.28, 0.72, 9), cm, 0.26, -0.02, -0.08, -0.1, 0.9, -0.18);
         put(prismGeo(0.22, 0.5, 13), cm, 0.04, 0.3, 0.24, 0.5, 0.4, 0.3);

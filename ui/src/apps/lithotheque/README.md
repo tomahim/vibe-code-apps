@@ -6,7 +6,8 @@ The interface is the "Bench" direction Thomas picked from the three design studi
 
 ## Honest modelling
 
-- The 3D specimens are original procedural Three.js study models (engine.js): correct habit, colour and lustre character per species, but stylized placeholders. They are not scans, not photogrammetry and not measured specimens, and the app says so wherever a model appears ("study model"). Realistic minerals are a separately planned later phase.
+- The 3D specimens are original procedural Three.js study models (engine.js). They are not scans, not photogrammetry and not measured specimens, and the app says so wherever a model appears ("study model").
+- Kyanite is the first higher-detail model (2026-11-03, Thomas asked for deep realism work on it): parametric tapered blades with gentle curvature and chisel tips, lengthwise striations and cleavage steps, the species' signature blue colour zoning (deep core paling to silvery edges), pearly lustre patches, an intergrown spray habit, a foliated mica-schist matrix with glinting flakes and a milky quartz vein. The other five species remain stylized placeholders; realistic versions are a separately planned later phase.
 - Instrument rail entries (scratch pick, streak plate, acid dropper, UV lamp) are published species reference values, labelled "Reference:", never measurements of a specific sample. Selecting the UV lamp relights the stage under a violet lamp; that is a viewing mood, not a simulated fluorescence measurement.
 - No measurement scale bars, no fabricated provenance, no copied museum scans or textures. The noise, geometry and canvas textures are generated in engine.js.
 
