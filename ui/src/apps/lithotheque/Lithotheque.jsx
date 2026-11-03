@@ -9,8 +9,8 @@ const TABS = ['Identity', 'Geology', 'Occurrence', 'Story', 'Resources'];
 function HonestNote() {
     return (
         <p className="litho-honest">
-            Original Three.js study models, never scans or measured specimens: kyanite is rebuilt
-            in higher detail, the other five are still placeholders. Instrument readouts are
+            Original Three.js study models, never scans or measured specimens: every species is a
+            higher-detail procedural rebuild of its classic habit. Instrument readouts are
             published reference values for the species, never measurements of a specific sample.
         </p>
     );
