@@ -25,5 +25,5 @@ test('Storage balance conserves water, counts shortages and clips overflow',()=>
 });
 import { notebookMarkdown } from '../src/artifacts/little-drops-source/notebook.js';
 test('Notebook exports only opened discoveries, canonical order, sources and honest scope',()=>{
- const md=notebookMarkdown(['tap','source','source','unknown']);assert.match(md,/2 of 5/);assert.ok(md.indexOf('## A city takes a sip')<md.indexOf('## An ordinary little miracle'));assert.ok(!md.includes('## Give gravity a job'));assert.match(md,/https:\/\/www.cdc.gov/);assert.match(md,/No account or cloud sync/);assert.equal(saveDiscoveries({setItem(){throw Error('quota');}},['tap']),false);assert.equal(saveDiscoveries({setItem(){}},[]),true);
+ const md=notebookMarkdown(['tap','source','source','unknown']);assert.match(md,/2 of 5/);assert.ok(md.indexOf('## A city takes a sip')<md.indexOf('## An ordinary little miracle'));assert.ok(!md.includes('## Give gravity a job'));assert.match(md,/https:\/\/www.cdc.gov/);assert.match(md,/Visit-only discoveries; no account or cloud sync/);assert.equal(saveDiscoveries({setItem(){throw Error('quota');}},['tap']),false);assert.equal(saveDiscoveries({setItem(){}},[]),true);
 });
