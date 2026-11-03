@@ -100,6 +100,21 @@ function rockGeo(r, seed, squashY = 0.62) {
 // abrupt termination (slanted chisel cut or flat break) - never a spear point.
 // Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides.
 // term: 0 = flat break, >0 = slant height of a diagonal cut across the width.
+// craggier rock surface: ridged noise for broken, angular relief
+function cragGeo(r, seed, squashY = 0.55) {
+    const g = rockGeo(r, seed, squashY);
+    const pos = g.attributes.position;
+    const v = new THREE.Vector3();
+    for (let i = 0; i < pos.count; i++) {
+        v.fromBufferAttribute(pos, i);
+        const n = 1 - Math.abs(fbm(v.x * 3.3 + seed, v.y * 3.3 + seed * 0.7, v.z * 3.3, 3));
+        const k = 1 + (n * 0.16) / (v.length() || 1);
+        pos.setXYZ(i, v.x * k, v.y * k, v.z * k);
+    }
+    g.computeVertexNormals();
+    return g;
+}
+
 function bladeGeo(len, w, t, seed, term) {
     const segs = 26, ring = 12;
     const bendX = noise3(seed, 0.3, 1.7) * 0.18 * len;
@@ -133,7 +148,10 @@ function bladeGeo(len, w, t, seed, term) {
             // slanted termination: top of the blade drops across the width
             const cut = u > 0.9 && term > 0 ? term * (px * 0.5 + 0.5) * ((u - 0.9) / 0.1) : 0;
             const y = u * len - cut;
-            positions.push(cx0 + px * w * 0.5 * taper * wob, y, cz0 + (pz * t * 0.5 + relief) * (1 - 0.25 * u));
+            // irregular natural edges: small continuous jitter along length and around the ring
+            const jx = fbm(u * 7 + seed, i * 0.9, seed * 0.3, 2) * w * 0.06;
+            const jz = fbm(u * 7 - seed, i * 0.9 + 4.2, seed, 2) * t * 0.35;
+            positions.push(cx0 + px * w * 0.5 * taper * wob + jx, y, cz0 + (pz * t * 0.5 + relief) * (1 - 0.25 * u) + jz);
             zone.push(Math.abs(px));
         }
     }
@@ -189,35 +207,47 @@ function mineralSurface(mat, mode) {
         return mix(mix(mix(hashStone(i),hashStone(i+vec3(1,0,0)),f.x),mix(hashStone(i+vec3(0,1,0)),hashStone(i+vec3(1,1,0)),f.x),f.y),mix(mix(hashStone(i+vec3(0,0,1)),hashStone(i+vec3(1,0,1)),f.x),mix(hashStone(i+vec3(0,1,1)),hashStone(i+vec3(1,1,1)),f.x),f.y),f.z);}
       ` + shader.fragmentShader;
         const detail = isBlade ? `
-      // bold lengthwise colour bands across the width (cobalt vs pale blue-grey)
-      float wob = stoneNoise(vStone*vec3(4.,1.2,4.))*3.5;
-      float band = .5+.5*sin(vStone.x*85. + wob);
-      vec3 deep = vec3(.055,.14,.42);
-      vec3 midb = vec3(.16,.30,.58);
-      vec3 pale = vec3(.42,.50,.67);
-      vec3 col = mix(deep, midb, smoothstep(.05,.45,band));
-      col = mix(col, pale, smoothstep(.6,.95,band)*.75);
-      // blades pale toward their side edges and tips
-      col = mix(col, pale, smoothstep(.6,1.,vZone)*.45);
-      col = mix(col, pale*.92, smoothstep(.78,1.,vStone.y)*.25);
-      // fine lengthwise striations
-      float stripe = sin(vStone.y*290. + stoneNoise(vec3(vStone.x*50.,0.,vStone.z*50.))*5.);
-      col *= .95 + .05*smoothstep(-.6,.9,stripe);
+      // cloudy internal colour variation, elongated along the blade
+      float cl1 = stoneNoise(vStone*vec3(6.,1.5,6.));
+      float cl2 = stoneNoise(vStone*vec3(15.,4.,15.));
+      float cloud = cl1*.62 + cl2*.38;
+      vec3 deep = vec3(.05,.13,.40);
+      vec3 midb = vec3(.17,.31,.60);
+      vec3 pale = vec3(.48,.56,.72);
+      vec3 col = mix(pale, midb, smoothstep(.22,.52,cloud));
+      col = mix(col, deep, smoothstep(.55,.85,cloud));
+      // broken lengthwise cobalt streaks, never regular
+      float streak = stoneNoise(vec3(vStone.x*38., vStone.y*2.2, vStone.z*38.));
+      col = mix(col, deep*1.1, smoothstep(.58,.9,streak)*.4);
+      // thin irregular fracture veins (ridged noise)
+      float fr = 1.-abs(stoneNoise(vStone*vec3(9.,2.2,9.))*2.-1.);
+      col = mix(col, col*.5, smoothstep(.90,.985,fr)*.55);
+      // whitish chips and flecks
+      float chip = step(.958, stoneNoise(vStone*vec3(55.,16.,55.)));
+      col = mix(col, pale*1.08, chip*.45);
+      // pale side edges and slight tip fade
+      col = mix(col, pale, smoothstep(.68,1.,vZone)*.4);
+      col = mix(col, pale*.92, smoothstep(.8,1.05,vStone.y)*.2);
+      // fine lengthwise striations, subtle
+      float stripe = sin(vStone.y*260. + stoneNoise(vStone*35.)*5.);
+      col *= .96 + .04*smoothstep(-.6,.9,stripe);
       // pearly lustre patches
       float pearl = stoneNoise(vStone*vec3(20.,4.5,20.));
-      col = mix(col, col*vec3(1.06,1.08,1.14), smoothstep(.6,.92,pearl)*.4);
+      col = mix(col, col*vec3(1.06,1.08,1.14), smoothstep(.6,.92,pearl)*.35);
       diffuseColor.rgb = col;
       ` : `
-      // foliated mica schist: warped light/dark bands with glinting flakes
-      float warp = (stoneNoise(vStone*2.6)-.5)*5.;
-      float band = .5+.5*sin(vStone.x*20. + vStone.y*4. + warp);
+      // foliated mica schist: irregular patchy bands, broken lighter lenses, glints
+      float warp = (stoneNoise(vStone*2.2)-.5)*9.;
+      float bandf = stoneNoise(vec3(vStone.x*6.5+warp, vStone.y*6.5, vStone.z*6.5));
       vec3 dark = vec3(.085,.08,.075);
-      vec3 light = vec3(.17,.158,.142);
-      vec3 col = mix(dark, light, smoothstep(.25,.75,band));
+      vec3 light = vec3(.16,.15,.135);
+      vec3 col = mix(dark, light, smoothstep(.3,.72,bandf));
+      float lens = stoneNoise(vStone*4.5+13.7);
+      col = mix(col, light*1.3, smoothstep(.6,.8,lens)*.45);
       float grain = stoneNoise(vStone*130.);
-      col *= .68 + grain*.55;
-      float glint = step(.984, stoneNoise(vStone*300.));
-      col += glint * vec3(.13,.125,.115);
+      col *= .66 + grain*.6;
+      float glint = step(.970, stoneNoise(vStone*330.));
+      col += glint * vec3(.15,.14,.13);
       diffuseColor.rgb = col;
       `;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\n' + detail);
@@ -290,33 +320,33 @@ export function buildSpecimen(kind, uv) {
         g.add(m);
         return m;
     };
-    const base = put(rockGeo(0.72, kind.length * 7 + 3), mats.matrix, 0, -0.72, 0);
+    const base = put(kind === 'kyanite' ? cragGeo(0.8, kind.length * 7 + 3, 0.5) : rockGeo(0.72, kind.length * 7 + 3), mats.matrix, 0, -0.72, 0);
     base.receiveShadow = true;
     const cm = mats.crystal(uv);
-    for (let i = 0; i < 14; i++) {
-        const a = i * 2.399, rad = .25 + (i % 4) * .12;
-        put(rockGeo(.12 + (i % 3) * .05, i + 36, .45), mats.matrix, Math.cos(a) * rad, -.66 + (i % 3) * .055, Math.sin(a) * rad, .3 * i, .7 * i, .2 * i);
+    if (kind !== 'kyanite') {
+        for (let i = 0; i < 14; i++) {
+            const a = i * 2.399, rad = .25 + (i % 4) * .12;
+            put(rockGeo(.12 + (i % 3) * .05, i + 36, .45), mats.matrix, Math.cos(a) * rad, -.66 + (i % 3) * .055, Math.sin(a) * rad, .3 * i, .7 * i, .2 * i);
+        }
     }
     if (kind === 'kyanite') {
-        // mica flakes lying along the foliation, silvery and thin
-        const mica = new THREE.MeshStandardMaterial({ color: '#c2bcb0', metalness: .6, roughness: .28, side: THREE.DoubleSide });
-        for (let i = 0; i < 70; i++) {
-            const a = i * 2.399, rad = .15 + (i % 10) * .065;
-            const fl = new THREE.Mesh(new THREE.CircleGeometry(.028 + (i % 4) * .014, 6), mica);
-            fl.position.set(Math.cos(a) * rad, -.5 + (i % 5) * .045, Math.sin(a) * rad * .8);
-            fl.rotation.set(-1.45 + (i % 7) * .05, i * .9, (i % 5) * .12);
-            fl.scale.set(1, 1.5, 1);
-            fl.castShadow = true;
-            g.add(fl);
+        // craggy foliated schist base with embedded milky quartz intergrowth
+        const quartzMat = new THREE.MeshPhysicalMaterial({ color: '#cfcabf', roughness: .58, metalness: 0, clearcoat: .2, clearcoatRoughness: .5, transparent: true, opacity: .96 });
+        const lumps = [
+            [0.085, 5, -0.42, -0.58, 0.26, 0.4, 1.9, 0.8, 1.1],
+            [0.07, 9, 0.38, -0.58, -0.18, 1.2, 1.6, 0.8, 1.3],
+            [0.06, 13, -0.12, -0.5, -0.33, 2.1, 1.4, 0.8, 1.0],
+            [0.055, 17, 0.22, -0.54, 0.3, 0.8, 1.5, 0.8, 1.2],
+            [0.05, 21, -0.34, -0.56, -0.05, 1.7, 1.8, 0.8, 0.9],
+        ];
+        for (const [r, sd, x, y, z, ry, sx, sy, sz] of lumps) {
+            const q = new THREE.Mesh(cragGeo(r, sd, 0.7), quartzMat);
+            q.position.set(x, y, z);
+            q.rotation.set(0.3 * sd, ry, 0.2 * sd);
+            q.scale.set(sx, sy, sz);
+            q.castShadow = true;
+            g.add(q);
         }
-        // milky quartz vein crossing the schist
-        const veinMat = new THREE.MeshPhysicalMaterial({ color: '#ece9e2', roughness: .38, metalness: 0, clearcoat: .5, clearcoatRoughness: .3, transparent: true, opacity: .96 });
-        const vein = new THREE.Mesh(rockGeo(0.15, 77, 0.55), veinMat);
-        vein.position.set(-0.05, -0.42, 0.12);
-        vein.rotation.set(0.15, 0, 0.85);
-        vein.scale.set(3.2, 1, 1.4);
-        vein.castShadow = true;
-        g.add(vein);
         // sub-parallel stacked cluster of thick blades (bent, fanned, some crossing)
         // [len, w, t, x, z, rx, rz, ry, term]
         const blades = [
@@ -329,6 +359,17 @@ export function buildSpecimen(kind, uv) {
         ];
         for (const [len, w, t, x, z, rx, rz, ry, term] of blades) {
             const b = new THREE.Mesh(bladeGeo(len, w, t, len * 13.7, term), cm);
+            b.position.set(x, -0.56, z);
+            b.rotation.set(rx, ry, rz);
+            b.castShadow = true;
+            g.add(b);
+        }
+        // broken blade stubs around the cluster base
+        for (const [len, w, t, x, z, rx, rz, ry] of [
+            [0.32, 0.12, 0.04, -0.3, 0.18, 0.3, -0.5, 0.6],
+            [0.26, 0.1, 0.035, 0.34, 0.12, -0.2, -0.28, 2.2],
+        ]) {
+            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 31.1, 0), cm);
             b.position.set(x, -0.5, z);
             b.rotation.set(rx, ry, rz);
             b.castShadow = true;
