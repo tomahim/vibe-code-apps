@@ -6,7 +6,7 @@ import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
 import { GrainsLoader } from "./Loader.jsx";
-import { shuffled } from "./shuffle.js";
+import { stableShuffler } from "./shuffle.js";
 import { BadgeButton, BadgeCollection } from "./Badges.jsx";
 import "./garden/garden.css";
 import "./little-grains.css";
@@ -237,7 +237,10 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
   // Shuffled once per question so the order stays stable while it is on screen.
-  const questionOptions = useMemo(() => shuffled(question?.options ?? []), [question]);
+  // Shuffle once per question id: a refetch after answering replaces the
+  // question object, and identity-keying reshuffles the options on screen.
+  const [shuffleOnce] = useState(() => stableShuffler());
+  const questionOptions = useMemo(() => shuffleOnce(question), [question, shuffleOnce]);
   const typedQuestion = question?.type === "type_answer_question";
   const reviewCard = data?.cards.find((item) => viewStep?.type === "revisit" && item.id === viewStep.id);
   const cardIndex = data?.cards.findIndex((item) => item.id === (card || reviewCard)?.id) ?? -1;
@@ -359,7 +362,10 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
   const question = queue[0] || null;
   const typedQuestion = question?.type === "type_answer_question";
   // Shuffled once per question so the order stays stable while it is on screen.
-  const questionOptions = useMemo(() => shuffled(question?.options ?? []), [question]);
+  // Shuffle once per question id: a refetch after answering replaces the
+  // question object, and identity-keying reshuffles the options on screen.
+  const [shuffleOnce] = useState(() => stableShuffler());
+  const questionOptions = useMemo(() => shuffleOnce(question), [question, shuffleOnce]);
 
   async function submitAnswer() {
     if (!question || !choice.trim() || busy) return;

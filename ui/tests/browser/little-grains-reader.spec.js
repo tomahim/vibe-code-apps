@@ -156,3 +156,26 @@ test('a checkpoint after the last card is served before the celebration', async 
   await page.waitForTimeout(1200); // Let the celebration animation settle for the screenshot.
   await page.screenshot({ path: '/tmp/lg-final-checkpoint.png' });
 });
+
+test('options keep their shuffled order when the answer is checked', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  // Alternating swap/no-swap pattern: any reshuffle after the question is on
+  // screen visibly flips a two-option list, whatever the call count so far.
+  await page.addInitScript(() => {
+    let call = 0;
+    const pattern = [0, 0.999, 0.999, 0];
+    Math.random = () => pattern[call++ % pattern.length];
+  });
+  await fixture(page);
+  await page.goto(url);
+  const reader = page.getByRole('dialog', { name: title });
+  await reader.getByRole('button', { name: /read this card/ }).click();
+  await expect(reader.getByRole('heading', { name: 'Which direction develops first?' })).toBeVisible();
+  const labels = reader.locator('.grains-options label span');
+  const before = await labels.allTextContents();
+  await reader.getByLabel(before[0], { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer', exact: true }).click();
+  await expect(reader.getByRole('status')).toContainText('right');
+  await expect(labels).toHaveText(before); // A refetch must not reshuffle on screen.
+  await page.screenshot({ path: '/tmp/lg-question-stable.png' });
+});

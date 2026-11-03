@@ -9,3 +9,20 @@ export function shuffled(items, random = Math.random) {
   }
   return result;
 }
+
+// Shuffle once per question id and keep that order for the session. The
+// reader refetches the lesson after a correct answer, so keying the shuffle
+// on the re-fetched question object reshuffles the options on screen right
+// when the feedback appears.
+export function stableShuffler(random = Math.random) {
+  const cache = new Map();
+  return (question) => {
+    if (!question) return [];
+    let options = cache.get(question.id);
+    if (!options) {
+      options = shuffled(question.options ?? [], random);
+      cache.set(question.id, options);
+    }
+    return options;
+  };
+}
