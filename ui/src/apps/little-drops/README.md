@@ -56,3 +56,6 @@ Travel now passes the demonstration gate into the far end of the section. A clos
 
 ## Release 014
 Water-level navigation gains an explicit look-back toggle and an accessible pipe locator showing the actual camera position, gate and viewing direction. Requested travel remains distinct from a view held before a closed gate. Looking back changes view only, never travel or gate state; no automatic spinning or extra animation. Pipe geometry extends on both sides so the reversed view stays within the section. This is orientation in a fictional toy, not a distribution map or hydraulic measurement.
+
+## Release 015
+Gate and look-direction quick controls now sit on the water-level scene so mobile visitors can manipulate them while seeing the result. Existing detailed controls remain synchronized below. Overlay buttons do not start travel gestures; the scene's accessible label follows view/gate/direction rather than always describing the city. Quick controls hide with WebGL failure/overview. No new animation or physics.
