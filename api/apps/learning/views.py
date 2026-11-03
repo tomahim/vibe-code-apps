@@ -334,6 +334,10 @@ def garden(request):
         # questions are still open: those stay available through the quiz.
         if state.lesson_fully_read(lesson.pk):
             continue
+        # Opening alone is not progress: with no card read yet the lesson
+        # stays reachable from its tile instead of taking a shortcut slot.
+        if not state.lesson_started(lesson.pk):
+            continue
         step = next_step(state, lesson)
         if step is None:
             continue
