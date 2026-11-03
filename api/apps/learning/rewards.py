@@ -84,34 +84,60 @@ def period_start(period, now=None):
     return None
 
 
-def totals(events, period='overall', now=None):
-    start = period_start(period, now)
+def period_window(period, offset=0, now=None):
+    """[start, end) of the weekly or monthly period `offset` steps back.
+
+    Offset 0 is the current period; overall covers all time and returns
+    open bounds. Windows follow the same UTC calendar rules as period_start.
+    """
+    now = now or datetime.now(dt_timezone.utc)
+    if period == 'weekly':
+        start = period_start('weekly', now) - timedelta(weeks=offset)
+        return start, start + timedelta(weeks=1)
+    if period == 'monthly':
+        month_index = now.year * 12 + now.month - 1 - offset
+        start = datetime(month_index // 12, month_index % 12 + 1, 1, tzinfo=dt_timezone.utc)
+        return start, (start.replace(day=28) + timedelta(days=7)).replace(day=1)
+    return None, None
+
+
+def window_label(period, window_start, window_end):
+    if period == 'monthly':
+        return window_start.strftime('%B %Y')
+    last = window_end - timedelta(days=1)
+    if last.month == window_start.month:
+        return f"{window_start.strftime('%b')} {window_start.day}\u2013{last.day}"
+    return f"{window_start.strftime('%b')} {window_start.day} \u2013 {last.strftime('%b')} {last.day}"
+
+
+def totals(events, period='overall', now=None, offset=0):
+    start, end = period_window(period, offset, now)
     result = {'drops': 0, 'carrots': 0}
     for kind, amount, at in events:
-        if start is None or at >= start:
+        if (start is None or at >= start) and (end is None or at < end):
             result[kind] += amount
     return result
 
 
-def chart_buckets(period, now=None, events=None):
+def chart_buckets(period, now=None, events=None, offset=0):
     """Calendar buckets for the growth chart: days (weekly), weeks (monthly), months (overall).
 
     The window never plots the future: it stops at the bucket containing
-    ``now``. It also starts at the first bucket holding a reward event, so a
-    young history is not padded with empty leading buckets.
+    ``now``. Past windows (offset > 0) are fully in the past, so every bucket
+    is plotted. The window also starts at the first bucket holding a reward
+    event, so a young history is not padded with empty leading buckets.
     """
     now = now or datetime.now(dt_timezone.utc)
     starts = [at for user_events in (events or {}).values() for _, _, at in user_events]
     if period == 'weekly':
-        start = period_start('weekly', now)
+        start, window_end = period_window('weekly', offset, now)
         buckets = []
         day = start
-        while day <= now:
+        while day < window_end and day <= now:
             buckets.append((day, day + timedelta(days=1), day.strftime('%a')))
             day += timedelta(days=1)
     elif period == 'monthly':
-        start = period_start('monthly', now)
-        month_end = (start.replace(day=28) + timedelta(days=7)).replace(day=1)
+        start, month_end = period_window('monthly', offset, now)
         buckets = []
         # Calendar weeks run Monday to Sunday, clipped to the month.
         monday = start - timedelta(days=start.weekday())
@@ -141,12 +167,12 @@ def chart_buckets(period, now=None, events=None):
     return buckets
 
 
-def chart(events, currency, period, rows, now=None, limit=5):
+def chart(events, currency, period, rows, now=None, limit=5, offset=0):
     """Cumulative growth per bucket for the top rows (self included even below the limit)."""
     now = now or datetime.now(dt_timezone.utc)
     currency_events = {user_id: [event for event in user_events if event[0] == currency]
                        for user_id, user_events in events.items()}
-    buckets = chart_buckets(period, now, currency_events)
+    buckets = chart_buckets(period, now, currency_events, offset)
     series_rows = list(rows[:limit])
     self_row = next((row for row in rows if row['is_self']), None)
     if self_row and self_row not in series_rows:
@@ -173,12 +199,13 @@ def chart(events, currency, period, rows, now=None, limit=5):
             'series': series}
 
 
-def leaderboard(user, currency, period, limit=20):
+def leaderboard(user, currency, period, limit=20, offset=0):
+    now = datetime.now(dt_timezone.utc)
     events = reward_events()
     users = list(get_user_model().objects.filter(is_active=True).order_by('pk'))
     rows = []
     for learner in users:
-        score = totals(events.get(learner.pk, []), period)[currency]
+        score = totals(events.get(learner.pk, []), period, offset=offset)[currency]
         if score == 0:
             continue
         name = learner.get_full_name().strip() or getattr(learner, 'username', '') or learner.email or 'Learner'
@@ -189,9 +216,20 @@ def leaderboard(user, currency, period, limit=20):
     rows.sort(key=lambda row: (-row['score'], row['user_id']))
     for index, row in enumerate(rows):
         row['rank'] = index + 1
-    growth = chart(events, currency, period, rows)
+    growth = chart(events, currency, period, rows, offset=offset)
     for row in rows:
         row.pop('user_id')
-    return {'currency': currency, 'period': period, 'timezone': 'UTC',
+    window_start, window_end = period_window(period, offset, now)
+    window = None
+    if window_start is not None:
+        window = {'start': window_start.isoformat(), 'end': window_end.isoformat(),
+                  'label': window_label(period, window_start, window_end),
+                  'current': window_start <= now < window_end}
+    # Whether any reward exists before this window, so the client can disable
+    # the "older" arrow instead of paging into empty history.
+    has_earlier = window_start is not None and any(
+        at < window_start for user_events in events.values() for _, _, at in user_events)
+    return {'currency': currency, 'period': period, 'timezone': 'UTC', 'offset': offset,
+            'window': window, 'has_earlier': has_earlier,
             'rows': rows[:limit], 'self': next((row for row in rows if row['is_self']), None),
             'chart': growth}
