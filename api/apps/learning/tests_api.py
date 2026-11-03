@@ -458,15 +458,24 @@ class LearningAPITests(TestCase):
         self.assertFalse(other["started"])
 
     def test_garden_returns_three_recent_unfinished_lessons(self):
+        # Two cards per lesson: reading the first keeps the lesson started but
+        # unfinished, so it belongs in the shortcut list.
+        first_cards = {self.lesson.pk: self.card}
+        self.row(Card, lesson=self.lesson, position=2, body_markdown="Second")
         lessons = [self.lesson]
         for position in (2, 3, 4):
             lesson = self.row(Lesson, learning_path=self.path, position=position)
-            self.row(Card, lesson=lesson, body_markdown=f"Card {position}")
+            first_cards[lesson.pk] = self.row(Card, lesson=lesson, body_markdown=f"Card {position}")
+            self.row(Card, lesson=lesson, position=2, body_markdown=f"Card {position} again")
             lessons.append(lesson)
         open_url = lambda lesson: f"/api/learning/lessons/{lesson.pk}/open/"
         self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
         for lesson in lessons:
             self.assertEqual(self.post(open_url(lesson), {}).status_code, 200)
+        # Opened but never read lessons take no slot.
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
+        for lesson in lessons:
+            self.post(f"/api/learning/cards/{first_cards[lesson.pk].pk}/complete/", {})
         recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
         self.assertEqual([row["id"] for row in recent], [str(lesson.pk) for lesson in reversed(lessons[1:])])
         self.assertEqual(recent[0]["next_step"]["type"], "card")
@@ -477,7 +486,7 @@ class LearningAPITests(TestCase):
         recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
         self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk), str(lessons[3].pk), str(lessons[2].pk)])
 
-        last_card = Card.objects.get(lesson=lessons[3])
+        last_card = Card.objects.get(lesson=lessons[3], position=2)
         self.post(f"/api/learning/cards/{last_card.pk}/complete/", {})
         recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
         self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk), str(lessons[2].pk), str(lessons[1].pk)])
@@ -486,11 +495,10 @@ class LearningAPITests(TestCase):
 
     def test_garden_recent_lessons_excludes_lessons_with_all_cards_read(self):
         # Finished for this list means every card read, even when questions
-        # remain open: only still-unread lessons get a shortcut.
+        # remain open: only still-unread lessons get a shortcut. Opening
+        # without reading any card is not progress either.
         self.post(f"/api/learning/lessons/{self.lesson.pk}/open/", {})
-        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
-        self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk)])
-        self.assertEqual(recent[0]["next_step"]["type"], "card")
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
 
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.assertEqual(self.client.get("/api/learning/garden/").json()["recent_lessons"], [])
@@ -505,6 +513,26 @@ class LearningAPITests(TestCase):
         recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
         self.assertEqual([row["id"] for row in recent], [str(second.pk)])
         self.assertEqual(recent[0]["next_step"]["type"], "question")
+
+    def test_garden_recent_lessons_excludes_lessons_with_no_cards_read(self):
+        # Thomas 2026-11-03: a lesson opened but with zero cards read must not
+        # appear in Last lessons, even as the most recent opening.
+        self.row(Card, lesson=self.lesson, position=2, body_markdown="Second")
+        second = self.row(Lesson, learning_path=self.path, position=2)
+        second_card = self.row(Card, lesson=second, body_markdown="First")
+        self.row(Card, lesson=second, position=2, body_markdown="Second")
+
+        # A partially read lesson is listed; a fresh opening on top of it is not.
+        self.post(f"/api/learning/lessons/{second.pk}/open/", {})
+        self.post(f"/api/learning/cards/{second_card.pk}/complete/", {})
+        self.post(f"/api/learning/lessons/{self.lesson.pk}/open/", {})
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(second.pk)])
+
+        # Reading one card of the freshly opened lesson lists it in front.
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        recent = self.client.get("/api/learning/garden/").json()["recent_lessons"]
+        self.assertEqual([row["id"] for row in recent], [str(self.lesson.pk), str(second.pk)])
 
     def test_open_lesson_validates_request_and_visibility(self):
         url = f"/api/learning/lessons/{self.lesson.pk}/open/"

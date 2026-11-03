@@ -97,6 +97,10 @@ class LearnerState:
         cards = [c for c in self.cards if c.lesson_id == lesson_id]
         return bool(cards) and all(c.pk in self.completed for c in cards)
 
+    def lesson_started(self, lesson_id):
+        return any(c.pk in self.completed
+                   for c in self.cards if c.lesson_id == lesson_id)
+
     def catch_up_questions(self, lessons):
         """Questions of fully read lessons with no correct answer yet: never
         attempted or only answered wrong. The catch-up quiz closes those gaps."""
