@@ -62,3 +62,6 @@ Gate and look-direction quick controls now sit on the water-level scene so mobil
 
 ## Release 016
 A compact in-scene travel rail adds keyboard/tap steps toward the entrance or far end, requested travel percentage and actual gate-side status. It stays independent of look direction, shares state with drag/slider controls and clamps at both ends. A closed gate explicitly reports a held view rather than pretending requested travel was reached. This is navigation inside the existing fictional toy, with no automatic motion or new hydraulic claims.
+
+## Release 017
+An optional taller water-level view gives the 3D scene more vertical room without browser fullscreen, scroll locking or automatic motion. A visible toggle on the scene returns to compact size. Travel, gate, look direction and motion preferences survive resizing; city overview keeps its normal height. Height follows the viewport within a bounded range and the renderer's existing resize observer updates the camera.
