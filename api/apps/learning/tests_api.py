@@ -11,7 +11,7 @@ from django.test import TestCase
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
-from .rewards import chart, totals
+from .rewards import chart, period_window, totals
 
 
 class LearningHealthTests(TestCase):
@@ -674,6 +674,91 @@ class LearningAPITests(TestCase):
         self.assertEqual(totals(events, "weekly", now), {"drops": 1, "carrots": 0})
         self.assertEqual(totals(events, "monthly", now), {"drops": 6, "carrots": 0})
         self.assertEqual(totals(events, "overall", now), {"drops": 6, "carrots": 1})
+
+    def test_leaderboard_offset_reads_past_periods(self):
+        # A card read seven days ago always lands in the previous calendar
+        # week, and scores there rather than in the current one.
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        earned_at = datetime.now(timezone.utc) - timedelta(days=7)
+        CardProgress.objects.filter(user=self.user).update(completed_at=earned_at)
+
+        current = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=0").json()
+        self.assertEqual(current["offset"], 0)
+        self.assertTrue(current["window"]["current"])
+        self.assertEqual(current["rows"], [])
+        self.assertTrue(current["has_earlier"])
+
+        previous = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=1").json()
+        self.assertEqual(previous["offset"], 1)
+        self.assertFalse(previous["window"]["current"])
+        # Adjacent weeks share a boundary, and the reward falls inside it.
+        self.assertEqual(previous["window"]["end"], current["window"]["start"])
+        self.assertLessEqual(previous["window"]["start"], earned_at.isoformat())
+        # The only card read earns 1 drop plus the 5-drop all-cards lesson bonus.
+        self.assertEqual(previous["rows"][0]["score"], 6)
+        self.assertFalse(previous["has_earlier"])
+
+        two_back = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=2").json()
+        self.assertEqual(two_back["rows"], [])
+        self.assertIsNone(two_back["self"])
+        self.assertFalse(two_back["has_earlier"])
+
+        # Seven days ago can still be this month: the reward lands in whichever
+        # monthly window contains it, and only there.
+        monthly = [self.client.get(f"/api/learning/leaderboard/?currency=drops&period=monthly&offset={i}").json()
+                   for i in range(3)]
+        scored = [payload for payload in monthly if payload["rows"]]
+        self.assertEqual(len(scored), 1)
+        self.assertEqual(scored[0]["rows"][0]["score"], 6)
+        self.assertLessEqual(scored[0]["window"]["start"], earned_at.isoformat())
+        self.assertLess(earned_at.isoformat(), scored[0]["window"]["end"])
+
+        overall = self.client.get("/api/learning/leaderboard/?currency=drops&period=overall").json()
+        self.assertIsNone(overall["window"])
+        self.assertEqual(overall["rows"][0]["score"], 6)
+
+        self.assertEqual(self.client.get("/api/learning/leaderboard/?offset=-1").status_code, 400)
+        self.assertEqual(self.client.get("/api/learning/leaderboard/?offset=later").status_code, 400)
+        self.assertEqual(self.client.get("/api/learning/leaderboard/?period=overall&offset=1").status_code, 400)
+
+    def test_period_window_offsets_follow_calendar_boundaries(self):
+        now = datetime(2026, 11, 3, 12, tzinfo=timezone.utc)  # Tuesday of the Nov 2-8 week
+        self.assertEqual(period_window("weekly", 0, now),
+                         (datetime(2026, 11, 2, tzinfo=timezone.utc), datetime(2026, 11, 9, tzinfo=timezone.utc)))
+        self.assertEqual(period_window("weekly", 3, now),
+                         (datetime(2026, 10, 12, tzinfo=timezone.utc), datetime(2026, 10, 19, tzinfo=timezone.utc)))
+        self.assertEqual(period_window("monthly", 1, now),
+                         (datetime(2026, 10, 1, tzinfo=timezone.utc), datetime(2026, 11, 1, tzinfo=timezone.utc)))
+        # January steps back into December of the previous year.
+        jan = datetime(2026, 1, 15, 12, tzinfo=timezone.utc)
+        self.assertEqual(period_window("monthly", 1, jan),
+                         (datetime(2025, 12, 1, tzinfo=timezone.utc), datetime(2026, 1, 1, tzinfo=timezone.utc)))
+        self.assertEqual(period_window("overall", 0, now), (None, None))
+
+    def test_leaderboard_history_scores_come_from_the_period_itself(self):
+        now = datetime(2026, 11, 3, 12, tzinfo=timezone.utc)  # Tuesday of the Nov 2-8 week
+        events = [
+            ("drops", 1, datetime(2026, 11, 2, 10, tzinfo=timezone.utc)),   # this week
+            ("drops", 5, datetime(2026, 10, 28, 10, tzinfo=timezone.utc)),  # last week
+            ("drops", 100, datetime(2026, 10, 4, 10, tzinfo=timezone.utc)), # two weeks ago, still October
+            ("carrots", 1, datetime(2026, 9, 15, 10, tzinfo=timezone.utc)), # September
+        ]
+        self.assertEqual(totals(events, "weekly", now, offset=1), {"drops": 5, "carrots": 0})
+        self.assertEqual(totals(events, "monthly", now, offset=1), {"drops": 105, "carrots": 0})
+        self.assertEqual(totals(events, "monthly", now, offset=2), {"drops": 0, "carrots": 1})
+
+        rows = [{"user_id": self.user.pk, "name": "learner", "is_self": True}]
+        weekly = chart({self.user.pk: events}, "drops", "weekly", rows, now, offset=1)
+        # Past weeks keep the usual trim of leading days with no rewards, and
+        # later events stay out of the window.
+        self.assertEqual([bucket["label"] for bucket in weekly["buckets"]], ["Wed", "Thu", "Fri", "Sat", "Sun"])
+        self.assertEqual(weekly["series"][0]["points"], [5, 5, 5, 5, 5])
+        self.assertFalse(any(bucket["current"] for bucket in weekly["buckets"]))
+
+        monthly = chart({self.user.pk: events}, "drops", "monthly", rows, now, offset=1)
+        self.assertEqual(monthly["buckets"][-1]["label"], "Oct 26\u201331")
+        self.assertEqual(monthly["series"][0]["points"][-1], 105)
+        self.assertFalse(any(bucket["current"] for bucket in monthly["buckets"]))
 
     def test_cannot_skip_cards_or_checkpoints_and_resume_after_pass(self):
         second = self.row(Card, lesson=self.lesson, position=2, body_markdown="Next")

@@ -375,5 +375,11 @@ def leaderboard(request):
     period = request.GET.get('period', 'weekly')
     if currency not in ('drops', 'carrots') or period not in ('weekly', 'monthly', 'overall'):
         return JsonResponse({"error": "Choose drops or carrots and weekly, monthly or overall."}, status=400)
-    return JsonResponse(ranking(request.user, currency, period))
+    try:
+        offset = int(request.GET.get('offset', '0'))
+    except ValueError:
+        return JsonResponse({"error": "Offset must be a whole number of past periods."}, status=400)
+    if offset < 0 or offset > 520 or (period == 'overall' and offset):
+        return JsonResponse({"error": "Offset goes 0-520 periods back; overall is all time and takes no offset."}, status=400)
+    return JsonResponse(ranking(request.user, currency, period, offset=offset))
 

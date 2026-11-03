@@ -5,7 +5,7 @@ const id = {
   lesson: 'ef40c724-a882-4798-949b-1bf950471d9b', card: '8f8b4671-3e2d-4c7f-a3c7-eb207401bb40', card2: '925a9b78-0546-44bf-a8bb-bb02fb6d7aca', question: 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', alternative: 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3',
 };
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
-function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false } = {}) {
+function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null } = {}) {
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
   page.route('**/api/learning/**', route => {
@@ -35,10 +35,35 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
     if (url.pathname.endsWith('/leaderboard/')) {
       const currency = url.searchParams.get('currency') === 'carrots' ? 'carrots' : 'drops';
       const period = url.searchParams.get('period') || 'weekly';
-      const score = currency === 'carrots' ? 1 : 106;
-      return route.fulfill({ json: { currency, period, timezone: 'UTC', rows: [{ rank: 1, name: 'aurore', score: currency === 'carrots' ? 3 : 140, is_self: false }, { rank: 2, name: 'Learner', score, is_self: true }], self: { rank: 2, score, is_self: true }, chart: mockChart(currency, period) } });
+      const offset = Number(url.searchParams.get('offset') || '0');
+      if (leaderboardLog) leaderboardLog.push({ currency, period, offset });
+      // Two past periods of mocked history, then nothing older.
+      const score = currency === 'carrots' ? [1, 1][offset] : [106, 40][offset];
+      const other = currency === 'carrots' ? [3, 2][offset] : [140, 58][offset];
+      const rows = offset < 2 ? [{ rank: 1, name: 'aurore', score: other, is_self: false }, { rank: 2, name: 'Learner', score, is_self: true }] : [];
+      const window = period === 'overall' ? null : leaderboardWindow(period, offset);
+      return route.fulfill({ json: { currency, period, timezone: 'UTC', offset, window, has_earlier: period !== 'overall' && offset < 2, rows, self: rows.length ? { rank: 2, score, is_self: true } : null, chart: mockChart(currency, period) } });
     }
   });
+}
+
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function leaderboardWindow(period, offset) {
+  const now = new Date();
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  let start, end;
+  if (period === 'weekly') {
+    start = today - ((now.getUTCDay() + 6) % 7) * 864e5 - offset * 7 * 864e5;
+    end = start + 7 * 864e5;
+  } else {
+    start = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - offset, 1);
+    end = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - offset + 1, 1);
+  }
+  const first = new Date(start), last = new Date(end - 864e5);
+  const label = period === 'monthly' ? `${MONTH_NAMES[first.getUTCMonth()]} ${first.getUTCFullYear()}`
+    : first.getUTCMonth() === last.getUTCMonth() ? `${MONTHS[first.getUTCMonth()]} ${first.getUTCDate()}\u2013${last.getUTCDate()}`
+    : `${MONTHS[first.getUTCMonth()]} ${first.getUTCDate()} \u2013 ${MONTHS[last.getUTCMonth()]} ${last.getUTCDate()}`;
+  return { start: first.toISOString(), end: new Date(end).toISOString(), label, current: offset === 0 };
 }
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -162,6 +187,73 @@ test('reward totals and leaderboard explain the same Drops and Carrots rules', a
   await leaderboard.getByRole('button', { name: /Carrots/ }).click();
   await expect(leaderboard.locator('.grains-reward-description')).toHaveText(carrotDescription);
   await page.screenshot({ path: '/tmp/little-grains-leaderboard-carrots.png' });
+});
+
+test('leaderboard arrows navigate previous weeks and months of history', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const leaderboardLog = [];
+  mockApi(page, 1, { leaderboardLog });
+  await page.goto('/apps/little-grains');
+  await page.getByRole('button', { name: 'Open leaderboard' }).click();
+  const leaderboard = page.getByRole('dialog', { name: 'Leaderboard' });
+
+  // Current week: the newer arrow is disabled, the older one steps back.
+  const older = leaderboard.getByRole('button', { name: 'Older week' });
+  const newer = leaderboard.getByRole('button', { name: 'Newer week' });
+  const label = leaderboard.locator('.grains-period-label');
+  // Each navigation re-fetches: the label passes through the "…" placeholder,
+  // so wait out both the old value and the placeholder before reading it.
+  const settledLabel = async (...stale) => {
+    for (const text of stale) await expect(label).not.toHaveText(text);
+    return label.textContent();
+  };
+  const currentWeek = await settledLabel('\u2026');
+  await expect(newer).toBeDisabled();
+  await expect(older).toBeEnabled();
+  await expect(leaderboard.locator('.grains-leaderboard-note')).toHaveText('Resets every Monday \u00b7 UTC');
+  await page.screenshot({ path: '/tmp/little-grains-leaderboard-current-mobile.png' });
+
+  await older.click();
+  const lastWeek = await settledLabel(currentWeek, '\u2026');
+  expect(lastWeek).not.toEqual(currentWeek);
+  await expect(leaderboard.locator('.grains-leaderboard-note')).toHaveText('Final ranking \u00b7 UTC');
+  // Past periods show the scores of that week, not the current totals.
+  await expect(leaderboard.locator('.grains-ranking li.self strong')).toHaveText('40');
+  await expect(newer).toBeEnabled();
+  await page.screenshot({ path: '/tmp/little-grains-leaderboard-last-week-mobile.png' });
+
+  // Two periods back is the end of the mocked history: empty and no older arrow.
+  await older.click();
+  await expect(leaderboard.locator('.grains-empty-ranking')).toHaveText('No activity this week.');
+  await expect(older).toBeDisabled();
+
+  await newer.click();
+  await newer.click();
+  await expect(label).toHaveText(currentWeek);
+  await expect(leaderboard.locator('.grains-ranking li.self strong')).toHaveText('106');
+
+  // Switching periods resets to the current one, months step back a month.
+  await leaderboard.getByRole('button', { name: 'Monthly' }).click();
+  const currentMonth = await settledLabel(currentWeek, '\u2026');
+  await leaderboard.getByRole('button', { name: 'Older month' }).click();
+  const lastMonth = await settledLabel(currentMonth, '\u2026');
+  expect(lastMonth).not.toEqual(currentMonth);
+  await page.screenshot({ path: '/tmp/little-grains-leaderboard-last-month-mobile.png' });
+
+  // Overall is all time: no navigation arrows.
+  await leaderboard.getByRole('button', { name: 'Overall' }).click();
+  await expect(leaderboard.locator('.grains-ranking li.self strong')).toHaveText('106');
+  await expect(leaderboard.locator('.grains-period-nav')).toHaveCount(0);
+  await expect(leaderboard.locator('.grains-leaderboard-note')).toHaveText('All time \u00b7 UTC');
+
+  const seen = leaderboardLog.map(({ period, offset }) => `${period}:${offset}`);
+  expect(seen).toContain('weekly:0');
+  expect(seen).toContain('weekly:1');
+  expect(seen).toContain('weekly:2');
+  expect(seen).toContain('monthly:0');
+  expect(seen).toContain('monthly:1');
+  expect(seen).toContain('overall:0');
 });
 
 test('a wrong answer opens another question at the checkpoint', async ({ page }) => {
