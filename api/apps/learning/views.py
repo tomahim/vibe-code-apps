@@ -330,6 +330,10 @@ def garden(request):
         "lesson__learning_path__theme",
     ).order_by("-opened_at", "-pk"):
         lesson = opened.lesson
+        # Finished for this shortcut list means every card read, even when
+        # questions are still open: those stay available through the quiz.
+        if state.lesson_fully_read(lesson.pk):
+            continue
         step = next_step(state, lesson)
         if step is None:
             continue
