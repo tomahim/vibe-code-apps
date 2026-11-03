@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {findOpenRoute,networkEdges,reachableNodes} from '../src/apps/little-drops/network.js';
+import {findOpenRoute,networkEdges,reachableNodes} from '../src/artifacts/little-drops-source/network.js';
 test('all valve combinations produce only a contiguous open route or no route',()=>{
  for(let bits=0;bits<8;bits++){
   const valves={main:Boolean(bits&1),home:Boolean(bits&2),'loop-in':Boolean(bits&4)};

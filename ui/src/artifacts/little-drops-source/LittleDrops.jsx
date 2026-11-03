@@ -6,7 +6,7 @@ import CityScene from './CityScene.jsx';
 import { stops, sources, treatmentSteps, pressureKpa, readDiscoveries, saveDiscoveries } from './content.js';
 import './little-drops.css';
 
-function localStorageSafe() { try { return window.localStorage; } catch { return null; } }
+function localStorageSafe() { return null; }
 export default function LittleDrops({ onHome }) {
   const [selected,setSelected]=useState(0),[cutaway,setCutaway]=useState(false),[playing,setPlaying]=useState(false);
   const [height,setHeight]=useState(25),[experiment,setExperiment]=useState('pressure'),[stage,setStage]=useState(0);
@@ -34,7 +34,7 @@ export default function LittleDrops({ onHome }) {
   function discover(){const next=[...new Set([...discoveries,stop.id])];setDiscoveries(next);setSaved(saveDiscoveries(localStorageSafe(),next));setRevealed(true);}
   function choose(i){setRevisit(null);setSelected(i);setPlaying(false);}
   return <main className="ld-app">
-    <header className="ld-header"><button onClick={onHome} className="ld-back" aria-label="Back to gallery">← <span>Gallery</span></button><a href="/apps/little-drops" className="ld-brand"><span className="ld-brand-drop">◒</span> little drops<span className="ld-beta">FIELD NOTES 001</span></a><span className="ld-local">No account. Just curiosity.</span></header>
+    <header className="ld-header"><span className="ld-back">Archived study</span><a href="#" className="ld-brand"><span className="ld-brand-drop">◒</span> little drops<span className="ld-beta">ARCHIVED 03 NOV 2026</span></a><span className="ld-local">Preserved artifact. No account.</span></header>
     <section className="ld-intro"><div><p className="ld-eyebrow">THE HIDDEN LIFE OF A CITY</p><h1>Follow something <em>small.</em><br/>Discover something big.</h1><p>A drop of water. An entire city behind it.<br className="ld-mobile-br"/> Take a look beneath the everyday.</p></div><div className="ld-edition"><span>01</span><p>RESERVOIR<br/>TO YOUR TAP</p><i>One ordinary miracle.</i></div></section>
     <section className="ld-world" aria-label="Water journey">
       <div className="ld-world-bar"><span><i className="ld-live-dot"/> A DROP'S JOURNEY</span><button className={cutaway?'ld-toggle active':'ld-toggle'} aria-pressed={cutaway} onClick={()=>setCutaway(v=>!v)}>{cutaway?'◉ Street peeled back':'◎ Peel back the street'}</button></div>
@@ -48,6 +48,6 @@ export default function LittleDrops({ onHome }) {
     <div id="ld-panel-treatment" hidden={experiment!=='treatment'}><h2>A filter does not work alone.</h2><p>Walk through a common treatment sequence. Each stage has a different job.</p><div className={`ld-treatment stage-${stage}`} aria-hidden="true">{Array.from({length:treatment.dots},(_,i)=><i key={i} style={{left:`${8+(i*29)%85}%`,top:`${stage===1?68+(i%3)*6:10+(i*17)%70}%`,width:treatment.size,height:treatment.size}}/>)}<span>{stage===3?'✦':'≈'}</span></div><div className="ld-treatment-steps">{treatmentSteps.map((s,i)=><button key={s.title} aria-pressed={stage===i} onClick={()=>setStage(i)}>{i+1}. {s.title}</button>)}</div><p aria-live="polite">{treatment.text}</p><p className="ld-model-note">Conceptual illustration. Dots represent particles, not a measured contaminant count. Real treatment depends on the source water. Do not use this as instructions to make water safe.</p><a className="ld-source" href={sources.treatment.url} target="_blank" rel="noreferrer">Read the treatment sequence at CDC ↗</a></div>
     </section></div>
     <Notebook discoveries={discoveries} saved={saved} onOpen={(i,found)=>{choose(i);setRevisit(found?i:null);setRevealed(found);window.requestAnimationFrame(()=>{const heading=document.querySelector('.ld-story h2');heading?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});heading?.focus({preventScroll:true});});}} onReset={()=>{setDiscoveries([]);setRevealed(false);setSaved(saveDiscoveries(localStorageSafe(),[]));}}/>
-    <footer className="ld-footer"><p>Little Drops · A playground for everyday wonders.</p><p>Independent. Front-end only. Discoveries saved on this device.</p><details><summary>Sources & model limits</summary><p>This fictional city illustrates one possible public water-supply journey, not a particular place. It is not a water-safety test. The explanations below were checked on 30 October 2026.</p>{Object.values(sources).map(s=><a key={s.url} href={s.url} target="_blank" rel="noreferrer">{s.label} ↗</a>)}</details></footer>
+    <footer className="ld-footer"><p>Little Drops · A playground for everyday wonders.</p><p>Archived on 3 November 2026. Iteration stopped. Discoveries last only for this visit.</p><details><summary>Sources & model limits</summary><p>This fictional city illustrates one possible public water-supply journey, not a particular place. It is not a water-safety test. The explanations below were checked on 30 October 2026.</p>{Object.values(sources).map(s=><a key={s.url} href={s.url} target="_blank" rel="noreferrer">{s.label} ↗</a>)}</details></footer>
   </main>;
 }
