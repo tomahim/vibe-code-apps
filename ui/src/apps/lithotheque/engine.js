@@ -92,15 +92,95 @@ function rockGeo(r, seed, squashY = 0.62) {
     g.setAttribute('normal', new THREE.BufferAttribute(n, 3));
     return g;
 }
-function bladeGeo(w, h, t) {
-    const sh = new THREE.Shape();
-    sh.moveTo(-w * .5, -h * .5); sh.lineTo(w * .49, -h * .5);
-    sh.lineTo(w * .44, h * .3); sh.lineTo(w * .28, h * .47);
-    sh.lineTo(-w * .08, h * .5); sh.lineTo(-w * .38, h * .42); sh.closePath();
-    const g = new THREE.ExtrudeGeometry(sh, { depth: t, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: .012, bevelThickness: .008 });
-    g.translate(0, 0, -t * .5);
+// Realistic kyanite blade: parametric, gently curved, tapered to a chisel tip.
+// Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides
+// (kyanite's deep blue runs lengthwise down the centre, paling to the edges).
+// Realistic kyanite blade: parametric slab with mostly parallel edges, a thick
+// bevel-edged cross-section, lengthwise cleavage steps on the flat faces, and an
+// abrupt termination (slanted chisel cut or flat break) - never a spear point.
+// Length along +Y from the base. aZone: 0 at the blade core, 1 at the sides.
+// term: 0 = flat break, >0 = slant height of a diagonal cut across the width.
+// craggier rock surface: ridged noise for broken, angular relief
+function cragGeo(r, seed, squashY = 0.55) {
+    const g = rockGeo(r, seed, squashY);
+    const pos = g.attributes.position;
+    const v = new THREE.Vector3();
+    for (let i = 0; i < pos.count; i++) {
+        v.fromBufferAttribute(pos, i);
+        const n = 1 - Math.abs(fbm(v.x * 3.3 + seed, v.y * 3.3 + seed * 0.7, v.z * 3.3, 3));
+        const k = 1 + (n * 0.16) / (v.length() || 1);
+        pos.setXYZ(i, v.x * k, v.y * k, v.z * k);
+    }
+    g.computeVertexNormals();
     return g;
 }
+
+function bladeGeo(len, w, t, seed, term) {
+    const segs = 26, ring = 12;
+    const bendX = noise3(seed, 0.3, 1.7) * 0.18 * len;
+    const bendZ = noise3(1.1, seed, 0.6) * 0.12 * len;
+    const positions = []; const zone = []; const idx = [];
+    // rounded-rectangle template: broad flat faces, narrow bevelled long edges
+    const ringPts = [];
+    for (let i = 0; i < ring; i++) {
+        const a = (i / ring) * Math.PI * 2;
+        const cx = Math.sign(Math.cos(a)) * Math.pow(Math.abs(Math.cos(a)), 0.30);
+        const cz = Math.sign(Math.sin(a)) * Math.pow(Math.abs(Math.sin(a)), 0.55);
+        ringPts.push([cx, cz]);
+    }
+    // lengthwise cleavage steps across the width (two grooves)
+    const stepAt = (px) => {
+        const s1 = Math.abs(px - 0.35) < 0.06 ? 0.16 : 0;
+        const s2 = Math.abs(px + 0.42) < 0.05 ? -0.13 : 0;
+        return s1 + s2;
+    };
+    for (let s = 0; s <= segs; s++) {
+        const u = s / segs;
+        // parallel edges for most of the length, slight wobble, mild narrowing only at the very top
+        const taper = u < 0.9 ? 1 : 1 - (u - 0.9) * 2.0;
+        const wob = 1 + 0.05 * fbm(u * 4 + seed, seed * 0.7, 0, 2);
+        const cx0 = bendX * u * u;
+        const cz0 = bendZ * Math.sin(u * 1.9);
+        for (let i = 0; i < ring; i++) {
+            const px = ringPts[i][0], pz = ringPts[i][1];
+            // stepped face relief only on the broad faces (|pz| large)
+            const relief = stepAt(px) * Math.abs(pz) * t * 0.5;
+            // slanted termination: top of the blade drops across the width
+            const cut = u > 0.9 && term > 0 ? term * (px * 0.5 + 0.5) * ((u - 0.9) / 0.1) : 0;
+            const y = u * len - cut;
+            // irregular natural edges: small continuous jitter along length and around the ring
+            const jx = fbm(u * 7 + seed, i * 0.9, seed * 0.3, 2) * w * 0.06;
+            const jz = fbm(u * 7 - seed, i * 0.9 + 4.2, seed, 2) * t * 0.35;
+            positions.push(cx0 + px * w * 0.5 * taper * wob + jx, y, cz0 + (pz * t * 0.5 + relief) * (1 - 0.25 * u) + jz);
+            zone.push(Math.abs(px));
+        }
+    }
+    for (let s = 0; s < segs; s++) {
+        for (let i = 0; i < ring; i++) {
+            const a = s * ring + i, b = s * ring + (i + 1) % ring;
+            const c = a + ring, d = b + ring;
+            idx.push(a, c, b, b, c, d);
+        }
+    }
+    // top cap: centre vertex at the average cut height
+    const topAvg = term > 0 ? len - term * 0.5 : len;
+    const apex = positions.length / 3;
+    positions.push(bendX, topAvg, bendZ * Math.sin(1.9));
+    zone.push(0.5);
+    const lastRing = segs * ring;
+    for (let i = 0; i < ring; i++) idx.push(lastRing + i, apex, lastRing + (i + 1) % ring);
+    // base cap (buried in matrix)
+    const base = positions.length / 3;
+    positions.push(0, 0, 0); zone.push(0);
+    for (let i = 0; i < ring; i++) idx.push(base, (i + 1) % ring, i);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    g.setAttribute('aZone', new THREE.Float32BufferAttribute(zone, 1));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    return g;
+}
+
 function prismGeo(r, h, seed, sides = 6) {
     const g = new THREE.CylinderGeometry(r, r * 1.04, h, sides, 4);
     const pos = g.attributes.position;
@@ -116,46 +196,85 @@ function prismGeo(r, h, seed, sides = 6) {
 function mineralSurface(mat, mode) {
     mat.customProgramCacheKey = () => mode;
     mat.onBeforeCompile = (shader) => {
-        shader.vertexShader = 'varying vec3 vStone;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvStone=position;');
+        const isBlade = mode === 'kyanite';
+        shader.vertexShader = (isBlade ? 'attribute float aZone; varying float vZone;\n' : '')
+            + 'varying vec3 vStone;\n' + shader.vertexShader.replace('#include <begin_vertex>',
+            '#include <begin_vertex>\nvStone=position;' + (isBlade ? 'vZone=aZone;' : ''));
         shader.fragmentShader = `varying vec3 vStone;
+      ${isBlade ? 'varying float vZone;' : ''}
       float hashStone(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
       float stoneNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
         return mix(mix(mix(hashStone(i),hashStone(i+vec3(1,0,0)),f.x),mix(hashStone(i+vec3(0,1,0)),hashStone(i+vec3(1,1,0)),f.x),f.y),mix(mix(hashStone(i+vec3(0,0,1)),hashStone(i+vec3(1,0,1)),f.x),mix(hashStone(i+vec3(0,1,1)),hashStone(i+vec3(1,1,1)),f.x),f.y),f.z);}
       ` + shader.fragmentShader;
-        const detail = mode === 'matrix' ? `
-      float grain=stoneNoise(vStone*135.);
-      float patch=stoneNoise(vStone*18.)*.55+stoneNoise(vStone*51.)*.25;
-      diffuseColor.rgb *= .52+patch*.75+grain*.35;
-      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.56,.51,.43),smoothstep(.86,.97,grain)*.5);
-      ` : mode === 'blade' ? `
-      float stripe=pow(.5+.5*sin(vStone.x*430.+stoneNoise(vStone*30.)*1.7),8.);
-      float zone=stoneNoise(vec3(vStone.x*38.,vStone.y*2.,vStone.z*15.));
-      diffuseColor.rgb*=.67+zone*.48+stripe*.16;
-      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.61,.7,.81),smoothstep(.66,.83,zone)*.35);
-      ` : `float grains=stoneNoise(vStone*85.);float cloud=stoneNoise(vStone*8.);
-      diffuseColor.rgb *= .78+cloud*.3+grains*.1;`;
+        const detail = isBlade ? `
+      // cloudy internal colour variation, elongated along the blade
+      float cl1 = stoneNoise(vStone*vec3(6.,1.5,6.));
+      float cl2 = stoneNoise(vStone*vec3(15.,4.,15.));
+      float cloud = cl1*.62 + cl2*.38;
+      vec3 deep = vec3(.05,.13,.40);
+      vec3 midb = vec3(.17,.31,.60);
+      vec3 pale = vec3(.48,.56,.72);
+      vec3 col = mix(pale, midb, smoothstep(.22,.52,cloud));
+      col = mix(col, deep, smoothstep(.55,.85,cloud));
+      // broken lengthwise cobalt streaks, never regular
+      float streak = stoneNoise(vec3(vStone.x*38., vStone.y*2.2, vStone.z*38.));
+      col = mix(col, deep*1.1, smoothstep(.58,.9,streak)*.4);
+      // thin irregular fracture veins (ridged noise)
+      float fr = 1.-abs(stoneNoise(vStone*vec3(9.,2.2,9.))*2.-1.);
+      col = mix(col, col*.5, smoothstep(.90,.985,fr)*.55);
+      // whitish chips and flecks
+      float chip = step(.958, stoneNoise(vStone*vec3(55.,16.,55.)));
+      col = mix(col, pale*1.08, chip*.45);
+      // pale side edges and slight tip fade
+      col = mix(col, pale, smoothstep(.68,1.,vZone)*.4);
+      col = mix(col, pale*.92, smoothstep(.8,1.05,vStone.y)*.2);
+      // fine lengthwise striations, subtle
+      float stripe = sin(vStone.y*260. + stoneNoise(vStone*35.)*5.);
+      col *= .96 + .04*smoothstep(-.6,.9,stripe);
+      // pearly lustre patches
+      float pearl = stoneNoise(vStone*vec3(20.,4.5,20.));
+      col = mix(col, col*vec3(1.06,1.08,1.14), smoothstep(.6,.92,pearl)*.35);
+      diffuseColor.rgb = col;
+      ` : `
+      // foliated mica schist: irregular patchy bands, broken lighter lenses, glints
+      float warp = (stoneNoise(vStone*2.2)-.5)*9.;
+      float bandf = stoneNoise(vec3(vStone.x*6.5+warp, vStone.y*6.5, vStone.z*6.5));
+      vec3 dark = vec3(.085,.08,.075);
+      vec3 light = vec3(.16,.15,.135);
+      vec3 col = mix(dark, light, smoothstep(.3,.72,bandf));
+      float lens = stoneNoise(vStone*4.5+13.7);
+      col = mix(col, light*1.3, smoothstep(.6,.8,lens)*.45);
+      float grain = stoneNoise(vStone*130.);
+      col *= .66 + grain*.6;
+      float glint = step(.970, stoneNoise(vStone*330.));
+      col += glint * vec3(.15,.14,.13);
+      diffuseColor.rgb = col;
+      `;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\n' + detail);
-        if (mode === 'matrix') shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+        if (!isBlade) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
       float b=stoneNoise(vStone*110.); vec3 q0=dFdx(vStone),q1=dFdy(vStone);
-      vec3 sn=normalize(cross(q0,q1));
-      normal=normalize(normal + (dFdx(b)*normalize(q0)+dFdy(b)*normalize(q1))*.45);`);
+      normal=normalize(normal + (dFdx(b)*normalize(q0)+dFdy(b)*normalize(q1))*.5);`);
     };
     return mat;
 }
 
 // ---- materials ----
 function makeMats(kind) {
+    if (kind === 'kyanite') {
+        const schist = mineralSurface(new THREE.MeshStandardMaterial({
+            color: '#ffffff', roughness: 0.94, metalness: 0.04,
+        }), 'schist');
+        return { matrix: schist, crystal: () => mineralSurface(new THREE.MeshPhysicalMaterial({
+            color: '#ffffff', roughness: 0.38, metalness: 0,
+            clearcoat: 0.25, clearcoatRoughness: 0.4,
+            sheen: 0.35, sheenRoughness: 0.6, sheenColor: new THREE.Color('#bcccea'),
+        }), 'kyanite') };
+    }
     const matrix = new THREE.MeshStandardMaterial({
         color: '#6f6a62', roughness: 0.96, metalness: 0,
         map: speckleTex('#6f6a62', ['#5d5850', '#7d7870', '#857f75'], 900, 11),
         bumpScale: 0.012,
     });
-    if (kind === 'kyanite') {
-        return { matrix, crystal: () => mineralSurface(new THREE.MeshPhysicalMaterial({
-            color: '#3d5da8', roughness: 0.38, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.45,
-            flatShading: false,
-        }), 'blade') };
-    }
     if (kind === 'nepheline') {
         return { matrix, crystal: () => new THREE.MeshPhysicalMaterial({
             color: '#a0a28c', roughness: 0.36, metalness: 0, clearcoat: 0.7, clearcoatRoughness: 0.25,
@@ -201,28 +320,62 @@ export function buildSpecimen(kind, uv) {
         g.add(m);
         return m;
     };
-    const base = put(rockGeo(0.72, kind.length * 7 + 3), mats.matrix, 0, -0.72, 0);
+    const base = put(kind === 'kyanite' ? cragGeo(0.8, kind.length * 7 + 3, 0.5) : rockGeo(0.72, kind.length * 7 + 3), mats.matrix, 0, -0.72, 0);
     base.receiveShadow = true;
     const cm = mats.crystal(uv);
-    for (let i = 0; i < 14; i++) {
-        const a = i * 2.399, rad = .25 + (i % 4) * .12;
-        put(rockGeo(.12 + (i % 3) * .05, i + 36, .45), mats.matrix, Math.cos(a) * rad, -.66 + (i % 3) * .055, Math.sin(a) * rad, .3 * i, .7 * i, .2 * i);
+    if (kind !== 'kyanite') {
+        for (let i = 0; i < 14; i++) {
+            const a = i * 2.399, rad = .25 + (i % 4) * .12;
+            put(rockGeo(.12 + (i % 3) * .05, i + 36, .45), mats.matrix, Math.cos(a) * rad, -.66 + (i % 3) * .055, Math.sin(a) * rad, .3 * i, .7 * i, .2 * i);
+        }
     }
     if (kind === 'kyanite') {
-        const mica = new THREE.MeshStandardMaterial({ color: '#aaa99d', metalness: .48, roughness: .36, side: THREE.DoubleSide });
-        for (let i = 0; i < 45; i++) {
-            const a = i * 2.399, rad = .2 + (i % 9) * .07;
-            put(new THREE.CircleGeometry(.025 + (i % 4) * .012, 5), mica, Math.cos(a) * rad, -.43 + Math.sin(i) * .09, Math.sin(a) * rad, -1.15 + i * .17, i * .3, i * .2);
-        }
-        const blades = [
-            [0.34, 1.7, 0.09, -0.12, 0.28, 0.02, 0.1, 0.22],
-            [0.3, 1.45, 0.08, 0.22, 0.1, 0.12, -0.08, -0.3],
-            [0.4, 1.9, 0.1, 0.02, 0.42, -0.1, 0.18, 0.05],
-            [0.26, 1.1, 0.07, -0.34, 0.02, 0.16, -0.14, 0.5],
-            [0.28, 1.35, 0.08, 0.4, 0.18, -0.06, 0.06, -0.62],
+        // craggy foliated schist base with embedded milky quartz intergrowth
+        const quartzMat = new THREE.MeshPhysicalMaterial({ color: '#cfcabf', roughness: .58, metalness: 0, clearcoat: .2, clearcoatRoughness: .5, transparent: true, opacity: .96 });
+        const lumps = [
+            [0.085, 5, -0.42, -0.58, 0.26, 0.4, 1.9, 0.8, 1.1],
+            [0.07, 9, 0.38, -0.58, -0.18, 1.2, 1.6, 0.8, 1.3],
+            [0.06, 13, -0.12, -0.5, -0.33, 2.1, 1.4, 0.8, 1.0],
+            [0.055, 17, 0.22, -0.54, 0.3, 0.8, 1.5, 0.8, 1.2],
+            [0.05, 21, -0.34, -0.56, -0.05, 1.7, 1.8, 0.8, 0.9],
         ];
-        for (const [w, h, t, x, y, z, rx, rz] of blades) put(bladeGeo(w, h, t), cm, x, y, z, rx, 0, rz);
-    } else if (kind === 'nepheline') {
+        for (const [r, sd, x, y, z, ry, sx, sy, sz] of lumps) {
+            const q = new THREE.Mesh(cragGeo(r, sd, 0.7), quartzMat);
+            q.position.set(x, y, z);
+            q.rotation.set(0.3 * sd, ry, 0.2 * sd);
+            q.scale.set(sx, sy, sz);
+            q.castShadow = true;
+            g.add(q);
+        }
+        // sub-parallel stacked cluster of thick blades (bent, fanned, some crossing)
+        // [len, w, t, x, z, rx, rz, ry, term]
+        const blades = [
+            [1.5, 0.30, 0.085, 0.0, 0.0, 0.04, -0.22, 0.2, 0.16],
+            [1.3, 0.26, 0.075, 0.14, 0.08, -0.03, -0.34, -0.4, 0.0],
+            [1.42, 0.24, 0.07, -0.15, 0.05, 0.06, -0.13, 0.8, 0.22],
+            [1.05, 0.20, 0.06, 0.05, -0.12, 0.14, -0.42, 1.9, 0.12],
+            [0.85, 0.17, 0.05, -0.08, 0.16, -0.08, 0.18, -1.1, 0.0],
+            [0.62, 0.14, 0.045, 0.24, -0.04, 0.05, -0.55, 1.3, 0.1],
+        ];
+        for (const [len, w, t, x, z, rx, rz, ry, term] of blades) {
+            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 13.7, term), cm);
+            b.position.set(x, -0.56, z);
+            b.rotation.set(rx, ry, rz);
+            b.castShadow = true;
+            g.add(b);
+        }
+        // broken blade stubs around the cluster base
+        for (const [len, w, t, x, z, rx, rz, ry] of [
+            [0.32, 0.12, 0.04, -0.3, 0.18, 0.3, -0.5, 0.6],
+            [0.26, 0.1, 0.035, 0.34, 0.12, -0.2, -0.28, 2.2],
+        ]) {
+            const b = new THREE.Mesh(bladeGeo(len, w, t, len * 31.1, 0), cm);
+            b.position.set(x, -0.5, z);
+            b.rotation.set(rx, ry, rz);
+            b.castShadow = true;
+            g.add(b);
+        }
+        } else if (kind === 'nepheline') {
         put(prismGeo(0.34, 0.95, 5), cm, -0.22, 0.05, 0.06, 0.14, 0.3, 0.1);
         put(prismGeo(0.28, 0.72, 9), cm, 0.26, -0.02, -0.08, -0.1, 0.9, -0.18);
         put(prismGeo(0.22, 0.5, 13), cm, 0.04, 0.3, 0.24, 0.5, 0.4, 0.3);
