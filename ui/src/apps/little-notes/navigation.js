@@ -9,15 +9,15 @@ export function readNotesRoute(search = window.location.search) {
   return { type: (p.get("type") || "").slice(0, 64), category: p.has("category") ? p.get("category").slice(0, 100) : "inbox",
     tag: (p.get("tag") || "").slice(0, 100), q: (p.get("q") || "").slice(0, 200),
     month: /^\d{4}-(0[1-9]|1[0-2])$/.test(month) ? month : "", page: Number.isInteger(page) && page > 0 && page <= 10000 ? page : 1,
-    view: views.has(p.get("view")) ? p.get("view") : "default", item: (p.get("item") || "").slice(0, 64), admin: p.get("admin") === "1" };
+    view: views.has(p.get("view")) ? p.get("view") : "default", item: (p.get("item") || "").slice(0, 64), day: /^\d{4}-\d{2}-\d{2}$/.test(p.get("day") || "") ? p.get("day") : "", adminKind: ["categories", "tags", "types"].includes(p.get("adminKind")) ? p.get("adminKind") : "categories", admin: p.get("admin") === "1" };
 }
 export function notesUrl(route) {
   const p = new URLSearchParams();
-  for (const key of ["type", "category", "tag", "q", "month", "view", "item"]) {
+  for (const key of ["type", "category", "tag", "q", "month", "view", "item", "day"]) {
     if (route[key] || key === "category") p.set(key, route[key]);
   }
   if (route.page > 1) p.set("page", route.page);
-  if (route.admin) p.set("admin", "1");
+  if (route.admin) { p.set("admin", "1"); if (route.adminKind && route.adminKind !== "categories") p.set("adminKind", route.adminKind); }
   return BASE + (p.size ? "?" + p : "");
 }
 export function useNotesRoute() {
