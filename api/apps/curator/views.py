@@ -16,7 +16,7 @@ import re
 
 from apps.accounts.decorators import jwt_required
 from apps.accounts.views import same_origin
-from .models import Category, Content, ContentCategory, ContentTag, ObjectType, Tag
+from .models import Category, Content, ContentCategory, ContentTag, ObjectType, Tag, ViewPreference
 
 
 def item(content, *, detail=False):
@@ -73,6 +73,7 @@ def taxonomy(request):
                                         for c in Category.objects.prefetch_related("object_types")],
                          "tags": list(Tag.objects.values("slug", "name", "is_system")),
                          "can_manage_taxonomy": request.user.is_staff,
+                         "view_preferences": dict(ViewPreference.objects.filter(owner=request.user).values_list("object_type__slug", "view")),
                          "months": [{"month": row["month"].strftime("%Y-%m"), "count": row["count"]}
                                     for row in Content.objects.filter(owner=request.user).annotate(month=TruncMonth("saved_on"))
                                     .values("month").annotate(count=Count("id")).order_by("-month")]})
@@ -287,5 +288,24 @@ def create_taxonomy(request, kind):
         return JsonResponse({"error": "This key already exists. Reload before trying again."}, status=409)
     except ValidationError:
         return JsonResponse({"error": "Invalid vocabulary fields. Check the name and key."}, status=400)
+    except (PermissionError, ValueError, TypeError, UnicodeDecodeError) as exc:
+        return error(exc)
+
+
+@never_cache
+@csrf_exempt
+@require_http_methods(["PUT"])
+@jwt_required
+def view_preference(request, type_slug):
+    try:
+        data = body(request)
+        if set(data) != {"view"} or data["view"] not in ViewPreference.View.values:
+            raise ValueError("Choose default, database, table, cards or calendar.")
+        kind = ObjectType.objects.get(slug=type_slug, is_active=True)
+        preference, _ = ViewPreference.objects.update_or_create(
+            owner=request.user, object_type=kind, defaults={"view": data["view"]})
+        return JsonResponse({"type": kind.slug, "view": preference.view})
+    except ObjectType.DoesNotExist:
+        return JsonResponse({"error": "Object type not found."}, status=404)
     except (PermissionError, ValueError, TypeError, UnicodeDecodeError) as exc:
         return error(exc)

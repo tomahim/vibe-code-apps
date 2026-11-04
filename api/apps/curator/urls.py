@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path("taxonomy/", views.taxonomy),
+    path("preferences/<slug:type_slug>/", views.view_preference),
     path("taxonomy/<str:kind>/", views.create_taxonomy),
     path("content/", views.collection),
     path("content/<uuid:content_id>/", views.detail),

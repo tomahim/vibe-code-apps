@@ -7,8 +7,8 @@ const sections = {
 };
 const keyFor = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-export default function TaxonomyAdmin({ taxonomy, api, onCreated, onClose }) {
-  const [kind, setKind] = useState("categories");
+export default function TaxonomyAdmin({ taxonomy, api, onCreated, onClose, initialKind = "categories", onKindChange }) {
+  const [kind, setKind] = useState(initialKind);
   const [name, setName] = useState(""); const [key, setKey] = useState(""); const [customKey, setCustomKey] = useState(false);
   const [scope, setScope] = useState("all"); const [types, setTypes] = useState([]);
   const [description, setDescription] = useState(""); const [busy, setBusy] = useState(false);
@@ -16,7 +16,7 @@ export default function TaxonomyAdmin({ taxonomy, api, onCreated, onClose }) {
   const inFlight = useRef(false); const nameRef = useRef(null);
   const section = sections[kind]; const entries = taxonomy[kind];
   function clear() { setName(""); setKey(""); setCustomKey(false); setScope("all"); setTypes([]); setDescription(""); setError(""); }
-  function switchKind(value) { if (busy) return; setKind(value); clear(); setNotice(""); }
+  function switchKind(value) { if (busy) return; setKind(value); onKindChange?.(value); clear(); setNotice(""); }
   async function create(e) {
     e.preventDefault(); if (inFlight.current) return;
     if (kind === "categories" && scope === "specific" && !types.length) { setError("Choose at least one object type, or select All object types."); return; }
