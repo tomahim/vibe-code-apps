@@ -148,6 +148,10 @@ class NotionReader:
 def export_ideas(root):
     root = Path(root)
     records = []
+    # Ideas moved to Little notes: when the bundled directory is gone from the
+    # repo, export zero ideas instead of failing the whole source capture.
+    if not root.is_dir():
+        return records
     for path in sorted(root.glob("*.md")):
         records.append({"path": "ui/src/apps/app-ideas/ideas/" + path.name,
                         "markdown": path.read_text(encoding="utf-8")})
