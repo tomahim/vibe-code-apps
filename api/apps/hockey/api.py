@@ -12,6 +12,7 @@ from django.views.decorators.http import require_GET, require_http_methods
 from apps.accounts.decorators import jwt_required
 
 from .models import (
+    FantasyTeamShare,
     FantasyTeam, Game, GamePlayerStats, HMSnapshot, Player, PlayerTeamMembership,
     PlayerWeekStats, Team, RosterEntry, TransferSimulation,
     Standing,
@@ -215,6 +216,12 @@ def team_dict(t, with_roster=False):
              "source": e.source}
             for e in t.roster.select_related("player")
         ]
+        data["pair_entries"] = [
+            {"label": pe.label, "hm_asset_id": pe.hm_asset_id,
+             "current_price_m": str(pe.current_price_m) if pe.current_price_m is not None else None,
+             "source": pe.source}
+            for pe in t.pair_entries.all()
+        ]
     return data
 
 
@@ -229,8 +236,20 @@ def own_team(request, team_id):
 @require_http_methods(["GET", "POST"])
 def my_teams(request):
     if request.method == "GET":
-        return JsonResponse({"teams": [team_dict(t) for t in
-                                       FantasyTeam.objects.filter(owner=request.user)]})
+        shared = []
+        for share in (FantasyTeamShare.objects
+                      .filter(viewer=request.user)
+                      .select_related("team", "team__owner")):
+            data = team_dict(share.team, with_roster=True)
+            data["read_only"] = True
+            data["owner_label"] = share.team.owner.username
+            data["granted_by"] = share.granted_by
+            shared.append(data)
+        return JsonResponse({
+            "teams": [team_dict(t) for t in
+                      FantasyTeam.objects.filter(owner=request.user)],
+            "shared_with_me": shared,
+        })
     import json
     try:
         body = json.loads(request.body or b"{}")

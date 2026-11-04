@@ -301,6 +301,58 @@ class RosterEntry(models.Model):
         ]
 
 
+class FantasyTeamShare(models.Model):
+    """Read-only view grant on a fantasy team for another app user.
+
+    Created when another person explicitly agrees to share their team with a
+    specific user (e.g. via i2i consent). The owner keeps ownership; viewers
+    get read-only API access with the owner labelled. Never grants writes.
+    """
+
+    team = models.ForeignKey(FantasyTeam, on_delete=models.CASCADE, related_name="shares")
+    viewer = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="hockey_team_views"
+    )
+    granted_by = models.CharField(max_length=100, help_text="Provenance, e.g. 'Aurore via i2i consent 2026-11-04'.")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "hockey_fantasy_team_share"
+        constraints = [
+            models.UniqueConstraint(fields=["team", "viewer"], name="uniq_team_share")
+        ]
+
+
+class FantasyPairEntry(models.Model):
+    """An indivisible HM goalie-pair asset on a fantasy roster.
+
+    Hockey Manager sells goalkeepers as pairs; the pair is one fantasy asset
+    and must not be collapsed onto one player or split into two invented
+    player entries. Player-level stats stay on Player; this records the
+    roster slot as HM models it.
+    """
+
+    team = models.ForeignKey(FantasyTeam, on_delete=models.CASCADE, related_name="pair_entries")
+    label = models.CharField(max_length=120, help_text="As HM shows it, e.g. 'Zumbühl/Hrubec'.")
+    hm_asset_id = models.PositiveIntegerField(help_text="HM internal id of the pair asset.")
+    nlid_reference = models.PositiveIntegerField(
+        null=True, blank=True,
+        help_text="nlid shown by HM for the pair (one of the two goalies; reference only).")
+    current_price_m = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True,
+                                          help_text="Pair price as last observed; not an acquisition cost.")
+    source = models.CharField(max_length=10, choices=RosterEntry.Source.choices,
+                              default=RosterEntry.Source.HM_IMPORT)
+
+    class Meta:
+        db_table = "hockey_fantasy_pair_entry"
+        constraints = [
+            models.UniqueConstraint(fields=["team", "hm_asset_id"], name="uniq_pair_asset")
+        ]
+
+    def __str__(self):
+        return f"{self.label} ({self.team_id})"
+
+
 class TransferSimulation(models.Model):
     """Sandboxed what-if: sells/buys with computed budget and foreigner
     count. Never touches the real Hockey Manager account."""

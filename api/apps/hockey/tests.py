@@ -6,7 +6,8 @@ from django.test import Client, TestCase
 
 from apps.accounts.tokens import issue_token
 from .models import (FantasyTeam, Game, GamePlayerStats, Player, PlayerTeamMembership,
-                     PlayerWeekStats, RosterEntry, Standing, Team)
+                     PlayerWeekStats, RosterEntry, Standing, Team, FantasyTeamShare,
+)
 
 User = get_user_model()
 
@@ -117,6 +118,47 @@ class FantasyApiTests(HockeyBase):
         # HM prices unknown (no sync): budget estimate honestly blocked
         self.assertIsNone(sim.json()["computed_budget_after_m"])
         self.assertIn("Unknown HM price", sim.json()["notes"])
+
+    def test_shared_team_read_only_for_viewer(self):
+        # Aurore owns a team; she shares it read-only with Thomas
+        aurore_team = FantasyTeam.objects.create(owner=self.other, name="Pongo")
+        RosterEntry.objects.create(team=aurore_team, player_id=155486, position_slot="F")
+        FantasyTeamShare.objects.create(team=aurore_team, viewer=self.user,
+                                        granted_by="Aurore via i2i consent 2026-11-04")
+        c = auth_client(self.user)
+        r = c.get("/api/apps/hockey/my/teams/")
+        self.assertEqual(r.status_code, 200)
+        body = r.json()
+        self.assertEqual(body["teams"], [])
+        shared = body["shared_with_me"]
+        self.assertEqual(len(shared), 1)
+        self.assertEqual(shared[0]["name"], "Pongo")
+        self.assertEqual(shared[0]["owner_label"], "aurore")
+        self.assertTrue(shared[0]["read_only"])
+        self.assertEqual(shared[0]["roster"][0]["name"], "Denis Malgin")
+        # viewer cannot write to the shared team
+        w = c.post(f"/api/apps/hockey/my/teams/{aurore_team.pk}/roster/",
+                   data=json.dumps({"player": 310134}), content_type="application/json")
+        self.assertEqual(w.status_code, 404)
+        d = c.delete(f"/api/apps/hockey/my/teams/{aurore_team.pk}/")
+        self.assertEqual(d.status_code, 404)
+        # and the owner still sees it as her own
+        mine = auth_client(self.other).get("/api/apps/hockey/my/teams/").json()
+        self.assertEqual([t["name"] for t in mine["teams"]], ["Pongo"])
+        self.assertEqual(mine["shared_with_me"], [])
+
+    def test_pair_entries_in_roster_view(self):
+        c = auth_client(self.user)
+        t = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "Pairs"}),
+                   content_type="application/json").json()
+        from .models import FantasyPairEntry
+        FantasyPairEntry.objects.create(team_id=t["id"], label="Zumbühl/Hrubec",
+                                        hm_asset_id=93, current_price_m="14.0")
+        r = c.get(f"/api/apps/hockey/my/teams/{t['id']}/")
+        self.assertEqual(r.status_code, 200)
+        pairs = r.json()["pair_entries"]
+        self.assertEqual(pairs[0]["label"], "Zumbühl/Hrubec")
+        self.assertEqual(pairs[0]["current_price_m"], "14.0")
 
     def test_simulation_validation(self):
         c = auth_client(self.user)
