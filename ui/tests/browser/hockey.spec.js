@@ -75,6 +75,8 @@ test('selection bar stays within reach while scrolling a long table',async({page
  await expect(bar).toBeVisible();await expect(bar.getByRole('button',{name:'Compare selected'})).toBeVisible();
  const footerBox=await page.locator('.hk-footer').boundingBox();const barBox=await bar.boundingBox();
  expect(footerBox.y+footerBox.height).toBeLessThanOrEqual(barBox.y+1);
+ const lastRow=await page.locator('.hk-player-table tbody tr').last().boundingBox();
+ expect(lastRow.y+lastRow.height).toBeLessThanOrEqual(barBox.y+1);
  await page.screenshot({path:'/downloads/hockey-mobile-selection-bar.png'});
  await bar.getByRole('button',{name:'Compare selected'}).click();
  await expect(page.getByRole('img',{name:/Weekly points/})).toBeVisible();
