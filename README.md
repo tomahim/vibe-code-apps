@@ -103,13 +103,6 @@ GitHub Actions deploys `api/` when changes under `api/` reach `master` and `ui/`
 
 The service and environment IDs are stored in the workflows; only the Railway project token is a repository secret.
 
-## Notion news reader
-
-`/apps/news` reads the dedicated Notion daily-news database, with Inbox/Archived
-lists, archive/restore and newest-first pagination. Content **and archive state**
-stay in Notion. It requires an explicitly allowed signed-in account and a dedicated
-server-side Notion connection with Read content + Update content, never a browser
-token. See [setup, privacy and verification](docs/notion-news-reader.md).
 
 ## The Story Room
 

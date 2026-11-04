@@ -13,7 +13,6 @@ urlpatterns = [
     path("api/apps/little-notes/", include("apps.curator.urls")),
     path("api/learning/", include("apps.learning.urls")),
     path("api/apps/", app_gallery, name="app-gallery"),
-    path("api/apps/news/", include("apps.news.urls")),
     path("api/auth/", include("apps.accounts.urls")),
     path("api/apps/little-grains/", include("apps.little_grains.urls")),
     path("api/apps/content-review/", include("apps.content_review.urls")),
