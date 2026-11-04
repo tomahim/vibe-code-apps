@@ -5,6 +5,7 @@ const players = [
  {licence_id:3,name:'Fixture Incoming',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:{games:2,goals:1,assists:0,points:1},hm:{price_m:'6.5'}},
 ];
 async function setup(page,{empty=false}={}){
+ const saved=[];
  await page.addInitScript(()=>{localStorage.setItem('genious_token','fixture-token');localStorage.setItem('genious_user',JSON.stringify({email:'fixture@example.invalid'}));});
  await page.route('**/api/apps/hockey/**',async route=>{
   const url=new URL(route.request().url()), path=url.pathname.replace('/api/apps/hockey/','');
@@ -15,7 +16,7 @@ async function setup(page,{empty=false}={}){
   else if(path==='compare/') data={players:players.filter(p=>url.searchParams.get('ids').split(',').includes(String(p.licence_id))).map(p=>({...p,weeks:[{week:38,games:1,goals:p.licence_id,assists:1,points:p.licence_id+1},{week:40,games:2,goals:0,assists:1,points:1}]})),missing:[]};
   else if(path==='my/teams/') data={teams:empty?[]:[{id:10,name:'Fixture team',roster_size:1}]};
   else if(path==='my/teams/10/') data={id:10,name:'Fixture team',roster:[{player:1,name:'Fixture Forward',slot:'F',acquired_price_m:null,source:'manual'}]};
-  else if(path==='my/teams/10/simulations/') data=route.request().method()==='POST'?{id:20,name:'Transfer what-if',computed_budget_after_m:'142',notes:'',sells:[players[0]],buys:[players[2]]}:{simulations:[]};
+  else if(path==='my/teams/10/simulations/') { if(route.request().method()==='POST'){ data={id:20,name:'Transfer what-if',computed_budget_after_m:'142',notes:'',created_at:'2026-11-04T21:00:00Z',sells:[players[0]],buys:[players[2]]};saved.push(data); } else data={simulations:saved}; }
   else if(path==='players/1/') data={...players[0],stints:[]};
   await route.fulfill({json:data});
  });
@@ -33,7 +34,7 @@ test('search, club filters, selection, comparison graphs, details and refresh',a
 });
 test('rosters and simulation suppress unknown-cost budget, never make real trade',async({page})=>{
  await setup(page);await page.goto('/apps/hockey/teams');await page.getByRole('button',{name:/Fixture team/}).click();await expect(page.getByRole('cell',{name:'Unknown',exact:true})).toBeVisible();await page.screenshot({path:'/downloads/hockey-mobile-teams.png',fullPage:true});await page.getByRole('button',{name:'Plan a transfer'}).click();
- await page.getByRole('checkbox',{name:'Fixture Forward F'}).check();await page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true}).check();await page.getByRole('button',{name:'Save what-if (no real trade)'}).click();await expect(page.getByRole('heading',{name:'Saved: Transfer what-if'})).toBeVisible();await expect(page.getByText('Budget unavailable: missing costs or current HM prices.')).toBeVisible();await expect(page.getByText(/Estimated budget after:/)).toHaveCount(0);await page.screenshot({path:'/downloads/hockey-simulator.png',fullPage:true});
+ await page.getByRole('checkbox',{name:'Fixture Forward F'}).check();await page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true}).check();await page.getByRole('button',{name:'Save what-if (no real trade)'}).click();await expect(page.getByRole('heading',{name:'Saved: Transfer what-if'})).toBeVisible();await expect(page.getByText('Budget unavailable: missing costs or current HM prices.')).toBeVisible();await expect(page.getByText(/Estimated budget after:/)).toHaveCount(0);await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');await page.screenshot({path:'/downloads/hockey-simulator.png',fullPage:true});await page.reload();await page.getByLabel('Your team',{exact:true}).selectOption('10');await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');
 });
 test('honest empty states and mobile screenshots',async({page})=>{
  await setup(page,{empty:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');await expect(page.getByText(/No players found/)).toBeVisible();await expect(page.getByText(/Official standings have not/)).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
