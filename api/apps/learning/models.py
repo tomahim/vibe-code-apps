@@ -276,6 +276,20 @@ class QuestionAttempt(models.Model):
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
 
 
+class PathCelebration(models.Model):
+    """A finished path's celebration has been shown to this learner, once.
+    Display tracking only: rewards stay derived from learner history, so this
+    row decides whether the +100 Drops appears in the dialog, never whether
+    the bonus is earned."""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="lg_path_celebrations")
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.PROTECT, related_name="celebrations")
+    shown_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "lg_path_celebration"
+        constraints = [models.UniqueConstraint(fields=["user", "learning_path"], name="lg_celebration_unique_user_path")]
+
+
 class BadgeAward(models.Model):
     """A badge a learner has earned. Written once by the first check that sees
     it earned; earned_at is the qualifying event's time, evidence the titles

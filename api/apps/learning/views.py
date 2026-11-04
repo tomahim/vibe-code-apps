@@ -16,7 +16,8 @@ from .api import (
     LearnerState, checkpoint_questions, described, input_error, json_object,
     lesson_summary, lock_learner, next_step, public_question, visible,
 )
-from .models import Card, CardProgress, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
+from .models import (Card, CardProgress, LearningPath, Lesson, LessonOpen, PathCelebration,
+                     Question, QuestionAttempt, Theme)
 from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
 from .badges import check as check_badges
@@ -46,6 +47,28 @@ def catch_up_payload(state, path_lessons):
     """Gauge context for the path panel: is the quiz unlocked, and how big is the pool."""
     return {"eligible": any(state.lesson_fully_read(lesson.pk) for lesson in path_lessons),
             "remaining": len(state.catch_up_questions(path_lessons))}
+
+
+@never_cache
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
+@require_POST
+@jwt_required
+def celebrate_path(request, path_id):
+    """Mark a finished path's celebration as shown: the +100 Drops displays
+    once per learner, on any device. Rewards stay derived from history; this
+    row only hides the bonus line on later replays."""
+    try:
+        json_object(request, [])
+    except ValidationError as exc:
+        return input_error(exc)
+    with transaction.atomic():
+        lock_learner(request.user)
+        path = get_object_or_404(visible(LearningPath), pk=path_id)
+        _, created = PathCelebration.objects.get_or_create(
+            user=request.user, learning_path=path, defaults={"shown_at": timezone.now()},
+        )
+    return JsonResponse({"learning_path_id": str(path.pk), "celebrated": True},
+                        status=201 if created else 200)
 
 
 @never_cache
@@ -326,6 +349,9 @@ def garden(request):
     paths = list(visible(LearningPath))
     lessons = list(visible(Lesson))
     events = reward_events().get(request.user.pk, [])
+    celebrated_paths = set(PathCelebration.objects.filter(
+        user=request.user, learning_path__in=paths,
+    ).values_list("learning_path_id", flat=True))
     recent_lessons = []
     for opened in LessonOpen.objects.filter(user=request.user, lesson__in=lessons).select_related(
         "lesson__learning_path__theme",
@@ -357,6 +383,7 @@ def garden(request):
                                         any(path.pk == lesson.learning_path_id and path.theme_id == theme.pk for path in paths)]),
             "learning_paths": [{
                 **described(path), "theme_id": str(theme.pk),
+                "celebrated": path.pk in celebrated_paths,
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
                 "catch_up": catch_up_payload(state, [lesson for lesson in lessons
                                                      if lesson.learning_path_id == path.pk]),

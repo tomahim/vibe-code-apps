@@ -8,7 +8,7 @@ Sources read 2026-10-27:
 
 ## GET themes/
 
-Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
+Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts, a per-path `celebrated` flag (its finish celebration was already shown to this learner) and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
 Theme, path and lesson objects still include `image_url`, but learning path and lesson images were removed (#195), so it is empty for them; only cards carry images, through `illustration_url`. Lesson cards also return the full illustration metadata: `illustration_srcset` (width-described variant URLs for `<img srcset>`, empty until variants exist), `illustration_width`/`illustration_height` for layout reservation, and `illustration_caption`, `illustration_credit`, `illustration_license` and `illustration_source_url` for attribution. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
 
@@ -48,12 +48,17 @@ All writes are bearer-only, JSON-only, reject mismatching browser Origin, and ru
 
 Returns `{learning_path_id, eligible, remaining, questions}`: one shared practice quiz of at most 10 unique questions for a learning path. The historical `/catch-up/` route remains, but there is no backend catch-up/review mode or path-completion gate. Only visible questions from lessons whose visible cards have all been read are eligible, even when unread lessons remain elsewhere in the path. Selection priority:
 
+
 1. Questions whose latest attempt failed, random within this tier. A later correct answer clears this priority.
 2. Questions with no stored attempts, random within this tier.
 3. Of the slots left after 1 and 2, 60% (nearest whole question, half up) come from the answered questions whose latest attempt is oldest.
 4. The remaining slots are random picks from the other eligible answered questions, excluding every question already selected.
 
 The session keeps this priority order and contains fewer than 10 questions only when the eligible pool is smaller. `remaining` still counts all eligible questions never answered correctly, not session size; it can be zero while practice remains available. `eligible` is false until at least one lesson is fully read. Questions are the public question shape plus `lesson_title`; answers and explanations stay server-side.
+
+## POST paths/<uuid:path_id>/celebrated/
+
+Send `{}` with `Content-Type: application/json`. Marks the path's finish celebration as shown to the authenticated learner, once per learner on any device: the client calls it when the celebration dialog appears, and the garden payload's `celebrated` flag then keeps the +100 Drops line to that first display. This is display tracking only - the 100-Drop bonus itself is derived from learner history and is neither granted nor removed here. First mark returns 201, repeats 200. Unknown/hidden path: 404.
 
 ## POST question-attempts/
 
