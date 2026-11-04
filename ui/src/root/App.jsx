@@ -15,7 +15,6 @@ const RustLearningPath = lazy(() => import("../apps/rust-learning-path/RustLearn
 const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/ThreeLearningPath.jsx"));
 
 const LittleNotes = lazy(() => import("../apps/little-notes/LittleNotes.jsx"));
-const AppIdeas = lazy(() => import("../apps/app-ideas/AppIdeas.jsx"));
 const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
 const ContentReview = lazy(() => import("../apps/content-review/ContentReview.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
@@ -69,10 +68,6 @@ export default function App() {
 
   if (path.startsWith("/apps/little-notes")) {
     return <Suspense fallback={<div>Opening little notes...</div>}><LittleNotes onHome={() => navigate("/")} /></Suspense>;
-  }
-
-  if (path.startsWith("/apps/app-ideas")) {
-    return <Suspense fallback={<div className="ideas-page" style={{ paddingTop: 40 }}>Opening the idea garden…</div>}><AppIdeas onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/content-review")) {
