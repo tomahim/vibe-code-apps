@@ -10,6 +10,7 @@ urlpatterns = [
     path("admin/learning/progress/", progress_dashboard_view, name="admin-learning-progress"),
     path("admin/", admin.site.urls),
     path("health/", health, name="health"),
+    path("api/apps/little-notes/", include("apps.curator.urls")),
     path("api/learning/", include("apps.learning.urls")),
     path("api/apps/", app_gallery, name="app-gallery"),
     path("api/apps/news/", include("apps.news.urls")),
