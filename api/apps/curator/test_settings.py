@@ -13,3 +13,5 @@ DATABASES = {"default": dj_database_url.parse(os.environ.get("CURATOR_TEST_DATAB
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 USE_TZ = True
 TIME_ZONE = "Europe/Paris"
+
+SECRET_KEY_REQUIRED = False
