@@ -28,12 +28,15 @@ No ingestion, no API, no UI yet. Do not merge without Thomas's explicit OK.
 
 ### Player identity - verified with a paired live sample
 
-The SIHF licence number = nationalleague.ch API `playerId` = Hockey Manager's
-`nlid` attribute. Proof: Denis Malgin is `155486` in HM's markup, in the NL
+The SIHF licence number, nationalleague.ch API `playerId` and Hockey
+Manager's `nlid` attribute appear to be one shared identifier. Verified so
+far on ONE paired sample: Denis Malgin is `155486` in HM's markup, in the NL
 API (`/api/player/155486`), and in the SIHF box score of Kloten-ZSC
 (`20271105000130`, Oct 31, where he appears as ZSC center with an assist).
-HM additionally has its own small internal id (Malgin 223, Järventie 728) -
-stored as `hm_id`.
+This is strong evidence, not a universal proof for every player: ingestion
+re-validates the mapping per player (name + team must agree across sources)
+and logs mismatches instead of assuming the join. HM additionally has its
+own small internal id (Malgin 223, Järventie 728) - stored as `hm_id`.
 
 ### Known data caveats (designed into the model)
 

@@ -3,9 +3,10 @@
 Data-model proposal for review - see docs/hockey-app-data-model.md for the
 verified source contract, open decisions and the Postgres role guide.
 
-Identity: the SIHF licence number is the primary key. It is the same value as
-the nationalleague.ch API player id and Hockey Manager's "nlid" attribute
-(verified pair: Denis Malgin = 155486 in all three, 2026-11-04).
+Identity: the SIHF licence number is the primary key. Evidence so far (one
+paired sample, 2026-11-04: Denis Malgin = 155486) says it matches the
+nationalleague.ch API player id and Hockey Manager's "nlid" attribute;
+ingestion re-validates the mapping per player and logs mismatches.
 """
 
 from django.conf import settings
