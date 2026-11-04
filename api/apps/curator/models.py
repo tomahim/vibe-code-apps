@@ -1,6 +1,6 @@
 """Little notes proposal: content, extensible taxonomy and copy provenance.
 
-This layer intentionally exposes no API, admin or source synchronisation.
+The API exposes owner-scoped content and staff-only shared vocabulary creation.
 """
 import uuid
 
