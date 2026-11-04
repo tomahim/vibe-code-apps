@@ -41,8 +41,8 @@ class CuratorCopyTests(TestCase):
         result = report(b)
         self.assertEqual(Content.objects.count(), 0)
         self.assertEqual(result["types"], {"idea": 3, "news": 1, "bookmark": 3})
-        self.assertEqual(result["tags"]["inspiration"], 1)
-        self.assertNotIn("inbox", result["tags"])  # archived Inbox loses inbox
+        self.assertEqual(result["categories"]["inspiration"], 1)
+        self.assertNotIn("inbox", result["categories"])  # archived Inbox loses inbox
         self.assertEqual(prepare(b)[0]["fields"]["saved_on"], date(2026, 2, 1))
 
     def test_copy_and_rerun_are_idempotent_and_do_not_overwrite_user_edits(self):
@@ -90,10 +90,10 @@ class CuratorCopyTests(TestCase):
         self.assertNotEqual(tag_slug("archive"), "archive")
         self.assertNotEqual(tag_slug("Coding agents"), tag_slug("coding-agents"))
 
-    def test_empty_tables_on_unresolved_semantic_tag(self):
+    def test_empty_tables_on_unresolved_category(self):
         b = bundle()
-        from .models import Tag
-        Tag.objects.filter(slug="promising").delete()
+        from .models import Category
+        Category.objects.filter(slug="promising").delete()
         with self.assertRaises(CopyError): copy_bundle(b, self.owner.pk)
         self.assertEqual(Content.objects.count(), 0)
 

@@ -75,6 +75,7 @@ class Content(models.Model):
     # Extension data, not a replacement for searchable common fields or tags.
     attributes = models.JSONField(default=dict, blank=True)
     tags = models.ManyToManyField(Tag, through="ContentTag", related_name="content")
+    categories = models.ManyToManyField("Category", through="ContentCategory", related_name="content")
 
     class Meta:
         db_table = "curator_content"
@@ -96,6 +97,57 @@ class ContentTag(models.Model):
         db_table = "curator_content_tag"
         constraints = [models.UniqueConstraint(fields=["content", "tag"], name="curator_unique_content_tag")]
         indexes = [models.Index(fields=["tag", "content"], name="curator_tag_content_idx")]
+
+
+class Category(models.Model):
+    """Navigation tab (Inbox, Archive, ...), distinct from free-form topic tags.
+
+    A category with no linked object types applies to every type; linked
+    categories (promising/to-improve -> Ideas, inspiration -> Bookmarks) are
+    only offered and assignable for those types.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
+    color = models.CharField(max_length=32, blank=True)
+    is_system = models.BooleanField(default=False)
+    position = models.PositiveIntegerField(default=0)
+    object_types = models.ManyToManyField(ObjectType, through="CategoryObjectType",
+                                          related_name="categories", blank=True)
+
+    class Meta:
+        db_table = "curator_category"
+        ordering = ["position", "slug"]
+        constraints = [
+            models.UniqueConstraint(Lower("slug"), name="curator_category_slug_ci"),
+            models.CheckConstraint(
+                condition=(Q(is_system=True, slug__in=["inbox", "archive", "favorite"])
+                           | (Q(is_system=False) & ~Q(slug__in=["inbox", "archive", "favorite"]))),
+                name="curator_reserved_category_kind",
+            ),
+        ]
+
+
+class CategoryObjectType(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="type_links")
+    object_type = models.ForeignKey(ObjectType, on_delete=models.CASCADE, related_name="category_links")
+
+    class Meta:
+        db_table = "curator_category_object_type"
+        constraints = [models.UniqueConstraint(fields=["category", "object_type"], name="curator_unique_category_type")]
+
+
+class ContentCategory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name="category_links")
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="content_links")
+    assigned_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "curator_content_category"
+        constraints = [models.UniqueConstraint(fields=["content", "category"], name="curator_unique_content_category")]
+        indexes = [models.Index(fields=["category", "content"], name="curator_category_content_idx")]
 
 
 class ContentSource(models.Model):

@@ -14,7 +14,7 @@ from django.core.exceptions import ValidationError
 
 from apps.accounts.decorators import jwt_required
 from apps.accounts.views import same_origin
-from .models import Content, ContentTag, ObjectType, Tag
+from .models import Category, Content, ContentCategory, ContentTag, ObjectType, Tag
 
 
 def item(content, *, detail=False):
@@ -23,6 +23,7 @@ def item(content, *, detail=False):
             "image_url": content.image_url, "image_alt": content.image_alt,
             "saved_on": content.saved_on.isoformat(), "published_on": content.published_on,
             "note_on": content.note_on, "updated_at": content.updated_at.isoformat(),
+            "categories": [{"slug": c.slug, "name": c.name, "system": c.is_system} for c in content.categories.all()],
             "tags": [{"slug": t.slug, "name": t.name, "system": t.is_system} for t in content.tags.all()]}
     if detail:
         data.update(body_markdown=content.body_markdown, author=content.author,
@@ -57,7 +58,7 @@ def error(exc):
 
 
 def owned(user):
-    return Content.objects.filter(owner=user).select_related("object_type").prefetch_related("tags")
+    return Content.objects.filter(owner=user).select_related("object_type").prefetch_related("tags", "categories")
 
 
 @never_cache
@@ -65,6 +66,9 @@ def owned(user):
 @jwt_required
 def taxonomy(request):
     return JsonResponse({"types": list(ObjectType.objects.filter(is_active=True).values("slug", "name", "icon")),
+                         "categories": [{"slug": c.slug, "name": c.name, "is_system": c.is_system, "position": c.position,
+                                         "types": sorted(c.object_types.values_list("slug", flat=True))}
+                                        for c in Category.objects.prefetch_related("object_types")],
                          "tags": list(Tag.objects.values("slug", "name", "is_system")),
                          "months": [{"month": row["month"].strftime("%Y-%m"), "count": row["count"]}
                                     for row in Content.objects.filter(owner=request.user).annotate(month=TruncMonth("saved_on"))
@@ -89,15 +93,16 @@ def collection(request):
                 validate_urls(content)
                 content.full_clean()
                 content.save()
-                ContentTag.objects.create(content=content, tag=Tag.objects.get(slug="inbox"))
+                ContentCategory.objects.create(content=content, category=Category.objects.get(slug="inbox"))
             return JsonResponse(item(owned(request.user).get(pk=content.pk), detail=True), status=201)
-        except (ValueError, TypeError, ValidationError, ObjectType.DoesNotExist) as exc:
+        except (ValueError, TypeError, ValidationError, ObjectType.DoesNotExist, Category.DoesNotExist) as exc:
             return error(ValueError("Invalid content. Check title, type, URLs and dates."))
         except PermissionError as exc:
             return error(exc)
     try:
         query = owned(request.user)
         kind, tag = request.GET.get("type", ""), request.GET.get("tag", "")
+        category = request.GET.get("category", "")
         search = request.GET.get("q", "").strip()
         if len(search) > 200:
             raise ValueError("Search is too long.")
@@ -105,6 +110,8 @@ def collection(request):
             query = query.filter(object_type__slug=kind)
         if tag:
             query = query.filter(tags__slug=tag)
+        if category:
+            query = query.filter(categories__slug=category)
         if search:
             query = query.filter(Q(title__icontains=search) | Q(summary__icontains=search) | Q(body_markdown__icontains=search))
         month = request.GET.get("month", "")
@@ -169,8 +176,6 @@ def assign_tag(request, content_id):
             if data.get("updated_at") != content.updated_at.isoformat():
                 return JsonResponse({"error": "This item changed. Reload before tagging."}, status=409)
             if enabled:
-                if slug in {"archive", "inbox"}:
-                    ContentTag.objects.filter(content=content, tag__slug="inbox" if slug == "archive" else "archive").delete()
                 ContentTag.objects.get_or_create(content=content, tag=tag)
             else:
                 ContentTag.objects.filter(content=content, tag=tag).delete()
@@ -178,3 +183,35 @@ def assign_tag(request, content_id):
         return JsonResponse(item(owned(request.user).get(pk=content_id), detail=True))
     except (PermissionError, ValueError, TypeError, Tag.DoesNotExist) as exc:
         return error(exc if isinstance(exc, PermissionError) else ValueError("Unknown tag or invalid input."))
+
+
+@never_cache
+@csrf_exempt
+@require_http_methods(["POST"])
+@jwt_required
+def assign_category(request, content_id):
+    try:
+        data = body(request)
+        slug, enabled = data.get("category"), data.get("enabled")
+        if not isinstance(enabled, bool):
+            raise ValueError("Provide category and enabled boolean.")
+        category = Category.objects.prefetch_related("object_types").get(slug=slug)
+        with transaction.atomic():
+            content = Content.objects.select_for_update().filter(owner=request.user, pk=content_id).first()
+            if not content:
+                return JsonResponse({"error": "Not found."}, status=404)
+            if data.get("updated_at") != content.updated_at.isoformat():
+                return JsonResponse({"error": "This item changed. Reload before saving."}, status=409)
+            if category.object_types.exists() and not category.object_types.filter(pk=content.object_type_id).exists():
+                raise ValueError("This category does not apply to this object type.")
+            if enabled:
+                if slug in {"archive", "inbox"}:
+                    ContentCategory.objects.filter(
+                        content=content, category__slug="inbox" if slug == "archive" else "archive").delete()
+                ContentCategory.objects.get_or_create(content=content, category=category)
+            else:
+                ContentCategory.objects.filter(content=content, category=category).delete()
+            content.save(update_fields=["updated_at"])
+        return JsonResponse(item(owned(request.user).get(pk=content_id), detail=True))
+    except (PermissionError, ValueError, TypeError, Category.DoesNotExist) as exc:
+        return error(exc if isinstance(exc, PermissionError) else ValueError("Unknown category or invalid input."))
