@@ -120,10 +120,4 @@ AUTH_JWT_TTL_SECONDS = int(os.environ.get("AUTH_JWT_TTL_SECONDS", str(7 * 24 * 3
 GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
 GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
 
-# Personal Notion news reader: backend-only, narrow archive-checkbox writes. Fail closed.
-NOTION_NEWS_TOKEN = os.environ.get("NOTION_NEWS_TOKEN", "")
-NOTION_NEWS_DATA_SOURCE_ID = os.environ.get("NOTION_NEWS_DATA_SOURCE_ID", "")
-NOTION_NEWS_ALLOWED_USER_IDS = {
-    value.strip() for value in os.environ.get("NOTION_NEWS_ALLOWED_USER_IDS", "").split(",") if value.strip()
-}
 
