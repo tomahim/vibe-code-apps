@@ -14,6 +14,7 @@ const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 const RustLearningPath = lazy(() => import("../apps/rust-learning-path/RustLearningPath.jsx"));
 const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/ThreeLearningPath.jsx"));
 
+const LittleNotes = lazy(() => import("../apps/little-notes/LittleNotes.jsx"));
 const AppIdeas = lazy(() => import("../apps/app-ideas/AppIdeas.jsx"));
 const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
 const ContentReview = lazy(() => import("../apps/content-review/ContentReview.jsx"));
@@ -64,6 +65,10 @@ export default function App() {
 
   if (path.startsWith("/apps/threejs-learning-path")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#10131a", color: "#bca3f5", display: "grid", placeItems: "center" }}>Opening your 3D studio…</div>}><ThreeLearningPath onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/little-notes")) {
+    return <Suspense fallback={<div>Opening little notes...</div>}><LittleNotes onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/app-ideas")) {

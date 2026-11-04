@@ -4,6 +4,7 @@ import collectionArtwork from "../assets/genious-apps.png";
 import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
+  { slug: "little-notes", name: "Little notes", description: "IN / OUT: ideas, bookmarks, news and daily notes in one private collection.", category: "News & ideas", icon: "↗" },
   { slug: "story-shelf", name: "The Story Room", description: "A little 3D library. Open illustrated books about history, nature and mountains.", category: "Stories & discovery", icon: "📚" },
   {
     slug: "little-factory",
