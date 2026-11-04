@@ -31,13 +31,6 @@ const initialApps = [
     icon: "🦀",
   },
   {
-    slug: "app-ideas",
-    name: "App Ideas",
-    description: "The idea garden: browse, search and filter every app idea waiting to be built.",
-    category: "Product ideas",
-    icon: "✎",
-  },
-  {
     slug: "recipes",
     name: "Etchebest",
     description: "Bring your ingredients. Spin a 3D wheel and discover what’s cooking tonight.",

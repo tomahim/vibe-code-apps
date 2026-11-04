@@ -17,7 +17,6 @@ urlpatterns = [
     path("api/auth/", include("apps.accounts.urls")),
     path("api/apps/little-grains/", include("apps.little_grains.urls")),
     path("api/apps/content-review/", include("apps.content_review.urls")),
-    path("api/app-ideas/", include("apps.app_ideas.urls")),
     path("api/", include("apps.livetrail_scrap.urls")),
     path("api/apps/rust/", include("apps.rust_learning_path.urls")),
     path("api/apps/recipes/", include("apps.recipes.urls")),

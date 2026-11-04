@@ -113,13 +113,6 @@ BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
 # JWT access tokens (see apps/accounts): signed with SECRET_KEY, default 7-day expiry.
 AUTH_JWT_TTL_SECONDS = int(os.environ.get("AUTH_JWT_TTL_SECONDS", str(7 * 24 * 3600)))
 
-# App Ideas star ratings: the api commits `rating` into the idea's md frontmatter.
-# Fine-grained GitHub token, contents:write on this one repo. Unset disables rating (503).
-GITHUB_IDEAS_TOKEN = os.environ.get("GITHUB_IDEAS_TOKEN", "")
-GITHUB_IDEAS_REPO = os.environ.get("GITHUB_IDEAS_REPO", "tomahim/vibe-code-apps")
-GITHUB_IDEAS_BRANCH = os.environ.get("GITHUB_IDEAS_BRANCH", "master")
-# Optional extra guard: require a logged-in Django staff session to rate.
-IDEAS_RATE_REQUIRE_STAFF = os.environ.get("IDEAS_RATE_REQUIRE_STAFF", "false").lower() == "true"
 
 # Little Grains content review: read open PRs/content trees and post review
 # comments on the one repo and commit quick content edits to PR branches. Fine-grained GitHub token, contents:write (quick edits commit on the PR branch) +
