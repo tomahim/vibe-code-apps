@@ -21,13 +21,17 @@ The private local capture used resumable chunks and a final full ID/edit-time
 reconciliation. Initial transaction timed out and rolled back; optimized bulk
 copy completed only after two live reads confirmed no partial rows.
 
-API base `/api/apps/little-notes/`:
-- GET taxonomy/: active types, shared tag vocabulary and owner-scoped month counts.
-- GET content/: owner-scoped type/tag/month/q filters, 30-row deterministic pages.
-- POST content/: create owner-scoped content, automatically #inbox.
+API base `/api/apps/little-notes/` (post-categories):
+- GET taxonomy/: active types, categories with linked type slugs, topic tag
+  vocabulary and owner-scoped month counts.
+- GET content/: owner-scoped type/category/tag/month/q filters, 30-row pages.
+- POST content/: create owner-scoped content, automatically in Inbox category.
 - GET/PATCH content/<uuid>/: detail / edit with updated_at conflict check.
-- POST content/<uuid>/tags/: one tag toggle, updated_at conflict check; row lock
-  makes #archive/#inbox exclusion atomic. Favorite and topic tags remain independent.
+- POST content/<uuid>/categories/: category toggle, updated_at conflict check;
+  row lock keeps archive/inbox exclusion atomic; type-linked categories are
+  refused for other object types.
+- POST content/<uuid>/tags/: topic tag toggle with updated_at conflict check.
+See categories.md for the category model and the tab/tag split.
 JWT required everywhere, existing same-origin mutation guard and JSON-only writes.
 No type/tag admin writes, delete endpoint, model changes, RLS or source mutation.
 
