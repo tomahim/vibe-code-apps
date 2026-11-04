@@ -22,6 +22,25 @@ CURRENT_SEASON = 2027  # 2026/27
 INITIAL_BUDGET_M = Decimal("140.0")
 
 
+def _sort_values():
+    """Supported /hockey/players sort keys -> value extractor from the player dict.
+
+    "price" is the latest HM price (HM domain); the stat keys are SIHF season
+    totals. The two domains stay explicitly distinct in the response.
+    """
+    return {
+        "name": lambda d: d["name"].lower(),
+        "games": lambda d: d["season"]["games"],
+        "goals": lambda d: d["season"]["goals"],
+        "assists": lambda d: d["season"]["assists"],
+        "points": lambda d: d["season"]["points"],
+        "price": lambda d: float(d["hm"]["price_m"]) if d["hm"]["price_m"] is not None else None,
+    }
+
+
+SORT_KEYS = _sort_values()
+
+
 def err(message, status=400):
     return JsonResponse({"error": message}, status=status)
 
@@ -124,14 +143,30 @@ def players(request):
     q = request.GET.get("q", "").strip()
     if q:
         qs = qs.filter(last_name__icontains=q) | qs.filter(first_name__icontains=q)
-    qs = qs[:500]
-    ids = [p.licence_id for p in qs]
+    total = qs.count()
+    players_qs = list(qs)
+    ids = [p.licence_id for p in players_qs]
     totals = season_totals(season, ids)
     memberships = latest_memberships(season, ids)
     hm = latest_hm()
+    data = [player_dict(p, season, totals, memberships, hm) for p in players_qs]
+    # Full-dataset sort BEFORE the 500-row cap; unknown/None values last in both
+    # directions. Contract: ?sort=<key> with optional leading "-" for descending.
+    sort = request.GET.get("sort", "name")
+    descending = sort.startswith("-")
+    key = sort[1:] if descending else sort
+    extractor = SORT_KEYS.get(key)
+    if extractor:
+        keyed = [(extractor(d), d) for d in data]
+        with_value = sorted([(v, d) for v, d in keyed if v is not None],
+                            key=lambda item: item[0], reverse=descending)
+        data = [d for _, d in with_value] + [d for v, d in keyed if v is None]
+    data = data[:500]
     return JsonResponse({
         "season": season,
-        "players": [player_dict(p, season, totals, memberships, hm) for p in qs],
+        "total": total,
+        "sort": {"applied": sort, "supported": sorted(SORT_KEYS)},
+        "players": data,
     })
 
 

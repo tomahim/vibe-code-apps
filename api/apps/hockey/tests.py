@@ -63,6 +63,47 @@ class LeagueApiTests(HockeyBase):
         self.assertEqual(malgin["season"]["points"], 2)
         self.assertIsNone(malgin["hm"]["price_m"])  # no HM sync yet
 
+    def test_players_sort_full_dataset(self):
+        scorer = Player.objects.create(
+            licence_id=999001, first_name="Zach", last_name="Able", position="F")
+        game2 = Game.objects.create(
+            game_id=20271105000131, season=2027, date="2026-11-01T19:45:00+01:00",
+            home_team=self.zsc, away_team=self.hcd, home_score=3, away_score=1,
+            status="finished")
+        GamePlayerStats.objects.create(
+            game=game2, player=scorer, team_side="home", goals=3, assists_primary=1)
+        c = auth_client(self.user)
+        data = c.get("/api/apps/hockey/players/?sort=-points").json()
+        names = [p["name"] for p in data["players"]]
+        self.assertEqual(names[0], "Zach Able")  # 4 pts first
+        self.assertEqual(data["sort"]["applied"], "-points")
+        self.assertEqual(data["total"], 3)
+        data = c.get("/api/apps/hockey/players/?sort=points").json()
+        self.assertEqual(data["players"][0]["name"], "Ivars Punnenovs")  # 0 pts
+
+    def test_players_sort_price_nulls_last(self):
+        from .models import HMSnapshot
+        from django.utils import timezone
+        HMSnapshot.objects.create(player=self.malgin, captured_on=date(2026, 11, 4),
+                                  source="account", source_observed_at=timezone.now(),
+                                  hm_price_m="14.0")
+        c = auth_client(self.user)
+        for q in ("price", "-price"):
+            data = c.get(f"/api/apps/hockey/players/?sort={q}").json()
+            priced = [p for p in data["players"] if p["hm"]["price_m"] is not None]
+            unpriced = [p for p in data["players"] if p["hm"]["price_m"] is None]
+            self.assertEqual([p["name"] for p in priced], ["Denis Malgin"])
+            self.assertEqual(len(unpriced), 1)
+            # nulls last in both directions
+            self.assertEqual(data["players"][-1]["hm"]["price_m"], None)
+
+    def test_players_sort_unknown_key_falls_back_to_name(self):
+        c = auth_client(self.user)
+        data = c.get("/api/apps/hockey/players/?sort=bogus").json()
+        names = [p["name"] for p in data["players"]]
+        self.assertEqual(names, ["Denis Malgin", "Ivars Punnenovs"])
+        self.assertIn("points", data["sort"]["supported"])
+
     def test_compare_weekly(self):
         c = auth_client(self.user)
         data = c.get("/api/apps/hockey/compare/?ids=155486,310134,999999").json()
