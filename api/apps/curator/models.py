@@ -173,3 +173,28 @@ class ContentSource(models.Model):
             models.CheckConstraint(condition=Q(original_rating__isnull=True) | Q(original_rating__in=[1, 2, 3]),
                                    name="curator_source_valid_rating"),
         ]
+
+
+class ViewPreference(models.Model):
+    """Private display choice per user and object type; no row means default."""
+    class View(models.TextChoices):
+        DEFAULT = "default", "Default"
+        DATABASE = "database", "Database"
+        TABLE = "table", "Light table"
+        CARDS = "cards", "Cards"
+        CALENDAR = "calendar", "Calendar"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                              related_name="curator_view_preferences")
+    object_type = models.ForeignKey(ObjectType, on_delete=models.CASCADE,
+                                    related_name="view_preferences")
+    view = models.CharField(max_length=16, choices=View.choices, default=View.DEFAULT)
+
+    class Meta:
+        db_table = "curator_view_preference"
+        constraints = [
+            models.UniqueConstraint(fields=["owner", "object_type"], name="curator_unique_owner_type_view"),
+            models.CheckConstraint(condition=Q(view__in=["default", "database", "table", "cards", "calendar"]),
+                                   name="curator_valid_view"),
+        ]

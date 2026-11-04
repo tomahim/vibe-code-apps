@@ -31,7 +31,8 @@ try {
    return route.fulfill({ json: { items: [], total: 0, page: 1, next_page: null } });
   });
   for (let i = 0; i < 40; i++) { try { await page.goto('http://localhost:5198/apps/little-notes'); break; } catch { await new Promise(r => setTimeout(r, 200)); } }
-  await page.getByRole('button', { name: 'Manage', exact: true }).click();
+  await page.getByRole('button', { name: '☰ Types', exact: true }).click();
+  await page.getByRole('button', { name: 'Manage', exact: false }).click();
   await page.getByLabel('Name', { exact: true }).fill('Weekend projects');
   await page.getByRole('radio', { name: 'Specific object types' }).check();
   await page.getByRole('button', { name: 'Create category', exact: false }).click();
@@ -68,7 +69,7 @@ try {
   await page.keyboard.press('Escape');
   taxonomy.can_manage_taxonomy = false; await page.reload();
   await page.getByRole('heading', { name: 'A little breathing room.' }).waitFor();
-  if (await page.getByRole('button', { name: 'Manage', exact: true }).count()) throw new Error('Manage shown to non-staff');
+  if (await page.getByRole('button', { name: 'Manage', exact: false }).count()) throw new Error('Manage shown to non-staff');
   if (errors.length) throw new Error(errors.join('\n'));
   await browser.close(); browser = null;
   console.log(`${engine}: PASS 320/390/1280 no overflow; create category/tag/type; multiple scopes; draft retained after 409; accent key; new type in capture; staff gating`);
