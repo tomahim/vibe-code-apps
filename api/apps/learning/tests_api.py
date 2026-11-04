@@ -554,12 +554,13 @@ class LearningAPITests(TestCase):
         self.assertNotIn("answer", garden.content.decode())
 
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
-        # Reading every card earns the lesson bonus without any correct answer.
-        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 6, "carrots": 0})
+        # Reading every card finishes the lesson and the path: both bonuses
+        # follow reading, questions are independent practice.
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 0})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "1"})
-        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 6, "carrots": 0})
+        self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 0})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
-        # The path bonus still waits for every question answered correctly.
+        # A correct answer adds its carrot; the reading bonuses do not move.
         self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
         self.assertEqual(self.client.get("/api/learning/progress/").json()["rewards"], {"drops": 106, "carrots": 1})
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
@@ -694,8 +695,9 @@ class LearningAPITests(TestCase):
         # Adjacent weeks share a boundary, and the reward falls inside it.
         self.assertEqual(previous["window"]["end"], current["window"]["start"])
         self.assertLessEqual(previous["window"]["start"], earned_at.isoformat())
-        # The only card read earns 1 drop plus the 5-drop all-cards lesson bonus.
-        self.assertEqual(previous["rows"][0]["score"], 6)
+        # The only card read earns 1 drop plus the 5-drop lesson bonus and the
+        # 100-drop path bonus: both reading bonuses land in the same window.
+        self.assertEqual(previous["rows"][0]["score"], 106)
         self.assertFalse(previous["has_earlier"])
 
         two_back = self.client.get("/api/learning/leaderboard/?currency=drops&period=weekly&offset=2").json()
@@ -709,13 +711,13 @@ class LearningAPITests(TestCase):
                    for i in range(3)]
         scored = [payload for payload in monthly if payload["rows"]]
         self.assertEqual(len(scored), 1)
-        self.assertEqual(scored[0]["rows"][0]["score"], 6)
+        self.assertEqual(scored[0]["rows"][0]["score"], 106)
         self.assertLessEqual(scored[0]["window"]["start"], earned_at.isoformat())
         self.assertLess(earned_at.isoformat(), scored[0]["window"]["end"])
 
         overall = self.client.get("/api/learning/leaderboard/?currency=drops&period=overall").json()
         self.assertIsNone(overall["window"])
-        self.assertEqual(overall["rows"][0]["score"], 6)
+        self.assertEqual(overall["rows"][0]["score"], 106)
 
         self.assertEqual(self.client.get("/api/learning/leaderboard/?offset=-1").status_code, 400)
         self.assertEqual(self.client.get("/api/learning/leaderboard/?offset=later").status_code, 400)
