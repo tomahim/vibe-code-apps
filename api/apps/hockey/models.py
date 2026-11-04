@@ -126,6 +126,44 @@ class GamePlayerStats(models.Model):
         indexes = [models.Index(fields=["player", "game"])]
 
 
+class Standing(models.Model):
+    """One team's official SIHF standing row at a capture date.
+
+    Official ranking as published by the SIHF statistic site, stored verbatim
+    (not computed from results). One snapshot per team per capture date.
+    """
+
+    team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="standings")
+    season = models.PositiveSmallIntegerField(help_text="Season end year, e.g. 2027 for 2026/27.")
+    captured_on = models.DateField()
+    rank = models.PositiveSmallIntegerField()
+    games_played = models.PositiveSmallIntegerField()
+    points = models.PositiveSmallIntegerField()
+    wins = models.PositiveSmallIntegerField(default=0)
+    ot_wins = models.PositiveSmallIntegerField(default=0)
+    so_wins = models.PositiveSmallIntegerField(default=0)
+    so_losses = models.PositiveSmallIntegerField(default=0)
+    ot_losses = models.PositiveSmallIntegerField(default=0)
+    losses = models.PositiveSmallIntegerField(default=0)
+    goals_for = models.PositiveSmallIntegerField(default=0)
+    goals_against = models.PositiveSmallIntegerField(default=0)
+    source = models.CharField(max_length=100, default="data.sihf.ch standing table")
+    source_updated_at = models.DateTimeField(null=True, blank=True,
+                                             help_text="updateDateTime reported by the source.")
+
+    class Meta:
+        db_table = "hockey_standing"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["team", "season", "captured_on"], name="uniq_standing_snapshot"
+            )
+        ]
+        ordering = ["-captured_on", "rank"]
+
+    def __str__(self):
+        return f"{self.rank}. {self.team_id} ({self.captured_on})"
+
+
 class PlayerWeekStats(models.Model):
     """Materialized weekly aggregates feeding the week-by-week charts."""
 

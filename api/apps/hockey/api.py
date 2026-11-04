@@ -14,6 +14,7 @@ from apps.accounts.decorators import jwt_required
 from .models import (
     FantasyTeam, Game, GamePlayerStats, HMSnapshot, Player, PlayerTeamMembership,
     PlayerWeekStats, Team, RosterEntry, TransferSimulation,
+    Standing,
 )
 
 CURRENT_SEASON = 2027  # 2026/27
@@ -364,3 +365,36 @@ def sim_dict(s):
         "computed_foreigners_after": s.computed_foreigners_after,
         "notes": s.notes,
     }
+
+@jwt_required
+@require_http_methods(["GET"])
+def standings(request):
+    """Latest official SIHF standing snapshot (current season).
+
+    Official published ranking, stored verbatim by the sync - never computed
+    from partial results. Empty until the first standings sync runs.
+    """
+    season = CURRENT_SEASON
+    latest = (Standing.objects.filter(season=season)
+              .order_by("-captured_on").values_list("captured_on", flat=True).first())
+    if latest is None:
+        return JsonResponse({"season": season, "captured_on": None, "source": None,
+                             "source_updated_at": None, "rows": []})
+    rows = (Standing.objects.filter(season=season, captured_on=latest)
+            .select_related("team").order_by("rank"))
+    first = rows[0] if rows else None
+    return JsonResponse({
+        "season": season,
+        "captured_on": latest.isoformat(),
+        "source": first.source if first else None,
+        "source_updated_at": first.source_updated_at.isoformat() if first and first.source_updated_at else None,
+        "rows": [{
+            "rank": s.rank,
+            "team": {"id": s.team.sihf_team_id, "name": s.team.name, "acronym": s.team.acronym},
+            "games_played": s.games_played, "points": s.points,
+            "wins": s.wins, "ot_wins": s.ot_wins, "so_wins": s.so_wins,
+            "so_losses": s.so_losses, "ot_losses": s.ot_losses, "losses": s.losses,
+            "goals_for": s.goals_for, "goals_against": s.goals_against,
+        } for s in rows],
+    })
+
