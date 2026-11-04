@@ -22,7 +22,6 @@ const initialApps = [
     category: "Collection",
     icon: "⛏",
   },
-  { slug: "news", name: "Link Keeper", description: "Your Notion link library: inbox, news, favorites, inspiration and archive. Private account access required.", category: "News & ideas", icon: "▤" },
   {
     slug: "rust-learning-path",
     name: "Rust learning path",
