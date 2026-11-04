@@ -62,6 +62,24 @@ def mmss_to_seconds(value):
         return 0
 
 
+
+def result_cells(row):
+    """Identify the cells of a results-table row by content, not position
+    (column order differs between the default and the Date-filtered query)."""
+    result = state = link = None
+    ot_flag = ""
+    for cell in row:
+        if isinstance(cell, dict):
+            if cell.get("type") == "result":
+                result = cell
+            elif cell.get("type") == "linkToGameDetail":
+                link = cell
+            elif "percent" in cell:
+                state = cell
+        elif isinstance(cell, str) and cell in ("OT", "SO"):
+            ot_flag = cell
+    return result, state, link, ot_flag
+
 def to_int(value, default=0):
     try:
         return int(str(value).replace(",", ""))
@@ -160,40 +178,44 @@ class Command(BaseCommand):
     # -- games ---------------------------------------------------------------
     def sync_games(self):
         rows = results_table(self.season).get("data", [])
-        n = 0
+        teams = {t.sihf_team_id: t for t in Team.objects.all()}
+        objs = []
         for row in rows:
             try:
                 day = datetime.strptime(row[1], "%d.%m.%Y").date()
                 hh, mm = (row[2].split(":") + ["0"])[:2]
                 start = timezone.make_aware(datetime(day.year, day.month, day.day,
                                                      int(hh), int(mm)))
-                home = Team.objects.get(sihf_team_id=row[3]["id"])
-                away = Team.objects.get(sihf_team_id=row[4]["id"])
-                result = row[5] if isinstance(row[5], dict) else {}
-                state = row[7] if isinstance(row[7], dict) else {}
-                link = next((c for c in row if isinstance(c, dict)
-                             and c.get("type") == "linkToGameDetail"), None)
+                home = teams[row[3]["id"]]
+                away = teams[row[4]["id"]]
+                result, state, link, ot_flag = result_cells(row)
                 if not link:
                     continue
-                ot_flag = str(row[8] or "")
-                defaults = dict(
-                    season=self.season, date=start, home_team=home, away_team=away,
-                    home_score=to_int(result.get("homeTeam"), None) if result else None,
-                    away_score=to_int(result.get("awayTeam"), None) if result else None,
+                objs.append(Game(
+                    game_id=int(link["gameId"]), season=self.season, date=start,
+                    home_team=home, away_team=away,
+                    home_score=(to_int(result["homeTeam"], None)
+                                if result and result.get("homeTeam", "-") != "-" else None),
+                    away_score=(to_int(result["awayTeam"], None)
+                                if result and result.get("awayTeam", "-") != "-" else None),
                     went_overtime=ot_flag == "OT", went_shootout=ot_flag == "SO",
-                    status=str(state.get("name") or ""))
-                if not self.dry:
-                    Game.objects.update_or_create(game_id=int(link["gameId"]),
-                                                  defaults=defaults)
-                n += 1
-            except (KeyError, Team.DoesNotExist, ValueError, IndexError) as exc:
+                    status=str(state.get("name") or "") if state else ""))
+            except (KeyError, ValueError, IndexError) as exc:
                 self.stderr.write(f"skip results row: {exc} {row!r}"[:300])
-        return n
+        if not self.dry:
+            Game.objects.bulk_create(
+                objs, update_conflicts=True, unique_fields=["game_id"],
+                update_fields=["season", "date", "home_team", "away_team",
+                               "home_score", "away_score", "went_overtime",
+                               "went_shootout", "status"])
+        return len(objs)
 
     # -- players + per-game stats -------------------------------------------
     def sync_players(self):
-        games = Game.objects.filter(season=self.season).exclude(
-            home_score__isnull=True).order_by("date")
+        games = (Game.objects.filter(season=self.season)
+                 .exclude(home_score__isnull=True)
+                 .filter(player_stats__isnull=True)  # resume: only games without stats
+                 .order_by("date").distinct())
         n = 0
         for game in games:
             detail = game_detail(game.game_id)
@@ -205,19 +227,109 @@ class Command(BaseCommand):
                 roster[key] = p.get("id")
                 names[p.get("id")] = p.get("fullName", "")
             with transaction.atomic():
-                for block in detail.get("stats", []):
-                    alias = block.get("alias") or ""
-                    if not (alias.startswith("gamePlayerStats")
-                            or alias.startswith("gameGoalieStats")):
-                        continue
-                    side = "home" if alias.endswith("Home") else "away"
-                    team_id = game.home_team_id if side == "home" else game.away_team_id
-                    for row in block.get("data", []):
-                        if alias.startswith("gamePlayerStats"):
-                            n += self._skater_row(game, side, team_id, roster, names, row)
-                        else:
-                            n += self._goalie_row(game, side, team_id, roster, names, row)
+                n += self._game_rows(game, detail, roster, names)
         return n
+
+    def _game_rows(self, game, detail, roster, names):
+        """One game's writes in bulk: a handful of queries instead of one
+        round trip per row (the production pooler makes per-row upserts
+        take minutes for a full season)."""
+        pending = []  # (side, team_id, row, is_goalie)
+        for block in detail.get("stats", []):
+            alias = block.get("alias") or ""
+            if not (alias.startswith("gamePlayerStats")
+                    or alias.startswith("gameGoalieStats")):
+                continue
+            side = "home" if alias.endswith("Home") else "away"
+            team_id = game.home_team_id if side == "home" else game.away_team_id
+            for row in block.get("data", []):
+                pending.append((side, team_id, row,
+                                alias.startswith("gameGoalieStats")))
+        wanted = {}  # licence_id -> (first, last, position, team_id)
+        for side, team_id, row, is_goalie in pending:
+            licence_id = roster.get((team_id, str(row[0])))
+            if not licence_id:
+                continue
+            full = names.get(licence_id, "").strip()
+            last, _, first = full.partition(" ")
+            if is_goalie:
+                pos = "G"
+            else:
+                pos = "D" if str(row[2]).lower().startswith("vert") else "F"
+            wanted[licence_id] = (first or full, last or full, pos, team_id)
+        if not wanted:
+            return 0
+        existing = {pl.licence_id: pl for pl in
+                    Player.objects.filter(licence_id__in=wanted)}
+        for licence_id, (first, last, pos, _t) in wanted.items():
+            if licence_id in existing:
+                pl = existing[licence_id]
+                changed = []
+                if first and pl.first_name != first:
+                    pl.first_name, changed = first, changed + ["first_name"]
+                if last and pl.last_name != last:
+                    pl.last_name, changed = last, changed + ["last_name"]
+                if pl.position != pos:
+                    pl.position, changed = pos, changed + ["position"]
+                if changed:
+                    pl.save(update_fields=changed)
+        Player.objects.bulk_create(
+            [Player(licence_id=lid, first_name=v[0], last_name=v[1],
+                    position=v[2])
+             for lid, v in wanted.items() if lid not in existing],
+            ignore_conflicts=True)
+        players = {pl.licence_id: pl for pl in
+                   Player.objects.filter(licence_id__in=wanted)}
+        season_start = date(self.season - 1, 8, 1)
+        known_teams = set(Team.objects.filter(
+            sihf_team_id__in={v[3] for v in wanted.values()}
+        ).values_list("sihf_team_id", flat=True))
+        PlayerTeamMembership.objects.bulk_create(
+            [PlayerTeamMembership(player=players[lid],
+                                  team_id=v[3], season=self.season,
+                                  from_date=season_start)
+             for lid, v in wanted.items() if v[3] in known_teams],
+            ignore_conflicts=True)
+        rows = []
+        for side, team_id, row, is_goalie in pending:
+            licence_id = roster.get((team_id, str(row[0])))
+            player = players.get(licence_id)
+            if player is None:
+                continue
+            if is_goalie:
+                seconds = mmss_to_seconds(row[6])
+                rows.append(GamePlayerStats(
+                    game=game, player=player, team_side=side,
+                    penalty_minutes=to_int(row[8]),
+                    goals_against=to_int(row[2]), saves=to_int(row[3]),
+                    shots_against=to_int(row[4]),
+                    shutout=bool(to_int(row[2]) == 0 and seconds > 0),
+                    goalie_seconds=seconds))
+            else:
+                plus_minus = to_int(row[9])
+                rows.append(GamePlayerStats(
+                    game=game, player=player, team_side=side,
+                    goals=to_int(row[3]),
+                    assists_primary=to_int(row[5]),
+                    assists_secondary=to_int(row[6]),
+                    penalty_minutes=to_int(row[8]),
+                    plus_count=max(plus_minus, 0),
+                    minus_count=max(-plus_minus, 0),
+                    shots_on_goal=to_int(row[10]),
+                    shots_blocked=to_int(row[13]),
+                    faceoffs_won=to_int(row[14]),
+                    faceoffs_lost=to_int(row[15]),
+                    toi_seconds=mmss_to_seconds(row[17])))
+        GamePlayerStats.objects.bulk_create(
+            rows, update_conflicts=True,
+            unique_fields=["game", "player"],
+            update_fields=["team_side", "goals", "assists_primary",
+                           "assists_secondary", "penalty_minutes",
+                           "plus_count", "minus_count", "shots_on_goal",
+                           "shots_blocked", "faceoffs_won", "faceoffs_lost",
+                           "toi_seconds", "goals_against", "saves",
+                           "shots_against", "shutout", "goalie_seconds"])
+        return len(rows)
 
     def _player(self, licence_id, names, team_id):
         full = names.get(licence_id, "").strip()
@@ -301,23 +413,24 @@ class Command(BaseCommand):
             a["plus_minus"] += s.plus_count - s.minus_count
             a["toi_seconds"] += s.toi_seconds
             a["shots_on_goal"] += s.shots_on_goal
-        n = 0
-        for (player_id, week), a in agg.items():
-            if not self.dry:
-                PlayerWeekStats.objects.update_or_create(
-                    player_id=player_id, season=self.season, iso_week=week, defaults=a)
-            n += 1
-        return n
+        objs = [PlayerWeekStats(player_id=pid, season=self.season, iso_week=week, **a)
+                for (pid, week), a in agg.items()]
+        if not self.dry:
+            PlayerWeekStats.objects.bulk_create(
+                objs, update_conflicts=True,
+                unique_fields=["player", "season", "iso_week"],
+                update_fields=["games", "goals", "assists", "points",
+                               "penalty_minutes", "plus_minus", "toi_seconds",
+                               "shots_on_goal"])
+        return len(objs)
 
     # -- reconciliation ------------------------------------------------------
     def sync_check(self):
         """Compare stored games/stats against the official results table."""
         official = set()
         for row in results_table(self.season).get("data", []):
-            link = next((c for c in row if isinstance(c, dict)
-                         and c.get("type") == "linkToGameDetail"), None)
-            state = row[7] if len(row) > 7 and isinstance(row[7], dict) else {}
-            if link and state.get("percent") == 100:
+            result, state, link, ot_flag = result_cells(row)
+            if link and state and state.get("percent") == 100:
                 official.add(int(link["gameId"]))
         stored = set(Game.objects.filter(season=self.season)
                      .values_list("game_id", flat=True))
