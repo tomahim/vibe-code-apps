@@ -6,6 +6,8 @@ import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
 import { GrainsLoader } from "./Loader.jsx";
+import { PathComplete } from "./PathComplete.jsx";
+import { newlyCompletedPaths } from "./path-completion.js";
 import { stableShuffler } from "./shuffle.js";
 import { BadgeButton, BadgeCollection } from "./Badges.jsx";
 import "./garden/garden.css";
@@ -523,6 +525,8 @@ export default function LittleGrains() {
   const scene = useRef(null);
   const lastGarden = useRef(null);
   const [garden, setGarden] = useState(null);
+  const [completedPaths, setCompletedPaths] = useState([]);
+  const celebratedPaths = useRef(new Set());
   const [error, setError] = useState("");
   const [startup, setStartup] = useState({ phase: "waking", attempt: 1 });
   const [wakeRun, setWakeRun] = useState(0);
@@ -546,7 +550,15 @@ export default function LittleGrains() {
   // The api awards badges when asked: on first load, after leaving a lesson or
   // quiz and when the badges tab opens. Never per card or answer, never polled.
   const checkBadges = useCallback(() => api("badges/check/", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).then((result) => { setBadges(result); setBadgesError(""); }).catch((err) => setBadgesError(err.message)), []);
-  const refresh = useCallback(async () => { const result = await api("garden/"); gardenData.current = result; setGarden(result); return result; }, []);
+  // Observe the server's full path completion rule (all cards + all questions),
+  // then wait until the reader/quiz closes before showing the larger result.
+  const refresh = useCallback(async () => {
+    const result = await api("garden/");
+    const completed = newlyCompletedPaths(gardenData.current, result).filter(path => !celebratedPaths.current.has(path.id));
+    completed.forEach(path => celebratedPaths.current.add(path.id));
+    if (completed.length) setCompletedPaths(queue => [...queue, ...completed]);
+    gardenData.current = result; setGarden(result); return result;
+  }, []);
 
   const navigate = useCallback((next, { replace = false } = {}) => {
     const url = routeUrl(next);
@@ -664,9 +676,9 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (showBadges) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp) return; if (showBadges) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [reader, catchUp, showLeaderboard, showBadges, rewardInfo, closeReader]);
+  }, [reader, catchUp, showLeaderboard, showBadges, rewardInfo, closeReader, completedPaths]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
@@ -676,6 +688,7 @@ export default function LittleGrains() {
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
   </main>;
