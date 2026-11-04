@@ -19,6 +19,7 @@ urlpatterns = [
     path("api/", include("apps.livetrail_scrap.urls")),
     path("api/apps/rust/", include("apps.rust_learning_path.urls")),
     path("api/apps/recipes/", include("apps.recipes.urls")),
+    path("api/apps/hockey/", include("apps.hockey.urls")),
 ]
 
 # Local disk media is served by Django in DEBUG only; production uses the bucket.
