@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "apps.livetrail_scrap",
     "apps.recipes",
     "apps.rust_learning_path",
+    "apps.hockey.apps.HockeyConfig",
 ]
 
 UNFOLD = {
