@@ -13,4 +13,5 @@ urlpatterns = [
     path("my/teams/<int:team_id>/", api.my_team_detail, name="hockey-my-team-detail"),
     path("my/teams/<int:team_id>/roster/", api.my_team_roster, name="hockey-my-team-roster"),
     path("my/teams/<int:team_id>/simulations/", api.my_team_simulations, name="hockey-my-team-simulations"),
+    path("standings/", api.standings),
 ]

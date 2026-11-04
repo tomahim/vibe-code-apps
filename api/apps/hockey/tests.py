@@ -6,7 +6,7 @@ from django.test import Client, TestCase
 
 from apps.accounts.tokens import issue_token
 from .models import (FantasyTeam, Game, GamePlayerStats, Player, PlayerTeamMembership,
-                     PlayerWeekStats, RosterEntry, Team)
+                     PlayerWeekStats, RosterEntry, Standing, Team)
 
 User = get_user_model()
 
@@ -71,6 +71,23 @@ class LeagueApiTests(HockeyBase):
         self.assertEqual(weeks[0]["week"], 44)
         self.assertEqual(weeks[0]["points"], 2)
 
+
+    def test_standings_empty_then_latest(self):
+        c = auth_client(self.user)
+        r = c.get("/api/apps/hockey/standings/")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["rows"], [])
+        team = Team.objects.get(sihf_team_id=101139)
+        Standing.objects.create(team=team, season=2027, captured_on="2026-11-01",
+                                rank=1, games_played=18, points=47, wins=13,
+                                ot_wins=3, so_wins=1, so_losses=0, ot_losses=0,
+                                losses=1, goals_for=75, goals_against=38,
+                                source="data.sihf.ch standing table")
+        r = c.get("/api/apps/hockey/standings/").json()
+        self.assertEqual(r["captured_on"], "2026-11-01")
+        self.assertEqual(r["source"], "data.sihf.ch standing table")
+        row = r["rows"][0]
+        self.assertEqual((row["rank"], row["team"]["acronym"], row["points"]), (1, "ZSC", 47))
 
 class FantasyApiTests(HockeyBase):
     def test_owner_isolation(self):
