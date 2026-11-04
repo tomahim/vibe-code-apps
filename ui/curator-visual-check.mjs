@@ -7,7 +7,7 @@ const page=await browser.newPage();
 const screenshots=process.env.CURATOR_SCREENSHOTS || "/tmp/little-notes-screenshots";
 const CATS=[['inbox','Inbox',[]],['archive','Archive',[]],['favorite','Favorite',[]],['promising','Promising',['idea']],['to-improve','To improve',['idea']],['inspiration','Inspiration',['bookmark']]]
  .map(([slug,name,types],i)=>({slug,name,is_system:i<3,position:i,types}));
-const mk=(id,type,title,day,cats,tags=[])=>({id,type,title,summary:'A thought saved for later.',saved_on:day,updated_at:'2026-11-04T18:00:00Z',categories:cats.map(slug=>({slug,name:CATS.find(c=>c.slug===slug)[1]})),tags});
+const mk=(id,type,title,day,cats,tags=[])=>({id,type,title,summary:'A thought saved for later.',saved_on:day,updated_at:'2026-11-04T18:00:00Z',categories:cats.map(slug=>({slug,name:CATS.find(c=>c.slug===slug).name})),tags});
 const records=[
  {id:'11111111-1111-4111-8111-111111111111',type:'idea',title:'A small cabinet for big ideas',subtitle:'Make room for the things you might build.',summary:'Collect ideas from anywhere. Keep the promising ones, improve the rough ones, and clear a little space for what comes next.',saved_on:'2026-11-04',external_url:'https://example.com',body_markdown:'## The thought\n\nA useful idea needs a place to wait. This is your one-object decision stage.\n\n- Keep it\n- Improve it\n- Come back later',updated_at:'2026-11-04T18:00:00Z',categories:[{slug:'inbox',name:'Inbox'}],tags:[{slug:'topic-coding-agents-x',name:'Coding agents'}]},
  mk('b1','bookmark','A field guide to quiet interfaces','2026-11-03',['inbox']),
