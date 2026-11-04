@@ -15,8 +15,7 @@ from .models import (
     FantasyTeamShare,
     FantasyTeam, Game, GamePlayerStats, HMSnapshot, Player, PlayerTeamMembership,
     PlayerWeekStats, Team, RosterEntry, TransferSimulation,
-    Standing,
-)
+    Standing, HMPair, HMPairSnapshot)
 
 CURRENT_SEASON = 2027  # 2026/27
 INITIAL_BUDGET_M = Decimal("140.0")
@@ -116,9 +115,44 @@ def player_dict(p, season, totals, memberships, hm):
         "hm": {
             "price_m": str(snap.hm_price_m) if snap and snap.hm_price_m is not None else None,
             "points_season": snap.hm_points_season if snap else None,
+            "points_avg": str(snap.hm_points_avg) if snap and snap.hm_points_avg is not None else None,
+            "matches": snap.hm_matches if snap else None,
+            "goals": snap.hm_goals if snap else None,
+            "assists_primary": snap.hm_assists_primary if snap else None,
+            "assists_secondary": snap.hm_assists_secondary if snap else None,
+            "gwg": snap.hm_gwg if snap else None,
+            "real_points": snap.hm_real_points if snap else None,
             "captured_on": snap.captured_on.isoformat() if snap else None,
         },
     }
+
+
+@jwt_required
+@require_GET
+def hm_pairs(request):
+    """League-wide HM goalkeeper pairs with their latest snapshot."""
+    latest = {}
+    for s in HMPairSnapshot.objects.select_related("pair__team").annotate(
+            rnk=Window(expression=Rank(), partition_by=[F("pair_id")],
+                       order_by=F("captured_on").desc())).filter(rnk=1):
+        latest[s.pair_id] = s
+    data = []
+    for pair in HMPair.objects.select_related("team").order_by("-hm_asset_id"):
+        s = latest.get(pair.pk)
+        data.append({
+            "hm_asset_id": pair.hm_asset_id,
+            "label": pair.label,
+            "team": {"id": pair.team.sihf_team_id, "name": pair.team.name,
+                     "acronym": pair.team.acronym},
+            "snapshot": {
+                "price_m": str(s.hm_price_m) if s and s.hm_price_m is not None else None,
+                "points_season": s.hm_points_season if s else None,
+                "points_avg": str(s.hm_points_avg) if s and s.hm_points_avg is not None else None,
+                "matches": s.hm_matches if s else None,
+                "captured_on": s.captured_on.isoformat() if s else None,
+            } if s else None,
+        })
+    return JsonResponse({"pairs": data})
 
 
 @jwt_required

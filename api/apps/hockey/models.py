@@ -214,6 +214,15 @@ class HMSnapshot(models.Model):
     hm_points_season = models.IntegerField(null=True, blank=True)
     hm_points_avg = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     hm_ownership_pct = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    # HM-supplied per-entity season metrics (HM's own counting, not SIHF stats).
+    hm_matches = models.IntegerField(null=True, blank=True)
+    hm_goals = models.IntegerField(null=True, blank=True)
+    hm_goals_ot = models.IntegerField(null=True, blank=True)
+    hm_assists_primary = models.IntegerField(null=True, blank=True)
+    hm_assists_secondary = models.IntegerField(null=True, blank=True)
+    hm_assists_ot = models.IntegerField(null=True, blank=True)
+    hm_gwg = models.IntegerField(null=True, blank=True)
+    hm_real_points = models.IntegerField(null=True, blank=True)
     source = models.CharField(max_length=20, choices=HMSource.choices)
     source_observed_at = models.DateTimeField()
 
@@ -221,6 +230,44 @@ class HMSnapshot(models.Model):
         db_table = "hockey_hm_snapshot"
         constraints = [
             models.UniqueConstraint(fields=["player", "captured_on"], name="hockey_hm_snapshot_uniq")
+        ]
+        ordering = ["-captured_on"]
+
+
+class HMPair(models.Model):
+    """An HM goalkeeper-pair asset (goalkeepers are priced/scored per club as
+    pairs). Identity as HM shows it; player-level stats stay on Player."""
+
+    hm_asset_id = models.PositiveIntegerField(unique=True)
+    label = models.CharField(max_length=120)
+    team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="hm_pairs")
+
+    class Meta:
+        db_table = "hockey_hm_pair"
+
+    def __str__(self):
+        return self.label
+
+
+class HMPairSnapshot(models.Model):
+    """Point-in-time HM state of a goalkeeper pair; same capture semantics as
+    HMSnapshot (HM corrects retroactively)."""
+
+    pair = models.ForeignKey(HMPair, on_delete=models.CASCADE, related_name="snapshots")
+    captured_on = models.DateField()
+    hm_price_m = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
+    hm_points_season = models.IntegerField(null=True, blank=True)
+    hm_points_avg = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    hm_matches = models.IntegerField(null=True, blank=True)
+    hm_assists_primary = models.IntegerField(null=True, blank=True)
+    hm_real_points = models.IntegerField(null=True, blank=True)
+    source = models.CharField(max_length=20, choices=HMSource.choices)
+    source_observed_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "hockey_hm_pair_snapshot"
+        constraints = [
+            models.UniqueConstraint(fields=["pair", "captured_on"], name="hockey_hm_pair_snapshot_uniq")
         ]
         ordering = ["-captured_on"]
 

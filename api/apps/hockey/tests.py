@@ -132,6 +132,41 @@ class LeagueApiTests(HockeyBase):
         self.assertEqual((row["rank"], row["team"]["acronym"], row["points"]), (1, "ZSC", 47))
 
 class FantasyApiTests(HockeyBase):
+    def test_hm_pairs_endpoint(self):
+        from django.utils import timezone
+        from .models import HMPair, HMPairSnapshot
+        pair = HMPair.objects.create(hm_asset_id=93, label="Zumbühl / Hrubec", team=self.zsc)
+        HMPairSnapshot.objects.create(
+            pair=pair, captured_on=date(2026, 11, 4), source="top_scorer_page",
+            source_observed_at=timezone.now(), hm_price_m="14.0",
+            hm_points_season=256, hm_matches=18)
+        c = auth_client(self.user)
+        data = c.get("/api/apps/hockey/hm-pairs/").json()
+        self.assertEqual(len(data["pairs"]), 1)
+        p0 = data["pairs"][0]
+        self.assertEqual(p0["label"], "Zumbühl / Hrubec")
+        self.assertEqual(p0["team"]["acronym"], "ZSC")
+        self.assertEqual(p0["snapshot"]["price_m"], "14.0")
+        self.assertEqual(p0["snapshot"]["matches"], 18)
+        self.assertEqual(Client().get("/api/apps/hockey/hm-pairs/").status_code, 401)
+
+    def test_player_hm_metrics_nullable(self):
+        from django.utils import timezone
+        from .models import HMSnapshot
+        HMSnapshot.objects.create(
+            player=self.malgin, captured_on=date(2026, 11, 4),
+            source="top_scorer_page", source_observed_at=timezone.now(),
+            hm_price_m="10.0", hm_points_season=100, hm_matches=19,
+            hm_goals=5, hm_real_points=12)
+        c = auth_client(self.user)
+        data = c.get("/api/apps/hockey/players/?q=Malgin").json()
+        hm = data["players"][0]["hm"]
+        self.assertEqual(hm["matches"], 19)
+        self.assertEqual(hm["goals"], 5)
+        self.assertIsNone(hm["gwg"])  # not supplied by the capture
+        punn = c.get("/api/apps/hockey/players/?q=Punnenovs").json()
+        self.assertIsNone(punn["players"][0]["hm"]["matches"])  # no snapshot
+
     def test_owner_isolation(self):
         t = FantasyTeam.objects.create(owner=self.user, name="Elephant Crushers")
         c_other = auth_client(self.other)
