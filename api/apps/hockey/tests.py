@@ -99,7 +99,53 @@ class FantasyApiTests(HockeyBase):
         self.assertEqual(sim.status_code, 201)
         # HM prices unknown (no sync): budget estimate honestly blocked
         self.assertIsNone(sim.json()["computed_budget_after_m"])
-        self.assertIn("Unknown current HM price", sim.json()["notes"])
+        self.assertIn("Unknown HM price", sim.json()["notes"])
+
+    def test_simulation_validation(self):
+        c = auth_client(self.user)
+        t = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "V"}),
+                   content_type="application/json").json()
+        c.post(f"/api/apps/hockey/my/teams/{t['id']}/roster/",
+               data=json.dumps({"player": 155486, "acquired_price_m": "17.0"}),
+               content_type="application/json")
+        # sell a player not in the roster
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/simulations/",
+                   data=json.dumps({"sells": [310134], "buys": []}),
+                   content_type="application/json")
+        self.assertEqual(r.status_code, 400)
+        self.assertIn("not in this roster", r.json()["error"])
+        # buy a player already in the roster
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/simulations/",
+                   data=json.dumps({"sells": [], "buys": [155486]}),
+                   content_type="application/json")
+        self.assertEqual(r.status_code, 400)
+        self.assertIn("Already in this roster", r.json()["error"])
+        # same player sold and bought
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/simulations/",
+                   data=json.dumps({"sells": [155486], "buys": [155486]}),
+                   content_type="application/json")
+        self.assertEqual(r.status_code, 400)
+        # unknown player id
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/simulations/",
+                   data=json.dumps({"sells": [], "buys": [999999]}),
+                   content_type="application/json")
+        self.assertEqual(r.status_code, 400)
+        self.assertIn("Unknown player id", r.json()["error"])
+
+    def test_simulation_unknown_acquisition_price_blocks_estimate(self):
+        c = auth_client(self.user)
+        t = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "U"}),
+                   content_type="application/json").json()
+        # roster entry without acquisition price: spent is unknown,
+        # the estimate must be null, never computed with a silent zero
+        c.post(f"/api/apps/hockey/my/teams/{t['id']}/roster/",
+               data=json.dumps({"player": 155486}), content_type="application/json")
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/simulations/",
+                   data=json.dumps({"sells": [], "buys": []}),
+                   content_type="application/json")
+        self.assertEqual(r.status_code, 201)
+        self.assertIsNone(r.json()["computed_budget_after_m"])
+        self.assertIn("Denis Malgin", r.json()["notes"])
 
     def test_roster_cap(self):
         c = auth_client(self.user)

@@ -309,8 +309,21 @@ def my_team_simulations(request, team_id):
     name = (body.get("name") or "Simulation").strip()[:100]
     sell_ids = body.get("sells", [])
     buy_ids = body.get("buys", [])
+    if not isinstance(sell_ids, list) or not isinstance(buy_ids, list):
+        return err("sells and buys must be lists of player licence ids.")
+    if set(sell_ids) & set(buy_ids):
+        return err("A player cannot be both sold and bought in one simulation.")
     sells = list(Player.objects.filter(pk__in=sell_ids))
     buys = list(Player.objects.filter(pk__in=buy_ids))
+    if len(sells) != len(set(sell_ids)) or len(buys) != len(set(buy_ids)):
+        return err("Unknown player id in sells or buys.")
+    roster_ids = set(t.roster.values_list("player_id", flat=True))
+    not_owned = [p.licence_id for p in sells if p.licence_id not in roster_ids]
+    if not_owned:
+        return err("Cannot sell players not in this roster: %s" % not_owned)
+    already = [p.licence_id for p in buys if p.licence_id in roster_ids]
+    if already:
+        return err("Already in this roster: %s" % already)
     hm = latest_hm()
 
     def price_of(p):
@@ -318,11 +331,14 @@ def my_team_simulations(request, team_id):
         return snap.hm_price_m if snap and snap.hm_price_m is not None else None
 
     # Budget math: 140M start - current roster acquisition cost - buys + sells.
-    # Sells use the latest known HM price; unknown prices block the estimate.
-    spent = sum((e.acquired_price_m or Decimal("0")) for e in t.roster.all())
+    # Every input must be known; any unknown price makes the whole estimate
+    # unknown (null) instead of silently counting zero.
+    entries = list(t.roster.all())
     unknown = [str(p) for p in buys + sells if price_of(p) is None]
+    unknown += [str(e.player) for e in entries if e.acquired_price_m is None]
     budget_after = None
     if not unknown:
+        spent = sum(e.acquired_price_m for e in entries)
         budget_after = (INITIAL_BUDGET_M - spent
                         + sum(price_of(p) for p in sells)
                         - sum(price_of(p) for p in buys))
@@ -331,7 +347,8 @@ def my_team_simulations(request, team_id):
     sim = TransferSimulation.objects.create(
         team=t, name=name,
         computed_budget_after_m=budget_after,
-        notes=("Unknown current HM price for: " + ", ".join(unknown)) if unknown else "",
+        notes=("Unknown HM price (estimate unavailable, not zero): "
+               + ", ".join(unknown)) if unknown else "",
     )
     sim.sells.set(sells)
     sim.buys.set(buys)
