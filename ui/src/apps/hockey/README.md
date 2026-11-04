@@ -1,12 +1,15 @@
 # Hockey Lab
 
-Authenticated frontend at `/apps/hockey/players`, `/compare`, `/teams`, and `/simulator` (all below `/apps/hockey`). Uses the shared Bearer-JWT helper and sign-in flow. No credentials, real user rosters, or demo data are bundled.
+Authenticated frontend at `/apps/hockey/players`, `/compare`, `/standings`, `/teams`, and `/simulator` (all below `/apps/hockey`). Uses the shared Bearer-JWT helper and sign-in flow. No credentials, real user rosters, or demo data are bundled.
 
-- Player search, club/position filters, details and an eight-player selection that survives filters.
+- Player search, club/position filters, details and an eight-player selection that survives filters and sorting.
+- Server-side sorting (`ordering` param, applied before the 500-row cap): name, SIHF points/goals/assists/games and HM price, both directions, unknown values always last. The UI never sorts only the loaded page.
+- The selection bar is pinned to the bottom of the viewport while any player is selected, so the count, Compare and Clear actions stay reachable in long tables. On the compare page it offers a jump to the charts instead. Table headers stick while scrolling.
 - Weekly comparison charts with metric selection, legend and an accessible data table. Missing weeks are not interpolated. Weeks across January remain in season order.
-- Account-owned fantasy teams and local planning rosters. Manual entries do not imply a live HM import or known acquisition cost.
+- Account-owned fantasy teams and local planning rosters. Manual entries do not imply a live HM import or known acquisition cost. Goalkeeper pairs render as indivisible pair entries; their observed price is labelled as not an acquisition cost.
+- Teams shared read-only by another account appear separately under "Shared with you", labelled with the owner, without any prices, edits, removals or simulations.
 - Equal-size transfer what-ifs, saved to the account's team. No real trade route exists. Unknown acquisition costs suppress estimates, even if an older API returned a number. Known-cost estimates are labeled as estimates from a 140 M initial budget, not actual HM balances. Position, nationality and transfer eligibility remain unchecked and are stated as such.
-- Official standings consume the exact `/standings/` API, including shootout splits, source, capture day and source update time. Empty data never becomes an inferred table.
+- Official standings have their own tab and consume the exact `/standings/` API, including shootout splits, source, capture day and source update time. Empty data never becomes an inferred table.
 
 This view deliberately warns that import coverage is not verified. A season total is not a weekly history. No synthetic statistics are used at runtime. Tests use clearly named fixture players and mocked API responses.
 

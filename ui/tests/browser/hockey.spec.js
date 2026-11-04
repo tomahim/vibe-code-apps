@@ -3,23 +3,31 @@ const players = [
  {licence_id:1,name:'Fixture Forward',position:'F',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:2,assists:4,points:6},hm:{price_m:'8.5',captured_on:'2026-11-04'}},
  {licence_id:2,name:'Fixture Defender',position:'D',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:1,assists:2,points:3},hm:{price_m:null}},
  {licence_id:3,name:'Fixture Incoming',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:{games:2,goals:1,assists:0,points:1},hm:{price_m:'6.5'}},
+ {licence_id:4,name:'Fixture Rookie',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:null,hm:{price_m:null}},
 ];
-async function setup(page,{empty=false}={}){
- const saved=[];
+const manyPlayers = Array.from({length:60},(_,i)=>({licence_id:100+i,name:`Fixture Player ${String(i+1).padStart(2,'0')}`,position:['F','D','G'][i%3],team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:i%5,assists:i%4,points:(i%5)+(i%4)},hm:{price_m:String(1+(i%10)),captured_on:'2026-11-04'}}));
+async function setup(page,{empty=false,many=false}={}){
+ const saved=[];const requests=[];const roster=many?manyPlayers:players;
  await page.addInitScript(()=>{localStorage.setItem('genious_token','fixture-token');localStorage.setItem('genious_user',JSON.stringify({email:'fixture@example.invalid'}));});
  await page.route('**/api/apps/hockey/**',async route=>{
   const url=new URL(route.request().url()), path=url.pathname.replace('/api/apps/hockey/','');
   let data={};
   if(path==='teams/') data={teams:empty?[]:[{id:1,name:'Fixture Club'},{id:2,name:'Other Club'}]};
-  else if(path==='players/') data={players:empty?[]:players.filter(p=>(!url.searchParams.get('q') || p.name.toLowerCase().includes(url.searchParams.get('q').toLowerCase())) && (!url.searchParams.get('team') || String(p.team.id)===url.searchParams.get('team')))};
+  else if(path==='players/') {
+   const ord=url.searchParams.get('sort');requests.push(ord);
+   let rows=roster.filter(p=>(!url.searchParams.get('q') || p.name.toLowerCase().includes(url.searchParams.get('q').toLowerCase())) && (!url.searchParams.get('team') || String(p.team.id)===url.searchParams.get('team')));
+   if(ord){const key=ord.replace(/^-/,''),dir=ord.startsWith('-')?-1:1,val=pl=>key==='name'?pl.name:key==='price'?(pl.hm&&pl.hm.price_m!=null?Number(pl.hm.price_m):null):(pl.season?pl.season[key]:null);rows=rows.slice().sort((a,b)=>{const va=val(a),vb=val(b);if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return va<vb?-dir:va>vb?dir:0;});}
+   data={players:empty?[]:rows};
+  }
   else if(path==='standings/') data={rows:[]};
-  else if(path==='compare/') data={players:players.filter(p=>url.searchParams.get('ids').split(',').includes(String(p.licence_id))).map(p=>({...p,weeks:[{week:38,games:1,goals:p.licence_id,assists:1,points:p.licence_id+1},{week:40,games:2,goals:0,assists:1,points:1}]})),missing:[]};
-  else if(path==='my/teams/') data={teams:empty?[]:[{id:10,name:'Fixture team',roster_size:1}]};
-  else if(path==='my/teams/10/') data={id:10,name:'Fixture team',roster:[{player:1,name:'Fixture Forward',slot:'F',acquired_price_m:null,source:'manual'}]};
+  else if(path==='compare/') data={players:roster.filter(p=>url.searchParams.get('ids').split(',').includes(String(p.licence_id))).map(p=>({...p,weeks:[{week:38,games:1,goals:p.licence_id,assists:1,points:p.licence_id+1},{week:40,games:2,goals:0,assists:1,points:1}]})),missing:[]};
+  else if(path==='my/teams/') data={teams:empty?[]:[{id:10,name:'Fixture team',roster_size:1}],shared_with_me:empty?[]:[{id:11,name:'Pongo',roster_size:1,read_only:true,owner_label:'aurore',granted_by:'Fixture consent 2026-11-04',roster:[{player:2,name:'Fixture Defender',slot:'D',acquired_price_m:'5.0',source:'hm_import'}],pair_entries:[{label:'Fixture Pair A/B',hm_asset_id:93,current_price_m:'14.0',source:'hm_import'}]}]};
+  else if(path==='my/teams/10/') data={id:10,name:'Fixture team',roster:[{player:1,name:'Fixture Forward',slot:'F',acquired_price_m:null,source:'manual'}],pair_entries:[{label:'Fixture Own Pair C/D',hm_asset_id:175,current_price_m:'13.0',source:'hm_import'}]};
   else if(path==='my/teams/10/simulations/') { if(route.request().method()==='POST'){ data={id:20,name:'Transfer what-if',computed_budget_after_m:'142',notes:'',created_at:'2026-11-04T21:00:00Z',sells:[players[0]],buys:[players[2]]};saved.push(data); } else data={simulations:saved}; }
   else if(path==='players/1/') data={...players[0],stints:[]};
   await route.fulfill({json:data});
  });
+ return requests;
 }
 test('signed-out visitors are redirected to sign-in preserving the hockey route',async({page})=>{
  await page.goto('/apps/hockey/compare');await expect(page).toHaveURL(/\/login\?next=%2Fapps%2Fhockey%2Fcompare/);await expect(page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
@@ -37,7 +45,7 @@ test('rosters and simulation suppress unknown-cost budget, never make real trade
  await page.getByRole('checkbox',{name:'Fixture Forward F'}).check();await page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true}).check();await page.getByRole('button',{name:'Save what-if (no real trade)'}).click();await expect(page.getByRole('heading',{name:'Saved: Transfer what-if'})).toBeVisible();await expect(page.getByText('Budget unavailable: missing costs or current HM prices.')).toBeVisible();await expect(page.getByText(/Estimated budget after:/)).toHaveCount(0);await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');await page.screenshot({path:'/downloads/hockey-simulator.png',fullPage:true});await page.reload();await page.getByLabel('Your team',{exact:true}).selectOption('10');await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');
 });
 test('honest empty states and mobile screenshots',async({page})=>{
- await setup(page,{empty:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');await expect(page.getByText(/No players found/)).toBeVisible();await expect(page.getByText(/Official standings have not/)).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+ await setup(page,{empty:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');await expect(page.getByText(/No players found/)).toBeVisible();await page.getByRole('link',{name:'Standings',exact:true}).click();await expect(page).toHaveURL(/apps\/hockey\/standings$/);await expect(page.getByText(/Official standings have not/)).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
  await page.screenshot({path:'/downloads/hockey-mobile-empty.png',fullPage:true});
 });
 test('mobile populated and comparison visual evidence',async({page})=>{
@@ -51,8 +59,76 @@ test('errors show retry and expired JWT returns to sign-in',async({page})=>{
 });
 
 test('official standings show exact source date and shootout splits',async({page})=>{
- await setup(page);await page.route('**/api/apps/hockey/standings/**',r=>r.fulfill({json:{season:2027,captured_on:'2026-11-04',source:'data.sihf.ch standing table',source_updated_at:'2026-11-04T20:00:00Z',rows:[{rank:1,team:{id:1,name:'Fixture Club'},games_played:20,wins:10,ot_wins:2,so_wins:1,so_losses:2,ot_losses:1,losses:4,points:39,goals_for:60,goals_against:40}]}}));await page.goto('/apps/hockey/players');await expect(page.getByRole('columnheader',{name:'SOW',exact:true})).toBeVisible();await expect(page.getByText(/Source: data.sihf.ch standing table/)).toContainText('2026-11-04T20:00:00Z');
+ await setup(page);await page.route('**/api/apps/hockey/standings/**',r=>r.fulfill({json:{season:2027,captured_on:'2026-11-04',source:'data.sihf.ch standing table',source_updated_at:'2026-11-04T20:00:00Z',rows:[{rank:1,team:{id:1,name:'Fixture Club'},games_played:20,wins:10,ot_wins:2,so_wins:1,so_losses:2,ot_losses:1,losses:4,points:39,goals_for:60,goals_against:40}]}}));await page.goto('/apps/hockey/standings');await expect(page.getByRole('columnheader',{name:'SOW',exact:true})).toBeVisible();await expect(page.getByText(/Source: data.sihf.ch standing table/)).toContainText('2026-11-04T20:00:00Z');
 });
 test('successful sign-in returns to hockey and rejects external next URL',async({page})=>{
  await page.route('**/api/auth/login',r=>r.fulfill({json:{token:'fixture-token',user:{email:'fixture@example.invalid'}}}));await page.route('**/api/apps/hockey/**',r=>r.fulfill({json:{players:[],teams:[],rows:[]}}));await page.goto('/login?next=%2Fapps%2Fhockey%2Fteams');await page.getByLabel('Email',{exact:true}).fill('fixture@example.invalid');await page.getByLabel('Password',{exact:true}).fill('not-a-real-password');await page.getByRole('button',{name:'Log in',exact:true}).click();await expect(page).toHaveURL(/apps\/hockey\/teams$/);
+});
+
+test('selection bar stays within reach while scrolling a long table',async({page})=>{
+ await setup(page,{many:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true})).toBeVisible();
+ await page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true}).check();
+ const bar=page.getByRole('region',{name:'Player selection'});
+ await expect(bar).toBeVisible();await expect(bar).toContainText('1 player selected across filters');
+ await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+ await expect(bar).toBeVisible();await expect(bar.getByRole('button',{name:'Compare selected'})).toBeVisible();
+ const footerBox=await page.locator('.hk-footer').boundingBox();const barBox=await bar.boundingBox();
+ expect(footerBox.y+footerBox.height).toBeLessThanOrEqual(barBox.y+1);
+ await page.screenshot({path:'/downloads/hockey-mobile-selection-bar.png'});
+ await bar.getByRole('button',{name:'Compare selected'}).click();
+ await expect(page.getByRole('img',{name:/Weekly points/})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Compare selected'})).toHaveCount(0);
+ await expect(bar).toBeVisible();await expect(bar.getByRole('button',{name:'Clear selection'})).toBeVisible();
+ await page.getByRole('link',{name:'Player database',exact:true}).click();
+ await page.getByRole('checkbox',{name:'Select Fixture Player 02',exact:true}).check();
+ await page.getByRole('link',{name:'Compare players',exact:true}).click();
+ await expect(page.getByRole('img',{name:/Weekly points/})).toBeVisible();
+ await page.evaluate(()=>window.scrollTo(0,0));
+ await expect(bar.getByRole('button',{name:'View comparison'})).toBeVisible();
+ await bar.getByRole('button',{name:'View comparison'}).click();
+ await expect.poll(()=>page.evaluate(()=>{const r=document.getElementById('hk-comparison').getBoundingClientRect();return r.top>=0 && r.top<window.innerHeight;})).toBe(true);
+});
+
+test('server-side sorting with direction, nulls last, selection preserved',async({page})=>{
+ const requests=await setup(page);await page.goto('/apps/hockey/players');
+ await page.getByLabel('Sort by',{exact:true}).selectOption('points');
+ await expect.poll(()=>requests[requests.length-1]).toBe('-points');
+ await expect(page.locator('.hk-player-table tbody tr').first()).toContainText('Fixture Forward');
+ await page.getByRole('checkbox',{name:'Select Fixture Defender',exact:true}).check();
+ await page.getByLabel('Sort direction',{exact:true}).selectOption('asc');
+ await expect.poll(()=>requests[requests.length-1]).toBe('points');
+ await expect(page.locator('.hk-player-table tbody tr').first()).toContainText('Fixture Incoming');
+ await expect(page.locator('.hk-player-table tbody tr').last()).toContainText('Fixture Rookie');
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Defender',exact:true})).toBeChecked();
+ await expect(page.getByRole('region',{name:'Player selection'})).toContainText('1 player selected across filters');
+ await page.getByLabel('Sort by',{exact:true}).selectOption('price');
+ await expect.poll(()=>requests[requests.length-1]).toBe('price');
+ await page.getByLabel('Sort direction',{exact:true}).selectOption('desc');
+ await expect.poll(()=>requests[requests.length-1]).toBe('-price');
+ await expect(page.locator('.hk-player-table tbody tr').first()).toContainText('Fixture Forward');
+ await expect(page.locator('.hk-player-table tbody tr').last()).toContainText('Fixture Rookie');
+ await page.screenshot({path:'/downloads/hockey-mobile-sorted.png',fullPage:true});
+});
+
+test('shared teams are named, read-only, price-free and show goalie pairs',async({page})=>{
+ await setup(page);await page.goto('/apps/hockey/teams');
+ await expect(page.getByRole('heading',{name:'Shared with you'})).toBeVisible();
+ await page.getByRole('button',{name:/Pongo/}).click();
+ await expect(page.getByText('Owner: aurore · Read-only')).toBeVisible();
+ await expect(page.getByRole('cell',{name:'Fixture Defender',exact:true})).toBeVisible();
+ await expect(page.getByRole('cell',{name:'Fixture Pair A/B',exact:true})).toBeVisible();
+ await expect(page.getByRole('cell',{name:'Goalie pair',exact:true})).toBeVisible();
+ await expect(page.getByText(/prices are excluded from this share/i)).toBeVisible();
+ await expect(page.getByText('5.0 M')).toHaveCount(0);
+ await expect(page.getByText('14.0')).toHaveCount(0);
+ const shared=page.locator('section.hk-card',{has:page.getByRole('heading',{name:'Shared with you'})});
+ await expect(shared.getByRole('button',{name:'Remove'})).toHaveCount(0);
+ await expect(shared.getByRole('button',{name:'Plan a transfer'})).toHaveCount(0);
+ await page.getByRole('button',{name:/Fixture team/}).click();
+ await expect(page.getByRole('heading',{name:'Goalkeeper pairs'})).toBeVisible();
+ await expect(page.getByText('Fixture Own Pair C/D')).toBeVisible();
+ await expect(page.getByText(/last observed 13.0 M \(not an acquisition cost\)/)).toBeVisible();
+ await expect(page.getByRole('button',{name:'Remove'})).toHaveCount(1);
+ await page.screenshot({path:'/downloads/hockey-mobile-shared-teams.png',fullPage:true});
 });
