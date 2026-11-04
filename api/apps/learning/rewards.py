@@ -27,10 +27,6 @@ def reward_events():
     for lesson in lessons:
         lessons_by_path[lesson['learning_path_id']].add(lesson['pk'])
 
-    questions_by_lesson = defaultdict(set)
-    for question in questions:
-        questions_by_lesson[question['lesson_id']].add(question['pk'])
-
     events = defaultdict(list)
     card_times = defaultdict(dict)
     question_times = defaultdict(dict)
@@ -55,7 +51,6 @@ def reward_events():
         for lesson in lessons:
             lesson_id = lesson['pk']
             required_cards = cards_by_lesson[lesson_id]
-            required_questions = questions_by_lesson[lesson_id]
             if not required_cards or not required_cards.issubset(card_times[user_id]):
                 continue
             # The lesson bonus is earned once every card is read, whatever the
@@ -63,12 +58,11 @@ def reward_events():
             # catch-up quiz (#204), not this reward.
             cards_done_at = max(card_times[user_id][card_id] for card_id in required_cards)
             events[user_id].append(('drops', 5, cards_done_at))
-            # The path bonus still needs full lesson completion: every question
-            # answered correctly once (#204), not only one per checkpoint.
-            if required_questions.issubset(question_times[user_id]):
-                completion_times[lesson_id] = max([cards_done_at] + [
-                    question_times[user_id][question_id] for question_id in required_questions
-                ])
+            # The path bonus follows the same rule as the lesson bonus and the
+            # garden celebration: a path is finished once every card is read.
+            # Questions are independent practice - they drive the gauge,
+            # carrots, the catch-up quiz and the "done" badges, not this bonus.
+            completion_times[lesson_id] = cards_done_at
         for path in paths:
             required_lessons = lessons_by_path[path['pk']]
             if required_lessons and required_lessons.issubset(completion_times):

@@ -28,8 +28,10 @@ export function PathComplete({ path, onDone }) {
       <p className="grains-path-eyebrow">LEARNING PATH COMPLETE</p>
       <h2 id="grains-path-title">Your knowledge<br />is in full bloom.</h2>
       <p className="grains-path-name">{path.title}</p>
-      <p id="grains-path-description">Every card read. Every question mastered.<br />A whole new part of your garden, grown.</p>
-      <div className="grains-path-reward"><span className="grains-path-drop" aria-hidden="true" /><strong>+100 <small>Drops</small></strong><span className="grains-path-reward-note">Path completion bonus</span></div>
+      <p id="grains-path-description">Every card read. Every lesson in bloom.<br />A whole new part of your garden, grown.</p>
+      {path.reward !== false
+        ? <div className="grains-path-reward"><span className="grains-path-drop" aria-hidden="true" /><strong>+100 <small>Drops</small></strong><span className="grains-path-reward-note">Path completion bonus</span></div>
+        : <p className="grains-path-replay-note">Revisited and still in bloom - the +100 Drops bonus was collected on the first finish.</p>}
       <button ref={done} className="grains-primary" onClick={onDone}>Back to my garden <span aria-hidden="true">↗</span></button>
     </section>
   </div>;

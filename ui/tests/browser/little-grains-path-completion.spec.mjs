@@ -2,15 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => { await page.setViewportSize({ width: 390, height: 844 }); });
 const url = '/apps/little-grains/theme/life/path/baby/lesson/lesson/card/card';
-async function fixture(page, { completed = false, quiz = false, partial = false } = {}) {
-  await page.addInitScript(() => localStorage.setItem('genious_token', 'path-celebration-fixture'));
+async function fixture(page, { completed = false, quiz = false, partial = false, celebrated = [], lastLesson = true } = {}) {
+  await page.addInitScript((ids) => { localStorage.setItem('genious_token', 'path-celebration-fixture'); localStorage.setItem('grains-path-celebrations', JSON.stringify(ids)); }, celebrated);
   let read = quiz || completed, answered = completed;
   const progress = () => ({ completed: completed || (read && answered && !partial), cards_completed: Number(read), cards_total: 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(read && answered), lessons_total: 1, lessons_fully_read: Number(read) });
   await page.route('**/api/learning/**', async route => {
     const p = new URL(route.request().url()).pathname;
     if (p.endsWith('/health/')) return route.fulfill({ json: { status: 'ok' } });
     if (p.endsWith('/badges/check/')) return route.fulfill({ json: { badges: [], new_count: 0 } });
-    if (p.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ id: 'life', title: 'Life & Society', learning_paths: [{ id: 'baby', title: "A baby's first year through science", progress: progress(), catch_up: { eligible: read, remaining: 1 }, lessons: [{ id: 'lesson', title: 'Small steps', position: 1, progress: progress() }] }] }], rewards: { drops: answered ? 107 : 0, carrots: Number(answered) } } });
+    if (p.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ id: 'life', title: 'Life & Society', learning_paths: [{ id: 'baby', title: "A baby's first year through science", progress: progress(), catch_up: { eligible: read, remaining: 1 }, lessons: [{ id: 'lesson', title: 'Small steps', position: 1, progress: progress() }, ...(lastLesson ? [] : [{ id: 'lesson-2', title: 'Growing taller', position: 2, progress: progress() }])] }] }], rewards: { drops: answered ? 107 : 0, carrots: Number(answered) } } });
     if (p.endsWith('/open/')) return route.fulfill({ json: {} });
     if (p.endsWith('/complete/')) { read = true; return route.fulfill({ json: {} }); }
     if (p.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { correct: true, carrot_earned: !completed, explanation: 'Correct.', next_step: null } }); }
@@ -53,31 +53,50 @@ for (const size of [{ width: 390, height: 844 }, { width: 320, height: 568 }, { 
     await expect(celebration).toHaveCount(0);
   });
 }
-test('existing completed path replay never repeats the 100-Drop celebration', async ({ page }) => {
-  await fixture(page, { completed: true });
+test('re-reading to the end of the last lesson replays the celebration without the +100', async ({ page }) => {
+  await fixture(page, { completed: true, celebrated: ['baby'] });
+  await page.goto(url.replace('/card/card', '/question/question'));
+  await answer(page);
+  await expect(page.getByText('Lesson reviewed!')).toBeVisible();
+  await page.getByRole('button', { name: 'Close lesson' }).click();
+  const celebration = page.locator('.grains-path-complete');
+  await expect(celebration).toBeVisible({ timeout: 10000 });
+  await expect(celebration.locator('.grains-path-reward')).toHaveCount(0);
+  await expect(celebration).toContainText('collected on the first finish');
+  await page.getByRole('button', { name: 'Back to my garden' }).click();
+  await expect(celebration).toHaveCount(0);
+});
+test('re-reading a lesson that is not the last of the path stays quiet', async ({ page }) => {
+  await fixture(page, { completed: true, celebrated: ['baby'], lastLesson: false });
   await page.goto(url.replace('/card/card', '/question/question'));
   await answer(page);
   await expect(page.getByText('Lesson reviewed!')).toBeVisible();
   await page.getByRole('button', { name: 'Close lesson' }).click();
   await expect(page.locator('.grains-path-complete')).toHaveCount(0);
 });
-test('reading a lesson does not claim path completion with unanswered questions elsewhere', async ({ page }) => {
+test('finishing the last card celebrates the path even with questions still open elsewhere', async ({ page }) => {
   await fixture(page, { partial: true });
   await page.goto(url);
   await page.getByRole('button', { name: /read this card/ }).click();
   await answer(page);
   await expect(page.getByText('Lesson finished!')).toBeVisible();
-  await page.getByRole('button', { name: 'Close lesson' }).click();
+  await expect(page.getByRole('dialog', { name: 'Your knowledge is in full bloom.' })).toBeVisible({ timeout: 10000 });
+  await expect(page.locator('.grains-path-complete')).toContainText('+100');
+});
+test('a path finished before the celebration shipped blooms once on the next visit', async ({ page }) => {
+  await fixture(page, { completed: true });
+  await page.goto('/apps/little-grains/theme/life/path/baby');
+  await expect(page.getByRole('dialog', { name: 'Your knowledge is in full bloom.' })).toBeVisible({ timeout: 10000 });
+  await page.getByRole('button', { name: 'Back to my garden' }).click();
+  await expect(page.locator('.grains-path-complete')).toHaveCount(0);
+  await page.reload();
   await expect(page.locator('.grains-path-complete')).toHaveCount(0);
 });
-test('Practice quiz can finish a path, reduced motion still shows the result', async ({ page }) => {
+test('reduced motion still shows the result', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await fixture(page, { quiz: true });
   await page.goto('/apps/little-grains/theme/life/path/baby');
-  await page.getByRole('button', { name: /Practice/ }).click();
-  await answer(page);
-  await page.getByRole('button', { name: 'Back to the garden' }).click();
   await expect(page.locator('.grains-path-complete')).toBeVisible();
   await expect(page.locator('.grains-path-burst')).toBeHidden();
   await expect(page.locator('.grains-path-reward')).toHaveCSS('animation-name', 'none');

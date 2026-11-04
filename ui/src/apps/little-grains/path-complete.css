@@ -12,3 +12,4 @@
 
 .grains-path-drop{display:block;width:19px;height:19px;margin-right:3px;rotate:45deg;background:linear-gradient(150deg,#8cc6f2,#2f7fc2);border-radius:0 50% 50% 50%}
 @media(max-height:650px){.grains-path-complete{padding:16px 18px}.grains-path-kicker{font-size:8px}.grains-path-tree{width:125px;height:112px;margin:10px auto 6px}.grains-path-eyebrow{margin:6px 0 8px;font-size:9px}.grains-path-complete h2{font-size:27px}.grains-path-name{font-size:16px;margin:10px 0 8px}.grains-path-complete #grains-path-description{font-size:11px;line-height:1.5}.grains-path-reward{margin-top:12px;padding:10px}.grains-path-reward strong{font-size:25px}.grains-path-complete .grains-primary{margin-top:14px;min-height:44px}}
+.grains-path-replay-note{margin:22px auto 0;color:#74806c;font-size:12px;line-height:1.6;max-width:260px;animation:grains-path-enter .6s 1.9s both}
