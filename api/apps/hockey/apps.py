@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class HockeyConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.hockey"
+    verbose_name = "National League hockey stats"
