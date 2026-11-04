@@ -78,3 +78,45 @@ class CuratorAPITests(TestCase):
     def test_taxonomy_month_counts_private(self):
         result=self.client.get('/taxonomy/', **self.headers).json()
         self.assertEqual(sum(m['count'] for m in result['months']), 1)
+
+
+    def test_inbox_includes_uncategorized_objects_without_backfill(self):
+        note = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="daily-note"), title="Unprocessed note")
+        self.assertFalse(note.categories.exists())
+        result = self.client.get('/content/?category=inbox', **self.headers).json()
+        self.assertEqual({item['id'] for item in result['items']}, {str(self.item.pk), str(note.pk)})
+        self.assertFalse(note.categories.exists())
+        self.assertEqual(self.client.get('/content/?category=inbox&type=daily-note', **self.headers).json()['total'], 1)
+
+    def test_inbox_news_includes_all_non_archived_even_other_categories(self):
+        news_type = ObjectType.objects.get(slug="news")
+        expected = []
+        for index, slugs in enumerate([[], ["inbox"], ["favorite"], ["favorite", "inbox"]]):
+            news = Content.objects.create(owner=self.owner, object_type=news_type, title=f"News {index}")
+            for slug in slugs:
+                ContentCategory.objects.create(content=news, category=Category.objects.get(slug=slug))
+            expected.append(str(news.pk))
+        result = self.client.get('/content/?category=inbox&type=news', **self.headers).json()
+        self.assertEqual(result['total'], 4)
+        self.assertEqual({item['id'] for item in result['items']}, set(expected))
+
+    def test_archived_news_stays_out_even_with_another_category(self):
+        for index, slugs in enumerate([["archive"], ["archive", "favorite"], ["archive", "inbox"]]):
+            news = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="news"), title=f"Archived {index}")
+            for slug in slugs:
+                ContentCategory.objects.create(content=news, category=Category.objects.get(slug=slug))
+        self.assertEqual(self.client.get('/content/?category=inbox&type=news', **self.headers).json()['total'], 0)
+        self.assertEqual(self.client.get('/content/?category=archive&type=news', **self.headers).json()['total'], 3)
+        self.assertEqual(self.client.get('/content/?type=news', **self.headers).json()['total'], 3)
+
+    def test_inbox_preserves_other_type_lanes_and_owner_search_filters(self):
+        ContentCategory.objects.create(content=self.item, category=Category.objects.get(slug="promising"))
+        bookmark = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="bookmark"), title="Inspiration only")
+        ContentCategory.objects.create(content=bookmark, category=Category.objects.get(slug="inspiration"))
+        self.assertEqual(self.client.get('/content/?category=inbox', **self.headers).json()['total'], 0)
+        news = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="news"), title="Maps today")
+        Content.objects.create(owner=self.other, object_type=news.object_type, title="Foreign maps")
+        result = self.client.get('/content/?category=inbox&q=maps', **self.headers).json()
+        self.assertEqual([item['id'] for item in result['items']], [str(news.pk)])
+        self.assertEqual(self.client.get('/content/?category=promising', **self.headers).json()['total'], 1)
+        self.assertEqual(self.client.get('/content/?category=inspiration', **self.headers).json()['total'], 1)

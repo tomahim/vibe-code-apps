@@ -113,7 +113,14 @@ def collection(request):
             query = query.filter(object_type__slug=kind)
         if tag:
             query = query.filter(tags__slug=tag)
-        if category:
+        if category == "inbox":
+            # Inbox is the unprocessed view: explicit Inbox, uncategorized
+            # objects, and every non-archived news item. Keep stored categories
+            # untouched, including intentional non-news lanes.
+            query = query.filter(Q(categories__slug="inbox") | Q(categories__isnull=True)
+                                 | Q(object_type__slug="news")).exclude(
+                                     object_type__slug="news", categories__slug="archive")
+        elif category:
             query = query.filter(categories__slug=category)
         if search:
             query = query.filter(Q(title__icontains=search) | Q(summary__icontains=search) | Q(body_markdown__icontains=search))
