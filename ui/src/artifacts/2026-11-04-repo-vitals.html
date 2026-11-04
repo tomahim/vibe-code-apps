@@ -126,6 +126,23 @@
   footer.defs li { margin-bottom: 4px; }
   footer.defs .asof { margin-top: 10px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
 
+  .zoombar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px;
+    margin: 14px 0 2px; padding: 9px 14px;
+    background: var(--panel); border: 1px solid rgba(216,168,78,.4); border-radius: 10px;
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+  }
+  .zoombar[hidden] { display: none; }
+  .zoombar .zlabel { letter-spacing: .12em; text-transform: uppercase; font-size: 10.5px; color: var(--gold); }
+  .zoombar .zrange { color: var(--ink); }
+  .zoombar button {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    padding: 6px 12px; border-radius: 999px; cursor: pointer; margin-left: auto;
+    background: transparent; color: var(--gold); border: 1px solid rgba(216,168,78,.55);
+  }
+  .zoombar button:hover, .zoombar button:focus-visible { background: var(--gold); color: #10131a; }
+  .zoombar .zhint { width: 100%; font-size: 10.5px; color: var(--faint); }
+
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -169,12 +186,19 @@
     </div>
   </div>
 
+  <div class="zoombar" id="zoombar" role="status" hidden>
+    <span class="zlabel">Zoomed</span>
+    <span class="zrange" id="zoomRange"></span>
+    <button id="zoomReset" type="button">Reset full history</button>
+    <span class="zhint">Double-tap a chart or press Esc to reset.</span>
+  </div>
+
   <section class="chart-block" aria-labelledby="hPulse">
     <div class="chart-head">
       <h2 id="hPulse">The Pulse</h2>
       <span class="what">commits per day, main branch</span>
     </div>
-    <p class="chart-note">Every beat is a day with at least one commit. The long flatline is the six-month gap between the March prototype and the October rebuild. Tap or drag to inspect.</p>
+    <p class="chart-note">Every beat is a day with at least one commit. The long flatline is the six-month gap between the March prototype and the October rebuild. Tap to inspect a day, or drag across a stretch to select a period: every chart zooms to it together.</p>
     <div class="cv-holder">
       <canvas class="chart" id="cvPulse" height="240" role="img"
         aria-label="Line chart of commits per day. Activity bursts in mid-March, silence from April to early October, then sustained daily activity through early November."></canvas>
@@ -293,21 +317,51 @@ function hideTip(tip) { tip.style.opacity = "0"; }
 // ---------- derived data ----------
 const daily = DATA.daily; // [date, commits, added, deleted]
 const N = daily.length;
-const cumAdded = new Array(N), cumCommits = new Array(N), cumNet = new Array(N);
-let ca = 0, cc = 0, cn = 0;
+const cumAdded = new Array(N), cumCommits = new Array(N);
+let ca = 0, cc = 0;
 for (let i = 0; i < N; i++) {
   ca += daily[i][2]; cumAdded[i] = ca;
   cc += daily[i][1]; cumCommits[i] = cc;
-  cn += daily[i][2] - daily[i][3]; cumNet[i] = cn;
 }
-const maxDayCommits = Math.max(...daily.map(d => d[1]));
-const maxDayAdded = Math.max(...daily.map(d => d[2]));
 const totalAdded = DATA.totals.lines_added;
-const totalDeleted = DATA.totals.lines_deleted;
 
-// Playback progress: 0..1 mapped over days
+// Playback progress: 0..1 mapped over the full timeline
 let progress = reduced ? 1 : 0;
 function dayAt(p) { return Math.min(N - 1, Math.floor(p * N)); }
+
+// ---------- shared zoom state ----------
+// Every chart shows the same day range [zFrom, zTo] (inclusive). Dragging a
+// period on any chart zooms all of them together; reset returns to full history.
+let zFrom = 0, zTo = N - 1;
+let sel = null; // live selection { from, to } in day indices while dragging
+const MIN_SPAN_DAYS = 3; // a smaller drag is an inspect gesture, not a zoom
+function isZoomed() { return zFrom > 0 || zTo < N - 1; }
+function spanDays() { return zTo - zFrom + 1; }
+
+const zoombar = document.getElementById("zoombar");
+const zoomRange = document.getElementById("zoomRange");
+function fmtRange(a, b) {
+  return a === b ? fmtDay(daily[a][0]) : fmtDay(daily[a][0]) + " - " + fmtDay(daily[b][0]);
+}
+function updateZoombar() {
+  zoombar.hidden = !isZoomed();
+  if (isZoomed()) zoomRange.textContent = fmtRange(zFrom, zTo) + " \u00b7 " + spanDays() + " days";
+}
+function setZoom(a, b) {
+  const lo = Math.max(0, Math.min(a, b));
+  const hi = Math.min(N - 1, Math.max(a, b));
+  if (hi - lo + 1 < MIN_SPAN_DAYS) return;
+  zFrom = lo; zTo = hi;
+  updateZoombar();
+  drawAll();
+}
+function resetZoom() {
+  if (!isZoomed() && !sel) return;
+  sel = null;
+  zFrom = 0; zTo = N - 1;
+  updateZoombar();
+  drawAll();
+}
 
 // ---------- counters ----------
 const counters = [
@@ -341,45 +395,84 @@ function renderCounters() {
   for (const c of counters) c.el.textContent = fmtInt(c.value());
 }
 
-// ---------- Pulse chart ----------
-const cvPulse = document.getElementById("cvPulse");
-const tipPulse = document.getElementById("tipPulse");
-let pulseHover = -1;
-function drawPulse() {
-  const { ctx, w, h } = setupCanvas(cvPulse, 240);
-  const padL = 34, padR = 10, padT = 18, padB = 26;
-  const iw = w - padL - padR, ih = h - padT - padB;
-  const di = dayAt(progress);
-
-  // grid
-  ctx.strokeStyle = "rgba(236,229,211,.07)";
-  ctx.fillStyle = "rgba(151,144,126,.9)";
-  ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
-  ctx.lineWidth = 1;
-  const yMax = Math.max(8, Math.ceil(maxDayCommits * 1.1));
-  for (let g = 0; g <= 4; g++) {
-    const v = Math.round((yMax * g) / 4);
-    const y = padT + ih - (v / yMax) * ih;
-    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
-    ctx.textAlign = "right"; ctx.fillText(String(v), padL - 6, y + 3);
-  }
-  // month labels
+// ---------- shared axis + selection painters ----------
+function xOfDay(i, padL, iw) { return padL + ((i - zFrom) / (zTo - zFrom)) * iw; }
+function drawXAxis(ctx, w, h, padL, padR, padT, ih) {
+  const iw = w - padL - padR;
+  const span = spanDays();
   ctx.textAlign = "center";
+  if (span <= 62) {
+    // zoomed in: label individual days
+    const step = Math.max(1, Math.ceil(span / 8));
+    for (let i = zFrom; i <= zTo; i += step) {
+      const x = xOfDay(i, padL, iw);
+      ctx.fillStyle = "rgba(151,144,126,.85)";
+      ctx.fillText(fmtDay(daily[i][0]), x, h - 8);
+      ctx.strokeStyle = "rgba(236,229,211,.10)";
+      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ih); ctx.stroke();
+    }
+    return;
+  }
   let lastM = -1;
-  for (let i = 0; i < N; i++) {
+  for (let i = zFrom; i <= zTo; i++) {
     const m = parseDay(daily[i][0]).getUTCMonth();
     if (m !== lastM) {
       lastM = m;
-      const x = padL + (i / (N - 1)) * iw;
+      const x = xOfDay(i, padL, iw);
       ctx.fillStyle = "rgba(151,144,126,.85)";
       ctx.fillText(parseDay(daily[i][0]).toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" }), x, h - 8);
       ctx.strokeStyle = "rgba(236,229,211,.10)";
       ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ih); ctx.stroke();
     }
   }
+}
+function drawSelBand(ctx, w, padL, padR, padT, ih) {
+  if (!sel) return;
+  const iw = w - padL - padR;
+  const a = Math.max(Math.min(sel.from, sel.to), zFrom);
+  const b = Math.min(Math.max(sel.from, sel.to), zTo);
+  if (b < a) return;
+  const x0 = xOfDay(a, padL, iw), x1 = xOfDay(b, padL, iw);
+  ctx.fillStyle = "rgba(216,168,78,.13)";
+  ctx.fillRect(x0, padT - 6, Math.max(2, x1 - x0), ih + 12);
+  ctx.strokeStyle = "rgba(216,168,78,.95)";
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(x0, padT - 6); ctx.lineTo(x0, padT + ih + 6);
+  ctx.moveTo(x1, padT - 6); ctx.lineTo(x1, padT + ih + 6);
+  ctx.stroke();
+}
 
-  const xOf = i => padL + (i / (N - 1)) * iw;
-  const upTo = pulseHover >= 0 ? pulseHover : di;
+// ---------- Pulse chart ----------
+const cvPulse = document.getElementById("cvPulse");
+const tipPulse = document.getElementById("tipPulse");
+const holderPulse = cvPulse.parentElement;
+let pulseHover = -1;
+function drawPulse() {
+  const { ctx, w, h } = setupCanvas(cvPulse, 240);
+  const padL = 34, padR = 10, padT = 18, padB = 26;
+  const iw = w - padL - padR, ih = h - padT - padB;
+  const di = Math.min(dayAt(progress), zTo);
+
+  let domMax = 0;
+  for (let i = zFrom; i <= zTo; i++) domMax = Math.max(domMax, daily[i][1]);
+  const yMax = Math.max(8, Math.ceil(domMax * 1.1));
+
+  // grid
+  ctx.strokeStyle = "rgba(236,229,211,.07)";
+  ctx.fillStyle = "rgba(151,144,126,.9)";
+  ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
+  ctx.lineWidth = 1;
+  for (let g = 0; g <= 4; g++) {
+    const v = Math.round((yMax * g) / 4);
+    const y = padT + ih - (v / yMax) * ih;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    ctx.textAlign = "right"; ctx.fillText(String(v), padL - 6, y + 3);
+  }
+  drawXAxis(ctx, w, h, padL, padR, padT, ih);
+
+  const xOf = i => xOfDay(i, padL, iw);
+  const upTo = Math.min(pulseHover >= 0 ? pulseHover : di, zTo);
 
   // flatline
   const baseY = padT + ih;
@@ -389,35 +482,34 @@ function drawPulse() {
   ctx.moveTo(padL, baseY); ctx.lineTo(padL + iw, baseY); ctx.stroke();
 
   // ECG spikes up to cursor
-  for (let i = 0; i <= upTo; i++) {
+  for (let i = zFrom; i <= upTo; i++) {
     const c = daily[i][1];
     if (!c) continue;
     const x = xOf(i);
     const hh = (c / yMax) * ih;
     const isHover = i === pulseHover;
     ctx.strokeStyle = isHover ? "#8ff0c4" : "#5fd9a4";
-    ctx.lineWidth = isHover ? 2.4 : Math.max(1.2, iw / N * 0.55);
+    ctx.lineWidth = isHover ? 2.4 : Math.min(18, Math.max(1.2, iw / spanDays() * 0.55));
     ctx.shadowColor = "rgba(95,217,164,.8)";
     ctx.shadowBlur = isHover ? 14 : 6;
     ctx.beginPath(); ctx.moveTo(x, baseY); ctx.lineTo(x, baseY - hh); ctx.stroke();
     ctx.shadowBlur = 0;
-    // peak dot
     ctx.fillStyle = isHover ? "#c9ffe6" : "#5fd9a4";
     ctx.beginPath(); ctx.arc(x, baseY - hh, isHover ? 3.4 : 2, 0, Math.PI * 2); ctx.fill();
   }
 
   // gap annotation
-  const gapA = xOf(daily.findIndex(d => d[0] === "2026-04-01"));
-  const gapB = xOf(daily.findIndex(d => d[0] === "2026-10-01"));
-  if (gapA > 0 && gapB > 0 && upTo > daily.findIndex(d => d[0] === "2026-04-01")) {
+  const giA = daily.findIndex(d => d[0] === "2026-04-01");
+  const giB = daily.findIndex(d => d[0] === "2026-10-01");
+  if (giA >= zFrom && giB <= zTo && upTo > giA) {
     ctx.fillStyle = "rgba(93,89,78,.9)";
     ctx.font = "italic 11px Georgia, serif";
     ctx.textAlign = "center";
-    ctx.fillText("~ 6 quiet months", (gapA + gapB) / 2, baseY - 14);
+    ctx.fillText("~ 6 quiet months", (xOf(giA) + xOf(giB)) / 2, baseY - 14);
   }
 
   // cursor
-  if (progress < 1 && pulseHover < 0) {
+  if (progress < 1 && pulseHover < 0 && di >= zFrom) {
     const x = xOf(di);
     ctx.strokeStyle = "rgba(216,168,78,.85)";
     ctx.lineWidth = 1.4;
@@ -425,28 +517,36 @@ function drawPulse() {
     ctx.fillStyle = "#d8a84e";
     ctx.beginPath(); ctx.arc(x, baseY, 3.5, 0, Math.PI * 2); ctx.fill();
   }
+
+  drawSelBand(ctx, w, padL, padR, padT, ih);
 }
 
 // ---------- Terrain chart ----------
 const cvTerrain = document.getElementById("cvTerrain");
 const tipTerrain = document.getElementById("tipTerrain");
+const holderTerrain = cvTerrain.parentElement;
 let terrainHover = -1;
 let terrainMode = "cum";
 function drawTerrain() {
   const { ctx, w, h } = setupCanvas(cvTerrain, 260);
   const padL = 44, padR = 10, padT = 16, padB = 26;
   const iw = w - padL - padR, ih = h - padT - padB;
-  const di = dayAt(progress);
-  const upTo = terrainHover >= 0 ? terrainHover : di;
+  const di = Math.min(dayAt(progress), zTo);
+  const upTo = Math.min(terrainHover >= 0 ? terrainHover : di, zTo);
 
   const cum = terrainMode === "cum";
-  const yMax = cum ? totalAdded * 1.05 : maxDayAdded * 1.1;
+  // zoomed cumulative view rebaselines to the value at the window start so the
+  // climb inside the window uses the full chart height; labels stay absolute.
+  const yLo = cum && zFrom > 0 ? cumAdded[zFrom - 1] : 0;
+  let domMax = 0;
+  for (let i = zFrom; i <= zTo; i++) domMax = Math.max(domMax, cum ? cumAdded[i] : daily[i][2]);
+  const yMax = (cum ? yLo + (domMax - yLo) * 1.08 : domMax * 1.1) || 1;
   ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
 
   // grid
   ctx.lineWidth = 1;
   for (let g = 0; g <= 4; g++) {
-    const v = (yMax * g) / 4;
+    const v = yLo + ((yMax - yLo) * g) / 4;
     const y = padT + ih - (v / yMax) * ih;
     ctx.strokeStyle = "rgba(236,229,211,.07)";
     ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
@@ -454,23 +554,10 @@ function drawTerrain() {
     ctx.textAlign = "right";
     ctx.fillText(v >= 1000 ? Math.round(v / 1000) + "k" : String(Math.round(v)), padL - 6, y + 3);
   }
-  // month labels
-  ctx.textAlign = "center";
-  let lastM = -1;
-  for (let i = 0; i < N; i++) {
-    const m = parseDay(daily[i][0]).getUTCMonth();
-    if (m !== lastM) {
-      lastM = m;
-      const x = padL + (i / (N - 1)) * iw;
-      ctx.fillStyle = "rgba(151,144,126,.85)";
-      ctx.fillText(parseDay(daily[i][0]).toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" }), x, h - 8);
-      ctx.strokeStyle = "rgba(236,229,211,.10)";
-      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ih); ctx.stroke();
-    }
-  }
+  drawXAxis(ctx, w, h, padL, padR, padT, ih);
 
-  const xOf = i => padL + (i / (N - 1)) * iw;
-  const yOf = v => padT + ih - (v / yMax) * ih;
+  const xOf = i => xOfDay(i, padL, iw);
+  const yOf = v => padT + ih - ((v - yLo) / (yMax - yLo)) * ih;
 
   if (cum) {
     // mountain silhouette
@@ -478,17 +565,17 @@ function drawTerrain() {
     grad.addColorStop(0, "rgba(216,168,78,.55)");
     grad.addColorStop(1, "rgba(216,168,78,.03)");
     ctx.beginPath();
-    ctx.moveTo(xOf(0), yOf(0));
-    for (let i = 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
+    ctx.moveTo(xOf(zFrom), yOf(cumAdded[zFrom]));
+    for (let i = zFrom + 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
     ctx.lineTo(xOf(upTo), padT + ih);
-    ctx.lineTo(xOf(0), padT + ih);
+    ctx.lineTo(xOf(zFrom), padT + ih);
     ctx.closePath();
     ctx.fillStyle = grad;
     ctx.fill();
     // ridge line
     ctx.beginPath();
-    ctx.moveTo(xOf(0), yOf(0));
-    for (let i = 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
+    ctx.moveTo(xOf(zFrom), yOf(cumAdded[zFrom]));
+    for (let i = zFrom + 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
     ctx.strokeStyle = "#d8a84e";
     ctx.lineWidth = 2;
     ctx.shadowColor = "rgba(216,168,78,.7)";
@@ -496,13 +583,13 @@ function drawTerrain() {
     ctx.stroke();
     ctx.shadowBlur = 0;
     // summit marker
-    if (upTo > 0) {
+    if (upTo > zFrom) {
       ctx.fillStyle = "#f3d492";
       ctx.beginPath(); ctx.arc(xOf(upTo), yOf(cumAdded[upTo]), 3.5, 0, Math.PI * 2); ctx.fill();
     }
   } else {
-    const bw = Math.max(1.2, (iw / N) * 0.62);
-    for (let i = 0; i <= upTo; i++) {
+    const bw = Math.min(42, Math.max(1.2, (iw / spanDays()) * 0.62));
+    for (let i = zFrom; i <= upTo; i++) {
       const a = daily[i][2], d = daily[i][3];
       if (!a && !d) continue;
       const x = xOf(i) - bw / 2;
@@ -519,26 +606,37 @@ function drawTerrain() {
   }
 
   // cursor
-  if (progress < 1 && terrainHover < 0) {
+  if (progress < 1 && terrainHover < 0 && di >= zFrom) {
     const x = xOf(di);
     ctx.strokeStyle = "rgba(216,168,78,.85)";
     ctx.lineWidth = 1.4;
     ctx.beginPath(); ctx.moveTo(x, padT - 4); ctx.lineTo(x, padT + ih); ctx.stroke();
   }
+
+  drawSelBand(ctx, w, padL, padR, padT, ih);
 }
 
 // ---------- Flow chart (weekly PRs + issues) ----------
 const cvFlow = document.getElementById("cvFlow");
 const tipFlow = document.getElementById("tipFlow");
-let flowHover = -1;
+const holderFlow = cvFlow.parentElement;
+let flowHover = -1; // absolute index into weeklyIdx
+// weeks intersecting the current zoom window
+function visibleWeeks() {
+  const out = [];
+  weeklyIdx.forEach((wk, wi) => {
+    if (wk.idx <= zTo && wk.idx + 6 >= zFrom) out.push({ wk, wi });
+  });
+  return out;
+}
 function drawFlow() {
   const { ctx, w, h } = setupCanvas(cvFlow, 260);
   const padL = 30, padR = 10, padT = 16, padB = 30;
   const iw = w - padL - padR, ih = h - padT - padB;
-  const weeks = weeklyIdx;
+  const weeks = visibleWeeks();
   const W = weeks.length;
   const di = dayAt(progress);
-  const maxV = Math.max(...weeks.map(x => Math.max(x.pr_new, x.pr_merged, x.iss_new, x.iss_closed))) * 1.15;
+  const maxV = Math.max(1, ...weeks.map(x => Math.max(x.wk.pr_new, x.wk.pr_merged, x.wk.iss_new, x.wk.iss_closed))) * 1.15;
 
   ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
   for (let g = 0; g <= 4; g++) {
@@ -559,12 +657,9 @@ function drawFlow() {
     { k: "iss_closed", c: "#8a6f3c", off: 1.5 },
   ];
   ctx.textAlign = "center";
-  for (let wi = 0; wi < W; wi++) {
-    const wk = weeks[wi];
-    if (wk.idx > di && flowHover !== wi) {
-      // future week: faint axis label only
-    }
-    const cx = padL + slot * (wi + 0.5);
+  for (let vi = 0; vi < W; vi++) {
+    const { wk, wi } = weeks[vi];
+    const cx = padL + slot * (vi + 0.5);
     const reveal = flowHover === wi ? 1 : (wk.idx <= di ? 1 : 0);
     for (const s of series) {
       const v = wk[s.k];
@@ -581,80 +676,172 @@ function drawFlow() {
       }
       ctx.globalAlpha = 1;
     }
-    // week labels: first and last few
+    // week labels
     ctx.fillStyle = flowHover === wi ? "#ece5d3" : "rgba(151,144,126,.85)";
-    if (wi % 2 === 0 || wi === W - 1) {
-      const [y, wn] = wk.w.split("-W");
+    if (W <= 8 || vi % 2 === 0 || vi === W - 1) {
+      const wn = wk.w.split("-W")[1];
       ctx.fillText("W" + wn, cx, h - 14);
     }
     if (flowHover === wi) {
       ctx.strokeStyle = "rgba(236,229,211,.35)";
-      ctx.strokeRect(padL + slot * wi + 1, padT - 4, slot - 2, ih + 8);
+      ctx.strokeRect(padL + slot * vi + 1, padT - 4, slot - 2, ih + 8);
     }
   }
   ctx.fillStyle = "rgba(93,89,78,.9)";
   ctx.textAlign = "center";
   ctx.font = "italic 10.5px Georgia, serif";
   ctx.fillText("ISO weeks, 2026", padL + iw / 2, h - 2);
+
+  drawSelBand(ctx, w, padL, padR, padT, ih);
 }
 
-// ---------- tooltips / scrubbing ----------
-function bindScrub(cv, tip, holder, onPos) {
-  let active = false;
-  function handle(e) {
+// ---------- gestures: tap/drag to inspect, drag farther to select + zoom ----------
+// tap or short drag -> inspect tooltip (original behavior);
+// horizontal drag past ~14px -> range selection mirrored on every chart;
+// release -> all charts zoom to the selected period.
+function bindChart(cfg) {
+  const { cv, tip, holder, indexAt, onInspect, clearHover } = cfg;
+  let mode = "idle"; // idle | pending | inspect | select
+  let startX = 0, startI = 0, lastTap = 0;
+  const SELECT_PX = 14;
+
+  function localPos(e) {
     const r = cv.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    onPos(x, y, r);
+    return { x: e.clientX - r.left, y: e.clientY - r.top, r };
   }
-  cv.addEventListener("pointerdown", e => { active = true; cv.setPointerCapture(e.pointerId); handle(e); });
-  cv.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || active) handle(e); });
-  cv.addEventListener("pointerup", () => { active = false; });
-  cv.addEventListener("pointerleave", () => { active = false; });
+  function showSelTip(x) {
+    const a = Math.min(sel.from, sel.to), b = Math.max(sel.from, sel.to);
+    showTip(tip,
+      `<span class="t-date">${fmtRange(a, b)}</span> &middot; ${b - a + 1} days`,
+      x, 26, holder);
+  }
+
+  cv.addEventListener("pointerdown", e => {
+    if (mode !== "idle") return;
+    cv.setPointerCapture(e.pointerId);
+    const p = localPos(e);
+    // double-tap / double-click resets the zoom
+    const now = performance.now();
+    if (now - lastTap < 340 && isZoomed()) {
+      lastTap = 0;
+      clearHover();
+      hideTip(tip);
+      resetZoom();
+      return;
+    }
+    lastTap = now;
+    startX = p.x;
+    startI = indexAt(p.x, p.r);
+    mode = "pending";
+    onInspect(p.x, p.y, p.r, startI); // tap still inspects
+  });
+  cv.addEventListener("pointermove", e => {
+    const p = localPos(e);
+    if (mode === "idle") {
+      if (e.pointerType === "mouse") onInspect(p.x, p.y, p.r, indexAt(p.x, p.r));
+      return;
+    }
+    if (mode === "pending") {
+      if (Math.abs(p.x - startX) >= SELECT_PX) {
+        mode = "select";
+        clearHover();
+        sel = { from: startI, to: indexAt(p.x, p.r) };
+        showSelTip(p.x);
+        drawAll();
+        return;
+      }
+      onInspect(p.x, p.y, p.r, indexAt(p.x, p.r));
+      return;
+    }
+    if (mode === "select") {
+      sel = { from: startI, to: indexAt(p.x, p.r) };
+      showSelTip(p.x);
+      drawAll();
+    }
+  });
+  function finish(commit) {
+    if (mode === "select" && commit && sel) {
+      const a = Math.min(sel.from, sel.to), b = Math.max(sel.from, sel.to);
+      sel = null;
+      hideTip(tip);
+      if (b - a + 1 >= MIN_SPAN_DAYS) setZoom(a, b); else drawAll();
+    } else {
+      sel = null;
+      if (mode === "select") { hideTip(tip); drawAll(); }
+    }
+    mode = "idle";
+  }
+  cv.addEventListener("pointerup", () => finish(true));
+  cv.addEventListener("pointercancel", () => finish(false));
+  cv.addEventListener("pointerleave", () => {
+    if (mode === "idle") { clearHover(); hideTip(tip); drawAll(); }
+  });
 }
-const holderPulse = cvPulse.parentElement;
-const holderTerrain = cvTerrain.parentElement;
-const holderFlow = cvFlow.parentElement;
 
-bindScrub(cvPulse, tipPulse, holderPulse, (x, y, r) => {
-  const padL = 34, padR = 10;
-  const iw = r.width - padL - padR;
-  const i = Math.max(0, Math.min(N - 1, Math.round(((x - padL) / iw) * (N - 1))));
-  pulseHover = i;
-  const d = daily[i];
-  showTip(tipPulse,
-    `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${d[1]} commit${d[1] === 1 ? "" : "s"}`,
-    x, y, holderPulse);
-  drawPulse();
-});
-cvPulse.addEventListener("pointerleave", () => { pulseHover = -1; hideTip(tipPulse); drawPulse(); });
+function dayIndexAt(padL, padR) {
+  return (x, r) => {
+    const iw = r.width - padL - padR;
+    const t = Math.max(0, Math.min(1, (x - padL) / iw));
+    return Math.round(zFrom + t * (zTo - zFrom));
+  };
+}
 
-bindScrub(cvTerrain, tipTerrain, holderTerrain, (x, y, r) => {
-  const padL = 44, padR = 10;
-  const iw = r.width - padL - padR;
-  const i = Math.max(0, Math.min(N - 1, Math.round(((x - padL) / iw) * (N - 1))));
-  terrainHover = i;
-  const d = daily[i];
-  const body = terrainMode === "cum"
-    ? `${fmtInt(cumAdded[i])} lines added in total`
-    : `+${fmtInt(d[2])} / -${fmtInt(d[3])} lines`;
-  showTip(tipTerrain, `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${body}`, x, y, holderTerrain);
-  drawTerrain();
+bindChart({
+  cv: cvPulse, tip: tipPulse, holder: holderPulse,
+  indexAt: dayIndexAt(34, 10),
+  clearHover: () => { pulseHover = -1; },
+  onInspect: (x, y, r, i) => {
+    pulseHover = i;
+    const d = daily[i];
+    showTip(tipPulse,
+      `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${d[1]} commit${d[1] === 1 ? "" : "s"}`,
+      x, y, holderPulse);
+    drawPulse();
+  },
 });
-cvTerrain.addEventListener("pointerleave", () => { terrainHover = -1; hideTip(tipTerrain); drawTerrain(); });
 
-bindScrub(cvFlow, tipFlow, holderFlow, (x, y, r) => {
-  const padL = 30, padR = 10;
-  const iw = r.width - padL - padR;
-  const W = weeklyIdx.length;
-  const wi = Math.max(0, Math.min(W - 1, Math.floor(((x - padL) / iw) * W)));
-  flowHover = wi;
-  const wk = weeklyIdx[wi];
-  showTip(tipFlow,
-    `<span class="t-date">${wk.w}</span> &middot; PR +${wk.pr_new}/&#10003;${wk.pr_merged} &middot; issues +${wk.iss_new}/&#10003;${wk.iss_closed}`,
-    x, y, holderFlow);
-  drawFlow();
+bindChart({
+  cv: cvTerrain, tip: tipTerrain, holder: holderTerrain,
+  indexAt: dayIndexAt(44, 10),
+  clearHover: () => { terrainHover = -1; },
+  onInspect: (x, y, r, i) => {
+    terrainHover = i;
+    const d = daily[i];
+    const body = terrainMode === "cum"
+      ? `${fmtInt(cumAdded[i])} lines added in total`
+      : `+${fmtInt(d[2])} / -${fmtInt(d[3])} lines`;
+    showTip(tipTerrain, `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${body}`, x, y, holderTerrain);
+    drawTerrain();
+  },
 });
-cvFlow.addEventListener("pointerleave", () => { flowHover = -1; hideTip(tipFlow); drawFlow(); });
+
+bindChart({
+  cv: cvFlow, tip: tipFlow, holder: holderFlow,
+  indexAt: (x, r) => {
+    const padL = 30, padR = 10;
+    const iw = r.width - padL - padR;
+    const weeks = visibleWeeks();
+    const vi = Math.max(0, Math.min(weeks.length - 1, Math.floor(((x - padL) / iw) * weeks.length)));
+    return Math.min(N - 1, weeks[vi].wk.idx + 3); // mid-week day index
+  },
+  clearHover: () => { flowHover = -1; },
+  onInspect: (x, y, r) => {
+    const padL = 30, padR = 10;
+    const iw = r.width - padL - padR;
+    const weeks = visibleWeeks();
+    const vi = Math.max(0, Math.min(weeks.length - 1, Math.floor(((x - padL) / iw) * weeks.length)));
+    const { wk, wi } = weeks[vi];
+    flowHover = wi;
+    showTip(tipFlow,
+      `<span class="t-date">${wk.w}</span> &middot; PR +${wk.pr_new}/&#10003;${wk.pr_merged} &middot; issues +${wk.iss_new}/&#10003;${wk.iss_closed}`,
+      x, y, holderFlow);
+    drawFlow();
+  },
+});
+
+// ---------- zoom bar ----------
+document.getElementById("zoomReset").addEventListener("click", resetZoom);
+window.addEventListener("keydown", e => { if (e.key === "Escape") resetZoom(); });
 
 // ---------- toggles ----------
 document.getElementById("tgCum").addEventListener("click", () => {
@@ -682,6 +869,7 @@ function drawAll() {
 }
 function play() {
   if (animId) cancelAnimationFrame(animId);
+  if (isZoomed() || sel) resetZoom(); // the story always plays over the full timeline
   progress = 0;
   replayBtn.setAttribute("aria-pressed", "true");
   replayLabel.textContent = "Replaying...";
@@ -707,6 +895,7 @@ function play() {
 replayBtn.addEventListener("click", play);
 
 // ---------- boot ----------
+updateZoombar();
 drawAll();
 if (!reduced) {
   // gentle intro: animate once on load
@@ -714,6 +903,7 @@ if (!reduced) {
 }
 let rT;
 window.addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(drawAll, 120); });
+
 </script>
 </body>
 </html>
