@@ -76,16 +76,6 @@ function routeUrl(route) {
 
 // Map URL ids to garden indices; an unknown or removed id falls back to the
 // nearest valid level (theme -> garden, path -> theme, lesson -> path).
-const CELEBRATED_PATHS_KEY = "grains-path-celebrations";
-function loadCelebratedPaths() {
-  try { return new Set(JSON.parse(localStorage.getItem(CELEBRATED_PATHS_KEY) || "[]")); } catch { return new Set(); }
-}
-function saveCelebratedPaths(celebrated) {
-  // Private mode can refuse the write: this visit's in-memory set still
-  // prevents repeats, and the next visit simply celebrates once more.
-  try { localStorage.setItem(CELEBRATED_PATHS_KEY, JSON.stringify([...celebrated])); } catch { /* visit memory only */ }
-}
-
 function locateRoute(gardenData, route) {
   const themes = gardenData?.themes || [];
   const ti = themes.findIndex((theme) => theme.id === route.themeId);
@@ -570,16 +560,21 @@ export default function LittleGrains() {
   // The api awards badges when asked: on first load, after leaving a lesson or
   // quiz and when the badges tab opens. Never per card or answer, never polled.
   const checkBadges = useCallback(() => api("badges/check/", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).then((result) => { setBadges(result); setBadgesError(""); }).catch((err) => setBadgesError(err.message)), []);
-  // A path celebrates once its last card is read, never twice: celebrated
-  // ids persist across visits, so a reload stays quiet and a path finished
-  // before the celebration shipped still blooms once on the next visit.
+  // A path celebrates once its last card is read, and the +100 Drops shows
+  // once per learner on any device: the server remembers the shown
+  // celebration (display only - the bonus itself is derived from history),
+  // this visit's set only guards against repeats within the session.
   const refresh = useCallback(async () => {
     const result = await api("garden/");
-    const celebrated = loadCelebratedPaths();
+    const serverCelebrated = (path) => (result.themes || []).some(theme =>
+      (theme.learning_paths || []).some(item => item.id === path.id && item.celebrated));
     const completed = (gardenData.current ? newlyCompletedPaths(gardenData.current, result) : finishedPaths(result))
-      .filter(path => !celebrated.has(path.id) && !celebratedPaths.current.has(path.id));
-    completed.forEach(path => { celebratedPaths.current.add(path.id); celebrated.add(path.id); });
-    if (completed.length) { saveCelebratedPaths(celebrated); setCompletedPaths(queue => [...queue, ...completed]); }
+      .filter(path => !serverCelebrated(path) && !celebratedPaths.current.has(path.id));
+    completed.forEach(path => {
+      celebratedPaths.current.add(path.id);
+      api(`paths/${path.id}/celebrated/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => {});
+    });
+    if (completed.length) setCompletedPaths(queue => [...queue, ...completed]);
     gardenData.current = result; setGarden(result); return result;
   }, []);
 

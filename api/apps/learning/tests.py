@@ -57,10 +57,11 @@ class LearningSchemaTests(TestCase):
         self.assertEqual({model._meta.db_table for model in models}, {
             "lg_content_entity", "lg_theme", "lg_learning_path", "lg_lesson", "lg_card",
             "lg_question", "lg_sync_log", "lg_card_progress", "lg_question_attempt", "lg_lesson_open", "lg_badge_award",
+            "lg_path_celebration",
         })
         tables = set(connection.introspection.table_names())
         self.assertTrue(all(model._meta.db_table in tables for model in models))
-        self.assertEqual(len(models), 11)
+        self.assertEqual(len(models), 12)
 
     def test_content_uuid_is_both_registry_id_and_content_primary_key(self):
         for record in (self.theme, self.path, self.lesson, self.card, self.question):

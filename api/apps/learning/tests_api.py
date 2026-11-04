@@ -10,7 +10,7 @@ from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
-from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, Theme
+from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, PathCelebration, Theme
 from .rewards import chart, period_window, totals
 
 
@@ -64,6 +64,30 @@ class LearningAPITests(TestCase):
         self.assertNotIn("answer", response.content.decode())
         self.client.defaults.clear()
         self.assertEqual(self.client.get(url).status_code, 401)
+
+    def test_path_celebration_is_marked_once_per_learner(self):
+        url = f"/api/learning/paths/{self.path.pk}/celebrated/"
+        garden_url = "/api/learning/garden/"
+        self.assertEqual(self.client.get(garden_url).json()["themes"][0]["learning_paths"][0]["celebrated"], False)
+
+        first = self.post(url, {})
+        self.assertEqual(first.status_code, 201)
+        self.assertEqual(first.json()["celebrated"], True)
+        self.assertEqual(self.client.get(garden_url).json()["themes"][0]["learning_paths"][0]["celebrated"], True)
+
+        # A repeat is a quiet 200, never a second row.
+        self.assertEqual(self.post(url, {}).status_code, 200)
+        self.assertEqual(PathCelebration.objects.count(), 1)
+
+        # Another learner is untouched, and extra fields are rejected.
+        self.assertEqual(self.post(url, {"shown_at": "2000-01-01T00:00:00Z"}).status_code, 400)
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
+        self.assertEqual(self.client.get(garden_url).json()["themes"][0]["learning_paths"][0]["celebrated"], False)
+
+        # Unknown path: 404. No token: 401.
+        self.assertEqual(self.post(f"/api/learning/paths/{uuid4()}/celebrated/", {}).status_code, 404)
+        self.client.defaults.clear()
+        self.assertEqual(self.client.post(url, "{}", content_type="application/json").status_code, 401)
 
     def test_hidden_content_is_not_counted(self):
         for model, record in [(Theme, self.theme), (LearningPath, self.path), (Lesson, self.lesson),
