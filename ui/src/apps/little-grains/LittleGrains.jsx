@@ -7,7 +7,7 @@ import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
 import { GrainsLoader } from "./Loader.jsx";
 import { PathComplete } from "./PathComplete.jsx";
-import { newlyCompletedPaths } from "./path-completion.js";
+import { finishedPaths, newlyCompletedPaths, pathFinished } from "./path-completion.js";
 import { stableShuffler } from "./shuffle.js";
 import { BadgeButton, BadgeCollection } from "./Badges.jsx";
 import "./garden/garden.css";
@@ -76,6 +76,16 @@ function routeUrl(route) {
 
 // Map URL ids to garden indices; an unknown or removed id falls back to the
 // nearest valid level (theme -> garden, path -> theme, lesson -> path).
+const CELEBRATED_PATHS_KEY = "grains-path-celebrations";
+function loadCelebratedPaths() {
+  try { return new Set(JSON.parse(localStorage.getItem(CELEBRATED_PATHS_KEY) || "[]")); } catch { return new Set(); }
+}
+function saveCelebratedPaths(celebrated) {
+  // Private mode can refuse the write: this visit's in-memory set still
+  // prevents repeats, and the next visit simply celebrates once more.
+  try { localStorage.setItem(CELEBRATED_PATHS_KEY, JSON.stringify([...celebrated])); } catch { /* visit memory only */ }
+}
+
 function locateRoute(gardenData, route) {
   const themes = gardenData?.themes || [];
   const ti = themes.findIndex((theme) => theme.id === route.themeId);
@@ -178,7 +188,7 @@ function LessonComplete({ kind, onDone }) {
   </div>;
 }
 
-function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onStepChange }) {
+function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onStepChange, onLessonEnd }) {
   const [data, setData] = useState(null);
   const [viewStep, setViewStep] = useState(null);
   const [replay, setReplay] = useState(false);
@@ -235,6 +245,16 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     const step = !viewStep ? null : viewStep.type === "revisit" ? { type: "card", id: viewStep.id } : viewStep;
     onStepChange({ themeId: data.theme.id, pathId: data.learning_path.id, lessonId }, step);
   }, [data, viewStep, onStepChange, lessonId]);
+
+  // Reaching the end screen (every step done) is the lesson-end moment:
+  // report it once, whichever way the reader is left afterwards.
+  const endReported = useRef(false);
+  useEffect(() => {
+    if (!endReported.current && data?.cards.length && viewStep === null) {
+      endReported.current = true;
+      onLessonEnd?.(fullyReadAtOpen.current ? "reviewed" : "drops");
+    }
+  }, [data, viewStep, onLessonEnd]);
 
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
@@ -550,13 +570,16 @@ export default function LittleGrains() {
   // The api awards badges when asked: on first load, after leaving a lesson or
   // quiz and when the badges tab opens. Never per card or answer, never polled.
   const checkBadges = useCallback(() => api("badges/check/", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).then((result) => { setBadges(result); setBadgesError(""); }).catch((err) => setBadgesError(err.message)), []);
-  // Observe the server's full path completion rule (all cards + all questions),
-  // then wait until the reader/quiz closes before showing the larger result.
+  // A path celebrates once its last card is read, never twice: celebrated
+  // ids persist across visits, so a reload stays quiet and a path finished
+  // before the celebration shipped still blooms once on the next visit.
   const refresh = useCallback(async () => {
     const result = await api("garden/");
-    const completed = newlyCompletedPaths(gardenData.current, result).filter(path => !celebratedPaths.current.has(path.id));
-    completed.forEach(path => celebratedPaths.current.add(path.id));
-    if (completed.length) setCompletedPaths(queue => [...queue, ...completed]);
+    const celebrated = loadCelebratedPaths();
+    const completed = (gardenData.current ? newlyCompletedPaths(gardenData.current, result) : finishedPaths(result))
+      .filter(path => !celebrated.has(path.id) && !celebratedPaths.current.has(path.id));
+    completed.forEach(path => { celebratedPaths.current.add(path.id); celebrated.add(path.id); });
+    if (completed.length) { saveCelebratedPaths(celebrated); setCompletedPaths(queue => [...queue, ...completed]); }
     gardenData.current = result; setGarden(result); return result;
   }, []);
 
@@ -580,6 +603,23 @@ export default function LittleGrains() {
     if (readerHistory.current === "none") { readerHistory.current = "pushed"; navigate(next); }
     else navigate(next, { replace: true });
   }, [navigate]);
+
+  // Re-reading to the end of the last lesson of an already-finished path
+  // replays the celebration without the +100 Drops: that bonus is earned
+  // once, by the first finish (garden transition or one-time catch-up).
+  const handleLessonEnd = useCallback((lessonId, kind) => {
+    if (kind !== "reviewed" || !gardenData.current) return;
+    for (const theme of gardenData.current.themes || []) {
+      for (const path of theme.learning_paths || []) {
+        const lessons = path.lessons || [];
+        const last = lessons.reduce((latest, lesson) => (lesson.position > (latest?.position ?? 0) ? lesson : latest), null);
+        if (last?.id === lessonId && pathFinished(path)) {
+          setCompletedPaths(queue => [...queue, { id: path.id, title: path.title, lessons: path.progress?.lessons_total, reward: false }]);
+          return;
+        }
+      }
+    }
+  }, []);
 
   const closeReader = useCallback(() => {
     if (readerHistory.current === "pushed") { readerHistory.current = "none"; window.history.back(); return; }
@@ -686,7 +726,7 @@ export default function LittleGrains() {
         : startup.phase !== "ready"
           ? <GrainsLoader attempt={startup.attempt} />
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
-    {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} />}
+    {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
