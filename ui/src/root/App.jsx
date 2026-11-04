@@ -16,6 +16,7 @@ const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/Three
 const LittleNotes = lazy(() => import("../apps/little-notes/LittleNotes.jsx"));
 const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
 const ContentReview = lazy(() => import("../apps/content-review/ContentReview.jsx"));
+const Hockey = lazy(() => import("../apps/hockey/Hockey.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
 
 export default function App() {
@@ -71,6 +72,10 @@ export default function App() {
 
   if (path.startsWith("/apps/lithotheque")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#14171b", color: "#e8e4dd", display: "grid", placeItems: "center" }}>Opening the bench…</div>}><Lithotheque onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path === "/apps/hockey" || path.startsWith("/apps/hockey/")) {
+    return <Suspense fallback={<div>Opening Hockey Lab...</div>}><Hockey path={path} onNavigate={navigate} onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/recipes")) {
