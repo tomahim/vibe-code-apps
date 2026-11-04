@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.little_grains",
     "apps.content_review",
+    "apps.curator.apps.CuratorConfig",
     "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
     "apps.recipes",
