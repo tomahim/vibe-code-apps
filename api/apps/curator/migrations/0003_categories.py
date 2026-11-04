@@ -55,6 +55,28 @@ def move_tabs_to_categories(apps, schema_editor):
         tag.delete(using=alias)
 
 
+DIRECT_ROLE = "instinct_curator_rw"
+DIRECT_TABLES = ["curator_category", "curator_category_object_type", "curator_content_category"]
+
+
+def grant_direct_role(apps, schema_editor):
+    """Extend the direct-write role to the new tables on deploy (PostgreSQL only).
+
+    The migration identity owns the tables it creates, so deploy is the one
+    authorized route that can grant. Guarded: no-op where the role is absent
+    (CI, local). Manual fallback documented in docs/little-notes/categories.md.
+    """
+    if schema_editor.connection.vendor != "postgresql":
+        return
+    with schema_editor.connection.cursor() as cursor:
+        cursor.execute("SELECT 1 FROM pg_roles WHERE rolname = %s", [DIRECT_ROLE])
+        if not cursor.fetchone():
+            return
+        for table in DIRECT_TABLES:
+            cursor.execute(
+                f'GRANT SELECT, INSERT, UPDATE, DELETE ON "{table}" TO "{DIRECT_ROLE}"')
+
+
 def move_categories_back_to_tags(apps, schema_editor):
     alias = schema_editor.connection.alias
     Category = apps.get_model("curator", "Category")
@@ -135,4 +157,5 @@ class Migration(migrations.Migration):
             field=models.ManyToManyField(related_name="content", through="curator.ContentCategory", to="curator.category"),
         ),
         migrations.RunPython(move_tabs_to_categories, move_categories_back_to_tags),
+        migrations.RunPython(grant_direct_role, migrations.RunPython.noop),
     ]
