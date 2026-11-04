@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repository Vitals - vibe-code-apps</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #151a22;
+    --panel-2: #1a212c;
+    --ink: #ece5d3;
+    --muted: #97907e;
+    --faint: #5d594e;
+    --gold: #d8a84e;
+    --gold-dim: rgba(216, 168, 78, .35);
+    --green: #5fd9a4;
+    --teal: #62c9da;
+    --red: #d87a6a;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(216,168,78,.07), transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, rgba(98,201,218,.05), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 20px 16px 48px; }
+  header.top { padding: 18px 0 6px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  h1 { font-size: clamp(28px, 7vw, 44px); margin: 6px 0 4px; font-weight: 600; letter-spacing: .01em; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 4px; }
+  .sub .repo { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+  .story-line { color: var(--muted); font-size: 14px; font-style: italic; margin: 10px 0 0; }
+
+  .replay {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin: 16px 0 4px; padding: 12px 22px;
+    background: linear-gradient(180deg, #232b38, #171d27);
+    color: var(--ink); border: 1px solid rgba(216,168,78,.45); border-radius: 999px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .08em;
+    cursor: pointer; transition: border-color .2s, transform .1s;
+  }
+  .replay:hover { border-color: var(--gold); }
+  .replay:active { transform: scale(.97); }
+  .replay:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .replay .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .replay[aria-pressed="true"] .dot { background: var(--green); box-shadow: 0 0 10px var(--green); }
+
+  .counters {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0 8px;
+  }
+  @media (min-width: 640px) { .counters { grid-template-columns: repeat(4, 1fr); } }
+  .counter {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid rgba(236,229,211,.08); border-radius: 14px; padding: 14px 14px 12px;
+  }
+  .counter .num { font-family: var(--mono); font-size: clamp(22px, 6vw, 30px); font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .counter .num .unit { font-size: .55em; color: var(--muted); margin-left: 2px; }
+  .counter .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .counter .extra { font-size: 12px; color: var(--faint); margin-top: 2px; }
+  .counter.c-commits .num { color: var(--green); }
+  .counter.c-lines .num { color: var(--gold); }
+  .counter.c-prs .num { color: var(--teal); }
+  .counter.c-issues .num { color: var(--ink); }
+
+  section.chart-block {
+    margin-top: 26px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid rgba(236,229,211,.08); border-radius: 18px;
+    padding: 16px 14px 12px;
+  }
+  .chart-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 2px; }
+  .chart-head h2 { font-size: 19px; margin: 0; font-weight: 600; }
+  .chart-head .what { color: var(--muted); font-size: 12.5px; }
+  .chart-note { color: var(--faint); font-size: 12px; margin: 2px 0 8px; }
+  .cv-holder { position: relative; }
+  canvas.chart { display: block; width: 100%; border-radius: 10px; touch-action: pan-y; cursor: crosshair; }
+  .tip {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s;
+    background: rgba(10, 12, 16, .92); border: 1px solid rgba(236,229,211,.2);
+    border-radius: 8px; padding: 6px 9px; font-family: var(--mono); font-size: 11.5px;
+    color: var(--ink); white-space: nowrap; transform: translate(-50%, -100%);
+    z-index: 3;
+  }
+  .tip .t-date { color: var(--gold); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 8px 2px 0; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  .toggle-row { display: flex; gap: 8px; margin: 4px 0 8px; }
+  .toggle-row button {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    padding: 7px 14px; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--muted); border: 1px solid rgba(236,229,211,.18);
+  }
+  .toggle-row button[aria-pressed="true"] { color: #10131a; background: var(--gold); border-color: var(--gold); font-weight: 600; }
+
+  .eras { display: grid; gap: 10px; margin-top: 26px; }
+  @media (min-width: 640px) { .eras { grid-template-columns: repeat(3, 1fr); } }
+  .era {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid rgba(236,229,211,.08); border-radius: 14px; padding: 14px;
+  }
+  .era .era-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; }
+  .era.e1 .era-tag { color: var(--green); }
+  .era.e2 .era-tag { color: var(--faint); }
+  .era.e3 .era-tag { color: var(--gold); }
+  .era h3 { margin: 6px 0 4px; font-size: 16px; }
+  .era p { margin: 0; color: var(--muted); font-size: 13px; }
+  .era .big { font-family: var(--mono); color: var(--ink); }
+
+  footer.defs { margin-top: 30px; border-top: 1px solid rgba(236,229,211,.12); padding-top: 14px; }
+  footer.defs h2 { font-size: 13px; font-family: var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  footer.defs ul { margin: 0; padding-left: 18px; color: var(--faint); font-size: 12.5px; }
+  footer.defs li { margin-bottom: 4px; }
+  footer.defs .asof { margin-top: 10px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .replay .dot { box-shadow: none; }
+    .tip { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">Artifact &middot; Repository Vitals</div>
+    <h1>The Life of a Repository</h1>
+    <p class="sub"><span class="repo">tomahim/vibe-code-apps</span> &middot; first commit 7 Mar 2026 &middot; measured through 4 Nov 2026</p>
+    <p class="story-line">A quiet prototype in March, six months of silence, then 25 days of relentless shipping. Press play and watch it happen.</p>
+    <button class="replay" id="replay" aria-pressed="false"><span class="dot"></span><span id="replayLabel">Replay the story</span></button>
+  </header>
+
+  <div class="counters" aria-label="Headline numbers">
+    <div class="counter c-commits">
+      <div class="num" id="nCommits">0</div>
+      <div class="lbl">Commits on master</div>
+      <div class="extra">32 active days</div>
+    </div>
+    <div class="counter c-lines">
+      <div class="num" id="nLines">0</div>
+      <div class="lbl">Lines added</div>
+      <div class="extra">as reported by git</div>
+    </div>
+    <div class="counter c-prs">
+      <div class="num" id="nPrs">0</div>
+      <div class="lbl">PRs merged</div>
+      <div class="extra" id="nPrsExtra">of 257 opened</div>
+    </div>
+    <div class="counter c-issues">
+      <div class="num" id="nIssues">0</div>
+      <div class="lbl">Issues opened</div>
+      <div class="extra" id="nIssExtra">42 closed &middot; 16 open</div>
+    </div>
+  </div>
+
+  <section class="chart-block" aria-labelledby="hPulse">
+    <div class="chart-head">
+      <h2 id="hPulse">The Pulse</h2>
+      <span class="what">commits per day, main branch</span>
+    </div>
+    <p class="chart-note">Every beat is a day with at least one commit. The long flatline is the six-month gap between the March prototype and the October rebuild. Tap or drag to inspect.</p>
+    <div class="cv-holder">
+      <canvas class="chart" id="cvPulse" height="240" role="img"
+        aria-label="Line chart of commits per day. Activity bursts in mid-March, silence from April to early October, then sustained daily activity through early November."></canvas>
+      <div class="tip" id="tipPulse"></div>
+    </div>
+    <div class="legend">
+      <span class="key"><span class="sw" style="background:var(--green)"></span>active day</span>
+      <span class="key"><span class="sw" style="background:var(--faint)"></span>silence</span>
+    </div>
+  </section>
+
+  <section class="chart-block" aria-labelledby="hTerrain">
+    <div class="chart-head">
+      <h2 id="hTerrain">The Terrain</h2>
+      <span class="what">lines of code added over time</span>
+    </div>
+    <p class="chart-note">Cumulative added lines form the mountain. Switch to per-day to see the individual climbs behind it.</p>
+    <div class="toggle-row" role="group" aria-label="Terrain mode">
+      <button id="tgCum" aria-pressed="true">Cumulative</button>
+      <button id="tgDay" aria-pressed="false">Per day</button>
+    </div>
+    <div class="cv-holder">
+      <canvas class="chart" id="cvTerrain" height="260" role="img"
+        aria-label="Area chart of cumulative lines added, flat during the gap and rising steeply from mid-October to about 149 thousand."></canvas>
+      <div class="tip" id="tipTerrain"></div>
+    </div>
+    <div class="legend">
+      <span class="key"><span class="sw" style="background:var(--gold)"></span>lines added</span>
+      <span class="key"><span class="sw" style="background:var(--red)"></span>lines deleted</span>
+    </div>
+  </section>
+
+  <section class="chart-block" aria-labelledby="hFlow">
+    <div class="chart-head">
+      <h2 id="hFlow">The Flow</h2>
+      <span class="what">pull requests and issues per week</span>
+    </div>
+    <p class="chart-note">Work moves in pairs: nearly every pull request merges, and most issues get closed within the same burst. Tap a week for exact numbers.</p>
+    <div class="cv-holder">
+      <canvas class="chart" id="cvFlow" height="260" role="img"
+        aria-label="Grouped bar chart per week: pull requests opened versus merged, and issues opened versus closed."></canvas>
+      <div class="tip" id="tipFlow"></div>
+    </div>
+    <div class="legend">
+      <span class="key"><span class="sw" style="background:var(--teal)"></span>PR opened</span>
+      <span class="key"><span class="sw" style="background:var(--green)"></span>PR merged</span>
+      <span class="key"><span class="sw" style="background:var(--gold)"></span>issue opened</span>
+      <span class="key"><span class="sw" style="background:#8a6f3c"></span>issue closed</span>
+    </div>
+  </section>
+
+  <div class="eras" aria-label="The three eras">
+    <div class="era e1">
+      <div class="era-tag">Era 1 &middot; March</div>
+      <h3>The prototype burst</h3>
+      <p><span class="big">84 commits</span> in two weeks. The first spike: Django API, a React UI, hosting. Then the repo went quiet.</p>
+    </div>
+    <div class="era e2">
+      <div class="era-tag">The gap &middot; Apr - Sep</div>
+      <h3>Six months of silence</h3>
+      <p><span class="big">0 commits</span> for about 200 days. A flatline, not an ending.</p>
+    </div>
+    <div class="era e3">
+      <div class="era-tag">Era 2 &middot; Oct - Nov</div>
+      <h3>The rebuild</h3>
+      <p><span class="big">377 commits</span> and <span class="big">254 PRs</span> in 25 days. Little Grains, Little Notes, Story Room, the Factory and a gallery of artifacts.</p>
+    </div>
+  </div>
+
+  <footer class="defs">
+    <h2>How these numbers are counted</h2>
+    <ul>
+      <li>Commits: git history of the <strong>master</strong> branch. Squash-merged PRs count as one commit each.</li>
+      <li>Lines added: sum of added lines reported by <span style="font-family:var(--mono)">git log --numstat</span> across all files, including artifacts and lockfiles. It is gross addition, not the current net size of the codebase.</li>
+      <li>Pull requests: GitHub API, all states. 253 merged, 3 closed unmerged, 1 still open at snapshot time.</li>
+      <li>Issues: GitHub API, pull requests excluded. 58 opened, 42 closed, 16 open at snapshot time.</li>
+      <li>Weekly buckets use ISO week numbers. Dates are UTC.</li>
+    </ul>
+    <p class="asof">Data snapshot: 4 Nov 2026 &middot; generated from the repository's own history, not estimates.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const DATA = {"repo":"tomahim/vibe-code-apps","asOf":"2026-11-04","firstCommit":"2026-03-07","totals":{"commits":461,"lines_added":149118,"lines_deleted":15085,"prs":257,"prs_merged":253,"prs_open":1,"prs_closed_unmerged":3,"issues":58,"issues_open":16,"issues_closed":42},"weekly":[{"w":"2026-W10","commits":2,"added":733,"deleted":31,"pr_new":1,"pr_merged":1,"iss_new":0,"iss_closed":0},{"w":"2026-W11","commits":5,"added":402,"deleted":106,"pr_new":0,"pr_merged":0,"iss_new":0,"iss_closed":0},{"w":"2026-W12","commits":69,"added":5037,"deleted":821,"pr_new":2,"pr_merged":2,"iss_new":0,"iss_closed":0},{"w":"2026-W13","commits":8,"added":339,"deleted":45,"pr_new":0,"pr_merged":0,"iss_new":0,"iss_closed":0},{"w":"2026-W41","commits":3,"added":46,"deleted":2,"pr_new":3,"pr_merged":3,"iss_new":2,"iss_closed":0},{"w":"2026-W42","commits":36,"added":8808,"deleted":1596,"pr_new":21,"pr_merged":20,"iss_new":8,"iss_closed":6},{"w":"2026-W43","commits":146,"added":23474,"deleted":908,"pr_new":86,"pr_merged":85,"iss_new":20,"iss_closed":20},{"w":"2026-W44","commits":126,"added":98870,"deleted":2636,"pr_new":100,"pr_merged":98,"iss_new":18,"iss_closed":9},{"w":"2026-W45","commits":66,"added":11409,"deleted":8940,"pr_new":44,"pr_merged":44,"iss_new":10,"iss_closed":7}],"daily":[["2026-03-07",1,580,0],["2026-03-08",1,153,31],["2026-03-09",3,63,9],["2026-03-10",0,0,0],["2026-03-11",0,0,0],["2026-03-12",0,0,0],["2026-03-13",0,0,0],["2026-03-14",0,0,0],["2026-03-15",2,339,97],["2026-03-16",30,384,299],["2026-03-17",0,0,0],["2026-03-18",0,0,0],["2026-03-19",0,0,0],["2026-03-20",0,0,0],["2026-03-21",37,4273,520],["2026-03-22",2,380,2],["2026-03-23",0,0,0],["2026-03-24",2,2,0],["2026-03-25",0,0,0],["2026-03-26",0,0,0],["2026-03-27",0,0,0],["2026-03-28",0,0,0],["2026-03-29",6,337,45],["2026-03-30",0,0,0],["2026-03-31",0,0,0],["2026-04-01",0,0,0],["2026-04-02",0,0,0],["2026-04-03",0,0,0],["2026-04-04",0,0,0],["2026-04-05",0,0,0],["2026-04-06",0,0,0],["2026-04-07",0,0,0],["2026-04-08",0,0,0],["2026-04-09",0,0,0],["2026-04-10",0,0,0],["2026-04-11",0,0,0],["2026-04-12",0,0,0],["2026-04-13",0,0,0],["2026-04-14",0,0,0],["2026-04-15",0,0,0],["2026-04-16",0,0,0],["2026-04-17",0,0,0],["2026-04-18",0,0,0],["2026-04-19",0,0,0],["2026-04-20",0,0,0],["2026-04-21",0,0,0],["2026-04-22",0,0,0],["2026-04-23",0,0,0],["2026-04-24",0,0,0],["2026-04-25",0,0,0],["2026-04-26",0,0,0],["2026-04-27",0,0,0],["2026-04-28",0,0,0],["2026-04-29",0,0,0],["2026-04-30",0,0,0],["2026-05-01",0,0,0],["2026-05-02",0,0,0],["2026-05-03",0,0,0],["2026-05-04",0,0,0],["2026-05-05",0,0,0],["2026-05-06",0,0,0],["2026-05-07",0,0,0],["2026-05-08",0,0,0],["2026-05-09",0,0,0],["2026-05-10",0,0,0],["2026-05-11",0,0,0],["2026-05-12",0,0,0],["2026-05-13",0,0,0],["2026-05-14",0,0,0],["2026-05-15",0,0,0],["2026-05-16",0,0,0],["2026-05-17",0,0,0],["2026-05-18",0,0,0],["2026-05-19",0,0,0],["2026-05-20",0,0,0],["2026-05-21",0,0,0],["2026-05-22",0,0,0],["2026-05-23",0,0,0],["2026-05-24",0,0,0],["2026-05-25",0,0,0],["2026-05-26",0,0,0],["2026-05-27",0,0,0],["2026-05-28",0,0,0],["2026-05-29",0,0,0],["2026-05-30",0,0,0],["2026-05-31",0,0,0],["2026-06-01",0,0,0],["2026-06-02",0,0,0],["2026-06-03",0,0,0],["2026-06-04",0,0,0],["2026-06-05",0,0,0],["2026-06-06",0,0,0],["2026-06-07",0,0,0],["2026-06-08",0,0,0],["2026-06-09",0,0,0],["2026-06-10",0,0,0],["2026-06-11",0,0,0],["2026-06-12",0,0,0],["2026-06-13",0,0,0],["2026-06-14",0,0,0],["2026-06-15",0,0,0],["2026-06-16",0,0,0],["2026-06-17",0,0,0],["2026-06-18",0,0,0],["2026-06-19",0,0,0],["2026-06-20",0,0,0],["2026-06-21",0,0,0],["2026-06-22",0,0,0],["2026-06-23",0,0,0],["2026-06-24",0,0,0],["2026-06-25",0,0,0],["2026-06-26",0,0,0],["2026-06-27",0,0,0],["2026-06-28",0,0,0],["2026-06-29",0,0,0],["2026-06-30",0,0,0],["2026-07-01",0,0,0],["2026-07-02",0,0,0],["2026-07-03",0,0,0],["2026-07-04",0,0,0],["2026-07-05",0,0,0],["2026-07-06",0,0,0],["2026-07-07",0,0,0],["2026-07-08",0,0,0],["2026-07-09",0,0,0],["2026-07-10",0,0,0],["2026-07-11",0,0,0],["2026-07-12",0,0,0],["2026-07-13",0,0,0],["2026-07-14",0,0,0],["2026-07-15",0,0,0],["2026-07-16",0,0,0],["2026-07-17",0,0,0],["2026-07-18",0,0,0],["2026-07-19",0,0,0],["2026-07-20",0,0,0],["2026-07-21",0,0,0],["2026-07-22",0,0,0],["2026-07-23",0,0,0],["2026-07-24",0,0,0],["2026-07-25",0,0,0],["2026-07-26",0,0,0],["2026-07-27",0,0,0],["2026-07-28",0,0,0],["2026-07-29",0,0,0],["2026-07-30",0,0,0],["2026-07-31",0,0,0],["2026-08-01",0,0,0],["2026-08-02",0,0,0],["2026-08-03",0,0,0],["2026-08-04",0,0,0],["2026-08-05",0,0,0],["2026-08-06",0,0,0],["2026-08-07",0,0,0],["2026-08-08",0,0,0],["2026-08-09",0,0,0],["2026-08-10",0,0,0],["2026-08-11",0,0,0],["2026-08-12",0,0,0],["2026-08-13",0,0,0],["2026-08-14",0,0,0],["2026-08-15",0,0,0],["2026-08-16",0,0,0],["2026-08-17",0,0,0],["2026-08-18",0,0,0],["2026-08-19",0,0,0],["2026-08-20",0,0,0],["2026-08-21",0,0,0],["2026-08-22",0,0,0],["2026-08-23",0,0,0],["2026-08-24",0,0,0],["2026-08-25",0,0,0],["2026-08-26",0,0,0],["2026-08-27",0,0,0],["2026-08-28",0,0,0],["2026-08-29",0,0,0],["2026-08-30",0,0,0],["2026-08-31",0,0,0],["2026-09-01",0,0,0],["2026-09-02",0,0,0],["2026-09-03",0,0,0],["2026-09-04",0,0,0],["2026-09-05",0,0,0],["2026-09-06",0,0,0],["2026-09-07",0,0,0],["2026-09-08",0,0,0],["2026-09-09",0,0,0],["2026-09-10",0,0,0],["2026-09-11",0,0,0],["2026-09-12",0,0,0],["2026-09-13",0,0,0],["2026-09-14",0,0,0],["2026-09-15",0,0,0],["2026-09-16",0,0,0],["2026-09-17",0,0,0],["2026-09-18",0,0,0],["2026-09-19",0,0,0],["2026-09-20",0,0,0],["2026-09-21",0,0,0],["2026-09-22",0,0,0],["2026-09-23",0,0,0],["2026-09-24",0,0,0],["2026-09-25",0,0,0],["2026-09-26",0,0,0],["2026-09-27",0,0,0],["2026-09-28",0,0,0],["2026-09-29",0,0,0],["2026-09-30",0,0,0],["2026-10-01",0,0,0],["2026-10-02",0,0,0],["2026-10-03",0,0,0],["2026-10-04",0,0,0],["2026-10-05",0,0,0],["2026-10-06",0,0,0],["2026-10-07",0,0,0],["2026-10-08",0,0,0],["2026-10-09",0,0,0],["2026-10-10",0,0,0],["2026-10-11",3,46,2],["2026-10-12",24,6210,1534],["2026-10-13",1,251,12],["2026-10-14",0,0,0],["2026-10-15",0,0,0],["2026-10-16",1,142,6],["2026-10-17",1,26,7],["2026-10-18",9,2179,37],["2026-10-19",7,1074,53],["2026-10-20",16,2303,62],["2026-10-21",42,1603,66],["2026-10-22",2,173,0],["2026-10-23",28,5136,389],["2026-10-24",43,7043,209],["2026-10-25",8,6142,129],["2026-10-26",20,2677,233],["2026-10-27",22,10362,382],["2026-10-28",23,36707,387],["2026-10-29",29,21696,618],["2026-10-30",13,15896,715],["2026-10-31",8,2042,238],["2026-11-01",11,9490,63],["2026-11-02",32,931,133],["2026-11-03",19,6973,511],["2026-11-04",15,3505,8296]]};
+
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+// ---------- helpers ----------
+function fmtInt(n) { return n.toLocaleString("en-US"); }
+function parseDay(s) { const [y,m,d] = s.split("-").map(Number); return new Date(Date.UTC(y, m-1, d)); }
+function fmtDay(s) {
+  const d = parseDay(s);
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
+function setupCanvas(cv, hCss) {
+  const w = cv.clientWidth;
+  cv.style.height = hCss + "px";
+  cv.width = Math.round(w * DPR);
+  cv.height = Math.round(hCss * DPR);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  return { ctx, w, h: hCss };
+}
+function showTip(tip, html, x, y, holder) {
+  tip.innerHTML = html;
+  tip.style.opacity = "1";
+  const hw = holder.clientWidth;
+  const cx = Math.max(60, Math.min(hw - 60, x));
+  tip.style.left = cx + "px";
+  tip.style.top = Math.max(34, y) + "px";
+}
+function hideTip(tip) { tip.style.opacity = "0"; }
+
+// ---------- derived data ----------
+const daily = DATA.daily; // [date, commits, added, deleted]
+const N = daily.length;
+const cumAdded = new Array(N), cumCommits = new Array(N), cumNet = new Array(N);
+let ca = 0, cc = 0, cn = 0;
+for (let i = 0; i < N; i++) {
+  ca += daily[i][2]; cumAdded[i] = ca;
+  cc += daily[i][1]; cumCommits[i] = cc;
+  cn += daily[i][2] - daily[i][3]; cumNet[i] = cn;
+}
+const maxDayCommits = Math.max(...daily.map(d => d[1]));
+const maxDayAdded = Math.max(...daily.map(d => d[2]));
+const totalAdded = DATA.totals.lines_added;
+const totalDeleted = DATA.totals.lines_deleted;
+
+// Playback progress: 0..1 mapped over days
+let progress = reduced ? 1 : 0;
+function dayAt(p) { return Math.min(N - 1, Math.floor(p * N)); }
+
+// ---------- counters ----------
+const counters = [
+  { el: document.getElementById("nCommits"), value: () => cumCommits[dayAt(progress)] },
+  { el: document.getElementById("nLines"), value: () => cumAdded[dayAt(progress)] },
+  { el: document.getElementById("nPrs"), value: () => prMergedByDay(dayAt(progress)) },
+  { el: document.getElementById("nIssues"), value: () => issuesByDay(dayAt(progress)) },
+];
+// PRs/issues are weekly; map week -> day index of week start (approx by Monday)
+function weekStartDayIndex(isoWeek) {
+  const [y, w] = isoWeek.split("-W").map(Number);
+  const jan4 = new Date(Date.UTC(y, 0, 4));
+  const monday = new Date(jan4.getTime());
+  monday.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() + 6) % 7) + (w - 1) * 7);
+  const first = parseDay(daily[0][0]);
+  let idx = Math.round((monday - first) / 86400000);
+  return Math.max(0, Math.min(N - 1, idx));
+}
+const weeklyIdx = DATA.weekly.map(wk => ({ idx: weekStartDayIndex(wk.w), ...wk }));
+function prMergedByDay(di) {
+  let s = 0;
+  for (const w of weeklyIdx) { if (w.idx <= di) s += w.pr_merged; }
+  return s;
+}
+function issuesByDay(di) {
+  let s = 0;
+  for (const w of weeklyIdx) { if (w.idx <= di) s += w.iss_new; }
+  return s;
+}
+function renderCounters() {
+  for (const c of counters) c.el.textContent = fmtInt(c.value());
+}
+
+// ---------- Pulse chart ----------
+const cvPulse = document.getElementById("cvPulse");
+const tipPulse = document.getElementById("tipPulse");
+let pulseHover = -1;
+function drawPulse() {
+  const { ctx, w, h } = setupCanvas(cvPulse, 240);
+  const padL = 34, padR = 10, padT = 18, padB = 26;
+  const iw = w - padL - padR, ih = h - padT - padB;
+  const di = dayAt(progress);
+
+  // grid
+  ctx.strokeStyle = "rgba(236,229,211,.07)";
+  ctx.fillStyle = "rgba(151,144,126,.9)";
+  ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
+  ctx.lineWidth = 1;
+  const yMax = Math.max(8, Math.ceil(maxDayCommits * 1.1));
+  for (let g = 0; g <= 4; g++) {
+    const v = Math.round((yMax * g) / 4);
+    const y = padT + ih - (v / yMax) * ih;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    ctx.textAlign = "right"; ctx.fillText(String(v), padL - 6, y + 3);
+  }
+  // month labels
+  ctx.textAlign = "center";
+  let lastM = -1;
+  for (let i = 0; i < N; i++) {
+    const m = parseDay(daily[i][0]).getUTCMonth();
+    if (m !== lastM) {
+      lastM = m;
+      const x = padL + (i / (N - 1)) * iw;
+      ctx.fillStyle = "rgba(151,144,126,.85)";
+      ctx.fillText(parseDay(daily[i][0]).toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" }), x, h - 8);
+      ctx.strokeStyle = "rgba(236,229,211,.10)";
+      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ih); ctx.stroke();
+    }
+  }
+
+  const xOf = i => padL + (i / (N - 1)) * iw;
+  const upTo = pulseHover >= 0 ? pulseHover : di;
+
+  // flatline
+  const baseY = padT + ih;
+  ctx.strokeStyle = "rgba(93,89,78,.55)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padL, baseY); ctx.lineTo(padL + iw, baseY); ctx.stroke();
+
+  // ECG spikes up to cursor
+  for (let i = 0; i <= upTo; i++) {
+    const c = daily[i][1];
+    if (!c) continue;
+    const x = xOf(i);
+    const hh = (c / yMax) * ih;
+    const isHover = i === pulseHover;
+    ctx.strokeStyle = isHover ? "#8ff0c4" : "#5fd9a4";
+    ctx.lineWidth = isHover ? 2.4 : Math.max(1.2, iw / N * 0.55);
+    ctx.shadowColor = "rgba(95,217,164,.8)";
+    ctx.shadowBlur = isHover ? 14 : 6;
+    ctx.beginPath(); ctx.moveTo(x, baseY); ctx.lineTo(x, baseY - hh); ctx.stroke();
+    ctx.shadowBlur = 0;
+    // peak dot
+    ctx.fillStyle = isHover ? "#c9ffe6" : "#5fd9a4";
+    ctx.beginPath(); ctx.arc(x, baseY - hh, isHover ? 3.4 : 2, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // gap annotation
+  const gapA = xOf(daily.findIndex(d => d[0] === "2026-04-01"));
+  const gapB = xOf(daily.findIndex(d => d[0] === "2026-10-01"));
+  if (gapA > 0 && gapB > 0 && upTo > daily.findIndex(d => d[0] === "2026-04-01")) {
+    ctx.fillStyle = "rgba(93,89,78,.9)";
+    ctx.font = "italic 11px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.fillText("~ 6 quiet months", (gapA + gapB) / 2, baseY - 14);
+  }
+
+  // cursor
+  if (progress < 1 && pulseHover < 0) {
+    const x = xOf(di);
+    ctx.strokeStyle = "rgba(216,168,78,.85)";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(x, padT - 6); ctx.lineTo(x, baseY); ctx.stroke();
+    ctx.fillStyle = "#d8a84e";
+    ctx.beginPath(); ctx.arc(x, baseY, 3.5, 0, Math.PI * 2); ctx.fill();
+  }
+}
+
+// ---------- Terrain chart ----------
+const cvTerrain = document.getElementById("cvTerrain");
+const tipTerrain = document.getElementById("tipTerrain");
+let terrainHover = -1;
+let terrainMode = "cum";
+function drawTerrain() {
+  const { ctx, w, h } = setupCanvas(cvTerrain, 260);
+  const padL = 44, padR = 10, padT = 16, padB = 26;
+  const iw = w - padL - padR, ih = h - padT - padB;
+  const di = dayAt(progress);
+  const upTo = terrainHover >= 0 ? terrainHover : di;
+
+  const cum = terrainMode === "cum";
+  const yMax = cum ? totalAdded * 1.05 : maxDayAdded * 1.1;
+  ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
+
+  // grid
+  ctx.lineWidth = 1;
+  for (let g = 0; g <= 4; g++) {
+    const v = (yMax * g) / 4;
+    const y = padT + ih - (v / yMax) * ih;
+    ctx.strokeStyle = "rgba(236,229,211,.07)";
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    ctx.fillStyle = "rgba(151,144,126,.9)";
+    ctx.textAlign = "right";
+    ctx.fillText(v >= 1000 ? Math.round(v / 1000) + "k" : String(Math.round(v)), padL - 6, y + 3);
+  }
+  // month labels
+  ctx.textAlign = "center";
+  let lastM = -1;
+  for (let i = 0; i < N; i++) {
+    const m = parseDay(daily[i][0]).getUTCMonth();
+    if (m !== lastM) {
+      lastM = m;
+      const x = padL + (i / (N - 1)) * iw;
+      ctx.fillStyle = "rgba(151,144,126,.85)";
+      ctx.fillText(parseDay(daily[i][0]).toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" }), x, h - 8);
+      ctx.strokeStyle = "rgba(236,229,211,.10)";
+      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ih); ctx.stroke();
+    }
+  }
+
+  const xOf = i => padL + (i / (N - 1)) * iw;
+  const yOf = v => padT + ih - (v / yMax) * ih;
+
+  if (cum) {
+    // mountain silhouette
+    const grad = ctx.createLinearGradient(0, padT, 0, padT + ih);
+    grad.addColorStop(0, "rgba(216,168,78,.55)");
+    grad.addColorStop(1, "rgba(216,168,78,.03)");
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    for (let i = 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
+    ctx.lineTo(xOf(upTo), padT + ih);
+    ctx.lineTo(xOf(0), padT + ih);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+    // ridge line
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    for (let i = 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(cumAdded[i]));
+    ctx.strokeStyle = "#d8a84e";
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "rgba(216,168,78,.7)";
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    // summit marker
+    if (upTo > 0) {
+      ctx.fillStyle = "#f3d492";
+      ctx.beginPath(); ctx.arc(xOf(upTo), yOf(cumAdded[upTo]), 3.5, 0, Math.PI * 2); ctx.fill();
+    }
+  } else {
+    const bw = Math.max(1.2, (iw / N) * 0.62);
+    for (let i = 0; i <= upTo; i++) {
+      const a = daily[i][2], d = daily[i][3];
+      if (!a && !d) continue;
+      const x = xOf(i) - bw / 2;
+      const isHover = i === terrainHover;
+      ctx.fillStyle = isHover ? "#f3d492" : "rgba(216,168,78,.85)";
+      const hh = (a / yMax) * ih;
+      ctx.fillRect(x, padT + ih - hh, bw, hh);
+      if (d) {
+        ctx.fillStyle = "rgba(216,122,106,.8)";
+        const dh = Math.min((d / yMax) * ih, 40);
+        ctx.fillRect(x, padT + ih, bw, dh);
+      }
+    }
+  }
+
+  // cursor
+  if (progress < 1 && terrainHover < 0) {
+    const x = xOf(di);
+    ctx.strokeStyle = "rgba(216,168,78,.85)";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(x, padT - 4); ctx.lineTo(x, padT + ih); ctx.stroke();
+  }
+}
+
+// ---------- Flow chart (weekly PRs + issues) ----------
+const cvFlow = document.getElementById("cvFlow");
+const tipFlow = document.getElementById("tipFlow");
+let flowHover = -1;
+function drawFlow() {
+  const { ctx, w, h } = setupCanvas(cvFlow, 260);
+  const padL = 30, padR = 10, padT = 16, padB = 30;
+  const iw = w - padL - padR, ih = h - padT - padB;
+  const weeks = weeklyIdx;
+  const W = weeks.length;
+  const di = dayAt(progress);
+  const maxV = Math.max(...weeks.map(x => Math.max(x.pr_new, x.pr_merged, x.iss_new, x.iss_closed))) * 1.15;
+
+  ctx.font = "10px " + getComputedStyle(document.body).getPropertyValue("--mono");
+  for (let g = 0; g <= 4; g++) {
+    const v = Math.round((maxV * g) / 4);
+    const y = padT + ih - (v / maxV) * ih;
+    ctx.strokeStyle = "rgba(236,229,211,.07)";
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    ctx.fillStyle = "rgba(151,144,126,.9)";
+    ctx.textAlign = "right"; ctx.fillText(String(v), padL - 6, y + 3);
+  }
+
+  const slot = iw / W;
+  const bw = Math.min(14, slot / 5.2);
+  const series = [
+    { k: "pr_new", c: "#62c9da", off: -1.5 },
+    { k: "pr_merged", c: "#5fd9a4", off: -0.5 },
+    { k: "iss_new", c: "#d8a84e", off: 0.5 },
+    { k: "iss_closed", c: "#8a6f3c", off: 1.5 },
+  ];
+  ctx.textAlign = "center";
+  for (let wi = 0; wi < W; wi++) {
+    const wk = weeks[wi];
+    if (wk.idx > di && flowHover !== wi) {
+      // future week: faint axis label only
+    }
+    const cx = padL + slot * (wi + 0.5);
+    const reveal = flowHover === wi ? 1 : (wk.idx <= di ? 1 : 0);
+    for (const s of series) {
+      const v = wk[s.k];
+      const bh = (v / maxV) * ih * reveal;
+      const x = cx + s.off * (bw + 1.5) - bw / 2;
+      const isHover = flowHover === wi;
+      ctx.fillStyle = s.c;
+      ctx.globalAlpha = isHover ? 1 : 0.88;
+      if (bh > 0.5) {
+        ctx.beginPath();
+        const r = Math.min(3, bw / 2, bh);
+        ctx.roundRect(x, padT + ih - bh, bw, bh, [r, r, 0, 0]);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    // week labels: first and last few
+    ctx.fillStyle = flowHover === wi ? "#ece5d3" : "rgba(151,144,126,.85)";
+    if (wi % 2 === 0 || wi === W - 1) {
+      const [y, wn] = wk.w.split("-W");
+      ctx.fillText("W" + wn, cx, h - 14);
+    }
+    if (flowHover === wi) {
+      ctx.strokeStyle = "rgba(236,229,211,.35)";
+      ctx.strokeRect(padL + slot * wi + 1, padT - 4, slot - 2, ih + 8);
+    }
+  }
+  ctx.fillStyle = "rgba(93,89,78,.9)";
+  ctx.textAlign = "center";
+  ctx.font = "italic 10.5px Georgia, serif";
+  ctx.fillText("ISO weeks, 2026", padL + iw / 2, h - 2);
+}
+
+// ---------- tooltips / scrubbing ----------
+function bindScrub(cv, tip, holder, onPos) {
+  let active = false;
+  function handle(e) {
+    const r = cv.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    onPos(x, y, r);
+  }
+  cv.addEventListener("pointerdown", e => { active = true; cv.setPointerCapture(e.pointerId); handle(e); });
+  cv.addEventListener("pointermove", e => { if (e.pointerType === "mouse" || active) handle(e); });
+  cv.addEventListener("pointerup", () => { active = false; });
+  cv.addEventListener("pointerleave", () => { active = false; });
+}
+const holderPulse = cvPulse.parentElement;
+const holderTerrain = cvTerrain.parentElement;
+const holderFlow = cvFlow.parentElement;
+
+bindScrub(cvPulse, tipPulse, holderPulse, (x, y, r) => {
+  const padL = 34, padR = 10;
+  const iw = r.width - padL - padR;
+  const i = Math.max(0, Math.min(N - 1, Math.round(((x - padL) / iw) * (N - 1))));
+  pulseHover = i;
+  const d = daily[i];
+  showTip(tipPulse,
+    `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${d[1]} commit${d[1] === 1 ? "" : "s"}`,
+    x, y, holderPulse);
+  drawPulse();
+});
+cvPulse.addEventListener("pointerleave", () => { pulseHover = -1; hideTip(tipPulse); drawPulse(); });
+
+bindScrub(cvTerrain, tipTerrain, holderTerrain, (x, y, r) => {
+  const padL = 44, padR = 10;
+  const iw = r.width - padL - padR;
+  const i = Math.max(0, Math.min(N - 1, Math.round(((x - padL) / iw) * (N - 1))));
+  terrainHover = i;
+  const d = daily[i];
+  const body = terrainMode === "cum"
+    ? `${fmtInt(cumAdded[i])} lines added in total`
+    : `+${fmtInt(d[2])} / -${fmtInt(d[3])} lines`;
+  showTip(tipTerrain, `<span class="t-date">${fmtDay(d[0])}</span> &middot; ${body}`, x, y, holderTerrain);
+  drawTerrain();
+});
+cvTerrain.addEventListener("pointerleave", () => { terrainHover = -1; hideTip(tipTerrain); drawTerrain(); });
+
+bindScrub(cvFlow, tipFlow, holderFlow, (x, y, r) => {
+  const padL = 30, padR = 10;
+  const iw = r.width - padL - padR;
+  const W = weeklyIdx.length;
+  const wi = Math.max(0, Math.min(W - 1, Math.floor(((x - padL) / iw) * W)));
+  flowHover = wi;
+  const wk = weeklyIdx[wi];
+  showTip(tipFlow,
+    `<span class="t-date">${wk.w}</span> &middot; PR +${wk.pr_new}/&#10003;${wk.pr_merged} &middot; issues +${wk.iss_new}/&#10003;${wk.iss_closed}`,
+    x, y, holderFlow);
+  drawFlow();
+});
+cvFlow.addEventListener("pointerleave", () => { flowHover = -1; hideTip(tipFlow); drawFlow(); });
+
+// ---------- toggles ----------
+document.getElementById("tgCum").addEventListener("click", () => {
+  terrainMode = "cum";
+  document.getElementById("tgCum").setAttribute("aria-pressed", "true");
+  document.getElementById("tgDay").setAttribute("aria-pressed", "false");
+  drawTerrain();
+});
+document.getElementById("tgDay").addEventListener("click", () => {
+  terrainMode = "day";
+  document.getElementById("tgCum").setAttribute("aria-pressed", "false");
+  document.getElementById("tgDay").setAttribute("aria-pressed", "true");
+  drawTerrain();
+});
+
+// ---------- replay ----------
+const replayBtn = document.getElementById("replay");
+const replayLabel = document.getElementById("replayLabel");
+let animId = null;
+function drawAll() {
+  renderCounters();
+  drawPulse();
+  drawTerrain();
+  drawFlow();
+}
+function play() {
+  if (animId) cancelAnimationFrame(animId);
+  progress = 0;
+  replayBtn.setAttribute("aria-pressed", "true");
+  replayLabel.textContent = "Replaying...";
+  const DURATION = 9000;
+  const t0 = performance.now();
+  function frame(t) {
+    const raw = Math.min(1, (t - t0) / DURATION);
+    // slight ease-out so the final burst settles gently
+    progress = 1 - Math.pow(1 - raw, 1.35);
+    drawAll();
+    if (raw < 1) {
+      animId = requestAnimationFrame(frame);
+    } else {
+      progress = 1;
+      drawAll();
+      replayBtn.setAttribute("aria-pressed", "false");
+      replayLabel.textContent = "Replay the story";
+      animId = null;
+    }
+  }
+  animId = requestAnimationFrame(frame);
+}
+replayBtn.addEventListener("click", play);
+
+// ---------- boot ----------
+drawAll();
+if (!reduced) {
+  // gentle intro: animate once on load
+  setTimeout(play, 500);
+}
+let rT;
+window.addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(drawAll, 120); });
+</script>
+</body>
+</html>
