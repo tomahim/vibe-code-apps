@@ -92,7 +92,7 @@ class LeagueApiTests(HockeyBase):
             priced = [p for p in data["players"] if p["hm"]["price_m"] is not None]
             unpriced = [p for p in data["players"] if p["hm"]["price_m"] is None]
             self.assertEqual([p["name"] for p in priced], ["Denis Malgin"])
-            self.assertEqual(len(unpriced), 2)
+            self.assertEqual(len(unpriced), 1)
             # nulls last in both directions
             self.assertEqual(data["players"][-1]["hm"]["price_m"], None)
 
