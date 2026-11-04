@@ -3,14 +3,16 @@ import json
 from datetime import date
 from urllib.parse import urlsplit
 
-from django.db import transaction
-from django.db.models import Count, Q
+from django.db import IntegrityError, transaction
+from django.db.models import Count, Max, Q
 from django.db.models.functions import TruncMonth
 from django.http import JsonResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_http_methods
 from django.core.exceptions import ValidationError
+from django.utils.text import slugify
+import re
 
 from apps.accounts.decorators import jwt_required
 from apps.accounts.views import same_origin
@@ -70,6 +72,7 @@ def taxonomy(request):
                                          "types": sorted(c.object_types.values_list("slug", flat=True))}
                                         for c in Category.objects.prefetch_related("object_types")],
                          "tags": list(Tag.objects.values("slug", "name", "is_system")),
+                         "can_manage_taxonomy": request.user.is_staff,
                          "months": [{"month": row["month"].strftime("%Y-%m"), "count": row["count"]}
                                     for row in Content.objects.filter(owner=request.user).annotate(month=TruncMonth("saved_on"))
                                     .values("month").annotate(count=Count("id")).order_by("-month")]})
@@ -215,3 +218,67 @@ def assign_category(request, content_id):
         return JsonResponse(item(owned(request.user).get(pk=content_id), detail=True))
     except (PermissionError, ValueError, TypeError, Category.DoesNotExist) as exc:
         return error(exc if isinstance(exc, PermissionError) else ValueError("Unknown category or invalid input."))
+
+
+@never_cache
+@csrf_exempt
+@require_http_methods(["POST"])
+@jwt_required
+def create_taxonomy(request, kind):
+    """Create shared vocabulary only. No renames, deletes or scope edits."""
+    if not request.user.is_staff:
+        return JsonResponse({"error": "Only staff can manage the shared vocabulary."}, status=403)
+    models = {"categories": Category, "tags": Tag, "types": ObjectType}
+    model = models.get(kind)
+    if model is None:
+        return JsonResponse({"error": "Unknown vocabulary kind."}, status=404)
+    try:
+        data = body(request)
+        allowed = {"name", "slug"} | ({"types"} if kind == "categories" else set()) | (
+            {"description", "icon"} if kind == "types" else set())
+        if data.keys() - allowed:
+            raise ValueError("Unsupported fields. Existing vocabulary cannot be changed here.")
+        name = data.get("name")
+        if not isinstance(name, str) or not name.strip() or len(name.strip()) > 100:
+            raise ValueError("Enter a name of 1 to 100 characters.")
+        name = name.strip()
+        slug = data.get("slug", slugify(name))
+        limit = model._meta.get_field("slug").max_length
+        if not isinstance(slug, str) or len(slug) > limit or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            raise ValueError(f"Use a key of 1 to {limit} lowercase letters, numbers and single hyphens.")
+        # Navigation slugs remain categories, never topic tags. System categories
+        # are provisioned by migrations, not by this create-only endpoint.
+        reserved = {"inbox", "archive", "favorite"}
+        if (kind == "categories" and slug in reserved) or (kind == "tags" and slug in reserved | {"promising", "to-improve", "inspiration"}):
+            raise ValueError("This key is reserved for navigation categories. Choose another key.")
+        values = {"slug": slug, "name": name}
+        types = []
+        if kind == "categories":
+            slugs = data.get("types", [])
+            if not isinstance(slugs, list) or len(slugs) > 100 or any(not isinstance(v, str) for v in slugs):
+                raise ValueError("Choose a list of active object types.")
+            types = list(ObjectType.objects.filter(slug__in=slugs, is_active=True))
+            if {t.slug for t in types} != set(slugs):
+                raise ValueError("An object type no longer exists or is inactive. Reload and try again.")
+        if kind == "types":
+            for field, limit in [("description", 2000), ("icon", 64)]:
+                value = data.get(field, "")
+                if not isinstance(value, str) or len(value) > limit:
+                    raise ValueError(f"{field.capitalize()} must be text of at most {limit} characters.")
+                values[field] = value.strip()
+        with transaction.atomic():
+            if model.objects.filter(slug__iexact=slug).exists():
+                return JsonResponse({"error": "This key already exists. Choose another key."}, status=409)
+            values["position"] = (model.objects.aggregate(last=Max("position"))["last"] or 0) + 1
+            entry = model(**values)
+            entry.full_clean()
+            entry.save()
+            if kind == "categories":
+                entry.object_types.set(types)
+        return JsonResponse({"slug": entry.slug, "name": entry.name}, status=201)
+    except IntegrityError:
+        return JsonResponse({"error": "This key already exists. Reload before trying again."}, status=409)
+    except ValidationError:
+        return JsonResponse({"error": "Invalid vocabulary fields. Check the name and key."}, status=400)
+    except (PermissionError, ValueError, TypeError, UnicodeDecodeError) as exc:
+        return error(exc)
