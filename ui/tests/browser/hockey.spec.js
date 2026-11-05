@@ -15,7 +15,7 @@ async function setup(page,{empty=false,many=false}={}){
   if(path==='teams/') data={teams:empty?[]:[{id:1,name:'Fixture Club'},{id:2,name:'Other Club'}]};
   else if(path==='players/') {
    const ord=url.searchParams.get('sort');requests.push(ord);
-   let rows=roster.filter(p=>(!url.searchParams.get('q') || p.name.toLowerCase().includes(url.searchParams.get('q').toLowerCase())) && (!url.searchParams.get('team') || String(p.team.id)===url.searchParams.get('team')));
+   let rows=roster.filter(p=>(!url.searchParams.get('q') || p.name.toLowerCase().includes(url.searchParams.get('q').toLowerCase())) && (!url.searchParams.get('team') || String(p.team.id)===url.searchParams.get('team')) && (!url.searchParams.get('position') || p.position===url.searchParams.get('position')));
    if(ord){const key=ord.replace(/^-/,''),dir=ord.startsWith('-')?-1:1,val=pl=>key==='name'?pl.name:key==='price'?(pl.hm&&pl.hm.price_m!=null?Number(pl.hm.price_m):null):(pl.season?pl.season[key]:null);rows=rows.slice().sort((a,b)=>{const va=val(a),vb=val(b);if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return va<vb?-dir:va>vb?dir:0;});}
    data={players:empty?[]:rows};
   }
@@ -43,6 +43,24 @@ test('search, club filters, selection, comparison graphs, details and refresh',a
 test('rosters and simulation suppress unknown-cost budget, never make real trade',async({page})=>{
  await setup(page);await page.goto('/apps/hockey/teams');await page.getByRole('button',{name:/Fixture team/}).click();await expect(page.getByRole('cell',{name:'Unknown',exact:true})).toBeVisible();await page.screenshot({path:'/downloads/hockey-mobile-teams.png',fullPage:true});await page.getByRole('button',{name:'Plan a transfer'}).click();
  await page.getByRole('checkbox',{name:'Fixture Forward F'}).check();await page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true}).check();await page.getByRole('button',{name:'Save what-if (no real trade)'}).click();await expect(page.getByRole('heading',{name:'Saved: Transfer what-if'})).toBeVisible();await expect(page.getByText('Budget unavailable: missing costs or current HM prices.')).toBeVisible();await expect(page.getByText(/Estimated budget after:/)).toHaveCount(0);await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');await page.screenshot({path:'/downloads/hockey-simulator.png',fullPage:true});await page.reload();await page.getByLabel('Your team',{exact:true}).selectOption('10');await expect(page.locator('.hk-sim-history li')).toHaveCount(1);await expect(page.locator('.hk-sim-history')).toContainText('Fixture Incoming');
+});
+test('simulator incoming list has the same filters and sorting as the player database',async({page})=>{
+ const requests=await setup(page);await page.goto('/apps/hockey/simulator');await page.getByLabel('Your team',{exact:true}).selectOption('10');
+ await expect(page.getByLabel('Find a player')).toBeVisible();await expect(page.getByLabel('Club',{exact:true})).toBeVisible();await expect(page.getByLabel('Position',{exact:true})).toBeVisible();await expect(page.getByLabel('Sort by',{exact:true})).toBeVisible();await expect(page.getByLabel('Sort direction',{exact:true})).toBeVisible();
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Forward',exact:true})).toHaveCount(0);
+ await page.getByLabel('Sort by',{exact:true}).selectOption('points');
+ await expect.poll(()=>requests[requests.length-1]).toBe('-points');
+ await expect(page.locator('.hk-player-table tbody tr').first()).toContainText('Fixture Defender');
+ await page.getByLabel('Club',{exact:true}).selectOption('2');
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true})).toBeVisible();
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Defender',exact:true})).toHaveCount(0);
+ await page.getByLabel('Position',{exact:true}).selectOption('G');
+ await expect(page.getByText(/No players found/)).toBeVisible();
+ await page.getByLabel('Position',{exact:true}).selectOption('');await page.getByLabel('Club',{exact:true}).selectOption('');
+ await page.getByLabel('Find a player').fill('Rookie');
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Rookie',exact:true})).toBeVisible();
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true})).toHaveCount(0);
+ await page.screenshot({path:'/downloads/hockey-simulator-filters.png',fullPage:true});
 });
 test('honest empty states and mobile screenshots',async({page})=>{
  await setup(page,{empty:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');await expect(page.getByText(/No players found/)).toBeVisible();await page.getByRole('link',{name:'Standings',exact:true}).click();await expect(page).toHaveURL(/apps\/hockey\/standings$/);await expect(page.getByText(/Official standings have not/)).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
