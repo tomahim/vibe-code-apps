@@ -63,6 +63,28 @@ def mmss_to_seconds(value):
 
 
 
+
+
+def parse_start(row, state):
+    """Official start instant. The results table's date/time strings are local
+    Swiss wall time, but the state cell carries startDateTime as ISO WITH the
+    correct offset (CET +01:00, CEST +02:00) - parse that so stored instants
+    are right in both winter and summer. Fall back to the legacy wall-time
+    parse (interpreted under TIME_ZONE) when the cell is absent or malformed."""
+    raw = (state or {}).get("startDateTime")
+    if raw:
+        try:
+            start = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+            if start.tzinfo is None:
+                start = timezone.make_aware(start)
+            return start
+        except ValueError:
+            pass  # fall through to the legacy wall-time parse
+    day = datetime.strptime(row[1], "%d.%m.%Y").date()
+    hh, mm = (row[2].split(":") + ["0"])[:2]
+    return timezone.make_aware(datetime(day.year, day.month, day.day,
+                                        int(hh), int(mm)))
+
 def result_cells(row):
     """Identify the cells of a results-table row by content, not position
     (column order differs between the default and the Date-filtered query)."""
@@ -182,13 +204,10 @@ class Command(BaseCommand):
         objs = []
         for row in rows:
             try:
-                day = datetime.strptime(row[1], "%d.%m.%Y").date()
-                hh, mm = (row[2].split(":") + ["0"])[:2]
-                start = timezone.make_aware(datetime(day.year, day.month, day.day,
-                                                     int(hh), int(mm)))
+                result, state, link, ot_flag = result_cells(row)
+                start = parse_start(row, state)
                 home = teams[row[3]["id"]]
                 away = teams[row[4]["id"]]
-                result, state, link, ot_flag = result_cells(row)
                 if not link:
                     continue
                 objs.append(Game(
