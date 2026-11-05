@@ -62,6 +62,23 @@ test('simulator incoming list has the same filters and sorting as the player dat
  await expect(page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true})).toHaveCount(0);
  await page.screenshot({path:'/downloads/hockey-simulator-filters.png',fullPage:true});
 });
+test('player lists paginate 25 per page, selection survives page changes',async({page})=>{
+ await setup(page,{many:true});await page.goto('/apps/hockey/players');
+ await page.getByLabel('Sort direction',{exact:true}).selectOption('asc');
+ await expect(page.locator('.hk-player-table tbody tr')).toHaveCount(25);
+ const pager=page.getByRole('navigation',{name:'Player list pages'});await expect(pager).toContainText('Page 1 of 3');
+ await page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true}).check();
+ await pager.getByRole('button',{name:'Next page'}).click();await expect(pager).toContainText('Page 2 of 3');
+ await expect(page.getByText('1 player selected across filters')).toBeVisible();
+ await pager.getByRole('button',{name:'Next page'}).click();await expect(pager).toContainText('Page 3 of 3');
+ await expect(page.locator('.hk-player-table tbody tr')).toHaveCount(10);
+ await expect(pager.getByRole('button',{name:'Next page'})).toBeDisabled();
+ await pager.getByRole('button',{name:'Previous page'}).click();await pager.getByRole('button',{name:'Previous page'}).click();await expect(pager).toContainText('Page 1 of 3');
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true})).toBeChecked();
+ await page.getByLabel('Find a player').fill('Player 01');
+ await expect(page.locator('.hk-player-table tbody tr')).toHaveCount(1);await expect(pager).toHaveCount(0);
+ await page.screenshot({path:'/downloads/hockey-pagination.png',fullPage:true});
+});
 test('honest empty states and mobile screenshots',async({page})=>{
  await setup(page,{empty:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');await expect(page.getByText(/No players found/)).toBeVisible();await page.getByRole('link',{name:'Standings',exact:true}).click();await expect(page).toHaveURL(/apps\/hockey\/standings$/);await expect(page.getByText(/Official standings have not/)).toBeVisible();await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
  await page.screenshot({path:'/downloads/hockey-mobile-empty.png',fullPage:true});
@@ -85,8 +102,8 @@ test('successful sign-in returns to hockey and rejects external next URL',async(
 
 test('selection bar stays within reach while scrolling a long table',async({page})=>{
  await setup(page,{many:true});await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');
- await expect(page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true})).toBeVisible();
- await page.getByRole('checkbox',{name:'Select Fixture Player 01',exact:true}).check();
+ await expect(page.getByRole('checkbox',{name:'Select Fixture Player 60',exact:true})).toBeVisible();
+ await page.getByRole('checkbox',{name:'Select Fixture Player 60',exact:true}).check();
  const bar=page.getByRole('region',{name:'Player selection'});
  await expect(bar).toBeVisible();await expect(bar).toContainText('1 player selected across filters');
  await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
@@ -101,7 +118,7 @@ test('selection bar stays within reach while scrolling a long table',async({page
  await expect(page.getByRole('button',{name:'Compare selected'})).toHaveCount(0);
  await expect(bar).toBeVisible();await expect(bar.getByRole('button',{name:'Clear selection'})).toBeVisible();
  await page.getByRole('link',{name:'Player database',exact:true}).click();
- await page.getByRole('checkbox',{name:'Select Fixture Player 02',exact:true}).check();
+ await page.getByRole('checkbox',{name:'Select Fixture Player 59',exact:true}).check();
  await page.getByRole('link',{name:'Compare players',exact:true}).click();
  await expect(page.getByRole('img',{name:/Weekly points/})).toBeVisible();
  await page.evaluate(()=>window.scrollTo(0,0));
