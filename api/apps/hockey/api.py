@@ -129,6 +129,26 @@ def latest_hm():
     return {s.player_id: s for s in ranked}
 
 
+def latest_hm_pair_snapshots():
+    """Most recent HM snapshot per goalie pair, keyed by HM asset id."""
+    ranked = HMPairSnapshot.objects.select_related("pair").annotate(
+        rnk=Window(expression=Rank(), partition_by=[F("pair_id")],
+                   order_by=F("captured_on").desc())
+    ).filter(rnk=1)
+    return {s.pair.hm_asset_id: s for s in ranked}
+
+
+def hm_roster_dict(snap):
+    """HM metrics for a My teams roster row (current price, season points,
+    per-match average). No snapshot stays null - never an invented zero."""
+    return {
+        "price_m": str(snap.hm_price_m) if snap and snap.hm_price_m is not None else None,
+        "points_season": snap.hm_points_season if snap else None,
+        "points_avg": str(snap.hm_points_avg) if snap and snap.hm_points_avg is not None else None,
+        "captured_on": snap.captured_on.isoformat() if snap else None,
+    }
+
+
 def player_dict(p, season, totals, memberships, hm, injuries=None):
     t = totals.get(p.licence_id, {})
     m = memberships.get(p.licence_id)
@@ -317,26 +337,33 @@ def compare(request):
 
 # ---- Fantasy (owner-scoped) ----
 
-def team_dict(t, with_roster=False):
+def team_dict(t, with_roster=False, with_hm=False):
+    """Serialize a fantasy team. with_hm adds each roster player's latest HM
+    snapshot (current price, season points, per-match average) and each pair's
+    latest snapshot. Own-team views only: shared read-only views never get it."""
     data = {"id": t.pk, "name": t.name, "created_at": t.created_at.isoformat(),
             "roster_size": t.roster.count(),
             "pair_count": t.pair_entries.count()}
     if with_roster:
         entries = list(t.roster.select_related("player"))
         injuries = latest_injuries([e.player_id for e in entries])
+        hm = latest_hm() if with_hm else {}
+        pair_hm = latest_hm_pair_snapshots() if with_hm else {}
         data["roster"] = [
             {"player": e.player_id, "name": str(e.player), "slot": e.position_slot,
              "acquired_price_m": str(e.acquired_price_m) if e.acquired_price_m is not None else None,
              "acquired_on": e.acquired_on.isoformat() if e.acquired_on else None,
              "source": e.source,
              "nationality": nationality_dict(e.player),
-             "injury": injury_dict(injuries.get(e.player_id))}
+             "injury": injury_dict(injuries.get(e.player_id)),
+             **({"hm": hm_roster_dict(hm.get(e.player_id))} if with_hm else {})}
             for e in entries
         ]
         data["pair_entries"] = [
             {"label": pe.label, "hm_asset_id": pe.hm_asset_id,
              "current_price_m": str(pe.current_price_m) if pe.current_price_m is not None else None,
-             "source": pe.source}
+             "source": pe.source,
+             **({"snapshot": hm_roster_dict(pair_hm.get(pe.hm_asset_id))} if with_hm else {})}
             for pe in t.pair_entries.all()
         ]
     return data
@@ -389,7 +416,7 @@ def my_team_detail(request, team_id):
     if request.method == "DELETE":
         t.delete()
         return JsonResponse({"deleted": True})
-    return JsonResponse(team_dict(t, with_roster=True))
+    return JsonResponse(team_dict(t, with_roster=True, with_hm=True))
 
 
 @jwt_required
@@ -410,7 +437,7 @@ def my_team_roster(request, team_id):
         return err("Unknown player.", 404)
     if request.method == "DELETE":
         RosterEntry.objects.filter(team=t, player=player).delete()
-        return JsonResponse(team_dict(t, with_roster=True))
+        return JsonResponse(team_dict(t, with_roster=True, with_hm=True))
     if t.roster.count() + t.pair_entries.count() >= 22:
         return err("Roster is full (22 players; HM counts each goalie duo as one player).", 409)
     price = body.get("acquired_price_m")
@@ -425,7 +452,7 @@ def my_team_roster(request, team_id):
     )
     if not created:
         return err("Player already in this roster.", 409)
-    return JsonResponse(team_dict(t, with_roster=True), status=201)
+    return JsonResponse(team_dict(t, with_roster=True, with_hm=True), status=201)
 
 
 @jwt_required
