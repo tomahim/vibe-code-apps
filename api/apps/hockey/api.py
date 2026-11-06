@@ -359,7 +359,6 @@ def my_teams(request):
             data = team_dict(share.team, with_roster=True)
             data["read_only"] = True
             data["owner_label"] = share.team.owner.username
-            data["granted_by"] = share.granted_by
             shared.append(data)
         return JsonResponse({
             "teams": [team_dict(t) for t in
