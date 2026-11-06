@@ -28,3 +28,22 @@ test('app omits the requested model and readout disclaimer and ships no remote c
   assert.match(engine, /three/);
   assert.doesNotMatch(engine, /fetch\(|https?:\/\//);
 });
+
+const { GLOSSARY_CATEGORIES, GLOSSARY_TERMS } = await import(new URL('glossary.js', base));
+test('glossary has unique categories, complete bilingual cards, sources and image attribution', () => {
+  const ids = new Set(GLOSSARY_CATEGORIES.map(c => c.id));
+  assert.equal(ids.size, GLOSSARY_CATEGORIES.length);
+  assert.equal(new Set(GLOSSARY_TERMS.map(t => t.id)).size, GLOSSARY_TERMS.length);
+  for (const t of GLOSSARY_TERMS) {
+    assert.ok(ids.has(t.category));
+    for (const lang of ['fr', 'en']) {
+      assert.ok(t[lang].term && t[lang].definition.length > 30);
+      assert.match(t[lang].source, /^https:\/\//);
+    }
+    assert.match(t.image.url, /^https:\/\//);
+    assert.match(t.image.file, /^https:\/\/commons.wikimedia.org\/wiki\/File:/);
+    assert.ok(t.image.credit && t.image.alt);
+    assert.match(t.image.license, /^(CC BY|Public domain)/);
+  }
+  for (const id of ['affleurement','gisement','schiste','granite','argile','gres','ravinement','lithosphere']) assert.ok(GLOSSARY_TERMS.some(t => t.id === id), id);
+});

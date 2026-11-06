@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MINERALS } from './minerals';
+import { Glossary } from './Glossary';
 import { SpecimenCanvas } from './SpecimenCanvas';
 import './lithotheque.css';
 
@@ -32,6 +33,7 @@ function SourceList({ m }) {
 }
 
 export default function Lithotheque({ onHome }) {
+    const [view, setView] = useState('catalogue');
     const [sel, setSel] = useState(null);
     const [group, setGroup] = useState('All');
     const [tab, setTab] = useState('Identity');
@@ -49,11 +51,12 @@ export default function Lithotheque({ onHome }) {
                     <span className="litho-brand-sub">The bench</span>
                 </div>
                 <nav className="litho-topnav">
-                    {sel && <button className="litho-navbtn" onClick={() => setSel(null)}>Catalogue</button>}
+                    <button className="litho-navbtn" aria-pressed={view === 'catalogue'} onClick={() => { setView('catalogue'); setSel(null); }}>Catalogue</button>
+                    <button className="litho-navbtn" aria-pressed={view === 'glossary'} onClick={() => setView('glossary')}>Glossaire · Glossary</button>
                     <button className="litho-navbtn ghost" onClick={onHome}>← Gallery</button>
                 </nav>
             </header>
-            {!sel ? (
+            {view === 'glossary' ? <main><Glossary /></main> : !sel ? (
                 <main className="litho-cat">
                     <div className="litho-catbar">
                         <span className="litho-cat-count">{list.length} specimens</span>

@@ -20,3 +20,12 @@ The interface is the "Bench" direction Thomas picked from the three design studi
 ## Data and sources
 
 Six starter species (kyanite, nepheline, quartz, pyrite, fluorite, calcite) in `minerals.js`, chosen so the catalogue filters and dossier tabs can be judged on real content. Facts are species-level references from the sources linked in each dossier (Mindat, Handbook of Mineralogy, Geology.com, Wikipedia), checked 2026-11-03. Text is original, not copied from these publications.
+
+
+## Bilingual glossary
+
+The Glossaire / Glossary button opens static two-sided cards: French first, English via a touch/keyboard-accessible language button. Search matches either language, ignoring accents. Seven broad category tabs group the entries. Definitions, source links and image credits ship in `glossary.js`; images are embedded remote Wikimedia URLs (internet needed for images, with an unavailable-image fallback). No API, backend, database or upload storage is used.
+
+The initial set includes Thomas's GEO terms and a small starter vocabulary chosen to populate the themes. Sources are linked per language; every image links to its Commons file page with author and reusable license. Images generally use Commons-generated 640px thumbnails; the small andesite and gabbro originals are embedded directly because their thumbnail endpoints returned rate errors during validation. The content is short original wording, not copied article text.
+
+When Thomas says `GEO <word>`, add the bilingual term and definition under the relevant theme, with a sourced and licensed representative image. Commas separate multiple entries. Check existing FR/EN terms before adding so repeats update rather than duplicate. This is a conversational addition convention, not a command parsed in the app. Future additions remain normal source-code changes and deployments.

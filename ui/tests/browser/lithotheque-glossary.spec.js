@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+for (const width of [393, 1440]) {
+ test(`bilingual glossary navigation and readable cards at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({width, height: 900});
+  await page.goto('/apps/lithotheque');
+  await page.getByRole('button', {name:'Glossaire · Glossary', exact:true}).click();
+  await expect(page.getByRole('heading', {name:'Glossaire géologique'})).toBeVisible();
+  const card = page.locator('[data-term="affleurement"]');
+  await expect(card.getByRole('heading')).toHaveText('Affleurement');
+  await expect(card.getByRole('link', {name:'Source',exact:true})).toHaveAttribute('href','https://fr.wikipedia.org/wiki/Affleurement');
+  await card.getByRole('button', {name:/read in English/}).click();
+  await expect(card.getByRole('heading')).toHaveText('Outcrop');
+  await expect(card.getByRole('link', {name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Outcrop');
+  await card.getByRole('button').focus(); await page.keyboard.press('Enter');
+  await expect(card.getByRole('heading')).toHaveText('Affleurement');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path:`/downloads/lithotheque-glossary-fr-${width}.png`});
+  await card.screenshot({path:`/downloads/lithotheque-card-fr-${width}.png`, animations: 'disabled'});
+  await card.getByRole('button').click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path:`/downloads/lithotheque-glossary-en-${width}.png`});
+  await card.screenshot({path:`/downloads/lithotheque-card-en-${width}.png`, animations: 'disabled'});
+  await page.getByRole('button', {name:'Roches & sédiments',exact:true}).click();
+  await expect(page.locator('.gcard')).toHaveCount(15);
+  await page.getByRole('searchbox').fill('gres');
+  await expect(page.getByRole('heading', {name:'Grès',exact:true})).toBeVisible();
+  await expect(page.locator('.gcard')).toHaveCount(1);
+  await page.getByRole('searchbox').fill('sandstone');
+  await expect(page.locator('.gcard')).toHaveCount(1);
+  await page.getByRole('searchbox').fill('zzzz'); await expect(page.getByText('Aucun mot trouvé · No terms found.')).toBeVisible();
+  await page.getByRole('searchbox').fill('');
+  await page.getByRole('button', {name:'Planète Terre',exact:true}).click();
+  await expect(page.getByRole('heading', {name:'Lithosphère',exact:true})).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('button', {name:'Catalogue',exact:true}).click();
+  await expect(page.locator('.litho-benchcard')).toHaveCount(6);
+ });
+}
