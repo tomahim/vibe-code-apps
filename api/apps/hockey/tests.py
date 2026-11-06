@@ -615,3 +615,86 @@ class InjuryOrderingAndMatchingTests(TestCase):
         # club mention disambiguates to the Kloten Wolf only
         reports = InjuryReport.objects.filter(source_url__endswith="with-club")
         self.assertEqual([r.player_id for r in reports], [self.wolf_k.licence_id])
+
+
+class SyncInjuriesParserTests(TestCase):
+    """parse_medicals_listing against listing fixtures that mirror the live
+    layout slots: featured h2, hero h3, list h4, duplicate hrefs across
+    slots, non-medical links, and class attributes with extra tokens."""
+
+    FIXTURE = """
+    <article class="raxo-item-top raxo-category-id23"><div class="raxo-wrap">
+      <div class="raxo-content">
+        <h2 class="raxo-title">
+          <a href="/en/shn/medical/featured-out-for-weeks">Featured out for weeks</a>
+        </h2>
+        <span class="raxo-date">04.11.2026</span>
+      </div>
+    </article>
+    <article class="raxo-hero-item">
+      <div class="raxo-content">
+        <h3 class="raxo-title">
+          <a href="/en/shn/medical/hero-day-to-day">Hero day-to-day</a>
+        </h3>
+        <span class="raxo-date">30.10.2026</span>
+      </div>
+    </article>
+    <article class="raxo-item-nor raxo-category-id23"><div class="raxo-wrap">
+      <div class="raxo-content">
+        <h4 class="raxo-title"><a href="/en/shn/medical/hero-day-to-day">Hero day-to-day</a></h4>
+        <span class="raxo-date">30.10.2026</span>
+      </div>
+    </article>
+    <article class="raxo-item-nor raxo-category-id23"><div class="raxo-wrap">
+      <div class="raxo-content">
+        <h4 class="raxo-title extra-token"><a href="/en/shn/medical/list-injured">List injured</a></h4>
+        <span class="raxo-date">28.10.2026</span>
+      </div>
+    </article>
+    <article class="raxo-item-nor raxo-category-id23"><div class="raxo-wrap">
+      <div class="raxo-content">
+        <h4 class="raxo-title"><a href="/en/shn/medical/old-entry">Too old</a></h4>
+        <span class="raxo-date">01.08.2026</span>
+      </div>
+    </article>
+    <article class="raxo-item-top raxo-category-id88"><div class="raxo-wrap">
+      <h2 class="raxo-title"><a href="/en/shb/podcasts/episode-9">Podcast, not medical</a></h2>
+      <span class="raxo-date">03.11.2026</span>
+    </article>
+    """
+
+    def test_extracts_all_heading_levels_deduped(self):
+        from apps.hockey.management.commands.sync_hockey import (
+            parse_medicals_listing)
+        entries = parse_medicals_listing(self.FIXTURE, date(2026, 9, 1))
+        urls = [e["url"] for e in entries]
+        self.assertEqual(len(urls), len(set(urls)))  # deduped
+        self.assertIn("https://swisshockeynews.ch/en/shn/medical/featured-out-for-weeks", urls)
+        self.assertIn("https://swisshockeynews.ch/en/shn/medical/hero-day-to-day", urls)
+        self.assertIn("https://swisshockeynews.ch/en/shn/medical/list-injured", urls)
+
+    def test_dedup_before_fetch_budget(self):
+        from apps.hockey.management.commands.sync_hockey import (
+            parse_medicals_listing)
+        entries = parse_medicals_listing(self.FIXTURE, date(2026, 9, 1))
+        hero = [e for e in entries if e["url"].endswith("hero-day-to-day")]
+        self.assertEqual(len(hero), 1)  # h3 hero + h4 list slot collapse to one
+
+    def test_cutoff_and_non_medical_excluded(self):
+        from apps.hockey.management.commands.sync_hockey import (
+            parse_medicals_listing)
+        entries = parse_medicals_listing(self.FIXTURE, date(2026, 9, 1))
+        urls = [e["url"] for e in entries]
+        self.assertFalse(any(u.endswith("old-entry") for u in urls))
+        self.assertFalse(any("podcasts" in u for u in urls))
+        self.assertEqual(len(entries), 3)
+
+    def test_dates_and_headlines_parsed(self):
+        from apps.hockey.management.commands.sync_hockey import (
+            parse_medicals_listing)
+        entries = parse_medicals_listing(self.FIXTURE, date(2026, 9, 1))
+        by_url = {e["url"]: e for e in entries}
+        self.assertEqual(by_url["https://swisshockeynews.ch/en/shn/medical/hero-day-to-day"]["published_on"],
+                         date(2026, 10, 30))
+        self.assertEqual(by_url["https://swisshockeynews.ch/en/shn/medical/featured-out-for-weeks"]["headline"],
+                         "Featured out for weeks")
