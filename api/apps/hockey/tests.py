@@ -195,6 +195,74 @@ class FantasyApiTests(HockeyBase):
         self.assertIsNone(sim.json()["computed_budget_after_m"])
         self.assertIn("Unknown HM price", sim.json()["notes"])
 
+    def test_own_roster_includes_latest_hm_metrics(self):
+        from django.utils import timezone
+        from .models import HMSnapshot
+        HMSnapshot.objects.create(
+            player=self.malgin, captured_on=date(2026, 10, 28),
+            source="top_scorer_page", source_observed_at=timezone.now(),
+            hm_price_m="9.5", hm_points_season=90, hm_points_avg="5.00")
+        HMSnapshot.objects.create(
+            player=self.malgin, captured_on=date(2026, 11, 4),
+            source="top_scorer_page", source_observed_at=timezone.now(),
+            hm_price_m="10.0", hm_points_season=100, hm_points_avg="5.26")
+        t = FantasyTeam.objects.create(owner=self.user, name="Elephant Crushers")
+        RosterEntry.objects.create(team=t, player=self.malgin, position_slot="F")
+        RosterEntry.objects.create(team=t, player=self.punnenovs, position_slot="G")
+        data = auth_client(self.user).get(f"/api/apps/hockey/my/teams/{t.pk}/").json()
+        rows = {r["name"]: r for r in data["roster"]}
+        hm = rows["Denis Malgin"]["hm"]  # the latest snapshot wins
+        self.assertEqual(hm["price_m"], "10.0")
+        self.assertEqual(hm["points_season"], 100)
+        self.assertEqual(hm["points_avg"], "5.26")
+        self.assertEqual(hm["captured_on"], "2026-11-04")
+        no_snap = rows["Ivars Punnenovs"]["hm"]  # no capture: nulls, never zero
+        self.assertIsNone(no_snap["price_m"])
+        self.assertIsNone(no_snap["points_season"])
+        self.assertIsNone(no_snap["points_avg"])
+        self.assertIsNone(no_snap["captured_on"])
+
+    def test_own_pair_entry_includes_latest_hm_snapshot(self):
+        from django.utils import timezone
+        from .models import FantasyPairEntry, HMPair, HMPairSnapshot
+        pair = HMPair.objects.create(hm_asset_id=93, label="Zumbühl / Hrubec",
+                                     team=self.zsc)
+        HMPairSnapshot.objects.create(
+            pair=pair, captured_on=date(2026, 10, 28), source="top_scorer_page",
+            source_observed_at=timezone.now(), hm_price_m="13.5",
+            hm_points_season=240, hm_points_avg="13.33")
+        HMPairSnapshot.objects.create(
+            pair=pair, captured_on=date(2026, 11, 4), source="top_scorer_page",
+            source_observed_at=timezone.now(), hm_price_m="14.0",
+            hm_points_season=256, hm_points_avg="14.22")
+        t = FantasyTeam.objects.create(owner=self.user, name="Pairs")
+        FantasyPairEntry.objects.create(team=t, label="Zumbühl/Hrubec",
+                                        hm_asset_id=93, current_price_m="14.0")
+        data = auth_client(self.user).get(f"/api/apps/hockey/my/teams/{t.pk}/").json()
+        snap = data["pair_entries"][0]["snapshot"]
+        self.assertEqual(snap["price_m"], "14.0")
+        self.assertEqual(snap["points_season"], 256)
+        self.assertEqual(snap["points_avg"], "14.22")
+        self.assertEqual(snap["captured_on"], "2026-11-04")
+
+    def test_shared_roster_excludes_hm_metrics(self):
+        from django.utils import timezone
+        from .models import FantasyPairEntry, HMSnapshot
+        HMSnapshot.objects.create(
+            player=self.malgin, captured_on=date(2026, 11, 4),
+            source="top_scorer_page", source_observed_at=timezone.now(),
+            hm_price_m="10.0", hm_points_season=100, hm_points_avg="5.26")
+        team = FantasyTeam.objects.create(owner=self.other, name="Pongo")
+        RosterEntry.objects.create(team=team, player=self.malgin, position_slot="F")
+        FantasyPairEntry.objects.create(team=team, label="Zumbühl/Hrubec",
+                                        hm_asset_id=93, current_price_m="14.0")
+        FantasyTeamShare.objects.create(team=team, viewer=self.user,
+                                        granted_by="test share")
+        data = auth_client(self.user).get("/api/apps/hockey/my/teams/").json()
+        shared = data["shared_with_me"][0]
+        self.assertNotIn("hm", shared["roster"][0])
+        self.assertNotIn("snapshot", shared["pair_entries"][0])
+
     def test_shared_team_read_only_for_viewer(self):
         # Aurore owns a team; she shares it read-only with Thomas
         aurore_team = FantasyTeam.objects.create(owner=self.other, name="Pongo")
