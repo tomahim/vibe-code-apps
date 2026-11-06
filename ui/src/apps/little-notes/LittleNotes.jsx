@@ -123,7 +123,12 @@ export default function LittleNotes({ onHome }) {
     // current list. Route to the next object in line instead of reloading the one
     // that just left: skip() stores the object in the URL, and without this the
     // detail effect reopens the archived object after the list refreshes.
-    const leaving = (slug === "archive" && enabled && category === "inbox") || (slug === "inbox" && enabled && category === "archive");
+    // Categorizing from the Inbox (Favorite, Promising, ...) keeps the object in
+    // the Inbox: only Archive is exclusive with it. The decision is still made, so
+    // show the next object; the categorized one stays in the list and its
+    // membership is not changed here.
+    const categorized = path === "categories" && enabled && category === "inbox" && !["archive", "inbox"].includes(slug);
+    const leaving = categorized || (slug === "archive" && enabled && category === "inbox") || (slug === "inbox" && enabled && category === "archive");
     let nextId = "";
     if (leaving) {
       const index = items.findIndex(i => i.id === selected.id);

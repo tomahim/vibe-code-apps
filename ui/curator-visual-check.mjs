@@ -145,5 +145,17 @@ await page.getByRole('button',{name:'Skip →'}).click();
 await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
 await page.getByRole('button',{name:'Back to inbox ↙',exact:true}).click();
 await page.getByRole('heading',{name:'A collection worth revisiting'}).waitFor();
-console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; no horizontal overflow');
+// Categorizing from the Inbox keeps the object in the Inbox but shows the next one.
+state=initial();
+await page.goto('http://localhost:5199/apps/little-notes');
+await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+await page.getByRole('button',{name:'☆ Favorite'}).click();
+await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
+const firstCats=state.get(records[0].id);
+if(!firstCats.includes('favorite')||!firstCats.includes('inbox'))throw new Error('Favorite must be added and Inbox kept, got '+firstCats);
+await page.screenshot({path:`${screenshots}/triage-categorize-advance-390.png`,fullPage:true});
+await page.getByLabel('Assign a category').selectOption({label:'Add Inspiration'});
+await page.getByRole('heading',{name:'What the newest maps can tell us'}).waitFor();
+if(!state.get('b1').includes('inbox')||!state.get('b1').includes('inspiration'))throw new Error('Category select must keep Inbox');
+console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; categorize-in-Inbox advance keeps Inbox; no horizontal overflow');
 await browser.close();server.kill('SIGTERM'); await new Promise(resolve => server.once('exit', resolve));

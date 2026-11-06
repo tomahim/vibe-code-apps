@@ -13,7 +13,9 @@ sanitized markdown, open a validated external URL, edit with conflict detection,
 favorite, assign/remove one category (type-linked categories refused for other
 types) or one topic tag, archive or restore. Skip changes no data. Archiving
 from the Inbox (or restoring from the Archive view) moves the stage to the next
-object in line. No projects,
+object in line. Adding a category (Favorite, Promising, ...) from the Inbox view
+also moves the stage to the next object, but the object stays in the Inbox:
+only Archive removes it. No projects,
 issues or lists. In the cards view each card carries the same archive/restore
 and category actions, and opening an object from the cards, table or database
 view scrolls the detail into view. Type/category/tag administration writes are
