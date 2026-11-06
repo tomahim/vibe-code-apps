@@ -944,5 +944,47 @@ export const GLOSSARY_TERMS = [
             "license": "Public domain",
             "alt": "Lapilli du Kīlauea"
         }
+    },
+    {
+        "id": "socle-hercynien",
+        "category": "structures",
+        "fr": {
+            "term": "Socle hercynien",
+            "definition": "Ensemble de roches anciennes, métamorphiques et granitiques, plissées puis pénéplanées lors de l'orogenèse hercynienne (varisque), du Dévonien au Permien. En France, il affleure dans les massifs anciens (Armoricain, Central, Vosges, Maures) et s'enfonce ailleurs sous la couverture sédimentaire.",
+            "source": "https://fr.wikipedia.org/wiki/Socle_(g%C3%A9ologie)"
+        },
+        "en": {
+            "term": "Hercynian basement",
+            "definition": "The ancient crystalline basement of metamorphic and granitic rocks, folded and peneplained during the Hercynian (Variscan) orogeny, from the Devonian to the Permian. In France it crops out in the old massifs (Armorican, Central, Vosges, Maures) and lies elsewhere beneath the sedimentary cover.",
+            "source": "https://en.wikipedia.org/wiki/Basement_(geology)"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/French_Hercynian_massifs_EN.svg/960px-French_Hercynian_massifs_EN.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:French_Hercynian_massifs_EN.svg",
+            "credit": "Woudloper",
+            "license": "Public domain",
+            "alt": "Carte des massifs hercyniens français"
+        }
+    },
+    {
+        "id": "alluvion",
+        "category": "roches",
+        "fr": {
+            "term": "Alluvion",
+            "definition": "Dépôt sédimentaire meuble (argile, limon, sable, gravier, galets) laissé par les eaux d'un cours d'eau dans son lit, sa plaine d'inondation, un delta ou une plage. Généralement récentes, les alluvions ne sont pas consolidées en roche.",
+            "source": "https://fr.wikipedia.org/wiki/Alluvion"
+        },
+        "en": {
+            "term": "Alluvium",
+            "definition": "Loose, unconsolidated sediment (clay, silt, sand or gravel) deposited by running water in a stream bed, on a floodplain, in a delta or on a beach. Typically geologically young, alluvium is not consolidated into solid rock.",
+            "source": "https://en.wikipedia.org/wiki/Alluvium"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Soil_profile_in_river_alluvium%2C_Gt_Ouse_floodplain_SE_of_Bedford_-_geograph.org.uk_-_225985.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "file": "https://commons.wikimedia.org/wiki/File:Soil_profile_in_river_alluvium,_Gt_Ouse_floodplain_SE_of_Bedford_-_geograph.org.uk_-_225985.jpg",
+            "credit": "Rodney Burton / geograph.org.uk",
+            "license": "CC BY-SA 2.0",
+            "alt": "Profil de sol dans des alluvions fluviales, avec une pelle pour l'échelle"
+        }
     }
 ];
