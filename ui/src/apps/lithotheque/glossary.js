@@ -6,7 +6,7 @@
 // - fr / en: { term, definition, source } - definitions original text grounded in the linked sources
 // - image: { url, file, credit, license, alt } - Wikimedia Commons image whose license was verified
 //   on the file page (file = Commons File: page for attribution); keep licenses to CC/PD only.
-// Definitions were checked against the linked Wikipedia articles on 2026-11-06; image licenses were
+// Definitions were checked against the linked geology and university sources on 2026-11-06; image licenses were
 // verified via the Commons API the same day.
 
 export const GLOSSARY_CATEGORIES = [
@@ -16,6 +16,7 @@ export const GLOSSARY_CATEGORIES = [
     { id: 'structures', fr: 'Structures', en: 'Structures' },
     { id: 'relief', fr: 'Relief & processus', en: 'Landforms & processes' },
     { id: 'temps', fr: 'Temps & fossiles', en: 'Time & fossils' },
+    { id: 'methodes', fr: 'Méthodes & métiers', en: 'Methods & professions' },
     { id: 'planete', fr: 'Planète Terre', en: 'Planet Earth' },
 ];
 
@@ -774,6 +775,111 @@ export const GLOSSARY_TERMS = [
             "credit": "Brocken Inaglory",
             "license": "CC BY-SA 3.0",
             "alt": "Obsidienne à reflets colorés"
+        }
+    },
+    {
+        "id": "petrographie",
+        "category": "methodes",
+        "fr": {
+            "term": "Pétrographie",
+            "definition": "Description et classification des roches d'après leur composition minérale, leur texture et leur structure. Elle associe l'observation sur le terrain et des échantillons à l'étude microscopique, notamment en lame mince.",
+            "source": "https://fr.wikipedia.org/wiki/P%C3%A9trographie"
+        },
+        "en": {
+            "term": "Petrography",
+            "definition": "The description and classification of rocks by their mineral composition, texture and structure. It combines field and hand-specimen observations with microscopic study, especially of thin sections.",
+            "source": "https://en.wikipedia.org/wiki/Petrography"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/LvMS-Lvm.jpg/960px-LvMS-Lvm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:LvMS-Lvm.jpg",
+            "credit": "Matt Affolter (QFL247)",
+            "license": "CC BY-SA 3.0",
+            "alt": "Grain de sable volcanique en lumière polarisée et en lumière polarisée analysée"
+        }
+    },
+    {
+        "id": "litholamelleurs",
+        "category": "methodes",
+        "fr": {
+            "term": "Litholamelleurs",
+            "definition": "Pluriel de litholamelleur, aussi appelé lithopréparateur : technicien qui prépare des lames minces de roches pour leur étude au microscope. Il découpe, amincit et polit les échantillons en contrôlant l'épaisseur et la qualité des préparations.",
+            "source": "https://factuel.univ-lorraine.fr/article/a-la-decouverte-du-metier-de-lithopreparateur/"
+        },
+        "en": {
+            "term": "Thin section technicians",
+            "definition": "Technicians who prepare thin sections of rocks for microscopic study. They cut, grind and polish samples while checking the thickness and quality of the preparations. French singular: litholamelleur; plural: litholamelleurs.",
+            "source": "https://le.ac.uk/people/annika-burns"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Thin_sections.JPG/960px-Thin_sections.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Thin_sections.JPG",
+            "credit": "Woudloper",
+            "license": "CC BY-SA 1.0",
+            "alt": "Lames minces de calcaire sur la platine d'un microscope, illustration du travail de préparation"
+        }
+    },
+    {
+        "id": "peridotite",
+        "category": "roches",
+        "fr": {
+            "term": "Péridotite",
+            "definition": "Roche ultramafique à gros cristaux, riche en olivine et contenant généralement des pyroxènes. Elle constitue l'essentiel du manteau supérieur terrestre ; on la rencontre aussi en fragments remontés par des magmas ou dans des massifs exposés en surface.",
+            "source": "https://fr.wikipedia.org/wiki/P%C3%A9ridotite"
+        },
+        "en": {
+            "term": "Peridotite",
+            "definition": "A coarse-grained ultramafic rock rich in olivine and usually containing pyroxenes. It makes up most of Earth's upper mantle and also occurs as fragments brought up by magmas or in rock masses exposed at the surface.",
+            "source": "https://en.wikipedia.org/wiki/Peridotite"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Perid_SanCarlos.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:Perid_SanCarlos.jpg",
+            "credit": "No machine-readable author provided. Omphacite~commonswiki assumed (based on copyright claims).",
+            "license": "Public domain",
+            "alt": "Péridotite de San Carlos, Arizona"
+        }
+    },
+    {
+        "id": "feldspath",
+        "category": "mineraux",
+        "fr": {
+            "term": "Feldspath",
+            "definition": "Minéral d'un groupe d'aluminosilicates très abondants dans la croûte terrestre. Les feldspaths comprennent notamment les feldspaths alcalins et les plagioclases ; ils sont présents dans de nombreuses roches magmatiques, métamorphiques et sédimentaires.",
+            "source": "https://fr.wikipedia.org/wiki/Feldspath"
+        },
+        "en": {
+            "term": "Feldspar",
+            "definition": "A mineral of a group of aluminium silicates that are very abundant in Earth's crust. Feldspars include alkali feldspars and plagioclases and occur in many igneous, metamorphic and sedimentary rocks.",
+            "source": "https://en.wikipedia.org/wiki/Feldspar"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/PlagioclaseFeldsparUSGOV.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:PlagioclaseFeldsparUSGOV.jpg",
+            "credit": "USGS",
+            "license": "Public domain",
+            "alt": "Feldspath plagioclase, exemple du groupe des feldspaths"
+        }
+    },
+    {
+        "id": "micas",
+        "category": "mineraux",
+        "fr": {
+            "term": "Micas",
+            "definition": "Famille de minéraux silicatés en feuillets qui se séparent facilement en fines lamelles souples et élastiques. Les micas, dont la muscovite et la biotite, sont fréquents dans les granites et les schistes.",
+            "source": "https://fr.wikipedia.org/wiki/Mica"
+        },
+        "en": {
+            "term": "Micas",
+            "definition": "A family of sheet silicate minerals that split easily into thin, flexible, elastic plates. Micas, including muscovite and biotite, are common in granites and schists.",
+            "source": "https://en.wikipedia.org/wiki/Mica"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/MicaSheetUSGOV.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:MicaSheetUSGOV.jpg",
+            "credit": "USGS",
+            "license": "Public domain",
+            "alt": "Feuillets de mica avec une pièce comme échelle"
         }
     }
 ];

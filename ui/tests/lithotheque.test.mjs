@@ -47,3 +47,14 @@ test('glossary has unique categories, complete bilingual cards, sources and imag
   }
   for (const id of ['affleurement','gisement','schiste','granite','argile','gres','ravinement','lithosphere']) assert.ok(GLOSSARY_TERMS.some(t => t.id === id), id);
 });
+
+test('GEO follow-up keeps petrography and the requested plural profession separate', () => {
+    const petro = GLOSSARY_TERMS.find((term) => term.id === 'petrographie');
+    const technicians = GLOSSARY_TERMS.find((term) => term.id === 'litholamelleurs');
+    assert.equal(petro.en.term, 'Petrography');
+    assert.equal(technicians.fr.term, 'Litholamelleurs');
+    assert.equal(technicians.en.term, 'Thin section technicians');
+    assert.match(technicians.fr.definition, /Pluriel de litholamelleur/);
+    assert.equal(petro.category, 'methodes');
+    assert.equal(technicians.category, 'methodes');
+});
