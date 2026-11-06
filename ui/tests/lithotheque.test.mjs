@@ -58,3 +58,11 @@ test('GEO follow-up keeps petrography and the requested plural profession separa
     assert.equal(petro.category, 'methodes');
     assert.equal(technicians.category, 'methodes');
 });
+
+test('silica is separate from quartz and feldspar', () => {
+  const silica = GLOSSARY_TERMS.find((t) => t.id === 'silice');
+  assert.equal(silica.en.term, 'Silica');
+  assert.match(silica.fr.definition, /SiO₂/);
+  assert.match(silica.en.definition, /amorphous/);
+  assert.match(silica.image.alt, /exemple/);
+});

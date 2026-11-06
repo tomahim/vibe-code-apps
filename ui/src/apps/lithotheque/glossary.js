@@ -881,5 +881,68 @@ export const GLOSSARY_TERMS = [
             "license": "Public domain",
             "alt": "Feuillets de mica avec une pièce comme échelle"
         }
+    },
+    {
+        "id": "silice",
+        "category": "mineraux",
+        "fr": {
+            "term": "Silice",
+            "definition": "Dioxyde de silicium (SiO₂), composé présent dans la nature sous des formes cristallines, comme le quartz, ou amorphes. La silice désigne une composition chimique : elle ne se confond ni avec le seul quartz ni avec l'ensemble des silicates.",
+            "source": "https://fr.wikipedia.org/wiki/Silice"
+        },
+        "en": {
+            "term": "Silica",
+            "definition": "Silicon dioxide (SiO₂), a compound found in nature in crystalline forms such as quartz and in amorphous forms. Silica names a chemical composition: it is not synonymous with quartz alone or with the whole silicate group.",
+            "source": "https://en.wikipedia.org/wiki/Silicon_dioxide"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Quartz_Br%C3%A9sil.jpg/960px-Quartz_Br%C3%A9sil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Quartz_Br%C3%A9sil.jpg",
+            "credit": "Didier Descouens",
+            "license": "CC BY-SA 4.0",
+            "alt": "Quartz, exemple de silice cristalline - not all silica is quartz"
+        }
+    },
+    {
+        "id": "vacuole",
+        "category": "structures",
+        "fr": {
+            "term": "Vacuole",
+            "definition": "Petite cavité dans une roche, laissée par une bulle de gaz lors de la solidification d'une lave ou par la dissolution d'un constituant. Dans une roche volcanique, une cavité issue d'une bulle se traduit par vesicle en anglais ; le sens général est cavity.",
+            "source": "https://www.cnrtl.fr/definition/vacuole"
+        },
+        "en": {
+            "term": "Cavity / vesicle",
+            "definition": "A small cavity in a rock, produced by a trapped gas bubble during lava solidification or by dissolution of a constituent. Vesicle is the specific English term for a gas-bubble cavity in volcanic rock; cavity is the broader translation of French vacuole.",
+            "source": "https://sites.wustl.edu/meteoritesite/items/vesicles-in-meteorites/"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Olivine_basalt2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:Olivine_basalt2.jpg",
+            "credit": "No machine-readable author provided. Siim assumed (based on copyright claims).",
+            "license": "CC BY-SA 3.0",
+            "alt": "Basalte à olivine avec des vacuoles, La Palma"
+        }
+    },
+    {
+        "id": "lapilli",
+        "category": "roches",
+        "fr": {
+            "term": "Lapilli",
+            "definition": "Fragments projetés lors d'une éruption volcanique, généralement classés entre 2 et 64 mm : plus gros que les cendres, plus petits que les bombes et blocs. Le terme décrit une taille, pas une composition ; il peut inclure des fragments de roche, de lave ou des agrégats de cendres.",
+            "source": "https://fr.wikipedia.org/wiki/Lapilli"
+        },
+        "en": {
+            "term": "Lapilli",
+            "definition": "Fragments ejected during a volcanic eruption, generally classified as 2-64 mm across: larger than ash and smaller than bombs and blocks. The term describes size, not composition, and can include rock or lava fragments and aggregates of ash.",
+            "source": "https://en.wikipedia.org/wiki/Lapilli"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/PuuPuaiLapilli_large.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:PuuPuaiLapilli_large.jpg",
+            "credit": "USGS",
+            "license": "Public domain",
+            "alt": "Lapilli du Kīlauea"
+        }
     }
 ];
