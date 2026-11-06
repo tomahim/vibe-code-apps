@@ -21,7 +21,7 @@ for (const width of [393, 1440]) {
   await page.screenshot({path:`/downloads/lithotheque-glossary-en-${width}.png`});
   await card.screenshot({path:`/downloads/lithotheque-card-en-${width}.png`, animations: 'disabled'});
   await page.getByRole('button', {name:'Roches & sédiments',exact:true}).click();
-  await expect(page.locator('.gcard')).toHaveCount(15);
+  await expect(page.locator('.gcard')).toHaveCount(16);
   await page.getByRole('searchbox').fill('gres');
   await expect(page.getByRole('heading', {name:'Grès',exact:true})).toBeVisible();
   await expect(page.locator('.gcard')).toHaveCount(1);
@@ -34,5 +34,28 @@ for (const width of [393, 1440]) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('button', {name:'Catalogue',exact:true}).click();
   await expect(page.locator('.litho-benchcard')).toHaveCount(6);
+ });
+}
+
+for (const width of [393, 1440]) {
+ test(`GEO petrography follow-up preserves plural and fits at ${width}px`, async ({page}) => {
+  await page.setViewportSize({width,height:900});
+  await page.goto('/apps/lithotheque');
+  await page.getByRole('button',{name:'Glossaire · Glossary',exact:true}).click();
+  await page.getByRole('button',{name:'Méthodes & métiers',exact:true}).click();
+  await expect(page.locator('.gcard')).toHaveCount(2);
+  await expect(page.getByRole('heading',{name:'Pétrographie',exact:true})).toBeVisible();
+  const card=page.locator('[data-term="litholamelleurs"]');
+  await expect(card.getByRole('heading')).toHaveText('Litholamelleurs');
+  await expect(card.locator('img')).toBeVisible();
+  await page.locator('.gcard img').evaluateAll(async images=>{await Promise.all(images.map(i=>i.decode().catch(()=>{})))});
+  await page.screenshot({path:`/downloads/lithotheque-petro-fr-${width}.png`,fullPage:true});
+  await card.getByRole('button').click();
+  await expect(card.getByRole('heading')).toHaveText('Thin section technicians');
+  await expect(card.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://le.ac.uk/people/annika-burns');
+  await card.screenshot({path:`/downloads/lithotheque-technicians-en-${width}.png`});
+  await page.getByRole('searchbox').fill('petrographie');
+  await expect(page.locator('.gcard')).toHaveCount(1);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  });
 }
