@@ -425,6 +425,11 @@ class SyncInjuriesTests(TestCase):
     </div></article>
     <article class="raxo-item-top"><div class="raxo-wrap">
       <div class="raxo-info"><span class="raxo-category">MEDICAL REPORT</span>
+      <span class="raxo-date">02.11.2026</span></div>
+      <h2 class="raxo-title"><a href="/en/shn/medical/comebacks-davos">Some comebacks on the horizon for HC Davos</a></h2>
+    </div></article>
+    <article class="raxo-item-top"><div class="raxo-wrap">
+      <div class="raxo-info"><span class="raxo-category">MEDICAL REPORT</span>
       <span class="raxo-date">01.06.2026</span></div>
       <h2 class="raxo-title"><a href="/en/shn/medical/old">Old report about Bernd Wolf</a></h2>
     </div></article>
@@ -439,6 +444,22 @@ class SyncInjuriesTests(TestCase):
     <h1>EHC Biel adds another player to their infirmary</h1>
     <p>Defenseman Ivars Punnenovs is considered day-to-day, the club confirms.</p>
     """
+    COMEBACKS_PAGE = """
+    <div class="com-content-article item-page" itemscope itemtype="https://schema.org/Article">
+    <h1>Some comebacks on the horizon for HC Davos</h1>
+    <div class="introtext"><div class='article'>
+    <p>Defender Calle Andersson, out since October, is set to make his return
+    after the international break, team manager Jan Alston confirms.</p>
+    </div></div>
+    </div>
+    <div class="shn-a card "><h3 class="card-header ">Latest Transfers</h3>
+    <div class="card-body"><div class="mod-custom custom">
+    <p><table class="ltrans_table">
+    <tr class="ltrans_row1"><td class="ltrans_name">Ivars Punnenovs (G, 31)</td><td>HC Biel</td></tr>
+    <tr class="ltrans_row2"><td class="ltrans_name">Bernd Wolf (D, 29)</td><td>EHC Kloten</td></tr>
+    </table></p>
+    </div></div></div>
+    """
 
     @classmethod
     def setUpTestData(cls):
@@ -447,6 +468,8 @@ class SyncInjuriesTests(TestCase):
                                          last_name="Wolf", position="D")
         cls.punnenovs = Player.objects.create(licence_id=310134, first_name="Ivars",
                                               last_name="Punnenovs", position="G")
+        cls.andersson = Player.objects.create(licence_id=700002, first_name="Calle",
+                                              last_name="Andersson", position="D")
         PlayerTeamMembership.objects.create(player=cls.wolf, team=cls.kloten,
                                             season=2027, from_date=date(2026, 9, 1))
 
@@ -455,6 +478,8 @@ class SyncInjuriesTests(TestCase):
             return self.LIST_HTML
         if url.endswith("biel-infirmary"):
             return self.BIEL_PAGE
+        if url.endswith("comebacks-davos"):
+            return self.COMEBACKS_PAGE
         return self.WOLF_PAGE
 
     def _run(self, **kwargs):
@@ -463,6 +488,25 @@ class SyncInjuriesTests(TestCase):
         with patch("apps.hockey.management.commands.sync_hockey.fetch_text",
                    side_effect=self._pages):
             call_command("sync_hockey", phase="injuries", sleep=0, **kwargs)
+
+    def test_transfers_widget_never_produces_match_or_excerpt(self):
+        from .models import InjuryReport
+        self._run()
+        # prose-backed match still works inside the article container
+        row = InjuryReport.objects.get(
+            player=self.andersson, source_url__contains="comebacks-davos")
+        self.assertEqual(row.status_hint, "returning")
+        self.assertIn("Andersson", row.excerpt)
+        self.assertNotIn("ltrans", row.excerpt)
+        self.assertNotIn("HC Biel", row.excerpt)
+        # names that appear only in the Latest Transfers widget do not match
+        self.assertFalse(InjuryReport.objects.filter(
+            player=self.punnenovs, source_url__contains="comebacks-davos").exists())
+        self.assertFalse(InjuryReport.objects.filter(
+            player=self.wolf, source_url__contains="comebacks-davos").exists())
+        # Punnenovs' genuine prose-backed row from the Biel article survives
+        self.assertTrue(InjuryReport.objects.filter(
+            player=self.punnenovs, source_url__contains="biel-infirmary").exists())
 
     def test_headline_and_body_matches_with_hints(self):
         from .models import InjuryReport
@@ -476,18 +520,19 @@ class SyncInjuriesTests(TestCase):
         punn = InjuryReport.objects.get(player=self.punnenovs)
         self.assertEqual(punn.status_hint, "day_to_day")
         # old article beyond lookback is ignored
-        self.assertEqual(InjuryReport.objects.count(), 2)
+        self.assertEqual(InjuryReport.objects.count(), 3)
 
     def test_idempotent_rerun(self):
         from .models import InjuryReport
         self._run()
         self._run()
-        self.assertEqual(InjuryReport.objects.count(), 2)
+        self.assertEqual(InjuryReport.objects.count(), 3)
 
     def test_no_match_no_row(self):
         from .models import InjuryReport
         self.wolf.delete()
         self.punnenovs.delete()
+        self.andersson.delete()
         self._run()
         self.assertEqual(InjuryReport.objects.count(), 0)
 

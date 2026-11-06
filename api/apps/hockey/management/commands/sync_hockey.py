@@ -105,6 +105,34 @@ def strip_tags(html):
     return re.sub(r"<[^>]+>", " ", html)
 
 
+SHN_ARTICLE_CONTAINER_RE = re.compile(
+    r'<div[^>]*class="[^"]*com-content-article[^"]*"[^>]*>', re.S)
+SHN_MODULE_CARD_RE = re.compile(r'<div class="shn-a card', re.S)
+SHN_TABLE_RE = re.compile(r"<table.*?</table>", re.S | re.I)
+
+
+def article_body_paras(page):
+    """Article prose paragraphs only.
+
+    SHN article pages wrap site modules (e.g. the "Latest Transfers" card)
+    around the article. Those modules embed tables inside <p> tags and can
+    contain player names that are not part of the report - a name found
+    there is not a medical mention of that player. Scope to the
+    com-content-article container when present (cut before the first module
+    card) and always drop tables, so widget text can never produce a match
+    or an excerpt.
+    """
+    body = page
+    m = SHN_ARTICLE_CONTAINER_RE.search(page)
+    if m:
+        rest = page[m.start():]
+        end = SHN_MODULE_CARD_RE.search(rest)
+        body = rest[:end.start()] if end else rest
+    body = SHN_TABLE_RE.sub(" ", body)
+    return [strip_tags(x).strip()
+            for x in re.findall(r"<p[^>]*>(.*?)</p>", body, re.S)]
+
+
 def status_hint_for(text):
     """Coarse, transparent keyword derivation from the source's own words.
     The headline/excerpt stay stored verbatim - this hint never replaces them."""
@@ -586,9 +614,7 @@ class Command(BaseCommand):
                 h1 = re.search(r"<h1[^>]*>(.*?)</h1>", page, re.S)
                 if h1:
                     e["headline"] = strip_tags(h1.group(1)).strip() or e["headline"]
-                body_paras = [strip_tags(x).strip()
-                              for x in re.findall(r"<p[^>]*>(.*?)</p>", page, re.S)]
-                body_paras = [x for x in body_paras
+                body_paras = [x for x in article_body_paras(page)
                               if len(x) > 40 and "passkey" not in x.lower()]
                 if not matched:
                     matched = self._match_players(
