@@ -236,6 +236,27 @@ class FantasyApiTests(HockeyBase):
         pairs = r.json()["pair_entries"]
         self.assertEqual(pairs[0]["label"], "Zumbühl/Hrubec")
         self.assertEqual(pairs[0]["current_price_m"], "14.0")
+        # the list payload exposes pair_count so the UI can count HM slots
+        listed = c.get("/api/apps/hockey/my/teams/").json()["teams"][0]
+        self.assertEqual(listed["roster_size"], 0)
+        self.assertEqual(listed["pair_count"], 1)
+
+    def test_roster_cap_counts_pair_as_one_slot(self):
+        c = auth_client(self.user)
+        t = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "Full"}),
+                   content_type="application/json").json()
+        from .models import FantasyPairEntry, RosterEntry
+        FantasyPairEntry.objects.create(team_id=t["id"], label="Zumbühl/Hrubec",
+                                        hm_asset_id=93)
+        for i in range(21):
+            pl = Player.objects.create(licence_id=900001 + i, first_name="Fill",
+                                       last_name=f"Player{i}", position="F")
+            RosterEntry.objects.create(team_id=t["id"], player=pl, position_slot="F")
+        r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/roster/",
+                   data=json.dumps({"player": 310134}), content_type="application/json")
+        # 21 singles + 1 pair = 22 HM slots, so the next add is rejected
+        self.assertEqual(r.status_code, 409)
+        self.assertIn("goalie pair", r.json()["error"])
 
     def test_simulation_validation(self):
         c = auth_client(self.user)
