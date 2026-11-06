@@ -6,11 +6,11 @@ after_card_position: 8
 prompt: "What is the TORX family?"
 choices:
   - id: 393e8bfa-7454-4307-bc19-18957a524994
-    text: "A shoe brand"
+    text: "A shoe brand sold in the mountains"
   - id: bd78d4f0-92ef-4c31-b17e-ad479e568eff
-    text: "A hotel chain"
+    text: "A hotel chain in the Aosta Valley"
   - id: d3d1dca6-d0e9-41b0-a2ad-d9c4cba9e2f8
-    text: "A mountain hut"
+    text: "A mountain hut on the route"
   - id: 735092f7-14df-43b1-9438-9d810584ef0a
     text: "A group of races with shared values"
 correct_choice_ids:

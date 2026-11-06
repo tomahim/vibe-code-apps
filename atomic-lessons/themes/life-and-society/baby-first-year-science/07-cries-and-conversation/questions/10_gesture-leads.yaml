@@ -8,9 +8,9 @@ choices:
   - id: 847d51fb-e9d2-475a-8e32-b715f8f0a90c
     text: "Precedes the same idea in speech by weeks"
   - id: a5fe2f89-57cc-413e-91d4-ee781f103a7d
-    text: "Lags months behind speech"
+    text: "Lags months behind speech in most children"
   - id: 4636631c-90ee-4f32-b418-3364ac61b3a7
-    text: "Replaces speech permanently"
+    text: "Replaces speech permanently in hearing children"
   - id: 77a54571-cc8f-49d6-aeed-f3fdfd9a2f7a
     text: "Has no relation to speech"
 correct_choice_ids:

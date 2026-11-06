@@ -8,11 +8,11 @@ choices:
   - id: 798b9f86-3294-451f-84f3-012a75253347
     text: "Several different proxies and labs agree"
   - id: a7a91a26-4568-41db-94e0-c84a0f25a897
-    text: "One famous lab publishes once"
+    text: "One famous lab publishes a result just once"
   - id: 8fd48ae6-0801-4af2-8677-f76406b25a09
-    text: "The sample is smallest"
+    text: "The sample is the smallest possible one"
   - id: 31457ea3-cc16-4baf-9fa8-652547779deb
-    text: "The method is newest"
+    text: "The method used is the newest available"
 correct_choice_ids:
   - 798b9f86-3294-451f-84f3-012a75253347
 explanation: "Convergence across methods, sites and replications is the field's confidence standard."

@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: "How did the USA tie Sweden in its first game?"
 choices:
   - id: a8415d8d-1e40-4b9f-ad18-03159c8cca4e
-    text: "On a penalty shot"
+    text: "On a late penalty shot with two minutes left"
   - id: f182d5fc-34a2-4c04-ad30-3664605513a0
-    text: "Scored with 27 seconds left with the goalie pulled"
+    text: "Scored with 27 seconds left and the goalie pulled"
   - id: 8dffede7-4c31-4fca-a958-64038f9b497c
-    text: "Through a Soviet own goal"
+    text: "Through a Soviet own goal with a minute left"
   - id: a130be53-926d-4926-b4ae-9d1b464adad9
-    text: "In overtime"
+    text: "In overtime on a power play in the fifth minute"
 correct_choice_ids:
   - f182d5fc-34a2-4c04-ad30-3664605513a0
 explanation: "Brooks pulled goalie Jim Craig for an extra attacker."

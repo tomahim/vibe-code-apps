@@ -8,11 +8,11 @@ choices:
   - id: f50f0ba2-1c9e-47aa-8223-d432a9fdfb4d
     text: "Joint attention supporting language learning"
   - id: 92e926b4-335a-461a-b0d4-f0976f01a9c3
-    text: "A reflex"
+    text: "A reflex that every baby is born with"
   - id: c4aae43a-a305-45f4-ab8a-fee72336d6d1
-    text: "Habituation"
+    text: "Habituation to a repeated sight or sound"
   - id: 0674b07d-f782-4da0-8208-c98ce1036677
-    text: "Perceptual narrowing"
+    text: "Perceptual narrowing of speech sounds"
 correct_choice_ids:
   - f50f0ba2-1c9e-47aa-8223-d432a9fdfb4d
 explanation: "Sharing attention to the same object, with the adult following the baby's lead, strongly supports word learning."

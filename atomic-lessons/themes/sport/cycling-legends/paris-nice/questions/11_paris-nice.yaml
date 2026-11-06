@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: Who organises Paris-Nice?
 choices:
 - id: 527e520b-7b8d-4713-9fbf-80e8b8f3c58f
-  text: RCS Sport
+  text: "RCS Sport, the Giro organiser"
 - id: dd3f92f8-bc68-4aea-8fc7-3c5ea714af90
-  text: ASO
+  text: "ASO, the Tour de France company"
 - id: 3346f97a-4fd9-48ff-b3ea-30b039b9ebfa
-  text: Flanders Classics
+  text: "Flanders Classics, the Belgian group"
 - id: c898725b-cbc4-4570-860d-2aebd8678ad6
-  text: The UCI
+  text: "The UCI, the governing body"
 correct_choice_ids:
 - dd3f92f8-bc68-4aea-8fc7-3c5ea714af90
 explanation: ASO, the Tour de France company.

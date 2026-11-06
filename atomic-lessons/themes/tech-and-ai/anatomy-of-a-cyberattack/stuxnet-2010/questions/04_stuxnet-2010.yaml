@@ -10,9 +10,9 @@ choices:
   - id: c7c5ce10-6c44-47b6-883c-bbdb2d3d5069
     text: "Officially confirmed by a court judgment"
   - id: 5d2afe6e-d6fd-41a6-9f98-b87aea452194
-    text: "Reported by media as US and Israeli, but never officially confirmed"
+    text: "Reported by media as US and Israeli, never confirmed"
   - id: a9886dbe-88d1-40f9-9a8a-5f5cbdf85e4c
-    text: "Proven to be a criminal gang"
+    text: "Proven to be the work of a criminal gang"
 correct_choice_ids:
   - 5d2afe6e-d6fd-41a6-9f98-b87aea452194
 explanation: "Credible reporting names the US and Israel, but governments have not officially acknowledged it."

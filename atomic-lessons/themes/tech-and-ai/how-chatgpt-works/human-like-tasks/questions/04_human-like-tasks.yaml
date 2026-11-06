@@ -6,7 +6,7 @@ after_card_position: 7
 prompt: "What does the trained digit network compute?"
 choices:
   - id: 65509a9e-10bb-4c5d-9d78-9ad9994baf51
-    text: "For a human-like task, a useful test is whether outputs usually match what people would say."
+    text: "A useful test is whether outputs usually match what people say."
   - id: 171e1121-b94d-4f87-af72-6aaa233c558f
     text: "The network computes an output from numerical pixel values."
   - id: 5ebdd301-1c39-45b2-93dd-a9b134987b89

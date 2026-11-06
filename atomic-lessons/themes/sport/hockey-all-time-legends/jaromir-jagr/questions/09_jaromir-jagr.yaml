@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: "What did Jagr's 1999 overtime goal against New Jersey help the Penguins do?"
 choices:
   - id: d1b3b06a-b0d3-4d30-9706-f172467c22b3
-    text: "Win the Stanley Cup"
+    text: "Win the Stanley Cup that same spring"
   - id: b1ad82cb-6a0f-42e5-88b6-3a22d3894987
     text: "Stay afloat until Lemieux could buy the team"
   - id: bfb51b60-c94f-4646-a19a-c3dd01e42342
-    text: "Move to a new arena"
+    text: "Move to a new arena in the city centre"
   - id: 45f4d202-ce52-43e2-9314-1496ba360165
-    text: "Draft Sidney Crosby"
+    text: "Draft Sidney Crosby with the first pick"
 correct_choice_ids:
   - b1ad82cb-6a0f-42e5-88b6-3a22d3894987
 explanation: "NHL.com says it helped keep the team afloat so that Lemieux could keep it in Pittsburgh."

@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: "What did Bowman do in 1997 that no other coach had done?"
 choices:
   - id: 89e5464b-45a2-4bfe-8501-e7bda7213ab7
-    text: "Won 100 games"
+    text: "Won 100 games in one season"
   - id: 671bf298-14fd-4514-a6ed-e1097c4123f4
-    text: "Coached a World Cup"
+    text: "Coached a World Cup final side"
   - id: 9e64dec3-9d46-4164-a75a-952ae80c498f
-    text: "Won the Hart"
+    text: "Won the Hart Trophy as coach"
   - id: 1fb8e8f1-792e-42df-9732-d1dc720376ab
-    text: "Won the Cup with three different teams"
+    text: "Won the Cup with three teams"
 correct_choice_ids:
   - 1fb8e8f1-792e-42df-9732-d1dc720376ab
 explanation: "Britannica says he was the only coach to win it with three teams."

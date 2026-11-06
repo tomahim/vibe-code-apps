@@ -8,11 +8,11 @@ choices:
   - id: 92965449-8156-4981-9012-9c5cc8e5bdbe
     text: "CSKA Moscow (Central Red Army)"
   - id: 0ada3c63-af8a-4bfd-9250-72932022e5d7
-    text: "Spartak Moscow"
+    text: "Spartak Moscow, the rival club"
   - id: dfce724c-3042-4def-a5ab-c0fd81ba79bf
-    text: "Dynamo Moscow"
+    text: "Dynamo Moscow, the police team"
   - id: f0d89433-cb17-4eca-8ed3-d7ef736155e7
-    text: "SKA Leningrad"
+    text: "SKA Leningrad, a Soviet club"
 correct_choice_ids:
   - 92965449-8156-4981-9012-9c5cc8e5bdbe
 explanation: "He played for CSKA from 1969 to 1984."

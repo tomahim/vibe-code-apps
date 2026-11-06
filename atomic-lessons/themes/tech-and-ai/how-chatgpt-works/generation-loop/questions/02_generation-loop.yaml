@@ -8,7 +8,7 @@ choices:
   - id: 574e4e06-5ee3-45a9-a126-7de172ec48d3
     text: "The current context is turned into token representations."
   - id: d0716553-803a-4737-92ea-b562d8915f36
-    text: "For a next-token prediction, the final position's representation is used to score possible continuations."
+    text: "The final position's representation is used to score continuations."
   - id: 3caf6f1d-b15a-4e0e-a844-e58f2f3e6375
     text: "The model produces scores over its token vocabulary."
   - id: 184e1aa9-c258-43c5-b1cc-a1a18578dafc

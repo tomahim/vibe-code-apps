@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: "What is a saucer pass?"
 choices:
   - id: 7af78fe7-a821-4556-b197-7cb845808ead
-    text: "A pass off the boards"
+    text: "A pass off the boards to a winger waiting at the point"
   - id: 48d2e711-a5b3-4339-bc7e-d83c108e3eb7
-    text: "A pass between a goalie's pads"
+    text: "A pass between a goalie's pads into the net behind him"
   - id: 03451c60-3643-47b8-b06c-8c147723803f
-    text: "A flip pass that skims over sticks and lands flat on a teammate's blade"
+    text: "A flip pass that skims over sticks and lands flat on a blade"
   - id: 5a9796eb-ba2a-4a97-8d24-2a07c63aaea0
-    text: "A slap shot along the ice"
+    text: "A slap shot along the ice into the far corner of the rink"
 correct_choice_ids:
   - 03451c60-3643-47b8-b06c-8c147723803f
 explanation: "His father drilled him in the saucer pass, a flip that clears a stick or skate and lands flat."

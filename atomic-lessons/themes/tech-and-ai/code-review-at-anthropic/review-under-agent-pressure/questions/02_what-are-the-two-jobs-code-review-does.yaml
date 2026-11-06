@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: What are the two jobs code review does?
 choices:
 - id: dba8aa16-7ec8-43de-881e-33b554dabfb0
-  text: Find and fix issues before they ship, and build shared context across the team
+  text: "Find and fix issues before they ship, and share context in the team"
 - id: df9dbe8d-cefd-4f4d-a5f4-b3cc764d799f
-  text: Enforce style rules and assign blame for bugs
+  text: "Enforce style rules and assign blame for bugs in the code"
 - id: 1952ac76-0c09-4624-a368-32342920f2c9
-  text: Estimate ticket size and plan the sprint
+  text: "Estimate ticket size and plan the sprint for the whole team"
 - id: 0126c063-136a-459a-a875-09e8612153cb
-  text: Approve releases and write documentation
+  text: "Approve releases and write the documentation for the users"
 correct_choice_ids:
 - dba8aa16-7ec8-43de-881e-33b554dabfb0
 explanation: Review finds and fixes issues before they ship, and it spreads codebase understanding across the team. The article

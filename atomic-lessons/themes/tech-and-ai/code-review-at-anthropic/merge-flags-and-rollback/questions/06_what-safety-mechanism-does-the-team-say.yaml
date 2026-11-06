@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: What safety mechanism does the team say is still missing?
 choices:
 - id: 210a953f-b22c-4d3b-b1a7-f80302ece018
-  text: Circuit breakers that tighten approval automatically when revert numbers move
+  text: "Circuit breakers that tighten approval when reverts rise"
 - id: 76ef4c4f-4741-41ef-b564-aa5ed2af51b4
-  text: Any kind of testing
+  text: "Any kind of automated testing before merge"
 - id: 1cec8dff-3f9b-4cfd-a3a7-28e34b14bf6a
-  text: A merge queue
+  text: "A merge queue that re-runs checks on each change"
 - id: 8e371435-610f-45db-a550-44a4660c0dbb
-  text: Feature flags
+  text: "Feature flags that gate each change for a few users"
 correct_choice_ids:
 - 210a953f-b22c-4d3b-b1a7-f80302ece018
 explanation: They do not yet have circuit breakers that tighten approval when revert and incident numbers move, and engineers

@@ -8,9 +8,9 @@ choices:
   - id: a0798051-6517-4f6c-b6a4-a6bc416e0890
     text: "A long straight canyon"
   - id: 3c5078c1-c72e-4830-9f33-c0bacee70ec8
-    text: "A triangle"
+    text: "A narrow triangle shape"
   - id: 7e85af6e-d308-4dbd-ab47-f7593d419d67
-    text: "A star shape"
+    text: "A star shape with points"
   - id: 92962072-3899-45ae-b625-ca5db7781fab
     text: "Almost a perfect circle"
 correct_choice_ids:

@@ -7,11 +7,11 @@ after_card_position: 2
 prompt: "Which institution did he attend from 2008 to 2012?"
 choices:
   - id: 4bad8b26-d69d-48dd-bef6-49e84f74369e
-    text: "Georgetown"
+    text: "Georgetown, in Washington"
   - id: d0ddbdb4-3eef-42e1-80b7-3cb04b4fae5e
-    text: "Iona College"
+    text: "Iona College, in New York"
   - id: 858a5265-b5b6-45e4-ae0a-52f7c0b3da6b
-    text: "Stanford"
+    text: "Stanford, in California"
   - id: 94938621-4230-470b-9a25-961bb4941aaa
     text: "The Air Force Academy"
 correct_choice_ids:

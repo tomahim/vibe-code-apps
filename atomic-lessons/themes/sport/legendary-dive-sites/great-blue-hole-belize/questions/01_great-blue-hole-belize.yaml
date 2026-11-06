@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: "Where is the Great Blue Hole located?"
 choices:
   - id: 79390f12-3f35-421b-a613-8983ffc10719
-    text: "On the Great Barrier Reef off Australia"
+    text: "On the Great Barrier Reef off the coast of Australia"
   - id: cd5bea58-02b7-4fb8-af2e-7be15595ce8f
     text: "Near the centre of Lighthouse Reef, an atoll off Belize"
   - id: 0fa2e723-b2c1-43c1-9ebc-1fbe76bd673e
-    text: "In the Red Sea near Egypt"
+    text: "In the Red Sea, near the coast of Egypt"
   - id: 587bc8e3-50e8-4503-a580-34d61e25cdec
-    text: "Inside Iceland's Thingvellir park"
+    text: "Inside Iceland's Thingvellir national park"
 correct_choice_ids:
   - cd5bea58-02b7-4fb8-af2e-7be15595ce8f
 explanation: "It lies in the Lighthouse Reef atoll, off the coast of Belize."

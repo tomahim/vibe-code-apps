@@ -8,11 +8,11 @@ choices:
   - id: 87c8538d-7b83-4b7e-835f-851ecdbe2610
     text: "An inn at Sainte-Catherine"
   - id: 4469351d-93cd-49f2-8b3d-8244093835bc
-    text: "A train station"
+    text: "A train station at the foot of the pass"
   - id: 8527d91b-ae7d-40cf-89e6-5c4c0e27f169
-    text: "A mountain hut"
+    text: "A mountain hut at the top of the climb"
   - id: 5dc1038c-0a7f-4519-805a-36eb914f9ec1
-    text: "A tent"
+    text: "A tent pitched in a field"
 correct_choice_ids:
   - 87c8538d-7b83-4b7e-835f-851ecdbe2610
 explanation: "The raid had a night in an inn at Sainte-Catherine."

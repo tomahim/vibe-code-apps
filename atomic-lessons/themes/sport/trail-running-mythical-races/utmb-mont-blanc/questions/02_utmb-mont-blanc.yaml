@@ -6,7 +6,7 @@ after_card_position: 2
 prompt: "Who launched it?"
 choices:
   - id: f4b98726-8c81-4d84-b5ea-c89629097b8b
-    text: "Richard Barnum-Reece"
+    text: "Richard Barnum-Reece and a friend"
   - id: 8cc11adb-7e4c-4e49-8f05-5dc4132eaba7
     text: "Ken Chlouber and Merilee Maupin"
   - id: 3ecf67dd-7c4f-4084-a1a7-9faf0e3a8142

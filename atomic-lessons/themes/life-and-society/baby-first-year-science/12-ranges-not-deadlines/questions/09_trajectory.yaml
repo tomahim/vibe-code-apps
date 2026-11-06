@@ -8,11 +8,11 @@ choices:
   - id: cfbc4e70-648e-4779-b159-e3cfd1127aee
     text: "The trajectory of skill-building over weeks, across domains"
   - id: 16aece37-68dc-4750-97e0-9c94059f19ac
-    text: "Any single milestone date"
+    text: "Any single milestone date on the chart of the baby"
   - id: bd121843-563e-40f3-bef8-eb86e91f2236
-    text: "Height percentiles"
+    text: "Height percentiles on the growth curve of the baby"
   - id: b55746dc-d994-4795-aa21-630050ae3fa5
-    text: "The exact day of first steps"
+    text: "The exact day of the first steps and the first word"
 correct_choice_ids:
   - cfbc4e70-648e-4779-b159-e3cfd1127aee
 explanation: "Patterns over time and across domains separate typical variation from concern better than points."

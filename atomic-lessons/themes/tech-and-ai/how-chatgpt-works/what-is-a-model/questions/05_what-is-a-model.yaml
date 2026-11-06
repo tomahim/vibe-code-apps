@@ -8,9 +8,9 @@ choices:
   - id: 98dd0e0b-9f4e-4e1b-a29a-f04434ba38ce
     text: "No. Training tunes parameters within the chosen structure, which may limit what it can learn."
   - id: caf4e483-6b5a-43d0-87e5-8902eeffa49d
-    text: "A straight line may fit some observations but miss their shape."
+    text: "A straight line may fit some observations but still miss the shape of the data overall."
   - id: 058722ec-1c52-4f97-9454-9ad4fd88695d
-    text: "Parameters are numerical values chosen to fit the model to data."
+    text: "Parameters are numerical values chosen so that the model fits the data well."
   - id: 79a45235-4a7c-4b14-a9e9-f4ba161bc102
     text: "A model can fit known examples yet fail on new ones."
 correct_choice_ids:

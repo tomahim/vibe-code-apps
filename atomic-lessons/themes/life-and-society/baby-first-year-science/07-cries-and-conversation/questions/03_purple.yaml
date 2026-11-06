@@ -8,11 +8,11 @@ choices:
   - id: ebe41db3-9ab0-44c9-82c2-e74e204679c8
     text: "A normal, temporary developmental phase to endure safely"
   - id: f6cb16cb-493c-4fb4-8ee1-e7e6063c2f9f
-    text: "Proof of illness"
+    text: "Proof of an illness that needs a visit to the doctor soon"
   - id: db82b8a4-69b8-42d9-81bd-c441055edd4b
-    text: "Caused by parenting mistakes"
+    text: "Caused by parenting mistakes made at home in the first weeks"
   - id: 926c74b8-f771-41f2-aab5-26d47daa7291
-    text: "A reason to stop soothing attempts"
+    text: "A reason to stop all soothing attempts after a few minutes"
 correct_choice_ids:
   - ebe41db3-9ab0-44c9-82c2-e74e204679c8
 explanation: "Naming the pattern protects babies: exhausted caregivers who know it is normal and temporary cope more safely."

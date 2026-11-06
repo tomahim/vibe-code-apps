@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: "The modern view distinguishes critical periods from sensitive periods as:"
 choices:
   - id: a7686143-6ea6-4780-9965-549729393c1d
-    text: "Strict deadlines versus windows of outsized but gradually closing influence"
+    text: "Strict deadlines versus gradually closing windows"
   - id: 58e5506b-1e24-40a3-bcd6-d47b91e5258f
-    text: "The same thing"
+    text: "The same thing, described with two different names"
   - id: 7280001c-9806-4192-9e3e-3bc760980e02
-    text: "Windows only in animals"
+    text: "Windows that only exist in animals, not humans"
   - id: 9fae7750-4976-48eb-984d-6fa95df6ad51
-    text: "Periods only for vision"
+    text: "Periods that apply only to vision in babies"
 correct_choice_ids:
   - a7686143-6ea6-4780-9965-549729393c1d
 explanation: "True now-or-never deadlines are rare, as in visual development; most systems have softer sensitive windows."

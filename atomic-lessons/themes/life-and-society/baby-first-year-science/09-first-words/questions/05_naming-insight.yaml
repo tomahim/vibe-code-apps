@@ -8,11 +8,11 @@ choices:
   - id: f7fd004f-ac66-404b-94e9-12bc42fb939f
     text: "Things have names that are shared and stable"
   - id: 22473c3a-955b-4edc-bc44-2bfcb570290b
-    text: "Their own name is special"
+    text: "Their own name is special and unique"
   - id: d2221ef9-7a40-4b77-90fb-d540f7b312bd
-    text: "Words are written"
+    text: "Words are written down on paper"
   - id: 6323f92c-a5b4-465b-b038-5dafb5289315
-    text: "Adults know everything"
+    text: "Adults know everything about every object"
 correct_choice_ids:
   - f7fd004f-ac66-404b-94e9-12bc42fb939f
 explanation: "Once children grasp that everything has a label, word learning shifts from lucky pairings to appetite."

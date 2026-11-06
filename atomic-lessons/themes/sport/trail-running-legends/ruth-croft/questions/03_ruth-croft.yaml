@@ -11,9 +11,9 @@ choices:
   - id: 4fd77173-1a17-479d-9b99-c3e6fc895d46
     text: "University of Portland"
   - id: a9eb7506-4f03-4e42-bd8b-4ac00eb5f80a
-    text: "Stanford"
+    text: "Stanford University"
   - id: 3e4dd496-97a5-4e5b-9209-e4ba5e8295d6
-    text: "Boston College"
+    text: "Boston University"
 correct_choice_ids:
   - 4fd77173-1a17-479d-9b99-c3e6fc895d46
 explanation: "It is in Oregon."

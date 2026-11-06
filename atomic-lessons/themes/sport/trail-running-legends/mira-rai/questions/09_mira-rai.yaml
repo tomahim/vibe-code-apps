@@ -9,9 +9,9 @@ choices:
   - id: 35b4ac63-f139-44bd-9f52-17edff827672
     text: "First Nepalese woman to win an international ultra"
   - id: fe5b4e37-5c2b-4d54-834e-5fc08f4301dc
-    text: "First woman to climb Everest"
+    text: "First Nepalese woman ever to summit Everest"
   - id: d7e177e7-34a2-4989-a1eb-5cf7210dde57
-    text: "First Olympic medal for Nepal"
+    text: "First Olympic medal for Nepal in any sport"
   - id: 20923b13-6e23-4c97-a237-8876d7e7c931
     text: "First UTMB win"
 correct_choice_ids:

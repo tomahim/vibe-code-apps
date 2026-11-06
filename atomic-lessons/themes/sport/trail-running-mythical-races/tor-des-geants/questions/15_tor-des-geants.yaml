@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: "Why does the race promote tourism?"
 choices:
   - id: 2ddb0ec2-9d0c-4d3b-bf1c-10bddc820c66
-    text: "To hide the route"
+    text: "To hide the route from other towns in the valley"
   - id: 0172279f-3940-4ac4-bbee-3e771ee7d22b
     text: "To help the municipalities of the Valle d'Aosta"
   - id: f76ff95b-0517-439d-8e4f-b92dc2d4e487
-    text: "To raise taxes"
+    text: "To raise new taxes for the regional council"
   - id: c23b11f4-3277-4a3c-b8b1-1ed6109969ee
-    text: "To close roads"
+    text: "To close mountain roads for most of the summer"
 correct_choice_ids:
   - 0172279f-3940-4ac4-bbee-3e771ee7d22b
 explanation: "The official page says it promotes tourism."

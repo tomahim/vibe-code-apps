@@ -8,11 +8,11 @@ choices:
   - id: acd97d05-d2ce-4727-a97a-28bfdf8bc2af
     text: "Part of how balance is calibrated through practice"
   - id: e6d00d89-8a3f-4ef2-a09f-96a4b47d8124
-    text: "Evidence the child should stop walking practice"
+    text: "Evidence the child should stop practice for now"
   - id: be3de1a4-4441-4fb8-ab1d-a2c615b812e5
-    text: "A sign of weak bones"
+    text: "A sign of weak bones and loose joints in the legs"
   - id: e9c4ba7a-b35e-41d6-aa08-7a008f91be02
-    text: "Rare events, a few per week"
+    text: "Rare events, perhaps a few every week"
 correct_choice_ids:
   - acd97d05-d2ce-4727-a97a-28bfdf8bc2af
 explanation: "New walkers take thousands of steps and fall dozens of times a day; falling is information for the balance system."

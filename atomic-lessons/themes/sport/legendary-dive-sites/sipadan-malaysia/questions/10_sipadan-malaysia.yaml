@@ -6,9 +6,9 @@ after_card_position: 6
 prompt: "What happened to the six resorts on the island in 2004?"
 choices:
   - id: 3e0ce8c6-3d01-4776-9be2-852ee3d19da8
-    text: "They were given a new name"
+    text: "They were given a new name and a new owner"
   - id: 180fc30c-0ee1-463f-81c4-2dd0785f8cd2
-    text: "They were enlarged"
+    text: "They were enlarged and rebuilt in the same place"
   - id: fa042d87-af7b-4f43-992d-70563e4cdb06
     text: "They were turned into a museum"
   - id: 574f3162-5f6f-4820-b253-dd3bb4f081b7

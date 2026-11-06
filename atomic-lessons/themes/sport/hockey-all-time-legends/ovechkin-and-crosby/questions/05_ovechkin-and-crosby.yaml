@@ -8,11 +8,11 @@ choices:
   - id: f18feeef-3ddf-4c0f-b664-e2c1da2cd02d
     text: "The youngest captain to win the Stanley Cup"
   - id: 579b8f51-c8de-459e-8fa6-7775741f36eb
-    text: "The oldest MVP"
+    text: "The oldest MVP in the league's history"
   - id: 552cbae7-6fb5-4cfe-b08d-0dc6fe47683a
-    text: "A coach"
+    text: "A coach of a junior team in Canada"
   - id: 1e483fde-230a-48d6-9a9d-1d89bbae9532
-    text: "The first European Cup winner"
+    text: "The first European captain to win the Cup"
 correct_choice_ids:
   - f18feeef-3ddf-4c0f-b664-e2c1da2cd02d
 explanation: "He was 21 when he won the Cup as captain."

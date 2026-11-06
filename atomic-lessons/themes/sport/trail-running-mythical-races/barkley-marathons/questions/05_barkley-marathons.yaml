@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: "What must the entry fee include?"
 choices:
   - id: 5d03ba42-46e3-4d20-8bd5-e25d57206701
-    text: "A compass"
+    text: "A compass and a map of the desert"
   - id: 16004ccd-c49f-4a69-8ede-38cd3ff332af
     text: "A license plate from your home"
   - id: 74494076-0930-47c1-828c-8f46ae4778bc
-    text: "A horse"
+    text: "A horse and a saddle for the trail"
   - id: 3b093435-bd3b-42cb-bd8b-19b84c845f5a
-    text: "A book"
+    text: "A book and a pen for the finish"
 correct_choice_ids:
   - 16004ccd-c49f-4a69-8ede-38cd3ff332af
 explanation: "Entry includes bringing a license plate."

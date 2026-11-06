@@ -6,7 +6,7 @@ after_card_position: 3
 prompt: "Why can more than one next token be considered?"
 choices:
   - id: 4461fb98-5d74-4ccf-b144-44a03ebaf667
-    text: "Several next tokens can be plausible at once."
+    text: "Several next tokens can be plausible at the same time."
   - id: 10447c22-15ae-4c4c-ad11-17804247d75a
     text: "Greedy decoding always takes the highest-scored option."
   - id: 46e50db9-faee-42dc-9d54-483800dd6b68

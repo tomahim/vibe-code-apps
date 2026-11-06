@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: How did Indurain win his Tours tactically?
 choices:
 - id: 9c9097df-65a3-4189-807a-aff80be8e5dd
-  text: Sprinting to bonuses
+  text: "Sprinting for time bonuses at most stage finishes"
 - id: 3e6278a5-6dd6-469a-9277-29be6d5bdf11
-  text: Dominating time trials and defending in the mountains
+  text: "Winning time trials, then defending in the mountains"
 - id: ead95cc5-cba2-44fb-857f-d8e4e005dba7
-  text: Attacking downhill
+  text: "Attacking downhill on every descent he met"
 - id: d9042d2f-c533-47a5-8e77-4c449d5efee6
-  text: Team time trials only
+  text: "Winning team time trials, and little else besides"
 correct_choice_ids:
 - 3e6278a5-6dd6-469a-9277-29be6d5bdf11
 explanation: He gained minutes in time trials, then defended them in the mountains.

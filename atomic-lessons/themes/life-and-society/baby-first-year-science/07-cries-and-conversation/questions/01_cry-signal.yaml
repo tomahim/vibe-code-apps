@@ -8,11 +8,11 @@ choices:
   - id: 0e529daa-ebd4-4ad8-94fd-04dd0d06a658
     text: "A graded broadcast signal where intensity matters more than type"
   - id: aa8962b6-c1d5-433d-84ea-6aec18683fc1
-    text: "A precise code with one cry per need"
+    text: "A precise code with one distinct cry for each need of the baby"
   - id: 084a9bdd-6466-4c80-a922-11b920ab65af
-    text: "A random noise"
+    text: "A random noise with no information in it for the caregivers"
   - id: 12106ab3-b09c-4254-b470-dd285297f644
-    text: "A learned habit"
+    text: "A learned habit copied from the parents during the first weeks"
 correct_choice_ids:
   - 0e529daa-ebd4-4ad8-94fd-04dd0d06a658
 explanation: "The hunger-cry vs pain-cry distinction has weak support; context and intensity carry the information."

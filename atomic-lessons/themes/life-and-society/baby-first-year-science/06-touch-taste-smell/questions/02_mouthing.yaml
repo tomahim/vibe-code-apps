@@ -8,11 +8,11 @@ choices:
   - id: 46f1a86f-034e-412a-a764-017f58489155
     text: "A primary way of measuring texture, shape and temperature"
   - id: 87c9ef09-05cb-4c98-ae47-2b2cb01ebd64
-    text: "Always a sign of teething pain"
+    text: "Always a sign of teething pain in the gums of the baby"
   - id: ba052a65-dd0d-4b12-8b4f-60df1f9f4370
     text: "A bad habit to stop immediately"
   - id: c492434c-0066-4034-8eb9-3fc128718636
-    text: "Random behavior"
+    text: "Random behavior with no learning value for the baby"
 correct_choice_ids:
   - 46f1a86f-034e-412a-a764-017f58489155
 explanation: "The mouth's dense sensors make it a precision instrument for exploring objects in the first year."

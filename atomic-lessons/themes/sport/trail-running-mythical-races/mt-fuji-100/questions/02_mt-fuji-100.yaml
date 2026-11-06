@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: "Which race inspired it?"
 choices:
   - id: 28b6fcd6-3470-45b8-bb7e-4c76d4ba8b09
-    text: "Barkley"
+    text: "The Barkley Marathons"
   - id: 312df343-8b35-43d3-b127-9129a624ba07
     text: "Marathon des Sables"
   - id: c1b8bbc9-7d6f-4b4c-adac-8393955ee34c
-    text: "Pikes Peak"
+    text: "Pikes Peak Marathon"
   - id: 63c4885e-3a3d-4acb-ac75-20bb54206de2
-    text: "UTMB"
+    text: "The UTMB, in Chamonix"
 correct_choice_ids:
   - 63c4885e-3a3d-4acb-ac75-20bb54206de2
 explanation: "His UTMB experience led to the idea."

@@ -9,11 +9,11 @@ choices:
   - id: 0123d578-952d-435f-ae1a-6e6dfa6fcc1f
     text: "Agricultural science"
   - id: 276d5889-c966-449f-a1de-63d8f0f81c1f
-    text: "Medicine"
+    text: "Medicine at a hospital"
   - id: b7f51c04-a799-4158-8e82-7885d5b2ef7a
-    text: "Law"
+    text: "Law at a university"
   - id: 299014e3-321d-42c3-b47b-d854ae877907
-    text: "Engineering"
+    text: "Engineering at a school"
 correct_choice_ids:
   - 0123d578-952d-435f-ae1a-6e6dfa6fcc1f
 explanation: "She finished an agricultural science degree."

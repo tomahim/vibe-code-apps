@@ -6,11 +6,11 @@ after_card_position: 6
 prompt: "What is a mesophotic reef?"
 choices:
   - id: 02dc6e0d-0d3d-41c0-8da4-f9fdabc2921c
-    text: "A reef above water"
+    text: "A reef above water at low tide"
   - id: 23a2466e-34c9-4fb5-8b49-fbcc618d4975
-    text: "A reef made of shipwrecks"
+    text: "A reef made of shipwrecks and steel"
   - id: a420fd4b-adb5-4229-9bb3-af73ab1644bd
-    text: "A reef of ice"
+    text: "A reef of ice in polar seas"
   - id: 765a7c78-7bba-41da-9f52-082d3eef5486
     text: "A deeper reef that gets less light"
 correct_choice_ids:

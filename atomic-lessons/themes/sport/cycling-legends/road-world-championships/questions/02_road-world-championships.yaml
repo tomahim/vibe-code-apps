@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: What is special about World Championship teams?
 choices:
 - id: fff40c8b-1170-424f-970b-7b0605a7b02a
-  text: Mixed gender squads
+  text: "Mixed gender squads in every event of the week"
 - id: 7163cf76-079b-4371-abf6-9b0fa9bb0295
   text: Riders race for national teams, not trade teams
 - id: 4319a884-6c86-44f2-b21d-ef96bd55eb69
-  text: No team radios
+  text: "No team radios allowed in the race, for any rider"
 - id: f77a5d4d-2b14-4ce3-8121-025e096eb11b
-  text: Amateurs only
+  text: "Only amateurs may take part in the national squads"
 correct_choice_ids:
 - 7163cf76-079b-4371-abf6-9b0fa9bb0295
 explanation: Riders represent their country, not their trade team.

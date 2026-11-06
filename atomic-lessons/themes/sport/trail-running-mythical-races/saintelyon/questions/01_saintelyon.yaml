@@ -8,11 +8,11 @@ choices:
   - id: 66bfdcfa-9e95-4e14-b510-cd4d13e76c13
     text: "Cyclotourists from Lyon and Saint-Étienne"
   - id: 7bc2deaa-6125-47f3-a335-0ec29d4cfc97
-    text: "Mountain guides"
+    text: "Mountain guides from the Alps"
   - id: 075c9bee-163c-4f34-92cf-2c3436a8dc0e
-    text: "Marathon runners from Paris"
+    text: "Marathon runners from the north"
   - id: 05801cca-297c-494f-aa45-dd43f194231e
-    text: "Ski patrollers"
+    text: "Ski patrollers from the Pyrenees"
 correct_choice_ids:
   - 66bfdcfa-9e95-4e14-b510-cd4d13e76c13
 explanation: "The idea came from cyclists in both cities."

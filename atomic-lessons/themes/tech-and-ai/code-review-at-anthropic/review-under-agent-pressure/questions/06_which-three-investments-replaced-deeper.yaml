@@ -6,11 +6,11 @@ after_card_position: 7
 prompt: Which three investments replaced deeper human reading?
 choices:
 - id: 0e774baa-4e49-4d8d-9c00-32fd27c1855b
-  text: Moving reading to machines, optimizing human attention, and making mistakes cheap to undo
+  text: "Moving reading to machines, optimizing human attention, and cheap undo"
 - id: 085bdf79-8375-43f4-bab9-d1c07f3bf0b9
-  text: More meetings, longer PR descriptions, and bigger teams
+  text: "More meetings, longer PR descriptions, and bigger teams of reviewers"
 - id: d653520c-f961-4139-a593-9f19e3ae1a4b
-  text: Hiring more reviewers, stricter gates, and longer freezes
+  text: "Hiring more reviewers, stricter gates, and longer code freezes"
 - id: 39570b3b-2de5-444f-8630-38ac7cf7bb65
   text: Rewriting the codebase, freezing features, and manual QA only
 correct_choice_ids:

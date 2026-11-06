@@ -8,11 +8,11 @@ choices:
   - id: dc6561c9-53f3-4fd5-8307-43f580513cd1
     text: "Increased infants' later acceptance of that flavor"
   - id: aff94ccc-b3bc-4f0e-9bd8-77b67b69cf3e
-    text: "Had no effect on later taste"
+    text: "Had no effect on later taste preference"
   - id: 23e45dfd-5402-430e-9c75-fc347a64fda2
-    text: "Made infants reject that flavor"
+    text: "Made infants reject that same flavor later on"
   - id: 487e43af-827f-4c01-a8ed-3e8be78199eb
-    text: "Only affected smell"
+    text: "Only affected smell, not the taste of later food"
 correct_choice_ids:
   - dc6561c9-53f3-4fd5-8307-43f580513cd1
 explanation: "Flavors reach amniotic fluid; infants exposed prenatally accepted carrot-flavored cereal more readily at weaning."

@@ -8,11 +8,11 @@ choices:
   - id: 5408596e-de85-45d8-bd41-0b8f34e506b0
     text: "Which of two images a baby looked at longer"
   - id: bc78324d-ee12-4124-9b6c-0cafc616f519
-    text: "How fast babies crawl"
+    text: "How fast babies crawl across a soft mat"
   - id: 326782da-6182-48fc-83bf-62919b21e8ca
-    text: "Cry pitch"
+    text: "The pitch of a baby's cry heard at night"
   - id: 24b56aaf-0281-4d42-908f-8057dafbb0d2
-    text: "Sleep duration"
+    text: "How long babies sleep in a single night"
 correct_choice_ids:
   - 5408596e-de85-45d8-bd41-0b8f34e506b0
 explanation: "Preferential looking turned gaze choice into data about discrimination and preference."

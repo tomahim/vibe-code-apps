@@ -8,11 +8,11 @@ choices:
   - id: c0a9074d-4a72-41a9-afd6-5022ecb37611
     text: "He marked the course with flags"
   - id: 4c1b2297-70dd-409c-be55-96cfa7259338
-    text: "He mapped a route"
+    text: "He mapped a route for it"
   - id: 1ab46d9b-4594-45ed-bcfd-381d96298303
-    text: "He cooked at aid stations"
+    text: "He cooked at the aid stations"
   - id: ec54ad3c-0fd9-467e-9744-e52f88faef38
-    text: "He sold entries"
+    text: "He sold the entries"
 correct_choice_ids:
   - 4c1b2297-70dd-409c-be55-96cfa7259338
 explanation: "Baugh used Forest Service maps to highlight a point-to-point course."

@@ -9,11 +9,11 @@ choices:
   - id: 1a520686-4245-4049-9e17-c20c4e2356c6
     text: "Sharing without expecting a return"
   - id: 4c395272-6da8-4628-a764-1b4e28a94b8e
-    text: "A race prize"
+    text: "A race prize given to the winner"
   - id: a7e55ad9-7fee-47e4-8d7f-2810a9f00cf0
-    text: "A canyon"
+    text: "A canyon in the Copper Canyons region"
   - id: ad30ec2d-ee22-4ffb-8186-5bb4982dc9da
-    text: "A running shoe"
+    text: "A running shoe made of tire rubber"
 correct_choice_ids:
   - 1a520686-4245-4049-9e17-c20c4e2356c6
 explanation: "It is the circle of sharing."

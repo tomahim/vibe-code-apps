@@ -6,7 +6,7 @@ after_card_position: 2
 prompt: "From which university did most of the American players come?"
 choices:
   - id: 374276c3-c489-4a2d-aac6-8ff38638125e
-    text: "Harvard"
+    text: "Harvard University"
   - id: 3dae5337-2f7e-4385-bc40-10fea333967a
     text: "University of Minnesota"
   - id: a7354b6b-f699-498d-8f09-796238606e69

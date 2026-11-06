@@ -6,9 +6,9 @@ after_card_position: 8
 prompt: "What is required to dive at Sipadan?"
 choices:
   - id: ccd7dc22-dd6c-406b-95d2-a8892b43b340
-    text: "Nothing"
+    text: "Nothing, just a boat ride"
   - id: 4703f720-a229-4057-9455-a429a8218305
-    text: "A boat only"
+    text: "A boat only, with a local guide"
   - id: f9d7cfc7-c5cb-4ac8-b2cb-637e533327fa
     text: "A passport stamp from Indonesia"
   - id: 70cae9f0-f394-4978-bba0-794d99840d2f

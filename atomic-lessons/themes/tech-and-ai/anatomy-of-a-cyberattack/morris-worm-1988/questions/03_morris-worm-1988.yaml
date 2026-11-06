@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: What kind of weaknesses did the worm combine?
 choices:
 - id: fcf5709d-9b6b-4367-ac92-9e2e5433293f
-  text: A mail debug feature, a service bug and password guessing with host trust
+  text: "A mail debug feature, a service bug and password guessing"
 - id: 73d47e65-3eab-46a4-ba20-ae4c23ad573e
-  text: Only one unknown flaw in the web browser
+  text: "Only one unknown flaw in the web browser of the host"
 - id: b370fb6d-68d2-47db-b7af-eb5ea994877e
-  text: A hardware defect in network cables
+  text: "A hardware defect in the network cables and the switches"
 - id: 9741a7f6-3cfa-4b66-9015-13a13e47a491
-  text: Stolen encryption certificates
+  text: "Stolen encryption certificates and old keys from a vendor"
 correct_choice_ids:
 - fcf5709d-9b6b-4367-ac92-9e2e5433293f
 explanation: It used multiple independent routes, so closing one did not stop it. The web did not exist yet.

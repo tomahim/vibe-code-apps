@@ -8,11 +8,11 @@ choices:
   - id: ce7121c5-2463-463c-8df3-7394883c8c59
     text: "Overextension: a first-draft category theory"
   - id: 78a128b6-06e4-4cfd-84ee-6c5082489103
-    text: "A hearing problem"
+    text: "A hearing problem that blurs word sounds"
   - id: 12b6198c-966f-41db-b6f2-fde875c21659
-    text: "Regression"
+    text: "Regression to earlier stages of speech"
   - id: 3a44044e-5e17-4775-98c3-4716bdd4989f
-    text: "Babbling"
+    text: "Babbling that has no real meaning yet"
 correct_choice_ids:
   - ce7121c5-2463-463c-8df3-7394883c8c59
 explanation: "Overextensions are systematic hypotheses about word boundaries, corrected as vocabulary grows."

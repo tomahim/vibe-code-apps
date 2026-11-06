@@ -7,11 +7,11 @@ after_card_position: 4
 prompt: "Which race was Forsberg's first serious trail race?"
 choices:
   - id: d715875e-8eb6-40e8-80eb-2b85fb4f9227
-    text: "UTMB"
+    text: "The UTMB in Chamonix"
   - id: 453a2be1-59db-4a96-a3e2-558b9ca32a81
-    text: "Lavaredo"
+    text: "The Lavaredo Ultra Trail"
   - id: 908f33d7-2f9d-47d3-a8a1-e0d8c1fc4f0d
-    text: "Zegama"
+    text: "The Zegama marathon"
   - id: 2aad88e8-2e8d-4331-95c0-0f7353821205
     text: "The Swedish Fjällmaraton"
 correct_choice_ids:

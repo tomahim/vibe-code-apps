@@ -6,11 +6,11 @@ after_card_position: 6
 prompt: "How many of the 52 sunken ships were raised by salvage companies?"
 choices:
   - id: bb66f070-b35d-4a08-824a-3d65f0551465
-    text: "None of them"
+    text: "None of them, as all stayed on the seabed"
   - id: 24c81f8c-f729-4b40-88d8-01f1e9197cb7
-    text: "About 5"
+    text: "About 5 of them, leaving 47 wrecks"
   - id: 75a87447-e41a-4d8d-b75d-55ce8ec78445
-    text: "About 15"
+    text: "About 15 of them, leaving 37 wrecks"
   - id: ca6a5cc4-ceed-4647-8834-22ab3dc42485
     text: "45 of them, leaving seven wrecks"
 correct_choice_ids:

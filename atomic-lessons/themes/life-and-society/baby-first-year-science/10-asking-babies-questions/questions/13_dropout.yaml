@@ -8,11 +8,11 @@ choices:
   - id: e747445c-43dc-42ad-a3bd-628e4e55a7c4
     text: "High dropout from fussiness and sleep can skew samples"
   - id: 073a0d94-3d49-42de-8fc8-3cfd10d98846
-    text: "Babies lie"
+    text: "Babies lie to the researchers during tasks"
   - id: 27f4dd62-302b-4441-91eb-092ac26910c5
-    text: "Parents interfere constantly"
+    text: "Parents interfere constantly in every session"
   - id: adb76b05-271f-4384-8404-5ec03ada1a67
-    text: "Equipment is cheap"
+    text: "The equipment is cheap and often inaccurate"
 correct_choice_ids:
   - e747445c-43dc-42ad-a3bd-628e4e55a7c4
 explanation: "Large attrition from crying or sleepiness means tested babies may not represent all babies."

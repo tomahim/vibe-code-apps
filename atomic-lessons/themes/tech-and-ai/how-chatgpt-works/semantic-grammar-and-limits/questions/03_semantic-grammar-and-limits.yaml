@@ -8,11 +8,11 @@ choices:
   - id: d804e713-2164-4896-bec0-9f2e18e6a6dc
     text: "A statement can sound meaningful and still be false in the world."
   - id: 0e908dd8-d036-4a8e-858b-fc216fc89b25
-    text: "A tool can perform an explicit calculation or retrieve checkable evidence."
+    text: "A tool can perform an explicit calculation or fetch checkable evidence."
   - id: d2953d6e-d635-4a75-a53c-a9c851075382
-    text: "Wolfram contrasts flexible human language with precise forms that a computer can execute."
+    text: "Flexible human language is contrasted with precise forms a computer can run."
   - id: bec3c915-63eb-41b9-8325-f9e52495314a
-    text: "Wolfram proposes rules about which concepts can sensibly combine."
+    text: "Rules about which concepts can sensibly combine are proposed."
 correct_choice_ids:
   - d2953d6e-d635-4a75-a53c-a9c851075382
 explanation: "Wolfram contrasts flexible human language with precise forms that a computer can execute. This is part of his proposed way to connect text with exact reasoning. Wolfram describes computational language as a precise symbolic way to represent things and operations so they can be executed unambiguously. For example, a structured expression for a quantity of apples could support a calculation, whereas the ordinary sentence “I bought some apples” leaves details open."

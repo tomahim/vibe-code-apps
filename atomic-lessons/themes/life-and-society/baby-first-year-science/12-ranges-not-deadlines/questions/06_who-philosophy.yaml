@@ -8,11 +8,11 @@ choices:
   - id: 43c87a8e-f007-4675-befd-1e6c73a9ea0f
     text: "The full 1st-to-99th-percentile normal spread"
   - id: 95313da7-324b-4b83-8d99-8640a0f716d6
-    text: "Only averages"
+    text: "Only averages for each age group, no spread"
   - id: e40451fe-9007-4d53-9797-0f48338d11d0
-    text: "Only the latest ages"
+    text: "Only the latest ages at which skills appear"
   - id: 560267c1-9ff3-45b6-851a-d94631d81281
-    text: "Only the earliest ages"
+    text: "Only the earliest ages at which skills appear"
 correct_choice_ids:
   - 43c87a8e-f007-4675-befd-1e6c73a9ea0f
 explanation: "The WHO approach describes variation directly; the CDC approach optimizes for actionability."

@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: What did the 2022 review recommend?
 choices:
 - id: ccf6f486-997f-44b0-bdc4-e7873caf03b2
-  text: Banning open-source software
+  text: "Banning open-source software in government"
 - id: 42da4d64-f7e2-43ca-9e77-a9256376acec
-  text: Removing logging from programs
+  text: "Removing logging from programs to cut the risk"
 - id: 5e8c2eb1-21da-4201-ad25-6689fbb65eb4
-  text: Better inventory, support for open-source maintainers and stronger development security
+  text: "Better inventory, open-source maintainer support and secure development"
 - id: 0da41272-23d8-454f-83f1-f542a5155e49
-  text: Ignoring the issue
+  text: "Ignoring the issue because the risk was judged low"
 correct_choice_ids:
 - 5e8c2eb1-21da-4201-ad25-6689fbb65eb4
 explanation: The Cyber Safety Review Board described the vulnerability as endemic.

@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: What did Hinault do after retiring?
 choices:
 - id: d390de34-fbed-4553-83a0-32ac1e010b03
-  text: Became a TV comedian
+  text: "Became a TV comedian in France"
 - id: 327b2364-7e44-49c8-9c31-3f0d03a15070
-  text: Farmed in Brittany and worked with the Tour organisation
+  text: "Farmed and worked with the Tour"
 - id: 0ef14e11-8b17-4f59-943e-16251134e27d
-  text: Coached the French team
+  text: "Coached the French national team"
 - id: 8e599889-a618-4bff-93f6-a6f73f5a9acd
-  text: Opened a bike shop
+  text: "Opened a bike shop in his town"
 correct_choice_ids:
 - 327b2364-7e44-49c8-9c31-3f0d03a15070
 explanation: He farmed and presented the Tour's podium ceremonies for years.

@@ -8,7 +8,7 @@ choices:
 - id: 7fbd497a-2639-470c-9267-73adc5f0a2fb
   text: Alerts only help if someone acts on them
 - id: 77cae4fc-5bd4-4dd2-ad30-8ba21e2cffa0
-  text: Monitoring tools should be removed
+  text: "Monitoring tools should be removed"
 - id: e69e93ac-75fc-4eab-a63c-dbe304d3a977
   text: Alerts always stop attacks automatically
 - id: 75597b7c-0013-49cc-909b-d73900e6c5f6

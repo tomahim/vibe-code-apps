@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: "Who organised the first edition?"
 choices:
   - id: 24a9ab07-7377-4635-bc58-83e013f876c9
-    text: "The Spanish army"
+    text: "The Spanish national army"
   - id: ef10c275-a866-4ff0-9188-87ed88acfae3
     text: "The Cabildo de La Palma"
   - id: 8839471f-8365-4076-a4b3-730b0829b0e3
-    text: "A shoe company"
+    text: "A large shoe company"
   - id: 3cdc686b-1861-41f2-b74a-b3abec427c53
-    text: "UTMB Group"
+    text: "The UTMB Group firm"
 correct_choice_ids:
   - ef10c275-a866-4ff0-9188-87ed88acfae3
 explanation: "The island government organised it."

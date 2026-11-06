@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: What defined the 1980 edition?
 choices:
 - id: 973d944e-bc58-4ab4-a3dc-fda313da4385
-  text: Record heat
+  text: "Record heat with many riders retiring"
 - id: 5df92ef5-5e49-4c89-b636-fb90d01b8927
   text: A snowstorm with only about 21 finishers
 - id: b005edbc-ed9f-4316-926b-01071b1c0024
-  text: A mass sprint
+  text: "A mass sprint on the final day"
 - id: e1384e17-72c5-4bb2-9a43-bbaba1f315d6
-  text: A dead heat
+  text: "A dead heat for first place"
 correct_choice_ids:
 - 5df92ef5-5e49-4c89-b636-fb90d01b8927
 explanation: A blizzard; Hinault won alone by nearly ten minutes.

@@ -8,11 +8,11 @@ choices:
   - id: 32a56a23-6bed-464f-8ae8-8dc6195a1eb3
     text: "Depth and trajectory from visual flow"
   - id: 35ebf91d-7039-4295-8466-78515a85b964
-    text: "Color categories"
+    text: "Color categories and shades"
   - id: fdcf5a26-e827-4ee6-bb11-8fe0aa4e8c64
-    text: "Faces"
+    text: "Faces and expressions of caregivers"
   - id: 7ce34673-911a-49dc-9673-1254a46574b1
-    text: "Written words"
+    text: "Written words and letter shapes"
 correct_choice_ids:
   - 32a56a23-6bed-464f-8ae8-8dc6195a1eb3
 explanation: "Looming responses show the young visual system already extracts approach and collision information."
