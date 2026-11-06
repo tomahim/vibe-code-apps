@@ -141,13 +141,17 @@ test('scouting table and simulator incoming list show latest medical reports, ne
  await expect(page.getByText(/no report is not a confirmation of health/)).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
  await page.screenshot({path:'/downloads/hockey-mobile-scouting-medical.png',fullPage:true});
+ const wrap=page.locator('.hk-table-wrap').first();await wrap.evaluate(el=>{el.scrollLeft=el.scrollWidth;});
+ const badge=fwd.getByRole('link',{name:'Out · 11-04'});await badge.scrollIntoViewIfNeeded();await expect(badge).toBeInViewport();await wrap.screenshot({path:'/downloads/hockey-mobile-scouting-medical-scrolled.png'});
  await page.goto('/apps/hockey/simulator');await page.getByLabel('Your team',{exact:true}).selectOption('10');
  const inc=page.locator('.hk-player-table tbody tr',{has:page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true})});
  const d2d=inc.getByRole('link',{name:'Day-to-day · 11-05'});
  await expect(d2d).toBeVisible();await expect(d2d).toHaveAttribute('href','https://swisshockeynews.ch/en/shn/medical/fixture-d2d');
- await expect(page.getByText(/no report is not a confirmation of health/)).toBeVisible();
+ await expect(page.getByText(/not a current medical state/)).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
  await page.screenshot({path:'/downloads/hockey-mobile-simulator-medical.png',fullPage:true});
+ const simWrap=page.locator('.hk-table-wrap').first();await simWrap.evaluate(el=>{el.scrollLeft=el.scrollWidth;});
+ await d2d.scrollIntoViewIfNeeded();await expect(d2d).toBeInViewport();await simWrap.screenshot({path:'/downloads/hockey-mobile-simulator-medical-scrolled.png'});
 });
 
 test('server-side sorting with direction, nulls last, selection preserved',async({page})=>{
