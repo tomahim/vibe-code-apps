@@ -1,0 +1,779 @@
+// Lithothèque glossary - bilingual (FR/EN) geology terms, no backend: all data ships in the build.
+//
+// "GEO <word>" convention (Thomas, 2026-11-06): when he sends "GEO <word>" (comma-separated = several
+// words), add one entry per word to GLOSSARY_TERMS under the relevant category. Each entry needs:
+// - id: stable kebab-case key; category: a key from GLOSSARY_CATEGORIES
+// - fr / en: { term, definition, source } - definitions original text grounded in the linked sources
+// - image: { url, file, credit, license, alt } - Wikimedia Commons image whose license was verified
+//   on the file page (file = Commons File: page for attribution); keep licenses to CC/PD only.
+// Definitions were checked against the linked Wikipedia articles on 2026-11-06; image licenses were
+// verified via the Commons API the same day.
+
+export const GLOSSARY_CATEGORIES = [
+    { id: 'terrain', fr: 'Terrain', en: 'Field geology' },
+    { id: 'roches', fr: 'Roches & sédiments', en: 'Rocks & sediments' },
+    { id: 'mineraux', fr: 'Minéraux', en: 'Minerals' },
+    { id: 'structures', fr: 'Structures', en: 'Structures' },
+    { id: 'relief', fr: 'Relief & processus', en: 'Landforms & processes' },
+    { id: 'temps', fr: 'Temps & fossiles', en: 'Time & fossils' },
+    { id: 'planete', fr: 'Planète Terre', en: 'Planet Earth' },
+];
+
+export const GLOSSARY_TERMS = [
+    {
+        "id": "affleurement",
+        "category": "terrain",
+        "fr": {
+            "term": "Affleurement",
+            "definition": "Partie d'une roche du sous-sol qui paraît à la surface, non masquée par le sol ou la végétation. C'est le point de départ de toute observation géologique sur le terrain.",
+            "source": "https://fr.wikipedia.org/wiki/Affleurement"
+        },
+        "en": {
+            "term": "Outcrop",
+            "definition": "Bedrock or ancient deposits visible at the surface, not hidden under soil or vegetation. Outcrops are where field geology begins.",
+            "source": "https://en.wikipedia.org/wiki/Outcrop"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Rockeskyller_Kopf_3.JPG/960px-Rockeskyller_Kopf_3.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Rockeskyller_Kopf_3.JPG",
+            "credit": "Beckstet",
+            "license": "CC BY-SA 3.0",
+            "alt": "Carrière montrant des couches rocheuses qui affleurent"
+        }
+    },
+    {
+        "id": "pendage",
+        "category": "terrain",
+        "fr": {
+            "term": "Pendage",
+            "definition": "Angle d'inclinaison d'un plan géologique (couche, faille) par rapport à l'horizontale. Mesuré avec la direction du plan, il décrit l'orientation d'une structure.",
+            "source": "https://fr.wikipedia.org/wiki/Pendage"
+        },
+        "en": {
+            "term": "Dip (and strike)",
+            "definition": "The angle at which a geological plane (bed, fault) tilts from horizontal. Together with the strike, it describes the orientation of a planar feature.",
+            "source": "https://en.wikipedia.org/wiki/Strike_and_dip"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Strike_and_dip_on_bedding.svg/960px-Strike_and_dip_on_bedding.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Strike_and_dip_on_bedding.svg",
+            "credit": "CrunchyRocks, after Karla Panchuck",
+            "license": "CC BY 4.0",
+            "alt": "Schéma de la mesure du pendage sur une couche inclinée"
+        }
+    },
+    {
+        "id": "carte-geologique",
+        "category": "terrain",
+        "fr": {
+            "term": "Carte géologique",
+            "definition": "Carte qui représente la nature, l'âge et la répartition des roches et des structures (failles, plis) d'une région, au moyen de couleurs et de symboles.",
+            "source": "https://fr.wikipedia.org/wiki/Carte_g%C3%A9ologique"
+        },
+        "en": {
+            "term": "Geological map",
+            "definition": "A map showing the type, age and distribution of rock units and structures (faults, folds) in a region, using colours and symbols.",
+            "source": "https://en.wikipedia.org/wiki/Geological_map"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/World_geologic_provinces.jpg/960px-World_geologic_provinces.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:World_geologic_provinces.jpg",
+            "credit": "USGS",
+            "license": "Public domain",
+            "alt": "Carte mondiale des provinces géologiques"
+        }
+    },
+    {
+        "id": "gisement",
+        "category": "terrain",
+        "fr": {
+            "term": "Gisement",
+            "definition": "Concentration naturelle d'une ressource dans le sol ou le sous-sol. Pour un minerai, on parle de gisement minéral ou métallifère ; pour le pétrole ou le gaz, de gisement pétrolier ou gazier. Un gisement peut être caché en profondeur.",
+            "source": "https://fr.wikipedia.org/wiki/Gisement"
+        },
+        "en": {
+            "term": "Deposit / field",
+            "definition": "A natural concentration of a resource in the ground. The translation depends on the resource: mineral or ore deposit, but oilfield or gas field for hydrocarbons. A deposit may be hidden underground.",
+            "source": "https://en.wikipedia.org/wiki/Ore"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Mina_de_Chuquicamata%2C_Calama%2C_Chile%2C_2016-02-01%2C_DD_110-112_PAN.JPG/960px-Mina_de_Chuquicamata%2C_Calama%2C_Chile%2C_2016-02-01%2C_DD_110-112_PAN.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Mina_de_Chuquicamata,_Calama,_Chile,_2016-02-01,_DD_110-112_PAN.JPG",
+            "credit": "Diego Delso",
+            "license": "CC BY-SA 4.0",
+            "alt": "Mine de cuivre à ciel ouvert de Chuquicamata, Chili"
+        }
+    },
+    {
+        "id": "granite",
+        "category": "roches",
+        "fr": {
+            "term": "Granite",
+            "definition": "Roche magmatique plutonique à grains visibles, riche en quartz et feldspaths, formée par refroidissement lent d'un magma siliceux en profondeur.",
+            "source": "https://fr.wikipedia.org/wiki/Granite"
+        },
+        "en": {
+            "term": "Granite",
+            "definition": "A coarse-grained intrusive igneous rock rich in quartz and feldspars, formed when silica-rich magma cools slowly underground.",
+            "source": "https://en.wikipedia.org/wiki/Granite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Bianco_Sardo_Granit_mit_polierter_Oberfl%C3%A4che.jpg/960px-Bianco_Sardo_Granit_mit_polierter_Oberfl%C3%A4che.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Bianco_Sardo_Granit_mit_polierter_Oberfl%C3%A4che.jpg",
+            "credit": "The stone gate",
+            "license": "CC BY-SA 4.0",
+            "alt": "Surface polie de granite montrant quartz et feldspaths"
+        }
+    },
+    {
+        "id": "basalte",
+        "category": "roches",
+        "fr": {
+            "term": "Basalte",
+            "definition": "Roche volcanique sombre à grains fins, issue du refroidissement rapide d'une lave fluide riche en fer et magnésium. Elle forme l'essentiel des fonds océaniques.",
+            "source": "https://fr.wikipedia.org/wiki/Basalte"
+        },
+        "en": {
+            "term": "Basalt",
+            "definition": "A dark, fine-grained volcanic rock from fast-cooling, iron- and magnesium-rich lava. It makes up most of the ocean floor.",
+            "source": "https://en.wikipedia.org/wiki/Basalt"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Basalt_12_%2848674276333%29.jpg/960px-Basalt_12_%2848674276333%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Basalt_12_(48674276333).jpg",
+            "credit": "James St. John",
+            "license": "CC BY 2.0",
+            "alt": "Échantillon de basalte"
+        }
+    },
+    {
+        "id": "gneiss",
+        "category": "roches",
+        "fr": {
+            "term": "Gneiss",
+            "definition": "Roche métamorphique feuilletée à gros grains (quartz, feldspaths, micas), formée sous haute température et pression à partir de roches sédimentaires ou magmatiques.",
+            "source": "https://fr.wikipedia.org/wiki/Gneiss"
+        },
+        "en": {
+            "term": "Gneiss",
+            "definition": "A foliated metamorphic rock with visible grains of quartz, feldspar and mica, formed under high temperature and pressure from sedimentary or igneous rocks.",
+            "source": "https://en.wikipedia.org/wiki/Gneiss"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Gneiss.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:Gneiss.jpg",
+            "credit": "Siim Sepp",
+            "license": "CC BY-SA 3.0",
+            "alt": "Échantillon de gneiss rubané"
+        }
+    },
+    {
+        "id": "schiste",
+        "category": "roches",
+        "fr": {
+            "term": "Schiste",
+            "definition": "Roche à aspect feuilleté qui se débite en plaques fines : on dit qu'elle a une schistosité. Le mot couvre le schiste métamorphique et, au sens large, les roches sédimentaires argileuses, que les géologues appellent plutôt argilite ou « shale ».",
+            "source": "https://fr.wikipedia.org/wiki/Schiste"
+        },
+        "en": {
+            "term": "Schist",
+            "definition": "A metamorphic rock with pronounced schistosity: it splits into thin sheets or flakes. In French, \"schiste\" is also used loosely for clayey sedimentary rocks, which geologists call shale or argillite.",
+            "source": "https://en.wikipedia.org/wiki/Schist"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Schist_detail.jpg/960px-Schist_detail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Schist_detail.jpg",
+            "credit": "Michael C. Rygel",
+            "license": "CC BY-SA 3.0",
+            "alt": "Détail de schiste, roche métamorphique feuilletée"
+        }
+    },
+    {
+        "id": "gres",
+        "category": "roches",
+        "fr": {
+            "term": "Grès",
+            "definition": "Roche sédimentaire détritique majoritairement sableuse : des grains de 0,063 à 2 mm, issus de l'érosion de roches préexistantes, consolidés par un ciment lors de la diagenèse.",
+            "source": "https://fr.wikipedia.org/wiki/Gr%C3%A8s_(g%C3%A9ologie)"
+        },
+        "en": {
+            "term": "Sandstone",
+            "definition": "A clastic sedimentary rock made of sand-sized grains (0.0625-2 mm) cemented together during burial. Sandstones are about a fifth of all sedimentary rocks.",
+            "source": "https://en.wikipedia.org/wiki/Sandstone"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/USDA_Mineral_Sandstone_93c3955.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:USDA_Mineral_Sandstone_93c3955.jpg",
+            "credit": "USDA",
+            "license": "Public domain",
+            "alt": "Tranche sciée de grès"
+        }
+    },
+    {
+        "id": "argile",
+        "category": "roches",
+        "fr": {
+            "term": "Argile",
+            "definition": "Matière rocheuse naturelle très fine, issue de l'altération de silicates comme les feldspaths, à base de minéraux hydratés en feuillets. Plastique quand elle est humide, elle durcit à la cuisson.",
+            "source": "https://fr.wikipedia.org/wiki/Argile"
+        },
+        "en": {
+            "term": "Clay",
+            "definition": "A fine-grained natural material from the weathering of silicates such as feldspars, built of hydrated sheet-silicate (clay) minerals. Plastic when wet, it hardens when fired.",
+            "source": "https://en.wikipedia.org/wiki/Clay"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Mettingen_Querenberg_Clay_Pit_02.jpg/960px-Mettingen_Querenberg_Clay_Pit_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Mettingen_Querenberg_Clay_Pit_02.jpg",
+            "credit": "J.-H. Janßen",
+            "license": "CC BY-SA 3.0",
+            "alt": "Carrière d’argile de Querenberg, Mettingen"
+        }
+    },
+    {
+        "id": "quartz",
+        "category": "mineraux",
+        "fr": {
+            "term": "Quartz",
+            "definition": "Minéral de silice (SiO₂) dur (7 sur l'échelle de Mohs) et sans clivage. Avec environ 12 % de la masse de la lithosphère, c'est l'un des minéraux les plus abondants.",
+            "source": "https://fr.wikipedia.org/wiki/Quartz"
+        },
+        "en": {
+            "term": "Quartz",
+            "definition": "A hard silica mineral (SiO₂), 7 on the Mohs scale, with no cleavage; about 12% of the lithosphere by mass, one of the most common minerals on Earth.",
+            "source": "https://en.wikipedia.org/wiki/Quartz"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Quartz_Br%C3%A9sil.jpg/960px-Quartz_Br%C3%A9sil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Quartz_Br%C3%A9sil.jpg",
+            "credit": "Didier Descouens",
+            "license": "CC BY-SA 4.0",
+            "alt": "Cristaux de quartz, Minas Gerais, Brésil"
+        }
+    },
+    {
+        "id": "calcite",
+        "category": "mineraux",
+        "fr": {
+            "term": "Calcite",
+            "definition": "Carbonate de calcium (CaCO₃), minéral principal du calcaire et du marbre. Tendre (3 Mohs), il effervesce à l'acide et dédouble les images par biréfringence.",
+            "source": "https://fr.wikipedia.org/wiki/Calcite"
+        },
+        "en": {
+            "term": "Calcite",
+            "definition": "Calcium carbonate (CaCO₃), the main mineral of limestone and marble. Soft (3 Mohs), it fizzes with acid and shows strong double refraction.",
+            "source": "https://en.wikipedia.org/wiki/Calcite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Calcite_Variation.png/960px-Calcite_Variation.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Calcite_Variation.png",
+            "credit": "PaleoNeolitic",
+            "license": "CC BY 4.0",
+            "alt": "Variétés de formes cristallines de la calcite"
+        }
+    },
+    {
+        "id": "grenat",
+        "category": "mineraux",
+        "fr": {
+            "term": "Grenat",
+            "definition": "Famille de minéraux silicatés cristallisant dans le système cubique, souvent présents dans les roches métamorphiques. Leurs cristaux peuvent avoir douze faces ; certaines variétés servent de gemmes ou d'abrasifs.",
+            "source": "https://fr.wikipedia.org/wiki/Grenat"
+        },
+        "en": {
+            "term": "Garnet",
+            "definition": "A group of silicate minerals in the cubic crystal system, often found in metamorphic rocks. Their crystals can have twelve faces; some varieties are used as gemstones or abrasives.",
+            "source": "https://en.wikipedia.org/wiki/Garnet"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Garnet_Andradite20.jpg/960px-Garnet_Andradite20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Garnet_Andradite20.jpg",
+            "credit": "Moha112100",
+            "license": "CC BY-SA 3.0",
+            "alt": "Cristal de grenat andradite"
+        }
+    },
+    {
+        "id": "faille",
+        "category": "structures",
+        "fr": {
+            "term": "Faille",
+            "definition": "Plan ou zone de rupture le long duquel deux blocs rocheux se sont déplacés l'un par rapport à l'autre, sous l'effet des contraintes tectoniques.",
+            "source": "https://fr.wikipedia.org/wiki/Faille"
+        },
+        "en": {
+            "term": "Fault",
+            "definition": "A fracture between two rock blocks that have slipped past each other under tectonic stress. The largest faults mark plate boundaries.",
+            "source": "https://en.wikipedia.org/wiki/Fault_(geology)"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Piqiang_Fault%2C_China_detail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:Piqiang_Fault,_China_detail.jpg",
+            "credit": "NASA Earth Observatory / Robert Simmon",
+            "license": "Public domain",
+            "alt": "Vue satellite de la faille de Piqiang, Chine"
+        }
+    },
+    {
+        "id": "pli",
+        "category": "structures",
+        "fr": {
+            "term": "Pli",
+            "definition": "Déformation courbe de couches rocheuses initialement planes, plissées sans se rompre (déformation ductile) sous l'effet des contraintes tectoniques.",
+            "source": "https://fr.wikipedia.org/wiki/Pli_(g%C3%A9ologie)"
+        },
+        "en": {
+            "term": "Fold",
+            "definition": "A bend in originally flat rock layers, deformed without breaking (ductile deformation) under tectonic stress. Folds range from microscopic crinkles to mountain-sized arcs.",
+            "source": "https://en.wikipedia.org/wiki/Fold_(geology)"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Folding_of_alternate_layers_of_limestone_layers_with_chert_layers.jpg/960px-Folding_of_alternate_layers_of_limestone_layers_with_chert_layers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Folding_of_alternate_layers_of_limestone_layers_with_chert_layers.jpg",
+            "credit": "Dieter Mueller",
+            "license": "CC BY-SA 4.0",
+            "alt": "Couches de calcaire et de chert plissées"
+        }
+    },
+    {
+        "id": "discordance",
+        "category": "structures",
+        "fr": {
+            "term": "Discordance",
+            "definition": "Ancienne surface d'érosion ou de non-dépôt séparant deux séries de couches d'âges différents : la série inférieure a été érodée avant le dépôt de la série supérieure. Elle marque un hiatus dans l'enregistrement sédimentaire.",
+            "source": "https://fr.wikipedia.org/wiki/Discordance_(stratigraphie)"
+        },
+        "en": {
+            "term": "Unconformity",
+            "definition": "A buried surface of erosion or non-deposition separating rock sequences of different ages: the older layers were eroded before the younger were laid down. It marks a gap (hiatus) in the record.",
+            "source": "https://en.wikipedia.org/wiki/Unconformity"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Hutton_Unconformity%2C_Jedburgh.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "file": "https://commons.wikimedia.org/wiki/File:Hutton_Unconformity,_Jedburgh.jpg",
+            "credit": "Dave souza",
+            "license": "Public domain",
+            "alt": "Discordance de Hutton à Jedburgh, Écosse"
+        }
+    },
+    {
+        "id": "moraine",
+        "category": "relief",
+        "fr": {
+            "term": "Moraine",
+            "definition": "Accumulation de débris rocheux transportés ou déposés par un glacier. On distingue notamment les moraines latérales sur ses bords, médianes au centre et frontales à son extrémité.",
+            "source": "https://fr.wikipedia.org/wiki/Moraine"
+        },
+        "en": {
+            "term": "Moraine",
+            "definition": "An accumulation of rock debris carried or deposited by a glacier. Lateral moraines lie along its sides, medial moraines down its centre, and terminal moraines at its end.",
+            "source": "https://en.wikipedia.org/wiki/Moraine"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Manang_site_%2854%29.JPG/960px-Manang_site_%2854%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Manang_site_(54).JPG",
+            "credit": "Bijaya2043",
+            "license": "CC BY-SA 3.0",
+            "alt": "Moraine dans la région de Manang, Népal"
+        }
+    },
+    {
+        "id": "cirque",
+        "category": "relief",
+        "fr": {
+            "term": "Cirque glaciaire",
+            "definition": "Dépression en forme d'amphithéâtre, entourée de parois raides, à l'amont d'une vallée glaciaire. Elle est façonnée par l'érosion glaciaire et peut rester visible après la disparition du glacier.",
+            "source": "https://fr.wikipedia.org/wiki/Cirque_glaciaire"
+        },
+        "en": {
+            "term": "Cirque",
+            "definition": "An amphitheatre-shaped hollow with steep walls at the head of a glacial valley. It is shaped by glacial erosion and may remain after the glacier has disappeared.",
+            "source": "https://en.wikipedia.org/wiki/Cirque"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Gavarnie-Cirque.JPG/960px-Gavarnie-Cirque.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Gavarnie-Cirque.JPG",
+            "credit": "Jean-Christophe Benoist",
+            "license": "CC BY 3.0",
+            "alt": "Cirque de Gavarnie, Hautes-Pyrénées"
+        }
+    },
+    {
+        "id": "erosion",
+        "category": "relief",
+        "fr": {
+            "term": "Érosion",
+            "definition": "Processus de dégradation et de transformation du relief (sols, roches, berges, littoraux) par des agents externes - eau, glace, vent, gravité - qui retirent les matériaux d'un lieu pour les déposer ailleurs.",
+            "source": "https://fr.wikipedia.org/wiki/%C3%89rosion"
+        },
+        "en": {
+            "term": "Erosion",
+            "definition": "The wearing away and reshaping of the land by external agents (water, ice, wind, gravity), removing soil and rock from one place and depositing them elsewhere.",
+            "source": "https://en.wikipedia.org/wiki/Erosion"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Eroding_rill_in_field_in_eastern_Germany.jpg/960px-Eroding_rill_in_field_in_eastern_Germany.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Eroding_rill_in_field_in_eastern_Germany.jpg",
+            "credit": "Katharina Helming",
+            "license": "CC BY-SA 1.0",
+            "alt": "Rigole d'érosion dans un champ, Allemagne de l'Est"
+        }
+    },
+    {
+        "id": "ravinement",
+        "category": "relief",
+        "fr": {
+            "term": "Ravinement",
+            "definition": "Érosion soudaine d'un sol meuble par un ruissellement concentré, lors de fortes averses, qui creuse des ravines : de petites vallées à parois abruptes progressant vers l'amont.",
+            "source": "https://fr.wikipedia.org/wiki/Ravinement"
+        },
+        "en": {
+            "term": "Gully erosion",
+            "definition": "Sudden erosion of soft ground by concentrated runoff during heavy rain, cutting gullies: steep-walled channels that grow by headward (upstream) erosion.",
+            "source": "https://en.wikipedia.org/wiki/Gully_erosion"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Vo%C3%A7oroca_%2823_12_24S_-_48_47_59W%29_-_REFON_3.JPG/960px-Vo%C3%A7oroca_%2823_12_24S_-_48_47_59W%29_-_REFON_3.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Vo%C3%A7oroca_(23_12_24S_-_48_47_59W)_-_REFON_3.JPG",
+            "credit": "Jose Reynaldo da Fonseca",
+            "license": "CC BY 2.5",
+            "alt": "Ravine (voçoroca) à Avaré, Brésil"
+        }
+    },
+    {
+        "id": "fossile",
+        "category": "temps",
+        "fr": {
+            "term": "Fossile",
+            "definition": "Reste, empreinte ou trace d'activité d'un organisme ayant vécu dans le passé géologique. Les fossiles sont souvent conservés dans les roches sédimentaires, mais ne sont pas tous minéralisés.",
+            "source": "https://fr.wikipedia.org/wiki/Fossile"
+        },
+        "en": {
+            "term": "Fossil",
+            "definition": "A preserved remain, impression or trace of activity of an organism from the geological past. Fossils are often found in sedimentary rocks, but are not all mineralized.",
+            "source": "https://en.wikipedia.org/wiki/Fossil"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Whale_2261-2263mod.jpg/960px-Whale_2261-2263mod.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Whale_2261-2263mod.jpg",
+            "credit": "JYB Devot",
+            "license": "CC BY-SA 4.0",
+            "alt": "Squelette de baleine fossile (Miocène), désert d'Ica, Pérou"
+        }
+    },
+    {
+        "id": "datation-radiometrique",
+        "category": "temps",
+        "fr": {
+            "term": "Datation radiométrique",
+            "definition": "Méthode qui estime un âge à partir de la désintégration radioactive d'isotopes, dont la vitesse est connue. Selon la méthode, elle compare l'isotope restant à ses produits de désintégration ou à une référence.",
+            "source": "https://fr.wikipedia.org/wiki/Datation_radiom%C3%A9trique"
+        },
+        "en": {
+            "term": "Radiometric dating",
+            "definition": "A method that estimates age using radioactive decay of isotopes at known rates. Depending on the method, it compares the remaining isotope with its decay products or a reference.",
+            "source": "https://en.wikipedia.org/wiki/Radiometric_dating"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Thorium_decay_chain_from_lead-212_to_lead-208.svg/960px-Thorium_decay_chain_from_lead-212_to_lead-208.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Thorium_decay_chain_from_lead-212_to_lead-208.svg",
+            "credit": "Eugene Alvin Villar",
+            "license": "CC BY-SA 4.0",
+            "alt": "Chaîne de désintégration radioactive"
+        }
+    },
+    {
+        "id": "superposition",
+        "category": "temps",
+        "fr": {
+            "term": "Principe de superposition",
+            "definition": "Énoncé par Nicolas Sténon (1669) : dans une série de couches non renversée, une couche est plus récente que celle qu'elle recouvre et plus ancienne que celle qui la surmonte. Base de la datation relative.",
+            "source": "https://fr.wikipedia.org/wiki/Principe_de_superposition_(g%C3%A9ologie)"
+        },
+        "en": {
+            "term": "Law of superposition",
+            "definition": "Stated by Nicolas Steno (1669): in an undisturbed sequence, each layer is younger than the one beneath it and older than the one above. A foundation of relative dating.",
+            "source": "https://en.wikipedia.org/wiki/Law_of_superposition"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/IsfjordenSuperposition.jpg/960px-IsfjordenSuperposition.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:IsfjordenSuperposition.jpg",
+            "credit": "Wilson44691",
+            "license": "Public domain",
+            "alt": "Couches sédimentaires superposées, Isfjorden, Svalbard"
+        }
+    },
+    {
+        "id": "lithosphere",
+        "category": "planete",
+        "fr": {
+            "term": "Lithosphère",
+            "definition": "Enveloppe rigide à la surface de la Terre : elle réunit la croûte et la partie supérieure du manteau. Fragmentée en plaques tectoniques, elle repose sur l'asthénosphère, plus ductile.",
+            "source": "https://fr.wikipedia.org/wiki/Lithosph%C3%A8re"
+        },
+        "en": {
+            "term": "Lithosphere",
+            "definition": "The rigid outermost rocky shell of a planet. On Earth it combines the crust and the uppermost mantle, and is broken into tectonic plates riding over the softer, ductile asthenosphere.",
+            "source": "https://en.wikipedia.org/wiki/Lithosphere"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Lithosphere_of_Earth_-_Idealized_Cross-section.jpg/960px-Lithosphere_of_Earth_-_Idealized_Cross-section.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Lithosphere_of_Earth_-_Idealized_Cross-section.jpg",
+            "credit": "Peter A. Cawood et al.",
+            "license": "CC BY 4.0",
+            "alt": "Coupe idéalisée de la lithosphère terrestre"
+        }
+    },
+    {
+        "id": "andesite",
+        "category": "roches",
+        "fr": {
+            "term": "Andésite",
+            "definition": "Roche volcanique à composition intermédiaire entre basalte et rhyolite, à grains fins ou à grands cristaux dans une pâte fine. Elle est fréquente dans les arcs volcaniques de subduction.",
+            "source": "https://fr.wikipedia.org/wiki/And%C3%A9site"
+        },
+        "en": {
+            "term": "Andesite",
+            "definition": "A volcanic rock intermediate in composition between basalt and rhyolite, with fine grains or larger crystals in a fine groundmass. It is common in subduction-related volcanic arcs.",
+            "source": "https://en.wikipedia.org/wiki/Andesite"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Amygdaloidal_andesite.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "file": "https://commons.wikimedia.org/wiki/File:Amygdaloidal_andesite.jpg",
+            "credit": "Photographer: Siim Sepp, 2005",
+            "license": "CC BY-SA 3.0",
+            "alt": "Andésite - Dark groundmass is andesite. Amygdaloidal structure, vesicules are filled with zeolite. Diameter is 8 cm. Rock sample belongs to the University of Tartu."
+        }
+    },
+    {
+        "id": "rhyolite",
+        "category": "roches",
+        "fr": {
+            "term": "Rhyolite",
+            "definition": "Roche volcanique riche en silice, équivalent volcanique du granite. Elle est généralement vitreuse ou à grains fins, parfois avec de grands cristaux de quartz et de feldspath.",
+            "source": "https://fr.wikipedia.org/wiki/Rhyolite"
+        },
+        "en": {
+            "term": "Rhyolite",
+            "definition": "A silica-rich volcanic rock, the extrusive equivalent of granite. It is generally glassy or fine-grained, sometimes with larger quartz and feldspar crystals.",
+            "source": "https://en.wikipedia.org/wiki/Rhyolite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Loebejuener_porphyr_poliert.jpg/960px-Loebejuener_porphyr_poliert.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Loebejuener_porphyr_poliert.jpg",
+            "credit": "Benhoff",
+            "license": "CC BY-SA 3.0",
+            "alt": "Rhyolite - Polished section of sample of permocarboniferous (“Rotliegend”, Gzhelian-Asselian) rhyolite, so-called Löbejüner Porphyr (“Löbejün Porphyry”), Halle Volcanic Co"
+        }
+    },
+    {
+        "id": "diorite",
+        "category": "roches",
+        "fr": {
+            "term": "Diorite",
+            "definition": "Roche magmatique plutonique à grains visibles, formée par refroidissement lent en profondeur. Sa composition est intermédiaire entre le gabbro et le granite ; son équivalent volcanique est l'andésite.",
+            "source": "https://fr.wikipedia.org/wiki/Diorite"
+        },
+        "en": {
+            "term": "Diorite",
+            "definition": "A coarse-grained intrusive igneous rock formed by slow cooling underground. Its composition is intermediate between gabbro and granite; its volcanic equivalent is andesite.",
+            "source": "https://en.wikipedia.org/wiki/Diorite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Diorite2.tif/lossy-page1-960px-Diorite2.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Diorite2.tif",
+            "credit": "Michael C. Rygel",
+            "license": "CC BY-SA 3.0",
+            "alt": "Diorite - Hand sample of diorite"
+        }
+    },
+    {
+        "id": "gabbro",
+        "category": "roches",
+        "fr": {
+            "term": "Gabbro",
+            "definition": "Roche plutonique sombre à grains visibles, riche en plagioclase et pyroxène. Elle refroidit lentement en profondeur et correspond au basalte par sa composition.",
+            "source": "https://fr.wikipedia.org/wiki/Gabbro"
+        },
+        "en": {
+            "term": "Gabbro",
+            "definition": "A dark, coarse-grained intrusive rock rich in plagioclase and pyroxene. It cools slowly underground and has a composition corresponding to basalt.",
+            "source": "https://en.wikipedia.org/wiki/Gabbro"
+        },
+        "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Gabbro_pmg_ss_2006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "file": "https://commons.wikimedia.org/wiki/File:Gabbro_pmg_ss_2006.jpg",
+            "credit": "Siim Sepp",
+            "license": "CC BY-SA 3.0",
+            "alt": "Gabbro en lame mince observé en lumière polarisée croisée"
+        }
+    },
+    {
+        "id": "gypse",
+        "category": "mineraux",
+        "fr": {
+            "term": "Gypse",
+            "definition": "Minéral tendre de sulfate de calcium hydraté (CaSO₄ · 2H₂O), de dureté 2 sur l'échelle de Mohs. Le même nom désigne une roche évaporitique formée principalement de ce minéral, utilisé pour fabriquer le plâtre.",
+            "source": "https://fr.wikipedia.org/wiki/Gypse"
+        },
+        "en": {
+            "term": "Gypsum",
+            "definition": "A soft hydrated calcium sulfate mineral (CaSO₄ · 2H₂O), hardness 2 on the Mohs scale. The name also refers to an evaporite rock consisting mainly of this mineral, which is used to make plaster.",
+            "source": "https://en.wikipedia.org/wiki/Gypsum"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Soufre%26gypse_sicile.jpg/960px-Soufre%26gypse_sicile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Soufre%26gypse_sicile.jpg",
+            "credit": "Didier Descouens",
+            "license": "CC BY-SA 4.0",
+            "alt": "Cristaux de gypse accompagnés de soufre, Sicile"
+        }
+    },
+    {
+        "id": "marne",
+        "category": "roches",
+        "fr": {
+            "term": "Marne",
+            "definition": "Roche sédimentaire faite d'un mélange de minéraux argileux et de carbonate de calcium, dans des proportions voisines. Sa sensibilité à l'eau favorise le ravinement et les instabilités de pente.",
+            "source": "https://fr.wikipedia.org/wiki/Marne_(g%C3%A9ologie)"
+        },
+        "en": {
+            "term": "Marl / marlstone",
+            "definition": "A sedimentary mixture of clay minerals and calcium carbonate in roughly comparable proportions. In English, the hardened rock is called marlstone; marl can also refer to unconsolidated material.",
+            "source": "https://en.wikipedia.org/wiki/Marl"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Piece_of_marl.JPG/960px-Piece_of_marl.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Piece_of_marl.JPG",
+            "credit": "Tashkoskim",
+            "license": "CC BY-SA 4.0",
+            "alt": "Marne - Piece of marl"
+        }
+    },
+    {
+        "id": "micaschiste",
+        "category": "roches",
+        "fr": {
+            "term": "Micaschiste",
+            "definition": "Roche métamorphique riche en mica, souvent accompagnée de quartz et de feldspaths. L'orientation de ses minéraux en feuillets lui donne une foliation marquée.",
+            "source": "https://fr.wikipedia.org/wiki/Micaschiste"
+        },
+        "en": {
+            "term": "Mica schist",
+            "definition": "A metamorphic rock rich in mica, often with quartz and feldspar. The alignment of its platy minerals gives it a pronounced foliation.",
+            "source": "https://en.wikipedia.org/wiki/Schist"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Micaschiste_grenat.jpg/960px-Micaschiste_grenat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Micaschiste_grenat.jpg",
+            "credit": "NicolasGrandjean",
+            "license": "CC BY-SA 3.0",
+            "alt": "Micaschiste - Inclusions de grenats dans du micaschiste. île de Groix, pointe des chats, Morbihan."
+        }
+    },
+    {
+        "id": "amphibolite",
+        "category": "roches",
+        "fr": {
+            "term": "Amphibolite",
+            "definition": "Roche métamorphique généralement sombre, composée surtout d'amphibole et de plagioclase. Elle provient souvent du métamorphisme d'une roche magmatique comme le basalte.",
+            "source": "https://fr.wikipedia.org/wiki/Amphibolite"
+        },
+        "en": {
+            "term": "Amphibolite",
+            "definition": "A typically dark metamorphic rock composed mainly of amphibole and plagioclase. It commonly forms by metamorphism of an igneous rock such as basalt.",
+            "source": "https://en.wikipedia.org/wiki/Amphibolite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Amphibolit.jpg/960px-Amphibolit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Amphibolit.jpg",
+            "credit": "Bernabè Egon",
+            "license": "Public domain",
+            "alt": "Amphibolite - Amphibolite from Val di Fleres, Italy"
+        }
+    },
+    {
+        "id": "quartzite",
+        "category": "roches",
+        "fr": {
+            "term": "Quartzite",
+            "definition": "Roche très dure constituée surtout de grains de quartz soudés. Le quartzite métamorphique se forme par recristallisation d'un grès riche en quartz sous l'effet de la chaleur et de la pression.",
+            "source": "https://fr.wikipedia.org/wiki/Quartzite"
+        },
+        "en": {
+            "term": "Quartzite",
+            "definition": "A very hard rock made mainly of interlocking quartz grains. Metamorphic quartzite forms when quartz-rich sandstone recrystallizes under heat and pressure.",
+            "source": "https://en.wikipedia.org/wiki/Quartzite"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Sample_of_Quartzite.JPG/960px-Sample_of_Quartzite.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Sample_of_Quartzite.JPG",
+            "credit": "Manishwiki15",
+            "license": "CC BY-SA 3.0",
+            "alt": "Quartzite - Quartzite has a grainy, sandpaper-like surface which becomes glassy in appearance"
+        }
+    },
+    {
+        "id": "mineral",
+        "category": "mineraux",
+        "fr": {
+            "term": "Minéral",
+            "definition": "Substance solide naturelle, formée par un processus géologique, caractérisée en général par une composition chimique définie et une structure cristalline. Une roche peut être constituée d'un ou de plusieurs minéraux.",
+            "source": "https://fr.wikipedia.org/wiki/Min%C3%A9ral"
+        },
+        "en": {
+            "term": "Mineral",
+            "definition": "A naturally occurring solid formed by geological processes, generally characterized by a defined chemical composition and crystal structure. A rock may consist of one mineral or a mixture of several.",
+            "source": "https://en.wikipedia.org/wiki/Mineral"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Quartz_Br%C3%A9sil.jpg/960px-Quartz_Br%C3%A9sil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Quartz_Br%C3%A9sil.jpg",
+            "credit": "Didier Descouens",
+            "license": "CC BY-SA 4.0",
+            "alt": "Cristaux de quartz, un exemple de minéral"
+        }
+    },
+    {
+        "id": "cristal",
+        "category": "mineraux",
+        "fr": {
+            "term": "Cristal",
+            "definition": "Solide dont les atomes, ions ou molécules présentent un arrangement microscopique ordonné, généralement périodique. Les faces géométriques visibles de certains cristaux reflètent cet ordre interne ; un cristal peut être naturel ou fabriqué.",
+            "source": "https://fr.wikipedia.org/wiki/Cristal"
+        },
+        "en": {
+            "term": "Crystal",
+            "definition": "A solid whose atoms, ions or molecules have an ordered microscopic arrangement, usually periodic. The geometric faces of some crystals reflect this internal order; crystals may be natural or manufactured.",
+            "source": "https://en.wikipedia.org/wiki/Crystal"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Quartz_28.jpg/960px-Quartz_28.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Quartz_28.jpg",
+            "credit": "Géry PARENT",
+            "license": "Public domain",
+            "alt": "Cristal de quartz aux faces géométriques"
+        }
+    },
+    {
+        "id": "obsidienne",
+        "category": "roches",
+        "fr": {
+            "term": "Obsidienne",
+            "definition": "Roche volcanique vitreuse, généralement riche en silice, formée lorsque la lave se solidifie avec très peu de croissance cristalline. Amorphe et cassante, elle se fracture en éclats aux bords très tranchants.",
+            "source": "https://fr.wikipedia.org/wiki/Obsidienne"
+        },
+        "en": {
+            "term": "Obsidian",
+            "definition": "A volcanic glass, usually rich in silica, formed when lava solidifies with very little crystal growth. Amorphous and brittle, it breaks into fragments with very sharp edges.",
+            "source": "https://en.wikipedia.org/wiki/Obsidian"
+        },
+        "image": {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Rainbow_obsidian.jpg/960px-Rainbow_obsidian.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "file": "https://commons.wikimedia.org/wiki/File:Rainbow_obsidian.jpg",
+            "credit": "Brocken Inaglory",
+            "license": "CC BY-SA 3.0",
+            "alt": "Obsidienne à reflets colorés"
+        }
+    }
+];
