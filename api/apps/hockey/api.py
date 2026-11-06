@@ -319,7 +319,8 @@ def compare(request):
 
 def team_dict(t, with_roster=False):
     data = {"id": t.pk, "name": t.name, "created_at": t.created_at.isoformat(),
-            "roster_size": t.roster.count()}
+            "roster_size": t.roster.count(),
+            "pair_count": t.pair_entries.count()}
     if with_roster:
         entries = list(t.roster.select_related("player"))
         injuries = latest_injuries([e.player_id for e in entries])
@@ -410,8 +411,8 @@ def my_team_roster(request, team_id):
     if request.method == "DELETE":
         RosterEntry.objects.filter(team=t, player=player).delete()
         return JsonResponse(team_dict(t, with_roster=True))
-    if t.roster.count() >= 22:
-        return err("Roster is full (22 players).", 409)
+    if t.roster.count() + t.pair_entries.count() >= 22:
+        return err("Roster is full (22 players; HM counts each goalie duo as one player).", 409)
     price = body.get("acquired_price_m")
     entry, created = RosterEntry.objects.get_or_create(
         team=t, player=player,
