@@ -11,16 +11,20 @@ unique-constrained snapshot key, so running the command twice changes no
 counts. A SyncLog row per phase records what happened.
 """
 
+import json
+import re
 import time
-from datetime import date, datetime
+import unicodedata
+from datetime import date, datetime, timedelta
 
 import requests
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.utils import timezone
 
-from apps.hockey.models import (Game, GamePlayerStats, Player, PlayerTeamMembership,
-                                PlayerWeekStats, Standing, SyncLog, Team)
+from apps.hockey.models import (Game, GamePlayerStats, InjuryReport, Player,
+                                PlayerTeamMembership, PlayerWeekStats, Standing,
+                                SyncLog, Team)
 
 BASE = "https://data.sihf.ch/statistic/api/cms"
 SEARCH = "1//1"  # National League (top competition), verified during research
@@ -32,6 +36,48 @@ def get_json(path, **params):
                      headers={"User-Agent": "hockey-stats-app/1.0 (personal stats app)"})
     r.raise_for_status()
     return r.json()
+
+
+SHN_BASE = "https://swisshockeynews.ch"
+SHN_MEDICALS = f"{SHN_BASE}/en/national-league/medicals"
+SHN_ARTICLE_RE = re.compile(
+    r'<h2 class="raxo-title">\s*<a href="(?P<href>/en/shn/medical/[^"]+)"[^>]*>'
+    r'(?P<title>.*?)</a>', re.S)
+SHN_DATE_RE = re.compile(r'<span class="raxo-date">(\d{2}\.\d{2}\.\d{4})</span>')
+
+
+def fetch_text(url):
+    """Plain GET of a public HTML page (robots.txt verified: /en/shn/* allowed)."""
+    r = requests.get(url, timeout=30,
+                     headers={"User-Agent": "hockey-stats-app/1.0 (personal stats app)"})
+    r.raise_for_status()
+    return r.text
+
+
+def norm_text(value):
+    """Lowercase, strip diacritics, collapse non-alphanumerics to spaces."""
+    value = unicodedata.normalize("NFKD", value)
+    value = "".join(c for c in value if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
+
+
+def strip_tags(html):
+    return re.sub(r"<[^>]+>", " ", html)
+
+
+def status_hint_for(text):
+    """Coarse, transparent keyword derivation from the source's own words.
+    The headline/excerpt stay stored verbatim - this hint never replaces them."""
+    t = text.lower()
+    if "day-to-day" in t or "day to day" in t:
+        return InjuryReport.StatusHint.DAY_TO_DAY
+    if re.search(r"out for the season|season is over|season-ending|indefinitely|long-term", t):
+        return InjuryReport.StatusHint.OUT_LONG
+    if re.search(r"comeback|return|back on (the )?ice|on the horizon", t):
+        return InjuryReport.StatusHint.RETURNING
+    if re.search(r"week|month|absence|out for|sidelined|surgery|suffer|miss", t):
+        return InjuryReport.StatusHint.OUT
+    return InjuryReport.StatusHint.REPORTED
 
 
 def table(alias, season, page=None):
@@ -52,6 +98,15 @@ def results_table(season):
 def game_detail(game_id):
     return get_json("/gameoverview", alias="gameDetail", searchQuery=str(game_id),
                     language="en")
+
+
+def latest_memberships_current(season):
+    """licence_id -> Team of the player's latest membership row this season."""
+    latest = {}
+    for m in (PlayerTeamMembership.objects.filter(season=season)
+              .select_related("team").order_by("from_date")):
+        latest[m.player_id] = m.team
+    return latest
 
 
 def mmss_to_seconds(value):
@@ -117,7 +172,17 @@ class Command(BaseCommand):
                             help="Season end year (2027 = 2026/27).")
         parser.add_argument("--phase", default="all",
                             choices=["teams", "standings", "games", "players",
-                                     "weeks", "check", "all"])
+                                     "weeks", "check", "injuries", "nationality", "all"])
+        parser.add_argument("--file", default="",
+                            help="nationality phase: HM capture JSON "
+                                 '[{"hm_id": 134, "name": "Sven Andrighetto", "club": "ZSC", '
+                                 '"flag": "ch", "kind": "player"}, ...] from the HM '
+                                 "/fr/transfers-classic list (one page, flag image code). "
+                                 "kind 'pair' rows are skipped (goalie pairs are not players).")
+        parser.add_argument("--lookback", type=int, default=60,
+                            help="injuries phase: only process medical reports from the last N days.")
+        parser.add_argument("--max-articles", type=int, default=25,
+                            help="injuries phase: cap article-page fetches per run (politeness).")
         parser.add_argument("--sleep", type=float, default=PAUSE)
         parser.add_argument("--dry-run", action="store_true")
 
@@ -125,7 +190,10 @@ class Command(BaseCommand):
         self.season = opts["season"]
         self.sleep = opts["sleep"]
         self.dry = opts["dry_run"]
-        phases = (["teams", "standings", "games", "players", "weeks", "check"]
+        self.file = opts["file"]
+        self.lookback = opts["lookback"]
+        self.max_articles = opts["max_articles"]
+        phases = (["teams", "standings", "games", "players", "weeks", "injuries", "check"]
                   if opts["phase"] == "all" else [opts["phase"]])
         for phase in phases:
             log = None if self.dry else SyncLog.objects.create(
@@ -442,6 +510,163 @@ class Command(BaseCommand):
                                "penalty_minutes", "plus_minus", "toi_seconds",
                                "shots_on_goal"])
         return len(objs)
+
+    # -- injury reports (swisshockeynews.ch medicals, public) ----------------
+    def sync_injuries(self):
+        """Latest NL medical reports -> hockey_injury_report.
+
+        Public news source, no login. One list page plus at most
+        --max-articles article pages (polite sleep). Players are matched by
+        exact full name against the roster database; ambiguous same-name
+        matches need a club mention, otherwise the article is skipped and
+        logged - never guessed. Idempotent via the (player, source_url) key.
+        """
+        listing = fetch_text(SHN_MEDICALS)
+        cutoff = date.today() - timedelta(days=self.lookback)
+        entries = []
+        for block in re.findall(r"<article.*?</article>", listing, re.S):
+            m = SHN_ARTICLE_RE.search(block)
+            d = SHN_DATE_RE.search(block)
+            if not m or not d:
+                continue
+            try:
+                published = datetime.strptime(d.group(1), "%d.%m.%Y").date()
+            except ValueError:
+                continue
+            if published < cutoff:
+                continue
+            entries.append({
+                "url": SHN_BASE + m.group("href"),
+                "headline": strip_tags(m.group("title")).strip(),
+                "published_on": published,
+            })
+        players = list(Player.objects.all())
+        by_name = {}
+        for pl in players:
+            by_name.setdefault(norm_text(f"{pl.first_name} {pl.last_name}"), []).append(pl)
+        teams_of = latest_memberships_current(self.season)
+        n = 0
+        fetched = 0
+        for e in entries:
+            matched = self._match_players(e["headline"], by_name, teams_of)
+            body_paras = []
+            if fetched < self.max_articles:
+                page = fetch_text(e["url"])
+                fetched += 1
+                time.sleep(self.sleep)
+                h1 = re.search(r"<h1[^>]*>(.*?)</h1>", page, re.S)
+                if h1:
+                    e["headline"] = strip_tags(h1.group(1)).strip() or e["headline"]
+                body_paras = [strip_tags(x).strip()
+                              for x in re.findall(r"<p[^>]*>(.*?)</p>", page, re.S)]
+                body_paras = [x for x in body_paras
+                              if len(x) > 40 and "passkey" not in x.lower()]
+                if not matched:
+                    matched = self._match_players(
+                        e["headline"] + " " + " ".join(body_paras), by_name, teams_of)
+            if not matched:
+                self.stdout.write(f"no player match: {e['headline'][:90]}")
+                continue
+            for player in matched:
+                excerpt = next(
+                    (x for x in body_paras
+                     if norm_text(player.last_name) in norm_text(x)), "")
+                defaults = {
+                    "published_on": e["published_on"],
+                    "headline": e["headline"][:300],
+                    "excerpt": excerpt[:1000],
+                    "status_hint": status_hint_for(e["headline"] + " " + excerpt),
+                    "observed_at": timezone.now(),
+                }
+                if not self.dry:
+                    InjuryReport.objects.update_or_create(
+                        player=player, source_url=e["url"], defaults=defaults)
+                n += 1
+        return n
+
+    def _match_players(self, text, by_name, teams_of):
+        """Players whose exact normalized full name appears in the text.
+        Same-name players require exactly one club name/acronym mention."""
+        hay = " " + norm_text(text) + " "
+        found = []
+        for key, candidates in by_name.items():
+            if f" {key} " not in hay:
+                continue
+            if len(candidates) == 1:
+                found.append(candidates[0])
+                continue
+            def club_mentioned(t):
+                if t is None:
+                    return False
+                tokens = {norm_text(t.name), norm_text(t.acronym)}
+                words = [w for w in norm_text(t.name).split() if len(w) >= 3]
+                if words:
+                    tokens.add(max(words, key=len))  # e.g. "kloten" from "EHC Kloten"
+                return any(f" {tok} " in hay for tok in tokens if tok)
+
+            clubs = [t for t in (teams_of.get(pl.licence_id) for pl in candidates)
+                     if club_mentioned(t)]
+            if len(clubs) == 1:
+                pl = next(pl for pl in candidates
+                          if teams_of.get(pl.licence_id)
+                          and teams_of[pl.licence_id].pk == clubs[0].pk)
+                found.append(pl)
+            else:
+                self.stdout.write(f"ambiguous name skipped: {key}")
+        return found
+
+    # -- HM nationality (Swiss/foreign) import -------------------------------
+    def sync_nationality(self):
+        """Apply an HM capture of /fr/transfers-classic (one page, every
+        purchasable player with HM's own flag image code) to hockey_player.
+
+        The capture JSON is produced by the browser-side HM read (the same
+        infrequent, account-scoped read as the HM snapshot capture):
+          [{"hm_id": 134, "name": "Sven Andrighetto", "club": "ZSC",
+            "flag": "ch", "kind": "player"}, ...]
+        Join order: Player.hm_id (HM's internal id), else normalized full
+        name + current club acronym. kind="pair" rows (goalie pairs) are
+        skipped - nationality is per player. Unmatched rows are logged,
+        never guessed. Only changed rows are written."""
+        if not self.file:
+            raise CommandError("nationality phase needs --file <capture.json>")
+        rows = json.load(open(self.file))
+        teams_of = latest_memberships_current(self.season)
+        by_hm = {pl.hm_id: pl for pl in Player.objects.exclude(hm_id__isnull=True)}
+        by_name = {}
+        for pl in Player.objects.all():
+            by_name.setdefault((norm_text(f"{pl.first_name} {pl.last_name}"),
+                                (teams_of.get(pl.licence_id).acronym.lower()
+                                 if teams_of.get(pl.licence_id) else "")), []).append(pl)
+        observed = timezone.now()
+        n = 0
+        for row in rows:
+            if row.get("kind", "player") != "player":
+                continue  # goalie-pair market rows are not players
+            flag = str(row.get("flag") or "").strip().lower()
+            if not flag:
+                continue
+            player = by_hm.get(row.get("hm_id"))
+            if player is None:
+                key = (norm_text(str(row.get("name", ""))),
+                       str(row.get("club", "")).strip().lower())
+                cand = by_name.get(key, [])
+                if len(cand) == 1:
+                    player = cand[0]
+            if player is None:
+                self.stdout.write(f"no player match: {row.get('name')!r} "
+                                  f"(hm_id={row.get('hm_id')})")
+                continue
+            if player.hm_nationality != flag:
+                player.hm_nationality = flag
+                player.hm_nationality_source = "HM /fr/transfers-classic flag"
+                player.hm_nationality_observed_at = observed
+                if not self.dry:
+                    player.save(update_fields=["hm_nationality",
+                                               "hm_nationality_source",
+                                               "hm_nationality_observed_at"])
+            n += 1
+        return n
 
     # -- reconciliation ------------------------------------------------------
     def sync_check(self):

@@ -13,7 +13,8 @@ from apps.accounts.decorators import jwt_required
 
 from .models import (
     FantasyTeamShare,
-    FantasyTeam, Game, GamePlayerStats, HMSnapshot, Player, PlayerTeamMembership,
+    FantasyTeam, Game, GamePlayerStats, HMSnapshot, InjuryReport, Player,
+    PlayerTeamMembership,
     PlayerWeekStats, Team, RosterEntry, TransferSimulation,
     Standing, HMPair, HMPairSnapshot)
 
@@ -84,6 +85,42 @@ def latest_memberships(season, licence_ids=None):
     return latest
 
 
+def latest_injuries(licence_ids=None):
+    """Most recent injury report per player. None = no report found, which is
+    not a confirmation of health."""
+    qs = InjuryReport.objects.all()
+    if licence_ids:
+        qs = qs.filter(player_id__in=licence_ids)
+    latest = {}
+    for r in qs.order_by("player_id", "-published_on", "-id"):
+        latest.setdefault(r.player_id, r)
+    return latest
+
+
+def injury_dict(r):
+    if r is None:
+        return None
+    return {
+        "status_hint": r.status_hint,
+        "headline": r.headline,
+        "excerpt": r.excerpt,
+        "url": r.source_url,
+        "source": r.source,
+        "published_on": r.published_on.isoformat(),
+        "observed_at": r.observed_at.isoformat() if r.observed_at else None,
+    }
+
+
+def nationality_dict(p):
+    """Nationality exactly as HM displays it (its flag code), never inferred."""
+    return {
+        "code": p.hm_nationality or None,
+        "source": p.hm_nationality_source or None,
+        "observed_at": (p.hm_nationality_observed_at.isoformat()
+                        if p.hm_nationality_observed_at else None),
+    }
+
+
 def latest_hm():
     """Most recent HM snapshot per player (price/points). Empty until HM sync runs."""
     ranked = HMSnapshot.objects.annotate(
@@ -92,7 +129,7 @@ def latest_hm():
     return {s.player_id: s for s in ranked}
 
 
-def player_dict(p, season, totals, memberships, hm):
+def player_dict(p, season, totals, memberships, hm, injuries=None):
     t = totals.get(p.licence_id, {})
     m = memberships.get(p.licence_id)
     snap = hm.get(p.licence_id)
@@ -103,6 +140,8 @@ def player_dict(p, season, totals, memberships, hm):
         "birth_date": p.birth_date.isoformat() if p.birth_date else None,
         "team": {"id": m.team.sihf_team_id, "name": m.team.name, "acronym": m.team.acronym} if m else None,
         "photo_url": p.photo_url or None,
+        "nationality": nationality_dict(p),
+        "injury": injury_dict((injuries or {}).get(p.licence_id)),
         "season": {
             "games": t.get("games", 0), "goals": t.get("goals", 0),
             "assists": t.get("assists", 0),
@@ -183,7 +222,8 @@ def players(request):
     totals = season_totals(season, ids)
     memberships = latest_memberships(season, ids)
     hm = latest_hm()
-    data = [player_dict(p, season, totals, memberships, hm) for p in players_qs]
+    injuries = latest_injuries(ids)
+    data = [player_dict(p, season, totals, memberships, hm, injuries) for p in players_qs]
     # Full-dataset sort BEFORE the 500-row cap; unknown/None values last in both
     # directions. Contract: ?sort=<key> with optional leading "-" for descending.
     sort = request.GET.get("sort", "name")
@@ -214,7 +254,8 @@ def player_detail(request, licence_id):
     season = season_from(request)
     totals = season_totals(season, [p.licence_id])
     memberships = latest_memberships(season, [p.licence_id])
-    data = player_dict(p, season, totals, memberships, latest_hm())
+    data = player_dict(p, season, totals, memberships, latest_hm(),
+                       latest_injuries([p.licence_id]))
     data["stints"] = [
         {"team": m.team.name, "from": m.from_date.isoformat(),
          "to": m.to_date.isoformat() if m.to_date else None}
@@ -261,11 +302,13 @@ def compare(request):
     totals = season_totals(season, ids)
     memberships = latest_memberships(season, ids)
     hm = latest_hm()
+    injuries = latest_injuries(ids)
     series = weekly_series(season, ids)
     return JsonResponse({
         "season": season,
         "players": [
-            {**player_dict(found[i], season, totals, memberships, hm), "weeks": series.get(i, [])}
+            {**player_dict(found[i], season, totals, memberships, hm, injuries),
+             "weeks": series.get(i, [])}
             for i in ids if i in found
         ],
         "missing": [i for i in ids if i not in found],
@@ -278,12 +321,16 @@ def team_dict(t, with_roster=False):
     data = {"id": t.pk, "name": t.name, "created_at": t.created_at.isoformat(),
             "roster_size": t.roster.count()}
     if with_roster:
+        entries = list(t.roster.select_related("player"))
+        injuries = latest_injuries([e.player_id for e in entries])
         data["roster"] = [
             {"player": e.player_id, "name": str(e.player), "slot": e.position_slot,
              "acquired_price_m": str(e.acquired_price_m) if e.acquired_price_m is not None else None,
              "acquired_on": e.acquired_on.isoformat() if e.acquired_on else None,
-             "source": e.source}
-            for e in t.roster.select_related("player")
+             "source": e.source,
+             "nationality": nationality_dict(e.player),
+             "injury": injury_dict(injuries.get(e.player_id))}
+            for e in entries
         ]
         data["pair_entries"] = [
             {"label": pe.label, "hm_asset_id": pe.hm_asset_id,

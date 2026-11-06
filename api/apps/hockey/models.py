@@ -42,6 +42,12 @@ class Player(models.Model):
     last_name = models.CharField(max_length=100)
     position = models.CharField(max_length=1, choices=Position.choices)
     birth_date = models.DateField(null=True, blank=True)
+    # Nationality exactly as Hockey Manager displays it (flag code, e.g. "ch",
+    # "fi"), captured from HM's own pages. HM's flag is not necessarily
+    # citizenship or import-license eligibility. Blank = never captured.
+    hm_nationality = models.CharField(max_length=8, blank=True, default="")
+    hm_nationality_source = models.CharField(max_length=100, blank=True, default="")
+    hm_nationality_observed_at = models.DateTimeField(null=True, blank=True)
     photo_url = models.URLField(blank=True, default="")
     photo_source = models.CharField(max_length=100, blank=True, default="")
     photo_attribution = models.CharField(max_length=200, blank=True, default="")
@@ -308,6 +314,46 @@ class HMGamePoints(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["player", "appearance_seq"], name="hockey_hm_points_uniq")
         ]
+
+
+class InjuryReport(models.Model):
+    """A medical-report mention of a player from a watched public news source.
+
+    A row is a dated report, not a current medical state: the source's own
+    words (headline/excerpt) are stored verbatim and status_hint is a coarse,
+    transparent keyword derivation. Absence of a report is NOT a confirmation
+    of health - the UI must never render "healthy".
+    """
+
+    class StatusHint(models.TextChoices):
+        REPORTED = "reported", "Mentioned in a medical report"
+        DAY_TO_DAY = "day_to_day", "Day-to-day"
+        OUT = "out", "Out (weeks/months mentioned)"
+        OUT_LONG = "out_long", "Out long-term / season"
+        RETURNING = "returning", "Comeback / return mentioned"
+
+    player = models.ForeignKey(Player, on_delete=models.CASCADE,
+                               related_name="injury_reports")
+    published_on = models.DateField()
+    headline = models.CharField(max_length=300)
+    excerpt = models.TextField(blank=True, default="")
+    status_hint = models.CharField(max_length=20, choices=StatusHint.choices,
+                                   default=StatusHint.REPORTED)
+    source = models.CharField(max_length=100,
+                              default="swisshockeynews.ch medical report")
+    source_url = models.URLField()
+    observed_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "hockey_injury_report"
+        constraints = [
+            models.UniqueConstraint(fields=["player", "source_url"],
+                                    name="hockey_injury_report_uniq")
+        ]
+        ordering = ["-published_on", "-id"]
+
+    def __str__(self):
+        return f"{self.player} - {self.headline[:60]}"
 
 
 class FantasyTeam(models.Model):
