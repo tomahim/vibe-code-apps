@@ -412,7 +412,7 @@ def my_team_roster(request, team_id):
         RosterEntry.objects.filter(team=t, player=player).delete()
         return JsonResponse(team_dict(t, with_roster=True))
     if t.roster.count() + t.pair_entries.count() >= 22:
-        return err("Roster is full (22 players; each goalie pair is one slot).", 409)
+        return err("Roster is full (22 players; HM counts each goalie duo as one player).", 409)
     price = body.get("acquired_price_m")
     entry, created = RosterEntry.objects.get_or_create(
         team=t, player=player,

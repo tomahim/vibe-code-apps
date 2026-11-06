@@ -256,7 +256,7 @@ class FantasyApiTests(HockeyBase):
                    data=json.dumps({"player": 310134}), content_type="application/json")
         # 21 singles + 1 pair = 22 HM slots, so the next add is rejected
         self.assertEqual(r.status_code, 409)
-        self.assertIn("goalie pair", r.json()["error"])
+        self.assertIn("goalie duo", r.json()["error"])
 
     def test_simulation_validation(self):
         c = auth_client(self.user)
