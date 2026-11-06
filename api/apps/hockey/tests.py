@@ -544,3 +544,74 @@ class SyncNationalityTests(TestCase):
         self._run(rows)
         second = Player.objects.get(pk=self.andrighetto.pk).hm_nationality_observed_at
         self.assertEqual(first, second)
+
+
+class InjuryOrderingAndMatchingTests(TestCase):
+    """Status safeguards: newest dated report wins, comebacks are not 'out',
+    same-name players are never guessed without a club mention."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.kloten = Team.objects.create(sihf_team_id=101149, name="EHC Kloten", acronym="EHC")
+        cls.zsc = Team.objects.create(sihf_team_id=101139, name="ZSC Lions", acronym="ZSC")
+        cls.wolf_k = Player.objects.create(licence_id=700001, first_name="Bernd",
+                                           last_name="Wolf", position="D")
+        cls.wolf_z = Player.objects.create(licence_id=700002, first_name="Bernd",
+                                           last_name="Wolf", position="F")
+        PlayerTeamMembership.objects.create(player=cls.wolf_k, team=cls.kloten,
+                                            season=2027, from_date=date(2026, 9, 1))
+        PlayerTeamMembership.objects.create(player=cls.wolf_z, team=cls.zsc,
+                                            season=2027, from_date=date(2026, 9, 1))
+
+    def _api_latest(self):
+        from django.utils import timezone
+        from .models import InjuryReport
+        return InjuryReport, timezone
+
+    def test_latest_report_wins_regardless_of_insert_order(self):
+        InjuryReport, timezone = self._api_latest()
+        InjuryReport.objects.create(player=self.wolf_k, published_on=date(2026, 10, 1),
+                                    headline="Older out report", status_hint="out",
+                                    source_url="https://x.ch/old", observed_at=timezone.now())
+        InjuryReport.objects.create(player=self.wolf_k, published_on=date(2026, 11, 1),
+                                    headline="Newer comeback report", status_hint="returning",
+                                    source_url="https://x.ch/new", observed_at=timezone.now())
+        t = FantasyTeam.objects.create(owner=User.objects.create_user(username="u2"),
+                                       name="T")
+        RosterEntry.objects.create(team=t, player=self.wolf_k, position_slot="D")
+        data = auth_client(t.owner).get(f"/api/apps/hockey/my/teams/{t.pk}/").json()
+        self.assertEqual(data["roster"][0]["injury"]["status_hint"], "returning")
+        self.assertEqual(data["roster"][0]["injury"]["published_on"], "2026-11-01")
+
+    def test_returning_not_read_as_out(self):
+        from apps.hockey.management.commands.sync_hockey import status_hint_for
+        self.assertEqual(status_hint_for("Some comebacks on the horizon for HC Davos"),
+                         "returning")
+        self.assertEqual(status_hint_for("Several weeks of absence for Bernd Wolf"),
+                         "out")
+        self.assertEqual(status_hint_for("ZSC's Sven Andrighetto considered day-to-day"),
+                         "day_to_day")
+
+    LIST_AMBIG = """
+    <article class="raxo-item-top"><div class="raxo-wrap">
+      <div class="raxo-info"><span class="raxo-date">04.11.2026</span></div>
+      <h2 class="raxo-title"><a href="/en/shn/medical/ambig">Bernd Wolf sidelined</a></h2>
+    </div></article>
+    <article class="raxo-item-top"><div class="raxo-wrap">
+      <div class="raxo-info"><span class="raxo-date">04.11.2026</span></div>
+      <h2 class="raxo-title"><a href="/en/shn/medical/with-club">Kloten's Bernd Wolf sidelined</a></h2>
+    </div></article>
+    """
+
+    def test_same_name_needs_club_mention(self):
+        from unittest.mock import patch
+        from django.core.management import call_command
+        from .models import InjuryReport
+        with patch("apps.hockey.management.commands.sync_hockey.fetch_text",
+                   side_effect=lambda url: self.LIST_AMBIG if url.endswith("/medicals") else "<h1>x</h1>"):
+            call_command("sync_hockey", phase="injuries", sleep=0)
+        # ambiguous article: no report at all (never guessed)
+        self.assertFalse(InjuryReport.objects.filter(source_url__endswith="ambig").exists())
+        # club mention disambiguates to the Kloten Wolf only
+        reports = InjuryReport.objects.filter(source_url__endswith="with-club")
+        self.assertEqual([r.player_id for r in reports], [self.wolf_k.licence_id])

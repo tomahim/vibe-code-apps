@@ -595,9 +595,17 @@ class Command(BaseCommand):
             if len(candidates) == 1:
                 found.append(candidates[0])
                 continue
+            def club_mentioned(t):
+                if t is None:
+                    return False
+                tokens = {norm_text(t.name), norm_text(t.acronym)}
+                words = [w for w in norm_text(t.name).split() if len(w) >= 3]
+                if words:
+                    tokens.add(max(words, key=len))  # e.g. "kloten" from "EHC Kloten"
+                return any(f" {tok} " in hay for tok in tokens if tok)
+
             clubs = [t for t in (teams_of.get(pl.licence_id) for pl in candidates)
-                     if t and (f" {norm_text(t.name)} " in hay
-                               or f" {norm_text(t.acronym)} " in hay)]
+                     if club_mentioned(t)]
             if len(clubs) == 1:
                 pl = next(pl for pl in candidates
                           if teams_of.get(pl.licence_id)
