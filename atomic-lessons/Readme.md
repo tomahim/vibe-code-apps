@@ -76,6 +76,8 @@ For expression lessons, use at most six cards. Keep card counts even so a questi
 
 Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type`, `after_card_position`, `prompt`, `explanation`, and `archived`. A `multiple_choice` question has four `choices` (each with `id` and `text`) and one `correct_choice_ids` reference.
 
+Keep the four choices of a `multiple_choice` question nearly the same length and level of detail. The longest or most detailed choice reads as the correct answer, so write distractors that match the correct answer's shape and length rather than padding the correct answer.
+
 A `type_answer_question` can ask for any typed response. It has `accepted_answers` instead of choices or `correct_choice_ids`; the first answer is the canonical feedback answer, and later entries are valid authored alternatives. Keep each answer under 256 characters. The server compares after normalizing case, punctuation, apostrophes, and spacing. Typos and unlisted paraphrases count as wrong and show the canonical answer. This keeps grading predictable for short answers where a one-letter change can change meaning. For lessons with both types at a checkpoint, multiple choice is used until the whole lesson is complete; later reviews use typed questions. Author at least two typed alternatives at each such checkpoint so a wrong answer can move to another question.
 
 For example, an English translation question in `questions/08_translate.yaml` has this shape:
