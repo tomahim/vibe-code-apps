@@ -59,6 +59,13 @@ const initialApps = [
     icon: "🔍",
   },
   {
+    slug: "db-dashboard",
+    name: "Database Dashboard",
+    description: "Size, tables, rows and indexes of the production Postgres, with a gauge against your storage allowance. Staff only, read-only.",
+    category: "Operations",
+    icon: "🗄",
+  },
+  {
     slug: "livetrail-scrap",
     name: "LiveTrail Scraper",
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",

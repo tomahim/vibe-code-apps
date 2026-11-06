@@ -110,3 +110,10 @@ Open `/apps/story-shelf` from the gallery for a 3D bookshelf library with four
 original, five-page illustrated books about history, nature and mountains.
 Markdown and all pictures ship with the frontend; there is no new backend or
 service. See [content, sources, rendering and checks](ui/src/apps/story-shelf/README.md).
+
+
+## Database Dashboard
+
+Open `/apps/db-dashboard` (staff accounts only) for the production Postgres at a glance: total size gauge, size split into table data, indexes and TOAST, size and exact row count per table, a by-app breakdown, the largest indexes and indexes with no recorded scan. It is read-only: the API reads catalog statistics (`pg_class`, `pg_stat_*`, `pg_database_size`) and `COUNT(*)` per table inside a READ ONLY transaction, never row contents, and adds no model or migration. Endpoint: `GET /api/apps/db-dashboard/overview` (JWT, `is_staff`).
+
+Set `DB_STORAGE_LIMIT_BYTES` on the `api` service to show usage against your plan allowance. Without it, staff can type the allowance in the dashboard (kept in that browser only). The allowance is not read from Neon. The growth sparkline is built from visits in the same browser; server-side history would need a table and is not included.

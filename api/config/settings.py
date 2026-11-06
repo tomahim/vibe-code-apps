@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.little_grains",
     "apps.content_review",
+    "apps.db_dashboard",
     "apps.curator.apps.CuratorConfig",
     "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
@@ -122,3 +123,7 @@ GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
 GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
 
 
+
+# Optional plan storage allowance (bytes) shown against the database size in the
+# database dashboard. Unset: the dashboard lets staff enter one in the browser.
+DB_STORAGE_LIMIT_BYTES = int(os.environ.get("DB_STORAGE_LIMIT_BYTES", "0") or 0)
