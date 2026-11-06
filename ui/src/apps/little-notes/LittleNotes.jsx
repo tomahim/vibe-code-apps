@@ -44,8 +44,10 @@ export default function LittleNotes({ onHome }) {
   const modalRef = useRef(null);
   const detailRef = useRef(null);
   useEffect(() => {
-    if (view !== "default" && detailOpen && selected) detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [view, detailOpen, selected]);
+    // The list refetch sets loading, which unmounts the detail wrapper; wait for
+    // loading to clear so the detail is on screen before scrolling to it.
+    if (!loading && view !== "default" && detailOpen && selected) detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [view, detailOpen, selected, loading]);
   useEffect(() => {
     if (!capture) return;
     const previous = document.activeElement;
@@ -137,6 +139,16 @@ export default function LittleNotes({ onHome }) {
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   }
   const toggleCategory = (slug, enabled = true) => toggle("categories", "category", slug, enabled);
+  // Cards view acts on a card that is not on stage, so it posts with the list
+  // item's own updated_at and lets the list refresh show the result.
+  async function cardCategory(item, slug, enabled) {
+    if (busy) return; setBusy(true); setError("");
+    try {
+      await api(`content/${item.id}/categories/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: slug, enabled, updated_at: item.updated_at }) });
+      setNotice(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`);
+      setRefresh(x => x + 1);
+    } catch (e) { setError(e.message); } finally { setBusy(false); }
+  }
   const toggleTag = (slug, enabled = true) => toggle("tags", "tag", slug, enabled);
   function skip() { if (!items.length) return; const index = items.findIndex(i => i.id === selected?.id); choose(items[(index + 1) % items.length]); setNotice("Skipped for now. Nothing changed."); }
   function openCapture() { setDraft({ title: "", type: type || "bookmark", body_markdown: "", external_url: "", saved_on: localDate() }); setEditing(false); setCapture(true); }
@@ -178,7 +190,7 @@ export default function LittleNotes({ onHome }) {
           {error && <div className="ln-error" role="alert">{error} <button onClick={() => setRefresh(x => x + 1)}>Reload</button></div>}{notice && <p className="ln-notice" role="status">{notice}</p>}
           {loading ? <div className="ln-empty" aria-busy="true">Opening your collection...</div> : !items.length && view !== "calendar" && !routeItem ? <div className="ln-empty"><span>↗</span><h2>{total ? "Choose an object" : "A little breathing room."}</h2><p>No objects match this view. Your other things are still here.</p><button onClick={() => { chooseType(""); setCategory(""); setTag(""); setMonth(""); setQ(""); setPage(1); }}>See everything</button></div> : <>
             {view === "calendar" && <ObjectCalendar day={route.day} onDay={value => setRoute(old => ({ ...old, day: value }))} month={month || localDate().slice(0, 7)} items={items} choose={choose} busy={busy} onMonth={value => { setRoute(old => ({ ...old, month: value, page: 1, item: "" })); setDetailOpen(false); }} />}
-            {["database", "table", "cards"].includes(view) && <ObjectList view={view} items={items} choose={choose} busy={busy} selectedId={selected?.id} types={taxonomy.types} />}
+            {["database", "table", "cards"].includes(view) && <ObjectList view={view} items={items} choose={choose} busy={busy} selectedId={selected?.id} types={taxonomy.types} categories={taxonomy.categories} onCategory={cardCategory} />}
             {selected && (view === "default" || detailOpen) && <><div ref={detailRef} className={view !== "default" ? "ln-view-detail" : ""}>{view !== "default" && <button onClick={() => { setRoute(old => ({ ...old, item: "" })); setDetailOpen(false); setSelected(null); }}>Close object ×</button>}
             <article className="ln-stage"><div className="ln-card-top"><span>{taxonomy.types.find(t => t.slug === selected.type)?.icon || icons[selected.type] || "◇"} {taxonomy.types.find(t => t.slug === selected.type)?.name || selected.type}</span><span>{selected.saved_on}</span></div><div className="ln-card-body"><p className="ln-kicker">{selected.subtitle || selected.source_name || "A thought worth keeping"}</p><h2>{selected.title}</h2>{selected.summary && <p className="ln-summary">{selected.summary}</p>}{safeUrl(selected.image_url) && <img key={selected.image_url} className="ln-image" src={safeUrl(selected.image_url)} alt={selected.image_alt || ""} loading="lazy" onError={e => { e.currentTarget.style.display = "none"; }} />}<div className="ln-card-tags">{selected.categories.map(c => <button key={c.slug} className="ln-chip-category" onClick={() => filter(setCategory, c.slug)}>{c.name}</button>)}{selected.tags.map(t => <button key={t.slug} onClick={() => filter(setTag, t.slug)}>#{t.name}</button>)}</div><details key={selected.id}><summary>Read the whole thing <span>↓</span></summary><div className="ln-markdown" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(selected.body_markdown || "No note content yet.")) }} />{selected.claim_status && <p>Source claim status: {selected.claim_status}</p>}{selected.author && <p>By {selected.author}</p>}</details></div><div className="ln-card-footer">{link ? <a href={link} target="_blank" rel="noopener noreferrer">Open original ↗</a> : <span>Stored in your collection</span>}<button onClick={openEdit}>Edit note</button></div></article>
             <section className="ln-decision" aria-label="Quick actions"><div><p className="ln-eyebrow">WHAT NEXT?</p><span>One category. One decision.</span></div><button disabled={busy} onClick={skip}>Skip →</button><button disabled={busy} aria-pressed={activeCategories.has("favorite")} onClick={() => toggleCategory("favorite", !activeCategories.has("favorite"))}>☆ Favorite</button><button className="ln-archive" disabled={busy} onClick={() => toggleCategory(activeCategories.has("archive") ? "inbox" : "archive")}>{activeCategories.has("archive") ? "Back to inbox ↙" : "Archive ↗"}</button><label className="ln-quick-tag"><span className="sr-only">Assign a category</span><select disabled={busy} value={quickCategory} onChange={e => { setQuickCategory(""); if (e.target.value) toggleCategory(e.target.value, !activeCategories.has(e.target.value)); }}><option value="">+ Set a category</option>{itemCategories.map(c => <option key={c.slug} value={c.slug}>{activeCategories.has(c.slug) ? "Remove " : "Add "}{c.name}</option>)}</select></label><label className="ln-quick-tag"><span className="sr-only">Assign a tag</span><select disabled={busy} value={quickTag} onChange={e => { setQuickTag(""); if (e.target.value) toggleTag(e.target.value, !activeTags.has(e.target.value)); }}><option value="">+ Set a tag</option>{taxonomy.tags.map(t => <option key={t.slug} value={t.slug}>{activeTags.has(t.slug) ? "Remove " : "Add "}#{t.name}</option>)}</select></label></section>
