@@ -41,9 +41,49 @@ def get_json(path, **params):
 SHN_BASE = "https://swisshockeynews.ch"
 SHN_MEDICALS = f"{SHN_BASE}/en/national-league/medicals"
 SHN_ARTICLE_RE = re.compile(
-    r'<h2 class="raxo-title">\s*<a href="(?P<href>/en/shn/medical/[^"]+)"[^>]*>'
+    # heading level varies by layout slot (h2 featured, h3 hero, h4 list);
+    # class attribute may carry extra tokens - match the raxo-title token.
+    r'<h[1-6]\b[^>]*class="[^"]*\braxo-title\b[^"]*"[^>]*>\s*'
+    r'<a href="(?P<href>/en/shn/medical/[^"]+)"[^>]*>'
     r'(?P<title>.*?)</a>', re.S)
-SHN_DATE_RE = re.compile(r'<span class="raxo-date">(\d{2}\.\d{2}\.\d{4})</span>')
+SHN_DATE_RE = re.compile(
+    r'<span\b[^>]*class="[^"]*\braxo-date\b[^"]*"[^>]*>'
+    r'(\d{2}\.\d{2}\.\d{4})</span>')
+
+
+def parse_medicals_listing(html, cutoff):
+    """Extract (url, headline, published_on) entries from the medicals list.
+
+    The listing renders the same article in several layout slots (featured
+    h2, hero h3, list h4), so hrefs repeat: entries are deduplicated by URL
+    here, before any per-article fetch budget is spent. Only the first
+    listing page exists (no pagination links), so the effective window is
+    whatever page 1 shows - roughly the last 2-3 weeks; nightly runs keep
+    coverage current and the caller's cutoff only filters page-1 entries.
+    """
+    entries = []
+    seen = set()
+    for block in re.findall(r"<article.*?</article>", html, re.S):
+        m = SHN_ARTICLE_RE.search(block)
+        d = SHN_DATE_RE.search(block)
+        if not m or not d:
+            continue
+        try:
+            published = datetime.strptime(d.group(1), "%d.%m.%Y").date()
+        except ValueError:
+            continue
+        if published < cutoff:
+            continue
+        url = SHN_BASE + m.group("href")
+        if url in seen:
+            continue
+        seen.add(url)
+        entries.append({
+            "url": url,
+            "headline": strip_tags(m.group("title")).strip(),
+            "published_on": published,
+        })
+    return entries
 
 
 def fetch_text(url):
@@ -516,30 +556,19 @@ class Command(BaseCommand):
         """Latest NL medical reports -> hockey_injury_report.
 
         Public news source, no login. One list page plus at most
-        --max-articles article pages (polite sleep). Players are matched by
+        --max-articles article pages (polite sleep; the cap applies after
+        URL dedup so duplicate layout slots never burn fetch budget).
+        Players are matched by
         exact full name against the roster database; ambiguous same-name
         matches need a club mention, otherwise the article is skipped and
         logged - never guessed. Idempotent via the (player, source_url) key.
         """
         listing = fetch_text(SHN_MEDICALS)
         cutoff = date.today() - timedelta(days=self.lookback)
-        entries = []
-        for block in re.findall(r"<article.*?</article>", listing, re.S):
-            m = SHN_ARTICLE_RE.search(block)
-            d = SHN_DATE_RE.search(block)
-            if not m or not d:
-                continue
-            try:
-                published = datetime.strptime(d.group(1), "%d.%m.%Y").date()
-            except ValueError:
-                continue
-            if published < cutoff:
-                continue
-            entries.append({
-                "url": SHN_BASE + m.group("href"),
-                "headline": strip_tags(m.group("title")).strip(),
-                "published_on": published,
-            })
+        entries = parse_medicals_listing(listing, cutoff)
+        self.stdout.write(
+            f"medicals list: {len(entries)} unique in-window articles "
+            f"(page-1 window only, see parse_medicals_listing docstring)")
         players = list(Player.objects.all())
         by_name = {}
         for pl in players:
