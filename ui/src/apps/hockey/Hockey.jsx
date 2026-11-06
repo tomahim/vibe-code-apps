@@ -43,7 +43,7 @@ function NatBadge({ nat }) {
 }
 function InjuryBadge({ injury }) {
   if (!injury) return <span className="hk-badge hk-badge-unknown" title="No medical report found in the watched news window. This is not a confirmation of health.">No report</span>;
-  return <a className={`hk-badge hk-inj-${injury.status_hint}`} href={injury.url} target="_blank" rel="noopener noreferrer" title={`${injury.headline} · ${injury.source}, ${injury.published_on}. Latest medical report found, not a current medical state.`}>{injuryLabel(injury.status_hint)} · {injury.published_on.slice(5)}</a>;
+  return <span className="hk-injury-cell"><a className={`hk-badge hk-inj-${injury.status_hint}`} href={injury.url} target="_blank" rel="noopener noreferrer" title={`${injury.headline} · ${injury.source}, ${injury.published_on}. Latest medical report found, not a current medical state.`}>{injuryLabel(injury.status_hint)} · {injury.published_on.slice(5)}</a><small className="hk-badge-sub">latest report</small></span>;
 }
 function PlayerTable({ players, selected = [], onSelect, onDetail, disabledIds = [], max = 8, pageSize = 25 }) {
   const [page, setPage] = useState(0);

@@ -12,3 +12,6 @@
 .hk-inj-returning{background:#e2f3e4;color:#2e7a38}
 .hk-inj-reported{background:#eef1ee;color:#55634f}
 a.hk-badge:hover{filter:brightness(.96)}
+
+.hk-injury-cell { display: inline-block; text-align: center; }
+.hk-badge-sub { display: block; font-size: 0.65rem; color: var(--hk-muted, #66706a); margin-top: 2px; letter-spacing: 0.02em; }
