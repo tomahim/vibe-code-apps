@@ -210,6 +210,7 @@ class FantasyApiTests(HockeyBase):
         self.assertEqual(len(shared), 1)
         self.assertEqual(shared[0]["name"], "Pongo")
         self.assertEqual(shared[0]["owner_label"], "aurore")
+        self.assertNotIn("granted_by", shared[0])  # internal provenance stays server-side
         self.assertTrue(shared[0]["read_only"])
         self.assertEqual(shared[0]["roster"][0]["name"], "Denis Malgin")
         # viewer cannot write to the shared team
