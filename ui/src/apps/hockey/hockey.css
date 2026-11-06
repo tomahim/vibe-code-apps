@@ -2,3 +2,13 @@
 @media(max-width:680px){.hk-pager button{flex:1}.hk-shell{padding:20px 14px}.hk-header{padding:12px 16px}.hk-hero{padding:12px 2px 25px}.hk-season{display:none}.hk-tabs{overflow-x:auto;gap:0}.hk-tabs a{padding:12px 14px;font-size:12px}.hk-notice{padding:12px;font-size:12px}.hk-card{padding:17px 13px;border-radius:11px}.hk-filters{grid-template-columns:1fr 1fr;gap:10px}.hk-filters>label:first-child{grid-column:1/-1}.hk-section-head{align-items:flex-start;gap:12px;flex-wrap:wrap}.hk-title-row h2{font-size:20px}.hk-app th,.hk-app td{padding:12px 9px}.hk-inline-form{flex-direction:column;align-items:stretch}.hk-selection{padding:11px 14px calc(11px + env(safe-area-inset-bottom,0px))}.hk-selection>button{flex:1;min-height:46px}.hk-section-head>label{width:100%}.hk-detail>button{float:none;margin-bottom:18px}.hk-stats{grid-template-columns:1fr 1fr}.hk-team-grid{grid-template-columns:1fr}.hk-roster-options{grid-template-columns:1fr}.hk-hero p:not(.hk-eyebrow){font-size:13px}.hk-player-table{min-width:640px}}
 
 .hk-scroll-hint{display:none}@media(max-width:680px){.hk-tabs{display:grid;grid-template-columns:1fr 1fr;overflow:visible}.hk-tabs a{white-space:normal;text-align:center}.hk-chart-wrap svg{min-width:0}.hk-scroll-hint{display:block;font-size:11px;color:var(--hk-muted);margin:4px 0 10px!important}}
+.hk-badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:20px;background:#e9f2ed;color:#35615b;text-decoration:none;white-space:nowrap;min-height:0}
+.hk-badge-swiss{background:#fdeaea;color:#b02929}
+.hk-badge-foreign{background:#e8eefb;color:#2d4a8a}
+.hk-badge-unknown{background:#f0f2ee;color:#8a968f;font-weight:600}
+.hk-inj-day_to_day{background:#fff4d6;color:#8a6d1a}
+.hk-inj-out{background:#fdeaea;color:#b02929}
+.hk-inj-out_long{background:#f8dede;color:#8f1d1d}
+.hk-inj-returning{background:#e2f3e4;color:#2e7a38}
+.hk-inj-reported{background:#eef1ee;color:#55634f}
+a.hk-badge:hover{filter:brightness(.96)}

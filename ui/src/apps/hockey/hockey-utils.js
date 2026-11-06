@@ -20,3 +20,10 @@ export function weekDomain(players) {
 export function adjacentWeeks(a,b) {
   return Number(b) === Number(a)+1 || (Number(a) >= 52 && Number(b) === 1);
 }
+
+export const INJURY_LABELS = { day_to_day: 'Day-to-day', out: 'Out', out_long: 'Long-term', returning: 'Returning', reported: 'Reported' };
+export function injuryLabel(hint) { return INJURY_LABELS[hint] || 'Reported'; }
+export function nationalityLabel(code) {
+  if (!code) return 'Unknown';
+  return code.toLowerCase() === 'ch' ? 'Swiss' : 'Foreign';
+}

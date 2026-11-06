@@ -11,3 +11,19 @@ test('missing costs never count as zero',()=>{assert.equal(completeCosts([]),fal
 test('weekly domain contains only imported weeks, no invented zero history',()=>{assert.deepEqual(weekDomain([{weeks:[{week:40},{week:38}]},{weeks:[{week:40},{week:39}]}]),[38,39,40]);});
 
 test("season weeks cross January without inventing connected gaps",()=>{assert.deepEqual(weekDomain([{weeks:[{week:2},{week:40},{week:1}]}]),[40,1,2]);assert.equal(adjacentWeeks(38,40),false);assert.equal(adjacentWeeks(53,1),true);});
+
+import { injuryLabel, nationalityLabel } from '../src/apps/hockey/hockey-utils.js';
+test('injury labels map known hints and never claim health',()=>{
+ assert.equal(injuryLabel('day_to_day'),'Day-to-day');
+ assert.equal(injuryLabel('out'),'Out');
+ assert.equal(injuryLabel('out_long'),'Long-term');
+ assert.equal(injuryLabel('returning'),'Returning');
+ assert.equal(injuryLabel('something-new'),'Reported');
+});
+test('nationality labels come only from the HM code, never inferred',()=>{
+ assert.equal(nationalityLabel('ch'),'Swiss');
+ assert.equal(nationalityLabel('CH'),'Swiss');
+ assert.equal(nationalityLabel('fi'),'Foreign');
+ assert.equal(nationalityLabel(null),'Unknown');
+ assert.equal(nationalityLabel(''),'Unknown');
+});

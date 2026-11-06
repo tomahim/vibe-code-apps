@@ -143,3 +143,33 @@ Notes:
 3. HM capture cadence: top-scorer page daily + on published repricing dates
    (infrequent, within the standing account-access rule)?
 4. Team logos: same image question as player photos.
+
+## Addendum 2026-11-06 - player status fields (issues #337 / #339)
+
+Two additions, same honest-source rules:
+
+- `hockey_player.hm_nationality` (+ source/observed_at): the nationality flag
+  exactly as Hockey Manager displays it. Verified live 2026-11-06: HM's
+  `/fr/transfers-classic` list (one page, every purchasable player) carries a
+  per-player `/site/images/flags/<code>.png`; the top-scorer page's
+  nationality filter does NOT change its row set (verified with the
+  `?ruolo=3&nationality=ch` GET), so the transfers list is the capture
+  source. HM's flag is not necessarily citizenship or import-license
+  eligibility; the UI labels it as HM's own display. Captured by the
+  standing HM read cadence (infrequent), joined by `hm_id` with a
+  name+club fallback; unmatched rows are logged, never guessed. Goalie-pair
+  market rows are skipped (pairs are not players).
+- `hockey_injury_report`: dated medical-report mentions from the public
+  `swisshockeynews.ch/en/national-league/medicals` feed (robots.txt allows
+  `/en/shn/*`; polite fetch: one list page + capped article pages, daily at
+  most). Players match by exact full name, with a club mention required to
+  disambiguate same-name players. `status_hint` is a transparent keyword
+  derivation; headline/excerpt stay verbatim. A row is a dated report, not a
+  current medical state; absence of a report is not health.
+
+New table needs one grant for the app role after migration:
+
+```sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE hockey_injury_report TO hockey_app;
+GRANT USAGE, SELECT ON SEQUENCE hockey_injury_report_id_seq TO hockey_app;
+```
