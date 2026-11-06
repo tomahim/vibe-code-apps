@@ -27,3 +27,12 @@ export function nationalityLabel(code) {
   if (!code) return 'Unknown';
   return code.toLowerCase() === 'ch' ? 'Swiss' : 'Foreign';
 }
+
+export function shotsPerMatch(season) {
+  if (!season || !season.games || season.shots_on_goal == null) return '-';
+  return (season.shots_on_goal / season.games).toFixed(1);
+}
+export function shootingPct(season) {
+  if (!season || !season.shots_on_goal) return '-';
+  return `${(season.goals / season.shots_on_goal * 100).toFixed(1)}%`;
+}
