@@ -293,3 +293,60 @@ class FantasyApiTests(HockeyBase):
         r = c.post(f"/api/apps/hockey/my/teams/{t['id']}/roster/",
                    data=json.dumps({"player": 155486}), content_type="application/json")
         self.assertEqual(r.status_code, 409)
+
+
+class SyncGamesTimezoneTests(TestCase):
+    """sync_hockey games phase must store official start instants with their
+    real offset (CET +01:00 / CEST +02:00 from the payload's startDateTime),
+    not the local wall time reinterpreted under TIME_ZONE."""
+
+    def setUp(self):
+        Team.objects.create(sihf_team_id=101144, name="EV Zug", acronym="EVZ")
+        Team.objects.create(sihf_team_id=101152, name="HC Ambri-Piotta", acronym="HCAP")
+
+    @staticmethod
+    def _row(day, wall, start_iso, game_id):
+        state = {"id": 0, "percent": 0, "name": "Wie geplant",
+                 "canceled": False, "type": "gameStatus"}
+        if start_iso is not None:
+            state["startDateTime"] = start_iso
+        return ["Mi", day, wall,
+                {"id": 101144, "name": "EV Zug", "acronym": "EVZ", "type": "team"},
+                {"id": 101152, "name": "HC Ambri-Piotta", "acronym": "HCAP", "type": "team"},
+                {"homeTeam": "-", "awayTeam": "-", "type": "result"},
+                {"homeTeam": ["-", "-", "-"], "awayTeam": ["-", "-", "-"], "type": "periods"},
+                "", state,
+                {"type": "linkToGameDetail", "gameId": str(game_id)}]
+
+    def _sync(self, rows):
+        from unittest.mock import patch
+        from django.core.management import call_command
+        with patch("apps.hockey.management.commands.sync_hockey.results_table",
+                   return_value={"data": rows}):
+            call_command("sync_hockey", phase="games")
+
+    def test_cet_start_uses_payload_offset(self):
+        self._sync([self._row("11.11.2026", "19:45",
+                              "2026-11-11T19:45:00+01:00", 1001)])
+        game = Game.objects.get(game_id=1001)
+        self.assertEqual(game.date.isoformat(), "2026-11-11T18:45:00+00:00")
+
+    def test_cest_start_uses_payload_offset(self):
+        self._sync([self._row("19.09.2026", "19:45",
+                              "2026-09-19T19:45:00+02:00", 1002)])
+        game = Game.objects.get(game_id=1002)
+        self.assertEqual(game.date.isoformat(), "2026-09-19T17:45:00+00:00")
+
+    def test_missing_start_datetime_keeps_legacy_wall_parse(self):
+        self._sync([self._row("12.11.2026", "20:00", None, 1003)])
+        game = Game.objects.get(game_id=1003)
+        self.assertEqual(game.date.isoformat(), "2026-11-12T20:00:00+00:00")
+
+    def test_resync_repairs_existing_offset_error(self):
+        self._sync([self._row("11.11.2026", "19:45", None, 1004)])
+        self.assertEqual(Game.objects.get(game_id=1004).date.isoformat(),
+                         "2026-11-11T19:45:00+00:00")
+        self._sync([self._row("11.11.2026", "19:45",
+                              "2026-11-11T19:45:00+01:00", 1004)])
+        self.assertEqual(Game.objects.get(game_id=1004).date.isoformat(),
+                         "2026-11-11T18:45:00+00:00")
