@@ -27,3 +27,17 @@ test('nationality labels come only from the HM code, never inferred',()=>{
  assert.equal(nationalityLabel(null),'Unknown');
  assert.equal(nationalityLabel(''),'Unknown');
 });
+
+import { shotsPerMatch, shootingPct } from '../src/apps/hockey/hockey-utils.js';
+test('shots per match and shooting percentage come only from imported shots',()=>{
+ assert.equal(shotsPerMatch({games:3,shots_on_goal:9}),'3.0');
+ assert.equal(shotsPerMatch({games:2,shots_on_goal:5}),'2.5');
+ assert.equal(shotsPerMatch({games:0,shots_on_goal:9}),'-');
+ assert.equal(shotsPerMatch({games:3}),'-');
+ assert.equal(shotsPerMatch(null),'-');
+ assert.equal(shootingPct({goals:2,shots_on_goal:9}),'22.2%');
+ assert.equal(shootingPct({goals:0,shots_on_goal:5}),'0.0%');
+ assert.equal(shootingPct({goals:2,shots_on_goal:0}),'-');
+ assert.equal(shootingPct({goals:2}),'-');
+ assert.equal(shootingPct(null),'-');
+});
