@@ -116,9 +116,23 @@ export default function LittleNotes({ onHome }) {
   }, [signedIn, routeItem, refresh]);
   async function toggle(path, key, slug, enabled = true) {
     if (!selected || busy) return; setBusy(true); setError("");
+    // Archive and Inbox are mutually exclusive in the API, so archiving from the
+    // Inbox view (or restoring from the Archive view) removes the object from the
+    // current list. Route to the next object in line instead of reloading the one
+    // that just left: skip() stores the object in the URL, and without this the
+    // detail effect reopens the archived object after the list refreshes.
+    const leaving = (slug === "archive" && enabled && category === "inbox") || (slug === "inbox" && enabled && category === "archive");
+    let nextId = "";
+    if (leaving) {
+      const index = items.findIndex(i => i.id === selected.id);
+      const following = index >= 0 ? items[(index + 1) % items.length] : null;
+      if (following && following.id !== selected.id) nextId = following.id;
+    }
     try {
       const updated = await api(`content/${selected.id}/${path}/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ [key]: slug, enabled, updated_at: selected.updated_at }) });
-      setSelected(updated); setNotice(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`);
+      setNotice(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`);
+      if (leaving) setRoute(old => ({ ...old, item: nextId }));
+      else setSelected(updated);
       setRefresh(x => x + 1);
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   }

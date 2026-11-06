@@ -17,23 +17,35 @@ const records=[
  mk('d1','daily-note','Wednesday: notes from the day','2026-11-03',['inbox']),
  mk('i2','idea','The archive is a garden','2026-11-03',['promising'])];
 await page.addInitScript(()=>localStorage.setItem('genious_token','visual-fixture-only'));
-let archived=false;
+// Stateful mock: category assignments change later list and detail responses like the real API.
+const withCats=(rec,slugs)=>({...rec,categories:slugs.map(slug=>({slug,name:CATS.find(c=>c.slug===slug).name}))});
+const initial=()=>new Map(records.map(r=>[r.id,r.categories.map(c=>c.slug)]));
+let state=initial();
 await page.route('**/api/apps/little-notes/**',async route=>{
  const u=new URL(route.request().url());let body;
  if(u.pathname.endsWith('/taxonomy/'))body={types:[['idea','Ideas'],['bookmark','Bookmarks'],['news','News'],['daily-note','Daily notes']].map(([slug,name])=>({slug,name})),categories:CATS,tags:[{slug:'topic-coding-agents-x',name:'Coding agents',is_system:false}],months:[{month:'2026-11',count:7},{month:'2026-10',count:10}]};
- else if(u.pathname.endsWith('/categories/')){archived=true;body={...records[0],categories:[{slug:'archive',name:'Archive'}]};}
+ else if(u.pathname.endsWith('/categories/')){
+   const id=u.pathname.split('/').filter(Boolean).slice(-2)[0];
+   const {category:slug,enabled}=JSON.parse(route.request().postData()||'{}');
+   const current=new Set(state.get(id)||[]);
+   if(enabled){if(slug==='archive')current.delete('inbox');if(slug==='inbox')current.delete('archive');current.add(slug);}else current.delete(slug);
+   state.set(id,[...current]);
+   body=withCats(records.find(r=>r.id===id),[...current]);
+ }
  else if(u.pathname.endsWith('/content/')){
    if(route.request().method()==='POST')body={...records[0]};
    else{
-     let list=records;
+     let list=records.map(r=>withCats(r,state.get(r.id)||[]));
      const t=u.searchParams.get('type');if(t)list=list.filter(i=>i.type===t);
-     const c=u.searchParams.get('category');if(c)list=list.filter(i=>i.categories.some(x=>x.slug===c));
+     const c=u.searchParams.get('category');
+     if(c==='inbox')list=list.filter(i=>!i.categories.length||i.categories.some(x=>x.slug===c));
+     else if(c)list=list.filter(i=>i.categories.some(x=>x.slug===c));
      const tg=u.searchParams.get('tag');if(tg)list=list.filter(i=>i.tags.some(x=>x.slug===tg));
-     if(u.searchParams.get('q')==='nomatch'||archived)list=[];
+     if(u.searchParams.get('q')==='nomatch')list=[];
      body={items:list,total:list.length,page:1,next_page:null};
    }
  }
- else body=records.find(i=>u.pathname.includes(i.id))||records[0];
+ else{const rec=records.find(i=>u.pathname.includes(i.id))||records[0];body=withCats(rec,state.get(rec.id)||rec.categories.map(c=>c.slug));}
  await route.fulfill({json:body});
 });
 for(let i=0;i<30;i++){try{await page.goto('http://localhost:5199/apps/little-notes');break;}catch{await new Promise(r=>setTimeout(r,200));}}
@@ -75,5 +87,30 @@ await page.keyboard.press('Escape');if(await page.getByRole('dialog').count())th
 await page.getByLabel('Search content').fill('nomatch');await page.getByRole('heading',{name:'A little breathing room.'}).waitFor();await page.screenshot({path:`${screenshots}/empty-390.png`,fullPage:true});
 await page.getByRole('button',{name:'See everything'}).click();await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
 await page.getByRole('button',{name:'Archive ↗',exact:true}).click();await page.getByRole('status').waitFor();
-console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; no horizontal overflow');
+// Triage regression: after skipping, Archive must advance to the next object in
+// line, not reopen the archived one; same for restoring from the Archive view.
+state=initial();
+await page.goto('http://localhost:5199/apps/little-notes');
+await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+await page.getByRole('button',{name:'Skip →'}).click();
+await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
+await page.setViewportSize({width:390,height:844});
+await page.screenshot({path:`${screenshots}/triage-skip-390.png`,fullPage:true});
+await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
+await page.getByRole('heading',{name:'What the newest maps can tell us'}).waitFor();
+if(await page.getByRole('button',{name:'Back to inbox',exact:false}).count())throw new Error('Archived object stayed on stage after archive');
+await page.screenshot({path:`${screenshots}/triage-archive-advance-390.png`,fullPage:true});
+await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
+await page.getByRole('heading',{name:'Wednesday: notes from the day'}).waitFor();
+await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
+await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
+await page.getByRole('heading',{name:'A little breathing room.'}).waitFor();
+await page.getByRole('button',{name:'Archive',exact:true}).click();
+await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+await page.getByRole('button',{name:'Skip →'}).click();
+await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
+await page.getByRole('button',{name:'Back to inbox ↙',exact:true}).click();
+await page.getByRole('heading',{name:'A collection worth revisiting'}).waitFor();
+console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; no horizontal overflow');
 await browser.close();server.kill('SIGTERM'); await new Promise(resolve => server.once('exit', resolve));

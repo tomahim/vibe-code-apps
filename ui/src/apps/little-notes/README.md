@@ -11,7 +11,9 @@ be selected with the jump control, not only the six preview cards.
 Actions: capture Ideas/Bookmarks/News/Daily notes into the Inbox category, read
 sanitized markdown, open a validated external URL, edit with conflict detection,
 favorite, assign/remove one category (type-linked categories refused for other
-types) or one topic tag, archive or restore. Skip changes no data. No projects,
+types) or one topic tag, archive or restore. Skip changes no data. Archiving
+from the Inbox (or restoring from the Archive view) moves the stage to the next
+object in line. No projects,
 issues or lists. Type/category/tag administration writes are intentionally not
 implemented.
 
@@ -24,5 +26,6 @@ Checks: `npm test`, `npm run build`; `node curator-visual-check.mjs` uses Chrome
 `/usr/bin/google-chrome` and mocked nonprivate records, writes screenshots to
 `/tmp/little-notes-screenshots` or CURATOR_SCREENSHOTS. It exercises 320/390/1280,
 no-overflow, type-linked category tabs (Ideas vs Bookmarks), type drawer,
-capture/Escape, search/empty/reset and archive.
+capture/Escape, search/empty/reset, archive and skip/archive/restore triage
+advance.
 This is not a claim of actual Android Firefox device testing.
