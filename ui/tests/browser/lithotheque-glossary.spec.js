@@ -21,7 +21,7 @@ for (const width of [393, 1440]) {
   await page.screenshot({path:`/downloads/lithotheque-glossary-en-${width}.png`});
   await card.screenshot({path:`/downloads/lithotheque-card-en-${width}.png`, animations: 'disabled'});
   await page.getByRole('button', {name:'Roches & sédiments',exact:true}).click();
-  await expect(page.locator('.gcard')).toHaveCount(17);
+  await expect(page.locator('.gcard')).toHaveCount(18);
   await page.getByRole('searchbox').fill('gres');
   await expect(page.getByRole('heading', {name:'Grès',exact:true})).toBeVisible();
   await expect(page.locator('.gcard')).toHaveCount(1);
@@ -74,5 +74,39 @@ test('silica bilingual card is searchable and readable on mobile',async ({page})
  await expect(c.getByRole('heading')).toHaveText('Silica');
  await expect(c.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Silicon_dioxide');
  await c.screenshot({path:'/downloads/lithotheque-silica-en.png'});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+test('socle hercynien bilingual card is searchable and readable on mobile',async ({page})=>{
+ await page.setViewportSize({width:393,height:900});
+ await page.goto('/apps/lithotheque');
+ await page.getByRole('button',{name:'Glossaire · Glossary',exact:true}).click();
+ await page.getByRole('searchbox').fill('socle');
+ const c=page.locator('[data-term="socle-hercynien"]');
+ await expect(page.locator('.gcard')).toHaveCount(1);
+ await expect(c.getByRole('heading')).toHaveText('Socle hercynien');
+ await c.locator('img').evaluate(i=>i.decode());
+ await c.screenshot({path:'/downloads/lithotheque-socle-fr.png'});
+ await c.getByRole('button').click();
+ await expect(c.getByRole('heading')).toHaveText('Hercynian basement');
+ await expect(c.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Basement_(geology)');
+ await c.screenshot({path:'/downloads/lithotheque-socle-en.png'});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+test('alluvion bilingual card is searchable and readable on mobile',async ({page})=>{
+ await page.setViewportSize({width:393,height:900});
+ await page.goto('/apps/lithotheque');
+ await page.getByRole('button',{name:'Glossaire · Glossary',exact:true}).click();
+ await page.getByRole('searchbox').fill('alluvion');
+ const c=page.locator('[data-term="alluvion"]');
+ await expect(page.locator('.gcard')).toHaveCount(1);
+ await expect(c.getByRole('heading')).toHaveText('Alluvion');
+ await c.locator('img').evaluate(i=>i.decode());
+ await c.screenshot({path:'/downloads/lithotheque-alluvion-fr.png'});
+ await c.getByRole('button').click();
+ await expect(c.getByRole('heading')).toHaveText('Alluvium');
+ await expect(c.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Alluvium');
+ await c.screenshot({path:'/downloads/lithotheque-alluvion-en.png'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
