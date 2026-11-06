@@ -85,6 +85,39 @@ await page.getByRole('button',{name:'+ Capture'}).click();await page.getByLabel(
 await page.screenshot({path:`${screenshots}/capture-390.png`,fullPage:true});
 await page.keyboard.press('Escape');if(await page.getByRole('dialog').count())throw new Error('Escape did not close capture');
 await page.getByLabel('Search content').fill('nomatch');await page.getByRole('heading',{name:'A little breathing room.'}).waitFor();await page.screenshot({path:`${screenshots}/empty-390.png`,fullPage:true});
+// Cards view: opening an object scrolls the detail into view, and each card
+// carries Archive/restore and category actions; the table open control meets
+// the mobile touch target and opening scrolls there too.
+state=initial();
+await page.goto('http://localhost:5199/apps/little-notes?view=cards');
+const grid=page.locator('.ln-view-cards');
+await grid.locator('.ln-view-card').nth(3).waitFor();
+await page.screenshot({path:`${screenshots}/cards-actions-390.png`,fullPage:true});
+await page.locator('.ln-view-card-open').first().click();
+await page.locator('.ln-view-detail').waitFor();
+await page.waitForFunction(()=>{const el=document.querySelector('.ln-view-detail');return el&&el.getBoundingClientRect().top>=0&&el.getBoundingClientRect().top<120;},null,{timeout:8000});
+await page.screenshot({path:`${screenshots}/cards-open-scrolled-390.png`,fullPage:false});
+await page.getByRole('button',{name:'Close object ×'}).click();
+const fieldCard=page.locator('.ln-view-card',{has:page.getByRole('heading',{name:'A field guide to quiet interfaces'})});
+await fieldCard.getByRole('button',{name:'Archive ↗',exact:true}).click();
+await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor({state:'detached'});
+if(await grid.locator('.ln-view-card').count()!==3)throw new Error('Archived card still in the Inbox grid');
+const cabinetCard=page.locator('.ln-view-card',{has:page.getByRole('heading',{name:'A small cabinet for big ideas'})});
+await cabinetCard.locator('select').selectOption({label:'Add Promising'});
+await cabinetCard.locator('.ln-view-chips').getByText('Promising',{exact:true}).waitFor();
+await page.getByRole('button',{name:'Archive',exact:true}).click();
+const archivedCard=page.locator('.ln-view-card',{has:page.getByRole('heading',{name:'A field guide to quiet interfaces'})});
+await archivedCard.getByRole('button',{name:'Back to inbox ↙',exact:true}).click();
+await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor({state:'detached'});
+await page.goto('http://localhost:5199/apps/little-notes?view=table');
+await page.locator('.ln-light-table').waitFor();
+const openBox=await page.locator('.ln-light-table td>button').first().boundingBox();
+if(!openBox||openBox.height<44)throw new Error('Table open control too small: '+(openBox&&Math.round(openBox.height)));
+await page.locator('.ln-light-table td>button').first().click();
+await page.locator('.ln-view-detail').waitFor();
+await page.waitForFunction(()=>window.scrollY>300,null,{timeout:5000});
+await page.goto('http://localhost:5199/apps/little-notes?q=nomatch');
+await page.getByRole('heading',{name:'A little breathing room.'}).waitFor();
 await page.getByRole('button',{name:'See everything'}).click();await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
 await page.getByRole('button',{name:'Archive ↗',exact:true}).click();await page.getByRole('status').waitFor();
 // Triage regression: after skipping, Archive must advance to the next object in

@@ -14,8 +14,10 @@ favorite, assign/remove one category (type-linked categories refused for other
 types) or one topic tag, archive or restore. Skip changes no data. Archiving
 from the Inbox (or restoring from the Archive view) moves the stage to the next
 object in line. No projects,
-issues or lists. Type/category/tag administration writes are intentionally not
-implemented.
+issues or lists. In the cards view each card carries the same archive/restore
+and category actions, and opening an object from the cards, table or database
+view scrolls the detail into view. Type/category/tag administration writes are
+intentionally not implemented.
 
 Source files and Notion blocks/attachments are preserved in Postgres provenance;
 this UI renders the readable markdown and source links, not raw JSON/HTML backups.
