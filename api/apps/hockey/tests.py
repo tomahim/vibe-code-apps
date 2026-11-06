@@ -201,11 +201,13 @@ class FantasyApiTests(HockeyBase):
         HMSnapshot.objects.create(
             player=self.malgin, captured_on=date(2026, 10, 28),
             source="top_scorer_page", source_observed_at=timezone.now(),
-            hm_price_m="9.5", hm_points_season=90, hm_points_avg="5.00")
+            hm_price_m="9.5", hm_points_season=90, hm_points_avg="5.00",
+            hm_matches=18)
         HMSnapshot.objects.create(
             player=self.malgin, captured_on=date(2026, 11, 4),
             source="top_scorer_page", source_observed_at=timezone.now(),
-            hm_price_m="10.0", hm_points_season=100, hm_points_avg="5.26")
+            hm_price_m="10.0", hm_points_season=100, hm_points_avg="5.26",
+            hm_matches=19)
         t = FantasyTeam.objects.create(owner=self.user, name="Elephant Crushers")
         RosterEntry.objects.create(team=t, player=self.malgin, position_slot="F")
         RosterEntry.objects.create(team=t, player=self.punnenovs, position_slot="G")
@@ -215,11 +217,13 @@ class FantasyApiTests(HockeyBase):
         self.assertEqual(hm["price_m"], "10.0")
         self.assertEqual(hm["points_season"], 100)
         self.assertEqual(hm["points_avg"], "5.26")
+        self.assertEqual(hm["matches"], 19)  # feeds the HM-rules value trend
         self.assertEqual(hm["captured_on"], "2026-11-04")
         no_snap = rows["Ivars Punnenovs"]["hm"]  # no capture: nulls, never zero
         self.assertIsNone(no_snap["price_m"])
         self.assertIsNone(no_snap["points_season"])
         self.assertIsNone(no_snap["points_avg"])
+        self.assertIsNone(no_snap["matches"])
         self.assertIsNone(no_snap["captured_on"])
 
     def test_own_pair_entry_includes_latest_hm_snapshot(self):

@@ -41,3 +41,31 @@ test('shots per match and shooting percentage come only from imported shots',()=
  assert.equal(shootingPct({goals:2}),'-');
  assert.equal(shootingPct(null),'-');
 });
+
+import { hmTrend, nextRepricing } from '../src/apps/hockey/hockey-utils.js';
+test('HM value trend follows the published repricing formula, verified against HM player details',()=>{
+ // Cases checked live on hockeymanager.ch 2026-11-06 (icon next to price):
+ assert.deepEqual(hmTrend({price_m:'15.0',points_season:360,matches:18}),{direction:'up',delta:1.5,eligible:true}); // Jarventie: 20.0 target, +1.5 cap, HM showed up
+ assert.deepEqual(hmTrend({price_m:'17.0',points_season:298,matches:18}),{direction:'down',delta:-0.5,eligible:true}); // Malgin: 16.56->16.5 target, HM showed down although his last repricing was +1.5
+ assert.deepEqual(hmTrend({price_m:'14.5',points_season:234,matches:16}),{direction:'stable',delta:0,eligible:true}); // Andrighetto: 14.625->14.5 = price, HM showed equals
+ assert.deepEqual(hmTrend({price_m:'10.0',points_season:164,matches:16}),{direction:'up',delta:0.5,eligible:true}); // Shore: exactly 10.25 rounds UP to 10.5, HM showed up
+ assert.deepEqual(hmTrend({price_m:'1.5',points_season:1,matches:1}),{direction:'stable',delta:0,eligible:false}); // Forget: <5 matches cannot move, HM showed equals
+});
+test('HM value trend caps the move at 1.5 M and uses 0.5 M steps',()=>{
+ assert.deepEqual(hmTrend({price_m:'12.5',points_season:289,matches:18}),{direction:'up',delta:1.5,eligible:true}); // 16.06->16.0 target: +3.5 capped to +1.5
+ assert.deepEqual(hmTrend({price_m:'14.0',points_season:100,matches:19}),{direction:'down',delta:-1.5,eligible:true}); // 5.26->5.5 target: -8.5 capped to -1.5
+});
+test('HM value trend is never invented from missing snapshot data',()=>{
+ assert.equal(hmTrend(null),null);
+ assert.equal(hmTrend({}),null);
+ assert.equal(hmTrend({price_m:null,points_season:142,matches:19}),null);
+ assert.equal(hmTrend({price_m:'8.5'}),null);
+ assert.equal(hmTrend({price_m:'8.5',points_season:142,matches:null}),null);
+ assert.equal(hmTrend({price_m:'abc',points_season:142,matches:19}),null);
+});
+test('next repricing date comes from the official published calendar only',()=>{
+ assert.equal(nextRepricing(new Date('2026-11-06T12:00:00Z')),'2026-11-19');
+ assert.equal(nextRepricing(new Date('2026-11-19T20:00:00Z')),'2026-11-19'); // date-level label
+ assert.equal(nextRepricing(new Date('2026-11-20T12:00:00Z')),'2026-12-03');
+ assert.equal(nextRepricing(new Date('2027-03-01T12:00:00Z')),null); // season calendar over: no invented date
+});

@@ -140,11 +140,14 @@ def latest_hm_pair_snapshots():
 
 def hm_roster_dict(snap):
     """HM metrics for a My teams roster row (current price, season points,
-    per-match average). No snapshot stays null - never an invented zero."""
+    per-match average, matches played). No snapshot stays null - never an
+    invented zero. matches feeds the UI's HM-rules value trend (repricing
+    eligibility starts at 5 matches)."""
     return {
         "price_m": str(snap.hm_price_m) if snap and snap.hm_price_m is not None else None,
         "points_season": snap.hm_points_season if snap else None,
         "points_avg": str(snap.hm_points_avg) if snap and snap.hm_points_avg is not None else None,
+        "matches": snap.hm_matches if snap else None,
         "captured_on": snap.captured_on.isoformat() if snap else None,
     }
 
