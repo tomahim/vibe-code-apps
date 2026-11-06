@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
+const injuryOut={status_hint:'out',headline:'Fixture medical headline',url:'https://swisshockeynews.ch/en/shn/medical/fixture',source:'swisshockeynews.ch medical report',published_on:'2026-11-04',observed_at:'2026-11-05T08:00:00Z',excerpt:'Fixture excerpt'};
+const injuryD2D={status_hint:'day_to_day',headline:'Fixture day-to-day headline',url:'https://swisshockeynews.ch/en/shn/medical/fixture-d2d',source:'swisshockeynews.ch medical report',published_on:'2026-11-05',observed_at:'2026-11-05T09:00:00Z',excerpt:'Fixture d2d excerpt'};
 const players = [
- {licence_id:1,name:'Fixture Forward',position:'F',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:2,assists:4,points:6},hm:{price_m:'8.5',captured_on:'2026-11-04'}},
- {licence_id:2,name:'Fixture Defender',position:'D',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:1,assists:2,points:3},hm:{price_m:null}},
- {licence_id:3,name:'Fixture Incoming',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:{games:2,goals:1,assists:0,points:1},hm:{price_m:'6.5'}},
- {licence_id:4,name:'Fixture Rookie',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:null,hm:{price_m:null}},
+ {licence_id:1,name:'Fixture Forward',position:'F',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:2,assists:4,points:6},hm:{price_m:'8.5',captured_on:'2026-11-04'},injury:injuryOut},
+ {licence_id:2,name:'Fixture Defender',position:'D',team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:1,assists:2,points:3},hm:{price_m:null},injury:null},
+ {licence_id:3,name:'Fixture Incoming',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:{games:2,goals:1,assists:0,points:1},hm:{price_m:'6.5'},injury:injuryD2D},
+ {licence_id:4,name:'Fixture Rookie',position:'F',team:{id:2,name:'Other Club',acronym:'OTH'},season:null,hm:{price_m:null},injury:null},
 ];
 const manyPlayers = Array.from({length:60},(_,i)=>({licence_id:100+i,name:`Fixture Player ${String(i+1).padStart(2,'0')}`,position:['F','D','G'][i%3],team:{id:1,name:'Fixture Club',acronym:'FIX'},season:{games:3,goals:i%5,assists:i%4,points:(i%5)+(i%4)},hm:{price_m:String(1+(i%10)),captured_on:'2026-11-04'}}));
 async function setup(page,{empty=false,many=false}={}){
@@ -24,7 +26,7 @@ async function setup(page,{empty=false,many=false}={}){
   else if(path==='my/teams/') data={teams:empty?[]:[{id:10,name:'Fixture team',roster_size:1}],shared_with_me:empty?[]:[{id:11,name:'Pongo',roster_size:1,read_only:true,owner_label:'aurore',granted_by:'Fixture consent 2026-11-04',roster:[{player:2,name:'Fixture Defender',slot:'D',acquired_price_m:'5.0',source:'hm_import',nationality:{code:'fi',source:'HM /fr/transfers-classic flag',observed_at:'2026-11-05T08:00:00Z'},injury:null}],pair_entries:[{label:'Fixture Pair A/B',hm_asset_id:93,current_price_m:'14.0',source:'hm_import'}]}]};
   else if(path==='my/teams/10/') data={id:10,name:'Fixture team',roster:[{player:1,name:'Fixture Forward',slot:'F',acquired_price_m:null,source:'manual',nationality:{code:'ch',source:'HM /fr/transfers-classic flag',observed_at:'2026-11-05T08:00:00Z'},injury:{status_hint:'out',headline:'Fixture medical headline',url:'https://swisshockeynews.ch/en/shn/medical/fixture',source:'swisshockeynews.ch medical report',published_on:'2026-11-04',observed_at:'2026-11-05T08:00:00Z',excerpt:'Fixture excerpt'}}],pair_entries:[{label:'Fixture Own Pair C/D',hm_asset_id:175,current_price_m:'13.0',source:'hm_import'}]};
   else if(path==='my/teams/10/simulations/') { if(route.request().method()==='POST'){ data={id:20,name:'Transfer what-if',computed_budget_after_m:'142',notes:'',created_at:'2026-11-04T21:00:00Z',sells:[players[0]],buys:[players[2]]};saved.push(data); } else data={simulations:saved}; }
-  else if(path==='players/1/') data={...players[0],stints:[]};
+  else if(path==='players/1/') data={...players[0],stints:[],injury:null,nationality:null};
   await route.fulfill({json:data});
  });
  return requests;
@@ -37,7 +39,7 @@ test('search, club filters, selection, comparison graphs, details and refresh',a
  await page.getByRole('checkbox',{name:'Select Fixture Forward',exact:true}).check();await page.getByLabel('Club',{exact:true}).selectOption('2');await expect(page.getByRole('button',{name:'Fixture Incoming',exact:true})).toBeVisible();await page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true}).check();
  await page.getByRole('button',{name:'Compare selected'}).click();await expect(page.getByRole('img',{name:/Weekly points/})).toBeVisible();await expect(page.getByText('2 players selected across filters')).toBeVisible();
  await page.getByLabel('Measure',{exact:true}).selectOption('goals');await expect(page.getByRole('img',{name:/Weekly goals/})).toBeVisible();await page.getByRole('button',{name:'Refresh data'}).click();await expect(page.getByRole('img',{name:/Weekly goals/})).toBeVisible();
- await page.getByLabel('Club',{exact:true}).selectOption('');await page.getByRole('button',{name:'Fixture Forward',exact:true}).click();await expect(page.getByRole('heading',{name:'Club history'})).toBeVisible();await expect(page.locator('.hk-detail .hk-badge-unknown').first()).toHaveText('Unknown');await expect(page.getByText(/not a confirmation of health/)).toBeVisible();await page.getByRole('button',{name:'Close player details'}).click();
+ await page.getByLabel('Club',{exact:true}).selectOption('');await page.getByRole('button',{name:'Fixture Forward',exact:true}).click();await expect(page.getByRole('heading',{name:'Club history'})).toBeVisible();await expect(page.locator('.hk-detail .hk-badge-unknown').first()).toHaveText('Unknown');await expect(page.locator('.hk-detail').getByText(/not a confirmation of health/)).toBeVisible();await page.getByRole('button',{name:'Close player details'}).click();
  await page.getByLabel('Find a player').fill('Defender');await expect(page.getByRole('button',{name:'Fixture Defender',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'Fixture Forward',exact:true})).toHaveCount(0);
 });
 test('rosters and simulation suppress unknown-cost budget, never make real trade',async({page})=>{
@@ -126,6 +128,26 @@ test('selection bar stays within reach while scrolling a long table',async({page
  await expect(bar.getByRole('button',{name:'View comparison'})).toBeVisible();
  await bar.getByRole('button',{name:'View comparison'}).click();
  await expect.poll(()=>page.evaluate(()=>{const r=document.getElementById('hk-comparison').getBoundingClientRect();return r.top>=0 && r.top<window.innerHeight;})).toBe(true);
+});
+
+test('scouting table and simulator incoming list show latest medical reports, never a health claim',async({page})=>{
+ await setup(page);await page.setViewportSize({width:393,height:852});await page.goto('/apps/hockey/players');
+ await expect(page.getByRole('columnheader',{name:'Medical',exact:true})).toBeVisible();
+ const fwd=page.locator('.hk-player-table tbody tr',{has:page.getByRole('button',{name:'Fixture Forward',exact:true})});
+ const link=fwd.getByRole('link',{name:'Out · 11-04'});
+ await expect(link).toBeVisible();await expect(link).toHaveAttribute('href','https://swisshockeynews.ch/en/shn/medical/fixture');await expect(link).toHaveAttribute('title',/not a current medical state/);
+ const def=page.locator('.hk-player-table tbody tr',{has:page.getByRole('button',{name:'Fixture Defender',exact:true})});
+ await expect(def.getByText('No report',{exact:true})).toBeVisible();
+ await expect(page.getByText(/no report is not a confirmation of health/)).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+ await page.screenshot({path:'/downloads/hockey-mobile-scouting-medical.png',fullPage:true});
+ await page.goto('/apps/hockey/simulator');await page.getByLabel('Your team',{exact:true}).selectOption('10');
+ const inc=page.locator('.hk-player-table tbody tr',{has:page.getByRole('checkbox',{name:'Select Fixture Incoming',exact:true})});
+ const d2d=inc.getByRole('link',{name:'Day-to-day · 11-05'});
+ await expect(d2d).toBeVisible();await expect(d2d).toHaveAttribute('href','https://swisshockeynews.ch/en/shn/medical/fixture-d2d');
+ await expect(page.getByText(/no report is not a confirmation of health/)).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+ await page.screenshot({path:'/downloads/hockey-mobile-simulator-medical.png',fullPage:true});
 });
 
 test('server-side sorting with direction, nulls last, selection preserved',async({page})=>{
