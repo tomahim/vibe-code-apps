@@ -7,6 +7,7 @@ from decimal import Decimal
 from django.db.models import Count, F, Sum, Window
 from django.db.models.functions import Rank
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_http_methods
 
 from apps.accounts.decorators import jwt_required
@@ -376,6 +377,7 @@ def own_team(request, team_id):
         return None
 
 
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @jwt_required
 @require_http_methods(["GET", "POST"])
 def my_teams(request):
@@ -407,6 +409,7 @@ def my_teams(request):
     return JsonResponse(team_dict(t), status=201)
 
 
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @jwt_required
 @require_http_methods(["GET", "DELETE"])
 def my_team_detail(request, team_id):
@@ -419,6 +422,7 @@ def my_team_detail(request, team_id):
     return JsonResponse(team_dict(t, with_roster=True, with_hm=True))
 
 
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @jwt_required
 @require_http_methods(["POST", "DELETE"])
 def my_team_roster(request, team_id):
@@ -455,6 +459,7 @@ def my_team_roster(request, team_id):
     return JsonResponse(team_dict(t, with_roster=True, with_hm=True), status=201)
 
 
+@csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @jwt_required
 @require_http_methods(["GET", "POST"])
 def my_team_simulations(request, team_id):

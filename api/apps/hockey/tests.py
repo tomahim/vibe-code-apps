@@ -195,6 +195,43 @@ class FantasyApiTests(HockeyBase):
         self.assertIsNone(sim.json()["computed_budget_after_m"])
         self.assertIn("Unknown HM price", sim.json()["notes"])
 
+    def test_writes_are_bearer_only_and_survive_csrf_enforcement(self):
+        # Regression for #344: browser writes carry only the Bearer token, so
+        # the views are csrf_exempt; CSRF enforcement must not 403 them, and
+        # the exemption must not open unauthenticated or cross-user writes.
+        from django.test import Client
+        c = Client(enforce_csrf_checks=True)
+        token = issue_token(self.user)
+        auth = {"HTTP_AUTHORIZATION": f"Bearer {token}"}
+        t = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "CSRF"}),
+                   content_type="application/json", **auth)
+        self.assertEqual(t.status_code, 201)
+        tid = t.json()["id"]
+        r = c.post(f"/api/apps/hockey/my/teams/{tid}/roster/",
+                   data=json.dumps({"player": 155486, "acquired_price_m": "17.0"}),
+                   content_type="application/json", **auth)
+        self.assertEqual(r.status_code, 201)
+        sim = c.post(f"/api/apps/hockey/my/teams/{tid}/simulations/",
+                     data=json.dumps({"sells": [155486], "buys": [310134]}),
+                     content_type="application/json", **auth)
+        self.assertEqual(sim.status_code, 201)
+        # No Bearer header (cookie/session-only or anonymous): still rejected.
+        anon = c.post("/api/apps/hockey/my/teams/", data=json.dumps({"name": "Nope"}),
+                      content_type="application/json")
+        self.assertEqual(anon.status_code, 401)
+        anon_sim = c.post(f"/api/apps/hockey/my/teams/{tid}/simulations/",
+                          data=json.dumps({"sells": [], "buys": []}),
+                          content_type="application/json")
+        self.assertEqual(anon_sim.status_code, 401)
+        # Another user's valid Bearer token cannot write to this team.
+        other = {"HTTP_AUTHORIZATION": f"Bearer {issue_token(self.other)}"}
+        cross = c.post(f"/api/apps/hockey/my/teams/{tid}/simulations/",
+                       data=json.dumps({"sells": [], "buys": []}),
+                       content_type="application/json", **other)
+        self.assertEqual(cross.status_code, 404)
+        cross_del = c.delete(f"/api/apps/hockey/my/teams/{tid}/", **other)
+        self.assertEqual(cross_del.status_code, 404)
+
     def test_own_roster_includes_latest_hm_metrics(self):
         from django.utils import timezone
         from .models import HMSnapshot
