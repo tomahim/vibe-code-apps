@@ -1,0 +1,386 @@
+/* Knob Conservatory - a vintage instrument bench, phone first. */
+
+.kc-app {
+  min-height: 100vh;
+  background: #17140f;
+  color: #efe6d4;
+  font-family: Georgia, "Times New Roman", serif;
+  padding: 0 12px 140px;
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+.kc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 10px;
+}
+
+.kc-header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+  letter-spacing: 0.04em;
+  color: #f5c96b;
+}
+
+.kc-header p {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: #b9a98a;
+}
+
+.kc-back, .kc-power {
+  border: 1px solid #6b5b3e;
+  background: #241f16;
+  color: #efe6d4;
+  border-radius: 10px;
+  min-width: 48px;
+  min-height: 48px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.kc-power {
+  margin-left: auto;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  padding: 0 14px;
+}
+
+.kc-power-on {
+  background: #f5c96b;
+  color: #241f16;
+  border-color: #f5c96b;
+  box-shadow: 0 0 14px rgba(245, 201, 107, 0.45);
+}
+
+.kc-modes {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 14px;
+}
+
+.kc-modes button {
+  flex: 1;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid #6b5b3e;
+  background: #241f16;
+  color: #b9a98a;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.kc-modes button.active {
+  background: #3a3122;
+  color: #f5c96b;
+  border-color: #f5c96b;
+}
+
+.kc-hint {
+  color: #b9a98a;
+  font-size: 0.9rem;
+}
+
+.kc-hint a { color: #f5c96b; }
+
+.kc-lesson, .kc-workshop {
+  background: #201b13;
+  border: 1px solid #3a3122;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.kc-lesson-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kc-lesson-head h2 { margin: 0; font-size: 1.15rem; color: #f5c96b; }
+.kc-chapter { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: #b9a98a; }
+.kc-minutes { margin-left: auto; font-size: 0.8rem; color: #b9a98a; }
+
+.kc-lesson p, .kc-workshop p { font-size: 0.95rem; line-height: 1.5; }
+.kc-goal { color: #f5c96b; }
+
+.kc-lesson-actions { display: flex; gap: 10px; margin-top: 10px; }
+
+.kc-lesson-actions button, .kc-save-row button, .kc-reveal {
+  flex: 1;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid #6b5b3e;
+  background: #2c2519;
+  color: #efe6d4;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.kc-lesson-actions button:disabled { opacity: 0.45; }
+.kc-check { background: #f5c96b; color: #241f16; border-color: #f5c96b; font-weight: bold; }
+
+.kc-match {
+  margin-top: 12px;
+  border: 1px solid #a15c3d;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #2a1d15;
+}
+
+.kc-match-passed { border-color: #7ba05b; background: #1d2a15; }
+.kc-match ul { margin: 8px 0 0; padding-left: 18px; }
+.kc-match li { font-size: 0.9rem; }
+.kc-reveal { margin-top: 10px; flex: none; width: 100%; }
+
+.kc-path { margin-top: 14px; }
+.kc-path summary { cursor: pointer; color: #b9a98a; min-height: 32px; }
+.kc-path-chapter h4 { margin: 10px 0 4px; color: #f5c96b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.kc-path-chapter ol { margin: 0; padding-left: 20px; }
+.kc-path-chapter button {
+  background: none;
+  border: none;
+  color: #efe6d4;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 8px 0;
+  min-height: 40px;
+  cursor: pointer;
+}
+.kc-path-chapter button:disabled { color: #6b5b3e; cursor: default; }
+.kc-path-chapter button.active { color: #f5c96b; text-decoration: underline; }
+
+.kc-save-row { display: flex; gap: 8px; }
+
+.kc-save-row input {
+  flex: 1;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid #6b5b3e;
+  background: #17140f;
+  color: #efe6d4;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0 12px;
+}
+
+.kc-save-row button { flex: 0 0 96px; }
+.kc-save-row button:disabled { opacity: 0.45; }
+
+.kc-presets { list-style: none; margin: 12px 0 0; padding: 0; }
+.kc-presets li { display: flex; gap: 8px; margin-bottom: 8px; }
+
+.kc-preset-name {
+  flex: 1;
+  min-height: 48px;
+  text-align: left;
+  border-radius: 10px;
+  border: 1px solid #3a3122;
+  background: #2c2519;
+  color: #f5c96b;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.kc-preset-delete {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid #6b3d2e;
+  background: #2a1d15;
+  color: #d98a6a;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.kc-notice { color: #f5c96b; font-size: 0.9rem; }
+
+/* The panel: sections in metal plates, knobs in a responsive grid. */
+
+.kc-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 760px) {
+  .kc-panel { grid-template-columns: 1fr 1fr; }
+}
+
+.kc-section {
+  background: linear-gradient(180deg, #2c2620 0%, #211c16 100%);
+  border: 1px solid #454033;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.kc-section-locked { opacity: 0.55; }
+
+.kc-section h3 {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #b9a98a;
+  border-bottom: 1px solid #3a3122;
+  padding-bottom: 6px;
+}
+
+.kc-section-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 6px;
+}
+
+.kc-knob {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 2px 6px;
+  border-radius: 10px;
+  min-height: 96px;
+  touch-action: none;
+  user-select: none;
+  cursor: ns-resize;
+}
+
+.kc-knob:active { background: rgba(245, 201, 107, 0.08); }
+.kc-knob-locked { cursor: default; opacity: 0.7; }
+.kc-knob-fine { outline: 1px dashed #f5c96b; }
+
+.kc-knob-dial { width: 52px; height: 52px; }
+.kc-knob-skirt { fill: #17140f; stroke: #6b5b3e; stroke-width: 1.5; }
+.kc-knob-cap { fill: #3a3122; stroke: #8a7a58; stroke-width: 1; }
+.kc-knob-pointer { stroke: #f5c96b; stroke-width: 3; stroke-linecap: round; }
+
+.kc-knob-label {
+  font-size: 0.68rem;
+  text-align: center;
+  color: #efe6d4;
+  line-height: 1.1;
+}
+
+.kc-knob-value { font-size: 0.66rem; color: #b9a98a; font-variant-numeric: tabular-nums; }
+
+.kc-knob-fine-badge {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  font-size: 0.6rem;
+  color: #241f16;
+  background: #f5c96b;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.kc-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 2px 6px;
+  align-items: center;
+}
+
+.kc-selector select {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid #6b5b3e;
+  background: #17140f;
+  color: #efe6d4;
+  font-family: inherit;
+  font-size: 0.8rem;
+}
+
+.kc-selector-locked { opacity: 0.7; }
+
+/* Keyboard strip: pinned at the bottom of the viewport. */
+
+.kc-keyboard-row {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #100d09;
+  border-top: 1px solid #3a3122;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.kc-octave-shift {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+
+.kc-octave-shift button {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #6b5b3e;
+  background: #241f16;
+  color: #f5c96b;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.kc-octave-shift button:disabled { opacity: 0.4; }
+.kc-octave-shift span { font-size: 0.7rem; color: #b9a98a; }
+
+.kc-keyboard {
+  position: relative;
+  flex: 1;
+  height: 110px;
+}
+
+.kc-key {
+  position: absolute;
+  top: 0;
+  border: 1px solid #100d09;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.kc-key-white {
+  width: 12.5%;
+  height: 100%;
+  background: #efe6d4;
+  border-radius: 0 0 6px 6px;
+}
+
+.kc-key-white:active { background: #d8c9a8; }
+
+.kc-key-white:nth-child(1) { left: 0; }
+.kc-key-white:nth-child(2) { left: 12.5%; }
+.kc-key-white:nth-child(3) { left: 25%; }
+.kc-key-white:nth-child(4) { left: 37.5%; }
+.kc-key-white:nth-child(5) { left: 50%; }
+.kc-key-white:nth-child(6) { left: 62.5%; }
+.kc-key-white:nth-child(7) { left: 75%; }
+.kc-key-white:nth-child(8) { left: 87.5%; }
+
+.kc-key-black {
+  width: 8%;
+  height: 60%;
+  background: #241f16;
+  border-radius: 0 0 5px 5px;
+  z-index: 1;
+}
+
+.kc-key-black:active { background: #4a3f2a; }

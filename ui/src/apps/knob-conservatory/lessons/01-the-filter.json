@@ -1,0 +1,68 @@
+{
+  "id": "the-filter",
+  "title": "The Filter",
+  "order": 1,
+  "lessons": [
+    {
+      "id": "open-the-curtain",
+      "title": "Open the curtain",
+      "minutes": 2,
+      "unlocks": ["cutoff"],
+      "body": [
+        "Every sound on this synth starts bright and buzzy. The filter is a curtain in front of it: the cutoff knob decides how far the curtain opens.",
+        "Low cutoff, dark and muffled. High cutoff, bright and open. Play a note, sweep the knob slowly, and listen to the curtain move."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 280, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "cutoff": 4500 },
+        "hint": "Make it open like a curtain - clearly bright, but not fully wide."
+      }
+    },
+    {
+      "id": "the-wah-in-the-wire",
+      "title": "The wah in the wire",
+      "minutes": 2,
+      "unlocks": ["resonance"],
+      "body": [
+        "Resonance is a megaphone pointed at the exact spot where the curtain opens. It makes that edge whistle and sing.",
+        "A little resonance sounds like a wah pedal. A lot sounds like a siren. Find the spot where the sound starts to speak."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 900, "resonance": 0.1, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "resonance": 0.65 },
+        "hint": "Give it a clear, vocal wah - singing, not screaming."
+      }
+    },
+    {
+      "id": "the-contours-hand",
+      "title": "The contour's hand",
+      "minutes": 3,
+      "unlocks": ["env_amount"],
+      "body": [
+        "The filter contour is an invisible hand on the cutoff knob. Every note, it gives the knob one quick turn, then settles back.",
+        "Contour amount decides how big that turn is. Zero: the hand stays home. High: each note starts with a bite, then mellows."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 600, "resonance": 0.2, "env_amount": 0,
+        "fattack": 0.005, "fdecay": 0.3, "fsustain": 0.2, "frelease": 0.3,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "env_amount": 0.75 },
+        "hint": "Each note should bite, then relax - a pluck, not a drone."
+      }
+    }
+  ]
+}

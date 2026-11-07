@@ -1,0 +1,74 @@
+{
+  "id": "the-oscillators",
+  "title": "The Oscillators",
+  "order": 3,
+  "lessons": [
+    {
+      "id": "a-second-voice",
+      "title": "A second voice",
+      "minutes": 2,
+      "unlocks": ["osc2_level"],
+      "body": [
+        "This synth has three oscillators - three voices singing the same note. The mixer decides how loud each one sings.",
+        "Oscillator 2 is parked slightly out of tune. Bring its level up until you hear the sound thicken and shimmer, like two singers almost in unison."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8,
+        "osc2_wave": "sawtooth", "osc2_level": 0, "osc2_detune": 8, "osc2_octave": 0,
+        "osc3_level": 0, "noise_level": 0,
+        "cutoff": 2500, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "osc2_level": 0.7 },
+        "hint": "Blend in the second voice until the sound thickens - present, but not louder than the first."
+      }
+    },
+    {
+      "id": "fatten-it-up",
+      "title": "Fatten it up",
+      "minutes": 3,
+      "unlocks": ["osc2_detune"],
+      "body": [
+        "Detune slides one oscillator a few cents off the other. A few cents: a slow, warm beating. Too many: out of tune.",
+        "This is the classic 'fat' sound. Listen for the gentle wobble - slow and warm, not seasick."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8,
+        "osc2_wave": "sawtooth", "osc2_level": 0.7, "osc2_detune": 0, "osc2_octave": 0,
+        "osc3_level": 0, "noise_level": 0,
+        "cutoff": 2500, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "osc2_detune": 14 },
+        "hint": "Find the slow, warm wobble - fat, not sour."
+      }
+    },
+    {
+      "id": "go-low",
+      "title": "Go low",
+      "minutes": 2,
+      "unlocks": ["osc3_level", "osc3_octave"],
+      "body": [
+        "Oscillator 3 can drop one or two octaves below the others. That is where bass comes from.",
+        "Its level is already up - your job is the octave switch. Take it down until the sound grows a chest."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8,
+        "osc2_wave": "sawtooth", "osc2_level": 0.6, "osc2_detune": 8, "osc2_octave": 0,
+        "osc3_wave": "square", "osc3_level": 0.7, "osc3_octave": 0, "osc3_detune": 0,
+        "noise_level": 0,
+        "cutoff": 1800, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "osc3_octave": -1 },
+        "hint": "Drop the third voice until the sound grows a chest - one floor down, not two."
+      }
+    }
+  ]
+}

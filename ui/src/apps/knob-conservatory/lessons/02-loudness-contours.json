@@ -1,0 +1,67 @@
+{
+  "id": "loudness-contours",
+  "title": "Loudness Contours",
+  "order": 2,
+  "lessons": [
+    {
+      "id": "slow-sunrise",
+      "title": "Slow sunrise",
+      "minutes": 2,
+      "unlocks": ["attack"],
+      "body": [
+        "Attack is how fast a note reaches full loudness after you press a key. Instant attack: a switch. Slow attack: a sunrise.",
+        "Strings and pads swell in. Drums and plucks hit immediately. This knob alone changes the instrument's personality."
+      ],
+      "note": 57,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 2200, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.005, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "attack": 0.9 },
+        "hint": "Make each note swell in like a sunrise - no click, no instant hit."
+      }
+    },
+    {
+      "id": "short-and-snappy",
+      "title": "Short and snappy",
+      "minutes": 2,
+      "unlocks": ["decay", "sustain"],
+      "body": [
+        "After the attack, the sound falls to its sustain level. Decay sets how fast it falls; sustain sets where it lands.",
+        "Here the sustain is parked at silence, so decay alone decides how long the note lives. Short decay: a pluck. Long decay: a bell."
+      ],
+      "note": 60,
+      "base_patch": {
+        "osc1_wave": "triangle", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 3000, "resonance": 0.1, "env_amount": 0,
+        "attack": 0.005, "decay": 1.4, "sustain": 0, "release": 0.2
+      },
+      "goal": {
+        "params": { "decay": 0.12 },
+        "hint": "Make it snappy - a plucked string, not a bell."
+      }
+    },
+    {
+      "id": "let-it-ring",
+      "title": "Let it ring",
+      "minutes": 2,
+      "unlocks": ["release"],
+      "body": [
+        "Release is what happens after your finger leaves the key. Zero release: the sound snaps shut. Long release: it floats away.",
+        "Release is why some sounds feel airy and others feel chopped. Match the target's tail - listen to how long it rings after the note ends."
+      ],
+      "note": 57,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 2200, "resonance": 0.15, "env_amount": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.7, "release": 0.05
+      },
+      "goal": {
+        "params": { "release": 1.4 },
+        "hint": "Let it float away - a long, gentle tail after each note."
+      }
+    }
+  ]
+}
