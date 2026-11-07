@@ -480,7 +480,7 @@ function EvolutionChart({ chart, currency }) {
   const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
   const gridValue = (f) => max * f;
   return <section className="grains-chart">
-    <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : currency === "carrots" ? "🥕" : "🏅"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
+    <div className="grains-chart-head"><h3>{currency === "badges" ? "🏅 Badges growth" : `${currency === "drops" ? "💧" : "🥕"} Growth`}</h3><span>Cumulative · {periodLabel}</span></div>
     <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
       <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
