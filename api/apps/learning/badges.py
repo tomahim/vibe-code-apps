@@ -16,6 +16,7 @@ card or answer writes and never in the background.
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone as dt_timezone
 
+from django.contrib.auth import get_user_model
 from django.db import transaction
 
 from .api import visible
@@ -54,6 +55,10 @@ class History:
         self.question_info = questions
         self.first_correct = {q: next(at for at, _, ok in rows if ok)
                               for q, rows in self.attempts.items() if any(ok for _, _, ok in rows)}
+        # A day counts toward a streak with a card read or a correct answer.
+        self.active_times = sorted(
+            list(self.card_times.values())
+            + [at for rows in self.attempts.values() for at, _, ok in rows if ok])
         # Current content tree, for completion rules.
         self.cards_of = defaultdict(set)
         for card_id, lesson_id in visible(Card).values_list("pk", "lesson_id"):
@@ -80,6 +85,69 @@ class History:
             if week not in first or at < first[week]:
                 first[week] = at
         return sorted((at, ("week", week)) for week, at in first.items())
+
+    def day_events(self):
+        """The first qualifying activity of each active UTC day, sorted."""
+        first = {}
+        for at in self.active_times:
+            day = at.date()
+            if day not in first or at < first[day]:
+                first[day] = at
+        return [(first[day], day) for day in sorted(first)]
+
+    def streak(self, **_):
+        """Days that set a new longest run of consecutive active days.
+
+        Each event is the first activity of a day that grew the all-time
+        best run, so the event count is the best streak ever reached and
+        the target-th event happened the day the streak first hit the
+        target. Streaks read the whole history; a missed day only stops
+        new records, it never erases an earned badge."""
+        events = []
+        best = 0
+        run = 0
+        previous = None
+        for at, day in self.day_events():
+            run = run + 1 if previous is not None and (day - previous).days == 1 else 1
+            if run > best:
+                best = run
+                events.append((at, ("day", day)))
+            previous = day
+        return events
+
+    def current_streak(self, today):
+        """(days, lit) for the header: the run ending today once today is
+        active, else the frozen run ending yesterday while today still has
+        no qualifying activity. (0, False) when the streak is broken."""
+        days = {day for _, day in self.day_events()}
+        if today in days:
+            end, lit = today, True
+        elif today - timedelta(days=1) in days:
+            end, lit = today - timedelta(days=1), False
+        else:
+            return 0, False
+        count = 0
+        day = end
+        while day in days:
+            count += 1
+            day -= timedelta(days=1)
+        return count, lit
+
+    def streak_stats(self, today):
+        """The streak payload for the header and its panel: the current
+        run, whether today already qualifies, the activity during the run
+        (distinct cards read and questions answered correctly) and the
+        best run ever."""
+        days, lit = self.current_streak(today)
+        best = len(self.streak())
+        if not days:
+            return {"days": 0, "lit": False, "cards": 0, "questions": 0, "best": best}
+        end = today if lit else today - timedelta(days=1)
+        start = end - timedelta(days=days - 1)
+        cards = sum(1 for at in self.card_times.values() if start <= at.date() <= end)
+        questions = sum(1 for rows in self.attempts.values()
+                        if any(ok and start <= at.date() <= end for at, _, ok in rows))
+        return {"days": days, "lit": lit, "cards": cards, "questions": questions, "best": best}
 
     def correct(self, typed=None, **_):
         return sorted((at, ("question", q)) for q, at in self.first_correct.items()
@@ -201,6 +269,8 @@ class History:
                           Question.objects.filter(pk__in=wanted["question"]).values_list("pk", "prompt")})
         for week in wanted["week"]:
             names[("week", week)] = f"Week of {week.strftime('%b')} {week.day}, {week.year}"
+        for day in wanted["day"]:
+            names[("day", day)] = f"{day.strftime('%b')} {day.day}, {day.year}"
         return {ref: shorten(names.get(ref, "")) for ref in refs}
 
 
@@ -225,6 +295,7 @@ def check(user, now=None):
     now = now or datetime.now(dt_timezone.utc)
     stored = {award.badge: award for award in BadgeAward.objects.filter(user=user)}
     history = History(user)
+    streak = history.streak_stats(now.date())
     evaluated = {badge.slug: evaluate(history, badge) for badge in BADGES}
     fresh = []
     for badge in BADGES:
@@ -242,10 +313,10 @@ def check(user, now=None):
                            evidence=[names[ref] for _, ref in shown if names[ref]])
                 for badge, at, shown in fresh], ignore_conflicts=True)
         stored = {award.badge: award for award in BadgeAward.objects.filter(user=user)}
-    return present(stored, evaluated, now)
+    return present(stored, evaluated, now, streak)
 
 
-def present(stored, evaluated, now):
+def present(stored, evaluated, now, streak):
     rows = []
     for badge in BADGES:
         events, _ = evaluated[badge.slug]
@@ -264,4 +335,111 @@ def present(stored, evaluated, now):
         "badges": rows,
         "earned_count": sum(row["earned"] for row in rows),
         "new_count": sum(row["new"] for row in rows),
+        "streak": streak,
     }
+
+
+def best_run(day_events):
+    """(days, start, end) of the longest run of consecutive active days.
+
+    Derived from recorded activity, never stored. Ties go to the most
+    recent run."""
+    best = (0, None, None)
+    run = 0
+    run_start = None
+    previous = None
+    for _, day in day_events:
+        if previous is not None and (day - previous).days == 1:
+            run += 1
+        else:
+            run = 1
+            run_start = day
+        if run >= best[0]:
+            best = (run, run_start, day)
+        previous = day
+    return best
+
+
+def player_badges(history):
+    """Rule-derived earned badges for one learner: [(earned_at, badge)] sorted.
+
+    Nothing is persisted here: this is the same evaluation check() applies,
+    so a player who never triggered a check still gets their real count and
+    dates from recorded history alone."""
+    earned = []
+    for badge in BADGES:
+        events, has = evaluate(history, badge)
+        if has:
+            earned.append((events[badge.target - 1][0], badge))
+    return sorted(earned, key=lambda item: item[0])
+
+
+def month_starts(first, now):
+    """Month starts from the month of `first` up to now's month, inclusive."""
+    cursor = first.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    last = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    while cursor <= last:
+        yield cursor
+        cursor = (cursor.replace(day=28) + timedelta(days=7)).replace(day=1)
+
+
+def badges_leaderboard(user, limit=20):
+    """Aggregate badge and streak fun stats per player, same audience and
+    aggregates-only rule as the drops/carrots leaderboard: names, counts and
+    dates, never raw history. Everything is derived from existing records;
+    no new tables, no writes."""
+    now = datetime.now(dt_timezone.utc)
+    today = now.date()
+    rows = []
+    earned_by_user = {}
+    for learner in get_user_model().objects.filter(is_active=True).order_by("pk"):
+        history = History(learner)
+        earned = player_badges(history)
+        if not earned and not history.active_times:
+            continue  # like a zero score on the other tabs: never played
+        length, start, end = best_run(history.day_events())
+        days, lit = history.current_streak(today)
+        attempts = [(at, ok) for rows_ in history.attempts.values() for at, _, ok in rows_]
+        correct = sum(1 for _, ok in attempts if ok)
+        name = learner.get_full_name().strip() or getattr(learner, "username", "") or learner.email or "Learner"
+        # An account's login identifier is not necessarily a chosen public name.
+        if "@" in name:
+            name = name.split("@", 1)[0]
+        earned_by_user[learner.pk] = earned
+        rows.append({
+            "user_id": learner.pk,
+            "name": name,
+            "is_self": learner.pk == user.pk,
+            "badges": len(earned),
+            "latest_badge": {"name": earned[-1][1].name, "earned_at": earned[-1][0].isoformat()} if earned else None,
+            "longest_streak": {"days": length,
+                               "start": start.isoformat() if start else None,
+                               "end": end.isoformat() if end else None},
+            "current_streak": {"days": days, "lit": lit},
+            "cards_read": len(history.card_times),
+            "correct": correct,
+            "attempts": len(attempts),
+            "accuracy": round(100 * correct / len(attempts)) if attempts else None,
+        })
+    rows.sort(key=lambda row: (-row["badges"], -row["longest_streak"]["days"], row["user_id"]))
+    for index, row in enumerate(rows):
+        row["rank"] = index + 1
+    # Badge growth, month by month: cumulative earned badges per player.
+    first = min((at for earned in earned_by_user.values() for at, _ in earned), default=None)
+    series = []
+    buckets = []
+    if first is not None:
+        months = list(month_starts(first, now))
+        buckets = [{"label": m.strftime("%b") if m.year == now.year else m.strftime("%b '%y"),
+                    "start": m.isoformat(),
+                    "end": (m.replace(day=28) + timedelta(days=7)).replace(day=1).isoformat(),
+                    "current": m.year == now.year and m.month == now.month} for m in months]
+        for row in rows:
+            dates = sorted(at for at, _ in earned_by_user[row["user_id"]])
+            points = [sum(1 for at in dates if at < datetime.fromisoformat(bucket["end"])) for bucket in buckets]
+            series.append({"name": row["name"], "is_self": row["is_self"], "points": points})
+    for row in rows:
+        row.pop("user_id")
+    return {"timezone": "UTC", "rows": rows[:limit],
+            "self": next((row for row in rows if row["is_self"]), None),
+            "chart": {"period": "overall", "buckets": buckets, "series": series}}

@@ -9,7 +9,7 @@ import { GrainsLoader } from "./Loader.jsx";
 import { PathComplete } from "./PathComplete.jsx";
 import { finishedPaths, newlyCompletedPaths, pathFinished } from "./path-completion.js";
 import { stableShuffler } from "./shuffle.js";
-import { BadgeButton, BadgeCollection } from "./Badges.jsx";
+import { BadgeButton, BadgeCollection, StreakPanel, StreakPill } from "./Badges.jsx";
 import "./garden/garden.css";
 import "./little-grains.css";
 
@@ -480,7 +480,7 @@ function EvolutionChart({ chart, currency }) {
   const periodLabel = chart.period === "weekly" ? "day by day" : chart.period === "monthly" ? "week by week" : "month by month";
   const gridValue = (f) => max * f;
   return <section className="grains-chart">
-    <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : "🥕"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
+    <div className="grains-chart-head"><h3>{currency === "drops" ? "💧" : currency === "carrots" ? "🥕" : "🏅"} Growth</h3><span>Cumulative · {periodLabel}</span></div>
     <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
       <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
@@ -501,7 +501,36 @@ function EvolutionChart({ chart, currency }) {
   </section>;
 }
 
+function BadgesStreak() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    let active = true; setData(null); setError("");
+    api("leaderboard/badges/").then((result) => { if (active) setData(result); }).catch((err) => { if (active) setError(err.message); });
+    return () => { active = false; };
+  }, []);
+  const formatRange = (streak) => {
+    if (!streak.start) return "";
+    const fmt = (iso) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(undefined, { day: "numeric", month: "short", timeZone: "UTC" });
+    return `${fmt(streak.start)} \u2013 ${fmt(streak.end)}`;
+  };
+  return <>
+    {error && <p className="grains-error" role="alert">{error}</p>}
+    {!data && !error && <p className="grains-loading">Gathering the badges…</p>}
+    {data && <><p className="grains-leaderboard-note">All time · UTC</p>
+      <ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}
+        <small className="detail">{row.longest_streak.days > 0 ? `🔥 Best streak ${row.longest_streak.days} days (${formatRange(row.longest_streak)}) · now ${row.current_streak.days}${row.current_streak.lit ? "" : " 🥶"}` : "No streak yet"}</small>
+        <small className="detail">🌱 {row.cards_read} cards · ✅ {row.correct} correct{row.accuracy !== null ? ` (${row.accuracy}%)` : ""}{row.latest_badge ? ` · Latest: ${row.latest_badge.name}` : ""}</small>
+      </span><strong>{row.badges}</strong></li>)}</ol>
+      {data.rows.length === 0 && <p className="grains-empty-ranking">No badges earned yet. The first one is waiting for you.</p>}
+      <EvolutionChart chart={data.chart} currency="badges" />
+      {data.self && <div className="grains-self-rank"><span>Your badges rank</span><strong>#{data.self.rank} · {data.self.badges} {data.self.badges === 1 ? "badge" : "badges"}</strong></div>}
+    </>}
+  </>;
+}
+
 function Leaderboard({ onClose }) {
+  const [tab, setTab] = useState("rewards");
   const [currency, setCurrency] = useState("drops");
   const [period, setPeriod] = useState("weekly");
   const [offset, setOffset] = useState(0);
@@ -515,17 +544,19 @@ function Leaderboard({ onClose }) {
   const step = period === "weekly" ? "week" : "month";
   return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <aside className="grains-leaderboard" role="dialog" aria-modal="true" aria-label="Leaderboard"><div className="grains-leaderboard-head"><div><p>THE GARDEN GROWS TOGETHER</p><h2>Leaderboard</h2></div><button className="grains-close" onClick={onClose} aria-label="Close leaderboard">×</button></div>
-      <div className="grains-segment" aria-label="Ranking type"><button className={currency === "drops" ? "active" : ""} onClick={() => setCurrency("drops")}>💧 Drops</button><button className={currency === "carrots" ? "active" : ""} onClick={() => setCurrency("carrots")}>🥕 Carrots</button></div>
-      <p className="grains-reward-description">{REWARD_COPY[currency].description}</p>
-      <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => { setPeriod(item); setOffset(0); }}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>
-      {period !== "overall" && <div className="grains-period-nav">
+      <div className="grains-segment" aria-label="Leaderboard tab"><button className={tab === "rewards" ? "active" : ""} onClick={() => setTab("rewards")}>💧🥕 Rewards</button><button className={tab === "badges" ? "active" : ""} onClick={() => setTab("badges")}>🏅 Badges & streak</button></div>
+      {tab === "rewards" && <div className="grains-segment" aria-label="Ranking type"><button className={currency === "drops" ? "active" : ""} onClick={() => setCurrency("drops")}>💧 Drops</button><button className={currency === "carrots" ? "active" : ""} onClick={() => setCurrency("carrots")}>🥕 Carrots</button></div>}
+      {tab === "rewards" && <p className="grains-reward-description">{REWARD_COPY[currency].description}</p>}
+      {tab === "rewards" && <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => { setPeriod(item); setOffset(0); }}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>}
+      {tab === "rewards" && period !== "overall" && <div className="grains-period-nav">
         <button aria-label={`Older ${step}`} disabled={!data || !data.has_earlier} onClick={() => setOffset((value) => value + 1)}>‹</button>
         <span className="grains-period-label" aria-live="polite">{data?.window?.label || "…"}</span>
         <button aria-label={`Newer ${step}`} disabled={!data || offset === 0} onClick={() => setOffset((value) => value - 1)}>›</button>
       </div>}
-      {error && <p className="grains-error" role="alert">{error}</p>}
-      {!data && !error && <p className="grains-loading">Gathering the rankings…</p>}
-      {data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : offset === 0 ? (period === "weekly" ? "Resets every Monday" : "Resets on the 1st") : "Final ranking"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}{row.stats && <small className="detail">{currency === "drops" ? `${row.stats.cards_read} card${row.stats.cards_read === 1 ? "" : "s"} read` : `${row.stats.attempts} attempted · ${row.stats.correct} correct · ${row.stats.wrong} wrong`}</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">{offset === 0 ? "The first spot is waiting for you." : `No activity this ${step}.`}</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : offset > 0 ? `No activity this ${step}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
+      {tab === "rewards" && error && <p className="grains-error" role="alert">{error}</p>}
+      {tab === "rewards" && !data && !error && <p className="grains-loading">Gathering the rankings…</p>}
+      {tab === "rewards" && data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : offset === 0 ? (period === "weekly" ? "Resets every Monday" : "Resets on the 1st") : "Final ranking"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}{row.stats && <small className="detail">{currency === "drops" ? `${row.stats.cards_read} card${row.stats.cards_read === 1 ? "" : "s"} read` : `${row.stats.attempts} attempted · ${row.stats.correct} correct · ${row.stats.wrong} wrong`}</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">{offset === 0 ? "The first spot is waiting for you." : `No activity this ${step}.`}</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : offset > 0 ? `No activity this ${step}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
+      {tab === "badges" && <BadgesStreak />}
     </aside>
   </div>;
 }
@@ -553,6 +584,7 @@ export default function LittleGrains() {
   const [catchUp, setCatchUp] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showBadges, setShowBadges] = useState(false);
+  const [showStreak, setShowStreak] = useState(false);
   const [badges, setBadges] = useState(null);
   const [badgesError, setBadgesError] = useState("");
   const [rewardInfo, setRewardInfo] = useState(null);
@@ -711,11 +743,11 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp) return; if (showBadges) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp) return; if (showBadges || showStreak) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [reader, catchUp, showLeaderboard, showBadges, rewardInfo, closeReader, completedPaths]);
+  }, [reader, catchUp, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
 
-  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
+  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><StreakPill streak={badges?.streak} onClick={() => { setShowStreak(true); checkBadges(); }} /><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
         ? <GrainsLoader exhausted onRetry={() => setWakeRun((run) => run + 1)} />
         : startup.phase !== "ready"
@@ -726,5 +758,6 @@ export default function LittleGrains() {
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
+    {showStreak && <StreakPanel data={badges} error={badgesError} onClose={() => setShowStreak(false)} />}
   </main>;
 }

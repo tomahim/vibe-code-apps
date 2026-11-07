@@ -8,6 +8,7 @@ urlpatterns = [
     path("garden/", views.garden, name="learning-garden"),
     path("badges/check/", views.badges_check, name="learning-badges-check"),
     path("leaderboard/", views.leaderboard, name="learning-leaderboard"),
+    path("leaderboard/badges/", views.badges_leaderboard_view, name="learning-badges-leaderboard"),
     path("images/<str:kind>/<uuid:content_id>/", content_image, name="learning-image"),
     path("themes/", views.themes, name="learning-themes"),
     path("themes/<uuid:theme_id>/", views.theme_detail, name="learning-theme"),

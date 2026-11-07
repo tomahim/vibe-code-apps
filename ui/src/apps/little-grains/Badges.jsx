@@ -16,6 +16,17 @@ export function BadgeButton({ newCount, onClick }) {
   </button>;
 }
 
+export function StreakPill({ streak, onClick }) {
+  if (!streak) return null;
+  const frozen = !streak.lit;
+  return <button className={streak.lit ? "grains-streak lit" : "grains-streak"} onClick={onClick}
+    aria-label={frozen
+      ? `Streak of ${streak.days} days, nothing read or answered yet today. Open streak details`
+      : `Current streak: ${streak.days} days. Open streak details`}>
+    <span aria-hidden="true">{streak.lit ? "🔥" : "🥶"}</span><span className="grains-streak-days">{streak.days}</span>
+  </button>;
+}
+
 function Art({ badge }) {
   return <img className={badge.earned ? "badge-art" : "badge-art locked"} src={art(badge.slug)} alt="" loading="lazy" />;
 }
@@ -59,6 +70,60 @@ export function BadgeCollection({ data, error, onClose }) {
               aria-label={`${badge.name}, ${badge.earned ? "earned" : "not earned yet"}${badge.new ? ", new" : ""}`}>
               <Art badge={badge} />{badge.new && <span className="grains-new-sticker">NEW</span>}<span className="grains-badge-name">{badge.name}</span></button>)}</div></section>;
         })}
+      </>}
+    </aside>
+  </div>;
+}
+
+export function StreakPanel({ data, error, onClose }) {
+  useEffect(() => {
+    const onKey = (event) => { if (event.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  const streak = data?.streak;
+  const milestones = (data?.badges || []).filter((badge) => badge.family === "Streaks");
+  const next = milestones.find((badge) => !badge.earned);
+  const days = streak?.days || 0;
+  const percent = next ? Math.min(100, Math.round((days / next.target) * 100)) : 100;
+  return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+    <aside className="grains-leaderboard grains-streak-panel" role="dialog" aria-modal="true" aria-label="Daily streak">
+      <div className="grains-leaderboard-head"><div><p>GROW A LITTLE, EVERY DAY</p><h2>Daily streak</h2></div><button className="grains-close" onClick={onClose} aria-label="Close streak">×</button></div>
+      {error && !data && <p className="grains-empty-ranking" role="alert">{error}</p>}
+      {!data && !error && <p className="grains-empty-ranking">Loading your streak…</p>}
+      {data && streak && <>
+        <div className={streak.lit ? "grains-streak-hero lit" : "grains-streak-hero"}>
+          <span aria-hidden="true">{streak.lit ? "🔥" : "🥶"}</span>
+          <div><strong>{days} {days === 1 ? "day" : "days"}</strong>
+            <small>{streak.lit
+              ? "Kept alive today. Come back tomorrow!"
+              : days > 0
+                ? "Read a card or answer a question correctly today to keep it alive."
+                : "Read a card or answer a question correctly today to start a new streak."}</small></div>
+        </div>
+        <div className="grains-streak-progress">
+          <div className="grains-streak-track" role="progressbar" aria-valuenow={days} aria-valuemin={0}
+            aria-valuemax={next ? next.target : days} aria-label={next ? `Progress to ${next.name}` : "All streak badges earned"}>
+            <div className="grains-streak-fill" style={{ width: `${percent}%` }} />
+          </div>
+          <p>{next ? <><strong>{days}</strong> of {next.target} days to <strong>{next.name}</strong></> : "Every streak badge earned. Impressive!"}</p>
+        </div>
+        <ul className="grains-milestones">
+          {milestones.map((badge) => <li key={badge.slug} className={badge.earned ? "grains-milestone earned" : "grains-milestone"}>
+            <Art badge={badge} />
+            <div><strong>{badge.name}</strong><span>{badge.target} days in a row</span></div>
+            {badge.earned
+              ? <span className="grains-milestone-check" role="img" aria-label={`Earned on ${formatDate(badge.earned_at)}`} title={`Earned on ${formatDate(badge.earned_at)}`}>✔️</span>
+              : <span className="grains-milestone-left">{badge.progress} / {badge.target}</span>}
+          </li>)}
+        </ul>
+        <p className="grains-streak-stats">
+          <span><strong>{streak.cards}</strong> {streak.cards === 1 ? "card" : "cards"} read</span>
+          <span aria-hidden="true">·</span>
+          <span><strong>{streak.questions}</strong> correct {streak.questions === 1 ? "answer" : "answers"}</span>
+          <span>during this streak</span>
+        </p>
+        {streak.best > days && <p className="grains-streak-best">Best streak so far: <strong>{streak.best} {streak.best === 1 ? "day" : "days"}</strong></p>}
       </>}
     </aside>
   </div>;
