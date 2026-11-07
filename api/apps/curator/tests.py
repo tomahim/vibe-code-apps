@@ -20,7 +20,9 @@ class CuratorModelTests(TestCase):
 
     def test_seeded_types_and_categories(self):
         self.assertSetEqual(set(ObjectType.objects.values_list("slug", flat=True)),
-                            {"idea", "bookmark", "news", "daily-note"})
+                            {"idea", "bookmark", "news", "daily-note", "video"})
+        video = ObjectType.objects.get(slug="video")
+        self.assertEqual((video.name, video.icon, video.position), ("Videos", "▶", 4))
         self.assertSetEqual(set(Category.objects.values_list("slug", flat=True)),
                             {"inbox", "archive", "favorite", "promising", "to-improve", "inspiration"})
         self.assertSetEqual(set(Category.objects.filter(is_system=True).values_list("slug", flat=True)),
