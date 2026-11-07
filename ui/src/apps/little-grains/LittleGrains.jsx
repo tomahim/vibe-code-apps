@@ -530,13 +530,15 @@ function BadgesStreak() {
 }
 
 function Leaderboard({ onClose }) {
-  const [tab, setTab] = useState("rewards");
+  // Three tabs: Drops, Carrots and Badges & streak. The rewards tabs share
+  // the currency state; "badges" swaps in its own view and fetch.
   const [currency, setCurrency] = useState("drops");
   const [period, setPeriod] = useState("weekly");
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   useEffect(() => {
+    if (currency === "badges") return undefined;
     let active = true; setData(null); setError("");
     api(`leaderboard/?currency=${currency}&period=${period}&offset=${offset}`).then((result) => { if (active) setData(result); }).catch((err) => { if (active) setError(err.message); });
     return () => { active = false; };
@@ -544,19 +546,18 @@ function Leaderboard({ onClose }) {
   const step = period === "weekly" ? "week" : "month";
   return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <aside className="grains-leaderboard" role="dialog" aria-modal="true" aria-label="Leaderboard"><div className="grains-leaderboard-head"><div><p>THE GARDEN GROWS TOGETHER</p><h2>Leaderboard</h2></div><button className="grains-close" onClick={onClose} aria-label="Close leaderboard">×</button></div>
-      <div className="grains-segment" aria-label="Leaderboard tab"><button className={tab === "rewards" ? "active" : ""} onClick={() => setTab("rewards")}>💧🥕 Rewards</button><button className={tab === "badges" ? "active" : ""} onClick={() => setTab("badges")}>🏅 Badges & streak</button></div>
-      {tab === "rewards" && <div className="grains-segment" aria-label="Ranking type"><button className={currency === "drops" ? "active" : ""} onClick={() => setCurrency("drops")}>💧 Drops</button><button className={currency === "carrots" ? "active" : ""} onClick={() => setCurrency("carrots")}>🥕 Carrots</button></div>}
-      {tab === "rewards" && <p className="grains-reward-description">{REWARD_COPY[currency].description}</p>}
-      {tab === "rewards" && <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => { setPeriod(item); setOffset(0); }}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>}
-      {tab === "rewards" && period !== "overall" && <div className="grains-period-nav">
+      <div className="grains-segment three" aria-label="Leaderboard tab"><button className={currency === "drops" ? "active" : ""} onClick={() => { setCurrency("drops"); setOffset(0); }}>💧 Drops</button><button className={currency === "carrots" ? "active" : ""} onClick={() => { setCurrency("carrots"); setOffset(0); }}>🥕 Carrots</button><button className={currency === "badges" ? "active" : ""} onClick={() => setCurrency("badges")}>🏅 Badges & streak</button></div>
+      {currency !== "badges" && <p className="grains-reward-description">{REWARD_COPY[currency].description}</p>}
+      {currency !== "badges" && <div className="grains-period" aria-label="Ranking period">{["weekly", "monthly", "overall"].map((item) => <button key={item} className={period === item ? "active" : ""} onClick={() => { setPeriod(item); setOffset(0); }}>{item[0].toUpperCase() + item.slice(1)}</button>)}</div>}
+      {currency !== "badges" && period !== "overall" && <div className="grains-period-nav">
         <button aria-label={`Older ${step}`} disabled={!data || !data.has_earlier} onClick={() => setOffset((value) => value + 1)}>‹</button>
         <span className="grains-period-label" aria-live="polite">{data?.window?.label || "…"}</span>
         <button aria-label={`Newer ${step}`} disabled={!data || offset === 0} onClick={() => setOffset((value) => value - 1)}>›</button>
       </div>}
-      {tab === "rewards" && error && <p className="grains-error" role="alert">{error}</p>}
-      {tab === "rewards" && !data && !error && <p className="grains-loading">Gathering the rankings…</p>}
-      {tab === "rewards" && data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : offset === 0 ? (period === "weekly" ? "Resets every Monday" : "Resets on the 1st") : "Final ranking"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}{row.stats && <small className="detail">{currency === "drops" ? `${row.stats.cards_read} card${row.stats.cards_read === 1 ? "" : "s"} read` : `${row.stats.attempts} attempted · ${row.stats.correct} correct · ${row.stats.wrong} wrong`}</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">{offset === 0 ? "The first spot is waiting for you." : `No activity this ${step}.`}</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : offset > 0 ? `No activity this ${step}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
-      {tab === "badges" && <BadgesStreak />}
+      {currency !== "badges" && error && <p className="grains-error" role="alert">{error}</p>}
+      {currency !== "badges" && !data && !error && <p className="grains-loading">Gathering the rankings…</p>}
+      {currency !== "badges" && data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : offset === 0 ? (period === "weekly" ? "Resets every Monday" : "Resets on the 1st") : "Final ranking"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}{row.stats && <small className="detail">{currency === "drops" ? `${row.stats.cards_read} card${row.stats.cards_read === 1 ? "" : "s"} read` : `${row.stats.attempts} attempted · ${row.stats.correct} correct · ${row.stats.wrong} wrong`}</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">{offset === 0 ? "The first spot is waiting for you." : `No activity this ${step}.`}</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : offset > 0 ? `No activity this ${step}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
+      {currency === "badges" && <BadgesStreak />}
     </aside>
   </div>;
 }

@@ -39,3 +39,5 @@
 .grains-streak-best{margin:10px 0 0;font-size:13px;color:var(--dim)}
 .grains-ranking .name small.detail{white-space:normal;text-overflow:clip;line-height:1.4}
 .grains-milestone-check{color:#2e7d32;font-size:20px;font-weight:900}
+.grains-segment.three{grid-template-columns:1fr 1fr 1.25fr}
+.grains-segment.three button{font-size:13px!important;padding:0 6px}
