@@ -193,11 +193,11 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     addLights(s);
     addCorridorLight(s);
 
-    s.add(box(mats, 10.4, 0.2, 46, 0, -0.1, -20, 0x2c3342));           // floor
-    s.add(box(mats, 10.4, 0.2, 46, 0, 4.6, -20, 0x3d4656));            // ceiling
+    s.add(box(mats, 9.9, 0.2, 46, 0, -0.1, -20, 0x2c3342));            // floor (a hair narrower than the walls so its edges read as junction lines)
+    s.add(box(mats, 9.9, 0.2, 46, 0, 4.6, -20, 0x3d4656));             // ceiling (same)
     s.add(box(mats, 0.2, 4.6, 46, -5.1, 2.3, -20, 0xcfc3a9));          // left wall
     s.add(box(mats, 0.2, 4.6, 46, 5.1, 2.3, -20, 0xc7b99d));           // right wall
-    s.add(box(mats, 10.4, 4.6, 0.2, 0, 2.3, -42.9, 0xd6ccb6));         // back wall
+    s.add(box(mats, 9.9, 4.5, 0.2, 0, 2.29, -42.9, 0xd6ccb6));         // back wall (floated clear of its neighbours)
     s.add(box(mats, 1.5, 0.02, 44, 0, 0.012, -20, 0x465065));          // carpet runner
 
     // wall panel frames receding down the hall
@@ -382,7 +382,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
   var mode = 'orbit';                 // 'orbit' | 'sketch'
   var gateOn = true;                  // sketch-first gate
   var state = [];                     // per tab: {revealed, strokes:[], cam:{...}}
-  var show = { vp: false, horizon: false, grid: true, guides: false, wire: false };
+  var show = { vp: false, horizon: false, grid: true, guides: false, wire: false, pencil: false };
   var modelOpacity = 1;
 
   for (var i = 0; i < 3; i++) {
@@ -472,6 +472,8 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     var w = world(current);
     var gated = overlaysGated();
     if (gated) return;
+    var inkSoft = show.pencil ? 'rgba(58,53,45,.5)' : 'rgba(236,229,211,.55)';
+    var inkLabel = show.pencil ? 'rgba(58,53,45,.65)' : 'rgba(236,229,211,.6)';
 
     // horizon: the camera's eye-level plane, seen edge-on
     if (show.horizon) {
@@ -485,7 +487,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
         if (!hp1.behind && !hp2.behind) {
           var dx = hp2.x - hp1.x, dy = hp2.y - hp1.y;
           ctx.save();
-          ctx.strokeStyle = 'rgba(236,229,211,.55)';
+          ctx.strokeStyle = inkSoft;
           ctx.setLineDash([10, 8]);
           ctx.lineWidth = 1.4;
           ctx.beginPath();
@@ -504,7 +506,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
           ctx.stroke();
           ctx.setLineDash([]);
           if (ly > 20 && ly < vpH - 10) {
-            ctx.fillStyle = 'rgba(236,229,211,.6)';
+            ctx.fillStyle = inkLabel;
             ctx.font = '11px ui-monospace, Menlo, monospace';
             ctx.fillText('HORIZON · eye level', 10, ly - 8);
           }
@@ -577,7 +579,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     state[current].strokes.forEach(function (st) {
       ctx.save();
       if (st.tool === 'erase') { ctx.globalCompositeOperation = 'destination-out'; ctx.strokeStyle = 'rgba(0,0,0,1)'; }
-      else { ctx.globalCompositeOperation = 'source-over'; ctx.strokeStyle = INK; }
+      else { ctx.globalCompositeOperation = 'source-over'; ctx.strokeStyle = show.pencil ? GRAPHITE : INK; }
       ctx.lineWidth = st.w;
       ctx.beginPath();
       st.pts.forEach(function (p, j) {
@@ -710,6 +712,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     nodes.forEach(function (n, j) { n.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
     world(i).grid.visible = show.grid;
     applyWire();
+    applyPencil();
     camState(i);
     syncEyeSlider();
     redrawSketch();
@@ -717,7 +720,83 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
   }
 
   function applyWire() {
-    world(current).materials.forEach(function (m) { m.wireframe = show.wire; });
+    var w = world(current);
+    w.materials.forEach(function (m) { m.wireframe = show.wire; });
+    if (w.pencil) w.pencil.fill.wireframe = show.wire;
+  }
+
+  /* ---------- pencil (hand-drawn) render mode ---------- */
+  var PAPER = 0xf3ecdc, GRAPHITE = '#37322a', DARK_BG = 0x10141b;
+
+  function seededRand(seed) {
+    var t = seed >>> 0;
+    return function () {
+      t += 0x6D2B79F5;
+      var r = Math.imul(t ^ (t >>> 15), 1 | t);
+      r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Rebuild every edge as a slightly wobbly polyline: the pencil-stroke look.
+  function jitterEdges(geo, rand) {
+    var pos = geo.getAttribute('position');
+    var out = [];
+    var a = new THREE.Vector3(), b = new THREE.Vector3();
+    var dir = new THREE.Vector3(), off = new THREE.Vector3(), m = new THREE.Vector3();
+    for (var i = 0; i < pos.count; i += 2) {
+      a.fromBufferAttribute(pos, i); b.fromBufferAttribute(pos, i + 1);
+      dir.subVectors(b, a);
+      var len = dir.length();
+      if (len < 1e-6) continue;
+      dir.divideScalar(len);
+      var amp = Math.min(0.02 * len, 0.035);
+      var pts = [a.clone()];
+      for (var s = 1; s <= 3; s++) {
+        off.set(rand() - 0.5, rand() - 0.5, rand() - 0.5);
+        off.addScaledVector(dir, -off.dot(dir));   // perpendicular component only
+        m.copy(a).addScaledVector(dir, len * s / 4).addScaledVector(off, amp * 2);
+        pts.push(m.clone());
+      }
+      pts.push(b.clone());
+      for (var k = 0; k < pts.length - 1; k++) {
+        out.push(pts[k].x, pts[k].y, pts[k].z, pts[k + 1].x, pts[k + 1].y, pts[k + 1].z);
+      }
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
+    return g;
+  }
+
+  function pencilAssets(i) {
+    var w = world(i);
+    if (w.pencil) return w.pencil;
+    var fill = new THREE.MeshBasicMaterial({ color: 0xf6f0e0, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 2 });   // flat paper fill, nudged back so coplanar edges win the depth test
+    // corridor is viewed from inside a flush box, so its junction edges lose the depth test to coplanar fill; draw them architect-sketch style instead
+    var lineMat = new THREE.LineBasicMaterial({ color: GRAPHITE, depthTest: i !== 0 });
+    var meshes = [];
+    w.scene.traverse(function (o) { if (o.isMesh) meshes.push(o); });
+    var entries = [];
+    meshes.forEach(function (mesh, idx) {
+      var edges = new THREE.EdgesGeometry(mesh.geometry, 10);
+      var line = new THREE.LineSegments(jitterEdges(edges, seededRand(idx * 7919 + 13)), lineMat);
+      line.visible = false;
+      mesh.add(line);
+      entries.push({ mesh: mesh, orig: mesh.material, line: line });
+    });
+    w.pencil = { fill: fill, entries: entries };
+    return w.pencil;
+  }
+
+  function applyPencil() {
+    var w = world(current), p = pencilAssets(current);
+    p.entries.forEach(function (e) {
+      e.mesh.material = show.pencil ? p.fill : e.orig;
+      e.line.visible = show.pencil;
+    });
+    w.scene.background.set(show.pencil ? PAPER : DARK_BG);
+    applyWire();
+    resize();
   }
 
   function syncEyeSlider() {
@@ -747,7 +826,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
 
     var defs = [
       ['vp', 'Vanishing pts'], ['horizon', 'Horizon'], ['grid', 'Grid'],
-      ['guides', 'Guide lines'], ['wire', 'Wireframe']
+      ['guides', 'Guide lines'], ['wire', 'Wireframe'], ['pencil', 'Pencil']
     ];
     var chips = el('chips');
     defs.forEach(function (d) {
@@ -759,6 +838,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
         b.setAttribute('aria-pressed', show[d[0]] ? 'true' : 'false');
         if (d[0] === 'grid') world(current).grid.visible = show.grid;
         if (d[0] === 'wire') applyWire();
+        if (d[0] === 'pencil') applyPencil();
       });
       chips.appendChild(b);
     });
@@ -829,6 +909,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
       '<li><b>Orbit mode</b>: drag to move your eye around the scene, pinch or scroll to zoom. The slider raises your eye level (or tilts your gaze on the Tower).</li>' +
       '<li><b>Sketch mode</b>: draw directly over the viewport with pen or eraser. Your drawing stays put while you orbit back underneath it.</li>' +
       '<li><b>Model slider</b>: fade the 3D scene down to nothing to see your sketch alone, or bring back a ghost of the truth to compare.</li>' +
+      '<li><b>Pencil</b>: flips the scene into a hand-drawn rendering - wobbly graphite edges on paper, and your pen turns to graphite too. Draw over it, then flip back to see the solid truth.</li>' +
       '<li><b>Sketch first</b>: construction overlays stay locked until you have drawn at least one line. Turn it off for free exploration.</li>' +
       '<li>Drawings live in this session only - leaving the page lets them go, like a sketchbook page you have already photographed.</li>' +
       '</ul>';
@@ -844,7 +925,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
   function resize() {
     var r = viewport.getBoundingClientRect();
     vpW = Math.max(1, r.width); vpH = Math.max(1, r.height);
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = show.pencil ? 1 : Math.min(window.devicePixelRatio || 1, 2);   // pencil lines stay a chewy 1 CSS px
     renderer.setPixelRatio(dpr);
     renderer.setSize(vpW, vpH);
     camera.aspect = vpW / vpH;
@@ -888,6 +969,12 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     if (/fade=60/.test(h)) {
       el('fadeSlider').value = 60;
       renderer.domElement.style.opacity = 0.4;
+    }
+    if (/pencil=1/.test(h)) {
+      show.pencil = true;
+      var pb = el('tg-pencil');
+      if (pb) pb.setAttribute('aria-pressed', 'true');
+      applyPencil();
     }
     if (/mode=sketch/.test(h)) setMode('sketch');
     if (/info=1/.test(h)) openSheet();
