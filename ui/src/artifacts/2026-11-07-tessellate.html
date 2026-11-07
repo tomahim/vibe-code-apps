@@ -144,21 +144,22 @@
         M.C. Escher (1898-1972), a Dutch graphic artist, turned that dry fact into an art form.
         Struck by the interlocking patterns of the Alhambra palace in Spain, which he visited in 1922
         and again in 1936, he spent decades on what he called the "regular division of the plane".
-        His method was exactly the one you just used: take a tile that already tiles, deform one edge,
-        and let a symmetry rule copy the deformation onto the matching edge so the tile still closes.
-        Then he looked at the silhouette until a lizard, a bird or a fish looked back - and drew it in.
+        The studio above uses a simplified version of the approach behind those prints: take a tile that
+        already tiles, deform one edge, and let a symmetry rule copy the deformation onto the matching
+        edge so it still closes. Escher then studied the silhouette until a lizard, a bird or a fish
+        looked back - and drew the creature in, adding detail the bare tile never dictated.
       </p>
       <p style="color: var(--muted); font-size: 15px">
         Beneath the craft sits a clean piece of mathematics: there are exactly seventeen ways a pattern
         can repeat across the plane, the seventeen wallpaper groups. This studio plays with two of the
-        simplest - repetition by translation alone (called p1) and by half-turns (p2). Escher worked
-        through all seventeen in his notebooks.
+        simplest - repetition by translation alone (called p1) and by half-turns (p2). Escher filled
+        notebooks with regular-division studies exploring many of them.
       </p>
       <h3 style="font-size: 16px; margin: 22px 0 10px">Keep exploring</h3>
       <div id="links" style="display: grid; gap: 10px"></div>
       <p style="color: var(--faint); font-size: 12.5px; margin-top: 18px">
         Escher's prints stay under copyright, so this page links out instead of reproducing them.
-        Links open from the gallery preview only if your browser allows it - otherwise copy the address shown.
+        Inside the gallery preview, links cannot open new tabs - use the Copy link buttons instead.
       </p>
     </div>
   </section>
@@ -701,17 +702,38 @@ const linkWrap = document.getElementById("links");
 LINKS.forEach(([title, desc, url]) => {
   const card = document.createElement("div");
   card.style.cssText = "background: var(--panel); border: 1px solid rgba(151,144,126,.25); border-radius: 12px; padding: 12px 14px;";
+  const head = document.createElement("div");
+  head.style.cssText = "display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;";
   const a = document.createElement("a");
   a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
   a.textContent = title;
   a.style.cssText = "color: var(--gold); font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--gold-dim);";
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.textContent = "Copy link";
+  btn.style.cssText = "font-family: var(--mono); font-size: 11.5px; background: var(--panel-2); color: var(--muted); border: 1px solid rgba(151,144,126,.35); border-radius: 999px; padding: 5px 12px; cursor: pointer; flex-shrink: 0;";
+  head.append(a, btn);
   const p = document.createElement("p");
   p.textContent = desc;
   p.style.cssText = "margin: 6px 0 4px; color: var(--muted); font-size: 13.5px;";
   const u = document.createElement("code");
   u.textContent = url;
   u.style.cssText = "font-family: var(--mono); font-size: 11.5px; color: var(--faint); word-break: break-all;";
-  card.append(a, p, u);
+  btn.addEventListener("click", async () => {
+    const done = (msg) => { btn.textContent = msg; setTimeout(() => { btn.textContent = "Copy link"; }, 1800); };
+    try {
+      await navigator.clipboard.writeText(url);
+      done("Copied");
+    } catch (err) {
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      const range = document.createRange();
+      range.selectNodeContents(u);
+      sel.addRange(range);
+      done("URL selected - copy it");
+    }
+  });
+  card.append(head, p, u);
   linkWrap.appendChild(card);
 });
 
