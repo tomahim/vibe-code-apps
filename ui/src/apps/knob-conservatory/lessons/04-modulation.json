@@ -1,0 +1,51 @@
+{
+  "id": "modulation",
+  "title": "Modulation",
+  "order": 4,
+  "lessons": [
+    {
+      "id": "vibrato",
+      "title": "Vibrato",
+      "minutes": 3,
+      "unlocks": ["lfo_depth"],
+      "body": [
+        "The LFO is a slow, invisible finger wobbling a knob for you, several times per second. Right now it is aimed at the pitch.",
+        "Depth decides how wide the wobble is. A little vibrato sounds human, like a violinist. Too much sounds like a siren."
+      ],
+      "note": 57,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8, "osc2_level": 0, "osc3_level": 0, "noise_level": 0,
+        "cutoff": 2200, "resonance": 0.15, "env_amount": 0,
+        "lfo_target": "pitch", "lfo_wave": "sine", "lfo_rate": 5, "lfo_depth": 0,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "lfo_depth": 0.3 },
+        "hint": "Give the note a singer's vibrato - gentle and human, not a siren."
+      }
+    },
+    {
+      "id": "the-slow-sweep",
+      "title": "The slow sweep",
+      "minutes": 3,
+      "unlocks": ["lfo_rate", "lfo_target"],
+      "body": [
+        "The same invisible finger can ride the cutoff knob instead of the pitch. Then the brightness pulses while the note stays still.",
+        "Rate decides how fast it rides. Find the slow, breathing sweep - a wave rolling in, not a machine gun."
+      ],
+      "note": 48,
+      "base_patch": {
+        "osc1_wave": "sawtooth", "osc1_level": 0.8,
+        "osc2_wave": "sawtooth", "osc2_level": 0.5, "osc2_detune": 8,
+        "osc3_level": 0, "noise_level": 0,
+        "cutoff": 1600, "resonance": 0.3, "env_amount": 0,
+        "lfo_target": "cutoff", "lfo_wave": "triangle", "lfo_rate": 6, "lfo_depth": 0.55,
+        "attack": 0.01, "decay": 0.15, "sustain": 0.8, "release": 0.2
+      },
+      "goal": {
+        "params": { "lfo_rate": 0.7 },
+        "hint": "Slow it down until the brightness breathes - a rolling wave, not a flutter."
+      }
+    }
+  ]
+}

@@ -17,6 +17,13 @@ const initialApps = [
     action_label: "Enter the factory",
   },
   {
+    slug: "knob-conservatory",
+    name: "Knob Conservatory",
+    description: "Learn synthesis one knob at a time, by ear: progressive lessons on a vintage monosynth, plus a workshop for your own instruments.",
+    category: "Music",
+    icon: "🎛",
+  },
+  {
     slug: "lithotheque",
     name: "Lithothèque",
     description: "A dark mineralogist's bench: turn 3D study models, check species reference readouts and read each stone's dossier.",
