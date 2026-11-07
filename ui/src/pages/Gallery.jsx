@@ -5,7 +5,7 @@ import AccountMenu from "../components/AccountMenu.jsx";
 
 const initialApps = [
   { slug: "hockey", name: "Hockey Lab", description: "National League player stats, weekly comparisons and your private fantasy transfer plans.", category: "Sports", icon: "◒" },
-  { slug: "little-notes", name: "Little notes", description: "IN / OUT: ideas, bookmarks, news, videos and daily notes in one private collection.", category: "News & ideas", icon: "↗" },
+  { slug: "little-notes", name: "Little notes", description: "IN / OUT: ideas, bookmarks, news, videos, work ideas and daily notes in one private collection.", category: "News & ideas", icon: "↗" },
   { slug: "story-shelf", name: "The Story Room", description: "A little 3D library. Open illustrated books about history, nature and mountains.", category: "Stories & discovery", icon: "📚" },
   {
     slug: "little-factory",
