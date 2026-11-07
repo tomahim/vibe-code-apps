@@ -28,7 +28,9 @@ await page.route('**/api/apps/little-notes/**',async route=>{
    const id=u.pathname.split('/').filter(Boolean).slice(-2)[0];
    const {category:slug,enabled}=JSON.parse(route.request().postData()||'{}');
    const current=new Set(state.get(id)||[]);
-   if(enabled){if(slug==='archive')current.delete('inbox');if(slug==='inbox')current.delete('archive');current.add(slug);}else current.delete(slug);
+   // Mirrors the API: Inbox/Archive are mutually exclusive, and choosing any
+   // other category clears the Inbox while keeping the remaining categories.
+   if(enabled){if(slug==='inbox')current.delete('archive');else current.delete('inbox');current.add(slug);}else current.delete(slug);
    state.set(id,[...current]);
    body=withCats(records.find(r=>r.id===id),[...current]);
  }
@@ -63,8 +65,11 @@ await page.getByRole('button',{name:'Promising',exact:true}).waitFor();
 if(await page.getByRole('button',{name:'Inspiration',exact:true}).count())throw new Error('Inspiration tab visible for Ideas');
 await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
 await page.screenshot({path:`${screenshots}/tabs-ideas-390.png`,fullPage:true});
-// More tags select must remain reachable in the scrollable tab row
+// Archive is the small control above the tab row, never a tab itself.
 const tabRow=page.locator('.ln-tabs');
+if(await tabRow.getByRole('button',{name:'Archive',exact:true}).count())throw new Error('Archive must not be a tab');
+await page.locator('.ln-archive-row').getByRole('button',{name:'Archive',exact:true}).waitFor();
+// More tags select must remain reachable in the scrollable tab row
 await tabRow.locator('select').scrollIntoViewIfNeeded();
 const selBox=await tabRow.locator('select').boundingBox();
 const vp=await page.evaluate(()=>innerWidth);
@@ -104,7 +109,10 @@ await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitF
 if(await grid.locator('.ln-view-card').count()!==3)throw new Error('Archived card still in the Inbox grid');
 const cabinetCard=page.locator('.ln-view-card',{has:page.getByRole('heading',{name:'A small cabinet for big ideas'})});
 await cabinetCard.locator('select').selectOption({label:'Add Promising'});
-await cabinetCard.locator('.ln-view-chips').getByText('Promising',{exact:true}).waitFor();
+// Choosing a category clears the Inbox: the card leaves the Inbox grid.
+await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor({state:'detached'});
+if(!(state.get(records[0].id)||[]).includes('promising')||(state.get(records[0].id)||[]).includes('inbox'))throw new Error('Promising must be added and Inbox cleared, got '+state.get(records[0].id));
+if(await grid.locator('.ln-view-card').count()!==2)throw new Error('Categorized card still in the Inbox grid');
 await page.getByRole('button',{name:'Archive',exact:true}).click();
 const archivedCard=page.locator('.ln-view-card',{has:page.getByRole('heading',{name:'A field guide to quiet interfaces'})});
 await archivedCard.getByRole('button',{name:'Back to inbox ↙',exact:true}).click();
@@ -145,17 +153,17 @@ await page.getByRole('button',{name:'Skip →'}).click();
 await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
 await page.getByRole('button',{name:'Back to inbox ↙',exact:true}).click();
 await page.getByRole('heading',{name:'A collection worth revisiting'}).waitFor();
-// Categorizing from the Inbox keeps the object in the Inbox but shows the next one.
+// Categorizing from the Inbox clears the Inbox and shows the next object.
 state=initial();
 await page.goto('http://localhost:5199/apps/little-notes');
 await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
 await page.getByRole('button',{name:'☆ Favorite'}).click();
 await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
 const firstCats=state.get(records[0].id);
-if(!firstCats.includes('favorite')||!firstCats.includes('inbox'))throw new Error('Favorite must be added and Inbox kept, got '+firstCats);
+if(!firstCats.includes('favorite')||firstCats.includes('inbox'))throw new Error('Favorite must be added and Inbox cleared, got '+firstCats);
 await page.screenshot({path:`${screenshots}/triage-categorize-advance-390.png`,fullPage:true});
 await page.getByLabel('Assign a category').selectOption({label:'Add Inspiration'});
 await page.getByRole('heading',{name:'What the newest maps can tell us'}).waitFor();
-if(!state.get('b1').includes('inbox')||!state.get('b1').includes('inspiration'))throw new Error('Category select must keep Inbox');
-console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; categorize-in-Inbox advance keeps Inbox; no horizontal overflow');
+if(!state.get('b1').includes('inspiration')||state.get('b1').includes('inbox'))throw new Error('Category select must clear Inbox, got '+state.get('b1'));
+console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; categorize-in-Inbox advance clears Inbox; no horizontal overflow');
 await browser.close();server.kill('SIGTERM'); await new Promise(resolve => server.once('exit', resolve));
