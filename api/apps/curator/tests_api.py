@@ -50,6 +50,7 @@ class CuratorAPITests(TestCase):
         taxonomy = self.client.get('/taxonomy/', **self.headers).json()
         categories = {c['slug']: c for c in taxonomy['categories']}
         self.assertEqual(categories['promising']['types'], ['idea'])
+        self.assertIn('video', {t['slug'] for t in taxonomy['types']})
         self.assertEqual(categories['inbox']['types'], [])
         self.assertEqual(self.client.get('/content/?category=inbox', **self.headers).json()['total'], 1)
         self.assertEqual(self.client.get('/content/?category=archive', **self.headers).json()['total'], 0)

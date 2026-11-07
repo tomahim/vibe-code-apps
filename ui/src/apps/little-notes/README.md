@@ -8,7 +8,7 @@ Ideas, Inspiration only on Bookmarks), topic tags behind "More tags", month
 selector, search and 30-object pagination. Any object on the page can
 be selected with the jump control, not only the six preview cards.
 
-Actions: capture Ideas/Bookmarks/News/Daily notes into the Inbox category, read
+Actions: capture Ideas/Bookmarks/News/Videos/Daily notes into the Inbox category, read
 sanitized markdown, open a validated external URL, edit with conflict detection,
 favorite, assign/remove one category (type-linked categories refused for other
 types) or one topic tag, archive or restore. Skip changes no data. Archiving
