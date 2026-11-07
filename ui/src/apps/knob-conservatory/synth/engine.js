@@ -48,6 +48,12 @@ export class SynthEngine {
     master.gain.value = 0;
     master.connect(context.destination);
 
+    // Output probe (drives the signal check in the visual test; can feed a
+    // VU meter later without touching the audio graph).
+    const analyser = context.createAnalyser();
+    analyser.fftSize = 2048;
+    master.connect(analyser);
+
     const ampEnv = context.createGain();
     ampEnv.gain.value = 0;
     ampEnv.connect(master);
@@ -84,7 +90,7 @@ export class SynthEngine {
     lfo.connect(lfoGain);
     lfo.start();
 
-    this._nodes = { master, ampEnv, filter, mixer, oscillators, noiseSource, noiseGain, lfo, lfoGain, lfoTarget: null };
+    this._nodes = { master, analyser, ampEnv, filter, mixer, oscillators, noiseSource, noiseGain, lfo, lfoGain, lfoTarget: null };
     this._applyAll();
   }
 
@@ -262,6 +268,22 @@ export class SynthEngine {
     detune.setValueAtTime(detune.value, t);
     detune.linearRampToValueAtTime(0, t + Math.max(0.02, p.frelease));
     this.gateOpen = false;
+  }
+
+  // Current output level 0..1 (RMS of the master bus) and average spectrum,
+  // for signal checks and a future meter. Zeros when the synth is off.
+  outputLevel() {
+    if (!this._nodes) return { rms: 0, centroid: 0 };
+    const analyser = this._nodes.analyser;
+    const time = new Float32Array(analyser.fftSize);
+    analyser.getFloatTimeDomainData(time);
+    const rms = Math.sqrt(time.reduce((sum, v) => sum + v * v, 0) / time.length);
+    const freq = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(freq);
+    let weighted = 0;
+    let total = 0;
+    freq.forEach((magnitude, bin) => { weighted += magnitude * bin; total += magnitude; });
+    return { rms, centroid: total > 0 ? weighted / total / freq.length : 0 };
   }
 
   // Play a short reference note with a different patch, then restore the

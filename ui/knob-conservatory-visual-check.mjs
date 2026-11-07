@@ -50,8 +50,9 @@ for (const width of [390, 1280]) {
 // Viewport-framed shots (the pinned keyboard sits at the bottom, nothing hidden).
 await page.setViewportSize({ width: 390, height: 844 });
 await page.screenshot({ path: `${screenshots}/viewport-lessons-390.png` });
-await page.evaluate(() => window.scrollTo(0, 9999));
-await page.screenshot({ path: `${screenshots}/viewport-panel-390.png` });
+await page.locator('.kc-section', { hasText: 'Performance' }).scrollIntoViewIfNeeded();
+await page.waitForTimeout(500); // let the scrolled content paint before capturing
+await page.screenshot({ path: `${screenshots}/viewport-panel-390.png`, animations: 'disabled' });
 await page.evaluate(() => window.scrollTo(0, 0));
 
 // Workshop with the full live panel and the saved-instrument shelf.

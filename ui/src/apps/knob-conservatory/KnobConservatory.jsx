@@ -14,7 +14,10 @@ const BASE_MIDI = 60; // C4
 
 export default function KnobConservatory({ onHome }) {
   const engine = useRef(null);
-  if (!engine.current) engine.current = new SynthEngine();
+  if (!engine.current) {
+    engine.current = new SynthEngine();
+    if (import.meta.env.DEV) window.__kcEngine = engine.current; // visual-check probe
+  }
 
   const [powered, setPowered] = useState(false);
   const [mode, setMode] = useState("lessons");
