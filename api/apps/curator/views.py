@@ -216,9 +216,15 @@ def assign_category(request, content_id):
             if category.object_types.exists() and not category.object_types.filter(pk=content.object_type_id).exists():
                 raise ValueError("This category does not apply to this object type.")
             if enabled:
-                if slug in {"archive", "inbox"}:
-                    ContentCategory.objects.filter(
-                        content=content, category__slug="inbox" if slug == "archive" else "archive").delete()
+                # Choosing a category is the triage decision ("I have read it"):
+                # any category other than Inbox takes the object out of the
+                # Inbox while keeping its other categories. Inbox and Archive
+                # stay mutually exclusive; removing a category never restores
+                # the Inbox, and topic tags are a separate axis, never touched.
+                if slug == "inbox":
+                    ContentCategory.objects.filter(content=content, category__slug="archive").delete()
+                else:
+                    ContentCategory.objects.filter(content=content, category__slug="inbox").delete()
                 ContentCategory.objects.get_or_create(content=content, category=category)
             else:
                 ContentCategory.objects.filter(content=content, category=category).delete()

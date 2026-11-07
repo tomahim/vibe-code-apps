@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
-from .models import Category, Content, ContentCategory, ObjectType
+from .models import Category, Content, ContentCategory, ContentTag, ObjectType, Tag
 
 
 @override_settings(ROOT_URLCONF="apps.curator.urls", SECRET_KEY="test-long-enough-secret-key-curator-123456789", AUTH_JWT_TTL_SECONDS=3600)
@@ -32,6 +32,28 @@ class CuratorAPITests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(set(self.item.categories.values_list('slug', flat=True)), {'archive'})
         self.assertEqual(self.send(f'/content/{self.item.pk}/categories/', {'category': 'favorite', 'enabled': True, 'updated_at': value}).status_code, 409)
+
+    def test_choosing_a_category_clears_inbox_keeps_lanes_and_tags(self):
+        for slug in ["inbox", "favorite"]:
+            ContentCategory.objects.create(content=self.item, category=Category.objects.get(slug=slug))
+        tag = Tag.objects.create(slug="topic-hiking", name="Hiking")
+        ContentTag.objects.create(content=self.item, tag=tag)
+        value = self.item.updated_at.isoformat()
+        response = self.send(f'/content/{self.item.pk}/categories/', {'category': 'promising', 'enabled': True, 'updated_at': value})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(set(self.item.categories.values_list('slug', flat=True)), {'favorite', 'promising'})
+        self.assertEqual([t['slug'] for t in response.json()['tags']], ['topic-hiking'])
+        self.assertEqual(self.client.get('/content/?category=inbox', **self.headers).json()['total'], 0)
+        self.assertEqual(self.client.get('/content/?category=promising', **self.headers).json()['total'], 1)
+        # Removing a category never restores the Inbox.
+        removed = self.send(f'/content/{self.item.pk}/categories/', {'category': 'promising', 'enabled': False, 'updated_at': response.json()['updated_at']})
+        self.assertEqual(removed.status_code, 200)
+        self.assertEqual(set(self.item.categories.values_list('slug', flat=True)), {'favorite'})
+        # Choosing Inbox itself only clears Archive; other categories stay.
+        ContentCategory.objects.create(content=self.item, category=Category.objects.get(slug="archive"))
+        restored = self.send(f'/content/{self.item.pk}/categories/', {'category': 'inbox', 'enabled': True, 'updated_at': removed.json()['updated_at']})
+        self.assertEqual(restored.status_code, 200)
+        self.assertEqual(set(self.item.categories.values_list('slug', flat=True)), {'inbox', 'favorite'})
 
     def test_type_linked_categories_only_apply_to_their_types(self):
         value = self.item.updated_at.isoformat()
