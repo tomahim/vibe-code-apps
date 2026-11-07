@@ -39,12 +39,18 @@ await page.route('**/api/apps/little-notes/**',async route=>{
    else{
      let list=records.map(r=>withCats(r,state.get(r.id)||[]));
      const t=u.searchParams.get('type');if(t)list=list.filter(i=>i.type===t);
-     const c=u.searchParams.get('category');
-     if(c==='inbox')list=list.filter(i=>!i.categories.length||i.categories.some(x=>x.slug===c));
-     else if(c)list=list.filter(i=>i.categories.some(x=>x.slug===c));
      const tg=u.searchParams.get('tag');if(tg)list=list.filter(i=>i.tags.some(x=>x.slug===tg));
      if(u.searchParams.get('q')==='nomatch')list=[];
-     body={items:list,total:list.length,page:1,next_page:null};
+     // Mirrors the API: tab counts share the context filters but not the
+     // category filter; Inbox keeps its view semantics.
+     const isInbox=i=>!i.categories.length||i.categories.some(x=>x.slug==='inbox');
+     const category_counts={all:list.length};
+     for(const i of list)for(const x of i.categories)category_counts[x.slug]=(category_counts[x.slug]||0)+1;
+     category_counts.inbox=list.filter(isInbox).length;
+     const c=u.searchParams.get('category');
+     if(c==='inbox')list=list.filter(isInbox);
+     else if(c)list=list.filter(i=>i.categories.some(x=>x.slug===c));
+     body={items:list,total:list.length,page:1,next_page:null,category_counts};
    }
  }
  else{const rec=records.find(i=>u.pathname.includes(i.id))||records[0];body=withCats(rec,state.get(rec.id)||rec.categories.map(c=>c.slug));}
@@ -58,12 +64,25 @@ for(const width of [1280,390,320]){
  await page.screenshot({path:`${screenshots}/inout-${width}.png`,fullPage:true});
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);if(overflow)throw new Error('Overflow at '+width);
 }
-// Ideas selected: tabs show Promising/To improve, not Inspiration; content filtered to ideas
+// Category tabs carry the live counts of the current context: All is every
+// object, Inbox follows the Inbox view rules (explicit, uncategorized, news).
 await page.setViewportSize({width:390,height:844});
+const tabRowCounts=page.locator('.ln-tabs');
+const countOf=async name=>{const el=tabRowCounts.getByRole('button',{name,exact:true}).locator('.ln-tab-count');return await el.count()?await el.textContent():null;};
+if(await countOf('All')!=='7')throw new Error('All tab count wrong: '+await countOf('All'));
+if(await countOf('Inbox')!=='4')throw new Error('Inbox tab count wrong: '+await countOf('Inbox'));
+if(await countOf('Archive')!==null)throw new Error('Archive must not be a tab');
+await tabRowCounts.screenshot({path:`${screenshots}/tab-counts-row-390.png`});
+await page.screenshot({path:`${screenshots}/tab-counts-390.png`,fullPage:true});
+// Ideas selected: tabs show Promising/To improve, not Inspiration; content filtered to ideas
 await page.getByRole('button',{name:'Types',exact:false}).click();await page.getByRole('button',{name:'Ideas',exact:false}).click();
 await page.getByRole('button',{name:'Promising',exact:true}).waitFor();
 if(await page.getByRole('button',{name:'Inspiration',exact:true}).count())throw new Error('Inspiration tab visible for Ideas');
 await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+// Counts rescope to the selected type: two ideas, one of them in the Inbox.
+if(await countOf('All')!=='2')throw new Error('All count should rescope to Ideas: '+await countOf('All'));
+if(await countOf('Inbox')!=='1')throw new Error('Inbox count should rescope to Ideas: '+await countOf('Inbox'));
+if(await countOf('Favorite')!=='0')throw new Error('Empty categories show an explicit zero: '+await countOf('Favorite'));
 await page.screenshot({path:`${screenshots}/tabs-ideas-390.png`,fullPage:true});
 // Archive is the small control below the tab row, never a tab itself.
 const tabRow=page.locator('.ln-tabs');

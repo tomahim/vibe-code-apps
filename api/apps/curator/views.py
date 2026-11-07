@@ -63,6 +63,15 @@ def owned(user):
     return Content.objects.filter(owner=user).select_related("object_type").prefetch_related("tags", "categories")
 
 
+def inbox_view(query):
+    # Inbox is the unprocessed view: explicit Inbox, uncategorized
+    # objects, and every non-archived news item. Keep stored categories
+    # untouched, including intentional non-news lanes.
+    return query.filter(Q(categories__slug="inbox") | Q(categories__isnull=True)
+                        | Q(object_type__slug="news")).exclude(
+                            object_type__slug="news", categories__slug="archive")
+
+
 @never_cache
 @require_GET
 @jwt_required
@@ -114,15 +123,6 @@ def collection(request):
             query = query.filter(object_type__slug=kind)
         if tag:
             query = query.filter(tags__slug=tag)
-        if category == "inbox":
-            # Inbox is the unprocessed view: explicit Inbox, uncategorized
-            # objects, and every non-archived news item. Keep stored categories
-            # untouched, including intentional non-news lanes.
-            query = query.filter(Q(categories__slug="inbox") | Q(categories__isnull=True)
-                                 | Q(object_type__slug="news")).exclude(
-                                     object_type__slug="news", categories__slug="archive")
-        elif category:
-            query = query.filter(categories__slug=category)
         if search:
             query = query.filter(Q(title__icontains=search) | Q(summary__icontains=search) | Q(body_markdown__icontains=search))
         month = request.GET.get("month", "")
@@ -130,6 +130,19 @@ def collection(request):
             start = date.fromisoformat(month + "-01")
             end = date(start.year + (start.month == 12), start.month % 12 + 1, 1)
             query = query.filter(saved_on__gte=start, saved_on__lt=end)
+        # Tab counts share the current context (type, tag, search, month) but
+        # not the category filter, so a tab's number is what choosing it
+        # shows. Inbox keeps its view semantics, so it is counted with the
+        # same rules as the Inbox list itself.
+        category_counts = {row["categories__slug"]: row["count"]
+                           for row in query.values("categories__slug").annotate(count=Count("id", distinct=True))
+                           if row["categories__slug"]}
+        category_counts["inbox"] = inbox_view(query).distinct().count()
+        category_counts["all"] = query.distinct().count()
+        if category == "inbox":
+            query = inbox_view(query)
+        elif category:
+            query = query.filter(categories__slug=category)
         page = int(request.GET.get("page", 1))
         if not 1 <= page <= 10000:
             raise ValueError("Invalid page.")
@@ -137,7 +150,8 @@ def collection(request):
         count = query.count()
         result = list(query[(page - 1) * 30:page * 30])
         return JsonResponse({"items": [item(c) for c in result], "total": count,
-                             "page": page, "next_page": page + 1 if page * 30 < count else None})
+                             "page": page, "next_page": page + 1 if page * 30 < count else None,
+                             "category_counts": category_counts})
     except (ValueError, TypeError) as exc:
         return error(ValueError("Invalid filter or page."))
 

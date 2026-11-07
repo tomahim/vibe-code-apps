@@ -16,3 +16,7 @@
 .ln-row-image{display:block;width:88px;height:56px;object-fit:contain;margin:0 0 10px;background:var(--paper)}.ln-view-cards img{object-fit:contain;background:var(--paper)}
 /* The view control stays secondary to the collection. */
 .ln-view-bar{justify-content:flex-end;gap:10px;margin:0 0 15px;padding:4px 0 9px;border-bottom:0}.ln-view-bar label{gap:6px;font-size:10px;font-weight:400}.ln-view-bar select{min-height:30px;max-width:116px;padding:4px 20px 4px 7px;font-size:10px;background:transparent;border-color:var(--line)}.ln-view-bar>span{font-size:9px;opacity:.8;max-width:130px}.ln-theme-dark .ln-view-bar select{background:transparent}@media(max-width:650px){.ln-view-bar{gap:8px}.ln-view-bar select{min-height:32px;max-width:108px}.ln-view-bar>span{max-width:118px}}
+/* Category tabs carry live counts for the current context (type/tag/search/month). */
+.ln-tabs button{display:inline-flex;align-items:baseline;gap:5px}
+.ln-tab-count{font-size:9px;opacity:.55}
+.ln-tabs button.active .ln-tab-count{opacity:.75}
