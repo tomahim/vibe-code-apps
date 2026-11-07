@@ -1,0 +1,6 @@
+{
+  "title": "Tessellate",
+  "description": "Bend one tile under a symmetry rule - the partner edge copies your move, so your figure always tiles the plane. With an Escher primer and resources.",
+  "date": "2026-11-07",
+  "tags": ["tessellation", "escher", "geometry", "math", "interactive", "canvas", "learn"]
+}

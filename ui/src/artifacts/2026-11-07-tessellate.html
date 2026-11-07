@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tessellate - vibe-code-apps</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #151a22;
+    --panel-2: #1a212c;
+    --ink: #ece5d3;
+    --muted: #97907e;
+    --faint: #5d594e;
+    --gold: #d8a84e;
+    --gold-dim: rgba(216, 168, 78, .35);
+    --teal: #62c9da;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(216,168,78,.07), transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, rgba(98,201,218,.05), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 18px 14px 48px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  h1 { font-size: clamp(28px, 7vw, 42px); margin: 6px 0 2px; font-weight: 600; letter-spacing: .01em; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+
+  .tabs { display: flex; gap: 8px; margin: 14px 0 16px; border-bottom: 1px solid rgba(151,144,126,.25); padding-bottom: 10px; }
+  .tabs button {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em;
+    background: var(--panel); color: var(--muted);
+    border: 1px solid rgba(151,144,126,.3); border-radius: 999px;
+    padding: 8px 16px; cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--gold); background: linear-gradient(180deg, #232b38, #171d27); }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .steps span {
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    border: 1px solid rgba(151,144,126,.25); border-radius: 999px; padding: 5px 11px;
+  }
+  .steps b { color: var(--gold); font-weight: 600; }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+  .seg { display: inline-flex; border: 1px solid rgba(151,144,126,.3); border-radius: 999px; overflow: hidden; }
+  .seg button {
+    font-family: var(--mono); font-size: 12px; background: var(--panel); color: var(--muted);
+    border: 0; padding: 8px 13px; cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid rgba(151,144,126,.25); }
+  .seg button[aria-pressed="true"] { color: var(--ink); background: #232b38; }
+  .pill {
+    font-family: var(--mono); font-size: 12px; background: var(--panel); color: var(--muted);
+    border: 1px solid rgba(151,144,126,.3); border-radius: 999px; padding: 8px 13px; cursor: pointer;
+  }
+  .pill:hover { color: var(--ink); border-color: var(--gold-dim); }
+  .pill:active { transform: scale(.97); }
+  .zoom { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .zoom input { accent-color: var(--gold); width: 90px; }
+
+  .boards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 860px) { .boards { grid-template-columns: 5fr 6fr; } }
+  .board { background: var(--panel); border: 1px solid rgba(151,144,126,.22); border-radius: 14px; overflow: hidden; }
+  .board header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 14px 0; font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .board header .grp { color: var(--teal); letter-spacing: .04em; text-transform: none; }
+  canvas { display: block; width: 100%; touch-action: none; }
+  #editor { height: 340px; cursor: grab; }
+  #editor.dragging { cursor: grabbing; }
+  #plane { height: 300px; cursor: move; }
+  @media (min-width: 860px) { #editor { height: 420px; } #plane { height: 420px; } }
+  .hint { padding: 0 14px 10px; font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Artifact &middot; Geometry studio</p>
+  <h1>Tessellate</h1>
+  <p class="sub">Bend one tile until it interlocks - the matching edge copies your move, so the plane always closes.</p>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-studio" aria-selected="true" aria-controls="panel-studio">Studio</button>
+    <button role="tab" id="tab-escher" aria-selected="false" aria-controls="panel-escher">Escher &amp; tessellations</button>
+  </div>
+
+  <section id="panel-studio" role="tabpanel" aria-labelledby="tab-studio">
+    <div class="steps">
+      <span><b>1</b> Drag an edge of the tile</span>
+      <span><b>2</b> The partner edge copies it, mirrored by the symmetry rule</span>
+      <span><b>3</b> The plane fills with your figure - it cannot fail to tile</span>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Base tile">
+        <button data-shape="square" aria-pressed="true">Square</button>
+        <button data-shape="hexagon" aria-pressed="false">Hexagon</button>
+        <button data-shape="triangle" aria-pressed="false">Triangle</button>
+      </div>
+      <button class="pill" id="preset-figure">Try a figure</button>
+      <button class="pill" id="preset-random">Random</button>
+      <button class="pill" id="reset">Reset</button>
+      <button class="pill" id="palette">Palette: Bazaar</button>
+      <label class="zoom">Tile size <input type="range" id="zoom" min="3" max="12" step="1" value="6"></label>
+    </div>
+    <div class="boards">
+      <div class="board">
+        <header><span>The tile</span><span class="grp" id="grp"></span></header>
+        <canvas id="editor"></canvas>
+        <p class="hint" id="editor-hint">Gold edges are yours to bend. Teal edges are bound by the rule.</p>
+      </div>
+      <div class="board">
+        <header><span>The plane</span><span class="grp">live</span></header>
+        <canvas id="plane"></canvas>
+        <p class="hint">Drag to pan. Every copy is the same tile - the rule does the interlocking.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-escher" role="tabpanel" aria-labelledby="tab-escher" hidden>
+    <div style="max-width: 720px">
+      <h2 style="font-size: 22px; margin: 6px 0 8px">The regular division of the plane</h2>
+      <p style="color: var(--muted); font-size: 15px">
+        A tessellation is a covering of the plane by shapes that repeat without gaps or overlaps.
+        Squares, equilateral triangles and regular hexagons do it on their own - they are the three
+        regular tilings, and each one is the starting point of the Studio tab.
+      </p>
+      <p style="color: var(--muted); font-size: 15px">
+        M.C. Escher (1898-1972), a Dutch graphic artist, turned that dry fact into an art form.
+        Struck by the interlocking patterns of the Alhambra palace in Spain, which he visited in 1922
+        and again in 1936, he spent decades on what he called the "regular division of the plane".
+        His method was exactly the one you just used: take a tile that already tiles, deform one edge,
+        and let a symmetry rule copy the deformation onto the matching edge so the tile still closes.
+        Then he looked at the silhouette until a lizard, a bird or a fish looked back - and drew it in.
+      </p>
+      <p style="color: var(--muted); font-size: 15px">
+        Beneath the craft sits a clean piece of mathematics: there are exactly seventeen ways a pattern
+        can repeat across the plane, the seventeen wallpaper groups. This studio plays with two of the
+        simplest - repetition by translation alone (called p1) and by half-turns (p2). Escher worked
+        through all seventeen in his notebooks.
+      </p>
+      <h3 style="font-size: 16px; margin: 22px 0 10px">Keep exploring</h3>
+      <div id="links" style="display: grid; gap: 10px"></div>
+      <p style="color: var(--faint); font-size: 12.5px; margin-top: 18px">
+        Escher's prints stay under copyright, so this page links out instead of reproducing them.
+        Links open from the gallery preview only if your browser allows it - otherwise copy the address shown.
+      </p>
+    </div>
+  </section>
+</div>
+<script>
+"use strict";
+const SQRT3_2 = Math.sqrt(3) / 2;
+const N = 40; // samples per free edge (offsets length N+1, endpoints pinned to 0)
+
+// ---- Shape model ----------------------------------------------------------
+// Each free edge is a straight segment A->B plus a perpendicular offset n(t),
+// t in [0,1]. Partner edges are derived by a symmetry rule, so closure holds
+// by construction. polyEdges describe the tile boundary in order.
+const SHAPES = {
+  square: {
+    group: "p1 · translations",
+    hint: "Gold edges are yours to bend. Teal edges are bound by the rule.",
+    free: [
+      { A: [0, 0], B: [1, 0] },
+      { A: [0, 0], B: [0, 1] }
+    ],
+    poly: [
+      { src: 0, shift: [0, 0] },
+      { src: 1, shift: [1, 0] },
+      { src: 0, shift: [0, 1], polyRev: true },
+      { src: 1, shift: [0, 0], polyRev: true }
+    ],
+    basis: [[1, 0], [0, 1]],
+    extent: [1, 1],
+    color: (i, j) => ((i + j) % 2 + 2) % 2,
+    figure: [
+      [[0.30, 0.12, -0.30], [0.72, 0.09, 0.20]],
+      [[0.35, 0.11, -0.24], [0.78, 0.08, 0.16]]
+    ]
+  },
+  hexagon: {
+    group: "p1 · translated hexagon",
+    hint: "Gold edges are yours to bend. Teal edges are bound by the rule.",
+    free: [
+      { A: [0.5, -SQRT3_2], B: [1, 0] },
+      { A: [1, 0], B: [0.5, SQRT3_2] },
+      { A: [0.5, SQRT3_2], B: [-0.5, SQRT3_2] }
+    ],
+    poly: [
+      { src: 0, shift: [0, 0] },
+      { src: 1, shift: [0, 0] },
+      { src: 2, shift: [0, 0] },
+      { src: 0, shift: [-1.5, SQRT3_2], rev: true },
+      { src: 1, shift: [-1.5, -SQRT3_2], rev: true },
+      { src: 2, shift: [0, -2 * SQRT3_2], rev: true }
+    ],
+    basis: [[-1.5, SQRT3_2], [-1.5, -SQRT3_2]],
+    extent: [2, 2 * SQRT3_2],
+    color: (i, j) => ((i + 2 * j) % 3 + 3) % 3,
+    figure: [
+      [[0.30, 0.10, -0.28], [0.70, 0.09, 0.18]],
+      [[0.50, 0.12, -0.22]],
+      [[0.35, 0.10, -0.26], [0.80, 0.07, 0.14]]
+    ]
+  },
+  triangle: {
+    group: "p2 · half-turns",
+    hint: "Each edge is symmetric under a half-turn about its midpoint: bend one half, the other half mirrors.",
+    selfSym: true,
+    free: [
+      { A: [0.5, 0], B: [1, SQRT3_2] },
+      { A: [1, SQRT3_2], B: [0, SQRT3_2] },
+      { A: [0, SQRT3_2], B: [0.5, 0] }
+    ],
+    poly: [ { src: 0 }, { src: 1 }, { src: 2 } ],
+    basis: [[1, 0], [0.5, SQRT3_2]],
+    extent: [1, SQRT3_2],
+    color: null, // up/down handled separately
+    figure: [
+      [[0.26, 0.10, -0.20]],
+      [[0.26, 0.10, -0.20]],
+      [[0.26, 0.10, -0.20]]
+    ]
+  }
+};
+
+const PALETTES = [
+  { name: "Bazaar",    fills: ["#c96f4a", "#e8dcc4", "#4a6d7c"], line: "rgba(20,18,14,.55)", planeBg: "#14171d" },
+  { name: "Ink",       fills: ["#262b33", "#efe9dc", "#8a93a3"], line: "rgba(14,17,22,.6)",  planeBg: "#101318" },
+  { name: "Meadow",    fills: ["#5c8a5a", "#e9e2cd", "#b5674c"], line: "rgba(18,22,16,.55)", planeBg: "#131712" },
+  { name: "Nocturne",  fills: ["#3d5a80", "#98c1d9", "#e0fbfc"], line: "rgba(8,12,20,.6)",   planeBg: "#0d1420" }
+];
+
+const state = {
+  shape: "square",
+  offsets: null,       // per free edge: Float64Array(N+1)
+  palette: 0,
+  zoom: 6,             // tiles across the plane view
+  pan: [0, 0],
+  dragged: false,
+  tween: null
+};
+
+function resetOffsets() {
+  const sh = SHAPES[state.shape];
+  state.offsets = sh.free.map(() => new Float64Array(N + 1));
+}
+resetOffsets();
+
+function perp(A, B) {
+  const dx = B[0] - A[0], dy = B[1] - A[1];
+  const L = Math.hypot(dx, dy) || 1;
+  return [-dy / L, dx / L];
+}
+
+// Points of one poly edge, t = 0..1 in polygon order.
+function edgePoints(pe) {
+  const sh = SHAPES[state.shape];
+  const f = sh.free[pe.src];
+  const s = pe.shift || [0, 0];
+  // rev partners are the free edge rotated: traversal runs B+s -> A+s
+  const A = [(pe.rev ? f.B[0] : f.A[0]) + s[0], (pe.rev ? f.B[1] : f.A[1]) + s[1]];
+  const B = [(pe.rev ? f.A[0] : f.B[0]) + s[0], (pe.rev ? f.A[1] : f.B[1]) + s[1]];
+  const n = perp(f.A, f.B);
+  const off = state.offsets[pe.src];
+  const pts = [];
+  for (let k = 0; k <= N; k++) {
+    let t = k / N;
+    let o = 0;
+    if (sh.selfSym) {
+      const tt = t <= 0.5 ? t : 1 - t;
+      const idx = Math.round(tt * N);
+      o = off[idx] * (t <= 0.5 ? 1 : -1);
+      if (t > 0.5) {
+        // second half = half-turn of the first half about the midpoint
+        const tt2 = 1 - t;
+        const bx = (A[0] + B[0]) / 2, by = (A[1] + B[1]) / 2;
+        const ft = tt2;
+        const fx = A[0] + (B[0] - A[0]) * ft + n[0] * off[Math.round(ft * N)];
+        const fy = A[1] + (B[1] - A[1]) * ft + n[1] * off[Math.round(ft * N)];
+        pts.push([2 * bx - fx, 2 * by - fy]);
+        continue;
+      }
+    } else {
+      const ft = pe.rev ? 1 - t : t;
+      o = off[Math.round(ft * N)];
+    }
+    pts.push([A[0] + (B[0] - A[0]) * t + n[0] * o, A[1] + (B[1] - A[1]) * t + n[1] * o]);
+  }
+  return pts;
+}
+
+function tilePolygon() {
+  const sh = SHAPES[state.shape];
+  const pts = [];
+  sh.poly.forEach((pe) => {
+    let ep = edgePoints(pe);
+    if (pe.polyRev) ep = ep.slice().reverse();
+    pts.push(...ep.slice(1)); // skip duplicated join point
+  });
+  return pts;
+}
+
+// ---- Canvas plumbing ------------------------------------------------------
+const editor = document.getElementById("editor");
+const plane = document.getElementById("plane");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function fitCanvas(cv) {
+  const r = cv.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.max(1, Math.round(r.width * dpr));
+  cv.height = Math.max(1, Math.round(r.height * dpr));
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w: r.width, h: r.height };
+}
+
+function drawPath(ctx, pts, tx, close) {
+  ctx.beginPath();
+  pts.forEach((p, i) => {
+    const x = tx(p)[0], y = tx(p)[1];
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  if (close !== false) ctx.closePath();
+}
+
+function shapeBBox(sh) {
+  let minx = 1e9, miny = 1e9, maxx = -1e9, maxy = -1e9;
+  sh.poly.forEach((pe) => {
+    const f = sh.free[pe.src];
+    const s = pe.shift || [0, 0];
+    [[f.A[0] + s[0], f.A[1] + s[1]], [f.B[0] + s[0], f.B[1] + s[1]]].forEach(([x, y]) => {
+      minx = Math.min(minx, x); maxx = Math.max(maxx, x);
+      miny = Math.min(miny, y); maxy = Math.max(maxy, y);
+    });
+  });
+  return { minx, miny, w: maxx - minx, h: maxy - miny };
+}
+
+function editorTx(w, h) {
+  const sh = SHAPES[state.shape];
+  const bb = shapeBBox(sh);
+  const s = (Math.min(w, h) * 0.56) / Math.max(bb.w, bb.h);
+  const ox = (w - bb.w * s) / 2 - bb.minx * s;
+  const oy = (h - bb.h * s) / 2 - bb.miny * s;
+  return { s, ox, oy };
+}
+
+function renderEditor() {
+  const { ctx, w, h } = fitCanvas(editor);
+  const sh = SHAPES[state.shape];
+  const pal = PALETTES[state.palette];
+  const { s, ox, oy } = editorTx(w, h);
+  const T = (p) => [ox + p[0] * s, oy + p[1] * s];
+
+  // ghost of the undeformed base tile
+  ctx.save();
+  ctx.setLineDash([5, 6]);
+  ctx.strokeStyle = "rgba(151,144,126,.4)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  sh.poly.forEach((pe) => {
+    const f = sh.free[pe.src];
+    const shft = pe.shift || [0, 0];
+    const A = [f.A[0] + shft[0], f.A[1] + shft[1]];
+    const B = [f.B[0] + shft[0], f.B[1] + shft[1]];
+    ctx.moveTo(T(A)[0], T(A)[1]);
+    ctx.lineTo(T(B)[0], T(B)[1]);
+  });
+  ctx.stroke();
+  ctx.restore();
+
+  // the tile itself
+  const poly = tilePolygon();
+  drawPath(ctx, poly, T);
+  ctx.fillStyle = pal.fills[0];
+  ctx.fill();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "rgba(236,229,211,.9)";
+  ctx.stroke();
+
+  // edge overlays: gold for yours, teal dashed for bound partners
+  sh.poly.forEach((pe) => {
+    const ep = edgePoints(pe);
+    drawPath(ctx, ep, T, false);
+    const isFree = !pe.rev && !pe.polyRev;
+    ctx.strokeStyle = isFree ? "#d8a84e" : "#62c9da";
+    ctx.lineWidth = isFree ? 3 : 2;
+    ctx.setLineDash(isFree ? [] : [4, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // symmetry markers: half-turn glyph on triangle edges, letter badges on pairs
+  const bb2 = shapeBBox(sh);
+  const centroid = [bb2.minx + bb2.w / 2, bb2.miny + bb2.h / 2];
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  if (sh.selfSym) {
+    ctx.fillStyle = "#62c9da";
+    ctx.font = "13px ui-monospace, monospace";
+    sh.poly.forEach((pe) => {
+      const f = sh.free[pe.src];
+      const M = T([(f.A[0] + f.B[0]) / 2, (f.A[1] + f.B[1]) / 2]);
+      ctx.fillText("\u21BB", M[0] + 14, M[1] - 10);
+    });
+  } else {
+    const letters = ["A", "B", "C"];
+    const badge = (pe, prime) => {
+      const li = pe.src;
+      const f = sh.free[pe.src];
+      const shft = pe.shift || [0, 0];
+      const A = [f.A[0] + shft[0], f.A[1] + shft[1]];
+      const B = [f.B[0] + shft[0], f.B[1] + shft[1]];
+      const mid = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
+      let n = perp(A, B);
+      const out = [mid[0] - centroid[0], mid[1] - centroid[1]];
+      if (n[0] * out[0] + n[1] * out[1] < 0) n = [-n[0], -n[1]];
+      const pos = T([mid[0] + n[0] * 0.16, mid[1] + n[1] * 0.16]);
+      ctx.beginPath();
+      ctx.arc(pos[0], pos[1], 9, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(14,17,22,.85)";
+      ctx.fill();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = prime ? "#62c9da" : "#d8a84e";
+      ctx.stroke();
+      ctx.font = "10px ui-monospace, monospace";
+      ctx.fillStyle = prime ? "#62c9da" : "#d8a84e";
+      ctx.fillText(letters[li] + (prime ? "\u2032" : ""), pos[0], pos[1] + 0.5);
+    };
+    sh.poly.forEach((pe) => { if (!pe.rev && !pe.polyRev) badge(pe, false); });
+    sh.poly.forEach((pe) => { if (pe.rev || pe.polyRev) badge(pe, true); });
+  }
+
+  // first-run hint: pulsing dot on the first free edge
+  if (!state.dragged) {
+    const ep = edgePoints(sh.poly[0]);
+    const m = T(ep[Math.floor(N / 2)]);
+    const pulse = reduceMotion ? 0.5 : (Math.sin(performance.now() / 300) + 1) / 2;
+    ctx.beginPath();
+    ctx.arc(m[0], m[1], 7 + pulse * 4, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(216,168,78,.85)";
+    ctx.fill();
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.fillStyle = "#ece5d3";
+    ctx.fillText("drag me", m[0], m[1] - 22);
+    if (!reduceMotion) requestAnimationFrame(renderEditor);
+  }
+}
+
+function renderPlane() {
+  const { ctx, w, h } = fitCanvas(plane);
+  const sh = SHAPES[state.shape];
+  const pal = PALETTES[state.palette];
+  ctx.fillStyle = pal.planeBg;
+  ctx.fillRect(0, 0, w, h);
+
+  const s = (w / state.zoom) / sh.extent[0];
+  const poly = tilePolygon();
+  const [b1, b2] = sh.basis;
+  // lattice vectors in pixels
+  const v1 = [b1[0] * s, b1[1] * s];
+  const v2 = [b2[0] * s, b2[1] * s];
+  const px = state.pan[0], py = state.pan[1];
+
+  // generous index range covering the viewport for any pan
+  const R = Math.ceil(Math.max(w, h) / Math.min(Math.hypot(...v1), Math.hypot(...v2))) + 3;
+  for (let i = -R; i <= R; i++) {
+    for (let j = -R; j <= R; j++) {
+      const ox = px + i * v1[0] + j * v2[0];
+      const oy = py + i * v1[1] + j * v2[1];
+      if (ox < -2 * s * sh.extent[0] || ox > w + 2 * s * sh.extent[0] ||
+          oy < -2 * s * sh.extent[1] || oy > h + 2 * s * sh.extent[1]) continue;
+      drawTile(ctx, poly, s, ox, oy, sh, pal, i, j, false);
+      if (sh.selfSym) {
+        // rotated partner across edge 0 midpoint
+        const f = sh.free[0];
+        const M = [(f.A[0] + f.B[0]) / 2, (f.A[1] + f.B[1]) / 2];
+        drawTile(ctx, poly, s, ox, oy, sh, pal, i, j, M);
+      }
+    }
+  }
+}
+
+function drawTile(ctx, poly, s, ox, oy, sh, pal, i, j, halfTurnM) {
+  ctx.beginPath();
+  poly.forEach((p, k) => {
+    let q = p;
+    if (halfTurnM) q = [2 * halfTurnM[0] - p[0], 2 * halfTurnM[1] - p[1]];
+    const x = ox + q[0] * s, y = oy + q[1] * s;
+    if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  const ci = sh.selfSym ? (halfTurnM ? 1 : 0) : sh.color(i, j);
+  ctx.fillStyle = pal.fills[ci % pal.fills.length];
+  ctx.fill();
+  ctx.lineWidth = Math.max(0.8, s * 0.012);
+  ctx.strokeStyle = pal.line;
+  ctx.stroke();
+}
+
+function renderAll() {
+  renderEditor();
+  renderPlane();
+}
+
+// ---- Editing interaction --------------------------------------------------
+function editorLocals(evt) {
+  const r = editor.getBoundingClientRect();
+  const { s, ox, oy } = editorTx(r.width, r.height);
+  return { p: [(evt.clientX - r.left - ox) / s, (evt.clientY - r.top - oy) / s], s };
+}
+
+function bendAt(local, delta) {
+  const sh = SHAPES[state.shape];
+  // find nearest poly-edge sample
+  let best = null;
+  sh.poly.forEach((pe) => {
+    const ep = edgePoints(pe);
+    for (let k = 0; k <= N; k++) {
+      const d = Math.hypot(ep[k][0] - local[0], ep[k][1] - local[1]);
+      if (!best || d < best.d) best = { d, pe, t: k / N };
+    }
+  });
+  if (!best || best.d > 0.35) return;
+  const pe = best.pe;
+  const f = sh.free[pe.src];
+  const n = perp(f.A, f.B);
+  let t = best.t;
+  if (pe.rev) t = 1 - t;
+  let dn = delta[0] * n[0] + delta[1] * n[1];
+  if (sh.selfSym && t > 0.5) { t = 1 - t; dn = -dn; }
+  const off = state.offsets[pe.src];
+  const R = 0.10;
+  const edgeLen = Math.hypot(f.B[0] - f.A[0], f.B[1] - f.A[1]);
+  for (let k = 0; k <= N; k++) {
+    const tt = k / N;
+    const w = Math.exp(-Math.pow((tt - t) / R, 2));
+    const v = off[k] + dn * w;
+    off[k] = Math.max(-0.38 * edgeLen, Math.min(0.38 * edgeLen, v));
+  }
+  off[0] = 0; off[N] = 0;
+  state.dragged = true;
+}
+
+let dragLast = null;
+editor.addEventListener("pointerdown", (e) => {
+  state.tween = null;
+  editor.setPointerCapture(e.pointerId);
+  editor.classList.add("dragging");
+  dragLast = editorLocals(e).p;
+  e.preventDefault();
+});
+editor.addEventListener("pointermove", (e) => {
+  if (!dragLast) return;
+  const { p } = editorLocals(e);
+  bendAt(p, [p[0] - dragLast[0], p[1] - dragLast[1]]);
+  dragLast = p;
+  renderAll();
+});
+["pointerup", "pointercancel"].forEach((ev) =>
+  editor.addEventListener(ev, () => { dragLast = null; editor.classList.remove("dragging"); })
+);
+
+let panLast = null;
+plane.addEventListener("pointerdown", (e) => {
+  plane.setPointerCapture(e.pointerId);
+  panLast = [e.clientX, e.clientY];
+  e.preventDefault();
+});
+plane.addEventListener("pointermove", (e) => {
+  if (!panLast) return;
+  state.pan[0] += e.clientX - panLast[0];
+  state.pan[1] += e.clientY - panLast[1];
+  panLast = [e.clientX, e.clientY];
+  renderPlane();
+});
+["pointerup", "pointercancel"].forEach((ev) =>
+  plane.addEventListener(ev, () => { panLast = null; })
+);
+
+// ---- Presets ---------------------------------------------------------------
+function gauss(t, c, w, a) { return a * Math.exp(-Math.pow((t - c) / w, 2)); }
+
+function targetOffsets(bumpsPerEdge) {
+  return bumpsPerEdge.map((bumps) => {
+    const arr = new Float64Array(N + 1);
+    for (let k = 0; k <= N; k++) {
+      const t = k / N;
+      bumps.forEach(([c, w, a]) => { arr[k] += gauss(t, c, w, a); });
+    }
+    arr[0] = 0; arr[N] = 0;
+    return arr;
+  });
+}
+
+function applyOffsets(target) {
+  if (reduceMotion) {
+    state.offsets = target;
+    renderAll();
+    return;
+  }
+  const from = state.offsets.map((a) => Float64Array.from(a));
+  const t0 = performance.now();
+  const dur = 550;
+  cancelAnimationFrame(state.tween);
+  const step = (now) => {
+    const u = Math.min(1, (now - t0) / dur);
+    const e = 1 - Math.pow(1 - u, 3);
+    state.offsets = from.map((a, i) => a.map((v, k) => v + (target[i][k] - v) * e));
+    renderAll();
+    if (u < 1) state.tween = requestAnimationFrame(step);
+  };
+  state.tween = requestAnimationFrame(step);
+}
+
+document.getElementById("preset-figure").addEventListener("click", () => {
+  state.dragged = true;
+  applyOffsets(targetOffsets(SHAPES[state.shape].figure));
+});
+document.getElementById("preset-random").addEventListener("click", () => {
+  state.dragged = true;
+  const rnd = SHAPES[state.shape].free.map(() => {
+    const count = 2 + Math.floor(Math.random() * 3);
+    const bumps = [];
+    for (let b = 0; b < count; b++) {
+      bumps.push([0.15 + Math.random() * 0.7, 0.06 + Math.random() * 0.1, (Math.random() * 2 - 1) * 0.28]);
+    }
+    return bumps;
+  });
+  applyOffsets(targetOffsets(rnd));
+});
+document.getElementById("reset").addEventListener("click", () => {
+  state.dragged = false;
+  applyOffsets(SHAPES[state.shape].free.map(() => new Float64Array(N + 1)));
+});
+document.getElementById("palette").addEventListener("click", (e) => {
+  state.palette = (state.palette + 1) % PALETTES.length;
+  e.currentTarget.textContent = "Palette: " + PALETTES[state.palette].name;
+  renderAll();
+});
+document.getElementById("zoom").addEventListener("input", (e) => {
+  state.zoom = Number(e.target.value);
+  renderPlane();
+});
+
+// ---- Shape switch ----------------------------------------------------------
+const segButtons = Array.from(document.querySelectorAll("[data-shape]"));
+function setShape(name) {
+  state.shape = name;
+  state.pan = [0, 0];
+  state.dragged = false;
+  resetOffsets();
+  segButtons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.shape === name)));
+  document.getElementById("grp").textContent = SHAPES[name].group;
+  document.getElementById("editor-hint").textContent = SHAPES[name].hint;
+  renderAll();
+}
+segButtons.forEach((b) => b.addEventListener("click", () => setShape(b.dataset.shape)));
+document.getElementById("grp").textContent = SHAPES.square.group;
+
+// ---- Tabs -------------------------------------------------------------------
+const tabs = { "tab-studio": "panel-studio", "tab-escher": "panel-escher" };
+Object.keys(tabs).forEach((id) => {
+  document.getElementById(id).addEventListener("click", () => {
+    Object.entries(tabs).forEach(([tid, pid]) => {
+      document.getElementById(tid).setAttribute("aria-selected", String(tid === id));
+      document.getElementById(pid).hidden = tid !== id;
+    });
+    if (id === "tab-studio") renderAll();
+  });
+});
+
+// ---- Escher resources -------------------------------------------------------
+const LINKS = [
+  ["M.C. Escher - The Official Website", "Biography, techniques and the story behind the prints.", "https://mcescher.com/"],
+  ["Official gallery", "The works themselves, hosted by the M.C. Escher company.", "https://www.mcescher.com/gallery/"],
+  ["Escher in The Palace", "The Hague museum devoted to his work, in the former royal palace.", "https://escherinhetpaleis.nl/en/"],
+  ["Tessellation (Wikipedia)", "The mathematics of covering a plane without gaps.", "https://en.wikipedia.org/wiki/Tessellation"],
+  ["Wallpaper group (Wikipedia)", "The seventeen ways a pattern can repeat - the groups Escher worked through.", "https://en.wikipedia.org/wiki/Wallpaper_group"],
+  ["M. C. Escher (Wikipedia)", "Life and career of the artist.", "https://en.wikipedia.org/wiki/M._C._Escher"]
+];
+const linkWrap = document.getElementById("links");
+LINKS.forEach(([title, desc, url]) => {
+  const card = document.createElement("div");
+  card.style.cssText = "background: var(--panel); border: 1px solid rgba(151,144,126,.25); border-radius: 12px; padding: 12px 14px;";
+  const a = document.createElement("a");
+  a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
+  a.textContent = title;
+  a.style.cssText = "color: var(--gold); font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--gold-dim);";
+  const p = document.createElement("p");
+  p.textContent = desc;
+  p.style.cssText = "margin: 6px 0 4px; color: var(--muted); font-size: 13.5px;";
+  const u = document.createElement("code");
+  u.textContent = url;
+  u.style.cssText = "font-family: var(--mono); font-size: 11.5px; color: var(--faint); word-break: break-all;";
+  card.append(a, p, u);
+  linkWrap.appendChild(card);
+});
+
+// ---- Boot -------------------------------------------------------------------
+new ResizeObserver(() => renderAll()).observe(editor);
+new ResizeObserver(() => renderPlane()).observe(plane);
+renderAll();
+</script>
+</body>
+</html>
