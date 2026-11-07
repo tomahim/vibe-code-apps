@@ -99,6 +99,10 @@ export default function LittleNotes({ onHome }) {
   }, [signedIn, type, category, tag, month, q, page, refresh, view, routeItem]);
   function filter(setter, value) { setRoute(old => ({ ...old, item: "" })); setter(value); setPage(1); setDrawer(false); setNotice(""); }
   const visibleCategories = taxonomy.categories.filter(c => !type || !c.types.length || c.types.includes(type));
+  // Archive is a destination, not a triage lane: it stays available as a small
+  // control below the tabs so the tab row keeps room for real categories.
+  const archiveCategory = visibleCategories.find(c => c.slug === "archive");
+  const tabCategories = visibleCategories.filter(c => c.slug !== "archive");
   function chooseType(value) {
     viewRequest.current++; setSavingView(false); setViewSaved(true); setDetailOpen(false);
     const nextView = viewCache.current[value] || "default";
@@ -118,15 +122,14 @@ export default function LittleNotes({ onHome }) {
   }, [signedIn, routeItem, refresh]);
   async function toggle(path, key, slug, enabled = true) {
     if (!selected || busy) return; setBusy(true); setError("");
-    // Archive and Inbox are mutually exclusive in the API, so archiving from the
-    // Inbox view (or restoring from the Archive view) removes the object from the
-    // current list. Route to the next object in line instead of reloading the one
-    // that just left: skip() stores the object in the URL, and without this the
-    // detail effect reopens the archived object after the list refreshes.
-    // Categorizing from the Inbox (Favorite, Promising, ...) keeps the object in
-    // the Inbox: only Archive is exclusive with it. The decision is still made, so
-    // show the next object; the categorized one stays in the list and its
-    // membership is not changed here.
+    // In the API, Inbox and Archive are mutually exclusive, and choosing any
+    // other category also takes the object out of the Inbox (the decision means
+    // it has been read; other categories stay). So archiving from the Inbox
+    // view, restoring from the Archive view, or categorizing from the Inbox all
+    // remove the object from the current list. Route to the next object in line
+    // instead of reloading the one that just left: skip() stores the object in
+    // the URL, and without this the detail effect reopens it after the list
+    // refreshes.
     const categorized = path === "categories" && enabled && category === "inbox" && !["archive", "inbox"].includes(slug);
     const leaving = categorized || (slug === "archive" && enabled && category === "inbox") || (slug === "inbox" && enabled && category === "archive");
     let nextId = "";
@@ -189,7 +192,8 @@ export default function LittleNotes({ onHome }) {
       {admin && taxonomy.can_manage_taxonomy ? <TaxonomyAdmin key={route.adminKind} initialKind={route.adminKind} onKindChange={value => setRoute(old => ({ ...old, adminKind: value }))} taxonomy={taxonomy} api={api} onCreated={() => setRefresh(x => x + 1)} onClose={() => setAdmin(false)} /> : <div className="ln-workspace">
         <aside className={`ln-sidebar ${drawer ? "is-open" : ""}`} aria-label="Object type filters"><button className="ln-close" onClick={() => setDrawer(false)}>Close filters ×</button><p className="ln-eyebrow">YOUR OBJECTS</p><button className={!type ? "active" : ""} onClick={() => chooseType("")}>◉ <span>Everything</span></button>{taxonomy.types.map(t => <button key={t.slug} className={type === t.slug ? "active" : ""} onClick={() => chooseType(t.slug)}>{t.icon || icons[t.slug] || "◇"}<span>{t.name}</span></button>)}<div className="ln-sidebar-foot"><strong>KEEP THE THOUGHT.<br />CLEAR THE INBOX.</strong><p>No folders to maintain.<br />Just types, dates and categories.</p></div>{taxonomy.can_manage_taxonomy && <button className="ln-manage-button" onClick={() => { setDrawer(false); setAdmin(true); }}><span aria-hidden="true">⚙</span> Manage</button>}</aside>
         <main className="ln-main"><div className="ln-toolbar"><button className="ln-filter-button" onClick={() => setDrawer(true)}>☰ Types</button><label className="ln-search"><span>⌕</span><input type="search" placeholder="Find a thought, link, phrase..." value={q} onChange={e => filter(setQ, e.target.value)} aria-label="Search content" /></label><select value={month} onChange={e => filter(setMonth, e.target.value)} aria-label="Browse by saved month">{view !== "calendar" && <option value="">All months</option>}{month && !taxonomy.months.some(m => m.month === month) && <option value={month}>{month}</option>}{taxonomy.months.map(m => <option key={m.month} value={m.month}>{m.month} · {m.count}</option>)}</select></div>
-          <nav className="ln-tabs" aria-label="Category filters"><button className={!category ? "active" : ""} onClick={() => filter(setCategory, "")}>All</button>{visibleCategories.map(c => <button key={c.slug} className={category === c.slug ? "active" : ""} onClick={() => filter(setCategory, c.slug)}>{c.name}</button>)}<select aria-label="Topic tag filter" value={tag} onChange={e => filter(setTag, e.target.value)}><option value="">More tags</option>{taxonomy.tags.map(t => <option key={t.slug} value={t.slug}>{t.name}</option>)}</select></nav>
+          <nav className="ln-tabs" aria-label="Category filters"><button className={!category ? "active" : ""} onClick={() => filter(setCategory, "")}>All</button>{tabCategories.map(c => <button key={c.slug} className={category === c.slug ? "active" : ""} onClick={() => filter(setCategory, c.slug)}>{c.name}</button>)}<select aria-label="Topic tag filter" value={tag} onChange={e => filter(setTag, e.target.value)}><option value="">More tags</option>{taxonomy.tags.map(t => <option key={t.slug} value={t.slug}>{t.name}</option>)}</select></nav>
+          {archiveCategory && <div className="ln-archive-row"><button className={category === "archive" ? "active" : ""} aria-pressed={category === "archive"} onClick={() => filter(setCategory, "archive")}>Archive</button></div>}
           <div className="ln-heading"><div><p className="ln-eyebrow">A SMALL DECISION AT A TIME</p><h1>{category === "inbox" ? "In, then out." : category ? visibleCategories.find(c => c.slug === category)?.name || category : tag ? `#${tag}` : "Everything, kept."}</h1></div><span className="ln-count">{total} <small>objects</small></span></div>
           <ViewPicker value={view} onChange={changeView} disabled={savingView} saving={savingView} saved={viewSaved} typeName={type ? taxonomy.types.find(t => t.slug === type)?.name || type : ""} />
           {error && <div className="ln-error" role="alert">{error} <button onClick={() => setRefresh(x => x + 1)}>Reload</button></div>}{notice && <p className="ln-notice" role="status">{notice}</p>}
