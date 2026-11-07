@@ -33,7 +33,7 @@ BADGES = [
     Badge("evergreen-reader", "Evergreen reader", "Reading", 3, "cards", 1200, "Read 1,200 different cards."),
     Badge("slow-growth", "Slow growth", "Reading", 1, "weeks", 6, "Come back in 6 different calendar weeks (Monday to Sunday), reading a card or answering a question each time. The weeks need not be consecutive."),
     Badge("perennial", "Perennial", "Reading", 3, "weeks", 16, "Be active in 16 different calendar weeks. Gaps are fine; nothing resets."),
-    Badge("first-flame", "First flame", "Streaks", 1, "streak", 7, "Read a card or answer a question correctly every day, 7 days in a row. Days are calendar days in UTC."),
+    Badge("first-flame", "First flame", "Streaks", 1, "streak", 7, "Read a card or answer a question correctly every day, 7 days in a row. Days are calendar days in Paris time."),
     Badge("steady-ember", "Steady ember", "Streaks", 1, "streak", 15, "Keep a daily streak going for 15 days in a row: a card read or a correct answer each day."),
     Badge("campfire", "Campfire", "Streaks", 2, "streak", 30, "A month without missing a day: a card read or a correct answer every day for 30 days in a row."),
     Badge("bonfire", "Bonfire", "Streaks", 2, "streak", 100, "Read a card or answer a question correctly every day for 100 days in a row."),

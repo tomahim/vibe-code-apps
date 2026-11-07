@@ -518,7 +518,7 @@ function BadgesStreak({ onOpenBadges }) {
   return <>
     {error && <p className="grains-error" role="alert">{error}</p>}
     {!data && !error && <p className="grains-loading">Gathering the badges…</p>}
-    {data && <><p className="grains-leaderboard-note">All time · UTC</p>
+    {data && <><p className="grains-leaderboard-note">All time · Paris time</p>
       <ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}
         <small className="detail">{row.longest_streak.days > 0 ? `🔥 Best streak ${row.longest_streak.days} days (${formatRange(row.longest_streak)}) · now ${row.current_streak.days}${row.current_streak.lit ? "" : " 🥶"}` : "No streak yet"}</small>
         <small className="detail">🌱 {row.cards_read} cards · ✅ {row.correct} correct{row.accuracy !== null ? ` (${row.accuracy}%)` : ""}{row.latest_badge ? ` · Latest: ${row.latest_badge.name}` : ""}</small>

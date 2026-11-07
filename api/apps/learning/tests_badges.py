@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -283,6 +283,33 @@ class BadgeTests(TestCase):
                          {"days": 2, "lit": False, "cards": 2, "questions": 0, "best": 2})
         self.assertEqual(check(get_user_model().objects.create_user(username="new"), NOW)["streak"],
                          {"days": 0, "lit": False, "cards": 0, "questions": 0, "best": 0})
+
+    def test_streak_day_boundary_is_midnight_in_paris_not_utc(self):
+        # 12:00 UTC is 13:00 in Paris (CET), but 23:30 UTC is already 00:30
+        # the next day there: one UTC day can hold two Paris streak days.
+        self.cards(2, start=datetime(2026, 11, 3, 12, 0, tzinfo=timezone.utc),
+                   step=timedelta(hours=11, minutes=30))
+        days = [day for _, day in History(self.user).day_events()]
+        self.assertEqual(days, [date(2026, 11, 3), date(2026, 11, 4)])
+
+    def test_streak_days_across_the_dst_fallback(self):
+        # Clocks fall back on 2026-10-25 (CEST to CET): four reads spaced one
+        # UTC day apart from Oct 23 22:30 UTC land on three Paris days, so the
+        # 25-hour day still counts as a single streak day.
+        self.cards(4, start=datetime(2026, 10, 23, 22, 30, tzinfo=timezone.utc),
+                   step=timedelta(days=1))
+        history = History(self.user)
+        days = [day for _, day in history.day_events()]
+        self.assertEqual(days, [date(2026, 10, 24), date(2026, 10, 25), date(2026, 10, 26)])
+        self.assertEqual(len(history.streak()), 3)
+
+    def test_current_streak_uses_the_paris_date_of_now(self):
+        # A read at 10:00 UTC is still "yesterday" once Paris passes midnight,
+        # even though it is the same UTC day: the pill freezes at 23:30 UTC.
+        self.cards(1, start=datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc))
+        late = datetime(2026, 11, 3, 23, 30, tzinfo=timezone.utc)
+        self.assertEqual(check(self.user, late)["streak"],
+                         {"days": 1, "lit": False, "cards": 1, "questions": 0, "best": 1})
 
     def test_streak_stats_count_distinct_cards_and_correct_questions_during_the_run(self):
         q1, q2 = self.question(1), self.question(2)

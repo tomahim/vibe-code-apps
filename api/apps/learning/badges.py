@@ -15,6 +15,7 @@ card or answer writes and never in the background.
 """
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone as dt_timezone
+from zoneinfo import ZoneInfo
 
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -24,6 +25,14 @@ from .badge_catalog import BADGES, MONTH, WEEK, TIERS  # noqa: F401 (re-exported
 from .models import BadgeAward, Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
 
 NEW_WINDOW = timedelta(days=7)
+PARIS = ZoneInfo("Europe/Paris")
+
+
+def paris_day(at):
+    """The Europe/Paris calendar day of a recorded moment. Streak days follow
+    the learner's own day (midnight in Paris, DST-aware), unlike weeks which
+    stay Monday to Sunday UTC."""
+    return at.astimezone(PARIS).date()
 TYPED = Question.Type.TYPE_ANSWER_QUESTION
 
 
@@ -87,10 +96,10 @@ class History:
         return sorted((at, ("week", week)) for week, at in first.items())
 
     def day_events(self):
-        """The first qualifying activity of each active UTC day, sorted."""
+        """The first qualifying activity of each active Paris day, sorted."""
         first = {}
         for at in self.active_times:
-            day = at.date()
+            day = paris_day(at)
             if day not in first or at < first[day]:
                 first[day] = at
         return [(first[day], day) for day in sorted(first)]
@@ -144,9 +153,9 @@ class History:
             return {"days": 0, "lit": False, "cards": 0, "questions": 0, "best": best}
         end = today if lit else today - timedelta(days=1)
         start = end - timedelta(days=days - 1)
-        cards = sum(1 for at in self.card_times.values() if start <= at.date() <= end)
+        cards = sum(1 for at in self.card_times.values() if start <= paris_day(at) <= end)
         questions = sum(1 for rows in self.attempts.values()
-                        if any(ok and start <= at.date() <= end for at, _, ok in rows))
+                        if any(ok and start <= paris_day(at) <= end for at, _, ok in rows))
         return {"days": days, "lit": lit, "cards": cards, "questions": questions, "best": best}
 
     def correct(self, typed=None, **_):
@@ -295,7 +304,7 @@ def check(user, now=None):
     now = now or datetime.now(dt_timezone.utc)
     stored = {award.badge: award for award in BadgeAward.objects.filter(user=user)}
     history = History(user)
-    streak = history.streak_stats(now.date())
+    streak = history.streak_stats(paris_day(now))
     evaluated = {badge.slug: evaluate(history, badge) for badge in BADGES}
     fresh = []
     for badge in BADGES:
@@ -389,7 +398,7 @@ def badges_leaderboard(user, limit=20):
     dates, never raw history. Everything is derived from existing records;
     no new tables, no writes."""
     now = datetime.now(dt_timezone.utc)
-    today = now.date()
+    today = paris_day(now)
     rows = []
     earned_by_user = {}
     for learner in get_user_model().objects.filter(is_active=True).order_by("pk"):
