@@ -106,15 +106,15 @@ export function StreakPanel({ data, error, onClose }) {
             aria-valuemax={next ? next.target : days} aria-label={next ? `Progress to ${next.name}` : "All streak badges earned"}>
             <div className="grains-streak-fill" style={{ width: `${percent}%` }} />
           </div>
-          <p>{next ? <><strong>{days}</strong> of {next.target} days to <strong>{next.name}</strong></> : "Every streak badge earned. Impressive!"}</p>
+          <p>{next ? <>Current streak: <strong>{days}</strong> of {next.target} days to <strong>{next.name}</strong></> : "Every streak badge earned. Impressive!"}</p>
         </div>
         <ul className="grains-milestones">
           {milestones.map((badge) => <li key={badge.slug} className={badge.earned ? "grains-milestone earned" : "grains-milestone"}>
             <Art badge={badge} />
             <div><strong>{badge.name}</strong><span>{badge.target} days in a row</span></div>
             {badge.earned
-              ? <span className="grains-milestone-check" role="img" aria-label={`Earned on ${formatDate(badge.earned_at)}`} title={`Earned on ${formatDate(badge.earned_at)}`}>✔️</span>
-              : <span className="grains-milestone-left">{badge.progress} / {badge.target}</span>}
+              ? <span className="grains-milestone-check" role="img" aria-label={`Earned on ${formatDate(badge.earned_at)}`} title={`Earned on ${formatDate(badge.earned_at)}`}>✓</span>
+              : <span className="grains-milestone-left">Best {badge.progress} / {badge.target}</span>}
           </li>)}
         </ul>
         <p className="grains-streak-stats">

@@ -33,9 +33,9 @@
 .grains-milestone>div{flex:1;display:flex;flex-direction:column}
 .grains-milestone strong{font-size:14px}
 .grains-milestone div span{font-size:12px;color:var(--dim)}
-.grains-milestone-check{color:#2e7d32;font-size:18px}
 .grains-milestone-left{font:700 12px var(--sans);color:#9a9384}
 .grains-streak-stats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:12px 14px;border-radius:14px;background:#f1ece0;font-size:14px;color:var(--dim)}
 .grains-streak-stats strong{color:var(--ink)}
 .grains-streak-best{margin:10px 0 0;font-size:13px;color:var(--dim)}
 .grains-ranking .name small.detail{white-space:normal;text-overflow:clip;line-height:1.4}
+.grains-milestone-check{color:#2e7d32;font-size:20px;font-weight:900}
