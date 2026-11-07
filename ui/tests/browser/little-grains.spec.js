@@ -266,8 +266,8 @@ test('leaderboard arrows navigate previous weeks and months of history', async (
 
   // Carrots: attempted, correct and wrong counts under every player's name.
   await leaderboard.getByRole('button', { name: /Carrots/ }).click();
-  await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('21 attempted \u00b7 16 correct \u00b7 5 wrong');
-  await expect(leaderboard.locator('.grains-ranking li:not(.self) .detail')).toHaveText('8 attempted \u00b7 6 correct \u00b7 2 wrong');
+  await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('21 attempted \u00b7 16 correct (76%) \u00b7 5 wrong');
+  await expect(leaderboard.locator('.grains-ranking li:not(.self) .detail')).toHaveText('8 attempted \u00b7 6 correct (75%) \u00b7 2 wrong');
   await page.screenshot({ path: '/tmp/little-grains-leaderboard-carrot-stats-mobile.png' });
   await leaderboard.getByRole('button', { name: /Drops/ }).click();
   await expect(leaderboard.locator('.grains-ranking li.self .detail')).toHaveText('12 cards read');
@@ -914,7 +914,12 @@ test.describe('badges on a phone', () => {
     await expect(dialog.getByText('Warm baths and gentle care')).toBeVisible();
     await expect(dialog.getByText(/^Earned on /)).toBeVisible();
     await page.screenshot({ path: '/tmp/little-grains-badges-detail.png' });
+    await page.goBack(); // the phone's back button steps back to the list
+    await expect(dialog.getByText('2 of 7 collected')).toBeVisible();
+    await page.goForward();
+    await expect(dialog.getByRole('heading', { name: 'Book beetle' })).toBeVisible();
     await dialog.getByRole('button', { name: '‹ All badges' }).click();
+    await expect(dialog.getByText('2 of 7 collected')).toBeVisible();
     await dialog.getByRole('button', { name: 'Wise oak, not earned yet' }).click();
     await expect(dialog.getByText('Not earned yet')).toBeVisible();
     await expect(dialog.getByText('140 of 300 so far')).toBeVisible();
