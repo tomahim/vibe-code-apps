@@ -452,7 +452,7 @@ function niceCeil(value) {
   return max % 2 ? max + 1 : max;
 }
 
-function EvolutionChart({ chart, currency }) {
+function EvolutionChart({ chart, currency, onOpenBadges }) {
   if (!chart || !chart.buckets?.length || !chart.series?.length) return null;
   const width = 360, height = 190, padL = 30, padR = 34, padT = 14, padB = 26;
   const now = Date.now();
@@ -481,6 +481,7 @@ function EvolutionChart({ chart, currency }) {
   const gridValue = (f) => max * f;
   return <section className="grains-chart">
     <div className="grains-chart-head"><h3>{currency === "badges" ? "🏅 Badges growth" : `${currency === "drops" ? "💧" : "🥕"} Growth`}</h3><span>Cumulative · {periodLabel}</span></div>
+    {onOpenBadges && <button type="button" className="grains-chart-link" onClick={onOpenBadges}>See all your badges →</button>}
     <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
       <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
@@ -501,7 +502,7 @@ function EvolutionChart({ chart, currency }) {
   </section>;
 }
 
-function BadgesStreak() {
+function BadgesStreak({ onOpenBadges }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   useEffect(() => {
@@ -523,13 +524,13 @@ function BadgesStreak() {
         <small className="detail">🌱 {row.cards_read} cards · ✅ {row.correct} correct{row.accuracy !== null ? ` (${row.accuracy}%)` : ""}{row.latest_badge ? ` · Latest: ${row.latest_badge.name}` : ""}</small>
       </span><strong>{row.badges}</strong></li>)}</ol>
       {data.rows.length === 0 && <p className="grains-empty-ranking">No badges earned yet. The first one is waiting for you.</p>}
-      <EvolutionChart chart={data.chart} currency="badges" />
+      <EvolutionChart chart={data.chart} currency="badges" onOpenBadges={onOpenBadges} />
       {data.self && <div className="grains-self-rank"><span>Your badges rank</span><strong>#{data.self.rank} · {data.self.badges} {data.self.badges === 1 ? "badge" : "badges"}</strong></div>}
     </>}
   </>;
 }
 
-function Leaderboard({ onClose }) {
+function Leaderboard({ onClose, onOpenBadges }) {
   // Three tabs: Drops, Carrots and Badges & streak. The rewards tabs share
   // the currency state; "badges" swaps in its own view and fetch.
   const [currency, setCurrency] = useState("drops");
@@ -557,7 +558,7 @@ function Leaderboard({ onClose }) {
       {currency !== "badges" && error && <p className="grains-error" role="alert">{error}</p>}
       {currency !== "badges" && !data && !error && <p className="grains-loading">Gathering the rankings…</p>}
       {currency !== "badges" && data && <><p className="grains-leaderboard-note">{period === "overall" ? "All time" : offset === 0 ? (period === "weekly" ? "Resets every Monday" : "Resets on the 1st") : "Final ranking"} · UTC</p><ol className="grains-ranking">{data.rows.map((row) => <li key={`${row.rank}-${row.name}`} className={row.is_self ? "self" : ""}><span className="rank">{row.rank}</span><span className="avatar" aria-hidden="true">{row.name.slice(0, 1).toUpperCase()}</span><span className="name">{row.name}{row.is_self && <small>YOU</small>}{row.stats && <small className="detail">{currency === "drops" ? `${row.stats.cards_read} card${row.stats.cards_read === 1 ? "" : "s"} read` : `${row.stats.attempts} attempted · ${row.stats.correct} correct · ${row.stats.wrong} wrong`}</small>}</span><strong>{row.score}</strong></li>)}</ol>{data.rows.length === 0 && <p className="grains-empty-ranking">{offset === 0 ? "The first spot is waiting for you." : `No activity this ${step}.`}</p>}<EvolutionChart chart={data.chart} currency={data.currency} /><div className="grains-self-rank"><span>Your {currency} rank</span><strong>{data.self?.rank ? `#${data.self.rank} · ${data.self.score} ${currency}` : offset > 0 ? `No activity this ${step}` : currency === "drops" ? "Read a card to join" : "Answer a question to join"}</strong></div></>}
-      {currency === "badges" && <BadgesStreak />}
+      {currency === "badges" && <BadgesStreak onOpenBadges={onOpenBadges} />}
     </aside>
   </div>;
 }
@@ -757,7 +758,7 @@ export default function LittleGrains() {
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
     {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
-    {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} />}
+    {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} onOpenBadges={() => { setShowLeaderboard(false); setShowBadges(true); checkBadges(); }} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
     {showStreak && <StreakPanel data={badges} error={badgesError} onClose={() => setShowStreak(false)} />}
   </main>;
