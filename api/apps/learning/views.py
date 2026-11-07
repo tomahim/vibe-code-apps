@@ -20,7 +20,7 @@ from .models import (Card, CardProgress, LearningPath, Lesson, LessonOpen, PathC
                      Question, QuestionAttempt, Theme)
 from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
-from .badges import check as check_badges
+from .badges import badges_leaderboard, check as check_badges
 from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
 
 
@@ -410,6 +410,16 @@ def leaderboard(request):
     if offset < 0 or offset > 520 or (period == 'overall' and offset):
         return JsonResponse({"error": "Offset goes 0-520 periods back; overall is all time and takes no offset."}, status=400)
     return JsonResponse(ranking(request.user, currency, period, offset=offset))
+
+
+@never_cache
+@require_GET
+@jwt_required
+def badges_leaderboard_view(request):
+    """Per-player badge and streak fun stats for the Badges & streak tab.
+    Same audience as the drops/carrots leaderboard, aggregates only, and
+    everything derived from existing records: no writes, no new tables."""
+    return JsonResponse(badges_leaderboard(request.user))
 
 
 

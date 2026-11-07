@@ -13,6 +13,7 @@
 .grains-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
 .grains-chart-head h3{font:700 15px var(--serif);margin:0;color:#4d6a51}
 .grains-chart-head span{color:var(--dim);font-size:11px;white-space:nowrap}
+.grains-chart-link{display:block;background:#e8f0fb;border:none;border-radius:999px;padding:4px 12px;margin:-2px 0 8px auto;color:var(--blue);font-size:11px;font-weight:700;cursor:pointer}
 .grains-chart svg{display:block;width:100%;height:auto}
 .grains-chart-grid{stroke:#e3d9c4;stroke-width:1}
 .grains-chart-y{fill:#a9a48f;font-size:9px;font-variant-numeric:tabular-nums}

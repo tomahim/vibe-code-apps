@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -57,7 +57,7 @@ class BadgeTests(TestCase):
 
     def test_nothing_is_earned_without_history(self):
         result = check(self.user, NOW)
-        self.assertEqual(len(result["badges"]), 34)
+        self.assertEqual(len(result["badges"]), 41)
         self.assertEqual((result["earned_count"], result["new_count"]), (0, 0))
         self.assertFalse(BadgeAward.objects.exists())
 
@@ -233,6 +233,145 @@ class BadgeTests(TestCase):
         beetle = next(b for b in result["badges"] if b["slug"] == "book-beetle")
         self.assertEqual(beetle["earned_at"], (T0 + timedelta(minutes=99)).isoformat())
 
+    def test_streak_counts_card_reads_and_correct_answers_not_wrong_ones(self):
+        q = self.question()
+        self.cards(1, start=T0)                                     # Monday: active
+        self.attempt(q, T0 + timedelta(days=1), correct=False)      # Tuesday: wrong, not active
+        self.attempt(q, T0 + timedelta(days=2))                     # Wednesday: run restarts
+        self.attempt(q, T0 + timedelta(days=3), kind="review")      # Thursday: review counts
+        events = History(self.user).streak()
+        self.assertEqual(times(events), [T0, T0 + timedelta(days=3)])
+        self.assertEqual([ref for _, ref in events],
+                         [("day", T0.date()), ("day", (T0 + timedelta(days=3)).date())])
+
+    def test_streak_records_only_new_bests_across_runs(self):
+        # A run of 2, a gap, then a run of 3: only the day the run passes
+        # the old best adds a record, so 3 events and a best streak of 3.
+        self.cards(2, start=T0, step=timedelta(days=1))
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        self.cards(3, lesson=other_lesson, start=T0 + timedelta(days=4), step=timedelta(days=1))
+        events = History(self.user).streak()
+        self.assertEqual(len(events), 3)
+        self.assertEqual(times(events)[-1], T0 + timedelta(days=6))
+
+    def test_streak_badge_dates_the_day_the_target_was_reached(self):
+        self.cards(8, start=T0, step=timedelta(days=1))
+        flame = self.badge("first-flame")
+        self.assertTrue(flame["earned"])
+        self.assertEqual(flame["earned_at"], (T0 + timedelta(days=6)).isoformat())
+        self.assertEqual(flame["evidence"], ["Oct 11, 2026"])
+        ember = self.badge("steady-ember")
+        self.assertFalse(ember["earned"])
+        self.assertEqual(ember["progress"], 8)
+
+    def test_streak_badges_survive_a_later_gap(self):
+        self.cards(7, start=T0, step=timedelta(days=1))
+        self.assertTrue(self.badge("first-flame")["earned"])
+        # A missed week breaks the current run but never the earned badge.
+        later = check(self.user, NOW + timedelta(days=30))
+        flame = next(b for b in later["badges"] if b["slug"] == "first-flame")
+        self.assertTrue(flame["earned"])
+        self.assertEqual(later["streak"], {"days": 0, "lit": False, "cards": 0, "questions": 0, "best": 7})
+
+    def test_current_streak_is_lit_frozen_or_broken(self):
+        self.cards(3, start=NOW - timedelta(days=2), step=timedelta(days=1))
+        self.assertEqual(check(self.user, NOW)["streak"],
+                         {"days": 3, "lit": True, "cards": 3, "questions": 0, "best": 3})
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        self.cards(2, lesson=other_lesson, start=NOW - timedelta(days=2), step=timedelta(days=1), user=self.other)
+        self.assertEqual(check(self.other, NOW)["streak"],
+                         {"days": 2, "lit": False, "cards": 2, "questions": 0, "best": 2})
+        self.assertEqual(check(get_user_model().objects.create_user(username="new"), NOW)["streak"],
+                         {"days": 0, "lit": False, "cards": 0, "questions": 0, "best": 0})
+
+    def test_streak_day_boundary_is_midnight_in_paris_not_utc(self):
+        # 12:00 UTC is 13:00 in Paris (CET), but 23:30 UTC is already 00:30
+        # the next day there: one UTC day can hold two Paris streak days.
+        self.cards(2, start=datetime(2026, 11, 3, 12, 0, tzinfo=timezone.utc),
+                   step=timedelta(hours=11, minutes=30))
+        days = [day for _, day in History(self.user).day_events()]
+        self.assertEqual(days, [date(2026, 11, 3), date(2026, 11, 4)])
+
+    def test_streak_days_across_the_dst_fallback(self):
+        # Clocks fall back on 2026-10-25 (CEST to CET): four reads spaced one
+        # UTC day apart from Oct 23 22:30 UTC land on three Paris days, so the
+        # 25-hour day still counts as a single streak day.
+        self.cards(4, start=datetime(2026, 10, 23, 22, 30, tzinfo=timezone.utc),
+                   step=timedelta(days=1))
+        history = History(self.user)
+        days = [day for _, day in history.day_events()]
+        self.assertEqual(days, [date(2026, 10, 24), date(2026, 10, 25), date(2026, 10, 26)])
+        self.assertEqual(len(history.streak()), 3)
+
+    def test_current_streak_uses_the_paris_date_of_now(self):
+        # A read at 10:00 UTC is still "yesterday" once Paris passes midnight,
+        # even though it is the same UTC day: the pill freezes at 23:30 UTC.
+        self.cards(1, start=datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc))
+        late = datetime(2026, 11, 3, 23, 30, tzinfo=timezone.utc)
+        self.assertEqual(check(self.user, late)["streak"],
+                         {"days": 1, "lit": False, "cards": 1, "questions": 0, "best": 1})
+
+    def test_streak_stats_count_distinct_cards_and_correct_questions_during_the_run(self):
+        q1, q2 = self.question(1), self.question(2)
+        self.cards(2, start=NOW - timedelta(days=1), step=timedelta(days=1))
+        self.attempt(q1, NOW - timedelta(days=1))                        # inside the run
+        self.attempt(q1, NOW - timedelta(days=1), kind="review")         # same question: once
+        self.attempt(q2, NOW - timedelta(days=1), correct=False)         # wrong: never
+        self.attempt(q2, NOW)
+        self.attempt(q1, NOW - timedelta(days=5))                        # before the run
+        self.cards(1, lesson=self.row(Lesson, learning_path=self.path, position=2),
+                   start=NOW - timedelta(days=5))                        # before the run
+        self.assertEqual(check(self.user, NOW)["streak"],
+                         {"days": 2, "lit": True, "cards": 2, "questions": 2, "best": 2})
+
+    def test_badges_leaderboard_requires_authentication(self):
+        self.assertEqual(self.client.get("/api/learning/leaderboard/badges/").status_code, 401)
+
+    def test_badges_leaderboard_lists_players_with_fun_stats(self):
+        # Seven daily reads of an 8-card lesson: first-flame, best run 7, and
+        # the path stays unfinished so no completion badge joins in.
+        made = [self.row(Card, lesson=self.lesson, position=i + 1, body_markdown="x") for i in range(8)]
+        CardProgress.objects.bulk_create([
+            CardProgress(user=self.user, card=made[i], completed_at=T0 + timedelta(days=i)) for i in range(7)])
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        self.cards(3, lesson=other_lesson, start=T0, step=timedelta(days=1), user=self.other)
+        self.attempt(self.question(), T0 + timedelta(days=2), user=self.other, correct=True)
+        self.attempt(self.question(2), T0 + timedelta(days=3), user=self.other, correct=False)
+        # A player with no activity at all never appears.
+        get_user_model().objects.create_user(username="ghost")
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.user)}"
+        response = self.client.get("/api/learning/leaderboard/badges/")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual([row["name"] for row in data["rows"]], ["learner", "other"])
+        mine, theirs = data["rows"]
+        self.assertEqual((mine["rank"], mine["badges"], mine["is_self"]), (1, 2, True))  # first-sprout + first-flame
+        self.assertEqual(mine["latest_badge"]["name"], "First flame")
+        self.assertEqual(mine["longest_streak"],
+                         {"days": 7, "start": T0.date().isoformat(),
+                          "end": (T0 + timedelta(days=6)).date().isoformat()})
+        self.assertEqual((mine["cards_read"], mine["correct"], mine["attempts"], mine["accuracy"]), (7, 0, 0, None))
+        self.assertEqual((theirs["badges"], theirs["longest_streak"]["days"]), (1, 3))  # first-sprout
+        self.assertEqual((theirs["cards_read"], theirs["correct"], theirs["attempts"], theirs["accuracy"]), (3, 1, 2, 50))
+        # Aggregates only: no question or card identifiers leave the API.
+        self.assertNotIn("evidence", theirs)
+        # The monthly growth graph is cumulative badges, from the first earned month on.
+        chart = data["chart"]
+        self.assertEqual(chart["period"], "overall")
+        self.assertEqual(chart["buckets"][0]["label"], "Oct")
+        series = {s["name"]: s for s in chart["series"]}
+        self.assertEqual(series["learner"]["points"][-1], 2)
+        self.assertEqual(series["other"]["points"][-1], 1)
+
+    def test_best_run_ties_go_to_the_most_recent_run(self):
+        self.cards(2, start=T0, step=timedelta(days=1))
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        self.cards(2, lesson=other_lesson, start=T0 + timedelta(days=4), step=timedelta(days=1))
+        from .badges import best_run
+        days, start, end = best_run(History(self.user).day_events())
+        self.assertEqual((days, start, end),
+                         (2, (T0 + timedelta(days=4)).date(), (T0 + timedelta(days=5)).date()))
+
     def test_endpoint_requires_authentication_and_checks_on_post(self):
         self.assertEqual(self.client.post("/api/learning/badges/check/").status_code, 401)
         self.cards(1, start=datetime.now(timezone.utc) - timedelta(days=1))
@@ -241,7 +380,7 @@ class BadgeTests(TestCase):
         response = self.client.post("/api/learning/badges/check/")
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual((data["earned_count"], data["new_count"], len(data["badges"])), (2, 2, 34))
+        self.assertEqual((data["earned_count"], data["new_count"], len(data["badges"])), (2, 2, 41))
         self.assertIn("no-store", response["Cache-Control"])
         self.assertEqual(BadgeAward.objects.filter(user=self.user).count(), 2)
 
@@ -259,6 +398,6 @@ class CatalogueTests(TestCase):
             self.assertTrue((art / f"{badge.slug}.svg").exists(), f"{badge.slug}: missing art")
         self.assertEqual(sorted(p.stem for p in art.glob("*.svg")), sorted(slugs), "art without a catalogue entry")
 
-    def test_the_designed_mix_of_34_badges(self):
-        self.assertEqual(len(BADGES), 34)
-        self.assertEqual([sum(b.tier == t for b in BADGES) for t in (1, 2, 3)], [9, 12, 13])
+    def test_the_designed_mix_of_41_badges(self):
+        self.assertEqual(len(BADGES), 41)
+        self.assertEqual([sum(b.tier == t for b in BADGES) for t in (1, 2, 3)], [11, 14, 16])
