@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "apps.recipes",
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
+    "apps.knob_conservatory.apps.KnobConservatoryConfig",
 ]
 
 UNFOLD = {
