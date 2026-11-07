@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./badges.css";
 
 // One art file per badge slug; the API owns every name, tier and rule.
@@ -50,23 +50,45 @@ function Detail({ badge, onBack }) {
 export function BadgeCollection({ data, error, onClose }) {
   const [slug, setSlug] = useState(null);
   const selected = data?.badges.find((badge) => badge.slug === slug);
+  // Opening a detail pushes one history entry, so the phone's back button
+  // steps back to the list instead of leaving the whole app. Closing from
+  // the detail pops that entry again, keeping the garden history intact.
+  const detailOpen = useRef(false);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   useEffect(() => {
-    const onKey = (event) => { if (event.key === "Escape") { if (slug) setSlug(null); else onClose(); } };
+    const onPopState = (event) => {
+      const state = event.state?.grainsBadge;
+      if (state) { detailOpen.current = true; setSlug(state); }
+      else if (detailOpen.current) { detailOpen.current = false; setSlug(null); }
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key !== "Escape") return;
+      if (detailOpen.current) window.history.back();
+      else onCloseRef.current();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [slug, onClose]);
-  return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+  }, []);
+  const openDetail = (next) => { window.history.pushState({ grainsBadge: next }, ""); detailOpen.current = true; setSlug(next); };
+  // From the detail, closing pops its history entry and shuts the modal.
+  const close = () => { if (detailOpen.current) { detailOpen.current = false; window.history.back(); } onCloseRef.current(); };
+  return <div className="grains-modal-backdrop leaderboard-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}>
     <aside className="grains-leaderboard grains-badges" role="dialog" aria-modal="true" aria-label="Badges">
-      <div className="grains-leaderboard-head"><div><p>KEEPSAKES FROM YOUR GARDEN</p><h2>Badges</h2></div><button className="grains-close" onClick={onClose} aria-label="Close badges">×</button></div>
+      <div className="grains-leaderboard-head"><div><p>KEEPSAKES FROM YOUR GARDEN</p><h2>Badges</h2></div><button className="grains-close" onClick={close} aria-label="Close badges">×</button></div>
       {error && !data && <p className="grains-empty-ranking" role="alert">{error}</p>}
       {!data && !error && <p className="grains-empty-ranking">Loading your badges…</p>}
-      {data && selected && <Detail badge={selected} onBack={() => setSlug(null)} />}
+      {data && selected && <Detail badge={selected} onBack={() => window.history.back()} />}
       {data && !selected && <>
         <p className="grains-badges-summary"><strong>{data.earned_count}</strong> of {data.badges.length} collected{data.new_count > 0 && <> · <span className="new-note">{data.new_count} new in the last 7 days</span></>}</p>
         {familiesOf(data.badges).map((family) => {
           const group = data.badges.filter((badge) => badge.family === family);
           return <section key={family} className="grains-badge-family"><h3>{family}<small>{group.filter((badge) => badge.earned).length} / {group.length}</small></h3>
-            <div className="grains-badge-grid">{group.map((badge) => <button key={badge.slug} className={badge.earned ? "grains-badge-tile earned" : "grains-badge-tile"} onClick={() => setSlug(badge.slug)}
+            <div className="grains-badge-grid">{group.map((badge) => <button key={badge.slug} className={badge.earned ? "grains-badge-tile earned" : "grains-badge-tile"} onClick={() => openDetail(badge.slug)}
               aria-label={`${badge.name}, ${badge.earned ? "earned" : "not earned yet"}${badge.new ? ", new" : ""}`}>
               <Art badge={badge} />{badge.new && <span className="grains-new-sticker">NEW</span>}<span className="grains-badge-name">{badge.name}</span></button>)}</div></section>;
         })}
