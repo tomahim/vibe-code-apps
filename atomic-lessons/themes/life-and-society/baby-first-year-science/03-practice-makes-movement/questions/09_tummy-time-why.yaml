@@ -8,11 +8,11 @@ choices:
   - id: 039d9cd1-0611-421b-8e52-5d6592690fb2
     text: "Rolling, crawling and later milestones"
   - id: 7e89d4f1-0fbc-45d1-be84-1bbdae9ac2d4
-    text: "Sleeping through the night"
+    text: "Sleeping through the night without waking"
   - id: cc39662b-5b58-4f5a-9dc5-985b4e8d0bc9
-    text: "Digestion only"
+    text: "Digestion and the first solid foods"
   - id: 064676da-e266-4667-a1c6-633092874e9f
-    text: "Smiling"
+    text: "Smiling and early social cooing"
 correct_choice_ids:
   - 039d9cd1-0611-421b-8e52-5d6592690fb2
 explanation: "From the prone position, head lifting and pushing up build the strength later motor skills require."

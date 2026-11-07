@@ -8,11 +8,11 @@ choices:
   - id: d41cbdeb-c8da-4192-bf06-21acb529b8fe
     text: "Engaged with responsive partners"
   - id: aa51eae2-23f4-4204-89ff-2de18f7c5a9f
-    text: "Alone and silent"
+    text: "Alone and silent in a quiet room"
   - id: 9609e508-acca-483d-8ed8-b4413e0dae9a
-    text: "Asleep"
+    text: "Asleep in their cot at night"
   - id: ddd7acc7-6e04-4309-9bd8-eed4b8b1e81e
-    text: "Watching screens"
+    text: "Watching screens with the sound on"
 correct_choice_ids:
   - d41cbdeb-c8da-4192-bf06-21acb529b8fe
 explanation: "Babbling is social; contingent caregiver replies push vocalizations toward more mature forms."

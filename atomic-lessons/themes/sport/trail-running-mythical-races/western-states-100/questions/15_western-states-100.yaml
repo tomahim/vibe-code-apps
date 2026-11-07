@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: "Which later race was modelled on Western States and Leadville?"
 choices:
   - id: 6763ce54-6ef6-4ce7-8975-c5737561905b
-    text: "Pikes Peak"
+    text: "Pikes Peak in Colorado"
   - id: e9651b3b-5de7-4f60-b552-4494ecbcade9
     text: "Les Templiers in France"
   - id: 13be9fd0-f198-43b1-a70a-278c366d926c
-    text: "Barkley"
+    text: "Barkley in Tennessee"
   - id: e37e96c9-844f-4999-a759-cb9dfad5c2b6
-    text: "Sierre-Zinal"
+    text: "Sierre-Zinal in Switzerland"
 correct_choice_ids:
   - e9651b3b-5de7-4f60-b552-4494ecbcade9
 explanation: "The founders of the Templiers trail used those two races as models."

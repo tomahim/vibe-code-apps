@@ -8,11 +8,11 @@ choices:
   - id: 50f64371-e2f9-46d1-9383-b6b0e8632baa
     text: "Los Llanos de Aridane"
   - id: 6a239b78-5847-4ce9-ad6c-a1d7e23295e0
-    text: "Fuencaliente"
+    text: "Fuencaliente, in the south"
   - id: 4648e733-a31d-49d0-b05e-e62783f34bfc
-    text: "Santa Cruz"
+    text: "Santa Cruz, the capital"
   - id: eeca6ce2-51b0-42a7-8d09-874f383a257a
-    text: "Tazacorte"
+    text: "Tazacorte, on the coast"
 correct_choice_ids:
   - 50f64371-e2f9-46d1-9383-b6b0e8632baa
 explanation: "The finish is in the Plaza de Espana."

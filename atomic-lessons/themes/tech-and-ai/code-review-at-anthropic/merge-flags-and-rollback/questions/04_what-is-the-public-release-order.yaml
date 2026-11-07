@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: What is the public release order?
 choices:
 - id: 039e62a4-ddf6-4c93-bdb2-041068d97386
-  text: The latest channel first, with the stable channel trailing it
+  text: "The latest channel first, stable trailing behind it"
 - id: 515ac940-fbea-4925-a283-c36cd8d9f117
-  text: Stable first, latest second
+  text: "Stable first and the latest channel a week or so later"
 - id: 2f854690-7dd8-4426-8003-fa84434fb1ad
-  text: Everything simultaneously
+  text: "Everything simultaneously on a fixed date for all users"
 - id: 4fcea919-f8be-4b2d-a1f7-62785df05df1
-  text: Alphabetical by username
+  text: "Alphabetical by the username of the author of the change"
 correct_choice_ids:
 - 039e62a4-ddf6-4c93-bdb2-041068d97386
 explanation: Public releases go to the latest channel first, and the stable channel trails it, so problems surface with a

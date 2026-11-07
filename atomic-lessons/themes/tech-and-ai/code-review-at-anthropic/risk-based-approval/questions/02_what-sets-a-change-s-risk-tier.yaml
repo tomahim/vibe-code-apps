@@ -8,11 +8,11 @@ choices:
 - id: a2bfc401-62c4-4cef-8543-19b1f3719b66
   text: A classifier reads the change itself, not the author's seniority
 - id: 144e5804-5979-423d-a58a-449dd29dd505
-  text: Whoever opens the PR picks it
+  text: "Whoever opens the PR picks the tier by hand when needed"
 - id: 84dbf868-32ff-4c51-8e1f-ff908743e14a
-  text: The day of the week
+  text: "The day of the week on which the PR is opened by the author"
 - id: 36545d20-eba9-4360-bbe2-8ebd9d69c183
-  text: The size of the team
+  text: "The size of the team that owns the code touched by the change"
 correct_choice_ids:
 - a2bfc401-62c4-4cef-8543-19b1f3719b66
 explanation: 'The change sets the tier, not the author: a classifier reads the change and picks its risk tier, and a second

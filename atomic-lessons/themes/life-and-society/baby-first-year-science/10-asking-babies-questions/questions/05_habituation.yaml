@@ -8,11 +8,11 @@ choices:
   - id: 9bbd8329-7bdc-4692-9ce8-ece0abeef5d1
     text: "Looks less over time, then perks up for something new"
   - id: 16463053-a37d-4346-8fe9-e872ef057688
-    text: "Looks longer each time"
+    text: "Looks longer each time, with more interest"
   - id: 47a3cfa6-4208-4131-9554-088fb735dbc2
-    text: "Falls asleep immediately"
+    text: "Falls asleep immediately after the first showing"
   - id: e5183b23-2520-4147-86b1-5149f2620c72
-    text: "Cries increasingly"
+    text: "Cries more and more with each repeat"
 correct_choice_ids:
   - 9bbd8329-7bdc-4692-9ce8-ece0abeef5d1
 explanation: "Declining looking time shows boredom; the rebound for a changed stimulus reveals discrimination."

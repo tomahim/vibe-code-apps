@@ -10,7 +10,7 @@ choices:
 - id: 08739e50-0b4b-4eba-be62-b86b4a2da16b
   text: March 2017, before the attack
 - id: 56fa1dfa-009d-4453-a036-b6f304e2e8d7
-  text: In 2010
+  text: "In 2010, years before the attack"
 - id: be69dc40-6f9a-4b5e-833a-49a07c2c40a3
   text: 12 May 2017, after the attack
 correct_choice_ids:

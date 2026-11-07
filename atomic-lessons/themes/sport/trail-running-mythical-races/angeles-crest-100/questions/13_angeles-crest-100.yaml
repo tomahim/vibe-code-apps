@@ -8,11 +8,11 @@ choices:
   - id: 6741a94a-b453-4dca-a713-572a135751bd
     text: "It started and finished in Altadena"
   - id: 96b92e98-cb22-4a38-a440-d1ede775e7ee
-    text: "It was held in July"
+    text: "It was held in July instead of autumn"
   - id: 0340b31e-77f4-4e12-b43c-144bed74660a
-    text: "It was cancelled"
+    text: "It was cancelled and replaced by a virtual race"
   - id: 7fb17b1d-a5d9-47d8-97a4-5f4dedd347b6
-    text: "It was held in Utah"
+    text: "It was held in Utah, on new trails"
 correct_choice_ids:
   - 6741a94a-b453-4dca-a713-572a135751bd
 explanation: "For the first time it started and finished at Loma Alta Park."

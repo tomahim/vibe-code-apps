@@ -10,9 +10,9 @@ choices:
   - id: 5551d743-24b8-43a7-b5f4-7f1153da5771
     text: "Parameters are numerical values chosen to fit the model to data."
   - id: 39b566c7-450f-476a-b7c3-ce479e3d711f
-    text: "Training adjusts parameters inside a structure selected beforehand."
+    text: "Training adjusts parameters inside a structure chosen beforehand."
   - id: adf24dea-2adc-43fb-8980-ce50ba344e76
-    text: "A model can fit known examples yet fail on new ones."
+    text: "A model can fit known examples yet still fail on new ones."
 correct_choice_ids:
   - adf24dea-2adc-43fb-8980-ce50ba344e76
 explanation: "A model can fit known examples yet fail on new ones. Testing beyond its training examples is necessary to judge usefulness. Picture a curve that passes exactly through five measured points but swings wildly between them. Its training fit is perfect while its predictions are poor."

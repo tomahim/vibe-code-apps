@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: What do the good REVIEW.md files ask for?
 choices:
 - id: 1a62b263-939a-4c9c-b6eb-64a916e9ad3d
-  text: What failure looks like, capped nits, paths to skip, and file-and-line evidence
+  text: "What failure looks like, capped nits, paths to skip, and line evidence"
 - id: 24825bfb-73aa-46cf-9de4-e89659aaf68d
-  text: Long essays about code style
+  text: "Long essays about code style and naming habits in the repo, with examples"
 - id: 888d3531-1fc3-4f16-ae48-e1a6782fb142
-  text: A list of favorite reviewers
+  text: "A list of favorite reviewers and their working schedules"
 - id: 08600caa-5d74-40fe-a084-81d15d946fc2
-  text: Maximum possible findings on every PR
+  text: "The maximum possible number of findings on every PR"
 correct_choice_ids:
 - 1a62b263-939a-4c9c-b6eb-64a916e9ad3d
 explanation: Good REVIEW.md files say what failure looks like in that area, cap the nits, list paths to skip, and ask for

@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: How long does a road world champion wear the rainbow jersey?
 choices:
 - id: a8d7810c-d930-495a-aeb5-869cfecc8bf9
-  text: One day
+  text: "One day, until the next race"
 - id: 1128ce60-9dc1-41e9-a53e-ac9e2c29a3e2
   text: Until the next championships
 - id: a121b2fb-3b4a-4a7c-96db-f267172ccf30
-  text: For life
+  text: "For life, even after they retire"
 - id: 0ee1c8ab-5468-4ef4-8601-ac57979dd715
-  text: One month
+  text: "One month, until the next big race"
 correct_choice_ids:
 - 1128ce60-9dc1-41e9-a53e-ac9e2c29a3e2
 explanation: In races of that category until the next Worlds.

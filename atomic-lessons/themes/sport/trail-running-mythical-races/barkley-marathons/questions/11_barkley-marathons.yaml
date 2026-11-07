@@ -8,11 +8,11 @@ choices:
   - id: 96e6a406-8a43-4086-9735-4c889a701ec8
     text: "The Cumberland Mountains"
   - id: 42a29046-4e61-4dd9-8687-7151edc944d7
-    text: "The Rockies"
+    text: "The Rocky Mountains"
   - id: 57116565-f089-47fc-be29-f4fb32481a3c
-    text: "The Sierra Nevada"
+    text: "The Sierra Nevada range"
   - id: 1ed91eee-41c0-4ea5-bd94-6a328594bbd9
-    text: "The Alps"
+    text: "The Swiss Alps of Europe"
 correct_choice_ids:
   - 96e6a406-8a43-4086-9735-4c889a701ec8
 explanation: "Frozen Head is in the Cumberland range."

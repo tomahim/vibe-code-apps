@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: What was distinctive about the Sony Pictures attack compared with a typical data theft?
 choices:
 - id: 8d78d2a6-6cb1-4dd3-ad72-6b300b82be7a
-  text: It had no effect on operations
+  text: "It had no effect on operations, only on email"
 - id: 26b2a8d5-86e1-4337-9409-45b1fbfdedbc
-  text: It combined data theft with destructive malware and public leaks
+  text: "It combined data theft with destructive malware and leaks"
 - id: fab029b1-fd15-496b-9e69-383a0c506a3a
-  text: It only stole a small number of passwords
+  text: "It only stole a small number of passwords from staff"
 - id: cecd4bcb-3e04-4c9d-81e9-e7a6ae63bd3e
-  text: It was done by a single customer
+  text: "It was done by a single unhappy customer of the studio"
 correct_choice_ids:
 - 26b2a8d5-86e1-4337-9409-45b1fbfdedbc
 explanation: The FBI described destructive malware, theft of data and threats.

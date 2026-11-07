@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: How should the Russia attribution be described?
 choices:
 - id: 16595543-4d79-45f9-b253-5857d6b6d5d4
-  text: A decision by the electricity operators alone
+  text: "A decision made by the electricity operators alone"
 - id: 8c414757-5b73-4306-970d-4fe6b5284531
-  text: A purely private rumour
+  text: "A purely private rumour spread on social media by users"
 - id: 6d7afbe4-11f5-4f3f-89e1-afa40c5a1bd0
-  text: An official assessment by the US government, with Ukrainian officials also blaming Russia
+  text: "An official US assessment, with Ukraine also blaming Russia"
 - id: 13aed666-81d8-49e7-9edb-9c2e6e16115f
-  text: A confirmed court verdict
+  text: "A confirmed court verdict in a Russian court trial"
 correct_choice_ids:
 - 6d7afbe4-11f5-4f3f-89e1-afa40c5a1bd0
 explanation: Governments attributed it, partly using non-public evidence.

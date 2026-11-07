@@ -8,9 +8,9 @@ choices:
   - id: 9a00e4dd-1744-4d2e-8bd6-1c354fc8dda7
     text: "Browsers removed DigiNotar from their trusted CA lists"
   - id: 1a7264db-2386-47f1-8aa4-557ec9700216
-    text: "Users were told to switch off encryption"
+    text: "Users were told to switch off encryption in their browsers"
   - id: 9aedf7db-639b-4f52-bec1-418c13535828
-    text: "All websites were closed for a week"
+    text: "All websites were closed for a full week"
   - id: 8a2656d1-51e4-483d-8c1e-9f63060f363d
     text: "Users changed their passwords only"
 correct_choice_ids:

@@ -8,11 +8,11 @@ choices:
 - id: c70bc61d-8257-4f98-a0f7-0cabbdd1347f
   text: The adversary showed patience, operational security and complex tradecraft
 - id: 3db0aa42-a21d-41ef-ad55-43e07a4c20ee
-  text: It displayed a large red warning
+  text: "It displayed a large red warning on every screen in the whole agency"
 - id: 45f7087e-ec48-4c71-9db3-77120d6050fc
-  text: It disabled the internet worldwide
+  text: "It disabled the internet worldwide for a few hours at a time each day"
 - id: d7be4066-e505-4d03-a1e6-7e33b10e1c94
-  text: It was written on paper
+  text: "It was written on paper"
 correct_choice_ids:
 - c70bc61d-8257-4f98-a0f7-0cabbdd1347f
 explanation: CISA's alert describes patience, operational security and complex tradecraft.

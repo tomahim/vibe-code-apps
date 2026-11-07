@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: What made the 1980 Liège-Bastogne-Liège legendary?
 choices:
 - id: 4349ed2e-1ca8-4d08-a87a-27887e93c03a
-  text: A photo finish
+  text: "A photo finish between two riders"
 - id: c099558a-e7f4-4cbe-a6c8-23459a5a383c
   text: A snowstorm and Hinault's solo win
 - id: 118b68aa-9168-4cd8-938b-0cd38b6080bf
-  text: A 50-rider crash
+  text: "A 50-rider crash on the final climb"
 - id: 592562ba-8227-41b4-b05a-ff3dabd1791b
-  text: A record speed
+  text: "A record average speed for the race"
 correct_choice_ids:
 - c099558a-e7f4-4cbe-a6c8-23459a5a383c
 explanation: Snow cut the field to about one finisher in eight; Hinault won by nearly ten minutes.

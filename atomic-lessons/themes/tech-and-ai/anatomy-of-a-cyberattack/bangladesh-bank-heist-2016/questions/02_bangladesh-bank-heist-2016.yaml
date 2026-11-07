@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: What stopped one large transfer?
 choices:
 - id: b899c17d-0af1-41b6-95b4-c4f8aeae7425
-  text: A court order
+  text: "A court order obtained by the recipient of the funds"
 - id: 522c9565-a687-4bc1-8fd2-0006e549f934
-  text: A misspelling in the recipient name noticed by an intermediary bank
+  text: "A misspelling in the recipient name caught by a bank"
 - id: 8d482833-b1fe-4e9c-b8f9-4543f1fc114d
-  text: A power failure
+  text: "A power failure at the receiving bank during the night"
 - id: ef18f5cc-9121-4640-ad00-3829e2513a49
-  text: A customer complaint
+  text: "A customer complaint filed with the sender's bank"
 correct_choice_ids:
 - 522c9565-a687-4bc1-8fd2-0006e549f934
 explanation: A $20 million payment was questioned after "foundation" was misspelled as "fandation".

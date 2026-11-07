@@ -10,7 +10,7 @@ choices:
   - id: 8a060726-3595-4e23-9889-f0fb8399f4ae
     text: "It was given to a Kings rookie"
   - id: 4524ef7e-3268-42a6-bb63-2f02d08e5aad
-    text: "It was banned"
+    text: "It was banned by the league"
   - id: b2ae796b-17fa-4f91-bf37-2475ca74d554
     text: "It was retired in Edmonton only"
 correct_choice_ids:

@@ -8,11 +8,11 @@ choices:
   - id: 397f94c5-ce11-49c6-9689-feb4997edf77
     text: "When it forms a stable sound-meaning pairing"
   - id: 1130ef97-35e4-4359-be01-9445094c2008
-    text: "After 20 uses"
+    text: "After exactly 20 uses in a single day"
   - id: cf72dcce-cb2f-4b4e-abaa-2e17e643dbe1
-    text: "Only after 12 months"
+    text: "Only after the first birthday at 12 months"
   - id: c52d4f84-288f-449b-82df-507d062da953
-    text: "When it is written down"
+    text: "When a parent writes it down in a diary"
 correct_choice_ids:
   - 397f94c5-ce11-49c6-9689-feb4997edf77
 explanation: "The babble-to-word boundary is blurry; a stable pairing of a sound with a meaning is what counts."

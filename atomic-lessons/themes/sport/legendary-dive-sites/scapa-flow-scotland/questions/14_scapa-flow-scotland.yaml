@@ -6,11 +6,11 @@ after_card_position: 8
 prompt: "Where do the remaining wrecks lie?"
 choices:
   - id: cf66ca34-7af1-4b39-bc7d-7c6cad541670
-    text: "On dry land in Orkney"
+    text: "On dry land in Orkney, near the shore"
   - id: 1455c790-86b7-426c-add0-9314ee6a3bad
-    text: "Floating at the surface"
+    text: "Floating at the surface, tied to buoys"
   - id: b74ab10c-9d3f-47ac-8a06-d58b8b24d60a
-    text: "Inside a museum"
+    text: "Inside a museum in Kirkwall"
   - id: c4747a0b-ca96-440c-8cda-5a4725232387
     text: "On the seabed, some in deeper water"
 correct_choice_ids:

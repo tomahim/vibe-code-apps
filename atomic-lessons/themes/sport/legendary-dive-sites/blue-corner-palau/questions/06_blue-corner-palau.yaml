@@ -6,11 +6,11 @@ after_card_position: 4
 prompt: "Why does a reef point attract many fish?"
 choices:
   - id: 9b8f7206-ed17-4e76-b94e-7c82101b8106
-    text: "It is warmer than anywhere else"
+    text: "It is warmer than anywhere else in the sea"
   - id: a4e22939-d83d-461c-bb63-1fa839be54c0
-    text: "It has no predators"
+    text: "It has no predators on the reef"
   - id: 8c650f93-bb09-48fa-bd17-d2d77de67f7e
-    text: "It is covered in ice"
+    text: "It is covered in ice for part of the year"
   - id: 64d5dbd0-9425-4e24-af07-212b3451bee5
     text: "Currents carry plankton and food across it"
 correct_choice_ids:

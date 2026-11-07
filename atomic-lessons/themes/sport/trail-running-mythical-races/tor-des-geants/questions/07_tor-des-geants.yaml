@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: "What is special about the race stages?"
 choices:
   - id: d88a5156-9b47-48c2-abeb-461e222cba6b
-    text: "It has 10 stages"
+    text: "It has 10 stages with fixed night stops"
   - id: 10b01eb8-95fd-42ae-81a2-a865f2957f0a
     text: "There are no compulsory stages"
   - id: 0044de96-47a7-4256-9307-2464d358f8d9
-    text: "It is run on a track"
+    text: "It is run on a track around a stadium"
   - id: 66f0bc76-af08-4fb8-abe9-5ad7e4deb8e6
-    text: "It stops every night"
+    text: "It stops every night for a full rest"
 correct_choice_ids:
   - 10b01eb8-95fd-42ae-81a2-a865f2957f0a
 explanation: "Runners choose when to stop."

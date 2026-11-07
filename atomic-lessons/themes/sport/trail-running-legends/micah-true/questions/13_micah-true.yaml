@@ -13,7 +13,7 @@ choices:
   - id: 3e225e68-e0ac-440b-8d56-051a4e6e5bff
     text: "Once a Runner"
   - id: 64fdfdd4-6d47-4865-bdf8-103ba948e1d3
-    text: "Running with the Kenyans"
+    text: "Ultramarathon Man"
 correct_choice_ids:
   - ce2ca549-3ffd-4c0c-9243-39d32007304a
 explanation: "Christopher McDougall wrote it in 2009."

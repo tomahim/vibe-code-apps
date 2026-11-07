@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: "Why is it called a wiper in disguise?"
 choices:
   - id: 01689089-3bb4-4094-9a55-e8cfd8a62f09
-    text: "It deleted only temporary files"
+    text: "It deleted only temporary files on the disk"
   - id: 26127a31-363e-4b6f-8555-3aa5bb87af3e
-    text: "It showed a ransom note but could not provide a working decryption path"
+    text: "It showed a ransom note but gave no working way to decrypt"
   - id: b528a6b5-bd0f-4747-b42a-ac3b7d9ba337
-    text: "It was a hardware device"
+    text: "It was a hardware device plugged into the company network"
   - id: 8ecfe98e-5724-49c8-aa9c-96f930664eb9
-    text: "It only showed advertisements"
+    text: "It only showed advertisements on the screen of the user"
 correct_choice_ids:
   - 26127a31-363e-4b6f-8555-3aa5bb87af3e
 explanation: "Investigators concluded that recovery was not the purpose."

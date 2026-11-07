@@ -9,9 +9,9 @@ choices:
   - id: 05ec129c-f44c-45ca-aae5-6a2df8350486
     text: "Mont-Blanc 90 km"
   - id: cb78c44c-7b02-43d5-915c-8825a2b7ecf9
-    text: "OCC"
+    text: "The OCC race"
   - id: 1b706e6d-19f8-4ec6-84e5-c58a1d600784
-    text: "CCC"
+    text: "The CCC race"
   - id: 2bc7e8fd-d08f-4aef-b000-8d8ad8c77f16
     text: "Mont-Blanc 80 km"
 correct_choice_ids:

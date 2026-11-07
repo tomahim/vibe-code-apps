@@ -6,11 +6,11 @@ after_card_position: 7
 prompt: "What did the Justice Department announce in June 2021?"
 choices:
   - id: 22b30f17-1d22-45ce-846d-5c1e92681394
-    text: "It arrested the whole DarkSide group"
+    text: "It arrested the whole DarkSide group abroad"
   - id: df83ddbf-0721-40b0-bcad-d7d03991dc83
-    text: "It closed the pipeline"
+    text: "It closed the pipeline for a second week"
   - id: f72c48d7-bcfa-412e-a8c0-7066f2f12087
-    text: "It paid a larger ransom"
+    text: "It paid a larger ransom to the attackers"
   - id: 4c000034-e76e-4595-8ce0-f7b33d8e5225
     text: "It recovered about 63.7 Bitcoin of the ransom"
 correct_choice_ids:

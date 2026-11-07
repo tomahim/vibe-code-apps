@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: "Where is most of the visible wildlife found?"
 choices:
   - id: ea078049-5c39-48c9-8774-4c59b4994768
-    text: "On the sulfide-rich floor"
+    text: "On the sulfide-rich floor of the hole"
   - id: a2dc156f-4df2-4aed-b4e0-659f25aea2c8
-    text: "In the middle of the hole at 60 m only"
+    text: "In the middle of the open hole itself"
   - id: 0cd8060a-1da3-4d5f-ad4f-31a813f95b32
-    text: "Inside the stalactites"
+    text: "Inside the stalactites deep down"
   - id: 4ac475bd-af5e-448a-9731-206ce3afa20f
-    text: "On the shallow reef rim"
+    text: "On the shallow reef rim of the hole"
 correct_choice_ids:
   - 4ac475bd-af5e-448a-9731-206ce3afa20f
 explanation: "The rim, from 5 to about 10 m, supports corals, groupers and reef sharks."

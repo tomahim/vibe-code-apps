@@ -6,11 +6,11 @@ after_card_position: 8
 prompt: "What is the main idea of the race?"
 choices:
   - id: 376cea29-9e75-4b1a-9d95-970989346b50
-    text: "Underground tunnels"
+    text: "Underground tunnels beneath the old mines"
   - id: 72a66075-3b3b-4a37-a030-dd138fe5b202
-    text: "Flat road racing"
+    text: "Flat road racing through the valley towns"
   - id: 9151f476-b073-4187-9d9e-620a81cdb332
-    text: "Desert stages"
+    text: "Desert stages across sand and dunes"
   - id: a2d2529b-1fa4-4aec-84b6-73bdcc59dea2
     text: "Scenery and technical mountain trails"
 correct_choice_ids:

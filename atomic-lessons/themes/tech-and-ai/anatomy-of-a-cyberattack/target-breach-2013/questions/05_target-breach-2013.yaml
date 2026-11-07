@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: "What was one financial result in 2017?"
 choices:
   - id: f49e28bb-0567-4250-9def-d62b2bcf4742
-    text: "An $18.5 million settlement with 47 states and the District of Columbia"
+    text: "An $18.5 million settlement with 47 states and D.C."
   - id: e6091e85-2a35-46b0-9abf-d3f9e2a5ac57
-    text: "A ban on all card payments"
+    text: "A ban on all card payments at the chain for ten years"
   - id: 525a9e0b-05e6-48dd-a46d-4e7c90b67d8a
-    text: "A $1 billion fine from the Senate"
+    text: "A $1 billion fine ordered by the US Senate against the chain"
   - id: 902cc090-b2d4-477e-86a6-94d126f62bea
-    text: "A free card replacement for all citizens"
+    text: "A free card replacement for all citizens of the 47 states"
 correct_choice_ids:
   - f49e28bb-0567-4250-9def-d62b2bcf4742
 explanation: "Target settled with state attorneys general in 2017."

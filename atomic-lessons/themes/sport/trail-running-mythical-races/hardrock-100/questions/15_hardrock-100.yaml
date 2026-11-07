@@ -8,9 +8,9 @@ choices:
   - id: 5d5dd7a3-2dab-4e26-9738-a344563a85ab
     text: "The course is closed to the public"
   - id: 7b719aec-daf8-4392-979f-00aa8b17c829
-    text: "The course closes at noon"
+    text: "The course closes at noon each day"
   - id: 8df48e39-dfed-4410-a5d2-1153b3cf12cc
-    text: "Runners choose any route"
+    text: "Runners choose any route they like"
   - id: 0d062b4a-88dc-4e70-b9cf-7045961d7914
     text: "Runners must follow the specified route"
 correct_choice_ids:

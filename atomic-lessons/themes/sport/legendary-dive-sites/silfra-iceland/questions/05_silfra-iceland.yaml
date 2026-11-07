@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: "What causes new cracks and fissures to open in the \u00deingvellir valley?"
 choices:
   - id: 80808d53-aef9-49e5-b886-66d2fce7e59d
-    text: "Volcanic ash"
+    text: "Volcanic ash falling on the valley floor"
   - id: ab0df6e3-2d58-427a-ab3d-c7ace43bd37e
     text: "Periodic major earthquakes"
   - id: 3ffc0fed-be83-4e71-bd77-5ea777addcdc
-    text: "Tides"
+    text: "Tides from the nearby sea"
   - id: db4aa0e8-21ae-46df-9069-0206b160f4d2
-    text: "Meteor impacts"
+    text: "Meteor impacts in the highlands"
 correct_choice_ids:
   - ab0df6e3-2d58-427a-ab3d-c7ace43bd37e
 explanation: "Tension between the pulling plates is released in earthquakes about every ten years."

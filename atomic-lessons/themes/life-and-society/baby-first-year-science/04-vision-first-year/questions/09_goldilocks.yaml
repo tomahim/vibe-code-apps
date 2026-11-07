@@ -8,11 +8,11 @@ choices:
   - id: 4b47bcd1-a837-481b-a236-87bdeed4f4fc
     text: "Moderately complex: neither too easy nor too hard"
   - id: 9069ebcd-f6dd-40b6-a1c5-c7a8a93fc1b7
-    text: "Always the simplest available"
+    text: "Always the very simplest ones available to them"
   - id: 67634268-7ac3-409a-9620-20a2c5c5bf22
-    text: "Always the most complex available"
+    text: "Always the most complex ones available to them"
   - id: 8cabc88e-d8e0-4168-b133-2d18b573cf47
-    text: "Completely random"
+    text: "Completely random ones, with no pattern"
 correct_choice_ids:
   - 4b47bcd1-a837-481b-a236-87bdeed4f4fc
 explanation: "Babies sample the world at the edge of their current ability, which steers their own learning."

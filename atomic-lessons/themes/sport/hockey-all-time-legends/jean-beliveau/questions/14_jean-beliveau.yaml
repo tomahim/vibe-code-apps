@@ -8,11 +8,11 @@ choices:
   - id: 01ba6289-191d-4fef-a3b4-941147c3e647
     text: "Scored his 500th goal and won the Cup"
   - id: 1868b5fb-414d-48cf-afa7-7e66b027bea0
-    text: "Played his first game"
+    text: "Played his first game in the league"
   - id: 81235ea3-8923-4418-bc2f-7449d3f2c67b
-    text: "Won the scoring title"
+    text: "Won the scoring title that year"
   - id: e9aeedb0-d23b-4e56-8d19-f43e967eb990
-    text: "Became a coach"
+    text: "Became a coach the next season"
 correct_choice_ids:
   - 01ba6289-191d-4fef-a3b4-941147c3e647
 explanation: "He scored his 500th goal in his final Stanley Cup season, 1970-71."

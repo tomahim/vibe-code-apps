@@ -8,11 +8,11 @@ choices:
   - id: d48c3712-0e10-4d7b-836c-4f94fd03984d
     text: "The start of two-way social exchange"
   - id: d70daa8f-b00b-49c8-bed3-b8bbbe6fb1f0
-    text: "Teething"
+    text: "Teething, which starts around the same age"
   - id: 3fda1ffa-aea4-4dcb-a7a0-f0a44d3358fd
-    text: "Hearing loss"
+    text: "Hearing loss, which needs a specialist visit"
   - id: 066f8e52-bc7d-488e-a91d-6f1c95d2c6a9
-    text: "Hunger"
+    text: "Hunger, which babies show with these cues"
 correct_choice_ids:
   - d48c3712-0e10-4d7b-836c-4f94fd03984d
 explanation: "Together they transform one-way care into protoconversation."

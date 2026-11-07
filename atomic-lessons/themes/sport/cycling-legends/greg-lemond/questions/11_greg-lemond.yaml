@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: Why is LeMond the only officially recognised American Tour winner?
 choices:
 - id: a8431e35-99c9-494a-8b48-738ca3ccfd3d
-  text: Other Americans never raced
+  text: "Other Americans never raced in the Tour"
 - id: 34aa21b5-513a-4b04-b0c3-b94bedabc78e
   text: Armstrong's titles were stripped for doping
 - id: 1ff98c20-d03c-4095-8555-66135843d645
-  text: He raced for a French team
+  text: "He raced for a French team in his career"
 - id: 4023dfe6-0a38-4e8f-9d73-f8e49dbf4240
-  text: He is a French citizen
+  text: "He is a French citizen with dual nationality"
 correct_choice_ids:
 - 34aa21b5-513a-4b04-b0c3-b94bedabc78e
 explanation: Lance Armstrong's seven titles were stripped in 2012.

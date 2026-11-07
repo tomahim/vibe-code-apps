@@ -8,11 +8,11 @@ choices:
 - id: 810ef8cf-e8dc-43f1-97e4-9ddff7b0873c
   text: Catching real bugs first, cutting review rounds second
 - id: 4ba48bc3-4268-4a47-b392-ac9d42e266e1
-  text: Cutting rounds first, bugs second
+  text: "Cutting rounds first, catching bugs second of all, at most"
 - id: 502fbe89-03fc-4ac4-8eca-6025ff0e1e42
-  text: Maximizing comment count
+  text: "Maximizing the number of comments left on each PR"
 - id: 0ea16c32-f446-4a1d-9207-f0f2272176f5
-  text: Approving everything quickly
+  text: "Approving everything quickly to save time for the authors"
 correct_choice_ids:
 - 810ef8cf-e8dc-43f1-97e4-9ddff7b0873c
 explanation: The priority, written down, is catching real bugs first and cutting review rounds second, which keeps recall

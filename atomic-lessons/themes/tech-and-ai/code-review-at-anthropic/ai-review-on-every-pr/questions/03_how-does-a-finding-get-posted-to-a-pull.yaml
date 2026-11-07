@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: How does a finding get posted to a pull request?
 choices:
 - id: 9cb645d9-207e-4989-aa52-907c3ae1a71d
-  text: Parallel agents hunt for bugs, and a separate group of verifiers votes on each finding first
+  text: "Parallel agents hunt for bugs, then verifiers vote on each finding first"
 - id: 30c55343-9e82-41d7-bc19-ca78446f5b5e
-  text: The first agent's opinion posts instantly
+  text: "The first agent's opinion posts instantly to the PR, unchecked"
 - id: c1eb8c61-3352-46af-ac6e-94364bb00b0e
-  text: A human posts every finding manually
+  text: "A human posts every finding by hand into the thread"
 - id: 214192c2-3dee-427e-bb76-d7d81bd6cab2
-  text: Findings post only after the merge
+  text: "Findings post only after the pull request has been merged"
 correct_choice_ids:
 - 9cb645d9-207e-4989-aa52-907c3ae1a71d
 explanation: Several agents hunt in parallel, then a separate group of verifier agents votes on each finding; it only posts

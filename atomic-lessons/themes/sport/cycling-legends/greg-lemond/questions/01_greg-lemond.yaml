@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: Where did Greg LeMond grow up?
 choices:
 - id: af93c6ff-593c-40a8-ba38-2c49d49a235a
-  text: Texas
+  text: "Texas and Oklahoma"
 - id: 8cf97b2b-0d0d-40a6-9b03-70963a50c91d
   text: California and Nevada
 - id: cd77e650-7137-4c05-a98e-57f2abc60955
-  text: Colorado
+  text: "Colorado and Utah"
 - id: 2b811907-6aa9-4132-81e9-cee6842d00b6
-  text: Florida
+  text: "Florida and Georgia"
 correct_choice_ids:
 - 8cf97b2b-0d0d-40a6-9b03-70963a50c91d
 explanation: Born in Lakewood, California, he grew up near Reno, Nevada.

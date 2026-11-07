@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: What did Anquetil promise before the 1961 Tour?
 choices:
 - id: 18a78fd5-d865-496b-8ff2-cf6b57005618
-  text: To win every stage
+  text: "To win every stage of the race"
 - id: ec34e9b9-a96e-4a3f-b1fa-e0b72c211100
-  text: To take yellow on day one and keep it to Paris
+  text: "To wear yellow from day one to Paris"
 - id: 95f07fae-9e68-4ace-b927-4cd989892deb
-  text: To win without a team
+  text: "To win without any help from a team"
 - id: deea3b6d-5a1d-4a34-b26f-ca1d935950ab
-  text: To retire after winning
+  text: "To retire straight after winning"
 correct_choice_ids:
 - ec34e9b9-a96e-4a3f-b1fa-e0b72c211100
 explanation: He took the yellow jersey on the first day and wore it all the way to Paris.

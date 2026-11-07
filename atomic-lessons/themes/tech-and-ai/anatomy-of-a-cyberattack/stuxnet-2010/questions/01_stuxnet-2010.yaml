@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: "What made Stuxnet unusual compared with most malware of its time?"
 choices:
   - id: e7dac45e-7423-4330-894d-388ef7db5f12
-    text: "It encrypted files for a ransom"
+    text: "It encrypted files and asked for a ransom payment"
   - id: ce1ed91d-82c9-46ff-9b08-60c1631501d7
-    text: "It only displayed advertisements"
+    text: "It only displayed advertisements on the screen of users"
   - id: fbd73b85-48a9-447c-8b19-bfe5b71038ef
-    text: "It aimed to alter physical industrial equipment through controllers"
+    text: "It aimed to alter physical equipment through controllers"
   - id: 1361985d-f756-4ac5-8372-c7f6c86d8eb0
-    text: "It stole credit card numbers from shops"
+    text: "It stole credit card numbers from shops and websites"
 correct_choice_ids:
   - fbd73b85-48a9-447c-8b19-bfe5b71038ef
 explanation: "Its payload targeted Siemens controllers and the machines they drive."

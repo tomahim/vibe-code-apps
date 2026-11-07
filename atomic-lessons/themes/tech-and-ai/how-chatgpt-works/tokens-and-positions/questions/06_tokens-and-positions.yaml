@@ -8,9 +8,9 @@ choices:
   - id: fbf14886-ba8b-4b93-a5df-d0e10f10f475
     text: "An embedding table maps token IDs to learned vectors."
   - id: d62ae9fa-b814-4b21-9226-61a74cd28857
-    text: "A sequence needs position information so the model can distinguish token order."
+    text: "A sequence needs position information so token order is distinguishable."
   - id: 16fdf843-ea9a-48f2-b6b3-6a065667a5ee
-    text: "The model processes a sequence of token representations, not just an isolated last word."
+    text: "The model processes a sequence of token representations, not an isolated last word."
   - id: ec6d884d-0623-435d-9ad3-fb193938f8b8
     text: "The essay's GPT-2 and GPT-3 dimensions are examples from its 2023 explanation."
 correct_choice_ids:

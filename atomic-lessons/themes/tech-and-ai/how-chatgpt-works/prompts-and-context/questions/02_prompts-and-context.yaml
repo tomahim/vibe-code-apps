@@ -6,11 +6,11 @@ after_card_position: 3
 prompt: "Can a described task influence output without a weight update?"
 choices:
   - id: 21e63a5f-7da8-4366-b916-db15e4b54ca6
-    text: "The words of a prompt become part of the input the model processes."
+    text: "The words of a prompt become part of the input the model processes for that answer."
   - id: 664f55bb-c7a5-41be-8a0a-d57ba2fd1c6c
-    text: "A few examples can establish a pattern for the next response."
+    text: "A few examples can establish a pattern for the next response in the same chat."
   - id: 92a1f20a-a7e9-49c0-9bce-73d54b709473
-    text: "Information supplied in a prompt can guide the current answer."
+    text: "Information supplied in a prompt can guide the current answer in a useful way."
   - id: 58865ba9-f6ad-46a8-b9c8-9282928aee32
     text: "Yes. A task described in the prompt can steer the current answer without updating weights."
 correct_choice_ids:

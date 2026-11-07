@@ -8,11 +8,11 @@ choices:
   - id: 195b9a2d-e2c6-4589-92ab-970654a2621c
     text: "Longer looking at events that break the pattern"
   - id: f2e5c9b1-756f-4a70-93a8-044750442368
-    text: "Faster sucking at normal events"
+    text: "Faster sucking at normal, expected events"
   - id: 38bd767b-7b43-4388-ba91-5f3332b16a2b
-    text: "Smiling at toys"
+    text: "Smiling at toys that move on their own"
   - id: 0cce114d-d034-48e9-a98e-459620213d12
-    text: "Falling asleep"
+    text: "Falling asleep during surprising events"
 correct_choice_ids:
   - 195b9a2d-e2c6-4589-92ab-970654a2621c
 explanation: "Babies look longer at impossible or surprising events, which researchers read as violated expectation."

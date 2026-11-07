@@ -10,9 +10,9 @@ choices:
   - id: 72962a11-c12d-4640-bbae-bf0acc96a884
     text: "100 assists in a season"
   - id: 15bd7d91-089b-40e1-bdaf-1e8bbb4b7c0e
-    text: "300 wins"
+    text: "300 career wins as a goalie"
   - id: 7f0514bd-4eab-4980-9a5c-f7421c366a1b
-    text: "1,000 points"
+    text: "1,000 career points"
 correct_choice_ids:
   - ce445dc3-a95a-4692-a049-f859fbede0e9
 explanation: "He was also first with 50 goals in 50 games."

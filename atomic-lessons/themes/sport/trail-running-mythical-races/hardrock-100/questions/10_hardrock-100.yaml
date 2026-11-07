@@ -8,9 +8,9 @@ choices:
   - id: f4a3d1aa-418a-499d-9024-937a9df1bc4f
     text: "The number of aid stations"
   - id: 92da1e02-53ca-4088-a498-58da8fec0ce4
-    text: "The month"
+    text: "The month it is held"
   - id: 3553d477-c78f-4415-ad1b-8555fc1f5c98
-    text: "The start town"
+    text: "The start town of the race"
   - id: b88843d1-82f8-48f6-89eb-121373aee270
     text: "The direction of the loop"
 correct_choice_ids:

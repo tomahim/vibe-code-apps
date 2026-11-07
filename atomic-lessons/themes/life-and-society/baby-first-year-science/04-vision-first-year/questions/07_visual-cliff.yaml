@@ -8,11 +8,11 @@ choices:
   - id: 0f565ca8-2e05-4aa1-8332-401e65134180
     text: "Perceive an apparent drop and hesitate to cross it"
   - id: 76670d32-8469-4cff-8120-d087ff8ac1d5
-    text: "Cannot see depth at all"
+    text: "Cannot see depth at all until they begin walking"
   - id: 28021912-c471-4691-82ee-8902ccd853ec
-    text: "Always cross without fear"
+    text: "Always cross at once, without any fear or pause"
   - id: 3716fe69-1802-4883-89e4-d21ff1608d7e
-    text: "Are born afraid of heights"
+    text: "Are born afraid of heights and so never cross"
 correct_choice_ids:
   - 0f565ca8-2e05-4aa1-8332-401e65134180
 explanation: "Gibson and Walk's glass platform tested crawling-age babies, revealing perceived depth, not an innate fear."

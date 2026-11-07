@@ -6,11 +6,11 @@ after_card_position: 2
 prompt: "What do the sea fans and soft corals on the wall tell you?"
 choices:
   - id: ef47e952-df33-43c1-a775-da591e710aee
-    text: "The wall is bare rock"
+    text: "The wall is bare rock with little life"
   - id: 822e6e5b-7c77-401c-971d-b30e5c30f7cd
-    text: "The water is polluted"
+    text: "The water is polluted and low in oxygen"
   - id: d65fc2ff-b1d6-4f58-978d-098b1a721094
-    text: "The wall is man-made"
+    text: "The wall is man-made and covered in concrete"
   - id: 22381265-5659-4979-8189-af585957f797
     text: "The reef is covered in varied corals"
 correct_choice_ids:

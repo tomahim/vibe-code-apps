@@ -7,13 +7,13 @@ after_card_position: 2
 prompt: "Which distance did Wyatt run at the 1996 Olympics?"
 choices:
   - id: be71c8ed-3d8c-43a9-99a8-4df744497787
-    text: "10,000 metres"
+    text: "10,000 metres on the track"
   - id: cd0c3b32-82e6-40e7-8f7f-ebab99680644
-    text: "5,000 metres"
+    text: "5,000 metres on the track"
   - id: a4a55aca-adcc-4a78-8029-63fa6350db7d
     text: "3,000 metres steeplechase"
   - id: 18f103a0-d52d-4d9c-ba90-d166f2df5a57
-    text: "Marathon"
+    text: "Marathon on the road"
 correct_choice_ids:
   - cd0c3b32-82e6-40e7-8f7f-ebab99680644
 explanation: "He ran the 5,000 metres in 1996."

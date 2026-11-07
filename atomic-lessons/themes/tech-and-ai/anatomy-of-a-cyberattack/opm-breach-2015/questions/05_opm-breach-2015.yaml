@@ -6,13 +6,13 @@ after_card_position: 7
 prompt: Which recommendation did the House committee make?
 choices:
 - id: 95c732e1-2093-49ca-9d4b-5f622fe304e5
-  text: Store all records in one system
+  text: "Store all records in one single central system, for speed"
 - id: 0d9c86f2-0ad5-4e6d-97b7-c9441ce33d7c
-  text: Remove the Inspector General
+  text: "Remove the Inspector General from the process of the review"
 - id: 2373ba95-4351-411b-a88f-003411170a00
-  text: Move toward zero trust and reduce use of Social Security numbers
+  text: "Move toward zero trust and cut use of Social Security numbers"
 - id: 8ebea914-7efd-4e12-8939-3107ca708aa2
-  text: Stop background investigations
+  text: "Stop background investigations for all staff for two years"
 correct_choice_ids:
 - 2373ba95-4351-411b-a88f-003411170a00
 explanation: These were among the committee's key recommendations.

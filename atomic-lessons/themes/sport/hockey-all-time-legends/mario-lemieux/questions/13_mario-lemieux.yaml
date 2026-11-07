@@ -10,9 +10,9 @@ choices:
   - id: 045b5482-897a-4d92-81b7-db3a3ae4e6b1
     text: "By buying them with endorsement money"
   - id: cf1c5467-ba72-4479-9487-4908ae959217
-    text: "By converting deferred salary into a share of the team"
+    text: "By converting deferred salary into a share"
   - id: 41d53665-fab6-4765-9127-33cf75325512
-    text: "By winning an auction against the NHL"
+    text: "By winning an auction run by the NHL"
 correct_choice_ids:
   - cf1c5467-ba72-4479-9487-4908ae959217
 explanation: "The club was bankrupt and Lemieux was owed deferred salary."

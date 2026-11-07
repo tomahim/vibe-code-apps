@@ -7,13 +7,13 @@ after_card_position: 4
 prompt: "Which New Zealand race did he win in 2017?"
 choices:
   - id: 4136f6a1-75d2-4d3a-bf39-50615983bdd2
-    text: "Zegama"
+    text: "The Zegama marathon in the Basque Country"
   - id: 54714b8f-4dba-4cd8-a28d-d13dd88dc7cb
-    text: "Tarawera Ultramarathon"
+    text: "The Tarawera Ultramarathon"
   - id: 62530b03-d743-4e51-aae3-f2ac42950ef2
-    text: "Lavaredo"
+    text: "The Lavaredo Ultra Trail in the Dolomites"
   - id: f8804544-4c79-4a26-9e06-6b5798de3d58
-    text: "Hardrock"
+    text: "The Hardrock 100 in Colorado"
 correct_choice_ids:
   - 54714b8f-4dba-4cd8-a28d-d13dd88dc7cb
 explanation: "He won Tarawera in 2017."

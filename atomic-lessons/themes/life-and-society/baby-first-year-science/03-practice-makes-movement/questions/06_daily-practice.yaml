@@ -10,9 +10,9 @@ choices:
   - id: ef8297fd-9bee-4fa0-aab9-f7a65a6397f0
     text: "Ten steps and one fall per day"
   - id: dee7f546-a50f-4556-9c05-17f7c0f5295e
-    text: "A hundred steps per week"
+    text: "About a hundred steps per week and no falls"
   - id: 25c4c4cf-8a81-4bf1-b107-6c0395b0dd7c
-    text: "No falls once walking starts"
+    text: "No falls once walking has started"
 correct_choice_ids:
   - 75b75466-2bdf-4876-954d-4cd27684065c
 explanation: "The volume of self-generated practice is enormous, which is exactly what calibrates the new skill."

@@ -8,11 +8,11 @@ choices:
   - id: 503bebdb-02f4-4678-a9b3-fb1b656ddba5
     text: "The Three Peaks of Lavaredo"
   - id: 65a9674d-8d93-4ebc-9e09-a342aca64914
-    text: "The Eiger"
+    text: "The Eiger, in the Bernese Alps"
   - id: 0fd7184a-6650-40fc-a7ed-386f0943a5ac
-    text: "Mont Blanc"
+    text: "Mont Blanc, in the French Alps"
   - id: e3b96afc-41ce-43c2-b665-73b5b531c092
-    text: "Mount Fuji"
+    text: "Mount Fuji, in central Japan"
 correct_choice_ids:
   - 503bebdb-02f4-4678-a9b3-fb1b656ddba5
 explanation: "It takes in the Three Peaks of Lavaredo."

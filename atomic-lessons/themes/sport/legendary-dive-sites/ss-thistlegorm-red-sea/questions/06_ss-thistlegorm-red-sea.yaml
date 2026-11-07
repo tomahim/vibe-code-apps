@@ -6,11 +6,11 @@ after_card_position: 4
 prompt: "What cargo was carried on deck and blown off by the explosion?"
 choices:
   - id: e8254db8-2fb4-43ed-b050-cbf5293cc181
-    text: "Two tanks"
+    text: "Two tanks lashed to the deck"
   - id: 9b28fdfe-9398-4627-a843-51006575621b
-    text: "Two aircraft"
+    text: "Two aircraft folded on the deck"
   - id: a25d7be4-0c40-44fc-b17d-38aecffc17fa
-    text: "Two lifeboats"
+    text: "Two lifeboats hanging from davits"
   - id: 6bef407b-c388-4d96-b2a3-da8b361e8561
     text: "Two steam locomotives"
 correct_choice_ids:

@@ -8,11 +8,11 @@ choices:
   - id: 80539245-0dae-426c-89f1-37f12f46bc94
     text: "Bruins owner Weston Adams"
   - id: 43a1fee8-eacd-4da5-82d5-6747f7522816
-    text: "Coach Dick Irvin"
+    text: "Canadiens coach Dick Irvin"
   - id: f95aeeef-e7f9-4b23-8f6c-bd9cd639feea
     text: "NHL president Clarence Campbell"
   - id: 5725016f-02f3-4c4d-ab2b-6279c9d18786
-    text: "Referee Red Storey"
+    text: "Referee Red Storey at the game"
 correct_choice_ids:
   - f95aeeef-e7f9-4b23-8f6c-bd9cd639feea
 explanation: "Clarence Campbell suspended him for three games and the playoffs."

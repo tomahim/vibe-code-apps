@@ -6,11 +6,11 @@ after_card_position: 2
 prompt: Where was Miguel Indurain born?
 choices:
 - id: 47d7eb12-44f4-4b84-852f-2fd6059cb9a6
-  text: Catalonia
+  text: "Catalonia, in north-east Spain"
 - id: 742ab287-c24b-4846-88ac-42fe53ac7ee1
-  text: Navarra
+  text: "Navarra, in northern Spain"
 - id: 7941a9e5-a60b-469f-91d1-59e14b36ffa8
-  text: Andalusia
+  text: "Andalusia, in southern Spain"
 - id: 3e182e34-9506-4f5c-9f84-0574c6d78d75
   text: The Basque city of Bilbao
 correct_choice_ids:

@@ -7,13 +7,13 @@ after_card_position: 2
 prompt: "What was D'Haene's job before becoming a wine grower?"
 choices:
   - id: f36d4fae-f22b-46c0-89bc-9a75bc67685c
-    text: "Physiotherapist"
+    text: "A physiotherapist by trade"
   - id: db0ba1b0-4739-48de-b8d7-58613377dd0a
-    text: "Teacher"
+    text: "A teacher by trade"
   - id: cf919152-0731-4a14-ad16-b01ee7912d27
-    text: "Pilot"
+    text: "A pilot by trade"
   - id: ecc60a36-ee69-4ecc-93c3-617030196730
-    text: "Chef"
+    text: "A chef by trade"
 correct_choice_ids:
   - f36d4fae-f22b-46c0-89bc-9a75bc67685c
 explanation: "He used to be a physiotherapist."

@@ -8,11 +8,11 @@ choices:
   - id: 8b36f7e8-f64e-4f87-a71f-6d5f3c3a912e
     text: "Heat waves, lightning and blizzards"
   - id: e3e41dc7-10e7-4254-bca0-7fd531eefb26
-    text: "Only fog"
+    text: "Only fog, with little else"
   - id: c0e14f77-8c00-4b39-82c3-a065f47d69e4
-    text: "Only rain"
+    text: "Only rain, with a few cold mornings"
   - id: 011a55ed-5cf2-4134-afc2-c23d29399b91
-    text: "Only wind"
+    text: "Only wind, with no storms"
 correct_choice_ids:
   - 8b36f7e8-f64e-4f87-a71f-6d5f3c3a912e
 explanation: "The history lists heat waves, lightning strikes and blizzards."

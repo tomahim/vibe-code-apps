@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: "Why was Naia in a pit that is now underwater?"
 choices:
   - id: b6806b1d-01e4-47fd-9cd2-ff5c6cdbe0a3
-    text: "She was a diver"
+    text: "She was a diver who explored the cave before the water rose"
   - id: 8751f4a9-8fe6-4184-8915-365d750513ef
     text: "Sea level was lower and the cave was dry when she fell in"
   - id: 45e71e35-db0c-4bdd-8d3c-f5ff4491cdfb
-    text: "The pit was an ocean trench"
+    text: "The pit was an ocean trench that flooded after an earthquake"
   - id: 6923e630-905d-4c40-962a-7aa3a15ea9c9
-    text: "She lived underwater"
+    text: "She lived underwater in a coastal village, near the cave"
 correct_choice_ids:
   - 8751f4a9-8fe6-4184-8915-365d750513ef
 explanation: "The passages flooded later as the sea rose after the ice age."

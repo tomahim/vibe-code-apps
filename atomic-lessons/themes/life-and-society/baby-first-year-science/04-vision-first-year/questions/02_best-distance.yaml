@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: "A newborn sees most clearly at about:"
 choices:
   - id: ed3e7cac-c80c-4f13-913e-d8bc6926c23f
-    text: "The distance to a caregiver's face during feeding"
+    text: "The distance to a caregiver's face when feeding"
   - id: 150f5041-2bd5-456a-96af-639781d26d12
-    text: "Across a room"
+    text: "Across a room, as sharp as an adult"
   - id: 3c56069e-afb8-4db3-ab8a-25bddd6a80b9
-    text: "About 10 meters"
+    text: "About 10 meters, at full adult sharpness"
   - id: e0b64455-1a15-48f2-a8ac-fc514a3909f3
-    text: "Only a few centimeters"
+    text: "Only a few centimeters, no further than that"
 correct_choice_ids:
   - ed3e7cac-c80c-4f13-913e-d8bc6926c23f
 explanation: "Newborn vision is tuned to close range, roughly the feeding distance to a caregiver's face."

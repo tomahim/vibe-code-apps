@@ -6,13 +6,13 @@ after_card_position: 3
 prompt: What happens before a pull request is even opened?
 choices:
 - id: 88a7d327-151f-4849-a1f7-c98d319ffbdb
-  text: Claude runs tests, build and linter, and a second agent reviews the diff in a fresh context
+  text: "Claude runs tests, build and linter, then a second agent reviews the diff"
 - id: 11b37880-1014-4951-af20-c402594ccc00
-  text: A manager approves the plan
+  text: "A manager approves the plan in a planning meeting beforehand"
 - id: 021ea084-3eca-4a8c-8bcc-db9a8eee4550
-  text: The change ships directly to stable
+  text: "The change ships directly to stable after a quick test run"
 - id: c96bc817-282a-4497-869b-13fcaeac6de9
-  text: Two humans pre-approve the diff
+  text: "Two humans pre-approve the diff before the agent has finished it"
 correct_choice_ids:
 - 88a7d327-151f-4849-a1f7-c98d319ffbdb
 explanation: 'Before the pull request, the work is verified: Claude runs the tests, build and linter, and a second agent reviews

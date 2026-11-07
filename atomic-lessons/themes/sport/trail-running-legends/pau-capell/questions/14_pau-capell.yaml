@@ -11,7 +11,7 @@ choices:
   - id: fb702674-b7cc-4f4d-995e-6ab5db99f89e
     text: "Races are always identical"
   - id: 3fd7f5c4-318f-4dbb-9d64-370fbaaea88b
-    text: "Times are random"
+    text: "Times are random each year"
   - id: 92cbbcf4-4ba9-433b-a5e9-074c29206fbf
     text: "Conditions and course can change"
 correct_choice_ids:

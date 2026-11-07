@@ -12,7 +12,7 @@ choices:
   - id: 40f635ae-3728-42d1-bca3-84f13ffeca38
     text: "It moves from the brain to the spinal cord"
   - id: e70428d4-cb07-4806-8d03-95e9021cf24b
-    text: "It is replaced by the Moro reflex"
+    text: "It is replaced by the Moro reflex at birth"
 correct_choice_ids:
   - cd05617c-9555-4737-b7b9-4d117a1bc154
 explanation: "Fading reflexes are absorbed into purposeful movement; the automatic grasp becomes deliberate reaching and releasing."

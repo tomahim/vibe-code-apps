@@ -7,11 +7,11 @@ after_card_position: 2
 prompt: "Which event did she run at the 2006 World Junior Championships?"
 choices:
   - id: 93304500-5021-4d57-8c6e-761372ebdd16
-    text: "High jump"
+    text: "High jump, with a personal best"
   - id: b3b11ae5-c443-4f62-b962-46429570676a
-    text: "Marathon"
+    text: "Marathon, on the road"
   - id: 4c1bbdfd-4762-412e-bd13-02d116d0164a
-    text: "100 metres"
+    text: "100 metres, on the track"
   - id: a94112ec-8778-41ae-9439-b8c112cfb144
     text: "3,000 metres steeplechase"
 correct_choice_ids:

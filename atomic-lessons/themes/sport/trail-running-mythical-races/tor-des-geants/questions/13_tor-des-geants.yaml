@@ -8,11 +8,11 @@ choices:
   - id: d0ef21d1-a339-43fc-839c-46bdfe10d3b9
     text: "Points given to TORX finishers"
   - id: ea24cf06-2eb7-4edd-95ee-c35fdb1c2f0b
-    text: "Pasta"
+    text: "Pasta served at the aid stations"
   - id: 355ffbe1-d3bb-4c23-8568-419a4b05d768
-    text: "Prize money"
+    text: "Prize money paid to the top finishers"
   - id: c0dcb299-700a-4239-863a-87832d15792a
-    text: "Passport"
+    text: "Passport checks at the border crossing"
 correct_choice_ids:
   - d0ef21d1-a339-43fc-839c-46bdfe10d3b9
 explanation: "TORX provides PAX to finishers."
