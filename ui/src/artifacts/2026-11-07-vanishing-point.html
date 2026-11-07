@@ -29,10 +29,13 @@ header{display:flex;align-items:center;gap:.5rem;padding:.55rem .8rem;
   background:linear-gradient(180deg,#171d27,#12171f);border-bottom:1px solid #262d3a;flex:0 0 auto}
 h1{font-size:1.02rem;margin:0;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 h1 .vp-dot{color:var(--gold)}
-#tabs{display:flex;gap:.35rem;margin-left:auto;overflow-x:auto;scrollbar-width:none}
-#tabs::-webkit-scrollbar{display:none}
+#tabs{display:flex;gap:.3rem;margin-left:auto;flex:1 1 auto;justify-content:flex-end;min-width:0}
 .tab{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--muted);
-  padding:.42rem .65rem;border:1px solid #2a3242;border-radius:999px;white-space:nowrap;flex:0 0 auto}
+  padding:.42rem .6rem;border:1px solid #2a3242;border-radius:999px;white-space:nowrap;flex:0 1 auto}
+@media (max-width:480px){
+  h1{font-size:.9rem}
+  .tab{font-size:.68rem;padding:.4rem .5rem}
+}
 .tab[aria-selected="true"]{color:var(--gold);border-color:var(--gold-dim);background:rgba(216,168,78,.08)}
 #infoBtn{flex:0 0 auto;width:2rem;height:2rem;border-radius:50%;border:1px solid #2a3242;
   color:var(--muted);font-family:var(--mono);font-size:.85rem}
@@ -52,10 +55,9 @@ h1 .vp-dot{color:var(--gold)}
 
 /* ---------- toolbar ---------- */
 footer{flex:0 0 auto;background:var(--panel);border-top:1px solid #262d3a;padding:.45rem .6rem calc(.45rem + env(safe-area-inset-bottom))}
-.row{display:flex;align-items:center;gap:.45rem}
+.row{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
 .row + .row{margin-top:.4rem}
-.chips{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
-.chips::-webkit-scrollbar{display:none}
+.chips{flex-wrap:wrap}
 .seg{display:flex;border:1px solid #2a3242;border-radius:999px;overflow:hidden;flex:0 0 auto}
 .seg button{font-family:var(--mono);font-size:.72rem;padding:.42rem .8rem;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--gold-dim);color:var(--gold)}
@@ -118,9 +120,8 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
       </div>
       <button class="chip warn" id="revealBtn">Draw first, then reveal</button>
       <div class="spacer"></div>
-      <button class="chip" id="gateChip" aria-pressed="true" title="Lock construction overlays until you draw">Sketch first</button>
     </div>
-    <div class="row chips" id="chips" aria-label="Construction overlays"></div>
+    <div class="row chips" id="chips" aria-label="Construction overlays"><button class="chip" id="gateChip" aria-pressed="true" title="Lock construction overlays until you draw">Sketch first</button></div>
     <div class="row" id="sketchTools" style="display:none">
       <div class="seg" role="group" aria-label="Tool">
         <button id="penBtn" aria-pressed="true">Pen</button>
@@ -345,8 +346,8 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
 
     return {
       scene: s, grid: grid, materials: mats,
-      cam: { mode: 'tilt', yaw: 0.7, pitch: 0.62, dist: 11, eye: 0, target: new THREE.Vector3(0, 7.2, 0),
-             yawMin: -2.6, yawMax: 2.6, pitchMin: 0.18, pitchMax: 1.15, distMin: 6, distMax: 20 },
+      cam: { mode: 'tilt', yaw: 0.7, pitch: 0.48, dist: 18, eye: 0, target: new THREE.Vector3(0, 6.8, 0), fov: 56,
+             yawMin: -2.6, yawMax: 2.6, pitchMin: 0.18, pitchMax: 1.15, distMin: 7, distMax: 26 },
       axes: [
         { dir: new THREE.Vector3(1, 0, 0), label: 'VP1', color: GOLD,
           anchors: [new THREE.Vector3(3.5, 0, 3.5), new THREE.Vector3(3.5, 3, 3.5)] },
@@ -429,13 +430,16 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
       camera.lookAt(t.x, cs.eye, t.z);
     } else {
       camera.up.set(0, 1, 0);
+      var cy = Math.max(1.2, t.y - Math.sin(cs.pitch) * cs.dist);
       camera.position.set(
         t.x + Math.sin(cs.yaw) * Math.cos(cs.pitch) * cs.dist,
-        t.y - Math.sin(cs.pitch) * cs.dist,
+        cy,
         t.z + Math.cos(cs.yaw) * Math.cos(cs.pitch) * cs.dist
       );
       camera.lookAt(t.x, t.y, t.z);
     }
+    var fov = world(current).cam.fov || 46;
+    if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
   }
 
   /* ---------- vanishing point maths ---------- */
@@ -690,7 +694,7 @@ input[type="range"]{flex:1 1 auto;min-width:60px;accent-color:var(--gold);height
     if (reveal) {
       reveal.style.display = gated ? '' : 'none';
       reveal.disabled = !hasStrokes;
-      reveal.textContent = hasStrokes ? 'Reveal construction' : 'Draw first, then reveal';
+      reveal.textContent = hasStrokes ? 'Reveal construction' : 'Sketch to unlock';
     }
     hint.textContent = gated
       ? (hasStrokes ? 'Good. Now reveal the construction and compare.' : 'Sketch what you see first - the geometry stays hidden until you draw.')
