@@ -65,7 +65,7 @@ await page.getByRole('button',{name:'Promising',exact:true}).waitFor();
 if(await page.getByRole('button',{name:'Inspiration',exact:true}).count())throw new Error('Inspiration tab visible for Ideas');
 await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
 await page.screenshot({path:`${screenshots}/tabs-ideas-390.png`,fullPage:true});
-// Archive is the small control above the tab row, never a tab itself.
+// Archive is the small control below the tab row, never a tab itself.
 const tabRow=page.locator('.ln-tabs');
 if(await tabRow.getByRole('button',{name:'Archive',exact:true}).count())throw new Error('Archive must not be a tab');
 await page.locator('.ln-archive-row').getByRole('button',{name:'Archive',exact:true}).waitFor();

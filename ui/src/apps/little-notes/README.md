@@ -6,7 +6,7 @@ a next-up queue, object-type sidebar (drawer on phone), horizontally scrollable
 category tabs that follow the selected object type (Promising/To improve only on
 Ideas, Inspiration only on Bookmarks), topic tags behind "More tags", month
 selector, search and 30-object pagination. Archive is deliberately less
-prominent: a small control above the tabs instead of a tab, so real categories
+prominent: a small control below the tabs instead of a tab, so real categories
 keep the room. Any object on the page can
 be selected with the jump control, not only the six preview cards.
 
@@ -33,7 +33,7 @@ Checks: `npm test`, `npm run build`; `node curator-visual-check.mjs` uses Chrome
 `/usr/bin/google-chrome` and mocked nonprivate records, writes screenshots to
 `/tmp/little-notes-screenshots` or CURATOR_SCREENSHOTS. It exercises 320/390/1280,
 no-overflow, type-linked category tabs (Ideas vs Bookmarks), Archive as the
-small above-tabs control (never a tab), type drawer,
+small below-tabs control (never a tab), type drawer,
 capture/Escape, search/empty/reset, archive and skip/archive/restore triage
 advance, and categorizing out of the Inbox.
 This is not a claim of actual Android Firefox device testing.
