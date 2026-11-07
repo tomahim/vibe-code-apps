@@ -481,7 +481,7 @@ function EvolutionChart({ chart, currency, onOpenBadges }) {
   const gridValue = (f) => max * f;
   return <section className="grains-chart">
     <div className="grains-chart-head"><h3>{currency === "badges" ? "🏅 Badges growth" : `${currency === "drops" ? "💧" : "🥕"} Growth`}</h3><span>Cumulative · {periodLabel}</span></div>
-    {onOpenBadges && <button type="button" className="grains-chart-link" onClick={onOpenBadges}>See all your badges →</button>}
+    {onOpenBadges && <button type="button" className="grains-chart-link" onClick={onOpenBadges}>See badges</button>}
     <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${currency} growth, ${periodLabel}`}>
       <defs><linearGradient id="grains-chart-fill" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor={accent} stopOpacity="0.22" /><stop offset="100%" stopColor={accent} stopOpacity="0" />
