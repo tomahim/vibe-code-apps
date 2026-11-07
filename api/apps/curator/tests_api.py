@@ -102,6 +102,35 @@ class CuratorAPITests(TestCase):
         result=self.client.get('/taxonomy/', **self.headers).json()
         self.assertEqual(sum(m['count'] for m in result['months']), 1)
 
+    def test_category_counts_follow_inbox_semantics_and_context(self):
+        idea = self.item.object_type
+        news_type = ObjectType.objects.get(slug="news")
+        ContentCategory.objects.create(content=self.item, category=Category.objects.get(slug="inbox"))
+        Content.objects.create(owner=self.owner, object_type=idea, title="Loose idea")
+        Content.objects.create(owner=self.owner, object_type=news_type, title="Fresh news")
+        archived_news = Content.objects.create(owner=self.owner, object_type=news_type, title="Old news")
+        ContentCategory.objects.create(content=archived_news, category=Category.objects.get(slug="archive"))
+        favorite_idea = Content.objects.create(owner=self.owner, object_type=idea, title="Favorite idea")
+        ContentCategory.objects.create(content=favorite_idea, category=Category.objects.get(slug="favorite"))
+        # Owner-only: the other user's object never appears in any count.
+        counts = self.client.get('/content/', **self.headers).json()['category_counts']
+        self.assertEqual(counts['all'], 5)
+        self.assertEqual(counts['inbox'], 3)  # explicit Inbox + uncategorized + non-archived news
+        self.assertEqual(counts['archive'], 1)
+        self.assertEqual(counts['favorite'], 1)
+        # The current context applies: filtering by type rescopes every count,
+        # while the category filter itself never does.
+        news_counts = self.client.get('/content/?type=news', **self.headers).json()['category_counts']
+        self.assertEqual(news_counts['all'], 2)
+        self.assertEqual(news_counts['inbox'], 1)
+        inbox_view = self.client.get('/content/?category=inbox', **self.headers).json()
+        self.assertEqual(inbox_view['total'], inbox_view['category_counts']['inbox'])
+        favorite_view = self.client.get('/content/?category=favorite', **self.headers).json()
+        self.assertEqual(favorite_view['total'], 1)
+        self.assertEqual(favorite_view['category_counts']['all'], 5)
+        # Uncategorized objects count towards Inbox only, never towards All-less duplicates.
+        self.assertNotIn(None, counts)
+
 
     def test_inbox_includes_uncategorized_objects_without_backfill(self):
         note = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="daily-note"), title="Unprocessed note")

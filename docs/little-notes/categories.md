@@ -32,6 +32,11 @@ keep no category after (they appear under All), matching current behavior.
 
 - GET taxonomy/ adds `categories` with their linked type slugs (empty = all).
 - GET content/ accepts `category=` alongside `tag=`; both filters combine.
+  The response also carries `category_counts`: per-category object counts in
+  the current type/tag/search/month context (without the category filter), so
+  each tab can show what choosing it would list. `inbox` follows the Inbox
+  view rules (explicit Inbox, uncategorized, non-archived news) and `all` is
+  the context total.
 - POST content/ puts new items in the Inbox category.
 - POST content/<uuid>/categories/: category toggle with updated_at conflict
   check; archive/inbox exclusion stays atomic; a type-linked category is

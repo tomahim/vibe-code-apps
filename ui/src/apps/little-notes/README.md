@@ -3,7 +3,8 @@
 New app at `/apps/little-notes`. Previous apps remain available. Owner-scoped JWT
 API, not Notion or GitHub in the browser. The interface keeps one object on stage,
 a next-up queue, object-type sidebar (drawer on phone), horizontally scrollable
-category tabs that follow the selected object type (Promising/To improve only on
+category tabs that follow the selected object type and carry the live object count
+of the current type/tag/search/month context (Inbox keeps its view semantics) (Promising/To improve only on
 Ideas, Inspiration only on Bookmarks), topic tags behind "More tags", month
 selector, search and 30-object pagination. Archive is deliberately less
 prominent: a small control below the tabs instead of a tab, so real categories
@@ -31,7 +32,7 @@ from making the app available; current RL remains Notion until confirmed ready.
 
 Checks: `npm test`, `npm run build`; `node curator-visual-check.mjs` uses Chrome at
 `/usr/bin/google-chrome` and mocked nonprivate records, writes screenshots to
-`/tmp/little-notes-screenshots` or CURATOR_SCREENSHOTS. It exercises 320/390/1280,
+`/tmp/little-notes-screenshots` or CURATOR_SCREENSHOTS. It exercises 320/390/1280, tab counts (All/Inbox, rescoped by type),
 no-overflow, type-linked category tabs (Ideas vs Bookmarks), Archive as the
 small below-tabs control (never a tab), type drawer,
 capture/Escape, search/empty/reset, archive and skip/archive/restore triage
