@@ -1,0 +1,11 @@
+id: 57fa92ce-c7d0-4523-97ff-d0f194c7d2e6
+position: 17
+type: type_answer_question
+after_card_position: 1
+prompt: Comment s'appelle le principal muscle de la ventilation ?
+accepted_answers:
+- diaphragme
+- le diaphragme
+explanation: 'Le diaphragme est le principal muscle de la ventilation : il s''abaisse
+  à l''inspiration, pendant que les muscles releveurs des côtes se contractent.'
+archived: false

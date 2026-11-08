@@ -1,0 +1,21 @@
+id: d95d1bfe-7a37-44b2-a7ab-93bcd326b316
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: À quoi le manuel compare-t-il les débits maximaux de plongeurs sains ?
+choices:
+- id: 4bec5e30-5ab6-4aa0-9f93-532521488066
+  text: Aux débits de sujets insuffisants respiratoires en surface.
+- id: aefbf720-5436-454d-ad93-9b70a9402f52
+  text: Aux débits d'athlètes de haut niveau en course.
+- id: ccea8431-7672-40db-93c0-cdc86354e341
+  text: Aux débits de nouveau-nés à la première tétée.
+- id: 88579621-7fcd-49e6-90ea-c19f03ef151e
+  text: Aux débits des apnéistes en surface.
+correct_choice_ids:
+- 4bec5e30-5ab6-4aa0-9f93-532521488066
+explanation: « En plongée, les débits ventilatoires maximaux de sujets sains sont
+  comparables à ceux des sujets insuffisants respiratoires en surface » - c'est la
+  citation du manuel.
+archived: false

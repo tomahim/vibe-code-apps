@@ -1,0 +1,22 @@
+id: 04bccb8e-a5c1-4846-b9ee-597b03b660d8
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels facteurs concourent à l'essoufflement selon le manuel ?
+choices:
+- id: 58bb8eb3-462a-4e6b-8905-c137f354faa6
+  text: Une ventilation alvéolaire insuffisante et une fatigue accrue des muscles
+    ventilatoires.
+- id: dc7f0440-d5ee-4173-80a9-1dc3404bbcea
+  text: Un excès d'oxygène dans le sang et une bradycardie.
+- id: a40cf52c-a0ef-4c74-a94c-37beff60962d
+  text: Une pression trop faible dans la bouteille uniquement.
+- id: cce5bbd2-b5ff-4557-ac71-6cfc373b0ba1
+  text: Un détendeur trop récent et trop bien réglé.
+correct_choice_ids:
+- 58bb8eb3-462a-4e6b-8905-c137f354faa6
+explanation: 'Volumes diminués, résistances accrues, débits réduits : tout concourt
+  à l''essoufflement par ventilation alvéolaire insuffisante et fatigue des muscles
+  ventilatoires.'
+archived: false

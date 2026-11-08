@@ -1,0 +1,21 @@
+id: 630526a8-659c-42d8-94ea-cb397ac8dfed
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi la mise en bouche d'un détendeur oblige-t-elle à une expiration active
+  ?
+choices:
+- id: b5662ca5-03ef-4e49-93f3-7c8d7bdd491a
+  text: Parce qu'il faut vaincre les résistances du détendeur à l'expiration.
+- id: 6b36a3b7-8a71-4409-8c7b-37dc599958cb
+  text: Parce que le détendeur bloque totalement l'expiration passive.
+- id: 290554e7-0af4-44a5-9126-d8c9dcaccce1
+  text: Parce que l'air de la bouteille est trop chaud.
+- id: 8a1f0482-4494-48ed-ab4e-3e5e0719612e
+  text: Parce que l'embout exerce une pression sur la langue.
+correct_choice_ids:
+- b5662ca5-03ef-4e49-93f3-7c8d7bdd491a
+explanation: Comme lors d'un exercice, l'expiration devient active en plongée pour
+  vaincre les résistances du détendeur à l'expiration.
+archived: false

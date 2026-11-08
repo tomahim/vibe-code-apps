@@ -1,0 +1,21 @@
+id: 7a13720c-9351-4760-b7d3-bba009d6746c
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce qui accentue la diminution des volumes pulmonaires en immersion
+  ?
+choices:
+- id: 49fbf04f-825d-488e-8ec3-ebff14ce8093
+  text: Le port d'une combinaison qui comprime plus ou moins la poitrine.
+- id: b7e356ef-5bb6-4983-9650-cdc5846eff6e
+  text: Le port du masque qui serre le visage.
+- id: d0882ba6-8fce-4709-91a1-196c46b662a0
+  text: Le port de la ceinture de plomb sur les hanches.
+- id: e24e5a40-99ce-4cd8-8fb9-df9bd69d590b
+  text: Le port des palmes qui alourdissent les jambes.
+correct_choice_ids:
+- 49fbf04f-825d-488e-8ec3-ebff14ce8093
+explanation: La combinaison qui comprime la poitrine accentue la diminution des volumes
+  due à l'afflux sanguin vers le thorax.
+archived: false

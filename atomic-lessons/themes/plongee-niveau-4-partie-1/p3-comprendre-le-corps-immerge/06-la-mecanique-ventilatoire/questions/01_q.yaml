@@ -1,0 +1,20 @@
+id: bd9a013c-1c8a-4294-98c1-d2d2cd561b0c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel est le principal muscle de la ventilation ?
+choices:
+- id: 5add7dda-e11a-463b-97eb-776600ea22a5
+  text: Le diaphragme.
+- id: 028609e5-1c23-474f-87dc-36aab7cea1e4
+  text: Le myocarde.
+- id: 4d91d129-b796-46f6-8933-ec4919dc5ac0
+  text: Le grand dorsal.
+- id: eb981e96-7471-49f4-b674-3304174954a0
+  text: Le muscle sternal.
+correct_choice_ids:
+- 5add7dda-e11a-463b-97eb-776600ea22a5
+explanation: Le diaphragme est le principal muscle de la ventilation ; il s'abaisse
+  à l'inspiration pendant que les releveurs des côtes se contractent.
+archived: false

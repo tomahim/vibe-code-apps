@@ -1,0 +1,21 @@
+id: 18b80922-f669-433a-9c52-5d508f04d24b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel de son spirogramme en immersion ?
+choices:
+- id: d0007f53-be13-4427-91bf-36ec3b46f26e
+  text: 'Qu''il est simplifié et imagé : aucune étude scientifique réalisée en immersion
+    à ce jour, des travaux en cours à Toulon.'
+- id: d98ba919-c8bb-473a-978d-3afc102a4885
+  text: Qu'il est le résultat de mesures précises réalisées à 60 mètres de profondeur.
+- id: 52c73772-1bba-4b5f-95fd-42f00feb0ef5
+  text: Qu'il vaut pour tous les plongeurs sans exception.
+- id: f9429db6-eb65-4f7e-8b6b-286e056f0938
+  text: Qu'il est tiré d'études réalisées en caisson hyperbare.
+correct_choice_ids:
+- d0007f53-be13-4427-91bf-36ec3b46f26e
+explanation: Le manuel précise que son spirogramme est une représentation simplifiée
+  et imagée, aucune étude en immersion à ce jour, travaux en cours notamment à Toulon.
+archived: false

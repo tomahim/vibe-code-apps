@@ -1,0 +1,20 @@
+id: df09af6b-7d0a-4aa3-95fa-930b553097ce
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quand l'expiration devient-elle active selon le manuel ?
+choices:
+- id: dcddf84a-67c5-4c9d-990f-11c7ced83865
+  text: Lors d'un exercice, ou en plongée pour vaincre les résistances du détendeur.
+- id: 40fdd101-a5fe-4cfe-b79e-8e2e5eff2265
+  text: Uniquement pendant le sommeil profond.
+- id: fe047c09-77e1-4dea-ab46-7e66a3f9d136
+  text: Uniquement chez les plongeurs débutants en piscine.
+- id: 0d6ff6c8-7537-41ea-8671-fb044b36cb59
+  text: 'Jamais : elle reste toujours passive.'
+correct_choice_ids:
+- dcddf84a-67c5-4c9d-990f-11c7ced83865
+explanation: 'L''expiration devient active par la contraction des abdominaux et des
+  abaisseurs de côtes : exercice, ou plongée avec les résistances du détendeur à l''expiration.'
+archived: false

@@ -1,0 +1,21 @@
+id: 3de43c0a-557c-4287-96be-fae7f003e6fc
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi l'air entre-t-il dans les poumons à l'inspiration ?
+choices:
+- id: deec31b4-3439-477e-af69-8403cb6020dc
+  text: 'L''augmentation de volume de la cage thoracique fait baisser la pression
+    : l''air est aspiré par dépression.'
+- id: 26cfe6ac-5e88-41ce-ad6b-97802488734c
+  text: Le diaphragme pousse l'air dans les poumons en se contractant.
+- id: 384eaff9-3dff-43c4-9c5f-e93af659d314
+  text: La pression extérieure de l'eau comprime la poitrine.
+- id: a7839504-f1c5-44d3-8161-5836a053db31
+  text: Les bronches souches pompent l'air comme une valve.
+correct_choice_ids:
+- deec31b4-3439-477e-af69-8403cb6020dc
+explanation: 'Diaphragme abaissé + côtes relevées = volume thoracique augmenté, pression
+  pulmonaire diminuée : l''air s''engouffre. C''est une phase active.'
+archived: false

@@ -1,0 +1,20 @@
+id: a22e1f6f-7e3c-4da8-aabb-438fa8496804
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles valeurs de réduction du débit le manuel donne-t-il ?
+choices:
+- id: 5c824ea5-dbbc-458c-954f-016974f8bf89
+  text: Réduit significativement dès 30-40 m ; 70 % de la valeur de surface à 60 m.
+- id: b0a2c216-bf36-4fd4-a927-2a4129fb9e66
+  text: Réduit de moitié dès 5 m ; nul à 20 m.
+- id: 8a334c23-8a97-462e-bea0-e9fb24f67e7c
+  text: Aucune réduction avant 100 mètres de profondeur.
+- id: 062e0c52-fac2-4efc-a715-43b93351a80b
+  text: Réduit de 10 % à 60 m, sans effet avant.
+correct_choice_ids:
+- 5c824ea5-dbbc-458c-954f-016974f8bf89
+explanation: Le débit est réduit de manière significative dès 30 à 40 m, jusqu'à 70
+  % de sa valeur de surface à 60 m.
+archived: false
