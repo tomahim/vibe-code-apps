@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: Un mouillage a un poids apparent de 30 kg dans l'eau. Quel volume d'air faut-il mettre dans le parachute ?
 choices:
 - id: 9abbf816-6e46-4bbc-9afc-d5508af52b5a
-  text: 30 litres dans le parachute, le poids du parachute étant négligé et la densité de l'eau prise égale à 1.
+  text: 30 litres d'air dans le parachute, à la pression du lieu.
 - id: 4d8deefa-b8e5-473f-b53f-d007eedba573
-  text: 60 litres, soit le double du poids apparent en litres.
+  text: 60 litres d'air dans le parachute, à la pression du lieu.
 - id: 5b723686-8acc-460c-b178-a0d910248003
-  text: 15 litres, soit la moitié du poids apparent en litres.
+  text: 15 litres d'air dans le parachute, à la pression du lieu.
 - id: 2363c249-0bd7-49eb-95a0-830c0a11cc87
-  text: 300 litres, soit dix fois le poids apparent en litres.
+  text: 300 litres d'air dans le parachute, à la pression du lieu.
 correct_choice_ids:
 - 9abbf816-6e46-4bbc-9afc-d5508af52b5a
 explanation: 'Il faut une poussée d''Archimède au moins égale à 30 kg. Le manuel pose deux approximations : poids du parachute négligeable et densité de l''eau égale à 1, d''où 30 litres d''air dans le parachute, à la pression du lieu.'
