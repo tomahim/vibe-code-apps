@@ -1,0 +1,26 @@
+id: d3ad9201-72a9-4fc1-82c6-69fdc333f99a
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi la loi exponentielle de saturation s'applique-t-elle imparfaitement
+  au corps humain ?
+choices:
+- id: a16764aa-3bd3-40b5-976f-8a4ab1c692c8
+  text: Elle vaut pour des liquides en contact direct avec le gaz ; le corps n'est
+    pas un liquide pur et le gaz traverse des membranes.
+- id: 311da7b9-ef9e-443e-a04c-d3125b96eabe
+  text: Elle suppose que le plongeur reste totalement immobile pendant toute la durée
+    de la plongée.
+- id: 58e787f5-8226-483b-9d5b-f5f45c176f8d
+  text: Elle n'a été démontrée expérimentalement que pour l'oxygène, et jamais pour
+    l'azote.
+- id: bd0a7774-0db7-49e8-b5e9-c4e5e07d0291
+  text: Elle exige une pression ambiante rigoureusement constante, ce qui est impossible
+    en plongée en mer.
+correct_choice_ids:
+- a16764aa-3bd3-40b5-976f-8a4ab1c692c8
+explanation: La loi de saturation exponentielle s'applique à des liquides en contact
+  direct avec le gaz ; or le corps n'est pas un liquide pur et le gaz traverse des
+  membranes (alvéoles, vaisseaux, membranes cellulaires) avant d'être absorbé.
+archived: false

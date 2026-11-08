@@ -1,0 +1,21 @@
+id: ab2b0fdc-1d3e-4711-bba2-7321b7164d0e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: À quoi sert le seuil critique d'un compartiment ?
+choices:
+- id: a6a812b9-5c1c-40dc-bd45-0ea35b208ac9
+  text: C'est lui qui impose ou non des paliers à la remontée.
+- id: cb7389b3-f364-4a22-85a7-b52b1ef90130
+  text: Il fixe la profondeur maximale autorisée pour la plongée.
+- id: 9382a71b-6920-4051-b3b1-f66fcac7fe1f
+  text: Il détermine la consommation d'air du plongeur au fond.
+- id: 6a0c6c1a-def0-4c7f-9f8b-06ee9c17dfb7
+  text: Il indique la durée maximale de la descente en début de plongée.
+correct_choice_ids:
+- a6a812b9-5c1c-40dc-bd45-0ea35b208ac9
+explanation: Le seuil critique de baisse de pression (vitesse de remontée, profondeur
+  plafond) ne doit pas être dépassé à la remontée ; c'est ce seuil qui impose ou non
+  des paliers.
+archived: false

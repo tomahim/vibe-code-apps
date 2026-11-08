@@ -1,0 +1,23 @@
+id: e53afa31-4539-40ee-b908-668d255bcaef
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: D'où vient la confusion entre compartiments et parties du corps, d'après le
+  manuel ?
+choices:
+- id: afb44597-0a64-4b1f-a877-85b356a385f3
+  text: De certaines brochures commerciales ou publications techniques qui font ce
+    parallèle par souci de simplification.
+- id: 3262609c-5a48-472e-aa2e-262edff9056c
+  text: Des travaux de Haldane, qui nommait ses compartiments comme des organes.
+- id: de3f6554-32a5-4283-8b32-54081d43cedb
+  text: Des tables MN90, qui associent chaque compartiment à un muscle.
+- id: 99b54b9f-8b6b-47c1-92f0-9b3e4b9b0a45
+  text: Des ordinateurs de plongée, qui affichent le nom des organes.
+correct_choice_ids:
+- afb44597-0a64-4b1f-a877-85b356a385f3
+explanation: La confusion est entretenue par certaines brochures commerciales ou publications
+  techniques qui, pour simplifier, font un parallèle direct entre compartiments et
+  parties du corps (yeux, muscles, os...).
+archived: false

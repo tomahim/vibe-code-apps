@@ -1,0 +1,16 @@
+id: 5b1149a1-42c5-464e-ac5c-deb0edb5513a
+position: 16
+type: type_answer_question
+after_card_position: 3
+prompt: Quel terme du manuel désigne les zones fictives dont la période mesure la
+  vitesse de charge et de décharge de l'azote ?
+accepted_answers:
+- compartiments
+- compartiment
+- compartiments théoriques
+- compartiment théorique
+- compartiments theoriques
+explanation: Les modèles découpent le corps en « compartiments » théoriques, caractérisés
+  par leur période (vitesse de charge/décharge) et leur seuil critique. À ne jamais
+  confondre avec de véritables tissus.
+archived: false

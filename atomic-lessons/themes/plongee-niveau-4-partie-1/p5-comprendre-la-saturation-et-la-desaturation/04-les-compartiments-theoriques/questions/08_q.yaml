@@ -1,0 +1,20 @@
+id: 00cad8e9-ff15-4b92-afed-c17618fc9e99
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment Haldane qualifie-t-il ses compartiments, selon le manuel ?
+choices:
+- id: eeb24e69-6df4-4d87-8026-cf4fd0048e50
+  text: Des régions anatomiques factices.
+- id: 0353ea6a-d4ae-45eb-96b4-bcd5d374dea4
+  text: Des organes parfaitement identifiés du corps humain.
+- id: f204548a-6ed1-4533-b68d-087cbef3f61c
+  text: Des segments de la colonne vertébrale.
+- id: a9009477-00de-4b15-8093-f27ea3621be7
+  text: Des zones du cerveau sensibles à l'azote.
+correct_choice_ids:
+- eeb24e69-6df4-4d87-8026-cf4fd0048e50
+explanation: 'Haldane le dit lui-même : ses 5 compartiments sont des « régions anatomiques
+  factices », pas de vraies régions du corps.'
+archived: false
