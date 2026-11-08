@@ -1,0 +1,19 @@
+id: 79d752c2-91f4-4478-9635-f757ec611db0
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: In a 2N design, how do the A side and B side relate?
+choices:
+- id: 2ec254b5-c83c-4601-889c-7e8b79d0e5b1
+  text: Fully independent power distribution systems, each able to carry the whole load
+- id: 3e95ec00-bdcc-4fbc-a28d-4971cb4ba696
+  text: A primary path and a cheaper backup path
+- id: 4b8f7c01-2623-45e3-ae56-338ba887d029
+  text: Two halves that each carry exactly half the servers
+- id: b21c6184-01f8-44f2-b83e-a88213590bae
+  text: A power path and a network path
+correct_choice_ids:
+- 2ec254b5-c83c-4601-889c-7e8b79d0e5b1
+explanation: A and B are independent end-to-end distribution systems; dual-corded equipment survives the loss of either.
+archived: false

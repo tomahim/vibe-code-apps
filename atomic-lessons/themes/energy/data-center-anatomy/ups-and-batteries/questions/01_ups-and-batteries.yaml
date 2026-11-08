@@ -1,0 +1,20 @@
+id: 5f97621f-6601-4196-9329-755dc801b46e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why can servers not simply wait for generators during a grid outage?
+choices:
+- id: 35d1fa10-aaa1-48c4-b619-305a82b894fb
+  text: Generators take about a minute to start, but servers crash after milliseconds without power
+- id: b4534267-cece-4cb0-9cba-1df08336f80c
+  text: Generators are too loud for the data hall
+- id: 75ec0a48-733a-492a-9339-6ce9334f899d
+  text: Generators cannot produce AC power
+- id: bee14304-9dad-431c-b325-34aa61cabcce
+  text: Servers reject power from any second source
+correct_choice_ids:
+- 35d1fa10-aaa1-48c4-b619-305a82b894fb
+explanation: The gap between grid failure and generator output is about a minute; servers need continuity within milliseconds, which is the UPS's
+  job.
+archived: false

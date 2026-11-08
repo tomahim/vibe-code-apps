@@ -1,0 +1,20 @@
+id: 490a6113-664d-4ac3-aad3-00c03fe015b3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: About how much of a direct-to-chip server's heat does the liquid typically capture?
+choices:
+- id: a592bb62-ea88-4ffb-960c-25bb76b52fac
+  text: 60 to 80 percent
+- id: 048644f1-89f5-4400-8d5d-2ab8ecbb1cb2
+  text: Exactly 100 percent
+- id: f9452117-daab-4f3f-a0d4-cf00a5a77b08
+  text: About 10 percent
+- id: 07dc7410-d063-4641-8521-bcfba52bd3da
+  text: About 25 percent
+correct_choice_ids:
+- a592bb62-ea88-4ffb-960c-25bb76b52fac
+explanation: Cold plates capture most but not all heat; memory, drives and power conversion still shed some heat to air, so air systems shrink
+  rather than vanish.
+archived: false

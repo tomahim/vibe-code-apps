@@ -1,0 +1,14 @@
+id: d71b4762-333a-408e-a93c-87202822762c
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: How long do generators generally take to reach full capacity, per SemiAnalysis? (number and unit)
+accepted_answers:
+- 60 seconds
+- about 60 seconds
+- a minute
+- one minute
+- 1 minute
+- ~60 seconds
+explanation: Around 60 seconds, occasionally longer when an engine fails its first start attempt.
+archived: false

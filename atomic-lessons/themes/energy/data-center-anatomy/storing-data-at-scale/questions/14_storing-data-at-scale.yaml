@@ -1,0 +1,19 @@
+id: e0ef7db6-ce2a-41ec-bf11-706a737243f0
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What will the next block of lessons assemble on top of these IT components?
+choices:
+- id: f5a6e614-35ff-430a-9fea-8ce557a3dd50
+  text: The electrical chain that feeds them power from the grid
+- id: cf966f11-4e0e-4123-b235-b594c2a9f4e2
+  text: The marketing strategy of cloud providers
+- id: 8b5b9948-3afc-4eaa-a7a0-c9dd5154ea39
+  text: The software licensing model of hyperscalers
+- id: 4bd360a9-c8fa-4038-bda4-5ae29c1a73c9
+  text: The physical security perimeter of the site
+correct_choice_ids:
+- f5a6e614-35ff-430a-9fea-8ce557a3dd50
+explanation: 'With the micro components covered, the course moves to the power chain: grid, transformers, UPS, generators and distribution.'
+archived: false

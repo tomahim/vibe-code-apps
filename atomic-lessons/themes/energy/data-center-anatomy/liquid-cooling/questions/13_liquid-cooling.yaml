@@ -1,0 +1,19 @@
+id: 0a6e7daf-f288-4ce8-a381-728b8433a418
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What risk does SemiAnalysis flag for facilities that cannot deliver high-density liquid cooling?
+choices:
+- id: cbb6f2c9-9d28-4fa9-9c7e-237c297b83aa
+  text: Missing the GB200 generation's performance and cost gains and falling behind
+- id: 43f34d0e-f2e5-4420-ac65-3eac393427ee
+  text: Being fined by the Uptime Institute
+- id: a02acea9-a8f7-443e-85a6-fb9d0eeb30ee
+  text: Losing their internet connectivity
+- id: acc1be2d-a83e-4d21-acd5-a53a38ddd6c9
+  text: Having their servers confiscated
+correct_choice_ids:
+- cbb6f2c9-9d28-4fa9-9c7e-237c297b83aa
+explanation: Operators unable to host liquid-cooled AI hardware will be left behind in the generative AI arms race, per SemiAnalysis.
+archived: false

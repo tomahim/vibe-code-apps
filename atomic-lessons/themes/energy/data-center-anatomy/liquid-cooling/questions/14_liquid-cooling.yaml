@@ -1,0 +1,19 @@
+id: 5395d84a-c70d-486c-a2be-35d0fa23889a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the realistic adoption sequence for liquid cooling in existing facilities?
+choices:
+- id: 097c4257-ea55-4ceb-99f3-59d6572c37fe
+  text: Rear-door exchangers, then direct-to-chip rows, then purpose-built liquid halls
+- id: 9c502a1a-5dd9-4def-a999-c2d12b0deec0
+  text: Full immersion on day one, always
+- id: 155e4ed6-af30-4dda-b5f6-f224cd55a378
+  text: Remove all cooling, then add liquid
+- id: 4f32d301-7585-4c54-a715-83513526f1f1
+  text: Chillers first, then racks, then servers
+correct_choice_ids:
+- 097c4257-ea55-4ceb-99f3-59d6572c37fe
+explanation: 'Most sites retrofit gradually: rear doors first, direct-to-chip for new high-density rows next, dedicated liquid halls last.'
+archived: false

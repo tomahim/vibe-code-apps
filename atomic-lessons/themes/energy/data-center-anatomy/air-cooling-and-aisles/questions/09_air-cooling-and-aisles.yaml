@@ -1,0 +1,19 @@
+id: 7e6b7ccb-ebfe-42cd-a622-5fe6412bebd1
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What inlet temperature range does ASHRAE recommend for IT equipment?
+choices:
+- id: 807e2b70-2d94-46de-900e-68702bd9ed0d
+  text: 18 to 27 degrees Celsius
+- id: d5f61935-bb48-42ed-9b53-352b3a7bbe8a
+  text: 0 to 5 degrees Celsius
+- id: b838eb6b-186a-412b-943e-4cd13e54793e
+  text: 30 to 40 degrees Celsius
+- id: c6e4ac9a-a0eb-41c8-9e9c-c9b4547803b1
+  text: Exactly 12 degrees Celsius
+correct_choice_ids:
+- 807e2b70-2d94-46de-900e-68702bd9ed0d
+explanation: ASHRAE's recommended envelope is 18-27 C; modern equipment tolerates considerably more, enabling warmer, cheaper cooling.
+archived: false

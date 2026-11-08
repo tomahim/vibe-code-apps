@@ -1,0 +1,19 @@
+id: a50493bb-8dfd-4b76-ac6c-e004feb24e35
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why does the grid run on AC rather than DC?
+choices:
+- id: 49f79940-656a-41fe-add4-39d9b3d7540e
+  text: Transformers need alternating current's changing field to step voltage up and down
+- id: f4a04007-eea4-4971-b4c4-ecc6d63310ab
+  text: AC is naturally produced by the Sun
+- id: 109ed6d9-bcfc-49eb-a109-e06679a32368
+  text: DC cables cannot be buried underground
+- id: 8b6a3be0-cad4-49d1-9528-8aadfb6a4fa2
+  text: AC meters are cheaper to manufacture
+correct_choice_ids:
+- 49f79940-656a-41fe-add4-39d9b3d7540e
+explanation: Only AC drives transformers, and transformers are what make long-distance, multi-voltage grids practical.
+archived: false

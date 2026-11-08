@@ -1,0 +1,19 @@
+id: d2dddbb1-32d4-44c4-ba20-1acf7358608e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does an air-side economizer do?
+choices:
+- id: 16f8bf53-3643-4a65-bbe0-41670e8a98b6
+  text: Ducts filtered cool outside air directly into the data hall when conditions allow
+- id: 65c5f2c8-a3bb-4e44-b521-b1c383615e8a
+  text: Burns excess refrigerant for disposal
+- id: 6fbad74b-1386-465c-913c-d662768f364d
+  text: Measures the facility's electricity tariff
+- id: 8f3fb96f-f57d-4902-9c28-47583ec37aae
+  text: Recycles exhaust air within the hall
+correct_choice_ids:
+- 16f8bf53-3643-4a65-bbe0-41670e8a98b6
+explanation: When outside air is cool enough, economizers use it directly, bypassing the compressors entirely.
+archived: false

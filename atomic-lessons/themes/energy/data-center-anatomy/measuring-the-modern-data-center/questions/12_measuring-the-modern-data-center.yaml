@@ -1,0 +1,19 @@
+id: 6b278c2e-7d41-4137-8ab4-c93fe669618e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How are hyperscale campuses commonly priced when leased from colocation developers?
+choices:
+- id: e329954c-28fd-46b5-8d3e-b5b3cb341376
+  text: Per kW of critical IT power per month
+- id: 294c9e34-ef84-4611-b952-27ca0a000e32
+  text: Per gigabyte stored per day
+- id: 1063cd8e-c9c0-45e6-bd72-bc7ec5d1755c
+  text: Per server rack door per week
+- id: 649f17e6-a480-4d3d-add6-dc00e18c927f
+  text: Per employee badge per year
+correct_choice_ids:
+- e329954c-28fd-46b5-8d3e-b5b3cb341376
+explanation: Colocation economics, from a quarter rack to a full build-to-suit campus, are priced per kW-month of critical IT power.
+archived: false

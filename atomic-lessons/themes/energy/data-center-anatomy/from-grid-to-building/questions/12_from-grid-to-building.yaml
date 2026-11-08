@@ -1,0 +1,19 @@
+id: 2e96ddca-f0c4-472c-8fea-83efc84cea93
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: According to SemiAnalysis, how many US households match a 300 MW campus's consumption?
+choices:
+- id: e906130e-e0aa-4452-a71d-50d7265870e8
+  text: Roughly 200,000
+- id: f04fb841-46f6-4f7d-98a2-2a5c03da636f
+  text: Roughly 2,000
+- id: d8bded5a-0482-4567-a599-a29690376d42
+  text: Roughly 20,000
+- id: d181a309-6ff8-4a88-9f99-72c91dc7af49
+  text: Roughly 2 million
+correct_choice_ids:
+- e906130e-e0aa-4452-a71d-50d7265870e8
+explanation: At ~1.2 kW average per home and higher datacenter utilization, about 200,000 households.
+archived: false

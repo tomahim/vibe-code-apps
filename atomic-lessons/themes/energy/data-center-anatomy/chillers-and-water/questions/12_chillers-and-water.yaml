@@ -1,0 +1,19 @@
+id: e714350a-88ff-4648-8fc2-afa2a36b90b4
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What usually limits the reuse of data center waste heat?
+choices:
+- id: 9114d28e-43a8-4968-b762-401b47b01ab4
+  text: The heat is low-grade, so heat pumps are needed to reach district-heating temperatures
+- id: fad6399c-ac98-4005-a91e-9720fb89b7c9
+  text: Regulations ban selling heat
+- id: 54ce4d20-0508-465f-aaa5-2fd437554d80
+  text: The heat is contaminated with data
+- id: c3788c62-bfa7-4a7d-8c8a-548fc7dce0d5
+  text: Water loops cannot leave the building
+correct_choice_ids:
+- 9114d28e-43a8-4968-b762-401b47b01ab4
+explanation: At 25-40 C the heat is useful mostly after a heat-pump lift, which adds cost but enables district-heating projects.
+archived: false

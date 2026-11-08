@@ -1,0 +1,19 @@
+id: 1a194b7f-8b51-4f3f-8dfc-ab4059471e44
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What distinguishes a CRAH from a CRAC unit?
+choices:
+- id: ad992c86-7c3d-405d-85c9-c46b8157473c
+  text: A CRAH moves air across a chilled-water coil fed by a central plant; a CRAC carries its own refrigeration
+- id: ce101252-6a26-426d-8a80-a4bbc68981d1
+  text: A CRAH only heats; a CRAC only cools
+- id: 2a59e400-fa12-4342-a0b5-ced000081834
+  text: A CRAH serves offices; a CRAC serves data halls
+- id: 1a698a80-d9bc-4e22-b6b5-b90c5f93fe36
+  text: A CRAH is portable; a CRAC is fixed
+correct_choice_ids:
+- ad992c86-7c3d-405d-85c9-c46b8157473c
+explanation: CRAC = local refrigerant compression; CRAH = air handler using centrally produced chilled water, preferred at scale.
+archived: false

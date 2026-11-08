@@ -1,0 +1,19 @@
+id: ad85f7eb-68f2-40c6-ae0f-466aceef9974
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: A rack is fed 400 V and draws 50 A. How much power does it consume?
+choices:
+- id: 8bb85f4a-77f9-4a69-892a-f6e9e09822f7
+  text: 20 kW
+- id: 8a891b36-f955-44ce-ada9-13ecd6a5fb41
+  text: 8 kW
+- id: e6ac9b8d-c6ed-4b49-b3c7-db7d894aeab5
+  text: 45 kW
+- id: 59c72811-3006-450d-80bb-7d2db9013733
+  text: 2 kW
+correct_choice_ids:
+- 8bb85f4a-77f9-4a69-892a-f6e9e09822f7
+explanation: P = V x I = 400 V x 50 A = 20,000 W = 20 kW.
+archived: false

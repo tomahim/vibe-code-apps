@@ -1,0 +1,19 @@
+id: 5e1ee424-5d74-4681-bf36-bb3d2c8fb97e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What would a PUE of 1.0 mean?
+choices:
+- id: e116fe53-2698-4a06-be8e-3a36069b2bb8
+  text: Every watt of facility energy reaches the IT equipment
+- id: 8b65dd32-9bd0-49a9-9c6d-e974e6069866
+  text: The facility uses no electricity
+- id: 74ef9938-e989-4d24-9b5e-51d7f83bf671
+  text: All servers run at 100% utilization
+- id: 330d95dc-407e-44b0-a2d5-e15a9e481d1c
+  text: The cooling system is broken
+correct_choice_ids:
+- e116fe53-2698-4a06-be8e-3a36069b2bb8
+explanation: 'PUE 1.0 is the unreachable ideal: zero overhead, with nothing spent on cooling, conversion losses or lighting.'
+archived: false

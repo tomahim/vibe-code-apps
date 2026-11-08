@@ -1,0 +1,19 @@
+id: 4328c045-fdda-483b-b80c-dfbc8404565c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Roughly what voltage does a processor core run on?
+choices:
+- id: fd77d3ab-3451-4d19-8bed-8bc7c89a9ac4
+  text: About 1 V
+- id: 3b3ca2eb-5119-43d2-b960-b2c8548ac8c2
+  text: About 230 V
+- id: 6b6e40cb-5dd2-4b39-92d3-121478f105ea
+  text: About 48 V
+- id: 7aeb9f40-30b4-46d8-bdbe-c81acb99a45d
+  text: About 11 kV
+correct_choice_ids:
+- fd77d3ab-3451-4d19-8bed-8bc7c89a9ac4
+explanation: Modern chip cores run at around 1 V, stepped down many times from the grid's hundreds of kilovolts.
+archived: false

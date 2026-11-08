@@ -1,0 +1,12 @@
+id: 5e34e479-3d83-4d40-9bf4-5777ae574fc0
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What are the enclosures called that plug into an overhead busway to feed each rack?
+accepted_answers:
+- tap-off units
+- tap-off boxes
+- tap-offs
+- tap off units
+explanation: Tap-off units attach to the busway above each rack and drop whips down to the rack.
+archived: false

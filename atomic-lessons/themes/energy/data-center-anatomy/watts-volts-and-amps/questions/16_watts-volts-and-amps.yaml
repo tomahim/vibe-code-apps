@@ -1,0 +1,12 @@
+id: a88b5697-8ac3-45aa-acd9-7c7c8ca9f3e9
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: What does the acronym kWh stand for?
+accepted_answers:
+- kilowatt-hour
+- kilowatt hour
+- kilowatt-hours
+- kilowatt hours
+explanation: 'The kilowatt-hour is the unit of energy: one kW of power sustained for one hour.'
+archived: false

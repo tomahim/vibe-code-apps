@@ -1,0 +1,19 @@
+id: 0654f504-02bc-47b3-a12b-f7d0b1317d13
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is the main electrical consumer inside a chiller?
+choices:
+- id: acdbc244-0ab3-45c7-9fc7-f32bece38f07
+  text: The compressor
+- id: 6cbffb23-acd3-4aa6-bbf1-7c024d884705
+  text: The control panel display
+- id: cfe56993-a0c0-495f-a4f8-881eb830c09b
+  text: The water-level sensors
+- id: 3965046f-1427-49a5-ba11-0a440d507ac0
+  text: The refrigerant itself
+correct_choice_ids:
+- acdbc244-0ab3-45c7-9fc7-f32bece38f07
+explanation: The compressor drives the vapor-compression cycle and dominates chiller energy use, which is why economizer hours matter so much.
+archived: false

@@ -1,0 +1,19 @@
+id: 4925cebb-1fd3-4b78-aee4-fb6e5bca1cda
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What energy lever is unique to storage systems?
+choices:
+- id: a1cb8af2-b277-49d4-af27-0ebaa8e73517
+  text: Consolidating cold data onto fewer, denser media and powering down the rest
+- id: 1e19ef20-490d-4070-9e2f-e3f0548f42d1
+  text: Running servers without any cooling
+- id: 7b24c28a-678c-461e-832a-fb1b42891340
+  text: Scheduling backups for nighttime only
+- id: 418a9b5d-2c32-45d9-8f01-1a850de7c25c
+  text: Replacing all flash with optical discs
+correct_choice_ids:
+- a1cb8af2-b277-49d4-af27-0ebaa8e73517
+explanation: Cold-tier discipline lets operators archive petabytes at very low power, a lever compute does not have.
+archived: false

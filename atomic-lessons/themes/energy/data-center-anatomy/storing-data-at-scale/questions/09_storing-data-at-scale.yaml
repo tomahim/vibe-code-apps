@@ -1,0 +1,19 @@
+id: c2d1ba67-c144-43d0-8197-34a8c2d88eca
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why do most modern servers run with little local storage?
+choices:
+- id: d5db19c3-2db8-4e23-bc5f-1e0b2d2dc5d9
+  text: Their data lives on networked storage systems shared across the fleet
+- id: f6a1d548-8af1-4a01-a6bb-9626b01c034f
+  text: Local drives are banned in data centers
+- id: 0dd8168a-99b6-4ec1-b339-c78c0a033ba9
+  text: Servers no longer need to read data
+- id: 603b6114-5fa9-41a1-97e9-0a32a58ff5f1
+  text: Network storage is always faster than local drives
+correct_choice_ids:
+- d5db19c3-2db8-4e23-bc5f-1e0b2d2dc5d9
+explanation: Block, file and object storage systems serve data over the network, letting compute racks stay lean.
+archived: false

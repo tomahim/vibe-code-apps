@@ -1,0 +1,19 @@
+id: 7bdb47ea-2564-4cdc-97be-994d59c87a32
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Where does the 19-inch rack width standard come from?
+choices:
+- id: 737395c2-7d3c-451e-b0d4-a278d037e75b
+  text: Railway relay equipment of the 1920s
+- id: 1705fadd-b8c7-4485-825d-8c44de18c6c3
+  text: The first IBM mainframe cabinets
+- id: c4e766a0-4072-4691-af42-cb0c4025f459
+  text: A 1996 telecom regulation
+- id: 09c79bb5-cac9-4397-9590-ebef6c9142a9
+  text: The width of a pizza box
+correct_choice_ids:
+- 737395c2-7d3c-451e-b0d4-a278d037e75b
+explanation: The 19-inch standard dates to 1920s railway relay racks and now shapes nearly all IT equipment.
+archived: false

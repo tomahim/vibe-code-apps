@@ -1,0 +1,19 @@
+id: 6297c998-e123-4c0c-b111-e1a95a5b7c08
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How does a static transfer switch (STS) differ from an ATS?
+choices:
+- id: 5e05dd4f-7b55-41c3-9638-e64348cacabf
+  text: It moves loads between two live sources in milliseconds using power electronics
+- id: 9a08d22e-313c-4371-8f87-5dffc0017ecd
+  text: It is slower but handles higher voltage
+- id: cab9a95e-ad33-4f3d-8bdb-a7344c790743
+  text: It can only switch once per day
+- id: 836047e6-e804-4d05-9d18-dbb976c3b263
+  text: It requires an operator's key to operate
+correct_choice_ids:
+- 5e05dd4f-7b55-41c3-9638-e64348cacabf
+explanation: ATS switches sources mechanically and slowly; STS uses solid-state electronics to hop loads between live paths in milliseconds.
+archived: false

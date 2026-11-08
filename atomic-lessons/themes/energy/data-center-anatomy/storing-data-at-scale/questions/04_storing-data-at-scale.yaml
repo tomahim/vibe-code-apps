@@ -1,0 +1,19 @@
+id: 65aa075f-691c-4fdb-a976-82188bea8e44
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What happens operationally when a drive fails in a hyperscale fleet?
+choices:
+- id: 12393d1f-7f0e-4e34-b4d2-a6e94b1553d6
+  text: Copies rebuild automatically and the drive waits for a routine swap
+- id: 7b57c458-0a25-403c-a110-408e0f4797c8
+  text: An engineer rushes to restore it overnight
+- id: 8526d934-712c-419f-93fe-1806345afddb
+  text: The affected customers are notified of data loss
+- id: 9bcf1025-e04f-4fc3-a9ee-0459cc72bbae
+  text: The whole storage cluster enters read-only mode
+correct_choice_ids:
+- 12393d1f-7f0e-4e34-b4d2-a6e94b1553d6
+explanation: 'Detection, rebuild from surviving copies and a queued replacement: designed to be a nonevent.'
+archived: false

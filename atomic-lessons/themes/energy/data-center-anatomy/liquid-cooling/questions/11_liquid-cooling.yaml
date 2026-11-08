@@ -1,0 +1,19 @@
+id: 8759d527-72c6-4df0-9328-bd42f217bbc7
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why can liquid-cooled loops run at 30 C or above, and why does that matter?
+choices:
+- id: 2cab749c-9569-48cb-b108-db7135098d33
+  text: Liquid captures chip heat efficiently, and warm loops can be cooled without compressors in most climates
+- id: 3ab452fb-b320-4f13-b5fb-27c3e69a3242
+  text: Warm loops reduce the cost of the coolant
+- id: c1569cd8-8369-4034-9830-a79b4529bc5e
+  text: Chips run faster when warmer
+- id: 6d73452a-0dce-43bb-b826-d4797d6715fb
+  text: Regulations require warm loops
+correct_choice_ids:
+- 2cab749c-9569-48cb-b108-db7135098d33
+explanation: Warm supply water lets dry coolers or towers reject the heat directly, shrinking or eliminating the chiller plant for that load.
+archived: false

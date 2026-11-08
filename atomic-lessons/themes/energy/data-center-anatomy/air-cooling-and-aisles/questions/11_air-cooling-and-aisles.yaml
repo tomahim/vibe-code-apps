@@ -1,0 +1,20 @@
+id: 21f7eb7c-d7e7-407a-81e5-b90288f77e12
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: At roughly what rack density does air cooling hit its practical ceiling?
+choices:
+- id: 42b0e734-87da-4111-ad88-9f1c76985f11
+  text: Around 20 to 40 kW per rack, even with heroic engineering
+- id: 9b707a48-4f8e-43dd-9a40-721a4294e7c4
+  text: Around 200 kW per rack
+- id: 26ef9c72-c2b0-40ba-973c-499c471838d3
+  text: Around 2 kW per rack
+- id: 87a2e4c1-a43c-425f-9c14-4dc4a758131f
+  text: Air cooling has no ceiling
+correct_choice_ids:
+- 42b0e734-87da-4111-ad88-9f1c76985f11
+explanation: Beyond roughly 15-25 kW, and at most 30-40 kW with containment and rear-door exchangers, air cannot carry the heat; AI racks exceed
+  that several-fold.
+archived: false

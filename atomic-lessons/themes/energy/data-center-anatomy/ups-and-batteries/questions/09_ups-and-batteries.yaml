@@ -1,0 +1,19 @@
+id: 16d73877-32ce-46ca-82b4-db34535feb86
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What do typical double-conversion UPS losses amount to, per SemiAnalysis?
+choices:
+- id: 00816a41-1f43-43d8-92eb-e8798a19a0f0
+  text: 3 to 5% of throughput, worse at light load
+- id: ee717447-aaad-4edd-8b9c-5a8766d469c9
+  text: 50% of throughput
+- id: 1c501a26-be06-4e04-92b6-c8757a557b08
+  text: Less than 0.01%
+- id: 9d33fc06-47ee-44bb-8509-1308af55c6a5
+  text: Exactly zero in modern units
+correct_choice_ids:
+- 00816a41-1f43-43d8-92eb-e8798a19a0f0
+explanation: Converting AC-DC-AC wastes a few percent continuously; at campus scale that is megawatts of heat.
+archived: false

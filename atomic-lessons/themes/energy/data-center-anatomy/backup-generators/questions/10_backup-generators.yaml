@@ -1,0 +1,19 @@
+id: 6539f5e0-9781-4936-9d07-df17cd26d1df
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is a day tank?
+choices:
+- id: aca4a5ae-6d3e-4f1d-8c97-72f3b7dfca04
+  text: A small fuel tank near the engine, fed from larger bulk storage
+- id: 63a5eec9-9fc2-43ab-8154-8de0c5bdfd30
+  text: A tank that only works in daylight
+- id: 86e01c08-f35e-4d4b-abba-7af11fda31ea
+  text: A water tank for engine washing
+- id: 3b201ac4-a521-417d-b4d4-b7eb578b3f3c
+  text: The daily quota of permitted emissions
+correct_choice_ids:
+- aca4a5ae-6d3e-4f1d-8c97-72f3b7dfca04
+explanation: Day tanks sit close to the gensets and are replenished from bulk tanks, adding a layer of fuel-system redundancy.
+archived: false

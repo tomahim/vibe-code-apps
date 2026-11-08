@@ -1,0 +1,19 @@
+id: 9956150c-c711-43b8-9dbd-a27418c18b6d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What kind of traffic dominates inside a modern data center?
+choices:
+- id: d474540d-fb1d-4646-a563-d14fbcadfa86
+  text: 'East-west: server-to-server within the facility'
+- id: 870c6172-9960-44f5-8ee1-bb7d85a7adde
+  text: 'North-south: users reaching the internet'
+- id: 16729c61-cc4a-43bc-b72f-6c88adae8a4f
+  text: Broadcast television distribution
+- id: 3938b599-2004-4205-8058-fcef80d04205
+  text: Dial-up modem aggregation
+correct_choice_ids:
+- d474540d-fb1d-4646-a563-d14fbcadfa86
+explanation: Most traffic now flows server to server (east-west), which is why flat spine-leaf fabrics replaced hierarchical designs.
+archived: false

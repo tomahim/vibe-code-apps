@@ -1,0 +1,19 @@
+id: 00cde980-a1df-4e08-83ed-109a1254178d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why do cooling failures have a larger blast radius than electrical faults, per SemiAnalysis?
+choices:
+- id: b39dcaae-6d11-4ee8-bd26-216c7f642248
+  text: Heat builds everywhere at once and there is no battery equivalent for cooling
+- id: 5c29c093-104b-4e45-998c-35cd45fe3544
+  text: Cooling equipment is made of fragile glass
+- id: 4232ddad-fef6-4b50-81d8-b7fd39174df2
+  text: Electrical faults always repair themselves instantly
+- id: ff347e48-6c90-4822-86b3-dfce158abab6
+  text: Cooling systems are excluded from all monitoring
+correct_choice_ids:
+- b39dcaae-6d11-4ee8-bd26-216c7f642248
+explanation: Electrical faults are more common but localized; cooling failure heats the whole hall in minutes with no bridging device.
+archived: false

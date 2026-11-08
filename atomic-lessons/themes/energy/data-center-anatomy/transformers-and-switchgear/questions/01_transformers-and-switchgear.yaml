@@ -1,0 +1,20 @@
+id: ce197d81-c467-431b-aaf2-ea657a1391e5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What physical principle lets a transformer change voltage?
+choices:
+- id: d9bfac8f-811d-4690-9c3d-9494cebc0f92
+  text: A changing magnetic field in the core induces voltage in the secondary coil
+- id: 3dbb641a-254e-47ac-be88-83b6ec59f637
+  text: Electrons jump across an air gap between coils
+- id: b1dcf699-605d-4d1b-b0e1-ef2f10520577
+  text: The iron core stores electricity like a battery
+- id: 9e1a76ac-263b-4b89-b067-ba4a2684f290
+  text: Resistance heating raises the voltage
+correct_choice_ids:
+- d9bfac8f-811d-4690-9c3d-9494cebc0f92
+explanation: AC in the primary creates a changing magnetic field, which induces a proportional voltage in the secondary; the turns ratio sets
+  the voltage ratio.
+archived: false

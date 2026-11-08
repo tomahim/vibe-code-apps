@@ -1,0 +1,19 @@
+id: b56038af-6436-47e3-a8bc-4fd4b1cc322a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: A 2 kW server runs at full load for 3 hours. How much energy does it use?
+choices:
+- id: a66a3d29-4361-4a6e-8784-0f7607eb7054
+  text: 6 kWh
+- id: 19b96c81-a799-4679-970f-112fbbdca795
+  text: 5 kWh
+- id: 75d4a40e-5060-4586-abe6-0d2bca2aced3
+  text: 2 kWh
+- id: 409449ea-ad1d-4ff2-9c2e-41adb481d58a
+  text: 1.5 kWh
+correct_choice_ids:
+- a66a3d29-4361-4a6e-8784-0f7607eb7054
+explanation: Energy = power x time = 2 kW x 3 h = 6 kWh.
+archived: false

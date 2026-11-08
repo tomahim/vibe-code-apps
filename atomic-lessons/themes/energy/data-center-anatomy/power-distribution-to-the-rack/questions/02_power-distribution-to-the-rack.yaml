@@ -1,0 +1,20 @@
+id: b35a7675-0c40-4be3-9006-41c506a6273d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why does the cooling path generally not receive battery ride-through?
+choices:
+- id: a8692f70-836c-4280-9c7a-2ed090fae5b6
+  text: Chillers and pumps tolerate the minute until generators take over
+- id: 89be2d60-7ab9-4135-b3e9-bae320b78da9
+  text: Cooling equipment uses no electricity
+- id: 82bace5c-a700-4e91-827f-2406ac0ef9e6
+  text: Batteries cannot power fans
+- id: b5f721cb-02de-46ff-841f-cd0069abc94e
+  text: Cooling is optional during outages
+correct_choice_ids:
+- a8692f70-836c-4280-9c7a-2ed090fae5b6
+explanation: Cooling can coast for a minute without harm, so battery capacity is reserved for IT; this asymmetry shapes the blast radius of cooling
+  failures.
+archived: false

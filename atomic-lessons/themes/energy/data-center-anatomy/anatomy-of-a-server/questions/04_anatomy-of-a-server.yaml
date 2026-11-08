@@ -1,0 +1,19 @@
+id: 6415aa17-9ec6-4616-9379-a63d3d561aea
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which network speeds do AI training servers typically carry per adapter?
+choices:
+- id: bc2b7f37-644e-4c10-8aca-a9a8f6c6ae61
+  text: 400 to 800 Gb/s
+- id: 9b9e7741-7262-4a15-92f5-ce097dee2ff1
+  text: 1 to 10 Mb/s
+- id: 079dbdb1-ecef-47ba-8626-eb47b9a75331
+  text: 10 to 100 Mb/s
+- id: 3dd805db-fe68-41ba-9214-fab7759cc451
+  text: 56 kb/s dial-up
+correct_choice_ids:
+- bc2b7f37-644e-4c10-8aca-a9a8f6c6ae61
+explanation: AI training synchronizes huge data volumes, so servers carry multiple 400 or 800 Gb/s adapters; standard servers use 10-100 Gb/s.
+archived: false

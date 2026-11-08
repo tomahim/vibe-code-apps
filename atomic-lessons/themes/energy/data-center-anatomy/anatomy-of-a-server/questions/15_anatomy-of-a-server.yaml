@@ -1,0 +1,10 @@
+id: dcd052e9-f1e7-4fe8-a7ff-bc65bdadb80c
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What does the acronym NIC stand for?
+accepted_answers:
+- network interface card
+- network interface controller
+explanation: The network interface card connects the server to the data center network.
+archived: false

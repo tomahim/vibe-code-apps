@@ -1,0 +1,19 @@
+id: 8e7e9d79-58c6-4c6f-afe6-caa4c2db63e3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why must cooling towers consume water continuously?
+choices:
+- id: b84df0dd-33ca-42b9-8888-8d36578df390
+  text: Evaporated water must be replaced, and concentrated minerals must be bled off
+- id: 8a564d91-8b05-4fb5-a9be-aca5f351dd43
+  text: Water is destroyed by heat
+- id: 3f1d43c7-c454-47b3-b207-edcb0940398f
+  text: The chillers dissolve water into refrigerant
+- id: e4f74cb5-85cf-4b8d-954b-4070e419fe72
+  text: Towers leak by design
+correct_choice_ids:
+- b84df0dd-33ca-42b9-8888-8d36578df390
+explanation: Make-up water replaces evaporation and bleed-off; a large facility can evaporate millions of liters per day in hot weather.
+archived: false

@@ -1,0 +1,9 @@
+id: 12e23731-cb85-4d72-ac85-1da14cd8c567
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: What does the acronym PUE stand for?
+accepted_answers:
+- power usage effectiveness
+explanation: 'Power usage effectiveness: total facility energy divided by IT energy, the industry''s efficiency report card.'
+archived: false

@@ -1,0 +1,20 @@
+id: d344b104-e752-4548-8ea5-6fdc77a0e803
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which sequence correctly orders the course's assembly of a data center?
+choices:
+- id: 8c1cf14c-5f2b-4a9a-a2d3-7393e29055a8
+  text: Transistor, chip, server, rack, hall, campus
+- id: eeb9536c-c0d6-4753-b32d-fc75acfde458
+  text: Campus, hall, rack, server, chip, transistor
+- id: 55050cec-74d9-4816-b74c-4cf39a7dc2d7
+  text: Chip, transistor, rack, campus, server, hall
+- id: 4bcc84cb-0151-4c52-ab13-07181f7579d8
+  text: Server, transistor, campus, chip, hall, rack
+correct_choice_ids:
+- 8c1cf14c-5f2b-4a9a-a2d3-7393e29055a8
+explanation: 'The course assembles micro to macro: transistors make chips, chips make servers, servers fill racks, racks fill halls, halls form
+  campuses.'
+archived: false

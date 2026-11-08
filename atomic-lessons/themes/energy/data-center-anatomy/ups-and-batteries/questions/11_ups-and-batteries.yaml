@@ -1,0 +1,19 @@
+id: 0f4de2e7-a455-4ecb-aa94-21fa661fad5c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What problem does modular UPS design NOT primarily solve?
+choices:
+- id: efa0e5ec-4476-417b-81bf-5d30472e2dce
+  text: Guaranteeing the grid itself never fails
+- id: 4c637b94-67fd-4b3b-a69a-7c5d9ab5d405
+  text: Growing capacity as load arrives
+- id: df98ccb8-bde2-4672-ae32-f160725a93b2
+  text: Hot-swapping a failed power core
+- id: 19b0ea6a-5ab4-4f76-b6eb-724f8190e214
+  text: Keeping active cores near efficient loading
+correct_choice_ids:
+- efa0e5ec-4476-417b-81bf-5d30472e2dce
+explanation: Modularity addresses capital timing, maintainability and efficiency; the grid's own reliability is out of scope.
+archived: false

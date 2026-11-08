@@ -1,0 +1,19 @@
+id: 5c9881b4-6b39-49cc-8084-0ca04042a24d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How large is a typical hyperscale building, in critical IT power?
+choices:
+- id: 3964a586-443e-4763-a5ed-02433a927924
+  text: 40 to 100 MW
+- id: be385c11-1a28-4068-8d86-c4b07426af17
+  text: 1 to 2 MW
+- id: ff68add6-570b-42d7-a1a7-24f641516c9e
+  text: 500 kW
+- id: 8736f73a-5b99-4ac4-b12e-8c25236d4e43
+  text: Over 1 GW per room
+correct_choice_ids:
+- 3964a586-443e-4763-a5ed-02433a927924
+explanation: Hyperscale buildings run 40-100 MW each, grouped into campuses rated in the hundreds of MW.
+archived: false

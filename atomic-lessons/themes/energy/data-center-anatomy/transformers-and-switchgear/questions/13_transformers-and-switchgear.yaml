@@ -1,0 +1,19 @@
+id: 71edbee6-bc7b-4b93-bbf2-ec6a07105466
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which pair handles continuity when the grid fails, and on what timescales?
+choices:
+- id: 60159c84-8de5-448e-8348-90c16bd0c8e7
+  text: UPS batteries respond in milliseconds; generators take over within about a minute
+- id: b7d4f032-b417-4a21-a043-90a596173513
+  text: Generators respond in milliseconds; batteries last for days
+- id: f09705dd-3f04-42cf-90df-428a2607d939
+  text: Solar panels respond in seconds; wind turbines take hours
+- id: 3ff6acfb-a5d4-43fc-8b34-3a15a8e4597d
+  text: The grid repairs itself instantly; no local equipment is needed
+correct_choice_ids:
+- 60159c84-8de5-448e-8348-90c16bd0c8e7
+explanation: The UPS bridges the first seconds from batteries; diesel generators start within about a minute and can run for days.
+archived: false

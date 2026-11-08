@@ -1,0 +1,19 @@
+id: d2596746-d25e-4d63-83ce-fae5305ead8a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why do operators test failover regularly, often weekly?
+choices:
+- id: 9e54100d-1381-481e-ad69-d9769b0b0550
+  text: A backup never proven under load is a hope, not a system
+- id: 357dea04-ae4c-4b9e-b71a-54357f26bb91
+  text: Regulators fine untested facilities daily
+- id: 1a0f412d-141a-402e-a168-4dff4e44d899
+  text: Diesel engines rust within a week
+- id: a140793e-5a14-43b7-a0d4-d2297c16035d
+  text: Tests generate electricity sold back to the grid
+correct_choice_ids:
+- 9e54100d-1381-481e-ad69-d9769b0b0550
+explanation: Idle-for-months equipment must be proven regularly; test runs under load are the only real evidence of readiness.
+archived: false

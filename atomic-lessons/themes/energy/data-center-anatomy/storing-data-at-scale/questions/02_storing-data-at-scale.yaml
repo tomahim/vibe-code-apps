@@ -1,0 +1,19 @@
+id: a7269881-3de5-46fc-94ba-6ac62538eb13
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is the main advantage of HDDs over SSDs for data centers?
+choices:
+- id: 702575bc-4c0a-4ff4-9df1-88e187828ffe
+  text: Lower cost per terabyte for bulk data
+- id: d1bc9c1f-33f0-4bc9-843c-1b9e8516a528
+  text: Higher random access speed
+- id: 3e2f69c3-0c1f-40a6-832d-c0148f8cd7db
+  text: No moving parts to wear out
+- id: 7da46719-2251-45f8-8da0-4c2e75256c3a
+  text: Immunity to magnetic fields
+correct_choice_ids:
+- 702575bc-4c0a-4ff4-9df1-88e187828ffe
+explanation: HDDs remain far cheaper per terabyte, which keeps them dominant for bulk and cold storage despite slower access.
+archived: false

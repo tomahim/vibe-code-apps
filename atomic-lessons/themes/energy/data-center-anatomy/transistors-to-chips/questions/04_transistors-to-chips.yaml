@@ -1,0 +1,19 @@
+id: 0025134e-6dff-4ff8-abdb-ca9a11ec77a7
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What happens to the electrical energy a chip consumes?
+choices:
+- id: 3c1d4329-05cf-40f1-90fa-6bb345db86f4
+  text: Almost all of it becomes heat
+- id: a1a8d3e5-549b-4ddb-ad52-b668d3e1f469
+  text: Most of it is stored in the transistors
+- id: da33cc9a-51b7-4f15-8824-a4f5130515f5
+  text: Half of it returns to the grid
+- id: 5de780e6-a911-4802-9262-b40ddaa5bcf5
+  text: It is converted into light in the package
+correct_choice_ids:
+- 3c1d4329-05cf-40f1-90fa-6bb345db86f4
+explanation: Computation dissipates nearly all consumed electrical power as heat, which is why power delivery and heat removal are equally sized.
+archived: false

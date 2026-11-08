@@ -1,0 +1,19 @@
+id: 8d3b854a-40ea-446a-8c00-444addc721e8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is a rear-door heat exchanger?
+choices:
+- id: 730ef433-eb2f-48ce-99da-07794994cfa3
+  text: A water-cooled radiator door on a standard rack that captures exhaust heat before it enters the room
+- id: 9582aca2-501c-4289-b7ed-b1073ac93c38
+  text: A fire door with emergency sprinklers
+- id: e014f9d4-13d6-47fb-855e-9bc1618a1088
+  text: The back panel of a CRAC unit
+- id: fc1f613e-88ee-46d3-ba80-8c04f67db245
+  text: A security barrier for the loading dock
+correct_choice_ids:
+- 730ef433-eb2f-48ce-99da-07794994cfa3
+explanation: Rear-door exchangers let existing air-cooled halls host 30-50 kW racks, a bridge toward fuller liquid adoption.
+archived: false

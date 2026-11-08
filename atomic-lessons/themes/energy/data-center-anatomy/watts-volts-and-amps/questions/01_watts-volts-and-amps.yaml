@@ -1,0 +1,19 @@
+id: 87a4f25c-784f-4a5a-95a7-c1b3e7f54ce8
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In the water-pipe analogy, what does voltage correspond to?
+choices:
+- id: b7197b21-3d1a-4fa5-b309-e22733448c7a
+  text: The water pressure in the pipe
+- id: 2fa64027-57d2-47d8-ad83-1e777227908d
+  text: The length of the pipe
+- id: 60b8e7f7-96d3-4ea2-b74d-d3af8faaabd0
+  text: The water flow rate in the pipe
+- id: 671e1589-07d6-4e5f-aff1-07106e9e41a0
+  text: The diameter of the pipe
+correct_choice_ids:
+- b7197b21-3d1a-4fa5-b309-e22733448c7a
+explanation: Voltage is electrical pressure, like water pressure in a pipe; current is the flow rate.
+archived: false

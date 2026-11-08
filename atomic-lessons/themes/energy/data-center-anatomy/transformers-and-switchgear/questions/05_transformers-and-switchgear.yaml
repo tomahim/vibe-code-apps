@@ -1,0 +1,19 @@
+id: 25750a35-f43a-4fe2-a38f-0d9e6d76334f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why are transformers rated in MVA rather than MW?
+choices:
+- id: 88cffd5d-96f9-4274-90c3-3ce70a2ea846
+  text: Their limit is total current, including reactive power that does no useful work
+- id: 6f79a0e5-3a3c-4ca1-ab20-3b86f063c197
+  text: MVA sounds more impressive in specifications
+- id: d1af1541-c737-4368-9bd5-9bd1a020332d
+  text: Watts cannot be measured above 1 MW
+- id: b5f09c9d-a2d3-4438-9c88-dd69c77e92d4
+  text: Regulations require apparent power ratings
+correct_choice_ids:
+- 88cffd5d-96f9-4274-90c3-3ce70a2ea846
+explanation: Cables and windings feel all current, real plus reactive, so equipment is rated on apparent power (VA), not just real power (W).
+archived: false

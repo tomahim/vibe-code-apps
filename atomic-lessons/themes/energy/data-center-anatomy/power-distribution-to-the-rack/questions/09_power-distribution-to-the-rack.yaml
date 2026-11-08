@@ -1,0 +1,19 @@
+id: 2292e594-026c-46b8-a97e-4cc8441d42d8
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the conceptual test of a 2N distribution design?
+choices:
+- id: 1f6d8ea2-e536-4caf-8366-f18ed0e27270
+  text: Fail any single component in either chain and every server keeps running
+- id: 748dc37e-31e3-4d40-bb07-3303d53e8494
+  text: Both chains run at exactly 50% load forever
+- id: 21ffc910-48e0-4075-8b23-f4495d586a41
+  text: Each server draws power from both cords at all times
+- id: 1e719066-f036-41e2-8bde-448bb9433ea8
+  text: The utility connection can be removed permanently
+correct_choice_ids:
+- 1f6d8ea2-e536-4caf-8366-f18ed0e27270
+explanation: 2N means two independent end-to-end systems; any single failure or maintenance action leaves the load fully powered.
+archived: false

@@ -1,0 +1,19 @@
+id: 6308a958-9c43-4c3d-bf9a-d0a744f04b52
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is the UPS's response time when grid power fails?
+choices:
+- id: af43206a-dc8b-47a6-8b40-74b32d1b57cc
+  text: Under 10 milliseconds
+- id: d1b50dff-7aa4-4afa-a8b0-340009ec15d0
+  text: About 60 seconds
+- id: f9c3e90b-ef31-47a5-86b7-2abf0700605d
+  text: About one minute
+- id: c566d2c3-520f-4272-a1b2-eb9337e5b523
+  text: Exactly one second
+correct_choice_ids:
+- af43206a-dc8b-47a6-8b40-74b32d1b57cc
+explanation: Because the battery already feeds the DC bus, the transition is effectively seamless, quoted under 10 ms.
+archived: false

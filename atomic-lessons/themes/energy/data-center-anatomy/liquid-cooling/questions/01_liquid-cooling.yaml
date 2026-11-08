@@ -1,0 +1,19 @@
+id: a84e240c-cbb3-4b32-b464-d66671583dcd
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why does liquid cooling beat air cooling at high rack density?
+choices:
+- id: add4bd3c-36e0-47f8-8125-1d317e860451
+  text: Water's volumetric heat capacity exceeds air's by a factor in the thousands
+- id: e502df10-3446-427d-8cc5-bf8e242c1665
+  text: Liquid is always colder than air
+- id: ecde16a1-6812-48e0-8bb7-2dc3b961fa90
+  text: Pipes are cheaper than fans
+- id: e7863343-55c5-4111-ab2d-a88f0e9bf217
+  text: Liquids conduct electricity, speeding up chips
+correct_choice_ids:
+- add4bd3c-36e0-47f8-8125-1d317e860451
+explanation: A modest liquid flow carries the heat an impossible storm of air would be needed for; that is the whole reason for the transition.
+archived: false

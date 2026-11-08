@@ -1,0 +1,19 @@
+id: 0bb47489-4388-49b2-90da-e18acbe995cc
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What distinguishes two-phase immersion cooling?
+choices:
+- id: ca26ceb5-c697-4ec9-92d9-81374ec5835f
+  text: The fluid boils on the hot chips and its vapor condenses on coils above, carrying heat out passively
+- id: f2fbad72-6a22-4449-ac69-2da3b6c771dc
+  text: Servers are frozen into blocks of ice
+- id: ea903033-0c62-40b6-a1cf-a841b5f70e21
+  text: Two separate buildings share one tank
+- id: ca688120-9df8-4722-9924-26728128a74b
+  text: The fluid alternates between water and oil each hour
+correct_choice_ids:
+- ca26ceb5-c697-4ec9-92d9-81374ec5835f
+explanation: Two-phase fluids boil at low temperature; the phase change itself transports heat to the condenser coils with no primary pump.
+archived: false

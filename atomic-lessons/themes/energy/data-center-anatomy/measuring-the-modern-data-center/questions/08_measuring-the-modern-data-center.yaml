@@ -1,0 +1,11 @@
+id: c332ba57-8614-4bfe-8a05-28bd16e6f35a
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: How many minutes of expected annual downtime correspond to Tier IV's 99.995% availability? (approximate, number only)
+accepted_answers:
+- '26'
+- 26 minutes
+- about 26
+explanation: 99.995% availability leaves about 26 minutes of expected downtime per year, versus about 28 hours at Tier I's 99.671%.
+archived: false

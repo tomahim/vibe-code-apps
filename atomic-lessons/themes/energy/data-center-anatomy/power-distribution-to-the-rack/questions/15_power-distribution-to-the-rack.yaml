@@ -1,0 +1,13 @@
+id: d99da7a7-7e50-4e79-8945-51a0c3804141
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What is the strip of outlets down the rear of a rack, distributing power to servers, called?
+accepted_answers:
+- rack PDU
+- vertical PDU
+- rack power strip
+- power strip
+- in-rack PDU
+explanation: The vertical rack PDU (two of them, A and B) is the final distribution point inside the rack.
+archived: false

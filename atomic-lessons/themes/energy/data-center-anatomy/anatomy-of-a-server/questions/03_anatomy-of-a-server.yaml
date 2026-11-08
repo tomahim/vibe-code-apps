@@ -1,0 +1,19 @@
+id: 8e4cf177-5fe5-4800-865d-0d6a0834dab7
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why do AI packages place high-bandwidth memory (HBM) next to the GPU on the same substrate?
+choices:
+- id: 781f2850-9a3a-480d-a9d6-131b2f810975
+  text: To reach much higher data rates between memory and compute
+- id: 79a56d1f-1458-4eb3-9549-68d5b8b25729
+  text: To make the memory upgradeable by technicians
+- id: 9450ef77-26da-441b-80b3-7ff644b6e0a4
+  text: To eliminate the need for a power supply
+- id: 4f6cfc80-eede-479c-b92e-688ff040e3cb
+  text: To reduce the physical size of the server chassis
+correct_choice_ids:
+- 781f2850-9a3a-480d-a9d6-131b2f810975
+explanation: HBM stacks memory beside the GPU for enormous bandwidth, trading away field upgradeability.
+archived: false

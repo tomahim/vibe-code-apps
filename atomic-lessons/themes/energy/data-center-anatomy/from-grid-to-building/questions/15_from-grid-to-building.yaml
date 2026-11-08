@@ -1,0 +1,12 @@
+id: 8d2027a4-7344-4e8d-878e-eea70906170b
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What is the name of the yard of transformers and switchgear that steps transmission power down for a campus?
+accepted_answers:
+- substation
+- the substation
+- on-site substation
+- electrical substation
+explanation: The on-site substation is the campus's front door for power, stepping high voltage down to medium voltage.
+archived: false

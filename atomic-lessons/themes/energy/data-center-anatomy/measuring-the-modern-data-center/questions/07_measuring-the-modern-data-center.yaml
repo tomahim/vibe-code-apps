@@ -1,0 +1,11 @@
+id: 887a6f24-3e9a-4e6c-bf9d-bc9a6767e831
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Which organization created the Tier classification for data center availability?
+accepted_answers:
+- Uptime Institute
+- the Uptime Institute
+- uptime institute
+explanation: The Uptime Institute's Tier Standard rates facilities from Tier I to Tier IV.
+archived: false

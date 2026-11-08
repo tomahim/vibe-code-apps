@@ -1,0 +1,19 @@
+id: 4bae9362-2faa-4bca-a341-6415c3e7cef3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What does Tier IV add beyond Tier III?
+choices:
+- id: e30ab058-25ec-43bb-906f-11862e6d7861
+  text: 'Fault tolerance: the facility survives any single failure without IT impact'
+- id: 19a2eabc-a2a2-46e1-9dfa-2fc9daff280a
+  text: Four times the server capacity
+- id: cf0394a5-4e7c-4e18-b6f3-46dd0c5a9945
+  text: Four independent grid connections by law
+- id: 4736527f-5e5d-44c4-bf30-b42dc9e9061d
+  text: Automatic carbon neutrality
+correct_choice_ids:
+- e30ab058-25ec-43bb-906f-11862e6d7861
+explanation: Tier IV survives failures, not just maintenance, typically requiring fully duplicated 2N infrastructure.
+archived: false

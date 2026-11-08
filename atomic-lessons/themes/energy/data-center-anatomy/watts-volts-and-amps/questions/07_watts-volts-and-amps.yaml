@@ -1,0 +1,11 @@
+id: 198b9874-83af-45b0-8584-0ac5cc3657b2
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What is the unit of electrical power?
+accepted_answers:
+- watt
+- watts
+- W
+explanation: Power is measured in watts (W), equal to volts times amps.
+archived: false

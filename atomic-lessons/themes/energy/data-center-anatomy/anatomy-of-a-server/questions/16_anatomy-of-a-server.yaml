@@ -1,0 +1,10 @@
+id: 3650a863-e2e6-4505-8a32-8d0923fb71d6
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: How many millimeters tall is a 1U server? (number only)
+accepted_answers:
+- '44.45'
+- 44.45 mm
+explanation: One rack unit is 44.45 mm, the standard height increment of rack-mounted equipment.
+archived: false

@@ -1,0 +1,12 @@
+id: 0ae01920-e73a-4534-917a-f74e006bff05
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: What are the two independent power feeds into a rack conventionally called?
+accepted_answers:
+- A side and B side
+- A and B
+- A-side and B-side
+- A feed and B feed
+explanation: Dual feeds are labeled A side and B side; either alone can power the entire rack.
+archived: false

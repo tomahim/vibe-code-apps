@@ -1,0 +1,19 @@
+id: 9b1034e3-c5e4-4420-bdbc-ef138b882ca7
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: SemiAnalysis estimates a 20,840-GPU NVIDIA H100 cluster needs about how much critical IT power?
+choices:
+- id: 30c757aa-776b-4c70-ab98-b32e0bd028c8
+  text: About 26 MW
+- id: 8d413e1b-86a8-47e1-a0a9-008e809f3adc
+  text: About 2.6 MW
+- id: 33df49f3-3a19-4289-bf25-4bd676c281a8
+  text: About 260 MW
+- id: 588e8cb8-99dd-4305-b27b-ef16ed563db5
+  text: About 0.26 MW
+correct_choice_ids:
+- 30c757aa-776b-4c70-ab98-b32e0bd028c8
+explanation: Roughly 25.9 MW of critical IT power for about 20,000 H100 GPUs, around 1.2 kW per GPU once the supporting systems are counted.
+archived: false

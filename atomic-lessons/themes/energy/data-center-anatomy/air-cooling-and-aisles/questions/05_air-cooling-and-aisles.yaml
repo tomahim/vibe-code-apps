@@ -1,0 +1,19 @@
+id: bc77513a-0fa6-45c4-bc29-47f13e4ef4e0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why are rack rows arranged front-to-front and back-to-back?
+choices:
+- id: c7420b7f-46c5-4dbd-beba-45b142ec3427
+  text: So cold supply and hot exhaust collect in separate aisles instead of mixing
+- id: 9d1d892e-16ee-4b31-b147-5d6c9a9eb354
+  text: So technicians face each other while working
+- id: 1d1550f4-c2ba-42f7-bfcb-2314f6b9a850
+  text: To reduce the number of power strips needed
+- id: 8587e4e3-cbf0-44e5-a872-08ea42c59545
+  text: To share network cables between facing racks
+correct_choice_ids:
+- c7420b7f-46c5-4dbd-beba-45b142ec3427
+explanation: The hot aisle / cold aisle layout keeps cold supply air and hot exhaust air apart, preventing short-circuiting.
+archived: false

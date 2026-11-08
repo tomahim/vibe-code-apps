@@ -1,0 +1,19 @@
+id: 21b39087-4358-4178-973b-7fc9e089b57d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What are the two paths power takes after the UPS?
+choices:
+- id: e67d5757-76e0-49ff-abe1-c347d9fec473
+  text: IT equipment and the cooling plant
+- id: 0f6797db-8b0e-41e4-a4ce-ebda0eada843
+  text: Servers and storage only
+- id: 61ee5422-559e-4e76-8387-a1efffd4ef0f
+  text: Lighting and elevators
+- id: 14f8e726-5b56-4a32-8739-914c059d1e17
+  text: Offices and the security gate
+correct_choice_ids:
+- e67d5757-76e0-49ff-abe1-c347d9fec473
+explanation: Power splits between the IT load and the cooling plant that removes its heat; only the IT path gets battery ride-through.
+archived: false

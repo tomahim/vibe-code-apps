@@ -1,0 +1,19 @@
+id: 59f4fd25-9a01-408c-887a-52716b6e0e0e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is the standard voltage of a European wall outlet?
+choices:
+- id: c32ad561-8620-44fe-a1e2-5f803bcf25f3
+  text: 230 V
+- id: 1d451510-89c6-4025-a78f-1a12ffc46862
+  text: 12 V
+- id: 38dd900b-67a3-4828-a4dc-e96ceda112d3
+  text: 110 kV
+- id: 0113943a-ad0f-4361-9e73-cc1dd1601f1a
+  text: 1,500 V
+correct_choice_ids:
+- c32ad561-8620-44fe-a1e2-5f803bcf25f3
+explanation: European outlets deliver 230 V AC; North American ones deliver about 120 V.
+archived: false

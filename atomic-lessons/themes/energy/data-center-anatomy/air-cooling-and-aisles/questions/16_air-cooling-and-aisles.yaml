@@ -1,0 +1,10 @@
+id: 4afdc7e4-f6bf-4afe-93c2-28f5e34fe413
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: Which industry body publishes the thermal guidelines that govern data hall temperature envelopes?
+accepted_answers:
+- ASHRAE
+- ashrae
+explanation: ASHRAE's Thermal Guidelines define the recommended and allowable temperature envelopes for IT equipment.
+archived: false

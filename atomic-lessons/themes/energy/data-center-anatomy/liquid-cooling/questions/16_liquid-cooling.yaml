@@ -1,0 +1,9 @@
+id: ab754310-9935-464c-b3cf-aee0182def48
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: direct-to-chip cooling mounts a cold ______ on each hot chip.'
+accepted_answers:
+- plate
+explanation: The cold plate, a channeled metal block, is where the liquid meets the silicon's heat.
+archived: false

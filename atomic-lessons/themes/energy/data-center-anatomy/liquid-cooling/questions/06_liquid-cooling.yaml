@@ -1,0 +1,19 @@
+id: bf468c7d-04f2-4ce7-a285-5db37ea97567
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why does the CDU keep the IT coolant supply above the dew point?
+choices:
+- id: f57e5caf-45b6-458e-9ee4-e804d338748d
+  text: To prevent condensation forming on cold pipes inside live racks
+- id: c9c749e8-55dc-46c1-bcda-c51444d6055a
+  text: To keep the liquid from freezing in winter
+- id: 916c9fc9-bc57-4716-86c7-621044bb2c45
+  text: To maximize the evaporation rate in the tower
+- id: 80c7da06-6b68-4b64-8294-6f80f8d3a24f
+  text: To reduce the pumping power required
+correct_choice_ids:
+- f57e5caf-45b6-458e-9ee4-e804d338748d
+explanation: Liquid supply stays warm enough that water from the air cannot condense onto plumbing surrounded by electronics.
+archived: false

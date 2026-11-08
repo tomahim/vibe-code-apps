@@ -1,0 +1,19 @@
+id: 587e55cc-43bf-49f8-8f30-9b69c4567de1
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: At roughly what voltage is power generated at a power plant, before step-up?
+choices:
+- id: 5ba924d9-2e7f-4656-9c00-1e4e21b7130d
+  text: Around 20 kV
+- id: 51bf4243-3128-4003-9206-2617cca03845
+  text: Around 230 V
+- id: 2fd1ebde-dc14-41e6-abf5-e4740ef7eb1a
+  text: Around 400 kV
+- id: 1363943d-d71f-4de4-8da3-ad4bae19d659
+  text: Around 1 V
+correct_choice_ids:
+- 5ba924d9-2e7f-4656-9c00-1e4e21b7130d
+explanation: Generators produce around 20 kV, which transformers step up to transmission voltage for the journey.
+archived: false

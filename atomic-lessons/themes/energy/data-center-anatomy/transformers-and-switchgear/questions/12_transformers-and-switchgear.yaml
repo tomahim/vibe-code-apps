@@ -1,0 +1,19 @@
+id: ca5b274e-8a5e-4977-ba38-b297620e2546
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which companies does SemiAnalysis name among key datacenter electrical equipment suppliers?
+choices:
+- id: 43d1d48c-9a70-4e92-b83a-13ea612fa728
+  text: Vertiv, Schneider Electric and Eaton
+- id: 856fbc9a-b12b-4019-b71c-8793c0398aed
+  text: Intel, AMD and Arm
+- id: 2a5e2ad6-c3c4-425c-a7ca-40a6fd70cbcd
+  text: Cisco, Juniper and Arista
+- id: 80a64f7e-78a0-4145-ba64-0903815752ad
+  text: Siemens Gamesa, Vestas and Orsted
+correct_choice_ids:
+- 43d1d48c-9a70-4e92-b83a-13ea612fa728
+explanation: SemiAnalysis tracks Vertiv, Schneider Electric and Eaton among the key electrical equipment suppliers for datacenters.
+archived: false

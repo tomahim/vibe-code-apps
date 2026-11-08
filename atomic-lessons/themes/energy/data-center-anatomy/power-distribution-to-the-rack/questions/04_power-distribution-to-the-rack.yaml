@@ -1,0 +1,19 @@
+id: 2782ed02-3a6a-48a9-9400-ebed89a1a95b
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What does PDU stand for in a data center context?
+choices:
+- id: 7e101fec-56e7-47ba-aa6d-a52a62813003
+  text: Power distribution unit
+- id: 07700325-cd13-4fe0-8d50-cfc7a8310773
+  text: Power delivery upgrade
+- id: 38b502de-ee5f-43c3-a08c-10a93ef44357
+  text: Protected data utility
+- id: 9166497d-cb56-4bd0-854f-3256ebc789af
+  text: Phase detection unit
+correct_choice_ids:
+- 7e101fec-56e7-47ba-aa6d-a52a62813003
+explanation: The power distribution unit breaks a large feed into many individually protected and metered branch circuits.
+archived: false

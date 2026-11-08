@@ -1,0 +1,19 @@
+id: 5521c34b-8e84-4cb9-ba41-80cd276b5f6f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why do so many hyperscale data centers sit in Oregon, Ireland or Scandinavia?
+choices:
+- id: c88c1cd9-5bc6-4c5a-b9a0-8ca9d3934f0a
+  text: Cool climates let economizers cover most of the year, slashing chiller energy
+- id: de0706c8-39b6-47ed-b3d5-9c998b6fed53
+  text: These regions outlaw backup generators
+- id: 7a19fc1b-86bd-45aa-8491-13a8a164242e
+  text: They are the only places with fiber optics
+- id: 1009168e-bf4b-4dab-9376-d6ed5d590d30
+  text: Local labor laws require it
+correct_choice_ids:
+- c88c1cd9-5bc6-4c5a-b9a0-8ca9d3934f0a
+explanation: 'Climate is an efficiency strategy: cool regions maximize free-cooling hours and minimize refrigeration plant.'
+archived: false

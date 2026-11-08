@@ -1,0 +1,19 @@
+id: c5163325-097e-430e-951e-c7921cf68af1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How did Meta's Open Compute Project change server power design?
+choices:
+- id: 5ad3f412-e4d7-4893-adce-45ee9240e36a
+  text: Servers snap onto a shared DC busbar, with conversion done once per rack in power shelves
+- id: af57767e-b539-46e2-b992-65d05f83b378
+  text: Each server carries three AC power supplies instead of two
+- id: c3fa9127-c5f1-485a-9084-cac7ef552263
+  text: Servers run directly on 11 kV medium voltage
+- id: b8a68fac-bd95-4f00-889b-64143a6aabfc
+  text: Batteries were removed from the facility entirely
+correct_choice_ids:
+- 5ad3f412-e4d7-4893-adce-45ee9240e36a
+explanation: OCP moves AC-DC conversion into central rack power shelves feeding servers DC via a busbar, removing one conversion per machine.
+archived: false
