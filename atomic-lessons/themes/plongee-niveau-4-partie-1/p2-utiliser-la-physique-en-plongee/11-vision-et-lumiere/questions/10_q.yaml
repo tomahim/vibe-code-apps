@@ -1,0 +1,21 @@
+id: 465833af-56c5-47b0-86e5-164fca28c289
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels sont les quatre phénomènes subis par un rayon lumineux dans l'eau ?
+choices:
+- id: de4f0761-931b-4667-b88c-dec75b91d470
+  text: Réflexion, réfraction, absorption et diffusion.
+- id: 7f9f1cd5-1da3-4d61-b2bc-177aea6db8dc
+  text: Réflexion, condensation, évaporation et conduction.
+- id: 955342fa-c6c8-446c-9cc1-be36c0e3d302
+  text: Réfraction, compression, dilatation et convection.
+- id: c1beb1a7-7890-4087-b2f3-e6a6a2eaf537
+  text: Absorption, émission, fluorescence et phosphorescence.
+correct_choice_ids:
+- de4f0761-931b-4667-b88c-dec75b91d470
+explanation: Réflexion (une partie ne pénètre pas), réfraction (les rayons sont déviés),
+  absorption due à l'eau (l'intensité diminue, transformée en chaleur) et diffusion
+  due aux particules en suspension, gênante en photo ou vidéo.
+archived: false

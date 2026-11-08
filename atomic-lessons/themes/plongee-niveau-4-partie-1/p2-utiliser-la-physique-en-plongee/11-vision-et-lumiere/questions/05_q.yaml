@@ -1,0 +1,21 @@
+id: 150b7469-417c-4915-b404-999c6fd299a0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: De combien le masque réduit-il le champ de vision sous l'eau ?
+choices:
+- id: 266dbe28-0470-47be-8b17-f88f15f14fb5
+  text: 'De 50 à 70 % : d''environ 180 degrés à 120-90 degrés.'
+- id: f9adcc42-3a17-4900-951b-73c0ff904d6b
+  text: De 10 à 20 % seulement, à peine perceptible en plongée.
+- id: 08c63d00-4a2f-4e57-8aeb-aa19703d1d7f
+  text: 'De 90 % : le champ se limite à quelques degrés centraux.'
+- id: 8714e7e5-6fc5-4142-985e-35ce5c6af097
+  text: Il ne le réduit pas, il l'élargit grâce à la réfraction.
+correct_choice_ids:
+- 266dbe28-0470-47be-8b17-f88f15f14fb5
+explanation: Avec des masques standards, le champ de vision sous l'eau est réduit
+  de 50 à 70 % par rapport à la surface sans masque, sur les côtés mais aussi en dessous
+  et au-dessus.
+archived: false

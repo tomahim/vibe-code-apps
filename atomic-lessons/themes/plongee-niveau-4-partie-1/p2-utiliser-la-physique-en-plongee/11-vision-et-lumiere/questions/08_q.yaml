@@ -1,0 +1,20 @@
+id: 4bf59b3c-829a-47fa-97b8-34e9b8d42bc1
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Vers quelle profondeur les rouges disparaissent-ils selon le manuel ?
+choices:
+- id: 831f88ae-1acb-4bb9-8ad7-039e03a996a6
+  text: Vers 5 mètres, puis les oranges vers 10 à 15 mètres.
+- id: 813d9cad-9b7e-418d-8d7f-22662da64d15
+  text: Vers 20 mètres, en même temps que les oranges.
+- id: 98cec89f-d196-4137-ac7a-f1f49f2cff8f
+  text: Vers 40 mètres, après les verts et les jaunes.
+- id: 430a9d65-fae6-4398-9213-932edc7a4936
+  text: Vers 500 mètres, au moment de l'extinction.
+correct_choice_ids:
+- 831f88ae-1acb-4bb9-8ad7-039e03a996a6
+explanation: Les rouges disparaissent vers 5 m, les oranges vers 10 à 15 m, les jaunes
+  vers 15 à 25 m, les verts au-delà de 40 m, pour ne laisser que des bleus.
+archived: false

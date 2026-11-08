@@ -1,0 +1,21 @@
+id: 5653301c-fd9c-4644-8a6d-e4fcec91e249
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi vise-t-on une lumière proche de celle du soleil pour un éclairage
+  ?
+choices:
+- id: 8fa13370-94e4-4163-8d62-d78a00d17f53
+  text: Pour obtenir un rendu des couleurs le plus naturel possible.
+- id: 94dbcbd0-fb4d-4e99-b016-ece37849cbaf
+  text: Pour chauffer l'eau autour du plongeur en hiver.
+- id: 478e1951-65f4-412c-bd0c-ea1f16b4e64b
+  text: Pour attirer les poissons vers le faisceau lumineux.
+- id: bf0b5edc-5bc7-4a6b-a692-5194aae43881
+  text: Pour recharger les batteries par effet photoélectrique.
+correct_choice_ids:
+- 8fa13370-94e4-4163-8d62-d78a00d17f53
+explanation: Tout l'enjeu d'un éclairage consiste à produire une lumière proche de
+  celle du soleil, pour un rendu des couleurs le plus naturel possible.
+archived: false
