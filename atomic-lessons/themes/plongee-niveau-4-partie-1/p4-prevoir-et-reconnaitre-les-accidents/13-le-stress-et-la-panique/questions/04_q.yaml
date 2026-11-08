@@ -1,0 +1,22 @@
+id: 41757339-19de-4d2d-8876-80f0771c1521
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que conseille le manuel en cas de stress excessif ou d'anxiété, selon le manuel
+  ?
+choices:
+- id: 2be93d65-d65f-48a9-98ff-9767b11db334
+  text: Déconseiller les plongées profondes, éventuellement la plongée en général.
+- id: 3c49b527-1432-4e2d-aad5-f730cdf40e12
+  text: Plonger plus profond pour apprendre à dominer son stress.
+- id: 8d2b1eef-42b9-491f-8172-3a54bc0dd06b
+  text: Prendre un médicament calmant juste avant la mise à l'eau.
+- id: 8c627e65-d3f2-4725-9ba8-a085b0790e97
+  text: Ignorer ces signes tant que le plongeur accepte de se mettre à l'eau.
+correct_choice_ids:
+- 2be93d65-d65f-48a9-98ff-9767b11db334
+explanation: 'Un bon état psychique fait partie de la prévention : un stress excessif
+  ou de l''anxiété conduit à déconseiller les plongées profondes (éventuellement,
+  la plongée en général).'
+archived: false

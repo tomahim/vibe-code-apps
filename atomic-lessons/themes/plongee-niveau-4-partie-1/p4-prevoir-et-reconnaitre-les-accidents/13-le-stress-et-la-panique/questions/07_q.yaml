@@ -1,0 +1,23 @@
+id: 9b60ee4b-eb67-44cf-9b51-8156ac62a2f5
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quels sont les risques d'une remontée panique, selon le manuel ?
+choices:
+- id: 82d2d74d-be18-4293-9b51-ac2d8e5b1f27
+  text: Une surpression pulmonaire par manque d'expiration, et un accident de désaturation
+    par protocole de désaturation impossible à respecter.
+- id: f8d8b98f-08e9-400a-b5be-9a40df114761
+  text: Uniquement une narcose plus forte, provoquée par la vitesse de la remontée.
+- id: 9e4d4ad6-a5b7-4757-b3b1-438c5da06656
+  text: Uniquement une otite barotraumatique, provoquée par la remontée trop rapide.
+- id: b6a24717-69a9-400c-bcf6-f52ee3f2a0e2
+  text: Aucun risque particulier, à condition que le plongeur atteigne rapidement
+    la surface.
+correct_choice_ids:
+- 82d2d74d-be18-4293-9b51-ac2d8e5b1f27
+explanation: Une remontée panique sans expiration suffisante expose à une surpression
+  pulmonaire ; l'impossibilité de respecter le protocole de désaturation (remontée
+  rapide, paliers non effectués) expose à un accident de désaturation.
+archived: false

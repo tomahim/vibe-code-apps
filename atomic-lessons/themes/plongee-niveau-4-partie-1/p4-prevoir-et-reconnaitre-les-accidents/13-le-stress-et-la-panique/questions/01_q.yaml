@@ -1,0 +1,25 @@
+id: 62455d8a-98bc-4431-9d74-ef6d29403db6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment le corps réagit-il au stress ou à l'effort, selon le manuel ?
+choices:
+- id: 4349b2ec-fef4-4d90-81b5-df084d6d88bc
+  text: Les nerfs cardiaques et des hormones augmentent le rythme cardiaque, ce qui
+    accroît la quantité de sang - et d'oxygène - transmise aux organes.
+- id: ef3858b7-0bcf-4ae7-88d4-58e7e847017d
+  text: Le rythme cardiaque ralentit fortement, afin d'économiser l'oxygène contenu
+    dans le sang.
+- id: 7e291c69-eae9-4139-b4f6-d457ab76f55f
+  text: La ventilation s'arrête pendant quelques secondes, le temps d'évaluer calmement
+    la situation.
+- id: 906e485d-6f8b-4f45-91a7-7fb1ffc6adb6
+  text: La digestion s'accélère immédiatement, afin de fournir plus d'énergie aux
+    muscles.
+correct_choice_ids:
+- 4349b2ec-fef4-4d90-81b5-df084d6d88bc
+explanation: En cas de stress ou d'effort, les nerfs cardiaques et des hormones augmentent
+  le rythme cardiaque ; la quantité de sang, et donc d'oxygène, transmise aux organes
+  (muscles en particulier) augmente. Contrôle assuré par le système nerveux végétatif.
+archived: false

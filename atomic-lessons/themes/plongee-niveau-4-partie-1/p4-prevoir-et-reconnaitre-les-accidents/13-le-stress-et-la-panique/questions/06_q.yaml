@@ -1,0 +1,23 @@
+id: 713775c3-6d0b-49eb-a46e-e3fbcf52b181
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi une panique peut-elle provoquer une surpression pulmonaire, selon
+  le manuel ?
+choices:
+- id: 643f4db6-9fef-4fc3-b2b6-9475cd0ce574
+  text: Sous l'effet d'une panique, un spasme réflexe peut fermer la glotte ; remonter
+    ainsi bloque toute évacuation d'air.
+- id: 4eb006a1-1795-48ad-ade9-1e6d0e35d826
+  text: La panique augmente directement la pression de l'air dans la bouteille.
+- id: a0e7f185-ae2b-418e-bc35-340eb286f15b
+  text: La panique fait oublier au plongeur de gonfler son gilet stabilisateur.
+- id: 5e380d0b-813b-435b-9aaf-f3cacca9091c
+  text: La panique dissout l'azote du sang et forme des bulles immédiates.
+correct_choice_ids:
+- 643f4db6-9fef-4fc3-b2b6-9475cd0ce574
+explanation: 'Sous l''effet d''une panique - ou d''une entrée d''eau dans les fosses
+  nasales -, un spasme réflexe peut fermer la glotte : tout plongeur remontant ainsi
+  risque une surpression pulmonaire complète.'
+archived: false

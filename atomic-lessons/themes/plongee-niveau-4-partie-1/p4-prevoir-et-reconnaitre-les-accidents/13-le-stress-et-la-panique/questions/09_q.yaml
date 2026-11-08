@@ -1,0 +1,22 @@
+id: d3130b01-05ac-4415-bd19-ae3563620d45
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que doit observer le guide dès la surface, selon le manuel ?
+choices:
+- id: 00c10750-480a-429b-a85c-b5cfac77697c
+  text: L'équipement - le lestage en particulier - et le comportement des plongeurs,
+    pour repérer et rassurer les anxieux.
+- id: 29a4bf7d-ae4e-416a-b16b-2f5a2046a2b5
+  text: Uniquement la météo et l'état de la mer, et jamais les plongeurs eux-mêmes.
+- id: 6951448e-6000-459f-9c45-e68784acb393
+  text: Uniquement la pression affichée par les bouteilles de la palanquée au départ.
+- id: d13278f2-f517-4a5d-a435-7d98b1e28ee3
+  text: Le niveau de certification affiché sur les cartes de plongée de chacun.
+correct_choice_ids:
+- 00c10750-480a-429b-a85c-b5cfac77697c
+explanation: Dès la surface, observez l'équipement (lestage en particulier) et le
+  comportement des plongeurs ; si certains semblent anxieux, rassurez-les en ramenant
+  les risques à de justes proportions.
+archived: false

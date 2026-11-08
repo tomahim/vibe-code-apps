@@ -1,0 +1,21 @@
+id: e2f79357-f631-47b2-86bd-12d80df47c7d
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi limiter les efforts de palmage, selon le manuel ?
+choices:
+- id: 827c6fba-cf6b-4e6e-8e73-c12a1f2089a4
+  text: Parce que la production de CO2 consécutive à un effort favoriserait l'effet
+    narcotique de l'azote.
+- id: 5e1db2bd-f721-431b-8366-ab0e5f3e141e
+  text: Parce que palmer fatigue les palmes et use prématurément le matériel.
+- id: 98d7d192-1af7-4a83-8113-3c020f79965e
+  text: Parce que l'effort de palmage rend le gilet stabilisateur inutile.
+- id: 518594be-c36c-4cce-9c4b-97897fc37b4f
+  text: Parce que le palmage rapide effraie la faune des fonds marins.
+correct_choice_ids:
+- 827c6fba-cf6b-4e6e-8e73-c12a1f2089a4
+explanation: L'effort musculaire favoriserait l'effet narcotique de l'azote via la
+  production de CO2 ; limitez les efforts de palmage pendant la plongée profonde.
+archived: false

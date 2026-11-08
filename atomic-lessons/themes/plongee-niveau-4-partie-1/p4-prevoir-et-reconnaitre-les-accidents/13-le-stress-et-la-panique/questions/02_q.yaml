@@ -1,0 +1,22 @@
+id: 66b552af-df0f-4ef1-9320-95a9d838f9d0
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel lien le manuel fait-il entre le stress et la narcose ?
+choices:
+- id: 4408d668-6b9f-415d-8757-277afdece56c
+  text: L'état de fatigue - manque de sommeil, stress, longs trajets - peut rapprocher
+    le seuil d'apparition de la narcose.
+- id: cd81f519-4c27-46a2-aad2-3b9aff1f0163
+  text: Le stress immunise durablement le plongeur contre la narcose.
+- id: fb9401cb-01dc-478e-af03-5d0e891b13f8
+  text: La narcose n'apparaît jamais chez un plongeur stressé ou fatigué.
+- id: 6c8070b5-a06f-4fd7-9f05-fda37bb00b8a
+  text: Le stress n'a aucune influence sur le seuil d'apparition de la narcose.
+correct_choice_ids:
+- 4408d668-6b9f-415d-8757-277afdece56c
+explanation: La fatigue, le manque de sommeil, le stress et les longs trajets peuvent
+  rapprocher le seuil d'apparition de la narcose ; la baisse de luminosité en descente
+  peut aussi être un facteur de stress.
+archived: false
