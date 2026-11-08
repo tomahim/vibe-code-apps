@@ -1,0 +1,20 @@
+id: ffe92c0e-8194-4219-a3ad-d66e0571971b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que rappelle le manuel sur l'obstruction de la trompe d'Eustache ?
+choices:
+- id: 2003004a-0c7c-4b68-b512-4ca4c53eae74
+  text: Ne jamais forcer une manœuvre d'équilibrage et ne jamais plonger enrhumé.
+- id: 6a17ea22-c741-4181-8540-6b51955d8406
+  text: Forcer progressivement jusqu'à entendre un déclic.
+- id: de3b49ba-f0fe-4ebb-842b-d7a9252d6738
+  text: Plonger enrhumé avec un décongestionnant, sans risque.
+- id: 462b4e18-fa97-4497-b435-ffb8657cd8c7
+  text: Attendre en surface que la trompe se débouche seule.
+correct_choice_ids:
+- 2003004a-0c7c-4b68-b512-4ca4c53eae74
+explanation: Congestionnée (passages en force) ou obstruée (mucosités), la trompe
+  empêche l'équilibre ; les décongestionnants n'ont qu'un effet limité dans le temps.
+archived: false

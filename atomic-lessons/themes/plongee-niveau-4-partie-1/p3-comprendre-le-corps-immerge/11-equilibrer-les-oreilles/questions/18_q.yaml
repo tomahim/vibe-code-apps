@@ -1,0 +1,23 @@
+id: 93f86daa-2426-44d0-b8d1-3c15fd6e8a48
+position: 18
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Qu'est-ce que le « coup de piston » ?
+choices:
+- id: 3520c471-927e-4afa-88b3-243b5966cc3d
+  text: Le retour brutal du tympan après un équilibrage violent, dont la réaction
+    en chaîne sur les osselets peut rompre la fenêtre ovale et atteindre la cochlée.
+- id: ec810b2a-ab42-4ef8-88ef-d1c78ecdb653
+  text: Un choc violent de l'embout du détendeur contre les dents et les gencives
+    pendant une descente trop rapide.
+- id: 69328a19-d73b-4492-a586-30f0dc41406f
+  text: Une compression du masque sur le visage à la descente.
+- id: 13c4f8af-ea12-4e99-86f3-2a921d0816c4
+  text: Une vibration du second étage à grande profondeur.
+correct_choice_ids:
+- 3520c471-927e-4afa-88b3-243b5966cc3d
+explanation: 'Valsalva tardif et violent à la descente, ou Valsalva à la remontée
+  au lieu d''un Toynbee : l''oreille interne peut être endommagée, perte d''audition
+  et/ou troubles de l''équilibre, temporaires ou définitifs.'
+archived: false

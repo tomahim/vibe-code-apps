@@ -1,0 +1,23 @@
+id: 2c031455-816f-4c4c-a1a5-227dc9b7b1db
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: En quoi consiste la manœuvre de Frenzel ?
+choices:
+- id: 60250c00-2ce4-41d2-9ed4-03ed28645088
+  text: Nez pincé, contracter la base de la langue et la refouler vers le haut et
+    l'arrière du voile du palais, pour amener l'air du pharynx vers la trompe.
+- id: ac187566-cbde-41b4-b250-0a78e377902c
+  text: Pincer le nez puis souffler le plus fort et le plus longtemps possible pendant
+    toute la descente.
+- id: 77b18e55-b2e2-4008-87ee-197c7ebe52de
+  text: Avancer la mâchoire sans aucune autre action.
+- id: 61615c59-45e0-4cfb-8c18-7ea637ad1650
+  text: Déglutir en inspirant par le nez pincé.
+correct_choice_ids:
+- 60250c00-2ce4-41d2-9ed4-03ed28645088
+explanation: 'Frenzel : utilisée par les pilotes de chasse, moins violente qu''un
+  Valsalva mais plus difficile pour certains, en particulier avec un détendeur en
+  bouche.'
+archived: false

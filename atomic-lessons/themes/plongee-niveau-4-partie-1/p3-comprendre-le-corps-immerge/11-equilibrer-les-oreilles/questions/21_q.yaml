@@ -1,0 +1,14 @@
+id: 0c886531-c884-4d4a-a484-bb5ae179d715
+position: 21
+type: type_answer_question
+after_card_position: 7
+prompt: Comment s'appelle la manœuvre de remontée qui consiste à pincer le nez, déglutir
+  et inspirer par le nez ?
+accepted_answers:
+- Toynbee
+- manœuvre de Toynbee
+- la manœuvre de Toynbee
+- toynbee
+explanation: La manœuvre de Toynbee favorise l'évacuation de l'air en excès de l'oreille
+  moyenne à la remontée.
+archived: false

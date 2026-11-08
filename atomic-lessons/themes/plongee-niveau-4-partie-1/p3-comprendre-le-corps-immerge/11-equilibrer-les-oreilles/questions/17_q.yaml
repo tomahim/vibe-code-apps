@@ -1,0 +1,22 @@
+id: ed50f66a-b6af-445b-83b3-d437038a6b33
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Quels signes accompagnent une perforation du tympan ?
+choices:
+- id: e2db8f4b-4003-47a8-9ad8-9c36b1c8ab02
+  text: Forte douleur, parfois saignements et acouphènes, parfois surdité temporaire
+    voire vertiges ; cicatrisation en plusieurs semaines.
+- id: 67bc4145-4ea4-4ee2-9203-cc417ed1914d
+  text: 'Aucun signe : la perforation est toujours indolore.'
+- id: 14443264-6357-4ab8-b24e-7ff7effe6d76
+  text: Une simple démangeaison du conduit auditif.
+- id: 8077b234-6832-4840-bcf8-1d6ba76e9ebe
+  text: Une perte définitive et immédiate de l'audition des deux oreilles en même
+    temps, sans douleur.
+correct_choice_ids:
+- e2db8f4b-4003-47a8-9ad8-9c36b1c8ab02
+explanation: Douleur forte, saignements et acouphènes possibles, surdité temporaire
+  voire vertiges dans certains cas ; la cicatrisation demande plusieurs semaines.
+archived: false

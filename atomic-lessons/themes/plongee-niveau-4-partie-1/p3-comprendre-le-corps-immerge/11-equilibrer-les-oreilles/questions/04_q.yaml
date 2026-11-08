@@ -1,0 +1,20 @@
+id: 8c6bac14-a118-4b4b-83fd-7adb14734957
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: En quoi consiste la méthode Valsalva ?
+choices:
+- id: 6e994743-4bea-4cc1-919f-2c43322e9ea0
+  text: Pincer son nez puis souffler.
+- id: b58f40fd-d0de-4553-94f3-01375157f411
+  text: Pincer son nez puis déglutir et inspirer.
+- id: 5947cc9c-d044-45aa-a233-ffc299fa18ff
+  text: Avancer la mâchoire en expirant doucement.
+- id: 8292faf9-66a8-41ae-8b58-f7384ece2bc8
+  text: Contracter la base de la langue vers le voile du palais.
+correct_choice_ids:
+- 6e994743-4bea-4cc1-919f-2c43322e9ea0
+explanation: 'Valsalva : pincer son nez puis souffler - la méthode la plus simple,
+  et aussi la plus risquée.'
+archived: false

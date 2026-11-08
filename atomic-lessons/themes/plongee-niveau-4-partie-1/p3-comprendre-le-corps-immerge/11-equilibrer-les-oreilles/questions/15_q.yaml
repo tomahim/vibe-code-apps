@@ -1,0 +1,20 @@
+id: 5dda00ec-b61e-40f4-bb78-87171d8ebe9c
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Quelle part des accidents ou incidents de plongée concerne les oreilles ?
+choices:
+- id: 929b9483-b6a1-4565-b3b2-0e66257368b5
+  text: 80 %, selon le manuel.
+- id: 9af3210e-38c9-4282-884b-260827dd9a89
+  text: 10 %, selon le manuel.
+- id: ac8840dd-1d0f-4320-97a5-fbaa9c28d0a2
+  text: 50 %, selon le manuel.
+- id: c32b3752-1d58-4065-9d2c-c9b1b60a7891
+  text: 1 %, selon le manuel.
+correct_choice_ids:
+- 929b9483-b6a1-4565-b3b2-0e66257368b5
+explanation: 'À 80 %, les accidents ou incidents de plongée concernent les oreilles
+  : un guide de palanquée doit y être particulièrement attentif.'
+archived: false
