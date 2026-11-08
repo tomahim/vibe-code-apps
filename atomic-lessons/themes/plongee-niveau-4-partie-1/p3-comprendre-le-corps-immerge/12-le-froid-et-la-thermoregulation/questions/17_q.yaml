@@ -1,0 +1,25 @@
+id: be2cd26a-a709-4c9a-a5ac-6c60a9026084
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 10
+prompt: Quelle conduite en surface en cas de refroidissement sévère ?
+choices:
+- id: cce2022e-225f-4879-b873-bcbfb6f74571
+  text: Déséquiper vite, sécher sans frictionner, vêtements chauds, allonger avec
+    couverture, boisson chaude sucrée, jamais d'alcool.
+- id: faa712a2-eb36-4989-b324-245c3aca7853
+  text: Passer les mains sous l'eau chaude et frictionner vigoureusement le plongeur
+    pour relancer la circulation.
+- id: eea24700-566e-4dec-9a0c-99c2d5b723a9
+  text: Faire boire un alcool fort au plongeur, afin de dilater ses vaisseaux et de
+    le réchauffer vite.
+- id: 37dc1ec5-3574-4a8f-ba97-015407fa767e
+  text: Faire courir le plongeur sur le pont du bateau, pour le réchauffer par l'exercice
+    musculaire.
+correct_choice_ids:
+- cce2022e-225f-4879-b873-bcbfb6f74571
+explanation: 'Réchauffement progressif : pas d''eau chaude sur les mains, pas d''alcool,
+  pas de friction - sinon afflux sanguin brusque vers la périphérie au détriment des
+  organes centraux, risque de malaise cardiaque.'
+archived: false

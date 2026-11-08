@@ -1,0 +1,21 @@
+id: ffbcc40c-c61e-47d0-bfbb-21558a3b3f01
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: À partir de quelle température interne entre-t-on en hypothermie ?
+choices:
+- id: c7bf308e-b0d1-409a-bcc2-dfa6066fbdaf
+  text: Environ 35 °C.
+- id: bea9069b-2e4f-4448-9753-ce914e1cacf9
+  text: Environ 37 °C.
+- id: f1a20b9f-cb21-4281-a739-7a64ac3e7fc7
+  text: Environ 30 °C.
+- id: 0e5a1629-f255-4d4c-a907-73c5d6c2722d
+  text: Environ 25 °C.
+correct_choice_ids:
+- c7bf308e-b0d1-409a-bcc2-dfa6066fbdaf
+explanation: Lorsque la température interne diminue pour atteindre environ 35 °C,
+  nous entrons en phase d'hypothermie ; persister mène à une hypothermie grave pouvant
+  entraîner la mort.
+archived: false

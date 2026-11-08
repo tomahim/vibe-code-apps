@@ -1,0 +1,22 @@
+id: 09ea753c-17d3-4f72-a1e1-f56b63edd239
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que peut ressentir un plongeur confronté au froid ?
+choices:
+- id: 46b5a4b9-c834-4ef8-8485-ab05973fff7b
+  text: Ventilation accrue, perte de sensibilité des extrémités, frissons, crampes,
+    tremblements, envie d'uriner.
+- id: 93ef71e0-984f-4dbe-8518-6c1704b91cb0
+  text: Uniquement une légère sensation de faim, qui disparaît dès la sortie de l'eau.
+- id: 25ac91b1-0040-46c5-a966-965cf768c09f
+  text: Uniquement des vertiges et des nausées, sans aucun signe sur les extrémités.
+- id: fbd8c07e-d3b8-49c6-80f1-4f0ea56bf883
+  text: Une sensation d'euphorie accompagnée d'une agréable impression de chaleur
+    dans tout le corps.
+correct_choice_ids:
+- 46b5a4b9-c834-4ef8-8485-ab05973fff7b
+explanation: 'Le manuel liste : rythme ventilatoire augmenté (donc consommation d''air),
+  perte de sensibilité (mains, pieds), frissons, crampes, tremblements, envie d''uriner.'
+archived: false

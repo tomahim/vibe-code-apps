@@ -1,0 +1,25 @@
+id: 61907378-5750-4ac1-8d84-a59691ee6d2e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que le refroidissement par convection ?
+choices:
+- id: 1a641322-1928-43dc-bf5d-cc396a417d2c
+  text: La circulation de l'eau dans la combinaison oblige le corps à réchauffer sans
+    cesse une nouvelle pellicule d'eau.
+- id: ab7692a8-c804-4dd6-b377-e77e8e0f100d
+  text: Le réchauffement de l'air inspiré, qui laisse échapper une certaine quantité
+    de chaleur à chaque expiration.
+- id: 851ca1a3-3f82-4705-a932-e77a193d3e91
+  text: Le contact direct de la peau avec la bouteille métallique, qui évacue la chaleur
+    du dos du plongeur.
+- id: 1b8da5ac-041f-4aee-921c-61973484de66
+  text: La perte de chaleur concentrée sur les seules extrémités, les mains et les
+    pieds du plongeur.
+correct_choice_ids:
+- 1a641322-1928-43dc-bf5d-cc396a417d2c
+explanation: 'Convection : l''eau circule sur et dans la combinaison - d''où l''intérêt
+  d''une combinaison près du corps avec manchons, et d''éviter les mouvements quand
+  on a froid.'
+archived: false

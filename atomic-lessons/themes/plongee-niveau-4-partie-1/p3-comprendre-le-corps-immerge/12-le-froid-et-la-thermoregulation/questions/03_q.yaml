@@ -1,0 +1,20 @@
+id: 16458cd4-05ae-4ea4-9495-642c24455503
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Où se situe la neutralité thermique dans l'air et dans l'eau ?
+choices:
+- id: 414fdc8e-7df7-4fef-9955-0e78bec71a83
+  text: Entre 24 et 26 °C dans l'air ; ramenée à 33 °C dans l'eau.
+- id: 349b2e5d-0576-46d1-af0d-d1dda4517b44
+  text: À 37 °C dans l'air comme dans l'eau.
+- id: c3a9c15c-2b02-40fd-a70a-60db1bab9676
+  text: À 15 °C dans l'air et 5 °C dans l'eau.
+- id: 0f6f5729-3f07-4591-a8e3-009420c954df
+  text: À 0 °C dans l'eau et 20 °C dans l'air.
+correct_choice_ids:
+- 414fdc8e-7df7-4fef-9955-0e78bec71a83
+explanation: 'Neutralité thermique : 24-26 °C dans l''air, 33 °C dans l''eau. En immersion,
+  nous nous refroidissons donc dans tous les cas, y compris en mers chaudes.'
+archived: false

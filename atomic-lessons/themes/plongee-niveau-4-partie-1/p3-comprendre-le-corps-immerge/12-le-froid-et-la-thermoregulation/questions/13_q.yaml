@@ -1,0 +1,24 @@
+id: 9ba44096-ebe8-49d5-b6f9-8dc3cc9b00ea
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la profondeur favorise-t-elle le froid ?
+choices:
+- id: d27b3176-c688-4213-991b-781100e15fd5
+  text: Elle comprime les bulles du néoprène, ce qui diminue le pouvoir isolant de
+    la combinaison.
+- id: ff4e5b57-f34f-41f3-985b-e221e11c3140
+  text: Elle rend l'eau mécaniquement plus froide, car la température diminue toujours
+    avec la pression.
+- id: fc1fa7f3-f131-40a2-bb60-753e55dd7f94
+  text: Elle accélère la circulation sanguine, ce qui évacue la chaleur du corps plus
+    rapidement.
+- id: 747f46aa-e929-4b75-8c4b-f30e7b1b5c83
+  text: Elle supprime la production de chaleur par les muscles, qui ne fonctionnent
+    plus sous pression.
+correct_choice_ids:
+- d27b3176-c688-4213-991b-781100e15fd5
+explanation: 'La profondeur comprime les bulles du néoprène : la combinaison isole
+  moins bien au fond qu''en surface.'
+archived: false
