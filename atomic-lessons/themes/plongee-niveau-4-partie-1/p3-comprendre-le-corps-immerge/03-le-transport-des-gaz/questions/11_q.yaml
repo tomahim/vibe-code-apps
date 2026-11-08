@@ -1,0 +1,21 @@
+id: 4a404eec-0848-48ec-babb-d60cf341514f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: D'où vient le monoxyde de carbone selon le manuel ?
+choices:
+- id: d96b81d8-55ed-43cb-a443-877dd87ede57
+  text: 'De la combustion imparfaite de matériaux contenant du carbone : échappement
+    automobile, fumée de cigarette.'
+- id: ff62fdf6-763e-441d-afb9-8fe9994e8570
+  text: De la décomposition naturelle des algues et du plancton au fond de l'eau.
+- id: 4696a341-008f-4c0c-9426-66c93a8b45ac
+  text: De la corrosion des blocs de plongée en acier.
+- id: 69d75477-2b23-401c-939a-a28b61a09595
+  text: De la respiration du plongeur dans son détendeur.
+correct_choice_ids:
+- d96b81d8-55ed-43cb-a443-877dd87ede57
+explanation: Le CO est un sous-produit de la combustion des matériaux contenant du
+  carbone, né d'une combustion imparfaite (gaz d'échappement, fumée de cigarette).
+archived: false

@@ -1,0 +1,20 @@
+id: b49ef944-472f-4e2f-9b00-6f892da271b6
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Où le CO2 se fixe-t-il sur l'hémoglobine ?
+choices:
+- id: 0639a933-7314-4427-853a-bb1561ec9493
+  text: Sur un site différent de celui de l'oxygène.
+- id: 78c15661-3bc5-45e3-9115-6e93b9a70501
+  text: Sur exactement le même site que l'oxygène.
+- id: 5d58372c-87ba-4a63-b53f-f27ca9bda9aa
+  text: Sur les hèmes, à la place du fer.
+- id: 73d42262-e958-4f73-b6eb-aa0dbe2e8592
+  text: Il ne se fixe jamais sur l'hémoglobine.
+correct_choice_ids:
+- 0639a933-7314-4427-853a-bb1561ec9493
+explanation: 8 % du CO2 se combinent à l'hémoglobine sur un site différent de celui
+  de l'O2 - contrairement au CO, qui occupe les sites de l'oxygène.
+archived: false

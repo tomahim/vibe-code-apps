@@ -1,0 +1,20 @@
+id: fa20f471-99d8-4308-946c-ab7e6baa68b1
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment l'azote est-il transporté selon le manuel ?
+choices:
+- id: e35ad49e-bedd-4d58-b9d8-87022f9394f5
+  text: À 100 % sous forme dissoute, en totalité dans le plasma.
+- id: cc460e4d-50c3-4524-ac08-78c8696de1f1
+  text: À 98 % combiné à l'hémoglobine, comme l'oxygène.
+- id: 8a9dda6a-48fe-445e-b11a-f336f10768fe
+  text: À 87 % sous forme de bicarbonates, comme le CO2.
+- id: 2bc6f90d-21ab-4af6-8efc-2235dd1b62b4
+  text: Fixé sur les plaquettes et les globules blancs.
+correct_choice_ids:
+- e35ad49e-bedd-4d58-b9d8-87022f9394f5
+explanation: 'Gaz inerte, l''azote ne provoque aucune réaction chimique : il est transporté
+  à 100 % sous forme dissoute, en totalité dans le plasma.'
+archived: false

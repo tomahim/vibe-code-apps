@@ -1,0 +1,20 @@
+id: 0747f37f-1958-4431-9ce1-a1208bafad3b
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Combien de molécules d'hémoglobine contient chaque globule rouge ?
+choices:
+- id: df4c7c0e-4809-46b1-8efa-11372b1e9ab0
+  text: 280 millions de molécules d'hémoglobine par globule rouge.
+- id: c205bb70-feb0-4ad0-8980-c78d0cf37dd9
+  text: 280 molécules d'hémoglobine par globule rouge.
+- id: 149a0f8c-e179-4133-b21a-f0590a1fda22
+  text: 4 molécules d'hémoglobine par globule rouge.
+- id: d2df434c-93a1-4698-8893-5ae74a03fdee
+  text: Un milliard de molécules d'hémoglobine par globule rouge.
+correct_choice_ids:
+- df4c7c0e-4809-46b1-8efa-11372b1e9ab0
+explanation: Chaque globule rouge contient 280 millions de molécules d'hémoglobine
+  ; sur chacune, 4 hèmes contenant du fer fixent l'oxygène.
+archived: false

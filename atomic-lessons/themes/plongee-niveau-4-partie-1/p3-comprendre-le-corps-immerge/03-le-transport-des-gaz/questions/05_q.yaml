@@ -1,0 +1,20 @@
+id: b53155bc-9f29-459b-b684-b38aea504f38
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment l'oxygène est-il transporté en surface selon le manuel ?
+choices:
+- id: 3f786bc6-ee96-43d1-9645-7053d07b4488
+  text: À 98 % combiné à l'hémoglobine et à 2 % dissous dans le plasma.
+- id: 1c348843-2210-4296-96a5-489f66f82d5b
+  text: À 100 % dissous dans le plasma, comme l'azote.
+- id: 2573557e-b892-4074-8dce-9fa414170299
+  text: À 50 % combiné à l'hémoglobine et 50 % dissous dans le plasma.
+- id: 2bb09627-367a-4512-96f3-b13e36d08b84
+  text: À 87 % sous forme de bicarbonates et 13 % sous forme dissoute.
+correct_choice_ids:
+- 3f786bc6-ee96-43d1-9645-7053d07b4488
+explanation: En surface, l'O2 est transporté à 98 % sous forme combinée avec l'hémoglobine
+  (fixé sur l'hème) et à 2 % sous forme dissoute dans l'eau du plasma.
+archived: false

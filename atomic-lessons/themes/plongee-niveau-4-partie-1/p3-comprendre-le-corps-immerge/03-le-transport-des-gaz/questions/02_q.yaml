@@ -1,0 +1,19 @@
+id: f6a3bc6c-3fed-4132-8ab2-db778a46b738
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi l'argon est-il souvent assimilé à l'azote selon le manuel ?
+choices:
+- id: 57760b73-3916-46f6-a01c-8e8da864c82f
+  text: Par simplification, dans les calculs et raisonnements sur les gaz de la plongée.
+- id: b9b12c1a-06ca-4f9e-be35-e0a24d7db0da
+  text: Parce que l'argon se transforme en azote sous pression.
+- id: 0c045f18-3927-4ae9-ac9a-c925eb99d8f3
+  text: Parce que l'argon est plus abondant que l'azote dans l'air.
+- id: 5cb07893-a56f-4d85-9179-0c5cf7774c9a
+  text: Parce que l'argon et l'azote sont le même gaz chimique.
+correct_choice_ids:
+- 57760b73-3916-46f6-a01c-8e8da864c82f
+explanation: L'argon (0,934 % de l'air) est souvent assimilé à l'azote par simplification.
+archived: false
