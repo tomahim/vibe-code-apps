@@ -12,15 +12,19 @@ so first-correct carrots stay derived from learner history and dedupe across
 modes: answering a question correctly here for the first time ever earns the
 usual one carrot, never a second one.
 
-Ranking is private to the week's participants and revealed only once every
-participant finished all 10 questions, never before. Wins count toward the
-Challenge badges: strictly beating every other participant with at least
-3/10 correct (ties are not wins).
+The duel is private to the two configured players (Thomas + Aurore): the
+LEARNING_CHALLENGE_PLAYERS setting lists their usernames or emails, and no
+other account can play, see the challenge, or count toward a week's reveal.
+
+Ranking is revealed only once BOTH players finished all 10 questions, never
+before, and never publicly. Wins count toward the Challenge badges: strictly
+beating the other player with at least 3/10 correct (ties are not wins).
 """
 import random
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.db import IntegrityError, transaction
+from django.db import IntegrityError, models, transaction
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -37,6 +41,23 @@ from .models import ChallengeWeek, Question, QuestionAttempt
 CHALLENGE_SIZE = 10
 CHALLENGE_SECONDS = 30
 CHALLENGE_MIN_WIN = 3
+
+
+def challenge_players():
+    """The duo allowed to play: the accounts named in settings. Empty setting,
+    no challenge."""
+    handles = [h.strip() for h in getattr(settings, "LEARNING_CHALLENGE_PLAYERS", "").split(",") if h.strip()]
+    if not handles:
+        return []
+    return list(get_user_model().objects.filter(
+        models.Q(username__in=handles) | models.Q(email__in=handles)))
+
+
+def player_or_404(request):
+    players = challenge_players()
+    if request.user.pk not in {p.pk for p in players}:
+        return None, JsonResponse({"error": "Not found."}, status=404)
+    return players, None
 
 
 def current_week_key():
@@ -63,13 +84,17 @@ def get_or_create_week():
         return ChallengeWeek.objects.get(week_key=key)
 
 
-def week_scores(week):
-    """Per-participant attempt counts for one week.
+def week_scores(week, players=None):
+    """Per-player attempt counts for one week, over the configured duo only:
+    no other account can join, affect the reveal, or appear in a ranking.
 
     Returns {user_id: {"answered": n, "correct": n, "finished": bool}}."""
+    if players is None:
+        players = challenge_players()
+    player_ids = {p.pk for p in players}
     size = len(week.question_ids)
     scores = {}
-    for row in week.attempts.values("user_id", "correct"):
+    for row in week.attempts.filter(user_id__in=player_ids).values("user_id", "correct"):
         entry = scores.setdefault(row["user_id"], {"answered": 0, "correct": 0})
         entry["answered"] += 1
         entry["correct"] += 1 if row["correct"] else 0
@@ -81,10 +106,10 @@ def week_scores(week):
 def ranking_rows(user, week, scores):
     """The week's ranking, or None while any participant is still playing.
 
-    Never revealed early: a participant sees their own score through `me`
-    once they finish, but the comparison stays hidden until everyone is
-    done. A ranking needs two players: a week only one of them played never
-    shows one (Thomas: visible only once both completed, never before).
+    Never revealed early: a player sees their own score through `me` once
+    they finish, but the comparison stays hidden until BOTH configured
+    players are done (Thomas: visible only once both completed, never
+    before). A week only one of them played never shows a ranking.
     """
     if len(scores) < 2 or not all(entry["finished"] for entry in scores.values()):
         return None
@@ -102,8 +127,8 @@ def ranking_rows(user, week, scores):
     return rows
 
 
-def week_payload(user, week, *, include_questions):
-    scores = week_scores(week)
+def week_payload(user, week, *, include_questions, players=None):
+    scores = week_scores(week, players)
     mine = scores.get(user.pk, {"answered": 0, "correct": 0, "finished": False})
     payload = {
         "week_key": week.week_key,
@@ -130,7 +155,10 @@ def week_payload(user, week, *, include_questions):
 @jwt_required
 def challenge(request):
     """The current week: its questions, my progress, the ranking if revealed."""
-    return JsonResponse(week_payload(request.user, get_or_create_week(), include_questions=True))
+    players, denied = player_or_404(request)
+    if denied:
+        return denied
+    return JsonResponse(week_payload(request.user, get_or_create_week(), include_questions=True, players=players))
 
 
 @never_cache
@@ -138,11 +166,14 @@ def challenge(request):
 @jwt_required
 def challenge_history(request):
     """Past weekly results, plus the current week once I finished it."""
+    players, denied = player_or_404(request)
+    if denied:
+        return denied
     current = get_or_create_week()
     weeks = list(ChallengeWeek.objects.order_by("-week_key"))
     out = []
     for week in weeks:
-        scores = week_scores(week)
+        scores = week_scores(week, players)
         mine = scores.get(request.user.pk)
         if not mine:
             continue  # weeks I never played stay out of my history
@@ -170,6 +201,9 @@ def challenge_answer(request):
             raise ValidationError("Provide question_id and answer as strings.")
     except ValidationError as exc:
         return input_error(exc)
+    players, denied = player_or_404(request)
+    if denied:
+        return denied
     with transaction.atomic():
         lock_learner(request.user)
         week = get_or_create_week()
@@ -189,7 +223,7 @@ def challenge_answer(request):
             user=request.user, question=question, challenge_week=week,
             attempt_type=QuestionAttempt.AttemptType.CHALLENGE,
             submitted_answer=answer, correct=correct, answered_at=timezone.now())
-        scores = week_scores(week)
+        scores = week_scores(week, players)
         return JsonResponse({
             "question_id": str(question.pk),
             "correct": correct,

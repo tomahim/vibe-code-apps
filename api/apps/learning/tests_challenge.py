@@ -3,7 +3,7 @@ import json
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from apps.accounts.tokens import issue_token
@@ -12,6 +12,7 @@ from apps.learning.models import (Card, ChallengeWeek, ContentEntity, LearningPa
                                   Question, QuestionAttempt, Theme)
 
 
+@override_settings(LEARNING_CHALLENGE_PLAYERS="thomas,aurore")
 class ChallengeTests(TestCase):
     def row(self, model, **fields):
         return model.objects.create(
@@ -147,6 +148,29 @@ class ChallengeTests(TestCase):
         events = History(self.thomas).challenge_wins()
         self.assertEqual([ref for _, (_, ref) in events], ["2026-W40"])
         self.assertEqual(History(self.aurore).challenge_wins(), [])
+
+    def test_only_the_configured_duo_can_play_or_be_seen(self):
+        outsider = get_user_model().objects.create_user(username="intruder")
+        self.as_user(outsider)
+        # An outsider cannot see the week, its history, or answer into it.
+        self.assertEqual(self.client.get("/api/learning/challenge/").status_code, 404)
+        self.assertEqual(self.client.get("/api/learning/challenge/history/").status_code, 404)
+        self.assertEqual(self.answer(str(self.questions[0].pk)).status_code, 404)
+        # Even an attempt smuggled into the table never affects the duel:
+        # it does not reveal the ranking nor appear in it.
+        self.as_user(self.thomas)
+        self.client.get("/api/learning/challenge/")
+        week = ChallengeWeek.objects.get()
+        for qid in week.question_ids:
+            self.answer(qid)
+        QuestionAttempt.objects.create(user=outsider, question_id=week.question_ids[0], challenge_week=week,
+                                       attempt_type="challenge", submitted_answer="a", correct=True,
+                                       answered_at=timezone.now())
+        mine = self.client.get("/api/learning/challenge/").json()
+        self.assertIsNone(mine["ranking"])  # Aurore has not finished: hidden
+        self.finish_week(self.aurore)
+        revealed = self.client.get("/api/learning/challenge/").json()["ranking"]
+        self.assertEqual({r["name"] for r in revealed}, {"Thomas", "Aurore"})
 
     def test_history_lists_finished_weeks_and_my_current_week_once_done(self):
         past = ChallengeWeek.objects.create(week_key="2026-W44", question_ids=[str(self.questions[0].pk)],
