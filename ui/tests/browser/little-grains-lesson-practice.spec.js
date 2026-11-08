@@ -56,6 +56,10 @@ function mockApi(page, { quizLog }) {
   });
 }
 
+// Desktop renders a card containing a button; mobile renders the pill,
+// which IS the button.
+const practiceButton = (page) => page.locator('.lg-practice-card button, button.lg-practice-pill');
+
 test('practice with a lesson selected asks the API for that lesson only', async ({ page }) => {
   const quizLog = [];
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
@@ -71,7 +75,7 @@ test('practice with a lesson selected asks the API for that lesson only', async 
   await panel.locator('.lg-lessons').getByRole('button', { name: /The Great One/ }).click();
 
   // Practice now scopes to the selected lesson.
-  await page.locator('.lg-practice-card, .lg-practice-pill').getByRole('button').click();
+  await practiceButton(page).click();
   const quiz = page.getByRole('dialog', { name: /Practice quiz/ });
   await expect(quiz.getByText(/Hockey all time legends · The Great One/)).toBeVisible();
   expect(quizLog.length).toBeGreaterThan(0);
@@ -80,7 +84,7 @@ test('practice with a lesson selected asks the API for that lesson only', async 
 
   // Deselect the lesson: practice goes back to the whole path.
   await panel.locator('.lg-lessons').getByRole('button', { name: /The Great One/ }).click();
-  await page.locator('.lg-practice-card, .lg-practice-pill').getByRole('button').click();
+  await practiceButton(page).click();
   await expect(page.getByRole('dialog', { name: /Practice quiz/ })).toBeVisible();
   expect(quizLog[quizLog.length - 1]).toBeNull();
   await page.getByRole('dialog', { name: /Practice quiz/ }).getByRole('button', { name: 'Close quiz' }).click();
@@ -88,9 +92,26 @@ test('practice with a lesson selected asks the API for that lesson only', async 
   // Selecting the unread lesson must NOT fall back to the whole path: the
   // quiz opens scoped and explains the cards must be read first.
   await panel.locator('.lg-lessons').getByRole('button', { name: /The Dynasty Years/ }).click();
-  await page.locator('.lg-practice-card, .lg-practice-pill').getByRole('button').click();
+  await practiceButton(page).click();
   const scoped = page.getByRole('dialog', { name: /Practice quiz/ });
   await expect(scoped.getByText('Read every card of The Dynasty Years first to practice its questions.')).toBeVisible();
   await expect(scoped.getByText(/Which team did Wayne Gretzky join/)).toHaveCount(0);
   expect(quizLog[quizLog.length - 1]).toBe(id(102));
+});
+
+test('phone: selected lesson scopes practice from the floating pill', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const quizLog = [];
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, { quizLog });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  await panel.getByRole('button', { name: /Sport/ }).click();
+  await panel.getByRole('button', { name: /Hockey all time legends/ }).click();
+  await panel.locator('.lg-lessons').getByRole('button', { name: /The Dynasty Years/ }).click();
+  await practiceButton(page).click();
+  const scoped = page.getByRole('dialog', { name: /Practice quiz/ });
+  await expect(scoped.getByText('Read every card of The Dynasty Years first to practice its questions.')).toBeVisible();
+  expect(quizLog[quizLog.length - 1]).toBe(id(102));
+  await page.screenshot({ path: '/tmp/lg-lesson-practice-mobile.png' });
 });
