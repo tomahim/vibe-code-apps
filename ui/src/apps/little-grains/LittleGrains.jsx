@@ -361,7 +361,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
 // One quiz dialog for both entry points: the per-path Practice quiz and the
 // cross-theme Review session. Same mechanism, same look (Thomas, 2026-11-08);
 // only the fetch URL, the kicker and the per-question path label differ.
-function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUIZ", onClose, onProgress }) {
+function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUIZ", lesson = null, onClose, onProgress }) {
   const [data, setData] = useState(null);
   const [queue, setQueue] = useState([]);
   const [tries, setTries] = useState({});
@@ -791,7 +791,7 @@ export default function LittleGrains() {
           ? <GrainsLoader attempt={startup.attempt} />
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
-    {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} lesson={catchUp.lesson} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
     {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
