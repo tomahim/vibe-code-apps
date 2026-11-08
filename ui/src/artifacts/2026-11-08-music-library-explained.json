@@ -1,0 +1,6 @@
+{
+  "title": "How Music generation library works",
+  "description": "Six interactive steps: from editable JavaScript score to a SuperCollider engine in WebAssembly. Runs the app's real scores, boot sequence, clock and note conversion.",
+  "date": "2026-11-08",
+  "tags": ["music", "supercollider", "webassembly", "interactive", "education"]
+}

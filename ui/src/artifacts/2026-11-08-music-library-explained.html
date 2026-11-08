@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Music generation library works</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0c0a14; --panel:#15121f; --panel2:#1d1930; --line:#2f2947;
+  --ink:#ece8f7; --muted:#a199bd; --faint:#6f6890;
+  --violet:#b48cff; --cyan:#5ee6e0; --gold:#f2b66d; --pink:#ff6fa8; --green:#7fe3a0; --red:#ff7a7a;
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#221a3d 0,transparent 60%),var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,sans-serif;color-scheme:dark;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.mast{max-width:1100px;margin:0 auto;padding:26px 18px 6px}
+.mast h1{margin:0;font:700 28px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.01em;background:linear-gradient(92deg,#d9c8ff,#b48cff 45%,#5ee6e0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mast p{margin:8px 0 0;color:var(--muted);font-size:14px;max-width:70ch}
+main{max-width:1100px;margin:0 auto;padding:8px 18px 120px}
+@media(min-width:900px){main{padding-bottom:48px}}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:rgba(12,10,20,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{flex:1;background:none;border:0;border-radius:10px;padding:7px 2px;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px;min-width:0}
+.tabs button b{font-size:16px;font-weight:600;line-height:1.2}
+.tabs button[aria-selected=true]{color:var(--ink);background:var(--panel2)}
+.tabs button[aria-selected=true] b{color:var(--cyan)}
+@media(min-width:900px){.tabs{position:sticky;top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--line);max-width:1100px;margin:10px auto 0;border-radius:12px;background:rgba(21,18,31,.9)}.tabs button{flex-direction:row;justify-content:center;gap:8px;font-size:13px}}
+section.pane{display:none;animation:fade .35s ease}
+section.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font:700 22px/1.25 Georgia,serif;margin:18px 0 4px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin:22px 0 8px}
+p.lead{color:var(--muted);margin:4px 0 14px;max-width:72ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.grid2{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.grid2>*{min-width:0}
+html,body{overflow-x:hidden}
+@media(min-width:900px){.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.grid2.wide{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+pre{margin:0;background:#0f0c19;border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow:auto;font-size:12px;line-height:1.55;color:#d8d0f0;white-space:pre}
+.btn{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600;font-size:14px}
+.btn.primary{background:linear-gradient(135deg,#6a46c9,#2aa6a6);border-color:transparent;color:#fff}
+.btn:hover{filter:brightness(1.15)}
+.btn[disabled]{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.note{font-size:12.5px;color:var(--muted);border-left:3px solid var(--violet);padding:4px 10px;margin:10px 0;background:rgba(180,140,255,.07);border-radius:0 8px 8px 0}
+.note.warn{border-color:var(--gold);background:rgba(242,182,109,.08)}
+.src{font-size:11px;color:var(--faint);margin-top:6px}
+.src code{color:var(--muted)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:13px}
+.kv span:nth-child(odd){color:var(--faint)}
+label.rng{display:grid;grid-template-columns:90px 1fr 56px;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:6px 0}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+select{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit}
+canvas{width:100%;display:block;border-radius:10px;background:#0f0c19;border:1px solid var(--line)}
+
+/* pipeline */
+.pipe{display:flex;flex-direction:column;gap:0}
+.stage{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:left;width:100%;transition:border-color .25s,background .25s,transform .25s}
+.stage .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--panel2);color:var(--violet);font-size:12px;font-weight:700;margin-right:8px}
+.stage .t{font-weight:700}
+.stage .s{display:block;color:var(--muted);font-size:13px;margin:2px 0 0 30px}
+.stage.on{border-color:var(--cyan);background:#16222b;}
+.stage.on .n{background:var(--cyan);color:#06222a}
+.link{width:2px;height:14px;background:var(--line);margin:0 0 0 22px;position:relative}
+.link.on{background:var(--cyan)}
+.payload{min-height:120px}
+.payload .tag{font-size:11px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+
+/* boot */
+.tree{font-size:13px;line-height:1.9}
+.tnode{display:inline-block;padding:1px 9px;border-radius:7px;border:1px solid var(--line);background:var(--panel2);margin:1px 0;transition:all .3s;opacity:.25}
+.tnode.on{opacity:1;border-color:var(--cyan);color:#fff}
+.tnode.fx{border-color:var(--gold)}
+.tl{padding-left:18px;border-left:1px dashed var(--line);margin-left:10px}
+.steps{display:flex;flex-direction:column;gap:6px;counter-reset:s}
+.stp{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;text-align:left;width:100%;opacity:.55}
+.stp.done{opacity:.85}
+.stp.cur{opacity:1;border-color:var(--violet);background:var(--panel2)}
+.stp i{font-style:normal;font-weight:700;color:var(--violet);min-width:18px}
+
+/* layers */
+.layerchips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--panel2);border-radius:99px;padding:3px 11px;font-size:12.5px;display:inline-flex;gap:6px;align-items:center}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chip.off{opacity:.35}
+.codebox{max-height:420px}
+.codebox .l1{color:#d6c1ff}.codebox .cm{color:#7e76a4}
+
+.adsr-out{font-size:13px}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.pal button{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 9px;text-align:left}
+.pal button.on{border-color:var(--gold);background:#251f1a}
+.pal b{display:block;font-size:13px}
+.pal span{font-size:11.5px;color:var(--muted)}
+.state{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.st{padding:10px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--panel);transition:all .3s}
+.st.on{border-color:var(--green);background:#14231b}
+.err{color:var(--red)}
+.ok{color:var(--green)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="mast">
+  <h1>How Music generation library works</h1>
+  <p>A real SuperCollider engine running inside the browser tab, driven by JavaScript you can edit. Six steps, each one an interactive view of the actual code in the app (<code>/apps/music-library</code>, PR #383).</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Steps">
+  <button role="tab" aria-selected="true" data-tab="overview"><b>1</b>Overview</button>
+  <button role="tab" aria-selected="false" data-tab="boot"><b>2</b>Boot</button>
+  <button role="tab" aria-selected="false" data-tab="score"><b>3</b>The score</button>
+  <button role="tab" aria-selected="false" data-tab="clock"><b>4</b>Clock</button>
+  <button role="tab" aria-selected="false" data-tab="notes"><b>5</b>Notes</button>
+  <button role="tab" aria-selected="false" data-tab="run"><b>6</b>Edit &amp; run</button>
+</nav>
+
+<main>
+
+<!-- 1. OVERVIEW -->
+<section class="pane on" id="overview">
+  <h2>One note, from text to speaker</h2>
+  <p class="lead">Nothing runs on a server. The music is JavaScript text in the editor. Pressing Play turns that text into timestamped messages for SuperCollider's synthesis engine, compiled to WebAssembly and running on the browser's audio thread. Tap <b>Send a note through</b> to follow one bell.</p>
+  <div class="grid2 wide">
+    <div>
+      <div class="row" style="margin-bottom:10px">
+        <button class="btn primary" id="sendNote">Send a note through</button>
+        <button class="btn" id="stageNext">Next stage</button>
+      </div>
+      <div class="pipe" id="pipe"></div>
+    </div>
+    <div class="card payload" id="payload" aria-live="polite" style="position:sticky;top:60px;align-self:start"></div>
+  </div>
+  <div class="note">The editor language is plain JavaScript against a small music API (<code>m.play</code>, <code>m.chord</code>, <code>m.sleep</code>, <code>m.spawn</code>). It is not SuperCollider's own language (sclang). What is SuperCollider is the sound engine: scsynth.</div>
+</section>
+
+<!-- 2. BOOT -->
+<section class="pane" id="boot">
+  <h2>Waking the engine</h2>
+  <p class="lead">The first tap on Play boots everything. Browsers refuse to start audio without a user gesture, so boot is tied to that tap. Step through <code>engine.boot()</code> and watch the node tree appear.</p>
+  <div class="grid2">
+    <div>
+      <div class="steps" id="bootSteps"></div>
+      <div class="row" style="margin-top:10px"><button class="btn primary" id="bootNext">Next step</button><button class="btn" id="bootReset">Restart</button></div>
+    </div>
+    <div>
+      <div class="card">
+        <h3 style="margin-top:0">What exists in the engine</h3>
+        <div class="tree" id="bootTree"></div>
+        <div class="src" id="bootSrc"></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3 style="margin-top:0">This step in code</h3><pre id="bootCode"></pre></div>
+    </div>
+  </div>
+  <div class="note">Everything the engine needs is vendored into the app's own static files under <code>/supersonic/</code>: about 3 MB of WebAssembly plus the worklet script and 119 precompiled instrument files (about 665 KB). No CDN, no API. That is why the first Play takes a moment.</div>
+</section>
+
+<!-- 3. SCORE -->
+<section class="pane" id="score">
+  <h2>The score is the code</h2>
+  <p class="lead">Each track is a few lines of async JavaScript. This view runs the real score code of the app, instantly and silently, against a mock of the music API, then draws every note it would play over two minutes. Randomness (bells, pan) changes each time: that is the "generative" part.</p>
+  <div class="row" style="margin-bottom:8px">
+    <select id="trackSel" aria-label="Track"></select>
+    <button class="btn" id="reroll">Re-roll randomness</button>
+    <button class="btn primary" id="sketchPlay">Hear a rough sketch</button>
+    <span class="mono" id="scoreStats" style="font-size:12px;color:var(--muted)"></span>
+  </div>
+  <div class="layerchips" id="layerChips"></div>
+  <canvas id="roll" height="260" aria-label="Piano roll of the generated notes"></canvas>
+  <div class="note warn">The sketch uses plain browser oscillators to make the structure audible. It is not the real engine and does not sound like the app. For the real sound open the app and press Play.</div>
+  <div class="grid2" style="margin-top:12px">
+    <div><h3>The code (from the app)</h3><pre class="codebox" id="codeView"></pre></div>
+    <div>
+      <h3>The music API in 6 lines</h3>
+<pre>m.play("prophet", {note:"C3", attack:2, dur:6, release:3})
+m.chord("blade", ["A2","E3","B3"], {dur:10})
+await m.sleep(4)               // move this layer's clock
+m.spawn(async (m) => { ... })  // new concurrent layer
+while (m.playing) { ... }      // loop until Stop
+m.choose([..]) m.rrand(a,b) m.note("F#3") m.notes("C3 E3")</pre>
+      <p class="lead" style="margin-top:10px">Each <code>m.spawn</code> creates a layer with its own musical clock, starting from where its parent was. Neon Rain has four: a drone, a pad, random bells, a distant growl. Time is only ever moved by <code>await m.sleep(...)</code>.</p>
+      <div class="src">Source: <code>tracks/neon-rain.js</code>, <code>tracks/first-light.js</code>, <code>engine/player.js</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CLOCK -->
+<section class="pane" id="clock">
+  <h2>Why the timing stays tight</h2>
+  <p class="lead">JavaScript timers wobble. Audio must not. So the code never says "play now". It runs about one second ahead of the sound and stamps every note with the exact moment it must start. The engine then starts it on that exact audio sample.</p>
+  <div class="card">
+    <canvas id="clockCv" height="230" aria-label="Timeline: audio playhead, notes waiting, jitter"></canvas>
+    <label class="rng"><span>JS jitter</span><input type="range" id="jit" min="0" max="1500" step="50" value="200"><span class="mono" id="jitV">200 ms</span></label>
+    <label class="rng"><span>Lookahead</span><input type="range" id="look" min="200" max="2000" step="100" value="1000"><span class="mono" id="lookV">1.0 s</span></label>
+    <div class="mono" id="clockInfo" style="font-size:12.5px;color:var(--muted)"></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div><h3>What sleep() does</h3>
+<pre>vTime += seconds;                   // layer's musical clock
+aheadBy = vTime - (now - startReal);
+wait = aheadBy - LOOKAHEAD_SECONDS; // 1.0
+if (wait &gt; 0) await timer(wait);</pre>
+    <div class="src"><code>player.js</code>, <code>makeSection().sleep</code></div></div>
+    <div><h3>What play() stamps</h3>
+<pre>when = startNtp + vTime + at;   // absolute time
+bundle = encodeBundle(when, [
+  ["/s_new", "sonic-pi-pretty_bell",
+   id, 0, sourceGroup, ...params]
+]);
+supersonic.sendOSC(bundle);</pre>
+    <div class="src"><code>player.js</code> + <code>supersonicEngine.js</code> scheduleNote</div></div>
+  </div>
+  <div class="note">Blue notes are sent and waiting inside the engine. Hollow notes are still only in the JS loop. If a note is sent after its own timestamp it turns red: that is the failure the one-second margin protects against. The sliders are a simulation of the idea. The app uses a fixed 1.0 s lookahead and a 0.4 s delay before the first note.</div>
+</section>
+
+<!-- 5. NOTES -->
+<section class="pane" id="notes">
+  <h2>From a note name to a sound</h2>
+  <p class="lead">Before a note is sent, the app converts names to MIDI numbers and turns the friendly <code>dur</code> option into the envelope the instrument understands. Try it.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Your <code>m.play(...)</code></h3>
+      <div class="row" style="margin-bottom:6px"><select id="nSynth"></select>
+        <input id="nNote" value="C#3" aria-label="Note name" style="width:90px;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit"></div>
+      <label class="rng"><span>dur</span><input type="range" id="nDur" min="1" max="24" step="0.5" value="12"><span class="mono" id="nDurV"></span></label>
+      <label class="rng"><span>attack</span><input type="range" id="nAtt" min="0" max="12" step="0.5" value="3"><span class="mono" id="nAttV"></span></label>
+      <label class="rng"><span>release</span><input type="range" id="nRel" min="0" max="12" step="0.5" value="5"><span class="mono" id="nRelV"></span></label>
+      <canvas id="adsr" height="150" aria-label="Envelope shape"></canvas>
+      <div class="adsr-out" id="adsrOut" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">What goes to the engine</h3>
+      <pre id="oscOut"></pre>
+      <div class="src">Conversion: <code>noteNameToMidi</code> and the <code>dur</code> block in <code>player.js</code>. Sent by <code>scheduleNote</code>; <code>out_bus</code> defaults to the private music bus 10.</div>
+      <h3>Instrument palette (16)</h3>
+      <div class="pal" id="pal"></div>
+      <div class="src" id="palInfo">These are Sonic Pi's precompiled instruments (synthdefs). Compositions can only use this fixed set.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. RUN -->
+<section class="pane" id="run">
+  <h2>Edit, run, stop</h2>
+  <p class="lead">The editor text is the program. Play compiles it with <code>new Function</code>, Stop wipes pending and sounding notes. Pick an edit to see what the app does with it.</p>
+  <div class="state" id="stateBox">
+    <div class="st" data-s="idle"><b>Idle</b><br><span class="src">engine may be booted</span></div>
+    <div class="st" data-s="boot"><b>Booting</b><br><span class="src">first Play only</span></div>
+    <div class="st" data-s="play"><b>Playing</b><br><span class="src">layers running</span></div>
+  </div>
+  <div class="row"><button class="btn primary" id="stPlay">Play</button><button class="btn" id="stStop">Stop</button></div>
+  <h3>Try an edit</h3>
+  <div class="row" style="margin-bottom:8px"><select id="editSel"></select><button class="btn" id="editRun">Press Play with this edit</button></div>
+  <pre id="editCode"></pre>
+  <div class="card" style="margin-top:10px;min-height:56px" id="editResult"></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h3 style="margin-top:0">Stop, precisely</h3>
+<pre>supersonic.send("/clearSched");           // drop pending notes
+supersonic.send("/g_freeAll", sourceGroup); // free only the notes</pre>
+      <p class="lead" style="margin:8px 0 0;font-size:13px">The reverb and master level live in a separate group and keep running, so the next Play starts instantly. During development an extra group id of 0 in that command emptied the whole root group, effects included. That bug is fixed in the shipped code.</p></div>
+    <div class="card"><h3 style="margin-top:0">Where your edits live</h3>
+      <p class="lead" style="margin:0;font-size:13px">Each track's code is saved in the browser's <code>localStorage</code> under <code>music-library:code:&lt;track id&gt;</code>, on your device only. Editing while playing shows "press Play again": the running music is the code as it was at Play.</p></div>
+  </div>
+  <h3>Honest limits</h3>
+  <div class="card"><ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13.5px">
+    <li>Compositions are JavaScript, not sclang. You cannot define new SuperCollider instruments in the editor, only choose and shape the 16 shipped ones.</li>
+    <li>Playback and the audio signal were verified in Firefox on a development machine. The private production page has not been opened from outside.</li>
+    <li>The first Play downloads about 3 MB of engine, then sound starts.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<script>
+const TRACKS = [{"id":"neon-rain","title":"Neon Rain","mood":"Dark city ambience","description":"A slow film-noir cityscape: C minor drones melting into each other, a soft analog pad, and bells falling like rain somewhere above the streets.","synths":["dark_ambience","prophet","pretty_bell","growl"],"code":"// \"Neon Rain\" - a slow, rain-soaked city ambience.\n// Deep drones in C minor under sparse bell droplets.\n//\n// The code below IS the music: change a chord, a synth name or a\n// sleep time, then press Play again to hear your version.\n//\n// Useful moves:\n//   m.play(\"prophet\", { note: \"C3\", attack: 2, dur: 6, release: 3 })\n//   m.chord(\"blade\", [\"A2\", \"E3\", \"B3\"], { attack: 4, dur: 10, release: 6 })\n//   await m.sleep(4)          wait 4 seconds\n//   m.spawn(async (m) => {...}) start a concurrent layer\n//   m.choose([...]) / m.rrand(0.2, 0.6)  pick / random\n\nconst ROOTS  = [\"C2\", \"G#1\", \"D#2\", \"A#1\"]; // Cm | Ab | Eb | Bb\nconst CHORDS = [\n  [\"C4\", \"D#4\", \"G4\"],   // C minor\n  [\"G#3\", \"C4\", \"D#4\"],  // Ab major\n  [\"D#4\", \"G4\", \"A#4\"],  // Eb major\n  [\"A#3\", \"D4\", \"F4\"],   // Bb major\n];\nconst PENTA = [\"C5\", \"D#5\", \"F5\", \"G5\", \"A#5\", \"C6\"];\n\n// Layer 1 - the deep drone, one dark_ambience note per chord.\nm.spawn(async (m) => {\n  let i = 0;\n  while (m.playing) {\n    m.play(\"dark_ambience\", {\n      note: ROOTS[i % ROOTS.length],\n      attack: 6, dur: 16, release: 8,\n      amp: 0.5, cutoff: 60, ring: 0.4, room: 100,\n    });\n    i += 1;\n    await m.sleep(14); // shorter than dur: drones melt into each other\n  }\n});\n\n// Layer 2 - a soft minor pad swelling above the drone.\nm.spawn(async (m) => {\n  let i = 0;\n  while (m.playing) {\n    m.chord(\"prophet\", CHORDS[i % CHORDS.length], {\n      attack: 7, dur: 15, release: 7,\n      amp: 0.28, cutoff: 55, res: 0.5,\n    });\n    i += 1;\n    await m.sleep(14);\n  }\n});\n\n// Layer 3 - rain: sparse bells falling at random heights.\nm.spawn(async (m) => {\n  await m.sleep(6);\n  while (m.playing) {\n    m.play(\"pretty_bell\", {\n      note: m.choose(PENTA),\n      amp: m.rrand(0.05, 0.16),\n      pan: m.rrand(-0.7, 0.7),\n      release: m.rrand(3, 7),\n    });\n    await m.sleep(m.rrand(0.7, 2.4));\n  }\n});\n\n// Layer 4 - a low growl far away, every couple of bars.\nm.spawn(async (m) => {\n  await m.sleep(28);\n  while (m.playing) {\n    m.play(\"growl\", {\n      note: \"C1\", attack: 3, dur: 6, release: 5,\n      amp: 0.3, cutoff: 45,\n    });\n    await m.sleep(56);\n  }\n});\n"},{"id":"first-light","title":"First Light","mood":"Dawn ambience","description":"A hopeful sunrise: D major pads opening like a sky, string swells answering an octave up, and small bells waking up one by one.","synths":["hollow","blade","dull_bell","prophet"],"code":"// \"First Light\" - a slow sunrise in D major.\n// Airy pads, string swells an octave up, and bells like early birds.\n//\n// The code below IS the music: change a chord, a synth name or a\n// sleep time, then press Play again to hear your version.\n//\n// Useful moves:\n//   m.play(\"hollow\", { note: \"D3\", attack: 4, dur: 10, release: 6 })\n//   m.chord(\"prophet\", [\"D3\", \"A3\", \"F#4\"], { attack: 4, dur: 10, release: 6 })\n//   await m.sleep(4)          wait 4 seconds\n//   m.spawn(async (m) => {...}) start a concurrent layer\n//   m.note(\"F#3\") + 12        one octave up\n//   m.choose([...]) / m.rrand(0.2, 0.6)  pick / random\n\nconst CHORDS = [\n  [\"D3\", \"A3\", \"E4\", \"F#4\"],   // D add9\n  [\"B2\", \"F#3\", \"A3\", \"D4\"],   // Bm7\n  [\"G2\", \"D3\", \"B3\", \"E4\"],    // Gmaj7 colour\n  [\"A2\", \"E3\", \"C#4\", \"G4\"],   // A suspended\n];\nconst SPARK = [\"A4\", \"B4\", \"C#5\", \"D5\", \"E5\", \"F#5\", \"A5\"];\n\n// Layer 1 - the sky: a hollow pad, one slow swell per chord.\nm.spawn(async (m) => {\n  let i = 0;\n  while (m.playing) {\n    m.chord(\"hollow\", CHORDS[i % CHORDS.length], {\n      attack: 8, dur: 18, release: 9,\n      amp: 0.3, cutoff: 70, noise: 0.6,\n    });\n    i += 1;\n    await m.sleep(16);\n  }\n});\n\n// Layer 2 - strings answering an octave up, every other chord.\nm.spawn(async (m) => {\n  await m.sleep(16);\n  let i = 1;\n  while (m.playing) {\n    const up = CHORDS[i % CHORDS.length].slice(1).map((n) => m.note(n) + 12);\n    m.chord(\"blade\", up, {\n      attack: 6, dur: 14, release: 8,\n      amp: 0.16, cutoff: 65, vibrato_rate: 4.5, vibrato_depth: 0.12,\n    });\n    i += 2;\n    await m.sleep(32);\n  }\n});\n\n// Layer 3 - first birds: sparse bright bells.\nm.spawn(async (m) => {\n  await m.sleep(10);\n  while (m.playing) {\n    m.play(\"dull_bell\", {\n      note: m.choose(SPARK),\n      amp: m.rrand(0.06, 0.18),\n      pan: m.rrand(-0.8, 0.8),\n      release: m.rrand(4, 9),\n    });\n    await m.sleep(m.rrand(1.2, 3.2));\n  }\n});\n\n// Layer 4 - the sun itself: a low warm swell under everything.\nm.spawn(async (m) => {\n  await m.sleep(32);\n  while (m.playing) {\n    m.play(\"prophet\", {\n      note: \"D2\", attack: 10, dur: 22, release: 10,\n      amp: 0.22, cutoff: 40,\n    });\n    await m.sleep(64);\n  }\n});\n"}];
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const LAYER_COLORS = ['#b48cff','#5ee6e0','#f2b66d','#ff6fa8','#7fe3a0'];
+
+/* ---------- tabs ---------- */
+function showTab(id){
+  $$('section.pane').forEach(p => p.classList.toggle('on', p.id === id));
+  $$('.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
+  window.scrollTo({top:0});
+  if(id==='score') drawRoll();
+  if(id==='clock') startClock(); else stopClock();
+  if(id==='notes') drawAdsr();
+  try{ history.replaceState(null,'','#'+id); }catch(e){}
+}
+$$('.tabs button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+addEventListener('resize', () => { drawRoll(); drawAdsr(); });
+
+/* ---------- 1. pipeline ---------- */
+const STAGES = [
+  {t:'The editor', s:'Shared CodeMirror editor holds the score as text', tag:'text in the editor',
+   p:'<pre>m.play("pretty_bell", {\n  note: "G5",\n  amp: 0.1, pan: -0.4,\n  release: 5\n})</pre><p class="src">Just JavaScript text. Edits are saved in localStorage.</p>'},
+  {t:'The performance (player.js)', s:'Text becomes a running async function', tag:'compiled with new Function',
+   p:'<pre>fn = new Function("m",\n  \'"use strict";\\nreturn (async () => {\\n\'\n  + code + \'\\n})();\');\nfn(mainSection)</pre><p class="src">A syntax error stops here with "Syntax: ...". Each m.spawn adds a layer with its own clock.</p>'},
+  {t:'Note preparation', s:'Names to MIDI, dur to envelope, time to an absolute stamp', tag:'normalised',
+   p:'<pre>note   "G5" -> 79\nwhen   startNtp + vTime + at\n       = NTP 3.9 s from now\nparams {note:79, amp:0.1, pan:-0.4, release:5}</pre><p class="src">If dur is given: sustain = max(0.05, dur - attack - release).</p>'},
+  {t:'Engine wrapper (supersonicEngine.js)', s:'One OSC bundle, timestamped, per note', tag:'OSC bundle',
+   p:'<pre>#bundle @ NTP t\n  /s_new "sonic-pi-pretty_bell"\n         nodeId 1042  addToHead  sourceGroup\n         note 79 amp 0.1 pan -0.4 release 5\n         out_bus 10</pre><p class="src">Open Sound Control is SuperCollider\'s native message format.</p>'},
+  {t:'SuperSonic transport', s:'Message crosses to the audio thread via postMessage', tag:'postMessage',
+   p:'<p>The bundle is posted to an <b>AudioWorklet</b>. The app uses the postMessage mode, so it needs no special HTTP headers on the static server (the faster shared-memory mode would).</p><p class="src">Package: supersonic-scsynth 0.95.1, pinned.</p>'},
+  {t:'scsynth in WebAssembly', s:'SuperCollider\'s synthesis server, running in the worklet', tag:'audio thread',
+   p:'<p>The bundle waits in the engine\'s scheduler until its timestamp, then a <b>pretty_bell</b> synth node is created inside the source group and starts making samples. About 2.7 MB of WebAssembly, served from the app itself.</p>'},
+  {t:'Effects and master', s:'bus 10 -> reverb -> bus 12 -> level -> speakers', tag:'mixed',
+   p:'<pre>sources  -> bus 10\nfx_gverb  in 10 out 12\nfx_level  in 12 out 0  amp 0.9</pre><p class="src">The volume slider sets fx_level\'s amp live with /n_set.</p>'}
+];
+let stageI = -1, stageTimer = null;
+const pipe = $('#pipe');
+STAGES.forEach((s,i) => {
+  if(i) pipe.insertAdjacentHTML('beforeend','<div class="link"></div>');
+  const b = document.createElement('button');
+  b.className='stage'; b.innerHTML=`<span class="t"><span class="n">${i+1}</span>${s.t}</span><span class="s">${s.s}</span>`;
+  b.addEventListener('click', () => { clearInterval(stageTimer); setStage(i); });
+  pipe.appendChild(b);
+});
+function setStage(i){
+  stageI = i;
+  const st = $$('.stage', pipe), lk = $$('.link', pipe);
+  st.forEach((e,k) => e.classList.toggle('on', k===i));
+  lk.forEach((e,k) => e.classList.toggle('on', k < i));
+  $('#payload').innerHTML = `<div class="tag">${STAGES[i].tag}</div>${STAGES[i].p}`;
+}
+$('#sendNote').addEventListener('click', () => {
+  clearInterval(stageTimer); let i = 0; setStage(0);
+  stageTimer = setInterval(() => { i++; if(i>=STAGES.length){clearInterval(stageTimer);return;} setStage(i); }, 1500);
+});
+$('#stageNext').addEventListener('click', () => { clearInterval(stageTimer); setStage((stageI+1) % STAGES.length); });
+setStage(0);
+
+/* ---------- 2. boot ---------- */
+const BOOT = [
+ {t:'Tap Play (a user gesture)', code:'async togglePlay() {\n  if (!engine.ready) {\n    setBooting(true);\n    await engine.boot(setStatus);\n  }\n  performance.start(code);\n}', tree:[], src:'Browsers block audio until the user acts. Status shown: "Waking the SuperCollider engine..."'},
+ {t:'Create the SuperSonic object', code:'new SuperSonic({\n  baseURL: "/supersonic/",\n  coreBaseURL: "/supersonic/core/",\n  synthdefBaseURL: "/supersonic/synthdefs/",\n})', tree:[], src:'All three URLs point into the app\'s own bundle.'},
+ {t:'init(): load WASM and start the audio worklet', code:'await supersonic.init();', tree:['root'], src:'Downloads ~2.7 MB WebAssembly, starts an AudioContext and the worklet. Node 0 (the root group) now exists.'},
+ {t:'Make sure the audio is running', code:'if (audioContext.state !== "running") {\n  await supersonic.resume();\n  await audioContext.resume();\n}', tree:['root'], src:'Added after Firefox left the context suspended even after a tap.'},
+ {t:'Load the instruments', code:'await supersonic.loadSynthDefs(\n  [...SYNTH_PALETTE, "fx_gverb", "fx_level"]\n    .map(n => "sonic-pi-" + n));', tree:['root'], src:'16 instruments plus 2 effects, fetched as .scsyndef binaries.'},
+ {t:'Create two groups, in order', code:'send("/g_new", sourceGroup, 0, 0); // head of root\nsend("/g_new", fxGroup,     1, 0); // tail of root', tree:['root','src','fxg'], src:'Order matters in SuperCollider: sources run first, effects after, so the reverb always hears the notes.'},
+ {t:'Build the effects chain', code:'/s_new fx_gverb  in_bus 10 out_bus 12\n       room 30 release 4 dry .85\n       tail_level .55 ref_level .4\n/s_new fx_level  in_bus 12 out_bus 0\n       amp 0.9   // added after gverb', tree:['root','src','fxg','rev','lvl'], src:'Music bus 10 -> reverb -> bus 12 -> master level -> speakers (bus 0).'},
+ {t:'sync(): wait until the engine confirms', code:'await supersonic.sync();\nthis.ready = true;\nonStatus("Ready");', tree:['root','src','fxg','rev','lvl'], ready:true, src:'Now performance.start(code) runs the score. Later Plays skip boot entirely.'}
+];
+const NODES = [['root','0 root group'],['src','source group (notes go here)'],['fxg','fx group'],['rev','fx_gverb: reverb'],['lvl','fx_level: master volume']];
+let bootI = -1;
+function renderBoot(){
+  $('#bootSteps').innerHTML = BOOT.map((s,i)=>`<button class="stp ${i<bootI?'done':''} ${i===bootI?'cur':''}" data-i="${i}"><i>${i+1}</i><span>${s.t}</span></button>`).join('');
+  $$('#bootSteps .stp').forEach(b => b.addEventListener('click', () => { bootI = +b.dataset.i; renderBoot(); }));
+  const cur = BOOT[Math.max(0,bootI)]; const on = bootI<0?[]:cur.tree;
+  $('#bootTree').innerHTML =
+   `<span class="tnode ${on.includes('root')?'on':''}">${NODES[0][1]}</span><div class="tl">`+
+   `<span class="tnode ${on.includes('src')?'on':''}">${NODES[1][1]}</span><br>`+
+   `<span class="tnode ${on.includes('fxg')?'on':''}">${NODES[2][1]}</span><div class="tl"><span class="tnode fx ${on.includes('rev')?'on':''}">${NODES[3][1]}</span><br><span class="tnode fx ${on.includes('lvl')?'on':''}">${NODES[4][1]}</span></div></div>`+
+   (bootI>=0&&cur.ready?'<div class="ok" style="margin-top:6px">Ready</div>':'');
+  $('#bootCode').textContent = bootI<0 ? 'Press "Next step"' : cur.code;
+  $('#bootSrc').textContent = bootI<0 ? '' : cur.src;
+}
+$('#bootNext').addEventListener('click', () => { bootI = Math.min(BOOT.length-1, bootI+1); renderBoot(); });
+$('#bootReset').addEventListener('click', () => { bootI = -1; renderBoot(); });
+renderBoot();
+
+/* ---------- 3. score: run the real code against a mock API ---------- */
+const NOTE_OFFSETS = {c:0,d:2,e:4,f:5,g:7,a:9,b:11};
+function noteNameToMidi(name){
+  const m = /^([a-gA-G])([#b]?)(-?\d+)$/.exec(String(name).trim());
+  if(!m) return null;
+  let s = NOTE_OFFSETS[m[1].toLowerCase()];
+  if(m[2]==='#') s++; if(m[2]==='b') s--;
+  return (parseInt(m[3],10)+1)*12+s;
+}
+function toMidi(n){
+  if(typeof n==='string'){const v=noteNameToMidi(n); if(v===null) throw new Error('Unknown note name: '+n); return v;}
+  if(typeof n==='number' && isFinite(n)) return n;
+  throw new Error('A note must be a name ("C#3") or a MIDI number, got: '+n);
+}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+async function simulate(code, seed, horizon){
+  const rnd = mulberry32(seed), events = []; let layers = 0, count = 0;
+  const STOP = new Error('__stopped__');
+  function section(start, layer){
+    let v = start;
+    const api = {
+      get playing(){ return v <= horizon; },
+      async sleep(s){ v += Math.max(0,s); if(v>horizon) throw STOP; await Promise.resolve(); },
+      play(synth, o={}){
+        if(v>horizon) throw STOP;
+        if(++count>4000) throw new Error('Stopped after 4000 notes');
+        const {note=60, at=0, dur, ...rest} = o;
+        const e = {t:v+at, layer, synth, note:toMidi(note), amp:rest.amp??0.5, attack:rest.attack??0.01, release:rest.release??0.5};
+        e.len = typeof dur==='number' ? dur : e.release;
+        events.push(e);
+      },
+      chord(synth, notes, o={}){ const {strum=0, ...r}=o; notes.forEach((n,i)=>api.play(synth,{...r,note:n,at:(r.at??0)+i*strum})); },
+      spawn(fn){ const child = section(v, ++layers); run(()=>fn(child)); },
+      note: toMidi,
+      notes: (s)=>String(s).trim().split(/\s+/).map(toMidi),
+      choose: (a)=>a[Math.floor(rnd()*a.length)],
+      rrand: (lo,hi)=>lo+rnd()*(hi-lo),
+      irand: (lo,hi)=>Math.floor(lo+rnd()*(hi-lo+1))
+    };
+    return api;
+  }
+  async function run(f){ try{ await f(); }catch(e){ if(e!==STOP) console.warn(e.message); } }
+  const fn = new Function('m','"use strict";\nreturn (async () => {\n'+code+'\n})();');
+  run(()=>fn(section(0,0)));
+  await new Promise(r=>setTimeout(r,0));
+  events.sort((a,b)=>a.t-b.t);
+  return {events, layers};
+}
+let cur = {track:TRACKS[0], seed:7, sim:null, hidden:new Set(), horizon:120};
+const trackSel = $('#trackSel');
+TRACKS.forEach((t,i)=>trackSel.insertAdjacentHTML('beforeend',`<option value="${i}">${t.title} - ${t.mood}</option>`));
+async function loadScore(){
+  cur.sim = await simulate(cur.track.code, cur.seed, cur.horizon);
+  const names = layerNames(cur.track.code).map(s=>s.split(/[,:]/)[0]);
+  $('#layerChips').innerHTML = [...Array(cur.sim.layers)].map((_,i)=>`<button class="chip ${cur.hidden.has(i+1)?'off':''}" data-l="${i+1}"><i style="background:${LAYER_COLORS[i%5]}"></i>${names[i]||'Layer '+(i+1)}</button>`).join('');
+  $$('#layerChips .chip').forEach(c=>c.addEventListener('click',()=>{const l=+c.dataset.l; cur.hidden.has(l)?cur.hidden.delete(l):cur.hidden.add(l); c.classList.toggle('off'); drawRoll();}));
+  const n = cur.sim.events.length;
+  $('#scoreStats').textContent = n+' notes in '+cur.horizon+' s, '+cur.sim.layers+' layers';
+  $('#codeView').innerHTML = highlight(cur.track.code);
+  drawRoll();
+}
+function layerNames(code){ return [...code.matchAll(/^\/\/ Layer \d+ - ([^\n.]*)/gm)].map(m=>m[1].trim()); }
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function highlight(code){
+  return code.split('\n').map(l=>{
+    const e = esc(l);
+    if(/^\/\/ Layer/.test(l)) return '<span class="l1">'+e+'</span>';
+    if(/^\s*\/\//.test(l)) return '<span class="cm">'+e+'</span>';
+    return e;
+  }).join('\n');
+}
+trackSel.addEventListener('change',()=>{cur.track=TRACKS[+trackSel.value]; cur.hidden=new Set(); stopSketch(); loadScore();});
+$('#reroll').addEventListener('click',()=>{cur.seed=Math.floor(Math.random()*1e6); stopSketch(); loadScore();});
+
+let playheadT = null, playheadStart = 0;
+function fitCanvas(cv){
+  const r = cv.getBoundingClientRect(), d = devicePixelRatio||1;
+  if(r.width===0) return null;
+  if(!cv.dataset.h) cv.dataset.h = cv.getAttribute('height');
+  const H = parseInt(cv.dataset.h); cv.style.height = H+'px';
+  cv.width = Math.round(r.width*d); cv.height = Math.round(H*d);
+  const g = cv.getContext('2d'); g.setTransform(d,0,0,d,0,0);
+  return {g, w:r.width, h:H};
+}
+function drawRoll(){
+  const cv = $('#roll'); if(!cv || !cur.sim) return;
+  const f = fitCanvas(cv); if(!f) return; const {g,w,h} = f;
+  g.clearRect(0,0,w,h);
+  const ev = cur.sim.events; if(!ev.length) return;
+  const lo = Math.min(...ev.map(e=>e.note))-2, hi = Math.max(...ev.map(e=>e.note))+2;
+  const padL = 30, X = t=>padL+(w-padL-6)*t/cur.horizon, Y = n=>h-14-(h-24)*(n-lo)/(hi-lo);
+  g.strokeStyle='#2a2440'; g.fillStyle='#6f6890'; g.font='10px system-ui'; g.lineWidth=1;
+  for(let t=0;t<=cur.horizon;t+=20){g.beginPath();g.moveTo(X(t),4);g.lineTo(X(t),h-14);g.stroke();g.fillText(t+'s',X(t)+2,h-2);}
+  for(const e of ev){
+    if(cur.hidden.has(e.layer)) continue;
+    const x = X(e.t), wd = Math.max(2, X(e.t+e.len)-x), y = Y(e.note);
+    g.fillStyle = LAYER_COLORS[(e.layer-1+5)%5]; g.globalAlpha = Math.min(1, 0.35+e.amp*1.2);
+    g.fillRect(x, y-3, Math.min(wd, w-x), 6);
+  }
+  g.globalAlpha=1;
+  if(playheadT!==null){ const x=X(playheadT); g.strokeStyle='#fff'; g.beginPath(); g.moveTo(x,2); g.lineTo(x,h-14); g.stroke(); }
+}
+
+/* rough Web Audio sketch (not the real engine) */
+let sk = null, skRaf = 0;
+function stopSketch(){
+  cancelAnimationFrame(skRaf); playheadT=null; if(sk){ try{sk.close();}catch(e){} sk=null; }
+  $('#sketchPlay').textContent='Hear a rough sketch'; drawRoll();
+}
+$('#sketchPlay').addEventListener('click', ()=>{
+  if(sk){ stopSketch(); return; }
+  const AC = window.AudioContext||window.webkitAudioContext; if(!AC) return;
+  sk = new AC(); sk.resume();
+  const master = sk.createGain(); master.gain.value = 0.55;
+  const dl = sk.createDelay(1); dl.delayTime.value = 0.37; const fb = sk.createGain(); fb.gain.value=0.45;
+  const lp = sk.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2400;
+  master.connect(sk.destination); master.connect(dl); dl.connect(lp); lp.connect(fb); fb.connect(dl); lp.connect(sk.destination);
+  const t0 = sk.currentTime + 0.2;
+  for(const e of cur.sim.events){
+    if(cur.hidden.has(e.layer)) continue;
+    const f = 440*Math.pow(2,(e.note-69)/12), bell = /bell/.test(e.synth);
+    const o = sk.createOscillator(), g = sk.createGain(), fl = sk.createBiquadFilter();
+    o.type = bell ? 'sine' : (e.synth==='blade'||e.synth==='hollow' ? 'triangle' : 'sawtooth');
+    fl.type='lowpass'; fl.frequency.value = bell?6000:900; o.frequency.value=f;
+    const s = t0+e.t, a = bell?0.005:Math.max(0.05,e.attack), len = Math.max(e.len, a+0.2), peak = Math.min(0.25, e.amp*(bell?0.9:0.35));
+    g.gain.setValueAtTime(0.0001,s); g.gain.linearRampToValueAtTime(peak,s+a);
+    g.gain.setValueAtTime(peak, s+Math.max(a, len-e.release)); g.gain.exponentialRampToValueAtTime(0.0001, s+len+0.05);
+    o.connect(fl); fl.connect(g); g.connect(master); o.start(s); o.stop(s+len+0.1);
+    if(bell){ const o2=sk.createOscillator(), g2=sk.createGain(); o2.frequency.value=f*2.76; o2.connect(g2); g2.gain.value=0.25; g2.connect(g); o2.start(s); o2.stop(s+len+0.1); }
+  }
+  $('#sketchPlay').textContent='Stop sketch';
+  const tick = ()=>{ if(!sk) return; playheadT = sk.currentTime - t0; if(playheadT>cur.horizon+8){stopSketch();return;} drawRoll(); skRaf=requestAnimationFrame(tick); };
+  tick();
+});
+loadScore();
+
+/* ---------- 4. clock simulation ---------- */
+let clockRaf = 0, clockT0 = 0;
+function stopClock(){ cancelAnimationFrame(clockRaf); clockRaf = 0; }
+function startClock(){
+  if(clockRaf) return;
+  clockT0 = performance.now();
+  const cv = $('#clockCv'), jit = $('#jit'), look = $('#look');
+  const step = 0.5; const hash = k => { const x = Math.sin(k*127.1)*43758.5453; return x-Math.floor(x); };
+  const frame = () => {
+    clockRaf = requestAnimationFrame(frame);
+    const f = fitCanvas(cv); if(!f) return; const {g,w,h} = f;
+    const J = jit.value/1000, L = look.value/1000;
+    $('#jitV').textContent = jit.value+' ms'; $('#lookV').textContent = (L).toFixed(1)+' s';
+    const t = (performance.now()-clockT0)/1000;      // audio clock
+    const span = 5, cx = w*0.35, X = tt => cx + (tt-t)*(w*0.6/span);
+    g.clearRect(0,0,w,h);
+    g.fillStyle='#6f6890'; g.font='11px system-ui';
+    g.fillText('notes: timestamp on the audio clock', 8, 16);
+    g.fillText('JS loop: when the note is actually sent', 8, 130);
+    g.strokeStyle='#2f2947'; g.beginPath(); g.moveTo(0,70); g.lineTo(w,70); g.stroke();
+    let late = 0, sent = 0, waiting = 0;
+    for(let k=Math.floor((t-3)/step); k<Math.ceil((t+span+3)/step); k++){
+      const stamp = k*step; if(stamp<0) continue;
+      const sendAt = stamp - L + (hash(k)-0.5)*2*J;     // JS wakes about L ahead, plus jitter
+      const isSent = t >= sendAt, isLate = sendAt > stamp;
+      const x = X(stamp);
+      if(x<-10||x>w+10) continue;
+      g.beginPath(); g.arc(x,70,6,0,7);
+      if(isSent && stamp>=t){ g.fillStyle=isLate?'#ff7a7a':'#5ee6e0'; g.fill(); }
+      else if(isSent){ g.fillStyle='rgba(180,140,255,.5)'; g.fill(); }
+      else { g.strokeStyle='#b48cff'; g.stroke(); }
+      // JS send marker
+      const sx = X(sendAt), sy = 150;
+      g.beginPath(); g.moveTo(sx,sy); g.lineTo(sx,sy+10); g.strokeStyle = isLate?'#ff7a7a':'#7fe3a0'; g.stroke();
+      if(stamp>=t && stamp<t+span){ if(isLate&&isSent) late++; else if(isSent) sent++; else waiting++; }
+      if(isSent && Math.abs(sendAt-t)<0.02){ g.strokeStyle='rgba(255,255,255,.15)'; g.beginPath(); g.moveTo(x,70); g.lineTo(sx,150); g.stroke(); }
+    }
+    g.strokeStyle='#fff'; g.lineWidth=2; g.beginPath(); g.moveTo(cx,28); g.lineTo(cx,112); g.stroke(); g.lineWidth=1;
+    g.fillStyle='#fff'; g.fillText('audio now', cx+6, 40);
+    g.strokeStyle='rgba(94,230,224,.35)'; g.setLineDash([4,4]); g.beginPath(); g.moveTo(X(t+L),28); g.lineTo(X(t+L),112); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#5ee6e0'; g.fillText('+'+L.toFixed(1)+' s', X(t+L)+4, 100);
+    const bad = J > L;
+    $('#clockInfo').innerHTML = bad
+      ? '<span class="err">Jitter ('+jit.value+' ms) is bigger than the lookahead: some notes would be sent after their moment.</span>'
+      : '<span class="ok">Jitter stays inside the lookahead: every note is already in the engine before its moment.</span>';
+  };
+  frame();
+}
+
+/* ---------- 5. notes & envelope ---------- */
+const PALETTE = [
+ ['prophet','warm poly synth, Prophet-5 flavour'],['dark_ambience','dark evolving drone with built-in space'],['hollow','airy, breathy pad'],['blade','cinematic string-like pad with vibrato'],
+ ['pretty_bell','FM bell, long shimmer'],['dull_bell','softer, rounder bell'],['pluck','Karplus-Strong pluck'],['growl','deep growling bass'],
+ ['hoover','classic alpha-juno hoover'],['supersaw','detuned saw stack'],['saw','plain saw'],['tri','triangle wave'],
+ ['pulse','pulse wave'],['tb303','acid bassline'],['mod_fm','basic FM'],['fm','2-op FM with modulator']];
+const nSynth = $('#nSynth');
+PALETTE.forEach(([n],i)=>nSynth.insertAdjacentHTML('beforeend',`<option ${n==='blade'?'selected':''}>${n}</option>`));
+$('#pal').innerHTML = PALETTE.map(([n,d])=>`<button data-n="${n}"><b>${n}</b><span>${d}</span></button>`).join('');
+$$('#pal button').forEach(b=>b.addEventListener('click',()=>{nSynth.value=b.dataset.n; drawAdsr();}));
+['nDur','nAtt','nRel','nNote'].forEach(id=>$('#'+id).addEventListener('input',drawAdsr));
+nSynth.addEventListener('change',drawAdsr);
+function drawAdsr(){
+  const dur=+$('#nDur').value, att=+$('#nAtt').value, rel=+$('#nRel').value;
+  $('#nDurV').textContent=dur+' s'; $('#nAttV').textContent=att+' s'; $('#nRelV').textContent=rel+' s';
+  $$('#pal button').forEach(b=>b.classList.toggle('on', b.dataset.n===nSynth.value));
+  const raw = noteNameToMidi($('#nNote').value);
+  const sustain = Math.max(0.05, dur-att-rel), total = att+sustain+rel;
+  const bad = raw===null;
+  const midi = bad ? 'unknown' : raw;
+  $('#adsrOut').innerHTML = (bad?'<span class="err">Unknown note name: '+esc($('#nNote').value)+' (the app throws this exact kind of error)</span><br>':'')+
+    `<div class="kv"><span>MIDI note</span><span>${midi}</span><span>sustain</span><span>max(0.05, ${dur} - ${att} - ${rel}) = ${sustain.toFixed(2)} s</span><span>total sound</span><span>${total.toFixed(2)} s${total>dur+0.001?' (longer than dur: attack + release do not fit)':''}</span></div>`;
+  $('#oscOut').textContent =
+`/s_new  "sonic-pi-${nSynth.value}"  <id>  0  <sourceGroup>
+  note    ${midi}
+  attack  ${att}
+  decay   0
+  sustain ${sustain.toFixed(2)}
+  release ${rel}
+  out_bus 10`;
+  const cv=$('#adsr'); const f=fitCanvas(cv); if(!f) return; const {g,w,h}=f; g.clearRect(0,0,w,h);
+  const pad=10, T=Math.max(total,dur,1), X=t=>pad+(w-2*pad)*t/T, Y=v=>h-18-(h-34)*v;
+  g.strokeStyle='#2a2440'; g.beginPath(); g.moveTo(pad,Y(0)); g.lineTo(w-pad,Y(0)); g.stroke();
+  g.beginPath(); g.moveTo(X(0),Y(0)); g.lineTo(X(att),Y(1)); g.lineTo(X(att+sustain),Y(1)); g.lineTo(X(total),Y(0));
+  g.lineTo(X(0),Y(0)); g.fillStyle='rgba(94,230,224,.18)'; g.fill(); g.strokeStyle='#5ee6e0'; g.lineWidth=2; g.stroke(); g.lineWidth=1;
+  g.setLineDash([4,4]); g.strokeStyle='#f2b66d'; g.beginPath(); g.moveTo(X(dur),6); g.lineTo(X(dur),h-18); g.stroke(); g.setLineDash([]);
+  g.fillStyle='#f2b66d'; g.font='11px system-ui'; g.fillText('dur', Math.min(X(dur)+4,w-30), 14);
+  g.fillStyle='#6f6890'; g.fillText('attack',X(0)+2,h-4); g.fillText('sustain',X(att)+2,h-4); g.fillText('release',X(att+sustain)+2,h-4);
+}
+drawAdsr();
+
+/* ---------- 6. edit & run ---------- */
+const EDITS = [
+ {n:'Change a chord to D#3', code:'const ROOTS = ["D#2", "G#1", "D#2", "A#1"];', ok:true,
+  msg:'Plays normally. The next Play uses the new root. If you edit while playing, the app shows "press Play again".'},
+ {n:'Typo in a note name', code:'m.play("prophet", { note: "H3", dur: 4 });', ok:false,
+  msg:'Unknown note name: H3'},
+ {n:'Syntax error', code:'m.play("prophet", { note: "C3" ;', ok:false,
+  msg:'Syntax: (the browser\'s own JavaScript error text)'},
+ {n:'Loop without sleep', code:'while (m.playing) {\n  m.play("pluck", { note: "C4", dur: 1 });\n}', ok:false,
+  msg:'Stopped after 4000 notes - is a loop missing "await m.sleep(...)"?'},
+ {n:'Schedule a long phrase at once', code:'for (let i = 0; i < 40; i++) {\n  m.play("tri", { note: "C4", at: i * 2 });\n}', ok:false,
+  msg:'Scheduling too far ahead - add "await m.sleep(...)" between phrases.'},
+ {n:'Add a new layer', code:'m.spawn(async (m) => {\n  while (m.playing) {\n    m.play("dull_bell", { note: m.choose(["C5","G5"]), amp: 0.1 });\n    await m.sleep(m.rrand(1, 3));\n  }\n});', ok:true,
+  msg:'A fifth concurrent layer with its own clock starts next to the others.'}
+];
+const editSel = $('#editSel');
+EDITS.forEach((e,i)=>editSel.insertAdjacentHTML('beforeend',`<option value="${i}">${e.n}</option>`));
+function showEdit(){ $('#editCode').textContent = EDITS[+editSel.value].code; $('#editResult').innerHTML='<span class="src">Press the button to see how the app reacts.</span>'; }
+editSel.addEventListener('change',showEdit); showEdit();
+$('#editRun').addEventListener('click',()=>{
+  const e = EDITS[+editSel.value];
+  setState('boot'); setTimeout(()=>{
+    if(e.ok){ setState('play'); $('#editResult').innerHTML='<b class="ok">Playing.</b> '+esc(e.msg); }
+    else { setState('idle'); $('#editResult').innerHTML='<b class="err">Stopped with a message under the editor:</b><br><code class="err">'+esc(e.msg)+'</code><br><span class="src">Playback stops cleanly; notes already sent are cleared.</span>'; }
+  }, 500);
+});
+function setState(s){ $$('#stateBox .st').forEach(x=>x.classList.toggle('on',x.dataset.s===s)); }
+$('#stPlay').addEventListener('click',()=>{ setState('boot'); setTimeout(()=>setState('play'),500); });
+$('#stStop').addEventListener('click',()=>setState('idle'));
+setState('idle');
+
+const h = (location.hash||'').slice(1); if(h && document.getElementById(h) && h!=='') showTab(h);
+</script>
+</body>
+</html>
