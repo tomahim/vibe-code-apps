@@ -1,0 +1,24 @@
+id: a581f6a1-7ff7-4c45-8bb3-236d7a537178
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Par téléphone (CROSS 196 ou SAMU 15), quelles informations le manuel demande-t-il
+  de transmettre ?
+choices:
+- id: 1298fc71-751a-43ba-8f0b-bdbc6a56c24a
+  text: Le lieu précis, le numéro de téléphone de l'appelant, le nombre de victimes,
+    les signes et les secours apportés.
+- id: 76e2c909-8bb8-41b7-a04c-2db0f6a36319
+  text: Uniquement le prénom de la victime et sa pointure, pour préparer le matériel
+    adapté.
+- id: a427549c-db36-42df-9d34-b0d4f901a25c
+  text: Le prix de la sortie plongée et le numéro de licence du club organisateur.
+- id: d933d2ff-2c05-4ab0-8a07-cfa52d87c3aa
+  text: La marque et la couleur de la combinaison de chaque membre de la palanquée.
+correct_choice_ids:
+- 1298fc71-751a-43ba-8f0b-bdbc6a56c24a
+explanation: 'Par téléphone : lieu précis, numéro de téléphone depuis lequel vous
+  appelez, nombre de victimes, signes de l''accident (symptômes) et secours apportés.
+  Et on ne raccroche jamais soi-même.'
+archived: false

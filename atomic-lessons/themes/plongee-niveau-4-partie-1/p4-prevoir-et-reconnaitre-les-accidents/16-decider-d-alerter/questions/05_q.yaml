@@ -1,0 +1,22 @@
+id: 40d34dc4-5d7a-42ec-8fa3-0c4145f178f5
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: En mer ou depuis le littoral, quel organisme faut-il alerter, et comment ?
+choices:
+- id: 73c767a6-ae59-4ffe-8bd6-744ec3ec5f89
+  text: Le CROSS, par VHF canal 16, VHF-ASN canal 70 ou par téléphone au 196 (numéros
+    de l'édition 2020).
+- id: ee48b3de-1c63-4ad2-acc3-c89d79e469b0
+  text: La préfecture maritime, par courrier recommandé avec accusé de réception postal.
+- id: 4052e902-ce95-4ce9-b1db-23a7a3a0c2db
+  text: Le concessionnaire du matériel de plongée, qui seul peut autoriser l'évacuation.
+- id: a52d5794-a067-477e-bc59-61fde987fb55
+  text: Le SAMU, qui reste le seul interlocuteur compétent, même en pleine mer.
+correct_choice_ids:
+- 73c767a6-ae59-4ffe-8bd6-744ec3ec5f89
+explanation: En mer ou depuis le littoral, on alerte le CROSS (VHF canal 16, VHF-ASN
+  canal 70, téléphone 196) ; dans tous les autres cas, le SAMU (téléphone 15). La
+  page de référence liste aussi 112, 18 et 17.
+archived: false

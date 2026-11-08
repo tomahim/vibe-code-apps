@@ -1,0 +1,26 @@
+id: e7772bbb-810f-4d2a-89e9-97e6377c780a
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment se déroule une alerte en VHF-ASN sur le canal 70 ?
+choices:
+- id: 5354c64c-1889-4b3d-83ad-10c78f32937e
+  text: Sélection du message, appui sur Distress jusqu'à cinq bips courts et un long,
+    accusé de réception, puis message en PTT.
+- id: 0abd36eb-2c77-428c-a57b-6a501dcec3ea
+  text: Annonce vocale directe « Mayday » répétée en continu pendant au moins dix
+    minutes.
+- id: 4a1820f5-be53-42d3-97f7-eebaaa021afc
+  text: Envoi d'un simple coup de sifflet dans le micro, les secours localisant alors
+    le signal.
+- id: 27d2e379-cfe3-42ec-9cb2-0ffea288c4be
+  text: Bascule sur le canal 16 pour y lire le plan de secours complet, phrase par
+    phrase.
+correct_choice_ids:
+- 5354c64c-1889-4b3d-83ad-10c78f32937e
+explanation: 'En VHF-ASN : sélection du message, appui maintenu sur Distress jusqu''à
+  entendre cinq bips courts suivis d''un long, attente de l''accusé de réception,
+  puis passage du message en mode émission (PTT) : signes, nombre de victimes, secours
+  apportés.'
+archived: false

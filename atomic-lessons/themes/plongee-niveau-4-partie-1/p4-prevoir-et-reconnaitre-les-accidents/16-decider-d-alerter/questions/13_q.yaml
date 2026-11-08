@@ -1,0 +1,24 @@
+id: a6ec99ef-77d8-449b-92bc-0651554380da
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles informations sur les lieux de plongée le modèle de plan de secours
+  du manuel demande-t-il ?
+choices:
+- id: 2386ad1f-813c-4d15-81f1-7aa02e6e27aa
+  text: Le nom de chaque site, ses coordonnées (L/G) et le premier port (nom, distance,
+    temps estimé).
+- id: 3ff4e7ce-2a56-4612-a92b-019241e29274
+  text: Uniquement le nom commercial du site, sans aucune coordonnée géographique.
+- id: b7679b98-4ecd-4e2a-86f9-b0aed2d90359
+  text: La température de l'eau relevée sur chaque site au premier janvier de l'année.
+- id: ffb6c45e-b71c-44b1-aa41-fcb16abb5114
+  text: La liste complète des espèces de poissons que l'on peut y rencontrer.
+correct_choice_ids:
+- 2386ad1f-813c-4d15-81f1-7aa02e6e27aa
+explanation: Le modèle de plan comporte les lieux de plongée (nom, coordonnées L/G,
+  premier port avec nom, distance et temps estimé), l'établissement, l'embarcation,
+  la localisation du matériel (oxygène, trousse), les consignes, les numéros d'urgence
+  et la fiche d'évacuation.
+archived: false
