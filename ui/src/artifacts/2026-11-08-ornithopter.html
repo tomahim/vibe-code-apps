@@ -347,7 +347,7 @@ function buildLilienthal() {
     pt(p1, 'Cambered ribs', 'Ribs set the curve of the wing. Lilienthal measured that a curved wing lifts far more than a flat board of the same size.', [0, 2.5, 0], [0, 0.3, 0], 8),
     pt(p2, 'Cotton skin', 'Stretched cotton fabric closes the curve. No engine, so every gram of the wing is paid for by the pilot running downhill.', [0, 3, 0], [0, 0.3, 0], 9),
     pt(p3, 'Tailplane and fin', 'A small tail behind the wing. It makes the glider settle nose-into-wind, like the feathers on an arrow.', [-3, 0, 0], [-2, 0.3, 0], 8),
-    pt(p4, 'Pilot and arm pads', 'He hangs by his forearms. His only control is swinging his hips and legs to move his weight: no moving surfaces at all.', [0, 3, 0], [0, -0.6, 0], 7)
+    pt(p4, 'Pilot and arm pads', 'He hangs by his forearms. His only control is swinging his hips and legs to move his weight: no moving surfaces at all.', [0, 3, 0], [0, -0.4, 0], 11)
   ] };
 }
 
@@ -523,10 +523,10 @@ function buildWright() {
   return { group: root, h0: 1.4, span: 12.3, props: props, parts: [
     pt(p0, 'Skids', 'Two wooden skids instead of wheels. The Flyer took off from a 60 ft wooden rail laid on the sand, into a strong wind.', [0, -3, 0], [0.4, -1, 0], 10),
     pt(p1, 'Biplane wings', 'Two wings, braced with struts and wires. Light, strong, and the cloth covers a wooden frame: the Wrights tested the wing shapes in their own wind tunnel.', [0, 3, 0], [0, 0, 0], 15),
-    pt(p2, 'Front elevator', 'A small pair of surfaces in front controls pitch: nose up, nose down. This is the piece Ader and Lilienthal did not have.', [3, 0, 0], [3, 0, 0], 9),
+    pt(p2, 'Front elevator', 'A small pair of surfaces in front controls pitch: nose up, nose down. This is the piece Ader and Lilienthal did not have.', [3, 0, 0], [2.6, 0, 0], 12),
     pt(p3, 'Twin rudders', 'Two upright rudders at the back steer left and right. They are linked to the wing-warping cradle, so a turn banks the wing too.', [-3, 0, 0], [-3, 0, 0], 9),
     pt(p4, 'Engine and propellers', 'A 12 hp engine the brothers built themselves, and two pusher propellers driven by bicycle-style chains. Thrust finally came from shaped propeller blades.', [-3, 0, 0], [-1.2, -0.2, 0.6], 10),
-    pt(p5, 'Pilot cradle', 'The pilot lies on the lower wing. Shifting his hips pulls wires that twist (warp) the wingtips, which rolls the machine. Three axes of control, in one man.', [0, 3, 0], [0, -0.8, -0.2], 8)
+    pt(p5, 'Pilot cradle', 'The pilot lies on the lower wing. Shifting his hips pulls wires that twist (warp) the wingtips, which rolls the machine. Three axes of control, in one man.', [0, 3, 0], [0, -0.5, -0.2], 13)
   ] };
 }
 
@@ -570,6 +570,8 @@ function applyStep(snap) {
   b.parts.forEach(function (p, i) { p.targets.forEach(function (t) { t.visible = i < asm.step; if (i < asm.step - 1) { t.position.set(0, 0, 0); t.scale.set(1, 1, 1); } }); });
   var p = b.parts[asm.step - 1]; asm.t = snap && reduce ? 1 : 0;
   asm.ttarget.set(p.focus[0], p.focus[1], p.focus[2]); asm.tdist = p.dist;
+  if (snap) { asm.target.copy(asm.ttarget); asm.dist = asm.tdist; }
+  if (true) { var fx = p.focus[0]; asm.yaw = fx > 1.5 ? 1.0 : (fx < -1.5 ? Math.PI - 0.9 : -0.7); }
   if (asm.box) { asm.scene.remove(asm.box); asm.box = null; }
   asm.box = new THREE.Box3Helper(new THREE.Box3(), 0x62c9da); asm.scene.add(asm.box);
   renderBuildPanel();
@@ -936,7 +938,7 @@ var qs = location.hash.replace('#', '').split(',');
 if (ORDER.indexOf(qs[0]) >= 0) mid = qs[0];
 renderChips(); loadAssembly(); buildFly(); buildCtl(); resize();
 if (qs[1] && ['build', 'fly', 'lesson', 'wall'].indexOf(qs[1]) >= 0) setTab(qs[1]); else renderPanel();
-if (qs[2]) { var sn = parseInt(qs[2], 10); if (sn > 0 && sn <= asm.build.parts.length) { asm.step = sn; applyStep(true); asm.t = 1; } }
+if (qs[2]) { var sn = parseInt(qs[2], 10); if (sn > 0 && sn <= asm.build.parts.length) { asm.step = sn; applyStep(true); asm.t = 1; asm.idle = -999; } }
 if (qs[3] === 'go') { startFlight(); if (qs[4]) { for (var ii = 0; ii < parseFloat(qs[4]) * 20; ii++) { clock += 0.05; updateFly(0.05, clock); } } }
 window.__orn = { asm: asm, fly: fly, setTab: setTab, selectMachine: selectMachine, startFlight: startFlight };
 requestAnimationFrame(frame);
