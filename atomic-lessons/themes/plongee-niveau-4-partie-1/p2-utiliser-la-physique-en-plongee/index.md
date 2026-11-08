@@ -1,7 +1,7 @@
 ---
 id: b490482d-4176-4cb4-8758-c96f99e5b2b5
 position: 2
-title: Utiliser la physique en plongée
+title: "2 - Utiliser la physique en plongée"
 description: 'Expliquer et calculer les phénomènes physiques utiles au guide de palanquée
   : pression, volumes, flottabilité, autonomie.'
 archived: false
