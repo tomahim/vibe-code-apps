@@ -1,0 +1,19 @@
+id: 3add50a5-358a-4282-a371-369e74d755ea
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel équipement supplémentaire un plongeur encadré au-delà de 20 m doit-il porter ?
+choices:
+- id: cba5e5b9-6bbd-4bc9-b35a-a87a9ab5574e
+  text: Instruments de contrôle de la plongée et de la remontée et seconde source d'air ; parachute de palier par palanquée.
+- id: fe5cd5e5-3e21-4638-8ef4-c68f6db6d56b
+  text: Deux détendeurs complets montés sur deux sorties indépendantes du robinet.
+- id: f6782164-f32d-41a7-b0fe-4f0dca4071dd
+  text: Un couteau de sécurité, une lampe principale et un avertisseur sonore.
+- id: 65ca76bf-5638-44d2-90ae-dcb8b1383a14
+  text: Une bouteille de secours supplémentaire accrochée sous le gilet stabilisateur.
+correct_choice_ids:
+- cba5e5b9-6bbd-4bc9-b35a-a87a9ab5574e
+explanation: Au-delà de 20 m - comme en autonomie - s'ajoutent les équipements de contrôle (ordinateur ou profondimètre + montre + tables), une seconde source d'air sans partage d'embout, et un parachute de palier par palanquée.
+archived: false

@@ -1,0 +1,19 @@
+id: 1da38ba1-b3fe-49a4-9ddb-6d32f4ad41bf
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: À 18 m, un plongeur s'essouffle alors que le programme prévoit 25 m. Que faites-vous ?
+choices:
+- id: 34d72006-1ae4-4ade-9d53-dcffa5b868b8
+  text: Vous remontez le groupe à une profondeur moindre et écourtez la plongée.
+- id: 5f617531-a40c-4c12-b432-b7bbc32e8d51
+  text: 'Vous maintenez le programme : le plongeur doit gérer sa ventilation.'
+- id: 9bc19702-f90b-41f2-a73b-fbe5480f0d8f
+  text: Vous faites remonter le plongeur seul en surface avec son octopus.
+- id: e554f602-859b-4b30-a80d-356428614cbb
+  text: Vous accélérez la fin du parcours pour raccourcir l'immersion.
+correct_choice_ids:
+- 34d72006-1ae4-4ade-9d53-dcffa5b868b8
+explanation: 'L''essoufflement impose d''alléger la contrainte : réduire la profondeur et la durée. Le guide est responsable de l''adaptation ; faire remonter un plongeur seul ou forcer le rythme aggrave le risque.'
+archived: false

@@ -1,0 +1,19 @@
+id: 0cadbed2-e64a-49d7-ac13-53f366c1e809
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi la FFESSM délivre-t-elle une carte CMAS 3 étoiles à ses moniteurs 2e degré ?
+choices:
+- id: 2ecd61d1-5e59-472c-a595-977f158c9d7a
+  text: Pour assurer la reconnaissance de leur diplôme à l'international.
+- id: a9d4a0f1-fec7-49fe-813a-9ae597ce700d
+  text: Pour leur permettre d'enseigner sans licence.
+- id: 27bf9476-eaf5-4753-9e41-0c646285f1e1
+  text: Pour les autoriser à diriger des plongées à titre professionnel.
+- id: d6d8b7eb-b0c4-49b9-b0fe-638e9e200e51
+  text: Pour les dispenser de certificat médical.
+correct_choice_ids:
+- 2ecd61d1-5e59-472c-a595-977f158c9d7a
+explanation: La FFESSM délivre une carte de moniteur CMAS 3 étoiles à ses moniteurs 2e degré afin d'assurer une reconnaissance à l'international, la CMAS couvrant plus de cent pays.
+archived: false

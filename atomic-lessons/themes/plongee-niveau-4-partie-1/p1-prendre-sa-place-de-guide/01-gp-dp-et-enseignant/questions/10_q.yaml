@@ -1,0 +1,19 @@
+id: f79ff52b-a7d1-473e-8536-f10123f4cae9
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles prérogatives un brevet d'initiateur ajoute-t-il à un plongeur niveau 4 ?
+choices:
+- id: 81cb695e-f2ad-44b8-9c60-9235fa19e605
+  text: 'Il devient enseignant de niveau 2 : formation jusqu''à 20 m et guidage en exploration jusqu''à 20 m.'
+- id: 38652710-58c7-43ea-ac33-c6a1cc8a7768
+  text: 'Il devient enseignant de niveau 3 : formation jusqu''à 40 m et direction de plongée.'
+- id: 21d37733-9149-432a-ae0d-ddf2a0c8d1dd
+  text: Il peut baptiser en milieu naturel jusqu'à 6 m sans autorisation du DP.
+- id: b1e291c2-3f72-4abf-9e37-6b99b39ac7a7
+  text: Il peut diriger des plongées d'exploration à titre bénévole.
+correct_choice_ids:
+- 81cb695e-f2ad-44b8-9c60-9235fa19e605
+explanation: 'L''initiateur confère la fonction E1, et adossé au niveau 4 il ouvre les prérogatives d''enseignant de niveau 2 : former vers les aptitudes de 12 et 20 m et guider en exploration jusqu''à 20 m. La direction de plongée relève d''E3 ou du niveau 5.'
+archived: false

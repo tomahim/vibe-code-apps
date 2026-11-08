@@ -1,0 +1,19 @@
+id: 8d209072-1bf7-480a-8620-3a1a3cc488c2
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle décision un guide de palanquée ne peut jamais prendre seul ?
+choices:
+- id: 73f9f3e1-1090-4af5-a39f-6957ba35eda5
+  text: Annuler la sortie pour l'ensemble des palanquées avant la mise à l'eau.
+- id: 617215a0-7272-4b26-8a70-997c3106774b
+  text: Interrompre sa propre plongée si un plongeur est en difficulté.
+- id: b0226fce-4314-4471-b75a-c619e09337e3
+  text: Réduire la profondeur maximale fixée par le directeur de plongée.
+- id: 6ad78825-9055-4fdb-8d62-51d8986a8e20
+  text: Modifier le trajet prévu pour éviter une zone de courant.
+correct_choice_ids:
+- 73f9f3e1-1090-4af5-a39f-6957ba35eda5
+explanation: Annuler la plongée pour tout le monde relève du DP, qui décide si la plongée peut avoir lieu. En immersion, le GP garde la responsabilité d'adapter ou d'interrompre sa propre plongée, sans jamais dépasser le cadre fixé.
+archived: false

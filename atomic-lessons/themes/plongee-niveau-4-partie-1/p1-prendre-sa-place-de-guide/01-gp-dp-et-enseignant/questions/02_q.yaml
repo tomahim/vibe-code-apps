@@ -1,0 +1,19 @@
+id: 71bda086-f69f-4349-a382-7351f6726d18
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit le code du sport du rôle de l'encadrant de palanquée ?
+choices:
+- id: 006792db-fbad-40f0-ba2c-da65975abe23
+  text: Il dirige la palanquée en immersion et est responsable du déroulement de la plongée.
+- id: 5431a8cc-a929-4e35-9d34-05884dd954ee
+  text: Il organise la plongée et forme les palanquées avant la mise à l'eau.
+- id: c4ed9829-11c8-4a02-98e2-ad2b64fa5d3b
+  text: Il évalue les aptitudes des plongeurs et valide leurs niveaux.
+- id: 8978dfc0-e52f-4078-8c15-10ccac3e72f9
+  text: Il établit la fiche de sécurité et déclenche les secours.
+correct_choice_ids:
+- 006792db-fbad-40f0-ba2c-da65975abe23
+explanation: L'encadrant de palanquée dirige la palanquée en immersion et veille à ce que la plongée reste adaptée aux circonstances et aux aptitudes. Organiser, former les palanquées et établir la fiche de sécurité relèvent du directeur de plongée.
+archived: false

@@ -1,0 +1,19 @@
+id: 94c8d0ef-c794-4e3b-a7db-ecb44058b603
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qui établit la fiche de sécurité et combien de temps est-elle conservée ?
+choices:
+- id: c5336063-cfdf-40ca-aab8-ae65a4fa5b90
+  text: Le directeur de plongée l'établit avant chaque plongée ; l'établissement la conserve un an.
+- id: ec312ba4-c2e5-4e95-8dce-2a91aea8db88
+  text: Le guide de palanquée la remplit après la plongée ; elle est conservée dix ans.
+- id: 7700015c-f28a-4ae0-9cc0-cfc1d90b004b
+  text: Chaque plongeur la signe ; l'établissement la conserve trois mois.
+- id: 02f91d30-432c-4e4b-a15d-407dc3d57ee9
+  text: Le moniteur le plus diplômé l'établit ; elle est conservée cinq ans.
+correct_choice_ids:
+- c5336063-cfdf-40ca-aab8-ae65a4fa5b90
+explanation: Établir une fiche de sécurité avant chaque plongée est l'une des six missions du DP. Le document est conservé une année par tout moyen par l'établissement.
+archived: false

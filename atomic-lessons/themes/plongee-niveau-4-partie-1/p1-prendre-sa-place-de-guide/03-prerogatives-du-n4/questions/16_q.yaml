@@ -1,0 +1,19 @@
+id: 05f08ebc-1423-449c-99df-538db0f6045c
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle pression partielle d'oxygène ne faut-il pas dépasser en plongée nitrox ?
+choices:
+- id: cc632d49-b6eb-49f2-bacb-682416bdffe5
+  text: 1,6 bar, souvent ramenée à 1,4 voire 1,3 ou 1,2 bar dans la pratique.
+- id: 8faf20d2-b22d-44f1-a79b-d18b6db53e3d
+  text: 2,0 bar, seuil absolu fixé par le code du sport.
+- id: 65b26dca-a1e9-4d9a-871a-fb8050b76155
+  text: 1,0 bar, comme en plongée à l'air classique.
+- id: e9c8db81-be7b-4fe8-8c84-8bb893b5ad3f
+  text: 0,5 bar, pour éviter tout risque d'hyperoxie.
+correct_choice_ids:
+- cc632d49-b6eb-49f2-bacb-682416bdffe5
+explanation: 'La zone d''évolution au nitrox dépend de la teneur en O2 du mélange et de la pression partielle d''O2 acceptée : 1 600 hectopascals (1,6 bar) au maximum, souvent ramenée à 1,4 voire 1,3 ou 1,2 bar en pratique.'
+archived: false

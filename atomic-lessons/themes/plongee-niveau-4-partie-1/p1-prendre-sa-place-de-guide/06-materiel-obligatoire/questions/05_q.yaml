@@ -1,0 +1,19 @@
+id: 366f6fdc-4ce7-41e3-bca9-4b6078c568e8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que doit porter l'encadrant de palanquée, en plus du socle commun ?
+choices:
+- id: 635a9dfc-0519-48c3-912b-58478e379f9b
+  text: Deux sorties indépendantes sur la bouteille et deux détendeurs complets.
+- id: 147ae7e5-5449-4e29-9b07-9115f4d69f59
+  text: Un ordinateur multifonction et une caméra de surveillance.
+- id: 7c076b12-fe53-442f-bdb3-71f107051deb
+  text: Une combinaison étanche et un couteau de plongée.
+- id: 6bdbec3c-f027-4184-a8dd-6ce98fc43b7b
+  text: Un parachute de palier par plongeur encadré.
+correct_choice_ids:
+- 635a9dfc-0519-48c3-912b-58478e379f9b
+explanation: L'encadrant porte, en plus du socle (manomètre, gilet, instruments de contrôle de la plongée et de la remontée de la palanquée, parachute de palier par palanquée), une bouteille à deux sorties indépendantes et deux détendeurs complets.
+archived: false

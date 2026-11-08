@@ -1,0 +1,19 @@
+id: d3f45ace-24c1-4f1c-ac85-4b746c69ab89
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Un club prête des masques à ses adhérents. Quelle obligation s'applique ?
+choices:
+- id: 41b7ed92-8b51-48e4-920e-107633bf827a
+  text: La tenue d'une fiche de gestion au titre des EPI-SL, comme en structure commerciale.
+- id: b28572bb-868a-4412-9607-d6c8208094cc
+  text: 'Aucune : le prêt en club associatif est libre.'
+- id: 46ae54f5-9e60-4ad7-83af-9123a48540e1
+  text: Uniquement une désinfection annuelle.
+- id: e12d590b-2c66-4872-8164-f28a65ee37a6
+  text: Une assurance spécifique masques.
+correct_choice_ids:
+- 41b7ed92-8b51-48e4-920e-107633bf827a
+explanation: Le code du sport rend obligatoire la fiche de gestion EPI-SL pour chaque équipement prêté ou loué aux pratiquants ou aux encadrants, que ce soit en structure commerciale ou en club associatif.
+archived: false

@@ -1,0 +1,19 @@
+id: 33c1cad4-4938-47b0-a962-61312bb4dc1c
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qu'est-ce qu'une plongée d'évaluation (« check dive ») ?
+choices:
+- id: d6dfec28-d9b6-412b-b3ca-0886b4115874
+  text: Une plongée décidée par le DP pour vérifier les aptitudes réelles d'un plongeur.
+- id: bc4f6ae1-272c-48bb-b996-925b76a80160
+  text: Une épreuve sanctionnant l'échec d'un plongeur en formation.
+- id: 13c8ecee-989e-41d3-b9ca-d5d24641809d
+  text: Une plongée technique réservée à la vérification du matériel.
+- id: 22281dd6-15e7-4435-b4b0-20990e1a28e3
+  text: Une formalité obligatoire avant toute plongée de plus de 40 m.
+correct_choice_ids:
+- d6dfec28-d9b6-412b-b3ca-0886b4115874
+explanation: En cas de doute, le DP peut décider une ou plusieurs plongées d'évaluation pour apprécier les aptitudes du moment. Cette pratique est systématique dans beaucoup de croisières et de séjours à l'étranger.
+archived: false

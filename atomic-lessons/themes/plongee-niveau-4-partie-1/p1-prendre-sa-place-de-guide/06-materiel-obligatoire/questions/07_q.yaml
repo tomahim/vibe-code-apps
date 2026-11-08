@@ -1,0 +1,19 @@
+id: f59b9b10-4eed-42c5-8d17-27210c50dee0
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle limite présentent les systèmes « Air 2 » ou « Air Source » ?
+choices:
+- id: d002e1d7-e046-4516-9b07-a5554482cd99
+  text: 'La longueur du tuyau interdit l''échange d''embout : on doit donner son détendeur principal.'
+- id: d13da641-cbc0-4d87-9d15-5cb73466f622
+  text: Ils ne comptent pas comme seconde source d'air au sens de la réglementation.
+- id: 939eddfc-9f36-481f-90c9-054dc76b4e8e
+  text: Ils sont incompatibles avec les gilets à direct-system classiques.
+- id: 0a5de389-e3f2-47ff-8f05-a425e68d8b32
+  text: Ils ne fonctionnent pas au-delà de 20 mètres de profondeur.
+correct_choice_ids:
+- d002e1d7-e046-4516-9b07-a5554482cd99
+explanation: 'Ces dispositifs combinent direct-system et deuxième étage : au sens strict, c''est une seconde source d''air, mais la longueur du tuyau oblige à donner son détendeur principal et à respirer soi-même sur l''Air 2 - une question d''efficacité et de confort.'
+archived: false

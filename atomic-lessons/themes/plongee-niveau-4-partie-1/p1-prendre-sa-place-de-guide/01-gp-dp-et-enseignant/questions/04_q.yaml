@@ -1,0 +1,19 @@
+id: fbc2c0e0-bc1a-40ce-afd7-dce491e90e67
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle affirmation sur le brevet de guide de palanquée est exacte ?
+choices:
+- id: 665f33de-73f0-4fa7-8626-e458a377e19f
+  text: En France, « guide de palanquée » est le nom générique du brevet de plongeur niveau 4.
+- id: c81a703d-b73e-47a6-8107-72131694b063
+  text: C'est une qualification d'enseignant permettant de former des plongeurs.
+- id: 6399bd3a-c8f8-4715-8cf8-1d0a23a82188
+  text: C'est une aptitude reconnue par le directeur de plongée à chaque plongée.
+- id: 2857b2f7-6578-4246-98e1-9dea430ff8ae
+  text: C'est le niveau minimal requis pour être directeur de plongée.
+correct_choice_ids:
+- 665f33de-73f0-4fa7-8626-e458a377e19f
+explanation: 'GP est le terme générique du brevet de plongeur niveau 4 (P4). Ce n''est ni une fonction d''enseignement ni une qualification de directeur de plongée : le DP est au moins un enseignant de niveau 3, ou un P5 en exploration bénévole.'
+archived: false

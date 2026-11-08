@@ -1,0 +1,19 @@
+id: ddf91fd9-4707-4dea-b635-cec98b1fcd9b
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que recommande-t-on pour les séjours plongée à l'étranger ?
+choices:
+- id: 2baaa9bc-3d06-4386-9080-38063aaf3885
+  text: Souscrire une assistance ou assurance couvrant frais médicaux et rapatriement ; la CEAM en Europe.
+- id: ba2eed08-007f-4ab8-8abb-c033b79c4916
+  text: Compter sur la sécurité sociale française, qui rembourse tout à l'étranger.
+- id: 4e520da2-c629-4927-8178-09c3cc905e1d
+  text: Emporter suffisamment d'espèces pour payer un caisson en toutes circonstances.
+- id: a8752bb8-8dc7-4fd2-97eb-bd93108296aa
+  text: Se contenter de la licence fédérale, qui couvre tous les frais.
+correct_choice_ids:
+- 2baaa9bc-3d06-4386-9080-38063aaf3885
+explanation: À l'étranger, les soins se règlent sur place et peuvent coûter très cher - passage en caisson compris. Une convention d'assistance ou une assurance est fortement recommandée ; en Europe, la CEAM gratuite facilite la prise en charge.
+archived: false

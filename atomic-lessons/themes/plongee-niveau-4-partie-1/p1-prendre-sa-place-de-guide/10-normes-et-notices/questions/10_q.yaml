@@ -1,0 +1,19 @@
+id: e56474a0-7e58-47fc-b095-76d5574f5a71
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Combien de temps les fiches de gestion doivent-elles être conservées ?
+choices:
+- id: 616254ca-17c1-42ed-9561-daf77b140f1f
+  text: Trois ans après la mise au rebut ou la sortie du stock de l'équipement.
+- id: b9e67a71-a95c-413e-8974-5f8411b08cbf
+  text: Un an après l'achat.
+- id: 3835e2e8-7ad8-4131-bb14-366c53a4b19c
+  text: Dix ans après la fabrication.
+- id: ceb6305d-6def-423b-bd00-b6262e0b45e8
+  text: Sans limite de durée.
+correct_choice_ids:
+- 616254ca-17c1-42ed-9561-daf77b140f1f
+explanation: Les fiches de gestion sont conservées durant trois ans après la mise au rebut ou la sortie du stock de l'équipement, et communiquées sur demande aux utilisateurs et aux agents chargés du contrôle.
+archived: false

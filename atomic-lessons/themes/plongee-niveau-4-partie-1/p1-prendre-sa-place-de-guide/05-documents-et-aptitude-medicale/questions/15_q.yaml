@@ -1,0 +1,19 @@
+id: 09c0209a-e002-4bc8-89a1-a79a90d6b451
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Début mai, un plongeur sédentaire veut descendre à 40 m « parce que son brevet le permet ». Quelle attitude pour le guide ?
+choices:
+- id: f6183404-bf61-43d0-84a9-9d8816659269
+  text: Proposer une remontée en puissance progressive, par exemple vers 15-20 m pour la première plongée.
+- id: ae214232-88b2-4f19-9dd7-49bbafa9ebf1
+  text: 'Accepter : le brevet pré-positionne les aptitudes, rien à redire.'
+- id: 91038314-2c5a-4cf7-a898-a9426a6783d8
+  text: Refuser de l'emmener à toute profondeur ce week-end.
+- id: e1f38499-2253-46dc-b8dc-39d1a5e5cec6
+  text: Lui faire signer une décharge avant la descente à 40 m.
+correct_choice_ids:
+- f6183404-bf61-43d0-84a9-9d8816659269
+explanation: 'Les plongées de début de saison sont particulièrement à risque : la reprise doit être progressive, par faible profondeur. Le guide adapte la plongée aux aptitudes réelles, pas au brevet affiché.'
+archived: false

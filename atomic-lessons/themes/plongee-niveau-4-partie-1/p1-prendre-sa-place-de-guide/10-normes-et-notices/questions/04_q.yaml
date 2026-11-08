@@ -1,0 +1,19 @@
+id: 7b08cccb-9770-41a8-94d4-fc7d93a84572
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce qui caractérise les EPI de catégorie I ?
+choices:
+- id: 66fe6095-0b4a-4db3-a0be-5dfc5df246ee
+  text: L'auto-certification par le fabricant - comme le masque de plongée, norme NF EN 250.
+- id: c1a7df2c-5bbb-427c-9a5d-7a1b893128fa
+  text: Un examen CE de type par un organisme notifié.
+- id: ff001bbe-3c53-4b93-a8ce-c469e24798b9
+  text: Un contrôle de la qualité de fabrication.
+- id: 8d9e49fe-8f6e-4cf4-a229-0d82adc32f95
+  text: L'absence totale de norme applicable.
+correct_choice_ids:
+- 66fe6095-0b4a-4db3-a0be-5dfc5df246ee
+explanation: Les EPI de catégorie I font l'objet d'une auto-certification par le fabricant ; en plongée, c'est le cas du masque - norme NF EN 250. Les catégories II et III exigent un examen CE de type par un organisme notifié.
+archived: false

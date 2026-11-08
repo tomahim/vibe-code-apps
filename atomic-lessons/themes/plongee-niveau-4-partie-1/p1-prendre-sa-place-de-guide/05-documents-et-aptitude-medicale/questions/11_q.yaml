@@ -1,0 +1,19 @@
+id: 4de778ec-1975-4dc0-9117-f8b1dd2ed74a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi la reprise de la plongée doit-elle être progressive ?
+choices:
+- id: 8311544d-7d6a-4b21-97c5-f4bbe81b8776
+  text: La saturation et la désaturation sollicitent fortement l'organisme ; la sédentarité fait surestimer sa condition.
+- id: 712cde90-5988-46b1-bc43-58b6b7f54195
+  text: Le matériel se dégrade pendant l'hiver et doit être testé doucement.
+- id: 076176e2-1b22-4e88-89eb-fe6b0d91513f
+  text: Les fédérations l'imposent pour limiter le nombre de plongeurs à l'eau.
+- id: e5d0518c-af30-4140-9636-70866c24624d
+  text: L'eau est plus froide en début de saison, c'est le seul risque.
+correct_choice_ids:
+- 8311544d-7d6a-4b21-97c5-f4bbe81b8776
+explanation: Saturation et désaturation fatiguent l'organisme sans qu'on s'en rende compte. Reprendre par faible profondeur (15-20 m) évite les accidents de début de saison, fréquents chez les plongeurs sédentaires qui surestiment leur condition.
+archived: false

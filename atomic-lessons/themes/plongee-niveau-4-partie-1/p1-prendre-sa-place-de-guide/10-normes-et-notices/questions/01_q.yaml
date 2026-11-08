@@ -1,0 +1,19 @@
+id: 486818d5-51f7-4cfa-b1ea-89b6cf3f633d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À quelles réglementations les EPI de plongée sont-ils soumis ?
+choices:
+- id: 5735eafc-3ec2-407d-a2d9-508065e19e61
+  text: Un règlement européen pour le marquage CE, le code du sport et le code du travail pour les fiches de gestion.
+- id: 9048843b-bafe-417b-9b38-6c66c25b71f9
+  text: Uniquement le code du sport, qui régit l'ensemble du matériel de plongée.
+- id: a6ac859c-f1c1-4fa8-8ecd-321989dc36de
+  text: Uniquement un règlement européen pour le marquage CE des équipements.
+- id: 00e20b86-0a53-42e6-9cbf-042d954db099
+  text: Le code de la consommation et le code civil pour tout le matériel.
+correct_choice_ids:
+- 5735eafc-3ec2-407d-a2d9-508065e19e61
+explanation: Les EPI sont soumis à un règlement européen pour le marquage CE, au code du sport pour la fiche de gestion des EPI-SL prêtés ou loués aux pratiquants et encadrants, et au code du travail pour les EPI prêtés aux salariés.
+archived: false

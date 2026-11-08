@@ -1,0 +1,19 @@
+id: a8cf1843-5685-4665-bd24-e78a7f39169f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment se passe le renouvellement de la licence depuis 2017 ?
+choices:
+- id: 09a67d15-1b23-45f7-846c-872255240b88
+  text: Réponse à un questionnaire de santé, avec examen médical complémentaire si nécessaire.
+- id: aa4d1032-97c6-4f90-b0bf-f5aed1023639
+  text: Visite médicale systématique chez un médecin fédéral chaque année.
+- id: 95fbebcc-5895-4bd1-a162-76c1995dacbc
+  text: Simple paiement de la cotisation, sans formalité médicale.
+- id: e6ce4ccf-fb53-4578-8b7f-0e387b764245
+  text: Examen médical complet tous les trois ans seulement.
+correct_choice_ids:
+- 09a67d15-1b23-45f7-846c-872255240b88
+explanation: Depuis le 1er juillet 2017, le renouvellement s'appuie sur le questionnaire de santé QS-SPORT. Selon les réponses, un examen médical complémentaire avec certificat de moins d'un an peut être exigé.
+archived: false

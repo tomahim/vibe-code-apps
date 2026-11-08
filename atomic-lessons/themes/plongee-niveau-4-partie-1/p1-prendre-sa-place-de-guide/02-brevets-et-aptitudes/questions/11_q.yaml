@@ -1,0 +1,19 @@
+id: 96c4adfe-f429-4e20-8cde-982d0457f721
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Un plongeur CMAS 3 étoiles breveté à l'étranger peut-il guider des palanquées en France ?
+choices:
+- id: a67f48f5-dec7-48c9-82b8-d3a69521b336
+  text: 'Non : les brevets délivrés à l''étranger ne sont pas reconnus comme brevets de guide de palanquée en France.'
+- id: d425d709-044f-45df-aa29-76db39c80ea0
+  text: 'Oui : la CMAS 3 étoiles correspond exactement au niveau 4 français.'
+- id: da88121b-6c25-4f52-8f4d-e275698d7e47
+  text: Oui, mais seulement pour des palanquées de plongeurs étrangers.
+- id: f039a0fd-c2da-470e-b520-7da3a8eb87ec
+  text: Oui, s'il est par ailleurs titulaire d'une licence FFESSM.
+correct_choice_ids:
+- a67f48f5-dec7-48c9-82b8-d3a69521b336
+explanation: Au sein de la CMAS, le 3 étoiles correspond au niveau 4 français, mais les brevets délivrés à l'étranger ne sont pas reconnus comme brevets de guide de palanquée en France. Le DP apprécie les aptitudes réelles du plongeur.
+archived: false

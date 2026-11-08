@@ -1,0 +1,19 @@
+id: bcf1e1dc-38e0-4aef-b5fa-f7ade4d339e4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Où le directeur de plongée doit-il se trouver pendant les plongées ?
+choices:
+- id: 412738e3-86c7-4b43-8660-6ae80e5d18d8
+  text: Sur le lieu de mise à l'eau ou d'immersion des palanquées.
+- id: 0485afcd-0322-4b95-8996-34bae9ff60d9
+  text: En immersion avec la palanquée la moins expérimentée.
+- id: bdbd146f-c614-483c-82c2-baa42b7d7ab2
+  text: À proximité d'un téléphone, où qu'il se trouve sur le site.
+- id: 18c0f1fa-2b25-4298-a3b7-a7a4c36ccaa4
+  text: Au siège de l'établissement qui organise la sortie.
+correct_choice_ids:
+- 412738e3-86c7-4b43-8660-6ae80e5d18d8
+explanation: Le code du sport exige un directeur de plongée présent sur le lieu de mise à l'eau ou d'immersion. La direction de plongée s'exerce de la mise à l'eau des palanquées jusqu'à leur retour.
+archived: false

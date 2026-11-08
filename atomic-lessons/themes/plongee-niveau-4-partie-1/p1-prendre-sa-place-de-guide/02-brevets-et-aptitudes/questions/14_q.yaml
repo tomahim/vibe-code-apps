@@ -1,0 +1,19 @@
+id: 546e8304-36ec-452b-9313-7acaa8077ffc
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles qualifications la FFESSM a-t-elle créées pour un accès progressif aux brevets ?
+choices:
+- id: 459e65c1-3120-4a7f-ad12-028a6d65a0a8
+  text: PE-12, PA-12, PA-20, PE-40, PA-40 et PE-60.
+- id: 233a7e6c-222d-42cc-91ae-ed1d43d28a31
+  text: Niveau 1 junior, niveau 2 junior et niveau 3 junior.
+- id: 1205cc6d-e6d4-442a-bee5-a516e497a5f8
+  text: Plongeur bronze, argent et or pour tous les âges.
+- id: 700d6d6f-e732-4418-91bf-33aa694c95f2
+  text: Baptême, pack découverte et pass randonnée palmée.
+correct_choice_ids:
+- 459e65c1-3120-4a7f-ad12-028a6d65a0a8
+explanation: Les organismes peuvent créer des qualifications intermédiaires ; la FFESSM a retenu PE-12, PA-12, PA-20, PE-40, PA-40 et PE-60 pour permettre un accès progressif aux brevets de plongeur.
+archived: false

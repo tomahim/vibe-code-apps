@@ -1,0 +1,19 @@
+id: 1f6ce492-6612-4035-bbd0-41be368b4222
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel coût peut atteindre un transfert en hydravion avec passage en caisson aux Maldives ?
+choices:
+- id: 1b63df4b-9d6e-4394-986d-f650c76efe66
+  text: Plus de 10 000 euros.
+- id: a4379edc-ad3d-47b1-9d21-c86bae8b5283
+  text: Environ 100 euros.
+- id: c31931c0-0d6b-4bd6-82b4-96dc8595107d
+  text: Toujours moins de 500 euros.
+- id: 3d24454f-f5a7-4b26-a8bf-9d71d5fffff6
+  text: Gratuit avec la licence fédérale.
+correct_choice_ids:
+- 1b63df4b-9d6e-4394-986d-f650c76efe66
+explanation: 'À l''étranger, il faut régler les frais sur place ou présenter une garantie : un transfert en hydravion avec passage en caisson peut coûter plus de 10 000 euros aux Maldives.'
+archived: false

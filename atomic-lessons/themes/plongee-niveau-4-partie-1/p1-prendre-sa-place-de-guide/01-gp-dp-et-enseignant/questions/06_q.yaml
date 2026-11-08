@@ -1,0 +1,19 @@
+id: b304e639-f18b-4ef2-89d9-f1153b2cb9dd
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pour des plongées d'exploration à l'air en milieu naturel, à titre bénévole, qui peut être directeur de plongée ?
+choices:
+- id: 6a111056-a65e-4244-9f7e-49fa16e3ac4b
+  text: Un plongeur de niveau 5, alors qu'il faut au moins un enseignant E3 dans le cas général.
+- id: 4cbfab6f-c199-40c3-8762-b464bab60e35
+  text: Un guide de palanquée expérimenté, dès lors qu'il connaît bien le site.
+- id: cb510c21-56c0-43c2-bde8-81acc1cb47a5
+  text: Un enseignant de niveau 1, comme en milieu artificiel peu profond.
+- id: 04abdf69-9b0f-4687-aec8-4e3a31f56a94
+  text: N'importe quel licencié désigné par les membres de la palanquée.
+correct_choice_ids:
+- 6a111056-a65e-4244-9f7e-49fa16e3ac4b
+explanation: Dans le cas général, le DP est au moins un enseignant de niveau 3 (MF1, BEES 1, DEJEPS). Pour l'exploration bénévole en milieu naturel, un plongeur de niveau 5 peut diriger ; en milieu artificiel de 6 m maximum, un E1 suffit.
+archived: false

@@ -1,0 +1,19 @@
+id: f30ecbb6-629b-4587-8cb9-f411766c0e2e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Un membre de la palanquée respire du nitrox, pas le guide. Quelle règle s'applique ?
+choices:
+- id: f54c7c0f-f45c-4ba2-896d-47f0491af68c
+  text: Le guide doit quand même justifier des aptitudes correspondant au mélange utilisé.
+- id: be05a019-6e8d-46a8-a8cf-33518c77f0fc
+  text: Seul le plongeur au nitrox doit justifier d'une aptitude, le guide respire de l'air.
+- id: e96a35ce-5169-4896-9626-41ffba3715a3
+  text: Le guide peut encadrer sans aptitude s'il reste au-dessus de 20 m.
+- id: 3edfbf7f-e054-4899-9ac0-954ea667f7d9
+  text: Le directeur de plongée peut déroger à cette exigence par écrit.
+correct_choice_ids:
+- f54c7c0f-f45c-4ba2-896d-47f0491af68c
+explanation: Lorsqu'un mélange autre que l'air est utilisé, l'encadrant de la palanquée doit justifier des aptitudes correspondant à ce mélange, même si c'est un autre membre de la palanquée qui le respire. Sans aptitude nitrox, un niveau 4 n'a pas de prérogative nitrox.
+archived: false

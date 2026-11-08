@@ -1,0 +1,19 @@
+id: 638e7f4e-5d45-4c3e-97d2-7bd4b0c04d5d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles sont les quatre prérogatives d'un plongeur niveau 4 ?
+choices:
+- id: 8beec19a-6ee3-4e55-b752-940d43fc30fa
+  text: Guider en exploration, aider les enseignants, baptiser en milieu artificiel sur autorisation, plonger en autonomie comme un niveau 3.
+- id: ef662352-3735-4813-bea7-cffb8129bb0a
+  text: Enseigner jusqu'à 20 m, diriger des plongées, baptiser en mer, plonger en autonomie à 60 m.
+- id: 950aff99-143f-4745-ab0c-c5b88ec874ee
+  text: Guider à 60 m, former des niveau 1, diriger en l'absence du DP, utiliser le nitrox librement.
+- id: 9dae09c9-b1c2-4ded-bd10-b51d62097a0b
+  text: Guider en exploration, enseigner les débutants, signer les fiches de sécurité, gonfler les blocs.
+correct_choice_ids:
+- 8beec19a-6ee3-4e55-b752-940d43fc30fa
+explanation: Le niveau 4 guide en exploration de 0 à 40 m, aide les enseignants en formation, peut baptiser en milieu artificiel de 6 m maximum sur autorisation du DP, et garde les prérogatives en autonomie d'un niveau 3.
+archived: false

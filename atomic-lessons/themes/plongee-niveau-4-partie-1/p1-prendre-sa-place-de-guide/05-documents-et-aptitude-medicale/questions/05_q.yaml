@@ -1,0 +1,19 @@
+id: fecc92e0-54a6-45c5-873a-f85b28c09714
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Laquelle de ces situations est une contre-indication à la plongée ?
+choices:
+- id: 4fea88b8-c162-45f7-a7fa-c0027a178c72
+  text: 'La grossesse : une femme enceinte ne doit pas plonger.'
+- id: afa9e571-7bef-4ed4-9cf1-a4517cb02e98
+  text: Le port de lunettes de vue correctrices.
+- id: 0a40c890-f9c5-4768-afce-ac7a5f85f90d
+  text: Une entorse de cheville en cours de guérison.
+- id: 21d4ed6e-4ee6-49e6-8dd7-c73a23554e1f
+  text: Une vaccination récente contre la grippe.
+correct_choice_ids:
+- 4fea88b8-c162-45f7-a7fa-c0027a178c72
+explanation: 'Parmi les grandes familles de contre-indications : grossesse, diabète, pathologies cardiaques non contrôlées, pneumologie (asthme, chirurgie pulmonaire), neurologie (épilepsie), sphère ORL. Toute prise régulière de médicaments appelle un avis médical.'
+archived: false

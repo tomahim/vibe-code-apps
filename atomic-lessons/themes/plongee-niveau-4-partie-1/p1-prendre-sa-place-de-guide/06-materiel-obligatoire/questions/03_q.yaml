@@ -1,0 +1,19 @@
+id: a9e7727d-022b-4a20-ad62-d423218a9a66
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Un plongeur encadré à 15 m doit-il porter une seconde source d'air ?
+choices:
+- id: 50091c02-83b1-4b4b-98bd-719d9b1abcd1
+  text: 'Non : entre 0 et 20 m, seuls manomètre et gilet sont obligatoires.'
+- id: ee5e050a-9875-476f-91ad-6c1a0b599f3c
+  text: 'Oui : l''octopus est obligatoire dès la première plongée.'
+- id: 638d8753-3a16-44cd-a081-d3c75e2ce618
+  text: Oui, mais seulement si la visibilité est mauvaise.
+- id: 8930faef-ca3a-42b0-a04e-9f5eb03545a6
+  text: Non, car c'est le guide qui le porte pour lui.
+correct_choice_ids:
+- 50091c02-83b1-4b4b-98bd-719d9b1abcd1
+explanation: Entre 0 et 20 m, le plongeur encadré n'est tenu qu'au manomètre et au gilet avec direct-system. La seconde source d'air devient obligatoire au-delà de 20 m et en autonomie.
+archived: false

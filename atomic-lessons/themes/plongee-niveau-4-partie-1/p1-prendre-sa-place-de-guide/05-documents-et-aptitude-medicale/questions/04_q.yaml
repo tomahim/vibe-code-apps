@@ -1,0 +1,19 @@
+id: e4472ebc-7c1a-436f-a7dc-9c5a8934efe1
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que doit pouvoir présenter un licencié FFESSM le jour de la pratique ?
+choices:
+- id: 16d389d2-8c1c-4910-8037-694981a46b46
+  text: Un certificat d'absence de contre-indication datant de moins d'un an.
+- id: 53215588-5d3a-4423-bf5a-e658d7a7d042
+  text: Son ordonnance médicale originale datant de moins de trois ans.
+- id: 89a8dece-b4fc-4ea9-bce0-36667708fd66
+  text: Un bilan ORL complet datant de moins de six mois.
+- id: 9ba93fae-4d93-4479-9f38-6d45b9b1a022
+  text: Uniquement sa licence en cours de validité, sans autre document.
+correct_choice_ids:
+- 16d389d2-8c1c-4910-8037-694981a46b46
+explanation: Au-delà du certificat de moins d'un an exigé pour la licence, la FFESSM demande de pouvoir présenter, le jour de la pratique - exploration, enseignement, compétition -, un certificat d'absence de contre-indication de moins d'un an.
+archived: false

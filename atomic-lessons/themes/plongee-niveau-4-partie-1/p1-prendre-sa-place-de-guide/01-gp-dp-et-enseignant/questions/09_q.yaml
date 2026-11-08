@@ -1,0 +1,19 @@
+id: d829e9de-e564-4834-be9d-dd5b9bbc9b83
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le code du sport qualifie-t-il le baptême de plongée ?
+choices:
+- id: 0443b787-91bb-4a71-bb5f-a422c07290b5
+  text: Un acte d'enseignement, exclu des plongées d'exploration.
+- id: cfea2339-09cf-4d84-b41d-4cfdb122654e
+  text: Une plongée d'exploration encadrée entre 0 et 6 m.
+- id: de230e2e-992f-4464-a6c6-8fd1afc8f090
+  text: Une simple initiation sans valeur réglementaire.
+- id: b14ca836-6e39-4711-8e5d-cd776ad4771f
+  text: Une évaluation d'aptitudes réservée aux moniteurs 2e degré.
+correct_choice_ids:
+- 0443b787-91bb-4a71-bb5f-a422c07290b5
+explanation: L'exploration est une plongée sans action d'enseignement, et le baptême est considéré comme un acte d'enseignement. Un GP ne peut donc pas baptiser en milieu naturel ; en piscine ou fosse de 6 m maximum, le DP peut l'y autoriser.
+archived: false

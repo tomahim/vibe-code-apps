@@ -1,0 +1,19 @@
+id: 19256911-644d-4048-bf7d-aa1565e81b0b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle est la différence fondamentale entre responsabilité civile et pénale ?
+choices:
+- id: 2bc44839-1d52-4492-b0d7-66d5d55e26b6
+  text: La civile répare un dommage et peut être assurée ; la pénale sanctionne une infraction et ne peut pas être assurée.
+- id: 28811adf-cb30-460b-9412-fa6f00991c54
+  text: La civile concerne les contrats ; la pénale ne concerne que les accidents mortels.
+- id: 929ca37f-4f89-4cf0-a060-7e89a1cea2b9
+  text: La civile est jugée en une journée ; la pénale prend des années.
+- id: d741dbd5-d548-42dd-adc6-1c61b9441b6c
+  text: La civile ne s'applique pas au sport ; la pénale s'applique à tous.
+correct_choice_ids:
+- 2bc44839-1d52-4492-b0d7-66d5d55e26b6
+explanation: La responsabilité civile fait supporter au responsable la réparation des dommages causés ; la responsabilité pénale impose une sanction - amende, emprisonnement - pour une infraction définie par la loi. Par définition, celle-ci ne peut pas être assurée.
+archived: false

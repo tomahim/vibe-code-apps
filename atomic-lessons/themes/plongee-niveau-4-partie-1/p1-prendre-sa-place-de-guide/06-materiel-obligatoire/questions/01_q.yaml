@@ -1,0 +1,19 @@
+id: 9c4ff4a1-9c17-4395-bc04-41774e801760
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le matériel obligatoire minimal de tout plongeur en milieu naturel ?
+choices:
+- id: b1f23e0f-9c28-42f7-b8bb-de604b41289d
+  text: Un manomètre ou équivalent et un gilet avec direct-system.
+- id: d2ce5f4d-34ec-4ab0-9036-085f832c88d0
+  text: Un ordinateur de plongée et un octopus.
+- id: 3fb32e51-9ae9-4d21-9cb2-a77bed2105ab
+  text: Un gilet, un octopus et un parachute de palier.
+- id: c1d81a12-a73c-49fa-8e6d-4e4a67443af1
+  text: Un manomètre, une boussole et un profondimètre.
+correct_choice_ids:
+- b1f23e0f-9c28-42f7-b8bb-de604b41289d
+explanation: 'Tout plongeur doit disposer d''un manomètre (ou système équivalent) et d''un système gonflable au gaz comprimé pour regagner la surface et s''y maintenir : le gilet avec direct-system. C''est aussi tout ce qu''exige un plongeur encadré entre 0 et 20 m.'
+archived: false

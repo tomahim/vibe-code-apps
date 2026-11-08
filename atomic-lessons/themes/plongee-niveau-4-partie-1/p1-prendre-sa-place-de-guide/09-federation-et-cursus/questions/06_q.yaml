@@ -1,0 +1,19 @@
+id: 295d673a-ae6d-445d-8b57-334bcc7d9dca
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi le nombre de voix des structures commerciales est-il limité ?
+choices:
+- id: 6594ef28-e19c-41b3-aea2-2a27fc3c14b5
+  text: Pour préserver la prépondérance du monde associatif dans les votes fédéraux.
+- id: 00f5d337-9930-434d-9cc5-5019997e5aca
+  text: Pour pénaliser les structures à but lucratif.
+- id: eb8b0926-3612-41fd-b500-f017ce3da6b2
+  text: Parce que les SCA ne délivrent pas de brevets.
+- id: 09c029e3-c051-46fe-9529-8e9decc6ff1c
+  text: Pour respecter une obligation imposée par la CMAS.
+correct_choice_ids:
+- 6594ef28-e19c-41b3-aea2-2a27fc3c14b5
+explanation: Le nombre de voix des SCA est limité à 10 % du total afin de maintenir la prépondérance du monde associatif, qui est l'essence même des fédérations sportives françaises.
+archived: false

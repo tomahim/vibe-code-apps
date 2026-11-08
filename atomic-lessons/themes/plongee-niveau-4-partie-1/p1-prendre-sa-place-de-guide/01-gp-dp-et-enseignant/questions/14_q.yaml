@@ -1,0 +1,19 @@
+id: a3ef7caf-51ad-4fa0-8452-1441093b8180
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qui forme les palanquées et vérifie les aptitudes des participants avant la mise à l'eau ?
+choices:
+- id: 9b4c79d0-0239-49b8-bded-6b0332bd0c1a
+  text: Le directeur de plongée, en s'appuyant sur brevets, carnets et éventuelles plongées d'évaluation.
+- id: dbebfcd7-b2a7-47d8-a0e9-75a0567769c7
+  text: Le guide de palanquée, pour chacun des plongeurs qu'il va emmener.
+- id: 65eb54d0-8bb9-4029-aaf1-e4d5bf174041
+  text: L'enseignant le plus diplômé présent sur le site de mise à l'eau.
+- id: c2411238-51e5-40bf-93bd-04f242d22ebe
+  text: Chaque plongeur, sur simple déclaration de son niveau et de son expérience.
+correct_choice_ids:
+- 9b4c79d0-0239-49b8-bded-6b0332bd0c1a
+explanation: Former les palanquées selon les aptitudes démontrées et vérifier l'équipement des participants fait partie des prérogatives du DP. Le GP reçoit une palanquée constituée et prend connaissance de la fiche de sécurité.
+archived: false

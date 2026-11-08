@@ -1,0 +1,19 @@
+id: 057bcf7c-4412-42be-87c2-37223bba8265
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Le coût de la visite médicale pour le certificat de plongée est-il remboursé ?
+choices:
+- id: 87eab5a4-1a36-4018-bf05-9d46d652b374
+  text: 'Non : c''est un acte de médecine préventive non pris en charge par l''Assurance-Maladie.'
+- id: 10418367-c838-4772-a9af-d6813988489f
+  text: 'Oui : il est intégralement remboursé par la sécurité sociale.'
+- id: 51dd3241-4473-4f74-89bc-f9458f52b41f
+  text: Oui, mais seulement pour les plongeurs de moins de 18 ans.
+- id: 3168e533-e3e7-4270-8da5-cf002224cec7
+  text: Non, sauf si le médecin est médecin du sport.
+correct_choice_ids:
+- 87eab5a4-1a36-4018-bf05-9d46d652b374
+explanation: La visite médicale préventive pour un certificat de plongée n'est pas remboursée par l'Assurance-Maladie. Certaines mutuelles peuvent la prendre en charge, et les centres de médecine du sport existent pour les petits budgets.
+archived: false

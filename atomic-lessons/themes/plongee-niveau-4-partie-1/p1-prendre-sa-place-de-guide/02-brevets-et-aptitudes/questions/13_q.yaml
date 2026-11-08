@@ -1,0 +1,19 @@
+id: aa612259-108d-4a9e-8d71-cde0c71de2da
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Un niveau 1 breveté se présente en début de saison. Quelle décision est cohérente avec le code du sport ?
+choices:
+- id: 89501d06-2bbd-42ac-8dd8-dae3ecdf87f6
+  text: Le DP peut limiter sa première plongée à 12 m encadré après une plongée d'évaluation.
+- id: 18c2a82b-9e66-41f3-b0e4-ab792adb59c8
+  text: Le GP doit l'emmener directement à 20 m puisque son brevet l'y autorise.
+- id: 9255ab98-fa16-44e7-a7d9-9a0ef53a46ae
+  text: Le DP doit exiger qu'il repasse intégralement son niveau 1.
+- id: a010159b-2226-48f2-a12d-2d89485761a5
+  text: Il doit plonger seul, son brevet prouvant son autonomie à 12 m.
+correct_choice_ids:
+- 89501d06-2bbd-42ac-8dd8-dae3ecdf87f6
+explanation: Le brevet pré-positionne le niveau 1 sur PE-20, mais le DP apprécie les aptitudes du moment. Après une longue interruption, limiter la profondeur et encadrer étroitement est une application saine de la règle d'adaptation.
+archived: false
