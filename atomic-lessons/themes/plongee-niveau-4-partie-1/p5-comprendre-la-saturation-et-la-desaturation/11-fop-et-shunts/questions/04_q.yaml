@@ -1,0 +1,20 @@
+id: fba2c09d-9501-4bae-9e68-73358dd9601f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle proportion de la population est concernée par un FOP ?
+choices:
+- id: 59fce273-02be-4f28-95a6-831cfaf17767
+  text: Environ 25 à 35 % des individus.
+- id: 6e51be15-b565-43c3-9a42-fc65e6f32d43
+  text: Moins de 1 % des individus.
+- id: 247d6887-df70-4d14-b398-d4e99a2074c4
+  text: Environ 75 % des individus.
+- id: 995d964d-ec56-479a-8bf6-6a42014c4be5
+  text: Tous les plongeurs, sans exception.
+correct_choice_ids:
+- 59fce273-02be-4f28-95a6-831cfaf17767
+explanation: 'Le FOP concerne 25 à 35 % des individus : c''est fréquent, ce qui explique
+  qu''il ne soit pas recherché de manière préventive en plongée loisir.'
+archived: false

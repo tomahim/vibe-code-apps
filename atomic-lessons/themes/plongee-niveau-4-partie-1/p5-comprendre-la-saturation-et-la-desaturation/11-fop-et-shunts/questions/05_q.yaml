@@ -1,0 +1,22 @@
+id: a2147d82-4627-4c86-9c0d-6af6328ff11a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que deviennent les bulles silencieuses quand le foramen ovale est fermé ?
+choices:
+- id: 9be78832-1393-4bdb-a4d1-e7b093201e6b
+  text: 'Elles sont éliminées par le filtre pulmonaire : le gaz inerte diffuse de
+    la bulle vers l''alvéole.'
+- id: 36200109-a394-4e63-b22b-3831b211cafa
+  text: Elles passent directement dans la circulation artérielle cérébrale.
+- id: 414404ec-9759-4811-af75-feff69e1d1df
+  text: Elles se dissolvent instantanément dans les veines des jambes.
+- id: 3beb6717-5357-41d2-9410-82ece252fb34
+  text: Elles s'accumulent dans le cœur droit jusqu'à la surface.
+correct_choice_ids:
+- 9be78832-1393-4bdb-a4d1-e7b093201e6b
+explanation: 'Foramen ovale fermé : les bulles silencieuses de la circulation veineuse
+  sont éliminées par le filtre pulmonaire, où le gaz inerte diffuse de la bulle vers
+  l''alvéole ; elles ne parviennent jamais dans la circulation artérielle.'
+archived: false

@@ -1,0 +1,21 @@
+id: 73f25836-09b3-45b1-8342-154c9db4d6f4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'ont montré les recherches récentes citées par le manuel sur le FOP ?
+choices:
+- id: a705160c-3553-4e99-9561-2ba018d0cd28
+  text: La prédominance du FOP dans les ADD cérébraux et vestibulaires survenus malgré
+    le respect des procédures.
+- id: 76739fea-c162-495d-80d3-bccbcf86413d
+  text: Que le FOP protège les plongeurs contre les accidents de désaturation.
+- id: 75209722-d947-461b-b59c-1947b62310bb
+  text: Que le FOP ne joue absolument aucun rôle dans les accidents de plongée.
+- id: 086acfe0-7034-4218-a51f-c10861a9fd69
+  text: Que le FOP se referme toujours spontanément dès le début de la remontée.
+correct_choice_ids:
+- a705160c-3553-4e99-9561-2ba018d0cd28
+explanation: Les recherches récentes ont montré la prédominance de FOP en cas d'accidents
+  de désaturation - principalement cérébraux et vestibulaires - avec respect des procédures.
+archived: false

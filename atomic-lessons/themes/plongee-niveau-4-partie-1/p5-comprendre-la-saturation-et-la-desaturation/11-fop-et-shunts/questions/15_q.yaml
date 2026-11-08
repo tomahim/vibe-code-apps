@@ -1,0 +1,23 @@
+id: dfd6fd0d-360a-4067-a8ad-e1e871387480
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle phrase résume le bon raisonnement sur le FOP ?
+choices:
+- id: f2b8d39f-1dcb-4aad-9f93-29e9bd8522de
+  text: 'Un facteur favorisant fréquent mais à risque faible : le bon levier est le
+    comportement, pas le dépistage systématique.'
+- id: 21a75616-cbe3-4bd3-9469-8b9d705c3f73
+  text: Une malformation très rare qui interdit définitivement toute pratique de la
+    plongée.
+- id: 74d2efdd-5400-4a63-9649-6a0b825ebe63
+  text: Un danger mortel qui impose un dépistage systématique pour tous les plongeurs.
+- id: 1ed517f2-c7bf-48cb-b745-b0e7c83fd926
+  text: Un simple détail anatomique sans aucune conséquence sur la décompression.
+correct_choice_ids:
+- f2b8d39f-1dcb-4aad-9f93-29e9bd8522de
+explanation: 'FOP = 25-35 % de la population, risque d''ADD de 1 à 3 pour dix mille
+  : un facteur favorisant parmi d''autres. Le comportement (pas d''effort, pas de
+  Valsalva violent) est le levier essentiel ; le dépistage n''est pas systématique.'
+archived: false

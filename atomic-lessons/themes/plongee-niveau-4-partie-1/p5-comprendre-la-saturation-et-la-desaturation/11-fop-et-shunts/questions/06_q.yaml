@@ -1,0 +1,22 @@
+id: d55d5a72-e7e1-4c70-9909-4cd538c76aa3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles situations peuvent forcer l'ouverture d'un FOP ?
+choices:
+- id: 2dc5e163-c96c-4299-a020-c595da222a07
+  text: 'Une augmentation de pression dans le cœur droit : effort, gilet gonflé à
+    la bouche, toux, Valsalva à la remontée.'
+- id: 6006a4ff-00a5-4e48-bc02-91bedd9e5767
+  text: Une descente trop lente et trop contrôlée dans les cinq premiers mètres.
+- id: 57345f12-7e11-452d-a1fb-bc3a32cbd24e
+  text: Une hydratation trop abondante réalisée juste avant la plongée.
+- id: 79cf6ceb-22eb-4317-8b1e-b4f6a8594739
+  text: Le port d'une combinaison de plongée trop épaisse pour la saison.
+correct_choice_ids:
+- 2dc5e163-c96c-4299-a020-c595da222a07
+explanation: Une augmentation de pression dans le cœur droit (effort, gonflage du
+  gilet à la bouche, secousses de toux, Valsalva à la remontée) peut forcer l'ouverture
+  d'un FOP et laisser passer des bulles dans la circulation générale.
+archived: false
