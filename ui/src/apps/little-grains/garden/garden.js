@@ -891,7 +891,16 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.recentToggle) { recentOpen = !recentOpen; renderPanel(); }
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
     else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
-    else if (b.dataset.quiz) onPracticeQuiz?.(trail.path.id, trail.path.title);
+    else if (b.dataset.quiz) {
+      // A selected, fully read lesson scopes Practice to that lesson's
+      // questions only (Thomas, 2026-11-08).
+      const sel = view.lesson >= 0 ? trail.path.lessonData[view.lesson] : null;
+      // A selected lesson scopes Practice even when unread: the quiz then
+      // explains the cards must be read first instead of silently widening
+      // to the whole path. Only deselecting restores the path pool.
+      const scoped = sel ? { id: sel.id, title: sel.title, read: lessonFinished(sel.progress) } : null;
+      onPracticeQuiz?.(trail.path.id, trail.path.title, scoped);
+    }
     else if (b.dataset.review) onReview?.();
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) { panel.classList.toggle('open'); trackFab(); }

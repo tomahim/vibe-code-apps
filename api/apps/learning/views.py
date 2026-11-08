@@ -324,10 +324,17 @@ def catch_up(request, path_id):
 
     Keep the historical endpoint name; there is no catch-up/review mode gate.
     The gauge's remaining count is independent of session selection.
+    With ?lesson=<id> the session draws only from that lesson, provided its
+    cards are read (Thomas, 2026-11-08: practising a selected lesson).
     """
     path = get_object_or_404(visible(LearningPath), pk=path_id)
     state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
+    lesson_id = request.GET.get("lesson")
+    if lesson_id:
+        lessons = [lesson for lesson in lessons if str(lesson.pk) == lesson_id]
+        if not lessons:
+            return JsonResponse({"error": "Unknown lesson for this path."}, status=404)
     titles = {lesson.pk: lesson.title for lesson in lessons}
     read_ids = {lesson.pk for lesson in lessons if state.lesson_fully_read(lesson.pk)}
     pool = [q for q in state.questions if q.lesson_id in read_ids]

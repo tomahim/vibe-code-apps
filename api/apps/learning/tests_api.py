@@ -968,6 +968,32 @@ class LearningAPITests(TestCase):
         self.assertEqual(self.client.get("/api/learning/garden/").json()["rewards"],
                          {"drops": 112, "carrots": 4})
 
+    def test_catch_up_lesson_filter_scopes_the_session_to_that_lesson(self):
+        """?lesson=<id> serves only that lesson's read questions (Thomas,
+        2026-11-08: practising the lesson selected in the garden)."""
+        other_lesson = self.row(Lesson, learning_path=self.path, position=2)
+        other_card = self.row(Card, lesson=other_lesson, body_markdown="Other")
+        other = self.row(Question, lesson=other_lesson, after_card_position=1,
+                         prompt="Other", options=self.question.options, answer="0")
+        url = f"/api/learning/paths/{self.path.pk}/catch-up/"
+
+        # Unknown lesson for this path: 404.
+        self.assertEqual(self.client.get(f"{url}?lesson={uuid4()}").status_code, 404)
+
+        # Nothing read: the filtered lesson is not eligible either.
+        unread = self.client.get(f"{url}?lesson={self.lesson.pk}").json()
+        self.assertEqual(unread["eligible"], False)
+        self.assertEqual(unread["questions"], [])
+
+        # Read both lessons: the filter serves only the chosen lesson's pool.
+        self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
+        self.post(f"/api/learning/cards/{other_card.pk}/complete/", {})
+        mine = self.client.get(f"{url}?lesson={self.lesson.pk}").json()
+        self.assertTrue(mine["eligible"])
+        self.assertEqual({q["id"] for q in mine["questions"]}, {str(self.question.pk)})
+        theirs = self.client.get(f"{url}?lesson={other_lesson.pk}").json()
+        self.assertEqual({q["id"] for q in theirs["questions"]}, {str(other.pk)})
+
     def test_practice_stays_open_at_zero_gaps_with_unread_lessons(self):
         unread = self.row(Lesson, learning_path=self.path, position=2)
         self.row(Card, lesson=unread, body_markdown="Unread")
