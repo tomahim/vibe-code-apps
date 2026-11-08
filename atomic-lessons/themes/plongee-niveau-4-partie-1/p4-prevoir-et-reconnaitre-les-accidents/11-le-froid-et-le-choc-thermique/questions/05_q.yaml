@@ -1,0 +1,21 @@
+id: 54e6cdf7-345b-47e0-b104-4dd80522ff93
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À partir de quelle température interne le manuel situe-t-il l'entrée en hypothermie
+  ?
+choices:
+- id: ae22b4d4-80a8-4b66-8194-b6a5c8db4f07
+  text: Vers 35 °C.
+- id: cdf2ef21-e350-4cb5-b102-5d74fb878af1
+  text: Vers 37 °C.
+- id: 8fa3f45a-eda5-4b78-8a14-1be0a65e2d33
+  text: Vers 39 °C.
+- id: 30831a54-f754-45aa-ac0b-301d15782333
+  text: Vers 32 °C.
+correct_choice_ids:
+- ae22b4d4-80a8-4b66-8194-b6a5c8db4f07
+explanation: Lorsque la température interne diminue pour atteindre environ 35 °C,
+  nous entrons en phase d'hypothermie ; l'hypothermie grave peut entraîner la mort.
+archived: false

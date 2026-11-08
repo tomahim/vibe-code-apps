@@ -1,0 +1,22 @@
+id: ccc7ed69-f7bc-4021-911b-94f5b5483266
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que risque un détendeur en eaux très froides, selon le manuel ?
+choices:
+- id: ed3d0dc4-bc29-4f6a-af0e-ae0a7174404b
+  text: 'Le givrage, qui le met en débit continu : le risque est la panne d''air,
+    puis la noyade.'
+- id: b5adc905-3287-41a3-be6f-d56e2a39f4de
+  text: Une obstruction totale et définitive du premier étage par la glace.
+- id: 2adfc448-cf18-43ff-ae98-f4209d986841
+  text: Une explosion de la bouteille par dilatation de l'air froid.
+- id: 98e53a88-6c75-4eb5-8021-f37440b23f11
+  text: Une augmentation de la consommation d'azote du mélange respiré.
+correct_choice_ids:
+- ed3d0dc4-bc29-4f6a-af0e-ae0a7174404b
+explanation: 'Dans les eaux très froides (lacs d''altitude, par exemple), le froid
+  peut faire givrer les détendeurs, qui se mettent en débit continu : risque de panne
+  d''air, puis de noyade. Une formation spécifique est nécessaire.'
+archived: false

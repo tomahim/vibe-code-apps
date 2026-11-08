@@ -1,0 +1,22 @@
+id: fa084acf-014f-48b6-b5ee-a593d902a989
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi le frisson thermique doit-il alerter, selon le manuel ?
+choices:
+- id: cb031d79-b78c-44fb-8c8a-c0a070d24432
+  text: C'est un mécanisme énergétiquement peu rentable, qui peut être considéré comme
+    un signal d'alarme.
+- id: cea35e8f-2815-41c9-ad0b-bd12187e11e5
+  text: C'est un signe que le plongeur est en train de se réchauffer efficacement.
+- id: 5c881e84-3f90-45b7-ae32-4613cce970cc
+  text: C'est une réaction sans importance qui disparaît toujours seule.
+- id: ec19151f-08f3-4cdc-b66f-db64637bddc3
+  text: C'est le signe que la combinaison est trop épaisse pour l'eau du jour.
+correct_choice_ids:
+- cb031d79-b78c-44fb-8c8a-c0a070d24432
+explanation: Le frisson thermique n'est que l'augmentation de l'activité des muscles
+  sous-cutanés ; mécanisme énergétiquement peu rentable, il doit être considéré comme
+  un signal d'alarme. Persister mène à l'hypothermie.
+archived: false

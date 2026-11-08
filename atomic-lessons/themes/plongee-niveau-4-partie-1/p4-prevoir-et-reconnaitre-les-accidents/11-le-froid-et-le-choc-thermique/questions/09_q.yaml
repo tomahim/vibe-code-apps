@@ -1,0 +1,24 @@
+id: 0c440416-2edf-4e2d-8912-f5ddc4d73a3d
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que ressent un plongeur confronté au froid, selon le manuel ?
+choices:
+- id: e9fd3fde-8b17-40cc-9c16-69e56aac2175
+  text: Ventilation accrue (consommation d'air augmentée), perte de sensibilité aux
+    extrémités, frissons, crampes, tremblements, envie d'uriner.
+- id: a6748151-4cd0-466f-a0fa-6f3e661eae93
+  text: Une euphorie intense, accompagnée d'une sensation de chaleur dans tout le
+    corps.
+- id: 78fc5409-6d55-4030-bc23-37141132b735
+  text: Uniquement une douleur aiguë et bien localisée au niveau du bas du dos, sans
+    autre signe.
+- id: a267ef34-1fc3-4021-83ab-9887e655e67a
+  text: Une somnolence profonde, accompagnée d'une respiration devenue très lente.
+correct_choice_ids:
+- e9fd3fde-8b17-40cc-9c16-69e56aac2175
+explanation: 'Ressenti possible : augmentation du rythme de ventilation et de la consommation,
+  perte de sensibilité des mains et pieds, frissons, crampes, tremblements, envie
+  d''uriner (facteur pas uniquement lié au froid).'
+archived: false
