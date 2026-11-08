@@ -1,0 +1,20 @@
+id: 700af74d-04db-43fb-b2fb-bad4d06398ff
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi le calcul ne pilote-t-il pas la plongée à lui seul ?
+choices:
+- id: c9c2eff0-efc6-4b83-a726-5b50b3a1a323
+  text: Parce que la consommation réelle varie avec l'effort, l'expérience et la technicité.
+- id: 9cb12f71-bff0-4281-b5f0-56a7e38a9f41
+  text: Parce que les manomètres affichent une pression toujours fausse.
+- id: 1d09b339-8aee-438d-ba8d-9c3f2cfff832
+  text: Parce que la pression au fond change toutes les cinq minutes.
+- id: c949bdb8-40f8-48d2-b1cc-b6f49e85e4a6
+  text: Parce que la réserve se consomme avant le reste de la bouteille.
+correct_choice_ids:
+- c9c2eff0-efc6-4b83-a726-5b50b3a1a323
+explanation: 'Seule la surveillance du manomètre donne la vérité du moment : la consommation
+  réelle dépend de l''effort et du plongeur.'
+archived: false

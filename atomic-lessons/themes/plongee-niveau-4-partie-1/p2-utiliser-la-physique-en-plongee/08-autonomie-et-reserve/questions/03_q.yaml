@@ -1,0 +1,21 @@
+id: ef954e7c-3650-41fa-9e90-94071370b3c3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Un bloc de 15 litres gonflé à 200 bars, réserve de 50 bars : quel est l''air
+  disponible ?'
+choices:
+- id: 79086251-f2af-4637-8452-529effcee634
+  text: 2250 litres équivalent surface, soit 150 x 15.
+- id: d85f5b58-a6ff-4f8d-b131-2e78c405acaa
+  text: 3000 litres équivalent surface, soit 200 x 15.
+- id: ac58c54a-3801-4538-95e1-a9e8b7ea8bc8
+  text: 750 litres équivalent surface, soit 50 x 15.
+- id: d69aead4-b591-4374-b9ec-2b1ebd66d921
+  text: 1800 litres équivalent surface, soit 150 x 12.
+correct_choice_ids:
+- 79086251-f2af-4637-8452-529effcee634
+explanation: 'Même méthode que l''exemple : (200 - 50) x 15 = 2250 litres équivalent
+  surface.'
+archived: false

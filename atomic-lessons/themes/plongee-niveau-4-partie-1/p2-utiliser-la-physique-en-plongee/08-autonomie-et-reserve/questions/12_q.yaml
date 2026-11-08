@@ -1,0 +1,20 @@
+id: 9447d50c-7236-4b4b-a227-f72f1fb822b6
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la première étape du calcul complet d'autonomie ?
+choices:
+- id: a13bbe2e-768d-4698-87eb-26a1c614089c
+  text: Multiplier la pression disponible (bloc moins réserve) par le volume du bloc.
+- id: 8f62bcd8-9233-4e5e-bdfd-71374cbb179a
+  text: Diviser la pression du bloc par la profondeur maximale prévue.
+- id: c2773cfb-b422-405a-a182-b67e3bdcbe21
+  text: Ajouter la réserve de 50 bars à la pression mesurée au manomètre.
+- id: 0121cd41-cab2-41e6-b5a0-ad1b25c3096d
+  text: Multiplier la consommation par minute par la durée de la descente.
+correct_choice_ids:
+- a13bbe2e-768d-4698-87eb-26a1c614089c
+explanation: 'On commence par l''air disponible : (pression du bloc - réserve) x volume
+  du bloc, en litres équivalent surface.'
+archived: false

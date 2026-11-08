@@ -1,0 +1,21 @@
+id: 55a5ecab-26a0-4068-a32a-0d3ffb81e35a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Si la consommation passe de 20 à 30 litres par minute, que devient cette autonomie
+  ?
+choices:
+- id: 4cc2f1df-c50f-41ef-a7e7-1f6b90020cae
+  text: Elle tombe à 30 minutes, car 900 / 30 = 30.
+- id: 7ea14a34-8271-4292-bdef-d4927c464a2a
+  text: Elle monte à 60 minutes, car on respire plus d'air.
+- id: aced3eda-64a3-436b-9ed9-310328480af7
+  text: Elle reste à 45 minutes, la bouteille étant identique.
+- id: 3393f81f-afce-4e8d-83b7-81696e0e0fb6
+  text: Elle tombe à 15 minutes, car 450 / 30 = 15.
+correct_choice_ids:
+- 4cc2f1df-c50f-41ef-a7e7-1f6b90020cae
+explanation: 'À volume respirable identique, l''autonomie est inversement proportionnelle
+  à la consommation : 900 / 30 = 30 minutes.'
+archived: false
