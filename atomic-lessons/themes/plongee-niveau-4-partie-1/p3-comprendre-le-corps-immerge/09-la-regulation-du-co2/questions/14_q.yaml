@@ -1,0 +1,21 @@
+id: bff4a54d-b7f5-495d-8844-4cbb419f6057
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qui doit assimiler les causes et mécanismes de l'essoufflement ?
+choices:
+- id: 229b1f22-e68c-483d-96d7-17afe884b4bb
+  text: Tout guide de palanquée, pour mettre en œuvre la prévention nécessaire en
+    toutes circonstances.
+- id: 8d050138-7daf-45a4-8579-f30d8361dfbd
+  text: Uniquement les moniteurs fédéraux.
+- id: 39f8664c-263a-4f1d-80a8-acd2a2eb95bc
+  text: Uniquement les plongeurs niveau 1.
+- id: e1e93e60-6423-457f-8a08-ef986cdfa48b
+  text: 'Personne : c''est une notion réservée aux médecins.'
+correct_choice_ids:
+- 229b1f22-e68c-483d-96d7-17afe884b4bb
+explanation: Causes et mécanismes doivent être assimilés par tout guide de palanquée
+  afin de mettre en œuvre la prévention nécessaire.
+archived: false

@@ -1,0 +1,20 @@
+id: 01d815d6-d246-4761-9e7d-2c9ab8a1bdc0
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce qui stimule les chémorécepteurs ?
+choices:
+- id: e20107de-a701-424b-aac9-6fcb08b93f6b
+  text: Une augmentation du taux de CO2 dans le sang artériel.
+- id: 673a550f-7ce0-4e82-99a9-a64840fa651f
+  text: Une baisse de la température de l'eau.
+- id: d48b6acb-247b-4401-a961-b60b77b77b5c
+  text: Une augmentation de la pression ambiante.
+- id: 841ba490-3ea0-4a0a-b587-cdfdf41e04bf
+  text: Une baisse du taux d'azote dans le sang.
+correct_choice_ids:
+- e20107de-a701-424b-aac9-6fcb08b93f6b
+explanation: 'Les chémorécepteurs sont des récepteurs sensibles aux substances chimiques
+  : une augmentation du taux de CO2 dans le sang artériel les stimule.'
+archived: false
