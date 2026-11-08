@@ -1,0 +1,19 @@
+id: 64fdd3e0-87d2-491a-a549-c9c5f56d197c
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels contrôles le guide effectue-t-il sur sa palanquée avant l'immersion ?
+choices:
+- id: 1915d74c-9cb4-44bf-9541-cb7b60d71796
+  text: Gilet raccordé, manomètre fonctionnel, bloc rempli, détendeur de secours accessible si requis et lestage adapté.
+- id: 412a4a23-3a29-4d0f-89a7-e206c7a3f0a3
+  text: 'Uniquement la pression des blocs : le reste relève du directeur de plongée.'
+- id: fa2abd39-4b43-4550-8d88-10be8ec1e11c
+  text: La validité des certificats médicaux de chacun des plongeurs encadrés.
+- id: fa8a2c4e-d0a0-4e62-b677-d83fe87100d4
+  text: Le réglage des ordinateurs de chaque plongeur sur le bon mélange gazeux.
+correct_choice_ids:
+- 1915d74c-9cb4-44bf-9541-cb7b60d71796
+explanation: 'La vérification d''équipe couvre gilet et direct-system, manomètre, pression et robinetterie, seconde source d''air quand elle est exigée, lestage largable. Bouteilles adaptées, embouts corrects, matériel en bon état : autant de « moyens » dont l''absence engage la responsabilité.'
+archived: false

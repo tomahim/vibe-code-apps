@@ -1,0 +1,19 @@
+id: 4564dafa-d206-437c-a2d2-dc23b0bea5dd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Dans quel cas un guide peut-il accompagner une formation PE-40 ?
+choices:
+- id: a3181b4c-8621-4a89-8113-323af7699475
+  text: Aux côtés d'un enseignant E3 minimum, jusqu'à 40 m.
+- id: 34e30f03-2333-4c25-9b24-0182e6ad307d
+  text: Aux côtés d'un enseignant E2 minimum, jusqu'à 20 m.
+- id: 5d2f6fae-67a9-49be-9d00-c4f878eba450
+  text: Seul, s'il est lui-même titulaire du niveau 4 depuis plus d'un an.
+- id: c64529a6-2b23-4e09-a24b-c63ebb9ee068
+  text: Aux côtés d'un E1, si la formation reste sous les 6 mètres.
+correct_choice_ids:
+- a3181b4c-8621-4a89-8113-323af7699475
+explanation: 'L''aide aux enseignants suit un barème : baptême et débutants avec un E1 (0-6 m), formations PE-12 à PE-20 avec un E2 (0-20 m), formations PE-40 ou PA-40 avec un E3 (0-40 m).'
+archived: false

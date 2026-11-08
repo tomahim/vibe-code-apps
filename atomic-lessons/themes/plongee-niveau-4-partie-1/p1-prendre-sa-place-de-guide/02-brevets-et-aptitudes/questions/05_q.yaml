@@ -1,0 +1,19 @@
+id: 2d105a7a-fca0-4364-aed7-3452db2ea6fd
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que signifie l'aptitude PE-40 ?
+choices:
+- id: ef05c959-2c35-4c37-a808-d91e6ea78ae9
+  text: Plonger encadré par un encadrant de palanquée entre 0 et 40 m.
+- id: 4209bd95-cc6a-4998-a0b9-53c173f15f9a
+  text: Plonger en autonomie entre 0 et 40 m avec un équipier.
+- id: 81301f3e-a472-425f-b8a9-ff688ff4105f
+  text: Plonger encadré exactement à 40 m, jamais moins profond.
+- id: 2dc7ab6c-d739-4bbf-bc6a-8267a3512fd1
+  text: Encadrer des plongeurs jusqu'à 40 m en tant que guide.
+correct_choice_ids:
+- ef05c959-2c35-4c37-a808-d91e6ea78ae9
+explanation: 'PE signifie « plongeur encadré » : l''aptitude PE-40 permet d''évoluer entre 0 et 40 m avec un encadrant de palanquée. L''autonomie relève des aptitudes PA.'
+archived: false

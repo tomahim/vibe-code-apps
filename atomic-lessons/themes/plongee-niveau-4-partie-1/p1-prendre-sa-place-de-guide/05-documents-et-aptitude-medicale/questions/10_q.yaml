@@ -1,0 +1,19 @@
+id: a71ce5c1-a1bd-4f6a-9314-ec10b734136d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit-on des prérogatives des jeunes plongeurs au sens du code du sport ?
+choices:
+- id: e91aaf73-adb7-41b9-a60d-0e2c31906d94
+  text: 'Ils n''ont pas de prérogatives officielles : ils restent débutants ou en formation de niveau 1.'
+- id: d1c8e814-8e6f-494a-a8b7-431a06d634a5
+  text: Ils ont les mêmes prérogatives que les adultes à brevet égal.
+- id: 542bc1fd-bce9-424b-a06c-9d48ba12e263
+  text: Ils peuvent plonger en autonomie à 6 m avec l'accord parental.
+- id: 15e0c0df-e06c-4b00-9562-2a849062862e
+  text: Ils sont assimilés guides de palanquée juniors à partir de 14 ans.
+correct_choice_ids:
+- e91aaf73-adb7-41b9-a60d-0e2c31906d94
+explanation: 'Les cursus jeunes (étoiles de mer, bronze, argent, or, Aquaticus...) n''ouvrent pas de prérogatives officielles : au sens du code du sport, les jeunes restent des plongeurs débutants ou en formation de niveau 1.'
+archived: false

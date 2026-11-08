@@ -1,0 +1,19 @@
+id: 874aa0d1-a920-4218-aa16-23023134d73c
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quelle fréquence l'Assemblée générale de la FFESSM procède-t-elle à des élections ?
+choices:
+- id: d3f4cab8-a25b-4b32-89a8-c3b28a26ae50
+  text: Tous les quatre ans, dans les mois qui suivent les Jeux Olympiques d'été.
+- id: b877c908-bd54-4a3b-a8ad-ef81abfdc025
+  text: Tous les ans, lors de l'AG annuelle.
+- id: 6f5671e0-29f3-486a-bb31-bbc9a4728981
+  text: Tous les deux ans, en alternance avec les élections régionales.
+- id: 947c1ba7-1a3f-4dfc-9a87-c12c5a22cf0c
+  text: Uniquement en cas de démission du président.
+correct_choice_ids:
+- d3f4cab8-a25b-4b32-89a8-c3b28a26ae50
+explanation: L'Assemblée générale se réunit au moins une fois par an pour définir et contrôler la politique fédérale, et une fois tous les quatre ans - dans les mois suivant les Jeux Olympiques d'été - pour les élections.
+archived: false

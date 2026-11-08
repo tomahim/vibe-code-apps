@@ -1,0 +1,19 @@
+id: eb7ab6d7-5d73-47c0-89fc-88bdd864fd22
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Laquelle de ces missions n'appartient pas au directeur de plongée ?
+choices:
+- id: 6d401e66-c19d-4a7d-86a6-1123f43d841d
+  text: Évaluer et valider les aptitudes des plongeurs pour leur délivrer un niveau.
+- id: 5d7c6421-6dd9-4ce4-bdb1-27fa481b04d2
+  text: Fixer les caractéristiques de la plongée et établir la fiche de sécurité.
+- id: 5af7bb94-6d03-451b-bbea-d2e45eb4c84e
+  text: Prendre les dispositions pour assurer la sécurité des plongeurs.
+- id: b80a72b7-ad24-49ce-bc36-755b3ec2684a
+  text: S'assurer de l'application des règles et procédures en vigueur.
+correct_choice_ids:
+- 6d401e66-c19d-4a7d-86a6-1123f43d841d
+explanation: Le DP organise, sécurise, déclenche les secours, fait appliquer les règles, fixe les caractéristiques et établit la fiche de sécurité. Évaluer et valider des aptitudes relève des enseignants, pas de la direction de plongée.
+archived: false

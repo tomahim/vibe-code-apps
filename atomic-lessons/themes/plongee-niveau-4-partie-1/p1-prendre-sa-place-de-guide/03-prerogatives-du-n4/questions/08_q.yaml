@@ -1,0 +1,19 @@
+id: 084dfc9e-ee26-425f-aa13-f6eaedc31870
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que signifie la co-responsabilité entre plongeurs autonomes ?
+choices:
+- id: 90f29ddd-93da-48b0-b25b-fed99dec527d
+  text: 'Il n''y a pas de guide de palanquée au sens juridique : chacun partage la responsabilité de la plongée.'
+- id: 7307aa45-6136-4537-a5d7-dc153990934a
+  text: Le plongeur le plus expérimenté devient juridiquement guide de palanquée.
+- id: 8ca4edb3-2568-4041-b95c-670338c3610f
+  text: Le directeur de plongée reste seul responsable de tout incident.
+- id: b81a78dd-e2a3-4dc8-ad65-cb39a12f4d9d
+  text: La responsabilité est transférée à l'exploitant du site.
+correct_choice_ids:
+- 90f29ddd-93da-48b0-b25b-fed99dec527d
+explanation: 'Entre plongeurs autonomes, la plongée s''effectue en co-responsabilité : aucun n''est guide de palanquée au sens juridique. Sans DP, l''exploitant doit autoriser la plongée et entériner l''organisation de sécurité, dans la limite de 40 m.'
+archived: false

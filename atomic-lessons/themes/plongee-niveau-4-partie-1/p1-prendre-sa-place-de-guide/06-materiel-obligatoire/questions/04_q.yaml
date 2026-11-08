@@ -1,0 +1,19 @@
+id: 09773b75-82ff-45ff-9f9a-e9cdd27d1cb8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi deux sorties indépendantes sur la bouteille du guide ?
+choices:
+- id: 621ad9d6-d4c1-47f7-a186-f1daae137593
+  text: Pour refermer une sortie en cas de fuite sans perdre tout l'air, et assurer la remontée sur l'autre.
+- id: 1cd76963-a35d-4090-aeb0-e93f86f74d23
+  text: Pour gonfler la bouteille deux fois plus vite entre deux plongées.
+- id: 463afe02-497d-4e20-bd29-e09a44fe0daa
+  text: Pour permettre à deux plongeurs de respirer sur le même bloc.
+- id: e504dee9-c658-4d6a-97f2-694dfc5f59d8
+  text: Pour équilibrer la pression entre les deux étages du détendeur.
+correct_choice_ids:
+- 621ad9d6-d4c1-47f7-a186-f1daae137593
+explanation: 'Avec deux sorties indépendantes, une fuite sur un robinet peut être isolée sans perdre la réserve : la remontée s''effectue sur la seconde sortie. Les raccords dérivant deux détendeurs d''une seule sortie sont donc proscrits.'
+archived: false

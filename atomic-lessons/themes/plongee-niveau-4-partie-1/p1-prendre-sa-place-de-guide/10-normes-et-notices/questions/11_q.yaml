@@ -1,0 +1,19 @@
+id: a0b1798a-c7dc-4016-a5ac-3b0094abd6a1
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui peut demander à consulter les fiches de gestion ?
+choices:
+- id: 383c9e71-2c6e-4be1-8b20-f68dd44cbfea
+  text: Les utilisateurs et les agents chargés du contrôle.
+- id: 6beb51dd-769e-4145-bc16-ecce893b35bb
+  text: Uniquement le propriétaire du matériel.
+- id: d0f35f2a-9696-4458-a54e-fa1409f0ea8a
+  text: Uniquement les moniteurs fédéraux.
+- id: 0554be7b-c36f-49bb-aaad-24792ec93b98
+  text: 'Personne : ce sont des documents internes confidentiels.'
+correct_choice_ids:
+- 383c9e71-2c6e-4be1-8b20-f68dd44cbfea
+explanation: 'Les fiches de gestion doivent être communiquées à leur demande aux utilisateurs et aux agents chargés du contrôle : le matériel prêté est tracé et consultable.'
+archived: false

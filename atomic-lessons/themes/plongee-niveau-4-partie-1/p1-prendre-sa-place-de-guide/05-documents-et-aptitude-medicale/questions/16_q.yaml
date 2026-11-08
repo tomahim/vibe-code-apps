@@ -1,0 +1,19 @@
+id: a1d0aa6c-4fc5-476a-852d-043d75041a18
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Un baptême est-il soumis au certificat médical ?
+choices:
+- id: 23c71731-257a-46ac-9b68-aa7b7844fc45
+  text: 'Non : le baptême fait partie des cas où le certificat n''est pas exigé, sauf cadre particulier comme l''handisub.'
+- id: 29b6b4f2-7e21-4f6a-9872-6f83d1769634
+  text: 'Oui : tout plongeur, même en baptême, doit présenter un certificat de moins d''un an.'
+- id: 70244385-1649-4686-ae09-ce575eb79754
+  text: Oui, mais seulement pour les baptêmes de mineurs.
+- id: 824ba79d-ca0c-4c67-97f6-86ed2d7c726b
+  text: Non, car le baptême n'est pas une activité de plongée réglementée.
+correct_choice_ids:
+- 23c71731-257a-46ac-9b68-aa7b7844fc45
+explanation: Le schéma fédéral prévoit que baptême (sauf handisub), packs découverte et premières étapes jeunes ne demandent pas de certificat médical. Au-delà, la présentation d'un certificat de moins d'un an est le cas général.
+archived: false

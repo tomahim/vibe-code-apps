@@ -1,0 +1,19 @@
+id: 05e0e835-ae4e-4ac7-a75e-a023ce90aaa7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: En quoi consiste la délégation accordée à une fédération ?
+choices:
+- id: 5e42f026-e065-40da-a595-bf8e5c83ad29
+  text: L'État choisit une fédération unique, dotée de pouvoirs publics, qui définit les règles techniques et organise les compétitions.
+- id: 6fb61904-2f52-4914-bd90-2615279a9083
+  text: La fédération gère les subventions de tous les clubs à la place des collectivités locales.
+- id: d8ff11e0-2e03-46e4-a1be-729e5185e397
+  text: La fédération organise les élections des dirigeants de tous les clubs.
+- id: bea5d676-dfcf-440f-8dcc-a35644a5f0a9
+  text: La fédération contrôle les comptes des moniteurs professionnels salariés.
+correct_choice_ids:
+- 5e42f026-e065-40da-a595-bf8e5c83ad29
+explanation: 'La délégation - renouvelable tous les quatre ans - consiste pour l''État à désigner une fédération unique ayant de véritables pouvoirs de puissance publique : règles techniques et administratives, organisation des compétitions et des titres.'
+archived: false

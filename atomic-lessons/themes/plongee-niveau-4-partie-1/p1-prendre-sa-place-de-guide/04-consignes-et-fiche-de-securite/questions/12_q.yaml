@@ -1,0 +1,19 @@
+id: 2cdb2305-209c-45fa-a32e-ed7559e426b5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit la réglementation de plusieurs directeurs de plongée sur un même navire ?
+choices:
+- id: 8a917db1-4fdb-48cc-b762-631bb62eb6c3
+  text: 'Elle est muette : possible mais débattu ; chaque DP doit avoir sa fiche et son périmètre clair.'
+- id: 45e63190-c8a7-49ab-a0ad-68e952749178
+  text: 'Elle l''interdit formellement : un seul DP par site de plongée.'
+- id: f3d8f44b-14b3-4e3b-88b7-e2fd3265421a
+  text: Elle l'autorise sans condition, y compris pour des clubs différents.
+- id: e68b5fdc-427b-45ac-8670-e5c6fb36a57c
+  text: Elle impose un DP principal désigné par écrit par l'armateur.
+correct_choice_ids:
+- 8a917db1-4fdb-48cc-b762-631bb62eb6c3
+explanation: Le code du sport n'interdit pas plusieurs DP à bord, mais la situation peut faire débat lors d'un contrôle. La convention avec le prestataire doit être claire et chaque DP dispose de sa fiche de sécurité et de son périmètre.
+archived: false

@@ -1,0 +1,19 @@
+id: 9d6a3e62-32ea-4eec-b13c-c010670cb27d
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle situation relève de l'enseignement et non de l'exploration ?
+choices:
+- id: a5e2e6f7-9505-403e-a4f1-d81f6bb28edf
+  text: Un moniteur fait faire un vidage de masque à un élève de niveau 1 en formation.
+- id: 7c393c93-7e99-4e5a-b96b-366c71f05870
+  text: Un guide emmène quatre plongeurs de niveau 1 déjà brevetés à 18 m.
+- id: b5ac58b0-bc6e-477d-b3ef-cc5dc84fe805
+  text: Un niveau 4 accompagne un moniteur pendant une formation à 20 m.
+- id: 7b6c79ac-39a9-46ba-8b88-4260783c619f
+  text: Deux plongeurs PA-60 explorent un tombant sans directeur de plongée.
+correct_choice_ids:
+- a5e2e6f7-9505-403e-a4f1-d81f6bb28edf
+explanation: Faire réaliser et évaluer des techniques à un élève en formation est une action d'enseignement. Guider des plongeurs déjà brevetés en exploration ou accompagner un enseignant en formation relève des prérogatives du GP.
+archived: false

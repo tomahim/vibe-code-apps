@@ -1,0 +1,19 @@
+id: 786df45b-1d8a-447d-b5e5-8dd4258496c7
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que vérifier dans ses contrats d'assurance existants ?
+choices:
+- id: a649db2d-6080-43b2-afa2-b6ad5d16a284
+  text: Qu'ils ne mentionnent pas la pratique de la plongée comme clause d'exclusion des garanties.
+- id: 3ec7430d-3c49-44f7-bb41-e062dc21ad01
+  text: Qu'ils couvrent obligatoirement la plongée souterraine.
+- id: 7e266629-a74b-4b66-8c87-f5cf0b64c304
+  text: Qu'ils sont signés par un moniteur fédéral.
+- id: 50070037-5263-4435-ae39-8f75007f402f
+  text: Qu'ils prévoient une surprime pour la plongée.
+correct_choice_ids:
+- a649db2d-6080-43b2-afa2-b6ad5d16a284
+explanation: Il faut vérifier que ses contrats existants - décès, indemnités journalières - n'excluent pas la plongée des garanties ; sinon, une surprime sera sans doute demandée pour les maintenir.
+archived: false

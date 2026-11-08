@@ -1,0 +1,19 @@
+id: 8130de9d-933f-4b94-b4e3-4503d56b7ffa
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est le rôle des commissions de la FFESSM ?
+choices:
+- id: a653847f-b166-418c-ab69-2547c396b331
+  text: Étudier les questions de leur discipline et préparer les décisions, que seul le comité directeur rend exécutoires.
+- id: 9eae36d1-477f-434c-a8f9-0573b74c6a36
+  text: Décider seules de la réglementation technique de leur discipline de compétence.
+- id: e557d26b-1842-4c6d-bbdc-e20603776449
+  text: Délivrer directement les brevets fédéraux aux plongeurs formés.
+- id: 22f769af-9554-4129-94d3-afa39808e4fa
+  text: Gérer les contrats d'assurance de tous les licenciés de la fédération.
+correct_choice_ids:
+- a653847f-b166-418c-ab69-2547c396b331
+explanation: 'Les commissions étudient les questions de leur domaine, assurent promotion et développement, préparent programmes et décisions - mais elles restent consultatives : seul le comité directeur a le pouvoir de les rendre exécutoires.'
+archived: false

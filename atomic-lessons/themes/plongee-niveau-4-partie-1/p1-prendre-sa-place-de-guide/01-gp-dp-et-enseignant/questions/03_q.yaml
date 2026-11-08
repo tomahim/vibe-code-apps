@@ -1,0 +1,19 @@
+id: 63f7c8d9-0f3b-4a81-925d-4eeced81143d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Hors l'encadrant, combien de plongeurs une palanquée encadrée peut-elle compter ?
+choices:
+- id: 25f880e4-3231-4606-ad1f-de17d56dd992
+  text: Un à quatre plongeurs, avec possibilité d'ajouter un second guide jusqu'à 40 m.
+- id: a6770113-70aa-4fed-a975-ea5126350564
+  text: Deux ou trois plongeurs, sans possibilité d'ajout d'un second guide.
+- id: bc572b3b-cc9d-42f9-9121-17d00e25ed32
+  text: Un à six plongeurs, selon la profondeur maximale de la plongée.
+- id: 30571d5e-7a12-47e5-af1e-847edb25f64b
+  text: Quatre plongeurs exactement, quel que soit leur niveau.
+correct_choice_ids:
+- 25f880e4-3231-4606-ad1f-de17d56dd992
+explanation: Une palanquée encadrée réunit un à quatre plongeurs ayant les aptitudes requises. Un second guide de palanquée peut s'ajouter si la profondeur n'excède pas 40 m. Deux ou trois, c'est la règle des palanquées autonomes.
+archived: false

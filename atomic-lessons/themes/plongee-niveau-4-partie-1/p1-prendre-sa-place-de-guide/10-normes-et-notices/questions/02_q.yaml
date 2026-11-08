@@ -1,0 +1,19 @@
+id: 4201cc29-49b5-4290-8cc4-aa9a62f7f890
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que prévoit le règlement UE 2016/425 ?
+choices:
+- id: a0190746-b5e8-44d1-a67a-44ade3bd448a
+  text: L'obligation de marquage CE pour les EPI vendus, prêtés ou loués au sein de l'Union européenne.
+- id: 56c19758-b503-4cdb-b9b5-38b759aa1eba
+  text: L'interdiction de prêter du matériel de plongée.
+- id: ab5db6ab-8b10-4e55-a277-b7aa932015fa
+  text: La création d'un contrôle technique annuel des bouteilles.
+- id: 7213e080-86cd-4524-bd8b-8b8553657443
+  text: La gratuité des EPI pour tous les pratiquants.
+correct_choice_ids:
+- a0190746-b5e8-44d1-a67a-44ade3bd448a
+explanation: Le règlement UE 2016/425 - conception et fabrication - fait obligation de marquage CE pour les EPI vendus, prêtés ou loués au sein de l'Union européenne, condition de leur libre circulation.
+archived: false

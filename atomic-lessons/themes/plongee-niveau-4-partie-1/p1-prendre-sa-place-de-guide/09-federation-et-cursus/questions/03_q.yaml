@@ -1,0 +1,19 @@
+id: 172cfeb9-6309-408c-823f-e4727a5d1bff
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles conditions exige l'agrément « sport » ?
+choices:
+- id: 0193d863-3a17-4201-8a40-a73c3cbf466e
+  text: But non lucratif, respect des règles d'encadrement et de sécurité, statuts types, fonctionnement démocratique.
+- id: ee00a511-1885-4d7e-96e6-f5a8e2b7e1a7
+  text: Uniquement un nombre minimal de licenciés par discipline sportive.
+- id: cdf4f406-5bd6-424b-bc8f-e02eaaf915d9
+  text: L'approbation préalable de la CMAS et du Comité international olympique.
+- id: c1ac8b30-d2e1-4917-a649-9fa3fb11e8cf
+  text: La présence permanente d'un médecin fédéral salarié par l'association.
+correct_choice_ids:
+- 0193d863-3a17-4201-8a40-a73c3cbf466e
+explanation: 'L''agrément « sport » est octroyé sous conditions : association à but non lucratif, respect des règles d''encadrement, d''hygiène et de sécurité, adoption de statuts types, fonctionnement démocratique. Il est indispensable pour prétendre aux aides de l''État.'
+archived: false

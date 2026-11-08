@@ -1,0 +1,19 @@
+id: 7b4ca25c-3903-41fc-9025-c0f714a3d8d3
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la particularité de la FSGT ?
+choices:
+- id: 403e7c98-0123-4be1-badf-fed4a4a7bbed
+  text: Une fédération multisports à licence omnisports, dont les brevets de plongée sont reconnus depuis 1982.
+- id: 37c53cdd-0ea0-4645-97ab-df5ffbbf19db
+  text: C'est la fédération délégataire de la plongée sous-marine en France.
+- id: 52dd39df-a79b-41c7-99f3-a0c87cda226d
+  text: C'est un syndicat de moniteurs professionnels de la plongée.
+- id: 59b4f669-d1f2-4d58-a146-542eb70c2014
+  text: C'est une agence internationale de certification des plongeurs.
+correct_choice_ids:
+- 403e7c98-0123-4be1-badf-fed4a4a7bbed
+explanation: La FSGT, née en 1934 de la fusion d'organisations sportives ouvrières, est une fédération multisports qui délivre une licence omnisports. Ses brevets de plongée sont reconnus depuis 1982 ; elle n'est pas spécialisée en plongée.
+archived: false

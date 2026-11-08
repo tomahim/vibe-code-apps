@@ -1,0 +1,19 @@
+id: 2c27e249-280b-4e4f-9d04-c2c3dab8be7c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: L'assurance individuelle accident est-elle obligatoire en loisir ?
+choices:
+- id: f8f152b9-8cc1-467b-bfea-b346d9544266
+  text: Non, hors compétition elle est facultative, mais les clubs doivent informer leurs adhérents de son intérêt.
+- id: a4c02267-033b-4d16-a1c1-ecc9999a336a
+  text: Oui, elle est exigée pour toute plongée pratiquée en structure de plongée.
+- id: 28ce8e57-2a85-4d7d-8c57-06841a27d79c
+  text: Oui, mais uniquement pour les plongeurs mineurs en club.
+- id: 9d6f7553-f1d3-45d6-ab67-45f9af338cc9
+  text: Non, et les clubs doivent au contraire la déconseiller.
+correct_choice_ids:
+- f8f152b9-8cc1-467b-bfea-b346d9544266
+explanation: L'assurance individuelle est facultative pour une pratique de loisir hors compétition, mais les clubs et centres sont tenus d'informer leurs adhérents de l'intérêt de souscrire un contrat d'assurance de personnes.
+archived: false

@@ -1,0 +1,19 @@
+id: 48f5fdd0-30e7-41ff-8000-1ecc9b1bf966
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Une plongée d'exploration en club associatif constitue-t-elle un contrat ?
+choices:
+- id: 31a989be-ab0f-479a-84dd-99fe3061db0c
+  text: 'Oui : toute prestation de plongée est un contrat, même non écrit, y compris en associatif.'
+- id: 42e443c9-31d9-494f-bdfb-725ac0d9286e
+  text: 'Non : seuls les centres commerciaux concluent de vrais contrats.'
+- id: 19489ba2-1853-486d-9a9a-3d9fa4f134cf
+  text: Oui, mais uniquement si le plongeur paie une prestation.
+- id: 1ec7489f-829b-47a5-b7cb-f6181b4511e3
+  text: 'Non : sans document signé, aucune obligation contractuelle n''existe.'
+correct_choice_ids:
+- 31a989be-ab0f-479a-84dd-99fe3061db0c
+explanation: Toute prestation de plongée - baptême, formation ou simple exploration - constitue un contrat, y compris dans le domaine associatif et sans écrit. La structure assume alors une obligation de sécurité et d'information.
+archived: false

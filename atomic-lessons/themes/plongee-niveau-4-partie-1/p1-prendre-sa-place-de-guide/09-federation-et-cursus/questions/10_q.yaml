@@ -1,0 +1,19 @@
+id: b4fb2cd9-22c5-44c7-b3d5-1af11205d428
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles organisations sont à la fois syndicat et agence de certification ?
+choices:
+- id: ba216952-8564-4fa4-b0fe-fa856086cdaf
+  text: L'ANMP et le SNMP.
+- id: 0878494c-05b3-4c03-8a85-139a9c33e1e6
+  text: La FFESSM et la FSGT.
+- id: 5cc28c98-b14f-4f40-9886-1e0faafbf3a4
+  text: La FNEAPL et le SMPS.
+- id: c5d62543-912b-4231-af18-b780b40f2eaf
+  text: Le CNOSF et la CMAS.
+correct_choice_ids:
+- ba216952-8564-4fa4-b0fe-fa856086cdaf
+explanation: L'ANMP - créée en 1972 - et le SNMP - créé en 1963 - ont tous deux la particularité d'être syndicat professionnel et agence de certification habilitée à délivrer des brevets de plongeurs.
+archived: false

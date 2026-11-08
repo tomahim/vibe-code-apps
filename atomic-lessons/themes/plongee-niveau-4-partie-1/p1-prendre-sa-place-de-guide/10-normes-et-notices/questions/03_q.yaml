@@ -1,0 +1,19 @@
+id: e77454ce-9905-4316-b10f-7b20e185701a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle norme s'applique au tuba ?
+choices:
+- id: 26127297-74e0-4c51-be6a-992861b677de
+  text: La norme NF EN 1972.
+- id: 764932ef-cf38-498e-89fe-7fb4953394c9
+  text: La norme NF EN 13319.
+- id: 986e46df-1cc7-4bae-89c8-bb434cfc4d34
+  text: La norme NF EN 250.
+- id: 11972540-9802-46c6-a56e-30b402e92934
+  text: La norme EN 14143.
+correct_choice_ids:
+- 26127297-74e0-4c51-be6a-992861b677de
+explanation: Le tuba relève de la norme NF EN 1972 ; le profondimètre de la norme NF EN 13319. Ce sont les deux accessoires de plongée listés par le règlement.
+archived: false

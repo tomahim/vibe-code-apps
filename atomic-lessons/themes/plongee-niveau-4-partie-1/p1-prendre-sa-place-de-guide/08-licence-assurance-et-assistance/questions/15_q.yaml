@@ -1,0 +1,19 @@
+id: 5b080a24-6a01-416e-b917-22fe5699037b
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi la question de l'assistance se pose-t-elle surtout à l'étranger ?
+choices:
+- id: 27af2717-325c-4178-ad71-f0524f6fc693
+  text: Les secours français sont gratuits ; à l'étranger, secours et caisson exigent souvent une garantie de paiement.
+- id: 08af4f31-a467-4439-b1f9-b2b733c9607e
+  text: Les plongées à l'étranger sont toujours plus profondes qu'en France.
+- id: 9ee0d59b-f57a-42dd-a04f-546c34e67399
+  text: Les fédérations étrangères exigent systématiquement une attestation d'assurance.
+- id: 7a52c0ba-6e55-4380-8809-02c1a24c1c43
+  text: L'assistance en plongée est tout simplement interdite en France.
+correct_choice_ids:
+- 27af2717-325c-4178-ad71-f0524f6fc693
+explanation: En France, les frais de secours étant gratuits, la question ne se pose habituellement pas. À l'étranger, il n'est généralement pas possible d'être secouru ou hospitalisé en caisson sans garantie de paiement.
+archived: false

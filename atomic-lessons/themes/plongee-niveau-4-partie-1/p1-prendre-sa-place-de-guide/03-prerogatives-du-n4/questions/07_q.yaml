@@ -1,0 +1,19 @@
+id: ea809831-4423-4878-a686-00dcfe64bf70
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: En autonomie, quelles prérogatives le niveau 4 conserve-t-il ?
+choices:
+- id: 91dcadcc-f5eb-41a5-94e6-33824f17a7be
+  text: 'Celles d''un niveau 3 : PA-60 avec deux ou trois plongeurs, sous responsabilité d''un DP.'
+- id: 45b5cc11-44ff-41ff-a398-a39df6b27431
+  text: 'Aucune : le niveau 4 ne plonge qu''en tant qu''encadrant de palanquée.'
+- id: 0cda307b-9d71-49a3-af06-f180b17bee27
+  text: L'autonomie illimitée en profondeur, dès lors qu'il connaît le site.
+- id: cb88e16e-2ac5-4e7c-a371-4e69af530389
+  text: L'autonomie à 40 m uniquement, même avec un directeur de plongée.
+correct_choice_ids:
+- 91dcadcc-f5eb-41a5-94e6-33824f17a7be
+explanation: 'En autonomie, le niveau 4 a les mêmes prérogatives qu''un niveau 3 (PA-60) : 0 à 60 m avec un DP, ou limité à 40 m sans DP après autorisation de l''exploitant.'
+archived: false

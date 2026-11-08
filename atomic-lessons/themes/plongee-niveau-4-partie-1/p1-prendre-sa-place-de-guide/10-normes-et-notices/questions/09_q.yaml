@@ -1,0 +1,19 @@
+id: 2afc0623-657e-458b-9a9d-c7bcec3865d9
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que doit comporter la fiche de gestion d'un EPI ?
+choices:
+- id: 4586fe3a-76b8-4411-9a74-5db4620c7064
+  text: Identification de l'équipement, notice fabricant, maintien en conformité, réparations, incidents et mesures d'hygiène.
+- id: ea5b1c0c-9846-47ba-a10d-bb6c889a03f0
+  text: Uniquement la date d'achat et le prix de l'équipement concerné.
+- id: 7bd083e8-6f46-4fee-9272-8ce67c936ac2
+  text: La liste des plongeurs autorisés à utiliser le matériel du club.
+- id: f2e56435-eabe-4f81-8797-af678f63b77e
+  text: Une photo de l'équipement et le numéro de licence fédérale de son propriétaire.
+correct_choice_ids:
+- 4586fe3a-76b8-4411-9a74-5db4620c7064
+explanation: La fiche comporte l'identification et les caractéristiques - référence, notice du fabricant, dates d'achat et de mise au rebut prévue -, l'organisation du maintien en conformité, les réparations et incidents, et les mesures d'hygiène et de désinfection.
+archived: false

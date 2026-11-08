@@ -1,0 +1,19 @@
+id: 364ca7b4-f8f6-463a-8133-d526a2146504
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Trois niveau 4 veulent plonger en autonomie à 38 m sans directeur de plongée. Quelles conditions ?
+choices:
+- id: a395a136-fc49-402a-955f-255980260a5b
+  text: L'accord de l'exploitant, l'information du site choisi et la validation de l'organisation de sécurité.
+- id: b68363cb-b3ba-4bf6-8472-d768d7f7f9db
+  text: 'C''est impossible : sans DP, l''autonomie est interdite quel que soit le niveau.'
+- id: 0e69ccd0-5ebd-4d71-8d3a-a27a81eb4d74
+  text: Une simple déclaration à la fédération avant la plongée.
+- id: 0d5aa860-6abd-4b08-b871-c04db412bf1e
+  text: La présence d'un quatrième plongeur titulaire du niveau 5.
+correct_choice_ids:
+- a395a136-fc49-402a-955f-255980260a5b
+explanation: Sans DP, des PA-60 peuvent organiser leurs plongées limitées à 40 m, avec l'autorisation de l'exploitant, l'information préalable du choix du site et l'entérinement de l'organisation de sécurité et de secours.
+archived: false

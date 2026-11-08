@@ -1,0 +1,19 @@
+id: 8e93b54c-6c61-4483-948b-e7fd9da3a3c6
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui est responsable de la vérification du matériel prêté ou loué ?
+choices:
+- id: d65738ac-7f7a-489c-aafb-979954e6c415
+  text: Le directeur de plongée s'assure de son bon état de fonctionnement.
+- id: 51dbdeaa-ccac-481e-a70e-aeef4fc07d0e
+  text: Le plongeur qui l'utilise, seul responsable de son matériel.
+- id: 99b8807f-6299-405f-a45c-f0a864842060
+  text: Le fabricant, par sa garantie commerciale.
+- id: a17b7af6-dd43-4b34-85b5-f2a6c6b002c8
+  text: Le guide de palanquée, pour tout le matériel du bateau.
+correct_choice_ids:
+- d65738ac-7f7a-489c-aafb-979954e6c415
+explanation: 'Parmi les prérogatives du DP : s''assurer du bon état de fonctionnement de l''équipement prêté ou loué. Il vérifie aussi que l''équipement des participants est conforme à la réglementation et adapté à la plongée.'
+archived: false

@@ -1,0 +1,19 @@
+id: f4a30334-47d1-48aa-b289-1cabdbb3f58c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Sur quoi le directeur de plongée s'appuie-t-il d'abord pour évaluer les aptitudes d'un plongeur ?
+choices:
+- id: 6bbc8f6c-6779-4262-bc48-912e1e203ee8
+  text: Le brevet et le carnet de plongée, complétés par l'observation du comportement.
+- id: ae7a7d7a-f932-47ad-b124-77bd6b63d52c
+  text: Un test écrit de connaissances théoriques avant chaque sortie.
+- id: 5db5f738-6594-4fa2-8271-8559641b2b10
+  text: La seule déclaration du plongeur sur son niveau de pratique.
+- id: 0054b866-ec2d-4eda-8a57-5a2e87b9c35f
+  text: Le matériel utilisé, qui renseigne le niveau technique.
+correct_choice_ids:
+- 6bbc8f6c-6779-4262-bc48-912e1e203ee8
+explanation: 'Le DP examine le brevet (pré-positionnement) et le carnet (expérience acquise), puis observe le comportement : équipement, mise à l''eau, gestes techniques, consommation. Une plongée d''évaluation peut compléter ce tableau.'
+archived: false

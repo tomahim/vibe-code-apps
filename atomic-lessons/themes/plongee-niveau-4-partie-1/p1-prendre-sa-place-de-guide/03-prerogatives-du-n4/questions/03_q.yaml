@@ -1,0 +1,19 @@
+id: 35492cd2-1ba5-4d97-b649-58fdd4068161
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Des débutants confiés à un guide en exploration sont-ils des baptêmes ?
+choices:
+- id: 167b95c7-a200-42ab-9ca2-20a24e07aaf5
+  text: 'Non : ce sont des plongeurs en cours de formation dont le moniteur a jugé une exploration opportune.'
+- id: 121ae0da-d6bc-47ec-885d-10d9df809f28
+  text: 'Oui : tout plongeur non breveté est considéré comme un baptiste.'
+- id: aaf64e61-590b-4d75-a917-9dd7dbebfadc
+  text: Oui, mais seulement si la plongée dépasse 6 mètres de profondeur.
+- id: 6a6f1e60-4198-4fba-a9b1-157ee845c2a8
+  text: Non, car le baptême est interdit en milieu naturel à tout niveau.
+correct_choice_ids:
+- 167b95c7-a200-42ab-9ca2-20a24e07aaf5
+explanation: Le baptême est un acte d'enseignement. Les débutants qu'un GP peut guider entre 0 et 6 m sont des plongeurs en cours de formation, pour lesquels leur moniteur juge opportune une plongée d'exploration.
+archived: false

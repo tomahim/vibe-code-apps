@@ -1,0 +1,19 @@
+id: b6726927-5416-4b86-bf35-1b8bd59b0de2
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: La bouteille du guide ne dispose que d'une seule sortie avec un raccord en Y pour deux détendeurs. Est-ce conforme ?
+choices:
+- id: d0c7434a-1c98-4168-9b28-ca5fdf9593c7
+  text: 'Non : la réglementation exige deux sorties indépendantes pour l''encadrant.'
+- id: fb28f444-99da-4405-947b-240eec86e305
+  text: 'Oui : deux détendeurs branchés suffisent, quelle que soit la robinetterie.'
+- id: 260121cb-41c5-42e2-aac4-ad49d5c4a2cf
+  text: Oui, si le raccord est un modèle agréé par le fabricant.
+- id: b96ffe19-a0ad-4a61-baf9-b530013e354d
+  text: Non, mais seulement pour les plongées au-delà de 40 m.
+correct_choice_ids:
+- d0c7434a-1c98-4168-9b28-ca5fdf9593c7
+explanation: 'En cas de fuite sur un robinet, une seule sortie ne permet pas d''isoler la panne : toute la réserve est perdue. L''encadrant doit disposer de deux sorties indépendantes ; les raccords de dérivation sont inutilisables.'
+archived: false

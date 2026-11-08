@@ -1,0 +1,19 @@
+id: cb51a088-84f1-4a3b-aade-d7e6cf30e476
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi rapporter au DP le stress d'un plongeur en début de descente ?
+choices:
+- id: cdf09c11-02e8-43ba-96e4-4cc37772cfa4
+  text: Cela nourrit la fiche de sécurité et aide le DP à adapter les plongées suivantes.
+- id: e6005013-d73a-4493-aac9-ab62ba4c2604
+  text: Cela décharge le guide de toute responsabilité pour la suite.
+- id: b70a84c7-f98f-4b6d-9df3-c53f28ca44e6
+  text: Cela permet au DP d'exclure le plongeur des sorties suivantes.
+- id: 4ae1e320-0081-43d1-8c3e-319f89199655
+  text: 'C''est inutile : seuls les accidents doivent être signalés.'
+correct_choice_ids:
+- cdf09c11-02e8-43ba-96e4-4cc37772cfa4
+explanation: 'La transmission ne se limite pas aux incidents : informer le DP des difficultés ou, au contraire, de l''aisance d''un plongée l''aide à composer les palanquées et à orienter la formation. C''est aussi une trace pour la fiche de sécurité.'
+archived: false

@@ -1,0 +1,19 @@
+id: a06831ed-7742-4354-baad-206b88817660
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce que la mise en danger délibérée d'autrui ?
+choices:
+- id: 6781cf86-681b-40f2-806f-3965f294949b
+  text: La violation délibérée d'une obligation de sécurité, créant un risque immédiat de mort ou de mutilation, même sans dommage.
+- id: f12a0cc2-a20c-47ba-be19-d3bc29606408
+  text: Le fait de causer la mort d'autrui par une imprudence caractérisée.
+- id: fcccfb8c-351b-4aab-8c85-fa1b132568c1
+  text: Toute plongée organisée sans contrat d'assurance responsabilité civile.
+- id: 06264c58-d2b5-4423-a553-785ab47004aa
+  text: Une infraction qui n'existe que si le dommage s'est réellement produit chez la victime.
+correct_choice_ids:
+- 6781cf86-681b-40f2-806f-3965f294949b
+explanation: La mise en danger délibérée d'autrui résulte de la violation délibérée d'une obligation de sécurité ou de prudence dès lors qu'elle expose directement autrui à un risque immédiat de mort, de mutilation ou d'infirmité permanente. L'infraction est constituée sans que le risque se réalise.
+archived: false

@@ -1,0 +1,19 @@
+id: 6ef9be31-148e-4bda-91a1-874778912bee
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Un plongeur adhère à deux clubs. Combien de licences peut-il détenir ?
+choices:
+- id: a14d87af-9ef5-44b5-9f9a-c2028a52e720
+  text: Une seule licence par année sportive ; un seul des deux clubs la délivre.
+- id: c27b97d7-0b10-4a45-ac2c-e61b20014a34
+  text: Deux, une par club d'adhésion.
+- id: 67173b42-3fa0-4d4c-80c8-656b8cf52f9d
+  text: Autant qu'il a de clubs, sans limite.
+- id: 792bf279-d5b7-471d-8369-1ccf8adbec50
+  text: 'Aucune : il faut choisir un club unique.'
+correct_choice_ids:
+- a14d87af-9ef5-44b5-9f9a-c2028a52e720
+explanation: On ne peut disposer que d'une seule licence par année sportive. Il est possible d'adhérer à plusieurs clubs, mais un seul délivre la licence.
+archived: false

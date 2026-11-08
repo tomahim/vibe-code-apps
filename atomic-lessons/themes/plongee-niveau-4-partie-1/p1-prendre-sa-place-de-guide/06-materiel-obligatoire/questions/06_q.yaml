@@ -1,0 +1,19 @@
+id: b24c4dab-e629-42cf-8cea-b22efba577f4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles qualités doit présenter la fixation du détendeur de secours ?
+choices:
+- id: 2bb69e0f-a5aa-4ba1-9811-4e6c404f5b18
+  text: Identification rapide, accès immédiat sans le voir, fixation près du corps sans traîner.
+- id: b352a250-e477-430a-acbd-a2ef99ae02f1
+  text: Fixation dans le dos pour ne pas gêner le palmage.
+- id: 98729b59-474f-4341-8205-3ef1afea54f8
+  text: Embout jaune vif rangé dans une poche fermée du gilet.
+- id: 7dea9f61-2e70-43f6-ad6b-710a431d143c
+  text: Flexible le plus long possible pour toutes les situations.
+correct_choice_ids:
+- 2bb69e0f-a5aa-4ba1-9811-4e6c404f5b18
+explanation: Le détendeur de secours doit être identifiable (couleurs vives), accessible sans le voir et saisissable par un plongeur en panne d'air sans qu'il le demande - poitrine, libre d'entrave - et fixé près du corps pour ne rien traîner.
+archived: false

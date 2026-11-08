@@ -1,0 +1,19 @@
+id: cc2ccfd3-ccd3-421a-bdc6-d2cbc4e386e2
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que doit annoncer le directeur de plongée avant la mise à l'eau ?
+choices:
+- id: e8147b86-9b51-4f6b-9381-6f66a55be01d
+  text: Les paramètres maximaux, l'autorisation ou non de décompresser, la zone de sortie et les procédures de secours.
+- id: d23b198b-8749-4846-9629-8588cdb83603
+  text: Uniquement la profondeur maximale et l'heure de retour au port.
+- id: 9bd3df12-6a3b-49c1-87dd-cd7379cc1adc
+  text: Le nom de chaque plongeur et son niveau, rien de plus.
+- id: e64e9067-7714-428c-b38e-cb121e0d9f1c
+  text: La météo détaillée et la température de l'eau à chaque profondeur.
+correct_choice_ids:
+- e8147b86-9b51-4f6b-9381-6f66a55be01d
+explanation: Le briefing du DP fixe profondeur et temps maximaux, précise si la décompression est autorisée (avec la durée totale de remontée), la zone de sortie et les procédures de secours, notamment en cas de perte de palanquée.
+archived: false

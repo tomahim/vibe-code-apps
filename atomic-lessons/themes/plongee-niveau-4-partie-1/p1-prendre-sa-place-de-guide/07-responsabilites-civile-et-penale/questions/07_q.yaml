@@ -1,0 +1,19 @@
+id: cfc4b66f-6de4-4732-8d19-7ccbfce826e3
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quand la responsabilité pénale d'un encadrant est-elle engagée ?
+choices:
+- id: 14cd5522-1237-4528-8915-4357048209c7
+  text: En cas de violation délibérée d'une obligation de sécurité, ou de faute caractérisée exposant autrui à un risque grave.
+- id: 6a466f98-93df-410c-a884-3bbbb780cea1
+  text: Dès qu'un accident survient dans sa palanquée, quelle qu'en soit la cause.
+- id: 63761c0d-ba0f-42f9-9fb9-1f23d62a8aa5
+  text: Uniquement s'il a agi avec l'intention de nuire au plongeur.
+- id: 0b63c3c3-6fd1-4991-9868-c3067d75d123
+  text: Uniquement si la victime porte plainte dans les 48 heures.
+correct_choice_ids:
+- 14cd5522-1237-4528-8915-4357048209c7
+explanation: La responsabilité pénale suppose la violation délibérée d'une obligation de prudence ou de sécurité prévue par la loi ou le règlement, ou une faute caractérisée exposant autrui à un risque d'une particulière gravité non ignorable.
+archived: false

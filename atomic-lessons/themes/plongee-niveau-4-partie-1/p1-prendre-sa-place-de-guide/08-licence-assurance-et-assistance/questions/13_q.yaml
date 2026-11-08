@@ -1,0 +1,19 @@
+id: bfb14f1a-b8e6-45d4-a743-ee896e7e7ec2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Un plongeur est blessé par un compagnon de palanquée en club. Comment est-il indemnisé ?
+choices:
+- id: a6f1d512-037e-4e28-ac00-4d223a2806b9
+  text: Par l'assurance RC du plongeur responsable, les licenciés étant tiers entre eux.
+- id: 2d12e215-3c6e-497f-99f2-0e93f60972c8
+  text: 'Il ne l''est pas : les licenciés d''un même club ne sont pas tiers entre eux.'
+- id: cc72f872-e1a9-4857-8fb4-3a77724fec7f
+  text: Par sa propre assurance RC, qui couvre aussi ses dommages subis.
+- id: 2826d415-013a-459e-a1a3-0a3fcf5dcfb0
+  text: Par la fédération, qui indemnise automatiquement.
+correct_choice_ids:
+- a6f1d512-037e-4e28-ac00-4d223a2806b9
+explanation: 'Dans le domaine sportif français, tous les licenciés et pratiquants sont considérés comme tiers entre eux : l''assurance RC du plongeur responsable peut donc être mise en œuvre pour réparer les dommages causés.'
+archived: false
