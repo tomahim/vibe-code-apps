@@ -66,6 +66,19 @@ export function makeSpecies(detail) {
   mk('forestTree', 12, (b) => broadleaf(b, FOREST));
   mk('appleTree', 13, (b) => broadleaf(b, GREENS, '#e2573c'));
   mk('blossomTree', 14, (b) => broadleaf(b, ['#f1b8c4', '#eaa3b4', '#f7cdd5']));
+  // A tree that lost its leaves for winter: trunk and bare branches only.
+  mk('bareTree', 15, (b) => {
+    const bark = '#7d5a3f', twig = '#6b4c35';
+    b.add(cyl(0.075, 0.045, 0.55, seg), { c: bark, j: 0.06 });
+    const br = (len, r, y, rz, ry, x = 0, z = 0) => b.add(cyl(r, r * 0.45, len, 4), { p: [x, y, z], r: [0, ry, rz], c: twig, j: 0.05 });
+    br(0.34, 0.022, 0.34, -0.85, 0);
+    br(0.3, 0.02, 0.42, 0.8, 1.2);
+    br(0.28, 0.018, 0.48, -0.7, 2.4);
+    br(0.24, 0.016, 0.52, 0.65, 3.6);
+    br(0.2, 0.014, 0.54, -0.35, 4.8);
+    br(0.14, 0.01, 0.62, -0.9, 0.8, 0.09, 0.02);
+    br(0.12, 0.01, 0.63, 0.75, 2.0, -0.07, -0.03);
+  });
 
   const pine = (snow) => (b) => {
     b.add(cyl(0.06, 0.04, 0.35, 5), { c: '#6e4f38' });

@@ -100,9 +100,9 @@ test('aged paths show their season in the garden, theme and path views', async (
 
   // Theme view: winter and autumn paths carry their emoji.
   await panel.getByRole('button', { name: /Sport/ }).click();
-  await expect(panel.getByRole('button', { name: /Hockey all time legends/ })).toContainText('❄️');
-  await expect(panel.getByRole('button', { name: /Legendary dive sites/ })).toContainText('🍂');
-  await expect(panel.getByRole('button', { name: /Trail-running races/ })).not.toContainText('🍂');
+  await expect(panel.getByRole('button', { name: /Hockey all time legends/ }).locator('.lg-season-ic.winter')).toBeVisible();
+  await expect(panel.getByRole('button', { name: /Legendary dive sites/ }).locator('.lg-season-ic.autumn')).toBeVisible();
+  await expect(panel.getByRole('button', { name: /Trail-running races/ }).locator('.lg-season-ic')).toHaveCount(0);
   await page.waitForTimeout(1200);
   await page.screenshot({ path: '/tmp/lg-review-theme-seasons.png' });
 

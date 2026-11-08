@@ -169,6 +169,13 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const AGE_MUL = { autumn: [1.14, 0.93, 0.6], winter: [1.05, 1.08, 1.13], uwAutumn: [0.88, 0.97, 1.04], uwWinter: [0.76, 0.88, 1.0] };
   const FALL_STYLE = { leaves: { colors: ['#d9903b', '#c9762e', '#e3a83c', '#b85c28'], size: 0.085, speed: [0.3, 0.5], sway: 0.14 }, snow: { colors: ['#f4f8fb', '#e8eff5', '#dde8f0'], size: 0.055, speed: [0.14, 0.24], sway: 0.1 }, marine: { colors: ['#e8f1f7', '#d7e6ef', '#cfe0ea'], size: 0.045, speed: [0.06, 0.11], sway: 0.08 } };
   const seasonKind = (state, uw) => state === 'fresh' || (uw && state === 'autumn') ? null : uw ? 'marine' : state === 'autumn' ? 'leaves' : 'snow';
+  // Winter vegetation is bare, not green under snow (Thomas, 2026-11-08):
+  // leafy trees lose their leaves, pines carry snow, flowers and crops are gone.
+  const WINTER_SWAP = { tree: 'bareTree', forestTree: 'bareTree', blossomTree: 'bareTree', appleTree: 'bareTree', pine: 'snowPine' };
+  // Instance colors are brightness multipliers over green vertex colors, so
+  // leafy species can only be swapped out, not recolored: bushes go too.
+  const WINTER_KEEP = new Set(['snowPine', 'bareTree', 'rock', 'redRock', 'cactus', 'pebble', 'mound', 'sprout', 'flag']);
+  const winterSpecies = (name) => WINTER_SWAP[name] || (WINTER_KEEP.has(name) ? name : null);
   function makeFallPoints(items, size) {
     const pos = new Float32Array(items.length * 3), col = new Float32Array(items.length * 3);
     items.forEach((p, i) => { pos.set([p.x, p.y, p.z], i * 3); col.set([p.color.r, p.color.g, p.color.b], i * 3); });
@@ -269,9 +276,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       }
       const test = (x, z) => inHex(x, z, 0.86) && (!isPond || Math.hypot(x, z) > pondR + 0.14);
       const pts = scatter(rng, prof.plants, test, mobile ? 0.3 : 0.21, 0.9);
+      const cellBare = !mix.underwater && ageOf(path) === 'winter';
       pts.forEach((pt, i) => {
         const u = i / Math.max(1, pts.length - 1), tier = u < 0.28 ? 'sig' : u < 0.62 ? 'mid' : 'low', list = mix[tier];
-        const name = list[Math.floor(rng() * list.length)], sr = SIG_SCALE[name];
+        let name = list[Math.floor(rng() * list.length)];
+        if (cellBare) { name = winterSpecies(name); if (!name) return; }
+        const sr = SIG_SCALE[name];
         let s, thr, w;
         if (tier === 'sig') { s = sr ? sr[0] + rng() * (sr[1] - sr[0]) : 0.9; thr = 0.4 + rng() * 0.5; w = 0.3; }
         else if (tier === 'mid') { s = (sr ? sr[0] * 0.9 : 1.0) * (0.75 + rng() * 0.45); thr = 0.15 + rng() * 0.4; w = 0.3; }
@@ -453,15 +463,19 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       const cardCount = path.lessonData[i]?.progress.cards_total || 0;
       for (let k = 0; k < cardCount; k++) { const m = new THREE.MeshBasicMaterial({ color: '#e9e1cd' }), d = new THREE.Mesh(dotGeo, m); d.position.set(x + (k - (cardCount - 1) / 2) * Math.min(0.21, 1.1 / Math.max(cardCount, 1)), tTop + 0.04, z + 0.74); d.userData.own = true; g.add(d); dotMat.push(m); dotMeshes.push(d); }
       const key = `L${i}`;
-      plants.add(lessonName, { x, y: tTop + 0.01, z: z - 0.1, rot: r() * 6, s: big, thr: 0, w: 1, key, min: 0.2, tint: new THREE.Color().setScalar(0.96) });
+      const bare = season === 'winter' && !uw;
+      plants.add(bare ? winterSpecies(lessonName) || 'bareTree' : lessonName, { x, y: tTop + 0.01, z: z - 0.1, rot: r() * 6, s: big, thr: 0, w: 1, key, min: 0.2, tint: new THREE.Color().setScalar(0.96) });
       plants.add('mound', { x, y: tTop + 0.01, z: z - 0.1, rot: 0, s: 1.3, thr: 0, w: 0.25, key, inv: true });
       plants.add('sprout', { x: x + 0.1, y: tTop + 0.02, z: z - 0.05, rot: r() * 6, s: 1.4, thr: 0, w: 0.2, key, inv: true });
-      for (let k = 0; k < (mobile ? 3 : 6); k++) { const a = (k / 6) * 6.28 + i * 0.7, d = 0.55 + (k % 2) * 0.08; plants.add(mix.flower, { x: x + Math.cos(a) * d, y: tTop + 0.01, z: z - 0.1 + Math.sin(a) * d * 0.7, rot: r() * 6, s: 1.1 + r() * 0.3, thr: 0.8 + k * 0.025, w: 0.18, key }); }
+      if (!bare) for (let k = 0; k < (mobile ? 3 : 6); k++) { const a = (k / 6) * 6.28 + i * 0.7, d = 0.55 + (k % 2) * 0.08; plants.add(mix.flower, { x: x + Math.cos(a) * d, y: tTop + 0.01, z: z - 0.1 + Math.sin(a) * d * 0.7, rot: r() * 6, s: 1.1 + r() * 0.3, thr: 0.8 + k * 0.025, w: 0.18, key }); }
       nodes.push({ i, pos: new THREE.Vector3(x, tTop, z), ring, stone: tile, dotMat });
     });
     const inside = (x, z) => inHex(z, x, TRAIL_R - 0.5) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 3.4);
     scatter(r, prof.trailPlants, inside, mobile ? 0.8 : 0.5, TRAIL_R).forEach((pt, i, arr) => {
-      const u = i / arr.length, tier = u < 0.3 ? 'sig' : u < 0.65 ? 'mid' : 'low', lst = mix[tier], name = lst[Math.floor(r() * lst.length)], sr = SIG_SCALE[name];
+      const u = i / arr.length, tier = u < 0.3 ? 'sig' : u < 0.65 ? 'mid' : 'low', lst = mix[tier];
+      let name = lst[Math.floor(r() * lst.length)];
+      if (season === 'winter' && !uw) { name = winterSpecies(name); if (!name) return; }
+      const sr = SIG_SCALE[name];
       const s = tier === 'sig' ? (sr ? sr[0] + r() * (sr[1] - sr[0]) : 1) * 1.35 : tier === 'mid' ? 1.25 * (0.8 + r() * 0.5) : (name.includes('ock') ? 1.2 : 1.5) * (0.8 + r() * 0.5);
       plants.add(name, { x: pt[0], y: top + 0.03, z: pt[1], rot: r() * 6.28, s, thr: tier === 'sig' ? 0.3 + r() * 0.5 : tier === 'mid' ? 0.1 + r() * 0.4 : r() * 0.25, w: 0.3, key: 'T', grow: true, tint: new THREE.Color().setScalar(0.9 + r() * 0.2) });
     });
@@ -711,7 +725,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     pause: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z" fill="currentColor"/></svg>',
     replay: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 0 5.4 6.5h-1.7A3.8 3.8 0 1 1 8 4.2c1 0 1.9.4 2.6 1L8.7 7H14V1.7l-1.8 1.8A5.500 5.500 0 0 0 8 2.5z" fill="currentColor"/></svg>',
     sprout: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 14V8.5" stroke="#5ea84a" stroke-width="1.6" stroke-linecap="round"/><path d="M8 8.5C8 5.6 5.6 3.5 2.2 3.5c0 3 2.4 5 5.8 5z" fill="#5ea84a"/><path d="M8 7C8 4.2 10.2 2.5 13.8 2.5c0 2.8-2.2 4.5-5.8 4.5z" fill="#7fb877"/></svg>',
+    snow: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"><path d="M8 1.5v13M2.4 4.7l11.2 6.6M13.6 4.7L2.4 11.3"/><path d="M8 1.5 6.3 3.2M8 1.5l1.7 1.7M8 14.5l-1.7-1.7M8 14.5l1.7-1.7"/></g></svg>',
+    leaf: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.5 2.5C8 2.5 3.8 6.2 3.2 12.8 9.6 12.8 13.2 8.4 13.5 2.5z" fill="currentColor"/><path d="M4.2 12.3C6 9.3 8.7 6.6 12.6 3.9" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="1" stroke-linecap="round"/></svg>',
   };
+  const seasonIcon = (s) => s === 'winter' ? `<i class="lg-season-ic winter">${ICON.snow}</i>` : s === 'autumn' ? `<i class="lg-season-ic autumn">${ICON.leaf}</i>` : '';
   const dots = (n, on) => Array.from({ length: n }, (_, i) => `<i class="dot ${i < on ? 'on' : ''}"></i>`).join('');
   // Progress dots for paths (per lesson) and themes (per path): filled green only when complete, thicker border while in progress.
   const stateDots = (states) => states.map((st) => `<i class="dot ${st}"></i>`).join('');
@@ -782,7 +799,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p><ul class="lg-list">` +
-        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); const season = ageOf(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${stateDots(lessonStates(p))}</span></span><span class="pc">${season === 'winter' ? '❄️ ' : season === 'autumn' ? '🍂 ' : ''}${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
+        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); const season = ageOf(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${stateDots(lessonStates(p))}</span></span><span class="pc">${seasonIcon(season)}${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
       const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
@@ -792,7 +809,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       h += `<p class="lg-strip"><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><span class="lg-strip-count">${qc} of ${qt} questions correct</span></p>`;
       const seasonInfo = trail.path.practice;
       if (seasonInfo && seasonInfo.days_since != null && (seasonInfo.state === 'autumn' || seasonInfo.state === 'winter')) {
-        h += `<p class="lg-season ${seasonInfo.state}">${seasonInfo.state === 'autumn' ? '🍂' : '❄️'} Not practised for ${seasonInfo.days_since} days - a Review wakes this path up.</p>`;
+        h += `<p class="lg-season ${seasonInfo.state}">${seasonIcon(seasonInfo.state)} Not practised for ${seasonInfo.days_since} days - a Review wakes this path up.</p>`;
       }
       // Card dots sit on their own line below the name in every row; the
       // selected lesson's start action is the floating button at the
