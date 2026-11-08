@@ -1,0 +1,20 @@
+id: b4efc7dd-c0d1-4e58-bfa8-448acd76f3eb
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: For a fixed heat load, what sets the temperature rise from chip to surroundings?
+choices:
+- id: 0615df09-f62f-476b-89f2-3925c36c7cb6
+  text: Total storage capacity in the server
+- id: a9a7cb0d-a065-4a9e-92b9-c3b9e17113b2
+  text: Total length of the network cable
+- id: 7cdc32e6-db62-41fd-9ea0-bac2f1ba6627
+  text: Total floor area inside the building
+- id: d0a05a69-32d2-43c7-ac38-b47e24265bb9
+  text: Total resistance across the heat path
+correct_choice_ids:
+- d0a05a69-32d2-43c7-ac38-b47e24265bb9
+explanation: Thermal resistance accumulates through package, interface, cold plate or heat sink, and the rest of
+  the cooling path.
+archived: false

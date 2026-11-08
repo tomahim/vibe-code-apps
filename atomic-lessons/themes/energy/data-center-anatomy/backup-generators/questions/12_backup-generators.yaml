@@ -1,0 +1,20 @@
+id: b5faff13-caa2-42e5-99da-724f83dc5eb4
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why are more generators installed than the load strictly requires?
+choices:
+- id: 26d5929c-3cd6-4658-bce8-ba5b9f113fc3
+  text: Remove the need to check generator fuel quality
+- id: 534251fa-4f42-4139-868b-d3808bfa0c82
+  text: Cover a failed start or unavailable unit
+- id: a0f4747c-000d-4335-a0f5-d0e2f5a2defe
+  text: Guarantee unlimited operation without any fuel delivery
+- id: 9d0805e7-7ea8-4c65-a4ff-3dc31edfbca4
+  text: Avoid maintaining every generator after long running
+correct_choice_ids:
+- 534251fa-4f42-4139-868b-d3808bfa0c82
+explanation: Like car engines, gensets sometimes balk at starting; Tier III sites install N+1 so one failure changes
+  nothing.
+archived: false

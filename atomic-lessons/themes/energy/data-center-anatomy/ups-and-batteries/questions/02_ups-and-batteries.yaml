@@ -1,0 +1,20 @@
+id: fdeb6103-95eb-450d-9ce2-fdad5b7a594b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: How long do UPS batteries typically carry the load, per SemiAnalysis?
+choices:
+- id: e1ee48ad-fbad-48a5-b42f-973350f80f80
+  text: 5 to 10 minutes
+- id: 82bc21d4-f943-4e20-b75a-245e58077ffe
+  text: 5 to 10 days
+- id: bdb6f149-a4bb-4083-9a0e-74c7aa6a40fa
+  text: 5 to 10 hours
+- id: e09cb3dc-42b5-4e7c-9870-6bd3e5114ec5
+  text: 5 to 10 seconds
+correct_choice_ids:
+- e1ee48ad-fbad-48a5-b42f-973350f80f80
+explanation: 5-10 minutes of autonomy is enough to cover generator starts, not long outages; fuel covers the long
+  term.
+archived: false

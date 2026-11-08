@@ -1,0 +1,10 @@
+id: 7170f8dd-0130-4d40-9c6a-69e1ba60853b
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What does the acronym CRAC stand for?
+accepted_answers:
+- computer room air conditioner
+- computer room air conditioning
+explanation: The CRAC is the self-contained refrigeration unit of traditional data hall cooling.
+archived: false

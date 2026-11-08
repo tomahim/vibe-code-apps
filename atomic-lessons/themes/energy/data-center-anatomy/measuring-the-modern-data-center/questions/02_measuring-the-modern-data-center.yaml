@@ -1,0 +1,20 @@
+id: 5233aae3-44e3-4e35-92e4-8c77930c739b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is the global average PUE in Uptime Institute's 2025 survey?
+choices:
+- id: 31bb4780-70b3-432d-88de-85062b945f49
+  text: About 1.54
+- id: 3538a8b1-7aeb-456c-9b51-a8e01143c776
+  text: About 2.50
+- id: 37139c79-5eb5-46e9-a87a-f862c1075910
+  text: About 0.54
+- id: 7552223f-44ba-42c8-aa92-bd8bf51e5345
+  text: About 1.05
+correct_choice_ids:
+- 31bb4780-70b3-432d-88de-85062b945f49
+explanation: 1.54, roughly flat for six years; newer large facilities average nearer 1.44 and the best hyperscalers
+  approach 1.1.
+archived: false

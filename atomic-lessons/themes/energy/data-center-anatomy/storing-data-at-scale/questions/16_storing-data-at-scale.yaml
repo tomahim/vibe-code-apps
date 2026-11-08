@@ -1,0 +1,12 @@
+id: 7d100897-9184-478d-a89e-98a3d4589cc2
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: data that exists in only ______ place is already at risk of loss.'
+accepted_answers:
+- one
+- '1'
+- a single
+- one place
+explanation: Single copies are lost copies waiting to happen; redundancy is the first commandment of storage.
+archived: false

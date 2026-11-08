@@ -1,0 +1,20 @@
+id: bae75578-ea05-46b8-bd31-8aded665a958
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does the IEA project for global data center electricity consumption by 2030?
+choices:
+- id: 862014a7-9f6b-47ee-bfe9-b63c3ce31887
+  text: Exactly zero TWh in every scenario
+- id: 15712a4e-64dd-4245-966e-f7e73ec096f0
+  text: Around 945 TWh in its base case
+- id: 179669c8-71da-49f3-a983-61fd629181b2
+  text: Around 94.5 TWh in its base case
+- id: 21228c3a-c488-43dc-b09a-6a113f0ad9a4
+  text: Around 9,450 TWh in its base case
+correct_choice_ids:
+- 15712a4e-64dd-4245-966e-f7e73ec096f0
+explanation: The IEA's base case roughly doubles consumption to ~945 TWh by 2030, with accelerated servers driving
+  nearly half the increase.
+archived: false

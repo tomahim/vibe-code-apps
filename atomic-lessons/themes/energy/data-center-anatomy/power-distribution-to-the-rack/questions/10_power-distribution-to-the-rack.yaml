@@ -1,0 +1,19 @@
+id: 447ce508-222f-4136-b7bb-87f56a3b27b6
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why must technicians respect the A/B labeling in the data hall?
+choices:
+- id: 47e0af5d-1730-41fb-953f-f40b0dd6bea0
+  text: The labels identify the owner's application software license
+- id: 9a314fef-c88f-4782-a595-d81361832297
+  text: The labels set which Ethernet protocol is allowed
+- id: 9dbe35f1-4d84-4340-b402-94217163693d
+  text: An action on both paths can defeat redundancy
+- id: fef4599f-fa20-48e3-b56b-0ceec21aa967
+  text: Every A-side cable must carry DC rather than AC
+correct_choice_ids:
+- 9dbe35f1-4d84-4340-b402-94217163693d
+explanation: Human error that crosses the sides defeats 2N; the visible labeling is part of the engineering.
+archived: false

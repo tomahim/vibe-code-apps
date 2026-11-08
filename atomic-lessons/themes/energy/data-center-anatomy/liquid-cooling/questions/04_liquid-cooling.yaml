@@ -1,0 +1,20 @@
+id: 8e8fa08c-9c11-413e-a361-24bde88baa82
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is a cold plate?
+choices:
+- id: 0bd94435-7de5-424f-b20b-2a9679081a5c
+  text: A channelled plate transferring chip heat to coolant
+- id: 2d7bc161-17e9-49e9-8c1d-576488d6f5cc
+  text: A power shelf converting incoming AC to rack DC
+- id: 2b55337f-3223-4b21-9b1a-64d4dd16c672
+  text: A blanking panel preventing airflow through empty slots
+- id: dc5ff505-9cc1-4930-b34c-3b7c44821b52
+  text: A mounting rail supporting the server inside the rack
+correct_choice_ids:
+- 0bd94435-7de5-424f-b20b-2a9679081a5c
+explanation: The cold plate sits on the CPU or GPU and carries heat away in flowing liquid, replacing the traditional
+  heat sink's job.
+archived: false

@@ -1,0 +1,20 @@
+id: 916ea6c7-c512-4422-b67b-f1abf72499d8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What can a redundant RAID level protect against?
+choices:
+- id: c880b141-c330-47cd-b2bc-c0015aabbab9
+  text: Any accidental deletion regardless of backup policy
+- id: 642e51b3-ef2b-48db-b3f0-17583f7655a4
+  text: Every software error regardless of RAID configuration
+- id: c1d64f35-6853-4e56-a871-3445edfdb043
+  text: Specified drive failures with a redundant RAID level
+- id: 53f9dd57-3b04-40f8-bc7e-7695cecaf2cf
+  text: Any building-wide loss regardless of drive placement
+correct_choice_ids:
+- c1d64f35-6853-4e56-a871-3445edfdb043
+explanation: Redundant RAID levels can tolerate specified drive failures. RAID 0 has no redundancy, and RAID is
+  not a substitute for independent backups.
+archived: false

@@ -1,0 +1,20 @@
+id: d59dde1d-1bb8-427e-996d-6027c3208271
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why does raising the supply air setpoint save energy twice over?
+choices:
+- id: 82961226-aa9b-40b2-8d9f-4eb735134502
+  text: Less chilled-water flow and no climate dependence
+- id: b01fc37b-70ed-4c1d-a84d-2b79aa51b340
+  text: Less refrigeration work and more economizer hours
+- id: 96223e41-b385-411e-873c-d7e73f639038
+  text: Less equipment monitoring and more uncontrolled exhaust mixing
+- id: 44e5e42a-6335-46f9-8f54-0eae019b916f
+  text: Less useful compute and more electrical conversion stages
+correct_choice_ids:
+- b01fc37b-70ed-4c1d-a84d-2b79aa51b340
+explanation: Each degree of setpoint increase cuts compressor work and expands the hours when economizers can cool
+  without refrigeration.
+archived: false

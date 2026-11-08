@@ -1,0 +1,19 @@
+id: 5e612ed1-ef43-4622-a62c-5c001c5d31f9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What voltage do voltage regulator modules (VRMs) deliver to a modern chip?
+choices:
+- id: 4f5b32e0-aff1-4431-8df9-8da929330373
+  text: About 48 V AC
+- id: 0691016b-47f6-4202-aaa6-d72607425023
+  text: About 1 V DC
+- id: 63a1c13d-b682-4c40-8798-d11f4d39b43f
+  text: About 230 V DC
+- id: 81fdb372-3d99-4452-9228-3275a2ab6bb5
+  text: About 12 V AC
+correct_choice_ids:
+- 0691016b-47f6-4202-aaa6-d72607425023
+explanation: VRMs step the 12 V motherboard rail down to around 1 V at very high current for the silicon.
+archived: false

@@ -1,0 +1,20 @@
+id: 2c3e92de-3f5c-4174-956f-f70c5d7aee5e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: About how much power does an NVIDIA GB200 NVL72 rack draw?
+choices:
+- id: a1eb8307-8656-4b52-a12a-61b12bbcd1a0
+  text: Around 1.2 kW
+- id: ffe2486d-f5ed-4dda-9f7d-753d29f424d2
+  text: Around 12 kW
+- id: 94087fa0-4b33-48f7-a9ed-fb2b12d25bbe
+  text: Around 120 kW
+- id: a176f1a7-992e-4cad-b65a-24022bfe09bb
+  text: Around 1,200 kW
+correct_choice_ids:
+- 94087fa0-4b33-48f7-a9ed-fb2b12d25bbe
+explanation: The GB200 NVL72 packs 72 GPUs and 36 Grace CPUs into one rack drawing roughly 120 kW, with SemiAnalysis
+  citing up to 130 kW for the family.
+archived: false

@@ -1,0 +1,20 @@
+id: 4aff33e5-f059-4c33-bb27-64471f80a765
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: How is PUE calculated?
+choices:
+- id: c03a833f-5c2b-4407-b0be-fbc8f0b228d2
+  text: Cooling energy divided by total facility energy
+- id: 42cd8716-e7cf-4f19-ad28-71625cd9b771
+  text: IT energy divided by total facility energy
+- id: b80046dc-ffc7-4320-83a8-9e1c63f5853c
+  text: Total facility energy divided by cooling energy
+- id: 0dad7f28-9cea-4ff9-8400-73147b499ce1
+  text: Total facility energy divided by IT energy
+correct_choice_ids:
+- 0dad7f28-9cea-4ff9-8400-73147b499ce1
+explanation: PUE = total / IT. A perfect facility would be 1.0; everything above is overhead, mostly cooling and
+  conversion losses.
+archived: false

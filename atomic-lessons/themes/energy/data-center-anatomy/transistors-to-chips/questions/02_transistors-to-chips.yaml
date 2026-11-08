@@ -1,0 +1,20 @@
+id: fad84130-dbb2-436d-a078-cf3a7db82455
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What distinguishes a GPU's design from a CPU's?
+choices:
+- id: e14d44ec-3096-47cd-b795-e3e256c94dff
+  text: One arithmetic unit running every instruction
+- id: 50b3100e-be9d-47db-8181-efc3a2e6717b
+  text: Network ports directly executing every instruction
+- id: 61e16a77-3a64-4a0e-b105-4b4da844a9ad
+  text: Storage cells replacing all arithmetic units
+- id: a4f64025-d1f7-4f44-b783-68d2ca4b9206
+  text: Many arithmetic units working in parallel
+correct_choice_ids:
+- a4f64025-d1f7-4f44-b783-68d2ca4b9206
+explanation: 'GPUs trade versatility for massive parallelism: many simple arithmetic units running the same operation
+  on big batches of data.'
+archived: false

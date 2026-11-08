@@ -1,0 +1,19 @@
+id: eedfc831-9dc6-45d9-9409-cd9a6ecdc8e6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: How tall is one rack unit (1U)?
+choices:
+- id: c1b77f28-920f-44db-8568-cc1c1c2f0132
+  text: 100 mm
+- id: 2b3e0a30-07dd-4818-ab1b-a9aa6ff735b7
+  text: 25.4 mm
+- id: d2941ba8-d7d0-499e-841b-47e62c113390
+  text: 44.45 mm
+- id: da7f50df-0cff-453b-b5ef-795b8d8f8bc6
+  text: 190 mm
+correct_choice_ids:
+- d2941ba8-d7d0-499e-841b-47e62c113390
+explanation: One rack unit is 44.45 mm (1.75 inches); servers are 1U or 2U tall, and 19 inches is the rack width.
+archived: false

@@ -1,0 +1,20 @@
+id: 6a9518ca-a644-4bd9-b95d-988242f917d9
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: At PUE 1.5, what fraction of total facility energy is non-IT overhead?
+choices:
+- id: 375635d0-adcc-4c44-8402-4458b3c4c351
+  text: One-third of total facility energy
+- id: 98ccd0bc-c3e1-4d6e-8cd3-f4d424e451a7
+  text: One-tenth of total facility energy
+- id: 259a6398-29fe-4210-969e-a9707d8215d9
+  text: Two-thirds of total facility energy
+- id: 4774e814-7c3a-4ba9-b869-d59872f53254
+  text: One-half of total facility energy
+correct_choice_ids:
+- 375635d0-adcc-4c44-8402-4458b3c4c351
+explanation: 'For each 1 unit of IT energy there are 0.5 units of overhead: 0.5 / 1.5 = one-third. Cooling is only
+  one part of that overhead.'
+archived: false

@@ -1,0 +1,20 @@
+id: 01c88d6a-1430-4aab-bb41-670c103dc03f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which infrastructure inputs can constrain AI data-center expansion?
+choices:
+- id: 429b5616-465d-41d0-86e5-05d5b00bacc8
+  text: Software engineers always provide the only growth constraint
+- id: 19476639-b86a-4edf-bdd2-1592d173f598
+  text: Grid access and electrical equipment can constrain growth
+- id: 630d35e0-bd1e-4b9e-a2b6-3021219465b5
+  text: Network cables always provide the only growth constraint
+- id: 4596f616-640b-4ec1-a094-ddf713786d37
+  text: Storage media always provide the only growth constraint
+correct_choice_ids:
+- 19476639-b86a-4edf-bdd2-1592d173f598
+explanation: Grid connections and long-lead electrical equipment can constrain delivery. The binding limit varies
+  with project, geography and date.
+archived: false

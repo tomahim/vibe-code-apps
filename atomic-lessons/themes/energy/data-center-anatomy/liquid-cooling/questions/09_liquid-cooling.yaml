@@ -1,0 +1,20 @@
+id: 0bb47489-4388-49b2-90da-e18acbe995cc
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What distinguishes two-phase immersion cooling?
+choices:
+- id: ca688120-9df8-4722-9924-26728128a74b
+  text: Working fluid alternates between electrical and network cables
+- id: ca26ceb5-c697-4ec9-92d9-81374ec5835f
+  text: Working fluid boils and then condenses in the system
+- id: f2fbad72-6a22-4449-ac69-2da3b6c771dc
+  text: Working fluid is replaced by ice around every server
+- id: ea903033-0c62-40b6-a1cf-a841b5f70e21
+  text: Working fluid remains liquid throughout the heat-transfer loop
+correct_choice_ids:
+- ca26ceb5-c697-4ec9-92d9-81374ec5835f
+explanation: Two-phase fluids boil at low temperature; the phase change itself transports heat to the condenser
+  coils with no primary pump.
+archived: false

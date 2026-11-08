@@ -1,0 +1,19 @@
+id: 3c8550b0-1868-4d2c-ba17-3c567fff5e8a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is treating any single drive as trustworthy a design error?
+choices:
+- id: 4915d885-0bd4-4325-b8ba-d3e781db6510
+  text: Single drives cannot store complete data objects
+- id: a7affe4a-a200-4ef9-bc82-d013d8c2fcee
+  text: Fleet-scale failures require redundant data protection
+- id: 4d447061-8cc2-4ab0-be75-5a8b7328380f
+  text: Rack standards require at least two drives
+- id: 153adc6d-fbf6-489e-b9ea-700d8d2e063e
+  text: Drive firmware cannot detect any read errors
+correct_choice_ids:
+- a7affe4a-a200-4ef9-bc82-d013d8c2fcee
+explanation: The mathematics of large fleets guarantees failures; redundancy is the only defense.
+archived: false

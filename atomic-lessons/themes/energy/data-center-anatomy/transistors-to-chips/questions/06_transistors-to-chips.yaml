@@ -1,0 +1,20 @@
+id: 446b24bd-5730-4f9d-be1a-cac391308483
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is NVIDIA's specified maximum configurable TDP for H100 SXM?
+choices:
+- id: 7b0abee3-bcc6-49cb-9f89-e2bc83a82e28
+  text: Up to 7,000 W
+- id: ba465164-cab7-48b2-b5c5-2b0cf2556ee6
+  text: Up to 7 W
+- id: a25e87c8-8bf5-4ffd-8a53-196497c75146
+  text: Up to 70 W
+- id: 45f108de-aac9-45be-a380-24cf27799d7f
+  text: Up to 700 W
+correct_choice_ids:
+- 45f108de-aac9-45be-a380-24cf27799d7f
+explanation: NVIDIA specifies up to 700 W for H100 SXM. Other H100 variants have different ratings; TDP is not constant
+  measured draw.
+archived: false

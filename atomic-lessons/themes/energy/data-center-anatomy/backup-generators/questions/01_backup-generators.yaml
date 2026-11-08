@@ -1,0 +1,19 @@
+id: decf120f-140c-46cc-b380-91e751c5866c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Roughly how much power does one data center diesel generator deliver?
+choices:
+- id: 3828040e-f948-419e-a615-fb29c6298df8
+  text: Around 2 MW in the cited example
+- id: 66257374-14a0-4532-8088-1a04b3f496e6
+  text: Around 2 kW in the cited example
+- id: 6662ed64-689c-429d-9ad0-74f7f9efc7f6
+  text: Around 200 MW in the cited example
+- id: 54a4d42b-a852-4d79-a6d3-264c5a92241d
+  text: Around 20 W in the cited example
+correct_choice_ids:
+- 3828040e-f948-419e-a615-fb29c6298df8
+explanation: Container-scale gensets are typically rated around 2 MW; facilities install them in rows.
+archived: false

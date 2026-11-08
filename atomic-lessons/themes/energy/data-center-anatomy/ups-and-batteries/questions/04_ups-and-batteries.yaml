@@ -1,0 +1,19 @@
+id: eb0cb545-d90c-43cd-bdd0-567c285e3dcf
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is the UPS described as a bridge rather than a source of energy?
+choices:
+- id: 930cde71-11e4-4aff-bcbd-77bd3280525a
+  text: It creates indefinite energy without stored fuel or charge
+- id: 2ea54c8b-031e-480f-ab28-bf9c62c48780
+  text: It works only while utility power remains fully available
+- id: 95372176-1b76-462c-9fb9-8e85a68ea26b
+  text: It spans the gap before another source is ready
+- id: 087151d9-86ae-40dc-bb22-c241dd9b8872
+  text: It supplies only lighting while servers wait for generators
+correct_choice_ids:
+- 95372176-1b76-462c-9fb9-8e85a68ea26b
+explanation: The UPS never substitutes for supply; it hides the transition between supplies.
+archived: false

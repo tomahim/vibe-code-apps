@@ -1,0 +1,11 @@
+id: 16df8e57-a103-4f1f-b560-dd33853dded4
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What is the name of the ratio between real power (MW) and apparent power (MVA)?
+accepted_answers:
+- power factor
+- the power factor
+- PF
+explanation: The power factor measures how much of the apparent power does useful work.
+archived: false

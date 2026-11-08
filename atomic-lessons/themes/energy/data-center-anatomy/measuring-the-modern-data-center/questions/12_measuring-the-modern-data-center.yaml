@@ -1,0 +1,20 @@
+id: 6b278c2e-7d41-4137-8ab4-c93fe669618e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How are hyperscale campuses commonly priced when leased from colocation developers?
+choices:
+- id: 649f17e6-a480-4d3d-add6-dc00e18c927f
+  text: Maximum server core temperature per month
+- id: 294c9e34-ef84-4611-b952-27ca0a000e32
+  text: Total rack mounting-rail length per month
+- id: e329954c-28fd-46b5-8d3e-b5b3cb341376
+  text: Reserved critical IT kW per month
+- id: 1063cd8e-c9c0-45e6-bd72-bc7ec5d1755c
+  text: Peak processor clock frequency per month
+correct_choice_ids:
+- e329954c-28fd-46b5-8d3e-b5b3cb341376
+explanation: Colocation economics, from a quarter rack to a full build-to-suit campus, are priced per kW-month of
+  critical IT power.
+archived: false

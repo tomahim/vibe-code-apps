@@ -1,0 +1,19 @@
+id: d2dddbb1-32d4-44c4-ba20-1acf7358608e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does an air-side economizer do?
+choices:
+- id: 65c5f2c8-a3bb-4e44-b521-b1c383615e8a
+  text: Use diesel exhaust instead of chilled water
+- id: 16f8bf53-3643-4a65-bbe0-41670e8a98b6
+  text: Use suitable filtered outside air for cooling
+- id: 6fbad74b-1386-465c-913c-d662768f364d
+  text: Use battery heat instead of server heat
+- id: 8f3fb96f-f57d-4902-9c28-47583ec37aae
+  text: Use network traffic instead of refrigeration work
+correct_choice_ids:
+- 16f8bf53-3643-4a65-bbe0-41670e8a98b6
+explanation: When outside air is cool enough, economizers use it directly, bypassing the compressors entirely.
+archived: false

@@ -1,0 +1,20 @@
+id: 800eb999-b0e3-41f1-adbf-e6a2a7384c32
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What does a chip's Thermal Design Power (TDP) tell the facility engineer?
+choices:
+- id: 534b89d7-2d81-4f03-92d2-d9f3537e4968
+  text: A vendor-defined thermal design rating
+- id: a5ade884-1e1b-475b-b1c6-6d77ec0910e1
+  text: A measure of the supply voltage
+- id: 2f6a952d-e45f-4f99-a70e-2527712eb968
+  text: A count of the chip's transistors
+- id: efe00411-0bf5-483b-a9b1-5d727d5d7680
+  text: A direct measure of constant draw
+correct_choice_ids:
+- 534b89d7-2d81-4f03-92d2-d9f3537e4968
+explanation: TDP is a vendor-defined thermal design rating. Actual system power depends on workload and supporting
+  components as well.
+archived: false

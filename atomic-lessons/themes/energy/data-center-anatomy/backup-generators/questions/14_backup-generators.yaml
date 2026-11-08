@@ -1,0 +1,20 @@
+id: 10514343-ea7c-4d7c-9482-05e2a46b62ea
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How are some operators turning generator and battery fleets into revenue?
+choices:
+- id: 259452d7-4679-47cf-aa00-3a2b4e3e2a9f
+  text: Permanent operation regardless of air-quality restrictions
+- id: 195d584d-9ba1-4ef5-b2ec-b8aa1ef0f3e9
+  text: Permitted grid-support operation during demand peaks
+- id: caae625f-30d6-4067-84b7-9e80ae3246bd
+  text: Replacing all energy meters with fixed fuel estimates
+- id: 3e5d0c98-e278-46a6-9dfc-04a9e40c6aa1
+  text: Selling stored customer data to the electricity utility
+correct_choice_ids:
+- 195d584d-9ba1-4ef5-b2ec-b8aa1ef0f3e9
+explanation: Idle insurance assets can support the grid at peak times, earning revenue while staying tested and
+  ready.
+archived: false

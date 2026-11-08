@@ -1,0 +1,11 @@
+id: b6cdef40-e5a3-49a4-bd8b-012fdc0706a8
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What is the refrigeration machine at the heart of a central cooling plant called?
+accepted_answers:
+- chiller
+- the chiller
+- a chiller
+explanation: The chiller runs the vapor-compression cycle that moves heat from the chilled-water loop to the condenser loop.
+archived: false

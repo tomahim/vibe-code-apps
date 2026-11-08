@@ -1,0 +1,20 @@
+id: 7b5b435f-a1bd-4354-a932-b6dc1dfae183
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How do eco-mode UPS systems reach efficiencies above 99%?
+choices:
+- id: c3524fac-efc0-4e1c-ac25-b5354336c04e
+  text: Reduce IT work until the utility meter reads zero
+- id: e0a4eac0-4303-4042-9c92-c553bb743036
+  text: Bypass the conversion path during suitable input conditions
+- id: 972d6a02-6a68-4e23-ba22-1458393fa6fd
+  text: Store utility AC directly without any electrical conversion
+- id: 901a0439-59c6-445d-82d5-5bb9d64dc479
+  text: Remove all protection and permanently disconnect the inverter
+correct_choice_ids:
+- e0a4eac0-4303-4042-9c92-c553bb743036
+explanation: Eco mode skips the conversion path when grid quality is good, accepting a few milliseconds of transfer
+  time as the trade.
+archived: false

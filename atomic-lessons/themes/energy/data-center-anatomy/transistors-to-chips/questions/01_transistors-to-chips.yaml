@@ -1,0 +1,20 @@
+id: 4204b589-2768-4ff7-bbb5-f2d05ca03b61
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In a transistor used for computing, what decides whether current flows?
+choices:
+- id: fbd844ee-ea1a-4bcd-a2b5-8fdf614bf283
+  text: The number of neighboring memory chips
+- id: c59a8c41-b037-47b9-9cfd-fa0e2b1410e1
+  text: The voltage applied to its gate
+- id: ff7e0deb-5660-47bd-887c-a46014a9efb6
+  text: The voltage printed on its package
+- id: dee5787f-fdfd-4199-919f-958dd3d2379e
+  text: The width of its external connector
+correct_choice_ids:
+- c59a8c41-b037-47b9-9cfd-fa0e2b1410e1
+explanation: 'A transistor is an electrically controlled switch: the gate voltage opens or closes the conducting
+  path.'
+archived: false

@@ -1,0 +1,20 @@
+id: 08bcdb4b-5715-4fc0-999f-c4ec7ea52547
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: In a spine-leaf fabric, how many hops separate any two leaf switches?
+choices:
+- id: 64ce9312-a634-4fdd-9cf6-d31dcfb30e7d
+  text: Four links, via the grid
+- id: 8639130b-63a5-4776-8b69-e2e7acc9cc61
+  text: Two links, via a spine
+- id: 6453c08b-0c1e-42f2-a2ab-6cc7696b9d5a
+  text: Three links, via another leaf
+- id: a5f229ba-c23e-4020-96c5-5e8ada72c769
+  text: One link, directly between leaves
+correct_choice_ids:
+- 8639130b-63a5-4776-8b69-e2e7acc9cc61
+explanation: Every leaf connects to every spine, so leaf-to-leaf traffic takes exactly two hops with many equal-cost
+  paths.
+archived: false

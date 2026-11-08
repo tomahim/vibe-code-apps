@@ -1,0 +1,20 @@
+id: 00cde980-a1df-4e08-83ed-109a1254178d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why can a shared cooling failure affect a large part of a data hall?
+choices:
+- id: 4232ddad-fef6-4b50-81d8-b7fd39174df2
+  text: All cooling equipment must share one unprotected circuit
+- id: b39dcaae-6d11-4ee8-bd26-216c7f642248
+  text: Shared heat removal can affect many racks together
+- id: ff347e48-6c90-4822-86b3-dfce158abab6
+  text: Cooling faults never appear in monitoring or alarms
+- id: 5c29c093-104b-4e45-998c-35cd45fe3544
+  text: Electrical faults always repair themselves without intervention
+correct_choice_ids:
+- b39dcaae-6d11-4ee8-bd26-216c7f642248
+explanation: Heat removal may serve many racks, so a common failure can have broad effects. UPS-backed auxiliaries
+  and thermal storage can help manage the risk.
+archived: false

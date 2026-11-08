@@ -1,0 +1,10 @@
+id: ccd2b1ea-31ce-4869-94a4-250fd335e8cf
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: a data center''s ______ IT power is the maximum draw of its IT equipment, the number
+  colocation pricing is built on.'
+accepted_answers:
+- critical
+explanation: Critical IT power is the max power of IT equipment; colocation leases are priced per kW of it per month.
+archived: false

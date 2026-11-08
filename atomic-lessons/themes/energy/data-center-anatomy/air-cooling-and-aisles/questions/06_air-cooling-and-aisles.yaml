@@ -1,0 +1,20 @@
+id: 921a129e-2681-4da1-a7b0-4244e9b82410
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What does aisle containment add beyond the hot/cold aisle layout?
+choices:
+- id: 80478898-9a53-4c48-8169-7b87f6e3a00b
+  text: Doors and barriers that reduce supply-exhaust mixing
+- id: fe451be1-cd24-4b35-87fe-92a2cecba6e2
+  text: Thicker rack rails that reduce structural vibration
+- id: 257da27b-c89e-4e5e-b598-e8d8442483f9
+  text: More power strips that reduce server voltage drops
+- id: 64a19566-5172-493f-9bbe-c09ee19296a4
+  text: Extra switches that reduce network packet collisions
+correct_choice_ids:
+- 80478898-9a53-4c48-8169-7b87f6e3a00b
+explanation: Containment adds physical barriers that reduce mixing. Real designs still need attention to leakage
+  and pressure balance.
+archived: false

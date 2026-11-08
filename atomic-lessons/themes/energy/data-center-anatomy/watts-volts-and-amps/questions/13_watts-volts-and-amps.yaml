@@ -1,0 +1,20 @@
+id: b132985b-b967-4513-9a39-6e5cf5a5dcdb
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: In colocation pricing, what does a customer actually rent when they pay per kW per month?
+choices:
+- id: 81004924-ea17-472f-a4e7-60f69a0f0083
+  text: Purchased network traffic and transit routes
+- id: b533a2a1-8b30-4c42-a72e-283a3d4c97bf
+  text: Installed floor area and office furniture
+- id: 7640f447-aa20-4d62-ad5f-e8ed96cb89cb
+  text: Reserved IT power and supporting plant
+- id: b27611ae-2539-4db4-a37f-870b8287ebcd
+  text: Consumed electricity and utility taxes only
+correct_choice_ids:
+- 7640f447-aa20-4d62-ad5f-e8ed96cb89cb
+explanation: Colocation leases are priced per kW of critical IT power per month, because the costly part is the
+  electrical and cooling infrastructure, not the floor space.
+archived: false

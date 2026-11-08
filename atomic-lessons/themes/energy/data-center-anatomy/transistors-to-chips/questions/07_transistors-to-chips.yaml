@@ -1,0 +1,10 @@
+id: 11f10c61-a0b5-4aa0-bba8-209b2a82d3b0
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What effect, which ended in the mid-2000s, used to let transistors shrink without raising chip power density?
+accepted_answers:
+- Dennard scaling
+- Dennard's law
+explanation: Dennard scaling kept power per transistor falling with size; its breakdown ended free efficiency gains.
+archived: false

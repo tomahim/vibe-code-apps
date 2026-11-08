@@ -1,0 +1,20 @@
+id: 6743c39b-1bb8-49f3-89b3-0a54f18458df
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is electricity transmitted across the grid at hundreds of kilovolts?
+choices:
+- id: 509e4995-acb2-46a9-a815-2bbb6df2c93b
+  text: Lower current makes transformers store more energy
+- id: 8ba52db0-188b-422d-bf07-a0500cf4d57b
+  text: Higher voltage increases the speed of electrons
+- id: 5ea3155e-9e05-46f0-8a35-0614979258c9
+  text: Lower current reduces resistive transmission losses
+- id: 12289e5e-6d86-4c31-8fa1-fc956a76d276
+  text: Higher voltage eliminates all insulation requirements
+correct_choice_ids:
+- 5ea3155e-9e05-46f0-8a35-0614979258c9
+explanation: For the same power, higher voltage means lower current, and since losses scale with I-squared, transmission
+  losses fall dramatically.
+archived: false

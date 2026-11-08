@@ -1,0 +1,19 @@
+id: 6b108c40-f91c-4f33-9f27-5766616fb8c9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which pairing correctly matches metric to resource?
+choices:
+- id: f0b29b41-9297-4741-bce8-4c5f8d1d5738
+  text: 'PUE: energy overhead; WUE: water per IT energy'
+- id: 252866f6-1b3c-487b-93b9-07b2d1cd6ffa
+  text: 'PUE: annual downtime; WUE: total storage capacity'
+- id: 90a209dd-169e-4fbb-a795-43bb0be16dac
+  text: 'PUE: water per IT energy; WUE: energy overhead'
+- id: 1b96fafa-ea20-449f-aaee-033822f4b506
+  text: 'PUE: grid voltage; WUE: average network latency'
+correct_choice_ids:
+- f0b29b41-9297-4741-bce8-4c5f8d1d5738
+explanation: PUE tracks total facility energy over IT energy; WUE tracks liters of water per kWh of IT energy.
+archived: false

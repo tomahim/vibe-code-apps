@@ -1,0 +1,19 @@
+id: c06d77eb-c4a2-4bdc-a603-0ca5fd635678
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: A 10 MVA transformer serves a load with power factor 0.95. What real power can it deliver at most?
+choices:
+- id: 344d7d46-f423-4bfc-9d3b-c05fd3954b39
+  text: 9.5 MW
+- id: 926cf056-6e17-40c8-903b-0ada5c3e6442
+  text: 10 MW
+- id: 810425df-e549-4de1-9ba3-dd637192099c
+  text: 0.95 MW
+- id: 137ff021-a179-40e7-bb6f-fdd041cbabd7
+  text: 10.5 MW
+correct_choice_ids:
+- 344d7d46-f423-4bfc-9d3b-c05fd3954b39
+explanation: Real power = apparent power x power factor = 10 MVA x 0.95 = 9.5 MW.
+archived: false

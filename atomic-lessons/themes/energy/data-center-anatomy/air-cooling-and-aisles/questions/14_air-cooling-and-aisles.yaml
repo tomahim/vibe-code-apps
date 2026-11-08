@@ -1,0 +1,20 @@
+id: 2e4b8c48-a35d-4fea-9848-31b99d2512d6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the destination when air cooling can no longer cope?
+choices:
+- id: 2a36dd25-55fa-45bc-aecd-3cea35b9727e
+  text: Remove the heat-transfer path from chip to room
+- id: 00a9498c-f60b-4b4d-bc67-96bcd6a39474
+  text: Bring liquid heat capture closer to the components
+- id: 4756bc68-e298-41d6-9e5f-bae073aedf0d
+  text: Move every rack into the same exhaust aisle
+- id: 4372601b-9428-4e22-b63d-c2234a99221c
+  text: Increase voltage without changing the thermal design
+correct_choice_ids:
+- 00a9498c-f60b-4b4d-bc67-96bcd6a39474
+explanation: Liquid carries heat far better than air; direct-to-chip and immersion cooling answer the densities
+  air cannot serve.
+archived: false

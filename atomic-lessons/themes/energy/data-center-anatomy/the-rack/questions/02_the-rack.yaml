@@ -1,0 +1,19 @@
+id: 88b08e4a-88f7-4c52-a442-f57e7e745eca
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: How many rack units does a typical full-height rack offer?
+choices:
+- id: 557a7652-fd90-4f43-8c10-4682ac8a355e
+  text: 100U
+- id: 4a6f97d9-3dc0-4e5a-8f58-c69cc9cc8b6c
+  text: 42U
+- id: 973843f8-c527-4d75-bb48-90891140f93a
+  text: 24U
+- id: 38794866-22e0-48e0-abd6-f4f96d85be61
+  text: 19U
+correct_choice_ids:
+- 4a6f97d9-3dc0-4e5a-8f58-c69cc9cc8b6c
+explanation: A standard rack is about 42U tall, roughly two meters of equipment space.
+archived: false

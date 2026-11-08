@@ -1,0 +1,11 @@
+id: 855ca205-8369-497f-8da6-ae29d692bca9
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: What type of battery is replacing lead-acid in new UPS installations?
+accepted_answers:
+- lithium-ion
+- lithium
+- li-ion
+explanation: Lithium-ion offers higher density, longer life and less maintenance, at the cost of strict fire codes.
+archived: false

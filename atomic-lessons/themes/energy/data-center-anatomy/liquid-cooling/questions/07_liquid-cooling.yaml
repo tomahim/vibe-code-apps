@@ -1,0 +1,10 @@
+id: a91c9d27-2171-4e25-9027-438099e60429
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What does the acronym CDU stand for in liquid cooling?
+accepted_answers:
+- coolant distribution unit
+- coolant distribution unit (CDU)
+explanation: The CDU is the heat exchanger and pumping station between the IT racks and the facility water loop.
+archived: false

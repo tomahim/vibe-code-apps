@@ -1,0 +1,20 @@
+id: 7fc7fbb5-ca86-427a-975c-6e70945a924c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why is colocation capacity sold per kW rather than per square meter?
+choices:
+- id: 33ef0985-cc26-41c7-acf0-63635ac4b52f
+  text: Cooling capacity has no effect on rental cost
+- id: 122094b5-de58-4218-aa22-206a3c606926
+  text: Floor area already includes unlimited IT power
+- id: 4c69cb6f-50f7-496a-b6fb-88429bb89b0d
+  text: Power includes costly supporting electrical plant
+- id: 8b6fa00b-09cb-4a04-a348-fd3573d96108
+  text: Network speed is measured in electrical watts
+correct_choice_ids:
+- 4c69cb6f-50f7-496a-b6fb-88429bb89b0d
+explanation: 'SemiAnalysis: space in a data center is far less costly than the electrical and cooling equipment
+  that powers the equipment on it.'
+archived: false

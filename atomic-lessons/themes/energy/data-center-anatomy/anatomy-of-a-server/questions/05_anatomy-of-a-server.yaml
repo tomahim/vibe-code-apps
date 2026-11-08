@@ -1,0 +1,20 @@
+id: 09deb796-b073-4146-8f32-a3f6518bb7f0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why does a server have two power supply units on separate A and B feeds?
+choices:
+- id: c6e56992-27b1-4aee-9835-df27b267ea46
+  text: One supported path can carry the load
+- id: 5bf9827f-c0d4-4803-a6b5-9ad5f6fe5fa3
+  text: Both must work to produce any power
+- id: e83dd2f8-1dc1-48fe-a32c-06f1ebc0303e
+  text: Each supply feeds a separate CPU only
+- id: cddc809a-4b9f-4eb2-b1fd-610a43736855
+  text: One supply is reserved for networking only
+correct_choice_ids:
+- c6e56992-27b1-4aee-9835-df27b267ea46
+explanation: 'Dual PSUs on independent feeds are the last link of 2N redundancy: any upstream failure on one side
+  leaves the server running.'
+archived: false

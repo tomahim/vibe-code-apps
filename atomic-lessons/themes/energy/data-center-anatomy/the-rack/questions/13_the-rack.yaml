@@ -1,0 +1,19 @@
+id: 1fc9bff3-e7f8-4c5b-b710-50314ae7120c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the revenue formula of a colocation business, in essence?
+choices:
+- id: 18c596ad-da2f-48ba-9801-a06a7f9bbc3e
+  text: Racks times voltage times internet users
+- id: 3fc281c2-d89e-47dc-a4fe-f99fe6c840a9
+  text: Servers times temperatures times floor area
+- id: d2d54e13-4ec3-430c-9d94-695d23bbd08a
+  text: Racks times reserved kW times months
+- id: eb2f0814-9d16-48be-b1b0-21557b5288dc
+  text: Switches times cable length times storage
+correct_choice_ids:
+- d2d54e13-4ec3-430c-9d94-695d23bbd08a
+explanation: 'Colocation sells power capacity over time: racks at a committed kW density, billed monthly.'
+archived: false

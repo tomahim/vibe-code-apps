@@ -1,0 +1,9 @@
+id: 08e54834-1db1-4910-a66b-0ca4b6f3cefa
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: What does the acronym STS stand for?
+accepted_answers:
+- static transfer switch
+explanation: The static transfer switch moves loads between live power sources in milliseconds using power electronics.
+archived: false

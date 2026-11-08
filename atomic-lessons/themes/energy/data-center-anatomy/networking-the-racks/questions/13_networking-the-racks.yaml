@@ -1,0 +1,19 @@
+id: 97a656ae-52b5-49cd-9ad2-882f7c2e177b
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which sequence correctly traces a bit from a GPU to another building on campus?
+choices:
+- id: cd3f0bdb-1b22-4532-8639-8c818703f5b6
+  text: Facility fabric, GPU link, campus backbone, rack fabric
+- id: c1d72b1c-e44c-43a5-a79f-3d93e45b4139
+  text: GPU link, rack fabric, facility fabric, campus backbone
+- id: c1a250ba-e96b-489b-865e-ed227cbd90f0
+  text: Campus backbone, GPU link, facility fabric, rack fabric
+- id: c94c0bac-04bf-4660-9422-b20653eed178
+  text: Rack fabric, campus backbone, GPU link, facility fabric
+correct_choice_ids:
+- c1d72b1c-e44c-43a5-a79f-3d93e45b4139
+explanation: Scale-up fabric inside the rack, scale-out fabric between racks, then the campus backbone between buildings.
+archived: false

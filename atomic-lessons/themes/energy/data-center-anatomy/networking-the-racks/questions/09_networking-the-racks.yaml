@@ -1,0 +1,19 @@
+id: 132a2ed6-61f5-4247-be9e-4f88a6c06bfc
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: During AI training's all-reduce phase, what sets the pace of the whole cluster?
+choices:
+- id: 35539921-c245-4380-8e45-eefa955ac107
+  text: The nearest router regardless of workload
+- id: 34c298d2-acb0-4659-a923-2e77d6f8e31c
+  text: Slow participants and congested network links
+- id: 88cde02b-3cdb-41a2-b734-b03de392cbf0
+  text: The largest disk regardless of communication
+- id: 37f9bd8d-9dd1-4e24-963b-a8a9b66a7551
+  text: The newest GPU regardless of network state
+correct_choice_ids:
+- 34c298d2-acb0-4659-a923-2e77d6f8e31c
+explanation: 'Synchronized training advances at the speed of its stragglers: one slow link stalls thousands of GPUs.'
+archived: false

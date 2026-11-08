@@ -1,0 +1,20 @@
+id: 0d765b75-43b7-400c-bffb-d23fbd34cddb
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why do server fans become part of the cooling problem at high density?
+choices:
+- id: a70ac3f4-43f9-466b-a45e-d979e58dff9e
+  text: Moving more air itself consumes electrical power
+- id: 9d1ce7a6-342d-42f4-8b0f-3f747587949c
+  text: Fans create cold without moving any room heat
+- id: ee069cb3-3993-4895-8414-dda315d2868c
+  text: Fan speed determines the utility's transmission voltage
+- id: 4e31b88e-601d-4648-bb41-8363487a4e85
+  text: Fan noise converts server heat into useful electricity
+correct_choice_ids:
+- a70ac3f4-43f9-466b-a45e-d979e58dff9e
+explanation: Air carries little heat per volume, so extreme densities demand fan power that eats into the very power
+  budget being cooled.
+archived: false

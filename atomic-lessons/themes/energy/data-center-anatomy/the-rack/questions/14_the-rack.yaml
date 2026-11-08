@@ -1,0 +1,20 @@
+id: 12313ea4-dc63-48ea-a819-27f7c7373d51
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: A wholesale colocation customer typically leases what unit of capacity?
+choices:
+- id: 77d2faff-dd68-4cc2-bb8d-0dfc84c3f573
+  text: Individual processor cores with reserved memory
+- id: c5a55a59-9713-45b7-9bf4-0825f7713688
+  text: Storage objects with reserved retention periods
+- id: f727ef18-cb94-4c46-840b-666c06b08194
+  text: Network packets with reserved transfer times
+- id: 549e4ce7-05c5-46b7-9338-d921561163bf
+  text: Rows or rooms with reserved power
+correct_choice_ids:
+- 549e4ce7-05c5-46b7-9338-d921561163bf
+explanation: Wholesale tenants take larger contiguous blocks, from whole rows to multiple MW, unlike retail's per-rack
+  leases.
+archived: false
