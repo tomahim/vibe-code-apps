@@ -1,0 +1,22 @@
+id: 0bbe74b4-8d84-48ea-bb5e-9458ca9690f8
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Un plongeur de 55 kg passe de l'eau de mer à l'eau douce. Quelle modification
+  de lestage le manuel indique-t-il ?
+choices:
+- id: a1538bda-3f5f-4829-97e4-150f1867095f
+  text: 'Retirer 2 kg : de 50 à 60 kg, +/- 2,0 kg au passage mer / eau douce.'
+- id: 34326280-1ad4-4ab1-8444-89db26bc3e47
+  text: 'Ajouter 2 kg : l''eau douce pousse moins, il faut lester plus.'
+- id: 240994c4-b6cd-4c58-a4d8-50d97a2d06fe
+  text: 'Retirer 1,5 kg : la tranche de 40 à 50 kg s''applique.'
+- id: 14b746d6-af2a-4c17-9854-49eb59ea556b
+  text: 'Aucune : la salinité ne modifie pas le lestage.'
+correct_choice_ids:
+- a1538bda-3f5f-4829-97e4-150f1867095f
+explanation: 'Tableau indicatif du manuel : 50 à 60 kg, +/- 2,0 kg lors du passage
+  eau de mer / eau douce, le signe moins vers l''eau douce car la poussée d''Archimède
+  y est plus faible.'
+archived: false

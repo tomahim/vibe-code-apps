@@ -1,0 +1,19 @@
+id: 88f7dfa1-5b29-443b-b02a-15d4406e65da
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment une modification du lestage doit-elle se faire ?
+choices:
+- id: 29a0ae2c-f98f-43c4-b91b-276b2de84c7f
+  text: Progressivement, sans ajouter ni retirer plusieurs kilos d'un coup.
+- id: 99dbde94-aed4-47bc-b33a-da0c02af7cc2
+  text: Rapidement, en ajustant toute la ceinture dès la mise à l'eau.
+- id: 0a989555-c9ce-4791-9234-b75ccfaf6e62
+  text: Par paliers de cinq kilos, pour gagner du temps.
+- id: e6f6fdb1-1509-4dc3-b402-3f1188a45041
+  text: Uniquement entre deux saisons de plongée complètes.
+correct_choice_ids:
+- 29a0ae2c-f98f-43c4-b91b-276b2de84c7f
+explanation: Toute modification du lestage doit être progressive.
+archived: false

@@ -1,0 +1,22 @@
+id: f4031d86-492e-4619-b719-304fb74c1894
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel est le poids de l'air d'une bouteille de 15 litres à 200 bars selon le
+  manuel ?
+choices:
+- id: 140b607a-932b-4757-9c3f-5adcff2bc63c
+  text: 'Près de 4 kg : 15 x 200 x 1,29 g par litre = 3 870 g.'
+- id: 5669a734-33ae-4c7f-83b5-6d040c9bc9c7
+  text: 'Près de 2 kg : 15 x 200 x 0,65 g par litre = 1 950 g.'
+- id: d8a0b339-1ba1-4c2c-bc05-1ae712b4253a
+  text: 'Près de 8 kg : 15 x 200 x 2,6 g par litre = 7 800 g.'
+- id: b2255f3c-4354-4658-a2be-02f04940b26a
+  text: 'Négligeable : le manuel précise que l''air ne pèse rien.'
+correct_choice_ids:
+- 140b607a-932b-4757-9c3f-5adcff2bc63c
+explanation: 'L''air a un poids non négligeable, de l''ordre de 1,29 g par litre :
+  15 x 200 x 1,29 = 3 870 g, près de 4 kg, avec une incidence importante entre le
+  début et la fin de la plongée.'
+archived: false

@@ -1,0 +1,20 @@
+id: 217e54b7-c190-499e-a805-b22c3fb733f0
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Lors de ce test, le plongeur descend rapidement. Quel est le diagnostic ?
+choices:
+- id: d394489e-51d0-4c95-ab43-8966470d094c
+  text: 'Il est surlesté : un lestage correct amène à s''immerger en douceur.'
+- id: dc4a757c-f84b-4f5e-9183-8d3701afefd3
+  text: 'Il est sous-lesté : il faudrait ajouter du poids à la ceinture.'
+- id: 7fb6d8ef-fafa-45e0-927d-9dbc6147ef75
+  text: 'Il est correctement lesté : la descente rapide est normale.'
+- id: 306cb5f2-fb47-4d14-afd4-624b4f5e126d
+  text: 'Il manque d''air dans son gilet : le test est à refaire.'
+correct_choice_ids:
+- d394489e-51d0-4c95-ab43-8966470d094c
+explanation: S'il descend rapidement, il est surlesté ; s'il ne s'enfonce pas du tout,
+  il est sous-lesté.
+archived: false

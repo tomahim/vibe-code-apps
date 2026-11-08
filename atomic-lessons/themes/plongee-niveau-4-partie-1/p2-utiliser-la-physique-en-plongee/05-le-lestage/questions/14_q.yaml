@@ -1,0 +1,19 @@
+id: 5f5b6868-8e40-424c-a7aa-ef45257e7c31
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pour un plongeur lourd, au-delà du tableau, quelle règle donne le manuel ?
+choices:
+- id: 372ebfb8-2cc6-4afe-89c8-e66a76cd6dff
+  text: Environ +/- 350 g de lest par 10 kg de poids du plongeur.
+- id: 09eae4d7-12cd-4ec3-8b44-582b18adb1ce
+  text: Environ +/- 100 g de lest par 10 kg de poids du plongeur.
+- id: e84830d7-7b66-4141-92be-4b809a817744
+  text: Environ +/- 1 kg de lest par 10 kg de poids du plongeur.
+- id: 08e54caa-42ea-4d5e-9cd7-53546612d6ff
+  text: 'Aucune règle : il faut peser le plongeur dans l''eau.'
+correct_choice_ids:
+- 372ebfb8-2cc6-4afe-89c8-e66a76cd6dff
+explanation: Au-delà de 70 kg, le tableau donne +/- environ 350 g par 10 kg.
+archived: false
