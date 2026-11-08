@@ -1,0 +1,20 @@
+id: f74ac318-2563-4767-a3e4-32f6163e2c59
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle particularité des tables BS-AC le manuel note-t-il ?
+choices:
+- id: be4f3976-90e7-41e0-8b9b-9b40e950c6aa
+  text: Le palier le moins profond s'y déroule à 5 m, non à 3 m.
+- id: 3a2a4662-cfa1-4b68-8dfe-4a1f2a058236
+  text: Elles interdisent toute plongée au-delà de vingt mètres.
+- id: 1a62a91a-1a1f-4ae4-9812-05897a21a585
+  text: Elles suppriment tous les paliers de décompression.
+- id: 5b2a382d-6b9e-40e3-8958-91a8b90044a6
+  text: Elles se lisent exclusivement en pieds et en brasses.
+correct_choice_ids:
+- be4f3976-90e7-41e0-8b9b-9b40e950c6aa
+explanation: Les tables BS-AC (1988) sont calculées sur un seul compartiment théorique,
+  et leur palier le moins profond se déroule à 5 m et non à 3 m.
+archived: false

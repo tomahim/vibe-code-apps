@@ -1,0 +1,22 @@
+id: ce1ea843-b5c1-4ef2-b659-d9cdb5d1262e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que sont devenues les recherches de Hempleman, selon le manuel ?
+choices:
+- id: 28174285-244b-46f3-95cd-e02a5ed066c3
+  text: Reprises par Tom Hennessy, elles ont donné naissance en 1988 aux tables du
+    BS-AC, sur un seul compartiment théorique.
+- id: d15ae33a-edd5-4aa2-87fa-e1ade79610ff
+  text: Elles ont été abandonnées et n'ont débouché sur aucune table de plongée.
+- id: 70629e22-f83d-461b-b51b-04a824729766
+  text: Elles sont à l'origine des tables MN90 de la Marine nationale française.
+- id: cf781f78-2842-4c24-8d3f-63079b6320a7
+  text: Elles ont servi à concevoir les premiers détendeurs à deux étages.
+correct_choice_ids:
+- 28174285-244b-46f3-95cd-e02a5ed066c3
+explanation: Reprises par Tom Hennessy, ces travaux ont donné naissance en 1988 aux
+  tables du British Sub-Aqua Club (BS-AC), calculées sur un seul compartiment théorique
+  ; le palier le moins profond s'y fait à 5 m, pas à 3 m.
+archived: false

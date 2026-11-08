@@ -1,0 +1,23 @@
+id: fd4b7129-4191-4a95-ae38-fea692721203
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi les modèles de désaturation privilégient-ils l'une des deux phases
+  ?
+choices:
+- id: 0f0a8740-8f4d-4312-a02f-07a7497c6676
+  text: Il est extrêmement complexe de modéliser les deux ensemble ; la seconde est
+    considérée comme négligeable.
+- id: fe025984-ebc4-43b0-a0a1-fe00e1450a76
+  text: Parce que la diffusion n'existe pas réellement dans le corps humain.
+- id: c3ae819a-68ca-4438-95f2-d9bd30ddad34
+  text: Parce que la perfusion ne joue aucun rôle dans les échanges gazeux.
+- id: 55e7a384-41d4-43bd-978a-5d5412c51410
+  text: Pour rendre les calculs impossibles à vérifier par les plongeurs.
+correct_choice_ids:
+- 0f0a8740-8f4d-4312-a02f-07a7497c6676
+explanation: Modéliser perfusion et diffusion ensemble est extrêmement complexe ;
+  les modèles privilégient une phase et considèrent l'autre comme d'influence négligeable.
+  C'est un choix de simplification, comme les compartiments.
+archived: false

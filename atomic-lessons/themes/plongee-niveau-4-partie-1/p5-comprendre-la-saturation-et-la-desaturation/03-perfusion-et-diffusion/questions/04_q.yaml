@@ -1,0 +1,20 @@
+id: 33654891-b6ed-44ff-aeca-0938ab3834e9
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: 'Le modèle de Haldane est un modèle :'
+choices:
+- id: f2b5da4d-5163-43e7-b0c9-c8783fe87f8c
+  text: 'À perfusion : il ignore le phénomène de diffusion.'
+- id: fa4a5fe8-a31a-406a-b1b1-f865c4336fd1
+  text: 'À diffusion : il ignore le transport par le sang.'
+- id: 402eac1b-83f6-47ba-8e29-9a6da543d0ff
+  text: 'Mixte : il modélise les deux phases avec la même précision.'
+- id: 1488b28b-7474-465b-ab45-1a8a23495281
+  text: 'Sans hypothèse : il ne simplifie rien du fonctionnement du corps.'
+correct_choice_ids:
+- f2b5da4d-5163-43e7-b0c9-c8783fe87f8c
+explanation: 'Haldane = modèle « à perfusion » : il considère le transport des gaz
+  comme le facteur principal et néglige la diffusion.'
+archived: false

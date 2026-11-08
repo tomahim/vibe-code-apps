@@ -1,0 +1,21 @@
+id: dc11d6bb-2275-4a22-aab0-88ebe6f92cbe
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que considère un modèle « à diffusion » ?
+choices:
+- id: b0ed55b1-4ee9-4d8d-88a3-96a82595ec15
+  text: 'Que le phénomène limitatif est la diffusion : être transporté ne suffit pas
+    pour être transmis à 100 %.'
+- id: 9caa7515-271f-4a08-8405-82149160d104
+  text: Que la diffusion est instantanée dans tous les tissus du corps.
+- id: e4bb8655-f681-4365-b4cc-162819f52ddf
+  text: Que le sang transporte l'azote plus vite que les tissus ne l'absorbent.
+- id: a3042626-f66e-49c5-8b90-a6f8fb6ac01e
+  text: Que seules les zones très vascularisées présentent un risque d'accident.
+correct_choice_ids:
+- b0ed55b1-4ee9-4d8d-88a3-96a82595ec15
+explanation: Un modèle « à diffusion » considère qu'il ne suffit pas que le gaz soit
+  transporté pour être transmis à 100 % au sang ou aux tissus, et inversement.
+archived: false

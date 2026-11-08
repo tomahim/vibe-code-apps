@@ -1,0 +1,22 @@
+id: 2750849d-c19d-4a47-a7c5-0f13a2302bfc
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que cherche à prendre en compte le « slab model » de Hempleman ?
+choices:
+- id: 60ace8c3-f421-4bcc-be9d-e33f31c57847
+  text: La manière dont les gaz diffusent dans l'organisme, dont la résistance mécanique
+    des tissus et le cas des bulles non pathogènes.
+- id: c9d5dea8-d214-405e-9f52-2b1378733a59
+  text: Uniquement la vitesse moyenne du sang dans les artères coronaires du plongeur en immersion.
+- id: c3c5065a-1227-4268-b2d9-256c87ab3735
+  text: La température de l'eau de mer et son effet direct sur la pression partielle des gaz.
+- id: 59680cf6-8670-45db-81cb-7fdc7fd56727
+  text: La composition exacte et la proportion des gaz rares présents dans l'air inspiré.
+correct_choice_ids:
+- 60ace8c3-f421-4bcc-be9d-e33f31c57847
+explanation: Le modèle par diffusion de Hempleman (1952) prend en compte la résistance
+  mécanique des tissus lors de l'absorption et de l'élimination de l'azote, et envisage
+  le cas des bulles non pathogènes.
+archived: false

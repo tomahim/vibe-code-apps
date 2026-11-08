@@ -1,0 +1,21 @@
+id: a9965a1f-20d4-468f-9ed5-3ead978651b8
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle phrase résume correctement perfusion et diffusion ?
+choices:
+- id: 96c0e8aa-6b67-4655-badb-d23aac122046
+  text: Perfusion = transport par le sang ; diffusion = passage entre le sang et les
+    tissus.
+- id: 5554b436-4dae-4edb-882d-c8d5ca1e00b4
+  text: Perfusion = absorption par les tissus ; diffusion = transport par le sang.
+- id: 4e076cbe-8e5f-499f-8703-7a1ce8d41b76
+  text: Perfusion = élimination à l'expiration ; diffusion = absorption à l'inspiration.
+- id: f3a95fa4-f812-4596-b240-e37205eaacf2
+  text: Perfusion et diffusion désignent toutes deux la seule circulation sanguine.
+correct_choice_ids:
+- 96c0e8aa-6b67-4655-badb-d23aac122046
+explanation: 'Perfusion : le sang transporte le gaz. Diffusion : le gaz pénètre ou
+  quitte les tissus. Les deux phases ensemble décrivent les échanges gazeux sang/tissu.'
+archived: false
