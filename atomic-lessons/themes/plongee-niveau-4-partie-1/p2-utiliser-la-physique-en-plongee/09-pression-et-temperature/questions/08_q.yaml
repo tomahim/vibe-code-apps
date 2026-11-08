@@ -7,7 +7,6 @@ prompt: Quelle échelle de température faut-il utiliser dans la formule P / T =
 accepted_answers:
 - kelvin
 - le kelvin
-- Kelvin
 - K
 explanation: Les calculs se font avec la température absolue en Kelvin (°C + 273),
   jamais avec les degrés Celsius directement.
