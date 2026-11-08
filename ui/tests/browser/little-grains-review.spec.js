@@ -24,7 +24,7 @@ function mockApi(page, { reviewLog = null } = {}) {
         json: {
           themes: [{
             ...row(id(1), 'Sport'), description: 'Legends and races', progress: done,
-            learning_paths: paths.map((p, i) => ({ ...p, lessons: [lesson(p.id, i)] })),
+            learning_paths: paths.map((p, i) => ({ ...p, celebrated: true, lessons: [lesson(p.id, i)] })),
           }],
           rewards: { drops: 120, carrots: 12 }, recent_lessons: [],
         },
@@ -68,12 +68,12 @@ test('review quest: time choice drives the session size and the quiz runs', asyn
   await panel.getByRole('button', { name: /Review/ }).click();
   const quest = page.getByRole('dialog', { name: /Review - choose how much time/ });
   await expect(quest.getByRole('heading', { name: 'How much time do you have?' })).toBeVisible();
-  await expect(quest.getByRole('button', { name: /5 min/ })).toContainText('10 questions · 1 path');
-  await expect(quest.getByRole('button', { name: /10 min/ })).toContainText('20 questions · 2 paths');
-  await expect(quest.getByRole('button', { name: /15 min/ })).toContainText('30 questions · 3 paths');
+  await expect(quest.getByRole('button', { name: /^5 min/ })).toContainText('10 questions · 1 path');
+  await expect(quest.getByRole('button', { name: /^10 min/ })).toContainText('20 questions · 2 paths');
+  await expect(quest.getByRole('button', { name: /^15 min/ })).toContainText('30 questions · 3 paths');
   await page.screenshot({ path: '/tmp/lg-review-quest-desktop.png' });
 
-  await quest.getByRole('button', { name: /5 min/ }).click();
+  await quest.getByRole('button', { name: /^5 min/ }).click();
   expect(reviewLog).toEqual(['5']);
   const quiz = page.getByRole('dialog', { name: 'Review · 5 minutes' });
   await expect(quiz.getByText('REVIEW', { exact: true })).toBeVisible();
@@ -122,9 +122,9 @@ test('phone: review quest picker and aged garden stay usable', async ({ page }) 
 
   await panel.getByRole('button', { name: /Review/ }).click();
   const quest = page.getByRole('dialog', { name: /Review - choose how much time/ });
-  await expect(quest.getByRole('button', { name: /10 min/ })).toBeInViewport();
+  await expect(quest.getByRole('button', { name: /^10 min/ })).toBeInViewport();
   await page.screenshot({ path: '/tmp/lg-review-quest-mobile.png' });
-  await quest.getByRole('button', { name: /10 min/ }).click();
+  await quest.getByRole('button', { name: /^10 min/ }).click();
   const quiz = page.getByRole('dialog', { name: 'Review · 10 minutes' });
   await expect(quiz.getByText(/Hockey all time legends · The Great One/)).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-review-quiz-mobile.png' });
