@@ -1,0 +1,21 @@
+id: 05a059cc-7d9e-48f5-a27c-3fcf5a261424
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: À 25 m, après 30 minutes, où en est le compartiment C10 (période 10 min) ?
+choices:
+- id: 59f5f8c3-82d0-4de5-aed7-232c5072487e
+  text: '3 périodes écoulées : taux de saturation de 87,5 %, tension finale de 2,55
+    bar.'
+- id: 6809821f-dbba-4434-a726-b485df246354
+  text: '2 périodes écoulées : taux de saturation de 75 %, tension de 2,3 bar.'
+- id: 5ddec6dc-1458-4552-995a-fcd55e953d85
+  text: '6 périodes écoulées : le compartiment est entièrement saturé.'
+- id: 14585f15-47ca-4e50-bc5a-b6aaa8680681
+  text: '1 période écoulée : taux de saturation de 50 %, tension de 1,8 bar.'
+correct_choice_ids:
+- 59f5f8c3-82d0-4de5-aed7-232c5072487e
+explanation: 30 min / 10 min = 3 périodes, soit Ts = 87,5 % ; TN2 = 0,8 + (2 × 87,5
+  %) = 2,55 bar.
+archived: false

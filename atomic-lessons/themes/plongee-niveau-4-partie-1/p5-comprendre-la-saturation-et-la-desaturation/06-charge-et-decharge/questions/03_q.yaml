@@ -1,0 +1,22 @@
+id: 25f65e9e-b9ac-4d50-afe1-d5a07459eea8
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le modèle considère-t-il la phase de descente ?
+choices:
+- id: 96a7e5bc-aa61-4fb3-aed2-754156a96045
+  text: 'Comme instantanée : au début de la plongée, la tension des compartiments
+    est encore celle de la surface.'
+- id: 4d19db4a-6420-49d3-aa17-dd8518a5189a
+  text: Comme une période complète de charge pour chaque compartiment.
+- id: 330293d6-fa35-4be7-9900-64f9b8d20f80
+  text: Comme une phase de décharge anticipée de tous les compartiments.
+- id: e750645a-c2f2-4738-a0d9-43c8f9e63f7e
+  text: 'Comme négligeable : elle n''entre jamais dans aucun calcul.'
+correct_choice_ids:
+- 96a7e5bc-aa61-4fb3-aed2-754156a96045
+explanation: 'Le modèle considère la descente comme instantanée : la tension d''azote
+  des compartiments au tout début de la plongée est encore celle de la surface, 0,8
+  bar.'
+archived: false

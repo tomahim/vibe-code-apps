@@ -1,0 +1,20 @@
+id: ea3694d0-1d28-45f4-8a17-f191aba93694
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Dans l'exemple du manuel (25 m, 30 min), quel est le gradient G ?
+choices:
+- id: 0f579070-24b5-49c3-b6a4-606605b46428
+  text: '2 bar : PpN2 = 3,5 × 0,8 = 2,8 bar, donc G = 2,8 - 0,8 = 2 bar.'
+- id: 1a27b726-e3f0-4938-9819-5517e5c8d1eb
+  text: '0,8 bar : la tension d''azote de surface, conservée au fond.'
+- id: 081b02df-24a3-4872-bebf-a0c455b20752
+  text: '2,8 bar : la pression partielle d''azote respirée au fond.'
+- id: 24253135-01ab-4aca-b7b9-8ab07591b435
+  text: '1,07 bar : la pression absolue minimale supportée en remontée.'
+correct_choice_ids:
+- 0f579070-24b5-49c3-b6a4-606605b46428
+explanation: 'À 25 m (3,5 bar), PpN2 = 2,8 bar ; G = PpN2 - 0,8 = 2 bar : c''est la
+  quantité maximale d''azote que le compartiment peut dissoudre à cette profondeur.'
+archived: false

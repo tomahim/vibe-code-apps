@@ -1,0 +1,15 @@
+id: 2f63c5aa-c0a3-41b3-b2d3-19dd8b7c13a0
+position: 16
+type: type_answer_question
+after_card_position: 6
+prompt: Quel sigle désigne, dans les tables MN90, la valeur de l'azote résiduel en
+  sortie de plongée, utile pour les plongées successives ?
+accepted_answers:
+- gps
+- g p s
+- groupe de plongée successive
+- groupe de plongee successive
+explanation: Le GPS (Groupe de Plongée Successive) symbolise la tension d'azote résiduel
+  du compartiment C120 en sortie de plongée ; son évolution en surface est donnée
+  par le tableau « Évolution de l'azote résiduel ».
+archived: false
