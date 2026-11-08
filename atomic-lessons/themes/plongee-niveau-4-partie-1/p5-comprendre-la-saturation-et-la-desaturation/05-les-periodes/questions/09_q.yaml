@@ -1,0 +1,22 @@
+id: 8c8635eb-b0a1-493d-b1b5-3f7f830ffd55
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment évolue le seuil critique (Sc) selon la période des compartiments MN90
+  ?
+choices:
+- id: 87714905-4a30-4269-83dc-db83758db00b
+  text: Les compartiments rapides ont un Sc élevé, les compartiments lents un Sc faible
+    (jusqu'à 1,54 pour C120).
+- id: 72150f83-5d6d-4e3d-8cc7-1ce9911e053b
+  text: Tous les compartiments partagent exactement le même seuil critique.
+- id: 9d49e39a-c795-40ff-91e0-e34b9b09d5a8
+  text: Les compartiments lents ont un Sc élevé, les rapides un Sc faible.
+- id: b25afb4a-7280-4681-9a98-efac1181741f
+  text: Le Sc varie au hasard d'un compartiment à l'autre, sans logique.
+correct_choice_ids:
+- 87714905-4a30-4269-83dc-db83758db00b
+explanation: 'Le Sc diminue quand la période augmente : C10 : 2,38, C30 : 1,82, C60
+  : 1,58, C120 : 1,54. Les compartiments lents supportent une moindre sursaturation.'
+archived: false

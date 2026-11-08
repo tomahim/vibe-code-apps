@@ -1,0 +1,20 @@
+id: 20350a69-0d84-4be8-b904-37149f261505
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Dans la formule TN2 finale = 0,8 + (G × Ts), que représente 0,8 bar ?
+choices:
+- id: ab8aee10-e62f-4952-bf12-afe7dc072e5b
+  text: La tension d'azote de départ, celle du plongeur en surface avant la plongée.
+- id: d70bf4a2-8615-414c-a39d-ad8670c1d866
+  text: Le seuil critique du compartiment le plus lent des tables.
+- id: efb9dc11-7e3e-4e04-b19c-75a46ae90714
+  text: La pression absolue minimale à laquelle on peut remonter.
+- id: 98d5d337-efc8-4b41-9334-98b92afadbf1
+  text: Le taux de saturation atteint après une seule période.
+correct_choice_ids:
+- ab8aee10-e62f-4952-bf12-afe7dc072e5b
+explanation: '0,8 bar est la tension (ou pression partielle) d''azote de départ :
+  la quantité d''azote déjà dissoute dans le corps en surface.'
+archived: false

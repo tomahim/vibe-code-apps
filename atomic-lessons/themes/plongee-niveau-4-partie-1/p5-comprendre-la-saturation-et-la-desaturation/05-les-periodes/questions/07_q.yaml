@@ -1,0 +1,21 @@
+id: 4ae8241e-c1f1-4889-9b63-ef41ca2e11d2
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Avec G = 2 bar et un taux de saturation de 75 %, quelle est la tension finale
+  TN2 ?
+choices:
+- id: 57e593b2-c539-42ee-9add-4d66e04226de
+  text: '2,3 bar : TN2 = 0,8 + (G × Ts) = 0,8 + (2 × 0,75).'
+- id: 5c78b97d-375e-4aca-919a-4192eb6b6555
+  text: '1,5 bar : TN2 = G × Ts, sans autre terme.'
+- id: 68784cfe-a078-4f85-919b-fde249954402
+  text: '2,8 bar : TN2 = 0,8 + G, quel que soit Ts.'
+- id: 47f564be-86b8-4f7a-b3f0-a5c0e9cfc2a0
+  text: '3,1 bar : TN2 = (0,8 + G) × Ts.'
+correct_choice_ids:
+- 57e593b2-c539-42ee-9add-4d66e04226de
+explanation: 'TN2 finale = 0,8 + (G × Ts) = 0,8 + (2 × 0,75) = 2,3 bar : l''azote
+  de départ (0,8 bar) plus la fraction du gradient dissoute.'
+archived: false

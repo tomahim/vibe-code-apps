@@ -1,0 +1,22 @@
+id: 861a30a2-e100-4e72-8c24-259a5359dc7f
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que donne le calcul TN2 / Sc pour un compartiment ?
+choices:
+- id: 2db7a996-797f-447e-bde5-21e71dfa1b0a
+  text: La pression absolue minimale à laquelle ce compartiment peut théoriquement
+    remonter sans risque d'ADD.
+- id: 673e5e54-db02-4065-b480-77b208903a70
+  text: La tension d'azote maximale que ce compartiment peut stocker.
+- id: 2853cc80-af0b-414b-9e3c-17fa86602b89
+  text: Le temps de plongée restant avant l'entrée en saturation complète.
+- id: 2e5e6d36-cb65-447e-9586-369b3d693584
+  text: La vitesse de remontée autorisée exprimée en mètres par minute.
+correct_choice_ids:
+- 2db7a996-797f-447e-bde5-21e71dfa1b0a
+explanation: 'Pabs = TN2 / Sc : la pression absolue minimale à laquelle le compartiment
+  peut théoriquement remonter ; au cours de la remontée, le rapport TN2/Pabs ne doit
+  jamais dépasser Sc.'
+archived: false

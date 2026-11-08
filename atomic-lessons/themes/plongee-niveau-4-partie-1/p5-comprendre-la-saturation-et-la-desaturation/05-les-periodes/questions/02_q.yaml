@@ -1,0 +1,21 @@
+id: 7e6df4c1-af37-4eb5-a111-141baf1f383a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: La période d'un compartiment dépend-elle de la valeur du gradient de pression
+  ?
+choices:
+- id: e57effda-36f5-49d4-8316-85395ffe2def
+  text: 'Non : elle est indépendante de la valeur du gradient, c''est une constante.'
+- id: 113c3c49-b065-48a4-b19a-b7eea799e457
+  text: 'Oui : elle double à chaque fois que le gradient double.'
+- id: 817779e3-45f9-43a6-b352-364da6225661
+  text: 'Oui : elle diminue quand la profondeur de la plongée augmente.'
+- id: 13409b75-36f3-4117-b68d-f5303755dd77
+  text: Oui, mais uniquement pour les compartiments les plus lents.
+correct_choice_ids:
+- e57effda-36f5-49d4-8316-85395ffe2def
+explanation: 'La période est indépendante de la valeur du gradient : c''est une constante
+  propre au compartiment, sa « demi-vie ».'
+archived: false
