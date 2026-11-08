@@ -1,0 +1,25 @@
+id: 1cf95a74-b29d-4c7a-8dbc-bed4d2434c6a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels matériaux composent une cartouche filtrante, selon le manuel ?
+choices:
+- id: fc0eb387-3a5d-4dfe-8636-1bd6b86b9aea
+  text: Charbon activé pour l'huile et les odeurs, feutre pour les poussières, tamis
+    moléculaire ou gels de silice pour l'humidité.
+- id: e79fb12f-47f5-46b8-9471-8220a3de8146
+  text: Uniquement du papier filtre, identique à celui utilisé dans les moteurs de
+    voiture.
+- id: 01e8bee4-a810-4ac0-8bac-3a6f907fefeb
+  text: De la chaux sodée pour piéger l'azote, et de petits graviers pour retenir
+    l'humidité.
+- id: dcc3b4a5-8929-45d0-a1e2-d35735924367
+  text: De la laine de verre et du sable très fin, qui retiennent ensemble toutes
+    les impuretés.
+correct_choice_ids:
+- fc0eb387-3a5d-4dfe-8636-1bd6b86b9aea
+explanation: Les cartouches combinent charbon activé (huile, odeurs), feutre (poussières),
+  tamis moléculaire et/ou gels de silice (humidité) ; certains modèles intègrent de
+  l'Hopcalite pour piéger des traces de CO et CO2.
+archived: false

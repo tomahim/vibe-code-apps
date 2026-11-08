@@ -1,0 +1,23 @@
+id: 898d2ca1-9b51-417f-9f0c-186ea929af0b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la première parade contre la contamination de l'air au gonflage
+  ?
+choices:
+- id: 82415fe8-894c-416e-b958-28cd0c68c54a
+  text: Un local ventilé et une prise d'air éloignée de toute source de pollution
+    potentielle.
+- id: aee85e69-5be6-462e-8ce5-6faa5e2c02d9
+  text: Une bouteille entièrement vidée de son air avant chaque gonflage.
+- id: 794954fc-7ac9-40cc-a217-56e7eebdfa17
+  text: Un gonflage réalisé uniquement pendant la nuit, par air frais.
+- id: 9d1d8e44-8ef0-4c30-9978-644613a662ac
+  text: Un filage de la bouteille toujours effectué en plein soleil.
+correct_choice_ids:
+- 82415fe8-894c-416e-b958-28cd0c68c54a
+explanation: La vigilance lors des opérations de gonflage commence par un local ventilé
+  et une prise d'air éloignée de toute source de pollution potentielle (gaz d'échappement,
+  par exemple).
+archived: false

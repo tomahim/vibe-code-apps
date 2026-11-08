@@ -1,0 +1,22 @@
+id: af1be300-c706-4b85-8155-64439401a89d
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que contient l'air en phase de compression, selon le manuel ?
+choices:
+- id: 022ce04e-20d9-4a48-a9a6-9e1e8a7d7e84
+  text: De l'eau, en provenance de l'air ambiant aspiré, et de l'huile, issue du système
+    de lubrification.
+- id: d80f1b58-aa0f-4d50-b693-7c6cb217623a
+  text: Uniquement de l'oxygène et de l'azote parfaitement purs et secs.
+- id: 02bb0fbd-58a4-4f9d-8078-e8a992d3fb49
+  text: De l'hélium et de l'argon ajoutés volontairement par le compresseur.
+- id: cd1aabe0-70ec-4a8f-90ea-faf0b4369ade
+  text: Du gaz carbonique injecté pour améliorer la conservation de l'air.
+correct_choice_ids:
+- 022ce04e-20d9-4a48-a9a6-9e1e8a7d7e84
+explanation: L'air en compression contient de l'eau (air ambiant aspiré) et de l'huile
+  (lubrification) ; l'eau peut endommager les pièces et favoriser la rouille, et un
+  excès de liquide peut perturber les soupapes.
+archived: false
