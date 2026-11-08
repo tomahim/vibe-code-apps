@@ -1,0 +1,21 @@
+id: 6a0c84a8-d868-472f-a84b-d6c429a1d8a3
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le rôle du système nerveux périphérique (SNP) ?
+choices:
+- id: 60b36a51-f920-4b68-a908-417c196a6325
+  text: Relier le système nerveux central aux différentes parties du corps.
+- id: c275ca29-5c27-4baa-9713-c74417684b70
+  text: Produire les hormones de régulation de l'organisme.
+- id: e8aec81d-0dde-4b0c-9810-4920d090018e
+  text: Protéger la moelle épinière des chocs extérieurs.
+- id: 9e0ddef5-6f4f-49d1-afd3-bd37ffb784fd
+  text: Commander uniquement les mouvements volontaires.
+correct_choice_ids:
+- 60b36a51-f920-4b68-a908-417c196a6325
+explanation: 'Le SNP relie le SNC aux différentes parties du corps pour envoyer ou
+  recevoir des informations : nerfs crâniens pour la tête et le cou, nerfs rachidiens
+  pour le reste du corps.'
+archived: false

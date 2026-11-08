@@ -1,0 +1,20 @@
+id: df85fb09-93de-499f-aaf6-fba445125c5b
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel automatisme le manuel cite-t-il chez le plongeur averti ?
+choices:
+- id: d4720e28-041e-466a-9d40-5bd0840197c5
+  text: Expirer pendant la remontée.
+- id: 4363c39c-9c53-4dba-a701-6cc4cfcb567f
+  text: Fermer les yeux à la mise à l'eau.
+- id: 65863c79-e254-4747-bd7e-ea8f6b915890
+  text: Retenir sa respiration aux paliers.
+- id: e5f032ec-5086-4b41-ba8c-4ddf55658ba7
+  text: Palmer sans jamais s'arrêter.
+correct_choice_ids:
+- d4720e28-041e-466a-9d40-5bd0840197c5
+explanation: 'Expirer pendant la remontée est un automatisme chez le plongeur averti,
+  mais pas encore chez le débutant : le guide de palanquée doit en tenir compte.'
+archived: false

@@ -1,0 +1,13 @@
+id: cabbd8f8-b8b9-4726-bdc3-a3b9eec010b7
+position: 17
+type: type_answer_question
+after_card_position: 4
+prompt: Comment s'appellent les zones de connexion d'un neurone à un autre neurone,
+  un muscle ou une glande ?
+accepted_answers:
+- synapses
+- synapse
+- les synapses
+explanation: La transmission de l'influx nerveux s'effectue par les synapses, qui
+  peuvent se connecter à un autre neurone, un muscle, une glande...
+archived: false

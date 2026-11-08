@@ -1,0 +1,20 @@
+id: fc68dced-403f-46d4-b259-9a435b4fd754
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que comprend le système nerveux central (SNC) ?
+choices:
+- id: 039f566a-cdbe-49cc-a49f-251a78ca2c8d
+  text: L'encéphale, prolongée par la moelle épinière.
+- id: 74717aec-d69e-4d1f-b339-8e3d0382dc42
+  text: Les nerfs crâniens et les nerfs rachidiens.
+- id: 7df63de5-c020-4af1-96ba-7b80c68711a1
+  text: Le cœur et les sept glandes endocrines.
+- id: 52fbfc7b-86b0-4ab8-91b1-6b00b957202d
+  text: Les poumons et la cage thoracique.
+correct_choice_ids:
+- 039f566a-cdbe-49cc-a49f-251a78ca2c8d
+explanation: Le SNC se compose de l'encéphale (cerveau, cervelet, tronc cérébral)
+  prolongée par la moelle épinière, protégée par la colonne vertébrale.
+archived: false
