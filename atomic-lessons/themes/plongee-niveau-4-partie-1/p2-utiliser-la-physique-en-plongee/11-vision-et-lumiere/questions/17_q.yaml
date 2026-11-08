@@ -5,10 +5,7 @@ after_card_position: 2
 prompt: Sous l'eau sans masque, l'image se formant en arrière de la rétine, que devenons-nous
   selon le manuel ?
 accepted_answers:
-- hypermétropes
 - hypermétrope
-- hypermetrope
-- hypermetropes
 explanation: 'L''effet optique de la courbure de la cornée est annulé : nous devenons
   hypermétropes et les objets apparaissent troubles.'
 archived: true

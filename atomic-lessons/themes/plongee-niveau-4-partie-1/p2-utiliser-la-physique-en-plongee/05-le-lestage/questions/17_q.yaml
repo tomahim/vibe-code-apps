@@ -6,6 +6,5 @@ prompt: Quel nom le manuel donne-t-il au phénomène par lequel le volume d'air 
   dans les poumons fait varier la flottabilité ?
 accepted_answers:
 - poumon-ballast
-- poumon ballast
 explanation: Le poumon-ballast peut faire varier la flottabilité de 2 à 3 litres.
 archived: true
