@@ -1,0 +1,21 @@
+id: 566123fe-6a4e-4e91-87d4-01239f3ebc9a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel organe transforme le mouvement mécanique en impulsions électriques ?
+choices:
+- id: dbc50328-6d85-4ac6-b3a3-804c8e6dfe61
+  text: La cochlée, grâce à ses cellules ciliées.
+- id: ea2c1d0e-6512-4a16-afc6-263ac00aedb0
+  text: Le tympan, grâce à sa membrane vibrante.
+- id: 7efddfd7-f0d7-4e77-818a-66909b01c2ea
+  text: La fenêtre ronde, grâce à sa souplesse.
+- id: 829ec7b2-ca05-4147-8c9f-330f8dcaeae4
+  text: Le pavillon, grâce à sa forme en entonnoir.
+correct_choice_ids:
+- dbc50328-6d85-4ac6-b3a3-804c8e6dfe61
+explanation: Le liquide de la cochlée entre en mouvement ; ses cellules ciliées sont
+  stimulées et transforment ce mouvement mécanique en impulsions électriques transmises
+  au cerveau par le nerf cochléaire.
+archived: false

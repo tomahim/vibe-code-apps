@@ -1,0 +1,23 @@
+id: ae1637e0-1c21-47f9-aa82-fd4056ac7b1c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le trajet du son dans l'oreille selon le manuel ?
+choices:
+- id: e046a59f-3bd3-4875-8f09-5c53b50d931e
+  text: Pavillon, conduit auditif, tympan, osselets, fenêtre ovale, cochlée, nerf
+    cochléaire.
+- id: db467a34-8d59-47af-9bd4-73f5bf5476e3
+  text: Pavillon, tympan, trompe d'Eustache, fenêtre ronde, nerf optique.
+- id: 1177b341-e0a3-4989-8e09-787c5f16f616
+  text: Conduit auditif, cochlée, osselets, tympan, cerveau, fenêtre ovale.
+- id: c9196d9c-d280-4eca-a27b-15acacdba325
+  text: Tympan, pavillon, fenêtre ovale, trompe d'Eustache, cerveau.
+correct_choice_ids:
+- e046a59f-3bd3-4875-8f09-5c53b50d931e
+explanation: Le pavillon canalise les ondes vers le conduit auditif et le tympan ;
+  les osselets amplifient la vibration transmise à la fenêtre ovale ; le liquide de
+  la cochlée entre en mouvement et les cellules ciliées transforment ce mouvement
+  en impulsions électriques transmises au cerveau par le nerf cochléaire.
+archived: false

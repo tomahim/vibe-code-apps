@@ -1,0 +1,20 @@
+id: 1f4bfac6-c76f-4a68-bcf3-015efe806a0a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que conclut le manuel sur la localisation des bruits en plongée ?
+choices:
+- id: faf8f371-9dd2-41c3-8201-d9a9f6193977
+  text: Il est très difficile pour un plongeur de déterminer la source d'un bruit.
+- id: e5202d7a-978c-415c-b84b-a167d1a1da6e
+  text: Le plongeur localise mieux les bruits sous l'eau que dans l'air.
+- id: 17f63f13-a06b-417f-b36d-85c5c713caee
+  text: Seuls les bruits très graves peuvent être localisés sous l'eau.
+- id: 169b5597-117b-49a4-a303-dd32e5fbf43a
+  text: La localisation est possible après quelques plongées d'entraînement.
+correct_choice_ids:
+- faf8f371-9dd2-41c3-8201-d9a9f6193977
+explanation: 'Il est très difficile pour un plongeur de déterminer la source d''un
+  bruit : entendre ne suffit pas à localiser.'
+archived: false
