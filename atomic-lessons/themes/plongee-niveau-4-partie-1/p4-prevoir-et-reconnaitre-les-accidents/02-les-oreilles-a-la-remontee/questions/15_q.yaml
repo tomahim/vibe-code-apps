@@ -1,0 +1,26 @@
+id: 5c6c969f-fb5d-4969-9486-a57bb03c80ec
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel risque supplémentaire le Valsalva à la remontée présente-t-il en cas
+  de foramen ovale perméable ?
+choices:
+- id: 3cb25eae-b885-4baf-b40f-a6d9528bb5ac
+  text: Un accident de désaturation, par la mise en surpression du thorax favorisant
+    le passage de bulles dans le circuit artériel.
+- id: c8ddd0f4-f1d6-4e39-aedb-75c92a834502
+  text: Une perforation immédiate et bilatérale des deux tympans, par surpression
+    de l'oreille moyenne.
+- id: 153ee4ca-6d31-417b-9d36-c03febc4b4b7
+  text: Une hémorragie du nez abondante, qui interrompt définitivement la plongée
+    en cours.
+- id: 76ebf589-6207-48f3-ad71-d495cd808c99
+  text: Une crise d'hyperoxie brutale, provoquée par l'afflux d'air comprimé dans
+    les poumons.
+correct_choice_ids:
+- 3cb25eae-b885-4baf-b40f-a6d9528bb5ac
+explanation: 'Les mises en surpression du thorax (Valsalva, effort à la remontée)
+  favorisent le passage de bulles dans le circuit artériel en cas de FOP : risque
+  d''ADD.'
+archived: false

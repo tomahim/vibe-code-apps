@@ -1,0 +1,23 @@
+id: 02fd7edb-2073-4a2e-a672-8760ecf34646
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Difficile de distinguer mal de mer, vertige alterno-barique et ADD : que
+  fait-on ?'
+choices:
+- id: 821e44f4-f7bf-47c8-bf1d-c67224d7eaee
+  text: 'Pas de diagnostic : procédure d''urgence avec oxygène et évacuation immédiate
+    vers un centre médicalisé.'
+- id: 15c72da5-d0b1-40f8-9555-9fea2dc5d1c5
+  text: On attend une heure pour voir si les symptômes passent d'eux-mêmes.
+- id: 912f99f1-40c9-4dc5-b6de-43088ba73a35
+  text: On demande au plongeur de décrire précisément ses symptômes pour trancher.
+- id: 0fef8093-6811-4906-826c-cd44593ca329
+  text: On fait redescendre le plongeur à trois mètres pour un palier test.
+correct_choice_ids:
+- 821e44f4-f7bf-47c8-bf1d-c67224d7eaee
+explanation: 'Un plongeur non-médecin n''a pas à se livrer à un diagnostic : en cas
+  de doute, oxygène et évacuation immédiate vers un centre médicalisé (caisson hyperbare,
+  etc.).'
+archived: false

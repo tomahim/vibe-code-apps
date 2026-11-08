@@ -1,0 +1,21 @@
+id: ca957589-3031-435e-b9ed-481c7ff21f1f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment un barotraumatisme des sinus se manifeste-t-il le plus souvent ?
+choices:
+- id: d6c771ee-be41-4af3-8bb3-ee14e6423ac7
+  text: Une douleur vive au niveau du front, parfois avec des saignements, ou de la
+    mâchoire.
+- id: 431e944f-5962-4f35-867c-0abc224802cd
+  text: Une douleur diffuse de tout le crâne accompagnée de nausées violentes.
+- id: 96e5342e-e042-4778-bb5a-694a3f665b1b
+  text: Un saignement de nez abondant suivi d'une perte de connaissance.
+- id: 185a7bf6-f71c-4c44-9182-5043b6a3d3b3
+  text: Une gêne auditive bilatérale avec bourdonnements dans les deux oreilles.
+correct_choice_ids:
+- d6c771ee-be41-4af3-8bb3-ee14e6423ac7
+explanation: 'Douleur vive au front (parfois saignements) ou à la mâchoire : tel est
+  le tableau le plus fréquent selon le manuel.'
+archived: false

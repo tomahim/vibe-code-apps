@@ -1,0 +1,21 @@
+id: e455df1f-0a84-4b2b-a470-c29f0b7ed1fb
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi faut-il équilibrer tôt plutôt qu'attendre la douleur ?
+choices:
+- id: fcf1178f-a3d9-4bef-9dff-e1cd4b30eeeb
+  text: Plus on tarde, plus la congestion gagne la trompe d'Eustache et plus les manœuvres
+    deviennent difficiles.
+- id: 8a42553a-9f77-40c6-bac5-eb7c91c74f17
+  text: La douleur signale que la cochlée est déjà détruite de façon définitive.
+- id: 1e1c5f97-75e6-4bcb-b37a-579a2819f70b
+  text: La douleur provoque toujours une syncope immédiate sous l'eau.
+- id: c552c241-9f3e-4155-b17e-a6c66043c11d
+  text: Équilibrer tôt permet de garder les mains libres pour le mouillage.
+correct_choice_ids:
+- fcf1178f-a3d9-4bef-9dff-e1cd4b30eeeb
+explanation: 'L''anticipation évite le cercle vicieux : une fois la trompe congestionnée,
+  chaque manœuvre devient plus difficile et plus risquée.'
+archived: false

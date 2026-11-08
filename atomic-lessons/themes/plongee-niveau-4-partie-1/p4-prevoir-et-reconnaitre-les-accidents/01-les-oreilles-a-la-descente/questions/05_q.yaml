@@ -1,0 +1,25 @@
+id: ec8099b2-a25e-43ee-839d-1b9d101c0e0b
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que le « coup de piston » ?
+choices:
+- id: 565b8e00-f8ad-48f2-a10e-91bd1f07f59f
+  text: 'Un barotraumatisme de l''oreille interne : l''étrier enfoncé dans la fenêtre
+    ovale provoque une brusque augmentation de pression dans le milieu liquidien.'
+- id: 89021128-3c64-44f8-8f68-942385003a2d
+  text: Une inflammation du conduit auditif externe provoquée par la flore microbienne
+    des eaux chaudes, avec douleurs lancinantes.
+- id: 8b8e28ba-ca8e-4e90-a91b-f851df5cdad1
+  text: Une douleur vive des sinus maxillaires, qui irradie vers la mâchoire au cours
+    de la descente.
+- id: fac72306-ddb5-42e5-95b7-43604d9abb2e
+  text: Une perforation du tympan provoquée par un nettoyage trop appuyé au coton-tige
+    avant la plongée.
+correct_choice_ids:
+- 565b8e00-f8ad-48f2-a10e-91bd1f07f59f
+explanation: 'Le coup de piston de l''étrier dans la fenêtre ovale est le barotraumatisme
+  de l''oreille interne : perte d''audition et/ou troubles de l''équilibre, temporaires
+  ou définitifs.'
+archived: false

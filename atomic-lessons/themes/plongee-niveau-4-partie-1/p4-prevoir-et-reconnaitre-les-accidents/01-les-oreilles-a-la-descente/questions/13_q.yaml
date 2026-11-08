@@ -1,0 +1,20 @@
+id: 626aea99-94ba-4a76-a118-aa8dafc3aae0
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Combien de temps demande la cicatrisation d'un tympan perforé ?
+choices:
+- id: 3d8d0386-5c04-43fb-b734-2d9e7d15aa68
+  text: Plusieurs semaines.
+- id: d6d25644-093e-46cf-acd6-99fe6469802f
+  text: Quelques heures.
+- id: 97603878-3706-4d25-bd2e-d2cf3b468bce
+  text: Quarante-huit jours exactement.
+- id: e7eb9c19-78e4-4ac5-bd12-ab84f1bbdd62
+  text: Une année complète sans plongée.
+correct_choice_ids:
+- 3d8d0386-5c04-43fb-b734-2d9e7d15aa68
+explanation: Le manuel indique que la cicatrisation d'une perforation du tympan demande
+  plusieurs semaines.
+archived: false

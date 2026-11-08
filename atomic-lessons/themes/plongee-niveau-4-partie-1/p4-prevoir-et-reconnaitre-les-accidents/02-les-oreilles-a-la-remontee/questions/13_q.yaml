@@ -1,0 +1,24 @@
+id: af35c3a8-64fd-4dbf-9e44-f85cec3cbf11
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que faire en cas de légère douleur d'oreille dont la cause est connue ?
+choices:
+- id: 27faf674-4f2e-448a-ab64-ff27453e6be2
+  text: Ne plus plonger, rincer à l'eau douce, sécher, ne pas toucher, protéger du
+    vent, et consulter un ORL si la douleur persiste ou en cas de baisse auditive.
+- id: add99bb4-ac1a-4954-a9bd-0e5b4a0276f4
+  text: Continuer à plonger normalement, en équilibrant simplement plus souvent pendant
+    les descentes suivantes.
+- id: b93fcb3b-2d68-4215-9cdf-49523026a4d0
+  text: Mettre des gouttes anesthésiantes dans l'oreille et reprendre la plongée dès
+    le lendemain matin.
+- id: ad751b3f-7d50-416f-8da4-27a68f092d56
+  text: Nettoyer soigneusement le conduit auditif au coton-tige après chacune des
+    plongées.
+correct_choice_ids:
+- 27faf674-4f2e-448a-ab64-ff27453e6be2
+explanation: Pour une légère douleur de cause connue (équilibrage tardif), on cesse
+  de plonger et on protège l'oreille ; persistance ou baisse auditive = médecin ORL.
+archived: false

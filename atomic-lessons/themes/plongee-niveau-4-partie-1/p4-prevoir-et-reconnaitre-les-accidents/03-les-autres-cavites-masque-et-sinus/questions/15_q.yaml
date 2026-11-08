@@ -1,0 +1,22 @@
+id: bbce5e46-1e28-40db-a4db-9f072fc352f5
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi le manuel déconseille-t-il les décongestifs locaux avant la plongée
+  ?
+choices:
+- id: b88a4788-7519-4eeb-8878-eb26082156d5
+  text: Leur action est limitée dans le temps et peut cesser en cours de plongée.
+- id: 908e89f6-39db-4894-a084-01b7878f65f6
+  text: Ils sont interdits par la réglementation fédérale de 2020.
+- id: 7e81ce05-7dd3-42d9-a94c-bcd27a4946d1
+  text: Ils provoquent des saignements de nez à chaque immersion.
+- id: 7522896d-0026-4d8b-89fd-a2a8e1b2f56c
+  text: Ils augmentent la consommation d'air de façon mesurable.
+correct_choice_ids:
+- b88a4788-7519-4eeb-8878-eb26082156d5
+explanation: 'Comme pour les oreilles, l''effet des décongestionnants est limité dans
+  le temps : il peut s''atténuer en cours de plongée, bloquant l''équilibrage au pire
+  moment.'
+archived: false

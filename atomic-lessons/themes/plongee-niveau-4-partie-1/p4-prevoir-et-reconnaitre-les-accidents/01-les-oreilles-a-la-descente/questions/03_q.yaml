@@ -1,0 +1,24 @@
+id: 8b17e366-28e2-4074-ad02-f2c144dccdd8
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: En quoi l'otite barotraumatique est-elle un cercle vicieux ?
+choices:
+- id: 33a436b9-3e73-4608-8353-4139c2d5fa6f
+  text: La congestion du tympan gagne la trompe d'Eustache, réduit sa perméabilité
+    et rend l'équilibrage encore plus difficile.
+- id: 642de85e-3ab2-48ea-9ff5-25a17613fe31
+  text: La douleur empêche le plongeur de respirer, ce qui provoque immédiatement
+    une surpression pulmonaire.
+- id: 9a25928e-7379-4800-a5b6-c334ffee0ed5
+  text: Le sang afflue dans l'oreille interne et détruit définitivement la cochlée
+    à chaque descente.
+- id: 36a82497-fbfa-49e8-8525-5d2ab4cef615
+  text: Le tympan se perfore dès les premiers mètres, ce qui aggrave chaque plongée
+    suivante.
+correct_choice_ids:
+- 33a436b9-3e73-4608-8353-4139c2d5fa6f
+explanation: 'La congestion gagne la trompe d''Eustache et réduit sa perméabilité
+  : les manœuvres d''équipression deviennent plus difficiles, ce qui aggrave l''otite.'
+archived: false

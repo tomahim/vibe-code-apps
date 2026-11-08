@@ -1,0 +1,21 @@
+id: 0a91ca8f-8199-41e1-bb99-bf1c404d6111
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Avec quoi la douleur de la mâchoire liée aux sinus peut-elle être confondue
+  ?
+choices:
+- id: 2b956747-7a4a-4a64-af4d-1b33d4bcd3a1
+  text: Avec une douleur dentaire aiguë.
+- id: 3d24d332-072d-4227-b2d3-3789e1298103
+  text: Avec une otite barotraumatique de l'oreille moyenne.
+- id: 4762e71f-8345-4840-9831-4c732b68163b
+  text: Avec une crampe des muscles masticateurs due à l'embout.
+- id: 89eea47e-4c6d-46ac-aa96-bbfda37a5aaa
+  text: Avec un vertige alterno-barique de la remontée.
+correct_choice_ids:
+- 2b956747-7a4a-4a64-af4d-1b33d4bcd3a1
+explanation: La douleur des sinus maxillaires ressentie à la mâchoire peut être confondue
+  avec une douleur dentaire aiguë.
+archived: false

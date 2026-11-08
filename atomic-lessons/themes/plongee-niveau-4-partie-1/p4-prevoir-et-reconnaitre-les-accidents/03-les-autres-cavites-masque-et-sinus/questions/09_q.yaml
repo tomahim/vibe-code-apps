@@ -1,0 +1,22 @@
+id: c5415743-d507-42cb-acad-edab3ab5c257
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel point commun le manuel trace-t-il entre masque, oreilles et sinus ?
+choices:
+- id: eb6a6dd3-5823-4066-90bc-19444076f821
+  text: Compenser tôt et en douceur, ne jamais insister en cas de douleur, ne pas
+    plonger encombré et se méfier des décongestionnants.
+- id: 0e06bd8c-3a4d-4401-bb54-5cb9e8034d33
+  text: Ces trois cavités se percent facilement et imposent toujours une évacuation
+    médicale.
+- id: 2b965fce-4e21-4433-bc87-cc6a270a78a9
+  text: Ces trois accidents ne concernent que les plongeurs débutants en piscine.
+- id: a48df3f2-2a28-4dcc-a42e-c46485c56a7b
+  text: Ces trois cavités imposent un Valsalva puissant toutes les deux minutes.
+correct_choice_ids:
+- eb6a6dd3-5823-4066-90bc-19444076f821
+explanation: 'La logique est identique pour toutes les cavités aériennes : anticipation,
+  douceur, pas d''insistance, pas de plongée encombrée.'
+archived: false

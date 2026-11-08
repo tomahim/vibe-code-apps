@@ -1,0 +1,21 @@
+id: a276bad3-2ec1-43ac-bfe6-edb189516f72
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi ne faut-il jamais plonger enrhumé ?
+choices:
+- id: f672ddc6-1f58-4411-8df2-7f80c88ec122
+  text: Les mucosités obstruent la trompe d'Eustache et les décongestionnants n'ont
+    qu'un effet limité dans le temps.
+- id: 2205eac5-d4e7-4a7c-862e-e26022b42a6d
+  text: Le rhume fatigue l'organisme et double la consommation d'air à chaque profondeur.
+- id: bda9074e-5a0c-451c-8a60-4e49528c7fc4
+  text: Les éternuements sous l'eau font perdre l'embout du détendeur à chaque descente.
+- id: 480796b3-3dc2-405e-b1da-004ff763b433
+  text: Le rhume fragilise le tympan, qui se perfore alors sans aucun signe avant-coureur.
+correct_choice_ids:
+- f672ddc6-1f58-4411-8df2-7f80c88ec122
+explanation: Une trompe obstruée par des mucosités ne permet plus l'équilibre des
+  pressions, et l'effet des produits décongestionnants s'atténue avec le temps.
+archived: false
