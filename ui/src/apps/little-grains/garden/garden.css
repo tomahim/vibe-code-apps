@@ -107,3 +107,6 @@
 .lg-review-copy small{font:400 11.5px var(--sans);color:#8a7a5c}
 .lg-season{margin:8px 0 0;font:600 12.5px var(--sans);color:#8a6a34}
 .lg-season.winter{color:#5d7a8c}
+.lg-season-ic{display:inline-flex;vertical-align:-1.5px;margin-right:3px}
+.lg-season-ic.winter{color:#7fa8c9}
+.lg-season-ic.autumn{color:#c9762e}
