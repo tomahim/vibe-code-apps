@@ -1,0 +1,21 @@
+id: 3b2e5643-2185-4b09-b323-e216871d6684
+position: 18
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle proportion du poids du corps le sang représente-t-il, et quel volume
+  ?
+choices:
+- id: b42fd29f-a832-41bf-93d1-40977a036a6e
+  text: Environ 8 % du poids, soit 5 à 6 litres.
+- id: 5abd8f9e-9451-42b4-afe3-43544877163f
+  text: Environ 50 % du poids, soit 40 litres.
+- id: 7219b9bc-4450-402c-996c-b4dc6e25edad
+  text: Environ 1 % du poids, soit 1 litre.
+- id: 6b89730b-7c7e-4670-85ed-5421dcc541f0
+  text: Environ 25 % du poids, soit 20 litres.
+correct_choice_ids:
+- b42fd29f-a832-41bf-93d1-40977a036a6e
+explanation: Le sang représente en moyenne 8 % de notre poids, soit 5 à 6 litres,
+  composé à plus de 50 % d'eau.
+archived: false

@@ -1,0 +1,22 @@
+id: 2528c28f-ebba-41e2-8a64-54e8306ef5c1
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle particularité des capillaires le manuel souligne-t-il ?
+choices:
+- id: 3730a5bf-ff35-43f0-978f-366cb7ee9bba
+  text: Des parois extrêmement fines qui facilitent les échanges, pour une surface
+    de contact d'environ 7000 m² chez un adulte.
+- id: 40904efa-edee-4a13-9017-927fcd6ae48a
+  text: Des parois épaisses et rigides qui empêchent tout échange entre le sang et
+    les cellules.
+- id: f1c244af-892b-428e-ac1f-c745708ba1ee
+  text: Un diamètre de 3 centimètres, le plus grand de tout le corps humain.
+- id: 20f0f215-23b9-4056-b318-b55beeefd8d8
+  text: L'absence totale de sang en leur intérieur pendant l'effort musculaire.
+correct_choice_ids:
+- 3730a5bf-ff35-43f0-978f-366cb7ee9bba
+explanation: Les capillaires ont des parois de 8 millièmes de mm et représentent environ
+  7000 m² de surface d'échange entre le sang et les cellules.
+archived: false

@@ -1,0 +1,22 @@
+id: 780b1040-4c8d-4ffa-887f-03208a399c8c
+position: 20
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Qu'est-ce que l'hématose ?
+choices:
+- id: b3e389ba-c0c5-458a-add8-d40a3e0229bc
+  text: L'ensemble des échanges alvéolo-capillaires permettant l'apport d'oxygène
+    au sang et l'élimination du gaz carbonique.
+- id: 591d3ffc-ca8d-4032-b2b7-b768799fd1c8
+  text: La coagulation accélérée du sang au contact de l'eau froide pendant l'immersion.
+- id: ad3b626b-b27c-4b55-8c1d-3dc631a65f4a
+  text: Le passage direct du sang veineux dans l'aorte sans passer par les poumons.
+- id: a43bc41c-4210-44de-8a53-78f5637b7952
+  text: La production de nouveaux globules rouges par la moelle osseuse pendant la
+    plongée.
+correct_choice_ids:
+- b3e389ba-c0c5-458a-add8-d40a3e0229bc
+explanation: 'Au contact des alvéoles, le sang se charge en O2 et rejette le CO2 :
+  c''est l''hématose ; le sang hématosé est le sang riche en oxygène.'
+archived: false

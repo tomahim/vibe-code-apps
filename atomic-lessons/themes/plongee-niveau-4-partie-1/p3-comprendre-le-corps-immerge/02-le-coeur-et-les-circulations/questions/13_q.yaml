@@ -1,0 +1,20 @@
+id: c2047154-6810-4cad-b097-af0485ab5f78
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À partir de quels seuils le manuel définit-il bradycardie et tachycardie ?
+choices:
+- id: 720ff833-3e14-4a10-bccc-d5bba451a115
+  text: Bradycardie au-dessous de 60 battements/min, tachycardie au-delà de 100 battements/min.
+- id: 47fae432-5172-46a4-a098-66350176aa81
+  text: Bradycardie au-dessous de 100, tachycardie au-delà de 60.
+- id: 6016a5a5-9fd0-4802-a3a3-199e19885335
+  text: Bradycardie au-dessous de 30, tachycardie au-delà de 200.
+- id: a94df813-dbd3-4561-af98-d04227153eec
+  text: Bradycardie au-dessous de 70, tachycardie au-delà de 70.
+correct_choice_ids:
+- 720ff833-3e14-4a10-bccc-d5bba451a115
+explanation: 'Bradycardie : rythme au-dessous de 60 contractions par minute ; tachycardie
+  : accélération durable au-delà de 100 battements par minute.'
+archived: false

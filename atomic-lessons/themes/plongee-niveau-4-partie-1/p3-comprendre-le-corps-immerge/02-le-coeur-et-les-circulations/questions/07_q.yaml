@@ -1,0 +1,20 @@
+id: 90b0427a-5186-4919-b359-d0c96545dc51
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qui assure le contrôle du rythme cardiaque selon le manuel ?
+choices:
+- id: 1a9fe08e-eced-4d10-85ee-9bd79a201639
+  text: Le système nerveux végétatif.
+- id: b38f2ad3-89fd-4a02-ae34-0f8a843f1efa
+  text: La volonté consciente du plongeur.
+- id: cb60aac7-b2cb-4149-a03d-fb5fe8f01a3c
+  text: Les muscles de la cage thoracique.
+- id: 1023355c-9466-49dd-bad6-61db2ca658c9
+  text: Les valvules des veines caves.
+correct_choice_ids:
+- 1a9fe08e-eced-4d10-85ee-9bd79a201639
+explanation: Le contrôle du rythme cardiaque est assuré par le système nerveux végétatif
+  (autonome).
+archived: false

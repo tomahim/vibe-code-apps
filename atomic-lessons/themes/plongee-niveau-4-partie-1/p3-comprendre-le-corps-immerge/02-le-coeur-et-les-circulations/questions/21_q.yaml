@@ -1,0 +1,23 @@
+id: ec5ab656-f6f4-47e3-b769-6d74e41ea865
+position: 21
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Comment l'azote circule-t-il selon le manuel ?
+choices:
+- id: 038a14b3-0441-4ede-90b1-d74a4062eb79
+  text: Il se dissout dans le sang à la descente et au fond, puis repasse des tissus
+    vers le sang veineux à la remontée et dans les heures qui suivent.
+- id: 37a93e71-1130-4e8d-974c-da57133e32ed
+  text: Il reste bloqué définitivement dans les poumons dès la première plongée de
+    la journée, sans jamais en ressortir.
+- id: 7fad68fe-cfc3-4cf3-bbab-0801f2c196db
+  text: Il est éliminé entièrement à la descente par les reins et la peau.
+- id: c7b878dc-1e74-4200-a094-dc829e48fed7
+  text: Il ne pénètre jamais dans le sang ni dans les tissus du plongeur.
+correct_choice_ids:
+- 038a14b3-0441-4ede-90b1-d74a4062eb79
+explanation: À la descente et au fond, une partie de l'azote en excès se dissout dans
+  le sang ; à la remontée, le phénomène s'inverse et la désaturation génère des bulles
+  silencieuses.
+archived: false

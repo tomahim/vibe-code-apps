@@ -1,0 +1,11 @@
+id: f1056fff-792c-4f17-8161-39ba02b5bb75
+position: 23
+type: type_answer_question
+after_card_position: 2
+prompt: Comment s'appelle le muscle qui constitue principalement le cœur ?
+accepted_answers:
+- myocarde
+- le myocarde
+explanation: Le cœur est principalement constitué du myocarde, un muscle gros comme
+  le poing, situé dans le médiastin entre les deux poumons.
+archived: false

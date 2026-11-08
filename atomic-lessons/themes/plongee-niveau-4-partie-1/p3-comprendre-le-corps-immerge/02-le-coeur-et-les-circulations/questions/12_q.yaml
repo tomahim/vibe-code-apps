@@ -1,0 +1,22 @@
+id: 1278e0fe-673a-4b01-afe9-4018f1c1f186
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que constate-t-on en apnée selon le manuel ?
+choices:
+- id: 7bce104e-4d13-46ed-9eaa-347dd4645266
+  text: Une bradycardie et une vasoconstriction périphérique, qui préservent l'apport
+    d'O2 au cœur et au système nerveux central.
+- id: 8f41fceb-f66d-4f66-9217-17e09e121ac2
+  text: Une tachycardie et une vasodilatation généralisée de tout l'organisme pendant
+    l'apnée.
+- id: 52ff1ffc-0349-4635-9177-4b9f0e856724
+  text: Une interruption totale de la circulation sanguine vers le cœur et le cerveau.
+- id: 5bae2cce-fff1-45aa-b3fb-6ddcab91ac51
+  text: Une augmentation importante du volume sanguin total dans les veines.
+correct_choice_ids:
+- 7bce104e-4d13-46ed-9eaa-347dd4645266
+explanation: Bradycardie et vasoconstriction périphérique liées à l'apnée permettent
+  d'apporter une quantité d'O2 suffisante au cœur et au système nerveux central.
+archived: false
