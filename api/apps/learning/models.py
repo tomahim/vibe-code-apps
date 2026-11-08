@@ -111,6 +111,9 @@ class LearningPath(DescribedContent):
     CONTENT_KIND = ContentEntity.Kind.LEARNING_PATH
     theme = models.ForeignKey(Theme, on_delete=models.PROTECT, related_name="learning_paths")
     introduction_markdown = models.TextField(blank=True)
+    # Paths flagged general knowledge feed the weekly Challenge; specialist
+    # paths (e.g. diving certifications) stay out of it.
+    general_knowledge = models.BooleanField(default=False)
 
     class Meta(DescribedContent.Meta):
         db_table = "lg_learning_path"
@@ -259,10 +262,14 @@ class QuestionAttempt(models.Model):
         INITIAL = "initial", "Initial"
         RETRY = "retry", "Retry"
         REVIEW = "review", "Review"
+        CHALLENGE = "challenge", "Challenge"
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="lg_question_attempts")
     question = models.ForeignKey(Question, on_delete=models.PROTECT, related_name="attempts")
     attempt_type = models.CharField(max_length=10, choices=AttemptType.choices)
+    # Set on challenge attempts: the week the answer counts toward.
+    challenge_week = models.ForeignKey("ChallengeWeek", null=True, blank=True,
+                                       on_delete=models.PROTECT, related_name="attempts")
     submitted_answer = models.CharField(max_length=255)
     correct = models.BooleanField()
     answered_at = models.DateTimeField()
@@ -271,9 +278,24 @@ class QuestionAttempt(models.Model):
         db_table = "lg_question_attempt"
         ordering = ["answered_at", "pk"]
         constraints = [models.CheckConstraint(
-            condition=Q(attempt_type__in=["initial", "retry", "review"]), name="lg_attempt_valid_type",
+            condition=Q(attempt_type__in=["initial", "retry", "review", "challenge"]), name="lg_attempt_valid_type",
         )]
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
+
+
+class ChallengeWeek(models.Model):
+    """One weekly challenge: the same 10 questions for every learner, drawn
+    from paths flagged general knowledge (specialist paths stay out). The row
+    is written once, when the first learner opens the week, and never updated,
+    so every learner faces the identical set. A challenge answer is an
+    ordinary QuestionAttempt (attempt_type=challenge) pointing here."""
+    week_key = models.CharField(max_length=8)  # UTC ISO week, e.g. 2026-W45
+    question_ids = models.JSONField(default=list)
+    created_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "lg_challenge_week"
+        constraints = [models.UniqueConstraint(fields=["week_key"], name="lg_challenge_week_unique_key")]
 
 
 class PathCelebration(models.Model):

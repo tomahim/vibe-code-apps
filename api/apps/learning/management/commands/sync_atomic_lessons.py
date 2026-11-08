@@ -428,6 +428,9 @@ class Command(BaseCommand):
                 desired["image_alt"] = ""
             if element["kind"] == "learning_path":
                 desired["theme"] = parent
+                # Front matter opt-in: general-knowledge paths feed the weekly
+                # Challenge; specialist paths (diving certifications) stay out.
+                desired["general_knowledge"] = bool(metadata.get("general_knowledge", False))
             elif element["kind"] == "lesson":
                 desired["learning_path"] = parent
             elif element["kind"] == "card":
