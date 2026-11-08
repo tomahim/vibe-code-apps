@@ -3,16 +3,18 @@ import json
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase, override_settings
+from django.core.management import call_command
+from django.core.management.base import CommandError
+from django.test import TestCase
 from django.utils import timezone
 
 from apps.accounts.tokens import issue_token
 from apps.learning.challenge import current_week_key
-from apps.learning.models import (Card, ChallengeWeek, ContentEntity, LearningPath, Lesson,
+from apps.learning.management.commands.seed_challenge_players import GENERAL_KNOWLEDGE_PATHS
+from apps.learning.models import (Card, ChallengePlayer, ChallengeWeek, ContentEntity, LearningPath, Lesson,
                                   Question, QuestionAttempt, Theme)
 
 
-@override_settings(LEARNING_CHALLENGE_PLAYERS="thomas,aurore")
 class ChallengeTests(TestCase):
     def row(self, model, **fields):
         return model.objects.create(
@@ -25,6 +27,7 @@ class ChallengeTests(TestCase):
         self.thomas = get_user_model().objects.create_user(username="thomas", first_name="Thomas")
         self.aurore = get_user_model().objects.create_user(username="aurore", first_name="Aurore")
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.thomas)}"
+        ChallengePlayer.objects.bulk_create([ChallengePlayer(user=self.thomas), ChallengePlayer(user=self.aurore)])
         self.theme = self.row(Theme)
         self.general = self.row(LearningPath, theme=self.theme, general_knowledge=True)
         self.diving = self.row(LearningPath, theme=self.theme, position=2, general_knowledge=False)
@@ -208,41 +211,95 @@ class ChallengeConfigTest(TestCase):
 
 
 class ChallengePlayersConfigTest(TestCase):
-    """The duo setting must resolve to exactly two distinct accounts."""
+    """The duel is live only while exactly two distinct active players are seated."""
 
     def setUp(self):
         User = get_user_model()
         self.thomas = User.objects.create_user(username="thomas", email="thomas@example.com", password="x")
         self.aurore = User.objects.create_user(username="aurore", email="aurore@example.com", password="x")
 
-    def url(self):
-        return "/api/learning/challenge/"
+    def seat(self, *users):
+        ChallengePlayer.objects.all().delete()
+        ChallengePlayer.objects.bulk_create([ChallengePlayer(user=u) for u in users])
 
-    def status_with(self, setting, user=None):
+    def status(self, user=None):
         user = user or self.thomas
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(user)}"
-        with override_settings(LEARNING_CHALLENGE_PLAYERS=setting):
-            return self.client.get(self.url()).status_code
+        return self.client.get("/api/learning/challenge/").status_code
 
-    def test_exactly_two_distinct_accounts_unlock_the_duel(self):
-        self.assertEqual(self.status_with("thomas,aurore"), 200)
-        self.assertEqual(self.status_with("thomas@example.com,aurore@example.com"), 200)
+    def test_two_seated_players_unlock_the_duel(self):
+        self.seat(self.thomas, self.aurore)
+        self.assertEqual(self.status(), 200)
+        self.assertEqual(self.status(self.aurore), 200)
 
-    def test_empty_setting_disables_the_duel(self):
-        self.assertEqual(self.status_with(""), 404)
+    def test_an_empty_table_disables_the_duel(self):
+        self.assertEqual(self.status(), 404)
 
-    def test_a_single_handle_disables_the_duel(self):
-        self.assertEqual(self.status_with("thomas"), 404)
+    def test_a_single_seat_disables_the_duel(self):
+        self.seat(self.thomas)
+        self.assertEqual(self.status(), 404)
 
-    def test_an_unknown_handle_disables_the_duel(self):
-        self.assertEqual(self.status_with("thomas,nobody"), 404)
+    def test_a_third_seat_disables_the_duel(self):
+        third = get_user_model().objects.create_user(username="third", password="x")
+        self.seat(self.thomas, self.aurore, third)
+        self.assertEqual(self.status(), 404)
 
-    def test_both_handles_resolving_to_one_account_disables_the_duel(self):
-        self.assertEqual(self.status_with("thomas,thomas@example.com"), 404)
+    def test_a_deactivated_player_disables_the_duel(self):
+        self.seat(self.thomas, self.aurore)
+        self.aurore.is_active = False
+        self.aurore.save(update_fields=["is_active"])
+        self.assertEqual(self.status(), 404)
 
-    def test_an_ambiguous_email_disables_the_duel(self):
+    def test_an_outsider_gets_404_even_with_two_seated(self):
+        self.seat(self.thomas, self.aurore)
+        outsider = get_user_model().objects.create_user(username="outsider", password="x")
+        self.assertEqual(self.status(outsider), 404)
+
+
+class SeedChallengePlayersTest(TestCase):
+    """The seed command seats the duo and flags exactly the 3 named paths."""
+
+    def row(self, model, **fields):
+        return model.objects.create(
+            entity=ContentEntity.objects.create(id=uuid4(), kind=model.CONTENT_KIND),
+            position=fields.pop("position", 1), published=True, source_path=fields.pop("source_path", "example"), last_changed_commit="a" * 40,
+            **({"title": model.__name__} if model != Question else {}), **fields,
+        )
+
+    def setUp(self):
         User = get_user_model()
-        User.objects.create_user(username="aurore2", email="aurore@example.com", password="x")
-        self.assertEqual(self.status_with("thomas,aurore@example.com"), 404)
-        # The exact username still resolves uniquely.
-        self.assertEqual(self.status_with("thomas,aurore"), 200)
+        self.thomas = User.objects.create_user(username="thomas", email="thomas@example.com", password="x")
+        self.aurore = User.objects.create_user(username="aurore", email="aurore@example.com", password="x")
+        self.theme = self.row(Theme)
+        self.paths = {}
+        for i, slug in enumerate(GENERAL_KNOWLEDGE_PATHS):
+            self.paths[slug] = self.row(LearningPath, theme=self.theme, position=i + 1, source_path=f"themes/{slug}/index.md", general_knowledge=False)
+        self.diving = self.row(LearningPath, theme=self.theme, position=4, source_path="themes/plongee-niveau-4-partie-1/index.md", general_knowledge=False)
+
+    def test_seed_seats_the_duo_and_flags_only_the_three_paths(self):
+        call_command("seed_challenge_players", "thomas", "aurore@example.com")
+        self.assertEqual({seat.user for seat in ChallengePlayer.objects.all()}, {self.thomas, self.aurore})
+        for slug, path in self.paths.items():
+            path.refresh_from_db()
+            self.assertTrue(path.general_knowledge, slug)
+        self.diving.refresh_from_db()
+        self.assertFalse(self.diving.general_knowledge)
+        # Idempotent: a second run changes nothing.
+        call_command("seed_challenge_players", "thomas", "aurore")
+        self.assertEqual(ChallengePlayer.objects.count(), 2)
+
+    def test_seed_replaces_a_previous_seating(self):
+        third = get_user_model().objects.create_user(username="third", password="x")
+        ChallengePlayer.objects.create(user=third)
+        call_command("seed_challenge_players", "thomas", "aurore")
+        self.assertEqual({seat.user for seat in ChallengePlayer.objects.all()}, {self.thomas, self.aurore})
+
+    def test_an_unknown_handle_writes_nothing(self):
+        with self.assertRaises(CommandError):
+            call_command("seed_challenge_players", "thomas", "nobody")
+        self.assertEqual(ChallengePlayer.objects.count(), 0)
+
+    def test_the_same_account_twice_writes_nothing(self):
+        with self.assertRaises(CommandError):
+            call_command("seed_challenge_players", "thomas", "thomas@example.com")
+        self.assertEqual(ChallengePlayer.objects.count(), 0)

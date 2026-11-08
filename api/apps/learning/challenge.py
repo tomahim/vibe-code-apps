@@ -12,9 +12,10 @@ so first-correct carrots stay derived from learner history and dedupe across
 modes: answering a question correctly here for the first time ever earns the
 usual one carrot, never a second one.
 
-The duel is private to the two configured players (Thomas + Aurore): the
-LEARNING_CHALLENGE_PLAYERS setting lists their usernames or emails, and no
-other account can play, see the challenge, or count toward a week's reveal.
+The duel is private to the two seeded players (Thomas + Aurore): the
+lg_challenge_player table lists their accounts (seeded with
+`manage.py seed_challenge_players`), and no other account can play, see the
+challenge, or count toward a week's reveal.
 
 Ranking is revealed only once BOTH players finished all 10 questions, never
 before, and never publicly. Wins count toward the Challenge badges: strictly
@@ -36,7 +37,7 @@ from apps.accounts.decorators import jwt_required
 
 from .api import input_error, json_object, lock_learner, public_question, visible
 from .grading import normalize_typed_answer
-from .models import ChallengeWeek, Question, QuestionAttempt
+from .models import ChallengePlayer, ChallengeWeek, Question, QuestionAttempt
 
 CHALLENGE_SIZE = 10
 CHALLENGE_SECONDS = 30
@@ -44,21 +45,15 @@ CHALLENGE_MIN_WIN = 3
 
 
 def challenge_players():
-    """The duo allowed to play: exactly the two distinct accounts named in
-    settings. Fail closed: an empty setting, a missing handle, a handle
-    matching several accounts, or both handles resolving to the same account
-    all disable the duel (no player list, every challenge endpoint 404s)."""
-    handles = [h.strip() for h in getattr(settings, "LEARNING_CHALLENGE_PLAYERS", "").split(",") if h.strip()]
-    if len(handles) != 2:
+    """The duo allowed to play: exactly the two accounts seated in the
+    lg_challenge_player table. Fail closed: anything other than two rows
+    pointing at two distinct active accounts (empty table, one seat, three
+    seats, a deactivated player) disables the duel - no player list, every
+    challenge endpoint 404s."""
+    players = [seat.user for seat in ChallengePlayer.objects.select_related("user")]
+    if len(players) != 2 or players[0].pk == players[1].pk:
         return []
-    User = get_user_model()
-    players = []
-    for handle in handles:
-        matches = User.objects.filter(models.Q(username=handle) | models.Q(email=handle))
-        if matches.count() != 1:
-            return []
-        players.append(matches.get())
-    if players[0].pk == players[1].pk:
+    if not all(player.is_active for player in players):
         return []
     return players
 

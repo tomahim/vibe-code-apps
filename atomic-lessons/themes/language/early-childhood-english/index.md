@@ -4,6 +4,7 @@ position: 1
 title: Early Childhood English
 description: American English expressions for talking to a baby throughout the day.
 archived: false
+general_knowledge: true
 ---
 Learn everyday American English with French translations. Read each pair of cards, then answer a short multiple-choice question.
 

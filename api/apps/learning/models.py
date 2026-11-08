@@ -283,6 +283,18 @@ class QuestionAttempt(models.Model):
         indexes = [models.Index(fields=["user", "question", "answered_at"], name="lg_attempt_review_idx")]
 
 
+class ChallengePlayer(models.Model):
+    """One seat in the weekly duel (Thomas, 2026-11-09: a table + a seed
+    script instead of an env variable). The challenge is live only while the
+    table holds exactly two rows pointing at two distinct active accounts;
+    seeded with `manage.py seed_challenge_players <handle> <handle>`."""
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="challenge_seat")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "lg_challenge_player"
+
+
 class ChallengeWeek(models.Model):
     """One weekly challenge: the same 10 questions for every learner, drawn
     from paths flagged general knowledge (specialist paths stay out). The row

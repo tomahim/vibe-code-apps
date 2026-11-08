@@ -111,7 +111,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LEARNING_CONTENT_REPOSITORY = os.environ.get("LEARNING_CONTENT_REPOSITORY", "tomahim/vibe-code-apps")
 # The weekly Challenge is a private duel: comma-separated usernames or emails
 # of the two allowed players. Empty disables the challenge entirely.
-LEARNING_CHALLENGE_PLAYERS = os.environ.get("LEARNING_CHALLENGE_PLAYERS", "")
 
 # Empty means recipe writes are disabled; separate from the Telegram bot token.
 BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
