@@ -1,0 +1,23 @@
+id: 31ae709e-f1c9-48ba-bbd6-f85970236197
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce que la sursaturation critique ?
+choices:
+- id: 3b9d0a08-a2e1-437d-b97d-759c9eb84bcd
+  text: Une décompression trop rapide, avec dépassement des seuils critiques (Sc)
+    et un risque important d'accident de désaturation.
+- id: 3af53cfc-0c4c-48d2-9847-6c1469455c6e
+  text: Une saturation normale atteinte après une longue plongée profonde sans effort.
+- id: b67e2612-e8b3-49b7-a6ee-b2c4d3c5c947
+  text: Un état sans danger dans lequel le corps élimine l'azote plus vite qu'il ne
+    l'absorbe.
+- id: ee0cabbc-01b9-4264-a039-1a1fd2d94abf
+  text: Une alarme d'ordinateur indiquant simplement que la réserve d'air est faible.
+correct_choice_ids:
+- 3b9d0a08-a2e1-437d-b97d-759c9eb84bcd
+explanation: 'La sursaturation critique indique une décompression trop rapide avec
+  dépassement des seuils critiques (Sc) : le risque d''accident de désaturation devient
+  important. C''est ce que les modèles cherchent à éviter.'
+archived: false

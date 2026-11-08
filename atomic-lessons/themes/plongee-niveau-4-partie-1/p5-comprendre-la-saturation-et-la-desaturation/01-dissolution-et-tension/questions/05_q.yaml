@@ -1,0 +1,21 @@
+id: a741edc9-31bd-4184-9dc8-1078658d93ef
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle est la PpN2 de l'air respiré à 25 mètres (3,5 bars) ?
+choices:
+- id: a3d78d5f-38c9-4da4-9784-3b843477e872
+  text: 2,8 bars.
+- id: 081abeef-c111-441f-a62f-48b0adc2f613
+  text: 0,8 bar.
+- id: 607a530b-8fc8-435d-9c84-b28db8f188be
+  text: 1,2 bar.
+- id: 7c0e2ad8-efa8-463b-a068-1bc89751c51a
+  text: 4,3 bars.
+correct_choice_ids:
+- a3d78d5f-38c9-4da4-9784-3b843477e872
+explanation: 'PpN2 = 0,8 × 3,5 bars = 2,8 bars. En surface (1 bar), elle vaut 0,8
+  bar : c''est cet écart qui pousse l''azote à se dissoudre dans l''organisme pendant
+  la plongée.'
+archived: false

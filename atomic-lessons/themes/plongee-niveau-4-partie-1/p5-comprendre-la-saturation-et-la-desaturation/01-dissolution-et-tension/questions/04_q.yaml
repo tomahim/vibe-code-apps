@@ -1,0 +1,21 @@
+id: 5fcd71b2-dd95-47e3-8c32-303a936e8c4a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment calcule-t-on la pression partielle d'azote (PpN2) de l'air à une profondeur
+  donnée ?
+choices:
+- id: 57e05ecc-53b7-49e3-8d6c-7beabcbfcc0b
+  text: PpN2 = 0,8 × pression absolue, l'air contenant environ 80 % d'azote.
+- id: 8f632839-d9f8-4ab2-afa0-9ca0012c711d
+  text: PpN2 = 2 × pression absolue, l'azote comptant double dans les mélanges.
+- id: cb0cd52f-be03-42c5-a4c2-50001060ed5b
+  text: PpN2 = pression absolue + 0,8 bar, par convention internationale.
+- id: b255d342-3ba7-42cb-bd6c-f6bbda7c35d9
+  text: PpN2 = pression absolue / 0,8, l'azote étant plus léger que l'air.
+correct_choice_ids:
+- 57e05ecc-53b7-49e3-8d6c-7beabcbfcc0b
+explanation: 'L''air contient environ 80 % d''azote : PpN2 = 0,8 × Pabs. En surface
+  (1 bar) : 0,8 bar. À 25 m (3,5 bars) : 3,5 × 0,8 = 2,8 bars.'
+archived: false
