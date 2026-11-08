@@ -766,7 +766,7 @@ export default function LittleGrains() {
     const current = parseRoute(window.location.pathname);
     const located = locateRoute(garden, current);
     if (!current.step) { const valid = routeUrl(located.route); if (valid !== window.location.pathname) window.history.replaceState({}, "", valid); }
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), onReview: () => setReviewPicker(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle, lesson = null) => setCatchUp({ pathId, pathTitle, lesson }), onReview: () => setReviewPicker(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -791,7 +791,7 @@ export default function LittleGrains() {
           ? <GrainsLoader attempt={startup.attempt} />
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
-    {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/`} kicker={`Practice quiz · ${catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.pathTitle}`} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
     {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
