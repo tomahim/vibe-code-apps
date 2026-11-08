@@ -1,0 +1,20 @@
+id: 5948b99a-beb9-439f-bc90-5e9e2e84c8cc
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel débit peut-on atteindre à l'effort selon le manuel ?
+choices:
+- id: 577c1d24-e63f-4e22-ae3c-f9b548e342bd
+  text: 100 à 120 L/min chez les sujets non entraînés, 250 L/min chez certains athlètes.
+- id: b9e8f0a1-045d-4ba0-a523-f1be7b8a07b0
+  text: 10 L/min au maximum, quelle que soit la condition physique.
+- id: 7c9dc6b4-56ea-4539-b0b4-3b4ac3acbe52
+  text: 1 000 L/min chez tout adulte en bonne santé.
+- id: 4e237fc2-7fdb-44cf-8261-21ba8ae64d79
+  text: 7,5 à 10 L/min, comme au repos.
+correct_choice_ids:
+- 577c1d24-e63f-4e22-ae3c-f9b548e342bd
+explanation: 'En augmentant amplitude et fréquence ventilatoires : 100 à 120 L/min
+  (non entraînés), jusqu''à 250 L/min chez certains athlètes.'
+archived: false

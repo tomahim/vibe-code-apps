@@ -1,0 +1,20 @@
+id: cd86af65-764e-43d2-a4c3-3dce90fd537e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont la fréquence et le débit ventilatoires au repos ?
+choices:
+- id: 32e78271-9707-44a3-b711-59fc9134bba6
+  text: 15 à 20 mouvements par minute, soit un débit de 7,5 à 10 litres par minute.
+- id: d034bd31-6c0c-4b46-a144-6e2a781aa5bf
+  text: 60 à 70 mouvements par minute, soit un débit de 50 litres par minute.
+- id: 4fc369b1-9167-409c-b58b-4f98f3b8e979
+  text: 3 à 5 mouvements par minute, soit un débit de 1 litre par minute.
+- id: cc3b21d9-a166-49fc-bd52-bfa9124137aa
+  text: 100 mouvements par minute, soit un débit de 120 litres par minute.
+correct_choice_ids:
+- 32e78271-9707-44a3-b711-59fc9134bba6
+explanation: '15 à 20 mouvements par minute pour 0,5 L : un débit ventilatoire de
+  l''ordre de 7,5 à 10 L/min au repos.'
+archived: false
