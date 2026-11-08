@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { makeSpecies, makeBlade, rngFor } from './plants.js';
+import { makeSpecies, makeBlade, makeFish, makeTurtle, rngFor } from './plants.js';
 import { hexPrism, hexOutline, axial, inHex } from './terrain.js';
 
 export const PROFILES = {
@@ -32,8 +32,14 @@ const MIX = {
   lavender: { sig: ['sunflower', 'sunflower'], mid: ['lavender', 'lavender', 'lavender'], low: ['lavender', 'flowerYellow', 'lavender'], lesson: 'sunflower', flower: 'lavender' },
   pond: { sig: ['reed', 'reed', 'blossomTree'], mid: ['reed', 'flowerWhite', 'bush'], low: ['flowerWhite', 'flowerBlue', 'reed'], lesson: 'lotus', flower: 'flowerWhite' },
   alpine: { sig: ['snowPine', 'snowPine', 'pine'], mid: ['rock', 'bush', 'snowPine'], low: ['flowerWhite', 'rock', 'flowerBlue'], lesson: 'snowPine', flower: 'flowerWhite' },
+  // Underwater worlds for the diving themes: corals and reef animals instead
+  // of a planted garden. `underwater` switches the palette in theme/path view
+  // and `strata` turns the slab sides into deep water.
+  coral: { sig: ['coralStag', 'coralFan', 'coralStag'], mid: ['coralBrain', 'anemone', 'coralTube'], low: ['starfish', 'shell', 'coralTube', 'anemone'], lesson: 'coralStag', flower: 'anemone', underwater: true, strata: ['#4f7d95', '#3f6a85', '#31576f', '#24455c'] },
+  reef: { sig: ['kelp', 'coralStag', 'kelp'], mid: ['seagrass', 'coralBrain', 'anemone'], low: ['urchin', 'starfish', 'shell', 'rock'], lesson: 'coralBrain', flower: 'seagrass', underwater: true, strata: ['#4f8a8a', '#407575', '#316060', '#234a4c'] },
 };
-const SIG_SCALE = { tree: [0.62, 0.85], blossomTree: [0.6, 0.8], forestTree: [0.6, 0.85], appleTree: [0.58, 0.8], pine: [0.62, 0.9], snowPine: [0.6, 0.85], cactus: [0.7, 1.0], sunflower: [0.8, 1.1], reed: [0.9, 1.25] };
+const SIG_SCALE = { tree: [0.62, 0.85], blossomTree: [0.6, 0.8], forestTree: [0.6, 0.85], appleTree: [0.58, 0.8], pine: [0.62, 0.9], snowPine: [0.6, 0.85], cactus: [0.7, 1.0], sunflower: [0.8, 1.1], reed: [0.9, 1.25], coralStag: [0.7, 1.05], coralFan: [0.7, 1.0], kelp: [0.85, 1.25] };
+const FISH_COLORS = ['#ffb84d', '#4dd2ff', '#ff6f91', '#f6f1e4', '#ffd94d'];
 
 function scatter(rng, n, test, minD, R) {
   const pts = [];
@@ -113,7 +119,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   controls.enableZoom = true; controls.panSpeed = 1.1;
   controls.autoRotate = !reduced; controls.autoRotateSpeed = 0.35;
 
-  scene.add(new THREE.HemisphereLight('#fff7ea', '#d9ccb2', 1.35));
+  const hemi = new THREE.HemisphereLight('#fff7ea', '#d9ccb2', 1.35); scene.add(hemi);
   const sun = new THREE.DirectionalLight('#fff0d8', 2.5);
   sun.position.set(-12, 20, 11);
   if (prof.shadows) { sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 70 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = 3; }
@@ -122,6 +128,26 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
 
   const sky = new THREE.Mesh(new THREE.SphereGeometry(200, 24, 12), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: { top: { value: new THREE.Color('#bcd8ea') }, mid: { value: new THREE.Color('#f9e9d3') }, bot: { value: HORIZON.clone() } }, vertexShader: 'varying vec3 vP; void main(){ vP=normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }', fragmentShader: 'varying vec3 vP; uniform vec3 top,mid,bot; void main(){ float h=vP.y; vec3 c = h>0. ? mix(mid, top, pow(h,.55)) : mix(mid, bot, clamp(-h*4.,0.,1.)); gl_FragColor=vec4(c,1.); }' }));
   scene.add(sky);
+  // The whole scene breathes toward an underwater palette while an underwater
+  // theme (or one of its paths) is in view, and back to the garden otherwise.
+  const PAL = {
+    garden: { fog: new THREE.Color('#f8eddc'), fogNear: 46, fogFar: 130, skyTop: new THREE.Color('#bcd8ea'), skyMid: new THREE.Color('#f9e9d3'), skyBot: HORIZON.clone(), hemiSky: new THREE.Color('#fff7ea'), hemiGround: new THREE.Color('#d9ccb2'), sun: new THREE.Color('#fff0d8'), fill: new THREE.Color('#cfe0ff'), table: new THREE.Color('#eee6d8') },
+    sea: { fog: new THREE.Color('#2b6a8a'), fogNear: 24, fogFar: 105, skyTop: new THREE.Color('#8fd4ec'), skyMid: new THREE.Color('#2f7ea6'), skyBot: new THREE.Color('#155070'), hemiSky: new THREE.Color('#d6f0f8'), hemiGround: new THREE.Color('#3d7a94'), sun: new THREE.Color('#e2f4ff'), fill: new THREE.Color('#9fd4e8'), table: new THREE.Color('#9ec6ca') },
+  };
+  let seaT = 0;
+  function applyPalette(k) {
+    scene.fog.color.lerpColors(PAL.garden.fog, PAL.sea.fog, k);
+    scene.fog.near = PAL.garden.fogNear + (PAL.sea.fogNear - PAL.garden.fogNear) * k;
+    scene.fog.far = PAL.garden.fogFar + (PAL.sea.fogFar - PAL.garden.fogFar) * k;
+    sky.material.uniforms.top.value.lerpColors(PAL.garden.skyTop, PAL.sea.skyTop, k);
+    sky.material.uniforms.mid.value.lerpColors(PAL.garden.skyMid, PAL.sea.skyMid, k);
+    sky.material.uniforms.bot.value.lerpColors(PAL.garden.skyBot, PAL.sea.skyBot, k);
+    hemi.color.lerpColors(PAL.garden.hemiSky, PAL.sea.hemiSky, k);
+    hemi.groundColor.lerpColors(PAL.garden.hemiGround, PAL.sea.hemiGround, k);
+    sun.color.lerpColors(PAL.garden.sun, PAL.sea.sun, k);
+    fill.color.lerpColors(PAL.garden.fill, PAL.sea.fill, k);
+    table.material.color.lerpColors(PAL.garden.table, PAL.sea.table, k);
+  }
   const GROUND_Y = -0.95;
   const table = new THREE.Mesh(new THREE.CircleGeometry(150, 48).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: '#eee6d8', roughness: 1 }));
   table.position.y = GROUND_Y; scene.add(table);
@@ -133,6 +159,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   })();
 
   const species = makeSpecies(prof.detail);
+  const fishGeos = makeFish(), turtleGeo = makeTurtle();
   const plantMat = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.88 });
   const bladeGeo = makeBlade();
   { const n = bladeGeo.attributes.position.count, c = new Float32Array(n * 3), base = new THREE.Color('#3f7d36'), tip = new THREE.Color('#a8d466'), t = new THREE.Color(); for (let i = 0; i < n; i++) { t.copy(base).lerp(tip, bladeGeo.attributes.position.getY(i)); c.set([t.r, t.g, t.b], i * 3); } bladeGeo.setAttribute('color', new THREE.BufferAttribute(c, 3)); }
@@ -168,15 +195,15 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const garden = new THREE.Group(); scene.add(garden);
   const spacing = Math.sqrt(3) * R_THEME + 0.5;
   const themeSlots = THEMES.length <= 7 ? [[0, 0], [1, 0], [0, 1], [-1, 1], [-1, 0], [0, -1], [1, -1]] : spiral(THEMES.length);
-  const themeMeshes = [], cellMeshes = [], tiles = [];
+  const themeMeshes = [], cellMeshes = [], tiles = [], oceanLife = [];
   const gardenPlants = new Plants(species, plantMat, prof.shadows);
   const grassList = [], rng = rngFor(20261028);
   THEMES.forEach((theme, ti) => {
     const [q, r] = themeSlots[ti], c = axial(q, r, spacing / Math.sqrt(3));
-    const slab = new THREE.Mesh(hexPrism(R_THEME, SLAB_H, { K: prof.K, top: theme.top2, top2: theme.top, seed: ti + 1, noise: 0.015 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+    const mix = MIX[theme.terrain], T = { ti, theme, center: new THREE.Vector3(c.x, SLAB_H, c.z), cells: [] };
+    const slab = new THREE.Mesh(hexPrism(R_THEME, SLAB_H, { K: prof.K, top: theme.top2, top2: theme.top, seed: ti + 1, noise: 0.015, ...(mix?.strata ? { strata: mix.strata } : {}) }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
     slab.position.set(c.x, 0, c.z); slab.castShadow = prof.shadows; slab.receiveShadow = true; slab.userData.pick = { kind: 'theme', ti };
     garden.add(slab); themeMeshes.push(slab);
-    const mix = MIX[theme.terrain], T = { ti, theme, center: new THREE.Vector3(c.x, SLAB_H, c.z), cells: [] };
     theme.paths.forEach((path, pi) => {
       const [cq, cr] = CELL_SLOTS[ORDER[pi]] || spiral(theme.paths.length)[pi], cc = axial(cq, cr, R_CELL * 1.035), cx = c.x + cc.x, cz = c.z + cc.z;
       const mesh = new THREE.Mesh(hexPrism(R_CELL, CELL_H, { K: prof.cellK, top: '#' + new THREE.Color(theme.top).offsetHSL(0, 0, 0.02 * (pi % 3)).getHexString(), top2: theme.top2, seed: ti * 10 + pi + 3, noise: 0.05, bevel: 0.05, colorJitter: 0.09 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
@@ -203,9 +230,51 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         else { s = (name === 'rock' || name === 'redRock') ? 0.7 + rng() * 0.6 : 0.9 + rng() * 0.5; thr = 0.01 + rng() * 0.3; w = 0.25; }
         gardenPlants.add(name, { x: cx + pt[0], y: top + 0.01, z: cz + pt[1], rot: rng() * 6.28, s, thr, w, key, grow: true, min: 0.14, tint: new THREE.Color().setScalar(0.88 + rng() * 0.22) });
       });
-      const gp = scatter(rng, prof.grass, (x, z) => inHex(x, z, 0.9) && (!isPond || Math.hypot(x, z) > pondR + 0.08), 0, 0.92), gtint = new THREE.Color(theme.top);
-      gp.forEach((pt) => grassList.push({ x: cx + pt[0], y: top, z: cz + pt[1], s: 0.14 + rng() * 0.16, rot: rng() * 6.28, key, v: rng(), tint: gtint.clone().offsetHSL((rng() - 0.5) * 0.03, 0, (rng() - 0.5) * 0.2).addScalar(0.45) }));
+      if (!mix.underwater) {
+        const gp = scatter(rng, prof.grass, (x, z) => inHex(x, z, 0.9) && (!isPond || Math.hypot(x, z) > pondR + 0.08), 0, 0.92), gtint = new THREE.Color(theme.top);
+        gp.forEach((pt) => grassList.push({ x: cx + pt[0], y: top, z: cz + pt[1], s: 0.14 + rng() * 0.16, rot: rng() * 6.28, key, v: rng(), tint: gtint.clone().offsetHSL((rng() - 0.5) * 0.03, 0, (rng() - 0.5) * 0.2).addScalar(0.45) }));
+      }
     });
+    if (mix?.underwater) {
+      // Reef décor lives on the slab itself, so the diving themes read as
+      // living oceans even before any learning path is published. Fully grown
+      // from the start (min: 1): it is scenery, not progress.
+      const cellCenters = T.cells.map((cl) => [cl.center.x - c.x, cl.center.z - c.z]);
+      const free = (x, z) => inHex(x, z, R_THEME * 0.9) && cellCenters.every(([dx, dz]) => (dx - x) ** 2 + (dz - z) ** 2 > 1.55 * 1.55);
+      scatter(rng, mobile ? 9 : 18, free, mobile ? 0.55 : 0.42, R_THEME * 0.82).forEach((pt, i, arr) => {
+        const u = i / Math.max(1, arr.length - 1), tier = u < 0.35 ? 'sig' : u < 0.7 ? 'mid' : 'low', list = mix[tier];
+        const name = list[Math.floor(rng() * list.length)], sr = SIG_SCALE[name];
+        const s = (sr ? sr[0] + rng() * (sr[1] - sr[0]) : 0.9) * (tier === 'low' ? 0.9 : 1.15);
+        gardenPlants.add(name, { x: c.x + pt[0], y: SLAB_H + 0.01, z: c.z + pt[1], rot: rng() * 6.28, s, thr: 0, w: 1, key: `d${ti}`, min: 1, tint: new THREE.Color().setScalar(0.9 + rng() * 0.2) });
+      });
+      // A school of fish circles each ocean; the open reef also gets a turtle.
+      const school = { cx: c.x, cz: c.z, fishes: [], turtle: null, bubbles: null };
+      const fishN = mobile ? 3 : theme.terrain === 'coral' ? 7 : 5;
+      for (let i = 0; i < fishN; i++) {
+        const mat = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.6, color: FISH_COLORS[i % FISH_COLORS.length] });
+        const bodyM = new THREE.Mesh(fishGeos.body, mat), tailM = new THREE.Mesh(fishGeos.tail, mat);
+        bodyM.castShadow = prof.shadows; tailM.position.z = -0.13;
+        const f = new THREE.Group(); f.add(bodyM, tailM);
+        f.scale.setScalar(0.75 + rng() * 0.6);
+        f.userData = { rad: 2.3 + rng() * 1.6, h: 1.0 + rng() * 1.3, sp: (0.25 + rng() * 0.3) * (rng() > 0.85 ? -1 : 1), ph: rng() * 6.28, bob: 1 + rng() * 1.4, tail: tailM };
+        garden.add(f); school.fishes.push(f);
+      }
+      if (theme.terrain === 'reef') {
+        const turt = new THREE.Mesh(turtleGeo, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.85 }));
+        turt.castShadow = prof.shadows; garden.add(turt);
+        school.turtle = { mesh: turt, rad: 3.4, h: 1.75, sp: 0.12, ph: rng() * 6.28 };
+      }
+      const bubN = mobile ? 12 : 34, bpos = new Float32Array(bubN * 3), bspd = [];
+      for (let i = 0; i < bubN; i++) {
+        const a = rng() * 6.28, rr = Math.sqrt(rng()) * 2.6;
+        bpos.set([c.x + Math.cos(a) * rr, SLAB_H + 0.4 + rng() * 2.6, c.z + Math.sin(a) * rr], i * 3);
+        bspd.push(0.25 + rng() * 0.4);
+      }
+      const bpoints = new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(bpos, 3)), new THREE.PointsMaterial({ color: '#dff4fb', size: 0.055, transparent: true, opacity: 0.55, depthWrite: false }));
+      bpoints.frustumCulled = false; garden.add(bpoints);
+      school.bubbles = bpoints; school.speeds = bspd;
+      oceanLife.push(school);
+    }
     tiles.push(T);
   });
   gardenPlants.build(garden);
@@ -273,7 +342,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     disposeTrail();
     const theme = THEMES[ti], path = theme.paths[pi], n = path.lessons.length, mix = MIX[theme.terrain], r = rngFor(ti * 100 + pi * 7 + 1);
     const g = new THREE.Group(), top = TRAIL_H, tTop = TRAIL_H + TILE_H;
-    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: theme.top, top2: theme.top2, seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: theme.top, top2: theme.top2, seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07, ...(mix?.strata ? { strata: mix.strata } : {}) }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
     plat.rotation.y = Math.PI / 6; plat.castShadow = prof.shadows; plat.receiveShadow = true; plat.userData.own = true; g.add(plat);
     // axial chain of tiles
     const ax = n > 7 ? spiral(n) : (() => { const cells = [[0, 0]]; for (let i = 1; i < n; i++) { const d = CHAIN[(i - 1) % CHAIN.length]; cells.push([cells[i - 1][0] + d[0], cells[i - 1][1] + d[1]]); } return cells; })();
@@ -324,10 +393,13 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       nextMark.add(pennant, halo, bud); nextMark.userData = { halo, pennant };
     }
     g.add(nextMark);
-    const gl = [], gt = new THREE.Color(theme.top);
-    scatter(r, prof.trailGrass, (x, z) => inHex(z, x, TRAIL_R - 0.35) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 1.5), 0, TRAIL_R)
-      .forEach((pt) => gl.push({ x: pt[0], y: top, z: pt[1], s: 0.22 + r() * 0.25, rot: r() * 6.28, key: 'T', v: r(), tint: gt.clone().offsetHSL((r() - 0.5) * 0.03, 0, (r() - 0.5) * 0.2).addScalar(0.45) }));
-    const tg = makeGrass(gl, g);
+    let tg = null;
+    if (!mix.underwater) {
+      const gl = [], gt = new THREE.Color(theme.top);
+      scatter(r, prof.trailGrass, (x, z) => inHex(z, x, TRAIL_R - 0.35) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 1.5), 0, TRAIL_R)
+        .forEach((pt) => gl.push({ x: pt[0], y: top, z: pt[1], s: 0.22 + r() * 0.25, rot: r() * 6.28, key: 'T', v: r(), tint: gt.clone().offsetHSL((r() - 0.5) * 0.03, 0, (r() - 0.5) * 0.2).addScalar(0.45) }));
+      tg = makeGrass(gl, g);
+    }
     trail = { ti, pi, theme, path, n, nodes, plants, grass: tg, nextMark };
     scene.add(g); trailGroup = g; g.visible = false;
     ['T', ...nodes.map((x) => `L${x.i}`)].forEach((k) => disp.set(k, 0));
@@ -768,6 +840,36 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     }
     outlineMat.opacity = 0.75 + Math.sin(time * 5) * 0.2;
     grassUniforms.uTime.value = time;
+    // Glide into the underwater palette while a diving theme is in view.
+    const seaTarget = view.level !== 'garden' && MIX[THEMES[view.ti]?.terrain]?.underwater ? 1 : 0;
+    seaT += (seaTarget - seaT) * (1 - Math.exp(-dt * 1.8));
+    if (Math.abs(seaT - seaTarget) > 0.0005) applyPalette(seaT);
+    if (garden.visible) {
+      for (const s of oceanLife) {
+        for (const f of s.fishes) {
+          const u = f.userData, a = time * u.sp + u.ph, dir = Math.sign(u.sp);
+          f.position.set(s.cx + Math.cos(a) * u.rad, SLAB_H + u.h + Math.sin(time * u.bob + u.ph) * 0.12, s.cz + Math.sin(a) * u.rad);
+          f.rotation.y = Math.atan2(-Math.sin(a) * dir, Math.cos(a) * dir);
+          f.rotation.z = Math.sin(time * 2 + u.ph) * 0.06;
+          u.tail.rotation.y = Math.sin(time * 9 + u.ph) * 0.55;
+        }
+        if (s.turtle) {
+          const u = s.turtle, a = time * u.sp + u.ph;
+          u.mesh.position.set(s.cx + Math.cos(a) * u.rad, SLAB_H + u.h + Math.sin(time * 0.7 + u.ph) * 0.18, s.cz + Math.sin(a) * u.rad);
+          u.mesh.rotation.y = Math.atan2(-Math.sin(a), Math.cos(a));
+          u.mesh.rotation.z = Math.sin(time * 0.9 + u.ph) * 0.08;
+        }
+        if (s.bubbles) {
+          const arr = s.bubbles.geometry.attributes.position;
+          for (let i = 0; i < s.speeds.length; i++) {
+            let y = arr.getY(i) + s.speeds[i] * dt;
+            if (y > SLAB_H + 3.6) y = SLAB_H + 0.35;
+            arr.setY(i, y);
+          }
+          arr.needsUpdate = true;
+        }
+      }
+    }
     clouds.children.forEach((c) => { c.position.x += c.userData.v * dt; if (c.position.x > 60) c.position.x = -60; });
     const ctr = controls.target, spread = Math.min(4, camera.position.distanceTo(ctr) * 0.22);
     flyers.children.forEach((f) => { const u = f.userData, a = time * u.sp + u.off; f.position.set(ctr.x + Math.cos(a) * (u.rad + spread * 0.4), ctr.y + u.h + Math.sin(time * 1.3 + u.ph) * 0.25, ctr.z + Math.sin(a * 1.2) * (u.rad + spread * 0.4)); f.rotation.y = -a + Math.PI; const flap = Math.sin(time * 16 + u.ph) * 0.9; u.wl.rotation.z = flap; u.wr.rotation.z = -flap; f.scale.setScalar(u.scale * (view.level === 'garden' ? 1.8 : 1)); });

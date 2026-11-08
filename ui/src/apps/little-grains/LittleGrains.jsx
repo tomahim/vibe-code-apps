@@ -107,8 +107,14 @@ function adaptGarden(data) {
     { terrain: "pond", top: "#87bbad", top2: "#70a996" },
     { terrain: "alpine", top: "#b5c0a6", top2: "#9aab94" },
   ];
+  // The diving themes get underwater reef scenery keyed by their content UUID;
+  // every other theme keeps the positional rotation above.
+  const themeTerrains = {
+    "bd957ab9-8aa7-4f8c-970f-c858f4cbec04": { terrain: "coral", top: "#e6d3a3", top2: "#d6bf8c" },
+    "e0fecbd7-085e-4f6e-8fdb-afd4f52a3f8b": { terrain: "reef", top: "#d3d8b8", top2: "#bcc39c" },
+  };
   return (data.themes || []).map((theme, index) => ({
-    ...theme, ...terrains[index % terrains.length], blurb: theme.description || "A place to grow your knowledge.",
+    ...theme, ...terrains[index % terrains.length], ...themeTerrains[theme.id], blurb: theme.description || "A place to grow your knowledge.",
     paths: (theme.learning_paths || []).map((path) => ({
       ...path, lessonData: path.lessons || [], lessons: (path.lessons || []).map((lesson) => lesson.title),
     })),
