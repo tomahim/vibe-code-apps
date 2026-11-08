@@ -1,0 +1,22 @@
+id: af4681a3-1eef-44a0-957b-9a80904f8519
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que préconise le manuel après plusieurs semaines sans pratique en milieu naturel
+  ?
+choices:
+- id: ecded110-8599-4e28-9218-6cd58d7c9d9a
+  text: S'adapter progressivement à la profondeur, avec des plongées de réadaptation,
+    quel que soit son niveau.
+- id: 87c9e323-4fa3-4cc1-afe0-2c19ebc7a50e
+  text: Reprendre directement par une plongée profonde, par exemple à quarante mètres.
+- id: 4c148c7b-3d4e-4822-8ee9-b723458a60fb
+  text: Refaire obligatoirement tout son brevet de plongée depuis le tout début.
+- id: 61b7b0e4-3936-461e-a3a6-d5cdee25e98a
+  text: S'interdire totalement de plonger pendant encore au moins six mois complets.
+correct_choice_ids:
+- ecded110-8599-4e28-9218-6cd58d7c9d9a
+explanation: Après plusieurs semaines sans pratique en milieu naturel, il faut s'adapter
+  progressivement à la profondeur (plongées de réadaptation), quel que soit son niveau.
+archived: false

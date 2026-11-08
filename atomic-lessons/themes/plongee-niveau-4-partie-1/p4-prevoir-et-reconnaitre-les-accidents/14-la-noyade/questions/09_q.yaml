@@ -1,0 +1,21 @@
+id: a7c439a4-1b95-4eea-a32a-5d3480130c62
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi le gilet est-il un instrument de sécurité, selon le manuel ?
+choices:
+- id: 3419e879-9fac-4f0d-a7c3-e466c8cd1fe9
+  text: Il permet au plongeur de rejoindre la surface et de s'y maintenir.
+- id: f386668b-27fd-4e8f-ac47-a44b65329695
+  text: Il protège la bouteille des chocs pendant la plongée.
+- id: 523f531c-6044-4067-b18f-d5f6e6989a89
+  text: Il améliore l'hydrodynamisme et la vitesse de nage.
+- id: 4fb040d3-a838-4230-9cc8-be0bff3252c7
+  text: Il sert uniquement à porter les instruments de mesure.
+correct_choice_ids:
+- 3419e879-9fac-4f0d-a7c3-e466c8cd1fe9
+explanation: Le gilet permet de rejoindre la surface et de s'y maintenir ; un niveau
+  4 encadrant des débutants non brevetés s'assure qu'ils savent au moins gonfler et
+  purger leur gilet en surface, « comme une bouée ».
+archived: false
