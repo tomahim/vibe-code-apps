@@ -1,22 +1,23 @@
-id: 901f0fdc-da97-47c4-a2de-817bb00d2ab4
+id: 31dfa0a5-6427-4d20-908f-06a17ef74204
 position: 12
 type: multiple_choice
 selection: single
 after_card_position: 7
-prompt: En régime général, à quelle fréquence minimale une bouteille doit-elle être
-  inspectée ?
+prompt: Que prévoit le régime TIV cité par l'édition 2020 du manuel ?
 choices:
-- id: 79e95949-c5a3-483d-b1d0-eaadd60e42ca
-  text: Au moins une fois tous les 12 mois, et autant de fois que nécessaire.
-- id: 4402519e-e08f-4324-879a-c39af928473c
-  text: Une fois tous les deux ans, à l'occasion de la requalification.
-- id: 00361c95-eb30-4ec9-97cd-d9d732e28a90
-  text: Une fois tous les six ans, comme dans le régime TIV.
-- id: ede43343-2fdb-4a78-90a6-21b2edab1dbc
-  text: Uniquement après un choc ou une suspicion d'entrée d'eau.
+- id: 89eb7667-6051-4d3d-99f7-57b561813d52
+  text: Une requalification tous les 6 ans, avec inspection visuelle par un TIV au
+    moins tous les 12 mois.
+- id: 4213e124-25f3-4fb2-997d-21b3266648be
+  text: Une suppression totale des requalifications pour les blocs récents.
+- id: 343c0a6b-b99d-456c-aea4-a389d9e97948
+  text: Une requalification annuelle réalisée par le propriétaire du bloc.
+- id: 22d73d79-621c-47af-8d0d-929074b1f446
+  text: Une requalification tous les 10 ans, sans inspection intermédiaire.
 correct_choice_ids:
-- 79e95949-c5a3-483d-b1d0-eaadd60e42ca
-explanation: Les bouteilles métalliques doivent être inspectées autant de fois que
-  nécessaire, mais au moins une fois tous les 12 mois, et requalifiées tous les deux
-  ans en régime général.
+- 89eb7667-6051-4d3d-99f7-57b561813d52
+explanation: 'La décision BSERR n°15-106 du 08/12/2015, modifiée par l''arrêté du
+  20/11/2017 (cités dans l''édition 2020), porte la requalification de 2 à 6 ans sous
+  conditions : cahier des charges et inspection visuelle TIV annuelle consignée, avec
+  attestation.'
 archived: false

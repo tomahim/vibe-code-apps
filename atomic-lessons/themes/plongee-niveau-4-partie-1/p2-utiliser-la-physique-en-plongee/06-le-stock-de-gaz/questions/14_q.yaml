@@ -1,23 +1,23 @@
-id: 31dfa0a5-6427-4d20-908f-06a17ef74204
+id: 6c39b5cb-9bf0-4ae1-8263-6c683cfe8213
 position: 14
 type: multiple_choice
 selection: single
-after_card_position: 7
-prompt: Que prévoit le régime TIV cité par l'édition 2020 du manuel ?
+after_card_position: 8
+prompt: Pourquoi ne faut-il jamais changer soi-même sa robinetterie selon le manuel
+  ?
 choices:
-- id: 89eb7667-6051-4d3d-99f7-57b561813d52
-  text: Une requalification tous les 6 ans, avec inspection visuelle par un TIV au
-    moins tous les 12 mois.
-- id: 4213e124-25f3-4fb2-997d-21b3266648be
-  text: Une suppression totale des requalifications pour les blocs récents.
-- id: 343c0a6b-b99d-456c-aea4-a389d9e97948
-  text: Une requalification annuelle réalisée par le propriétaire du bloc.
-- id: 22d73d79-621c-47af-8d0d-929074b1f446
-  text: Une requalification tous les 10 ans, sans inspection intermédiaire.
+- id: b1d4c7a6-1768-42d8-a66a-1a07d3755e8b
+  text: Un pas de vis inadapté s'abîme et la robinetterie peut devenir un véritable
+    projectile.
+- id: d473f912-1d82-4b35-910c-860163139604
+  text: Le démontage à domicile annule systématiquement l'assurance du club.
+- id: dd529eb3-8896-47b9-82c0-a879459c48e8
+  text: La robinetterie contient un ressort qui peut blesser les doigts.
+- id: ec591543-04aa-412f-be8c-e4bb10eb63ea
+  text: Seule la robinetterie d'origine accepte l'air comprimé respirable.
 correct_choice_ids:
-- 89eb7667-6051-4d3d-99f7-57b561813d52
-explanation: 'La décision BSERR n°15-106 du 08/12/2015, modifiée par l''arrêté du
-  20/11/2017 (cités dans l''édition 2020), porte la requalification de 2 à 6 ans sous
-  conditions : cahier des charges et inspection visuelle TIV annuelle consignée, avec
-  attestation.'
+- b1d4c7a6-1768-42d8-a66a-1a07d3755e8b
+explanation: 'Certains pas de vis peuvent être montés sur des bouteilles qui ne leur
+  correspondent pas exactement : les filets s''abîment et la robinetterie risque de
+  ne plus tenir. Toute intervention est à confier à un spécialiste.'
 archived: false

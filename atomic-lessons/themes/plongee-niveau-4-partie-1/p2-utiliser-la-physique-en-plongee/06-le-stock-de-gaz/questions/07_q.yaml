@@ -1,20 +1,21 @@
-id: e0b56497-596f-4f05-a5c2-305857192590
+id: 416205e3-6585-4b0f-b411-1cdd65d6179e
 position: 7
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: Que subissent certains blocs prélevés dans les lots de fabrication ?
+prompt: Quel avantage le manuel reconnaît-il aux bouteilles en aluminium ?
 choices:
-- id: bb2ded76-6fec-4ebe-a721-1dc6019e7504
-  text: 'Des essais destructifs : surpression, éclatement, charge/décharge.'
-- id: 2341f140-559a-45fb-bb35-fbb59fa612f8
-  text: Une plongée d'essai à 40 mètres avec des moniteurs.
-- id: f7c2e740-224e-467c-a379-1ec7a53d26df
-  text: Un remplissage à l'oxygène pur pendant vingt-quatre heures.
-- id: 7509899d-25e5-4645-b7c9-2e18af597e8f
-  text: Une immersion d'un an en bassin d'eau de mer salée.
+- id: 4e9d8093-cd29-436a-afbc-e2f8e5b6749c
+  text: Elles sont moins sensibles à la corrosion due au sel de mer.
+- id: 56e3766e-d11f-4726-9e70-fa778b5bdfbb
+  text: Elles sont plus lourdes, donc plus stables au fond.
+- id: c4881965-4275-47f6-83b5-ac5e3cad2c60
+  text: Elles acceptent des pressions de service plus élevées.
+- id: 129e9e6c-0392-4b8c-bba2-f2a15608fbcf
+  text: Elles ne nécessitent aucune requalification périodique.
 correct_choice_ids:
-- bb2ded76-6fec-4ebe-a721-1dc6019e7504
-explanation: Par sondage dans les lots, des blocs subissent des essais destructifs
-  pour vérifier la limite de résistance et l'absence de défaut.
+- 4e9d8093-cd29-436a-afbc-e2f8e5b6749c
+explanation: L'aluminium est moins sensible à la corrosion saline, mais subit d'autres
+  types de corrosion ; sa légèreté n'est pas un avantage en eaux tempérées avec des
+  combinaisons épaisses.
 archived: false
