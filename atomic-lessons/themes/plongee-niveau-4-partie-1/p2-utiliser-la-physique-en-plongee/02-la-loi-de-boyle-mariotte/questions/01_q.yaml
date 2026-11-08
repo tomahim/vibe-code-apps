@@ -1,0 +1,21 @@
+id: fa3dc0c4-7ea9-4721-8a23-13fca0a46f9e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Quand la pression d''un gaz augmente à température constante, son volume
+  :'
+choices:
+- id: cb7dc670-de28-45b0-83a6-58dc5a83b6e7
+  text: Diminue dans la même proportion.
+- id: 3a0e3aeb-2d45-4bc3-a93a-6ce4ad57d937
+  text: Augmente dans la même proportion.
+- id: 6fbbfb19-5512-40e4-b11f-caca72be87e5
+  text: Reste rigoureusement identique.
+- id: 1e371473-8359-49ed-9bb5-c1aec61fba1d
+  text: Diminue deux fois plus vite.
+correct_choice_ids:
+- cb7dc670-de28-45b0-83a6-58dc5a83b6e7
+explanation: 'Le produit P x V est constant : pression et volume varient en raison
+  inverse l''un de l''autre.'
+archived: false

@@ -1,0 +1,20 @@
+id: a1d3f597-e4a4-46c6-8699-9abe991a4c46
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle écriture résume la loi de Boyle-Mariotte ?
+choices:
+- id: 9146bfee-ab78-4483-92bc-c771178b910c
+  text: P x V = constante, à température constante.
+- id: eb544c35-f85f-4fe8-a5fe-7bf58ae49512
+  text: P / V = constante, quelle que soit la température.
+- id: 479eb2c1-5c96-47ee-b00f-1e015c3e123d
+  text: P + V = constante, à pression constante.
+- id: ea8750d4-1032-46b1-8d6b-90924dc16fe2
+  text: V / P = constante, si la bouteille est pleine.
+correct_choice_ids:
+- 9146bfee-ab78-4483-92bc-c771178b910c
+explanation: 'On retient P x V = constante, avec la condition essentielle : la température
+  doit être constante.'
+archived: false

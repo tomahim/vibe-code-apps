@@ -1,0 +1,23 @@
+id: c10bfa9e-d9ef-4330-a739-865e28265285
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit l'énoncé historique de la loi ?
+choices:
+- id: b2bcb83f-74e7-49df-a680-e0199e6aaebd
+  text: À température constante, le volume d'une masse gazeuse varie en raison inverse
+    de sa pression.
+- id: dd36befc-1ee5-4963-9417-d79c04a23b26
+  text: À pression constante, le volume d'une masse gazeuse varie en raison directe
+    de sa température.
+- id: 8c6bb02b-5b85-4c24-8eb5-3bfa3fe0b4d7
+  text: À volume constant, la pression d'une masse gazeuse varie en raison inverse
+    du volume.
+- id: 4497bb45-02ab-4be0-b8c8-3cf293edbb60
+  text: À température constante, la pression d'une masse gazeuse varie comme son volume.
+correct_choice_ids:
+- b2bcb83f-74e7-49df-a680-e0199e6aaebd
+explanation: En 1679, Mariotte découvre, à partir des expériences de Boyle, qu'à température
+  constante le volume varie en raison inverse de la pression.
+archived: false

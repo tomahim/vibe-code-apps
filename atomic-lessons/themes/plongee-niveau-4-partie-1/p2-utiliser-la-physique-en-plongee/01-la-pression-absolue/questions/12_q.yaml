@@ -1,0 +1,21 @@
+id: 6a313861-7627-4856-ae25-287d8b88ddba
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Deux plongeurs au même effort, l''un à 10 m, l''autre à faible profondeur
+  : qui épuise sa réserve le plus vite ?'
+choices:
+- id: e350e663-b474-4297-8792-916f107a787d
+  text: Celui à 10 m, car chaque litre respiré y contient davantage de molécules.
+- id: e04af9e4-0f33-4955-b742-c901321446c3
+  text: Celui à faible profondeur, car l'air y est moins dense et moins bon.
+- id: d2eefdbe-8bf1-4295-952d-3b9ce7aea9f7
+  text: Les deux à la même vitesse, l'effort étant strictement identique.
+- id: b17ed96e-2f50-4997-b1c6-d04168a4dd98
+  text: 'Aucun des deux : seul le volume de la bouteille fait la différence.'
+correct_choice_ids:
+- e350e663-b474-4297-8792-916f107a787d
+explanation: À effort égal, la consommation en volume est identique, mais la masse
+  d'air respirée croît avec la pression ambiante.
+archived: false

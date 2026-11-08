@@ -1,0 +1,21 @@
+id: f0e03f65-2998-45b8-bc53-38246e80c936
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Un ballon de 12 litres en surface est descendu à 30 m (4 bars). Quel est son
+  volume au fond ?
+choices:
+- id: 7d0a199c-0b2e-4c1a-8c18-037773321d77
+  text: 3 litres, car 1 x 12 = 4 x V(fond).
+- id: 07b3fcb9-d9e4-40d6-ad6f-f6e4a33ada7e
+  text: 4 litres, car 12 divisé par 3 bars.
+- id: 0fc97028-04be-444c-a116-8ac07ea37ce0
+  text: 6 litres, soit la moitié du volume initial.
+- id: 5d1ac77b-2944-4248-97fb-39b21906511f
+  text: 48 litres, car le volume suit la pression.
+correct_choice_ids:
+- 7d0a199c-0b2e-4c1a-8c18-037773321d77
+explanation: 'P(surface) x V(surface) = P(fond) x V(fond) : 1 x 12 = 4 x V(fond),
+  d''où 3 litres. Exemple du manuel.'
+archived: false

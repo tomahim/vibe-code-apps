@@ -1,0 +1,21 @@
+id: bbd1df26-70be-428e-bfb4-d5990aaade91
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Un ballon de 3 litres remonte de 30 m (4 bars) à 10 m (2 bars). Son volume
+  devient :'
+choices:
+- id: 3cfe2a6d-d48b-4e24-827e-0013c271052a
+  text: 6 litres, car 4 x 3 = 2 x V.
+- id: 93e1899e-5a10-464e-9fab-2184dc40ab74
+  text: 3 litres, car son volume ne change plus.
+- id: 2fde62ec-f2b0-4628-bb58-fa2a63ecd699
+  text: 12 litres, car 4 x 3 = 1 x V.
+- id: 94402be5-b803-4546-866c-a1220c4c20a1
+  text: 1,5 litre, car il perd la moitié de son air.
+correct_choice_ids:
+- 3cfe2a6d-d48b-4e24-827e-0013c271052a
+explanation: 4 x 3 = 2 x V, d'où 6 litres à 10 m ; en surface, il retrouverait ses
+  12 litres.
+archived: false

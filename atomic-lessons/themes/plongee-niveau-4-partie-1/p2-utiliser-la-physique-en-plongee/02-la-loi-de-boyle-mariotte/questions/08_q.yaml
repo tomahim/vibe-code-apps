@@ -1,0 +1,21 @@
+id: b7ef79e9-ed89-45d6-b37e-09a97614c247
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Un ballon de 6 litres est descendu à 10 m (2 bars). Son volume au fond est
+  :'
+choices:
+- id: 0e29cdf9-82af-4ce7-9e60-313483f69604
+  text: 3 litres, car 1 x 6 = 2 x V(fond).
+- id: dd2a01f5-99f7-4c02-aff5-c216ed764262
+  text: 12 litres, car le volume double à 2 bars.
+- id: 3e9cd2e8-a41d-4510-8148-a362543d9365
+  text: 2 litres, car on divise par la profondeur.
+- id: e2b72af9-a93e-48ad-8d83-ea198c7e4e69
+  text: 6 litres, car le ballon est indéformable.
+correct_choice_ids:
+- 0e29cdf9-82af-4ce7-9e60-313483f69604
+explanation: '1 x 6 = 2 x V(fond), d''où V(fond) = 3 litres : même méthode que l''exemple
+  du ballon de 12 litres à 30 m.'
+archived: false

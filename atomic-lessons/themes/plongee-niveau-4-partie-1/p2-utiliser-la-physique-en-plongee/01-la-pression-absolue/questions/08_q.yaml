@@ -1,0 +1,21 @@
+id: 4abaeff9-167f-4262-9c92-73117180c8b8
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Pour convertir un volume en profondeur en quantité d''air équivalent surface,
+  on utilise :'
+choices:
+- id: ebba5d50-724f-45e5-a1ae-4e8a57296152
+  text: La pression absolue du lieu où se situe le volume.
+- id: 9724b4c6-1971-468a-b2f4-0d5b87473c26
+  text: La température de l'eau au moment de la mesure.
+- id: fb4bf0ba-3aaf-4172-ab40-e4a95d3412ef
+  text: La pression de gonflage maximale de la bouteille.
+- id: 998b8fa8-ba16-4d39-8e1a-e044cf5e2d3d
+  text: Le temps de plongée déjà effectué à cette profondeur.
+correct_choice_ids:
+- ebba5d50-724f-45e5-a1ae-4e8a57296152
+explanation: Le volume en profondeur se multiplie par la pression absolue du lieu
+  pour obtenir l'équivalent surface, comme dans le calcul du relevage.
+archived: false

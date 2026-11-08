@@ -1,0 +1,20 @@
+id: 35965261-a3f0-49ae-bbec-402a79f74153
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À effort égal, que devient la consommation d'air en profondeur ?
+choices:
+- id: 30b0f79e-c25b-4f5c-8076-7b3be871faa8
+  text: Le volume respiré est le même, mais la masse d'air consommée augmente.
+- id: 6bf98a40-98ab-45fa-846a-be4fa7c65f0f
+  text: Le volume et la masse respirés diminuent tous les deux.
+- id: 421cff2f-2df8-4728-a518-ec60e92add56
+  text: Le volume respiré diminue, la masse consommée reste égale.
+- id: f03688df-8f83-4e37-8afe-07a2e0f452bc
+  text: Le volume et la masse respirés restent tous les deux identiques.
+correct_choice_ids:
+- 30b0f79e-c25b-4f5c-8076-7b3be871faa8
+explanation: À effort égal, la consommation en volume est la même en surface qu'en
+  profondeur, mais la masse volumique de l'air varie avec la pression.
+archived: false
