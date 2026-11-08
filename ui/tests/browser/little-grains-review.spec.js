@@ -74,7 +74,9 @@ test('review quest: time choice drives the session size and the quiz runs', asyn
   await page.screenshot({ path: '/tmp/lg-review-quest-desktop.png' });
 
   await quest.getByRole('button', { name: /^5 min/ }).click();
-  expect(reviewLog).toEqual(['5']);
+  // StrictMode fetches twice in dev; what matters is the chosen minutes.
+  expect(reviewLog.length).toBeGreaterThan(0);
+  expect([...new Set(reviewLog)]).toEqual(['5']);
   const quiz = page.getByRole('dialog', { name: 'Review · 5 minutes' });
   await expect(quiz.getByText('REVIEW', { exact: true })).toBeVisible();
   await expect(quiz.getByText(/Hockey all time legends · The Great One/)).toBeVisible();
@@ -87,6 +89,7 @@ test('review quest: time choice drives the session size and the quiz runs', asyn
 });
 
 test('aged paths show their season in the garden, theme and path views', async ({ page }) => {
+  test.slow(); // WebGL scene + three screenshots are slow under software GL
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
   mockApi(page);
   await page.goto('/apps/little-grains');
