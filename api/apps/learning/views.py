@@ -49,6 +49,49 @@ def catch_up_payload(state, path_lessons):
             "remaining": len(state.catch_up_questions(path_lessons))}
 
 
+# A path's practice ages when it has not been revisited for a while: autumn
+# from 10 days, winter from 20 (Thomas, 2026-11-08). The age anchor is the
+# latest learner activity on the path - a question attempt, or a card read
+# when its questions were never practised - so a path read long ago but never
+# quizzed still ages from real elapsed time, not an assumed season.
+PRACTICE_AUTUMN_DAYS = 10
+PRACTICE_WINTER_DAYS = 20
+
+
+def path_recency(state, lessons):
+    """Latest question attempt or card read per learning path, from the
+    already-loaded learner state (no extra queries)."""
+    lesson_path = {lesson.pk: lesson.learning_path_id for lesson in lessons}
+    recency = {}
+
+    def touch(path_id, at):
+        if path_id is not None and at is not None and (path_id not in recency or at > recency[path_id]):
+            recency[path_id] = at
+
+    for question in state.questions:
+        touch(lesson_path.get(question.lesson_id), state.last_attempt.get(question.pk))
+    for card in state.cards:
+        touch(lesson_path.get(card.lesson_id), state.completed.get(card.pk))
+    return recency
+
+
+def practice_age(anchor, now):
+    """Seasonal aging of one path's practice, for the garden scenery."""
+    if anchor is None:
+        return {"last_activity_at": None, "days_since": None, "state": "fresh"}
+    days = (now - anchor).days
+    season = "winter" if days >= PRACTICE_WINTER_DAYS else "autumn" if days >= PRACTICE_AUTUMN_DAYS else "fresh"
+    return {"last_activity_at": anchor.isoformat(), "days_since": days, "state": season}
+
+
+def practice_payload(state, path_lessons, recency, now):
+    """Aging is only shown once the path has something to review: at least one
+    fully read lesson. Before that the path is still growing, never wilting."""
+    if not path_lessons or not any(state.lesson_fully_read(lesson.pk) for lesson in path_lessons):
+        return {"last_activity_at": None, "days_since": None, "state": "fresh"}
+    return practice_age(recency.get(path_lessons[0].learning_path_id), now)
+
+
 @never_cache
 @csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @require_POST
@@ -296,6 +339,58 @@ def catch_up(request, path_id):
                                        for q in session]})
 
 
+# Review session sizes: the learner says how much time they have, and that
+# sets both the number of paths revisited and the question count (Thomas,
+# 2026-11-08): 5 min -> 1 path / 10 questions, 10 -> 2 / 20, 15 -> 3 / 30.
+REVIEW_MODES = {5: 1, 10: 2, 15: 3}
+
+
+@never_cache
+@require_GET
+@jwt_required
+def review(request):
+    """Cross-theme review: questions from the paths practised least recently.
+
+    Same mechanics as the path practice quiz (same selection priorities, same
+    attempt route), but the pool spans the 1-3 stalest paths across every
+    theme. Only questions of fully read lessons are reviewable.
+    """
+    try:
+        minutes = int(request.GET.get("minutes", ""))
+    except (TypeError, ValueError):
+        minutes = 0
+    if minutes not in REVIEW_MODES:
+        return JsonResponse({"error": "minutes must be one of 5, 10 or 15."}, status=400)
+    state = LearnerState(request.user)
+    lessons = list(visible(Lesson).select_related("learning_path__theme"))
+    read_ids = {lesson.pk for lesson in lessons if state.lesson_fully_read(lesson.pk)}
+    eligible = {}
+    for lesson in lessons:
+        if lesson.pk in read_ids:
+            eligible.setdefault(lesson.learning_path_id, lesson.learning_path)
+    # Every eligible path has an anchor (a fully read lesson implies card
+    # reads), so the stalest-first ordering never has to break a None tie.
+    recency = path_recency(state, lessons)
+    ordered = sorted(eligible, key=lambda pid: (recency.get(pid) or timezone.now(), str(pid)))
+    selected = ordered[:REVIEW_MODES[minutes]]
+    lesson_path = {lesson.pk: lesson.learning_path_id for lesson in lessons}
+    titles = {lesson.pk: lesson.title for lesson in lessons}
+    pool = [q for q in state.questions
+            if q.lesson_id in read_ids and lesson_path.get(q.lesson_id) in selected]
+    session = quiz_session(state, pool, limit=minutes * 2)
+    return JsonResponse({
+        "minutes": minutes,
+        "eligible": bool(selected),
+        "learning_paths": [{"id": str(pid), "title": eligible[pid].title,
+                            "theme_title": eligible[pid].theme.title,
+                            "last_activity_at": (recency[pid].isoformat() if pid in recency else None)}
+                           for pid in selected],
+        "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id],
+                       "learning_path_title": eligible[lesson_path[q.lesson_id]].title}
+                      for q in session],
+    })
+
+
 def quiz_session(state, pool, limit=10):
     """Failed latest answers, unseen questions, then 60% oldest / 40% random.
 
@@ -348,6 +443,8 @@ def garden(request):
     themes_list = list(visible(Theme))
     paths = list(visible(LearningPath))
     lessons = list(visible(Lesson))
+    recency = path_recency(state, lessons)
+    now = timezone.now()
     events = reward_events().get(request.user.pk, [])
     celebrated_paths = set(PathCelebration.objects.filter(
         user=request.user, learning_path__in=paths,
@@ -387,6 +484,8 @@ def garden(request):
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
                 "catch_up": catch_up_payload(state, [lesson for lesson in lessons
                                                      if lesson.learning_path_id == path.pk]),
+                "practice": practice_payload(state, [lesson for lesson in lessons
+                                                     if lesson.learning_path_id == path.pk], recency, now),
                 "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],

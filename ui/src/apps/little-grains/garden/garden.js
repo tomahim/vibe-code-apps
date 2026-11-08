@@ -83,7 +83,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onViewChange, initialView = null, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onReview, onViewChange, initialView = null, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -158,6 +158,50 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     blob.position.y = GROUND_Y + 0.01; blob.scale.setScalar(36); scene.add(blob); return blob;
   })();
 
+  // Seasonal aging of a path's practice (Thomas, 2026-11-08): autumn from 10
+  // days without a question attempt or card read, winter from 20. Above water
+  // the leaves yellow and fall, then snow settles; underwater there are no
+  // falling leaves - the reef pales, and winter drifts down as marine snow.
+  const ageOf = (path) => path?.practice?.state || 'fresh';
+  const isUnderwater = (theme) => !!MIX[theme.terrain]?.underwater;
+  const ageTarget = (state, uw) => state === 'autumn' ? (uw ? '#8fa5b5' : '#d28c2e') : (uw ? '#647e91' : '#eef3f7');
+  const ageTint = (tint, state, uw) => state === 'fresh' ? tint : tint.clone().lerp(new THREE.Color(ageTarget(state, uw)), state === 'autumn' ? 0.55 : 0.75);
+  const AGE_MUL = { autumn: [1.14, 0.93, 0.6], winter: [1.05, 1.08, 1.13], uwAutumn: [0.88, 0.97, 1.04], uwWinter: [0.76, 0.88, 1.0] };
+  const FALL_STYLE = { leaves: { colors: ['#d9903b', '#c9762e', '#e3a83c', '#b85c28'], size: 0.085, speed: [0.3, 0.5], sway: 0.14 }, snow: { colors: ['#f4f8fb', '#e8eff5', '#dde8f0'], size: 0.055, speed: [0.14, 0.24], sway: 0.1 }, marine: { colors: ['#e8f1f7', '#d7e6ef', '#cfe0ea'], size: 0.045, speed: [0.06, 0.11], sway: 0.08 } };
+  const seasonKind = (state, uw) => state === 'fresh' || (uw && state === 'autumn') ? null : uw ? 'marine' : state === 'autumn' ? 'leaves' : 'snow';
+  function makeFallPoints(items, size) {
+    const pos = new Float32Array(items.length * 3), col = new Float32Array(items.length * 3);
+    items.forEach((p, i) => { pos.set([p.x, p.y, p.z], i * 3); col.set([p.color.r, p.color.g, p.color.b], i * 3); });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const pts = new THREE.Points(g, new THREE.PointsMaterial({ size, vertexColors: true, transparent: true, opacity: 0.95, depthWrite: false }));
+    pts.frustumCulled = false; pts.userData.items = items;
+    return pts;
+  }
+  function fallItems(cx, cz, floor, kind, n, rng) {
+    const style = FALL_STYLE[kind], cols = style.colors.map((c) => new THREE.Color(c)), items = [];
+    for (let i = 0; i < n; i++) {
+      const a = rng() * 6.28, d = rng() * 0.85, h = 1.8 + rng() * 0.9;
+      items.push({ x: cx + Math.cos(a) * d, z: cz + Math.sin(a) * d, floor, h, y: floor + rng() * h, phase: rng() * 6.28, sway: style.sway * (0.6 + rng() * 0.8), speed: style.speed[0] + rng() * (style.speed[1] - style.speed[0]), color: cols[Math.floor(rng() * cols.length)] });
+    }
+    return items;
+  }
+  function updateFallPoints(list, dt, time) {
+    for (const pts of list) {
+      const a = pts.geometry.attributes.position.array, items = pts.userData.items;
+      for (let i = 0; i < items.length; i++) {
+        const p = items[i];
+        p.y -= p.speed * dt;
+        if (p.y < p.floor) p.y = p.floor + p.h;
+        a[i * 3] = p.x + Math.sin(time * 1.2 + p.phase) * p.sway;
+        a[i * 3 + 1] = p.y;
+        a[i * 3 + 2] = p.z + Math.cos(time * 0.9 + p.phase) * p.sway * 0.6;
+      }
+      pts.geometry.attributes.position.needsUpdate = true;
+    }
+  }
+
   const species = makeSpecies(prof.detail);
   const fishGeos = makeFish(), turtleGeo = makeTurtle();
   const plantMat = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.88 });
@@ -210,6 +254,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       mesh.position.set(cx, SLAB_H, cz); mesh.castShadow = prof.shadows; mesh.receiveShadow = true; mesh.userData.pick = { kind: 'path', ti, pi };
       garden.add(mesh); cellMeshes.push(mesh);
       const key = `c${ti}.${pi}`, top = SLAB_H + CELL_H, cell = { pi, path, key, center: new THREE.Vector3(cx, top, cz), mesh };
+      // Winter snow cap, hidden unless the path's practice has frozen over.
+      const cap = new THREE.Mesh(hexPrism(R_CELL * 0.94, 0.035, { K: prof.cellK, top: '#f2f6fa', top2: '#dbe5ec', seed: ti * 31 + pi + 7, noise: 0.02, bevel: 0.03 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.55 }));
+      cap.position.set(cx, top + 0.004, cz); cap.receiveShadow = prof.shadows; cap.visible = false; garden.add(cap);
+      cell.snowCap = cap; cell.ageMul = new THREE.Color(1, 1, 1);
       T.cells.push(cell);
       const isPond = theme.terrain === 'pond', pondR = 0.42;
       if (isPond) {
@@ -280,6 +328,47 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   gardenPlants.build(garden);
   const gardenGrass = makeGrass(grassList, garden);
 
+  // Seasonal aging pass: recolour the plants and slabs of stale paths, show
+  // their snow caps and (re)build their falling leaves / snow / marine snow.
+  // Runs once at startup and again whenever fresh garden data arrives, so a
+  // path greens up right after a Review session.
+  const seasonFx = new THREE.Group(); garden.add(seasonFx);
+  let seasonFalls = [];
+  function tintInstances(mesh) {
+    const list = mesh.userData.list;
+    if (!list || !mesh.instanceColor) return;
+    for (let i = 0; i < list.length; i++) {
+      const it = list[i];
+      let tint = it.tint;
+      if (it.key && it.key[0] === 'c') {
+        const [t, p] = it.key.slice(1).split('.').map(Number);
+        const theme = THEMES[t], path = theme?.paths[p];
+        if (path) tint = ageTint(it.tint, ageOf(path), isUnderwater(theme));
+      }
+      mesh.setColorAt(i, tint);
+    }
+    mesh.instanceColor.needsUpdate = true;
+  }
+  function applySeasons() {
+    gardenPlants.meshes.forEach(tintInstances);
+    if (gardenGrass) tintInstances(gardenGrass);
+    tiles.forEach((T) => T.cells.forEach((c) => {
+      const state = ageOf(c.path), uw = isUnderwater(T.theme);
+      const mul = state === 'fresh' ? [1, 1, 1] : AGE_MUL[uw ? `uw${state === 'autumn' ? 'Autumn' : 'Winter'}` : state];
+      c.ageMul.setRGB(mul[0], mul[1], mul[2]);
+      if (c.snowCap) c.snowCap.visible = state === 'winter' && !uw;
+    }));
+    seasonFalls.forEach((f) => { seasonFx.remove(f); f.geometry.dispose(); f.material.dispose(); });
+    seasonFalls = [];
+    tiles.forEach((T) => T.cells.forEach((c) => {
+      const kind = seasonKind(ageOf(c.path), isUnderwater(T.theme));
+      if (!kind) return;
+      seasonFalls.push(makeFallPoints(fallItems(c.center.x, c.center.z, c.center.y + 0.02, kind, mobile ? 6 : 14, rng), FALL_STYLE[kind].size));
+    }));
+    seasonFalls.forEach((f) => seasonFx.add(f));
+  }
+  applySeasons();
+
   const outlineMat = new THREE.MeshBasicMaterial({ color: TERRACOTTA, transparent: true, opacity: 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2, side: THREE.DoubleSide });
   const cellOutline = new THREE.Mesh(hexOutline(R_CELL, 0.07), outlineMat), slabOutline = new THREE.Mesh(hexOutline(R_THEME + 0.02, 0.11), outlineMat), selOutline = new THREE.Mesh(hexOutline(R_CELL, 0.09), outlineMat), tileOutline = new THREE.Mesh(hexOutline(TILE_R, 0.08), outlineMat);
   [cellOutline, slabOutline, selOutline, tileOutline].forEach((o) => { o.visible = false; o.renderOrder = 5; scene.add(o); });
@@ -341,8 +430,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   function buildTrail(ti, pi) {
     disposeTrail();
     const theme = THEMES[ti], path = theme.paths[pi], n = path.lessons.length, mix = MIX[theme.terrain], r = rngFor(ti * 100 + pi * 7 + 1);
+    // A stale path keeps its season inside the trail view too: yellowed or
+    // frosted ground, falling leaves or snow (marine snow underwater).
+    const season = ageOf(path), uw = !!mix.underwater;
+    const seasonTop = (hex) => (season === 'fresh' ? hex : `#${ageTint(new THREE.Color(hex), season, uw).getHexString()}`);
     const g = new THREE.Group(), top = TRAIL_H, tTop = TRAIL_H + TILE_H;
-    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: theme.top, top2: theme.top2, seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07, ...(mix?.strata ? { strata: mix.strata } : {}) }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: seasonTop(theme.top), top2: seasonTop(theme.top2), seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07, ...(mix?.strata ? { strata: mix.strata } : {}) }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
     plat.rotation.y = Math.PI / 6; plat.castShadow = prof.shadows; plat.receiveShadow = true; plat.userData.own = true; g.add(plat);
     // axial chain of tiles
     const ax = n > 7 ? spiral(n) : (() => { const cells = [[0, 0]]; for (let i = 1; i < n; i++) { const d = CHAIN[(i - 1) % CHAIN.length]; cells.push([cells[i - 1][0] + d[0], cells[i - 1][1] + d[1]]); } return cells; })();
@@ -353,7 +446,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     const lessonName = mix.lesson, big = { tree: 0.85, pine: 0.9, snowPine: 0.9, appleTree: 0.85, cactus: 1.05, lotus: 1.25, sunflower: 1.15 }[lessonName] || 1;
     wp.forEach((w, i) => {
       const x = w.x - cx, z = w.z - cz;
-      const tile = new THREE.Mesh(hexPrism(TILE_R, TILE_H, { K: prof.cellK, top: theme.top, top2: theme.top2, seed: ti * 13 + pi * 5 + i + 90, noise: 0.05, bevel: 0.05, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+      const tile = new THREE.Mesh(hexPrism(TILE_R, TILE_H, { K: prof.cellK, top: seasonTop(theme.top), top2: seasonTop(theme.top2), seed: ti * 13 + pi * 5 + i + 90, noise: 0.05, bevel: 0.05, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
       tile.position.set(x, top, z); tile.castShadow = prof.shadows; tile.receiveShadow = true; tile.userData = { pick: { kind: 'lesson', i }, own: true }; g.add(tile);
       const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: '#b9b3a2', transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide })); ring.position.set(x, tTop + 0.03, z); ring.userData.own = true; g.add(ring);
       const dotMat = [], dotMeshes = [];
@@ -373,6 +466,18 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       plants.add(name, { x: pt[0], y: top + 0.03, z: pt[1], rot: r() * 6.28, s, thr: tier === 'sig' ? 0.3 + r() * 0.5 : tier === 'mid' ? 0.1 + r() * 0.4 : r() * 0.25, w: 0.3, key: 'T', grow: true, tint: new THREE.Color().setScalar(0.9 + r() * 0.2) });
     });
     plants.build(g);
+    if (season !== 'fresh') {
+      const tintAll = (mesh) => {
+        const list = mesh.userData.list;
+        if (!list || !mesh.instanceColor) return;
+        for (let i = 0; i < list.length; i++) mesh.setColorAt(i, ageTint(list[i].tint || new THREE.Color(1, 1, 1), season, uw));
+        mesh.instanceColor.needsUpdate = true;
+      };
+      plants.meshes.forEach(tintAll);
+    }
+    const trailFalls = [];
+    { const kind = seasonKind(season, uw);
+      if (kind) { const pts = makeFallPoints(fallItems(0, 0, top + 0.05, kind, mobile ? 10 : 26, r), FALL_STYLE[kind].size); pts.userData.own = true; g.add(pts); trailFalls.push(pts); } }
     // Next-lesson marker: a gold pennant, a soft halo and a budding orange flower, moved onto the next lesson tile.
     const nextMark = new THREE.Group();
     {
@@ -400,7 +505,12 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
         .forEach((pt) => gl.push({ x: pt[0], y: top, z: pt[1], s: 0.22 + r() * 0.25, rot: r() * 6.28, key: 'T', v: r(), tint: gt.clone().offsetHSL((r() - 0.5) * 0.03, 0, (r() - 0.5) * 0.2).addScalar(0.45) }));
       tg = makeGrass(gl, g);
     }
-    trail = { ti, pi, theme, path, n, nodes, plants, grass: tg, nextMark };
+    if (season !== 'fresh' && tg) {
+      const list = tg.userData.list;
+      for (let i = 0; i < list.length; i++) tg.setColorAt(i, ageTint(list[i].tint || new THREE.Color(1, 1, 1), season, uw));
+      tg.instanceColor.needsUpdate = true;
+    }
+    trail = { ti, pi, theme, path, n, nodes, plants, grass: tg, nextMark, falls: trailFalls };
     scene.add(g); trailGroup = g; g.visible = false;
     ['T', ...nodes.map((x) => `L${x.i}`)].forEach((k) => disp.set(k, 0));
     return trail;
@@ -665,12 +775,14 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     fab.hidden = true;
     let h = '';
     if (view.level === 'garden') {
-      h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>${renderRecentMenu()}<ul class="lg-list">` +
+      const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
+      h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>` +
+        `<div class="lg-review"><button class="lg-review-btn" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.replay}<span class="lg-review-copy"><b>Review</b><small>Questions from your least-practised paths</small></span></button></div>${renderRecentMenu()}<ul class="lg-list">` +
         THEMES.map((t, i) => { const started = t.paths.filter((p) => p.progress.started).length, avg = fraction(t.progress); return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p><ul class="lg-list">` +
-        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${stateDots(lessonStates(p))}</span></span><span class="pc">${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
+        t.paths.map((p, i) => { const pr = fraction(p.progress), li = lessonInfo(p); const season = ageOf(p); return `<li><button data-path="${i}"><span class="tt"><b>${mobile ? `${i + 1}. ` : ''}${esc(p.title)}</b><span class="dots">${stateDots(lessonStates(p))}</span></span><span class="pc">${season === 'winter' ? '❄️ ' : season === 'autumn' ? '🍂 ' : ''}${pr === 0 ? 'Not started' : pct(pr)}</span></button></li>`; }).join('') + '</ul>';
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
       const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
@@ -678,6 +790,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       // The question gauge shrinks to a slim strip: the practice quiz floats
       // outside the panel, so the lessons stay the panel's focus.
       h += `<p class="lg-strip"><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><span class="lg-strip-count">${qc} of ${qt} questions correct</span></p>`;
+      const seasonInfo = trail.path.practice;
+      if (seasonInfo && seasonInfo.days_since != null && (seasonInfo.state === 'autumn' || seasonInfo.state === 'winter')) {
+        h += `<p class="lg-season ${seasonInfo.state}">${seasonInfo.state === 'autumn' ? '🍂' : '❄️'} Not practised for ${seasonInfo.days_since} days - a Review wakes this path up.</p>`;
+      }
       // Card dots sit on their own line below the name in every row; the
       // selected lesson's start action is the floating button at the
       // panel's right edge (wired below, positioned by placeFab).
@@ -740,6 +856,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);
     else if (b.dataset.reward) onRewardInfo?.(b.dataset.reward);
     else if (b.dataset.quiz) onPracticeQuiz?.(trail.path.id, trail.path.title);
+    else if (b.dataset.review) onReview?.();
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) { panel.classList.toggle('open'); trackFab(); }
   });
@@ -810,7 +927,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (changed || dirty) {
       if (garden.visible) {
         gardenPlants.update(disp); updateGrass(gardenGrass, disp);
-        tiles.forEach((T) => T.cells.forEach((c) => { const s = smooth((disp.get(c.key) ?? 0) * 3); c.mesh.material.color.setRGB(0.8 + 0.2 * s, 0.74 + 0.26 * s, 0.6 + 0.4 * s); }));
+        tiles.forEach((T) => T.cells.forEach((c) => { const s = smooth((disp.get(c.key) ?? 0) * 3); c.mesh.material.color.setRGB(0.8 + 0.2 * s, 0.74 + 0.26 * s, 0.6 + 0.4 * s).multiply(c.ageMul); }));
       }
       if (trail && trailGroup.visible) {
         trail.plants.update(disp); updateGrass(trail.grass, disp);
@@ -873,6 +990,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     clouds.children.forEach((c) => { c.position.x += c.userData.v * dt; if (c.position.x > 60) c.position.x = -60; });
     const ctr = controls.target, spread = Math.min(4, camera.position.distanceTo(ctr) * 0.22);
     flyers.children.forEach((f) => { const u = f.userData, a = time * u.sp + u.off; f.position.set(ctr.x + Math.cos(a) * (u.rad + spread * 0.4), ctr.y + u.h + Math.sin(time * 1.3 + u.ph) * 0.25, ctr.z + Math.sin(a * 1.2) * (u.rad + spread * 0.4)); f.rotation.y = -a + Math.PI; const flap = Math.sin(time * 16 + u.ph) * 0.9; u.wl.rotation.z = flap; u.wr.rotation.z = -flap; f.scale.setScalar(u.scale * (view.level === 'garden' ? 1.8 : 1)); });
+    updateFallPoints(seasonFalls, dt, time);
+    if (trail && trailGroup.visible && trail.falls) updateFallPoints(trail.falls, dt, time);
     if (pollen) { const a = pollen.geometry.attributes.position.array; for (let i = 0; i < a.length; i += 3) { a[i] += Math.sin(time * 0.5 + i) * 0.003 + 0.002; a[i + 1] += Math.sin(time * 0.7 + i * 0.3) * 0.002; a[i + 2] += Math.cos(time * 0.4 + i) * 0.002; if (a[i] > 11) a[i] -= 22; if (a[i + 1] > 4.2) a[i + 1] = 0.3; } pollen.geometry.attributes.position.needsUpdate = true; }
     if (rainT > 0) rainT -= dt;
     const raining = rainT > 0; rain.visible = raining;
@@ -892,7 +1011,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       const v = trail.nodes[i].pos.clone().project(camera), rr = root.getBoundingClientRect();
       return { x: (v.x * 0.5 + 0.5) * rr.width, y: (-v.y * 0.5 + 0.5) * rr.height };
     },
-    updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, catch_up: path.catch_up, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; renderUI(); rainT = 1.2; },
+    updateData(nextThemes, nextRewards, nextRecentLessons = []) { nextThemes.forEach((theme, ti) => { if (!THEMES[ti]) return; THEMES[ti].progress = theme.progress; theme.paths.forEach((path, pi) => { if (!THEMES[ti].paths[pi]) return; Object.assign(THEMES[ti].paths[pi], { progress: path.progress, catch_up: path.catch_up, practice: path.practice, lessonData: path.lessonData }); }); }); state.rewards = nextRewards; state.recentLessons = nextRecentLessons; state.version = (state.version || 0) + 1; dirty = true; applySeasons(); renderUI(); rainT = 1.2; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
     dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },

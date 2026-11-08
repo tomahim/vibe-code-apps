@@ -96,3 +96,14 @@
 .lg-lastlessons-caret{margin-left:auto;color:var(--terra);transition:transform .2s}
 .lg-lastlessons-toggle[aria-expanded="true"] .lg-lastlessons-caret{transform:rotate(180deg)}
 .lg-lastlessons-menu{list-style:none;margin:6px 0 0;padding:10px;display:grid;gap:5px;background:#f8f0e3;border:1px solid #e9dac0;border-radius:14px}
+
+/* Review entry at the garden root + seasonal practice aging hints. */
+.lg-review{margin:10px 0 12px}
+.lg-review-btn{width:100%;min-height:44px;display:flex;align-items:center;gap:10px;border:1px solid #e5d3b0;border-radius:12px;background:linear-gradient(135deg,#fdf6e3,#f8ecd2);padding:9px 12px;font:700 13px var(--serif);text-align:left;color:#5b4a2e;cursor:pointer}
+.lg-review-btn:hover,.lg-review-btn:focus-visible{border-color:var(--terra);background:#fbf1da}
+.lg-review-btn:disabled{opacity:.55;cursor:not-allowed}
+.lg-review-btn svg{flex:none;width:18px;height:18px;color:#b57658}
+.lg-review-copy{display:flex;flex-direction:column;gap:1px}
+.lg-review-copy small{font:400 11.5px var(--sans);color:#8a7a5c}
+.lg-season{margin:8px 0 0;font:600 12.5px var(--sans);color:#8a6a34}
+.lg-season.winter{color:#5d7a8c}

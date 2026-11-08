@@ -358,7 +358,10 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
   </div>;
 }
 
-function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
+// One quiz dialog for both entry points: the per-path Practice quiz and the
+// cross-theme Review session. Same mechanism, same look (Thomas, 2026-11-08);
+// only the fetch URL, the kicker and the per-question path label differ.
+function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUIZ", onClose, onProgress }) {
   const [data, setData] = useState(null);
   const [queue, setQueue] = useState([]);
   const [tries, setTries] = useState({});
@@ -371,11 +374,11 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
 
   useEffect(() => {
     let active = true;
-    api(`paths/${pathId}/catch-up/`)
+    api(fetchUrl)
       .then((result) => { if (active) { setData(result); setQueue(result.questions); setTotal(result.questions.length); } })
       .catch((err) => { if (active) setError(err.message); });
     return () => { active = false; };
-  }, [pathId]);
+  }, [fetchUrl]);
 
   const question = queue[0] || null;
   const typedQuestion = question?.type === "type_answer_question";
@@ -409,17 +412,17 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
 
   const left = total - solved;
   return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) finish(); }}>
-    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={`Practice quiz - ${pathTitle}`}>
-      <div className="grains-reader-top"><span className="grains-reader-kicker">Practice quiz · {pathTitle}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
+    <section className="grains-reader" role="dialog" aria-modal="true" aria-label={label}>
+      <div className="grains-reader-top"><span className="grains-reader-kicker">{kicker}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
       {error && <p className="grains-error" role="alert">{error}</p>}
       {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>No questions available yet</h3><p>Read every card in a lesson to practice its questions.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : <>
-          <div className="grains-reader-head"><p>PRACTICE QUIZ</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
+          <div className="grains-reader-head"><p>{heading}</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
           <div className="grains-progress-track" aria-label={`${solved} of ${total} questions answered correctly`}><span style={{ width: `${total ? (solved / total) * 100 : 0}%` }} /></div>
           <div className="grains-reader-content">
             <div className="grains-question">
-              <p className="grains-card-index">{question.lesson_title} · {typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
+              <p className="grains-card-index">{question.learning_path_title ? `${question.learning_path_title} · ` : ""}{question.lesson_title} · {typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
               <h3>{question.prompt}</h3>
               {typedQuestion ? <div className="grains-typed-answer">
                 <label htmlFor={`grains-quiz-answer-${question.id}`}>Your answer</label>
@@ -437,6 +440,30 @@ function PracticeQuiz({ pathId, pathTitle, onClose, onProgress }) {
             </div>
           </div>
         </>}
+    </section>
+  </div>;
+}
+
+// The three Review session sizes, straight from his voice note: the time the
+// learner has sets both the question count and how many stale paths are mixed.
+const REVIEW_OPTIONS = [
+  { minutes: 5, questions: 10, paths: 1 },
+  { minutes: 10, questions: 20, paths: 2 },
+  { minutes: 15, questions: 30, paths: 3 },
+];
+
+function ReviewPicker({ onPick, onClose }) {
+  return <div className="grains-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+    <section className="grains-quest" role="dialog" aria-modal="true" aria-label="Review - choose how much time you have">
+      <div className="grains-quest-note">
+        <p className="grains-card-index">REVIEW</p>
+        <h2>How much time do you have?</h2>
+        <p>Questions from the paths you have not practised for the longest time, across every theme.</p>
+        <div className="grains-quest-options">{REVIEW_OPTIONS.map((option) => <button key={option.minutes} className="grains-quest-option" onClick={() => onPick(option.minutes)}>
+          <b>{option.minutes} min</b><span>{option.questions} questions · {option.paths} path{option.paths === 1 ? "" : "s"}</span>
+        </button>)}</div>
+        <button className="grains-text-button" onClick={onClose}>Not now</button>
+      </div>
     </section>
   </div>;
 }
@@ -590,6 +617,8 @@ export default function LittleGrains() {
   const readerMeta = useRef(null);
   const gardenData = useRef(null);
   const [catchUp, setCatchUp] = useState(null);
+  const [reviewPicker, setReviewPicker] = useState(false);
+  const [reviewMinutes, setReviewMinutes] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showBadges, setShowBadges] = useState(false);
   const [showStreak, setShowStreak] = useState(false);
@@ -684,7 +713,7 @@ export default function LittleGrains() {
 
   // Leaving a lesson or a Practice quiz, by any route (close, back, finish),
   // is the moment to look for new badges.
-  const inSession = Boolean(reader || catchUp);
+  const inSession = Boolean(reader || catchUp || reviewMinutes);
   const wasInSession = useRef(false);
   useEffect(() => {
     if (wasInSession.current && !inSession) checkBadges();
@@ -737,7 +766,7 @@ export default function LittleGrains() {
     const current = parseRoute(window.location.pathname);
     const located = locateRoute(garden, current);
     if (!current.step) { const valid = routeUrl(located.route); if (valid !== window.location.pathname) window.history.replaceState({}, "", valid); }
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle) => setCatchUp({ pathId, pathTitle }), onReview: () => setReviewPicker(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -751,9 +780,9 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp) return; if (showBadges || showStreak) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp && !reviewMinutes) return; if (showBadges || showStreak) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (reviewPicker) setReviewPicker(false); else if (reviewMinutes) setReviewMinutes(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [reader, catchUp, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
+  }, [reader, catchUp, reviewPicker, reviewMinutes, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><StreakPill streak={badges?.streak} onClick={() => { setShowStreak(true); checkBadges(); }} /><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
@@ -762,7 +791,9 @@ export default function LittleGrains() {
           ? <GrainsLoader attempt={startup.attempt} />
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
     {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
-    {catchUp && <PracticeQuiz pathId={catchUp.pathId} pathTitle={catchUp.pathTitle} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/`} kicker={`Practice quiz · ${catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.pathTitle}`} onClose={() => setCatchUp(null)} onProgress={refresh} />}
+    {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
+    {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} onOpenBadges={() => { setShowLeaderboard(false); setShowBadges(true); checkBadges(); }} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
