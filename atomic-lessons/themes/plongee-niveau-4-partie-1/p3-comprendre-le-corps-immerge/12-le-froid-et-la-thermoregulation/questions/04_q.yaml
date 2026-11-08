@@ -2,7 +2,7 @@ id: 64452f89-80e7-41ee-b894-c7a4622eecac
 position: 4
 type: multiple_choice
 selection: single
-after_card_position: 2
+after_card_position: 3
 prompt: Quelle est la première réaction de l'organisme face au froid ?
 choices:
 - id: 432da777-0bc8-42e9-b23e-69d5afba5cf1
