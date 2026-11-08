@@ -196,3 +196,53 @@ class ChallengeTests(TestCase):
         self.finish_week(self.aurore)
         revealed = self.client.get("/api/learning/challenge/history/").json()["weeks"][0]["ranking"]
         self.assertEqual({r["name"] for r in revealed}, {"Thomas", "Aurore"})
+
+
+class ChallengeConfigTest(TestCase):
+    """Production defaults the accelerated browser fixtures override."""
+
+    def test_timer_defaults_to_thirty_seconds(self):
+        from apps.learning.challenge import CHALLENGE_SECONDS, CHALLENGE_SIZE
+        self.assertEqual(CHALLENGE_SECONDS, 30)
+        self.assertEqual(CHALLENGE_SIZE, 10)
+
+
+class ChallengePlayersConfigTest(TestCase):
+    """The duo setting must resolve to exactly two distinct accounts."""
+
+    def setUp(self):
+        User = get_user_model()
+        self.thomas = User.objects.create_user(username="thomas", email="thomas@example.com", password="x")
+        self.aurore = User.objects.create_user(username="aurore", email="aurore@example.com", password="x")
+
+    def url(self):
+        return "/api/learning/challenge/"
+
+    def status_with(self, setting, user=None):
+        user = user or self.thomas
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(user)}"
+        with override_settings(LEARNING_CHALLENGE_PLAYERS=setting):
+            return self.client.get(self.url()).status_code
+
+    def test_exactly_two_distinct_accounts_unlock_the_duel(self):
+        self.assertEqual(self.status_with("thomas,aurore"), 200)
+        self.assertEqual(self.status_with("thomas@example.com,aurore@example.com"), 200)
+
+    def test_empty_setting_disables_the_duel(self):
+        self.assertEqual(self.status_with(""), 404)
+
+    def test_a_single_handle_disables_the_duel(self):
+        self.assertEqual(self.status_with("thomas"), 404)
+
+    def test_an_unknown_handle_disables_the_duel(self):
+        self.assertEqual(self.status_with("thomas,nobody"), 404)
+
+    def test_both_handles_resolving_to_one_account_disables_the_duel(self):
+        self.assertEqual(self.status_with("thomas,thomas@example.com"), 404)
+
+    def test_an_ambiguous_email_disables_the_duel(self):
+        User = get_user_model()
+        User.objects.create_user(username="aurore2", email="aurore@example.com", password="x")
+        self.assertEqual(self.status_with("thomas,aurore@example.com"), 404)
+        # The exact username still resolves uniquely.
+        self.assertEqual(self.status_with("thomas,aurore"), 200)

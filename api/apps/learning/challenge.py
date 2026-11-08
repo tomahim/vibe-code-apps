@@ -44,13 +44,23 @@ CHALLENGE_MIN_WIN = 3
 
 
 def challenge_players():
-    """The duo allowed to play: the accounts named in settings. Empty setting,
-    no challenge."""
+    """The duo allowed to play: exactly the two distinct accounts named in
+    settings. Fail closed: an empty setting, a missing handle, a handle
+    matching several accounts, or both handles resolving to the same account
+    all disable the duel (no player list, every challenge endpoint 404s)."""
     handles = [h.strip() for h in getattr(settings, "LEARNING_CHALLENGE_PLAYERS", "").split(",") if h.strip()]
-    if not handles:
+    if len(handles) != 2:
         return []
-    return list(get_user_model().objects.filter(
-        models.Q(username__in=handles) | models.Q(email__in=handles)))
+    User = get_user_model()
+    players = []
+    for handle in handles:
+        matches = User.objects.filter(models.Q(username=handle) | models.Q(email=handle))
+        if matches.count() != 1:
+            return []
+        players.append(matches.get())
+    if players[0].pk == players[1].pk:
+        return []
+    return players
 
 
 def player_or_404(request):

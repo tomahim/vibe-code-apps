@@ -160,3 +160,36 @@ test('ten-question flow: timer, auto-advance, completion and ranking reveal', as
   await expect(dialog.getByText('#2 Thomas — 2/10')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-challenge-reveal-desktop.png' });
 });
+
+test('phone: intro shows production timer config (10 questions, 30 seconds)', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const questions = Array.from({ length: 10 }, (_, i) => ({
+    id: id(400 + i), type: 'multiple_choice', after_card_position: 1,
+    prompt: `Question ${i + 1}?`,
+    options: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }],
+    lesson_title: `Lesson ${i + 1}`, learning_path_title: 'Hockey all time legends', answered: false,
+  }));
+  page.route('**/api/learning/**', (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
+    if (url.pathname.endsWith('/garden/')) {
+      return route.fulfill({
+        json: {
+          themes: [{ ...row(id(1), 'Sport'), description: 'L', progress: done, learning_paths: [{ celebrated: true, ...row(id(11), 'Hockey all time legends'), progress: done, practice: { last_activity_at: '2026-11-07T10:00:00+00:00', days_since: 1, state: 'fresh' }, catch_up: { eligible: true, remaining: 0 }, lessons: [{ ...row(id(101), 'The Great One'), learning_path_id: id(11), progress: done }] }] }],
+          rewards: { drops: 120, carrots: 12 }, recent_lessons: [],
+        },
+      });
+    }
+    if (url.pathname.endsWith('/challenge/history/')) return route.fulfill({ json: { weeks: [] } });
+    if (url.pathname.endsWith('/challenge/')) {
+      return route.fulfill({ json: { week_key: '2026-W45', size: 10, seconds_per_question: 30, me: { answered: 0, correct: 0, finished: false }, ranking: null, questions } });
+    }
+    return route.fulfill({ json: {} });
+  });
+  await page.goto('/apps/little-grains');
+  await page.locator('button.lg-challenge-pill').click();
+  const dialog = page.getByRole('dialog', { name: 'Weekly challenge' });
+  await expect(dialog.getByText('10 questions picked at random from the general-knowledge paths — read or not. 30 seconds each, then it moves on. Same questions for both players.')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-challenge-intro-prod-mobile.png' });
+});
