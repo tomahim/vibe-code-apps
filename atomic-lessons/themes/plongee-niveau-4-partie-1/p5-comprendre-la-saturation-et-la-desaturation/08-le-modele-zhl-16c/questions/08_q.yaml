@@ -1,0 +1,21 @@
+id: 70166ca3-b3bf-46d1-a045-8651b2656fcc
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle porte Bühlmann ouvre-t-il avec ces travaux, selon le manuel ?
+choices:
+- id: 62360607-b8d5-4397-8a2b-2a80ac928ddf
+  text: Les premières tables spécifiquement conçues pour la plongée en altitude.
+- id: 40197165-7364-4586-9295-5832a4895c77
+  text: Les premières tables de plongée souterraine en France.
+- id: 6bf29785-c0b9-4de1-8ef1-45167395734f
+  text: Les premières tables destinées à la plongée sous glace.
+- id: ea76ed93-4174-44b3-b369-f053e846db3f
+  text: Les premières tables de chasse sous-marine en apnée.
+correct_choice_ids:
+- 62360607-b8d5-4397-8a2b-2a80ac928ddf
+explanation: En prenant en compte la pression absolue et l'air alvéolaire, Bühlmann
+  ouvre la voie aux premières tables spécifiquement conçues pour l'altitude ; son
+  livre de 1983 popularise son modèle dans de nombreux ordinateurs.
+archived: false

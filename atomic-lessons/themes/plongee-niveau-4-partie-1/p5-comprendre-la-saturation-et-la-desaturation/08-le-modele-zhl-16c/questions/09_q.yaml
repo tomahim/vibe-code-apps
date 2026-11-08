@@ -1,0 +1,22 @@
+id: 491c366c-a590-48fa-abb1-54d8458ae0cb
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que signifient les lettres « ZH-L » dans ZH-L12 et ZH-L16 ?
+choices:
+- id: e24c1f2f-7e98-4f1d-84ac-1a7178bd3acf
+  text: ZH pour Zürich, L pour Limits ; le nombre indique la quantité de M-Values
+    par compartiment.
+- id: 07d3b596-c9d0-4a9e-a19a-eb1ad81f3358
+  text: ZH pour Zürich-Haldane, L pour Limite de 12 ou 16 compartiments.
+- id: 8c6ff6eb-2453-4e20-96f6-7938993645ee
+  text: ZH pour Zone Humide, L pour le nom du laboratoire suisse.
+- id: 351327f9-e568-45d5-ab45-2b858fb41f13
+  text: ZH pour Zéro Helium, L pour la profondeur maximale en mètres.
+correct_choice_ids:
+- e24c1f2f-7e98-4f1d-84ac-1a7178bd3acf
+explanation: ZH = Zürich, L = Limits ; le nombre (12 ou 16) indique la quantité de
+  M-Values pour chaque compartiment - par abus de langage, parfois présenté comme
+  le nombre de compartiments.
+archived: false

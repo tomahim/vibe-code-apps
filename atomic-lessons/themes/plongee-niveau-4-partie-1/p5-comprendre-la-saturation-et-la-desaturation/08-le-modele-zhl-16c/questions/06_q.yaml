@@ -1,0 +1,22 @@
+id: 729fa210-23d5-4789-ae8f-5c090cccd42e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Sc et M-Values s'opposent-ils, selon le manuel ?
+choices:
+- id: e44dba19-a2c6-4ec1-af1f-91db62085cf9
+  text: 'Non : ce sont deux présentations du même concept, qui se complètent dans
+    les modèles haldaniens.'
+- id: 9388daf3-bc2c-45da-9807-75d215cca45a
+  text: 'Oui : un modèle doit choisir définitivement entre les deux approches.'
+- id: 7caa3cc4-51a0-46eb-9cfc-39cb65a20905
+  text: 'Oui : les M-Values ont rendu les Sc totalement obsolètes.'
+- id: e7c6e9c0-27a0-49c6-ba07-8da747b56369
+  text: Non, mais les Sc sont réservés aux tables et les M-Values aux piscines.
+correct_choice_ids:
+- e44dba19-a2c6-4ec1-af1f-91db62085cf9
+explanation: Avec les Sc, on calcule jusqu'à quelle profondeur remonter ; avec les
+  M-Values, la TN2 maximale acceptable à une profondeur donnée. Les deux approches
+  se complètent sans s'opposer.
+archived: false
