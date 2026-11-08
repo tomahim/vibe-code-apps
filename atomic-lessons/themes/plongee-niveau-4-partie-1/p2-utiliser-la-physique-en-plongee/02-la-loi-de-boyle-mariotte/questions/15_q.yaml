@@ -1,0 +1,21 @@
+id: 0af4a37d-f8ca-4bc2-9692-f494e1980905
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Si la température augmente pendant le gonflage, que fait la pression dans
+  la bouteille ?
+choices:
+- id: a1498b99-9a78-41d8-901f-ed3520fe1d98
+  text: 'Elle varie aussi : P x V = constante ne suffit plus à décrire le gaz.'
+- id: 8599ff36-38e3-4b77-81ef-3a7b4a58b79c
+  text: Elle reste stable, le volume de la bouteille étant invariable.
+- id: 919820f6-d018-4617-bf52-1ec4bae8bf3f
+  text: Elle diminue toujours, car le gaz se détend en chauffant.
+- id: 765b57ef-1de4-4b57-af97-71caded7c597
+  text: Elle devient nulle, le gaz se transformant en liquide.
+correct_choice_ids:
+- a1498b99-9a78-41d8-901f-ed3520fe1d98
+explanation: Quand la température varie, la pression varie aussi ; une autre loi entre
+  en jeu, détaillée dans la leçon sur la température.
+archived: false

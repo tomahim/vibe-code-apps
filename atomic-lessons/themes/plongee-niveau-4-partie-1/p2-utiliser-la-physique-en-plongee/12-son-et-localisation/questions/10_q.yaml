@@ -1,0 +1,23 @@
+id: 4ce630d8-3365-4e59-adbc-bce242805bdc
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi les deux oreilles sont-elles stimulées presque en même temps sous
+  l'eau ?
+choices:
+- id: fb428242-ede2-45db-bb0a-f71d42ee3cb4
+  text: Le son y va beaucoup plus vite et les oreilles internes ne sont distantes
+    que d'environ 10 cm.
+- id: 5e2a02d0-4785-481a-9221-761bf0704044
+  text: Le cerveau traite les sons sous-marins en les fusionnant volontairement.
+- id: 7b00fb38-6fd0-46eb-a7d0-5bb8099da8e5
+  text: Le masque relie les deux oreilles par une chambre d'air unique.
+- id: 22ef82e0-de28-44c6-ad3f-b7ff6be86243
+  text: Les ondes y sont trop faibles pour créer le moindre décalage.
+correct_choice_ids:
+- fb428242-ede2-45db-bb0a-f71d42ee3cb4
+explanation: 'Avec 1 530 m/s et un écart d''environ 10 cm entre les deux oreilles
+  internes, les deux oreilles sont stimulées pratiquement en même temps : le décalage
+  utile à la localisation disparaît.'
+archived: false

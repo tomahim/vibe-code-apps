@@ -1,0 +1,21 @@
+id: 9a473b1b-bc85-4c6c-aa08-556c0de5c392
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi la voie tympanique fonctionne-t-elle mal sous l'eau ?
+choices:
+- id: faad954e-b405-461b-93f9-241fb24c2fee
+  text: 'Les ondes sont de petite amplitude : le tympan vibre trop faiblement.'
+- id: 746635e8-4ed3-4129-bc77-f2c337ed18f5
+  text: L'eau bouche le conduit auditif dès la mise à l'eau.
+- id: d43d5e45-c683-43c9-85ca-ccf045ce6bf7
+  text: Le tympan est paralysé par la pression ambiante.
+- id: 415ebb31-7253-4420-863d-cc1cfb6fa9cc
+  text: Les osselets se solidarisent sous l'effet du froid.
+correct_choice_ids:
+- faad954e-b405-461b-93f9-241fb24c2fee
+explanation: 'Les ondes phoniques qui traversent l''eau sont de petite amplitude :
+  le tympan vibre faiblement, empêchant les cellules sensorielles de la cochlée de
+  détecter les oscillations transmises par cette voie.'
+archived: false

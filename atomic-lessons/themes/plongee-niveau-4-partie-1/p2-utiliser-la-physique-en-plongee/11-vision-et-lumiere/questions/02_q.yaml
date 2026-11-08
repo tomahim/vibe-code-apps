@@ -1,0 +1,22 @@
+id: 74da0bdb-9314-49d5-b4fd-07ed51a0a55a
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi voit-on trouble sous l'eau sans masque ?
+choices:
+- id: 069fb30f-538a-4e69-9344-8c5f35dfd5af
+  text: 'L''effet optique de la cornée est annulé : l''image se forme légèrement en
+    arrière de la rétine.'
+- id: e5fa59ce-56ad-461a-8698-b16a330d5beb
+  text: L'eau irrite la rétine, qui ne peut plus recevoir aucune image.
+- id: cec6d6d5-c78c-4a1b-9170-73b183f3d29b
+  text: La pression déforme le globe oculaire dès le premier mètre.
+- id: 2dcc085d-aa8d-42dc-8851-aae57fb84465
+  text: Les rayons lumineux sont entièrement absorbés avant l'œil.
+correct_choice_ids:
+- 069fb30f-538a-4e69-9344-8c5f35dfd5af
+explanation: 'Dans l''eau, l''image ne se forme plus sur la rétine mais légèrement
+  en arrière : nous devenons hypermétropes. Le masque interpose une couche d''air
+  entre l''œil et l''eau pour retrouver une image nette.'
+archived: false

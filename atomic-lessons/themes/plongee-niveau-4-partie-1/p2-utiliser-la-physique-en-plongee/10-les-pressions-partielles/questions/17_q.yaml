@@ -1,0 +1,21 @@
+id: 2092ec6e-ecf1-48b8-ba49-7c2d068d76dc
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi tolère-t-on en caisson des PpO2 supérieures à celles de la plongée
+  ?
+choices:
+- id: ec0b96f7-0330-4f2a-9647-d98b141b732f
+  text: La sensibilité à l'oxygène est plus importante dans l'eau qu'en ambiance sèche.
+- id: 842d6857-8db6-413b-88df-4a669393e509
+  text: Les caissons sont remplis d'hélium qui neutralise l'oxygène.
+- id: 37dd8296-689a-4d85-adf8-f6d1b50cac3a
+  text: La réglementation des caissons date d'avant la découverte de l'hyperoxie.
+- id: 08c7adbe-15f7-45f3-952d-c6c28841f98a
+  text: Les caissons fonctionnent toujours à moins de 1 bar de pression.
+correct_choice_ids:
+- ec0b96f7-0330-4f2a-9647-d98b141b732f
+explanation: La sensibilité à l'oxygène est plus importante dans l'eau qu'en ambiance
+  sèche, d'où des pressions partielles d'oxygène supérieures tolérées en caisson.
+archived: true

@@ -1,0 +1,21 @@
+id: e34de163-f6ea-4694-99e3-a3ffc9a4d417
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle température de couleur donne le meilleur rendu en immersion ?
+choices:
+- id: 63e5d118-7871-489b-b6cb-385f0d136e04
+  text: De l'ordre de 4 800 à 5 000 K, contre 6 000 K en surface.
+- id: 8f5ed173-6dc7-4f2d-8b48-9e41d123339c
+  text: De l'ordre de 6 000 K, exactement comme en surface.
+- id: 8af4a434-a6ab-4682-b0d4-8c59267be5e9
+  text: De l'ordre de 10 000 K, pour traverser l'eau plus facilement.
+- id: c637949c-3f6b-4a82-97cb-14756c437e6f
+  text: De l'ordre de 2 000 K, pour ne pas effrayer les poissons.
+correct_choice_ids:
+- 63e5d118-7871-489b-b6cb-385f0d136e04
+explanation: 'En immersion, l''eau se comporte comme un filtre, essentiellement dans
+  le rouge : le meilleur rendu est obtenu avec une température de couleur plus faible
+  qu''en surface, de l''ordre de 4 800 à 5 000 K.'
+archived: false

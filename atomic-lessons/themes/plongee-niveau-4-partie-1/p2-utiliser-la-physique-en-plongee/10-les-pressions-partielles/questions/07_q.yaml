@@ -1,0 +1,21 @@
+id: 385d582e-ce7c-424b-b8b6-b963ac155f2c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce que la normoxie selon le manuel ?
+choices:
+- id: 89c0e610-0f4b-48df-83e7-a0b8f5fb3602
+  text: Une pression partielle d'oxygène de l'ordre de 0,21 bar, celle de l'air au
+    niveau de la mer.
+- id: 6202e3d1-a541-41a0-a12b-26eceb6eac9e
+  text: Une pression partielle d'oxygène de 1 bar, celle d'un caisson.
+- id: 5072750b-76d8-41a7-9543-0455bdbd3020
+  text: Une pression partielle d'oxygène de 0,16 bar, la limite basse.
+- id: bdc1e1d6-62e6-4514-8ca7-f26546772f69
+  text: Une pression partielle d'oxygène de 1,6 bar, le seuil haut.
+correct_choice_ids:
+- 89c0e610-0f4b-48df-83e7-a0b8f5fb3602
+explanation: 'Nous respirons habituellement un air à 21 % d''oxygène, soit une pression
+  partielle de l''ordre de 0,21 bar au niveau de la mer : c''est la normoxie.'
+archived: false

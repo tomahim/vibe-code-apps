@@ -1,0 +1,21 @@
+id: 1423ee18-edeb-49b0-87f4-3749d910dcb6
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi convertir les 1800 litres à la pression du fond ?
+choices:
+- id: 8e57ec03-5356-4063-9305-8366585ff6a9
+  text: Parce qu'à 10 m (2 bars), chaque litre respiré contient deux fois plus de
+    molécules.
+- id: 9ba9da0d-463b-4863-b01e-4f1ead777dcd
+  text: Parce que la bouteille se comprime à la pression ambiante du fond.
+- id: 7e09dc96-bbbc-4581-b884-0c280ab23e8a
+  text: Parce que le manomètre affiche des litres au lieu de bars au fond.
+- id: 244e0dea-1687-4f8a-aa13-e30eb74791e6
+  text: Parce que la réserve ne se consomme qu'en surface libre.
+correct_choice_ids:
+- 8e57ec03-5356-4063-9305-8366585ff6a9
+explanation: 'Les litres équivalent surface ne valent plus la même chose à la pression
+  du fond : on applique 1 x 1800 = 2 x V(fond).'
+archived: false

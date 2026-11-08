@@ -1,0 +1,20 @@
+id: 77a6d9f1-fe20-4c12-880d-80c2a057300c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que vaut la pression partielle d'oxygène dans l'air en surface ?
+choices:
+- id: 8a60ada3-8ffc-466e-aded-08a091c86ef1
+  text: 0,21 bar, soit 1 bar multiplié par 21 %.
+- id: 0be6fcc8-695a-477c-a464-5781bca94b68
+  text: 0,79 bar, soit 1 bar multiplié par 79 %.
+- id: d7a4e6db-71c0-447a-a35a-3f070292d88b
+  text: 1 bar, la pression atmosphérique totale.
+- id: 15f448d1-da19-4423-8f7a-d111b024d5c4
+  text: 0,16 bar, la limite inférieure tolérée.
+correct_choice_ids:
+- 8a60ada3-8ffc-466e-aded-08a091c86ef1
+explanation: PpO2 = 1 x 0,21 = 0,21 bar, et PpN2 = 1 x 0,79 = 0,79 bar ; la somme
+  redonne bien 1 bar.
+archived: false

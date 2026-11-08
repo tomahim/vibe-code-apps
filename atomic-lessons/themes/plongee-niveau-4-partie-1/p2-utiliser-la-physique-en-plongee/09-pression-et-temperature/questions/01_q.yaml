@@ -1,0 +1,22 @@
+id: ed8bbf3a-d4ef-4ded-9979-55712228ac5a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi une bouteille peut-elle « perdre » de la pression sans fuite apparente
+  ?
+choices:
+- id: 9c396e7f-4fe5-4d15-9d24-a071c9254b3c
+  text: Parce que le rapport pression-volume ne se vérifie plus si la température
+    change.
+- id: 9629702a-5aef-4da4-9882-5753b642390a
+  text: Parce que le joint du robinet laisse échapper des molécules invisibles.
+- id: d575c8fc-3fc4-4db0-ac8d-36d4dbb518bd
+  text: Parce que la bouteille se dilate en refroidissant et augmente son volume.
+- id: f58a311b-63d2-4faa-bdcd-c4f2cbc1fec3
+  text: Parce que le manomètre se dérègle toujours avec le froid de l'hiver.
+correct_choice_ids:
+- 9c396e7f-4fe5-4d15-9d24-a071c9254b3c
+explanation: Le rapport constant entre pression et volume suppose une température
+  constante ; au gonflage, la température varie de plusieurs dizaines de degrés.
+archived: false

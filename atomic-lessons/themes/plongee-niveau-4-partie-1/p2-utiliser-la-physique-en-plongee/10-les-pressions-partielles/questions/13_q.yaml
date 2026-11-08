@@ -1,0 +1,22 @@
+id: a0125908-a323-42a3-9a33-63a603192cab
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: De quoi dépend le délai d'apparition d'une crise d'hyperoxie ?
+choices:
+- id: 352292ee-c103-4815-a438-453bab25d69b
+  text: De la PpO2, de la sensibilité individuelle et de facteurs favorisants comme
+    l'effort ou la fatigue.
+- id: 4310a0f7-e214-4322-b39f-d0009c8414e5
+  text: Uniquement de la marque du détendeur utilisé pendant la plongée.
+- id: 0806f254-3c4d-4aca-80c7-6c00bb6a9432
+  text: Uniquement de la température de l'eau au fond pendant le séjour.
+- id: f85cc8e5-0168-490a-99ad-19adad58e00e
+  text: Du volume de la bouteille et de la couleur de la combinaison.
+correct_choice_ids:
+- 352292ee-c103-4815-a438-453bab25d69b
+explanation: 'Le délai de latence dépend de la pression partielle d''oxygène, de la
+  sensibilité individuelle (7 minutes à 2 h 30 selon des études, pour une même personne
+  !) et de facteurs favorisants : effort, fatigue, anxiété, chaleur ou froid.'
+archived: false

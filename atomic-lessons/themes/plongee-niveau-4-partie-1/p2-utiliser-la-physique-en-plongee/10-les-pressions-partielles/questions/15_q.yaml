@@ -1,0 +1,22 @@
+id: aab509f1-4a8a-4f12-b07c-7f8d6a4f9455
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment les gaz circulent-ils entre alvéoles et sang ?
+choices:
+- id: 461e4ebb-f7bc-4e39-a9e8-672ff2b07098
+  text: Des plus fortes pressions partielles vers les plus faibles, par diffusion.
+- id: 7da0626d-acf1-4213-b34a-d125130896cd
+  text: Des plus faibles pressions partielles vers les plus fortes, par osmose.
+- id: f55b89e9-73c3-4199-99ff-fb2b20b56f21
+  text: Uniquement sous l'effet du pompage mécanique du cœur.
+- id: 9ac2d879-7d2d-4520-9aea-5bb3e11ae7e0
+  text: Par capillarité, indépendamment de toute pression partielle.
+correct_choice_ids:
+- 461e4ebb-f7bc-4e39-a9e8-672ff2b07098
+explanation: 'Les gaz s''écoulent des plus fortes pressions partielles (ou concentrations)
+  vers les plus faibles, par diffusion : l''oxygène passe des alvéoles vers le sang,
+  le gaz carbonique en sens inverse, et l''azote des alvéoles vers les capillaires
+  pendant la descente.'
+archived: false

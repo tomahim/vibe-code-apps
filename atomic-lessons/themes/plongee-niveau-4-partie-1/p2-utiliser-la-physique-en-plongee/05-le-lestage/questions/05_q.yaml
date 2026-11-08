@@ -1,0 +1,21 @@
+id: dcc30cdf-fc02-4296-a9aa-26e8344138fa
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment vérifier son lestage en fin de plongée ?
+choices:
+- id: b21cd659-142a-4f4a-b747-d646ee26bc2d
+  text: 'Gilet vide au palier de 3 m avec 30 à 50 bars : on doit s''y maintenir sans
+    effort.'
+- id: 2c112623-d3dc-44d6-947e-e64f18556224
+  text: 'Gilet vide à 10 m, bouteille pleine : on doit pouvoir rester au fond.'
+- id: f052960b-3f71-4faa-b1b2-8185e81c10fc
+  text: 'Gilet gonflé en surface, bouteille vide : on doit couler doucement.'
+- id: 6d1975cb-eafc-45b9-9020-e862f2c4c735
+  text: 'Gilet vide à 6 m avec 100 bars : on doit remonter sans palmer.'
+correct_choice_ids:
+- b21cd659-142a-4f4a-b747-d646ee26bc2d
+explanation: Gilet vide au palier de 3 m avec 30 à 50 bars dans sa bouteille, le plongeur
+  doit pouvoir s'y maintenir sans effort.
+archived: false

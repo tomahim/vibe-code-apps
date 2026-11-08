@@ -1,0 +1,21 @@
+id: 1e396fab-8529-431b-ae0d-b37b4adaebdc
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle oxygénothérapie le manuel préconise-t-il en cas de surpression pulmonaire
+  suspectée ?
+choices:
+- id: 3d542248-3e6e-4d66-abb8-e82fd7e66bd2
+  text: Oxygène à 100 %, débit 15 litres par minute.
+- id: 07c2da13-33b8-4037-985c-6bd0e5aaccfd
+  text: Oxygène à 50 %, débit 5 litres par minute.
+- id: 8c8dd03b-cf42-4680-a911-24723cccea53
+  text: Air pur en ventilation artificielle uniquement.
+- id: 4cba9c7a-ef59-404e-9b5b-bf0d2d30385c
+  text: Oxygène à 100 %, débit 3 litres par minute.
+correct_choice_ids:
+- 3d542248-3e6e-4d66-abb8-e82fd7e66bd2
+explanation: Administrer de l'oxygène à 100 %, débit 15 l/min ; corriger la déshydratation
+  si la victime peut boire ; surveiller l'évolution ; remplir une fiche d'évacuation.
+archived: false

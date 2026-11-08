@@ -1,0 +1,20 @@
+id: 61c1d12f-a58d-4c19-87ed-d3f61ec26e2e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Lorsque la pression est multipliée par 2, l''autonomie en air est :'
+choices:
+- id: 0f15d3f0-2d9d-4a81-be2f-ee48439bb064
+  text: Divisée par 2.
+- id: 3ffdf611-5102-40c3-a12a-c38eada71f6f
+  text: Multipliée par 2.
+- id: 667d931f-69b3-4d8a-b51a-915bec587a31
+  text: Divisée par 4.
+- id: 7b3b4740-be9d-4e83-bf48-bbb2b8dbb43c
+  text: Inchangée.
+correct_choice_ids:
+- 0f15d3f0-2d9d-4a81-be2f-ee48439bb064
+explanation: 'L''autonomie diminue de manière inversement proportionnelle à la pression
+  : pression multipliée par 2, autonomie divisée par 2.'
+archived: false

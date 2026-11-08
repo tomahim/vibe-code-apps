@@ -1,0 +1,21 @@
+id: 004f6c9b-af6b-452c-9d7d-c12eaec33f42
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles valeurs la formule P(surface) x V(surface) = P(fond) x V(fond) relie-t-elle
+  ?
+choices:
+- id: 4ac6db3f-cadf-4e4c-b6f3-b5111435e7c2
+  text: La pression et le volume en surface, la pression et le volume au fond.
+- id: 6eb652d1-16bf-479d-a414-09462656a3fb
+  text: La pression de la bouteille et le volume des poumons du plongeur.
+- id: e69b2709-1b52-4e34-b776-8d5c491817ef
+  text: La profondeur maximale et le temps passé au fond de la plongée.
+- id: a96dfa18-b930-4f78-9b93-103fdba7e90f
+  text: La température de surface et la température au fond de l'eau.
+correct_choice_ids:
+- 4ac6db3f-cadf-4e4c-b6f3-b5111435e7c2
+explanation: La formule relie les pressions et volumes en surface et au fond ; trois
+  valeurs connues permettent de trouver la quatrième.
+archived: false

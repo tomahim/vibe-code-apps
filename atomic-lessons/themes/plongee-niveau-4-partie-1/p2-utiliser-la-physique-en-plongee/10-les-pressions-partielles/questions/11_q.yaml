@@ -1,0 +1,21 @@
+id: e41fcaf2-727b-44b8-97af-bd88951068ba
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi l'hyperoxie est-elle absente des plongées à l'air classiques ?
+choices:
+- id: 0cd2fcac-3e30-4ec8-8eb9-1fff252d4ca3
+  text: Elles sont plafonnées à 60 m du fait de la narcose ; l'hyperoxie apparaîtrait
+    vers 66 m.
+- id: 64e62b9e-3ac1-4207-8d0b-77090985e59c
+  text: L'air comprimé ne contient jamais assez d'oxygène pour être toxique.
+- id: 03266c43-838f-442d-aa51-76c5ee0adf2c
+  text: Les détendeurs modernes filtrent l'excès d'oxygène automatiquement.
+- id: 5ba05c10-300f-4eed-9680-6c74c7790681
+  text: Le code du sport interdit toute plongée au-delà de 20 mètres.
+correct_choice_ids:
+- 0cd2fcac-3e30-4ec8-8eb9-1fff252d4ca3
+explanation: 'Les risques d''hyperoxie sont absents des plongées à l''air plafonnées
+  à 60 m ; il reste deux cas à risque : le nitrox et les paliers de désaturation.'
+archived: false

@@ -1,0 +1,20 @@
+id: da033b99-6882-4535-bc14-beaffdd7804f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Au repos, la phase expiratoire est :'
+choices:
+- id: f640af5f-a12b-4c68-8963-90f0a0576cb3
+  text: 'Passive : le relâchement des muscles expulse l''air par augmentation de pression.'
+- id: c27a8b36-5283-4dc4-97d3-708f8f36ef15
+  text: 'Active : les abdominaux expulsent l''air en se contractant fortement.'
+- id: 0aff3a10-a419-4c98-93d5-6b9fdf0d6de9
+  text: 'Nulle : l''air reste immobile dans les poumons entre deux cycles.'
+- id: 0621667d-3616-4d82-937a-2278462eeb62
+  text: 'Active : le diaphragme se contracte pour chasser l''air des alvéoles.'
+correct_choice_ids:
+- f640af5f-a12b-4c68-8963-90f0a0576cb3
+explanation: 'Au repos, l''expiration est passive : la baisse du volume thoracique
+  entraîne une augmentation de pression qui expulse l''air.'
+archived: false

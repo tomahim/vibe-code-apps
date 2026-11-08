@@ -1,0 +1,20 @@
+id: e0b56497-596f-4f05-a5c2-305857192590
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que subissent certains blocs prélevés dans les lots de fabrication ?
+choices:
+- id: bb2ded76-6fec-4ebe-a721-1dc6019e7504
+  text: 'Des essais destructifs : surpression, éclatement, charge/décharge.'
+- id: 2341f140-559a-45fb-bb35-fbb59fa612f8
+  text: Une plongée d'essai à 40 mètres avec des moniteurs.
+- id: f7c2e740-224e-467c-a379-1ec7a53d26df
+  text: Un remplissage à l'oxygène pur pendant vingt-quatre heures.
+- id: 7509899d-25e5-4645-b7c9-2e18af597e8f
+  text: Une immersion d'un an en bassin d'eau de mer salée.
+correct_choice_ids:
+- bb2ded76-6fec-4ebe-a721-1dc6019e7504
+explanation: Par sondage dans les lots, des blocs subissent des essais destructifs
+  pour vérifier la limite de résistance et l'absence de défaut.
+archived: true

@@ -1,0 +1,20 @@
+id: b6d6661e-6db5-4c7b-939a-20ff9f8c0923
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Un bloc froid est rentré dans une pièce chaude. Que fait sa pression ?
+choices:
+- id: 47e89698-be0c-4cc9-94a2-060d29a06ad4
+  text: Elle remonte, à volume constant, proportionnellement à l'élévation de température.
+- id: 9ebf6228-cf8b-404e-938e-823b64b8e20e
+  text: Elle redescend, car le gaz se détend en se réchauffant.
+- id: 10ea0826-a420-4474-a2c8-8521d23f88c5
+  text: Elle reste identique, le robinet étant fermé pendant le stockage.
+- id: f35d1d4b-eff3-48dd-baab-6f484f220372
+  text: Elle chute à zéro si la pièce dépasse la température du gonflage.
+correct_choice_ids:
+- 47e89698-be0c-4cc9-94a2-060d29a06ad4
+explanation: 'À volume constant, la pression augmente proportionnellement à l''élévation
+  en température : un bloc froid regagne de la pression en se réchauffant.'
+archived: false

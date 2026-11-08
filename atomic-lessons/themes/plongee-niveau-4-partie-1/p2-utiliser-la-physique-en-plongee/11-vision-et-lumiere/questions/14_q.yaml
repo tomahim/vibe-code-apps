@@ -1,0 +1,22 @@
+id: 68e68f0f-91c4-435a-835e-1b08eabbc31d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que mesure l'indice de rendu des couleurs (IRC) ?
+choices:
+- id: e514570f-f42f-4194-b954-bca96b129e6c
+  text: La capacité d'une source à restituer les couleurs d'un objet, sur une échelle
+    de 0 à 100.
+- id: 21f5c9ae-b14e-4677-992f-1d50174a0305
+  text: La puissance électrique consommée par une lampe de plongée.
+- id: 21730b29-3161-417f-861a-4499c618a421
+  text: La distance maximale d'éclairage utile d'un phare dans l'eau.
+- id: 0a7f7f3e-1d43-443e-b341-bc30c7805cb6
+  text: La proportion de lumière bleue émise par la source lumineuse.
+correct_choice_ids:
+- e514570f-f42f-4194-b954-bca96b129e6c
+explanation: L'IRC est un nombre compris entre 0 et 100 qui caractérise la capacité
+  d'une source lumineuse à restituer les couleurs d'un objet par rapport à un échantillon
+  normalisé ; il complète la température de couleur.
+archived: false

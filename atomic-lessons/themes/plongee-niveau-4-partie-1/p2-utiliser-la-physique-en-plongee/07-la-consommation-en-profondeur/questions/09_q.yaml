@@ -1,0 +1,21 @@
+id: 977377f1-c54b-47d1-8cc1-4342823dc879
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel débit ventilatoire un sujet non entraîné peut-il atteindre à l'effort
+  ?
+choices:
+- id: f55aa83b-4492-4dba-af97-2bae327ab63b
+  text: 100 à 120 litres par minute.
+- id: 1d02b674-e167-459d-8f65-67dc4c1ee3c7
+  text: 30 à 40 litres par minute.
+- id: c7f2dbd3-ca2a-4c85-a2f5-895eac738d18
+  text: 7,5 à 10 litres par minute.
+- id: 44855aef-8cae-4fb2-99dd-f65e91ef2658
+  text: 250 litres par minute.
+correct_choice_ids:
+- f55aa83b-4492-4dba-af97-2bae327ab63b
+explanation: À l'effort, le débit peut atteindre 100 à 120 litres par minute chez
+  les sujets non entraînés, et 250 litres par minute chez certains athlètes.
+archived: false

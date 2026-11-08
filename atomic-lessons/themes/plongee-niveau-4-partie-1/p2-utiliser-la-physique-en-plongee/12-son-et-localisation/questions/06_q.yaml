@@ -1,0 +1,22 @@
+id: 67211ad3-d103-4c9e-b03c-2d9ac0880097
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le cerveau localise-t-il un son dans l'air ?
+choices:
+- id: a6aae90a-9b12-40c0-b07e-88bb9d4c250e
+  text: Grâce au décalage de perception entre les deux oreilles, distantes d'environ
+    15 cm.
+- id: 30022745-fd6a-4fa6-8cfc-2689b857436a
+  text: Grâce à la différence de pression entre les deux tympans.
+- id: 48267b60-b351-4958-9861-71691776a415
+  text: Grâce à la position des canaux semi-circulaires dans l'espace.
+- id: 1e24144f-6068-47d3-afb6-a5e10b902bc6
+  text: Grâce à la comparaison entre son direct et son réfléchi.
+correct_choice_ids:
+- a6aae90a-9b12-40c0-b07e-88bb9d4c250e
+explanation: 'L''écart d''une quinzaine de centimètres entre les deux oreilles fait
+  que l''une perçoit le son avant l''autre : cela suffit au cerveau pour déterminer
+  avec précision l''origine du son.'
+archived: false

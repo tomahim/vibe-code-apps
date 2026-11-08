@@ -1,0 +1,21 @@
+id: fb216f31-c5e1-4cbc-8fae-ef4e80068748
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'Dans le calcul précédent, la pression a été multipliée par 4. Le volume a
+  été :'
+choices:
+- id: f60f21bc-4074-471f-8f76-0421b8fc47c6
+  text: Divisé par 4.
+- id: b034daa0-036d-4826-be09-1c0619f37935
+  text: Multiplié par 4.
+- id: bf8f79ce-3cde-4cfe-b321-f249015356d2
+  text: Divisé par 2.
+- id: 84929435-1644-4817-aa96-6ddc39477a1e
+  text: Multiplié par 2.
+correct_choice_ids:
+- f60f21bc-4074-471f-8f76-0421b8fc47c6
+explanation: 'Pression et volume varient en raison inverse : pression multipliée par
+  4, volume divisé par 4.'
+archived: false

@@ -1,0 +1,21 @@
+id: ad52513f-5d74-470e-a618-e34e19d314aa
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que recommande le manuel au guide concernant l'autonomie de sa palanquée ?
+choices:
+- id: b8e8e474-d726-417b-90d2-8cb36a9d38c9
+  text: Garder les ordres de grandeur à l'esprit et contrôler régulièrement les réserves
+    d'air.
+- id: 9a61d874-56c8-4b01-bbd9-4e855d950dba
+  text: Calculer l'autonomie au départ et ne plus jamais regarder les manomètres.
+- id: 776cb643-f4be-44f8-9d03-f9e89caafea9
+  text: Laisser chaque plongeur gérer seul sa consommation sans contrôle.
+- id: 892fd435-4960-40ff-a784-4952e0b6f03c
+  text: Interdire toute plongée au-delà de 45 minutes d'autonomie calculée.
+correct_choice_ids:
+- b8e8e474-d726-417b-90d2-8cb36a9d38c9
+explanation: Le guide doit avoir présents à l'esprit les ordres de grandeur et penser
+  à contrôler régulièrement les réserves d'air des membres de sa palanquée.
+archived: false

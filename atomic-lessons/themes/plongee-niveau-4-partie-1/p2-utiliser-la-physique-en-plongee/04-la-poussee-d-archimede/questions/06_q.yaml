@@ -1,0 +1,21 @@
+id: ab2fa773-9b93-4afb-bee8-d43655c3a8d1
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Un plongeur équipé déplace 80 litres d'eau. Quelle poussée d'Archimède en
+  eau douce ?
+choices:
+- id: eb985322-da8e-47fb-95b5-6975cec82256
+  text: 80 kg, soit 80 litres x 1 kg par litre.
+- id: f8812732-5ff1-4e33-873a-57554635dd3f
+  text: 82,4 kg, soit 80 litres x 1,03 kg par litre.
+- id: 754019fc-d9c6-4d69-87a9-0177e6572b7f
+  text: 77,6 kg, soit 80 litres x 0,97 kg par litre.
+- id: 6e22dc9e-06a3-4cf4-b30d-00b7408c8d74
+  text: 8 kg, soit 80 litres divisés par dix.
+correct_choice_ids:
+- eb985322-da8e-47fb-95b5-6975cec82256
+explanation: 'En eau douce de densité 1 : 80 litres x 1 kg/litre = 80 kg ; en eau
+  de mer de densité 1,03, ce serait 82,4 kg.'
+archived: false

@@ -1,0 +1,21 @@
+id: 9d6389fc-3feb-404b-8d19-46c6b9743152
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi la loi s'écrit-elle P / T = constante pour une bouteille de plongée
+  ?
+choices:
+- id: f7bcab91-5c1d-4364-b1ef-491d75bb9673
+  text: Parce que le volume de la bouteille est invariable.
+- id: 733ee152-5b46-40a7-b6ef-cb76072035f3
+  text: Parce que la pression de service est toujours de 200 bars.
+- id: 5741d3ee-3ef3-4dc7-8f43-70fd18f5a1b3
+  text: Parce que la température de l'eau est constante au fond.
+- id: bc85d53b-6f71-4f3b-98f9-f96aa7847dd7
+  text: Parce que le gaz de la bouteille est de l'air parfaitement sec.
+correct_choice_ids:
+- f7bcab91-5c1d-4364-b1ef-491d75bb9673
+explanation: Le volume des bouteilles de plongée étant invariable, la relation pression-température
+  se simplifie en P / T = constante.
+archived: false

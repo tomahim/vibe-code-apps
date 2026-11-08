@@ -1,0 +1,21 @@
+id: 7b1c5830-d710-44c0-a0ee-a46e955ea4e0
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Franck pèse 65 kg et est correctement équilibré en maillot. Quel est son volume
+  immergé ?
+choices:
+- id: 670e12ed-2c89-42ca-8cc5-b54cc83a4f7b
+  text: De l'ordre de 65 dm3 en eau douce.
+- id: 8220c1a3-115e-4bb2-93f5-2c44f1b5301c
+  text: De l'ordre de 65 litres de combinaison.
+- id: 2fa5f98e-086f-4391-a1ac-0bfaf5610626
+  text: De l'ordre de 6,5 dm3 en eau douce.
+- id: 8a8ca95a-57ac-459b-a965-5ca1dc3c81c6
+  text: De l'ordre de 650 dm3 en eau de mer.
+correct_choice_ids:
+- 670e12ed-2c89-42ca-8cc5-b54cc83a4f7b
+explanation: 'Correctement équilibré, la poussée égale son poids réel : 65 kg, soit
+  un volume immergé de l''ordre de 65 dm3 en eau douce.'
+archived: false

@@ -1,0 +1,21 @@
+id: ca44cacb-bc7e-4602-abea-403045edc3e1
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pour 4 kg de poids apparent, quel poids réel de plomb le manuel conseille-t-il
+  ?
+choices:
+- id: 5c6a970f-860a-48c2-b0ea-54c94b379551
+  text: 4,4 kg, soit le poids apparent augmenté de 10 %, et 4,5 à 5 kg en pratique.
+- id: c66ae7ab-070f-42f4-b8c0-9e3439a8c25b
+  text: 3,6 kg, soit le poids apparent diminué de 10 % en pratique.
+- id: 21d3ac0e-d098-4298-9ea8-ea265e6f390e
+  text: 4 kg exactement, le plomb étant incompressible dans l'eau.
+- id: 9544570f-7ba4-4a8a-9846-74157624597e
+  text: 8 kg, soit le double du poids apparent recherché.
+correct_choice_ids:
+- 5c6a970f-860a-48c2-b0ea-54c94b379551
+explanation: 'On augmente le poids apparent de 10 % : 4 + 0,4 = 4,4 kg ; dans la pratique,
+  Franck choisira 4,5 à 5 kg.'
+archived: false

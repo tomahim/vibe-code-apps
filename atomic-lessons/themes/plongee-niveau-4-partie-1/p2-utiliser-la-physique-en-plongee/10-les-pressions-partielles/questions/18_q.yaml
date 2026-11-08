@@ -1,0 +1,11 @@
+id: 2e7db8e3-d5fb-49c2-bb31-c019f0d18e5a
+position: 18
+type: type_answer_question
+after_card_position: 4
+prompt: Quel physicien britannique a donné son nom à la loi des pressions partielles
+  (et au daltonisme) ?
+accepted_answers:
+- Dalton
+explanation: 'John Dalton (1766-1844) énonça la loi des pressions partielles : la
+  pression totale est égale à la somme des pressions partielles.'
+archived: true

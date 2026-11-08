@@ -1,0 +1,20 @@
+id: efc04487-6840-46e8-be5f-c491e181871a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Un bloc affiche 200 bars à 50 °C. Quelle pression affichera-t-il à 15 °C ?
+choices:
+- id: f157d250-3833-4cc7-8492-0c14e1332e0b
+  text: Environ 178 bars, car 200 x 288 / 323.
+- id: 70714f91-1d62-4a5b-b805-0e881af8d130
+  text: Exactement 200 bars, le gaz ne s'échappe pas.
+- id: 9c4cc91f-15ff-4293-991c-65dfe9a40f76
+  text: Environ 220 bars, car le froid comprime le gaz.
+- id: 7b569443-1d64-4ad2-8783-aea4f2cd98c8
+  text: Environ 165 bars, car 200 - 50 + 15.
+correct_choice_ids:
+- f157d250-3833-4cc7-8492-0c14e1332e0b
+explanation: 'P2 = P1 x T2 / T1 = 200 x 288 / 323 = 178 bars environ : exemple du
+  manuel.'
+archived: false

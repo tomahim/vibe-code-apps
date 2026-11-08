@@ -1,0 +1,19 @@
+id: c34caa51-a285-4a42-bc97-e8dae759975b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Si la pression ambiante est multipliée par 2, l''autonomie est :'
+choices:
+- id: 732794aa-d097-4be4-ab08-ed784dd27b68
+  text: Divisée par 2.
+- id: d32aca04-69dc-4328-b427-8b1aa4b9739b
+  text: Multipliée par 2.
+- id: a96cc13e-cf1b-4440-9d96-5d887ef53fa5
+  text: Divisée par 4.
+- id: 9fb585f4-23b8-4896-bce5-ec6b9b94b251
+  text: Strictement inchangée.
+correct_choice_ids:
+- 732794aa-d097-4be4-ab08-ed784dd27b68
+explanation: L'autonomie diminue de manière inversement proportionnelle à la pression.
+archived: false

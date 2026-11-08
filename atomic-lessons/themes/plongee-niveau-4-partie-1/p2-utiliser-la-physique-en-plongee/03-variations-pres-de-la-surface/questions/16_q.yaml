@@ -1,0 +1,22 @@
+id: fbdb4ca9-04fe-4b80-9f69-8bc0f56ce795
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle formalité le manuel mentionne-t-il après un tel accident ?
+choices:
+- id: 645bf0d2-7ea1-4531-bb59-c662d0613c58
+  text: Une déclaration d'accident grave, après la fiche d'évacuation transmise aux
+    secours.
+- id: 9d68e054-62d9-432a-b547-2ce6022798ce
+  text: Un simple compte rendu oral au président du club.
+- id: 16739217-4749-4eb5-9eac-0e48edfa16b0
+  text: Une analyse de l'air de la bouteille dans les 24 heures.
+- id: aba9d73a-43c6-4bf5-9e80-054b49d33792
+  text: 'Aucune : seules les compagnies d''assurance sont prévenues.'
+correct_choice_ids:
+- 645bf0d2-7ea1-4531-bb59-c662d0613c58
+explanation: Remplir une fiche d'évacuation (article A322-78-1 du code du sport cité
+  par l'édition 2020) à transmettre aux secours, puis faire une déclaration d'accident
+  grave (article R322-6).
+archived: false

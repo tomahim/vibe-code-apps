@@ -1,0 +1,21 @@
+id: c886d69d-044c-4bc5-9edb-ac82dfd29942
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le manuel de la maîtrise du poumon-ballast ?
+choices:
+- id: 376caebb-10ac-4ce9-8155-89a5538042b2
+  text: 'Elle se perd : après une longue période sans plonger, il faut plusieurs immersions
+    pour la retrouver.'
+- id: 6dad375a-59e5-4e77-a735-6147e1a92db5
+  text: Elle est acquise une fois pour toutes dès le niveau 1.
+- id: 0ba6200e-d5bd-4864-8be5-65c51fb46c0e
+  text: Elle ne concerne que les moniteurs et les guides de palanquée.
+- id: f9eb6eec-52e0-4c7b-9436-ea93686238e2
+  text: Elle est facilitée par un léger surlestage de la ceinture.
+correct_choice_ids:
+- 376caebb-10ac-4ce9-8155-89a5538042b2
+explanation: Cette maîtrise ventilatoire n'est pas acquise une fois pour toutes, et
+  le surlestage rend le poumon-ballast plus difficile.
+archived: false

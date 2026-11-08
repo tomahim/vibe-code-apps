@@ -1,0 +1,12 @@
+id: 440f6666-f3f8-42a4-86f3-cf3f2189ec9d
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Comment le manuel nomme-t-il la pression du lieu à utiliser dans les calculs
+  de plongée (deux mots) ?
+accepted_answers:
+- pression absolue
+- la pression absolue
+explanation: Les calculs se mènent avec la pression absolue du lieu, par exemple pour
+  convertir un volume en équivalent surface.
+archived: false

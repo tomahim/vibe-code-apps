@@ -1,0 +1,20 @@
+id: 3d98ae1b-8db3-4491-bfe0-bf12d0938fd0
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle incidence directe ce mode de délivrance a-t-il selon le manuel ?
+choices:
+- id: 55add080-d2b2-4523-bf6d-8d420e3f380a
+  text: Sur l'autonomie en air du plongeur.
+- id: 5a24992d-9089-4995-9e5e-ad69f3465665
+  text: Sur la température de l'air respiré.
+- id: 669d3a7b-18ba-417b-9dc5-596d6e2bc462
+  text: Sur la composition de l'air respiré.
+- id: 01c77bce-7d15-411e-88d1-4ee10f4b2b5c
+  text: Sur la flottabilité de la bouteille.
+correct_choice_ids:
+- 55add080-d2b2-4523-bf6d-8d420e3f380a
+explanation: 'Respirer à la pression ambiante a une incidence directe sur l''autonomie
+  : chaque litre respiré contient davantage de molécules en profondeur.'
+archived: false
