@@ -1,0 +1,23 @@
+id: 78dd2174-acb3-4cb0-a7e3-db7554167a17
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi la phase d'alarme ne suffit-elle pas à se protéger d'une crise d'hyperoxie
+  ?
+choices:
+- id: cce4db04-cff5-4671-9cd2-fb9c78a86f1e
+  text: 'Ces signes sont souvent absents ou non perçus : la crise peut apparaître
+    soudainement et se déroule ensuite inexorablement.'
+- id: 211159a8-b393-47d8-b596-24d503ca4ba9
+  text: Ces signes sont si douloureux que le plongeur perd connaissance immédiatement.
+- id: 25e27060-6e2e-4881-a816-fc7b2dc25b42
+  text: Ces signes ne surviennent qu'après la fin complète de la crise convulsive.
+- id: 0fdb55e2-508a-42f6-9135-820bc3ab2224
+  text: Ces signes disparaissent toujours avant que le plongeur puisse remonter.
+correct_choice_ids:
+- cce4db04-cff5-4671-9cd2-fb9c78a86f1e
+explanation: Les signes précurseurs sont souvent absents ou non perçus par le plongeur
+  ; la crise peut apparaître de manière soudaine et, une fois déclenchée, se déroule
+  inexorablement, même si le mélange respiré n'est plus hyperoxique.
+archived: false

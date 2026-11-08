@@ -1,0 +1,21 @@
+id: 3033065a-f37f-4eab-8dd0-a333f93d56ac
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles plongées présentent un risque d'hyperoxie, selon le manuel ?
+choices:
+- id: b88fa354-2d5e-4fbb-8b8f-f3bb6a326950
+  text: Les plongées au nitrox et celles comportant des paliers de désaturation à
+    l'oxygène pur.
+- id: 3aa54928-a6a4-4341-b1f2-246091ff2d91
+  text: Toutes les plongées à l'air dans l'espace 0-60 mètres, sans aucune exception.
+- id: 2aa4cdc6-c892-4e0d-9ab6-bb53f6707c6c
+  text: Uniquement les plongées professionnelles en caisson hyperbare à sec.
+- id: d0641b9d-3bfb-41d7-bc2f-889b09101334
+  text: Les plongées en apnée, du fait de l'hyperventilation préalable.
+correct_choice_ids:
+- b88fa354-2d5e-4fbb-8b8f-f3bb6a326950
+explanation: 'Deux cas de plongées à risque d''hyperoxie : celles au nitrox et celles
+  faisant intervenir des paliers de désaturation à l''oxygène pur.'
+archived: false

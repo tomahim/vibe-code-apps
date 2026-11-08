@@ -1,0 +1,25 @@
+id: 2347abf9-b331-4f61-aeef-596bd705d883
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels signes peuvent annoncer la phase d'alarme d'une crise d'hyperoxie ?
+choices:
+- id: 76dd6da6-0c63-4841-bd81-5ddd468ce621
+  text: Crampes, effet tunnel, gêne ventilatoire, accélération du pouls, modification
+    de l'humeur, secousses musculaires, nausées.
+- id: af82169e-88e1-4e6a-a961-510a256df066
+  text: Un saignement de nez abondant, accompagné d'une douleur aiguë et localisée
+    des sinus.
+- id: f57a478a-7efd-4327-926e-25fcae8126bf
+  text: Une faim intense et tenace, accompagnée de crampes abdominales et d'une forte
+    soif.
+- id: b0e6e6d1-febe-493b-82cc-6ad90801963b
+  text: Des démangeaisons cutanées généralisées, avec l'apparition de boutons rouges
+    sur la peau.
+correct_choice_ids:
+- 76dd6da6-0c63-4841-bd81-5ddd468ce621
+explanation: 'La phase d''alarme associe un ou plusieurs signes : crampes, diminution
+  du champ visuel en effet tunnel, gêne ventilatoire, accélération du pouls, modification
+  de l''humeur (euphorie, dépression), secousses musculaires involontaires, nausées.'
+archived: false

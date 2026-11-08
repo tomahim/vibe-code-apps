@@ -1,0 +1,23 @@
+id: 7d59b313-d7dc-4e6e-a1b4-28abec3ce258
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce que l'« effet Paul Bert » ?
+choices:
+- id: 4be5f253-98ab-4eac-a93e-77827a2bd305
+  text: 'La neurotoxicité de l''oxygène : des troubles du système nerveux central
+    liés à une PpO2 supérieure à la normale.'
+- id: 3010ef12-ab5e-4b3a-9255-775358ce9b38
+  text: Une forme grave de narcose provoquée par l'azote au-delà de soixante mètres
+    de profondeur.
+- id: b2676063-dfba-4806-a6ee-e242bcb1197e
+  text: Une surpression pulmonaire survenant pendant une remontée trop rapide en apnée.
+- id: 95771a75-0585-4989-a462-67960deaae00
+  text: Une intoxication au monoxyde de carbone due à un gaz de plongée contaminé.
+correct_choice_ids:
+- 4be5f253-98ab-4eac-a93e-77827a2bd305
+explanation: 'Du nom du premier chercheur à avoir étudié le phénomène (1878), l''effet
+  Paul Bert désigne la neurotoxicité de l''oxygène : le trouble du fonctionnement
+  du système nerveux central en cas d''exposition à une PpO2 supérieure à la normale.'
+archived: false
