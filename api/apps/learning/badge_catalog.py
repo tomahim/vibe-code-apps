@@ -67,5 +67,10 @@ BADGES = [
     Badge("garden-keeper", "Garden keeper", "Finishing", 3, "paths_done", 1, "Read every card in one path and answer all of its questions correctly at least once."),
     Badge("little-greenhouse", "Little greenhouse", "Finishing", 3, "paths_done", 3, "Fully complete 3 different paths by the Garden keeper rule."),
     Badge("theme-master", "Theme master", "Finishing", 3, "themes_done", 1, "Fully complete every path of a theme that has 2 or more paths."),
+    Badge("worthy-rival", "Worthy rival", "Challenge", 2, "challenge_wins", 10, "Win the weekly Challenge 10 times. A win means finishing ahead of the other player with at least 3 correct answers; ties don't count."),
+    Badge("duel-veteran", "Duel veteran", "Challenge", 2, "challenge_wins", 20, "Win the weekly Challenge 20 times. A win means finishing ahead of the other player with at least 3 correct answers; ties don't count."),
+    Badge("challenge-champion", "Challenge champion", "Challenge", 3, "challenge_wins", 30, "Win the weekly Challenge 30 times. A win means finishing ahead of the other player with at least 3 correct answers; ties don't count."),
+    Badge("grand-duelist", "Grand duelist", "Challenge", 3, "challenge_wins", 50, "Win the weekly Challenge 50 times. A win means finishing ahead of the other player with at least 3 correct answers; ties don't count."),
+    Badge("living-legend", "Living legend", "Challenge", 3, "challenge_wins", 100, "Win the weekly Challenge 100 times. A win means finishing ahead of the other player with at least 3 correct answers; ties don't count."),
 ]
 BY_SLUG = {badge.slug: badge for badge in BADGES}

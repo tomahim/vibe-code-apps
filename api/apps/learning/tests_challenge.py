@@ -124,6 +124,30 @@ class ChallengeTests(TestCase):
                          [("Thomas", 10, 1), ("Aurore", 0, 2)])
         self.assertTrue(revealed[0]["is_self"] is False and revealed[1]["is_self"])
 
+    def test_challenge_wins_badge_rule_counts_strict_wins_only(self):
+        from apps.learning.badges import History
+
+        def played_week(key, thomas_correct, aurore_correct, aurore_finished=True):
+            week = ChallengeWeek.objects.create(week_key=key, question_ids=[str(q.pk) for q in self.questions[:10]],
+                                                created_at=timezone.now())
+            for i, q in enumerate(self.questions[:10]):
+                if not aurore_finished and i >= 5:
+                    break
+                QuestionAttempt.objects.create(user=self.thomas, question=q, challenge_week=week,
+                                               attempt_type="challenge", submitted_answer="a",
+                                               correct=i < thomas_correct, answered_at=timezone.now())
+                QuestionAttempt.objects.create(user=self.aurore, question=q, challenge_week=week,
+                                               attempt_type="challenge", submitted_answer="a",
+                                               correct=i < aurore_correct, answered_at=timezone.now())
+
+        played_week("2026-W40", 8, 5)   # a win
+        played_week("2026-W41", 4, 4)   # a tie is not a win
+        played_week("2026-W42", 2, 0)   # below the 3/10 minimum
+        played_week("2026-W43", 9, 1, aurore_finished=False)  # unrevealed
+        events = History(self.thomas).challenge_wins()
+        self.assertEqual([ref for _, (_, ref) in events], ["2026-W40"])
+        self.assertEqual(History(self.aurore).challenge_wins(), [])
+
     def test_history_lists_finished_weeks_and_my_current_week_once_done(self):
         past = ChallengeWeek.objects.create(week_key="2026-W44", question_ids=[str(self.questions[0].pk)],
                                             created_at=timezone.now())

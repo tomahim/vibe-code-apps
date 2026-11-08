@@ -57,7 +57,7 @@ class BadgeTests(TestCase):
 
     def test_nothing_is_earned_without_history(self):
         result = check(self.user, NOW)
-        self.assertEqual(len(result["badges"]), 41)
+        self.assertEqual(len(result["badges"]), 46)
         self.assertEqual((result["earned_count"], result["new_count"]), (0, 0))
         self.assertFalse(BadgeAward.objects.exists())
 
@@ -380,7 +380,7 @@ class BadgeTests(TestCase):
         response = self.client.post("/api/learning/badges/check/")
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual((data["earned_count"], data["new_count"], len(data["badges"])), (2, 2, 41))
+        self.assertEqual((data["earned_count"], data["new_count"], len(data["badges"])), (2, 2, 46))
         self.assertIn("no-store", response["Cache-Control"])
         self.assertEqual(BadgeAward.objects.filter(user=self.user).count(), 2)
 
@@ -398,6 +398,6 @@ class CatalogueTests(TestCase):
             self.assertTrue((art / f"{badge.slug}.svg").exists(), f"{badge.slug}: missing art")
         self.assertEqual(sorted(p.stem for p in art.glob("*.svg")), sorted(slugs), "art without a catalogue entry")
 
-    def test_the_designed_mix_of_41_badges(self):
-        self.assertEqual(len(BADGES), 41)
-        self.assertEqual([sum(b.tier == t for b in BADGES) for t in (1, 2, 3)], [11, 14, 16])
+    def test_the_designed_mix_of_46_badges(self):
+        self.assertEqual(len(BADGES), 46)
+        self.assertEqual([sum(b.tier == t for b in BADGES) for t in (1, 2, 3)], [11, 16, 19])
