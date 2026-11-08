@@ -97,3 +97,66 @@ test('phone: challenge entry pill and duel intro stay usable', async ({ page }) 
   await expect(dialog.getByText('Question 1 of 2')).toBeVisible();
   await page.screenshot({ path: '/tmp/lg-challenge-question-mobile.png' });
 });
+
+test('ten-question flow: timer, auto-advance, completion and ranking reveal', async ({ page }) => {
+  test.setTimeout(120000);
+  const answers = [];
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const questions = Array.from({ length: 10 }, (_, i) => ({
+    id: id(300 + i), type: 'multiple_choice', after_card_position: 1,
+    prompt: `General knowledge question ${i + 1}?`,
+    options: [{ id: 'a', text: `Right ${i + 1}` }, { id: 'b', text: `Wrong ${i + 1}` }],
+    lesson_title: `Lesson ${i + 1}`, learning_path_title: 'Hockey all time legends', answered: false,
+  }));
+  page.route('**/api/learning/**', (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
+    if (url.pathname.endsWith('/garden/')) {
+      return route.fulfill({
+        json: {
+          themes: [{ ...row(id(1), 'Sport'), description: 'L', progress: done, learning_paths: [{ celebrated: true, ...row(id(11), 'Hockey all time legends'), progress: done, practice: { last_activity_at: '2026-11-07T10:00:00+00:00', days_since: 1, state: 'fresh' }, catch_up: { eligible: true, remaining: 0 }, lessons: [{ ...row(id(101), 'The Great One'), learning_path_id: id(11), progress: done }] }] }],
+          rewards: { drops: 120, carrots: 12 }, recent_lessons: [],
+        },
+      });
+    }
+    if (url.pathname.endsWith('/challenge/history/')) return route.fulfill({ json: { weeks: [] } });
+    if (url.pathname.endsWith('/challenge/answers/')) {
+      answers.push(route.request().postDataJSON());
+      const finished = answers.length >= 10;
+      return route.fulfill({
+        status: 201,
+        json: {
+          question_id: id(300), correct: answers[answers.length - 1].answer === 'a', carrot_earned: answers[answers.length - 1].answer === 'a', explanation: 'x', correct_answer: null,
+          me: { answered: answers.length, correct: answers.filter((a) => a.answer === 'a').length, finished },
+          // Both players done by the time I finish: the ranking reveals.
+          ranking: finished ? [{ name: 'Aurore', correct: 5, is_self: false, rank: 1 }, { name: 'Thomas', correct: 2, is_self: true, rank: 2 }] : null,
+        },
+      });
+    }
+    if (url.pathname.endsWith('/challenge/')) {
+      return route.fulfill({ json: { week_key: '2026-W45', size: 10, seconds_per_question: 3, me: { answered: 0, correct: 0, finished: false }, ranking: null, questions } });
+    }
+    if (url.pathname.endsWith('/badges/check/')) return route.fulfill({ json: { badges: [], earned_count: 0, new_count: 0, streak: { current: 1 } } });
+    return route.fulfill({ json: {} });
+  });
+  await page.goto('/apps/little-grains');
+  await page.locator('.lg-review-float').getByRole('button', { name: /challenge/i }).click();
+  const dialog = page.getByRole('dialog', { name: 'Weekly challenge' });
+  await expect(dialog.getByText('10 questions picked at random from the general-knowledge paths')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-challenge-intro10-desktop.png' });
+  await dialog.getByRole('button', { name: 'Take the challenge' }).click();
+
+  // Questions 1-2 answered in time; 3-10 run the 3-second clock out.
+  for (let i = 1; i <= 2; i++) {
+    await expect(dialog.getByText(`Question ${i} of 10`)).toBeVisible();
+    await dialog.locator('label', { hasText: `Right ${i}` }).click();
+    await dialog.getByRole('button', { name: 'Lock it in →' }).click();
+  }
+  await expect(dialog.getByRole('heading', { name: 'Challenge complete' })).toBeVisible({ timeout: 60000 });
+  expect(answers.map((a) => a.answer)).toEqual(['a', 'a', '', '', '', '', '', '', '', '']);
+  await expect(dialog.getByText('2 of 10 correct')).toBeVisible();
+  // Reveal: both players finished, so the ranking shows.
+  await expect(dialog.getByText('#1 Aurore — 5/10')).toBeVisible();
+  await expect(dialog.getByText('#2 Thomas — 2/10')).toBeVisible();
+  await page.screenshot({ path: '/tmp/lg-challenge-reveal-desktop.png' });
+});

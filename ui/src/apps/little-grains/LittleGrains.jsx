@@ -527,7 +527,7 @@ function ChallengeSession({ onClose, onProgress }) {
           <div className="grains-quest-note">
             <p className="grains-card-index">CHALLENGE · {data.week_key}</p>
             <h2>This week's duel</h2>
-            <p>{data.size} questions from every general-knowledge path — read or not. {data.seconds_per_question} seconds each, then it moves on. Same questions for both players.</p>
+            <p>{data.size} questions picked at random from the general-knowledge paths — read or not. {data.seconds_per_question} seconds each, then it moves on. Same questions for both players.</p>
             {data.me.answered > 0 && <p>You have answered {data.me.answered} of {data.size}.</p>}
             {data.me.finished
               ? <div>

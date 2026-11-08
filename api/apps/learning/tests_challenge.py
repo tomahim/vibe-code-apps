@@ -184,5 +184,15 @@ class ChallengeTests(TestCase):
         self.assertEqual([w["week_key"] for w in history], ["2026-W44"])
         # Weeks I never played stay out; finishing the current week adds it.
         self.finish_week(self.thomas)
-        keys = [w["week_key"] for w in self.client.get("/api/learning/challenge/history/").json()["weeks"]]
-        self.assertEqual(keys, [current_week_key(), "2026-W44"])
+        weeks = self.client.get("/api/learning/challenge/history/").json()["weeks"]
+        self.assertEqual([w["week_key"] for w in weeks], [current_week_key(), "2026-W44"])
+        # Reveal gate holds in history too: with Aurore still playing, the
+        # finished current week carries no ranking, no other score, no result.
+        current = weeks[0]
+        self.assertIsNone(current["ranking"])
+        self.assertNotIn("won", json.dumps(current))
+        self.assertNotIn("aurore", json.dumps(current).lower())
+        # Once she finishes, history reveals the same ranking as the week.
+        self.finish_week(self.aurore)
+        revealed = self.client.get("/api/learning/challenge/history/").json()["weeks"][0]["ranking"]
+        self.assertEqual({r["name"] for r in revealed}, {"Thomas", "Aurore"})
