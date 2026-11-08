@@ -570,6 +570,12 @@ function applyStep(snap) {
   b.parts.forEach(function (p, i) { p.targets.forEach(function (t) { t.visible = i < asm.step; if (i < asm.step - 1) { t.position.set(0, 0, 0); t.scale.set(1, 1, 1); } }); });
   var p = b.parts[asm.step - 1]; asm.t = snap && reduce ? 1 : 0;
   asm.ttarget.set(p.focus[0], p.focus[1], p.focus[2]); asm.tdist = p.dist;
+  if (true) {
+    var bb0 = new THREE.Box3(); b.parts.forEach(function (q, i) { if (i < asm.step) q.targets.forEach(function (t) { var sv = t.position.clone(); t.position.set(0, 0, 0); bb0.expandByObject(t); t.position.copy(sv); }); });
+    var c0 = bb0.getCenter(new THREE.Vector3()), r0 = bb0.getSize(new THREE.Vector3()).length() * 0.5, asp = camera.aspect || 1;
+    var half = Math.min(22.5 * Math.PI / 180, Math.atan(Math.tan(22.5 * Math.PI / 180) * asp));
+    asm.ttarget.copy(c0); asm.tdist = Math.max(4, r0 / Math.sin(half) * 1.15);
+  }
   if (snap) { asm.target.copy(asm.ttarget); asm.dist = asm.tdist; }
   if (true) { var fx = p.focus[0]; asm.yaw = fx > 1.5 ? 1.0 : (fx < -1.5 ? Math.PI - 0.9 : -0.7); }
   if (asm.box) { asm.scene.remove(asm.box); asm.box = null; }
