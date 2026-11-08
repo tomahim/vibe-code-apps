@@ -70,7 +70,7 @@ export default function MusicLibrary({ onHome }) {
   }
 
   function resetCode() {
-    updateCode(track.id, track.code);
+    updateCode(track.code);
   }
 
   async function togglePlay() {
