@@ -1,0 +1,24 @@
+id: aaec0ee8-72dd-4b90-8e0d-3b08ddba52ad
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels réflexes pratiques le manuel recommande-t-il à bord d'un bateau ?
+choices:
+- id: aa5b2f64-d85e-429c-8836-b1ce5ed91207
+  text: Avoir toujours de l'eau avec soi, boire régulièrement, ne pas rester au soleil
+    et mettre la combinaison au dernier moment.
+- id: 57fccdf8-8f5f-4fc2-8844-93d2023bc074
+  text: Mettre sa combinaison dès l'arrivée à bord, afin d'être prêt à plonger au
+    plus vite.
+- id: 3ecb51d6-dfcb-4b1c-b62b-2c30dd503783
+  text: Rester en plein soleil le plus possible, afin de stocker la vitamine D avant
+    l'immersion.
+- id: 9cf1ab9c-7ff2-4a5d-a50d-b4e5790f054e
+  text: Éviter soigneusement de boire avant la plongée, pour ne pas avoir envie d'uriner.
+correct_choice_ids:
+- aa5b2f64-d85e-429c-8836-b1ce5ed91207
+explanation: 'À bord : toujours une bouteille d''eau avec soi, boire régulièrement
+  surtout après la plongée ; s''il fait chaud, ne pas rester trop longtemps exposé
+  au soleil et ne mettre la combinaison qu''au dernier moment.'
+archived: false

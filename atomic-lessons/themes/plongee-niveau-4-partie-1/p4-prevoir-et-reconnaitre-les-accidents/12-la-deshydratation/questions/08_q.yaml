@@ -1,0 +1,25 @@
+id: 0c01be9d-6217-4476-b8a7-9da1d66b9e31
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que se passe-t-il au retour en surface après la plongée, selon le manuel ?
+choices:
+- id: 17ac649c-ed40-48a4-b3a9-f270436c9717
+  text: 'Les veines et capillaires se rouvrent soudainement ; le volume sanguin remplit
+    moins bien les vaisseaux : c''est l''hypovolémie.'
+- id: 83d477e4-e4f8-47c2-9027-a9bb1cd60436
+  text: Le volume sanguin augmente fortement, ce qui provoque une crise d'hypertension
+    brutale.
+- id: 738aeebb-be5c-4c4e-9d52-e42dd1c5854b
+  text: Le sang afflue massivement vers le cerveau, ce qui provoque immanquablement
+    une syncope.
+- id: ad9fff52-1015-4a78-9cf5-ff2751812791
+  text: 'Rien de particulier : la circulation retrouve immédiatement et complètement
+    son état initial.'
+correct_choice_ids:
+- 17ac649c-ed40-48a4-b3a9-f270436c9717
+explanation: 'De retour aux conditions terrestres, les veines et capillaires se rouvrent
+  soudainement et le volume sanguin remplit moins bien les vaisseaux : cette hypovolémie
+  peut limiter la perfusion de certains tissus.'
+archived: false

@@ -1,0 +1,24 @@
+id: 176c7f2c-fd30-40a0-b49d-9d27ffa91d18
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi les pertes d'eau se cumulent-elles sur des plongées successives ?
+choices:
+- id: c8bb9e0a-3f84-429f-9e59-a37ab33f6349
+  text: La reconstitution à terre des volumes plasmatique et interstitiel est beaucoup
+    plus lente que leur diminution en immersion.
+- id: db60565a-1240-425d-a842-9744362cc529
+  text: Parce que le corps refuse d'absorber l'eau qui est bue entre deux plongées.
+- id: 31cb2624-7b22-49a8-8238-e8802be0c47c
+  text: Parce que chaque plongée successive double définitivement le débit urinaire.
+- id: 3c4aee28-2b37-41fd-ba5a-1bc9d9d7c5fb
+  text: Parce que l'eau de mer pénètre dans la combinaison et déshydrate la peau en
+    surface.
+correct_choice_ids:
+- c8bb9e0a-3f84-429f-9e59-a37ab33f6349
+explanation: 'Les pertes se cumulent partiellement : la reconstitution à terre des
+  volumes plasmatique et interstitiel est beaucoup plus lente que leur diminution
+  au cours de l''immersion - vigilance en croisière (plusieurs plongées par jour sur
+  plusieurs jours).'
+archived: false

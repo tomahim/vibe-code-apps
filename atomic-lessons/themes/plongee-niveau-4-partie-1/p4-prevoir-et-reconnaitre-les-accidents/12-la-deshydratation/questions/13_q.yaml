@@ -1,0 +1,21 @@
+id: 36f93031-38c3-46a1-9075-c4c511f1a591
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel est le bon réflexe d'hydratation autour de la plongée, selon le manuel
+  ?
+choices:
+- id: 391151cd-cc4f-40bc-b44c-f4449ebedc79
+  text: Plonger en étant normalement hydraté et se réhydrater après la plongée.
+- id: 45caf59d-938e-4e6b-aa17-d0795f50e2ab
+  text: Se déshydrater volontairement avant la plongée pour éviter d'uriner.
+- id: a6bffe88-3bf2-4d8e-8b99-1b9273ce972d
+  text: Ne boire ni avant ni après, pour garder un sang peu visqueux.
+- id: ff00dd4e-7843-4295-b656-abac97160e53
+  text: Ne boire que le soir, une fois toutes les plongées terminées.
+correct_choice_ids:
+- 391151cd-cc4f-40bc-b44c-f4449ebedc79
+explanation: Toute immersion provoquant une déshydratation, il est important de plonger
+  en étant normalement hydraté et de se réhydrater après la plongée.
+archived: false

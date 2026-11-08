@@ -1,0 +1,21 @@
+id: 2a0149e2-912d-42d3-980e-9c53ce3c8949
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle quantité d'eau le manuel conseille-t-il de boire après la plongée ?
+choices:
+- id: 863f2c88-e9a6-4035-82c5-99500ecddb81
+  text: 0,3 à 0,5 litre d'eau par heure d'immersion, par petites gorgées régulières.
+- id: 939780d0-1126-4e50-8a31-fb89328f60bf
+  text: 2 litres d'un seul coup dès la sortie de l'eau, pour aller plus vite.
+- id: b06bedaa-2b31-4031-b7f8-2af7953b2367
+  text: Une gorgée par jour de plongée, pour ne pas surcharger les reins.
+- id: c3eb3975-64bb-4da7-9cad-2aa789d73def
+  text: 'Aucune quantité précise : il suffit d''attendre d''avoir soif.'
+correct_choice_ids:
+- 863f2c88-e9a6-4035-82c5-99500ecddb81
+explanation: Il est conseillé de boire 0,3 à 0,5 litre d'eau par heure d'immersion,
+  par petites prises régulières pour laisser le temps à l'organisme d'assimiler le
+  liquide.
+archived: false
