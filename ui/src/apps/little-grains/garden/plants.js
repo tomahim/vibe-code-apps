@@ -156,6 +156,85 @@ export function makeSpecies(detail) {
     const n = hi ? 7 : 5;
     for (let i = 0; i < n; i++) { const a = (i / n) * 6.28; b.add(cone(0.02, 0.22, 3), { p: [Math.cos(a) * 0.02, 0.04, Math.sin(a) * 0.02], r: [Math.sin(a) * 0.55, 0, -Math.cos(a) * 0.55], s: [1, 1, 0.5], c: '#5ea84a', j: 0.06 }); }
   });
+  // Underwater set for the diving themes: corals, anemones and reef critters
+  // standing in for the land plants. Same low-poly, vertex-coloured style.
+  mk('coralStag', 111, (b) => {
+    const C = ['#ff8a5c', '#ff9d75', '#f2724f'];
+    b.add(blob(0.1, 0, 0.2, 1), { s: [1.4, 0.6, 1.4], p: [0, 0.03, 0], c: '#e8b08a', j: 0.08 });
+    const n = hi ? 7 : 5;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * 6.28 + 0.5, lean = 0.35 + (i % 3) * 0.22, h = 0.34 + (i % 3) * 0.1, x = Math.cos(a) * 0.07, z = Math.sin(a) * 0.07;
+      const rx = Math.sin(a) * lean, rz = -Math.cos(a) * lean;
+      b.add(cyl(0.045, 0.02, h, 5), { p: [x, 0.04, z], r: [rx, 0, rz], c: C[i % 3], j: 0.07, grad: 0.55 });
+      const tx = x + Math.sin(-rz) * h * 0.9, tz = z + Math.sin(rx) * h * 0.9;
+      b.add(cyl(0.018, 0.008, h * 0.45, 4), { p: [tx, 0.04 + Math.cos(lean) * h * 0.82, tz], r: [rx + 0.5, 0, rz - 0.4], c: C[(i + 1) % 3], j: 0.06, grad: 0.5 });
+    }
+  });
+  mk('coralFan', 112, (b) => {
+    b.add(cyl(0.035, 0.05, 0.16, 5), { c: '#8a5a4a', j: 0.05 });
+    const C = ['#c65d8a', '#b04a9e', '#d8719a'];
+    const n = hi ? 5 : 3;
+    for (let i = 0; i < n; i++) {
+      const a = (i - (n - 1) / 2) * 0.38, r = 0.28 - Math.abs(i - (n - 1) / 2) * 0.045;
+      b.add(blob(r, ico, 0.16, i * 3), { p: [Math.sin(a) * 0.16, 0.4 + (i % 2) * 0.04, 0], r: [0, a * 0.25, a * 0.35], s: [1.1, 1.1, 0.16], c: C[i % 3], j: 0.08, grad: 0.5 });
+    }
+  });
+  mk('coralBrain', 113, (b) => {
+    b.add(blob(0.24, ico + 1, 0.3, 2), { s: [1, 0.62, 1], p: [0, 0.1, 0], c: '#c9a86a', j: 0.1, grad: 0.45 });
+    b.add(blob(0.13, ico, 0.3, 3), { s: [1, 0.6, 1], p: [0.2, 0.05, 0.1], c: '#b8985c', j: 0.1 });
+  });
+  mk('coralTube', 114, (b) => {
+    const C = ['#f0c040', '#e8a838', '#d89050'];
+    const n = hi ? 5 : 3;
+    for (let i = 0; i < n; i++) {
+      const a = i * 2.4, h = 0.2 + (i % 3) * 0.09, x = Math.cos(a) * 0.07, z = Math.sin(a) * 0.07;
+      b.add(cyl(0.042, 0.034, h, 6), { p: [x, 0, z], c: C[i % 3], j: 0.07, grad: 0.4 });
+      b.add(cyl(0.05, 0.042, 0.03, 6), { p: [x, h - 0.012, z], c: '#f6e0b0', j: 0.05 });
+    }
+  });
+  mk('anemone', 115, (b) => {
+    b.add(cyl(0.07, 0.09, 0.09, 6), { c: '#b8527a', j: 0.05 });
+    b.add(blob(0.09, 0, 0.1, 1), { s: [1, 0.6, 1], p: [0, 0.1, 0], c: '#c96387', j: 0.06 });
+    const n = hi ? 14 : 9;
+    for (let i = 0; i < n; i++) {
+      const a = i * 2.399, r = 0.02 + (i % 3) * 0.03, lean = 0.25 + (i % 3) * 0.3, x = Math.cos(a) * r, z = Math.sin(a) * r;
+      b.add(cone(0.016, 0.16, 4), { p: [x, 0.12, z], r: [Math.sin(a) * lean, 0, -Math.cos(a) * lean], c: i % 2 ? '#8ee08a' : '#a4ec9e', j: 0.08, grad: 0.6 });
+    }
+  });
+  mk('starfish', 116, (b) => {
+    b.add(blob(0.07, 0, 0.15, 1), { s: [1, 0.45, 1], p: [0, 0.03, 0], c: '#f0854a', j: 0.06 });
+    for (let i = 0; i < 5; i++) {
+      const a = (i / 5) * 6.28, lean = Math.PI / 2 - 0.14;
+      b.add(cone(0.045, 0.22, 4), { p: [0, 0.028, 0], r: [Math.sin(a) * lean, 0, -Math.cos(a) * lean], c: i % 2 ? '#f0854a' : '#e97a3f', j: 0.06, grad: 0.35 });
+    }
+  });
+  mk('shell', 117, (b) => {
+    b.add(blob(0.09, 0, 0.18, 2), { s: [1.25, 0.42, 1.05], p: [0, 0.028, 0], c: '#f2e2cc', j: 0.07, grad: 0.35 });
+    b.add(blob(0.045, 0, 0.15, 3), { s: [1, 0.6, 1], p: [0.06, 0.05, 0.02], c: '#e8cba8', j: 0.06 });
+  });
+  mk('urchin', 118, (b) => {
+    b.add(blob(0.055, 0, 0.1, 1), { p: [0, 0.05, 0], c: '#4a3a5a', j: 0.06 });
+    const n = hi ? 10 : 7;
+    for (let i = 0; i < n; i++) {
+      const a = i * 2.399, tilt = 0.5 + (i % 3) * 0.35;
+      b.add(cone(0.007, 0.13, 3), { p: [0, 0.05, 0], r: [Math.sin(a) * tilt, 0, -Math.cos(a) * tilt], c: '#3a2d49', j: 0.05 });
+    }
+  });
+  mk('seagrass', 119, (b) => {
+    const n = hi ? 7 : 5;
+    for (let i = 0; i < n; i++) {
+      const a = i * 1.9, h = 0.5 + (i % 3) * 0.16, x = Math.cos(a) * 0.045, z = Math.sin(a) * 0.045, lean = 0.08 + (i % 2) * 0.1;
+      b.add(wobble(cone(0.03, h, 4).toNonIndexed(), 0.004, i), { p: [x, 0, z], r: [Math.sin(a) * lean, 0, -Math.cos(a) * lean], s: [1, 1, 0.35], c: i % 2 ? '#4f9a6a' : '#63aa74', j: 0.07, grad: 0.5 });
+    }
+  });
+  mk('kelp', 120, (b) => {
+    b.add(cyl(0.018, 0.026, 1.15, 5), { c: '#3f8a5a', j: 0.05, grad: 0.3 });
+    const n = hi ? 6 : 4;
+    for (let i = 0; i < n; i++) {
+      const a = i * 2.4, y = 0.2 + i * 0.16;
+      b.add(blob(0.085, 0, 0.12, i), { p: [Math.cos(a) * 0.07, y, Math.sin(a) * 0.07], r: [Math.sin(a) * 0.7, 0, -Math.cos(a) * 0.7], s: [0.5, 1.9, 0.28], c: i % 2 ? '#4f9a5f' : '#5da868', j: 0.07, grad: 0.4 });
+    }
+  });
   mk('rock', 101, (b) => { b.add(blob(0.12, 0, 0.25, 3), { s: [1.3, 0.7, 1], p: [0, 0.05, 0], c: '#b7b2a6', j: 0.1, grad: 0.3 }); b.add(blob(0.07, 0, 0.25, 4), { p: [0.14, 0.03, 0.05], c: '#a8a397', j: 0.1 }); });
   mk('redRock', 102, (b) => { b.add(blob(0.13, 0, 0.25, 5), { s: [1.2, 0.8, 1], p: [0, 0.06, 0], c: '#c4714a', j: 0.1, grad: 0.4 }); b.add(blob(0.07, 0, 0.25, 6), { p: [-0.14, 0.03, 0.04], c: '#b5643f', j: 0.1 }); });
   mk('pebble', 103, (b) => b.add(blob(0.035, 0, 0.2, 7), { s: [1.4, 0.5, 1], c: '#eee8d8', j: 0.05 }));
@@ -164,6 +243,29 @@ export function makeSpecies(detail) {
   mk('flag', 106, (b) => { b.add(cyl(0.012, 0.012, 0.6, 4), { c: '#d9cdb8' }); b.add(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0.6, 0), new THREE.Vector3(0.22, 0.52, 0), new THREE.Vector3(0, 0.44, 0)]).setIndex([0, 1, 2, 0, 2, 1]), { c: '#c65d3b', j: 0 }); });
 
   return S;
+}
+
+// Swimming animals for the underwater themes. Geometries face +z; the garden
+// orients each swimmer along its path and flaps the tail around its own pivot.
+export function makeFish() {
+  const fin = (pts) => new THREE.BufferGeometry().setFromPoints(pts.map((p) => new THREE.Vector3(...p))).setIndex([0, 1, 2, 0, 2, 1]).toNonIndexed();
+  const body = new Builder(201);
+  body.add(new THREE.ConeGeometry(0.085, 0.3, 6).rotateX(Math.PI / 2), { p: [0, 0, 0.02], c: '#ffffff', j: 0.04, grad: 0.35 });
+  body.add(fin([[0, 0.06, 0.06], [0, 0.13, -0.03], [0, 0.06, -0.07]]), { c: '#ffffff', j: 0.03 });
+  const tail = new Builder(202);
+  tail.add(fin([[0, 0, 0], [0, 0.11, -0.15], [0, -0.05, -0.12]]), { c: '#ffffff', j: 0.03 });
+  return { body: body.build(), tail: tail.build() };
+}
+
+export function makeTurtle() {
+  const b = new Builder(203), SHELL = '#6d8a4f', SKIN = '#8aa86a';
+  b.add(blob(0.22, 1, 0.14, 1), { s: [1, 0.5, 1.25], p: [0, 0.1, 0], c: SHELL, j: 0.07, grad: 0.4 });
+  b.add(blob(0.2, 0, 0.1, 2), { s: [0.9, 0.3, 1.1], p: [0, 0.05, 0], c: '#d8cf9a', j: 0.05 });
+  b.add(blob(0.06, 0, 0.1, 3), { s: [1, 0.9, 1.3], p: [0, 0.09, 0.32], c: SKIN, j: 0.05 });
+  [[0.22, 0.14, 0.5], [-0.22, 0.14, -0.5], [0.2, -0.16, 0.35], [-0.2, -0.16, -0.35]].forEach(([x, z, rot], i) => {
+    b.add(blob(0.09, 0, 0.1, 4 + i), { s: [1.5, 0.25, 0.7], p: [x, 0.06, z], r: [0, rot, 0], c: SKIN, j: 0.06 });
+  });
+  return b.build();
 }
 
 // Grass blade (3-segment tapered strip), instanced and wind-animated by the garden.
