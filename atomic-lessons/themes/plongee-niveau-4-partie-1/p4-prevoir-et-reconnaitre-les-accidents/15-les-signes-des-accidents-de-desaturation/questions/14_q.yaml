@@ -1,0 +1,25 @@
+id: 23d1475f-9f55-4738-834a-ce10327cd60d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment se manifestent les atteintes cutanées, et que faut-il en faire ?
+choices:
+- id: f18b3145-69c7-4808-95fd-121208949951
+  text: 'Démangeaisons type brûlures ou urticaire (« puces ») et boursouflures en
+    plaques (« moutons ») : mise en observation dans un centre hyperbare.'
+- id: 9104a982-2984-4288-ab7e-901e5a1690f1
+  text: Un simple rougissement des joues, qui ne mérite jamais la moindre surveillance
+    particulière.
+- id: 2ed4f658-9ea1-4fca-bd73-10daa5a5c556
+  text: Des cloques pleines d'eau sur tout le corps, qu'il faut percer soigneusement
+    dès la sortie.
+- id: aac9bb83-8bde-473f-9fe8-9c3b50791b64
+  text: Un bronzage plus marqué que d'habitude, sans aucune conséquence médicale possible.
+correct_choice_ids:
+- f18b3145-69c7-4808-95fd-121208949951
+explanation: Des bulles piégées dans les capillaires sous-cutanés provoquent démangeaisons
+  localisées (aspect de petites brûlures ou d'urticaire) ou boursouflures en plaques.
+  Rares en plongée de loisir, ces symptômes doivent conduire à une mise en observation
+  dans un centre hyperbare.
+archived: false

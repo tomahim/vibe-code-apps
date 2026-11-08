@@ -1,0 +1,23 @@
+id: 9255aac2-f6f3-47b2-ae8b-c1969e75727d
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce qu'une hémiplégie, selon le manuel ?
+choices:
+- id: 81538f36-e023-4ec3-a5d6-6d88500fe121
+  text: Une paralysie d'un côté du corps, suite à une lésion des régions motrices
+    du côté opposé du cerveau.
+- id: bb01c288-13c8-4cdc-aa0d-15bd45891336
+  text: Une paralysie des muscles d'un seul membre, sans aucune atteinte cérébrale
+    associée.
+- id: 3372a4e6-79ca-41ae-b40e-705d0acd5244
+  text: Une paralysie du tronc et des quatre membres, liée à une lésion des cervicales.
+- id: 696316bf-9f7e-4e42-a418-0076f3f34984
+  text: Une simple fatigue musculaire passagère des avant-bras après un long palmage.
+correct_choice_ids:
+- 81538f36-e023-4ec3-a5d6-6d88500fe121
+explanation: 'Hémiplégie : paralysie d''un côté du corps (le côté gauche si la partie
+  droite du cerveau est atteinte). À distinguer de la monoplégie (un membre), de la
+  tétraplégie (tronc et quatre membres) et de la paraplégie (les deux jambes).'
+archived: false

@@ -1,0 +1,23 @@
+id: fe610e32-43e0-4c59-a5bb-8a868b8db2f7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce qu'une paraplégie, selon le manuel ?
+choices:
+- id: 2b1070db-fbc6-4ca4-9970-60480acf2b50
+  text: Une paralysie des deux jambes et parfois d'une partie du tronc, après atteinte
+    de la moelle épinière dorsale ou lombaire.
+- id: ac0bbc39-d0fb-431d-ba22-1d0e59635d4e
+  text: Une paralysie d'un seul côté du corps, après lésion du cerveau du côté opposé.
+- id: d193dd11-522a-4aaf-8226-905e2cd60828
+  text: Une paralysie du tronc et des quatre membres, après lésion des vertèbres cervicales.
+- id: 3cad22a8-a18d-4eba-b182-a76761159de3
+  text: Une perte de connaissance brève, sans aucune atteinte de la moelle épinière.
+correct_choice_ids:
+- 2b1070db-fbc6-4ca4-9970-60480acf2b50
+explanation: 'La paraplégie résulte d''une atteinte de la moelle épinière au niveau
+  des vertèbres dorsales ou lombaires : paralysie des deux jambes et parfois d''une
+  partie du tronc, avec troubles de la sensibilité. La tétraplégie atteint, elle,
+  le tronc et les quatre membres.'
+archived: false

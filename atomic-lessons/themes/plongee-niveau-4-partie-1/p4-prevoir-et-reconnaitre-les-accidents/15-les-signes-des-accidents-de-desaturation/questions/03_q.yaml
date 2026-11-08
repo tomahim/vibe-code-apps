@@ -1,0 +1,25 @@
+id: 230b86cb-f5e9-411a-b8f2-8432477e83ff
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Selon le manuel, quels sont les deux éléments principaux de la formation des
+  bulles ?
+choices:
+- id: 5cc5917d-41f7-4fb4-bcf1-a3c988f22749
+  text: La quantité d'azote réellement dissous pendant la plongée et la préexistence
+    de poches de germes gazeux (micronoyaux).
+- id: 022b7a1d-9e72-4617-9956-30512f559c02
+  text: La température de l'eau et la couleur de la combinaison du plongeur.
+- id: 44c66ab0-41db-4dca-bf54-578242809e24
+  text: La marque du détendeur et la pression de gonflage de la bouteille au départ.
+- id: d2530899-2fcd-4c09-82ab-4e564062e17a
+  text: La profondeur maximale atteinte et la présence éventuelle d'un courant de
+    marée.
+correct_choice_ids:
+- 5cc5917d-41f7-4fb4-bcf1-a3c988f22749
+explanation: 'La formation de bulles fait intervenir la quantité de gaz inerte dissous
+  (qui dépend du débit cardiaque : effort, froid, essoufflement, stress l''augmentent)
+  et la préexistence de poches de germes gazeux qui favorisent l''apparition et le
+  grossissement des bulles.'
+archived: false

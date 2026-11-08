@@ -1,0 +1,27 @@
+id: f07ec674-1556-47ee-ad38-fda1a6de7b39
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que faut-il retenir de la classification clinique des ADD (type I / type II)
+  et de l'attitude à adopter ?
+choices:
+- id: a188527d-ca35-44fb-b839-b0ad4374981a
+  text: 'Elle est d''aucune utilité pour les secours : au moindre doute, il faut considérer
+    qu''il s''agit d''un accident, sans tenter de diagnostic.'
+- id: eb0ad96f-f544-48d6-ad26-99d16bd492b5
+  text: Elle permet au plongeur de décider seul, sur le bateau, si un appel aux secours
+    est justifié.
+- id: a09e3691-4722-4c76-8e11-e2176717f49e
+  text: Elle impose d'attendre l'apparition de signes de type II avant d'envisager
+    la moindre alerte.
+- id: 8bfd0f5e-38e3-4074-bd6d-c8af361c93e6
+  text: Elle dispense de toute surveillance si les signes restent purement cutanés
+    ou articulaires.
+correct_choice_ids:
+- a188527d-ca35-44fb-b839-b0ad4374981a
+explanation: Le manuel précise que la classification type I / type II est d'aucune
+  utilité pour les actes de secours en plongée. Dès la constatation de « quelque chose
+  d'anormal » - une grande fatigue inhabituelle par exemple -, il faut considérer
+  qu'il s'agit d'un accident.
+archived: false

@@ -1,0 +1,13 @@
+id: 8146cd22-542e-44f6-b87b-eb7083f9df6b
+position: 13
+type: type_answer_question
+after_card_position: 6
+prompt: Quel nom les Anglo-Saxons donnent-ils aux accidents ostéo-articulaires de
+  la décompression (de l'anglais « to bend », courber) ?
+accepted_answers:
+- bends
+- bend
+explanation: 'Les bends : à la fin du XIXe siècle, les ouvriers atteints se courbaient
+  de douleur, évoquant la posture à la mode « Grecian bend ». Ces douleurs ne sont
+  pas calmées par les antalgiques et disparaissent en caisson sous oxygène.'
+archived: false

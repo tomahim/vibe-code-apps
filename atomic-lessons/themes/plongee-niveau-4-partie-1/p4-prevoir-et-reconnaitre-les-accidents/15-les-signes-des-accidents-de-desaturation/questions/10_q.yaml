@@ -1,0 +1,14 @@
+id: 506d993a-fa40-41f0-baea-10dda449b966
+position: 10
+type: type_answer_question
+after_card_position: 4
+prompt: Comment le manuel nomme-t-il les troubles de la sensibilité (fourmillements,
+  picotements) pouvant signaler un accident de désaturation ?
+accepted_answers:
+- paresthésie
+- paresthésies
+explanation: On parle de paresthésies. Au même titre que les paralysies (monoplégie,
+  hémiplégie, tétraplégie, paraplégie), les troubles de la vue ou de la parole, une
+  douleur vive dans le bas du dos (« coup de poignard ») ou entre les omoplates doivent
+  alerter.
+archived: false
