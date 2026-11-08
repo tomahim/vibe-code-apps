@@ -1,0 +1,25 @@
+id: 62351c6b-198b-45a0-9d74-5751388a3e6c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce que l'essoufflement selon le manuel ?
+choices:
+- id: 5636e096-5a5f-4f0a-a2cf-29f3c86ee100
+  text: La manifestation ventilatoire d'une intoxication par le dioxyde de carbone,
+    dont la cause principale est une élimination insuffisante du CO2 par la ventilation.
+- id: 1e0b23eb-f3ea-4659-990f-c3301079494f
+  text: Une simple fatigue musculaire des jambes, qui survient après un palmage trop
+    soutenu contre le courant.
+- id: b76276d6-c09a-4ae4-9ab3-169e5efbf692
+  text: Une intoxication par l'oxygène, qui survient systématiquement dès que la pression
+    dépasse deux bars.
+- id: a0f44efc-d679-4226-ae45-597183706d5f
+  text: Une crise d'asthme déclenchée systématiquement par l'air sec fourni par la
+    bouteille.
+correct_choice_ids:
+- 5636e096-5a5f-4f0a-a2cf-29f3c86ee100
+explanation: 'L''essoufflement est la manifestation ventilatoire de l''hypercapnie
+  : le CO2 est mal éliminé par la ventilation ; plus rarement, l''air est pollué (local
+  mal ventilé, erreur de gonflage).'
+archived: false

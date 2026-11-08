@@ -1,0 +1,20 @@
+id: 1ea329dc-a59e-42fd-bcc3-499be57c23ce
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que demander au plongeur essoufflé ?
+choices:
+- id: 68f2c994-3e92-422f-81ad-f9a01820edcb
+  text: De se concentrer et de prendre sur lui pour se forcer à expirer.
+- id: 8a60fd8f-2684-4e6f-b9dd-c7c9519c56fb
+  text: D'inspirer le plus profondément possible à chaque cycle.
+- id: 53aa732a-6d8d-40d3-a3d4-fe03cb0b4c68
+  text: De bloquer sa respiration quelques secondes en pleine eau.
+- id: 4ede816c-409b-4f83-8f39-65b29195bfd6
+  text: De signaler son état en agitant frénétiquement les deux bras.
+correct_choice_ids:
+- 68f2c994-3e92-422f-81ad-f9a01820edcb
+explanation: 'Calmer le plongeur et le faire expirer : c''est l''expiration qui élimine
+  le CO2 - la régulation spontanée pousse à tort vers l''inspiration.'
+archived: false

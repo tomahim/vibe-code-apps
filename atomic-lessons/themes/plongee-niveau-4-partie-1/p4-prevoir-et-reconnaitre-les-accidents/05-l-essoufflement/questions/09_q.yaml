@@ -1,0 +1,20 @@
+id: 2e6b3785-7d20-4d00-a381-ab041ef6ce88
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel signe visuel doit immédiatement alerter le guide de palanquée ?
+choices:
+- id: 798e98ea-1192-4805-9295-9c3cbcdccb6f
+  text: Une grande quantité de bulles expirées à un rythme élevé par un plongeur.
+- id: d4889fc3-1f99-42c0-8a89-42306f20e4b2
+  text: Un plongeur qui regarde son manomètre pendant la plongée.
+- id: 0afc74aa-5203-41bc-a308-28342c0a45c1
+  text: Un plongeur qui se rapproche de son binôme pour signaler quelque chose.
+- id: 1c6f2914-e309-4b40-8133-8075cd18c7e6
+  text: Des bulles qui s'échappent du joint du masque à chaque expiration.
+correct_choice_ids:
+- 798e98ea-1192-4805-9295-9c3cbcdccb6f
+explanation: 'Le guide surveille les bulles : une expiration abondante et rapide signe
+  une ventilation en détresse - il suit aussi régulièrement les consommations.'
+archived: false

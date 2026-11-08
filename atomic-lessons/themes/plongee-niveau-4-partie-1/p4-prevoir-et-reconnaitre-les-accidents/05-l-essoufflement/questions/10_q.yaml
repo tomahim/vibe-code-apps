@@ -1,0 +1,23 @@
+id: 41653d86-8412-4d71-93f9-eea808b8ae96
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment adapter la plongée en présence de courant selon le manuel ?
+choices:
+- id: 15a3e8b4-b0da-4479-b673-743ceff6492d
+  text: S'aider d'une ligne de vie pour rejoindre le mouillage et s'abriter du courant
+    derrière des rochers, comme les poissons.
+- id: 7d6abd16-2f06-4db1-8740-23ce06855746
+  text: Palmer plus fort contre le courant, afin de terminer l'exploration exactement
+    comme prévue.
+- id: ca0e1e92-bbfd-4a67-8204-5fda5d1e48af
+  text: Remonter systématiquement en surface et annuler immédiatement toute la plongée.
+- id: cc8ac6e5-ed8c-4b16-a9bf-159cff38b339
+  text: Se laisser dériver passivement sans jamais palmer, quelle que soit la zone
+    traversée.
+correct_choice_ids:
+- 15a3e8b4-b0da-4479-b673-743ceff6492d
+explanation: 'Ligne de vie jusqu''au mouillage, exploration adaptée, abri derrière
+  les rochers : le but est d''éviter l''effort excessif qui déclenche l''essoufflement.'
+archived: false

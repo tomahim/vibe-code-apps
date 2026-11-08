@@ -1,0 +1,25 @@
+id: af5704bc-272a-4584-8025-e15d218b64fe
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: '« Ne pas bloquer sa respiration suffit à éviter une surpression pulmonaire
+  » : vrai ou faux selon le manuel ?'
+choices:
+- id: 2f17e95c-1801-462c-bbfb-1ab2ee31f5b9
+  text: 'Faux : en cas de remontée rapide, il faut insister sur l''expiration ; se
+    contenter de ne pas bloquer peut être insuffisant.'
+- id: 366951ce-d477-4eb2-a9e3-98d2cc02542a
+  text: 'Vrai : il suffit de garder la glotte grande ouverte pendant toute la durée
+    de la remontée.'
+- id: fa7a651e-2112-4783-a733-728324cd70c9
+  text: Vrai, mais cette règle vaut uniquement pour les plongeurs expérimentés et
+    bien entraînés.
+- id: c38d2af4-d378-42db-b724-271b81185599
+  text: 'Faux : il faut au contraire bloquer sa respiration dans les tout derniers
+    mètres avant la surface.'
+correct_choice_ids:
+- 2f17e95c-1801-462c-bbfb-1ab2ee31f5b9
+explanation: L'expiration doit être active en remontée rapide ; « ne pas bloquer »
+  ne suffit pas toujours à évacuer l'air assez vite.
+archived: false

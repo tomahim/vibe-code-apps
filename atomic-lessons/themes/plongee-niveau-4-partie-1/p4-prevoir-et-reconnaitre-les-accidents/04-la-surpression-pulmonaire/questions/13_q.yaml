@@ -1,0 +1,23 @@
+id: 18ae05cb-8b60-4053-bf38-379d48cf963c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que doit rappeler le guide de palanquée pour la remontée ?
+choices:
+- id: f014f350-9b34-41d8-a461-96624f11a2d9
+  text: Ne pas remonter plus vite que lui, expirer correctement, respecter une vitesse
+    lente et insister sur l'expiration dans les 10 derniers mètres.
+- id: 23366ad6-8bfe-4c99-a675-43a85374b651
+  text: Bloquer sa respiration dans les trois derniers mètres pour économiser l'air
+    de la bouteille.
+- id: 1220533f-e495-4ca0-b120-885823d69567
+  text: Remonter le plus vite possible dès que le manomètre affiche la réserve.
+- id: 748f8ed3-5ee9-417e-abd8-fec3e92c2015
+  text: Faire un Valsalva régulier à la remontée pour équilibrer les oreilles.
+correct_choice_ids:
+- f014f350-9b34-41d8-a461-96624f11a2d9
+explanation: 'Vigilance du guide : vitesse lente, expiration surveillée, personne
+  ne remonte plus vite que lui, insistance sur l''expiration dans les 10 derniers
+  mètres.'
+archived: false

@@ -1,0 +1,22 @@
+id: e095ff8c-170f-4d36-af88-e1f9b626510f
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quels signes accompagnent un emphysème du médiastin ?
+choices:
+- id: 3dae8340-8fe5-40de-b93a-3a007b593a36
+  text: Une gêne respiratoire avec douleur dans la poitrine, une voix rauque, et parfois
+    des troubles cardiaques.
+- id: c427513d-2126-46ec-8c0a-448d5d5499cc
+  text: Un gonflement indolore du ventre et une faim intense après la plongée.
+- id: ffaea485-da0a-4303-b2fa-563a5b9e8ab8
+  text: Une éruption cutanée généralisée accompagnée de fortes démangeaisons.
+- id: a2810870-49a0-48f7-b74a-1127fbc9fa46
+  text: Une paralysie brutale des deux jambes sans aucune autre manifestation.
+correct_choice_ids:
+- 3dae8340-8fe5-40de-b93a-3a007b593a36
+explanation: 'L''air pénètre l''espace entre poumons, cœur et trachée : gêne respiratoire,
+  douleur thoracique, voix rauque, troubles cardiaques possibles ; l''emphysème peut
+  aussi être sous-cutané (cou).'
+archived: false

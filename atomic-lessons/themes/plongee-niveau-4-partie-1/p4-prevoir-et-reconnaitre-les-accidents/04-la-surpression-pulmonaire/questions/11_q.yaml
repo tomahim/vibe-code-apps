@@ -1,0 +1,20 @@
+id: 1fbb67ba-e8d4-4b33-886d-861518802485
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel type de plongeur l'expiration insuffisante concerne-t-elle plutôt ?
+choices:
+- id: 95be1609-9b61-4152-b4ad-1f4b0e2360b2
+  text: Des plongeurs généralement chevronnés.
+- id: 88bde0f5-3c7e-426f-8991-2ef20cf362ff
+  text: Uniquement des enfants en cours d'apprentissage.
+- id: 348f511c-70c3-47e3-bba6-2f7f2bd3700b
+  text: Uniquement des débutants en première plongée.
+- id: 850e02b8-652e-46fd-afdb-e8f50fe46e17
+  text: Uniquement les plongeurs âgés et essoufflés.
+correct_choice_ids:
+- 95be1609-9b61-4152-b4ad-1f4b0e2360b2
+explanation: L'expiration insuffisante atteint des plongeurs généralement chevronnés
+  ; le blocage pour manque de maîtrise de la REC touche plutôt les plongeurs peu expérimentés.
+archived: false

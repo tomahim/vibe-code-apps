@@ -1,0 +1,25 @@
+id: ba484ab4-7f6f-4ed2-b04a-6185a3802310
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels sont les signes neurologiques d'une surpression pulmonaire ?
+choices:
+- id: ae783998-d4b6-4d80-baf9-9ccda5ab652f
+  text: État de choc (pouls rapide, pâleur ou teint violacé, extrémités refroidies),
+    convulsions, troubles de la parole et/ou de la vision, paralysies.
+- id: e2f1f915-9a20-4551-b2f4-ed35f86a7e4e
+  text: Des maux de tête isolés, qui disparaissent spontanément au bout de quelques
+    minutes de repos.
+- id: d2e2f6ba-fdfe-45e4-b34b-1fac60dd71c9
+  text: Une somnolence profonde avec une respiration lente, sans aucun autre signe
+    visible.
+- id: 30d723d8-ae5b-4656-ba9d-deb628959e28
+  text: Des douleurs articulaires des membres inférieurs accompagnées d'éruptions
+    cutanées étendues.
+correct_choice_ids:
+- ae783998-d4b6-4d80-baf9-9ccda5ab652f
+explanation: 'Embolie cérébrale (cas le plus fréquent) : état de choc, convulsions,
+  troubles de la parole et/ou de la vision, paralysies (hémiplégie, quadriplégie),
+  paresthésies - symptômes très évolutifs.'
+archived: false
