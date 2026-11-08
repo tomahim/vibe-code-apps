@@ -1,0 +1,23 @@
+id: 02ed60f3-9622-488a-b3d9-9ca3e2a23570
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qu'est-ce que l'effet Lorrain Smith selon le manuel ?
+choices:
+- id: aac965fd-7acd-4118-a811-6165e44303c1
+  text: 'Un effet pneumotoxique : l''O2 pur au-delà de 0,5 bar pendant plusieurs heures
+    peut causer des lésions pulmonaires (surfactant et bronches).'
+- id: 3c8a208b-1df6-4baf-a6b5-606a42317df4
+  text: 'Un effet neurotoxique : des convulsions immédiates dès la moindre augmentation
+    de pression partielle.'
+- id: a15b1d1c-fe71-41f8-bb45-1d5700e3b5b7
+  text: 'Un effet bénéfique : l''oxygénation complète des tissus.'
+- id: 519b3554-9bbd-4d0e-851b-b2a40a7d3ca2
+  text: 'Un effet auditif : des acouphènes après la plongée.'
+correct_choice_ids:
+- aac965fd-7acd-4118-a811-6165e44303c1
+explanation: 'L''effet pneumotoxique Lorrain Smith : O2 pur au-delà de 0,5 bar durant
+  plusieurs heures (6 à 30 h), lésions du surfactant et des bronches ; pas de confrontation
+  en plongée de loisir.'
+archived: false

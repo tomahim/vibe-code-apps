@@ -1,0 +1,21 @@
+id: a2001f8a-6291-4d76-8870-95c1bfb63dd4
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 10
+prompt: Quel risque le manuel cite-il en eaux très froides ?
+choices:
+- id: 6c69a03f-f05c-4123-86a8-ce9ee04221fa
+  text: 'Le givrage des détendeurs, qui se mettent en débit continu : panne d''air,
+    puis noyade.'
+- id: d0a2deb5-3e58-450b-9f41-8d07f59e991a
+  text: La congélation instantanée de la combinaison.
+- id: ee315140-f2a7-4992-9c98-20343b6638dc
+  text: Le blocage du gilet stabilisateur par la glace.
+- id: e1eb9629-154c-4eee-a147-933235225dc5
+  text: La rupture des palmes durcies par le froid.
+correct_choice_ids:
+- 6c69a03f-f05c-4123-86a8-ce9ee04221fa
+explanation: Dans les eaux très froides (ex. lacs d'altitude), le froid peut faire
+  givrer les détendeurs ; le manuel conseille une formation spécifique avant de pratiquer.
+archived: false

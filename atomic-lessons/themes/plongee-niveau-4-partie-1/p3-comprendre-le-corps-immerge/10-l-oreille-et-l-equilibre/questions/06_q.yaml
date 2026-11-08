@@ -1,0 +1,20 @@
+id: 97c211b5-c5b4-4f6e-bba3-81558841f1d3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que contient l'oreille interne ?
+choices:
+- id: 5c0448c2-ee51-4828-b9b0-ca5b82130fd0
+  text: La cochlée (audition), le vestibule et les canaux semi-circulaires (équilibre).
+- id: 2623bb1d-6eef-4f05-be34-c3b2853eca52
+  text: Les trois osselets et la trompe d'Eustache.
+- id: 0a84ae89-79fa-4d71-a8c0-7f194946af59
+  text: Le pavillon et le conduit auditif.
+- id: 1170d5e3-e39d-4f9d-92aa-2bed963f99eb
+  text: Le tympan et la fenêtre du larynx.
+correct_choice_ids:
+- 5c0448c2-ee51-4828-b9b0-ca5b82130fd0
+explanation: 'L''oreille interne est un labyrinthe empli de liquide : cochlée pour
+  l''audition, vestibule et canaux semi-circulaires pour l''équilibre.'
+archived: false

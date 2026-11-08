@@ -1,0 +1,21 @@
+id: 66dd75af-696f-4fa1-8e53-073152abecff
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles sont les trois étapes de la chaîne de décision décrite par le manuel
+  ?
+choices:
+- id: fa413f86-abbb-4f81-bd24-8bef77549fd7
+  text: Perception, analyse, action.
+- id: 0f92e79a-e3f8-4892-bac0-bda6f9c047cd
+  text: Sensation, émotion, réflexe.
+- id: 892f14a5-ff4d-444f-96cc-8db92bbbdfc5
+  text: Inspiration, expiration, apnée.
+- id: e58af86b-4b9d-44ec-aa56-fd1face3cd6f
+  text: Descente, palier, remontée.
+correct_choice_ids:
+- fa413f86-abbb-4f81-bd24-8bef77549fd7
+explanation: Une perception (« je remonte... »), une analyse (« il faut purger un
+  peu d'air du gilet »), une action (« je purge »).
+archived: false

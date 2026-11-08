@@ -1,0 +1,22 @@
+id: c4496235-5ac5-4f90-b92f-d7b08ed28c29
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi l'air comprimé de la bouteille déshydrate-t-il ?
+choices:
+- id: d91cb3ae-b24e-4043-bc84-3aa23df082aa
+  text: Parce qu'il est très sec et que l'organisme doit l'humidifier, ce qui consomme
+    de l'eau.
+- id: 63d7e98c-1e9d-4b71-8f60-4c762d5136e0
+  text: Parce qu'il contient du sel qui assoiffe le plongeur.
+- id: 65a256b8-f1a8-4009-bc55-851b06345539
+  text: Parce qu'il est glacé et refroidit les poumons.
+- id: 250c8fa9-ba27-4c13-8820-7d2412a5dbd4
+  text: Parce qu'il bloque la production d'urine pendant la plongée.
+correct_choice_ids:
+- d91cb3ae-b24e-4043-bc84-3aa23df082aa
+explanation: 'La respiration d''un gaz sec figure parmi les causes : l''air comprimé
+  est très sec et l''organisme doit l''humidifier (0,3 L/jour rien que pour l''air
+  inspiré au quotidien).'
+archived: false

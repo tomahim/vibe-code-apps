@@ -1,0 +1,22 @@
+id: 7606aa9d-4364-4ad8-a3b4-72404cfaae04
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que traverse une molécule pour passer de l'alvéole au sang ?
+choices:
+- id: 527fd163-cbf3-473c-8349-230a2c1aab2b
+  text: L'alvéole (surfactant, liquide, paroi), le tissu intermédiaire, puis la membrane
+    et la cellule de la paroi capillaire.
+- id: f3360e58-05c1-4504-b125-3ea102999b24
+  text: Uniquement la paroi de l'alvéole, extrêmement fine, lors d'une seule traversée.
+- id: 10d4a5b5-a216-4f13-8f38-55305b3a3dd0
+  text: Uniquement la paroi du capillaire, très fine.
+- id: 8ae47a62-4d37-44cf-83cd-ce136ecfd0c0
+  text: Le diaphragme, la plèvre et la cage thoracique.
+correct_choice_ids:
+- 527fd163-cbf3-473c-8349-230a2c1aab2b
+explanation: 'Trois obstacles successifs : l''alvéole (surfactant, liquide et paroi
+  alvéolaire), le tissu entre alvéole et capillaire, la membrane et la cellule de
+  la paroi capillaire.'
+archived: false

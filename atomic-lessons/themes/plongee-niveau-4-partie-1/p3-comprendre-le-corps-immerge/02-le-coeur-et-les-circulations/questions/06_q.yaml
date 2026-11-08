@@ -1,0 +1,20 @@
+id: 7ef9ae74-b7c5-4de4-8499-b6b544e6df75
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel est le rythme cardiaque moyen au repos selon le manuel ?
+choices:
+- id: 365e6633-fbbb-448d-a3ff-cd863ee6b2c6
+  text: Environ 70 pulsations par minute.
+- id: 251a8ddd-53b2-40af-85df-510f5a92fa44
+  text: Environ 30 pulsations par minute.
+- id: 3a5ecdec-49e7-4e7b-8224-5c6298affd32
+  text: Environ 120 pulsations par minute.
+- id: 1d31b9a4-6575-4285-9fad-e7009431bf3b
+  text: Environ 200 pulsations par minute.
+correct_choice_ids:
+- 365e6633-fbbb-448d-a3ff-cd863ee6b2c6
+explanation: Au repos, le rythme cardiaque est en moyenne de 70 pulsations par minute
+  ; stress et effort l'augmentent via les nerfs cardiaques et les hormones.
+archived: false

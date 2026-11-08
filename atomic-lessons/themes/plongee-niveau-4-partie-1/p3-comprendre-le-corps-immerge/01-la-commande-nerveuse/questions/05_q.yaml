@@ -1,0 +1,21 @@
+id: b72d32fb-f7ce-427a-95fd-97192a01fbad
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle action le manuel attribue-t-il au système sympathique ?
+choices:
+- id: 7c29eb12-4736-42f2-9e56-6b43719a3d95
+  text: Il accélère le rythme cardiaque et dilate les bronches.
+- id: 57c06955-a56e-4ed0-92ab-4eaa4b37f906
+  text: Il ralentit le rythme cardiaque et contracte les bronches.
+- id: f4fe6349-3cb5-416e-8574-455f29522123
+  text: Il déclenche la digestion et le sommeil réparateur.
+- id: fc978d3d-c404-4a7f-b328-7682c2d0ee1a
+  text: Il produit les hormones des glandes endocrines.
+correct_choice_ids:
+- 7c29eb12-4736-42f2-9e56-6b43719a3d95
+explanation: Le système sympathique accélère le rythme cardiaque, contracte certains
+  vaisseaux sanguins et dilate les bronches ; le parasympathique produit l'inverse,
+  et leurs actions s'équilibrent.
+archived: false

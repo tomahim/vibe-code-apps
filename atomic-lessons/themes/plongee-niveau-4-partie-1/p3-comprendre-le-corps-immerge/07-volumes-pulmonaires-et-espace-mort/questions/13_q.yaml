@@ -1,0 +1,19 @@
+id: 90004efa-59c7-4655-9781-56535a8ce369
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel débit de repos le manuel donne-t-il pour un adulte ?
+choices:
+- id: 655c9502-a65f-4267-8d4b-ca96d19e09d0
+  text: De l'ordre de 7,5 à 10 litres par minute.
+- id: 53d0d334-e4ec-4946-b654-14bf344f73af
+  text: De l'ordre de 100 litres par minute.
+- id: d68d949e-9a9a-44fa-9797-990b6ca02ef3
+  text: De l'ordre de 0,5 litre par minute.
+- id: e55752f8-9df5-455e-b575-9962ebb718d5
+  text: De l'ordre de 250 litres par minute.
+correct_choice_ids:
+- 655c9502-a65f-4267-8d4b-ca96d19e09d0
+explanation: 0,5 L × 15 à 20 mouvements par minute = 7,5 à 10 L/min au repos.
+archived: false

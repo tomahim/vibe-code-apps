@@ -1,0 +1,22 @@
+id: 27f0ca11-ef16-4d62-afc9-40a48662e992
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Dans quel sens s'écoulent les gaz lors des échanges ?
+choices:
+- id: 890c90bf-b641-4d37-9051-52087c065b1c
+  text: Des plus fortes pressions partielles (ou concentrations) vers les plus faibles,
+    par diffusion.
+- id: 2e6b9ac0-410d-41f4-ba52-414438dd8eee
+  text: Des plus faibles concentrations vers les plus fortes, par osmose.
+- id: 78580e85-69ff-4186-91f7-d6fb47daeacf
+  text: Uniquement des poumons vers le sang, jamais l'inverse.
+- id: a30e5455-42f3-4589-8c1f-3dde77990d7b
+  text: Uniquement du sang vers les poumons, jamais l'inverse.
+correct_choice_ids:
+- 890c90bf-b641-4d37-9051-52087c065b1c
+explanation: Gaz et liquides s'écoulent des plus fortes pressions partielles vers
+  les plus faibles, par diffusion - dans un sens à la descente, dans l'autre à la
+  remontée.
+archived: false

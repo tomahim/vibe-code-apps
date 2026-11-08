@@ -1,0 +1,23 @@
+id: 4d1e984b-6e27-4fad-97d8-8a08907c62ae
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la situation doit-elle être « habituelle, codifiée et sans inconnue
+  » entre 40 et 60 m ?
+choices:
+- id: e630cfd2-47a3-4527-bcbc-ee64659bbdee
+  text: Pour que le plongeur ait les bonnes réactions même si ses capacités de réflexion
+    sont diminuées.
+- id: 294d3187-d08c-4fca-9417-78f017240217
+  text: Parce que la législation interdit toute improvisation en dessous de 40 mètres.
+- id: a7132d07-8081-4441-9f79-94ab029707e8
+  text: Pour économiser l'air des bouteilles sur ces plongées longues.
+- id: 5bcf5538-931f-4571-b906-4982c96ef269
+  text: Parce que le courant y est toujours plus fort qu'en surface.
+correct_choice_ids:
+- e630cfd2-47a3-4527-bcbc-ee64659bbdee
+explanation: 'En plongée profonde, les capacités de réflexion peuvent être diminuées
+  : tout nouvel équipement (purges, inflateur, volume) apporte des inconnues potentiellement
+  lourdes de conséquences.'
+archived: false

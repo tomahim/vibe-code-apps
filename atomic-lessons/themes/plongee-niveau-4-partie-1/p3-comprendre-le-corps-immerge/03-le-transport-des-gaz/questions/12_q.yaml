@@ -1,0 +1,22 @@
+id: d2bf3a60-2d29-4947-9684-ccf9b91d7a6c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles précautions le manuel impose-t-il au gonflage ?
+choices:
+- id: 2312b11f-5348-4037-8c2a-2b348dd5fb25
+  text: Un local ventilé et une prise d'air éloignée de toute source de pollution
+    potentielle.
+- id: c2e2d248-bd71-47cd-9ad7-ffb40bee24f2
+  text: Un local fermé pour concentrer l'air comprimé.
+- id: 24b68050-5411-4ae3-99e2-da3355d2ea93
+  text: Une prise d'air située près des moteurs pour l'air chaud.
+- id: 182c368e-deca-40f4-b65b-a9401dd1b10d
+  text: Un gonflage uniquement nocturne, loin du soleil.
+correct_choice_ids:
+- 2312b11f-5348-4037-8c2a-2b348dd5fb25
+explanation: 'Vigilance lors des opérations de gonflage : local ventilé, prise d''air
+  éloignée de toute source de pollution, y compris échappements et ventilation des
+  locaux.'
+archived: false

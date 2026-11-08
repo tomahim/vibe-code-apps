@@ -1,0 +1,20 @@
+id: 85707f01-ee92-4cb5-89e3-cec0c0618f11
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que devient le CO2 pendant la phase alvéolaire ?
+choices:
+- id: 14dda07b-c665-4270-9a77-665e0db0082c
+  text: Il passe du sang dans les alvéoles pour être évacué lors de l'expiration.
+- id: 29a5b882-9c67-49bd-b5a7-0d4db6338633
+  text: Il passe des alvéoles dans le sang pour être stocké.
+- id: 803bfc7f-c527-443e-90c4-c033709c8eb7
+  text: Il se transforme en oxygène dans les capillaires.
+- id: 1faacd1f-408a-4712-8e09-4ff37e9b95df
+  text: Il est fixé par le surfactant des alvéoles.
+correct_choice_ids:
+- 14dda07b-c665-4270-9a77-665e0db0082c
+explanation: Dans le même temps que l'O2 oxygène le sang, le CO2 du sang passe dans
+  les alvéoles pour être évacué à l'expiration.
+archived: false

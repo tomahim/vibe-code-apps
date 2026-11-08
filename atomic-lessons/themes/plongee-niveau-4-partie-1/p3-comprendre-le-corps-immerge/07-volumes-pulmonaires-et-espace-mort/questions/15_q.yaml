@@ -1,0 +1,21 @@
+id: 3c6f65c4-bf31-460f-9c11-dabda7d7680b
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que rappelle le manuel à propos de son spirogramme ?
+choices:
+- id: 137dacab-3fb6-486b-abfc-a2274283959d
+  text: Qu'il s'agit d'une approche simplifiée, sans étude scientifique en immersion
+    à ce jour.
+- id: 9ed856f8-4497-4d53-b13f-703c175b2a1b
+  text: Qu'il est issu de mesures individuelles sur 700 plongeurs.
+- id: 076d6284-2ac3-4529-b393-b209fcd9b55e
+  text: Qu'il permet de calculer l'autonomie en air de chacun.
+- id: 7316eca7-8853-422d-a760-7cea071c39e0
+  text: Qu'il vaut uniquement pour les apnéistes.
+correct_choice_ids:
+- 137dacab-3fb6-486b-abfc-a2274283959d
+explanation: 'Le spirogramme est une représentation simplifiée : retenez les ordres
+  de grandeur et les mécanismes, pas une mesure individuelle.'
+archived: false

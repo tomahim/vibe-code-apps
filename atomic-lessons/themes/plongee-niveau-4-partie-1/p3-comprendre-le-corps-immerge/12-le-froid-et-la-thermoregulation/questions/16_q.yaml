@@ -1,0 +1,14 @@
+id: 30bbe0d2-3083-4382-b9b6-f0f9670d2d35
+position: 16
+type: type_answer_question
+after_card_position: 1
+prompt: Comment s'appelle le mécanisme de production de chaleur par augmentation de
+  l'activité des muscles sous-cutanés, signal d'alarme du froid ?
+accepted_answers:
+- frisson thermique
+- le frisson thermique
+- frisson
+- le frisson
+explanation: 'Le frisson thermique est l''augmentation de l''activité des muscles
+  sous-cutanés : mécanisme énergétiquement peu rentable, signal d''alarme.'
+archived: false

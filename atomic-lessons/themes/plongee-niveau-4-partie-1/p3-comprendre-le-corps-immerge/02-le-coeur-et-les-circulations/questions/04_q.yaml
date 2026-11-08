@@ -1,0 +1,21 @@
+id: b097d948-dcde-4c3f-abfd-96088296fbd3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel trajet le sang suit-il selon le manuel ?
+choices:
+- id: cc6ab2e8-3478-4a77-b3a9-c7f6e29126fa
+  text: Veines caves → cœur droit → poumons → cœur gauche → aorte.
+- id: eeba092d-8841-47d1-974b-ca760a8a1cb7
+  text: Aorte → cœur gauche → poumons → cœur droit → veines caves.
+- id: 7ceaa0a1-4719-4154-ac9d-96a87773ad5f
+  text: Poumons → cœur droit → aorte → cœur gauche → veines caves.
+- id: 8909d796-d935-41c8-9ab9-2320af04a9d3
+  text: Cœur gauche → veines caves → cœur droit → aorte → poumons.
+correct_choice_ids:
+- cc6ab2e8-3478-4a77-b3a9-c7f6e29126fa
+explanation: Les veines caves amènent le sang chargé en CO2 au cœur droit, qui l'envoie
+  aux poumons ; les veines pulmonaires ramènent le sang oxygéné au cœur gauche, qui
+  le distribue via l'aorte.
+archived: false

@@ -1,0 +1,22 @@
+id: 735448e4-28fb-403b-b8d9-d70073b46495
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi le hile est-il un point de faiblesse ?
+choices:
+- id: e7b20afa-9911-41d4-878b-8ef488f3f8b6
+  text: 'C''est la zone d''insertion des bronches dans les poumons : il augmente les
+    risques de rupture en cas de surpression pulmonaire.'
+- id: 724792fd-c6b5-4068-b826-fcce2c3e21ed
+  text: C'est la zone la plus froide du corps, exposée aux engelures lors des plongées
+    en eau froide.
+- id: 411a5aed-0f3c-4b12-b53f-52c66ddceffd
+  text: C'est le point où le diaphragme se coince à l'effort.
+- id: 295ff984-016f-40e8-927d-7767b8d0c13b
+  text: C'est l'endroit où l'azote forme ses premières bulles.
+correct_choice_ids:
+- e7b20afa-9911-41d4-878b-8ef488f3f8b6
+explanation: Le hile, zone d'insertion des bronches dans les poumons, est un point
+  de faiblesse qui augmente les risques de rupture en cas de surpression pulmonaire.
+archived: false

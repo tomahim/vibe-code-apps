@@ -1,0 +1,20 @@
+id: efefbada-2e17-494f-aa30-1aa3c873c53e
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la cause principale de l'essoufflement ?
+choices:
+- id: c42d4f7c-a952-46a1-bda0-a46697b1df50
+  text: Une élimination insuffisante du CO2 par la ventilation.
+- id: 9a9389e1-55d6-4484-9ba6-a8ca2b2e2ca5
+  text: Une pollution systématique de l'air des bouteilles.
+- id: 613d902a-9ae3-4ab3-94fd-53d10a57fb02
+  text: Une trop grande quantité d'oxygène dans le sang.
+- id: f573a90b-1736-432d-afb5-274d4650737d
+  text: Une remontée toujours trop rapide.
+correct_choice_ids:
+- c42d4f7c-a952-46a1-bda0-a46697b1df50
+explanation: 'Cause principale : élimination insuffisante du CO2 par la ventilation
+  ; plus rarement, une pollution de l''air (local mal ventilé, erreur de gonflage).'
+archived: false

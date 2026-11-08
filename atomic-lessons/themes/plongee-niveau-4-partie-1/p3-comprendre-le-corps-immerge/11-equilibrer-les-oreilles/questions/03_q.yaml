@@ -1,0 +1,21 @@
+id: bfd67fa7-72a3-472d-bb85-f989e1d85b8f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels facteurs influent sur la perméabilité de la trompe d'Eustache ?
+choices:
+- id: 5545e12e-0a3c-4070-aca5-144b9442da61
+  text: Sa forme, la qualité des muscles péristaphylins, l'état de la muqueuse et
+    celui des fosses nasales.
+- id: 9297d963-3508-486e-850c-e2d60d1eb1ca
+  text: Uniquement l'âge, le sexe et l'expérience totale du plongeur concerné.
+- id: d8489ee0-8a09-481e-ba08-a39369f9b02a
+  text: Uniquement la profondeur et la température.
+- id: be07603e-0665-401d-be8d-4fddff6b8762
+  text: Uniquement le type de masque porté.
+correct_choice_ids:
+- 5545e12e-0a3c-4070-aca5-144b9442da61
+explanation: Forme de la trompe, muscles péristaphylins, muqueuse (l'inflammation
+  favorise le mucus), fosses nasales (un rhume peut obstruer le canal).
+archived: false

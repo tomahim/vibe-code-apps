@@ -1,0 +1,20 @@
+id: 9393a657-b500-4c52-8c03-092c2759a205
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qui régit l'équilibre, outre les oreilles internes ?
+choices:
+- id: d34b4d83-0887-4ff5-9520-89bcffc4dfa3
+  text: Les informations visuelles et divers capteurs répartis sur le corps.
+- id: 54e6c914-157b-4fdd-a9db-37d3f480e5f7
+  text: Uniquement la respiration et le rythme cardiaque.
+- id: d545efb1-93b6-4ffe-adcb-ae41fc736e40
+  text: Uniquement les signaux des palmes.
+- id: 0f47798b-c901-4d0d-b27d-783b1783f625
+  text: Uniquement la position du gilet stabilisateur.
+correct_choice_ids:
+- d34b4d83-0887-4ff5-9520-89bcffc4dfa3
+explanation: L'équilibre est régi par les organes des deux oreilles internes, mais
+  aussi par les informations visuelles et divers capteurs corporels.
+archived: false

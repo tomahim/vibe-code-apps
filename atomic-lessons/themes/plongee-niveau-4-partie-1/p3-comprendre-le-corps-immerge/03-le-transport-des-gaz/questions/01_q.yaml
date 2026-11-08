@@ -1,0 +1,21 @@
+id: 841532f1-f32d-4ca3-82e7-5219c30102f7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle est la composition de l'air donnée par le manuel ?
+choices:
+- id: 01e5c039-fdcd-4ddf-a50d-a96a38ef05cf
+  text: Azote 78,084 %, oxygène 20,946 %, argon 0,934 %, CO2 0,037 %, autres gaz à
+    l'état de traces.
+- id: f1b30676-f1ea-4b22-a2dc-2b10d6115dc3
+  text: Azote 50 %, oxygène 45 %, CO2 5 %, sans aucun autre gaz présent.
+- id: f6a351bd-0da8-4124-94b1-b4059c4bd832
+  text: Oxygène 78 %, azote 21 %, argon 1 %, avec des traces de CO2.
+- id: f753b586-c8d3-4136-bb5a-c72c269ac8cd
+  text: Azote 90 %, oxygène 9 %, hélium 1 %, sans gaz carbonique.
+correct_choice_ids:
+- 01e5c039-fdcd-4ddf-a50d-a96a38ef05cf
+explanation: L'air contient 78,084 % d'azote, 20,946 % d'oxygène, 0,934 % d'argon
+  (souvent assimilé à l'azote), 0,037 % de CO2 et des traces d'autres gaz.
+archived: false

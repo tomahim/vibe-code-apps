@@ -1,0 +1,21 @@
+id: 9583b1e4-2f2f-4886-af50-bf95fe7f6975
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment le CO2 est-il transporté selon le manuel ?
+choices:
+- id: e05f4550-b12c-4846-af50-695f9b8dfa4a
+  text: 87 % sous forme de bicarbonates par le plasma, 8 % combinés à l'hémoglobine,
+    5 % dissous.
+- id: 15ccdece-f6be-4df3-9999-a60f9b27e769
+  text: 100 % dissous dans le plasma, comme l'azote.
+- id: 83869fe6-9309-47b7-8aba-7a4a5afc1e54
+  text: 98 % combinés à l'hémoglobine sur le site de l'O2, 2 % dissous.
+- id: 7e7b70a8-50c3-4d0c-9f05-5f4040e151f1
+  text: 50 % par les globules blancs, 50 % par les plaquettes.
+correct_choice_ids:
+- e05f4550-b12c-4846-af50-695f9b8dfa4a
+explanation: Le CO2 voyage à 87 % sous forme de bicarbonates transportés par le plasma,
+  8 % combinés à l'hémoglobine (sur un site différent de l'O2), 5 % dissous.
+archived: false

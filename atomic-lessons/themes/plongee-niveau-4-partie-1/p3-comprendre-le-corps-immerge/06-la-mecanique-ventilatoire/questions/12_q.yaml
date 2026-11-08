@@ -1,0 +1,20 @@
+id: 64374f3f-cb6e-4e45-8dc7-519fa1eb0d36
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que devient la ventilation lors d'un essoufflement ?
+choices:
+- id: e6afff10-27c6-458f-b470-de57fb75053e
+  text: Elle devient superficielle.
+- id: 7e41a8ea-6121-4f07-8703-4862a2867c3a
+  text: Elle devient plus ample et plus lente.
+- id: 3f6dee49-057d-4f14-8531-528919e7842f
+  text: Elle s'arrête définitivement.
+- id: c80ecf22-d125-4494-bc50-02f62b61f05f
+  text: Elle devient identique à celle du repos.
+correct_choice_ids:
+- e6afff10-27c6-458f-b470-de57fb75053e
+explanation: Sur le spirogramme du manuel, lors d'un essoufflement, la ventilation
+  devient superficielle.
+archived: false

@@ -1,0 +1,21 @@
+id: 388f0a3c-8552-457f-bdec-513751abf7b5
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels nerfs acheminent les sensations de chaud, de froid ou de douleur ?
+choices:
+- id: cf43efec-938f-49d9-96e3-5d27737ef606
+  text: Les nerfs sensitifs, vers le système nerveux central.
+- id: 74d03e3a-d451-429b-8278-a22c5667a707
+  text: Les nerfs moteurs, vers les muscles concernés.
+- id: 14a23704-c608-4bec-b628-6e20d1c209ef
+  text: Les nerfs sympathiques, vers les glandes endocrines.
+- id: 6e799d7c-267f-4ed4-8259-3f93e2bcad59
+  text: Les nerfs végétatifs, vers le cœur et les bronches.
+correct_choice_ids:
+- cf43efec-938f-49d9-96e3-5d27737ef606
+explanation: Les nerfs sensitifs acheminent vers le SNC les informations des capteurs
+  (peau, muscles, vaisseaux sanguins) ; les nerfs moteurs transmettent les ordres
+  aux muscles.
+archived: false

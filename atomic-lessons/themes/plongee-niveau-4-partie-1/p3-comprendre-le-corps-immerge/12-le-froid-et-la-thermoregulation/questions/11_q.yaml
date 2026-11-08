@@ -1,0 +1,24 @@
+id: 48c3bb4c-3662-46d3-90d7-16ea05de4c80
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels conseils alimentaires le manuel donne-t-il avant une plongée ?
+choices:
+- id: f37551b7-2231-48ed-90cc-057068dbd916
+  text: Glucides (sucres lents) et lipides, alcool proscrit, petit-déjeuner copieux
+    pour les plongées du matin.
+- id: 0e7f17d8-3b52-49f6-8e45-9d236d05a96b
+  text: Un jeûne complet avant la plongée, pour éviter tout effort de digestion pendant
+    l'immersion.
+- id: 628dfcea-2df9-4453-9379-c3c7935e0c72
+  text: Uniquement des boissons énergisantes caféinées, qui stimulent la production
+    de chaleur.
+- id: 2a38f3c7-eea5-4912-a7cb-599e70dc56f6
+  text: Un repas très riche accompagné d'un peu d'alcool, réputé pour donner une sensation
+    de chaleur.
+correct_choice_ids:
+- f37551b7-2231-48ed-90cc-057068dbd916
+explanation: S'alimenter en favorisant glucides et lipides ; l'alcool est à proscrire
+  ; petit-déjeuner copieux le matin ; bien se couvrir sur le pont avant et après.
+archived: false

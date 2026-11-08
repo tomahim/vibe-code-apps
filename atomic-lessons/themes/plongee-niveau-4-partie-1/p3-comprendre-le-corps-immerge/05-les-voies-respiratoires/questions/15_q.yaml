@@ -1,0 +1,23 @@
+id: ac80c674-7424-459a-abf5-933bc401597e
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce que la plèvre selon le manuel ?
+choices:
+- id: 5800c073-7f01-4df3-b2ad-6cee32268d95
+  text: Une enveloppe à deux feuillets avec un liquide lubrifiant, qui garde poumons
+    et cage thoracique solidaires pendant la ventilation.
+- id: cd1c1f32-441e-4b9c-aab0-bb547f1c1afb
+  text: Un muscle respiratoire qui soulève les côtes à l'inspiration et les abaisse
+    à l'expiration.
+- id: 26dd7a98-e190-4ee4-aad5-282cb74cc42d
+  text: Une membrane qui sépare le cœur des poumons.
+- id: 3bdd4712-0f15-44af-9253-292763835795
+  text: Un cartilage qui ferme la trachée pendant la déglutition.
+correct_choice_ids:
+- 5800c073-7f01-4df3-b2ad-6cee32268d95
+explanation: La plèvre a un feuillet interne accolé au poumon et un externe accolé
+  à la cage thoracique ; le liquide entre les deux les fait glisser tout en restant
+  solidaires.
+archived: false

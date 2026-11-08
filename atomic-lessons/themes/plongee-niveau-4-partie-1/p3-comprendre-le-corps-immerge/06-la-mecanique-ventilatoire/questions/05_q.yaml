@@ -1,0 +1,23 @@
+id: 55bd081b-65a5-453c-a071-e754add63204
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle différence le manuel fait-il entre ventilation et respiration ?
+choices:
+- id: d0a02133-6086-49b2-907d-45e5363802e7
+  text: La respiration (involontaire) est l'échange d'O2 et CO2 ; la ventilation (volontaire)
+    en assure le renouvellement de l'air.
+- id: 726a09a6-2cd9-4953-bd9d-df4ff03e3090
+  text: 'La ventilation est involontaire et la respiration est volontaire : c''est
+    l''inverse.'
+- id: d7f02b16-33dd-4476-9403-befba182cc53
+  text: Ce sont deux synonymes parfaitement interchangeables.
+- id: 24d00ae4-6c19-4287-a894-344895cbc9dc
+  text: La ventilation ne concerne que les poissons.
+correct_choice_ids:
+- d0a02133-6086-49b2-907d-45e5363802e7
+explanation: 'La respiration se déroule en deux étapes : la ventilation assure le
+  renouvellement de l''air, la diffusion les échanges cellulaires. Respiration involontaire,
+  ventilation volontaire.'
+archived: false

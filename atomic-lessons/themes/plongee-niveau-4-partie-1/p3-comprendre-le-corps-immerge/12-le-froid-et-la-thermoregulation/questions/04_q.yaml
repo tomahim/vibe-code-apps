@@ -1,0 +1,24 @@
+id: 64452f89-80e7-41ee-b894-c7a4622eecac
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle est la première réaction de l'organisme face au froid ?
+choices:
+- id: 432da777-0bc8-42e9-b23e-69d5afba5cf1
+  text: Une vasoconstriction périphérique, qui réduit la circulation aux extrémités
+    et concentre la chaleur sur les organes vitaux.
+- id: 6be8bb86-f2ba-4264-9523-4a7b05e934d3
+  text: Une vasodilatation générale des vaisseaux de surface, qui réchauffe d'abord
+    les mains et les pieds du plongeur.
+- id: ba70140e-31de-41d1-83ce-1e9f0a8997f6
+  text: Une augmentation immédiate de la température centrale, pour compenser la chaleur
+    perdue au contact de l'eau.
+- id: 8446c589-be84-42aa-bf6b-9a9579ddc576
+  text: Une sudation abondante sous la combinaison, qui évacue la chaleur vers l'extérieur
+    du corps.
+correct_choice_ids:
+- 432da777-0bc8-42e9-b23e-69d5afba5cf1
+explanation: 'La première réaction vise à réduire les pertes : vasoconstriction périphérique
+  (mains, pieds), chaleur concentrée sur les organes vitaux.'
+archived: false

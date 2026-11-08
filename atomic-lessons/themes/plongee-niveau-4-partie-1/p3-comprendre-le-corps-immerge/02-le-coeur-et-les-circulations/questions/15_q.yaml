@@ -1,0 +1,21 @@
+id: 38eb5b20-3bc6-4afb-a5a3-a074977fe90a
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que risque-t-il de se passer en cas de bulles dans le sang, selon le manuel
+  ?
+choices:
+- id: a1a49a36-96cc-40ee-8e1f-d5e6ec17a016
+  text: Les globules rouges ont tendance à s'agréger.
+- id: ed2d5647-9005-47a1-bedd-b2a10ea1820b
+  text: Les globules blancs se transforment en plaquettes.
+- id: cef4cf67-2a2f-490f-8681-346f545dded6
+  text: Le sang devient instantanément hématosé.
+- id: 67efc0dc-1928-43df-8017-1b6776c40827
+  text: Les plaquettes se dissolvent sans effet.
+correct_choice_ids:
+- a1a49a36-96cc-40ee-8e1f-d5e6ec17a016
+explanation: En cas d'apparition de bulles dans le sang, les globules rouges ont tendance
+  à s'agréger - voir les réactions plaquettaires dans la partie sur la désaturation.
+archived: false

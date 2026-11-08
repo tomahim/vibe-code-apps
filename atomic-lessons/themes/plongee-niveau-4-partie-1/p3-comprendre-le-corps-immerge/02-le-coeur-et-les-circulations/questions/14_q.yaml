@@ -1,0 +1,22 @@
+id: a890a1f8-ebe5-423b-bc17-07bd9dc29dbd
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Face au froid, comment l'organisme réagit-il selon le manuel ?
+choices:
+- id: e838364d-c8d7-4855-92ea-1fee09ceeeb9
+  text: Par vasoconstriction périphérique, pour concentrer la chaleur sur les organes
+    vitaux.
+- id: 98896231-494d-496d-b8c7-87182ed12c63
+  text: Par vasodilatation des extrémités, pour réchauffer les doigts.
+- id: 20b42f63-76b4-4619-8855-e948be815b3b
+  text: Par arrêt de la circulation dans les membres supérieurs.
+- id: 765b1a6c-eccd-4cb5-afe5-ed342a9d5b21
+  text: Par augmentation immédiate de la température de l'eau.
+correct_choice_ids:
+- e838364d-c8d7-4855-92ea-1fee09ceeeb9
+explanation: Confronté au froid, l'organisme diminue le calibre des vaisseaux à la
+  périphérie pour réduire la circulation vers les extrémités et concentrer la chaleur
+  sur cœur et cerveau.
+archived: false

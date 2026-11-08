@@ -1,0 +1,21 @@
+id: 1d211fdc-c8d0-4e9e-86dc-35cbab71e420
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment se développe un automatisme selon le manuel ?
+choices:
+- id: 0d311e0c-5746-48b8-8a46-06f7cb3ba394
+  text: Par des répétitions dans des situations variées, par apprentissage volontaire.
+- id: f8ce798e-fbc1-45d2-88be-cf2905606dee
+  text: Par injection d'adrénaline avant chaque plongée difficile.
+- id: 19ce7c2c-b8c8-46d8-9477-f6e657ed8329
+  text: Par la seule lecture du manuel de plongée niveau 4.
+- id: 24028c72-96e5-4561-a0d7-732bee97b472
+  text: Automatiquement dès le premier cours en piscine.
+correct_choice_ids:
+- 0d311e0c-5746-48b8-8a46-06f7cb3ba394
+explanation: 'À force de répétitions dans des situations variées, nous développons
+  une réaction rapide et adaptée : un réflexe acquis par apprentissage volontaire,
+  appelé aussi automatisme.'
+archived: false

@@ -1,0 +1,20 @@
+id: 4651642c-8925-4cdb-bbe2-349c0d49ff32
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que contrôlent l'utricule et le saccule ?
+choices:
+- id: 799ee034-aae3-4acb-8fad-4f7269096925
+  text: La position de la tête par rapport au sol.
+- id: 3dd2ab32-d493-4d6a-84cc-935f6cce6d59
+  text: La vitesse de propagation du son.
+- id: 653b32ad-9d3a-42eb-82e4-16beaee9bb60
+  text: L'ouverture de la trompe d'Eustache.
+- id: 4c4d0b42-f608-40a9-9b31-256aff872bfc
+  text: La pression du liquide cochléaire.
+correct_choice_ids:
+- 799ee034-aae3-4acb-8fad-4f7269096925
+explanation: Dans le vestibule, les deux poches appelées utricule et saccule contiennent
+  une zone sensorielle qui contrôle la position de la tête par rapport au sol.
+archived: false

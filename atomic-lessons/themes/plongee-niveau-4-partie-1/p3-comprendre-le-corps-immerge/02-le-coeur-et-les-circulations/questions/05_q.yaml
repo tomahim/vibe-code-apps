@@ -1,0 +1,23 @@
+id: fefe051d-5b75-42ae-9d98-588aa89dd083
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que sont la systole et la diastole ?
+choices:
+- id: 0c778623-c98d-41dc-9a1d-c7d0901bcbb3
+  text: La systole est la contraction qui propulse le sang ; la diastole, le relâchement
+    général qui permet le remplissage.
+- id: 9f2b482a-aecb-4dad-81c2-c650d1e510f9
+  text: La systole est le relâchement général du cœur ; la diastole, la contraction
+    qui propulse le sang.
+- id: 3fafd2ef-d65c-4f43-be57-a3ff054be3a9
+  text: La systole concerne les poumons et la respiration ; la diastole, les reins
+    et la filtration.
+- id: 31968dff-686f-456d-a5b3-72d0a99d0fd0
+  text: Ce sont les deux valves cardiaques situées entre les oreillettes et les ventricules.
+correct_choice_ids:
+- 0c778623-c98d-41dc-9a1d-c7d0901bcbb3
+explanation: Le cycle cardiaque alterne systole (contraction des oreillettes et ventricules)
+  et diastole (relâchement général, remplissage des cavités).
+archived: false

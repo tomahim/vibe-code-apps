@@ -1,0 +1,22 @@
+id: a0e7ad20-917d-4506-ae3e-fc88ab9498a0
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce que la bradycardie réflexe d'immersion ?
+choices:
+- id: 8a5a23e4-e021-4cb0-b537-046b959c620c
+  text: Une diminution réflexe de la fréquence cardiaque, surtout chez les sujets
+    jeunes, liée au remplissage cardiaque et à l'augmentation du VES.
+- id: 90e69579-2615-48c0-b98b-76c3b75810b9
+  text: Une accélération durable du rythme cardiaque provoquée par la peur, le stress
+    et la surprise de l'eau froide.
+- id: c06e5947-58df-4532-b8d3-a5702e7cd97f
+  text: Un arrêt cardiaque brutal provoqué par la pression hydrostatique.
+- id: 5f5a0846-66a0-41e7-a56a-838ad5df0086
+  text: Une fatigue du myocarde après plusieurs heures de plongée.
+correct_choice_ids:
+- 8a5a23e4-e021-4cb0-b537-046b959c620c
+explanation: Le remplissage cardiaque augmente le volume d'éjection systolique ; de
+  façon réflexe, surtout chez les sujets jeunes, la fréquence cardiaque diminue.
+archived: false

@@ -1,0 +1,21 @@
+id: 4fd62f4a-37b2-40d4-a75d-e1a40b1798d8
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Dans quels cas la PpCO2 peut-elle augmenter avec la profondeur ?
+choices:
+- id: 5dfc6ef4-ee71-4fb6-bbb0-aa59877a4f17
+  text: Erreur de gonflage (CO2 dans l'air comprimé) ou mauvaise épuration dans un
+    recycleur (chaux sodée défectueuse).
+- id: a074f72f-268c-4b23-a654-793e8d8891fc
+  text: 'Dans tous les cas de figure : c''est une loi physique strictement inévitable.'
+- id: 5eb93221-386a-49b1-8d92-efee225ab82f
+  text: Uniquement chez les plongeurs fumeurs de plus de 40 ans.
+- id: 2f083751-7a36-46d0-80e3-b627ddbd4b49
+  text: Uniquement lors de plongées de nuit en eau froide.
+correct_choice_ids:
+- 5dfc6ef4-ee71-4fb6-bbb0-aa59877a4f17
+explanation: 'Les seuls cas cités : une erreur de gonflage (CO2 en grande quantité
+  dans l''air comprimé) ou une mauvaise épuration du CO2 dans un recycleur.'
+archived: false

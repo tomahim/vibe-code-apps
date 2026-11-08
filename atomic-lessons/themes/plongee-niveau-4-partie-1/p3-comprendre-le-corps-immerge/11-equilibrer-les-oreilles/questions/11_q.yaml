@@ -1,0 +1,21 @@
+id: 30990fe3-14f7-4d0c-82de-6a2b4787a36f
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: En quoi consiste la manœuvre de Toynbee ?
+choices:
+- id: 2dadd20e-b59f-4b0f-8a05-5e28f7dd00aa
+  text: Pincer le nez, puis déglutir et inspirer par le nez, pour aspirer l'air en
+    excès de l'oreille moyenne.
+- id: 11569ba9-a8fe-46ed-b260-a7fcbcde75c8
+  text: Pincer le nez et souffler doucement par la bouche légèrement entrouverte.
+- id: 66848d72-7ad1-4baa-99c5-697a2b4c697b
+  text: Expirer fortement par la bouche, nez ouvert.
+- id: 698555a6-795e-4b0a-8b25-afb226e13133
+  text: Avancer la mâchoire en baillant largement.
+correct_choice_ids:
+- 2dadd20e-b59f-4b0f-8a05-5e28f7dd00aa
+explanation: 'Toynbee fonctionne à l''inverse des méthodes de descente : elle favorise
+  l''évacuation de l''air en excès plutôt que d''en ajouter.'
+archived: false

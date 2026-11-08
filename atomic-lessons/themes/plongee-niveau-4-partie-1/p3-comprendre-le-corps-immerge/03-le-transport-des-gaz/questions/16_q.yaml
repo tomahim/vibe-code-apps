@@ -1,0 +1,22 @@
+id: 043774ea-f74f-4fbc-bee6-7d850a0c4576
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Dans quels cas le manuel justifie-t-il l'OHB ?
+choices:
+- id: ab3bbef3-1423-45ac-8316-1e05f318e8f0
+  text: Déficit respiratoire (surpression pulmonaire, intoxication au CO) ou manque
+    d'apport sanguin (accident de désaturation).
+- id: 697ccdda-72b0-4a40-bd96-54532336cddb
+  text: Uniquement pour soigner le mal de mer, la fatigue accumulée et le stress de
+    bord.
+- id: 2036d322-87aa-49ff-982a-c3c44c915d81
+  text: Uniquement en cas de noyade en piscine, jamais en mer.
+- id: e79a0cc6-39dd-4035-843f-2f2b1b5f3f74
+  text: Pour toutes les plongées dépassant 20 mètres, en prévention.
+correct_choice_ids:
+- ab3bbef3-1423-45ac-8316-1e05f318e8f0
+explanation: L'OHB se justifie en cas de déficit respiratoire (surpression pulmonaire,
+  intoxication au CO) ou de manque d'apport sanguin (accident de désaturation).
+archived: false

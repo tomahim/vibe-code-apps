@@ -1,0 +1,22 @@
+id: 9dcbdeb6-a577-4376-a66b-9a9ebb65db74
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le manuel des veines ?
+choices:
+- id: 651a0694-d651-49bb-a28f-d1bdb99aceef
+  text: Elles ramènent le sang au cœur, contiennent des valvules sous le niveau du
+    cœur et environ 60 % du volume sanguin total.
+- id: 1f43662b-521b-4bfd-81e1-c2b35fbb1f26
+  text: Elles transportent le sang oxygéné du cœur vers les organes et les muscles.
+- id: 330a63db-cc93-44e3-b720-bcaa53634fa8
+  text: Elles contiennent environ 2 % du volume sanguin total de l'organisme.
+- id: 841b7f19-f792-482f-9b2f-e766f5b087ae
+  text: Elles sont plus épaisses et moins extensibles que les artères du même territoire.
+correct_choice_ids:
+- 651a0694-d651-49bb-a28f-d1bdb99aceef
+explanation: Les veines, plus minces et extensibles que les artères, ramènent le sang
+  au cœur ; leurs valvules évitent le retour vers la périphérie et elles contiennent
+  environ 60 % du volume sanguin.
+archived: false

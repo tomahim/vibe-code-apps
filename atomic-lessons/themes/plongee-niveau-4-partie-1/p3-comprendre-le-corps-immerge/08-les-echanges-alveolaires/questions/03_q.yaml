@@ -1,0 +1,23 @@
+id: e5a46ae7-5fce-47bd-ae1d-f50a11c6fcc6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: À quoi sert le surfactant ?
+choices:
+- id: ee10cdfd-37a7-484a-b649-1ee27ca69524
+  text: À éviter que les alvéoles ne s'affaissent sur elles-mêmes lors d'une expiration
+    forcée, et à faciliter les entrées et sorties d'air.
+- id: 6b92f500-a026-4095-94c9-3ed41f9fd128
+  text: À bloquer la diffusion du CO2 vers les alvéoles.
+- id: aa1349ab-fb1b-42f7-bfed-849751c83976
+  text: À accélérer la dissolution de l'azote dans le plasma.
+- id: 3257951c-d293-4dbe-a604-0a564e2b6bbd
+  text: À fabriquer les globules rouges nécessaires au sang des vaisseaux pulmonaires
+    profonds.
+correct_choice_ids:
+- ee10cdfd-37a7-484a-b649-1ee27ca69524
+explanation: Sécrété par certaines cellules de la paroi alvéolaire, le surfactant
+  empêche l'affaissement des alvéoles à l'expiration forcée et facilite les mouvements
+  d'air.
+archived: false

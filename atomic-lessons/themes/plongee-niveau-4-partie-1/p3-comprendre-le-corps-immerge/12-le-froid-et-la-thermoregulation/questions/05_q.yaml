@@ -1,0 +1,25 @@
+id: 676422ae-d5a2-41d8-9603-bc1254492554
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi les doigts gourds sont-ils un vrai problème en plongée ?
+choices:
+- id: 1be6696a-510d-4fad-bfec-b46d2b7f3458
+  text: 'L''habileté manuelle diminue : certains signes ou la manipulation de l''inflateur
+    deviennent difficiles.'
+- id: d06675ae-5f54-407b-828a-9b287e350f9d
+  text: Ils indiquent toujours le début d'une hypothermie grave, qui impose une évacuation
+    médicale immédiate.
+- id: 76be279b-4490-44ff-91f1-8699f1d76224
+  text: Ils ne gênent que la fermeture du masque et la tenue de l'embout, sans autre
+    conséquence réelle.
+- id: 70d6087a-c04c-4030-b08a-88a334534d8f
+  text: Ils signalent le plus souvent une allergie au néoprène, fréquente chez les
+    plongeurs exposés au froid.
+correct_choice_ids:
+- 1be6696a-510d-4fad-bfec-b46d2b7f3458
+explanation: 'La sensation de doigts gourds diminue l''habileté manuelle : signes
+  de plongée ou manipulation de l''inflateur difficiles - ce qui peut être lourd de
+  conséquences.'
+archived: false

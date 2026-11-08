@@ -1,0 +1,20 @@
+id: e1f7ac14-f2d8-4283-aa0b-928cfd8d562f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels gaz échangent les alvéoles selon le manuel ?
+choices:
+- id: cbe09809-ed56-44f7-aaaa-4be37c95b648
+  text: O2, CO2 et N2.
+- id: 42858dfd-8394-4f38-b088-199ee2b9550f
+  text: O2 uniquement.
+- id: 0e4b8060-c939-4bf5-8470-29e7ea4c43a2
+  text: CO2 et hélium uniquement.
+- id: 47cbc1f2-87fb-4867-a39b-d08cc3f4ec63
+  text: N2 et argon uniquement.
+correct_choice_ids:
+- cbe09809-ed56-44f7-aaaa-4be37c95b648
+explanation: 'Les alvéoles pulmonaires sont le siège des échanges gazeux : O2, CO2,
+  N2.'
+archived: false

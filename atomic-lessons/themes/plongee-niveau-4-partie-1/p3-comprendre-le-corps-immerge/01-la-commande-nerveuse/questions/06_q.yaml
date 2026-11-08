@@ -1,0 +1,21 @@
+id: f2d0d414-da01-476d-84bd-5b62c516bafa
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment les hormones se comparent-elles aux voies nerveuses ?
+choices:
+- id: 6caecf2e-ee88-4e63-87d2-3de1c3175c34
+  text: Effets plus lents mais plus durables, véhiculées par le sang.
+- id: 2a8dccda-26eb-48ea-8b0c-7b2f238dbc48
+  text: Effets plus rapides mais très brefs, véhiculées par les nerfs.
+- id: 83f59e64-ad1d-4871-b4eb-f4ca0d3dcb37
+  text: Effets identiques, simplement produits par d'autres organes.
+- id: bf97c801-2979-4b34-811d-04a7f2c07a8f
+  text: Effets limités au cerveau, véhiculées par le liquide céphalorachidien.
+correct_choice_ids:
+- 6caecf2e-ee88-4e63-87d2-3de1c3175c34
+explanation: Sept glandes principales sécrètent des hormones aux effets plus lents
+  mais plus durables que les voies nerveuses ; ces messagers chimiques circulent dans
+  le sang.
+archived: false

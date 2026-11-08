@@ -1,0 +1,22 @@
+id: 2c2164b9-7922-4f69-a80b-48bcbc5ca77e
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que la bradycardie réflexe selon le manuel ?
+choices:
+- id: d2953ef3-7696-4b8a-8143-dee1da435e1e
+  text: Un ralentissement du rythme cardiaque provoqué par le contact des narines
+    et surtout du pourtour des lèvres avec de l'eau froide.
+- id: 5a4e10af-b542-43b6-881f-0b7783bcfa35
+  text: Une accélération durable du cœur provoquée par la chaleur accumulée sous la
+    combinaison étanche.
+- id: dd4544f8-ce8d-43eb-b8c3-be5348e29abd
+  text: Un arrêt cardiaque brutal provoqué par une descente trop rapide sous 40 mètres.
+- id: 4073e2b4-6154-4130-9f61-12c1b4b4f515
+  text: Un tremblement incontrôlable des mains provoqué par le froid sur les extrémités.
+correct_choice_ids:
+- d2953ef3-7696-4b8a-8143-dee1da435e1e
+explanation: La bradycardie réflexe est liée au contact de l'eau froide avec les narines
+  et surtout le pourtour des lèvres.
+archived: false

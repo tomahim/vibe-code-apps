@@ -1,0 +1,20 @@
+id: 7a4fc5ff-9f9f-4bcb-9545-336e8a6731e3
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quand la trompe d'Eustache s'ouvre-t-elle spontanément ?
+choices:
+- id: 2d996abb-3c9f-4ca9-ade9-b6948922f2b7
+  text: Toutes les 2 ou 3 minutes, et lors de la déglutition.
+- id: 290a481e-948e-4ce0-8bcb-4feda157f637
+  text: Uniquement à la descente en plongée.
+- id: 3dbddf01-c423-4a72-8c42-f496f6aab816
+  text: Une fois par heure, pendant le sommeil.
+- id: aebff5d7-49f4-4eed-a9de-213dc850a8d2
+  text: 'Jamais : elle reste toujours fermée.'
+correct_choice_ids:
+- 2d996abb-3c9f-4ca9-ade9-b6948922f2b7
+explanation: Conduit généralement fermé, la trompe s'ouvre spontanément toutes les
+  2 ou 3 minutes et lors de la déglutition, via les muscles péristaphylins.
+archived: false

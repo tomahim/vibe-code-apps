@@ -1,0 +1,21 @@
+id: f0242223-ccb7-4536-a417-042584cb6936
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Quelle conduite dans l'eau dès les premiers signes de froid ?
+choices:
+- id: faf65a93-6580-4cc6-810c-34dc3dca628b
+  text: Les plongeurs le signalent et le guide met fin à la plongée.
+- id: 2003a65d-3616-4ff5-864f-0e61edfe6c47
+  text: On continue jusqu'à la fin du temps prévu.
+- id: c40da789-84bc-48d7-adf6-964e8429471f
+  text: On accélère les mouvements pour se réchauffer.
+- id: 24f9c944-0517-4112-bf2a-8feb6dcab940
+  text: On descend plus profond pour se stabiliser.
+correct_choice_ids:
+- faf65a93-6580-4cc6-810c-34dc3dca628b
+explanation: 'Dès les premiers signes, signal et fin de la plongée ; froid = facteur
+  favorisant les ADD : paliers éventuellement accrus, remontée lente, courbe sans
+  palier si possible.'
+archived: false

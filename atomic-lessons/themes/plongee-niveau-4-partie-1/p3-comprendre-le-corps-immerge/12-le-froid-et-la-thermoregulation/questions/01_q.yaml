@@ -1,0 +1,22 @@
+id: 09b4471f-f488-455d-b573-0c6fa1ad7ee6
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce qu'un organisme homéotherme selon le manuel ?
+choices:
+- id: c54d6051-da5f-4e20-97ae-d1f41d34272f
+  text: Un organisme qui ne peut survivre qu'en maintenant sa température centrale
+    aux alentours de 37 °C.
+- id: 95af3188-186f-4aa5-ad8a-2b44e0f98000
+  text: Un organisme dont la température interne suit celle de l'eau.
+- id: d1990d15-ce16-4aa6-81b8-e6c847c3b433
+  text: Un organisme qui ne ressent jamais le froid.
+- id: 0e4a10b2-7c25-4c5a-bd57-298a7c57ca8b
+  text: Un organisme capable de vivre sans aucune chaleur.
+correct_choice_ids:
+- c54d6051-da5f-4e20-97ae-d1f41d34272f
+explanation: 'L''homme est homéotherme, contrairement aux poissons : sa température
+  centrale (cerveau, organes du thorax et de l''abdomen) doit rester aux alentours
+  de 37 °C.'
+archived: false

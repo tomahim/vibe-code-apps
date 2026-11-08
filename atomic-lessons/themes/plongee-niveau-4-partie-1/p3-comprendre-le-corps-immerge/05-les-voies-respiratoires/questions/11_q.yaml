@@ -1,0 +1,22 @@
+id: 5f288071-fa63-4eef-8ae9-6993ad972aa2
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel est le trajet de l'air au repos selon le manuel ?
+choices:
+- id: 7f1fb794-d99e-4f21-88fc-934e8484eb88
+  text: Narines, fosses nasales, pharynx, larynx et glotte, trachée, bronches souches,
+    poumons.
+- id: fe73d834-c32f-4f10-bca6-ae5cb36cf2d2
+  text: Bouche, œsophage, estomac, intestin, diaphragme, poumons.
+- id: 0ca5b6cd-5cf2-418f-9688-54d80a37364f
+  text: Narines, sinus frontaux, oreille moyenne, trompe d'Eustache, poumons.
+- id: 933337ef-bb83-4e59-ae2e-3101bd1e67ed
+  text: Trachée, larynx, pharynx, fosses nasales, narines, poumons.
+correct_choice_ids:
+- 7f1fb794-d99e-4f21-88fc-934e8484eb88
+explanation: L'air pénètre par les narines dans les fosses nasales, atteint le pharynx,
+  passe dans le larynx par la glotte, débouche dans la trachée puis les bronches souches
+  vers les poumons.
+archived: false

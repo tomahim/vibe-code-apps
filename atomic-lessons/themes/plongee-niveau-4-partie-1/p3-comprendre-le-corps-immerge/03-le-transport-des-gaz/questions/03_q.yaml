@@ -1,0 +1,21 @@
+id: 73767d41-5d24-490a-93a8-f879e4946c80
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment les gaz se déplacent-ils selon le manuel ?
+choices:
+- id: 25a6d786-e145-4e4d-9d0c-6e14e69d8c39
+  text: Des plus fortes pressions partielles ou concentrations vers les plus faibles,
+    par diffusion.
+- id: a3cf5cb9-177f-4755-9698-483520cf94bb
+  text: Des plus faibles concentrations vers les plus fortes, par osmose active.
+- id: 1bcb82fa-41e4-4c8c-b3d5-fad012fb5cab
+  text: Uniquement sous l'effet des contractions du cœur et des vaisseaux.
+- id: 416c267b-078e-4368-9ec5-c1c2b2a9f8f3
+  text: Toujours du sang vers les alvéoles, quel que soit le gaz.
+correct_choice_ids:
+- 25a6d786-e145-4e4d-9d0c-6e14e69d8c39
+explanation: Les gaz, comme les liquides, s'écoulent des plus fortes pressions partielles
+  (ou concentrations) vers les plus faibles, par diffusion.
+archived: false

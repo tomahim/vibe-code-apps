@@ -1,0 +1,21 @@
+id: 46d40009-7b06-4477-ad6f-711ead031b2e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle perte d'eau le manuel donne-t-il pour une heure d'immersion ?
+choices:
+- id: 11dfa06e-4a6e-49ae-8371-44dc2165175f
+  text: De l'ordre de 250 mL par heure d'immersion, 500 mL pour deux heures.
+- id: 9d785b1e-fe76-4d0f-8dc8-aa3f58a65172
+  text: De l'ordre de 2,5 litres par heure d'immersion.
+- id: 0ae7e05a-f628-44b1-a343-829f4e9c3e89
+  text: De l'ordre de 25 mL par heure d'immersion.
+- id: a875559d-4ed3-49cc-afe7-8af253d75e11
+  text: Aucune perte mesurable en dessous de trois heures.
+correct_choice_ids:
+- 11dfa06e-4a6e-49ae-8371-44dc2165175f
+explanation: La perte de masse d'eau de l'organisme est de l'ordre de 250 mL pour
+  une heure d'immersion, 500 mL pour deux heures, et elle se cumule partiellement
+  avec les plongées successives.
+archived: false
