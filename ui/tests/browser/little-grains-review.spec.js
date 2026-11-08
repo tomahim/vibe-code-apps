@@ -65,7 +65,7 @@ test('review quest: time choice drives the session size and the quiz runs', asyn
   const panel = page.locator('.lg-panel');
   await expect(panel.getByRole('heading', { name: 'The Garden' })).toBeVisible();
 
-  await panel.getByRole('button', { name: /Review/ }).click();
+  await page.locator('.lg-review-float').getByRole('button', { name: /review/i }).click();
   const quest = page.getByRole('dialog', { name: /Review - choose how much time/ });
   await expect(quest.getByRole('heading', { name: 'How much time do you have?' })).toBeVisible();
   await expect(quest.getByRole('button', { name: /^5 min/ })).toContainText('10 questions · 1 path');
@@ -123,7 +123,7 @@ test('phone: review quest picker and aged garden stay usable', async ({ page }) 
   await page.waitForTimeout(900);
   await page.screenshot({ path: '/tmp/lg-review-garden-mobile.png' });
 
-  await panel.getByRole('button', { name: /Review/ }).click();
+  await page.locator('.lg-review-float').getByRole('button', { name: /review/i }).click();
   const quest = page.getByRole('dialog', { name: /Review - choose how much time/ });
   await expect(quest.getByRole('button', { name: /^10 min/ })).toBeInViewport();
   await page.screenshot({ path: '/tmp/lg-review-quest-mobile.png' });

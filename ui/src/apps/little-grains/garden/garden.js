@@ -96,6 +96,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   <aside class="lg-panel" aria-live="polite"><button class="lg-handle" aria-label="Expand or collapse details"><span></span></button><div class="lg-panel-body"></div></aside>
   <button class="lg-fab" type="button" hidden></button>
   <div class="lg-practice" hidden></div>
+  <div class="lg-review-float" hidden></div>
   <div class="lg-zoom"><button data-zoom="in" aria-label="Zoom in">+</button><button data-zoom="out" aria-label="Zoom out">−</button></div><div class="lg-hint"></div><div class="lg-toast" role="status"></div><div class="lg-error" hidden>This garden needs WebGL. Open it in a browser with hardware acceleration enabled.</div>`;
   container.appendChild(root);
   const $ = (s) => root.querySelector(s);
@@ -725,6 +726,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     pause: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z" fill="currentColor"/></svg>',
     replay: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 0 5.4 6.5h-1.7A3.8 3.8 0 1 1 8 4.2c1 0 1.9.4 2.6 1L8.7 7H14V1.7l-1.8 1.8A5.500 5.500 0 0 0 8 2.5z" fill="currentColor"/></svg>',
     sprout: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 14V8.5" stroke="#5ea84a" stroke-width="1.6" stroke-linecap="round"/><path d="M8 8.5C8 5.6 5.6 3.5 2.2 3.5c0 3 2.4 5 5.8 5z" fill="#5ea84a"/><path d="M8 7C8 4.2 10.2 2.5 13.8 2.5c0 2.8-2.2 4.5-5.8 4.5z" fill="#7fb877"/></svg>',
+    pencil: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.4 11 10.2 3.2a1.35 1.35 0 0 1 1.9 0l1.3 1.3a1.35 1.35 0 0 1 0 1.9L5.6 14.2 1.7 14.9z" fill="currentColor"/></svg>',
     snow: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"><path d="M8 1.5v13M2.4 4.7l11.2 6.6M13.6 4.7L2.4 11.3"/><path d="M8 1.5 6.3 3.2M8 1.5l1.7 1.7M8 14.5l-1.7-1.7M8 14.5l1.7-1.7"/></g></svg>',
     leaf: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.5 2.5C8 2.5 3.8 6.2 3.2 12.8 9.6 12.8 13.2 8.4 13.5 2.5z" fill="currentColor"/><path d="M4.2 12.3C6 9.3 8.7 6.6 12.6 3.9" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="1" stroke-linecap="round"/></svg>',
   };
@@ -792,9 +794,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     fab.hidden = true;
     let h = '';
     if (view.level === 'garden') {
-      const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
       h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>` +
-        `<div class="lg-review"><button class="lg-review-btn" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.replay}<span class="lg-review-copy"><b>Review</b><small>Questions from your least-practised paths</small></span></button></div>${renderRecentMenu()}<ul class="lg-list">` +
+        `${renderRecentMenu()}<ul class="lg-list">` +
         THEMES.map((t, i) => { const started = t.paths.filter((p) => p.progress.started).length, avg = fraction(t.progress); return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
@@ -851,6 +852,24 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     practiceEl.hidden = false;
     placePractice();
   }
+  // The global Review entry floats like the Practice entry (Thomas, 2026-11-08),
+  // out of the content panel, visible from the garden and theme levels. The
+  // path level belongs to the path's own Practice float.
+  const reviewFloatEl = $('.lg-review-float');
+  function renderReviewFloat() {
+    if (view.level === 'path') { reviewFloatEl.hidden = true; reviewFloatEl.innerHTML = ''; return; }
+    const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
+    reviewFloatEl.innerHTML = mobile
+      ? `<button class="lg-review-pill" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.pencil} Review</button>`
+      : `<div class="lg-review-card"><h3>Review</h3><p>Questions from your least-practised paths</p><button class="primary" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.pencil} Start a review</button>${reviewable ? '' : '<p class="lg-review-note">Read every card of a lesson first</p>'}</div>`;
+    reviewFloatEl.hidden = false;
+    placeReviewFloat();
+  }
+  function placeReviewFloat() {
+    if (!mobile || reviewFloatEl.hidden) return;
+    const pr = panel.getBoundingClientRect(), rr = root.getBoundingClientRect();
+    reviewFloatEl.style.bottom = `${Math.max(0, Math.round(rr.bottom - pr.top)) + 10}px`;
+  }
   // The phone pill rides the sheet's top edge as it expands and collapses.
   function placePractice() {
     if (!mobile || practiceEl.hidden) return;
@@ -861,7 +880,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     const t = totals();
     statsEl.innerHTML = `<button class="chip drop" data-reward="drops" aria-label="${t.drops} Drops. How Drops are earned">${ICON.drop}<b>${t.drops}</b><small>drops</small><span class="info" aria-hidden="true">ⓘ</span></button><button class="chip carrot" data-reward="carrots" aria-label="${t.carrots} Carrots. How Carrots are earned">${ICON.carrot}<b>${t.carrots}</b><small>carrots</small><span class="info" aria-hidden="true">ⓘ</span></button>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
   }
-  function renderUI() { renderCrumbs(); renderPanel(); renderPractice(); renderStats(); buildLabels(); }
+  function renderUI() { renderCrumbs(); renderPanel(); renderPractice(); renderReviewFloat(); renderStats(); buildLabels(); }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); notifyView(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
@@ -1013,7 +1032,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (rainT > 0) rainT -= dt;
     const raining = rainT > 0; rain.visible = raining;
     if (raining) { const R = Math.min(9, camera.position.distanceTo(ctr) * 0.5); for (let i = 0; i < RAIN_N; i++) { const s0 = rainSeed[i * 3], s1 = rainSeed[i * 3 + 1], s2 = rainSeed[i * 3 + 2], y = (((s1 - time * 0.9 * (0.8 + s0 * 0.2)) % 1) + 1) % 1, x = ctr.x + s0 * R, z = ctr.z + s2 * R, yy = ctr.y + y * 9 - 1; rainArr.set([x, yy, z, x - 0.02, yy - 0.34, z], i * 6); } rain.geometry.attributes.position.needsUpdate = true; }
-    stepFly(now); controls.update(); placeLabels(); placePractice();
+    stepFly(now); controls.update(); placeLabels(); placePractice(); placeReviewFloat();
     renderer.render(scene, camera);
   }
   resize(); renderUI(); setVisibility(); if (initialView && (initialView.ti >= 0 || initialView.pi >= 0)) applyView(initialView); raf = requestAnimationFrame(frame);
