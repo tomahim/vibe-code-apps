@@ -1,0 +1,21 @@
+id: 316ff3c7-fefb-4e0f-9486-1734120aa263
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que contiennent réellement les bulles, selon le manuel ?
+choices:
+- id: 3a56db75-e72a-450f-9bd4-41fe057974ad
+  text: De l'azote, mais aussi du CO2, de la vapeur d'eau et de l'O2.
+- id: d08b1af5-02a3-4a3b-a7ef-594bc29015d0
+  text: Uniquement de l'azote pur, rien d'autre.
+- id: ef66a3a5-38e7-49de-8b33-243fc2a62d45
+  text: Uniquement du dioxyde de carbone expiré.
+- id: 3739eaa6-048d-41a6-b911-c737eaba0979
+  text: De l'hélium et de l'oxygène en parts égales.
+correct_choice_ids:
+- 3a56db75-e72a-450f-9bd4-41fe057974ad
+explanation: Par simplification, on dit souvent que les bulles ne contiennent que
+  de l'azote ; en réalité, elles contiendraient également du CO2, de la vapeur d'eau
+  et de l'O2.
+archived: false

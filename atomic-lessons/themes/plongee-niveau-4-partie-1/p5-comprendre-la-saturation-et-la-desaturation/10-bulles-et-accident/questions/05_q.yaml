@@ -1,0 +1,22 @@
+id: 3a977b03-2fb1-43b2-960d-9b28434f5e6b
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: À quoi le manuel compare-t-il la formation des bulles ?
+choices:
+- id: 31e98dcc-6102-495e-b59e-db4a62d864a2
+  text: 'À un verre de boisson gazeuse : le dégazage a lieu partout, mais les bulles
+    se forment sur les « impuretés ».'
+- id: 4902d329-7189-44c5-bfdb-eb72ab887400
+  text: À une cocotte-minute qui laisse échapper sa vapeur pendant la cuisson.
+- id: 8a92f562-3017-46c8-853f-2855e6e3909d
+  text: À un pneu de voiture qui se dégonfle lentement pendant la remontée.
+- id: 91e51e9e-1044-4f12-a220-b2a8e158fe32
+  text: À une bouteille de plongée que l'on purge lentement après son usage.
+correct_choice_ids:
+- 31e98dcc-6102-495e-b59e-db4a62d864a2
+explanation: Comme dans une boisson gazeuse, le dégazage se produit dans l'ensemble
+  du liquide, mais les bulles deviennent visibles au niveau des poches de germes gazeux
+  qui servent d'amorce à leur grossissement.
+archived: false
