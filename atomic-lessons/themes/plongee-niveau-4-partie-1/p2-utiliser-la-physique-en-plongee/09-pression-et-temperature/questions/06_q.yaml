@@ -1,0 +1,19 @@
+id: b948b0ff-8380-4400-9efa-fb42cc41047f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que valent 37 °C en Kelvin selon le manuel ?
+choices:
+- id: 1bf72f87-83fb-44ef-8c02-f7c7692506db
+  text: 310 K, soit 37 + 273.
+- id: d7e945cb-06d9-415f-a0c6-9eb7c473aa11
+  text: 236 K, soit 273 - 37.
+- id: 5f57f61e-60cc-4682-8552-34bc60a542ec
+  text: 373 K, soit 100 + 273.
+- id: 1c22bfcb-6cac-4c80-aada-b90416fbd3c7
+  text: 288 K, soit 15 + 273.
+correct_choice_ids:
+- 1bf72f87-83fb-44ef-8c02-f7c7692506db
+explanation: 37 °C + 273 = 310 K ; le manuel donne aussi 0 °C = 273 K comme repère.
+archived: false

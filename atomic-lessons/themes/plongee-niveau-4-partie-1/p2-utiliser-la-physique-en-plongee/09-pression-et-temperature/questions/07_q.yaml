@@ -1,0 +1,20 @@
+id: 4111629e-0695-4c50-a2bb-8bc2de6b738a
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle formulation du manuel est à éviter pour nommer l'unité ?
+choices:
+- id: fc470032-66c2-4101-8e8f-6a9fb45fe19c
+  text: '« Degré Kelvin » : le Kelvin se note K, tout simplement.'
+- id: 7d0ecfaa-a094-405f-9ad8-0e74022e19ea
+  text: '« Kelvin » tout court : il faut toujours dire « kelvin absolu ».'
+- id: 737208cb-3f6a-42cf-84de-718a6e890de1
+  text: '« K » : il faut écrire le mot Kelvin en toutes lettres.'
+- id: ee87f4d1-bdf6-4cf3-acc7-8d29d3e4f345
+  text: '« Température absolue » : il faut dire « température kelvine ».'
+correct_choice_ids:
+- fc470032-66c2-4101-8e8f-6a9fb45fe19c
+explanation: Le Kelvin est noté K, et non « degré Kelvin », formulation employée parfois
+  à tort.
+archived: false
