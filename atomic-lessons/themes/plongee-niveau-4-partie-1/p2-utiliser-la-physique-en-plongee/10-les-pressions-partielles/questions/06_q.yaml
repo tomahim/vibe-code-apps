@@ -1,0 +1,22 @@
+id: 7a7f55fc-697a-4b77-b1be-a60e1e9e4641
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'énonce la loi de Dalton ?
+choices:
+- id: 01c9e675-5fb2-44dc-a7c1-88979ecdb375
+  text: Chaque gaz d'un mélange exerce la pression qu'il exercerait s'il occupait
+    seul l'enceinte ; la pression totale est la somme de ces pressions partielles.
+- id: 0c58aff1-1986-476a-a649-c6840fb92a51
+  text: La pression d'un gaz double tous les dix mètres de profondeur dans l'eau de
+    mer.
+- id: 8dfaa7cf-df80-4603-866e-a474749a7129
+  text: Les gaz d'un mélange se répartissent toujours en parts égales entre eux.
+- id: e8b84e5c-4e26-4373-bddb-eb72575e20d5
+  text: La pression partielle d'un gaz ne dépend que de la température du mélange.
+correct_choice_ids:
+- 01c9e675-5fb2-44dc-a7c1-88979ecdb375
+explanation: John Dalton (1766-1844), aussi connu pour avoir décrit le daltonisme,
+  énonça cette loi des pressions partielles.
+archived: false
