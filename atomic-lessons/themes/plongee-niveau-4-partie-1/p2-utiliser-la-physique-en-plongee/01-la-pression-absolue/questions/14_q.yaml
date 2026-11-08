@@ -3,8 +3,7 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Ce mouillage est à 10 m (2 bars). Quelle quantité d'air équivalent surface
-  est nécessaire ?
+prompt: Ce mouillage est à 10 m (2 bars). Quelle quantité d'air équivalent surface est nécessaire ?
 choices:
 - id: 2f8eda13-4511-47c5-9c67-1efc5b474ac0
   text: 60 litres, soit 30 litres multipliés par 2 bars.
@@ -16,6 +15,5 @@ choices:
   text: 32 litres, en ajoutant simplement les 2 bars de pression.
 correct_choice_ids:
 - 2f8eda13-4511-47c5-9c67-1efc5b474ac0
-explanation: 'Les 30 litres se multiplient par la pression absolue du lieu : 30 x
-  2 = 60 litres équivalent surface à 10 m.'
+explanation: 'Les 30 litres occupés dans le parachute se multiplient par la pression absolue du lieu pour obtenir la quantité d''air équivalent surface à puiser dans la bouteille : 30 x 2 = 60 litres à 10 m.'
 archived: false
