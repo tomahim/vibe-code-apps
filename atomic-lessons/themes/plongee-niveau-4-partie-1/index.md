@@ -1,7 +1,7 @@
 ---
 id: bd957ab9-8aa7-4f8c-970f-c858f4cbec04
 position: 7
-title: "Niveau 4 pour Aurore - Partie 1"
+title: "Diving N4 #1"
 description: "Première partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt."
 archived: false
 ---
