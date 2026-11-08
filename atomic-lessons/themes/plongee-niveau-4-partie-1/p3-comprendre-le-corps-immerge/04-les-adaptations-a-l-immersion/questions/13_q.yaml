@@ -1,0 +1,20 @@
+id: 08a2d973-e5e9-4837-894e-0f7881833525
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la déshydratation aggrave-t-elle les risques de désaturation ?
+choices:
+- id: 281dfc9f-6c2f-4720-9f4c-d25fb9ff7009
+  text: Par l'augmentation de la viscosité sanguine qu'elle provoque.
+- id: e222f4cf-24a0-41f1-869c-db9a2ecdb589
+  text: Par la diminution du taux d'azote dans l'air inspiré.
+- id: 96231b07-42a0-47f3-99b4-eb9423412399
+  text: Par l'arrêt de la circulation dans les poumons.
+- id: 78a3fd2c-7ed0-44ec-914a-f8a93d50f25d
+  text: Par l'augmentation brutale de la taille des alvéoles.
+correct_choice_ids:
+- 281dfc9f-6c2f-4720-9f4c-d25fb9ff7009
+explanation: Souvent négligée, la déshydratation augmente les risques d'accident de
+  désaturation et aggrave leurs conséquences, par l'augmentation de la viscosité sanguine.
+archived: false

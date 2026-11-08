@@ -1,0 +1,23 @@
+id: b695f0ca-6faa-4fb2-87e4-c10b86ef29c5
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels conseils de bord le manuel donne-t-il ?
+choices:
+- id: 7b131dee-dd42-404a-9eef-09dd56ac9939
+  text: Toujours une bouteille d'eau avec soi, boire régulièrement, limiter l'exposition
+    au soleil, enfiler la combinaison au dernier moment.
+- id: aad47811-e74a-47c9-beeb-76ef4fa03224
+  text: Ne jamais boire avant une plongée pour éviter la diurèse.
+- id: 218b9dd9-2176-4ec6-b5ec-afe450e1648f
+  text: Enfiler la combinaison étanche au moins une heure avant le départ du bateau
+    pour s'y habituer.
+- id: 78661705-22e8-4650-9919-bf42b281f938
+  text: Rester au soleil en combinaison pour se réchauffer avant l'eau.
+correct_choice_ids:
+- 7b131dee-dd42-404a-9eef-09dd56ac9939
+explanation: 'À bord : bouteille d''eau toujours avec soi, boire régulièrement surtout
+  après la plongée, limiter l''exposition au soleil, ne mettre la combinaison qu''au
+  dernier moment.'
+archived: false

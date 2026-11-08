@@ -1,0 +1,21 @@
+id: fcf38df0-c24d-4b87-951f-20dbc12bd63c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le débit urinaire évolue-t-il à l'immersion selon le manuel ?
+choices:
+- id: 3fc8664b-5c70-4380-b900-85339bddd6bf
+  text: De 1 mL/min à terre à 6 mL/min dans l'eau après 2 h d'immersion immobile ;
+    environ 4 mL/min en plongée avec activité.
+- id: 6aa9ede1-9c86-4a90-a782-046b471c3552
+  text: Il reste stable à 1 mL/min quelle que soit la situation.
+- id: 349b68cf-a60a-4887-975d-8a7f36a7502a
+  text: Il chute à zéro dès la mise à l'eau pour économiser l'eau.
+- id: 031925bd-74c9-49d9-82ac-de884cc9f716
+  text: Il double uniquement lorsque l'eau descend sous les 10 degrés Celsius en hiver.
+correct_choice_ids:
+- 3fc8664b-5c70-4380-b900-85339bddd6bf
+explanation: Le débit urinaire passe de 1 mL/min à terre à 6 mL/min après 2 h d'immersion
+  immobile ; en plongée avec activité physique, il est en moyenne de 4 mL/min.
+archived: false

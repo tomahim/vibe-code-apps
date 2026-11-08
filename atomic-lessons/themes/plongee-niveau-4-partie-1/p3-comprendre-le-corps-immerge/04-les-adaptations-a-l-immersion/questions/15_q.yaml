@@ -1,0 +1,21 @@
+id: 95fa761f-11b3-4501-9e5f-5ee572ffedbd
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quand faut-il être particulièrement vigilant sur l'hydratation ?
+choices:
+- id: 028469fb-2022-45a9-950c-7b4ad58b8b2c
+  text: Lorsqu'on cumule plusieurs plongées par jour sur plusieurs jours, comme en
+    croisière.
+- id: 08275ec9-4050-4417-8927-be04d489d61f
+  text: Uniquement lors de la toute première plongée de sa vie.
+- id: f2f13f4f-ba49-4887-b69b-3809fdbd2faa
+  text: Uniquement lors de plongées de nuit sous les tropiques.
+- id: 4c750743-ce28-4aaf-9883-e62f40dcac95
+  text: 'Jamais : l''hydratation n''a aucun lien avec la plongée.'
+correct_choice_ids:
+- 028469fb-2022-45a9-950c-7b4ad58b8b2c
+explanation: Les pertes se cumulant partiellement d'une plongée à l'autre, le manuel
+  demande une vigilance particulière lors de plongées multiples sur plusieurs jours.
+archived: false

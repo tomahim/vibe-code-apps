@@ -1,0 +1,21 @@
+id: 977b2af9-b7dc-49b8-9e99-45ae0f84a017
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle part de liquide compose notre organisme selon le manuel ?
+choices:
+- id: dc0b760f-dde9-40ec-a958-6441a105ae73
+  text: 60 % de liquide, contenu dans les cellules, le liquide interstitiel et le
+    sang.
+- id: 3293b813-40e4-4a5b-8b67-2a982a38fe7a
+  text: 10 % de liquide, uniquement dans le sang.
+- id: 430455cb-67d9-49ca-8a58-e5df78383a80
+  text: 90 % de liquide, uniquement dans les muscles.
+- id: 4c899993-b3e4-4b0d-a7e0-839f41c052a6
+  text: 30 % de liquide, uniquement dans la vessie.
+correct_choice_ids:
+- dc0b760f-dde9-40ec-a958-6441a105ae73
+explanation: 'L''organisme est composé à 60 % de liquide : dans les cellules, le liquide
+  interstitiel et le sang.'
+archived: false
