@@ -5,15 +5,16 @@ selection: single
 after_card_position: 2
 prompt: What is the chiller's role in the loop?
 choices:
-- id: db591729-6132-4bc4-8d33-bc5b95159318
-  text: Move heat from the chilled-water loop into the condenser-water loop
-- id: e431b13f-36a7-49b8-a65a-f32c546c597b
-  text: Spray water onto the servers directly
-- id: e68d652d-608d-458e-ad69-3fba12bfa364
-  text: Generate backup power for the pumps
 - id: 748aad69-6a01-4b62-ba79-aa83241d711e
-  text: Filter minerals out of the water supply
+  text: Move customer data from memory to storage media
+- id: db591729-6132-4bc4-8d33-bc5b95159318
+  text: Move heat from chilled water to condenser water
+- id: e431b13f-36a7-49b8-a65a-f32c546c597b
+  text: Move utility fuel from bulk storage to day tanks
+- id: e68d652d-608d-458e-ad69-3fba12bfa364
+  text: Move electrical power from batteries to IT equipment
 correct_choice_ids:
 - db591729-6132-4bc4-8d33-bc5b95159318
-explanation: The chiller's vapor-compression cycle absorbs heat from the chilled-water loop and rejects it into the condenser loop heading outdoors.
+explanation: The chiller's vapor-compression cycle absorbs heat from the chilled-water loop and rejects it into
+  the condenser loop heading outdoors.
 archived: false

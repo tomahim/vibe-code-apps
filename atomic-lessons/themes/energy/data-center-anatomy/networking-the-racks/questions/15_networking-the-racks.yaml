@@ -2,10 +2,11 @@ id: 73d6a519-9d08-415b-8536-d3b399a5bcba
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: What is the name of the synchronized communication pattern, used in training, where every GPU exchanges gradients at once?
+prompt: What is the name of the synchronized communication pattern, used in training, where every GPU exchanges
+  gradients at once?
 accepted_answers:
 - all-reduce
 - allreduce
-- all reduce
-explanation: All-reduce synchronizes gradients across the whole cluster at once, the traffic pattern AI fabrics are engineered around.
+explanation: All-reduce synchronizes gradients across the whole cluster at once, the traffic pattern AI fabrics
+  are engineered around.
 archived: false

@@ -5,7 +5,6 @@ after_card_position: 8
 prompt: What does the acronym SSD stand for?
 accepted_answers:
 - solid-state drive
-- solid state drive
 - solid-state disk
 explanation: Solid-state drives store data in flash memory with no moving parts.
 archived: false

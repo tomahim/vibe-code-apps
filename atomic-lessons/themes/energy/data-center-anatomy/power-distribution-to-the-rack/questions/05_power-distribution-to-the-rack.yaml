@@ -5,15 +5,16 @@ selection: single
 after_card_position: 4
 prompt: What is a busway?
 choices:
-- id: a9abf9db-44e5-4eea-b35d-0e34834ecaef
-  text: A rigid overhead housing with solid copper bars distributing power along the rows
-- id: 30ddcdf1-502d-48de-bac0-fd5f14bcc0ab
-  text: A dedicated lane for fuel tankers
 - id: c26d8841-a4eb-4297-9980-ab787aba537d
-  text: The network cable tray above the racks
+  text: Mounting rails supporting storage drives inside a chassis
 - id: 7496803e-32bc-458f-8525-73d820d36414
-  text: A conveyor belt for moving servers
+  text: Optical fibers distributing network traffic along a row
+- id: a9abf9db-44e5-4eea-b35d-0e34834ecaef
+  text: Enclosed conductors distributing power along a row
+- id: 30ddcdf1-502d-48de-bac0-fd5f14bcc0ab
+  text: Water pipes distributing coolant through server cold plates
 correct_choice_ids:
 - a9abf9db-44e5-4eea-b35d-0e34834ecaef
-explanation: The busway is a copper highway above the racks; tap-off boxes plug in anywhere along it to feed racks below.
+explanation: The busway is a copper highway above the racks; tap-off boxes plug in anywhere along it to feed racks
+  below.
 archived: false

@@ -5,15 +5,16 @@ selection: single
 after_card_position: 8
 prompt: Why did Google standardize a 48 V DC busbar in its racks?
 choices:
-- id: 46b014d8-1c4e-4fef-8f1d-5ac9a4acff62
-  text: Fewer conversion stages and lower copper losses feeding high-power chips
 - id: 53c81960-631b-4cd4-91eb-24ec350632f7
-  text: 48 V is the European wall standard
+  text: No voltage regulation needed near any processor
+- id: 46b014d8-1c4e-4fef-8f1d-5ac9a4acff62
+  text: Lower current and wiring losses at equal power
 - id: d010f60a-0c04-48dc-97e4-04f72c6b0eae
-  text: Batteries only come in 48 V sizes
+  text: Lower capacity required for the identical IT workload
 - id: c4707e35-18dc-4da3-bfa1-6f944192c52b
-  text: To make racks incompatible with competitors' servers
+  text: No electrical losses possible anywhere in the rack
 correct_choice_ids:
 - 46b014d8-1c4e-4fef-8f1d-5ac9a4acff62
-explanation: Higher-voltage DC distribution in the rack reduces conversion steps and current, cutting losses on the way to the silicon.
+explanation: Higher-voltage DC distribution in the rack reduces conversion steps and current, cutting losses on
+  the way to the silicon.
 archived: false

@@ -6,5 +6,5 @@ prompt: What does the acronym UPS stand for?
 accepted_answers:
 - uninterruptible power supply
 - uninterruptible power system
-explanation: The uninterruptible power supply keeps power flowing to IT load through every grid disturbance.
+explanation: The uninterruptible power supply supports its protected load within its operating and stored-energy limits.
 archived: false

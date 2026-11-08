@@ -6,6 +6,5 @@ prompt: What effect, which ended in the mid-2000s, used to let transistors shrin
 accepted_answers:
 - Dennard scaling
 - Dennard's law
-- dennard scaling
 explanation: Dennard scaling kept power per transistor falling with size; its breakdown ended free efficiency gains.
 archived: false

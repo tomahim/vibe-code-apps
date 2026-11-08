@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: Who defined the PUE metric?
 choices:
+- id: aa961ed9-c3a4-4549-a1cc-e88cf86d826f
+  text: The Uptime Institute
+- id: aaae242c-cb7f-4007-ba64-1bf3b2a539d5
+  text: The ASHRAE technical committee
+- id: 933067b9-d68d-4e7c-abe2-2505e58607be
+  text: The International Energy Agency
 - id: bcfaa02b-32f6-476b-ad37-b4031d84f822
   text: The Green Grid
-- id: aa961ed9-c3a4-4549-a1cc-e88cf86d826f
-  text: ASHRAE
-- id: aaae242c-cb7f-4007-ba64-1bf3b2a539d5
-  text: The Uptime Institute
-- id: 933067b9-d68d-4e7c-abe2-2505e58607be
-  text: The IEA
 correct_choice_ids:
 - bcfaa02b-32f6-476b-ad37-b4031d84f822
 explanation: The Green Grid defined PUE; Uptime Institute's surveys track it across the industry.

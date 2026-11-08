@@ -6,6 +6,5 @@ prompt: A site needs ten transformers for its load and buys twenty. What is this
 accepted_answers:
 - 2N
 - two N
-- 2n
 explanation: 2N doubles the system into two fully independent sets, each able to carry the whole load.
 archived: false

@@ -3,17 +3,18 @@ position: 1
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: Where does the 19-inch rack width standard come from?
+prompt: What does the 19-inch dimension in a standard rack describe?
 choices:
-- id: 737395c2-7d3c-451e-b0d4-a278d037e75b
-  text: Railway relay equipment of the 1920s
-- id: 1705fadd-b8c7-4485-825d-8c44de18c6c3
-  text: The first IBM mainframe cabinets
 - id: c4e766a0-4072-4691-af42-cb0c4025f459
-  text: A 1996 telecom regulation
+  text: Distance between the two facing rows
 - id: 09c79bb5-cac9-4397-9590-ebef6c9142a9
-  text: The width of a pizza box
+  text: Overall cabinet width, including side panels
+- id: 737395c2-7d3c-451e-b0d4-a278d037e75b
+  text: Mounting width, not overall cabinet width
+- id: 1705fadd-b8c7-4485-825d-8c44de18c6c3
+  text: Depth from the front to the rear
 correct_choice_ids:
 - 737395c2-7d3c-451e-b0d4-a278d037e75b
-explanation: The 19-inch standard dates to 1920s railway relay racks and now shapes nearly all IT equipment.
+explanation: It describes an equipment mounting convention, not the cabinet's overall external width. Other rack
+  formats also exist.
 archived: false

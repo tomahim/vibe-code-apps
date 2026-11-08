@@ -5,15 +5,16 @@ selection: single
 after_card_position: 4
 prompt: What is the CDU's primary job?
 choices:
-- id: 636c916a-4490-49b4-862c-8514f5763994
-  text: Exchange heat between a clean IT coolant loop and the facility water loop while keeping them separate
-- id: 17ea6d64-b885-4a28-a189-6e36b9df53cb
-  text: Filter the internet traffic entering the rack
 - id: f65eb29f-3798-48e2-a9e7-20845463d5e9
-  text: Convert AC power to DC power
+  text: Compress network traffic before it leaves the GPU domain
 - id: 4eab031a-ad72-4957-8e29-4fffe21fd8fa
-  text: Compress the refrigerant for the chillers
+  text: Mix IT and facility loops to equalize their chemistry
+- id: 636c916a-4490-49b4-862c-8514f5763994
+  text: Separate IT and facility loops while exchanging heat
+- id: 17ea6d64-b885-4a28-a189-6e36b9df53cb
+  text: Convert incoming AC power into regulated processor voltage
 correct_choice_ids:
 - 636c916a-4490-49b4-862c-8514f5763994
-explanation: The coolant distribution unit isolates and controls the technology coolant loop, exchanging its heat with the building's water system.
+explanation: The coolant distribution unit isolates and controls the technology coolant loop, exchanging its heat
+  with the building's water system.
 archived: false

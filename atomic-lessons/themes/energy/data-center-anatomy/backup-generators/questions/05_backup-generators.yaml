@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: In a genset, what does the alternator do?
 choices:
 - id: 8ea0197e-fd49-46bf-9580-ce42477cbec7
-  text: Converts the engine's rotation into AC electricity
+  text: Convert shaft rotation into AC electricity
 - id: 545861a9-a6cb-4aad-b1f0-176d2ac02d2c
-  text: Starts the diesel engine
+  text: Remove dissolved minerals from cooling-tower water
 - id: 800ea36b-c161-4db0-8db5-14f248a7e604
-  text: Filters the exhaust gases
+  text: Filter exhaust particles from the engine gases
 - id: 4d073fc5-6a6c-4d38-82e8-ddc5fcbb5864
-  text: Stores diesel fuel safely
+  text: Convert AC electricity into stored diesel fuel
 correct_choice_ids:
 - 8ea0197e-fd49-46bf-9580-ce42477cbec7
 explanation: The engine spins the shaft; the alternator turns rotation into AC power at the facility's voltage.

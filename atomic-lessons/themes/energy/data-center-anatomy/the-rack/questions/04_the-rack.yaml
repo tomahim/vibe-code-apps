@@ -6,14 +6,15 @@ after_card_position: 2
 prompt: Why do operators install blanking panels in empty rack slots?
 choices:
 - id: 603d7c47-665b-4904-a006-8f2cb39e9b44
-  text: To stop cold air short-circuiting through gaps instead of passing through servers
+  text: Reduce airflow bypass around installed servers
 - id: 33b110e1-2e14-4e40-bf00-199af4da1d39
-  text: To protect empty slots from dust static
+  text: Reduce network delays between leaf switches
 - id: ec34f003-792f-4c6e-b26a-141e277f6e5d
-  text: To hide unused space from customers
+  text: Reduce voltage drop along electrical feeders
 - id: 732d6296-974d-4b53-99f8-afa2645907fd
-  text: To add structural strength to the frame
+  text: Reduce vibration in the rack mounting rails
 correct_choice_ids:
 - 603d7c47-665b-4904-a006-8f2cb39e9b44
-explanation: Blanking panels force cold air through the equipment rather than leaking through empty slots, an efficiency measure.
+explanation: Blanking panels force cold air through the equipment rather than leaking through empty slots, an efficiency
+  measure.
 archived: false

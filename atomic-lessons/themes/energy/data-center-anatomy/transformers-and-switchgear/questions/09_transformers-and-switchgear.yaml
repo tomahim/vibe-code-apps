@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: What is switchgear's protective job during a short circuit?
 choices:
-- id: c6127842-6196-480b-822a-9f3dcec18d07
-  text: Detect the fault and trip the smallest possible part of the system in milliseconds
 - id: f7f60b3e-83e9-4a47-9e4b-2590d18b02a8
-  text: Reroute all power to the backup generators
+  text: Switch every server to a faster network path
 - id: 3ab282aa-a183-4455-8427-74328a3a6782
-  text: Convert the surge into stored battery energy
+  text: Raise voltage until the fault stops conducting
 - id: f6fb8377-9aea-4f31-9bab-d4ec42b70c9b
-  text: Shut down the entire campus instantly
+  text: Convert every fault into stored battery energy
+- id: c6127842-6196-480b-822a-9f3dcec18d07
+  text: Isolate the fault with coordinated protective devices
 correct_choice_ids:
 - c6127842-6196-480b-822a-9f3dcec18d07
-explanation: Selective protection clears faults fast and locally, so one short circuit does not take down the whole facility.
+explanation: Selective protection clears faults fast and locally, so one short circuit does not take down the whole
+  facility.
 archived: false

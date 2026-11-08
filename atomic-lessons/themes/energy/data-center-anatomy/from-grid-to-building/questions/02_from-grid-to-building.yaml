@@ -5,15 +5,16 @@ selection: single
 after_card_position: 2
 prompt: Why do hyperscale campuses sit near high-voltage transmission lines?
 choices:
-- id: 61755ed2-6925-44ba-8277-bdd57dcbe4aa
-  text: Only transmission-level connections can deliver hundreds of MW
 - id: c56cfcd1-233b-41d0-ab11-c56a7902b8db
-  text: Fiber internet follows power lines
+  text: They need pylons to support their server racks
 - id: 1dd1a0a4-cbf7-4394-820f-614d5f21606e
-  text: Tall pylons mark cheap land
+  text: They need utility batteries to store their data
+- id: 61755ed2-6925-44ba-8277-bdd57dcbe4aa
+  text: They need access to very large power capacity
 - id: 1b221351-adb6-4bc8-b225-139f9294b1c9
-  text: Regulations ban data centers in cities
+  text: They need transmission wires as network cables
 correct_choice_ids:
 - 61755ed2-6925-44ba-8277-bdd57dcbe4aa
-explanation: 'SemiAnalysis: medium-voltage distribution cannot deliver >100 MW in a dense location; campuses need 138-345 kV transmission access.'
+explanation: 'SemiAnalysis: medium-voltage distribution cannot deliver >100 MW in a dense location; campuses need
+  138-345 kV transmission access.'
 archived: false

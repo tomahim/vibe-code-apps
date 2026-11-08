@@ -6,14 +6,15 @@ after_card_position: 2
 prompt: In what order does heat travel out of a water-cooled facility?
 choices:
 - id: 238e86a8-7751-4253-a786-c7f2e23a1fbf
-  text: Server air, chilled-water loop, condenser loop, cooling tower, atmosphere
+  text: Server air, chilled water, condenser water, tower
 - id: 35e68a44-0592-4a53-941a-fbb888b5db3a
-  text: Cooling tower, condenser loop, chilled-water loop, server air
+  text: Tower, condenser water, chilled water, server air
 - id: 75aab8f2-8858-4583-b2a3-9354c47ee4b2
-  text: Atmosphere, cooling tower, server air, chiller
+  text: Condenser water, server air, tower, chilled water
 - id: 2772e3d2-c04f-4b8b-bff0-c2b414144117
-  text: Server air, condenser loop, chilled-water loop, atmosphere
+  text: Server air, condenser water, tower, chilled water
 correct_choice_ids:
 - 238e86a8-7751-4253-a786-c7f2e23a1fbf
-explanation: Air heats chilled water; the chiller passes heat to the condenser loop; the tower rejects it to the atmosphere.
+explanation: Air heats chilled water; the chiller passes heat to the condenser loop; the tower rejects it to the
+  atmosphere.
 archived: false

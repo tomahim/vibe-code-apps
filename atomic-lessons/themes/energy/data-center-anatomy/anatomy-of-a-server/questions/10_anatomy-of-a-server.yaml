@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: A rack has a 10 kW power budget. An AI server draws about 10 kW. How many such servers fit in the rack?
 choices:
-- id: ca01d886-04c1-4b0a-9468-3f7b28d7f3fb
-  text: One
 - id: 85230741-5e51-490c-a230-913cbbd372f4
-  text: Ten
+  text: Forty servers
 - id: 69a042c2-a694-42c5-bb6a-3ea01e9339a8
-  text: Forty-two
+  text: Ten servers
+- id: ca01d886-04c1-4b0a-9468-3f7b28d7f3fb
+  text: One server
 - id: 082621cf-df61-41bc-ae31-327de38f6cea
-  text: Two
+  text: Two servers
 correct_choice_ids:
 - ca01d886-04c1-4b0a-9468-3f7b28d7f3fb
-explanation: 'The power budget, not the physical space, is the limit: one AI server can consume an entire conventional rack''s capacity.'
+explanation: 'The power budget, not the physical space, is the limit: one AI server can consume an entire conventional
+  rack''s capacity.'
 archived: false

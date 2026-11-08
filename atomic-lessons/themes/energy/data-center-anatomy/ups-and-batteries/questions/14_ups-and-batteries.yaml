@@ -6,14 +6,15 @@ after_card_position: 8
 prompt: What distinguishes a catcher UPS design from classic 2N?
 choices:
 - id: 50a83877-cfe9-4487-8927-fa3b0b879842
-  text: N+1 UPS blocks with static transfer switches moving loads between them in milliseconds
-- id: 130562eb-55e4-4a83-aa91-739a41f1d529
-  text: One enormous UPS replacing all others
+  text: Spare UPS capacity can catch a displaced load
 - id: c43ca462-8be4-4613-8e8a-33c97b2dd221
-  text: Batteries removed entirely in favor of flywheels
+  text: No protected load needs any stored ride-through energy
 - id: f5ab46d9-e40e-4e8e-9fb2-d1a3373ac09e
-  text: Generators used as the primary power source
+  text: Every server must carry its own diesel generator
+- id: 130562eb-55e4-4a83-aa91-739a41f1d529
+  text: All loads depend on one unmaintainable UPS module
 correct_choice_ids:
 - 50a83877-cfe9-4487-8927-fa3b0b879842
-explanation: Catcher uses multiple smaller UPS units plus a spare, with fast static transfer switches, saving capital versus duplicated 2N chains.
+explanation: Catcher uses multiple smaller UPS units plus a spare, with fast static transfer switches, saving capital
+  versus duplicated 2N chains.
 archived: false

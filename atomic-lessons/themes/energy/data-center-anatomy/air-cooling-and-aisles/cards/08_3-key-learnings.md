@@ -5,8 +5,9 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. Cooling is power removal.** Every watt delivered to IT becomes heat in the hall, so the cooling chain mirrors the power chain in capacity, redundancy and cost.
 
 **2. Air discipline is the foundation:** the front-to-back airflow contract, hot and cold aisles, and containment keep cold supply and hot exhaust from mixing, saving energy at every degree.
 
-**3. Air has a ceiling.** ASHRAE's 18-27 C inlet envelope guides setpoints, but above roughly 20-40 kW per rack, air physically cannot carry the heat, which is why AI forced liquid cooling.
+**3. Air has a ceiling.** ASHRAE's class-specific inlet envelopes guide setpoints (18-27 C for A1-A4), but practical limits depend on airflow and equipment. Very dense AI systems increasingly use liquid rather than a universal air-cooling cutoff.

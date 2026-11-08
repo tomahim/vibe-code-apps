@@ -5,15 +5,16 @@ selection: single
 after_card_position: 8
 prompt: 'A city-facing vision for data centers described in this lesson is:'
 choices:
-- id: d958804d-1e2e-4fac-8ea7-40fd013e5286
-  text: Buying power from the grid and selling heat to the district network
-- id: 68f88a5d-2526-4cfb-8c97-54d6eaa1dfd0
-  text: Selling servers to residents at discount
-- id: 59bea25d-5058-4dc9-834a-f3e9f4a69481
-  text: Powering the grid permanently from diesel
 - id: 4efacd14-f25b-4b9d-83e7-e79efd9ac260
-  text: Hosting public swimming pools in the data hall
+  text: Buy water and store all of it inside processor packages
+- id: 68f88a5d-2526-4cfb-8c97-54d6eaa1dfd0
+  text: Buy internet traffic and convert all of it into fuel
+- id: d958804d-1e2e-4fac-8ea7-40fd013e5286
+  text: Buy electricity and supply useful heat where feasible
+- id: 59bea25d-5058-4dc9-834a-f3e9f4a69481
+  text: Buy heat and convert all of it back into electricity
 correct_choice_ids:
 - d958804d-1e2e-4fac-8ea7-40fd013e5286
-explanation: 'Heat reuse turns the data center into a two-way energy participant: electricity in, computation and district heat out.'
+explanation: 'Heat reuse turns the data center into a two-way energy participant: electricity in, computation and
+  district heat out.'
 archived: false

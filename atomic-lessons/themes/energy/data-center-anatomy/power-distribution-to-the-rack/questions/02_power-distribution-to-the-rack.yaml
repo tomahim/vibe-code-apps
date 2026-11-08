@@ -3,18 +3,18 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: Why does the cooling path generally not receive battery ride-through?
+prompt: Which statement about cooling continuity is correct?
 choices:
-- id: a8692f70-836c-4280-9c7a-2ed090fae5b6
-  text: Chillers and pumps tolerate the minute until generators take over
 - id: 89be2d60-7ab9-4135-b3e9-bae320b78da9
-  text: Cooling equipment uses no electricity
+  text: Cooling requires no electrical energy during outages
 - id: 82bace5c-a700-4e91-827f-2406ac0ef9e6
-  text: Batteries cannot power fans
+  text: No cooling motor can ever use a UPS
 - id: b5f721cb-02de-46ff-841f-cd0069abc94e
-  text: Cooling is optional during outages
+  text: All cooling can always stop safely for one minute
+- id: a8692f70-836c-4280-9c7a-2ed090fae5b6
+  text: Some fans, pumps or controls need uninterrupted power
 correct_choice_ids:
 - a8692f70-836c-4280-9c7a-2ed090fae5b6
-explanation: Cooling can coast for a minute without harm, so battery capacity is reserved for IT; this asymmetry shapes the blast radius of cooling
-  failures.
+explanation: Some cooling auxiliaries require uninterrupted power. Others may ride through restart using stored
+  thermal capacity; the specific system must be assessed.
 archived: false

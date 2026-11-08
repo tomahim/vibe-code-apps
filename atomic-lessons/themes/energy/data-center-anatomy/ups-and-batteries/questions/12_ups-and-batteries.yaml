@@ -3,17 +3,18 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: Why are chillers and pumps usually not given UPS battery ride-through?
+prompt: What determines whether cooling equipment needs UPS-backed power?
 choices:
 - id: fe42f606-3ad5-4941-ad5e-65c4ff216550
-  text: They tolerate a minute's interruption, and battery capacity is reserved for IT load
+  text: Restart times, thermal storage and critical circulation
 - id: 90073ee5-d657-402f-83c9-5d35540caef1
-  text: Cooling equipment runs on DC already
+  text: Only the physical color of the cooling pipes
 - id: 013088de-db7e-4b61-8299-8ce8097ce9df
-  text: Batteries cannot power any motor
+  text: The location of the network's internet gateway
 - id: fd4981f8-8f64-4786-92d0-bb7b746481a5
-  text: Regulations forbid backing up cooling
+  text: Only the number of spare storage drives
 correct_choice_ids:
 - fe42f606-3ad5-4941-ad5e-65c4ff216550
-explanation: Cooling rides out a minute without harm, so batteries serve the IT path; this is also why cooling failures carry a larger blast radius.
+explanation: Restart time, stored thermal capacity and critical circulation determine continuity needs. There is
+  no universal safe one-minute interruption.
 archived: false

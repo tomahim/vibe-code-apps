@@ -5,14 +5,14 @@ selection: single
 after_card_position: 6
 prompt: According to the IEA, roughly how much electricity did data centers consume in 2024?
 choices:
-- id: 58bb321c-15d3-4eaa-a45a-790085459df9
-  text: About 415 TWh, around 1.5% of global electricity
-- id: 2e6a1fed-c03d-46c6-9c94-bdc998f25581
-  text: About 41 TWh, around 0.15% of global electricity
-- id: e6200af2-cc42-4023-ada5-2643fb45c3a2
-  text: About 4,150 TWh, around 15% of global electricity
 - id: 241fbc55-bf44-4e3c-91e3-158c1f084a24
-  text: About 4 TWh, around 0.015% of global electricity
+  text: 4,150 TWh, about 15%
+- id: 2e6a1fed-c03d-46c6-9c94-bdc998f25581
+  text: 830 TWh, about 3%
+- id: 58bb321c-15d3-4eaa-a45a-790085459df9
+  text: 415 TWh, about 1.5%
+- id: e6200af2-cc42-4023-ada5-2643fb45c3a2
+  text: 41 TWh, about 0.15%
 correct_choice_ids:
 - 58bb321c-15d3-4eaa-a45a-790085459df9
 explanation: The IEA estimates about 415 TWh in 2024, roughly 1.5% of global electricity consumption.

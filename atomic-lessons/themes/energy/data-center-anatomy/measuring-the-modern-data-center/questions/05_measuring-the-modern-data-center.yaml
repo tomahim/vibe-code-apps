@@ -6,14 +6,15 @@ after_card_position: 4
 prompt: What does Tier III's 'concurrently maintainable' mean?
 choices:
 - id: 2c8c588a-6bd6-4159-a762-b2cbb02f1f10
-  text: Any component or distribution path can be serviced without interrupting the IT load
-- id: 5883191c-00b8-4637-9a89-def692f2b914
-  text: Three technicians must be present for maintenance
-- id: e1ddbeb5-a23d-4605-af43-f06c050e64ed
-  text: Maintenance happens only every three years
+  text: Maintenance can proceed without interrupting the IT load
 - id: 11eed6aa-56f2-4833-b1fa-1890184b29b2
-  text: The facility can host three tenants at once
+  text: Maintenance requires three independent teams at every task
+- id: 5883191c-00b8-4637-9a89-def692f2b914
+  text: Maintenance guarantees a fixed annual outage duration
+- id: e1ddbeb5-a23d-4605-af43-f06c050e64ed
+  text: Maintenance is limited to three predetermined weeks annually
 correct_choice_ids:
 - 2c8c588a-6bd6-4159-a762-b2cbb02f1f10
-explanation: Tier III facilities can be maintained live, the property N+1 and 2N designs deliver; Tier IV adds fault tolerance.
+explanation: Tier III facilities can be maintained live, the property N+1 and 2N designs deliver; Tier IV adds fault
+  tolerance.
 archived: false

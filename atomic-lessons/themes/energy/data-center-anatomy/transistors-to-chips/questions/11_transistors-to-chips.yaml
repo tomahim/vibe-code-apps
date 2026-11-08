@@ -6,13 +6,13 @@ after_card_position: 6
 prompt: What is heat flux in the context of chips?
 choices:
 - id: 949d2ee1-20df-458a-91b3-9249e9b86f3c
-  text: Watts of heat per square centimeter of silicon
+  text: Heat output per unit silicon area
 - id: e20f3619-4cab-474f-a1e0-846a8b7ef7e1
-  text: The speed of air leaving the server fans
+  text: Air speed per unit server height
 - id: e3206a57-b857-46dd-bda9-6d5b26e22f82
-  text: The temperature difference between two racks
+  text: Energy stored per unit rack weight
 - id: 26222328-0e70-406c-b9d6-b8e1bb39abc2
-  text: The energy stored in the heat sink
+  text: Voltage drop per unit cable length
 correct_choice_ids:
 - 949d2ee1-20df-458a-91b3-9249e9b86f3c
 explanation: Heat flux is power per unit area. Modern dies reach kitchen-hotplate-level flux on a coin-sized area.

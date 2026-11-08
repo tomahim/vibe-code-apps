@@ -41,6 +41,42 @@ class DataCenterAnatomyTests(unittest.TestCase):
             body = card.read_text().split("---\n", 2)[2]
             self.assertGreaterEqual(len(body.split()), 100, card)
 
+    def test_typed_answers_are_distinct_after_normalization(self):
+        import importlib.util
+        source = Path(__file__).parent.parent / "api/apps/learning/grading.py"
+        spec = importlib.util.spec_from_file_location("learning_grading", source)
+        grading = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(grading)
+        for path in ROOT.glob("*/questions/*.yaml"):
+            question = yaml.safe_load(path.read_text())
+            if question["type"] == "type_answer_question":
+                answers = [grading.normalize_typed_answer(a) for a in question["accepted_answers"]]
+                self.assertTrue(all(answers), path)
+                self.assertEqual(len(answers), len(set(answers)), path)
+
+    def test_mc_choices_have_comparable_length(self):
+        for path in ROOT.glob("*/questions/*.yaml"):
+            question = yaml.safe_load(path.read_text())
+            if question["type"] != "multiple_choice":
+                continue
+            lengths = [len(choice["text"].split()) for choice in question["choices"]]
+            self.assertLessEqual(max(lengths) / min(lengths), 1.7, path)
+
+    def test_answers_are_not_fixed_in_first_position(self):
+        positions = set()
+        for path in ROOT.glob("*/questions/*.yaml"):
+            question = yaml.safe_load(path.read_text())
+            if question["type"] == "multiple_choice":
+                positions.add(next(i for i, choice in enumerate(question["choices"])
+                                   if choice["id"] in question["correct_choice_ids"]))
+        self.assertEqual(positions, {0, 1, 2, 3})
+
+    def test_each_lesson_has_direct_further_reading(self):
+        for lesson in (p for p in ROOT.iterdir() if p.is_dir()):
+            text = "\n".join(p.read_text() for p in (lesson / "cards").glob("*.md"))
+            self.assertIn("[Further reading:", text, lesson)
+        self.assertTrue((Path(__file__).parent / "data-center-anatomy-sources.md").is_file())
+
     def test_at_least_two_illustrations_per_lesson(self):
         for lesson in sorted(p for p in ROOT.iterdir() if p.is_dir()):
             illustrated = 0

@@ -5,15 +5,16 @@ selection: single
 after_card_position: 2
 prompt: What happens when grid power returns after an outage?
 choices:
-- id: 6ce89481-702a-4c83-af9f-ce44a0c587b0
-  text: Load transfers back to utility and engines cool down before sleeping
-- id: 3b9492ae-c1bf-43f8-bab6-341894a37705
-  text: Generators keep running for 30 days
 - id: 4f37ab51-567c-4e77-858a-07615ae5a287
-  text: Batteries discharge completely to celebrate
+  text: Stop all UPS protection before reconnecting utility power
 - id: ced403da-77ba-4df3-88d3-651ba4dd5c17
-  text: The facility stays on generator power forever
+  text: Keep both sources unsynchronized on the same circuit
+- id: 6ce89481-702a-4c83-af9f-ce44a0c587b0
+  text: Transfer to utility, then cool down the engines
+- id: 3b9492ae-c1bf-43f8-bab6-341894a37705
+  text: Empty all fuel tanks before restoring utility power
 correct_choice_ids:
 - 6ce89481-702a-4c83-af9f-ce44a0c587b0
-explanation: The ATS transfers load back to the utility and the gensets cool down before shutting off, ready for the next event.
+explanation: The ATS transfers load back to the utility and the gensets cool down before shutting off, ready for
+  the next event.
 archived: false

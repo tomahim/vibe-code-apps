@@ -5,15 +5,16 @@ selection: single
 after_card_position: 8
 prompt: Why is network headroom provisioned above expected peak demand?
 choices:
-- id: f83505ab-37ba-4c9c-81c0-b19a1890aafa
-  text: So that even in a degraded state the fabric carries peak training bursts
 - id: 2759881c-ba59-4b9c-84e2-8518b3270b67
-  text: Because switches are cheaper when bought in bulk
+  text: Ensure the fabric never needs maintenance work
 - id: 8c2286ac-73ce-4cf2-a91b-fdc7201defdf
-  text: To leave room for telephone traffic growth
+  text: Make every switch operate at maximum congestion
+- id: f83505ab-37ba-4c9c-81c0-b19a1890aafa
+  text: Retain capacity during failures and training bursts
 - id: 8ba534dc-1388-407e-9ee2-083bbcbd6720
-  text: Because regulations require 50% spare capacity
+  text: Remove the need to monitor network utilization
 correct_choice_ids:
 - f83505ab-37ba-4c9c-81c0-b19a1890aafa
-explanation: 'Redundancy is capacity-based: with a spine down, the remaining fabric must still carry the synchronized bursts of training traffic.'
+explanation: 'Redundancy is capacity-based: with a spine down, the remaining fabric must still carry the synchronized
+  bursts of training traffic.'
 archived: false

@@ -2,10 +2,10 @@ id: 0b29bd82-3485-49b2-ab3d-2f79e0618212
 position: 8
 type: type_answer_question
 after_card_position: 4
-prompt: A server holds eight 700 W GPUs. In kilowatts, how much power do the GPUs alone draw?
+prompt: Eight GPUs each have a 700 W power rating. What is their combined rating in kW?
 accepted_answers:
 - '5.6'
 - 5.6 kW
 - 5.6kW
-explanation: 8 x 700 W = 5,600 W = 5.6 kW, before counting CPUs, memory, networking and power conversion losses.
+explanation: 8 x 700 W = 5,600 W = 5.6 kW. This excludes the rest of the server and does not imply constant draw.
 archived: false

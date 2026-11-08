@@ -3,17 +3,18 @@ position: 13
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: In a Rated 3 facility, how are UPS systems typically deployed?
+prompt: What does Tier III require of the overall UPS and distribution design?
 choices:
-- id: 6bf49a54-1f19-4d95-8d8f-7f3534f583c9
-  text: '2N: two fully independent UPS chains, each able to carry the load'
 - id: 2e19c517-e849-483c-8b2a-f518a927c0ef
-  text: A single UPS sized at exactly 100% of load
+  text: No need for maintenance bypass or safe isolation
+- id: 6bf49a54-1f19-4d95-8d8f-7f3534f583c9
+  text: Concurrent maintainability across the complete topology
 - id: bccaffeb-1335-4772-a766-a3290f70f012
-  text: One UPS shared between five buildings
+  text: A fixed annual outage allowance guaranteed by classification
 - id: ffee9730-2e41-4446-b7dc-2efdeca33949
-  text: UPS units only on the cooling plant
+  text: Exactly two UPS boxes regardless of distribution design
 correct_choice_ids:
 - 6bf49a54-1f19-4d95-8d8f-7f3534f583c9
-explanation: Rated 3 designs typically use 2N UPS and distribution, the origin of the A and B power sides in the data hall.
+explanation: Tier III requires concurrent maintainability. It does not prescribe exactly two UPS units or a universal
+  2N equipment recipe.
 archived: false

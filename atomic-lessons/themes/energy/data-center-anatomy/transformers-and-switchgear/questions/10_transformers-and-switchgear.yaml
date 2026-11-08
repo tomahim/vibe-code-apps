@@ -5,14 +5,14 @@ selection: single
 after_card_position: 6
 prompt: In redundancy vocabulary, what does N mean?
 choices:
-- id: 04be2e68-02c1-44aa-aa7d-4aefda24e250
-  text: The number of units strictly needed to carry the load
 - id: 4fa3fbaf-7c17-4815-949d-0e3e5132d6f5
-  text: The number of spare units available
+  text: Spare units beyond the operating requirement
 - id: f3414425-bb2f-45ac-bbea-665de7048b5d
-  text: The nominal voltage of the system
+  text: Nominal voltage at the transformer terminals
+- id: 04be2e68-02c1-44aa-aa7d-4aefda24e250
+  text: Units required to support the load
 - id: 46a261a3-4b8e-4b4d-b0e8-9cb68ca41aac
-  text: The national grid connection
+  text: Independent feeds from the national grid
 correct_choice_ids:
 - 04be2e68-02c1-44aa-aa7d-4aefda24e250
 explanation: N is the required capacity; N+1 adds a spare, 2N doubles the system.

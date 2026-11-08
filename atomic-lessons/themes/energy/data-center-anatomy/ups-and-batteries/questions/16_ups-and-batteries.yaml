@@ -8,7 +8,7 @@ accepted_answers:
 - a minute
 - one minute
 - 1 minute
-- ~60 seconds
 - about a minute
-explanation: Generators typically take around 60 seconds, sometimes more on a bad first crank; the UPS covers exactly that window.
+explanation: Generators typically take around 60 seconds, sometimes more on a bad first crank; the UPS covers exactly
+  that window.
 archived: false

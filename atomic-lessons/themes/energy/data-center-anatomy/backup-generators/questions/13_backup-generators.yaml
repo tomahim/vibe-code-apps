@@ -8,11 +8,11 @@ choices:
 - id: e7412507-2743-4cea-b5f6-30be44f0f236
   text: HVO renewable diesel
 - id: 4b3e852b-8f05-403b-8acf-a9858304b234
-  text: Unleaded gasoline
+  text: Conventional gasoline
 - id: d23a2f27-78e5-412e-8e7f-cc68004aa78a
-  text: Coal slurry
+  text: Coal-water slurry
 - id: 2e1b3357-9356-435a-b341-c10a4ba3f07c
-  text: Ethanol E85
+  text: Hydrogen without conversion
 correct_choice_ids:
 - e7412507-2743-4cea-b5f6-30be44f0f236
 explanation: HVO is a drop-in renewable diesel; natural gas and hydrogen fuel cells require different equipment.

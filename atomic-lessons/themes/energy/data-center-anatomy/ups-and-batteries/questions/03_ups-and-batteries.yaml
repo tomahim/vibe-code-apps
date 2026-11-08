@@ -3,17 +3,18 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: What is the UPS's response time when grid power fails?
+prompt: In online double-conversion operation, what happens at battery takeover?
 choices:
-- id: af43206a-dc8b-47a6-8b40-74b32d1b57cc
-  text: Under 10 milliseconds
-- id: d1b50dff-7aa4-4afa-a8b0-340009ec15d0
-  text: About 60 seconds
-- id: f9c3e90b-ef31-47a5-86b7-2abf0700605d
-  text: About one minute
 - id: c566d2c3-520f-4272-a1b2-eb9337e5b523
-  text: Exactly one second
+  text: A one-hour battery-transfer break before generator start
+- id: d1b50dff-7aa4-4afa-a8b0-340009ec15d0
+  text: No need for batteries during a utility outage
+- id: af43206a-dc8b-47a6-8b40-74b32d1b57cc
+  text: No battery-transfer break in online double conversion
+- id: f9c3e90b-ef31-47a5-86b7-2abf0700605d
+  text: A one-minute battery-transfer break in online operation
 correct_choice_ids:
 - af43206a-dc8b-47a6-8b40-74b32d1b57cc
-explanation: Because the battery already feeds the DC bus, the transition is effectively seamless, quoted under 10 ms.
+explanation: The inverter keeps supplying the load from the DC bus without a battery-transfer break. Eco-mode and
+  bypass transitions have different timing specifications.
 archived: false

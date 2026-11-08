@@ -5,16 +5,16 @@ selection: single
 after_card_position: 8
 prompt: Which ordering traces power from the grid to a server correctly?
 choices:
-- id: 738f7d67-8b1f-492d-a156-fe7ade5aa9c7
-  text: Substation, transformer, ATS, UPS, busway, rack PDU, server PSU
 - id: d268e333-cc00-4c81-a4ef-bc362a5cc75c
-  text: UPS, ATS, transformer, server PSU, busway, substation
+  text: Substation, PSU, busway, ATS, rack PDU, transformer, UPS
 - id: 18c6a441-55bc-4b39-9f7f-7a92cf63524d
-  text: Busway, substation, server PSU, ATS, transformer, UPS
+  text: PSU, substation, transformer, UPS, rack PDU, ATS, busway
 - id: e44673d2-1748-4d9c-90cf-577808382f9d
-  text: Transformer, server PSU, substation, UPS, ATS, busway
+  text: UPS, busway, substation, rack PDU, transformer, ATS, PSU
+- id: 738f7d67-8b1f-492d-a156-fe7ade5aa9c7
+  text: Substation, transformer, ATS, UPS, busway, rack PDU, PSU
 correct_choice_ids:
 - 738f7d67-8b1f-492d-a156-fe7ade5aa9c7
-explanation: The chain descends from the substation through transformation, transfer switch, UPS, distribution, rack strips and finally the server's
-  own supply.
+explanation: The chain descends from the substation through transformation, transfer switch, UPS, distribution,
+  rack strips and finally the server's own supply.
 archived: false

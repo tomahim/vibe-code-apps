@@ -6,6 +6,5 @@ prompt: Name the topology in which every leaf switch connects to every spine swi
 accepted_answers:
 - spine-leaf
 - spine and leaf
-- spine leaf
 explanation: The spine-leaf fabric gives two-hop, multi-path connectivity between all racks.
 archived: false

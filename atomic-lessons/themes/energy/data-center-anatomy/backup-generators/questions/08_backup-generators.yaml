@@ -9,6 +9,5 @@ accepted_answers:
 - a minute
 - one minute
 - 1 minute
-- ~60 seconds
 explanation: Around 60 seconds, occasionally longer when an engine fails its first start attempt.
 archived: false

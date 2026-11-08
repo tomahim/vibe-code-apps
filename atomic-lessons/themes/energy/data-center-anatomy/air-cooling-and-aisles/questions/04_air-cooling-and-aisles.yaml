@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: Where do CRAC and CRAH units deliver their cold air in a classic design?
 choices:
-- id: f4dffa7d-ec2e-4ab7-916b-5208824e8bd6
-  text: Into a raised-floor plenum or overhead ducts feeding the cold aisles
-- id: 761f6eae-f3cd-4b15-91fc-6ecccb094eda
-  text: Directly into each server's rear exhaust
-- id: 091a6c43-b797-4841-8005-c2ec3f60de58
-  text: Onto the roof of the building
 - id: 68cda25e-60ee-44a6-a461-513ce356105e
-  text: Into the battery rooms first
+  text: A network tray or fiber bundle toward switches
+- id: 761f6eae-f3cd-4b15-91fc-6ecccb094eda
+  text: A battery string or DC bus toward inverters
+- id: 091a6c43-b797-4841-8005-c2ec3f60de58
+  text: A fuel tank or generator exhaust toward outdoors
+- id: f4dffa7d-ec2e-4ab7-916b-5208824e8bd6
+  text: A supply plenum or duct toward server intakes
 correct_choice_ids:
 - f4dffa7d-ec2e-4ab7-916b-5208824e8bd6
 explanation: Pressurized supply plenums deliver cold air evenly to the aisles that feed server intakes.

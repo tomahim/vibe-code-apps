@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: Roughly how many transistors does a modern chip contain?
 choices:
-- id: cd912789-6a4d-4837-96d3-9f70f4050520
-  text: Tens of billions
 - id: 190c9429-6b2d-41d4-873e-4bcf3f608458
   text: Tens of thousands
 - id: bc88af84-991b-44a3-862c-ff7fd25473ca
-  text: A few million
+  text: Hundreds of millions
 - id: 047d3f15-e0dd-4ba6-8396-e36bc498e65c
-  text: Several trillion
+  text: Hundreds of thousands
+- id: cd912789-6a4d-4837-96d3-9f70f4050520
+  text: Tens of billions
 correct_choice_ids:
 - cd912789-6a4d-4837-96d3-9f70f4050520
 explanation: Modern chips pack tens of billions of nanometer-scale transistors onto one piece of silicon.

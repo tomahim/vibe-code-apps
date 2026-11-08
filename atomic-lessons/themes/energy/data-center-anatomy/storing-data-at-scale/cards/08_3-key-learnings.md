@@ -5,6 +5,7 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. At fleet scale, drive failure is daily weather.** Design assumes failure: data is protected by RAID within systems and replication or erasure coding across machines and sites.
 
 **2. Data is tiered by temperature.** Hot data on flash, warm on disks, cold on dense archives or tape, automatically moved to balance cost, speed and energy.

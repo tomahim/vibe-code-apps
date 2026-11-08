@@ -3,17 +3,18 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: According to SemiAnalysis, how many US households match a 300 MW campus's consumption?
+prompt: Using an assumed average of 1.2 kW per home, a continuous 300 MW load equals about how many homes?
 choices:
-- id: e906130e-e0aa-4452-a71d-50d7265870e8
-  text: Roughly 200,000
-- id: f04fb841-46f6-4f7d-98a2-2a5c03da636f
-  text: Roughly 2,000
 - id: d8bded5a-0482-4567-a599-a29690376d42
-  text: Roughly 20,000
+  text: About 2,500,000 homes
 - id: d181a309-6ff8-4a88-9f99-72c91dc7af49
-  text: Roughly 2 million
+  text: About 25,000 homes
+- id: e906130e-e0aa-4452-a71d-50d7265870e8
+  text: About 250,000 homes
+- id: f04fb841-46f6-4f7d-98a2-2a5c03da636f
+  text: About 2,500 homes
 correct_choice_ids:
 - e906130e-e0aa-4452-a71d-50d7265870e8
-explanation: At ~1.2 kW average per home and higher datacenter utilization, about 200,000 households.
+explanation: 300,000 kW / 1.2 kW = 250,000 homes. This is an illustrative load comparison, not a measured household
+  statistic.
 archived: false

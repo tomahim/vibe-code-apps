@@ -6,14 +6,15 @@ after_card_position: 2
 prompt: Why is the cooling load of a data hall approximately equal to its IT power load?
 choices:
 - id: cdf32e7c-e21d-42dc-acbb-2402cb3ee407
-  text: Nearly every watt of electricity delivered to IT becomes heat in the room
-- id: e3b973b3-a20d-4cdf-ba87-6b34fa26daab
-  text: Servers store half their energy as data
+  text: Almost all IT electricity ultimately becomes heat
 - id: faa2176a-27a2-40bb-861c-cddfa9ee90cb
-  text: Cooling units generate their own heat by regulation
+  text: Almost all IT electricity leaves as visible light
 - id: 7aaefb6f-17db-4ef4-8a50-3ada5d8f0a3d
-  text: Heat leaks in through the walls faster than servers make it
+  text: Almost all IT electricity remains stored as bits
+- id: e3b973b3-a20d-4cdf-ba87-6b34fa26daab
+  text: Almost all IT electricity returns through network cables
 correct_choice_ids:
 - cdf32e7c-e21d-42dc-acbb-2402cb3ee407
-explanation: Computation converts electrical energy to heat with near-perfect efficiency; a 10 MW IT load is a 10 MW heater.
+explanation: Computation converts electrical energy to heat with near-perfect efficiency; a 10 MW IT load is a 10
+  MW heater.
 archived: false

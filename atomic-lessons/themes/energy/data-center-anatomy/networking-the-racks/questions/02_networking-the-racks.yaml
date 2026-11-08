@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: What network speeds do AI server adapters commonly run per port?
 choices:
+- id: d052b30e-8228-4086-95c3-5b2749956f07
+  text: 40 or 80 Mb/s
 - id: b3a1cd94-cb81-4e38-a50a-18e7b2b6fb45
   text: 400 or 800 Gb/s
-- id: d052b30e-8228-4086-95c3-5b2749956f07
-  text: 1 or 2 Gb/s
 - id: 985f7955-03e7-4245-9af4-1d491adf3597
-  text: 10 or 25 Mb/s
+  text: 4 or 8 Gb/s
 - id: 72756d5f-b3bd-41c2-b843-d5aa1a7ff3d0
-  text: 100 or 200 Tb/s
+  text: 4 or 8 Tb/s
 correct_choice_ids:
 - b3a1cd94-cb81-4e38-a50a-18e7b2b6fb45
 explanation: AI servers carry multiple 400/800 Gb/s ports; conventional servers typically run 10-100 Gb/s.

@@ -5,15 +5,16 @@ selection: single
 after_card_position: 4
 prompt: What makes a GB200 NVL72 fundamentally different from a conventional rack?
 choices:
-- id: 2725d089-c256-451d-821c-db8925666605
-  text: 'It is a single computer: 72 GPUs linked by a rack-wide NVLink fabric'
 - id: c61617e1-6a98-47b5-9406-a35da3e2220d
-  text: It holds 72 separate customers' servers in one frame
+  text: 72 tenants share one external internet port
+- id: 2725d089-c256-451d-821c-db8925666605
+  text: 72 GPUs share a rack-scale NVLink domain
 - id: 1caf5934-573b-44e0-977c-86053c767c25
-  text: It runs without any network connection
+  text: 72 racks share one low-voltage power strip
 - id: d84c9fa8-0648-401f-8231-20d63d292408
-  text: It uses half the power of a normal rack
+  text: 72 drives replace all compute and networking
 correct_choice_ids:
 - 2725d089-c256-451d-821c-db8925666605
-explanation: 'The NVL72 is a rack-scale system: 72 GPUs and 36 Grace CPUs behaving as one accelerator over copper NVLink.'
+explanation: GB200 NVL72 links 72 distinct GPUs and 36 Grace CPUs in one rack-scale system. The GPUs remain separate
+  processors in one high-bandwidth domain.
 archived: false

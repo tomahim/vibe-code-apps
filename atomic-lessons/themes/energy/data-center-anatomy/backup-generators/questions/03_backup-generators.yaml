@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: What carries the IT load during the first seconds of a grid outage?
 choices:
-- id: d9aaf6e2-bc00-41c7-99dc-b7e712988fd2
-  text: The UPS batteries
-- id: 60dae821-bba3-4a4f-8114-7613137de719
-  text: The generators
 - id: e8034ab9-ab75-47cd-b865-7384616de058
-  text: The utility's reserve feed
+  text: Data already stored on the disks
+- id: d9aaf6e2-bc00-41c7-99dc-b7e712988fd2
+  text: Stored energy in the UPS
 - id: 7f2fd5aa-96e6-4fb8-8e09-bb6670d57487
-  text: The servers' capacitors
+  text: Fuel already burning in the generator
+- id: 60dae821-bba3-4a4f-8114-7613137de719
+  text: Water already held in the chiller
 correct_choice_ids:
 - d9aaf6e2-bc00-41c7-99dc-b7e712988fd2
 explanation: The UPS bridges instantly from batteries while the generators spend about a minute starting.

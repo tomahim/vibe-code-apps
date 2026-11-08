@@ -3,17 +3,18 @@ position: 13
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: What happens to a failed server in a large fleet?
+prompt: In a resilient distributed fleet, how can software respond to one server failing?
 choices:
-- id: a2259ea8-10c6-451a-a6ef-0270bbea18d2
-  text: Its work migrates automatically and a technician swaps it later
 - id: 196fb94a-f039-4b5a-aa85-727efa89ea5b
-  text: The whole application shuts down until it is repaired
+  text: All storage must be erased before recovery
+- id: a2259ea8-10c6-451a-a6ef-0270bbea18d2
+  text: Software can recover work on another machine
 - id: 275a3ffc-e60c-4480-8131-0d68159654b8
-  text: It is repaired immediately on the spot, whatever it takes
+  text: Every server must stop until repairs finish
 - id: 7609955a-4685-46a0-a83a-798db3f6d681
-  text: The rack it sits in is powered down for safety
+  text: The utility must restore its grid connection
 correct_choice_ids:
 - a2259ea8-10c6-451a-a6ef-0270bbea18d2
-explanation: 'Fleet design assumes routine individual failures: workloads move elsewhere and hardware is replaced on a maintenance round.'
+explanation: Recovery on another machine requires application and platform support. It is not automatic for every
+  possible workload.
 archived: false

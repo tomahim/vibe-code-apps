@@ -5,7 +5,6 @@ after_card_position: 4
 prompt: What is the name of the family of techniques that spreads data with parity across the drives of one system?
 accepted_answers:
 - RAID
-- raid
 - redundant array of independent disks
 explanation: 'RAID: redundant array of independent disks, protecting data within a chassis.'
 archived: false

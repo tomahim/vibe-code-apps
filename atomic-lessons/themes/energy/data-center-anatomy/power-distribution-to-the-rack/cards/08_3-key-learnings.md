@@ -5,7 +5,8 @@ title: 3 key learnings
 archived: false
 ---
 
-**1. Downstream of the UPS, power forks:** one path feeds IT, the other cooling, and the ratio between them is the facility's efficiency in one number.
+
+**1. IT and mechanical loads need distinct power and continuity plans:** the IT branch commonly has a UPS, and some cooling auxiliaries need one too, while PUE compares all facility energy with IT energy.
 
 **2. Distribution is a protected river delta**: PDUs and busways break megawatts into metered, breakered circuits, with tap-offs and whips delivering the final meters to each rack.
 

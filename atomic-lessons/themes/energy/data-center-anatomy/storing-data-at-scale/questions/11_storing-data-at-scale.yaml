@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: Why does storage form a steady baseline in the facility's power profile?
 choices:
-- id: a77d8bcd-b61b-4d5a-af92-f3cfb7eb2326
-  text: Data must stay readable around the clock, so storage does not idle like compute
 - id: 80e00b3e-2ef7-46e2-9703-2248ca2c2d3b
-  text: Storage drives run at maximum speed continuously
+  text: All archived tapes need continuous spinning motors
+- id: a77d8bcd-b61b-4d5a-af92-f3cfb7eb2326
+  text: Keeping data available creates ongoing baseline demand
 - id: 26148266-ec85-44bc-b7c5-4977a49c0826
-  text: Storage racks have no power supplies of their own
+  text: Every drive draws its maximum power continuously
 - id: 8d4b9162-e802-47d1-99b5-6068f5b2720b
-  text: Tape libraries consume constant cooling
+  text: Storage chassis consume no energy except during writes
 correct_choice_ids:
 - a77d8bcd-b61b-4d5a-af92-f3cfb7eb2326
-explanation: 'Unlike compute, storage load is roughly constant: the bytes must always be available, so the drives stay powered.'
+explanation: Keeping online data readable creates baseline demand, although drive states, cache behavior and workload
+  still change actual draw.
 archived: false

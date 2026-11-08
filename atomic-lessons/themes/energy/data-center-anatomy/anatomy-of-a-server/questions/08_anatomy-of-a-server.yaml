@@ -5,7 +5,6 @@ after_card_position: 4
 prompt: What efficiency label marks the best server power supplies, wasting only a few percent as heat?
 accepted_answers:
 - 80 Plus Titanium
-- 80 plus titanium
 - Titanium
 - 80+ Titanium
 explanation: 80 Plus Titanium is the top efficiency tier for server PSUs.

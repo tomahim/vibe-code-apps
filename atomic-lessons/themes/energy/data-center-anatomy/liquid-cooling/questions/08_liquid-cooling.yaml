@@ -5,7 +5,6 @@ after_card_position: 4
 prompt: What kind of coupling lets technicians disconnect a liquid-cooled server without draining the loop?
 accepted_answers:
 - quick-disconnect
-- quick disconnect
 - quick-disconnect couplings
 - QD
 explanation: Drip-less quick-disconnect couplings allow hot swaps without draining, essential for serviceability.

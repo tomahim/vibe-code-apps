@@ -5,14 +5,14 @@ selection: single
 after_card_position: 4
 prompt: What is a whip in power distribution?
 choices:
-- id: 44031ba0-44a9-4c2f-88d7-2cbde5ab0e37
-  text: The flexible cable dropping from a tap-off box into the rack
-- id: be777d66-a36b-4156-bdbc-03f4b0e014b8
-  text: A tool for untangling network cables
 - id: b94f7e52-b366-416a-9886-13d89222ea45
-  text: The grounding strap on a technician's wrist
+  text: A safety label from a technician to a breaker
 - id: 3e5736a2-ca54-4e29-b92b-d8038653672d
-  text: A type of circuit breaker
+  text: A network fiber from a server to a switch
+- id: 44031ba0-44a9-4c2f-88d7-2cbde5ab0e37
+  text: A flexible feeder from distribution to a rack
+- id: be777d66-a36b-4156-bdbc-03f4b0e014b8
+  text: A coolant tube from a manifold to a chip
 correct_choice_ids:
 - 44031ba0-44a9-4c2f-88d7-2cbde5ab0e37
 explanation: Whips are the flexible final links from busway tap-offs or PDU circuits to the rack's power strips.

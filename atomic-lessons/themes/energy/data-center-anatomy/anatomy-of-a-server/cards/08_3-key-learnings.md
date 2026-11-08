@@ -5,6 +5,7 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. A server is compute, memory, storage, networking and power conversion in a standardized chassis**, sized in rack units and built for remote management and hot swaps.
 
 **2. The PSU and VRMs complete the electrical chain**, converting the rack's AC feed down to roughly 1 V DC at the silicon, with dual supplies on A and B feeds for redundancy.

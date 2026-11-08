@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: A transformer steps voltage down by half. What happens to the available current?
 choices:
-- id: 2f6f7f0f-255d-4735-83a5-a43d7db97d30
-  text: It doubles, minus small losses
 - id: bd12b444-774e-484b-b35a-7a85b094b945
-  text: It halves
+  text: Available current stays exactly unchanged
+- id: 2f6f7f0f-255d-4735-83a5-a43d7db97d30
+  text: Available current approximately doubles
 - id: 7db7f037-5cf0-46c3-92fe-54ae28e4f895
-  text: It stays the same
+  text: Available current approximately halves
 - id: 0dc6041e-78c0-4e52-b11a-8668d672a2c1
-  text: It drops to zero
+  text: Available current drops to zero
 correct_choice_ids:
 - 2f6f7f0f-255d-4735-83a5-a43d7db97d30
 explanation: 'Power is conserved: halving voltage doubles available current, minus a few percent of losses.'

@@ -5,6 +5,7 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. Water carries heat out of the building.** Air handlers warm a chilled-water loop; chillers move the heat to a condenser loop; cooling towers evaporate it into the atmosphere.
 
 **2. Cooling is a three-way trade-off among energy, water and climate:** towers save energy but consume water, dry coolers invert that, and WUE tracks the water side as PUE tracks the energy side.

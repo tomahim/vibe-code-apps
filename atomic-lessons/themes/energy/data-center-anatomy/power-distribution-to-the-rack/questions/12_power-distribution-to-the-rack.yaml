@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: What advantage do in-rack battery backup units offer, per SemiAnalysis?
 choices:
-- id: 08f386cd-94f0-4980-adb9-635e6e698d0e
-  text: They can halve total facility battery capacity versus A/B central UPS chains
-- id: a51dae75-6941-40a0-b152-ca7362c78bf2
-  text: They eliminate the need for generators
-- id: 1e29e56e-132d-4926-844e-522a77b47ff6
-  text: They cool the rack during outages
 - id: 1eec280d-f58b-4c34-a00a-81c05b960589
-  text: They remove the need for any fire engineering
+  text: No requirements for battery fire-safety engineering
+- id: 08f386cd-94f0-4980-adb9-635e6e698d0e
+  text: Potentially less duplicated battery capacity in that design
+- id: a51dae75-6941-40a0-b152-ca7362c78bf2
+  text: Complete removal of every possible IT failure mode
+- id: 1e29e56e-132d-4926-844e-522a77b47ff6
+  text: Unlimited running time without fuel or stored energy
 correct_choice_ids:
 - 08f386cd-94f0-4980-adb9-635e6e698d0e
-explanation: Distributed batteries replace duplicated central chains, but putting lithium in the rack demands advanced fire suppression.
+explanation: Distributed batteries replace duplicated central chains, but putting lithium in the rack demands advanced
+  fire suppression.
 archived: false

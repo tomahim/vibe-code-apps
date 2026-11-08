@@ -3,17 +3,18 @@ position: 5
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: According to Uptime Institute's 2025 survey, in what range do most rack power densities sit?
+prompt: In the 2025 survey reporting cited here, where did most reported maximum rack densities fall?
 choices:
-- id: 20954f6b-1c36-47ab-adb9-cdcbacf80213
-  text: 10 to 30 kW
 - id: 202e458e-9bcd-4a9e-9376-aeb3ded27485
   text: 1 to 3 kW
+- id: 20954f6b-1c36-47ab-adb9-cdcbacf80213
+  text: 10 to 30 kW
 - id: c10545c1-84a7-4f06-8679-1150b56d4e93
   text: 50 to 80 kW
 - id: 70051ec4-2238-41f8-b9a5-f3ddac32a5d7
   text: 100 to 200 kW
 correct_choice_ids:
 - 20954f6b-1c36-47ab-adb9-cdcbacf80213
-explanation: Most operators still run 10-30 kW racks; extreme densities above 30 kW are rising but not yet common.
+explanation: The reported maximum-density range was 10-30 kW for most respondents. Maximum rack density is not the
+  average density of every rack.
 archived: false

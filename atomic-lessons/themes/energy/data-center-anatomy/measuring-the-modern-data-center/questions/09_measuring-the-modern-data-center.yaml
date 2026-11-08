@@ -6,14 +6,15 @@ after_card_position: 6
 prompt: What is the real product of a retail colocation facility, per SemiAnalysis?
 choices:
 - id: 7a52bee8-1634-45d0-8656-062402609533
-  text: 'Interconnection: cheap network links among many tenants in one building'
-- id: 81cf6d32-5b52-40de-ac9b-09ca1f7e9100
-  text: Retail electricity resale to consumers
+  text: Interconnection among tenants alongside powered space
 - id: a5885bdb-46f4-4543-9cc0-75770984c3ec
-  text: Shopping-mall space near the racks
+  text: Office rental alongside general warehouse distribution
 - id: 163666c2-8acb-452d-a4c2-3afc84686cb5
-  text: Consumer device repair
+  text: Consumer repair alongside home-computer retail sales
+- id: 81cf6d32-5b52-40de-ac9b-09ca1f7e9100
+  text: Electricity resale alongside public utility generation
 correct_choice_ids:
 - 7a52bee8-1634-45d0-8656-062402609533
-explanation: Retail facilities are network ecosystems; their location and tenant density lower customers' connectivity costs.
+explanation: Retail facilities are network ecosystems; their location and tenant density lower customers' connectivity
+  costs.
 archived: false

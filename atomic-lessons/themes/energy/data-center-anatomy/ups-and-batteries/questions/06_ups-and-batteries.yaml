@@ -5,15 +5,16 @@ selection: single
 after_card_position: 4
 prompt: What is the role of the static bypass switch?
 choices:
-- id: f1f3085f-dc82-4c8c-beda-af8428e1609f
-  text: Route power around the UPS if it fails or needs maintenance
-- id: 32a59b4e-2dfc-485c-a648-47e46fc16d90
-  text: Boost battery voltage during outages
-- id: 543dacdb-f337-4f2a-9ada-441741612ac0
-  text: Disconnect the generators during storms
 - id: 6a31d5f9-8368-4990-8bc0-e6afaa4d7ede
-  text: Switch the servers to a lower clock speed
+  text: Provide additional battery energy during a long outage
+- id: 32a59b4e-2dfc-485c-a648-47e46fc16d90
+  text: Provide automatic replacement of a failed battery module
+- id: 543dacdb-f337-4f2a-9ada-441741612ac0
+  text: Provide mechanical isolation for all maintenance by itself
+- id: f1f3085f-dc82-4c8c-beda-af8428e1609f
+  text: Provide an alternate route around UPS conversion
 correct_choice_ids:
 - f1f3085f-dc82-4c8c-beda-af8428e1609f
-explanation: The static bypass keeps power flowing if the UPS itself is the problem, automatically or manually.
+explanation: Static bypass provides an alternate electrical path. Safe maintenance also requires the specified maintenance
+  bypass and isolation procedure.
 archived: false

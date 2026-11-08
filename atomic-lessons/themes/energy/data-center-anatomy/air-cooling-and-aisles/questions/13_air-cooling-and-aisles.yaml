@@ -5,15 +5,16 @@ selection: single
 after_card_position: 8
 prompt: Which sequence correctly orders the air-cooling chain?
 choices:
-- id: fb02114f-a9ce-45f0-90b6-a635611d95b8
-  text: Cooling unit, cold aisle, server intake, server exhaust, hot aisle, back to cooling unit
 - id: 5dfa0f5c-488a-4e8a-83f1-6b90f34352d3
-  text: Cold aisle, cooling unit, hot aisle, server intake, server exhaust
+  text: Cooling unit, hot aisle, exhaust, intake, cold aisle
+- id: fb02114f-a9ce-45f0-90b6-a635611d95b8
+  text: Cooling unit, cold aisle, intake, exhaust, hot aisle
 - id: aeaf2a1f-e5d4-4c28-aa7e-94267f1479a5
-  text: Server exhaust, cold aisle, cooling unit, hot aisle, server intake
+  text: Intake, cold aisle, exhaust, cooling unit, hot aisle
 - id: 4a6068a8-e05b-4c08-9f9e-5dfaaf90f24b
-  text: Hot aisle, server intake, cold aisle, server exhaust, cooling unit
+  text: Exhaust, cold aisle, cooling unit, hot aisle, intake
 correct_choice_ids:
 - fb02114f-a9ce-45f0-90b6-a635611d95b8
-explanation: 'Air circulates in a loop: chilled into the cold aisle, through the servers, collected hot, and returned to the cooling units.'
+explanation: 'Air circulates in a loop: chilled into the cold aisle, through the servers, collected hot, and returned
+  to the cooling units.'
 archived: false

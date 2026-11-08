@@ -5,6 +5,7 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. Generators turn a data center into its own power plant.** Diesel gensets around 2 MW each start within about a minute and can run for days on stored fuel.
 
 **2. The failover is a rehearsed choreography:** UPS bridges instantly, the ATS starts engines and transfers load, and N+1 spare generators cover the occasional failure to start.

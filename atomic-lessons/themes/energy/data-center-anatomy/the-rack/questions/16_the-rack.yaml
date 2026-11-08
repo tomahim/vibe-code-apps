@@ -6,7 +6,6 @@ prompt: What are the two independent power feeds into a rack conventionally call
 accepted_answers:
 - A side and B side
 - A and B
-- A-side and B-side
 - A feed and B feed
 explanation: Dual feeds are labeled A side and B side; either alone can power the entire rack.
 archived: false

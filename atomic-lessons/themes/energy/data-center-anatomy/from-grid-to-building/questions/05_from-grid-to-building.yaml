@@ -6,14 +6,15 @@ after_card_position: 4
 prompt: What is the role of the on-site substation?
 choices:
 - id: 3972ac56-8728-45b7-9750-492f3b9433d2
-  text: Step transmission voltage down to medium voltage for distribution around the campus
+  text: Step high voltage down for campus distribution
 - id: d51e05ed-16d3-452d-a0a2-236b96a1392b
-  text: Convert AC power into DC for the servers
+  text: Remove the heat produced inside server chips
 - id: 96960678-d265-4c88-adc5-c3464652140a
-  text: Store energy for short grid outages
+  text: Store enough energy for the generator-start interval
 - id: 858d02ff-3e64-4701-a899-fddc15b2c5bd
-  text: Cool the transformers with river water
+  text: Convert server DC into transmission-voltage AC
 correct_choice_ids:
 - 3972ac56-8728-45b7-9750-492f3b9433d2
-explanation: The substation receives high-voltage power and steps it down to 11-33 kV medium voltage that circulates around the site.
+explanation: The substation receives high-voltage power and steps it down to 11-33 kV medium voltage that circulates
+  around the site.
 archived: false

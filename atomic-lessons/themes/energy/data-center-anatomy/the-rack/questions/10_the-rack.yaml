@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: What does 'concurrently maintainable' mean for a data center?
 choices:
-- id: 96d304a0-ab61-4f33-a85f-406535149a58
-  text: Any single distribution path can be shut down for maintenance without interrupting IT load
-- id: 3b8ce20f-cfd9-42b0-8367-7d2dc8dbad54
-  text: Two technicians can work in the same aisle at the same time
-- id: 603f2b89-e14d-431d-83a4-e0dfb95b2c3e
-  text: Servers can be repaired while customers watch
 - id: 234e51de-c80e-4c2d-b4ca-75178b2e2cc9
-  text: The facility can run two maintenance contractors at once
+  text: All maintenance is postponed during operation
+- id: 3b8ce20f-cfd9-42b0-8367-7d2dc8dbad54
+  text: Two technicians must attend every maintenance task
+- id: 603f2b89-e14d-431d-83a4-e0dfb95b2c3e
+  text: Every server can run without cooling forever
+- id: 96d304a0-ab61-4f33-a85f-406535149a58
+  text: Maintenance can proceed without interrupting IT
 correct_choice_ids:
 - 96d304a0-ab61-4f33-a85f-406535149a58
-explanation: Concurrent maintainability, required of Rated 3 sites, means planned work on any component or path never interrupts computing.
+explanation: Concurrent maintainability, required of Tier III sites, means planned work on any component or path
+  never interrupts computing.
 archived: false

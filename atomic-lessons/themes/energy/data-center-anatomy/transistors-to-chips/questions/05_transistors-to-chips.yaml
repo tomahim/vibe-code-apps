@@ -6,14 +6,15 @@ after_card_position: 4
 prompt: What does a chip's Thermal Design Power (TDP) tell the facility engineer?
 choices:
 - id: 534b89d7-2d81-4f03-92d2-d9f3537e4968
-  text: The sustained heat output the cooling system must remove
+  text: A vendor-defined thermal design rating
 - id: a5ade884-1e1b-475b-b1c6-6d77ec0910e1
-  text: The chip's peak clock speed in gigahertz
+  text: A measure of the supply voltage
 - id: 2f6a952d-e45f-4f99-a70e-2527712eb968
-  text: The maximum voltage the package can survive
+  text: A count of the chip's transistors
 - id: efe00411-0bf5-483b-a9b1-5d727d5d7680
-  text: The number of transistors on the die
+  text: A direct measure of constant draw
 correct_choice_ids:
 - 534b89d7-2d81-4f03-92d2-d9f3537e4968
-explanation: TDP is the sustained power the cooling solution must be designed to carry away, and it sums up from chip to rack to hall.
+explanation: TDP is a vendor-defined thermal design rating. Actual system power depends on workload and supporting
+  components as well.
 archived: false

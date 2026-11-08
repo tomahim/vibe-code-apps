@@ -5,6 +5,5 @@ after_card_position: 8
 prompt: 'Fill in the blank: traffic between servers inside a data center is called ______-west traffic.'
 accepted_answers:
 - east
-- East
 explanation: East-west is server-to-server traffic inside the facility; north-south is traffic to and from users.
 archived: false

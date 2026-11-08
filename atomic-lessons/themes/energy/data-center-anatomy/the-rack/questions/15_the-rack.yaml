@@ -2,9 +2,9 @@ id: 27953cf2-4e46-4fd2-9d43-6b319171b200
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: What is the standard width of a server rack, in inches? (number only)
+prompt: What is the common equipment mounting width for a standard server rack, in inches? (number only)
 accepted_answers:
 - '19'
 - 19 inches
-explanation: The 19-inch rack standard dates back to 1920s railway relay equipment.
+explanation: The common mounting convention is 19 inches, not the overall external cabinet width.
 archived: false

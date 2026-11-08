@@ -3,18 +3,18 @@ position: 4
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: Why is power distributed inside a data center building at medium voltage such as 11 kV rather than 230 V?
+prompt: As electricity approaches processors, what generally happens to its voltage?
 choices:
-- id: b3d3efef-0196-44f1-b76f-75b043578103
-  text: Lower current means less heat lost in the building's cabling
 - id: 4a415562-4c04-48fb-90a6-262a8c4a22ca
-  text: Medium voltage is required by server power supplies
+  text: Voltage stays constant to the chip
 - id: 455f9e6d-8ac9-4795-b2c8-240f51f80b3e
-  text: Transformers only work above 10 kV
+  text: Voltage is increased near equipment
 - id: 69ec8107-a5f2-4250-b8fa-41d72cb0d321
-  text: Batteries can only be charged at medium voltage
+  text: Voltage becomes zero at the rack
+- id: b3d3efef-0196-44f1-b76f-75b043578103
+  text: Voltage is reduced near equipment
 correct_choice_ids:
 - b3d3efef-0196-44f1-b76f-75b043578103
-explanation: Higher voltage means lower current for the same power, and heat loss grows with the square of current, so medium voltage keeps distribution
-  losses down.
+explanation: Transmission and medium-voltage feeds are stepped down near the equipment, eventually reaching roughly
+  1 V at the processor core.
 archived: false

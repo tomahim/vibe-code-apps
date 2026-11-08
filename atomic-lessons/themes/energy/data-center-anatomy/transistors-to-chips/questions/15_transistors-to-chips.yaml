@@ -2,10 +2,10 @@ id: f966fc97-9cfc-4a03-89da-35e423261683
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: What is the name of NVIDIA's 2022-era GPU, rated at 700 W, that powered the first wave of large AI models?
+prompt: What is the name of NVIDIA's 2022-era GPU, rated at 700 W, that powered the generative AI expansion?
 accepted_answers:
 - H100
 - the H100
 - NVIDIA H100
-explanation: The H100 (Hopper generation) draws 700 W in SXM form and was the workhorse of the generative AI boom.
+explanation: The H100 (Hopper generation) has a configurable maximum TDP of 700 W in SXM form and was the workhorse of the generative AI boom.
 archived: false

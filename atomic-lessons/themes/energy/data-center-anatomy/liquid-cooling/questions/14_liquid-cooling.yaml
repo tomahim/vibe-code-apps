@@ -3,17 +3,18 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: What is the realistic adoption sequence for liquid cooling in existing facilities?
+prompt: How should the rear-door to direct-to-chip retrofit sequence be interpreted?
 choices:
-- id: 097c4257-ea55-4ceb-99f3-59d6572c37fe
-  text: Rear-door exchangers, then direct-to-chip rows, then purpose-built liquid halls
 - id: 9c502a1a-5dd9-4def-a999-c2d12b0deec0
-  text: Full immersion on day one, always
+  text: A fixed legal sequence required for every existing facility
+- id: 097c4257-ea55-4ceb-99f3-59d6572c37fe
+  text: A possible route, not a mandatory universal sequence
 - id: 155e4ed6-af30-4dda-b5f6-f224cd55a378
-  text: Remove all cooling, then add liquid
+  text: A complete removal of air cooling before any retrofit begins
 - id: 4f32d301-7585-4c54-a715-83513526f1f1
-  text: Chillers first, then racks, then servers
+  text: A fixed technical sequence independent of power and structure
 correct_choice_ids:
 - 097c4257-ea55-4ceb-99f3-59d6572c37fe
-explanation: 'Most sites retrofit gradually: rear doors first, direct-to-chip for new high-density rows next, dedicated liquid halls last.'
+explanation: It is one possible retrofit route. Each site must assess power, structure, water connections and equipment
+  compatibility, rather than follow a mandatory sequence.
 archived: false

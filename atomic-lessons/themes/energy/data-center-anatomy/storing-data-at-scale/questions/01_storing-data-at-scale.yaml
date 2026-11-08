@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: With 100,000 drives at a 1% annual failure rate, about how many drives fail per day?
 choices:
-- id: ff42646b-b222-4071-aeb9-ca6581bbe59d
-  text: About three
 - id: 9d926243-f09d-4f5e-b9bf-c3a581682a04
-  text: About one per week
+  text: About thirty per day
+- id: ff42646b-b222-4071-aeb9-ca6581bbe59d
+  text: About three per day
 - id: 0f16398a-31ce-4fd2-bd82-e87816ddbb94
-  text: About one per month
+  text: About thirty per year
 - id: a2e9bd88-b780-430c-b8f7-5dc4c7bab172
-  text: About thirty
+  text: About three per month
 correct_choice_ids:
 - ff42646b-b222-4071-aeb9-ca6581bbe59d
 explanation: '100,000 x 1% = 1,000 failures per year, roughly three per day: routine, not an emergency.'

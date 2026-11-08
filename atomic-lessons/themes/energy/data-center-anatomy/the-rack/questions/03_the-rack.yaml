@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: What does a top-of-rack (ToR) switch do?
 choices:
-- id: d0d83270-bf08-44d7-9796-4ecc1ca7fb2d
-  text: Aggregates the rack's server links into a few high-speed uplinks
-- id: 6dfd6454-7347-4d8e-800f-a3486624d2cb
-  text: Converts AC power to DC for the rack
-- id: 1f688e18-8e81-44ee-99f2-bab61384427a
-  text: Measures the rack's temperature
 - id: 918170fe-f4bc-49e0-a37f-bd6a55fb9b80
-  text: Filters dust from the cold aisle air
+  text: Convert incoming AC into low-voltage DC
+- id: 6dfd6454-7347-4d8e-800f-a3486624d2cb
+  text: Move chilled water into the cooling loop
+- id: 1f688e18-8e81-44ee-99f2-bab61384427a
+  text: Aggregate server cords into electrical feeds
+- id: d0d83270-bf08-44d7-9796-4ecc1ca7fb2d
+  text: Aggregate server links into network uplinks
 correct_choice_ids:
 - d0d83270-bf08-44d7-9796-4ecc1ca7fb2d
 explanation: The ToR switch connects every server in the rack and uplinks the whole rack to the network spine.

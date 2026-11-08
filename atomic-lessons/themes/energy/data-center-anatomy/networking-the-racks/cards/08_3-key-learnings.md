@@ -5,6 +5,7 @@ title: 3 key learnings
 archived: false
 ---
 
+
 **1. The network is the backplane of one building-sized computer**, and its quality directly sets how well expensive compute is utilized.
 
 **2. Spine-leaf topology gives every rack equal, redundant, two-hop connectivity**, matching the east-west, server-to-server traffic that dominates modern workloads.

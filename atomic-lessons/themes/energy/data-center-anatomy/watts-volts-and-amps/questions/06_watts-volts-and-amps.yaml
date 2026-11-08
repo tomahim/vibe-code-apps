@@ -5,14 +5,14 @@ selection: single
 after_card_position: 4
 prompt: If the current in a cable doubles, what happens to the power lost as heat in that cable?
 choices:
-- id: 91dcfaa9-560e-4a7c-ad40-55f744641aa2
-  text: It quadruples
-- id: 83529e22-7e5b-434e-bbc3-e756fcaa60ab
-  text: It doubles
 - id: f6e5ef72-a14b-4205-b693-17edae81777f
-  text: It stays the same
+  text: It remains the same size
 - id: 4a2b72ce-0ab0-406b-98a4-91c2bea9286c
-  text: It halves
+  text: It becomes two times larger
+- id: 91dcfaa9-560e-4a7c-ad40-55f744641aa2
+  text: It becomes four times larger
+- id: 83529e22-7e5b-434e-bbc3-e756fcaa60ab
+  text: It becomes half as large
 correct_choice_ids:
 - 91dcfaa9-560e-4a7c-ad40-55f744641aa2
 explanation: Losses grow with the square of current (P = I^2 x R), so doubling current quadruples the loss.

@@ -6,14 +6,15 @@ after_card_position: 6
 prompt: How does SemiAnalysis characterize power utilization for AI training versus typical cloud workloads?
 choices:
 - id: a1891e4e-1e85-4f1a-b5bc-b4c3b9041074
-  text: Above 80% for AI training, 50-60% for cloud
+  text: AI above 80%; cloud around 50-60%
 - id: 12a73ac0-5fd8-4816-a5c9-2fdbeb443f34
-  text: Below 20% for both
+  text: AI around 50-60%; cloud above 80%
 - id: d17fa6ae-67c5-45db-951d-99161fea6fde
-  text: Exactly 100% for AI training, 5% for cloud
+  text: AI below 20%; cloud around 50-60%
 - id: a3e4174d-14a3-49d5-91bf-446a2ae2138a
-  text: 50-60% for AI training, above 80% for cloud
+  text: AI exactly 100%; cloud exactly 100%
 correct_choice_ids:
 - a1891e4e-1e85-4f1a-b5bc-b4c3b9041074
-explanation: AI training keeps clusters above 80% utilization; cloud workloads average 50-60%; enterprises often run below 50%.
+explanation: AI training keeps clusters above 80% utilization; cloud workloads average 50-60%; enterprises often
+  run below 50%.
 archived: false

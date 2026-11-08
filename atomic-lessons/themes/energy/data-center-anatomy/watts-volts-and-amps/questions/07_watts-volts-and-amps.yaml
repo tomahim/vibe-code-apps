@@ -7,5 +7,5 @@ accepted_answers:
 - watt
 - watts
 - W
-explanation: Power is measured in watts (W), equal to volts times amps.
+explanation: Power is measured in watts (W). For DC, watts equal volts times amps; real AC power also depends on power factor and phase arrangement.
 archived: false

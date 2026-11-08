@@ -5,14 +5,14 @@ selection: single
 after_card_position: 2
 prompt: Why are large power transformers currently a constraint on data center construction?
 choices:
-- id: abeb4c30-511d-4e2a-8276-91a6d9641644
-  text: They are built to order and lead times have stretched to years under AI-driven demand
-- id: aa164f6a-344e-436f-86dc-20535120b289
-  text: They are banned near residential areas
 - id: 6095a487-3154-4d17-8c47-a7a8c74848ff
-  text: They require rare elements found only in space
+  text: Data-center transformers cannot use existing road transport
 - id: b4d13805-29c0-4ecd-a3e1-fe2d3b019010
-  text: They cannot be transported by road
+  text: Standard servers require one transformer for every chip
+- id: abeb4c30-511d-4e2a-8276-91a6d9641644
+  text: Custom manufacturing and high demand stretch lead times
+- id: aa164f6a-344e-436f-86dc-20535120b289
+  text: Power transformers must be replaced after every outage
 correct_choice_ids:
 - abeb4c30-511d-4e2a-8276-91a6d9641644
 explanation: Transformer lead times have stretched dramatically; projects are now sequenced around equipment deliveries.

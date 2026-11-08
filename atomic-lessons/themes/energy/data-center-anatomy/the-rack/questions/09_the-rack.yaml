@@ -6,14 +6,15 @@ after_card_position: 6
 prompt: Why are racks arranged in facing rows with shared aisles?
 choices:
 - id: 85e26f8a-0bd1-4b0e-afdf-669b9e0a4831
-  text: So intakes share a cold aisle and exhausts share a hot aisle
-- id: dc0122df-77c3-4704-aadd-63d22a26e77b
-  text: So technicians can reach two racks at once
+  text: Separate intake air from hot exhaust
 - id: 1b6d11a2-c400-4245-af67-db879c842735
-  text: To reduce the number of network switches needed
+  text: Reduce the voltage delivered to each server
 - id: 1c7bfd88-67c1-4aba-bce3-2237a08f9026
-  text: To fit more racks under each fire sprinkler
+  text: Combine intake air with hot exhaust
+- id: dc0122df-77c3-4704-aadd-63d22a26e77b
+  text: Remove all fans from the server chassis
 correct_choice_ids:
 - 85e26f8a-0bd1-4b0e-afdf-669b9e0a4831
-explanation: Facing rows concentrate cold supply air in one aisle and hot exhaust in another, the basis of efficient air cooling.
+explanation: Facing rows concentrate cold supply air in one aisle and hot exhaust in another, the basis of efficient
+  air cooling.
 archived: false

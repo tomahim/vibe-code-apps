@@ -6,13 +6,13 @@ after_card_position: 4
 prompt: Why are generator loads applied in steps after start?
 choices:
 - id: 25dee42a-66ea-468a-8611-56c1d3cb9aca
-  text: A sudden megawatt demand could stall the engine
+  text: Avoid a load step beyond the engine's response
 - id: c6eb8877-9a20-4fb7-b210-a245765bf590
-  text: Step loading saves diesel fuel
+  text: Make the generator run at zero frequency
 - id: ece9a76f-5125-467d-a50e-8d946e420ce6
-  text: Batteries can only absorb gradual charging
+  text: Make every server start a new network address
 - id: 59fd279e-26e9-4e84-98c2-598668bb1587
-  text: Regulations limit ramp speed
+  text: Keep the alternator disconnected permanently from loads
 correct_choice_ids:
 - 25dee42a-66ea-468a-8611-56c1d3cb9aca
 explanation: Engines must stabilize speed, voltage and frequency, then accept load progressively to avoid stalling.

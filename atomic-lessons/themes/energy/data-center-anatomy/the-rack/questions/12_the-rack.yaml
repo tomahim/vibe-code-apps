@@ -3,17 +3,17 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: Why do operators fit out electrical capacity in blocks as demand signs up?
+prompt: How much IT power do twelve racks drawing 20 kW each require?
 choices:
 - id: 0b5816c6-ef00-422b-a99a-663a824398cc
-  text: The electrical plant costs money per rack whether or not it is used
-- id: 25b081f2-e247-4006-803d-c5fa6c30e5e8
-  text: Regulations require phased construction permits
-- id: 23001513-09a3-4428-a2be-09fb809c2f34
-  text: Transformers expire if installed too early
+  text: Twelve 20 kW racks need 240 kW
 - id: c0f6d7e0-5dbb-43d6-82ea-27b40554c661
-  text: Customers prefer halls that look unfinished
+  text: Twelve 20 kW racks need 120 kW
+- id: 25b081f2-e247-4006-803d-c5fa6c30e5e8
+  text: Twelve 20 kW racks need 2,400 kW
+- id: 23001513-09a3-4428-a2be-09fb809c2f34
+  text: Twelve 20 kW racks need 24 kW
 correct_choice_ids:
 - 0b5816c6-ef00-422b-a99a-663a824398cc
-explanation: Over-building capacity strands capital, so operators install transformers and busway in phases matched to committed demand.
+explanation: 12 x 20 kW = 240 kW of IT power. Facility overhead and design margin are separate from this arithmetic.
 archived: false

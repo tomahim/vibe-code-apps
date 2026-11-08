@@ -5,14 +5,14 @@ selection: single
 after_card_position: 6
 prompt: 'A 300 MW campus at high utilization consumes annually on the order of:'
 choices:
-- id: 1acbf167-44dc-4e9e-bba2-b9ae6764f3ca
-  text: Well over 1 TWh, comparable to a dedicated power plant's output
 - id: 73f83182-0439-457a-a50d-a031da7377a0
-  text: About 300 kWh, like a large house
+  text: About 300 kWh at high utilization
+- id: 1acbf167-44dc-4e9e-bba2-b9ae6764f3ca
+  text: Well over 1 TWh at high utilization
 - id: f44f27d6-3582-49a5-bd9a-022bd1a68d04
-  text: About 3 GWh, like a village
+  text: About 3 GWh at high utilization
 - id: 1253c99f-8cad-4f20-88c2-a5d24022d35e
-  text: About 1 MWh, like a single server
+  text: About 1 MWh at high utilization
 correct_choice_ids:
 - 1acbf167-44dc-4e9e-bba2-b9ae6764f3ca
 explanation: 300 MW x 8,760 h at high utilization exceeds a terawatt-hour per year, the output of a real power plant.

@@ -6,13 +6,13 @@ after_card_position: 8
 prompt: What decides where power comes from during a grid outage?
 choices:
 - id: be73b697-b50a-4d83-8c91-076caadfe308
-  text: The automatic transfer switch (ATS)
-- id: da0e9e24-7a08-488b-a84b-6c59e8eb6292
-  text: The server power supply
+  text: Automatic transfer switch
 - id: 8dbe7656-d7ef-4a46-90a6-daa19ade5559
-  text: The network operations team
+  text: Chiller expansion valve
 - id: 86cefc1a-44f8-4518-a7e9-ea1373501d0c
-  text: The utility's control room
+  text: Server network controller
+- id: da0e9e24-7a08-488b-a84b-6c59e8eb6292
+  text: Rack power converter
 correct_choice_ids:
 - be73b697-b50a-4d83-8c91-076caadfe308
 explanation: The ATS automatically moves the load from utility power to the generators when utility power fails.

@@ -6,13 +6,13 @@ after_card_position: 2
 prompt: Why do large clusters prefer copper connections where physics allows?
 choices:
 - id: 69c67cd4-31f2-47fe-bbac-bf354c5acce4
-  text: Copper needs no optical conversion, saving power and cost at every end
+  text: Avoid optical conversion over short distances
 - id: 4b3cb558-c129-4ef2-b80f-c36d8a03a609
-  text: Copper cables are immune to all electrical interference
+  text: Provide unlimited bandwidth without signal electronics
 - id: cfafb24b-1614-4f72-b7f0-eba124b563e6
-  text: Copper is required by the NVLink standard
+  text: Remove all signal losses over long distances
 - id: 70c8c456-33bf-43fb-b2ba-3922a9c8c193
-  text: Fiber cannot be manufactured in long lengths
+  text: Eliminate electrical interference over any distance
 correct_choice_ids:
 - 69c67cd4-31f2-47fe-bbac-bf354c5acce4
 explanation: Optical transceivers add watts and cost per end; copper reaches a few meters at high speed with neither.

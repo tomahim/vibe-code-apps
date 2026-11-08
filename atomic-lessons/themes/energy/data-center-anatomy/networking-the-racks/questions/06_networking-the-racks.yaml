@@ -5,15 +5,16 @@ selection: single
 after_card_position: 4
 prompt: What is the difference between scale-up and scale-out networking?
 choices:
-- id: 4a8a870e-c4b2-40c8-af00-e935c8ebdbcf
-  text: Scale-up links GPUs within a rack at extreme speed; scale-out links racks across the facility
 - id: dd25b524-6592-4713-bc89-be9d14c1457a
-  text: Scale-up means adding floors to the building; scale-out means renting adjacent land
+  text: Scale-up adds storage; scale-out adds cooling
+- id: 4a8a870e-c4b2-40c8-af00-e935c8ebdbcf
+  text: Scale-up connects GPUs; scale-out connects systems
 - id: b3432f0b-ac6b-4af6-bbc0-5f8eb6ae161c
-  text: Scale-up uses only fiber; scale-out uses only copper
+  text: Scale-up uses software; scale-out uses no software
 - id: 8171170d-4cb4-4086-9be5-ea44d8dc2340
-  text: Scale-up is for storage; scale-out is for compute
+  text: Scale-up changes voltage; scale-out changes frequency
 correct_choice_ids:
 - 4a8a870e-c4b2-40c8-af00-e935c8ebdbcf
-explanation: Scale-up fabrics like NVLink make one rack act as a giant GPU; scale-out networks like InfiniBand or RoCE join racks into clusters.
+explanation: Scale-up fabrics like NVLink make one rack act as a giant GPU; scale-out networks like InfiniBand or
+  RoCE join racks into clusters.
 archived: false

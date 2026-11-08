@@ -3,17 +3,18 @@ position: 11
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: What does a gigawatt of contracted grid capacity represent?
+prompt: What does contracted grid capacity specify?
 choices:
-- id: 10205ce4-ccdc-4c2c-b609-66c24f9a6f2d
-  text: A utility's promise to deliver that power, at that reliability, from a set date
-- id: afc72f50-d9f0-4de0-b47b-932066a0009b
-  text: A payment for electricity already consumed
 - id: c6adbd14-1aac-425d-a681-62aae658538f
-  text: A tax credit for renewable generation
+  text: Renewable generation owned by the data center
 - id: 0184f507-49f5-4cae-a393-559e3287b9a3
-  text: The peak output of the backup generators
+  text: Energy already consumed during the previous year
+- id: 10205ce4-ccdc-4c2c-b609-66c24f9a6f2d
+  text: Capacity subject to the agreement's conditions
+- id: afc72f50-d9f0-4de0-b47b-932066a0009b
+  text: Guaranteed operation without any possible grid outage
 correct_choice_ids:
 - 10205ce4-ccdc-4c2c-b609-66c24f9a6f2d
-explanation: Contracted capacity is a forward promise of power delivery, negotiated years ahead and increasingly contested.
+explanation: The agreement sets capacity and connection conditions. Announced capacity may still depend on upgrades,
+  approvals and delivery dates.
 archived: false

@@ -3,18 +3,18 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Why is liquid cooling a requirement rather than an option for GB200-class systems?
+prompt: Why must a facility planning for GB200 NVL72 provide liquid-cooling infrastructure?
 choices:
-- id: 3bc09db6-26fe-4c44-ae64-86abab3911a2
-  text: Air can no longer remove heat at those rack densities
-- id: f717069a-9a26-43ff-904b-3bac734be123
-  text: Liquid is cheaper than air at any scale
 - id: 73212e7e-7691-4e3c-819f-081b7c163b0a
-  text: NVIDIA wanted quieter server rooms
+  text: Its rack rejects heat through network links
+- id: 3bc09db6-26fe-4c44-ae64-86abab3911a2
+  text: Its rack is engineered for liquid cooling
 - id: 906c9dcc-8953-4526-9453-7ef1d8ba1714
-  text: Regulations ban fans above 50 kW
+  text: Its rack removes heat through wiring
+- id: f717069a-9a26-43ff-904b-3bac734be123
+  text: Its rack stores heat in battery modules
 correct_choice_ids:
 - 3bc09db6-26fe-4c44-ae64-86abab3911a2
-explanation: At 120 kW per rack and beyond, air cooling cannot carry the heat away; SemiAnalysis notes the GB200 family requires direct-to-chip
-  liquid cooling.
+explanation: NVIDIA specifies GB200 NVL72 as a liquid-cooled rack-scale system. This is a product requirement, not
+  a universal air-cooling kilowatt ceiling.
 archived: false

@@ -5,15 +5,16 @@ selection: single
 after_card_position: 6
 prompt: What change did Meta's Open Compute Project make to rack power?
 choices:
-- id: fa406f7b-252c-4b3c-8631-a1358681166c
-  text: AC-DC conversion moved to central power shelves feeding servers DC over a busbar
 - id: 47049aad-bbcf-4a35-bbe2-83e718dba65d
-  text: Servers were given three power supplies each
+  text: Shared network switches supply the rack's cooling water
 - id: 9f6e256c-2a15-4f34-bdf3-6d50e9c7dbb3
-  text: The rack runs entirely on batteries at all times
+  text: Shared cooling towers supply the rack's processor voltage
+- id: fa406f7b-252c-4b3c-8631-a1358681166c
+  text: Shared power shelves supply a rack DC busbar
 - id: e592b1d1-8e95-4514-86fc-fe391c8c4def
-  text: Racks connect directly to medium voltage
+  text: Shared storage drives supply the rack's utility connection
 correct_choice_ids:
 - fa406f7b-252c-4b3c-8631-a1358681166c
-explanation: OCP power shelves convert once per rack and feed servers DC via a shared busbar, removing per-server rectifiers.
+explanation: OCP power shelves convert once per rack and feed servers DC via a shared busbar, removing per-server
+  rectifiers.
 archived: false

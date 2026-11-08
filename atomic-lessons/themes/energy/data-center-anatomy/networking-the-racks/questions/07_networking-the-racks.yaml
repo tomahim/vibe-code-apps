@@ -5,7 +5,6 @@ after_card_position: 4
 prompt: What is NVIDIA's rack-scale GPU interconnect fabric called?
 accepted_answers:
 - NVLink
-- nvlink
 - NV Link
 explanation: NVLink connects the 72 GPUs of a GB200 rack into one accelerator, far faster than any facility network.
 archived: false

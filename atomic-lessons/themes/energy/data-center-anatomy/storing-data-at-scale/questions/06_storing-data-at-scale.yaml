@@ -3,16 +3,17 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: A system stores data as 12 data fragments plus 4 parity fragments, any 12 of 16 reconstructing the whole. What is this technique?
+prompt: A system stores data as 12 data fragments plus 4 parity fragments, any 12 of 16 reconstructing the whole.
+  What is this technique?
 choices:
 - id: 33006fe8-640e-4ecd-a639-6b0c4bdfd92e
   text: Erasure coding
 - id: 3a9e05c0-c7d1-42a1-a1f7-d8ba6c3ad843
   text: Triple replication
 - id: cb50464f-d83a-4b02-8a6f-7bf7634777da
-  text: Disk mirroring
+  text: Simple striping
 - id: d682d9ad-a51d-4b08-816e-2c0ac69120d6
-  text: Tiering
+  text: Storage tiering
 correct_choice_ids:
 - 33006fe8-640e-4ecd-a639-6b0c4bdfd92e
 explanation: Erasure coding tolerates multiple simultaneous losses while using far less space than full copies.

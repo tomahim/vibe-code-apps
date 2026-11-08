@@ -3,17 +3,18 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: According to SemiAnalysis, what power utilization rate is typical for AI training workloads?
+prompt: What provisioned-power utilization does SemiAnalysis cite for AI training in its example?
 choices:
-- id: 07a808b7-bb4c-450a-9202-fe3d5eafb75d
-  text: Above 80%
 - id: 76f28fc4-0d21-4f74-8a41-3f3bcd6cdef1
-  text: Below 10%
+  text: Below 20% in the cited example
 - id: 8605ae54-7d7b-4f85-85f5-908c79fdc6c4
-  text: Exactly 50%
+  text: Exactly 100% for every AI workload
 - id: 89ddcb06-b3c0-4c37-b4a9-a6ecf9727c00
-  text: Around 25%
+  text: About 40% in the cited example
+- id: 07a808b7-bb4c-450a-9202-fe3d5eafb75d
+  text: Above 80% in the cited example
 correct_choice_ids:
 - 07a808b7-bb4c-450a-9202-fe3d5eafb75d
-explanation: AI training keeps expensive GPUs busy at north of 80% utilization, versus 50-60% for typical cloud workloads.
+explanation: The article cites above 80% for AI training. Provisioned-power utilization is not the same as useful
+  GPU compute utilization, and varies by deployment.
 archived: false
