@@ -1,0 +1,20 @@
+id: cc48a689-e79d-4e3a-8e41-f050cfcbd646
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Ce même dm3 de plomb en eau de mer a un poids apparent :'
+choices:
+- id: 498f19eb-5321-4acd-a51e-93b67cc14b02
+  text: Légèrement inférieur, la poussée d'Archimède y étant plus forte.
+- id: 64a3c39d-346c-44b0-baaf-73e1a5bc6294
+  text: Légèrement supérieur, l'eau de mer portant moins le plomb.
+- id: 622afe85-c28f-4958-876c-603059e4d21a
+  text: Strictement identique, le plomb n'étant pas compressible.
+- id: 60484208-b0a1-40a1-883a-b38fb64e3683
+  text: Double, la densité de la mer étant deux fois celle du plomb.
+correct_choice_ids:
+- 498f19eb-5321-4acd-a51e-93b67cc14b02
+explanation: 'En eau de mer, la poussée d''Archimède est plus forte : le poids apparent
+  du plomb y est légèrement inférieur.'
+archived: false

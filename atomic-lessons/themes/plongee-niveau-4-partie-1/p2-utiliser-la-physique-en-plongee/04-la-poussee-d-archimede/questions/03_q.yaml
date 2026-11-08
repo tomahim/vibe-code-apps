@@ -1,0 +1,20 @@
+id: 21e2dfad-7f93-4b70-8c9d-0db1fe244332
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À quoi est égale l'intensité de la poussée d'Archimède ?
+choices:
+- id: ad3123ff-562b-47f6-ad6f-410103648fa9
+  text: Au poids du volume d'eau déplacé par le plongeur et son équipement.
+- id: 2b645df7-f6c4-4d66-9412-f35c7541aa62
+  text: Au poids réel du plongeur et de son équipement réunis.
+- id: 7c53c7f3-713d-4f04-913b-49f1adf04811
+  text: Au volume de la bouteille multiplié par sa pression de service.
+- id: 63d84e37-5ea6-4234-9fa8-6d0605181b27
+  text: À la densité du plongeur multipliée par sa profondeur d'évolution.
+correct_choice_ids:
+- ad3123ff-562b-47f6-ad6f-410103648fa9
+explanation: La poussée d'Archimède est une force dont l'intensité est égale au poids
+  du volume d'eau déplacé.
+archived: false

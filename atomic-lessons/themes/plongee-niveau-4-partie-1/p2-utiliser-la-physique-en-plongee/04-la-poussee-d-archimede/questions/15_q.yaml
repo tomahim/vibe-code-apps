@@ -1,0 +1,12 @@
+id: a3b1afcc-2e19-49df-b17a-ab79001d423a
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: Comment s'appelle la résultante du poids réel et de la poussée d'Archimède
+  (deux mots) ?
+accepted_answers:
+- poids apparent
+- le poids apparent
+explanation: Poids apparent = poids réel - poussée d'Archimède ; les plongeurs cherchent
+  un poids apparent nul.
+archived: false
