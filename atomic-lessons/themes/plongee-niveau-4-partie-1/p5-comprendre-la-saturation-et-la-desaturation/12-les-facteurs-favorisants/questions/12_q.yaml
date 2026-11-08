@@ -1,0 +1,22 @@
+id: 0bdbcd77-68e6-44d9-bb00-e92274c6992c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle consigne pour l'altitude après une plongée, selon le manuel ?
+choices:
+- id: 4e14affc-fb9e-448d-b82d-dc527cb073f2
+  text: Ne pas monter en altitude dans les 12 heures, d'autant plus vigilant que la
+    montée est rapide (téléphériques).
+- id: 9adcab80-c3fe-4cf6-aa8c-cc4c63139fd9
+  text: 'L''altitude est sans risque : seul le voyage en avion pose problème.'
+- id: e160a48d-670c-4c28-9fb6-d8453613fa55
+  text: Attendre exactement 48 heures complètes avant toute sortie en montagne.
+- id: 6979baa7-a7a8-44a5-b920-2ac139131d71
+  text: Monter en altitude est conseillé pour accélérer la désaturation du corps.
+correct_choice_ids:
+- 4e14affc-fb9e-448d-b82d-dc527cb073f2
+explanation: Pas d'altitude dans les 12 heures suivant une plongée (par exemple pour
+  skier) ; ce délai peut être raccourci avec des tables spécifiques (Ski Bühlmann,
+  Hahn) ou un ordinateur indiquant l'altitude maximum autorisée.
+archived: false

@@ -1,0 +1,22 @@
+id: c3faf76e-8e8a-47d0-8886-5aefd25802ed
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi les facteurs favorisants ne sont-ils pas pris en compte par les modèles
+  ?
+choices:
+- id: b451efe9-1f8e-41bb-a666-cca7d96307ae
+  text: 'Parce qu''ils ne sont pas généralisables : ce sont des facteurs individuels
+    de risque.'
+- id: ac0b5f0b-736a-4631-9115-4f7cfa485f75
+  text: Parce qu'ils n'ont aucune influence réelle sur les accidents.
+- id: d67adf6b-1514-40fe-83c8-158428a1560a
+  text: Parce que les modèles sont interdits d'y accéder par la loi.
+- id: ac290240-f503-471b-ace0-6421fd08ac34
+  text: Parce qu'ils ne concernent que la plongée au recycleur.
+correct_choice_ids:
+- b451efe9-1f8e-41bb-a666-cca7d96307ae
+explanation: Les facteurs individuels de risque favorisent les ADD mais ne sont pas
+  pris en compte par les modèles de désaturation, car non généralisables.
+archived: false

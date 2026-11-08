@@ -1,0 +1,22 @@
+id: e2ad9871-c228-41fe-b0f9-44344a57da86
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels facteurs d'hygiène de vie le manuel cite-t-il ?
+choices:
+- id: dcbeaf71-d313-4a47-816c-4ed0894d1f4f
+  text: Tabac (viscosité sanguine augmentée par 3 ou 4 selon Bonnin), alcool, nourriture
+    trop riche.
+- id: 2cdcaf8c-0cd6-4fda-8b31-cd3be853dbde
+  text: Le café, le thé et les boissons énergisantes bus avant la plongée.
+- id: f6dc8252-b882-4c8f-ae79-255a71b76de8
+  text: Le végétarisme et la pratique du jeûne intermittent prolongé.
+- id: c42aa266-4d86-4a1d-926e-821eb90301cd
+  text: Le manque de vitamines et de compléments alimentaires quotidiens.
+correct_choice_ids:
+- dcbeaf71-d313-4a47-816c-4ed0894d1f4f
+explanation: La mauvaise hygiène de vie comprend le tabac (qui augmenterait la viscosité
+  sanguine par 3 ou 4 selon Bonnin et coll., 1999), l'alcool et la nourriture trop
+  riche.
+archived: false

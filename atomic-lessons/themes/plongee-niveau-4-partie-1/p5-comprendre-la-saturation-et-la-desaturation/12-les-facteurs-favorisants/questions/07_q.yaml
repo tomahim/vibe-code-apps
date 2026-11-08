@@ -1,0 +1,22 @@
+id: 49cada50-3788-499f-95cf-10457313f67b
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que montre l'étude de DAN Europe sur les plongées successives ?
+choices:
+- id: 0579ca38-85e6-4345-ab73-4dae5db88a10
+  text: 'Près de deux fois plus de bulles qu''en plongées unitaires ; délai recommandé
+    : au moins 3 à 4 heures.'
+- id: 2c7bc6ca-0683-4e70-9a97-666b0814a205
+  text: Aucune différence de bulles entre plongées successives et plongées unitaires.
+- id: 63e8b275-c282-4ca9-92e4-c4489b28b21d
+  text: Une diminution nette des bulles lorsque les plongées sont rapprochées.
+- id: ead3705f-941b-4814-8d91-7f922e49fb11
+  text: Que seules les plongées au-delà de soixante mètres créent des bulles.
+correct_choice_ids:
+- 0579ca38-85e6-4345-ab73-4dae5db88a10
+explanation: 'DAN Europe : la quantité de bulles détectables par effet Doppler était
+  près de deux fois plus importante en plongées successives ; il est recommandé de
+  respecter un délai d''au moins 3 ou 4 heures entre deux plongées.'
+archived: false
