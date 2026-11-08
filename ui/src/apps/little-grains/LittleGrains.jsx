@@ -451,6 +451,101 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
   </div>;
 }
 
+// The weekly Challenge (Thomas, 2026-11-08): 10 shared questions, 30 seconds
+// each with auto-advance, the ranking locked until both players finished.
+function ChallengeSession({ onClose, onProgress }) {
+  const [data, setData] = useState(null);
+  const [history, setHistory] = useState(null);
+  const [queue, setQueue] = useState(null); // null: intro screen
+  const [choice, setChoice] = useState("");
+  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [done, setDone] = useState(null);   // final payload (me + ranking)
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    Promise.all([api("challenge/"), api("challenge/history/")])
+      .then(([week, past]) => { if (active) { setData(week); setHistory(past.weeks); } })
+      .catch((err) => { if (active) setError(err.message); });
+    return () => { active = false; };
+  }, []);
+
+  const question = queue?.[0] || null;
+
+  async function submit(answer) {
+    try {
+      const result = await api("challenge/answers/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer }) });
+      const rest = queue.slice(1);
+      if (rest.length) { setQueue(rest); setChoice(""); setSecondsLeft(data.seconds_per_question); }
+      else { setDone(result); onProgress(); }
+    } catch (err) { setError(err.message); }
+  }
+
+  // The 30-second clock: at zero the question is recorded wrong and the quiz
+  // moves on by itself.
+  useEffect(() => {
+    if (!question || done) return undefined;
+    if (secondsLeft <= 0) { submit(""); return undefined; }
+    const tick = setTimeout(() => setSecondsLeft((n) => n - 1), 1000);
+    return () => clearTimeout(tick);
+  }, [question, secondsLeft, done]);
+
+  function start() {
+    setQueue(data.questions.filter((q) => !q.answered));
+    setChoice("");
+    setSecondsLeft(data.seconds_per_question);
+  }
+
+  return <div className="grains-modal-backdrop">
+    <section className="grains-reader" role="dialog" aria-modal="true" aria-label="Weekly challenge">
+      <div className="grains-reader-top"><span className="grains-reader-kicker">Weekly Challenge{data ? ` · ${data.week_key}` : ""}</span><button className="grains-close" onClick={onClose} aria-label="Close challenge">×</button></div>
+      {error && <p className="grains-error" role="alert">{error}</p>}
+      {!data ? <p className="grains-loading">Gathering this week's duel…</p>
+        : done ? <div className="grains-complete"><span aria-hidden="true">⚔</span><h3>Challenge complete</h3>
+          <p>{done.me.correct} of {data.size} correct</p>
+          {done.ranking
+            ? <ol className="grains-challenge-ranking">{done.ranking.map((row) => <li key={row.rank} className={row.is_self ? "self" : ""}><b>#{row.rank}</b> {row.name} — {row.correct}/{data.size}</li>)}</ol>
+            : <p>The ranking unlocks once both players have finished all {data.size} questions.</p>}
+          <button className="grains-primary" onClick={onClose}>Back to the garden</button></div>
+        : question ? <>
+          <div className="grains-reader-head"><p>CHALLENGE</p><h2>Question {data.size - queue.length + 1} of {data.size}</h2><span>{secondsLeft} second{secondsLeft === 1 ? "" : "s"} left</span></div>
+          <div className="grains-progress-track grains-challenge-timer" aria-label={`${secondsLeft} seconds left`}><span style={{ width: `${(secondsLeft / data.seconds_per_question) * 100}%` }} /></div>
+          <div className="grains-reader-content">
+            <div className="grains-question">
+              <p className="grains-card-index">{question.learning_path_title} · {question.lesson_title}</p>
+              <h3>{question.prompt}</h3>
+              {question.type === "type_answer_question" ? <div className="grains-typed-answer">
+                <label htmlFor="grains-challenge-answer">Your answer</label>
+                <textarea id="grains-challenge-answer" rows={3} maxLength={255} value={choice}
+                  onChange={(event) => setChoice(event.target.value)}
+                  autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
+              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`challenge-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} /><span>{option.text}</span></label>)}</div>}
+              <button className="grains-primary" disabled={!choice.trim()} onClick={() => submit(choice)}>Lock it in →</button>
+            </div>
+          </div></>
+        : <div className="grains-reader-content">
+          <div className="grains-quest-note">
+            <p className="grains-card-index">CHALLENGE · {data.week_key}</p>
+            <h2>This week's duel</h2>
+            <p>{data.size} questions from every general-knowledge path — read or not. {data.seconds_per_question} seconds each, then it moves on. Same questions for both players.</p>
+            {data.me.answered > 0 && <p>You have answered {data.me.answered} of {data.size}.</p>}
+            {data.me.finished
+              ? <div>
+                <p>You finished: {data.me.correct} of {data.size} correct.</p>
+                {data.ranking
+                  ? <ol className="grains-challenge-ranking">{data.ranking.map((row) => <li key={row.rank} className={row.is_self ? "self" : ""}><b>#{row.rank}</b> {row.name} — {row.correct}/{data.size}</li>)}</ol>
+                  : <p>The ranking unlocks once both players have finished.</p>}
+              </div>
+              : <button className="grains-primary" onClick={start}>{data.me.answered > 0 ? "Continue the challenge" : "Take the challenge"}</button>}
+            {history?.length > 0 && <div className="grains-challenge-history"><p className="grains-card-index">PAST WEEKS</p>
+              <ul>{history.map((week) => <li key={week.week_key}><b>{week.week_key}</b> — you: {week.me.correct}/{week.size}{week.ranking ? ` · ${week.ranking.find((r) => r.is_self)?.rank === 1 ? "won" : ` #${week.ranking.find((r) => r.is_self)?.rank}`}` : ""}</li>)}</ul>
+            </div>}
+          </div>
+        </div>}
+    </section>
+  </div>;
+}
+
 // The three Review session sizes, straight from his voice note: the time the
 // learner has sets both the question count and how many stale paths are mixed.
 const REVIEW_OPTIONS = [
@@ -626,6 +721,7 @@ export default function LittleGrains() {
   const [catchUp, setCatchUp] = useState(null);
   const [reviewPicker, setReviewPicker] = useState(false);
   const [reviewMinutes, setReviewMinutes] = useState(null);
+  const [challenge, setChallenge] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showBadges, setShowBadges] = useState(false);
   const [showStreak, setShowStreak] = useState(false);
@@ -720,7 +816,7 @@ export default function LittleGrains() {
 
   // Leaving a lesson or a Practice quiz, by any route (close, back, finish),
   // is the moment to look for new badges.
-  const inSession = Boolean(reader || catchUp || reviewMinutes);
+  const inSession = Boolean(reader || catchUp || reviewMinutes || challenge);
   const wasInSession = useRef(false);
   useEffect(() => {
     if (wasInSession.current && !inSession) checkBadges();
@@ -773,7 +869,7 @@ export default function LittleGrains() {
     const current = parseRoute(window.location.pathname);
     const located = locateRoute(garden, current);
     if (!current.step) { const valid = routeUrl(located.route); if (valid !== window.location.pathname) window.history.replaceState({}, "", valid); }
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle, lesson = null) => setCatchUp({ pathId, pathTitle, lesson }), onReview: () => setReviewPicker(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle, lesson = null) => setCatchUp({ pathId, pathTitle, lesson }), onReview: () => setReviewPicker(true), onChallenge: () => setChallenge(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
@@ -787,9 +883,9 @@ export default function LittleGrains() {
   }, [garden]);
 
   useEffect(() => {
-    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp && !reviewMinutes) return; if (showBadges || showStreak) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (reviewPicker) setReviewPicker(false); else if (reviewMinutes) setReviewMinutes(null); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
+    const onEscape = (event) => { if (event.key === "Escape") { if (completedPaths.length && !reader && !catchUp && !reviewMinutes) return; if (showBadges || showStreak) return; if (reader) closeReader(); else if (catchUp) setCatchUp(null); else if (reviewPicker) setReviewPicker(false); else if (reviewMinutes) setReviewMinutes(null); else if (challenge) setChallenge(false); else if (showLeaderboard) setShowLeaderboard(false); else if (rewardInfo) setRewardInfo(null); } };
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
-  }, [reader, catchUp, reviewPicker, reviewMinutes, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
+  }, [reader, catchUp, reviewPicker, reviewMinutes, challenge, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
 
   return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><StreakPill streak={badges?.streak} onClick={() => { setShowStreak(true); checkBadges(); }} /><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
     <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
@@ -801,6 +897,7 @@ export default function LittleGrains() {
     {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} lesson={catchUp.lesson} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
     {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
+    {challenge && <ChallengeSession onClose={() => setChallenge(false)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
     {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} onOpenBadges={() => { setShowLeaderboard(false); setShowBadges(true); checkBadges(); }} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
