@@ -6,8 +6,8 @@ archived: false
 ---
 
 
-**1. The UPS bridges the deadly gap.** Generators need about a minute; batteries carry the load for 5 to 10 minutes, and double conversion means the load never even sees a switch.
+**1. The UPS bridges the startup gap.** The article uses roughly a minute for generator start and 5-10 minutes of battery autonomy. In normal online double conversion, battery takeover does not interrupt the inverter output; bypass and eco-mode transfers are different cases.
 
-**2. Rectifier, battery, inverter, bypass:** AC is rebuilt to DC and back, which conditions incoming power within its specified limits but costs 3-5% in losses, pushing modern systems toward >99% eco modes.
+**2. Rectifier, battery, inverter, bypass:** normal double conversion rebuilds AC from the DC bus. Bypass routes around that conversion path; its source quality and transfer behavior matter. Efficiency and losses depend on operating mode and load.
 
 **3. Batteries are moving from lead-acid to lithium**, trading space, life and maintenance for strict fire-code engineering, while modular cores let capacity grow with the load.
