@@ -28,6 +28,9 @@
     "marked": "^18.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "supersonic-scsynth": "^0.95.1",
+    "supersonic-scsynth-core": "^0.95.1",
+    "supersonic-scsynth-synthdefs": "^0.95.1",
     "three": "0.180.0"
   },
   "devDependencies": {

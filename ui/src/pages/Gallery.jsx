@@ -24,6 +24,13 @@ const initialApps = [
     icon: "🎛",
   },
   {
+    slug: "music-library",
+    name: "Music generation library",
+    description: "A library of generative film ambiences played live by a real SuperCollider engine in your browser. Press play, read the score, change the code.",
+    category: "Music",
+    icon: "🎼",
+  },
+  {
     slug: "lithotheque",
     name: "Lithothèque",
     description: "A dark mineralogist's bench: turn 3D study models, check species reference readouts and read each stone's dossier.",
