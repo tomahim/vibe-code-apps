@@ -1,0 +1,22 @@
+id: ac3ba105-1268-44fc-9f11-5df0d351cdee
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Plus la plongée est profonde, que devient le gradient et la charge potentielle
+  ?
+choices:
+- id: 59952733-494f-4800-993e-b6c19d0e6994
+  text: Le gradient augmente, et la charge potentielle en azote augmente avec lui.
+- id: 1cf7fb87-00d5-4235-abbb-2f33d90c5c23
+  text: Le gradient diminue, car la pression partielle de surface devient négligeable.
+- id: 674cecd4-1ac8-4b28-a413-6f366c30f80b
+  text: 'Le gradient ne change pas : seule la durée de plongée joue un rôle.'
+- id: f25fde30-1bec-44ea-b219-1637b5e18138
+  text: Le gradient augmente, mais la charge potentielle reste strictement identique.
+correct_choice_ids:
+- 59952733-494f-4800-993e-b6c19d0e6994
+explanation: Plus la plongée est profonde, plus la PpN2 au fond est élevée, plus le
+  gradient G est grand, et plus la quantité maximale d'azote que les compartiments
+  peuvent dissoudre est importante.
+archived: false

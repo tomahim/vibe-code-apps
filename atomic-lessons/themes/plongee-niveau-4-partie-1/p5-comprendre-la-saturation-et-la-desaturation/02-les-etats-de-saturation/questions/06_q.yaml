@@ -1,0 +1,22 @@
+id: 49101190-181f-4a63-aa57-214de69400e6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: La sursaturation pendant la remontée est-elle anormale ?
+choices:
+- id: c490fe3c-ff00-432b-9e8f-52e9b60843c2
+  text: 'Non : elle est normale et nécessaire - sans elle, l''azote ne pourrait pas
+    s''éliminer.'
+- id: 470964ed-7cb9-474a-a166-1612bdb3198f
+  text: 'Oui : elle signe toujours une erreur de procédure de la part du plongeur.'
+- id: 6cfe7c4a-af26-4b9a-ab7f-ac93d86d637e
+  text: 'Oui : elle impose dans tous les cas un arrêt immédiat de la remontée.'
+- id: 97e11893-1440-40fd-9748-43726607e5aa
+  text: Non, mais uniquement si la plongée a duré moins de vingt minutes.
+correct_choice_ids:
+- c490fe3c-ff00-432b-9e8f-52e9b60843c2
+explanation: 'La sursaturation est une situation normale pendant la remontée : c''est
+  l''écart entre tension dissoute et pression partielle qui fait sortir l''azote.
+  Seule la sursaturation critique (au-delà du Sc) est dangereuse.'
+archived: false

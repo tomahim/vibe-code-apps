@@ -1,0 +1,21 @@
+id: b150e407-5db5-4a74-ae26-d9297854d9d9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qu'est-ce que le gradient de pression (G) ?
+choices:
+- id: 9f8cd676-cd10-4af7-8a03-71bbbc30b0ac
+  text: La différence entre la PpN2 au plus profond de la plongée et celle en surface.
+- id: 2137da87-8c48-4f89-9bc8-abef0ffb2a89
+  text: La vitesse de remontée maximale autorisée par l'ordinateur de plongée.
+- id: 20cc74e7-545e-4e24-94a5-116c559f8fa8
+  text: La pente du fond marin sur le site de plongée, exprimée en degrés.
+- id: d67e5c33-5a1f-4aa6-9ebb-adce9305c437
+  text: La différence de pression entre le premier et le dernier palier effectué.
+correct_choice_ids:
+- 9f8cd676-cd10-4af7-8a03-71bbbc30b0ac
+explanation: Le gradient G est la différence entre la pression partielle d'azote au
+  plus profond et celle en surface. Selon le modèle MN90, la quantité maximale d'azote
+  que les compartiments peuvent dissoudre correspond à ce gradient.
+archived: false
