@@ -1,0 +1,23 @@
+id: 52c0df99-5067-4bb1-a8f5-7a559ed9ba86
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle trace écrite accompagne l'évacuation, selon le manuel ?
+choices:
+- id: e538c6bf-53a3-456b-9d43-c67e6641c44a
+  text: Une fiche d'évacuation de plongeur et une déclaration d'accident grave (article
+    R322-6 du Code du sport).
+- id: 2e763c2c-0334-4041-92c4-b41a0145ac95
+  text: Uniquement un mot griffonné sur un coin de nappe, remis au conducteur de l'ambulance.
+- id: 0572ea11-67df-46c8-9256-39941834612b
+  text: Un communiqué de presse rédigé par le club et validé par la préfecture maritime.
+- id: 4a79620c-8e68-479f-88ba-f232be35e940
+  text: 'Aucune trace écrite n''est nécessaire : le témoignage oral des plongeurs
+    suffit toujours.'
+correct_choice_ids:
+- e538c6bf-53a3-456b-9d43-c67e6641c44a
+explanation: Le plan de secours comprend une fiche d'évacuation de plongeur et s'accompagne
+  d'une déclaration d'accident grave (art. R322-6 du Code du sport, cité par le manuel)
+  ; les notes de surveillance complètent ce dossier.
+archived: false

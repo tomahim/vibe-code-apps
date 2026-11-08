@@ -1,0 +1,22 @@
+id: 32acb639-0e4b-4e9e-b227-8e7616372173
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que faut-il faire si la victime ne ventile pas et ne circule pas ?
+choices:
+- id: 00eae0a4-e10b-4460-9b6a-edada3ed2e43
+  text: Alterner compressions thoraciques et insufflations, conformément à la formation
+    suivie en secourisme.
+- id: be1595c1-22d2-4067-8022-1caa80f24909
+  text: Attendre le retour spontané de la circulation, sans toucher à la victime.
+- id: b32be663-32b7-4be0-847d-0b66e43065e3
+  text: La plonger dans l'eau froide pour provoquer un choc thermique salutaire.
+- id: 3262076e-f4e4-4b88-a95e-d4dddb9bd765
+  text: Lui administrer immédiatement de grandes quantités d'eau sucrée à boire.
+correct_choice_ids:
+- 00eae0a4-e10b-4460-9b6a-edada3ed2e43
+explanation: 'Si la victime ne ventile pas et ne circule pas : compressions thoraciques
+  et insufflations alternées, selon la formation en secourisme ; chez une victime
+  inconsciente, libération des voies aériennes au préalable.'
+archived: false

@@ -1,0 +1,24 @@
+id: c70a0040-77d5-42cd-9a2e-6be525a06e2e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: La victime dit se « sentir mieux » après quelques minutes d'oxygène. Que faut-il
+  faire ?
+choices:
+- id: 349942fc-86f2-478e-8dbb-6a14d41364d1
+  text: 'Poursuivre la procédure sans rien changer : il ne faut jamais interrompre
+    l''administration d''oxygène.'
+- id: fc8f52cb-3cdf-41e2-a288-4b4c5a29e30f
+  text: Arrêter immédiatement l'oxygène, puisque l'amélioration prouve que tout est
+    passé.
+- id: 7eef30d4-1d4a-465e-bb6b-bae7d5a8cbc2
+  text: Laisser la victime repartir chez elle si elle se sent capable de conduire.
+- id: 9aa9c632-cf5c-47bf-9832-8c47a45abb63
+  text: Réduire le débit d'oxygène de moitié, puis l'arrêter progressivement.
+correct_choice_ids:
+- 349942fc-86f2-478e-8dbb-6a14d41364d1
+explanation: 'L''évolution d''un accident n''est pas linéaire : l''amélioration passagère
+  est un piège, particulièrement dans les premières minutes d''oxygène. Interrompre
+  la procédure est une erreur grave ; on ne l''interrompt jamais, même en cas d''amélioration.'
+archived: false
