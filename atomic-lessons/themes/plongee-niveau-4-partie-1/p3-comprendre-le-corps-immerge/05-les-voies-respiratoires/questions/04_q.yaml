@@ -1,0 +1,20 @@
+id: 99ebb96c-1641-474a-8736-081a547c2409
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel est le rôle de la muqueuse des fosses nasales ?
+choices:
+- id: 15d34438-9649-4b17-94c0-6424d8b235b4
+  text: Piéger les impuretés, humidifier et réchauffer l'air inspiré.
+- id: ff08082d-87c9-4f61-939c-51ea09069631
+  text: Produire les sons de la voix pendant l'expiration.
+- id: 82823441-815d-41a8-81e5-1d7b9d807077
+  text: Empêcher l'air de pénétrer dans les poumons.
+- id: 024b8a03-76b3-426d-95d5-c6360b0c01a2
+  text: Mesurer le taux de CO2 dans le sang artériel.
+correct_choice_ids:
+- 15d34438-9649-4b17-94c0-6424d8b235b4
+explanation: Les fosses nasales sont tapissées d'une muqueuse collante qui piège les
+  impuretés et humidifie et réchauffe l'air inspiré.
+archived: false

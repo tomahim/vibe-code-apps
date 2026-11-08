@@ -1,0 +1,20 @@
+id: 3b6a7dcd-fedf-4afa-8c8a-723923dc2593
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Une douleur de la mâchoire liée aux sinus peut être confondue avec quoi ?
+choices:
+- id: d3be49d5-237b-4b23-b7f7-b670eab789b3
+  text: Une douleur dentaire aiguë.
+- id: 1d7a61f7-2728-4584-9408-4393cc61cf68
+  text: Une crampe du masseter due au détendeur.
+- id: ba8329c0-f620-451d-9b82-c8a09592968c
+  text: Une otite barotraumatique de l'oreille moyenne.
+- id: 7b1986fe-8a60-4475-baa6-256a11b6e516
+  text: Une douleur cardiaque d'origine coronarienne.
+correct_choice_ids:
+- d3be49d5-237b-4b23-b7f7-b670eab789b3
+explanation: Le barotraumatisme des sinus maxillaires peut être confondu avec une
+  douleur dentaire aiguë.
+archived: false

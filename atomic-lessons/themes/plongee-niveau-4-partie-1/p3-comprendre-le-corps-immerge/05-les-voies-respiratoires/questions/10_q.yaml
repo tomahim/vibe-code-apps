@@ -1,0 +1,21 @@
+id: 54c296be-a41a-486f-94cd-75bec51e7463
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que la glotte ?
+choices:
+- id: d28f195a-9ece-4316-beb1-33ac9eb01eeb
+  text: Un orifice situé entre les deux cordes vocales, qui s'ouvre et se ferme volontairement
+    ou involontairement.
+- id: 343c4b81-34e0-4364-986f-0034a0aee8d0
+  text: Le point d'insertion des bronches souches dans les poumons, appelé hile.
+- id: f6e76446-9e94-4ca1-b34a-cb0a538544a9
+  text: Le feuillet externe de la plèvre accolé aux côtes.
+- id: 4cd713bb-8a26-407c-9cb3-2f256042c6e3
+  text: La valve qui sépare le pharynx de l'œsophage.
+correct_choice_ids:
+- d28f195a-9ece-4316-beb1-33ac9eb01eeb
+explanation: La glotte est un orifice du larynx, entre les deux cordes vocales ; le
+  larynx est l'organe qui produit les sons.
+archived: false

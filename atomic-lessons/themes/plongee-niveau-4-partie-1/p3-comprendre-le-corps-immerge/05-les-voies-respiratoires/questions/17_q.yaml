@@ -1,0 +1,20 @@
+id: 9821daec-463b-46e8-a432-ac35b6ae62bc
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que contient le médiastin ?
+choices:
+- id: f90a265b-662d-418c-8ed5-ff9235ec6754
+  text: Le cœur, la trachée, l'œsophage, des vaisseaux et des nerfs.
+- id: 0cd3b0d9-6ece-4cb4-b2ac-0330ddb3e319
+  text: Uniquement les deux poumons et leurs bronches.
+- id: b7271a88-f444-40d1-ba75-56f44e3a8604
+  text: Les côtes, le sternum et les muscles intercostaux.
+- id: 03b8b5ba-a91e-44c6-9024-c6eb0f712689
+  text: Le diaphragme et les muscles abdominaux.
+correct_choice_ids:
+- f90a265b-662d-418c-8ed5-ff9235ec6754
+explanation: Le médiastin est l'espace qui sépare les deux poumons ; il contient le
+  cœur, la trachée, l'œsophage, des vaisseaux et des nerfs.
+archived: false

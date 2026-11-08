@@ -1,0 +1,12 @@
+id: 14c42435-cba9-4c8d-b98f-bb6d69384fa9
+position: 18
+type: type_answer_question
+after_card_position: 7
+prompt: Comment s'appelle la zone d'insertion des bronches dans les poumons, point
+  de faiblesse en cas de surpression pulmonaire ?
+accepted_answers:
+- hile
+- le hile
+explanation: 'Le hile est la zone d''insertion des bronches dans les poumons : un
+  point de faiblesse qui augmente les risques de rupture en cas de surpression pulmonaire.'
+archived: false

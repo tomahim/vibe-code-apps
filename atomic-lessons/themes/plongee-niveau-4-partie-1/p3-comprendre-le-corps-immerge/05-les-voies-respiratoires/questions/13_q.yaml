@@ -1,0 +1,21 @@
+id: 84349147-176a-478b-9124-e09954702740
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels diamètres le manuel donne-t-il pour bronches souches et bronchioles
+  ?
+choices:
+- id: 77960f2b-5e8c-4460-ab74-e0567f5e7b75
+  text: 1,2 cm pour les bronches souches, 0,5 mm pour les bronchioles.
+- id: b99f118d-3799-4767-8a93-4cd5a7c7e75f
+  text: 12 cm pour les bronches souches, 5 mm pour les bronchioles.
+- id: 563c3cc7-c77b-4db9-b2fe-860e7cdf6bc4
+  text: 1,2 mm pour les bronches souches, 0,05 mm pour les bronchioles.
+- id: e45a7501-fa98-478b-afb1-451ef9ab7113
+  text: 2,5 cm pour les bronches souches, 3 cm pour les bronchioles.
+correct_choice_ids:
+- 77960f2b-5e8c-4460-ab74-e0567f5e7b75
+explanation: Les bronches souches mesurent 1,2 cm de diamètre ; les bronches se rétrécissent
+  jusqu'aux bronchioles de 0,5 mm, qui aboutissent aux alvéoles.
+archived: false

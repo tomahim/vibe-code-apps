@@ -1,0 +1,20 @@
+id: dc2d3043-5f7e-4e38-a739-d18d43a79a6f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce que la noyade, dans la définition anatomique du manuel ?
+choices:
+- id: 7c8cadfd-6170-4ca8-8c25-909f90e7228b
+  text: L'inondation des voies aériennes.
+- id: 9ae39b20-e315-478b-9f10-ca4a23c12b7a
+  text: La rupture des bronchioles terminales.
+- id: 1de1d5a6-9791-4c8f-811f-388be676c524
+  text: La contraction douloureuse du diaphragme.
+- id: 28d07e98-b13f-4ed6-9a23-0bc7c3a99879
+  text: L'obstruction des sinus frontaux.
+correct_choice_ids:
+- 7c8cadfd-6170-4ca8-8c25-909f90e7228b
+explanation: Le manuel associe la compréhension du système respiratoire aux risques
+  de surpression pulmonaire et de noyade, c'est-à-dire l'inondation des voies aériennes.
+archived: false
