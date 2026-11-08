@@ -73,3 +73,16 @@
   .grains-lesson-reader .grain-markdown{font-size:17px;line-height:1.6}
 }
 
+
+/* Review quest note: the 5/10/15-minute session picker. */
+.grains-quest{width:min(430px,100%);background:var(--paper);border:1px solid #e3d8c6;border-radius:20px;box-shadow:0 28px 80px rgba(22,35,22,.28);overflow:hidden}
+.grains-quest-note{position:relative;padding:28px 26px 24px;background:linear-gradient(160deg,#fffdf4,#faf3df);border:10px solid transparent;border-image:repeating-linear-gradient(45deg,#e8d9b8 0 10px,#f7efdc 10px 20px) 10}
+.grains-quest-note>.grains-card-index{color:#a56545}
+.grains-quest-note h2{font:700 27px/1.12 var(--serif);margin:0 0 10px}
+.grains-quest-note>p{color:var(--dim);font-size:13.5px;line-height:1.5;margin:0 0 18px}
+.grains-quest-options{display:grid;gap:10px;margin-bottom:8px}
+.grains-quest-option{display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-height:52px;padding:12px 16px;border:1px solid #e2d3ae;border-radius:13px;background:#fffdf8;cursor:pointer;text-align:left}
+.grains-quest-option:hover,.grains-quest-option:focus-visible{border-color:#b57658;background:#fbf1da}
+.grains-quest-option b{font:800 16px var(--serif);color:#5b4a2e}
+.grains-quest-option span{font-size:12.5px;color:#8a7a5c}
+@media(max-width:760px){.grains-quest{width:100%;border-radius:20px 20px 0 0}}

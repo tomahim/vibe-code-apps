@@ -1131,3 +1131,122 @@ class LearningConcurrencyTests(TransactionTestCase):
                               .values_list("attempt_type", flat=True)), ["initial", "review"])
         garden = Client(HTTP_AUTHORIZATION=f"Bearer {self.token}").get("/api/learning/garden/").json()
         self.assertEqual(garden["rewards"], {"drops": 106, "carrots": 1})
+
+
+class ReviewSessionTests(TestCase):
+    """Cross-theme Review sessions and the garden's seasonal practice aging.
+
+    Thomas, 2026-11-08: 5/10/15 minutes -> 1/2/3 stalest paths and 10/20/30
+    questions, read lessons only, same selection priorities as Practice.
+    """
+
+    def row(self, model, **fields):
+        return model.objects.create(
+            entity=ContentEntity.objects.create(id=uuid4(), kind=model.CONTENT_KIND),
+            position=fields.pop("position", 1), published=True, source_path="example", last_changed_commit="a" * 40,
+            **({} if model == Question or "title" in fields else {"title": model.__name__}), **fields)
+
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username="learner")
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.user)}"
+        self.now = datetime.now(timezone.utc)
+        # Three paths with one fully read lesson each, last touched 25, 3 and
+        # 12 days ago: winter, fresh and autumn anchors.
+        self.paths = []
+        for i, days in enumerate((25, 3, 12)):
+            theme = self.row(Theme, title=f"Theme{i}", position=i + 1)
+            path = self.row(LearningPath, theme=theme, title=f"Path{i}", position=i + 1)
+            lesson = self.row(Lesson, learning_path=path, title=f"Lesson{i}", position=1)
+            card = self.row(Card, lesson=lesson, position=1, body_markdown="Body")
+            question = self.row(Question, lesson=lesson, after_card_position=1, prompt=f"Prompt{i}",
+                                options=[{"id": "a", "text": "A"}, {"id": "b", "text": "B"}],
+                                answer="a", explanation="Why")
+            CardProgress.objects.create(user=self.user, card=card,
+                                        completed_at=self.now - timedelta(days=days))
+            self.paths.append({"path": path, "lesson": lesson, "question": question, "days": days})
+        # A second, unread lesson on the stalest path: its question is never reviewable.
+        unread = self.row(Lesson, learning_path=self.paths[0]["path"], title="Unread", position=2)
+        self.row(Card, lesson=unread, position=1, body_markdown="Body")
+        self.unread_question = self.row(Question, lesson=unread, after_card_position=1, prompt="Unread prompt",
+                                        options=[{"id": "a", "text": "A"}], answer="a", explanation="Why")
+
+    def review(self, minutes=None):
+        url = "/api/learning/review/" + ("" if minutes is None else f"?minutes={minutes}")
+        return self.client.get(url)
+
+    def test_review_minutes_validation_and_auth(self):
+        self.assertEqual(self.review().status_code, 400)
+        self.assertEqual(self.review(7).status_code, 400)
+        self.assertEqual(self.review("abc").status_code, 400)
+        self.assertEqual(self.review(5).status_code, 200)
+        self.client.defaults.clear()
+        self.assertEqual(self.review(5).status_code, 401)
+
+    def test_review_picks_stalest_paths_first(self):
+        body = self.review(5).json()
+        self.assertEqual(body["minutes"], 5)
+        self.assertEqual([p["title"] for p in body["learning_paths"]], ["Path0"])
+        self.assertEqual(body["learning_paths"][0]["theme_title"], "Theme0")
+        self.assertTrue(body["eligible"])
+        body = self.review(15).json()
+        self.assertEqual([p["title"] for p in body["learning_paths"]], ["Path0", "Path2", "Path1"])
+
+    def test_review_questions_come_from_read_lessons_of_selected_paths_only(self):
+        body = self.review(15).json()
+        ids = {q["id"] for q in body["questions"]}
+        self.assertNotIn(str(self.unread_question.pk), ids)
+        self.assertEqual(ids, {str(p["question"].pk) for p in self.paths})
+        for question in body["questions"]:
+            self.assertIn("learning_path_title", question)
+            self.assertIn("lesson_title", question)
+            self.assertNotIn("answer", question)
+        # 5 minutes: only the stalest path's questions, below the 10 target
+        # because the pool is smaller - sessions shrink honestly, never top up.
+        body = self.review(5).json()
+        self.assertEqual(len(body["questions"]), 1)
+        self.assertEqual(body["questions"][0]["learning_path_title"], "Path0")
+
+    def test_review_session_keeps_practice_priorities(self):
+        # On the stalest path, a second question whose latest attempt failed
+        # leads the session; the never-answered one follows.
+        failed = self.row(Question, lesson=self.paths[0]["lesson"], after_card_position=1, position=2, prompt="Failed",
+                          options=[{"id": "a", "text": "A"}], answer="a", explanation="Why")
+        QuestionAttempt.objects.create(user=self.user, question=failed, attempt_type="review",
+                                       submitted_answer="b", correct=False,
+                                       answered_at=self.now - timedelta(days=20))
+        body = self.review(5).json()
+        self.assertEqual(body["questions"][0]["id"], str(failed.pk))
+        self.assertEqual(len(body["questions"]), 2)
+
+    def test_review_anchor_uses_latest_of_attempts_and_reads(self):
+        # Path1 was read 3 days ago; an older attempt must not make it stale.
+        QuestionAttempt.objects.create(user=self.user, question=self.paths[1]["question"],
+                                       attempt_type="initial", submitted_answer="a", correct=True,
+                                       answered_at=self.now - timedelta(days=20))
+        body = self.review(15).json()
+        self.assertEqual([p["title"] for p in body["learning_paths"]], ["Path0", "Path2", "Path1"])
+        # A fresh attempt on the stalest path moves it out of first place.
+        QuestionAttempt.objects.create(user=self.user, question=self.paths[0]["question"],
+                                       attempt_type="review", submitted_answer="a", correct=True,
+                                       answered_at=self.now - timedelta(days=1))
+        body = self.review(5).json()
+        self.assertEqual([p["title"] for p in body["learning_paths"]], ["Path2"])
+
+    def test_garden_reports_seasonal_practice_aging(self):
+        garden = self.client.get("/api/learning/garden/").json()
+        practice = {p["title"]: p["practice"] for theme in garden["themes"] for p in theme["learning_paths"]}
+        self.assertEqual(practice["Path0"]["state"], "winter")
+        self.assertEqual(practice["Path0"]["days_since"], 25)
+        self.assertEqual(practice["Path1"]["state"], "fresh")
+        self.assertEqual(practice["Path1"]["days_since"], 3)
+        self.assertEqual(practice["Path2"]["state"], "autumn")
+        self.assertEqual(practice["Path2"]["days_since"], 12)
+        self.assertTrue(practice["Path2"]["last_activity_at"])
+        # A path with nothing fully read is still growing: no aging.
+        theme = self.row(Theme, title="New", position=9)
+        path = self.row(LearningPath, theme=theme, title="Unstarted", position=9)
+        lesson = self.row(Lesson, learning_path=path, position=1)
+        self.row(Card, lesson=lesson, position=1, body_markdown="Body")
+        garden = self.client.get("/api/learning/garden/").json()
+        practice = {p["title"]: p["practice"] for theme in garden["themes"] for p in theme["learning_paths"]}
+        self.assertEqual(practice["Unstarted"], {"last_activity_at": None, "days_since": None, "state": "fresh"})
