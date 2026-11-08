@@ -1,0 +1,21 @@
+id: bbe10060-eaf0-4d77-a2e3-bc326bac2766
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans quelles situations les GF permettent-ils de prendre de la marge ?
+choices:
+- id: 402b857a-65cf-46a1-9fec-042db9ac0328
+  text: Facteurs individuels, environnementaux, plongées hors hypothèses ou très saturantes.
+- id: bbeb7d16-d339-4f97-9fb3-44b7b5d4c1db
+  text: Uniquement lors de plongées sous glace réalisées en altitude.
+- id: 9fd1b0d0-1ebc-4493-a704-7e81ee0ccf2c
+  text: Seulement quand le plongeur a oublié son ordinateur sur le bateau.
+- id: 22fd9d67-f029-4207-b096-ef0500603749
+  text: Uniquement pour les plongées de nuit effectuées au-delà de soixante mètres.
+correct_choice_ids:
+- 402b857a-65cf-46a1-9fec-042db9ac0328
+explanation: 'Les GF servent à prendre une marge pour : facteurs individuels (âge,
+  poids, sédentarité, fatigue, reprise), facteurs environnementaux (mer agitée, froid),
+  plongées hors hypothèses du modèle (effort, froid) et plongées très saturantes.'
+archived: false

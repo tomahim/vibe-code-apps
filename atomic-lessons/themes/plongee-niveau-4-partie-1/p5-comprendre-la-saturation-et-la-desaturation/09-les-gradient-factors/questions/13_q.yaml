@@ -1,0 +1,23 @@
+id: eebfbb63-f350-4c7c-aaac-b645c7998785
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment évolue le facteur Ɛ du RGBM, selon le manuel ?
+choices:
+- id: fd8bb675-92cd-4f94-aa36-cbb01e9670a6
+  text: Initialisé à 1 ; baissé pour les plongées successives et longues ; augmenté
+    si l'intervalle de surface est réduit.
+- id: 033030c8-8744-427f-8edc-18a27fa393ca
+  text: Fixé une fois pour toutes en usine lors de la fabrication et jamais modifié
+    ensuite.
+- id: 69eeef05-dec7-400c-a5be-d0f856266941
+  text: Augmenté à chaque plongée successive réalisée et à chaque palier effectué.
+- id: a7e95b65-4c3b-48f7-aa0f-0c2a55832828
+  text: Toujours rigoureusement égal à zéro, quelle que soit la plongée effectuée.
+correct_choice_ids:
+- fd8bb675-92cd-4f94-aa36-cbb01e9670a6
+explanation: Ɛ est initialisé à 1 à la première plongée, baissé pour les plongées
+  successives et lorsque le temps de plongée augmente, augmenté lorsque l'intervalle
+  en surface est réduit.
+archived: false

@@ -1,0 +1,21 @@
+id: fec21a60-4755-432f-b851-4205c6ac18a8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que signifie un GF fixé à 80 % ?
+choices:
+- id: 9d0a9848-118b-4259-8e5f-5c9e9e5de1c7
+  text: 'Une désaturation plus « conservative » : des paliers plus longs et/ou plus
+    profonds que le modèle.'
+- id: f1feee9b-17ab-4660-932d-271749ae3741
+  text: Une désaturation plus rapide, avec des paliers raccourcis de 20 %.
+- id: f7124dc0-3014-4b81-9cf1-ea620d8427ce
+  text: Une interdiction de plonger au-delà de 80 % de la profondeur maximale.
+- id: a6c08670-6272-4d37-88e5-eb0bb50c5dfd
+  text: Un ordinateur réglé pour un plongeur de moins de 80 kg.
+correct_choice_ids:
+- 9d0a9848-118b-4259-8e5f-5c9e9e5de1c7
+explanation: 'À 80 %, on ne va qu''à 80 % des possibilités du modèle : la marge de
+  sécurité supplémentaire se traduit par des paliers plus longs et/ou plus profonds.'
+archived: false

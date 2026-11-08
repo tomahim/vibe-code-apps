@@ -1,0 +1,21 @@
+id: 3bef5b01-5622-4cb0-838c-62f3a89bde33
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel couple de GF le manuel suggère-t-il pour la plongée loisir à l'air ?
+choices:
+- id: 69ddb489-f520-497d-b217-a4afc92b0031
+  text: '80/80 : GF bas jamais sous 70 % (80 % souhaitable), GF haut de l''ordre de
+    80 %.'
+- id: c569d60c-7228-4f35-98ee-221f8cc83ea9
+  text: '100/100 : le modèle est suffisamment sûr sans aucune marge.'
+- id: 4bbbc6d5-d658-4c6b-b49b-1e254c1653ec
+  text: '50/50 : la moitié des possibilités du modèle suffit largement.'
+- id: 6509fac3-0903-4623-8bcc-1402deb3988a
+  text: '30/90 : paliers très profonds puis très courts en surface.'
+correct_choice_ids:
+- 69ddb489-f520-497d-b217-a4afc92b0031
+explanation: 'Pour les plongées classiques à l''air : GF bas jamais à moins de 70
+  % (80 % souhaitable) et GF haut de l''ordre de 80 %, soit un couple 80/80.'
+archived: false

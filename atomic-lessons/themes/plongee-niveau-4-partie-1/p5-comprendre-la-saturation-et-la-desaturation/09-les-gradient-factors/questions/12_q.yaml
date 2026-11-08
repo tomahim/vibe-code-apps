@@ -1,0 +1,20 @@
+id: fbaa51d2-401b-4e15-b3a4-29e1ea1705c6
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que fait le « bubble factor » (facteur Ɛ) du RGBM ?
+choices:
+- id: 424f1c26-8a08-46d9-9cf5-0a57fcb72d73
+  text: Il modifie les M-Values classiques des modèles haldaniens pour plus de conservatisme.
+- id: d8f9255c-ea9e-4b48-8522-bcb9455b7dd2
+  text: Il mesure directement les bulles dans le sang par effet Doppler.
+- id: 216d097a-bf73-4b18-821e-ef0b1b4e5e31
+  text: Il supprime tous les paliers pour les plongées de moins de 20 mètres.
+- id: adb56a28-72b9-431f-a0e0-07c63be44da2
+  text: Il calcule la consommation d'air prévue pour la plongée suivante.
+correct_choice_ids:
+- 424f1c26-8a08-46d9-9cf5-0a57fcb72d73
+explanation: Le « bubble factor » ou « facteur Ɛ » du RGBM modifie les M-Values «
+  classiques » des modèles haldaniens pour plus de conservatisme.
+archived: false
