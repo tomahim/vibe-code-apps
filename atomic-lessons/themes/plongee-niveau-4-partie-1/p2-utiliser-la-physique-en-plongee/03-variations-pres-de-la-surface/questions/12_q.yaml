@@ -1,0 +1,20 @@
+id: df26b371-1557-41eb-8c18-6944daf9415d
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que peut provoquer une inhalation d'eau selon le manuel ?
+choices:
+- id: 2ca30a2c-1a58-4db9-8e49-c0381add4f20
+  text: Un spasme glottique qui bloque toute évacuation d'air.
+- id: f74b16f9-9f93-40d5-9614-3642b6408f93
+  text: Une noyade sèche sans aucun autre symptôme.
+- id: aadda4a3-615f-4fce-9be2-21426e8b6487
+  text: Une syncope immédiate sans phase d'alarme.
+- id: 32eb22db-c585-4f9c-9d21-53460ef34d4b
+  text: Une sinusite barotraumatique bilatérale.
+correct_choice_ids:
+- 2ca30a2c-1a58-4db9-8e49-c0381add4f20
+explanation: Une inhalation d'eau peut provoquer un spasme glottique et bloquer toute
+  évacuation d'air à la remontée.
+archived: false

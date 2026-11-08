@@ -1,0 +1,22 @@
+id: f92e1d4e-cc7b-47aa-901d-b627102fc127
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que doit rappeler le guide de palanquée pour la remontée ?
+choices:
+- id: 796aad92-e541-4d9b-9b2e-b7478ccf9b27
+  text: Ne pas remonter plus vite que lui, expirer correctement, garder une vitesse
+    lente.
+- id: 9b6eebaf-f92f-40cc-8f76-34aa412c2680
+  text: Remonter en apnée complète pour économiser l'air de la bouteille.
+- id: 44d147b8-bf0e-4a2c-8b78-4408f22d1701
+  text: Gonfler le gilet au maximum dès le début de la remontée.
+- id: efa703c5-0404-472c-a8d3-29b0ab745a79
+  text: Atteindre la surface le plus vite possible en cas de fatigue.
+correct_choice_ids:
+- 796aad92-e541-4d9b-9b2e-b7478ccf9b27
+explanation: Le guide rappelle de ne pas remonter plus vite que lui, surveille que
+  les plongeurs expirent correctement et respecte une vitesse de remontée lente ;
+  expirer suffisamment à la remontée doit être un automatisme.
+archived: false
