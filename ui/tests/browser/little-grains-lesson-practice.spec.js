@@ -33,7 +33,12 @@ function mockApi(page, { quizLog }) {
       });
     }
     if (url.pathname.endsWith('/catch-up/')) {
-      quizLog.push(url.searchParams.get('lesson'));
+      const lessonParam = url.searchParams.get('lesson');
+      quizLog.push(lessonParam);
+      if (lessonParam === id(102)) {
+        // The unread lesson scopes to an empty, ineligible pool.
+        return route.fulfill({ json: { learning_path_id: id(11), eligible: false, remaining: 0, questions: [] } });
+      }
       return route.fulfill({
         json: {
           learning_path_id: id(11), eligible: true, remaining: 0,
@@ -78,4 +83,14 @@ test('practice with a lesson selected asks the API for that lesson only', async 
   await page.locator('.lg-practice-card, .lg-practice-pill').getByRole('button').click();
   await expect(page.getByRole('dialog', { name: /Practice quiz/ })).toBeVisible();
   expect(quizLog[quizLog.length - 1]).toBeNull();
+  await page.getByRole('dialog', { name: /Practice quiz/ }).getByRole('button', { name: 'Close quiz' }).click();
+
+  // Selecting the unread lesson must NOT fall back to the whole path: the
+  // quiz opens scoped and explains the cards must be read first.
+  await panel.locator('.lg-lessons').getByRole('button', { name: /The Dynasty Years/ }).click();
+  await page.locator('.lg-practice-card, .lg-practice-pill').getByRole('button').click();
+  const scoped = page.getByRole('dialog', { name: /Practice quiz/ });
+  await expect(scoped.getByText('Read every card of The Dynasty Years first to practice its questions.')).toBeVisible();
+  await expect(scoped.getByText(/Which team did Wayne Gretzky join/)).toHaveCount(0);
+  expect(quizLog[quizLog.length - 1]).toBe(id(102));
 });

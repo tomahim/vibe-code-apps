@@ -876,7 +876,10 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       // A selected, fully read lesson scopes Practice to that lesson's
       // questions only (Thomas, 2026-11-08).
       const sel = view.lesson >= 0 ? trail.path.lessonData[view.lesson] : null;
-      const scoped = sel && lessonFinished(sel.progress) ? { id: sel.id, title: sel.title } : null;
+      // A selected lesson scopes Practice even when unread: the quiz then
+      // explains the cards must be read first instead of silently widening
+      // to the whole path. Only deselecting restores the path pool.
+      const scoped = sel ? { id: sel.id, title: sel.title, read: lessonFinished(sel.progress) } : null;
       onPracticeQuiz?.(trail.path.id, trail.path.title, scoped);
     }
     else if (b.dataset.review) onReview?.();

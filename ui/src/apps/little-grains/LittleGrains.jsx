@@ -415,7 +415,7 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
     <section className="grains-reader" role="dialog" aria-modal="true" aria-label={label}>
       <div className="grains-reader-top"><span className="grains-reader-kicker">{kicker}</span><button className="grains-close" onClick={finish} aria-label="Close quiz">×</button></div>
       {error && <p className="grains-error" role="alert">{error}</p>}
-      {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>No questions available yet</h3><p>Read every card in a lesson to practice its questions.</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
+      {!data ? <p className="grains-loading">Gathering your questions…</p> : total === 0 ? <div className="grains-complete"><span aria-hidden="true">✿</span><h3>No questions available yet</h3><p>{lesson ? `Read every card of ${lesson.title} first to practice its questions.` : "Read every card in a lesson to practice its questions."}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : !question ? <div className="grains-complete"><span aria-hidden="true">🌱</span><h3>Quiz complete</h3><p>{solved} of {total} answered correctly{left > 0 ? ` · ${left} left to grow` : ""}</p><button className="grains-primary" onClick={finish}>Back to the garden</button></div>
         : <>
           <div className="grains-reader-head"><p>{heading}</p><h2>{queue.length} question{queue.length === 1 ? "" : "s"} to go</h2><span>{solved} answered correctly this round</span></div>
