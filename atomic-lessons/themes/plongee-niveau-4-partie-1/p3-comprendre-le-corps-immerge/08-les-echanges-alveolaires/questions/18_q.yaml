@@ -1,0 +1,12 @@
+id: 3096a5e2-9329-4798-9715-3e75829e2f29
+position: 18
+type: type_answer_question
+after_card_position: 1
+prompt: Comment s'appelle la substance sécrétée par la paroi alvéolaire qui empêche
+  les alvéoles de s'affaisser à l'expiration forcée ?
+accepted_answers:
+- surfactant
+- le surfactant
+explanation: Le surfactant est sécrété par certaines cellules de la paroi alvéolaire
+  ; il évite l'affaissement des alvéoles et facilite les entrées et sorties d'air.
+archived: false

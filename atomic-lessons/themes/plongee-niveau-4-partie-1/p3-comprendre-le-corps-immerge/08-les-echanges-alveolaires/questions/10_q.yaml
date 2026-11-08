@@ -1,0 +1,21 @@
+id: 2af70d86-504f-44c6-82fb-7d43413cbd86
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment l'azote circule-t-il entre sang et cellules ?
+choices:
+- id: 36bae50a-bae7-4fda-990c-21ddc2828056
+  text: Du sang vers les cellules à la descente et au fond ; en sens inverse à la
+    remontée.
+- id: 79f8479c-fabd-48fa-95c5-5003b0b11b1d
+  text: Des cellules vers le sang à la descente uniquement.
+- id: f8b810c0-0721-4b1e-8b9f-9561df421552
+  text: Il ne quitte jamais le sang pendant la plongée.
+- id: 34ea482d-d5fe-47e8-a30e-6db53db731b8
+  text: Il reste bloqué dans les cellules après la remontée.
+correct_choice_ids:
+- 36bae50a-bae7-4fda-990c-21ddc2828056
+explanation: 'Descente et séjour au fond : l''azote passe du sang vers les cellules
+  ; remontée : le phénomène s''inverse - toute la logique de la désaturation.'
+archived: false

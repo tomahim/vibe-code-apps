@@ -1,0 +1,21 @@
+id: 05dbc5da-7674-40fd-84e8-f16d104d052a
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que se passe-t-il au niveau des cellules pendant la phase tissulaire ?
+choices:
+- id: b490b2c7-fb02-4ee8-8474-7df50c792b2c
+  text: Le sang libère l'O2 qui se fixe sur les cellules, et celles-ci rejettent du
+    CO2 en contrepartie.
+- id: f72bc90b-493c-4876-bae6-868fd1a21d14
+  text: Les cellules fabriquent de l'O2 et rejettent de l'azote.
+- id: 10345d52-63f7-4ecf-bad3-d3a2e1968794
+  text: Le sang prélève le CO2 des cellules et le transforme en O2.
+- id: be55837a-4572-4a8c-ad1a-5e6ee11a3e67
+  text: Les cellules absorbent le sang des capillaires.
+correct_choice_ids:
+- b490b2c7-fb02-4ee8-8474-7df50c792b2c
+explanation: Au cours de son parcours, le sang libère les molécules d'O2 qui se fixent
+  sur les cellules ; en contrepartie, les cellules rejettent du CO2.
+archived: false

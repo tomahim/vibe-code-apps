@@ -1,0 +1,20 @@
+id: f32704ab-68eb-4b16-8636-15a1199aef4e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel est le rôle du liquide qui tapisse la paroi alvéolaire ?
+choices:
+- id: 60626db2-cc99-4c6a-8f07-7e38e21a2a91
+  text: Dissoudre les gaz avant leur diffusion au travers des parois.
+- id: 08a4f0c8-220e-49b9-96ce-14f3f6a0e744
+  text: Réchauffer l'air inspiré avant son arrivée.
+- id: 83944b73-bc25-4f14-aa48-72c9ea02e45e
+  text: Produire les anticorps de défense des poumons.
+- id: 41548f0c-3503-41f2-9f1f-e1f75c39e33e
+  text: Empêcher l'azote de pénétrer dans le sang.
+correct_choice_ids:
+- 60626db2-cc99-4c6a-8f07-7e38e21a2a91
+explanation: Le liquide de la paroi alvéolaire dissout les gaz avant leur diffusion
+  au travers des parois.
+archived: false

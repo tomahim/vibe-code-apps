@@ -1,0 +1,20 @@
+id: f197f951-5ea5-47a4-8009-126314ce17d8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel est l'autre effet de l'excès d'oxygène cité par le manuel ?
+choices:
+- id: 5e5c14f8-bc8c-424b-88dc-3ece9c064da6
+  text: L'effet Paul Bert, sur le système nerveux.
+- id: d91f8274-b7b9-469f-91c8-8c8511718a79
+  text: L'effet Louis Smith, sur le cerveau.
+- id: fb80d0dc-25a4-4121-8275-d69c7ae504e6
+  text: L'effet Alfred Bove, sur le cœur.
+- id: 1e260545-e4fb-47af-843e-3573e3d8cf76
+  text: L'effet Medsubhyp, sur la circulation.
+correct_choice_ids:
+- 5e5c14f8-bc8c-424b-88dc-3ece9c064da6
+explanation: Le manuel renvoie à l'effet Paul Bert pour la sensibilité du système
+  nerveux à l'excès d'oxygène, vu dans la partie sur le système nerveux.
+archived: false

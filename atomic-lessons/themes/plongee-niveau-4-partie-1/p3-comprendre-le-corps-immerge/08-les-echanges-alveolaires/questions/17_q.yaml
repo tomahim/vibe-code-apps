@@ -1,0 +1,20 @@
+id: d40fd30b-ddf6-47f2-8339-99efd07d358b
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Vers quel âge une alvéole est-elle pleinement développée ?
+choices:
+- id: 39479c8c-f88d-4731-b647-7b04d3c145da
+  text: Vers l'âge de 6 à 8 ans.
+- id: ade26076-12c3-4577-90b5-59b3231a8e6f
+  text: Dès la naissance.
+- id: 0227fb3a-907f-4036-b901-78d05aae08ae
+  text: Vers l'âge de 20 ans.
+- id: 6ad10e45-a82e-4dcb-a651-f06faf26975c
+  text: Vers l'âge de 40 ans.
+correct_choice_ids:
+- 39479c8c-f88d-4731-b647-7b04d3c145da
+explanation: Pleinement développée vers l'âge de 6 à 8 ans, une alvéole mesure environ
+  0,2 mm.
+archived: false

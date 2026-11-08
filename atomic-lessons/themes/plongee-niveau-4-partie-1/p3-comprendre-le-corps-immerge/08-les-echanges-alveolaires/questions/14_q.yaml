@@ -1,0 +1,23 @@
+id: 3e726c5b-b104-4497-9c09-2d80c373ffc9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qu'est-ce qui peut ouvrir ces shunts, et avec quel risque ?
+choices:
+- id: eb60495c-897c-462e-8c4d-2c40336c07ac
+  text: 'Une mise en pression du thorax (ex. Valsalva à la remontée) : des bulles
+    peuvent passer et causer un accident de désaturation.'
+- id: 643d02a3-df73-49a6-900e-cd481d75dd43
+  text: 'Une inspiration profonde pendant la descente : l''azote se bloque alors dans
+    les poumons.'
+- id: 14b8762b-3d91-4b7f-bdec-4b323a6ab8c7
+  text: 'Une combinaison trop serrée : le thorax se comprime.'
+- id: f1dd5f08-a448-4523-b5c3-8510b4ce1371
+  text: 'Un froid intense : les vaisseaux se ferment.'
+correct_choice_ids:
+- eb60495c-897c-462e-8c4d-2c40336c07ac
+explanation: Toute mise en pression du thorax, comme un Valsalva à la remontée, peut
+  favoriser l'ouverture des shunts et laisser passer des bulles - risque d'accident
+  de désaturation.
+archived: false

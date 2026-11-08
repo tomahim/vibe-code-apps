@@ -1,0 +1,21 @@
+id: cd3ff7d7-9586-42df-9c03-1400edc83e05
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles dimensions le manuel donne-t-il pour une alvéole ?
+choices:
+- id: 8af26cf3-260e-4e1c-9e3f-70938e0bbef6
+  text: Environ 0,2 mm ; 0,1 mm en expiration forcée, 0,3 à 0,5 mm en inspiration
+    forcée.
+- id: b2b590fc-3c74-4d2f-aa27-34bfc0b3ed3a
+  text: Environ 2 mm ; constante quelle que soit la ventilation.
+- id: 0b1162a8-1acf-466e-bcad-613fc1c6be23
+  text: Environ 1,2 cm, comme les bronches souches.
+- id: d1e183de-d4ee-442c-9479-55a4dea80441
+  text: Environ 0,008 mm, comme les capillaires.
+correct_choice_ids:
+- 8af26cf3-260e-4e1c-9e3f-70938e0bbef6
+explanation: Une alvéole mesure environ 0,2 mm ; ses fibres élastiques permettent
+  0,1 mm en expiration forcée et 0,3 à 0,5 mm en inspiration forcée.
+archived: false
