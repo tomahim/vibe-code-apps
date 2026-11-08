@@ -1,0 +1,20 @@
+id: ca693d03-fd5c-4ac6-a2e1-435c5634ef26
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est le volume courant (VC) d'un adulte au repos en surface ?
+choices:
+- id: 9fd1d415-28fb-4157-b9a0-003f3f707c91
+  text: Environ 0,5 litre d'air inspiré et expiré à chaque cycle.
+- id: 28f9d919-300c-457d-aebc-1730def084a8
+  text: Environ 1,5 litre d'air inspiré et expiré à chaque cycle.
+- id: 90cf1a82-e45b-4482-b7f1-700aab989af2
+  text: Environ 2 litres d'air inspiré et expiré à chaque cycle.
+- id: a35852a7-33aa-4e5c-8239-6af4067cc0c1
+  text: Environ 4,5 litres d'air inspiré et expiré à chaque cycle.
+correct_choice_ids:
+- 9fd1d415-28fb-4157-b9a0-003f3f707c91
+explanation: 'Au repos en surface, un adulte inspire et expire environ 0,5 litre par
+  cycle : c''est le volume courant.'
+archived: false

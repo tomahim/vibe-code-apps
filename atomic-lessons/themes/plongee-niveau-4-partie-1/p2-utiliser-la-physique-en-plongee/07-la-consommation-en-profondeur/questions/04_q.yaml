@@ -1,0 +1,20 @@
+id: 03c5d2cc-d814-41dd-9bd8-e05d81e64b24
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quand l'expiration devient-elle active selon le manuel ?
+choices:
+- id: 8477f946-162e-4a51-bfe0-757bb8e69c82
+  text: Lors d'un exercice, ou en plongée pour vaincre les résistances du détendeur.
+- id: f0217b37-ffc6-495a-b3cf-eeadb637c40e
+  text: Uniquement pendant la toux et les éternuements en surface.
+- id: 78d343df-314f-48dc-ae8b-0c676cbb80f1
+  text: Dès que le plongeur descend sous les dix premiers mètres.
+- id: bea64b96-cf15-491a-ac91-a8982071620e
+  text: Uniquement chez les plongeurs débutants et essoufflés.
+correct_choice_ids:
+- 8477f946-162e-4a51-bfe0-757bb8e69c82
+explanation: 'L''expiration devient active par la contraction des abdominaux et des
+  abaisseurs des côtes : à l''exercice, ou en plongée contre le détendeur.'
+archived: false

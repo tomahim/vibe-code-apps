@@ -1,0 +1,21 @@
+id: a11c61a7-1661-486f-b418-2d1156225d2a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pour un guide, quel est l'intérêt pratique de ces chiffres de ventilation
+  ?
+choices:
+- id: 2822452d-1d40-40e2-b0ed-d34058fe4867
+  text: Gérer l'effort de la palanquée, c'est gérer sa consommation d'air.
+- id: 7ff269cf-2e21-4978-ab3a-436916fc22b3
+  text: Calculer au litre près l'autonomie de chaque plongeur encadré.
+- id: e273949f-baf1-43cd-a805-504d41d98332
+  text: Choisir la profondeur en fonction du seul volume courant.
+- id: dd5dfb65-7134-4c56-b1c6-d13d88345f14
+  text: Interdire tout dépassement de 10 litres par minute en plongée.
+correct_choice_ids:
+- 2822452d-1d40-40e2-b0ed-d34058fe4867
+explanation: 'Le débit réel dépend avant tout de l''effort : gérer l''effort de la
+  palanquée, c''est gérer sa consommation.'
+archived: false

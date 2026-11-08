@@ -1,0 +1,21 @@
+id: 9c976967-bfc8-4397-807d-5cb49f0a1b9e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi l'air entre-t-il dans les poumons à l'inspiration ?
+choices:
+- id: 1545cd52-5563-47dc-9258-a1643dd59be8
+  text: 'L''augmentation de volume de la cage thoracique fait baisser la pression
+    : l''air est aspiré par dépression.'
+- id: e36b168a-c195-44f2-a36b-5965e0ec4177
+  text: Les muscles des côtes poussent l'air de la trachée vers les alvéoles.
+- id: 9a07d6ac-528e-4581-9df2-498136c4bca7
+  text: La pression ambiante comprime la cage thoracique et y injecte l'air.
+- id: 9b06019d-0f1b-46f3-a1f9-fc057b4502d6
+  text: Le diaphragme se contracte et chasse l'air de la bouteille vers les poumons.
+correct_choice_ids:
+- 1545cd52-5563-47dc-9258-a1643dd59be8
+explanation: 'La solidarité diaphragme-côtes crée une augmentation de volume de la
+  cage thoracique, donc une baisse de pression : l''air s''engouffre, aspiré par dépression.'
+archived: false
