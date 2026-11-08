@@ -1,0 +1,22 @@
+id: 58c2ec7d-ee5c-476c-ac53-48cdabe868da
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le manuel de la prise habituelle de médicaments ?
+choices:
+- id: 02bc13c2-d14c-4919-9739-10e748fe3fe8
+  text: C'est a priori une contre-indication temporaire à la plongée, qui nécessite
+    l'avis d'un médecin spécialisé.
+- id: 8434e723-36a8-457e-acf9-bc597dd277b0
+  text: Cela ne pose aucun problème si le médicament est pris le matin même.
+- id: bc703756-736f-4e3f-9b7a-01f71d972e6d
+  text: Cela impose simplement de plonger moins profond que dix mètres.
+- id: 95503698-d236-4c29-9917-98a840e368e8
+  text: Cela interdit définitivement toute plongée, même encadrée.
+correct_choice_ids:
+- 02bc13c2-d14c-4919-9739-10e748fe3fe8
+explanation: Certains médicaments aggraveraient la narcose ; toute prise habituelle
+  de médicament est a priori une contre-indication temporaire nécessitant un avis
+  médical spécialisé.
+archived: false

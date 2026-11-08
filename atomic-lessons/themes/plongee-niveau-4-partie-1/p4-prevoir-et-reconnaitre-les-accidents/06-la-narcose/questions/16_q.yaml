@@ -1,0 +1,12 @@
+id: e2be00c0-7790-43d3-b95c-b485ada50117
+position: 16
+type: type_answer_question
+after_card_position: 1
+prompt: Quel est le surnom courant de la narcose à l'azote, évoquant l'état du plongeur
+  ?
+accepted_answers:
+- ivresse des profondeurs
+- l'ivresse des profondeurs
+explanation: 'L''« ivresse des profondeurs » : les paroles de Frédéric Dumas citées
+  par le manuel en donnent une description caractéristique.'
+archived: false

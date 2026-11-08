@@ -1,0 +1,20 @@
+id: e4598255-18d4-431c-9ace-1d4ed7772ddf
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle est la première mesure de la conduite à tenir ?
+choices:
+- id: c67753d0-4bf3-4119-bee7-453e310786ac
+  text: Sortir la victime de l'eau le plus rapidement possible.
+- id: bf15aafa-3860-45f6-a066-5af9d5b498bf
+  text: Faire redescendre la victime de quelques mètres pour la stabiliser.
+- id: f3baefcd-da69-4684-9242-cfd997f7b09a
+  text: Faire boire à la victime un grand verre d'eau sucrée.
+- id: 518686ab-6a3f-4ea4-9ce7-1ea42f3cb8d7
+  text: Faire tousser la victime pour vider complètement ses poumons.
+correct_choice_ids:
+- c67753d0-4bf3-4119-bee7-453e310786ac
+explanation: Sortie de l'eau rapide, mise à l'abri, retrait de la combinaison pour
+  favoriser la ventilation et les flux sanguins.
+archived: false

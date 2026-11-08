@@ -1,0 +1,22 @@
+id: 30b9ad5f-c54d-40f3-b396-a72bd10b5033
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel rôle de prévention le guide joue-t-il face au risque d'OPI ?
+choices:
+- id: e4b032d9-17d4-41ad-9d6f-e763d49fe609
+  text: Adapter l'effort à la palanquée, gérer le froid et le stress, ne pousser personne
+    au-delà de ses limites.
+- id: 69e2caa4-35f0-441d-b16f-48ef071d05ad
+  text: Exiger de chaque plongeur un certificat de tension artérielle avant chaque
+    sortie.
+- id: 63dfb44f-8da0-4fd6-902a-628ae90d9f09
+  text: Interdire la plongée à toute personne de plus de quarante ans.
+- id: d57c7c1b-ee30-4197-b264-42d79061f9cf
+  text: Faire nager chaque plongeur sur le dos pour soulager sa pression thoracique.
+correct_choice_ids:
+- e4b032d9-17d4-41ad-9d6f-e763d49fe609
+explanation: 'L''effort et le stress augmentent la pression capillaire pulmonaire
+  : le guide adapte l''effort, gère le froid et rassure sa palanquée.'
+archived: false

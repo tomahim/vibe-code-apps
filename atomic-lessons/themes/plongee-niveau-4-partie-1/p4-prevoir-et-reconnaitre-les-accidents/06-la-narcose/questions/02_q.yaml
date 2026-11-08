@@ -1,0 +1,25 @@
+id: d5193760-aa79-4428-a30f-abdceab8f5a9
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles sont les deux théories avancées pour expliquer la narcose ?
+choices:
+- id: 49f7a14d-e33f-4022-83c9-297badf92c9d
+  text: La théorie lipidique (gonflement des membranes des cellules nerveuses) et
+    la théorie protéique (fixation des gaz inertes sur les protéines des neurones).
+- id: c2db6d22-d552-4b91-b43d-c2716d354a9e
+  text: La théorie de l'écrasement alvéolaire à la remontée et la théorie de l'embolie
+    cérébrale par bulles d'air.
+- id: 12767d7f-f035-44ba-999f-085bdb096d5f
+  text: La théorie du froid sur les membranes cellulaires et la théorie de la fatigue
+    des cellules nerveuses.
+- id: 696e186a-aa49-435d-ba41-872d6dc8f8b5
+  text: La théorie de la toxicité de l'oxygène et la théorie de l'accumulation du
+    gaz carbonique.
+correct_choice_ids:
+- 49f7a14d-e33f-4022-83c9-297badf92c9d
+explanation: 'Les deux théories, qui se complètent probablement : diffusion du gaz
+  inerte dans la couche lipidique des membranes, ou fixation directe sur les protéines
+  de la membrane des neurones.'
+archived: false

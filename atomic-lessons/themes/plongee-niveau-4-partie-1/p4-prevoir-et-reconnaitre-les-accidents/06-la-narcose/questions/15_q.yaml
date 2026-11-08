@@ -1,0 +1,21 @@
+id: cb0239c8-7138-4a13-bc6d-57af45d1ca19
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle vitesse de descente le manuel préconise-t-il en prévention de la narcose
+  ?
+choices:
+- id: 194ac5f3-8418-4ec2-90e4-ac4a3ee62f01
+  text: Limitée à 30 m/min, et ralentie au-delà de 30 mètres de profondeur.
+- id: 8d555b6b-7aef-4a82-8d67-2fe1d23e28c0
+  text: Limitée à 60 m/min, quelle que soit la profondeur atteinte.
+- id: 9dc78c8e-0d55-421f-9606-2fce444665b0
+  text: La plus rapide possible, pour traverser vite la zone à risques.
+- id: 04feb23e-663d-4139-b450-0d803f8f3784
+  text: Exactement 9 m/min, comme la vitesse de remontée.
+correct_choice_ids:
+- 194ac5f3-8418-4ec2-90e4-ac4a3ee62f01
+explanation: Vitesse de descente limitée à 30 m/min et ralentie au-delà de 30 m ;
+  descentes avec repères visuels, efforts limités, entraînement régulier encadré.
+archived: false

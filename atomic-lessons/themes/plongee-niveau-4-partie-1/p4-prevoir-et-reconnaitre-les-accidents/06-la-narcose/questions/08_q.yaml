@@ -1,0 +1,22 @@
+id: 08a4183d-aa0d-4537-abaa-898728e8dd17
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels signes doivent alerter le guide de palanquée ?
+choices:
+- id: 2d382759-7285-4e6d-abce-b32cece55bb2
+  text: Non-réponse ou réponse inadaptée aux signes, attitude incohérente, non-respect
+    des consignes.
+- id: 4a5f1b44-0f4d-4d27-9d40-0e18dcc394ad
+  text: Un palmage régulier et un regard attentif sur ses instruments.
+- id: f8762f8b-1e58-412d-8cc4-636c5445acca
+  text: Un plongeur qui suit scrupuleusement le guide à distance constante.
+- id: 9a1c4a5f-8c68-447d-932d-e3d90424ee17
+  text: Une consommation d'air faible et régulière pendant toute la plongée.
+correct_choice_ids:
+- 2d382759-7285-4e6d-abce-b32cece55bb2
+explanation: 'Le guide repère : non-réponse ou réponse inadaptée aux signes usuels,
+  attitude incohérente (tout fascine, ou désintérêt total), consignes non respectées
+  (« Ok » puis il part à l''opposé).'
+archived: false

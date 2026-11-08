@@ -1,0 +1,25 @@
+id: 89c543ab-725b-488c-b505-a49614f93381
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce que l'œdème pulmonaire d'immersion (OPI) ?
+choices:
+- id: c822d827-be49-465c-b0cd-d09ec0c063cf
+  text: Une accumulation de liquide dans les poumons, pathologie décrite pour la première
+    fois dans les années 1980.
+- id: 91771301-2110-47f3-b3bb-7c6ab58fa863
+  text: Une poche d'air coincée entre les poumons et la cage thoracique, décrite dès
+    les années 1950.
+- id: d23b7786-4c64-4827-a48b-76f2d9e937bc
+  text: Une inflammation des bronchioles provoquée par le froid, connue depuis les
+    premiers scaphandres.
+- id: 7502e8aa-bb35-4bb9-a9c8-99b68f476412
+  text: Une noyade lente provoquée par l'entrée d'eau de mer dans la trachée pendant
+    la plongée.
+correct_choice_ids:
+- c822d827-be49-465c-b0cd-d09ec0c063cf
+explanation: 'OPI ou œdème aigu pulmonaire (OAP) : accumulation de liquide dans les
+  poumons ; pathologie relativement nouvelle, souvent bénigne, parfois récidivante,
+  qui peut être mortelle.'
+archived: false

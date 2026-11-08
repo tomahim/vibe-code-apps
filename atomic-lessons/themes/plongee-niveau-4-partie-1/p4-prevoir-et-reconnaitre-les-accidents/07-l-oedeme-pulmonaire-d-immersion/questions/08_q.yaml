@@ -1,0 +1,21 @@
+id: 97464385-5ba5-479a-99d6-09fe3ebe3e66
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels facteurs favorisent l'OPI selon le manuel ?
+choices:
+- id: 21e1e366-1191-486a-ac26-006e00539351
+  text: Tension artérielle élevée, anomalie cardiaque même légère, âge, eau froide,
+    effort, stress.
+- id: 2d36c4cd-fd8a-4888-acba-8e67011d7286
+  text: Uniquement le tabagisme et une mauvaise condition physique générale.
+- id: 6fdbdae4-3808-4e5b-8b68-71f9f3dcec1c
+  text: Uniquement la profondeur, au-delà de quarante mètres systématiquement.
+- id: ffd4fb92-6320-43ba-9bec-7fb3b00019c8
+  text: Uniquement une plongée de nuit par eau trouble et agitée.
+correct_choice_ids:
+- 21e1e366-1191-486a-ac26-006e00539351
+explanation: 'Le manuel liste : tension artérielle élevée, anomalie cardiaque même
+  légère, âge, eau froide, effort, stress.'
+archived: false
