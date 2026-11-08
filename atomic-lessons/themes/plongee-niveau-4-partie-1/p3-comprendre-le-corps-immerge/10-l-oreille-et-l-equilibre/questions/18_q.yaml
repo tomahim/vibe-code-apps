@@ -1,0 +1,14 @@
+id: 2afc070f-bf75-4a5e-94c3-a5654959a5b0
+position: 18
+type: type_answer_question
+after_card_position: 5
+prompt: Comment s'appellent les cellules de la cochlée qui transforment le mouvement
+  mécanique en impulsions électriques ?
+accepted_answers:
+- cellules ciliées
+- les cellules ciliées
+- cellules ciliees
+explanation: Les cils des cellules ciliées de la cochlée sont stimulés par le mouvement
+  du liquide et le transforment en impulsions électriques transmises au cerveau par
+  le nerf cochléaire.
+archived: false

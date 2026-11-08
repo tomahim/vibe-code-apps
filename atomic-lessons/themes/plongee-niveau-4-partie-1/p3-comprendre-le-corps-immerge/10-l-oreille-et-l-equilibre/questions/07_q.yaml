@@ -1,0 +1,20 @@
+id: f7bd9b58-2413-44f2-9dcb-5096a699398d
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qu'est-ce que le nerf auditif ?
+choices:
+- id: eedf8510-f3c8-4fca-b913-e601ece9eba7
+  text: La réunion du nerf cochléaire et du nerf vestibulaire.
+- id: 5fc345d2-b7a7-4655-ad86-b150249ab307
+  text: Le nerf qui commande les muscles péristaphylins.
+- id: 9291960e-9e84-41fe-9df5-d7e2ffdcc1d3
+  text: Le nerf optique de l'oreille interne.
+- id: fe74cb28-30ab-4e77-97d6-0555f7d252b0
+  text: Le nerf facial de l'oreille externe.
+correct_choice_ids:
+- eedf8510-f3c8-4fca-b913-e601ece9eba7
+explanation: Le nerf cochléaire (audition) et le nerf vestibulaire (équilibre) se
+  réunissent pour constituer le nerf auditif.
+archived: false

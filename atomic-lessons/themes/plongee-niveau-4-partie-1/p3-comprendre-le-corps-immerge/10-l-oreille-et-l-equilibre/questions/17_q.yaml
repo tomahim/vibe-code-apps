@@ -1,0 +1,21 @@
+id: 4a3576e7-8e0f-4193-91a0-471a5e15348e
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Par où la vibration sonore s'évacue-t-elle après avoir parcouru la cochlée
+  ?
+choices:
+- id: 1f533cd2-a3a6-43c1-8711-2b9f2380f77f
+  text: Par la fenêtre ronde.
+- id: 13d46910-a00f-41f4-b2d6-8a1360b7a3f8
+  text: Par la fenêtre ovale.
+- id: 71eb4fb9-3c82-48e1-a8be-d59b440c878b
+  text: Par la trompe d'Eustache.
+- id: b511df64-b542-4609-b73d-f9c6f4ca2a7b
+  text: Par le conduit auditif externe.
+correct_choice_ids:
+- 1f533cd2-a3a6-43c1-8711-2b9f2380f77f
+explanation: La vibration initiale s'évacue par la fenêtre ronde après avoir parcouru
+  toute la cochlée.
+archived: false
