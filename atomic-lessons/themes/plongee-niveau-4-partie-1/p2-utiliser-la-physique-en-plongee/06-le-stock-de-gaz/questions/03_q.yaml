@@ -1,0 +1,21 @@
+id: 276a5a7f-8978-46c6-9aa3-383158ea0cf5
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Jusqu'à quelles pressions les lois des gaz parfaits sont-elles valables selon
+  le manuel ?
+choices:
+- id: 506c25a8-2c71-4ccc-9f72-cf2d682952e6
+  text: Jusqu'à des pressions de l'ordre de 170 à 180 bars.
+- id: 37b8ab23-a8b7-43da-a83c-7321c1a6a445
+  text: Jusqu'à des pressions de l'ordre de 300 à 350 bars.
+- id: 9740ece1-58d1-448a-8fe6-98128f6c10f1
+  text: Jusqu'à des pressions de l'ordre de 50 à 60 bars.
+- id: 255a526b-7293-419f-96e1-c0f9e0c68a2e
+  text: Sans aucune limite pour l'air de plongée.
+correct_choice_ids:
+- 506c25a8-2c71-4ccc-9f72-cf2d682952e6
+explanation: Au-delà de 170 à 180 bars environ, l'air ne suit plus rigoureusement
+  les lois de Boyle-Mariotte, Charles, etc.
+archived: false

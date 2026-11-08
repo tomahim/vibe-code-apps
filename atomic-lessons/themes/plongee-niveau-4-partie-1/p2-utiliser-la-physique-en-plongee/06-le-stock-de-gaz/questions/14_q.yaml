@@ -1,0 +1,23 @@
+id: 31dfa0a5-6427-4d20-908f-06a17ef74204
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que prévoit le régime TIV cité par l'édition 2020 du manuel ?
+choices:
+- id: 89eb7667-6051-4d3d-99f7-57b561813d52
+  text: Une requalification tous les 6 ans, avec inspection visuelle par un TIV au
+    moins tous les 12 mois.
+- id: 4213e124-25f3-4fb2-997d-21b3266648be
+  text: Une suppression totale des requalifications pour les blocs récents.
+- id: 343c0a6b-b99d-456c-aea4-a389d9e97948
+  text: Une requalification annuelle réalisée par le propriétaire du bloc.
+- id: 22d73d79-621c-47af-8d0d-929074b1f446
+  text: Une requalification tous les 10 ans, sans inspection intermédiaire.
+correct_choice_ids:
+- 89eb7667-6051-4d3d-99f7-57b561813d52
+explanation: 'La décision BSERR n°15-106 du 08/12/2015, modifiée par l''arrêté du
+  20/11/2017 (cités dans l''édition 2020), porte la requalification de 2 à 6 ans sous
+  conditions : cahier des charges et inspection visuelle TIV annuelle consignée, avec
+  attestation.'
+archived: false

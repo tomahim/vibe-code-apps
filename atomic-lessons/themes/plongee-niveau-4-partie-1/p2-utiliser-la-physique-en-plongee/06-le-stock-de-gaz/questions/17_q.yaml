@@ -1,0 +1,23 @@
+id: 2b77664e-fb55-4a5a-9528-6684fb1618da
+position: 17
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi demande-t-on généralement de vider les bouteilles avant un transport
+  en car ou en navette ?
+choices:
+- id: 5f3d14ec-fbaa-4938-b991-67cb9329abdb
+  text: Le transport professionnel de bouteilles gonflées est soumis à l'ADR sur les
+    marchandises dangereuses.
+- id: 558df37a-0a18-470c-84ae-5dbc06bce801
+  text: Une bouteille pleine explose systématiquement dès que le véhicule freine.
+- id: a16ed940-6b66-4717-b06b-4856f6e7e3f1
+  text: Les bouteilles pleines dépassent le poids autorisé des navettes.
+- id: a199d0fc-0b3f-4d28-9e33-c67ed21a1aa0
+  text: Le bruit de la route fatigue le métal des bouteilles pleines.
+correct_choice_ids:
+- 5f3d14ec-fbaa-4938-b991-67cb9329abdb
+explanation: Le transport des bouteilles relève de l'ADR, sauf bouteilles vides ou
+  transport par des particuliers en pratique de loisir sportif ; tout transport professionnel
+  avec bouteilles gonflées y est soumis.
+archived: false

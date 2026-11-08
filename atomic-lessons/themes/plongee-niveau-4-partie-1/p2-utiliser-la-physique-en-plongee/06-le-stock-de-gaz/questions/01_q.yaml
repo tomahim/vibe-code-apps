@@ -1,0 +1,20 @@
+id: d45703d7-44ab-4875-8fa2-f6fe246a6337
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment obtient-on la capacité d'une bouteille de plongée ?
+choices:
+- id: 43cadd63-a06e-4e1b-82d9-4360fcf0743d
+  text: En multipliant le volume du bloc par sa pression de gonflage.
+- id: 7b26f899-f41f-436c-8f9a-fcc93d435d79
+  text: En divisant la pression de gonflage par le volume du bloc.
+- id: 918331b4-685e-4a17-9e1e-b2aa9771290e
+  text: En additionnant le volume du bloc et sa pression de service.
+- id: c415c612-518d-4803-bbcc-4370e08eb979
+  text: En multipliant le poids du bloc par la densité de l'acier.
+correct_choice_ids:
+- 43cadd63-a06e-4e1b-82d9-4360fcf0743d
+explanation: 'Le produit de la pression par le volume est constant : la capacité s''obtient
+  en multipliant le volume par la pression de gonflage.'
+archived: false

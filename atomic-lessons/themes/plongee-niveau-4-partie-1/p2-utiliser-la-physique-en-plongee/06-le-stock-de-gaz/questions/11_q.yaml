@@ -1,0 +1,21 @@
+id: d926784c-3e2d-4d56-827d-6777b1d21851
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles bouteilles peuvent recevoir tout type de gaz même sans gravage de
+  la nature du gaz ?
+choices:
+- id: 4331beee-7352-4838-841a-910ba0578697
+  text: Les bouteilles de plongée en aluminium.
+- id: d9c6c233-9cd6-4e79-af24-b150a774349c
+  text: Les bouteilles de plongée en acier uniquement.
+- id: 9a841853-7d88-4b3d-8e17-b5e26980a7eb
+  text: Les bouteilles de moins de 12 litres de volume.
+- id: ffa3dd9b-9130-44da-9f2f-64bb77451dff
+  text: 'Aucune bouteille : le gravage est toujours exigé.'
+correct_choice_ids:
+- 4331beee-7352-4838-841a-910ba0578697
+explanation: Les bouteilles de plongée en aluminium peuvent recevoir tout type de
+  gaz, même sans gravage de la nature du gaz sur la bouteille.
+archived: false

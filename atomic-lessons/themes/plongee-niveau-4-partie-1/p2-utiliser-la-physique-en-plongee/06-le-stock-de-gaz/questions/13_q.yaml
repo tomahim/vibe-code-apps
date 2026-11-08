@@ -1,0 +1,24 @@
+id: cb428e6f-1555-4f61-b682-cea04ccc4bd0
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment se déroule l'épreuve de requalification selon le manuel ?
+choices:
+- id: 82431f86-0752-4685-8886-eabc33d6f373
+  text: Bouteille remplie d'eau, soumise à au moins 120 % de sa pression de service
+    sans dépasser sa pression d'épreuve.
+- id: c9a88e93-e1b2-4154-8c8d-577ba0cfbf10
+  text: Bouteille remplie d'air, soumise à 200 % de sa pression de service pendant
+    une heure.
+- id: 643435f4-eeb8-4d18-a147-b56ca6c56a84
+  text: Bouteille vide, soumise à une dépression complète puis regonflée d'un coup.
+- id: 440b426d-a8ce-49cb-8714-ef6e3eba9407
+  text: Bouteille remplie d'huile, chauffée à 50 °C puis mise en pression.
+correct_choice_ids:
+- 82431f86-0752-4685-8886-eabc33d6f373
+explanation: 'L''épreuve se fait bouteille remplie d''eau, à au moins 120 % de la
+  PS sans dépasser la PE (généralement 1,5 fois la PS : par exemple 300 bars pour
+  un bloc à 200 bars). L''eau n''étant pas compressible, cela évite les projections
+  de métal en cas de fuite.'
+archived: false
