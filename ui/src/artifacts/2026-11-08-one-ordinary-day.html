@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>One Ordinary Day · Ten real lives</title>
+<style>
+:root{--paper:#f7f1e4;--ink:#233b35;--muted:#626c61;--line:#d6d5c5;--gold:#e4be73;--rust:#9b583d;--green:#294d43}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e9e5d9;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input,select{font:inherit}button,a,select,input{touch-action:manipulation}button{cursor:pointer}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #af642d;outline-offset:4px}button{border:0}button:disabled{opacity:.45;cursor:default}::selection{background:#ebcd92}.skip{position:absolute;top:-100px}.skip:focus{top:8px;left:8px;background:white;padding:12px;z-index:50}.mast{max-width:1480px;margin:auto;padding:23px 4%;display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line)}.brand{font-family:Georgia,serif;font-size:23px;letter-spacing:-.7px}.brand i{color:var(--rust)}.small{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;line-height:1.7}.mast-actions{display:flex;align-items:center;gap:18px}.quiet{color:var(--ink);background:transparent;min-height:44px;padding:10px 0;border-bottom:1px solid var(--ink)}.intro{max-width:1480px;padding:31px 4% 25px;margin:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:35px}.intro h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(42px,5.1vw,77px);letter-spacing:-3px;line-height:1;margin:8px 0}.intro p{max-width:355px;font-size:14px;line-height:1.7;margin:0 0 5px;color:var(--muted)}.kicker{color:var(--rust);font-size:10px;letter-spacing:2.4px;text-transform:uppercase;font-weight:bold}.workbench{max-width:1480px;margin:auto;padding:0 4%;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:start;gap:0}.left{position:sticky;top:20px}.scene{position:relative;background:#172f2a;height:530px;overflow:hidden;border-radius:5px 0 0 5px;color:#f2e9d5}.scene canvas{width:100%;height:100%;display:block}.scene-head{position:absolute;top:27px;left:28px;right:28px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}.scene-head .small{opacity:.7}.folio{font:italic 45px Georgia,serif;color:var(--gold)}.scene-bottom{position:absolute;bottom:24px;left:28px;right:28px;pointer-events:none}.scene-bottom h2{font:400 30px Georgia,serif;margin:5px 0 7px;letter-spacing:-.8px}.scene-bottom p{font-size:11px;line-height:1.7;color:#b8c7ba;margin:0}.scene-hint{position:absolute;left:28px;top:79px;max-width:220px;font-size:10px;line-height:1.7;color:#c3c8b7}.light-control{background:#1c3830;padding:13px 23px 16px;color:#d8dfcd;display:flex;align-items:center;gap:15px}.light-control label{font-size:10px;line-height:1.5;flex-shrink:0}.light-control input{min-width:30px;flex:1;accent-color:var(--gold);height:30px}.desk-objects{padding:15px 0 12px;font-size:11px;line-height:1.7;color:var(--muted);max-width:90%}.paper{background:var(--paper);padding:35px 40px 34px;border-radius:0 5px 5px 0;min-width:0;box-shadow:3px 8px 20px #484a3010}.dateline{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.8px;line-height:1.6;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:16px;color:var(--muted)}.paper h2{font:400 clamp(34px,3.4vw,48px)/1.05 Georgia,serif;letter-spacing:-1.8px;margin:24px 0 12px}.deck{font:italic 18px/1.45 Georgia,serif;color:var(--rust);margin:0 0 20px}.opening{font:15px/1.8 Georgia,serif;margin:0 0 23px}.chapter-tools{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:15px 0 11px;gap:15px}.chapter-tools .small{color:var(--muted);font-size:9px;letter-spacing:1px}.text-button{background:transparent;color:var(--green);font-size:11px;min-height:44px;text-decoration:underline;text-underline-offset:4px}.beat-nav{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}.beat-dot{flex:1;min-height:44px;background:#ece8d8;color:var(--muted);font:13px Georgia,serif;border-top:3px solid transparent}.beat-dot.active{background:var(--green);color:white;border-color:var(--gold)}.beat-dot.gap{background:transparent;border:1px dashed #b9bdac}.beat-dot.gap.active{background:#daddce;color:var(--green);border:1px dashed var(--green)}.beat{border-left:1px solid #afbaab;padding-left:19px;position:relative;margin:0 0 25px}.beat:before{content:'';height:7px;width:7px;background:var(--green);position:absolute;left:-4px;top:5px;border-radius:50%}.beat.gap{border-left-style:dashed}.beat.gap:before{background:var(--paper);border:1px solid var(--muted)}.beat-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px}.time{font-size:11px;color:var(--muted)}.badge{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#365449;background:#e1e8d9;padding:5px 8px;border-radius:2px}.badge.gap{background:#e8e4d6;color:#6a6a5c}.beat h3{font:400 24px/1.15 Georgia,serif;letter-spacing:-.5px;margin:0 0 10px}.beat p{font-size:13px;line-height:1.85;margin:0 0 12px;color:#435348}.evidence{font-size:12px;line-height:1.7}.evidence summary{cursor:pointer;min-height:44px;display:list-item;padding:10px 0;color:var(--green)}.evidence blockquote{font:italic 17px/1.6 Georgia,serif;margin:5px 0 10px;border-left:2px solid #d2b074;padding-left:12px}.evidence p{font-size:11px;color:var(--muted);line-height:1.7;overflow-wrap:anywhere}.source-address{margin:8px 0 10px}.source-address label{display:block;font-size:10px;color:var(--muted);margin:6px 0;line-height:1.6}.source-address input{display:block;width:100%;min-width:0;min-height:44px;padding:10px;border:1px solid var(--line);background:#eeeada;color:var(--ink);font-size:11px;border-radius:2px}.source-address button{min-height:44px;background:transparent;padding:8px 0;color:var(--green);font-size:11px;text-decoration:underline;text-underline-offset:4px}.source-link{display:inline-flex;align-items:center;min-height:44px;font-size:12px}.paging{display:flex;gap:12px;justify-content:space-between;align-items:center;margin:12px 0 22px}.nav-button{min-height:44px;padding:11px 17px;background:#e5e2d2;color:var(--ink);font-size:12px}.nav-button.primary{background:var(--green);color:#fff}.position{font:italic 13px Georgia,serif;color:var(--muted)}.context{border-top:1px solid var(--line);padding-top:15px;color:var(--muted);font-size:11px;line-height:1.8}.context summary{cursor:pointer;min-height:44px;padding:10px 0;color:var(--green);font-size:12px}.context p{margin:0 0 15px}.context strong{color:var(--ink)}.full .beat{margin-bottom:30px}.library{max-width:1480px;margin:38px auto 0;padding:0 4% 35px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:18px}.section-head h2{font:400 29px Georgia,serif;letter-spacing:-.8px;margin:0}.section-head span{font-size:11px;color:var(--muted)}.shelves{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.spine{position:relative;text-align:left;min-height:142px;padding:17px 16px 15px;background:#f3eee1;border:1px solid #d4d4c4;border-radius:3px;color:var(--ink);display:flex;flex-direction:column;align-items:flex-start;transition:transform .18s,background .18s}.spine:hover{transform:translateY(-3px)}.spine[aria-pressed=true]{background:var(--green);color:#f4f0de;border-color:var(--green)}.spine .index{font:italic 21px Georgia,serif;color:var(--rust);margin-bottom:11px}.spine[aria-pressed=true] .index{color:var(--gold)}.spine .name{font:17px Georgia,serif;margin-bottom:7px}.spine .card-date{font-size:10px;opacity:.7;margin-top:auto}.spine .card-role{font-size:10px;margin-bottom:9px;opacity:.8;line-height:1.5}.read-mark{position:absolute;top:16px;right:14px;font-size:11px;color:#8a9d7e}.mobile-picker{display:none}.compare{max-width:1362px;margin:0 auto 35px;padding:25px 30px;background:#dedfcf;display:grid;grid-template-columns:1fr 1fr;gap:35px;border-radius:3px}.compare h2{font:400 27px Georgia,serif;letter-spacing:-.6px;margin:0 0 10px}.compare p{font-size:12px;line-height:1.8;color:#536254;margin:0}.compare-fields{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.compare-fields label{font-size:11px;display:flex;flex:1;flex-direction:column;gap:8px;min-width:90px}.compare-fields input{width:100%;min-height:44px;border:1px solid #aeb9a6;background:#f6f2e7;padding:8px;color:var(--ink);border-radius:2px}.compare-result{font:italic 14px/1.7 Georgia,serif;margin-top:16px!important;color:var(--ink)!important}.footer{max-width:1480px;margin:auto;padding:20px 4% 35px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:25px;color:var(--muted);font-size:10px;line-height:1.8}.footer p{margin:0;max-width:650px}.dialog{border:0;max-width:600px;width:calc(100% - 30px);background:var(--paper);color:var(--ink);padding:30px;box-shadow:0 20px 80px #0005;border-radius:4px;max-height:85vh}.dialog::backdrop{background:#122a23b3}.dialog h2{font:32px Georgia,serif;margin:0 0 20px;letter-spacing:-1px}.dialog p,.dialog li{font-size:13px;line-height:1.9}.dialog ul{padding-left:20px}.dialog button{float:right;min-width:44px;min-height:44px;background:var(--green);color:#fff;margin:0 0 10px 15px}.dialog a{overflow-wrap:anywhere}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.fallback-art{position:absolute;inset:20% 15%;transform:perspective(600px) rotateX(30deg) rotateZ(-8deg);background:#eadcb5;border:15px solid #7e5336;box-shadow:0 20px 40px #0008;padding:30px;text-align:center;font:30px Georgia,serif;color:var(--ink)}[hidden]{display:none!important}
+@media(min-width:1500px){.compare{max-width:1362px}}@media(max-width:900px){.intro{gap:20px}.intro p{max-width:290px}.paper{padding:28px}.scene{height:490px}.shelves{grid-template-columns:repeat(5,minmax(0,1fr))}.spine{padding:14px 11px}.spine .name{font-size:15px}.compare{margin:0 4% 30px}.scene-bottom h2{font-size:26px}}@media(max-width:680px){.mast{padding:13px 5%;gap:9px}.brand{font-size:20px}.mast-actions{gap:12px}.mast-actions .small{display:none}.quiet{font-size:11px}.intro{padding:23px 5% 22px;display:block}.intro h1{letter-spacing:-2px;margin:9px 0 14px;font-size:49px}.intro p{max-width:100%;font-size:12px}.workbench{display:flex;flex-direction:column;padding:0 5%}.left{width:100%;position:static}.scene{height:275px;border-radius:4px 4px 0 0}.scene-head{left:20px;right:20px;top:16px}.scene-head .small{font-size:9px}.folio{font-size:31px}.scene-bottom{left:20px;bottom:16px;right:20px}.scene-bottom h2{font-size:24px;display:inline;margin-right:8px}.scene-bottom p{font-size:9px;margin-top:5px}.scene-hint{left:20px;top:55px;font-size:9px;max-width:180px}.light-control{padding:4px 17px 8px;gap:10px}.light-control label{font-size:9px}.desk-objects{display:none}.paper{padding:23px 21px 25px;border-radius:0 0 4px 4px;width:100%}.dateline{font-size:9px;letter-spacing:.5px}.paper h2{font-size:38px;letter-spacing:-1.6px;margin:22px 0 12px}.opening{font-size:15px;line-height:1.8}.deck{font-size:17px}.beat h3{font-size:24px}.beat p{font-size:13px}.mobile-picker{display:block;margin:0 5% 16px}.mobile-picker label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;display:block;margin:0 0 9px;color:var(--muted)}.mobile-picker select{width:100%;height:46px;border:1px solid #b6bcab;color:var(--ink);background:var(--paper);padding:9px 12px;border-radius:3px;font-size:13px}.library{padding:0 5% 25px;margin-top:28px}.section-head h2{font-size:26px}.section-head span{font-size:10px}.shelves{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.spine{min-height:140px;padding:16px}.spine .name{font-size:18px}.spine .index{font-size:20px;margin-bottom:9px}.compare{display:block;margin:0 5% 25px;padding:22px}.compare-fields{margin-top:20px;gap:9px}.compare-fields label{min-width:100%;flex:auto}.compare-fields input{max-width:100%}.footer{padding:18px 5% 28px;display:block}.footer p{margin-bottom:12px}.dialog{padding:24px}.paging{gap:8px}.nav-button{padding:11px 13px}.chapter-tools{gap:8px}.chapter-tools .small{font-size:8px}.text-button{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style></head><body>
+<a class="skip" href="#reading">Skip to the story</a>
+<header class="mast"><div class="brand">one <i>ordinary</i> day.</div><div class="mast-actions"><span class="small">The everyday archive · Vol. 01</span><button class="quiet" id="methodButton">How we know</button></div></header>
+<section class="intro"><div><div class="kicker">Ten real lives. Ten dated pages.</div><h1>History, at human scale.</h1></div><p>No invented dialogue. No filled-in hours.<br>A little of someone's day, exactly as far as the record lets us go.</p></section>
+<div class="mobile-picker"><label for="storySelect">Open a different day</label><select id="storySelect"></select></div>
+<main class="workbench" id="reading"><aside class="left"><div class="scene" id="scene"><canvas id="desk" role="img" aria-label="An illustrative three-dimensional reading desk with an open diary and symbolic objects. Not a reconstruction of the diarist's room."></canvas><div class="scene-head"><span class="small" id="sceneRole"></span><span class="folio" id="folio">01</span></div><div class="scene-hint">An imagined reading desk.<br>Objects are symbols, not artefacts.</div><div class="scene-bottom"><div class="small" id="sceneDate"></div><h2 id="sceneName"></h2><p id="scenePlace"></p></div></div><div class="light-control"><label for="light">Reading light<br><span style="opacity:.6">illustration only</span></label><span aria-hidden="true">☾</span><input id="light" type="range" min="0" max="100" value="65" aria-label="Illustrative desk lighting"><span aria-hidden="true">☀</span></div><div class="desk-objects" id="objectCaption"></div></aside>
+<article class="paper" aria-labelledby="storyTitle"><div class="dateline"><span id="paperDate"></span><span id="paperPlace"></span></div><h2 id="storyTitle"></h2><p class="deck" id="deck"></p><p class="opening" id="opening"></p><div class="chapter-tools"><span class="small">The surviving sequence, not a 24-hour log</span><button class="text-button" id="fullButton" aria-pressed="false">Read all moments</button></div><div class="beat-nav" id="beatNav" aria-label="Choose a moment"></div><div id="beats" aria-live="polite" aria-atomic="true"></div><div class="paging"><button class="nav-button" id="previous">← Previous</button><span class="position" id="position"></span><button class="nav-button primary" id="next">Next moment →</button></div><details class="context" id="context"><summary>Context & the limits of this page</summary><p id="contextText"></p><p><strong>What we cannot know</strong><br><span id="limitText"></span></p><p id="editionText"></p><div id="entrySource"></div></details></article></main>
+<section class="library" aria-labelledby="libraryTitle"><div class="section-head"><h2 id="libraryTitle">Ten doors into a day</h2><span id="readCount">0 / 10 explored</span></div><div class="shelves" id="shelves"></div></section>
+<section class="compare" aria-labelledby="compareTitle"><div><div class="kicker" style="margin-bottom:9px">Then, beside now</div><h2 id="compareTitle">What does your day leave behind?</h2><p>Add three times from your own day. Compare the shape, not the standard of living. These optional notes stay only in this open page, are not sent anywhere, and disappear when you reload.</p></div><div><div class="compare-fields"><label>Woke up<input type="time" id="wake"></label><label>A main meal<input type="time" id="meal"></label><label>Finished work / study<input type="time" id="finish"></label><button class="text-button" id="clearNotes">Clear</button></div><p class="compare-result" id="compareResult">A missing hour is not an invitation to invent one.</p></div></section>
+<footer class="footer"><p>Volume 01 uses English-language records from Britain and North America, 1660-1941. This is a limited collection, not a representative sample of the world or of social classes. Some diarists were privileged; some later became famous. The focus is ordinary activities.</p><p>Ten dated accounts · Curated 8 November 2026<br>Primary voices, mediated by editions and selections.</p></footer>
+<dialog class="dialog" id="method"><button id="closeMethod" aria-label="Close source method">✕</button><div class="kicker">An honest reconstruction</div><h2>The record sets the boundary.</h2><p>Each story is built around one named person and one dated diary entry. The story and moments are editorial paraphrases. Open “See the evidence” to find a short source excerpt and a direct link.</p><ul><li><strong>Documented</strong> means the cited entry says it. It does not mean the diarist was unbiased, complete or independently corroborated.</li><li><strong>Not recorded</strong> marks a gap. We do not supply a plausible breakfast, bedtime, motive or conversation.</li><li>Only clock times explicitly present in the record are displayed as clock times. “After dinner” is not silently translated into 19:00.</li><li>Reading order follows the entry where possible. Events with no established place in that sequence say so.</li><li>The 3D desk, objects and light are an illustration. They are not evidence about possessions, rooms or weather.</li></ul><p>These are excerpts and edited transcriptions. The source notes retain edition limits. Short quotations are for identification and commentary; the full texts remain with their source publishers. In the gallery, select and copy a source address to open it in your browser; the embedded page cannot open new tabs.</p><p>No account, tracking, downloads or network requests are needed. Reading progress and optional comparison times exist only in this page's memory.</p></dialog>
+<script id="story-data" type="application/json">[
+  {
+    "id": "forten",
+    "name": "Charlotte Forten",
+    "role": "Student",
+    "place": "Salem, Massachusetts",
+    "date": "24 May 1854",
+    "title": "Before the sun gets ahead",
+    "deck": "Arithmetic, sewing, the water, and a new Dickens story.",
+    "intro": "A school day begins with a small competition against the sun. Charlotte Forten is sixteen, and she has risen at five, only to find daylight already at her window. There is a lesson to prepare before breakfast. The rest of the entry moves between schoolwork, music, sewing and a walk beside the water. This is also the day she begins the journal that lets us follow her. Nothing here requires a famous event to become worth remembering.",
+    "context": "Forten came from a prominent free Black family. The edition places her in Salem after exclusion from white schools in Philadelphia. Her access to education was hard-won, not something every young woman could assume.",
+    "source": "https://nationalhumanitiescenter.org/pds/maai/identity/text3/charlottefortenjournal.pdf",
+    "edition": "National Humanities Center, selections from the journal edited by Ray Allen Billington (1953), entry of 24 May 1854.",
+    "limit": "The wake-up time is explicit. The later clock times, meals, route and bedtime are not. A diary is her account, not an independently verified recording.",
+    "objects": [
+      "book",
+      "spool",
+      "cup"
+    ],
+    "beats": [
+      {
+        "time": "05:00",
+        "title": "Daylight at the window",
+        "text": "She rises at five. Outside, the trees are in blossom and birds are singing. She listens at the window, then remembers the arithmetic lesson waiting before breakfast.",
+        "evidence": "Rose at five.",
+        "status": "documented"
+      },
+      {
+        "time": "After breakfast",
+        "title": "A first page at school",
+        "text": "Breakfast gives way to school. Forten recites her lessons and starts her journal: an ordinary school task and the beginning of the record we are reading.",
+        "evidence": "recited my lessons, and commenced my journal",
+        "status": "documented"
+      },
+      {
+        "time": "After dinner",
+        "title": "Music, then a needle",
+        "text": "After dinner she practices music, then sews. The diary names both activities without giving either a clock time.",
+        "evidence": "practiced a music lesson, did some sewing",
+        "status": "documented"
+      },
+      {
+        "time": "Later, on her walk",
+        "title": "Watching a boat",
+        "text": "By the water she watches the waves rise and fall in the sunshine. Boys are out in a sailing boat; she records envying them.",
+        "evidence": "envying a party of boys",
+        "status": "documented"
+      },
+      {
+        "time": "On the way home",
+        "title": "A new story",
+        "text": "On the way home she stops at Mrs. Putnam's. There she starts Hard Times, a new story by Dickens. A book enters an already full day.",
+        "evidence": "commenced reading “Hard Times,”",
+        "status": "documented"
+      },
+      {
+        "time": "Night",
+        "title": "The page falls silent",
+        "text": "No bedtime or night-time routine is given in this selected entry. Leave this part of the day empty.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "turner",
+    "name": "Thomas Turner",
+    "role": "Shopkeeper & parish officer",
+    "place": "East Hoathly, Sussex",
+    "date": "25 February 1754",
+    "title": "Tea after a rumour",
+    "deck": "A borrowed horse, an unwanted report, and the relief of coming home.",
+    "intro": "An ordinary errand can begin with something said about your marriage. John Richards comes to Thomas Turner's house with a report circulating in Lewes: Turner and his wife are said not to get along. Turner hires a horse and goes to find out more. The page ends with tea at home and the cost of the journey. We know his pleasure at that tea because he says so. We do not know his wife's private version of the day.",
+    "context": "Turner was both a village shopkeeper and a parish officer. This is a published transcription of a diary, not a complete record of the household. The site explains that its underlying Worcester transcription is selective and not fully accurate.",
+    "source": "https://thomasturner.org.uk/",
+    "edition": "Thomas Turner diary site, entry of 25 February 1754, based on Dean K. Worcester's 1948 transcription. Edition notes: https://thomasturner.org.uk/about",
+    "limit": "The visit and trip are in narrative order, without clock times. Only the return is placed in the evening. Pleasure is Turner's reported assessment, not his wife's testimony.",
+    "objects": [
+      "cup",
+      "ledger",
+      "coin"
+    ],
+    "beats": [
+      {
+        "time": "Before the trip; hour unknown",
+        "title": "News arrives at the house",
+        "text": "John Richards tells Turner about a report in Lewes concerning disagreement between Turner and his wife. The report is documented as something Turner heard, not as a true account of their marriage.",
+        "evidence": "John Richards called at my house",
+        "status": "documented"
+      },
+      {
+        "time": "Then; hour unknown",
+        "title": "A hired horse to Lewes",
+        "text": "Turner hires Elphick's horse and goes to Lewes. He finds Mr. Madgwick holds that opinion. The entry does not preserve the words of their conversation.",
+        "evidence": "hired Elphick’s horse and went to Lewes",
+        "status": "documented"
+      },
+      {
+        "time": "Evening",
+        "title": "Tea together",
+        "text": "He comes home and drinks tea with his wife. He describes it as pleasurable to them both. That is his own account of the encounter.",
+        "evidence": "drank tea with my wife",
+        "status": "documented"
+      },
+      {
+        "time": "Recorded cost; payment time unknown",
+        "title": "Ten pence on the page",
+        "text": "He records spending 10d at Lewes. We cannot split the sum into horse hire, food or other costs from this entry.",
+        "evidence": "Spent 10d at Lewes.",
+        "status": "documented"
+      },
+      {
+        "time": "After tea",
+        "title": "No further entry",
+        "text": "No bedtime, later conversation or resolution of the rumour is recorded here. A reassuring ending is not proof that everything was settled.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "cooper",
+    "name": "Mary Cooper",
+    "role": "Farm wife",
+    "place": "Long Island, New York",
+    "date": "1 August 1769",
+    "title": "Two dogs in the bedroom",
+    "deck": "Finished work, a short visit, and guests who will not leave her in peace.",
+    "intro": "Mary Cooper has finished her work and, for a moment, feels more comfortable. She goes to meet Ester and Salle at Salle Wheeler's. Then she is urgently called back. Ben Hildrith has arrived by boat with two men and two dogs. The dogs are allowed at the table and in the bedroom, and Mary is up late and upset. The details are almost painfully domestic. A visitor's arrival can reorganize someone else's entire day.",
+    "context": "Cooper's household farmed near Oyster Bay and also accommodated travellers. The edition identifies enslaved people in her household elsewhere in the diary. Her account of hard work must not erase that unequal setting or turn her into a representative of everyone on the farm.",
+    "source": "https://nationalhumanitiescenter.org/pds/becomingamer/peoples/text5/marycooper.pdf",
+    "edition": "National Humanities Center, excerpts from The Diary of Mary Cooper, edited by Field Horne (1981), entry of 1 August 1769; context from the edition's introduction and notes.",
+    "limit": "Work tasks and exact hours are not listed. Anxiety, relief and irritation are hers as recorded; the guests' motives and the experiences of others in the household are not supplied.",
+    "objects": [
+      "spool",
+      "cup",
+      "boat"
+    ],
+    "beats": [
+      {
+        "time": "Morning",
+        "title": "A clear day, an anxious start",
+        "text": "The morning is clear and cool. Cooper is worried that she may hear from her creditors. That anxiety is her own description of the start of the day.",
+        "evidence": "fearing I shall hear from some of my credtors",
+        "status": "documented"
+      },
+      {
+        "time": "Afternoon",
+        "title": "Work is finished",
+        "text": "By afternoon the work is done, and Cooper feels more comfortable. The entry gives us the relief, but not a list of the tasks behind it.",
+        "evidence": "I have done my worke",
+        "status": "documented"
+      },
+      {
+        "time": "After that; hour unknown",
+        "title": "A visit cut short",
+        "text": "She goes to Salle Wheeler's to meet Ester and Salle. Then she is sent for in a great hurry: company has arrived back at the house.",
+        "evidence": "am sent after in greate hurre",
+        "status": "documented"
+      },
+      {
+        "time": "Later; hour unknown",
+        "title": "A boat brings company",
+        "text": "Ben Hildrith has come in a small boat with two men and two dogs. Mary objects to the dogs being kept at the table and in the bedroom.",
+        "evidence": "a littel boate with two men",
+        "status": "documented"
+      },
+      {
+        "time": "Late",
+        "title": "Still awake",
+        "text": "She is still up late, much bothered by the visitors and the dogs. We have her frustration, in her words, but no precise time when she finally sleeps.",
+        "evidence": "I am up late and much freted",
+        "status": "documented"
+      },
+      {
+        "time": "Unrecorded intervals",
+        "title": "No invented chores",
+        "text": "We have no continuous account of the hours between these moments. The page keeps that silence.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "ballard",
+    "name": "Martha Ballard",
+    "role": "Midwife & healer",
+    "place": "Hallowell community",
+    "date": "10 October 1785",
+    "title": "Two houses to visit",
+    "deck": "A morning call, another after noon, and a household network at work.",
+    "intro": "Martha Ballard's entry for this date is brief enough to fit on a small scrap of paper. She goes to one house before noon and another after noon. At the second, she finds both husband and wife better. In the evening, the girls go there too, while Mr. Ballard is away on another visit. This is not one of the diary's dramatic births. It is the quieter texture of care: returning, checking, and finding improvement.",
+    "context": "Ballard's diary recorded her healing and midwifery alongside domestic and community life. Its compressed names and spelling require caution. We do not turn an ambiguous surname or an unnamed group into a more detailed cast of characters.",
+    "source": "https://www.dohistory.org/diary/1785/10/17851008_txt.html",
+    "edition": "DoHistory, transcription of Martha Ballard's diary, page covering 8-17 October 1785; selected entry: 10 October. Background: https://www.dohistory.org/diary/about.html Place context: https://dohistory.org/timeline/timeline3.html",
+    "limit": "No clock times, travel method, treatment or payment is recorded for this date. The statement that the Westons were better is Ballard's observation, not a modern medical assessment.",
+    "objects": [
+      "bowl",
+      "bag",
+      "book"
+    ],
+    "beats": [
+      {
+        "time": "Before noon",
+        "title": "The Chamberlin household",
+        "text": "Before noon, Ballard goes to Mr. Chamberlin's. A short line records the visit without its purpose, treatment or duration.",
+        "evidence": "mr Chamberlins fore noon",
+        "status": "documented"
+      },
+      {
+        "time": "After noon",
+        "title": "The Weston household",
+        "text": "After noon she goes to Mr. Weston's. She finds both him and his wife better. It is a small piece of good news in a page full of care work.",
+        "evidence": "found him & his wife better",
+        "status": "documented"
+      },
+      {
+        "time": "Evening",
+        "title": "The girls go too",
+        "text": "In the evening, the girls go to the Weston household too. The diary does not name them individually in this entry.",
+        "evidence": "y e Girls went there at Eving",
+        "status": "documented"
+      },
+      {
+        "time": "Time not given",
+        "title": "Another journey",
+        "text": "Mr. Ballard has gone on a visit of his own. The transcription renders the destination as Mr. [Wheles], keeping uncertainty in the name visible.",
+        "evidence": "mr Ballard Gone to mr [Wheles]",
+        "status": "documented"
+      },
+      {
+        "time": "Night",
+        "title": "No full-night account",
+        "text": "There is no bedtime or further night-time activity in this entry. We do not borrow an overnight watch from a neighbouring date.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "wordsworth",
+    "name": "Dorothy Wordsworth",
+    "role": "Journal writer",
+    "place": "Ullswater, Lake District",
+    "date": "15 April 1802",
+    "title": "A walk in the wind",
+    "deck": "Dinner first. Then shelter, rough water, and flowers along the shore.",
+    "intro": "It begins as a walk after dinner, not as a famous poem. Dorothy Wordsworth leaves Eusemere with her brother William. Mrs. Clarkson accompanies them a little way, then turns back. The wind is strong enough to make them consider returning. They shelter, rest, notice a plough and avoid cows. Along the shore they encounter more and more daffodils. The remembered flowers belong to a day that also contains fatigue, weather and the practical business of getting somewhere.",
+    "context": "Wordsworth later became celebrated for these journals. She and her brother had the time and connections for this visit and walk; their day is not a sample of everyone's working life. The source is a personal observation, not a botanical survey.",
+    "source": "https://wordsworth-coleridge.com/home/dorothy/daffodils",
+    "edition": "The Grasmere Journal, entry of 15 April 1802, online transcription. Date and setting also checked against Lancaster University's FutureLearn reading: https://www.futurelearn.com/info/courses/william-wordsworth/0/steps/9880",
+    "limit": "The source says after dinner, without a clock time. The online passage used here does not give the whole evening, a precise route duration or a bedtime.",
+    "objects": [
+      "flower",
+      "book",
+      "stone"
+    ],
+    "beats": [
+      {
+        "time": "Morning; recalled in the entry",
+        "title": "Mild but threatening",
+        "text": "The morning is misty and threatening, but mild. This is the weather Dorothy remembers at the opening of her entry.",
+        "evidence": "a threatening, misty morning, but mild",
+        "status": "documented"
+      },
+      {
+        "time": "After dinner",
+        "title": "Setting off from Eusemere",
+        "text": "After dinner they set out from Eusemere. Mrs. Clarkson comes part of the way, then turns back. The diary supplies the meal as a marker, not an exact hour.",
+        "evidence": "We set off after dinner from Eusemere.",
+        "status": "documented"
+      },
+      {
+        "time": "During the walk",
+        "title": "Finding shelter",
+        "text": "The wind is furious enough to make them consider returning. They shelter first in a boathouse, then under a gorse bush. A plough is working in a field.",
+        "evidence": "We first rested in the large boat-house",
+        "status": "documented"
+      },
+      {
+        "time": "Further along",
+        "title": "Keeping clear of cows",
+        "text": "They cross into a field to avoid cows. There are people working nearby. Primroses and other small flowers appear beside the road.",
+        "evidence": "to avoid some cows",
+        "status": "documented"
+      },
+      {
+        "time": "Along the shore",
+        "title": "More and more flowers",
+        "text": "Beyond Gowbarrow Park, a few daffodils become more and more: a long belt along the shore. Dorothy records repeated rests, rough water and flowers moving in the wind.",
+        "evidence": "there were more and yet more",
+        "status": "documented"
+      },
+      {
+        "time": "Later hours",
+        "title": "The extract ends",
+        "text": "The passage used here does not provide the rest of the day. We do not supply a cosy arrival, supper or conversation about a future poem.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "lister",
+    "name": "Anne Lister",
+    "role": "Diarist, Shibden household",
+    "place": "Halifax, Yorkshire",
+    "date": "27 August 1817",
+    "title": "A wheel, a letter, a lecture",
+    "deck": "Study in the morning; engineering and company later on.",
+    "intro": "Anne Lister's day makes room for several different kinds of attention. There is a letter to finish, French history to read, Euclid to work through and natural history after dinner. At four she goes to see the wheels removed from a gig. Then come a walk, tea, and a lecture at seven. She is interested in the apparatus, but records another reason for lingering: Miss Brown. These are her own reported interests, not a romance invented to decorate the page.",
+    "context": "Lister was from a landowning family, not an economically typical worker. The archive transcription includes difficult shorthand, marginal times and encoded personal passages. Here we use only clearly readable activities in the dated entry, without guessing what ambiguous time notation means.",
+    "source": "https://www.catalogue.wyjs.org.uk/Record.aspx?id=CC00001%2F7%2F9%2F6%2F1%2F34&src=CalmView.Catalog",
+    "edition": "West Yorkshire Archive Service, SH:7/ML/E/1/0034, entry headed Wednesday 27 August 1817. The page contains several dates; this story uses only the 27th.",
+    "limit": "The entry explicitly gives four, seven and near eleven in its narrative. We leave its compressed waking and retiring notation uninterpreted. The desk and apparatus shown here are symbolic, not reconstructions.",
+    "objects": [
+      "book",
+      "wheel",
+      "letter"
+    ],
+    "beats": [
+      {
+        "time": "Before and after breakfast",
+        "title": "Finish the letter",
+        "text": "Before breakfast, and for half an hour afterwards, Lister finishes her letter to Isabella. The day also includes French history and a sequence of propositions from Euclid.",
+        "evidence": "Before breakfast and half an hour after",
+        "status": "documented"
+      },
+      {
+        "time": "Just after dinner",
+        "title": "Natural history",
+        "text": "Just after dinner she returns to volume seven of Goldsmith's History of the Earth. The diary records pages 233 to 268.",
+        "evidence": "Just after dinner read",
+        "status": "documented"
+      },
+      {
+        "time": "16:00",
+        "title": "The gig wheels come off",
+        "text": "At four she goes to Halifax to see Dalton take the wheels off his gig. She admires the axle arrangement and notes the fifteen guineas he paid for it. This is her assessment of the demonstration.",
+        "evidence": "At 4, went to Halifax",
+        "status": "documented"
+      },
+      {
+        "time": "Around the Halifax visit",
+        "title": "A letter posted, then tea",
+        "text": "On arriving in Halifax she posts her letter to Isabella in Berne. After seeing the gig wheels she walks around town, then drinks tea at Northgate.",
+        "evidence": "went to drink tea at Northgate",
+        "status": "documented"
+      },
+      {
+        "time": "19:00 to near 23:00",
+        "title": "The lecture runs late",
+        "text": "At seven she goes to the lecture. She sits in front of Miss Brown, passes her things to look at and speaks to her afterwards. The lecture and her lingering keep her out until near eleven.",
+        "evidence": "did not get home till near 11",
+        "status": "documented"
+      },
+      {
+        "time": "Other intervals",
+        "title": "Not a continuous timetable",
+        "text": "The entry is unusually detailed but still not a log of every hour. Travel duration, meals and bedtime remain incomplete.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "davis",
+    "name": "Emilie Davis",
+    "role": "Seamstress & diarist",
+    "place": "Philadelphia, Pennsylvania",
+    "date": "1 January 1863",
+    "title": "A party after the jubilee",
+    "deck": "A few lines hold a public change and a private evening.",
+    "intro": "Emilie Davis calls this a memorable day. Her short entry notes religious observance, open churches, an evening jubilee and a party at Jones's. The page does not describe a grand speech or list everything she did. Its centre is a person participating in community life. Ordinary lives do not stop at history's large dates: the Emancipation Proclamation takes effect, and Davis still tells us about going to a party and having a blessed time.",
+    "context": "Davis was a free Black woman whose work included sewing and domestic service. The Proclamation did not free every enslaved person everywhere in the United States: it applied to designated rebellious areas and excluded loyal border states. Its reach is checked against the National Archives, rather than the journal article's over-broad explanatory sentence.",
+    "source": "https://journals.psu.edu/pmhb/article/download/60404/60363/0",
+    "edition": "Kaye Wise Whitehead, Reconstructing the Life of a Colored Woman: The Pocket Diaries of Emilie F. Davis, Pennsylvania Magazine of History and Biography (2011), p. 561; reproduces the diary entry of 1 January 1863. Historical context: https://www.archives.gov/exhibits/featured-documents/emancipation-proclamation",
+    "limit": "Only a short quoted entry is available in this source. It does not establish her waking time, a particular church she personally attended that day, the party's start time or its guest list.",
+    "objects": [
+      "letter",
+      "spool",
+      "candle"
+    ],
+    "beats": [
+      {
+        "time": "Daytime; hour unknown",
+        "title": "The churches are open",
+        "text": "Davis describes a day of religious observance, with churches open. It is a community-wide scene in a very short entry, not a list of the services she herself attends.",
+        "evidence": "all the churches were open",
+        "status": "documented"
+      },
+      {
+        "time": "Evening",
+        "title": "A jubilee",
+        "text": "In the evening there is a jubilee. The diary gives us that word and the time of day, without a programme or a guest list.",
+        "evidence": "quite a Jubilee in the evens",
+        "status": "documented"
+      },
+      {
+        "time": "Same entry; hour unknown",
+        "title": "A party at Jones's",
+        "text": "She goes to a party at Jones's and records a blessed time. Her small pocket diary keeps the evening in just a few words.",
+        "evidence": "I went to Joness to a Party",
+        "status": "documented"
+      },
+      {
+        "time": "Unrecorded hours",
+        "title": "A small entry, a large silence",
+        "text": "There is no documented morning routine, work shift or bedtime here. This story stays a fragment rather than expanding three sentences into a fictional full day.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "parkman",
+    "name": "Ebenezer Parkman",
+    "role": "Parish minister",
+    "place": "Westborough, Massachusetts",
+    "date": "8 January 1776",
+    "title": "Still no dinner",
+    "deck": "House calls, food at last, and a letter in the evening.",
+    "intro": "For a minister, a day outside the house can be a chain of visits. Ebenezer Parkman calls on sick neighbours, prays, and keeps moving. He notes that he has not dined. When he reaches Ensign Snow's, the hosts are away, so he tells Mrs. Breed he needs something to eat. She prepares food. Later the hosts return and receive him gladly. By evening the diary has made room for more visits, family news and a letter.",
+    "context": "Parkman was an educated Congregational minister whose diary also records household resources and local obligations. His viewpoint is not that of every person he visits. In particular, the sick neighbours do not speak for themselves in this entry.",
+    "source": "https://www.colonialsociety.org/documents/ebenezer-parkman-world-diary-1776",
+    "edition": "Colonial Society of Massachusetts, Ebenezer Parkman's World, diary for 1776, entry of 8 January. Background: https://www.colonialsociety.org/documents/ebenezer-parkman-world/introduction",
+    "limit": "Most clock times are absent. We can follow the order of visits and the evening letter, but not assign a timetable, diagnose the patients, or know the conversations not written down.",
+    "objects": [
+      "book",
+      "bowl",
+      "letter"
+    ],
+    "beats": [
+      {
+        "time": "During the day",
+        "title": "Visits and prayers",
+        "text": "Parkman visits Mr. Hawes, then Mr. Artemas Bruce's little daughter, and prays. The first name before Hawes is damaged in the edition; the surname survives.",
+        "evidence": "visited and prayed",
+        "status": "documented"
+      },
+      {
+        "time": "Later; hour unknown",
+        "title": "Another call, still no meal",
+        "text": "There is another call, at Abraham Beeman's. Then a blunt note in the diary: he has not dined.",
+        "evidence": "Did not dine.",
+        "status": "documented"
+      },
+      {
+        "time": "At Ensign Snow's",
+        "title": "Asking for food",
+        "text": "At Ensign Snow's the hosts are away. Parkman tells Mrs. Breed that he needs to eat, and she prepares food. When the hosts return, he records a glad welcome.",
+        "evidence": "I was in need of Eating",
+        "status": "documented"
+      },
+      {
+        "time": "Returning home",
+        "title": "More people to see",
+        "text": "On his way home he calls on George Andrews, then at Timothy Warrin's. News of a son ill at camp enters the page alongside the visits.",
+        "evidence": "In returning home I called",
+        "status": "documented"
+      },
+      {
+        "time": "Evening",
+        "title": "A letter to Mr. Forbes",
+        "text": "News from his son William includes anxiety about illness in the family. In the evening Parkman writes to Mr. Forbes.",
+        "evidence": "At eve wrote to Mr. Forbes.",
+        "status": "documented"
+      },
+      {
+        "time": "Night",
+        "title": "No ending supplied",
+        "text": "The entry does not state when he sleeps or what happens after the letter. The day remains unfinished at the edge of the record.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "pepys",
+    "name": "Samuel Pepys",
+    "role": "Office worker & diarist",
+    "place": "London",
+    "date": "2 January 1659/60",
+    "title": "Bread and cheese will do",
+    "deck": "Failed appointments, borrowed money, cards, singing, and a late bite.",
+    "intro": "Samuel Pepys spends much of this day trying to find people. A gift of wine arrives in the morning. One appointment fails, he borrows money, and his office has nothing for him to do. He misses dinner, settles for bread, cheese and ale, then fails to find the same man again. Later he learns cribbage, sings until nine and goes home for another bite. A diary can preserve the shape of a day spent mostly between its intended destinations.",
+    "context": "Pepys was connected to a powerful patron and later became a senior naval administrator. His movements are not a typical poor Londoner's day. The source dates this entry 1659/60 under the old English year convention; this display preserves that label rather than silently converting calendars.",
+    "source": "https://www.pepysdiary.com/diary/1660/01/02/",
+    "edition": "The Diary of Samuel Pepys, online entry for 2 January 1659/60. Uses the diary text above the modern reader comments; those comments are not evidence for these beats.",
+    "limit": "Nine o'clock is explicit; most other hours are not. Rumours Pepys hears in Westminster Hall are not treated as verified political news. We do not give his wife's illness a modern diagnosis.",
+    "objects": [
+      "cup",
+      "coin",
+      "cheese"
+    ],
+    "beats": [
+      {
+        "time": "Morning",
+        "title": "A dozen bottles",
+        "text": "Before he goes out, East brings a dozen bottles of sack. Pepys gives him a shilling. Sheply later explains that the wine is a gift ordered by his patron.",
+        "evidence": "a dozen of bottles of sack",
+        "status": "documented"
+      },
+      {
+        "time": "Afterwards",
+        "title": "Appointments that do not happen",
+        "text": "Calthropp is out. Pepys borrows ten pounds from Andrewes, goes to the office and finds nothing to do. He spends time walking in Westminster Hall.",
+        "evidence": "where there was nothing to do",
+        "status": "documented"
+      },
+      {
+        "time": "Dinner; clock time unknown",
+        "title": "Too late for the meal",
+        "text": "He is too late for dinner at Mr. Crew's. With companions he goes for ale instead, eating bread and cheese. Later he tries Calthropp again, and misses him again.",
+        "evidence": "bread and cheese for my dinner",
+        "status": "documented"
+      },
+      {
+        "time": "Later",
+        "title": "Learning cribbage",
+        "text": "Mrs. Jemimah teaches him cribbage. In a day of failed errands, there is time to learn a card game.",
+        "evidence": "she taught me how to play at cribbage",
+        "status": "documented"
+      },
+      {
+        "time": "Until 21:00, then home",
+        "title": "Singing, then another bite",
+        "text": "At Will's, Pepys talks and sings with Mr. Ashwell until nine. At home his wife cuts a slice of brawn for him. Then they go to bed.",
+        "evidence": "talking and singing till nine o’clock",
+        "status": "documented"
+      },
+      {
+        "time": "Between the errands",
+        "title": "The minutes are missing",
+        "text": "Walking durations, most departure times and the conversations not recorded remain unknown. Do not mistake narrative order for a precise route log.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  },
+  {
+    "id": "last",
+    "name": "Nella Last",
+    "role": "Housewife & Mass Observation diarist",
+    "place": "Barrow-in-Furness, England",
+    "date": "15 January 1941",
+    "title": "Who works for a living?",
+    "deck": "A generous lunch becomes a disagreement about the value of housework.",
+    "intro": "Nella Last gives her son Cliff a very large helping at lunch. He has a train to catch back to his base. He compliments her cooking by suggesting she could cook for the Army if she ever has to work for a living. Nella challenges the premise: raising a family and making a home are already work. The source preserves her report of the exchange. It does not need an invented morning of kitchen tasks to make that labour matter.",
+    "context": "Last wrote for Mass Observation, a project recording everyday British life. These are brief excerpts published by the BBC, not the entire diary for this date. Wartime separation is part of the setting, but this story centres the household exchange she records.",
+    "source": "https://www.bbc.co.uk/history/british/britain_wwtwo/nella_last_01.shtml",
+    "edition": "BBC History, War Diary of Nella Last, private-life extracts, dated 15 January 1941. Published 1 July 2001. Based on Last's Mass Observation diary.",
+    "limit": "The train is a plan in the entry, not proof of the exact departure. The BBC selection does not document her whole morning or evening. Dialogue is paraphrased here rather than recreated as a scene.",
+    "objects": [
+      "bowl",
+      "cup",
+      "letter"
+    ],
+    "beats": [
+      {
+        "time": "Before lunch",
+        "title": "Not in this extract",
+        "text": "The selected passage does not list shopping, cooking steps or other work earlier that day. We leave those hours open instead of inventing a busy kitchen montage.",
+        "evidence": "",
+        "status": "gap"
+      },
+      {
+        "time": "Lunch",
+        "title": "A large helping",
+        "text": "Cliff has a train to catch back to his base after lunch. Nella gives him a very large helping. The BBC extract does not say what is on the plate.",
+        "evidence": "I gave Cliff a very big helping",
+        "status": "documented"
+      },
+      {
+        "time": "During the exchange",
+        "title": "A compliment with an assumption",
+        "text": "Cliff suggests she could cook for the Army if she ever has to work for a living. It is a compliment to her cooking with an assumption about her present life attached.",
+        "evidence": "come and cook for the Army",
+        "status": "documented"
+      },
+      {
+        "time": "Her reply",
+        "title": "Making a home is work",
+        "text": "Nella challenges him: a woman who brings up a family and makes a home is already working hard for her living. Her diary records the reply, not an apology or a change of mind from Cliff.",
+        "evidence": "working jolly hard for her living",
+        "status": "documented"
+      },
+      {
+        "time": "After lunch and later",
+        "title": "A train due, not a departure witnessed",
+        "text": "The excerpt says Cliff has to catch the train, but does not narrate the departure or Nella's evening. The record ends before a neat conclusion.",
+        "evidence": "",
+        "status": "gap"
+      }
+    ]
+  }
+]</script>
+<script>
+'use strict';
+const stories=JSON.parse(document.getElementById('story-data').textContent);let current=0,step=0,full=false;const read=new Set();const $=id=>document.getElementById(id);const objectLabels={book:'a book',spool:'a spool',cup:'a cup',ledger:'a ledger',coin:'coins',boat:'a small boat',bowl:'a bowl',bag:'a bag',flower:'flowers',stone:'stones',wheel:'a wheel',letter:'a folded letter',candle:'a candle',cheese:'a wedge of cheese'};
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+function external(url,text){const wrap=el('div','source-address');if(window.parent===window){const a=el('a','source-link',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';wrap.append(a)}const label=el('label','','Source address · select and copy to open in your browser');const input=el('input');input.type='text';input.readOnly=true;input.value=url;input.setAttribute('aria-label','Source address');input.addEventListener('focus',()=>input.select());label.append(input);const select=el('button','','Select source address');select.addEventListener('click',()=>{input.focus();input.select()});wrap.append(label,select);return wrap}
+function beatElement(b,index){const section=el('section','beat '+(b.status==='gap'?'gap':''));const meta=el('div','beat-meta');meta.append(el('span','time',b.time),el('span','badge '+(b.status==='gap'?'gap':''),b.status==='gap'?'Not recorded':'Documented'));section.append(meta,el('h3','',b.title),el('p','',b.text));if(b.evidence){const d=el('details','evidence');d.append(el('summary','','See the evidence'));d.append(el('blockquote','',b.evidence));d.append(el('p','','Short excerpt from the cited entry. Spelling follows the transcription.'));d.append(el('p','',stories[current].edition));d.append(external(stories[current].source,'Read this dated entry ↗'));section.append(d)}return section}
+function renderStep(){const s=stories[current];$('beatNav').replaceChildren();s.beats.forEach((b,i)=>{const n=el('button','beat-dot '+(b.status==='gap'?'gap ':'')+(i===step?'active':''),String(i+1).padStart(2,'0'));n.setAttribute('aria-label','Moment '+(i+1)+': '+b.title);n.setAttribute('aria-pressed',String(i===step));n.addEventListener('click',()=>{step=i;full=false;renderStep()});$('beatNav').append(n)});$('beats').className=full?'full':'';$('beats').replaceChildren(...(full?s.beats.map(beatElement):[beatElement(s.beats[step],step)]));$('fullButton').textContent=full?'One moment at a time':'Read all moments';$('fullButton').setAttribute('aria-pressed',String(full));$('previous').disabled=step===0;$('next').textContent=step===s.beats.length-1?'Next day →':'Next moment →';$('position').textContent=full?s.beats.length+' moments':(step+1)+' / '+s.beats.length;if(full)$('position').textContent='Full page';read.add(current);$('readCount').textContent=read.size+' / 10 explored';document.querySelectorAll('.read-mark').forEach((n,i)=>n.textContent=read.has(i)?'✓':'');updateCompare()}
+function choose(i,scroll=false){current=i;step=0;full=false;const s=stories[i];$('sceneRole').textContent=s.role;$('folio').textContent=String(i+1).padStart(2,'0');$('sceneDate').textContent=s.date;$('sceneName').textContent=s.name;$('scenePlace').textContent=s.place;$('paperDate').textContent=s.date;$('paperPlace').textContent=s.place;$('storyTitle').textContent=s.title;$('deck').textContent=s.deck;$('opening').textContent=s.intro;$('contextText').textContent=s.context;$('limitText').textContent=s.limit;$('editionText').textContent=s.edition;$('entrySource').replaceChildren(external(s.source,'Open the source entry ↗'));$('context').open=false;$('storySelect').value=String(i);$('objectCaption').textContent='On the illustrated desk: '+s.objects.map(x=>objectLabels[x]).join(', ')+'. Symbolic objects, not claims about what '+s.name+' owned.';document.querySelectorAll('.spine').forEach((n,j)=>n.setAttribute('aria-pressed',String(i===j)));renderStep();if(window.drawDesk)drawDesk();if(scroll)$('reading').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'})}
+stories.forEach((s,i)=>{const b=el('button','spine');b.setAttribute('aria-pressed',String(i===0));b.setAttribute('aria-label',s.name+', '+s.date);b.append(el('span','index',String(i+1).padStart(2,'0')),el('span','read-mark',''),el('span','name',s.name),el('span','card-role',s.role),el('span','card-date',s.date));b.addEventListener('click',()=>choose(i,true));$('shelves').append(b);const o=el('option','',String(i+1).padStart(2,'0')+' · '+s.name+' · '+s.date);o.value=String(i);$('storySelect').append(o)});
+$('storySelect').addEventListener('change',e=>choose(Number(e.target.value)));$('fullButton').addEventListener('click',()=>{full=!full;renderStep()});$('previous').addEventListener('click',()=>{if(step>0)step--;full=false;renderStep()});$('next').addEventListener('click',()=>{if(step<stories[current].beats.length-1){step++;full=false;renderStep()}else choose((current+1)%stories.length,true)});$('methodButton').addEventListener('click',()=>$('method').showModal());$('closeMethod').addEventListener('click',()=>$('method').close());$('method').addEventListener('click',e=>{if(e.target===$('method')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
+function updateCompare(){const vals=['wake','meal','finish'].map(id=>$(id).value);if(!vals.some(Boolean)){$('compareResult').textContent='A missing hour is not an invitation to invent one.';return}const parts=vals.map((v,i)=>v?['You woke at ','Your meal was at ','You finished at '][i]+v:null).filter(Boolean);const s=stories[current];$('compareResult').textContent=parts.join('. ')+'. '+(s.id==='forten'?'Forten records rising at 05:00; most later hours are absent.':'For '+s.name+', '+s.beats.filter(b=>b.evidence).length+' recorded moments survive here, but not a full clock.');}
+['wake','meal','finish'].forEach(id=>$(id).addEventListener('input',updateCompare));$('clearNotes').addEventListener('click',()=>{['wake','meal','finish'].forEach(id=>$(id).value='');updateCompare()});choose(0);
+</script>
+<script>
+// Small offline WebGL still life. No external libraries, requests, telemetry or storage.
+(()=>{const canvas=document.getElementById('desk'),gl=canvas.getContext('webgl',{antialias:true,alpha:false});if(!gl){const f=document.createElement('div');f.className='fallback-art';f.textContent='A page from another day';document.getElementById('scene').prepend(f);canvas.hidden=true;return}const vs='attribute vec3 p;attribute vec3 n;attribute vec3 c;uniform mat4 m;uniform float light;varying vec3 col;void main(){gl_Position=m*vec4(p,1.);float d=max(dot(normalize(n),normalize(vec3(-.5,1.,.7))),0.);col=c*(.3+d*.7)*(0.65+light*.45);}';const fs='precision mediump float;varying vec3 col;void main(){gl_FragColor=vec4(col,1.);}';function shader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Desk shader could not compile');return s}const prog=gl.createProgram();gl.attachShader(prog,shader(gl.VERTEX_SHADER,vs));gl.attachShader(prog,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error('Desk shader could not link');gl.useProgram(prog);gl.enable(gl.DEPTH_TEST);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);['p','n','c'].forEach((a,i)=>{const loc=gl.getAttribLocation(prog,a);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,3,gl.FLOAT,false,36,i*12)});const matrix=gl.getUniformLocation(prog,'m'),lightUniform=gl.getUniformLocation(prog,'light');let vertices=[];const colors={wood:[.32,.19,.105],edge:[.19,.115,.065],paper:[.85,.79,.61],page:[.94,.88,.72],ink:[.28,.34,.26],brass:[.66,.48,.22],rust:[.48,.235,.13],green:[.15,.3,.23],clay:[.57,.42,.27],white:[.74,.74,.61]};
+function tri(a,b,c,col){const u=b.map((x,i)=>x-a[i]),v=c.map((x,i)=>x-a[i]);let n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],l=Math.hypot(...n)||1;n=n.map(x=>x/l);for(const p of[a,b,c])vertices.push(...p,...n,...col)}
+function box(x,y,z,w,h,d,col){const p=[[x-w/2,y,z-d/2],[x+w/2,y,z-d/2],[x+w/2,y+h,z-d/2],[x-w/2,y+h,z-d/2],[x-w/2,y,z+d/2],[x+w/2,y,z+d/2],[x+w/2,y+h,z+d/2],[x-w/2,y+h,z+d/2]];for(const f of[[0,3,2,1],[4,5,6,7],[3,7,6,2],[0,1,5,4],[1,2,6,5],[0,4,7,3]]){tri(p[f[0]],p[f[1]],p[f[2]],col);tri(p[f[0]],p[f[2]],p[f[3]],col)}}
+function cylinder(x,y,z,r,h,col,r2=r,segments=24){for(let i=0;i<segments;i++){let a=i/segments*Math.PI*2,b=(i+1)/segments*Math.PI*2;let p=[x+Math.cos(a)*r,y,z+Math.sin(a)*r],q=[x+Math.cos(b)*r,y,z+Math.sin(b)*r],u=[x+Math.cos(a)*r2,y+h,z+Math.sin(a)*r2],v=[x+Math.cos(b)*r2,y+h,z+Math.sin(b)*r2];tri(p,u,v,col);tri(p,v,q,col);tri([x,y+h,z],v,u,col)}}
+function rod(a,b,r,col){const dir=b.map((x,i)=>x-a[i]),l=Math.hypot(...dir),n=dir.map(x=>x/l);let u=Math.abs(n[1])>.9?[1,0,0]:[0,1,0];let v=[n[1]*u[2]-n[2]*u[1],n[2]*u[0]-n[0]*u[2],n[0]*u[1]-n[1]*u[0]];let vl=Math.hypot(...v);v=v.map(x=>x/vl);u=[n[1]*v[2]-n[2]*v[1],n[2]*v[0]-n[0]*v[2],n[0]*v[1]-n[1]*v[0]];for(let i=0;i<10;i++){let t=i/10*Math.PI*2,t2=(i+1)/10*Math.PI*2;const off=t=>u.map((x,k)=>r*(x*Math.cos(t)+v[k]*Math.sin(t)));let o=off(t),p=off(t2);let a1=a.map((x,k)=>x+o[k]),a2=a.map((x,k)=>x+p[k]),b1=b.map((x,k)=>x+o[k]),b2=b.map((x,k)=>x+p[k]);tri(a1,b1,b2,col);tri(a1,b2,a2,col)}}
+function ring(x,y,z,r,col){for(let i=0;i<36;i++){const a=i/36*Math.PI*2,b=(i+1)/36*Math.PI*2;rod([x+r*Math.cos(a),y+r*Math.sin(a),z],[x+r*Math.cos(b),y+r*Math.sin(b),z],.025,col)}}
+function object(type,x,z){const c=colors;if(type==='cup'||type==='bowl'){cylinder(x,.12,z,.24,.035,c.brass);cylinder(x,.15,z,.17,type==='cup'?.29:.16,c.clay,.22);cylinder(x,.435,z,.175,.007,c.edge);if(type==='cup')ring(x+.23,.29,z,.1,c.clay)}else if(type==='book'||type==='ledger'){box(x,.11,z,.55,.05,.75,c.green);box(x,.16,z,.5,.11,.69,c.paper);box(x,.27,z,.55,.035,.75,c.green);box(x-.2,.31,z,.03,.006,.64,c.brass)}else if(type==='spool'){cylinder(x,.11,z,.18,.035,c.wood);cylinder(x,.145,z,.12,.35,c.rust);cylinder(x,.49,z,.18,.035,c.wood);for(let i=0;i<9;i++)cylinder(x,.17+i*.034,z,.125,.007,c.clay)}else if(type==='coin'){for(let j=0;j<5;j++)cylinder(x+j*.035,.12+j*.035,z+j*.025,.12,.029,c.brass);cylinder(x-.23,.12,z+.11,.12,.029,c.brass)}else if(type==='letter'){box(x,.12,z,.65,.015,.4,c.page);rod([x-.3,.14,z-.18],[x,.14,z+.04],.005,c.clay);rod([x+.3,.14,z-.18],[x,.14,z+.04],.005,c.clay);cylinder(x,.145,z+.04,.057,.01,c.rust)}else if(type==='candle'){cylinder(x,.11,z,.2,.04,c.brass);cylinder(x,.15,z,.07,.65,c.paper);cylinder(x,.8,z,.025,.06,c.edge,.01);tri([x-.03,.86,z],[x+.03,.86,z],[x,.99,z],[1,.65,.1])}else if(type==='wheel'){ring(x,.48,z,.35,c.wood);for(let i=0;i<10;i++){let t=i/10*6.28;rod([x,.48,z],[x+.35*Math.cos(t),.48+.35*Math.sin(t),z],.015,c.brass)}cylinder(x,.11,z,.17,.035,c.wood)}else if(type==='flower'){cylinder(x,.11,z,.12,.23,c.clay,.14);for(let j=0;j<3;j++){let dx=(j-1)*.13;rod([x,.33,z],[x+dx,.8+j*.1,z],.012,c.green);for(let i=0;i<6;i++){let a=i/6*6.28;tri([x+dx,.8+j*.1,z],[x+dx+.12*Math.cos(a),.8+j*.1+.12*Math.sin(a),z+.03],[x+dx+.12*Math.cos(a+.6),.8+j*.1+.12*Math.sin(a+.6),z+.02],c.brass)}}}else if(type==='boat'){tri([x-.4,.12,z],[x+.4,.12,z],[x+.2,.3,z+.19],c.wood);tri([x-.4,.12,z],[x+.2,.3,z+.19],[x-.2,.3,z+.19],c.wood);rod([x,.18,z],[x,.9,z],.015,c.brass);tri([x,.85,z],[x,.4,z],[x+.3,.4,z],c.paper)}else if(type==='bag'){box(x,.12,z,.5,.4,.35,c.rust);ring(x,.56,z,.15,c.edge);box(x,.4,z+.19,.15,.07,.015,c.brass)}else if(type==='cheese'){tri([x-.3,.12,z-.2],[x+.3,.12,z-.2],[x,.12,z+.3],c.brass);tri([x-.3,.12,z-.2],[x-.3,.33,z-.2],[x,.33,z+.3],c.brass);tri([x-.3,.12,z-.2],[x,.33,z+.3],[x,.12,z+.3],c.brass);tri([x-.3,.33,z-.2],[x+.3,.33,z-.2],[x,.33,z+.3],c.paper);tri([x+.3,.12,z-.2],[x,.12,z+.3],[x,.33,z+.3],c.rust);tri([x+.3,.12,z-.2],[x,.33,z+.3],[x+.3,.33,z-.2],c.rust)}else cylinder(x,.12,z,.2,.15,c.white,.12)}
+function geometry(){vertices=[];const c=colors;box(0,-.09,0,5.7,.2,3.8,c.wood);box(0,-.16,0,5.8,.1,3.9,c.edge);for(let i=0;i<8;i++)box(-2.5+i*.7,.112,0,.014,.004,3.8,[.26,.15,.08]);box(-.04,.13,0,2.35,.06,1.7,c.rust);box(-.57,.19,0,1.07,.12,1.57,c.paper);box(.55,.19,0,1.07,.12,1.57,c.paper);box(-.57,.31,0,1.07,.012,1.57,c.page);box(.55,.31,0,1.07,.012,1.57,c.page);box(-.01,.24,0,.065,.08,1.64,c.edge);for(let page=0;page<2;page++){let x=page===0?-.57:.55;for(let i=0;i<12;i++){const width=.62-(i%4)*.065;box(x-.03,.327,-.56+i*.085,width,.002,.009,[.48,.48,.36])}box(x,.33,-.68,.5,.002,.027,c.ink)}box(.77,.33,.02,.025,.008,1.7,c.rust);rod([.25,.38,.73],[.95,.38,.36],.024,c.wood);cylinder(1.45,.11,-.77,.115,.15,c.ink,.09);stories[current].objects.forEach((t,i)=>object(t,[-1.65,1.65,-1.6][i],[-.65,.47,.78][i]));gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW)}
+function multiply(a,b){let o=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k];return o}function normalize(v){const l=Math.hypot(...v);return v.map(x=>x/l)}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}function look(eye,target){const z=normalize(eye.map((v,i)=>v-target[i])),x=normalize(cross([0,1,0],z)),y=cross(z,x),dot=(a,b)=>a.reduce((t,v,i)=>t+v*b[i],0);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1])}let tilt=0,drag=false,startX=0;
+function render(){const r=canvas.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2),w=Math.round(r.width*d),h=Math.round(r.height*d);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}gl.viewport(0,0,w,h);const lv=Number(document.getElementById('light').value)/100;gl.clearColor(.065+lv*.015,.14+lv*.018,.12+lv*.01,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const aspect=w/h;const f=1/Math.tan(.63/2),near=.1,far=80;const p=new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)/(near-far),-1,0,0,2*far*near/(near-far),0]);const distance=aspect<1?7.0:7.3;const view=look([Math.sin(tilt)*distance,6.6,Math.cos(tilt)*distance],[0,.25,0]);gl.uniformMatrix4fv(matrix,false,multiply(p,view));gl.uniform1f(lightUniform,lv);gl.drawArrays(gl.TRIANGLES,0,vertices.length/9)}
+window.drawDesk=()=>{geometry();render()};document.getElementById('light').addEventListener('input',render);canvas.addEventListener('pointerdown',e=>{drag=true;startX=e.clientX;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!drag)return;tilt+=((e.clientX-startX)/250);tilt=Math.max(-.5,Math.min(.5,tilt));startX=e.clientX;render()});canvas.addEventListener('pointerup',()=>drag=false);canvas.addEventListener('pointercancel',()=>drag=false);new ResizeObserver(render).observe(canvas);geometry();render();})();
+</script></body></html>
