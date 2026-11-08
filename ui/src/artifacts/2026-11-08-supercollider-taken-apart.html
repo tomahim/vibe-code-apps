@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SuperCollider, taken apart</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0c0a14; --panel:#15121f; --panel2:#1d1930; --line:#2f2947;
+  --ink:#ece8f7; --muted:#a199bd; --faint:#6f6890;
+  --violet:#b48cff; --cyan:#5ee6e0; --gold:#f2b66d; --pink:#ff6fa8; --green:#7fe3a0; --red:#ff7a7a;
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#221a3d 0,transparent 60%),var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,sans-serif;color-scheme:dark;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.mast{max-width:1100px;margin:0 auto;padding:26px 18px 6px}
+.mast h1{margin:0;font:700 28px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.01em;background:linear-gradient(92deg,#d9c8ff,#b48cff 45%,#5ee6e0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mast p{margin:8px 0 0;color:var(--muted);font-size:14px;max-width:70ch}
+main{max-width:1100px;margin:0 auto;padding:8px 18px 170px}
+@media(min-width:900px){main{padding-bottom:48px}}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:rgba(12,10,20,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{flex:1;background:none;border:0;border-radius:10px;padding:7px 2px;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px;min-width:0}
+.tabs button b{font-size:16px;font-weight:600;line-height:1.2}
+.tabs button[aria-selected=true]{color:var(--ink);background:var(--panel2)}
+.tabs button[aria-selected=true] b{color:var(--cyan)}
+@media(min-width:900px){.tabs{position:sticky;top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--line);max-width:1100px;margin:10px auto 0;border-radius:12px;background:rgba(21,18,31,.9)}.tabs button{flex-direction:row;justify-content:center;gap:8px;font-size:13px}}
+section.pane{display:none;animation:fade .35s ease}
+section.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font:700 22px/1.25 Georgia,serif;margin:18px 0 4px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin:22px 0 8px}
+p.lead{color:var(--muted);margin:4px 0 14px;max-width:72ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.grid2{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.grid2>*{min-width:0}
+html,body{overflow-x:hidden}
+@media(min-width:900px){.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.grid2.wide{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+pre{margin:0;background:#0f0c19;border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow:auto;font-size:12px;line-height:1.55;color:#d8d0f0;white-space:pre}
+.btn{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600;font-size:14px}
+.btn.primary{background:linear-gradient(135deg,#6a46c9,#2aa6a6);border-color:transparent;color:#fff}
+.btn:hover{filter:brightness(1.15)}
+.btn[disabled]{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.note{font-size:12.5px;color:var(--muted);border-left:3px solid var(--violet);padding:4px 10px;margin:10px 0;background:rgba(180,140,255,.07);border-radius:0 8px 8px 0}
+.note.warn{border-color:var(--gold);background:rgba(242,182,109,.08)}
+.src{font-size:11px;color:var(--faint);margin-top:6px}
+.src code{color:var(--muted)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:13px}
+.kv span:nth-child(odd){color:var(--faint)}
+label.rng{display:grid;grid-template-columns:90px 1fr 56px;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:6px 0}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+select{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit}
+canvas{width:100%;display:block;border-radius:10px;background:#0f0c19;border:1px solid var(--line)}
+
+/* pipeline */
+.pipe{display:flex;flex-direction:column;gap:0}
+.stage{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:left;width:100%;transition:border-color .25s,background .25s,transform .25s}
+.stage .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--panel2);color:var(--violet);font-size:12px;font-weight:700;margin-right:8px}
+.stage .t{font-weight:700}
+.stage .s{display:block;color:var(--muted);font-size:13px;margin:2px 0 0 30px}
+.stage.on{border-color:var(--cyan);background:#16222b;}
+.stage.on .n{background:var(--cyan);color:#06222a}
+.link{width:2px;height:14px;background:var(--line);margin:0 0 0 22px;position:relative}
+.link.on{background:var(--cyan)}
+.payload{min-height:120px}
+.payload .tag{font-size:11px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+
+/* boot */
+.tree{font-size:13px;line-height:1.9}
+.tnode{display:inline-block;padding:1px 9px;border-radius:7px;border:1px solid var(--line);background:var(--panel2);margin:1px 0;transition:all .3s;opacity:.25}
+.tnode.on{opacity:1;border-color:var(--cyan);color:#fff}
+.tnode.fx{border-color:var(--gold)}
+.tl{padding-left:18px;border-left:1px dashed var(--line);margin-left:10px}
+.steps{display:flex;flex-direction:column;gap:6px;counter-reset:s}
+.stp{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;text-align:left;width:100%;opacity:.55}
+.stp.done{opacity:.85}
+.stp.cur{opacity:1;border-color:var(--violet);background:var(--panel2)}
+.stp i{font-style:normal;font-weight:700;color:var(--violet);min-width:18px}
+
+/* layers */
+.layerchips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--panel2);border-radius:99px;padding:3px 11px;font-size:12.5px;display:inline-flex;gap:6px;align-items:center}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chip.off{opacity:.35}
+.codebox{max-height:420px}
+.codebox .l1{color:#d6c1ff}.codebox .cm{color:#7e76a4}
+
+.adsr-out{font-size:13px}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.pal button{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 9px;text-align:left}
+.pal button.on{border-color:var(--gold);background:#251f1a}
+.pal b{display:block;font-size:13px}
+.pal span{font-size:11.5px;color:var(--muted)}
+.state{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.st{padding:10px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--panel);transition:all .3s}
+.st.on{border-color:var(--green);background:#14231b}
+.err{color:var(--red)}
+.ok{color:var(--green)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.tabs button{font-size:10.5px}
+.tabs button b{font-size:15px}
+.flow{display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:760px){.flow.h{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.box{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:10px 12px;position:relative;transition:all .3s}
+.box.on{border-color:var(--cyan);background:#16222b}
+.box.warn{border-color:var(--gold)}
+.box.dim{opacity:.35}
+.box .t{font-weight:700}.box .s{color:var(--muted);font-size:13px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:8px 0}
+.ctl label{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.ctl input[type=range]{width:130px}
+table.t{border-collapse:collapse;width:100%;font-size:12.5px}
+table.t td,table.t th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left;vertical-align:top}
+table.t th{color:var(--faint);font-weight:600}
+.wrap{overflow-x:auto}
+.badge{display:inline-block;border-radius:6px;padding:0 6px;font-size:11px;font-weight:700}
+.b-ar{background:#1f3b3a;color:var(--cyan)}.b-kr{background:#3a2f1a;color:var(--gold)}.b-ir{background:#2c2342;color:var(--violet)}
+.tn{display:block;border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:3px 8px;margin:3px 0;font-size:13px}
+.tn.src{border-color:var(--cyan)}.tn.fx{border-color:var(--gold)}.tn.grp{border-color:var(--violet);background:transparent}
+.tn .x{float:right;background:none;border:0;color:var(--faint);padding:0 4px}
+.tn .ord{display:inline-block;min-width:20px;color:var(--faint)}
+.kids{margin-left:14px;border-left:1px dashed var(--line);padding-left:8px}
+.msgs{font-size:12px;color:#cfc6ee;max-height:150px;overflow:auto}
+.hex span.w{display:inline-block;padding:1px 5px;margin:1px;border-radius:5px;background:var(--panel2);border:1px solid var(--line)}
+.meter{height:12px;border-radius:6px;background:#0f0c19;border:1px solid var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold));width:0;transition:width .2s}
+.srcl{margin-top:26px;border-top:1px solid var(--line);padding-top:10px;font-size:11.5px;color:var(--faint)}
+.srcl code{color:var(--muted);word-break:break-all}
+.sim{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+#c_msg,#trOut,#t_log,#o_sum{white-space:pre-wrap;word-break:break-word}
+</style>
+</head>
+<body>
+<header class="mast">
+  <h1>SuperCollider, taken apart</h1>
+  <p>An audio synthesis platform made of two programs that talk over a network protocol. Seven interactive steps: the client and the server, the node tree, SynthDefs, rates, buses, OSC and timing, and the language's patterns. Everything here models behaviour documented in the SuperCollider 3.14 help. The sounds are small browser previews, not SuperCollider itself.</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Steps">
+  <button role="tab" aria-selected="true" data-tab="pic"><b>1</b>Picture</button>
+  <button role="tab" aria-selected="false" data-tab="tree"><b>2</b>Tree</button>
+  <button role="tab" aria-selected="false" data-tab="def"><b>3</b>SynthDef</button>
+  <button role="tab" aria-selected="false" data-tab="rates"><b>4</b>Rates</button>
+  <button role="tab" aria-selected="false" data-tab="bus"><b>5</b>Buses</button>
+  <button role="tab" aria-selected="false" data-tab="osc"><b>6</b>OSC</button>
+  <button role="tab" aria-selected="false" data-tab="lang"><b>7</b>Patterns</button>
+</nav>
+
+<main>
+
+<!-- 1 -->
+<section class="pane on" id="pic">
+  <h2>Two programs, one protocol</h2>
+  <p class="lead">"SuperCollider" names five things: an audio server, a language, an interpreter, the interpreter acting as the server's client, and the application bundling them. The two programs that matter are <b>sclang</b> (language, interpreter, client) and <b>scsynth</b> (the server, or its multicore sibling <b>supernova</b>).</p>
+  <div class="grid2 wide">
+    <div>
+      <div class="ctl">
+        <label>Client <select id="cl"><option value="sclang">sclang (the usual one)</option><option value="script">your own script</option><option value="two">two clients at once</option></select></label>
+        <button class="btn primary" id="send">Send a line through</button>
+      </div>
+      <div class="flow" id="pipe"></div>
+    </div>
+    <div class="card" id="pcard" style="position:sticky;top:60px;align-self:start;min-height:180px" aria-live="polite"></div>
+  </div>
+
+  <h3>What the client really sends</h3>
+  <p class="lead">Pick a line of sclang. The server never sees it. It only receives the OSC messages the interpreter derives from it.</p>
+  <div class="card">
+    <div class="ctl"><select id="tr"></select></div>
+    <div class="grid2"><div><div class="tag">sclang line</div><pre id="trIn"></pre></div><div><div class="tag">OSC the server receives</div><pre id="trOut"></pre></div></div>
+    <p class="src" id="trNote"></p>
+  </div>
+  <div class="note">The server "knows nothing about SC code, objects, Object Oriented Programming, or anything else to do with the SC language." It does no MIDI either: a client receives MIDI and converts it to OSC commands.</div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Guides/ClientVsServer.html</code>, <code>https://doc.sccode.org/Reference/Server-Architecture.html</code>, <code>https://doc.sccode.org/Reference/Server-Command-Reference.html</code></div>
+</section>
+
+<!-- 2 -->
+<section class="pane" id="tree">
+  <h2>The node tree decides who runs first</h2>
+  <p class="lead">Everything running on the server is a <b>node</b>: a <b>synth</b> or a <b>group</b> of nodes. The tree is the order of execution. Within each control cycle the server calculates nodes top to bottom, so a synth that reads another synth's output must sit <i>after</i> it.</p>
+  <div class="grid2 wide">
+    <div class="card">
+      <div class="tag">Server node tree</div>
+      <div id="tr_view"></div>
+      <div class="note" id="tr_status" aria-live="polite"></div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="tag">Create a node (/s_new, /g_new)</div>
+        <div class="ctl">
+          <label>What <select id="t_kind"><option value="src">Source synth "pad" (writes bus 4)</option><option value="fx">Effect synth "reverb" (reads bus 4)</option><option value="grp">Group</option></select></label>
+          <label>Add action <select id="t_act"><option value="0">0 head of group</option><option value="1">1 tail of group</option><option value="2">2 before node</option><option value="3">3 after node</option><option value="4">4 replace node</option></select></label>
+          <label>Target <select id="t_tgt"></select></label>
+        </div>
+        <button class="btn primary" id="t_add">Send</button>
+        <button class="btn" id="t_bad">Load: effect before source</button>
+        <button class="btn" id="t_good">Load: source then effect</button>
+        <p class="src" id="t_err" style="color:var(--red)"></p>
+        <div class="tag" style="margin-top:10px">Messages sent</div>
+        <pre class="msgs" id="t_log"></pre>
+      </div>
+      <p class="src">Click the x on a node to send /n_free. Freeing a group frees everything inside it.</p>
+    </div>
+  </div>
+  <div class="note">Group 0 is the root. When the server is booted from sclang, group 1 is the default group and the default target for new nodes. The sclang client begins handing out node IDs at 1000 (<code>ServerOptions.initialNodeID</code>). Sending <code>/s_new</code> with ID -1 makes the server pick the ID, so you cannot address that node later.</div>
+  <div class="note warn">Order only matters when one synth reads another through a bus. Independent sources can sit anywhere. That is also why the next steps keep returning to buses.</div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Guides/Order-of-execution.html</code>, <code>https://doc.sccode.org/Reference/Server-Architecture.html</code>, <code>https://doc.sccode.org/Reference/Server-Command-Reference.html</code> (s_new add actions 0 to 4)</div>
+</section>
+
+<!-- 3 -->
+<section class="pane" id="def">
+  <h2>A SynthDef is a graph of unit generators</h2>
+  <p class="lead">A <b>SynthDef</b> is the template the server builds synths from. sclang runs your function once, records which <b>UGens</b> were connected how, and ships that graph to the server by name. Change the patch and watch the graph and the data structure change.</p>
+  <div class="grid2 wide">
+    <div class="card">
+      <div class="ctl">
+        <label>Oscillator <select id="d_osc"><option>SinOsc</option><option selected>Saw</option><option>Pulse</option></select></label>
+        <label><input type="checkbox" id="d_flt" checked> LPF filter</label>
+        <label><input type="checkbox" id="d_env" checked> perc envelope</label>
+      </div>
+      <label class="rng"><span>freq</span><input type="range" id="d_f" min="110" max="880" value="220"><output id="d_fo"></output></label>
+      <label class="rng"><span>cutoff</span><input type="range" id="d_c" min="200" max="6000" value="1800"><output id="d_co"></output></label>
+      <label class="rng"><span>attack</span><input type="range" id="d_a" min="1" max="400" value="10"><output id="d_ao"></output></label>
+      <label class="rng"><span>release</span><input type="range" id="d_r" min="100" max="2500" value="900"><output id="d_ro"></output></label>
+      <div class="tag" style="margin-top:8px">sclang</div>
+      <pre id="d_src"></pre>
+      <div class="row" style="margin-top:10px"><button class="btn primary" id="d_play">Play preview</button><span class="sim">browser preview, not scsynth</span></div>
+      <canvas id="d_cv" style="margin-top:8px" aria-label="Rendered waveform of the preview note"></canvas>
+    </div>
+    <div class="card">
+      <div class="tag">The UGen graph (what the server loads)</div>
+      <div class="wrap"><table class="t" id="d_tab"></table></div>
+      <div class="kv" style="margin-top:10px" id="d_kv"></div>
+    </div>
+  </div>
+  <div class="note">The definition file format starts with the four ASCII characters <code>SCgf</code> and a version, then lists constants, parameters (with names) and UGen specs. Each UGen spec has a class name, a calculation rate, input and output counts, and inputs that point at either a constant or another UGen's output. The table above is built that way. It is a faithful layout, not bytes captured from sclang, so small details (for instance how sclang optimises the multiplications) can differ.</div>
+  <div class="note">UGens are plug-ins the server loads at start-up. Their names match the sclang classes used to build SynthDefs. <code>doneAction: 2</code> (<code>Done.freeSelf</code>) tells the envelope to free the whole synth when it ends, so finished notes do not pile up in the tree.</div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Classes/SynthDef.html</code>, <code>https://doc.sccode.org/Reference/Synth-Definition-File-Format.html</code>, <code>https://doc.sccode.org/Classes/EnvGen.html</code>, <code>https://doc.sccode.org/Classes/Done.html</code></div>
+</section>
+
+<!-- 4 -->
+<section class="pane" id="rates">
+  <h2>Audio rate, control rate, once</h2>
+  <p class="lead">The server computes sound in small chunks. A <b>control period</b> is one chunk of <code>blockSize</code> samples (default 64). Every UGen has a calculation rate: <span class="badge b-ar">ar</span> one value per sample, <span class="badge b-kr">kr</span> one value per block, <span class="badge b-ir">ir</span> once when the synth starts.</p>
+  <div class="card">
+    <div class="ctl">
+      <label>Sample rate <select id="r_sr"><option>44100</option><option selected>48000</option><option>96000</option></select></label>
+      <label>Block size <select id="r_bs"><option>16</option><option>32</option><option selected>64</option><option>128</option></select></label>
+      <label>Signal Hz <input type="range" id="r_hz" min="60" max="900" value="220"><output id="r_hzo"></output></label>
+    </div>
+    <canvas id="r_cv" aria-label="The same sine at audio rate and control rate"></canvas>
+    <div class="kv" style="margin-top:10px" id="r_kv"></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><span class="badge b-ar">ar</span> <b>SinOsc.ar(220)</b><p class="src">Calculated for every sample. Use it for anything you hear directly: oscillators, filters, reverb.</p></div>
+    <div class="card"><span class="badge b-kr">kr</span> <b>SinOsc.kr(220)</b><p class="src">One value per block, so the curve steps. Cheap, and fine for slow movement: envelopes, LFOs, parameters. The staircase above is what a fast signal looks like at control rate.</p></div>
+  </div>
+  <div class="note">Smaller blocks mean finer control and more per-block overhead. The default is 64 and it is a server option (<code>-z</code> on the command line, <code>ServerOptions.blockSize</code>). Changing it is rare.</div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Classes/ServerOptions.html</code>, <code>https://doc.sccode.org/Reference/Server-Architecture.html</code>, <code>https://doc.sccode.org/Classes/UGen.html</code></div>
+</section>
+
+<!-- 5 -->
+<section class="pane" id="bus">
+  <h2>Buses are the patch cables</h2>
+  <p class="lead">Synths never connect to each other directly. They write to and read from numbered <b>buses</b>: one global array of audio buses and one of control buses. The lowest audio buses are the hardware outputs, followed by the inputs, and then private buses for internal routing.</p>
+  <div class="grid2 wide">
+    <div class="card">
+      <div class="tag">Audio buses: three sources and a reverb</div>
+      <div id="b_src"></div>
+      <label class="rng"><span>reverb wet</span><input type="range" id="b_wet" min="0" max="100" value="60"><output id="b_wo"></output></label>
+      <p class="src">Writing to a bus with <code>Out.ar</code> <b>adds</b> to what is already there. <code>ReplaceOut</code> overwrites instead.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Bus levels (sum of amplitudes)</div>
+      <div id="b_m"></div>
+      <pre id="b_code" style="margin-top:10px"></pre>
+    </div>
+  </div>
+  <div class="note">With the default options (2 output and 2 input channels), buses 0 and 1 reach the speakers, 2 and 3 are the inputs, and 4 is the first private bus. The reverb here reads bus 4, so it must run after every synth that writes to it (step 2).</div>
+
+  <h3>Control buses</h3>
+  <p class="lead">A control bus carries a slow signal. <code>/n_map</code> connects a synth parameter to a bus, so one LFO can move several synths. Toggle the mapping to see the parameter follow it.</p>
+  <div class="card">
+    <div class="ctl"><label><input type="checkbox" id="c_map" checked> map "cutoff" to control bus 0</label><label>LFO Hz <input type="range" id="c_hz" min="1" max="30" value="8"><output id="c_ho"></output></label></div>
+    <canvas id="c_cv" aria-label="Control bus LFO and mapped cutoff"></canvas>
+    <pre id="c_msg"></pre>
+  </div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Reference/Server-Architecture.html</code> (buses), <code>https://doc.sccode.org/Classes/ServerOptions.html</code> (default channel counts), <code>https://doc.sccode.org/Reference/Server-Command-Reference.html</code> (n_map)</div>
+</section>
+
+<!-- 6 -->
+<section class="pane" id="osc">
+  <h2>OSC: the actual bytes, and timing</h2>
+  <p class="lead">Open Sound Control messages are compact binary. An address, a type tag string, then arguments, everything padded to 4 bytes. The server also accepts <b>bundles</b>: messages wrapped with a time tag saying when to execute them.</p>
+  <div class="card">
+    <div class="ctl">
+      <select id="o_msg"></select>
+      <label><input type="checkbox" id="o_bun"> wrap in a bundle</label>
+      <label>Latency <input type="range" id="o_lat" min="0" max="500" value="200"><output id="o_lato"></output></label>
+      <label><input type="checkbox" id="o_now"> time tag "immediately"</label>
+    </div>
+    <div class="wrap hex"><table class="t" id="o_tab"></table></div>
+    <p class="src" id="o_sum"></p>
+  </div>
+
+  <h3>Why timestamps matter</h3>
+  <p class="lead">The client builds a note a little before it should sound, and the time it takes varies. Sent as plain messages, that variation is audible. Stamped with logical time plus a latency, the server plays each at the exact moment, as long as the message arrives before it is due.</p>
+  <div class="card">
+    <span class="sim">simulation of the documented principle</span>
+    <div class="ctl">
+      <label>Client jitter <input type="range" id="j_j" min="0" max="80" value="25"><output id="j_jo"></output></label>
+      <label>Latency <input type="range" id="j_l" min="0" max="200" value="50"><output id="j_lo"></output></label>
+      <button class="btn" id="j_r">Re-roll</button>
+    </div>
+    <canvas id="j_cv" aria-label="Note onset times with and without time stamps"></canvas>
+    <div class="kv" id="j_kv" style="margin-top:8px"></div>
+  </div>
+  <div class="note">In sclang, <code>latency</code> is a server setting and <code>Pbind</code> imports it automatically. Notes triggered by live input (MIDI, GUI) should use no latency, because they want to sound as soon as possible. Sequencing wants latency. The value must cover generating the bundle and the server rendering the audio, and on a network it also absorbs the jitter.</div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Guides/ServerTiming.html</code>, <code>https://doc.sccode.org/Reference/Server-Command-Reference.html</code>, <code>https://doc.sccode.org/Reference/Server-Architecture.html</code>, <code>https://opensoundcontrol.stanford.edu/files/OSC_in_SC_Server.pdf</code>. Byte layout follows the OSC 1.0 specification.</div>
+</section>
+
+<!-- 7 -->
+<section class="pane" id="lang">
+  <h2>From a pattern to a stream of notes</h2>
+  <p class="lead">This is where the language earns its place. A <b>Pbind</b> binds keys such as <code>\degree</code> and <code>\dur</code> to value patterns and plays the resulting stream of <b>Events</b>. Each event becomes OSC for the server: usually a timestamped <code>/s_new</code>. Edit the pattern and read the messages it produces.</p>
+  <div class="grid2 wide">
+    <div class="card">
+      <div class="ctl">
+        <label>\degree <select id="p_deg"><option value="a">Arpeggio 0 2 4 7 4 2</option><option value="s">Scale up 0 to 7</option><option value="w">Wander 0 1 2 1 3 2 4 3</option></select></label>
+        <label>\scale <select id="p_sc"><option value="major">Scale.major</option><option value="minor">Scale.minor</option><option value="dorian" selected>Scale.dorian</option></select></label>
+        <label>\root <select id="p_root"></select></label>
+        <label>\dur <select id="p_dur"><option>0.125</option><option selected>0.25</option><option>0.5</option></select></label>
+        <label>tempo <input type="range" id="p_bpm" min="60" max="180" value="96"><output id="p_bo"></output></label>
+      </div>
+      <pre id="p_code"></pre>
+      <div class="row" style="margin-top:10px"><button class="btn primary" id="p_play">Play 16 events</button><button class="btn" id="p_stop">Stop</button><span class="sim">browser preview, not scsynth</span></div>
+      <canvas id="p_cv" style="margin-top:8px" aria-label="Piano roll of the first sixteen events"></canvas>
+    </div>
+    <div class="card">
+      <div class="tag">Events and the OSC they become</div>
+      <div class="wrap"><table class="t" id="p_tab"></table></div>
+      <p class="src">Degree to note uses the scale, then the root. With root 0, degree 0 lands on middle C (MIDI 60, the Event default). The server needs a frequency, so the Event computes <code>freq = 440 * 2^((midinote - 69)/12)</code>. Times are beats on the pattern's TempoClock; the <code>\tempo</code> key sets its tempo (beats per second).</p>
+    </div>
+  </div>
+
+  <h3>The chain</h3>
+  <div class="flow h">
+    <div class="box"><div class="t">Pattern</div><div class="s">Pseq, Prand, Pwhite: lazy descriptions of value streams.</div></div>
+    <div class="box"><div class="t">Event stream</div><div class="s">Pbind merges its streams into Events: key and value maps.</div></div>
+    <div class="box"><div class="t">OSC bundles</div><div class="s">Each Event plays a synth: s_new with the Event's values, stamped with the server latency.</div></div>
+  </div>
+
+  <h3>Other things in the box</h3>
+  <div class="grid2">
+    <div class="card"><b>Non-real-time mode</b><p class="src">scsynth can read a file of timestamped OSC commands and write an audio file instead of playing live. A score is just a list of messages like the ones above.</p></div>
+    <div class="card"><b>supernova</b><p class="src">An alternative server that speaks the same OSC and can spread synths over several CPU cores. You choose scsynth or supernova as the server; sclang stays the client either way.</p></div>
+    <div class="card"><b>Plug-in UGens</b><p class="src">Synthesis building blocks are binary libraries loaded at start-up. Add more and sclang classes with the same names let you use them.</p></div>
+    <div class="card"><b>Any client works</b><p class="src">Anything that can send OSC can drive the server. The help describes definition files as writable by any program that knows the UGens.</p></div>
+  </div>
+  <div class="srcl">Sources: <code>https://doc.sccode.org/Classes/Pbind.html</code>, <code>https://doc.sccode.org/Guides/ServerTiming.html</code>, <code>https://doc.sccode.org/Reference/Server-Architecture.html</code>, <code>https://doc.sccode.org/Guides/ClientVsServer.html</code>. Pitch conversion (midinote defaults to 60) comes from <code>https://doc.sccode.org/Classes/Event.html</code>; scale degrees wrap by octave per <code>https://doc.sccode.org/Classes/Scale.html</code>.</div>
+</section>
+
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function fit(c,h){const d=window.devicePixelRatio||1,w=c.clientWidth||320;c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return{x,w,h};}
+const C={bg:'#0f0c19',line:'#2f2947',ink:'#ece8f7',muted:'#a199bd',violet:'#b48cff',cyan:'#5ee6e0',gold:'#f2b66d',pink:'#ff6fa8',green:'#7fe3a0'};
+const inited={};let current='pic';
+const hooks={};
+function show(id){
+  $$('.pane').forEach(p=>p.classList.toggle('on',p.id===id));
+  $$('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===id));
+  current=id;
+  if(!inited[id]){inited[id]=true;hooks[id]&&hooks[id].init&&hooks[id].init();}
+  hooks[id]&&hooks[id].draw&&hooks[id].draw();
+  window.scrollTo({top:0});
+}
+$$('.tabs button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+addEventListener('resize',()=>{hooks[current]&&hooks[current].draw&&hooks[current].draw();});
+
+/* shared browser-preview voice (Web Audio, not scsynth) */
+function voice(ctx,dest,t,freq,o){
+  const osc=ctx.createOscillator();osc.type=o.type;osc.frequency.value=freq;let n=osc;
+  if(o.cutoff){const f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=o.cutoff;osc.connect(f);n=f;}
+  const g=ctx.createGain();g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(o.amp,t+o.atk);g.gain.setTargetAtTime(0,t+o.atk,o.rel/4);
+  n.connect(g);g.connect(dest);osc.start(t);osc.stop(t+o.atk+o.rel*1.6);
+}
+let liveCtx=null;
+function audio(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;if(!liveCtx||liveCtx.state==='closed')liveCtx=new AC();if(liveCtx.state==='suspended')liveCtx.resume();return liveCtx;}
+
+/* ============ 1 PICTURE ============ */
+hooks.pic={init(){
+  const stages=[
+    {t:'Your code',s:'Text in the SuperCollider language.',d:()=>'<span class="tag">Stage 1</span><p>You write <code>x = Synth(\\default, [\\freq, 440]);</code>. This is the language: objects, functions, patterns. Nothing audio-related has happened yet.</p>'},
+    {t:'Interpreter',s:'sclang parses and runs it.',d:()=>'<span class="tag">Stage 2</span><p>The sclang interpreter runs your code like any programming language. A <code>SynthDef</code> function is evaluated once to record a UGen graph. Patterns and routines are scheduled on sclang\'s own clocks.</p>'},
+    {t:'Client',s:'Objects become OSC messages.',d:()=>'<span class="tag">Stage 3</span><p>The same program is also the server\'s client. A <code>Synth</code> object turns into a <code>/s_new</code> message, a <code>.set</code> into <code>/n_set</code>, and so on. The user writes poetry, as the help puts it, and sclang paraphrases it in OSC prose.</p>'},
+    {t:'OSC over UDP or TCP',s:'Bytes on a network socket.',d:()=>'<span class="tag">Stage 4</span><p>Client and server speak a simplified Open Sound Control. They are usually on one machine, but nothing requires it. Because it is a network protocol, '+({sclang:'a second client could join',script:'your script talks to the same port as sclang would',two:'both clients here send to the same server'}[$('#cl').value])+'.</p>'},
+    {t:'scsynth or supernova',s:'The server: nodes, UGens, buses.',d:()=>'<span class="tag">Stage 5</span><p>A lean command-line program dedicated to synthesis. It adds the node to its tree, then calculates every node in order, one control period at a time. It has no idea what sclang is.</p>'},
+    {t:'Audio device',s:'Output buses become sound.',d:()=>'<span class="tag">Stage 6</span><p>The lowest audio buses are the hardware outputs. Whatever the synths have summed there leaves through the sound card.</p>'}
+  ];
+  const pipe=$('#pipe');
+  pipe.innerHTML=stages.map((s,i)=>`<button class="box" data-i="${i}" style="text-align:left"><span class="t">${i+1}. ${s.t}</span><br><span class="s">${s.s}</span></button>`).join('');
+  const boxes=$$('.box',pipe);
+  const setOn=i=>{boxes.forEach((b,j)=>b.classList.toggle('on',j===i));$('#pcard').innerHTML=stages[i].d();};
+  function client(){const v=$('#cl').value;boxes[1].classList.toggle('dim',v!=='sclang');boxes[2].querySelector('.s').textContent=v==='sclang'?stages[2].s:(v==='script'?'Your script builds the OSC itself.':'Each client sends its own messages.');boxes[1].querySelector('.s').textContent=v==='sclang'?stages[1].s:'Not needed: this client has no interpreter.';}
+  boxes.forEach((b,i)=>b.addEventListener('click',()=>setOn(i)));
+  $('#cl').addEventListener('change',()=>{client();setOn(3);});
+  let timer=null;
+  $('#send').addEventListener('click',()=>{clearInterval(timer);let i=0;const start=$('#cl').value==='sclang'?0:2;i=start;setOn(i);if(calm){setOn(4);return;}timer=setInterval(()=>{i++;if(i>=stages.length){clearInterval(timer);return;}setOn(i);},900);});
+  client();setOn(0);
+  const T=[
+    ['s.boot;','Starts the server program (scsynth or supernova) as a separate process, then talks to it by OSC.','(no OSC yet: this launches the command-line program)\nscsynth -u 57110   (roughly: it listens on a UDP port)'],
+    ['x = Synth(\\default, [\\freq, 440]);','The first node ID the client hands out is 1000. Add action 0 is "head of group"; target 1 is the default group.','/s_new "default" 1000 0 1 "freq" 440.0'],
+    ['x.set(\\freq, 660);','Controls are changed by name on a node ID.','/n_set 1000 "freq" 660.0'],
+    ['x.free;','Free the node. It leaves the tree.','/n_free 1000'],
+    ['g = Group.tail(s.defaultGroup);','Groups are nodes too. Group.tail uses add action 1 with the default group as target.','/g_new 1001 1 1'],
+    ['{ SinOsc.ar(440, 0, 0.1) }.play;','Function.play is a shortcut. It builds a SynthDef from the function, sends the definition, then makes a synth from it. (The generated name and ID differ; the shape is what matters.)','/d_recv <bytes of a SynthDef>\n/s_new "temp__0" 1002 0 1'],
+    ['Pbind(\\degree, Pseq([0,2,4]), \\dur, 0.25).play;','The pattern runs on sclang\'s clock. Each Event becomes one timestamped bundle. The server is not told about patterns at all.','#bundle t0+latency\n  /s_new "default" -1 0 1 "freq" 261.6 ...\n#bundle t0+0.25+latency\n  /s_new "default" -1 0 1 "freq" 329.6 ...\n(and so on)']
+  ];
+  $('#tr').innerHTML=T.map((t,i)=>`<option value="${i}">${esc(t[0])}</option>`).join('');
+  const dr=()=>{const t=T[$('#tr').value];$('#trIn').textContent=t[0];$('#trOut').textContent=t[2];$('#trNote').textContent=t[1];};
+  $('#tr').addEventListener('change',dr);dr();
+}};
+
+/* ============ 2 TREE ============ */
+hooks.tree={init(){
+  let nid,tree,log;
+  const kindName={src:'pad',fx:'reverb',grp:'group'};
+  function reset(){nid=1000;tree={id:0,kind:'grp',ch:[{id:1,kind:'grp',ch:[]}]};log=[];}
+  function find(id,n=tree,p=null){if(n.id===id)return{n,p};for(const c of n.ch||[]){const r=find(id,c,n);if(r)return r;}return null;}
+  function mk(kind){return kind==='grp'?{id:nid++,kind:'grp',ch:[]}:{id:nid++,kind};}
+  function insert(node,act,tid){
+    const f=find(tid);if(!f)return 'Target node does not exist.';
+    if(act===0||act===1){if(f.n.kind!=='grp')return 'Add actions 0 and 1 need a group as the target.';act===0?f.n.ch.unshift(node):f.n.ch.push(node);}
+    else{if(!f.p)return 'The root group has no neighbours: use add action 0 or 1.';const i=f.p.ch.indexOf(f.n);
+      if(act===2)f.p.ch.splice(i,0,node);else if(act===3)f.p.ch.splice(i+1,0,node);
+      else if(act===4){f.p.ch.splice(i,1,node);}}
+    return '';
+  }
+  function msg(node,act,tid){return node.kind==='grp'?`/g_new ${node.id} ${act} ${tid}`:`/s_new "${kindName[node.kind]}" ${node.id} ${act} ${tid}`+(node.kind==='fx'?' "in" 4':' "out" 4');}
+  function add(kind,act,tid){const node=mk(kind);const e=insert(node,act,tid);if(e){nid--;$('#t_err').textContent=e;return;}$('#t_err').textContent='';log.push(msg(node,act,tid));draw();}
+  function freeNode(id){const f=find(id);if(!f||!f.p)return;f.p.ch.splice(f.p.ch.indexOf(f.n),1);log.push('/n_free '+id);draw();}
+  function leaves(n,out=[]){for(const c of n.ch||[]){c.kind==='grp'?leaves(c,out):out.push(c);}return out;}
+  function render(n,ord){
+    const lab=n.id===0?'root group (0)':(n.id===1?'default group (1)':'group '+n.id);
+    if(n.kind==='grp'){return `<div><span class="tn grp">${lab}${n.id>1?`<button class="x" data-free="${n.id}" aria-label="Free node ${n.id}">x</button>`:''}</span><div class="kids">${n.ch.map(c=>render(c,ord)).join('')||'<span class="src">empty</span>'}</div></div>`;}
+    const o=ord.indexOf(n)+1;
+    return `<span class="tn ${n.kind}"><span class="ord">${o}</span>${n.kind==='src'?'pad':'reverb'} <span class="src">node ${n.id}</span><button class="x" data-free="${n.id}" aria-label="Free node ${n.id}">x</button></span>`;
+  }
+  function targets(){const out=[];(function w(n,d){out.push([n.id,(n.id===0?'root group 0':(n.id===1?'default group 1':(n.kind==='grp'?'group ':'node ')+n.id+(n.kind==='src'?' pad':n.kind==='fx'?' reverb':'')))]);(n.ch||[]).forEach(c=>w(c,d+1));})(tree,0);return out;}
+  function draw(){
+    const ord=leaves(tree);
+    $('#tr_view').innerHTML=render(tree,ord);
+    const cur=$('#t_tgt').value;$('#t_tgt').innerHTML=targets().map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');if([...$('#t_tgt').options].some(o=>o.value===cur))$('#t_tgt').value=cur;else $('#t_tgt').value='1';
+    $('#t_log').textContent=log.join('\n')||'(nothing yet)';$('#t_log').scrollTop=1e5;
+    const srcs=ord.filter(n=>n.kind==='src'),fxs=ord.filter(n=>n.kind==='fx');const lines=[];
+    if(!fxs.length)lines.push('No effect running. Add one to hear the order rule.');
+    fxs.forEach(f=>{const pos=ord.indexOf(f);const before=srcs.filter(s=>ord.indexOf(s)<pos).length;
+      if(!srcs.length)lines.push(`reverb ${f.id}: nothing writes to bus 4 yet, so it processes silence.`);
+      else if(before===srcs.length)lines.push(`reverb ${f.id}: runs after ${before} source${before>1?'s':''}. It hears everything.`);
+      else if(before>0)lines.push(`reverb ${f.id}: hears ${before} of ${srcs.length} sources. The others run after it and are missing from the effect.`);
+      else lines.push(`reverb ${f.id}: runs before every source. It will not hear them. That is the classic order-of-execution bug.`);});
+    const bad=fxs.some(f=>srcs.some(s=>ord.indexOf(s)>ord.indexOf(f)));
+    $('#tr_status').className='note'+(bad?' warn':'');$('#tr_status').innerHTML=lines.join('<br>');
+  }
+  $('#tr_view').addEventListener('click',e=>{const b=e.target.closest('[data-free]');if(b)freeNode(+b.dataset.free);});
+  $('#t_add').addEventListener('click',()=>add($('#t_kind').value,+$('#t_act').value,+$('#t_tgt').value));
+  function preset(order){reset();order.forEach(k=>add(k,1,1));}
+  $('#t_bad').addEventListener('click',()=>preset(['fx','src']));
+  $('#t_good').addEventListener('click',()=>preset(['src','fx']));
+  reset();preset(['src','fx']);
+  hooks.tree.draw=draw;
+}};
+
+/* ============ 3 SYNTHDEF ============ */
+function buildDef(p){
+  const U=[],cn=v=>({k:v});
+  const add=(name,rate,inputs,extra)=>{U.push(Object.assign({name,rate,inputs},extra||{}));return U.length-1;};
+  const params=[['freq',p.freq],['cutoff',p.cutoff],['amp',0.2]];
+  const ctl=add('Control','kr',[],{outs:params.length});
+  const P=i=>({u:ctl,o:i});
+  let sig;
+  if(p.osc==='SinOsc')sig=add('SinOsc','ar',[P(0),cn(0)]);
+  else if(p.osc==='Saw')sig=add('Saw','ar',[P(0)]);
+  else sig=add('Pulse','ar',[P(0),cn(0.5)]);
+  if(p.flt)sig=add('LPF','ar',[{u:sig,o:0},P(1)]);
+  if(p.env){const e=add('EnvGen','kr',[cn(1),cn(1),cn(0),cn(1),cn(2),cn(0),cn(2),cn(-99),cn(-99),cn(1),cn(p.atk),cn(5),cn(-4),cn(0),cn(p.rel),cn(5),cn(-4)]);sig=add('BinaryOpUGen','ar',[{u:sig,o:0},{u:e,o:0}],{op:'*'});}
+  sig=add('BinaryOpUGen','ar',[{u:sig,o:0},P(2)],{op:'*'});
+  add('Out','ar',[cn(0),{u:sig,o:0},{u:sig,o:0}]);
+  const K=[];U.forEach(u=>u.inputs.forEach(i=>{if('k'in i&&!K.includes(i.k))K.push(i.k);}));
+  return{U,K,params};
+}
+hooks.def={init(){
+  const st=()=>({osc:$('#d_osc').value,flt:$('#d_flt').checked,env:$('#d_env').checked,freq:+$('#d_f').value,cutoff:+$('#d_c').value,atk:+$('#d_a').value/1000,rel:+$('#d_r').value/1000});
+  let t2=null;
+  function upd(){
+    const p=st();$('#d_fo').textContent=p.freq+' Hz';$('#d_co').textContent=p.cutoff+' Hz';$('#d_ao').textContent=(p.atk*1000)+' ms';$('#d_ro').textContent=(p.rel*1000)+' ms';
+    $('#d_c').disabled=!p.flt;$('#d_a').disabled=!p.env;$('#d_r').disabled=!p.env;
+    const {U,K,params}=buildDef(p);
+    let s=`SynthDef(\\pluck, { |freq=${p.freq}, cutoff=${p.cutoff}, amp=0.2|\n  var sig = ${p.osc}.ar(freq${p.osc==='Pulse'?', 0.5':''});\n`;
+    if(p.flt)s+='  sig = LPF.ar(sig, cutoff);\n';
+    if(p.env)s+=`  sig = sig * EnvGen.kr(Env.perc(${p.atk}, ${p.rel}), doneAction: 2);\n`;
+    s+='  sig = sig * amp;\n  Out.ar(0, sig ! 2);\n}).add;';
+    $('#d_src').textContent=s;
+    const fmt=i=>'k' in i?`<span class="src">const[${K.indexOf(i.k)}]=</span>${i.k}`:(U[i.u].name==='Control'?`<span class="src">param</span> ${params[i.o][0]}`:`<span class="src">ugen</span> #${i.u}`);
+    $('#d_tab').innerHTML='<tr><th>#</th><th>UGen</th><th>rate</th><th>inputs</th></tr>'+U.map((u,i)=>`<tr><td>${i}</td><td><b>${u.name}</b>${u.op?' <span class="src">'+u.op+'</span>':''}</td><td><span class="badge b-${u.rate}">${u.rate}</span></td><td>${u.name==='Control'?params.map(q=>q[0]+'='+q[1]).join(', ')+' <span class="src">(outputs)</span>':(u.name==='EnvGen'?'gate, levelScale, levelBias, timeScale, doneAction=2, then Env.perc as numbers: '+u.inputs.slice(5).map(x=>x.k).join(' '):u.inputs.map(fmt).join(' , '))}</td></tr>`).join('');
+    $('#d_kv').innerHTML=`<span>file header</span><span><code>SCgf</code>, version 2</span><span>constants</span><span>${K.length}: ${K.join(', ')}</span><span>parameters</span><span>${params.length}: ${params.map(q=>q[0]).join(', ')}</span><span>unit generators</span><span>${U.length}</span>`;
+    clearTimeout(t2);t2=setTimeout(wave,60);
+  }
+  async function wave(){
+    const cv=$('#d_cv');const {x,w,h}=fit(cv,110);x.fillStyle=C.bg;x.fillRect(0,0,w,h);
+    const p=st();const OAC=window.OfflineAudioContext||window.webkitOfflineAudioContext;if(!OAC){x.fillStyle=C.muted;x.fillText('Offline rendering unavailable here.',10,20);return;}
+    const sr=22050,dur=Math.min(2.2,0.2+p.atk+p.rel*1.4);const oc=new OAC(1,Math.round(sr*dur),sr);
+    voice(oc,oc.destination,0.02,p.freq,{type:{SinOsc:'sine',Saw:'sawtooth',Pulse:'square'}[p.osc],cutoff:p.flt?p.cutoff:0,amp:0.8,atk:p.env?Math.max(p.atk,0.002):0.002,rel:p.env?p.rel:Math.max(0.6,dur*0.8)});
+    try{const buf=await oc.startRendering();const d=buf.getChannelData(0);
+      const mid=h/2;x.strokeStyle=C.line;x.beginPath();x.moveTo(0,mid);x.lineTo(w,mid);x.stroke();
+      x.strokeStyle=C.cyan;x.beginPath();const per=d.length/w;
+      for(let px=0;px<w;px++){let lo=1,hi=-1;for(let i=Math.floor(px*per);i<Math.floor((px+1)*per);i++){const v=d[i];if(v<lo)lo=v;if(v>hi)hi=v;}x.moveTo(px+.5,mid-hi*mid*.9);x.lineTo(px+.5,mid-lo*mid*.9);}
+      x.stroke();x.fillStyle=C.muted;x.font='11px system-ui';x.fillText(dur.toFixed(1)+' s',w-44,12);
+    }catch(e){}
+  }
+  ['#d_osc','#d_flt','#d_env','#d_f','#d_c','#d_a','#d_r'].forEach(s=>$(s).addEventListener('input',upd));
+  $('#d_play').addEventListener('click',()=>{const c=audio();if(!c)return;const p=st();voice(c,c.destination,c.currentTime+0.03,p.freq,{type:{SinOsc:'sine',Saw:'sawtooth',Pulse:'square'}[p.osc],cutoff:p.flt?p.cutoff:0,amp:0.15,atk:p.env?Math.max(p.atk,0.002):0.002,rel:p.env?p.rel:0.6});});
+  hooks.def.draw=()=>{wave();};
+  upd();
+}};
+
+/* ============ 4 RATES ============ */
+hooks.rates={init(){
+  function draw(){
+    const sr=+$('#r_sr').value,bs=+$('#r_bs').value,hz=+$('#r_hz').value;
+    $('#r_hzo').textContent=hz+' Hz';
+    const cv=$('#r_cv');const {x,w,h}=fit(cv,200);x.fillStyle=C.bg;x.fillRect(0,0,w,h);
+    const win=0.012,N=win*sr,mid=h/2,A=h*.38;
+    const X=i=>i/N*w;const val=i=>Math.sin(2*Math.PI*hz*i/sr);
+    // block boundaries
+    x.strokeStyle='#241f38';x.lineWidth=1;for(let b=0;b*bs<=N;b++){x.beginPath();x.moveTo(X(b*bs)+.5,0);x.lineTo(X(b*bs)+.5,h);x.stroke();}
+    x.strokeStyle=C.line;x.beginPath();x.moveTo(0,mid);x.lineTo(w,mid);x.stroke();
+    // ar
+    x.strokeStyle=C.cyan;x.lineWidth=1.5;x.beginPath();for(let px=0;px<=w;px++){const i=px/w*N;x[px?'lineTo':'moveTo'](px,mid-val(i)*A);}x.stroke();
+    // kr
+    x.strokeStyle=C.gold;x.lineWidth=2;x.beginPath();for(let b=0;b*bs<N;b++){const v=val(b*bs),xa=X(b*bs),xb=X(Math.min((b+1)*bs,N));if(!b)x.moveTo(xa,mid-v*A);else x.lineTo(xa,mid-v*A);x.lineTo(xb,mid-v*A);}x.stroke();
+    // ir
+    x.strokeStyle=C.violet;x.setLineDash([4,4]);x.lineWidth=1;const v0=val(0);x.beginPath();x.moveTo(0,mid-v0*A);x.lineTo(w,mid-v0*A);x.stroke();x.setLineDash([]);
+    x.font='11px system-ui';x.fillStyle=C.cyan;x.fillText('ar: every sample',8,14);x.fillStyle=C.gold;x.fillText('kr: once per block',8,28);x.fillStyle=C.violet;x.fillText('ir: once at start',8,42);
+    x.fillStyle=C.muted;x.fillText('12 ms window, faint lines = block boundaries',w-250,h-6);
+    const cr=sr/bs;
+    $('#r_kv').innerHTML=`<span>samples per second</span><span>${sr}</span><span>block (control period)</span><span>${bs} samples = ${(bs/sr*1000).toFixed(2)} ms</span><span>control rate</span><span>${cr.toFixed(1)} Hz</span><span>kr values vs ar values</span><span>1 per ${bs} samples (${Math.round(100/bs*10)/10}% of the work)</span><span>kr values in this window</span><span>${Math.ceil(N/bs)} (ar: ${Math.round(N)})</span>`;
+  }
+  ['#r_sr','#r_bs','#r_hz'].forEach(s=>$(s).addEventListener('input',draw));
+  hooks.rates.draw=draw;
+}};
+
+/* ============ 5 BUSES ============ */
+hooks.bus={init(){
+  const S=[{n:'bass',a:60,b:0},{n:'lead',a:50,b:1},{n:'pad',a:70,b:4}];
+  const opts=[[0,'bus 0 (left out)'],[1,'bus 1 (right out)'],[4,'bus 4 (private)']];
+  $('#b_src').innerHTML=S.map((s,i)=>`<div class="ctl"><b style="min-width:42px">${s.n}</b><label>amp <input type="range" data-a="${i}" min="0" max="100" value="${s.a}"></label><label>Out.ar <select data-b="${i}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===s.b?'selected':''}>${o[1]}</option>`).join('')}</select></label></div>`).join('');
+  $('#b_m').innerHTML=[0,1,4].map(b=>`<div style="margin:6px 0"><div class="src">bus ${b}${b<2?' (speaker)':' (private)'} <span id="bv${b}"></span></div><div class="meter"><i id="bm${b}"></i></div></div>`).join('');
+  function draw(){
+    S.forEach((s,i)=>{s.a=+$(`[data-a="${i}"]`).value;s.b=+$(`[data-b="${i}"]`).value;});
+    const wet=+$('#b_wet').value/100;$('#b_wo').textContent=Math.round(wet*100)+'%';
+    const L={0:0,1:0,4:0};S.forEach(s=>{L[s.b]+=s.a/100;});
+    const fx=L[4]*wet;L[0]+=fx;L[1]+=fx;
+    [0,1,4].forEach(b=>{$('#bv'+b).textContent='= '+L[b].toFixed(2);$('#bm'+b).style.width=Math.min(100,L[b]/2*100)+'%';});
+    $('#b_code').textContent=S.map(s=>`// ${s.n}\nOut.ar(${s.b}, sig * ${(s.a/100).toFixed(2)});`).join('\n')+`\n// reverb (runs last)\nsig = In.ar(4) * ${wet.toFixed(2)};\nOut.ar(0, sig ! 2);`;
+  }
+  $('#b_src').addEventListener('input',draw);$('#b_wet').addEventListener('input',draw);
+  // control bus
+  let ph=0,raf=null,last=0;
+  function cdraw(){
+    const hz=+$('#c_hz').value,mp=$('#c_map').checked;$('#c_ho').textContent=hz+' Hz';
+    const {x,w,h}=fit($('#c_cv'),150);x.fillStyle=C.bg;x.fillRect(0,0,w,h);
+    const win=1;const lfo=t=>Math.sin(2*Math.PI*hz*t*0.25);
+    const base=0.3;x.strokeStyle=C.line;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();
+    x.strokeStyle=C.violet;x.lineWidth=1.5;x.beginPath();for(let px=0;px<=w;px++){const t=ph+px/w*win;x[px?'lineTo':'moveTo'](px,h/2-lfo(t)*h*.35);}x.stroke();
+    const cutoff=mp?400+(lfo(ph+win)*0.5+0.5)*3600:1400;
+    x.strokeStyle=C.gold;x.lineWidth=2;x.beginPath();for(let px=0;px<=w;px++){const t=ph+px/w*win;const c=mp?400+(lfo(t)*0.5+0.5)*3600:1400;const y=h-8-(c-300)/4000*(h-20);x[px?'lineTo':'moveTo'](px,y);}x.stroke();
+    x.font='11px system-ui';x.fillStyle=C.violet;x.fillText('control bus 0 (LFO)',8,14);x.fillStyle=C.gold;x.fillText('synth "cutoff" = '+Math.round(cutoff)+' Hz',8,h-6);
+    $('#c_msg').textContent=mp?'/n_map 1000 "cutoff" 0      // the parameter now reads control bus 0 every block\n/n_set 1000 "cutoff" 1400 // sending a plain value again would unmap it':'/n_set 1000 "cutoff" 1400  // a fixed value; the bus is ignored';
+  }
+  function loop(ts){if(current!=='bus'){raf=null;return;}if(!last)last=ts;ph+=(ts-last)/1000*0.25;last=ts;cdraw();raf=requestAnimationFrame(loop);}
+  ['#c_map','#c_hz'].forEach(s=>$(s).addEventListener('input',cdraw));
+  hooks.bus.draw=()=>{draw();cdraw();if(!calm&&!raf){last=0;raf=requestAnimationFrame(loop);}};
+}};
+
+/* ============ 6 OSC ============ */
+const OSC=[
+  ['/s_new "default" 1000 0 1 "freq" 440.0',['/s_new',['s','default'],['i',1000],['i',0],['i',1],['s','freq'],['f',440]],'Make a synth from the definition "default": ID 1000, add action 0 (head), target group 1, control freq = 440.'],
+  ['/n_set 1000 "cutoff" 1200.0',['/n_set',['i',1000],['s','cutoff'],['f',1200]],'Set a control on node 1000.'],
+  ['/n_free 1000',['/n_free',['i',1000]],'Free node 1000.'],
+  ['/g_new 1001 1 1',['/g_new',['i',1001],['i',1],['i',1]],'New group 1001 at the tail of group 1.'],
+  ['/status',['/status'],'No arguments: the type tag string is just a comma. The server replies with /status.reply.']
+];
+function pad4(a){while(a.length%4)a.push(0);return a;}
+function enc(m){
+  const te=new TextEncoder(),words=[];
+  const str=s=>{const b=[...te.encode(s),0];return pad4(b);};
+  const push=(bytes,label,cls)=>{for(let i=0;i<bytes.length;i+=4)words.push({b:bytes.slice(i,i+4),label:i?'(continued)':label,cls});};
+  push(str(m[0]),'address pattern "'+m[0]+'"','addr');
+  push(str(','+m.slice(1).map(a=>a[0]).join('')),'type tags','tt');
+  m.slice(1).forEach(a=>{
+    if(a[0]==='s')push(str(a[1]),'string "'+a[1]+'"','s');
+    else if(a[0]==='i'){const v=new DataView(new ArrayBuffer(4));v.setInt32(0,a[1]);push([...new Uint8Array(v.buffer)],'int32 '+a[1],'i');}
+    else{const v=new DataView(new ArrayBuffer(4));v.setFloat32(0,a[1]);push([...new Uint8Array(v.buffer)],'float32 '+a[1],'f');}
+  });
+  return words;
+}
+const hex=b=>b.map(x=>x.toString(16).padStart(2,'0')).join(' ');
+const asc=b=>b.map(x=>x>=32&&x<127?String.fromCharCode(x):'.').join('');
+hooks.osc={init(){
+  $('#o_msg').innerHTML=OSC.map((o,i)=>`<option value="${i}">${esc(o[0])}</option>`).join('');
+  function draw(){
+    const o=OSC[$('#o_msg').value];const bun=$('#o_bun').checked;const lat=+$('#o_lat').value;
+    $('#o_lato').textContent=lat+' ms';$('#o_lat').disabled=!bun||$('#o_now').checked;$('#o_now').disabled=!bun;
+    let words=enc(o[1]);const msgBytes=words.length*4;let pre=[];
+    if(bun){
+      const te=new TextEncoder();pre.push({b:[...te.encode('#bun')],label:'"#bundle" (8 bytes with the zero pad)',cls:'addr'},{b:[...te.encode('dle')].concat([0]),label:'(continued)',cls:'addr'});
+      let hi,lo;
+      if($('#o_now').checked){hi=0;lo=1;}else{const t=Date.now()/1000+lat/1000+2208988800;hi=Math.floor(t)>>>0;lo=Math.floor((t-Math.floor(t))*4294967296)>>>0;}
+      const dv=new DataView(new ArrayBuffer(8));dv.setUint32(0,hi);dv.setUint32(4,lo);const tb=[...new Uint8Array(dv.buffer)];
+      pre.push({b:tb.slice(0,4),label:'time tag: seconds since 1900'+($('#o_now').checked?'':' ('+hi+')'),cls:'tt'},{b:tb.slice(4,8),label:'time tag: fraction of a second'+($('#o_now').checked?' (1 = immediately)':''),cls:'tt'});
+      const sz=new DataView(new ArrayBuffer(4));sz.setInt32(0,msgBytes);pre.push({b:[...new Uint8Array(sz.buffer)],label:'size of the next message: '+msgBytes+' bytes',cls:'i'});
+    }
+    const all=pre.concat(words);const col={addr:C.cyan,tt:C.gold,s:C.green,i:C.violet,f:C.pink};
+    $('#o_tab').innerHTML='<tr><th>hex</th><th>ascii</th><th>meaning</th></tr>'+all.map(w=>`<tr><td><span class="w" style="color:${col[w.cls]}">${hex(w.b)}</span></td><td><code>${esc(asc(w.b))}</code></td><td>${esc(w.label)}</td></tr>`).join('');
+    $('#o_sum').textContent=o[2]+' Total on the wire: '+(all.length*4)+' bytes.'+(bun?' The bundle tells the server to run the message at the time tag. A message with a time tag in the past runs at once (and late).':'');
+  }
+  ['#o_msg','#o_bun','#o_lat','#o_now'].forEach(s=>$(s).addEventListener('input',draw));
+  // jitter sim
+  let rnd=[];function roll(){rnd=Array.from({length:16},()=>Math.random());}
+  function jd(){
+    const J=+$('#j_j').value,L=+$('#j_l').value;$('#j_jo').textContent=J+' ms';$('#j_lo').textContent=L+' ms';
+    const {x,w,h}=fit($('#j_cv'),170);x.fillStyle=C.bg;x.fillRect(0,0,w,h);
+    const gap=120,N=16,tot=gap*(N+1);const X=t=>20+t/tot*(w-40);
+    const lane=[50,125];let dev1=0,dev2=0,late=0;
+    x.font='11px system-ui';x.fillStyle=C.muted;x.fillText('no time stamp: plays on arrival',8,16);x.fillText('time stamp = logical time + latency',8,h/2+8);
+    for(let i=0;i<N;i++){
+      const ideal=gap*(i+1);const j=rnd[i]*J;
+      const t1=ideal+j;dev1=Math.max(dev1,j);
+      const isLate=j>L;const t2=ideal+Math.max(L,j);const d2=Math.max(0,j-L);if(isLate)late++;dev2=Math.max(dev2,d2);
+      x.strokeStyle='#241f38';x.beginPath();x.moveTo(X(ideal),24);x.lineTo(X(ideal),h-6);x.stroke();
+      x.fillStyle=C.gold;x.fillRect(X(t1)-1.5,lane[0]-14,3,28);
+      x.fillStyle=isLate?C.pink:C.cyan;x.fillRect(X(t2)-1.5,lane[1]-14,3,28);
+    }
+    x.strokeStyle=C.line;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();
+    $('#j_kv').innerHTML=`<span>worst onset error, no stamp</span><span>${dev1.toFixed(0)} ms</span><span>worst onset error, stamped</span><span>${dev2.toFixed(0)} ms${late?` (${late} late: jitter above latency)`:' (all on the grid, shifted by the latency)'}</span>`;
+  }
+  $('#j_r').addEventListener('click',()=>{roll();jd();});['#j_j','#j_l'].forEach(s=>$(s).addEventListener('input',jd));
+  roll();hooks.osc.draw=()=>{draw();jd();};
+}};
+
+/* ============ 7 PATTERNS ============ */
+const SC={major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10],dorian:[0,2,3,5,7,9,10]};
+const DEG={a:[0,2,4,7,4,2],s:[0,1,2,3,4,5,6,7],w:[0,1,2,1,3,2,4,3]};
+const NN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+hooks.lang={init(){
+  $('#p_root').innerHTML=NN.map((n,i)=>`<option value="${i}" ${i===2?'selected':''}>${i} (${n})</option>`).join('');
+  const st=()=>({deg:$('#p_deg').value,sc:$('#p_sc').value,root:+$('#p_root').value,dur:+$('#p_dur').value,bpm:+$('#p_bpm').value});
+  const evs=p=>{const D=DEG[p.deg],S=SC[p.sc];return Array.from({length:16},(_,i)=>{const d=D[i%D.length];const oct=Math.floor(d/7),k=((d%7)+7)%7;const midi=60+p.root+S[k]+12*oct;return{i,beat:i*p.dur,deg:d,midi,freq:440*Math.pow(2,(midi-69)/12)};});};
+  function draw(){
+    const p=st();$('#p_bo').textContent=p.bpm+' bpm';
+    const E=evs(p);const D=DEG[p.deg];
+    $('#p_code').textContent=`Pbind(\n  \\scale, Scale.${p.sc},\n  \\root, ${p.root},\n  \\degree, Pseq([${D.join(', ')}], inf),\n  \\dur, ${p.dur},\n  \\tempo, ${(p.bpm/60).toFixed(2)}\n).play;`;
+    const spb=60/p.bpm;
+    $('#p_tab').innerHTML='<tr><th>beat</th><th>degree</th><th>MIDI</th><th>OSC (bundle at t0 + time + latency)</th></tr>'+E.slice(0,8).map(e=>`<tr><td>${e.beat}</td><td>${e.deg}</td><td>${e.midi}</td><td><code>+${(e.beat*spb).toFixed(2)} s: /s_new "default" -1 0 1 "freq" ${e.freq.toFixed(1)}</code></td></tr>`).join('')+'<tr><td colspan="4" class="src">...8 more events in the preview</td></tr>';
+    const {x,w,h}=fit($('#p_cv'),130);x.fillStyle=C.bg;x.fillRect(0,0,w,h);
+    const lo=Math.min(...E.map(e=>e.midi))-2,hi=Math.max(...E.map(e=>e.midi))+2,rows=hi-lo+1;
+    x.strokeStyle='#201b33';for(let r=0;r<rows;r++){const y=h-(r+1)/rows*h;x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke();}
+    const tot=16*p.dur;E.forEach(e=>{const xx=e.beat/tot*w,ww=Math.max(3,p.dur/tot*w-2),y=h-(e.midi-lo+1)/rows*h;x.fillStyle=C.violet;x.fillRect(xx,y+1,ww,h/rows-2);});
+    x.fillStyle=C.muted;x.font='11px system-ui';x.fillText('16 events, '+tot+' beats',8,12);
+  }
+  let pc=null;
+  $('#p_play').addEventListener('click',()=>{const c=audio();if(!c)return;const p=st(),E=evs(p),spb=60/p.bpm,t0=c.currentTime+0.1;E.forEach(e=>voice(c,c.destination,t0+e.beat*spb,e.freq,{type:'triangle',cutoff:2400,amp:0.13,atk:0.005,rel:Math.max(0.25,p.dur*spb*2)}));pc=c;});
+  $('#p_stop').addEventListener('click',()=>{if(pc){pc.close();pc=null;liveCtx=null;}});
+  ['#p_deg','#p_sc','#p_root','#p_dur','#p_bpm'].forEach(s=>$(s).addEventListener('input',draw));
+  hooks.lang.draw=draw;
+}};
+
+show('pic');
+</script>
+</body>
+</html>

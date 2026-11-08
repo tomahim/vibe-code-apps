@@ -1,0 +1,6 @@
+{
+  "title": "SuperCollider, taken apart",
+  "description": "Seven interactive steps on how SuperCollider works: sclang and scsynth, the node tree, SynthDefs, rates, buses, real OSC bytes and timing, and Pbind patterns.",
+  "date": "2026-11-08",
+  "tags": ["music", "supercollider", "synthesis", "interactive", "education"]
+}
