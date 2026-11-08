@@ -1,0 +1,23 @@
+id: a117d7de-4b51-4f7b-b917-290172f2da27
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi l'hyperventilation avant l'apnée est-elle mortelle ?
+choices:
+- id: d061e78f-a9c6-410d-a184-748efb34eb13
+  text: Elle abaisse anormalement le CO2 artériel et repousse le seuil de rupture
+    d'apnée après le seuil de syncope hypoxique.
+- id: 88fc3031-52ed-4813-a794-bdf610b4bd1d
+  text: Elle sature le sang en oxygène, ce qui provoque une crise d'hyperoxie immédiate.
+- id: a7579e3d-301b-49da-9ec6-73eba419086f
+  text: Elle contracte les muscles respiratoires, incapables ensuite de reprendre
+    le souffle.
+- id: e7e126d7-eaf8-46ad-9ae7-e08670114a4a
+  text: Elle refroidit les poumons, ce qui déclenche un choc thermique à l'immersion.
+correct_choice_ids:
+- d061e78f-a9c6-410d-a184-748efb34eb13
+explanation: 'Les signaux d''alerte naturels (besoin de respirer, lié au CO2) sont
+  masqués : l''apnéiste atteint le manque d''oxygène sans avertissement et tombe en
+  syncope, donc se noie.'
+archived: false

@@ -1,0 +1,25 @@
+id: 15cbaa2b-77a8-4dd6-8ad8-9de7a5230672
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que l'hyperventilation insidieuse ?
+choices:
+- id: 5525c61e-78e9-45c2-aa8e-f5b44dafa3cd
+  text: Toute ventilation fournissant de l'air au-delà des besoins physiologiques,
+    même lente et profonde, si elle dure longtemps.
+- id: e277fe8e-3739-4bfd-922a-fd9982728a2f
+  text: Une hyperventilation provoquée par un détendeur qui fuit en continu pendant
+    la plongée.
+- id: 3af363db-4481-4a0d-a0e8-d684d5b93cdf
+  text: Une respiration volontairement rapide et superficielle, pratiquée pendant
+    la descente.
+- id: 8acc8444-e27e-44a8-baa7-cacc5371ca34
+  text: Une ventilation forcée qui ne concerne que les plongeurs en bouteille, jamais
+    les apnéistes.
+correct_choice_ids:
+- 5525c61e-78e9-45c2-aa8e-f5b44dafa3cd
+explanation: 'Respirer profondément pendant une longue période suffit : sans augmenter
+  la fréquence, on provoque une baisse anormale du CO2 artériel. Amplitude, fréquence
+  et temps comptent.'
+archived: false

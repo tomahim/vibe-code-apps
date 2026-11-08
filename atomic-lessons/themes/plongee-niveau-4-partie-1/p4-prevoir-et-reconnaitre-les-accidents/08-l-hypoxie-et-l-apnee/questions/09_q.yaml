@@ -1,0 +1,24 @@
+id: 7e61054e-629f-4bbe-9b2d-fca6defa78d6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi « pousser ses limites » est-il dangereux en apnée ?
+choices:
+- id: cfb8510c-0010-444e-bdba-b4da6e7039e1
+  text: 'Aller au-delà des signaux du corps peut dépasser l''avertissement de l''excès
+    de CO2 et atteindre la zone de manque d''oxygène : la syncope.'
+- id: 85e8de7f-0ae3-44ca-bf69-feb08cfac452
+  text: Cela fatigue durablement les muscles des jambes, ce qui interdit de nager
+    le lendemain.
+- id: 95efdaf0-9dc9-4ffb-8cc5-0cf917bf403d
+  text: Cela use prématurément le matériel d'apnée, en particulier la ceinture de
+    plomb et le masque.
+- id: 89373d7a-a42a-49a7-bb1c-6073a495cbfe
+  text: Cela n'est dangereux qu'en compétition officielle, et jamais pendant les séances
+    d'entraînement.
+correct_choice_ids:
+- cfb8510c-0010-444e-bdba-b4da6e7039e1
+explanation: Le réflexe ventilatoire (CO2) peut être repoussé par la volonté ; dépasser
+  ces signaux expose à la syncope hypoxique et à la noyade.
+archived: false
