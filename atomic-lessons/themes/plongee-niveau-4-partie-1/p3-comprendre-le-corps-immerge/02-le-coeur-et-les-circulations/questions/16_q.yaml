@@ -1,22 +1,23 @@
-id: a890a1f8-ebe5-423b-bc17-07bd9dc29dbd
+id: ec5ab656-f6f4-47e3-b769-6d74e41ea865
 position: 16
 type: multiple_choice
 selection: single
-after_card_position: 7
-prompt: Face au froid, comment l'organisme réagit-il selon le manuel ?
+after_card_position: 9
+prompt: Comment l'azote circule-t-il selon le manuel ?
 choices:
-- id: e838364d-c8d7-4855-92ea-1fee09ceeeb9
-  text: Par vasoconstriction périphérique, pour concentrer la chaleur sur les organes
-    vitaux.
-- id: 98896231-494d-496d-b8c7-87182ed12c63
-  text: Par vasodilatation des extrémités, pour réchauffer les doigts.
-- id: 20b42f63-76b4-4619-8855-e948be815b3b
-  text: Par arrêt de la circulation dans les membres supérieurs.
-- id: 765b1a6c-eccd-4cb5-afe5-ed342a9d5b21
-  text: Par augmentation immédiate de la température de l'eau.
+- id: 038a14b3-0441-4ede-90b1-d74a4062eb79
+  text: Il se dissout dans le sang à la descente et au fond, puis repasse des tissus
+    vers le sang veineux à la remontée et dans les heures qui suivent.
+- id: 37a93e71-1130-4e8d-974c-da57133e32ed
+  text: Il reste bloqué définitivement dans les poumons dès la première plongée de
+    la journée, sans jamais en ressortir.
+- id: 7fad68fe-cfc3-4cf3-bbab-0801f2c196db
+  text: Il est éliminé entièrement à la descente par les reins et la peau.
+- id: c7b878dc-1e74-4200-a094-dc829e48fed7
+  text: Il ne pénètre jamais dans le sang ni dans les tissus du plongeur.
 correct_choice_ids:
-- e838364d-c8d7-4855-92ea-1fee09ceeeb9
-explanation: Confronté au froid, l'organisme diminue le calibre des vaisseaux à la
-  périphérie pour réduire la circulation vers les extrémités et concentrer la chaleur
-  sur cœur et cerveau.
+- 038a14b3-0441-4ede-90b1-d74a4062eb79
+explanation: À la descente et au fond, une partie de l'azote en excès se dissout dans
+  le sang ; à la remontée, le phénomène s'inverse et la désaturation génère des bulles
+  silencieuses.
 archived: false

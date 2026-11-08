@@ -1,23 +1,20 @@
-id: ac80c674-7424-459a-abf5-933bc401597e
+id: 9821daec-463b-46e8-a432-ac35b6ae62bc
 position: 16
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Qu'est-ce que la plèvre selon le manuel ?
+prompt: Que contient le médiastin ?
 choices:
-- id: 5800c073-7f01-4df3-b2ad-6cee32268d95
-  text: Une enveloppe à deux feuillets avec un liquide lubrifiant, qui garde poumons
-    et cage thoracique solidaires pendant la ventilation.
-- id: cd1c1f32-441e-4b9c-aab0-bb547f1c1afb
-  text: Un muscle respiratoire qui soulève les côtes à l'inspiration et les abaisse
-    à l'expiration.
-- id: 26dd7a98-e190-4ee4-aad5-282cb74cc42d
-  text: Une membrane qui sépare le cœur des poumons.
-- id: 3bdd4712-0f15-44af-9253-292763835795
-  text: Un cartilage qui ferme la trachée pendant la déglutition.
+- id: f90a265b-662d-418c-8ed5-ff9235ec6754
+  text: Le cœur, la trachée, l'œsophage, des vaisseaux et des nerfs.
+- id: 0cd3b0d9-6ece-4cb4-b2ac-0330ddb3e319
+  text: Uniquement les deux poumons et leurs bronches.
+- id: b7271a88-f444-40d1-ba75-56f44e3a8604
+  text: Les côtes, le sternum et les muscles intercostaux.
+- id: 03b8b5ba-a91e-44c6-9024-c6eb0f712689
+  text: Le diaphragme et les muscles abdominaux.
 correct_choice_ids:
-- 5800c073-7f01-4df3-b2ad-6cee32268d95
-explanation: La plèvre a un feuillet interne accolé au poumon et un externe accolé
-  à la cage thoracique ; le liquide entre les deux les fait glisser tout en restant
-  solidaires.
+- f90a265b-662d-418c-8ed5-ff9235ec6754
+explanation: Le médiastin est l'espace qui sépare les deux poumons ; il contient le
+  cœur, la trachée, l'œsophage, des vaisseaux et des nerfs.
 archived: false

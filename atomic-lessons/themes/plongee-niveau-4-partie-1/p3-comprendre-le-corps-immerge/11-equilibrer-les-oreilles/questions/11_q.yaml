@@ -1,21 +1,21 @@
-id: 5cf6ac35-f6db-448b-bf60-202b38601812
+id: 30990fe3-14f7-4d0c-82de-6a2b4787a36f
 position: 11
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: Quel est le premier conseil de Fructus et Sciarli pour apprendre la BTV ?
+after_card_position: 7
+prompt: En quoi consiste la manœuvre de Toynbee ?
 choices:
-- id: 4cb2adfa-f925-4f49-8f14-7c4e0aeb1f13
-  text: Effectuer préalablement une manœuvre de type Valsalva ou Frenzel.
-- id: 12133a19-7c02-46af-b6b9-ce7302ea8a82
-  text: Plonger directement à 40 mètres pour tester.
-- id: cb0838f8-bfbc-418f-9a24-0abf58d5e800
-  text: Prendre un décongestionnant nasal avant l'eau.
-- id: fd185c79-36fc-4f1e-bb50-f6c30afc26b8
-  text: Boucher les deux oreilles avec des bouchons.
+- id: 2dadd20e-b59f-4b0f-8a05-5e28f7dd00aa
+  text: Pincer le nez, puis déglutir et inspirer par le nez, pour aspirer l'air en
+    excès de l'oreille moyenne.
+- id: 11569ba9-a8fe-46ed-b260-a7fcbcde75c8
+  text: Pincer le nez et souffler doucement par la bouche légèrement entrouverte.
+- id: 66848d72-7ad1-4baa-99c5-697a2b4c697b
+  text: Expirer fortement par la bouche, nez ouvert.
+- id: 698555a6-795e-4b0a-8b25-afb226e13133
+  text: Avancer la mâchoire en baillant largement.
 correct_choice_ids:
-- 4cb2adfa-f925-4f49-8f14-7c4e0aeb1f13
-explanation: Fructus et Sciarli conseillent de commencer par une manœuvre de type
-  Valsalva ou Frenzel, puis de prendre conscience de la position des muscles au moment
-  de la plénitude de l'oreille.
+- 2dadd20e-b59f-4b0f-8a05-5e28f7dd00aa
+explanation: 'Toynbee fonctionne à l''inverse des méthodes de descente : elle favorise
+  l''évacuation de l''air en excès plutôt que d''en ajouter.'
 archived: false

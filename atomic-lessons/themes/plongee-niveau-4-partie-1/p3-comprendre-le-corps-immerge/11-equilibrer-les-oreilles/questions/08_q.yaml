@@ -1,20 +1,22 @@
-id: e3a71e6c-c1a6-42f5-84ff-fdd952aa9559
+id: 83e5a51c-672a-4b9b-af7e-3ba23c0edbf6
 position: 8
 type: multiple_choice
 selection: single
 after_card_position: 5
-prompt: Pour qui une simple déglutition peut-elle suffire ?
+prompt: Quel est l'avantage de souffler dans le masque, narines plaquées sur la jupe
+  ?
 choices:
-- id: 7ab0f79e-6185-408e-be7e-85e31f9299c3
-  text: Pour certains individus aux trompes d'Eustache bien droites.
-- id: e284147d-48c9-40ab-ab37-9990cabd311b
-  text: Pour tous les plongeurs sans exception.
-- id: d260317a-c118-475f-8ad2-c9aad624670c
-  text: 'Pour personne : la déglutition est inefficace.'
-- id: 1f374a32-2a93-49ac-8624-010cd8f226fe
-  text: Uniquement pour les enfants de moins de 12 ans.
+- id: d28c3467-c10b-474a-aa6f-26eecba46d5f
+  text: C'est une variante du Valsalva moins violente, pratique lorsque les mains
+    sont prises.
+- id: 25373f45-a2d7-417f-bdc1-e8b6bd409f8c
+  text: Cela évite d'avoir à équilibrer les oreilles.
+- id: 87ada602-120d-4f09-8d11-643d87cc5b77
+  text: Cela débouche les sinus frontaux à coup sûr.
+- id: 0c6302b9-68e6-4c81-ba32-7b46c793e366
+  text: Cela économise l'air de la bouteille.
 correct_choice_ids:
-- 7ab0f79e-6185-408e-be7e-85e31f9299c3
-explanation: Pour certains individus aux trompes d'Eustache bien droites, une simple
-  déglutition suffit à les ouvrir.
+- d28c3467-c10b-474a-aa6f-26eecba46d5f
+explanation: 'Variante du Valsalva moins violente, utile quand les mains sont prises
+  : descente le long d''un mouillage, aide à un plongeur en difficulté...'
 archived: false

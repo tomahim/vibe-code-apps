@@ -9,3 +9,11 @@ Contrairement aux poissons, dont la température interne correspond à celle de 
 Or, dans l'eau, nous nous refroidissons 25 fois plus vite que dans l'air.
 
 Notre organisme régule donc son activité en permanence, en fonction des déperditions caloriques et des mécanismes de production calorique - principalement le travail musculaire. Le frisson thermique n'est rien d'autre que l'augmentation de l'activité des muscles sous-cutanés : un mécanisme énergétiquement peu rentable, qu'on peut considérer comme un signal d'alarme.
+
+## La neutralité thermique
+
+On parle de neutralité thermique lorsque les échanges thermiques entre le corps et le milieu ambiant sont très faibles.
+
+Alors que cette neutralité est atteinte entre 24 et 26 °C dans l'air, elle est ramenée à 33 °C dans l'eau.
+
+En immersion, nous nous refroidissons donc dans tous les cas, y compris dans les mers chaudes.

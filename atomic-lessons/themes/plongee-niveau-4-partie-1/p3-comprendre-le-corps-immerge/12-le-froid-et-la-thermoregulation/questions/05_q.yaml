@@ -2,7 +2,7 @@ id: 676422ae-d5a2-41d8-9603-bc1254492554
 position: 5
 type: multiple_choice
 selection: single
-after_card_position: 3
+after_card_position: 2
 prompt: Pourquoi les doigts gourds sont-ils un vrai problème en plongée ?
 choices:
 - id: 1be6696a-510d-4fad-bfec-b46d2b7f3458

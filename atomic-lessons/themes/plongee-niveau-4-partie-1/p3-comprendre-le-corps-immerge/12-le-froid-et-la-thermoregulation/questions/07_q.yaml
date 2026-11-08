@@ -2,7 +2,7 @@ id: 98e8bc53-47e1-4b82-863a-44ff815ee317
 position: 7
 type: multiple_choice
 selection: single
-after_card_position: 4
+after_card_position: 3
 prompt: Que sont les défenses « maximales » contre le froid ?
 choices:
 - id: 04b450cf-1172-425c-8f43-94eb8ed81aa1

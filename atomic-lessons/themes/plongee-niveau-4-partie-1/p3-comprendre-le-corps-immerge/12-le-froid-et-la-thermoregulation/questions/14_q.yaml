@@ -1,21 +1,25 @@
-id: ed95f6c7-4827-4fb4-b22c-7ffb05a82270
+id: 5f0cef91-817a-490f-b760-48ea0ad3259e
 position: 14
 type: multiple_choice
 selection: single
-after_card_position: 8
-prompt: Pourquoi faut-il limiter les mouvements quand on a froid dans l'eau ?
+after_card_position: 9
+prompt: Pourquoi pas d'eau chaude sur les mains ni d'alcool après un refroidissement
+  ?
 choices:
-- id: b5bebfdc-0f25-4543-892a-2012326cfb6f
-  text: Ils augmentent la circulation d'eau dans la combinaison, ce qui favorise le
-    refroidissement.
-- id: 7da56ea4-7969-4751-86d3-6d5f618cc271
-  text: Ils provoquent immédiatement des crampes mortelles.
-- id: 6ad328a3-4008-46fa-ae5e-6533cca9280e
-  text: Ils déchirent la combinaison néoprène.
-- id: 6d0768ee-8e2f-4c55-9e0d-0a834e1b3f44
-  text: Ils épuisent la réserve d'air en quelques secondes.
+- id: 1b6bd565-b3ed-41f1-8bf2-a0f1d959ce98
+  text: La vasoconstriction périphérique doit se relâcher progressivement, sinon l'afflux
+    brusque vers la périphérie risque le malaise cardiaque.
+- id: 7b729072-e873-4d0a-9ac3-2574d0afa186
+  text: Parce que l'eau chaude brûle systématiquement la peau refroidie, qui a perdu
+    toute sensibilité.
+- id: d5d08709-28d5-437c-b783-3e91cac4ea37
+  text: Parce que l'alcool dissout l'azote résiduel dans le sang et provoque un accident
+    de désaturation.
+- id: e29b8095-3e0a-427a-82aa-e03c8f4559be
+  text: Parce que ces réactions augmentent la diurèse d'immersion et déshydratent
+    le plongeur.
 correct_choice_ids:
-- b5bebfdc-0f25-4543-892a-2012326cfb6f
-explanation: 'Contrairement au réflexe de surface, s''agiter sous l''eau chasse la
-  pellicule d''eau réchauffée : mieux vaut limiter les mouvements pour la garder prisonnière.'
+- 1b6bd565-b3ed-41f1-8bf2-a0f1d959ce98
+explanation: Les vaisseaux doivent se dilater progressivement jusqu'à leur ouverture
+  habituelle ; sinon l'afflux brusque se fait au détriment des organes centraux.
 archived: false

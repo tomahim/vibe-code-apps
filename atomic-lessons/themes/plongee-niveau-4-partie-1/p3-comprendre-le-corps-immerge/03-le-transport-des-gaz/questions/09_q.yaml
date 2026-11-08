@@ -1,22 +1,21 @@
-id: a9373434-3675-4813-b80f-642e4a7eb6bd
+id: de6a5f01-3166-4c6a-915c-35d0b9da3f24
 position: 9
 type: multiple_choice
 selection: single
 after_card_position: 5
-prompt: Pourquoi le monoxyde de carbone est-il si dangereux ?
+prompt: Quel taux de CO suffit à réduire de moitié la capacité de transport de l'oxygène
+  ?
 choices:
-- id: 80df6ff6-26f1-4099-b996-1570e3a396db
-  text: Il se combine de manière stable à l'hémoglobine sur les mêmes sites que l'oxygène,
-    ce qui conduit à l'hypoxie.
-- id: 267c5978-4e3a-4f99-8ba6-6be274c5f39f
-  text: Il détruit immédiatement et définitivement les parois des alvéoles pulmonaires.
-- id: 546fbb7a-7245-4203-844e-fb709adf7927
-  text: Il transforme l'oxygène de la bouteille en gaz carbonique.
-- id: 33d35443-5479-49c7-a5f4-54215285fd59
-  text: Il provoque une narcose instantanée dès la mise à l'eau.
+- id: dd0021c7-b810-4ec7-9821-fbf74c8c9cc6
+  text: 0,1 % de CO suffit, selon le manuel.
+- id: db86ac1f-8f10-4517-a568-1d22634e5929
+  text: 10 % de CO sont nécessaires, selon le manuel.
+- id: 11c098fd-d42f-49be-9319-eb9d2d9f838c
+  text: 50 % de CO sont nécessaires, selon le manuel.
+- id: 724f989b-922d-4411-99fd-81633479507b
+  text: Aucun taux n'a d'effet mesurable, selon le manuel.
 correct_choice_ids:
-- 80df6ff6-26f1-4099-b996-1570e3a396db
-explanation: 'Le CO se combine de manière stable et indissociable avec l''hémoglobine,
-  sur les mêmes sites que l''O2 : le transport normal de l''oxygène est bloqué, d''où
-  l''hypoxie.'
+- dd0021c7-b810-4ec7-9821-fbf74c8c9cc6
+explanation: La présence de 0,1 % de CO suffit à réduire de moitié la capacité de
+  transport de l'oxygène par le sang.
 archived: false

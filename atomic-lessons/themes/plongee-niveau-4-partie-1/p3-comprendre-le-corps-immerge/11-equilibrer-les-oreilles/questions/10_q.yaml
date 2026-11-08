@@ -1,22 +1,22 @@
-id: 1c1df78f-073b-40e9-9944-2dbe15f9a61c
+id: c4cc388d-bedb-4423-9673-954498f159fd
 position: 10
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: En quoi consiste la BTV (béance tubaire volontaire) ?
+after_card_position: 7
+prompt: Quelle méthode est à proscrire à la remontée, et pourquoi ?
 choices:
-- id: 321b5da4-9f47-44f2-9ca1-924c1cd0a4e1
-  text: Plonger « trompes ouvertes » par le contrôle volontaire des muscles de leur
-    ouverture, comme lors du bâillement.
-- id: c2b79022-1ec0-433a-ace6-753e4470e3cc
-  text: Bloquer volontairement la trompe bien fermée pendant toute la durée de la
-    plongée.
-- id: b462f748-b654-43b5-8258-41f239938cd6
-  text: Forcer la trompe ouverte par une hyperpression maximale.
-- id: 267bab68-f256-4b42-baaf-5c0759288a20
-  text: Se percer le tympan avant la saison de plongée.
+- id: 8e2f1d91-9c0c-4fe9-9352-2c6071ae6ee7
+  text: 'Le Valsalva : risque de barotraumatisme de l''oreille interne (surdité),
+    de surpression pulmonaire ou d''accident de désaturation.'
+- id: a461d6b0-1264-4e95-a2fb-76f3ff56c024
+  text: 'Le Toynbee : il ajoute beaucoup trop d''air dans l''oreille moyenne pendant
+    la remontée.'
+- id: 579e4f06-06b3-465d-b1c8-344963be55d0
+  text: 'La déglutition : elle fait avaler de l''eau de mer.'
+- id: b603655c-9a5b-46f5-9e05-bd24e29a31cc
+  text: 'Le Frenzel : il bloque la trompe d''Eustache.'
 correct_choice_ids:
-- 321b5da4-9f47-44f2-9ca1-924c1cd0a4e1
-explanation: 'Décrite par G. Delonca, la BTV élimine tout risque barotraumatique :
-  les trompes restent ouvertes par contrôle volontaire des muscles.'
+- 8e2f1d91-9c0c-4fe9-9352-2c6071ae6ee7
+explanation: 'À la remontée, le Valsalva ajoute de l''air alors qu''il faut en retirer
+  : barotraumatisme de l''oreille interne, surpression pulmonaire, ou ADD via un FOP.'
 archived: false

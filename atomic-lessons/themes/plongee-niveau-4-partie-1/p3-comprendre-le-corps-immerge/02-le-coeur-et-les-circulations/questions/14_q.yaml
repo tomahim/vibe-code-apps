@@ -1,22 +1,22 @@
-id: 2528c28f-ebba-41e2-8a64-54e8306ef5c1
+id: a890a1f8-ebe5-423b-bc17-07bd9dc29dbd
 position: 14
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: Quelle particularité des capillaires le manuel souligne-t-il ?
+after_card_position: 7
+prompt: Face au froid, comment l'organisme réagit-il selon le manuel ?
 choices:
-- id: 3730a5bf-ff35-43f0-978f-366cb7ee9bba
-  text: Des parois extrêmement fines qui facilitent les échanges, pour une surface
-    de contact d'environ 7000 m² chez un adulte.
-- id: 40904efa-edee-4a13-9017-927fcd6ae48a
-  text: Des parois épaisses et rigides qui empêchent tout échange entre le sang et
-    les cellules.
-- id: f1c244af-892b-428e-ac1f-c745708ba1ee
-  text: Un diamètre de 3 centimètres, le plus grand de tout le corps humain.
-- id: 20f0f215-23b9-4056-b318-b55beeefd8d8
-  text: L'absence totale de sang en leur intérieur pendant l'effort musculaire.
+- id: e838364d-c8d7-4855-92ea-1fee09ceeeb9
+  text: Par vasoconstriction périphérique, pour concentrer la chaleur sur les organes
+    vitaux.
+- id: 98896231-494d-496d-b8c7-87182ed12c63
+  text: Par vasodilatation des extrémités, pour réchauffer les doigts.
+- id: 20b42f63-76b4-4619-8855-e948be815b3b
+  text: Par arrêt de la circulation dans les membres supérieurs.
+- id: 765b1a6c-eccd-4cb5-afe5-ed342a9d5b21
+  text: Par augmentation immédiate de la température de l'eau.
 correct_choice_ids:
-- 3730a5bf-ff35-43f0-978f-366cb7ee9bba
-explanation: Les capillaires ont des parois de 8 millièmes de mm et représentent environ
-  7000 m² de surface d'échange entre le sang et les cellules.
+- e838364d-c8d7-4855-92ea-1fee09ceeeb9
+explanation: Confronté au froid, l'organisme diminue le calibre des vaisseaux à la
+  périphérie pour réduire la circulation vers les extrémités et concentrer la chaleur
+  sur cœur et cerveau.
 archived: false

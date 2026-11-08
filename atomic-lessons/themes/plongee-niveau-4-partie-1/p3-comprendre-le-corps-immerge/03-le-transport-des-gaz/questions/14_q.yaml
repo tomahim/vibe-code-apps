@@ -1,21 +1,20 @@
-id: 9583b1e4-2f2f-4886-af50-bf95fe7f6975
+id: fa20f471-99d8-4308-946c-ab7e6baa68b1
 position: 14
 type: multiple_choice
 selection: single
-after_card_position: 7
-prompt: Comment le CO2 est-il transporté selon le manuel ?
+after_card_position: 8
+prompt: Comment l'azote est-il transporté selon le manuel ?
 choices:
-- id: e05f4550-b12c-4846-af50-695f9b8dfa4a
-  text: 87 % sous forme de bicarbonates par le plasma, 8 % combinés à l'hémoglobine,
-    5 % dissous.
-- id: 15ccdece-f6be-4df3-9999-a60f9b27e769
-  text: 100 % dissous dans le plasma, comme l'azote.
-- id: 83869fe6-9309-47b7-8aba-7a4a5afc1e54
-  text: 98 % combinés à l'hémoglobine sur le site de l'O2, 2 % dissous.
-- id: 7e7b70a8-50c3-4d0c-9f05-5f4040e151f1
-  text: 50 % par les globules blancs, 50 % par les plaquettes.
+- id: e35ad49e-bedd-4d58-b9d8-87022f9394f5
+  text: À 100 % sous forme dissoute, en totalité dans le plasma.
+- id: cc460e4d-50c3-4524-ac08-78c8696de1f1
+  text: À 98 % combiné à l'hémoglobine, comme l'oxygène.
+- id: 8a9dda6a-48fe-445e-b11a-f336f10768fe
+  text: À 87 % sous forme de bicarbonates, comme le CO2.
+- id: 2bc6f90d-21ab-4af6-8efc-2235dd1b62b4
+  text: Fixé sur les plaquettes et les globules blancs.
 correct_choice_ids:
-- e05f4550-b12c-4846-af50-695f9b8dfa4a
-explanation: Le CO2 voyage à 87 % sous forme de bicarbonates transportés par le plasma,
-  8 % combinés à l'hémoglobine (sur un site différent de l'O2), 5 % dissous.
+- e35ad49e-bedd-4d58-b9d8-87022f9394f5
+explanation: 'Gaz inerte, l''azote ne provoque aucune réaction chimique : il est transporté
+  à 100 % sous forme dissoute, en totalité dans le plasma.'
 archived: false

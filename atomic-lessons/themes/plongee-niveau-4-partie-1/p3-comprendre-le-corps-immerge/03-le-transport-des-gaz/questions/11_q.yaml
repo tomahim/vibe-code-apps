@@ -1,21 +1,21 @@
-id: 4a404eec-0848-48ec-babb-d60cf341514f
+id: f6ec2324-4b55-4320-af24-54198a36a80a
 position: 11
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: D'où vient le monoxyde de carbone selon le manuel ?
+after_card_position: 6
+prompt: Quel est le traitement d'urgence d'une intoxication au CO ?
 choices:
-- id: d96b81d8-55ed-43cb-a443-877dd87ede57
-  text: 'De la combustion imparfaite de matériaux contenant du carbone : échappement
-    automobile, fumée de cigarette.'
-- id: ff62fdf6-763e-441d-afb9-8fe9994e8570
-  text: De la décomposition naturelle des algues et du plancton au fond de l'eau.
-- id: 4696a341-008f-4c0c-9426-66c93a8b45ac
-  text: De la corrosion des blocs de plongée en acier.
-- id: 69d75477-2b23-401c-939a-a28b61a09595
-  text: De la respiration du plongeur dans son détendeur.
+- id: 5ddf7d8e-7076-4074-89c3-78dfa60fd0eb
+  text: Administrer de l'oxygène pur et alerter immédiatement les secours en vue d'un
+    traitement hyperbare.
+- id: bbd2c357-1cd4-4936-844f-8bb20cf76ae0
+  text: Faire respirer de l'air ambiant et attendre l'arrivée du médecin.
+- id: 40debd67-9a1d-450d-be0b-8683681efe4c
+  text: Plonger à nouveau peu profond pour recompresser la victime.
+- id: 50b9b7ef-51d1-428d-992f-363c9f15a651
+  text: Administrer un médicament contre l'hypoxie et surveiller le rythme cardiaque.
 correct_choice_ids:
-- d96b81d8-55ed-43cb-a443-877dd87ede57
-explanation: Le CO est un sous-produit de la combustion des matériaux contenant du
-  carbone, né d'une combustion imparfaite (gaz d'échappement, fumée de cigarette).
+- 5ddf7d8e-7076-4074-89c3-78dfa60fd0eb
+explanation: 'Oxygène pur et secours alertés immédiatement en vue d''un traitement
+  hyperbare : telle est la conduite décrite par le manuel.'
 archived: false

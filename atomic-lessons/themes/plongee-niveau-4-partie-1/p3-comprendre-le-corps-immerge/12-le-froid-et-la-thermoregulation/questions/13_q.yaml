@@ -1,24 +1,25 @@
-id: 9ba44096-ebe8-49d5-b6f9-8dc3cc9b00ea
+id: be2cd26a-a709-4c9a-a5ac-6c60a9026084
 position: 13
 type: multiple_choice
 selection: single
-after_card_position: 8
-prompt: Pourquoi la profondeur favorise-t-elle le froid ?
+after_card_position: 9
+prompt: Quelle conduite en surface en cas de refroidissement sévère ?
 choices:
-- id: d27b3176-c688-4213-991b-781100e15fd5
-  text: Elle comprime les bulles du néoprène, ce qui diminue le pouvoir isolant de
-    la combinaison.
-- id: ff4e5b57-f34f-41f3-985b-e221e11c3140
-  text: Elle rend l'eau mécaniquement plus froide, car la température diminue toujours
-    avec la pression.
-- id: fc1fa7f3-f131-40a2-bb60-753e55dd7f94
-  text: Elle accélère la circulation sanguine, ce qui évacue la chaleur du corps plus
-    rapidement.
-- id: 747f46aa-e929-4b75-8c4b-f30e7b1b5c83
-  text: Elle supprime la production de chaleur par les muscles, qui ne fonctionnent
-    plus sous pression.
+- id: cce2022e-225f-4879-b873-bcbfb6f74571
+  text: Déséquiper vite, sécher sans frictionner, vêtements chauds, allonger avec
+    couverture, boisson chaude sucrée, jamais d'alcool.
+- id: faa712a2-eb36-4989-b324-245c3aca7853
+  text: Passer les mains sous l'eau chaude et frictionner vigoureusement le plongeur
+    pour relancer la circulation.
+- id: eea24700-566e-4dec-9a0c-99c2d5b723a9
+  text: Faire boire un alcool fort au plongeur, afin de dilater ses vaisseaux et de
+    le réchauffer vite.
+- id: 37dc1ec5-3574-4a8f-ba97-015407fa767e
+  text: Faire courir le plongeur sur le pont du bateau, pour le réchauffer par l'exercice
+    musculaire.
 correct_choice_ids:
-- d27b3176-c688-4213-991b-781100e15fd5
-explanation: 'La profondeur comprime les bulles du néoprène : la combinaison isole
-  moins bien au fond qu''en surface.'
+- cce2022e-225f-4879-b873-bcbfb6f74571
+explanation: 'Réchauffement progressif : pas d''eau chaude sur les mains, pas d''alcool,
+  pas de friction - sinon afflux sanguin brusque vers la périphérie au détriment des
+  organes centraux, risque de malaise cardiaque.'
 archived: false

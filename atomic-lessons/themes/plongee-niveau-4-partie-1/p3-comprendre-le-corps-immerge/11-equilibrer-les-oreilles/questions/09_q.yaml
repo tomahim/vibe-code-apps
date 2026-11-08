@@ -1,22 +1,22 @@
-id: 83e5a51c-672a-4b9b-af7e-3ba23c0edbf6
+id: 1c1df78f-073b-40e9-9944-2dbe15f9a61c
 position: 9
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: Quel est l'avantage de souffler dans le masque, narines plaquées sur la jupe
-  ?
+after_card_position: 6
+prompt: En quoi consiste la BTV (béance tubaire volontaire) ?
 choices:
-- id: d28c3467-c10b-474a-aa6f-26eecba46d5f
-  text: C'est une variante du Valsalva moins violente, pratique lorsque les mains
-    sont prises.
-- id: 25373f45-a2d7-417f-bdc1-e8b6bd409f8c
-  text: Cela évite d'avoir à équilibrer les oreilles.
-- id: 87ada602-120d-4f09-8d11-643d87cc5b77
-  text: Cela débouche les sinus frontaux à coup sûr.
-- id: 0c6302b9-68e6-4c81-ba32-7b46c793e366
-  text: Cela économise l'air de la bouteille.
+- id: 321b5da4-9f47-44f2-9ca1-924c1cd0a4e1
+  text: Plonger « trompes ouvertes » par le contrôle volontaire des muscles de leur
+    ouverture, comme lors du bâillement.
+- id: c2b79022-1ec0-433a-ace6-753e4470e3cc
+  text: Bloquer volontairement la trompe bien fermée pendant toute la durée de la
+    plongée.
+- id: b462f748-b654-43b5-8258-41f239938cd6
+  text: Forcer la trompe ouverte par une hyperpression maximale.
+- id: 267bab68-f256-4b42-baaf-5c0759288a20
+  text: Se percer le tympan avant la saison de plongée.
 correct_choice_ids:
-- d28c3467-c10b-474a-aa6f-26eecba46d5f
-explanation: 'Variante du Valsalva moins violente, utile quand les mains sont prises
-  : descente le long d''un mouillage, aide à un plongeur en difficulté...'
+- 321b5da4-9f47-44f2-9ca1-924c1cd0a4e1
+explanation: 'Décrite par G. Delonca, la BTV élimine tout risque barotraumatique :
+  les trompes restent ouvertes par contrôle volontaire des muscles.'
 archived: false

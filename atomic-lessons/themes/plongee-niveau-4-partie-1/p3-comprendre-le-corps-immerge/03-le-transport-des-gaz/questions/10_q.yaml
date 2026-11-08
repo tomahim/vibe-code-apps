@@ -1,21 +1,21 @@
-id: de6a5f01-3166-4c6a-915c-35d0b9da3f24
+id: 4a404eec-0848-48ec-babb-d60cf341514f
 position: 10
 type: multiple_choice
 selection: single
 after_card_position: 5
-prompt: Quel taux de CO suffit à réduire de moitié la capacité de transport de l'oxygène
-  ?
+prompt: D'où vient le monoxyde de carbone selon le manuel ?
 choices:
-- id: dd0021c7-b810-4ec7-9821-fbf74c8c9cc6
-  text: 0,1 % de CO suffit, selon le manuel.
-- id: db86ac1f-8f10-4517-a568-1d22634e5929
-  text: 10 % de CO sont nécessaires, selon le manuel.
-- id: 11c098fd-d42f-49be-9319-eb9d2d9f838c
-  text: 50 % de CO sont nécessaires, selon le manuel.
-- id: 724f989b-922d-4411-99fd-81633479507b
-  text: Aucun taux n'a d'effet mesurable, selon le manuel.
+- id: d96b81d8-55ed-43cb-a443-877dd87ede57
+  text: 'De la combustion imparfaite de matériaux contenant du carbone : échappement
+    automobile, fumée de cigarette.'
+- id: ff62fdf6-763e-441d-afb9-8fe9994e8570
+  text: De la décomposition naturelle des algues et du plancton au fond de l'eau.
+- id: 4696a341-008f-4c0c-9426-66c93a8b45ac
+  text: De la corrosion des blocs de plongée en acier.
+- id: 69d75477-2b23-401c-939a-a28b61a09595
+  text: De la respiration du plongeur dans son détendeur.
 correct_choice_ids:
-- dd0021c7-b810-4ec7-9821-fbf74c8c9cc6
-explanation: La présence de 0,1 % de CO suffit à réduire de moitié la capacité de
-  transport de l'oxygène par le sang.
+- d96b81d8-55ed-43cb-a443-877dd87ede57
+explanation: Le CO est un sous-produit de la combustion des matériaux contenant du
+  carbone, né d'une combustion imparfaite (gaz d'échappement, fumée de cigarette).
 archived: false

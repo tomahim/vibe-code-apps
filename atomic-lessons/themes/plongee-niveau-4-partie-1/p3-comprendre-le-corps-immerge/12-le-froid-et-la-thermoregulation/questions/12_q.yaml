@@ -1,24 +1,21 @@
-id: d4f31d83-79ea-4d59-a231-0ca97ba8244b
+id: f0242223-ccb7-4536-a417-042584cb6936
 position: 12
 type: multiple_choice
 selection: single
-after_card_position: 7
-prompt: Que doit observer le guide de palanquée ?
+after_card_position: 9
+prompt: Quelle conduite dans l'eau dès les premiers signes de froid ?
 choices:
-- id: 5c6bfb18-1878-4d55-85af-a95f79951f22
-  text: Désintérêt de la plongée, position recroquevillée, débuts de tremblement des
-    lèvres et des bras.
-- id: 5444e45c-9938-4965-9961-545754e9a520
-  text: Uniquement les signes effectués par les plongeurs, qui suffisent à détecter
-    le froid dans une palanquée.
-- id: 13695f68-2ed5-4bed-80d0-d424b5dbe729
-  text: Uniquement la consommation d'air lue sur le manomètre, seul indicateur fiable
-    du froid.
-- id: 32df264c-359a-470b-9881-34f56bf809d2
-  text: Uniquement la couleur et l'épaisseur de la combinaison portée par chaque plongeur.
+- id: faf65a93-6580-4cc6-810c-34dc3dca628b
+  text: Les plongeurs le signalent et le guide met fin à la plongée.
+- id: 2003a65d-3616-4ff5-864f-0e61edfe6c47
+  text: On continue jusqu'à la fin du temps prévu.
+- id: c40da789-84bc-48d7-adf6-964e8429471f
+  text: On accélère les mouvements pour se réchauffer.
+- id: 24f9c944-0517-4112-bf2a-8feb6dcab940
+  text: On descend plus profond pour se stabiliser.
 correct_choice_ids:
-- 5c6bfb18-1878-4d55-85af-a95f79951f22
-explanation: 'Le GP recueille des informations indépendamment des signes effectués
-  : désintérêt, position recroquevillée, tremblements perceptibles aux lèvres et aux
-  bras.'
+- faf65a93-6580-4cc6-810c-34dc3dca628b
+explanation: 'Dès les premiers signes, signal et fin de la plongée ; froid = facteur
+  favorisant les ADD : paliers éventuellement accrus, remontée lente, courbe sans
+  palier si possible.'
 archived: false

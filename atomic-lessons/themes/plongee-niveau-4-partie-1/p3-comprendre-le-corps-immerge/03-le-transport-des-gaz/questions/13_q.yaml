@@ -1,22 +1,21 @@
-id: d2bf3a60-2d29-4947-9684-ccf9b91d7a6c
+id: 9583b1e4-2f2f-4886-af50-bf95fe7f6975
 position: 13
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: Quelles précautions le manuel impose-t-il au gonflage ?
+after_card_position: 7
+prompt: Comment le CO2 est-il transporté selon le manuel ?
 choices:
-- id: 2312b11f-5348-4037-8c2a-2b348dd5fb25
-  text: Un local ventilé et une prise d'air éloignée de toute source de pollution
-    potentielle.
-- id: c2e2d248-bd71-47cd-9ad7-ffb40bee24f2
-  text: Un local fermé pour concentrer l'air comprimé.
-- id: 24b68050-5411-4ae3-99e2-da3355d2ea93
-  text: Une prise d'air située près des moteurs pour l'air chaud.
-- id: 182c368e-deca-40f4-b65b-a9401dd1b10d
-  text: Un gonflage uniquement nocturne, loin du soleil.
+- id: e05f4550-b12c-4846-af50-695f9b8dfa4a
+  text: 87 % sous forme de bicarbonates par le plasma, 8 % combinés à l'hémoglobine,
+    5 % dissous.
+- id: 15ccdece-f6be-4df3-9999-a60f9b27e769
+  text: 100 % dissous dans le plasma, comme l'azote.
+- id: 83869fe6-9309-47b7-8aba-7a4a5afc1e54
+  text: 98 % combinés à l'hémoglobine sur le site de l'O2, 2 % dissous.
+- id: 7e7b70a8-50c3-4d0c-9f05-5f4040e151f1
+  text: 50 % par les globules blancs, 50 % par les plaquettes.
 correct_choice_ids:
-- 2312b11f-5348-4037-8c2a-2b348dd5fb25
-explanation: 'Vigilance lors des opérations de gonflage : local ventilé, prise d''air
-  éloignée de toute source de pollution, y compris échappements et ventilation des
-  locaux.'
+- e05f4550-b12c-4846-af50-695f9b8dfa4a
+explanation: Le CO2 voyage à 87 % sous forme de bicarbonates transportés par le plasma,
+  8 % combinés à l'hémoglobine (sur un site différent de l'O2), 5 % dissous.
 archived: false

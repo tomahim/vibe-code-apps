@@ -1,20 +1,22 @@
-id: b49ef944-472f-4e2f-9b00-6f892da271b6
+id: 65637338-26b1-4644-9211-591b12c5c3ba
 position: 15
 type: multiple_choice
 selection: single
-after_card_position: 7
-prompt: Où le CO2 se fixe-t-il sur l'hémoglobine ?
+after_card_position: 9
+prompt: Qu'est-ce que l'oxygénothérapie hyperbare (OHB) ?
 choices:
-- id: 0639a933-7314-4427-853a-bb1561ec9493
-  text: Sur un site différent de celui de l'oxygène.
-- id: 78c15661-3bc5-45e3-9115-6e93b9a70501
-  text: Sur exactement le même site que l'oxygène.
-- id: 5d58372c-87ba-4a63-b53f-f27ca9bda9aa
-  text: Sur les hèmes, à la place du fer.
-- id: 73d42262-e958-4f73-b6eb-aa0dbe2e8592
-  text: Il ne se fixe jamais sur l'hémoglobine.
+- id: 6c3ed521-dd1a-4c55-b0d1-e6dae8bedb21
+  text: L'administration d'oxygène à pression partielle élevée en caisson, qui augmente
+    l'apport d'O2 dissous agissant directement sur les tissus.
+- id: fc18a67b-f47e-4e4b-91cb-cf8cf0dcc67c
+  text: L'administration d'air ambiant à pression atmosphérique normale dans un service
+    hospitalier classique.
+- id: 9ae284a0-0195-4ef7-b39b-e10511c29573
+  text: Une plongée de recompression libre, sans matériel ni caisson.
+- id: ea10d5a3-3167-4f9c-b1f2-409331a8505b
+  text: Un massage cardiaque suivi d'une ventilation artificielle prolongée.
 correct_choice_ids:
-- 0639a933-7314-4427-853a-bb1561ec9493
-explanation: 8 % du CO2 se combinent à l'hémoglobine sur un site différent de celui
-  de l'O2 - contrairement au CO, qui occupe les sites de l'oxygène.
+- 6c3ed521-dd1a-4c55-b0d1-e6dae8bedb21
+explanation: 'L''OHB se pratique en caisson, à pression partielle d''oxygène élevée
+  : l''apport d''O2 dissous augmente et agit directement sur les tissus.'
 archived: false

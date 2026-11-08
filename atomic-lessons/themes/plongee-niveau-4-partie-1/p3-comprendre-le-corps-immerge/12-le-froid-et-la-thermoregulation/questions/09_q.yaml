@@ -1,25 +1,24 @@
-id: 61907378-5750-4ac1-8d84-a59691ee6d2e
+id: d4f31d83-79ea-4d59-a231-0ca97ba8244b
 position: 9
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: Qu'est-ce que le refroidissement par convection ?
+after_card_position: 6
+prompt: Que doit observer le guide de palanquée ?
 choices:
-- id: 1a641322-1928-43dc-bf5d-cc396a417d2c
-  text: La circulation de l'eau dans la combinaison oblige le corps à réchauffer sans
-    cesse une nouvelle pellicule d'eau.
-- id: ab7692a8-c804-4dd6-b377-e77e8e0f100d
-  text: Le réchauffement de l'air inspiré, qui laisse échapper une certaine quantité
-    de chaleur à chaque expiration.
-- id: 851ca1a3-3f82-4705-a932-e77a193d3e91
-  text: Le contact direct de la peau avec la bouteille métallique, qui évacue la chaleur
-    du dos du plongeur.
-- id: 1b8da5ac-041f-4aee-921c-61973484de66
-  text: La perte de chaleur concentrée sur les seules extrémités, les mains et les
-    pieds du plongeur.
+- id: 5c6bfb18-1878-4d55-85af-a95f79951f22
+  text: Désintérêt de la plongée, position recroquevillée, débuts de tremblement des
+    lèvres et des bras.
+- id: 5444e45c-9938-4965-9961-545754e9a520
+  text: Uniquement les signes effectués par les plongeurs, qui suffisent à détecter
+    le froid dans une palanquée.
+- id: 13695f68-2ed5-4bed-80d0-d424b5dbe729
+  text: Uniquement la consommation d'air lue sur le manomètre, seul indicateur fiable
+    du froid.
+- id: 32df264c-359a-470b-9881-34f56bf809d2
+  text: Uniquement la couleur et l'épaisseur de la combinaison portée par chaque plongeur.
 correct_choice_ids:
-- 1a641322-1928-43dc-bf5d-cc396a417d2c
-explanation: 'Convection : l''eau circule sur et dans la combinaison - d''où l''intérêt
-  d''une combinaison près du corps avec manchons, et d''éviter les mouvements quand
-  on a froid.'
+- 5c6bfb18-1878-4d55-85af-a95f79951f22
+explanation: 'Le GP recueille des informations indépendamment des signes effectués
+  : désintérêt, position recroquevillée, tremblements perceptibles aux lèvres et aux
+  bras.'
 archived: false

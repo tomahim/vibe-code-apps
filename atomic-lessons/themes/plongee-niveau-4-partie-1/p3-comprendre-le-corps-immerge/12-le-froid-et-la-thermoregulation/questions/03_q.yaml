@@ -2,7 +2,7 @@ id: 16458cd4-05ae-4ea4-9495-642c24455503
 position: 3
 type: multiple_choice
 selection: single
-after_card_position: 2
+after_card_position: 1
 prompt: Où se situe la neutralité thermique dans l'air et dans l'eau ?
 choices:
 - id: 414fdc8e-7df7-4fef-9955-0e78bec71a83

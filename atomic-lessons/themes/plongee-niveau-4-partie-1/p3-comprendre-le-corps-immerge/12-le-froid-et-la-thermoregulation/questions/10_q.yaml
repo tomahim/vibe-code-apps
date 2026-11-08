@@ -1,21 +1,21 @@
-id: 080e9124-97f8-4d34-84ad-31918c1fda97
+id: ed95f6c7-4827-4fb4-b22c-7ffb05a82270
 position: 10
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: Pourquoi les enfants subissent-ils plus vite les effets du froid ?
+after_card_position: 7
+prompt: Pourquoi faut-il limiter les mouvements quand on a froid dans l'eau ?
 choices:
-- id: e0cab980-f6b2-4cf0-882f-68e5ab41c4c7
-  text: Leur surface corporelle est plus importante relativement à leur masse.
-- id: c6bc4f74-cef1-4041-b2da-2990c056ef7e
-  text: Leur combinaison est toujours trop grande.
-- id: 95ac3160-8f22-4749-b919-ebba2dd39beb
-  text: Ils respirent plus d'air que les adultes.
-- id: 15ff6435-47cd-4885-b931-7553e42f8f42
-  text: Leur température centrale est plus basse.
+- id: b5bebfdc-0f25-4543-892a-2012326cfb6f
+  text: Ils augmentent la circulation d'eau dans la combinaison, ce qui favorise le
+    refroidissement.
+- id: 7da56ea4-7969-4751-86d3-6d5f618cc271
+  text: Ils provoquent immédiatement des crampes mortelles.
+- id: 6ad328a3-4008-46fa-ae5e-6533cca9280e
+  text: Ils déchirent la combinaison néoprène.
+- id: 6d0768ee-8e2f-4c55-9e0d-0a834e1b3f44
+  text: Ils épuisent la réserve d'air en quelques secondes.
 correct_choice_ids:
-- e0cab980-f6b2-4cf0-882f-68e5ab41c4c7
-explanation: 'Le refroidissement par conduction est d''autant plus grand que la surface
-  de contact est importante : les enfants ont une surface corporelle relativement
-  plus importante.'
+- b5bebfdc-0f25-4543-892a-2012326cfb6f
+explanation: 'Contrairement au réflexe de surface, s''agiter sous l''eau chasse la
+  pellicule d''eau réchauffée : mieux vaut limiter les mouvements pour la garder prisonnière.'
 archived: false
