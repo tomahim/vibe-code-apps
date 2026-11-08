@@ -233,3 +233,19 @@ import {
   to = railway_variable.api_django_secret_key
   id = "5b117cf2-e177-4951-ba3e-9b20c4920144:production:DJANGO_SECRET_KEY"
 }
+
+# --- Little Grains weekly challenge (app PR #407; infra lands first) ---
+# The Challenge API returns 404 for everyone except the two accounts named by
+# this variable (see challenge_players() in api/apps/learning/challenge.py):
+# it must resolve to exactly two distinct production Django accounts, matched
+# on username or email. Fail closed: a missing handle, an ambiguous email, or
+# one account behind both handles disables the duel for everyone. Confirm the
+# exact handles against the production accounts before apply. This variable
+# does not exist in Railway yet: `terraform apply` creates it, so there is no
+# import. Do not apply before the app PR merges.
+resource "railway_variable" "api_learning_challenge_players" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.api.id
+  name           = "LEARNING_CHALLENGE_PLAYERS"
+  value          = "thomas,aurore"
+}
