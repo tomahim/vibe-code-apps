@@ -1,0 +1,22 @@
+id: 89100f89-b551-42ea-a707-91178bdd4d6f
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi les Sc de Yarbrough (1937) ont-ils été abandonnés ?
+choices:
+- id: e7ffc581-36f7-455e-8af6-111eb0686130
+  text: VanDerAue a démontré leur dangerosité sur les plongées longues et profondes
+    (1946-1948).
+- id: 7c0d735a-3650-445d-88d0-f4cfa64f5a53
+  text: Ils étaient impossibles à imprimer sur les tables de l'époque.
+- id: ad09af1e-ce9c-48b9-8bb8-82d75ec85ded
+  text: Ils imposaient des paliers beaucoup trop longs aux plongeurs.
+- id: de6dd5c6-411e-4e1f-b4d3-3c54c7db048e
+  text: Ils interdisaient toute plongée au-delà de vingt mètres.
+correct_choice_ids:
+- e7ffc581-36f7-455e-8af6-111eb0686130
+explanation: Entre 1946 et 1948, VanDerAue démontre la dangerosité des Sc de Yarbrough,
+  en particulier sur les plongées longues et profondes ; Workman révisera les Sc en
+  1956.
+archived: false
