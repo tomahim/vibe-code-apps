@@ -1,7 +1,7 @@
 ---
 id: eec0d055-7900-4a31-9ff9-ef58d990c910
 position: 1
-title: Prendre sa place de guide de palanquée
+title: "1 - Prendre sa place de guide de palanquée"
 description: Comprendre le rôle du guide de palanquée, ses limites et ses responsabilités
   dans le cadre du code du sport.
 archived: false
