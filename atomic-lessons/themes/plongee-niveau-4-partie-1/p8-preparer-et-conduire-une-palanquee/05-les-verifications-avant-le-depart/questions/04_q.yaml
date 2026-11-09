@@ -1,0 +1,20 @@
+id: 18844d71-3a2e-40d2-8e2d-1024b8ca7b74
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi une bouteille mal ouverte est-elle particulièrement dangereuse ?
+choices:
+- id: 29f57bca-f199-43a2-b616-d404a3a1f26f
+  text: L'insuffisance d'ouverture peut ne se révéler qu'en profondeur.
+- id: 11f09cc6-5cb8-4be2-bace-2fb4fb3db474
+  text: Elle rend la bouteille plus lourde.
+- id: 2aa57bbb-6309-4176-bf0b-7dd98624cb3e
+  text: Elle fait exploser le manomètre.
+- id: 5b444a71-abc5-48c5-8c9f-831f491ebb8e
+  text: Elle vide le gilet instantanément.
+correct_choice_ids:
+- 29f57bca-f199-43a2-b616-d404a3a1f26f
+explanation: Un robinet pas complètement ouvert peut se révéler en profondeur, quand
+  la pression ambiante rend l'insuffisance d'ouverture sensible.
+archived: false

@@ -1,0 +1,22 @@
+id: 627c405f-706f-4e93-a035-66fe10fd6b2e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont les quatre points des vérifications préalables du manuel ?
+choices:
+- id: 00316584-23ba-409e-b6e8-75052208e72e
+  text: Bouteille ouverte, direct-system branché, manomètre indiquant la pression,
+    masque sur le visage et détendeur en bouche.
+- id: 235f146a-22c3-4ecc-90ac-5a32e49eed8a
+  text: Palmes cirées, gilet neuf, combinaison sèche, montre étanche.
+- id: aacb861d-93c5-48fd-b137-e431a47fbbc9
+  text: Uniquement la pression de la bouteille.
+- id: da34c54c-5456-404b-9510-aa6853f4c4ed
+  text: Le nom du capitaine et l'heure de retour.
+correct_choice_ids:
+- 00316584-23ba-409e-b6e8-75052208e72e
+explanation: 'Les vérifications préalables : bouteille bien ouverte, direct-system
+  branché, manomètre indiquant bien la pression, masque sur le visage, détendeur en
+  bouche.'
+archived: false
