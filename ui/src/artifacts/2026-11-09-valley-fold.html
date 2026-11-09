@@ -627,43 +627,28 @@ VF.models = (function () {
     ]
   });
 
-  /* ---------- 10. Masu Box ---------- */
+
+  /* ---------- 10. Stunt Glider ---------- */
   S.push({
-    slug: 'masu-box', name: 'Masu Box', diff: 5, color: '#e07856',
-    blurb: 'A real box from one sheet - the traditional masu.',
+    slug: 'stunt-glider', name: 'Stunt Glider', diff: 5, color: '#d8a84e',
+    blurb: 'The dart, mastered: blunted nose, wide glider wings.',
     steps: [
-      { text: 'Fold in half top to bottom, then unfold.',
-        ops: precrease([0, 0], [1, 0], [0, 1], 'v', 'm1') },
-      { text: 'Fold in half left to right, then unfold.',
-        ops: precrease([0, 0], [0, 1], [1, 0], 'v', 'm2') },
-      { text: 'Fold all four corners to the center.',
+      { text: 'Fold in half lengthwise, then unfold.',
+        ops: precrease([0, -1], [0, 1], [1, 0], 'v', 'g1') },
+      { text: 'Fold the top-right corner to the center line.',
         ops: [foldTo([1, 1], [0, 0], 'v', { group: 1 })] },
-      { text: 'Second corner to the center.',
+      { text: 'Fold the top-left corner to the center line.',
         ops: [foldTo([-1, 1], [0, 0], 'v', { group: 2 })] },
-      { text: 'Third corner to the center.',
-        ops: [foldTo([-1, -1], [0, 0], 'v', { group: 3 })] },
-      { text: 'Fourth corner to the center.',
-        ops: [foldTo([1, -1], [0, 0], 'v', { group: 4 })] },
-      { text: 'Fold the top-right edge to the center line, then unfold. Same for the bottom-left edge.',
-        ops: precrease([0.5, 0], [0, 0.5], [1, 1], 'v', 'm3').concat(
-             precrease([-0.5, 0], [0, -0.5], [-1, -1], 'v', 'm4')) },
-      { text: 'Fold the other two edges to the center line, then unfold them.',
-        ops: precrease([0.5, 0], [0, -0.5], [1, -1], 'v', 'm5').concat(
-             precrease([-0.5, 0], [0, 0.5], [-1, 1], 'v', 'm6')) },
-      { text: 'Open out the top-right and bottom-left corner flaps.',
-        ops: [
-          mk([0, 1], [1, 0], [0, 0], 'v', { includeGroups: [1] }),
-          mk([0, -1], [-1, 0], [0, 0], 'v', { includeGroups: [3] })
-        ] },
-      { text: 'Raise the right wall: fold the right strip up along its crease.',
-        ops: [mk([0.5, 0], [0, -0.5], [1, -1], 'v', { angle: Math.PI / 2, zMode: 'keep' })] },
-      { text: 'Raise the left wall the same way.',
-        ops: [mk([-0.5, 0], [0, 0.5], [-1, 1], 'v', { angle: Math.PI / 2, zMode: 'keep' })] },
-      { text: 'Push the top corners in and fold the last flaps over into the box to lock it.',
-        ops: [
-          mk([0, 1], [1, 0], [0.5, 0.5], 'v', { angle: Math.PI / 2, zMode: 'keep' }),
-          mk([0, -1], [-1, 0], [-0.5, -0.5], 'v', { angle: Math.PI / 2, zMode: 'keep' })
-        ] }
+      { text: 'Fold the nose tip back a little - a blunted nose glides, a pointy one dives.',
+        ops: [mk([-0.2, 0.55], [0.2, 0.55], [0, 1], 'v', { group: 5 })] },
+      { text: 'Fold the plane in half away from you.',
+        ops: [mk([0, -1], [0, 1], [1, 0], 'm', { group: 6 })] },
+      { text: 'Fold the top wing down: start a thumb-width below the nose, out to the tail corner. Wide wings glide.',
+        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'v', { includeGroups: [0, 2, 4], group: 7 })] },
+      { text: 'Fold the other wing down behind.',
+        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'm', { includeGroups: [1, 3, 5, 6], group: 8 })] },
+      { text: 'Open the wings, hold the body, throw high and watch it glide.',
+        ops: [spinZ(Math.PI / 2)] }
     ]
   });
 
