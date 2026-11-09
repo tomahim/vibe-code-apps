@@ -1,23 +1,23 @@
-id: c348e560-8729-45a1-a7d9-2de7786ebe24
+id: b72965c4-071d-42ca-8a23-62e23b20b14e
 position: 8
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: Quels sont les premiers secours après une morsure à risque d'envenimation,
-  selon le manuel ?
+after_card_position: 4
+prompt: Quelles limites le manuel fixe-t-il pour une plongée de nuit ?
 choices:
-- id: 902e1be8-5314-492d-a296-8865df0bbfa4
-  text: Immobiliser immédiatement, désinfecter la plaie, apposer de la glace, évacuer
-    vers une structure médicale, et surveiller la victime en permanence.
-- id: 716fdaee-c6ab-43f8-b2b9-b7ad6e79a11e
-  text: Faire courir la victime pour activer la circulation.
-- id: 81d42ff8-8152-4399-bf0f-ed99eb812ad3
-  text: Sucer le venin.
-- id: 68d74986-10fb-4905-843d-8731e7189d18
-  text: Appliquer un garrot serré et attendre.
+- id: 7c9c9ee7-51e0-4b80-8a5a-e5a866e9243f
+  text: Profondeur limitée (par exemple 10-15 m) largement dans la courbe sans palier,
+    site connu de jour, sans difficulté d'orientation, près du mouillage, bateau éclairé.
+- id: 974cf480-a39b-4dbb-b8c1-8dd94e336e35
+  text: 'Aucune limite : la nuit ne change rien.'
+- id: cb329908-ee4c-4ba9-bd60-862ffc4e011c
+  text: Uniquement une limite de temps de 10 minutes.
+- id: 8079302d-473b-46ef-b75b-117a9ac628f1
+  text: Profondeur jusqu'à 40 m si l'on a deux lampes.
 correct_choice_ids:
-- 902e1be8-5314-492d-a296-8865df0bbfa4
-explanation: 'Premiers secours : immobiliser immédiatement, désinfecter la plaie,
-  apposer de la glace, évacuer vers une structure médicale ; la victime est surveillée
-  en permanence par des personnes capables d''effectuer les gestes de premiers secours.'
+- 7c9c9ee7-51e0-4b80-8a5a-e5a866e9243f
+explanation: 'De nuit : profondeur limitée (par exemple 10 ou 15 mètres), plongées
+  largement dans la courbe sans palier, site connu pour l''avoir exploré de jour,
+  aucune difficulté d''orientation, peu d''éloignement du mouillage, bateau éclairé
+  en surface.'
 archived: false

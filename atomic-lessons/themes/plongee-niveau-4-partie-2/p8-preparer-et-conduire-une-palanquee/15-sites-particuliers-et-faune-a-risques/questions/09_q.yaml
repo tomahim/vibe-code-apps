@@ -1,21 +1,23 @@
-id: 08c85bda-de78-4ded-8ace-28b4cf57b666
+id: b66a1106-91e0-4367-a863-95649e75bbea
 position: 9
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: Que dit le manuel des cônes en zones tropicales ?
+after_card_position: 5
+prompt: Comment prévenir les morsures de congres et de murènes, selon le manuel ?
 choices:
-- id: c616a66d-5955-40b6-bbfa-8b3996dedf5b
-  text: Ne pas toucher les coquillages que l'on ne connaît pas et ne pas fouiller
-    dans le sable.
-- id: 7836044c-105d-42d2-94d7-fc02534e56fb
-  text: Les collectionner sans gants.
-- id: fe9805c4-c228-465f-8a39-8d9cb989cc70
-  text: Les goûter pour les identifier.
-- id: 82680a37-c1a5-45d6-8007-bedf3a3875b4
-  text: Ils sont tous inoffensifs.
+- id: 3e9439d7-f642-4356-a4fe-9de8d1cbcdd2
+  text: Éviter de les agresser et ne pas leur présenter les doigts, par exemple pour
+    les faire sortir de leur trou.
+- id: 10336a87-49a8-4f39-9dcf-1cde209814bf
+  text: Leur donner de la nourriture pour les apaiser.
+- id: 5d5827d8-aca6-4344-94d1-4c53cef28dec
+  text: Les attraper par la queue.
+- id: e659693d-bd61-4d0b-81ce-063514b13f83
+  text: Tapoter leur tête.
 correct_choice_ids:
-- c616a66d-5955-40b6-bbfa-8b3996dedf5b
-explanation: Certaines espèces de cônes sont dangereuses pour l'homme ; en zones tropicales,
-  ne touchez pas les coquillages inconnus et ne fouillez pas dans le sable.
+- 3e9439d7-f642-4356-a4fe-9de8d1cbcdd2
+explanation: 'La prévention est simple : éviter d''agresser ces animaux et ne pas
+  leur présenter vos doigts. Vigilance accrue dans les zones où certaines espèces
+  sont nourries : elles peuvent devenir agressives envers les plongeurs qui ne donnent
+  rien.'
 archived: false

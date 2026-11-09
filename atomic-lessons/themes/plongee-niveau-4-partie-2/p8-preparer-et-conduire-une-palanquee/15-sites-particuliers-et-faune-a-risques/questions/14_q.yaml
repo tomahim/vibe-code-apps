@@ -1,22 +1,23 @@
-id: 01be9ac5-bf42-4305-bb18-ee8385bfa91a
+id: 1eaa6e01-6386-4d67-b278-4a9938454232
 position: 14
 type: multiple_choice
 selection: single
-after_card_position: 8
-prompt: Comment prévenir la ciguatera, selon le manuel ?
+after_card_position: 7
+prompt: Que ne faut-il jamais faire après un contact avec des cellules urticantes
+  (méduses, anémones, corail de feu) ?
 choices:
-- id: 71d8c863-4377-45e3-8bbb-4ecb58bf85b2
-  text: Éviter la consommation de gros poissons carnivores (barracuda, mérou, vivaneau...)
-    en zone à risque.
-- id: 3d79c918-ec39-4019-8f2b-49afca4bf18d
-  text: Manger uniquement du poisson cuit à l'eau bouillante.
-- id: 2077f2fd-9d45-4dba-a0b0-1e7ce60ce170
-  text: Boire de l'eau de mer.
-- id: 02eda66f-db2a-4dec-8541-d214d62916c3
-  text: Manger uniquement des coquillages.
+- id: 93e2dcdd-5b7b-4388-a59d-de91ae8d4c0b
+  text: Frotter la zone douloureuse.
+- id: b8dc242e-a808-43b9-bac6-c0c8d379dfd0
+  text: Rincer à l'eau de mer.
+- id: 902131cd-3ad3-4db1-a354-6878cc88bb0e
+  text: Désinfecter.
+- id: 6d7db0f7-9066-447f-bfb0-4cf23b8381fe
+  text: Appliquer un corticoïde après désinfection.
 correct_choice_ids:
-- 71d8c863-4377-45e3-8bbb-4ecb58bf85b2
-explanation: La ciguatera est due à l'ingestion de poissons tropicaux contaminés par
-  une neurotoxine ; à titre préventif, évitez les gros poissons carnivores (barracuda,
-  thazard de lagon, sériole, vivaneau, mérou...) en zone à risque.
+- 93e2dcdd-5b7b-4388-a59d-de91ae8d4c0b
+explanation: 'Il est contre-indiqué de frotter : cela peut faire éclater les cellules
+  urticantes restées collées à la peau et disséminer le poison. En immersion, agiter
+  de l''eau de mer au-dessus de la zone ; en surface, laver sans frotter, éventuellement
+  racler après sable ou mousse à raser, puis désinfecter avant d''appliquer un corticoïde.'
 archived: false

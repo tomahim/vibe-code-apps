@@ -1,5 +1,5 @@
 ---
-id: ab986217-39c2-4633-bb05-14c0cae43a04
+id: d995fbd4-9890-4b39-aba5-02e8d7086f83
 position: 8
 title: Les intoxications alimentaires
 archived: false

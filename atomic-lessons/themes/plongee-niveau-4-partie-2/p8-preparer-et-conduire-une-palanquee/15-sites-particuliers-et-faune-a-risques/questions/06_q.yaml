@@ -1,22 +1,20 @@
-id: 70f981cf-98f5-407a-871d-f44e1a6c5cce
+id: 5c429bdc-f62d-4f61-ac13-f67ee7a6fb6f
 position: 6
 type: multiple_choice
 selection: single
-after_card_position: 4
-prompt: Que doit faire un plongeur pris dans des filets, selon le manuel ?
+after_card_position: 3
+prompt: Quelle est la première précaution concernant les filets, selon le manuel ?
 choices:
-- id: 473bea2f-5f20-4679-b63b-58e0d95dd0da
-  text: Éviter de s'agiter ; il faut couper les fils le plus rapidement possible à
-    l'aide d'un couteau ou d'une cisaille.
-- id: 3f1ce439-fdac-47b1-92e8-f93a3879dcbc
-  text: Se débattre vigoureusement.
-- id: 84ae00c5-4441-45d2-9bd7-26df462b36c0
-  text: Gonfler son gilet au maximum.
-- id: 03900fc6-b2c9-40d5-83f4-c2ea8316022e
-  text: Retirer son détendeur.
+- id: 60d849af-9110-4b4c-86d0-ae3061b41aae
+  text: Ne pas plonger à proximité de ces engins de pêche.
+- id: 2981715d-e546-4319-9d8d-fa87247d216a
+  text: Porter toujours deux couteaux.
+- id: 361e03c3-61ce-4c52-b192-79f50f44fa09
+  text: Plonger uniquement de nuit près des filets.
+- id: a3fe23b1-f3da-4171-afd9-eedc6d75122b
+  text: Toucher les filets pour vérifier leur solidité.
 correct_choice_ids:
-- 473bea2f-5f20-4679-b63b-58e0d95dd0da
-explanation: 'Un plongeur pris dans des filets risque la noyade : il doit éviter de
-  s''agiter et il faut couper les fils au plus vite avec un couteau ou une cisaille.
-  La première précaution reste de ne pas plonger à proximité de ces engins de pêche.'
+- 60d849af-9110-4b4c-86d0-ae3061b41aae
+explanation: La première des précautions consiste à ne pas plonger à proximité de
+  ces engins de pêche ; les filets abandonnés recouvrent certaines épaves.
 archived: false

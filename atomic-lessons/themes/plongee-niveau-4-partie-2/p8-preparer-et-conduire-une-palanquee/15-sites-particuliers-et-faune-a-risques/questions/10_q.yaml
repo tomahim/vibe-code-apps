@@ -1,22 +1,23 @@
-id: d6d9db88-08d7-4792-8932-7328aa7ce0f0
+id: ff8c553b-832b-41a6-859d-0a2c658d81a3
 position: 10
 type: multiple_choice
 selection: single
-after_card_position: 6
-prompt: Quelle est la conduite à tenir en cas de piqûre de vive, selon le manuel ?
+after_card_position: 5
+prompt: Quels sont les premiers secours après une morsure à risque d'envenimation,
+  selon le manuel ?
 choices:
-- id: 997c37e8-8b48-44dd-8e88-32678f397e41
-  text: Désinfecter la plaie, approcher une source de chaleur quelques minutes jusqu'à
-    la limite du supportable pour dénaturer le poison, puis glacer la plaie.
-- id: 8d29db99-9a4f-47c7-b58f-c5466e17dd79
-  text: Suer le poison en nageant.
-- id: d77c28f9-d186-49eb-a07b-7b8035e4e90d
-  text: Appliquer du sable chaud uniquement.
-- id: d3416d90-acad-44ee-bfeb-53da531cbee5
-  text: Ne rien faire, c'est inoffensif.
+- id: 4f53e81b-54a4-4a3c-b374-39ae4127d0dc
+  text: Immobiliser immédiatement, désinfecter la plaie, apposer de la glace, évacuer
+    vers une structure médicale, et surveiller la victime en permanence.
+- id: afceddd4-92a7-497d-9553-c9c87aed2b0d
+  text: Faire courir la victime pour activer la circulation.
+- id: 2d072103-3808-44e6-98e0-23b3b5ef503f
+  text: Sucer le venin.
+- id: 7637d241-c0a3-41e7-9c82-6a74901c401d
+  text: Appliquer un garrot serré et attendre.
 correct_choice_ids:
-- 997c37e8-8b48-44dd-8e88-32678f397e41
-explanation: 'Piqûre de vive : désinfecter, approcher une source de chaleur quelques
-  minutes jusqu''à la limite du supportable pour dénaturer le poison, puis glacer.
-  Même conduite pour les rascasses et poissons-scorpions.'
+- 4f53e81b-54a4-4a3c-b374-39ae4127d0dc
+explanation: 'Premiers secours : immobiliser immédiatement, désinfecter la plaie,
+  apposer de la glace, évacuer vers une structure médicale ; la victime est surveillée
+  en permanence par des personnes capables d''effectuer les gestes de premiers secours.'
 archived: false

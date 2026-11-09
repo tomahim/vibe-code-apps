@@ -1,22 +1,21 @@
-id: 73bf0b5d-9ecd-4088-82da-592621175b56
+id: 90eb3df5-79eb-4f0b-a03a-f05dbc9aa86a
 position: 11
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: Pourquoi les rascasses et scorpénidés sont-ils dangereux pour un plongeur
-  non averti ?
+prompt: Que dit le manuel des cônes en zones tropicales ?
 choices:
-- id: 7978ed45-85da-4248-916e-d46d4b6529fd
-  text: 'Ils sont peu craintifs et restent sur le fond sans bouger : un plongeur risque
-    de les toucher et d''être piqué.'
-- id: 6ca8cf4f-0c72-4c26-8720-cef9099a53d6
-  text: Ils attaquent en groupe.
-- id: 74e31fe3-4ef2-4324-a9c6-39a6b8d28d90
-  text: Ils sautent hors de l'eau.
-- id: 6366e51d-7a9f-4d85-a653-cbfe2953082f
-  text: Ils percent les combinaisons.
+- id: 1c4d899c-d27e-4b97-b5fb-366f60f256fb
+  text: Ne pas toucher les coquillages que l'on ne connaît pas et ne pas fouiller
+    dans le sable.
+- id: b99a229f-77ba-4793-8ae9-c112bfe98505
+  text: Les collectionner sans gants.
+- id: 56535f46-8dc7-415f-b4e3-2978d3280b9a
+  text: Les goûter pour les identifier.
+- id: f2765c49-a7cc-4fa3-9201-34a994ec8171
+  text: Ils sont tous inoffensifs.
 correct_choice_ids:
-- 7978ed45-85da-4248-916e-d46d4b6529fd
-explanation: Ces espèces sont peu craintives et restent sur le fond sans bouger ;
-  un plongeur non averti risque de les toucher et d'être piqué.
+- 1c4d899c-d27e-4b97-b5fb-366f60f256fb
+explanation: Certaines espèces de cônes sont dangereuses pour l'homme ; en zones tropicales,
+  ne touchez pas les coquillages inconnus et ne fouillez pas dans le sable.
 archived: false

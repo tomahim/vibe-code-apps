@@ -1,20 +1,21 @@
-id: f605665a-db2f-454d-9156-4ea06e89dc0b
+id: 0c0a2078-3b42-40cd-affb-18c30543276e
 position: 5
 type: multiple_choice
 selection: single
 after_card_position: 3
-prompt: Quel conseil le manuel donne-t-il pour le mouillage sur une épave ?
+prompt: Que doit faire un plongeur pris dans des filets, selon le manuel ?
 choices:
-- id: 9c1f9a45-e9c8-480b-9b15-b2ddbb9e09be
-  text: L'attacher bien haut, pour faciliter son identification.
-- id: a0fae5a3-3905-40da-a784-3e2f915d551c
-  text: L'attacher au fond, caché.
-- id: ecee809e-a0df-46a9-9e12-603d44b7e8e9
-  text: Ne jamais mouiller sur une épave.
-- id: 70cc5249-6488-4921-9cbd-481a18abbe48
-  text: Utiliser deux ancres croisées.
+- id: 65bd30e5-1f6e-4639-835b-22cc8bc9aac1
+  text: Éviter de s'agiter ; il faut couper les fils le plus rapidement possible à
+    l'aide d'un couteau ou d'une cisaille.
+- id: b53beb99-5dc1-48e4-87f9-bcab31ef2978
+  text: Se débattre vigoureusement.
+- id: ead08b84-9062-4193-823d-eea40399448d
+  text: Gonfler son gilet au maximum.
+- id: 625dbe91-f5a9-4672-867b-b92925712592
+  text: Retirer son détendeur.
 correct_choice_ids:
-- 9c1f9a45-e9c8-480b-9b15-b2ddbb9e09be
-explanation: Sur une épave, il reste conseillé que le mouillage soit attaché bien
-  haut, pour faciliter son identification.
+- 65bd30e5-1f6e-4639-835b-22cc8bc9aac1
+explanation: 'Un plongeur pris dans des filets risque la noyade : il doit éviter de
+  s''agiter et il faut couper les fils au plus vite avec un couteau ou une cisaille.'
 archived: false
