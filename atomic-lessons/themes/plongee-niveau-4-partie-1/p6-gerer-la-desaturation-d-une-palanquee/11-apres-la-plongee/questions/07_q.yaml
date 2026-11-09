@@ -1,0 +1,22 @@
+id: 862355b3-39b8-4f50-bd3a-5d87b824cc60
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Dans quel cas la question du délai avant vol ne se pose-t-elle pas ?
+choices:
+- id: 1e9608b3-0297-41db-bc8b-6ad98a509f36
+  text: Vols à moins de quelques centaines de mètres (300 ou 500 m) en avions non
+    pressurisés.
+- id: 2b98ede6-bd95-4f0e-932b-3390beb2f8fb
+  text: Vols de nuit, la pressurisation étant alors renforcée à un bar complet.
+- id: 1302e33c-2962-4e2a-8d23-c292a12fe9d9
+  text: Vols de moins d'une heure, quelle que soit l'altitude atteinte.
+- id: 1d641aec-8c34-4177-9016-490e947d0f21
+  text: Vols en hélicoptère, quel que soit le profil de plongée précédent.
+correct_choice_ids:
+- 1e9608b3-0297-41db-bc8b-6ad98a509f36
+explanation: Pour des vols à une altitude inférieure à quelques centaines de mètres
+  (300 ou 500 m) à bord d'avions non pressurisés - certaines liaisons interîles -
+  cette question ne se pose pas.
+archived: false

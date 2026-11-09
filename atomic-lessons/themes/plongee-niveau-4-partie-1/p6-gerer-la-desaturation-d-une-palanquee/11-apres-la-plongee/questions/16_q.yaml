@@ -1,0 +1,25 @@
+id: 88ae1506-5974-409f-9442-dd68c4018a26
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Des vacanciers veulent plonger 3 à 4 fois par jour avec ordinateurs. Que dit
+  le manuel ?
+choices:
+- id: 6a04106a-6680-4e3a-a1d5-656dc85fd400
+  text: 'Le calcul reste affiché mais sa fiabilité n''est pas établie : respecter
+    la règle des 2 plongées par jour.'
+- id: 6020019f-3961-41d1-afa8-903601445e32
+  text: 'C''est sans risque : les ordinateurs modernes gèrent parfaitement quatre
+    plongées quotidiennes.'
+- id: 58c1f46e-d07c-4477-95c5-a0c58689991a
+  text: C'est possible uniquement avec deux ordinateurs alternés entre les plongées.
+- id: 0ad99ea2-10a2-42d5-a18d-321cbb52f72a
+  text: C'est possible si chaque plongée reste sous dix-huit mètres de profondeur.
+correct_choice_ids:
+- 6a04106a-6680-4e3a-a1d5-656dc85fd400
+explanation: Au-delà de 2 plongées par 24 h, l'ordinateur effectue tout de même les
+  calculs mais rien n'indique actuellement que les données affichées sont fiables
+  ; l'emploi d'un ordinateur ne dispense pas de respecter la « règle des 2 plongées
+  par jour ».
+archived: false

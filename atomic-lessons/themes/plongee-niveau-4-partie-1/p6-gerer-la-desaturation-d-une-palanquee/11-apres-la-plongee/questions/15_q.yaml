@@ -1,0 +1,22 @@
+id: 3f5eae59-9b09-47c6-be2f-d7a6e9f66726
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi l'après-plongée fait-elle partie de la prévention des accidents ?
+choices:
+- id: 5eb35b31-3fc8-40fc-be41-0fe7b20ef46d
+  text: Toute baisse de pression ambiante pendant l'élimination de l'azote peut favoriser
+    un dégazage anarchique.
+- id: 75ba697d-00e9-4a68-8ae4-0af0ea89dfc1
+  text: Parce que la plupart des accidents de plongée surviennent sur le bateau.
+- id: 8114711c-7c0c-4e90-ad0f-be11f5730ba1
+  text: Parce que le corps ne commence à éliminer l'azote qu'au bout de 24 heures.
+- id: 9ef9ac2a-aa43-4d3c-b44e-9254b32ccaec
+  text: Parce que l'hydratation en surface supprime totalement le risque d'accident.
+correct_choice_ids:
+- 5eb35b31-3fc8-40fc-be41-0fe7b20ef46d
+explanation: Durant les 12 à 24 heures d'évacuation de l'azote résiduel, toute baisse
+  de la pression ambiante peut favoriser un dégazage anarchique de l'azote en excès
+  et augmenter les risques d'accident de désaturation.
+archived: false

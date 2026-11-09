@@ -1,0 +1,20 @@
+id: a6279ea8-ab13-4cc3-8423-4fd3fd1c8031
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle est la « règle des 2 plongées par jour » du manuel ?
+choices:
+- id: 0b038258-5892-437a-8495-f691bc799278
+  text: Pas plus de 2 plongées par 24 heures, avec une pause tous les 6 ou 7 jours.
+- id: f05957fb-604d-41cc-b779-32cbe8bdea39
+  text: Pas plus de 2 plongées par semaine, avec une pause tous les 15 jours.
+- id: 40e823ed-98c7-40e5-bd5c-0fd37cdc0c31
+  text: Au moins 2 plongées par jour pour entretenir le niveau technique.
+- id: 7bffc136-cda6-4ac4-a29b-6b003bb438ab
+  text: Exactement 2 plongées par sortie, matin et après-midi obligatoirement.
+correct_choice_ids:
+- 0b038258-5892-437a-8495-f691bc799278
+explanation: Généralement, il est conseillé de ne pas effectuer plus de 2 plongées
+  par 24 heures, avec une pause tous les 6 ou 7 jours.
+archived: false
