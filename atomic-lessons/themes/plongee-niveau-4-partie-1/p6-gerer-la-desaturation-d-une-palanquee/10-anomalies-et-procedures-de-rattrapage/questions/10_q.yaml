@@ -1,0 +1,23 @@
+id: fe0851d1-80b3-4046-8cec-c86eb2d0ad59
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que risque-t-on si le palier interrompu ne peut pas être repris (ordinateur
+  en mode erreur) ?
+choices:
+- id: 57a80487-2747-4d6e-a558-3268e46b1ed3
+  text: Déclencher la procédure de secours comme si un accident était déclaré.
+- id: 7e01f148-8158-441d-b5bf-ecc302e49893
+  text: 'Rien : l''absence de palier n''a jamais provoqué d''accident de désaturation.'
+- id: e6ec7ba0-9489-40a4-8004-3e3c7ba3da4c
+  text: Une simple pénalisation sur la plongée du lendemain, sans autre suite.
+- id: 790218ed-70fa-492e-a21b-1a3454b948bd
+  text: Le blocage de l'ordinateur, mais aucune conséquence pour le plongeur.
+correct_choice_ids:
+- 57a80487-2747-4d6e-a558-3268e46b1ed3
+explanation: 'Interrompre un palier est une procédure dangereuse : si aucune solution
+  n''a pu être trouvée pour se réimmerger, ou si les instruments restent en mode erreur,
+  la logique pousse à déclencher la procédure de secours comme si un accident était
+  déclaré.'
+archived: false

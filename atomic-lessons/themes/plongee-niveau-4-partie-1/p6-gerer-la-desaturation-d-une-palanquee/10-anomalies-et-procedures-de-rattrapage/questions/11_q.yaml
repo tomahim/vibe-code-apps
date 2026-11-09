@@ -1,0 +1,23 @@
+id: acba6493-806c-4fbf-84b5-af736f7cebaf
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la procédure FFESSM aux tables en cas d'interruption de palier
+  ?
+choices:
+- id: 1e875626-d836-42ce-b8e7-3b273597aaa6
+  text: Redescendre en moins de 3 minutes et recommencer en totalité le palier interrompu.
+- id: 8a16bc9d-e6e0-4dc4-a37f-2a972dcd4072
+  text: Redescendre en moins de 3 minutes et recommencer l'ensemble des paliers.
+- id: d3d1d0b0-5959-49a1-9b21-28c14e9a0986
+  text: Faire surface et reprendre la mer vingt-quatre heures plus tard.
+- id: f0fec18e-47d8-4bc2-b430-fce7a5df1795
+  text: Doubler le palier suivant sans redescendre au palier interrompu.
+correct_choice_ids:
+- 1e875626-d836-42ce-b8e7-3b273597aaa6
+explanation: 'La palanquée redescend le plus rapidement possible (en tout cas en moins
+  de 3 minutes) à la profondeur du palier interrompu pour le recommencer en totalité.
+  C''est la procédure FFESSM : la Marine nationale, elle, prévoit de recommencer l''ensemble
+  des paliers.'
+archived: false

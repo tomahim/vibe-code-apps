@@ -1,0 +1,23 @@
+id: b27883c3-5b48-405f-b69f-d38fac13886d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Après une panne d'ordinateur sur une plongée sans palier, que recommande le
+  manuel ?
+choices:
+- id: c0486694-2c3f-4036-9f9d-da9f542dcb70
+  text: Remontée à 10 m/min max et palier de principe de 3 à 5 min entre 6 et 3 m.
+- id: 491043f8-426c-4036-bb41-605aa7d17bb0
+  text: Remontée directe à la surface le plus vite possible pour raccourcir l'exposition.
+- id: a196c134-a525-4ca1-b550-487d5b1b02ae
+  text: Palier de sécurité de 10 minutes à 9 mètres, puis surface immédiate.
+- id: 9baadd3e-60c2-40c1-ac18-7351756c5422
+  text: Redescendre au fond pour y attendre l'arrivée des secours en sécurité.
+correct_choice_ids:
+- c0486694-2c3f-4036-9f9d-da9f542dcb70
+explanation: 'Sans que ce soit une règle absolue : remonter lentement sans dépasser
+  10 m/min et effectuer un palier de principe d''au moins 3 à 5 minutes entre 6 et
+  3 mètres (plongées sans palier). Dans tous les cas, ne pas replonger dans les 24
+  à 48 h.'
+archived: false

@@ -1,0 +1,24 @@
+id: 91246da7-9482-4cd7-9ace-7fb1e2c05110
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle différence entre FFESSM et Marine nationale pour une interruption de
+  palier ?
+choices:
+- id: f60d3a0a-224f-41b7-9953-c602b9209005
+  text: 'FFESSM : refaire le palier interrompu ; Marine nationale : recommencer l''ensemble
+    des paliers.'
+- id: ea7531af-f986-4c23-9c45-a499f406915a
+  text: 'FFESSM : tout recommencer ; Marine nationale : refaire seulement le palier
+    interrompu.'
+- id: 49413389-ea05-4835-b605-6a30d2325960
+  text: 'FFESSM : surface immédiate ; Marine nationale : palier de sécurité de 5 minutes.'
+- id: 67893b41-b72e-485f-abc2-31f4fa4f5890
+  text: 'Aucune : les deux procédures sont strictement identiques depuis 2020.'
+correct_choice_ids:
+- f60d3a0a-224f-41b7-9953-c602b9209005
+explanation: La procédure FFESSM (plongées de loisir) fait refaire le palier interrompu
+  ; celle de la Marine nationale prévoit de recommencer l'ensemble des paliers (instructions
+  IPA).
+archived: false

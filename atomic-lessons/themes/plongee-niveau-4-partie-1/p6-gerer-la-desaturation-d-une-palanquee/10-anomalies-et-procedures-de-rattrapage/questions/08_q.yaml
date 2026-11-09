@@ -1,0 +1,22 @@
+id: 0cd550be-a676-4293-a6cc-87a5c79d402b
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment les temps de surface et de demi-profondeur sont-ils traités dans cette
+  procédure ?
+choices:
+- id: 13231546-0ae8-4e7e-a969-068341261a58
+  text: Ils sont intégrés au temps de plongée pour déterminer les paliers.
+- id: 01948f37-e611-4338-bef2-50bba933a0bb
+  text: 'Ils sont ignorés : seul le temps passé au fond compte pour les paliers.'
+- id: 83b7f0b0-3247-4b4e-87df-c685dbd29774
+  text: Ils sont soustraits du temps de plongée pour réduire les paliers.
+- id: 81d7bb50-8d31-4e9d-a55f-35f881e557f7
+  text: Ils sont comptés double pour pénaliser la remontée trop rapide.
+correct_choice_ids:
+- 13231546-0ae8-4e7e-a969-068341261a58
+explanation: Les temps en surface et à la demi-profondeur sont intégrés au temps de
+  plongée pour déterminer les paliers ; dans tous les cas, la palanquée doit effectuer
+  au moins 2 minutes de palier à 3 mètres.
+archived: false
