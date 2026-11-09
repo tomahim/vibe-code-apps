@@ -2,7 +2,7 @@ id: 03c6fdfe-6b6d-4f04-8cd8-2410bbed4ace
 position: 16
 type: multiple_choice
 selection: single
-after_card_position: 8
+after_card_position: 7
 prompt: Pourquoi cette épreuve est-elle d'abord une épreuve de sécurité ?
 choices:
 - id: bde2a7c1-9f56-4a48-80dd-07443f530875
