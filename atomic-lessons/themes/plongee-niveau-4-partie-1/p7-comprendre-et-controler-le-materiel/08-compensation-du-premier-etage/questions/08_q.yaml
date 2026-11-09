@@ -1,21 +1,21 @@
-id: e4cca01e-5cda-41fe-9314-d4fe090677eb
+id: cf22bc8e-fb94-4a02-b3c9-90afeccbf414
 position: 8
 type: multiple_choice
 selection: single
 after_card_position: 6
 prompt: Quels bénéfices le manuel attribue-t-il aux détendeurs compensés ?
 choices:
-- id: fbb9f439-c400-47a8-ad29-51a2c5ac2d4a
+- id: 9a3cd35e-2a31-4080-ade7-44442d2a9885
   text: Des débits plus élevés et un fonctionnement plus régulier quelle que soit
     la pression restante.
-- id: 71dcd8f0-2c4a-4f68-85d0-d9755aed70ca
+- id: 42473b49-3568-4a1a-9025-038f4c4817ef
   text: Une bouteille qui se vide deux fois moins vite.
-- id: b0a06ee6-d1c7-41f3-a20f-66c330563aab
+- id: 0b8a49ef-21fa-4fa0-9bea-044dfae1012c
   text: Une suppression totale du besoin de révision annuelle.
-- id: bbb3cd15-c6f3-4e37-8786-10de0a2436f3
+- id: affc1cc9-8ea2-40fa-8c05-e6cce2ab6849
   text: Une résistance mécanique supérieure aux chocs.
 correct_choice_ids:
-- fbb9f439-c400-47a8-ad29-51a2c5ac2d4a
+- 9a3cd35e-2a31-4080-ade7-44442d2a9885
 explanation: Les détendeurs compensés permettent des débits plus élevés et un fonctionnement
   plus régulier, quelle que soit la pression restante dans la bouteille.
 archived: false

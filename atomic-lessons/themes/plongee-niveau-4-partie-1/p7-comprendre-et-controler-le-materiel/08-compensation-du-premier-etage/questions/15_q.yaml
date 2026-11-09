@@ -1,4 +1,4 @@
-id: d880b5b2-26e1-4c97-b736-321b6227298b
+id: 49505e3b-2f16-40af-91db-e2c7414dc66c
 position: 15
 type: multiple_choice
 selection: single
@@ -6,17 +6,17 @@ after_card_position: 8
 prompt: Selon l'encadré du manuel, en quoi consiste la surcompensation de Scubapro
   ?
 choices:
-- id: e8d8bc13-77b4-44ce-8465-f3f55e4f96a0
+- id: 01452fa7-aeb2-46d8-9b31-44b0ded4b5bc
   text: Augmenter la pression intermédiaire en fonction inverse de la haute pression,
     pour diminuer le travail respiratoire en fin de plongée.
-- id: 7b78fcd5-3ad7-4b19-a4b1-d31bc032c6b7
+- id: d52c71bb-25dd-4dd1-83aa-9e864a1c031b
   text: Diminuer la pression intermédiaire quand la bouteille se vide.
-- id: a8c0ff4e-3b82-434e-9b95-d43afa13caba
+- id: 734e3242-a5d0-41f4-b5e5-87419b4b57ff
   text: Supprimer le deuxième étage pour alléger le détendeur.
-- id: e476717b-0577-4035-a9a3-c89264a9f40a
+- id: 54f12d56-b7a5-432b-beaf-b767f4c2c1ad
   text: Doubler la pression de gonflage de la bouteille.
 correct_choice_ids:
-- e8d8bc13-77b4-44ce-8465-f3f55e4f96a0
+- 01452fa7-aeb2-46d8-9b31-44b0ded4b5bc
 explanation: 'Citation de l''encadré : « Elle consiste à augmenter la pression intermédiaire
   en fonction inverse de la haute pression. Il en résulte une diminution du travail
   respiratoire en fin de plongée. »'

@@ -1,5 +1,5 @@
 ---
-id: 18763329-5725-4d55-b6ee-e83a3ae83dd4
+id: dd8af826-26e3-4ae7-9aa9-10b21e57dd5a
 position: 3
 title: Le bilan des forces, sens fermeture
 archived: false

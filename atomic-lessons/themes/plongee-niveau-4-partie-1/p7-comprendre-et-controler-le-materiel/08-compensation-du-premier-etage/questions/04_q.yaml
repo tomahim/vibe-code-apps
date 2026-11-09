@@ -1,20 +1,20 @@
-id: fd136d4c-2ccd-4ec3-969b-ee21e5175018
+id: 90fe6aff-1564-4f82-82c7-c7de79e7b01b
 position: 4
 type: multiple_choice
 selection: single
 after_card_position: 3
 prompt: Quand le piston non compensé se referme-t-il ?
 choices:
-- id: bbfc479f-16e8-4f6f-aaca-bfcaf22c8dc8
+- id: 7a7a594c-ce65-49d9-95c6-cec827e81eff
   text: Quand la PI montée dans le premier étage compense exactement les forces d'ouverture.
-- id: bcef7af9-7181-4597-9aa8-d05aaf87df21
+- id: eb251c23-c99b-4288-a0fa-d5d3b2c27c7b
   text: Quand la bouteille atteint 50 bars.
-- id: 147ce4b1-8a07-4b37-b544-d5d8100b421b
+- id: dd62ef89-bd4a-4083-80fb-aa4564018d21
   text: Quand le plongeur expire dans l'embout.
-- id: 27c3b6be-e1e5-4220-a639-7b0ab9996e82
+- id: d239ef82-cd51-400a-9edb-56991120e8ac
   text: Quand le ressort est complètement comprimé.
 correct_choice_ids:
-- bbfc479f-16e8-4f6f-aaca-bfcaf22c8dc8
+- 7a7a594c-ce65-49d9-95c6-cec827e81eff
 explanation: 'L''équilibre s''établit lorsque la PI, montant dans le premier étage,
   compense exactement les forces d''ouverture : le piston revient contre son siège.'
 archived: false

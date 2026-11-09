@@ -1,21 +1,21 @@
-id: 6c050058-56f9-439a-a543-49b3ee92daa3
+id: 0aece88e-3050-412b-9cab-5f83aceb4d18
 position: 11
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Que dit le manuel de la « surcompensation » ?
+prompt: Que dit le manuel de la surcompensation ?
 choices:
-- id: 35bf0cfb-20d4-4974-a0ba-7e6cc6ee0096
-  text: 'Le terme n''apparaît pas dans son chapitre détendeurs : il décrit des mécanismes
-    non compensés et compensés, sans famille « surcompensée » distincte.'
-- id: 12812ec0-178c-4f94-b09a-1568becb549e
-  text: Il la décrit comme un troisième type de mécanisme à double piston.
-- id: 323dcc06-5da3-48e2-8a99-97aa80fabe7e
-  text: Il l'interdit pour la plongée au-delà de 40 mètres.
-- id: 4e19489d-8902-4f1c-8151-20201d9bb78f
-  text: Il la présente comme l'avenir des détendeurs grand public.
+- id: db338ff5-f20b-4c84-83d2-cb6b787a30ba
+  text: 'Il lui consacre un encadré (d''après Henri Le Bris) : Scubapro au niveau
+    de la HP, Aqua Lung et Omersub au niveau de la PA.'
+- id: 4d9a6684-f333-4127-9783-78512fa42197
+  text: Le terme n'apparaît nulle part dans le manuel.
+- id: 07bdb341-d90a-426d-a7f3-10e546d6ffec
+  text: Il l'interdit pour la plongée loisir.
+- id: a92a00d6-fa02-4a7e-98e7-dfe0b2efb1cb
+  text: Il la présente comme une norme obligatoire EN 250.
 correct_choice_ids:
-- 35bf0cfb-20d4-4974-a0ba-7e6cc6ee0096
-explanation: 'Point de vocabulaire : « surcompensation » n''apparaît pas dans le chapitre
-  détendeurs du manuel, qui distingue fonctionnement non compensé et compensé.'
+- db338ff5-f20b-4c84-83d2-cb6b787a30ba
+explanation: 'Encadré « La surcompensation » (d''après Henri Le Bris) : Scubapro revendique
+  une surcompensation au niveau de la HP ; Aqua Lung et Omersub au niveau de la PA.'
 archived: false
