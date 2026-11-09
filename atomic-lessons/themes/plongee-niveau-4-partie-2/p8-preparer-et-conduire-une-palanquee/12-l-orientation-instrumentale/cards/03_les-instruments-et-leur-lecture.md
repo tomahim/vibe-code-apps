@@ -2,6 +2,11 @@
 id: 996f6709-577b-4fd7-a275-61a81fd85e28
 position: 3
 title: Les instruments et leur lecture
+image: "p8-compas-classique-electronique.jpg"
+image_alt: "Photos du manuel : un compas « classique » à sphère mobile et un compas électronique au poignet affichant le cap."
+image_caption: "Compas « classique » et compas électronique"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 64"
+image_license: "Tous droits réservés - usage interne"
 archived: false
 ---
 Il existe des boussoles à aiguille et des boussoles à sphère mobile, appelées aussi compas, ainsi que des compas électroniques.

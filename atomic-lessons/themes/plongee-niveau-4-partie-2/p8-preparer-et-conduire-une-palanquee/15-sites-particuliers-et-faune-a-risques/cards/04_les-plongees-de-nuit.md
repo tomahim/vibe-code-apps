@@ -2,6 +2,11 @@
 id: 4a8c6e1b-9013-436c-bfde-f1bc4ab08d7b
 position: 4
 title: Les plongées de nuit
+image: "p8-plongee-de-nuit.jpg"
+image_alt: "Panneau du manuel « Plongées de nuit / Signes de nuit » : bateau éclairé, plongeur avec lampe, signes « Ok de nuit » loin et proche de l'interlocuteur, « Détresse en surface » ; une lampe par personne et une lampe de secours par palanquée."
+image_caption: "Plongées et signes de nuit : une lampe par personne, plus une lampe de secours par palanquée"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 97"
+image_license: "Tous droits réservés - usage interne"
 archived: false
 ---
 Les plongées de nuit permettent de rencontrer une faune particulière, souvent peu visible de jour. Les précautions, dictées par le bon sens selon le manuel :
