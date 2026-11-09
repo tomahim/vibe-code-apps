@@ -94,11 +94,13 @@ VF.models = (function () {
       { text: 'Fold in half diagonally, bottom-right corner to top-left.',
         ops: [foldTo([1, -1], [-1, 1], 'v', { group: 1 })] },
       { text: 'Fold the right corner up and out to make an ear.',
-        ops: [mk([0.55, 0.55], [0.8, 1], [1, 1], 'v', { group: 2 })] },
+        ops: [mk([0.11, 0.11], [0.315, 1], [1, 1], 'v', { group: 2 })] },
       { text: 'Fold the left corner up and out for the other ear.',
-        ops: [mk([-0.55, -0.55], [-1, -0.8], [-1, -1], 'v', { group: 3 })] },
-      { text: 'Fold the top point behind. Turn it over and draw a face.',
-        ops: [mk([-1, 0.45], [-0.45, 1], [-1, 1], 'm', { group: 4 })] }
+        ops: [mk([-0.11, -0.11], [-1, -0.315], [-1, -1], 'v', { group: 3 })] },
+      { text: 'Fold the top point behind.',
+        ops: [mk([-1, 0.45], [-0.45, 1], [-1, 1], 'm', { group: 4 })] },
+      { text: 'Turn the face upright - ears up, chin down. Draw on whiskers!',
+        ops: [spinZ(7 * Math.PI / 4)] }
     ]
   });
 
@@ -231,7 +233,7 @@ VF.models = (function () {
       { text: 'Fold the top-left point behind to round the other lobe.',
         ops: [mk([-1, 0.3], [-0.7, 0], [-1, 0], 'v')] },
       { text: 'Turn the heart upright - point down, lobes up. Done!',
-        ops: [spinZ(-Math.PI / 4)] }
+        ops: [spinZ(7 * Math.PI / 4)] }
     ]
   });
 
