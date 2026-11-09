@@ -1,0 +1,22 @@
+id: 515e66b7-ca61-47d8-99b9-fdf329139f8e
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: D'où court le délai conventionnel de 3 minutes des procédures anormales ?
+choices:
+- id: 284a26b7-3849-4ce0-903a-0b0702b361ba
+  text: De l'erreur de procédure jusqu'à la mise en œuvre du protocole de secours.
+- id: a4ea208d-5402-44f0-aaf7-9049076172ba
+  text: Du début de la remontée jusqu'à l'arrivée effective en surface.
+- id: cf8197e4-15be-4bb5-8b80-6e795f6a9528
+  text: Du premier palier affiché jusqu'au dernier palier effectué.
+- id: 8ef139f8-8824-4141-bb7f-ec1368af5207
+  text: De la mise à l'eau jusqu'au déclenchement de l'horloge de plongée.
+correct_choice_ids:
+- 284a26b7-3849-4ce0-903a-0b0702b361ba
+explanation: Par convention, le délai de 3 minutes court depuis l'erreur de procédure
+  (remontée rapide, interruption de palier) jusqu'à la mise en œuvre du protocole
+  de secours (arrivée à la demi-profondeur ou au palier) ; dans la réalité, il faut
+  agir le plus vite possible.
+archived: false

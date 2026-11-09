@@ -1,0 +1,20 @@
+id: 7fd03de3-f44b-4b05-b385-62bbf09493a2
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle est la conclusion du manuel sur le mode paliers profonds ?
+choices:
+- id: 925c4d78-9e15-443d-9b75-a1ce1fbe2219
+  text: Le désactiver, au moins pour les plongées à l'air.
+- id: 341cd422-c2ad-41a7-91eb-08cc8a781e2e
+  text: L'activer systématiquement pour toutes les plongées au-delà de vingt mètres.
+- id: 8c14c71b-a4b9-4bfe-890c-085e2e3782d9
+  text: Le réserver aux moniteurs, qui seuls savent le paramétrer correctement.
+- id: 755a7d24-4e59-4959-996d-8f299d238b5b
+  text: Le laisser dans l'état d'usine, qu'il soit activé ou non par défaut.
+correct_choice_ids:
+- 925c4d78-9e15-443d-9b75-a1ce1fbe2219
+explanation: 'Conclusion du manuel sur les paliers profonds : ce mode doit être désactivé,
+  au moins pour les plongées à l''air.'
+archived: false

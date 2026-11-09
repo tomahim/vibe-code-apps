@@ -1,0 +1,22 @@
+id: 6a8154e7-34e9-4bd5-8744-b393ecd16e2a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: En combien de temps l'azote résiduel est-il évacué quasiment en totalité après
+  une plongée ?
+choices:
+- id: 3cee0164-e795-4f87-bfe8-6e6e1d9535d8
+  text: 12 à 24 heures.
+- id: a0e002bf-fa6c-4757-8063-9ab5416c7185
+  text: 2 à 4 heures.
+- id: 1a03d1fa-0507-456c-b91b-0174b353445d
+  text: 48 à 72 heures.
+- id: 91940473-566d-4ee5-a7be-216ba6465e28
+  text: Environ une semaine.
+correct_choice_ids:
+- 3cee0164-e795-4f87-bfe8-6e6e1d9535d8
+explanation: Après une plongée, l'azote résiduel met 12 à 24 heures pour être évacué
+  quasiment en totalité ; durant cet intervalle, toute baisse de la pression ambiante
+  peut favoriser un dégazage anarchique.
+archived: false

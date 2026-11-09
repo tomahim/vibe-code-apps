@@ -1,0 +1,22 @@
+id: 7936bacb-b856-43d4-9f60-c9405a55e631
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que remplace l'option « gestion d'air » d'un ordinateur ?
+choices:
+- id: 7f6cca1e-a98d-497f-a946-2fd4e1e6ecb8
+  text: 'Un manomètre : l''écran affiche la pression de la bouteille et l''autonomie
+    en air.'
+- id: e473f99d-0036-4340-91c4-4c86ad6f1bda
+  text: 'Un profondimètre : l''écran n''affiche plus que la profondeur courante.'
+- id: 6d4acbb4-8033-4987-baa7-54914a0703c1
+  text: 'Une boussole : l''écran indique le cap à suivre pendant toute la plongée.'
+- id: f7e75ba5-a698-4a50-9e2b-2c6b19501cbd
+  text: 'Un carnet de plongée papier : l''écran enregistre les commentaires du plongeur.'
+correct_choice_ids:
+- 7f6cca1e-a98d-497f-a946-2fd4e1e6ecb8
+explanation: L'option « gestion d'air » remplace un manomètre et permet d'afficher
+  sur l'écran de l'ordinateur la pression disponible dans la bouteille ainsi que des
+  informations sur l'autonomie en air.
+archived: false

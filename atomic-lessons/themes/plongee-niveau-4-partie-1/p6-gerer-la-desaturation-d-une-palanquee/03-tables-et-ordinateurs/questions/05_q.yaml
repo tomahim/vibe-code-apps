@@ -1,0 +1,22 @@
+id: 104d0fe8-dec6-41a4-877b-30c6ad982458
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle différence de profil distingue tables et ordinateurs ?
+choices:
+- id: bca7c562-3b50-4617-943e-69c021754057
+  text: Les tables assimilent la plongée à un carré à la profondeur max ; l'ordinateur
+    suit le profil réel.
+- id: 14faae4c-41c7-4323-8d3d-5c07fe24a57b
+  text: Les tables suivent le profil réel ; l'ordinateur calcule un profil carré unique.
+- id: c1bb8fda-b335-4cbe-a251-b1342cde0ad0
+  text: Les deux suivent le profil réel, seule la vitesse de calcul les différencie.
+- id: bba36657-f26a-416a-99d4-9d864e9583b4
+  text: Les deux imposent un profil carré, mais l'ordinateur arrondit plus sévèrement.
+correct_choice_ids:
+- bca7c562-3b50-4617-943e-69c021754057
+explanation: Les tables considèrent un « profil carré » (toute la plongée à la profondeur
+  max) ; l'ordinateur découpe la plongée en tranches de quelques secondes et suit
+  le profil réel, ce qui optimise la désaturation.
+archived: false

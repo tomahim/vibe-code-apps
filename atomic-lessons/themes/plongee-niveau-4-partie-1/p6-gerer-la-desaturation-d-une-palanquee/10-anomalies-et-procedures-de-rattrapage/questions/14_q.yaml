@@ -1,0 +1,23 @@
+id: bddd5f44-9e0b-42e1-8a13-bc29c140e7d8
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment une plongée consécutive est-elle traitée aux tables ?
+choices:
+- id: 3d18b9fe-8c2f-42ba-af70-729f9ee940d2
+  text: Les temps s'additionnent et la profondeur retenue est la plus profonde des
+    deux immersions.
+- id: 4b954964-bed1-4591-b931-22a18d559d58
+  text: Chaque immersion est calculée séparément, comme deux plongées simples.
+- id: bb6d5151-32dc-4917-a9b1-27a67d3f3b97
+  text: La seconde immersion est ignorée si elle dure moins de quinze minutes.
+- id: 15eb3123-3132-45cf-a749-22fd161b9f35
+  text: La seconde immersion est traitée comme une plongée successive classique.
+correct_choice_ids:
+- 3d18b9fe-8c2f-42ba-af70-729f9ee940d2
+explanation: 'La plongée consécutive (intervalle strictement inférieur à 15 minutes)
+  est considérée comme la poursuite de l''immersion précédente : les deux temps d''immersion
+  s''additionnent et la profondeur considérée est la plus profonde atteinte au cours
+  des deux immersions.'
+archived: false

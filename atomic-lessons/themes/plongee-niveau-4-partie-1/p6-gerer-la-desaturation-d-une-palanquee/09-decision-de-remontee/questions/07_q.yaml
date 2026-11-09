@@ -1,0 +1,22 @@
+id: 0470e188-2c4e-41e5-b9d2-1bd3b56c22be
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Combien de temps le manuel recommande-t-il entre le dernier palier et la surface
+  ?
+choices:
+- id: e806cc56-1eda-449b-a1f1-6b87e1dd7b5f
+  text: Au moins 30 secondes.
+- id: bfab2cef-2e30-4883-864b-f7ad936ce7dc
+  text: Au moins 3 minutes.
+- id: 98ac2708-c4c3-48b1-9ff6-7779562159d3
+  text: Au moins 5 minutes.
+- id: 6c14892f-a694-4aae-9f30-ed11ec9679d7
+  text: 'Aucun : on fait surface dès le dernier palier terminé.'
+correct_choice_ids:
+- e806cc56-1eda-449b-a1f1-6b87e1dd7b5f
+explanation: Prenez l'habitude de rejoindre la surface très lentement, en mettant
+  au moins 30 secondes entre le dernier palier et la surface ; remonter vite dès la
+  fin du dernier palier est un comportement à risques.
+archived: false

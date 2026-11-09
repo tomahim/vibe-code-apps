@@ -1,0 +1,22 @@
+id: 70e486ca-7d63-4c0f-96ce-1c3218aff34c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel est l'esprit d'une reprise après accident, selon le manuel ?
+choices:
+- id: ca19cab1-885e-480e-b5c4-3c1393bd9aef
+  text: Construire une pratique compatible avec ce qui s'est passé, pas « revenir
+    comme avant ».
+- id: 46bb1f2d-911c-4e85-a33c-1b03a5b87e4e
+  text: Reprendre exactement la même pratique pour ne pas entretenir de peur.
+- id: cf0cd1fa-bb85-403d-937e-339b0fc6949d
+  text: Changer définitivement de club pour repartir sur de nouvelles bases.
+- id: 9f598dfb-7d9c-4588-994e-9fda28486eca
+  text: Attendre cinq ans sans plongée avant toute nouvelle immersion.
+correct_choice_ids:
+- ca19cab1-885e-480e-b5c4-3c1393bd9aef
+explanation: 'La CIR montre l''esprit d''une reprise : la cause de l''accident étant
+  évitable, on ajuste la pratique (profondeur réduite, protocoles plus sûrs) - on
+  ne cherche pas à « revenir comme avant ».'
+archived: false

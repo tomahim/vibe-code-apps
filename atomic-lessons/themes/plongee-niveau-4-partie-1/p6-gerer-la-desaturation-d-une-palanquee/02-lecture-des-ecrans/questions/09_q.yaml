@@ -1,0 +1,20 @@
+id: e848faec-72ec-4964-a084-0a701032cc70
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment la vitesse de remontée est-elle présentée au plongeur ?
+choices:
+- id: e6136c54-bcbe-4eb2-be68-e2e2cc81dd26
+  text: En pourcentage de la vitesse maximum ou sous forme de graphique.
+- id: 2ff50999-fbbf-42f6-85f0-8661c8c7fe2c
+  text: Uniquement par une alarme sonore, sans aucune information visuelle.
+- id: 924c476f-39c2-4a71-84da-ba69e428010d
+  text: En kilomètres par heure, l'unité normalisée pour tous les ordinateurs.
+- id: 66b8a329-7a33-4ab8-a24e-eab86b13673f
+  text: 'Par une couleur d''écran fixe : vert en toutes circonstances, jamais de rouge.'
+correct_choice_ids:
+- e6136c54-bcbe-4eb2-be68-e2e2cc81dd26
+explanation: Les ordinateurs disposent d'un indicateur de vitesse de remontée, affiché
+  en pourcentage de la vitesse maximum (ex. 90 %) ou sous forme de graphique.
+archived: false

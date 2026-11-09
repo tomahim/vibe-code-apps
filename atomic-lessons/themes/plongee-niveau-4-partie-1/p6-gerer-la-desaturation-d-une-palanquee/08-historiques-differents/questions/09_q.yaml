@@ -1,0 +1,23 @@
+id: a4b3a802-a76d-490e-8b73-0047e722be4c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment se calcule l'intervalle en surface entre deux plongées ?
+choices:
+- id: 5930ba1a-3fdc-40d2-bdf3-0cd55e9ada41
+  text: Entre l'heure d'immersion de la seconde plongée et l'heure de sortie de la
+    première.
+- id: 7454b737-cdd1-4924-b0cf-1a31965bd660
+  text: Entre l'heure de sortie de la seconde plongée et l'heure d'immersion de la
+    première.
+- id: e1211ac6-3fd4-485c-a8a5-64aa56d6f0a9
+  text: Entre le début du premier palier de la première plongée et la mise à l'eau
+    suivante.
+- id: 0fcc0042-12fa-4540-b9af-d065a2190576
+  text: Entre les deux mises sous tension successives de l'ordinateur de plongée.
+correct_choice_ids:
+- 5930ba1a-3fdc-40d2-bdf3-0cd55e9ada41
+explanation: L'intervalle en surface se calcule par différence entre l'heure d'immersion
+  de la seconde plongée et l'heure d'arrivée en surface à l'issue de la première plongée.
+archived: false

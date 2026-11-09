@@ -1,0 +1,21 @@
+id: 9dce9ce6-0cf2-4fdd-9d97-ca123d3a4eb1
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment la grossesse est-elle classée vis-à-vis de la plongée ?
+choices:
+- id: 9efdc4b1-ae8a-4324-8db0-c9420ad04074
+  text: Comme une contre-indication temporaire, par principe de précaution.
+- id: 62363912-9bec-4610-be94-600ead567b2d
+  text: Comme une contre-indication absolue et définitive à vie.
+- id: 2af4371c-e02c-4b3e-a5c9-db33ff068446
+  text: Comme une simple recommandation sans valeur de contre-indication.
+- id: 01480a63-e295-48aa-bce5-811463af8178
+  text: Comme une contre-indication uniquement à partir du deuxième trimestre.
+correct_choice_ids:
+- 9efdc4b1-ae8a-4324-8db0-c9420ad04074
+explanation: 'La grossesse est une contre-indication temporaire à la plongée : devant
+  les risques théoriques et le petit nombre d''études disponibles, le principe de
+  précaution s''impose.'
+archived: false

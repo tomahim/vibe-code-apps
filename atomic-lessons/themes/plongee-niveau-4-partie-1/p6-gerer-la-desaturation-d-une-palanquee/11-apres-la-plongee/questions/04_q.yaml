@@ -1,0 +1,21 @@
+id: aa5738b0-516f-485e-80bc-0392003b3a76
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel délai sans sport le manuel fixe-t-il après une plongée ?
+choices:
+- id: 4b947176-0250-40b4-b336-4586f32983a7
+  text: 2 heures sans sport ni effort violent.
+- id: 5f365d54-43d0-49d6-8cf3-f733e2c0479a
+  text: 30 minutes sans sport ni effort violent.
+- id: 06944748-359d-4c1f-a6b0-9a484ee75092
+  text: 6 heures sans sport ni effort violent.
+- id: 1d3f7495-18b0-473b-b1bc-c3b6c82416e9
+  text: 24 heures sans sport ni effort violent.
+correct_choice_ids:
+- 4b947176-0250-40b4-b336-4586f32983a7
+explanation: 'Éviter de faire du sport, et de manière générale tout effort violent,
+  dans les 2 heures qui suivent une plongée : dans un organisme sursaturé en azote,
+  cela favoriserait la création de bulles.'
+archived: false

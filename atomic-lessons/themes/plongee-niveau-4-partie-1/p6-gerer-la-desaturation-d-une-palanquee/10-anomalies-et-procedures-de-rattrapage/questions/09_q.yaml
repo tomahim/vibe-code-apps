@@ -1,0 +1,23 @@
+id: 21a27985-3617-4a4a-8a23-44058972f2ca
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que faire en cas d'interruption de palier avec un ordinateur ?
+choices:
+- id: 1a4f8e26-5be1-4385-8f82-c0c5aab8a047
+  text: Redescendre au plus vite au moins à la profondeur du palier interrompu et
+    suivre l'ordinateur.
+- id: 442e9787-8904-4d29-b873-d340b2ae8581
+  text: 'Rester en surface : le palier interrompu est définitivement perdu.'
+- id: 36dd3f50-8be1-4b34-9c77-d54500667478
+  text: Continuer la remontée lentement jusqu'au palier suivant affiché.
+- id: ca18f677-40cb-4256-88cb-efb2cb2ff1c7
+  text: Éteindre puis rallumer l'ordinateur pour réinitialiser la désaturation.
+correct_choice_ids:
+- 1a4f8e26-5be1-4385-8f82-c0c5aab8a047
+explanation: Il faut redescendre le plus rapidement possible au moins à la profondeur
+  du palier interrompu et poursuivre la désaturation en suivant les instructions de
+  l'ordinateur ; selon les modèles, un délai max de 2 ou 3 minutes est laissé avant
+  le mode « Erreur » ou « Paliers omis » permanent.
+archived: false

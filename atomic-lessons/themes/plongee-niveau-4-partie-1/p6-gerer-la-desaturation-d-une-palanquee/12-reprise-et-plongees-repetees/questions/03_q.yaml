@@ -1,0 +1,21 @@
+id: 257844d4-d709-4e8a-ad01-b9099e0a533d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle population est la plus exposée à ce risque de reprise, selon le manuel
+  ?
+choices:
+- id: af329954-614c-4c3a-b2a1-83beb28ddf30
+  text: Les plongeurs confirmés de plus de 50 ans.
+- id: e4facf3e-bacd-4b6d-8822-52716a3be03b
+  text: Les débutants de moins de 20 ans.
+- id: 16ea37be-bc17-4738-9e90-f2a04dcbd7ed
+  text: Les moniteurs en exercice toute l'année.
+- id: 6b5a5044-4642-4dd1-bba6-bc64f6ee231d
+  text: Les plongeurs trimix en exploration profonde.
+correct_choice_ids:
+- af329954-614c-4c3a-b2a1-83beb28ddf30
+explanation: 'La population la plus exposée est celle des plongeurs confirmés de plus
+  de 50 ans : le brevet permet la profondeur, mais ne dispense pas de l''entraînement.'
+archived: false

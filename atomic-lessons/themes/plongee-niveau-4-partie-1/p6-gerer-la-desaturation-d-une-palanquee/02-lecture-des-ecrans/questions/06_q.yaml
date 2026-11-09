@@ -1,0 +1,20 @@
+id: c12b01da-6d6e-4cbb-9c3a-f6e62c3a1a7a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment la profondeur des paliers est-elle présentée selon les modèles ?
+choices:
+- id: 69f8d715-4ce1-4101-9a0d-68f14adbdd57
+  text: Explicitement (6 m, 3 m) ou sous forme de barrettes de désaturation.
+- id: 0ce1b1dc-ac8a-432c-a08c-89b562a74226
+  text: Uniquement en pourcentage de la profondeur maximale de la plongée.
+- id: 58c0f2a6-40c9-47cf-91c1-d29db96be9e9
+  text: Toujours par un message vocal, les écrans étant trop petits pour l'afficher.
+- id: a383ae88-d92f-48c6-abfa-843a9cf55c0a
+  text: 'Jamais affichée : le plongeur doit la connaître par cœur avant de plonger.'
+correct_choice_ids:
+- 69f8d715-4ce1-4101-9a0d-68f14adbdd57
+explanation: Selon les modèles, la profondeur des paliers est mentionnée explicitement
+  (6 m, 3 m) ou sous forme de barrettes indiquant une plage de désaturation.
+archived: false

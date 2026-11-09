@@ -1,0 +1,22 @@
+id: 96bf0dea-c9c5-4a7e-a3a0-3ca7c026ac3a
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: À quoi le manuel compare-t-il une reprise de la plongée sans progressivité
+  ?
+choices:
+- id: ed36b521-a23c-4d1f-835c-60ce84961211
+  text: Courir un marathon sans entraînement.
+- id: 1d87f54c-d0c9-44be-bb2f-902844de3144
+  text: Conduire une voiture sans permis.
+- id: ff3533f1-1b4e-46e2-996b-91698352b083
+  text: Nager sans savoir respirer.
+- id: 8436b300-8d76-4885-bd66-1309aa7961a3
+  text: Monter en avion sans avoir décollé.
+correct_choice_ids:
+- ed36b521-a23c-4d1f-835c-60ce84961211
+explanation: Tout comme il ne viendrait à l'idée de personne de raisonnable de courir
+  un marathon sans entraînement, chaque reprise de la plongée en milieu naturel doit
+  se faire de manière progressive, par faible profondeur.
+archived: false

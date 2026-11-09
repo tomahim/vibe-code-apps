@@ -1,0 +1,25 @@
+id: ad832f9a-9b31-4764-8afa-af54339121ff
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel de la procédure de la demi-profondeur après une remontée
+  rapide ?
+choices:
+- id: ecced302-16d1-4a03-b616-30af9820c511
+  text: Une procédure « faute de mieux » du mode opératoire MN90, qui n'enlève rien
+    à la dangerosité.
+- id: b3f51bea-0c89-424e-9fe7-37569eef239d
+  text: Une procédure de secours fiable qui annule tous les risques de la remontée
+    rapide.
+- id: f708c017-a58d-45a0-90ef-b3cd80015b59
+  text: Une procédure intégrée aux modèles des ordinateurs récents.
+- id: abdb3ae1-9223-4abb-ab45-ff99a58d6597
+  text: Une invention des ordinateurs, absente de l'univers des tables.
+correct_choice_ids:
+- ecced302-16d1-4a03-b616-30af9820c511
+explanation: Aucune procédure de secours n'existe dans les modèles ; la procédure
+  de la demi-profondeur - proposée non pas dans le modèle des tables MN90 mais dans
+  son mode opératoire - reste une procédure « faute de mieux » qui n'enlève rien à
+  la dangerosité d'une remontée rapide.
+archived: false

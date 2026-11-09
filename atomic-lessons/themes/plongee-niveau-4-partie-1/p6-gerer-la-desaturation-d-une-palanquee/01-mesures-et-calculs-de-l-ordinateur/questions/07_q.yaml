@@ -1,0 +1,21 @@
+id: c885f2ae-fdbe-45d0-aebf-f5613525fc97
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi le manuel dit-il qu'un ordinateur est un instrument personnel ?
+choices:
+- id: 70669484-f6b7-484f-a284-03e6dcaac2f6
+  text: Parce qu'il suit le profil exact de chaque plongeur qui le porte.
+- id: 7549a51b-5fb2-4afc-950d-80132a66d785
+  text: Parce qu'il est interdit de le prêter pour des raisons d'hygiène.
+- id: d331b060-f0c5-45a5-b6ef-29a2b0d8485c
+  text: Parce qu'il ne fonctionne qu'avec une seule bouteille de plongée.
+- id: 398b7b58-3f04-4f94-bcec-b75e38cd2712
+  text: Parce que son écran n'est lisible que par la personne qui le porte.
+correct_choice_ids:
+- 70669484-f6b7-484f-a284-03e6dcaac2f6
+explanation: 'L''ordinateur suit le profil exact de chaque plongeur : il découpe la
+  plongée en tranches de quelques secondes et tient compte des changements de niveau
+  d''immersion de celui qui le porte.'
+archived: false

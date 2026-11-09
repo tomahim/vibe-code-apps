@@ -1,0 +1,13 @@
+id: 187d3f98-2b99-4b77-9aad-ddb024bcf3f7
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Quel sigle anglais, affiché par les ordinateurs, désigne le temps restant
+  sans palier (limite de plongée sans palier de décompression) ?
+accepted_answers:
+- NDL
+- No Decompression Limit
+explanation: NDL (No Decompression Limit). Il apparaît aussi sous les formes NO DEC,
+  NO DECO, NO DEC TIME, NDC ou NO STOP, suivi du temps restant sans palier à la profondeur
+  courante.
+archived: false

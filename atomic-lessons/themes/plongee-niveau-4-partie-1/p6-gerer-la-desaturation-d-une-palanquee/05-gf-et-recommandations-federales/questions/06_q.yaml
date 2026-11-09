@@ -1,0 +1,23 @@
+id: 7b9bdebf-da76-489e-bfa8-22cfe5011132
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi « durcir » les GF bas n'est-il pas toujours plus sûr à l'air ?
+choices:
+- id: a9948ec5-bb95-4a38-88e2-5b5a7ddaac6d
+  text: Des premiers paliers plus profonds et longs peuvent augmenter la saturation
+    et le risque d'ADD.
+- id: 190e3ded-0ec5-4862-b33f-2e938462b4e6
+  text: Parce que des GF bas trop stricts provoquent systématiquement une panne de
+    l'ordinateur.
+- id: 3138d7a8-42f6-4bdd-966f-f5e5dd4553b0
+  text: Parce que les GF bas réduisent la quantité d'air disponible pour la remontée.
+- id: b61ea539-0388-41c6-b8ed-acf0ad07f892
+  text: Parce que les paliers profonds interdisent ensuite toute plongée successive.
+correct_choice_ids:
+- a9948ec5-bb95-4a38-88e2-5b5a7ddaac6d
+explanation: Pour des plongées de loisir à l'air, augmenter la profondeur et le temps
+  des premiers paliers peut augmenter le niveau de saturation et donc le risque d'accident
+  de désaturation, au lieu de le diminuer.
+archived: false

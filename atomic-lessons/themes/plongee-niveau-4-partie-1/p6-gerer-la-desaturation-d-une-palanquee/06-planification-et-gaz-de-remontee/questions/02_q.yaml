@@ -1,0 +1,21 @@
+id: 7ef4263d-3b3c-4009-8c3c-371988ede58f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quand la désaturation de la palanquée doit-elle être décidée ?
+choices:
+- id: ee63d9e9-dc57-482e-9de8-1e231eb93ea3
+  text: Avant la plongée, d'un commun accord ; elle ne doit pas s'improviser au fond.
+- id: 4dc72418-7e8c-430b-8d76-5f2e2eacaaa5
+  text: Au fond, juste avant d'amorcer la remontée, selon la consommation réelle.
+- id: 77e9860c-4134-4427-81d3-ff81026c989b
+  text: En surface après la plongée, lors du débriefing de la palanquée.
+- id: bf7d9fbe-9603-4624-b265-38d3a8ecaf9d
+  text: Pendant la remontée, en suivant l'ordinateur le moins chargé du groupe.
+correct_choice_ids:
+- ee63d9e9-dc57-482e-9de8-1e231eb93ea3
+explanation: 'La désaturation de la palanquée ne doit pas s''improviser au fond au
+  moment d''amorcer la remontée : le protocole doit être décidé d''un commun accord
+  avant la plongée, le mode planification étant alors indispensable.'
+archived: false

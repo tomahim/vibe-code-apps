@@ -1,0 +1,22 @@
+id: c75e1376-179c-4093-8837-c7ceaea65a6b
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que faut-il vérifier avant d'acheter un système de liaison ?
+choices:
+- id: 128f9b41-60e5-41fc-879a-c93e1fbb42ad
+  text: Sa compatibilité avec votre système (la liaison peut être en option selon
+    les marques).
+- id: ecb30031-1052-4783-a2b5-c7d3726c485c
+  text: Sa couleur, pour qu'elle soit assortie à celle de l'ordinateur de plongée.
+- id: a65577b9-03e8-4251-9335-49ea789cea73
+  text: Son poids, pour ne pas déséquilibrer la ceinture de plongée.
+- id: badde667-7301-442a-ade5-d15650ad4a6c
+  text: Sa profondeur maximale d'utilisation, qui doit dépasser soixante mètres.
+correct_choice_ids:
+- 128f9b41-60e5-41fc-879a-c93e1fbb42ad
+explanation: 'Selon les marques, le système de liaison est vendu avec l''ordinateur
+  ou disponible en option (câble USB, infrarouge ou Bluetooth) : vérifiez avant achat
+  la compatibilité avec votre système.'
+archived: false

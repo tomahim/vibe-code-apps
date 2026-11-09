@@ -1,0 +1,23 @@
+id: d93c8daf-a94e-40df-8100-598b5d7c1659
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi les plongées du mois de mai sont-elles particulièrement à risque
+  en France métropolitaine ?
+choices:
+- id: 03f83afe-c73e-4a77-a025-ee6884c0aa24
+  text: Des plongeurs sédentaires descendent trop profond sans entraînement ; plusieurs
+    morts par an selon le CROSSMED.
+- id: 7734ce3b-9342-4b24-815e-d250bb4e56c9
+  text: L'eau est encore trop froide pour les combinaisons humides classiques.
+- id: 5ac10c28-e91c-47bf-b86a-404ca24c32eb
+  text: Les ordinateurs ne sont pas encore étalonnés pour la saison qui débute.
+- id: fd50cfcf-becb-4de5-9954-a44aa7e39e1f
+  text: La faune marine est plus agressive pendant la période de reproduction.
+correct_choice_ids:
+- 03f83afe-c73e-4a77-a025-ee6884c0aa24
+explanation: De nombreux plongeurs, sédentaires le reste de l'année, présument de
+  leur condition physique et descendent trop profond (ex. 40 ou 50 m) sans entraînement
+  ; les plongées de mai font plusieurs morts chaque année selon le CROSSMED.
+archived: false

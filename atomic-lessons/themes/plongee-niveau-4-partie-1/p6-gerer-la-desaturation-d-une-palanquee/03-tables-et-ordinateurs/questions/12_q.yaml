@@ -1,0 +1,21 @@
+id: 3189b503-4d99-4b83-a72b-dc2be42acf24
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que prévoient les tables MN90-FFESSM en cas d'interruption de palier, contrairement
+  à la MN90 d'origine ?
+choices:
+- id: 07a49ba5-12b8-47b0-96cd-03e1a4822e9c
+  text: Refaire le palier interrompu, sans recommencer l'ensemble des paliers.
+- id: 380e5180-b17c-4431-9d89-7b4999558917
+  text: Recommencer l'intégralité des paliers depuis le plus profond.
+- id: 9045d194-7d34-46f3-90c7-d853f5b54c29
+  text: Faire surface immédiatement et respirer de l'oxygène pur deux heures.
+- id: 07d66f5a-dcb8-4b13-8413-1969af1403dd
+  text: Doubler la durée du palier suivant pour compenser l'interruption.
+correct_choice_ids:
+- 07a49ba5-12b8-47b0-96cd-03e1a4822e9c
+explanation: 'La FFESSM a adapté le protocole MN90 : en cas d''interruption de paliers,
+  il faut refaire le palier interrompu (et non recommencer l''ensemble des paliers).'
+archived: false

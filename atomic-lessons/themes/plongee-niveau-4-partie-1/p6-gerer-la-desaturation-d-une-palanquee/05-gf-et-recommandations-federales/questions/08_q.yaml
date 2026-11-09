@@ -1,0 +1,21 @@
+id: 04db61df-fb4c-4f8f-9dac-ab366eb358cc
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelle borne basse le manuel fixe-t-il au GF bas pour les plongées à l'air
+  ?
+choices:
+- id: e34890f2-2a4c-41c5-be73-9bd1d634c430
+  text: Jamais moins de 70 %, avec une valeur souhaitable de 80 %.
+- id: d0fd3608-f371-4763-b890-313f583bd461
+  text: Jamais moins de 50 %, avec une valeur souhaitable de 60 %.
+- id: ebbb97f8-6d31-4f46-96ee-03f3c74a6496
+  text: Jamais moins de 90 %, avec une valeur souhaitable de 95 %.
+- id: 2a8579c6-c5a9-4aef-bdc8-51747f5a058f
+  text: 'Aucune borne : le GF bas est laissé à l''appréciation du plongeur.'
+correct_choice_ids:
+- e34890f2-2a4c-41c5-be73-9bd1d634c430
+explanation: Pour les plongées classiques à l'air, le manuel suggère de ne jamais
+  mettre un GF bas (low) à moins de 70 %, avec une valeur souhaitable de 80 %.
+archived: false

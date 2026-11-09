@@ -1,0 +1,13 @@
+id: f585b439-9fea-4eaf-96aa-844a61c577f9
+position: 3
+type: type_answer_question
+after_card_position: 2
+prompt: Comment s'appellent les valeurs limites du modèle (ex. Bühlmann) dont les
+  Gradient Factors sont un pourcentage ?
+accepted_answers:
+- M-Values
+- Maximum Values
+explanation: Les M-Values (Maximum Values). GF à 100 % = désaturation 100 % conforme
+  au modèle ; GF à 80 % = désaturation plus « conservative », avec des paliers plus
+  longs et/ou plus profonds.
+archived: false

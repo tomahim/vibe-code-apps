@@ -1,0 +1,22 @@
+id: ad698697-2dbd-482c-a2d6-038eb1c9b019
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel couple de GF le manuel suggère-t-il pour les plongées de loisir à l'air
+  ?
+choices:
+- id: 1951a536-540f-4b7c-b2d5-f266eece9c6b
+  text: 80/80.
+- id: e89fc0fa-b58a-4d81-b4d2-c952eab935ce
+  text: 50/50.
+- id: 3e489b5a-7056-409a-ad69-5aecda956b95
+  text: 100/100.
+- id: b776f167-dcc4-4538-bbbc-45bb7204c21a
+  text: 30/85.
+correct_choice_ids:
+- 1951a536-540f-4b7c-b2d5-f266eece9c6b
+explanation: 'Pour les plongées classiques à l''air : ne jamais mettre un GF bas à
+  moins de 70 % (valeur souhaitable 80 %), un GF haut de l''ordre de 80 % - soit un
+  couple 80/80.'
+archived: false

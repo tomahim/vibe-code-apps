@@ -1,0 +1,22 @@
+id: 9cc2f214-0cd8-48d5-b83e-9ac90aeeea84
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quand l'horloge du temps de plongée se déclenche-t-elle ?
+choices:
+- id: 878059b5-4354-47f8-b35e-911a014b4fe0
+  text: Au-delà d'une certaine profondeur, de quelques dizaines de centimètres à un
+    peu plus d'un mètre.
+- id: dc8dc3ee-b3f4-4d61-8fba-bf9bc2912bbc
+  text: Dès la mise sous tension de l'appareil, avant même la mise à l'eau.
+- id: ca0250fa-98f2-4dad-b645-6655c3cdd40b
+  text: Exactement à trois mètres de profondeur, pour tous les modèles du marché.
+- id: 22309976-7375-49f7-9536-7afd1651d8f6
+  text: Quand le plongeur appuie sur un bouton en arrivant sur le fond.
+correct_choice_ids:
+- 878059b5-4354-47f8-b35e-911a014b4fe0
+explanation: Le temps de plongée est déterminé par une horloge qui se déclenche au-delà
+  d'une certaine profondeur - de l'ordre de quelques dizaines de centimètres à un
+  peu plus d'un mètre selon les modèles.
+archived: false

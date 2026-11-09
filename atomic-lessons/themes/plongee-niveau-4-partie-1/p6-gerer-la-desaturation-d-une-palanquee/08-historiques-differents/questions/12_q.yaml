@@ -1,0 +1,24 @@
+id: 30fb96c5-8afe-483a-92ef-77ad3f38311b
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que traduit la longueur des délais affichés en mode SURFACE ?
+choices:
+- id: 33c2ec5e-3884-4d4a-9208-560308cfc473
+  text: 'L''historique de saturation accumulé : plongées récentes nombreuses ou profondes
+    allongent les délais.'
+- id: a4024215-caea-4079-938f-7a7455c48d46
+  text: 'La qualité de la batterie : des piles faibles allongent artificiellement
+    les délais.'
+- id: 600d7ef9-3ecf-48f3-a257-26e285739808
+  text: 'La marque de l''ordinateur : certains fabricants affichent toujours des délais
+    fixes.'
+- id: 6ddb79b1-b520-4f11-bdfd-446caa6a1b7a
+  text: 'La température de l''eau : une eau froide raccourcit toujours les délais
+    affichés.'
+correct_choice_ids:
+- 33c2ec5e-3884-4d4a-9208-560308cfc473
+explanation: 'Ces délais traduisent directement l''historique de saturation accumulé
+  : plus les plongées récentes sont nombreuses ou profondes, plus ils sont longs.'
+archived: false

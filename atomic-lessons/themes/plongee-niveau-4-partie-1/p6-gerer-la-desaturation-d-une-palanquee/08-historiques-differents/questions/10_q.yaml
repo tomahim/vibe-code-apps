@@ -1,0 +1,23 @@
+id: f3820675-cc38-49be-b019-9888aefcee50
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'apportent certains modèles sophistiqués à la prise en compte de l'intervalle
+  surface ?
+choices:
+- id: 0f32a898-6b94-448d-95e7-da572cf1a8a6
+  text: Ils planifient avec l'intervalle surface prévu avant l'immersion, pas celui
+    du moment.
+- id: e4f3d48b-a723-4317-8ba7-ea5519b3fe4f
+  text: Ils bloquent la plongée si l'intervalle surface est inférieur à deux heures.
+- id: 3eda5811-d0e9-47ba-b2b4-eff7a8989365
+  text: Ils effacent l'azote résiduel après deux heures d'intervalle en surface.
+- id: 40cf7837-2713-4a64-be75-b4808428ad47
+  text: Ils allongent automatiquement l'intervalle en retardant le départ de la palanquée.
+correct_choice_ids:
+- 0f32a898-6b94-448d-95e7-da572cf1a8a6
+explanation: Certains modèles sophistiqués prennent en compte, en mode planification,
+  l'intervalle surface prévu avant l'immersion - et non l'intervalle surface au moment
+  du lancement de la planification.
+archived: false

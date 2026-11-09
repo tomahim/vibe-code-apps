@@ -1,0 +1,12 @@
+id: b39016a1-623b-43bd-9114-a655cab9048a
+position: 10
+type: type_answer_question
+after_card_position: 7
+prompt: Quel message anglais affiche, sur certains ordinateurs, le temps total de
+  remontée, paliers inclus ?
+accepted_answers:
+- ASC TIME
+- ASC
+explanation: 'ASC TIME : le temps total de remontée, paliers inclus, qui peut compléter
+  le message DECTIME/STOP/DECOSTOP indiquant le temps et la profondeur du palier (CEILING).'
+archived: false

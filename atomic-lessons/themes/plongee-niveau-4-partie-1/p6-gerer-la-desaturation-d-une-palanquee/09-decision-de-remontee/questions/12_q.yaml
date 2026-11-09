@@ -1,0 +1,22 @@
+id: 3763ac6f-a9fb-410b-aec6-34b957bb42e8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: À partir de quel dépassement les ordinateurs considèrent-ils une remontée
+  comme rapide ?
+choices:
+- id: e916923b-5d86-4425-9a9e-fb45c4642a38
+  text: 110 à 120 % de la vitesse maximale autorisée.
+- id: 12ad99d5-f4e1-478e-bafe-97f86e7989a7
+  text: Dès le premier mètre par minute de dépassement de la vitesse affichée.
+- id: 02548619-4bce-429a-8e61-ae9f419bbe52
+  text: Au-delà de 200 % de la vitesse maximale autorisée.
+- id: 3869f7ad-ee1b-40bd-abe3-de238e464b73
+  text: Uniquement lorsque le plongeur dépasse 25 m/min de remontée.
+correct_choice_ids:
+- e916923b-5d86-4425-9a9e-fb45c4642a38
+explanation: En cas de remontée rapide (110 à 120 % de la vitesse maximale autorisée),
+  tous les ordinateurs se mettent en mode alarme, généralement sonore et visuelle
+  (« SLOW », « STOP », flèche, pictogramme...).
+archived: false

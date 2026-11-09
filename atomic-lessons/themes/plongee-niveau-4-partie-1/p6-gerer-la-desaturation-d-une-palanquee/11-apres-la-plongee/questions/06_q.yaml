@@ -1,0 +1,21 @@
+id: 53f59eee-3830-4171-ad21-c20616d95965
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À quelle altitude équivaut une cabine d'avion de ligne pressurisée ?
+choices:
+- id: e0c450c1-5e4e-4604-a96c-7efe60ff2b92
+  text: Environ 2 000 m (cabine pressurisée à 0,8 bar environ).
+- id: 7e03cc44-0a71-478f-91f1-5fe705fec8f8
+  text: Environ 200 m (cabine pressurisée à 0,98 bar environ).
+- id: 273990dc-d7aa-4a0f-8513-688b0c4176c1
+  text: Environ 10 000 m (cabine à la pression de l'altitude de croisière).
+- id: d2d44aee-9e8f-4193-8b06-99d46808b61b
+  text: 'Zéro : la cabine reste exactement à la pression du niveau de la mer.'
+correct_choice_ids:
+- e0c450c1-5e4e-4604-a96c-7efe60ff2b92
+explanation: Les cabines étant pressurisées à 0,8 bar environ, les passagers passent
+  en quelques minutes de 1 bar (niveau de la mer) à 0,8 bar, ce qui équivaut à une
+  altitude de 2 000 m.
+archived: false

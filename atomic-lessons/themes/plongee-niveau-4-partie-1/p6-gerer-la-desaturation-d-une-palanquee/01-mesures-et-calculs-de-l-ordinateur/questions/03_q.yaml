@@ -1,0 +1,23 @@
+id: e87c48a6-1283-42a0-85b3-6af2338d2f48
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que faisaient les premiers appareils électroniques, dits « lecteurs de tables
+  » ?
+choices:
+- id: 3a1f6cc0-5c46-4fa1-a132-492eb16b26d2
+  text: Ils indiquaient les paliers d'après le temps de plongée et la profondeur max.
+- id: 4831b38d-3921-49c2-8553-876bdbcff6a0
+  text: Ils suivaient le profil réel du plongeur, tranche par tranche de quelques
+    secondes.
+- id: 21ea1d0b-50fe-4bc9-85ab-4c98ed641cd0
+  text: Ils calculaient la consommation d'air et la pression restante dans la bouteille.
+- id: e719e89e-cf70-4876-a564-b15efa3fb756
+  text: Ils mesuraient la fréquence cardiaque pour adapter la désaturation à l'effort.
+correct_choice_ids:
+- 3a1f6cc0-5c46-4fa1-a132-492eb16b26d2
+explanation: 'Les premiers appareils électroniques se contentaient d''indiquer les
+  paliers en fonction du temps de plongée et de la profondeur maximum atteinte : seul
+  un « profil carré » était pris en compte.'
+archived: false

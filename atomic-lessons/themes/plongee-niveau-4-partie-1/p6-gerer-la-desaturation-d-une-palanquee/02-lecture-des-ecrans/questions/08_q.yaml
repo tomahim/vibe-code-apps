@@ -1,0 +1,22 @@
+id: 9b7b895b-fac5-45c3-9281-8db42696d431
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le manuel des paliers profonds (deep stops) pour les plongées à l'air
+  ?
+choices:
+- id: 7e3f04be-c112-4551-b15b-842f6d977e18
+  text: Leur bien-fondé est controversé ; s'ils sont choisis, ils s'affichent à la
+    remontée.
+- id: 6886fe40-ebc0-450e-8a93-36f02d6a0b68
+  text: Ils sont obligatoires dès vingt mètres et calculés par tous les ordinateurs.
+- id: ad6b73ed-fb84-4dfc-ac43-a32137a978aa
+  text: Ils sont interdits par la réglementation française de la plongée loisir.
+- id: fa8f5b91-96ea-483e-868c-d7b6975774f2
+  text: Ils remplacent toujours le palier de trois mètres des procédures classiques.
+correct_choice_ids:
+- 7e3f04be-c112-4551-b15b-842f6d977e18
+explanation: Les paliers profonds sont controversés pour les plongées à l'air ; si
+  l'option est choisie, ils s'affichent automatiquement au cours de la remontée.
+archived: false

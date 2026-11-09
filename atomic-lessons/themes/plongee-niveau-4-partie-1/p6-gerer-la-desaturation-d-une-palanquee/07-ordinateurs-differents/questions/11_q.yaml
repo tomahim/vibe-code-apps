@@ -1,0 +1,20 @@
+id: af059e71-4ac8-412a-b2a2-893ae31687a3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que ne doit jamais faire la palanquée au cours de la désaturation ?
+choices:
+- id: 93197400-7d73-405e-9545-7f36081dd9e2
+  text: 'Se dissocier : chacun partant de son côté selon son propre ordinateur.'
+- id: 05f5136f-bb48-4950-8e68-18b46b1fb76f
+  text: S'arrêter à un palier plus long que prévu initialement.
+- id: 43953d8b-6ded-4d93-989f-961e346b5170
+  text: Remonter à une vitesse inférieure à dix mètres par minute.
+- id: 1340fc32-e432-433f-bfab-3073907bd6c2
+  text: Signaler au guide un message d'alarme sur un ordinateur.
+correct_choice_ids:
+- 93197400-7d73-405e-9545-7f36081dd9e2
+explanation: 'La palanquée ne doit en aucun cas se dissocier au cours de la désaturation
+  : les paliers les plus exigeants s''imposent à tous.'
+archived: false

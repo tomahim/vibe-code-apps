@@ -1,0 +1,22 @@
+id: ff85d03a-c443-4ae0-aee5-7f1aa143ae47
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment chaque reprise de la plongée en milieu naturel doit-elle se faire
+  ?
+choices:
+- id: 3366e772-7faa-4618-a6f9-aace4b24754d
+  text: Progressivement, par faible profondeur, dans la zone des 15-20 m.
+- id: 65d7cb4b-127f-4ab3-8bc7-8a12ff46ced6
+  text: Directement à la profondeur maximale autorisée par le brevet.
+- id: c0ab233b-89d2-4894-8a10-a34ee3e2f9d8
+  text: Par une plongée profonde d'emblée, pour retrouver ses sensations.
+- id: a887554a-55ad-41e6-8d53-57950e41dd9a
+  text: Par une apnée de préparation la veille de la première plongée.
+correct_choice_ids:
+- 3366e772-7faa-4618-a6f9-aace4b24754d
+explanation: 'Chaque reprise de la plongée en milieu naturel doit se faire de manière
+  progressive, par faible profondeur (zone des 15-20 m) : la saturation et la désaturation
+  sollicitent énormément l''organisme, comme un marathon sans entraînement.'
+archived: false

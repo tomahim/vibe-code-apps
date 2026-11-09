@@ -1,0 +1,14 @@
+id: 65faad3a-b856-47bd-9855-d34212dcb163
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Quel nom anglais porte la fonction « carnet de plongée » des ordinateurs,
+  qui conserve les paramètres des dernières plongées ?
+accepted_answers:
+- Logbook
+- LOG BOOK
+- Carnet de plongée
+explanation: 'La fonction carnet de plongée (« Logbook ») : numéro, date, heure, intervalle
+  surface, profondeur max, temps d''immersion, type de plongée, altitude, température
+  de l''eau, et profil déroulable.'
+archived: false

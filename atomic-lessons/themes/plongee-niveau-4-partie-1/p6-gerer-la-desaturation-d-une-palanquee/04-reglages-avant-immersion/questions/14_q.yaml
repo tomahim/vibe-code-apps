@@ -1,0 +1,21 @@
+id: 02098c17-8475-433e-9b4a-ab15ec1162d6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels éléments le mode PLAN prend-il en compte ?
+choices:
+- id: 79e04909-9cdf-4c48-a6a5-dff6cd3f88cb
+  text: Plongées précédentes, altitude, facteurs personnels et type de gaz.
+- id: b11a535b-6539-437c-9079-e2523dcc0f6a
+  text: Uniquement la profondeur prévue et la température de l'eau du jour.
+- id: d6d004d9-ae49-4629-87ba-992eb75085c1
+  text: La météo marine et l'heure de la marée sur le site de plongée.
+- id: d8cbe0cb-47ff-4f08-bc1b-5f8f50de8929
+  text: Le nombre de plongeurs de la palanquée et leur niveau fédéral.
+correct_choice_ids:
+- 79e04909-9cdf-4c48-a6a5-dff6cd3f88cb
+explanation: Le mode PLAN prend en compte les précédentes immersions (donc le taux
+  d'azote résiduel), le niveau d'altitude indiqué, les facteurs personnels paramétrés
+  et le type de gaz utilisé (air, nitrox...).
+archived: false

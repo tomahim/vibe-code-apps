@@ -1,0 +1,21 @@
+id: a33621b1-dca3-4a9a-bb0b-e4fb29748d6c
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels deux paramètres caractérisent une plongée aux tables ?
+choices:
+- id: ca73d29e-e99c-47ae-801a-f5ebb0e4944c
+  text: Le temps de plongée et la profondeur maximale atteinte.
+- id: 6d895724-276c-4f29-a9a0-93c73327b793
+  text: La profondeur moyenne et la consommation d'air totale.
+- id: cdd419df-8964-40ce-bf29-2166ffec3e7b
+  text: Le temps de descente et la vitesse de remontée réelle.
+- id: 4bce2d6b-017f-416b-bd37-b29fb4de1e05
+  text: La température de l'eau et la durée totale de l'immersion.
+correct_choice_ids:
+- ca73d29e-e99c-47ae-801a-f5ebb0e4944c
+explanation: Aux tables, une plongée se caractérise par un temps de plongée (de l'immersion
+  jusqu'à la remontée à 15 m/min) et une profondeur maximale atteinte, prise en compte
+  pour toute la durée de la plongée.
+archived: false

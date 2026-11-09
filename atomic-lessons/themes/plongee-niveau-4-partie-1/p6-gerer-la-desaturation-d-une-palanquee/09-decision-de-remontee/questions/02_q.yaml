@@ -1,0 +1,22 @@
+id: 3b051806-9b3a-4287-92cb-69438e2a5b22
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que se passe-t-il quand le temps sans palier diminue jusqu'à la zone des plongées
+  avec palier ?
+choices:
+- id: 5bb6576f-926b-4679-90b6-95ad3255f3df
+  text: La plupart des ordinateurs émettent une alarme sonore pour avertir le plongeur.
+- id: 945f483d-08f1-4788-a36d-6ddd721a5f5c
+  text: L'ordinateur bloque instantanément toute poursuite de la plongée.
+- id: 982cdec5-e1d1-46b4-a2ae-7e2937eb02e5
+  text: L'écran s'éteint pour économiser la batterie pendant les paliers.
+- id: 675a63ae-0d8d-4b3f-b2fb-b3c91ae5bf7f
+  text: L'ordinateur bascule automatiquement en mode profondimètre (GAUGE).
+correct_choice_ids:
+- 5bb6576f-926b-4679-90b6-95ad3255f3df
+explanation: Le temps sans palier diminue au cours de la plongée ; quand la zone des
+  plongées avec palier est atteinte, la plupart des ordinateurs émettent une alarme
+  sonore pour avertir le plongeur.
+archived: false

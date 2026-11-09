@@ -1,0 +1,22 @@
+id: 1b456529-f93e-43fe-8067-d18475b8cf12
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi une plongée successive impose-t-elle le calcul d'une majoration ?
+choices:
+- id: 9001bf51-4e6a-4600-9c7e-00a76db7b1ae
+  text: La lecture directe des tables ne permet pas de déterminer les paliers dans
+    ce cas.
+- id: ef7531ab-7566-406d-8f94-9904587c8c1c
+  text: Les tables interdisent toute seconde plongée sans une majoration forfaitaire.
+- id: 59f9080e-944c-4707-8d7b-a7083367cf6f
+  text: La majoration sert uniquement à rattraper une remontée trop rapide.
+- id: 3818a637-1622-4f0a-be14-c3dca8514d3a
+  text: 'Les paliers n''existent pas en plongée successive : on majore le temps total.'
+correct_choice_ids:
+- 9001bf51-4e6a-4600-9c7e-00a76db7b1ae
+explanation: 'En plongée successive, la lecture directe des tables ne permet pas de
+  déterminer les paliers : il faut calculer une majoration à partir du GPS et de l''intervalle
+  en surface.'
+archived: false

@@ -1,0 +1,22 @@
+id: 2f8bc636-2429-459e-8c07-c9974eeff89c
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles opérations les interfaces permettent-elles, selon les modèles ?
+choices:
+- id: 86a24ccf-037b-4f91-8d1c-6a15f558f9c7
+  text: Compléter les profils, faire des statistiques, modifier les réglages, mettre
+    à jour le logiciel.
+- id: 1a8fadd9-456e-49bd-95d8-847c445da60a
+  text: Uniquement exporter les plongées, sans aucune autre possibilité.
+- id: d09d9065-88b4-458e-9ea6-db3b1688957e
+  text: Effacer les plongées des autres membres de la palanquée après la sortie.
+- id: 5afb05f5-24a2-4f0e-8622-a9a583a1d5aa
+  text: Augmenter la mémoire interne de l'ordinateur en ajoutant une carte SD.
+correct_choice_ids:
+- 86a24ccf-037b-4f91-8d1c-6a15f558f9c7
+explanation: 'Selon les modèles : compléter les profils (commentaires, photos), calculs
+  statistiques, modification de réglages et paramètres personnels, chargement d''images
+  visibles en immersion, mise à jour du logiciel, accès au numéro de série.'
+archived: false

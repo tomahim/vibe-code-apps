@@ -1,0 +1,14 @@
+id: da9e7778-db41-44f3-917d-273e0b90ba51
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: Quel sigle, ajouté en colonne des tables MN90-FFESSM, désigne la durée totale
+  de remontée ?
+accepted_answers:
+- DTR
+- Durée totale de remontée
+- Duree totale de remontee
+explanation: DTR (durée totale de remontée). Les tables MN90-FFESSM se distinguent
+  aussi de la MN90 par la vitesse de remontée de 15 m/min, la règle de refaire seulement
+  le palier interrompu, et l'ajout du tableau de durée de remontée.
+archived: false

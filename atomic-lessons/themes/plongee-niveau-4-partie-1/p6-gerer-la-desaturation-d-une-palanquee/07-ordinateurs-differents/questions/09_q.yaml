@@ -1,0 +1,22 @@
+id: 0b99b477-a5ab-49eb-b514-9c7ce782fc94
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment les plongeurs aux tables gèrent-ils une remontée plus lente que 15
+  m/min ?
+choices:
+- id: 3da1b435-e539-4a63-88c2-82ac03a5d3fb
+  text: Ils intègrent le temps de remontée dans la durée de la plongée.
+- id: 9b09839b-d2b7-4098-a125-71eb254a4605
+  text: Ils ajoutent systématiquement dix minutes de palier à trois mètres.
+- id: 5249f1b1-fdae-43f7-85c6-6df9def52aeb
+  text: Ils remontent quand même à 15 m/min pour respecter leur table.
+- id: bde76aaf-e51b-40dc-b36d-87f92a317854
+  text: Ils interrompent la plongée et regagnent la surface immédiatement.
+correct_choice_ids:
+- 3da1b435-e539-4a63-88c2-82ac03a5d3fb
+explanation: 'Si nécessaire, les plongeurs utilisant des tables intègrent le temps
+  de remontée dans la durée de la plongée : c''est le traitement de la « remontée
+  lente » dans le protocole des tables.'
+archived: false

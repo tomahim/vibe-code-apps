@@ -1,0 +1,22 @@
+id: da27f54d-bf3e-427d-8945-08e95d1345b1
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment l'ordinateur détecte-t-il une remontée trop rapide ?
+choices:
+- id: 97c90714-b883-4df8-9728-9c930716f2d0
+  text: Il calcule la vitesse d'après le temps mis entre deux profondeurs et déclenche
+    une alarme.
+- id: 1fd50976-5266-4faf-8426-7ec54469792e
+  text: Il mesure la turbulence de l'eau autour du plongeur avec un capteur dédié.
+- id: a92cd3a5-840a-41c3-bd8d-dadab884cabe
+  text: Il compare la consommation d'air à une consommation de référence enregistrée.
+- id: dbb3c53b-2043-4bbc-b998-b1aacbdc2327
+  text: 'Il ne la détecte pas : seul le moniteur peut constater une remontée rapide.'
+correct_choice_ids:
+- 97c90714-b883-4df8-9728-9c930716f2d0
+explanation: L'ordinateur calcule et affiche la vitesse de remontée en fonction du
+  temps mis pour passer d'une profondeur à une autre ; en cas de dépassement, une
+  alarme est déclenchée.
+archived: false

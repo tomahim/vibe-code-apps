@@ -1,0 +1,21 @@
+id: b1402603-c45d-4865-92ec-0ef73b256efa
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'ajoutent certains modèles sophistiqués au mode planification ?
+choices:
+- id: edcf45ea-776d-4289-88f3-e61026f11fe5
+  text: L'intervalle surface prévu avant l'immersion et les paliers éventuels.
+- id: 496df22c-c37e-47fb-8717-d930b91aafb1
+  text: La prévision météo à sept jours et la hauteur de houle annoncée.
+- id: 8764b4b6-84e4-4e8b-a745-b1a719ba271c
+  text: Le prix de la plongée et le nombre de places restantes sur le bateau.
+- id: 4c416f25-bb04-47c5-bebe-8c7945d95897
+  text: La consommation des autres plongeurs enregistrée en temps réel.
+correct_choice_ids:
+- edcf45ea-776d-4289-88f3-e61026f11fe5
+explanation: Certains modèles sophistiqués prennent en compte l'intervalle surface
+  prévu avant l'immersion (et non celui au moment du lancement) et les paliers éventuels,
+  en sélectionnant profondeur et temps de plongée envisagé.
+archived: false
