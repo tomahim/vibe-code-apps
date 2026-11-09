@@ -97,7 +97,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   <button class="lg-fab" type="button" hidden></button>
   <div class="lg-practice" hidden></div>
   <div class="lg-review-float" hidden></div>
-  <div class="lg-zoom"><button data-zoom="in" aria-label="Zoom in">+</button><button data-zoom="out" aria-label="Zoom out">−</button></div><div class="lg-hint"></div><div class="lg-toast" role="status"></div><div class="lg-error" hidden>This garden needs WebGL. Open it in a browser with hardware acceleration enabled.</div>`;
+  ${mobile ? '' : '<div class="lg-zoom"><button data-zoom="in" aria-label="Zoom in">+</button><button data-zoom="out" aria-label="Zoom out">−</button></div><div class="lg-hint"></div>'}<div class="lg-toast" role="status"></div><div class="lg-error" hidden>This garden needs WebGL. Open it in a browser with hardware acceleration enabled.</div>`;
   container.appendChild(root);
   const $ = (s) => root.querySelector(s);
   const canvas = $('.lg-canvas');
@@ -742,6 +742,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
 
   function renderCrumbs() {
     const cur = (lvl) => (view.level === lvl ? ' aria-current="page"' : '');
+    if (view.level === 'garden') { crumbs.innerHTML = ''; crumbs.hidden = true; return; }
+    crumbs.hidden = false;
     let h = view.level !== 'garden' ? '<button class="lg-back" data-go="back" aria-label="Back">‹</button>' : '';
     h += `<button data-go="garden"${cur('garden')}>Garden</button>`;
     if (view.level !== 'garden') h += `<span class="sep">›</span><button data-go="theme"${cur('theme')}>${esc(THEMES[view.ti].title)}</button>`;
@@ -796,8 +798,8 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     let h = '';
     if (view.level === 'garden') {
       h = `<p class="eyebrow">Your learning garden</p><h2>The Garden</h2><p class="lede">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>` +
-        `${renderRecentMenu()}<ul class="lg-list">` +
-        THEMES.map((t, i) => { const started = t.paths.filter((p) => p.progress.started).length, avg = fraction(t.progress); return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
+        `${renderRecentMenu()}<ul class="lg-list lg-tiles">` +
+        THEMES.map((t, i) => { const avg = fraction(t.progress); return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b></span><span class="bar" role="progressbar" aria-label="${esc(t.title)} reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(avg * 100)}"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson.</p><ul class="lg-list">` +
@@ -884,7 +886,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   }
   function renderStats() {
     const t = totals();
-    statsEl.innerHTML = `<button class="chip drop" data-reward="drops" aria-label="${t.drops} Drops. How Drops are earned">${ICON.drop}<b>${t.drops}</b><small>drops</small><span class="info" aria-hidden="true">ⓘ</span></button><button class="chip carrot" data-reward="carrots" aria-label="${t.carrots} Carrots. How Carrots are earned">${ICON.carrot}<b>${t.carrots}</b><small>carrots</small><span class="info" aria-hidden="true">ⓘ</span></button>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
+    statsEl.innerHTML = `<button class="chip drop" data-reward="drops" aria-label="${t.drops} Drops. How Drops are earned">${ICON.drop}<b>${t.drops}</b></button><button class="chip carrot" data-reward="carrots" aria-label="${t.carrots} Carrots. How Carrots are earned">${ICON.carrot}<b>${t.carrots}</b></button>` + (mobile ? '' : `<span class="chip plain"><b>${t.started}</b><small>of ${t.paths} paths growing</small></span>`);
   }
   function renderUI() { renderCrumbs(); renderPanel(); renderPractice(); renderReviewFloat(); renderStats(); buildLabels(); }
   root.addEventListener('click', (e) => {
@@ -922,7 +924,11 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (view.level === 'path' && trail && !mobile && trail.n <= 8) trail.nodes.forEach((n) => add('lesson', `<b>${esc(trail.path.lessons[n.i])}</b>`, n.pos.clone().add(new THREE.Vector3(0, 1.5, 0)), { pick: { kind: 'lesson', i: n.i } }));
     refreshLabelDots();
   }
-  const hint = $('.lg-hint'); hint.textContent = mobile ? 'Drag to move · pinch to zoom · two fingers to turn' : 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn'; setTimeout(() => hint.classList.add('gone'), 9000);
+  const hint = $('.lg-hint');
+  if (hint) {
+    hint.textContent = 'Scroll or drag to move · pinch or ctrl+scroll to zoom · right-drag to turn';
+    setTimeout(() => hint.classList.add('gone'), 9000);
+  }
   const tv = new THREE.Vector3();
   function placeLabels() {
     const w = root.clientWidth, h = root.clientHeight, shown = [];
