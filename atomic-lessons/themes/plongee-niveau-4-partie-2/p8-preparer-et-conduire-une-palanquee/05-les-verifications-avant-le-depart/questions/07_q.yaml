@@ -1,0 +1,21 @@
+id: 70467a50-8d4a-4eb0-85e0-d331ffc32dde
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que le guide observe-t-il chez chaque plongeur à la mise à l'eau, selon le
+  manuel ?
+choices:
+- id: 0eec8ad9-901f-470f-a148-8dc2cd2e35ed
+  text: Flottabilité neutre, masque sur le visage, détendeur en bouche, prêt à intervenir.
+- id: 3b0a3f27-ea66-4dd0-9e83-a2765c233493
+  text: La marque de l'ordinateur.
+- id: f10e97b3-4bf4-4f8a-ab5d-9dad00509c91
+  text: La propreté du masque.
+- id: ed166a46-3ee0-42ae-b4c8-6f263a52c819
+  text: La couleur des palmes.
+correct_choice_ids:
+- 0eec8ad9-901f-470f-a148-8dc2cd2e35ed
+explanation: 'Le guide surveille la mise à l''eau de chacun, prêt à intervenir : flottabilité
+  neutre, masque sur le visage, détendeur en bouche.'
+archived: false

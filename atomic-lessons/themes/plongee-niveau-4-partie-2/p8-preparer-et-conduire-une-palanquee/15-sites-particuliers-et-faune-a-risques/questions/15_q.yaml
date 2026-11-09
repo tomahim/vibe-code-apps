@@ -1,0 +1,22 @@
+id: 3aa416bd-ca36-4b38-9026-f0c92fabf73a
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment prévenir la ciguatera, selon le manuel ?
+choices:
+- id: de13bc51-352c-4559-831b-65ae180ea58c
+  text: Éviter la consommation de gros poissons carnivores (barracuda, mérou, vivaneau...)
+    en zone à risque.
+- id: 78e051cd-d2eb-4811-8248-9b870a208326
+  text: Manger uniquement du poisson cuit à l'eau bouillante.
+- id: acd055f0-270f-4e12-879f-bc194ca5d19b
+  text: Boire de l'eau de mer.
+- id: 08a373f7-8007-44af-b247-8711bd65e2e3
+  text: Manger uniquement des coquillages.
+correct_choice_ids:
+- de13bc51-352c-4559-831b-65ae180ea58c
+explanation: La ciguatera est due à l'ingestion de poissons tropicaux contaminés par
+  une neurotoxine ; à titre préventif, évitez les gros poissons carnivores (barracuda,
+  thazard de lagon, sériole, vivaneau, mérou...) en zone à risque.
+archived: false

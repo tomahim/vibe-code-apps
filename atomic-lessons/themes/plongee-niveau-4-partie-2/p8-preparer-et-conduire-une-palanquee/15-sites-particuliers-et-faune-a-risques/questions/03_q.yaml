@@ -1,0 +1,23 @@
+id: 17cbbdb1-f1ca-4d80-b33b-2a481b637471
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le principal risque des épaves, et que dit le manuel de leur pénétration
+  ?
+choices:
+- id: 0bb9671a-c667-4a7c-94d2-5df8f3798435
+  text: Le principal risque est de rester prisonnier ; en règle générale, il est déconseillé
+    d'y pénétrer, et les précautions des grottes restent valables si l'on entre.
+- id: 49909475-a080-403e-96b4-bec0d553192a
+  text: Le principal risque est le froid ; on peut y entrer librement.
+- id: 04a9bda9-470d-4c92-835f-7ec7a4aeb1b8
+  text: Le principal risque est la visibilité ; il suffit d'une lampe.
+- id: 6497e38d-1156-49cd-89c5-19d4513adc73
+  text: Il n'y a aucun risque si l'épave est petite.
+correct_choice_ids:
+- 0bb9671a-c667-4a7c-94d2-5df8f3798435
+explanation: 'Le principal risque des épaves est de rester prisonnier ; en règle générale,
+  il est déconseillé d''y pénétrer. Si vous choisissez d''entrer : accès large, sortie
+  visible à tout moment, réserve d''air suffisante, lampe.'
+archived: false

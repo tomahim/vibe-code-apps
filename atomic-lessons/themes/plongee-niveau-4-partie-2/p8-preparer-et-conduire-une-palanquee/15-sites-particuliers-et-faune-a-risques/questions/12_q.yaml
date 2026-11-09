@@ -1,0 +1,22 @@
+id: 3d64daa1-2e55-4b03-8d6f-88d3991f6bb9
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la conduite à tenir en cas de piqûre de vive, selon le manuel ?
+choices:
+- id: d22fbb84-af4e-46cd-9fee-1e7a37d5d59e
+  text: Désinfecter la plaie, approcher une source de chaleur quelques minutes jusqu'à
+    la limite du supportable pour dénaturer le poison, puis glacer la plaie.
+- id: 693093f8-ca98-489c-9fac-ddbf57747e64
+  text: Suer le poison en nageant.
+- id: 653634fd-921a-4acc-a274-40a6e05a5c5e
+  text: Appliquer du sable chaud uniquement.
+- id: 0b55924f-f7bc-4ab6-a5d4-819eec65f098
+  text: Ne rien faire, c'est inoffensif.
+correct_choice_ids:
+- d22fbb84-af4e-46cd-9fee-1e7a37d5d59e
+explanation: 'Piqûre de vive : désinfecter, approcher une source de chaleur quelques
+  minutes jusqu''à la limite du supportable pour dénaturer le poison, puis glacer.
+  Même conduite pour les rascasses et poissons-scorpions.'
+archived: false

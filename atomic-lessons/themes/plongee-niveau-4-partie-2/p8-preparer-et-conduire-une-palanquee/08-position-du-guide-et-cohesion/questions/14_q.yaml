@@ -1,0 +1,21 @@
+id: 46f7a759-259a-4a1e-bc9f-9f8d34a4c75e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que signifie « cohésion » pour une palanquée en exploration ?
+choices:
+- id: 1c395b0b-ffc0-4ba4-acc6-805ca528cec8
+  text: Proximité, observation mutuelle et progression collective sous la conduite
+    du guide.
+- id: ab0960ac-3e69-4e13-a576-50147e3aacb5
+  text: Nager collés sans regarder.
+- id: 828fbf97-5f58-459b-bad0-04483c3da9e1
+  text: Se tenir par la main en permanence.
+- id: ace2256b-d537-4de7-a3b0-9afbdb515c4c
+  text: Être tous au même club.
+correct_choice_ids:
+- 1c395b0b-ffc0-4ba4-acc6-805ca528cec8
+explanation: La cohésion combine proximité, observation mutuelle et progression collective
+  sous la conduite du guide.
+archived: false

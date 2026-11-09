@@ -1,0 +1,20 @@
+id: 1bb3a190-7e8a-4336-8260-ca8587127541
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Un plongeur qui signale une difficulté d'équilibration pendant la descente...
+choices:
+- id: dce39e1e-fd9c-4144-a570-aa1f6d9e8055
+  text: '...applique la consigne : le guide l''attend.'
+- id: 47904290-1cf3-4745-8144-971d9070882b
+  text: '...doit être renvoyé seul en surface.'
+- id: fc6dc7c6-97b4-42a2-9fe2-127e5f747391
+  text: '...doit accélérer pour compenser.'
+- id: b129153a-86fd-4bf8-b1cf-d417497f1488
+  text: '...doit être ignoré pour ne pas retarder la palanquée.'
+correct_choice_ids:
+- dce39e1e-fd9c-4144-a570-aa1f6d9e8055
+explanation: Un plongeur qui signale une difficulté d'équilibration applique la consigne
+  de sécurité ; le guide l'attend, comme le montre l'exemple du manuel.
+archived: false

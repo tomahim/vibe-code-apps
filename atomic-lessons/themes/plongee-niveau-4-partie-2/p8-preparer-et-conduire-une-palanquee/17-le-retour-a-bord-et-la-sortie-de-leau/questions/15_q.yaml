@@ -1,0 +1,22 @@
+id: 57d22484-f05e-4830-8f5e-810abe2ad923
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle séquence résume le retour à bord selon le manuel ?
+choices:
+- id: 9712b80f-e33b-4e5c-94ef-cb9c890d30b3
+  text: Rester groupés, avancer ensemble, demander la récupération si c'est trop loin
+    ou trop dur, faire remonter les équipiers, le guide passe en dernier.
+- id: 801a1184-d691-45a2-98b4-f006058ecc00
+  text: Nager chacun de son côté, le guide d'abord.
+- id: 2ba92554-3932-44a4-8d0a-fb7e448f3503
+  text: Attendre le bateau en pleine eau sans se signaler.
+- id: 7330f223-73ff-4b53-9ed7-d6f558bf4626
+  text: Redescendre au mouillage et refaire un tour.
+correct_choice_ids:
+- 9712b80f-e33b-4e5c-94ef-cb9c890d30b3
+explanation: 'Le retour selon le manuel : groupés, tous ensemble ; récupération demandée
+  si l''embarcation est trop éloignée ou l''effort trop grand ; équipiers à bord d''abord,
+  guide en dernier.'
+archived: false

@@ -1,0 +1,21 @@
+id: c0ae3cee-dc23-4ce5-abbb-42fd874cb7f8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: À quoi renvoie le manuel pour les aspects pratiques non écrits de l'après-plongée
+  ?
+choices:
+- id: 86351faf-0d47-464a-a842-52758f975fb1
+  text: Au cadre de la formation encadrée.
+- id: bd251426-4052-4dc7-a6e8-059f40a94550
+  text: À Internet.
+- id: 06718153-f8a0-435f-a69b-0cb3038af476
+  text: À l'expérience personnelle sans encadrement.
+- id: 1b5e2ad4-939a-49d5-bb3e-0e1f59041796
+  text: 'À rien : ils sont interdits.'
+correct_choice_ids:
+- 86351faf-0d47-464a-a842-52758f975fb1
+explanation: Les habitudes d'après-plongée relèvent de l'apprentissage en formation,
+  que le manuel ne détaille pas.
+archived: false

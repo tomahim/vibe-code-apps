@@ -1,0 +1,21 @@
+id: 21a768a9-e4fd-4ef5-aab8-2ba9e4750570
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que recommande le manuel pour l'immersion et la descente, chaque fois que
+  possible ?
+choices:
+- id: 4ce252e1-6791-402b-85d3-c3edca51372c
+  text: Descendre le long d'un mouillage ou d'un pendeur.
+- id: 45c811b5-b536-40b6-bea5-93ebd2a6346b
+  text: Descendre en pleine eau sans repère.
+- id: 4338a3eb-72d9-4171-903e-b97a6ad02844
+  text: Descendre le long d'un câble électrique.
+- id: d7e021dc-8ab9-4c3e-a21b-1dcb9ef1d6e1
+  text: Descendre en suivant les poissons.
+correct_choice_ids:
+- 4ce252e1-6791-402b-85d3-c3edca51372c
+explanation: Préférez, chaque fois que possible, une immersion le long d'un mouillage
+  ou d'un pendeur.
+archived: false

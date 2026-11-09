@@ -1,0 +1,20 @@
+id: 87d54d8a-0019-48aa-a1c6-d2ab188deaec
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel ton doit avoir la phase d'accueil du briefing ?
+choices:
+- id: 8211fe34-27a7-4270-b24a-aaccf3faa4f9
+  text: Sympathique et respectueux.
+- id: a4d89b6d-15d8-4fea-b78f-0608af930c83
+  text: Froid et distant.
+- id: 0b8489eb-ed8e-4929-896e-4ec23f42167d
+  text: Militaire et sec.
+- id: f0915389-e112-4c1b-883b-2b1430ec74e1
+  text: Commercial et insistant.
+correct_choice_ids:
+- 8211fe34-27a7-4270-b24a-aaccf3faa4f9
+explanation: La phase d'accueil doit être « à la fois sympathique et respectueuse
+  afin de mettre en confiance vos interlocuteurs ».
+archived: false

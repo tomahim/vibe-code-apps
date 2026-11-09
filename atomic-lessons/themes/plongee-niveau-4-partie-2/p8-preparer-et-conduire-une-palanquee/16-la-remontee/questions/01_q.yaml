@@ -1,0 +1,21 @@
+id: f2a9f844-8ca0-4958-bead-6be52620707b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que fait la palanquée sur votre signe « Fin de plongée », selon le manuel
+  ?
+choices:
+- id: 237f8608-ad44-42db-baf8-317db12e8e9a
+  text: Elle remonte en respectant votre vitesse de remontée et vos arrêts (paliers).
+- id: 5005eb0b-9ff3-4d9f-b204-120f59fc325e
+  text: Elle remonte chacun à sa vitesse.
+- id: 23b60492-fe7e-41e3-9ed5-6877aedb1b4a
+  text: Elle attend le bateau au fond.
+- id: 95d7c9d3-ed47-4d2a-9ad8-50043e895861
+  text: Elle gonfle les gilets et remonte vite.
+correct_choice_ids:
+- 237f8608-ad44-42db-baf8-317db12e8e9a
+explanation: Sur le signe « Fin de plongée », la palanquée remonte en respectant la
+  vitesse de remontée et les arrêts (paliers) du guide.
+archived: false

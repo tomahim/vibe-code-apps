@@ -1,0 +1,21 @@
+id: 2c56e7d1-e633-4123-95e1-4b33de54f0e0
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi le manuel demande-t-il au moins un parachute de palier par plongeur
+  ?
+choices:
+- id: 9bb9caa6-831c-41d8-877e-d54be8e264f0
+  text: Pour que chacun puisse se signaler visuellement en cas de dérive en surface.
+- id: f62b6888-567c-4aaf-a5d2-316acc56fc97
+  text: Pour décorer le bateau.
+- id: fa65e5f8-6607-4c69-8930-aadb06917609
+  text: Pour mesurer la profondeur.
+- id: 850c248e-0872-4320-baf0-9232aa714971
+  text: Pour stabiliser le mouillage.
+correct_choice_ids:
+- 9bb9caa6-831c-41d8-877e-d54be8e264f0
+explanation: En cas de dérive en surface, la signalisation visuelle repose notamment
+  sur au moins un parachute de palier par plongeur.
+archived: false

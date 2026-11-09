@@ -1,0 +1,21 @@
+id: b0b4f06e-77f1-4bba-8040-d07a53e98694
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que faut-il mémoriser des roches caractéristiques, selon le manuel ?
+choices:
+- id: 860c0767-a42e-4521-a0f0-15c702c850c5
+  text: Leur apparence dans le sens de l'aller ET dans celui du retour.
+- id: 1d744549-7ecb-4d72-80c2-f5c374be0eec
+  text: Uniquement leur couleur à l'aller.
+- id: c0e6db57-a58a-43ba-bd48-450b97478805
+  text: Leur nom scientifique.
+- id: 7c376ca8-5d4a-4872-a068-8635ed33acca
+  text: 'Rien : elles se ressemblent toutes.'
+correct_choice_ids:
+- 860c0767-a42e-4521-a0f0-15c702c850c5
+explanation: Il est conseillé de mémoriser leur apparence dans le sens de l'aller
+  et dans celui du retour, car la forme d'une roche peut être très différente selon
+  l'angle de vue.
+archived: false

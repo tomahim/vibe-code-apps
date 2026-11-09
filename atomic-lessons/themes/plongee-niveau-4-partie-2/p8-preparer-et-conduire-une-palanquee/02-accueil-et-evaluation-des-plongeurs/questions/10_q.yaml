@@ -1,0 +1,20 @@
+id: 71f2d18d-a664-455d-a559-e18726210397
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À quoi servent les réponses des plongeurs pendant l'accueil ?
+choices:
+- id: 9aa973bc-0992-4ad6-aa07-8231e09e7463
+  text: Elles guident la suite de la présentation.
+- id: 2920cb52-1e61-4c7d-9542-a077fc7cc549
+  text: À remplir le livre de bord du capitaine.
+- id: 67af1e6f-7810-45db-8e7e-8c02c0a27a94
+  text: 'À rien : ce sont des politesses.'
+- id: 0c5292ff-b33b-4678-bbf3-adaa80a36fb8
+  text: À choisir la musique du bateau.
+correct_choice_ids:
+- 9aa973bc-0992-4ad6-aa07-8231e09e7463
+explanation: 'La participation commence dès l''accueil : les réponses aux questions
+  de contact guident la suite de la présentation.'
+archived: false

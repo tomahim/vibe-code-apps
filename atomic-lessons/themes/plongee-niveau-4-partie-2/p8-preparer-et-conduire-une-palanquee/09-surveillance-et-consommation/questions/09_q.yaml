@@ -1,0 +1,21 @@
+id: 76fa6873-ff98-4031-b639-64c1e877f943
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qui doit être particulièrement attentif à la ventilation, selon le manuel
+  ?
+choices:
+- id: 117b7cad-be59-4a0e-a811-4e6ec90818ee
+  text: Le guide de palanquée.
+- id: 9ff7d3fa-4fc1-432c-a408-323d5fd0fab6
+  text: Uniquement le médecin.
+- id: 8f0453f3-3b03-4977-8eaf-42bb81a8e2a5
+  text: Le fabricant de combinaisons.
+- id: 41e222ec-671b-4abb-ad01-eec3150f2a87
+  text: Personne.
+correct_choice_ids:
+- 117b7cad-be59-4a0e-a811-4e6ec90818ee
+explanation: « En tant que guide de palanquée vous devez y être particulièrement attentif.
+  »
+archived: false

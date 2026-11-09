@@ -1,0 +1,21 @@
+id: fe5aaa80-9262-4afe-bca5-174484a030aa
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le manuel des signaux lumineux de jour ?
+choices:
+- id: 52420e71-44e1-4294-9c30-9d5fc6d62ef5
+  text: Ils ne seront perçus que s'ils sont dirigés en face du plongeur et non sur
+    le côté.
+- id: 8fe21072-2717-49ae-acdc-ece51100a031
+  text: Ils sont invisibles de jour, inutile d'essayer.
+- id: 9c207b02-1298-4073-b2c7-15208ce820fa
+  text: Ils doivent être dirigés vers la surface.
+- id: ded447da-e8c8-425d-82f8-0307945dc697
+  text: Ils doivent éclairer les pieds.
+correct_choice_ids:
+- 52420e71-44e1-4294-9c30-9d5fc6d62ef5
+explanation: De jour, les signaux lumineux (appel avec une lampe) ne seront perçus
+  que s'ils sont dirigés en face du plongeur et non sur le côté.
+archived: false

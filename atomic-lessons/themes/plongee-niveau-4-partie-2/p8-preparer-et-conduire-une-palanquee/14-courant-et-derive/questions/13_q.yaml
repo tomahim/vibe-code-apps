@@ -1,0 +1,23 @@
+id: ee9a28d8-5c79-469a-a79b-95a027cb2cdb
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels instruments de signalisation le manuel dit-il de toujours avoir sur
+  soi ?
+choices:
+- id: 7db22dac-8af7-49ea-ae4f-fa83987f190e
+  text: Sonore (sifflet, avertisseur sonore) et visuelle (au moins un parachute de
+    palier par plongeur, lampe à éclats, miroir, bâton lumineux, fluorescéine...).
+- id: 7015d526-3e09-4342-b289-0a395cf222b4
+  text: Uniquement un téléphone étanche.
+- id: 25e8ec43-9f99-4d95-8a59-07801e8a500f
+  text: Uniquement une fusée de détresse.
+- id: bea427aa-08a8-4535-9521-2e60cffd63d3
+  text: 'Aucun : la voix suffit.'
+correct_choice_ids:
+- 7db22dac-8af7-49ea-ae4f-fa83987f190e
+explanation: 'Ayez toujours sur vous des instruments de signalisation : sonore (sifflet,
+  avertisseur sonore) et visuelle (au moins un parachute de palier par plongeur, lampe
+  à éclats, miroir, bâton lumineux, tube de fluorescéine...).'
+archived: false

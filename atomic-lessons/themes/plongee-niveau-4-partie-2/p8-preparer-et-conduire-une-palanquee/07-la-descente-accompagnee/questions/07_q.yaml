@@ -1,0 +1,20 @@
+id: f0b318f3-ee9f-4b66-b5e1-d71cf661b073
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi se placer face aux plongeurs ?
+choices:
+- id: 85f541ac-e3f6-4f9b-808d-84e50cd1c298
+  text: Pour voir leur état et leurs signes et adapter la descente en temps réel.
+- id: fa52f730-792a-4e0e-b0f7-e42885066010
+  text: Pour les photographier.
+- id: 1efc886b-b677-4981-afa1-b6a47dbfd4c8
+  text: Pour être vu du bateau.
+- id: f5db5a29-c60d-4bb9-b885-64a7510fb22c
+  text: Pour se protéger du courant.
+correct_choice_ids:
+- 85f541ac-e3f6-4f9b-808d-84e50cd1c298
+explanation: 'Face aux plongeurs, le guide voit leur état et leurs signes : c''est
+  ce qui permet d''adapter vitesse et organisation en temps réel.'
+archived: false

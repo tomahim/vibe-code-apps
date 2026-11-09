@@ -1,0 +1,21 @@
+id: 17cbd57f-cdce-4d3f-ba78-73699bba3cfa
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi rappeler les signes en surface ?
+choices:
+- id: ed1f8d25-a66e-4c39-bdac-0dead6fa1c9c
+  text: 'Une consigne compréhensible se prépare avant l''immersion : le répertoire
+    de signes doit être partagé.'
+- id: 1fb6bb4e-5a22-4cb1-b5b0-03444d8db97c
+  text: Pour remplir le temps de trajet.
+- id: 864d1233-a7bb-46ef-ab8c-1eb5eba92234
+  text: Pour tester la mémoire du guide.
+- id: 590c2219-4b95-44fd-8acf-e447fcea6f83
+  text: Ce n'est pas utile.
+correct_choice_ids:
+- ed1f8d25-a66e-4c39-bdac-0dead6fa1c9c
+explanation: 'Les signes rappelés en surface garantissent un répertoire partagé :
+  une consigne compréhensible se prépare avant l''immersion.'
+archived: false

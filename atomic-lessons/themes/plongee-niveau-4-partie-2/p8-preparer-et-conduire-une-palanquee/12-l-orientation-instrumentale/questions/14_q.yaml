@@ -1,0 +1,21 @@
+id: 76cad0e3-a8d5-485b-836b-5a3863ff0833
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le manuel propose-t-il d'étalonner son palmage ?
+choices:
+- id: 550bfb3b-4226-44d7-81ff-2feda597ccef
+  text: Suivre un bout de longueur connue (25 ou 50 m) en palmant normalement, en
+    chronométrant ou en comptant les coups de palme.
+- id: 7f9f46e7-67b1-4b7a-bfa4-a609598b2b30
+  text: Mesurer ses palmes avec un mètre.
+- id: 0b9689eb-7ee3-4da1-92e3-80a9f4bf7bae
+  text: Nager en apnée sur 100 m.
+- id: a55f522c-9e4b-4896-be29-9070f2d0f60f
+  text: Compter les vagues.
+correct_choice_ids:
+- 550bfb3b-4226-44d7-81ff-2feda597ccef
+explanation: Utilisez un bout de longueur connue (25 ou 50 m) et suivez-le en palmant
+  normalement, en chronométrant le temps ou en comptant les coups de palme.
+archived: false

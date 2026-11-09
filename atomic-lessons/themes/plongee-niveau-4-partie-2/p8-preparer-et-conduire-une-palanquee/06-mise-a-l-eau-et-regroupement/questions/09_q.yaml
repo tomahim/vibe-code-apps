@@ -1,0 +1,20 @@
+id: bdaf3f19-ae36-4cd2-9902-b45bc74bf7e5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels points le guide observe-t-il à la mise à l'eau de chaque plongeur ?
+choices:
+- id: ac160bbc-f15a-41ec-bda5-970b67dff823
+  text: Flottabilité neutre, masque sur le visage, détendeur en bouche.
+- id: c618a870-115a-4784-986d-ab74ac7b9ff5
+  text: La couleur du tuba.
+- id: ef9bad91-a45b-4e28-98be-e03694a63ab3
+  text: La marque de la combinaison.
+- id: 7148f97a-6800-4b39-af2c-7ad14c147ba0
+  text: Le style du saut.
+correct_choice_ids:
+- ac160bbc-f15a-41ec-bda5-970b67dff823
+explanation: 'Le guide surveille la mise à l''eau de chacun, prêt à intervenir : flottabilité
+  neutre, masque sur le visage, détendeur en bouche.'
+archived: false

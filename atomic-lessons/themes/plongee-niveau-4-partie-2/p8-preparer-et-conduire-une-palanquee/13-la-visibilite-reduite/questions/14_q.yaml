@@ -1,0 +1,22 @@
+id: 16a8decb-f33b-44e9-95df-1a522cfb6029
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel ensemble de mesures le manuel associe-t-il aux eaux troubles ?
+choices:
+- id: 2bb4e0c3-4584-4fb4-b88b-cc6d18dc74fe
+  text: Palanquée réduite, distance limitée, repassage au mouillage à mi-temps, boussole,
+    attention mutuelle, progression de front.
+- id: 12e4ad79-623b-4a78-b850-d11dc4ffc543
+  text: Palanquée élargie et nage rapide.
+- id: 6ca1ea43-999d-4a59-9700-ff4137a8cc62
+  text: Plongée profonde et longue.
+- id: 33ce08e3-e21f-4ea1-a689-a08e32ae3975
+  text: Suppression du guide.
+correct_choice_ids:
+- 2bb4e0c3-4584-4fb4-b88b-cc6d18dc74fe
+explanation: 'En eaux troubles : 2 idéal/3 max encadrement compris, distance limitée,
+  repassage devant le mouillage à mi-temps et avant 100 bars, boussole, attention
+  mutuelle, progression de front.'
+archived: false

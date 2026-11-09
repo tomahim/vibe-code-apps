@@ -1,0 +1,21 @@
+id: 8eaa48de-4b63-4fd1-bb08-4b0500dbea19
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: La remontée sécurisée se termine-t-elle à la surface, selon le manuel ?
+choices:
+- id: ecb38bff-20d5-49d2-9667-e3afbcb7dca9
+  text: 'Non : la plongée n''est pas terminée, il faut encore rejoindre le bateau
+    et sortir de l''eau (leçon suivante).'
+- id: a5fed70d-3af7-45b4-a4c3-c9bb6cbf1771
+  text: 'Oui : arrivé en surface, tout est fini.'
+- id: bbc556d8-60a6-46ac-b149-c0fef26994b9
+  text: Oui, si l'on a fait le signe « Ok ».
+- id: ff45afda-2bd4-469a-8b21-ca5c6aabd373
+  text: 'Non : il faut redescendre faire un palier.'
+correct_choice_ids:
+- ecb38bff-20d5-49d2-9667-e3afbcb7dca9
+explanation: 'En surface, le guide reste responsable de sa palanquée : il faut rejoindre
+  le bateau ou le bord de l''eau, puis sortir de l''eau — objet de la leçon suivante.'
+archived: false

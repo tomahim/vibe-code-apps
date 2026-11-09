@@ -1,0 +1,21 @@
+id: a293828a-89ab-44e5-bb76-9ee2096d550f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle conséquence pratique le guide tire-t-il de cette remarque ?
+choices:
+- id: 0c4a66a3-a086-4d43-892d-de01da42e4f3
+  text: 'Une consigne comme « regardez votre manomètre » peut prendre du temps chez
+    un plongeur récent : anticiper et laisser le temps de l''exécution.'
+- id: 5e86182c-1d3f-4ef8-8eb4-ad239f36f5f3
+  text: Interdire les manomètres aux débutants.
+- id: 1e42e074-e88a-46c3-aa67-f8511bf24379
+  text: Ne jamais demander la pression.
+- id: 64c932b4-387e-4036-afe9-d48949311bb9
+  text: Plonger sans instruments.
+correct_choice_ids:
+- 0c4a66a3-a086-4d43-892d-de01da42e4f3
+explanation: 'Chez un plongeur récent, chercher un instrument sans le voir prend du
+  temps : le guide anticipe et laisse le temps de l''exécution.'
+archived: false

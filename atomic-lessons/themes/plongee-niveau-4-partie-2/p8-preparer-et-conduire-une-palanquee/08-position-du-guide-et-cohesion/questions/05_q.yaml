@@ -1,0 +1,21 @@
+id: 3be4dcda-37b8-4611-86fd-71370f3da7e2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: À quoi sert d'abord la position du guide pendant l'exploration ?
+choices:
+- id: 2d1a092d-3460-44c0-b602-a7330e0be6f4
+  text: 'Au contrôle visuel : voir les plongeurs, leurs signes, leur aisance, sans
+    se retourner en permanence.'
+- id: 30af56b4-7749-448e-ad86-8a40fad73cfa
+  text: À nager plus vite.
+- id: 7aeca3e8-3901-45c7-8ce8-2be6ff3fa8f0
+  text: À se reposer.
+- id: 8ce47c8a-dd95-4cfe-b32f-3a72663c2eba
+  text: À éviter les courants.
+correct_choice_ids:
+- 2d1a092d-3460-44c0-b602-a7330e0be6f4
+explanation: 'La position du guide sert d''abord le contrôle visuel : voir ses plongeurs,
+  leurs signes, leur aisance.'
+archived: false

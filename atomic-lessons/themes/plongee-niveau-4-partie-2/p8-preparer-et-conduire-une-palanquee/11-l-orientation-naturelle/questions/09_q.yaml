@@ -1,0 +1,20 @@
+id: 06d07e0f-c5e4-410c-96d4-ca8a018c5ce5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment se repérer sur les zones de sable, selon le manuel ?
+choices:
+- id: 61ade424-62de-4f70-9fec-0d6bb5355632
+  text: À l'aide des lignes d'ondulation qui forment des sortes de « rides » parallèles.
+- id: 72cf565b-ddfb-4991-919d-09d4f18404b4
+  text: En comptant les coquillages.
+- id: 6e4b1caf-ccfa-4963-8813-15312dd7d193
+  text: En suivant les étoiles de mer.
+- id: 586fc94b-2877-4a8e-8516-0097f631d81c
+  text: Impossible de s'y repérer.
+correct_choice_ids:
+- 61ade424-62de-4f70-9fec-0d6bb5355632
+explanation: Sur les zones de sable, il est possible de se repérer à l'aide des lignes
+  d'ondulation qui forment des sortes de « rides » parallèles.
+archived: false

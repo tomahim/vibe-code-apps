@@ -1,0 +1,21 @@
+id: cc1de034-eda2-4c92-a42b-add67cd2744e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels habitats le manuel cite-t-il comme indications de parcours ?
+choices:
+- id: b79a9dcc-711a-4af9-bfd7-ff0464e1d5c6
+  text: Zone de sable, herbier, aplomb rocheux, roche isolée.
+- id: c168fde3-9503-438b-aa37-e30a72760bb0
+  text: Uniquement les épaves.
+- id: ec4ef6d7-2394-4fad-b724-dc87e7926c07
+  text: Uniquement les grottes.
+- id: cada9a0a-6d23-474d-b807-20db951dd48c
+  text: Les algues rouges exclusivement.
+correct_choice_ids:
+- b79a9dcc-711a-4af9-bfd7-ff0464e1d5c6
+explanation: Les différents habitats (zone de sable, herbier, aplomb rocheux, roche
+  isolée...) fournissent de précieuses indications selon leur situation par rapport
+  au parcours.
+archived: false

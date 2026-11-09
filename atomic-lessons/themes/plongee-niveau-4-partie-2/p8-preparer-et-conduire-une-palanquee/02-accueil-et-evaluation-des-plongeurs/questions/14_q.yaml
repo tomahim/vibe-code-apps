@@ -1,0 +1,20 @@
+id: 80ee2a52-8dca-477e-93c3-c067a29c2b07
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quoi sert ce que vous avez appris pendant l'accueil ?
+choices:
+- id: f917f1e1-ce8e-45d3-a718-1ce6a675af40
+  text: À adapter la présentation de la plongée aux plongeurs présents.
+- id: fc5566b1-538c-4620-809c-1eb7304bda90
+  text: À remplir des statistiques fédérales.
+- id: 052c1750-1c55-444b-9b0d-a5225fc6ef73
+  text: À choisir la musique du briefing.
+- id: 2cb9d598-02ee-4a31-ada5-6c798d7788aa
+  text: À rien de pratique.
+correct_choice_ids:
+- f917f1e1-ce8e-45d3-a718-1ce6a675af40
+explanation: Ce que l'accueil vous a appris aide à adapter la présentation de la plongée
+  aux plongeurs présents.
+archived: false

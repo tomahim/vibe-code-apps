@@ -1,0 +1,20 @@
+id: 3ceba9f3-216a-406d-b62a-8e80f7182d77
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel binôme résume la conduite de la descente selon le manuel ?
+choices:
+- id: 4ed632a0-1d1c-4644-aa00-0654e1fdc3ff
+  text: Repère (mouillage/pendeur) et position face aux plongeurs.
+- id: 27d1dc44-c3e0-468f-a17f-88ccd3ebbddc
+  text: Vitesse maximale et dispersion.
+- id: 6cd7cd55-8f2a-4799-b29f-4ea8efd9663a
+  text: Plein phare et pleine eau.
+- id: 2d8c25a5-00ae-4ce7-89be-015b775e808e
+  text: Silence radio et ignorance des signes.
+correct_choice_ids:
+- 4ed632a0-1d1c-4644-aa00-0654e1fdc3ff
+explanation: 'La descente selon le manuel : de préférence le long d''un mouillage
+  ou d''un pendeur, guide face aux plongeurs, vitesse adaptée aux réactions.'
+archived: false

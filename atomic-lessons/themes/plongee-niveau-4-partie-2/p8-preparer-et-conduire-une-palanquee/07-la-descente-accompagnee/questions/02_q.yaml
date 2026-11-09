@@ -1,0 +1,23 @@
+id: 0ab02dd9-94c2-4423-a14a-e4c823503484
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels exemples contrastés d'adaptation le manuel donne-t-il pour la descente
+  ?
+choices:
+- id: 6c53091d-5f78-41fd-b20c-6b137b38d98a
+  text: Descendre rapidement sur un tombant ou, au contraire, attendre un plongeur
+    ayant des difficultés à équilibrer ses oreilles.
+- id: de49ec3a-5ad1-40db-a663-fd2fdc9710c0
+  text: Descendre toujours à 30 m/min ou remonter.
+- id: 7b7ac08a-651f-4126-869e-bce136342c46
+  text: Descendre en apnée ou en bouteille.
+- id: fffebb86-90c9-4371-bcc3-5a869c81fd68
+  text: Descendre de jour ou de nuit.
+correct_choice_ids:
+- 6c53091d-5f78-41fd-b20c-6b137b38d98a
+explanation: 'Les exemples du manuel : descendre rapidement sur un tombant ou, au
+  contraire, savoir attendre un plongeur encadré ayant des difficultés à équilibrer
+  ses oreilles.'
+archived: false

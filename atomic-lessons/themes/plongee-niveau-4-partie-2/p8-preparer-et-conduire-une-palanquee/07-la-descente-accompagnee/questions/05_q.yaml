@@ -1,0 +1,20 @@
+id: ba6125a7-200a-4275-bc02-4c136c3d4418
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que le mouillage ou le pendeur apporte-t-il aux plongeurs ?
+choices:
+- id: e5dff721-788f-4cde-b395-77a02c7a5069
+  text: Un repère visuel et un point d'appui.
+- id: 040adc21-653e-4da3-8f6c-68a09c381a4f
+  text: De l'air supplémentaire.
+- id: cbfb520d-48b3-468c-b5cf-cf843eef5daa
+  text: Une protection contre le froid.
+- id: 7eda3703-1054-488c-a469-68e51a533628
+  text: Un raccourci vers le fond.
+correct_choice_ids:
+- e5dff721-788f-4cde-b395-77a02c7a5069
+explanation: Le mouillage ou le pendeur offre un repère visuel et un point d'appui,
+  utiles quand l'équilibre dans l'eau doit encore s'améliorer.
+archived: false

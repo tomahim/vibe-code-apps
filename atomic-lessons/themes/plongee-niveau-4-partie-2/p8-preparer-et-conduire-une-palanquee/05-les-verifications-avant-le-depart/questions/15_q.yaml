@@ -1,0 +1,23 @@
+id: 2cc1ba8d-fd69-4c05-bf35-b09810854aae
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le guide organise-t-il la mise à l'eau face au risque de couler, selon
+  le manuel ?
+choices:
+- id: 719a5d30-956e-446b-9921-e04ae20e3755
+  text: Il se met à l'eau le premier et surveille la mise à l'eau de chacun, prêt
+    à intervenir.
+- id: 65a54ce1-463c-48bc-bc6d-275959c915c0
+  text: Il envoie d'abord le plongeur le plus lourd.
+- id: d25352a4-b5a4-4a5e-80f2-3f11b9d11067
+  text: Il reste sur le bateau pour compter.
+- id: f8def503-dc4c-4fa3-b821-4f955be48c1e
+  text: Il fait sauter tout le monde en même temps.
+correct_choice_ids:
+- 719a5d30-956e-446b-9921-e04ae20e3755
+explanation: Le guide se met à l'eau le premier et surveille la mise à l'eau de chacun
+  des membres de sa palanquée, prêt à intervenir ; il peut demander de gonfler légèrement
+  le gilet avant de sauter.
+archived: false

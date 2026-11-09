@@ -1,0 +1,20 @@
+id: 5858dc07-406c-44e3-af1d-c6d93190f9ca
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle est la position optimale du guide pendant la remontée ?
+choices:
+- id: 782ce39c-b0b0-4481-a867-a5ed91b8f2f3
+  text: Légèrement au-dessus de ses équipiers.
+- id: 76353dd1-ed16-4db0-bdd9-bb4fafbcf95c
+  text: Légèrement en dessous de ses équipiers.
+- id: 94939446-226c-41f5-af1b-d07fd206338c
+  text: Au fond.
+- id: b1a0b348-db93-46ee-8c9f-546c6b263ae3
+  text: Déjà sur le bateau.
+correct_choice_ids:
+- 782ce39c-b0b0-4481-a867-a5ed91b8f2f3
+explanation: La position optimale du guide de palanquée se situe légèrement au-dessus
+  de ses équipiers pendant la remontée.
+archived: false

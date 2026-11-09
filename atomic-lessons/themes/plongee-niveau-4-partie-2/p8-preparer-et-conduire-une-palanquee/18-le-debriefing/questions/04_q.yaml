@@ -1,0 +1,20 @@
+id: 2e8c751c-e578-48a9-8e9c-e05079ed815b
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit le manuel du briefing du guide par rapport à celui du DP ?
+choices:
+- id: c5afca49-604a-4fde-b7ae-5f5507164677
+  text: Il le complète, il ne s'y substitue pas.
+- id: 682a7505-6d49-4cc2-9b4c-a6ac8061e155
+  text: Il le remplace entièrement.
+- id: 62102ff0-5b45-46a7-ae98-f1131643c038
+  text: Il le rend inutile.
+- id: c1ace627-8b4f-4259-b4df-db43b8cc42fd
+  text: Il est interdit.
+correct_choice_ids:
+- c5afca49-604a-4fde-b7ae-5f5507164677
+explanation: Le briefing du guide comprend « un rappel succinct du briefing du directeur
+  de plongée (le vôtre le complète, il ne s'y substitue pas) ».
+archived: false

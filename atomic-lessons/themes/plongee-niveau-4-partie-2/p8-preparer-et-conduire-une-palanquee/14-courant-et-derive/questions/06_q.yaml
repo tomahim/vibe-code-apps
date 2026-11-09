@@ -1,0 +1,22 @@
+id: 4c228b53-8a65-4ee0-b1ec-da2fa4541484
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la « renverse », selon le manuel ?
+choices:
+- id: 5dfab178-c12a-48de-bf68-525701a8df57
+  text: Le passage de marée montante à descendante, et inversement, qui peut inverser
+    le sens du courant entre le début et la fin de l'exploration.
+- id: 804177d3-48b4-407f-9ed5-4b56a116a2dd
+  text: Un courant de vent méditerranéen.
+- id: 1d22245b-fc4b-4017-a24e-17a1a4941680
+  text: Une vague qui retourne le bateau.
+- id: 05f1ec90-ed40-4ddd-b957-7a1a5c35d509
+  text: Un exercice de retournement du gilet.
+correct_choice_ids:
+- 5dfab178-c12a-48de-bf68-525701a8df57
+explanation: 'En courant de marée, le sens peut être inversé entre le début et la
+  fin de l''exploration, du fait de la « renverse » (passage de marée montante à descendante,
+  et inversement) : assurez-vous du sens du courant en fin de plongée.'
+archived: false

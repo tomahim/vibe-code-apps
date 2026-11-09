@@ -1,0 +1,20 @@
+id: 75b7b0f1-1444-4979-b032-5db2c8c50615
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit le manuel des paliers en pleine eau ?
+choices:
+- id: 4448178a-3d9c-41c4-8c4e-2cbb2e34e009
+  text: Ne jamais en faire sans s'être signalé.
+- id: 3c4688ed-72c5-4835-977d-f7ebbc17a0a1
+  text: Ils sont obligatoires à chaque plongée.
+- id: b71814dc-ebdd-4d98-97a4-ee76aff42bfd
+  text: Ils sont interdits dans tous les cas.
+- id: 4ebd7a7d-0deb-4538-aaa0-4f132b2c86b6
+  text: Ils remplacent le parachute.
+correct_choice_ids:
+- 4448178a-3d9c-41c4-8c4e-2cbb2e34e009
+explanation: « Dans tous les cas, ne jamais faire de paliers en pleine eau sans s'être
+  signalé. »
+archived: false

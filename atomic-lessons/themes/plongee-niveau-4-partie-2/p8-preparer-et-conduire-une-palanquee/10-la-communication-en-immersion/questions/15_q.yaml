@@ -1,0 +1,21 @@
+id: 2923ece0-336d-41c8-a2ef-c86b57918d2d
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle règle résume la communication gestuelle et lumineuse selon le manuel
+  ?
+choices:
+- id: f1e0c640-d6e7-418a-a442-a62845512605
+  text: 'Viser le regard : signes en face du masque, signaux lumineux en face du plongeur.'
+- id: e1e34e11-343a-4af7-b814-5e3f92267d23
+  text: Signaler vers le ciel.
+- id: fc633c67-588e-44cc-9f70-260bb761f362
+  text: Toucher le fond.
+- id: 3b667d9d-504e-45b1-b9cd-8e2d0067dde0
+  text: Faire des bulles.
+correct_choice_ids:
+- f1e0c640-d6e7-418a-a442-a62845512605
+explanation: 'La communication vise le regard : signes bien en face du masque, signaux
+  lumineux dirigés en face du plongeur.'
+archived: false

@@ -1,0 +1,21 @@
+id: 1ebbc1eb-02cb-4bf6-a31c-9548f3f47848
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel utilise-t-il le soleil comme repère ?
+choices:
+- id: 48481fb8-15e5-4d51-99a4-31146ebd0af2
+  text: 'On repère sa position par rapport à la plongée : en face, dans le dos, à
+    gauche, à droite.'
+- id: 797969a2-d113-49e9-8bee-812410de7202
+  text: On l'ignore sous l'eau.
+- id: 6e3b8df5-8079-408f-9b77-330de6421fa1
+  text: Il sert uniquement à se réchauffer.
+- id: c2f9234a-677b-493e-9ab3-fa03b0555c70
+  text: Il indique toujours le sud.
+correct_choice_ids:
+- 48481fb8-15e5-4d51-99a4-31146ebd0af2
+explanation: 'Premier repère : le soleil — où doit-il être par rapport à la plongée,
+  en face, dans le dos, à gauche, à droite ?'
+archived: false

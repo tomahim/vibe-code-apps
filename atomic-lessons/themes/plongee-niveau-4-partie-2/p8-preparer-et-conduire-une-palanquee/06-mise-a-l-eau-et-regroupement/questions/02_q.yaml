@@ -1,0 +1,21 @@
+id: 334dd791-93a7-4519-9988-911341ef00c1
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi faire entrer les plongeurs un par un plutôt que tous ensemble ?
+choices:
+- id: 316e2126-035f-428e-81ac-2f4fe482e846
+  text: Pour contrôler chaque immersion individuellement au lieu de gérer plusieurs
+    plongeurs en difficulté en même temps.
+- id: 5aa41386-a36e-4707-97c6-a68717b62392
+  text: Pour faire durer le plaisir.
+- id: bcef7b10-4936-4cfb-b0e5-0586e432d1cd
+  text: Pour économiser l'air du compresseur.
+- id: 9ba36938-7f46-48e3-ae4a-e30b9e73adb7
+  text: Par tradition, sans raison pratique.
+correct_choice_ids:
+- 316e2126-035f-428e-81ac-2f4fe482e846
+explanation: L'organisation « chacun à son tour, au signal » permet de contrôler chaque
+  immersion individuellement.
+archived: false

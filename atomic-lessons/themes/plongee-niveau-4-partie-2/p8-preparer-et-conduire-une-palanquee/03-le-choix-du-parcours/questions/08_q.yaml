@@ -1,0 +1,21 @@
+id: 0d6f52b9-d149-4df1-8f37-c639dca9c68e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelle est la difficulté d'un plateau rocheux ou corallien, selon le manuel
+  ?
+choices:
+- id: dde3d4d1-d648-4953-aec0-378e6b0b8d53
+  text: 'Le manque de relief : tout se ressemble.'
+- id: 089e8fac-784c-4ac9-993a-7391490ec9ca
+  text: La profondeur trop grande.
+- id: 12eab55c-3c91-48af-86a8-4f890deab353
+  text: La température de l'eau.
+- id: fabbff63-540f-4630-acf2-ca3f0f78cb18
+  text: L'absence totale de vie marine.
+correct_choice_ids:
+- dde3d4d1-d648-4953-aec0-378e6b0b8d53
+explanation: 'Sur un plateau rocheux ou corallien, la difficulté tient au manque de
+  relief du paysage sous-marin : tout se ressemble.'
+archived: false

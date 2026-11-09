@@ -1,0 +1,19 @@
+id: 30af731e-d9af-4a6a-bc39-21a590e6986b
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel accessoire le manuel juge-t-il fort utile en eaux troubles ?
+choices:
+- id: ad7a77a5-6e30-47fd-a916-2d4abe98fa54
+  text: Une lampe à éclat.
+- id: a41da3fe-1649-4de1-9aff-b0b12ef9b98d
+  text: Un parasol.
+- id: 95a5225c-16db-4a14-b76b-2e7dcd2b7d16
+  text: Un sifflet de surface uniquement.
+- id: 8e6cd082-4816-4c33-9a1d-d9855b3a8826
+  text: Un appareil photo.
+correct_choice_ids:
+- ad7a77a5-6e30-47fd-a916-2d4abe98fa54
+explanation: « Une lampe à éclat peut être fort utile » dans cette configuration.
+archived: false

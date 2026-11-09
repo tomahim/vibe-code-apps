@@ -1,0 +1,22 @@
+id: 128bff67-9d47-4998-ad13-95d4510d02d4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels sont les risques principaux des plongées en eaux troubles, selon le
+  manuel ?
+choices:
+- id: 597d5bd9-1a92-41c2-976a-1157cb0a9a84
+  text: La perte des plongeurs encadrés et l'éloignement involontaire du site prévu
+    et donc de l'embarcation.
+- id: bb6eb910-147c-4fe6-bd4f-148d39b031b3
+  text: Le froid et la faim.
+- id: 455d126b-f450-4fff-ae77-ceef055a5ca1
+  text: Les algues et le sable.
+- id: e965069f-7136-4092-a559-fe6e4d62cef9
+  text: Le courant d'air et la pluie.
+correct_choice_ids:
+- 597d5bd9-1a92-41c2-976a-1157cb0a9a84
+explanation: 'Les risques principaux : la perte des plongeurs encadrés et l''éloignement
+  involontaire du site prévu et donc de l''embarcation.'
+archived: false

@@ -1,0 +1,23 @@
+id: b496dd69-c894-471e-acb6-ff6778dbb48e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que trouve-t-on sur la fiche de sécurité (feuille de palanquée), selon le
+  manuel ?
+choices:
+- id: e73c9dd0-ee7f-4413-977b-907fa3a84f38
+  text: Noms, prénoms et aptitudes des plongeurs, leur fonction dans la palanquée,
+    et les paramètres prévus et réalisés de la plongée.
+- id: 57ee147b-dd53-4891-8517-34e09711c813
+  text: Uniquement le nom du guide et la profondeur maximale.
+- id: 1c4705f2-9143-4025-9184-fe4fbe32892f
+  text: La liste du matériel loué par le club.
+- id: 2affd315-375a-42e0-a01d-d5d1402acc79
+  text: Le carnet de plongée complet de chaque participant.
+correct_choice_ids:
+- e73c9dd0-ee7f-4413-977b-907fa3a84f38
+explanation: La fiche de sécurité comprend notamment les noms, prénoms, aptitudes
+  des plongeurs, leur fonction dans la palanquée, et les paramètres prévus et réalisés
+  relatifs à la plongée.
+archived: false

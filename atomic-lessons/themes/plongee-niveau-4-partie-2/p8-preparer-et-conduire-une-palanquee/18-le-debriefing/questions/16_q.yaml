@@ -1,0 +1,21 @@
+id: 97c0d2a1-79e2-4c53-ad13-c3fa781c35cd
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle pression minimale doit rester dans les blocs de retour au bateau, selon
+  le manuel ?
+choices:
+- id: 915169d0-03bc-40ef-b914-bc2a3d6e157d
+  text: Au moins 30 à 50 bars.
+- id: c071f57c-d667-4c27-b12e-f489bf18bca7
+  text: Au moins 100 bars.
+- id: 46cd1d19-8e4c-4430-a5f0-2d6e8ca88a5d
+  text: 0 bar.
+- id: f23b068c-1439-46cc-8bb7-3f1c7ff28224
+  text: Au moins 150 bars.
+correct_choice_ids:
+- 915169d0-03bc-40ef-b914-bc2a3d6e157d
+explanation: De retour au bateau, tous les plongeurs doivent avoir au moins 30 à 50
+  bars dans leur bloc.
+archived: false

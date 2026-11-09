@@ -1,0 +1,22 @@
+id: f361c4a3-01c7-42e4-ac72-14c25a583934
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans quel cas un plongeur de niveau 5 (P5) peut-il être directeur de plongée,
+  selon le manuel ?
+choices:
+- id: 139f498a-6ada-4a06-ae56-bb967a9c1474
+  text: Pour les plongées d'exploration à l'air en milieu naturel à titre bénévole.
+- id: 7ad1f073-262f-47f6-9e39-49b5756399fc
+  text: Pour toutes les plongées, sans condition.
+- id: d241b2ef-5c45-4c92-a8c8-1dc4e3c55f10
+  text: Uniquement en piscine de moins de 6 m.
+- id: 79fa548b-402c-47fe-8557-d62b5798a8b6
+  text: 'Jamais : le P5 ne peut pas être DP.'
+correct_choice_ids:
+- 139f498a-6ada-4a06-ae56-bb967a9c1474
+explanation: Pour pallier le manque de moniteurs, un P5 peut être DP pour les plongées
+  d'exploration à l'air en milieu naturel à titre bénévole, et pour les plongées au
+  nitrox avec l'aptitude PN-C.
+archived: false

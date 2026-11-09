@@ -1,0 +1,21 @@
+id: bd7ba5b7-8b05-4abc-bac0-8d2d908cc2d7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment les plongeurs doivent-ils avancer en eaux troubles, selon le manuel
+  ?
+choices:
+- id: 33f9590b-7802-4425-ad3b-bedee7b88372
+  text: De front, les uns à côté des autres, plutôt que l'un derrière l'autre.
+- id: b1631bb1-6776-4e67-b099-0a758ba7a604
+  text: En file indienne.
+- id: 567eb6e1-f3d4-4459-8cd5-15f37b3c75b8
+  text: En ligne verticale.
+- id: 9fc8e502-c286-43bf-8d71-60812d681699
+  text: Dispersés.
+correct_choice_ids:
+- 33f9590b-7802-4425-ad3b-bedee7b88372
+explanation: « Mieux vaut avancer de front, les uns à côté des autres, plutôt que
+  l'un derrière l'autre. »
+archived: false

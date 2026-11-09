@@ -1,0 +1,23 @@
+id: 18aaae23-fee8-49af-b901-841aff743eab
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels sont les trois composants d'un compas « classique », selon le manuel
+  ?
+choices:
+- id: 55043a1e-a6aa-4979-b820-20557f49260a
+  text: Une lunette crantée graduée de 0 à 359, une ligne de foi fixe, une sphère
+    aimantée indiquant le nord magnétique.
+- id: 83da63e8-00c5-4488-abf4-48140ace668f
+  text: Un GPS, une batterie, un écran.
+- id: 1d1dc6fe-ca7c-40e5-a1d4-874b3ebb5dd6
+  text: Une aiguille, un fil, une bouée.
+- id: 27d620a3-ea48-4cd8-9185-16c1336cd8a1
+  text: Un tube, un cadran, un flexible.
+correct_choice_ids:
+- 55043a1e-a6aa-4979-b820-20557f49260a
+explanation: 'Un compas classique : lunette crantée (bague) graduée de 0 à 359 degrés,
+  ligne de foi fixe dans le strict alignement de la direction à suivre, sphère aimantée
+  indiquant toujours le nord magnétique.'
+archived: false

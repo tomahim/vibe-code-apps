@@ -1,0 +1,20 @@
+id: 195b3172-d3cb-4781-bfba-2d2e7a54923d
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Où sont détaillées les adaptations pour eaux troubles ?
+choices:
+- id: 6ab1ac80-9567-423f-a116-bcfa6dd33c69
+  text: Dans la leçon sur la visibilité réduite.
+- id: f1d13e6d-45a2-46b0-861d-9462124aa2a9
+  text: Dans la leçon sur le matelotage.
+- id: 8c69c41d-9e83-419d-bfb4-6d13a1021df9
+  text: Dans la leçon sur la désaturation.
+- id: a625f150-845f-4eda-a9ff-d2ec93fa4e8c
+  text: Nulle part.
+correct_choice_ids:
+- 6ab1ac80-9567-423f-a116-bcfa6dd33c69
+explanation: Les adaptations spécifiques (palanquée réduite, distance limitée, repassage
+  devant le mouillage) sont détaillées dans la leçon sur la visibilité réduite.
+archived: false

@@ -1,0 +1,21 @@
+id: f5c41bdc-0ad2-4c77-8a9e-a253e874d14c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel effet le palmage vertical d'un plongeur surlesté a-t-il près du fond,
+  selon le manuel ?
+choices:
+- id: 858a3772-37df-4f8a-ba98-992d4f6a8359
+  text: Il abîme la faune et la flore et trouble l'eau.
+- id: 8447463d-cc21-423e-ad07-38cb6a57bee1
+  text: Il nettoie le fond.
+- id: 34eec575-0efb-4147-83a3-7c99b7429a8d
+  text: Il attire les poissons.
+- id: 70d240cf-6271-47cf-b4e6-1c97fcb16713
+  text: Aucun effet.
+correct_choice_ids:
+- 858a3772-37df-4f8a-ba98-992d4f6a8359
+explanation: Debout dans l'eau, le plongeur surlesté palme énormément ; un palmage
+  vertical proche du fond abîme la faune et la flore et trouble l'eau.
+archived: false

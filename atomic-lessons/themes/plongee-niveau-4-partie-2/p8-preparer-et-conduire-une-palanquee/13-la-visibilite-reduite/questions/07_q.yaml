@@ -1,0 +1,20 @@
+id: f6f8d9d9-4824-46ef-9d9a-1a6e2c2f2ef5
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels facteurs aggravent ces risques, selon le manuel ?
+choices:
+- id: 9b35f11b-d120-41df-905d-2b66d914e15f
+  text: Le courant et les vagues.
+- id: ae47828c-6005-4818-864f-938c981801a8
+  text: La chaleur et le soleil.
+- id: 0b27b7c0-a5bf-4282-8abc-bee7567578ed
+  text: La faune et la flore.
+- id: 873fb254-4cce-4aea-aa78-0eb8ea96b3c6
+  text: Les palmes et le masque.
+correct_choice_ids:
+- 9b35f11b-d120-41df-905d-2b66d914e15f
+explanation: Les conséquences peuvent être importantes en cas de besoin d'assistance
+  sous l'eau ou en surface ; courant et vagues sont des facteurs aggravants.
+archived: false

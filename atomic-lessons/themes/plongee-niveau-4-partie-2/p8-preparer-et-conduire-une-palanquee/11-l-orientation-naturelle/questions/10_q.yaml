@@ -1,0 +1,21 @@
+id: d629aa3a-38bd-4372-b345-d953494aeee0
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel type de parcours le manuel recommande-t-il pour l'orientation naturelle
+  ?
+choices:
+- id: 200e85ec-3d82-47a5-94c8-bb5bee8cb65b
+  text: Un parcours simple, en évitant les changements de direction incessants.
+- id: 030739f3-0473-4cbd-9fb5-ab35707e4d19
+  text: Un parcours complexe pour tester la palanquée.
+- id: fd64df88-ae51-40ca-86b5-09f19883a806
+  text: Un parcours en zigzag permanent.
+- id: 6436e420-ead4-4b60-ab91-a40e4d80f547
+  text: Un parcours aléatoire.
+correct_choice_ids:
+- 200e85ec-3d82-47a5-94c8-bb5bee8cb65b
+explanation: « Adoptez un parcours simple en évitant les changements de direction
+  incessants. »
+archived: false

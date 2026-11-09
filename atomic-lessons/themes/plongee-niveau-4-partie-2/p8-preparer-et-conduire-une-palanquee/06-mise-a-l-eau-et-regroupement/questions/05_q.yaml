@@ -1,0 +1,21 @@
+id: b8829ca4-58a0-41b2-9ffb-7d0ae7e0027c
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que fait chaque plongeur en surface après sa mise à l'eau, lorsque tout va
+  bien ?
+choices:
+- id: 33f9c5ab-92f2-4882-9a7a-1dc4e032e074
+  text: Le signe « Ok ».
+- id: 44d490d5-741b-439e-beb4-ff10b5714f6f
+  text: Le signe « problème ».
+- id: e3b0eb41-7c3f-4801-bb3c-2389924f4b40
+  text: Un plongeon immédiat.
+- id: 96d6f0f5-24b0-460e-abb0-885e3462fc2b
+  text: Il retire son masque.
+correct_choice_ids:
+- 33f9c5ab-92f2-4882-9a7a-1dc4e032e074
+explanation: Après la mise à l'eau, lorsque tout va bien, chaque plongeur fait le
+  signe « Ok » en surface.
+archived: false

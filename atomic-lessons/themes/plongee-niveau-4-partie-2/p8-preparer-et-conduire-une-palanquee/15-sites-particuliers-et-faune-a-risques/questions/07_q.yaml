@@ -1,0 +1,23 @@
+id: 996b2231-ffb1-46e6-b5d6-f0cb5f3b88c1
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la règle des lampes pour une plongée de nuit, selon le manuel ?
+choices:
+- id: 3b723619-122d-473b-a82c-336fd4347467
+  text: Une lampe par plongeur avec une autonomie suffisante pour toute la plongée,
+    souhaitablement une lampe de secours par palanquée, et les lampes restent allumées
+    sous l'eau.
+- id: de180688-7140-4b70-8b09-8c8dee65f2d6
+  text: Une seule lampe pour toute la palanquée, éteinte au fond.
+- id: 63fb44f0-47f3-4a66-bcdf-66b0fd5e56d2
+  text: Les lampes sont facultatives si la lune est pleine.
+- id: 41c816af-747b-4d1b-aac0-3bc5de7eb202
+  text: Uniquement la lampe du guide, allumée par intermittence.
+correct_choice_ids:
+- 3b723619-122d-473b-a82c-336fd4347467
+explanation: Chaque plongeur doit disposer d'une lampe avec une autonomie suffisante
+  pour toute la plongée ; il est souhaitable que la palanquée dispose au moins d'une
+  lampe de secours ; sous l'eau, les lampes doivent rester allumées.
+archived: false

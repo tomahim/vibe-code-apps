@@ -1,0 +1,20 @@
+id: 3a94bfc3-36c7-490a-a75d-5a15bcde7b2d
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles positions permettent au guide de voir les réactions à ses signes ?
+choices:
+- id: 51611a62-2841-4a60-9fd6-91f257049829
+  text: Face aux plongeurs à la descente, équipiers de chaque côté pendant l'exploration.
+- id: 9db43f0c-292e-403b-a079-1fe8898a2945
+  text: Derrière la palanquée.
+- id: 91ce25d1-d7b0-4616-8e2d-66bea7a6a8d0
+  text: En surface.
+- id: 1710f28b-7d90-4cd6-b5cb-6b8bcced7cc6
+  text: Sous la palanquée.
+correct_choice_ids:
+- 51611a62-2841-4a60-9fd6-91f257049829
+explanation: 'Face aux plongeurs à la descente, équipiers de chaque côté pendant l''exploration
+  : le guide voit les réactions à ses signes.'
+archived: false

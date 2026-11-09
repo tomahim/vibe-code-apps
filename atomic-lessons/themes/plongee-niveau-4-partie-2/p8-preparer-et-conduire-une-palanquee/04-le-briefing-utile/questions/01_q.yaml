@@ -1,0 +1,20 @@
+id: 62bb909a-e275-40aa-bbda-80357bae1915
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que présente le guide de palanquée lors de son briefing, selon le manuel ?
+choices:
+- id: 09b336ee-317c-4703-ba3a-eb0d225f0aab
+  text: La plongée et le rappel des consignes de sécurité aux membres de sa palanquée.
+- id: 73ad1a9c-a700-467d-b6ac-e90ffbc95508
+  text: Uniquement la météo de la semaine.
+- id: 4f0afcac-3bed-4455-8ad9-9c007fdc306a
+  text: Le règlement intérieur du club.
+- id: d88d0b9d-87fc-423e-aeab-6c28e06bbcde
+  text: La liste des poissons de Méditerranée.
+correct_choice_ids:
+- 09b336ee-317c-4703-ba3a-eb0d225f0aab
+explanation: En tant que guide de palanquée, vous serez amené à présenter la plongée
+  et à rappeler les consignes de sécurité aux membres de votre palanquée.
+archived: false

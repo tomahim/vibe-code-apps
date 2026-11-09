@@ -1,0 +1,21 @@
+id: 582f9c4e-89fb-4853-882b-e4ccdba178ea
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans le cadre général, quel est le niveau minimal du directeur de plongée,
+  selon le manuel ?
+choices:
+- id: 083c21ef-c2dd-4343-ae53-a4f3e1ab701d
+  text: Un encadrant de niveau 3 (E3), c'est-à-dire un moniteur 1er degré ou supérieur.
+- id: ed88b554-8a6c-42b3-aaf2-4966a078298e
+  text: Un plongeur de niveau 2 autonome.
+- id: 25587d85-625a-4747-9f28-e5e055ca42b9
+  text: Un plongeur de niveau 4 en cours de formation.
+- id: 55d71d6e-6f83-4f6f-b123-368e7a97c11b
+  text: N'importe quel plongeur majeur.
+correct_choice_ids:
+- 083c21ef-c2dd-4343-ae53-a4f3e1ab701d
+explanation: 'Dans le cadre général, le directeur de plongée est au moins un encadrant
+  de niveau 3 (E3) : MF1, BEES1, DEJEPS ou supérieur.'
+archived: false

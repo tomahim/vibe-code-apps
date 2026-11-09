@@ -1,0 +1,22 @@
+id: 7069c198-096e-43ce-8ec5-064682fa3f7a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment le briefing du guide s'articule-t-il avec celui du directeur de plongée,
+  selon le manuel ?
+choices:
+- id: f8f20870-94dd-494e-92c3-665991074ae4
+  text: 'Le briefing du guide comporte un rappel succinct de celui du DP : il le complète,
+    il ne s''y substitue pas.'
+- id: dce9e17f-1a8a-4ab0-863a-16f4cf7a0d15
+  text: Le briefing du guide remplace entièrement celui du DP.
+- id: ba4ea9a1-82a3-47a0-8b10-6f1ea0eefbf7
+  text: Le guide ne briefe que si le DP est absent.
+- id: 34ed8a0e-f146-4853-b74a-4db47f4b0fd0
+  text: Le DP reprend mot pour mot le briefing du guide.
+correct_choice_ids:
+- f8f20870-94dd-494e-92c3-665991074ae4
+explanation: 'Selon le manuel, le briefing du guide comporte un rappel succinct du
+  briefing du directeur de plongée : le vôtre le complète, il ne s''y substitue pas.'
+archived: false

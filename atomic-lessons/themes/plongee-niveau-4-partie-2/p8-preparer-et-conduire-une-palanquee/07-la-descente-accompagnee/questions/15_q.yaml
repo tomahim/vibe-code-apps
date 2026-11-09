@@ -1,0 +1,23 @@
+id: bb4df555-c156-4464-9943-a593fd6d3683
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi « oreilles » est-il une consigne de sécurité et non une perte de
+  temps ?
+choices:
+- id: 3dd19bc3-80c5-4dde-ba61-6e773c0a34d1
+  text: Parce qu'équilibrer correctement prévient un accident dès la descente ; attendre
+    un plongeur qui équilibre est la conduite attendue.
+- id: 69d69e29-5e47-461a-8c91-98178408f427
+  text: Parce que les oreilles servent à nager.
+- id: 9c61c9d2-cac6-4911-8148-2f941c0b72a2
+  text: Parce que c'est une tradition sans fondement.
+- id: 688fc02f-986c-4487-a3dd-0be6e21b5788
+  text: Parce que le DP l'exige sans raison.
+correct_choice_ids:
+- 3dd19bc3-80c5-4dde-ba61-6e773c0a34d1
+explanation: 'Le manuel donne l''exemple du guide qui sait attendre un plongeur encadré
+  ayant des difficultés à équilibrer ses oreilles : c''est une adaptation normale
+  de la descente.'
+archived: false

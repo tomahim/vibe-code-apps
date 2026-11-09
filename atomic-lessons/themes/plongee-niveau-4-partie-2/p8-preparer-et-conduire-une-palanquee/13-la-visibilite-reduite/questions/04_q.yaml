@@ -1,0 +1,21 @@
+id: beee32f3-257e-4e3c-8ffe-adb92d8857c8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi repasser devant le mouillage à mi-temps plutôt qu'en fin de plongée
+  ?
+choices:
+- id: 4042fe59-c345-418c-9de6-90f4ba299d7e
+  text: Si vous ne le retrouvez pas, il vous reste encore du temps pour y parvenir.
+- id: c7c677f8-bcf1-42aa-88d7-a443af3398c6
+  text: Pour économiser les paliers.
+- id: 6054c9f5-effe-4a2b-a083-478f1a53f86a
+  text: Pour faire des photos.
+- id: 65a57a70-cc19-4ba6-b4c7-9ab1c84a7c2c
+  text: Pour changer de bouteille.
+correct_choice_ids:
+- 4042fe59-c345-418c-9de6-90f4ba299d7e
+explanation: '« Si vous ne le retrouvez pas, il vous reste encore du temps pour y
+  parvenir » ; le manuel ajoute : faites le point à mi-parcours.'
+archived: false

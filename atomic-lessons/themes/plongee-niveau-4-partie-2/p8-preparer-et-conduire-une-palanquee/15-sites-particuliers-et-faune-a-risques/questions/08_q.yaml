@@ -1,0 +1,23 @@
+id: b72965c4-071d-42ca-8a23-62e23b20b14e
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles limites le manuel fixe-t-il pour une plongée de nuit ?
+choices:
+- id: 7c9c9ee7-51e0-4b80-8a5a-e5a866e9243f
+  text: Profondeur limitée (par exemple 10-15 m) largement dans la courbe sans palier,
+    site connu de jour, sans difficulté d'orientation, près du mouillage, bateau éclairé.
+- id: 974cf480-a39b-4dbb-b8c1-8dd94e336e35
+  text: 'Aucune limite : la nuit ne change rien.'
+- id: cb329908-ee4c-4ba9-bd60-862ffc4e011c
+  text: Uniquement une limite de temps de 10 minutes.
+- id: 8079302d-473b-46ef-b75b-117a9ac628f1
+  text: Profondeur jusqu'à 40 m si l'on a deux lampes.
+correct_choice_ids:
+- 7c9c9ee7-51e0-4b80-8a5a-e5a866e9243f
+explanation: 'De nuit : profondeur limitée (par exemple 10 ou 15 mètres), plongées
+  largement dans la courbe sans palier, site connu pour l''avoir exploré de jour,
+  aucune difficulté d''orientation, peu d''éloignement du mouillage, bateau éclairé
+  en surface.'
+archived: false

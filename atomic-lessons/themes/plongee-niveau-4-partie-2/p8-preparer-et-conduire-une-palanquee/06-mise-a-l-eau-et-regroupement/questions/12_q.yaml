@@ -1,0 +1,20 @@
+id: a63d3eb0-c19a-4361-9aa5-5d74b8d8e2ae
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que le mouillage ou le pendeur offre-t-il aux plongeurs, selon le manuel ?
+choices:
+- id: 0979bc47-c02c-4205-8dbf-b62e4904767f
+  text: Un repère visuel et un point d'appui.
+- id: 07b1824e-5d28-40b2-bca4-9f2aa11b7ee9
+  text: Un abri contre le courant uniquement.
+- id: a1a6f75b-2d25-4320-a6d1-79bbabe52eab
+  text: Un endroit où poser les déchets.
+- id: be985ee6-ca95-4a52-bc57-627b19148b1c
+  text: Une source de chaleur.
+correct_choice_ids:
+- 0979bc47-c02c-4205-8dbf-b62e4904767f
+explanation: Le mouillage ou le pendeur offre un repère visuel et un point d'appui,
+  utiles lorsque l'équilibre dans l'eau doit encore s'améliorer.
+archived: false

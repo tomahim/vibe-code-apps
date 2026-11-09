@@ -1,0 +1,21 @@
+id: 74891806-a326-470c-8c3d-13be92d6bb3a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que recommande le manuel pour la descente qui suit la mise à l'eau ?
+choices:
+- id: 26765006-36a4-47e8-8d72-a8ff4ac3f578
+  text: Préférer, chaque fois que possible, une immersion le long d'un mouillage ou
+    d'un pendeur.
+- id: 073e1a25-3db7-4ca4-8a30-fe153ad9abd0
+  text: Descendre en pleine eau tête la première.
+- id: 5a55bbaf-4bd3-4098-b17d-154ff29975fa
+  text: Descendre le plus vite possible.
+- id: 451accc6-2a92-4263-9331-fb6303943384
+  text: Descendre en fermant les yeux.
+correct_choice_ids:
+- 26765006-36a4-47e8-8d72-a8ff4ac3f578
+explanation: Préférez, chaque fois que possible, une immersion le long d'un mouillage
+  ou d'un pendeur.
+archived: false

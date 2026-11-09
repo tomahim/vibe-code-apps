@@ -1,0 +1,20 @@
+id: 09501f51-efa7-4d60-a517-e6218742c7a8
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Jusqu'à quand la direction de plongée est-elle assurée, selon le manuel ?
+choices:
+- id: 6511602c-0367-4e85-beec-3d3f917a13f4
+  text: Depuis la mise à l'eau des palanquées jusqu'à leur retour.
+- id: f9671104-5f9e-48f3-9597-b414f3fa48a9
+  text: Jusqu'au début de la descente.
+- id: d93f97b2-e391-41f1-9bb6-5e9a51592561
+  text: Uniquement pendant le briefing.
+- id: 455da0bd-1440-4a09-a277-afb3859d9fad
+  text: Jusqu'au premier palier.
+correct_choice_ids:
+- 6511602c-0367-4e85-beec-3d3f917a13f4
+explanation: Une direction de plongée doit être assurée depuis la mise à l'eau des
+  palanquées jusqu'à leur retour.
+archived: false

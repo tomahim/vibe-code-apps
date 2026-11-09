@@ -1,0 +1,23 @@
+id: 15a3a467-5a90-4c10-8ccf-69b88936882a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles questions le manuel donne-t-il en exemple pour la prise de contact
+  ?
+choices:
+- id: 8fca881d-c5c5-4c00-90b9-98755cd907e7
+  text: « Vous avez déjà plongé ici ? », « à quand remonte votre dernière plongée
+    ? »
+- id: a3a8008f-435b-442f-83d8-f5f1c2d40f28
+  text: « Quel est votre salaire ? », « où habitez-vous ? »
+- id: 65bcd04d-1782-4226-b445-152f6803db9e
+  text: « Savez-vous démonter un détendeur ? »
+- id: a8caf274-1ff3-49b8-a749-b57ca448247b
+  text: « Quelle est votre marque de combinaison ? »
+correct_choice_ids:
+- 8fca881d-c5c5-4c00-90b9-98755cd907e7
+explanation: 'Le manuel illustre la prise de contact par des questions simples sur
+  l''expérience : « vous avez déjà plongé ici ? », « à quand remonte votre dernière
+  plongée ? ».'
+archived: false

@@ -1,0 +1,20 @@
+id: c4a962e8-35d4-41b6-a7fe-10202fead7d7
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel risque un plongeur surlesté court-il à la mise à l'eau ?
+choices:
+- id: 08454fe6-cd6f-40ab-a81b-03d07ec52c50
+  text: Couler dès la mise à l'eau.
+- id: fce679dc-97b2-48be-9820-fbf55c021242
+  text: Flotter trop haut.
+- id: 570121b6-9ff0-4f68-ac72-310f4be2092b
+  text: Perdre ses palmes.
+- id: 2289a7f0-f9a7-493b-8ebd-833dc7ee24fd
+  text: Aucun risque particulier.
+correct_choice_ids:
+- 08454fe6-cd6f-40ab-a81b-03d07ec52c50
+explanation: Chez un plongeur surlesté, l'immersion est facilitée, parfois au risque
+  de couler dès la mise à l'eau.
+archived: false

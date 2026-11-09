@@ -1,0 +1,21 @@
+id: ee8501a9-8ef7-4eee-9fd3-d39c6696c613
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Avec quelle pression le manuel demande-t-il de pouvoir sortir d'une grotte
+  ?
+choices:
+- id: 33d75908-d7b8-4fab-9ffb-cf7e7967cefb
+  text: Au moins 80 à 100 bars dans les bouteilles.
+- id: bcd51eff-5aea-41e4-96e8-a9e032c3804c
+  text: Au moins 10 bars.
+- id: 353c386c-27ca-412f-bcfa-e05eaf97dcbb
+  text: Au moins 200 bars.
+- id: e18eeef8-032c-487f-b7c0-3063559a36e7
+  text: Peu importe, s'il reste de l'air.
+correct_choice_ids:
+- 33d75908-d7b8-4fab-9ffb-cf7e7967cefb
+explanation: Les réserves d'air doivent permettre de sortir de la grotte avec au moins
+  80 à 100 bars dans les bouteilles.
+archived: false

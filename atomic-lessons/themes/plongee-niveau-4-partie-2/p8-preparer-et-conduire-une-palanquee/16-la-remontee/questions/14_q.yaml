@@ -1,0 +1,21 @@
+id: 7f9621d8-7503-4306-9e9a-2ca2fd88f0a3
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels engins le manuel cite-t-il comme silencieux et dangereux en surface
+  ?
+choices:
+- id: 05e870c4-cba0-4cc3-ba98-cdb6dbbf2c00
+  text: Le voilier et la planche à voile.
+- id: eeafcb06-dd93-42b0-bc6a-98e52479e9ee
+  text: Le jet-ski moteur coupé uniquement.
+- id: 54d22870-a7c9-4176-ad37-0d35b2da1af8
+  text: Le sous-marin.
+- id: 522271d4-1bc7-425a-a0d3-d02a156ed89d
+  text: L'hydravion.
+correct_choice_ids:
+- 05e870c4-cba0-4cc3-ba98-cdb6dbbf2c00
+explanation: 'Une fois en surface, le tour d''horizon vise notamment les engins silencieux
+  : voilier, planche à voile.'
+archived: false

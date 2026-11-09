@@ -1,0 +1,21 @@
+id: 89813407-059a-4e08-add8-6c06f873a4bb
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que faire si l'on doit se retourner en suivant un cap ?
+choices:
+- id: 6078e741-70a3-4b1a-b58e-3bd5d37e33a4
+  text: S'arrêter d'abord et, si possible, se poser sur le fond, reprendre son cap
+    et continuer.
+- id: 6413112c-2b7c-417e-b349-270f38db71cb
+  text: Tourner en nageant vite.
+- id: 52bb102d-5990-45fb-b215-973a4e4e7956
+  text: Fermer les yeux et tourner.
+- id: b6cd2173-119c-4571-b77e-7f3e794c9426
+  text: Changer de cap.
+correct_choice_ids:
+- 6078e741-70a3-4b1a-b58e-3bd5d37e33a4
+explanation: Si vous devez vous retourner, arrêtez-vous d'abord et si possible posez-vous
+  sur le fond ; reprenez ensuite votre cap et continuez.
+archived: false

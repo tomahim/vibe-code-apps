@@ -1,0 +1,20 @@
+id: 421ff26f-c703-4640-a7c6-6425f039f172
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel fait-il vérifier qu'une bouteille est bien ouverte ?
+choices:
+- id: 0068b9ab-3fcb-42ac-a4d3-47272b816aa6
+  text: Par 2 ou 3 essais d'inspiration/expiration sur le détendeur.
+- id: cd87751f-6485-4e8f-9242-29962d636b16
+  text: En tapotant le robinet.
+- id: 6a2027d8-6dc4-44c4-8455-ccfa8e8c4883
+  text: En regardant la peinture de la bouteille.
+- id: 937175c6-8351-4935-a953-cbd82fba954a
+  text: En soufflant dans le manomètre.
+correct_choice_ids:
+- 0068b9ab-3fcb-42ac-a4d3-47272b816aa6
+explanation: La bouteille bien ouverte se vérifie par 2 ou 3 essais d'inspiration/expiration
+  sur le détendeur.
+archived: false

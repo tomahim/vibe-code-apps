@@ -1,0 +1,20 @@
+id: 53aaa32b-ff5f-4e76-a1c5-fe1c1fce0fae
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi revenir à plus faible profondeur le long d'un tombant ?
+choices:
+- id: b3409bef-14cc-4e4c-9ad2-1d64e5a303e4
+  text: Pour adopter un profil correct.
+- id: d35687ca-7f91-4881-8152-9a83e7d0c8ed
+  text: Pour éviter les poissons.
+- id: 95094f9a-16b4-4f1c-ba01-689e41e8620d
+  text: Pour économiser la lampe.
+- id: 2382b81b-1abc-43fa-837f-d0085988ec3d
+  text: Pour raccourcir la fiche de sécurité.
+correct_choice_ids:
+- b3409bef-14cc-4e4c-9ad2-1d64e5a303e4
+explanation: Le retour s'effectue généralement à plus faible profondeur, pour adopter
+  un profil correct.
+archived: false

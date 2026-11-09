@@ -1,0 +1,23 @@
+id: a850244a-7959-4365-8098-c4112bc2e39b
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle est la règle générale d'itinéraire face au courant, selon le manuel
+  ?
+choices:
+- id: dd45d52b-ecf3-487b-b4d8-6e50bf8d36b6
+  text: Débuter sa plongée à contre-courant, de manière à ce que le courant ramène
+    au bateau en fin de plongée.
+- id: ba1c96ca-4af1-4e18-86e0-2b73a080ce9e
+  text: Débuter dans le sens du courant pour se fatiguer d'abord.
+- id: 7946cd9f-7ae4-4d88-b8eb-bb228b457010
+  text: Nager toujours perpendiculairement au courant.
+- id: d107eaed-5497-4151-813d-878785c7f046
+  text: Ignorer le courant.
+correct_choice_ids:
+- dd45d52b-ecf3-487b-b4d8-6e50bf8d36b6
+explanation: « Préparez votre exploration de manière à ce qu'en fin de plongée le
+  courant vous ramène au bateau. Généralement, cela revient à débuter sa plongée à
+  contre-courant. »
+archived: false
