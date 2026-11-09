@@ -1,0 +1,22 @@
+id: a9b6dadb-0038-4fce-9936-2ea4e282c723
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: De combien de tentatives le candidat dispose-t-il ?
+choices:
+- id: eaba6efd-5c43-4833-ad15-823b24c6caa6
+  text: Une seule tentative pour l'épreuve dans sa totalité, avec une seconde tentative
+    possible uniquement pour la récupération du mannequin, chrono non arrêté
+- id: b7cbfd48-6546-464a-a672-656bfb780e8e
+  text: Trois tentatives
+- id: 0f00bdf5-5c2f-49b1-91af-ae6c24916a54
+  text: Deux tentatives complètes
+- id: ea8a3981-69b1-4d12-8910-c5e6a24c792e
+  text: Autant que nécessaire
+correct_choice_ids:
+- eaba6efd-5c43-4833-ad15-823b24c6caa6
+explanation: Une seule tentative pour la totalité ; en cas d'échec de la récupération
+  du mannequin, une seconde tentative est possible sans arrêter le chronomètre (MFT,
+  mai 2026).
+archived: false

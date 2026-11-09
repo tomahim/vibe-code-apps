@@ -1,0 +1,21 @@
+id: ae61d125-9f2c-4d13-9f76-3732396d4887
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Parmi ces fautes, laquelle est éliminatoire, selon le MFT ?
+choices:
+- id: 84533f8a-e2f3-4c30-90fc-c3ece5906ef3
+  text: Immersion complète de la face du mannequin pendant 5 secondes consécutives
+    au moins durant le remorquage
+- id: fcc55b54-6d74-4781-bf91-b869ef3cd41f
+  text: Un tractage imparfait
+- id: 0d9cb337-b7eb-45ea-b269-5647d57efd40
+  text: Un canard maladroit
+- id: 4f137c77-bfa0-4400-a22d-d6dcba0b0234
+  text: Un temps supérieur à 5 minutes
+correct_choice_ids:
+- 84533f8a-e2f3-4c30-90fc-c3ece5906ef3
+explanation: Toute immersion complète de la face du mannequin d'une durée de 5 secondes
+  consécutives au moins durant le remorquage est éliminatoire (MFT, mai 2026).
+archived: false

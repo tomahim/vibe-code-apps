@@ -1,0 +1,22 @@
+id: 71114d3d-33a1-4141-8f9d-aedc587aa4c9
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la prise classique du mannequin ?
+choices:
+- id: a71956da-d4bd-4d96-bddf-ba8ca06cc0a2
+  text: Bras sous l'aisselle, main sur la poitrine, tête du mannequin sur l'épaule,
+    en se déplaçant sur le dos
+- id: 06a76d88-ecbc-4712-97aa-e26da431471d
+  text: Mannequin porté sur le dos du candidat
+- id: 932da08a-b258-4fbe-bf21-bacf1ccc4ff2
+  text: Mannequin tiré par un pied
+- id: 5a2a294e-672b-48fd-b63f-56222e72c207
+  text: Mannequin poussé devant soi
+correct_choice_ids:
+- a71956da-d4bd-4d96-bddf-ba8ca06cc0a2
+explanation: 'La prise classique : bras placé sous l''aisselle, main sur la poitrine,
+  tête du mannequin sur l''épaule, déplacement sur le dos (manuel p. 380 ; MFT, mai
+  2026).'
+archived: false
