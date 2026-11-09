@@ -1,0 +1,22 @@
+id: 5b4b3b7e-7dd0-4534-bc63-e51e9b27a31b
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que faire si un plongeur n'arrive pas à équilibrer à la descente ?
+choices:
+- id: 13d18950-f385-4b04-b412-566d9ce6047c
+  text: S'approcher, le faire remonter de quelques dizaines de centimètres et l'aider
+    à maintenir son niveau d'immersion.
+- id: 16673963-3621-4b7f-a7fb-0dd6c102fda2
+  text: Lui faire forcer un Valsalva violent jusqu'à ce que ça passe.
+- id: 8f95c141-c4f9-4ac7-8822-ac014746682d
+  text: Lui donner l'ordre de continuer la descente malgré la douleur, en soufflant
+    plus fort.
+- id: 4f731c05-ef58-4283-914c-84691a9f0a83
+  text: Le renvoyer immédiatement seul en surface, le long du mouillage, sans l'accompagner.
+correct_choice_ids:
+- 13d18950-f385-4b04-b412-566d9ce6047c
+explanation: Remonter de quelques dizaines de centimètres suffit souvent à décongestionner
+  ; si les difficultés persistent, on interrompt la plongée.
+archived: false

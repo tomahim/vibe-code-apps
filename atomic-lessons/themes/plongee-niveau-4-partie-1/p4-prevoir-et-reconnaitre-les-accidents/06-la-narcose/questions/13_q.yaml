@@ -1,0 +1,24 @@
+id: d13bd106-7be7-4063-9c0a-e1023e7e7614
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment se termine la remontée après une narcose ?
+choices:
+- id: 48c21a05-3177-44c8-895f-7dafd1ff8e2c
+  text: On interrompt la plongée, on remonte en portant assistance et en respectant
+    la décompression, puis on vérifie son état au bateau.
+- id: b0508a66-01f2-4013-864a-762fa7dc5ec1
+  text: On accélère la remontée au maximum possible pour soustraire le plongeur à
+    la pression.
+- id: 352ddb90-bdd6-4385-86be-2deb7caaee1c
+  text: On supprime tous les paliers prévus pour sortir le plongeur de l'eau au plus
+    vite.
+- id: 9d4feeb5-40a4-4125-a6a5-2e5a858c9b5e
+  text: On fait redescendre le plongeur de quelques mètres afin de le réadapter à
+    la pression.
+correct_choice_ids:
+- 48c21a05-3177-44c8-895f-7dafd1ff8e2c
+explanation: Interruption de la plongée, remontée assistée dans le respect de la procédure
+  de décompression, vérification de l'état de conscience au retour sur le bateau.
+archived: false

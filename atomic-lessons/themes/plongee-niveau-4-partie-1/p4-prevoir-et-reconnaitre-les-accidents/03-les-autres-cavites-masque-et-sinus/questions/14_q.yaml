@@ -1,0 +1,22 @@
+id: 2489bdbc-a574-4b9f-a825-ce167f9f116a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi les sinus deviennent-ils vulnérables en plongée ?
+choices:
+- id: cee02a1a-0879-47b0-b4ce-98e062c20782
+  text: Les minces canaux qui les relient aux fosses nasales peuvent s'obstruer, empêchant
+    l'équilibre des pressions.
+- id: 5c8aab06-260e-4d8c-bc9b-017aa885af94
+  text: Ils sont directement exposés à la pression de l'eau, sans aucune protection
+    osseuse.
+- id: d9fa7ce4-c949-4e32-bf99-77c6c280f763
+  text: Ils se remplissent d'eau dès que le plongeur retire son masque.
+- id: 037e95f1-205b-40f4-957e-61e25951410c
+  text: Leur volume est trop important pour être compensé par la respiration.
+correct_choice_ids:
+- cee02a1a-0879-47b0-b4ce-98e062c20782
+explanation: 'Ce sont des cavités d''air reliées aux fosses nasales par de minces
+  canaux : obstrués, l''équilibre des pressions devient impossible.'
+archived: false

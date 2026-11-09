@@ -1,0 +1,22 @@
+id: 8ce58a9c-df25-49b2-996e-1ce889b9031d
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que peut entraîner la panique chez un débutant, selon le manuel ?
+choices:
+- id: 4ce39db9-20ac-45d8-a4a7-e40722aa9cbf
+  text: La perte de l'encadrant et l'incapacité à rejoindre la surface par manque
+    de technique.
+- id: 7d5325cb-0c3d-4c1d-a41b-4cf1d5ad6a1a
+  text: Une amélioration immédiate de sa technique par l'adrénaline.
+- id: d502cdee-1c9c-4b47-8cc9-5b975e7d5f71
+  text: Une consommation d'air réduite, car il bloque sa respiration.
+- id: 018b6de0-68a4-4356-96f6-4af8272e3ea3
+  text: Une envie de renouveler l'expérience dès le lendemain.
+correct_choice_ids:
+- 4ce39db9-20ac-45d8-a4a7-e40722aa9cbf
+explanation: Chez un débutant, la panique (eau dans le masque, peur...) peut conduire
+  à la perte de l'encadrant et à l'incapacité à rejoindre la surface par manque de
+  technique.
+archived: false

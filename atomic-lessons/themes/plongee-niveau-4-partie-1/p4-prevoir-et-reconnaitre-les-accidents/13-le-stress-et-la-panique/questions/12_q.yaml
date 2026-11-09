@@ -1,0 +1,25 @@
+id: f93bf9de-b78d-4557-9cae-88b286dafd62
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment adapter la palanquée aux conditions, selon le manuel ?
+choices:
+- id: ccfefe67-ec10-47ef-9e5b-eaa44255853e
+  text: Limiter le nombre de débutants dans une palanquée, particulièrement quand
+    les conditions ne sont pas idéales (turbidité, état de la mer).
+- id: 0dcbd4ae-cc15-4bbc-9d5d-ededa14d53f5
+  text: Augmenter le nombre de débutants par palanquée, pour qu'ils se rassurent entre
+    eux.
+- id: d95840c5-2d3b-4d94-b676-c74d414434f2
+  text: Plonger toujours avec exactement la même palanquée, quelles que soient les
+    conditions.
+- id: 26866f65-c422-4373-b4cb-f28b29ff82b5
+  text: Interdire définitivement la plongée à tout plongeur débutant, quelles que
+    soient les conditions.
+correct_choice_ids:
+- ccfefe67-ec10-47ef-9e5b-eaa44255853e
+explanation: Limitez le nombre de débutants dans une palanquée, particulièrement lorsque
+  les conditions ne sont pas idéales (turbidité, état de la mer) ; si la technicité
+  est insuffisante, renoncez à plonger profond.
+archived: false

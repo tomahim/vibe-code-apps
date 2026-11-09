@@ -1,0 +1,23 @@
+id: 7dc851d1-2372-4533-8cd3-2dc4d627f45a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles positions pourraient favoriser la défaillance de la barrière alvéolo-capillaire
+  ?
+choices:
+- id: 9422dc7b-5d7c-4b5c-b423-3ee39df6c7c3
+  text: Plongeur sur le dos, recycleur avec sac respiratoire sur le dos, plongeur
+    allongé regardant le sol.
+- id: 5fc6c279-eeb2-40ec-a036-91abe7b27b07
+  text: Plongeur parfaitement vertical, tête en haut, pendant toute la plongée.
+- id: c85c2640-8cfb-439a-83c6-f3a7f1b7f39b
+  text: Plongeur assis sur le fond, appuyé contre un rocher stable.
+- id: 1ed6dfbb-2bd5-4b3e-9ead-277a0a4def14
+  text: Plongeur en position horizontale, bien stabilisé à mi-eau.
+correct_choice_ids:
+- 9422dc7b-5d7c-4b5c-b423-3ee39df6c7c3
+explanation: Une pression intra-thoracique moyenne inférieure à celle de l'air à la
+  bouche pourrait favoriser la défaillance ; le stress et l'effort augmentent aussi
+  fortement la pression capillaire pulmonaire.
+archived: false

@@ -1,0 +1,22 @@
+id: dad8c66b-6077-48bd-948e-33a28f11ebcb
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quels sinus sont essentiellement concernés par le barotraumatisme en plongée
+  ?
+choices:
+- id: c5808962-7f36-4a0a-9158-f9966afaca51
+  text: Les sinus frontaux et maxillaires, du fait de l'obstruction des minces canaux
+    qui les relient aux fosses nasales.
+- id: 26b29ae3-a667-470c-9742-e1aae8a6f492
+  text: Les sinus sphénoïdaux et ethmoïdaux, situés au fond de la boîte crânienne.
+- id: 73edd09a-5d9c-4afa-b3a8-c21d10d2e44c
+  text: Uniquement les sinus frontaux, les seuls remplis d'air chez l'adulte.
+- id: 2a84dc40-4e0b-478e-9751-6fcf8162f0c2
+  text: Uniquement les sinus maxillaires, les plus volumineux du visage.
+correct_choice_ids:
+- c5808962-7f36-4a0a-9158-f9966afaca51
+explanation: 'Le manuel cite les sinus frontaux et maxillaires : leurs minces canaux
+  vers les fosses nasales peuvent s''obstruer.'
+archived: false

@@ -1,0 +1,20 @@
+id: 3c27c260-935e-458c-a0c2-13438a0d46a8
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi l'OPI a-t-il longtemps été méconnu selon le manuel ?
+choices:
+- id: dc7af503-2c7b-4a42-aa30-411dcacc2ec5
+  text: Il a probablement été confondu avec la surpression pulmonaire par le passé.
+- id: fa7015c6-de59-4b7a-be4c-5c1588de948b
+  text: Il ne touchait autrefois que les apnéistes, jamais les plongeurs en scaphandre.
+- id: 1ef6c3af-dfc3-460a-8736-aa0b30ad2071
+  text: Il était attribué à tort à des allergies aux combinaisons en néoprène.
+- id: 48f9a8fe-84b6-44f2-8d29-552d44ce1b06
+  text: Il ne laissait aucun signe clinique observable avant les années 1980.
+correct_choice_ids:
+- dc7af503-2c7b-4a42-aa30-411dcacc2ec5
+explanation: Pathologie décrite pour la première fois dans les années 1980 ; par le
+  passé, l'OPI a probablement été confondu avec la surpression pulmonaire.
+archived: false

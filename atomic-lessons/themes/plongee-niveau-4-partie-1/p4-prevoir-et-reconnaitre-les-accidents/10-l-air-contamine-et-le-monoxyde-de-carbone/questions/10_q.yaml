@@ -1,0 +1,21 @@
+id: e8cb8718-1d32-44b9-8980-dae1b54ed790
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel est le rôle du filtre séparateur (décanteur) ?
+choices:
+- id: 1c30d578-f276-49f7-9ca2-d2511ff06674
+  text: Condenser les vapeurs d'huile et d'eau pour les séparer de l'air comprimé.
+- id: a73a36d0-749d-452c-a113-e0bf0f827470
+  text: Réchauffer l'air comprimé avant son entrée dans la bouteille.
+- id: 8c3f88b8-3534-4517-bd38-27734186b53a
+  text: Ajouter de l'oxygène pur à l'air avant la fin du gonflage.
+- id: 45f702d1-3175-4d01-982f-8d44ac19b4ac
+  text: Mesurer le débit du compresseur en temps réel.
+correct_choice_ids:
+- 1c30d578-f276-49f7-9ca2-d2511ff06674
+explanation: 'Placé entre les étages et après le dernier, le séparateur condense les
+  vapeurs d''huile et d''eau : l''air accéléré est projeté sur les parois, et les
+  gouttelettes formées s''écoulent par gravité ; elles forment les condensats.'
+archived: false

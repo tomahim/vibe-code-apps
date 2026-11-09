@@ -1,0 +1,24 @@
+id: 6de1f850-7313-46e0-a951-d8385fafb271
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi les compresseurs utilisent-ils des huiles spécifiques ?
+choices:
+- id: 3e934c80-2828-46df-97f2-8f1b859a230d
+  text: Elles garantissent une faible présence dans l'air produit (faible toxicité)
+    tout en lubrifiant à haute température.
+- id: e1690615-79ef-4823-8fb9-5cd0e4b2f53a
+  text: Elles parfument volontairement l'air de la bouteille afin de détecter les
+    fuites.
+- id: 06a35afe-1c29-47e2-9ecf-dad35559acbe
+  text: Elles permettent d'augmenter la pression de service maximale du compresseur.
+- id: 5c65e786-f670-4370-8349-9b7769229c11
+  text: Elles empêchent totalement la formation de monoxyde de carbone dans l'air.
+correct_choice_ids:
+- 3e934c80-2828-46df-97f2-8f1b859a230d
+explanation: Les hautes températures de compression et la nécessité d'un air respirable
+  obligent à utiliser des huiles spécifiques (minérales ou synthétiques), faiblement
+  présentes dans l'air produit et faiblement toxiques ; leur niveau se contrôle avant
+  chaque utilisation.
+archived: false

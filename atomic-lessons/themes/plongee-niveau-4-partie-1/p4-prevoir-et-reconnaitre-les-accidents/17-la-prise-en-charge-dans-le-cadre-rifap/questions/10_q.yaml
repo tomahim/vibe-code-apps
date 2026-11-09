@@ -1,0 +1,23 @@
+id: 1e8c069c-f441-42dc-9284-1dc58af29ef5
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que comprend la surveillance de la victime, selon le manuel ?
+choices:
+- id: aff2bee1-575b-4ec9-bda9-a30fbe85d885
+  text: Lui parler, la rassurer, prendre régulièrement son pouls et noter les évolutions
+    avec l'heure.
+- id: f13b4555-d719-47d1-8bb0-693357d2c7d7
+  text: La laisser dormir tranquillement, le repos étant le meilleur des remèdes.
+- id: 38413387-bf56-494c-bb52-0aec17529575
+  text: Lui poser un questionnaire médical complet sur tous ses antécédents familiaux.
+- id: 7908cb21-60df-4864-b598-d43b3f813f3b
+  text: La filmer en continu pour pouvoir montrer la vidéo aux secours à leur arrivée.
+correct_choice_ids:
+- aff2bee1-575b-4ec9-bda9-a30fbe85d885
+explanation: 'Surveiller : parler à la victime, la rassurer, prendre régulièrement
+  son pouls et noter les évolutions avec l''heure (ex. : « 10 h 42, pouls 80/min fuyant,
+  lèvres violacées, fourmillements du côté droit »). Ces notes sont précieuses pour
+  les secours.'
+archived: false

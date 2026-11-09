@@ -1,0 +1,20 @@
+id: 5a109938-d720-4b61-82c0-f675bd22e6d0
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Où et quand l'OPI survient-il généralement ?
+choices:
+- id: 81077eef-bd87-43b9-8eda-df7bd36b4001
+  text: Dans l'eau, généralement au fond, avec une aggravation à la remontée.
+- id: 7f2b512d-57cc-4475-a3c9-66d0dd3a7db2
+  text: Uniquement en surface, plusieurs heures après la plongée.
+- id: edcf96f7-a563-4017-920e-315634a65432
+  text: Uniquement pendant la descente, dans les cinq premiers mètres.
+- id: d1b7a9a3-c4e4-46ae-951c-f6f2344a7464
+  text: Uniquement pendant le sommeil, la nuit qui suit la plongée.
+correct_choice_ids:
+- 81077eef-bd87-43b9-8eda-df7bd36b4001
+explanation: L'OPI survient dans l'eau, généralement au fond, et s'aggrave à la remontée
+  - d'où l'importance d'alerter tôt.
+archived: false

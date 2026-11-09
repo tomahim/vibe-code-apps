@@ -1,0 +1,25 @@
+id: 139c39b3-e49c-41ca-a1ad-83d5478c76c9
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que contient la rubrique « consignes en cas d'accident grave » du modèle de
+  plan de secours ?
+choices:
+- id: 8f155a57-2b22-4c7d-b8f6-062531dd271e
+  text: 'Les procédures d''urgence : alerter (VHF, téléphone), secourir (oxygène,
+    réhydrater, allonger/réchauffer), et les numéros d''urgence.'
+- id: 6d848365-bcca-40cf-96be-1f671895908b
+  text: Uniquement la liste des pénalités financières prévues en cas de fausse alerte.
+- id: ec6da6ab-694e-4d61-bdc1-6e0ad0793764
+  text: Uniquement le règlement intérieur du club et ses horaires d'ouverture estivale.
+- id: 536f767c-c704-4da3-a7b0-0ced849acde9
+  text: Des recommandations pour annuler la sortie du lendemain et prévenir la presse
+    locale.
+correct_choice_ids:
+- 8f155a57-2b22-4c7d-b8f6-062531dd271e
+explanation: Le modèle regroupe l'alerte (VHF canal 16 PAN-PAN, VHF-ASN canal 70,
+  téléphone 196/15), le secours (oxygène 100 %, réhydratation, allonger et réchauffer
+  ou mettre à l'ombre, ne jamais interrompre une procédure même en cas d'amélioration)
+  et les numéros d'urgence.
+archived: false

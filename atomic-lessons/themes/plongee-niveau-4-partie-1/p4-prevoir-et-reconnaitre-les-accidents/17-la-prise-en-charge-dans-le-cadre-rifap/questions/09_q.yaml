@@ -1,0 +1,24 @@
+id: 4bb937fd-e37f-479e-a1df-24930a23d680
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment installer la victime, selon le manuel ?
+choices:
+- id: 545b9123-6ba3-4d1f-a931-48259a2560ef
+  text: Débarrassée de sa combinaison, assise ou allongée, réchauffée (couverture
+    de survie) et/ou à l'ombre.
+- id: 1705cd08-fcb9-44de-8c3f-10d7025bd719
+  text: La maintenir debout et la faire marcher, pour éviter que le sang ne stagne.
+- id: f3e819e3-3579-4721-a60a-4972b591bde7
+  text: La laisser dans sa combinaison humide et au soleil, quelles que soient les
+    conditions.
+- id: eff24417-590d-4957-ab18-1c2e9769eb09
+  text: L'asseoir jambes pendantes dans l'eau, pour maintenir une pression sur les
+    tissus.
+correct_choice_ids:
+- 545b9123-6ba3-4d1f-a931-48259a2560ef
+explanation: 'Selon les circonstances : débarrasser la victime de sa combinaison,
+  l''asseoir ou l''allonger, la réchauffer (couverture de survie) et/ou la mettre
+  à l''ombre, puis la surveiller.'
+archived: false

@@ -1,0 +1,22 @@
+id: 5cfe5086-35af-4785-b1a1-a76e929758e7
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels signes chez un plongeur peuvent faire suspecter un barotraumatisme des
+  sinus pendant la descente ?
+choices:
+- id: c0df2aab-74e9-432a-833e-1f10f3d52599
+  text: Il se touche le front ou la mâchoire, grimace dans son masque ou ralentit
+    anormalement.
+- id: e2033c90-6c89-4ff5-869a-2970cbd212ee
+  text: Il palme deux fois plus vite que le reste de la palanquée.
+- id: 9894d848-7ffc-4cc3-b7ed-631ef2efc3e5
+  text: Il signale systématiquement un problème d'oreilles avec la main.
+- id: 17c49da9-382c-43d2-8254-94ea0f79eb84
+  text: Il ferme les yeux et cesse de respirer pendant quelques secondes.
+correct_choice_ids:
+- c0df2aab-74e9-432a-833e-1f10f3d52599
+explanation: 'Le guide observe le visage et le comportement : toucher le front ou
+  la mâchoire, grimacer, ralentir anormalement.'
+archived: false

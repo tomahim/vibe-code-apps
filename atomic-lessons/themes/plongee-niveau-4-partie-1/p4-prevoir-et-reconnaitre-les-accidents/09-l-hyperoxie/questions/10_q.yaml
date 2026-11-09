@@ -1,0 +1,25 @@
+id: 2a8a7dbd-120e-4374-a955-487c2d76afe6
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que montrent les études citées par le manuel sur la sensibilité individuelle
+  à l'oxygène ?
+choices:
+- id: 74c7b1eb-5bec-4853-b1c8-498d43c456a9
+  text: Un délai de tolérance variant de 7 minutes à 2 h 30 pour une même personne
+    dans des conditions similaires.
+- id: f11852fc-c10f-4e59-88db-6544048ae516
+  text: Une tolérance parfaitement stable et identique d'un jour sur l'autre chez
+    chaque plongeur.
+- id: 1311fb39-ad1b-4cf6-9851-5ce161a397f3
+  text: Une tolérance toujours plus faible en caisson sec que dans l'eau de mer.
+- id: b2aaf341-c89b-4f14-9b7e-6af4b240c235
+  text: Une tolérance identique pour tous les plongeurs, fixée une fois pour toutes.
+correct_choice_ids:
+- 74c7b1eb-5bec-4853-b1c8-498d43c456a9
+explanation: 'La sensibilité individuelle varie d''un jour sur l''autre pour un même
+  individu : certaines études montrent un délai de tolérance de 7 minutes à 2 h 30
+  dans des conditions de plongée similaires. La sensibilité est plus importante dans
+  l''eau qu''en ambiance sèche.'
+archived: false

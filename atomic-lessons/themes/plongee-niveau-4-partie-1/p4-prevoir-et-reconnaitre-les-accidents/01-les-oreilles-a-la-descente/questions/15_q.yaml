@@ -1,0 +1,22 @@
+id: 4b7fce04-2d33-4183-9087-81b50008366f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont les trois risques pour les oreilles à la descente cités par le
+  manuel ?
+choices:
+- id: bdd21b93-a18b-47aa-8b53-51c36f9750f4
+  text: Otite barotraumatique de l'oreille moyenne, perforation du tympan, coup de
+    piston.
+- id: 068edb64-74b4-49d2-8053-c5223bc95991
+  text: Otite infectieuse, syncope, œdème pulmonaire.
+- id: 257c478c-a2fe-480f-a617-667f44604ab3
+  text: Vertige alterno-barique, essoufflement, narcose.
+- id: 9fd17a17-0ca9-4eda-a976-d8511ccc6dbb
+  text: Placage de masque, sinusite, barotraumatisme dentaire.
+correct_choice_ids:
+- bdd21b93-a18b-47aa-8b53-51c36f9750f4
+explanation: 'Le résumé du manuel pour la descente : otite barotraumatique de l''oreille
+  moyenne, perforation du tympan, coup de piston (oreille interne).'
+archived: false

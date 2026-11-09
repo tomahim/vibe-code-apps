@@ -1,0 +1,23 @@
+id: 878e7c0c-7adc-47f6-9493-8d4e74a0be5f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qu'une contre-indication relative (CIR) après un ADD ?
+choices:
+- id: 1c8a52c3-d55a-4ffc-81c1-3c08fe67094f
+  text: Une reprise possible avec de légères séquelles si la cause est évitable (profondeur
+    réduite, paliers à l'O2).
+- id: 2384095f-ff3c-4a2e-ba3d-537121d0b0c5
+  text: Un arrêt définitif et total de toute pratique de la plongée sous-marine.
+- id: eeb4e85d-d050-4c01-921b-0d4c25afb26d
+  text: Une simple pause d'un week-end, sans aucun avis médical préalable.
+- id: 735b8dbc-5aab-46a8-9f67-b8c63fc443f9
+  text: Une autorisation de plonger donnée par le seul directeur de plongée du club.
+correct_choice_ids:
+- 1c8a52c3-d55a-4ffc-81c1-3c08fe67094f
+explanation: 'Selon les causes et conséquences de l''accident : CIA (séquelles lourdes),
+  CIR (légères séquelles, cause évitable - réduire la profondeur, paliers à l''oxygène
+  par exemple), ou CIT (quelques semaines à plusieurs mois, dans l''attente d''une
+  guérison complète).'
+archived: false

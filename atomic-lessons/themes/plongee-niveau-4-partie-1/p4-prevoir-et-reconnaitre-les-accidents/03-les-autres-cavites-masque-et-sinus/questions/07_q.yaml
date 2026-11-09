@@ -1,0 +1,20 @@
+id: 9aca025f-7df5-46ab-9ea5-e38c72f91ca7
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que conseille le manuel après une sinusite barotraumatique ?
+choices:
+- id: 0ae9b917-ede0-4cd2-93dc-42e82b00c9cc
+  text: Consulter un médecin ORL, pour éviter toute infection ou maux de tête consécutifs.
+- id: d9612224-b429-4448-a3d2-1ebbef8f4ea6
+  text: Reprendre la plongée dès le lendemain en soufflant plus fort par le nez.
+- id: c33cfb08-5fdd-42a5-b74f-a6474413cc81
+  text: Prendre un décongestif local avant chacune des plongées suivantes.
+- id: 0efb1d56-07cc-42bb-9481-5fef7880a1e7
+  text: Appliquer de l'huile d'amande douce dans les narines pendant une semaine.
+correct_choice_ids:
+- 0ae9b917-ede0-4cd2-93dc-42e82b00c9cc
+explanation: La consultation d'un médecin ORL est conseillée pour éviter infection
+  ou maux de tête consécutifs à une sinusite barotraumatique.
+archived: false

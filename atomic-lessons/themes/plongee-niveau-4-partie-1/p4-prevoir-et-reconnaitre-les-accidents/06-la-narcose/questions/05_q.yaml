@@ -1,0 +1,21 @@
+id: 537458e9-09fb-4abf-837a-f251bcd7262a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que fixe le code du sport pour l'azote, selon l'édition 2020 du manuel ?
+choices:
+- id: b58bf4a6-031b-44cc-aee4-e6d148a1fce9
+  text: Un seuil de tolérance de 5,6 bars de PpN2, soit 60 mètres de profondeur pour
+    les plongées à l'air.
+- id: 3cb075ef-49e8-4ac8-8443-e86d1c830067
+  text: Un seuil de tolérance de 1,6 bar de PpN2, soit 20 mètres de profondeur.
+- id: d8c524c0-f110-4992-9663-4ca5c02f8efa
+  text: Une interdiction totale de plonger au-delà de 40 mètres avec de l'air.
+- id: e73f9f79-55f4-4791-b09f-fcc59b241d5f
+  text: Un seuil de tolérance variable, adapté chaque jour à chaque plongeur.
+correct_choice_ids:
+- b58bf4a6-031b-44cc-aee4-e6d148a1fce9
+explanation: 'L''édition 2020 cite le code du sport : seuil de tolérance de l''azote
+  à 5,6 bars de PpN2, soit 60 mètres pour les plongées à l''air.'
+archived: false

@@ -1,0 +1,23 @@
+id: d0e25a57-c5e8-4b5a-aeba-dfdc11e7a0ea
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce que la « samba » ?
+choices:
+- id: f606b098-99c1-4fb4-bb5b-2994c8212369
+  text: Une perte de contrôle moteur sans perte de connaissance, en surface dans les
+    20-30 s après l'apnée, avec gesticulations désordonnées.
+- id: 09f2febc-503e-492d-85e8-7f11636de31d
+  text: Une perte de connaissance brutale survenant au fond, accompagnée d'un lâcher
+    de bulles.
+- id: 59223b1c-d5ec-4f72-b4a7-30661a175334
+  text: Une danse de détente collective pratiquée par les apnéistes avant chaque séance.
+- id: 91d3fc55-7d8e-4e65-bf5b-0333a7346828
+  text: Une crampe généralisée des deux jambes, provoquée par le froid de l'eau.
+correct_choice_ids:
+- f606b098-99c1-4fb4-bb5b-2994c8212369
+explanation: 'La samba - hypoxie sévère selon certains auteurs - survient en surface,
+  sans signes avant-coureurs, lors de la reprise ventilatoire : gesticulations incontrôlées
+  et mouvement saccadé de la tête.'
+archived: false

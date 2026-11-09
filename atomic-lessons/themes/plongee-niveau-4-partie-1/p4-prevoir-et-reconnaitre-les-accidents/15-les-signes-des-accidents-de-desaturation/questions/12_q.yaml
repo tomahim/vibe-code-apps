@@ -1,0 +1,25 @@
+id: 451fb082-02f8-4bc1-888d-0c04020ff615
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la caractéristique des douleurs des bends, selon le manuel ?
+choices:
+- id: 185140fa-58ab-4d75-8261-7eda14f8a0a2
+  text: Elles ne sont pas calmées par les antalgiques et disparaissent lors de la
+    recompression en caisson sous oxygène.
+- id: aedea0da-8f9a-423a-9cbb-1a9a5939cb6d
+  text: Elles cèdent immédiatement avec un antalgique ordinaire, ce qui permet de
+    les ignorer.
+- id: f49a9bee-2bdf-40aa-bc63-cfa5cba9de66
+  text: Elles ne surviennent que pendant la plongée, jamais après la sortie de l'eau.
+- id: e132d5c9-2a9d-4c9c-97b5-fe394ddf8317
+  text: Elles se limitent toujours aux doigts de la main gauche et disparaissent au
+    repos.
+correct_choice_ids:
+- 185140fa-58ab-4d75-8261-7eda14f8a0a2
+explanation: 'Douleurs aiguës et localisées (sensation « d''arrachement » ou de «
+  broiement »), non calmées par les antalgiques ; la douleur disparaît à la recompression
+  sous oxygène, avec guérison totale. Sans traitement : risque de récidives et de
+  lésions irréversibles.'
+archived: false

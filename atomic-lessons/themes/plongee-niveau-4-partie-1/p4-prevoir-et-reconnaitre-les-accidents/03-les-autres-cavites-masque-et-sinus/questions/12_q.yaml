@@ -1,0 +1,24 @@
+id: 2ee76b78-482f-43ea-b9a6-55b34f8918a5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que fait le guide si un plongeur présente une gêne de sinus pendant la descente
+  ?
+choices:
+- id: 5b231a84-9f72-487c-972f-ac4cd075419a
+  text: Il le fait remonter de quelques dizaines de centimètres, comme pour une difficulté
+    d'équilibrage, et interrompt si la gêne persiste.
+- id: 5464e8c4-52da-4fff-8124-03d7e88be032
+  text: Il lui fait forcer doucement la descente, le temps de passer le cap de la
+    douleur.
+- id: 083776a1-e21b-4583-8aab-ddd78575316c
+  text: Il lui fait retirer le masque sous l'eau et pincer le nez en soufflant doucement.
+- id: 9d34019c-93d1-4036-9eee-2993c2ce877e
+  text: Il le fait immédiatement remonter en surface, aussi vite que possible et sans
+    étape.
+correct_choice_ids:
+- 5b231a84-9f72-487c-972f-ac4cd075419a
+explanation: 'Même conduite que pour les oreilles : remonter de quelques dizaines
+  de centimètres, puis interrompre la plongée si la gêne persiste.'
+archived: false

@@ -1,0 +1,27 @@
+id: cb6bde73-399b-4279-b2db-cf324a8cd7b3
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que se passe-t-il pendant la « phase de constitution » décrite par Michaud
+  ?
+choices:
+- id: ec4d1575-f769-4dfa-aa77-28bc2bd80956
+  text: Les bulles sont encore sphériques, la circulation est seulement ralentie,
+    aucun accident n'est déclaré et le processus est jugé réversible.
+- id: 45fafb08-8286-4465-a755-de188e27e670
+  text: Les bulles se fixent et bloquent définitivement la circulation, avec des symptômes
+    irréversibles.
+- id: a155923f-70dc-453c-a500-7eb854b761b8
+  text: La victime présente immédiatement des troubles généraux graves, qui s'amplifient
+    d'eux-mêmes.
+- id: b769eeb6-4912-44b4-a0ff-7312798d2272
+  text: Les séquelles sont déjà installées, et seule une chirurgie peut encore les
+    limiter.
+correct_choice_ids:
+- ec4d1575-f769-4dfa-aa77-28bc2bd80956
+explanation: 'Quatre phases selon Michaud : constitution (réversible, sans symptôme
+  - c''est le délai, estimé à environ 3 minutes, mis à profit par les tables et ordinateurs),
+  organisation (symptômes nets, urgence des secours), troubles généraux dans les cas
+  graves, puis séquelles éventuelles si les secours ont été défaillants.'
+archived: false

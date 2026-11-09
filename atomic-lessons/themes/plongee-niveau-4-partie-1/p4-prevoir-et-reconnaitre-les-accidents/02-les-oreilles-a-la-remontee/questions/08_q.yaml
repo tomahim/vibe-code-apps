@@ -1,0 +1,24 @@
+id: 19174f75-4159-47f7-9833-38e41c8e08dc
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment prévenir l'otite infectieuse selon le manuel ?
+choices:
+- id: f1dc9bcc-aeef-419e-9660-09e13176977d
+  text: Rincer les oreilles à l'eau douce tiède après chaque plongée, bien sécher
+    sans coton-tige, éventuellement huile d'amande douce avant.
+- id: e6917828-0612-4e3d-9a97-2da62da70c79
+  text: Nettoyer soigneusement le conduit au coton-tige après chaque plongée, pour
+    évacuer toute l'eau de mer.
+- id: a82342b2-8b40-497b-b4cf-b6c3a05a3a23
+  text: Plonger systématiquement avec des bouchons d'oreille étanches dans toutes
+    les eaux chaudes.
+- id: af9175eb-44ef-415b-ade6-ae4319a85a27
+  text: Mettre des gouttes anesthésiantes dans le conduit auditif avant chaque plongée
+    en mer chaude.
+correct_choice_ids:
+- f1dc9bcc-aeef-419e-9660-09e13176977d
+explanation: 'Eaux chaudes = flore microbienne : rinçage à l''eau douce tiède, séchage
+  soigneux sans coton-tige, huile d''amande douce en protection éventuelle.'
+archived: false

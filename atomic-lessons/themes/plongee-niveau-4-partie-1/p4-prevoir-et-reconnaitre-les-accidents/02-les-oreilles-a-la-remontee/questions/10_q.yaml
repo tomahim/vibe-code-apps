@@ -1,0 +1,22 @@
+id: 5fcae6b9-82f3-47eb-b686-e5825d4bfd7a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment un plongeur victime d'un trouble de l'équilibre se comporte-t-il dans
+  l'eau ?
+choices:
+- id: 4bddbd9e-7276-43d6-a60c-8eef9c7f054c
+  text: 'De façon incohérente : position dans l''eau, façon de palmer et direction
+    du palmage deviennent anormales.'
+- id: 55c7ee11-b72f-494f-9ca2-f4c14aefc330
+  text: Il reste parfaitement immobile et silencieux, sans aucun signe visible.
+- id: 6e56f1c0-c345-42ba-9ffa-6a11ff9ea47f
+  text: Il fait systématiquement le signe « ça va » à répétition au guide.
+- id: 18a1ae98-8c54-4668-8343-ebaed1ca2149
+  text: Il retire immédiatement son masque pour signaler le problème.
+correct_choice_ids:
+- 4bddbd9e-7276-43d6-a60c-8eef9c7f054c
+explanation: Le comportement incohérent - position, palmage, direction - est le signe
+  que le guide doit repérer pour intervenir sans délai.
+archived: false

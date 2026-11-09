@@ -1,0 +1,23 @@
+id: 82a91ef7-0590-4806-8b37-5d3d9aca8838
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles sont les préventions contre la noyade de l'apnéiste, selon le manuel
+  ?
+choices:
+- id: 932fa8e9-d7bb-4789-9d16-d54514091c8c
+  text: Pas d'hyperventilation, ne pas dépasser brutalement ses limites, ne jamais
+    plonger seul, récupération, pas de surlestage.
+- id: c022ed72-d5ef-4016-9a64-6b16f7a2f377
+  text: Hyperventiler longuement avant chaque apnée, afin de stocker un maximum d'oxygène.
+- id: df5ae21b-7045-4cef-84ce-b76e5ca72a68
+  text: Plonger systématiquement seul, pour éviter d'être distrait par un binôme.
+- id: 33ebfefc-ab40-4d13-8c00-bb1a3bcb4f24
+  text: Se surlester volontairement, afin de rester bien stable au fond pendant l'apnée.
+correct_choice_ids:
+- 932fa8e9-d7bb-4789-9d16-d54514091c8c
+explanation: 'Pour l''apnéiste (syncope, samba) : pas d''hyperventilation, ne pas
+  aller brutalement au-delà de ses limites, ne jamais plonger seul (surveillance en
+  binôme), se ménager des périodes de récupération, pas de surlestage.'
+archived: false

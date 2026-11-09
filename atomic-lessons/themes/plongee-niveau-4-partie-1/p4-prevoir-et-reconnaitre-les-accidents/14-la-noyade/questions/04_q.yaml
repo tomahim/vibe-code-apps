@@ -1,0 +1,26 @@
+id: 4f08b72f-a830-4b39-a1c3-182963f918eb
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment se déroule une noyade secondaire, selon le manuel ?
+choices:
+- id: 35cdd329-d32d-4631-916f-50380c52928a
+  text: Une syncope survient d'abord ; au réflexe respiratoire, si le sujet est encore
+    dans l'eau, il se noie.
+- id: b62f0713-77c9-455f-ae95-25b3b4a55dcb
+  text: La victime inhale d'abord une très grande quantité d'eau, puis perd connaissance
+    au fond.
+- id: 81572520-4eb1-4429-b128-91299f678d56
+  text: La victime est immédiatement en arrêt cardiaque complet, sans aucune phase
+    de syncope préalable.
+- id: e50e0184-648e-45a3-b152-3e48669ef1df
+  text: La victime se noie uniquement dans le cas où elle panique pendant sa remontée
+    vers la surface.
+correct_choice_ids:
+- 35cdd329-d32d-4631-916f-50380c52928a
+explanation: 'La noyade secondaire est précédée d''une syncope ; l''organisme continue
+  à produire du CO2 jusqu''au seuil où le réflexe respiratoire réapparaît (plusieurs
+  dizaines de secondes). D''où l''importance de maintenir les voies aériennes hors
+  de l''eau : des victimes en simple syncope se sont noyées lors du tractage en surface.'
+archived: false

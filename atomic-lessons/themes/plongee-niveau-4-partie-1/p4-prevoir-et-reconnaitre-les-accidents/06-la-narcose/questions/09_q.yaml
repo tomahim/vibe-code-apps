@@ -1,0 +1,20 @@
+id: de838802-b2ac-40b1-9123-d7f5b0658e9f
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi la narcose favorise-t-elle la panne d'air ?
+choices:
+- id: b51e8d90-e205-46d0-9ab7-e57c1f04b34a
+  text: Un sujet même légèrement narcosé peut oublier de vérifier ses réserves d'air.
+- id: aa357302-233e-45bd-b4e6-bb27e44f5ed7
+  text: L'azote accélère mécaniquement le débit du détendeur à grande profondeur.
+- id: 10ee82fc-14ae-4b46-920a-6dc020f474fe
+  text: Le plongeur narcosé ferme toujours le robinet de sa propre bouteille.
+- id: 6bcd536e-2262-43d4-8097-5633cceead68
+  text: La narcose supprime la sensation d'essoufflement avant la panne.
+correct_choice_ids:
+- b51e8d90-e205-46d0-9ab7-e57c1f04b34a
+explanation: 'Troubles de l''attention et de la mémoire immédiate : le plongeur narcosé
+  peut oublier ses réserves - d''où la vigilance de l''encadrant.'
+archived: false

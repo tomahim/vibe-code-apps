@@ -1,0 +1,24 @@
+id: 18f6c8a3-d57d-4c7b-ab31-81a0d78328ff
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: De quoi dépend la quantité de CO2 rejetée par nos cellules ?
+choices:
+- id: 6a23a3fe-af9f-492a-9b4a-51b6d92323d1
+  text: 'De l''activité musculaire, et non de la profondeur : à effort égal, même
+    production en surface, à 10 m ou à 40 m.'
+- id: fa9b150a-3669-4523-853e-06bb39abc391
+  text: 'De la profondeur uniquement : plus on descend, plus les cellules produisent
+    de CO2.'
+- id: cd4fb55c-acea-4943-b137-c2a98e362864
+  text: De la température de l'eau, qui stimule directement la production cellulaire
+    de CO2.
+- id: b4840aa2-3057-4fd2-bbc7-65a279ca87c0
+  text: De la durée de la plongée, le CO2 s'accumulant mécaniquement au fil des minutes.
+correct_choice_ids:
+- 6a23a3fe-af9f-492a-9b4a-51b6d92323d1
+explanation: À effort égal, la production de CO2 est identique quelle que soit la
+  profondeur ; la PpCO2 alvéolaire ne varie pas avec la profondeur pour un effort
+  donné.
+archived: false

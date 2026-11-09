@@ -1,0 +1,22 @@
+id: f3fdf869-dcc2-4b8b-9b19-fdce0abe7c00
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle est la conduite à tenir en cas d'intoxication au CO, selon le manuel
+  ?
+choices:
+- id: 773cf952-9699-414e-b9fb-a848cb162ba6
+  text: Administrer de l'oxygène pur et alerter immédiatement les secours en vue d'un
+    traitement hyperbare.
+- id: 788550ef-567c-469e-941f-7c21c27d1cb0
+  text: Faire respirer de l'air frais et attendre que les signes passent d'eux-mêmes.
+- id: b0774378-4439-4fe4-a98c-a6696d421004
+  text: Donner de l'eau sucrée et garder la victime au chaud vingt-quatre heures.
+- id: 6e0b1121-ab61-4bf7-b96e-c7a6d563a601
+  text: Refaire une plongée lente à faible profondeur pour éliminer le gaz.
+correct_choice_ids:
+- 773cf952-9699-414e-b9fb-a848cb162ba6
+explanation: 'Le traitement d''urgence : oxygène pur et alerte immédiate des secours,
+  en vue d''un traitement hyperbare (oxygénothérapie hyperbare en caisson).'
+archived: false

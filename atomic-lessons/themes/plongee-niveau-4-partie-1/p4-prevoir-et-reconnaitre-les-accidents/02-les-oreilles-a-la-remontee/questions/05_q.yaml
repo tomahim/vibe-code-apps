@@ -1,0 +1,20 @@
+id: 4855fde8-4ab8-4490-bda4-25e32e246b72
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la conduite à tenir en cas de vertige alterno-barique ?
+choices:
+- id: 2c81c52d-b4bb-4827-bdb6-3d5a318b4862
+  text: Déglutir, sans jamais faire de Valsalva.
+- id: 7e1a1015-0367-4918-8b36-06a0cce6921b
+  text: Faire un Valsalva énergique pour débloquer la trompe.
+- id: ba903db1-9ba9-4582-9dc3-033768c34186
+  text: Accélérer la remontée pour sortir vite de l'eau.
+- id: a3c41fb4-b446-4017-b3ca-c604f77c0dd0
+  text: Redescendre immédiatement de plusieurs mètres.
+correct_choice_ids:
+- 2c81c52d-b4bb-4827-bdb6-3d5a318b4862
+explanation: La conduite à tenir consiste à déglutir, sans jamais faire de Valsalva
+  - qui aggraverait la situation.
+archived: false

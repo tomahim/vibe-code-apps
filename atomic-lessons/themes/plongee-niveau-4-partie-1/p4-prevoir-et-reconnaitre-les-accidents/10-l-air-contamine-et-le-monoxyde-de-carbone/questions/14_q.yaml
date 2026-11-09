@@ -1,0 +1,23 @@
+id: 32593a91-7a26-4526-a996-c6b4824290a6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quand faut-il faire analyser l'air délivré par le compresseur, selon le manuel
+  ?
+choices:
+- id: 6f8f26d0-0597-4d69-ae45-c3b777291d96
+  text: Périodiquement, en particulier après chaque intervention lourde d'entretien
+    ou de réparation.
+- id: bb99f8c6-b4c8-490f-8ed0-afb858494aaa
+  text: Uniquement lors de la première mise en service du compresseur.
+- id: 2e530c7b-12cb-4c65-ba12-770fe6ea7284
+  text: 'Jamais : l''analyse de l''air n''est pas utile en plongée loisir.'
+- id: 11d4ff2e-5c91-4a7d-8ae5-95ff2160862d
+  text: Seulement après une intoxication avérée d'un plongeur.
+correct_choice_ids:
+- 6f8f26d0-0597-4d69-ae45-c3b777291d96
+explanation: Il est conseillé de faire analyser périodiquement l'air délivré, notamment
+  après chaque intervention lourde d'entretien ou de réparation ; des organismes spécialisés
+  font ces analyses.
+archived: false

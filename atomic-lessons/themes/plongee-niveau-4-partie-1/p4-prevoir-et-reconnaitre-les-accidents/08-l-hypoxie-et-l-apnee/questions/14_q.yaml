@@ -1,0 +1,22 @@
+id: 4b8541a2-ff76-48ad-a495-aabdb10d18e6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles règles de prévention de l'apnée le manuel donne-t-il ?
+choices:
+- id: 49ccb6c2-62fd-4695-a8af-f6fb648d53c6
+  text: Jamais seul, sécurité vérifiée, ne jamais dépasser ce qui est annoncé, travailler
+    aux sensations, se méfier de l'hyperventilation.
+- id: 4c031d11-ee8e-47b4-953f-7afab94b714f
+  text: Toujours plonger seul, afin d'éviter de distraire les autres apnéistes présents.
+- id: f81e2a1f-6273-4df9-ba73-f9570bb8bdde
+  text: Toujours dépasser légèrement l'objectif annoncé, afin de progresser plus vite.
+- id: 713750df-7dd5-435d-9327-a0bba624d94d
+  text: Toujours s'entraîner à la montre et au profondimètre, pour tout mesurer précisément.
+correct_choice_ids:
+- 49ccb6c2-62fd-4695-a8af-f6fb648d53c6
+explanation: Binôme a minima, trinôme près des maxima ; « je dis ce que je fais, je
+  fais ce que je dis » ; plaisir et temps plutôt que limites ; sensations plutôt que
+  montre ; méfiance envers amplitude, fréquence et temps de ventilation.
+archived: false

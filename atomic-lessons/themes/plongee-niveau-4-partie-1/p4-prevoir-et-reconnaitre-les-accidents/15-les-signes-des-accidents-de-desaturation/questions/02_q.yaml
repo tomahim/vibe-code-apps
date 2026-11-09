@@ -1,0 +1,25 @@
+id: 5bcf9044-bc82-4d3c-b971-b3124d08cb89
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que sont les « bulles silencieuses » ?
+choices:
+- id: 9c7b3e21-733c-4387-88f4-261b4e6ca8de
+  text: Des bulles de très petite taille et en faible quantité, tolérées par l'organisme
+    et évacuées par le filtre pulmonaire à l'expiration.
+- id: 9866b312-ce6d-40e3-bf8f-42463b99e8f6
+  text: Des bulles entièrement composées d'oxygène, qui ne peuvent jamais devenir
+    dangereuses.
+- id: 2814f15a-237c-4c48-98fa-0617d4394be7
+  text: Des bulles qui se forment uniquement chez les apnéistes, jamais en scaphandre.
+- id: fbe2748f-98c1-4daf-a571-0f4981347c7d
+  text: Des bulles toujours détectables par le plongeur, qui ressent un sifflement
+    caractéristique.
+correct_choice_ids:
+- 9c7b3e21-733c-4387-88f4-261b4e6ca8de
+explanation: 'Phénomène déjà décrit par Haldane en 1908 : présentes dans la circulation
+  veineuse à chaque remontée, ces bulles sont tolérées si elles restent très petites
+  et peu nombreuses, et sont éliminées par le filtre pulmonaire. Elles deviennent
+  dangereuses si elles grossissent ou passent dans la grande circulation.'
+archived: false

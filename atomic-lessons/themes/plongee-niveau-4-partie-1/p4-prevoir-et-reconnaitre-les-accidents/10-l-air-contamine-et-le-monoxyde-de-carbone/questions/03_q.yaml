@@ -1,0 +1,22 @@
+id: 7adeeee4-784a-4fdc-b597-4872d3130819
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel ordre de grandeur le manuel donne-t-il pour la toxicité du CO ?
+choices:
+- id: d6087c2a-f994-4431-a9a8-a9ba62b46012
+  text: 0,1 % de CO suffit à réduire de moitié la capacité de transport de l'oxygène
+    par le sang.
+- id: 4ced9e3c-7c47-4b18-8159-b77a98e13952
+  text: Il faut 10 % de CO dans l'air pour ressentir les premiers effets.
+- id: 028575f7-2e05-425e-90a2-661e6e562d4e
+  text: Le CO n'est dangereux qu'à partir de 50 % du mélange respiré.
+- id: c737c62f-2426-4b19-9f29-117147f204d5
+  text: Une trace de CO est toujours sans conséquence pour l'organisme.
+correct_choice_ids:
+- d6087c2a-f994-4431-a9a8-a9ba62b46012
+explanation: 'La présence de 0,1 % de CO suffit à réduire de moitié la capacité de
+  transport de l''oxygène par le sang : une contamination même modeste a des conséquences
+  majeures.'
+archived: false

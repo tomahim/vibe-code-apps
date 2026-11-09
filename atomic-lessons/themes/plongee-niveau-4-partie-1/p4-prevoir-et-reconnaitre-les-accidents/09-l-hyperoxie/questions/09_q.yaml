@@ -1,0 +1,23 @@
+id: ba9ec8fd-7141-4c8a-8daf-4c4a4d4ce37f
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: De quoi dépend le délai de latence avant une crise d'hyperoxie ?
+choices:
+- id: 18548e2c-c9ae-4f47-9ce2-fc28228fa71a
+  text: De la PpO2 (donc de la profondeur selon le gaz respiré), de la sensibilité
+    individuelle et de facteurs favorisants.
+- id: e2d4c6e1-68f4-49de-97aa-b0da05a4313e
+  text: Uniquement de la température de l'eau au moment de la plongée.
+- id: 7c22008d-da26-452c-a1cb-2166b189ca45
+  text: 'Uniquement de l''expérience du plongeur : les confirmés n''y sont pas exposés.'
+- id: f5b4b3d6-1c3e-40cf-b6bd-e447556ad0b1
+  text: Du volume de la bouteille utilisée pendant la plongée concernée.
+correct_choice_ids:
+- 18548e2c-c9ae-4f47-9ce2-fc28228fa71a
+explanation: 'Le délai de latence dépend de la pression partielle d''oxygène et donc
+  de la profondeur d''évolution selon le gaz respiré, de la sensibilité individuelle
+  - variable d''un jour sur l''autre - et de facteurs favorisants : effort, fatigue,
+  anxiété, chaleur ou froid.'
+archived: false

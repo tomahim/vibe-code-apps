@@ -1,0 +1,24 @@
+id: 1c110b10-dcaa-4540-afb6-c85b11054f21
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles vigilances pendant la remontée qui met fin à la plongée ?
+choices:
+- id: 4b80b0fc-c619-486d-be27-b96e66dcc166
+  text: La consommation d'air (vérifier les manomètres) et la vitesse de remontée,
+    particulièrement dans la zone des 10 m, pour éviter la surpression pulmonaire.
+- id: 6f46f192-850e-4bc5-b3db-bbcbc70fa376
+  text: Uniquement l'heure de fin de la plongée, afin de respecter précisément l'horaire
+    annoncé au bateau.
+- id: b741c93a-c238-4823-a496-2c368344e515
+  text: Uniquement la direction du courant, afin de pouvoir rejoindre le mouillage
+    sans effort.
+- id: 1d2c4c65-a555-43cd-882a-a353fe449fdb
+  text: Uniquement la température de l'eau, afin d'éviter tout risque de choc thermique.
+correct_choice_ids:
+- 4b80b0fc-c619-486d-be27-b96e66dcc166
+explanation: 'Fin de plongée sous surveillance : manomètres contrôlés et remontée
+  maîtrisée dans la zone des 10 m - l''essoufflement expose aussi à la surpression
+  pulmonaire.'
+archived: false

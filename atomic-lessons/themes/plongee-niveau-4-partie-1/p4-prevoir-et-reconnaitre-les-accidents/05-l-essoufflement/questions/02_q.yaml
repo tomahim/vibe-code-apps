@@ -1,0 +1,23 @@
+id: 21c6fcd3-0ad2-4e00-a8be-134e413b1ea6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles conséquences dramatiques l'essoufflement peut-il avoir en plongée
+  ?
+choices:
+- id: 35adbac8-d242-46c1-8378-7d19798d8610
+  text: Noyade, surpression pulmonaire, accident de désaturation - chez le débutant
+    comme chez le chevronné.
+- id: ce060d4c-16f0-4a2b-84cb-da6ec3f17a79
+  text: Uniquement une légère fatigue, qui disparaît après quelques minutes de repos
+    au fond.
+- id: 60c4c1a7-1767-4c53-b874-7e534dc22e63
+  text: Uniquement des maux de tête passagers, sans aucune conséquence sur la plongée.
+- id: f5eb9617-0523-4b80-bcfc-a723d66ade05
+  text: Une consommation excessive de la bouteille, mais sans aucun autre risque réel.
+correct_choice_ids:
+- 35adbac8-d242-46c1-8378-7d19798d8610
+explanation: Anodin en surface, l'essoufflement peut mener en plongée à la noyade,
+  à la surpression pulmonaire ou à un accident de désaturation.
+archived: false

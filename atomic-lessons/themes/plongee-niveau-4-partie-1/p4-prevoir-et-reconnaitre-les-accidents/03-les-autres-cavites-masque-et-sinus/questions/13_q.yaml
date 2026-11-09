@@ -1,0 +1,21 @@
+id: ad5dc70e-522e-4071-9054-5ec734b67996
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles cavités aériennes le manuel cite-il, outre les oreilles, comme concernées
+  par les variations de pression ?
+choices:
+- id: 1fdba0a5-5b78-4f6f-961c-e7d22f1de3ea
+  text: Le masque et les sinus.
+- id: 52730087-c230-438e-82cc-dbd860c6ebd0
+  text: Les poumons et l'estomac.
+- id: a03408f7-4770-4103-9092-01ba6ecac938
+  text: Les intestins et la vessie.
+- id: bfcbaa3a-adfe-4306-bc7a-017c1612c167
+  text: Les articulations et les dents.
+correct_choice_ids:
+- 1fdba0a5-5b78-4f6f-961c-e7d22f1de3ea
+explanation: Outre les oreilles, le manuel traite le masque (placage) et les sinus
+  (barotraumatisme) comme cavités soumises au mécanisme pression-volume.
+archived: false

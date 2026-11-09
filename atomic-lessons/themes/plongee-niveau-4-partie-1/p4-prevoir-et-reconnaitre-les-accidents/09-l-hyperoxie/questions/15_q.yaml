@@ -1,0 +1,23 @@
+id: 0a8ead07-a7ce-4fe9-abbf-5b7945da7845
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle est la première réaction face à un plongeur en crise d'hyperoxie, selon
+  le manuel ?
+choices:
+- id: 83c1383c-7389-4096-a860-ed1a95b07459
+  text: Saisir la personne et lui maintenir l'embout en bouche pour éviter tout risque
+    de noyade.
+- id: 0904738c-86b1-431d-b283-8cc678d8b94b
+  text: Remonter immédiatement et aussi vite que possible vers la surface.
+- id: aa6a8e9c-86ac-4704-bea0-112fd8d2d441
+  text: Lui retirer son embout pour faciliter ses convulsions.
+- id: 351ba446-53ed-45a5-a777-349cdbee9b2f
+  text: La laisser seule au fond le temps d'aller chercher de l'aide en surface.
+correct_choice_ids:
+- 83c1383c-7389-4096-a860-ed1a95b07459
+explanation: La première des réactions consiste à saisir la personne pour lui maintenir
+  l'embout en bouche (le sien ou celui d'un détendeur de secours si la qualité du
+  mélange respiratoire est respectée) afin d'éviter tout risque de noyade.
+archived: false

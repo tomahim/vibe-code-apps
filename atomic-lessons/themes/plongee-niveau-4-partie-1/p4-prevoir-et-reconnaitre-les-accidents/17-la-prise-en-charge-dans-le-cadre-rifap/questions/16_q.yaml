@@ -1,0 +1,25 @@
+id: a511994b-0287-40a6-920d-7b02f3aae782
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle conduite globale résume la prise en charge décrite par le manuel ?
+choices:
+- id: 49a05167-df2b-42d4-90c5-10005c1d1a70
+  text: Alerter, O2 à 100 %, hydrater sauf contre-indications, installer et surveiller,
+    sans jamais interrompre.
+- id: 9a044fef-2238-463c-bb85-4cf23d859ffa
+  text: Attendre les secours sans rien faire, afin de ne pas aggraver l'état de la
+    victime.
+- id: a170e829-c71f-4c6c-b816-db88dc28c036
+  text: Faire remonter la victime en plongée pour une réimmersion thérapeutique immédiate.
+- id: 13026e35-fe7f-4966-af3a-35055409016c
+  text: Administrer d'abord des antalgiques, puis évaluer la situation quelques heures
+    plus tard.
+correct_choice_ids:
+- 49a05167-df2b-42d4-90c5-10005c1d1a70
+explanation: 'La chaîne complète : alerter (CROSS/SAMU), oxygène à 100 % (15 l/min),
+  correction de la déshydratation sauf contre-indications, installation (allongée,
+  réchauffée ou à l''ombre), surveillance avec notes horodatées, et jamais d''interruption,
+  même en cas d''amélioration.'
+archived: false

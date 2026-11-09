@@ -1,0 +1,20 @@
+id: 579ab6c6-7d6a-4e17-b626-796d303135ad
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels signes dans l'eau doivent immédiatement alerter ?
+choices:
+- id: 0bcee737-7809-47a3-a02f-8366c0323a2d
+  text: De la toux en immersion et une sensation d'étouffement.
+- id: fc1fb957-c141-4b43-a46c-e2a930361548
+  text: Une légère démangeaison de la peau sous la combinaison.
+- id: 46782c00-2444-4339-9e3b-acd7655bbfb5
+  text: Un bourdonnement d'oreilles à chaque mouvement de tête.
+- id: 76eecf9d-5963-468e-93b8-5d5c002210c5
+  text: Une sensation de froid soudain dans le dos du plongeur.
+correct_choice_ids:
+- 0bcee737-7809-47a3-a02f-8366c0323a2d
+explanation: 'L''OPI survient dans l''eau, généralement au fond avec aggravation à
+  la remontée : toux en immersion et sensation d''étouffement = alerte immédiate.'
+archived: false

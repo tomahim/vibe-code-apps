@@ -1,0 +1,26 @@
+id: ccba9795-fb44-4c1a-bfc2-00e382f60867
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelles sont les causes principales d'un essoufflement citées par le manuel
+  ?
+choices:
+- id: 4687a129-899c-42e3-9c3c-0d7829318c55
+  text: Effort inadapté ou trop important, facteurs émotifs, manque de maîtrise technique,
+    détendeur mal réglé, froid.
+- id: 15282303-d473-4e4e-8846-1d12d1705a03
+  text: Uniquement la mauvaise condition physique du plongeur qui est concerné par
+    l'incident.
+- id: 898f8d97-7e27-4608-bd8d-f2232acce92b
+  text: Uniquement la présence d'un courant fort, maintenu pendant toute la durée
+    de la plongée.
+- id: 9dd0bdb6-e5e5-490f-8432-00d71af3b112
+  text: Uniquement des bouteilles qui ont été gonflées avec un air mal filtré ou mal
+    purifié.
+correct_choice_ids:
+- 4687a129-899c-42e3-9c3c-0d7829318c55
+explanation: 'Le manuel liste : effort inadapté ou trop important (courant), facteurs
+  émotifs avec hyperventilation (profondeur, eaux troubles ou sombres), manque de
+  maîtrise technique, détendeur dur ou bouteille mal ouverte, froid.'
+archived: false

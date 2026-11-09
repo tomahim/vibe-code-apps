@@ -1,0 +1,25 @@
+id: 17100297-4810-4738-b2ce-61c5319c75fc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle est la première réaction de l'organisme face au froid ?
+choices:
+- id: b97a36b2-21f8-4e16-98cc-bb1c7b1a7ca5
+  text: Une vasoconstriction périphérique, qui diminue la circulation du sang aux
+    extrémités pour concentrer la chaleur sur les organes vitaux.
+- id: 12adb114-5b5f-416d-8ab5-cfd27859bf19
+  text: Une sudation abondante et immédiate, destinée à évacuer l'excès d'humidité
+    du corps.
+- id: ca9d97fa-6f1f-424b-8565-248825c81f9f
+  text: Une augmentation immédiate de la fréquence cardiaque, destinée à réchauffer
+    le sang.
+- id: 0379e76a-097e-4f40-92cc-5f35ef07ad86
+  text: Une dilatation des vaisseaux des mains et des pieds, pour les irriguer davantage
+    en sang chaud.
+correct_choice_ids:
+- b97a36b2-21f8-4e16-98cc-bb1c7b1a7ca5
+explanation: La vasoconstriction périphérique réduit les pertes caloriques ; elle
+  crée une sensation de doigts gourds diminuant l'habileté manuelle (signes, inflateur)
+  et provoque une envie d'uriner par afflux sanguin vers le cœur.
+archived: false

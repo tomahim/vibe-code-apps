@@ -1,0 +1,20 @@
+id: ef3a3b0a-4a0f-48ae-a5f1-584abf921814
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quand les symptômes d'un ADD de l'oreille peuvent-ils survenir ?
+choices:
+- id: 1037c08c-a808-4bd3-bd5f-deac5725664a
+  text: Dans l'eau ou dans les heures qui suivent une plongée.
+- id: 0805a522-9cff-4409-9858-57230d1dd7db
+  text: Uniquement pendant la descente, jamais après.
+- id: f376c517-257d-45a4-988f-b57035ae9052
+  text: Uniquement la semaine qui suit la plongée.
+- id: 2ddca713-9522-4266-9168-1edff01b6a1b
+  text: Uniquement si le plongeur fait un Valsalva en surface.
+correct_choice_ids:
+- 1037c08c-a808-4bd3-bd5f-deac5725664a
+explanation: Les symptômes - vertiges, nausées, troubles de l'équilibre - peuvent
+  survenir dans l'eau ou dans les heures qui suivent une plongée.
+archived: false

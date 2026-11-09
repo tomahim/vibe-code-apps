@@ -1,0 +1,24 @@
+id: 5561ccfc-a2ed-43df-9550-bf83ba09ba14
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que prévoient les consignes de chargement FFESSM pendant le gonflage (édition
+  2020) ?
+choices:
+- id: ec4f374b-5dac-431a-a3a0-9a4f4715c316
+  text: Purger fréquemment les décanteurs et filtres, surveiller le manomètre et ne
+    jamais dépasser la pression de chargement.
+- id: 171b68ae-a325-45de-8408-c7420f87f0da
+  text: Laisser la rampe sans surveillance pour gagner du temps.
+- id: 1af66620-f191-4ec7-a68f-ea1d3af7e6c3
+  text: Dépasser légèrement la pression de chargement pour compenser le refroidissement.
+- id: 154b3c58-ddcd-442e-a13c-08a8b3476cbd
+  text: Remplir d'abord les bouteilles les plus vides, quelle que soit leur pression
+    de service.
+correct_choice_ids:
+- ec4f374b-5dac-431a-a3a0-9a4f4715c316
+explanation: 'Pendant le chargement : purger fréquemment les décanteurs et filtres,
+  surveiller le manomètre de la rampe, et ne jamais dépasser la pression de chargement
+  de la bouteille ; le préposé refuse les bouteilles non conformes.'
+archived: false

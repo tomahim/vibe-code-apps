@@ -1,0 +1,26 @@
+id: a9933488-3f22-418c-bf0c-d81637d7fd8c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment le guide assiste-t-il la remontée d'un plongeur victime d'un trouble
+  de l'équilibre ?
+choices:
+- id: 8e4b9607-a51f-4a96-a47a-21912931f547
+  text: Il intervient sans délai, maintient si besoin l'embout en bouche, assure la
+    remontée avec les gilets, palanquée groupée et procédure de désaturation respectée.
+- id: 6d3e71a0-f6f5-4a88-935b-230480fb6386
+  text: Il laisse le plongeur remonter seul à son propre rythme, afin de ne pas affoler
+    le reste de la palanquée en plongée.
+- id: 41f188a3-68a8-42ba-81f2-205cb3bb9df2
+  text: Il fait redescendre le plongeur de quelques mètres et attend calmement que
+    le vertige disparaisse de lui-même.
+- id: 8cb9cc9e-100b-47f0-821c-870e5da4ff6b
+  text: Il accélère la remontée autant que possible, afin de gagner du temps vers
+    le bateau et prévenir les secours.
+correct_choice_ids:
+- 8e4b9607-a51f-4a96-a47a-21912931f547
+explanation: Intervention immédiate, embout maintenu si nécessaire, remontée aux gilets,
+  palanquée groupée, procédure de désaturation respectée, puis secourisme et alerte
+  si doute.
+archived: false

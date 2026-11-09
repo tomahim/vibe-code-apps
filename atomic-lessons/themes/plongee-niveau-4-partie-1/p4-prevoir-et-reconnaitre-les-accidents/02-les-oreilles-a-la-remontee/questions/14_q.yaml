@@ -1,0 +1,23 @@
+id: a694bf61-b47a-4c44-81ca-550b615003f9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel des plongeurs confrontés à un traumatisme important de l'oreille
+  ?
+choices:
+- id: 84ed68e8-c009-460e-9f61-cfe421ef5618
+  text: Beaucoup hésitent à en parler ; le guide doit les inciter à le faire et à
+    consulter un médecin le plus tôt possible.
+- id: 9535bc90-303a-43c3-a898-b2ee95a0119b
+  text: Ils consultent toujours spontanément un médecin ORL dans la journée qui suit.
+- id: 4d424291-6c8a-4117-9543-c3673732f792
+  text: Ils doivent attendre la fin de la saison de plongée avant de pouvoir consulter.
+- id: d9b8946e-aa77-4966-b0fc-6da438f5c36e
+  text: Ils peuvent se soigner seuls avec des gouttes auriculaires, sans aucun avis
+    médical.
+correct_choice_ids:
+- 84ed68e8-c009-460e-9f61-cfe421ef5618
+explanation: Forte douleur, saignements, bourdonnements = médecin ORL le plus tôt
+  possible ; le guide incite les plongeurs à ne pas cacher le traumatisme.
+archived: false

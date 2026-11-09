@@ -1,0 +1,22 @@
+id: 1e2c278e-720b-42b8-9a9d-5e8b8ecace82
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle oxygénation le manuel préconise-t-il pour un OPI ?
+choices:
+- id: e6cc0d02-d365-420e-9a42-d0423dc0c150
+  text: Oxygène à 15 l/min, au masque à haute concentration, victime à l'abri du froid
+    et des chocs, rassurée.
+- id: 72238e46-86e2-48a4-aa21-6bf418fb72ea
+  text: Oxygène à 2 l/min en lunettes nasales, victime assise au soleil.
+- id: da6f9d8c-28f2-4445-ab1f-9e76b7b55238
+  text: Ventilation artificielle bouche à bouche pendant au moins une heure.
+- id: f9a7712b-53c2-4bd2-9c37-0959c7130325
+  text: 'Aucune oxygénation : l''OPI se résorbe toujours seul au repos.'
+correct_choice_ids:
+- e6cc0d02-d365-420e-9a42-d0423dc0c150
+explanation: Oxygène 15 l/min au masque à haute concentration, abri du froid et des
+  chocs, rassurance ; puis procédure d'alerte (CROSS ou SAMU selon le cas, numéros
+  de l'édition 2020).
+archived: false

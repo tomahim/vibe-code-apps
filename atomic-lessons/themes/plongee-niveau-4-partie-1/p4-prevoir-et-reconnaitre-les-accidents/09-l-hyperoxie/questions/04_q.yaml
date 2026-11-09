@@ -1,0 +1,25 @@
+id: c1dc4d6f-844a-4484-916c-8024184efe1e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi les plongées à l'air jusqu'à 60 m ne présentent-elles pas de risque
+  d'hyperoxie, selon le manuel ?
+choices:
+- id: 4280d7fb-cdc5-48c9-a4d7-e26860d7efc0
+  text: Parce qu'elles sont plafonnées à 60 m du fait de la narcose ; le risque d'hyperoxie
+    n'apparaîtrait qu'au-delà, vers 66 m.
+- id: 49a24a30-01a5-494a-ac2a-4d3cacfd2300
+  text: Parce que l'air ne contient pas assez d'oxygène pour provoquer la moindre
+    crise d'hyperoxie.
+- id: 01f4e3af-3830-41d2-91be-f385825d3f0a
+  text: Parce que l'organisme élimine l'excès d'oxygène naturellement à ces profondeurs.
+- id: 8d6f3673-7b4b-47e3-bfa5-ac1420bb94c0
+  text: Parce que la durée de ces plongées est toujours trop courte pour une exposition
+    dangereuse.
+correct_choice_ids:
+- 4280d7fb-cdc5-48c9-a4d7-e26860d7efc0
+explanation: 'Les risques d''hyperoxie sont absents des plongées à l''air, plafonnées
+  à 60 m du fait de la narcose ; à l''air, ils n''apparaîtraient qu''au-delà, vers
+  66 m. Restent à risque : le nitrox et les paliers de désaturation à l''O2 pur.'
+archived: false

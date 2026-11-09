@@ -1,0 +1,22 @@
+id: a6ce21b7-5130-4048-a7ca-a23a99922e5f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: À partir de quelle PpO2 l'hyperoxie devient-elle dangereuse en plongée, selon
+  l'édition 2020 du manuel ?
+choices:
+- id: fb987ff2-3bd0-40fc-9017-0e07ebc062f9
+  text: À partir de 1,6 bar de pression partielle d'oxygène.
+- id: e33df04e-43cd-4390-8407-e0b8bf8cde10
+  text: À partir de 0,21 bar de pression partielle d'oxygène.
+- id: 613db8c6-ed7b-46b1-ac29-be472a326158
+  text: À partir de 0,16 bar de pression partielle d'oxygène.
+- id: e96a47ae-6f52-404d-8b71-7887667482c6
+  text: À partir de 5 bars de pression partielle d'oxygène.
+correct_choice_ids:
+- fb987ff2-3bd0-40fc-9017-0e07ebc062f9
+explanation: La zone d'hyperoxie devient dangereuse en plongée à partir de 1,6 bar
+  de PpO2 ; cette limite est fixée par le Code du sport pour la plongée de loisir
+  aux mélanges.
+archived: false

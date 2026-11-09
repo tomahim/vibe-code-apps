@@ -1,0 +1,23 @@
+id: 416f3235-1291-4ca0-b232-6c1ed4a1fc12
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la prévention des barotraumatismes de l'oreille selon le manuel
+  ?
+choices:
+- id: 202ca941-526f-4e96-9dbe-30a30027410e
+  text: Équilibrer régulièrement par une manœuvre douce et anticipée, sans jamais
+    forcer ni plonger enrhumé.
+- id: 2dca6aa3-6121-47a1-a48d-23dcd48eda4d
+  text: Équilibrer le plus fort possible dès la surface, puis ne plus y toucher.
+- id: 992946b9-c686-4402-965c-7a768db7967d
+  text: Attendre la première douleur pour équilibrer, afin de ménager la trompe.
+- id: b577a5d4-fc42-45fc-93db-56a2d7874c24
+  text: Utiliser un décongestionnant nasal juste avant chaque plongée de la journée.
+correct_choice_ids:
+- 202ca941-526f-4e96-9dbe-30a30027410e
+explanation: Manœuvre douce et anticipée, régulière pendant la descente ; jamais de
+  force ; jamais de plongée enrhumée - les décongestionnants n'ont qu'un effet limité
+  dans le temps.
+archived: false

@@ -1,0 +1,24 @@
+id: 65ecf3b2-c443-42cf-97e5-39f17d6140b4
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que dit le manuel du remplacement des cartouches filtrantes ?
+choices:
+- id: b111cd80-9ef7-4f7d-a746-9a85792ba53b
+  text: Elles doivent être changées régulièrement, selon les modèles toutes les 20,
+    30 ou 40 heures de fonctionnement, voire plus.
+- id: 558ab777-7a5a-42ba-9d6e-8ccd9526eba6
+  text: Elles sont définitives et ne demandent aucun remplacement au cours de la vie
+    du compresseur.
+- id: 216ec06b-5226-4cbf-90ed-f2960acc1764
+  text: Elles se remplacent uniquement lorsque l'air de la bouteille sent mauvais
+    au goût.
+- id: fde99465-6a0f-4160-af94-8af8fbb47252
+  text: Elles doivent être changées systématiquement avant chaque gonflage de bouteille.
+correct_choice_ids:
+- b111cd80-9ef7-4f7d-a746-9a85792ba53b
+explanation: 'Les cartouches filtrantes se changent régulièrement : selon les modèles,
+  toutes les 20, 30 ou 40 heures de fonctionnement, voire plus ; certains modèles
+  ont des indicateurs de saturation.'
+archived: false

@@ -1,0 +1,25 @@
+id: 6df5a124-0582-4577-855f-6bfedaab05df
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels facteurs favorisent l'apparition de la narcose ?
+choices:
+- id: 1d4b0504-29b8-483f-bc18-a5c8b7196289
+  text: Sensibilité individuelle variable, descente rapide, fatigue, pleine eau ou
+    eau trouble, froid, effort musculaire, certains médicaments.
+- id: cffd633c-a36c-4e11-b000-2cb4276b4e73
+  text: 'Uniquement la profondeur : à niveau égal, tous les plongeurs sont narcosés
+    exactement de la même façon.'
+- id: 63cce277-d8a7-40f9-854a-7bc7094db7bc
+  text: Uniquement la consommation d'alcool ou de substances excitantes la veille
+    de la plongée.
+- id: 44ea07de-d9b7-4ece-abef-660eb813df3c
+  text: Uniquement le port d'une combinaison trop épaisse pour la température de l'eau.
+correct_choice_ids:
+- 1d4b0504-29b8-483f-bc18-a5c8b7196289
+explanation: 'Liste non exhaustive du manuel : susceptibilité individuelle (variable
+  d''un jour à l''autre), vitesse de descente, fatigue et stress, conditions (pleine
+  eau, retournement brusque au-delà de 30 m, froid, eau trouble, manque de lumière),
+  effort (CO2), médicaments.'
+archived: false

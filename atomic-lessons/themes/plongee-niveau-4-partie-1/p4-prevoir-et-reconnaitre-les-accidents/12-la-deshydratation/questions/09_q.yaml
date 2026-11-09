@@ -1,0 +1,23 @@
+id: ac443716-08c4-4660-9e0e-848dbe104b52
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi l'hypovolémie de sortie augmente-t-elle le risque d'accident de désaturation
+  ?
+choices:
+- id: a6025275-911a-46d9-9c91-3b8b8e90a6e5
+  text: Elle peut limiter la perfusion sanguine de certains tissus et gêner ainsi
+    l'élimination de l'azote.
+- id: ae46a7ef-5b09-4213-ac50-4c35b99714ce
+  text: Elle provoque la formation de bulles d'oxygène dans les artères.
+- id: e02c69d4-05fa-405f-a49f-130729165bb9
+  text: Elle accélère la vitesse de remontée réelle du plongeur.
+- id: f9077b35-97a3-4725-af73-c3ce05877e82
+  text: Elle empêche l'inspiration d'air en surface par compression des poumons.
+correct_choice_ids:
+- a6025275-911a-46d9-9c91-3b8b8e90a6e5
+explanation: L'hypovolémie (volume sanguin insuffisant) peut limiter la perfusion
+  sanguine dans certains tissus, gêner l'élimination de l'azote et augmenter les risques
+  d'accidents de désaturation.
+archived: false

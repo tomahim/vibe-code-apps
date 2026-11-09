@@ -1,0 +1,21 @@
+id: e4738a82-e8fd-42e2-b91b-98cab377dc46
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que conseille le manuel lors des remontées sans embout (RSE) ?
+choices:
+- id: 7292c607-7282-4647-ba50-6e111054ec96
+  text: Dégager les voies aériennes en regardant vers la surface, pour éviter tout
+    blocage involontaire de l'expiration.
+- id: 913f55e7-9778-45d2-921b-3926b8471dbe
+  text: Fermer la glotte pendant toute la remontée pour garder l'air en réserve.
+- id: 5a5fe19f-185a-46dc-8cd0-f59122d771b6
+  text: Expirer uniquement dans les trois derniers mètres avant la surface.
+- id: 55d96faf-cdac-47ba-b3dc-da3ef7f92a36
+  text: Remonter le plus vite possible pour réduire le temps sans air.
+correct_choice_ids:
+- 7292c607-7282-4647-ba50-6e111054ec96
+explanation: En RSE, regarder vers la surface dégage les voies aériennes et évite
+  le blocage involontaire de l'expiration.
+archived: false

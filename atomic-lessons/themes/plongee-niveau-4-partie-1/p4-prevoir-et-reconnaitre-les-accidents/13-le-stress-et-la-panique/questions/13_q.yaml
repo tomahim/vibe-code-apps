@@ -1,0 +1,22 @@
+id: 9a4aca3d-65e3-421c-93c7-591fbd009475
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la limite du rôle d'un guide de palanquée, selon le manuel ?
+choices:
+- id: 864c3569-e241-4172-bc83-566a97cd48f8
+  text: Il ne peut pas faire d'acte d'enseignement ni vérifier la maîtrise de gestes
+    techniques.
+- id: b77e2de4-112d-499b-965e-0a00dbfb541e
+  text: Il peut enseigner tous les gestes techniques à n'importe quel plongeur.
+- id: 0094585f-b451-46d8-8ea7-03ead41c417f
+  text: Il peut délivrer des certifications à l'issue de la plongée encadrée.
+- id: a4c7dbdb-c104-45c5-9acc-6cf7b69a6bcb
+  text: Il peut imposer n'importe quel exercice technique pendant la plongée.
+correct_choice_ids:
+- 864c3569-e241-4172-bc83-566a97cd48f8
+explanation: En tant que guide de palanquée, vous ne pouvez pas faire d'acte d'enseignement
+  et ne pouvez vérifier la maîtrise de gestes techniques ; adapter la plongée aux
+  aptitudes des pratiquants relève en revanche de votre rôle.
+archived: false

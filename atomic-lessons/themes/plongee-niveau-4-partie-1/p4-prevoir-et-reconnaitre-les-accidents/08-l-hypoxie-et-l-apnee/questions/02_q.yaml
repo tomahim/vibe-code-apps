@@ -1,0 +1,22 @@
+id: f381ffea-ea93-418e-9a2a-e20f47658cda
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi la syncope hypoxique est-elle si redoutable ?
+choices:
+- id: febcb529-839f-4cf3-92f8-5b75011f643a
+  text: C'est une perte de connaissance brutale, sans signes avant-coureurs, qui peut
+    conduire à la mort.
+- id: 6ea53948-9610-4eec-b411-8eafc4065fab
+  text: Elle provoque toujours de fortes douleurs qui terrifient la victime.
+- id: 08287684-6a38-4951-956e-3a3d935fb166
+  text: Elle s'accompagne systématiquement de convulsions violentes et visibles.
+- id: 6f5d7830-3193-4c0a-a4d2-c65109d7a317
+  text: Elle survient uniquement chez les plongeurs débutants et inexpérimentés.
+correct_choice_ids:
+- febcb529-839f-4cf3-92f8-5b75011f643a
+explanation: 'Au-delà d''une limite variable selon les individus, le corps fonctionne
+  a minima pour réserver l''oxygène au cerveau et au cœur : perte de connaissance
+  brutale, sans signes avant-coureurs.'
+archived: false

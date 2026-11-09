@@ -1,0 +1,22 @@
+id: fad18b25-c1b1-4532-9010-d14ea17678c5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi le monoxyde de carbone est-il si dangereux pour le plongeur ?
+choices:
+- id: 28c96655-fde0-42bc-bb90-57ffe719704c
+  text: Il se combine de manière stable avec l'hémoglobine, aux mêmes sites que l'oxygène,
+    empêchant le transport normal de l'oxygène.
+- id: 5dc5b4e9-b43b-4f0f-b068-964e512cba8b
+  text: Il attaque directement les parois des poumons et détruit les alvéoles.
+- id: 77693863-4e1a-4924-8359-01b0973f14b5
+  text: Il transforme l'azote du sang en bulles qui provoquent des accidents de désaturation.
+- id: 97cc4af9-7115-467a-b685-2d8faf3afbfa
+  text: Il rend l'air de la bouteille instantanément impropre à toute ventilation.
+correct_choice_ids:
+- 28c96655-fde0-42bc-bb90-57ffe719704c
+explanation: 'Le CO se combine de manière stable - indissociable à la pression atmosphérique
+  - avec l''hémoglobine sur les mêmes sites que l''O2 : le transport de l''oxygène
+  est bloqué, ce qui conduit à l''hypoxie, voire rapidement à l''asphyxie.'
+archived: false

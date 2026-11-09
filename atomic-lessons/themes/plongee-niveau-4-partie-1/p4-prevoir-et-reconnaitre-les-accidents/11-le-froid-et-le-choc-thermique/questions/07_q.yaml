@@ -1,0 +1,25 @@
+id: 08c8971a-a08d-4d8d-80b1-bd6f0d5f7f9e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel est le rôle de la ventilation dans le refroidissement, selon le manuel
+  ?
+choices:
+- id: 675c7420-cbfd-4e43-b2a2-1b2eedc30fa0
+  text: L'air inspiré est réchauffé, laissant échapper de la chaleur à chaque expiration
+    - d'autant plus que l'eau, et donc l'air inspiré, est froide.
+- id: 4ba16557-7a81-4cc2-9712-e0b983ed8add
+  text: 'La ventilation ne joue aucun rôle : seul le contact direct de la peau avec
+    l''eau refroidit.'
+- id: 407043a6-9e63-49b8-9142-03808f4a50b1
+  text: La ventilation ne refroidit que les apnéistes, et jamais les plongeurs avec
+    un détendeur.
+- id: 81fbd577-a1ea-447c-9132-ecb9c742b994
+  text: L'air expiré est froid, ce qui refroidit l'eau immédiatement autour du plongeur.
+correct_choice_ids:
+- 675c7420-cbfd-4e43-b2a2-1b2eedc30fa0
+explanation: 'Le refroidissement par la ventilation : l''air est réchauffé dans les
+  poumons et une quantité de chaleur s''échappe à chaque expiration, d''autant plus
+  que la température de l''eau - et de l''air inspiré - est basse.'
+archived: false

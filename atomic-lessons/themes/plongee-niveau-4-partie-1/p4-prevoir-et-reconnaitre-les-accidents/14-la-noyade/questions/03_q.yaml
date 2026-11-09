@@ -1,0 +1,23 @@
+id: 79b5c48b-5940-479a-9307-60a0b5aa9e6a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qu'est-ce qu'une noyade primaire, selon le manuel ?
+choices:
+- id: c12e7e8f-7fb8-4ab2-9f78-f39c63e31f05
+  text: Une inondation des voies aériennes sans perte de connaissance préalable (inhalation
+    d'eau en surface, narcose, panique, panne d'air...).
+- id: 862b47b1-7fc2-4d4a-87bc-31f60811b5dc
+  text: Une noyade qui survient uniquement chez les jeunes enfants débutants, jamais
+    chez l'adulte.
+- id: 4c2a02d3-075d-460e-8d10-6768d8ff7667
+  text: Une noyade qui survient toujours après une longue syncope survenue en apnée.
+- id: 3526bc28-f295-408b-af10-4481b2067d3f
+  text: Une noyade bénigne, qui ne nécessite jamais la moindre évacuation médicale.
+correct_choice_ids:
+- c12e7e8f-7fb8-4ab2-9f78-f39c63e31f05
+explanation: 'La noyade primaire est une inondation des voies aériennes sans perte
+  de connaissance préalable : inhalation d''eau en surface, ou conséquence d''une
+  narcose, d''une panique, d''une panne d''air, etc.'
+archived: false

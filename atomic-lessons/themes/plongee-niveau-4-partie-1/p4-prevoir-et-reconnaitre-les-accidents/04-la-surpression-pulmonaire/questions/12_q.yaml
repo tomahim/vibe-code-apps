@@ -1,0 +1,25 @@
+id: 1f738cad-33ab-4fbe-b117-ca8be7ce1a7f
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qu'est-ce qui peut provoquer un blocage expiratoire à la remontée ?
+choices:
+- id: 1d4dc82e-b33f-4391-ad2b-31c66deda3a3
+  text: Une panique, une erreur de manipulation du gilet, une inhalation d'eau (spasme
+    glottique), l'asthme ou un Valsalva à la remontée.
+- id: ea0e3bda-89ce-4b0e-b201-89e9c3217196
+  text: Une consommation d'air volontairement trop lente, maintenue pendant toute
+    la durée de la plongée.
+- id: dc7dde1e-69b0-4358-837d-7e8092292d95
+  text: Un lestage beaucoup trop important du plongeur, qui vient comprimer durablement
+    la cage thoracique.
+- id: b8effcc6-0495-430c-92f8-17c57a6783e3
+  text: Une température de l'eau supérieure à vingt-six degrés pendant toute la remontée
+    vers la surface.
+correct_choice_ids:
+- 1d4dc82e-b33f-4391-ad2b-31c66deda3a3
+explanation: 'Blocage : panique (peur, eau trouble, eau dans le masque), erreur de
+  gilet, spasme glottique après inhalation d''eau, raisons physiologiques (asthme),
+  Valsalva à la remontée.'
+archived: false

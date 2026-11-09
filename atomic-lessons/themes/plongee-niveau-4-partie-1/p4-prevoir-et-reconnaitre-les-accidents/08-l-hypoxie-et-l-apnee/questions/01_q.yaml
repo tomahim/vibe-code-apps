@@ -1,0 +1,20 @@
+id: fd416fb4-7cd4-4963-870b-6aff3845a24f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment le corps réagit-il d'abord quand l'oxygène disponible s'amenuise ?
+choices:
+- id: 56c628d4-7512-44fb-80e1-54aa2887f119
+  text: Il accélère la ventilation pour augmenter l'apport en oxygène.
+- id: 36f16050-e084-4e7e-9bbf-2aaa389f0e29
+  text: Il ralentit immédiatement le rythme cardiaque pour économiser l'oxygène.
+- id: 5076bffd-c129-49e9-8baa-0b727ce018b9
+  text: Il déclenche des tremblements pour produire de la chaleur.
+- id: 2af39a87-bf5d-4c9c-a638-061dd0206840
+  text: Il dilate les vaisseaux des membres pour irriguer les muscles.
+correct_choice_ids:
+- 56c628d4-7512-44fb-80e1-54aa2887f119
+explanation: La première régulation est ventilatoire ; si elle est inefficace (gaz
+  appauvri) ou impossible (apnée), les ressources en oxygène baissent progressivement.
+archived: false

@@ -1,0 +1,25 @@
+id: 3f853526-b643-4cb9-9353-7b9a4fc37a87
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle est la première action de la conduite à tenir face à une noyade, selon
+  le manuel ?
+choices:
+- id: 69b829e8-a155-401d-8bb9-5ad39c2981ec
+  text: 'Protéger : maintenir dès que possible les voies aériennes de la victime hors
+    de l''eau, en évitant tout suraccident pour les autres membres.'
+- id: 745de726-a453-46a3-a458-10d2bfcc23bc
+  text: 'Secourir d''abord : commencer immédiatement le massage cardiaque externe,
+    encore dans l''eau.'
+- id: d4de1ad4-8b96-4db0-8f3b-47e338513957
+  text: 'Alerter d''abord : quitter immédiatement les lieux pour téléphoner, avant
+    toute autre action.'
+- id: 76aa5551-77d7-4227-ba62-cc3dfe5447bf
+  text: Retirer d'abord entièrement la combinaison de la victime, alors qu'elle est
+    encore dans l'eau.
+correct_choice_ids:
+- 69b829e8-a155-401d-8bb9-5ad39c2981ec
+explanation: 'Protéger : dès que possible, maintenez les voies aériennes de la victime
+  hors de l''eau ; évitez aussi tout suraccident pour les autres membres de la palanquée.'
+archived: false

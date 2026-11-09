@@ -1,0 +1,24 @@
+id: bf15f3d7-c7e4-4508-949b-2065c0514952
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que dit le manuel de la limite de 1,6 bar de PpO2 (édition 2020) ?
+choices:
+- id: 0bc08700-74c5-4b20-98f6-1153caf5efda
+  text: Elle est fixée par le Code du sport pour la plongée de loisir aux mélanges,
+    et souvent abaissée à 1,5 ou 1,4 bar par sécurité.
+- id: ab98614c-b4dc-48cd-9624-ceeed6f2c3ad
+  text: Elle vaut pour tous les contextes, y compris la plongée professionnelle et
+    le cadre médical.
+- id: 07a8b6a3-45d4-43bd-8914-267e88d05929
+  text: 'Elle est indicative : chaque plongeur peut la dépasser selon sa propre expérience.'
+- id: d9f852b2-3cf8-4e0a-b144-0ddf86b466ed
+  text: Elle concerne uniquement les plongées à l'air au-delà de soixante mètres.
+correct_choice_ids:
+- 0bc08700-74c5-4b20-98f6-1153caf5efda
+explanation: 1,6 bar est la limite du Code du sport pour la plongée de loisir aux
+  mélanges, souvent abaissée à 1,5 ou 1,4 bar par mesure de sécurité ; d'autres chiffres
+  correspondent à d'autres conditions (plongée professionnelle, médical, travailleurs
+  hyperbares).
+archived: false
