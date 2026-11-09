@@ -83,7 +83,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onReview, onViewChange, initialView = null, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onReview, onChallenge, onViewChange, initialView = null, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -727,6 +727,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     replay: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 0 5.4 6.5h-1.7A3.8 3.8 0 1 1 8 4.2c1 0 1.9.4 2.6 1L8.7 7H14V1.7l-1.8 1.8A5.500 5.500 0 0 0 8 2.5z" fill="currentColor"/></svg>',
     sprout: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 14V8.5" stroke="#5ea84a" stroke-width="1.6" stroke-linecap="round"/><path d="M8 8.5C8 5.6 5.6 3.5 2.2 3.5c0 3 2.4 5 5.8 5z" fill="#5ea84a"/><path d="M8 7C8 4.2 10.2 2.5 13.8 2.5c0 2.8-2.2 4.5-5.8 4.5z" fill="#7fb877"/></svg>',
     pencil: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.4 11 10.2 3.2a1.35 1.35 0 0 1 1.9 0l1.3 1.3a1.35 1.35 0 0 1 0 1.9L5.6 14.2 1.7 14.9z" fill="currentColor"/></svg>',
+    swords: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.2 2.2l9 9M11.2 11.2l-.9.1M11.2 11.2l.1.9M2.2 2.2l-.7-.7M2.2 2.2l1.4.4M13.8 2.2l-9 9M4.8 11.2l.9.1M4.8 11.2l-.1.9M13.8 2.2l.7-.7M13.8 2.2l-1.4.4"/></g></svg>',
     snow: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"><path d="M8 1.5v13M2.4 4.7l11.2 6.6M13.6 4.7L2.4 11.3"/><path d="M8 1.5 6.3 3.2M8 1.5l1.7 1.7M8 14.5l-1.7-1.7M8 14.5l1.7-1.7"/></g></svg>',
     leaf: '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.5 2.5C8 2.5 3.8 6.2 3.2 12.8 9.6 12.8 13.2 8.4 13.5 2.5z" fill="currentColor"/><path d="M4.2 12.3C6 9.3 8.7 6.6 12.6 3.9" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="1" stroke-linecap="round"/></svg>',
   };
@@ -859,9 +860,14 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   function renderReviewFloat() {
     if (view.level === 'path') { reviewFloatEl.hidden = true; reviewFloatEl.innerHTML = ''; return; }
     const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
+    const reviewNote = reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"';
     reviewFloatEl.innerHTML = mobile
-      ? `<button class="lg-review-pill" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.pencil} Review</button>`
-      : `<div class="lg-review-card"><h3>Review</h3><p>Questions from your least-practised paths</p><button class="primary" data-review="1"${reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"'}>${ICON.pencil} Start a review</button>${reviewable ? '' : '<p class="lg-review-note">Read every card of a lesson first</p>'}</div>`;
+      ? `<button class="lg-review-pill" data-review="1"${reviewNote}>${ICON.pencil} Review</button>`
+        + `<button class="lg-review-pill lg-challenge-pill" data-challenge="1">${ICON.swords} Challenge</button>`
+      : `<div class="lg-review-card"><h3>Review or Challenge</h3><p>Questions from your least-practised paths, or this week's duel</p>`
+        + `<button class="primary" data-review="1"${reviewNote}>${ICON.pencil} Start a review</button>`
+        + `<button class="primary lg-challenge-btn" data-challenge="1">${ICON.swords} Take the challenge</button>`
+        + (reviewable ? '' : '<p class="lg-review-note">Read every card of a lesson first</p>') + '</div>';
     reviewFloatEl.hidden = false;
     placeReviewFloat();
   }
@@ -902,6 +908,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       onPracticeQuiz?.(trail.path.id, trail.path.title, scoped);
     }
     else if (b.dataset.review) onReview?.();
+    else if (b.dataset.challenge) onChallenge?.();
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) { panel.classList.toggle('open'); trackFab(); }
   });

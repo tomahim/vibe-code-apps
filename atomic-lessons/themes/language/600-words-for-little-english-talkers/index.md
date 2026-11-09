@@ -4,6 +4,7 @@ position: 2
 title: "600 words for little english talkers"
 description: "French-guided American English vocabulary for everyday conversations with young children."
 archived: false
+general_knowledge: true
 ---
 
 Learn 630 workbook words in 21 small themed lessons. Say each English word aloud, compare its French meaning, then try a short translation checkpoint. Animal sounds and actions stay beside the animal they describe.

@@ -22,7 +22,8 @@ from django.db import transaction
 
 from .api import visible
 from .badge_catalog import BADGES, MONTH, WEEK, TIERS  # noqa: F401 (re-exported for tests)
-from .models import BadgeAward, Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .models import (BadgeAward, Card, CardProgress, ChallengeWeek, LearningPath, Lesson,
+                     Question, QuestionAttempt, Theme)
 
 NEW_WINDOW = timedelta(days=7)
 PARIS = ZoneInfo("Europe/Paris")
@@ -44,6 +45,7 @@ class History:
     """One learner's recorded history, loaded in a handful of queries."""
 
     def __init__(self, user):
+        self.user = user
         lessons = dict(Lesson.objects.values_list("pk", "learning_path_id"))
         paths = dict(LearningPath.objects.values_list("pk", "theme_id"))
         card_lesson = dict(Card.objects.values_list("pk", "lesson_id"))
@@ -197,6 +199,24 @@ class History:
                     if len(picked) == 3:
                         events.append((at, ("question", q)))
                         break
+        return sorted(events)
+
+    def challenge_wins(self, **_):
+        """Each weekly Challenge won: revealed ranking (every participant
+        finished, at least two played), strictly ahead of every other
+        participant, with at least the minimum correct. Ties are not wins.
+        The event time is the week's reveal moment."""
+        from .challenge import CHALLENGE_MIN_WIN, week_scores  # late import: challenge needs no badges
+        events = []
+        for week in ChallengeWeek.objects.prefetch_related("attempts"):
+            scores = week_scores(week)
+            mine = scores.get(self.user.pk)
+            if not mine or len(scores) < 2 or not all(e["finished"] for e in scores.values()):
+                continue
+            others = [e["correct"] for uid, e in scores.items() if uid != self.user.pk]
+            if mine["correct"] >= CHALLENGE_MIN_WIN and mine["correct"] > max(others):
+                revealed_at = max(a.answered_at for a in week.attempts.all())
+                events.append((revealed_at, ("challenge", week.week_key)))
         return sorted(events)
 
     def area(self, level, cards, **_):

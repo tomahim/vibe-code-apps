@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from . import challenge, views
 from .images import content_image
 
 urlpatterns = [
@@ -20,6 +20,9 @@ urlpatterns = [
     path("lessons/<uuid:lesson_id>/open/", views.open_lesson, name="learning-open-lesson"),
     path("cards/<uuid:card_id>/complete/", views.complete_card, name="learning-complete-card"),
     path("question-attempts/", views.question_attempts, name="learning-question-attempts"),
+    path("challenge/", challenge.challenge, name="learning-challenge"),
+    path("challenge/answers/", challenge.challenge_answer, name="learning-challenge-answer"),
+    path("challenge/history/", challenge.challenge_history, name="learning-challenge-history"),
     path("progress/", views.progress, name="learning-progress"),
 ]
 
