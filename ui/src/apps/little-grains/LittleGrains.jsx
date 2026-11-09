@@ -142,6 +142,7 @@ function CardIllustration({ card }) {
         ? <a className="grains-illustration-credit" href={card.illustration_source_url} target="_blank" rel="noopener noreferrer">Photo: {credit}</a>
         : <span className="grains-illustration-credit">Photo: {credit}</span>)}
     </figcaption>}
+    <a className="grains-illustration-open" href={card.illustration_url} target="_blank" rel="noopener noreferrer">View full size</a>
   </figure>;
 }
 
