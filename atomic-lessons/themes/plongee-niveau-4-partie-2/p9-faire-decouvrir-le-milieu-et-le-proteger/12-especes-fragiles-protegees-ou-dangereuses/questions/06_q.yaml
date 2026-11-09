@@ -1,0 +1,22 @@
+id: 12a36981-cc4e-45e5-ab3b-fda38aecc810
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que le guide peut-il tirer d'une rencontre avec un requin, selon cette leçon
+  ?
+choices:
+- id: 1e81bb0f-2940-4360-ba0d-a60314e12b60
+  text: L'occasion de parler protection à la palanquée, pas seulement d'observer un
+    grand animal.
+- id: 6fcd0fa6-bafb-416d-9bcb-8691b5e8da44
+  text: La preuve que tous les requins sont inoffensifs.
+- id: 0fd0a0d2-c74a-4f24-9729-bc3e5bb16eed
+  text: Une raison de faire remonter la palanquée immédiatement.
+- id: 198b7aef-6371-43c5-a210-c9a11a4abdd1
+  text: Un sujet à éviter pour ne pas inquiéter les plongeurs.
+correct_choice_ids:
+- 1e81bb0f-2940-4360-ba0d-a60314e12b60
+explanation: De nombreuses espèces de requins étant menacées par la surpêche, croiser
+  un requin est l'occasion de parler protection, en plus de l'observation.
+archived: false

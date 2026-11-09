@@ -1,0 +1,19 @@
+id: 841367cd-2a7f-42f8-8490-664a3f8e3960
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Combien d'espèces d'invertébrés le manuel estime-t-il ?
+choices:
+- id: 81dbe74f-6964-4450-91a5-6555829698aa
+  text: Environ 200 000 espèces.
+- id: fc80d4f5-20ae-48e4-9e23-a6fd60518e38
+  text: Environ 2 000 espèces.
+- id: c074e003-12bf-4379-9849-19fd86b4743e
+  text: Environ 2 millions d'espèces.
+- id: 29bd6b3b-183a-4f5a-b0f9-2c118010bf52
+  text: Exactement 56 espèces.
+correct_choice_ids:
+- 81dbe74f-6964-4450-91a5-6555829698aa
+explanation: Selon le manuel, il y aurait environ 200 000 espèces d'invertébrés.
+archived: false

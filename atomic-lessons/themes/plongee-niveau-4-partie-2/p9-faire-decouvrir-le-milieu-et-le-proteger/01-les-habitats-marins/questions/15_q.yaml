@@ -1,0 +1,21 @@
+id: 3e28b049-ac0e-43cf-870a-abe50c9cbd67
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: À quels plongeurs le manuel conseille-t-il de réserver les plongées sur fonds
+  de sable ?
+choices:
+- id: 62791eed-371f-42fc-9eb1-e9560da0dcb4
+  text: À des plongeurs déjà passionnés.
+- id: 6c369164-c17a-4559-a410-4bd3ad77076f
+  text: Aux plongeurs en première expérience de milieu naturel.
+- id: 1769b8f9-2a26-4f54-a297-9f24c1f20c25
+  text: Aux plongeurs qui n'ont jamais vu de poissons.
+- id: cbd545c7-2fe5-4ded-85bc-2c1288e82ff1
+  text: Aux groupes les plus nombreux, pour simplifier l'organisation.
+correct_choice_ids:
+- 62791eed-371f-42fc-9eb1-e9560da0dcb4
+explanation: Selon le manuel, les fonds de sable, souvent boudés, peuvent être riches
+  en vie ; il conseille de réserver plutôt ces plongées à des plongeurs déjà passionnés.
+archived: false

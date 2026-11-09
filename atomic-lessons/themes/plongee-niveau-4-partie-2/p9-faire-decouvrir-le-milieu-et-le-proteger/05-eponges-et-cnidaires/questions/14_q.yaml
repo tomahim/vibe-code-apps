@@ -1,0 +1,20 @@
+id: dd4bf3b5-7bd6-4fb2-971b-011354ca643c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: D'où les coraux tirent-ils leurs couleurs, selon l'exemple du manuel ?
+choices:
+- id: 11b55a21-4c43-4c7a-9b23-bf5eac1f4d3b
+  text: De micro-algues qui vivent en association avec eux.
+- id: d09e0fd8-1fe5-4651-8113-4cd097e4a098
+  text: De la pollution lumineuse des côtes.
+- id: 7cab4479-707e-47c5-a487-fc8134d0979a
+  text: Du sang des poissons qu'ils capturent.
+- id: 451bc926-7933-4be3-ad57-2d4c9524c467
+  text: De la température de leur squelette.
+correct_choice_ids:
+- 11b55a21-4c43-4c7a-9b23-bf5eac1f4d3b
+explanation: 'Le manuel donne l''exemple des micro-algues qui donnent leurs couleurs
+  aux coraux : une symbiose, association intime et durable aux bénéfices réciproques.'
+archived: false

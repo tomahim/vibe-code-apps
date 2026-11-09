@@ -1,0 +1,23 @@
+id: ed4acaa4-54d6-499d-8491-9c2f0067b1f4
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment distinguer mutualisme et commensalisme, selon les définitions du manuel
+  ?
+choices:
+- id: 81db3697-1312-45d5-a23a-1c73e8749690
+  text: Le mutualisme est nécessaire et bénéfique aux deux ; le commensalisme profite
+    à l'un sans contrepartie ni dommage pour l'autre.
+- id: 4ac8173a-a9db-4709-98e6-928deee77612
+  text: Le mutualisme concerne les plantes, le commensalisme les poissons.
+- id: a0c088bb-31fc-49d9-b44a-6ec299f28a15
+  text: Le mutualisme ne dure pas, le commensalisme est éternel.
+- id: bf056e45-ce49-4e45-9bcd-2fa639639a90
+  text: Le mutualisme est toujours nocif, le commensalisme jamais.
+correct_choice_ids:
+- 81db3697-1312-45d5-a23a-1c73e8749690
+explanation: 'Mutualisme : association nécessaire et bénéfique aux deux (anémone et
+  poissons-clowns). Commensalisme : l''un profite, l''autre n''est ni aidé ni lésé
+  (anémone et bernard-l''ermite).'
+archived: false

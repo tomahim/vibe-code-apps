@@ -1,0 +1,22 @@
+id: 3ab890f9-ea84-4477-bd0b-9cacfca659f5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelles sont les trois étapes d'un récit fiable, selon cette leçon ?
+choices:
+- id: 471ec824-0ecd-4d8e-b12f-4d8acb9c8e70
+  text: Noter l'observation, vérifier l'identification dans une ressource de référence,
+    puis raconter.
+- id: 2c562963-5480-4822-8cb3-c0311bba98b1
+  text: Inventer, affirmer, oublier.
+- id: b5f910e1-5857-4f8f-9c27-0a38cf318407
+  text: Photographier, publier, attendre les commentaires.
+- id: 9c81eab1-9c61-4601-a1c3-eb5f3c930cb7
+  text: Deviner, généraliser, conclure.
+correct_choice_ids:
+- 471ec824-0ecd-4d8e-b12f-4d8acb9c8e70
+explanation: On note l'observation (plaquette, ardoise, kit d'exploration), on vérifie
+  dans une ressource de référence (ouvrage spécialisé, DORIS, ressource locale), puis
+  on raconte.
+archived: false

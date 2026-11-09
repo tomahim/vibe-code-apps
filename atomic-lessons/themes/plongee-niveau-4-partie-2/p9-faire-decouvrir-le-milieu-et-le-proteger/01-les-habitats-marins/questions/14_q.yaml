@@ -1,0 +1,23 @@
+id: e24d1173-0f00-43c7-90ee-a56660ee1184
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment le manuel décrit-il les mangroves ?
+choices:
+- id: 2a3c19bb-316b-421d-9839-ad078c07f31d
+  text: Des parties de côtes basses, abritées, en zone estuarienne, avec une végétation
+    résistant à l'immersion en eau salée, abritant de nombreux juvéniles.
+- id: 7ffe1b62-46f7-45c9-9de4-e59e5b68778d
+  text: Des forêts de kelp qui ne poussent que dans les eaux froides de l'Atlantique
+    Nord.
+- id: b9d58304-42d4-42a5-83d3-52501f574aa9
+  text: Des récifs artificiels construits pour accueillir les plongeurs débutants.
+- id: 6cb673ff-501b-428a-98cf-53dd55fed425
+  text: Des zones de sable fin balayées par les tempêtes tropicales.
+correct_choice_ids:
+- 2a3c19bb-316b-421d-9839-ad078c07f31d
+explanation: Selon le manuel, les mangroves sont des parties de côtes basses, abritées,
+  situées en zone estuarienne, pourvues d'une végétation résistant à l'immersion en
+  eau salée ; elles abritent de nombreux juvéniles.
+archived: false

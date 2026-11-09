@@ -1,0 +1,22 @@
+id: 56429b98-0301-4846-95e3-b0dc67bfcc8a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel message de protection le guide peut-il tirer du cycle de l'eau, selon
+  le manuel ?
+choices:
+- id: 3adba6ce-f2d2-4ad8-940d-52a11eae0c3e
+  text: 'Les rejets faits à l''intérieur des terres finissent dans l''océan : chacun
+    a un impact sur le milieu marin.'
+- id: a94fddad-5975-4847-a7cf-540b0486dd7b
+  text: Seuls les riverains du littoral ont un impact sur le milieu marin.
+- id: 4048e467-ddfe-408f-ba0b-506ab43fb3ac
+  text: Les rivières purifient tous les rejets avant leur arrivée à la mer.
+- id: 258ea10c-9f26-49d4-a49b-0191403c7ab6
+  text: L'eau douce ne communique jamais avec l'eau de mer.
+correct_choice_ids:
+- 3adba6ce-f2d2-4ad8-940d-52a11eae0c3e
+explanation: Le manuel souligne que, vivant à l'intérieur des terres ou au bord des
+  côtes, nous avons tous un impact sur le milieu marin.
+archived: false

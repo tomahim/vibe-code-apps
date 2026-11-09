@@ -1,0 +1,22 @@
+id: 4ae0dd19-e436-4a0d-ab2e-d7d759458981
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pour le guide, à quoi sert la distinction rouges / vertes / brunes ?
+choices:
+- id: 4e39991f-a720-480f-bd6b-e4ae2f70cf56
+  text: C'est un premier niveau de lecture du paysage sous-marin avant une identification
+    plus fine.
+- id: 121ab981-c012-43a0-8b46-275e9ba2ea99
+  text: Cela permet de dater l'âge des rochers.
+- id: 27d89dac-7f68-40dd-ace9-3be6373c6ff8
+  text: Cela indique la profondeur légale de plongée.
+- id: 7c645c18-059b-4050-a442-09d64a611f54
+  text: Cela remplace l'usage de toute documentation.
+correct_choice_ids:
+- 4e39991f-a720-480f-bd6b-e4ae2f70cf56
+explanation: Cette répartition en trois groupes offre un premier repère de lecture
+  ; l'identification fine s'appuie ensuite sur les plaquettes et ouvrages spécialisés
+  cités par le livre.
+archived: false

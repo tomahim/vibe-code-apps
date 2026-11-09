@@ -1,0 +1,21 @@
+id: d1d14624-a73c-43a9-9038-ed2baa90cca1
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que le manuel demande-t-il au sujet de la liste des espèces ?
+choices:
+- id: 63859bb3-9174-4138-b703-855e966a5b19
+  text: 'Il ne liste pas toutes les espèces : il reprend les connaissances en synthèse
+    avec des pistes pour les améliorer.'
+- id: 1b755b1a-1524-4854-a507-f02184effe43
+  text: Il impose de connaître toutes les espèces de Méditerranée par cœur.
+- id: 349e7b90-4919-46ba-b41a-01cc6c62ef34
+  text: Il interdit d'apprendre les noms communs avant le niveau 5.
+- id: e319c0a3-e4e9-4de3-b079-2964563ae561
+  text: Il exige la récitation de la classification complète à l'examen.
+correct_choice_ids:
+- 63859bb3-9174-4138-b703-855e966a5b19
+explanation: Le manuel précise reprendre les éléments sous forme de synthèse, sans
+  lister toutes les espèces, mais en donnant des pistes pour améliorer ses connaissances.
+archived: false

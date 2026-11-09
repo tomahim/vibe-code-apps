@@ -1,0 +1,20 @@
+id: 7ca94984-96f4-45e3-a51b-c27793a467c5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le manuel des cavités du coralligène ?
+choices:
+- id: b69a21f5-f954-41bc-b14b-e84311370fa0
+  text: Elles constituent un habitat privilégié par de nombreuses espèces.
+- id: 407e352c-eac4-4a8a-91c5-160281fb79d1
+  text: Elles sont dangereuses et doivent être évitées systématiquement.
+- id: 7a6a92da-7fbf-4a5b-8e0c-524a7b57ffa6
+  text: Elles sont vides de vie en raison de l'absence de lumière.
+- id: 5f3bc4c5-ef88-4073-97ec-37285eec374f
+  text: Elles servent uniquement de zone de reproduction aux requins.
+correct_choice_ids:
+- b69a21f5-f954-41bc-b14b-e84311370fa0
+explanation: Selon le manuel, les cavités du coralligène constituent un habitat privilégié
+  par de nombreuses espèces.
+archived: false

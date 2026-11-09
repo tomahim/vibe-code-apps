@@ -1,0 +1,22 @@
+id: 399f2018-bdb7-4b24-afd9-8889965156f5
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles sont les deux « loyautés » du récit d'observation, selon cette leçon
+  ?
+choices:
+- id: f356d510-80b8-4d86-b98b-5be186043d77
+  text: Dire quand on ne sait pas, et relier l'explication à la protection du milieu
+    observé.
+- id: ea67a1a1-085a-4148-b8bb-479ac8125cd3
+  text: Toujours répondre, et toujours impressionner.
+- id: f1c73017-990a-47bf-8fa8-d38d5e52f3ad
+  text: Parler latin, et parler longtemps.
+- id: dbe424aa-41c3-4165-b388-f5dae3454963
+  text: Citer ses sources, et vendre le manuel.
+correct_choice_ids:
+- f356d510-80b8-4d86-b98b-5be186043d77
+explanation: Le guide reste fiable en admettant ses doutes et en vérifiant, et il
+  relie son explication à la protection du milieu, comme la charte et le MFT y invitent.
+archived: false

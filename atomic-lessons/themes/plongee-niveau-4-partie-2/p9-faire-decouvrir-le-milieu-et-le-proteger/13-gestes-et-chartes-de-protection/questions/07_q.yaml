@@ -1,0 +1,23 @@
+id: 21d90a4c-af72-4fb8-879e-bfeb2e30533f
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi fixer détendeurs de secours, consoles et manomètres, selon la charte
+  ?
+choices:
+- id: 3f99ff54-d12f-4ddf-a32b-6ffd692e8ba9
+  text: Pour qu'ils ne pendent pas et ne s'accrochent pas dans la flore et la faune
+    fixées qu'ils endommageraient.
+- id: 04a59be3-db44-44dd-902e-0cbda1732c27
+  text: Pour éviter de les perdre dans le sable.
+- id: 55149c0d-59a0-4e85-aec0-8cff3979622a
+  text: Pour les retrouver plus vite dans le noir.
+- id: b6ef32fb-2a84-429c-8712-26cf5690e846
+  text: Pour alléger le gilet stabilisateur.
+correct_choice_ids:
+- 3f99ff54-d12f-4ddf-a32b-6ffd692e8ba9
+explanation: Selon la charte, il faut bien fixer détendeurs de secours, consoles et
+  manomètres afin qu'ils ne pendent pas et ne s'accrochent pas dans la flore et la
+  faune fixées qu'ils endommageraient.
+archived: false

@@ -1,0 +1,22 @@
+id: d795dec5-ff43-4023-aaf5-79a0667075eb
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que demande la charte avant la plongée pour préparer le récit ?
+choices:
+- id: 28b6312b-9abd-4b48-a3cb-91b9430ab941
+  text: Demander la liste des espèces menacées et protégées et les réglementations
+    les concernant.
+- id: 5c6d6302-9f29-4e3c-976e-a814f7f3427d
+  text: Demander la liste des restaurants du port.
+- id: cdca2a85-3ea4-4d52-96cc-24c38e42cb9f
+  text: Demander le programme télé de la semaine.
+- id: 554af792-ad75-44ee-8541-e17236e0b34b
+  text: Demander la liste des prix du marché local.
+correct_choice_ids:
+- 28b6312b-9abd-4b48-a3cb-91b9430ab941
+explanation: 'Selon la charte (avant la plongée) : demandez la liste des espèces menacées,
+  la liste des espèces protégées, les réglementations les concernant — de quoi relier
+  le récit à la protection.'
+archived: false

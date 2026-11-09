@@ -1,0 +1,22 @@
+id: a097af53-e979-402b-93e2-d3ba419c4562
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle différence de mode de vie distingue les vers plats des vers à tube,
+  selon cette leçon ?
+choices:
+- id: 08e474e0-c84b-48b7-9ba0-de41cd74f829
+  text: Les vers plats sont des formes libres qui se déplacent sur le fond ; les vers
+    à tube sont fixés.
+- id: 4c933b92-268a-45bb-a92d-f8ce9dd0209b
+  text: Les vers plats sont des poissons ; les vers à tube sont des algues.
+- id: f551947e-b916-4192-a940-866d5a86843e
+  text: Les vers plats vivent dans un tube ; les vers à tube nagent en pleine eau.
+- id: 7399ad87-8b5b-49a8-a753-ceb729af294f
+  text: Il n'y a aucune différence observable.
+correct_choice_ids:
+- 08e474e0-c84b-48b7-9ba0-de41cd74f829
+explanation: Les vers plats (comme la planaire) sont libres et rampent sur le fond,
+  alors que le spirographe ou la protule vivent fixés dans un tube.
+archived: false

@@ -1,0 +1,23 @@
+id: c1ae1703-7a50-4133-a9c1-cba79dd875b1
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel bénéfice le manuel attribue-t-il à l'approche du milieu par la logique
+  d'écosystème ?
+choices:
+- id: 2467c24e-beba-4647-900e-115dff5e4de1
+  text: Elle donne du sens aux plongées et permet de trouver plus facilement les espèces
+    recherchées.
+- id: b9eb6b37-fd43-4084-b0d3-651a32043c70
+  text: Elle dispense de connaître les règles de sécurité de la palanquée.
+- id: 965f8398-64f3-4e0e-b707-d998865b44a4
+  text: Elle permet de plonger sur n'importe quel site sans préparation.
+- id: ac7583df-3726-465b-a9e5-814f30d66ea7
+  text: Elle supprime le besoin de briefing avant la mise à l'eau.
+correct_choice_ids:
+- 2467c24e-beba-4647-900e-115dff5e4de1
+explanation: Selon le manuel, cette approche donne du sens aux plongées, aide à trouver
+  les espèces recherchées et augmente la satisfaction et la motivation des plongeurs
+  encadrés.
+archived: false

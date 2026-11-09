@@ -1,0 +1,23 @@
+id: b39abfc1-9b78-4674-ac36-1097956611f4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qui a mis en place le kit d'exploration et dans quel but, selon le manuel
+  ?
+choices:
+- id: 83a0e39b-bc09-41f7-b3c9-fe0c12bc3aa5
+  text: La FFESSM et Longitude 181, pour recenser les espèces rencontrées et en conserver
+    une trace.
+- id: a159e9c0-5486-4666-86de-13288349d376
+  text: Les fabricants de caméras, pour vendre du matériel.
+- id: 3d2a1139-5995-40e3-ad56-dd2486df7a38
+  text: Les assureurs, pour contrôler les déclarations.
+- id: 665e9fa5-a658-494e-81db-bf72a0d36d81
+  text: Les écoles de biologie, pour leurs examens.
+correct_choice_ids:
+- 83a0e39b-bc09-41f7-b3c9-fe0c12bc3aa5
+explanation: Selon le manuel, la FFESSM et Longitude 181 ont mis en place un kit d'exploration
+  (carnet, ardoise) pour recenser les espèces rencontrées durant la plongée et en
+  conserver une trace.
+archived: false

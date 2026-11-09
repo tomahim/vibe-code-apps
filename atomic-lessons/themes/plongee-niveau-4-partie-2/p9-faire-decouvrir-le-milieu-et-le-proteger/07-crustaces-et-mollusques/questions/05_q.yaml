@@ -1,0 +1,22 @@
+id: 49f2f921-cf75-4120-88e7-b5848ed654d1
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le manuel définit-il le commensalisme ?
+choices:
+- id: 25686468-8a22-47c6-aae9-ae6e7d62f5c7
+  text: Une relation où une espèce tire sa nourriture de son hôte (déchets ou restes)
+    sans contrepartie et sans dommage pour lui.
+- id: 3c7e381a-4bc2-496b-8338-a2d3c2a12045
+  text: Une relation où les deux espèces se détruisent mutuellement.
+- id: 0430e249-93d8-4b5d-86c8-edaebb955a67
+  text: Une relation où le parasite tue toujours son hôte.
+- id: 1427f595-fef5-49f9-87d3-58d4f2c289da
+  text: Une association qui oblige les deux espèces à se reproduire ensemble.
+correct_choice_ids:
+- 25686468-8a22-47c6-aae9-ae6e7d62f5c7
+explanation: Selon le manuel, le commensalisme est la relation entre une espèce tirant
+  sa nourriture de son hôte (déchets produits ou restes de nourriture) sans contrepartie
+  et sans dommage pour ce dernier.
+archived: false

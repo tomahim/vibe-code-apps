@@ -1,0 +1,21 @@
+id: 8229e94e-1c52-4ac0-931c-ca3e6de6a5e8
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Selon le manuel, quels fonds correspondent aux plongées pratiquées le plus
+  souvent dans l'hémisphère Nord ?
+choices:
+- id: da2b9171-d842-4a29-905d-cc2db8c6a320
+  text: Les fonds rocheux.
+- id: 8a8ec10f-1908-4ba6-af18-b279d6e02166
+  text: Les fonds coralliens.
+- id: 69ffb0b7-66ac-4b07-be60-0978ad357631
+  text: Les mangroves.
+- id: 063ed82b-c043-490f-90a4-ce9b8e1e180a
+  text: Les herbiers.
+correct_choice_ids:
+- da2b9171-d842-4a29-905d-cc2db8c6a320
+explanation: Le manuel précise que les fonds rocheux sont les plongées pratiquées
+  le plus souvent dans l'hémisphère Nord, en Atlantique ou en Méditerranée.
+archived: false

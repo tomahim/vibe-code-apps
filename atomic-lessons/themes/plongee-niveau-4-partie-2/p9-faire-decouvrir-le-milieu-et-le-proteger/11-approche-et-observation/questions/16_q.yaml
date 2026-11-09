@@ -1,0 +1,22 @@
+id: bbb2c18d-b66c-4e9b-9c7b-acd189a7971e
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles sont les trois règles d'approche du manuel ?
+choices:
+- id: 66a585a0-379f-4a43-bcd2-a24b647f0a11
+  text: Ni bruit ni mouvement brusque ; ne pas s'interposer entre le poisson et le
+    courant ; ne pas s'interposer entre la lumière et le poisson.
+- id: 4e69469c-7036-4926-8be0-c626ff0217de
+  text: Nourrir, toucher, poursuivre.
+- id: f8c0b7c8-a39e-4785-bf24-2e7ab5f0145b
+  text: Palmer fort, parler fort, briller fort.
+- id: 76a1f9db-bb66-4f2c-9ca6-5276fd4c70a2
+  text: Descendre vite, remonter vite, nager vite.
+correct_choice_ids:
+- 66a585a0-379f-4a43-bcd2-a24b647f0a11
+explanation: 'Les trois règles : ni bruit ni mouvement brusque (immobilité, courtes
+  apnées) ; ne pas s''interposer entre le poisson et le courant (ligne latérale) ;
+  ne pas s''interposer entre la lumière et le poisson (ombre, lampe éteinte).'
+archived: false

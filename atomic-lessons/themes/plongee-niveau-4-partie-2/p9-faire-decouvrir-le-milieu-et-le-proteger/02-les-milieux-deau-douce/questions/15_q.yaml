@@ -1,0 +1,22 @@
+id: 55fe526d-4365-410e-b117-fe56f637f647
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pour documenter un site d'eau douce précis, vers quoi cette leçon renvoie-t-elle
+  ?
+choices:
+- id: b9b24924-2d40-444c-85b7-25255553524f
+  text: Les ressources locales et les ouvrages spécialisés cités par le livre.
+- id: 599aeedf-9098-4aa2-bffa-8ec08586c1ad
+  text: Les réseaux sociaux non vérifiés.
+- id: b5f6ca4b-d953-4310-9b5a-0f5965c377cf
+  text: Le hasard des rencontres sur place.
+- id: 4abf26d6-30ee-4133-ac69-0134d8144959
+  text: 'Aucune source : il faut tout deviner.'
+correct_choice_ids:
+- b9b24924-2d40-444c-85b7-25255553524f
+explanation: Le manuel renvoie à des ouvrages spécialisés complémentaires pour connaître
+  la faune des zones de plongée habituelles ; les ressources locales complètent cette
+  démarche.
+archived: false

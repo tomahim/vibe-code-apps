@@ -1,0 +1,20 @@
+id: 29ea1a33-a83e-472d-95e7-7cbde7a26403
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le manuel décrit-il les nudibranches ?
+choices:
+- id: 8565766d-f145-413c-9a14-a12c794456c9
+  text: Des « branchies à nu » aux formes variées et aux couleurs éclatantes.
+- id: 7f1c7a6f-d8c2-4c03-b273-89fe10649666
+  text: Des coquillages lourds et ternes.
+- id: dba45352-ef84-40cc-8eef-c81e8fb5ec8b
+  text: Des crustacés rapides et nocturnes.
+- id: 14ce1571-e981-4f1d-ba16-08d803071e27
+  text: Des poissons microscopiques transparents.
+correct_choice_ids:
+- 8565766d-f145-413c-9a14-a12c794456c9
+explanation: Selon le manuel, les nudibranches (« branchies à nu ») sont des opisthobranches
+  aux formes variées et aux couleurs éclatantes.
+archived: false

@@ -1,0 +1,22 @@
+id: 22262996-d2a2-437a-931b-290210607ff3
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle conduite face à une espèce potentiellement dangereuse, selon cette
+  leçon ?
+choices:
+- id: 03158c1d-02fe-453e-8bdc-de391838dae5
+  text: Observer sans toucher, sans poursuivre, sans geste brusque, en gardant la
+    palanquée à distance.
+- id: 2741abc9-46ae-40f8-a9fa-f6c0a3d6a3e9
+  text: L'attraper fermement derrière la tête.
+- id: 7a120506-5fd8-431e-9b23-a1119a10dbb9
+  text: La provoquer pour évaluer sa réaction.
+- id: 75dd0fd8-c414-4255-b81b-1e0dab927d7e
+  text: La nourrir pour l'apprivoiser.
+correct_choice_ids:
+- 03158c1d-02fe-453e-8bdc-de391838dae5
+explanation: 'La conduite reste celle du manuel : observation calme à distance, sans
+  contact ni poursuite, le guide gardant la palanquée à distance.'
+archived: false

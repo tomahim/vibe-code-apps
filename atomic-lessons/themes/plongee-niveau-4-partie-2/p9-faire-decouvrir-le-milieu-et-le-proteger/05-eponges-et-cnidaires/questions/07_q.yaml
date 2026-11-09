@@ -1,0 +1,22 @@
+id: 1d67536a-61e6-4e65-b82c-ae5f147b4f2a
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel lien le manuel établit-il entre certaines éponges et certains nudibranches
+  ?
+choices:
+- id: c2ba0b66-6d04-4594-8ce0-4985d2857f86
+  text: Ces nudibranches se nourrissent sur une espèce particulière d'éponge.
+- id: bec9bc61-917a-4180-b66c-6cb0b48be766
+  text: Les éponges se nourrissent des nudibranches.
+- id: 265647f2-b095-45e7-826a-463479bbe801
+  text: Les nudibranches transforment les éponges en corail.
+- id: 2506d9b3-7db4-40be-a6ea-7d60e08accfd
+  text: Les éponges imitent la couleur des nudibranches.
+correct_choice_ids:
+- c2ba0b66-6d04-4594-8ce0-4985d2857f86
+explanation: Selon le manuel, certains nudibranches se nourrissent sur une espèce
+  particulière d'éponge ; repérer cette éponge augmente les chances d'observer ces
+  nudibranches.
+archived: false

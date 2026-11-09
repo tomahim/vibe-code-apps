@@ -1,0 +1,22 @@
+id: fb054461-3715-4c9a-b418-7b8be8aafc48
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel est l'attendu MFT sur la faune et la flore d'un site d'eau douce ?
+choices:
+- id: dbba58b0-7d18-4dd5-a005-3d821f7cd440
+  text: Pouvoir décrire le site, sa faune et sa flore, et répondre simplement aux
+    questions courantes des plongeurs.
+- id: 12a94df6-3569-43b0-9b50-8c3711a7fcb9
+  text: Réciter la classification latine complète des espèces locales.
+- id: 1c903af4-473a-491e-96a9-d01cede22369
+  text: Ignorer les questions des plongeurs sur le milieu.
+- id: 63822e95-bdc1-4955-a811-a5c8b7356dc6
+  text: Filtrer les questions pour ne répondre qu'aux plus expérimentés.
+correct_choice_ids:
+- dbba58b0-7d18-4dd5-a005-3d821f7cd440
+explanation: Le MFT attend que le guide décrive l'environnement du site (milieu marin
+  ou eau douce), sa faune et sa flore, et réponde simplement aux questions courantes
+  des plongeurs.
+archived: false

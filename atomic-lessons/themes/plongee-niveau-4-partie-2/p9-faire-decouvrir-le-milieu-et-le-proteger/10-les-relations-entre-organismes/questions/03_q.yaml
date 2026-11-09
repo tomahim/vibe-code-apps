@@ -1,0 +1,21 @@
+id: 38fe0344-bf29-4d43-a9f0-4a4f86856361
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel définit-il la symbiose ?
+choices:
+- id: b6788baa-ad10-44f0-b9a2-ae2f0368f54a
+  text: Une association intime et durable entre deux espèces qui en tirent des bénéfices
+    réciproques.
+- id: 60ead4de-9a03-4f0f-b9c5-7f474cef64c5
+  text: Une relation où une espèce mange l'autre.
+- id: 7614df91-e40e-4952-aff3-2107c00e92f0
+  text: Une rencontre accidentelle entre deux poissons.
+- id: d9c5b3b6-56c4-4456-a12d-8e45bc108be1
+  text: Une compétition pour le même territoire.
+correct_choice_ids:
+- b6788baa-ad10-44f0-b9a2-ae2f0368f54a
+explanation: Selon le manuel, la symbiose est une association intime et durable entre
+  deux espèces qui en tirent des bénéfices réciproques.
+archived: false

@@ -1,0 +1,20 @@
+id: b2be16e2-eb51-44c5-bce0-2540545c5b49
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment le manuel présente-t-il les invertébrés au plongeur ?
+choices:
+- id: e55388f7-bd8f-4067-a5cb-9a60aa32b892
+  text: Par grands groupes reconnaissables en plongée.
+- id: ae5a8f03-a848-40b7-9634-183564eacca0
+  text: Par ordre alphabétique latin complet.
+- id: 5a3c1b9d-3620-4689-9dff-4c28cc0376f7
+  text: Par profondeur d'apparition statistique.
+- id: ddc504b1-bfc4-4530-b32c-cef73e41a110
+  text: Par date de découverte scientifique.
+correct_choice_ids:
+- e55388f7-bd8f-4067-a5cb-9a60aa32b892
+explanation: 'Le livre présente les invertébrés par grands groupes : éponges, cnidaires,
+  vers, bryozoaires, crustacés, mollusques, échinodermes, tuniciers.'
+archived: false

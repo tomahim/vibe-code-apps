@@ -1,0 +1,21 @@
+id: 5b4199cc-4f7e-42d1-a0af-889fa46d43d2
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle particularité de la larve d'ascidie le manuel souligne-t-il ?
+choices:
+- id: d3612661-9312-4cdd-9610-96810fd31ec9
+  text: Elle dispose d'une « chorde » annonciatrice de l'apparition du squelette chez
+    les vertébrés.
+- id: 91125879-12d4-4e69-9766-260629043e3e
+  text: Elle est déjà capable de plonger en apnée.
+- id: 1663f3fc-59ae-4686-a058-c31f38a08c8c
+  text: Elle porte une coquille identique à celle de l'huître.
+- id: 776abe75-d49a-467d-bae0-e141cf822815
+  text: Elle vit dans la poche ventrale de son parent.
+correct_choice_ids:
+- d3612661-9312-4cdd-9610-96810fd31ec9
+explanation: Selon le manuel, les ascidies sont des êtres évolués disposant, à l'état
+  larvaire, d'une « chorde » annonciatrice de l'apparition du squelette chez les vertébrés.
+archived: false

@@ -1,0 +1,22 @@
+id: 28c6569e-a878-4334-95d4-65663a5d443f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle différence de nutrition le manuel établit-il entre algues et plantes
+  ?
+choices:
+- id: f9c04acf-e77e-4b99-bc6f-a6a27bbf6462
+  text: Les plantes s'alimentent essentiellement par leurs racines, les algues par
+    tous leurs tissus.
+- id: b89f8912-166e-4537-a994-fce0b45f703b
+  text: Les algues s'alimentent par leurs racines, les plantes par leurs feuilles.
+- id: c4556dbc-d5c1-4dcf-8de2-0b07263b063f
+  text: Les algues mangent du plancton, les plantes filtrent le sable.
+- id: 721cf7f9-2dfd-4f80-b1d9-1a37ca1b8df6
+  text: Il n'y a aucune différence de nutrition entre les deux.
+correct_choice_ids:
+- f9c04acf-e77e-4b99-bc6f-a6a27bbf6462
+explanation: Selon le manuel, les plantes s'alimentent essentiellement par leurs racines,
+  alors que les algues absorbent l'eau et les nutriments par tous leurs tissus.
+archived: false

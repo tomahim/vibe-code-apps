@@ -1,0 +1,22 @@
+id: 7e4b3b80-289c-4d27-958a-982b9e4ba910
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le manuel définit-il la taxinomie ?
+choices:
+- id: daaca16f-798a-46e1-9a07-8e8cd3e177cb
+  text: La science qui décrit les organismes vivants et les regroupe en taxons pour
+    les identifier, les nommer puis les classer.
+- id: c26eeff6-6709-4697-b4f8-4055d7dc065a
+  text: La science des courants marins et des marées.
+- id: f1d84c6f-182a-41c3-a6f2-4d8db1bed8d4
+  text: Une méthode de calcul des temps de plongée.
+- id: d0c2065a-7064-4f99-ade1-641ce60bfa0a
+  text: L'étude des accidents de désaturation.
+correct_choice_ids:
+- daaca16f-798a-46e1-9a07-8e8cd3e177cb
+explanation: La taxinomie a pour objet de décrire les organismes vivants et de les
+  regrouper en entités appelées taxons, afin de les identifier, puis les nommer, et
+  enfin les classer.
+archived: false

@@ -1,0 +1,24 @@
+id: 527b9a8b-8a8d-456b-b491-1b83c90fdaac
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment aborder un banc de poissons, selon le manuel ?
+choices:
+- id: df5f5b64-0bed-4aba-97d7-002996a989be
+  text: Très progressivement, avec des apnées répétées, en profitant du mouvement
+    naturel de la houle ; parfois par-dessous, ce qui exige une parfaite maîtrise
+    de son équilibre.
+- id: 59a17f6b-4d0c-4d12-8822-4fd5cac3be77
+  text: En plongeant directement au centre du banc depuis la surface.
+- id: cf465d2d-6d0e-4f1c-9097-b396bf1e7c3e
+  text: En frappant l'eau pour regrouper les poissons.
+- id: 494ba7d0-4cd9-4ab8-b453-629ebd04afaf
+  text: En nourrissant les poissons pour les attirer.
+correct_choice_ids:
+- df5f5b64-0bed-4aba-97d7-002996a989be
+explanation: Selon le manuel, l'approche d'un banc (barracudas, carangues, lutjans,
+  platax...) doit être très progressive, avec une respiration en apnées répétées ;
+  en cas de houle, on profite du mouvement naturel de l'eau, et une approche par-dessous
+  suppose une parfaite maîtrise de son équilibre.
+archived: false

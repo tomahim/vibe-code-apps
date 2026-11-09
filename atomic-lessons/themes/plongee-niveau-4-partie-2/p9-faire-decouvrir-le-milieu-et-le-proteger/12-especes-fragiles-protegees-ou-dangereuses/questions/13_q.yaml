@@ -1,0 +1,20 @@
+id: afe3e869-dce1-4672-9d79-38506a6eccfe
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle solution à la surpêche le manuel met-il en avant ?
+choices:
+- id: 3c343077-f72a-4240-a94b-a9a47c25bd22
+  text: La création d'aires marines protégées.
+- id: 25e861f8-ccf5-45ce-980c-c2a076bc9a1f
+  text: L'augmentation des quotas de pêche.
+- id: e4a57557-8c53-41df-b590-ae7392f1ad05
+  text: L'élevage de poissons dans les piscines des clubs.
+- id: 084b2c43-40e2-4cc3-8efc-016bde37401d
+  text: L'interdiction de la plongée sous-marine.
+correct_choice_ids:
+- 3c343077-f72a-4240-a94b-a9a47c25bd22
+explanation: Selon le manuel (Jean-Michel Cousteau), la solution pour lutter contre
+  la surpêche est la création d'aires marines protégées.
+archived: false

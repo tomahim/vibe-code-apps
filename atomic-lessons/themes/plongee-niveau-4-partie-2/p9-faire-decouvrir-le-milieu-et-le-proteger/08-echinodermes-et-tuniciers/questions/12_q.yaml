@@ -1,0 +1,22 @@
+id: 999859b8-339b-4bb9-857c-e1bee08d3017
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi l'ascidie est-elle une bonne anecdote de guide, selon cette leçon
+  ?
+choices:
+- id: b6d57ae9-311d-4d35-bf01-1a2563c0e140
+  text: Par sa larve, ce petit sac fixé au rocher est plus proche des vertébrés que
+    son apparence ne le suggère.
+- id: f494d1b5-e582-4e4c-a4b8-8cf7a67cdfbf
+  text: C'est le seul animal capable de respirer hors de l'eau.
+- id: aa6cb427-b5e7-4075-b80f-0e6bc8a82975
+  text: C'est le plus grand invertébré du monde.
+- id: 0f919bc6-528f-4c3d-9712-d8d6b9e4f28e
+  text: Elle peut survivre indéfiniment sans eau.
+correct_choice_ids:
+- b6d57ae9-311d-4d35-bf01-1a2563c0e140
+explanation: 'La chorde larvaire de l''ascidie annonce le squelette des vertébrés
+  : un lien évolutif inattendu qui marque les plongeurs.'
+archived: false

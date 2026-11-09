@@ -1,0 +1,21 @@
+id: bfc5b234-dda7-435e-9cb0-40ca2e9d2d97
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont les six volets de la charte, selon le manuel ?
+choices:
+- id: afc24212-a315-495d-a8cf-bd1ad8e68555
+  text: Préparer son voyage, avant la plongée, sur le bateau, en plongée, après la
+    plongée, au cours du séjour.
+- id: e826d7c0-4700-407a-abe9-bdba2b77535b
+  text: S'inscrire, payer, plonger, remonter, partir, revenir.
+- id: ad74ab7b-d215-466d-86b1-e9418f50f841
+  text: Théorie, piscine, mer, lac, épave, nuit.
+- id: 01607b6d-b257-4de9-81c4-41bce2da12bb
+  text: Niveau 1, niveau 2, niveau 3, niveau 4, niveau 5, niveau 6.
+correct_choice_ids:
+- afc24212-a315-495d-a8cf-bd1ad8e68555
+explanation: 'La charte s''organise en six volets : préparer votre voyage, avant la
+  plongée, sur le bateau, en plongée, après la plongée, au cours du séjour.'
+archived: false

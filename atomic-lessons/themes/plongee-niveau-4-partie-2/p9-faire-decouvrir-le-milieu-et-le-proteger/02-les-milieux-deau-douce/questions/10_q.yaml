@@ -1,0 +1,22 @@
+id: af6e0e99-493e-479a-b3fa-505abe9c470e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que doit savoir décrire le plongeur niveau 4 selon le MFT (mai 2026) ?
+choices:
+- id: 3ce7eb7d-6ae1-4813-acdf-6118eeca62f0
+  text: L'environnement du site sur lequel il évolue, en milieu marin ou en eau douce,
+    ainsi que la faune et la flore.
+- id: c5a74955-8b5d-4682-b1ee-f7510c072012
+  text: Uniquement la faune des sites marins tropicaux.
+- id: efdd0aa9-ac1a-40f1-8850-c0c3a9c85b84
+  text: La géologie complète du fond, carte en main.
+- id: b0abcad9-f8d2-4287-a84a-e2409c080a41
+  text: Le nom scientifique latin de chaque espèce rencontrée.
+correct_choice_ids:
+- 3ce7eb7d-6ae1-4813-acdf-6118eeca62f0
+explanation: Le MFT attend la description de l'environnement du site (milieu marin
+  ou eau douce), ainsi que de sa faune et de sa flore, dans l'épreuve de conduite
+  de palanquée.
+archived: false

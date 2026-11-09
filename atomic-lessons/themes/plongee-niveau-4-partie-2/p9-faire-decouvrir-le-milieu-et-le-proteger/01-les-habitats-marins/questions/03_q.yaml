@@ -1,0 +1,21 @@
+id: e500a531-3c23-4e06-a07a-67f8d4cff90b
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel définit-il un écosystème ?
+choices:
+- id: cd436fb3-14d9-44c0-b575-c0241fbe75f0
+  text: L'ensemble formé par des êtres vivants (la biocénose) et leur environnement
+    (le biotope).
+- id: f44e03a6-ae85-47a4-a509-c708da4fa244
+  text: L'ensemble des poissons d'une même zone géographique.
+- id: 65593a54-5329-4e51-91e6-fbc9d9008661
+  text: Une zone marine protégée par la réglementation.
+- id: 4b0a43a9-0644-453a-9757-57ed8c23a65b
+  text: La chaîne alimentaire complète d'un milieu donné.
+correct_choice_ids:
+- cd436fb3-14d9-44c0-b575-c0241fbe75f0
+explanation: Écosystème = êtres vivants + environnement. Les êtres vivants forment
+  la biocénose, l'environnement est le biotope.
+archived: false

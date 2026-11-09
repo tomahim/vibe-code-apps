@@ -1,0 +1,20 @@
+id: ef707de9-c430-49ba-aa60-46251d4cc62d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Sous quel angle le manuel traite-t-il surtout l'eau douce ?
+choices:
+- id: c38ba6f8-7845-44bc-99f2-eb6d71e9bee4
+  text: 'La flottabilité : la densité de l''eau joue sur le lestage.'
+- id: 3d86bbd2-3be8-4e08-8691-7ad17b6b6661
+  text: La faune spécifique des lacs de montagne.
+- id: 48967d61-6054-4400-9892-5d1318e4c1b8
+  text: La réglementation des carrières de plongée.
+- id: 5418381a-8ca4-4db4-a668-9840fad73916
+  text: La photographie sous-marine en eau trouble.
+correct_choice_ids:
+- c38ba6f8-7845-44bc-99f2-eb6d71e9bee4
+explanation: Dans le manuel, l'eau douce est surtout traitée sous l'angle de la flottabilité,
+  avec un tableau indicatif des modifications de lestage entre eau de mer et eau douce.
+archived: false

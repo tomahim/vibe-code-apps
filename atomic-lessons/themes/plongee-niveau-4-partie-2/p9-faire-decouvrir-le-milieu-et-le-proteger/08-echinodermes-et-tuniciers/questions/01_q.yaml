@@ -1,0 +1,20 @@
+id: f71fc9c4-8e4c-4147-ac18-9e8cfd5c5e03
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles formes d'échinodermes le manuel illustre-t-il ?
+choices:
+- id: 25e14378-4cc4-4011-a13e-82d4279847d2
+  text: Étoiles de mer, ophiures, oursins, holothuries, comatules.
+- id: 66bee11e-2832-4b86-8d62-93eece172c7e
+  text: Méduses, gorgones, anémones, coraux, pennatules.
+- id: 2b25a3f0-b7be-4494-bb13-b0c1a5f4611e
+  text: Poulpes, seiches, calmars, nautiles, argonautes.
+- id: 93f0a886-6b03-4ea1-851b-450712ca06f3
+  text: Langoustes, homards, crabes, crevettes, araignées de mer.
+correct_choice_ids:
+- 25e14378-4cc4-4011-a13e-82d4279847d2
+explanation: La planche du manuel montre les étoiles de mer (astérides), les ophiures,
+  les oursins, les holothuries (concombres de mer) et les comatules (crinoïdes).
+archived: false

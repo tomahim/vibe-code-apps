@@ -1,0 +1,20 @@
+id: 9cbe1caf-6177-4a53-86b2-ead614ad0bda
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel exemple de mutualisme le manuel donne-t-il ?
+choices:
+- id: d04acbfa-8736-4b16-ae75-24ba95868463
+  text: L'anémone et les poissons-clowns.
+- id: 12f5f249-dbbf-49e1-8b03-3fa030a1c843
+  text: L'oursin et l'étoile de mer.
+- id: 2818fa43-1f60-4508-a52b-0e37819cde18
+  text: Le mérou et la palanquée.
+- id: 5b225d29-f302-48d9-a8a8-303e0a220c57
+  text: La seiche et le crabe.
+correct_choice_ids:
+- d04acbfa-8736-4b16-ae75-24ba95868463
+explanation: 'Le manuel illustre le mutualisme par l''anémone et les poissons-clowns
+  : une association nécessaire et bénéfique aux deux partenaires.'
+archived: false

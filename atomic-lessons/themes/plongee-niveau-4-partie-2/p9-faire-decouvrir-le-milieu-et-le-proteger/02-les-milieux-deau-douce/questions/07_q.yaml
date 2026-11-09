@@ -1,0 +1,21 @@
+id: e10d7ea8-aa36-45eb-b159-d1c9a20058d8
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que faut-il retenir du lestage quand on passe de la mer à l'eau douce ?
+choices:
+- id: 5afd46d8-5f89-4b0d-8c02-4ab54598c9d0
+  text: Il faut revoir son lestage, car on flotte moins en eau douce.
+- id: ef9dc067-8f17-42c5-87ed-2a8c647038b2
+  text: On peut garder exactement le même lestage sans vérification.
+- id: a9a9c2e4-21b3-4cba-8517-51c080449766
+  text: Il faut supprimer tout lestage en eau douce.
+- id: 52da3236-6bf0-49b0-8486-3b1bb2718a65
+  text: Le lestage ne dépend que de la profondeur, pas de l'eau.
+correct_choice_ids:
+- 5afd46d8-5f89-4b0d-8c02-4ab54598c9d0
+explanation: 'La densité de l''eau douce étant plus faible que celle de l''eau de
+  mer, la poussée d''Archimède diminue : le manuel fournit un tableau indicatif d''adaptation
+  du lestage.'
+archived: false

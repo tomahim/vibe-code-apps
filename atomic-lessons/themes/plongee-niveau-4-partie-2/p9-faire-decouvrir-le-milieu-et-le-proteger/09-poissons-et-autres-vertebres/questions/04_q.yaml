@@ -1,0 +1,20 @@
+id: f4fa1c82-f95a-47de-af64-88d614cdd591
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Vers quelle ressource le manuel renvoie-t-il à propos des requins ?
+choices:
+- id: 88fb1907-cbdc-44a3-90f9-de03a7d03f27
+  text: Le site www.longitude181.com.
+- id: f1bff0aa-803a-4540-8b05-7a36f1d8d038
+  text: Le site des fabricants de combinaisons.
+- id: 5a5d0ea4-ec54-4ab4-b5cd-1b48b512f0ee
+  text: Le journal officiel de la République.
+- id: 4e464813-57bb-4d94-b56e-c88e434832dc
+  text: 'Aucune ressource : le sujet est interdit.'
+correct_choice_ids:
+- 88fb1907-cbdc-44a3-90f9-de03a7d03f27
+explanation: Le manuel renvoie au site www.longitude181.com pour en savoir plus, à
+  propos des requins menacés par le commerce des ailerons.
+archived: false

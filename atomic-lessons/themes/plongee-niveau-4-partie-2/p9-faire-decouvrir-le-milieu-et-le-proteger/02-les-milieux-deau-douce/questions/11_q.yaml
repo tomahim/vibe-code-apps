@@ -1,0 +1,21 @@
+id: d71d6def-5b33-4712-a437-0947a9990579
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans quelle épreuve ces compétences sur le milieu sont-elles évaluées, selon
+  le MFT ?
+choices:
+- id: db943fc1-afa5-4661-9046-383f586a2b15
+  text: L'épreuve de conduite de palanquée.
+- id: db90fe94-3643-4d92-8253-390e9448e01e
+  text: Une épreuve écrite de biologie marine.
+- id: 8139f948-4b05-479f-a4ad-71ddda7c8d47
+  text: L'épreuve de sauvetage en surface.
+- id: b589c20c-ed6c-48db-ae28-ba2a2ceca967
+  text: Un exposé théorique devant jury fédéral.
+correct_choice_ids:
+- db943fc1-afa5-4661-9046-383f586a2b15
+explanation: Selon le MFT (mai 2026), ces attendus relèvent de l'épreuve n°4 « conduite
+  de palanquée ».
+archived: false

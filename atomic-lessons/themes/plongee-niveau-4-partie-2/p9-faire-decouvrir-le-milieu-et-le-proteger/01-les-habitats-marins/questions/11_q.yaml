@@ -1,0 +1,21 @@
+id: e3d8261b-3a76-4a30-956a-96cc2df16405
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qu'est-ce que le coralligène, selon le manuel ?
+choices:
+- id: ad19bf02-9da0-4839-9ab2-6d988914fe06
+  text: Une formation calcaire créée par de micro-organismes, caractéristique de certaines
+    zones méditerranéennes.
+- id: bae77793-ea35-4a2f-a839-985c03517e66
+  text: Un type de corail mou que l'on ne trouve qu'en zone tropicale.
+- id: b8292998-549d-414e-8398-160e35135937
+  text: Une algue rouge qui colonise les sables fins de l'Atlantique.
+- id: 2bf7bfc2-dc16-403c-a073-b1d06797691c
+  text: Un rocher volcanique recouvert d'huîtres en Méditerranée.
+correct_choice_ids:
+- ad19bf02-9da0-4839-9ab2-6d988914fe06
+explanation: Le coralligène est une formation calcaire créée par de micro-organismes
+  ; ses cavités constituent un habitat privilégié par de nombreuses espèces.
+archived: false

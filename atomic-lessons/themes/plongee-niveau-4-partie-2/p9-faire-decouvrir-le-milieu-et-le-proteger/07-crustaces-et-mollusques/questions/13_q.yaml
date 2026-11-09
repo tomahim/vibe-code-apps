@@ -1,0 +1,21 @@
+id: f05ff2f9-8749-4a08-b0bf-078f75bbb69c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Où chercher certains nudibranches, selon la logique d'écosystème du manuel
+  ?
+choices:
+- id: 58a716f0-2e7e-4c86-81cf-db82d23d61c1
+  text: Sur l'espèce d'éponge particulière dont ils se nourrissent.
+- id: 0b9fd9c5-0bb8-472f-a407-4d5dc1fbf44f
+  text: Sur le sable nu, loin de toute vie fixée.
+- id: 62f53460-08ed-495f-addd-29051ab4a2cf
+  text: Dans les poches des gilets de plongée.
+- id: 4c186100-22f6-447e-92b8-a2cf94fa53a1
+  text: À la surface, dans l'écume des vagues.
+correct_choice_ids:
+- 58a716f0-2e7e-4c86-81cf-db82d23d61c1
+explanation: 'Le manuel donne l''exemple de nudibranches se nourrissant sur une espèce
+  particulière d''éponge : repérer l''éponge rapproche du nudibranche.'
+archived: false

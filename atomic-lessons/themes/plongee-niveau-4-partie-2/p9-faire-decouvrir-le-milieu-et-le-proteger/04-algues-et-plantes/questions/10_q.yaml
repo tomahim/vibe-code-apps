@@ -1,0 +1,21 @@
+id: b29c8a4f-1080-48fc-92a0-8301a7cbfef5
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi le puits de carbone est-il un argument utile au guide ?
+choices:
+- id: e552e879-2274-4cf8-9972-55eeab98140d
+  text: Il montre à la palanquée que même la vie végétale microscopique de l'océan
+    compte pour la planète.
+- id: b181f9f0-bcf9-4b38-acc9-84dea66855a0
+  text: Il justifie de remonter le plus vite possible après la plongée.
+- id: 11fa60b1-cddf-4f20-b33c-3b96c8011e76
+  text: Il permet d'éviter les paliers de sécurité.
+- id: cc756f9c-f177-4038-9b51-57a65e6f5bf3
+  text: Il dispense de respecter la faune fixée.
+correct_choice_ids:
+- e552e879-2274-4cf8-9972-55eeab98140d
+explanation: Le rôle du phytoplancton dans l'absorption du CO₂ est un exemple simple
+  pour expliquer que même le végétal invisible a une importance planétaire.
+archived: false

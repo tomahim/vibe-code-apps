@@ -1,0 +1,22 @@
+id: 1ed94e5a-c9ae-4409-a992-ee18326441b8
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quelle relation la girelle qui suit le rouget ressemble-t-elle le plus,
+  selon cette leçon ?
+choices:
+- id: db8b3ae1-c69b-4e02-8c3d-f81175dc5aa6
+  text: 'Au commensalisme : elle profite des restes sans aider ni gêner son hôte.'
+- id: e802bf60-31c2-488d-9b9f-d2b87f9847c9
+  text: 'Au parasitisme : elle affaiblit le rouget durablement.'
+- id: d985bb02-fc08-4d2c-b0da-0a8a39f0db67
+  text: 'À la prédation : elle dévore le rouget.'
+- id: f834189d-31cd-46eb-b046-a9415fedba8a
+  text: 'Au mutualisme : elle est indispensable au rouget.'
+correct_choice_ids:
+- db8b3ae1-c69b-4e02-8c3d-f81175dc5aa6
+explanation: 'La girelle tire sa nourriture des particules déterrées par le rouget,
+  sans contrepartie ni dommage pour lui : le schéma du commensalisme défini par le
+  manuel.'
+archived: false

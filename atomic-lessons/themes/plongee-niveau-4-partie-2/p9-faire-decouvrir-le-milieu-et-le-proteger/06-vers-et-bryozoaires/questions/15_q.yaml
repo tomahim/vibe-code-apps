@@ -1,0 +1,23 @@
+id: 23cbc63e-5081-4d5a-91de-49646a84da62
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel comportement commun aux vers à panache faut-il anticiper en approche
+  ?
+choices:
+- id: 2aa4e65d-0fc3-4a71-aa71-31cb9f7139ad
+  text: 'Ils rétractent leur panache à l''alerte : approche douce, sans couper courant
+    ni lumière.'
+- id: 4012d673-ca91-48a8-995c-7dc7463f7a56
+  text: Ils attaquent les plongeurs qui s'approchent.
+- id: 602fbf95-7423-459b-a90d-de48f387be5a
+  text: Ils se détachent et suivent la palanquée.
+- id: 06affa2b-9ad6-4a5e-923b-da889478959a
+  text: Ils s'éclairent eux-mêmes dans le noir.
+correct_choice_ids:
+- 2aa4e65d-0fc3-4a71-aa71-31cb9f7139ad
+explanation: 'Spirographes et sabelles cachent leur panache à la moindre alerte :
+  l''approche doit être douce, sans interposition entre l''animal et le courant ou
+  la lumière.'
+archived: false

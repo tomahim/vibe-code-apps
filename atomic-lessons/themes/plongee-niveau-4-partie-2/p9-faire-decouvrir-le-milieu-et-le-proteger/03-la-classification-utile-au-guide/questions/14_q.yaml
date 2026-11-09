@@ -1,0 +1,20 @@
+id: 9f0d5c5f-167c-44fe-824f-21251bf1c8d9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quoi servent les plaquettes immergeables, selon le manuel ?
+choices:
+- id: def440e0-8c2c-4897-aa0b-6b85d36fb19f
+  text: À identifier les espèces, sous l'eau ou dès le retour en surface.
+- id: 43b19252-b279-4cb2-a9b9-8043a1ce1b28
+  text: À noter les temps de palier pendant la plongée.
+- id: 68aa05a8-3257-4dae-a3c9-667624313ee2
+  text: À signaler sa position au bateau en surface.
+- id: 3cfdc905-2e48-4bb2-a909-712d5a8bd495
+  text: À protéger la combinaison du frottement sur le rocher.
+correct_choice_ids:
+- def440e0-8c2c-4897-aa0b-6b85d36fb19f
+explanation: Selon le manuel, des plaquettes immergeables permettent d'identifier
+  les espèces, sous l'eau ou dès le retour en surface.
+archived: false

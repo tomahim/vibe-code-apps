@@ -1,0 +1,20 @@
+id: e3539206-151a-4b9e-b978-5fe79c17b0ff
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel nomme-t-il les étoiles de mer ?
+choices:
+- id: 527ee4fe-c012-482f-aed2-bfcdb1d6fadd
+  text: Les astérides.
+- id: 6e53c89c-f5d5-485b-832d-4bb0c12b411b
+  text: Les crinoïdes.
+- id: 89a2492f-5fdb-424d-92dd-d0b2672e5146
+  text: Les holothuries.
+- id: ef48b93e-d071-4c4c-b7eb-b1d8f5256ab8
+  text: Les procordés.
+correct_choice_ids:
+- 527ee4fe-c012-482f-aed2-bfcdb1d6fadd
+explanation: Le manuel présente les étoiles de mer sous le nom d'astérides, au sein
+  des échinodermes.
+archived: false

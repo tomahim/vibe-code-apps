@@ -1,0 +1,20 @@
+id: 9480c77e-64ae-4fdb-925a-8d4e90c09727
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel comportement du poisson-perroquet le manuel décrit-il ?
+choices:
+- id: c3f26aad-576a-4ffe-b656-5354f458127c
+  text: Il croque le corail pour se nourrir des polypes et rejette le squelette calcaire.
+- id: 8efaf137-482e-4b81-9232-5de4d42c8604
+  text: Il imite le chant des oiseaux pour attirer ses proies.
+- id: b0b28df1-b5ef-421a-bb11-0a7bed030349
+  text: Il creuse des galeries dans le bois des épaves.
+- id: e4807401-10f9-4591-84c9-e674fd121f29
+  text: Il transporte ses œufs dans une poche ventrale.
+correct_choice_ids:
+- c3f26aad-576a-4ffe-b656-5354f458127c
+explanation: 'Selon le manuel, le poisson-perroquet croque le corail pour se nourrir
+  des polypes et rejette le squelette calcaire : une scène de vie animale à montrer.'
+archived: false

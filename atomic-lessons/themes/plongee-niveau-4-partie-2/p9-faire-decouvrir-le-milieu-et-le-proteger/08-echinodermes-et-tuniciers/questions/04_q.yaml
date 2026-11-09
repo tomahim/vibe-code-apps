@@ -1,0 +1,22 @@
+id: d4cffa2d-46b2-4afe-97ae-e224fd9d803c
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle différence visible distingue une ophiure d'une étoile de mer ?
+choices:
+- id: 59bd3b13-8c56-455f-8ba7-819a7a653062
+  text: L'ophiure a des bras longs et fins, nettement séparés du corps central ; l'étoile
+    a des bras courts soudés au corps.
+- id: e2b56dd5-2a25-4bb0-94d6-de54b1130fca
+  text: L'ophiure est une plante, l'étoile est un animal.
+- id: f2b869aa-eeaf-465e-8b45-53f2936ef49d
+  text: L'ophiure a deux coquilles, l'étoile n'en a qu'une.
+- id: 47bcb9a3-13e3-4755-bad9-ad60f0d8c2f0
+  text: L'ophiure nage en pleine eau, l'étoile vole sous l'eau.
+correct_choice_ids:
+- 59bd3b13-8c56-455f-8ba7-819a7a653062
+explanation: La planche du manuel montre les ophiures aux bras longs et fins, distincts
+  du disque central, par opposition aux étoiles de mer (astérides) au corps épais
+  en étoile.
+archived: false

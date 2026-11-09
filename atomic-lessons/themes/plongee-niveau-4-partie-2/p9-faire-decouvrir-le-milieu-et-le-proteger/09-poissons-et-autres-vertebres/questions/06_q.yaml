@@ -1,0 +1,21 @@
+id: 913eec83-d8f1-4dfe-986c-0ecd53dddb51
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi une raie ne se confond-elle pas avec un requin, selon cette leçon
+  ?
+choices:
+- id: 5b6c7ac8-12d0-4144-bac2-dc8cce6b353f
+  text: Ses fentes branchiales sont ventrales et elle nage avec des ailes.
+- id: 9e65cd36-c520-4b2f-a681-c8d755e7cad8
+  text: Elle est toujours plus petite qu'une main.
+- id: 94d4a6b3-994c-439c-8881-38b6c0bf10fc
+  text: Elle ne vit que dans les aquariums.
+- id: 271b934c-8a3e-4305-9fe3-5ff69950a0b4
+  text: Elle possède une coquille dure.
+correct_choice_ids:
+- 5b6c7ac8-12d0-4144-bac2-dc8cce6b353f
+explanation: 'Fentes branchiales sur la face ventrale et nage en ailes : la silhouette
+  d''une raie est distincte de celle d''un requin, dont les fentes sont latérales.'
+archived: false

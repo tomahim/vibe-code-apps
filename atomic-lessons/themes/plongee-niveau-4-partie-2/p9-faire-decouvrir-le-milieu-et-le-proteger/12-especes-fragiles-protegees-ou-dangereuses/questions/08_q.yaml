@@ -1,0 +1,21 @@
+id: d7c09491-3f98-45b6-99f6-6e3db2b57ec9
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel rôle jouent les mangroves pour les mérous géants, selon le manuel ?
+choices:
+- id: 0d93419f-b91f-479e-8e9e-b5505ad5773b
+  text: Ce sont des nurseries où les jeunes mérous passent leurs sept premières années.
+- id: f884ea24-fe65-4337-8e3a-367eb2119085
+  text: Ce sont des zones de chasse pour les mérous adultes.
+- id: b9f6943e-50ae-4c0a-be50-c3292da2d6de
+  text: Ce sont des pièges naturels qui tuent les mérous.
+- id: 67b2e24c-cef7-4ce7-98b9-a423504da566
+  text: Ce sont des zones sans aucun lien avec les mérous.
+correct_choice_ids:
+- 0d93419f-b91f-479e-8e9e-b5505ad5773b
+explanation: Selon le manuel, les œufs atteignent des zones propices comme les mangroves,
+  où les jeunes mérous séjournent leurs sept premières années avant de rejoindre les
+  eaux profondes.
+archived: false

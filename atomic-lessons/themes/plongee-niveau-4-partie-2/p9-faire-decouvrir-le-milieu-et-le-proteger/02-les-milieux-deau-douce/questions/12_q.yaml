@@ -1,0 +1,22 @@
+id: 41be285d-1981-4e8e-a903-34c58a04d088
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pour décrire un site d'eau douce, quelle démarche cette leçon reprend-elle
+  ?
+choices:
+- id: a82fc76c-ed60-4c60-bf44-467d25025650
+  text: 'Raisonner en écosystème et repérer les conditions favorables : nourriture,
+    température, luminosité, habitat.'
+- id: 64bf2f95-3ece-4608-a8a8-5cc7cd26af1b
+  text: Improviser des noms d'espèces pour répondre vite aux plongeurs.
+- id: 47687743-5ff9-4da6-a591-9f365d7c9793
+  text: Décrire uniquement la température de l'eau.
+- id: 955866dc-f480-4cb5-a20e-abd739590db6
+  text: Éviter toute description, faute de documentation.
+correct_choice_ids:
+- a82fc76c-ed60-4c60-bf44-467d25025650
+explanation: La démarche écosystème du manuel (êtres vivants + environnement, conditions
+  de vie favorables) s'applique aussi aux milieux d'eau douce.
+archived: false

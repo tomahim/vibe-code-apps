@@ -1,0 +1,20 @@
+id: 48621bab-6085-4c17-8370-882a7f599241
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle récompense le manuel associe-t-il à une approche réussie ?
+choices:
+- id: f73acb4b-fa19-420a-a0d8-0569cdba135e
+  text: Le sourire radieux des compagnons d'exploration.
+- id: bceb0189-ae4b-4711-89f9-2ad96f3cbb18
+  text: Une prime versée par le club.
+- id: 6d7abff8-d1c5-4d8f-8e7e-ea8fdf7e4476
+  text: Le droit de pêcher sur le site.
+- id: 11c50210-606f-46bc-a0ff-5cd5fa666282
+  text: Une mention au carnet de plongée.
+correct_choice_ids:
+- f73acb4b-fa19-420a-a0d8-0569cdba135e
+explanation: 'Selon le manuel, le plaisir de la plongée est alors au rendez-vous :
+  le sourire radieux de vos compagnons d''exploration en est la récompense.'
+archived: false

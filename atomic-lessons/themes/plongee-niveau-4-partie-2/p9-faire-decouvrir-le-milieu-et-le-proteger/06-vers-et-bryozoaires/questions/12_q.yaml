@@ -1,0 +1,20 @@
+id: 9df61c3c-be75-45de-b9bf-143417b734f5
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Où le plongeur croise-t-il les bryozoaires, selon cette leçon ?
+choices:
+- id: 4631169d-ff1a-434b-8389-44a6e6df2df8
+  text: Sur les fonds rocheux et le coralligène.
+- id: 22f74e64-61e6-41dd-b487-ed6c3ec3bc53
+  text: En pleine eau au milieu des bancs.
+- id: 8aa67694-7d5c-4b92-86ff-c1b03152693c
+  text: Uniquement dans les épaves profondes.
+- id: f725a9ca-6bf3-49e9-922d-01f9b9e22470
+  text: Sur la plage à marée basse uniquement.
+correct_choice_ids:
+- 4631169d-ff1a-434b-8389-44a6e6df2df8
+explanation: Les bryozoaires illustrés par le manuel sont des colonies fixées que
+  le plongeur croise sur les fonds rocheux et le coralligène.
+archived: false

@@ -1,0 +1,22 @@
+id: ba4c6ea2-2b6d-42c3-8848-2490279e6747
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit la charte à propos des animaux réfugiés dans leur cachette ?
+choices:
+- id: 9bbd88df-a6e3-485b-a938-359be52c59c6
+  text: 'Ne pas les forcer : ils sont déjà stressés ; patienter sans bouger jusqu''à
+    ce qu''ils retrouvent leur calme et sortent à nouveau.'
+- id: 30f7e6fb-8db5-4d55-bb3a-829ba03d3ccc
+  text: Les déloger doucement avec la main pour les observer.
+- id: 86b79915-6b9e-44b4-85ab-fd86d7126b46
+  text: Les bloquer dans leur trou pour les photographier.
+- id: 90f44153-c542-4675-a51e-d803ab2d93c9
+  text: Revenir le lendemain avec plus de plongeurs.
+correct_choice_ids:
+- 9bbd88df-a6e3-485b-a938-359be52c59c6
+explanation: 'Selon la charte, ne harcelez pas les animaux : s''ils se sont réfugiés
+  dans leur cachette, ne les forcez pas ; patientez sans bouger jusqu''à ce qu''ils
+  retrouvent leur calme et sortent à nouveau.'
+archived: false

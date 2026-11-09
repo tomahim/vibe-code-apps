@@ -1,0 +1,22 @@
+id: cb958fe6-cd1a-49e2-a80e-c9459ae9c552
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles caractéristiques des cétacés le manuel cite-t-il ?
+choices:
+- id: e262aecc-87de-4bee-b6a4-ab50e0299e22
+  text: Environ 78 espèces, vie entièrement dans l'eau, température interne constante
+    de l'ordre de 36 °C, émission d'ultrasons pour se repérer.
+- id: d591fb9e-d15a-48e6-8d86-c79df495a1a6
+  text: Respiration par branchies et ponte sur les plages.
+- id: a424429a-1b7b-4286-8f37-7035f14cd8b9
+  text: Squelette cartilagineux et fentes branchiales latérales.
+- id: d16a45be-132a-4a0d-b93c-856bc594bc9c
+  text: Hibernation sous-marine de six mois par an.
+correct_choice_ids:
+- e262aecc-87de-4bee-b6a4-ab50e0299e22
+explanation: Selon le manuel, les cétacés (environ 78 espèces) passent toute leur
+  vie dans l'eau, ont une température interne constante de l'ordre de 36 °C, ingèrent
+  leurs proies sans les mâcher et émettent des ultrasons pour se repérer.
+archived: false

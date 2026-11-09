@@ -1,0 +1,20 @@
+id: 5a3c8c1b-7f6a-4252-b64b-5b7eb0937dcd
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que signifie le « S » du résumé S.I.C.L. du manuel ?
+choices:
+- id: e21f58ce-834e-44b9-aa43-eb37ef5c35f0
+  text: 'Silence : ne faites pas de bruit, limitez votre ventilation (courtes apnées).'
+- id: e44e75ea-3bf5-47df-aa1d-7e7e818cf020
+  text: 'Surface : restez toujours près de la surface.'
+- id: d147b132-7b12-48f1-9760-17ad89b7d3b5
+  text: 'Sécurité : regardez votre manomètre en permanence.'
+- id: a79929c5-c5b1-4ded-98a0-0506d890add7
+  text: 'Souplesse : pliez les genoux à chaque palmage.'
+correct_choice_ids:
+- e21f58ce-834e-44b9-aa43-eb37ef5c35f0
+explanation: 'S.I.C.L. : Silence (pas de bruit, ventilation limitée par courtes apnées),
+  Immobilité, Courant, Lumière.'
+archived: false

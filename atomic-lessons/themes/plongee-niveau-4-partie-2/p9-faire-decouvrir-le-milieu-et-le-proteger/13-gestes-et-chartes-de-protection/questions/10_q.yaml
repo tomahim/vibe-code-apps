@@ -1,0 +1,20 @@
+id: e8c10593-1865-430d-9bd2-1fc62d869bc8
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelles sources de perturbations le MFT demande-t-il de maîtriser ?
+choices:
+- id: 03c2e03b-bf2b-46c8-baca-801450a0187e
+  text: La lumière, le bruit et les bulles.
+- id: 03245a77-d212-4ff3-8c4e-7f80ca94b9d5
+  text: Le courant, la marée et la houle.
+- id: 720313ca-3266-4e60-909f-97d0062a3051
+  text: La température, la salinité et la densité.
+- id: 1bf47d48-8642-4282-98f5-fa9dc422cf35
+  text: La profondeur, la durée et la vitesse.
+correct_choice_ids:
+- 03c2e03b-bf2b-46c8-baca-801450a0187e
+explanation: 'Selon le MFT (mai 2026), le guide maîtrise les instruments sources de
+  perturbations : lumière, bruit, bulles.'
+archived: false

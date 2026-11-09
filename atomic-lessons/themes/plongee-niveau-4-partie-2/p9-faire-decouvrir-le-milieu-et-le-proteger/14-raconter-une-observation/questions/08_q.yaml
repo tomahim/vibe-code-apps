@@ -1,0 +1,20 @@
+id: f6a34421-9b67-49b9-820c-99097c5f0aaa
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que signale cette leçon à propos de DORIS et du manuel N4 ?
+choices:
+- id: 6b76053d-4249-4b2a-b338-e40598b383bc
+  text: DORIS est cité par le MFT, mais pas mentionné par le manuel N4 (10e éd. 2020).
+- id: 8a526ae4-775d-43e4-92d8-dafe2a63364b
+  text: DORIS est le chapitre 8 du manuel N4.
+- id: e88c18b4-26e1-45e2-a0ea-2e1bbaa5d0ab
+  text: Le manuel N4 interdit l'usage de DORIS.
+- id: 68f22b45-e9b3-491e-99fb-971acd4f0f6a
+  text: DORIS n'existe plus depuis 2020.
+correct_choice_ids:
+- 6b76053d-4249-4b2a-b338-e40598b383bc
+explanation: 'Note de préparation honnête : DORIS est cité par le MFT (mai 2026) comme
+  site ressource, mais le manuel N4 (10e éd. 2020) ne le mentionne pas.'
+archived: false

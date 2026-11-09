@@ -1,0 +1,22 @@
+id: 7f38eaa2-1a8e-417a-9b27-f4c3508f1699
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels souvenirs la charte interdit-elle d'acheter ?
+choices:
+- id: d4337291-9020-4c1e-a959-20c7b2b67f58
+  text: 'Les souvenirs arrachés à la mer : dent de requin, carapace de tortue, étoile
+    de mer, hippocampe, poissons séchés, corail, coquillages.'
+- id: 1eb24689-7359-4552-8a66-d7aadc2053fc
+  text: Les cartes postales et les t-shirts du club.
+- id: 2cde44e0-8097-42f9-88c9-ac7671ce69e9
+  text: Les ouvrages d'identification des espèces.
+- id: 597a1043-c515-4ba0-bdb9-0e91a5258d7c
+  text: Les plaquettes immergeables.
+correct_choice_ids:
+- d4337291-9020-4c1e-a959-20c7b2b67f58
+explanation: 'Selon la charte, n''achetez pas de souvenirs arrachés à la mer : dent
+  de requin, carapace de tortue, étoile de mer, hippocampe et autres poissons séchés,
+  corail, coquillages.'
+archived: false
