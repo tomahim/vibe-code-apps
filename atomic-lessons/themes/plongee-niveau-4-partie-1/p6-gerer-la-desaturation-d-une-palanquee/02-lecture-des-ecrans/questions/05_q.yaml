@@ -1,0 +1,21 @@
+id: ebbc95af-0435-4bd9-819f-847ea133ef90
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qu'indique le message DECTIME, STOP ou DECOSTOP pendant la plongée ?
+choices:
+- id: 9ccf3813-be73-4493-872f-2606c84e4040
+  text: Le temps et la profondeur du palier, parfois notés CEILING.
+- id: 9702f960-a317-4de0-9a33-445af2ae18f9
+  text: La fin de la plongée et l'obligation de faire surface immédiatement.
+- id: 3f14bffe-e6cd-4524-ad6b-5a284aa7fb7f
+  text: Une panne de l'ordinateur imposant une remontée d'urgence directe.
+- id: a960389f-e34b-4e37-89c7-f384ffa39983
+  text: Le début du décompte du délai minimum avant de prendre l'avion.
+correct_choice_ids:
+- 9ccf3813-be73-4493-872f-2606c84e4040
+explanation: Quand la zone des plongées avec palier est atteinte, une alarme sonore
+  retentit et le message DECTIME, STOP ou DECOSTOP indique le temps et la profondeur
+  du palier (CEILING), parfois complété par le temps total de remontée ASC TIME.
+archived: false

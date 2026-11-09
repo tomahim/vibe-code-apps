@@ -1,0 +1,21 @@
+id: 34f9494a-a239-4322-b7f1-8dce3927bc3c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que se passe-t-il au moment où le mode PLONGÉE s'active ?
+choices:
+- id: 6a1ae0ce-1bf4-4eb7-83e8-c54dec7f8194
+  text: Le temps est décompté, les paramètres mémorisés, les calculs lancés.
+- id: 27e431d7-c20b-44b7-a149-5b53e97cfdf1
+  text: L'ordinateur efface la plongée précédente pour libérer sa mémoire.
+- id: 9ca73e03-3ebd-4185-9d15-994decaa462d
+  text: L'ordinateur affiche le délai avant avion et passe en mode surface.
+- id: 299895b6-9027-486e-afd1-fedb8d2fb16f
+  text: L'ordinateur bloque la remontée tant que les paliers ne sont pas faits.
+correct_choice_ids:
+- 6a1ae0ce-1bf4-4eb7-83e8-c54dec7f8194
+explanation: 'À partir de l''activation du mode PLONGÉE : le temps d''immersion est
+  décompté, les paramètres (temps, profondeur) sont mémorisés et les calculs de désaturation
+  sont effectués.'
+archived: false

@@ -1,0 +1,21 @@
+id: 05836bde-66bc-4b1c-bb09-03a4d6aed3d0
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que signifie généralement la valeur 99 (ou « - - ») affichée après le message
+  NDL ?
+choices:
+- id: 6039a766-5026-403d-9451-86903cbe4721
+  text: Le temps sans palier dépasse la capacité d'affichage de l'écran.
+- id: 1a6e0855-55d9-48bc-85bc-a8fd5aa7544b
+  text: Il reste exactement 99 secondes avant le premier palier obligatoire.
+- id: 10277524-afa7-4af5-a2ce-336f3d34354a
+  text: L'ordinateur refuse de calculer tant que la profondeur n'est pas stable.
+- id: 5e551d9f-1dc8-43fa-b18a-d40160689e37
+  text: La batterie est chargée à 99 % et doit être surveillée pendant la plongée.
+correct_choice_ids:
+- 6039a766-5026-403d-9451-86903cbe4721
+explanation: Généralement, la valeur 99 (ou le signe « - - ») indique que le temps
+  sans palier est plus important que la capacité d'affichage de l'écran.
+archived: false
