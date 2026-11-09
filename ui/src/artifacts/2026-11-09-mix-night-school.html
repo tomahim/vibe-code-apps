@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mix Night School - learn to mix, one night at a time</title>
+<style>
+:root{
+  --paper:#141723; --card:#1a1e2e; --wash:#20263c; --line:#363d52;
+  --ink:#e9e8e1; --muted:#9aa0b5; --faint:#6b7186;
+  --accent:#a8b0ff; --accent-bright:#c8cdff; --accent-dim:#a8b0ff22;
+  --good:#7fd6a4; --warn:#e8c268; --bad:#e58a8a;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color-scheme:dark}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+h1,h2,h3{font-weight:650;margin:0}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px 90px}
+header.top{padding:44px 0 8px}
+.eyebrow{color:var(--muted);font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+header.top h1{font-size:clamp(30px,5.4vw,46px);letter-spacing:-.01em;margin:8px 0 10px}
+header.top h1 em{font-style:normal;color:var(--accent)}
+header.top p{max-width:640px;color:var(--muted);margin:0}
+.synth-note{color:var(--faint);font:11px var(--mono);margin-top:10px;letter-spacing:.04em}
+/* night rail */
+.nights{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 6px}
+.night-dot{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 10px 7px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-width:64px;transition:border-color .15s,background .15s}
+.night-dot .n-num{font:11px var(--mono);color:var(--muted);letter-spacing:.1em}
+.night-dot .n-state{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.night-dot.done .n-state{background:var(--good)}
+.night-dot.current{border-color:var(--accent);background:var(--wash)}
+.night-dot.current .n-num{color:var(--accent-bright)}
+.night-dot.locked{opacity:.38;cursor:not-allowed}
+.night-dot:not(.locked):hover{border-color:var(--accent)}
+.night-dot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* lesson card */
+.lesson{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 22px 20px}
+.lesson-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.lesson-head .night-label{font:11px var(--mono);color:var(--accent);letter-spacing:.14em;text-transform:uppercase}
+.lesson-head h2{font-size:22px}
+.concept{color:var(--muted);margin:14px 0 0;max-width:70ch}
+.concept strong{color:var(--ink);font-weight:600}
+.concept em{color:var(--accent-bright);font-style:normal}
+.move-demo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 0;padding:12px 14px;border:1px dashed var(--line);border-radius:10px}
+.move-demo .label{font:11px var(--mono);color:var(--muted);letter-spacing:.08em}
+.pill-btn{border:1px solid var(--line);border-radius:999px;padding:7px 16px;background:var(--wash);font:12px var(--mono);letter-spacing:.06em;transition:border-color .15s,background .15s}
+.pill-btn:hover{border-color:var(--accent)}
+.pill-btn.playing{border-color:var(--accent);background:var(--accent-dim);color:var(--accent-bright)}
+.pill-btn:disabled{opacity:.4;cursor:default}
+.pill-btn.primary{background:var(--accent);border-color:var(--accent);color:#141723;font-weight:600}
+.pill-btn.primary:hover{background:var(--accent-bright)}
+.exercise{margin:16px 0 0}
+.exercise h3{font:11px var(--mono);color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.exercise p{margin:0;color:var(--ink)}
+.lesson-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.pass-tag{font:11px var(--mono);color:var(--good);letter-spacing:.08em;align-self:center}
+</style>
+<style>
+/* console */
+.console{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 14px 14px}
+.transport{display:flex;align-items:center;gap:12px;padding:2px 6px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.transport .tempo{font:11px var(--mono);color:var(--faint);letter-spacing:.1em}
+.transport .hint{margin-left:auto;font:11px var(--mono);color:var(--faint)}
+.strips-scroll{overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+.strips{display:flex;gap:10px;padding:14px 4px 4px;min-width:min-content;width:100%}
+.strip{scroll-snap-align:start;flex:1 1 96px;min-width:96px;max-width:132px;background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:9px;position:relative}
+.strip .ch-name{font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}
+.strip .ch-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.85}
+.strip.muted-ch .ch-dot{background:var(--bad)}
+.strip.solo-ch .ch-dot{background:var(--good)}
+.knob-row{display:flex;gap:4px}
+.ctl{display:flex;flex-direction:column;align-items:center;gap:3px;touch-action:none;user-select:none;-webkit-user-select:none}
+.ctl .c-label{font:9px var(--mono);color:var(--faint);letter-spacing:.06em}
+.ctl .c-val{font:9px var(--mono);color:var(--muted);min-height:11px}
+.ctl.locked{opacity:.32;pointer-events:none}
+.knob{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#2c3350,#171b2b 70%);border:1px solid var(--line);position:relative;cursor:ns-resize}
+.knob::after{content:"";position:absolute;left:50%;top:3px;width:2px;height:9px;background:var(--accent);border-radius:1px;transform-origin:50% 12px;transform:translateX(-50%) rotate(var(--rot,0deg))}
+.ctl:focus-visible .knob,.fader:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.fader{width:34px;height:150px;position:relative;cursor:ns-resize;touch-action:none;user-select:none;-webkit-user-select:none}
+.fader .rail{position:absolute;left:50%;top:0;bottom:0;width:4px;transform:translateX(-50%);background:#10131f;border-radius:2px;border:1px solid #2a3049}
+.fader .tick{position:absolute;left:50%;width:12px;height:1px;background:var(--line);transform:translateX(-50%)}
+.fader .cap{position:absolute;left:50%;width:30px;height:16px;transform:translate(-50%,-50%);background:linear-gradient(#e9e8e1,#b9b8b0);border-radius:3px;border:1px solid #00000060;box-shadow:0 2px 5px #00000070}
+.fader .cap::after{content:"";position:absolute;left:3px;right:3px;top:50%;height:2px;transform:translateY(-50%);background:#141723;border-radius:1px}
+.ms-row{display:flex;gap:6px}
+.ms-btn{font:9px var(--mono);width:22px;height:20px;border:1px solid var(--line);border-radius:5px;color:var(--faint);letter-spacing:.05em}
+.ms-btn.on-m{background:var(--bad);border-color:var(--bad);color:#141723}
+.ms-btn.on-s{background:var(--good);border-color:var(--good);color:#141723}
+.meter{width:8px;height:150px;background:#10131f;border:1px solid #2a3049;border-radius:2px;position:relative;overflow:hidden}
+.meter>i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,#7fd6a4 0%,#7fd6a4 62%,#e8c268 80%,#e58a8a 96%);height:0%}
+.fader-zone{display:flex;gap:8px;align-items:flex-start}
+.strip.master{flex:0 0 96px;max-width:96px;background:#181c2c}
+.strip.master .ch-name{color:var(--accent)}
+.console-note{font:10px var(--mono);color:var(--faint);padding:8px 6px 0;letter-spacing:.04em}
+/* exam */
+.exam{position:fixed;inset:0;background:#0b0d16ee;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.exam.open{display:flex}
+.exam-card{background:var(--card);border:1px solid var(--line);border-radius:14px;max-width:520px;width:100%;padding:26px 24px;max-height:88vh;overflow-y:auto}
+.exam-card h2{font-size:20px;margin-bottom:4px}
+.exam-card .round{font:11px var(--mono);color:var(--accent);letter-spacing:.12em;margin-bottom:12px}
+.exam-card p{color:var(--muted);margin:0 0 14px}
+.ab-row{display:flex;gap:10px;margin-bottom:12px}
+.ab-btn{flex:1;border:1px solid var(--line);border-radius:10px;padding:14px 10px;background:var(--wash);font:14px var(--mono);letter-spacing:.08em;transition:border-color .15s}
+.ab-btn:hover{border-color:var(--accent)}
+.ab-btn.playing{border-color:var(--accent);background:var(--accent-dim);color:var(--accent-bright)}
+.ab-btn.picked{border-color:var(--good);color:var(--good)}
+.ab-btn:disabled{opacity:.4;cursor:default}
+.exam-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.exam-result{font:12px var(--mono);color:var(--muted)}
+/* report */
+.report{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:none}
+.report.show{display:block}
+.report h2{font-size:18px;margin-bottom:2px}
+.report .sub{color:var(--muted);font-size:13px;margin-bottom:12px}
+.delta-table{width:100%;border-collapse:collapse;font:12px var(--mono)}
+.delta-table th{text-align:left;color:var(--faint);font-weight:400;letter-spacing:.08em;font-size:10px;text-transform:uppercase;padding:4px 8px 4px 0;border-bottom:1px solid var(--line)}
+.delta-table td{padding:6px 8px 6px 0;border-bottom:1px solid #262c42;color:var(--muted)}
+.delta-table td.v-good{color:var(--good)}
+.delta-table td.v-close{color:var(--warn)}
+.delta-table td.v-off{color:var(--bad)}
+footer.notes{margin-top:30px;color:var(--faint);font:11px var(--mono);line-height:1.8;letter-spacing:.03em;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:640px){
+  header.top{padding:30px 0 4px}
+  .lesson{padding:18px 16px}
+  .fader{height:128px}
+  .meter{height:128px}
+  .strip{min-width:92px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Genious artifacts · ear training</div>
+    <h1>Mix <em>Night School</em></h1>
+    <p>A browser mixing desk that teaches you to mix, one move per night. Balance faders, place the vocal, carve EQ, glue with compression - then prove you can hear it in a blind test against the reference mix.</p>
+    <div class="synth-note">ALL STEMS ARE SYNTHESIZED LIVE IN YOUR BROWSER - NO SAMPLES, NO FILES.</div>
+    <nav class="nights" id="nights" aria-label="Lessons"></nav>
+  </header>
+
+  <section class="lesson" id="lessonCard">
+    <div class="lesson-head">
+      <span class="night-label" id="lessonNight"></span>
+      <h2 id="lessonTitle"></h2>
+    </div>
+    <div class="concept" id="lessonConcept"></div>
+    <div class="move-demo" id="moveDemo">
+      <span class="label">HEAR THE MOVE</span>
+      <button class="pill-btn" id="demoBefore">BEFORE</button>
+      <button class="pill-btn" id="demoAfter">AFTER</button>
+      <span class="label" id="demoStatus" style="color:var(--faint)"></span>
+    </div>
+    <div class="exercise">
+      <h3>Tonight's exercise</h3>
+      <p id="lessonExercise"></p>
+    </div>
+    <div class="lesson-actions">
+      <button class="pill-btn primary" id="startAudio">START THE DESK</button>
+      <button class="pill-btn" id="resetMix" style="display:none">RESET MY MIX</button>
+      <button class="pill-btn" id="takeExam" style="display:none">TAKE THE BLIND TEST</button>
+      <span class="pass-tag" id="passTag"></span>
+    </div>
+  </section>
+
+  <section class="report" id="report">
+    <h2 id="reportTitle"></h2>
+    <div class="sub" id="reportSub"></div>
+    <table class="delta-table">
+      <thead><tr><th>Control</th><th>Yours</th><th>Reference</th><th>Verdict</th></tr></thead>
+      <tbody id="reportBody"></tbody>
+    </table>
+  </section>
+
+  <section class="console" id="console" style="display:none">
+    <div class="transport">
+      <button class="pill-btn primary" id="playBtn">PLAY</button>
+      <span class="tempo">4-BAR LOOP · 100 BPM · A MINOR</span>
+      <span class="hint">DRAG FADERS &amp; KNOBS · ARROW KEYS FINE-TUNE · DOUBLE-CLICK RESETS</span>
+    </div>
+    <div class="strips-scroll">
+      <div class="strips" id="strips"></div>
+    </div>
+    <div class="console-note">EVERY A/B COMPARISON IN THIS SCHOOL IS LOUDNESS-MATCHED - LOUDER IS NOT BETTER HERE.</div>
+  </section>
+
+  <footer class="notes">
+    THERE IS NO SINGLE CORRECT MIX - THE REFERENCE IS ONE BALANCED TASTE, AND THE COACH TEACHES RANGES, NOT RULES.<br>
+    PROGRESS LIVES IN THIS TAB ONLY: RELOAD AND SCHOOL RESTARTS. HEADPHONES RECOMMENDED.
+  </footer>
+</div>
+
+<div class="exam" id="exam" role="dialog" aria-modal="true" aria-label="Blind test">
+  <div class="exam-card">
+    <div class="round" id="examRound"></div>
+    <h2>Which one is the reference?</h2>
+    <p id="examIntro">Two mixes, loudness-matched, random order. One is the reference, one is yours. Pick the reference - no peeking at the desk while you decide.</p>
+    <div class="ab-row">
+      <button class="ab-btn" id="playA">PLAY A</button>
+      <button class="ab-btn" id="playB">PLAY B</button>
+    </div>
+    <div class="ab-row">
+      <button class="ab-btn" id="pickA">A IS THE REFERENCE</button>
+      <button class="ab-btn" id="pickB">B IS THE REFERENCE</button>
+    </div>
+    <div class="exam-foot">
+      <span class="exam-result" id="examStatus"></span>
+      <button class="pill-btn" id="examQuit">BACK TO THE DESK</button>
+    </div>
+  </div>
+</div>
+<script>
+"use strict";
+/* ============ song model ============ */
+const BPM = 100, SPB = 60 / BPM, STEP = SPB / 4, STEPS = 64, LOOP = STEPS * STEP; // 4 bars, 9.6s
+const mf = m => 440 * Math.pow(2, (m - 69) / 12); // midi -> Hz
+// chords: Am, F, C, G (one per bar)
+const CH = {
+  kick: [0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60].map(s => ({s, v: 1})),
+  snare: [4,12,20,28,36,44,52,60].map(s => ({s, v: 1})),
+  hats: Array.from({length: 32}, (_, i) => ({s: i * 2, v: i % 4 === 1 ? 0.55 : 0.95}))
+    .concat([{s: 31, v: 0.5}, {s: 63, v: 0.5}]),
+  // bass: 8ths, root + octave, approach note at each bar end
+  bass: (() => {
+    const roots = [45, 41, 48, 43]; // A2 F2 C3 G2
+    const appr  = [52, 48, 55, 50]; // E3 C4 G3 D3-ish approach
+    const out = [];
+    for (let b = 0; b < 4; b++) {
+      const r = roots[b], base = b * 16;
+      [0, 4, 8, 10].forEach(o => out.push({s: base + o, d: 2, m: r, v: o === 10 ? 0.7 : 1}));
+      [2, 6, 12].forEach(o => out.push({s: base + o, d: 2, m: r + 12, v: 0.75}));
+      out.push({s: base + 14, d: 2, m: appr[b], v: 0.85});
+    }
+    return out;
+  })(),
+  // keys: stabs at 0, 7, 10 of each bar
+  keys: (() => {
+    const chords = [[57, 60, 64], [53, 57, 60], [55, 60, 64], [55, 59, 62]]; // Am F C G voicings
+    const out = [];
+    for (let b = 0; b < 4; b++) {
+      const base = b * 16;
+      [[0, 5], [7, 3], [10, 2]].forEach(([o, d]) => chords[b].forEach(m => out.push({s: base + o, d, m, v: o === 0 ? 0.9 : 0.65})));
+    }
+    return out;
+  })(),
+  // lead: one phrase over the 4 bars (A minor)
+  lead: [
+    {s: 0, d: 6, m: 69}, {s: 8, d: 4, m: 72}, {s: 12, d: 4, m: 74},
+    {s: 16, d: 6, m: 76}, {s: 24, d: 4, m: 74}, {s: 28, d: 4, m: 72},
+    {s: 32, d: 6, m: 69}, {s: 40, d: 4, m: 67}, {s: 44, d: 4, m: 69},
+    {s: 48, d: 8, m: 72}, {s: 56, d: 6, m: 67},
+  ].map(n => ({...n, v: 0.9})),
+};
+const CHANNELS = [
+  {id: "kick",  name: "KICK"},
+  {id: "snare", name: "SNARE"},
+  {id: "hats",  name: "HATS"},
+  {id: "bass",  name: "BASS"},
+  {id: "keys",  name: "KEYS"},
+  {id: "lead",  name: "LEAD VOX"},
+];
+/* ============ voices (pure WebAudio, no samples) ============ */
+function noiseBuffer(ctx){
+  const b = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+  const d = b.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return b;
+}
+function vKick(ctx, out, t, v){
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = "sine";
+  o.frequency.setValueAtTime(155, t);
+  o.frequency.exponentialRampToValueAtTime(46, t + 0.09);
+  g.gain.setValueAtTime(1.0 * v, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+  o.connect(g).connect(out); o.start(t); o.stop(t + 0.3);
+}
+function vSnare(ctx, out, t, v, noise){
+  const n = ctx.createBufferSource(); n.buffer = noise;
+  const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1900; bp.Q.value = 0.9;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.75 * v, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+  n.connect(bp).connect(g).connect(out); n.start(t); n.stop(t + 0.2);
+  const o = ctx.createOscillator(), g2 = ctx.createGain();
+  o.type = "triangle"; o.frequency.setValueAtTime(196, t);
+  g2.gain.setValueAtTime(0.5 * v, t);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+  o.connect(g2).connect(out); o.start(t); o.stop(t + 0.1);
+}
+function vHat(ctx, out, t, v, noise){
+  const n = ctx.createBufferSource(); n.buffer = noise;
+  const hp = ctx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 7800;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.42 * v, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+  n.connect(hp).connect(g).connect(out); n.start(t); n.stop(t + 0.06);
+}
+function vBass(ctx, out, t, m, dur, v){
+  const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = mf(m);
+  const o2 = ctx.createOscillator(); o2.type = "square"; o2.frequency.value = mf(m - 12);
+  const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 640; lp.Q.value = 0.6;
+  const g = ctx.createGain();
+  const end = t + dur * STEP;
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.5 * v, t + 0.012);
+  g.gain.setTargetAtTime(0, end - 0.02, 0.03);
+  const g2 = ctx.createGain(); g2.gain.value = 0.45;
+  o.connect(g); o2.connect(g2).connect(g);
+  g.connect(lp).connect(out);
+  o.start(t); o.stop(end + 0.15); o2.start(t); o2.stop(end + 0.15);
+}
+function vKeys(ctx, out, t, m, dur, v){
+  const end = t + dur * STEP;
+  [0, 12].forEach((off, i) => {
+    const o = ctx.createOscillator(); o.type = i ? "sine" : "triangle";
+    o.frequency.value = mf(m + off);
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime((i ? 0.14 : 0.24) * v, t + 0.01);
+    g.gain.setTargetAtTime(0, end - 0.01, 0.05);
+    o.connect(lp).connect(g).connect(out);
+    o.start(t); o.stop(end + 0.25);
+  });
+}
+function vLead(ctx, out, t, m, dur, v){
+  const end = t + dur * STEP;
+  const o = ctx.createOscillator(); o.type = "sine"; o.frequency.value = mf(m);
+  const o2 = ctx.createOscillator(); o2.type = "sine"; o2.frequency.value = mf(m); o2.detune.value = 7;
+  const vib = ctx.createOscillator(); vib.frequency.value = 5.6;
+  const vibG = ctx.createGain(); vibG.gain.value = 4.5;
+  vib.connect(vibG); vibG.connect(o.detune); vibG.connect(o2.detune);
+  const g = ctx.createGain(), g2 = ctx.createGain(); g2.gain.value = 0.35;
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.34 * v, t + 0.05);
+  g.gain.setTargetAtTime(0, end - 0.03, 0.05);
+  o.connect(g); o2.connect(g2).connect(g); g.connect(out);
+  o.start(t); o.stop(end + 0.2); o2.start(t); o2.stop(end + 0.2);
+  vib.start(t); vib.stop(end + 0.2);
+}
+function scheduleStep(ctx, buses, step, t, noise){
+  CH.kick.forEach(n => n.s === step && vKick(ctx, buses.kick, t, n.v));
+  CH.snare.forEach(n => n.s === step && vSnare(ctx, buses.snare, t, n.v, noise));
+  CH.hats.forEach(n => n.s === step && vHat(ctx, buses.hats, t, n.v, noise));
+  CH.bass.forEach(n => n.s === step && vBass(ctx, buses.bass, t, n.m, n.d, n.v));
+  CH.keys.forEach(n => n.s === step && vKeys(ctx, buses.keys, t, n.m, n.d, n.v));
+  CH.lead.forEach(n => n.s === step && vLead(ctx, buses.lead, t, n.m, n.d, n.v));
+}
+</script>
+<script>
+"use strict";
+/* ============ mix params ============ */
+// fader pos 0..1 -> dB (-60..+6); unity (0 dB) at ~0.909
+const faderDb = p => p <= 0.004 ? -Infinity : p * 66 - 60;
+const faderGain = p => Math.pow(10, faderDb(p) / 20);
+const FLAT = {fader: 0.909, pan: 0, low: 0, mid: 0, high: 0, comp: 0, mute: false, solo: false};
+const newFlat = () => ({...FLAT});
+// The reference: one balanced taste (faders tuned so the stems sit together)
+const REFERENCE = {
+  kick:  {...FLAT, fader: 0.94, comp: 0.35},
+  snare: {...FLAT, fader: 0.90, comp: 0.30},
+  hats:  {...FLAT, fader: 0.72, pan: 0.30, high: 3},
+  bass:  {...FLAT, fader: 0.95},
+  keys:  {...FLAT, fader: 0.78, pan: -0.35, low: -7, mid: -3},
+  lead:  {...FLAT, fader: 0.97, high: 2},
+};
+/* ============ channel strip engine ============ */
+function buildChain(ctx, master){
+  const input = ctx.createGain();
+  const low = ctx.createBiquadFilter(); low.type = "lowshelf"; low.frequency.value = 200;
+  const mid = ctx.createBiquadFilter(); mid.type = "peaking"; mid.frequency.value = 800; mid.Q.value = 1.0;
+  const high = ctx.createBiquadFilter(); high.type = "highshelf"; high.frequency.value = 8000;
+  const comp = ctx.createDynamicsCompressor();
+  comp.knee.value = 12; comp.attack.value = 0.006; comp.release.value = 0.16;
+  const pan = ctx.createStereoPanner();
+  const fader = ctx.createGain();
+  const out = ctx.createGain(); // mute/solo bus
+  input.connect(low).connect(mid).connect(high).connect(comp).connect(pan).connect(fader).connect(out).connect(master);
+  return {input, low, mid, high, comp, pan, fader, out};
+}
+function applyParams(chain, p, ctx, smooth){
+  const t = ctx.currentTime;
+  const set = (param, v) => smooth ? param.setTargetAtTime(v, t, 0.025) : param.setValueAtTime(v, t);
+  set(chain.low.gain, p.low); set(chain.mid.gain, p.mid); set(chain.high.gain, p.high);
+  set(chain.comp.threshold, -8 - 32 * p.comp);
+  set(chain.comp.ratio, 1 + 5 * p.comp);
+  set(chain.pan.pan, p.pan);
+  set(chain.fader.gain, faderGain(p.fader));
+}
+function applyMuteSolo(chains, params){
+  const anySolo = CHANNELS.some(c => params[c.id].solo);
+  CHANNELS.forEach(c => {
+    const p = params[c.id];
+    const audible = p.mute ? false : (anySolo ? p.solo : true);
+    chains[c.id].out.gain.setTargetAtTime(audible ? 1 : 0, AC.currentTime, 0.015);
+  });
+}
+/* ============ offline render (exams + demos, loudness-matched) ============ */
+function renderMix(params, seconds){
+  const sr = 44100, tail = 0.5;
+  const ctx = new OfflineAudioContext(2, Math.ceil((seconds + tail) * sr), sr);
+  const master = ctx.createGain(); master.gain.value = 0.34; master.connect(ctx.destination);
+  const buses = {};
+  CHANNELS.forEach(c => {
+    const chain = buildChain(ctx, master);
+    applyParams(chain, params[c.id], ctx, false);
+    chain.out.gain.value = params[c.id].mute ? 0 : 1; // solos ignored in graded renders
+    buses[c.id] = chain.input;
+  });
+  const noise = noiseBuffer(ctx);
+  for (let s = 0; s < STEPS; s++) scheduleStep(ctx, buses, s, s * STEP, noise);
+  return ctx.startRendering();
+}
+function rmsOf(buf){
+  let sum = 0, n = 0;
+  for (let ch = 0; ch < buf.numberOfChannels; ch++){
+    const d = buf.getChannelData(ch);
+    for (let i = 0; i < d.length; i += 3){ sum += d[i] * d[i]; n++; }
+  }
+  return Math.sqrt(sum / n);
+}
+function normalizedCopy(buf, target){
+  const r = rmsOf(buf) || 1e-9;
+  const k = target / r;
+  const out = new AudioBuffer({length: buf.length, numberOfChannels: buf.numberOfChannels, sampleRate: buf.sampleRate});
+  for (let ch = 0; ch < buf.numberOfChannels; ch++){
+    const d = buf.getChannelData(ch), o = out.getChannelData(ch);
+    for (let i = 0; i < d.length; i++) o[i] = Math.max(-1, Math.min(1, d[i] * k));
+  }
+  return out;
+}
+</script>
+<script>
+"use strict";
+/* ============ curriculum ============ */
+// scope: [channelId, control] pairs the student may touch tonight.
+// Locked controls silently hold the reference value so each night isolates one move.
+const LESSONS = [
+  { title: "Balance the rhythm section",
+    scope: [["kick","fader"],["snare","fader"],["hats","fader"],["bass","fader"]],
+    concept: `<p>Every mix starts with <strong>balance</strong>: before any EQ or effect, the faders alone should make the song work. The classic starting point is the <strong>rhythm section</strong> - kick, snare and bass carry the track, hats fill the space above.</p>
+    <p>A reliable anchor: set the <strong>kick and bass to roughly equal loudness</strong> - if one buries the other, the low end turns to soup. Bring the snare up until the backbeat speaks clearly, then add hats quietly: they are felt more than heard.</p>`,
+    exercise: "Using only the four faders, build a balanced drum-and-bass bed. The band (keys, lead vox) sits at the reference - trust it. When it grooves, take the blind test.",
+    demo: true },
+  { title: "Place the vocal",
+    scope: [["lead","fader"]],
+    concept: `<p>The vocal (tonight, the lead line) is usually <strong>the loudest sustained element</strong> - it is what the listener follows. A common rule of thumb: the vocal sits about <strong>1-2 dB above the snare</strong>, close enough to feel glued, clear enough to read every note.</p>
+    <p>Too loud and the track feels like karaoke; too quiet and listeners strain. Small moves matter here - <strong>1 dB is audible, 3 dB is a decision</strong>.</p>`,
+    exercise: "One fader, one job: find the level where the lead sits on top of the band without detaching from it. Then the blind test.",
+    demo: true },
+  { title: "Panning space",
+    scope: [["hats","pan"],["keys","pan"],["lead","pan"]],
+    concept: `<p>Panning gives each part its own seat. The weight lives in the middle: <strong>kick, snare, bass and lead vocal stay near the center</strong>, because that is where focus and low-end power belong.</p>
+    <p>Width comes from the supporting cast. Spread <strong>hats and keys symmetrically-ish</strong> - one a bit left, one a bit right - and the mix opens up without losing its spine. Hard panning everything is a gimmick; <strong>small offsets of 20-40% already breathe</strong>.</p>`,
+    exercise: "Place hats, keys and lead vox in the stereo field. Keep the spine centered, spread the rest with taste. Then the blind test.",
+    demo: true },
+  { title: "Cut the mud",
+    scope: [["keys","low"],["keys","mid"],["bass","low"]],
+    concept: `<p>Home mixes die in the <strong>low-mids, roughly 200-800 Hz</strong>: every instrument contributes a little warmth there, and the sum is mud. The fix is subtraction, not addition.</p>
+    <p>Two moves cover most of it: <strong>cut the low shelf on instruments that don't own the low end</strong> (keys don't - bass and kick do), and <strong>dip the mid band where a part sounds boxy</strong>. Cutting what you can't hear anyway makes room for what you can.</p>`,
+    exercise: "Clean up: pull the keys' low shelf down, find the boxiness in the mid band, and make sure the bass low shelf leaves the sub to the kick. Compare with BEFORE / AFTER, then the blind test.",
+    demo: true },
+  { title: "Air on top",
+    scope: [["hats","high"],["lead","high"],["keys","high"]],
+    concept: `<p>The opposite of mud is <strong>air</strong>: the high-shelf region above ~8 kHz where cymbals shimmer and vocals feel close. A gentle boost of <strong>2-4 dB</strong> on the right parts reads as polish.</p>
+    <p>The trap is harshness - but that lives lower, in the <strong>2-5 kHz presence range</strong>. Boosting air is safe in small doses; if the mix gets thin or hissy, you went too far. As everywhere: <strong>moves of a few dB, not ten</strong>.</p>`,
+    exercise: "Add air where it helps (hats, lead vox) and leave it off where it doesn't. Then the blind test.",
+    demo: true },
+  { title: "Glue the drums",
+    scope: [["kick","comp"],["snare","comp"]],
+    concept: `<p>Compression <strong>narrows the gap between loud and quiet hits</strong>: turn the knob and the threshold drops, so hits that cross it get pulled down by the ratio. The result is drums that feel even and <strong>glued</strong> instead of spiky.</p>
+    <p>Tonight's knob is gentle by design (a soft knee, moderate ratio). Some compression steadies the groove; <strong>too much squashes the punch out of it</strong> - the kick stops knocking and starts buzzing. Watch for the point where control becomes flatness.</p>`,
+    exercise: "Dial compression onto kick and snare until the drums feel even but still punch. Then the blind test.",
+    demo: true },
+  { title: "The full mix",
+    scope: "all",
+    concept: `<p>Final exam week, part one: <strong>every control on every channel is yours</strong>. Work in the order you learned - balance first, vocal next, then panning, EQ and compression - because each move depends on the ones before it.</p>
+    <p>If you get lost, come back to the anchor question: <strong>can I follow the lead, does the low end knock, does anything fight?</strong></p>`,
+    exercise: "Mix the whole song from flat. Take your time - then take the full blind test.",
+    demo: false },
+  { title: "Graduation night",
+    scope: "all",
+    concept: `<p>One more round, from flat, no coaching. The blind test after this one grades <strong>every control on every channel</strong> and shows you, in dB, how close your ears got you.</p>
+    <p>Remember the method: balance, vocal, space, mud, air, glue. And the honest truth of the craft: <strong>the reference is one taste, not the law</strong> - being within a dB or two of it means you can hear like a mixer.</p>`,
+    exercise: "Mix from flat, then pass the blind test to graduate.",
+    demo: false },
+];
+const ROUNDS = 3, PASS = 2;
+</script>
+<script>
+"use strict";
+/* ============ state ============ */
+let AC = null;                 // live AudioContext
+let chains = null, masterGain = null, masterAnalyser = null, chAnalysers = {};
+let noiseLive = null, schedTimer = null, nextStep = 0, nextTime = 0, playing = false;
+let userMix = {};              // per channel params (editable subset live, rest = reference)
+let current = 0;               // lesson index
+const done = LESSONS.map(() => false);
+let examState = null;
+const $ = id => document.getElementById(id);
+function lessonScope(idx){
+  const s = LESSONS[idx].scope;
+  if (s === "all"){
+    const out = [];
+    CHANNELS.forEach(c => ["fader","pan","low","mid","high","comp"].forEach(k => out.push([c.id, k])));
+    return out;
+  }
+  return s;
+}
+function isEditable(idx, chId, key){ return lessonScope(idx).some(([c, k]) => c === chId && k === key); }
+function resetUserMix(idx){
+  userMix = {};
+  CHANNELS.forEach(c => {
+    userMix[c.id] = {...REFERENCE[c.id]};          // locked values follow the reference
+    ["fader","pan","low","mid","high","comp"].forEach(k => {
+      if (isEditable(idx, c.id, k)) userMix[c.id][k] = FLAT[k]; // editable start flat
+    });
+    userMix[c.id].mute = false; userMix[c.id].solo = false;
+  });
+}
+/* ============ live engine ============ */
+function startEngine(){
+  if (AC) return;
+  AC = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = AC.createGain(); masterGain.gain.value = 0.34;
+  masterAnalyser = AC.createAnalyser(); masterAnalyser.fftSize = 512;
+  masterGain.connect(masterAnalyser); masterAnalyser.connect(AC.destination);
+  chains = {}; noiseLive = noiseBuffer(AC);
+  CHANNELS.forEach(c => {
+    chains[c.id] = buildChain(AC, masterGain);
+    applyParams(chains[c.id], userMix[c.id], AC, false);
+    chAnalysers[c.id] = AC.createAnalyser(); chAnalysers[c.id].fftSize = 256;
+    chains[c.id].fader.connect(chAnalysers[c.id]);
+  });
+}
+function setPlaying(on){
+  playing = on;
+  $("playBtn").textContent = on ? "STOP" : "PLAY";
+  if (on){
+    if (AC.state === "suspended") AC.resume();
+    nextStep = 0; nextTime = AC.currentTime + 0.08;
+    schedTimer = setInterval(() => {
+      while (nextTime < AC.currentTime + 0.14){
+        scheduleStep(AC, liveBuses(), nextStep, nextTime, noiseLive);
+        nextStep = (nextStep + 1) % STEPS; nextTime += STEP;
+      }
+    }, 30);
+  } else {
+    clearInterval(schedTimer); schedTimer = null;
+  }
+}
+function liveBuses(){
+  const b = {};
+  CHANNELS.forEach(c => b[c.id] = chains[c.id].input);
+  return b;
+}
+function liveParam(chId, key, value){
+  userMix[chId][key] = value;
+  if (!AC) return;
+  applyParams(chains[chId], userMix[chId], AC, true);
+}
+/* ============ buffer playback (demos + exam) ============ */
+let bufSource = null, bufBtn = null;
+function stopBuffer(){
+  if (bufSource){ try { bufSource.onended = null; bufSource.stop(); } catch(e){} bufSource = null; }
+  if (bufBtn){ bufBtn.classList.remove("playing"); bufBtn = null; }
+}
+function playBuffer(buf, btn, onend){
+  stopBuffer();
+  if (playing) setPlaying(false);
+  const src = AC.createBufferSource(); src.buffer = buf;
+  const g = AC.createGain(); g.gain.value = 1;
+  src.connect(g).connect(AC.destination);
+  bufSource = src; bufBtn = btn; btn && btn.classList.add("playing");
+  src.onended = () => { btn && btn.classList.remove("playing"); if (bufBtn === btn) bufBtn = null; bufSource = null; onend && onend(); };
+  src.start();
+}
+</script>
+<script>
+"use strict";
+/* ============ UI: knobs & faders ============ */
+function fmtVal(key, v){
+  const fmtDb = d => { const r = Math.abs(d) < 0.049 ? 0 : d; return (r > 0 ? "+" : "") + r.toFixed(1) + "dB"; };
+  if (key === "fader"){ const d = faderDb(v); return d === -Infinity ? "-inf" : fmtDb(d); }
+  if (key === "pan") return Math.abs(v) < 0.045 ? "C" : (v < 0 ? "L" : "R") + Math.round(Math.abs(v) * 100);
+  if (key === "comp") return Math.round(v * 100) + "%";
+  return fmtDb(v);
+}
+function dragControl(el, get, set, min, max, stepKey){
+  let startY = 0, startV = 0;
+  el.addEventListener("pointerdown", e => {
+    el.setPointerCapture(e.pointerId);
+    startY = e.clientY; startV = get();
+    e.preventDefault();
+  });
+  el.addEventListener("pointermove", e => {
+    if (!el.hasPointerCapture(e.pointerId)) return;
+    const range = el.dataset.knob ? 90 : el.clientHeight;
+    let v = startV + (startY - e.clientY) / range * (max - min);
+    v = Math.min(max, Math.max(min, v));
+    if (Math.abs(v) < (stepKey === "pan" ? 0.045 : 0)) v = 0; // center detent
+    set(v);
+  });
+  el.addEventListener("dblclick", () => set(el.dataset.knob ? +el.dataset.def : +el.dataset.def));
+  el.tabIndex = 0;
+  el.addEventListener("keydown", e => {
+    const d = (max - min) / 40;
+    if (e.key === "ArrowUp" || e.key === "ArrowRight"){ set(Math.min(max, get() + d)); e.preventDefault(); }
+    if (e.key === "ArrowDown" || e.key === "ArrowLeft"){ set(Math.max(min, get() - d)); e.preventDefault(); }
+  });
+}
+function makeKnob(chId, key, min, max){
+  const box = document.createElement("div");
+  box.className = "ctl";
+  box.dataset.knob = "1";
+  box.dataset.ch = chId;
+  box.dataset.key = key;
+  box.dataset.def = REFERENCE[chId][key];
+  const labels = {pan: "PAN", low: "LOW", mid: "MID", high: "HIGH", comp: "COMP"};
+  box.innerHTML = `<div class="knob"></div><div class="c-label">${labels[key]}</div><div class="c-val"></div>`;
+  const valEl = box.querySelector(".c-val"), knob = box.querySelector(".knob");
+  const render = () => {
+    const v = userMix[chId][key];
+    knob.style.setProperty("--rot", ((v - min) / (max - min) * 270 - 135) + "deg");
+    valEl.textContent = fmtVal(key, v);
+  };
+  dragControl(box, () => userMix[chId][key], v => { liveParam(chId, key, v); render(); }, min, max, key);
+  box.render = render;
+  return box;
+}
+function makeFader(chId){
+  const zone = document.createElement("div");
+  zone.className = "fader-zone";
+  const f = document.createElement("div");
+  f.className = "fader"; f.dataset.def = REFERENCE[chId].fader;
+  f.setAttribute("role", "slider"); f.setAttribute("aria-label", chId + " fader");
+  let ticks = "";
+  [0, .25, .5, .75, 1].forEach(p => ticks += `<div class="tick" style="top:${(1 - p) * 100}%"></div>`);
+  f.innerHTML = `<div class="rail"></div>${ticks}<div class="cap"></div>`;
+  const cap = f.querySelector(".cap");
+  const meter = document.createElement("div");
+  meter.className = "meter"; meter.innerHTML = "<i></i>";
+  const valEl = document.createElement("div");
+  valEl.className = "c-val"; valEl.style.textAlign = "center";
+  const render = () => {
+    const v = userMix[chId].fader;
+    cap.style.top = (1 - v) * 100 + "%";
+    valEl.textContent = fmtVal("fader", v);
+  };
+  dragControl(f, () => userMix[chId].fader, v => { liveParam(chId, "fader", v); render(); }, 0, 1, "fader");
+  zone.append(f, meter);
+  return {zone, valEl, render, faderEl: f, meterEl: meter.firstChild, chId};
+}
+const faderUIs = [], knobUIs = [];
+function buildConsole(){
+  const host = $("strips");
+  host.innerHTML = ""; faderUIs.length = 0; knobUIs.length = 0;
+  CHANNELS.forEach(c => {
+    const strip = document.createElement("div");
+    strip.className = "strip"; strip.id = "strip-" + c.id;
+    strip.innerHTML = `<div class="ch-dot"></div><div class="ch-name">${c.name}</div>`;
+    // EQ + comp knobs in two rows
+    const row1 = document.createElement("div"); row1.className = "knob-row";
+    const row2 = document.createElement("div"); row2.className = "knob-row";
+    [["high", -12, 12], ["mid", -12, 12]].forEach(([k, a, b]) => { const kn = makeKnob(c.id, k, a, b); knobUIs.push(kn); row1.append(kn); });
+    [["low", -12, 12], ["comp", 0, 1]].forEach(([k, a, b]) => { const kn = makeKnob(c.id, k, a, b); knobUIs.push(kn); row2.append(kn); });
+    const panKn = makeKnob(c.id, "pan", -1, 1); knobUIs.push(panKn);
+    strip.append(row1, row2, panKn);
+    const fz = makeFader(c.id);
+    faderUIs.push(fz);
+    strip.append(fz.zone, fz.valEl);
+    // mute / solo
+    const ms = document.createElement("div"); ms.className = "ms-row";
+    const mb = document.createElement("button"); mb.className = "ms-btn"; mb.textContent = "M"; mb.title = "Mute";
+    const sb = document.createElement("button"); sb.className = "ms-btn"; sb.textContent = "S"; sb.title = "Solo";
+    mb.onclick = () => { userMix[c.id].mute = !userMix[c.id].mute; syncMs(); };
+    sb.onclick = () => { userMix[c.id].solo = !userMix[c.id].solo; syncMs(); };
+    ms.append(mb, sb); strip.append(ms);
+    strip._mb = mb; strip._sb = sb;
+    host.append(strip);
+  });
+  // master strip
+  const m = document.createElement("div");
+  m.className = "strip master";
+  m.innerHTML = `<div class="ch-dot"></div><div class="ch-name">MASTER</div>`;
+  const meter = document.createElement("div"); meter.className = "meter"; meter.style.height = "150px"; meter.innerHTML = "<i></i>";
+  m.append(meter);
+  host.append(m);
+  masterMeterEl = meter.firstChild;
+  syncLocks(); syncMs(); renderAllControls();
+}
+let masterMeterEl = null;
+function syncMs(){
+  CHANNELS.forEach(c => {
+    const s = $("strip-" + c.id);
+    s._mb.classList.toggle("on-m", userMix[c.id].mute);
+    s._sb.classList.toggle("on-s", userMix[c.id].solo);
+    s.classList.toggle("muted-ch", userMix[c.id].mute);
+    s.classList.toggle("solo-ch", userMix[c.id].solo);
+  });
+  if (AC) applyMuteSolo(chains, userMix);
+}
+function syncLocks(){ if (typeof applyLockState === "function") applyLockState(); }
+function renderAllControls(){
+  faderUIs.forEach(f => f.render());
+  knobUIs.forEach(k => k.render());
+}
+/* meters */
+const tmp = new Uint8Array(512);
+function meterLoop(){
+  requestAnimationFrame(meterLoop);
+  if (!AC) return;
+  faderUIs.forEach(f => {
+    const an = chAnalysers[f.chId];
+    an.getByteTimeDomainData(tmp);
+    let peak = 0;
+    for (let i = 0; i < tmp.length; i++){ const v = Math.abs(tmp[i] - 128) / 128; if (v > peak) peak = v; }
+    const el = f.meterEl;
+    const cur = parseFloat(el.style.height || "0");
+    el.style.height = Math.max(peak * 100, cur * 0.86) + "%";
+  });
+  if (masterAnalyser && masterMeterEl){
+    masterAnalyser.getByteTimeDomainData(tmp);
+    let peak = 0;
+    for (let i = 0; i < tmp.length; i++){ const v = Math.abs(tmp[i] - 128) / 128; if (v > peak) peak = v; }
+    const cur = parseFloat(masterMeterEl.style.height || "0");
+    masterMeterEl.style.height = Math.max(peak * 100, cur * 0.86) + "%";
+  }
+}
+requestAnimationFrame(meterLoop);
+</script>
+<script>
+"use strict";
+/* ============ lessons UI ============ */
+function renderNights(){
+  const nav = $("nights"); nav.innerHTML = "";
+  LESSONS.forEach((L, i) => {
+    const b = document.createElement("button");
+    b.className = "night-dot" + (done[i] ? " done" : "") + (i === current ? " current" : "");
+    const locked = i > 0 && !done[i - 1];
+    if (locked) b.classList.add("locked");
+    b.innerHTML = `<span class="n-num">NIGHT ${i + 1}</span><span class="n-state"></span>`;
+    b.title = L.title;
+    if (!locked) b.onclick = () => selectLesson(i);
+    nav.append(b);
+  });
+}
+function selectLesson(i){
+  stopBuffer(); if (playing) setPlaying(false);
+  current = i;
+  resetUserMix(i);
+  const L = LESSONS[i];
+  $("lessonNight").textContent = "NIGHT " + (i + 1) + " OF " + LESSONS.length;
+  $("lessonTitle").textContent = L.title;
+  $("lessonConcept").innerHTML = L.concept;
+  $("lessonExercise").textContent = L.exercise;
+  $("moveDemo").style.display = L.demo ? "flex" : "none";
+  $("demoStatus").textContent = "";
+  $("report").classList.remove("show");
+  $("passTag").textContent = done[i] ? "PASSED" : "";
+  $("takeExam").style.display = AC ? "" : "none";
+  $("resetMix").style.display = AC ? "" : "none";
+  applyLockState();
+  if (AC){ CHANNELS.forEach(c => applyParams(chains[c.id], userMix[c.id], AC, true)); applyMuteSolo(chains, userMix); }
+  renderAllControls(); renderNights();
+  $("lessonCard").scrollIntoView({behavior: "smooth", block: "nearest"});
+}
+function applyLockState(){
+  document.querySelectorAll("#strips .ctl[data-knob]").forEach(el => {
+    el.classList.toggle("locked", !isEditable(current, el.dataset.ch, el.dataset.key));
+  });
+  faderUIs.forEach(f => {
+    f.faderEl.classList.toggle("locked", !isEditable(current, f.chId, "fader"));
+    f.faderEl.style.pointerEvents = isEditable(current, f.chId, "fader") ? "" : "none";
+    f.faderEl.style.opacity = isEditable(current, f.chId, "fader") ? "" : ".32";
+  });
+}
+/* ============ hear-the-move demo ============ */
+async function playDemo(after, btn){
+  if (!AC) return;
+  $("demoStatus").textContent = "RENDERING…";
+  btn.disabled = true;
+  const before = {};
+  CHANNELS.forEach(c => before[c.id] = {...userMix[c.id]});
+  // BEFORE = reference except tonight's controls left flat
+  const demo = {};
+  CHANNELS.forEach(c => demo[c.id] = {...REFERENCE[c.id]});
+  if (!after) lessonScope(current).forEach(([ch, k]) => demo[ch][k] = FLAT[k]);
+  try {
+    const [refBuf, demoBuf] = await Promise.all([renderMix(REFERENCE, LOOP), renderMix(demo, LOOP)]);
+    const target = rmsOf(refBuf);
+    playBuffer(normalizedCopy(demoBuf, target), btn, () => { $("demoStatus").textContent = ""; });
+    $("demoStatus").textContent = after ? "REFERENCE MIX" : "UNMIXED (FLAT)";
+  } finally { btn.disabled = false; }
+}
+/* ============ exam ============ */
+async function openExam(){
+  if (!AC) return;
+  stopBuffer(); if (playing) setPlaying(false);
+  $("exam").classList.add("open");
+  $("examStatus").textContent = "RENDERING BOTH MIXES, MATCHING LOUDNESS…";
+  ["playA","playB","pickA","pickB"].forEach(id => $(id).disabled = true);
+  const userParams = {};
+  CHANNELS.forEach(c => userParams[c.id] = {...userMix[c.id]});
+  try {
+    const [refBuf, usrBuf] = await Promise.all([renderMix(REFERENCE, LOOP), renderMix(userParams, LOOP)]);
+    const target = rmsOf(refBuf);
+    examState = {
+      round: 0, score: 0,
+      ref: normalizedCopy(refBuf, target),
+      usr: normalizedCopy(usrBuf, target),
+      order: null,
+    };
+    nextRound();
+  } catch (err){
+    $("examStatus").textContent = "RENDER FAILED: " + err.message;
+  }
+}
+function nextRound(){
+  const st = examState;
+  if (st.round >= ROUNDS){ closeExam(true); return; }
+  st.order = Math.random() < 0.5 ? ["ref","usr"] : ["usr","ref"];
+  st.round++;
+  $("examRound").textContent = "ROUND " + st.round + " OF " + ROUNDS + " · SCORE " + st.score;
+  $("examStatus").textContent = "LISTEN, THEN PICK.";
+  ["playA","playB","pickA","pickB"].forEach(id => $(id).disabled = false);
+  $("pickA").classList.remove("picked"); $("pickB").classList.remove("picked");
+}
+function examPlay(which){
+  const st = examState;
+  const kind = st.order[which === "A" ? 0 : 1];
+  const btn = $(which === "A" ? "playA" : "playB");
+  playBuffer(kind === "ref" ? st.ref : st.usr, btn);
+}
+function examPick(which){
+  const st = examState;
+  if (!st) return;
+  const kind = st.order[which === "A" ? 0 : 1];
+  const right = kind === "ref";
+  if (right) st.score++;
+  $(which === "A" ? "pickA" : "pickB").classList.add("picked");
+  $("examStatus").textContent = right ? "CORRECT - THAT WAS THE REFERENCE." : "THAT ONE WAS YOURS.";
+  ["pickA","pickB","playA","playB"].forEach(id => $(id).disabled = true);
+  stopBuffer();
+  setTimeout(nextRound, 1200);
+}
+function closeExam(finished){
+  const st = examState; examState = null;
+  $("exam").classList.remove("open");
+  stopBuffer();
+  if (!finished || !st) return;
+  const passed = st.score >= PASS;
+  showReport(passed, st.score);
+  if (passed && !done[current]){
+    done[current] = true;
+    $("passTag").textContent = "PASSED";
+    renderNights();
+  }
+}
+/* ============ report ============ */
+function verdict(key, delta){
+  const tol = key === "fader" ? [1.5, 3.5] : (key === "pan" ? [0.12, 0.3] : (key === "comp" ? [0.15, 0.35] : [2, 4.5]));
+  const a = Math.abs(delta);
+  if (a <= tol[0]) return ["Nailed it", "v-good"];
+  if (a <= tol[1]) return ["Close", "v-close"];
+  return ["Off", "v-off"];
+}
+function showReport(passed, score){
+  const L = LESSONS[current];
+  $("report").classList.add("show");
+  $("reportTitle").textContent = passed
+    ? (current === LESSONS.length - 1 ? "Graduated - you can hear the moves." : "Passed - night " + (current + 1) + " complete.")
+    : "Not yet - " + score + " of " + ROUNDS + " right.";
+  $("reportSub").textContent = passed
+    ? "Your mix against the reference, control by control:"
+    : "Your ears will get there. Here is where your mix stood against the reference - listen to the BEFORE / AFTER above and try again:";
+  const body = $("reportBody"); body.innerHTML = "";
+  const chName = id => CHANNELS.find(c => c.id === id).name;
+  lessonScope(current).forEach(([chId, key]) => {
+    const u = userMix[chId][key], r = REFERENCE[chId][key];
+    let delta, uTxt = fmtVal(key, u), rTxt = fmtVal(key, r);
+    if (key === "fader"){ const du = faderDb(u), dr = faderDb(r); delta = (du === -Infinity ? -60 : du) - dr; }
+    else delta = u - r;
+    const [txt, cls] = verdict(key, delta);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${chName(chId)} ${key.toUpperCase()}</td><td>${uTxt}</td><td>${rTxt}</td><td class="${cls}">${txt}</td>`;
+    body.append(tr);
+  });
+  $("report").scrollIntoView({behavior: "smooth", block: "nearest"});
+}
+/* ============ wiring ============ */
+$("startAudio").onclick = () => {
+  startEngine();
+  $("startAudio").style.display = "none";
+  $("console").style.display = "";
+  $("takeExam").style.display = "";
+  $("resetMix").style.display = "";
+  applyLockState();
+  buildConsole();
+  setPlaying(true);
+};
+$("playBtn").onclick = () => setPlaying(!playing);
+$("resetMix").onclick = () => {
+  resetUserMix(current);
+  CHANNELS.forEach(c => applyParams(chains[c.id], userMix[c.id], AC, true));
+  applyMuteSolo(chains, userMix);
+  syncMs(); renderAllControls();
+};
+$("takeExam").onclick = openExam;
+$("examQuit").onclick = () => { examState = null; $("exam").classList.remove("open"); stopBuffer(); };
+$("playA").onclick = () => examPlay("A");
+$("playB").onclick = () => examPlay("B");
+$("pickA").onclick = () => examPick("A");
+$("pickB").onclick = () => examPick("B");
+$("demoBefore").onclick = e => playDemo(false, e.currentTarget);
+$("demoAfter").onclick = e => playDemo(true, e.currentTarget);
+/* init */
+resetUserMix(0);
+buildConsole();
+selectLesson(0);
+</script>
+</body>
+</html>
