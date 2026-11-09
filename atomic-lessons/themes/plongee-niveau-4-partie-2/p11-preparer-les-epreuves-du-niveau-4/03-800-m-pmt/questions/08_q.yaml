@@ -1,0 +1,20 @@
+id: 798106da-33b8-4d42-a307-f099c6cfcd71
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Au-delà de quel temps l'épreuve est-elle notée 0/20, selon le MFT ?
+choices:
+- id: 2d020aab-1ff7-4eb7-812c-2859b854dc1f
+  text: Au-delà de 20 min (hommes) ou 21 min (femmes)
+- id: 0a57a49f-694d-488a-85bd-9679b8d49816
+  text: Au-delà de 15 minutes pour tous
+- id: edf79c6d-3ef2-40a9-b56c-c9ba396459b3
+  text: Au-delà de 30 minutes pour tous
+- id: 5528ff44-5ab4-4d3a-8725-70cc3d27533f
+  text: Il n'y a pas de zéro possible
+correct_choice_ids:
+- 2d020aab-1ff7-4eb7-812c-2859b854dc1f
+explanation: '0/20 : temps supérieur à 20 min (hommes) ou 21 min (femmes) (MFT, mai
+  2026).'
+archived: false

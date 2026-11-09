@@ -1,0 +1,22 @@
+id: 662b2264-ec64-47a3-8943-6ec79912d2c4
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi s'entraîner avec son matériel d'examen ?
+choices:
+- id: 26be5bdb-aff5-4f07-a931-0a66207b3350
+  text: Parce que le MFT impose les mêmes palmes et le même masque sur les épreuves
+    pratiques aquatiques
+- id: d41584e5-4c70-427d-b515-84f5ecd1776c
+  text: Parce que le matériel neuf est interdit
+- id: a7603bb9-afce-47b4-b7e5-e754f376a62f
+  text: Parce que le jury note le matériel
+- id: daf78ab1-bf3f-4f25-806c-09a20dcfa4ac
+  text: Ce n'est pas utile
+correct_choice_ids:
+- 26be5bdb-aff5-4f07-a931-0a66207b3350
+explanation: 'Le MFT impose la même paire de palmes et le même masque pour les épreuves
+  pratiques aquatiques : l''aisance avec ce matériel se travaille donc à l''entraînement
+  (MFT, mai 2026).'
+archived: false

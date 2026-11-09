@@ -1,0 +1,21 @@
+id: 638b3ba8-9bd9-4307-a3cf-cf9fb0817c9a
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume l'épreuve selon le manuel et le MFT ?
+choices:
+- id: 3b946492-9302-45ce-8f04-924fe3310103
+  text: 800 m PMT chronométré, coefficient 2, barème par paliers, préparé via l'aptitude
+    A4 en milieu naturel
+- id: fb8b2bd3-a973-4360-bb09-5275575dee1a
+  text: 500 m capelé non chronométré
+- id: d1c2a788-c15e-4536-9f85-2875a66f248f
+  text: Épreuve théorique sur la nage
+- id: db9739f0-da3a-46a1-8598-1061a26d69b0
+  text: Sprint de 100 m suivi d'un oral
+correct_choice_ids:
+- 3b946492-9302-45ce-8f04-924fe3310103
+explanation: L'épreuve est un 800 m PMT chronométré (coef. 2, groupe 1), noté au temps
+  par paliers, et lié à l'aptitude A4 (manuel p. 380 ; MFT, mai 2026).
+archived: false

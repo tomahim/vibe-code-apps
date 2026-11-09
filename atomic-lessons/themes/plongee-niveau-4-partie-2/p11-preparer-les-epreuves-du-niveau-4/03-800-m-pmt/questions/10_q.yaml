@@ -1,0 +1,21 @@
+id: c94e1212-b991-4e07-812d-6e73486b408a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui peut attester l'aptitude A4 ?
+choices:
+- id: c26be813-7f43-42af-8dd5-042483d7f895
+  text: Un MF1, BEES 1 ou DEJEPS minimum, titulaire de la licence fédérale en cours
+    de validité
+- id: 4db1e8ad-cb86-41fa-889d-fe63f27d312b
+  text: Un niveau 4
+- id: b58dac7d-634e-4275-a840-d70d86a96afc
+  text: Le président du jury uniquement
+- id: 8e6298cd-46f6-4fdd-a05e-25f6afe6ddac
+  text: Un médecin fédéral
+correct_choice_ids:
+- c26be813-7f43-42af-8dd5-042483d7f895
+explanation: L'aptitude A4 est attestée par un MF1, BEES 1 ou DEJEPS minimum, titulaire
+  de la licence fédérale en cours de validité (MFT, mai 2026).
+archived: false

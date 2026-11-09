@@ -1,0 +1,20 @@
+id: 23eff09e-ff9f-46a8-839c-b76170cb0276
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que risque le candidat qui ne réalise pas l'épreuve ?
+choices:
+- id: b264b9c9-bde2-42d9-a461-4e85686069ae
+  text: Rien, elle ne rapporte pas de points
+- id: 3a3cf731-d3b0-48ee-b402-d91886cf1e82
+  text: Toute épreuve non faite est éliminatoire pour l'examen
+- id: 155861ea-df0a-4bbb-98b8-d026eb9fc916
+  text: Une simple pénalité de 2 points
+- id: 42aad3fe-6599-489a-824e-2a751d27a96a
+  text: Un report automatique
+correct_choice_ids:
+- 3a3cf731-d3b0-48ee-b402-d91886cf1e82
+explanation: L'épreuve ne rapporte pas de points, mais toute épreuve non faite est
+  éliminatoire (MFT, mai 2026).
+archived: false

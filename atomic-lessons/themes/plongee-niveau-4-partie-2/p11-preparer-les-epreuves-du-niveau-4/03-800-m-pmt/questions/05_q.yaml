@@ -1,0 +1,20 @@
+id: a8c53f78-5985-4d5a-a26b-5902acbd2173
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Le barème de l'épreuve est-il identique pour tous les candidats ?
+choices:
+- id: 46147a73-3f12-44d2-b675-28ce8a95f11e
+  text: 'Non : le MFT prévoit un barème hommes et un barème femmes'
+- id: 28e2563b-21ee-4bad-bde1-016659ffe07d
+  text: Oui, un barème unique
+- id: f245e2cb-5250-4c14-bfb9-92f7da10a51d
+  text: 'Non : il dépend de l''âge'
+- id: 8aae3afe-1008-49c1-8897-a0baf25def59
+  text: Oui, mais il change chaque année
+correct_choice_ids:
+- 46147a73-3f12-44d2-b675-28ce8a95f11e
+explanation: La notation est effectuée suivant un barème distinct pour les hommes
+  et pour les femmes (MFT, mai 2026).
+archived: false
