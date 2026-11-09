@@ -1,0 +1,19 @@
+id: ea5c18ed-4835-4da7-b562-203cf676c5eb
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pour faire demi-tour, de combien modifie-t-on le cap ?
+choices:
+- id: 38328fe2-b723-4f5a-b0d5-e1577941d360
+  text: De 180 degrés, en ajoutant ou en retirant.
+- id: 8ff59f5e-dc48-4238-9ecb-60c8c987f8a9
+  text: De 90 degrés.
+- id: 8277149b-07e1-4248-a2b6-6480947307e1
+  text: De 360 degrés.
+- id: c2597a9f-203b-43d8-94bd-d99c310b1f0d
+  text: De 45 degrés.
+correct_choice_ids:
+- 38328fe2-b723-4f5a-b0d5-e1577941d360
+explanation: Pour faire demi-tour, il faut ajouter ou retirer 180 degrés.
+archived: false

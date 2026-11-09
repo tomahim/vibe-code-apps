@@ -1,0 +1,21 @@
+id: 513e309f-d98c-4572-b409-35a741b25bb5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quand une boussole est-elle nécessaire, selon le manuel ?
+choices:
+- id: 8096df56-9a2c-4ef4-8d70-aebed8a997c8
+  text: En l'absence de points de repère, par exemple pour se rendre sur un site ou
+    pour en revenir.
+- id: 52b1febb-508e-4c9c-85dc-c06aae00ced0
+  text: Uniquement de nuit.
+- id: f2ff0535-c4da-4b5a-8d6f-ee84f8842d5d
+  text: Uniquement sous la glace.
+- id: 5799fa3b-95a9-4db4-b025-5b0d1e0b226b
+  text: 'Jamais : les repères naturels suffisent toujours.'
+correct_choice_ids:
+- 8096df56-9a2c-4ef4-8d70-aebed8a997c8
+explanation: « En l'absence de points de repère, par exemple, pour se rendre sur un
+  site ou pour en revenir, une boussole est nécessaire. »
+archived: false

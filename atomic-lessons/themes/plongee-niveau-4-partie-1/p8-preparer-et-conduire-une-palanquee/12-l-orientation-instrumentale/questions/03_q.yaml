@@ -1,0 +1,20 @@
+id: 230434c9-0388-4beb-a466-690138c97d9d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À combien de degrés se situent l'Est et l'Ouest sur une boussole ?
+choices:
+- id: 55ad28c6-4486-427f-a55c-dda2075f071f
+  text: Est à 90, Ouest (W) à 270.
+- id: 4e618c0d-41cb-41b4-9e21-470cb2289e65
+  text: Est à 45, Ouest à 225.
+- id: 8d3a2739-6778-4bfa-8635-2e92330e7de8
+  text: Est à 180, Ouest à 0.
+- id: 4be4536f-cc17-436a-b47b-f9f6935b5a84
+  text: Est à 0, Ouest à 180.
+correct_choice_ids:
+- 55ad28c6-4486-427f-a55c-dda2075f071f
+explanation: Le Nord (N) est à 0, l'Est (E) à 90, le Sud (S) à 180, l'Ouest (W pour
+  West) à 270.
+archived: false

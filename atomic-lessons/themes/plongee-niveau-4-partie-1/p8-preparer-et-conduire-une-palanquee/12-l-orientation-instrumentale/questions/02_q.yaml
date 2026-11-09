@@ -1,0 +1,21 @@
+id: 5d271d54-9250-4635-a299-deed2dd644a6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles sont les deux capacités requises pour l'orientation instrumentale
+  ?
+choices:
+- id: f3c6689c-2b8c-46bb-afa6-805294eead47
+  text: Suivre un cap sans dévier et évaluer la distance parcourue.
+- id: 05953b95-fbfb-4394-8faf-1fe8182aed08
+  text: Nager vite et retenir son souffle.
+- id: ab1f9d03-13f1-4321-b12c-cba18c1f460c
+  text: Photographier et mesurer.
+- id: 9a0ac0fc-0228-4488-96a6-1987275aa627
+  text: Plonger profond et longtemps.
+correct_choice_ids:
+- f3c6689c-2b8c-46bb-afa6-805294eead47
+explanation: Il s'agit d'être capable de suivre un cap sans dévier et d'évaluer la
+  distance parcourue.
+archived: false
