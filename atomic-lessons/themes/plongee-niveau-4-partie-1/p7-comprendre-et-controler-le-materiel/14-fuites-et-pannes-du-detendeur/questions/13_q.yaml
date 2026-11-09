@@ -1,0 +1,20 @@
+id: ed354fbd-9adb-4f5c-8f74-6bacdb4ebb10
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel est le réflexe général du plongeur face à une panne de détendeur ?
+choices:
+- id: 7372f664-3a49-4b10-8b5d-7b799e4093d5
+  text: Diagnostiquer l'origine, mais confier le mécanisme à un réparateur.
+- id: 31d8ea8e-ff80-49ac-801b-39dcc42c18ae
+  text: Démonter le premier étage sur le bateau.
+- id: 6e890bde-c24e-4257-98cc-484d8a5c0cc0
+  text: Régler le levier du deuxième étage soi-même.
+- id: 0f8273c1-9af6-4826-85f1-953187725432
+  text: Continuer la plongée en surveillant.
+correct_choice_ids:
+- 7372f664-3a49-4b10-8b5d-7b799e4093d5
+explanation: 'Le tableau distingue les petites réparations accessibles (embout, soupape,
+  joint de robinetterie, flexible) du mécanisme : celui-ci se confie à un réparateur.'
+archived: false

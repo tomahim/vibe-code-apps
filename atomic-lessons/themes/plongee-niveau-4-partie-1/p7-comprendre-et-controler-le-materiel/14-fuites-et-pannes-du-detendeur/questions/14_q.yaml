@@ -1,0 +1,21 @@
+id: 937111f9-09de-461d-94e6-d88fe40d9256
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles petites réparations le manuel laisse-t-il à la portée du plongeur
+  ?
+choices:
+- id: 6515e4f5-8cdb-4cfc-a72a-72185260fa64
+  text: Remplacer l'embout et nettoyer la soupape d'expiration encrassée.
+- id: a6dc3a32-9d70-4d90-8daf-75dea47c9fa4
+  text: Régler le levier et le ressort du clapet.
+- id: 5458a024-f77b-46aa-94a5-c62b989ceb7e
+  text: Remplacer les joints toriques du premier étage.
+- id: 3d86dcd6-1476-4068-a3e9-539444084bf2
+  text: Changer le siège du pointeau.
+correct_choice_ids:
+- 6515e4f5-8cdb-4cfc-a72a-72185260fa64
+explanation: 'Pour l''entrée d''eau : réparer soi-même (remplacer l''embout, nettoyer
+  la soupape encrassée) ou confier au réparateur (boîtier, membrane).'
+archived: false

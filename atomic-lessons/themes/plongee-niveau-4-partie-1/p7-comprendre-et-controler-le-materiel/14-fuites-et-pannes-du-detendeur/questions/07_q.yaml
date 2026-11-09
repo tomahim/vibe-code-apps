@@ -1,0 +1,22 @@
+id: c8ae6741-2a7e-46ac-80a2-acf79f44eb65
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'De petites bulles sortant de la chambre humide du premier étage indiquent
+  :'
+choices:
+- id: ffa69146-2a40-4dec-99ed-427cebc22fa0
+  text: Des joints toriques du premier étage défectueux, à faire remplacer par un
+    réparateur.
+- id: 777dcaa1-6b97-4d35-a47b-562ed3de6c46
+  text: Un embout fendu à remplacer soi-même.
+- id: 1539a66e-3b31-4737-a4b4-ffadc9ca5475
+  text: Une membrane déplacée au deuxième étage.
+- id: 7f739b71-bb46-4b9f-a0b5-de4db08dfc62
+  text: Un phénomène normal à chaque plongée.
+correct_choice_ids:
+- ffa69146-2a40-4dec-99ed-427cebc22fa0
+explanation: 'Incident au premier étage : joints toriques défectueux. Solution : faire
+  remplacer ces joints par un réparateur.'
+archived: false

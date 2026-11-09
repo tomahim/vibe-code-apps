@@ -1,0 +1,21 @@
+id: 4a00c478-1735-4f21-8116-de71c037f89d
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi un détendeur devient-il dur, selon le manuel ?
+choices:
+- id: 7436319c-cd9a-4fc8-a3b7-3f0ddfd54b7f
+  text: Déréglage du levier ou dépôt d'impureté (sel, calcaire, oxydation) sur les
+    pièces en mouvement.
+- id: 5580bad4-c45c-46a4-b812-9e20a2157db2
+  text: Bouteille gonflée à une pression trop élevée.
+- id: c1588627-2529-451f-8657-768ad51b2470
+  text: Eau trop froide qui contracte le métal.
+- id: 4d185705-e1a0-49dd-8c2a-d8dbd88cc824
+  text: Flexible PI trop court.
+correct_choice_ids:
+- 7436319c-cd9a-4fc8-a3b7-3f0ddfd54b7f
+explanation: 'Origines : déréglage du levier, dépôt d''impureté (sel, calcaire, oxydation)
+  sur les pièces en mouvement. Prévention : rinçage à l''eau douce après chaque plongée.'
+archived: false

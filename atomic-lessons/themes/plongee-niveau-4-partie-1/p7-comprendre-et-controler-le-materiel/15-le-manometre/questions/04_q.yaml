@@ -1,0 +1,22 @@
+id: d90df07d-81af-4b28-b23f-b377cd6c27af
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que dit la réglementation rappelée par le manuel à propos du manomètre ?
+choices:
+- id: e45c3558-3a1f-4f36-80b8-a8364573294f
+  text: « Un manomètre ou un système équivalent permettant d'indiquer la pression
+    au cours de la plongée » est obligatoire.
+- id: cda4dc40-eebe-4652-8d02-74029468da4e
+  text: Le manomètre est facultatif pour les plongeurs expérimentés.
+- id: 4777e1f5-f073-4c41-9863-bbcdd8a1fa7a
+  text: Un manomètre par palanquée suffit.
+- id: b4560ca0-b390-4a53-8e87-399c99751880
+  text: Seuls les moniteurs doivent en porter un.
+correct_choice_ids:
+- e45c3558-3a1f-4f36-80b8-a8364573294f
+explanation: 'Aide-mémoire du matériel obligatoire : un manomètre ou un système équivalent
+  indiquant la pression au cours de la plongée, pour l''autonomie, l''encadré au-delà
+  de 20 m et l''encadrant de palanquée.'
+archived: false

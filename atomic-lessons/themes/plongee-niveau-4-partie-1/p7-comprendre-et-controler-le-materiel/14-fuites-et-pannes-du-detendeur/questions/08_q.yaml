@@ -1,0 +1,20 @@
+id: d69e35f7-b3da-4f82-b076-46993c4b980c
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: D'où vient une fuite à la fixation du détendeur sur la robinetterie ?
+choices:
+- id: 9d9b92aa-9468-45fd-ba91-5f5a5c80b3cb
+  text: Joint de la robinetterie absent, défectueux ou inadapté.
+- id: 86b1dd81-01c7-4231-8a91-1e714d3d878d
+  text: Membrane du deuxième étage percée.
+- id: 251ad0d2-55b5-4410-bc75-e1ece36d6fb7
+  text: Piston du premier étage bloqué.
+- id: 1e4a59d9-d5c1-478c-8f2d-6d1e5c20a4a4
+  text: Soupape d'expiration encrassée.
+correct_choice_ids:
+- 9d9b92aa-9468-45fd-ba91-5f5a5c80b3cb
+explanation: 'Origine : joint de la robinetterie absent, défectueux ou inadapté ;
+  solution : changer le joint.'
+archived: false

@@ -1,0 +1,20 @@
+id: 74f6b267-8e07-4fcd-9159-08d56fb21a45
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que mesure le manomètre branché sur la sortie HP ?
+choices:
+- id: d88ac72d-94b3-4163-bbff-f8c62ee0d2ed
+  text: La pression de la bouteille.
+- id: 4db1b99a-b102-4fa6-82f0-80a39d2e83b9
+  text: La pression intermédiaire du premier étage.
+- id: e85ba39b-1c1c-4efa-b820-5e097e6ea97b
+  text: La pression ambiante à la profondeur du plongeur.
+- id: 69a756c7-64d0-4a10-9614-10973cbbe93c
+  text: La pression dans le flexible du gilet.
+correct_choice_ids:
+- d88ac72d-94b3-4163-bbff-f8c62ee0d2ed
+explanation: Branché sur la sortie HP, il lit la pression de la bouteille ; la PI,
+  elle, n'est pas affichée par le manomètre du plongeur.
+archived: false

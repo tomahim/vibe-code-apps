@@ -1,0 +1,21 @@
+id: ae52c07d-36a5-4959-b58f-67488770014c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment le tableau des pannes du manuel est-il organisé ?
+choices:
+- id: 1e86e672-be66-41be-a156-afcbf4809dfb
+  text: 'Trois colonnes : panne/incident, origine possible, solution.'
+- id: b91a6a5e-78bc-4398-af5b-5e4fece42975
+  text: Par ordre alphabétique des pièces du détendeur.
+- id: 98568636-d65c-4be6-a64d-7e3868a05888
+  text: Par marque de détendeur et année de fabrication.
+- id: 28360738-872f-4b8e-baaf-68642af83758
+  text: Par profondeur à laquelle la panne survient.
+correct_choice_ids:
+- 1e86e672-be66-41be-a156-afcbf4809dfb
+explanation: 'Le tableau présente : panne/incident, origine possible, solution. Une
+  panne se situe au premier ou au deuxième étage ; la plupart des solutions renvoient
+  au réparateur.'
+archived: false
