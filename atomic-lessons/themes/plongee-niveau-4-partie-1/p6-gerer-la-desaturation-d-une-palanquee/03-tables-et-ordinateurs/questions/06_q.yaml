@@ -1,0 +1,22 @@
+id: 48916720-83c6-4e8c-807a-9f568281b1d6
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: En quoi l'ordinateur est-il un instrument « personnel » par rapport aux tables
+  ?
+choices:
+- id: c185cea1-5b1e-4d50-882b-d7018199627b
+  text: Il suit le profil exact de chaque plongeur, quand la table sert de référence
+    commune.
+- id: a1a477e7-51c2-4341-b5eb-ab7cfab60d18
+  text: Il est nominatif et ne peut être prêté à un autre plongeur de la palanquée.
+- id: 1a72ab0c-1ef3-424e-9aa5-c558f0d9f91d
+  text: Il est étalonné sur la morphologie de son propriétaire à l'achat.
+- id: d828234c-2f8f-4bfb-be01-2f0004a6b7e5
+  text: Il refuse de fonctionner s'il détecte plusieurs plongeurs à proximité.
+correct_choice_ids:
+- c185cea1-5b1e-4d50-882b-d7018199627b
+explanation: L'ordinateur suit le profil exact de chaque plongeur qui le porte, tranche
+  par tranche ; la table, elle, sert de référence de calcul commune à toute la palanquée.
+archived: false

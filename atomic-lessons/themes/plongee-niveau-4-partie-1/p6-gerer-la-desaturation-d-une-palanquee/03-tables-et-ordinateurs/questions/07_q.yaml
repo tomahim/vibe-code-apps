@@ -1,0 +1,21 @@
+id: 18e21136-e808-44ce-83a8-a98c86dfa23d
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle est la profondeur maximum d'utilisation des tables MN90-FFESSM ?
+choices:
+- id: c4061f9d-8784-4c98-a4ac-d56e70d0907d
+  text: 60 m, les cases 62 et 65 m n'étant prévues qu'à titre de secours.
+- id: f186158a-33de-46c9-abda-11fbcaac69ca
+  text: 40 m, au-delà les tables fédérales ne donnent plus aucune valeur.
+- id: f13defff-d54e-48ac-9cdb-7d708421ddf9
+  text: 80 m, comme la plupart des tables de plongée internationales.
+- id: 4b799a17-4850-49c6-a318-31f78070402e
+  text: 'Il n''y a pas de limite : la table couvre toutes les profondeurs.'
+correct_choice_ids:
+- c4061f9d-8784-4c98-a4ac-d56e70d0907d
+explanation: 'Profondeur maximum : 60 m. Les profondeurs de 62 et 65 m ne sont indiquées
+  qu''à titre de secours en cas de dépassement accidentel, ce qui interdit alors toute
+  plongée dans les 12 heures.'
+archived: false

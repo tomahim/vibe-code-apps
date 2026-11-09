@@ -1,0 +1,21 @@
+id: b85ba464-d8c1-4591-b56b-e425572d27fa
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que faire quand le temps ou la profondeur de la plongée ne figurent pas dans
+  la table ?
+choices:
+- id: 436dc323-5a81-4b3f-ad92-617903427e0b
+  text: Prendre la valeur lue immédiatement supérieure dans la table.
+- id: 658e1d80-70d8-4c69-a4d2-b1474d8b9410
+  text: Interpoler proportionnellement entre les deux valeurs encadrantes.
+- id: d51867d0-26c7-47f9-b74c-1c555174b21b
+  text: Prendre la valeur immédiatement inférieure pour rester réaliste.
+- id: ace6e4b6-a4ab-4a87-8de1-fad32cf08311
+  text: Refaire la plongée en respectant exactement les cases de la table.
+correct_choice_ids:
+- 436dc323-5a81-4b3f-ad92-617903427e0b
+explanation: Lorsque le temps ou la profondeur de la plongée ne sont pas inscrits
+  dans la table, il faut prendre la valeur lue immédiatement supérieure.
+archived: false

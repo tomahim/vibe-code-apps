@@ -1,0 +1,21 @@
+id: 1c44f7df-e4df-4e95-bb70-2bb6476c2f17
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À quoi servent les tableaux 1 et 2 qui complètent les tables MN90-FFESSM ?
+choices:
+- id: f653708e-c4cb-4ab6-aa6b-17f4472b335f
+  text: Évolution de l'azote résiduel selon le GPS ; majoration d'une plongée successive.
+- id: d3d46609-0a9e-4f2a-939d-ffae9a2049d8
+  text: Conversion pression/profondeur ; calcul de la consommation d'air au fond.
+- id: 64b168a6-d6d6-4f8d-a9f8-764411cdb69f
+  text: Choix du mélange nitrox ; calcul de la PpO2 maximale autorisée.
+- id: 36f571c1-2251-431a-b705-956532b2bb65
+  text: Durée des paliers profonds ; calcul de la vitesse de descente optimale.
+correct_choice_ids:
+- f653708e-c4cb-4ab6-aa6b-17f4472b335f
+explanation: Le tableau 1 indique l'évolution de l'azote résiduel en surface en fonction
+  du Groupe de Plongée Successive (GPS) ; le tableau 2 sert à déterminer la majoration
+  en minutes lors d'une plongée successive.
+archived: false

@@ -1,0 +1,23 @@
+id: b899a529-84b1-4a9c-89a9-f96e0bd1db59
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles vitesses de remontée le protocole des tables fédérales prévoit-il
+  ?
+choices:
+- id: fe9495ae-d287-48ae-ac7a-c2512cd53009
+  text: 15 m/min jusqu'au premier palier, puis 6 m/min entre paliers et jusqu'à la
+    surface.
+- id: 13c9eb07-0ffa-4509-a36e-f4fb221ac0aa
+  text: 10 m/min du fond à la surface, sans variation selon les étapes de la remontée.
+- id: 64f6786e-92de-458b-8c6d-5c120a229ae7
+  text: 20 m/min jusqu'au premier palier, puis 15 m/min entre les paliers.
+- id: f12d349e-f0be-4a3a-9fa4-60d1addcdb33
+  text: Vitesse libre jusqu'au premier palier, puis 6 m/min entre les paliers.
+correct_choice_ids:
+- fe9495ae-d287-48ae-ac7a-c2512cd53009
+explanation: Vitesse de l'ordre de 15 m/min jusqu'au premier palier, puis 6 m/min
+  entre les paliers et du dernier palier à la surface - soit 30 secondes (0,5 minute)
+  pour remonter de 3 m.
+archived: false

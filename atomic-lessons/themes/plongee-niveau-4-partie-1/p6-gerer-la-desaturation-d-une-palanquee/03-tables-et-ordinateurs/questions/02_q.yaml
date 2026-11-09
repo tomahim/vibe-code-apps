@@ -1,0 +1,21 @@
+id: 82ed1f18-a9dd-41e2-8187-0c81ac173969
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Hors cadre des examens, quel protocole de désaturation un plongeur peut-il
+  utiliser ?
+choices:
+- id: 12733340-d838-4704-be85-0949a73f7143
+  text: Tout protocole de désaturation validé, tables ou ordinateurs.
+- id: 95e6c9d9-e738-49e6-9d44-1194ef7371fd
+  text: Uniquement les tables MN90-FFESSM, les autres étant interdites.
+- id: 0fa0d659-1846-438b-9927-160074da879d
+  text: Uniquement un ordinateur, les tables étant réservées aux examens.
+- id: fe989850-6e2e-4feb-ac43-f2edca59830a
+  text: N'importe quelle méthode, même non validée, sous sa responsabilité.
+correct_choice_ids:
+- 12733340-d838-4704-be85-0949a73f7143
+explanation: En dehors du cadre des examens, chaque plongeur est libre d'utiliser
+  tout protocole de désaturation validé (tables ou ordinateurs).
+archived: false
