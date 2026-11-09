@@ -1,0 +1,22 @@
+id: b2230c58-b7ec-4345-b2dd-46e68eee37ba
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Selon le manuel, comment éviter de vriller pendant la descente ?
+choices:
+- id: c58227de-1d29-45f5-934e-92d23864db8e
+  text: Lestage réparti de manière équilibrée, palmage symétrique, deux bras pour
+    les oreilles, tête dans les épaules
+- id: ef6fc0c6-c69e-447a-898f-fd7ecf3c9bee
+  text: Descendre à reculons
+- id: a203c176-0762-4df2-9ad4-8b2f8358d77a
+  text: Fermer les yeux
+- id: 2224e2b1-bae2-40c5-af66-3c97eea00be4
+  text: Se tenir à un bout
+correct_choice_ids:
+- c58227de-1d29-45f5-934e-92d23864db8e
+explanation: 'Le manuel conseille : bouteille et gilet solidaires, lestage équilibré,
+  palmage symétrique, deux bras pour équilibrer les oreilles, tête dans les épaules
+  (p. 368).'
+archived: false

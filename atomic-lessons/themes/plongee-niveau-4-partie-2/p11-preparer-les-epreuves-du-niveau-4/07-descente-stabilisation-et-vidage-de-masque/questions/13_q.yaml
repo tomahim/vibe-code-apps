@@ -1,0 +1,21 @@
+id: 009f2fbf-8f4d-444f-bb7f-441ef33c85d3
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le vidage de masque doit-il être réalisé, selon le MFT ?
+choices:
+- id: c104ab28-efb7-4f84-9003-1cc93a25ae18
+  text: Retrait au signe, 3 cycles ventilatoires, remise et vidage totalement réalisé
+    en une seule fois, puis signe OK
+- id: 8a8c763b-9d1a-4554-8028-3457d5ae5623
+  text: Vidage en trois fois
+- id: b3a1cd55-0032-4cb8-814d-758ca6ef1912
+  text: Vidage partiel autorisé
+- id: f607a905-5011-40eb-98f7-5981cae8b126
+  text: Masque simplement soulevé
+correct_choice_ids:
+- c104ab28-efb7-4f84-9003-1cc93a25ae18
+explanation: 'Au signal : retrait du masque, 3 cycles ventilatoires, remise, vidage
+  total en une seule fois, puis signe OK au jury (MFT, mai 2026).'
+archived: false

@@ -1,0 +1,22 @@
+id: a88e5a6c-17e4-4428-8e65-d5f0f3d6222c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel définit-il la « descente dans le bleu » ?
+choices:
+- id: b6da9931-7189-494a-b060-c2d2065c9fdf
+  text: 'Une démonstration technique : descendre rapidement, de manière rectiligne,
+    sans vriller, en ralentissant dans les derniers mètres'
+- id: 7c0f119e-14d7-4c92-8ec3-ed4aa02a89ca
+  text: Une descente le long d'un mouillage
+- id: f4e1e910-d221-41f2-b700-f8545f9025c5
+  text: Une descente en apnée
+- id: c3bdfb96-9cde-4dc7-9f7b-77b6253505a7
+  text: Une descente lente à 6 m/min
+correct_choice_ids:
+- b6da9931-7189-494a-b060-c2d2065c9fdf
+explanation: 'La descente dans le bleu est une démonstration technique : descendre
+  vite (~30 m/min selon le manuel), droit, sans vriller, en ralentissant à la fin
+  (p. 368).'
+archived: false
