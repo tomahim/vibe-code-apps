@@ -1,0 +1,19 @@
+id: 290957f7-7ddc-48de-b75d-fcb03770c3cf
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Combien de temps la fiche de sécurité est-elle conservée ?
+choices:
+- id: 50ae1dae-ec00-4333-bd9f-96b14830109f
+  text: Un an
+- id: c7a12f03-633f-4784-bacc-4f6b99153599
+  text: Une semaine
+- id: 6237c238-ea27-470b-a6e5-88f6be934146
+  text: Dix ans
+- id: d16a0a92-6c72-4729-bb69-3a55ac054bb3
+  text: Elle est détruite après la plongée
+correct_choice_ids:
+- 50ae1dae-ec00-4333-bd9f-96b14830109f
+explanation: La fiche de sécurité est conservée par tout moyen pendant un an (p. 385).
+archived: false

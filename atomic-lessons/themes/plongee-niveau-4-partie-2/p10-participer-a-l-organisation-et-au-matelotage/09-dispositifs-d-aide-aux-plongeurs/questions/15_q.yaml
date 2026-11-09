@@ -1,0 +1,23 @@
+id: 4e6295eb-7301-435c-9f00-49d8fd4a0849
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Un plongeur reste bloqué au palier : quel comportement le manuel décrit-il
+  ?'
+choices:
+- id: f4e51da6-d8bd-487b-b76d-42bb4fbc671e
+  text: Se signaler avec son parachute de palier, le garder déployé et remonter à
+    l'échelle, éventuellement aidé par les assistants de surface
+- id: 9c497e07-be27-4885-9d74-15eeada6aa70
+  text: Lâcher son parachute et nager sous l'eau vers le rivage
+- id: d9b20a61-b7e2-438f-9790-c73492eca453
+  text: Attendre au fond que le courant cesse
+- id: c58cb178-004f-4a3c-ad21-4c8f6eb538e7
+  text: Remonter d'un coup sans palier
+correct_choice_ids:
+- f4e51da6-d8bd-487b-b76d-42bb4fbc671e
+explanation: Le plongeur se signale à l'aide de son parachute de palier, le garde
+  déployé jusqu'à remonter à l'échelle, éventuellement aidé par les assistants de
+  surface (p. 393).
+archived: false

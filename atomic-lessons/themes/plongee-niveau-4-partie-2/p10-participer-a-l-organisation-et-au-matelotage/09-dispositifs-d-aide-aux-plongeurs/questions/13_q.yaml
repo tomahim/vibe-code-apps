@@ -1,0 +1,22 @@
+id: 01525bdd-cfe0-43b1-bb59-193666b6c2d9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la bouteille de secours n'est-elle pas nécessairement au pendeur
+  ?
+choices:
+- id: 284f5aac-02f3-4593-8fda-e3b207bc3acb
+  text: Le manuel exige qu'elle soit prête à l'emploi, sans imposer qu'elle soit dans
+    l'eau
+- id: eb70e378-f70d-4d8d-9ac3-ba905abb6388
+  text: Parce qu'elle est interdite dans l'eau
+- id: 1debf276-27ad-42c7-88b2-2f0a5f94e7a0
+  text: Parce que le pendeur est réservé aux masques
+- id: bd7c8247-4166-463a-8a1c-7c8258d598b5
+  text: Parce qu'elle doit rester scellée
+correct_choice_ids:
+- 284f5aac-02f3-4593-8fda-e3b207bc3acb
+explanation: La bouteille d'air de secours doit être prête à l'emploi, mais elle n'est
+  pas nécessairement dans l'eau, au pendeur (p. 384).
+archived: false

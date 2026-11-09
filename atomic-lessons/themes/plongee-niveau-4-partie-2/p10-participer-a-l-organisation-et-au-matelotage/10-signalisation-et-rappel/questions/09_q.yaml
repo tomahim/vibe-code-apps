@@ -1,0 +1,21 @@
+id: a85c4c0a-ac28-48b3-8aa7-6999893a0b04
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quand un moyen de rappeler les plongeurs doit-il être prévu ?
+choices:
+- id: 649e24e1-141f-46e8-99bd-72be7d29ed45
+  text: Lorsque la plongée se déroule en milieu naturel, au départ d'une embarcation
+- id: 17e5a4f8-ff5a-4628-9eae-c5119aceed54
+  text: Uniquement en piscine
+- id: 36c5a15e-041f-42a4-ac63-17e15879c0d3
+  text: Uniquement de nuit
+- id: 6eb0f074-527a-4186-af47-0e41a2da87d7
+  text: Uniquement au-delà de 40 mètres
+correct_choice_ids:
+- 649e24e1-141f-46e8-99bd-72be7d29ed45
+explanation: Un moyen de rappeler les plongeurs en immersion depuis la surface doit
+  être prévu lorsque la plongée se déroule en milieu naturel, au départ d'une embarcation
+  (p. 385).
+archived: false

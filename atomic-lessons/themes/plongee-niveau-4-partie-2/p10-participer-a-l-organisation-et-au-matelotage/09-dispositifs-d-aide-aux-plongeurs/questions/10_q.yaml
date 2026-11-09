@@ -1,0 +1,20 @@
+id: cdfc33ee-f601-4f02-80f9-b1f41002d7f3
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui peut aider le plongeur signalé lors de la remontée à l'échelle ?
+choices:
+- id: c6527995-2e3d-4f6e-acc0-7a9e2f4571c8
+  text: Les assistants de surface
+- id: 96b6e5d8-cd0a-4269-89a8-86e1d2005e1c
+  text: Uniquement le directeur de plongée
+- id: 5230c44c-d29c-4ffd-aafd-425d83a60136
+  text: Personne, il remonte seul par principe
+- id: f243bf21-caa3-48ef-a390-a30db3308a87
+  text: Les autres navires
+correct_choice_ids:
+- c6527995-2e3d-4f6e-acc0-7a9e2f4571c8
+explanation: Le plongeur remonte à l'échelle, éventuellement aidé par les assistants
+  de surface (p. 393).
+archived: false

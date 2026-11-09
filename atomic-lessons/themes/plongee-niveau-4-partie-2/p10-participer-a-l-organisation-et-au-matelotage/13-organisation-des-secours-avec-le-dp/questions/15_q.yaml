@@ -1,0 +1,21 @@
+id: 05fbbc75-ab0d-4168-bc08-75c8012d3066
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume l'organisation des secours selon le manuel ?
+choices:
+- id: ed04bf0e-1a16-4da3-92a0-985cb7f3969f
+  text: Plan de secours écrit et connu, trousse adaptée, oxygénothérapie complète,
+    fiches d'évacuation et fiche de sécurité, eau douce et couverture isothermique
+- id: a648e3f9-79ac-4f5c-ba8c-f95f3b41a559
+  text: Uniquement la VHF, rien d'autre
+- id: 086d7ccf-f127-44ce-ba76-0a262deb2211
+  text: Attendre les secours sans matériel
+- id: ee0b0ac8-afd3-4fd0-ad97-b446303d0e3e
+  text: Uniquement la trousse de secours
+correct_choice_ids:
+- ed04bf0e-1a16-4da3-92a0-985cb7f3969f
+explanation: Le manuel articule plan de secours, trousse, oxygénothérapie, fiches
+  et matériel de confort de la victime (p. 384-386).
+archived: false

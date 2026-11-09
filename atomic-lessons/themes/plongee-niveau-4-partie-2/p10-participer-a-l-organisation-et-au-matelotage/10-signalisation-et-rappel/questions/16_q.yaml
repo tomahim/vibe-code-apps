@@ -1,0 +1,21 @@
+id: d3ab1701-55d5-4e13-993f-b9adf82f1952
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume la signalisation selon le manuel ?
+choices:
+- id: 279dce14-8a72-42bb-aaed-c7d83f488f38
+  text: Pavillon Alpha de jour (ou feux rouge / blanc / rouge de nuit), périmètre
+    respecté selon la région, moyen de rappel efficace et connu des plongeurs
+- id: 1ba18e26-b582-41aa-9709-72844bb4af95
+  text: Pavillon facultatif, rappel interdit, VHF en option
+- id: 22232f29-ca78-46b1-89d5-9247ea1e4c88
+  text: Signalement uniquement si des bateaux approchent
+- id: e8416711-60ec-4672-bce2-6df58787753e
+  text: Feux de détresse permanents et amarres fluorescentes
+correct_choice_ids:
+- 279dce14-8a72-42bb-aaed-c7d83f488f38
+explanation: 'Le manuel enchaîne : signalisation jour/nuit, périmètre selon les régions
+  maritimes, moyen de rappel efficace et connu (p. 383-386).'
+archived: false

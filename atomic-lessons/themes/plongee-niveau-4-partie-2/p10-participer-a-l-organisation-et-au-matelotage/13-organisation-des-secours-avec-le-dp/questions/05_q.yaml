@@ -1,0 +1,22 @@
+id: ce4b5cd1-e21b-4016-9a66-fd683e335305
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi le contenu de la trousse n'est-il pas fixé uniformément, selon le
+  raisonnement du manuel ?
+choices:
+- id: d7af8b45-bfef-4d2a-abb3-0628be611d0e
+  text: Parce qu'il doit être adapté aux risques de l'activité, au lieu et aux conditions
+    de pratique
+- id: 8537855b-941f-4e32-9a4c-3dc57c07cd0e
+  text: Parce que la trousse est facultative
+- id: f9faefb8-40fc-4066-9cfa-4330bc18a0c8
+  text: Parce que les pharmaciens le décident
+- id: 7ea5a7cb-4a19-49c1-b0c9-959eb3967913
+  text: Parce que chaque plongeur apporte la sienne
+correct_choice_ids:
+- d7af8b45-bfef-4d2a-abb3-0628be611d0e
+explanation: L'article R322-4 ne fixe pas le contenu ; le manuel en déduit qu'il doit
+  être adapté aux risques, au lieu et aux conditions de pratique (p. 385).
+archived: false

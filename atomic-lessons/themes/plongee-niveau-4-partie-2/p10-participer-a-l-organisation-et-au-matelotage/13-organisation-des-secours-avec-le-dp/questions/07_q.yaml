@@ -1,0 +1,22 @@
+id: 7cc5910f-56b7-4c43-8fb8-eddb1b4e93ef
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle capacité l'ensemble d'oxygénothérapie doit-il avoir, selon le manuel
+  ?
+choices:
+- id: 73cd7e33-99d0-4ea9-a188-eb9352e7cbdd
+  text: Une capacité suffisante pour permettre, en cas d'accident, une prise en charge
+    adaptée à la situation jusqu'à l'arrivée des secours médicaux
+- id: 0a6c9a03-8b41-430b-b963-50ef7ab802db
+  text: Dix minutes quel que soit le site
+- id: 1c02c43e-5963-4ab3-96ff-b9dc9e05273a
+  text: Une heure par plongeur embarqué
+- id: d67d76da-e5e9-4b18-8f0f-a41f9087ffb8
+  text: Aucune capacité minimale n'est évoquée
+correct_choice_ids:
+- 73cd7e33-99d0-4ea9-a188-eb9352e7cbdd
+explanation: L'ensemble doit avoir une capacité suffisante pour une prise en charge
+  adaptée jusqu'à l'arrivée des secours médicaux (p. 385).
+archived: false

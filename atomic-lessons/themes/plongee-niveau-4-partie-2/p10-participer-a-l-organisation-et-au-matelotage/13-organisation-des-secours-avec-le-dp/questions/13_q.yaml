@@ -1,0 +1,20 @@
+id: 98fcc991-c94d-4cac-b239-8a64193745ae
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: À quoi sert la couverture isothermique, selon le manuel ?
+choices:
+- id: 4cd7e3ef-137b-46ae-a851-17d0de0855ad
+  text: Elle doit être à disposition pour secourir
+- id: 68d3901f-e7ed-44f9-be87-f9fc07aac621
+  text: À couvrir le moteur
+- id: f8082a1f-017d-4f7d-8014-1aaa9f2c7ede
+  text: À protéger les tables de décompression
+- id: 548c4c8e-2670-470f-91ca-e31bf0ae2b42
+  text: À signaler le bateau
+correct_choice_ids:
+- 4cd7e3ef-137b-46ae-a851-17d0de0855ad
+explanation: 'Une couverture isothermique doit être à disposition : elle fait partie
+  du matériel pour secourir (p. 385).'
+archived: false
