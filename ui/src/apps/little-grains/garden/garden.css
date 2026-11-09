@@ -130,3 +130,7 @@
 .lg-list.lg-tiles .bar{width:100%}
 
 .lg-crumbs[hidden]{display:none}
+/* Root view hides the crumbs pill; the counters reclaim its row instead of
+   sitting a full breadcrumb-height below the header. Deeper levels keep the
+   56px offset so the chips stay clear of the visible breadcrumbs. */
+.lg-mobile .lg-crumbs[hidden] + .lg-stats{top:10px}
