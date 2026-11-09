@@ -1,0 +1,21 @@
+id: 0b9c0e2f-1cc9-452f-adf3-6187962cf125
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume les règles de réussite selon le MFT ?
+choices:
+- id: daa694ca-d9aa-4bf5-97d3-cc94467529d0
+  text: 300/600 points, moyenne dans chaque groupe et sous-groupe, aucune note < 5/20,
+    toutes les épreuves réalisées
+- id: 335503d6-2a2e-49a1-847e-d629019c6567
+  text: La moyenne générale suffit
+- id: 21779be0-27d1-46ec-ac86-4f58c6e4885a
+  text: 300/600 points et deux épreuves au choix
+- id: 5df87afa-8eb4-40b2-ac73-80be072515f5
+  text: Réussir le groupe 2 dispense du reste
+correct_choice_ids:
+- daa694ca-d9aa-4bf5-97d3-cc94467529d0
+explanation: Il faut 300/600, la moyenne dans chaque groupe et sous-groupe du groupe
+  2, aucune note inférieure à 5/20 et toutes les épreuves réalisées (MFT, mai 2026).
+archived: false

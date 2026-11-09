@@ -1,0 +1,21 @@
+id: 74cb0bfd-4947-4535-bf05-a19d9084e5c6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel diplôme de plongée l'accès à l'examen exige-t-il, selon le MFT ?
+choices:
+- id: 5bd984fc-84d6-4f48-ab7a-63218da2788c
+  text: Le niveau 2
+- id: 11e0a315-de4f-40cf-ad70-1e1a3c0ba2a0
+  text: Le niveau 3 (N3) de la FFESSM ou un diplôme admis en équivalence dans le Code
+    du sport
+- id: 7b9b0629-ae23-4adf-9375-85c911bfa32b
+  text: Le niveau 1
+- id: 158b3bc5-0c16-4af2-bd45-a42396272f13
+  text: Aucun, seule la licence compte
+correct_choice_ids:
+- 11e0a315-de4f-40cf-ad70-1e1a3c0ba2a0
+explanation: Le candidat doit être titulaire du niveau 3 de la FFESSM ou d'un diplôme
+  admis en équivalence dans le Code du sport (MFT, mai 2026).
+archived: false

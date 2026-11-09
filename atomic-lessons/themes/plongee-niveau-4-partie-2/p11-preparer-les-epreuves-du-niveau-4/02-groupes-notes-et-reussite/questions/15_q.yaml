@@ -1,0 +1,21 @@
+id: 31e387e3-dde5-4121-a8ac-f6d9cb10ed13
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Un candidat a 310 points mais une note de 4/20 à une épreuve : est-il reçu
+  ?'
+choices:
+- id: 6c83ef6c-86c6-4675-b289-2f48ced697ce
+  text: Oui, le total dépasse 300
+- id: f9b927b2-6d98-45d3-92ed-9937e5a2252b
+  text: 'Non : aucune note inférieure à 5/20 n''est admise'
+- id: 059230bd-9905-440b-a839-f03e3fe3797d
+  text: Oui, si le jury vote pour
+- id: 7de434c6-f26c-4cf0-8b43-db017a40ef93
+  text: Non, il faut 350 points
+correct_choice_ids:
+- f9b927b2-6d98-45d3-92ed-9937e5a2252b
+explanation: Ne pas avoir de note inférieure à 5/20 est une condition de réussite,
+  indépendante du total de 300 points (MFT, mai 2026).
+archived: false

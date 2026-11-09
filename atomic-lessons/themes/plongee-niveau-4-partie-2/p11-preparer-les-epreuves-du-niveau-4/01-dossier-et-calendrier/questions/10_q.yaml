@@ -1,0 +1,22 @@
+id: 8c529d4f-524c-4cdb-adce-55e10d438a42
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels candidats sont dispensés de présenter les attestations d'aptitude ?
+choices:
+- id: f4d17fd1-e608-4474-bbf5-6190afe46b5f
+  text: Les titulaires des groupes 1 et 2 acquis lors d'une session antérieure, qui
+    ne présentent que le groupe 3
+- id: 0966f965-4e5e-4c58-8a20-aee6b39da64b
+  text: Les candidats de plus de 25 ans
+- id: b0623636-5946-4471-beee-83f8e4b8594b
+  text: Les candidats déjà niveau 4 d'une autre fédération
+- id: efba6f58-dd92-4d4c-b565-0018b2c2bada
+  text: Aucun candidat
+correct_choice_ids:
+- f4d17fd1-e608-4474-bbf5-6190afe46b5f
+explanation: Les titulaires des groupes 1 et 2 acquis lors d'une session antérieure,
+  qui ne présentent que le groupe 3 (théoriques), sont dispensés des attestations
+  (MFT, mai 2026).
+archived: false

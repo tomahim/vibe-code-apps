@@ -1,0 +1,21 @@
+id: 7254a0eb-540c-4fdf-8792-9fd5916f0db0
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel délai sépare au minimum la demande d'organisation d'un examen de sa date
+  prévisionnelle ?
+choices:
+- id: 97106445-fcd6-4245-a007-98820e8cf70a
+  text: 2 semaines
+- id: dd771a37-0792-4454-8e89-09c6aff7000c
+  text: Au moins 2 mois
+- id: 796e132a-727b-4079-b14f-997cad4e6226
+  text: 6 mois
+- id: e9c84d34-347e-42dd-90b4-67afad2dbf23
+  text: 1 an
+correct_choice_ids:
+- dd771a37-0792-4454-8e89-09c6aff7000c
+explanation: Les comités départementaux ou clubs font la demande à leur CTR au moins
+  2 mois avant la date prévisionnelle de début de l'examen (MFT, mai 2026).
+archived: false

@@ -1,0 +1,21 @@
+id: 95b19528-03eb-4186-bca2-3428428a59b5
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la validité d'une partie acquise ?
+choices:
+- id: b70e89eb-5653-42f4-8ffd-26c38d59f4ec
+  text: 9 mois maximum depuis la première épreuve présentée, pour un maximum de deux
+    sessions de rattrapage
+- id: 3171cee5-f9f2-4879-ad1a-e549e2761555
+  text: 1 an sans limite de sessions
+- id: acfb108e-56bc-449f-a6be-7db9ff32f49a
+  text: 3 mois
+- id: f0b37f39-a71b-4780-9879-a4f9738682bf
+  text: À vie
+correct_choice_ids:
+- b70e89eb-5653-42f4-8ffd-26c38d59f4ec
+explanation: La partie acquise est valable 9 mois maximum à compter de la première
+  épreuve présentée, pour un maximum de deux sessions de rattrapage (MFT, mai 2026).
+archived: false

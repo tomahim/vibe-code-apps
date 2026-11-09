@@ -1,0 +1,20 @@
+id: 0bc11516-4cf0-49d4-941a-2b9e31603dbd
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel total minimum le candidat doit-il obtenir pour être reçu ?
+choices:
+- id: 87785f26-c5e5-4637-9c03-35dbd313c35f
+  text: 200 points sur 600
+- id: 6c13d95f-c644-4953-828b-830c846fa438
+  text: 300 points sur 600, soit la moyenne générale de 10/20
+- id: a9a83954-c31c-4503-b2fb-40525c840f7b
+  text: 400 points sur 600
+- id: 3caa2885-009c-4948-956d-72eb457b81f8
+  text: 600 points sur 600
+correct_choice_ids:
+- 6c13d95f-c644-4953-828b-830c846fa438
+explanation: Le candidat doit obtenir au moins 300 points sur 600, soit une moyenne
+  générale de 10/20 (MFT, mai 2026).
+archived: false

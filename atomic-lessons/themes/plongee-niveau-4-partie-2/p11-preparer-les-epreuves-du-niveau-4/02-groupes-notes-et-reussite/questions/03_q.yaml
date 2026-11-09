@@ -1,0 +1,21 @@
+id: 63c3cb36-95c8-4abe-bf24-7f93b605d7d3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel coefficient porte l'épreuve d'anatomie, physiologie et physiopathologie
+  ?
+choices:
+- id: 2dea43a9-63b8-4486-bc11-1e4299173822
+  text: '1'
+- id: 26e87cf3-65ef-4c5f-be36-06f611d7ee72
+  text: '2'
+- id: 05f8a6cd-07c3-45c1-af77-3566d7db56e0
+  text: '3'
+- id: 1f50c258-6fd4-4345-89ea-0ddd79bf9ec3
+  text: '4'
+correct_choice_ids:
+- 1f50c258-6fd4-4345-89ea-0ddd79bf9ec3
+explanation: L'épreuve 11 (anatomie, physiologie et physiopathologie du plongeur)
+  est coefficient 4, le plus fort de l'examen (MFT, mai 2026).
+archived: false

@@ -1,0 +1,22 @@
+id: 4c51efc3-32d6-4e2e-b34c-addb5e881590
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans quel cas la partie pratique et condition physique est-elle conservée
+  sans la moyenne aux groupes 1 et 2 ?
+choices:
+- id: a1d3dcf4-c542-4036-92e4-b9097f4de1d5
+  text: Si le candidat obtient au moins 77 points au groupe 3 (théoriques)
+- id: 70639969-ebe5-4315-aa24-518dbf37895e
+  text: Si le candidat obtient 133 points au groupe 3
+- id: 53926210-4dc1-4d26-aca5-cbfdad4f50ec
+  text: Si le jury l'apprécie
+- id: 460dd7cb-4be5-4555-8f99-df1114626f30
+  text: Jamais
+correct_choice_ids:
+- a1d3dcf4-c542-4036-92e4-b9097f4de1d5
+explanation: La partie pratique est aussi acquise si le candidat obtient un minimum
+  de 77 points au groupe 3, avec ou sans note éliminatoire dans ce groupe (MFT, mai
+  2026).
+archived: false
