@@ -854,11 +854,11 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     placePractice();
   }
   // The global Review entry floats like the Practice entry (Thomas, 2026-11-08),
-  // out of the content panel, visible from the garden and theme levels. The
-  // path level belongs to the path's own Practice float.
+  // out of the content panel. It belongs to the Themes (garden) page only
+  // (Thomas, 2026-11-09); the path level has the path's own Practice float.
   const reviewFloatEl = $('.lg-review-float');
   function renderReviewFloat() {
-    if (view.level === 'path') { reviewFloatEl.hidden = true; reviewFloatEl.innerHTML = ''; return; }
+    if (view.level !== 'garden') { reviewFloatEl.hidden = true; reviewFloatEl.innerHTML = ''; return; }
     const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
     const reviewNote = reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"';
     reviewFloatEl.innerHTML = mobile
