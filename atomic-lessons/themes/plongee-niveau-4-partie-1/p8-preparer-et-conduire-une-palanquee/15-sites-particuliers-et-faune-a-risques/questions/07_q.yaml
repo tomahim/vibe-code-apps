@@ -1,0 +1,23 @@
+id: b5f6715e-6b89-4c05-9561-cfd540df69ca
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment prévenir les morsures de congres et de murènes, selon le manuel ?
+choices:
+- id: 71122027-4b53-4c8e-bef8-4fc0e449565b
+  text: Éviter de les agresser et ne pas leur présenter les doigts, par exemple pour
+    les faire sortir de leur trou.
+- id: 24f1708a-a917-461a-9bdd-6392def5c3fe
+  text: Leur donner de la nourriture pour les apaiser.
+- id: 99af660b-f189-4f3b-9f02-ec448ce917cc
+  text: Les attraper par la queue.
+- id: 270d209e-fac4-4752-b0ce-f45a3e6e57af
+  text: Tapoter leur tête.
+correct_choice_ids:
+- 71122027-4b53-4c8e-bef8-4fc0e449565b
+explanation: 'La prévention est simple : éviter d''agresser ces animaux et ne pas
+  leur présenter vos doigts. Vigilance accrue dans les zones où certaines espèces
+  sont nourries : elles peuvent devenir agressives envers les plongeurs qui ne donnent
+  rien.'
+archived: false

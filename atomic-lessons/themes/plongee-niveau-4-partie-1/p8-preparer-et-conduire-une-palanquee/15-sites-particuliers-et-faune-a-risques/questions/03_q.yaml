@@ -1,0 +1,21 @@
+id: 0d960396-4038-4aaf-b5bb-e06f7b7c7758
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le principal risque des épaves, selon le manuel ?
+choices:
+- id: c0cf6d18-a8ca-4713-8cd7-a217b750bcc5
+  text: Rester prisonnier.
+- id: 7ea6c2af-f972-49a2-8e32-a72afd6b4eed
+  text: Le froid.
+- id: dee4620f-2768-4dfa-8fcb-18c086709a39
+  text: Le bruit.
+- id: 528ec672-9cb4-48bb-bea0-8611386b4a8f
+  text: Les poissons.
+correct_choice_ids:
+- c0cf6d18-a8ca-4713-8cd7-a217b750bcc5
+explanation: Les épaves sont chargées d'histoire et abritent de nombreuses espèces,
+  mais le principal risque est de rester prisonnier ; en règle générale, il est déconseillé
+  d'y pénétrer.
+archived: false

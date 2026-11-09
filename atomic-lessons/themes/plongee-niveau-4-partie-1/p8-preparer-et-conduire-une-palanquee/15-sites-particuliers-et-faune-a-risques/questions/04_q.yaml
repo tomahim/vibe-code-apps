@@ -1,0 +1,21 @@
+id: c2d599dd-5338-423d-a3dc-fcd3d52d4fc1
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Si l'on choisit malgré tout d'entrer dans une épave, que dit le manuel ?
+choices:
+- id: b26273b1-5093-4675-adcb-f64b0b3b0618
+  text: 'Les précautions indiquées pour les grottes et tunnels restent valables :
+    accès large, sortie visible à tout moment, réserve d''air suffisante, lampe.'
+- id: bf9b463b-a4ad-4be6-ab1a-cb0ac579cd46
+  text: On peut y entrer sans précaution si l'épave est petite.
+- id: 0dc797c4-20f3-4aa0-bffd-6dccf9508519
+  text: Il suffit de plonger de jour.
+- id: 324ddf47-7f33-400a-8873-ff92ea756774
+  text: Il suffit d'être deux.
+correct_choice_ids:
+- b26273b1-5093-4675-adcb-f64b0b3b0618
+explanation: Si vous choisissez tout de même d'entrer, les précautions indiquées pour
+  les grottes et tunnels restent valables.
+archived: false

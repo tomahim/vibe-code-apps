@@ -1,0 +1,21 @@
+id: a28fdeca-9788-4ea2-872a-d12ad0bfeb84
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle longueur peuvent atteindre les filaments invisibles de certaines méduses,
+  selon le manuel ?
+choices:
+- id: 2c17c765-313b-4760-9299-f6c45077fba3
+  text: 10 mètres.
+- id: 9ddc75a8-e34b-4da4-be77-c8401a4acb01
+  text: 10 centimètres.
+- id: 207a2cc5-2a5d-4790-8b52-58f0b8d0344a
+  text: 1 kilomètre.
+- id: 6d78dea7-3ee2-4456-9adc-8ac032d68fd2
+  text: 50 centimètres.
+correct_choice_ids:
+- 2c17c765-313b-4760-9299-f6c45077fba3
+explanation: Les filaments de certaines espèces de méduses, invisibles, atteignent
+  10 m de long.
+archived: false

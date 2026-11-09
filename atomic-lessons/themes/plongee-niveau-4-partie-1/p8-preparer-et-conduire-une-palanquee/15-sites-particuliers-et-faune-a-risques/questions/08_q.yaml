@@ -1,0 +1,23 @@
+id: c348e560-8729-45a1-a7d9-2de7786ebe24
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels sont les premiers secours après une morsure à risque d'envenimation,
+  selon le manuel ?
+choices:
+- id: 902e1be8-5314-492d-a296-8865df0bbfa4
+  text: Immobiliser immédiatement, désinfecter la plaie, apposer de la glace, évacuer
+    vers une structure médicale, et surveiller la victime en permanence.
+- id: 716fdaee-c6ab-43f8-b2b9-b7ad6e79a11e
+  text: Faire courir la victime pour activer la circulation.
+- id: 81d42ff8-8152-4399-bf0f-ed99eb812ad3
+  text: Sucer le venin.
+- id: 68d74986-10fb-4905-843d-8731e7189d18
+  text: Appliquer un garrot serré et attendre.
+correct_choice_ids:
+- 902e1be8-5314-492d-a296-8865df0bbfa4
+explanation: 'Premiers secours : immobiliser immédiatement, désinfecter la plaie,
+  apposer de la glace, évacuer vers une structure médicale ; la victime est surveillée
+  en permanence par des personnes capables d''effectuer les gestes de premiers secours.'
+archived: false

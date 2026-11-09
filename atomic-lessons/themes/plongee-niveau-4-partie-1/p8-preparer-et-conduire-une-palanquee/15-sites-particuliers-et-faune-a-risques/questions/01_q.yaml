@@ -1,0 +1,25 @@
+id: bfab8bd6-d3bb-4220-b0b1-fbedca78cc86
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles conditions le manuel exige-t-il pour explorer une grotte ou un tunnel
+  en plongée de loisir ?
+choices:
+- id: 9497c559-6faf-4324-94d7-a354eab89ce5
+  text: Passages larges pour plusieurs plongeurs de front, visibilité excellente,
+    sortie visible à tout moment, lampe par plongeur, et réserve d'air permettant
+    de sortir avec au moins 80 à 100 bars.
+- id: 494b8ee1-197d-44cd-af38-6d7c2e71a95e
+  text: Uniquement une lampe par plongeur.
+- id: 49174d0b-340f-4adf-9805-c7f6feedc3bc
+  text: Uniquement une faible profondeur.
+- id: 741e296c-0cb7-4b78-9610-d613f4c28a29
+  text: Uniquement l'absence de courant.
+correct_choice_ids:
+- 9497c559-6faf-4324-94d7-a354eab89ce5
+explanation: 'Le manuel liste des conditions cumulatives : accès large à plusieurs
+  plongeurs de front, visibilité excellente (pas de fond de vase), sortie visible
+  à tout moment, lampe pour chaque plongeur, et sortie avec au moins 80 à 100 bars
+  dans les bouteilles.'
+archived: false

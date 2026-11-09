@@ -1,0 +1,22 @@
+id: 70f981cf-98f5-407a-871d-f44e1a6c5cce
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que doit faire un plongeur pris dans des filets, selon le manuel ?
+choices:
+- id: 473bea2f-5f20-4679-b63b-58e0d95dd0da
+  text: Éviter de s'agiter ; il faut couper les fils le plus rapidement possible à
+    l'aide d'un couteau ou d'une cisaille.
+- id: 3f1ce439-fdac-47b1-92e8-f93a3879dcbc
+  text: Se débattre vigoureusement.
+- id: 84ae00c5-4441-45d2-9bd7-26df462b36c0
+  text: Gonfler son gilet au maximum.
+- id: 03900fc6-b2c9-40d5-83f4-c2ea8316022e
+  text: Retirer son détendeur.
+correct_choice_ids:
+- 473bea2f-5f20-4679-b63b-58e0d95dd0da
+explanation: 'Un plongeur pris dans des filets risque la noyade : il doit éviter de
+  s''agiter et il faut couper les fils au plus vite avec un couteau ou une cisaille.
+  La première précaution reste de ne pas plonger à proximité de ces engins de pêche.'
+archived: false

@@ -1,0 +1,23 @@
+id: e0d6bfef-3143-490a-9165-a7f517eb274f
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que ne faut-il jamais faire après un contact avec des cellules urticantes
+  (méduses, anémones, corail de feu) ?
+choices:
+- id: 85b4d3d7-5b4c-4654-b618-b306f4405243
+  text: Frotter la zone douloureuse.
+- id: c0f9ab1e-8e90-43a4-8f56-c2c2b33dcda9
+  text: Rincer à l'eau de mer.
+- id: 2da5a6b2-e25a-4050-a12e-e7b09da21a55
+  text: Désinfecter.
+- id: 918b3a59-0319-4897-895f-3241a9d129e5
+  text: Appliquer un corticoïde après désinfection.
+correct_choice_ids:
+- 85b4d3d7-5b4c-4654-b618-b306f4405243
+explanation: 'Il est contre-indiqué de frotter : cela peut faire éclater les cellules
+  urticantes restées collées à la peau et disséminer le poison. En immersion, agiter
+  de l''eau de mer au-dessus de la zone ; en surface, laver sans frotter, éventuellement
+  racler après sable ou mousse à raser, puis désinfecter avant d''appliquer un corticoïde.'
+archived: false

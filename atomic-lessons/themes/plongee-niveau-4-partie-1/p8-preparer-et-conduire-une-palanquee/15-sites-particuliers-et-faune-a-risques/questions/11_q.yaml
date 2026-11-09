@@ -1,0 +1,22 @@
+id: 73bf0b5d-9ecd-4088-82da-592621175b56
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi les rascasses et scorpénidés sont-ils dangereux pour un plongeur
+  non averti ?
+choices:
+- id: 7978ed45-85da-4248-916e-d46d4b6529fd
+  text: 'Ils sont peu craintifs et restent sur le fond sans bouger : un plongeur risque
+    de les toucher et d''être piqué.'
+- id: 6ca8cf4f-0c72-4c26-8720-cef9099a53d6
+  text: Ils attaquent en groupe.
+- id: 74e31fe3-4ef2-4324-a9c6-39a6b8d28d90
+  text: Ils sautent hors de l'eau.
+- id: 6366e51d-7a9f-4d85-a653-cbfe2953082f
+  text: Ils percent les combinaisons.
+correct_choice_ids:
+- 7978ed45-85da-4248-916e-d46d4b6529fd
+explanation: Ces espèces sont peu craintives et restent sur le fond sans bouger ;
+  un plongeur non averti risque de les toucher et d'être piqué.
+archived: false

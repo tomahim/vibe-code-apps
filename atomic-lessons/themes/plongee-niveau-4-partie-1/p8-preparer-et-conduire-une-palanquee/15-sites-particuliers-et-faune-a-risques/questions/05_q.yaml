@@ -1,0 +1,20 @@
+id: f605665a-db2f-454d-9156-4ea06e89dc0b
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel conseil le manuel donne-t-il pour le mouillage sur une épave ?
+choices:
+- id: 9c1f9a45-e9c8-480b-9b15-b2ddbb9e09be
+  text: L'attacher bien haut, pour faciliter son identification.
+- id: a0fae5a3-3905-40da-a784-3e2f915d551c
+  text: L'attacher au fond, caché.
+- id: ecee809e-a0df-46a9-9e12-603d44b7e8e9
+  text: Ne jamais mouiller sur une épave.
+- id: 70cc5249-6488-4921-9cbd-481a18abbe48
+  text: Utiliser deux ancres croisées.
+correct_choice_ids:
+- 9c1f9a45-e9c8-480b-9b15-b2ddbb9e09be
+explanation: Sur une épave, il reste conseillé que le mouillage soit attaché bien
+  haut, pour faciliter son identification.
+archived: false

@@ -1,0 +1,25 @@
+id: d53c571e-0168-4e4c-8019-7f622e68308f
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Parmi les conseils préventifs du manuel sur les produits de la mer, lequel
+  est correct ?
+choices:
+- id: faaa9f18-2471-4eb0-94fb-6eaf8073e78a
+  text: Se renseigner localement, ne prélever aucun coquillage dans des eaux sales
+    ou dormantes, et ne jamais consommer un poisson bleu resté plus de huit heures
+    à l'air libre.
+- id: c597d6f9-64d7-4d72-a91e-7c548160a72b
+  text: Manger de gros poissons carnivores en priorité.
+- id: 1a0f9581-d54b-48be-ae38-b81c02c05210
+  text: Prélever les coquillages dans les ports.
+- id: a6acdfd2-aafe-43d3-89e1-bcf1747984e8
+  text: Consommer les mérous à la saison du frai.
+correct_choice_ids:
+- faaa9f18-2471-4eb0-94fb-6eaf8073e78a
+explanation: 'Conseils du manuel : se renseigner localement ; pas de coquillage dans
+  des eaux sales, colorées ou dormantes ; poissons de petite taille sans laitance,
+  viscères ni tête ; jamais de poisson bleu resté plus de huit heures à l''air libre
+  ; ni mérous ni barracudas à la saison du frai.'
+archived: false

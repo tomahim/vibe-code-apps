@@ -1,0 +1,22 @@
+id: eaac57eb-35bb-4010-bb5b-ee5295fcbd61
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel du fugu (poisson-ballon) ?
+choices:
+- id: b83a2caa-0e9f-4dff-b620-ea45fcad205a
+  text: 'Ses viscères contiennent un poison violent, non détruit par la cuisson :
+    sa consommation est à proscrire.'
+- id: 5dd22c15-450d-41d4-8325-41d7eceb05ad
+  text: Il est comestible sans précaution.
+- id: deefb2a0-000b-4e16-9ad2-fdd5f8e56fb2
+  text: La cuisson détruit son poison.
+- id: 4602e8b8-df66-422b-8083-0b424c6b386c
+  text: Seule sa peau est toxique.
+correct_choice_ids:
+- b83a2caa-0e9f-4dff-b620-ea45fcad205a
+explanation: 'Le fugu contient dans ses viscères un poison violent, non détruit par
+  la cuisson, qui peut tuer un être humain en moins d''une heure : sa consommation
+  est à proscrire.'
+archived: false
