@@ -1,0 +1,21 @@
+id: 6c1972a6-6fd3-4784-8e51-65cbd46ea792
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Dans quelles circonstances un Bulletin Météo Spécial (BMS) est-il diffusé
+  ?
+choices:
+- id: b320fcac-e729-4efb-a92b-532bd57840d6
+  text: En cas de vent fort, de forte houle ou de visibilité réduite
+- id: 119338de-a5e3-4401-9873-14deb3ea3252
+  text: Uniquement en cas de tempête
+- id: 4f225290-0874-49b4-a838-fa7038608389
+  text: À chaque changement de marée
+- id: 3fe3d6f7-776d-421e-8e97-6c5ca0e801dc
+  text: Pendant les week-ends et jours fériés
+correct_choice_ids:
+- b320fcac-e729-4efb-a92b-532bd57840d6
+explanation: Les avis comme les BMS sont diffusés en cas de vent fort, forte houle
+  ou visibilité réduite (p. 387).
+archived: false

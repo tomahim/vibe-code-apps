@@ -1,0 +1,21 @@
+id: ea4956d0-fe3a-482c-b70f-750d84117add
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi anticiper la renverse aide-t-il la récupération ?
+choices:
+- id: 52936c95-918a-449c-a27e-5d12d5408f57
+  text: Parce que le sens du courant en fin de plongée peut être inversé, ce qui change
+    la position des plongeurs par rapport au mouillage
+- id: 206ca012-91ee-46ac-beff-c6b51961dcc7
+  text: Parce qu'elle permet d'éviter de mouiller
+- id: 20fd094a-b8cc-459f-b8f5-10c552b212ab
+  text: Parce qu'elle supprime le courant
+- id: 1e8ee90e-d53e-4dda-b823-2947a42f9206
+  text: Parce qu'elle raccourcit les paliers
+correct_choice_ids:
+- 52936c95-918a-449c-a27e-5d12d5408f57
+explanation: Anticiper la renverse, c'est anticiper où la palanquée se retrouvera
+  en fin de plongée par rapport au mouillage (p. 324, 355 et 393).
+archived: false

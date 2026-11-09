@@ -1,0 +1,20 @@
+id: 1f2d3bb5-430a-4976-a946-066cf2df64f9
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que désigne la jauge d'un navire ?
+choices:
+- id: 84e78c70-dd03-4748-a8ba-5325e0ed0988
+  text: La longueur maximale de la coque
+- id: 037aaf4b-841d-4403-98e3-919dcb067cc3
+  text: Le volume des capacités intérieures, exprimé en tonneaux
+- id: 7f2316fe-59fb-4869-87e4-c87d50896b99
+  text: La profondeur du puits à chaîne
+- id: 322c7d6b-aa34-41a9-b12d-1ecd53da172a
+  text: La hauteur réglementaire du pavillon Alpha
+correct_choice_ids:
+- 037aaf4b-841d-4403-98e3-919dcb067cc3
+explanation: La jauge est le volume des capacités intérieures des navires, exprimé
+  en tonneaux (1 tonneau vaut 2,83 m³) (p. 399).
+archived: false

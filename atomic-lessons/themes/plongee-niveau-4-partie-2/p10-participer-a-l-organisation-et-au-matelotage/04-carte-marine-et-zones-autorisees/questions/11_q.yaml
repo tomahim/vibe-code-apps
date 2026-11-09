@@ -1,0 +1,11 @@
+id: 664772ff-61ae-4630-8338-53f6891bae46
+position: 11
+type: type_answer_question
+after_card_position: 6
+prompt: Comment s'appelle un point de repère précis, significatif, fixe et bien visible,
+  utilisé pour localiser un site ?
+accepted_answers:
+- amer
+explanation: Un amer est un point de repère précis, significatif, fixe et bien visible
+  (p. 389).
+archived: false

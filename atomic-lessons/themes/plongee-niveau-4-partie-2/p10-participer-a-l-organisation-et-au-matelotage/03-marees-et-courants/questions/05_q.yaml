@@ -1,0 +1,20 @@
+id: 58c17cad-ebbb-46b5-9d47-eaa07bd06ac2
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'appelle-t-on la « renverse » dans le manuel ?
+choices:
+- id: 39c09411-b3cb-4f2c-ac8c-69efde31c26c
+  text: Le passage de la marée montante à la descendante, et inversement
+- id: 60970a08-efb5-4f32-bb4b-6e98402e0301
+  text: Le retournement du bateau au mouillage
+- id: 0534c6a6-dcfd-4ea8-920d-a70fa173c934
+  text: Le changement de direction du vent en fin de journée
+- id: 9f8b11f2-cf67-4f37-a96c-8b9007179262
+  text: La remontée d'une palanquée en urgence
+correct_choice_ids:
+- 39c09411-b3cb-4f2c-ac8c-69efde31c26c
+explanation: La renverse est le passage de la marée montante à la descendante, et
+  inversement ; elle peut inverser le sens du courant en fin de plongée (p. 324).
+archived: false

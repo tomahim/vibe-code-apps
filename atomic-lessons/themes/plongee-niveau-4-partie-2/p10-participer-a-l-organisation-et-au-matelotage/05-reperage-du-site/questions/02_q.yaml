@@ -1,0 +1,20 @@
+id: ba7c74c6-b142-403d-9dc3-d2f7bfbb57d7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce qu'une enseignure ?
+choices:
+- id: 59408899-af3c-4a55-a037-ef3d0e2313a2
+  text: Le croisement de deux (ou trois) alignements afin de déterminer un point précis
+- id: 5c8fe8ff-f1d5-4dc1-a7bb-97104c7c9f57
+  text: Un amer unique très visible
+- id: be024234-a44e-401e-b75c-e1c47e6a7db4
+  text: Une bouée lumineuse
+- id: 638a5002-92d1-4498-bf23-538d3df24f10
+  text: Un point GPS enregistré
+correct_choice_ids:
+- 59408899-af3c-4a55-a037-ef3d0e2313a2
+explanation: Une enseignure est le croisement de deux (ou trois) alignements, afin
+  de déterminer un point précis (p. 389).
+archived: false

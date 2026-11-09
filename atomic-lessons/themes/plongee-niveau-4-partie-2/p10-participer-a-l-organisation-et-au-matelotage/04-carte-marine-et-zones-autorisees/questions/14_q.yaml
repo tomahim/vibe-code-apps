@@ -1,0 +1,19 @@
+id: 3c68712e-0c2a-4c7c-958c-760f9ff0499f
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qu'une enseignure ?
+choices:
+- id: 7b29b144-85ec-4737-bb5e-a92258a6c00e
+  text: Un amer lumineux de nuit
+- id: 5adf621a-b91e-498e-865f-c1c1c1d2d2e7
+  text: Le croisement de deux alignements
+- id: 9d0008a6-7b2b-4816-a449-ddea94139013
+  text: Une bouée de mouillage pour plongeurs
+- id: d5be9ca4-6c7e-4b02-a216-05d37ec22ec1
+  text: Un type de sondeur
+correct_choice_ids:
+- 5adf621a-b91e-498e-865f-c1c1c1d2d2e7
+explanation: Une enseignure est le croisement de deux alignements (p. 389).
+archived: false

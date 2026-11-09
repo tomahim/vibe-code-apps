@@ -1,0 +1,22 @@
+id: 81b0e694-585e-43ee-9b5c-40ce198a2c31
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels domaines le manuel associe-t-il à l'aide à l'organisation des plongées
+  ?
+choices:
+- id: bd229dfd-90e4-4dc3-b87f-5cc58fcc8571
+  text: Les embarcations, le matelotage, la surveillance des palanquées et les procédures
+    de secours
+- id: 3c075df9-de6a-4983-8cb9-adf264c285c6
+  text: Uniquement la météo et la navigation
+- id: 911a7001-cc14-4aec-938f-b38f0d12bc32
+  text: La théorie de la décompression et le matériel du plongeur
+- id: 44f79656-1da7-4aef-a3e4-1543e0685819
+  text: La législation du travail des moniteurs
+correct_choice_ids:
+- bd229dfd-90e4-4dc3-b87f-5cc58fcc8571
+explanation: Le chapitre du manuel couvre les embarcations, le matelotage, la surveillance
+  des palanquées et les procédures de secours (p. 383).
+archived: false

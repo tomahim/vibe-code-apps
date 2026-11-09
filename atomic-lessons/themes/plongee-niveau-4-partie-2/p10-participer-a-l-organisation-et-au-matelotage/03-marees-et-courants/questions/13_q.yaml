@@ -1,0 +1,21 @@
+id: 989edbeb-70c7-455e-8879-2a16e20ca0cf
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Une palanquée partie avec un courant portant vers le nord découvre en fin
+  de plongée un courant portant au sud. Quelle explication le manuel donne-t-il ?
+choices:
+- id: 10196816-8986-451c-a228-ce317d45cdfd
+  text: Une erreur de compas des plongeurs
+- id: 68acc3e3-167e-479c-9f62-6207d3e56970
+  text: 'La renverse : le passage de la marée montante à la descendante, ou inversement'
+- id: 9978622e-fa32-4700-a15e-069eb3f21c13
+  text: Une modification du vent forcément simultanée
+- id: e5dd2375-6291-4b49-bef4-9d1faba35bf6
+  text: Un effet de la houle de fond
+correct_choice_ids:
+- 68acc3e3-167e-479c-9f62-6207d3e56970
+explanation: 'C''est la renverse : le courant de marée peut être inversé entre le
+  début et la fin de la plongée (p. 324 et 355).'
+archived: false

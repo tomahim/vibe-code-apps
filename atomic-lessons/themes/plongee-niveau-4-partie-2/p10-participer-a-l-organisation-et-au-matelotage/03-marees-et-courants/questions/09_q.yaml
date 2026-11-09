@@ -1,0 +1,21 @@
+id: 2ef3b544-b376-42a2-abfc-6cf195a5e50c
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Selon le manuel, comment le choix du site tient-il compte de la marée ?
+choices:
+- id: 42cc4501-7ef7-4cd8-8360-026a5c158ba6
+  text: On évite systématiquement les sites de marée
+- id: 1adaecd5-6283-4498-83e5-aa92a8bc19df
+  text: On privilégie l'étale pour les sites soumis au courant de marée, et on vérifie
+    le sens du courant en surface
+- id: 298220a8-f80f-4e98-96d1-39ab4a3852f1
+  text: On ne plonge qu'à marée basse
+- id: 666acb50-3c9c-41a8-9a90-d1a904b309e3
+  text: La marée n'a aucune influence sur le choix du site
+correct_choice_ids:
+- 1adaecd5-6283-4498-83e5-aa92a8bc19df
+explanation: 'Le livre relie la marée au choix du site : étale favorable pour les
+  sites à courant, et vérification du sens du courant en surface (p. 324 et 387).'
+archived: false

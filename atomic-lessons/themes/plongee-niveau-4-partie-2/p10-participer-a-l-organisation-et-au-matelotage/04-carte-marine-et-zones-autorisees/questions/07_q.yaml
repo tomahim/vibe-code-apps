@@ -1,0 +1,21 @@
+id: 55b15796-6c04-40dd-84d5-624b0686bbde
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que précise le manuel pour la Polynésie française ?
+choices:
+- id: d32543b1-6a3e-44fa-a5ac-a912ef299101
+  text: La navigation est interdite dans un rayon de 200 mètres
+- id: e8246a21-eceb-4667-b8f7-b46fa89b0970
+  text: Le pavillon ne peut pas avoir un guindant (hauteur) inférieur à 0,50 mètre,
+    sans indication sur le périmètre ou la conduite à tenir
+- id: 29cd8ddd-4927-4313-8811-271ed9f11181
+  text: Le pavillon Alpha est facultatif
+- id: 58566d8c-ae97-4804-8f53-2aa149bbaf48
+  text: La vitesse est limitée à 3 nœuds
+correct_choice_ids:
+- e8246a21-eceb-4667-b8f7-b46fa89b0970
+explanation: Pour la Polynésie française, le manuel indique un guindant d'au moins
+  0,50 mètre, sans indication concernant le périmètre ou la conduite à tenir (p. 383).
+archived: false

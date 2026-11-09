@@ -1,0 +1,20 @@
+id: b2d951ba-35e1-4f3b-98f4-d5af30e31e15
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi lover correctement un cordage ?
+choices:
+- id: 6b3ab26e-c3a9-490b-8f2f-61a2a4f8cbcf
+  text: Pour éviter qu'il ne s'emmêle et lui assurer une plus grande longévité
+- id: 69ee4843-86a5-478e-ac90-b4566e76d1a5
+  text: Pour le rendre visible de nuit
+- id: aab5516f-6f42-41be-bdee-db0dece86b8f
+  text: Pour le peser avant la manœuvre
+- id: 97f6942f-0970-42d0-8316-468eddfdc159
+  text: Pour le raccourcir définitivement
+correct_choice_ids:
+- 6b3ab26e-c3a9-490b-8f2f-61a2a4f8cbcf
+explanation: Lover évite que le cordage s'emmêle et lui assure une plus grande longévité
+  (p. 398).
+archived: false

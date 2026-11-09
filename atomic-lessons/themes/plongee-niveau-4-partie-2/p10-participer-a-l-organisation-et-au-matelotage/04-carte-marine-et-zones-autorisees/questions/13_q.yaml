@@ -1,0 +1,20 @@
+id: 57ce3210-1645-4ad3-8112-c208b6af08a0
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qu'un alignement, selon le manuel ?
+choices:
+- id: 84021040-3e34-4c78-b755-940e25545f34
+  text: Deux amers parfaitement alignés l'un derrière l'autre
+- id: a4ce194e-6902-4c95-83a5-48bdb1e75d7f
+  text: La route du bateau entre deux bouées
+- id: eee77079-ef3e-445e-903c-51936beef5f1
+  text: Une ligne de sonde sur la carte
+- id: 9b7f7c3a-be52-4f06-b962-7c33d3418a2f
+  text: Le cap suivi au compas
+correct_choice_ids:
+- 84021040-3e34-4c78-b755-940e25545f34
+explanation: Deux amers parfaitement alignés l'un derrière l'autre forment un alignement
+  (p. 389).
+archived: false

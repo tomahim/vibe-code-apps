@@ -1,0 +1,20 @@
+id: 6214cd54-befa-4db5-8cf2-41443ecc9562
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Selon le manuel, quel est le rôle d'un plongeur de niveau 4 à bord ?
+choices:
+- id: 9a21e2a7-96df-4a2d-963d-8269634980ea
+  text: Uniquement guider sa palanquée sous l'eau
+- id: 5f9a27fe-58ba-4bac-9d73-22a1ceed1792
+  text: Guide de palanquée et encadrant qui aide à l'organisation de l'activité
+- id: d2315ce1-ae03-4c06-afd0-e9e76e8c9e39
+  text: Pilote du navire de plongée
+- id: 62170828-e9de-45ce-ab7f-a59626f178e6
+  text: Responsable unique de la maintenance de l'embarcation
+correct_choice_ids:
+- 5f9a27fe-58ba-4bac-9d73-22a1ceed1792
+explanation: Le manuel précise que le niveau 4 est non seulement guide de palanquée
+  mais aussi un encadrant qui aide à l'organisation de l'activité (p. 383).
+archived: false

@@ -1,0 +1,20 @@
+id: b40ea9a5-d211-4255-a5cb-86fb6f1eff99
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce que le roulis ?
+choices:
+- id: 609f01ae-e962-430b-a464-fc2d58d61bb5
+  text: Le mouvement du navire dans le sens longitudinal
+- id: 2069b857-ad99-449c-b1b9-18921c4437cb
+  text: L'appareil qui mesure la vitesse du navire
+- id: 75c81106-99d2-42df-b146-14d49040780b
+  text: Le balancement du navire dans le sens transversal
+- id: cecf78b0-23cc-4baf-8a42-843c8d5a1186
+  text: La partie avant de la coque
+correct_choice_ids:
+- 75c81106-99d2-42df-b146-14d49040780b
+explanation: Le roulis est le balancement qui prend le navire dans le sens transversal
+  ; le tangage est le mouvement longitudinal (p. 399).
+archived: false

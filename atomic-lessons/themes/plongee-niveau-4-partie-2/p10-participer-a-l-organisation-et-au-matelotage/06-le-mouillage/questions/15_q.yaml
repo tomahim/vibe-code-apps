@@ -1,0 +1,23 @@
+id: 3b5bcf0d-d138-4c66-b2b3-b6d583c2713f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Le vent tourne pendant la plongée. Que doit permettre le mouillage, selon
+  le manuel ?
+choices:
+- id: 3435f0b7-487d-4cbd-9d89-4864be0f1b63
+  text: Que le bateau tourne autour du mouillage sans heurter de récif ou d'embarcation,
+    grâce au rayon d'évitage
+- id: d69ca9bc-c105-47c4-b290-398d18aa29cc
+  text: Que le bateau reste parfaitement immobile, quelles que soient les conditions
+- id: 5ceb8677-7c5a-474d-ba62-e62e7d42ff93
+  text: Que l'ancre se décroche pour suivre le vent
+- id: 2865af60-51ac-4214-a6e5-5ef12883311e
+  text: Que la chaîne se tende au maximum
+correct_choice_ids:
+- 3435f0b7-487d-4cbd-9d89-4864be0f1b63
+explanation: 'Le lieu doit permettre au bateau de tourner autour du mouillage sans
+  heurter de récif ou d''embarcation si le vent ou le courant change de sens : c''est
+  le rayon d''évitage (p. 392).'
+archived: false

@@ -1,0 +1,21 @@
+id: c6a39282-9409-4bc1-997f-80310fbf11a9
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Outre la profondeur, que permet le sondeur selon le manuel ?
+choices:
+- id: c99368de-ba9a-452f-89de-fb532a962ff6
+  text: De dessiner les fonds et de repérer des points significatifs comme une remontée
+    rocheuse ou une épave
+- id: f8274323-189a-4073-ab02-79544903595f
+  text: De mesurer la température de l'eau
+- id: e0f68cff-9351-48dc-9119-b4e544597bbb
+  text: De communiquer avec les plongeurs
+- id: 9ed30a02-2d6a-4b54-a9b6-87905531fb28
+  text: De détecter les autres bateaux
+correct_choice_ids:
+- c99368de-ba9a-452f-89de-fb532a962ff6
+explanation: 'Le sondeur permet aussi de dessiner les fonds et de repérer des points
+  significatifs : une remontée rocheuse, une épave, etc. (p. 391).'
+archived: false

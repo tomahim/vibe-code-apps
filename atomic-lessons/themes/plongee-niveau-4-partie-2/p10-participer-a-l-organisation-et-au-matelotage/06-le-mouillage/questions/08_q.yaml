@@ -1,0 +1,21 @@
+id: 35d8bff3-6c84-46bb-97e2-f498b94822dd
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles longueurs de mouillage le manuel recommande-t-il ?
+choices:
+- id: 08c4dac1-4c81-4de8-b83b-d184de5e8467
+  text: Toujours 10 fois la hauteur d'eau
+- id: 3e6bd667-4a75-48e0-8c8e-82f28381831e
+  text: Au minimum 2 fois la hauteur d'eau par mer belle ou peu agitée ; 3 à 5 fois
+    s'il y a des vagues, du vent, du courant ou par petits fonds
+- id: 9722becd-df49-4f1a-b901-211386ab6fda
+  text: Exactement la hauteur d'eau
+- id: 52eda10a-786e-4c37-9160-c374f84fbfa3
+  text: La moitié de la hauteur d'eau
+correct_choice_ids:
+- 3e6bd667-4a75-48e0-8c8e-82f28381831e
+explanation: Par mer belle ou peu agitée, au minimum 2 fois la hauteur d'eau ; 3 à
+  5 fois s'il y a des vagues, du vent, du courant ou par petits fonds (p. 392).
+archived: false

@@ -1,0 +1,22 @@
+id: 38a1b9be-e04f-488f-8530-c37e6dc0c00c
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que peut-il arriver au sens du courant de marée entre le début et la fin de
+  l'exploration ?
+choices:
+- id: 40830e0b-c681-4a7c-ae87-10ed7463786e
+  text: Il reste toujours identique
+- id: 1998651d-070a-415c-9ec9-d415eb24a033
+  text: Il peut être inversé, et le guide doit en tenir compte
+- id: d3f62a61-8364-45f9-9976-0d61b1becdc1
+  text: Il s'arrête définitivement
+- id: ea7ad87a-3c8a-4156-a6fb-db4c4670f102
+  text: Il double systématiquement
+correct_choice_ids:
+- 1998651d-070a-415c-9ec9-d415eb24a033
+explanation: Le manuel précise qu'en présence d'un courant de marée, son sens peut
+  être inversé entre le début et la fin de l'exploration, et qu'il faut en tenir compte
+  (p. 355).
+archived: false

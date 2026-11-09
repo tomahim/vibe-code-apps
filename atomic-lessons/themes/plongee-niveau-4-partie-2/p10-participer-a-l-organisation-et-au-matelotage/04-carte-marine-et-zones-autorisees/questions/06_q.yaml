@@ -1,0 +1,23 @@
+id: ddc95123-827e-4fcf-8741-06451390049e
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: En Martinique, Guadeloupe, Saint-Barthélemy et Saint-Martin, quelle conduite
+  le manuel indique-t-il dans le rayon de 100 mètres ?
+choices:
+- id: 1412eabc-023a-47ba-b7f0-b29c60b4044f
+  text: Navigation interdite
+- id: 0704cb3e-c2e3-4db6-8f0f-41c3a8ed341b
+  text: Vitesse appropriée garantissant la sécurité, limitée en tout état de cause
+    à 5 nœuds
+- id: fa6b995c-2be7-4c6d-b7d8-ae2f724f9f04
+  text: Vitesse limitée à 10 nœuds
+- id: 7f8dfaae-5b89-4f6e-b1a9-38f3368e48f7
+  text: Passage autorisé uniquement de nuit
+correct_choice_ids:
+- 0704cb3e-c2e3-4db6-8f0f-41c3a8ed341b
+explanation: Dans ces régions, on maintient une vitesse appropriée garantissant la
+  sécurité, limitée en tout état de cause à 5 nœuds dans un rayon de 100 mètres (p.
+  383).
+archived: false

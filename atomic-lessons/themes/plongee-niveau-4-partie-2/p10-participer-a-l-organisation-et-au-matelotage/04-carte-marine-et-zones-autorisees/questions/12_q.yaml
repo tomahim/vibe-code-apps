@@ -1,0 +1,20 @@
+id: bc0da1f2-7711-4496-af5b-e7567113e990
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles qualités un amer doit-il réunir selon le manuel ?
+choices:
+- id: 8868b224-d37e-46e4-bb4b-2c838b815ad5
+  text: Précis, significatif, fixe et bien visible
+- id: 41b7df4b-84e7-42bb-a1a0-bcbd8815a6a2
+  text: Mobile, flottant et lumineux
+- id: 9c9a0875-605e-4a1a-9c52-3063567b0363
+  text: Naturel, grand et éloigné
+- id: 3e5be63f-f8b2-4f1a-80fc-b97b9c1af1c8
+  text: Significatif, récent et coloré
+correct_choice_ids:
+- 8868b224-d37e-46e4-bb4b-2c838b815ad5
+explanation: Un amer est précis, significatif (différent des points voisins), fixe
+  et bien visible (p. 389).
+archived: false

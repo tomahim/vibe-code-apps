@@ -1,0 +1,19 @@
+id: 6dade251-264d-42ad-8d42-099440432705
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Par téléphone, après le 08 99 71 08 08, que compose-t-on selon le manuel ?
+choices:
+- id: ffd1a021-1d59-433e-9d9e-79f02d927331
+  text: Le code postal du port
+- id: 457b75b7-5f4f-4c3d-bb17-af9e2e94200a
+  text: Le numéro de département
+- id: a6ce4740-66c8-4de5-8b85-fa34c51134b8
+  text: L'indicatif de la région maritime
+- id: dcc9a951-013f-4f7c-ac39-1517759dfb80
+  text: Le numéro de la capitainerie
+correct_choice_ids:
+- 457b75b7-5f4f-4c3d-bb17-af9e2e94200a
+explanation: Le manuel indique de composer ensuite son numéro de département (p. 387).
+archived: false

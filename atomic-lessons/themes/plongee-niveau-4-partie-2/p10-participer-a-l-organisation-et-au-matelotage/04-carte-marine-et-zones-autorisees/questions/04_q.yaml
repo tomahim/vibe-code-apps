@@ -1,0 +1,23 @@
+id: 18f0ae79-2d0b-4aaf-b405-f7f88f0b895e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit le manuel des dimensions du pavillon pour les navires de moins de
+  20 mètres ?
+choices:
+- id: 7d5bc127-15f0-4db4-ad05-d42ba50574ef
+  text: Elles sont fixées à 2 mètres minimum
+- id: 1f48ab9d-351b-4aad-b9b0-189a104d7c4a
+  text: L'annexe du RIPAM prévoit des dimensions inférieures en rapport avec le navire,
+    sans autre précision
+- id: a1669209-9036-404f-b53c-76a37a7c3505
+  text: Le pavillon est interdit sous 20 mètres
+- id: 5c6acc4f-a5dd-4858-9209-5f7b81f429e2
+  text: Elles relèvent du choix du directeur de plongée
+correct_choice_ids:
+- 1f48ab9d-351b-4aad-b9b0-189a104d7c4a
+explanation: L'annexe (point 6 c) du RIPAM précise qu'à bord d'un navire de longueur
+  inférieure à 20 mètres, les marques peuvent avoir des dimensions inférieures, en
+  rapport avec le navire, sans précision sur ces dimensions (p. 383).
+archived: false

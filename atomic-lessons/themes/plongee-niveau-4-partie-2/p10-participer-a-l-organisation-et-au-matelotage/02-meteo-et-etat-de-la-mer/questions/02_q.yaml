@@ -1,0 +1,21 @@
+id: 3012fe1d-b95f-4735-82ae-e0ba863f948f
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que permettent de décider les prévisions météorologiques, selon le manuel
+  ?
+choices:
+- id: 7bdb8b7d-980b-47f7-bebe-48a743a39009
+  text: Uniquement l'heure de la sortie
+- id: da17e0c4-444b-4f3f-9905-19aab5e560e7
+  text: Si la plongée a lieu et, dans l'affirmative, son lieu
+- id: 02d02e71-b97b-4611-9d13-7eea5d2c4dce
+  text: La durée des paliers de décompression
+- id: 64771dff-6615-418d-91d7-e60a2fab1a9f
+  text: Le nombre de plongeurs par palanquée
+correct_choice_ids:
+- da17e0c4-444b-4f3f-9905-19aab5e560e7
+explanation: Les prévisions permettent de décider si la plongée a lieu et, dans l'affirmative,
+  d'en déterminer le lieu (p. 387).
+archived: false

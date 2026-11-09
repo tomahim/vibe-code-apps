@@ -1,0 +1,21 @@
+id: a2ba4335-747d-42b6-b464-3e9dc626cb86
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Une fois le site localisé, quelles options le manuel propose-t-il avant la
+  mise à l'eau ?
+choices:
+- id: b0df9f53-95e5-458f-b0ca-96f927ca3d34
+  text: Lancer une balise comme repère visuel, ou mouiller le bateau
+- id: 7bf99352-1efb-4dcb-aec6-2ee787a7f2cb
+  text: Jeter l'ancre immédiatement, quelle que soit la position
+- id: f855ae7f-cecf-4840-9796-069f8bd6fd89
+  text: Appeler la capitainerie
+- id: 632645a0-ca09-44b2-9d77-0da728e02a31
+  text: Faire le tour du site à grande vitesse
+correct_choice_ids:
+- b0df9f53-95e5-458f-b0ca-96f927ca3d34
+explanation: 'Après localisation : lancer une balise (en indiquant de ne pas s''y
+  tenir) ou mouiller le bateau (p. 391).'
+archived: false

@@ -1,0 +1,20 @@
+id: 39bd7691-0637-48eb-9a17-ebfe9de01226
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qu'un coffre, au sens maritime du manuel ?
+choices:
+- id: 5a3b4a78-8bbc-4417-bfbc-5e6d3bb41612
+  text: Une grosse bouée servant à l'amarrage des navires sur une rade
+- id: 9a5fe7ea-827c-45ab-9ff8-f27fcd1ce53e
+  text: Un compartiment étanche de la coque
+- id: 9841c51b-5043-4644-b661-d3f18b9ac9b9
+  text: Une caisse de rangement des détendeurs
+- id: 54f23bcc-aa38-4a73-87ca-83cc9f814a96
+  text: Un passage étroit entre les chambres du navire
+correct_choice_ids:
+- 5a3b4a78-8bbc-4417-bfbc-5e6d3bb41612
+explanation: Le coffre est une grosse bouée servant à l'amarrage des navires sur une
+  rade (p. 399).
+archived: false
