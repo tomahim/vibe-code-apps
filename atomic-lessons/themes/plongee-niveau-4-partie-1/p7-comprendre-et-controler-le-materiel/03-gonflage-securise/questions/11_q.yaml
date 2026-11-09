@@ -1,0 +1,23 @@
+id: 71b5acaf-b0a3-4b6b-965d-0f7dc0554edf
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que faire si l'équilibre des pressions s'effectue avant la pression visée
+  ?
+choices:
+- id: ce1e91b7-5c84-4c6d-b2df-4cfdf64e9a07
+  text: Fermer cette série de tampons et en ouvrir une autre à pression supérieure,
+    ou utiliser le compresseur.
+- id: 47fa1492-643f-497a-a600-ba34421d0241
+  text: 'Continuer : la pression finira par monter toute seule.'
+- id: 0b69aa54-3ebf-47a1-a535-e340c8731c21
+  text: Ouvrir la soupape de sûreté pour équilibrer les pressions.
+- id: 31e491b8-4f8c-4912-9482-bf5fcbd5d0f0
+  text: Secouer les bouteilles pour homogénéiser l'air qu'elles contiennent.
+correct_choice_ids:
+- ce1e91b7-5c84-4c6d-b2df-4cfdf64e9a07
+explanation: 'Pas assez d''air dans les tampons : fermer la série et en ouvrir une
+  autre, à pression supérieure à celle affichée (sinon on déverse l''air des blocs
+  dans les tampons), ou utiliser le compresseur.'
+archived: false

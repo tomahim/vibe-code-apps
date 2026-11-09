@@ -1,0 +1,22 @@
+id: 55eb823c-b441-433f-8709-325e9e44ada9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment entreposer les bouteilles gonflées, selon le manuel ?
+choices:
+- id: 867763ed-3b99-4b88-bb36-b76469b1b7fa
+  text: Dans un lieu sûr, sans risque de chute ni de confusion avec des bouteilles
+    vides ou d'autres mélanges (Nitrox, Trimix).
+- id: 3cc65b75-b6ac-45ae-b1ce-2651c5db5ab6
+  text: À l'extérieur, en plein soleil pour sécher la robinetterie.
+- id: 4d88be8d-3ee6-4252-b93b-21bb0b6d993d
+  text: Couchées dans un local fermé sans aucune signalisation.
+- id: 055dca54-aaa0-4c73-947b-f799861bc79e
+  text: 'Mélangées aux bouteilles vides : le manomètre permet de les distinguer.'
+correct_choice_ids:
+- 867763ed-3b99-4b88-bb36-b76469b1b7fa
+explanation: Entreposer les bouteilles gonflées dans un lieu sûr, sans risque qu'elles
+  tombent ni qu'elles soient confondues avec des bouteilles vides ou contenant un
+  autre mélange (Nitrox, Trimix...).
+archived: false

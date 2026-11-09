@@ -1,0 +1,22 @@
+id: ef1e2e9f-41df-49dc-bc89-3d0f39e94cc7
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles sont les trois consignes pendant le chargement ?
+choices:
+- id: 882c372c-e02a-419f-8a01-a4f9b65973e5
+  text: Purger fréquemment décanteurs et filtres, surveiller le manomètre de la rampe,
+    ne jamais dépasser la pression de chargement.
+- id: bf979a79-42fc-441a-8e7c-1c8ac1c6dab4
+  text: Fumer loin de la rampe, éteindre son téléphone, rester assis.
+- id: f6b91337-89c3-4270-aa1a-e4f6e36d19ca
+  text: Gonfler vite le matin, lentement le soir, jamais la nuit.
+- id: 929ed262-dc55-42de-870b-e9ff020d036a
+  text: Mettre des gants, un casque et des chaussures de sécurité.
+correct_choice_ids:
+- 882c372c-e02a-419f-8a01-a4f9b65973e5
+explanation: 'Pendant le chargement : purger fréquemment les décanteurs et filtres,
+  surveiller le manomètre de la rampe de chargement, ne jamais dépasser la pression
+  de chargement de la bouteille.'
+archived: false

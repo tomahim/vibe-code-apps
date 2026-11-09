@@ -1,0 +1,21 @@
+id: 0332627b-665c-491d-bc5c-2a57b4960be5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que doit faire le préposé au chargement face à une bouteille non conforme
+  ?
+choices:
+- id: b7ad4128-d964-4c7b-b744-0dbb683ba6ec
+  text: Refuser les bouteilles qui ne répondent pas aux exigences des vérifications.
+- id: 9c373052-ddaf-4aa4-b0c0-4928db55fa68
+  text: Les gonfler à mi-pression pour limiter les risques.
+- id: 392da2e0-603d-478c-9c14-cad927b1ce0b
+  text: Les gonfler normalement mais le signaler au guide de palanquée.
+- id: 092596e6-a9c0-4c3e-8a90-fca196b772f5
+  text: Les marquer d'un autocollant rouge et les rendre au plongeur.
+correct_choice_ids:
+- b7ad4128-d964-4c7b-b744-0dbb683ba6ec
+explanation: Le préposé au chargement doit refuser les bouteilles qui ne répondent
+  pas aux exigences des vérifications.
+archived: false

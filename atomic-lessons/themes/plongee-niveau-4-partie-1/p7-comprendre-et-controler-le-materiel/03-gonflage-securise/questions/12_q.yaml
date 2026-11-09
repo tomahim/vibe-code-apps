@@ -1,0 +1,23 @@
+id: 7eafd694-93cd-4fdc-b5e6-0825d7f5f452
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi fermer le robinet des tampons légèrement au-dessus de la pression
+  cible ?
+choices:
+- id: 88e10005-82d8-4990-9167-f88ce331f88f
+  text: Sinon la soupape de sûreté se met en œuvre et on perd inutilement une partie
+    du stock d'air.
+- id: fa2c0884-417f-4727-9469-1a3f6289979a
+  text: Pour que les bouteilles descendent exactement à la cible en refroidissant.
+- id: 7f59da57-8308-420f-b6ca-780d345d0fd4
+  text: Pour laisser une marge au manomètre qui sous-estime toujours.
+- id: 28a2e4ec-5a3b-4b14-98bd-68640d110a7f
+  text: Pour éviter le claquement des clapets de refoulement du compresseur.
+correct_choice_ids:
+- 88e10005-82d8-4990-9167-f88ce331f88f
+explanation: Si la quantité d'air est suffisante, on ferme le robinet lorsque la pression
+  est légèrement au-dessus de la cible ; sinon la soupape de sûreté se met en œuvre
+  et on perd inutilement une partie du stock.
+archived: false
