@@ -1,5 +1,5 @@
 ---
-id: 0f1a5c07-8d5c-4748-9b8d-819e151b2a5b
+id: 97a9c26f-99e8-4e83-b772-ce15fc2f8610
 position: 9
 title: La règle du direct-system
 archived: false

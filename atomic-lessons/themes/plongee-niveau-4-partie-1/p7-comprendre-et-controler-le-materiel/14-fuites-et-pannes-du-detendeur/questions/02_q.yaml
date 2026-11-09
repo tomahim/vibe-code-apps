@@ -1,20 +1,20 @@
-id: cb5ffc94-bec5-45f1-94f4-c7aca43dc63b
+id: ccf2b82c-4eb5-45b7-b427-7692e0de437d
 position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
 prompt: 'Une entrée d''eau lors de l''aspiration est une panne :'
 choices:
-- id: 9a6ab3ee-872b-42e3-b9a9-11e61956c1e4
+- id: 680062c5-3764-4e20-85ce-c77c669b8a89
   text: Du deuxième étage.
-- id: d054ab38-19c8-4e6e-a615-6ec8151428bf
+- id: e2b8a4c6-60d3-49ba-a70c-60354ea42117
   text: Du premier étage.
-- id: 4ee605b4-06fb-496c-b5c7-e1d3367b44d3
+- id: f6feedc0-6ce2-4a97-a4d9-5b4f996abdee
   text: De la robinetterie.
-- id: ab37c346-d1f9-484c-8433-521a8abe5b36
+- id: d688f11d-f275-456d-aa8c-50138d45cd58
   text: Du flexible HP.
 correct_choice_ids:
-- 9a6ab3ee-872b-42e3-b9a9-11e61956c1e4
+- 680062c5-3764-4e20-85ce-c77c669b8a89
 explanation: 'Entrée d''eau lors de l''aspiration : panne au deuxième étage (embout,
   membrane, boîtier, soupape d''expiration).'
 archived: false

@@ -1,20 +1,23 @@
-id: fb3ac398-f18e-4de6-92f2-404e7c504e11
+id: 35b13b04-53c3-4869-8994-614cf7e3ded3
 position: 16
 type: multiple_choice
 selection: single
-after_card_position: 8
-prompt: Quelle est la solution du manuel face à un flexible défectueux ?
+after_card_position: 10
+prompt: Que dit le manuel du givrage des détendeurs en eaux très froides ?
 choices:
-- id: fe862f8a-cd5c-4202-815a-7c84e528d2e3
-  text: Changer le flexible.
-- id: a1f76ee0-3cb3-44a8-8fcc-8689aa826859
-  text: Le colmater avec du ruban adhésif.
-- id: 90c0a39f-5074-451a-b63a-8fdb7a6c17e2
-  text: Le rincer à l'eau douce plus souvent.
-- id: d8e70f07-845a-48df-9255-117cdf7e2c4d
-  text: Le retourner pour répartir l'usure.
+- id: 882d2097-8f3b-48ea-9e50-684ed03acb18
+  text: Le froid peut faire givrer les détendeurs, qui se mettent en débit continu
+    ; risque de panne d'air puis de noyade ; formation spécifique avant ce type de
+    plongées.
+- id: 6fc4c7d4-603c-46df-8ac7-591af929ac0c
+  text: Le givrage est impossible sous l'eau, le manuel n'en parle pas.
+- id: eb838cc1-3fef-472c-ad04-88213ac64fe1
+  text: Le givrage améliore l'étanchéité du premier étage.
+- id: 448fa1ef-7490-4e8a-9a3c-72e55317d191
+  text: Le givrage ne concerne que les bouteilles en acier.
 correct_choice_ids:
-- fe862f8a-cd5c-4202-815a-7c84e528d2e3
-explanation: 'Solution : changer le flexible. La prévention : entretien et vérification
-  régulière de son état, notamment au contrôle avant plongée.'
+- 882d2097-8f3b-48ea-9e50-684ed03acb18
+explanation: 'Chapitre froid : en eaux très froides (ex. lacs d''altitude), le froid
+  peut faire givrer les détendeurs, qui se mettent en débit continu ; risque de panne
+  d''air puis de noyade ; formation spécifique recommandée.'
 archived: false

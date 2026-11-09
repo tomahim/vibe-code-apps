@@ -1,21 +1,21 @@
-id: 47842e97-d14e-4cc3-b99f-531b0d0b086f
+id: e61036d7-2563-410f-9a7a-00f47ba59017
 position: 9
 type: multiple_choice
 selection: single
 after_card_position: 7
 prompt: Quelle précaution le manuel donne-t-il pour les fixations à étrier ?
 choices:
-- id: 6a46669f-b05e-4d04-b14e-341268920778
+- id: 373275c0-fca6-4402-a688-cb7783853e8a
   text: Serrer correctement pour éviter que le joint ne s'extrude à l'ouverture de
     la bouteille.
-- id: 9cd83c04-da54-4a73-af1a-96f08b688161
+- id: 83d7ef05-95f8-41e4-bd22-7ef031c0f5b0
   text: Ne jamais serrer, le joint doit rester libre.
-- id: 62048581-e69b-4eb5-a009-32864f648949
+- id: b54c745e-d28f-416b-aa81-13615be72bc3
   text: Graisser l'étrier avant chaque plongée.
-- id: 9a0a8ef4-ea95-420f-a9ca-aa243e12c07e
+- id: 708d558d-59c5-48cb-a3b7-1bdd3540e25d
   text: Monter deux joints l'un sur l'autre.
 correct_choice_ids:
-- 6a46669f-b05e-4d04-b14e-341268920778
+- 373275c0-fca6-4402-a688-cb7783853e8a
 explanation: 'Sur les fixations à étrier : serrer correctement pour éviter que le
   joint ne s''extrude à l''ouverture de la bouteille.'
 archived: false

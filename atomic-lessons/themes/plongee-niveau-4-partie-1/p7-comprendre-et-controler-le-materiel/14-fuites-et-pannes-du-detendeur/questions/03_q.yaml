@@ -1,4 +1,4 @@
-id: b6b77d06-fd0b-472a-beb0-67d15a0e580b
+id: 7a339209-482f-43c4-8602-16c31bc9ba41
 position: 3
 type: multiple_choice
 selection: single
@@ -6,17 +6,17 @@ after_card_position: 2
 prompt: Quelles origines le manuel donne-t-il pour une entrée d'eau au deuxième étage
   ?
 choices:
-- id: 236ed731-1dbd-4e29-83b6-1722cc8b4e7e
+- id: af186699-17f8-47a8-83d3-51f7706c371d
   text: Embout percé ou fendu, membrane défectueuse, boîtier fêlé, soupape d'expiration
     endommagée ou encrassée.
-- id: 05f45a72-93ca-4c85-b0c8-4e4ddebbe361
+- id: 155aecb4-0fb2-4c30-86de-3b053402f3b3
   text: Piston bloqué et ressort cassé.
-- id: e5961756-4ee2-4b9f-b900-352efc029bd9
+- id: 5991e5ce-c4e6-4023-abd9-465dd129e8d6
   text: Joint de robinetterie absent et étrier desserré.
-- id: da47bcda-8ac0-4e31-9ce1-cf42b124344f
+- id: cd212c83-c6fa-41df-aa8c-f4a4b2ad1c28
   text: Flexible poreux et filtre colmaté.
 correct_choice_ids:
-- 236ed731-1dbd-4e29-83b6-1722cc8b4e7e
+- af186699-17f8-47a8-83d3-51f7706c371d
 explanation: 'Origines : embout percé, déchiré ou fendu ; membrane déplacée ou percée
   ; boîtier fêlé ; soupape d''expiration endommagée ou encrassée.'
 archived: false

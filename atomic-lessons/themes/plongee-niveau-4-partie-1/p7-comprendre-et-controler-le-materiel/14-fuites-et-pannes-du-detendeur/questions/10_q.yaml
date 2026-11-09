@@ -1,21 +1,21 @@
-id: ad5a4c1e-85dd-445a-9f3a-e332596e2706
+id: 338472e0-327e-4731-be7b-d27c5dcf0f7a
 position: 10
 type: multiple_choice
 selection: single
 after_card_position: 8
 prompt: Pourquoi le manuel insiste-t-il sur l'état des flexibles ?
 choices:
-- id: 2127e88c-bcf5-4ba5-869c-7492d3c68129
+- id: c3d54504-6564-4555-9333-57b359cc1036
   text: Une fuite ou explosion de flexible peut vider la bouteille en quelques dizaines
     de secondes.
-- id: 1af3ed88-05f3-4061-8878-a1ba3b888df3
+- id: 35edeeed-0efe-43bc-9b58-2e278967757d
   text: Un flexible usé change le goût de l'air.
-- id: fbb9b48c-51df-4db7-8de9-85fe6a583564
+- id: b3ca2d11-8e96-473c-8c00-e2ece9898125
   text: Un flexible ancien interdit toute plongée en mer.
-- id: aea62c7a-3093-420a-a675-12c696fd8dce
+- id: c72ffc44-4f1c-418d-9f96-58a0b38c4d15
   text: Les flexibles coûtent trop cher à remplacer.
 correct_choice_ids:
-- 2127e88c-bcf5-4ba5-869c-7492d3c68129
+- c3d54504-6564-4555-9333-57b359cc1036
 explanation: 'Origine : manque d''entretien et de vérification du flexible ; la bouteille
   peut se vider en quelques dizaines de secondes. La vérification visuelle fait partie
   du contrôle avant plongée.'
