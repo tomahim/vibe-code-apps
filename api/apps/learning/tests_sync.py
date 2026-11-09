@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import subprocess
 import uuid
 from unittest import mock
 from io import StringIO
@@ -11,7 +12,9 @@ from tempfile import TemporaryDirectory
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.core.management.base import CommandError
+from django.db import connection
 from django.test import TestCase
+from django.test.utils import CaptureQueriesContext
 from django.utils import timezone
 
 from apps.learning.models import (
@@ -424,3 +427,139 @@ class CardIllustrationSyncTests(TestCase):
         self.assertEqual(card.illustration_path, "")
         self.assertEqual(card.illustration_variants, {})
         self.assertIsNone(card.illustration_width)
+
+
+def add_cards(root: Path, count: int, first_position: int = 2) -> list[str]:
+    """Add `count` extra cards after the fixture card and return their ids."""
+    cards = root / "themes/language/early-english/greetings/cards"
+    ids = []
+    for offset in range(count):
+        card_id = str(uuid.uuid4())
+        position = first_position + offset
+        (cards / f"{position:02d}_extra.md").write_text(
+            f"---\nid: {card_id}\nposition: {position}\ntitle: Extra {position}\narchived: false\n---\n\nBody {position}.\n",
+            encoding="utf-8",
+        )
+        ids.append(card_id)
+    return ids
+
+
+class BulkSyncTests(TestCase):
+    """The sync must not issue per-row queries (#186) and must behave as before."""
+
+    def count_queries(self, root, commit):
+        with CaptureQueriesContext(connection) as queries:
+            run_sync(root, commit)
+        return queries
+
+    def test_unchanged_resync_query_count_does_not_grow_with_the_library(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            add_cards(root, 20)
+            run_sync(root, "1" * 40)
+            small = len(self.count_queries(root, "2" * 40))
+            add_cards(root, 20, first_position=22)
+            run_sync(root, "3" * 40)
+            large = len(self.count_queries(root, "4" * 40))
+        self.assertEqual(Card.objects.count(), 41)
+        self.assertEqual(small, large, "resync queries must not depend on the number of rows")
+        self.assertLess(small, 30)
+
+    def test_new_rows_are_inserted_in_batches(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            add_cards(root, 25)
+            queries = self.count_queries(root, "5" * 40)
+        card_inserts = [q for q in queries if q["sql"].startswith('INSERT INTO "lg_card"')]
+        entity_inserts = [q for q in queries if q["sql"].startswith('INSERT INTO "lg_content_entity"')]
+        self.assertEqual(len(card_inserts), 1)
+        self.assertEqual(Card.objects.count(), 26)
+        # 5 kinds batched: entities are inserted once per kind, not once per row.
+        self.assertLessEqual(len(entity_inserts), 5)
+        self.assertEqual(ContentEntity.objects.count(), 30)
+
+    def test_new_card_takes_a_slot_held_by_an_existing_card_that_moves_down(self):
+        second_id = str(uuid.uuid4())
+        new_id = str(uuid.uuid4())
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            cards = root / "themes/language/early-english/greetings/cards"
+            (cards / "02_second.md").write_text(
+                f"---\nid: {second_id}\nposition: 2\ntitle: Second\narchived: false\n---\n\nSecond.\n",
+                encoding="utf-8",
+            )
+            run_sync(root, "6" * 40)
+            for name, position in (("01_expressions.md", 2), ("02_second.md", 3)):
+                text = (cards / name).read_text(encoding="utf-8")
+                (cards / name).write_text(
+                    "".join(
+                        f"position: {position}\n" if line.startswith("position:") else line
+                        for line in text.splitlines(keepends=True)
+                    ),
+                    encoding="utf-8",
+                )
+            (cards / "00_new.md").write_text(
+                f"---\nid: {new_id}\nposition: 1\ntitle: New first\narchived: false\n---\n\nNew.\n",
+                encoding="utf-8",
+            )
+            run_sync(root, "7" * 40)
+        positions = {str(card.pk): card.position for card in Card.objects.all()}
+        self.assertEqual(positions, {new_id: 1, CARD_ID: 2, second_id: 3})
+        self.assertFalse(Card.objects.filter(position__gte=1_000_000_000).exists())
+        log = SyncLog.objects.get(commit_sha="7" * 40)
+        self.assertEqual(log.changes["card"], {"added": 1, "updated": 2, "unchanged": 0})
+
+    def test_slot_reserved_by_a_row_outside_the_library_still_aborts(self):
+        with TemporaryDirectory() as tmp:
+            root = write_library(Path(tmp))
+            run_sync(root, "8" * 40)
+            outsider = ContentEntity.objects.create(id=uuid.uuid4(), kind="card")
+            Card.objects.create(
+                entity=outsider, position=2, lesson_id=LESSON_ID, title="Outsider",
+                body_markdown="x", source_path="x.md", last_changed_commit="x",
+            )
+            add_cards(root, 1, first_position=2)
+            with self.assertRaises(CommandError) as caught:
+                run_sync(root, "9" * 40)
+        self.assertIn("already reserved by", str(caught.exception))
+        self.assertEqual(Card.objects.count(), 2)
+
+
+class BatchedProvenanceTests(TestCase):
+    def git(self, repo, *args):
+        subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=repo, check=True, capture_output=True,
+        )
+
+    def test_one_pass_matches_the_per_file_lookup(self):
+        from apps.learning.management.commands import sync_atomic_lessons as module
+
+        with TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self.git(repo, "init", "-q")
+            (repo / "lessons" / "a").mkdir(parents=True)
+            (repo / "lessons" / "a" / "one.md").write_text("1", encoding="utf-8")
+            (repo / "lessons" / "two.md").write_text("2", encoding="utf-8")
+            (repo / "lessons" / "caf\u00e9 3.md").write_text("3", encoding="utf-8")
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", "first")
+            (repo / "lessons" / "two.md").write_text("2b", encoding="utf-8")
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", "second")
+            (repo / "lessons" / "untracked.md").write_text("u", encoding="utf-8")
+            paths = ["lessons/a/one.md", "lessons/two.md", "lessons/caf\u00e9 3.md", "lessons/untracked.md"]
+            with mock.patch.object(module, "REPO_ROOT", repo):
+                command = module.Command()
+                batched = command.last_changed_commits(paths)
+                per_file = {path: command.last_changed_commit(path) for path in paths}
+        self.assertEqual({path: batched.get(path) for path in paths}, per_file)
+        self.assertIsNone(per_file["lessons/untracked.md"])
+        self.assertNotEqual(batched["lessons/two.md"], batched["lessons/a/one.md"])
+
+    def test_missing_git_history_falls_back_without_failing(self):
+        from apps.learning.management.commands import sync_atomic_lessons as module
+
+        with TemporaryDirectory() as tmp:
+            with mock.patch.object(module, "REPO_ROOT", Path(tmp)):
+                self.assertIsNone(module.Command().last_changed_commits(["lessons/x.md"]))
