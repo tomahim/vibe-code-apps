@@ -1,0 +1,20 @@
+id: d95f7e2e-2b13-49a9-af96-57e677b242d5
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel est l'objectif de la phase d'accueil, selon le manuel ?
+choices:
+- id: aba2ea6b-8a27-4656-9dd0-b76a62410700
+  text: Mettre en confiance les interlocuteurs.
+- id: 0d2720b9-b0e1-40ad-abe8-727b3f3514f9
+  text: Vendre des prestations supplémentaires.
+- id: 9114790d-c281-4d17-8061-9b6b6457db70
+  text: Remplir la fiche de sécurité à la place du DP.
+- id: fc0dc5e2-003e-4bbd-804b-974e6b2f3725
+  text: Tester les connaissances théoriques des plongeurs.
+correct_choice_ids:
+- aba2ea6b-8a27-4656-9dd0-b76a62410700
+explanation: Cette phase doit être « à la fois sympathique et respectueuse afin de
+  mettre en confiance vos interlocuteurs ».
+archived: false

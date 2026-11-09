@@ -1,0 +1,21 @@
+id: 71c1be0e-3d03-45e3-8907-5ecb6d5a88ea
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que faut-il faire avant de poser ces questions, selon l'exemple du manuel
+  ?
+choices:
+- id: 3a308e56-5b49-4140-af6f-40eb3639dd0a
+  text: Se présenter comme guide de palanquée.
+- id: a8e00df4-da98-40a3-ba60-751749443f81
+  text: Faire signer une décharge.
+- id: f271c4ae-1625-41d2-bd27-e15e825691ce
+  text: Vérifier la pression des blocs.
+- id: b9bacd64-8a5e-47a6-a0a3-08091961ac8b
+  text: Distribuer les palmes.
+correct_choice_ids:
+- 3a308e56-5b49-4140-af6f-40eb3639dd0a
+explanation: 'L''exemple du manuel commence par la présentation : « Bonjour, je m''appelle...
+  Je suis votre guide de palanquée », puis viennent les questions.'
+archived: false

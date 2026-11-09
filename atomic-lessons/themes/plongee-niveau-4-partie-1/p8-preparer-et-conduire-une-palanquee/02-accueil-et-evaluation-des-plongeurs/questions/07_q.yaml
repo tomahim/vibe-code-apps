@@ -1,0 +1,23 @@
+id: 1c35da72-de65-4c16-bdf0-759b40384a5d
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que le DP a-t-il vérifié concernant l'équipement des participants, selon le
+  manuel ?
+choices:
+- id: 28c16489-50cd-4cf8-8cb2-7e78c838deda
+  text: Sa conformité à la réglementation (détendeurs de secours, instruments...)
+    et aux exigences de la plongée (parachute de palier, boussole...).
+- id: 17fb5e16-79b2-4c36-b285-9fd399110414
+  text: Uniquement la couleur des combinaisons.
+- id: 5cbbf9e9-ae90-4a89-a0b2-f34c84f66801
+  text: Que tout le matériel est neuf.
+- id: 096a49d6-d29c-42d8-938a-11ea9d8b085a
+  text: 'Rien : l''équipement ne concerne que le guide.'
+correct_choice_ids:
+- 28c16489-50cd-4cf8-8cb2-7e78c838deda
+explanation: Le DP s'assure que l'équipement est conforme à la réglementation (détendeurs
+  de secours, instruments...) et aux exigences de la plongée (parachute de palier,
+  boussole...).
+archived: false

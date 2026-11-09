@@ -1,0 +1,20 @@
+id: cb96fd4e-8e2f-4417-955e-7a8865d5d259
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que recommande le manuel pour animer le briefing ?
+choices:
+- id: 886913da-5ad0-480c-b260-433127f5cc56
+  text: 'Faire participer l''auditoire : entamer une conversation, éviter les monologues.'
+- id: 3401ab7b-5bff-47fa-a69b-ab14c10d9901
+  text: Lire un texte appris par cœur sans interruption.
+- id: b5c875db-6e23-45dd-a59e-75c0312c0b88
+  text: Interdire toute question.
+- id: 8f9e83e8-712d-42ef-a2ce-20efc7d483c1
+  text: Parler le plus vite possible pour gagner du temps.
+correct_choice_ids:
+- 886913da-5ad0-480c-b260-433127f5cc56
+explanation: « Chaque fois que cela est possible, faites participer votre auditoire,
+  entamez une conversation, évitez les monologues. »
+archived: false
