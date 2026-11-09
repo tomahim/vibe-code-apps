@@ -1,0 +1,21 @@
+id: c9c85799-bc58-456a-8093-845a64ec5f55
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle part des nœuds connus le domaine maritime a-t-il créée, selon le manuel
+  ?
+choices:
+- id: e304ebbb-7c36-4a33-81cd-3978bfbe240b
+  text: Moins de 10 %
+- id: 4bed24e9-bd0d-4c44-a73a-ed97c321ac57
+  text: Environ 50 %
+- id: a53b3cbd-173a-4238-b408-7751e5c54ee1
+  text: Plus de 90 %
+- id: 4ccc1880-3f62-4ef8-a076-3b7ccb34d003
+  text: La totalité
+correct_choice_ids:
+- a53b3cbd-173a-4238-b408-7751e5c54ee1
+explanation: Le manuel indique que le domaine maritime a créé plus de 90 % des nœuds
+  (p. 394).
+archived: false

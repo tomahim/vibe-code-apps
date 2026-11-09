@@ -1,0 +1,20 @@
+id: becd5af1-b0e8-45c4-b85c-2de519d61120
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: À quoi sert le nœud de taquet ?
+choices:
+- id: 7b41cf9c-a1ad-405d-8454-27ff1ab82750
+  text: À amarrer un bout à un taquet
+- id: e6f871e1-de74-4475-8557-728687ac3c4c
+  text: À relier deux cordages
+- id: 97040a96-bd2e-4c43-a5e3-525630758fe8
+  text: À fixer une échelle
+- id: 5fd06df7-2600-47ae-b79e-1c562488dc7b
+  text: À faire une boucle en milieu de cordage
+correct_choice_ids:
+- 7b41cf9c-a1ad-405d-8454-27ff1ab82750
+explanation: Comme son nom l'indique, le nœud de taquet permet d'amarrer un bout à
+  un taquet (p. 398).
+archived: false

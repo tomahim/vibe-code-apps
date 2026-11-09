@@ -1,0 +1,21 @@
+id: 606cae08-37c2-4d44-8dc5-648937ed5c7f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quand on ne mouille pas, comment les palanquées se signalent-elles, selon
+  le manuel ?
+choices:
+- id: 5dce8df4-7249-497f-ae83-1a5b11b7d1a5
+  text: Avec un parachute de palier, gardé déployé jusqu'au moment de remonter à l'échelle
+- id: fbf45683-0f11-4496-838d-18f653d7d522
+  text: Avec des feux de détresse
+- id: 665fed06-077e-43e4-9f84-847c2cb0852e
+  text: Avec un sifflet uniquement
+- id: 72067920-ff8a-43dc-a00f-782bf639d6de
+  text: En remontant toutes ensemble au même endroit
+correct_choice_ids:
+- 5dce8df4-7249-497f-ae83-1a5b11b7d1a5
+explanation: Les palanquées se signalent avec un parachute de palier, gardé déployé
+  jusqu'au moment de remonter à l'échelle (p. 393).
+archived: false

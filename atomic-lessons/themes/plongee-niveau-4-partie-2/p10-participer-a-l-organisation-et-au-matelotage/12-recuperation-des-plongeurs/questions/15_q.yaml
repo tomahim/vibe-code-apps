@@ -1,0 +1,23 @@
+id: 46467418-3e73-4375-96aa-36143133434b
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Courant violent sur le site : quelle organisation cohérente avec le manuel
+  ?'
+choices:
+- id: 46fe57e5-abec-4215-8ec4-e8655872b61f
+  text: Ne pas mouiller, faire signaler les palanquées au parachute de palier, récupérer
+    en dérive moteur débrayé entre le vent et les plongeurs
+- id: d4821e8d-1307-4b4c-918f-bff7ba614729
+  text: Mouiller quoi qu'il arrive et interdire les paliers
+- id: 151f17be-bf24-41b0-94b8-425300aad077
+  text: Laisser les palanquées rejoindre la côte à la nage
+- id: 944b8fd6-e1e2-411f-ac05-38699470aac7
+  text: Annuler toute surveillance en surface
+correct_choice_ids:
+- 46fe57e5-abec-4215-8ec4-e8655872b61f
+explanation: 'Par courant violent, le manuel préfère ne pas mouiller, faire signaler
+  les palanquées au parachute de palier ; la récupération suit la méthode : s''intercaler,
+  débrayer, dériver (p. 393).'
+archived: false

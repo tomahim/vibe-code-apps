@@ -1,0 +1,21 @@
+id: a48a2b24-de53-487b-93b0-d35d268e4680
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi faut-il assurer le nœud d'écoute double ?
+choices:
+- id: c7ba7b0f-9c43-4df1-8764-aa6ea2460c23
+  text: Parce que dès qu'il n'est plus sous tension, il se défait
+- id: 6e76f9b0-e4d4-4212-905f-d19ceee0e5fa
+  text: Parce qu'il glisse sur les cordages mouillés uniquement
+- id: d233ab42-4c7a-4c8c-8ba8-8911110c617d
+  text: Parce qu'il coupe les fibres
+- id: c3980e8c-6b22-42a9-9de0-b5024851018f
+  text: Parce qu'il est interdit par la réglementation
+correct_choice_ids:
+- c7ba7b0f-9c43-4df1-8764-aa6ea2460c23
+explanation: 'L''avantage de l''écoute double est aussi un inconvénient : dès qu''il
+  n''est plus sous tension, il se défait ; il faut donc l''assurer, par exemple avec
+  deux demi-clefs (p. 394).'
+archived: false

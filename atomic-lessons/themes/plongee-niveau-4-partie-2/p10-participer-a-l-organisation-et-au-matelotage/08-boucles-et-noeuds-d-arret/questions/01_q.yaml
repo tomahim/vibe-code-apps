@@ -1,0 +1,20 @@
+id: 0d9d9506-f135-4cab-ae4b-a68e0859722a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles sont les trois familles de nœuds distinguées par le manuel ?
+choices:
+- id: 9bbf6c06-81c3-47ec-a722-50cd85c261d4
+  text: Nœuds d'arrêt, nœuds d'ajout, nœuds d'amarrage
+- id: 5b0ea040-0181-44c2-9664-de4794d491cb
+  text: Nœuds simples, doubles et triples
+- id: 04b47cb6-f5eb-482b-b242-a76825f85a6f
+  text: Nœuds de mer, de montagne et de secours
+- id: 1998e7ee-e7dd-47bb-817d-216675ec21f4
+  text: Nœuds plats, ronds et carrés
+correct_choice_ids:
+- 9bbf6c06-81c3-47ec-a722-50cd85c261d4
+explanation: Le manuel distingue les nœuds d'arrêt, les nœuds d'ajout et les nœuds
+  d'amarrage (p. 394).
+archived: false

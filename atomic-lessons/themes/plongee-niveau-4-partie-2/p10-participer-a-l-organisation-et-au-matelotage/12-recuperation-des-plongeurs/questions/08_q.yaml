@@ -1,0 +1,21 @@
+id: 3370a4ea-25a7-4e9d-bbc7-6079d72d1bb2
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel enchaînement complet le manuel donne-t-il pour la récupération ?
+choices:
+- id: f8d0aab8-65e2-4e07-99ce-3f916789bb28
+  text: S'intercaler entre le vent et les plongeurs, débrayer le moteur, puis se laisser
+    dériver
+- id: b0a994de-e940-4943-95ae-3566f876527e
+  text: Accélérer, piler, jeter l'ancre
+- id: d5fe6946-f2ac-472d-a80f-be0b0e75c4ee
+  text: Appeler, attendre, repartir
+- id: 19c46aeb-ede6-4f71-98c2-66e467c10b5a
+  text: Mouiller, signaler, plonger
+correct_choice_ids:
+- f8d0aab8-65e2-4e07-99ce-3f916789bb28
+explanation: 'La méthode : s''intercaler entre le vent et les plongeurs, débrayer
+  le moteur, puis se laisser dériver (p. 393).'
+archived: false

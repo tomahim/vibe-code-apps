@@ -1,0 +1,20 @@
+id: 2f6d1c62-6cd5-407a-89bf-33cc03734c44
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le manuel propose-t-il de repérer les différentes palanquées ?
+choices:
+- id: 948adbd5-b975-4c5e-a5bb-fc50d24a0a27
+  text: Par leur panache de bulles, en suivant leur parcours
+- id: a794bdc9-a804-4ecd-a35b-5e52d4241550
+  text: Par VHF, toutes les cinq minutes
+- id: 1a4409af-033d-468a-b3c1-a99b626a5333
+  text: Par leurs lumières, même de jour
+- id: 5b777ff1-e6c7-4223-abf3-6e53ba9b5909
+  text: Par des bouées numérotées obligatoires
+correct_choice_ids:
+- 948adbd5-b975-4c5e-a5bb-fc50d24a0a27
+explanation: Il faut repérer les différentes palanquées par leur panache de bulles
+  et suivre leur parcours (p. 393).
+archived: false

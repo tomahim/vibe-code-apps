@@ -1,0 +1,21 @@
+id: 15cc428d-0fad-4925-9573-4db159a3eeac
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi se placer entre le vent et les plongeurs ?
+choices:
+- id: 00968a3e-7a87-4c6e-9f17-ff15d1b334f7
+  text: Pour que le bateau dérive vers les plongeurs, sans risquer d'être poussé sur
+    eux
+- id: d1a8e533-b3fb-4b96-95fb-9cc2cac7dd45
+  text: Pour cacher les plongeurs aux autres bateaux
+- id: bc74fae0-8489-4f76-b5e0-f17c2505d3b6
+  text: Pour capter le vent avec la coque
+- id: f2ed9f10-edf2-444a-aa33-ca62e906ed63
+  text: Pour éviter d'utiliser le moteur au départ du port
+correct_choice_ids:
+- 00968a3e-7a87-4c6e-9f17-ff15d1b334f7
+explanation: En plaçant le bateau entre le vent et les plongeurs, c'est le bateau
+  qui dérive vers eux, de façon contrôlée (p. 393).
+archived: false

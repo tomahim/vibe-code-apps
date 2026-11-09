@@ -1,0 +1,20 @@
+id: 36f4c2ce-3b22-4177-a395-abaab881f8ca
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels nœuds d'arrêt le manuel cite-t-il ?
+choices:
+- id: 60735284-dfeb-4657-ad6d-088e9116c301
+  text: Le nœud en huit et le nœud de plein poing
+- id: e1c3189a-82ba-40df-8c73-835856380918
+  text: Le nœud de chaise et le nœud de cabestan
+- id: d9aaacd9-14bf-49b3-a201-56132f892e89
+  text: Le nœud de taquet et le tour mort
+- id: 55a8915e-7466-486e-bd6e-f1b8f4b7323f
+  text: Le nœud d'agui et le nœud du pêcheur
+correct_choice_ids:
+- 60735284-dfeb-4657-ad6d-088e9116c301
+explanation: Le manuel cite le nœud en huit et le nœud de plein poing comme nœuds
+  d'arrêt (p. 394).
+archived: false

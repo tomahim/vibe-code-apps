@@ -1,0 +1,23 @@
+id: 8c700e83-be9e-4d89-9d27-586c991ccb20
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement le manuel donne-t-il pour une surveillance efficace ?
+choices:
+- id: f9feb6af-e863-4855-a44f-1b36e70084d5
+  text: Bateau en place (repère à terre, GPS), vigilance sur les embarcations, suivi
+    des panaches de bulles, feuille de palanquée jusqu'à ce que toutes les palanquées
+    soient remontées
+- id: e9d6044d-3fcc-45c2-bcf0-31d836d3446c
+  text: Mouillage, sommeil, réveil à l'heure convenue
+- id: c06b94e6-a099-4114-b347-d0b3cab1990b
+  text: Départ du site dès la mise à l'eau
+- id: 51954f29-aab4-4a25-82ba-466781149150
+  text: Surveillance confiée aux plongeurs eux-mêmes
+correct_choice_ids:
+- f9feb6af-e863-4855-a44f-1b36e70084d5
+explanation: 'Le manuel enchaîne : bateau en place, vigilance sur les embarcations,
+  suivi des panaches, capacité d''assistance et contrôle des remontées par la feuille
+  de palanquée (p. 392-393).'
+archived: false

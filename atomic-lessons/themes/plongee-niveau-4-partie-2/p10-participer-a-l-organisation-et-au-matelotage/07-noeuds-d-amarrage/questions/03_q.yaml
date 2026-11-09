@@ -1,0 +1,20 @@
+id: 34efb3f5-e2d1-4ecf-a5a5-135f65ac1992
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels usages le manuel cite-t-il pour le tour mort et deux demi-clefs ?
+choices:
+- id: c9394afa-7bb9-4c8f-8f35-b472c59c45a6
+  text: Amarrer un bateau, fixer une échelle
+- id: 99a549c9-6043-49f3-9e0a-caa3342b6ee5
+  text: Fixer un pare-battage, tracter une annexe
+- id: 95fc7a95-e7cb-4f33-bc14-1012827d45c9
+  text: Relier deux bouts de diamètres différents
+- id: 5595e876-8031-4deb-8c70-1be2a6a77774
+  text: Isoler la partie usagée d'un cordage
+correct_choice_ids:
+- c9394afa-7bb9-4c8f-8f35-b472c59c45a6
+explanation: Le tour mort et deux demi-clefs sert à amarrer un bateau ou à fixer une
+  échelle (p. 396).
+archived: false

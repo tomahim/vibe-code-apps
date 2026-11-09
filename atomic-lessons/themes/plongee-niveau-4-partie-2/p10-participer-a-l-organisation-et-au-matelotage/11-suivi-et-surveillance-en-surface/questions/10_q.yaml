@@ -1,0 +1,20 @@
+id: 4fc4f5ce-9fad-4bef-a6f6-d2c7456fa4ef
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel outil le manuel cite-il pour gérer un grand nombre de plongeurs ?
+choices:
+- id: 76bc12db-4aae-4f59-b6f2-170574e7d196
+  text: La feuille de palanquée
+- id: 3e346fd5-df19-4baf-8424-b09f1c63784d
+  text: Le carnet de bord du capitaine uniquement
+- id: c8aacaf0-e8f6-42c2-acd1-90a7d4342994
+  text: Le tableau des marées
+- id: 2f5b3079-cb07-4c90-89e7-5c511c06d517
+  text: La liste du matériel
+correct_choice_ids:
+- 76bc12db-4aae-4f59-b6f2-170574e7d196
+explanation: Une « feuille de palanquée » est un moyen efficace pour gérer un grand
+  nombre de plongeurs (p. 393).
+archived: false

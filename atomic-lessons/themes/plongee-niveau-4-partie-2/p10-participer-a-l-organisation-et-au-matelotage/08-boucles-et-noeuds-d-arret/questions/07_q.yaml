@@ -1,0 +1,21 @@
+id: ceddb217-4146-4f60-910e-e7b71ee5608c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Un cordage a une partie usagée à isoler. Quel nœud le manuel associe-t-il
+  à cet usage ?
+choices:
+- id: 31ff528e-f9a8-4a99-a481-848e618eb02f
+  text: Le nœud en huit
+- id: 8ecdc7da-b1de-4234-a9a1-fccb570d6d88
+  text: Le nœud de plein poing
+- id: f6d1c65d-8858-4af8-a1dd-96ff590d43ed
+  text: Le nœud de chaise
+- id: a4d346be-eb87-466e-8cf0-71176c27cc5b
+  text: Le nœud d'écoute double
+correct_choice_ids:
+- 8ecdc7da-b1de-4234-a9a1-fccb570d6d88
+explanation: Le nœud de plein poing est utilisé le plus souvent pour isoler la partie
+  usagée d'un cordage (p. 394).
+archived: false

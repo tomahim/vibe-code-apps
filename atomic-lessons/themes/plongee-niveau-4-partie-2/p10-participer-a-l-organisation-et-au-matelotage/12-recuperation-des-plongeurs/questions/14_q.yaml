@@ -1,0 +1,21 @@
+id: 6de34abf-3b74-4f68-93b0-0f7bfed5f914
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quand le bateau ne mouille pas, comment les palanquées se signalent-elles
+  pour la récupération ?
+choices:
+- id: 526521d6-f9ca-44d3-a450-2d86c3d4649e
+  text: Avec un parachute de palier, gardé déployé jusqu'au moment de remonter à l'échelle
+- id: a353a9b8-398e-4f08-b721-23a7cd44f1b6
+  text: En tapant sur leur bloc
+- id: 047f1a63-3756-4c6d-bff3-ab7112262557
+  text: Avec un pavillon Alpha personnel
+- id: cfc4fe43-c451-4247-9c5a-ea53c61b7185
+  text: En remontant sans s'arrêter
+correct_choice_ids:
+- 526521d6-f9ca-44d3-a450-2d86c3d4649e
+explanation: Les palanquées se signalent avec un parachute de palier, gardé déployé
+  jusqu'au moment de remonter à l'échelle (p. 393).
+archived: false

@@ -1,0 +1,21 @@
+id: aaa59d99-8373-43b9-b6e7-8b57e61dcbad
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles conditions le manuel cite-il comme pouvant rendre préférable de ne
+  pas mouiller ?
+choices:
+- id: 8e36a7cb-f951-4107-a29c-eae0d691c3ba
+  text: Grande profondeur et courant violent
+- id: ac6c5cb4-45eb-4c5c-be32-06b1614c4cc6
+  text: Faible profondeur et mer calme
+- id: c0c64feb-c361-4dbf-a130-da5946e25514
+  text: Présence de débutants
+- id: 63846604-7490-42d3-ba78-e6ee5ae78a17
+  text: Plongée sur épave uniquement
+correct_choice_ids:
+- 8e36a7cb-f951-4107-a29c-eae0d691c3ba
+explanation: Selon les conditions de plongée (grande profondeur, courant violent),
+  il peut être préférable de ne pas mouiller (p. 393).
+archived: false
