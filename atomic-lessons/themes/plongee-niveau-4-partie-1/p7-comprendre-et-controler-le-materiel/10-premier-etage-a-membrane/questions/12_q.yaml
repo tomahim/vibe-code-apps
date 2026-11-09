@@ -1,0 +1,21 @@
+id: 45a3d3cd-d732-4c08-a739-31201dc6ad8c
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle pièce d'usure est surveillée lors des révisions d'un premier étage
+  à membrane ?
+choices:
+- id: 79a331c7-9444-4327-b89a-14b33a65bd0b
+  text: La membrane elle-même.
+- id: dc959b4e-f6cb-409e-960e-9e3ebd59b518
+  text: Le flexible HP du manomètre.
+- id: 17eb9a67-7b99-462a-9518-785a9b1c7053
+  text: La sangle de la bouteille.
+- id: 004ed11d-b7ff-475f-b551-721fb130a50b
+  text: Le bouton purge du deuxième étage.
+correct_choice_ids:
+- 79a331c7-9444-4327-b89a-14b33a65bd0b
+explanation: 'La membrane est une pièce d''usure : son remplacement fait partie de
+  l''entretien périodique surveillé lors des révisions annuelles.'
+archived: false

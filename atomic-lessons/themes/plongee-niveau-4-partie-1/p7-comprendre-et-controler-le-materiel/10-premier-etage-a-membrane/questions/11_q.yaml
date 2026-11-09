@@ -1,0 +1,22 @@
+id: 4311db64-f8d1-4e84-b833-2745f9995321
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel entretien le manuel impose-t-il au premier étage à membrane ?
+choices:
+- id: 41e7215b-60d2-441d-95e9-25e02c3c9d91
+  text: 'Le même que pour le piston : rinçage à l''eau douce, protection contre les
+    chocs et le sable, révision annuelle.'
+- id: d5365adc-31ca-4d6f-9e45-435db6de038e
+  text: Un séchage au four après chaque sortie.
+- id: 178869ce-acff-4d28-95c7-6f1e8a0ff779
+  text: Un démontage du pointeau par le plongeur à chaque plongée.
+- id: 284cb93c-c084-47f2-bc13-dfaf2e39e507
+  text: 'Aucun : la membrane est inusable.'
+correct_choice_ids:
+- 41e7215b-60d2-441d-95e9-25e02c3c9d91
+explanation: 'Même logique d''entretien : rinçage à l''eau douce, protection contre
+  les chocs et le sable, révision annuelle ; la membrane, pièce d''usure, est surveillée
+  en révision.'
+archived: false

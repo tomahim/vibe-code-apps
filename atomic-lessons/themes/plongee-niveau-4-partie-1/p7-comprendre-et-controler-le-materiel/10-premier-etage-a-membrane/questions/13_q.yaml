@@ -1,0 +1,21 @@
+id: c1b2a2df-5fab-4e97-843e-920108605eb2
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: 'Vrai ou faux : sur un premier étage à membrane, l''eau est en contact direct
+  avec l''air HP et les parties internes.'
+choices:
+- id: 20f039ca-9eef-40cf-bacd-8fafbcb9c418
+  text: 'Faux : la membrane isole le mécanisme du milieu extérieur.'
+- id: c59eec30-6712-45fa-af9b-092f28fa6fda
+  text: 'Vrai : c''est le principe de la chambre humide.'
+- id: e3b6f94c-1f05-4de1-b3c8-fb83fc8cc69b
+  text: Vrai, mais uniquement en eau douce.
+- id: c851c22b-c600-4853-a40f-727c24d80a01
+  text: 'Faux : c''est le filtre qui repousse l''eau.'
+correct_choice_ids:
+- 20f039ca-9eef-40cf-bacd-8fafbcb9c418
+explanation: 'La membrane fait barrière : l''eau n''entre pas en contact direct avec
+  l''air HP et les parties internes ; d''où sa protection en eaux froides ou polluées.'
+archived: false

@@ -1,0 +1,21 @@
+id: f1f19590-f005-49f8-97dd-c9c66a849ece
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel avantage le manuel donne-t-il au piston, face à la membrane ?
+choices:
+- id: 2bd52785-6f6c-4b7a-8682-50352403ff68
+  text: La robustesse et la simplicité.
+- id: 516e1c41-3183-41be-a37c-87a29c11b6d9
+  text: Une meilleure étanchéité en eau polluée.
+- id: c6137181-3daf-4d2f-a6ea-2894736079e4
+  text: Un débit toujours supérieur.
+- id: abeeb3b8-7846-4b9d-8878-413f2478ae5d
+  text: Un prix toujours inférieur.
+correct_choice_ids:
+- 2bd52785-6f6c-4b7a-8682-50352403ff68
+explanation: '« Choisir un détendeur » : les pistons ont l''avantage de la robustesse
+  et de la simplicité ; la membrane, celui de protéger le mécanisme en eaux froides
+  ou polluées.'
+archived: false

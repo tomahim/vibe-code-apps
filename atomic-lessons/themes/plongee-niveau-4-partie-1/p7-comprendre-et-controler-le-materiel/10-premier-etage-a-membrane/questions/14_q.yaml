@@ -1,0 +1,20 @@
+id: a0cd76a9-f155-4334-a6a3-2dfe6c7eb57a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: 'À l''état de repos, le premier étage à membrane est :'
+choices:
+- id: 5d58ca8f-d830-423c-bd78-6a8a0395931e
+  text: 'Fermé : pointeau sur son siège ; il ne s''ouvre que sur demande inspiratoire.'
+- id: e72ed6d5-6a5d-4ea0-93af-cf991db31741
+  text: 'Ouvert : l''air circule en continu pour rester prêt.'
+- id: b49da276-bf2b-4ef7-9a6a-11a0733a89f1
+  text: En débit continu, ce qui est normal.
+- id: 0c8b7ade-3e77-49fd-b8ec-cab9adbce5f5
+  text: Dépressurisé entre chaque plongée.
+correct_choice_ids:
+- 5d58ca8f-d830-423c-bd78-6a8a0395931e
+explanation: Comme tout détendeur, le mécanisme est fermé au repos et ne s'ouvre que
+  sur demande, c'est-à-dire sur dépression inspiratoire.
+archived: false
