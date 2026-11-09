@@ -1,0 +1,21 @@
+id: 69c9cbde-7d3c-4d2c-a6bb-d669a131229f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Un excès de pression inter-étage signale quel dysfonctionnement ?
+choices:
+- id: 7dce231b-1d92-4c2d-866b-2bbb1f909420
+  text: Un dysfonctionnement du clapet d'aspiration de l'étage suivant.
+- id: ebd2a0db-700f-4d28-99ca-728e043d32bc
+  text: Un filtre d'aspiration bouché au premier étage.
+- id: 9e3e141a-7011-4162-9e84-2a8f573ac47c
+  text: Une courroie de transmission détendue.
+- id: 0970a71b-98cd-4a07-a2f2-3a309b95d9e2
+  text: Un manque d'huile dans le carter moteur.
+correct_choice_ids:
+- 7dce231b-1d92-4c2d-866b-2bbb1f909420
+explanation: 'Selon le mini-guide de dépannage, l''excès de pression inter-étage vient
+  d''un dysfonctionnement du clapet d''aspiration de l''étage suivant : l''air refoulé
+  ne peut pas entrer dans le cylindre aval.'
+archived: false

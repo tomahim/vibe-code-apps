@@ -1,0 +1,23 @@
+id: 61eadffd-3aaf-498c-8e01-b8c612994e8f
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi les soupapes de sûreté inter-étages protègent-elles la machine en
+  cas de clapet aval défectueux ?
+choices:
+- id: 60f6ff18-cc19-46cd-b197-7a3e5cddc10c
+  text: Elles laissent échapper l'air si la pression monte anormalement entre les
+    étages.
+- id: 9c0cb359-5f9e-47f4-a57d-3f67d5ca9fc9
+  text: Elles réparent automatiquement le clapet défectueux de l'étage suivant.
+- id: 3b8aef0d-13b4-4dbf-b215-f0a3cafc3834
+  text: Elles augmentent le débit pour compenser le clapet bloqué.
+- id: 6120a2a9-61cb-45f7-9ca3-ad03c9f74a89
+  text: Elles coupent le refroidissement pour limiter l'échauffement.
+correct_choice_ids:
+- 60f6ff18-cc19-46cd-b197-7a3e5cddc10c
+explanation: 'Les soupapes de sûreté interposées entre les étages évitent toute montée
+  en pression excessive en cas de dysfonctionnement : le clapet se soulève et l''air
+  s''échappe.'
+archived: false

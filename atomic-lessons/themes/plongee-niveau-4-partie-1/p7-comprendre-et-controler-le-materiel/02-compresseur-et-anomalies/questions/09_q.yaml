@@ -1,0 +1,21 @@
+id: 3221bbc5-8402-4bbb-ad5a-c86253ec27d4
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelles sont les vérifications courantes citées par le manuel ?
+choices:
+- id: 550e295e-4bad-40fd-90aa-788cd149178c
+  text: L'huile, la prise d'air et le sens de rotation (courant électrique).
+- id: db5fb080-5c07-4958-9aed-aadfa168b056
+  text: La peinture du carter, les roues et la longueur des flexibles.
+- id: 715fd297-b360-4d87-8b1e-ecbc7c793a35
+  text: Le poinçon des bouteilles et la date de la dernière épreuve.
+- id: 663ea23b-a022-4291-847c-0ccb2311c58f
+  text: Le débit nominal, la puissance du moteur et le prix de l'huile.
+correct_choice_ids:
+- 550e295e-4bad-40fd-90aa-788cd149178c
+explanation: 'Vérifications courantes : huile, prise d''air, sens de rotation (courant
+  électrique). Les vérifications périodiques portent sur l''étanchéité, les filtres,
+  la qualité de l''air, le débit, les heures d''utilisation et le cahier d''entretien.'
+archived: false

@@ -1,0 +1,21 @@
+id: 7308e350-8e48-4797-89e2-f21eaa93f790
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Un compresseur de 16 m3/h au lieu de 8 m3/h : quel effet sur le temps de
+  gonflage théorique ?'
+choices:
+- id: d63bf44a-4161-4452-8840-697d5602ebd0
+  text: Il est divisé par deux (6 h 45 deviennent environ 3 h 23).
+- id: d01e11af-f3bb-4c85-be24-b1e32245061a
+  text: 'Il reste identique : seule la pression finale change.'
+- id: 1de882b6-8ce8-4892-9cdb-b7f819a8c6ba
+  text: Il est divisé par quatre, car le débit agit au carré.
+- id: 53c79962-b822-4507-a81d-6cc87aeb7d65
+  text: Il augmente légèrement à cause de l'échauffement.
+correct_choice_ids:
+- d63bf44a-4161-4452-8840-697d5602ebd0
+explanation: 'Le temps théorique est inversement proportionnel au débit : avec 16
+  m3/h au lieu de 8 m3/h, 54 m3 demandent environ 3 h 23 au lieu de 6 h 45.'
+archived: false

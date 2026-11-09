@@ -1,0 +1,20 @@
+id: 286b9880-ff9c-440b-8574-f2f4fccfc3dc
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Un bruit excessif du compresseur doit faire penser à quoi ?
+choices:
+- id: c2b29dd8-5c16-4c98-be1a-39818e112d40
+  text: Un manque d'huile ou une transmission désalignée.
+- id: 19fec02f-1437-4f9d-a797-467249bedea5
+  text: Un excès de pression dans les bouteilles tampons.
+- id: ec9ac1f5-19bf-427a-b11c-880a5f88a618
+  text: Un filtre séparateur plein de condensats.
+- id: b657aa1a-ee1f-4c85-b877-67e953fd7d66
+  text: Une soupape de sûreté plombée par le constructeur.
+correct_choice_ids:
+- c2b29dd8-5c16-4c98-be1a-39818e112d40
+explanation: 'Bruit excessif : manque d''huile ou transmission désalignée. Le niveau
+  d''huile se contrôle avant chaque utilisation.'
+archived: false
