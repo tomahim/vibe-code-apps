@@ -1,6 +1,6 @@
 ---
 id: ee1c6ad2-7034-478d-8205-8db442ef01fe
-theme_id: bd957ab9-8aa7-4f8c-970f-c858f4cbec04
+theme_id: e0fecbd7-085e-4f6e-8fdb-afd4f52a3f8b
 title: 8 - Préparer et conduire une palanquée
 position: 8
 archived: false
