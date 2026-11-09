@@ -1,0 +1,22 @@
+id: c738f67f-9179-4ad7-9e21-130cb0f70eb5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Sur quels critères le DP forme-t-il les palanquées, selon le manuel ?
+choices:
+- id: 64f1e197-01a1-41bc-a9f3-ac27192b9327
+  text: Les aptitudes démontrées par les participants (brevets, carnet de plongée...)
+    et la conformité de leur équipement.
+- id: 96f28afe-7455-4528-ad29-78bedfb2f6ee
+  text: L'ordre d'arrivée des plongeurs sur le bateau.
+- id: 1ec1dfbc-b546-469b-a256-1ba18d9bb598
+  text: Uniquement l'âge des participants.
+- id: 77d69ff0-f13d-4ab6-96fb-2de5c6063b5e
+  text: Le matériel le plus récent, qui va aux plus jeunes.
+correct_choice_ids:
+- 64f1e197-01a1-41bc-a9f3-ac27192b9327
+explanation: Le DP forme les palanquées en fonction des aptitudes démontrées par les
+  participants (brevets, carnet de plongée...) et s'assure que leur équipement est
+  conforme à la réglementation et aux exigences de la plongée.
+archived: false

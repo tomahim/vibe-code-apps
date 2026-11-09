@@ -1,0 +1,21 @@
+id: 3839a903-1f62-4ab9-86d4-00a02a864d85
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Combien de temps la fiche de sécurité est-elle conservée, selon le manuel
+  ?
+choices:
+- id: f1509447-df31-46b8-9de7-b268cf21ca54
+  text: Une année, par tout moyen, par l'établissement.
+- id: 81657bb0-3bb5-4228-b17a-c1c4791e3d91
+  text: Une semaine, par le guide de palanquée.
+- id: cf811054-1407-4683-bcb3-e80456715087
+  text: Dix ans, à la préfecture.
+- id: 8ea60921-6229-4b51-be13-f98985082e89
+  text: Elle est détruite dès le retour des palanquées.
+correct_choice_ids:
+- f1509447-df31-46b8-9de7-b268cf21ca54
+explanation: Selon le manuel, la fiche de sécurité est conservée une année, par tout
+  moyen, par l'établissement.
+archived: false

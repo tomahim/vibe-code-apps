@@ -1,0 +1,20 @@
+id: cdcdfc0f-a014-4ca8-9cff-1b8973f13ab8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qui est responsable du déclenchement des secours, selon le manuel ?
+choices:
+- id: 570c1da8-5ec8-47a7-8635-a41362320fea
+  text: Le directeur de plongée.
+- id: c6108824-04f5-40f0-bb1f-dc53c94c99e8
+  text: Le guide de palanquée.
+- id: 3a42e68d-af11-4b36-bbc0-e187b9ea9098
+  text: Chaque plongeur de la palanquée.
+- id: 581dec1f-498a-42f2-9356-101f6719d6f4
+  text: Le propriétaire de l'embarcation.
+correct_choice_ids:
+- 570c1da8-5ec8-47a7-8635-a41362320fea
+explanation: Parmi les 6 missions du directeur de plongée figure la responsabilité
+  du déclenchement des secours.
+archived: false
