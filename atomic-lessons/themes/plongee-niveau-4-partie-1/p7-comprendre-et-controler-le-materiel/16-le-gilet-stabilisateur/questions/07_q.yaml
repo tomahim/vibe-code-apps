@@ -1,0 +1,22 @@
+id: 49a6cc1f-50fa-49a8-bb35-e49811ba7de1
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que doit disposer chaque personne embarquée, selon la Division 240 citée par
+  le manuel ?
+choices:
+- id: 2a4bf8c8-fcee-4764-9459-4724c52b0197
+  text: D'un équipement individuel de flottabilité (EIF), communément appelé « gilet
+    de sauvetage ».
+- id: 5b6bea6c-9d30-4094-b14e-98f5f0a28bcd
+  text: D'un parachute de palier personnel.
+- id: 18eb6a15-0366-482c-910c-1710387723db
+  text: D'un ordinateur de plongée.
+- id: 0c346b39-da28-4542-8414-150a620fb4da
+  text: D'une bouteille de secours.
+correct_choice_ids:
+- 2a4bf8c8-fcee-4764-9459-4724c52b0197
+explanation: Chaque personne embarquée doit disposer d'un EIF, communément appelé
+  « gilet de sauvetage » (Division 240, articles 240-2.03 et 240-2.04).
+archived: false

@@ -1,0 +1,22 @@
+id: b98edc22-a1e2-4edb-96ed-5bff187ce89e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que prescrit le manuel au guide de palanquée pour la sécurité matérielle ?
+choices:
+- id: ad031893-f579-4d78-b082-5876e9361c56
+  text: S'assurer en permanence que ses deux détendeurs fonctionnent parfaitement
+    ; même sérieux pour le gilet.
+- id: cdaa5698-0cec-40fb-9fb4-9d6331338d99
+  text: Confier le contrôle du matériel aux plongeurs encadrés.
+- id: b3749eb6-cff4-4474-b0c1-bb8640639fd6
+  text: Contrôler le matériel une fois par mois.
+- id: 71c4fecf-6ea5-41f3-9d2c-8aa43fb6de34
+  text: Ne contrôler que les bouteilles.
+correct_choice_ids:
+- ad031893-f579-4d78-b082-5876e9361c56
+explanation: Le guide de palanquée s'assure en permanence que ses deux détendeurs
+  fonctionnent parfaitement ; le gilet, système qui permet de regagner la surface
+  et de s'y maintenir, mérite le même sérieux.
+archived: false

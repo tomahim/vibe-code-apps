@@ -1,0 +1,21 @@
+id: 98c1c459-11fc-4f17-9c40-985a1ac9c115
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que comprend le contrôle du gilet avant la plongée ?
+choices:
+- id: 3b0f4a26-f35e-434f-8091-5822ab6ef916
+  text: Gonflage et vidange au direct-system et à l'inflateur, tenue des sangles et
+    de la vessie, commandes accessibles.
+- id: f3af4426-133d-4edb-9284-203bd75cf273
+  text: Peinture de la vessie et graissage des purges.
+- id: 58e21677-83b6-4048-8492-9c6e98aca8e5
+  text: Démontage complet de l'inflateur.
+- id: 44be79e8-38e3-4a8b-b9b8-2236684c2ede
+  text: Rinçage interne à l'eau de Javel.
+correct_choice_ids:
+- 3b0f4a26-f35e-434f-8091-5822ab6ef916
+explanation: 'Contrôle d''usage : gonflage/vidange au direct-system et à l''inflateur,
+  tenue des sangles et de la vessie, position accessible des commandes.'
+archived: false

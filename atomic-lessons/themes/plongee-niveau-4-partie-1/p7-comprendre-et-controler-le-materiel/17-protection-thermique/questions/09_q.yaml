@@ -1,0 +1,21 @@
+id: 0fbcfd03-dac9-4132-be92-931c1d3d4ef6
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels signes de la deuxième réaction de défense le manuel décrit-il ?
+choices:
+- id: 5a6b4fe5-fb7f-46fd-830c-be4a86d8ee7a
+  text: Chair de poule, frissons généralisés, crampes, hyperventilation, vasoconstriction
+    cutanée avec grande pâleur.
+- id: 3c93cfa7-a0e1-40db-896e-7b7fa857e505
+  text: Somnolence, euphorie et vision floue.
+- id: 70689181-9c66-4fda-8d89-1efd8a229047
+  text: Toux sèche et éternuements.
+- id: 60503806-fe29-41a0-b725-2353a4ec2989
+  text: Vertiges et maux de tête uniquement.
+correct_choice_ids:
+- 5a6b4fe5-fb7f-46fd-830c-be4a86d8ee7a
+explanation: 'Défenses « maximales » : chair de poule, frissons généralisés, crampes,
+  hyperventilation, vasoconstriction cutanée caractérisée par une grande pâleur.'
+archived: false
