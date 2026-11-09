@@ -57,6 +57,24 @@ function mockApi(page, { reviewLog = null } = {}) {
   });
 }
 
+test('review entry shows on the Themes page only (Thomas, 2026-11-09)', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, { reviewLog: [] });
+  await page.goto('/apps/little-grains');
+  const panel = page.locator('.lg-panel');
+  const float = page.locator('.lg-review-float');
+  await expect(panel.getByRole('heading', { name: 'The Garden' })).toBeVisible();
+  await expect(float.getByRole('button', { name: /review/i })).toBeVisible();
+
+  // Inside a theme the entry is gone; back on the Themes page it returns.
+  await panel.getByRole('button', { name: /Sport/ }).click();
+  await expect(panel.getByRole('button', { name: /Hockey all time legends/ })).toBeVisible();
+  await expect(float).toBeHidden();
+  await page.locator('.lg-crumbs').getByRole('button', { name: 'Garden' }).click();
+  await expect(panel.getByRole('heading', { name: 'The Garden' })).toBeVisible();
+  await expect(float.getByRole('button', { name: /review/i })).toBeVisible();
+});
+
 test('review quest: time choice drives the session size and the quiz runs', async ({ page }) => {
   const reviewLog = [];
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
