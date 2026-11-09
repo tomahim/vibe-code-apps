@@ -1,0 +1,21 @@
+id: 16775bbc-606c-465f-b1f2-cec309352d87
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Sur quoi la vitesse de descente se règle-t-elle ?
+choices:
+- id: 45056d38-7ca2-4465-a485-69edbc2842d6
+  text: Sur les réactions des plongeurs encadrés.
+- id: afc1180e-6ebc-4d8d-82e2-412ac8023d9c
+  text: Sur la montre du capitaine.
+- id: 10d04533-44e1-4ad9-a15b-e15717d19c91
+  text: Sur la profondeur maximale prévue.
+- id: a213a07e-3c05-4909-85b4-e0b5452057db
+  text: Sur la température de l'eau.
+correct_choice_ids:
+- 45056d38-7ca2-4465-a485-69edbc2842d6
+explanation: 'La vitesse de descente se règle sur les réactions des plongeurs : attendre
+  celui qui peine à équilibrer ses oreilles, descendre plus soutenu quand tous sont
+  à l''aise.'
+archived: false

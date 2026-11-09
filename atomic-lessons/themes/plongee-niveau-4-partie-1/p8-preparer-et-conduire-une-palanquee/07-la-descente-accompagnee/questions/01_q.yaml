@@ -1,0 +1,21 @@
+id: 50d00a50-a814-443c-b94e-56d2b3c69c22
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que doit faire tout guide de palanquée pendant la phase de descente, selon
+  le manuel ?
+choices:
+- id: 74a708f2-8657-4809-a3bf-64226b258d39
+  text: La maîtriser parfaitement et s'adapter en fonction des circonstances.
+- id: fef2ff54-b270-41c4-9eb4-7433730494b7
+  text: Descendre toujours à vitesse maximale.
+- id: c26620b2-dbcf-44d6-b08a-50b462472bf4
+  text: Laisser chacun descendre à son rythme sans surveillance.
+- id: f835c152-f88f-47e5-89ee-37d4641bfd30
+  text: Rester en surface pendant que la palanquée descend.
+correct_choice_ids:
+- 74a708f2-8657-4809-a3bf-64226b258d39
+explanation: « Tout guide de palanquée doit parfaitement maîtriser la phase de descente
+  et être capable de s'adapter en fonction des circonstances. »
+archived: false

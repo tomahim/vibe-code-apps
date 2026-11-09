@@ -1,0 +1,20 @@
+id: c9ae448c-df20-4978-b1fb-d88fff681bda
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi la qualité de la descente conditionne-t-elle la suite ?
+choices:
+- id: fa768874-578a-4881-8d6f-db2dec38711f
+  text: Des plongeurs arrivés détendus et équilibrés au fond sont prêts pour l'exploration.
+- id: 2a9dee49-a1ec-4ca2-ae9c-f88b0747654e
+  text: Parce qu'elle use les palmes.
+- id: 3240d128-f2f6-418b-ab6a-2056f24fd872
+  text: Parce qu'elle vide les bouteilles.
+- id: 4300231e-6694-4ad0-9843-607db58a57da
+  text: Elle n'a aucune influence.
+correct_choice_ids:
+- fa768874-578a-4881-8d6f-db2dec38711f
+explanation: Une descente bien conduite amène des plongeurs détendus et équilibrés
+  au fond, prêts pour l'exploration.
+archived: false
