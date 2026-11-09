@@ -1,0 +1,6 @@
+{
+  "title": "Mix Night School",
+  "description": "A browser mixing desk that teaches mixing one move per night - faders, pan, EQ, compression - with blind loudness-matched tests against a reference mix. All stems synthesized live with WebAudio.",
+  "date": "2026-11-09",
+  "tags": ["music", "audio", "webaudio", "learning", "ear-training", "interactive"]
+}
