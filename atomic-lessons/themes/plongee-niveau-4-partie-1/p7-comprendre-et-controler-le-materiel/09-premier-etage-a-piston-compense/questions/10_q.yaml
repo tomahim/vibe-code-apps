@@ -1,0 +1,22 @@
+id: 778df8a9-ee43-47d0-9793-55ba9d30cfb1
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que remarque le plongeur au quotidien avec un premier étage compensé ?
+choices:
+- id: bc219186-e2ad-42a2-9b99-bad6790e8ddf
+  text: 'La régularité de la respiration : l''effort inspiratoire ne varie pas entre
+    bouteille pleine et bouteille entamée.'
+- id: 519d3f46-9926-4d9d-9c26-e0c452ac8fcc
+  text: Une bouteille qui se vide beaucoup plus lentement.
+- id: d18e11f5-abc4-4083-8d84-8c01b62f1fcf
+  text: Un manomètre qui affiche la profondeur en plus.
+- id: 07c64827-7963-4860-8a28-19d984d4ec64
+  text: Un bruit mécanique plus fort à chaque inspiration.
+correct_choice_ids:
+- bc219186-e2ad-42a2-9b99-bad6790e8ddf
+explanation: Le piston compensé se remarque par la régularité de l'effort inspiratoire
+  entre le début et la fin de la plongée, tant qu'il reste de l'air au-dessus de la
+  PI.
+archived: false

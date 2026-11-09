@@ -1,0 +1,22 @@
+id: 4544e2d9-7c3c-43b4-88bc-a47a6536e7ca
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel avantage respiratoire le manuel attribue-t-il au piston compensé ?
+choices:
+- id: 2a3e8fe0-9f6b-49f4-9a0a-4d5b1f015916
+  text: Des débits plus élevés et un fonctionnement régulier quelle que soit la pression
+    de la bouteille.
+- id: abcb1b75-0f87-4d9f-a1aa-91d1723501b0
+  text: Une consommation d'air réduite de moitié.
+- id: c03ed4d3-67c0-4e13-b67b-2aaccb28bc62
+  text: Une suppression de l'effort ventilatoire à toute profondeur.
+- id: c5e650e1-76f7-419b-b389-f24da4c319ce
+  text: Une respiration possible sans bouteille en secours.
+correct_choice_ids:
+- 2a3e8fe0-9f6b-49f4-9a0a-4d5b1f015916
+explanation: 'Les détendeurs compensés permettent des débits plus élevés et un fonctionnement
+  régulier : la prestation au début de la plongée est la même qu''en fin de plongée,
+  tant qu''il reste de l''air au-dessus de la PI.'
+archived: false

@@ -1,0 +1,21 @@
+id: d0e05426-e185-46bc-930a-53670e853570
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le manuel caractérise-t-il le piston simple face au compensé ?
+choices:
+- id: 7abb0f42-95f6-46c2-a69e-9ec2ed849c98
+  text: 'Fiable, robuste et simple : adapté à un usage courant.'
+- id: 515546f2-aa8a-4097-bb2a-e31a3a992f0e
+  text: Dangereux et à proscrire dès le niveau 2.
+- id: 643d7c3e-07d4-4cab-a7bf-519b299cbc81
+  text: Plus cher mais plus précis que le compensé.
+- id: 8064e5f3-3d7b-426d-8522-f429f9fa9941
+  text: Réservé aux moniteurs fédéraux.
+correct_choice_ids:
+- 7abb0f42-95f6-46c2-a69e-9ec2ed849c98
+explanation: Le piston simple reste fiable, robuste et simple ; le compensé ajoute
+  la constance des prestations et des débits plus élevés au prix d'une mécanique plus
+  élaborée.
+archived: false
