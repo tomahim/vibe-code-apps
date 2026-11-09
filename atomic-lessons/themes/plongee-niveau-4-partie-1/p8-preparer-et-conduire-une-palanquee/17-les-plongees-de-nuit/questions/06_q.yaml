@@ -1,0 +1,19 @@
+id: c2968e78-13fb-44b8-b2ca-050b1ea7d78d
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Les lampes peuvent-elles être éteintes sous l'eau pour observer la faune ?
+choices:
+- id: 8e0a7857-36f4-4eec-8d38-c52344b7cbe6
+  text: 'Non : sous l''eau, les lampes doivent rester allumées.'
+- id: ff1c7b22-9563-4d92-9615-a9778824c852
+  text: Oui, toujours.
+- id: 07a36ce2-9aad-4f3b-9ab7-3f12ab7d00eb
+  text: Oui, si la lune est pleine.
+- id: 95caabed-66e7-48c8-b7c3-723e724960a7
+  text: Seulement au palier.
+correct_choice_ids:
+- 8e0a7857-36f4-4eec-8d38-c52344b7cbe6
+explanation: Sous l'eau, les lampes doivent rester allumées.
+archived: false

@@ -1,0 +1,22 @@
+id: f207a3e2-abde-469a-988c-4ad34bdd4588
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: À quelle profondeur la plongée de nuit doit-elle être limitée, selon le manuel
+  ?
+choices:
+- id: 11183671-d3c8-4d18-8c7e-74d9051a1d2b
+  text: Par exemple à 10 ou 15 mètres, largement dans la courbe des plongées sans
+    palier.
+- id: 67f7f52b-cb12-430c-b6e2-0a938e716ae1
+  text: À 40 mètres.
+- id: 23eefde8-d42a-4fee-960b-825059c5c2df
+  text: À 60 mètres.
+- id: 9dd1bdcf-b350-4d5b-b53e-3cd0badb0ffc
+  text: Aucune limite.
+correct_choice_ids:
+- 11183671-d3c8-4d18-8c7e-74d9051a1d2b
+explanation: La profondeur doit être limitée, par exemple à 10 ou 15 mètres ; les
+  plongées doivent s'effectuer largement dans la courbe des plongées sans palier.
+archived: false

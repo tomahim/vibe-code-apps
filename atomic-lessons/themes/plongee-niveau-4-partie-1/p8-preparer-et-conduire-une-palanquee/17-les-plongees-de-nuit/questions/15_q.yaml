@@ -1,0 +1,19 @@
+id: b3fd59d1-b9e1-4f25-ac61-d34ccdc5f85f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: De nuit, les lampes restent allumées sous l'eau. Vrai ou faux ?
+choices:
+- id: 9d44710b-1296-4f6c-b026-d2029eaf5e36
+  text: Vrai.
+- id: 2dfd3bb9-f7a6-42ff-9e3a-96e4505d09a9
+  text: 'Faux : on les éteint pour économiser les batteries.'
+- id: f5014fbd-43f7-4b46-b5e0-0de97c4d9318
+  text: 'Faux : on les éteint pour ne pas effrayer la faune.'
+- id: d3caa7d3-1ecf-469a-b112-7ee2326dda7d
+  text: 'Faux : seule la lampe du guide reste allumée.'
+correct_choice_ids:
+- 9d44710b-1296-4f6c-b026-d2029eaf5e36
+explanation: 'Vrai : sous l''eau, les lampes doivent rester allumées.'
+archived: false
