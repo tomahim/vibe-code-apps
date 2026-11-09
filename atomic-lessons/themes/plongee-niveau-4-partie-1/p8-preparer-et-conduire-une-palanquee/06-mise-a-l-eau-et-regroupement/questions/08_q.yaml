@@ -1,0 +1,21 @@
+id: 42aa8b3b-0072-4a40-9a0c-16d8063cec3b
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que peut-on demander à un plongeur avant qu'il saute, pour limiter ce risque
+  ?
+choices:
+- id: 46a1d904-6aaf-4529-a9c0-bd766fbc0104
+  text: De gonfler légèrement son gilet.
+- id: 435dc42e-fbb0-42b9-8ec3-fafa7ce363d2
+  text: De retirer tout son lest en une fois.
+- id: 2e8b818d-4212-41c1-be1a-9c23b4f22049
+  text: De sauter sans bouteille.
+- id: 4a072bf8-bcb5-4e0c-b48c-4b91cccd1429
+  text: De retenir sa respiration.
+correct_choice_ids:
+- 46a1d904-6aaf-4529-a9c0-bd766fbc0104
+explanation: Il peut être utile de demander aux plongeurs de gonfler légèrement leur
+  gilet avant de sauter.
+archived: false

@@ -1,0 +1,20 @@
+id: eb2cffd6-3fad-4f68-adb2-1f77e60d14f7
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu' évite la vérification « personne en dessous » ?
+choices:
+- id: 682f8da8-d401-4a17-b7a2-c54a1eaf725d
+  text: Les collisions entre un plongeur qui saute et un plongeur déjà à l'eau.
+- id: 41cc4ea6-cca7-4c7b-a977-efbbba6f0a9a
+  text: Les algues dans le masque.
+- id: 6216962f-7db2-4d8e-b202-dc2eeb8e5f79
+  text: La désorientation du bateau.
+- id: 9ac868c2-aef2-4a6b-85b0-da81516a76dd
+  text: La fatigue des palmes.
+correct_choice_ids:
+- 682f8da8-d401-4a17-b7a2-c54a1eaf725d
+explanation: Cette vérification évite les collisions entre un plongeur qui saute et
+  un plongeur déjà à l'eau.
+archived: false

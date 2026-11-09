@@ -1,0 +1,22 @@
+id: 3b007f71-6a4b-4322-9655-19ce612acf70
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle séquence résume la mise à l'eau selon le manuel ?
+choices:
+- id: c85d0b59-ea41-4513-a655-4d0f2f7ec71a
+  text: Guide en premier, plongeurs un par un au signal, personne en dessous, signe
+    « Ok », regroupement au mouillage.
+- id: b2bde0fd-e0b5-44d3-9216-acea43fca476
+  text: Saut groupé, puis chacun se débrouille.
+- id: 98a570b8-4381-48a7-9c3f-db97615331d8
+  text: Plongeurs d'abord, regroupement en pleine eau loin du site.
+- id: 24cae853-121f-4d60-8cf3-d192a44038c0
+  text: 'Pas d''organisation : l''improvisation suffit.'
+correct_choice_ids:
+- c85d0b59-ea41-4513-a655-4d0f2f7ec71a
+explanation: 'L''organisation du manuel : guide en premier, plongeurs chacun à leur
+  tour au signal, vérification « personne en dessous », signe « Ok » en surface, descente
+  de préférence le long du mouillage ou d''un pendeur, guide face aux plongeurs.'
+archived: false
