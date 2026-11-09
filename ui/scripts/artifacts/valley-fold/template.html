@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valley Fold</title>
+<meta name="description" content="Learn origami on a virtual sheet: ten classic models with orbitable 3D folds, scrubbable steps and classic crease notation.">
+<style>
+/*STYLE*/
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="top">
+      <h1>Valley Fold<span class="dot">.</span></h1>
+      <button id="legend-btn" aria-expanded="false">notation</button>
+    </div>
+    <p id="blurb"></p>
+    <div id="tabs" role="tablist" aria-label="Models"></div>
+  </header>
+  <div id="viewport">
+    <div id="legend" hidden>
+      <h2>Classic notation</h2>
+      <div class="row"><span class="ln"></span><span>Valley fold - paper comes toward you</span></div>
+      <div class="row"><span class="ln m"></span><span>Mountain fold - paper goes behind</span></div>
+      <p>Drag to orbit, pinch or scroll to zoom, double-tap to reset the view.</p>
+    </div>
+    <div id="diagram" aria-hidden="true"></div>
+  </div>
+  <div id="panel">
+    <div id="step-row">
+      <span id="step-count"></span>
+      <p id="step-text"></p>
+    </div>
+    <div id="controls">
+      <button id="restart" class="ctl" aria-label="Back to the flat sheet" title="Restart">↺</button>
+      <button id="prev" class="ctl" aria-label="Previous step" title="Previous step">‹</button>
+      <button id="play" class="ctl" aria-label="Play fold-along" title="Fold along">▶</button>
+      <button id="next" class="ctl" aria-label="Next step" title="Next step">›</button>
+      <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Scrub through the folds">
+    </div>
+  </div>
+</div>
+/*THREE*/
+<script>
+/*ENGINE*/
+</script>
+<script>
+/*MODELS*/
+</script>
+<script>
+/*APP*/
+</script>
+</body>
+</html>

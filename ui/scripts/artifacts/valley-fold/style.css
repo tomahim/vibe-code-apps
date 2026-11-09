@@ -1,0 +1,77 @@
+:root{
+  --bg:#0e1116; --panel:#151a22; --panel-2:#1b222d;
+  --ink:#ece5d3; --muted:#97907e; --faint:#5d594e;
+  --gold:#d8a84e; --teal:#62c9da; --coral:#e07856;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
+  -webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+button:disabled{opacity:.35;cursor:default}
+
+#app{display:flex;flex-direction:column;height:100dvh}
+
+header{padding:.55rem .8rem .45rem;background:linear-gradient(180deg,#171d27,#12171f);
+  border-bottom:1px solid #262d3a;flex:0 0 auto}
+header .top{display:flex;align-items:baseline;gap:.6rem}
+h1{font-size:1.05rem;margin:0;font-weight:600;letter-spacing:.02em}
+h1 .dot{color:var(--gold)}
+#blurb{margin:.15rem 0 0;font-size:.8rem;color:var(--muted);font-style:italic;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+#tabs{display:flex;gap:.35rem;overflow-x:auto;padding:.5rem .1rem .15rem;scrollbar-width:thin}
+.tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;
+  padding:.35rem .6rem;border:1px solid #262d3a;border-radius:.55rem;background:var(--panel);
+  color:var(--muted);font-size:.78rem;line-height:1.15}
+.tab .dots{font-size:.44rem;letter-spacing:.1em;color:var(--gold)}
+.tab .dots .off{color:#333a45}
+.tab.on{color:var(--ink);border-color:var(--gold);background:var(--panel-2)}
+
+#viewport{flex:1 1 auto;position:relative;min-height:0;touch-action:none;
+  background:radial-gradient(120% 90% at 50% 12%,#1a2130 0%,#10141b 55%,#0b0e13 100%)}
+#viewport canvas{display:block;width:100%;height:100%}
+
+#legend{position:absolute;top:.6rem;right:.6rem;background:rgba(14,17,22,.88);
+  border:1px solid #2a3342;border-radius:.6rem;padding:.6rem .7rem;font-size:.74rem;
+  color:var(--muted);max-width:13rem;backdrop-filter:blur(4px)}
+#legend h2{font-size:.78rem;margin:0 0 .35rem;color:var(--ink)}
+#legend .row{display:flex;align-items:center;gap:.5rem;margin:.25rem 0}
+#legend .ln{flex:0 0 2.1rem;border-top:2px dashed var(--gold);height:0}
+#legend .ln.m{border-top:2px dashed var(--teal);border-top-style:dashed;
+  border-image:repeating-linear-gradient(90deg,var(--teal) 0 8px,transparent 8px 11px,var(--teal) 11px 13px,transparent 13px 16px) 2}
+#legend p{margin:.4rem 0 0;font-size:.7rem;color:var(--faint)}
+
+#panel{flex:0 0 auto;background:linear-gradient(0deg,#141922,#171d27);
+  border-top:1px solid #262d3a;padding:.55rem .8rem calc(.55rem + env(safe-area-inset-bottom))}
+#step-row{display:flex;align-items:baseline;gap:.6rem}
+#step-count{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+#step-text{margin:0;font-size:.92rem;line-height:1.35;min-height:2.5em}
+
+#diagram{position:absolute;left:.6rem;bottom:.6rem;width:5.4rem;height:5.4rem;
+  background:rgba(14,17,22,.82);border:1px solid #2a3342;border-radius:.55rem;overflow:hidden}
+#diagram svg{width:100%;height:100%;display:block}
+
+#controls{display:flex;align-items:center;gap:.45rem;margin-top:.5rem}
+.ctl{width:2.5rem;height:2.5rem;border:1px solid #2a3342;border-radius:50%;background:var(--panel-2);
+  font-size:1rem;display:grid;place-items:center;flex:0 0 auto}
+.ctl:active{background:#232c3a}
+#play{border-color:var(--gold);color:var(--gold)}
+#scrub{flex:1 1 auto;appearance:none;height:.35rem;border-radius:1rem;background:#2a3342;cursor:pointer}
+#scrub::-webkit-slider-thumb{appearance:none;width:1.05rem;height:1.05rem;border-radius:50%;
+  background:var(--gold);border:2px solid #0e1116}
+#scrub::-moz-range-thumb{width:.9rem;height:.9rem;border-radius:50%;background:var(--gold);border:2px solid #0e1116}
+#legend-btn{margin-left:.1rem;color:var(--muted);font-size:.72rem;text-decoration:underline;
+  text-underline-offset:3px}
+
+@media (min-width:760px){
+  #panel{padding:.7rem 1.4rem calc(.7rem + env(safe-area-inset-bottom))}
+  #step-text{font-size:1rem}
+  #diagram{width:7rem;height:7rem}
+  header .top{max-width:60rem}
+  #tabs{padding:.55rem .1rem .25rem}
+}
