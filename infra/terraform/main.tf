@@ -36,7 +36,9 @@ resource "railway_service" "api" {
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3
-  serverless                 = true
+  # Time-boxed trial (requested 2026-11-09): keep the api running instead of
+  # sleeping, to observe the cost impact. Revert to true to end the trial.
+  serverless = false
 }
 
 resource "railway_service" "ui" {
