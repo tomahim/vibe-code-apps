@@ -1,0 +1,22 @@
+id: 77a18b38-fd70-4957-bb22-b416a27c7b09
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui peut effectuer l'épreuve d'une bouteille ?
+choices:
+- id: 667959a1-1e9b-402c-96ed-ef894e30af0b
+  text: L'Administration ou un organisme autorisé (APAVE, VERITAS, ASAP) ; la date
+    est gravée si la bouteille est conforme.
+- id: 96b6b203-0935-434c-b972-2d6eadac00be
+  text: N'importe quel technicien TIV du club, avec un compresseur 300 bars.
+- id: 933876ad-c722-4588-863c-2a45c2a3d776
+  text: Le propriétaire de la bouteille, sous contrôle d'huissier.
+- id: 672d54f4-1f09-4de8-8978-5ab5ed073be9
+  text: Le fabricant uniquement, dans l'usine d'origine du bloc.
+correct_choice_ids:
+- 667959a1-1e9b-402c-96ed-ef894e30af0b
+explanation: L'épreuve, fortement réglementée, doit être effectuée par l'Administration
+  ou un organisme autorisé (APAVE, VERITAS, ASAP) ; si la bouteille est conforme,
+  la date de l'épreuve est gravée dessus.
+archived: false

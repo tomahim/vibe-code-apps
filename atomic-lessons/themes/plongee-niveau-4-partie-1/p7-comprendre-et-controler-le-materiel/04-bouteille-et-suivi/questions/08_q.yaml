@@ -1,0 +1,22 @@
+id: 42899b38-343f-40b6-a8be-e74f16390778
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qui choisit l'inspecteur, selon le manuel ?
+choices:
+- id: 0533d1e5-fa6a-42d1-b9a4-d52affa319eb
+  text: 'Le choix n''est pas imposé par l''administration : il suffit qu''il soit
+    compétent, et la preuve peut être exigée.'
+- id: fa86d52d-4faa-4288-9627-b6b0e706e53e
+  text: L'administration impose un inspecteur agréé par la préfecture.
+- id: bed70519-e216-49ba-aaef-0fc6272adedc
+  text: Le fabricant de la bouteille désigne son inspecteur à vie.
+- id: b24615a0-8b0d-4b42-a01f-25bf9e886ba2
+  text: Le guide de palanquée inspecte lui-même ses bouteilles.
+correct_choice_ids:
+- 0533d1e5-fa6a-42d1-b9a4-d52affa319eb
+explanation: 'Le choix de l''inspecteur n''est pas imposé : il suffit qu''il soit
+  compétent ; l''administration peut demander la preuve de cette compétence et récuser
+  la personne en cas de doute.'
+archived: false

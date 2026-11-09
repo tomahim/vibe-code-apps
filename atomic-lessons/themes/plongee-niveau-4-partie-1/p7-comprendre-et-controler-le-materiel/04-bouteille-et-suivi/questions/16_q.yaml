@@ -1,0 +1,22 @@
+id: 30fe4909-c4a9-4b01-aea6-509653a75b75
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel choix de bouteille le manuel conseille-t-il, et pour le nitrox ?
+choices:
+- id: f0b47960-1747-4c5a-a242-4396385cf803
+  text: Un 15 litres ou un 12 litres à 230 bars selon gabarit et consommation ; une
+    bouteille gravée « G1 » pour le nitrox.
+- id: a779756b-1108-4d3c-8396-3c0f65988772
+  text: Un 18 litres à 300 bars dans tous les cas ; n'importe quel bloc pour le nitrox.
+- id: a42d0e07-0ad9-41d5-8a0a-a0f6b2cf28a7
+  text: Un 6 litres à 200 bars pour débuter ; le nitrox est interdit aux N4.
+- id: 22e4096b-8379-4b3c-8b27-1186670e90c8
+  text: Uniquement de l'aluminium ; le nitrox impose une bouteille en acier.
+correct_choice_ids:
+- f0b47960-1747-4c5a-a242-4396385cf803
+explanation: Le manuel conseille un 15 litres à 230 bars ou un 12 litres à 230 bars,
+  selon gabarit, consommation et plongées (autonomie 20 m, 40 m encadré, au-delà avec
+  le niveau 3) ; pour le nitrox, choisir une bouteille gravée « G1 ».
+archived: false
