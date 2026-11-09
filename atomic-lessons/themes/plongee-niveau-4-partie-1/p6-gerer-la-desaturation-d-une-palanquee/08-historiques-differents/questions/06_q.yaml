@@ -1,0 +1,22 @@
+id: 2a40d16f-1629-40ca-b3e6-1aacd4f1cb5b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle règle collective s'appliquera à cette palanquée pendant la désaturation
+  ?
+choices:
+- id: bd815673-9821-4262-9a46-c972bba4139e
+  text: La désaturation la plus limitative s'impose à tout le groupe.
+- id: f894ffa2-9782-477f-92c3-f70b23611b95
+  text: Chacun suit son propre ordinateur selon son historique personnel.
+- id: 487e5e7b-7302-4aaf-ba74-e7e78771a12a
+  text: Le plongeur non saturé impose sa désaturation plus courte à tous.
+- id: 38cee185-9f7f-4bed-a070-52a5d36886fd
+  text: Le groupe se sépare au premier palier pour rejoindre la surface.
+correct_choice_ids:
+- bd815673-9821-4262-9a46-c972bba4139e
+explanation: 'Comme pour toute procédure hétérogène : la désaturation la plus limitative
+  (vitesse la plus lente, paliers les plus longs) s''impose à tout le groupe, sans
+  dissociation.'
+archived: false

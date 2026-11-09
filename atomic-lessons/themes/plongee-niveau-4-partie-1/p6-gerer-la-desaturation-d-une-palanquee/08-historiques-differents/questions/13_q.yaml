@@ -1,0 +1,22 @@
+id: d4ebf9be-5681-43ad-835f-ce8d035b1b5d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quoi servent les interfaces des ordinateurs de plongée ?
+choices:
+- id: 333ed4ee-30af-4c4b-bc60-cff0407b76b9
+  text: Pallier le manque de mémoire et exporter les données vers ordinateur, tablette
+    ou smartphone.
+- id: abf3c209-c455-4dbe-8309-9d921e5c4024
+  text: Recharger les piles de l'ordinateur par induction pendant la nuit.
+- id: 9b06ccdf-11d0-48fc-b244-276e790d97f0
+  text: Connecter l'ordinateur au GPS du bateau pour géolocaliser les paliers.
+- id: f5cbc45e-9642-4559-ba75-e22728857895
+  text: Synchroniser les ordinateurs de la palanquée sur un modèle commun.
+correct_choice_ids:
+- 333ed4ee-30af-4c4b-bc60-cff0407b76b9
+explanation: 'Les interfaces pallient le manque de mémoire des ordinateurs : export
+  vers un ordinateur personnel (câble USB ou infrarouge) et, sur certains modèles,
+  vers tablette ou smartphone via Bluetooth, avec le logiciel d''interface du fabricant.'
+archived: false

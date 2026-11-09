@@ -1,0 +1,21 @@
+id: 21389738-4465-4fe1-9c9d-15fe4c018cc1
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'indique le tableau 1 des tables MN90-FFESSM ?
+choices:
+- id: 6b82a305-9ff3-42be-9a1d-f8ea19817fa9
+  text: L'évolution de l'azote résiduel en surface après une plongée, selon le GPS.
+- id: 2cb58af0-83cf-4f10-bc48-47035b766241
+  text: La majoration en minutes à appliquer lors d'une plongée successive.
+- id: dacac692-9a68-4daa-8a40-507919b02c74
+  text: La diminution de l'azote résiduel par inhalation d'oxygène pur en surface.
+- id: d9cd921f-62d1-4e71-a62a-365efc4d0683
+  text: Le calcul des durées de remontée entre les paliers et la surface.
+correct_choice_ids:
+- 6b82a305-9ff3-42be-9a1d-f8ea19817fa9
+explanation: 'Le tableau 1 indique l''évolution de l''azote résiduel en surface après
+  une plongée, en fonction du Groupe de Plongée Successive (GPS). (Tableau 2 : majoration
+  ; tableau 3 : O2 en surface ; tableau 4 : durées de remontée.)'
+archived: false
