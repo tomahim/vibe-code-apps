@@ -1,0 +1,21 @@
+id: 6c676509-a90f-46ea-bb6e-2578a7ec7982
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Sur quoi la décision de remonter doit-elle s'appuyer, selon le manuel ?
+choices:
+- id: f88f7b86-fb4b-4be8-97ea-55a808f689f2
+  text: Le protocole décidé avant la plongée et les contraintes de toute la palanquée.
+- id: 92729c14-988b-4c41-812f-acf6755197b4
+  text: Uniquement l'ordinateur du guide, qui affiche les valeurs de référence.
+- id: e4e08708-5572-46d4-8e60-9b55f88efb7b
+  text: La quantité d'air restante du plongeur le plus consommateur, rien d'autre.
+- id: 690d71bd-9394-4e30-90fc-26d0db9c6c44
+  text: L'horaire de retour du bateau, qui fixe l'heure de fin de plongée.
+correct_choice_ids:
+- f88f7b86-fb4b-4be8-97ea-55a808f689f2
+explanation: La décision de remonter consiste à respecter, pour tout le groupe, le
+  protocole de désaturation décidé avant la plongée (plongée sans palier, limitation
+  à 3 minutes de paliers, etc.) - pas à suivre l'ordinateur le plus optimiste.
+archived: false

@@ -1,0 +1,22 @@
+id: aacaecab-724b-4737-8fdf-24936be086f8
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi la vitesse de remontée doit-elle toujours être lente ?
+choices:
+- id: e032231a-a6bb-46ea-aad0-be9823f74523
+  text: Une remontée rapide favorise la création de bulles et augmente les risques
+    d'accident.
+- id: 4658b9a8-71f7-46c8-92d4-488c245f367d
+  text: Pour économiser l'air de la bouteille pendant la phase de remontée.
+- id: d4decb48-3ae6-456a-9feb-025219685944
+  text: Pour permettre aux poissons de s'écarter du trajet de la palanquée.
+- id: a68792a6-0ec0-4a2d-b402-940320499bdb
+  text: Parce que les paliers ne peuvent être effectués qu'en descente lente.
+correct_choice_ids:
+- e032231a-a6bb-46ea-aad0-be9823f74523
+explanation: 'La vitesse de remontée doit toujours être lente : une remontée rapide
+  favorise la création de bulles et augmente considérablement les risques d''accidents
+  de désaturation.'
+archived: false

@@ -1,0 +1,21 @@
+id: 74c2ef04-b8ca-4faa-8041-0ef385a123e2
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Dans une palanquée, quel temps sans palier faut-il surveiller pour décider
+  ?
+choices:
+- id: 89e9a44f-d065-478c-9266-973b71b3896a
+  text: 'Le plus défavorable : le plongeur le plus chargé atteint sa limite en premier.'
+- id: ad0e25a0-84cd-48a9-b931-14921033300f
+  text: 'Le plus favorable : il garantit que personne n''entre dans les paliers.'
+- id: b8d3b5a9-9c30-454d-8528-bb407b3b5b29
+  text: La moyenne des temps affichés par les ordinateurs de la palanquée.
+- id: 54cbf6c2-0e78-4852-b879-3ba540cc7f74
+  text: Uniquement celui du guide de palanquée, qui fait foi pour le groupe.
+correct_choice_ids:
+- 89e9a44f-d065-478c-9266-973b71b3896a
+explanation: 'C''est l''évolution la plus défavorable qui compte : le plongeur le
+  plus chargé en azote - historique, profil - atteint sa limite avant les autres.'
+archived: false

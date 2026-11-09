@@ -1,0 +1,23 @@
+id: cb359883-79cb-487e-be5b-123c5a5005a1
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le gaz disponible pèse-t-il sur la décision de remonter ?
+choices:
+- id: ce9d208d-203a-4c9d-99ec-c00167c2e82a
+  text: La remontée est amorcée assez tôt pour terminer la désaturation prévue avec
+    la réserve intacte.
+- id: af0d20c0-8ef7-421b-8a1a-e008b75ac743
+  text: On remonte uniquement quand la bouteille du premier plongeur est complètement
+    vide.
+- id: 72c6b19f-d0cb-4f8e-a524-83b2666aacdb
+  text: 'Le gaz ne joue pas : seule la désaturation affichée décide de la remontée.'
+- id: 882f0e2b-49c7-48f6-80af-b324055fafb6
+  text: On prolonge la plongée tant que l'alarme de réserve n'a pas sonné deux fois.
+correct_choice_ids:
+- ce9d208d-203a-4c9d-99ec-c00167c2e82a
+explanation: 'L''autonomie (RBT, AIR TIME, TTR) tient compte de la consommation, de
+  la désaturation et d''une réserve de l''ordre de 35 bars : la remontée doit être
+  amorcée assez tôt pour finir la désaturation prévue avec la réserve intacte.'
+archived: false
