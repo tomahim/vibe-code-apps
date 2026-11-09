@@ -1,0 +1,23 @@
+id: 0152d2f3-3edd-4729-93d1-56ab219e2dd7
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel document le directeur de plongée établit-il pour encadrer la palanquée
+  ?
+choices:
+- id: 3c31a966-5fa4-465a-b001-cde3f3856754
+  text: Une fiche de sécurité (feuille de palanquée) avec noms, prénoms, aptitudes
+    et fonction des plongeurs.
+- id: bfc775e5-754d-4484-9c48-612c0ec4a5bc
+  text: Un contrat d'assurance par plongeur.
+- id: ed379ff4-9d94-4200-b729-28cc3c0697ca
+  text: Une carte marine annotée.
+- id: 899d8882-b95e-49f0-8337-da72dac24b11
+  text: Un carnet de notes personnel.
+correct_choice_ids:
+- 3c31a966-5fa4-465a-b001-cde3f3856754
+explanation: Le DP établit une fiche de sécurité (feuille de palanquée) comprenant
+  notamment les noms, les prénoms, les aptitudes des plongeurs et leur fonction dans
+  la palanquée.
+archived: false

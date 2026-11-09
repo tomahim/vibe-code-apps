@@ -1,0 +1,22 @@
+id: b3af3be9-b580-43fc-8638-603d9d2decae
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Où l'absence du débriefing a-t-elle été vérifiée ?
+choices:
+- id: e2bac0eb-5cca-48b9-b421-ed74b1da3de0
+  text: Dans le chapitre « Guider sa palanquée », le chapitre sur l'assistance, et
+    l'index thématique du manuel.
+- id: 85c9b4b9-dcb0-4097-b670-39f7d15a35a0
+  text: Uniquement sur la couverture.
+- id: f22b1654-1f2d-4127-a43b-3c31705b343a
+  text: Uniquement dans le sommaire.
+- id: 64321105-25dd-4367-ae29-14579bb68ab3
+  text: Nulle part, c'est une supposition.
+correct_choice_ids:
+- e2bac0eb-5cca-48b9-b421-ed74b1da3de0
+explanation: L'absence a été vérifiée sur le chapitre de conduite de palanquée (p.
+  58-97), le chapitre sur l'assistance et les remontées d'urgence, et l'index thématique
+  de l'ouvrage.
+archived: false

@@ -1,0 +1,21 @@
+id: 9031e286-ac21-45aa-9304-2cf0d01c8b26
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce que le manuel formalise à la place du débriefing ?
+choices:
+- id: c9022430-ca81-4002-871a-e529c9ef322e
+  text: Le briefing d'avant-plongée, qui complète celui du directeur de plongée sans
+    s'y substituer.
+- id: af1bee13-826e-4caf-b171-60f155873814
+  text: Un rapport écrit d'après-plongée.
+- id: cc8a5507-e769-4872-b147-68baa4fd5e80
+  text: Une réunion du soir obligatoire.
+- id: 89cb709f-9b35-47d1-b72c-ed632d06f000
+  text: Un questionnaire de satisfaction.
+correct_choice_ids:
+- c9022430-ca81-4002-871a-e529c9ef322e
+explanation: 'Le manuel formalise l''avant : le briefing du guide, qui complète celui
+  du DP sans s''y substituer ; aucune section symétrique ne structure l''après-plongée.'
+archived: false

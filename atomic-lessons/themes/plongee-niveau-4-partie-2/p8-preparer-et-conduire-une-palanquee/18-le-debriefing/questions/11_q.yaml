@@ -1,0 +1,20 @@
+id: 29ba15b3-a610-4fb2-a90c-55e54eab70dc
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le manuel dit-il que s'acquiert la conduite de palanquée ?
+choices:
+- id: ecb63790-47f7-4121-b186-dcca85606015
+  text: Par un apprentissage, durant la formation.
+- id: 8efa0e5a-4094-424d-9e8c-94364d519f71
+  text: Par la seule lecture du manuel.
+- id: 4c2e28f8-53f2-465d-9207-a7b31a1a1c50
+  text: Par l'expérience en autonomie.
+- id: dbcb59d9-2885-4dce-9b3d-b67acf2c2c4b
+  text: Par un examen écrit unique.
+correct_choice_ids:
+- ecb63790-47f7-4121-b186-dcca85606015
+explanation: « Conduire une palanquée nécessite un apprentissage, durant votre formation
+  », écrit le manuel.
+archived: false

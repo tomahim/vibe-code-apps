@@ -1,0 +1,22 @@
+id: 31f78c28-2935-4c76-a436-6d9be8f118ac
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle affirmation résume correctement l'après-plongée selon le manuel ?
+choices:
+- id: db56c23e-a39c-4b4f-bc26-1085d1c207c7
+  text: Pas de débriefing formalisé ; le guide reste responsable jusqu'à la sortie,
+    la direction de plongée couvre la palanquée jusqu'à son retour.
+- id: de51521f-aef9-48e6-9399-a83a06efaa1d
+  text: Un débriefing écrit est obligatoire.
+- id: 6623dc64-d4c4-498e-a2a7-16dff263c7e5
+  text: Le guide est relevé de sa responsabilité à la surface.
+- id: fe3b6aaf-b6c7-4223-a7ff-c980d782da52
+  text: La direction de plongée cesse dès la mise à l'eau.
+correct_choice_ids:
+- db56c23e-a39c-4b4f-bc26-1085d1c207c7
+explanation: Le manuel ne formalise pas de débriefing ; il pose la responsabilité
+  du guide jusqu'à la sortie et une direction de plongée assurée jusqu'au retour des
+  palanquées.
+archived: false
