@@ -235,9 +235,30 @@ VF.models = (function () {
     ]
   });
 
-  /* ---------- 9. Cootie Catcher ---------- */
+  /* ---------- 9. Stunt Glider ---------- */
   S.push({
-    slug: 'cootie-catcher', name: 'Fortune Teller', diff: 4, color: '#b48ae0',
+    slug: 'stunt-glider', name: 'Stunt Glider', diff: 4, color: '#d8a84e',
+    blurb: 'Take the dart one step further: blunt the nose, widen the wings.',
+    steps: [
+      { text: 'Fold in half lengthwise, then unfold.',
+        ops: precrease([0, -1], [0, 1], [1, 0], 'v', 'g1') },
+      { text: 'Fold the top-right corner to the center line.',
+        ops: [foldTo([1, 1], [0, 0], 'v', { group: 1 })] },
+      { text: 'Fold the top-left corner to the center line.',
+        ops: [foldTo([-1, 1], [0, 0], 'v', { group: 2 })] },
+      { text: 'Fold the nose tip back a little - a blunted nose glides, a pointy one dives.',
+        ops: [mk([-0.2, 0.55], [0.2, 0.55], [0, 1], 'v', { group: 5 })] },
+      { text: 'Fold the plane in half away from you.',
+        ops: [mk([0, -1], [0, 1], [1, 0], 'm', { group: 6 })] },
+      { text: 'Fold the top wing down: start a thumb-width below the nose, out to the tail corner. Wide wings glide.',
+        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'v', { includeGroups: [0, 2, 4], group: 7 })] },
+      { text: 'Fold the other wing down behind.',
+        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'm', { includeGroups: [1, 3, 5, 6], group: 8 })] },
+      { text: 'Open the wings, hold the body, throw high and watch it glide.',
+        ops: [spinZ(Math.PI / 2)] }
+    ]
+  });S.push({
+    slug: 'cootie-catcher', name: 'Fortune Teller', diff: 5, color: '#b48ae0',
     blurb: 'The playground fortune teller - write fortunes inside.',
     steps: [
       { text: 'Fold both diagonals, unfolding each.',
@@ -262,31 +283,6 @@ VF.models = (function () {
         ops: [foldTo([1, -1], [0, 0], 'v', { group: 8 })] },
       { text: 'Fold in half, then slip your thumbs and fingers into the four pockets and push them together. Ask a question, pick a color.',
         ops: [foldTo([0, 1], [0, -1], 'v', { group: 9 })] }
-    ]
-  });
-
-
-  /* ---------- 10. Stunt Glider ---------- */
-  S.push({
-    slug: 'stunt-glider', name: 'Stunt Glider', diff: 5, color: '#d8a84e',
-    blurb: 'The dart, mastered: blunted nose, wide glider wings.',
-    steps: [
-      { text: 'Fold in half lengthwise, then unfold.',
-        ops: precrease([0, -1], [0, 1], [1, 0], 'v', 'g1') },
-      { text: 'Fold the top-right corner to the center line.',
-        ops: [foldTo([1, 1], [0, 0], 'v', { group: 1 })] },
-      { text: 'Fold the top-left corner to the center line.',
-        ops: [foldTo([-1, 1], [0, 0], 'v', { group: 2 })] },
-      { text: 'Fold the nose tip back a little - a blunted nose glides, a pointy one dives.',
-        ops: [mk([-0.2, 0.55], [0.2, 0.55], [0, 1], 'v', { group: 5 })] },
-      { text: 'Fold the plane in half away from you.',
-        ops: [mk([0, -1], [0, 1], [1, 0], 'm', { group: 6 })] },
-      { text: 'Fold the top wing down: start a thumb-width below the nose, out to the tail corner. Wide wings glide.',
-        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'v', { includeGroups: [0, 2, 4], group: 7 })] },
-      { text: 'Fold the other wing down behind.',
-        ops: [mk([0, 0.35], [-1, -1], [-0.5, 0.5], 'm', { includeGroups: [1, 3, 5, 6], group: 8 })] },
-      { text: 'Open the wings, hold the body, throw high and watch it glide.',
-        ops: [spinZ(Math.PI / 2)] }
     ]
   });
 
