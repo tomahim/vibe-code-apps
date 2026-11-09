@@ -7,6 +7,7 @@ import "./little-notes.css";
 import TaxonomyAdmin from "./TaxonomyAdmin.jsx";
 import { useNotesRoute } from "./navigation.js";
 import { ObjectList, ObjectCalendar, ViewPicker } from "./ObjectViews.jsx";
+import { planUndo } from "./undo.js";
 
 const base = "/api/apps/little-notes/";
 const icons = { idea: "✳", bookmark: "↗", news: "▤", "daily-note": "▦", video: "▶", "work-idea": "⚒" };
@@ -41,6 +42,10 @@ export default function LittleNotes({ onHome }) {
   const [next, setNext] = useState(null);
   const [selected, setSelected] = useState(null); const [busy, setBusy] = useState(false);
   const [error, setError] = useState(""); const [notice, setNotice] = useState("");
+  // The last category move, kept so the notice can offer Undo. Cleared with
+  // the notice, and on a short timer: undo is a second thought, not a mode.
+  const [undo, setUndo] = useState(null);
+  function flash(text, undoState = null) { setNotice(text); setUndo(undoState); }
   const [loading, setLoading] = useState(true); const [drawer, setDrawer] = useState(false);
   const [capture, setCapture] = useState(false); const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ title: "", type: "bookmark", body_markdown: "", external_url: "", saved_on: localDate() });
@@ -68,6 +73,11 @@ export default function LittleNotes({ onHome }) {
     document.addEventListener("keydown", handler);
     return () => { document.removeEventListener("keydown", handler); previous?.focus(); };
   }, [capture, busy]);
+  useEffect(() => {
+    if (!undo) return;
+    const timer = setTimeout(() => { setUndo(null); setNotice(""); }, 10000);
+    return () => clearTimeout(timer);
+  }, [undo]);
   const signedIn = Boolean(getToken());
   useEffect(() => { if (signedIn) api("taxonomy/").then(data => { setTaxonomy(data); viewCache.current = data.view_preferences || {};
     setViewSaved(!route.type || (viewCache.current[route.type] || "default") === route.view);
@@ -102,7 +112,7 @@ export default function LittleNotes({ onHome }) {
     }, q ? 200 : 0);
     return () => { clearTimeout(timer); generation.current++; };
   }, [signedIn, type, category, tag, month, q, page, refresh, view, routeItem]);
-  function filter(setter, value) { setRoute(old => ({ ...old, item: "" })); setter(value); setPage(1); setDrawer(false); setNotice(""); }
+  function filter(setter, value) { setRoute(old => ({ ...old, item: "" })); setter(value); setPage(1); setDrawer(false); flash(""); }
   const visibleCategories = taxonomy.categories.filter(c => !type || !c.types.length || c.types.includes(type));
   // Archive is a destination, not a triage lane: it stays available as a small
   // control below the tabs so the tab row keeps room for real categories.
@@ -143,9 +153,10 @@ export default function LittleNotes({ onHome }) {
       const following = index >= 0 ? items[(index + 1) % items.length] : null;
       if (following && following.id !== selected.id) nextId = following.id;
     }
+    const before = path === "categories" ? selected.categories.map(c => c.slug) : null;
     try {
       const updated = await api(`content/${selected.id}/${path}/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ [key]: slug, enabled, updated_at: selected.updated_at }) });
-      setNotice(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`);
+      flash(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`, before ? { id: selected.id, before } : null);
       if (leaving) setRoute(old => ({ ...old, item: nextId }));
       else setSelected(updated);
       setRefresh(x => x + 1);
@@ -156,21 +167,39 @@ export default function LittleNotes({ onHome }) {
   // item's own updated_at and lets the list refresh show the result.
   async function cardCategory(item, slug, enabled) {
     if (busy) return; setBusy(true); setError("");
+    const before = item.categories.map(c => c.slug);
     try {
       await api(`content/${item.id}/categories/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: slug, enabled, updated_at: item.updated_at }) });
-      setNotice(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`);
+      flash(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`, { id: item.id, before });
       setRefresh(x => x + 1);
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   }
+  // Undo replays the recorded pre-move category set through the same endpoint,
+  // so every server rule (Inbox/Archive exclusivity, triage semantics) applies
+  // exactly as if the person had clicked the categories back by hand.
+  async function undoMove() {
+    if (!undo || busy) return; setBusy(true); setError("");
+    const move = undo; setUndo(null);
+    try {
+      let current = await api(`content/${move.id}/`);
+      for (const step of planUndo(move.before, current.categories.map(c => c.slug))) {
+        current = await api(`content/${move.id}/categories/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: step.slug, enabled: step.enabled, updated_at: current.updated_at }) });
+      }
+      flash("Undone. Back where it was.");
+      setRoute(old => ({ ...old, item: move.id }));
+      setRefresh(x => x + 1);
+    } catch (e) { setError(`Could not undo: ${e.message}`); setNotice(""); }
+    finally { setBusy(false); }
+  }
   const toggleTag = (slug, enabled = true) => toggle("tags", "tag", slug, enabled);
-  function skip() { if (!items.length) return; const index = items.findIndex(i => i.id === selected?.id); choose(items[(index + 1) % items.length]); setNotice("Skipped for now. Nothing changed."); }
+  function skip() { if (!items.length) return; const index = items.findIndex(i => i.id === selected?.id); choose(items[(index + 1) % items.length]); flash("Skipped for now. Nothing changed."); }
   function openCapture() { setDraft({ title: "", type: type || "bookmark", body_markdown: "", external_url: "", saved_on: localDate() }); setEditing(false); setCapture(true); }
   function openEdit() { setDraft({ ...selected }); setEditing(true); setCapture(true); }
   async function save(e) {
     e.preventDefault(); setBusy(true); setError("");
     try {
       await api(editing ? `content/${selected.id}/` : "content/", { method: editing ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(draft) });
-      setCapture(false); setRefresh(x => x + 1); setNotice(editing ? "Changes saved." : "Saved to Inbox.");
+      setCapture(false); setRefresh(x => x + 1); flash(editing ? "Changes saved." : "Saved to Inbox.");
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   }
   async function changeView(value) {
@@ -182,7 +211,7 @@ export default function LittleNotes({ onHome }) {
     try {
       const result = await api(`preferences/${type}/`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ view: value }) });
       viewCache.current[type] = result.view;
-      if (request === viewRequest.current) { setViewSaved(true); setNotice("View preference saved."); }
+      if (request === viewRequest.current) { setViewSaved(true); flash("View preference saved."); }
     } catch (e) { if (request === viewRequest.current) setError(`View shown, but preference was not saved: ${e.message}`); }
     finally { if (request === viewRequest.current) setSavingView(false); }
   }
@@ -201,7 +230,7 @@ export default function LittleNotes({ onHome }) {
           {archiveCategory && <div className="ln-archive-row"><button className={category === "archive" ? "active" : ""} aria-pressed={category === "archive"} onClick={() => filter(setCategory, "archive")}>Archive</button></div>}
           <div className="ln-heading"><div><p className="ln-eyebrow">A SMALL DECISION AT A TIME</p><h1>{category === "inbox" ? "In, then out." : category ? visibleCategories.find(c => c.slug === category)?.name || category : tag ? `#${tag}` : "Everything, kept."}</h1></div><span className="ln-count">{total} <small>objects</small></span></div>
           <ViewPicker value={view} onChange={changeView} disabled={savingView} saving={savingView} saved={viewSaved} typeName={type ? taxonomy.types.find(t => t.slug === type)?.name || type : ""} />
-          {error && <div className="ln-error" role="alert">{error} <button onClick={() => setRefresh(x => x + 1)}>Reload</button></div>}{notice && <p className="ln-notice" role="status">{notice}</p>}
+          {error && <div className="ln-error" role="alert">{error} <button onClick={() => setRefresh(x => x + 1)}>Reload</button></div>}{notice && <p className="ln-notice" role="status"><span>{notice}</span>{undo && <button className="ln-undo" disabled={busy} onClick={undoMove}>Undo ↩</button>}</p>}
           {loading ? <div className="ln-empty" aria-busy="true">Opening your collection...</div> : !items.length && view !== "calendar" && !routeItem ? <div className="ln-empty"><span>↗</span><h2>{total ? "Choose an object" : "A little breathing room."}</h2><p>No objects match this view. Your other things are still here.</p><button onClick={() => { chooseType(""); setCategory(""); setTag(""); setMonth(""); setQ(""); setPage(1); }}>See everything</button></div> : <>
             {view === "calendar" && <ObjectCalendar day={route.day} onDay={value => setRoute(old => ({ ...old, day: value }))} month={month || localDate().slice(0, 7)} items={items} choose={choose} busy={busy} onMonth={value => { setRoute(old => ({ ...old, month: value, page: 1, item: "" })); setDetailOpen(false); }} />}
             {["database", "table", "cards"].includes(view) && <ObjectList view={view} items={items} choose={choose} busy={busy} selectedId={selected?.id} types={taxonomy.types} categories={taxonomy.categories} onCategory={cardCategory} />}
