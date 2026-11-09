@@ -1,5 +1,6 @@
 """Weekly Challenge: shared draw, open eligibility, carrots, ranking reveal."""
 import json
+from datetime import timedelta
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -9,7 +10,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from apps.accounts.tokens import issue_token
-from apps.learning.challenge import current_week_key
+from apps.learning.challenge import current_week_key, recent_week_keys
 from apps.learning.management.commands.seed_challenge_players import GENERAL_KNOWLEDGE_PATHS
 from apps.learning.models import (Card, ChallengePlayer, ChallengeWeek, ContentEntity, LearningPath, Lesson,
                                   Question, QuestionAttempt, Theme)
@@ -221,6 +222,112 @@ class ChallengeTests(TestCase):
         self.finish_week(self.aurore)
         revealed = self.client.get("/api/learning/challenge/history/").json()["weeks"][0]["ranking"]
         self.assertEqual({r["name"] for r in revealed}, {"Thomas", "Aurore"})
+
+
+class ChallengeCooldownTests(TestCase):
+    """The 8-week cooldown (Thomas, 2026-11-09): a question stays out of the
+    draw until 8 weeks after its last Challenge use, so the last 7 weeks are
+    excluded and the 8th comes back; a small fresh pool makes a smaller
+    week, never an early repeat; already drawn weeks stay frozen."""
+
+    def setUp(self):
+        self.thomas = get_user_model().objects.create_user(username="thomas", first_name="Thomas")
+        self.aurore = get_user_model().objects.create_user(username="aurore", first_name="Aurore")
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.thomas)}"
+        ChallengePlayer.objects.bulk_create([ChallengePlayer(user=self.thomas), ChallengePlayer(user=self.aurore)])
+        theme = Theme.objects.create(
+            entity=ContentEntity.objects.create(id=uuid4(), kind=Theme.CONTENT_KIND),
+            position=1, published=True, source_path="example", last_changed_commit="a" * 40, title="Theme")
+        path = LearningPath.objects.create(
+            entity=ContentEntity.objects.create(id=uuid4(), kind=LearningPath.CONTENT_KIND),
+            theme=theme, position=1, published=True, source_path="example", last_changed_commit="a" * 40,
+            title="Path", general_knowledge=True)
+        self.questions = []
+        for i in range(15):
+            self.lesson = lesson = Lesson.objects.create(
+                entity=ContentEntity.objects.create(id=uuid4(), kind=Lesson.CONTENT_KIND),
+                learning_path=path, position=i + 1, published=True, source_path="example",
+                last_changed_commit="a" * 40, title=f"Lesson {i}")
+            Card.objects.create(
+                entity=ContentEntity.objects.create(id=uuid4(), kind=Card.CONTENT_KIND),
+                lesson=lesson, position=1, published=True, source_path="example",
+                last_changed_commit="a" * 40, body_markdown="Card")
+            self.questions.append(Question.objects.create(
+                entity=ContentEntity.objects.create(id=uuid4(), kind=Question.CONTENT_KIND),
+                lesson=lesson, position=1, after_card_position=1, published=True, source_path="example",
+                last_changed_commit="a" * 40, prompt=f"Q{i}",
+                options=[{"id": "a", "text": "A"}, {"id": "b", "text": "B"}],
+                answer="a", explanation="Because"))
+
+    def past_week(self, weeks_back, questions):
+        return ChallengeWeek.objects.create(
+            week_key=recent_week_keys(weeks_back)[-1],
+            question_ids=[str(q.pk) for q in questions], created_at=timezone.now())
+
+    def draw(self):
+        self.client.get("/api/learning/challenge/")
+        return ChallengeWeek.objects.get(week_key=current_week_key())
+
+    def test_questions_used_in_the_cooldown_window_stay_out(self):
+        used = self.past_week(3, self.questions[:5])
+        week = self.draw()
+        self.assertEqual(len(week.question_ids), 10)
+        self.assertTrue(set(week.question_ids).isdisjoint(used.question_ids))
+
+    def test_a_question_used_seven_weeks_ago_still_sits_out(self):
+        used = self.past_week(7, self.questions[:12])
+        week = self.draw()
+        self.assertEqual(len(week.question_ids), 3)
+        self.assertTrue(set(week.question_ids).isdisjoint(used.question_ids))
+
+    def test_a_question_used_eight_weeks_ago_is_eligible_again(self):
+        # Eight weeks back is outside the excluded window (the last 7 weeks):
+        # "8 semaines après, c'est bien" - every question comes back.
+        self.past_week(8, self.questions)
+        week = self.draw()
+        self.assertEqual(len(week.question_ids), 10)
+
+    def test_a_small_fresh_pool_shrinks_the_week_instead_of_repeating(self):
+        used = self.past_week(1, self.questions[:12])
+        week = self.draw()
+        # Only the 3 fresh questions are drawn; no recent repeat tops up.
+        self.assertEqual(len(week.question_ids), 3)
+        self.assertTrue(set(week.question_ids).isdisjoint(used.question_ids))
+        self.assertEqual(set(week.question_ids), {str(q.pk) for q in self.questions[12:]})
+
+    def test_an_empty_pool_starts_no_duel_and_stores_nothing(self):
+        self.past_week(1, self.questions)  # every question is on cooldown
+        data = self.client.get("/api/learning/challenge/").json()
+        # An honest empty state: no frozen empty week, no playable duel.
+        self.assertEqual(data["size"], 0)
+        self.assertEqual(data["questions"], [])
+        self.assertIsNone(data["ranking"])
+        self.assertFalse(data["me"]["finished"])
+        self.assertEqual(ChallengeWeek.objects.count(), 1)  # only the past week
+        # History and answering cope with the weekless state.
+        self.assertEqual(self.client.get("/api/learning/challenge/history/").json()["weeks"], [])
+        no_week = self.client.post("/api/learning/challenge/answers/", json.dumps(
+            {"question_id": str(self.questions[0].pk), "answer": "a"}), content_type="application/json")
+        self.assertEqual(no_week.status_code, 404)
+        # New eligible content starts the duel on the next request.
+        extra = Question.objects.create(
+            entity=ContentEntity.objects.create(id=uuid4(), kind=Question.CONTENT_KIND),
+            lesson=self.lesson, position=2, after_card_position=1, published=True, source_path="example",
+            last_changed_commit="a" * 40, prompt="New",
+            options=[{"id": "a", "text": "A"}, {"id": "b", "text": "B"}], answer="a", explanation="x")
+        data = self.client.get("/api/learning/challenge/").json()
+        self.assertEqual(data["size"], 1)
+        self.assertEqual([q["id"] for q in data["questions"]], [str(extra.pk)])
+        self.assertEqual(ChallengeWeek.objects.get(week_key=current_week_key()).question_ids, [str(extra.pk)])
+
+    def test_already_drawn_weeks_stay_frozen(self):
+        week = self.draw()
+        frozen = list(week.question_ids)
+        self.past_week(1, self.questions)  # everything suddenly "recent"
+        again = self.client.get("/api/learning/challenge/").json()
+        self.assertEqual([q["id"] for q in again["questions"]],
+                         [q["id"] for q in self.client.get("/api/learning/challenge/").json()["questions"]])
+        self.assertEqual(ChallengeWeek.objects.get(week_key=current_week_key()).question_ids, frozen)
 
 
 class ChallengeConfigTest(TestCase):

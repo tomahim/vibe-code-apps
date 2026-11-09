@@ -5,7 +5,10 @@ knowledge (specialist paths such as diving certifications stay out). The set
 is stored on first request and is identical for every learner. Every question
 is eligible: unread lessons and unstarted paths included. Each question
 allows 30 seconds (enforced by the client; an unanswered question is recorded
-wrong on auto-advance).
+wrong on auto-advance). A question stays out of the draw until 8 weeks after
+its last Challenge use (Thomas, 2026-11-09); if that leaves fewer than 10
+fresh questions the week is simply smaller - the cooldown is never broken to
+fill the duel.
 
 A challenge answer is an ordinary QuestionAttempt (attempt_type=challenge),
 so first-correct carrots stay derived from learner history and dedupe across
@@ -22,6 +25,7 @@ before, and never publicly. Wins count toward the Challenge badges: strictly
 beating the other player with at least 3/10 correct (ties are not wins).
 """
 import random
+from datetime import timedelta
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -42,6 +46,7 @@ from .models import ChallengePlayer, ChallengeWeek, Question, QuestionAttempt
 CHALLENGE_SIZE = 10
 CHALLENGE_SECONDS = 30
 CHALLENGE_MIN_WIN = 3
+CHALLENGE_COOLDOWN_WEEKS = 8
 
 
 def challenge_players():
@@ -71,15 +76,50 @@ def current_week_key():
     return f"{iso.year}-W{iso.week:02d}"
 
 
+def recent_week_keys(count=CHALLENGE_COOLDOWN_WEEKS - 1):
+    """The `count` UTC ISO week keys before the current one, newest first."""
+    today = timezone.now().date()
+    monday = today - timedelta(days=today.weekday())
+    keys = []
+    for back in range(1, count + 1):
+        iso = (monday - timedelta(weeks=back)).isocalendar()
+        keys.append(f"{iso.year}-W{iso.week:02d}")
+    return keys
+
+
+def draw_pool():
+    """The eligible questions for a new weekly draw: visible questions from
+    general-knowledge paths, minus the ones a recent Challenge week used.
+    The cooldown (Thomas, 2026-11-09: "8 semaines après, c'est bien") keeps a
+    question out until 8 weeks after its last appearance - used last week, it
+    sits out the next 7 draws and can come back on the 8th. Weeks already
+    drawn stay frozen; the cooldown only shapes future draws. A pool with
+    fewer than CHALLENGE_SIZE questions just makes a smaller week: the
+    cooldown is never broken to fill the duel."""
+    # With nothing eligible at all there is no duel yet: get_or_create_week
+    # returns None and nothing is stored, so an empty draw can never freeze
+    # the week, earn a bogus win or badge, or block late-arriving content.
+    base = visible(Question).filter(lesson__learning_path__general_knowledge=True)
+    on_cooldown = set()
+    for key in recent_week_keys():
+        week = ChallengeWeek.objects.filter(week_key=key).first()
+        if week:
+            on_cooldown.update(week.question_ids)
+    return list(base.exclude(pk__in=on_cooldown).values_list("pk", flat=True))
+
+
 def get_or_create_week():
     """The current week's row, drawing and freezing its questions on first
-    request. The unique key makes a simultaneous first draw safe."""
+    request. The unique key makes a simultaneous first draw safe. None when
+    the cooldown empties the pool: an empty draw is never stored, so the
+    next request draws again once questions become eligible."""
     key = current_week_key()
     week = ChallengeWeek.objects.filter(week_key=key).first()
     if week:
         return week
-    pool = list(visible(Question).filter(
-        lesson__learning_path__general_knowledge=True).values_list("pk", flat=True))
+    pool = draw_pool()
+    if not pool:
+        return None
     drawn = [str(pk) for pk in random.sample(pool, min(CHALLENGE_SIZE, len(pool)))]
     try:
         with transaction.atomic():
@@ -181,11 +221,19 @@ def week_payload(user, week, *, include_questions, players=None):
 @require_GET
 @jwt_required
 def challenge(request):
-    """The current week: its questions, my progress, the ranking if revealed."""
+    """The current week: its questions, my progress, the ranking if revealed.
+    With no eligible questions at all, an honest empty state (re-drawn on
+    every request) instead of a frozen empty week."""
     players, denied = player_or_404(request)
     if denied:
         return denied
-    return JsonResponse(week_payload(request.user, get_or_create_week(), include_questions=True, players=players))
+    week = get_or_create_week()
+    if week is None:
+        return JsonResponse({"week_key": current_week_key(), "size": 0,
+                             "seconds_per_question": CHALLENGE_SECONDS,
+                             "me": {"answered": 0, "correct": 0, "finished": False},
+                             "ranking": None, "questions": []})
+    return JsonResponse(week_payload(request.user, week, include_questions=True, players=players))
 
 
 @never_cache
@@ -204,7 +252,7 @@ def challenge_history(request):
         mine = scores.get(request.user.pk)
         if not mine:
             continue  # weeks I never played stay out of my history
-        if week.pk == current.pk and not mine["finished"]:
+        if current and week.pk == current.pk and not mine["finished"]:
             continue  # the current week joins the history once finished
         out.append({
             "week_key": week.week_key,
@@ -234,6 +282,8 @@ def challenge_answer(request):
     with transaction.atomic():
         lock_learner(request.user)
         week = get_or_create_week()
+        if week is None:
+            return JsonResponse({"error": "There is no challenge this week."}, status=404)
         if data["question_id"] not in week.question_ids:
             return JsonResponse({"error": "This question is not part of this week's challenge."}, status=409)
         question = get_object_or_404(visible(Question).select_related("lesson"), pk=data["question_id"])
