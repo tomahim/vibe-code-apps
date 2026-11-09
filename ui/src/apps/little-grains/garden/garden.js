@@ -815,6 +815,14 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       if (seasonInfo && seasonInfo.days_since != null && (seasonInfo.state === 'autumn' || seasonInfo.state === 'winter')) {
         h += `<p class="lg-season ${seasonInfo.state}">${seasonIcon(seasonInfo.state)} Not practised for ${seasonInfo.days_since} days - a Review wakes this path up.</p>`;
       }
+      // Resume bar (Thomas, 2026-11-09): one tap back into the path, aimed at
+      // the same lesson the gold pennant flags - the first unfinished one.
+      // A finished path needs no resume, so the bar drops out there.
+      const nextIdx = trail.path.lessonData.findIndex((lesson) => !lessonFinished(lesson.progress));
+      if (nextIdx >= 0) {
+        const nextLesson = trail.path.lessonData[nextIdx], resuming = nextLesson.progress.started;
+        h += `<button class="lg-resume" data-resume="${nextIdx}" aria-label="${resuming ? 'Continue' : 'Start'} lesson ${nextIdx + 1}, ${esc(nextLesson.title)}">${ICON.play}<span>${resuming ? 'Continue' : 'Start'} lesson ${nextIdx + 1}</span></button>`;
+      }
       // Card dots sit on their own line below the name in every row; the
       // selected lesson's start action is the floating button at the
       // panel's right edge (wired below, positioned by placeFab).
@@ -895,6 +903,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     else if (b.dataset.theme) goTheme(Number(b.dataset.theme));
     else if (b.dataset.path) goPath(view.ti, Number(b.dataset.path));
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
+    else if (b.dataset.resume) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.resume)].id);
     else if (b.dataset.start) onOpenLesson?.(trail.path.lessonData[Number(b.dataset.start)].id);
     else if (b.dataset.recentToggle) { recentOpen = !recentOpen; renderPanel(); }
     else if (b.dataset.recent) onOpenLesson?.(b.dataset.recent);

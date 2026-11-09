@@ -164,8 +164,8 @@ test('garden, lesson progress and leaderboard use the API', async ({ page }) => 
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await page.getByRole('button', { name: /Start lesson/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
+  await page.getByRole('button', { name: 'Start lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await expect(reader.getByText('The bath water is')).toBeVisible();
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
@@ -294,8 +294,8 @@ test('a wrong answer opens another question at the checkpoint', async ({ page })
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await page.getByRole('button', { name: /Start lesson/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
+  await page.getByRole('button', { name: 'Start lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await reader.getByLabel('Cold', { exact: true }).check();
@@ -350,7 +350,7 @@ test('the selected lesson gets a floating start action at the panel right edge',
   await panel.locator('.lg-lessons button[data-lesson]').first().click();
   const selRow = panel.locator('.lg-lessons li.lg-selrow');
   await expect(selRow).toHaveCount(1);
-  const start = page.getByRole('button', { name: 'Start lesson' });
+  const start = page.getByRole('button', { name: 'Start lesson', exact: true });
   await expect(start).toBeVisible();
   // The detail block and the row carry no detached copy of the action.
   await expect(panel.locator('button[data-start]')).toHaveCount(0);
@@ -384,8 +384,8 @@ test('previous cards are read-only and return to the current step', async ({ pag
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
-  await page.getByRole('button', { name: /Start lesson/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
+  await page.getByRole('button', { name: 'Start lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await expect(reader.getByText('Dry gently')).toBeVisible();
@@ -412,7 +412,7 @@ test('a completed lesson replays cards and questions without rereading progress'
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
   await panel.getByRole('button', { name: /Read lesson/ }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await expect(reader.getByText('Warm water')).toBeVisible();
@@ -445,7 +445,7 @@ test('phone replay asks for a full typed answer and rotates after a wrong answer
   const panel = page.locator('.lg-panel');
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
   await panel.getByRole('button', { name: /Read lesson/ }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
@@ -704,10 +704,10 @@ test('refresh restores the theme, path, selected lesson and card from the URL', 
   await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}`, { timeout: 15000 });
   await page.reload();
   await expect(panel.getByRole('heading', { name: 'Early Childhood English' })).toBeVisible();
-  await panel.getByRole('button', { name: /Bath time and care/ }).click();
+  await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
   await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}`);
   await page.reload();
-  await page.getByRole('button', { name: 'Start lesson' }).click();
+  await page.getByRole('button', { name: 'Start lesson', exact: true }).click();
   await expect(page.locator('.grains-reader')).toBeVisible();
   await expect(page).toHaveURL(`/apps/little-grains/theme/${id.theme}/path/${id.path}/lesson/${id.lesson}/card/${id.card}`);
   await page.reload();
