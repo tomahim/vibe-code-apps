@@ -1,0 +1,21 @@
+id: ffe083ea-7f4b-477a-8e7f-18b3f86386c1
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle séquence décrit une consigne bien conduite selon le manuel ?
+choices:
+- id: a8d68989-4b10-4e70-a605-d9d70749d113
+  text: Rappel des signes en surface, signe en face du masque, vérification de l'exécution,
+    refait en face si besoin.
+- id: 78b1ffbc-d629-488d-937d-31a0e0eb06de
+  text: Signe au hasard, puis on oublie.
+- id: 08c08d1a-a523-4531-b449-bf39184b0d3b
+  text: Consigne écrite sur le carnet après la plongée.
+- id: ee6e4881-f954-4a8f-b9e6-d0aae2445204
+  text: Cri sous l'eau puis remontée.
+correct_choice_ids:
+- a8d68989-4b10-4e70-a605-d9d70749d113
+explanation: 'Une consigne bien conduite : signes rappelés en surface, signe donné
+  en face du masque, exécution vérifiée, signe refait en face si nécessaire.'
+archived: false

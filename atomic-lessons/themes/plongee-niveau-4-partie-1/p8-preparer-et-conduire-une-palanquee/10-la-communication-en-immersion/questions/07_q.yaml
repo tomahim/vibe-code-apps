@@ -1,0 +1,21 @@
+id: d6663ce8-71d1-40a7-af49-9f2f7e0b545e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi un signe fait sur le côté est-il inefficace ?
+choices:
+- id: 2cb078f0-8048-40bf-9c07-4629bbf03bde
+  text: 'Il sort du champ de vision rétréci du destinataire : la consigne n''existe
+    que si elle est vue.'
+- id: 89e8837d-c8d5-4bde-bc6e-e79f05094bba
+  text: Il fait peur aux poissons.
+- id: 3f45fff1-79b9-4f8e-9ba9-afe8e1eb410f
+  text: Il consomme trop d'air.
+- id: f5f483df-4034-4305-b701-6ff1104336d6
+  text: Il est interdit par le code du sport.
+correct_choice_ids:
+- 2cb078f0-8048-40bf-9c07-4629bbf03bde
+explanation: Un signe fait sur le côté, même correct, sort du champ de vision rétréci
+  du destinataire.
+archived: false

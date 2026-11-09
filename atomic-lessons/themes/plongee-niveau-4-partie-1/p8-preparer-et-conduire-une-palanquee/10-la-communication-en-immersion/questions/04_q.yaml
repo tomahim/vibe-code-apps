@@ -1,0 +1,21 @@
+id: bb2332fe-e022-4aa9-8a40-f995727d1c75
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pour regarder autour de soi en plongée, que faut-il faire, selon le manuel
+  ?
+choices:
+- id: e21cb7cb-1b88-438e-927f-c8231420a4c9
+  text: 'Pivoter sur soi : tourner la tête ne suffit pas.'
+- id: a5dae393-dad3-4fd9-849e-e37810a935a6
+  text: Fermer un œil.
+- id: c5f94c39-0682-4468-9776-39bb3ac7e0ea
+  text: Retirer son masque.
+- id: bc609fba-c3be-4f3b-a0e9-bc2ecd0e00d8
+  text: Monter en surface.
+correct_choice_ids:
+- e21cb7cb-1b88-438e-927f-c8231420a4c9
+explanation: Pour regarder autour de soi, tourner la tête ne suffit pas, il faut pivoter
+  sur soi.
+archived: false

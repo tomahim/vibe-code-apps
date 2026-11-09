@@ -1,0 +1,20 @@
+id: 82fbcaba-f6f2-4087-a41f-8671a1a1f2b9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le guide sait-il qu'une consigne est acquise ?
+choices:
+- id: 807aec95-cb1c-441b-8008-593f2b855a9b
+  text: Lorsqu'elle est exécutée ; sinon, il se replace en face du masque et la refait.
+- id: eaea44fd-2cbe-43e2-99b3-cbc219ebcbb8
+  text: Lorsqu'elle est prononcée.
+- id: 6e8eb173-9b36-445b-8f6d-a7981e039ff5
+  text: Lorsque la plongée est finie.
+- id: a12c3119-66e8-443d-94fe-a342bd8bb6b8
+  text: Il ne le sait jamais.
+correct_choice_ids:
+- 807aec95-cb1c-441b-8008-593f2b855a9b
+explanation: 'La consigne n''est acquise que lorsqu''elle est exécutée : si un signe
+  ne produit pas l''action attendue, le guide se replace en face du masque et le refait.'
+archived: false
