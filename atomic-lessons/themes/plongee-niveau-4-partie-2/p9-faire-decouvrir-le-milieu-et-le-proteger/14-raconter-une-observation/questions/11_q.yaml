@@ -1,0 +1,22 @@
+id: 9a3d614e-f951-4fdd-afa7-47b14861fc0c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles scènes de vie le manuel cite-il comme observations marquantes ?
+choices:
+- id: 509671eb-f430-4c50-b9be-b537c629ae50
+  text: Les mérous qui se frôlent en période des amours, la girelle qui suit le rouget,
+    le poisson-perroquet qui croque le corail.
+- id: 8d82008a-ce05-47b9-9e33-c0ae67af7b01
+  text: Les requins qui attaquent les plongeurs.
+- id: db1e6a9b-1c25-41c5-86d7-f54384964908
+  text: Les orques qui encerclent les bateaux.
+- id: f4ea66fd-43cf-44cb-8b3d-0f71f3351db4
+  text: Les dauphins qui portent les plongeurs en détresse.
+correct_choice_ids:
+- 509671eb-f430-4c50-b9be-b537c629ae50
+explanation: 'Selon le manuel : les mérous qui se frôlent pendant la période des amours,
+  la girelle qui profite des particules déterrées par un rouget, le poisson-perroquet
+  qui croque le corail et rejette le squelette calcaire.'
+archived: false

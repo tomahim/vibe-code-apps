@@ -1,0 +1,21 @@
+id: d022de81-d756-4576-87e1-694d0c51937b
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel caractère visible distingue d'emblée un crustacé, selon le manuel ?
+choices:
+- id: 2a022b37-0c48-4462-af5a-a24204e6e18d
+  text: Son corps recouvert d'une croûte.
+- id: 86d215a8-8c71-42b1-a2cb-8c954b6529e1
+  text: Ses branchies à nu et colorées.
+- id: 3d4bdca6-369f-41e0-8233-f8ddd013b61a
+  text: Sa coquille unique spiralée.
+- id: 5d4970eb-a547-47e9-881e-1508878e679c
+  text: Ses deux coquilles articulées.
+correct_choice_ids:
+- 2a022b37-0c48-4462-af5a-a24204e6e18d
+explanation: Le corps recouvert d'une croûte est le caractère qui a donné leur nom
+  aux crustacés ; les mollusques se reconnaissent à leurs coquilles ou à leur corps
+  mou.
+archived: false

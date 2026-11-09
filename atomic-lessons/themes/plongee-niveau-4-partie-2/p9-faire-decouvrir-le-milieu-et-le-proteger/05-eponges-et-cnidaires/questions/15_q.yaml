@@ -1,0 +1,21 @@
+id: fc8d3c9a-abb1-406e-aa90-9eafb873a41d
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels sont les deux premiers groupes d'invertébrés détaillés par le manuel
+  ?
+choices:
+- id: 85cf79cf-ed77-4553-a907-6e797c76ffda
+  text: Les éponges et les cnidaires.
+- id: bcfc309d-6a9b-4a6e-8544-c0b522f7eb0a
+  text: Les poissons et les mammifères.
+- id: 86cd1336-a72b-467a-a76d-e93d3fd1f7cc
+  text: Les algues et les plantes.
+- id: a51a3df0-d118-423b-a05d-cab3c9a783e3
+  text: Les oiseaux et les reptiles.
+correct_choice_ids:
+- 85cf79cf-ed77-4553-a907-6e797c76ffda
+explanation: Après le règne végétal, le manuel ouvre le règne animal par les invertébrés,
+  en commençant par les éponges puis les cnidaires.
+archived: false

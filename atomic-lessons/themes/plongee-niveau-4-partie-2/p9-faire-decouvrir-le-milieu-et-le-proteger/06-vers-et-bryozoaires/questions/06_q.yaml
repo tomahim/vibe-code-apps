@@ -1,0 +1,22 @@
+id: bd65f467-b9ba-4398-8194-a8b5c16d2539
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelles règles d'approche le manuel applique-t-il à ces organismes fixés ?
+choices:
+- id: b2cd3f38-700e-4a31-bdf6-5545d275d059
+  text: Ne pas couper le courant qui les alimente, ne pas s'interposer entre eux et
+    la lumière, approcher en douceur, éviter les lumières brusques ou intenses.
+- id: 59939f99-bccc-4295-b143-68e2013e8a10
+  text: Les toucher un par un pour vérifier qu'ils sont vivants.
+- id: 079c3108-6ab8-42c2-9a83-765a3eb21d95
+  text: Souffler des bulles dessus pour les faire sortir.
+- id: cf807d7c-5a82-4996-b34b-f42cfe68c2ae
+  text: Les photographier flash au maximum avant toute observation.
+correct_choice_ids:
+- b2cd3f38-700e-4a31-bdf6-5545d275d059
+explanation: 'Ces êtres utilisent le courant pour se nourrir et se rétractent à l''alerte
+  : le manuel demande de ne couper ni le courant ni la lumière, d''approcher en douceur
+  et d''éviter les éclairages brusques.'
+archived: false

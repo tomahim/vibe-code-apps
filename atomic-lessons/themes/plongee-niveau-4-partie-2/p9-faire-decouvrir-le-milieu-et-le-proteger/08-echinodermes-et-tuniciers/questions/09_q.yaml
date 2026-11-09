@@ -1,0 +1,20 @@
+id: 8652ffb7-5ac8-47d7-9563-5d763e69558d
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelle forme de tunicier est la plus visible en plongée, selon le manuel ?
+choices:
+- id: 2fea80bc-e0d2-4078-a4d6-d3a77ffe45a3
+  text: Les ascidies.
+- id: 080af1f5-3232-40d4-8aee-a65b6c8baa17
+  text: Les méduses.
+- id: 5d34aaec-6b0d-4d47-a47e-ad51f78724df
+  text: Les comatules.
+- id: f71ff829-bea8-4d54-8fa1-3e5480a9a9df
+  text: Les planaires.
+correct_choice_ids:
+- 2fea80bc-e0d2-4078-a4d6-d3a77ffe45a3
+explanation: Les ascidies sont les tuniciers fixés que le guide repère sur le rocher
+  et les parois.
+archived: false

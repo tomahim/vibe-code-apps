@@ -1,0 +1,20 @@
+id: 0c786b84-8c9b-4b0f-8258-fb7389390111
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi les crustacés portent-ils ce nom, selon le manuel ?
+choices:
+- id: 4268dcfb-4be5-491a-abda-7892dd560552
+  text: Parce que leur corps est recouvert d'une croûte.
+- id: f3caecdc-4fd9-4802-b9d3-8255e4a71a96
+  text: Parce qu'ils vivent dans la croûte terrestre.
+- id: bf871261-f4cf-4de3-8186-058e8735f58c
+  text: Parce qu'ils se nourrissent de croûtes de pain.
+- id: e2bc43ac-a1c9-46fb-842b-c5f8fe6f8a89
+  text: Parce qu'ils fabriquent des croûtes de corail.
+correct_choice_ids:
+- 4268dcfb-4be5-491a-abda-7892dd560552
+explanation: Selon le manuel, les crustacés, environ 30 000 espèces, sont ainsi appelés
+  parce que leur corps est recouvert d'une croûte.
+archived: false

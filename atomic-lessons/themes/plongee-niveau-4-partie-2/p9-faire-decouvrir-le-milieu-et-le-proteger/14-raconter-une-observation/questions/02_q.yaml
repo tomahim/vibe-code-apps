@@ -1,0 +1,20 @@
+id: ea693ec8-8863-4785-a8dc-6f8ee5504421
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle est la bonne ambition d'un récit d'observation, selon cette leçon ?
+choices:
+- id: f68965c7-a763-47c5-8b7c-1372fa492f03
+  text: Une explication courte, fiable et compréhensible.
+- id: c057f86a-ccaf-44e4-bb00-7ad2ca14c88b
+  text: Une démonstration scientifique exhaustive.
+- id: 222fd751-a858-48b5-b8d4-2c7035c89ec6
+  text: Un récit spectaculaire, même approximatif.
+- id: 1c920625-6318-4590-9c95-a7bb5642d346
+  text: Une liste de noms latins impressionnante.
+correct_choice_ids:
+- f68965c7-a763-47c5-8b7c-1372fa492f03
+explanation: 'L''attendu MFT est une réponse simple aux questions courantes : une
+  explication courte, fiable et compréhensible vaut mieux que l''érudition.'
+archived: false

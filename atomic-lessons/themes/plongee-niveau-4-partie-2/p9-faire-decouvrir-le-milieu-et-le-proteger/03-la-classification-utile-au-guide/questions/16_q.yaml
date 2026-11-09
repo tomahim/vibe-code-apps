@@ -1,0 +1,23 @@
+id: db927985-6f15-48e2-a25b-621dfa90c517
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle est, selon cette leçon, la bonne ambition d'un guide en matière de
+  classification ?
+choices:
+- id: 3194d558-3b3c-407f-8e03-3d91ba4ae6c5
+  text: Utiliser les clefs visibles, noter ses observations et donner noms communs
+    et explications simples.
+- id: fe127650-a861-4ba9-b1a3-4424b0d53c4b
+  text: Mémoriser le nom latin de toutes les espèces du monde.
+- id: dae5b604-0d64-4d9d-bef3-f5f175e35d1c
+  text: Refuser toute question de la palanquée faute de certitude absolue.
+- id: 880644ce-daae-4b5c-ac80-6eb3ac34de59
+  text: Classer chaque plongeur selon son niveau taxinomique.
+correct_choice_ids:
+- 3194d558-3b3c-407f-8e03-3d91ba4ae6c5
+explanation: 'Le guide vise l''utile : clefs visibles (bouche, nageoires, rayures,
+  ocelle), traces d''observation (plaquettes, kit d''exploration) et réponses simples
+  en noms communs pour sa palanquée.'
+archived: false

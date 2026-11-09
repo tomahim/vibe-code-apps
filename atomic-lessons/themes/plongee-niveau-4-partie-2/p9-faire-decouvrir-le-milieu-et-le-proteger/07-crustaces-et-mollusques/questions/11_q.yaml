@@ -1,0 +1,20 @@
+id: 2a269cc0-952f-4cde-93e3-83281b465f6c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que signifie « opisthobranche », selon l'étymologie donnée par le manuel ?
+choices:
+- id: 290306e7-fbc3-4895-87e7-a9ac8170d70d
+  text: '« En arrière » : leurs branchies sont sur l''arrière du cœur.'
+- id: ae0e6be5-44a0-434d-aaa1-2e3847515212
+  text: '« Sans coquille » : ils n''ont aucune protection.'
+- id: b2e2c92c-b753-42cb-a6e7-8b54ef74154c
+  text: '« À deux têtes » : ils regardent des deux côtés.'
+- id: b762a7a8-7beb-40df-a42c-cbaf0a2e0f6a
+  text: '« De nuit » : ils ne sortent qu''à la tombée du jour.'
+correct_choice_ids:
+- 290306e7-fbc3-4895-87e7-a9ac8170d70d
+explanation: 'Du grec opisthen, « en arrière » : le manuel explique que leurs branchies
+  sont sur l''arrière du cœur. Ce sont les limaces au sens large.'
+archived: false

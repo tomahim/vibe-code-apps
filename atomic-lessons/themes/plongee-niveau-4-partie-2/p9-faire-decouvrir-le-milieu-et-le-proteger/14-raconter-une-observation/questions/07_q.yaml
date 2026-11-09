@@ -1,0 +1,21 @@
+id: 99cb5e5f-ef89-4879-ae0e-b52d6ca40b09
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le MFT à propos de DORIS ?
+choices:
+- id: f328e860-5a1e-4051-8279-950a3c6ab961
+  text: 'Le guide doit connaître la charte du plongeur responsable et les sites ressources
+    : DORIS, etc.'
+- id: 94d88523-8b3f-4a14-bde9-8cc068336eee
+  text: DORIS est le nom du manuel fédéral officiel.
+- id: 7be48e40-6cd9-4b21-a6da-143e0dda0f24
+  text: DORIS est une application de calcul de décompression.
+- id: 0d41a170-13f6-400b-b804-d1d1117ebcd8
+  text: DORIS est une marque de combinaisons.
+correct_choice_ids:
+- f328e860-5a1e-4051-8279-950a3c6ab961
+explanation: 'Selon le MFT (mai 2026), le plongeur niveau 4 doit connaître la charte
+  du plongeur responsable et les sites ressources : DORIS, etc.'
+archived: false

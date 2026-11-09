@@ -1,0 +1,21 @@
+id: ab92b52f-6ac4-4d0a-bd99-dc254463b419
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles sont les interdictions de la charte en plongée ?
+choices:
+- id: 8ee74a7b-675f-4bda-b916-b21b32555b24
+  text: Pas de contact avec plantes et animaux fixés, pas de prélèvement, pas de harcèlement,
+    pas de nourrissage.
+- id: f9cac70b-944f-4b10-a82c-51c73e49a504
+  text: Pas de palmes, pas de lampe, pas de combinaison, pas de gilet.
+- id: 6c139e37-1d8d-4943-acd7-2d17f2b74846
+  text: Pas de photos, pas de vidéos, pas de croquis, pas de notes.
+- id: a492a568-4a6b-44cd-916c-8a584deab9fc
+  text: Pas de descente, pas de paliers, pas de remontée, pas de surface.
+correct_choice_ids:
+- 8ee74a7b-675f-4bda-b916-b21b32555b24
+explanation: 'Selon la charte, en plongée : éviter le contact avec plantes et animaux
+  fixés, ne prélevez rien, ne harcelez pas les animaux, évitez de nourrir les poissons.'
+archived: false

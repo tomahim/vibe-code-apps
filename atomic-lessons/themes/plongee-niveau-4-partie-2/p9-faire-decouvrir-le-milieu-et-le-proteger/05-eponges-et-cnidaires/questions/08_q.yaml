@@ -1,0 +1,20 @@
+id: 6e5658ea-6bc6-451d-a11e-cd48741f3928
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle démarche générale cet exemple éponge-nudibranche illustre-t-il ?
+choices:
+- id: 366a4120-5319-400b-a7f8-35124443ec60
+  text: Chercher la nourriture d'un animal est souvent la meilleure façon de le trouver.
+- id: 03c5ff9d-f2b1-4e75-9894-a99ffac74bdb
+  text: Il faut toujours remonter en surface pour trouver les animaux.
+- id: 1b2e5407-0751-48cf-91eb-47b0830b0a03
+  text: Les animaux se trouvent uniquement par hasard.
+- id: ab3f1312-3678-4fc2-bac6-0f6727912fed
+  text: Il faut déplacer les éponges pour faire sortir les nudibranches.
+correct_choice_ids:
+- 366a4120-5319-400b-a7f8-35124443ec60
+explanation: 'C''est la logique d''écosystème du manuel : repérer la ressource (nourriture,
+  habitat) d''une espèce rapproche de l''espèce elle-même.'
+archived: false

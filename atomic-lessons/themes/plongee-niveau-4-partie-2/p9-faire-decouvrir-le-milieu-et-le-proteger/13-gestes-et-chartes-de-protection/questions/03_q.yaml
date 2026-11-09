@@ -1,0 +1,21 @@
+id: e36f977e-d235-4421-b0a9-d71f57551bc5
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que conseille la charte à un plongeur qui n'a pas plongé depuis longtemps
+  ?
+choices:
+- id: 776dd96d-b8f1-4c29-8eca-48b5d84c1b20
+  text: 'S''entraîner à gérer sa flottabilité : poumon-ballast, gilet, lestage optimal.'
+- id: 3ff2daf3-c7af-4c94-9535-8d1f4f237b4f
+  text: Plonger directement à 40 mètres pour se remettre à niveau.
+- id: c5b377af-63d1-4ab9-a4b2-b979a64b32de
+  text: Changer immédiatement tout son matériel.
+- id: 42676fb1-98a4-4502-aab5-96fb9103030b
+  text: Arrêter définitivement la plongée.
+correct_choice_ids:
+- 776dd96d-b8f1-4c29-8eca-48b5d84c1b20
+explanation: 'Selon la charte, si vous n''avez pas plongé depuis longtemps, entraînez-vous
+  à gérer votre flottabilité : poumon-ballast, gilet, lestage optimal.'
+archived: false

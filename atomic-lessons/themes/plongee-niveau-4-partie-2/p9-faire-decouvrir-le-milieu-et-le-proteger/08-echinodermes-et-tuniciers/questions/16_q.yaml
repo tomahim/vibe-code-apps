@@ -1,0 +1,22 @@
+id: f99996a5-0d48-453c-88ba-f5b4de3179f0
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel point commun à retenir entre échinodermes et tuniciers pour la palanquée
+  ?
+choices:
+- id: 535dfd52-b598-426e-9251-876b476f2fc4
+  text: Ce sont des invertébrés du fond, identifiables par leur silhouette, sans taxonomie
+    exhaustive.
+- id: a0bfff41-5c36-492d-8c66-52ce318fc1e2
+  text: Ce sont tous des poissons déguisés.
+- id: 0486e1a7-ed52-4369-9b5d-1ceb26d75aad
+  text: Ils ne vivent que sous les tropiques.
+- id: 90347493-4912-46cd-b42a-ad7e2935fad5
+  text: Ils sont tous dangereux au toucher.
+correct_choice_ids:
+- 535dfd52-b598-426e-9251-876b476f2fc4
+explanation: 'Le guide retient des silhouettes : l''étoile et l''ophiure, l''oursin
+  et le concombre de mer, la comatule plumeuse, l''ascidie solitaire ou coloniale.'
+archived: false

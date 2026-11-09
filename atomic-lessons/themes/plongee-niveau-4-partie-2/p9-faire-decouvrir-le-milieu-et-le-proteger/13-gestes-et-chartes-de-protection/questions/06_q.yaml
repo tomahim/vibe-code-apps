@@ -1,0 +1,22 @@
+id: d896d81f-30d8-4838-b9d4-de04682690a0
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que demande le MFT concernant le palmage du guide ?
+choices:
+- id: 67417881-252b-4cc3-8cb5-1700981db254
+  text: Adapter sa vitesse de palmage et choisir sa position par rapport aux plongeurs
+    guidés pour favoriser l'observation de chacun.
+- id: 019a418f-d726-4ed7-bb6c-e9e3b2e912b9
+  text: Palmer toujours en tête, quelle que soit la situation.
+- id: b92b4839-f205-4090-a304-01796de73140
+  text: Interdire aux plongeurs guidés de palmer eux-mêmes.
+- id: 6265876c-5849-41e4-9572-e241f7b8bea7
+  text: Imposer une vitesse unique à toutes les plongées.
+correct_choice_ids:
+- 67417881-252b-4cc3-8cb5-1700981db254
+explanation: Selon le MFT (mai 2026), le guide adapte sa vitesse de palmage et choisit
+  sa position par rapport aux plongeurs guidés, afin de favoriser l'observation de
+  chacun.
+archived: false

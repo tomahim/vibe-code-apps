@@ -1,0 +1,19 @@
+id: 556a3fc4-596b-4404-85d5-f554a3416a1f
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que forment les espèces d'algues microscopiques, selon le manuel ?
+choices:
+- id: 59d8ead9-bf31-4d25-a3d0-6db158c63403
+  text: Le phytoplancton.
+- id: 7b60242b-671f-44f3-b39e-d633388edb07
+  text: Le coralligène.
+- id: 12068fca-0884-47ef-a33b-b79cdc53fcf4
+  text: Les herbiers.
+- id: f5bec3ec-21c3-4c3a-9ae3-164f52f4ebe5
+  text: Les mangroves.
+correct_choice_ids:
+- 59d8ead9-bf31-4d25-a3d0-6db158c63403
+explanation: 'Certaines espèces d''algues sont microscopiques : elles forment le phytoplancton.'
+archived: false

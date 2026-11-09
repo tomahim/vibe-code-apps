@@ -1,0 +1,22 @@
+id: 1df53c91-1eea-469c-9439-6f689b4baf87
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels outils le manuel cite-il pour noter une observation pendant la plongée
+  ?
+choices:
+- id: 868a1da7-ac26-4fd2-b7be-d1d9f873192a
+  text: Les plaquettes immergeables et le kit d'exploration (carnet, ardoise).
+- id: 086c3e6a-066c-4513-8154-7cbbc6ec3f4d
+  text: Le smartphone étanche et ses applications.
+- id: 099ef010-8e44-409a-ae3d-d9d9bdac7088
+  text: La radio sous-marine et le drone.
+- id: 6b0f4a13-c2ed-42fa-bb74-b52f206e31e8
+  text: Le compas et le profondimètre.
+correct_choice_ids:
+- 868a1da7-ac26-4fd2-b7be-d1d9f873192a
+explanation: 'Selon le manuel : des plaquettes immergeables pour identifier, et le
+  kit d''exploration (carnet, ardoise) de la FFESSM et Longitude 181 pour recenser
+  les espèces et en conserver une trace.'
+archived: false

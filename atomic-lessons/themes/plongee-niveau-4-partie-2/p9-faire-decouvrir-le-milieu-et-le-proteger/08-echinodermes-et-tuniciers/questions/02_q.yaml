@@ -1,0 +1,20 @@
+id: 279e202a-b714-475f-819d-2f8f937d3e26
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Sur quels fonds le guide montre-t-il les échinodermes, selon cette leçon ?
+choices:
+- id: 406b0912-d82b-4a42-adb1-49d6ffd4fa47
+  text: Sur le rocher, le sable ou le coralligène.
+- id: 99ca9997-8fb1-4ff2-a2a9-b85a1a2a3d64
+  text: Uniquement en pleine eau.
+- id: 357cb91b-0635-4943-a806-82225135a6e6
+  text: Uniquement à la surface de nuit.
+- id: 8e383d90-7a31-46f2-9998-e09671f6b878
+  text: Uniquement dans les grottes profondes.
+correct_choice_ids:
+- 406b0912-d82b-4a42-adb1-49d6ffd4fa47
+explanation: Les échinodermes illustrés par le manuel sont des animaux du fond, visibles
+  sur le rocher, le sable ou le coralligène.
+archived: false

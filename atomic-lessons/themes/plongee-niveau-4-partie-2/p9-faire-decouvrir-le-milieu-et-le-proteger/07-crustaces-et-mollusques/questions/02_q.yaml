@@ -1,0 +1,19 @@
+id: 65625bcb-b3d9-452a-8f0e-6e4915e85f54
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Combien d'espèces de crustacés le manuel cite-t-il ?
+choices:
+- id: 6e1ff535-fb1f-49d3-8474-f60b25cfb671
+  text: Environ 30 000 espèces.
+- id: 54928356-bc8d-49f7-9a1b-8039d1cf8299
+  text: Environ 3 000 espèces.
+- id: 5c84f372-60d0-4fe1-aa80-17c6f0d3de7e
+  text: Environ 300 000 espèces.
+- id: 777f6163-ee4e-49f5-adf8-65b7bdeac54d
+  text: Environ 300 espèces.
+correct_choice_ids:
+- 6e1ff535-fb1f-49d3-8474-f60b25cfb671
+explanation: Le manuel indique environ 30 000 espèces de crustacés.
+archived: false

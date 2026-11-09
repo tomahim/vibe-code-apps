@@ -1,0 +1,19 @@
+id: 2931b9b5-a827-4c11-85c9-6df7d4e11952
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel exemple de commensalisme le manuel donne-t-il ?
+choices:
+- id: b08b1aff-31d0-4656-9d68-84163177d5b1
+  text: L'anémone et le bernard-l'ermite.
+- id: f3a5a141-f34e-4cf8-98fb-bdf3c9f6ce36
+  text: Le requin et le plongeur.
+- id: da5084f0-81b4-4a8e-be9b-4bfabd9de399
+  text: La méduse et la moule.
+- id: 086c19f4-7d85-41e5-b88e-13ad320f2a72
+  text: Le sar et le gobie.
+correct_choice_ids:
+- b08b1aff-31d0-4656-9d68-84163177d5b1
+explanation: Le manuel illustre le commensalisme par l'anémone et le bernard-l'ermite.
+archived: false

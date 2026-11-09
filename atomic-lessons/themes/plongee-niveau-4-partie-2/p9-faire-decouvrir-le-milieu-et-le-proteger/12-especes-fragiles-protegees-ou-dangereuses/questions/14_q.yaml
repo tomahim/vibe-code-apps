@@ -1,0 +1,22 @@
+id: 77f6e436-54a5-4afe-b9f5-c2695bd2c802
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que montre l'exemple de Cap Canaveral, selon le manuel ?
+choices:
+- id: 4e1115c6-0499-4798-adbb-504cc66882b5
+  text: 'Une zone interdite pour d''autres raisons est devenue extrêmement poissonneuse
+    : la protection totale est efficace pour le repeuplement.'
+- id: a821d549-83e5-4a6e-9a98-a57bcaa294e9
+  text: Les fusées polluent définitivement les océans.
+- id: 8aaa33cb-7e8b-40ab-9ed5-e73ffebbac39
+  text: La pêche y est devenue la meilleure du monde.
+- id: 79a71b92-cc7a-4c42-b7ce-8c46201b775a
+  text: Les aires protégées ne servent à rien.
+correct_choice_ids:
+- 4e1115c6-0499-4798-adbb-504cc66882b5
+explanation: Selon le manuel, la zone interdite de Cap Canaveral est devenue extrêmement
+  poissonneuse ; en à peine trois ans, certaines espèces sont capables de renverser
+  la tendance.
+archived: false

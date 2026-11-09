@@ -1,0 +1,20 @@
+id: c75458ad-fc2b-4fb1-86c4-25eba6b8cf97
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Combien d'espèces de raies le manuel cite-t-il ?
+choices:
+- id: bc654044-86a4-4fa7-a6aa-2a0d5e00e076
+  text: Environ 450 espèces.
+- id: 74084f4d-3c95-4b14-990a-0b37537726da
+  text: Environ 45 espèces.
+- id: 87e03854-6c6a-49a4-a6a4-32ca344d05b7
+  text: Environ 4 500 espèces.
+- id: 46cd35f0-4f4d-4227-980a-8453875c3945
+  text: Environ 4 espèces.
+correct_choice_ids:
+- bc654044-86a4-4fa7-a6aa-2a0d5e00e076
+explanation: Selon le manuel, il existe environ 450 espèces de raies ; le livre illustre
+  notamment la raie manta.
+archived: false

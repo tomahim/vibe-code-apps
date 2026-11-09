@@ -1,0 +1,23 @@
+id: 22e95551-6a01-4995-a09d-761fe4c5e0bd
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qui a mis en place le kit d'exploration cité par le manuel, et dans quel but
+  ?
+choices:
+- id: bfde3583-5740-4c21-aab7-669c2b9dffb6
+  text: La FFESSM et Longitude 181, pour recenser les espèces rencontrées et en conserver
+    une trace.
+- id: 7053a663-8a34-4923-93f3-0cde6d176adc
+  text: Les fabricants de détendeurs, pour tester le matériel.
+- id: 9fa7994d-4d0f-4d98-ad5a-48ced626cc2c
+  text: Les assureurs, pour vérifier les déclarations d'accident.
+- id: 7b1fc75f-3192-442f-8a13-5f95d8bfd593
+  text: Les capitaines de navire, pour contrôler les palanquées.
+correct_choice_ids:
+- bfde3583-5740-4c21-aab7-669c2b9dffb6
+explanation: La FFESSM et Longitude 181 ont mis en place un kit d'exploration (carnet,
+  ardoise) pour recenser les espèces rencontrées durant la plongée et en conserver
+  une trace.
+archived: false

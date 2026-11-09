@@ -1,0 +1,22 @@
+id: f20d1480-3421-4fc8-aadc-1b14cade72cb
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi les mérous géants étaient-ils faciles à attraper, selon Jean-Michel
+  Cousteau cité par le manuel ?
+choices:
+- id: 98aa3fd7-9558-4fe4-afc9-4f622476bebc
+  text: Parce qu'ils se regroupaient pour se reproduire, et il fallait les laisser
+    en paix.
+- id: 0d006d90-c83c-4624-8715-c9c18de14094
+  text: Parce qu'ils dormaient profondément en surface.
+- id: 47cef082-0fe6-441b-9f6f-cc2858b61f64
+  text: Parce qu'ils étaient attirés par les hameçons brillants.
+- id: 5666ee19-b4ae-43ff-96e6-4c367800b7e0
+  text: Parce qu'ils ne savaient pas nager.
+correct_choice_ids:
+- 98aa3fd7-9558-4fe4-afc9-4f622476bebc
+explanation: Selon le récit du manuel, les pêcheurs n'avaient pas compris que, quand
+  les mérous étaient faciles à attraper, c'est qu'ils se regroupaient pour se reproduire.
+archived: false

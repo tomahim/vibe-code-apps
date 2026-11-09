@@ -1,0 +1,20 @@
+id: 8c87dc14-e85f-4e91-bf61-3d27f60cf1f2
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelles familles tropicales le manuel illustre-t-il ?
+choices:
+- id: e585254a-c5b8-4d33-8ffd-9f04ac07d8fd
+  text: Poissons-ange, balistes, poissons-chirurgiens, poissons-perroquets, poissons-papillons.
+- id: 9f7e83fc-f5ac-44b3-b3b3-f0f3f7e850b8
+  text: Sars, dorades, oblades, tacauds.
+- id: c94a653a-bc2d-4548-871f-4879c2194c38
+  text: Requins, raies, chimères.
+- id: 1f6b82ab-6616-4e5c-b069-89bee7431eb2
+  text: Truites, carpes, brochets.
+correct_choice_ids:
+- e585254a-c5b8-4d33-8ffd-9f04ac07d8fd
+explanation: Les planches tropicales du manuel montrent poissons-ange, balistes, poissons-chirurgiens,
+  poissons-perroquets et poissons-papillons, entre autres.
+archived: false

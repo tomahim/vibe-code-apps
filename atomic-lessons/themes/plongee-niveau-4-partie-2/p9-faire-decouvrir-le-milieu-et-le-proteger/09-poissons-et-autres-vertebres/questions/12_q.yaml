@@ -1,0 +1,20 @@
+id: 3b34f807-8547-4d6c-90aa-4f97e865157f
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles « formes étonnantes » le manuel présente-t-il ?
+choices:
+- id: 01ff58ad-1e26-446f-9625-582ed39d5bfa
+  text: Le poisson-rasoir, l'hippocampe pygmée, le poisson-fantôme.
+- id: 3b6514ed-5b54-4aa8-98a3-6bb9b0b01aa0
+  text: Le requin-marteau, le poulpe géant, le calmar colossal.
+- id: 8a460ab7-eca7-4e3b-be73-235edd592e85
+  text: La limace de jardin, le ver de terre, l'escargot.
+- id: cb536bf2-60b4-412f-b75f-22638ef0524f
+  text: Le dauphin, le phoque, la loutre.
+correct_choice_ids:
+- 01ff58ad-1e26-446f-9625-582ed39d5bfa
+explanation: Le manuel illustre comme formes étonnantes le poisson-rasoir, l'hippocampe
+  pygmée et le poisson-fantôme.
+archived: false

@@ -1,0 +1,23 @@
+id: 33c012c8-5be7-4642-87de-381b665b4826
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles espèces fréquentes d'Atlantique et de Méditerranée le manuel illustre-t-il
+  ?
+choices:
+- id: b17af211-f013-486c-80d9-a11854d28801
+  text: Sar, oblade, dorade royale, corb, denti, rouget, girelle, castagnole, triptérygion,
+    tacauds.
+- id: 609e9d05-bda0-4256-bec1-70cd0ee87f5f
+  text: Requin blanc, orque, baleine bleue.
+- id: 49a0c1ab-4ee9-43df-b1a5-7ac13262e663
+  text: Piranha, poisson-chat, esturgeon.
+- id: 463f22d8-8c4e-4f7b-a03b-bbd6ad8540ef
+  text: Thon rouge, espadon, marlin uniquement.
+correct_choice_ids:
+- b17af211-f013-486c-80d9-a11854d28801
+explanation: Les planches du manuel montrent notamment sar à museau pointu, oblade,
+  dorade royale, sar à tête noire, sar tambour, corb, denti, rouget et girelle, castagnole,
+  triptérygion et tacauds.
+archived: false

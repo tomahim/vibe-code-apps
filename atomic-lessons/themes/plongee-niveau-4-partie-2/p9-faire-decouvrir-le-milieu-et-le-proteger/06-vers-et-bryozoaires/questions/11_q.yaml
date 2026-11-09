@@ -1,0 +1,20 @@
+id: b6d4f00b-e2ed-47e1-a97c-5214ed376585
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels exemples de bryozoaires le manuel photographie-t-il ?
+choices:
+- id: 3b7bda76-ddaa-45f2-9503-1ce1ca673813
+  text: La dentelle de Neptune et le « faux corail ».
+- id: 5488bc4d-4257-41c6-9e3f-1df12e7b207f
+  text: La gorgone et la pennatule.
+- id: e8b5b0ea-0e58-4434-a858-df4879964144
+  text: L'huître et la moule.
+- id: 667e068a-c24d-47cd-ab8f-6f866a47da23
+  text: Le poulpe et la seiche.
+correct_choice_ids:
+- 3b7bda76-ddaa-45f2-9503-1ce1ca673813
+explanation: Le manuel présente les bryozoaires par la dentelle de Neptune et le «
+  faux corail », organismes fixés en colonies aux formes délicates.
+archived: false

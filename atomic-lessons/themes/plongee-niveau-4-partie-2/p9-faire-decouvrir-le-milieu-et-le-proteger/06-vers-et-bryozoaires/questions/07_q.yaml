@@ -1,0 +1,20 @@
+id: 5fbdfc9a-f1fa-4574-960f-52bb9323d0a1
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le manuel nomme-t-il les vers plats ?
+choices:
+- id: 213f80ef-0844-47bd-8765-98ded5f66c07
+  text: Les plathelminthes.
+- id: b16bf635-5fb0-4851-bb2d-061d3ea7691e
+  text: Les madréporaires.
+- id: 78db0ca4-3a3f-4f52-aa12-5cfa9fbe4346
+  text: Les gastéropodes.
+- id: b09dc749-5adc-4c14-9077-d6f4b4890685
+  text: Les crinoïdes.
+correct_choice_ids:
+- 213f80ef-0844-47bd-8765-98ded5f66c07
+explanation: La planche du manuel montre les vers plats (plathelminthes), dont une
+  grande planaire.
+archived: false

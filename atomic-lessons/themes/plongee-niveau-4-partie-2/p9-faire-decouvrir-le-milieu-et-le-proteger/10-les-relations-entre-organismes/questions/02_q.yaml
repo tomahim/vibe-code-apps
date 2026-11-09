@@ -1,0 +1,21 @@
+id: e3a9da70-4763-45a2-a480-cee39c2b755e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi ces relations sont-elles utiles au guide, selon cette leçon ?
+choices:
+- id: af3cb887-8048-42d8-a9f0-289f40d2d379
+  text: Elles permettent de montrer et d'expliquer à la palanquée ce qu'elle observe
+    réellement.
+- id: b3a42005-0440-4f50-b866-77a175d2fdf3
+  text: Elles remplacent la lecture de la fiche de sécurité.
+- id: 3efb9da6-d2e6-48f1-a592-ae290ba20cb5
+  text: Elles dispensent de contrôler la consommation d'air.
+- id: e5df1f01-5203-4141-9f88-d76ea96d16c8
+  text: Elles servent uniquement à l'examen théorique écrit.
+correct_choice_ids:
+- af3cb887-8048-42d8-a9f0-289f40d2d379
+explanation: 'Le guide rencontre ces associations concrètement en plongée : savoir
+  les nommer et les raconter répond aux questions des plongeurs, comme le MFT l''attend.'
+archived: false

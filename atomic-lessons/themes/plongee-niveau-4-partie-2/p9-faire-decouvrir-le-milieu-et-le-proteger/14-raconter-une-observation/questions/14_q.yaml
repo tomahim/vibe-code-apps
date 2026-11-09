@@ -1,0 +1,21 @@
+id: c4d13d78-43cb-4cca-909b-9540cffce4f6
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Selon le MFT, que doit décrire le guide sur son site de plongée ?
+choices:
+- id: 58e8784e-b32b-423c-ae5e-bd9fbdb514a9
+  text: L'environnement du site (milieu marin ou eau douce), ainsi que sa faune et
+    sa flore.
+- id: 6066a3e6-2267-4a70-9a8b-23f8385b5afe
+  text: Uniquement la température de l'eau.
+- id: db214e17-d4e3-4afe-ba19-5e399728cfc9
+  text: Uniquement les dangers du site.
+- id: 1a583950-f322-4d3f-a56b-a4f5094a8c4c
+  text: Le prix des concessions de pêche.
+correct_choice_ids:
+- 58e8784e-b32b-423c-ae5e-bd9fbdb514a9
+explanation: Selon le MFT, le guide décrit l'environnement du site sur lequel il évolue
+  (milieu marin ou eau douce), ainsi que la faune et la flore.
+archived: false

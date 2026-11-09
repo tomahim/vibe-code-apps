@@ -1,0 +1,20 @@
+id: 919f5265-f1c0-4ac5-b100-4bdec9325a98
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quels autres vers le manuel illustre-t-il ?
+choices:
+- id: f418cda4-33f8-4afb-88a1-48f7c5d981eb
+  text: La bonellie et le ver de feu.
+- id: 41bedd5b-7401-4bc5-a7c8-e32fa6cef2f9
+  text: Le ver luisant et le ver polaire.
+- id: 79c7f490-ca46-4ddc-8873-a9b818c0c73f
+  text: L'ascidie et la comatule.
+- id: e07dcb2e-0e26-4be4-be6a-2cc086cdc09a
+  text: La seiche et le calmar.
+correct_choice_ids:
+- f418cda4-33f8-4afb-88a1-48f7c5d981eb
+explanation: La planche du manuel présente aussi la bonellie, au corps très allongé,
+  et le ver de feu, au corps segmenté bordé de soies.
+archived: false

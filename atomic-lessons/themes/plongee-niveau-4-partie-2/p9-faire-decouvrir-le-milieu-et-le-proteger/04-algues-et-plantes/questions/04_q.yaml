@@ -1,0 +1,20 @@
+id: 5513bc0b-a4e2-4383-bc6f-ce70d63ea6de
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le rôle du crampon chez une algue ?
+choices:
+- id: ad59a9d6-33da-4468-8b74-3786c0296075
+  text: S'agripper au rocher, sans fonction de racine absorbante.
+- id: 76e608c1-3ce3-4b8d-85f5-a09d28128a76
+  text: Puiser les nutriments dans le sol comme une racine.
+- id: a2285f7f-befa-4327-a1b8-8fac0cd54fe2
+  text: Conduire la sève vers les feuilles.
+- id: 69bbbf62-daf0-4db3-96df-363ebd3d2c5b
+  text: Produire les graines de l'algue.
+correct_choice_ids:
+- ad59a9d6-33da-4468-8b74-3786c0296075
+explanation: Le crampon ne permet que de s'agripper au rocher ; il n'a pas le rôle
+  nutritif des racines des plantes.
+archived: false

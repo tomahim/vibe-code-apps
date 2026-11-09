@@ -1,0 +1,21 @@
+id: 60fc279c-b113-4cb9-8699-ad94a7efc209
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Parmi les cnidaires, quelle règle d'approche le manuel rappelle-t-il pour
+  les formes fixées ?
+choices:
+- id: f855bc98-4cb8-4674-a985-c2ee841b2c8a
+  text: Ne pas couper le courant qui les alimente.
+- id: 24b3ed03-d9d9-4f63-b45a-46bb4839ba5b
+  text: Les toucher doucement pour les rassurer.
+- id: 795e7ac7-a9c7-48a2-be35-0715604e3611
+  text: Souffler dessus pour ouvrir leurs polypes.
+- id: 3a723c04-224a-4ba2-9ac3-79736d510e2f
+  text: Les éclairer en permanence à pleine puissance.
+correct_choice_ids:
+- f855bc98-4cb8-4674-a985-c2ee841b2c8a
+explanation: 'Une grande partie de ces êtres utilise le courant pour se nourrir :
+  le manuel demande de ne pas s''interposer entre eux et le courant.'
+archived: false

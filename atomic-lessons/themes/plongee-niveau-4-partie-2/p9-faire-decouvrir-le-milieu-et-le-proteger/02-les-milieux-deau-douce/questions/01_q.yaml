@@ -1,0 +1,21 @@
+id: 3ccf4162-63aa-481f-9cb1-84217a8a4f7f
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que signale cette leçon à propos du manuel Plongée Plaisir Niveau 4 ?
+choices:
+- id: 167e0d6a-399f-43c2-bc9d-30d7a608fbc8
+  text: Il ne consacre pas de section dédiée aux milieux d'eau douce dans son chapitre
+    sur le monde subaquatique.
+- id: e0d2dc4f-2b5c-4e6a-bb0d-5ba39a1fb6f2
+  text: Il interdit la plongée en eau douce aux plongeurs de niveau 4.
+- id: 92a9435b-d8bc-41b1-a740-08a24058aa80
+  text: Il décrit en détail les lacs, rivières et carrières de France.
+- id: 93124f3b-528c-4ec0-90aa-207e56b061b3
+  text: Il réserve la plongée en eau douce aux seuls moniteurs fédéraux.
+correct_choice_ids:
+- 167e0d6a-399f-43c2-bc9d-30d7a608fbc8
+explanation: Le manuel ne consacre pas de section dédiée aux milieux d'eau douce ;
+  la leçon rassemble ce que le livre en dit réellement et ce que le MFT attend.
+archived: false

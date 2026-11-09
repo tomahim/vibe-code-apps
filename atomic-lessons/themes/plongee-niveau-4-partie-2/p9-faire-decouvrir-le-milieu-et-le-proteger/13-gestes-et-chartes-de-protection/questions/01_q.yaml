@@ -1,0 +1,21 @@
+id: 85d7da0a-efcd-4196-b64f-8939d20e8b62
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qui édite la charte internationale du plongeur responsable reproduite par
+  le manuel ?
+choices:
+- id: 90b78d5b-7638-4cde-b919-c3fde402f64b
+  text: Longitude 181.
+- id: a0a207d5-58fa-493b-be76-22aa5e7ad6a7
+  text: La FFESSM seule.
+- id: 5fa41648-0406-49fe-969e-4fa2e845155f
+  text: L'UNESCO.
+- id: ff1aba98-32e2-4e3d-a254-ee34cf2800ec
+  text: Le ministère des Sports.
+correct_choice_ids:
+- 90b78d5b-7638-4cde-b919-c3fde402f64b
+explanation: Le manuel reproduit la charte internationale du plongeur responsable
+  de Longitude 181 (www.longitude181.com), en six volets.
+archived: false

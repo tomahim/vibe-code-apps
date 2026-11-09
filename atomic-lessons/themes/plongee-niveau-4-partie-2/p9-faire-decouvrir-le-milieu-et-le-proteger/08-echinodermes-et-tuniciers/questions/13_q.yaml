@@ -1,0 +1,20 @@
+id: 73c5ece2-89da-4dbd-aa51-d09accc675e5
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelles formes d'ascidies le manuel distingue-t-il ?
+choices:
+- id: 7c8e941c-05d1-4430-955c-342c64ef6181
+  text: Solitaires ou coloniales.
+- id: 7398880d-76ac-4aaf-99ea-ac2e170fc607
+  text: Marines ou volantes.
+- id: 9c391392-e728-4380-af65-2f0804616094
+  text: Diurnes ou nocturnes uniquement.
+- id: aafb77bd-0f20-4fd1-948a-eef609613a22
+  text: Comestibles ou toxiques uniquement.
+correct_choice_ids:
+- 7c8e941c-05d1-4430-955c-342c64ef6181
+explanation: 'Selon le manuel, les ascidies peuvent être solitaires ou coloniales
+  : individu isolé bien dessiné, ou tapis et grappes de petits individus soudés.'
+archived: false

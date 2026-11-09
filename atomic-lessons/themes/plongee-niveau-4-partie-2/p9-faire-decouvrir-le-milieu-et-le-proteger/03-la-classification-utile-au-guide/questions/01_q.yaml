@@ -1,0 +1,21 @@
+id: b6da9ad9-b90d-4ec3-9c87-748c33975ece
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qui le manuel présente-t-il comme le père de la classification moderne des
+  espèces ?
+choices:
+- id: 9c55a850-92b6-481f-a3ef-894e61e24bc5
+  text: Carl von Linné.
+- id: 1b6e2387-8c21-4f21-9fc2-5cb5643d1143
+  text: Charles Darwin.
+- id: e85215a9-34c5-441e-b577-9693914e0fe0
+  text: Jean-Michel Cousteau.
+- id: ca86fad4-c6d8-45ce-bec7-6cd33e825dbb
+  text: Aristote.
+correct_choice_ids:
+- 9c55a850-92b6-481f-a3ef-894e61e24bc5
+explanation: Selon le manuel, le naturaliste suédois Carl von Linné établit en 1758
+  une classification globale visant à attribuer un nom unique à chaque organisme vivant.
+archived: false

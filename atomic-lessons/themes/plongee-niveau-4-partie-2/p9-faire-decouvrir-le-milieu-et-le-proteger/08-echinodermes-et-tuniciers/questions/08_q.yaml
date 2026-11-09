@@ -1,0 +1,22 @@
+id: 056d2841-09b7-467f-a236-9a4a1148fd28
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi la silhouette de la comatule surprend-elle les plongeurs, selon cette
+  leçon ?
+choices:
+- id: 2246252a-202d-4f7f-8072-a93b98021917
+  text: Sa forme ramifiée ne ressemble pas à une étoile de mer, alors que c'est un
+    de ses parents.
+- id: 08ef8b15-1236-4939-9bc4-116b744b3d93
+  text: Elle ressemble à un plongeur miniature.
+- id: 87c8ef41-0ca1-4803-b712-ced5bfdfebf4
+  text: Elle est invisible même en pleine lumière.
+- id: aa5d82c0-f772-4176-8712-b1ddddd871d5
+  text: Elle change de forme à chaque saison.
+correct_choice_ids:
+- 2246252a-202d-4f7f-8072-a93b98021917
+explanation: Les bras nombreux et plumeux de la comatule surprennent, mais c'est bien
+  un échinoderme, un lointain parent des étoiles de mer.
+archived: false

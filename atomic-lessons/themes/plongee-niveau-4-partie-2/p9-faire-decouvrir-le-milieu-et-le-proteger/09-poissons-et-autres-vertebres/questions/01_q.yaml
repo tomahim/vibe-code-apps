@@ -1,0 +1,20 @@
+id: d4ed9ba2-8479-4a79-be0f-c9462dda83d7
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel caractère distingue les poissons cartilagineux, selon le manuel ?
+choices:
+- id: 33822db6-67ba-48a9-b586-12df830a34c1
+  text: La présence de 5 à 7 fentes branchiales.
+- id: ba6cb940-0219-4be6-bbaa-7ac0fb868ce9
+  text: Une coquille externe articulée.
+- id: da6b742d-f1e8-4b9d-8e1b-e7202afb73f7
+  text: Des plumes colorées sur le dos.
+- id: 783030ab-9875-431a-a76d-b9c9337fe6c8
+  text: Un squelette entièrement osseux.
+correct_choice_ids:
+- 33822db6-67ba-48a9-b586-12df830a34c1
+explanation: Selon le manuel, les poissons cartilagineux sont caractérisés, entre
+  autres, par la présence de 5 à 7 fentes branchiales.
+archived: false

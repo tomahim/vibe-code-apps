@@ -1,0 +1,20 @@
+id: 390341f9-4763-48e0-8c1d-e456a3710c44
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment le manuel décrit-il les herbiers ?
+choices:
+- id: 4fc315f2-23f6-4a33-9f53-bb958018eff7
+  text: De véritables nurseries, riches en petits animaux, à particulièrement préserver.
+- id: 5b2ded56-fe4e-4c69-a4cf-e214672ba02f
+  text: Des zones mortes à éviter absolument.
+- id: 8ddc3f81-af06-42d0-8931-abcbf15c602e
+  text: Des champs d'algues réservés à la pêche professionnelle.
+- id: 1ab514b4-a046-4c2f-a0d5-973e9e614b97
+  text: Des formations uniquement tropicales sans intérêt en Europe.
+correct_choice_ids:
+- 4fc315f2-23f6-4a33-9f53-bb958018eff7
+explanation: Selon le manuel, les herbiers sont de véritables nurseries, riches en
+  petits animaux, et ils doivent être particulièrement préservés.
+archived: false

@@ -1,0 +1,20 @@
+id: d13173bb-274a-4fed-b12c-8a3ab34e21cc
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Selon le manuel, quel type de zone est généralement riche en faune ?
+choices:
+- id: 37658909-83e0-4bac-8f1b-d57fd7b217cd
+  text: Les zones exposées aux courants.
+- id: 4d762f91-7b5a-4426-b4e8-72582c1ebfe4
+  text: Les zones de sable fin sans aucun relief.
+- id: faf3fef3-6716-4a98-aafc-2b6cdc5a6dcc
+  text: Les zones sans luminosité.
+- id: 57032191-67ca-4adb-8316-768c55a53168
+  text: Les zones où l'eau est toujours froide.
+correct_choice_ids:
+- 37658909-83e0-4bac-8f1b-d57fd7b217cd
+explanation: 'Le manuel cite l''abondance de la nourriture parmi les conditions favorables
+  : les zones exposées aux courants sont généralement riches en faune.'
+archived: false

@@ -1,0 +1,22 @@
+id: a2985dc6-7274-483f-a865-3d5e9331027a
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels sont les trois points de la règle n° 1, selon le manuel ?
+choices:
+- id: 3d988858-166e-4d7d-9b8d-e3a2dc32cf7e
+  text: Rester parfaitement immobile, limiter le bruit de la respiration par de courtes
+    apnées, ne jamais tenter d'aller vers les poissons.
+- id: 2384c767-7986-4fe4-bbd6-863bb0294532
+  text: Nager vite, frapper dans ses mains, allumer sa lampe.
+- id: 7030d907-814c-4c5a-baf6-255c800e6826
+  text: Plonger seul, descendre profond, remonter rapidement.
+- id: 905587dd-138e-46d8-93da-6569126abb16
+  text: Toucher les poissons, les nourrir, les attraper.
+correct_choice_ids:
+- 3d988858-166e-4d7d-9b8d-e3a2dc32cf7e
+explanation: 'Le manuel liste : rester parfaitement immobile (sur le fond ou en pleine
+  eau), limiter le bruit de la respiration par de courtes apnées, ne jamais tenter
+  d''aller vers les poissons et éviter tout geste brusque.'
+archived: false

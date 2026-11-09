@@ -1,0 +1,20 @@
+id: c2482a95-3012-4898-b835-c567ced1e651
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le manuel nomme-t-il les holothuries ?
+choices:
+- id: 56010e4d-8992-41d2-8a88-2d381455efe2
+  text: Des concombres de mer.
+- id: 56164456-0cec-4926-ae89-04dbb15c7344
+  text: Des plumes de mer.
+- id: a0ef40fe-9b9e-4baf-b826-dad0eaa55ba5
+  text: Des araignées de mer.
+- id: 24e89845-1e26-40fa-be64-aea775401acb
+  text: Des dentelles de mer.
+correct_choice_ids:
+- 56010e4d-8992-41d2-8a88-2d381455efe2
+explanation: Le manuel présente les holothuries comme les « concombres de mer », au
+  corps mou et allongé rampant sur le sable.
+archived: false

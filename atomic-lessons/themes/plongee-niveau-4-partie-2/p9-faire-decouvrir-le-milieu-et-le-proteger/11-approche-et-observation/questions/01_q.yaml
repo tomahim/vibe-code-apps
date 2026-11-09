@@ -1,0 +1,21 @@
+id: 93a03a2b-ceae-4b6e-a248-d76cc469982d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment les plongeurs accompagnés voient-ils le guide, selon le manuel ?
+choices:
+- id: fa4e0a51-fae9-47a9-a628-a1bb771b361b
+  text: Comme un plongeur expérimenté, capable de leur faire approcher, connaître
+    et aimer le monde subaquatique.
+- id: 8e7a96f7-69c3-459b-af98-7cce6136a1da
+  text: Comme un simple transporteur de bouteilles.
+- id: 7fb710e5-d761-4739-9dff-54f27f28827e
+  text: Comme un remplaçant du directeur de plongée.
+- id: be844981-8031-4635-a9a3-601ecc28ede4
+  text: Comme un photographe professionnel salarié.
+correct_choice_ids:
+- fa4e0a51-fae9-47a9-a628-a1bb771b361b
+explanation: Selon le manuel, les personnes accompagnées voient en vous un plongeur
+  expérimenté, capable de leur faire approcher, connaître, aimer le monde subaquatique.
+archived: false

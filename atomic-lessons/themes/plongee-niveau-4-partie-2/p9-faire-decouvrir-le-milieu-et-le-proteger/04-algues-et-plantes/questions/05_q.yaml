@@ -1,0 +1,21 @@
+id: 5a454aa3-eb32-4853-8fed-37b5e2380fe5
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment les algues absorbent-elles l'eau et les nutriments, selon le manuel
+  ?
+choices:
+- id: e4d0913e-bb73-4e4b-9794-a5a19f0854e0
+  text: Par tous leurs tissus.
+- id: 6e1e68d0-6dce-429c-8596-fb3dc0f21a00
+  text: Uniquement par leurs racines.
+- id: 88774360-2547-4123-829c-c2d0af3fbfb4
+  text: Par leur stipe uniquement.
+- id: b6bdd44a-eb81-41ea-a61e-c12fe33b9fcc
+  text: Par la photosynthèse de nuit.
+correct_choice_ids:
+- e4d0913e-bb73-4e4b-9794-a5a19f0854e0
+explanation: Contrairement aux plantes qui s'alimentent essentiellement par leurs
+  racines, les algues absorbent l'eau et les nutriments par tous leurs tissus.
+archived: false
