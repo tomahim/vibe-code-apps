@@ -2,6 +2,11 @@
 id: 91cd88fc-35bd-4eea-a376-4ef5231696d5
 position: 5
 title: Lire l'échelle de Beaufort
+image: "p10-echelle-beaufort.jpg"
+image_alt: "Table de l'echelle de Beaufort (force des vents) : degres 0 a 9, description, vitesse moyenne en noeuds et km/h, etat de la mer."
+image_caption: "Echelle de Beaufort (force des vents)"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 388"
+image_license: "Tous droits réservés - usage interne"
 archived: false
 ---
 Quelques degrés repères de la table du manuel (vitesse moyenne en nœuds / aspect de la mer) :

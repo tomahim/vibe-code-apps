@@ -2,6 +2,11 @@
 id: fdf38508-48d3-49e5-9deb-058e58ccbbfc
 position: 6
 title: 'L''échelle Douglas : l''état de la mer'
+image: "p10-echelle-douglas.jpg"
+image_alt: "Table de l'echelle Douglas (etat de la mer) : degres 0 a 9, description et hauteur des vagues."
+image_caption: "Echelle Douglas (etat de la mer)"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 388"
+image_license: "Tous droits réservés - usage interne"
 archived: false
 ---
 L'état de la mer se lit sur l'échelle Douglas, de 0 à 9, d'après la hauteur des vagues :
