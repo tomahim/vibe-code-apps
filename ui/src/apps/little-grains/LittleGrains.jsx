@@ -125,7 +125,13 @@ function CardIllustration({ card }) {
   if (!card.illustration_url) return null;
   const srcset = (card.illustration_srcset || []).map((variant) => `${variant.url} ${variant.width}w`).join(", ");
   const credit = card.illustration_credit ? [card.illustration_credit, card.illustration_license].filter(Boolean).join(", ") : "";
-  return <figure className="grains-illustration">
+  // Book figures (N4 manuals) carry labels that cover-cropping would eat; they fit
+  // inside the height cap instead. Scoped on the repo theme path, not on license text.
+  const bookFigure = (card.illustration_path || "").includes("/plongee-niveau-4-");
+  const variants = card.illustration_srcset || [];
+  const largest = variants.reduce((best, v) => (v && v.width > (best ? best.width : 0) ? v : best), null);
+  const fullUrl = largest ? largest.url : card.illustration_url;
+  return <figure className={bookFigure ? "grains-illustration grains-illustration--figure" : "grains-illustration"}>
     <img
       src={card.illustration_url}
       srcSet={srcset || undefined}
@@ -142,7 +148,7 @@ function CardIllustration({ card }) {
         ? <a className="grains-illustration-credit" href={card.illustration_source_url} target="_blank" rel="noopener noreferrer">Photo: {credit}</a>
         : <span className="grains-illustration-credit">Photo: {credit}</span>)}
     </figcaption>}
-    <a className="grains-illustration-open" href={card.illustration_url} target="_blank" rel="noopener noreferrer">View full size</a>
+    <a className="grains-illustration-open" href={fullUrl} target="_blank" rel="noopener noreferrer">View full size</a>
   </figure>;
 }
 
