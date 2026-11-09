@@ -1,0 +1,21 @@
+id: 1c7db745-63bd-481f-a053-e5ca5080e0b9
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Où se trouve l'examinateur pendant l'épreuve, selon le MFT ?
+choices:
+- id: 7b7a592f-b132-45f3-bf96-7aa3592d7b65
+  text: 'À 10 m : le candidat descend jusqu''à son niveau, dont le masque est à 10
+    m'
+- id: 02485172-44f1-497c-9b97-94a76ce05015
+  text: En surface, dans le bateau
+- id: 1540a2f8-1bf1-4082-9c9f-5e6dd24bacdb
+  text: À 5 m, sur un pendeur
+- id: d500728d-384e-4025-88c7-ccbe911d3b68
+  text: Au fond, à 20 m
+correct_choice_ids:
+- 7b7a592f-b132-45f3-bf96-7aa3592d7b65
+explanation: Le candidat descend en apnée jusqu'au niveau de l'examinateur, dont le
+  masse est à 10 m (MFT, mai 2026).
+archived: false
