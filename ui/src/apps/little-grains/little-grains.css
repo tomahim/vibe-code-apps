@@ -97,3 +97,9 @@
 .grains-challenge-chart svg{width:100%;height:auto;display:block}
 .grains-challenge-chart .grid{stroke:var(--line);stroke-width:1}
 .grains-challenge-chart .tick{fill:var(--dim);font-size:10px}
+.grains-challenge-wins{display:grid;gap:6px;margin:0 0 24px}
+.grains-challenge-wins .grains-card-index{margin:0 0 2px}
+.grains-challenge-wins .row{display:flex;align-items:center;gap:8px;font:600 12px var(--sans)}
+.grains-challenge-wins .name{width:56px;color:var(--dim);font-weight:700}
+.grains-challenge-wins .track{flex:1;height:10px;border-radius:5px;background:#efe7d6;overflow:hidden}
+.grains-challenge-wins .bar{display:block;height:100%;border-radius:5px}

@@ -63,6 +63,14 @@ test('challenge: intro with history, timed questions, auto-advance, locked ranki
   await entry.click();
   const dialog = page.getByRole('dialog', { name: 'Weekly challenge' });
   await expect(dialog.getByRole('heading', { name: "This week's duel" })).toBeVisible();
+  // Wins so far: one bar per player over every revealed duel (Thomas, 2026-11-09).
+  // Mock week W44: Thomas 7 vs Aurore 5 - one win for You, none for Aurore.
+  const wins = dialog.getByRole('img', { name: 'Challenges won in total, one bar per player' });
+  await expect(wins).toBeVisible();
+  await expect(wins).toContainText('WINS');
+  await expect(wins.locator('.row', { hasText: 'You' })).toContainText('1');
+  await expect(wins.locator('.row', { hasText: 'Aurore' })).toContainText('0');
+
   // Past weeks render as a chart with one line per player (Thomas, 2026-11-09).
   const chart = dialog.getByRole('img', { name: 'Past challenge weeks, one line per player' });
   await expect(chart).toBeVisible();
