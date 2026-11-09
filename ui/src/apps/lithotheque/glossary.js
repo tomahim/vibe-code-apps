@@ -986,5 +986,68 @@ export const GLOSSARY_TERMS = [
             "license": "CC BY-SA 2.0",
             "alt": "Profil de sol dans des alluvions fluviales, avec une pelle pour l'échelle"
         }
+    },
+    {
+            "id": "chlorite",
+            "category": "mineraux",
+            "fr": {
+                    "term": "Chlorite",
+                    "definition": "Groupe d'une quinzaine de phyllosilicates de fer, de magnésium et d'aluminium, de formule générale (Fe,Mg,Al)₆(Si,Al)₄O₁₀(OH)₈. Tendres (2 à 2,5 sur l'échelle de Mohs), en feuillets flexibles proches du mica, les chlorites sont typiques des roches métamorphiques de faible degré comme les schistes verts. Leur nom vient du grec khlôros, « vert » : elles ne contiennent pas de chlore.",
+                    "source": "https://fr.wikipedia.org/wiki/Groupe_des_chlorites"
+            },
+            "en": {
+                    "term": "Chlorite (group)",
+                    "definition": "A group of about fifteen phyllosilicate minerals of iron, magnesium and aluminium, with general formula (Fe,Mg,Al)₆(Si,Al)₄O₁₀(OH)₈. Soft (Mohs 2-2.5), with flexible mica-like flakes, chlorites are typical of low-grade metamorphic rocks such as greenschist and of altered igneous rocks. Their name comes from the Greek chloros, 'green': they contain no chlorine.",
+                    "source": "https://en.wikipedia.org/wiki/Chlorite_group"
+            },
+            "image": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Clinochlore-usa12c.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                    "file": "https://commons.wikimedia.org/wiki/File:Clinochlore-usa12c.jpg",
+                    "credit": "Rob Lavinsky, iRocks.com",
+                    "license": "CC BY-SA 3.0",
+                    "alt": "Cristal de clinochlore, un minéral vert foncé du groupe des chlorites (mine Tilly Foster, New York)"
+            }
+    },
+    {
+            "id": "kaolin",
+            "category": "roches",
+            "fr": {
+                    "term": "Kaolin",
+                    "definition": "Argile blanche, friable et réfractaire, composée principalement de kaolinite, un silicate d'aluminium issu de l'altération des feldspaths des roches granitiques. Matière première de la porcelaine depuis la Chine, il tient son nom du chinois gaoling, « collines hautes », près de Jingdezhen ; il sert aussi au papier, aux cosmétiques et à la médecine.",
+                    "source": "https://fr.wikipedia.org/wiki/Kaolin"
+            },
+            "en": {
+                    "term": "Kaolin (china clay)",
+                    "definition": "A white, friable, refractory clay made up mainly of the mineral kaolinite, produced by the weathering of feldspar in granitic rocks. Kaolin names the rock; kaolinite the dominant mineral. The raw material of porcelain, named after Gaoling, 'high hills', near Jingdezhen in China, it is also used in paper, cosmetics and medicine.",
+                    "source": "https://en.wikipedia.org/wiki/Kaolinite"
+            },
+            "image": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Kaolin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+                    "file": "https://commons.wikimedia.org/wiki/File:Kaolin.jpg",
+                    "credit": "USGS",
+                    "license": "Public domain",
+                    "alt": "Morceau de kaolin blanc, avec une pièce de monnaie pour l'échelle"
+            }
+    },
+    {
+            "id": "montmorillonite",
+            "category": "mineraux",
+            "fr": {
+                    "term": "Montmorillonite",
+                    "definition": "Minéral argileux du groupe des smectites, un phyllosilicate 2:1 de formule (Na,Ca)₀,₃(Al,Mg)₂Si₄O₁₀(OH)₂·nH₂O. De l'eau et des cations échangeables s'insèrent entre ses feuillets microscopiques, qui gonflent fortement au contact de l'eau : c'est un constituant typique des sols gonflants. Nommée d'après Montmorillon (Vienne), elle est aussi appelée terre de Sommières.",
+                    "source": "https://fr.wikipedia.org/wiki/Montmorillonite"
+            },
+            "en": {
+                    "term": "Montmorillonite",
+                    "definition": "A very soft clay mineral of the smectite group: a 2:1 phyllosilicate whose microscopic plates are separated by water and exchangeable cations, so it swells strongly when wet and is a classic component of swelling soils. It is named after Montmorillon in France.",
+                    "source": "https://en.wikipedia.org/wiki/Montmorillonite"
+            },
+            "image": {
+                    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Montmorillonite_%28GeoDIL_number_-_2341%29.jpg/960px-Montmorillonite_%28GeoDIL_number_-_2341%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                    "file": "https://commons.wikimedia.org/wiki/File:Montmorillonite_(GeoDIL_number_-_2341).jpg",
+                    "credit": "Shannon Heinle (GeoDIL)",
+                    "license": "Public domain (CC0 1.0)",
+                    "alt": "Échantillon de montmorillonite, une argile beige clair"
+            }
     }
 ];
