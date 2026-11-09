@@ -1,0 +1,22 @@
+id: 04546ee5-c3b0-4c10-a730-0eef2ea9f0c4
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle est la solution la plus sage pour une plongée en procédure hétérogène
+  ?
+choices:
+- id: f3dc3474-61e5-48e4-a370-58ef8b71ef85
+  text: Limiter la profondeur pour rester dans la courbe des plongées sans palier.
+- id: e7dc3718-949c-40f2-ab49-41033391f748
+  text: Pousser la profondeur au maximum autorisé pour rentabiliser la sortie.
+- id: 3f6e4efb-770d-4104-8ccf-220629896615
+  text: Faire plonger chacun avec ses propres paliers en se retrouvant en surface.
+- id: 468c7179-c0f9-4f57-8c19-0fb9ae8269ac
+  text: Imposer à tous le même modèle d'ordinateur loué pour la sortie.
+correct_choice_ids:
+- f3dc3474-61e5-48e4-a370-58ef8b71ef85
+explanation: Pour éviter toute complication, la solution la plus sage consiste à limiter
+  la profondeur de ce type de plongée, pour rester dans la courbe des plongées sans
+  palier.
+archived: false

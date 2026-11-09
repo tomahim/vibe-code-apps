@@ -1,0 +1,23 @@
+id: 3a9ab854-f796-4e37-b8ed-9cfc63dc9bb9
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que faire si les protocoles de désaturation des membres sont trop éloignés
+  ?
+choices:
+- id: a7253c66-f5b4-438e-9d2b-3fa43c3b9ddb
+  text: Modifier la composition des palanquées, en concertation avec le directeur
+    de plongée.
+- id: 7c753380-a392-4398-a6da-ba790b3600cf
+  text: 'Ignorer l''écart : chacun suivra son propre ordinateur pendant la remontée.'
+- id: 81450358-ff88-4e58-af88-f90e56eea9db
+  text: Imposer à tous le protocole le moins restrictif pour simplifier la plongée.
+- id: bf762551-4ae2-4dd8-9a32-e67799bf8dac
+  text: Annuler systématiquement la plongée, quelle que soit l'ampleur de l'écart.
+correct_choice_ids:
+- a7253c66-f5b4-438e-9d2b-3fa43c3b9ddb
+explanation: Des protocoles de désaturation trop éloignés les uns des autres doivent
+  conduire à la modification des palanquées, en concertation avec le directeur de
+  plongée.
+archived: false

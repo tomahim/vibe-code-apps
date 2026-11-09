@@ -1,0 +1,23 @@
+id: 284d903e-e1be-47b4-b82e-b26baff073e9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi les affichages de deux ordinateurs peuvent-ils diverger sur une même
+  plongée ?
+choices:
+- id: 2bada043-6c27-4cb8-847f-d848ab341cce
+  text: Modèles de calcul différents selon les concepteurs, et tolérances de capteurs
+    de pression.
+- id: fe42620a-b82f-4e8b-b23a-4773d5c4a380
+  text: Parce que l'un des deux appareils est toujours défectueux dans ce cas.
+- id: 25022b27-5fbf-4cd3-b1ea-93c518bccfef
+  text: Parce que les ordinateurs mesurent l'azote dans le sang de leur porteur.
+- id: 1ecc9d9b-14b9-42a7-b037-7cf2111f49ee
+  text: Parce que l'écran LCD vieillit et affiche des valeurs de moins en moins justes.
+correct_choice_ids:
+- 2bada043-6c27-4cb8-847f-d848ab341cce
+explanation: Les formules dépendent du modèle choisi par chaque concepteur, et la
+  profondeur affichée peut varier de 1 à 2 m à 40-50 m selon l'étalonnage et la tolérance
+  des capteurs (± 30 à 50 cm).
+archived: false

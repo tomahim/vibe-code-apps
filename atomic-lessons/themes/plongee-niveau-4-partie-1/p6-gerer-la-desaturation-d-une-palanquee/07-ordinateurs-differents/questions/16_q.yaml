@@ -1,0 +1,23 @@
+id: ff74b3af-ff9f-4191-80c3-c3ff3ad30d4d
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Une palanquée mélangeant ordinateur en mode « personnalisation » et ordinateur
+  standard relève-t-elle des procédures hétérogènes ?
+choices:
+- id: b1943768-ea6b-4300-89fe-84b0c1d8072c
+  text: 'Oui : des paramétrages différents suffisent, même pour deux modèles de la
+    même marque.'
+- id: 7512080b-b933-454a-996e-a82377396a7d
+  text: 'Non : seules les différences de marque créent une procédure hétérogène.'
+- id: 276425b5-cbd0-4ac8-b65a-54d57debb7a9
+  text: 'Non : seule la coexistence tables/ordinateurs crée une procédure hétérogène.'
+- id: b2bf012b-32e6-4f39-9797-aab391bfe7b3
+  text: Oui, mais seulement si l'un des deux a activé les paliers profonds.
+correct_choice_ids:
+- b1943768-ea6b-4300-89fe-84b0c1d8072c
+explanation: La coexistence de paramétrages différents (personnalisation, paliers
+  profonds, paliers optionnels...) suffit à créer une procédure hétérogène, y compris
+  pour deux modèles de la même marque.
+archived: false

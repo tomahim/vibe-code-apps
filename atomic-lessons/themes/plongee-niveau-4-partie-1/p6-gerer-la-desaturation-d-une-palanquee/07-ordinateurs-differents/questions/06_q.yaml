@@ -1,0 +1,22 @@
+id: 36b462d3-184d-4ca0-909b-ce8ed17df3cc
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel outil le manuel juge-t-il indispensable à ce stade de la planification
+  ?
+choices:
+- id: 30eb2275-c1cf-4dba-8974-fe7210516c6a
+  text: Le mode planification des ordinateurs.
+- id: 148a6bbd-ef7d-495c-b0f8-5dc4eabae07e
+  text: Le carnet de plongée papier de la palanquée.
+- id: 2ec2d256-ff2c-4913-81d4-029e467850a5
+  text: Le compas de relèvement du guide de palanquée.
+- id: 3d9ee193-57f3-4095-84bb-2cd56d28aee3
+  text: Le mode profondimètre (GAUGE) de chaque appareil.
+correct_choice_ids:
+- 30eb2275-c1cf-4dba-8974-fe7210516c6a
+explanation: 'Le guide détermine les paramètres (temps, profondeur) en concertation,
+  et chacun vérifie que la désaturation est bien celle prévue : le mode planification
+  des ordinateurs est ici indispensable.'
+archived: false
