@@ -1,0 +1,20 @@
+id: 86a6fbe9-a75b-4048-821e-b00c156c5afa
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment la plongée est-elle signalée de nuit ?
+choices:
+- id: 52778599-a901-4820-b835-2f86c7e3c242
+  text: Par les feux rouge / blanc / rouge
+- id: 7250db5f-949d-4dcd-91a1-05e18fccca8c
+  text: Par le pavillon Alpha éclairé
+- id: f855af34-eb04-4f8d-9eab-9ed71ea86a5c
+  text: Par un feu de mât blanc uniquement
+- id: ff43035a-5e36-452b-9a6e-2e7d82085e62
+  text: Par des fusées de détresse régulières
+correct_choice_ids:
+- 52778599-a901-4820-b835-2f86c7e3c242
+explanation: De nuit, la plongée est signalée par les feux rouge / blanc / rouge (p.
+  383).
+archived: false

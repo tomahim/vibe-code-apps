@@ -1,0 +1,21 @@
+id: 944545d0-c6bd-48f9-a141-275dbc99eda3
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le rôle des nœuds d'arrêt, selon le manuel ?
+choices:
+- id: 6a2f839c-a512-4c48-be20-6da3992a7c07
+  text: Relier deux bouts entre eux
+- id: 93b078d0-9d84-4132-887e-34a4d752f8b7
+  text: Éviter que les brins d'un cordage se disjoignent ou que le cordage glisse
+    dans un œil (boucle fermée)
+- id: 3e708ee6-550c-4e02-83dd-96809143d58f
+  text: Amarrer un bateau à quai
+- id: b6a31305-7290-4221-932a-ce345c7c5bf2
+  text: Raccourcir un cordage définitivement
+correct_choice_ids:
+- 93b078d0-9d84-4132-887e-34a4d752f8b7
+explanation: Les nœuds d'arrêt évitent que les brins d'un cordage se disjoignent ou
+  que le cordage glisse dans un œil, c'est-à-dire une boucle fermée (p. 394).
+archived: false

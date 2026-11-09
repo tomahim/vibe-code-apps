@@ -1,0 +1,20 @@
+id: fe822cc4-e2cb-4a79-b421-8d9dc7db4fbc
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi faut-il assurer le nœud de cabestan par deux demi-clefs ?
+choices:
+- id: 11e45b3e-2ec5-472a-904b-2e0223fe8b62
+  text: Pour éviter qu'il ne glisse et se défasse
+- id: 4d6c4dd0-281b-401f-b055-d920f9f1919e
+  text: Pour le rendre étanche
+- id: f2faf995-5284-415f-b1d2-37faaab9ab56
+  text: Pour qu'il tienne sans cordage
+- id: 5409c981-1c88-4111-aeb1-f567bd6f3521
+  text: Pour le repérer la nuit
+correct_choice_ids:
+- 11e45b3e-2ec5-472a-904b-2e0223fe8b62
+explanation: Pour éviter qu'il ne glisse et se défasse, le nœud de cabestan doit être
+  assuré par deux demi-clefs (p. 396).
+archived: false

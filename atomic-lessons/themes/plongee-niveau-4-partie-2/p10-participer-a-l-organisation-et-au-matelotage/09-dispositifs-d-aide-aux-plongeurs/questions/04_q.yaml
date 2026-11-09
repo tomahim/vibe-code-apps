@@ -1,0 +1,23 @@
+id: 9ecdb4da-7754-4d2a-91d1-f0d46e32f1e8
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel exemple de sécurité passive le manuel donne-t-il à propos du pendeur
+  ?
+choices:
+- id: ecaf8c4a-41a4-46db-b7a8-955377418c89
+  text: Disposer un ou plusieurs blocs de secours attachés à un pendeur ou prêts à
+    être largués si une palanquée le demande
+- id: be9a635b-f4da-4a2c-ad73-8fa71143637f
+  text: Suspendre les palmes des plongeurs
+- id: f78377b3-5d16-4cb0-aefd-3f33db52d39f
+  text: Y accrocher la trousse de secours
+- id: 1f705c32-8df2-4ffb-871b-179efba3bccf
+  text: Y fixer le pavillon Alpha
+correct_choice_ids:
+- ecaf8c4a-41a4-46db-b7a8-955377418c89
+explanation: La sécurité passive consiste à anticiper les besoins des autres plongeurs,
+  par exemple avec un ou plusieurs blocs de secours au pendeur ou prêts à être largués
+  (p. 393).
+archived: false

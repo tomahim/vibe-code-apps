@@ -1,0 +1,20 @@
+id: 7e63a7de-1906-454e-b762-9df0c2a79151
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui choisit le moyen de rappel, selon le manuel ?
+choices:
+- id: ba387034-4617-4978-809e-4d7b50e67ed5
+  text: Il est laissé à l'appréciation des organisateurs
+- id: 8ff758f8-f663-4f11-bed2-79d51e858101
+  text: Il est imposé par la préfecture maritime
+- id: 418f333f-3adb-4e23-bfda-d87f601180ad
+  text: Il est choisi par chaque plongeur
+- id: a93113c7-97f0-4bc0-a015-6b35041dbada
+  text: Il est fixé par le code international des signaux
+correct_choice_ids:
+- ba387034-4617-4978-809e-4d7b50e67ed5
+explanation: Le moyen de rappel est laissé à l'appréciation des organisateurs ; l'essentiel
+  est que la procédure soit efficace et connue (p. 385).
+archived: false

@@ -1,0 +1,20 @@
+id: 418bd3ac-d895-4153-bab1-49c870d2970d
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle précision le manuel attribue-t-il au GPS en usage civil ?
+choices:
+- id: 3147b708-4ae5-4b94-af9a-a85001be0164
+  text: Quelques centimètres
+- id: ac68a6de-e3cc-435a-8912-4f09369c6fe7
+  text: Quelques dizaines de mètres
+- id: 02bcb13d-a918-47e7-962a-ad55870f4602
+  text: Quelques kilomètres
+- id: 6dd90329-c977-4988-8919-1d29a83b42b8
+  text: Exactement un mille
+correct_choice_ids:
+- ac68a6de-e3cc-435a-8912-4f09369c6fe7
+explanation: La précision du GPS va de quelques centimètres (usage militaire, Protected
+  Code) à quelques dizaines de mètres (usage civil, Clear Acquisition) (p. 390).
+archived: false

@@ -1,0 +1,21 @@
+id: 88278534-78d2-4fa3-b7e6-f70116188b97
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi les marées ont-elles une importance primordiale en plongée, selon
+  le manuel ?
+choices:
+- id: d988642e-ae46-4a9d-a6b9-e4f68832452b
+  text: Parce qu'elles modifient la pression atmosphérique
+- id: 21860138-62ad-4779-9878-7d01d8eda01e
+  text: Du fait des courants qu'elles provoquent
+- id: 0d44fbca-83e7-4b5c-b011-24349dca3e49
+  text: Parce qu'elles changent la salinité de l'eau
+- id: f2dd1c1d-2f7b-4894-b025-d2a870796935
+  text: Parce qu'elles déterminent la visibilité sous-marine
+correct_choice_ids:
+- 21860138-62ad-4779-9878-7d01d8eda01e
+explanation: Le manuel indique que les marées ont une importance primordiale en plongée,
+  du fait des courants qu'elles provoquent (p. 387).
+archived: false

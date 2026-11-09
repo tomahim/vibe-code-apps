@@ -1,0 +1,22 @@
+id: 5145262f-7cd9-4510-b2ba-90707b8e4e67
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Aux Antilles (Martinique, Guadeloupe, Saint-Barthélemy, Saint-Martin), quelle
+  règle s'applique dans le rayon de 100 mètres ?
+choices:
+- id: 61dc5869-2bb1-4c0d-8c19-cbb698a5b751
+  text: Navigation interdite
+- id: 847eb71b-1e7c-4abe-ae28-d3c363c3940c
+  text: Vitesse appropriée garantissant la sécurité, limitée en tout état de cause
+    à 5 nœuds
+- id: 0f11259a-9ace-4ec5-8e6b-2fedb0fece5c
+  text: Vitesse libre sous réserve de prudence
+- id: 5eaa1f8e-4484-4c2c-85ce-e9615fca62b0
+  text: Passage interdit de jour uniquement
+correct_choice_ids:
+- 847eb71b-1e7c-4abe-ae28-d3c363c3940c
+explanation: Dans un rayon de 100 mètres, maintien d'une vitesse appropriée garantissant
+  la sécurité, limitée en tout état de cause à 5 nœuds (p. 383).
+archived: false

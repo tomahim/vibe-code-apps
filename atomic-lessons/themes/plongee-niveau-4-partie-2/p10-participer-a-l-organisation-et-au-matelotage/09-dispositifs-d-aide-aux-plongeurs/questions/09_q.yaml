@@ -1,0 +1,21 @@
+id: 2105be33-77fa-425f-8f9e-cf6ff25ba271
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le plongeur se signale-t-il à la surface en cas de problème au palier,
+  selon le manuel ?
+choices:
+- id: b2c28f10-eee2-4b51-991d-3c4dc8f35c37
+  text: À l'aide de son parachute de palier, gardé déployé jusqu'à remonter à l'échelle
+- id: 2aeaa7fa-78c8-4a7e-a557-b8d8ad8153c0
+  text: En agitant sa lampe
+- id: 9390d65a-f46d-4c30-a710-21583258412c
+  text: En frappant sa bouteille
+- id: 364ad6b6-dbaa-4b73-9f63-8457709ed376
+  text: En gonflant son gilet au maximum
+correct_choice_ids:
+- b2c28f10-eee2-4b51-991d-3c4dc8f35c37
+explanation: En cas de problème au palier, le plongeur se signale à l'aide de son
+  parachute de palier et le garde déployé jusqu'à remonter à l'échelle (p. 393).
+archived: false

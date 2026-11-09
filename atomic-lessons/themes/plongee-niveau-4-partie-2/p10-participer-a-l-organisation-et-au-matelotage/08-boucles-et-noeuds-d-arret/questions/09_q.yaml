@@ -1,0 +1,22 @@
+id: 3792f46e-3b59-4729-91e0-84457e9f2135
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le manuel du nœud de chaise ?
+choices:
+- id: 9be612a9-a77c-4993-a80e-c33886d5ff0b
+  text: 'Nœud essentiel, valable dans de nombreuses circonstances : sûr, tout en se
+    défaisant facilement'
+- id: 763cd5b4-0659-439e-80a9-13ca662069a1
+  text: Nœud réservé aux marins professionnels
+- id: a592ef34-5abc-471e-929c-def2dc227226
+  text: Nœud dangereux à proscrire
+- id: 8efdf04f-c2a8-47a4-850b-acaaf2fcc329
+  text: Nœud qui ne se défait jamais
+correct_choice_ids:
+- 9be612a9-a77c-4993-a80e-c33886d5ff0b
+explanation: 'Le nœud de chaise est un nœud essentiel, valable dans de nombreuses
+  circonstances ; il n''offre que des avantages : sûr, tout en se défaisant facilement
+  (p. 397).'
+archived: false

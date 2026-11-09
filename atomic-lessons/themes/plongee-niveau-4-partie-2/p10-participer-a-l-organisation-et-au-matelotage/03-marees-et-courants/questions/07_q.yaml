@@ -1,0 +1,20 @@
+id: 26659df3-74d7-4c77-bce9-1bea690b353e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel exemple géographique le manuel cite-t-il pour le courant de marée ?
+choices:
+- id: 6bc9f370-d9dd-47c8-9e3a-6af4260255f6
+  text: La Méditerranée
+- id: b9759dcb-f2d1-47ff-a5ab-53a18b9c1216
+  text: La Bretagne
+- id: c4dcabec-bd0e-4aa2-9aa6-543be4f00ca7
+  text: La mer des Caraïbes
+- id: 9e721bc8-55e9-442d-8546-fd3ca2280c6e
+  text: Le bassin d'Arcachon
+correct_choice_ids:
+- b9759dcb-f2d1-47ff-a5ab-53a18b9c1216
+explanation: Le manuel illustre le courant de marée avec l'exemple de la Bretagne
+  (p. 324).
+archived: false

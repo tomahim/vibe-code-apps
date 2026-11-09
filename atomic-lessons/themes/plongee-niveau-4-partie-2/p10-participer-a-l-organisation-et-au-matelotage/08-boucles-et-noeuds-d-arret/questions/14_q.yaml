@@ -1,0 +1,21 @@
+id: 34c4dd81-a944-4362-bcd8-c1e4339cf8d5
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Vous devez relier durablement deux bouts de même diamètre pour allonger un
+  cordage. Quel nœud le manuel associe-t-il à cet usage ?
+choices:
+- id: 0816c759-12fb-4edd-98f4-dc19ccde483d
+  text: Le nœud d'écoute double
+- id: a008c873-f364-4cde-bc43-6a49b81bb42d
+  text: Le nœud du pêcheur
+- id: 631de08e-0507-4be1-8552-f597e12c724a
+  text: Le nœud de taquet
+- id: bd681794-b1d4-47c2-9842-fae1c5e8afdc
+  text: Le tour mort
+correct_choice_ids:
+- a008c873-f364-4cde-bc43-6a49b81bb42d
+explanation: Le nœud du pêcheur relie de manière quasi définitive deux bouts de diamètres
+  comparables, par exemple pour allonger un cordage (p. 394).
+archived: false

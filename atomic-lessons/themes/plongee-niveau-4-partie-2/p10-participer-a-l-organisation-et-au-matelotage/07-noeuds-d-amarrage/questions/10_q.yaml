@@ -1,0 +1,21 @@
+id: c61c3746-2e93-4222-94b2-968db002cd27
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Vous devez ajuster régulièrement la hauteur d'un pare-battage. Quel nœud choisir,
+  selon le manuel ?
+choices:
+- id: 9a6867d1-ad21-44f3-8bf9-ff13e0b09c3e
+  text: Le tour mort et deux demi-clefs
+- id: e4e2b5b9-835e-4ed4-a0ec-bec3f6b28297
+  text: Le nœud de cabestan, assuré par deux demi-clefs
+- id: c3ea648b-d9df-422c-ba81-43f5830ea605
+  text: Le nœud de plein poing
+- id: 69a5f8da-f849-4686-a7fc-3864b1e753a0
+  text: Le nœud du pêcheur
+correct_choice_ids:
+- e4e2b5b9-835e-4ed4-a0ec-bec3f6b28297
+explanation: Le nœud de cabestan permet d'ajuster la longueur du bout sans défaire
+  le nœud ; on l'assure par deux demi-clefs (p. 396).
+archived: false

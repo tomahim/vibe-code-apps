@@ -1,0 +1,21 @@
+id: 509aa741-0385-4277-959a-5f952a25d4e5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Selon le manuel, sur quels paramètres repose le choix du lieu de plongée ?
+choices:
+- id: 187586df-6d05-4889-b4f0-3b4187d22f92
+  text: La force du vent (échelle de Beaufort), son orientation et l'état de la mer
+    (échelle de 0 à 9)
+- id: db6125e4-c8b1-4282-b90a-b6fabf448da8
+  text: Uniquement la température de l'eau et la visibilité sous-marine
+- id: 6efa4460-8f08-4f6b-b680-a7e30ffd3250
+  text: Le coefficient de marée et la phase de la Lune
+- id: 6beef144-4102-4a12-9418-19b4294ff08c
+  text: L'affluence prévue sur le site
+correct_choice_ids:
+- 187586df-6d05-4889-b4f0-3b4187d22f92
+explanation: Le manuel détermine le lieu en fonction de la force du vent (Beaufort),
+  de son orientation et de l'état de la mer, échelle de 0 à 9 (p. 387).
+archived: false

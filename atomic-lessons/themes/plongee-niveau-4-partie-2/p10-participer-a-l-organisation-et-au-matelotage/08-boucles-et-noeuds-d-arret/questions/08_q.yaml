@@ -1,0 +1,22 @@
+id: 6149912e-d5d9-47f3-9a57-f20e3c81113f
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle différence pratique le manuel laisse-t-il entendre entre le nœud en
+  huit et le nœud de plein poing ?
+choices:
+- id: b78564c3-a417-41eb-b4ab-953299c6bfa8
+  text: Le plein poing est très difficile à défaire, l'en huit reste un arrêt plus
+    simple
+- id: 400f021f-1e30-4212-a1c4-4f15f6867917
+  text: L'en huit est interdit en plongée
+- id: ba08bc0c-3181-4024-a36b-e7d039e079c2
+  text: Le plein poing est le plus facile à réaliser
+- id: 38821c32-f6dc-48e3-9e8d-541537053ded
+  text: Il n'y a aucune différence
+correct_choice_ids:
+- b78564c3-a417-41eb-b4ab-953299c6bfa8
+explanation: Le nœud de plein poing est présenté comme solide et très difficile à
+  défaire, ce qui le réserve à des usages comme isoler une partie usagée (p. 394).
+archived: false

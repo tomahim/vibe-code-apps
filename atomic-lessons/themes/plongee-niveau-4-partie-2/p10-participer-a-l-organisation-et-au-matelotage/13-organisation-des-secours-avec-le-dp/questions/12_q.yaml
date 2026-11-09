@@ -1,0 +1,20 @@
+id: 23ee264f-2c7c-420b-baf1-8f64a8d01b4e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Selon le manuel, de quoi dépend la quantité d'eau douce potable à bord ?
+choices:
+- id: 9967fd41-26bc-4097-8f7f-3c57fb498433
+  text: Du nombre de plongeurs et de la durée du trajet
+- id: 563ffc21-f31a-4b33-8fc0-5a51e75976a9
+  text: Du prix du carburant
+- id: eecbf5a9-0665-41c3-a9e8-e794eccb42d4
+  text: De la profondeur de la plongée
+- id: 5d68262e-0eb0-4410-b656-5446862f0edc
+  text: De la couleur du bateau
+correct_choice_ids:
+- 9967fd41-26bc-4097-8f7f-3c57fb498433
+explanation: De l'eau douce potable doit être disponible en quantité suffisante selon
+  le nombre de plongeurs et la durée du trajet (p. 385).
+archived: false

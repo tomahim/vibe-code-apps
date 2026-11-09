@@ -1,0 +1,22 @@
+id: 5818183c-0fd5-4567-8c27-3937cd5a1cad
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que prévoit l'annexe du RIPAM pour les navires de moins de 20 mètres ?
+choices:
+- id: 91855ea0-134c-4d44-8185-1d3f3e1cd6a7
+  text: Des dimensions de marques inférieures, en rapport avec les dimensions du navire,
+    sans précision sur ces dimensions
+- id: 656291c0-242f-4cf2-91bc-fec632612cf2
+  text: Une hauteur de pavillon de 2 mètres
+- id: f4977ff4-6c92-4fd1-b776-d887c0376351
+  text: L'interdiction du pavillon Alpha
+- id: 820cc481-561f-4dd4-b191-fef3e6f1d57c
+  text: Un pavillon jaune supplémentaire
+correct_choice_ids:
+- 91855ea0-134c-4d44-8185-1d3f3e1cd6a7
+explanation: À bord d'un navire de moins de 20 mètres, les marques peuvent avoir des
+  dimensions inférieures, en rapport avec le navire ; aucune précision n'est donnée
+  sur ces dimensions (p. 383).
+archived: false

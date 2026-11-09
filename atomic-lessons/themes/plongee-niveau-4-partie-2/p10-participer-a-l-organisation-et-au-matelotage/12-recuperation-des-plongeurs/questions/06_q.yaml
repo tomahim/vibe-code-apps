@@ -1,0 +1,21 @@
+id: bd2534d0-0865-4d64-81e4-ec9408a9f2ed
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi débrayer le moteur à proximité des plongeurs ?
+choices:
+- id: e32a182c-e023-4444-a662-c8220ae503a3
+  text: Pour supprimer le danger de l'hélice et préparer la dérive contrôlée vers
+    les plongeurs
+- id: fba74480-f73e-4edf-a903-af8749c4e8cf
+  text: Pour économiser le carburant
+- id: eb9c7628-5c76-4bb4-be07-0e4044c25c43
+  text: Pour éviter le bruit qui fait peur aux poissons
+- id: a21682c8-5dfd-4343-a0de-f35e073480e6
+  text: Pour permettre au GPS de se recaler
+correct_choice_ids:
+- e32a182c-e023-4444-a662-c8220ae503a3
+explanation: Débrayer supprime le danger de l'hélice à proximité des plongeurs et
+  permet la dérive contrôlée de la méthode du manuel (p. 393).
+archived: false

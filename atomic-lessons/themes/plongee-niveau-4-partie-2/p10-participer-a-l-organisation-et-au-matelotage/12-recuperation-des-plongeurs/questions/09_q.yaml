@@ -1,0 +1,22 @@
+id: dbfadf68-cfe5-4810-8614-2af3e209ec1b
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels facteurs font dériver les plongeurs en surface, selon ce que relie la
+  leçon ?
+choices:
+- id: 98ac6ec4-8977-49d8-a950-8985d07bb349
+  text: Le vent et le courant, dont le sens peut être inversé par la renverse
+- id: 5942c85b-81fa-4d93-9672-551e3a73b531
+  text: Uniquement la houle de fond
+- id: 0b3c3296-4131-4ac7-8851-cd5af4fdf1a6
+  text: Le poids des blocs
+- id: 4cb5e3aa-36c0-40d8-9211-1430fc0debbc
+  text: La température de l'eau
+correct_choice_ids:
+- 98ac6ec4-8977-49d8-a950-8985d07bb349
+explanation: Le vent pousse les plongeurs en surface, le courant s'y ajoute, et la
+  renverse peut inverser le sens du courant entre le début et la fin de la plongée
+  (p. 324, 355 et 393).
+archived: false

@@ -1,0 +1,21 @@
+id: dac9ca39-e53d-4565-95a3-1e5a37254a5b
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Face à un courant de marée, que recommande le manuel de vérifier ?
+choices:
+- id: 2747ef40-6d44-4a47-bc9f-0e414aba8769
+  text: Le sens du courant en surface, car il peut être inversé en fin de plongée
+- id: 652252d4-9725-4c8d-aff3-0c8a94d5b2e0
+  text: Uniquement la vitesse du vent
+- id: b4d691d7-4184-4c11-9fef-ada99e482c1f
+  text: La température de l'eau au mouillage
+- id: d34eb0d0-e84f-4e04-88cd-0482f7ec29c0
+  text: La hauteur d'eau sous la coque uniquement
+correct_choice_ids:
+- 2747ef40-6d44-4a47-bc9f-0e414aba8769
+explanation: 'En cas de courant de marée, le manuel conseille de s''assurer du sens
+  en surface : le courant peut être inversé en fin de plongée du fait de la renverse
+  (p. 324).'
+archived: false

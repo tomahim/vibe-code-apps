@@ -1,0 +1,22 @@
+id: 878c9aba-3f08-4f8c-aa5c-4e16b4a13abd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Parmi les usages courants cités par le manuel pour un guide, lequel relève
+  des nœuds d'amarrage ?
+choices:
+- id: 06db0307-2405-4521-8d70-7f6922fe6dd4
+  text: Fixer une bouteille au pendeur ou amarrer l'embarcation
+- id: 6bdec7e1-a1e6-4807-8334-5b45f80759ce
+  text: Réaliser un nœud de chirurgien
+- id: dd7a6fd8-6dfd-4226-b1f1-a15509b0bfc9
+  text: Fabriquer un filet de pêche
+- id: bd2aacca-49d1-4c15-8c4a-3b441396b631
+  text: Réparer une combinaison
+correct_choice_ids:
+- 06db0307-2405-4521-8d70-7f6922fe6dd4
+explanation: 'Le manuel limite le répertoire à quelques nœuds d''usage courant : amarrer
+  une embarcation, fixer un pare-battage, relier une annexe, fixer une bouteille au
+  pendeur, mettre en place une ligne de vie (p. 394).'
+archived: false

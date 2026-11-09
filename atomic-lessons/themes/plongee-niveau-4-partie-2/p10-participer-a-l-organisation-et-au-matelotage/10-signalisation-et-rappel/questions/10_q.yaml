@@ -1,0 +1,20 @@
+id: 5c6f0c47-22f9-44e5-a9b9-4d7b96b028f7
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels moyens de rappel le manuel cite-t-il ?
+choices:
+- id: 113d943f-a46c-435f-b13f-f422a1d4fc67
+  text: Pétard de rappel, mise en route des moteurs
+- id: 8cab182f-8358-41b2-8f58-0cb23472c09e
+  text: Sirène de brume et feux de détresse
+- id: 701b8a42-f366-4933-a7e0-2a2a894cce00
+  text: Coups de rame sur la coque uniquement
+- id: d38a2f4a-d2b4-4c1d-a74a-82258efb46f9
+  text: Appel VHF canal 16
+correct_choice_ids:
+- 113d943f-a46c-435f-b13f-f422a1d4fc67
+explanation: Le manuel cite le pétard de rappel et la mise en route des moteurs ;
+  le moyen est laissé à l'appréciation des organisateurs (p. 385).
+archived: false

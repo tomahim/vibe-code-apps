@@ -1,0 +1,20 @@
+id: 6d981d07-90ca-48eb-ae06-4814191709eb
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle attitude le manuel demande-t-il pour apprendre la récupération ?
+choices:
+- id: 461a884e-c2d7-4d50-9756-a11dfae9af49
+  text: La considérer comme une phase délicate et s'y former spécifiquement
+- id: e6fb98d8-18e2-4a46-862a-27fb195f0250
+  text: L'improviser le jour J
+- id: 9af8afa6-de40-4dc8-8256-1bacc2297d50
+  text: La déléguer toujours à quelqu'un d'autre
+- id: d2ab4e74-8558-4b49-9ebc-5ed7631f940d
+  text: L'éviter en ne plongeant que du bord
+correct_choice_ids:
+- 461a884e-c2d7-4d50-9756-a11dfae9af49
+explanation: La récupération des palanquées est une phase délicate, qui nécessite
+  un apprentissage particulier (p. 393).
+archived: false

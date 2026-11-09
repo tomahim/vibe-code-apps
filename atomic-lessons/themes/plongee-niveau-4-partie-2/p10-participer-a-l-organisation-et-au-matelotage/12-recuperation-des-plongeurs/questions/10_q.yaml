@@ -1,0 +1,21 @@
+id: 2f4dba4d-083a-4e22-8f43-389711199080
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel outil de surveillance permet d'anticiper une palanquée qui s'éloigne
+  trop ?
+choices:
+- id: 517c0a1a-97b9-4ef5-9954-1ee30dc3c1a6
+  text: Le suivi des panaches de bulles
+- id: 65ab2270-7f9c-4544-bf37-ad41d0f5dc84
+  text: Le sondeur
+- id: 4dec2261-58c5-4b1f-96a0-d30c91ec37bd
+  text: La VHF
+- id: 44da74ac-7689-4005-9c92-ba37dece8e57
+  text: Le radar
+correct_choice_ids:
+- 517c0a1a-97b9-4ef5-9954-1ee30dc3c1a6
+explanation: Repérer les palanquées par leur panache de bulles et suivre leur parcours
+  permet d'anticiper des difficultés si une palanquée s'éloigne trop (p. 393).
+archived: false

@@ -1,0 +1,22 @@
+id: 752161ee-78d7-45b0-bdbd-88b0dfe67260
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi la récupération est-elle délicate, d'après la logique du manuel ?
+choices:
+- id: ed089ba5-27c4-470a-b6cf-d4100ed21bbc
+  text: Le bateau évolue à proximité de plongeurs en surface, souvent par vent ou
+    courant
+- id: 4fe37665-e845-465a-ae73-c1043e3c4e18
+  text: Les plongeurs refusent toujours de remonter
+- id: a4d70d93-d939-4cc6-bd37-d44e60de3f97
+  text: Le moteur ne peut plus démarrer
+- id: c6bf07df-8366-45f6-9256-9732e3014a13
+  text: L'échelle est toujours trop courte
+correct_choice_ids:
+- ed089ba5-27c4-470a-b6cf-d4100ed21bbc
+explanation: 'La manœuvre se fait à proximité de plongeurs en surface, souvent par
+  vent ou courant : elle doit protéger les plongeurs tout en gardant le bateau maîtrisé
+  (p. 393).'
+archived: false

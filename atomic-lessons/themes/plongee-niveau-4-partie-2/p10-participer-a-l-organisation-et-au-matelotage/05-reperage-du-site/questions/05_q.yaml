@@ -1,0 +1,22 @@
+id: f4c9d558-e101-42f9-a0dd-31db79ccc4e1
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le manuel conseille-t-il de suivre un alignement pour trouver le lieu
+  de plongée ?
+choices:
+- id: 7cb64c32-c662-4455-b85c-92d5829c124c
+  text: À vitesse maximale pour gagner du temps
+- id: c44edf64-24ce-473c-9844-20cfe17c9030
+  text: À allure réduite, sans en dévier, dans la direction du deuxième alignement
+- id: 83519844-adbe-4c2f-9afd-1dc8c5d628fd
+  text: En zigzag pour balayer la zone
+- id: 47f0b0aa-ee6b-4713-abe7-bdac302890ec
+  text: En marche arrière
+correct_choice_ids:
+- c44edf64-24ce-473c-9844-20cfe17c9030
+explanation: Le manuel conseille de suivre un alignement à allure réduite, sans en
+  dévier, dans la direction du deuxième alignement ; quand on le coupe, on est sur
+  le point recherché (p. 389).
+archived: false

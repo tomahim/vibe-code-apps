@@ -1,0 +1,22 @@
+id: 2ca1553d-54a3-4b90-a93e-be12f7093ca9
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la conduite à tenir près d'une plongée signalée n'est-elle pas unique
+  ?
+choices:
+- id: d2847b4b-72d7-4a3a-9603-6ea99c7c62b2
+  text: Parce qu'elle diffère selon les régions maritimes
+- id: b4429e9d-2258-45ce-9a47-82ba6ce610b0
+  text: Parce qu'elle dépend de la taille des plongeurs
+- id: 11fe24bc-058c-46ef-818f-1486892a2852
+  text: Parce qu'elle change toutes les semaines
+- id: fecadb1d-fd9e-4229-98a3-13e440ea3813
+  text: Parce qu'elle relève du choix de chaque capitaine de pêche
+correct_choice_ids:
+- d2847b4b-72d7-4a3a-9603-6ea99c7c62b2
+explanation: 'Le manuel indique que la conduite à tenir diffère selon les régions
+  maritimes : interdiction des 100 mètres sur plusieurs littoraux, vitesse limitée
+  aux Antilles, autres règles ailleurs (p. 383).'
+archived: false

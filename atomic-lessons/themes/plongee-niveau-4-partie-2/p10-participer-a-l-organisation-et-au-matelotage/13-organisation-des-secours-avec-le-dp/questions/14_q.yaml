@@ -1,0 +1,21 @@
+id: 54dab958-9724-4506-9b27-8a7af074bf20
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le manuel organise-t-il la connaissance du dispositif de secours ?
+choices:
+- id: eae47edf-7779-4a0d-b433-50706ac51019
+  text: Le plan de secours est porté à la connaissance du directeur de plongée, des
+    encadrants et des plongeurs autonomes
+- id: 53d62a58-18de-4b0a-a129-57012f4354df
+  text: Il est gardé secret
+- id: 7f567425-9f92-4c3c-8089-4454817c3b6e
+  text: Seul le propriétaire du bateau le connaît
+- id: 4969ea7c-8894-46ec-b597-3b607d23481f
+  text: Il est improvisé en cas d'accident
+correct_choice_ids:
+- eae47edf-7779-4a0d-b433-50706ac51019
+explanation: Le plan de secours, écrit et mis à jour, est porté à la connaissance
+  du directeur de plongée, des encadrants et des plongeurs autonomes (p. 384).
+archived: false

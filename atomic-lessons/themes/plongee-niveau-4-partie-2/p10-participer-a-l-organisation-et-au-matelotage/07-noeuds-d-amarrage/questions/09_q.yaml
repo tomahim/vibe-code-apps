@@ -1,0 +1,21 @@
+id: bc447bfa-61b2-4176-a1ac-d82371d2f4d2
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi le manuel déconseille-t-il la demi-clef sur la dernière boucle du
+  nœud de taquet ?
+choices:
+- id: 9cb6d453-bd02-41b1-8e2e-f010143dd174
+  text: Elle bloque le nœud de taquet, ce qui interdit tout largage rapide
+- id: 00a466eb-f2fd-47df-9422-51db060b3f2e
+  text: Elle fait glisser le nœud
+- id: 6a26cafa-0122-462f-ba62-1f50f5c4ecdc
+  text: Elle use le taquet
+- id: 98d5f3c8-eae4-4a26-a846-188556c76346
+  text: Elle empêche d'ajuster la longueur
+correct_choice_ids:
+- 9cb6d453-bd02-41b1-8e2e-f010143dd174
+explanation: La demi-clef pratiquée lors de la dernière boucle « bloque » le nœud
+  de taquet, ce qui interdit tout largage rapide ; le manuel la déconseille (p. 398).
+archived: false

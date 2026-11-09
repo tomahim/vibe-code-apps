@@ -1,0 +1,20 @@
+id: 8d98333a-f1c0-4a7d-a1af-6b96a46e5eac
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Une fois débrayé, que fait le bateau selon la méthode du manuel ?
+choices:
+- id: 28509879-4ff0-43b3-8d54-1e71acea7c40
+  text: Il se laisse dériver vers les plongeurs
+- id: 5cb86faa-3a4b-4951-93a4-f95c2d6b180e
+  text: Il recule au moteur
+- id: 51898832-d0a6-4c3e-96cd-3a17acfb31d0
+  text: Il tourne sur lui-même
+- id: 637783e5-3efe-4f30-919f-37615411cabb
+  text: Il s'éloigne pour mieux revenir
+correct_choice_ids:
+- 28509879-4ff0-43b3-8d54-1e71acea7c40
+explanation: Après s'être intercalé entre le vent et les plongeurs et avoir débrayé,
+  le bateau se laisse dériver vers la palanquée (p. 393).
+archived: false

@@ -1,0 +1,20 @@
+id: b7eca252-b3d4-4f05-a5f9-a4ccd5e57bdc
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles caractéristiques le pavillon Alpha doit-il présenter ?
+choices:
+- id: 33819ade-f475-43a7-b4e1-4fd3b2411396
+  text: Rigide, visible sur tout l'horizon, d'une hauteur d'au moins 1 mètre
+- id: f9e32f57-675a-4188-b136-164e18d17ea9
+  text: Souple et coloré, d'au moins 2 mètres
+- id: d3fb2d80-0d40-48f4-a450-c7d630704f3f
+  text: Rigide, visible à 50 mètres, d'au moins 0,30 mètre
+- id: 4ff72324-3dc6-4a17-866a-cd5d73b6a830
+  text: Flottant et lumineux
+correct_choice_ids:
+- 33819ade-f475-43a7-b4e1-4fd3b2411396
+explanation: Le pavillon doit être rigide, visible sur tout l'horizon et d'une hauteur
+  d'au moins 1 mètre (règle n° 27 du RIPAM, p. 383).
+archived: false

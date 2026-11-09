@@ -1,0 +1,20 @@
+id: 70c0b9d8-e4c9-4ca1-8f11-46469191ce5b
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Par où s'achève concrètement la récupération ?
+choices:
+- id: 62a172ca-4a08-498a-93ed-ae617702cf0c
+  text: Par la remontée des plongeurs à bord, à l'échelle
+- id: a8d77fcc-8d9d-490f-b2c3-aa85b442f13b
+  text: Par le retour au port
+- id: 5f6becaa-43ca-4e2b-9490-f64a445225f7
+  text: Par la fermeture de la feuille de palanquée
+- id: d1cb5655-202c-49d2-850e-d535ceae2bfe
+  text: Par le rinçage du matériel
+correct_choice_ids:
+- 62a172ca-4a08-498a-93ed-ae617702cf0c
+explanation: La récupération s'achève par la remontée des plongeurs à bord, par l'échelle
+  ; sans mouillage, le parachute de palier reste déployé jusqu'à ce moment (p. 393).
+archived: false

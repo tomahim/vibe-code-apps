@@ -1,0 +1,20 @@
+id: 17f81b8e-d0e1-436d-8adb-59537f62bee4
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi le manuel recommande-t-il de laisser une balise sur le site ?
+choices:
+- id: a479298e-c58d-4e45-9059-53dc49822e7e
+  text: Elle matérialise la zone de plongée
+- id: 22c64d26-afd3-418e-ba94-861325328489
+  text: Elle remplace le pavillon Alpha
+- id: 992fee1b-daeb-49bf-9cde-fc655e4818b9
+  text: Elle sert de mouillage principal
+- id: 8fe4d2ef-23e1-4664-965d-1a029146f3ed
+  text: Elle indique la direction du courant aux autres navires
+correct_choice_ids:
+- a479298e-c58d-4e45-9059-53dc49822e7e
+explanation: 'Le manuel recommande de laisser une balise sur le site si possible :
+  elle matérialise la zone de plongée (p. 391).'
+archived: false

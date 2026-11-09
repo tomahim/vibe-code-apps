@@ -1,0 +1,21 @@
+id: f906557f-7308-4c7a-971e-fd66b07ea292
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Dans l'exemple de bulletin du manuel, comment la visibilité est-elle exprimée
+  ?
+choices:
+- id: dd954d29-6ff4-4fbb-a50e-060cd6c050b6
+  text: En kilomètres
+- id: cb223289-fb1e-43ae-9592-884dc104d35b
+  text: En milles, avec une visibilité réduite sous averses
+- id: 3d43cc78-a66e-414d-a5e6-dae9b59674c1
+  text: En mètres sous l'eau
+- id: b92d9575-26ff-4225-8c69-300f75b490fb
+  text: En degrés Beaufort
+correct_choice_ids:
+- cb223289-fb1e-43ae-9592-884dc104d35b
+explanation: L'exemple donne une visibilité de 5 à 10 milles, réduite sous averses
+  (p. 387).
+archived: false

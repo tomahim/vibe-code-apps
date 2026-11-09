@@ -1,0 +1,21 @@
+id: 0ef07571-b534-4910-9a39-1aeb6af11460
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles vitesses moyennes correspondent au degré 6 (vent frais) de l'échelle
+  de Beaufort ?
+choices:
+- id: 10049c27-4f50-4592-9f48-d91fd9a0beb1
+  text: 11 à 16 nœuds, soit 20 à 28 km/h
+- id: 41744f88-0f8d-489f-99cc-1eabce48c334
+  text: 17 à 21 nœuds, soit 29 à 38 km/h
+- id: 41e8cd79-61db-412b-9eee-0c849b4f7d4d
+  text: 22 à 27 nœuds, soit 39 à 49 km/h
+- id: b462bcf9-bd56-434a-8e68-08840a5a9ae4
+  text: 34 à 40 nœuds, soit 62 à 74 km/h
+correct_choice_ids:
+- 41e8cd79-61db-412b-9eee-0c849b4f7d4d
+explanation: Le vent frais (degré 6) correspond à 22 à 27 nœuds, soit 39 à 49 km/h
+  ; 17 à 21 nœuds est la bonne brise et 34 à 40 nœuds le coup de vent (p. 388).
+archived: false

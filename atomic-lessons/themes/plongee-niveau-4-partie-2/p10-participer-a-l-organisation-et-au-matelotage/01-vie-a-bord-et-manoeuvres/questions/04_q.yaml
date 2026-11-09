@@ -1,0 +1,21 @@
+id: 09caeb95-d80b-462a-bb90-9b172ccf3ddd
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que dit le manuel à propos de l'appareillage et de l'accostage ?
+choices:
+- id: 31c32948-b39d-495a-a9ad-9caa8cb2d2ce
+  text: Il en donne une procédure détaillée en dix étapes
+- id: b26b3311-b8d3-4294-a59b-ace4b52653fa
+  text: Il n'en décrit pas de procédure détaillée ; il fournit le vocabulaire et les
+    gestes de matelotage utiles
+- id: 1146bada-5aa9-4073-b5c8-d00006cee14d
+  text: Il les interdit aux plongeurs de niveau 4
+- id: eb831ec3-ac34-4d07-9df7-d9fcc2934126
+  text: Il les réserve au directeur de plongée
+correct_choice_ids:
+- b26b3311-b8d3-4294-a59b-ace4b52653fa
+explanation: Le manuel ne décrit pas de procédure d'appareillage ou d'accostage ;
+  la leçon signale cette limite et s'appuie sur ce que le livre fournit réellement.
+archived: false

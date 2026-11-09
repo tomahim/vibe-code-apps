@@ -1,0 +1,22 @@
+id: a5e8c5a1-e59a-4895-83e1-3c5bbf94b6a6
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le manuel suggère-t-il de retenir les nœuds ?
+choices:
+- id: e6f2422f-c88c-43a5-a283-f4acde899c8b
+  text: En les refaisant en pratique, en se limitant à quelques nœuds d'usage courant
+    choisis et maîtrisés
+- id: f0a447e0-a0f0-4f2e-8d0e-6d4ced1aad0b
+  text: En apprenant les 4 000 nœuds du livre d'Ashley
+- id: 5b8299a7-df2d-4964-a1d5-79519eef2e85
+  text: En regardant une seule fois les schémas
+- id: 63d49b07-9e79-4ecc-9ccc-9c52dda700da
+  text: En déléguant tous les nœuds au pilote
+correct_choice_ids:
+- e6f2422f-c88c-43a5-a283-f4acde899c8b
+explanation: L'ambition du guide est limitée à quelques nœuds d'usage courant ; le
+  manuel précise que ces connaissances complètent les cours du moniteur (p. 383 et
+  394).
+archived: false

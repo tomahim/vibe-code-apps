@@ -1,0 +1,20 @@
+id: e7d3faf4-e37f-4bd1-b340-901f6e2f19bb
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le manuel des fiches d'évacuation ?
+choices:
+- id: 0219fa62-9e11-455d-9076-666d4d6b3218
+  text: Des fiches d'évacuation selon un modèle-type doivent être disponibles
+- id: 6d5f45c4-40d2-4d05-bbbe-f09a8c309dc6
+  text: Elles sont facultatives
+- id: 6cb77cfe-352f-4d23-bd3f-963d4a562ca2
+  text: Elles remplacent le plan de secours
+- id: 8b455109-8abe-4762-91de-f3eeaef9979c
+  text: Elles sont conservées dix ans
+correct_choice_ids:
+- 0219fa62-9e11-455d-9076-666d4d6b3218
+explanation: Des fiches d'évacuation selon un modèle-type doivent être disponibles
+  ; le modèle figure p. 420 du manuel (p. 385).
+archived: false

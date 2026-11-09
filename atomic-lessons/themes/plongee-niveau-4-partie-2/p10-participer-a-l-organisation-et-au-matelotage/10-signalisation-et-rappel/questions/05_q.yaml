@@ -1,0 +1,21 @@
+id: e8d1b951-6f56-474f-a9c9-8362dd57d88a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle conduite s'impose aux autres navires en Atlantique, Manche et Mer du
+  Nord, Mayotte et Méditerranée autour d'une plongée signalée ?
+choices:
+- id: 94dba661-5581-49fe-88a1-2f5a6e56d435
+  text: Navigation interdite dans un rayon de 100 mètres
+- id: b18c542c-a292-4690-beaa-8d446f6e562e
+  text: Passage libre à plus de 25 mètres
+- id: d63dd9ad-c316-4400-bad1-35642243d176
+  text: Vitesse limitée à 3 nœuds sans distance minimale
+- id: 100eb270-3ef4-413f-82f3-941443f434ff
+  text: Aucune règle particulière
+correct_choice_ids:
+- 94dba661-5581-49fe-88a1-2f5a6e56d435
+explanation: Pour ces régions maritimes, la navigation est interdite dans un rayon
+  de 100 mètres (p. 383).
+archived: false

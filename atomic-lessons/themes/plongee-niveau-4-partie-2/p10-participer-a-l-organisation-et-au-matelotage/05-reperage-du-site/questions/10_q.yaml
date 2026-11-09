@@ -1,0 +1,22 @@
+id: b9be25c2-1dc8-44fa-b954-264d24b7afe8
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels sont les points zéro des longitudes et des latitudes, selon le manuel
+  ?
+choices:
+- id: 62fc83fa-0a91-43ab-a8a6-830f0e6d0fef
+  text: Le méridien de Greenwich pour les longitudes, l'équateur pour les latitudes
+- id: 7d434e11-bfd5-471e-91af-2d87a3e05252
+  text: Le pôle Nord pour les deux
+- id: e70780b7-6c50-4d2e-9849-a47a84444a60
+  text: Le port de Brest pour les longitudes, l'équateur pour les latitudes
+- id: 8079522e-64f0-44e7-895c-4841764f4e62
+  text: Le tropique du Cancer pour les latitudes, l'équateur pour les longitudes
+correct_choice_ids:
+- 62fc83fa-0a91-43ab-a8a6-830f0e6d0fef
+explanation: Les points zéro sont le méridien de Greenwich pour les longitudes (Est,
+  Ouest) et l'équateur pour les latitudes (Nord, Sud) ; latitude et longitude se donnent
+  en degrés et minutes d'angle (p. 390).
+archived: false

@@ -1,0 +1,22 @@
+id: 20e41416-c5b6-41ef-abb1-966d8574c916
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Avec quel nœud le manuel propose-t-il de fixer un pare-battage, en restant
+  réglable sans défaire le nœud ?
+choices:
+- id: 6749fb0b-761b-46ba-b857-0342a20dce54
+  text: Le nœud de chaise
+- id: acc38e50-aaaf-428d-8161-f846c554f428
+  text: Le nœud en huit
+- id: eedf4c2c-33ce-42fe-b388-48249f1867ea
+  text: Le nœud du pêcheur
+- id: 6bf23876-7d24-4867-bd43-6a7c187bd2ab
+  text: Le nœud de cabestan
+correct_choice_ids:
+- 6bf23876-7d24-4867-bd43-6a7c187bd2ab
+explanation: Le nœud de cabestan est rapide à réaliser et permet d'ajuster la longueur
+  du bout sans défaire le nœud, par exemple pour fixer un pare-battage ; on l'assure
+  par deux demi-clefs (p. 396).
+archived: false

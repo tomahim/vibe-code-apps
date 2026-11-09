@@ -1,0 +1,21 @@
+id: d928748d-d72b-4941-98b5-311230fd5726
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Sur l'échelle Douglas, quelles hauteurs de vagues correspondent à une mer
+  « belle » (degré 2) ?
+choices:
+- id: 30884969-eb6f-4794-bd09-e0a4b3da1104
+  text: 0 m exactement
+- id: 023ef9f3-2fab-4bf2-a9f4-03cc362fd1e4
+  text: 0 à 0,1 m
+- id: 473fd39e-5731-45ec-b71c-577f45c198d1
+  text: 0,1 à 0,5 m
+- id: 1030c41c-259d-4695-a461-49f38cc33a10
+  text: 1,25 à 2,5 m
+correct_choice_ids:
+- 473fd39e-5731-45ec-b71c-577f45c198d1
+explanation: Une mer belle (degré 2) correspond à des vagues de 0,1 à 0,5 m ; 0 à
+  0,1 m est une mer ridée et 1,25 à 2,5 m une mer agitée (p. 388).
+archived: false

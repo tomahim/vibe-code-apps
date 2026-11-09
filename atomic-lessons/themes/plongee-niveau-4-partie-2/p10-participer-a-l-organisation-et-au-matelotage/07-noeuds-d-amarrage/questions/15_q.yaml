@@ -1,0 +1,21 @@
+id: 563094ff-4e0a-4659-96e3-8c15033e9d7d
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Un plongeur veut un nœud simple pour fixer une échelle. Que propose le manuel
+  ?
+choices:
+- id: aba0a68a-049d-4125-a2ca-8ac63c1094e8
+  text: Le nœud de taquet
+- id: 9f7a16b1-5d0f-41d3-a8ba-4c2a6d3904bc
+  text: Le tour mort et deux demi-clefs
+- id: e6523844-1fe2-400a-a4e3-d577c3de1f8a
+  text: Le nœud d'agui
+- id: ecdf4404-e54c-4a09-820f-4a3bfb637d61
+  text: Le nœud d'écoute double
+correct_choice_ids:
+- 9f7a16b1-5d0f-41d3-a8ba-4c2a6d3904bc
+explanation: Le tour mort et deux demi-clefs, le nœud le plus facile à réaliser, sert
+  à amarrer un bateau ou à fixer une échelle (p. 396).
+archived: false

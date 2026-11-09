@@ -1,0 +1,19 @@
+id: 4ccbeb94-97ac-49b8-98e5-00f2820a5243
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le manuel qualifie-t-il la sécurité en surface ?
+choices:
+- id: 00e23aa2-266e-4b18-b9f7-9644a8c9d520
+  text: Une tâche de confiance
+- id: 29ff06ad-33aa-4fd1-8750-b254784bd5f8
+  text: Une tâche secondaire
+- id: b2d2800c-2a02-4991-8149-4d1da68d9a74
+  text: Une formalité administrative
+- id: b6c669ac-9d7c-4aa9-9937-d636a279a512
+  text: Une compétence de niveau 1
+correct_choice_ids:
+- 00e23aa2-266e-4b18-b9f7-9644a8c9d520
+explanation: Assurer la sécurité en surface est une tâche de confiance (p. 393).
+archived: false

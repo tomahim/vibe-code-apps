@@ -1,0 +1,21 @@
+id: 05494cf1-373f-41f2-b297-2ebcbe60c5db
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Vous devez pouvoir larguer l'amarre instantanément depuis un taquet. Que recommande
+  la logique du manuel ?
+choices:
+- id: ae6a2c36-cf50-482b-a564-261a7f01da83
+  text: Un nœud de taquet, sans demi-clef sur la dernière boucle
+- id: 4ea2a2ee-faa8-46cb-a729-96a531795a44
+  text: Un nœud de cabestan assuré par trois demi-clefs
+- id: b197e2ca-302f-497a-9815-e9cae06f8c40
+  text: Un tour mort et deux demi-clefs
+- id: 4a335f3d-91d4-422a-a110-56adaa318006
+  text: Un nœud de plein poing
+correct_choice_ids:
+- ae6a2c36-cf50-482b-a564-261a7f01da83
+explanation: Le nœud de taquet permet le largage rapide ; la demi-clef sur la dernière
+  boucle l'interdit, d'où la déconseil du manuel (p. 398).
+archived: false
