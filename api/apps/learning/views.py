@@ -14,7 +14,7 @@ from apps.accounts.decorators import jwt_required
 
 from .api import (
     LearnerState, checkpoint_questions, described, input_error, json_object,
-    lesson_summary, lock_learner, next_step, public_question, visible,
+    lesson_summary, lock_learner, next_step, public_questions, visible,
 )
 from .models import (Card, CardProgress, LearningPath, Lesson, LessonOpen, PathCelebration,
                      Question, QuestionAttempt, Theme)
@@ -135,8 +135,8 @@ def themes(request):
 @jwt_required
 def theme_detail(request, theme_id):
     theme = get_object_or_404(visible(Theme), pk=theme_id)
-    state = LearnerState(request.user)
-    lessons = list(visible(Lesson))
+    lessons = list(visible(Lesson).filter(learning_path__theme=theme))
+    state = LearnerState(request.user, lessons=lessons)
     return JsonResponse({"theme": described(theme), "learning_paths": [
         {**described(path), "theme_id": str(theme.pk),
          "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
@@ -149,8 +149,8 @@ def theme_detail(request, theme_id):
 @jwt_required
 def path_detail(request, path_id):
     path = get_object_or_404(visible(LearningPath).select_related("theme"), pk=path_id)
-    state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
+    state = LearnerState(request.user, lessons=lessons)
     return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
                                           "progress": state.progress(lessons),
                                           "catch_up": catch_up_payload(state, lessons)},
@@ -165,7 +165,7 @@ def path_detail(request, path_id):
 @jwt_required
 def lesson_detail(request, lesson_id):
     lesson = get_object_or_404(visible(Lesson).select_related("learning_path__theme"), pk=lesson_id)
-    state = LearnerState(request.user)
+    state = LearnerState(request.user, lesson=lesson, card_content=True)
     return JsonResponse({"lesson": lesson_summary(lesson, state),
                          "learning_path": described(lesson.learning_path),
                          "theme": described(lesson.learning_path.theme),
@@ -184,9 +184,9 @@ def lesson_detail(request, lesson_id):
                                     "completed_at": state.completed[c.pk].isoformat()
                                     if c.pk in state.completed else None}
                                    for c in state.cards if c.lesson_id == lesson.pk],
-                         "questions": [{**public_question(q),
-                                        "completed": (lesson.pk, q.after_card_position) in state.passed}
-                                       for q in checkpoint_questions(state, lesson)],
+                         "questions": [{**q,
+                                        "completed": (lesson.pk, q["after_card_position"]) in state.passed}
+                                       for q in public_questions(checkpoint_questions(state, lesson))],
                          "next_step": next_step(state, lesson)})
 
 
@@ -261,7 +261,7 @@ def question_attempts(request):
         question = get_object_or_404(visible(Question).select_related("lesson"), pk=question_id)
         if question.type == Question.Type.MULTIPLE_CHOICE and data["answer"] not in {o["id"] for o in question.options}:
             return JsonResponse({"error": "Answer must be one of this question's choice IDs."}, status=400)
-        state = LearnerState(request.user)
+        state = LearnerState(request.user, lesson=question.lesson)
         checkpoint = (question.lesson_id, question.after_card_position)
         fully_read = state.lesson_fully_read(question.lesson_id)
         catch_up = fully_read and question.pk not in state.correct_questions
@@ -298,7 +298,7 @@ def question_attempts(request):
             submitted_answer=data["answer"],
             correct=correct, answered_at=timezone.now(),
         )
-        state = LearnerState(request.user)
+        state = LearnerState(request.user, lesson=question.lesson)
         if review:
             following = None
             if not attempt.correct:
@@ -328,13 +328,13 @@ def catch_up(request, path_id):
     cards are read (Thomas, 2026-11-08: practising a selected lesson).
     """
     path = get_object_or_404(visible(LearningPath), pk=path_id)
-    state = LearnerState(request.user)
     lessons = list(visible(Lesson).filter(learning_path=path))
     lesson_id = request.GET.get("lesson")
     if lesson_id:
         lessons = [lesson for lesson in lessons if str(lesson.pk) == lesson_id]
         if not lessons:
             return JsonResponse({"error": "Unknown lesson for this path."}, status=404)
+    state = LearnerState(request.user, lessons=lessons)
     titles = {lesson.pk: lesson.title for lesson in lessons}
     read_ids = {lesson.pk for lesson in lessons if state.lesson_fully_read(lesson.pk)}
     pool = [q for q in state.questions if q.lesson_id in read_ids]
@@ -342,8 +342,8 @@ def catch_up(request, path_id):
     return JsonResponse({"learning_path_id": str(path.pk),
                          "eligible": bool(read_ids),
                          "remaining": len(state.catch_up_questions(lessons)),
-                         "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id]}
-                                       for q in session]})
+                         "questions": [{**q, "lesson_title": titles[UUID(q["lesson_id"])]}
+                                       for q in public_questions(session)]})
 
 
 # Review session sizes: the learner says how much time they have, and that
@@ -392,9 +392,9 @@ def review(request):
                             "theme_title": eligible[pid].theme.title,
                             "last_activity_at": (recency[pid].isoformat() if pid in recency else None)}
                            for pid in selected],
-        "questions": [{**public_question(q), "lesson_title": titles[q.lesson_id],
-                       "learning_path_title": eligible[lesson_path[q.lesson_id]].title}
-                      for q in session],
+        "questions": [{**q, "lesson_title": titles[UUID(q["lesson_id"])],
+                       "learning_path_title": eligible[lesson_path[UUID(q["lesson_id"])]].title}
+                      for q in public_questions(session)],
     })
 
 

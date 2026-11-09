@@ -37,15 +37,26 @@ def described(row):
 
 class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
-    def __init__(self, user, lesson=None):
+    def __init__(self, user, lesson=None, *, lessons=None, card_content=False):
         self.user_id = user.pk
         cards = visible(Card)
         questions = visible(Question)
         if lesson is not None:
             cards = cards.filter(lesson=lesson)
             questions = questions.filter(lesson=lesson)
+        if lessons is not None:
+            lesson_ids = [row.pk for row in lessons]
+            cards = cards.filter(lesson_id__in=lesson_ids)
+            questions = questions.filter(lesson_id__in=lesson_ids)
+        # Summary/progression code needs identities and ordering, not the
+        # library's Markdown, illustrations, prompts or answer keys. Keep the
+        # full card payload opt-in for the single-lesson reader only.
+        if not card_content:
+            cards = cards.only("entity", "lesson", "position")
         self.cards = list(cards)
-        self.questions = list(questions)
+        self.questions = list(questions.only(
+            "entity", "lesson", "position", "after_card_position", "type",
+        ))
         self.completed = dict(CardProgress.objects.filter(
             user=user, card__in=self.cards,
         ).values_list("card_id", "completed_at"))
@@ -135,6 +146,22 @@ def checkpoint_questions(state, lesson):
         ).digest())
         selected.append(ranked[state.wrong_counts[lesson.pk, position, preferred] % len(ranked)])
     return selected
+
+
+def public_questions(questions):
+    """Hydrate only the selected quiz/checkpoint questions, in one query.
+
+    Selection and progress use lightweight rows. Do not let deferred prompt
+    access turn rendering a quiz into one query per field per question.
+    Answer keys/explanations stay in the server-side grading lookup.
+    """
+    questions = list(questions)
+    if not questions:
+        return []
+    rows = {row.pk: row for row in visible(Question).filter(
+        pk__in=[q.pk for q in questions],
+    ).only("entity", "lesson", "position", "after_card_position", "type", "prompt", "options")}
+    return [public_question(rows[q.pk]) for q in questions if q.pk in rows]
 
 
 def public_question(question):
