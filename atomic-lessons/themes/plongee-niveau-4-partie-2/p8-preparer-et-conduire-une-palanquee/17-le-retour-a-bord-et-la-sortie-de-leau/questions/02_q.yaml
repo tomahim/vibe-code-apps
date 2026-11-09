@@ -1,0 +1,20 @@
+id: 2136db34-e0ed-49a8-b3e0-bf2998f23feb
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qui reste responsable de la palanquée en surface ?
+choices:
+- id: 8751007b-1fc9-40cb-b99e-77488f69a4e9
+  text: Le guide de palanquée.
+- id: 17381619-1c31-4b1b-9454-fac0babdf62b
+  text: Le directeur de plongée, qui prend le relais à la surface.
+- id: 569b56bf-8dc6-42f5-bf26-0155200f472a
+  text: Chaque plongeur individuellement.
+- id: da994eef-e85c-44e0-a8f6-b62cb8fe3734
+  text: Le pilote du bateau.
+correct_choice_ids:
+- 8751007b-1fc9-40cb-b99e-77488f69a4e9
+explanation: En surface, vous êtes toujours responsable de votre palanquée, écrit
+  le manuel à l'adresse du guide.
+archived: false

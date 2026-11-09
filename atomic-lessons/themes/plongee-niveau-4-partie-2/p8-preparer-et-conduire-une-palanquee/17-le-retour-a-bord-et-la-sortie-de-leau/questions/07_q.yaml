@@ -1,0 +1,21 @@
+id: 6aaa4360-1eca-45ea-b645-13ac231ae087
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi le guide passe-t-il en dernier, dans la logique du manuel ?
+choices:
+- id: c8173799-f3c3-4089-8148-648d3ede21eb
+  text: Il ne quitte l'eau qu'une fois sa palanquée récupérée, pour la surveiller
+    jusqu'au bout.
+- id: 76838599-a650-4b9c-85e9-8b9a306c209e
+  text: Pour vérifier l'ancre.
+- id: 44c39772-af0d-44cf-9e8e-9998e883c7d9
+  text: Pour finir son air.
+- id: 1117cd42-10e8-46e7-b78a-abcc494f026e
+  text: Par tradition, sans raison pratique.
+correct_choice_ids:
+- c8173799-f3c3-4089-8148-648d3ede21eb
+explanation: 'Le guide fait remonter ses équipiers à bord et passe en dernier : il
+  reste en position de surveiller sa palanquée jusqu''à la fin.'
+archived: false

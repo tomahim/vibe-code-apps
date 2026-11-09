@@ -1,0 +1,20 @@
+id: 42e383c4-6e55-4c01-bbff-8fb0c7c514f6
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment la palanquée rejoint-elle le bateau, selon le manuel ?
+choices:
+- id: 0efe1ab0-da0e-4459-9e60-dc83997034f9
+  text: Restez groupés et avancez tous ensemble.
+- id: 3ab7abbb-278a-4d35-bd63-458e125bca8e
+  text: Chacun nage de son côté à son rythme.
+- id: 8b946292-6ecb-43a0-a8a6-fc877ad9598f
+  text: Le guide part seul chercher le bateau.
+- id: 2b7ad49a-5c7f-4ff1-82a3-03d52a933c7a
+  text: On retire les palmes et on attend.
+correct_choice_ids:
+- 0efe1ab0-da0e-4459-9e60-dc83997034f9
+explanation: 'Pour rejoindre le bateau ou le bord de l''eau : restez groupés et avancez
+  tous ensemble.'
+archived: false

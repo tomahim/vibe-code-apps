@@ -1,0 +1,22 @@
+id: 61ea7fbb-921e-4c7b-8517-eeea93b90990
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: La plongée est-elle terminée une fois la palanquée en surface, selon le manuel
+  ?
+choices:
+- id: 172f2a85-239c-470b-8fd6-069313f0e684
+  text: 'Non : le guide reste responsable, il faut rejoindre le bateau ou le bord
+    de l''eau.'
+- id: 3ab34eb8-892e-4a57-9ee2-3c62bab09078
+  text: 'Oui : une fois en surface, tout est fini.'
+- id: 56b85c51-2d42-4da6-a01c-5ed2d8c38588
+  text: Oui, si personne n'a eu de problème.
+- id: a806315b-68d8-461e-861b-adcd6f0834e7
+  text: Oui, dès que le signe « Ok » est fait.
+correct_choice_ids:
+- 172f2a85-239c-470b-8fd6-069313f0e684
+explanation: « En surface, vous êtes toujours responsable de votre palanquée. La plongée
+  n'est pas terminée, il vous faut rejoindre le bateau ou le bord de l'eau. »
+archived: false

@@ -1,0 +1,20 @@
+id: 822ac5c2-efbf-4c9d-a929-b19afd54746a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui établit la fiche de sécurité (feuille de palanquée), selon le manuel ?
+choices:
+- id: c690b7ba-0df6-4d47-9bdf-6c500873ca8c
+  text: Le directeur de plongée.
+- id: fd427a18-b16d-488b-9a4c-918c532e2355
+  text: Le guide de palanquée.
+- id: 7da311c8-48c1-4dfb-98ba-86e3e6f6fa11
+  text: Chaque plongeur pour lui-même.
+- id: ab5ab613-1b58-4fac-a0ac-0405e5652255
+  text: Le pilote du bateau.
+correct_choice_ids:
+- c690b7ba-0df6-4d47-9bdf-6c500873ca8c
+explanation: C'est le directeur de plongée qui établit la fiche de sécurité (feuille
+  de palanquée).
+archived: false
