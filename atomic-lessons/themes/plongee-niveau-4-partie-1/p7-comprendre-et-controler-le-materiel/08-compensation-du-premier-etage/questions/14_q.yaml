@@ -1,20 +1,20 @@
-id: a2f9639a-8b58-4272-a2c1-3e75a8b7ab8a
+id: 0c65a27f-feea-46fb-a36f-8c4ff15cd3ab
 position: 14
 type: multiple_choice
 selection: single
 after_card_position: 6
 prompt: 'La compensation rend le fonctionnement du premier étage indépendant :'
 choices:
-- id: 489f222b-c195-42ed-889f-ad41bd25320f
+- id: 91d62cd3-869a-44ab-abae-98b446684748
   text: De la pression de la bouteille.
-- id: 80598e05-add7-47a9-8ce8-3096f7829e0b
+- id: 0f8a16eb-a85e-4a5b-989f-4a8473bff20a
   text: De la profondeur du plongeur.
-- id: baebbe43-c680-4d15-8978-ed2beccaf425
+- id: b3ff7b7b-f08d-4436-aac0-9a01e11d2ff9
   text: De la température de l'eau.
-- id: 3ba9da55-5428-4127-ba60-65e30a970728
+- id: 8e2df33f-2175-4e7e-b373-0c3e4f94aaaf
   text: De la ventilation du plongeur.
 correct_choice_ids:
-- 489f222b-c195-42ed-889f-ad41bd25320f
+- 91d62cd3-869a-44ab-abae-98b446684748
 explanation: La HP ne participant plus au mécanisme, le fonctionnement devient indépendant
   de la pression de la bouteille ; il reste informé de la profondeur par la pression
   ambiante.

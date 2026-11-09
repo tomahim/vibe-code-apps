@@ -1,4 +1,4 @@
-id: 7fdff355-b961-4395-aff7-0befcd7bb1d5
+id: dc06894c-527b-4a7b-bae8-06761856b2ba
 position: 1
 type: multiple_choice
 selection: single
@@ -6,17 +6,17 @@ after_card_position: 1
 prompt: Pourquoi le fonctionnement d'un premier étage non compensé varie-t-il au cours
   de la plongée ?
 choices:
-- id: 6bd1f214-ec4c-4269-8be9-b47c3de8bb6a
+- id: 60c715d3-ebf0-4514-9b6b-ea4444ee35a4
   text: 'L''air HP arrive dans l''axe du piston et participe au mouvement : la pression
     de la bouteille influence le mécanisme.'
-- id: 9d3a8b78-484a-4521-b2d2-ed6de5695056
+- id: ccd169f8-2c28-4754-938a-142529f63e99
   text: Le ressort se détend progressivement à cause du froid de l'eau.
-- id: 5a2c52cb-cac9-4fad-9cc3-e14e538a4ddb
+- id: 6d4eb225-3b4e-4cdf-b4c8-c7f2fbf184ed
   text: La pression ambiante diminue au fil de la plongée.
-- id: 4ae6bbb7-2764-411d-91c1-0e93d86540bf
+- id: 4e9c3997-d766-40b1-8918-98ee455df12b
   text: Le filtre se colmate et réduit le débit vers la fin.
 correct_choice_ids:
-- 6bd1f214-ec4c-4269-8be9-b47c3de8bb6a
+- 60c715d3-ebf0-4514-9b6b-ea4444ee35a4
 explanation: Sur un premier étage à piston non compensé, l'air HP pousse dans l'axe
   du piston ; la pression de la bouteille variant (environ 200 bars au départ, 50
   bars en fin de plongée), le fonctionnement varie.

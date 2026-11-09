@@ -1,20 +1,20 @@
-id: 7b4a3f90-846d-4c0e-81c5-5b5fa02f23a9
+id: 4b7e7c83-6c51-4d4b-8c97-f292532d3f86
 position: 7
 type: multiple_choice
 selection: single
 after_card_position: 5
 prompt: Après compensation, à quoi se réduit le bilan des forces ?
 choices:
-- id: 726c3c4c-028a-4f6e-b9e9-46992f1a92a6
+- id: b575de44-2354-4ee7-93e6-c6fb93b716fc
   text: Au ressort, à la pression ambiante et à la pression intermédiaire.
-- id: e147a082-dd50-43dd-ba27-9213e1ba3890
+- id: af81ae86-73d9-4111-957d-3884f7d40f38
   text: À la seule pression de la bouteille.
-- id: fc2ee13a-27fd-4802-a0e0-e9745b8d703f
+- id: 3ff9021e-14aa-42b8-bbfd-bf813a9c9694
   text: Au ressort et à la haute pression.
-- id: 01ed5c7e-3cae-403d-bd6d-5bb16f6bec76
+- id: 399eb0ec-73ae-4203-8635-84272bfda792
   text: À la pression ambiante et à la poussée d'Archimède.
 correct_choice_ids:
-- 726c3c4c-028a-4f6e-b9e9-46992f1a92a6
+- b575de44-2354-4ee7-93e6-c6fb93b716fc
 explanation: 'La HP étant neutralisée, le bilan des forces se réduit au ressort, à
   la pression ambiante (ouverture) et à la PI (fermeture) : le fonctionnement devient
   indépendant de la pression de la bouteille.'

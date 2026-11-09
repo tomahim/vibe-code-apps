@@ -1,21 +1,21 @@
-id: 519e8f7b-8a1b-40ea-815f-12d35f1bbdad
+id: 3faf50c2-751b-4e57-8582-7741f0f034f5
 position: 3
 type: multiple_choice
 selection: single
 after_card_position: 3
 prompt: D'où vient la régularité de la respiration sur un détendeur compensé ?
 choices:
-- id: e09b191d-8ee7-44f8-8277-a852fbb73824
+- id: 8d18a751-7071-4d31-8084-33b6035de355
   text: De la compensation du premier étage, qui stabilise la PI alimentant le deuxième
     étage.
-- id: ce435138-4028-4b8f-b550-82cb9eecfec1
+- id: b18ea71f-b435-40c3-9671-d8110b67fc1a
   text: D'un mécanisme de compensation propre au deuxième étage, décrit par le manuel.
-- id: 21640276-aa5d-4b1d-a309-cd57de36084a
+- id: 2f9c0a63-1e28-4785-8e95-227024d578e8
   text: De la soupape d'expiration, qui régule le débit.
-- id: 19073b9c-a01a-4f24-9310-3fa37cb2e636
+- id: 487a5ee0-2108-459f-9651-b11ef1a99509
   text: Du manomètre, qui ajuste la pression en continu.
 correct_choice_ids:
-- e09b191d-8ee7-44f8-8277-a852fbb73824
+- 8d18a751-7071-4d31-8084-33b6035de355
 explanation: Le premier étage compensé stabilise la PI ; alimenté à une PI stable,
   le deuxième étage délivre un air à la PA avec un effort inspiratoire régulier du
   début à la fin de la plongée.

@@ -1,22 +1,22 @@
-id: 8915e097-fed8-4095-a0a1-3bdf6f642563
+id: e70647db-361b-49d1-99fd-6a790c73cee1
 position: 13
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: 'Troisième idée à retenir : que dire du « deuxième étage compensé » comme
-  mécanisme ?'
+prompt: 'Troisième idée à retenir : la mécanique interne du « deuxième étage compensé
+  »'
 choices:
-- id: 0dd55640-e9d1-4ad1-880d-2a5957c946ce
-  text: 'Non couvert par le manuel : hors du cours, aucune mécanique ne doit être
-    inventée.'
-- id: 119f63be-6cb8-42c6-a032-93a600597ec7
-  text: C'est le mécanisme le plus important du N4.
-- id: fa1a4ad6-3f89-4871-ad49-fbbcd909c266
-  text: C'est un accessoire interdit en club.
-- id: 3027fe1f-4067-419e-8605-37d0eb1e5b95
-  text: C'est un autre nom du premier étage à membrane.
+- id: cd163bbf-3f1a-43fb-b50d-b764eebb80cf
+  text: 'N''est pas décrite par le manuel : seule sa finalité (s''affranchir de la
+    pression ambiante) est affirmée, en une phrase.'
+- id: d41c0240-58d3-4fde-872c-93b82f871e82
+  text: Est détaillée par trois schémas du manuel.
+- id: dcde1519-1cf1-4e36-8299-6cd82902017e
+  text: Est le mécanisme le plus important du N4.
+- id: f06a2c01-e7c0-443f-825b-5c95d796d1a7
+  text: Est un réglage que le plongeur effectue avant chaque plongée.
 correct_choice_ids:
-- 0dd55640-e9d1-4ad1-880d-2a5957c946ce
-explanation: 'Idée 3 : tout mécanisme de « deuxième étage compensé » proprement dit
-  n''est pas couvert par le manuel et ne fait pas partie du cours.'
+- cd163bbf-3f1a-43fb-b50d-b764eebb80cf
+explanation: 'Idée 3 : la finalité est affirmée en une phrase ; aucune mécanique interne
+  n''est décrite par le manuel et aucune ne doit être inventée.'
 archived: false

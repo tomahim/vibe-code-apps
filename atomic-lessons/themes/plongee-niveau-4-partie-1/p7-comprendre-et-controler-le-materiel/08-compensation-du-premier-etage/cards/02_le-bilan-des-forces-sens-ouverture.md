@@ -1,5 +1,5 @@
 ---
-id: 391249e8-c095-4edd-b533-42f3c2e384dc
+id: 25d0a425-761f-49fe-ba3e-38ea8b666f70
 position: 2
 title: Le bilan des forces, sens ouverture
 archived: false

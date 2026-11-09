@@ -1,4 +1,4 @@
-id: 12b4f851-c782-44f4-852a-955c59c5fef7
+id: d61b1aba-b0e3-44e9-ac35-eecbe6be7837
 position: 2
 type: multiple_choice
 selection: single
@@ -6,17 +6,17 @@ after_card_position: 2
 prompt: Quelles forces participent à l'ouverture du piston non compensé, selon le
   schéma du manuel ?
 choices:
-- id: b000bed6-8ae3-4d94-97f7-5f9a3aa665a0
+- id: 5d200a1f-2f21-473c-9cf9-cc4d250d2300
   text: Le ressort, la pression ambiante sur le piston et la haute pression sur la
     section du clapet.
-- id: 07406579-0d5d-47c1-b687-964ad9ee2bc5
+- id: aa0e5667-da12-44d9-9577-46aa43df4e32
   text: La pression intermédiaire et la poussée d'Archimède.
-- id: 6f12abb2-37cf-4317-9429-e83246c03d1f
+- id: 9fda373b-7eec-443a-83ef-6f9f4d6553d1
   text: Uniquement le ressort du premier étage.
-- id: e825404a-b6a0-4468-aae3-17e5dc762ce6
+- id: 95666791-6efb-4f35-945c-8a8ff8f4d5bc
   text: La pression ambiante et le poids de l'eau au-dessus du plongeur.
 correct_choice_ids:
-- b000bed6-8ae3-4d94-97f7-5f9a3aa665a0
+- 5d200a1f-2f21-473c-9cf9-cc4d250d2300
 explanation: 'Forces d''ouverture : force du ressort, pression ambiante sur le piston
   (chambre humide), et haute pression sur la section du clapet.'
 archived: false

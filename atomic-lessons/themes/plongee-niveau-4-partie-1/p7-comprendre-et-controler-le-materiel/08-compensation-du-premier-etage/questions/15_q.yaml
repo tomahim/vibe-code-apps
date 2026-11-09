@@ -1,22 +1,23 @@
-id: 01202525-67ad-4ff8-a032-881171f80ac1
+id: d880b5b2-26e1-4c97-b736-321b6227298b
 position: 15
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Quelles deux familles de fonctionnement le manuel distingue-t-il pour le premier
-  étage ?
+prompt: Selon l'encadré du manuel, en quoi consiste la surcompensation de Scubapro
+  ?
 choices:
-- id: 7274383f-44a8-44f0-bebe-0ea285c1c056
-  text: Non compensé (la HP participe au mouvement) et compensé (la HP arrive perpendiculairement).
-- id: 7b758809-02e4-4ced-9dea-7354cf9438ba
-  text: Manuel et automatique.
-- id: c8037ac6-3907-4b54-982f-852c0a27c39f
-  text: Piston simple et piston double, sans autre distinction.
-- id: e20f259b-cd55-491d-9c85-270cfba9d633
-  text: Côtier et hauturier.
+- id: e8d8bc13-77b4-44ce-8465-f3f55e4f96a0
+  text: Augmenter la pression intermédiaire en fonction inverse de la haute pression,
+    pour diminuer le travail respiratoire en fin de plongée.
+- id: 7b78fcd5-3ad7-4b19-a4b1-d31bc032c6b7
+  text: Diminuer la pression intermédiaire quand la bouteille se vide.
+- id: a8c0ff4e-3b82-434e-9b95-d43afa13caba
+  text: Supprimer le deuxième étage pour alléger le détendeur.
+- id: e476717b-0577-4035-a9a3-c89264a9f40a
+  text: Doubler la pression de gonflage de la bouteille.
 correct_choice_ids:
-- 7274383f-44a8-44f0-bebe-0ea285c1c056
-explanation: 'Le chapitre détendeurs du manuel décrit deux familles : non compensé,
-  où la HP participe au mouvement, et compensé, où elle arrive perpendiculairement
-  et n''y participe plus.'
+- e8d8bc13-77b4-44ce-8465-f3f55e4f96a0
+explanation: 'Citation de l''encadré : « Elle consiste à augmenter la pression intermédiaire
+  en fonction inverse de la haute pression. Il en résulte une diminution du travail
+  respiratoire en fin de plongée. »'
 archived: false

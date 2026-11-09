@@ -1,5 +1,5 @@
 ---
-id: 10cea0fc-4cb3-48a6-98dc-ae6afb50f74c
+id: cbccbf55-e66d-4ef2-a26a-d2c1629da1f9
 position: 6
 title: Les bénéfices de la compensation
 archived: false

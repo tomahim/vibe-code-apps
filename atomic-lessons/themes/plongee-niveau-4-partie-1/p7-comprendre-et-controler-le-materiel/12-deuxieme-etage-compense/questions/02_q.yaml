@@ -1,22 +1,23 @@
-id: 0215a0d0-60b5-4c60-b123-141a854516be
+id: afbeeb6f-b95d-4be2-829b-e4f17586f2b7
 position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: Dans le manuel, que qualifie le terme « compensé » ?
+prompt: Dans le manuel, que qualifie principalement le terme « compensé » ?
 choices:
-- id: 77f779c0-8199-4499-aaa7-14361ff49513
+- id: 2a4b3f75-7fd9-4b7a-9409-abd6e6147992
   text: 'Le premier étage : la HP y arrive perpendiculairement et ne participe plus
-    au bilan des forces.'
-- id: b3275041-fdf3-49e2-aa79-216aba213128
-  text: 'Le deuxième étage : son clapet s''équilibre tout seul.'
-- id: 6a4cd0a7-2b3a-4368-a6d0-f7a9544927ba
+    au bilan des forces ; une phrase ajoute le cas du 2e étage, qui s''affranchit
+    de la pression ambiante.'
+- id: 140a2057-b237-4b65-859f-46014c86a76c
+  text: 'Uniquement le deuxième étage : son clapet s''équilibre tout seul.'
+- id: bbcf276d-c60d-4c62-8b46-efa78ff5a47e
   text: 'La bouteille : sa pression se régule d''elle-même.'
-- id: bbd154c5-229c-4460-9d7e-43a7749bcd56
+- id: e0eb76b5-53cc-4a4f-9899-44ac637f65b6
   text: 'Le gilet : ses purges compensent la flottabilité.'
 correct_choice_ids:
-- 77f779c0-8199-4499-aaa7-14361ff49513
-explanation: 'Dans le chapitre détendeurs, « compensé » qualifie le premier étage
-  : HP perpendiculaire au mouvement, PI stable, débits plus élevés quelle que soit
-  la pression de la bouteille.'
+- 2a4b3f75-7fd9-4b7a-9409-abd6e6147992
+explanation: « Compensé » qualifie d'abord le premier étage (HP perpendiculaire, PI
+  stable) ; le manuel ajoute une phrase sur le 2e étage compensé, qui s'affranchit
+  de la pression ambiante et donc de la profondeur.
 archived: false

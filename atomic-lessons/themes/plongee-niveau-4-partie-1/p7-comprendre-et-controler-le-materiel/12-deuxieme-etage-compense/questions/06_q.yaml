@@ -1,21 +1,24 @@
-id: ecafc7e1-0d85-4209-80d1-ff36dc0c3b0a
+id: 88a44e52-9a02-4856-b5f1-afb7532a898d
 position: 6
 type: multiple_choice
 selection: single
 after_card_position: 5
-prompt: Quelle affirmation NE PEUT PAS être tirée du manuel ?
+prompt: Quelle est l'unique phrase que le manuel consacre au deuxième étage compensé
+  ?
 choices:
-- id: 53187c01-2cb9-4b43-9481-1e286d3bc764
-  text: Une mécanique de compensation interne au deuxième étage.
-- id: a2bf892b-8610-43e5-b9d1-47dc42a2795f
-  text: Le fonctionnement de la membrane et du clapet au deuxième étage.
-- id: 103d5f51-76bf-48f8-b9a9-fb0a1a6a2fc7
-  text: Le principe de la compensation du premier étage.
-- id: b7de3c40-9a2d-4dad-9e42-f649641a6507
-  text: Le rôle de la soupape d'expiration.
+- id: d4de8b9f-d482-44ff-b3d0-7e6a3d7b32a9
+  text: « Un détendeur compensé au 2e étage s'affranchit de la pression ambiante,
+    et donc de la profondeur (pression intermédiaire), pour offrir un confort égal
+    à toutes les profondeurs. »
+- id: d81a15fe-5b78-433c-a004-bf4e3971a6ed
+  text: « Le deuxième étage compensé double la pression intermédiaire à toute profondeur.
+    »
+- id: ad0f3aa6-b8ce-4f2a-a1af-7e232d42e72e
+  text: « Le deuxième étage compensé supprime la soupape d'expiration. »
+- id: 62c75be0-67ba-4690-8acd-62bd5f77cca0
+  text: « Le deuxième étage compensé est réservé à la plongée souterraine. »
 correct_choice_ids:
-- 53187c01-2cb9-4b43-9481-1e286d3bc764
-explanation: Le manuel ne décrit ni schéma ni principe de compensation interne au
-  deuxième étage ; il couvre le deuxième étage (membrane, levier, clapet, soupape)
-  et la compensation du premier étage.
+- d4de8b9f-d482-44ff-b3d0-7e6a3d7b32a9
+explanation: C'est la phrase exacte du manuel ; il ne décrit ni schéma ni mécanisme
+  interne de cette compensation au deuxième étage.
 archived: false

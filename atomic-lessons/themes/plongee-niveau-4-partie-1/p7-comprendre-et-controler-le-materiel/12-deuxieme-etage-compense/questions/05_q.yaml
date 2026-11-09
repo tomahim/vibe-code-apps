@@ -1,20 +1,20 @@
-id: 140f3765-bbb3-4313-a32f-701c5e1fb447
+id: ed67e76f-c804-4f89-b432-6352a816fb0b
 position: 5
 type: multiple_choice
 selection: single
 after_card_position: 4
 prompt: Qui ajuste le réglage du deuxième étage ?
 choices:
-- id: c1387396-98f0-40aa-8771-8fba3b487d8f
+- id: fdea865e-38c2-4594-a979-28bb4869ff8a
   text: Le réparateur, lors des révisions annuelles.
-- id: 9a30e27a-1bbd-4480-916c-9dad49ee4dd4
+- id: 40f4936f-0a08-4ced-996b-6d4cee519b6e
   text: Le plongeur, selon ses préférences du jour.
-- id: 359df688-e14d-4dea-b690-bd43e268b270
+- id: af1a0f7e-3602-4a26-af8b-06f2f9ee5a39
   text: Le fabricant de la bouteille.
-- id: 82b92b7a-2d47-44e6-9e27-3b43ebcc19b0
+- id: 4925077a-5385-46e8-b6f9-f47ce8484ff5
   text: Le gonfleur de la station de gonflage.
 correct_choice_ids:
-- c1387396-98f0-40aa-8771-8fba3b487d8f
+- fdea865e-38c2-4594-a979-28bb4869ff8a
 explanation: Le réglage du clapet et du levier est affaire de révision annuelle, pas
   de réglage plongeur.
 archived: false

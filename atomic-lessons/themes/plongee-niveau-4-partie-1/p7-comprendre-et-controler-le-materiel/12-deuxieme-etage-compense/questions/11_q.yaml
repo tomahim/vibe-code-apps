@@ -1,20 +1,21 @@
-id: 27e1df46-0803-4b89-9a85-b16bc3651d28
+id: 681dfe32-0deb-43e9-90c4-e685b36fafec
 position: 11
 type: multiple_choice
 selection: single
 after_card_position: 8
 prompt: 'Première idée à retenir de cette leçon :'
 choices:
-- id: 3e426afb-d24b-43a5-8c08-69b60b1e91ee
-  text: « Compensé », dans le manuel, désigne le premier étage.
-- id: a41a2e8b-6f37-4f58-aa7a-729e90d9a1d2
+- id: 0a3ca131-50b5-49d3-b752-c319462d5a5a
+  text: « Compensé », dans le manuel, désigne d'abord le premier étage, avec schémas
+    à l'appui.
+- id: 20ddfc29-bf6e-4782-bf1f-8353b00470a2
   text: « Compensé » désigne toujours le deuxième étage.
-- id: e327719f-1d35-4152-9b8a-37896d53f139
+- id: a2108eb1-1255-4ec0-942f-22c3d5c3e313
   text: « Compensé » désigne la bouteille.
-- id: 393a38e6-4562-487f-a910-773424f144d0
+- id: d623a5cb-01f3-420a-98b6-0610cbf8d040
   text: « Compensé » ne s'applique à aucun matériel.
 correct_choice_ids:
-- 3e426afb-d24b-43a5-8c08-69b60b1e91ee
-explanation: 'Idée 1 : dans le chapitre détendeurs du manuel, « compensé » est une
-  caractéristique du premier étage (arrivée HP perpendiculaire).'
+- 0a3ca131-50b5-49d3-b752-c319462d5a5a
+explanation: 'Idée 1 : dans le chapitre détendeurs, « compensé » est d''abord une
+  caractéristique du premier étage (arrivée HP perpendiculaire, schémas du manuel).'
 archived: false

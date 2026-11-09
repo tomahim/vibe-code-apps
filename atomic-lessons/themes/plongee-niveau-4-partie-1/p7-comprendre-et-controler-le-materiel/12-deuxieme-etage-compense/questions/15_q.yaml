@@ -1,20 +1,20 @@
-id: 8afde3ee-5d06-41b6-8581-9309255ee762
+id: c7125466-ecc1-4ccc-b26b-0295d0f8d44a
 position: 15
 type: multiple_choice
 selection: single
 after_card_position: 2
 prompt: 'Le deuxième étage d''un détendeur compensé reçoit l''air :'
 choices:
-- id: 5a91d4b8-9ba4-42e6-b4c4-27edc48192d3
+- id: 9f1ed898-975d-4712-a854-af90fef0491b
   text: À la PI, comme tout deuxième étage, et le délivre à la pression ambiante.
-- id: 02ee4e5a-20d3-4c9c-8382-821ac9534d63
+- id: 9738bdf1-4fec-47e4-b04e-c23dcfec9942
   text: Directement à la HP, pour plus de débit.
-- id: 7fedc070-9fd1-4c90-ae59-1b170deb007d
+- id: fe8f58ae-67d8-4ae4-a2f7-136c41f0a81e
   text: À la pression atmosphérique de surface.
-- id: 8abae312-aa69-4ee6-8798-1b867c608c13
+- id: 86396365-a139-416c-bfc9-e8e779c4e6ec
   text: À une pression variable réglée par le plongeur.
 correct_choice_ids:
-- 5a91d4b8-9ba4-42e6-b4c4-27edc48192d3
+- 9f1ed898-975d-4712-a854-af90fef0491b
 explanation: 'Quel que soit le premier étage, le deuxième étage reçoit l''air à la
   PI et le délivre à la pression ambiante : son rôle ne change pas.'
 archived: false

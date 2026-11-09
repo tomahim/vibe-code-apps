@@ -1,20 +1,20 @@
-id: f6a1b8f2-7f42-4c68-b558-de6e42fa9713
+id: 798be927-0b38-4874-a7bf-bb5571604e35
 position: 3
 type: multiple_choice
 selection: single
 after_card_position: 3
 prompt: Quelle force s'exerce dans le sens de la fermeture ?
 choices:
-- id: d363c0ed-c3ae-4a1b-ac06-c941f1e020a9
+- id: d337a3d6-e3bc-49f6-8303-27873e341c9c
   text: La pression intermédiaire appliquée sur la section du piston.
-- id: 86f0246c-a9aa-434c-9497-5b3d58290391
+- id: 58e052d6-6b18-4398-bd9e-b11e074fa99b
   text: La haute pression sur la tige du piston.
-- id: bfd18c02-047c-401a-a664-b4b6f3b2f3e3
+- id: 710271ba-e8b2-4255-b678-25ab8d39f68b
   text: Le ressort du deuxième étage.
-- id: 818ac3e4-a56e-4203-aabf-a32056da1716
+- id: 02156938-8d1a-45b9-8b19-d1a2e436a0bc
   text: La pression ambiante sur la membrane.
 correct_choice_ids:
-- d363c0ed-c3ae-4a1b-ac06-c941f1e020a9
+- d337a3d6-e3bc-49f6-8303-27873e341c9c
 explanation: 'Dans le sens de la fermeture : la pression intermédiaire sur la section
   du piston. L''équilibre s''établit quand la PI compense les forces d''ouverture.'
 archived: false

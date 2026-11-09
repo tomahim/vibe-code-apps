@@ -1,4 +1,4 @@
-id: 5429d7e0-9090-43f7-b56b-84c11e2f26e4
+id: 730a5616-e3f0-4556-ad90-5d21779097a8
 position: 9
 type: multiple_choice
 selection: single
@@ -6,16 +6,16 @@ after_card_position: 6
 prompt: Pour quel usage le manuel juge-t-il le surcoût d'un détendeur compensé justifié
   ?
 choices:
-- id: 6be7f7d5-d9a9-4806-8976-a943b24f6268
+- id: e2a21697-0215-4358-a032-7852177d872a
   text: Une activité de grande plongée ou des plongées régulières au-delà de 20 mètres.
-- id: bc4b65dd-53a1-4c0b-952c-c29b256515eb
+- id: 05ff5fdc-c9f1-4ddf-b295-f942d14f30d0
   text: Uniquement la plongée souterraine en spéléologie.
-- id: e2ec0d94-ab32-4bf7-b34c-a6aa497fbd72
+- id: cae46b8c-d41c-443c-b341-5afa71903fe7
   text: Les baptêmes de plongée en piscine.
-- id: 2bbe3a85-373c-49a7-835b-e135a9cae95b
+- id: 8b7dfa22-410b-4d7e-9c7d-36b869cf2130
   text: La chasse sous-marine exclusivement.
 correct_choice_ids:
-- 6be7f7d5-d9a9-4806-8976-a943b24f6268
+- e2a21697-0215-4358-a032-7852177d872a
 explanation: '« Choisir un détendeur » : le surcoût d''un détendeur compensé se justifie
   pour une activité de grande plongée ou des plongées régulières au-delà de 20 mètres.'
 archived: false

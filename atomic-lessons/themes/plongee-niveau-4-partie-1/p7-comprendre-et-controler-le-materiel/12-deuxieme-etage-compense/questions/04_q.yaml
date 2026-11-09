@@ -1,20 +1,20 @@
-id: 86b788ea-ecf7-4957-8156-7b0ab46ff899
+id: 16960fa1-fb38-4f1b-9ecf-7f7ed7dfb615
 position: 4
 type: multiple_choice
 selection: single
 after_card_position: 4
 prompt: Quel critère de qualité le manuel exige-t-il du deuxième étage ?
 choices:
-- id: 432069a1-31b2-4d6c-a355-506df3e15475
+- id: e9850833-788c-4f49-92fa-ff0c78242372
   text: Une résistance à l'inspiration la plus faible possible.
-- id: 8b483a9e-3a4e-43ed-9116-527ffe090cfb
+- id: beab07db-48ab-4aa0-aabf-78deeb1812ed
   text: Un poids minimal du boîtier.
-- id: 0c96d339-aaa2-48eb-b897-97cfbfba1119
+- id: 291bcaf5-84e4-4609-97ef-8350192e0e85
   text: Une couleur voyante pour la sécurité.
-- id: 8b82ff2e-9e2d-4f34-8621-6b407ff00359
+- id: 679bdbb2-ce04-4283-a057-d638342e77ac
   text: Un embout interchangeable à chaud.
 correct_choice_ids:
-- 432069a1-31b2-4d6c-a355-506df3e15475
+- e9850833-788c-4f49-92fa-ff0c78242372
 explanation: 'Le critère du manuel pour le deuxième étage : la résistance à l''inspiration
   la plus faible, obtenue par un clapet bien réglé, un levier bien ajusté et une membrane
   en bon état.'
