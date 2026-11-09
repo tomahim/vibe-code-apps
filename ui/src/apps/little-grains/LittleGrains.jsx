@@ -451,6 +451,37 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
   </div>;
 }
 
+// Past duels as one line per player (Thomas, 2026-11-09). The signed-in
+// learner is the blue line, the other player orange - the same steering as
+// the growth charts. The other player's score is plotted only for weeks whose
+// ranking is unlocked, so an unfinished duel never leaks it.
+function ChallengeHistoryChart({ weeks }) {
+  const played = weeks.filter((w) => w.me?.finished);
+  if (!played.length) return null;
+  const width = 340, height = 170, padL = 26, padR = 10, padT = 8, padB = 24;
+  const n = played.length;
+  const x = (i) => padL + (n === 1 ? (width - padL - padR) / 2 : (i * (width - padL - padR)) / (n - 1));
+  const max = Math.max(1, ...played.map((w) => w.size));
+  const y = (v) => padT + (1 - v / max) * (height - padT - padB);
+  const otherName = played.map((w) => w.ranking?.find((r) => !r.is_self)?.name).find(Boolean);
+  const series = [
+    { name: "You", color: "var(--blue)", w: 2.5, values: played.map((w) => w.me.correct) },
+    ...(otherName ? [{ name: otherName, color: "var(--orange)", w: 1.5, values: played.map((w) => w.ranking?.find((r) => !r.is_self)?.correct ?? null) }] : []),
+  ];
+  return <div className="grains-challenge-chart">
+    <div className="grains-challenge-chart-legend">{series.map((s) => <span key={s.name}><i style={{ background: s.color }} />{s.name}</span>)}</div>
+    <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Past challenge weeks, one line per player">
+      {[0, 0.5, 1].map((f) => <g key={f}><line className="grid" x1={padL} x2={width - padR} y1={y(max * f)} y2={y(max * f)} /><text className="tick" x={padL - 5} y={y(max * f) + 3} textAnchor="end">{Math.round(max * f)}</text></g>)}
+      {played.map((w, i) => <text key={w.week_key} className="tick" x={x(i)} y={height - 6} textAnchor="middle">{w.week_key.replace(/^\d{4}-/, "")}</text>)}
+      {series.map((s) => <g key={s.name}>
+        {s.values.slice(1).map((v, i) => (v == null || s.values[i] == null) ? null
+          : <polyline key={i} points={`${x(i)},${y(s.values[i])} ${x(i + 1)},${y(v)}`} fill="none" stroke={s.color} strokeWidth={s.w} strokeLinecap="round" />)}
+        {s.values.map((v, i) => v == null ? null : <circle key={i} cx={x(i)} cy={y(v)} r={s.w + 1} fill={s.color} />)}
+      </g>)}
+    </svg>
+  </div>;
+}
+
 // The weekly Challenge (Thomas, 2026-11-08): 10 shared questions, 30 seconds
 // each with auto-advance, the ranking locked until both players finished.
 function ChallengeSession({ onClose, onProgress }) {
@@ -538,7 +569,8 @@ function ChallengeSession({ onClose, onProgress }) {
               </div>
               : <button className="grains-primary" onClick={start}>{data.me.answered > 0 ? "Continue the challenge" : "Take the challenge"}</button>}
             {history?.length > 0 && <div className="grains-challenge-history"><p className="grains-card-index">PAST WEEKS</p>
-              <ul>{history.map((week) => <li key={week.week_key}><b>{week.week_key}</b> — you: {week.me.correct}/{week.size}{week.ranking ? ` · ${week.ranking.find((r) => r.is_self)?.rank === 1 ? "won" : ` #${week.ranking.find((r) => r.is_self)?.rank}`}` : ""}</li>)}</ul>
+              <ChallengeHistoryChart weeks={history} />
+              {history.some((w) => !w.me?.finished) && <ul>{history.filter((w) => !w.me?.finished).map((week) => <li key={week.week_key}><b>{week.week_key}</b> — you: {week.me.correct}/{week.size} so far, unfinished</li>)}</ul>}
             </div>}
           </div>
         </div>}

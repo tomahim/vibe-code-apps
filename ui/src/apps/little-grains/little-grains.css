@@ -92,3 +92,8 @@
 .grains-challenge-ranking li.self{border-color:#7a4a8c;background:#f6effa}
 .grains-challenge-history{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;text-align:left}
 .grains-challenge-history ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13.5px}
+.grains-challenge-chart-legend{display:flex;gap:14px;margin:2px 0 4px;font:700 12px var(--sans);color:var(--dim)}
+.grains-challenge-chart-legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:3px}
+.grains-challenge-chart svg{width:100%;height:auto;display:block}
+.grains-challenge-chart .grid{stroke:var(--line);stroke-width:1}
+.grains-challenge-chart .tick{fill:var(--dim);font-size:10px}

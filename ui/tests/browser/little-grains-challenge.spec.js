@@ -63,7 +63,12 @@ test('challenge: intro with history, timed questions, auto-advance, locked ranki
   await entry.click();
   const dialog = page.getByRole('dialog', { name: 'Weekly challenge' });
   await expect(dialog.getByRole('heading', { name: "This week's duel" })).toBeVisible();
-  await expect(dialog.getByText('2026-W44')).toBeVisible();
+  // Past weeks render as a chart with one line per player (Thomas, 2026-11-09).
+  const chart = dialog.getByRole('img', { name: 'Past challenge weeks, one line per player' });
+  await expect(chart).toBeVisible();
+  await expect(chart.getByText('W44')).toBeVisible();
+  await expect(dialog.locator('.grains-challenge-chart-legend')).toContainText('You');
+  await expect(dialog.locator('.grains-challenge-chart-legend')).toContainText('Aurore');
 
   // Question 1: answered in time. Question 2: the mock clock runs out and
   // the answer is recorded empty (wrong) by auto-advance. No mid-quiz
