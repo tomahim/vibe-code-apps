@@ -1,0 +1,21 @@
+id: cd71e9ce-d964-46bc-b59a-50f856eab6a1
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que comprend le contrôle avant plongée du détendeur ?
+choices:
+- id: c68cfcdd-d2ad-445a-acc4-9704895963a4
+  text: Fonctionnement des deux étages, purge, absence de fuite, état des flexibles.
+- id: bda080ba-8a02-4860-914a-eecee2d9ca34
+  text: Démontage du premier étage.
+- id: e5c5dd6b-5700-4965-b668-e0b859023316
+  text: Réglage du levier par le plongeur.
+- id: db64a77d-4bb7-4a94-8902-96d2bf521565
+  text: Remplacement préventif des joints.
+correct_choice_ids:
+- c68cfcdd-d2ad-445a-acc4-9704895963a4
+explanation: 'Contrôle d''usage : fonctionnement des deux étages, purge, absence de
+  fuite, état des flexibles ; manomètre cohérent à l''ouverture ; gilet gonflé et
+  vidangé ; pression et robinetterie de la bouteille.'
+archived: false

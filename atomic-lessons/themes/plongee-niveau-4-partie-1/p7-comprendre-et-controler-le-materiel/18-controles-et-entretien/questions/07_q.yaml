@@ -1,0 +1,20 @@
+id: d97900a1-967b-4c0b-a3fa-bd37e47cf9be
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: 'Le contrôle avant plongée est :'
+choices:
+- id: 9d736a4e-051a-4a94-bb9b-2c013fd90a34
+  text: Individuel, et réciproque dans la palanquée.
+- id: c62fe981-4310-47ae-b34e-50ffafb036f9
+  text: Réservé au guide de palanquée.
+- id: 19e686ae-4eda-4d98-814d-494f31d11397
+  text: Optionnel pour les plongeurs niveau 4.
+- id: a0825993-2eb0-44c7-b34b-c9654fa21c3e
+  text: Fait une fois par saison.
+correct_choice_ids:
+- 9d736a4e-051a-4a94-bb9b-2c013fd90a34
+explanation: 'Le contrôle est individuel et réciproque dans la palanquée : chacun
+  vérifie son matériel et celui de ses équipiers avant l''immersion.'
+archived: false

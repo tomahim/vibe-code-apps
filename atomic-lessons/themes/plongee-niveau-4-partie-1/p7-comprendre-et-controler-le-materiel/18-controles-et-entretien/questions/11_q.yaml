@@ -1,0 +1,22 @@
+id: 3d9384b3-ccdb-4729-b6c0-84016c4233f9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel matériel spécifique pour l'encadrant de palanquée ?
+choices:
+- id: eaad94d5-0dc6-4582-92af-497e34c5d387
+  text: Manomètre, gilet + direct-system, équipements de contrôle de la plongée et
+    de la remontée de la palanquée, équipement de plongée à deux sorties indépendantes.
+- id: 9a0159bb-98ef-419a-9867-484cd46c778c
+  text: Une bouteille de 20 litres obligatoire.
+- id: ee189b82-c0e7-45c2-86d6-a6055b4566ce
+  text: Un direct-system supplémentaire pour les élèves.
+- id: ec29aaa7-37e6-4400-ae4d-1b3654b64138
+  text: Un ordinateur double sonde.
+correct_choice_ids:
+- eaad94d5-0dc6-4582-92af-497e34c5d387
+explanation: 'Encadrant de palanquée : manomètre, gilet + direct-system, ordinateur
+  ou profondimètre/timer et tables pour la palanquée, et un équipement de plongée
+  avec deux sorties indépendantes.'
+archived: false

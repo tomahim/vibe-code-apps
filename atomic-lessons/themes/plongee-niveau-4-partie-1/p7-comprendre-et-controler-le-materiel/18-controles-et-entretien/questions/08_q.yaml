@@ -1,0 +1,21 @@
+id: fe2fbfeb-7750-4bdc-b2a1-f48946245918
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que doit disposer tout plongeur a minima, selon l'aide-mémoire ?
+choices:
+- id: afb7b90f-55e0-439a-a72d-5193c7050844
+  text: Un manomètre ou système équivalent ; un système gonflable (gilet + direct-system)
+    en milieu naturel.
+- id: 2b4261b3-cb46-4eae-bf4f-be95e00fd497
+  text: Un ordinateur et un parachute de palier.
+- id: 1d86921a-1096-425f-a230-001714bc8a32
+  text: Deux bouteilles et un détendeur de secours.
+- id: 79d0b549-c029-44ab-8461-06e9914a4435
+  text: Une lampe et un couteau.
+correct_choice_ids:
+- afb7b90f-55e0-439a-a72d-5193c7050844
+explanation: 'Tout plongeur a minima : manomètre ou système équivalent indiquant la
+  pression ; système gonflable au gaz comprimé (gilet + direct-system) en milieu naturel.'
+archived: false

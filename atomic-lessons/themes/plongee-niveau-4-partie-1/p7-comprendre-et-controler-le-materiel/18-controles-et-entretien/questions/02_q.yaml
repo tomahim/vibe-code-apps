@@ -1,0 +1,20 @@
+id: 85911df9-277f-4862-a258-311cfc1d6eca
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi refermer le bouchon du premier étage avant le rinçage ?
+choices:
+- id: 37467378-1df1-452a-aa9c-455d45da7f41
+  text: Pour empêcher l'eau de pénétrer dans le circuit HP et d'oxyder le mécanisme.
+- id: dc9c6775-adbd-419b-bab9-fe86bc14667a
+  text: Pour que le détendeur flotte pendant le rinçage.
+- id: 4df41083-0842-4d84-a3e7-917621f9ef85
+  text: Pour garder la pression intermédiaire.
+- id: b1a66e93-93cf-4718-a338-f861c47058e4
+  text: Pour protéger la peinture du premier étage.
+correct_choice_ids:
+- 37467378-1df1-452a-aa9c-455d45da7f41
+explanation: Le bouchon fermé empêche l'eau de pénétrer dans le circuit HP pendant
+  le rinçage ; on le retire ensuite pour le séchage.
+archived: false
