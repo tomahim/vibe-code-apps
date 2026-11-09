@@ -3,6 +3,12 @@ id: af0bad57-426b-4377-a0e5-eeba13f75004
 position: 3
 title: Le transport de l'oxygène
 archived: false
+image: "p3-hemoglobine.jpg"
+image_alt: "Molécule d'hémoglobine : 4 hèmes fixant l'oxygène"
+image_caption: "La molécule d'hémoglobine"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 143"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Dès son arrivée en provenance des alvéoles, l'oxygène commence par se dissoudre dans le plasma. Il peut demeurer ainsi ou bien se combiner à l'hémoglobine pour former l'oxyhémoglobine.
 

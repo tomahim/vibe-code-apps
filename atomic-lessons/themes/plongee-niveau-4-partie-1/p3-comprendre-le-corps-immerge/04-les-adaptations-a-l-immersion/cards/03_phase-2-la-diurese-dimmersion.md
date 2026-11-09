@@ -3,6 +3,12 @@ id: 0834f9ab-e30c-4bed-8642-30c69e185f69
 position: 3
 title: 'Phase 2 : la diurèse d''immersion'
 archived: false
+image: "p3-diurese.jpg"
+image_alt: "Redistribution du volume sanguin vers le thorax en immersion"
+image_caption: "La redistribution du volume sanguin en immersion"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 150"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 La redistribution immédiate du volume sanguin est analogue à une hypervolémie pour les mécanismes de régulation (baroréflexes et régulations endocriniennes du volume sanguin). L'entrée lente mais continue d'eau interstitielle dans les vaisseaux tend, elle, à augmenter le volume de plasma.
 

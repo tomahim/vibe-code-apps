@@ -3,6 +3,12 @@ id: e49e3229-d303-451c-9a43-1e95533f0752
 position: 2
 title: Le cœur, une double pompe
 archived: false
+image: "p3-coeur-anatomie.jpg"
+image_alt: "Anatomie du cœur : oreillettes, ventricules, valvules et gros vaisseaux"
+image_caption: "Le cœur"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 140"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Le cœur est principalement constitué du myocarde, un muscle gros comme le poing. Situé entre les deux poumons, dans un espace appelé médiastin, son rôle est de faire circuler le sang dans les vaisseaux.
 

@@ -3,6 +3,12 @@ id: 96b96f31-f167-42ab-a052-0810a728a70f
 position: 3
 title: Aptitudes PE et PA
 archived: false
+image: "p1-aptitudes-competences.jpg"
+image_alt: "Organigramme des aptitudes : brevets, expérience acquise et évaluation du profil plongeur"
+image_caption: "Les aptitudes, des compétences reconnues"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 20"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Le code du sport prévoit deux familles d'aptitudes. Les aptitudes « plongeur encadré » (PE) permettent d'évoluer avec un encadrant de palanquée : PE-12, PE-20, PE-40, PE-60. Les aptitudes « plongeur autonome » (PA) permettent de plonger sans encadrant : PA-12, PA-20, PA-40, PA-60.
 

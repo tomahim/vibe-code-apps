@@ -3,6 +3,12 @@ id: 68d54ea3-2894-497a-a4c8-bd93483200e8
 position: 9
 title: 'Deux circulations : pulmonaire et générale'
 archived: false
+image: "p3-circulation.jpg"
+image_alt: "Schéma de principe de la grande circulation et de la petite circulation"
+image_caption: "La grande circulation (schéma de principe)"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 145"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Il y a deux circulations sanguines, qui correspondent aux deux parties du cœur.
 
