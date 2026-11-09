@@ -1,0 +1,22 @@
+id: 682b9179-8613-4dc2-a5ae-c865f876705d
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi les paliers et la remontée lente existent-ils ?
+choices:
+- id: 929caa02-e83a-4ad7-9232-a787a7e93c70
+  text: Pour laisser l'azote s'éliminer tout en maintenant la sursaturation sous le
+    seuil critique de chaque compartiment.
+- id: f4af14a6-36e0-457c-9582-d6ccecb68241
+  text: Pour permettre au plongeur de se reposer physiquement pendant la remontée.
+- id: a350ba2c-89bd-4ae6-81e3-0bbcae915623
+  text: Pour économiser l'air de la bouteille pendant la phase de retour à la surface.
+- id: 36cd2a79-d842-4402-aa08-a54d9fae7fe9
+  text: Pour augmenter volontairement la saturation des compartiments les plus lents.
+correct_choice_ids:
+- 929caa02-e83a-4ad7-9232-a787a7e93c70
+explanation: 'Toute la logique de la désaturation : laisser l''azote s''éliminer grâce
+  à la sursaturation, sans jamais la laisser devenir critique (dépassement du Sc),
+  ce qui augmenterait fortement le risque d''accident.'
+archived: false

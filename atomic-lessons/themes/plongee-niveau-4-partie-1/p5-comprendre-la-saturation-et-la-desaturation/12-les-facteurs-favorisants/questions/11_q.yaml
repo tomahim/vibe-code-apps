@@ -1,0 +1,22 @@
+id: 400d44ae-43c3-46f0-8481-49c524e777ca
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi ne faut-il pas prendre l'avion juste après une plongée ?
+choices:
+- id: 53c9efaa-0daa-420f-b1f3-634f5c8c71b8
+  text: 'La cabine est pressurisée à 0,8 bar, l''équivalent de 2 000 m d''altitude
+    : une baisse de pression qui favorise le dégazage.'
+- id: 8534b808-9d60-426b-aebc-f33e6ffcc9f6
+  text: Parce que les bouteilles de plongée sont interdites en cabine par les compagnies.
+- id: fe8b04ff-08b5-4bcd-b8c0-c2c66e755d9e
+  text: Parce que le bruit des réacteurs aggrave les barotraumatismes de l'oreille.
+- id: 1ae6665f-3aa4-476b-8fda-54ee49266e4c
+  text: Parce que l'air des cabines pressurisées est enrichi en azote pur.
+correct_choice_ids:
+- 53c9efaa-0daa-420f-b1f3-634f5c8c71b8
+explanation: L'azote résiduel met 12 à 24 h à être évacué ; en cabine pressurisée
+  à 0,8 bar (équivalent 2 000 m d'altitude), la baisse de pression ambiante peut favoriser
+  un dégazage anarchique. Les ordinateurs affichent le délai minimum avant l'envol.
+archived: false

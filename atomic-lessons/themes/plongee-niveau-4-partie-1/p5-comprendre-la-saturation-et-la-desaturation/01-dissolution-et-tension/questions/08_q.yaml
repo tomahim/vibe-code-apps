@@ -1,0 +1,22 @@
+id: 5ff30979-81f7-4fcd-aa70-6e20f8ee4ebe
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quand dit-on qu'il y a saturation, selon le manuel ?
+choices:
+- id: 5cc6c3eb-08e4-4ce4-84be-8413d24bfea0
+  text: Lorsqu'à l'interface de deux milieux, autant de molécules passent dans un
+    sens que dans l'autre.
+- id: 8fa09ace-92b5-4fb7-8333-efa15a732435
+  text: Lorsque le corps contient la quantité maximale d'azote qu'il peut supporter.
+- id: cc7640ac-e0ed-4fb7-9f84-0261ed56abde
+  text: Lorsque toutes les molécules d'azote quittent définitivement les poumons.
+- id: 1723ace9-7dec-4d7c-9bd5-edea7a8eb0f9
+  text: Lorsque le plongeur ne peut plus éliminer aucune molécule d'azote.
+correct_choice_ids:
+- 5cc6c3eb-08e4-4ce4-84be-8413d24bfea0
+explanation: 'Saturation : à l''interface de deux milieux A et B (exemple alvéoles/sang),
+  autant de molécules passent de A vers B que de B vers A. Ce n''est pas un maximum
+  absolu : c''est un équilibre à une pression donnée.'
+archived: false

@@ -1,0 +1,21 @@
+id: ba0ff3d6-5d78-4d0c-8bc9-92bb71a845bf
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment le gradient de pression (G) est-il défini ?
+choices:
+- id: 39705493-2228-4665-a6fb-6e0631989523
+  text: La différence entre la PpN2 au plus profond de la plongée et celle en surface
+    (0,8 bar).
+- id: 72a2f87b-7a3a-430e-b903-71f39b8d3868
+  text: La différence de pression entre le début et la fin de la remontée.
+- id: 6b9b1849-96ac-45b3-8600-b4cc10f79d1e
+  text: Le rapport entre la tension d'azote et le seuil critique du compartiment.
+- id: 80e9664b-fe1c-43c1-a723-1f40f2b35fc9
+  text: La somme des pressions partielles de tous les gaz du mélange respiré.
+correct_choice_ids:
+- 39705493-2228-4665-a6fb-6e0631989523
+explanation: 'G = PpN2 au fond - PpN2 en surface (0,8 bar) : c''est la quantité maximale
+  d''azote que les compartiments peuvent dissoudre.'
+archived: false

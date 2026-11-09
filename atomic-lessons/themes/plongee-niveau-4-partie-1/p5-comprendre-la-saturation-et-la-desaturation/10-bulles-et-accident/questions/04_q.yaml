@@ -1,0 +1,23 @@
+id: e6c3e0b0-ab0d-4136-a685-8b59b8e81a6f
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qu'ajoutent les modèles « diphasiques » à l'azote dissous ?
+choices:
+- id: 2965451d-5325-46dd-a8c3-b19bdd1c01e6
+  text: La prise en compte de micronoyaux (germes) gazeux, essentiellement du CO2,
+    qui serviraient d'amorce aux microbulles.
+- id: ebbc3082-cbaf-4708-b01f-92cb39d61375
+  text: La prise en compte d'une deuxième bouteille de gaz de secours pour la remontée.
+- id: 6b91c74a-be5c-47d8-9720-0c7958220b7f
+  text: Le calcul détaillé de la consommation d'oxygène des muscles pendant le fond.
+- id: c0b56664-ad9c-4153-a7c9-17094474d312
+  text: Une estimation statistique du nombre de plongées successives possibles par
+    jour.
+correct_choice_ids:
+- 2965451d-5325-46dd-a8c3-b19bdd1c01e6
+explanation: Les modèles diphasiques considèrent que des « germes » gazeux préexistants,
+  composés essentiellement de CO2, serviraient d'amorce à la création de microbulles
+  quand l'azote est relâché à la remontée.
+archived: false

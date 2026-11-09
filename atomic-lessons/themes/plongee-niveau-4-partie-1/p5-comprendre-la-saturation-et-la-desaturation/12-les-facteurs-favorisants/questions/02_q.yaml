@@ -1,0 +1,23 @@
+id: e8a53095-12cb-4c00-9968-f530a1d1b496
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels éléments relèvent de la « mauvaise forme physique », selon le manuel
+  ?
+choices:
+- id: 794f7fc2-716c-42db-9be3-904e3d344013
+  text: Longs trajets, manque de sommeil, fatigue, et facteurs psychiques excessifs
+    (stress durable, divorce, perte d'emploi).
+- id: 41259d1d-85e7-42ab-a396-3359a82f867c
+  text: Uniquement l'absence totale de pratique sportive régulière depuis l'enfance.
+- id: 0285ba52-37c5-4c8e-b381-79536e76444b
+  text: Le seul fait de ne pas savoir nager correctement en mer.
+- id: aaf87f57-791b-4108-be1f-cc3f7f250420
+  text: Uniquement une blessure récente touchant l'épaule ou le dos.
+correct_choice_ids:
+- 794f7fc2-716c-42db-9be3-904e3d344013
+explanation: 'Mauvaise forme physique : longs trajets, manque de sommeil, fatigue
+  ; le manuel ajoute les facteurs excessifs y compris psychiques : stress au travail,
+  problèmes durables, perte d''emploi, divorce...'
+archived: false

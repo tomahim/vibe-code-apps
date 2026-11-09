@@ -1,0 +1,21 @@
+id: e84097bd-fca7-4238-bed9-bb0b2f8f0613
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que signifie un GF fixé à 100 % ?
+choices:
+- id: 1ceb3ba5-a3e8-4b14-b0cb-0f04f557bb8c
+  text: La désaturation sera 100 % conforme (profondeur et temps des paliers) au modèle
+    retenu.
+- id: 128c20ba-137b-4c8f-91bc-9a4d0dac1dce
+  text: Le plongeur est garanti à 100 % contre tout accident de désaturation.
+- id: 99f30d5a-63d2-4604-b09b-bc668ba141b5
+  text: La plongée est limitée à 100 minutes ou 40 mètres.
+- id: ade78fa8-7101-4fb4-a4c0-1cac98adcf22
+  text: L'ordinateur applique automatiquement les paliers les plus longs.
+correct_choice_ids:
+- 1ceb3ba5-a3e8-4b14-b0cb-0f04f557bb8c
+explanation: 'GF à 100 % = désaturation 100 % conforme au modèle ; à 80 %, on n''utilise
+  que 80 % des possibilités du modèle : paliers plus longs et/ou plus profonds.'
+archived: false

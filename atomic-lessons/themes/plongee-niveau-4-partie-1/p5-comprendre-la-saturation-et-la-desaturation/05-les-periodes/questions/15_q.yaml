@@ -1,0 +1,21 @@
+id: f234eb4a-5f54-457e-9084-d2e8c71998dd
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Après 6 périodes, où en est le taux de saturation d'un compartiment ?
+choices:
+- id: 5ae4da5b-5459-4859-903d-2ca12f94a15b
+  text: 'Proche de 100 % : le compartiment est considéré comme saturé.'
+- id: 9618ab79-5f68-4dbf-b5e7-eba882287501
+  text: 'Exactement 50 % : il reste la moitié du chemin à parcourir.'
+- id: 14abcc3a-301d-4c4c-9d46-5639cc5c7157
+  text: 'Environ 75 % : la saturation reste très incomplète.'
+- id: 5d648a65-ea49-4ca8-affe-eaf449f85ec3
+  text: 'Bloqué à 93,75 % : la progression s''arrête définitivement.'
+correct_choice_ids:
+- 5ae4da5b-5459-4859-903d-2ca12f94a15b
+explanation: 'La progression (50, 75, 87,5, 93,75, 96,875 %) tend vers 100 % sans
+  jamais l''atteindre : au bout de 6 périodes, le compartiment est considéré comme
+  saturé.'
+archived: false

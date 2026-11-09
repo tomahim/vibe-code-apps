@@ -1,0 +1,23 @@
+id: b6b39713-72d5-4f79-83c1-78269c59de7b
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle innovation Robert Workman apporte-t-il en 1965 ?
+choices:
+- id: 9a257393-bd05-44f4-b1ac-ede68dd2b831
+  text: Il calcule les TN2 maximales acceptables à différentes profondeurs, au lieu
+    de chercher la profondeur de remontée.
+- id: 57e47502-20c0-4b44-841c-1c5c72aa7129
+  text: Il invente les premiers compartiments théoriques de l'histoire de la plongée.
+- id: dadd0c27-20b8-4a63-9b50-b977f1e48975
+  text: Il supprime tous les seuils critiques des tables de décompression.
+- id: 8ae1ab3a-5919-4592-be00-e5294e138366
+  text: Il interdit toute plongée successive sur la même journée.
+correct_choice_ids:
+- 9a257393-bd05-44f4-b1ac-ede68dd2b831
+explanation: 'Workman retourne la question de Haldane : plutôt que la profondeur à
+  laquelle remonter, il calcule les TN2 maximales acceptables pour chaque compartiment
+  à différentes profondeurs - les M-Values - pour faciliter l''intégration dans les
+  logiciels.'
+archived: false

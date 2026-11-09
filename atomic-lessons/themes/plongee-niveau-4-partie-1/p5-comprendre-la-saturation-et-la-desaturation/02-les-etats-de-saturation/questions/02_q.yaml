@@ -1,0 +1,23 @@
+id: 2f4b0956-0be7-4921-9309-e9f3b60cf3c6
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que se passe-t-il au début de la plongée, pendant la charge ?
+choices:
+- id: 6f8c7c5f-b14e-454b-8607-0bb3a341c773
+  text: 'La PpN2 augmente instantanément avec la pression, la TN2 pas encore : l''azote
+    pénètre dans le sang.'
+- id: 64cc4956-0583-4fb4-a18e-325e768a6bc3
+  text: 'La TN2 augmente instantanément, la PpN2 ne bouge pas : l''azote quitte le
+    corps.'
+- id: 3f7ac4fd-2fa7-46c4-a9e9-ba1e17fea913
+  text: 'PpN2 et TN2 restent égales en permanence : aucun échange n''a lieu.'
+- id: 7d871473-d35c-4725-a0c1-70ad3fd2b67f
+  text: 'La PpN2 chute brutalement sous la TN2 : le plongeur élimine son azote.'
+correct_choice_ids:
+- 6f8c7c5f-b14e-454b-8607-0bb3a341c773
+explanation: À la descente, la PpN2 des poumons s'accroît en proportion de la pression
+  (2,8 bars à 25 m) alors que la TN2 reste à 0,8 bar ; l'azote pénètre progressivement
+  dans le sang, transporté vers les cellules.
+archived: false

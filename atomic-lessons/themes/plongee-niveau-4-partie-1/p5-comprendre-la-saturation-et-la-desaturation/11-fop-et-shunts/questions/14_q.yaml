@@ -1,0 +1,23 @@
+id: 897dcbdd-6c52-4045-a010-b789bc518e66
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment les bulles arrivent-elles dans la circulation artérielle en présence
+  d'un FOP ?
+choices:
+- id: 9c80b89f-446a-4921-97d4-232195f6b5b2
+  text: Le FOP, avec un comportement inadapté (effort, Valsalva), laisse passer les
+    bulles du circuit veineux au circuit artériel.
+- id: a812e96d-18b9-4afd-b239-3534f77ebd47
+  text: Les bulles traversent directement la paroi musculaire du cœur gauche.
+- id: f5ef822e-f961-4211-a5f3-69a2f2fa0351
+  text: Le filtre pulmonaire cesse définitivement de fonctionner après quarante mètres.
+- id: 3851f151-befb-4e1d-b2f0-baf55ef766db
+  text: Les bulles se forment directement à l'intérieur des artères coronaires.
+correct_choice_ids:
+- 9c80b89f-446a-4921-97d4-232195f6b5b2
+explanation: La présence d'un FOP, associée à un comportement inadapté (effort, Valsalva
+  à la remontée...), peut favoriser le passage de bulles du circuit veineux vers le
+  circuit artériel.
+archived: false

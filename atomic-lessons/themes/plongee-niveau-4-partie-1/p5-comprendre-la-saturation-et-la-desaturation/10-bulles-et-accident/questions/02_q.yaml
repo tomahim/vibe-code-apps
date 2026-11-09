@@ -1,0 +1,21 @@
+id: 144b3a2e-66e3-45ea-9cde-1c5e37088d4d
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle hypothèse tous les modèles partagent-ils, sans exception ?
+choices:
+- id: 547b5821-58f0-49e5-83d7-1dfb5f7a88b6
+  text: Plus la quantité d'azote dissoute est importante, plus le risque d'accident
+    de désaturation est important.
+- id: 249eb034-b506-4d0c-9303-8a1e166c2fd2
+  text: Toutes les bulles sont toujours dangereuses pour le plongeur.
+- id: 16798d04-e559-498b-898b-37627cea8715
+  text: Le risque d'accident ne dépend que de la profondeur atteinte.
+- id: 344922bc-7014-431e-be72-7db28ffc96d7
+  text: L'azote ne se dissout jamais dans le corps humain.
+correct_choice_ids:
+- 547b5821-58f0-49e5-83d7-1dfb5f7a88b6
+explanation: Tous les modèles supposent que plus la quantité d'azote dissoute dans
+  le corps est importante, plus le risque d'ADD est important.
+archived: false

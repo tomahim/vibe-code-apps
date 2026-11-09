@@ -1,0 +1,20 @@
+id: 49f7ad5c-83a8-46a9-8930-850523267c5d
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle est la forme générique de la formule des M-Values ?
+choices:
+- id: 3430bbc9-c685-49ab-b332-7e7297c26a2f
+  text: Mp = M0 + ΔM × p.
+- id: f986733f-b14b-4dad-a22b-b6a7c1b8545d
+  text: Mp = Sc × Pabs / 2.
+- id: 1ac4db19-d43a-4c29-995f-65810260fc24
+  text: Mp = 0,8 + (G × Ts).
+- id: c3bf106d-3406-4bd0-b085-1ab353e5629a
+  text: Mp = TN2 / Pabs.
+correct_choice_ids:
+- 3430bbc9-c685-49ab-b332-7e7297c26a2f
+explanation: 'Mp = M0 + ΔM × p : M0 est la TN2 maximale acceptable en surface, ΔM
+  son facteur d''augmentation par mètre, p la profondeur en mètres.'
+archived: false

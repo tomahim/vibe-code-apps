@@ -1,0 +1,22 @@
+id: d1054469-b522-4635-a0b4-30c8644a86ab
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment la décharge se déroule-t-elle, par rapport à la charge ?
+choices:
+- id: f22a7d16-a4aa-4b6a-a8d4-426d96d95de3
+  text: 'Selon la même loi exponentielle, en sens inverse : la tension diminue de
+    moitié par période.'
+- id: ea671d67-720d-452d-8b04-bb8c155a0d11
+  text: 'Beaucoup plus vite : l''azote sort quatre fois plus vite qu''il n''entre.'
+- id: 7df2f59f-f61c-4647-a209-440b23333177
+  text: 'De façon linéaire : une quantité fixe d''azote éliminée chaque minute.'
+- id: 52ab1375-1ac7-48f9-b3ca-3c7c1f5aa678
+  text: 'Uniquement pendant les paliers : jamais à la remontée ni en surface.'
+correct_choice_ids:
+- f22a7d16-a4aa-4b6a-a8d4-426d96d95de3
+explanation: 'L''élimination de l''azote est exponentielle comme son absorption :
+  la tension diminue de la moitié de l''écart restant à chaque période. La désaturation
+  a lieu à la remontée, aux paliers et en surface.'
+archived: false

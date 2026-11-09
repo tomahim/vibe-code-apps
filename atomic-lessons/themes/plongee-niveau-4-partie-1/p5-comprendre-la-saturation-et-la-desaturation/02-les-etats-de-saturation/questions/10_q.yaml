@@ -1,0 +1,20 @@
+id: 071783a5-54c6-483e-b9b8-82425009f53d
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment s'écrit la tension finale d'un compartiment, selon le modèle ?
+choices:
+- id: 34ee9bcf-bf52-4372-8743-51bd2cc87cfe
+  text: TN2 finale = 0,8 + (G × Ts), où G est le gradient et Ts le taux de saturation.
+- id: 39590e45-a7f5-4932-9bf0-899cc489d50d
+  text: TN2 finale = PpN2 / Sc, quels que soient la profondeur et le temps.
+- id: f0f9aade-20d9-4bc2-a942-4d2a7834f5fd
+  text: TN2 finale = 0,8 × nombre de périodes écoulées depuis le début.
+- id: b937f6d2-c72d-4b54-856a-0d218462e9d6
+  text: TN2 finale = G + (0,8 × Ts), le gradient étant additionné à la tension.
+correct_choice_ids:
+- 34ee9bcf-bf52-4372-8743-51bd2cc87cfe
+explanation: 'TN2 finale = 0,8 + (G × Ts) : on ajoute à l''azote de départ (0,8 bar)
+  le produit du gradient de pression initial par le taux de saturation.'
+archived: false

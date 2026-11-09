@@ -1,0 +1,13 @@
+id: 41ec5895-8232-4b71-be87-058aca40967f
+position: 16
+type: type_answer_question
+after_card_position: 1
+prompt: Quel terme du manuel désigne une décompression trop rapide, avec dépassement
+  des seuils critiques et risque important d'accident de désaturation ?
+accepted_answers:
+- sursaturation critique
+- la sursaturation critique
+explanation: La sursaturation critique = décompression trop rapide avec dépassement
+  des seuils critiques (Sc). Le rapport TN2/Pabs ne doit jamais dépasser le Sc d'un
+  compartiment pendant la remontée.
+archived: false

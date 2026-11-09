@@ -1,0 +1,24 @@
+id: 57cabe6b-7230-4ae2-b139-dc89286faf1f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que montrent les études de la Marine nationale sur l'effort avant la plongée
+  ?
+choices:
+- id: 3a921c75-10f6-4504-8b3b-ec6c8b6371d9
+  text: Un bénéfice pour un effort modéré de 40 à 45 minutes au moins deux heures
+    avant la plongée en circuit ouvert.
+- id: f8b1e992-99de-466f-9419-7f2e4bb2f5d6
+  text: Un bénéfice pour un effort intense réalisé juste avant de se mettre à l'eau.
+- id: ff710ee9-bed9-4426-a812-21882825d67b
+  text: Une dangerosité de tout effort physique dans la semaine précédente.
+- id: c1ceef55-342b-4139-b60f-6f318414d4f1
+  text: Aucun effet de l'effort physique sur la formation des bulles.
+correct_choice_ids:
+- 3a921c75-10f6-4504-8b3b-ec6c8b6371d9
+explanation: Bénéfice pour un effort modéré (70 à 80 % de la capacité maximale) de
+  40 à 45 min au moins 2 h avant la plongée ; en deçà de 2 h, le CO2 en excès favoriserait
+  au contraire les bulles. Technique interdite avant les plongées au recycleur (œdèmes
+  pulmonaires d'immersion).
+archived: false

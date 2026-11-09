@@ -1,0 +1,21 @@
+id: 89fe770d-0376-47f2-824a-840b0ea23867
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel est le lien entre M0 et le seuil critique Sc ?
+choices:
+- id: 3533eb77-d29d-4550-8c25-2f766dcc5c39
+  text: M0 correspond à la valeur du Sc, exprimée en bars (ou en mètres d'eau de mer).
+- id: 42ac4fc4-60e0-49bd-bfba-0b87ceb427f3
+  text: M0 est toujours le double du Sc, quelle que soit la profondeur.
+- id: 32deec13-fa69-434a-a8a0-5bdf15c46331
+  text: M0 et Sc sont deux concepts opposés et incompatibles.
+- id: 1e7b0b30-9053-478e-8159-5c14057d2c63
+  text: M0 ne concerne que l'oxygène, le Sc ne concerne que l'azote.
+correct_choice_ids:
+- 3533eb77-d29d-4550-8c25-2f766dcc5c39
+explanation: 'TN2 max en surface = Sc × Pabs, avec Pabs = 1 au niveau de la mer :
+  M0 est donc égal à la valeur du Sc. Les Sc sont sans unité, M0 est exprimé en bars
+  : même concept, autre présentation.'
+archived: false

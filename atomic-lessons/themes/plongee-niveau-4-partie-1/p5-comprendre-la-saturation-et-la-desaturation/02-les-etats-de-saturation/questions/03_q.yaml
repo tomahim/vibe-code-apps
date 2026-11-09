@@ -1,0 +1,22 @@
+id: 7dc14876-93fd-4535-83e2-ec2740cda941
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Qu'est-ce que la saturation, selon le manuel ?
+choices:
+- id: 61d61e4c-a7f4-4b42-994f-53c56df14a73
+  text: Un équilibre où, à l'interface de deux milieux, autant de molécules passent
+    dans un sens que dans l'autre.
+- id: 71775141-da36-4a93-8533-ee279947cc8f
+  text: La quantité maximale d'azote qu'un corps humain peut contenir sans danger.
+- id: 0bd5b638-1002-43fd-ba96-18075e248bd8
+  text: Le point au-delà duquel tout apport d'azote devient immédiatement dangereux.
+- id: 6ed5871a-6581-40e2-a5f6-6343c21517a8
+  text: Un état qui ne peut être atteint que lors de plongées très profondes.
+correct_choice_ids:
+- 61d61e4c-a7f4-4b42-994f-53c56df14a73
+explanation: 'Saturation : autant de molécules passent de A vers B que de B vers A
+  (exemple alvéoles/sang). C''est un équilibre à une pression donnée, pas un maximum
+  absolu : on est saturé « pour » une profondeur donnée.'
+archived: false

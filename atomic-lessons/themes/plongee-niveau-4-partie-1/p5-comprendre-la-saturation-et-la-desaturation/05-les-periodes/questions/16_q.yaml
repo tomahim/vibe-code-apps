@@ -1,0 +1,16 @@
+id: f0c90153-3edd-495e-b8e7-d19e53756cb9
+position: 16
+type: type_answer_question
+after_card_position: 2
+prompt: Quel terme (une lettre) désigne la différence entre la PpN2 au plus profond
+  et celle en surface, soit la quantité maximale d'azote dissoluble ?
+accepted_answers:
+- gradient
+- g
+- gradient de pression
+- le gradient
+- gradient de pression g
+explanation: 'Le gradient de pression (G) = PpN2 au fond - 0,8 bar : c''est la quantité
+  maximale d''azote que les compartiments peuvent dissoudre. La tension finale vaut
+  TN2 = 0,8 + (G × Ts).'
+archived: false

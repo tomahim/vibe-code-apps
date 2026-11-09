@@ -1,0 +1,22 @@
+id: 102df149-c5eb-4768-9b1e-e667ec20f093
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: 'Le choix entre perfusion et diffusion dans un modèle est :'
+choices:
+- id: e2882f72-7aaf-4dac-9f83-c4da0a7f39d2
+  text: 'Une simplification assumée, comme les compartiments : des résultats fiables
+    plutôt qu''une description exacte.'
+- id: 26b83b41-cfe8-4014-8775-5179d868f0ce
+  text: Une erreur historique que les modèles récents ont entièrement corrigée.
+- id: fbe87892-2ad4-453f-8be4-009d952cb90a
+  text: Une preuve que les modèles de désaturation ne servent à rien.
+- id: ef046c50-f75f-4912-bbdc-d93afb861815
+  text: Un détail marketing sans aucune conséquence sur les calculs.
+correct_choice_ids:
+- e2882f72-7aaf-4dac-9f83-c4da0a7f39d2
+explanation: 'Les modèles privilégient une phase et négligent l''autre : c''est un
+  choix de simplification, au même titre que les compartiments théoriques ; le modèle
+  vise des résultats suffisamment fiables.'
+archived: false

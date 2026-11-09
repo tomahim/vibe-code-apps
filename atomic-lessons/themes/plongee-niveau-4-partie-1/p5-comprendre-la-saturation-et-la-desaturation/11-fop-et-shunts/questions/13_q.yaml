@@ -1,0 +1,22 @@
+id: 95710e22-9570-4c91-ae57-fe5ea506ecc7
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi le Valsalva trop fort ou trop long est-il déconseillé ?
+choices:
+- id: 02496f54-089b-4bd7-bde5-27f3f3aefaeb
+  text: La surpression du thorax et le blocage momentané de la ventilation peuvent
+    favoriser l'ouverture d'un FOP.
+- id: 5d259582-0a6e-40ef-a291-26b6aaae5f5b
+  text: Il provoque systématiquement une surpression pulmonaire immédiate.
+- id: e5893e3e-d38d-47e1-9898-c38f9f9b15b6
+  text: Il augmente la consommation d'air du détendeur pendant le fond.
+- id: eb1696af-4567-47b8-bd52-7ef63e7cc2a6
+  text: Il empêche l'équilibration des oreilles pendant la descente.
+correct_choice_ids:
+- 02496f54-089b-4bd7-bde5-27f3f3aefaeb
+explanation: Par la mise en surpression du thorax et le blocage momentané de la ventilation,
+  un Valsalva trop fort ou trop long peut favoriser l'ouverture d'un FOP - et le passage
+  de bulles en circulation générale.
+archived: false

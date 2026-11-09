@@ -1,0 +1,15 @@
+id: bf7cbbb3-921e-466f-b764-42b9392561f5
+position: 8
+type: type_answer_question
+after_card_position: 5
+prompt: Comment s'appelle, pour chaque compartiment, le seuil de sursaturation à ne
+  pas dépasser à la remontée (noté Sc) ?
+accepted_answers:
+- seuil critique
+- seuil de sursaturation critique
+- Sc
+explanation: 'Le seuil critique de sursaturation (Sc) : le rapport entre la tension
+  d''azote du compartiment et la pression absolue ne doit jamais le dépasser. Haldane
+  l''avait fixé à 2 pour tous les compartiments ; des valeurs propres à chacun ont
+  suivi.'
+archived: false

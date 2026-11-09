@@ -1,0 +1,24 @@
+id: 74ff20c6-f6a8-4762-843e-e27e4fb942bd
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que suppose un modèle « à perfusion » ?
+choices:
+- id: 1dd6fe10-4fd6-4bbb-94aa-9d8f58d02fe1
+  text: Qu'il suffit qu'une quantité X de gaz soit transportée pour qu'elle soit diffusée
+    en totalité au sang et aux tissus.
+- id: 84635839-83ae-4fdb-8842-459f16f27205
+  text: Que la diffusion est le phénomène limitatif des échanges gazeux entre le sang
+    et les tissus.
+- id: bf8ccb06-3a0f-4096-a17d-9b10f3641f8f
+  text: Que le sang ne transporte aucun gaz dissous pendant toute la durée de la plongée.
+- id: c873a85b-8e60-42da-98db-3997a92f06bb
+  text: Que les tissus du corps ne peuvent jamais être saturés, même pendant une plongée
+    très longue.
+correct_choice_ids:
+- 1dd6fe10-4fd6-4bbb-94aa-9d8f58d02fe1
+explanation: 'Un modèle « à perfusion » ignore la diffusion : le transport des gaz
+  est considéré comme le facteur principal. Le modèle de Haldane est un modèle « à
+  perfusion ».'
+archived: false

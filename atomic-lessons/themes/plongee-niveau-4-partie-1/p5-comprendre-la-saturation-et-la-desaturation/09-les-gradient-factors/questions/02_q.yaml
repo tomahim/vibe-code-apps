@@ -1,0 +1,22 @@
+id: 5be257a0-bbd9-4a0b-9ff6-1b32555ff0ff
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Peut-on, avec les GF, être moins restrictif que le modèle ?
+choices:
+- id: 150be3cf-5ca0-4cf2-a07e-dfb6d5a85518
+  text: 'Non : impossible, pour des raisons évidentes de sécurité ; on peut seulement
+    être plus restrictif.'
+- id: 9137b4d4-a326-4616-98ee-08b05ac8c374
+  text: 'Oui : un GF supérieur à 100 % autorise n''importe quelle remontée.'
+- id: 2eb6b69a-1e52-4626-a9a3-e2217725cba9
+  text: Oui, mais uniquement pour les plongées de moins de dix mètres.
+- id: f08c8d0c-4604-43a0-b6b6-87fb9cc924ee
+  text: Oui, si le plongeur possède un ordinateur récent et cher.
+correct_choice_ids:
+- 150be3cf-5ca0-4cf2-a07e-dfb6d5a85518
+explanation: Il est impossible d'être moins restrictif que le modèle ; on peut seulement
+  indiquer un pourcentage inférieur à 100 % du gradient de M-Value pour ajouter de
+  la marge.
+archived: false

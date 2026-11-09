@@ -1,0 +1,23 @@
+id: e8d40bd5-b8c3-4da9-a0b8-8d54e8b10d1d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi le manuel déconseille-t-il un GF bas inférieur à 70 % en plongée
+  à l'air ?
+choices:
+- id: 14937852-f0a3-4e4c-a03d-063d535ced46
+  text: Des premiers paliers beaucoup plus profonds augmenteraient la saturation et
+    le risque d'accident.
+- id: d466cc84-ed8d-4eb1-9ee2-ee5cdc3d5fa6
+  text: L'ordinateur s'éteindrait automatiquement sous cette valeur de réglage.
+- id: fa9de98d-0005-4000-9590-a77ecd6c0abe
+  text: La remontée deviendrait trop rapide pour être contrôlée.
+- id: 46ffb94f-1737-4be9-96e7-5ad63bdde310
+  text: Les paliers de surface deviendraient impossibles à réaliser.
+correct_choice_ids:
+- 14937852-f0a3-4e4c-a03d-063d535ced46
+explanation: Un GF bas trop faible impose des premiers paliers plus profonds et plus
+  longs ; en plongée loisir à l'air, cela peut augmenter le niveau de saturation et
+  le risque d'ADD au lieu de le diminuer.
+archived: false

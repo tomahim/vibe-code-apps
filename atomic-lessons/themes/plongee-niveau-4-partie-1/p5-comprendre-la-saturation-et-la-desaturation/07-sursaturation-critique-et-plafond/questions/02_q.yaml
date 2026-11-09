@@ -1,0 +1,21 @@
+id: f271e175-6af3-4488-b862-aa1db5682648
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que dit la règle du rapport TN2 / Pabs pendant la remontée ?
+choices:
+- id: e0dda983-9e4e-403d-9584-b7822f51a769
+  text: Il ne doit jamais dépasser le seuil de sursaturation critique (Sc) du compartiment.
+- id: 9c87e184-6e6a-4e43-91fc-b80960c704da
+  text: Il doit toujours rester exactement égal à 2, comme chez Haldane.
+- id: 68a7aa8d-7389-4928-be43-595330af55e6
+  text: Il doit être supérieur au Sc pour accélérer la décompression.
+- id: 54677ab5-c222-4e65-a867-fb0951054922
+  text: Il ne concerne que le compartiment le plus rapide du modèle.
+correct_choice_ids:
+- e0dda983-9e4e-403d-9584-b7822f51a769
+explanation: Au cours de la remontée, le rapport entre la tension d'azote (TN2) de
+  chaque compartiment et la pression absolue (Pabs) ne doit jamais dépasser le seuil
+  de sursaturation critique (Sc).
+archived: false

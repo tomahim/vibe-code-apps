@@ -1,0 +1,22 @@
+id: e52a6010-9915-43cf-af53-2bfa7529d755
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que déterminent respectivement le GF bas et le GF haut ?
+choices:
+- id: 788ece67-3f2e-4d1c-8a31-ed6a451d8be2
+  text: 'Le GF bas : le premier palier, le plus profond ; le GF haut : le dernier
+    palier, le moins profond.'
+- id: 3d9b9402-ff93-4590-a9fd-65e44d1c1808
+  text: 'Le GF bas : la durée de la descente ; le GF haut : la vitesse de remontée.'
+- id: 2c6b68b5-e7f4-4d46-8337-6aaa495a70ed
+  text: 'Le GF bas : les plongées à moins de 20 m ; le GF haut : les plongées profondes.'
+- id: 9b82b1c0-fc65-4bab-8de3-340861e3a11d
+  text: 'Le GF bas : la consommation d''air ; le GF haut : la flottabilité.'
+correct_choice_ids:
+- 788ece67-3f2e-4d1c-8a31-ed6a451d8be2
+explanation: Le GF bas (low) détermine le premier palier, le plus profond ; le GF
+  haut (high) détermine le dernier palier, le moins profond, c'est-à-dire la durée
+  des paliers proches de la surface.
+archived: false

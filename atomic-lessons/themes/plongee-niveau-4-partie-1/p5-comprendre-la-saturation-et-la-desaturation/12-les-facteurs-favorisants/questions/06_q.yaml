@@ -1,0 +1,21 @@
+id: a1a3f144-a499-4d07-a991-7db4052ce3dd
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi les plongées yo-yo (dents de scie) sont-elles à risque ?
+choices:
+- id: 79b9da3e-e95f-4659-916e-43b080ea1a5a
+  text: Une remontée de 10 m suffit à créer des bulles, dont les effets ne sont pas
+    annulés par une redescente.
+- id: b998cfab-548d-4353-87ce-28a9035c2f9b
+  text: Elles vident la bouteille deux fois plus vite qu'une plongée carrée.
+- id: 897712fd-893f-4352-bc4b-91d105fec852
+  text: Elles empêchent tout calcul de la consommation d'air au fond.
+- id: e883cffe-7ad5-447a-8179-359d1422fa80
+  text: Elles fatiguent les oreilles par les équilibrages répétés.
+correct_choice_ids:
+- 79b9da3e-e95f-4659-916e-43b080ea1a5a
+explanation: Même à vitesse lente, une remontée de 10 m (un bar de baisse) suffit
+  à créer des bulles dont les effets sur l'organisme ne sont pas annulés par une redescente.
+archived: false

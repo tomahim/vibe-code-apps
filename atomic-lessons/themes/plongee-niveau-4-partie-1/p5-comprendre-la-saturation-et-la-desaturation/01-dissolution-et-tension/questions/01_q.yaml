@@ -1,0 +1,22 @@
+id: 5f996b34-bb58-4bca-85ae-330bba22f25c
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi l'azote se dissout-il dans le corps en plongée ?
+choices:
+- id: 61ce3c02-d3e4-4793-ac1f-85aead257e95
+  text: Parce que l'air respiré sous pression dissout l'azote dans le sang puis les
+    tissus.
+- id: f0d9257c-809f-4279-8b22-9f49ec98d61f
+  text: Parce que l'azote réagit chimiquement avec l'hémoglobine du sang, comme l'oxygène.
+- id: 238ed51e-525f-44b9-b8bf-f383b92d4010
+  text: Parce que la peau absorbe l'azote de l'eau de mer pendant toute la plongée.
+- id: df727fd7-9a25-4812-ae21-02abc2214c23
+  text: Parce que le détendeur transforme l'azote de l'air en azote liquide sous pression.
+correct_choice_ids:
+- 61ce3c02-d3e4-4793-ac1f-85aead257e95
+explanation: 'L''azote est un gaz inerte : il ne réagit pas chimiquement avec l''organisme
+  (contrairement à l''oxygène), mais sous l''effet de la pression il se dissout progressivement
+  dans le sang puis dans les tissus.'
+archived: false

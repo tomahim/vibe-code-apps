@@ -1,0 +1,23 @@
+id: 4878e022-6088-47bf-8fd0-4676c4687826
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels comportements le manuel recommande-t-il vis-à-vis du risque FOP ?
+choices:
+- id: caae39af-7832-4e40-9777-8bcc82719c9e
+  text: Pas d'effort en fin de plongée ni dans les heures qui suivent, pas de Valsalva
+    trop fort ou trop long.
+- id: fa2f53bd-875a-410f-b820-861efe885bce
+  text: Faire un effort intense juste avant la remontée pour évacuer l'azote.
+- id: 1eca074f-92de-4970-98a5-10097cd26f1e
+  text: Gonfler son gilet à la bouche à chaque palier de décompression.
+- id: 4523f9fb-5bef-4a55-9226-475981e52456
+  text: Réaliser un Valsalva prolongé toutes les cinq minutes de plongée.
+correct_choice_ids:
+- caae39af-7832-4e40-9777-8bcc82719c9e
+explanation: 'Il est crucial d''éviter toute ouverture du FOP : pas d''effort en fin
+  de plongée, dans l''eau ou en surface (mouillage...) ; pas de Valsalva trop fort
+  ou trop long ; efforts violents en immersion ou dans les heures suivantes plus que
+  jamais déconseillés.'
+archived: false

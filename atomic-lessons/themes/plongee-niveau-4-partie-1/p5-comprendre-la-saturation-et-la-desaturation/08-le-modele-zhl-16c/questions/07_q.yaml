@@ -1,0 +1,22 @@
+id: 47a6f2bc-0210-497a-bd25-6b4c6a4f5f00
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que prend en compte Bühlmann (1983), que Workman ne considérait pas ?
+choices:
+- id: 9c5943eb-73f7-433f-8e3a-63c27745d043
+  text: La pression absolue et la composition de l'air alvéolaire, au lieu de l'air
+    atmosphérique.
+- id: e1cf960b-9680-4886-ab25-16925e0a4bf0
+  text: La température de l'eau et la salinité des mers chaudes.
+- id: f76d2156-bec9-449d-841e-c5aac680ccf3
+  text: Le sexe et l'âge du plongeur dans chaque calcul.
+- id: 87013b08-6c98-4ba4-96a0-964d286ccfa5
+  text: La consommation d'air du plongeur pendant le fond.
+correct_choice_ids:
+- 9c5943eb-73f7-433f-8e3a-63c27745d043
+explanation: Workman ne considérait que la pression de l'eau avec une pression atmosphérique
+  unique (1 bar) ; Bühlmann prend en compte la pression absolue et la composition
+  de l'air alvéolaire, ouvrant la voie aux tables d'altitude.
+archived: false

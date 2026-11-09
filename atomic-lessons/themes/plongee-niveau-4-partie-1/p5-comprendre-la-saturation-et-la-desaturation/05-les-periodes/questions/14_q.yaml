@@ -1,0 +1,22 @@
+id: 870bcfb9-00df-489f-a0e9-3e746ca4f7bb
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce qu'un modèle dit « haldanien » ?
+choices:
+- id: 5d307e13-d40c-4cbe-8938-132d155870a7
+  text: Un modèle qui retient la formulation exponentielle de Haldane pour calculer
+    les tensions tissulaires de gaz inerte.
+- id: 01fb176b-bb61-4ba1-a73f-4b14ca0631c1
+  text: Un modèle qui calcule l'ensemble des échanges gazeux uniquement par diffusion.
+- id: 7e5ab929-fb02-4806-a89d-2537131827c1
+  text: Un modèle qui refuse toute simplification du fonctionnement du corps humain.
+- id: d96508d5-3489-4605-9d72-6600d43b2615
+  text: Un modèle de décompression réservé aux plongées au trimix et à l'héliox.
+correct_choice_ids:
+- 5d307e13-d40c-4cbe-8938-132d155870a7
+explanation: Un modèle est dit « haldanien » lorsqu'il retient la formulation de type
+  exponentiel utilisée par Haldane ; les tables MN90, US-Navy, Comex ou Bühlmann sont
+  des modèles haldaniens.
+archived: false

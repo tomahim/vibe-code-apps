@@ -1,0 +1,23 @@
+id: 8d61a475-2c0f-408c-9dd0-adf18759c330
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Qu'est-ce que la sursaturation critique ?
+choices:
+- id: 1c96e6cc-df85-4c0f-bef2-0aea38341363
+  text: Une décompression trop rapide, avec dépassement des seuils critiques (Sc)
+    et un risque important d'accident.
+- id: 22463b22-ca68-4443-b850-3b9fcef8b657
+  text: Une simple sursaturation un peu forte, sans conséquence particulière pour
+    le plongeur.
+- id: b3c73fcb-c8d2-455e-acbe-3de7b4de857b
+  text: Une saturation totale du compartiment le plus lent avant la fin de la plongée.
+- id: 4fa8dce1-491a-4355-a6dd-599a19e1ed71
+  text: Une baisse de la tension d'azote en dessous de 0,8 bar pendant le palier.
+correct_choice_ids:
+- 1c96e6cc-df85-4c0f-bef2-0aea38341363
+explanation: La sursaturation critique indique une décompression trop rapide avec
+  dépassement des seuils critiques (Sc) et un risque important d'accident de désaturation.
+  C'est ce seuil qui impose ou non des paliers.
+archived: false

@@ -1,0 +1,21 @@
+id: 364af797-58b0-44c2-8cf9-0102000ae869
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel duo résume un compartiment théorique ?
+choices:
+- id: 6a8d8695-da21-40c8-b08d-c31a71580c9e
+  text: Une période de charge/décharge et un seuil critique de baisse de pression.
+- id: abaed42b-fe58-487f-bc75-047772912406
+  text: Une profondeur maximale et une durée maximale de plongée.
+- id: 72f30bf4-9784-4c3a-87b8-aa4f41163149
+  text: Un volume de sang et un nombre de globules rouges.
+- id: 5512f412-3050-4fca-a2ba-b26822e6c270
+  text: Une température corporelle et une fréquence cardiaque.
+correct_choice_ids:
+- 6a8d8695-da21-40c8-b08d-c31a71580c9e
+explanation: 'Un compartiment se résume à deux caractéristiques : sa période (vitesse
+  de charge et de décharge) et son seuil critique de baisse de pression, qui impose
+  ou non des paliers.'
+archived: false

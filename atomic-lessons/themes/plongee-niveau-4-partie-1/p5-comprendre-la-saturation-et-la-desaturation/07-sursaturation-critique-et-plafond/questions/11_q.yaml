@@ -1,0 +1,21 @@
+id: d44b7be4-0a60-4152-a25e-bcc0ab35d800
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle conséquence pratique a un Sc faible pour un compartiment lent ?
+choices:
+- id: 37d1d2c8-61eb-45dc-8760-4a3f5a91fa1a
+  text: Il supporte une moindre sursaturation et impose plus facilement un plafond.
+- id: e5c0fc09-7d9e-4974-a485-a34463b95cb4
+  text: Il permet des remontées beaucoup plus rapides sans paliers.
+- id: 841e081e-d7c5-4792-9b74-64c8e1ff4547
+  text: Il se désature entièrement pendant la descente en début de plongée.
+- id: 3851c1cb-28f2-42b6-9432-b9f711ade05e
+  text: Il n'a aucune influence sur la procédure de remontée.
+correct_choice_ids:
+- 37d1d2c8-61eb-45dc-8760-4a3f5a91fa1a
+explanation: 'Un Sc faible (C120 : 1,54) signifie que le compartiment supporte une
+  moindre sursaturation : il atteint plus facilement son seuil et impose plus souvent
+  une profondeur plafond.'
+archived: false

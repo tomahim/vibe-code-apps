@@ -1,0 +1,23 @@
+id: 01782dd0-2d96-4aa0-be24-0a2bbdf19c1f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Sur quelles données et hypothèses les modèles calculent-ils la quantité d'azote
+  ?
+choices:
+- id: 34af319a-0632-44ec-916d-28e9bff3fc8e
+  text: Profondeur, temps, débit cardiaque et consommation d'air (20 l/min), élimination
+    par le filtre pulmonaire.
+- id: ba67c1f4-e749-447a-86ed-460196e219a7
+  text: Uniquement la profondeur maximale et la température de l'eau.
+- id: 64f0ed76-1811-4437-9c96-1a5f2513683b
+  text: Le poids du plongeur et la taille de son bloc de plongée.
+- id: dba3f29c-0684-44b2-9290-412039809196
+  text: Le nombre de plongées réalisées dans l'année écoulée.
+correct_choice_ids:
+- 34af319a-0632-44ec-916d-28e9bff3fc8e
+explanation: La quantité d'azote est calculée selon la profondeur et le temps (instruments),
+  une hypothèse de débit cardiaque et de consommation (20 l/min) et une hypothèse
+  d'élimination par le filtre pulmonaire.
+archived: false

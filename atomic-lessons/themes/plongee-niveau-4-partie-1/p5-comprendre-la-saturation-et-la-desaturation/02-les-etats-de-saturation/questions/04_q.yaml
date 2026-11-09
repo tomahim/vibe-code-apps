@@ -1,0 +1,22 @@
+id: a236b0e5-4755-4367-9394-85bfbbf48023
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Au bout de combien de temps un compartiment est-il considéré comme saturé
+  ?
+choices:
+- id: 0e157deb-554c-4843-9cea-d7eadbf508c0
+  text: Au bout d'environ six fois sa période.
+- id: 18031564-a74d-4ee0-9657-dae02fb0b740
+  text: Au bout exactement d'une seule période.
+- id: 9ecbad30-8d57-4f92-b553-417c7b6718c8
+  text: Au bout de dix minutes, quelle que soit sa période.
+- id: 5f550354-18f0-46a5-8251-1aa8fad8be6e
+  text: 'Jamais : la saturation est théoriquement impossible à atteindre.'
+correct_choice_ids:
+- 0e157deb-554c-4843-9cea-d7eadbf508c0
+explanation: 'La courbe est exponentielle : le taux de saturation atteint 50 % en
+  une période, puis 75 %, 87,5 %, 93,75 %, 96,87 %... Au bout d''environ six périodes,
+  le compartiment est considéré comme saturé (proche de 100 %).'
+archived: false

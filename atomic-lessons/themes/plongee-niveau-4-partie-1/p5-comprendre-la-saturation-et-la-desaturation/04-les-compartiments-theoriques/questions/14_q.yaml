@@ -1,0 +1,23 @@
+id: 95bd8a94-a837-4ee4-bd02-5f53a389a506
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment les périodes des compartiments ont-elles été choisies, selon le manuel
+  ?
+choices:
+- id: 6faaa0fe-efcf-41f6-8790-11f15e4649a9
+  text: C'est un choix plus « mathématique » que « physiologique », validé empiriquement
+    sur des relevés de plongées.
+- id: c732c0c9-c608-4c5f-94af-031836765f8f
+  text: Elles ont été mesurées précisément dans chaque tissu du corps humain.
+- id: 9f996e0a-46c2-485a-a952-49a4f4407742
+  text: Elles ont été imposées par la réglementation internationale de la plongée.
+- id: 9dc52910-e012-4226-8d24-74987692d19f
+  text: Elles correspondent aux durées des phases de la digestion.
+correct_choice_ids:
+- 6faaa0fe-efcf-41f6-8790-11f15e4649a9
+explanation: Les valeurs (5, 7, 10, 15, 20, 30...) montrent un choix plus « mathématique
+  » que « physiologique », ajusté empiriquement grâce à des bases de données de relevés
+  de plongées.
+archived: false

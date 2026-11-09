@@ -1,0 +1,21 @@
+id: 42da7a1e-659a-4f2c-9d59-4e3b9403f6fd
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que désigne la tension d'azote (TN2), dans le vocabulaire du manuel ?
+choices:
+- id: c060ae8f-ea7e-432d-be40-bcfff75d04a6
+  text: La quantité d'azote dissous dans le corps ou dans les compartiments théoriques.
+- id: aa544094-e18f-439a-b003-63d082b911aa
+  text: La quantité d'azote à l'état gazeux dans les poumons uniquement.
+- id: 2e5ca1de-7f53-4803-a973-b19c09f6e7b7
+  text: La pression totale du mélange respiré mesurée au deuxième étage.
+- id: 8bf995df-3701-4d80-a6c1-32e63152631a
+  text: La résistance mécanique des tissus à l'étirement pendant la plongée.
+correct_choice_ids:
+- c060ae8f-ea7e-432d-be40-bcfff75d04a6
+explanation: 'PpN2 pour l''azote à l''état gazeux (poumons), TN2 pour l''azote dissous
+  (corps, compartiments) : les deux termes traduisent la même notion de quantité d''azote,
+  mais les distinguer évite les confusions.'
+archived: false

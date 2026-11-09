@@ -1,0 +1,22 @@
+id: b7529bb9-e161-4813-a4a4-b20f2cfd0080
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que signifie le terme « shunt » en médecine ?
+choices:
+- id: cdc71f5e-0e78-4891-b053-e8e9d338ca63
+  text: 'Une dérivation : l''ouverture de passages normalement fermés, au niveau du
+    cœur ou des poumons.'
+- id: aa5f0027-b2f2-400b-95fc-723f3699be52
+  text: Une valve de sécurité installée chirurgicalement dans le cœur.
+- id: a02f7de8-addf-4c96-98a2-96db2023bdef
+  text: Un rétrécissement des artères coronaires avec l'âge.
+- id: 90c7efbb-f234-41d9-9d68-67e71d4dc63e
+  text: Un appareil mesurant la tension artérielle du plongeur.
+correct_choice_ids:
+- cdc71f5e-0e78-4891-b053-e8e9d338ca63
+explanation: 'Shunt : dérivation, court-circuit ; l''ouverture de passages normalement
+  fermés (cœur : foramen ovale ; poumons), qui peut faire passer du sang veineux dans
+  le circuit artériel sans filtre pulmonaire.'
+archived: false

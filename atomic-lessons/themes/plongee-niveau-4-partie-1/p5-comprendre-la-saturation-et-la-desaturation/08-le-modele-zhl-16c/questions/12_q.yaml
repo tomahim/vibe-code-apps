@@ -1,0 +1,21 @@
+id: f2fc32d6-e5fd-4384-808f-17000dc78519
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que signifie « ADT » dans l'algorithme ZH-L8 ADT des Aladin (Uwatec) ?
+choices:
+- id: 1fa82c94-7d9b-4936-abeb-31f9685cf436
+  text: 'Adaptatif : l''algorithme s''adapte à certaines conditions (froid, effort...)
+    pour améliorer la sécurité.'
+- id: 02738cdf-96ea-4b12-9be7-b3d843d471d4
+  text: 'Altitude : l''algorithme est réservé aux plongées en lac de montagne.'
+- id: cb7764ab-5e40-4e05-8622-ab8e9c00d076
+  text: 'Avancé : l''algorithme est destiné aux seuls plongeurs techniques.'
+- id: b6d9386f-246b-4930-ba1e-07d5f32f792d
+  text: 'Automatique : l''ordinateur se passe de tout réglage du plongeur.'
+correct_choice_ids:
+- 1fa82c94-7d9b-4936-abeb-31f9685cf436
+explanation: '« ADT » signifie « adaptatif » : l''algorithme tente de s''adapter à
+  certaines conditions (froid, effort...) pour améliorer la sécurité de la désaturation.'
+archived: false

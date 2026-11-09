@@ -1,0 +1,22 @@
+id: 83051d8f-a2e2-4b15-8040-3b00322673f3
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-ce que le modèle RGBM ?
+choices:
+- id: ed59c8e0-96e9-4219-8bf2-c38f96341896
+  text: Un modèle hybride du Dr Bruce Wienke, qui intègre des facteurs prenant en
+    compte les germes gazeux.
+- id: 09fad14c-1bda-4ab5-a487-99854665915a
+  text: Une table française développée par la Comex pour les travailleurs hyperbares.
+- id: 26522f9b-5a54-4346-849c-eae5f8b5621c
+  text: Un ordinateur de plongée réservé aux recycleurs à l'héliox.
+- id: 1ff07a22-0434-415f-bac4-02df017a204d
+  text: Une méthode de calcul des paliers basée uniquement sur la diffusion.
+correct_choice_ids:
+- ed59c8e0-96e9-4219-8bf2-c38f96341896
+explanation: Le RGBM (Dr Bruce Wienke, Los Alamos National Laboratory) est un modèle
+  hybride qui modifie l'approche haldanienne en intégrant des facteurs censés prendre
+  en compte les germes gazeux.
+archived: false

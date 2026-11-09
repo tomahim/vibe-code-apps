@@ -1,0 +1,20 @@
+id: 49bc8225-f1e7-4cf2-8d2f-202ba5de3277
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que représente ΔM dans la formule des M-Values ?
+choices:
+- id: 7ce023ee-b39d-49e3-8e2c-116fcace4ebc
+  text: Le facteur d'augmentation de M0 par mètre de profondeur.
+- id: 57b92643-aa30-4b8d-89d3-a8da34cfb90f
+  text: La différence de marée entre le début et la fin de la plongée.
+- id: db97aa03-3e66-405c-9040-acd51acfc4e2
+  text: Le temps écoulé depuis la dernière plongée successive.
+- id: 1c22283a-78e2-41b2-af9b-a9406c32bdce
+  text: Le taux de désaturation du compartiment le plus lent.
+correct_choice_ids:
+- 7ce023ee-b39d-49e3-8e2c-116fcace4ebc
+explanation: 'ΔM est le facteur d''augmentation de M0 par mètre de profondeur : plus
+  on descend, plus la tension maximale acceptable Mp augmente.'
+archived: false

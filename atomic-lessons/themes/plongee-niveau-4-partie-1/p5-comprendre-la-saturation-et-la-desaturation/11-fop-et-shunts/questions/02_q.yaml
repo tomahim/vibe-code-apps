@@ -1,0 +1,21 @@
+id: 5a98a441-5289-4391-8002-43e22995bd0b
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel danger un shunt présente-t-il pour le plongeur ?
+choices:
+- id: 37c66d07-8ff0-42e7-94d6-3d6175ffc0c0
+  text: Il peut faire passer du sang veineux - et ses bulles - directement dans le
+    circuit artériel, sans filtrage.
+- id: f6185df7-aa7e-4cdb-8464-bd47bd762a3d
+  text: Il empêche le sang d'atteindre les poumons pendant l'expiration.
+- id: f5c81769-405e-4636-b57a-33706c60f143
+  text: Il bloque totalement la circulation dans le cœur gauche.
+- id: 034fb87a-cc9b-4256-80bc-b6faaa9c9dd5
+  text: Il provoque une accumulation de dioxygène dans les veines.
+correct_choice_ids:
+- 37c66d07-8ff0-42e7-94d6-3d6175ffc0c0
+explanation: 'Un shunt peut court-circuiter le filtre pulmonaire : le sang veineux,
+  porteur éventuel de bulles silencieuses, passe directement dans le circuit artériel.'
+archived: false

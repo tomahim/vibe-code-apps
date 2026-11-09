@@ -1,0 +1,22 @@
+id: 7d12ff75-315a-4438-8b24-8f2d38944925
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qu'est-ce que la désaturation, selon le manuel ?
+choices:
+- id: 2b2ee993-a3e8-40d1-bc1a-19432ec5ec05
+  text: 'La phase durant laquelle le corps élimine de l''azote : à la remontée, aux
+    paliers et en surface dans les heures qui suivent.'
+- id: a917f774-ab35-4d48-8103-0da931bf659c
+  text: La phase durant laquelle la pression baisse pendant la remontée vers la surface.
+- id: acfda5ec-1171-4cc5-bb15-0bd11cd13f05
+  text: Le moment précis où le plongeur quitte le fond pour rejoindre la surface.
+- id: 171af647-5d52-4f77-b2c3-b71ac8c8470d
+  text: L'élimination de l'azote, qui ne se produit que pendant les paliers affichés.
+correct_choice_ids:
+- 2b2ee993-a3e8-40d1-bc1a-19432ec5ec05
+explanation: 'La désaturation, c''est l''élimination de l''azote par le corps : à
+  la remontée, aux paliers et en surface, dans les heures qui suivent une plongée.
+  La décompression, elle, est la baisse de pression.'
+archived: false

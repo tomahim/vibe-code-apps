@@ -1,0 +1,22 @@
+id: 5af593bd-1b6c-4949-889a-cf6fc3123fcf
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: D'où vient la valeur Sc = 1,58 ?
+choices:
+- id: 99cc362a-6d24-42e2-9e23-116d52c71583
+  text: 'Du recalcul du ratio 2:1 sur la pression partielle d''azote : 0,79 × 2 =
+    1,58.'
+- id: aafeb744-f1c9-46c1-8d67-27b73a8b5433
+  text: Du doublement du seuil du compartiment le plus lent des tables MN90.
+- id: fd6a0093-902b-4830-8e45-a86f3ded6de9
+  text: De la pression absolue à 10 mètres de profondeur en mer.
+- id: a3983dec-a2e4-4b29-b036-181b9afe45cb
+  text: D'une mesure directe de la tension d'azote dans le sang.
+correct_choice_ids:
+- 99cc362a-6d24-42e2-9e23-116d52c71583
+explanation: 'Le Sc de 2 de Haldane devait s''appliquer non à la pression de l''air
+  mais à la pression partielle d''azote (0,79 bar en surface au niveau de la mer)
+  : 0,79 × 2 = 1,58.'
+archived: false
