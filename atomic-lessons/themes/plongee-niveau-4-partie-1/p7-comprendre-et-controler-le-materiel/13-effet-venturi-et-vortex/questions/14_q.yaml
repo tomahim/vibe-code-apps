@@ -1,0 +1,20 @@
+id: 8f71a935-5b73-4fb1-ae26-52b70862bd6d
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle est la conséquence d'une PI stable pour le plongeur ?
+choices:
+- id: e5a2b15e-d0d9-4b04-945a-33c03346b560
+  text: Un air délivré de façon régulière du début à la fin de la plongée.
+- id: e67cddd0-4f72-4c9b-a895-917b49374cdd
+  text: Une bouteille qui dure deux fois plus longtemps.
+- id: 1c2b4877-b16a-4a25-a918-7463cf034576
+  text: Une suppression des paliers de décompression.
+- id: 1bba91f9-3767-425a-af82-dfbfad1ca848
+  text: Une remontée plus rapide autorisée.
+correct_choice_ids:
+- e5a2b15e-d0d9-4b04-945a-33c03346b560
+explanation: Alimenté à une PI stable, le deuxième étage délivre un air à la PA avec
+  un effort inspiratoire régulier, quelle que soit la pression restante.
+archived: false

@@ -1,0 +1,22 @@
+id: f90441fe-382d-4196-b3aa-7960c8ad6e98
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: 'Rappel : que fait la compensation du premier étage ?'
+choices:
+- id: a9a235ab-32ab-4735-b971-c2d0b72db7fc
+  text: Elle stabilise la PI quelle que soit la pression de la bouteille, la HP arrivant
+    perpendiculairement au mécanisme.
+- id: 9636260e-dcf4-4b59-9292-6659ad17ba9b
+  text: Elle supprime le besoin d'un deuxième étage.
+- id: c7528623-8190-4b34-afad-ea01b983a125
+  text: Elle augmente la pression de la bouteille.
+- id: 632b8afb-d33b-408d-8988-4a6b552a09c9
+  text: Elle réduit la pression ambiante autour du plongeur.
+correct_choice_ids:
+- a9a235ab-32ab-4735-b971-c2d0b72db7fc
+explanation: 'HP perpendiculaire au mouvement : elle ne participe plus au bilan des
+  forces, la PI reste stable, et le deuxième étage délivre un air régulier du début
+  à la fin de la plongée.'
+archived: false

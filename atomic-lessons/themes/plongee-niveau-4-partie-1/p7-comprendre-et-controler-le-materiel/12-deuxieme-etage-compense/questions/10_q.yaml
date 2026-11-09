@@ -1,0 +1,21 @@
+id: 8cef1f42-c106-4504-abd8-5d05e1a9452e
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Sur quoi repose la sécurité côté plongeur, selon le manuel ?
+choices:
+- id: f0367f18-fb79-4ec2-934e-2af80c5f37f3
+  text: Contrôle avant plongée, surveillance du manomètre, entretien et révision annuelle.
+- id: 1f1c3c9e-feb3-4681-906d-16ad7ef3d071
+  text: Connaissance interne complète de chaque mécanisme.
+- id: ce41f7fb-ffbf-4276-99cb-5d6576825c45
+  text: Possession d'un deuxième détendeur neuf chaque année.
+- id: 10ba040f-156c-4c51-bc7a-c51084843fa2
+  text: Réglage personnel du clapet avant chaque sortie.
+correct_choice_ids:
+- f0367f18-fb79-4ec2-934e-2af80c5f37f3
+explanation: La sécurité repose sur le contrôle avant plongée, la surveillance du
+  manomètre, l'entretien et la révision annuelle, pas sur la connaissance interne
+  de chaque mécanisme.
+archived: false

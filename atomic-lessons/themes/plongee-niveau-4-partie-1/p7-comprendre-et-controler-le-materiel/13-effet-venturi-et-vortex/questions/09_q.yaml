@@ -1,0 +1,22 @@
+id: 2c47191a-8762-44a8-9890-e090fab64a65
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: 'Deuxième idée à retenir : le confort respiratoire selon le manuel repose
+  sur :'
+choices:
+- id: 529057f8-95ac-495a-bf19-cd9a2d2c4a80
+  text: Premier étage compensé, deuxième étage à faible résistance inspiratoire, révisions
+    à jour.
+- id: 1d9c6b6a-5f14-4839-b0fd-656e76b5099c
+  text: Réglages Venturi et Vortex bien calibrés.
+- id: 3c795c0d-59f2-46db-b141-bccfc732c8b4
+  text: Une bouteille sur-gonflée à 250 bars.
+- id: 366d577d-cecf-41b8-a42b-4a7a5b456b25
+  text: Un embout buccal de grande taille.
+correct_choice_ids:
+- 529057f8-95ac-495a-bf19-cd9a2d2c4a80
+explanation: 'Idée 2 : premier étage compensé (PI stable), deuxième étage à faible
+  résistance inspiratoire, révisions à jour.'
+archived: false

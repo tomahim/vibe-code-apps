@@ -1,0 +1,22 @@
+id: 229878fb-4d67-446d-b5bc-c9c8823e2f4f
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel est le chemin complet de l'air, de la bouteille au plongeur ?
+choices:
+- id: 09df4481-ca24-49f5-9f58-217f0262eaa7
+  text: Bouteille HP → premier étage (détente à la PI) → flexible PI → deuxième étage
+    (détente à la PA) → embout.
+- id: aaefd019-404c-41a8-83c4-7c8a02dbefa1
+  text: Bouteille → manomètre → deuxième étage → premier étage → embout.
+- id: 6aec3299-35ec-4dcd-8877-0800b79c73b4
+  text: Bouteille → gilet → octopus → embout.
+- id: da757741-b911-40a1-81df-80f88ea1f55e
+  text: Bouteille → filtre → soupape → chambre humide → embout.
+correct_choice_ids:
+- 09df4481-ca24-49f5-9f58-217f0262eaa7
+explanation: La bouteille fournit l'air HP ; le premier étage le détend à la PI ;
+  le flexible PI alimente le deuxième étage, qui délivre l'air à la pression ambiante
+  sur demande.
+archived: false

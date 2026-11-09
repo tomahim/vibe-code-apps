@@ -1,0 +1,21 @@
+id: 6539f4fe-f7ee-4a19-8900-6f2ee150b20f
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans quel état se trouve chaque maillon du détendeur au repos ?
+choices:
+- id: 3015b7d2-7ea4-40ad-b386-37e0bd77713f
+  text: 'Fermé : l''air ne circule que quand le plongeur inspire.'
+- id: 26d99d1a-f848-4d6f-9113-acb38255cf89
+  text: 'Ouvert : un débit de veille permanent.'
+- id: f444da9c-8314-4170-bd22-f1b84fb7e6ff
+  text: 'À moitié ouvert : réactivité maximale.'
+- id: 56d98eb2-13be-4a5a-ac64-5b61e1125164
+  text: 'Variable : cela dépend du réglage plongeur.'
+correct_choice_ids:
+- 3015b7d2-7ea4-40ad-b386-37e0bd77713f
+explanation: 'Chaque maillon est fermé au repos : clapet du deuxième étage sur son
+  siège, piston ou pointeau du premier étage fermé. L''air ne circule que sur demande
+  inspiratoire.'
+archived: false

@@ -1,0 +1,21 @@
+id: ecafc7e1-0d85-4209-80d1-ff36dc0c3b0a
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelle affirmation NE PEUT PAS être tirée du manuel ?
+choices:
+- id: 53187c01-2cb9-4b43-9481-1e286d3bc764
+  text: Une mécanique de compensation interne au deuxième étage.
+- id: a2bf892b-8610-43e5-b9d1-47dc42a2795f
+  text: Le fonctionnement de la membrane et du clapet au deuxième étage.
+- id: 103d5f51-76bf-48f8-b9a9-fb0a1a6a2fc7
+  text: Le principe de la compensation du premier étage.
+- id: b7de3c40-9a2d-4dad-9e42-f649641a6507
+  text: Le rôle de la soupape d'expiration.
+correct_choice_ids:
+- 53187c01-2cb9-4b43-9481-1e286d3bc764
+explanation: Le manuel ne décrit ni schéma ni principe de compensation interne au
+  deuxième étage ; il couvre le deuxième étage (membrane, levier, clapet, soupape)
+  et la compensation du premier étage.
+archived: false

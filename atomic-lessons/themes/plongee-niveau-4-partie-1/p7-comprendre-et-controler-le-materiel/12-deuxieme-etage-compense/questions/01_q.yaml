@@ -1,0 +1,22 @@
+id: 13b23e9b-cf05-4208-a0a8-4722f34f8fc3
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que dit le manuel d'un « deuxième étage compensé » ?
+choices:
+- id: 1474df37-293e-4897-bf99-72781db0bd2a
+  text: 'Rien de spécifique : ses schémas et descriptions détaillent le deuxième étage
+    et la compensation du premier étage, sans mécanisme « 2e étage compensé » à part
+    entière.'
+- id: 11f30eff-e35a-439d-aa26-e225d6aa0809
+  text: Il le décrit comme un deuxième étage à double membrane.
+- id: bf34da84-a3fe-449f-b00c-60be5b78fe79
+  text: Il l'interdit pour la plongée loisir.
+- id: 6b989ae8-cc27-4e12-9e4a-4842252a8fb9
+  text: Il le présente comme obligatoire au niveau 4.
+correct_choice_ids:
+- 1474df37-293e-4897-bf99-72781db0bd2a
+explanation: 'Point d''honnêteté : le manuel ne développe pas de mécanisme « deuxième
+  étage compensé » ; il détaille le deuxième étage et la compensation au premier étage.'
+archived: false

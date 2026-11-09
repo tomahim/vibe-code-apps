@@ -1,0 +1,21 @@
+id: 51fd4b53-f540-47c6-a3c7-5d09d49adf98
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: 'Vrai ou faux : la norme EN 250 citée par le manuel fixe des exigences de
+  sécurité pour les détendeurs.'
+choices:
+- id: c4783d5b-7e41-4511-8621-8bf43c1a5574
+  text: Vrai.
+- id: 6c4218bd-d159-415b-be59-0e8cc50188e3
+  text: 'Faux : c''est une norme de couleur des flexibles.'
+- id: cfe1e603-bec2-432c-9aac-971bc138b0e8
+  text: Vrai, mais seulement pour les bouteilles.
+- id: da7cb7af-9589-4d12-8e7e-1ff22f52a9c3
+  text: 'Faux : EN 250 concerne les combinaisons.'
+correct_choice_ids:
+- c4783d5b-7e41-4511-8621-8bf43c1a5574
+explanation: 'Vrai : le manuel cite la norme EN 250 comme référentiel d''exigences
+  de sécurité des détendeurs commercialisés.'
+archived: false

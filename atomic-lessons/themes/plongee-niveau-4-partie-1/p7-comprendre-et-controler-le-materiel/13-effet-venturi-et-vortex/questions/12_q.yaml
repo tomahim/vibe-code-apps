@@ -1,0 +1,21 @@
+id: 454c10fb-c392-4f77-bd70-6da135751555
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment obtenir plus de confort respiratoire selon le manuel ?
+choices:
+- id: 5fb6c73c-8625-4eae-90f3-016c6e0373b8
+  text: Par le choix du matériel (compensé, faible résistance inspiratoire) et la
+    révision, jamais par une modification personnelle.
+- id: 9b6a2cc3-1cf8-4038-9eda-c9cd1e6c6113
+  text: En dévissant légèrement le clapet du deuxième étage.
+- id: 229cecc2-c644-4f55-a274-c82f7af44d92
+  text: En augmentant la pression de gonflage de la bouteille.
+- id: 1a714ed0-04f8-4fef-82fc-069fe297cf1f
+  text: En retirant la soupape d'expiration.
+correct_choice_ids:
+- 5fb6c73c-8625-4eae-90f3-016c6e0373b8
+explanation: Toute recherche de confort passe par le choix du matériel et par la révision
+  annuelle, jamais par une modification personnelle du mécanisme.
+archived: false

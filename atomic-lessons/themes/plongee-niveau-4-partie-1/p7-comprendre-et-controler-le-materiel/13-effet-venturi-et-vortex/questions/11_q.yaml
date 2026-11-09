@@ -1,0 +1,20 @@
+id: e2daeff1-5993-45bb-a578-bcc25c2aecd6
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce qui garantit une alimentation stable du deuxième étage ?
+choices:
+- id: cac615fb-c8f5-4cb2-935f-6f682a706e47
+  text: La compensation du premier étage, qui maintient une PI stable.
+- id: fa2af1c5-e9a6-4c69-a13b-a93a0872ca8e
+  text: Le système Vortex du deuxième étage.
+- id: cc741445-1cdd-4fbf-a82c-57fc62f12e9a
+  text: Le bouton purge actionné régulièrement.
+- id: 27294c07-572f-4540-95be-0b8bc71b2af8
+  text: La soupape d'expiration.
+correct_choice_ids:
+- cac615fb-c8f5-4cb2-935f-6f682a706e47
+explanation: C'est la compensation du premier étage (HP perpendiculaire, PI indépendante
+  de la bouteille) qui stabilise l'alimentation du deuxième étage.
+archived: false

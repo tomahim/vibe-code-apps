@@ -1,0 +1,22 @@
+id: 519e8f7b-8a1b-40ea-815f-12d35f1bbdad
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: D'où vient la régularité de la respiration sur un détendeur compensé ?
+choices:
+- id: e09b191d-8ee7-44f8-8277-a852fbb73824
+  text: De la compensation du premier étage, qui stabilise la PI alimentant le deuxième
+    étage.
+- id: ce435138-4028-4b8f-b550-82cb9eecfec1
+  text: D'un mécanisme de compensation propre au deuxième étage, décrit par le manuel.
+- id: 21640276-aa5d-4b1d-a309-cd57de36084a
+  text: De la soupape d'expiration, qui régule le débit.
+- id: 19073b9c-a01a-4f24-9310-3fa37cb2e636
+  text: Du manomètre, qui ajuste la pression en continu.
+correct_choice_ids:
+- e09b191d-8ee7-44f8-8277-a852fbb73824
+explanation: Le premier étage compensé stabilise la PI ; alimenté à une PI stable,
+  le deuxième étage délivre un air à la PA avec un effort inspiratoire régulier du
+  début à la fin de la plongée.
+archived: false
