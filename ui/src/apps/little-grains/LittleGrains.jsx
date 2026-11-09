@@ -451,6 +451,37 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
   </div>;
 }
 
+// Total duels won, one bar per player (Thomas, 2026-11-09). Mirrors the
+// backend rule (CHALLENGE_MIN_WIN, also used by the win badges): a win needs
+// at least 3 correct AND strictly more than the other player - ties are not
+// wins. Only weeks with an unlocked ranking can have a winner, so a duel
+// still waiting on the other player never counts or leaks anything.
+function ChallengeWinsChart({ weeks }) {
+  const ranked = weeks.filter((w) => w.ranking);
+  if (!ranked.length) return null;
+  const tally = {};
+  for (const w of ranked) {
+    const self = w.ranking.find((r) => r.is_self);
+    const other = w.ranking.find((r) => !r.is_self);
+    if (!self || !other) continue;
+    for (const [name, mine, theirs] of [["You", self, other], [other.name, other, self]]) {
+      if (!(name in tally)) tally[name] = 0;
+      if (mine.correct >= 3 && mine.correct > theirs.correct) tally[name]++;
+    }
+  }
+  const names = Object.keys(tally);
+  if (!names.length) return null;
+  const max = Math.max(1, ...Object.values(tally));
+  return <div className="grains-challenge-wins" role="img" aria-label="Challenges won in total, one bar per player">
+    <p className="grains-card-index">WINS</p>
+    {names.map((name) => <div className="row" key={name}>
+      <span className="name">{name}</span>
+      <span className="track"><span className="bar" style={{ width: `${(tally[name] / max) * 100}%`, background: name === "You" ? "var(--blue)" : "var(--orange)" }} /></span>
+      <b>{tally[name]}</b>
+    </div>)}
+  </div>;
+}
+
 // Past duels as one line per player (Thomas, 2026-11-09). The signed-in
 // learner is the blue line, the other player orange - the same steering as
 // the growth charts. The other player's score is plotted only for weeks whose
@@ -569,6 +600,7 @@ function ChallengeSession({ onClose, onProgress }) {
               </div>
               : <button className="grains-primary" onClick={start}>{data.me.answered > 0 ? "Continue the challenge" : "Take the challenge"}</button>}
             {history?.length > 0 && <div className="grains-challenge-history"><p className="grains-card-index">PAST WEEKS</p>
+              <ChallengeWinsChart weeks={history} />
               <ChallengeHistoryChart weeks={history} />
               {history.some((w) => !w.me?.finished) && <ul>{history.filter((w) => !w.me?.finished).map((week) => <li key={week.week_key}><b>{week.week_key}</b> — you: {week.me.correct}/{week.size} so far, unfinished</li>)}</ul>}
             </div>}
