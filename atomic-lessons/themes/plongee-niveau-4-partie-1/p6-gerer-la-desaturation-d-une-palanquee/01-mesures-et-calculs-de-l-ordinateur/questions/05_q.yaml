@@ -1,0 +1,22 @@
+id: 85901f58-8f21-4d48-afca-018d89390a33
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Sur quelle approche déjà ancienne s'appuie le suivi du profil réel par les
+  ordinateurs ?
+choices:
+- id: 3749974e-0183-4dc7-99f2-2f2cfa6bdc5d
+  text: L'approche multiprofondeur des tables US-Navy, proposée par Denis Graver.
+- id: 9b7d2e87-e795-43c8-b717-559370d40e5a
+  text: La méthode des décompressimètres à chambres d'azote des années 1950.
+- id: f9a6f968-4933-42fb-875c-95c7f63ab0cc
+  text: La règle des tiers utilisée pour la gestion de l'air en plongée souterraine.
+- id: c95bfb91-d855-4789-9539-7b4142975aa9
+  text: Le profil carré des tables MN90, généralisé à toutes les profondeurs.
+correct_choice_ids:
+- 3749974e-0183-4dc7-99f2-2f2cfa6bdc5d
+explanation: 'Le suivi du profil réel repose sur l''approche multiprofondeur des tables
+  US-Navy, déjà proposée par Denis Graver dans les années 1970 : on part du plus profond
+  pour aller vers le moins profond.'
+archived: false

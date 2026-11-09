@@ -1,0 +1,13 @@
+id: 5ef954ef-ff78-403d-b8de-4a177a553a77
+position: 4
+type: type_answer_question
+after_card_position: 2
+prompt: Quel a été, en 1981, le premier ordinateur de plongée cité par le manuel (fabricant
+  Orca) ?
+accepted_answers:
+- Edge
+- Edge (Orca)
+- Orca Edge
+explanation: Edge (Orca), en 1981. Suivront Decobrain en 1985, puis SME-ML (Suunto)
+  et Aladin (Beuchat, Uwatec) en 1987.
+archived: false

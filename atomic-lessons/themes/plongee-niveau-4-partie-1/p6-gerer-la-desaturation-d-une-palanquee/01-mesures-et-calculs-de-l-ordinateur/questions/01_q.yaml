@@ -1,0 +1,22 @@
+id: 46595d2f-0646-4147-b628-46e1d9f05c05
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Comment les décompressimètres des années 1950 estimaient-ils la saturation
+  de l'organisme ?
+choices:
+- id: e4a43cc0-7850-41d3-bac3-ec4c39a14bcc
+  text: Par l'azote diffusant entre des chambres à travers des parois poreuses.
+- id: 6766925b-a930-413c-aab8-7d6ffc897dfc
+  text: Par des capteurs électroniques de pression placés sous la peau du plongeur.
+- id: 482b823a-9195-4a26-a4c5-0ff397421f61
+  text: Par des prises de sang réalisées avant et après chaque plongée.
+- id: 23f10170-f004-4c7d-89e5-c8a49143e0bc
+  text: Par des calculs réalisés par un microprocesseur embarqué dans l'appareil.
+correct_choice_ids:
+- e4a43cc0-7850-41d3-bac3-ec4c39a14bcc
+explanation: 'Les décompressimètres étaient composés de chambres remplies d''azote
+  : l''azote diffusait au travers de parois poreuses en fonction de la profondeur,
+  et la quantité transférée était censée symboliser le taux de saturation de l''organisme.'
+archived: false

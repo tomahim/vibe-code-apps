@@ -1,0 +1,21 @@
+id: 81dcff8f-05f8-4da2-9d2c-be2648b4fafb
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment la pression mesurée est-elle corrigée par mesure de sécurité ?
+choices:
+- id: 3ea6746c-23cd-470e-b081-e807ff6124e8
+  text: Majorée à la descente et au fond, minorée à la remontée.
+- id: 717c381b-f479-41bb-8a72-9a4260891f6e
+  text: Minorée à la descente et au fond, majorée à la remontée.
+- id: 5d3944fb-0612-4b15-bb16-7920c3333c1c
+  text: Toujours majorée de dix pour cent, quelle que soit la phase de plongée.
+- id: a8150d53-ddd4-44a9-b92f-850098658c3a
+  text: 'Jamais corrigée : le capteur affiche la pression exacte mesurée.'
+correct_choice_ids:
+- 3ea6746c-23cd-470e-b081-e807ff6124e8
+explanation: 'Par mesure de sécurité, la pression est majorée durant la descente et
+  le séjour au fond, et minorée lors de la remontée : l''ordinateur arrondit dans
+  le sens d''une désaturation plus prudente.'
+archived: false
