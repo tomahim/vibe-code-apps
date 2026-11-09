@@ -1,0 +1,20 @@
+id: 156f032d-bd2d-46f7-9659-466827cbfe66
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Comment rejoindre le bateau, selon le manuel ?
+choices:
+- id: 4772bcd5-e822-44c6-9b0d-93ac180d6d2b
+  text: Restez groupés et avancez tous ensemble.
+- id: 712f26d5-8c53-4854-9b79-2f2b846ae973
+  text: Chacun nage de son côté.
+- id: 6f328afa-bff8-485f-8db1-57aba605049b
+  text: Le guide part seul chercher le bateau.
+- id: b91ec6f8-6a30-45ee-9c2a-76c718ba1a62
+  text: On retire les palmes et on marche.
+correct_choice_ids:
+- 4772bcd5-e822-44c6-9b0d-93ac180d6d2b
+explanation: 'En surface, vous êtes toujours responsable de votre palanquée : restez
+  groupés et avancez tous ensemble pour rejoindre le bateau ou le bord de l''eau.'
+archived: false

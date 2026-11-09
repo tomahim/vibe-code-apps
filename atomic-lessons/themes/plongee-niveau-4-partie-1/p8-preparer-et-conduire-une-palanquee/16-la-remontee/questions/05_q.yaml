@@ -1,0 +1,20 @@
+id: 99fd427d-70ef-44ba-ba87-b17d60ec5da8
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment larguer un parachute de palier depuis le fond, selon le manuel ?
+choices:
+- id: 98c54177-3554-41f8-8454-87c1a5d08b17
+  text: En utilisant un dévidoir.
+- id: 8b3ff661-e1f2-4701-9b53-74d1bf519979
+  text: En le remplissant d'eau.
+- id: 69a98f5d-a053-4c66-8bbf-aa3106602f1f
+  text: En l'attachant à une palme.
+- id: 8b2a1a49-40b2-4e2c-8e09-747924202eae
+  text: Ce n'est pas possible.
+correct_choice_ids:
+- 98c54177-3554-41f8-8454-87c1a5d08b17
+explanation: En utilisant un dévidoir, il est possible de larguer le parachute de
+  palier depuis le fond.
+archived: false

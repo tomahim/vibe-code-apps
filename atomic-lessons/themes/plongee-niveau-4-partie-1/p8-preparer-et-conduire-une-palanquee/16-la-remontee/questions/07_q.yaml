@@ -1,0 +1,21 @@
+id: 70090afe-2ab0-43da-899d-f9daca74333b
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi les embarcations sont-elles dangereuses, selon le manuel ?
+choices:
+- id: c9f99f2d-cd52-42ba-ab7b-99d1cdca774c
+  text: Elles constituent un risque important, parfois mortel, pour les plongeurs
+    s'apprêtant à faire surface.
+- id: 568b110d-458b-4912-897e-b7da2367333a
+  text: Elles font peur aux poissons.
+- id: f556915c-01c9-419c-8a54-d21e67480a79
+  text: Elles créent des vagues agréables.
+- id: 6f0acb54-040e-40a5-ab46-6ce720c8ea2f
+  text: Elles ne présentent aucun risque.
+correct_choice_ids:
+- c9f99f2d-cd52-42ba-ab7b-99d1cdca774c
+explanation: Les embarcations (bateaux, planches à voile, scooters) constituent un
+  risque important, parfois mortel, pour les plongeurs s'apprêtant à faire surface.
+archived: false

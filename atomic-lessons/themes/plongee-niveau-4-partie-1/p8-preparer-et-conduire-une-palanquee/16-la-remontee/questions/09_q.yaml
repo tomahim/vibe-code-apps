@@ -1,0 +1,22 @@
+id: 16c54a5c-df95-4e99-a075-1b7cd8dcabb5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles sont les deux vérifications à effectuer à 3 m, selon le manuel ?
+choices:
+- id: 39ee78c9-e10d-41de-9ffe-a208e3154ad8
+  text: Vérifier son équilibrage pour pouvoir redescendre en urgence, et faire un
+    tour d'horizon pour vérifier l'absence d'obstacle en surface.
+- id: aad848aa-9f7c-4467-96e1-364c79e2d827
+  text: Retirer le masque et le détendeur.
+- id: 64cb98ac-bfce-4808-b013-9658227db8d6
+  text: Gonfler le gilet et fermer les yeux.
+- id: 2bbc8389-3092-4b07-93b4-d5b291b341e3
+  text: Accélérer et sortir d'un coup.
+correct_choice_ids:
+- 39ee78c9-e10d-41de-9ffe-a208e3154ad8
+explanation: 'À 3 m : vérifiez votre équilibrage (vous devez pouvoir redescendre en
+  urgence en cas de nécessité) et faites un tour d''horizon pour vérifier qu''il n''y
+  a pas d''obstacle en surface.'
+archived: false

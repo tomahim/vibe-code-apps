@@ -1,0 +1,20 @@
+id: 8ad7a4ca-812c-473d-94b8-54f6a08ccf72
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À quoi faut-il être attentif juste avant de faire surface ?
+choices:
+- id: 495b62be-55e2-4298-9a37-d8551cd2a44f
+  text: À tout bruit suspect, notamment les bruits de moteur.
+- id: 1ac8d7c3-9ac4-450f-9b7a-d599e7e96f36
+  text: Aux chants des dauphins.
+- id: 32ccc6a1-d8fa-47ab-be70-6d6e61012754
+  text: À la couleur de l'eau uniquement.
+- id: b54718b4-241c-45de-bb14-8d749bf4954a
+  text: 'À rien : la surface est sûre.'
+correct_choice_ids:
+- 495b62be-55e2-4298-9a37-d8551cd2a44f
+explanation: 'Soyez à l''écoute de tout bruit suspect : les hélices de bateaux et
+  les engins flottants constituent des risques mortels.'
+archived: false

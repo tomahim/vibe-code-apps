@@ -1,0 +1,19 @@
+id: 21bea489-c5b9-419a-966e-960d738662ce
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qui remonte à bord en dernier, selon le manuel ?
+choices:
+- id: 9c673f44-7c52-433b-9998-0b83ee540581
+  text: Le guide, après avoir fait remonter ses équipiers.
+- id: 01096765-301b-42b1-9263-b7d4d01c5756
+  text: Le plongeur le plus rapide.
+- id: 5f82f352-7c5f-4796-a7b4-e6ee39c49475
+  text: Le plus jeune.
+- id: 879aee55-4633-45ce-b331-cb0962cb159a
+  text: Peu importe.
+correct_choice_ids:
+- 9c673f44-7c52-433b-9998-0b83ee540581
+explanation: Faites remonter vos équipiers à bord, passez en dernier.
+archived: false

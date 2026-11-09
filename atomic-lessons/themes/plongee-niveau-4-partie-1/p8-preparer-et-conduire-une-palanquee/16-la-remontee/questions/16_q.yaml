@@ -1,0 +1,24 @@
+id: 72cb8b30-c9bb-4bd6-9890-73b63135c289
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle séquence résume une remontée sécurisée selon le manuel ?
+choices:
+- id: 14312650-853d-423c-bb51-72227f99c6c4
+  text: Vitesse et paliers respectés, signalisation au parachute si loin du mouillage,
+    équilibrage et tour d'horizon à 3 m, signe « Ok », nouveau tour d'horizon en surface,
+    retour groupé, guide en dernier.
+- id: a483cc12-c84f-4d6e-b44e-97bfaa2d8e16
+  text: Remontée rapide, gilet gonflé, sans regarder.
+- id: c8897484-d3ca-4ad4-89c6-ca7f1be1a968
+  text: Palier en pleine eau sans signalisation, puis nage solitaire vers le bateau.
+- id: e17fa796-3417-49d3-b5a7-aca6d5df35e8
+  text: Sortie directe sous la coque du bateau.
+correct_choice_ids:
+- 14312650-853d-423c-bb51-72227f99c6c4
+explanation: 'La remontée selon le manuel : respect de la vitesse et des paliers,
+  parachute si l''on ne remonte pas au mouillage, équilibrage et tour d''horizon à
+  3 m, signe « Ok », tour d''horizon en surface, retour groupé au bateau, guide en
+  dernier.'
+archived: false

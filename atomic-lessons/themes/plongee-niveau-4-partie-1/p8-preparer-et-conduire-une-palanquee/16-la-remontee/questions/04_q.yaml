@@ -1,0 +1,22 @@
+id: 67a31f3b-aa64-42a9-9e39-4f3d5a574722
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que faut-il faire lorsque l'on ne remonte pas au mouillage, selon le manuel
+  ?
+choices:
+- id: 9bceb63f-8d52-4466-913c-8f54a9b8c371
+  text: Se signaler à l'aide d'un parachute de palier, le plus tôt possible.
+- id: f0adc2ae-41c6-4d2c-b292-9609246772dc
+  text: Remonter vite sans se signaler.
+- id: a595b8ae-7c3a-4206-bfb0-fdf68ad6ad3b
+  text: Crier sous l'eau.
+- id: ce5687b0-456f-444b-8c32-f4d1878506c0
+  text: Attendre la nuit.
+correct_choice_ids:
+- 9bceb63f-8d52-4466-913c-8f54a9b8c371
+explanation: Pensez à vous signaler à l'aide d'un parachute de palier lorsque vous
+  ne remontez pas au mouillage ; en cas de remontée en pleine eau, signalez-vous le
+  plus tôt possible.
+archived: false

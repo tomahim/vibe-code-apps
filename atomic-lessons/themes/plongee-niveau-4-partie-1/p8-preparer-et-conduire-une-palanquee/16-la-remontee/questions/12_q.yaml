@@ -1,0 +1,21 @@
+id: dc1c4ae9-6b41-444c-b22e-720ba1f05264
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi refaire un tour d'horizon une fois en surface, selon le manuel ?
+choices:
+- id: a0e4cd49-249e-4cde-8a80-c53363003008
+  text: Pour vérifier que des engins silencieux (voilier, planche à voile) ne foncent
+    pas sur vous.
+- id: 6e5a7eae-41ee-4172-bb2e-8f09d44205c5
+  text: Pour admirer le paysage.
+- id: 2ec84007-93d9-4007-ab91-5cb3096ac6a8
+  text: Pour compter les plongeurs du bateau voisin.
+- id: 1acf7b03-eb69-461b-9604-226bdba2622f
+  text: Ce n'est pas nécessaire.
+correct_choice_ids:
+- a0e4cd49-249e-4cde-8a80-c53363003008
+explanation: Une fois en surface, refaites un tour d'horizon pour vérifier que des
+  engins silencieux (voilier, planche à voile) ne foncent pas sur vous.
+archived: false

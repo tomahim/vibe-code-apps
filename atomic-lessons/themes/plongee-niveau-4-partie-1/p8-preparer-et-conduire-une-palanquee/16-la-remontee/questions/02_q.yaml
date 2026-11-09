@@ -1,0 +1,20 @@
+id: 901eef94-cc97-41f1-a2e7-71925995d056
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Le long de quoi est-il préférable de remonter, selon le manuel ?
+choices:
+- id: 829f7d1c-91f1-43aa-80e4-643a6161e5fe
+  text: Le long du mouillage ou d'un tombant, pour éviter tout risque de dérive.
+- id: 72f005da-5f49-47f6-a8da-88215e187d9d
+  text: En pleine eau, c'est plus rapide.
+- id: 80400c39-81f7-4105-a039-e52254ab6dc2
+  text: Le long des filets de pêche.
+- id: 00fb162f-0185-444c-8c47-0de4f0f8035d
+  text: Peu importe.
+correct_choice_ids:
+- 829f7d1c-91f1-43aa-80e4-643a6161e5fe
+explanation: Il est toujours préférable de remonter le long du mouillage ou d'un tombant,
+  pour éviter tout risque de dérive.
+archived: false
