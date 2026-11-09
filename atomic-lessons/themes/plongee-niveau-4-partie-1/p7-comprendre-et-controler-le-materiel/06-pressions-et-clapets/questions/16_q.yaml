@@ -1,0 +1,22 @@
+id: 45cb7236-0ba8-4596-b2c9-a3e9f5a9c734
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Où se situe la membrane qui déclenche l'arrivée d'air au deuxième étage ?
+choices:
+- id: 6ee3e56e-13ed-4c16-9b0d-fc67739a549e
+  text: 'Entre la chambre humide et la chambre sèche : elle s''abaisse quand l''inspiration
+    crée une dépression.'
+- id: b4671cdb-9bc5-4eaf-99af-97bfaeb2519b
+  text: Dans la bouteille, entre le gaz et la robinetterie.
+- id: 2076ecd4-7b91-4b06-a26c-7b1edee4d5ff
+  text: Dans le manomètre, pour mesurer la pression restante.
+- id: c9bc8607-b461-4e8f-b95c-d2974bb0ce72
+  text: Dans le premier étage, pour couper l'arrivée HP en surface.
+correct_choice_ids:
+- 6ee3e56e-13ed-4c16-9b0d-fc67739a549e
+explanation: La dépression de l'inspiration dans la chambre sèche abaisse la membrane
+  (en contact avec la chambre humide, donc la pression ambiante), qui appuie sur le
+  levier et écarte le clapet de son siège.
+archived: false

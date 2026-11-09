@@ -1,0 +1,24 @@
+id: a39dcf45-73ad-4377-b4ac-f12ff7e9962d
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi ne jamais monter un direct-system sur un premier étage seul ?
+choices:
+- id: 665b266e-4d50-4d0f-8a15-e9107d042de9
+  text: 'Sur un direct-system, la pression ferme le clapet : en cas de surpression,
+    l''air ne peut s''échapper ; il faut un deuxième étage qui se mettra en débit
+    continu.'
+- id: 48deabee-2e8f-4131-b2b1-19d48d29645c
+  text: Le direct-system consomme trop d'air pour un seul étage.
+- id: ceb6c450-49f7-452b-9093-304dd05eeee3
+  text: Le premier étage seul ne peut pas fixer le flexible du gilet.
+- id: d62a1f06-5a5a-4fe9-bec1-16c5286a4e8c
+  text: C'est une simple question de confort respiratoire du plongeur.
+correct_choice_ids:
+- 665b266e-4d50-4d0f-8a15-e9107d042de9
+explanation: 'Sur un direct-system, la pression ferme le clapet amont : en cas d''augmentation
+  anormale de pression dans le flexible, l''air ne peut pas s''échapper. La seule
+  sécurité est un deuxième étage (ou une soupape spécifique) qui se met en débit continu
+  si la pression est trop forte.'
+archived: false

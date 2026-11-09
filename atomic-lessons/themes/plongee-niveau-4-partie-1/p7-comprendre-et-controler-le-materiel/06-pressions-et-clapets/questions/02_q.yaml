@@ -1,0 +1,22 @@
+id: 5e6ac650-3ec3-492a-ad14-0ef22138af30
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle est la valeur usuelle de la pression intermédiaire, selon le manuel
+  ?
+choices:
+- id: 43fa7a89-66dd-426a-9615-2ecbb943a3b2
+  text: 'De l''ordre de 8 à 10 bars au-dessus de la pression ambiante (extrêmes :
+    5 à 14 bars selon les modèles).'
+- id: 2561fbc5-46d4-4085-996e-acc01bd1f502
+  text: Exactement 1 bar au-dessus de la pression ambiante.
+- id: 0226e95b-3abf-41d4-96a2-c93a481ea1b2
+  text: Toujours la moitié de la pression de la bouteille.
+- id: d910b02a-d17c-4471-8a6e-35d474ec603c
+  text: Toujours 200 bars, comme la bouteille.
+correct_choice_ids:
+- 43fa7a89-66dd-426a-9615-2ecbb943a3b2
+explanation: La PI est de l'ordre de 8 à 10 bars au-dessus de la pression ambiante,
+  avec des extrêmes de 5 à 14 bars selon les modèles.
+archived: false

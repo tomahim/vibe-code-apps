@@ -1,0 +1,14 @@
+id: 2d1fdf98-aa28-44fb-b12a-47d531032c86
+position: 15
+type: type_answer_question
+after_card_position: 2
+prompt: Quel sigle désigne la pression intermédiaire, sortie du premier étage, dans
+  le manuel ?
+accepted_answers:
+- PI
+- P.I.
+- Pression intermédiaire
+explanation: 'PI : pression intermédiaire, de l''ordre de 8 à 10 bars au-dessus de
+  la pression ambiante ; HP désigne la haute pression de la bouteille et PA la pression
+  ambiante.'
+archived: false

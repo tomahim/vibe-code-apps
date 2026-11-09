@@ -1,0 +1,22 @@
+id: 2140356f-60d5-4796-9d8e-68c3a830e2b7
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle plage de pression intermédiaire le manuel donne-t-il selon les modèles
+  ?
+choices:
+- id: 39965a5d-977a-4a82-8e27-412287e6ba81
+  text: De 5 à 14 bars au-dessus de la pression ambiante, avec une valeur usuelle
+    de 8 à 10 bars.
+- id: 88f0d12b-dc19-41f7-8293-6596282e444a
+  text: De 50 à 100 bars, selon la profondeur de la plongée.
+- id: 3aa155d2-d002-4210-8075-067aac78e4ca
+  text: De 1 à 2 bars, comme la pression partielle d'oxygène.
+- id: d4e4c7b4-6157-4e4e-aa8f-3490b2814903
+  text: Toujours exactement 10 bars, quelle que soit la marque.
+correct_choice_ids:
+- 39965a5d-977a-4a82-8e27-412287e6ba81
+explanation: La PI est de l'ordre de 8 à 10 bars au-dessus de la pression ambiante,
+  avec des extrêmes de 5 à 14 bars selon les modèles.
+archived: false
