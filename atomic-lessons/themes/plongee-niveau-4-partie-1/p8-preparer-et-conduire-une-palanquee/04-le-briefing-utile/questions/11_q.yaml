@@ -1,0 +1,23 @@
+id: 5581165b-b949-4bbf-baef-48b4efeb9f87
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelles vérifications préalables le briefing annonce-t-il avant la mise à
+  l'eau ?
+choices:
+- id: d23bc85e-30a4-4c9c-93de-efafdbd552bc
+  text: Bouteille ouverte, direct-system branché, manomètre vérifié, masque sur le
+    visage et détendeur en bouche.
+- id: dea71965-04e6-47f2-a831-087eb4c44b7f
+  text: Uniquement la couleur du gilet.
+- id: 5bd1af70-8439-4877-bc00-b003e232e58e
+  text: Le poids exact de chaque plongeur.
+- id: 906c3463-3c74-4748-905e-f092781f05eb
+  text: La marque des palmes.
+correct_choice_ids:
+- d23bc85e-30a4-4c9c-93de-efafdbd552bc
+explanation: 'Avant la mise à l''eau : bouteille bien ouverte (2 ou 3 essais d''inspiration/expiration),
+  direct-system branché, manomètre indiquant la pression, masque sur le visage, détendeur
+  en bouche.'
+archived: false

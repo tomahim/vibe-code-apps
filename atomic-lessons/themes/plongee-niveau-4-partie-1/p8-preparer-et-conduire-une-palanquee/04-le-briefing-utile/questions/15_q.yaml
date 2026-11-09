@@ -1,0 +1,21 @@
+id: 62365002-9e9a-47ee-9de5-4967d8e05db2
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel signe les plongeurs font-ils en surface après la mise à l'eau lorsque
+  tout va bien ?
+choices:
+- id: 70945156-1454-49e6-9b01-2ca5f0409d05
+  text: Le signe « Ok ».
+- id: 2c171a48-207c-42eb-942c-be7b95e44310
+  text: Le signe « remontée ».
+- id: 51656673-b493-4e84-9aee-915658b782ed
+  text: Le signe « froid ».
+- id: c8b173d0-243c-4358-8dcc-935aac4f6d34
+  text: Le signe « panne d'air ».
+correct_choice_ids:
+- 70945156-1454-49e6-9b01-2ca5f0409d05
+explanation: Après la mise à l'eau, les plongeurs font le signe « Ok » en surface
+  lorsque tout va bien.
+archived: false

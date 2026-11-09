@@ -1,0 +1,23 @@
+id: c8244063-f7a3-4a32-8596-eb07f660a945
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le guide vérifie-t-il que son projet de plongée est compris, selon
+  l'esprit du manuel ?
+choices:
+- id: 6d978789-e58d-40b0-ab34-33b5e275fb92
+  text: 'En faisant participer l''auditoire : réactions et réponses montrent ce qui
+    est acquis ou à reprendre.'
+- id: 8bf94fbd-857b-462e-8db2-2b611a4b0873
+  text: Par un examen écrit avant la mise à l'eau.
+- id: 391dafa0-6fce-4905-a513-43b7203f59bd
+  text: Il ne le vérifie pas.
+- id: 3791228d-090d-4aa3-9f60-103200f5bc9c
+  text: En demandant au DP de le faire.
+correct_choice_ids:
+- 6d978789-e58d-40b0-ab34-33b5e275fb92
+explanation: 'La participation est le moyen de vérifier que le projet est compris
+  : les réactions et réponses des plongeurs montrent ce qui est acquis et ce qui doit
+  être repris.'
+archived: false

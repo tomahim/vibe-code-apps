@@ -1,0 +1,23 @@
+id: b17ab29d-7e11-48fd-8c08-ca9e56dbf9d3
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelles consignes de sécurité le manuel cite-t-il comme rappel au briefing
+  ?
+choices:
+- id: a904074d-caef-4064-a7d3-06faa1eda6c4
+  text: Oreilles, profondeur max., réserves d'air et signes, remontée lente, paliers,
+    rester groupés.
+- id: c4747224-16c8-44ba-8f54-c0574296edc5
+  text: Uniquement la profondeur maximale.
+- id: 5c6e93df-a92b-4038-9a2a-1096171f0478
+  text: Uniquement l'heure de retour au port.
+- id: faa80b07-172e-4cb3-b1e5-c13b1f968417
+  text: Le menu du repas d'après plongée.
+correct_choice_ids:
+- a904074d-caef-4064-a7d3-06faa1eda6c4
+explanation: 'Le briefing comporte un rappel des consignes de sécurité : oreilles,
+  profondeur max., réserves d''air et signes, remontée lente, paliers, rester groupés,
+  etc.'
+archived: false

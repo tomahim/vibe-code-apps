@@ -1,0 +1,20 @@
+id: de3a0688-e084-4527-b2e1-86f4dbdd74ea
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que doit vérifier chaque plongeur avant de sauter, selon le manuel ?
+choices:
+- id: 5e83ad39-ff30-45aa-8dca-2ef30759ae11
+  text: Qu'il n'y a personne en dessous.
+- id: 875c8228-d671-4df0-88ca-98175db0e1b0
+  text: Que ses palmes sont cirées.
+- id: 7f7ae251-4916-47b8-a534-9e3ab933a058
+  text: Que le bateau démarre.
+- id: 4a7f63fa-20d6-4858-bfce-9491e242ce4a
+  text: Que le soleil brille.
+correct_choice_ids:
+- 5e83ad39-ff30-45aa-8dca-2ef30759ae11
+explanation: Le manuel insiste sur l'importance de bien vérifier qu'il n'y a personne
+  en dessous avant de sauter.
+archived: false
