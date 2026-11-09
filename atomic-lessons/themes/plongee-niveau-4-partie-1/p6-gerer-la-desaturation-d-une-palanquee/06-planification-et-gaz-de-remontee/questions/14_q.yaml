@@ -1,0 +1,20 @@
+id: 5a007f35-518c-4af5-8325-d5581cc00b03
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Que signale l'alarme de réserve d'air faible, et vers quelles valeurs ?
+choices:
+- id: 113b87c1-e537-4d4c-8887-dfef425e5939
+  text: La réserve d'air faible, vers 50 à 35 bars.
+- id: 2c61fa7d-96e8-4152-a5f2-a15458c68080
+  text: La fin imminente de la batterie, vers 10 % de charge restante.
+- id: 00ece088-dcf6-424f-affc-b3743fbae945
+  text: Le dépassement de la profondeur maximale, vers 40 mètres.
+- id: 1436eb97-809f-4c86-b470-68dc2db25d05
+  text: Le début du premier palier obligatoire, vers 9 mètres.
+correct_choice_ids:
+- 113b87c1-e537-4d4c-8887-dfef425e5939
+explanation: Une alarme d'indication de réserve d'air faible intervient vers 50 bars
+  à 35 bars, selon les modèles.
+archived: false

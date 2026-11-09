@@ -1,0 +1,21 @@
+id: 0f87710d-4946-40b1-9090-610e5b8eccd2
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qui détermine les paramètres de la plongée, et comment, selon le manuel ?
+choices:
+- id: f6f3e1b7-1f84-40d8-9617-3c67cf01ea13
+  text: Le guide de palanquée, en concertation avec les autres membres de la palanquée.
+- id: 6a75caea-ecf1-4b01-ab28-344bf61d3145
+  text: Le directeur de plongée seul, sans consulter les plongeurs de la palanquée.
+- id: 2d32e0b9-1655-4b0c-b8d6-85796c0e2653
+  text: Chaque plongeur individuellement, selon son envie du moment.
+- id: 93307673-085c-44a2-a85f-4be46b9e6b27
+  text: L'ordinateur le plus récent de la palanquée, qui impose ses valeurs.
+correct_choice_ids:
+- f6f3e1b7-1f84-40d8-9617-3c67cf01ea13
+explanation: En fonction du site prévu, le guide de palanquée détermine les paramètres
+  (temps, profondeur) en concertation avec les autres membres ; chacun vérifie alors
+  que la désaturation est bien celle prévue.
+archived: false

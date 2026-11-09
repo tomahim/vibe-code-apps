@@ -1,0 +1,20 @@
+id: bca10194-19f1-4b05-8bd2-7ab592fed623
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quand l'appairage entre sonde et ordinateur doit-il être effectué ?
+choices:
+- id: 0953b240-172d-4692-bef4-9a27b70a4a28
+  text: À la première utilisation et après tout changement de piles.
+- id: b82820c7-defc-4ce4-a222-6f1138cd5cf2
+  text: Uniquement à l'achat de l'appareil, jamais ensuite.
+- id: 5cc87a1d-446f-4fb6-b2a5-dc5ceed51271
+  text: Avant chaque plongée, même répétée dans la même journée.
+- id: 30f1349e-d3e4-4a59-82c7-60114ec9f8e9
+  text: Uniquement quand l'ordinateur change de propriétaire.
+correct_choice_ids:
+- 0953b240-172d-4692-bef4-9a27b70a4a28
+explanation: La synchronisation (par appairage ou numéro de série) doit être effectuée
+  pour toute première utilisation et après tout changement de piles.
+archived: false
