@@ -45,6 +45,14 @@ SCOPE_FIELDS = {
     "card": ("lesson",),
     "question": ("lesson",),
 }
+MODELS = {
+    "theme": Theme,
+    "learning_path": LearningPath,
+    "lesson": Lesson,
+    "card": Card,
+    "question": Question,
+}
+BULK_BATCH_SIZE = 500
 KINDS = {
     "theme": ContentEntity.Kind.THEME,
     "learning_path": ContentEntity.Kind.LEARNING_PATH,
@@ -220,6 +228,53 @@ class Command(BaseCommand):
         except ValueError:
             return f"{content_root.name}/{file.relative_to(content_root).as_posix()}"
 
+    def last_changed_commits(self, source_paths):
+        """Last-changing commit of every file in one `git log` pass.
+
+        Returns {source_path: sha} (files without history are absent), or None
+        when the batched pass could not run, so callers fall back to the
+        per-file lookup. The newest commit that lists a path is the same commit
+        `git log -1 -- path` reports on linear history.
+        """
+        wanted = set(source_paths)
+        roots = sorted({path.split("/", 1)[0] for path in wanted})
+        if not roots:
+            return {}
+        try:
+            result = subprocess.run(
+                ["git", "--literal-pathspecs", "-c", "core.quotepath=off", "log",
+                 "--format=@@%H", "--name-only", "--", *roots],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                timeout=600,
+            )
+        except (OSError, subprocess.SubprocessError):
+            return None
+        if result.returncode != 0:
+            return None
+        found = {}
+        sha = ""
+        for line in result.stdout.splitlines():
+            if line.startswith("@@"):
+                sha = line[2:]
+            elif sha and line in wanted and line not in found:
+                found[line] = sha
+                if len(found) == len(wanted):
+                    break
+        return found
+
+    def fill_provenance(self, elements):
+        """Set last_changed_commit on every element (None without git history)."""
+        batched = self.last_changed_commits(element["provenance"]["source_path"] for element in elements)
+        for element in elements:
+            source_path = element["provenance"]["source_path"]
+            if batched is None:
+                element["provenance"]["last_changed_commit"] = self.last_changed_commit(source_path)
+            else:
+                element["provenance"]["last_changed_commit"] = batched.get(source_path)
+
     def last_changed_commit(self, source_path):
         """Commit that last touched the file, or None without git history."""
         try:
@@ -297,13 +352,14 @@ class Command(BaseCommand):
         to_process = []
         unchanged = 0
         non_raster = 0
+        stored_cards = Card.objects.in_bulk([element["id"] for element in cards])
         for element in cards:
             candidate = self.image_file(element["metadata"], element["directory"], element["location"])
             if not illustrations.raster_image(candidate):
                 non_raster += 1  # SVG and friends are served as-is through the fallback
                 continue
             sha = illustrations.source_hash(candidate)
-            row = Card.objects.filter(pk=element["id"]).first()
+            row = stored_cards.get(element["id"])
             if row is not None and row.illustration_source_hash == sha and row.illustration_variants:
                 unchanged += 1  # unchanged source: no decode, resize or upload
                 continue
@@ -394,92 +450,108 @@ class Command(BaseCommand):
     # --- Writing ----------------------------------------------------------
 
     def sync_library(self, content_root, commit, stats, elements, prepared_illustrations):
+        """Write the library one kind at a time, parents before children.
+
+        Existing rows are read in bulk, diffed in memory and written only when
+        changed; new rows are validated one by one (full_clean) and inserted in
+        batches. A kind is fully written before the next one starts, so every
+        parent row exists when its children are validated.
+        """
         records_by_dir = {}
         positions_seen = {}
         seen_ids = {element["id"] for element in elements}
+        self.fill_provenance(elements)
+        entities = ContentEntity.objects.in_bulk(list(seen_ids))
         # Periodic one-line progress so CI logs show the import advancing
         # through themes, paths, lessons, cards and questions (#195).
         total = len(elements)
         progress_step = max(1, min(100, total // 25)) if total else 1
-        for index, element in enumerate(elements, start=1):
-            element["provenance"]["last_changed_commit"] = self.last_changed_commit(
-                element["provenance"]["source_path"]
-            )
-            metadata = element["metadata"]
-            location = element["location"]
-            archived = bool(metadata.get("archived", False))
-            entity = self.sync_entity(element, archived)
-            parent = records_by_dir.get(element["parent_dir"]) if element["kind"] != "theme" else None
-            # Retiring a parent makes its whole subtree unavailable: effective
-            # publication needs the element's own flag AND the parent's state.
-            published = not archived and (parent is None or parent.published)
-            desired = {
-                "position": self.position(metadata, location),
-                "published": published,
-                **element["provenance"],
-            }
-            if element["kind"] in ("theme", "learning_path", "lesson"):
-                desired["title"] = str(self.require(metadata, "title", location))
-                desired["description"] = str(metadata.get("description") or "")
-                desired["introduction_markdown"] = element["body"]
-                # Path and lesson covers were removed (#195): illustrations live
-                # on cards only, so stale cover references are cleared on sync.
-                desired["image_path"] = ""
-                desired["image_alt"] = ""
-            if element["kind"] == "learning_path":
-                desired["theme"] = parent
-                # Front matter opt-in: general-knowledge paths feed the weekly
-                # Challenge; specialist paths (diving certifications) stay out.
-                desired["general_knowledge"] = bool(metadata.get("general_knowledge", False))
-            elif element["kind"] == "lesson":
-                desired["learning_path"] = parent
-            elif element["kind"] == "card":
-                if not element["body"]:
-                    raise CommandError(f"{location}: card body is empty")
-                desired["lesson"] = parent
-                desired["title"] = str(self.require(metadata, "title", location))
-                desired["body_markdown"] = element["body"]
-                desired.update(
-                    self.image_fields(
-                        metadata,
-                        element["directory"],
-                        location,
-                        path_key="illustration_path",
-                        alt_key="illustration_alt",
+        processed = 0
+        for kind, model in MODELS.items():
+            batch = [element for element in elements if element["kind"] == kind]
+            if not batch:
+                continue
+            new_entities = []
+            for element in batch:
+                self.sync_entity(element, bool(element["metadata"].get("archived", False)), entities, new_entities)
+            self.bulk_insert(ContentEntity, new_entities)
+            existing = model.objects.in_bulk([element["id"] for element in batch])
+            occupancy = self.load_occupancy(model)
+            new_records = []
+            for element in batch:
+                processed += 1
+                metadata = element["metadata"]
+                location = element["location"]
+                archived = bool(metadata.get("archived", False))
+                entity = entities[element["id"]]
+                parent = records_by_dir.get(element["parent_dir"]) if kind != "theme" else None
+                # Retiring a parent makes its whole subtree unavailable: effective
+                # publication needs the element's own flag AND the parent's state.
+                published = not archived and (parent is None or parent.published)
+                desired = {
+                    "position": self.position(metadata, location),
+                    "published": published,
+                    **element["provenance"],
+                }
+                if kind in ("theme", "learning_path", "lesson"):
+                    desired["title"] = str(self.require(metadata, "title", location))
+                    desired["description"] = str(metadata.get("description") or "")
+                    desired["introduction_markdown"] = element["body"]
+                    # Path and lesson covers were removed (#195): illustrations live
+                    # on cards only, so stale cover references are cleared on sync.
+                    desired["image_path"] = ""
+                    desired["image_alt"] = ""
+                if kind == "learning_path":
+                    desired["theme"] = parent
+                    # Front matter opt-in: general-knowledge paths feed the weekly
+                    # Challenge; specialist paths (diving certifications) stay out.
+                    desired["general_knowledge"] = bool(metadata.get("general_knowledge", False))
+                elif kind == "lesson":
+                    desired["learning_path"] = parent
+                elif kind == "card":
+                    if not element["body"]:
+                        raise CommandError(f"{location}: card body is empty")
+                    desired["lesson"] = parent
+                    desired["title"] = str(self.require(metadata, "title", location))
+                    desired["body_markdown"] = element["body"]
+                    desired.update(
+                        self.image_fields(
+                            metadata,
+                            element["directory"],
+                            location,
+                            path_key="illustration_path",
+                            alt_key="illustration_alt",
+                        )
                     )
+                    if desired["illustration_path"]:
+                        desired.update(self.illustration_metadata_fields(metadata))
+                        # Freshly processed variants; an unchanged source hash keeps
+                        # the row's stored variants and dimensions untouched.
+                        desired.update(prepared_illustrations.get(str(element["id"]), {}))
+                    else:
+                        desired.update(self.empty_illustration_fields())
+                elif kind == "question":
+                    desired["lesson"] = parent
+                    desired.update(self.question_fields(metadata, location))
+                # Reject duplicate sibling positions in the manifest itself; the
+                # two-phase move below handles valid reorders against existing rows.
+                scope_key = (kind, None if kind == "theme" else str(element["parent_dir"]))
+                siblings = positions_seen.setdefault(scope_key, {})
+                if desired["position"] in siblings:
+                    raise CommandError(
+                        f"{location}: position {desired['position']} is already used by "
+                        f"{siblings[desired['position']]} under the same parent"
+                    )
+                siblings[desired["position"]] = location
+                record = self.upsert_record(
+                    model, entity, desired, location, stats, kind, commit, seen_ids,
+                    existing, occupancy, new_records,
                 )
-                if desired["illustration_path"]:
-                    desired.update(self.illustration_metadata_fields(metadata))
-                    # Freshly processed variants; an unchanged source hash keeps
-                    # the row's stored variants and dimensions untouched.
-                    desired.update(prepared_illustrations.get(str(element["id"]), {}))
-                else:
-                    desired.update(self.empty_illustration_fields())
-            elif element["kind"] == "question":
-                desired["lesson"] = parent
-                desired.update(self.question_fields(metadata, location))
-            model = {
-                "theme": Theme,
-                "learning_path": LearningPath,
-                "lesson": Lesson,
-                "card": Card,
-                "question": Question,
-            }[element["kind"]]
-            # Reject duplicate sibling positions in the manifest itself; the
-            # two-phase move below handles valid reorders against existing rows.
-            scope_key = (element["kind"], None if element["kind"] == "theme" else str(element["parent_dir"]))
-            siblings = positions_seen.setdefault(scope_key, {})
-            if desired["position"] in siblings:
-                raise CommandError(
-                    f"{location}: position {desired['position']} is already used by "
-                    f"{siblings[desired['position']]} under the same parent"
-                )
-            siblings[desired["position"]] = location
-            record = self.upsert_record(model, entity, desired, location, stats, element["kind"], commit, seen_ids)
-            if element["kind"] in ("theme", "learning_path", "lesson"):
-                records_by_dir[element["directory"]] = record
-            if index % progress_step == 0 or index == total:
-                self.stdout.write(f"Content: {index}/{total} elements processed.")
+                if kind in ("theme", "learning_path", "lesson"):
+                    records_by_dir[element["directory"]] = record
+                if processed % progress_step == 0 or processed == total:
+                    self.stdout.write(f"Content: {processed}/{total} elements processed.")
+            self.bulk_insert(model, new_records)
         self.enforce_retirement(seen_ids)
 
     def enforce_retirement(self, seen_ids):
@@ -524,13 +596,20 @@ class Command(BaseCommand):
                 "archived: true. The sync was aborted; no rows were changed."
             )
 
-    def sync_entity(self, element, archived):
+    def sync_entity(self, element, archived, entities, new_entities):
+        """Resolve the entity of one element from the preloaded rows.
+
+        New entities are validated here and queued in new_entities for a batch
+        insert before the records of this kind are written.
+        """
         location = element["location"]
         kind = KINDS[element["kind"]]
-        entity = ContentEntity.objects.filter(pk=element["id"]).first()
+        entity = entities.get(element["id"])
         if entity is None:
             entity = ContentEntity(id=element["id"], kind=kind, archived=archived)
-            self.validated_save(entity, location)
+            self.validate(entity, location)
+            entities[element["id"]] = entity
+            new_entities.append((entity, location))
             return entity
         if entity.kind != kind:
             raise CommandError(
@@ -542,8 +621,9 @@ class Command(BaseCommand):
             self.validated_save(entity, location)
         return entity
 
-    def upsert_record(self, model, entity, desired, location, stats, kind_label, commit, syncing_ids):
-        record = model.objects.filter(pk=entity.pk).first()
+    def upsert_record(self, model, entity, desired, location, stats, kind_label, commit, syncing_ids,
+                      existing, occupancy, new_records):
+        record = existing.get(entity.pk)
         if desired["last_changed_commit"] is None:
             # Without git history, keep the recorded commit for untouched files
             # and fall back to the synced commit only for new/changed content.
@@ -551,23 +631,55 @@ class Command(BaseCommand):
                 desired["last_changed_commit"] = record.last_changed_commit
             else:
                 desired["last_changed_commit"] = commit
-        self.free_position(model, entity.pk, desired, location, syncing_ids)
+        self.free_position(model, entity.pk, desired, location, syncing_ids, existing, occupancy)
         if record is None:
             record = model(entity=entity, **desired)
-            self.validated_save(record, location)
+            self.validate(record, location)
+            new_records.append((record, location))
+            occupancy[self.slot(record)] = record.pk
             stats[kind_label]["added"] += 1
             return record
-        changed = {name: value for name, value in desired.items() if getattr(record, name) != value}
+        changed = {name: value for name, value in desired.items() if self.differs(record, name, value)}
         if not changed:
             stats[kind_label]["unchanged"] += 1
             return record
+        old_slot = self.slot(record)
         for name, value in changed.items():
             setattr(record, name, value)
         self.validated_save(record, location)
+        if occupancy.get(old_slot) == record.pk:
+            del occupancy[old_slot]
+        occupancy[self.slot(record)] = record.pk
         stats[kind_label]["updated"] += 1
         return record
 
-    def free_position(self, model, own_pk, desired, location, syncing_ids):
+    @staticmethod
+    def differs(record, name, value):
+        """Compare one desired field; relations compare by key, without a lookup."""
+        field = type(record)._meta.get_field(name)
+        if field.is_relation:
+            return getattr(record, field.attname) != value.pk
+        return getattr(record, name) != value
+
+    @staticmethod
+    def scope_attnames(model):
+        return [f"{field}_id" for field in SCOPE_FIELDS[Command.kind_label(model)]]
+
+    @staticmethod
+    def slot(record):
+        """(parent scope, position) key: the unit the position constraint protects."""
+        scope = tuple(getattr(record, f"{field}_id") for field in SCOPE_FIELDS[Command.kind_label(type(record))])
+        return scope, record.position
+
+    def load_occupancy(self, model):
+        """Map every stored (scope, position) slot to its row, in one light query."""
+        columns = self.scope_attnames(model)
+        return {
+            (tuple(row[1:-1]), row[-1]): row[0]
+            for row in model.objects.order_by().values_list("pk", *columns, "position")
+        }
+
+    def free_position(self, model, own_pk, desired, location, syncing_ids, existing, occupancy):
         """Move a synced sibling out of the target slot so reorders never collide.
 
         Sibling-position uniqueness is enforced immediately by the database, so
@@ -576,19 +688,25 @@ class Command(BaseCommand):
         processed. Rows outside this sync keep their reserved positions; a
         target slot held by one of them is a real conflict, not a reorder.
         """
-        scope = {field: desired[field] for field in SCOPE_FIELDS[self.kind_label(model)]}
-        occupant = (
-            model.objects.filter(position=desired["position"], **scope).exclude(pk=own_pk).first()
+        scope = tuple(
+            desired[field].pk for field in SCOPE_FIELDS[self.kind_label(model)]
         )
-        if occupant is None:
+        key = (scope, desired["position"])
+        occupant_pk = occupancy.get(key)
+        if occupant_pk is None or occupant_pk == own_pk:
             return
-        if occupant.pk not in syncing_ids:
+        if occupant_pk not in syncing_ids:
             raise CommandError(
                 f"{location}: position {desired['position']} is already reserved by "
-                f"{occupant.pk}, which is not part of this sync"
+                f"{occupant_pk}, which is not part of this sync"
             )
-        occupant.position = TEMP_POSITION_OFFSET + occupant.position
-        occupant.save(update_fields=["position"])
+        temporary = TEMP_POSITION_OFFSET + desired["position"]
+        model.objects.filter(pk=occupant_pk).update(position=temporary)
+        parked = existing.get(occupant_pk)
+        if parked is not None:
+            parked.position = temporary
+        del occupancy[key]
+        occupancy[(scope, temporary)] = occupant_pk
 
     @staticmethod
     def kind_label(model):
@@ -598,14 +716,37 @@ class Command(BaseCommand):
             Lesson: "lesson",
             Card: "card",
             Question: "question",
-        }[model]
+        }.get(model) or {ContentEntity: "entity"}[model]
 
     @staticmethod
-    def validated_save(instance, location):
+    def validate(instance, location):
         try:
             instance.full_clean()
-            instance.save()
         except ValidationError as error:
             raise CommandError(f"{location}: {error}") from error
+
+    @classmethod
+    def validated_save(cls, instance, location):
+        cls.validate(instance, location)
+        try:
+            instance.save()
         except IntegrityError as error:
             raise CommandError(f"{location}: database rejected the row: {error}") from error
+
+    @classmethod
+    def bulk_insert(cls, model, pending):
+        """Insert already validated rows in batches.
+
+        If the database rejects a batch (for example a position collision
+        with a row outside this sync), the rows are retried one by one so the
+        error names the offending file exactly as a row-by-row import would.
+        """
+        if not pending:
+            return
+        try:
+            with transaction.atomic():
+                model.objects.bulk_create([instance for instance, _ in pending], batch_size=BULK_BATCH_SIZE)
+        except IntegrityError as error:
+            for instance, location in pending:
+                cls.validated_save(instance, location)
+            raise CommandError(f"database rejected a batch of {model.__name__} rows: {error}") from error
