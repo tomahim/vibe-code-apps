@@ -5,6 +5,7 @@ import { BRAND_BADGE } from "../../config/brand.js";
 import { authFetch, clearToken, getToken } from "../../auth.js";
 import AccountMenu from "../../components/AccountMenu.jsx";
 import { createGarden } from "./garden/garden.js";
+import { CardIllustration } from "./CardIllustration.jsx";
 import { GrainsLoader } from "./Loader.jsx";
 import { PathComplete } from "./PathComplete.jsx";
 import { finishedPaths, newlyCompletedPaths, pathFinished } from "./path-completion.js";
@@ -121,36 +122,6 @@ function adaptGarden(data) {
   }));
 }
 
-function CardIllustration({ card }) {
-  if (!card.illustration_url) return null;
-  const srcset = (card.illustration_srcset || []).map((variant) => `${variant.url} ${variant.width}w`).join(", ");
-  const credit = card.illustration_credit ? [card.illustration_credit, card.illustration_license].filter(Boolean).join(", ") : "";
-  // Book figures (N4 manuals) carry labels that cover-cropping would eat; they fit
-  // inside the height cap instead. Scoped on the repo theme path, not on license text.
-  const bookFigure = (card.illustration_path || "").includes("/plongee-niveau-4-");
-  const variants = card.illustration_srcset || [];
-  const largest = variants.reduce((best, v) => (v && v.width > (best ? best.width : 0) ? v : best), null);
-  const fullUrl = largest ? largest.url : card.illustration_url;
-  return <figure className={bookFigure ? "grains-illustration grains-illustration--figure" : "grains-illustration"}>
-    <img
-      src={card.illustration_url}
-      srcSet={srcset || undefined}
-      sizes="(max-width: 660px) calc(100vw - 88px), 596px"
-      width={card.illustration_width || undefined}
-      height={card.illustration_height || undefined}
-      loading="lazy"
-      decoding="async"
-      alt={card.illustration_alt || ""}
-    />
-    {(card.illustration_caption || credit) && <figcaption>
-      {card.illustration_caption && <span className="grains-illustration-caption">{card.illustration_caption}</span>}
-      {credit && (card.illustration_source_url
-        ? <a className="grains-illustration-credit" href={card.illustration_source_url} target="_blank" rel="noopener noreferrer">Photo: {credit}</a>
-        : <span className="grains-illustration-credit">Photo: {credit}</span>)}
-    </figcaption>}
-    <a className="grains-illustration-open" href={fullUrl} target="_blank" rel="noopener noreferrer">View full size</a>
-  </figure>;
-}
 
 function Markdown({ source }) {
   const html = DOMPurify.sanitize(marked.parse(source || ""));
