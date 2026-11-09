@@ -1,0 +1,23 @@
+id: eb7017b2-1df9-4d6e-ae52-8e8c3f68a71a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle conséquence pratique le manuel associe-t-il au mécanisme non compensé
+  ?
+choices:
+- id: 6f44e557-da60-4ac9-bc75-57a563908be0
+  text: Les prestations du détendeur ne sont pas rigoureusement constantes entre le
+    début et la fin de la plongée.
+- id: 5d4e4829-8f78-4b3f-83d2-0fe1d602adcf
+  text: Le détendeur devient inutilisable sous les 100 bars.
+- id: a86e0709-27d0-40fb-b383-488bcc418b5a
+  text: La PI monte dangereusement à chaque inspiration.
+- id: aeaa2870-1c25-4a60-92f8-0fd2fad43185
+  text: Le deuxième étage givre systématiquement.
+correct_choice_ids:
+- 6f44e557-da60-4ac9-bc75-57a563908be0
+explanation: 'La HP comptant dans les forces d''ouverture, une bouteille plus ou moins
+  pleine modifie le point d''équilibre : efforts et prestations varient au cours de
+  la plongée.'
+archived: false

@@ -1,0 +1,23 @@
+id: f1cd3ed4-a7c0-422c-a67e-f5a6bdb1f964
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Sur un piston non compensé, quel effet a une bouteille très pleine sur l'équilibre
+  ?
+choices:
+- id: a7c69b71-c01e-4d14-aa84-360758e91e59
+  text: 'La HP plus forte compte davantage dans les forces d''ouverture : le point
+    d''équilibre de la PI est modifié.'
+- id: 19ca66ad-20d5-4ef0-af8b-285f38bc8b33
+  text: Le détendeur se bloque définitivement en position fermée.
+- id: 2c057180-aff1-46a2-a5bd-ce9ec83f5d2c
+  text: Le ressort se casse sous l'effort supplémentaire.
+- id: e951c54d-73d9-4d61-b025-dae660b7fb53
+  text: 'Aucun : la HP n''agit jamais sur le piston, même non compensé.'
+correct_choice_ids:
+- a7c69b71-c01e-4d14-aa84-360758e91e59
+explanation: 'Comme la HP participe aux forces d''ouverture sur un mécanisme non compensé,
+  une bouteille plus pleine modifie le point d''équilibre : c''est le défaut que la
+  compensation corrige.'
+archived: false

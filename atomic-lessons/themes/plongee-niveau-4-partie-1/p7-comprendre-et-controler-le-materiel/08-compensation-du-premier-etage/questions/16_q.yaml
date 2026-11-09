@@ -1,0 +1,22 @@
+id: 0eb6f4ac-2128-4f4a-b470-57defaa97d7b
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est le but recherché par la compensation ?
+choices:
+- id: 89b22c78-a143-46d1-8464-09f4e344e3ed
+  text: Une PI stable et des prestations constantes, indépendantes de la pression
+    restante dans la bouteille.
+- id: 9192c0dc-f100-4696-9acf-529044e37582
+  text: Augmenter la pression de gonflage des bouteilles à 300 bars.
+- id: 242ebb97-2975-47b5-830a-24d713daf1e8
+  text: Supprimer le deuxième étage pour alléger le détendeur.
+- id: bbd92280-e665-4a7e-8e29-b6968278e330
+  text: Réduire la consommation d'air du plongeur de moitié.
+correct_choice_ids:
+- 89b22c78-a143-46d1-8464-09f4e344e3ed
+explanation: 'But de la compensation : obtenir une PI stable et des prestations constantes,
+  indépendantes de la pression de la bouteille, avec des débits plus élevés sur les
+  modèles compensés.'
+archived: false

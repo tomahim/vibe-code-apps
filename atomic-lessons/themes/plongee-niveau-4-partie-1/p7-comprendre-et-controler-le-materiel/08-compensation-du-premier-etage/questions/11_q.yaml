@@ -1,0 +1,21 @@
+id: b636a323-2f93-4319-950f-ece70a00e7d4
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel de la « surcompensation » ?
+choices:
+- id: c2d784b6-1f17-47e2-9f54-ac1157e2a905
+  text: 'Le terme n''apparaît pas dans son chapitre détendeurs : il décrit des mécanismes
+    non compensés et compensés, sans famille « surcompensée » distincte.'
+- id: 3f5e4b70-2cc9-472a-8ffb-c5cf4cac1dae
+  text: Il la décrit comme un troisième type de mécanisme à double piston.
+- id: 80dc88c0-b050-4b1d-8e67-ddbd05cf24e0
+  text: Il l'interdit pour la plongée au-delà de 40 mètres.
+- id: 5b0b661d-1ddf-45fc-82b2-c1270e617dc2
+  text: Il la présente comme l'avenir des détendeurs grand public.
+correct_choice_ids:
+- c2d784b6-1f17-47e2-9f54-ac1157e2a905
+explanation: 'Point de vocabulaire : « surcompensation » n''apparaît pas dans le chapitre
+  détendeurs du manuel, qui distingue fonctionnement non compensé et compensé.'
+archived: false
