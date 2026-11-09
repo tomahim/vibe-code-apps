@@ -1,0 +1,23 @@
+id: 4b56e6aa-3160-40c2-8f04-28948e065d95
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quand faut-il repasser devant le mouillage en eaux troubles, selon le manuel
+  ?
+choices:
+- id: 10eaa995-cb33-4264-a0f5-05b28dbf72a5
+  text: Vers la moitié du temps de plongée prévu et avant que l'un des plongeurs ait
+    atteint 100 bars.
+- id: c7c25cfe-cb0b-47ee-9cac-a298d4209b8b
+  text: Uniquement à la toute fin de la plongée.
+- id: b12ae06e-f113-4ea9-b905-d2e85d247331
+  text: Toutes les 5 minutes.
+- id: d9b5c19d-e029-44a1-9432-74e3024c0185
+  text: 'Jamais : on s''en éloigne toujours plus.'
+correct_choice_ids:
+- 10eaa995-cb33-4264-a0f5-05b28dbf72a5
+explanation: Limitez la distance parcourue et repassez devant le mouillage vers la
+  moitié du temps de plongée prévu et avant que l'un des plongeurs ait atteint 100
+  bars.
+archived: false

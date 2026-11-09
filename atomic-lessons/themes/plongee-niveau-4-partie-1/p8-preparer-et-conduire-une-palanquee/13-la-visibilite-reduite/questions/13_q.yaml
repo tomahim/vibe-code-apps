@@ -1,0 +1,21 @@
+id: a9a8cbef-c59a-4b20-93cd-9bf10c27190f
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que fait cette leçon de la procédure de perte de palanquée ?
+choices:
+- id: fb19ad86-b4a3-42e6-bed8-e78f61ec138a
+  text: Elle signale l'absence de codification dans le manuel et n'invente pas les
+    étapes.
+- id: 22ec3f6b-da5c-4ece-8b3f-d861c52215ee
+  text: Elle invente une procédure plausible.
+- id: e7b6f4e8-392d-47c2-8a3e-a613f30f294b
+  text: Elle copie celle d'un autre manuel.
+- id: 1e6971d2-2f32-4b16-b081-7c8c9523f83f
+  text: Elle affirme qu'elle est inutile.
+correct_choice_ids:
+- fb19ad86-b4a3-42e6-bed8-e78f61ec138a
+explanation: La procédure n'étant pas codifiée dans le manuel, la leçon signale l'absence
+  sans inventer les étapes.
+archived: false

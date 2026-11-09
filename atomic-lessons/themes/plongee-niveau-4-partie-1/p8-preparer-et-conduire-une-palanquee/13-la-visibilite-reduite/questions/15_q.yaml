@@ -1,0 +1,23 @@
+id: 978a3ac1-df97-4210-bf89-6b27bc0d8360
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi la maîtrise des techniques d'orientation est-elle un levier de prévention
+  en eaux troubles ?
+choices:
+- id: 75cbef6c-05e3-434c-88bf-87b70f5eeec0
+  text: Privé des repères naturels, le guide s'appuie sur le cap et l'évaluation des
+    distances pour ramener la palanquée.
+- id: 2b493b1a-752f-4b7e-93cf-2515c65fbfe7
+  text: Parce qu'elle embellit la plongée.
+- id: 681858b6-6f59-413f-b6e6-45cacddc72e4
+  text: Parce qu'elle remplace le gilet.
+- id: 3d94ab95-415b-4251-86b8-48f2385ceb7e
+  text: Parce qu'elle économise l'air.
+correct_choice_ids:
+- 75cbef6c-05e3-434c-88bf-87b70f5eeec0
+explanation: 'En eaux troubles, les repères naturels disparaissent : suivre un cap
+  sans dévier et évaluer la distance deviennent les techniques principales pour ramener
+  la palanquée.'
+archived: false
