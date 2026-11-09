@@ -1,0 +1,23 @@
+id: bccbca73-16ef-4e4c-9634-f03411f9db9c
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le manuel de la maîtrise ventilatoire après une longue période sans
+  plonger ?
+choices:
+- id: 7207669b-b21c-4a1f-8e8e-adc830879a70
+  text: 'Elle n''est pas acquise une fois pour toutes : il faut plusieurs immersions
+    pour retrouver sensations et automatismes.'
+- id: 16155eee-1183-411b-bf6f-4095472a2932
+  text: Elle revient instantanément.
+- id: 352f87f1-692c-4d40-a84d-ca40aee81843
+  text: Elle disparaît à jamais.
+- id: ff7aa465-1250-448f-8285-0ce417df5cc7
+  text: Elle ne change jamais.
+correct_choice_ids:
+- 7207669b-b21c-4a1f-8e8e-adc830879a70
+explanation: 'Cette maîtrise n''est pas acquise une fois pour toutes : après de longues
+  périodes sans plonger, il faut plusieurs immersions pour retrouver certaines sensations
+  et automatismes.'
+archived: false

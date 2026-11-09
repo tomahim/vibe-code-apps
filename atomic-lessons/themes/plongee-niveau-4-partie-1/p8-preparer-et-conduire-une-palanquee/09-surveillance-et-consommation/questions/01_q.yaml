@@ -1,0 +1,21 @@
+id: 0aa70d00-6b73-41f1-983b-2cb0ccb9b66a
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que prescrit le manuel concernant la consommation d'air de la palanquée ?
+choices:
+- id: c1f8df81-a502-492e-aa6b-829d48e72fa9
+  text: Surveiller régulièrement la consommation d'air des membres de la palanquée
+    et adapter le parcours en conséquence.
+- id: b7e30bb4-e573-436a-8a60-ba88e394c879
+  text: La vérifier une seule fois à la fin.
+- id: 3d0b5d4d-8254-4f56-a9c7-9af3e5c56b02
+  text: La laisser à chaque plongeur, sans surveillance.
+- id: bb2df562-fd10-484a-8b05-000db471ba9c
+  text: La noter dans un cahier après la plongée.
+correct_choice_ids:
+- c1f8df81-a502-492e-aa6b-829d48e72fa9
+explanation: « Surveillez régulièrement la consommation d'air des membres de votre
+  palanquée et adaptez votre parcours en conséquence. »
+archived: false

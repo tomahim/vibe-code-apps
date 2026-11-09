@@ -1,0 +1,21 @@
+id: 493aba18-17b3-40e3-aa16-4041f29cc977
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Où l'essoufflement comme accident et sa prise en charge sont-ils traités dans
+  ce parcours de formation ?
+choices:
+- id: 5c81335e-a091-4c7d-89f4-d9a33b92df20
+  text: Dans le parcours sur les accidents et leur prévention.
+- id: a30ea313-1d22-44b1-a1d1-74784df5f393
+  text: Dans le parcours matelotage.
+- id: 6d56f194-e2a6-4304-b6ab-4d0b16546d5d
+  text: Dans le parcours milieu vivant.
+- id: 90728962-c276-4421-aa96-4b19602b211b
+  text: Nulle part.
+correct_choice_ids:
+- 5c81335e-a091-4c7d-89f4-d9a33b92df20
+explanation: L'essoufflement comme accident est traité dans le parcours sur les accidents
+  et leur prévention ; ici, l'enjeu du guide est la détection précoce.
+archived: false

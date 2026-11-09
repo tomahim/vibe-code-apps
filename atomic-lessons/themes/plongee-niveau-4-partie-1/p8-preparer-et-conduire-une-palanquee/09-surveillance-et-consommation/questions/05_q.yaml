@@ -1,0 +1,20 @@
+id: 19e2a4cc-070c-4687-b369-eac851ef8cb7
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels signes le manuel dit-il de rappeler en surface si nécessaire ?
+choices:
+- id: 13be3f51-0416-4ec2-9688-581fff58b1eb
+  text: « Mi-pression » (100 bars) et « Je suis sur réserve ».
+- id: bc441177-d4ee-42a0-a308-b7518c1bf356
+  text: « J'ai faim » et « j'ai froid ».
+- id: 2a6a52fb-6bcd-4c12-b012-e328ce60f1bc
+  text: « Photo » et « vidéo ».
+- id: e8ce0b0f-20e1-4dd9-b064-8096f2ecc47a
+  text: « Courant » et « vague ».
+correct_choice_ids:
+- 13be3f51-0416-4ec2-9688-581fff58b1eb
+explanation: Si nécessaire, les signes « Mi-pression » (100 bars) et « Je suis sur
+  réserve » doivent avoir été rappelés en surface.
+archived: false

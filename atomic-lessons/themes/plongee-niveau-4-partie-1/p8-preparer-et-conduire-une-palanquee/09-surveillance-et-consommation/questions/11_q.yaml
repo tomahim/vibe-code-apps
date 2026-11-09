@@ -1,0 +1,21 @@
+id: 1a0fc32c-d1a0-4dd3-bc82-ac59a35341da
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi une évolution d'aisance ou de ventilation doit-elle être repérée
+  tôt ?
+choices:
+- id: abca98e5-8bed-4c5d-94b1-252e32db6a18
+  text: Un plongeur dont l'aisance se dégrade consomme davantage et s'expose à l'essoufflement.
+- id: 6c878a24-21c5-4abe-8732-93bbd9f2f283
+  text: Pour remplir les statistiques du club.
+- id: aa046715-bb08-46fd-bc5a-8fa0f0a754fe
+  text: Pour raccourcir le briefing.
+- id: 38415d58-2321-4841-86d5-e1cffbb87851
+  text: Pour changer de site.
+correct_choice_ids:
+- abca98e5-8bed-4c5d-94b1-252e32db6a18
+explanation: 'Un plongeur dont la ventilation ou l''équilibre se dégrade consomme
+  davantage et s''expose à l''essoufflement : le guide intervient tôt.'
+archived: false

@@ -1,0 +1,21 @@
+id: 7f26e200-becc-44c5-a3c5-82ad993d5844
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelle pression minimale chaque plongeur doit-il avoir au retour au bateau,
+  selon le manuel ?
+choices:
+- id: 530a7a80-fe67-4589-8536-8fb9ce7dc3a4
+  text: 30 à 50 bars.
+- id: 76360dc0-03ef-4623-8265-ebd0c4d13294
+  text: '0 bar : il faut tout utiliser.'
+- id: f2029360-b375-47bd-81c3-1de54cd212e3
+  text: 200 bars.
+- id: 52baed44-563d-44f3-b4ca-0eea17df467b
+  text: 5 bars.
+correct_choice_ids:
+- 530a7a80-fe67-4589-8536-8fb9ce7dc3a4
+explanation: « De retour au bateau, tous les plongeurs doivent avoir au moins 30 à
+  50 bars dans leur bloc. »
+archived: false
