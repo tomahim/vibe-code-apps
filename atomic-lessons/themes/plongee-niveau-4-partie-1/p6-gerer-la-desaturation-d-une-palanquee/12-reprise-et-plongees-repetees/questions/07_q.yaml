@@ -1,0 +1,22 @@
+id: 02522104-2b9b-44f0-bf4a-181afefea4b7
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment une plongée successive (intervalle de 15 min à 12 h) est-elle traitée
+  aux tables ?
+choices:
+- id: 22629464-8044-4092-9a44-1066d6085e1d
+  text: Par une majoration calculée à partir du GPS et de l'intervalle en surface.
+- id: 6fb6a665-0e78-4c5a-980c-008d6dc118ce
+  text: Par simple lecture directe des tables, comme une plongée isolée.
+- id: 0e970730-f6df-4470-bf4c-7698cadae6a1
+  text: Par addition des temps, comme une plongée consécutive.
+- id: be57f687-f0ab-4843-810b-ba39fa82d4f9
+  text: 'Elle est interdite : il faut attendre au moins 12 heures entre deux plongées.'
+correct_choice_ids:
+- 22629464-8044-4092-9a44-1066d6085e1d
+explanation: 'En plongée successive, la lecture directe des tables ne permet pas de
+  déterminer les paliers : il faut calculer une majoration à partir du GPS et de l''intervalle
+  en surface.'
+archived: false

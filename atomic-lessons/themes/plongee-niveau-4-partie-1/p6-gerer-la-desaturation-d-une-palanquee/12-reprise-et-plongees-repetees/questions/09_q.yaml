@@ -1,0 +1,20 @@
+id: 04b60a96-3c15-41df-b417-6a49dec555a7
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qu'est-ce qu'une contre-indication absolue (CIA) après un ADD ?
+choices:
+- id: 1ad5e333-5d0b-425b-b4cf-762b7d2a1b04
+  text: L'arrêt définitif de la plongée, quand les séquelles sont lourdes.
+- id: c1e43e93-ced6-468c-966d-be45ad6caed3
+  text: Une pause de quelques semaines, en attendant la guérison complète.
+- id: 8e1aec61-af93-4670-9b01-b8d227cf9de3
+  text: Une limitation à dix mètres de profondeur pendant un an.
+- id: 5d7d104d-c9cc-4043-bb47-5e40258fbf35
+  text: Une interdiction de plonger uniquement en milieu naturel.
+correct_choice_ids:
+- 1ad5e333-5d0b-425b-b4cf-762b7d2a1b04
+explanation: Selon ses causes et conséquences, un accident de désaturation peut déboucher
+  sur une contre-indication absolue (CIA) si les séquelles sont lourdes.
+archived: false

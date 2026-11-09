@@ -1,0 +1,24 @@
+id: b4ee8e70-6ec8-4934-bba8-21c34eba83b4
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi un ordinateur ne dispense-t-il pas de la règle des 2 plongées par
+  jour ?
+choices:
+- id: 5ce6da12-a265-4f5e-a5e9-06d4994bb309
+  text: Son modèle est valable pour 2 plongées par 24 h ; au-delà, la fiabilité des
+    données affichées n'est pas établie.
+- id: 055fcd8c-40f2-4909-a7fd-c2c962f51ad6
+  text: Parce qu'il efface l'historique de la journée à chaque nouvelle plongée.
+- id: 7af1464f-bf53-45a2-ba92-a8e1ec2eb0cb
+  text: Parce que sa batterie ne supporte jamais plus de deux plongées par jour.
+- id: d8f57709-7940-479b-898c-bec7acde2d5a
+  text: Parce qu'il affiche un message d'erreur dès la troisième plongée du jour.
+correct_choice_ids:
+- 5ce6da12-a265-4f5e-a5e9-06d4994bb309
+explanation: 'Un ordinateur calcule un profil de désaturation à partir d''un modèle
+  mathématique valable pour 2 plongées par 24 h, successives ou non : au-delà, il
+  effectue les calculs mais rien n''indique actuellement que les données affichées
+  sont fiables.'
+archived: false

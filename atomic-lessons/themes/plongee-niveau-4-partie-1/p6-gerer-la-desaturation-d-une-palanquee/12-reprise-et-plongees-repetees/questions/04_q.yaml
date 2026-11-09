@@ -1,0 +1,23 @@
+id: 5ea4906b-5432-4948-b17c-a30dca461d16
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: À quoi servent les plongées de réadaptation après plusieurs semaines ou mois
+  d'interruption ?
+choices:
+- id: daad8a0d-d915-4173-858d-ff132615e0cd
+  text: Retrouver automatismes et sensations (équilibre, ventilation) et régler son
+    matériel, notamment le lestage.
+- id: a247591e-5f03-4ff7-90f0-dc9d2de1c260
+  text: Valider une nouvelle qualification fédérale avant de replonger en palanquée.
+- id: 778cdd8b-041f-4513-b97d-5c759144e856
+  text: Tester l'étanchéité de la combinaison avant de l'envoyer en révision.
+- id: cc41e963-0544-40b9-8da1-9509a81627be
+  text: Augmenter sa consommation d'air pour préparer les plongées profondes.
+correct_choice_ids:
+- daad8a0d-d915-4173-858d-ff132615e0cd
+explanation: 'Après plusieurs semaines ou mois d''interruption : une ou plusieurs
+  plongées de réadaptation pour retrouver automatismes et sensations (équilibre, ventilation),
+  et régler son matériel (lestage en particulier).'
+archived: false

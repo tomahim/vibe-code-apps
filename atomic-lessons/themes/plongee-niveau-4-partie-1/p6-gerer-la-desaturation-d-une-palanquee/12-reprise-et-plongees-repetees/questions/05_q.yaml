@@ -1,0 +1,21 @@
+id: 841f907c-0989-408f-bb00-0d317b4d79bf
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelle conduite le guide doit-il tenir lors de ces plongées de réadaptation
+  ?
+choices:
+- id: fca96e27-d1b4-4b11-8cfe-a8125837a20d
+  text: Être particulièrement attentif aux membres de sa palanquée et limiter la profondeur.
+- id: b2dbb17b-cf07-4044-b725-0e68a4b7753c
+  text: Laisser chacun gérer sa plongée seul pour qu'il reprenne confiance.
+- id: f5ee7ede-3028-4669-bfd5-7c69bd4dd846
+  text: Descendre directement à quarante mètres pour tester les automatismes.
+- id: 86c8069d-eec4-44f6-868d-599cc9ed04c3
+  text: Confier la palanquée au plongeur le moins expérimenté pour l'évaluer.
+correct_choice_ids:
+- fca96e27-d1b4-4b11-8cfe-a8125837a20d
+explanation: Dans le cadre de ces plongées, un guide doit être particulièrement attentif
+  aux membres de sa palanquée et, en conséquence, limiter la profondeur de la plongée.
+archived: false
