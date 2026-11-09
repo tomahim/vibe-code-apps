@@ -1,20 +1,20 @@
-id: c4925ca4-fbbc-484a-90b3-29f82308b8aa
+id: a2bf3fa3-4d3f-48bc-93f4-ac4f587c4a11
 position: 8
 type: multiple_choice
 selection: single
 after_card_position: 3
 prompt: Que dit le manuel de la coque d'un bateau ?
 choices:
-- id: a02bb7a6-864e-455a-bb5e-5c54726e0cce
+- id: 45f0b7b3-010a-43a6-afaf-e8a040818aef
   text: Ne jamais passer sous la coque d'un bateau ; attention aux hélices.
-- id: c5522df8-a5cb-4b4a-ae85-bacb00a6183b
+- id: a54c7159-af5a-4ae1-9313-407f2dc7f2a1
   text: On peut y passer si le moteur est lent.
-- id: 79b68aa4-7146-42c0-87e0-fe2129af5ead
+- id: a884ca4a-94c3-4910-9cea-cc55a8a92095
   text: On peut s'y accrocher pour se reposer.
-- id: 3a101655-2f9d-4422-aeb0-2883d35bf97e
+- id: d928b813-bee7-4d6b-8a71-228dc6b334d7
   text: La coque protège du courant.
 correct_choice_ids:
-- a02bb7a6-864e-455a-bb5e-5c54726e0cce
+- 45f0b7b3-010a-43a6-afaf-e8a040818aef
 explanation: « Ne passez jamais sous la coque d'un bateau, attention aux hélices.
   »
 archived: false

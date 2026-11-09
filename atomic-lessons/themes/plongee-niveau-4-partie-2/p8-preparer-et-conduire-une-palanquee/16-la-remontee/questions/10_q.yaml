@@ -1,21 +1,20 @@
-id: eec4082d-2d65-490c-8eee-cce197ef29f3
+id: e641b306-9895-48f2-83e3-26824524ab73
 position: 10
 type: multiple_choice
 selection: single
-after_card_position: 5
-prompt: Sur quel signe fait-on surface, selon le manuel ?
+after_card_position: 4
+prompt: Pourquoi vérifier son équilibrage à 3 m, selon le manuel ?
 choices:
-- id: b3019664-bf9d-4521-80c2-a31b7f590fbd
-  text: Sur le signe « Ok » à destination de la personne assurant la sécurité de surface
-    sur le bateau.
-- id: d5d423ae-2031-4f8f-8031-2229ba91cf09
-  text: Sur le signe « Problème ».
-- id: 9d26acee-ad9a-49d3-bddc-4c2104a72cb5
-  text: Sans aucun signe.
-- id: d5581884-efe1-4d59-9e4d-fe976fe03350
-  text: Sur un coup de sifflet du fond.
+- id: 93a02362-84e5-4328-b869-c1c0233329a2
+  text: Pour pouvoir redescendre en urgence en cas de nécessité.
+- id: 1fb1d231-f383-4e33-957c-5dfff80e2115
+  text: Pour faire des photos de surface.
+- id: 3609c4a8-78d3-43cc-9fee-887b46051c97
+  text: Pour économiser l'air du gilet.
+- id: d8b7eefe-7ba1-4a6f-9513-0cae712672ad
+  text: Pour saluer le bateau.
 correct_choice_ids:
-- b3019664-bf9d-4521-80c2-a31b7f590fbd
-explanation: Faites surface sur le signe « Ok » à destination de la personne assurant
-  la sécurité de surface sur le bateau.
+- 93a02362-84e5-4328-b869-c1c0233329a2
+explanation: 'À 3 m, vous devez pouvoir redescendre en urgence en cas de nécessité
+  : l''équilibrage vérifié le permet.'
 archived: false

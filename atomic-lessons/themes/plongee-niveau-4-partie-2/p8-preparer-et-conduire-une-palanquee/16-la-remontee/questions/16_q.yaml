@@ -1,24 +1,21 @@
-id: 72cb8b30-c9bb-4bd6-9890-73b63135c289
+id: 8eaa48de-4b63-4fd1-bb08-4b0500dbea19
 position: 16
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Quelle séquence résume une remontée sécurisée selon le manuel ?
+prompt: La remontée sécurisée se termine-t-elle à la surface, selon le manuel ?
 choices:
-- id: 14312650-853d-423c-bb51-72227f99c6c4
-  text: Vitesse et paliers respectés, signalisation au parachute si loin du mouillage,
-    équilibrage et tour d'horizon à 3 m, signe « Ok », nouveau tour d'horizon en surface,
-    retour groupé, guide en dernier.
-- id: a483cc12-c84f-4d6e-b44e-97bfaa2d8e16
-  text: Remontée rapide, gilet gonflé, sans regarder.
-- id: c8897484-d3ca-4ad4-89c6-ca7f1be1a968
-  text: Palier en pleine eau sans signalisation, puis nage solitaire vers le bateau.
-- id: e17fa796-3417-49d3-b5a7-aca6d5df35e8
-  text: Sortie directe sous la coque du bateau.
+- id: ecb38bff-20d5-49d2-9667-e3afbcb7dca9
+  text: 'Non : la plongée n''est pas terminée, il faut encore rejoindre le bateau
+    et sortir de l''eau (leçon suivante).'
+- id: a5fed70d-3af7-45b4-a4c3-c9bb6cbf1771
+  text: 'Oui : arrivé en surface, tout est fini.'
+- id: bbc556d8-60a6-46ac-b149-c0fef26994b9
+  text: Oui, si l'on a fait le signe « Ok ».
+- id: ff45afda-2bd4-469a-8b21-ca5c6aabd373
+  text: 'Non : il faut redescendre faire un palier.'
 correct_choice_ids:
-- 14312650-853d-423c-bb51-72227f99c6c4
-explanation: 'La remontée selon le manuel : respect de la vitesse et des paliers,
-  parachute si l''on ne remonte pas au mouillage, équilibrage et tour d''horizon à
-  3 m, signe « Ok », tour d''horizon en surface, retour groupé au bateau, guide en
-  dernier.'
+- ecb38bff-20d5-49d2-9667-e3afbcb7dca9
+explanation: 'En surface, le guide reste responsable de sa palanquée : il faut rejoindre
+  le bateau ou le bord de l''eau, puis sortir de l''eau — objet de la leçon suivante.'
 archived: false

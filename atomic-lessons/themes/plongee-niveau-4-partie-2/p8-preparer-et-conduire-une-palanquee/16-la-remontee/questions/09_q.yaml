@@ -1,21 +1,21 @@
-id: 16c54a5c-df95-4e99-a075-1b7cd8dcabb5
+id: 8e95391d-8baa-4fda-b2e5-e9bd0595798d
 position: 9
 type: multiple_choice
 selection: single
 after_card_position: 4
 prompt: Quelles sont les deux vérifications à effectuer à 3 m, selon le manuel ?
 choices:
-- id: 39ee78c9-e10d-41de-9ffe-a208e3154ad8
+- id: 95b50e6d-a278-47a3-a212-8c3280fe777d
   text: Vérifier son équilibrage pour pouvoir redescendre en urgence, et faire un
     tour d'horizon pour vérifier l'absence d'obstacle en surface.
-- id: aad848aa-9f7c-4467-96e1-364c79e2d827
+- id: d10bfa8a-c1f3-4e14-899a-e1083534ec48
   text: Retirer le masque et le détendeur.
-- id: 64cb98ac-bfce-4808-b013-9658227db8d6
+- id: bd698324-5801-4955-9cb5-3617a7494930
   text: Gonfler le gilet et fermer les yeux.
-- id: 2bbc8389-3092-4b07-93b4-d5b291b341e3
+- id: 8498434a-4e7e-4e60-9275-7296ed23234f
   text: Accélérer et sortir d'un coup.
 correct_choice_ids:
-- 39ee78c9-e10d-41de-9ffe-a208e3154ad8
+- 95b50e6d-a278-47a3-a212-8c3280fe777d
 explanation: 'À 3 m : vérifiez votre équilibrage (vous devez pouvoir redescendre en
   urgence en cas de nécessité) et faites un tour d''horizon pour vérifier qu''il n''y
   a pas d''obstacle en surface.'

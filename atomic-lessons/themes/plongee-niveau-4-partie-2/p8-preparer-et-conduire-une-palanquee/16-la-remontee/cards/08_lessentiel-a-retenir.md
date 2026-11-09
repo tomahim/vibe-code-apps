@@ -1,5 +1,5 @@
 ---
-id: cf046b8d-ae07-413d-a85a-63175265da33
+id: 4ee7e503-3d2a-4ca2-9371-bdc7a56b386d
 position: 8
 title: L'essentiel à retenir
 archived: false
@@ -8,4 +8,3 @@ archived: false
 - Remonter le long du mouillage ou d'un tombant ; sinon, parachute de palier le plus tôt possible (possible depuis le fond avec un dévidoir), jamais de paliers en pleine eau sans signalisation.
 - À 3 m : équilibrage vérifié (pour pouvoir redescendre) et tour d'horizon.
 - Surface : écouter les bruits de moteur, signe « Ok » vers la sécurité de surface, nouveau tour d'horizon (engins silencieux), jamais sous la coque.
-- Rejoindre le bateau groupés ; se faire récupérer si c'est trop loin ; le guide passe en dernier.
