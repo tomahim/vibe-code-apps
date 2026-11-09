@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 // Synthetic progress and rewards only. No production API or database access.
-// "Last seen" line at the top left of the learning-path panel (Thomas, 2026-11-09).
+// "Last seen" line at the top right of the learning-path panel (Thomas, 2026-11-09).
 const row = (id, title, position = 1) => ({ id, title, position, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
 const done = { cards_completed: 2, cards_total: 2, questions_correct: 0, questions_total: 0, started: true, completed: true };
 const cur = { cards_completed: 1, cards_total: 2, questions_correct: 0, questions_total: 0, started: true, completed: false };
@@ -58,7 +58,9 @@ for (const [practice, text] of cases) {
     const line = root.locator('.lg-lastseen');
     if (text === null) { await expect(line).toHaveCount(0); return; }
     await expect(line).toHaveText(text);
-    // First element of the panel body, left aligned above the eyebrow.
+    // First element of the panel body, right aligned above the eyebrow.
+    const align = await line.evaluate((el) => getComputedStyle(el).textAlign);
+    expect(align).toBe("right");
     const first = await root.locator('.lg-lastseen').evaluate((el) => el === el.parentElement.firstElementChild);
     expect(first).toBe(true);
     await page.screenshot({ path: `/tmp/lg-lastseen-${practice.days_since}.png` });
