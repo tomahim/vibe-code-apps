@@ -24,8 +24,12 @@ for (const mobile of [true, false]) {
     await page.setViewportSize(mobile ? { width: 390, height: 844 } : { width: 1440, height: 1000 });
     await setup(page);
     const root = page.locator('.lg-root');
+    const statsTop = () => root.locator('.lg-stats').evaluate(el => getComputedStyle(el).top);
     await expect(root).toBeVisible();
     await expect(root.locator('.lg-crumbs')).toBeHidden();
+    // Root hides the crumbs pill: counters reclaim its row on phones instead of
+    // stranding a breadcrumb-height band below the header (Thomas, 2026-11-09).
+    expect(await statsTop()).toBe(mobile ? '10px' : '14px');
     await expect(root.locator('.lg-stats .info, .lg-stats [data-reward] small')).toHaveCount(0);
     await expect(root.locator('[data-reward="drops"]')).toHaveAccessibleName('1284 Drops. How Drops are earned');
     await expect(root.locator('[data-reward="carrots"]')).toHaveAccessibleName('212 Carrots. How Carrots are earned');
@@ -62,6 +66,8 @@ for (const mobile of [true, false]) {
     await page.getByRole('button', { name: 'Close reward information' }).click();
     await tiles.nth(3).click();
     await expect(root.locator('.lg-crumbs')).toBeVisible();
+    // Deeper levels keep the counters clear of the visible breadcrumbs.
+    expect(await statsTop()).toBe(mobile ? '56px' : '14px');
     await expect(root.locator('.lg-crumbs [data-go="garden"]')).toBeVisible();
     await expect(root.locator('.lg-crumbs [data-go="theme"]')).toHaveText('Sport');
     await root.locator('[data-path="0"]').click();
@@ -70,5 +76,6 @@ for (const mobile of [true, false]) {
     await root.locator('.lg-crumbs [data-go="garden"]').click();
     await expect(root.locator('.lg-crumbs')).toBeHidden();
     await expect(root.locator('.lg-tiles')).toBeVisible();
+    expect(await statsTop()).toBe(mobile ? '10px' : '14px');
   });
 }
