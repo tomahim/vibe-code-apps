@@ -422,19 +422,23 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
   </div>;
 }
 
-// Total duels won, one bar per player (Thomas, 2026-11-09). Mirrors the
-// backend rule (CHALLENGE_MIN_WIN, also used by the win badges): a win needs
-// at least 3 correct AND strictly more than the other player - ties are not
-// wins. Only weeks with an unlocked ranking can have a winner, so a duel
-// still waiting on the other player never counts or leaks anything.
-function ChallengeWinsChart({ weeks }) {
+// Total duels won, one bar per player, plus the number of ties as a separate
+// gray bar (Thomas, 2026-11-09). Mirrors the backend rule (CHALLENGE_MIN_WIN,
+// also used by the win badges): a win needs at least 3 correct AND strictly
+// more than the other player - ties are not wins and never feed the badges.
+// A tie is a revealed week where both players finished with the same correct
+// score, whatever the score. Only weeks with an unlocked ranking count, so a
+// duel still waiting on the other player never counts or leaks anything.
+export function ChallengeWinsChart({ weeks }) {
   const ranked = weeks.filter((w) => w.ranking);
   if (!ranked.length) return null;
   const tally = {};
+  let ties = 0;
   for (const w of ranked) {
     const self = w.ranking.find((r) => r.is_self);
     const other = w.ranking.find((r) => !r.is_self);
     if (!self || !other) continue;
+    if (self.correct === other.correct) ties++;
     for (const [name, mine, theirs] of [["You", self, other], [other.name, other, self]]) {
       if (!(name in tally)) tally[name] = 0;
       if (mine.correct >= 3 && mine.correct > theirs.correct) tally[name]++;
@@ -442,14 +446,19 @@ function ChallengeWinsChart({ weeks }) {
   }
   const names = Object.keys(tally);
   if (!names.length) return null;
-  const max = Math.max(1, ...Object.values(tally));
-  return <div className="grains-challenge-wins" role="img" aria-label="Challenges won in total, one bar per player">
+  const max = Math.max(1, ...Object.values(tally), ties);
+  return <div className="grains-challenge-wins" role="img" aria-label="Challenges won in total, one bar per player, plus tied duels">
     <p className="grains-card-index">WINS</p>
     {names.map((name) => <div className="row" key={name}>
       <span className="name">{name}</span>
       <span className="track"><span className="bar" style={{ width: `${(tally[name] / max) * 100}%`, background: name === "You" ? "var(--blue)" : "var(--orange)" }} /></span>
       <b>{tally[name]}</b>
     </div>)}
+    {ties > 0 && <div className="row">
+      <span className="name">Ties</span>
+      <span className="track"><span className="bar" style={{ width: `${(ties / max) * 100}%`, background: "var(--dim)" }} /></span>
+      <b>{ties}</b>
+    </div>}
   </div>;
 }
 
