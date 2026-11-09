@@ -1,0 +1,22 @@
+id: 0b91cfce-1fd5-43e6-bb4f-e42bba0140b1
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: En plongée à la dérive, pourquoi ces plongées sont-elles délicates, selon
+  le manuel ?
+choices:
+- id: 9bdd1116-a7e1-4390-99cc-e385d089d33d
+  text: Le pilote du bateau doit suivre les bulles.
+- id: 27197e02-6984-4cfc-8d11-333bc92ca26f
+  text: La palanquée doit nager très vite.
+- id: 642a7de1-9fea-4010-af26-98f5a783895e
+  text: La boussole ne fonctionne pas.
+- id: 90a5f9be-e2ea-4e98-98c4-f1045713e28c
+  text: Les poissons suivent le bateau.
+correct_choice_ids:
+- 9bdd1116-a7e1-4390-99cc-e385d089d33d
+explanation: En plongée à la dérive, le bateau ne s'ancre pas et suit le parcours
+  dans le sens du courant ; ces plongées sont délicates à gérer pour le pilote du
+  bateau devant suivre les bulles.
+archived: false

@@ -1,0 +1,23 @@
+id: 7b6278b4-8404-47a0-b795-870c0370fc46
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Comment vérifier la présence de courant depuis la surface, selon le manuel
+  ?
+choices:
+- id: 657e1fe6-f231-4687-9659-4920b8608ec3
+  text: Tremper une palme dans l'eau pour « sentir » le courant, ou observer les rides
+    de l'eau autour d'une bouée matérialisant le site.
+- id: f8187a51-8fc2-4d42-aae2-b1402f583e4e
+  text: Se jeter à l'eau et voir.
+- id: 762be2de-67d0-4bfa-98ae-ea666eb50f20
+  text: Appeler la météo marine.
+- id: ead79b1d-5ac4-4a06-98eb-a6cf0525627f
+  text: Regarder les nuages.
+correct_choice_ids:
+- 657e1fe6-f231-4687-9659-4920b8608ec3
+explanation: 'Dès la surface, lorsque l''embarcation est stabilisée : tremper une
+  palme dans l''eau et « sentir » le courant sur la voilure, ou observer les rides
+  que forme l''eau autour d''une bouée.'
+archived: false

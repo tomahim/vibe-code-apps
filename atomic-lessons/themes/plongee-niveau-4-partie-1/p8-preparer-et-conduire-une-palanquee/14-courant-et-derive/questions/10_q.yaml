@@ -1,0 +1,23 @@
+id: fd44c83d-8a92-464e-a23f-8979600a5e8c
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles configurations compliquent la détection des plongeurs en surface,
+  selon le manuel ?
+choices:
+- id: 15dee31e-04f0-485c-9ee8-51b19690836a
+  text: Houle et vagues, brouillard, dérive dans le soleil, éloignement du bateau,
+    contournement d'une île ou d'un cap, tombée de la nuit.
+- id: b89ece2b-ef2c-4559-b6e7-5bf533b12d56
+  text: Uniquement la pluie.
+- id: f5575a27-61be-4af7-8ed0-b03d59709262
+  text: Uniquement la pleine lune.
+- id: e587974b-f8d9-4438-b2d4-edb977262e1a
+  text: La présence de dauphins.
+correct_choice_ids:
+- 15dee31e-04f0-485c-9ee8-51b19690836a
+explanation: 'Le manuel liste : houle et vagues ; brouillard ; dérive dans le soleil,
+  qui aveugle ceux qui regardent dans ce sens ; éloignement trop important ; contournement
+  d''une île ou d''un cap ; tombée de la nuit.'
+archived: false

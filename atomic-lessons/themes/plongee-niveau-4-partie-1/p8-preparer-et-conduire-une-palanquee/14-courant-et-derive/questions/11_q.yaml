@@ -1,0 +1,20 @@
+id: 15eb3a0e-8475-4274-a929-b5cd8a5aecdd
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la première prévention de la dérive, selon le manuel ?
+choices:
+- id: bf207a8e-4ae0-4b96-be1f-d40a9f8ecdaf
+  text: Remonter systématiquement le long d'un mouillage ou d'un tombant.
+- id: e8207a3e-e093-47b3-97c6-b3e9bd08aa2a
+  text: Remonter en pleine eau à chaque plongée.
+- id: c46ec30a-c474-4189-9fdd-959fc8cc7d58
+  text: S'éloigner volontairement du bateau.
+- id: 94c93337-235d-44b4-802e-3c629d329866
+  text: Faire tous les paliers en pleine eau sans se signaler.
+correct_choice_ids:
+- bf207a8e-4ae0-4b96-be1f-d40a9f8ecdaf
+explanation: Dans la mesure du possible, éviter toute dérive en remontant systématiquement
+  le long d'un mouillage ou d'un tombant.
+archived: false
