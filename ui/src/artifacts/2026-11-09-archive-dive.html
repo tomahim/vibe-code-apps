@@ -271,6 +271,7 @@ const EXERCISES = [
     org: "Bibliothèque nationale de France",
     url: "https://gallica.bnf.fr",
     domains: ["gallica.bnf.fr"],
+    need: ["bpt6k30708891"],
     skill: "Phrase search + date narrowing",
     question: "In the spring of 1874, painters rejected by the official Salon held their own exhibition in a former photographer's studio on the boulevard des Capucines in Paris. A satirical review of that show accidentally gave their movement its name. Find the review: which daily ran it, on what exact date, and who signed it?",
     hints: [
@@ -293,6 +294,7 @@ const EXERCISES = [
     org: "archive.org scanned books",
     url: "https://archive.org",
     domains: ["archive.org"],
+    need: ["polksbaltimoreci1922rlpo"],
     skill: "Full-text search inside scans",
     question: "H. L. Mencken, the \"Sage of Baltimore\", lived nearly his whole life in one rowhouse. Polk's 1922 Baltimore city directory records how he earned his living and exactly where. What single word does the directory print as his occupation, and at what address?",
     hints: [
@@ -315,6 +317,7 @@ const EXERCISES = [
     org: "worldwide patent collections",
     url: "https://patents.google.com",
     domains: ["patents.google.com"],
+    need: ["us821393"],
     skill: "Claims vs title",
     question: "Everyone says the Wright brothers \"patented the airplane\" in 1906. Open patent US821393 and check the legal heart of it: what does claim 1 actually claim?",
     hints: [
@@ -337,6 +340,7 @@ const EXERCISES = [
     org: "UK Parliament",
     url: "https://api.parliament.uk/historic-hansard",
     domains: ["parliament.uk", "millbanksystems.com"],
+    need: ["war-situation", "1940"],
     skill: "Procedural navigation",
     question: "One of the most quoted speeches in British history sits in the official record under a sitting title so plain you would scroll past it. On what exact date did the Commons record the words \"we shall fight on the beaches\", and under what sitting title?",
     hints: [
@@ -521,21 +525,28 @@ function renderCard() {
 
   if (st.found) {
     verdict.classList.add("ok");
-    verdict.textContent = "Record accepted: it resolves inside " + ex.archive + ". Dive " + ex.num + " complete.";
+    verdict.textContent = "That is the record this dive asks for. Dive " + ex.num + " complete.";
   }
 
   checkBtn.addEventListener("click", () => {
     const raw = input.value.trim();
-    let host2 = "";
-    try { host2 = new URL(raw).hostname.toLowerCase(); } catch (e) { host2 = ""; }
-    if (host2 && ex.domains.some(d => host2 === d || host2.endsWith("." + d))) {
+    let parsed = null;
+    try { parsed = new URL(raw); } catch (e) { parsed = null; }
+    const host2 = parsed ? parsed.hostname.toLowerCase() : "";
+    const path2 = parsed ? (parsed.pathname + parsed.search).toLowerCase() : "";
+    const inArchive = host2 && ex.domains.some(d => host2 === d || host2.endsWith("." + d));
+    const isRecord = inArchive && ex.need.every(fragment => path2.includes(fragment));
+    if (isRecord) {
       st.found = true;
       st.verifiedUrl = raw;
       verdict.className = "verdict ok";
-      verdict.textContent = "Record accepted: it resolves inside " + ex.archive + ". Dive " + ex.num + " complete.";
+      verdict.textContent = "That is the record this dive asks for. Dive " + ex.num + " complete.";
       renderProgress();
       renderNav();
       renderAnswer(true);
+    } else if (inArchive) {
+      verdict.className = "verdict no";
+      verdict.textContent = "Right archive, but not the record yet: this link does not point to the document the question asks for. Keep digging.";
     } else {
       verdict.className = "verdict no";
       verdict.textContent = raw
