@@ -1,0 +1,21 @@
+id: 1d84a8b9-535d-4474-bb31-7d49ef2d9647
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le débit du deuxième étage s'adapte-t-il à l'effort ?
+choices:
+- id: 278bae4b-66e9-489c-bcd7-261f4bf35788
+  text: Plus l'inspiration est forte, plus la dépression est marquée et plus le débit
+    délivré est important.
+- id: 38ec63f4-8fa2-41d6-832d-40fe9eba1781
+  text: Le débit est fixe, quelle que soit l'inspiration.
+- id: 49bb96e7-0fa5-4e73-b96b-89081715a704
+  text: Le débit diminue quand l'inspiration est forte.
+- id: bc8680ac-247b-4d55-8e01-277710dfb744
+  text: Le débit dépend uniquement de la couleur du boîtier.
+correct_choice_ids:
+- 278bae4b-66e9-489c-bcd7-261f4bf35788
+explanation: 'Le système est à la demande : plus l''inspiration est forte, plus la
+  dépression est marquée, plus le clapet s''ouvre et plus le débit délivré est important.'
+archived: false

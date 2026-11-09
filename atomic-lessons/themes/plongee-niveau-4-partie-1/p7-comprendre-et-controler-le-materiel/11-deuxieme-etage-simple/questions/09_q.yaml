@@ -1,0 +1,20 @@
+id: dc72632f-7c75-47ba-8799-1a89e1a82465
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi faut-il utiliser la purge avec mesure ?
+choices:
+- id: bffa080a-c00f-4078-b99d-b4f5638f8aba
+  text: Elle consomme l'air de la bouteille.
+- id: a0d6488f-d2ac-4dac-bb42-a3651b5db7c5
+  text: Elle refroidit le deuxième étage.
+- id: c86e0ba0-8711-4123-b21e-9479576c520b
+  text: Elle use la soupape d'expiration.
+- id: 26473f3c-965c-45de-819c-ddd516a94964
+  text: Elle désoriente le plongeur sous l'eau.
+correct_choice_ids:
+- bffa080a-c00f-4078-b99d-b4f5638f8aba
+explanation: 'La purge ouvre un débit continu alimenté par la bouteille : à utiliser
+  pour vérifier ou dégager le deuxième étage, pas en permanence.'
+archived: false

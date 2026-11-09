@@ -1,0 +1,21 @@
+id: 923940f8-2ea1-4fdb-a8d2-f96d6975099a
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel critère de choix le manuel donne-t-il pour le deuxième étage ?
+choices:
+- id: fb47852c-13aa-41a7-9450-41566917fb9f
+  text: Une résistance à l'inspiration la plus faible possible.
+- id: 0bd7408f-41b1-4a48-808b-83477a1b423f
+  text: Un embout le plus lourd possible.
+- id: 8bdcb0c2-833c-4cc8-8e31-4b7d7bc6643b
+  text: Un boîtier le plus coloré possible.
+- id: 2b04f3dd-c069-4191-a252-c1a52eb17df6
+  text: Un flexible le plus long possible.
+correct_choice_ids:
+- fb47852c-13aa-41a7-9450-41566917fb9f
+explanation: '« Choisir un détendeur » : choisir un détendeur dont la résistance à
+  l''inspiration est la plus faible ; la souplesse de respiration est la qualité clé
+  du deuxième étage.'
+archived: false
