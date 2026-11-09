@@ -1,0 +1,22 @@
+id: e853aea5-9932-4af6-a5a2-dfda4e3a2aa3
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que se passe-t-il après une utilisation en mode PROFONDIMÈTRE (GAUGE) ?
+choices:
+- id: 81b6ed8f-2fdc-47cd-b31a-fda25ab05a34
+  text: Il faut généralement attendre 48 h sans plonger avant de revenir au mode AIR
+    ou NITROX.
+- id: 9b3001f1-759a-4922-b995-2f7062dc0652
+  text: L'ordinateur recalcule immédiatement la désaturation de la plongée effectuée.
+- id: b322cb28-ab3c-4f20-962c-f4481ff07e31
+  text: 'Rien : on peut repasser en mode AIR ou NITROX dès la sortie de l''eau.'
+- id: 68a3badc-1c52-45e5-9bf9-ee5e62d46887
+  text: L'appareil se verrouille définitivement et doit être renvoyé au fabricant.
+correct_choice_ids:
+- 81b6ed8f-2fdc-47cd-b31a-fda25ab05a34
+explanation: 'Utilisé en mode PROFONDIMÈTRE ou GAUGE, l''ordinateur n''a effectué
+  aucun calcul : il faudra généralement attendre 48 h sans plonger avant de pouvoir
+  revenir au mode AIR ou NITROX.'
+archived: false

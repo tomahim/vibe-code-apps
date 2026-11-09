@@ -1,0 +1,21 @@
+id: 5a8eca12-f187-40b1-afaa-4ef66b787923
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que risque un plongeur dont l'ordinateur a des piles faibles ?
+choices:
+- id: c878543b-621c-4bdd-bf6a-0bf1f5d34882
+  text: Une extinction brusque sous l'eau, imposant une procédure de remontée d'urgence.
+- id: c23686c0-70a6-4b02-9025-06080a0381b1
+  text: Un simple retard d'affichage, sans conséquence sur la désaturation.
+- id: d9a393db-c29b-4580-b8e3-03b3f91050f9
+  text: Un passage automatique en mode profondimètre jusqu'à la fin de la plongée.
+- id: 8118534d-3883-4208-af85-d211148b666b
+  text: Une perte du carnet de plongée, mais des calculs de désaturation normaux.
+correct_choice_ids:
+- c878543b-621c-4bdd-bf6a-0bf1f5d34882
+explanation: 'Ne plongez jamais avec un niveau de piles faible (signal « bat » clignotant
+  ou « low bat ») : l''ordinateur risque de s''éteindre brusquement sous l''eau, ce
+  qui impose une procédure de remontée d''urgence.'
+archived: false

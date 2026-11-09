@@ -1,0 +1,21 @@
+id: 92f16426-696f-473d-8804-ff777b7b4fa5
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles alarmes le manuel cite-t-il parmi les réglages d'avant-plongée ?
+choices:
+- id: f64b87a0-cfd7-4cad-9e26-bc1192f523c9
+  text: Les alarmes de profondeur et de temps de plongée.
+- id: 7c8a8d76-74cb-4324-bb71-ae80ffa6d671
+  text: Les alarmes de température de l'eau et de turbidité du milieu.
+- id: db1b87ab-7691-4a66-8dac-ef931bfa4f93
+  text: Les alarmes de pression de bouteille des autres membres de la palanquée.
+- id: 37a9be29-dd0c-4285-82d6-75739ddf809e
+  text: Les alarmes de courant et de visibilité mesurées par des sondes externes.
+correct_choice_ids:
+- f64b87a0-cfd7-4cad-9e26-bc1192f523c9
+explanation: 'Avant l''immersion : paramétrer certaines alarmes (profondeur, temps
+  de plongée), vérifier la gestion d''air si disponible, prendre un cap si le mode
+  boussole existe, définir d''éventuels paramètres personnels.'
+archived: false

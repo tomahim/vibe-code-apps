@@ -1,0 +1,21 @@
+id: ca6a92f8-d282-4392-8128-8110f91c9c60
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel risque résiduel le manuel associe-t-il aux modèles de désaturation ?
+choices:
+- id: d515402b-bc8f-4011-90da-f7e5d079317c
+  text: 'Un accident jugé acceptable en moyenne : 1 à 5 pour 10 000 plongées.'
+- id: 97b42205-76ba-4477-a457-ed5914847ee0
+  text: Un accident certain dès que la plongée dépasse trente minutes au fond.
+- id: b5b9ddc7-c44c-42d5-8935-2f23a07643ec
+  text: 'Aucun : les modèles garantissent une désaturation sûre dans tous les cas.'
+- id: c0bb4314-424a-438b-8847-c6352d4ddc5a
+  text: Un accident pour une plongée sur deux en cas d'effort physique modéré.
+correct_choice_ids:
+- d515402b-bc8f-4011-90da-f7e5d079317c
+explanation: Les modèles ne peuvent pas assurer une désaturation sûre dans 100 % des
+  cas pour 100 % des individus ; en moyenne, le risque d'accident est jugé acceptable
+  (1 à 5 pour 10 000).
+archived: false

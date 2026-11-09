@@ -1,0 +1,22 @@
+id: 40e19406-3a7c-4ce0-9752-b94928451a26
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi le manuel conseille-t-il de toujours mettre l'ordinateur sous tension
+  avant de plonger ?
+choices:
+- id: 34d0988e-2b03-41d1-9a93-e09ce508521f
+  text: Pour vérifier son fonctionnement et le niveau de charge des piles.
+- id: ab1f4bbf-9fe6-405b-b9fd-d4081cd5b054
+  text: Pour le synchroniser avec les ordinateurs des autres plongeurs.
+- id: cac7652c-75d8-4852-9fc2-5141bb7fc3e8
+  text: Pour effacer la plongée précédente et libérer la mémoire de l'appareil.
+- id: f3b31118-9604-470d-8083-2c2bea753ec7
+  text: Pour déclencher l'horloge de plongée, qui ne s'active pas sous l'eau.
+correct_choice_ids:
+- 34d0988e-2b03-41d1-9a93-e09ce508521f
+explanation: 'Avant de plonger : vérifier le fonctionnement (affichage correct, pas
+  de message d''erreur ou d''avertissement de sécurité) et vérifier le niveau de charge
+  des piles.'
+archived: false
