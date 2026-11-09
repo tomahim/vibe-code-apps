@@ -132,6 +132,26 @@ def ranking_rows(user, week, scores):
     return rows
 
 
+def review_rows(user, week, players, ranking, questions):
+    """The per-question duel review (Thomas, 2026-11-09): once I finished,
+    my right/wrong and the correct answer on every question, plus the other
+    player's right/wrong once the ranking is unlocked - never before, the
+    same gate as the ranking itself."""
+    mine = {str(qid): c for qid, c in
+            week.attempts.filter(user=user).values_list("question_id", "correct")}
+    other = {}
+    if ranking:
+        rival = next((p for p in players if p.pk != user.pk), None)
+        if rival:
+            other = {str(qid): c for qid, c in
+                     week.attempts.filter(user=rival).values_list("question_id", "correct")}
+    return [{"question_id": qid,
+             "correct_answer": questions[qid].answer if qid in questions else None,
+             "mine": mine.get(qid, False),
+             "other": other.get(qid) if ranking else None}
+            for qid in week.question_ids]
+
+
 def week_payload(user, week, *, include_questions, players=None):
     scores = week_scores(week, players)
     mine = scores.get(user.pk, {"answered": 0, "correct": 0, "finished": False})
@@ -152,6 +172,8 @@ def week_payload(user, week, *, include_questions, players=None):
              "learning_path_title": questions[qid].lesson.learning_path.title,
              "answered": questions[qid].pk in attempted}
             for qid in week.question_ids if qid in questions]
+        if mine["finished"]:
+            payload["review"] = review_rows(user, week, players, payload["ranking"], questions)
     return payload
 
 
@@ -229,6 +251,8 @@ def challenge_answer(request):
             attempt_type=QuestionAttempt.AttemptType.CHALLENGE,
             submitted_answer=answer, correct=correct, answered_at=timezone.now())
         scores = week_scores(week, players)
+        ranking = ranking_rows(request.user, week, scores)
+        questions = {str(q.pk): q for q in visible(Question).filter(pk__in=week.question_ids)}
         return JsonResponse({
             "question_id": str(question.pk),
             "correct": correct,
@@ -236,5 +260,7 @@ def challenge_answer(request):
             "explanation": question.explanation,
             "correct_answer": question.answer if not correct else None,
             "me": scores.get(request.user.pk),
-            "ranking": ranking_rows(request.user, week, scores),
+            "ranking": ranking,
+            "review": review_rows(request.user, week, players, ranking, questions)
+            if scores.get(request.user.pk, {}).get("finished") else None,
         }, status=201)

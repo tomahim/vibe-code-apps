@@ -97,6 +97,20 @@
 .grains-challenge-chart svg{width:100%;height:auto;display:block}
 .grains-challenge-chart .grid{stroke:var(--line);stroke-width:1}
 .grains-challenge-chart .tick{fill:var(--dim);font-size:10px}
+.grains-challenge-review{margin-top:18px;text-align:left;display:grid;gap:8px}
+.grains-challenge-review .grains-card-index{margin:0}
+.grains-challenge-review .row{display:flex;align-items:flex-start;gap:10px;font-size:13px}
+.grains-challenge-review .row.head{color:var(--dim);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.grains-challenge-review .prompt{flex:1;min-width:0}
+.grains-challenge-review .prompt small{display:block;color:var(--dim);font-size:11.5px}
+.grains-challenge-review .mark{flex:none;width:52px;text-align:center}
+.grains-challenge-review .mark.ok{color:#3c6a47}
+.grains-challenge-review .mark.ko{color:#a74131}
+.grains-options label.correct{border-color:#6e9f70;background:#edf5e9}
+.grains-options label.wrong{border-color:#b0433a;background:#fbeeea}
+.grains-options .mark{margin-left:auto;flex:none;font-weight:800}
+.grains-options .mark.ok{color:#3c6a47}
+.grains-options .mark.ko{color:#a74131}
 .grains-challenge-wins{display:grid;gap:6px;margin:0 0 24px}
 .grains-challenge-wins .grains-card-index{margin:0 0 2px}
 .grains-challenge-wins .row{display:flex;align-items:center;gap:8px;font:600 12px var(--sans)}
