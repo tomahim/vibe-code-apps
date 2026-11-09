@@ -1,0 +1,22 @@
+id: 79e107ca-aa15-478f-9d9f-22cac5db9461
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que signifie un réglage de GF à 80 % ?
+choices:
+- id: 05d6d11d-fb61-4349-b72e-9ed601b61056
+  text: 'Une désaturation plus conservatrice : on n''ira qu''à 80 % des possibilités
+    du modèle.'
+- id: e4093d74-9a53-4908-b641-0499c775a0f6
+  text: 'Une désaturation plus rapide : on supprime vingt pour cent des paliers prévus.'
+- id: cf51cc79-1b5d-44ea-9e9d-523331932eb0
+  text: Une réserve d'air de vingt pour cent conservée pour la fin de la plongée.
+- id: a80ffd45-1a0e-4aa0-801d-7c4f42ce400b
+  text: Une remontée limitée à quatre-vingts pour cent de la vitesse maximale.
+correct_choice_ids:
+- 05d6d11d-fb61-4349-b72e-9ed601b61056
+explanation: 'GF fixés à 80 % : la désaturation sera plus « conservative » que celle
+  prévue par le modèle - les paliers pourront être plus longs et/ou plus profonds,
+  du fait de cette marge de sécurité supplémentaire.'
+archived: false

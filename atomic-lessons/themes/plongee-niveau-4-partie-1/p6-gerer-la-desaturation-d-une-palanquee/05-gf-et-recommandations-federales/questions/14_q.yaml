@@ -1,0 +1,25 @@
+id: 65fd1b46-4798-4292-bc1f-deeb2f2abc68
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que montrait l'étude du DAN citée, et quelle limite le manuel lui associe-t-il
+  ?
+choices:
+- id: 0dce599a-a8e5-43bb-b8a2-37e6d0273182
+  text: Moins de bulles avec un arrêt à 13 m puis 3 m à 25 m, mais les scientifiques
+    restent partagés.
+- id: 7b3700e5-cc1d-4560-9b08-4d1d6a817053
+  text: Une efficacité universelle des paliers profonds, validée pour tous les types
+    de plongée.
+- id: 639e35eb-9d78-4fa1-9743-42eb1a85ef94
+  text: Une dangerosité absolue des paliers profonds, interdits dans tous les pays.
+- id: 009247ce-53e7-49a0-baa3-8101fe08a629
+  text: 'Aucun effet mesurable : l''étude a été annulée avant d''obtenir des résultats.'
+correct_choice_ids:
+- 0dce599a-a8e5-43bb-b8a2-37e6d0273182
+explanation: L'étude du DAN (22 volontaires, environ 25 m, sans paliers, 10 m/min)
+  concluait qu'un court arrêt à 13 m puis 3 m réduisait d'un facteur 1,7 le nombre
+  de bulles ; pour autant, les scientifiques interrogés par Alert Diver (2010) sont
+  partagés.
+archived: false

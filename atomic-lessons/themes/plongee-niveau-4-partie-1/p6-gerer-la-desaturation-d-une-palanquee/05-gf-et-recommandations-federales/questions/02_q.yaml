@@ -1,0 +1,22 @@
+id: e7248836-e8c0-4e03-9f2b-8d6b71e47989
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Est-il possible, avec les GF, d'être moins restrictif que le modèle ?
+choices:
+- id: 8045ffd4-875a-4815-a2d4-f743aa472581
+  text: Non, pour des raisons évidentes de sécurité ; on peut seulement être plus
+    restrictif.
+- id: 91a3c4cf-dc68-4e2c-8284-913e379a4d7f
+  text: Oui, en sélectionnant un pourcentage supérieur à cent pour cent du gradient.
+- id: 7597976c-61ae-41de-b02b-8ab6987f729d
+  text: Oui, mais uniquement pour les plongées de loisir à l'air peu profondes.
+- id: 4b4e0519-906c-4a5b-a09a-9813065bbb0f
+  text: Oui, si le plongeur signe une décharge dans les réglages de l'appareil.
+correct_choice_ids:
+- 8045ffd4-875a-4815-a2d4-f743aa472581
+explanation: Il est impossible d'être moins restrictif que le modèle, pour des raisons
+  évidentes de sécurité ; en revanche, on peut être plus restrictif en indiquant un
+  pourcentage du gradient de M-Value du modèle.
+archived: false

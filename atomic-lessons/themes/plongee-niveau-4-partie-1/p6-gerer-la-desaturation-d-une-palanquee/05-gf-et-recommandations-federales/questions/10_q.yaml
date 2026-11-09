@@ -1,0 +1,21 @@
+id: f5f90911-ba7d-4dea-9656-f7d8b7216db1
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: De quel domaine la pratique des paliers profonds est-elle issue ?
+choices:
+- id: fbe259e1-ca42-4d4c-84a8-3354cbbcb25c
+  text: Des plongées au trimix, pour éliminer le plus de bulles possible en profondeur.
+- id: 77357466-2712-4319-a0a8-fdf50847fc69
+  text: De la plongée à l'air en milieu associatif français, vers les années 1950.
+- id: ec4c55f6-cc06-42b6-a973-3d77487c6449
+  text: Des procédures de la Marine nationale pour les plongées sous glace.
+- id: bb14b59a-582d-4b6a-98e9-476f7f8cf2c6
+  text: Des recommandations des fabricants de combinaisons étanches.
+correct_choice_ids:
+- fbe259e1-ca42-4d4c-84a8-3354cbbcb25c
+explanation: La pratique des paliers profonds est issue des plongées au trimix ; leur
+  but est d'éliminer le plus possible de bulles en profondeur avant de poursuivre
+  la remontée.
+archived: false
