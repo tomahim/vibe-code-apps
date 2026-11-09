@@ -1,0 +1,23 @@
+id: 443f0893-922b-4e60-9515-45565ca9073f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles connaissances sur les blocs de plongée sont exigibles, selon le MFT
+  ?
+choices:
+- id: 61462364-f59a-42ef-af43-22a28e53a78c
+  text: La réglementation de l'inspection visuelle et de la requalification, et le
+    fonctionnement du robinet de conservation
+- id: 8effc480-f5dc-4813-94b0-a407ab2e47f2
+  text: La fabrication de l'acier des blocs
+- id: 402657db-d9a1-44dc-acc9-c3106e95e065
+  text: Le prix des blocs
+- id: 230c1308-7256-41c6-b132-c98db03a052a
+  text: L'histoire des blocs de plongée
+correct_choice_ids:
+- 61462364-f59a-42ef-af43-22a28e53a78c
+explanation: 'Blocs : réglementation de l''inspection visuelle et de la requalification
+  ; robinet de conservation (fonctionnement sur schéma, précautions d''utilisation
+  et d''entretien) (MFT, mai 2026).'
+archived: false

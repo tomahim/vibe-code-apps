@@ -1,0 +1,22 @@
+id: cddcf65a-75c2-432d-9a9d-cfadced02f1e
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels éléments sont éliminatoires à la DTMR, selon le MFT ?
+choices:
+- id: 2089d9ad-0dcc-48af-b367-bb6d13353713
+  text: Redescendre de plus de 2 m, regonfler le gilet plus de 2 fois, s'arrêter à
+    moins de 4 m de la surface, palmage propulsif, comportement impactant la sécurité
+- id: c4266150-bd7e-46ed-bb1e-36296caa3e23
+  text: Uniquement la perte du parachute
+- id: 0a6bf14c-9c68-46fb-8979-6ee879be189d
+  text: Uniquement un arrêt trop long
+- id: f2fe40ed-8df9-4f01-acab-a13660e73556
+  text: Le fait d'expirer par le nez
+correct_choice_ids:
+- 2089d9ad-0dcc-48af-b367-bb6d13353713
+explanation: 'Éliminatoires (note < 5) : redescente > 2 m (décollage, remontée, arrêt),
+  regonflage du gilet plus de 2 fois, arrêt à moins de 4 m de la surface, durée hors
+  limites, palmage propulsif, comportement impactant la sécurité (MFT, mai 2026).'
+archived: false

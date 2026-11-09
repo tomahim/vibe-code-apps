@@ -1,0 +1,22 @@
+id: c55e41e7-109a-451a-bb8e-682e8652c24e
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment la vitesse doit-elle être gérée selon le manuel ?
+choices:
+- id: 4984011b-7a66-4c70-8ce9-fbb66b98b301
+  text: 'Vitesse maîtrisée de l''ordre de 10 m/min, avec régularité : pas d''arrêt,
+    pas de redescente, décollage relativement rapide'
+- id: cd25cb93-14db-41d5-8b8a-c86df7b67f1e
+  text: Le plus lentement possible
+- id: 193b5e75-6de6-451a-8b9a-22f5af700ea5
+  text: Le plus rapidement possible
+- id: e51a6496-081b-45b7-a586-45ead6e0b284
+  text: Par paliers de 3 m
+correct_choice_ids:
+- 4984011b-7a66-4c70-8ce9-fbb66b98b301
+explanation: 'Le manuel : décollage relativement rapide, vitesse de l''ordre de 10
+  m/min et régularité - maintien de la vitesse, pas d''arrêt, pas de redescente (p.
+  378).'
+archived: false

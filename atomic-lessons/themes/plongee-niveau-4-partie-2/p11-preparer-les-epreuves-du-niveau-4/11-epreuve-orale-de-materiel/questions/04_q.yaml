@@ -1,0 +1,22 @@
+id: 66deef8b-bebe-4e25-b974-d94904a55d59
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles connaissances sur le compresseur sont exigibles, selon le MFT ?
+choices:
+- id: 03d5cc6d-54f3-4e97-acf0-d99b4a91de8c
+  text: Commenter un schéma de principe et décrire les composants, connaître la réglementation
+    du gonflage des blocs, reconnaître les pannes courantes
+- id: 03d64d36-64f3-4938-9f8e-e6adc73debbb
+  text: Savoir réparer un compresseur
+- id: 0ceef570-5082-4307-bbc6-72c04a92153f
+  text: Connaître les marques du marché
+- id: 62ffc4aa-6e09-4bd2-b92e-b44bffc4a1c1
+  text: Savoir calculer le rendement d'un compresseur
+correct_choice_ids:
+- 03d5cc6d-54f3-4e97-acf0-d99b4a91de8c
+explanation: 'Compresseur : principe de fonctionnement (schéma commenté, composants),
+  réglementation du gonflage des blocs en toute sécurité, pannes courantes (MFT, mai
+  2026).'
+archived: false

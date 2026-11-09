@@ -1,0 +1,20 @@
+id: 831086ba-c401-4100-b77a-8c77b90b809d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels sont le coefficient et l'aptitude associés à la DTMR, selon le MFT ?
+choices:
+- id: bafb7576-ffeb-4eb2-8605-f48d1b18caf6
+  text: Coefficient 2, aptitude A3
+- id: 957a0cab-10a6-4a63-9bdf-38f5081a4e43
+  text: Coefficient 3, aptitude A2
+- id: 97781525-80b2-4176-9f70-63ed89e2dbb6
+  text: Coefficient 1, aptitude A1
+- id: f752abf3-cfff-48d1-af16-2b22c6aba25c
+  text: Coefficient 2, aptitude A1
+correct_choice_ids:
+- bafb7576-ffeb-4eb2-8605-f48d1b18caf6
+explanation: L'épreuve n° 8 (DTMR de 25 m) est coefficient 2 et correspond à l'aptitude
+  A3 (MFT, mai 2026).
+archived: false

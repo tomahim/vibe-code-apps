@@ -1,0 +1,20 @@
+id: 3acbf739-bfcf-4538-bc3f-a5e6bbf410de
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que faire du parachute une fois en surface, selon le manuel ?
+choices:
+- id: a2df7c21-7fb4-4d4b-80a0-0cf41231a5fb
+  text: Le maintenir déployé et haut sur l'eau jusqu'à l'arrivée de l'embarcation
+- id: 7a9d512f-0c18-4363-a9e2-04b0903696fc
+  text: Le ranger immédiatement
+- id: 3518f5b2-2e80-45bf-ae20-795f9c0092ee
+  text: Le laisser dériver
+- id: 7ff683e8-c82b-46eb-98ec-f8dd983e0a9f
+  text: Le dégonfler pour gagner du temps
+correct_choice_ids:
+- a2df7c21-7fb4-4d4b-80a0-0cf41231a5fb
+explanation: En surface, on maintient le parachute déployé et haut sur l'eau jusqu'à
+  l'arrivée de l'embarcation (p. 379).
+archived: false

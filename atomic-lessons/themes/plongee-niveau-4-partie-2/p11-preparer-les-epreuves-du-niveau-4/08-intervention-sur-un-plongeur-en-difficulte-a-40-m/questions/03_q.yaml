@@ -1,0 +1,20 @@
+id: 781c0fba-c3e3-4af0-bc5c-ccfae07a460f
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels incidents le manuel cite-il comme justifiant une intervention ?
+choices:
+- id: eb08ee34-f76b-40b2-8739-5387344313bf
+  text: Début de panique, essoufflement, narcose
+- id: 11184f55-abd1-4c63-aa48-f39aa6922707
+  text: Perte de palme uniquement
+- id: fa9b345c-d14f-429e-9819-bed60fb22e22
+  text: Simple envie de remonter
+- id: a36faa9c-cd97-47b9-b164-df791a754359
+  text: Panne d'ordinateur uniquement
+correct_choice_ids:
+- eb08ee34-f76b-40b2-8739-5387344313bf
+explanation: Le manuel cite le début de panique d'un niveau 1, l'essoufflement (20
+  à 60 m selon les aptitudes) et la narcose (zone des 30 à 40 m) (p. 376).
+archived: false

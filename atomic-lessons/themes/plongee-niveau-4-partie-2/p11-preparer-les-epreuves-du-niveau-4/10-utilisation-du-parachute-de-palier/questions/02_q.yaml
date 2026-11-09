@@ -1,0 +1,21 @@
+id: eefcd016-ccd8-4d83-b9a9-00bbaefaeecb
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quand le parachute de palier doit-il être utilisé, selon le manuel ?
+choices:
+- id: 814998f1-3dd2-44bf-abf2-444cea30c395
+  text: 'Dès que le retour surface s''effectue en pleine eau : bateau non ancré ou
+    mouillage non retrouvé'
+- id: 1cb1f0ac-edb9-42ba-a5fa-d51d241597e7
+  text: Uniquement de nuit
+- id: 7bbeec2d-130f-47aa-8546-c915847f7eb9
+  text: Uniquement par grand froid
+- id: af1409df-0a95-4ee6-9b91-5a38f30282f7
+  text: Jamais, il est facultatif
+correct_choice_ids:
+- 814998f1-3dd2-44bf-abf2-444cea30c395
+explanation: Le parachute est un instrument de sécurité à utiliser dès lors que le
+  retour surface s'effectue en pleine eau (p. 379).
+archived: false

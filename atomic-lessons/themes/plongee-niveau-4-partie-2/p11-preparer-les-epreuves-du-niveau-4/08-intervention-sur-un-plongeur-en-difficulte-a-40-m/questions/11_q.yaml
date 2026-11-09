@@ -1,0 +1,21 @@
+id: 3faab08d-3183-40ee-8db6-2571c43bfc2b
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que dit le MFT de la vitesse de remontée en début d'intervention ?
+choices:
+- id: 6db35639-88d2-4fb4-b5aa-71ad02fc6f82
+  text: Une vitesse rapide est tolérée en début de remontée, mais elle doit être définitivement
+    maîtrisée au plus tard à l'arrivée à 35 m
+- id: 21854e20-304b-404d-8c26-bb5e3fd6faba
+  text: Elle doit être de 6 m/min dès le départ
+- id: 3881311b-9258-4e27-a90c-65fe9290ff02
+  text: Elle n'est pas évaluée
+- id: 4782d23c-1c71-43f5-9b1e-8be8d9a693e0
+  text: Elle doit dépasser 20 m/min au départ
+correct_choice_ids:
+- 6db35639-88d2-4fb4-b5aa-71ad02fc6f82
+explanation: Une vitesse rapide est tolérée en début de remontée, mais définitivement
+  maîtrisée au plus tard à 35 m (MFT, mai 2026).
+archived: false

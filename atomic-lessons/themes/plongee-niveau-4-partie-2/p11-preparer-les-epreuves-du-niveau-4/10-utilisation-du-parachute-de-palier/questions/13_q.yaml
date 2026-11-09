@@ -1,0 +1,22 @@
+id: d84d12f9-6ea5-45d7-a60e-a194e4e544c9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le parachute est-il déployé dans l'épreuve d'IPD, selon le MFT ?
+choices:
+- id: 62cd2025-92d7-4d1b-a62d-63e263012de8
+  text: Après la désolidarisation du binôme au signe « fin d'exercice », en conservant
+    son niveau d'immersion
+- id: 614b6063-b7de-47e2-9354-380a281eef43
+  text: Au fond à 40 m
+- id: 69c46d01-f9c7-4e2f-895d-f29d722c6813
+  text: En surface, sans contrainte
+- id: f392628c-acf0-4890-8834-bcf336bf0220
+  text: Pendant la descente
+correct_choice_ids:
+- 62cd2025-92d7-4d1b-a62d-63e263012de8
+explanation: Dans l'épreuve n° 5, une fois stabilisé et au signe « fin d'exercice
+  », le binôme se désolidarise et le candidat déploie son parachute en conservant
+  son niveau d'immersion (MFT, mai 2026).
+archived: false

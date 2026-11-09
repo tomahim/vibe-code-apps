@@ -1,0 +1,21 @@
+id: 97ffdd3c-6142-4ef5-82be-0810fec3a600
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Avec quoi le manuel conseille-t-il de gonfler légèrement le parachute ?
+choices:
+- id: 7aa869d5-128e-4eeb-ba95-71c188c9cb54
+  text: Avec le détendeur de secours, pour qu'il tienne droit dans l'eau sans remonter
+- id: 0feee272-d802-4bf6-8e6e-c2ecdc7f5e89
+  text: Avec la bouche uniquement
+- id: 8e29004f-1405-4d31-b171-64cefee38b83
+  text: Avec le gilet
+- id: 89e11371-013e-4335-aba0-46cc2c5c68df
+  text: Avec le tuba
+correct_choice_ids:
+- 7aa869d5-128e-4eeb-ba95-71c188c9cb54
+explanation: On gonfle légèrement le parachute, si possible à l'aide du détendeur
+  de secours, pour qu'il tienne droit dans l'eau sans remonter (p. 379). Le MFT impose
+  le détendeur de secours dans l'épreuve de DTMR.
+archived: false

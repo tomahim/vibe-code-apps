@@ -1,0 +1,22 @@
+id: cbb3bf41-805c-49e5-91ee-3fa6ff8673f4
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que dit le manuel de la gestion de l'air pendant la DTMR ?
+choices:
+- id: 77f894f4-a541-43f7-8197-5150d9bdd35b
+  text: 'Ni poumon-ballast, ni palmage, ni regonflage : mettre de l''air dans le gilet
+    puis gérer son évacuation jusqu''à la surface'
+- id: ff5af06c-4b29-4ee1-9d79-f9c60ae66a28
+  text: Gonfler le gilet à chaque mètre
+- id: 702183f3-d0fb-4820-a3d3-3ed103b8a730
+  text: Utiliser le poumon-ballast en priorité
+- id: cd68be21-045d-4df8-b198-3d7c7cf7b53b
+  text: Palmer fort au début puis regonfler
+correct_choice_ids:
+- 77f894f4-a541-43f7-8197-5150d9bdd35b
+explanation: 'Pas de poumon-ballast (dangereux : surpression pulmonaire), pas de palmage,
+  pas de regonflage : l''idéal est de gérer l''évacuation de l''air du gilet à la
+  remontée (p. 378).'
+archived: false

@@ -1,0 +1,21 @@
+id: 5061252e-2733-47f8-83cf-d6a0eedf7fdd
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quels éléments sont évalués au fond, selon le MFT ?
+choices:
+- id: 1059701b-608f-4df8-8c50-cb9cd1d32b3a
+  text: Le maintien précis du niveau d'immersion à la ventilation et au gilet, et
+    une remontée entamée sans délai après le signe
+- id: f83d05d2-9c50-4e49-ba7f-4a78e70dccfa
+  text: Le temps passé au fond
+- id: 7d77c3a7-300b-4786-bc0c-6d503331d78f
+  text: La consommation d'air
+- id: dce69717-fcfa-43b2-b553-4d1440f5a926
+  text: La tenue du masque
+correct_choice_ids:
+- 1059701b-608f-4df8-8c50-cb9cd1d32b3a
+explanation: 'Au fond : maintien précis du niveau d''immersion à la ventilation et
+  au gilet, et remontée entamée sans délai après le signe « remonte » (MFT, mai 2026).'
+archived: false

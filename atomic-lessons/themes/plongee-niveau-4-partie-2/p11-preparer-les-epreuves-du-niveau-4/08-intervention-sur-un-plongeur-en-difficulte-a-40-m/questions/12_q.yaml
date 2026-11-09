@@ -1,0 +1,23 @@
+id: f9bd77a5-085e-4ad6-8367-6cf672ee46a1
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment le manuel décrit-il la fin de la remontée ?
+choices:
+- id: f0a001e1-fd8a-4122-9622-6136ae0422f9
+  text: Vitesse ralentie dès la zone des 10 m, gilets purgés avant 6 m, arrêt franc
+    entre 6 m et 3 m
+- id: 10e39824-ff36-45b5-8515-5ebbeab958ef
+  text: Remontée pleine vitesse jusqu'en surface
+- id: 6757b052-237f-4fd6-b5ed-cc9ab793f746
+  text: Arrêt obligatoire à 12 m
+- id: bbbe4673-49fa-4c08-b244-bdf5dc49ef99
+  text: Pas d'arrêt si l'on se sent bien
+correct_choice_ids:
+- f0a001e1-fd8a-4122-9622-6136ae0422f9
+explanation: 'Selon le manuel : ralentir dès la zone des 10 m, purger les gilets avant
+  6 m (si aucun plongeur n''est surlesté), marquer un arrêt franc entre 6 et 3 m,
+  vérifier réserves d''air et paliers (p. 377). Le MFT fixe l''arrêt franc entre 8
+  et 6 m.'
+archived: false

@@ -1,0 +1,22 @@
+id: f4b13269-a542-4f9e-af35-81f40b7196c9
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Où l'arrêt franc est-il réalisé, selon le MFT ?
+choices:
+- id: 771df8d8-eb8e-4162-ae00-746748712e2a
+  text: Entre 8 et 6 m, suivi d'un tour d'horizon complet, stabilisé, regard vers
+    la surface
+- id: dfa0693c-bcdf-49e9-86b7-3e8264c8f4cd
+  text: À 3 m exactement
+- id: 2084f3c0-0da2-4368-9dd8-4c63b06fdc77
+  text: En surface
+- id: 1bcdf2ac-08bc-4d8e-81a2-262556d3ff7a
+  text: Entre 12 et 9 m
+correct_choice_ids:
+- 771df8d8-eb8e-4162-ae00-746748712e2a
+explanation: Arrêt franc entre 8 et 6 m, tour d'horizon complet stabilisé, regard
+  vers la surface, niveau d'immersion maintenu (MFT, mai 2026). Le manuel indique
+  un arrêt franc entre 6 et 3 m (p. 378).
+archived: false

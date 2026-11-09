@@ -1,0 +1,22 @@
+id: 574da3d6-591c-416d-af19-e973c3faa2c1
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles sont les difficultés citées par le manuel ?
+choices:
+- id: 32c99476-2999-4466-9313-32215a966b27
+  text: Maintenir le parachute droit et haut, ne pas être entraîné vers la surface,
+    ne pas se prendre les palmes dans le bout, déployer tout en assurant une assistance
+- id: d6567c0d-134f-449f-a084-bf7badaf8de5
+  text: Le parachute est trop lourd
+- id: 3f984db1-e116-4861-b428-13140327c9df
+  text: Le parachute coule
+- id: 68075f49-9558-43bb-b534-0e9b0e9c24ec
+  text: Il est impossible à plier
+correct_choice_ids:
+- 32c99476-2999-4466-9313-32215a966b27
+explanation: 'Difficultés : parachute insuffisamment gonflé ou manque de traction,
+  entraînement vers la surface au gonflage, palmes prises dans le bout, déploiement
+  pendant une remontée ou une assistance (p. 379).'
+archived: false

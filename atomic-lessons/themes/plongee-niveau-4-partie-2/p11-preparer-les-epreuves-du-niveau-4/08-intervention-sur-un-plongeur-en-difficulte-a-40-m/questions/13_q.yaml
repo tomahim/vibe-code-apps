@@ -1,0 +1,22 @@
+id: 1241a2c7-7030-4aa5-882b-f98ae8acc65c
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le candidat doit-il réagir à une panne d'air de l'assisté pendant
+  la remontée ?
+choices:
+- id: 0209d6f1-7ee5-4036-92ac-1e157db51a60
+  text: Agir sans interrompre la remontée, par exemple donner son détendeur de secours
+- id: b04a8619-a869-456c-a91f-e8ba26234948
+  text: Arrêter la remontée pour évaluer
+- id: b1a6a6ef-a69d-42af-991c-aac5af4f8220
+  text: Redescendre chercher de l'aide
+- id: bece657e-1578-4d77-b643-0897776db9c0
+  text: Lui retirer son détendeur
+correct_choice_ids:
+- 0209d6f1-7ee5-4036-92ac-1e157db51a60
+explanation: Face à une situation évolutive (perte de conscience, lâcher du détendeur,
+  panne d'air), le candidat agit sans interrompre la remontée, par exemple en donnant
+  le détendeur de secours (manuel p. 377 ; MFT mai 2026).
+archived: false

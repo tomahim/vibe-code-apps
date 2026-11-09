@@ -1,0 +1,21 @@
+id: 0fc9c13b-d7d8-49d2-9df4-b1a7365aafaf
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels sont le coefficient et l'aptitude associés à l'épreuve d'IPD à 40 m,
+  selon le MFT ?
+choices:
+- id: 71f55a9f-436d-4e62-a743-84b364297849
+  text: Coefficient 3, aptitude A2
+- id: 290496a7-b050-4866-b042-37c6c65b29a8
+  text: Coefficient 1, aptitude A1
+- id: fc7a9103-d06a-444e-817b-c3fcb769326a
+  text: Coefficient 2, aptitude A3
+- id: 96b4c1ff-6c33-4337-aed1-32e4fb1fa5fe
+  text: Coefficient 4, aptitude A4
+correct_choice_ids:
+- 71f55a9f-436d-4e62-a743-84b364297849
+explanation: L'épreuve n° 5 « intervention sur un plongeur en difficulté à 40 mètres
+  » est coefficient 3 et correspond à l'aptitude A2 (MFT, mai 2026).
+archived: false
