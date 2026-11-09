@@ -6,8 +6,6 @@ prompt: Quel message anglais affiche, sur certains ordinateurs, le temps total d
   remontée, paliers inclus ?
 accepted_answers:
 - ASC TIME
-- asc time
-- ASC.TIME
 - ASC
 explanation: 'ASC TIME : le temps total de remontée, paliers inclus, qui peut compléter
   le message DECTIME/STOP/DECOSTOP indiquant le temps et la profondeur du palier (CEILING).'

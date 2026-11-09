@@ -7,9 +7,7 @@ prompt: Quel sigle anglais désigne les paramètres de gradient que certains ord
   ?
 accepted_answers:
 - GF
-- gf
 - Gradient factors
-- gradient factors
 explanation: 'GF (gradient factors). Le manuel est catégorique : n''achetez et n''utilisez
   ces ordinateurs que si vous maîtrisez vraiment le sujet ; à défaut, restez sur des
   ordinateurs « grand public ».'

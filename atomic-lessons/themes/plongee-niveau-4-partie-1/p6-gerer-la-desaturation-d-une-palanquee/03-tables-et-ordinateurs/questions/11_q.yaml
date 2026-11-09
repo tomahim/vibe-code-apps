@@ -6,7 +6,6 @@ prompt: Quel sigle, ajouté en colonne des tables MN90-FFESSM, désigne la duré
   de remontée ?
 accepted_answers:
 - DTR
-- dtr
 - Durée totale de remontée
 - Duree totale de remontee
 explanation: DTR (durée totale de remontée). Les tables MN90-FFESSM se distinguent

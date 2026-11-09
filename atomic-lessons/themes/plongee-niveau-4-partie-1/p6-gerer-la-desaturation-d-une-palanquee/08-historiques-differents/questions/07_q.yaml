@@ -6,7 +6,6 @@ prompt: Quel nom anglais porte la fonction « carnet de plongée » des ordinate
   qui conserve les paramètres des dernières plongées ?
 accepted_answers:
 - Logbook
-- logbook
 - LOG BOOK
 - Carnet de plongée
 explanation: 'La fonction carnet de plongée (« Logbook ») : numéro, date, heure, intervalle

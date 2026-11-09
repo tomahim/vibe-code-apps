@@ -6,7 +6,6 @@ prompt: Quel sigle anglais, affiché par les ordinateurs à gestion d'air, dési
   temps de fond restant (« Remaining Bottom Time ») ?
 accepted_answers:
 - RBT
-- rbt
 - Remaining Bottom Time
 explanation: 'RBT (Remaining Bottom Time). Il existe aussi AIR TIME ou TTR (Time To
   Reserve) : l''autonomie est estimée en permanence en tenant compte de la consommation,

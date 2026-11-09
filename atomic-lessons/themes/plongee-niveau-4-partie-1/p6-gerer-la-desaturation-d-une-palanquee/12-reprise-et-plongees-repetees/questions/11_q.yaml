@@ -6,7 +6,6 @@ prompt: Quel sigle désigne la contre-indication temporaire à la plongée, de q
   semaines à plusieurs mois, dans l'attente d'une guérison complète ?
 accepted_answers:
 - CIT
-- cit
 - Contre-indication temporaire
 explanation: 'CIT : contre-indication temporaire, de quelques semaines à plusieurs
   mois, dans l''attente d''une guérison complète (avec CIA - absolue - et CIR - relative).'
