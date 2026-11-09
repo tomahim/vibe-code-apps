@@ -1,0 +1,20 @@
+id: a77239b4-0b13-40e9-8418-0c000fab7d25
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: À qui confier toute intervention sur une robinetterie ?
+choices:
+- id: fd5c20d6-6264-4b97-a161-3c9e4d38ed87
+  text: À un spécialiste ; on ne change jamais soi-même sa robinetterie.
+- id: 79b04a23-b871-4a37-9077-b6d60c5e0b2b
+  text: Au guide de palanquée, qui est formé pour cela au niveau 4.
+- id: d4875d27-f7a1-483b-9c63-ab2202aa2e9a
+  text: À n'importe quel plongeur possédant une clé à molette.
+- id: 93cf4bfa-7f51-4f38-be66-905b4a7659ed
+  text: Au préposé au gonflage, pendant le chargement de la bouteille.
+correct_choice_ids:
+- fd5c20d6-6264-4b97-a161-3c9e4d38ed87
+explanation: Toute intervention sur une robinetterie doit être confiée à un spécialiste
+  ; soyez extrêmement vigilant à l'achat d'une bouteille d'occasion.
+archived: false

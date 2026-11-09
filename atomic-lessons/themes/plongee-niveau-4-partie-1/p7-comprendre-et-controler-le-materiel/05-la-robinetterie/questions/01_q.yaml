@@ -1,0 +1,23 @@
+id: 61ba534b-b0ed-44c9-96b0-4b9fed7ff3d9
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont les quatre composants d'une robinetterie décrits par le manuel
+  ?
+choices:
+- id: de410a27-953e-4320-a629-d66b40600808
+  text: Robinet à poignée, tube anti-corps étrangers, pas de vis avec joint, adaptateur
+    DIN/INT.
+- id: 83a71e39-074b-452f-b8e6-45f8f9494dcb
+  text: Manomètre, purge automatique, clapet anti-retour, volant de sécurité.
+- id: 8abfbdf6-8086-4dba-96c4-91e956e73b00
+  text: Soupape de sûreté, filtre à air, joint torique, raccord rapide.
+- id: 656b9fe4-b5c1-4f74-8653-df42ca7a4fa4
+  text: Poignée, sangle de transport, bouchon de protection, échelle graduée.
+correct_choice_ids:
+- de410a27-953e-4320-a629-d66b40600808
+explanation: Un robinet (poignée) pour ouvrir et fermer, un tube évitant les corps
+  étrangers quand le plongeur est tête en bas, un pas de vis avec joint pour fixer
+  sur la bouteille, un adaptateur pour détendeur à étrier (INT) ou DIN.
+archived: false

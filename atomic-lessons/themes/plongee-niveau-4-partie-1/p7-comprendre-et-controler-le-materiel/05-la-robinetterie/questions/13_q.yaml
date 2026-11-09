@@ -1,0 +1,22 @@
+id: f5d8c309-bbdd-4c34-9f03-883aba57d480
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: À quoi servira le numéro de série gravé sur la robinetterie, selon le manuel
+  ?
+choices:
+- id: 2d41e635-5376-4c08-9c41-38a88be464bb
+  text: Identifier, dans un futur proche, l'appartenance d'une robinetterie à une
+    bouteille donnée.
+- id: 6494516e-89df-44f9-969f-09ab0b222495
+  text: Compter le nombre de plongées effectuées avec la bouteille.
+- id: 1d764034-892d-467e-b5d0-5d497464063c
+  text: Déterminer automatiquement la date de requalification.
+- id: a8c9d470-6db1-435b-9403-c4ff28f82cb9
+  text: Prouver la marque du détendeur monté dessus.
+correct_choice_ids:
+- 2d41e635-5376-4c08-9c41-38a88be464bb
+explanation: Le numéro de série, gravé depuis peu, devrait permettre d'identifier
+  dans un futur proche l'appartenance d'une robinetterie à une bouteille donnée.
+archived: false

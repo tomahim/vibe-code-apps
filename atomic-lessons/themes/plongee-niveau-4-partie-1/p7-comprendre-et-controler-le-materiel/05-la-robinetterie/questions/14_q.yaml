@@ -1,0 +1,20 @@
+id: c7578ac1-9856-4dd4-b993-f980097c0d74
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Comment le plongeur choisit-il entre sortie DIN et sortie étrier ?
+choices:
+- id: 79011a7a-0716-4383-b0f9-c0901da42694
+  text: En fonction du détendeur utilisé.
+- id: f4f510bf-4722-4e48-bbfb-97aaedc63b2b
+  text: En fonction de la profondeur de plongée visée.
+- id: 03ad505c-dbd6-499a-bb13-0d0b1ece07f0
+  text: 'En fonction du prix : le DIN est toujours moins cher.'
+- id: 7af66ade-b6d3-4d27-a708-0afe2c527a47
+  text: En fonction de la couleur de la bouteille achetée.
+correct_choice_ids:
+- 79011a7a-0716-4383-b0f9-c0901da42694
+explanation: Les sorties « DIN » ou « étrier » dépendent du détendeur utilisé ; le
+  choix de la bouteille et de sa robinetterie suit celui du détendeur.
+archived: false

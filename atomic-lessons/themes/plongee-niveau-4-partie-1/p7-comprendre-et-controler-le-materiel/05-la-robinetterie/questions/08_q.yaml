@@ -1,0 +1,22 @@
+id: fce62a43-d407-4496-81e9-73dbf1519141
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi la bouteille doit-elle être démontée pour la requalification, et
+  par qui de préférence ?
+choices:
+- id: 5879f946-82d3-41ad-80ec-7ff530a3a449
+  text: La requalification exige le démontage ; il est préférable de le confier à
+    un spécialiste.
+- id: 15d34d40-bfd1-4059-a616-70d04301d51e
+  text: 'Le démontage n''est jamais nécessaire : tout se fait en place.'
+- id: b383c815-1142-40b9-b181-9a761f896595
+  text: Le démontage se fait par le plongeur, sans aucune précaution.
+- id: a8791a53-22ea-4faf-8369-6147c9799aba
+  text: Seul le fabricant d'origine peut démonter une robinetterie.
+correct_choice_ids:
+- 5879f946-82d3-41ad-80ec-7ff530a3a449
+explanation: Pour être requalifiée, la bouteille doit être démontée ; on peut le faire
+  soi-même avec des précautions, mais il est préférable de confier cela à un spécialiste.
+archived: false

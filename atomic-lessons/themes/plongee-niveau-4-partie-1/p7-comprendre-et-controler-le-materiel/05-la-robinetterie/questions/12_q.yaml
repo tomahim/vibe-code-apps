@@ -1,0 +1,23 @@
+id: 0892305e-e0f5-4888-a352-8f38234f68bc
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi être particulièrement vigilant à l'achat d'une bouteille d'occasion
+  ?
+choices:
+- id: 16356609-f03c-4fc0-a10a-512e0a6dae8f
+  text: Certains pas de vis peuvent être montés sur des bouteilles qui ne leur correspondent
+    pas exactement.
+- id: 9c581c92-5eaf-445f-887b-cb698eaccbca
+  text: Les bouteilles d'occasion sont toujours volées, selon le manuel.
+- id: d11fdbac-180f-47fc-83a7-9597153cb6c7
+  text: L'occasion interdit tout gonflage ultérieur en club.
+- id: c734b89f-55d3-4b33-9796-6a05b0156ffe
+  text: La peinture d'origine se décolle toujours après la revente.
+correct_choice_ids:
+- 16356609-f03c-4fc0-a10a-512e0a6dae8f
+explanation: Certains pas de vis peuvent être montés sur des bouteilles alors même
+  qu'ils ne leur correspondent pas exactement ; le filetage gravé sur la bouteille
+  (ex. M25) est une information à contrôler.
+archived: false
