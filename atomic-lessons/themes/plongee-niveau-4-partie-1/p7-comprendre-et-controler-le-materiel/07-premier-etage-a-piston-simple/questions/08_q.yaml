@@ -1,0 +1,20 @@
+id: 60a9966c-2abd-4f24-81d6-b6025178ffc8
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que devient l'air expiré au deuxième étage ?
+choices:
+- id: 8d5101a5-7d22-4c1e-8340-1e422c25aecc
+  text: Il s'échappe par la soupape d'expiration.
+- id: 5fc88d9a-5f26-4edf-86cb-1af393c743ad
+  text: Il retourne dans la bouteille par le flexible HP.
+- id: 10856659-3f32-4a20-a107-788e9c0230f0
+  text: Il est stocké dans la chambre sèche pour l'inspiration suivante.
+- id: 054b506d-7152-43a2-a535-809148fb4ccd
+  text: Il est renvoyé vers le premier étage pour être recompressé.
+correct_choice_ids:
+- 8d5101a5-7d22-4c1e-8340-1e422c25aecc
+explanation: À l'expiration, le clapet se referme, le piston du premier étage bloque
+  l'arrivée HP, et l'air expiré s'échappe du deuxième étage par la soupape d'expiration.
+archived: false

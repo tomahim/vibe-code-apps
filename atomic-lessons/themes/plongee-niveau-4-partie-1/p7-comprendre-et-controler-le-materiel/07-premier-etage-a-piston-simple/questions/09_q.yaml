@@ -1,0 +1,20 @@
+id: 136e80c1-e316-4d0a-bd8b-7345a17a5fe5
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelles forces s'exercent sur le piston, dans le sens de l'ouverture ?
+choices:
+- id: a8213328-ced7-4b32-a181-b84f37a59eba
+  text: La force du ressort et la pression ambiante, via la chambre humide.
+- id: e9a4ce78-4817-4829-b521-93a1c1803ba0
+  text: La pression intermédiaire et le poids du plongeur.
+- id: 3790762e-277d-4a74-a318-e6e06a0c402c
+  text: La haute pression et la force du levier du deuxième étage.
+- id: 30b5501c-3e1c-4e81-85f9-bdad21d5b023
+  text: La pression partielle d'oxygène et la poussée d'Archimède.
+correct_choice_ids:
+- a8213328-ced7-4b32-a181-b84f37a59eba
+explanation: 'Dans le sens de l''ouverture : le ressort et la pression ambiante (chambre
+  humide) ; dans le sens de la fermeture : la pression intermédiaire sur le piston.'
+archived: false
