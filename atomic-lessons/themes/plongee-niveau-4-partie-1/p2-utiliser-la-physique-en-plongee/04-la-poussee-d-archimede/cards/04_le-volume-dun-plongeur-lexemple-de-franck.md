@@ -3,6 +3,12 @@ id: b97edf76-df12-4b11-adbd-3f5b1580def8
 position: 4
 title: 'Le volume d''un plongeur : l''exemple de Franck'
 archived: false
+image: "p2-poussee-archimede.jpg"
+image_alt: "Schéma de la poussée d'Archimède : poids réel et poids apparent d'un plongeur"
+image_caption: "Poids réel, poussée d'Archimède et poids apparent"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 76"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Le manuel pose le cas de Franck, plongeur débutant de 65 kg, qui demande quel est son volume.
 

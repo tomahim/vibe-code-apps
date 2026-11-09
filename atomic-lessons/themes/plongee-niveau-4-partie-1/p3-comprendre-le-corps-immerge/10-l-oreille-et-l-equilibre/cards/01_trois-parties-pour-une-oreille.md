@@ -3,6 +3,12 @@ id: a849b2c1-1839-4d4b-b0b3-0e5cec185a3c
 position: 1
 title: Trois parties pour une oreille
 archived: false
+image: "p3-oreille-anatomie.jpg"
+image_alt: "Anatomie de l'oreille : oreille externe, moyenne et interne"
+image_caption: "Description de l'oreille"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 187"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Une oreille se compose de trois grandes parties.
 

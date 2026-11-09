@@ -3,6 +3,12 @@ id: 486de673-8b2b-4efb-a7cb-30e6ca377e21
 position: 8
 title: Un schéma, pas une mesure
 archived: false
+image: "p3-spirogramme.jpg"
+image_alt: "Spirogramme simplifié : volumes pulmonaires au repos, à l'effort et en immersion"
+image_caption: "Spirogramme (approche simplifiée)"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 162"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 Le spirogramme du manuel qui représente ces volumes est une approche simplifiée : il sert à visualiser VC, VRI, VRE, VR et capacité vitale.
 

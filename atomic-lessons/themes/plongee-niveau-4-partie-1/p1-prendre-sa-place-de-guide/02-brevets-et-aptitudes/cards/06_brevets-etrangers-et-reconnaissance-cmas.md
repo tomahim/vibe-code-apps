@@ -3,6 +3,12 @@ id: 520eaa7d-df98-4f37-99c0-6977811011b8
 position: 6
 title: Brevets étrangers et reconnaissance CMAS
 archived: false
+image: "p1-carte-cmas.jpg"
+image_alt: "Exemple de carte CMAS 3 star diver délivrée par la FFESSM"
+image_caption: "Une carte CMAS délivrée par la FFESSM"
+image_credit: "Manuel Plongée Plaisir Niveau 4 (A. Foret, FFESSM, 10e éd. 2020), p. 26"
+image_license: "Tous droits réservés - usage interne"
+
 ---
 La FFESSM est affiliée à la CMAS, la Confédération mondiale des activités subaquatiques. Elle délivre des cartes double face qui offrent une reconnaissance auprès des membres de la CMAS : plus de cent fédérations nationales et des dizaines d'organismes affiliés.
 
