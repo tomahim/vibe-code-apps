@@ -791,6 +791,16 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   panel.addEventListener('scroll', placeFab, { passive: true });
   panel.addEventListener('transitionend', placeFab);
   addEventListener('resize', placeFab);
+  // "Last seen" (Thomas, 2026-11-09): the latest question attempt or card read
+  // on this path, from the practice payload. Counted in local calendar days.
+  // No activity on record (or none to review yet) shows nothing, never a guess.
+  function lastSeenLine(info) {
+    const at = info && info.last_activity_at ? new Date(info.last_activity_at) : null;
+    if (!at || Number.isNaN(at.getTime())) return '';
+    const day = (d) => Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+    const days = Math.max(0, Math.round((day(new Date()) - day(at)) / 86400000));
+    return `<p class="lg-lastseen">Last seen: ${days === 0 ? 'today' : days === 1 ? 'yesterday' : `${days} days ago`}</p>`;
+  }
   function renderPanel() {
     const ctx = `${view.level}.${view.ti}.${view.pi}`, keepTop = ctx === panelCtx ? panel.scrollTop : 0;
     panelCtx = ctx;
@@ -807,7 +817,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     } else if (trail) {
       const li = lessonInfo(trail.path), sel = view.lesson;
       const prog = trail.path.progress, qt = prog.questions_total || 0, qc = prog.questions_correct || 0, qp = qt ? Math.round((qc / qt) * 100) : 0;
-      h = `<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
+      h = `${lastSeenLine(trail.path.practice)}<p class="eyebrow">${esc(trail.theme.title)} · learning path</p><h2>${esc(trail.path.title)}</h2><p class="lede">${li.done ? 'Every lesson has bloomed.' : `${li.cur} of ${li.n} lessons complete. Each dot is a card you have read.`}</p>`;
       // The question gauge shrinks to a slim strip: the practice quiz floats
       // outside the panel, so the lessons stay the panel's focus.
       h += `<p class="lg-strip"><span class="bar" role="img" aria-label="${qp}% of questions answered correctly"><i style="width:${qp}%"></i></span><span class="lg-strip-count">${qc} of ${qt} questions correct</span></p>`;

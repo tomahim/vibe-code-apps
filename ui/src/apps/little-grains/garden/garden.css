@@ -123,6 +123,7 @@
 /* Pills sit side by side on phones (Thomas, 2026-11-09). */
 .lg-mobile .lg-review-float{display:flex;flex-direction:row;gap:8px;align-items:center}
 .lg-challenge-pill{background:#7a4a8c !important;color:#fff !important;border-color:#7a4a8c !important}
+.lg-lastseen{margin:0 0 4px;font:400 11px var(--sans);color:#9a9a96;text-align:left}
 .lg-season{margin:8px 0 0;font:600 12.5px var(--sans);color:#8a6a34}
 .lg-season.winter{color:#5d7a8c}
 .lg-season-ic{display:inline-flex;vertical-align:-1.5px;margin-right:3px}
