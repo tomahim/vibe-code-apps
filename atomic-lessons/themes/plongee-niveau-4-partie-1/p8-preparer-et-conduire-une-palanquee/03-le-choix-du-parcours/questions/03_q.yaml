@@ -1,0 +1,22 @@
+id: 3656f6af-fc5e-414d-be49-f93c0f7e509e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Sur un « sec » ou une roche de faible dimension, que faut-il faire généralement,
+  selon le manuel ?
+choices:
+- id: 5c8bbce2-d201-44f3-a328-5fbf6e649e26
+  text: Le tour du site, en faisant attention au courant.
+- id: 34453352-b9a8-43ec-a9c3-4bbf347c12b6
+  text: Un parcours en carré obligatoire.
+- id: a332cc86-159f-4248-a99f-aa6c5f8cef47
+  text: Uniquement une descente verticale sur place.
+- id: 277efc14-6115-4858-a51d-97c4cad31ec9
+  text: Un aller-retour au compas sans repère.
+correct_choice_ids:
+- 5c8bbce2-d201-44f3-a328-5fbf6e649e26
+explanation: 'Ces plongées ne posent aucune difficulté d''orientation : il suffit
+  généralement de faire le tour du site ; attention au courant pour ne pas être surpris
+  avec la palanquée.'
+archived: false

@@ -1,0 +1,21 @@
+id: 9e38eabc-caa8-4fdb-8e9b-8c3131900ef8
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi les plongées sur roches dispersées sont-elles trompeuses ?
+choices:
+- id: d9a0882d-6ea9-49ad-81c5-0db7248deae3
+  text: Toutes les roches se ressemblant, on peut très vite ne plus savoir où l'on
+    est.
+- id: 59e2e813-f8c8-4613-9103-bdcb8672b923
+  text: Les roches se déplacent avec le courant.
+- id: ad1778f8-0287-4d8d-8047-27e125d6b0b5
+  text: Les roches attirent les compas.
+- id: 71197d47-bc3d-4134-82a0-1da627406710
+  text: Les roches sont toujours trop profondes.
+correct_choice_ids:
+- d9a0882d-6ea9-49ad-81c5-0db7248deae3
+explanation: 'Toutes les roches se ressemblant, vous pouvez très vite ne plus savoir
+  où vous êtes : adopter la même conduite que sur plateau rocheux.'
+archived: false

@@ -1,0 +1,21 @@
+id: 1f9e8134-be8b-41a8-940f-a6f960267464
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que rappelle le manuel sur les sites de plongée du point de vue de l'orientation
+  ?
+choices:
+- id: 07b36ce5-392d-45bb-bf6e-52f224736db8
+  text: Tous les sites ne sont pas d'égale difficulté.
+- id: 33be10d5-637d-4dc5-9126-8241104925b5
+  text: Tous les sites présentent la même difficulté.
+- id: 79510a8e-deb3-485c-a2ff-ad18f0a95b1f
+  text: Seules les épaves sont difficiles.
+- id: 5bb8147d-566c-426d-b7a7-9e78f2e9e08c
+  text: L'orientation ne pose jamais de problème.
+correct_choice_ids:
+- 07b36ce5-392d-45bb-bf6e-52f224736db8
+explanation: '« Du point de vue de l''orientation, tous les sites ne sont pas d''égale
+  difficulté » : le manuel décrit les principaux cas de figure.'
+archived: false

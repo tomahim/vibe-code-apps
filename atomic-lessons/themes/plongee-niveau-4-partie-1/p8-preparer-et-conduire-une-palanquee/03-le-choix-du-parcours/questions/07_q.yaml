@@ -1,0 +1,21 @@
+id: 9b21bdc0-1b2b-46b2-b9e8-cbf29f82d4b9
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Dans quelles conditions l'orientation sur une épave ne pose-t-elle aucune
+  difficulté particulière, selon le manuel ?
+choices:
+- id: 07121d49-8557-4489-9f2a-919c88a0ab02
+  text: Eau claire et courant faible.
+- id: 77a6a7c6-87cb-4821-8900-63e89f918200
+  text: Eau trouble et courant fort.
+- id: 4df72b26-9c7b-41c1-926a-f4ec9fcc86ce
+  text: Uniquement de nuit.
+- id: d291b859-fd42-4584-8456-15b511f982c2
+  text: Uniquement en hiver.
+correct_choice_ids:
+- 07121d49-8557-4489-9f2a-919c88a0ab02
+explanation: Dans de bonnes conditions (eau claire, courant faible), s'orienter sur
+  une épave ne pose aucune difficulté particulière.
+archived: false

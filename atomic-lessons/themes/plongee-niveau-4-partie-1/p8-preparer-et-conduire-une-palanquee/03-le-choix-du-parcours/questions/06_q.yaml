@@ -1,0 +1,20 @@
+id: 2b419c97-1a7a-4943-a784-a7600967d623
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Sur une épave, quel conseil le manuel donne-t-il pour le mouillage ?
+choices:
+- id: 8c4d7c4d-bcc9-43e0-a082-31b51149ef78
+  text: Que le mouillage soit attaché bien haut, pour faciliter son identification.
+- id: 52d7c18f-590a-4fe4-889d-59d849349ffb
+  text: Que le mouillage soit coupé à la fin de la plongée.
+- id: 061dd124-b6ee-4bd5-8f69-830976cb84bc
+  text: Que le mouillage soit immergé à 30 m.
+- id: da19ac7d-f27d-4236-b8d0-516706fe0773
+  text: Qu'il n'y ait jamais de mouillage sur une épave.
+correct_choice_ids:
+- 8c4d7c4d-bcc9-43e0-a082-31b51149ef78
+explanation: Il reste conseillé que le mouillage soit attaché bien haut, pour faciliter
+  son identification.
+archived: false

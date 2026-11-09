@@ -1,0 +1,20 @@
+id: 2571b7ae-5002-4933-bc51-38ed0f49098b
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Sur un plateau, quels repères deviennent précieux, selon le manuel ?
+choices:
+- id: 7927746d-a0b8-4ee3-a71a-c3b25150f0c4
+  text: L'emplacement du soleil et le sens du courant.
+- id: 747f8a19-5cd1-440d-81bc-f5773e23fdfa
+  text: Le bruit du moteur uniquement.
+- id: 9e3c071b-f3d7-4fbc-a3ab-ffeed6c0f517
+  text: La couleur des palmes des voisins.
+- id: 64a3a62d-00d3-41b4-a42f-802e452cae9a
+  text: Les bulles des autres palanquées.
+correct_choice_ids:
+- 7927746d-a0b8-4ee3-a71a-c3b25150f0c4
+explanation: Sur un plateau, l'emplacement du soleil et le sens du courant peuvent
+  devenir des points de repère précieux.
+archived: false
