@@ -1,0 +1,22 @@
+id: 6d5ab33f-106c-4adf-bfe8-faba7d2fbb06
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Qu'est-ce qui provoque la montée en pression entre deux cylindres ?
+choices:
+- id: fa2a40fc-3b6d-459b-af0b-39f10ba8554b
+  text: 'L''air se déverse dans un cylindre plus étroit : la diminution de volume
+    fait monter la pression.'
+- id: 54f077a0-beb4-442b-8fee-31943c8a384b
+  text: Le deuxième piston tourne plus vite, ce qui accélère les molécules d'air.
+- id: 0c104abf-6ad7-436d-b5a3-62cd30d83d5d
+  text: Le clapet de refoulement chauffe l'air, ce qui augmente sa pression.
+- id: f7dab18e-15db-4102-af24-c516edaf0ebd
+  text: Le ressort de la soupape de sûreté comprime l'air entre les deux étages.
+correct_choice_ids:
+- fa2a40fc-3b6d-459b-af0b-39f10ba8554b
+explanation: 'Lorsque la pression atteint le seuil du clapet de refoulement, l''air
+  se déverse dans un cylindre plus étroit : cette diminution de volume entre les deux
+  cylindres provoque une montée en pression.'
+archived: false

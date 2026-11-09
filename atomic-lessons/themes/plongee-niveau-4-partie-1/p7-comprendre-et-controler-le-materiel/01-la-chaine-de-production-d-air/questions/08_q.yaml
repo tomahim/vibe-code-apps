@@ -1,0 +1,23 @@
+id: beadbfdd-95b0-4c25-9d15-a9f12ec0e364
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Pourquoi des soupapes sont-elles aussi obligatoires entre le dernier étage
+  et les bouteilles ?
+choices:
+- id: 53bf7184-7acf-48d1-80ad-76098990d8f0
+  text: La pression de service d'un compresseur peut être bien supérieure à celle
+    des bouteilles ; il faut éviter de dépasser la pression de service des blocs.
+- id: 56fc3e5f-20c5-4895-ad90-b9269cf20704
+  text: Elles empêchent l'air des bouteilles de retourner dans le compresseur la nuit.
+- id: 01887c32-999e-41e4-b746-d8eebba22f9b
+  text: Elles mesurent la quantité d'huile contenue dans l'air gonflé.
+- id: 9f1c21ac-05cd-4289-91f8-9827d9a3be9a
+  text: Elles servent uniquement à réduire le bruit du compresseur en fin de gonflage.
+correct_choice_ids:
+- 53bf7184-7acf-48d1-80ad-76098990d8f0
+explanation: Ces soupapes, couplées à un détendeur, doivent éviter de dépasser la
+  pression de service des blocs, la pression de service d'un compresseur pouvant être
+  bien supérieure à celle des bouteilles (tolérance +10 % max).
+archived: false

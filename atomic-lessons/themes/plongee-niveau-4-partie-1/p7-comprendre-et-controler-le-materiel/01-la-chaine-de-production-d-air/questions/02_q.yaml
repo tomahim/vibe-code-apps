@@ -1,0 +1,21 @@
+id: c5b53598-3a74-473a-a45e-aeb2b61fe51c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles pressions de service le manuel cite-t-il pour les bouteilles de plongée
+  ?
+choices:
+- id: c23c9154-4898-4473-9f4c-942479699d73
+  text: 176, 200, 230 ou 300 bars.
+- id: 954305a5-e0bb-4393-b0b1-3a902dca2ac8
+  text: 100, 150 ou 250 bars.
+- id: 55c5f245-3235-484f-8df3-8f71ebc81912
+  text: 50, 80 ou 120 bars.
+- id: 5e5c8347-f1c2-4d20-93d6-ce4012c41dd0
+  text: 400, 500 ou 600 bars.
+correct_choice_ids:
+- c23c9154-4898-4473-9f4c-942479699d73
+explanation: 'En plongée, les compresseurs amènent l''air progressivement de la pression
+  atmosphérique à la pression désirée : 176, 200, 230 ou 300 bars.'
+archived: false

@@ -1,0 +1,21 @@
+id: 7410e755-0891-41f3-bc48-56aa2fadf4df
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel usage le manuel donne-t-il en exemple pour un compresseur à un étage
+  ?
+choices:
+- id: 41a31ba9-0d51-42b9-8dd7-821460d10ba8
+  text: Le pistolet à peinture, pour un usage limité à de faibles pressions.
+- id: f074a927-4184-41e1-b3cb-8c648de1d52f
+  text: Le gonflage des bouteilles de plongée de 300 bars.
+- id: 7d0b46c5-c5df-4a29-89c0-379ec3862a44
+  text: La propulsion des torpilles d'entraînement en piscine.
+- id: a6583695-3fb7-488f-bfa2-92f3d9660537
+  text: Le gonflage des gilets stabilisateurs en surface.
+correct_choice_ids:
+- 41a31ba9-0d51-42b9-8dd7-821460d10ba8
+explanation: Il existe des compresseurs à un étage pour un usage limité à de faibles
+  pressions, comme le pistolet à peinture.
+archived: false

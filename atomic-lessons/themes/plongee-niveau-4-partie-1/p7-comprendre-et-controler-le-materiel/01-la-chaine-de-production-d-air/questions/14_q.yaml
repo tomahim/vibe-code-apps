@@ -1,0 +1,23 @@
+id: bcd2b4a3-4b22-46c2-a9fd-76ba23ef8003
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Comment le filtre séparateur (décanteur) sépare-t-il l'eau et l'huile de l'air
+  ?
+choices:
+- id: 2d103811-571e-4d08-a360-30eef11ede32
+  text: L'air est accéléré puis projeté sur les parois ; le brouillard forme des gouttelettes
+    qui s'écoulent par gravité.
+- id: 8bde7f23-2c17-4c11-8711-d8a95023ddab
+  text: L'air traverse une membrane chauffée qui évapore l'eau et l'huile.
+- id: c5253795-92dd-43d4-a6b4-652e773b3f84
+  text: L'air est centrifugé dans un tambour tournant à très grande vitesse.
+- id: b027465e-f815-47e9-bcec-aceefef7ebb5
+  text: L'air est refroidi à -40 degrés pour congeler les vapeurs d'eau.
+correct_choice_ids:
+- 2d103811-571e-4d08-a360-30eef11ede32
+explanation: L'air est accéléré par diminution du diamètre du tube d'entrée, puis
+  projeté perpendiculairement sur les parois ; le brouillard d'eau et d'huile se rassemble
+  en gouttelettes qui s'écoulent par gravité, formant les condensats.
+archived: false
