@@ -1,0 +1,21 @@
+id: 4aa2aecf-3107-4214-b29c-ef5001807a20
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelles durées de remontée sont éliminatoires, selon le MFT ?
+choices:
+- id: 59027281-8a5e-4e18-ab24-2e099518903c
+  text: Plus de 2 min 40 s (moins d'environ 7 m/min) ou moins d'1 min (plus de 20
+    m/min) jusqu'à l'arrêt
+- id: 7a403248-1d10-4ee5-9029-27eda3a08309
+  text: Plus de 10 minutes
+- id: 0127f62c-de63-4d19-a8a0-11df38675db3
+  text: Moins de 3 minutes
+- id: f770224a-43df-4f5c-a53d-f8fc4345c280
+  text: Aucune durée n'est éliminatoire
+correct_choice_ids:
+- 59027281-8a5e-4e18-ab24-2e099518903c
+explanation: Une remontée jusqu'à l'arrêt de plus de 2'40" (vitesse < ~7 m/min) ou
+  de moins d'1' (vitesse > 20 m/min) est éliminatoire (MFT, mai 2026).
+archived: false

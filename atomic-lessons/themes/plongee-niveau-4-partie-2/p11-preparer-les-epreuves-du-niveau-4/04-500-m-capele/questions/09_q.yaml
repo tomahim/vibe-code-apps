@@ -1,0 +1,22 @@
+id: 729b471d-9262-4da5-9663-ee99ee980b0f
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi le réglage du scaphandre avant le départ est-il un paramètre d'efficacité
+  ?
+choices:
+- id: 69f61ed8-6b3a-4fc1-9a7c-28dab47839e8
+  text: 'Le scaphandre se porte sur le dos, bouteille ouverte et détendeur en main
+    : l''équilibrage et le réglage conditionnent la nage'
+- id: a7fa0f6c-4df0-4bb0-a1eb-bac18f769b40
+  text: Parce que le jury note le réglage
+- id: 729f7c48-db91-4641-b767-468bab573885
+  text: Parce qu'un scaphandre mal réglé est éliminatoire
+- id: 5b645bd8-7779-4a75-a5fa-426716c9a22e
+  text: Ce n'est pas un paramètre
+correct_choice_ids:
+- 69f61ed8-6b3a-4fc1-9a7c-28dab47839e8
+explanation: Le port imposé (dos, bouteille ouverte, détendeur en main) rend l'équilibrage
+  et le réglage du scaphandre déterminants pour nager efficacement (MFT, mai 2026).
+archived: false

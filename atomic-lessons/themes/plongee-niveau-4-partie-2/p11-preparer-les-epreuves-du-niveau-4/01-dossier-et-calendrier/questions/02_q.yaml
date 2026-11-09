@@ -1,0 +1,21 @@
+id: d4faf801-0434-4fd2-ab31-e62c18636dbe
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel âge minimum le MFT exige-t-il pour se présenter à l'examen du niveau
+  4 ?
+choices:
+- id: 2efcb0e8-7565-42b6-b413-cac314bf5b53
+  text: 16 ans
+- id: 244c8773-1664-4392-ba1f-06480508234d
+  text: 17 ans au moins le jour du début de l'examen
+- id: cabc8bab-9dfc-4056-99ca-8c911361c725
+  text: 18 ans
+- id: 206c151f-7208-494a-886f-6adfc1bc02dd
+  text: 21 ans
+correct_choice_ids:
+- 244c8773-1664-4392-ba1f-06480508234d
+explanation: Le candidat doit être âgé de 17 ans au moins le jour du début de l'examen
+  (MFT, mai 2026).
+archived: false

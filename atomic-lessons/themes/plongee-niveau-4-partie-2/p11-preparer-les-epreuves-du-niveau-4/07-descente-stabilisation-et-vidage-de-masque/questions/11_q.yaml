@@ -1,0 +1,21 @@
+id: a42c8d71-695d-469b-b260-8100e8c0cac6
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: En combien de temps la stabilisation doit-elle intervenir, selon le manuel
+  ?
+choices:
+- id: 19b1f476-39e8-453d-a86b-08d7e58b783b
+  text: 'Sans délai : 2 à 3 secondes'
+- id: d7f50015-9408-4b57-bde9-a972adaddf83
+  text: En 30 secondes
+- id: 5ae03e34-57ab-4eff-95f1-28969f759ffc
+  text: En 1 minute
+- id: c78be314-06a2-4591-b96b-231b3cff1df1
+  text: Le temps n'a pas d'importance
+correct_choice_ids:
+- 19b1f476-39e8-453d-a86b-08d7e58b783b
+explanation: Une fois au fond, le candidat se stabilise parfaitement sans délai (2
+  à 3 secondes) avant d'enchaîner sur le vidage de masque (p. 368).
+archived: false

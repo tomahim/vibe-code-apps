@@ -1,0 +1,22 @@
+id: fe5e82b1-607e-4732-8081-aabea575c021
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que peut dissocier une CTR, selon le MFT ?
+choices:
+- id: 5a4dfbd7-9976-4272-a7f4-c2fa7dc97e63
+  text: Les épreuves théoriques (groupe 3) des épreuves pratiques et de condition
+    physique (groupes 1 et 2), dans un délai de 9 mois
+- id: d8534373-49f7-4ac5-b981-412685722c5c
+  text: Chaque épreuve, sans limite de temps
+- id: 422c14e9-4ba7-4f27-87dc-44efb06599f9
+  text: Le jury en deux équipes
+- id: e4a8ef2d-ac70-42fc-afa2-baa240513bf4
+  text: Les barèmes de notation
+correct_choice_ids:
+- 5a4dfbd7-9976-4272-a7f4-c2fa7dc97e63
+explanation: Une CTR peut dissocier les épreuves théoriques des épreuves pratiques
+  et de condition physique, le candidat participant à l'ensemble dans un délai de
+  9 mois (MFT, mai 2026).
+archived: false

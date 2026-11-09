@@ -1,0 +1,21 @@
+id: 0987392c-9286-4e30-852f-403ab7bd65e6
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que se passe-t-il si aucun palier n'est nécessaire, selon le MFT ?
+choices:
+- id: ef14dd95-c18d-49ef-97c1-ae36111a563f
+  text: Un minimum d'une minute à 6 m est réalisé pour permettre au jury d'évaluer
+    la stabilisation
+- id: cf20d977-7caf-4cdd-b759-cfc7a1deee4b
+  text: L'épreuve s'arrête immédiatement
+- id: 9b59c0f4-e9ba-4869-a010-678b070242d3
+  text: Le candidat refait une descente à 25 m
+- id: a2a23c69-55c7-4985-be18-632c4e9640a1
+  text: Le jury ne note pas la fin de l'épreuve
+correct_choice_ids:
+- ef14dd95-c18d-49ef-97c1-ae36111a563f
+explanation: Sans palier nécessaire, un minimum d'une minute à 6 m permet au jury
+  d'évaluer la stabilisation (MFT, mai 2026).
+archived: false

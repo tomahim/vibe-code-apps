@@ -1,0 +1,20 @@
+id: 031d51ca-bd9c-4769-a6d7-0b3a0684cc9e
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Que doit attester l'aptitude A4 pour la nage capelée ?
+choices:
+- id: 22a89764-b1d7-4411-9713-3e356c0485e8
+  text: Qu'elle a été réalisée dans des conditions non éliminatoires en milieu naturel
+- id: 8a27ef5a-05f5-41f8-91ce-99304beafa9e
+  text: Qu'elle a été réussie en moins de 10 minutes
+- id: 9f2fb29d-1dbb-4aac-8e87-22ef5ca239c0
+  text: Qu'elle a été faite sans scaphandre
+- id: cc0ca000-cb1a-43b8-8e5b-42d7e8696d18
+  text: Qu'elle a été validée en piscine
+correct_choice_ids:
+- 22a89764-b1d7-4411-9713-3e356c0485e8
+explanation: L'aptitude A4 atteste que les nages PMT et capelée ont été réalisées
+  dans des conditions non éliminatoires en milieu naturel (MFT, mai 2026).
+archived: false

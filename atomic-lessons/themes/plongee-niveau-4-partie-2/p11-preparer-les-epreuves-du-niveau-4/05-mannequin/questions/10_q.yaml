@@ -1,0 +1,20 @@
+id: f2a39d49-5e62-4a16-b67c-855ffe50d307
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quel temps maximal est autorisé pour l'ensemble de l'épreuve ?
+choices:
+- id: a41e6bd0-8002-4cc9-842f-0d3b28e40916
+  text: 8 minutes
+- id: 69d5cd73-9d5f-4bbd-8aab-ff329b025796
+  text: 10 minutes
+- id: ae892018-f5ca-41a8-b766-fc76ae49987c
+  text: 16 minutes
+- id: 8691d349-bf94-4f80-90a6-aa076ec66312
+  text: 5 minutes
+correct_choice_ids:
+- a41e6bd0-8002-4cc9-842f-0d3b28e40916
+explanation: L'épreuve se réalise en moins de 8 minutes ; un temps supérieur à 8 minutes
+  est éliminatoire (MFT, mai 2026).
+archived: false

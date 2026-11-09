@@ -1,0 +1,21 @@
+id: af7e3ebc-8c7b-4e2d-8187-93b8a77207b4
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi le déploiement du parachute compte-t-il double à l'examen ?
+choices:
+- id: db49b8d6-aad6-4cd6-99e8-3f59fc424d5c
+  text: Parce qu'il est évalué dans deux épreuves (IPD et DTMR) et que sa non-maîtrise
+    peut coûter des points dans chacune
+- id: ce8217de-72c7-4c93-98c9-450638f7318d
+  text: Parce qu'il est noté sur 40 points
+- id: a50e2eb4-c039-403f-a6f9-481d750f4834
+  text: Parce qu'il est facultatif
+- id: 50241b98-f647-4706-a494-278b41654ac9
+  text: Parce qu'il est évalué uniquement à l'oral
+correct_choice_ids:
+- db49b8d6-aad6-4cd6-99e8-3f59fc424d5c
+explanation: Le déploiement du parachute est intégré aux épreuves n° 5 et n° 8 ; dans
+  chacune, sa non-maîtrise peut entraîner une perte de points (MFT, mai 2026).
+archived: false

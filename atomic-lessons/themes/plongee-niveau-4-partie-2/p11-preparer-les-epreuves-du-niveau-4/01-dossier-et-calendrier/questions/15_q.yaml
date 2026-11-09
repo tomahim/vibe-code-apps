@@ -1,0 +1,21 @@
+id: 2b02b34e-6316-4065-906f-602a4fc449bb
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume le dossier du candidat selon le MFT ?
+choices:
+- id: 7641881f-3f56-4cd4-9710-6f866f666a74
+  text: Licence, 17 ans, niveau 3 ou équivalence, carte RIFA Plongée, contrôle médical,
+    attestations A1 à A4 de moins de 9 mois
+- id: 663016a9-97c0-4c52-a285-1d55ecc1c9d7
+  text: Licence et bonne humeur seulement
+- id: 3e7a2d43-866f-4e58-a79f-a731293c3824
+  text: Niveau 2 et RIFAP
+- id: ebd1fb2f-529e-471b-a228-d601084f5377
+  text: Attestations A1 à A4 puis niveau 3 après l'examen
+correct_choice_ids:
+- 7641881f-3f56-4cd4-9710-6f866f666a74
+explanation: Le dossier cumule licence, âge, niveau 3 (ou équivalence), RIFAP, contrôle
+  médical et attestations A1 à A4 valides (MFT, mai 2026).
+archived: false

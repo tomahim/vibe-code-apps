@@ -1,0 +1,21 @@
+id: 3a1aca5e-faeb-4c61-b52e-c53fe1c5d822
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quels sont le profil et la vitesse de référence de la DTMR, selon le MFT ?
+choices:
+- id: af35ed72-0602-4a9f-b542-99a7c7697284
+  text: Profil linéaire, vitesse de 10 à 12 m/min
+- id: 76d2b16f-2790-4040-8799-a4184ad0db12
+  text: Profil en spirale, 20 m/min
+- id: e9cc5336-8dae-4d8b-9c15-a2274a3234cd
+  text: Profil libre, 6 m/min
+- id: 996b6a51-0ba6-4b80-b9db-008c9d94dcae
+  text: Profil linéaire, 15 à 18 m/min
+correct_choice_ids:
+- af35ed72-0602-4a9f-b542-99a7c7697284
+explanation: Le profil de référence est linéaire et la vitesse de référence est de
+  10 à 12 m/min ; la vitesse peut être contrôlée par tout moyen (instruments, bulles)
+  (MFT, mai 2026). Le manuel donne l'ordre de 10 m/min (p. 378).
+archived: false

@@ -1,0 +1,20 @@
+id: 5fa0a9b9-ffb4-42c1-89ae-d0465b9b8008
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment le scaphandre doit-il être porté pendant l'épreuve ?
+choices:
+- id: 6aae079a-762a-4f72-8ccd-4e8ca7804d89
+  text: Scaphandre sur le dos, bouteille ouverte et détendeur en main
+- id: 401d1712-bd63-467e-800a-68ac9a60908e
+  text: Scaphandre sur le ventre, bouteille fermée
+- id: af44da53-ab50-4ffe-83f7-c8a2a3e4eafb
+  text: Scaphandre posé sur une planche
+- id: 28816669-d25f-4d63-b71b-76113aa48294
+  text: Scaphandre tenu à bout de bras
+correct_choice_ids:
+- 6aae079a-762a-4f72-8ccd-4e8ca7804d89
+explanation: L'épreuve doit être effectuée scaphandre sur le dos, bouteille ouverte
+  et détendeur en main (MFT, mai 2026).
+archived: false

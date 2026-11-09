@@ -1,0 +1,20 @@
+id: 89a635aa-fce8-495d-b75e-f9ee8445e228
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment les candidats effectuent-ils le parcours, selon le MFT ?
+choices:
+- id: 4096a4b5-731d-4919-8b26-f2be265b8c25
+  text: Ils partent ensemble et effectuent un parcours déterminé de 800 m
+- id: 06ada137-cfe1-43c7-9a3f-fe0459db8946
+  text: Ils partent un par un, au couloir
+- id: 783adbfd-c263-42f8-9575-28fb16051782
+  text: Ils choisissent leur distance
+- id: 8e3f00d0-caaf-48b1-a986-a4889878b3cd
+  text: Ils nagent en palanquée de quatre
+correct_choice_ids:
+- 4096a4b5-731d-4919-8b26-f2be265b8c25
+explanation: Les candidats partent ensemble et effectuent un parcours déterminé de
+  800 m (MFT, mai 2026).
+archived: false

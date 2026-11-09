@@ -1,0 +1,21 @@
+id: 8e74132a-a9ed-428b-800c-3a158c46af43
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Comment les points de l'épreuve se répartissent-ils, selon le MFT ?
+choices:
+- id: dfd59cfb-ef6a-4228-9009-871afa81cf18
+  text: Jusqu'à 12 points de temps, plus 1 à 8 points de tenue et d'efficacité du
+    tractage
+- id: 96fca970-0285-4b33-96fc-8df24484bbb2
+  text: 20 points de temps uniquement
+- id: 79d2c775-fabc-4746-a936-a4037966453d
+  text: 10 points de nage et 10 points d'apnée
+- id: 41f2a47f-4c04-45c3-95c5-674e34bb9110
+  text: 5 points de temps et 15 points de style
+correct_choice_ids:
+- dfd59cfb-ef6a-4228-9009-871afa81cf18
+explanation: Le temps donne de 5 à 12 points selon le barème ; 1 à 8 points sont attribués
+  pour la tenue et l'efficacité du tractage (MFT, mai 2026).
+archived: false

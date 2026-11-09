@@ -1,0 +1,22 @@
+id: 74faa048-0075-4c2a-bfc7-922759ab80c2
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels perfectionnements des détendeurs sont au programme, selon le MFT ?
+choices:
+- id: a1ab2927-ed64-4391-a804-5e83740f1844
+  text: La surcompensation au 1er étage, le réglage de l'effet Venturi et l'effet
+    Vortex au 2e étage
+- id: 3e8557e5-af78-4207-82d8-291a22edad9b
+  text: Le turbo-compresseur intégré
+- id: 83db089d-b0a6-40d0-9061-06b06f7492fd
+  text: L'injection électronique
+- id: 70e99afb-c783-4f02-8b3b-32e4b0999fb4
+  text: Le détendeur sans clapet
+correct_choice_ids:
+- a1ab2927-ed64-4391-a804-5e83740f1844
+explanation: 'Surcompensation (1er étage), réglage de l''effet Venturi et effet Vortex
+  (2e étage) : décrire simplement leurs avantages supposés, sans valeurs chiffrées
+  (MFT, mai 2026).'
+archived: false

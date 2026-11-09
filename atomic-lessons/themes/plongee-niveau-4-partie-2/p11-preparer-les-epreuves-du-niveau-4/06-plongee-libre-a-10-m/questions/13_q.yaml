@@ -1,0 +1,21 @@
+id: fa6da30d-2587-4e8e-b852-6967a3dc3a45
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quels critères de notation le manuel cite-t-il pour l'épreuve d'apnée ?
+choices:
+- id: 4f5618a4-e67f-4b81-839d-8e0195919777
+  text: Temps d'immersion, qualité du canard, comportement à 10 m, comportement au
+    retour en surface
+- id: 06db93ce-9b47-4e54-9fb5-126de9e10cc8
+  text: Vitesse de descente uniquement
+- id: 36c7242b-dc68-40e4-97b3-70e827a442c1
+  text: Nombre de cycles respiratoires
+- id: 774abece-ef99-4b13-9a53-84c24e7adda0
+  text: Style de palmage uniquement
+correct_choice_ids:
+- 4f5618a4-e67f-4b81-839d-8e0195919777
+explanation: Le manuel cite le temps d'immersion, la qualité du canard, le comportement
+  à 10 m et le comportement lors du retour en surface (p. 380).
+archived: false

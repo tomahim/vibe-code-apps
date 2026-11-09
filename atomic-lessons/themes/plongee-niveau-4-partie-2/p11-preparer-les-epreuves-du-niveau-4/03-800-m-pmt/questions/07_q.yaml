@@ -1,0 +1,21 @@
+id: 8a0196ef-1259-41f9-9cb2-0c14bb972911
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel temps correspond environ à la moyenne (10/20) au barème du MFT ?
+choices:
+- id: 6eeae79a-0e7d-4f93-b667-0a974d1571e4
+  text: Entre 16 min 01 s et 16 min 30 s (hommes), entre 15 min 31 s et 16 min 10
+    s (femmes)
+- id: 5e745a3d-6541-466a-8adf-3bb6b23642c3
+  text: Entre 12 et 13 minutes pour tous
+- id: bda87c02-c6a7-4683-8713-bef7d31b155e
+  text: Entre 18 et 19 minutes pour tous
+- id: b6832f6b-4d0f-41f2-8855-e069e07b5a43
+  text: Moins de 14 minutes pour tous
+correct_choice_ids:
+- 6eeae79a-0e7d-4f93-b667-0a974d1571e4
+explanation: '10/20 : entre 16 min 01 s et 16 min 30 s (hommes) ; entre 15 min 31
+  s et 16 min 10 s (femmes) (MFT, mai 2026).'
+archived: false

@@ -1,0 +1,21 @@
+id: 97bbb47e-7379-4332-ba89-66bf1229cdfe
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles sont la nature et le coefficient de l'épreuve de matériel, selon le
+  MFT ?
+choices:
+- id: eb75311c-2226-4566-8c5c-9daa77837201
+  text: Une épreuve orale du groupe théorique, coefficient 2
+- id: 8ab745e6-b43d-4115-ac55-a77fb76a45d8
+  text: Une épreuve pratique en piscine, coefficient 1
+- id: edf5e5fa-b736-47fe-ac68-cbccfb644668
+  text: Un QCM écrit, coefficient 3
+- id: d54e262f-f81a-4ab3-a3f7-b66bedcca6f5
+  text: Une épreuve pratique en milieu naturel, coefficient 2
+correct_choice_ids:
+- eb75311c-2226-4566-8c5c-9daa77837201
+explanation: L'épreuve n° 13 « matériel de plongée » est une épreuve orale du groupe
+  3 (théorique), coefficient 2 (MFT, mai 2026).
+archived: false

@@ -1,0 +1,20 @@
+id: 3466d2a2-a64d-4fb6-9fd2-4ef4fc0448ef
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel est le total de points de l'examen, selon le MFT ?
+choices:
+- id: ff083dd4-8fd2-4ee2-a9fc-2145b00ebcd3
+  text: 400 points
+- id: 62f517e7-fe6e-4ebb-9cb1-d3527968bff2
+  text: 500 points
+- id: d8642215-4e44-4b7b-a3c4-c517b40fa07a
+  text: 600 points
+- id: e8fded27-9872-47e4-b01b-61102028208b
+  text: 280 points
+correct_choice_ids:
+- d8642215-4e44-4b7b-a3c4-c517b40fa07a
+explanation: 'L''examen totalise 600 points : 100 (groupe 1) + 280 (groupe 2) + 220
+  (groupe 3) (MFT, mai 2026).'
+archived: false

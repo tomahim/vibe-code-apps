@@ -1,0 +1,22 @@
+id: 43102f69-6a85-4045-9f77-145ada22432f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelles notions élémentaires sur les détendeurs sont exigibles, selon le MFT
+  ?
+choices:
+- id: 724a0e67-f7c3-4cfe-b167-1c244c5f65e9
+  text: Siège, clapet, clapet amont et aval, haute et moyenne pression, pression intermédiaire
+    et ambiante, principe de compensation
+- id: ededaf32-eda7-4e28-b416-bb5c63670138
+  text: La composition chimique des membranes
+- id: 8f306c55-69b2-4615-8a50-4fd3b71f6253
+  text: Les brevets des fabricants
+- id: bc71e177-5537-4b2d-a20a-ea7978abc47c
+  text: La soudure des détendeurs
+correct_choice_ids:
+- 724a0e67-f7c3-4cfe-b167-1c244c5f65e9
+explanation: 'Notions exigibles : siège, clapet, clapet amont/aval, HP, MP, pression
+  intermédiaire et ambiante, principe de compensation (MFT, mai 2026).'
+archived: false

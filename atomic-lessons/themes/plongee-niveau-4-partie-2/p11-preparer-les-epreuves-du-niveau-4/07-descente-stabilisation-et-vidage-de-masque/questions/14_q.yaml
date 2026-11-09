@@ -1,0 +1,20 @@
+id: 165a066a-af11-4be8-9769-0ee560339622
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle variation de profondeur est éliminatoire, selon le MFT ?
+choices:
+- id: 4eeef33e-b06b-4920-82a5-2b88314adc00
+  text: Plus ou moins 2 m autour de la profondeur plancher
+- id: cb15682d-d008-48e5-ad02-ed294537e04b
+  text: Plus ou moins 10 m
+- id: 11545236-5b84-4d5d-9ef7-9d8ef73986bb
+  text: Plus ou moins 50 cm
+- id: 8b7a9918-b4d9-4698-9b28-4f36bc3e3de5
+  text: Aucune variation n'est éliminatoire
+correct_choice_ids:
+- 4eeef33e-b06b-4920-82a5-2b88314adc00
+explanation: Une variation de +/- 2 m autour de la profondeur plancher est éliminatoire
+  (MFT, mai 2026).
+archived: false

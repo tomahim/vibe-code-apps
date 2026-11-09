@@ -1,0 +1,20 @@
+id: cb3f8458-0075-4555-b2fc-1da4ca34a90a
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi nager droit sur le parcours compte-t-il ?
+choices:
+- id: f0f30da6-f5f2-4a29-9d58-4788175bb9ff
+  text: 'L''épreuve est limitée à 16 minutes : les mètres en trop coûtent du temps'
+- id: b680d728-ac24-4fa3-9f6b-beff851f6ed1
+  text: Le jury pénalise les zigzags
+- id: f6f228f5-66db-4f90-8fa6-628ea9bcaf95
+  text: Le parcours n'est pas matérialisé
+- id: 0133f58a-61c7-4c9e-a0f3-c31fd8c58513
+  text: Cela ne compte pas
+correct_choice_ids:
+- f0f30da6-f5f2-4a29-9d58-4788175bb9ff
+explanation: 'Le parcours déterminé est à réaliser en moins de 16 minutes : suivre
+  la ligne évite de nager des mètres superflus (MFT, mai 2026).'
+archived: false

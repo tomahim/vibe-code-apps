@@ -1,0 +1,20 @@
+id: 130b4f37-b1f2-480a-851f-fa99a667099d
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Qui organise l'examen du niveau 4, selon le MFT ?
+choices:
+- id: e0f25e1b-b228-41e1-a32c-2562e440eb07
+  text: La CTR, qui peut déléguer à un Codep, un club associatif ou une SCA
+- id: fffc2a1e-19f5-4247-883a-1552e6b458ce
+  text: Chaque moniteur individuellement
+- id: a1e2edfb-469f-4349-9729-77553e7608aa
+  text: La préfecture maritime
+- id: 7150a461-eacb-4a85-a7b3-9ed71e6decb9
+  text: La FFESSM nationale uniquement
+correct_choice_ids:
+- e0f25e1b-b228-41e1-a32c-2562e440eb07
+explanation: L'organisation de l'examen relève de la CTR, qui peut la déléguer à un
+  Codep, un club associatif ou une SCA (MFT, mai 2026).
+archived: false

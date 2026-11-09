@@ -1,0 +1,20 @@
+id: a1ba5ac2-c0eb-41d3-88b7-b09cb4a415df
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Que cherche à démontrer le candidat, selon le MFT ?
+choices:
+- id: 0fed3a80-7ead-4c27-9934-955ae3875cd3
+  text: Une capacité minimale à l'apnée
+- id: 8a9e19ec-00be-43da-8982-ad0af1c3e9b5
+  text: Un record de profondeur
+- id: ece58761-d970-45da-b8a9-8eafd044bd21
+  text: Une apnée de plus de 3 minutes
+- id: 32fd4f74-6455-43a3-91cb-d5b8035a23a4
+  text: Une technique de chasse sous-marine
+correct_choice_ids:
+- 0fed3a80-7ead-4c27-9934-955ae3875cd3
+explanation: L'épreuve de plongée libre à 10 mètres (coef. 1, groupe 1) permet au
+  candidat de démontrer une capacité minimale à l'apnée (MFT, mai 2026).
+archived: false

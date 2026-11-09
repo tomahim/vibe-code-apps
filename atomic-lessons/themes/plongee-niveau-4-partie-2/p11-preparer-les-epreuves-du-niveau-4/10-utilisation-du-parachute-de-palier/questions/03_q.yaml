@@ -1,0 +1,22 @@
+id: 4874924d-1477-4c3a-a7f2-09abc39d6139
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel message le parachute envoie-t-il aux embarcations, selon le manuel ?
+choices:
+- id: d2aac334-9ab9-4617-9847-22d14cf60f65
+  text: Il signale une palanquée au palier ou sur le point de faire surface, pour
+    qu'elles ralentissent et se détournent ou viennent chercher les plongeurs
+- id: 53de2222-5e34-4603-b76b-5f6c590f08ad
+  text: Il signale une pêche en cours
+- id: 7ffbae47-ca28-400f-a615-0b5be44348b2
+  text: Il signale une course de vitesse
+- id: 8a281d36-12e2-45f9-b70b-a3b1ab020d8b
+  text: Il n'a pas de fonction de signalisation
+correct_choice_ids:
+- d2aac334-9ab9-4617-9847-22d14cf60f65
+explanation: 'Le parachute signale une palanquée au palier ou sur le point de faire
+  surface : les embarcations ralentissent et se détournent, ou viennent chercher les
+  plongeurs (p. 379).'
+archived: false

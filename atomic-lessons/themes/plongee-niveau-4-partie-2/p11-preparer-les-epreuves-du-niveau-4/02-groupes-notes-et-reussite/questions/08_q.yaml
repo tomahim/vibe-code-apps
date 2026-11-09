@@ -1,0 +1,20 @@
+id: de54311d-a046-4b7c-95a6-e08bbbc1ea62
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que se passe-t-il si une épreuve n'est pas réalisée ?
+choices:
+- id: 9af0ce22-d23c-424a-8676-4faa65e5b298
+  text: Elle est notée 0 mais rattrapable
+- id: 8034396b-e8c9-47d9-b8bb-5e02cc1f4ded
+  text: Toute épreuve non faite est éliminatoire
+- id: 7ba2d432-96f5-406a-99aa-f220fa747705
+  text: Elle est remplacée par un oral
+- id: 0f1dc38c-6c40-4210-941b-354083496303
+  text: Rien, elle est facultative
+correct_choice_ids:
+- 8034396b-e8c9-47d9-b8bb-5e02cc1f4ded
+explanation: 'Le candidat doit avoir réalisé toutes les épreuves : toute épreuve non
+  faite est éliminatoire (MFT, mai 2026).'
+archived: false

@@ -1,0 +1,21 @@
+id: 8d36593f-75dc-43f2-8dc9-244ba7212664
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que se passe-t-il au retour en surface, selon le MFT ?
+choices:
+- id: 1a12b562-b9d8-4b49-8260-f02e6878d2e5
+  text: Signe OK immédiat, puis 30 secondes sous contrôle du jury pour vérifier l'état
+    de conscience
+- id: b285dd1b-2524-447b-b157-3d80135a9b92
+  text: Le candidat repart pour un second essai
+- id: e4efc354-6348-48cc-bfce-89dc95fc7fcd
+  text: Le jury descend vérifier le fond
+- id: d1112ce3-4fff-42d1-9a72-9e00f67adf69
+  text: Rien, l'épreuve est finie à 10 m
+correct_choice_ids:
+- 1a12b562-b9d8-4b49-8260-f02e6878d2e5
+explanation: Dès la surface, le candidat fait le signe OK et reste 30 secondes sous
+  contrôle du jury pour vérifier son état de conscience (MFT, mai 2026).
+archived: false

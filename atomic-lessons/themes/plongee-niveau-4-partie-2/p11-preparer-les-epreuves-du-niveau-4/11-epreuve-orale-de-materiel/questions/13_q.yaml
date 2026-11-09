@@ -1,0 +1,23 @@
+id: 4e2a84df-2d3f-4423-946f-c15ab2d04cf6
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qu'est-il exigible sur l'ordinateur de plongée, selon le MFT ?
+choices:
+- id: 748ae0a5-ef74-4745-836e-c7fa4fe2157b
+  text: Les principes simples de fonctionnement, les différences de calcul entre table
+    et ordinateur, les réglages et leurs conséquences en plongée
+- id: 43c60e4b-3196-4e3b-80f8-c118b31aa9f8
+  text: La programmation des algorithmes
+- id: 0c5baed5-008b-4087-a7e4-7c70809507ef
+  text: L'électronique embarquée
+- id: d4622161-550c-41b9-a485-2061bb41e0bb
+  text: Le langage informatique des ordinateurs
+correct_choice_ids:
+- 748ae0a5-ef74-4745-836e-c7fa4fe2157b
+explanation: 'Ordinateur : principes simples (aucune notion d''informatique ou d''électronique
+  exigible), différences de calcul table/ordinateur, réglages et conséquences (durcissement,
+  paliers spécifiques, mode planification, mélanges, pression résiduelle) (MFT, mai
+  2026).'
+archived: false

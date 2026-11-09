@@ -1,0 +1,20 @@
+id: 152caa56-4523-40ca-950b-eb367da2aaa0
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel mannequin est utilisé, selon le MFT ?
+choices:
+- id: 4bb664eb-e635-4327-ad84-f4aaf8e171f0
+  text: Un mannequin adulte homologué FFSS, d'un poids apparent de 1,5 kg
+- id: 58d7d66b-1d0a-4c7f-9714-f0d5a137ad2f
+  text: Un mannequin d'enfant de 10 kg
+- id: 2400de6e-049a-4610-8245-8845190ba8fe
+  text: Une bouteille de plongée vide
+- id: ca816924-3baa-414f-8d57-f354880bbb2b
+  text: Un poids de 5 kg sans forme
+correct_choice_ids:
+- 4bb664eb-e635-4327-ad84-f4aaf8e171f0
+explanation: Le mannequin est de type adulte, homologué « FFSS » et agréé pour les
+  épreuves de sauvetage aquatique, d'un poids apparent de 1,5 kg (MFT, mai 2026).
+archived: false

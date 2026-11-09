@@ -1,0 +1,21 @@
+id: c70c0a48-f29c-4cbc-8eeb-6f14783352c9
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: En quoi la DTMR diffère-t-elle de l'épreuve n° 5 (IPD), selon le MFT ?
+choices:
+- id: 6c0017b0-178f-4fbb-9cfe-d58f1d7f26f0
+  text: C'est une démonstration axée sur des critères techniques, qui ne cherche pas
+    à refléter une situation réelle d'assistance
+- id: 4c1d25ae-5c81-49d0-bfd8-e1a331ab1761
+  text: Elle se déroule en piscine
+- id: acb08d0d-aafe-4ed3-a647-8864c8dfa04d
+  text: Elle est plus réaliste que l'IPD
+- id: 2cf802ac-4dc5-4750-aaf8-c63e07681b85
+  text: Elle ne comporte pas de remontée
+correct_choice_ids:
+- 6c0017b0-178f-4fbb-9cfe-d58f1d7f26f0
+explanation: 'Contrairement à l''IPD, la DTMR ne reflète pas la réalité d''une situation
+  d''assistance : l''évaluation est axée sur des critères techniques (MFT, mai 2026).'
+archived: false

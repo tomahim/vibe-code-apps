@@ -1,0 +1,19 @@
+id: 570240e3-584e-4124-a030-5417e43219b4
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle est la validité des attestations d'aptitude, selon le MFT ?
+choices:
+- id: 2804a349-9cd9-4d37-9f30-4d14f7df5b1c
+  text: 3 mois
+- id: 217136fb-8e9a-42d1-964d-b0ccfe40cd0a
+  text: 9 mois
+- id: 07a430cb-f821-4324-a745-0ff4bab47941
+  text: 1 an
+- id: 4602969d-5c33-42fa-bea6-8227930e9e97
+  text: 2 ans
+correct_choice_ids:
+- 217136fb-8e9a-42d1-964d-b0ccfe40cd0a
+explanation: Les aptitudes attestées ont une validité de 9 mois (MFT, mai 2026).
+archived: false

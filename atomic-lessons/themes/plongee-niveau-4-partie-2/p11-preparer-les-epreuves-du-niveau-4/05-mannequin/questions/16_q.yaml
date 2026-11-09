@@ -1,0 +1,22 @@
+id: d35dcefe-ac4d-435a-bde2-639e56761f51
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Pourquoi le volet « tenue et efficacité du tractage » change-t-il la préparation
+  ?
+choices:
+- id: 3304243f-a210-4164-83d1-5840400a2044
+  text: 'Parce que 1 à 8 points récompensent la gestuelle de sauvetage : le chrono
+    seul ne suffit pas'
+- id: 77b13076-d5fa-4aef-8c12-e85a75381cf6
+  text: Parce qu'il est éliminatoire
+- id: 94fac868-7178-486c-b8fb-e1657cdd971a
+  text: Parce qu'il dispense de nager
+- id: 96512801-3032-4258-ad73-1cb03d08ae3e
+  text: Il ne change rien
+correct_choice_ids:
+- 3304243f-a210-4164-83d1-5840400a2044
+explanation: '1 à 8 points sont attribués pour la tenue et l''efficacité du tractage
+  : la qualité de la prise et du remorquage compte autant que le temps (MFT, mai 2026).'
+archived: false

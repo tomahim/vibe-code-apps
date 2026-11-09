@@ -1,0 +1,21 @@
+id: 29ec6c33-c964-4d7f-91a0-5402afa8f342
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quand faut-il lâcher le parachute, selon le manuel ?
+choices:
+- id: 2649c4f1-e6d2-4330-979e-e91e034eda8f
+  text: Après l'avoir gonflé franchement en vérifiant que rien n'entrave sa remontée,
+    et avant d'être entraîné vers la surface
+- id: d71718d2-5697-4333-b161-47eadde4544c
+  text: Immédiatement après l'avoir déroulé
+- id: b799d52c-1666-4f32-b1ad-53180c25384e
+  text: Jamais, on le garde en main
+- id: 1d9c1267-8d22-4aa6-8fae-2e6a1aecf59c
+  text: Uniquement en surface
+correct_choice_ids:
+- 2649c4f1-e6d2-4330-979e-e91e034eda8f
+explanation: On vérifie que rien n'entrave sa remontée, on le gonfle franchement en
+  le maintenant, puis on le lâche avant d'être entraîné vers la surface (p. 379).
+archived: false

@@ -1,0 +1,19 @@
+id: 6e3bdfc8-ce5b-4349-9d0b-7de9abb830b0
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle règle le MFT impose-t-il sur le retournement ?
+choices:
+- id: 2cb7521e-1740-446f-952b-8c1a0cffde48
+  text: Le retournement ne doit pas intervenir avant 35 m
+- id: c1349ae6-91d0-40f0-a007-804b47b0a365
+  text: Le retournement est interdit
+- id: e5442186-11d9-466a-8c8f-680513389e4d
+  text: Le retournement doit se faire à 20 m
+- id: c612bc7e-7a06-4eb4-bf49-9efaeacab3ba
+  text: Aucune règle
+correct_choice_ids:
+- 2cb7521e-1740-446f-952b-8c1a0cffde48
+explanation: Le retournement ne doit pas intervenir avant 35 m (MFT, mai 2026).
+archived: false

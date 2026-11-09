@@ -1,0 +1,20 @@
+id: 69d51c6a-e3a1-49a3-9ede-6c8cf90e495c
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel temps limite le MFT fixe-t-il pour le 500 m ?
+choices:
+- id: 1f0457e4-07dc-4f9d-a63d-c599d56426d1
+  text: Moins de 10 minutes
+- id: 72171403-a540-4bb0-83b1-97149ceb299d
+  text: Moins de 16 minutes
+- id: 2667070b-42e6-4c16-88c0-e7f7cef9a298
+  text: Moins de 20 minutes
+- id: c29f2396-fbe6-4f59-87f2-e648bfc59cc4
+  text: Aucun temps limite
+correct_choice_ids:
+- 72171403-a540-4bb0-83b1-97149ceb299d
+explanation: L'épreuve consiste à réaliser un parcours déterminé de 500 m en moins
+  de 16 minutes (MFT, mai 2026).
+archived: false

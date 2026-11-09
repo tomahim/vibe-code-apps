@@ -1,0 +1,23 @@
+id: db4ece10-f462-4171-975e-edafe33c1cf5
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel enchaînement résume l'épreuve selon le MFT ?
+choices:
+- id: 83606cee-d240-43f5-b663-7a439a6b3722
+  text: Signal, descente verticale tête en bas à vitesse constante, stabilisation
+    à la profondeur plancher, signal, vidage de masque en 3 cycles en une fois, signe
+    OK
+- id: 97e63d6c-09df-4392-bbec-6ca047e60927
+  text: Descente lente, vidage, puis remontée au gilet
+- id: d96c7cf3-f99b-4138-bb9e-2f3596f8190f
+  text: Descente en apnée et vidage en surface
+- id: fa58fc0c-1852-440c-85aa-5a09275879fe
+  text: Stabilisation à 10 m puis vidage
+correct_choice_ids:
+- 83606cee-d240-43f5-b663-7a439a6b3722
+explanation: 'L''épreuve : départ à 3 m sur signal, descente verticale constante,
+  stabilisation à la profondeur plancher, vidage de masque complet au signal, signe
+  OK final (MFT, mai 2026).'
+archived: false

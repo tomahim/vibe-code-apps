@@ -1,0 +1,20 @@
+id: ac83b475-a37a-47fd-a651-2040483640bc
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que vaut environ une descente à 10 m sans stabilisation, selon le MFT ?
+choices:
+- id: b3555c3c-4a60-4d6a-87ca-bb5f764abe01
+  text: Environ 5/20
+- id: 900fcf1f-017a-4a53-9449-e45ff38d8833
+  text: 10/20
+- id: 00278e75-965b-4761-bed6-7867073f9dfb
+  text: 15/20
+- id: 51116022-ba70-4508-9ef8-02d4fb0f0cea
+  text: 20/20
+correct_choice_ids:
+- b3555c3c-4a60-4d6a-87ca-bb5f764abe01
+explanation: 'Si les 10 m sont atteints mais que le plongeur ne peut se stabiliser
+  et remonte vite : environ 5/20 (MFT, mai 2026).'
+archived: false

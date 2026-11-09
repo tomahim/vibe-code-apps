@@ -1,0 +1,21 @@
+id: f4c5ce4b-9c7d-403e-a370-1f6a819b40e9
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quelle vitesse de descente le MFT évalue-t-il ?
+choices:
+- id: 76a95506-7b65-48f7-9ee8-feb61b57b033
+  text: Entre 20 et 30 m/min, constante, éventuellement plus lente sur la fin
+- id: d1520fc5-442d-4698-8b91-ec08c871db9e
+  text: Entre 9 et 12 m/min
+- id: 41cae2cd-5f19-4ffc-a94c-f52fe22f02a8
+  text: 6 m/min
+- id: 89038096-dcaf-4ad2-bc8a-b92c6e282a27
+  text: Plus de 40 m/min
+correct_choice_ids:
+- 76a95506-7b65-48f7-9ee8-feb61b57b033
+explanation: Le MFT évalue une vitesse entre 20 et 30 m/min, constante, éventuellement
+  plus lente sur la fin ; le manuel donne l'ordre de 30 m/min (MFT mai 2026 ; manuel
+  p. 368).
+archived: false

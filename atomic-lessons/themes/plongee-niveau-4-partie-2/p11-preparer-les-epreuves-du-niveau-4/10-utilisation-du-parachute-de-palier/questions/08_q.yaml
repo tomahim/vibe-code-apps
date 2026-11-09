@@ -1,0 +1,23 @@
+id: 7b81a372-c7bb-4cbc-b979-de7110f090db
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment se préparer avant de gonfler le parachute, selon le manuel ?
+choices:
+- id: 0cf12537-2b98-4ce9-813c-1e406620f49b
+  text: Se stabiliser dans la zone désirée (par exemple 6 à 3 m), au besoin vider
+    le gilet pour être en flottabilité légèrement négative, dérouler le parachute
+    et son bout
+- id: 1eeaa830-a822-40f3-b571-f570813e40e3
+  text: Gonfler le gilet au maximum
+- id: f637ba65-fbe7-4029-8aef-d3220aab20a6
+  text: Remonter d'abord en surface
+- id: 2efdc14d-c87a-4d62-a893-de6894abf9e5
+  text: Retirer ses palmes
+correct_choice_ids:
+- 0cf12537-2b98-4ce9-813c-1e406620f49b
+explanation: On se stabilise, on vide éventuellement le gilet pour être légèrement
+  négatif (le parachute gonflé agira comme une bouée), on déroule le parachute et
+  son bout - un plomb ou un mousqueton facilite (p. 379).
+archived: false
