@@ -1,0 +1,22 @@
+id: e9bab7d6-477b-4629-b729-1275f0da0889
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quels avantages la disposition « de chaque côté » offre-t-elle, selon le manuel
+  ?
+choices:
+- id: e41e9cb1-7f59-4f1d-8ea0-4d377fdbc548
+  text: Elle facilite le contrôle visuel et permet aux plongeurs de voir la faune
+    montrée.
+- id: 561e8728-89d6-4032-94b2-c612ce05b56a
+  text: Elle fait gagner du temps au briefing.
+- id: b6b4f724-b729-4c56-9646-9e876f41de57
+  text: Elle économise l'air.
+- id: 5d25b5a0-bc0b-4824-9796-537cddae7ad1
+  text: Elle dispense de palier.
+correct_choice_ids:
+- e41e9cb1-7f59-4f1d-8ea0-4d377fdbc548
+explanation: Cette disposition facilite le contrôle visuel tout en permettant aux
+  plongeurs de voir la faune que vous montrez.
+archived: false

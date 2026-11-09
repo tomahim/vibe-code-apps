@@ -1,0 +1,21 @@
+id: 64096f5d-27b0-4a3a-ba92-818909aa0538
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Pourquoi éviter la file indienne en eau trouble ?
+choices:
+- id: c446e235-0a99-4b13-9e66-572a6ba2366f
+  text: En file, chacun ne voit que les palmes du précédent ; de front, l'attention
+    mutuelle est possible.
+- id: c8e1f03d-f41c-4a6e-8520-09c4f1c420de
+  text: La file fait peur aux poissons.
+- id: 8c96266e-f972-4c9b-8ccf-99a3ba9d8d38
+  text: La file use les palmes.
+- id: 014bef1a-8153-4341-882b-c4764221f0a7
+  text: La file est plus lente.
+correct_choice_ids:
+- c446e235-0a99-4b13-9e66-572a6ba2366f
+explanation: De front, les plongeurs se voient mutuellement ; en file, chacun ne voit
+  que le devant de palmes du précédent.
+archived: false

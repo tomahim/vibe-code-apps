@@ -1,0 +1,20 @@
+id: e68c9aae-0b94-4047-a1f0-5023f41fd1f0
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: En eaux troubles, comment le manuel recommande-t-il de progresser ?
+choices:
+- id: fe21d6d8-3403-4acc-890d-a5464e2bfc01
+  text: De front, les uns à côté des autres, plutôt que l'un derrière l'autre.
+- id: cff0238d-ee1d-4c53-a6a7-9ee7a95103b2
+  text: En file indienne serrée.
+- id: 716af436-1439-4584-abca-f44271946a83
+  text: Chacun de son côté.
+- id: 2fc06328-7f65-4d00-9eb1-43ddab609267
+  text: En cercle tournant.
+correct_choice_ids:
+- fe21d6d8-3403-4acc-890d-a5464e2bfc01
+explanation: « Mieux vaut avancer de front, les uns à côté des autres, plutôt que
+  l'un derrière l'autre. »
+archived: false
