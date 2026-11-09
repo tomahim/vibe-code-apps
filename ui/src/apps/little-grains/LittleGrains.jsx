@@ -422,19 +422,23 @@ function QuizSession({ fetchUrl, kicker, label = kicker, heading = "PRACTICE QUI
   </div>;
 }
 
-// Total duels won, one bar per player (Thomas, 2026-11-09). Mirrors the
-// backend rule (CHALLENGE_MIN_WIN, also used by the win badges): a win needs
-// at least 3 correct AND strictly more than the other player - ties are not
-// wins. Only weeks with an unlocked ranking can have a winner, so a duel
-// still waiting on the other player never counts or leaks anything.
-function ChallengeWinsChart({ weeks }) {
+// Total duels won, one bar per player, plus the number of ties as a separate
+// gray bar (Thomas, 2026-11-09). Mirrors the backend rule (CHALLENGE_MIN_WIN,
+// also used by the win badges): a win needs at least 3 correct AND strictly
+// more than the other player - ties are not wins and never feed the badges.
+// A tie is a revealed week where both players finished with the same correct
+// score, whatever the score. Only weeks with an unlocked ranking count, so a
+// duel still waiting on the other player never counts or leaks anything.
+export function ChallengeWinsChart({ weeks }) {
   const ranked = weeks.filter((w) => w.ranking);
   if (!ranked.length) return null;
   const tally = {};
+  let ties = 0;
   for (const w of ranked) {
     const self = w.ranking.find((r) => r.is_self);
     const other = w.ranking.find((r) => !r.is_self);
     if (!self || !other) continue;
+    if (self.correct === other.correct) ties++;
     for (const [name, mine, theirs] of [["You", self, other], [other.name, other, self]]) {
       if (!(name in tally)) tally[name] = 0;
       if (mine.correct >= 3 && mine.correct > theirs.correct) tally[name]++;
@@ -442,14 +446,19 @@ function ChallengeWinsChart({ weeks }) {
   }
   const names = Object.keys(tally);
   if (!names.length) return null;
-  const max = Math.max(1, ...Object.values(tally));
-  return <div className="grains-challenge-wins" role="img" aria-label="Challenges won in total, one bar per player">
+  const max = Math.max(1, ...Object.values(tally), ties);
+  return <div className="grains-challenge-wins" role="img" aria-label="Challenges won in total, one bar per player, plus tied duels">
     <p className="grains-card-index">WINS</p>
     {names.map((name) => <div className="row" key={name}>
       <span className="name">{name}</span>
       <span className="track"><span className="bar" style={{ width: `${(tally[name] / max) * 100}%`, background: name === "You" ? "var(--blue)" : "var(--orange)" }} /></span>
       <b>{tally[name]}</b>
     </div>)}
+    {ties > 0 && <div className="row">
+      <span className="name">Ties</span>
+      <span className="track"><span className="bar" style={{ width: `${(ties / max) * 100}%`, background: "var(--dim)" }} /></span>
+      <b>{ties}</b>
+    </div>}
   </div>;
 }
 
@@ -484,15 +493,42 @@ function ChallengeHistoryChart({ weeks }) {
   </div>;
 }
 
+// Per-question duel review (Thomas, 2026-11-09): after finishing, my
+// right/wrong on each question with the correct answer on my misses; the
+// other player's column appears only once the ranking is unlocked, so an
+// unfinished duel never leaks their answers.
+export function ChallengeReview({ data, review, ranking }) {
+  if (!review?.length) return null;
+  const byId = Object.fromEntries((data.questions || []).map((q) => [q.id, q]));
+  const other = ranking?.find((r) => !r.is_self)?.name;
+  return <div className="grains-challenge-review">
+    <p className="grains-card-index">QUESTION BY QUESTION</p>
+    <div className="row head"><span className="prompt" /><b className="mark">You</b>{other && <b className="mark">{other}</b>}</div>
+    {review.map((row, i) => {
+      const q = byId[row.question_id];
+      const correctText = q?.type === "type_answer_question" ? row.correct_answer
+        : q?.options?.find((o) => o.id === row.correct_answer)?.text;
+      return <div className="row" key={row.question_id}>
+        <span className="prompt">{i + 1}. {q?.prompt || "Question"}
+          {!row.mine && correctText && <small>Answer: {correctText}</small>}</span>
+        <b className={`mark ${row.mine ? "ok" : "ko"}`}>{row.mine ? "✓" : "✗"}</b>
+        {row.other != null && <b className={`mark ${row.other ? "ok" : "ko"}`}>{row.other ? "✓" : "✗"}</b>}
+      </div>;
+    })}
+  </div>;
+}
+
 // The weekly Challenge (Thomas, 2026-11-08): 10 shared questions, 30 seconds
 // each with auto-advance, the ranking locked until both players finished.
-function ChallengeSession({ onClose, onProgress }) {
+// Each answer gets immediate right/wrong feedback (Thomas, 2026-11-09).
+export function ChallengeSession({ onClose, onProgress }) {
   const [data, setData] = useState(null);
   const [history, setHistory] = useState(null);
   const [queue, setQueue] = useState(null); // null: intro screen
   const [choice, setChoice] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(30);
-  const [done, setDone] = useState(null);   // final payload (me + ranking)
+  const [feedback, setFeedback] = useState(null); // the last answer's grading
+  const [done, setDone] = useState(null);   // final payload (me + ranking + review)
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -508,20 +544,26 @@ function ChallengeSession({ onClose, onProgress }) {
   async function submit(answer) {
     try {
       const result = await api("challenge/answers/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer }) });
-      const rest = queue.slice(1);
-      if (rest.length) { setQueue(rest); setChoice(""); setSecondsLeft(data.seconds_per_question); }
-      else { setDone(result); onProgress(); }
+      setFeedback(result);
     } catch (err) { setError(err.message); }
   }
 
-  // The 30-second clock: at zero the question is recorded wrong and the quiz
-  // moves on by itself.
+  function advance() {
+    const rest = queue.slice(1);
+    const result = feedback;
+    setFeedback(null);
+    if (rest.length) { setQueue(rest); setChoice(""); setSecondsLeft(data.seconds_per_question); }
+    else { setDone(result); onProgress(); }
+  }
+
+  // The 30-second clock: at zero the answer is recorded wrong. The clock
+  // pauses on the feedback screen, which moves on with a tap.
   useEffect(() => {
-    if (!question || done) return undefined;
+    if (!question || done || feedback) return undefined;
     if (secondsLeft <= 0) { submit(""); return undefined; }
     const tick = setTimeout(() => setSecondsLeft((n) => n - 1), 1000);
     return () => clearTimeout(tick);
-  }, [question, secondsLeft, done]);
+  }, [question, secondsLeft, done, feedback]);
 
   function start() {
     setQueue(data.questions.filter((q) => !q.answered));
@@ -539,6 +581,7 @@ function ChallengeSession({ onClose, onProgress }) {
           {done.ranking
             ? <ol className="grains-challenge-ranking">{done.ranking.map((row) => <li key={row.rank} className={row.is_self ? "self" : ""}><b>#{row.rank}</b> {row.name} — {row.correct}/{data.size}</li>)}</ol>
             : <p>The ranking unlocks once both players have finished all {data.size} questions.</p>}
+          <ChallengeReview data={data} review={done.review} ranking={done.ranking} />
           <button className="grains-primary" onClick={onClose}>Back to the garden</button></div>
         : question ? <>
           <div className="grains-reader-head"><p>CHALLENGE</p><h2>Question {data.size - queue.length + 1} of {data.size}</h2><span>{secondsLeft} second{secondsLeft === 1 ? "" : "s"} left</span></div>
@@ -550,17 +593,27 @@ function ChallengeSession({ onClose, onProgress }) {
               {question.type === "type_answer_question" ? <div className="grains-typed-answer">
                 <label htmlFor="grains-challenge-answer">Your answer</label>
                 <textarea id="grains-challenge-answer" rows={3} maxLength={255} value={choice}
-                  onChange={(event) => setChoice(event.target.value)}
+                  onChange={(event) => setChoice(event.target.value)} disabled={!!feedback}
                   autoCapitalize="sentences" autoComplete="off" spellCheck="true" />
-              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => <label key={option.id} className={choice === option.id ? "selected" : ""}><input type="radio" name={`challenge-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} /><span>{option.text}</span></label>)}</div>}
-              <button className="grains-primary" disabled={!choice.trim()} onClick={() => submit(choice)}>Lock it in →</button>
+              </div> : <div className="grains-options" role="radiogroup" aria-label="Choose an answer">{question.options.map((option) => {
+                const correctId = feedback ? (feedback.correct ? choice : feedback.correct_answer) : null;
+                const isCorrectOption = !!feedback && option.id === correctId;
+                const isWrongPick = !!feedback && !feedback.correct && option.id === choice;
+                return <label key={option.id} className={[choice === option.id ? "selected" : "", isCorrectOption ? "correct" : "", isWrongPick ? "wrong" : ""].join(" ").trim()}><input type="radio" name={`challenge-${question.id}`} value={option.id} checked={choice === option.id} onChange={() => setChoice(option.id)} disabled={!!feedback} /><span>{option.text}</span>{isCorrectOption && <b className="mark ok">✓</b>}{isWrongPick && <b className="mark ko">✗</b>}</label>;
+              })}</div>}
+              {feedback ? <div className={`grains-feedback ${feedback.correct ? "correct" : "incorrect"}`} role="status">
+                <strong>{feedback.correct ? feedback.carrot_earned ? "That’s right! +1 carrot" : "That’s right!" : "Not quite."}</strong>
+                {!feedback.correct && feedback.correct_answer && question.type === "type_answer_question" && <p className="grains-correct-answer">An accepted answer: <b>{feedback.correct_answer}</b></p>}
+                <Markdown source={feedback.explanation} />
+                <button className="grains-primary" onClick={advance}>{queue.length > 1 ? "Next question →" : "See the result →"}</button>
+              </div> : <button className="grains-primary" disabled={!choice.trim()} onClick={() => submit(choice)}>Lock it in →</button>}
             </div>
           </div></>
         : <div className="grains-reader-content">
           <div className="grains-quest-note">
             <p className="grains-card-index">CHALLENGE · {data.week_key}</p>
             <h2>This week's duel</h2>
-            <p>{data.size} questions picked at random from the general-knowledge paths — read or not. {data.seconds_per_question} seconds each, then it moves on. Same questions for both players.</p>
+            <p>{data.size} questions picked at random from the general-knowledge paths — read or not. {data.seconds_per_question} seconds each, and you see right away if you were right. Same questions for both players.</p>
             {data.me.answered > 0 && <p>You have answered {data.me.answered} of {data.size}.</p>}
             {data.me.finished
               ? <div>
@@ -568,6 +621,7 @@ function ChallengeSession({ onClose, onProgress }) {
                 {data.ranking
                   ? <ol className="grains-challenge-ranking">{data.ranking.map((row) => <li key={row.rank} className={row.is_self ? "self" : ""}><b>#{row.rank}</b> {row.name} — {row.correct}/{data.size}</li>)}</ol>
                   : <p>The ranking unlocks once both players have finished.</p>}
+                <ChallengeReview data={data} review={data.review} ranking={data.ranking} />
               </div>
               : <button className="grains-primary" onClick={start}>{data.me.answered > 0 ? "Continue the challenge" : "Take the challenge"}</button>}
             {history?.length > 0 && <div className="grains-challenge-history"><p className="grains-card-index">PAST WEEKS</p>

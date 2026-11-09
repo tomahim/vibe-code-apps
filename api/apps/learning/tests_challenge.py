@@ -128,6 +128,28 @@ class ChallengeTests(TestCase):
                          [("Thomas", 10, 1), ("Aurore", 0, 2)])
         self.assertTrue(revealed[0]["is_self"] is False and revealed[1]["is_self"])
 
+    def test_review_shows_my_results_and_gates_the_other_player(self):
+        self.client.get("/api/learning/challenge/")
+        week = ChallengeWeek.objects.get(week_key=current_week_key())
+        # Before finishing there is no review at all.
+        self.assertNotIn("review", self.client.get("/api/learning/challenge/").json())
+        # First question wrong, the rest right: my column appears at once.
+        self.answer(week.question_ids[0], "b")
+        last = None
+        for qid in week.question_ids[1:]:
+            last = self.answer(qid)
+        review = last.json()["review"]
+        self.assertEqual([row["mine"] for row in review], [False] + [True] * 9)
+        self.assertEqual(review[0]["correct_answer"], "a")
+        # The other player is still playing: her column stays hidden.
+        self.assertTrue(all(row["other"] is None for row in review))
+        mine = self.client.get("/api/learning/challenge/").json()["review"]
+        self.assertEqual([row["mine"] for row in mine], [False] + [True] * 9)
+        # Once both finished, the review shows both columns.
+        self.finish_week(self.aurore)
+        revealed = self.client.get("/api/learning/challenge/").json()["review"]
+        self.assertEqual([row["other"] for row in revealed], [True] * 10)
+
     def test_challenge_wins_badge_rule_counts_strict_wins_only(self):
         from apps.learning.badges import History
 
