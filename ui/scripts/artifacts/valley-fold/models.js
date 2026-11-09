@@ -100,7 +100,7 @@ VF.models = (function () {
       { text: 'Fold the top point behind.',
         ops: [mk([-1, 0.45], [-0.45, 1], [-1, 1], 'm', { group: 4 })] },
       { text: 'Turn the face upright - ears up, chin down. Draw on whiskers!',
-        ops: [spinZ(7 * Math.PI / 4)] }
+        ops: [spinZ(7 * Math.PI / 4)], cam: { pitch: 0.3, yaw: 0 } }
     ]
   });
 
@@ -218,22 +218,22 @@ VF.models = (function () {
     slug: 'heart', name: 'Easy Heart', diff: 4, color: '#e07856',
     blurb: 'The classic Valentine heart, from one square.',
     steps: [
-      { text: 'Start with the colored side down. Fold in half diagonally, top corner to bottom corner, then unfold.',
+      { text: 'Start colored side down. Fold the top-left corner to the bottom-right corner, crease, and unfold.',
         ops: [flipX()].concat(precreaseTo([-1, 1], [1, -1], 'v', 'h1')) },
-      { text: 'Fold the top corner down to the center point.',
-        ops: [foldTo([-1, 1], [0, 0], 'v', { group: 1 })] },
-      { text: 'Fold the bottom corner up to the top corner.',
-        ops: [foldTo([1, -1], [-1, 1], 'v', { group: 2 })] },
-      { text: 'Fold the right corner up to the top - the first lobe of the heart.',
-        ops: [foldTo([1, 1], [-1, 1], 'v', { group: 3 })] },
-      { text: 'Fold the left corner up to the top - the second lobe.',
-        ops: [foldTo([-1, -1], [-1, 1], 'v', { group: 4 })] },
-      { text: 'Fold the top-right point behind to round the first lobe.',
-        ops: [mk([-0.3, 1], [0, 0.7], [0, 1], 'm')] },
-      { text: 'Fold the top-left point behind to round the other lobe.',
-        ops: [mk([-1, 0.3], [-0.7, 0], [-1, 0], 'v')] },
-      { text: 'Turn the heart upright - point down, lobes up. Done!',
-        ops: [spinZ(7 * Math.PI / 4)] }
+      { text: 'Fold the top-right corner to the bottom-left corner, crease, and unfold.',
+        ops: precreaseTo([1, 1], [-1, -1], 'v', 'h2') },
+      { text: 'Fold the top-right corner down to the center of the paper.',
+        ops: [foldTo([1, 1], [0, 0], 'v', { group: 1 })] },
+      { text: 'Fold the bottom-left corner up to meet the folded edge.',
+        ops: [foldTo([-1, -1], [0.5, 0.5], 'v', { group: 2 })] },
+      { text: 'Fold the left corner up so its edge lies along the center crease - the first lobe.',
+        ops: [foldTo([-1, 0.5], [0.5, 0.5], 'v', { group: 3 })] },
+      { text: 'Fold the bottom corner up the same way - the second lobe, with the cleft between them.',
+        ops: [foldTo([0.5, -1], [0.5, 0.5], 'v', { group: 4 })] },
+      { text: 'Fold the two top points behind to round the lobes. Turn the heart upright - lobes up, point down. Done!',
+        ops: [mk([0.02, 1.22], [1.22, 0.02], [0.75, 0.75], 'm', { group: 5 })] },
+      { text: 'Your heart is done!',
+        ops: [spinZ(Math.PI / 4)], cam: { pitch: 0.35, yaw: 0 } }
     ]
   });
 
@@ -278,16 +278,18 @@ VF.models = (function () {
         ops: [foldTo([1, -1], [0, 0], 'v', { group: 4 })] },
       { text: 'Turn the model over.',
         ops: [flipX()] },
-      { text: 'Fold all four corners to the center again.',
-        ops: [foldTo([1, 1], [0, 0], 'v', { group: 5 })] },
+      { text: 'Fold the four new corners to the center again. First corner.',
+        ops: [foldTo([1, 0], [0, 0], 'v', { group: 5 })] },
       { text: 'Second corner to the center.',
-        ops: [foldTo([-1, 1], [0, 0], 'v', { group: 6 })] },
+        ops: [foldTo([0, 1], [0, 0], 'v', { group: 6 })] },
       { text: 'Third corner to the center.',
-        ops: [foldTo([-1, -1], [0, 0], 'v', { group: 7 })] },
+        ops: [foldTo([-1, 0], [0, 0], 'v', { group: 7 })] },
       { text: 'Fourth corner to the center.',
-        ops: [foldTo([1, -1], [0, 0], 'v', { group: 8 })] },
-      { text: 'Fold in half, then slip your thumbs and fingers into the four pockets and push them together. Ask a question, pick a color.',
-        ops: [foldTo([0, 1], [0, -1], 'v', { group: 9 })] }
+        ops: [foldTo([0, -1], [0, 0], 'v', { group: 8 })] },
+      { text: 'Turn the model over - the four pocket openings are on this side.',
+        ops: [flipX()] },
+      { text: 'By hand now, past what this animation can show: crease the square in half both ways, then slide two thumbs and two fingers into the four pockets and push them gently together. The fortune teller pops into 3D - write fortunes inside!',
+        ops: [] }
     ]
   });
 

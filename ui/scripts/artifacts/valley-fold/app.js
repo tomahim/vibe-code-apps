@@ -228,6 +228,7 @@
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    if (cur && cur.snaps) cam.dist = fitDistFor(cur.step);
   }
   window.addEventListener('resize', resize);
 
@@ -259,13 +260,21 @@
     cam.dist = Math.max(1.6, Math.min(9, cam.dist * (1 + e.deltaY * 0.001)));
   }, { passive: false });
   viewport.addEventListener('dblclick', function () {
-    cam.yaw = -0.6; cam.pitch = 0.95; cam.dist = fitDist();
+    cam.yaw = -0.6; cam.pitch = 0.95; cam.dist = fitDistFor(cur.step);
   });
 
-  function fitDist() {
-    var b = E.bounds(cur.snaps[cur.snaps.length - 1]);
-    var r = Math.max(1, Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1]) / 2);
-    return Math.max(3.2, r * 3.1);
+  /* fit the current step's paper fully inside the view, whatever the aspect */
+  function fitDistFor(k) {
+    var b = E.bounds(cur.snaps[k == null ? cur.step : k]);
+    var hw = (b.max[0] - b.min[0]) / 2, hh = (b.max[1] - b.min[1]) / 2;
+    var cy = Math.abs(Math.cos(cam.yaw)), sy = Math.abs(Math.sin(cam.yaw));
+    var cp = Math.cos(cam.pitch);
+    var exH = hw * cy + hh * sy;         /* screen-horizontal half-extent */
+    var exV = (hw * sy + hh * cy) * cp;  /* screen-vertical half-extent (flat paper) */
+    var tf = Math.tan(camera.fov * Math.PI / 360);
+    var asp = camera.aspect || 1;
+    var d = Math.max(exV / tf, exH / (tf * asp));
+    return Math.max(2.0, d * 1.18 + 0.3);
   }
 
   /* ---------------- animation loop ---------------- */
@@ -299,6 +308,12 @@
     step = Math.max(0, Math.min(cur.model.steps.length, step));
     cur.step = step; cur.t = (t == null ? 1 : t);
     recenter();
+    var stCam = cur.model.steps[step - 1];
+    if (stCam && stCam.cam) {
+      if (stCam.cam.pitch != null) cam.pitch = stCam.cam.pitch;
+      if (stCam.cam.yaw != null) cam.yaw = stCam.cam.yaw;
+    }
+    cam.dist = fitDistFor(step);
     if (!keepPlay) cur.playing = false;
     rebuildMeshes(); renderStepUI(); updateDiagram();
   }
@@ -381,7 +396,9 @@
     var step = Math.min(n, Math.floor(v) + 1);
     var t = Math.min(1, v - Math.floor(v));
     if (v <= 0) { step = 0; t = 1; }
+    var stepChanged = step !== cur.step;
     cur.step = step; cur.t = step === 0 ? 1 : Math.max(0.02, t);
+    if (stepChanged) { recenter(); cam.dist = fitDistFor(cur.step); }
     cur.playing = false;
     rebuildMeshes(); renderStepUI(); updateDiagram();
   });
@@ -406,7 +423,7 @@
     gotoStep(parseInt(params.get('step'), 10) || 0, params.get('t') != null ? parseFloat(params.get('t')) : 1);
   }
   if (params.get('top') === '1') { cam.pitch = 0.03; cam.yaw = 0; }
-  cam.dist = fitDist();
   resize();
+  cam.dist = fitDistFor(cur.step);
   requestAnimationFrame(frame);
 })();
