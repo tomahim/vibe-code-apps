@@ -615,7 +615,9 @@ export function ChallengeSession({ onClose, onProgress }) {
             <h2>This week's duel</h2>
             <p>{data.size} questions picked at random from the general-knowledge paths — read or not. {data.seconds_per_question} seconds each, and you see right away if you were right. Same questions for both players.</p>
             {data.me.answered > 0 && <p>You have answered {data.me.answered} of {data.size}.</p>}
-            {data.me.finished
+            {data.size === 0
+              ? <p>No duel questions available this week — check back once new general-knowledge questions arrive.</p>
+              : data.me.finished
               ? <div>
                 <p>You finished: {data.me.correct} of {data.size} correct.</p>
                 {data.ranking
