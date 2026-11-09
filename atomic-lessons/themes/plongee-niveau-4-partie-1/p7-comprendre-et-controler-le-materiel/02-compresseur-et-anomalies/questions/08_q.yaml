@@ -1,0 +1,20 @@
+id: e8fd7ade-510e-4cb3-a4a3-4bbf19f213a9
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelles causes le manuel donne-t-il pour un démarrage impossible ?
+choices:
+- id: 5afd1816-5d8e-4fb4-8e20-cd2eb442aa7e
+  text: Panne moteur, défaut d'alimentation ou compresseur grippé.
+- id: 77cb4a5e-e57a-4ae8-b8e2-63c097cf7754
+  text: Filtre d'aspiration propre et huile à niveau.
+- id: b2621a33-5a70-4cdb-b107-574efba6ea99
+  text: Pression trop faible dans les bouteilles à gonfler.
+- id: ff68f18f-4ae9-49fb-8282-e18ef1951b23
+  text: Cahier d'entretien mal tenu par le préposé.
+correct_choice_ids:
+- 5afd1816-5d8e-4fb4-8e20-cd2eb442aa7e
+explanation: 'Démarrage impossible : panne moteur, défaut d''alimentation ou compresseur
+  grippé. La notice du constructeur est indispensable pour un entretien correct.'
+archived: false

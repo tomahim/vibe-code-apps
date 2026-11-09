@@ -1,0 +1,22 @@
+id: 0dbcdae5-d4c3-4013-975c-33b673b0964c
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quelle limite du piston non compensé le manuel souligne-t-il ?
+choices:
+- id: 63227a9b-ed6a-48eb-b588-226c72f50331
+  text: 'La HP participe au mouvement du mécanisme : le fonctionnement dépend en partie
+    de la pression restante dans la bouteille.'
+- id: 30e6e8f4-bb8c-4669-b865-55109a966de4
+  text: Le piston simple ne fonctionne pas au-delà de 20 mètres.
+- id: 0e8ce36b-ac31-480d-8350-84eb468dbcad
+  text: Le piston simple interdit l'utilisation d'un deuxième étage.
+- id: 68b93d33-cd09-409d-9f3a-0f7146b667d8
+  text: Le piston simple s'use en une seule saison de plongée.
+correct_choice_ids:
+- 63227a9b-ed6a-48eb-b588-226c72f50331
+explanation: Sur un premier étage à piston non compensé, la HP participe au mouvement
+  du mécanisme ; le piston compensé s'en affranchit. Le piston simple garde l'avantage
+  de la robustesse et de la simplicité.
+archived: false

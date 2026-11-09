@@ -1,0 +1,22 @@
+id: a22bdbdc-8b0d-4d47-88d8-08b336f0765c
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: À quoi servent les bouteilles tampons ?
+choices:
+- id: da569072-6014-44d3-8b6c-404d33a2e218
+  text: Stock d'air comprimé immédiatement disponible, rempli pendant les heures creuses,
+    à grande capacité (30, 50 litres) et haute pression (250 à 350 bars).
+- id: 3aa4d322-e759-4fbe-aec7-093aaefdb170
+  text: Elles servent de ballast pour maintenir la rampe au sol.
+- id: f735db57-7780-4ea6-a00b-49a66c7b2809
+  text: Elles remplacent les bouteilles de plongée sous l'eau en secours.
+- id: b648d86b-4cae-4562-b0a3-d5f8629e48e5
+  text: Elles stockent l'huile usagée du compresseur avant recyclage.
+correct_choice_ids:
+- da569072-6014-44d3-8b6c-404d33a2e218
+explanation: 'Les tampons sont des bouteilles de grande capacité (30, 50 litres...)
+  gonflées par exemple à 250, 300 ou 350 bars, remplies pendant les heures creuses
+  : un stock d''air comprimé immédiatement disponible.'
+archived: false

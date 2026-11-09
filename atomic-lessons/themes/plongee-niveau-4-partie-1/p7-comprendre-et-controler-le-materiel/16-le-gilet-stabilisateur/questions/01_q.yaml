@@ -1,0 +1,22 @@
+id: 589ee89c-5abc-4ace-b31a-08e4d5a5e83e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Que couvre le manuel à propos du gilet ?
+choices:
+- id: f89ea1f1-6103-4646-808e-b6b5702f4082
+  text: L'obligation du système gonflable, la règle du direct-system, l'EIF à bord
+    ; pas la mécanique interne (purges, inflateur).
+- id: 344aa259-d5fd-43ca-9da2-181b791ed851
+  text: Le fonctionnement détaillé des purges et de l'inflateur.
+- id: 3b0fc9f1-20ee-4e7b-abcd-2b11adb42edd
+  text: La fabrication des vessies et des sangles.
+- id: a5ec6b94-38dd-4565-8da4-04d231e74122
+  text: Uniquement les marques et les prix.
+correct_choice_ids:
+- f89ea1f1-6103-4646-808e-b6b5702f4082
+explanation: 'Point d''honnêteté : la mécanique interne du gilet (purges, inflateur)
+  n''est pas décrite par le manuel ; l''obligation, la règle du direct-system et l''EIF,
+  si.'
+archived: false

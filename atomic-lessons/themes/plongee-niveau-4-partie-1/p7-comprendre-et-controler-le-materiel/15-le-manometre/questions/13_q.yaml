@@ -1,0 +1,21 @@
+id: 1434b07a-b2a0-42ce-bf38-34af67f80828
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Troisième idée à retenir :'
+choices:
+- id: 7cd348d2-7d0b-442d-afbd-a97c14d3061c
+  text: Le mécanisme interne du manomètre n'est pas couvert par le manuel ; son usage,
+    lui, l'est partout.
+- id: dc9cef7d-8616-46de-ab9d-9be0859a1ef4
+  text: Le manuel détaille le tube et l'aiguille du manomètre.
+- id: 47cd9cb7-193d-401a-aa8b-16d53487f583
+  text: Le manomètre ne sert qu'en piscine.
+- id: 6bb44bae-1781-4976-ae15-0da987faaf1d
+  text: Le manomètre est une pièce jetable.
+correct_choice_ids:
+- 7cd348d2-7d0b-442d-afbd-a97c14d3061c
+explanation: 'Idée 3 : pas de mécanique interne de l''instrument dans le manuel ;
+  le branchement, l''obligation et les usages, si.'
+archived: false

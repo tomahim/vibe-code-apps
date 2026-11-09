@@ -1,0 +1,13 @@
+id: 22b2ff7a-8cc7-4ae5-ae92-5473415384aa
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: Quel nom porte le liquide blanchâtre produit par la séparation de l'eau et
+  de l'huile dans le séparateur ?
+accepted_answers:
+- Condensats
+- condensat
+- Les condensats
+explanation: La séparation produit un liquide blanchâtre appelé condensats ; la qualité
+  de l'air est directement liée à la fréquence de leur évacuation.
+archived: false

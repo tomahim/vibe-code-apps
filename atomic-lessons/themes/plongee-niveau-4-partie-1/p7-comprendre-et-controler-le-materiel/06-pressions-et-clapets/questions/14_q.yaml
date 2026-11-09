@@ -1,0 +1,21 @@
+id: 4836b413-d69b-4eb4-b66f-9e36e6f2468c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment le détendeur sait-il que le plongeur inspire ?
+choices:
+- id: cc4aa8a5-dded-4fe1-b8b4-16773139191f
+  text: L'inspiration crée une dépression dans la chambre sèche, qui déclenche la
+    réaction en chaîne du mécanisme.
+- id: 29d7cc76-8223-433b-8c34-2dd100c3e0fa
+  text: Un capteur électrique dans l'embout détecte le flux d'air.
+- id: 15112b7b-a452-4d7e-a082-958953e1eee9
+  text: Le plongeur appuie sur le bouton purge à chaque inspiration.
+- id: 23aa3c99-813d-40d5-aa76-7fd58388947a
+  text: La descente en profondeur déclenche automatiquement le débit.
+correct_choice_ids:
+- cc4aa8a5-dded-4fe1-b8b4-16773139191f
+explanation: 'Le mécanisme ne délivre de l''air que lorsque l''inspiration crée une
+  dépression dans la chambre sèche du deuxième étage : membrane, levier, clapet.'
+archived: false

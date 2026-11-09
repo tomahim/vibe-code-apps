@@ -1,0 +1,20 @@
+id: 77dbe850-7805-4f43-9f46-79529b2b5872
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelle norme le manuel cite-t-il pour les détendeurs ?
+choices:
+- id: 71e891b6-99ef-4f2e-81ad-6cefb597a96c
+  text: EN 250.
+- id: 0fdb7428-565b-4b2c-8fe5-fff4170a3e22
+  text: ISO 9001.
+- id: c2b285b4-1ebb-49c4-8859-678becc4aaa8
+  text: CE 1010.
+- id: fde47d08-08cb-42fe-bae3-d6fe28043e31
+  text: NF 404.
+correct_choice_ids:
+- 71e891b6-99ef-4f2e-81ad-6cefb597a96c
+explanation: Le manuel rappelle que les détendeurs répondent à la norme EN 250, qui
+  fixe des exigences de sécurité pour le matériel commercialisé.
+archived: false

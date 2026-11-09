@@ -1,0 +1,21 @@
+id: 9cbf39ce-a4dc-4f05-837b-2c7670b48a37
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quelle règle le manuel associe-t-il à la lecture du manomètre au gonflage
+  ?
+choices:
+- id: 551734bc-bb5e-46a0-90f1-49ec51ba648c
+  text: Ne jamais dépasser la pression de chargement de la bouteille.
+- id: 175c1eba-fe9c-42e6-a1b8-4d84d5d788ea
+  text: Toujours arrêter à 100 bars exactement.
+- id: 08326254-ab94-400d-b093-d3f9f9ad013a
+  text: Gonfler uniquement de nuit.
+- id: e34d062c-a4c8-4115-9ce9-06aee42cec1a
+  text: Ne jamais regarder le manomètre pendant le gonflage.
+correct_choice_ids:
+- 551734bc-bb5e-46a0-90f1-49ec51ba648c
+explanation: 'Règle du manuel au gonflage : surveiller le manomètre de la rampe et
+  ne jamais dépasser la « pression de chargement » de la bouteille.'
+archived: false

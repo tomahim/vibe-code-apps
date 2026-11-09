@@ -1,0 +1,21 @@
+id: 6d025c8c-69b7-45b5-b8e8-513173075cb7
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: À l'expiration, quel est l'état du premier étage ?
+choices:
+- id: 04b95308-53c8-403a-8296-a6e7ab1d19f1
+  text: 'La PI n''étant plus consommée, elle repousse le piston contre son siège :
+    l''arrivée HP est bloquée.'
+- id: cd616268-65bd-4f96-af52-9b115eecf2a3
+  text: Le piston reste grand ouvert pour préparer l'inspiration suivante.
+- id: 7354e14f-ac83-47c0-aaa1-041dc2e844d7
+  text: Le premier étage se met en débit continu pour évacuer l'air expiré.
+- id: d4aa1218-df77-4912-97f1-05a9aab5e59b
+  text: Le premier étage bascule sur la réserve de la bouteille.
+correct_choice_ids:
+- 04b95308-53c8-403a-8296-a6e7ab1d19f1
+explanation: 'À l''expiration, la PI remonte (elle n''est plus consommée) et repousse
+  le piston contre son siège : l''air HP est bloqué jusqu''à la prochaine inspiration.'
+archived: false

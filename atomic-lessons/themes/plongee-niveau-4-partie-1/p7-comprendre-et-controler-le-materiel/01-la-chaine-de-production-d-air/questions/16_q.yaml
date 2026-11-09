@@ -1,0 +1,23 @@
+id: eff06a7f-7dc6-40f3-b921-6af13c622892
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel sur les purges manuelles et l'analyse de l'air ?
+choices:
+- id: 0b192175-2815-4a29-822d-edfa5e74c14e
+  text: Ouvrir la purge au moins 3 secondes toutes les 6 à 8 minutes ; faire analyser
+    l'air périodiquement, surtout après une intervention lourde.
+- id: e8e94c05-cfeb-4145-98f1-3424b28196e6
+  text: Purger une fois par mois suffit ; l'analyse de l'air n'est jamais nécessaire.
+- id: 852e385c-134d-4b9d-b052-78bad8c306cc
+  text: La purge se fait uniquement en fin de journée, pendant 10 minutes.
+- id: 66931c0e-74b0-44dc-9eae-5cfa4ef26db2
+  text: L'analyse de l'air est obligatoire avant chaque gonflage de bouteille.
+correct_choice_ids:
+- 0b192175-2815-4a29-822d-edfa5e74c14e
+explanation: Avec des purges manuelles, la personne chargée du gonflage ouvre la purge
+  pendant au moins 3 secondes toutes les 6 à 8 minutes (ou selon les normes du constructeur)
+  ; il est conseillé de faire analyser l'air périodiquement, en particulier après
+  chaque intervention lourde.
+archived: false

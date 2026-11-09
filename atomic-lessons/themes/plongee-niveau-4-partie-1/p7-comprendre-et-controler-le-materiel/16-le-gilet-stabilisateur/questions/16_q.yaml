@@ -1,0 +1,21 @@
+id: 22473783-d7cf-4438-8021-2cff14dc59db
+position: 16
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Pourquoi vérifier le gilet avant chaque plongée ?
+choices:
+- id: 7125a83f-1911-4c78-be76-ef7826ea5210
+  text: 'C''est le système qui permet de regagner la surface et de s''y maintenir
+    : sa présence et son bon fonctionnement sont vitaux.'
+- id: 577529cb-e7a9-4c11-9aa7-f0598d1127f0
+  text: Pour éviter qu'il ne se perde sur le bateau.
+- id: 279de284-c1d9-45bd-b66d-c91f30d87111
+  text: Pour économiser l'air du direct-system.
+- id: ea9f26db-379b-42ce-bd44-fe569a2c7cc2
+  text: Parce que la vessie se dégonfle toujours en stockage.
+correct_choice_ids:
+- 7125a83f-1911-4c78-be76-ef7826ea5210
+explanation: 'Le gilet est un équipement de sécurité : regagner la surface et s''y
+  maintenir. Sa présence et son bon fonctionnement se vérifient avant chaque plongée.'
+archived: false

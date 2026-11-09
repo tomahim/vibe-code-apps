@@ -1,0 +1,21 @@
+id: 3084409e-c101-40e7-a79c-e732f96b9ca5
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quels sont les trois critères principaux de choix d'un compresseur selon le
+  manuel ?
+choices:
+- id: ad60db9a-abd4-4ae0-8aa1-dc92e12c129f
+  text: Le débit, la pression de service et le mode d'entraînement.
+- id: 1e6d75a5-72d9-461d-a230-0e5937fba40c
+  text: Le prix, la marque et la couleur du carter.
+- id: d08a2f64-1e12-4669-bf4c-c3a376afe596
+  text: Le poids, le bruit et la longueur des flexibles.
+- id: 97c24a52-aba4-4652-a9cc-af043ae4fed1
+  text: La puissance électrique, le nombre de roues et le réservoir.
+correct_choice_ids:
+- ad60db9a-abd4-4ae0-8aa1-dc92e12c129f
+explanation: 'Trois critères principaux : le débit, la pression de service et le mode
+  d''entraînement. La motorisation détermine le débit de l''appareil.'
+archived: false

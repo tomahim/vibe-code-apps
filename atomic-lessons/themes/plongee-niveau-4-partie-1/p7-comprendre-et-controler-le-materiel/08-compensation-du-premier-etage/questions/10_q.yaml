@@ -1,0 +1,21 @@
+id: 896b38c3-f43d-4a60-9c27-21a04fa555a5
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que conserve un premier étage compensé malgré la neutralisation de la HP ?
+choices:
+- id: ecbb3647-f74f-4a01-8145-50e6f7a90dc9
+  text: 'L''action de la pression ambiante : le mécanisme reste informé de la profondeur,
+    et la PI reste au-dessus de la pression ambiante.'
+- id: 4087ec4e-3c99-4144-8813-1d1159a95b8f
+  text: La dépendance à la pression de la bouteille pour l'ouverture.
+- id: 79a126f6-e239-47f1-a0b9-08996f131c7f
+  text: Le filtre HP, qui n'est plus nécessaire.
+- id: bc08995a-44fe-4fcc-8b7b-5f11e39fd320
+  text: La chambre sèche, qui disparaît au profit d'une chambre humide.
+correct_choice_ids:
+- ecbb3647-f74f-4a01-8145-50e6f7a90dc9
+explanation: 'La compensation ne supprime pas l''action de la pression ambiante (chambre
+  humide) : la PI reste définie au-dessus d''elle. Le système reste fermé au repos.'
+archived: false

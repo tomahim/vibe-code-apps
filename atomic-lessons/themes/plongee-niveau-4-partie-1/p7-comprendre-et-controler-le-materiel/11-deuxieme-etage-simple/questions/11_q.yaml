@@ -1,0 +1,20 @@
+id: afd4d614-cf21-47e9-8f5b-92519a8bb4f9
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels réflexes face à une entrée d'eau au deuxième étage ?
+choices:
+- id: 4659c85c-e273-4dc8-940e-89175b331706
+  text: Respirer prudemment, utiliser la purge, passer sur l'octopus si nécessaire.
+- id: 61c6b4c8-b97a-43c2-b160-c24c945ef00d
+  text: Retirer immédiatement l'embout et remonter en apnée.
+- id: cdea3e02-79a2-45fe-91eb-e84d77cdc615
+  text: Fermer la bouteille et attendre l'assistance.
+- id: 1c8131bf-04ab-497a-8384-22dcb7ae56c7
+  text: Appuyer sur la purge en continu jusqu'à la surface.
+correct_choice_ids:
+- 4659c85c-e273-4dc8-940e-89175b331706
+explanation: 'Réflexes : respirer prudemment sur l''air restant, chasser l''eau avec
+  la purge, et passer sur l''octopus si le deuxième étage reste noyé.'
+archived: false

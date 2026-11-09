@@ -1,0 +1,21 @@
+id: e3c10fc6-a578-4b28-81e5-b8288b5ca96e
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles sont les trois voies de déperdition décrites par le manuel ?
+choices:
+- id: 77523cb1-826b-42f9-aa12-1ee3ec052f90
+  text: Convection, conduction et ventilation.
+- id: e5fa9a8f-16cb-48e8-bec8-08ea5f365ca9
+  text: Rayonnement, évaporation et osmose.
+- id: b7c1924f-a96d-465c-925d-9950ee88f7e6
+  text: Friction, compression et dilatation.
+- id: 517274a8-c8a5-4324-9132-9c99f0cc0482
+  text: Inspiration, expiration et apnée.
+correct_choice_ids:
+- 77523cb1-826b-42f9-aa12-1ee3ec052f90
+explanation: 'Échanges thermiques : convection (circulation d''eau sur et dans la
+  combinaison), conduction (le corps réchauffe l''eau emprisonnée), ventilation (l''air
+  inspiré est réchauffé et emporte de la chaleur).'
+archived: false

@@ -1,0 +1,20 @@
+id: cc22fbcd-5a42-49c1-acb7-b8857afd03d2
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est le rôle du filtre à l'entrée du premier étage ?
+choices:
+- id: a2415dd5-b1b6-4d10-b82d-64e54c500304
+  text: Protéger le mécanisme des particules venues de la bouteille.
+- id: 5e5b81d7-7358-44ae-b11a-6de3e17f8b49
+  text: Retenir l'humidité de l'air expiré par le plongeur.
+- id: 4b9476ff-1fc5-4bd4-aad8-a3ad0ae33c2c
+  text: Réduire le bruit de l'air dans le flexible PI.
+- id: 33a32b3b-4d7f-42d9-a1f9-8ebff0326044
+  text: Empêcher l'eau de mer de remonter dans la bouteille.
+correct_choice_ids:
+- a2415dd5-b1b6-4d10-b82d-64e54c500304
+explanation: Le filtre, par lequel arrive l'air du bloc, protège le mécanisme des
+  particules ; les joints toriques assurent l'étanchéité en s'écrasant sous la pression.
+archived: false

@@ -1,0 +1,23 @@
+id: afbeeb6f-b95d-4be2-829b-e4f17586f2b7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Dans le manuel, que qualifie principalement le terme « compensé » ?
+choices:
+- id: 2a4b3f75-7fd9-4b7a-9409-abd6e6147992
+  text: 'Le premier étage : la HP y arrive perpendiculairement et ne participe plus
+    au bilan des forces ; une phrase ajoute le cas du 2e étage, qui s''affranchit
+    de la pression ambiante.'
+- id: 140a2057-b237-4b65-859f-46014c86a76c
+  text: 'Uniquement le deuxième étage : son clapet s''équilibre tout seul.'
+- id: bbcf276d-c60d-4c62-8b46-efa78ff5a47e
+  text: 'La bouteille : sa pression se régule d''elle-même.'
+- id: e0eb76b5-53cc-4a4f-9899-44ac637f65b6
+  text: 'Le gilet : ses purges compensent la flottabilité.'
+correct_choice_ids:
+- 2a4b3f75-7fd9-4b7a-9409-abd6e6147992
+explanation: « Compensé » qualifie d'abord le premier étage (HP perpendiculaire, PI
+  stable) ; le manuel ajoute une phrase sur le 2e étage compensé, qui s'affranchit
+  de la pression ambiante et donc de la profondeur.
+archived: false

@@ -1,0 +1,20 @@
+id: ac6ab5b9-9872-4a1c-b105-094be936f3a7
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: À quel étage le manuel associe-t-il une entrée d'eau dans l'embout ?
+choices:
+- id: bc9a9e6c-8987-4733-813b-5d802e08376b
+  text: 'Au deuxième étage : membrane, clapet ou soupape d''expiration.'
+- id: 157b2f67-8c54-47c6-a436-982ab3779f3a
+  text: 'Au premier étage : siège ou clapet HP.'
+- id: bb508bef-7dc1-46a7-85e3-31ea2b508a73
+  text: 'À la robinetterie : joint de sortie.'
+- id: d8dee8d2-561b-4b6d-9807-ff6f009fb3cc
+  text: 'Au manomètre : flexible HP.'
+correct_choice_ids:
+- bc9a9e6c-8987-4733-813b-5d802e08376b
+explanation: 'Tableau des pannes : l''entrée d''eau dans l''embout vient d''un problème
+  au deuxième étage (membrane, clapet, soupape d''expiration).'
+archived: false

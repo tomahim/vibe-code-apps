@@ -1,0 +1,21 @@
+id: 084804a8-2637-4d1d-ba6d-5edf888dae49
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quelles mentions sont gravées sur la robinetterie ?
+choices:
+- id: 738d79a7-c55f-4b14-a889-ca814258c5de
+  text: La pression maximum d'utilisation (ex. 232 bars) et le numéro de série.
+- id: 9b468f95-a37c-48a1-b3ea-f7a2d240dc57
+  text: La date de naissance du propriétaire et son club.
+- id: 7136211b-fd30-463f-ad98-8f8b98ce687a
+  text: Le nom du fabricant de la bouteille et sa couleur.
+- id: bc1a4a73-6b17-41f3-b26d-743ad0d65941
+  text: La date de la dernière plongée et la profondeur atteinte.
+correct_choice_ids:
+- 738d79a7-c55f-4b14-a889-ca814258c5de
+explanation: 'Sont gravés notamment la pression maximum d''utilisation (exemple :
+  232 bars) et le numéro de série - gravé depuis peu pour identifier l''appartenance
+  d''une robinetterie à une bouteille donnée.'
+archived: false

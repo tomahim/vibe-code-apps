@@ -1,0 +1,21 @@
+id: b4a545d0-1631-4f73-899e-02894c3fabda
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pour quelles configurations le gilet + direct-system est-il exigé ?
+choices:
+- id: 8348d162-1e92-46ee-a016-cdbad28840e9
+  text: Plongées en autonomie, plongées encadrées au-delà de 20 m, et encadrant de
+    palanquée.
+- id: 9aa7e1b7-05a0-4cc1-9c13-8cc9a86f70a1
+  text: Uniquement la plongée depuis un bateau.
+- id: e2312c4e-5f4c-4759-9165-d7aca956d32f
+  text: Uniquement la plongée de nuit.
+- id: b8f6636c-dee0-4265-a08f-7dc1f65c992a
+  text: Uniquement les formations en piscine.
+correct_choice_ids:
+- 8348d162-1e92-46ee-a016-cdbad28840e9
+explanation: L'exigence vaut pour les plongées en autonomie, les plongées encadrées
+  au-delà de 20 m, et l'encadrant de palanquée (guide, moniteur).
+archived: false

@@ -1,0 +1,23 @@
+id: c6578fd4-1229-4951-b493-8e2d0194b6c5
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Quelle recommandation transversale le manuel fait-il pour la grande plongée
+  ?
+choices:
+- id: 47071fe2-1e76-4cb5-aa11-c75734a6972e
+  text: Un détendeur compensé, quelle que soit l'architecture, pour la grande plongée
+    ou les plongées régulières au-delà de 20 mètres.
+- id: 2b0fd539-af97-44bf-84b7-cde3f4e2578a
+  text: Un détendeur à membrane obligatoire au-delà de 20 mètres.
+- id: 29ed4c8f-f906-4e5d-a110-979ad2bff8da
+  text: Un premier étage à piston interdit au-delà de 40 mètres.
+- id: c55c66c3-438d-4fa2-bc10-ab7a034425b9
+  text: Deux premiers étages montés sur la même robinetterie.
+correct_choice_ids:
+- 47071fe2-1e76-4cb5-aa11-c75734a6972e
+explanation: Le manuel recommande un détendeur compensé pour la grande plongée ou
+  les plongées régulières au-delà de 20 mètres, que l'architecture soit à piston ou
+  à membrane.
+archived: false

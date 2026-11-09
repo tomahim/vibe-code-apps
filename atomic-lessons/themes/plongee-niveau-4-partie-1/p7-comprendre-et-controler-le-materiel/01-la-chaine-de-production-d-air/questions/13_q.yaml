@@ -1,0 +1,22 @@
+id: 16827669-e82b-4a47-9272-fc37b971becc
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Que contient l'air en phase de compression, et avec quels risques ?
+choices:
+- id: 4e2b7e9b-0623-464e-b4c4-77055f7ef3b0
+  text: 'De l''eau (air ambiant) et de l''huile (lubrification) : rouille, oxydation
+    des raccords, dysfonctionnements des soupapes.'
+- id: 49b558d8-28ff-4059-a1c6-9052ba2ca163
+  text: 'Du sable et du sel : ils rayent les cylindres et bloquent les pistons.'
+- id: 4ce5ee67-9a3f-455a-aa8e-0025450db05a
+  text: 'De l''ozone et de l''azote liquide : ils rendent l''air impropre à la respiration.'
+- id: 62201d11-7ca8-4a24-9781-a82f80e648db
+  text: Du monoxyde de carbone uniquement, en provenance du moteur électrique.
+correct_choice_ids:
+- 4e2b7e9b-0623-464e-b4c4-77055f7ef3b0
+explanation: L'air en compression contient de l'eau (air ambiant aspiré) et de l'huile
+  (lubrification) ; l'eau endommage les pièces et favorise rouille et oxydation, et
+  un excès de liquide peut perturber les soupapes d'aspiration ou de refoulement.
+archived: false

@@ -1,0 +1,21 @@
+id: f976dca1-1910-44e8-ba7a-1e00c606e01d
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce qui déclenche toute la chaîne mécanique du détendeur ?
+choices:
+- id: c72a7eb1-6bde-45c6-b8ce-54efaccdd7b8
+  text: La dépression créée dans la chambre sèche du deuxième étage par l'inspiration.
+- id: ebba1083-0e0e-47ce-9b03-f1da7c77ea01
+  text: La pression de la bouteille qui pousse en permanence sur le piston.
+- id: 35d01ea3-9e5f-4893-a3bc-4e89cf78d79d
+  text: Le ressort du premier étage qui ouvre le clapet par défaut.
+- id: 30e6fe17-2522-49e8-8f05-43b1ce96f31b
+  text: L'expiration du plongeur dans l'embout buccal.
+correct_choice_ids:
+- c72a7eb1-6bde-45c6-b8ce-54efaccdd7b8
+explanation: 'Lors d''une inspiration, l''air à la pression ambiante du deuxième étage
+  est utilisé ; la dépression créée dans la chambre sèche provoque la réaction en
+  chaîne : membrane, levier, clapet.'
+archived: false

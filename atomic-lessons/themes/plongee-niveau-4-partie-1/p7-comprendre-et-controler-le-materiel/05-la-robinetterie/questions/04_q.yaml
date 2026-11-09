@@ -1,0 +1,21 @@
+id: 90f5d686-067a-4d36-8096-5e1be3ca20a3
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels sont les quatre filetages en circulation en Europe ?
+choices:
+- id: 6e856048-7c48-4945-8b90-2ac5918a20de
+  text: 3/4 DIN 259, M18 x 1,5, M25 x 2 (adopté par tous les fabricants en 1998),
+    conique E17.
+- id: a0a819fd-1793-4f79-8c9c-5cf1fc92936b
+  text: M10, M12, M14 et M16 standard.
+- id: e9ed4203-9906-4724-a992-68120e3c8ad1
+  text: UNF, UNC, NPT et BSP uniquement.
+- id: 80863cbd-ae06-4dbb-b0e2-d439ae8453a5
+  text: 'Un seul filetage existe : le M25 x 2 universel.'
+correct_choice_ids:
+- 6e856048-7c48-4945-8b90-2ac5918a20de
+explanation: 'Quatre types de filetage : 3/4 DIN 259 (3/4 gaz), M18 x 1,5, M25 x 2
+  (adopté par tous les fabricants en 1998), conique E17.'
+archived: false

@@ -1,0 +1,21 @@
+id: 5866a6d5-68e2-4133-bfed-701f5ad96190
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Qu'est-ce qu'être homéotherme ?
+choices:
+- id: 0309a37a-79e3-44d2-bd26-2db4bcffd8ae
+  text: Ne pouvoir survivre qu'en maintenant sa température centrale aux alentours
+    de 37 °C.
+- id: 94471846-d308-405b-896f-256991b5bdcd
+  text: Prendre la température de l'eau environnante.
+- id: f6609daf-6419-4730-9cc6-82533020bb5d
+  text: Ne jamais ressentir le froid.
+- id: 1fc88458-c8af-478c-aac0-ea9a51120904
+  text: Produire de la chaleur uniquement en nageant.
+correct_choice_ids:
+- 0309a37a-79e3-44d2-bd26-2db4bcffd8ae
+explanation: 'L''homme est homéotherme : sa température centrale (cerveau, organes
+  du thorax et de l''abdomen) doit rester aux alentours de 37 °C.'
+archived: false

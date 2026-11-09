@@ -1,0 +1,22 @@
+id: 3dfbe065-5012-41d6-960c-e8dc833b322a
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quelles sont les quatre vérifications imposées pour chaque bouteille ?
+choices:
+- id: 9e91548e-ea97-4062-b56a-4d281389c7be
+  text: Date d'épreuve avec poinçon officiel, contrôle visuel annuel (TIV), pression
+    de chargement, bon fonctionnement de la soupape du dispositif.
+- id: c987d147-cfee-49bb-a245-25fd9b03feb4
+  text: Couleur de la peinture, poids, marque et année d'achat.
+- id: fa0ec608-2ae5-4b64-8bfd-3d4f51e7c169
+  text: Propriétaire, club d'appartenance, assurance et licence.
+- id: 44076189-c36f-4a6a-a191-ab919a3dff94
+  text: Température, humidité, altitude et pression atmosphérique.
+correct_choice_ids:
+- 9e91548e-ea97-4062-b56a-4d281389c7be
+explanation: 'Pour chaque bouteille : date d''épreuve avec poinçon officiel, contrôle
+  visuel annuel (autocollant TIV ou attestation reconnue), pression de chargement
+  (PS), bon fonctionnement de la soupape de sécurité du dispositif de chargement.'
+archived: false

@@ -1,0 +1,21 @@
+id: 65b09750-b3c1-4310-8484-675eb1d9f5f4
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pour quel usage le manuel juge-t-il le surcoût d'un détendeur compensé justifié
+  ?
+choices:
+- id: d581e3a0-9039-4a54-9a81-a2ae9bf2a263
+  text: Une activité de grande plongée ou des plongées régulières au-delà de 20 mètres.
+- id: 4d180fc9-a085-4bae-8335-50044440af58
+  text: Uniquement la plongée souterraine en spéléologie.
+- id: b7c3e3c0-bb8d-4f00-9542-6d90ba1a633e
+  text: Les baptêmes de plongée en piscine.
+- id: 6724a41d-8336-4a14-a857-83ad3799f950
+  text: La chasse sous-marine exclusivement.
+correct_choice_ids:
+- d581e3a0-9039-4a54-9a81-a2ae9bf2a263
+explanation: '« Choisir un détendeur » : le surcoût d''un détendeur compensé se justifie
+  pour une activité de grande plongée ou des plongées régulières au-delà de 20 mètres.'
+archived: false

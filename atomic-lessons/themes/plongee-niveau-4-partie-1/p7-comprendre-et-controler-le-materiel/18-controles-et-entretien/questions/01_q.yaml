@@ -1,0 +1,22 @@
+id: 85826438-ac59-406a-8c2b-72e6f555d2ee
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelles sont les consignes d'entretien du détendeur selon le manuel ?
+choices:
+- id: 893f8b0a-1591-4855-bf3d-20750b95aa60
+  text: Rinçage à l'eau douce après chaque plongée bouchon fermé, éviter les chocs,
+    attention au sable, révision annuelle par un spécialiste.
+- id: 5a2885be-9350-44b0-9b8c-0b39e004fadf
+  text: Graissage hebdomadaire du piston par le plongeur.
+- id: f681fa2d-38c4-4dff-8d73-14fefe867069
+  text: Démontage complet après chaque sortie.
+- id: 88e36c2e-1d6b-46e8-887b-ed313ae5d309
+  text: Stockage sous pression, bouteille ouverte.
+correct_choice_ids:
+- 893f8b0a-1591-4855-bf3d-20750b95aa60
+explanation: 'Consignes : rinçage à l''eau douce après chaque plongée en refermant
+  le bouchon du premier étage (retiré pour le séchage), éviter les chocs, attention
+  au sable, révision annuelle par un spécialiste.'
+archived: false

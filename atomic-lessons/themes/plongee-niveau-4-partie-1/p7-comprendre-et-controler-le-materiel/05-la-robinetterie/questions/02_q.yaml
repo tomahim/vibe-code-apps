@@ -1,0 +1,21 @@
+id: d11e08e9-ad11-44b0-925e-594aeed63008
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: À quoi sert le tube de la robinetterie ?
+choices:
+- id: 5eb2d204-39f2-4783-be69-f66e7331ed7c
+  text: Il évite que des corps étrangers (poussière, eau) n'arrivent dans le détendeur
+    quand le plongeur est tête en bas.
+- id: 436d239f-b433-44ad-84c1-2909d2cd2bd5
+  text: Il augmente le débit d'air vers le détendeur en profondeur.
+- id: 46a0ddc6-609b-4f5d-a6e4-3c35955b6049
+  text: Il refroidit l'air avant son entrée dans le premier étage.
+- id: f55c64d3-0f83-4401-b032-f2b82d70f86b
+  text: Il mesure la quantité d'air restante dans la bouteille.
+correct_choice_ids:
+- 5eb2d204-39f2-4783-be69-f66e7331ed7c
+explanation: Le tube évite que des corps étrangers (poussière, eau...) n'arrivent
+  dans le détendeur lorsque le plongeur est tête en bas.
+archived: false

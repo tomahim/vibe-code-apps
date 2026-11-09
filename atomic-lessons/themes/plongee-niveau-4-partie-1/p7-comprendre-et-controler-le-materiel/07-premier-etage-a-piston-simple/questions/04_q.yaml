@@ -1,0 +1,22 @@
+id: 68d813d7-7942-496b-8167-ea753f195fea
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Comment les mécanismes se ferment-ils à la fin de l'inspiration ?
+choices:
+- id: ab77c48a-b36a-4a96-885a-36386867dd55
+  text: 'Les forces s''équilibrent dans les deux étages : le clapet et le piston reviennent
+    sur leurs sièges.'
+- id: a6db8129-8685-4c60-9801-880158848fe3
+  text: Le plongeur appuie sur le bouton purge pour refermer le circuit.
+- id: 5bb0093b-cbd6-442d-8e93-6dcbb5685e97
+  text: La bouteille se ferme automatiquement dès que l'air suffit.
+- id: ab6a63c9-313c-415e-b92a-c1cfe91bc18f
+  text: Le ressort du deuxième étage bloque définitivement le levier.
+correct_choice_ids:
+- ab77c48a-b36a-4a96-885a-36386867dd55
+explanation: 'Lorsque l''inspiration cesse, les forces du détendeur s''équilibrent
+  dans le deuxième et le premier étage, provoquant la fermeture des mécanismes : clapet
+  sur son siège, piston contre son siège.'
+archived: false

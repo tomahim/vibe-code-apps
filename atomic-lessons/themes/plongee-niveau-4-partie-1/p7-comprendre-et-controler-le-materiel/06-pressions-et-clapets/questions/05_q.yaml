@@ -1,0 +1,22 @@
+id: 83ef6e26-4f5d-4627-91e2-8af77da1e147
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est le rôle du clapet et du siège dans chaque étage ?
+choices:
+- id: a2dfd6a7-17a8-4bec-92c5-f59163f3241f
+  text: Le clapet plaqué sur son siège bloque l'air ; écarté, il laisse l'air se détendre
+    dans la chambre suivante.
+- id: a99e35dd-e12f-49b9-bc67-309ea13611e7
+  text: Le siège filtre l'air et le clapet mesure le débit délivré.
+- id: 03bcd2ef-af79-4131-b1eb-14e85bffc32e
+  text: Le clapet régule la température de l'air et le siège son humidité.
+- id: d00b52d5-01c2-42ec-bdf6-e6799e1c71aa
+  text: Le siège amortit les chocs et le clapet bloque l'embout buccal.
+correct_choice_ids:
+- a2dfd6a7-17a8-4bec-92c5-f59163f3241f
+explanation: Tant que le clapet reste plaqué sur son siège, l'air ne passe pas ; quand
+  le mécanisme l'en écarte, l'air se détend dans la chambre suivante. À la fin de
+  l'inspiration, les forces s'équilibrent et le clapet revient sur son siège.
+archived: false

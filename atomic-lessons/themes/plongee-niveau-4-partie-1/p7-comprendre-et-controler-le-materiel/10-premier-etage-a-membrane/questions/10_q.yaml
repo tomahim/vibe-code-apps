@@ -1,0 +1,20 @@
+id: be2d3a03-e11d-4a37-987f-2e1c86bca67b
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quel symptôme trahit une défaillance du siège ou du pointeau ?
+choices:
+- id: 0ac16d2d-1b9c-4f4f-8302-438952434079
+  text: Un débit en continu, dû à la montée anormale de la PI.
+- id: 929a1454-5be7-4522-84b5-d77dd84e45a0
+  text: Une bouteille qui se gonfle toute seule.
+- id: 849defc4-40f5-45ab-b161-615cfdd8a81a
+  text: Un manomètre qui tombe à zéro instantanément.
+- id: 308ac697-7a26-4491-8893-56402039cdcb
+  text: Une eau qui s'infiltre dans la bouteille.
+correct_choice_ids:
+- 0ac16d2d-1b9c-4f4f-8302-438952434079
+explanation: 'Le tableau des pannes du manuel associe un débit en continu à un problème
+  de siège ou de clapet au premier étage : la PI monte anormalement et l''air s''échappe.'
+archived: false

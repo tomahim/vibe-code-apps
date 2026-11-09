@@ -1,0 +1,22 @@
+id: 1884aafc-7419-4ffc-944a-5f5fd059d405
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quel est le rôle du premier étage à membrane ?
+choices:
+- id: 375b4de6-87b5-4ebb-985b-7c2f0a8bf2c0
+  text: 'Le même que celui à piston : détendre l''air HP à la PI, puis couper l''arrivée
+    dès que la PI est atteinte.'
+- id: 5243b7b1-3e7c-4ccb-bdc3-dcb647732eda
+  text: Filtrer l'air de la bouteille avant le détendeur.
+- id: 0e2f1709-bed6-45c9-a065-12bed3f16e44
+  text: Mesurer la pression restante pour le manomètre.
+- id: e2e272e3-29da-4d8d-91c2-fdc7dee1f0ec
+  text: Refroidir l'air HP avant le deuxième étage.
+correct_choice_ids:
+- 375b4de6-87b5-4ebb-985b-7c2f0a8bf2c0
+explanation: 'Le premier étage à membrane a exactement le même rôle que le piston
+  : détendre l''air HP à la pression intermédiaire et couper l''arrivée dès que la
+  PI est atteinte. Seul le mobile change.'
+archived: false

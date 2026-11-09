@@ -1,0 +1,21 @@
+id: 296b5b08-b1eb-429f-9121-e71c202f8628
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Un 12 litres à 30 bars et un 15 litres à 70 bars sont mis en communication.
+  Pression d'équilibre ?
+choices:
+- id: 86286661-d612-4967-b153-640465b7985b
+  text: '52 bars : (360 + 1050) / 27 = 1410 / 27.'
+- id: 0d4726f1-7254-4669-b7a9-5765404b1294
+  text: '50 bars : la moyenne simple de 30 et 70.'
+- id: a7c9d8af-81e7-4589-9596-5b8de60605f3
+  text: '70 bars : le bloc le plus plein impose sa pression.'
+- id: fdba45c0-55e2-443c-b8ce-e5c36dfb6445
+  text: '39 bars : (30 + 70) / (12 - 15) en valeur absolue.'
+correct_choice_ids:
+- 86286661-d612-4967-b153-640465b7985b
+explanation: 'Bloc 1 : 30 x 12 = 360 litres d''air ; bloc 2 : 70 x 15 = 1050 litres
+  ; total 1410 litres dans 27 litres de volume : 1410 / 27 = 52 bars.'
+archived: false

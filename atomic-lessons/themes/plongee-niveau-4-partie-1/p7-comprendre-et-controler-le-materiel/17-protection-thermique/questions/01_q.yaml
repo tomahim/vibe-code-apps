@@ -1,0 +1,20 @@
+id: 0338b516-3ed3-443f-82fa-7845a8def050
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Pourquoi le froid est-il un facteur limitant de la plongée ?
+choices:
+- id: 4ec1d6cb-12d7-463c-8f50-e31c99fd9bf1
+  text: Dans l'eau, nous nous refroidissons 25 fois plus vite que dans l'air.
+- id: be2ae047-eb4e-4004-8fe9-f2241479b610
+  text: L'eau est toujours en dessous de 0 °C.
+- id: 3078a5d5-1fcb-4769-896c-51306a913557
+  text: Les combinaisons ne servent à rien.
+- id: 27513e2e-571d-432c-a38c-a5412587b212
+  text: Le froid empêche la détente de l'air dans le détendeur.
+correct_choice_ids:
+- 4ec1d6cb-12d7-463c-8f50-e31c99fd9bf1
+explanation: 'Du fait de la modification des échanges thermiques en immersion, le
+  froid est un facteur limitant : refroidissement 25 fois plus rapide que dans l''air.'
+archived: false

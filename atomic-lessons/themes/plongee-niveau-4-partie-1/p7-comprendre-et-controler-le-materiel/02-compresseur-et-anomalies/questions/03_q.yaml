@@ -1,0 +1,21 @@
+id: 9351aab2-90d4-4441-a37a-2be62edf5b98
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Avec un compresseur de 50 m3/h, combien de temps pour ces 54 m3, selon le
+  manuel ?
+choices:
+- id: f4904c35-bde2-47e8-886e-addbef19078b
+  text: Environ 1 heure et 5 minutes (54 / 50 = 1,08 heure).
+- id: 7899aebf-7c7b-439c-9bb3-2d4403e5bd4f
+  text: Environ 3 heures et 23 minutes, comme avec 16 m3/h.
+- id: 51e2d7c7-58cf-4aa2-bd3a-cc2d283cbabb
+  text: Environ 6 heures et 45 minutes, comme avec 8 m3/h.
+- id: de18b6aa-49d0-45c7-bb35-2c38e9ba8b9e
+  text: Environ 27 minutes, la moitié du temps précédent.
+correct_choice_ids:
+- f4904c35-bde2-47e8-886e-addbef19078b
+explanation: 54 / 50 = 1,08 heure, soit environ 1 h 05. Un débit deux fois plus élevé
+  divise le temps théorique par deux.
+archived: false

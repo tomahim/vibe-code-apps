@@ -1,0 +1,21 @@
+id: 47362cc5-ee45-4293-986f-d75ff9147637
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Sur le schéma « inspiration », que relie le flexible PI ?
+choices:
+- id: 88a7bd84-4ae2-4308-ba5f-aed415fe63dc
+  text: 'Le premier étage au deuxième étage : ce que le deuxième consomme, le premier
+    le réapprovisionne.'
+- id: 54b50d4f-1127-49ee-84ca-c504a4484cfe
+  text: La bouteille au manomètre, pour lire la pression restante.
+- id: 4d23a8da-b970-4c59-930f-71dab63cee98
+  text: Le deuxième étage à la soupape d'expiration.
+- id: f4a041b5-d70d-420e-853c-17e1ada6bb3f
+  text: Le piston à la membrane, mécaniquement, à l'intérieur du boîtier.
+correct_choice_ids:
+- 88a7bd84-4ae2-4308-ba5f-aed415fe63dc
+explanation: 'Le flexible PI relie les deux étages : le premier étage réapprovisionne
+  en air à pression intermédiaire ce que le deuxième étage détend et délivre au plongeur.'
+archived: false

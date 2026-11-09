@@ -1,0 +1,22 @@
+id: 2393116d-f7ce-4211-913c-22d2f60ec05f
+position: 15
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Que se passe-t-il si la pression monte anormalement dans le flexible d'un
+  direct-system monté correctement ?
+choices:
+- id: fa2842ef-1983-4627-b768-6351dd9ed410
+  text: Le deuxième étage se met en débit continu et évacue la pression.
+- id: b6287094-e386-4251-8250-382efbd0100e
+  text: Le gilet explose immédiatement.
+- id: c300de96-7caa-4c0d-ba87-c35ceb206c20
+  text: La bouteille se ferme toute seule.
+- id: 43e60e56-728d-43c8-828d-db870ab23e24
+  text: Le manomètre bloque la surpression.
+correct_choice_ids:
+- fa2842ef-1983-4627-b768-6351dd9ed410
+explanation: 'Monté avec un deuxième étage (ou une soupape spécifique), la surpression
+  s''évacue : le deuxième étage se met en débit continu. Sans lui, l''air n''a aucune
+  échappatoire.'
+archived: false

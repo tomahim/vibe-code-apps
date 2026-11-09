@@ -1,0 +1,22 @@
+id: 9c684581-2d9d-459c-adeb-2d3db8cb4962
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Quelle est la règle du direct-system selon le manuel ?
+choices:
+- id: cd42b5ce-2283-462f-b5d7-fe277211a743
+  text: 'Ne jamais le monter sur un premier étage seul : il faut aussi un deuxième
+    étage (ou une soupape spécifique sur le premier étage).'
+- id: 529e393e-af84-494c-bc14-5037626c2230
+  text: Toujours le monter sur la sortie HP.
+- id: a0fd0324-4089-4268-8c38-c4abc2272d37
+  text: Le réserver aux bouteilles de plus de 15 litres.
+- id: 1dbb3e8c-a582-4a47-8fea-e0f07fee78ab
+  text: Le démonter avant chaque révision.
+correct_choice_ids:
+- cd42b5ce-2283-462f-b5d7-fe277211a743
+explanation: 'Règle : jamais de direct-system sur un premier étage seul ; un deuxième
+  étage (ou une soupape spécifique) doit pouvoir évacuer une pression anormale du
+  flexible.'
+archived: false

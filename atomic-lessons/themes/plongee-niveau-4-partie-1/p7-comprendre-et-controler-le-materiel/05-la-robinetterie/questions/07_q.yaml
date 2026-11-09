@@ -1,0 +1,22 @@
+id: e3367d07-f8d4-46cf-a3f7-c6b1409e83ef
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Que signifient « INT » et « DIN » pour la sortie de la robinetterie ?
+choices:
+- id: f4f47bef-4d55-4d7b-a83b-833422225cd1
+  text: 'INT : détendeur à étrier (montage « international ») ; DIN : l''autre montage
+    possible - le choix dépend du détendeur utilisé.'
+- id: f284e671-a8fc-4415-9395-d7ff18937893
+  text: 'INT : usage intérieur piscine ; DIN : usage mer uniquement.'
+- id: 8b0b13ba-5ba7-4212-9540-208ce9521068
+  text: 'INT : bouteille en acier ; DIN : bouteille en aluminium.'
+- id: 53126a29-6b37-42ce-ae8f-90c6a7eeaff9
+  text: Ce sont deux marques concurrentes de robinetteries.
+correct_choice_ids:
+- f4f47bef-4d55-4d7b-a83b-833422225cd1
+explanation: L'adaptateur permet de monter soit un détendeur à étrier (appelé aussi
+  INT pour « international »), soit un détendeur DIN ; les sorties DIN ou étrier dépendent
+  du détendeur utilisé.
+archived: false

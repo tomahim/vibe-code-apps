@@ -1,0 +1,22 @@
+id: f14fccce-44bc-48ca-a0df-2233df12bc2a
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quelles sont les précautions au remontage, selon le manuel ?
+choices:
+- id: 693f1fbf-0610-4c98-b0dd-8ac3b350f240
+  text: Changer le joint torique, vérifier et graisser le filetage (graisse constructeur),
+    remonter le robinet sur son fût d'origine.
+- id: 5dd0fe9c-a039-493e-b8e2-bae903a9e99c
+  text: Réutiliser le vieux joint, monter n'importe quel robinet disponible.
+- id: 7e0a3726-78e9-4596-b13b-d2b487de64a5
+  text: Serrer au maximum sans graisse pour garantir l'étanchéité.
+- id: 62110028-98f2-43b3-bdd8-58de30bf7026
+  text: Peindre le filetage pour repérer les fuites d'air futures.
+correct_choice_ids:
+- 693f1fbf-0610-4c98-b0dd-8ac3b350f240
+explanation: 'Au remontage : changer le joint torique, vérifier la propreté et l''état
+  du filetage, le graisser (graisse constructeur), remonter le robinet sur son fût
+  d''origine.'
+archived: false

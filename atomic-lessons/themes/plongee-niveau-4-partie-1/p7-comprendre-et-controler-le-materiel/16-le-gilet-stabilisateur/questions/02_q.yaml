@@ -1,0 +1,21 @@
+id: 7666157e-4896-4da7-b142-c3b0406321d7
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Quel système l'aide-mémoire du matériel obligatoire impose-t-il ?
+choices:
+- id: e7eee8b3-3e97-41df-bf3d-7ca99e7bec72
+  text: Un système gonflable au moyen de gaz comprimé permettant de regagner la surface
+    et de s'y maintenir (gilet + direct-system).
+- id: 37026db3-b60f-4df7-a321-cc134a2b4f25
+  text: Un simple ceinturon de plombs.
+- id: 2ff817d0-45d0-42c7-bd7b-9ce200e4eea1
+  text: Une paire de palmes de surface.
+- id: 4c628411-12f9-4f7a-bbb8-2075a41916b4
+  text: Un tuba de grande taille.
+correct_choice_ids:
+- e7eee8b3-3e97-41df-bf3d-7ca99e7bec72
+explanation: 'Citation : « Un système gonflable au moyen de gaz comprimé lui permettant
+  de regagner la surface et de s''y maintenir (gilet + direct-system) ».'
+archived: false

@@ -1,0 +1,20 @@
+id: 371e1c68-d251-432d-8bbb-f4f6a09edaff
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Qui règle l'effort inspiratoire du deuxième étage ?
+choices:
+- id: 8d649492-7437-4225-bb26-a69d3a61dda1
+  text: 'Le réparateur lors des révisions : le plongeur n''y touche pas.'
+- id: 8d93f5df-8fa8-48a8-9618-cc08172ec71e
+  text: Le plongeur, avant chaque plongée.
+- id: b81805a0-48d2-4ed4-97b3-4f88634247bb
+  text: Le moniteur, au début de chaque sortie.
+- id: 56df392c-ce34-4545-8c20-8635a2b481b1
+  text: 'Personne : il est figé en usine et ne se règle jamais.'
+correct_choice_ids:
+- 8d649492-7437-4225-bb26-a69d3a61dda1
+explanation: 'Le réglage du clapet (ressort, levier) détermine l''effort inspiratoire
+  : il est ajusté lors des révisions et ne se touche pas par le plongeur.'
+archived: false

@@ -1,0 +1,20 @@
+id: 9b25b065-78fa-48e5-be8b-7519c86f577e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Où le manomètre se raccorde-t-il ?
+choices:
+- id: 8c5f2973-0b9a-40d7-a8d2-9b38f23e810d
+  text: Sur une sortie HP du premier étage.
+- id: e82ae179-2bb4-4bc4-8434-f1c7414b60d3
+  text: Sur une sortie PI du premier étage.
+- id: ce72abc7-3c0e-48fd-9f49-1a78e7ccc633
+  text: Sur le deuxième étage.
+- id: 38fd23d4-30f6-4250-8acd-63f753fda1bc
+  text: Directement sur la robinetterie de la bouteille.
+correct_choice_ids:
+- 8c5f2973-0b9a-40d7-a8d2-9b38f23e810d
+explanation: 'Le manomètre se raccorde à une sortie HP du premier étage : il mesure
+  la pression de la bouteille, pas la pression intermédiaire.'
+archived: false

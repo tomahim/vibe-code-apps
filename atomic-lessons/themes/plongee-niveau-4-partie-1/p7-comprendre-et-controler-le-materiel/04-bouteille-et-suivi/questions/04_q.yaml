@@ -1,0 +1,22 @@
+id: efe2a247-abac-4e45-913a-44b5cab80e56
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quels sont les trois procédés de fabrication des blocs acier cités ?
+choices:
+- id: 499add6c-2872-4562-b5ad-a080e2a9ba83
+  text: Plaque emboutie-filée (I.W.K.A.), tube sans soudure fluotourné (ROTH), tronçon
+    « billette » filé sur presse.
+- id: a994aaa9-dc2c-4424-98f4-b607e18e543b
+  text: Soudure longitudinale, moulage en sable, impression 3D métal.
+- id: 5ec55036-e4e8-43a5-ae17-896e2c8d2f3d
+  text: Forgeage à froid, découpe laser, assemblage par rivets.
+- id: b9c38fa0-2134-4675-aceb-c90c49c9367f
+  text: Injection d'aluminium, laminage à chaud, tournage sur mandrin.
+correct_choice_ids:
+- 499add6c-2872-4562-b5ad-a080e2a9ba83
+explanation: 'Trois procédés selon le matériau de départ : plaque (inspectée, découpée,
+  emboutie, filée - I.W.K.A.), tube sans soudure (fluotournage - ROTH, fond plus épais,
+  1 à 2 kg plus lourd), tronçon d''acier « billette » (chauffé, filé sur presse).'
+archived: false

@@ -1,0 +1,22 @@
+id: 9544bf2f-ba18-413a-9af9-44aa292e4a8b
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Pourquoi purger la robinetterie de la bouteille avant le gonflage ?
+choices:
+- id: 29d7f3ff-18ab-43be-ac94-cbdd333cb981
+  text: Pour retirer l'eau et les particules et éviter de les faire pénétrer dans
+    la bouteille.
+- id: 417fe91c-2f64-4523-8665-6cf95500c166
+  text: Pour vérifier que le robinet n'est pas grippé par le sel.
+- id: 7157da01-977d-48a8-bebc-4af371ccf149
+  text: Pour refroidir la robinetterie avant le transfert d'air chaud.
+- id: ef42946f-af47-47e6-b0fa-42dd7f6e461d
+  text: Pour vider complètement la bouteille de son air résiduel.
+correct_choice_ids:
+- 29d7f3ff-18ab-43be-ac94-cbdd333cb981
+explanation: 'Étape 2 de l''opération : purger la robinetterie pour retirer l''eau
+  et les particules afin d''éviter de les faire pénétrer dans la bouteille lors du
+  gonflage.'
+archived: false

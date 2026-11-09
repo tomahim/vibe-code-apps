@@ -1,0 +1,20 @@
+id: 97404823-881a-49af-9640-3f4ae69c49ca
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: 'À l''état de repos (état d''équilibre), le détendeur est :'
+choices:
+- id: 98d0d3a3-01e4-4164-b794-a364a636b36c
+  text: 'Fermé : il ne s''ouvre que sur demande, c''est-à-dire sur dépression inspiratoire.'
+- id: 94a60487-5008-4be0-9802-c4d703dedbfa
+  text: 'Ouvert : l''air circule en permanence en faible débit.'
+- id: 6d8ed700-08df-4a33-bdf5-a69ec6124518
+  text: À moitié ouvert, pour rester prêt à répondre vite.
+- id: 189ceb29-578b-4785-bddb-58150051e1d1
+  text: 'Dépressurisé : aucune pression n''est présente nulle part.'
+correct_choice_ids:
+- 98d0d3a3-01e4-4164-b794-a364a636b36c
+explanation: 'À l''équilibre, clapet et piston sont sur leurs sièges : le système
+  est fermé au repos et ne s''ouvre que sur demande (inspiration).'
+archived: false

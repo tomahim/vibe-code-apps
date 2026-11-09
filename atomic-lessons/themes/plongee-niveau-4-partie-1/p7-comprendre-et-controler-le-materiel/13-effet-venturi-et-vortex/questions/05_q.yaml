@@ -1,0 +1,20 @@
+id: c646445f-6ddc-45fe-ba95-dddd5d0f1eec
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: D'où vient la souplesse inspiratoire du deuxième étage, selon le manuel ?
+choices:
+- id: 73ad8c70-dc5c-4224-9091-e6333e7ba1d6
+  text: Du réglage du clapet et du levier, ajusté lors des révisions.
+- id: 193738f3-a30e-4575-bd47-da1ad3760b29
+  text: D'un bouton Venturi accessible au plongeur.
+- id: 62247705-8bdd-402e-86e5-9a6036c64f5f
+  text: De la couleur du boîtier.
+- id: 0247609f-52ca-42e4-aa1a-b4afe4ab357d
+  text: De la pression de gonflage de la bouteille.
+correct_choice_ids:
+- 73ad8c70-dc5c-4224-9091-e6333e7ba1d6
+explanation: 'La souplesse dépend du réglage du clapet et du levier du deuxième étage,
+  ajusté lors des révisions : ce n''est pas un réglage plongeur.'
+archived: false

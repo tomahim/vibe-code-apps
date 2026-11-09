@@ -1,0 +1,23 @@
+id: ac300d4d-c726-47fc-af44-f325aff7a893
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Une mise en débit continu du deuxième étage vient typiquement de quel étage
+  ?
+choices:
+- id: a217036c-f876-4bc2-8394-a0ccf2a14dab
+  text: 'Du premier étage : une mauvaise étanchéité siège/clapet augmente la PI, ce
+    qui met le deuxième étage en débit continu.'
+- id: 50f7b66e-7a5f-45e2-9f2e-34ffc437bd0a
+  text: 'Du deuxième étage : l''embout buccal est simplement mal positionné.'
+- id: a51b2b79-e5a8-4df1-b5b7-a67d10e26d5c
+  text: 'Du manomètre : son capillaire fuit et déclenche le débit.'
+- id: 187f992c-eff3-4196-8c5c-240e45be03b0
+  text: 'De la bouteille : elle est trop froide pour ce détendeur.'
+correct_choice_ids:
+- a217036c-f876-4bc2-8394-a0ccf2a14dab
+explanation: 'La mise en débit continu est une panne du premier étage : la fuite au
+  niveau siège/clapet augmente la pression intermédiaire, ce qui met le deuxième étage
+  en débit continu. À confier à un réparateur.'
+archived: false

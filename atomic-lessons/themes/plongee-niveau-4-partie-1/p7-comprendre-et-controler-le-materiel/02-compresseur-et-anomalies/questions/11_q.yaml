@@ -1,0 +1,20 @@
+id: 54770be7-c670-4573-a67b-89587dc0ddfa
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que dit le manuel du cahier d'entretien du compresseur ?
+choices:
+- id: e4d4ffb1-2519-41c8-babe-35414680e48c
+  text: Sa tenue est obligatoire ; chaque intervention et vérification s'y consigne.
+- id: b757d162-0b40-4466-ab25-2125f87f126d
+  text: Il est facultatif et réservé aux compresseurs de plus de 50 m3/h.
+- id: 091cb957-aec8-4b2a-a7fa-fa445ade26cf
+  text: Il ne concerne que les compresseurs à essence, pas les électriques.
+- id: 5cd3bc73-e8ff-4b2c-92b0-d0593a937461
+  text: Il est tenu par la FFESSM pour l'ensemble des clubs affiliés.
+correct_choice_ids:
+- e4d4ffb1-2519-41c8-babe-35414680e48c
+explanation: La tenue d'un cahier d'entretien est obligatoire ; son contenu dépasse
+  le cadre du manuel.
+archived: false

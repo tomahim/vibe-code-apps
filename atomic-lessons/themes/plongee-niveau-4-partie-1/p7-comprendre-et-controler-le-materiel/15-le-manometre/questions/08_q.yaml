@@ -1,0 +1,22 @@
+id: 82fafe4b-4150-4449-b069-2463e75cfa84
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Dans une assistance, que prescrit le manuel à propos du manomètre ?
+choices:
+- id: d871b99e-233e-4eef-bf4b-9886d0926e18
+  text: Vérifier les réserves d'air (manomètres) et les paramètres de plongée, tout
+    en communiquant avec le plongeur et en informant la palanquée.
+- id: 53078c9c-6b5a-49a0-8e05-a44817c2344e
+  text: Retirer le manomètre du plongeur secouru pour alléger.
+- id: ca98e922-1266-4a98-aec4-c64f46aab391
+  text: Ne regarder que son propre manomètre.
+- id: 1c23d6a9-790c-47b4-8ae6-9862fdba8d33
+  text: Offrir son manomètre au plongeur en difficulté.
+correct_choice_ids:
+- d871b99e-233e-4eef-bf4b-9886d0926e18
+explanation: 'Conduite d''assistance : vérifier les réserves d''air (manomètres) et
+  les paramètres de plongée (ordinateurs, paliers), communiquer avec le plongeur,
+  informer la palanquée.'
+archived: false

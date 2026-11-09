@@ -1,0 +1,22 @@
+id: 11fca886-45fc-4cc0-83a2-efc8ad127448
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 9
+prompt: Pourquoi le direct-system seul est-il dangereux en cas de surpression ?
+choices:
+- id: 51286f2d-7636-4a5d-af06-02ba4d9817c7
+  text: 'La pression ferme son clapet amont : l''air ne peut pas s''échapper par lui
+    ; seul un deuxième étage peut se mettre en débit continu.'
+- id: ae6f3333-4ba0-4f03-91b0-16b6ffbee113
+  text: Il bloque la remontée du plongeur en gonflant trop vite.
+- id: 2904f682-dd1a-4281-8b21-510c97439908
+  text: Il détourne l'air destiné à l'embout buccal.
+- id: d11af2af-d674-4e32-ae16-6d96813e207d
+  text: Il provoque le givrage immédiat du premier étage.
+correct_choice_ids:
+- 51286f2d-7636-4a5d-af06-02ba4d9817c7
+explanation: 'Sur un direct-system, la pression ferme le clapet amont : en cas de
+  pression anormale dans le flexible, l''air ne peut s''échapper ; la sécurité est
+  le deuxième étage qui se met en débit continu.'
+archived: false

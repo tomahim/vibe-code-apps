@@ -1,0 +1,20 @@
+id: 2a913e13-164b-4922-a891-4f87e8b7c941
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Dans quel état se trouve le détendeur à piston compensé au repos ?
+choices:
+- id: 1d8aeebf-59e3-4c92-b17d-9e43a5a233ff
+  text: 'Fermé : piston contre son siège ; il ne s''ouvre que sur dépression inspiratoire.'
+- id: 23140495-d6af-4710-aa5a-38c45746e501
+  text: 'Ouvert : un filet d''air circule en permanence.'
+- id: d36c4ae4-5308-4247-8fda-20a87594c5d0
+  text: 'Dépressurisé : aucune pression nulle part.'
+- id: 45813464-c48c-42f1-b706-acc11c8ad4ea
+  text: Bloqué par une goupille de sécurité.
+correct_choice_ids:
+- 1d8aeebf-59e3-4c92-b17d-9e43a5a233ff
+explanation: 'Comme tout détendeur, le piston compensé est fermé au repos : il ne
+  s''ouvre que sur demande, c''est-à-dire sur dépression inspiratoire.'
+archived: false

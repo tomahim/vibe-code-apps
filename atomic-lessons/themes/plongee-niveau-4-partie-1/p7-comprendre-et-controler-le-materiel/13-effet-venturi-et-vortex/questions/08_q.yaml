@@ -1,0 +1,20 @@
+id: 7505eb5b-6528-415f-9cb0-f7d2735f0306
+position: 8
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: 'Première idée à retenir :'
+choices:
+- id: f61256b6-e1c9-4638-a412-d3cecadb1d9e
+  text: « Effet Venturi » et « Vortex » sont absents du manuel de référence.
+- id: 4e333254-adb5-4309-881f-98536257db0e
+  text: « Effet Venturi » est le principe de base du premier étage.
+- id: c2d22cea-e7d2-4a13-9adf-420b701a42c7
+  text: « Vortex » est le nom du clapet du deuxième étage.
+- id: a81fedae-956f-4989-8966-3dcdf486dc79
+  text: Les deux sont des pannes classiques du détendeur.
+correct_choice_ids:
+- f61256b6-e1c9-4638-a412-d3cecadb1d9e
+explanation: 'Idée 1 : ces systèmes d''assistance inspiratoire ne figurent pas dans
+  le manuel de référence de ce cours.'
+archived: false

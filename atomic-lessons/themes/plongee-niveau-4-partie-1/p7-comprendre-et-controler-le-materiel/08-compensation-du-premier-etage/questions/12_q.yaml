@@ -1,0 +1,21 @@
+id: 9460348e-b8e3-48a2-a438-1459ee209198
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 1
+prompt: Quelle plage de pression de bouteille le manuel cite-t-il pour illustrer la
+  variation au cours d'une plongée ?
+choices:
+- id: af72725b-ea7b-4b5e-8dfa-8ff01cbc0083
+  text: D'environ 200 bars au départ à environ 50 bars en fin de plongée.
+- id: a5d1b1cc-58cf-4774-aa6a-196ee09dc5ac
+  text: De 300 bars au départ à 0 bar à la fin.
+- id: e8780d60-4858-4e74-8a52-0d53264eb222
+  text: 'De 150 bars à 150 bars : la pression ne varie pas.'
+- id: 74e9f28b-04e3-492e-a721-7b41b9885207
+  text: De 10 bars au départ à 200 bars à l'arrivée.
+correct_choice_ids:
+- af72725b-ea7b-4b5e-8dfa-8ff01cbc0083
+explanation: 'La pression de la bouteille varie fortement : environ 200 bars au départ,
+  environ 50 bars en fin de plongée — d''où l''intérêt de neutraliser son influence.'
+archived: false

@@ -1,0 +1,22 @@
+id: 68513cef-d9c8-4127-b803-4f827af8fd4f
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Qu'est-ce qui provoque une mise en débit continu ?
+choices:
+- id: d19c0b49-9472-45b9-bc6f-6a2609bb50a2
+  text: 'Une mauvaise étanchéité siège/clapet au premier étage : la PI augmente et
+    met le deuxième étage en débit continu.'
+- id: 557fbddc-f56f-4d7a-a4cd-1050a2da1804
+  text: Une soupape d'expiration bloquée en position ouverte.
+- id: 20b96a4d-e928-41b3-b0ba-d7e0b50b4391
+  text: Un embout buccal trop souple.
+- id: 1b6245d2-b2a1-434f-a403-46943f666e1d
+  text: Une bouteille gonflée au-delà de 200 bars.
+correct_choice_ids:
+- d19c0b49-9472-45b9-bc6f-6a2609bb50a2
+explanation: 'Panne au premier étage : clapet non étanche ou premier étage bloqué
+  ouvert ; la fuite augmente la PI et met le deuxième étage en débit continu. Solution
+  : réparateur.'
+archived: false

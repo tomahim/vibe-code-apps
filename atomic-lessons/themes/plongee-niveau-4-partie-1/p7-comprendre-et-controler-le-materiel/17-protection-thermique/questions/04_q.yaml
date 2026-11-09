@@ -1,0 +1,22 @@
+id: 349945f3-19cf-4383-9158-b97594e998ab
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Pourquoi limiter les mouvements quand on a froid dans l'eau ?
+choices:
+- id: de6a1229-e196-4ea6-b3b1-55a0c29d8efc
+  text: Ils augmentent la circulation d'eau dans la combinaison et accélèrent le refroidissement
+    par convection.
+- id: 453acc61-eabc-4275-b123-09cf10151991
+  text: Ils fatiguent le cœur inutilement.
+- id: b0d50012-0e03-4155-b38c-c6666314e4bb
+  text: Ils augmentent la consommation d'azote.
+- id: 13d9f2a8-02c8-4b0a-b906-fa4f7a701641
+  text: Ils risquent de déchirer la combinaison.
+correct_choice_ids:
+- de6a1229-e196-4ea6-b3b1-55a0c29d8efc
+explanation: 'Les mouvements obligent le corps à réchauffer sans cesse une nouvelle
+  pellicule d''eau : mieux vaut limiter les mouvements et maintenir prisonnière la
+  couche d''eau.'
+archived: false

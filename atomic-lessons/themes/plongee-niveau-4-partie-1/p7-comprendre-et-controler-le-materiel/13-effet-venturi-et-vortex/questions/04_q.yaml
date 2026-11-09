@@ -1,0 +1,20 @@
+id: 60498834-e536-473e-a7dc-19af8871cb04
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel critère de choix le manuel donne-t-il pour le confort inspiratoire ?
+choices:
+- id: 90ac1cf0-8544-4bca-a820-6a180aa74fce
+  text: Choisir un détendeur dont la résistance à l'inspiration est la plus faible.
+- id: 015ddaa3-295c-43d5-a4b1-c857d6a207fe
+  text: Choisir le détendeur le plus lourd du marché.
+- id: 601114a7-dead-4330-acc9-8e08cf2bbb0c
+  text: Choisir un détendeur à réglage Venturi manuel.
+- id: fdf1ec21-8af7-4d8a-acdf-0b2e5a8c1a1e
+  text: Choisir le flexible le plus long possible.
+correct_choice_ids:
+- 90ac1cf0-8544-4bca-a820-6a180aa74fce
+explanation: 'Citation du manuel : « Choisir un détendeur dont la résistance à l''inspiration
+  est la plus faible. »'
+archived: false

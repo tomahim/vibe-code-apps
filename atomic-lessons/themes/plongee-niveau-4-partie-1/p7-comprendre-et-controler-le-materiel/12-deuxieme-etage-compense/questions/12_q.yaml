@@ -1,0 +1,20 @@
+id: 45bc6c05-864d-42b5-bd55-b822e646a515
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: 'Deuxième idée à retenir : comment juger un deuxième étage ?'
+choices:
+- id: dcd94e91-d463-42c8-95e9-1bcc32df0c4c
+  text: 'À sa souplesse inspiratoire : résistance à l''inspiration la plus faible.'
+- id: cbd0b745-ee85-4f96-a1d4-8e0e6234a5b8
+  text: À sa couleur et à son esthétique.
+- id: 1dcdc810-ee7d-41f4-8333-eba746761776
+  text: À son nombre de boutons de réglage plongeur.
+- id: a15a413c-4ce1-4094-be98-f6ed0ffc309a
+  text: À la longueur de son flexible.
+correct_choice_ids:
+- dcd94e91-d463-42c8-95e9-1bcc32df0c4c
+explanation: 'Idée 2 : le deuxième étage se caractérise par sa souplesse inspiratoire
+  ; le manuel recommande la résistance à l''inspiration la plus faible.'
+archived: false

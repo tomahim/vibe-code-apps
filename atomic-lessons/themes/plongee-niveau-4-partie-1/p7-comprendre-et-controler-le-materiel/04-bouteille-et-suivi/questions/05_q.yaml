@@ -1,0 +1,23 @@
+id: f7a0f1c9-67fb-4542-8c51-ee091b59271a
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel est l'avantage et la limite des blocs en aluminium, selon le manuel ?
+choices:
+- id: a0a64a1b-a1f9-4553-bc7d-cfbe0983d687
+  text: Moins sensibles à la corrosion du sel, mais la légèreté n'est pas un avantage
+    en eaux tempérées avec des combinaisons épaisses.
+- id: fd11ae83-c0fa-4acc-b25a-dec275e3a22c
+  text: Plus légers partout et jamais soumis à aucune forme de corrosion.
+- id: 027b2b8f-5b5b-417b-91a4-34046a16d2a0
+  text: Plus résistants aux chocs, mais interdits en eau de mer.
+- id: 2f961043-53ae-4f6a-a36a-af3fe2a3b99c
+  text: Moins chers, mais limités à 150 bars de pression de service.
+correct_choice_ids:
+- a0a64a1b-a1f9-4553-bc7d-cfbe0983d687
+explanation: L'aluminium est moins sensible à la corrosion due au sel de mer (mais
+  subit d'autres corrosions) ; sa légèreté n'est pas un avantage en eaux tempérées
+  où l'on porte des combinaisons épaisses. Usage courant sous les tropiques, zone
+  américaine.
+archived: false

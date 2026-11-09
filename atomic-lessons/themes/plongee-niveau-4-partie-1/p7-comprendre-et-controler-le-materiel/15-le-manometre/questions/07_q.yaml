@@ -1,0 +1,22 @@
+id: 8e5e0f6b-5298-4efc-92cc-686c46c45f01
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel rôle joue le manomètre au gonflage ?
+choices:
+- id: 9299498c-e27e-4424-bc7f-008878354698
+  text: 'Instrument de contrôle : surveillance du manomètre de la rampe et lecture
+    des pressions lors des mises en équilibre.'
+- id: f87fdba0-20cd-43dd-ac6e-ba48a54897e7
+  text: Il gonfle la bouteille à la place du compresseur.
+- id: 7546475d-c81e-4abf-b0b3-c0d54160de8e
+  text: Il refroidit l'air pendant la compression.
+- id: 3ac85ddb-d84e-4268-b5f0-7a3c947609dc
+  text: Il filtre l'humidité de l'air.
+correct_choice_ids:
+- 9299498c-e27e-4424-bc7f-008878354698
+explanation: 'Au gonflage : surveiller le manomètre de la rampe de chargement, lire
+  la pression lors des équilibrages, et ne jamais dépasser la pression de chargement
+  de la bouteille.'
+archived: false

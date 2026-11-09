@@ -1,0 +1,20 @@
+id: b10edc84-2749-4d4a-9792-68f0f58604b4
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: '« L''air n''arrive plus » : quelle origine le manuel donne-t-il ?'
+choices:
+- id: 55796d52-81be-4516-9a60-02a64ffd622c
+  text: Le premier étage est bloqué.
+- id: 99c8d99a-c559-46d7-9645-a0b5bd93c097
+  text: La membrane du deuxième étage est percée.
+- id: 9c037575-ab5a-46fa-b363-d4a31278c58e
+  text: Le flexible PI est plié par le sable.
+- id: 912196cc-34b5-4083-82d2-0251dc467b50
+  text: La soupape d'expiration est encrassée.
+correct_choice_ids:
+- 55796d52-81be-4516-9a60-02a64ffd622c
+explanation: 'Origine : le premier étage est bloqué ; solution : confier à un réparateur.
+  En plongée, l''octopus du binôme et le partage d''air prennent le relais.'
+archived: false

@@ -1,0 +1,22 @@
+id: be0f3100-0f4d-4040-9cf5-8ca3e040bf7f
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 5
+prompt: Quel est le principe géométrique de la compensation ?
+choices:
+- id: aa7c4afe-886b-4821-adbf-8b60027586c5
+  text: 'La haute pression arrive perpendiculairement au mouvement du mécanisme :
+    elle ne participe plus aux forces sur le piston.'
+- id: d87e83e5-19c0-4fd8-8c07-17b0b5404eae
+  text: La haute pression est divisée par deux avant d'atteindre le piston.
+- id: 22587870-56b2-4c8b-aa24-36dd5e19c2aa
+  text: Le piston est remplacé par une seconde membrane plus souple.
+- id: 1a35c9d5-ab34-4846-a91c-43de8c2322ac
+  text: Le ressort est supprimé et remplacé par un aimant.
+correct_choice_ids:
+- aa7c4afe-886b-4821-adbf-8b60027586c5
+explanation: 'Sur un premier étage compensé, la HP n''agit plus dans l''axe du piston
+  : arrivant perpendiculairement, elle ne participe plus aux forces d''ouverture ou
+  de fermeture.'
+archived: false

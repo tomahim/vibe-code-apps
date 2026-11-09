@@ -1,0 +1,22 @@
+id: b54d2a08-8889-4063-a5ba-486521eaaa3c
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Pourquoi la détente se fait-elle en deux étapes plutôt qu'une ?
+choices:
+- id: 867f9c8d-ed9b-40ad-bd80-26bdb7855ce9
+  text: 'Chaque étage ne gère qu''un écart de pression limité : mécanismes simples,
+    fiables et confortables.'
+- id: 958ad5f8-a80c-41fa-8025-9998cc07a3ae
+  text: Parce que la réglementation interdit les détendeurs à un étage.
+- id: e8bcb26e-5cbc-42c1-b56f-6b37540226aa
+  text: Pour pouvoir respirer deux gaz différents en même temps.
+- id: 571c3a26-a5e0-43a2-b0a8-4bc0eba2d2a8
+  text: Pour que le manomètre puisse mesurer deux pressions à la fois.
+correct_choice_ids:
+- 867f9c8d-ed9b-40ad-bd80-26bdb7855ce9
+explanation: Détendre directement de 200 bars à la pression ambiante demanderait d'équilibrer
+  des forces considérables ; en deux étapes (HP vers PI, PI vers PA), chaque étage
+  ne gère qu'un écart limité.
+archived: false

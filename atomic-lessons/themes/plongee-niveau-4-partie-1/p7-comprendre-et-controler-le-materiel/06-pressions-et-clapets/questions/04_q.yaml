@@ -1,0 +1,22 @@
+id: 238abd81-e563-4ec1-bd4b-c9442be5a50e
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 3
+prompt: Quel est le principal intérêt d'un détendeur, selon le manuel ?
+choices:
+- id: 168f0e53-d6bd-46b6-b8e2-6a71d89d9c8f
+  text: Fournir de l'air sur simple demande du plongeur, à la pression ambiante, quelles
+    que soient profondeur, position et conditions.
+- id: 6fc970c2-116c-4dc2-9ee6-3085f7588772
+  text: Fournir un débit d'air constant, que le plongeur inspire ou expire.
+- id: 2a52c121-31e7-47b0-8b02-a14294d0ce54
+  text: Réchauffer l'air de la bouteille avant de le délivrer au plongeur.
+- id: 62f72eee-5958-4512-9f56-70b75b7e48fa
+  text: Filtre les impuretés de l'air comprimé avant la respiration.
+correct_choice_ids:
+- 168f0e53-d6bd-46b6-b8e2-6a71d89d9c8f
+explanation: 'Le principal intérêt d''un détendeur : fournir de l''air sur simple
+  demande (inspiration), à la pression ambiante, quelles que soient la profondeur,
+  la position du plongeur et les conditions d''utilisation.'
+archived: false

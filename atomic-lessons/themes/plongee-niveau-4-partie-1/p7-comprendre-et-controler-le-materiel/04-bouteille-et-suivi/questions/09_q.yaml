@@ -1,0 +1,23 @@
+id: 5b4893d5-034a-48da-b41d-f91da27a1932
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Comment se déroule l'épreuve de requalification ?
+choices:
+- id: cc35903c-f91d-4c33-b817-1a6344ae0a9f
+  text: Remplie d'eau, la bouteille est soumise à au moins 120 % de sa PS sans dépasser
+    la PE (en général 1,5 fois la PS).
+- id: 0af780f8-0976-4cff-af31-54c0596a5267
+  text: Gonflée à l'air à 200 % de sa pression de service pendant 10 minutes.
+- id: 0a208546-0f25-4a32-859c-6497ca3fcb72
+  text: Chauffée à 100 degrés puis plongée dans l'eau glacée trois fois.
+- id: 15564135-37ce-4e45-b1c9-ac777b324c99
+  text: Soumise à des chocs contrôlés au marteau sur le fond et le col.
+correct_choice_ids:
+- cc35903c-f91d-4c33-b817-1a6344ae0a9f
+explanation: Lors de l'épreuve, la bouteille est remplie d'eau (incompressible, ce
+  qui évite les projections de métal en cas de fuite) puis soumise à au moins 120
+  % de la PS sans dépasser la PE, généralement 1,5 fois la PS (ex. 300 bars pour un
+  bloc à 200 bars).
+archived: false

@@ -1,0 +1,23 @@
+id: da396fb1-8375-4402-94c6-82674504a665
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Qu'imposent le régime général et le régime TIV ?
+choices:
+- id: 9c343b5b-4d02-4975-962d-f7c0daddf736
+  text: 'Général : visite tous les 12 mois et requalification tous les 2 ans. TIV
+    : requalification à 6 ans si cahier des charges et inspection TIV annuelle.'
+- id: c282f191-8e69-44bf-b87f-aaf856a6d5b4
+  text: 'Général : requalification annuelle. TIV : aucune inspection jamais.'
+- id: f4a6bdae-3495-4aca-8b46-df78881ce114
+  text: 'Général : inspection tous les 5 ans. TIV : requalification mensuelle.'
+- id: 78e14c49-3702-420c-acdb-24a0a65ee1d6
+  text: Les deux régimes imposent exactement les mêmes intervalles.
+correct_choice_ids:
+- 9c343b5b-4d02-4975-962d-f7c0daddf736
+explanation: 'Régime général : inspection au moins tous les 12 mois, requalification
+  tous les 2 ans. Régime TIV : requalification portée à 6 ans si cahier des charges
+  respecté et inspection par un Technicien en Inspection Visuelle au moins tous les
+  12 mois, consignée dans un registre.'
+archived: false

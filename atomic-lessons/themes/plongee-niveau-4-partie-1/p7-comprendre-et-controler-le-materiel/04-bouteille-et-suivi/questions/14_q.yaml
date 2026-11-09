@@ -1,0 +1,22 @@
+id: d15fda3f-4b43-4dd9-9460-5c987aab6775
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Que signifient les marques de gaz « AIR », « G2 » et « G1 » ?
+choices:
+- id: 185b094a-7efd-4a17-a251-07fa51c28f9b
+  text: 'AIR : air sec respirable uniquement ; G2 : mélanges à au plus 21 % d''oxygène
+    ; G1 : tout gaz, y compris au-delà de 21 % (nitrox).'
+- id: 751f341f-ac3b-4618-8add-351a8cc4c41a
+  text: 'AIR : usage terrestre ; G2 : gaz de 2e catégorie interdits ; G1 : gaz gratuits.'
+- id: f83be420-47ff-40e6-80d0-6cb1f13e3536
+  text: 'AIR : bouteille vide ; G2 : 50 % oxygène ; G1 : oxygène pur uniquement.'
+- id: 24932489-3d8f-4ad4-89fb-c9d4524ecddd
+  text: Les trois marques sont équivalentes et purement commerciales.
+correct_choice_ids:
+- 185b094a-7efd-4a17-a251-07fa51c28f9b
+explanation: '« AIR » : air sec respirable uniquement ; « G2 » : air ou mélange respirable
+  sec non dangereux, au plus 21 % d''oxygène ; « G1 » : tout gaz sec respirable, y
+  compris au-delà de 21 % d''oxygène (ex. nitrox).'
+archived: false
