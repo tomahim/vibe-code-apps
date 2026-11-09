@@ -123,3 +123,10 @@
 .lg-season-ic{display:inline-flex;vertical-align:-1.5px;margin-right:3px}
 .lg-season-ic.winter{color:#7fa8c9}
 .lg-season-ic.autumn{color:#c9762e}
+/* Garden root: compact theme tiles with a thin progress bar (idea 9). */
+.lg-list.lg-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lg-list.lg-tiles button{flex-direction:column;align-items:stretch;gap:6px;min-height:44px;padding:8px 10px;background:#fffdf8;border:1px solid var(--line);border-radius:12px}
+.lg-list.lg-tiles .sw{display:none}
+.lg-list.lg-tiles .bar{width:100%}
+
+.lg-crumbs[hidden]{display:none}
