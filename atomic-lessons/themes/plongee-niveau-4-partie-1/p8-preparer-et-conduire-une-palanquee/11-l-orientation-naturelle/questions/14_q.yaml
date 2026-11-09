@@ -1,0 +1,21 @@
+id: a151637a-914f-41c2-ae56-5f8c8fca0e4c
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Quel duo de repères naturels le manuel associe-t-il au plateau rocheux ou
+  corallien ?
+choices:
+- id: 745819f3-0ed8-4fb1-a078-3a8ffd080829
+  text: L'emplacement du soleil et le sens du courant.
+- id: 93ad76de-09ed-4f1e-bf54-b749b6f37a51
+  text: Les nuages et la pluie.
+- id: a8331288-0a59-4ccb-afe3-f0cf27d1b5c4
+  text: Les oiseaux et le vent.
+- id: df90d229-45d5-4868-a874-e00bc3646ef9
+  text: Les bulles et le bruit.
+correct_choice_ids:
+- 745819f3-0ed8-4fb1-a078-3a8ffd080829
+explanation: 'Sur un plateau rocheux ou corallien, tout se ressemble : l''emplacement
+  du soleil et le sens du courant peuvent alors devenir des points de repère précieux.'
+archived: false

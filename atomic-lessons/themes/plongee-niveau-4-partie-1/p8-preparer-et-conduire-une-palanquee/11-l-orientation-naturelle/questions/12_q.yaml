@@ -1,0 +1,21 @@
+id: b8292d23-63d3-4d96-96fb-1f54fa00ad16
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Sur un plateau ou des roches dispersées, quel handicap le manuel signale-t-il
+  ?
+choices:
+- id: 0b7fc5ba-6707-4a7a-ad92-ecde3d75fb2d
+  text: L'absence de points de repère significatifs.
+- id: 864150b6-d4f5-45f6-8df5-3b4a0226b313
+  text: La profondeur excessive.
+- id: 9949df83-1940-4be2-ba1c-b1451bf3eb62
+  text: Le froid.
+- id: 29b4aa8b-13bd-4ead-96ea-f922983f1889
+  text: L'obscurité totale.
+correct_choice_ids:
+- 0b7fc5ba-6707-4a7a-ad92-ecde3d75fb2d
+explanation: Sur un plateau ou sur des roches dispersées, l'absence de points de repère
+  significatifs peut être un handicap.
+archived: false

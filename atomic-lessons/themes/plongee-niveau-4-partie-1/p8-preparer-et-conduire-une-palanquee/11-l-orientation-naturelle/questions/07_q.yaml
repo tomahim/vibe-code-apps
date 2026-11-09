@@ -1,0 +1,20 @@
+id: b966e49d-e741-4e4d-acff-183618c77285
+position: 7
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Quel piège le manuel signale-t-il sur la profondeur du mouillage ?
+choices:
+- id: 9be0044a-eb40-4435-a515-1e255c488079
+  text: Inutile de rechercher l'ancre sur 20 m si elle est posée sur 15 m.
+- id: ddb6699f-ddc5-4450-8734-3e19e0d6416a
+  text: L'ancre est toujours à 3 m.
+- id: a9af0f52-e0c5-48ad-a20b-aeffef46023f
+  text: L'ancre remonte toute seule.
+- id: fb7f1ad6-3b05-4ce1-8014-4381362c6b0a
+  text: La profondeur du mouillage ne change rien.
+correct_choice_ids:
+- 9be0044a-eb40-4435-a515-1e255c488079
+explanation: « Inutile, en fin de plongée, de rechercher l'ancre sur 20 m si elle
+  est posée sur 15 m. »
+archived: false

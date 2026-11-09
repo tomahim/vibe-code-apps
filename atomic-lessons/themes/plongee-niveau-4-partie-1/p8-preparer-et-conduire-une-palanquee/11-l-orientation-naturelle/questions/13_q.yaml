@@ -1,0 +1,20 @@
+id: 67afe6be-a65d-410f-b1a4-f04dde4edd23
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 7
+prompt: Quels parcours le manuel conseille-t-il alors ?
+choices:
+- id: 2009c590-a80e-4889-b88d-ce65fbc739c1
+  text: En carré ou en « branches d'étoile », en revenant plusieurs fois au mouillage.
+- id: ce99cd9e-ba08-4e3e-83d9-51827bbaef36
+  text: En ligne droite vers le large.
+- id: e2a1edd3-829b-41ff-b107-70d7a3f57dc0
+  text: En spirale descendante.
+- id: 95f1d7ed-971f-4fc8-bad6-f111cc079cdf
+  text: En cercle autour des poissons.
+correct_choice_ids:
+- 2009c590-a80e-4889-b88d-ce65fbc739c1
+explanation: 'Il est conseillé d''adapter le parcours : en plongée en carré, en «
+  branches d''étoile » en revenant plusieurs fois au mouillage, etc.'
+archived: false
