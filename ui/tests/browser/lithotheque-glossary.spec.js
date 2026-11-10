@@ -110,3 +110,39 @@ test('alluvion bilingual card is searchable and readable on mobile',async ({page
  await c.screenshot({path:'/downloads/lithotheque-alluvion-en.png'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
+
+test('corail bilingual card is searchable and readable on mobile',async ({page})=>{
+ await page.setViewportSize({width:393,height:900});
+ await page.goto('/apps/lithotheque');
+ await page.getByRole('button',{name:'Glossaire · Glossary',exact:true}).click();
+ await page.getByRole('button',{name:'Temps & fossiles',exact:true}).click();
+ const c=page.locator('[data-term="corail"]');
+ await expect(c.getByRole('heading')).toHaveText('Corail');
+ await c.locator('img').evaluate(i=>i.decode());
+ await c.screenshot({path:'/downloads/lithotheque-corail-fr.png'});
+ await c.getByRole('button').click();
+ await expect(c.getByRole('heading')).toHaveText('Coral');
+ await expect(c.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Coral');
+ await c.screenshot({path:'/downloads/lithotheque-corail-en.png'});
+ await page.getByRole('searchbox').fill('corail');
+ await expect(page.locator('.gcard')).toHaveCount(1);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+test('phytoplancton bilingual card is searchable and readable on mobile',async ({page})=>{
+ await page.setViewportSize({width:393,height:900});
+ await page.goto('/apps/lithotheque');
+ await page.getByRole('button',{name:'Glossaire · Glossary',exact:true}).click();
+ await page.getByRole('button',{name:'Planète Terre',exact:true}).click();
+ const c=page.locator('[data-term="phytoplancton"]');
+ await expect(c.getByRole('heading')).toHaveText('Phytoplancton');
+ await c.locator('img').evaluate(i=>i.decode());
+ await c.screenshot({path:'/downloads/lithotheque-phyto-fr.png'});
+ await c.getByRole('button').click();
+ await expect(c.getByRole('heading')).toHaveText('Phytoplankton');
+ await expect(c.getByRole('link',{name:'Source',exact:true})).toHaveAttribute('href','https://en.wikipedia.org/wiki/Phytoplankton');
+ await c.screenshot({path:'/downloads/lithotheque-phyto-en.png'});
+ await page.getByRole('searchbox').fill('phytoplancton');
+ await expect(page.locator('.gcard')).toHaveCount(1);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
