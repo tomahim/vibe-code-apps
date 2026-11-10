@@ -62,9 +62,30 @@ await page.getByText('Velvet bass').waitFor();
 await page.screenshot({ path: `${screenshots}/workshop-390.png`, fullPage: true });
 await page.screenshot({ path: `${screenshots}/viewport-workshop-390.png` });
 
+// Collapsible lines: fold a line on both widths, keep the lesson-guided
+// line open and disabled, and confirm the fold survives a reload.
+await page.getByRole('button', { name: 'Lessons' }).click();
+const guidedToggle = page.locator('.kc-line-toggle', { hasText: 'Filter ·' });
+await guidedToggle.waitFor();
+if (await guidedToggle.isEnabled()) throw new Error('The line the lesson points at must keep its toggle disabled');
+const oscToggle = page.locator('.kc-line-toggle', { hasText: 'Oscillators' });
+const foldedOsc = page.locator('.kc-line-sections[hidden]', { hasText: 'Osc 1 wave' });
+await page.setViewportSize({ width: 1280, height: 900 });
+await oscToggle.click();
+await foldedOsc.waitFor({ state: 'attached' });
+await page.screenshot({ path: `${screenshots}/folded-1280.png`, fullPage: true });
+await page.setViewportSize({ width: 390, height: 900 });
+await page.screenshot({ path: `${screenshots}/folded-390.png`, fullPage: true });
+const foldedOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+if (foldedOverflow) throw new Error('Horizontal overflow with a folded line at 390px');
+await page.reload();
+await page.getByRole('heading', { name: 'Knob Conservatory' }).waitFor();
+await foldedOsc.waitFor({ state: 'attached' }); // the fold survives a reload
+await oscToggle.click(); // unfold again for the interactive pass
+await page.getByRole('slider', { name: 'Cutoff' }).waitFor();
+
 // Interactive ear-match: power on, fail a blind check, drag the cutoff knob
 // to the hidden target (4500 Hz ≈ +83px of vertical drag), pass the lesson.
-await page.getByRole('button', { name: 'Lessons' }).click();
 if (engine !== 'chromium') {
   await page.getByText('Lesson path').click();
   await page.screenshot({ path: `${screenshots}/path-390.png`, fullPage: true });
@@ -73,8 +94,7 @@ if (engine !== 'chromium') {
   console.log(`screenshots in ${screenshots} (static pass; rerun with KC_BROWSER_ENGINE=chromium for the interactive pass)`);
   process.exit(0);
 }
-await page.getByRole('button', { name: 'Power' }).click();
-await page.getByRole('button', { name: 'On', exact: true }).waitFor();
+// Power is on by default (#447): no switch to flip before playing.
 await page.getByRole('button', { name: 'Check my ear' }).click();
 await page.getByText(/Not yet/).waitFor();
 const knob = page.getByRole('slider', { name: 'Cutoff' });

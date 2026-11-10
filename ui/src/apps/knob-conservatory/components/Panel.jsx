@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Knob from "./Knob.jsx";
 import { SECTIONS } from "../synth/params.js";
+import { sectionLines, readCollapsedLines, writeCollapsedLines } from "../collapse.js";
 
 // The synth panel, rendered from the parameter registry. `unlocked === null`
 // means the workshop: every control live. Otherwise it is the set of control
@@ -40,55 +41,100 @@ function GuidanceBubble({ tip, status }) {
   );
 }
 
+// The sections fold away line by line, two racks per line, to limit vertical
+// scrolling. A line the current lesson step points at stays open and its
+// toggle is disabled: lesson guidance must never end up hidden in a fold.
+
 export default function Panel({ patch, unlocked, onChange, guidance, feedback, anchorRef }) {
+  const lines = sectionLines(SECTIONS);
+  const [collapsed, setCollapsed] = useState(() => readCollapsedLines(window.localStorage, lines));
+
+  function toggleLine(lineId) {
+    setCollapsed((prev) => {
+      const next = new Set(prev);
+      if (next.has(lineId)) next.delete(lineId);
+      else next.add(lineId);
+      writeCollapsedLines(window.localStorage, next);
+      return next;
+    });
+  }
+
+  function renderSection(section) {
+    const anyOpen = unlocked === null || section.controls.some((control) => unlocked.has(control.id));
+    return (
+      <section key={section.id} className={`kc-section ${anyOpen ? "" : "kc-section-locked"}`}>
+        <h3>{section.name}</h3>
+        <div className="kc-section-controls">
+          {section.controls.map((control) => {
+            const locked = unlocked !== null && !unlocked.has(control.id);
+            const guided = !locked && guidance !== null && guidance !== undefined && guidance.ids.has(control.id);
+            const isAnchor = guided && guidance.anchor === control.id;
+            const body = control.kind === "selector" ? (
+              <label className={`kc-selector ${locked ? "kc-selector-locked" : ""}`}>
+                <span className="kc-knob-label">{locked ? "🔒 " : ""}{control.label}</span>
+                <select
+                  value={patch[control.id]}
+                  disabled={locked}
+                  onChange={(event) => onChange(control.id, event.target.value)}
+                >
+                  {control.choices.map((choice) => <option key={choice} value={choice}>{choice}</option>)}
+                </select>
+              </label>
+            ) : (
+              <Knob
+                control={control}
+                value={patch[control.id]}
+                locked={locked}
+                onChange={onChange}
+              />
+            );
+            if (!guided) return <div key={control.id} className="kc-control">{body}</div>;
+            const status = feedback?.[control.id] ?? null;
+            const state = status ? (status.within ? "kc-control-ok" : "kc-control-fix") : "";
+            return (
+              <div
+                key={control.id}
+                className={`kc-control kc-control-guided ${state}`}
+                ref={isAnchor ? anchorRef : undefined}
+              >
+                {!isAnchor && !status && <span className="kc-pointer" aria-hidden="true">▾</span>}
+                {body}
+                {(isAnchor || status) && <GuidanceBubble tip={isAnchor ? guidance.tip : null} status={status} />}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <div className="kc-panel">
-      {SECTIONS.map((section) => {
-        const anyOpen = unlocked === null || section.controls.some((control) => unlocked.has(control.id));
+      {lines.map((line) => {
+        // A lesson step that points into this line forces it open, whatever
+        // the saved fold says.
+        const guided = guidance != null
+          && line.sections.some((section) => section.controls.some((control) => guidance.ids.has(control.id)));
+        const folded = !guided && collapsed.has(line.id);
         return (
-          <section key={section.id} className={`kc-section ${anyOpen ? "" : "kc-section-locked"}`}>
-            <h3>{section.name}</h3>
-            <div className="kc-section-controls">
-              {section.controls.map((control) => {
-                const locked = unlocked !== null && !unlocked.has(control.id);
-                const guided = !locked && guidance !== null && guidance !== undefined && guidance.ids.has(control.id);
-                const isAnchor = guided && guidance.anchor === control.id;
-                const body = control.kind === "selector" ? (
-                  <label className={`kc-selector ${locked ? "kc-selector-locked" : ""}`}>
-                    <span className="kc-knob-label">{locked ? "🔒 " : ""}{control.label}</span>
-                    <select
-                      value={patch[control.id]}
-                      disabled={locked}
-                      onChange={(event) => onChange(control.id, event.target.value)}
-                    >
-                      {control.choices.map((choice) => <option key={choice} value={choice}>{choice}</option>)}
-                    </select>
-                  </label>
-                ) : (
-                  <Knob
-                    control={control}
-                    value={patch[control.id]}
-                    locked={locked}
-                    onChange={onChange}
-                  />
-                );
-                if (!guided) return <div key={control.id} className="kc-control">{body}</div>;
-                const status = feedback?.[control.id] ?? null;
-                const state = status ? (status.within ? "kc-control-ok" : "kc-control-fix") : "";
-                return (
-                  <div
-                    key={control.id}
-                    className={`kc-control kc-control-guided ${state}`}
-                    ref={isAnchor ? anchorRef : undefined}
-                  >
-                    {!isAnchor && !status && <span className="kc-pointer" aria-hidden="true">▾</span>}
-                    {body}
-                    {(isAnchor || status) && <GuidanceBubble tip={isAnchor ? guidance.tip : null} status={status} />}
-                  </div>
-                );
-              })}
+          <div key={line.id} className={`kc-line ${folded ? "kc-line-folded" : ""}`}>
+            <button
+              type="button"
+              className="kc-line-toggle"
+              onClick={() => toggleLine(line.id)}
+              aria-expanded={!folded}
+              disabled={guided}
+              title={guided
+                ? "The current lesson step uses these controls"
+                : (folded ? `Show ${line.name}` : `Hide ${line.name}`)}
+            >
+              <span className="kc-line-chevron" aria-hidden="true">{folded ? "▸" : "▾"}</span>
+              {line.name}
+            </button>
+            <div className="kc-line-sections" hidden={folded}>
+              {line.sections.map((section) => renderSection(section))}
             </div>
-          </section>
+          </div>
         );
       })}
     </div>

@@ -223,8 +223,44 @@
   gap: 12px;
 }
 
+/* A line folds two racks away with one tap; the slim toggle bar keeps the
+   line's name visible when its sections are hidden. */
+
+.kc-line { display: flex; flex-direction: column; gap: 6px; }
+
+.kc-line-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #3a3122;
+  border-radius: 8px;
+  background: rgba(44, 38, 32, 0.6);
+  color: #b9a98a;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  text-align: left;
+}
+
+.kc-line-toggle:hover { background: rgba(60, 50, 38, 0.7); }
+.kc-line-toggle:disabled { cursor: default; opacity: 0.75; }
+.kc-line-toggle:disabled:hover { background: rgba(44, 38, 32, 0.6); }
+
+.kc-line-chevron { font-size: 0.8rem; width: 1em; text-align: center; }
+
+.kc-line-sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.kc-line-sections[hidden] { display: none; }
+
 @media (min-width: 760px) {
-  .kc-panel { grid-template-columns: 1fr 1fr; }
+  .kc-line-sections { grid-template-columns: 1fr 1fr; }
 }
 
 .kc-section {
