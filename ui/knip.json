@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/root/App.jsx",
+    "src/apps/little-grains/LittleGrains.jsx"
+  ],
+  "project": ["src/apps/little-grains/**/*.{js,jsx}"],
+  "exclude": ["dependencies", "devDependencies"]
+}

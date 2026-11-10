@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 const h2 = (x, y, s) => { const v = Math.sin(x * 127.1 + y * 311.7 + s * 74.7) * 43758.5453; return v - Math.floor(v); };
 const vnoise = (x, y, s) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf); const a = h2(xi, yi, s), b = h2(xi + 1, yi, s), c = h2(xi, yi + 1, s), d = h2(xi + 1, yi + 1, s); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; };
-export const terrainHeight = (x, z, s = 0) => (vnoise(x * 0.9, z * 0.9, s) - 0.5) * 0.5 + (vnoise(x * 2.4, z * 2.4, s + 3) - 0.5) * 0.25;
+const terrainHeight = (x, z, s = 0) => (vnoise(x * 0.9, z * 0.9, s) - 0.5) * 0.5 + (vnoise(x * 2.4, z * 2.4, s + 3) - 0.5) * 0.25;
 
 const STRATA = ['#a97c52', '#946a45', '#7b5738', '#5f432c'];
 
