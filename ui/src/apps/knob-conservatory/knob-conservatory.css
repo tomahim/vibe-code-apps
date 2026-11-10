@@ -113,7 +113,7 @@
 
 .kc-lesson-actions { display: flex; gap: 10px; margin-top: 10px; }
 
-.kc-lesson-actions button, .kc-save-row button, .kc-reveal {
+.kc-lesson-actions button, .kc-step-bar-actions button, .kc-save-row button, .kc-reveal {
   flex: 1;
   min-height: 48px;
   border-radius: 10px;
@@ -125,7 +125,7 @@
   cursor: pointer;
 }
 
-.kc-lesson-actions button:disabled { opacity: 0.45; }
+.kc-lesson-actions button:disabled, .kc-step-bar-actions button:disabled { opacity: 0.45; }
 .kc-check { background: #f5c96b; color: #241f16; border-color: #f5c96b; font-weight: bold; }
 
 .kc-match {
@@ -384,3 +384,157 @@
 }
 
 .kc-key-black:active { background: #4a3f2a; }
+
+/* Computer-keyboard playing: key letters and pressed-key highlight. */
+
+.kc-key-letter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.kc-key-white .kc-key-letter { color: #8a7a5c; }
+.kc-key-black .kc-key-letter { color: #9c8a66; }
+
+.kc-key-white.kc-key-active { background: #f5c96b; }
+.kc-key-black.kc-key-active { background: #6b5b3e; }
+
+.kc-keys-hint {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #b9a98a;
+}
+
+/* Touch devices have no computer keyboard: keep the strip clean. */
+@media (hover: none), (pointer: coarse) {
+  .kc-key-letter, .kc-keys-hint { display: none; }
+}
+
+/* Sticky step bar: the current lesson's goal and actions stay on screen while
+   the player scrolls through the panel, so there is no scrolling back to the
+   instructions. */
+
+.kc-step-bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  background: #17140f;
+  border-bottom: 1px solid #3a3122;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+.kc-step-bar-text { flex: 1 1 220px; }
+.kc-step-bar-lesson { font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: #b9a98a; }
+.kc-step-bar-goal { margin: 2px 0 0; font-size: 0.85rem; color: #f5c96b; }
+
+.kc-step-bar-actions { display: flex; gap: 6px; flex: 0 0 auto; }
+.kc-step-bar-actions button { min-height: 40px; padding: 0 12px; font-size: 0.8rem; }
+
+.kc-step-bar-result {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #e8b64c;
+}
+
+.kc-step-bar-result button {
+  flex: none;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #6b5b3e;
+  background: #2c2519;
+  color: #efe6d4;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.kc-step-bar-passed { color: #a8c68a; }
+
+/* Lesson guidance on the panel: ring the knobs to adjust, point at them, and
+   pin the step's instruction to the first one. */
+
+.kc-control { position: relative; display: flex; flex-direction: column; }
+.kc-control > .kc-knob, .kc-control > .kc-selector { flex: 1; }
+
+.kc-control-guided {
+  border-radius: 10px;
+  outline: 2px solid rgba(245, 201, 107, 0.9);
+  outline-offset: 2px;
+  animation: kc-guide-pulse 1.6s ease-in-out infinite;
+}
+
+.kc-pointer {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f5c96b;
+  font-size: 0.85rem;
+  z-index: 26;
+  animation: kc-guide-bob 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.kc-tip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(calc(-50% + var(--tip-shift, 0px)));
+  width: max-content;
+  max-width: min(230px, calc(100vw - 40px));
+  background: #f5c96b;
+  color: #241f16;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  z-index: 26;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.kc-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: calc(50% - var(--tip-shift, 0px));
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #f5c96b;
+}
+
+@keyframes kc-guide-pulse {
+  50% { outline-color: rgba(245, 201, 107, 0.25); }
+}
+
+@keyframes kc-guide-bob {
+  50% { transform: translateX(-50%) translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-control-guided, .kc-pointer { animation: none; }
+}
+
+.kc-step-bar-actions button { white-space: nowrap; }
+
+/* Keep guided controls clear of the sticky step bar and the pinned piano when
+   anything scrolls them into view (browser find-in-page, focus, etc.). */
+.kc-control {
+  scroll-margin-top: 90px;
+  scroll-margin-bottom: 160px;
+}
