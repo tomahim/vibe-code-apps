@@ -178,3 +178,39 @@ test("held notes follow last-note priority like a monosynth", () => {
   held.press("w", 61, 1);
   assert.deepEqual([...held.activeOffsets()].sort(), [0, 1]);
 });
+
+import {
+  sectionLines, readCollapsedLines, writeCollapsedLines, COLLAPSE_STORAGE_KEY,
+} from "../src/apps/knob-conservatory/collapse.js";
+
+function fakeStorage() {
+  const map = new Map();
+  return {
+    getItem: (key) => (map.has(key) ? map.get(key) : null),
+    setItem: (key, value) => map.set(key, String(value)),
+  };
+}
+
+test("panel sections pair into lines of two, in order", () => {
+  const lines = sectionLines(SECTIONS);
+  assert.equal(lines.length, Math.ceil(SECTIONS.length / 2));
+  assert.deepEqual(lines.flatMap((line) => line.sections), SECTIONS);
+  for (const line of lines) {
+    assert.ok(line.sections.length >= 1 && line.sections.length <= 2);
+    assert.equal(line.id, line.sections.map((section) => section.id).join("+"));
+    assert.ok(line.name.includes(line.sections[0].name));
+  }
+  assert.equal(new Set(lines.map((line) => line.id)).size, lines.length, "unique line ids");
+});
+
+test("collapsed lines round-trip through storage, ignoring junk", () => {
+  const lines = sectionLines(SECTIONS);
+  const storage = fakeStorage();
+  assert.deepEqual([...readCollapsedLines(storage, lines)], []);
+  storage.setItem(COLLAPSE_STORAGE_KEY, "{not json");
+  assert.deepEqual([...readCollapsedLines(storage, lines)], []);
+  storage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(["bogus", 42, lines[0].id]));
+  assert.deepEqual([...readCollapsedLines(storage, lines)], [lines[0].id]);
+  writeCollapsedLines(storage, new Set([lines[1].id, lines[0].id]));
+  assert.deepEqual([...readCollapsedLines(storage, lines)], [lines[1].id, lines[0].id]);
+});
