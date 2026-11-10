@@ -119,8 +119,6 @@ def collection(request):
         search = request.GET.get("q", "").strip()
         if len(search) > 200:
             raise ValueError("Search is too long.")
-        if kind:
-            query = query.filter(object_type__slug=kind)
         if tag:
             query = query.filter(tags__slug=tag)
         if search:
@@ -130,6 +128,14 @@ def collection(request):
             start = date.fromisoformat(month + "-01")
             end = date(start.year + (start.month == 12), start.month % 12 + 1, 1)
             query = query.filter(saved_on__gte=start, saved_on__lt=end)
+        # Type counts share tag, search, month and category but not the type
+        # filter, so a sidebar number is what choosing that type shows.
+        typed = inbox_view(query) if category == "inbox" else query.filter(categories__slug=category) if category else query
+        type_counts = {row["object_type__slug"]: row["count"]
+                       for row in typed.values("object_type__slug").annotate(count=Count("id", distinct=True))}
+        type_counts["all"] = typed.distinct().count()
+        if kind:
+            query = query.filter(object_type__slug=kind)
         # Tab counts share the current context (type, tag, search, month) but
         # not the category filter, so a tab's number is what choosing it
         # shows. Inbox keeps its view semantics, so it is counted with the
@@ -151,7 +157,7 @@ def collection(request):
         result = list(query[(page - 1) * 30:page * 30])
         return JsonResponse({"items": [item(c) for c in result], "total": count,
                              "page": page, "next_page": page + 1 if page * 30 < count else None,
-                             "category_counts": category_counts})
+                             "category_counts": category_counts, "type_counts": type_counts})
     except (ValueError, TypeError) as exc:
         return error(ValueError("Invalid filter or page."))
 
