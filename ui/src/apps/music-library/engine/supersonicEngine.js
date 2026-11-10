@@ -6,6 +6,7 @@
 // /supersonic/ (ui/public/supersonic) so the app works fully from our own
 // static bundle, with no CDN dependency.
 import { SuperSonic } from "supersonic-scsynth";
+import { audioEnvironmentProblem } from "./environment.js";
 
 export const MUSIC_BUS = 10; // private stereo bus pair (10/11): every note plays here
 export const WET_BUS = 12;   // reverb output pair (12/13), read by the master level
@@ -53,6 +54,11 @@ class MusicEngine {
     if (this.ready) return this;
     if (this.booting) return this.booting;
     this.booting = (async () => {
+      // Fail fast with an actionable message when the browser hides
+      // AudioWorklet (plain-HTTP origins) instead of SuperSonic's cryptic
+      // "Missing required features for postMessage mode: audioWorklet".
+      const problem = audioEnvironmentProblem();
+      if (problem) throw new Error(problem);
       onStatus("Waking the SuperCollider engine…");
       const supersonic = new SuperSonic({
         baseURL: "/supersonic/",
