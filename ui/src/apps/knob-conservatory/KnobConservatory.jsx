@@ -20,14 +20,17 @@ export default function KnobConservatory({ onHome }) {
     if (import.meta.env.DEV) window.__kcEngine = engine.current; // visual-check probe
   }
 
-  const [powered, setPowered] = useState(false);
+  // Power is on by default: the player should be able to play right away.
+  // The browser's autoplay policy may still hold the AudioContext suspended
+  // until the first gesture; the wake effect below resumes it transparently.
+  const [powered, setPowered] = useState(true);
   const [mode, setMode] = useState("lessons");
   const [patch, setPatch] = useState(() => normalizePatch());
   const [octaveShift, setOctaveShift] = useState(0);
   const [activeKeys, setActiveKeys] = useState(() => new Set());
   const heldNotes = useRef(new HeldNotes());
   // Values the global key listeners need without re-binding them.
-  const live = useRef({ powered: false, root: BASE_MIDI });
+  const live = useRef({ powered: true, root: BASE_MIDI });
   live.current = { powered, root: BASE_MIDI + octaveShift * 12 };
   const [progress, setProgress] = useState(() => readProgress(window.localStorage, lessons));
   const [match, setMatch] = useState(null);
@@ -56,6 +59,19 @@ export default function KnobConservatory({ onHome }) {
     return { ids: new Set(ids), anchor: ids[0], tip: currentLesson.goal.hint };
   }, [mode, currentLesson]);
 
+  // Per-control verdicts from the last ear check, shown on each goal knob's
+  // tooltip so the feedback sits on the control it talks about. Direction
+  // ("turn up/down") is revealed only after the player asks for the gap.
+  const controlFeedback = useMemo(() => {
+    if (!match || mode !== "lessons") return null;
+    const feedback = {};
+    for (const check of match.checks) {
+      const direction = revealGap && check.direction ? ` · turn ${check.direction}` : "";
+      feedback[check.id] = { text: `${closenessLabel(check)}${direction}`, within: check.within };
+    }
+    return feedback;
+  }, [match, revealGap, mode]);
+
   useEffect(() => {
     selectLesson(currentLesson, { silent: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,6 +84,22 @@ export default function KnobConservatory({ onHome }) {
   function shiftOctave(delta) {
     setOctaveShift((shift) => Math.min(1, Math.max(-2, shift + delta)));
   }
+
+  // Default-on power: try to start the engine immediately, and retry on the
+  // first tap or key press, which is when autoplay policies let audio run.
+  // While the switch is off these gestures leave the engine parked.
+  useEffect(() => {
+    function wakeEngine() {
+      if (live.current.powered && !engine.current.running) engine.current.powerOn();
+    }
+    wakeEngine();
+    window.addEventListener("pointerdown", wakeEngine);
+    window.addEventListener("keydown", wakeEngine);
+    return () => {
+      window.removeEventListener("pointerdown", wakeEngine);
+      window.removeEventListener("keydown", wakeEngine);
+    };
+  }, []);
 
   // Computer-keyboard playing: A S D F G H J K white keys, W E T Y U black
   // keys, up/down arrows for octave (same physical positions on AZERTY).
@@ -137,15 +169,15 @@ export default function KnobConservatory({ onHome }) {
     persist({ ...progress, currentLesson: lesson.id });
     if (!silent) setNotice("");
     if (scroll) {
-      // Bring the knob this step points at fully into the usable band between
-      // the sticky step bar and the pinned piano, leaving room above it for
-      // the callout: no part of knob, label or tip hides behind either bar.
+      // Bring the knob this step points at fully into the usable band below
+      // the pinned goal bar (phones) and above the pinned piano, leaving room
+      // above it for the callout: no part of knob, label or tip hides.
       window.setTimeout(() => {
         const el = anchorRef.current;
         if (!el) return;
-        const bar = document.querySelector(".kc-step-bar");
+        const bar = document.querySelector(".kc-mobilebar");
+        const bandTop = bar && getComputedStyle(bar).display !== "none" ? bar.getBoundingClientRect().bottom : 0;
         const keys = document.querySelector(".kc-keyboard-row");
-        const bandTop = bar ? bar.getBoundingClientRect().bottom : 0;
         const bandBottom = keys ? keys.getBoundingClientRect().top : window.innerHeight;
         const callout = 76; // bubble + gap allowance above the knob
         const rect = el.getBoundingClientRect();
@@ -216,6 +248,8 @@ export default function KnobConservatory({ onHome }) {
     const loaded = normalizePatch(preset.settings);
     setPatch(loaded);
     engine.current.applyPatch(loaded);
+    setMatch(null);
+    setRevealGap(false);
     setNotice(`"${preset.name}" is on the panel.`);
   }
 
@@ -258,137 +292,110 @@ export default function KnobConservatory({ onHome }) {
 
       {!powered && <p className="kc-hint">Flip the power switch, then play the keyboard below.</p>}
 
-      {mode === "lessons" && (
-        <div className="kc-step-bar">
-          <div className="kc-step-bar-text">
-            <span className="kc-step-bar-lesson">{currentLesson.chapterTitle} · {currentLesson.title}</span>
-            <p className="kc-step-bar-goal"><strong>Sound goal:</strong> {currentLesson.goal.hint}</p>
+      {mode === "lessons" ? (
+        <>
+          {/* Phones: the goal and the two actions stay pinned on screen while
+              the panel scrolls; the verdict itself lives at the knobs. */}
+          <div className="kc-mobilebar">
+            <span className="kc-mobilebar-goal"><strong>Goal:</strong> {currentLesson.goal.hint}</span>
+            <div className="kc-mobilebar-actions">
+              <button type="button" onClick={hearTarget} disabled={!powered}>Hear the target</button>
+              <button type="button" className="kc-check" onClick={checkEar} disabled={!powered}>Check my ear</button>
+            </div>
           </div>
-          <div className="kc-step-bar-actions">
-            <button type="button" onClick={hearTarget} disabled={!powered}>Hear the target</button>
-            <button type="button" className="kc-check" onClick={checkEar} disabled={!powered}>Check my ear</button>
-          </div>
-          {match && (
-            <div className={`kc-step-bar-result ${match.passed ? "kc-step-bar-passed" : ""}`} role="status">
-              {match.passed ? (
-                <>
-                  <span>Matched ({match.score}%).</span>
-                  {lessons[lessons.indexOf(currentLesson) + 1] && (
-                    <button type="button" onClick={() => selectLesson(lessons[lessons.indexOf(currentLesson) + 1], { scroll: true })}>
+          <div className="kc-lesson-layout">
+            <aside className="kc-sidebar" aria-label="Lesson steps">
+              <div className="kc-lesson-head">
+                <span className="kc-chapter">{currentLesson.chapterTitle}</span>
+                <h2>{currentLesson.title}{lessonPassed ? " ✓" : ""}</h2>
+                <span className="kc-minutes">{currentLesson.minutes} min</span>
+              </div>
+              {currentLesson.body.map((line) => <p key={line}>{line}</p>)}
+              <p className="kc-goal"><strong>Sound goal:</strong> {currentLesson.goal.hint}</p>
+              <div className="kc-side-actions">
+                <button type="button" onClick={hearTarget} disabled={!powered}>Hear the target</button>
+                <button type="button" className="kc-check" onClick={checkEar} disabled={!powered}>Check my ear</button>
+              </div>
+              {match && (
+                <div className={`kc-match ${match.passed ? "kc-match-passed" : ""}`} role="status">
+                  {match.passed
+                    ? <p>Passed - your ear matched the target ({match.score}%). The next knob is unlocked.</p>
+                    : <p>Not yet - {match.score}% there. Each flagged knob says how close it is.</p>}
+                  {match.passed && lessons[lessons.indexOf(currentLesson) + 1] && (
+                    <button type="button" className="kc-reveal" onClick={() => selectLesson(lessons[lessons.indexOf(currentLesson) + 1], { scroll: true })}>
                       Next: {lessons[lessons.indexOf(currentLesson) + 1].title}
                     </button>
                   )}
-                </>
-              ) : (
-                <>
-                  <span>{match.score}% there - listen again and adjust.</span>
-                  {!revealGap && tries >= 3 && (
-                    <button type="button" onClick={() => setRevealGap(true)}>Reveal the gap</button>
+                  {!match.passed && !revealGap && tries >= 3 && (
+                    <button type="button" className="kc-reveal" onClick={() => setRevealGap(true)}>Reveal the gap</button>
                   )}
-                </>
+                  {!match.passed && revealGap && (
+                    <p className="kc-match-revealed">The flagged knobs now say which way to turn.</p>
+                  )}
+                </div>
               )}
-            </div>
-          )}
-        </div>
-      )}
-
-      {mode === "lessons" ? (
-        <section className="kc-lesson" aria-label="Current lesson">
-          <div className="kc-lesson-head">
-            <span className="kc-chapter">{currentLesson.chapterTitle}</span>
-            <h2>{currentLesson.title}{lessonPassed ? " ✓" : ""}</h2>
-            <span className="kc-minutes">{currentLesson.minutes} min</span>
-          </div>
-          {currentLesson.body.map((line) => <p key={line}>{line}</p>)}
-          {match && (
-            <div className={`kc-match ${match.passed ? "kc-match-passed" : ""}`} role="status">
-              {match.passed
-                ? <p>Passed - your ear matched the target ({match.score}%). The next knob is unlocked.</p>
-                : <p>Not yet - {match.score}% there. Listen again and adjust.</p>}
-              {match.passed && lessons[lessons.indexOf(currentLesson) + 1] && (
-                <button type="button" className="kc-reveal" onClick={() => selectLesson(lessons[lessons.indexOf(currentLesson) + 1], { scroll: true })}>
-                  Next: {lessons[lessons.indexOf(currentLesson) + 1].title}
-                </button>
-              )}
-              {!match.passed && (
-                <ul>
-                  {match.checks.map((check) => (
-                    <li key={check.id}>
-                      {check.label}: {closenessLabel(check)}
-                      {revealGap && check.direction ? ` (turn ${check.direction})` : ""}
-                    </li>
+              <nav className="kc-path" aria-label="Lesson path">
+                <h3>Lesson path ({passedIds.size}/{lessons.length} passed)</h3>
+                <div className="kc-path-scroll">
+                  {chapters.map((chapter) => (
+                    <div key={chapter.id} className="kc-path-chapter">
+                      <h4>{chapter.title}</h4>
+                      <ol>
+                        {chapter.lessons.map((lesson) => {
+                          const full = lessons.find((entry) => entry.id === lesson.id);
+                          const locked = !passedIds.has(lesson.id) && upcoming?.id !== lesson.id
+                            && lessons.indexOf(full) > lessons.indexOf(upcoming ?? lessons[lessons.length - 1]);
+                          return (
+                            <li key={lesson.id}>
+                              <button
+                                type="button"
+                                disabled={locked}
+                                className={lesson.id === currentLesson.id ? "active" : ""}
+                                onClick={() => selectLesson(full, { scroll: true })}
+                              >
+                                {progress.passed[lesson.id] ? "✓ " : locked ? "🔒 " : ""}{lesson.title}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    </div>
                   ))}
-                </ul>
-              )}
-              {!match.passed && !revealGap && tries >= 3 && (
-                <button type="button" className="kc-reveal" onClick={() => setRevealGap(true)}>Reveal the gap</button>
-              )}
-            </div>
-          )}
-          <details className="kc-path">
-            <summary>Lesson path ({passedIds.size}/{lessons.length} passed)</summary>
-            {chapters.map((chapter) => (
-              <div key={chapter.id} className="kc-path-chapter">
-                <h4>{chapter.title}</h4>
-                <ol>
-                  {chapter.lessons.map((lesson) => {
-                    const full = lessons.find((entry) => entry.id === lesson.id);
-                    const locked = !passedIds.has(lesson.id) && upcoming?.id !== lesson.id
-                      && lessons.indexOf(full) > lessons.indexOf(upcoming ?? lessons[lessons.length - 1]);
-                    return (
-                      <li key={lesson.id}>
-                        <button
-                          type="button"
-                          disabled={locked}
-                          className={lesson.id === currentLesson.id ? "active" : ""}
-                          onClick={() => selectLesson(full, { scroll: true })}
-                        >
-                          {progress.passed[lesson.id] ? "✓ " : locked ? "🔒 " : ""}{lesson.title}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            ))}
-          </details>
-        </section>
+                </div>
+              </nav>
+              <section className="kc-side-shelf" aria-label="Instrument shelf">
+                <h3>Your shelf</h3>
+                <PresetShelf
+                  signedIn={signedIn}
+                  presetName={presetName}
+                  onPresetName={setPresetName}
+                  onSave={onSavePreset}
+                  presets={presets}
+                  onLoad={onLoadPreset}
+                  onDelete={onDeletePreset}
+                />
+              </section>
+            </aside>
+            <Panel patch={patch} unlocked={unlocked} onChange={changeParam} guidance={guidance} feedback={controlFeedback} anchorRef={anchorRef} />
+          </div>
+        </>
       ) : (
         <section className="kc-workshop" aria-label="Workshop">
           <p>The full panel, all {TOTAL_CONTROLS} controls live. Build a sound, name it, and keep it on your shelf.</p>
-          {signedIn ? (
-            <div className="kc-shelf">
-              <div className="kc-save-row">
-                <input
-                  type="text"
-                  value={presetName}
-                  maxLength={80}
-                  placeholder="Name this instrument…"
-                  onChange={(event) => setPresetName(event.target.value)}
-                  onKeyDown={(event) => { if (event.key === "Enter") onSavePreset(); }}
-                />
-                <button type="button" onClick={onSavePreset} disabled={!presetName.trim()}>Save</button>
-              </div>
-              {presets.length > 0 && (
-                <ul className="kc-presets">
-                  {presets.map((preset) => (
-                    <li key={preset.id}>
-                      <button type="button" className="kc-preset-name" onClick={() => onLoadPreset(preset)}>{preset.name}</button>
-                      <button type="button" className="kc-preset-delete" aria-label={`Delete ${preset.name}`} onClick={() => onDeletePreset(preset)}>×</button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ) : (
-            <p className="kc-hint"><a href="/login">Sign in</a> to save your instruments and find them later.</p>
-          )}
+          <PresetShelf
+            signedIn={signedIn}
+            presetName={presetName}
+            onPresetName={setPresetName}
+            onSave={onSavePreset}
+            presets={presets}
+            onLoad={onLoadPreset}
+            onDelete={onDeletePreset}
+          />
+          <Panel patch={patch} unlocked={unlocked} onChange={changeParam} guidance={guidance} feedback={controlFeedback} anchorRef={anchorRef} />
         </section>
       )}
 
       {notice && <p className="kc-notice" role="status">{notice}</p>}
-
-      <Panel patch={patch} unlocked={unlocked} onChange={changeParam} guidance={guidance} anchorRef={anchorRef} />
 
       <p className="kc-keys-hint">
         Your computer keyboard plays too: A S D F G H J K for the white keys, W E T Y U for the black
@@ -403,6 +410,40 @@ export default function KnobConservatory({ onHome }) {
         onNoteOff={(midi) => { if (powered) engine.current.noteOff(midi); }}
         activeOffsets={activeKeys}
       />
+    </div>
+  );
+}
+
+// The instrument shelf: save the current patch under a name and reload saved
+// instruments. Shared by the workshop and the lessons sidebar, so a sound
+// discovered mid-lesson can be kept without switching modes.
+function PresetShelf({ signedIn, presetName, onPresetName, onSave, presets, onLoad, onDelete }) {
+  if (!signedIn) {
+    return <p className="kc-hint"><a href="/login">Sign in</a> to save your instruments and find them later.</p>;
+  }
+  return (
+    <div className="kc-shelf">
+      <div className="kc-save-row">
+        <input
+          type="text"
+          value={presetName}
+          maxLength={80}
+          placeholder="Name this instrument…"
+          onChange={(event) => onPresetName(event.target.value)}
+          onKeyDown={(event) => { if (event.key === "Enter") onSave(); }}
+        />
+        <button type="button" onClick={onSave} disabled={!presetName.trim()}>Save</button>
+      </div>
+      {presets.length > 0 && (
+        <ul className="kc-presets">
+          {presets.map((preset) => (
+            <li key={preset.id}>
+              <button type="button" className="kc-preset-name" onClick={() => onLoad(preset)}>{preset.name}</button>
+              <button type="button" className="kc-preset-delete" aria-label={`Delete ${preset.name}`} onClick={() => onDelete(preset)}>×</button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
