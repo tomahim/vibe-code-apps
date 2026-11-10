@@ -41,3 +41,15 @@ export function writeCollapsedLines(storage, collapsed) {
     return false;
   }
 }
+
+// Lessons mode keeps only the lines the current step needs open. The saved
+// folds belong to the workshop and are left alone here; a line the player
+// opens by hand in a lesson ("peeked") is a session-only choice.
+export function lineIsUseful(line, usefulIds) {
+  return line.sections.some((section) => section.controls.some((control) => usefulIds.has(control.id)));
+}
+
+export function lineIsFolded({ lessonMode, useful, saved, peeked }) {
+  if (useful) return false;
+  return lessonMode ? !peeked : saved;
+}

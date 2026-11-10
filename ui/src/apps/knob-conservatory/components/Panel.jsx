@@ -1,7 +1,7 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import Knob from "./Knob.jsx";
 import { SECTIONS } from "../synth/params.js";
-import { sectionLines, readCollapsedLines, writeCollapsedLines } from "../collapse.js";
+import { sectionLines, readCollapsedLines, writeCollapsedLines, lineIsUseful, lineIsFolded } from "../collapse.js";
 
 // The synth panel, rendered from the parameter registry. `unlocked === null`
 // means the workshop: every control live. Otherwise it is the set of control
@@ -42,14 +42,33 @@ function GuidanceBubble({ tip, status }) {
 }
 
 // The sections fold away line by line, two racks per line, to limit vertical
-// scrolling. A line the current lesson step points at stays open and its
-// toggle is disabled: lesson guidance must never end up hidden in a fold.
+// scrolling. In the workshop the folds are the player's own and are saved. In
+// lessons only the line(s) holding the controls the step asks for are open;
+// the rest start folded (saved workshop folds untouched) and can be peeked
+// open for the current step. A useful line stays open and its toggle is
+// disabled: lesson guidance must never end up hidden in a fold.
 
 export default function Panel({ patch, unlocked, onChange, guidance, feedback, anchorRef }) {
   const lines = sectionLines(SECTIONS);
   const [collapsed, setCollapsed] = useState(() => readCollapsedLines(window.localStorage, lines));
 
+  const lessonMode = unlocked !== null;
+  // Controls this step is about: the goal's controls, else whatever is unlocked.
+  const usefulIds = guidance != null ? guidance.ids : (unlocked ?? new Set());
+  const stepKey = [...usefulIds].join(",");
+  const [peeked, setPeeked] = useState(() => new Set());
+  useEffect(() => { setPeeked(new Set()); }, [stepKey]);
+
   function toggleLine(lineId) {
+    if (lessonMode) {
+      setPeeked((prev) => {
+        const next = new Set(prev);
+        if (next.has(lineId)) next.delete(lineId);
+        else next.add(lineId);
+        return next;
+      });
+      return;
+    }
     setCollapsed((prev) => {
       const next = new Set(prev);
       if (next.has(lineId)) next.delete(lineId);
@@ -113,9 +132,10 @@ export default function Panel({ patch, unlocked, onChange, guidance, feedback, a
       {lines.map((line) => {
         // A lesson step that points into this line forces it open, whatever
         // the saved fold says.
-        const guided = guidance != null
-          && line.sections.some((section) => section.controls.some((control) => guidance.ids.has(control.id)));
-        const folded = !guided && collapsed.has(line.id);
+        const guided = lessonMode ? lineIsUseful(line, usefulIds) : false;
+        const folded = lineIsFolded({
+          lessonMode, useful: guided, saved: collapsed.has(line.id), peeked: peeked.has(line.id),
+        });
         return (
           <div key={line.id} className={`kc-line ${folded ? "kc-line-folded" : ""}`}>
             <button
