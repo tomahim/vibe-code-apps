@@ -115,3 +115,66 @@ test("progress storage is migration-safe", () => {
   storage.setItem(STORAGE_KEY, "not json");
   assert.deepEqual(readProgress(storage, lessons), { currentLesson: null, passed: {}, tries: {} });
 });
+
+import { offsetForKey, isTextEntryTarget, HeldNotes, WHITE_KEY_LABELS, BLACK_KEY_LABELS } from "../src/apps/knob-conservatory/synth/computerKeys.js";
+
+test("computer keyboard maps the classic two-row layout", () => {
+  // White keys: A S D F G H J K -> C D E F G A B C.
+  assert.equal(offsetForKey("a"), 0);
+  assert.equal(offsetForKey("s"), 2);
+  assert.equal(offsetForKey("d"), 4);
+  assert.equal(offsetForKey("f"), 5);
+  assert.equal(offsetForKey("g"), 7);
+  assert.equal(offsetForKey("h"), 9);
+  assert.equal(offsetForKey("j"), 11);
+  assert.equal(offsetForKey("k"), 12);
+  // Black keys: W E T Y U -> C# D# F# G# A#.
+  assert.equal(offsetForKey("w"), 1);
+  assert.equal(offsetForKey("e"), 3);
+  assert.equal(offsetForKey("t"), 6);
+  assert.equal(offsetForKey("y"), 8);
+  assert.equal(offsetForKey("u"), 10);
+  // Uppercase (shift held) plays the same notes.
+  assert.equal(offsetForKey("A"), 0);
+  // AZERTY letters land on the same physical keys.
+  assert.equal(offsetForKey("q"), 0); // AZERTY home row starts with Q
+  assert.equal(offsetForKey("z"), 1); // AZERTY top row has Z where QWERTY has W
+  // Non-note keys stay unmapped.
+  assert.equal(offsetForKey("x"), null);
+  assert.equal(offsetForKey(" "), null);
+  assert.equal(offsetForKey("Enter"), null);
+  // Every on-screen key shows the letter that plays it.
+  assert.deepEqual(Object.keys(WHITE_KEY_LABELS).map(Number).sort((a, b) => a - b), [0, 2, 4, 5, 7, 9, 11, 12]);
+  assert.deepEqual(Object.keys(BLACK_KEY_LABELS).map(Number).sort((a, b) => a - b), [1, 3, 6, 8, 10]);
+  for (const [offset, letter] of [...Object.entries(WHITE_KEY_LABELS), ...Object.entries(BLACK_KEY_LABELS)]) {
+    assert.equal(offsetForKey(letter), Number(offset), `${letter} plays offset ${offset}`);
+  }
+});
+
+test("text entry targets never trigger notes", () => {
+  const input = { closest: (sel) => sel.includes("input") ? {} : null, isContentEditable: false };
+  assert.ok(isTextEntryTarget(input));
+  assert.ok(isTextEntryTarget({ closest: () => null, isContentEditable: true }));
+  assert.ok(!isTextEntryTarget({ closest: () => null, isContentEditable: false }));
+  assert.ok(!isTextEntryTarget({ isContentEditable: false })); // e.g. the page body
+});
+
+test("held notes follow last-note priority like a monosynth", () => {
+  const held = new HeldNotes();
+  assert.equal(held.press("a", 60, 0), 60); // first key sounds
+  assert.equal(held.press("a", 60, 0), null); // repeat ignored
+  assert.equal(held.press("s", 62, 2), 62); // newer key takes over
+  assert.equal(held.release("s"), 60); // releasing the top falls back to the held note
+  assert.equal(held.release("a"), "off"); // last key up releases the gate
+  assert.equal(held.release("a"), null);
+  held.press("a", 60, 0);
+  held.press("s", 62, 2);
+  assert.equal(held.release("a"), null); // releasing a buried key changes nothing
+  assert.equal(held.release("s"), "off");
+  held.press("a", 60, 0);
+  assert.equal(held.clear(), "off");
+  assert.equal(held.clear(), null);
+  held.press("a", 60, 0);
+  held.press("w", 61, 1);
+  assert.deepEqual([...held.activeOffsets()].sort(), [0, 1]);
+});
