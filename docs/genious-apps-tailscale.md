@@ -262,3 +262,17 @@ If a device is lost, remove that device from Machines right away.
 - The `master` deploy workflows (GitHub Actions deploying `ui` and `api` to
   Railway) still succeed; they authenticate with the `RAILWAY_TOKEN` secret and
   do not depend on a public domain.
+
+## Known limitation: plain HTTP blocks browser AudioWorklet
+
+The app is served as `http://...railway.internal:8080`. Browsers treat that as
+an insecure context and hide the AudioWorklet API, so the Music generation
+library (SuperSonic / scsynth on WebAssembly) cannot start its audio engine on
+the deployed address; other apps are unaffected. The app now detects this and
+says so instead of showing SuperSonic's "Missing required features" error.
+
+The real fix is serving the app over HTTPS on the tailnet (for example
+Tailscale HTTPS certificates plus `tailscale serve` in front of the `ui`
+service). Until then, a per-device Chrome workaround is
+`chrome://flags/#unsafely-treat-insecure-origin-as-secure` with the app's
+`http://...railway.internal:8080` origin added, then relaunch Chrome.
