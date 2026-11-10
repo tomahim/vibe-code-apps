@@ -214,3 +214,18 @@ test("collapsed lines round-trip through storage, ignoring junk", () => {
   writeCollapsedLines(storage, new Set([lines[1].id, lines[0].id]));
   assert.deepEqual([...readCollapsedLines(storage, lines)], [lines[1].id, lines[0].id]);
 });
+
+test("lessons fold every line the step does not need, workshop folds stay saved", async () => {
+  const { lineIsUseful, lineIsFolded } = await import("../src/apps/knob-conservatory/collapse.js");
+  const lines = sectionLines(SECTIONS);
+  const target = lines[1].sections[0].controls[0].id;
+  const useful = lines.filter((line) => lineIsUseful(line, new Set([target])));
+  assert.deepEqual(useful.map((line) => line.id), [lines[1].id]);
+  // lessons: useful open, others folded even if saved open, peek opens
+  assert.equal(lineIsFolded({ lessonMode: true, useful: true, saved: true, peeked: false }), false);
+  assert.equal(lineIsFolded({ lessonMode: true, useful: false, saved: false, peeked: false }), true);
+  assert.equal(lineIsFolded({ lessonMode: true, useful: false, saved: false, peeked: true }), false);
+  // workshop: saved fold decides
+  assert.equal(lineIsFolded({ lessonMode: false, useful: false, saved: true, peeked: false }), true);
+  assert.equal(lineIsFolded({ lessonMode: false, useful: false, saved: false, peeked: false }), false);
+});
