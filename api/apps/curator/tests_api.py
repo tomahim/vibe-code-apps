@@ -131,6 +131,12 @@ class CuratorAPITests(TestCase):
         # Uncategorized objects count towards Inbox only, never towards All-less duplicates.
         self.assertNotIn(None, counts)
 
+        # Type counts ignore the type filter but follow the category filter.
+        types = self.client.get('/content/', **self.headers).json()['type_counts']
+        self.assertEqual((types['all'], types['news'], types[idea.slug]), (5, 2, 3))
+        inbox_types = self.client.get('/content/?category=inbox&type=news', **self.headers).json()['type_counts']
+        self.assertEqual((inbox_types['all'], inbox_types['news'], inbox_types[idea.slug]), (3, 1, 2))
+
 
     def test_inbox_includes_uncategorized_objects_without_backfill(self):
         note = Content.objects.create(owner=self.owner, object_type=ObjectType.objects.get(slug="daily-note"), title="Unprocessed note")

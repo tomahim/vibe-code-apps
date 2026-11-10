@@ -20,3 +20,5 @@
 .ln-tabs button{display:inline-flex;align-items:baseline;gap:5px}
 .ln-tab-count{font-size:9px;opacity:.55}
 .ln-tabs button.active .ln-tab-count{opacity:.75}
+.ln-sidebar>button .ln-side-count{margin-left:auto;font-size:11px;opacity:.6;font-variant-numeric:tabular-nums}
+.ln-sidebar>button.active .ln-side-count{opacity:.8}

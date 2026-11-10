@@ -15,6 +15,7 @@ function safeUrl(value) { try { const u = new URL(value); return ["http:", "http
 // The count is a visual glance; screen readers already get the total from the
 // heading, so it stays out of the tab's accessible name. Every tab shows its
 // number once counts are loaded, zero included, so the row never looks half-loaded.
+function SideCount({ counts, slug }) { return counts ? <span className="ln-side-count" >{counts[slug] ?? 0}</span> : null; }
 function TabCount({ counts, slug }) { return counts ? <span className="ln-tab-count" aria-hidden="true">{counts[slug] ?? 0}</span> : null; }
 async function api(path, options = {}) {
   const response = await authFetch(base + path, options);
@@ -39,6 +40,7 @@ export default function LittleNotes({ onHome }) {
   const [taxonomy, setTaxonomy] = useState({ types: [], categories: [], tags: [], months: [] });
   const [items, setItems] = useState([]); const [total, setTotal] = useState(0);
   const [categoryCounts, setCategoryCounts] = useState(null);
+  const [typeCounts, setTypeCounts] = useState(null);
   const [next, setNext] = useState(null);
   const [selected, setSelected] = useState(null); const [busy, setBusy] = useState(false);
   const [error, setError] = useState(""); const [notice, setNotice] = useState("");
@@ -105,7 +107,7 @@ export default function LittleNotes({ onHome }) {
           }
         }
         if (current !== generation.current) return;
-        setItems(result.items); setTotal(result.total); setNext(result.next_page); setCategoryCounts(result.category_counts || null);
+        setItems(result.items); setTotal(result.total); setNext(result.next_page); setCategoryCounts(result.category_counts || null); setTypeCounts(result.type_counts || null);
         if (!routeItem && view === "default" && result.items[0]) { const detail = await api(`content/${result.items[0].id}/`); if (current === generation.current) setSelected(detail); }
       } catch (e) { if (current === generation.current) setError(e.message); }
       finally { if (current === generation.current) setLoading(false); }
@@ -224,7 +226,7 @@ export default function LittleNotes({ onHome }) {
     <header className="ln-header"><button className="ln-home" onClick={onHome} aria-label="Back to apps">↖</button><span className="ln-brand">little notes<span>IN / OUT</span></span><div className="ln-header-actions"><button className="ln-theme-toggle" aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} onClick={toggleTheme}>{theme === "dark" ? "☀" : "☾"}</button><button onClick={openCapture} disabled={!signedIn}>+ Capture</button><AccountMenu /></div></header>
     {!signedIn ? <main className="ln-signin"><p className="ln-eyebrow">YOUR PERSONAL COLLECTION</p><h1>A little room<br />for later.</h1><p>Ideas, bookmarks, news, videos, work ideas and daily notes. Sign in to open your own collection.</p><a href="/login">Sign in →</a></main> : <>
       {admin && taxonomy.can_manage_taxonomy ? <TaxonomyAdmin key={route.adminKind} initialKind={route.adminKind} onKindChange={value => setRoute(old => ({ ...old, adminKind: value }))} taxonomy={taxonomy} api={api} onCreated={() => setRefresh(x => x + 1)} onClose={() => setAdmin(false)} /> : <div className="ln-workspace">
-        <aside className={`ln-sidebar ${drawer ? "is-open" : ""}`} aria-label="Object type filters"><button className="ln-close" onClick={() => setDrawer(false)}>Close filters ×</button><p className="ln-eyebrow">YOUR OBJECTS</p><button className={!type ? "active" : ""} onClick={() => chooseType("")}>◉ <span>Everything</span></button>{taxonomy.types.map(t => <button key={t.slug} className={type === t.slug ? "active" : ""} onClick={() => chooseType(t.slug)}>{t.icon || icons[t.slug] || "◇"}<span>{t.name}</span></button>)}<div className="ln-sidebar-foot"><strong>KEEP THE THOUGHT.<br />CLEAR THE INBOX.</strong><p>No folders to maintain.<br />Just types, dates and categories.</p></div>{taxonomy.can_manage_taxonomy && <button className="ln-manage-button" onClick={() => { setDrawer(false); setAdmin(true); }}><span aria-hidden="true">⚙</span> Manage</button>}</aside>
+        <aside className={`ln-sidebar ${drawer ? "is-open" : ""}`} aria-label="Object type filters"><button className="ln-close" onClick={() => setDrawer(false)}>Close filters ×</button><p className="ln-eyebrow">YOUR OBJECTS</p><button className={!type ? "active" : ""} onClick={() => chooseType("")}>◉ <span>Everything</span><SideCount counts={typeCounts} slug="all" /></button>{taxonomy.types.map(t => <button key={t.slug} className={type === t.slug ? "active" : ""} onClick={() => chooseType(t.slug)}>{t.icon || icons[t.slug] || "◇"}<span>{t.name}</span><SideCount counts={typeCounts} slug={t.slug} /></button>)}<div className="ln-sidebar-foot"><strong>KEEP THE THOUGHT.<br />CLEAR THE INBOX.</strong><p>No folders to maintain.<br />Just types, dates and categories.</p></div>{taxonomy.can_manage_taxonomy && <button className="ln-manage-button" onClick={() => { setDrawer(false); setAdmin(true); }}><span aria-hidden="true">⚙</span> Manage</button>}</aside>
         <main className="ln-main"><div className="ln-toolbar"><button className="ln-filter-button" onClick={() => setDrawer(true)}>☰ Types</button><label className="ln-search"><span>⌕</span><input type="search" placeholder="Find a thought, link, phrase..." value={q} onChange={e => filter(setQ, e.target.value)} aria-label="Search content" /></label><select value={month} onChange={e => filter(setMonth, e.target.value)} aria-label="Browse by saved month">{view !== "calendar" && <option value="">All months</option>}{month && !taxonomy.months.some(m => m.month === month) && <option value={month}>{month}</option>}{taxonomy.months.map(m => <option key={m.month} value={m.month}>{m.month} · {m.count}</option>)}</select></div>
           <nav className="ln-tabs" aria-label="Category filters"><button className={!category ? "active" : ""} onClick={() => filter(setCategory, "")}>All<TabCount counts={categoryCounts} slug="all" /></button>{tabCategories.map(c => <button key={c.slug} className={category === c.slug ? "active" : ""} onClick={() => filter(setCategory, c.slug)}>{c.name}<TabCount counts={categoryCounts} slug={c.slug} /></button>)}<select aria-label="Topic tag filter" value={tag} onChange={e => filter(setTag, e.target.value)}><option value="">More tags</option>{taxonomy.tags.map(t => <option key={t.slug} value={t.slug}>{t.name}</option>)}</select></nav>
           {archiveCategory && <div className="ln-archive-row"><button className={category === "archive" ? "active" : ""} aria-pressed={category === "archive"} onClick={() => filter(setCategory, "archive")}>Archive</button></div>}
