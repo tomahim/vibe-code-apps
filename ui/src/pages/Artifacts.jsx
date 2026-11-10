@@ -9,6 +9,16 @@ const artifacts = createCatalog(
   import.meta.glob("../artifacts/*.json", { eager: true, import: "default" }),
 );
 const months = [...new Set(artifacts.map((artifact) => artifact.date?.slice(0, 7)).filter(Boolean))].sort().reverse();
+const FAVORITES_KEY = "genious-artifacts-favorites";
+
+function loadFavorites() {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(FAVORITES_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed.filter((slug) => typeof slug === "string") : [];
+  } catch {
+    return [];
+  }
+}
 const dateFormat = new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 const formatDate = (date) => date ? dateFormat.format(new Date(`${date}T00:00:00Z`)) : "Undated";
 const monthFormat = new Intl.DateTimeFormat("en", { month: "long", year: "numeric", timeZone: "UTC" });
@@ -40,11 +50,25 @@ export default function Artifacts({ path }) {
   const [query, setQuery] = useState("");
   const [month, setMonth] = useState("");
   const [order, setOrder] = useState("oldest");
+  const [favorites, setFavorites] = useState(loadFavorites);
+  const [showFavorites, setShowFavorites] = useState(false);
   const slug = path.replace(/^\/artifacts\/?/, "").replace(/\/$/, "");
   const artifact = artifacts.find((entry) => encodeURIComponent(entry.slug) === slug);
-  const results = filterArtifacts(artifacts, { query, month, order });
+  const results = filterArtifacts(artifacts, { query, month, order, favorites: showFavorites ? favorites : undefined });
 
-  function reset() { setQuery(""); setMonth(""); setOrder("oldest"); }
+  function toggleFavorite(favoriteSlug) {
+    setFavorites((current) => {
+      const next = current.includes(favoriteSlug) ? current.filter((entry) => entry !== favoriteSlug) : [...current, favoriteSlug];
+      try {
+        window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(next));
+      } catch {
+        // Private browsing or full storage: favorites stay session-only.
+      }
+      return next;
+    });
+  }
+
+  function reset() { setQuery(""); setMonth(""); setOrder("oldest"); setShowFavorites(false); }
 
   if (slug && artifact) return <ArtifactViewer key={artifact.slug} artifact={artifact} />;
 
@@ -62,18 +86,29 @@ export default function Artifacts({ path }) {
         <label className="artifact-search"><span>Search the collection</span><input type="search" placeholder="Search titles, descriptions…" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
         <label><span>Added</span><select value={month} onChange={(event) => setMonth(event.target.value)}><option value="">All months</option>{months.map((value) => <option key={value} value={value}>{formatMonth(value)}</option>)}</select></label>
         <label><span>Sort by</span><select value={order} onChange={(event) => setOrder(event.target.value)}><option value="oldest">Earliest first</option><option value="newest">Newest first</option></select></label>
+        <div className="artifact-fav-filter"><button type="button" aria-pressed={showFavorites} onClick={() => setShowFavorites((on) => !on)}><span aria-hidden="true">{showFavorites ? "★" : "☆"}</span> Favorites{favorites.length > 0 ? ` (${favorites.length})` : ""}</button></div>
       </section>
-      <div className="artifact-results-heading"><p role="status">{results.length} {results.length === 1 ? "experiment" : "experiments"}{query || month ? ` of ${artifacts.length}` : " in the collection"}</p><span>{order === "newest" ? "LATEST → EARLIEST" : "EARLIEST → LATEST"}</span></div>
+      <div className="artifact-results-heading"><p role="status">{showFavorites
+        ? `${results.length} ${results.length === 1 ? "favorite" : "favorites"}${query || month ? ` of ${favorites.length}` : " starred"}`
+        : `${results.length} ${results.length === 1 ? "experiment" : "experiments"}${query || month ? ` of ${artifacts.length}` : " in the collection"}`}</p><span>{order === "newest" ? "LATEST → EARLIEST" : "EARLIEST → LATEST"}</span></div>
       <ol className="artifact-list" aria-label="Artifacts">
-        {results.map((entry, index) => <li key={entry.slug}>
-          <span className="artifact-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-          <div className="artifact-entry">
-            <div className="artifact-entry-heading"><h2><a href={`/artifacts/${encodeURIComponent(entry.slug)}`}>{entry.title}<span aria-hidden="true">↗</span></a></h2><time dateTime={entry.date || undefined}>{formatDate(entry.date)}</time></div>
-            <p>{entry.description}</p>
-          </div>
-        </li>)}
+        {results.map((entry, index) => {
+          const isFavorite = favorites.includes(entry.slug);
+          return <li key={entry.slug}>
+            <span className="artifact-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <div className="artifact-entry">
+              <div className="artifact-entry-heading"><h2><a href={`/artifacts/${encodeURIComponent(entry.slug)}`}>{entry.title}<span aria-hidden="true">↗</span></a></h2><time dateTime={entry.date || undefined}>{formatDate(entry.date)}</time></div>
+              <p>{entry.description}</p>
+            </div>
+            <button type="button" className="artifact-fav" aria-pressed={isFavorite} aria-label={isFavorite ? `Remove ${entry.title} from favorites` : `Add ${entry.title} to favorites`} title={isFavorite ? "Remove from favorites" : "Add to favorites"} onClick={() => toggleFavorite(entry.slug)}><span aria-hidden="true">{isFavorite ? "★" : "☆"}</span></button>
+          </li>;
+        })}
       </ol>
-      {!results.length && <section className="artifact-empty"><h2>{artifacts.length ? "No experiments found." : "Room for the first experiment."}</h2><p>{artifacts.length ? "Try a different search or clear your filters." : "New ideas will find their way here."}</p>{artifacts.length > 0 && <button onClick={reset}>Clear filters</button>}</section>}
+      {!results.length && <section className="artifact-empty">
+        {showFavorites && favorites.length === 0 ? <><h2>No favorites yet.</h2><p>Star an experiment and it will wait for you here.</p></>
+          : showFavorites ? <><h2>No favorites match.</h2><p>Try a different search or clear your filters.</p><button onClick={reset}>Clear filters</button></>
+            : <><h2>{artifacts.length ? "No experiments found." : "Room for the first experiment."}</h2><p>{artifacts.length ? "Try a different search or clear your filters." : "New ideas will find their way here."}</p>{artifacts.length > 0 && <button onClick={reset}>Clear filters</button>}</>}
+      </section>}
       <footer className="site-footer artifacts-footer"><span>An ongoing collection. Always room for another idea.</span><span>MADE TO EXPLORE ↗</span></footer>
     </>}
   </main>;

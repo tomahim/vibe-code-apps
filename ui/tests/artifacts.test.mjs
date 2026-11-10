@@ -38,3 +38,14 @@ test('search words and month filter combine without mutating the catalog', () =>
   assert.equal(catalog.length, 2);
   assert.deepEqual(createCatalog({}), []);
 });
+
+test('favorites filter keeps only starred slugs and combines with search and month', () => {
+  const catalog = createCatalog({ './2026-10-23-devflow.html': () => {}, './2026-10-24-color-play.html': () => {}, './2026-10-25-open-water.html': () => {} });
+  assert.deepEqual(filterArtifacts(catalog, { favorites: ['2026-10-24-color-play'] }).map(entry => entry.slug), ['2026-10-24-color-play']);
+  assert.deepEqual(filterArtifacts(catalog, { favorites: [] }), [], 'favorites view with no starred slugs is empty');
+  assert.equal(filterArtifacts(catalog).length, 3, 'omitted favorites means no favorites filtering');
+  assert.equal(filterArtifacts(catalog, { favorites: undefined }).length, 3, 'undefined favorites means no favorites filtering');
+  assert.deepEqual(filterArtifacts(catalog, { favorites: ['2026-10-23-devflow', '2026-10-25-open-water'], query: 'water' }).map(entry => entry.slug), ['2026-10-25-open-water']);
+  assert.deepEqual(filterArtifacts(catalog, { favorites: ['2026-10-23-devflow'], month: '2026-11' }), [], 'month filter still applies inside favorites');
+  assert.equal(catalog.length, 3, 'favorites filtering does not mutate the catalog');
+});
