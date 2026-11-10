@@ -1070,5 +1070,47 @@ export const GLOSSARY_TERMS = [
                     "license": "CC BY-SA 4.0",
                     "alt": "Schéma des changements à l'échelle du grain dans un grès pendant la compaction et la cimentation"
             }
+    },
+    {
+            "id": "corail",
+            "category": "temps",
+            "fr": {
+                    "term": "Corail",
+                    "definition": "Animal marin de l'embranchement des cnidaires, vivant le plus souvent en colonies de polypes qui partagent un squelette calcaire. Par l'accumulation de ces squelettes, les coraux durs bâtisseurs de récifs ont formé les récifs coralliens, plus grandes structures complexes créées par des organismes vivants.",
+                    "source": "https://fr.wikipedia.org/wiki/Corail"
+            },
+            "en": {
+                    "term": "Coral",
+                    "definition": "A marine invertebrate of the phylum Cnidaria, usually living in colonies of tiny polyps that share a hard skeleton. Reef-building corals secrete calcium carbonate, and the accumulation of their skeletons forms coral reefs, the largest complex structures built by living organisms.",
+                    "source": "https://en.wikipedia.org/wiki/Coral"
+            },
+            "image": {
+                    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Coral_%28Galaxea_fascicularis%29%2C_mar_Rojo%2C_Egipto%2C_2023-04-18%2C_DD_128.jpg/960px-Coral_%28Galaxea_fascicularis%29%2C_mar_Rojo%2C_Egipto%2C_2023-04-18%2C_DD_128.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                    "file": "https://commons.wikimedia.org/wiki/File:Coral_(Galaxea_fascicularis),_mar_Rojo,_Egipto,_2023-04-18,_DD_128.jpg",
+                    "credit": "Diego Delso",
+                    "license": "CC BY-SA 4.0",
+                    "alt": "Colonie de corail Galaxea fascicularis aux polypes ouverts, mer Rouge"
+            }
+    },
+    {
+            "id": "phytoplancton",
+            "category": "planete",
+            "fr": {
+                    "term": "Phytoplancton",
+                    "definition": "Partie du plancton qui tire son énergie de la photosynthèse : cyanobactéries, diatomées, dinoflagellés et coccolithophoridés dérivent dans la zone éclairée des océans. Base des chaînes alimentaires marines, il produit environ la moitié de l'oxygène de la planète ; les plaques calcaires des coccolithophoridés fossiles ont formé la craie.",
+                    "source": "https://fr.wikipedia.org/wiki/Phytoplancton"
+            },
+            "en": {
+                    "term": "Phytoplankton",
+                    "definition": "The photosynthesizing part of plankton: cyanobacteria, diatoms, dinoflagellates and coccolithophores drifting in the sunlit surface layer of oceans and lakes. The base of marine food webs, it produces about half of Earth's oxygen; the calcium-carbonate plates of fossil coccolithophores built up chalk.",
+                    "source": "https://en.wikipedia.org/wiki/Phytoplankton"
+            },
+            "image": {
+                    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Diatoms_through_the_microscope.jpg/960px-Diatoms_through_the_microscope.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                    "file": "https://commons.wikimedia.org/wiki/File:Diatoms_through_the_microscope.jpg",
+                    "credit": "Prof. Gordon T. Taylor, Stony Brook University",
+                    "license": "Public domain",
+                    "alt": "Diatomées, un groupe majeur du phytoplancton, observées au microscope optique"
+            }
     }
 ];
