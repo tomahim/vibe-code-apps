@@ -12,9 +12,14 @@ import { SECTIONS } from "../synth/params.js";
 // first of them (`anchor`, also wired to `anchorRef` for scroll-to-knob)
 // carries a callout bubble with the step's instruction, kept inside the
 // viewport by measuring and shifting after render.
+//
+// `feedback` (lessons mode, after an ear check) maps control id to the
+// verdict for that control ({ text, within }); each flagged control gets its
+// own bubble, so the player reads the verdict on the knob, not in a banner.
 
-function GuidanceBubble({ tip }) {
+function GuidanceBubble({ tip, status }) {
   const ref = useRef(null);
+  const text = status ? status.text : null;
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -25,11 +30,17 @@ function GuidanceBubble({ tip }) {
     if (rect.left < margin) shift = margin - rect.left;
     else if (rect.right > window.innerWidth - margin) shift = window.innerWidth - margin - rect.right;
     if (shift) el.style.setProperty("--tip-shift", `${shift}px`);
-  }, [tip]);
-  return <div className="kc-tip" role="note" ref={ref}>{tip}</div>;
+  }, [tip, text]);
+  const tone = status ? (status.within ? "kc-tip-ok" : "kc-tip-fix") : "";
+  return (
+    <div className={`kc-tip ${tone}`} role="note" ref={ref}>
+      {tip && <span className="kc-tip-hint">{tip}</span>}
+      {status && <span className="kc-tip-status">{status.text}</span>}
+    </div>
+  );
 }
 
-export default function Panel({ patch, unlocked, onChange, guidance, anchorRef }) {
+export default function Panel({ patch, unlocked, onChange, guidance, feedback, anchorRef }) {
   return (
     <div className="kc-panel">
       {SECTIONS.map((section) => {
@@ -62,15 +73,17 @@ export default function Panel({ patch, unlocked, onChange, guidance, anchorRef }
                   />
                 );
                 if (!guided) return <div key={control.id} className="kc-control">{body}</div>;
+                const status = feedback?.[control.id] ?? null;
+                const state = status ? (status.within ? "kc-control-ok" : "kc-control-fix") : "";
                 return (
                   <div
                     key={control.id}
-                    className="kc-control kc-control-guided"
+                    className={`kc-control kc-control-guided ${state}`}
                     ref={isAnchor ? anchorRef : undefined}
                   >
-                    {!isAnchor && <span className="kc-pointer" aria-hidden="true">▾</span>}
+                    {!isAnchor && !status && <span className="kc-pointer" aria-hidden="true">▾</span>}
                     {body}
-                    {isAnchor && <GuidanceBubble tip={guidance.tip} />}
+                    {(isAnchor || status) && <GuidanceBubble tip={isAnchor ? guidance.tip : null} status={status} />}
                   </div>
                 );
               })}

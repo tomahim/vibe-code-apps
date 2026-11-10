@@ -230,7 +230,10 @@ export class SynthEngine {
   }
 
   noteOn(midi) {
-    if (!this._nodes) return;
+    if (!this.context) this._build(); // default-on power: lazy start on first note
+    // A key or tap is a user gesture, so if the autoplay policy parked the
+    // context this resume lets the very first note sound.
+    if (this.context.state === "suspended") this.context.resume().catch(() => {});
     const n = this._nodes;
     const p = this.patch;
     const t = this.context.currentTime;
@@ -289,7 +292,7 @@ export class SynthEngine {
   // Play a short reference note with a different patch, then restore the
   // player's patch. Used by lessons for the hidden target sound.
   async preview(patch, midi = 57, seconds = 1.1) {
-    if (!this._nodes) return;
+    await this.powerOn(); // builds the engine and clears an autoplay hold
     const saved = this.patch;
     this.applyPatch(patch);
     this.noteOn(midi);

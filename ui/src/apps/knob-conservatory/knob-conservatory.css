@@ -89,13 +89,14 @@
 
 .kc-hint a { color: #f5c96b; }
 
-.kc-lesson, .kc-workshop {
+.kc-sidebar, .kc-workshop {
   background: #201b13;
   border: 1px solid #3a3122;
   border-radius: 14px;
   padding: 14px;
-  margin-bottom: 14px;
 }
+
+.kc-workshop { margin-bottom: 14px; }
 
 .kc-lesson-head {
   display: flex;
@@ -108,12 +109,12 @@
 .kc-chapter { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: #b9a98a; }
 .kc-minutes { margin-left: auto; font-size: 0.8rem; color: #b9a98a; }
 
-.kc-lesson p, .kc-workshop p { font-size: 0.95rem; line-height: 1.5; }
+.kc-sidebar p, .kc-workshop p { font-size: 0.95rem; line-height: 1.5; }
 .kc-goal { color: #f5c96b; }
 
-.kc-lesson-actions { display: flex; gap: 10px; margin-top: 10px; }
+.kc-side-actions { display: flex; gap: 6px; margin: 10px 0; }
 
-.kc-lesson-actions button, .kc-step-bar-actions button, .kc-save-row button, .kc-reveal {
+.kc-side-actions button, .kc-mobilebar-actions button, .kc-save-row button, .kc-reveal {
   flex: 1;
   min-height: 48px;
   border-radius: 10px;
@@ -125,7 +126,7 @@
   cursor: pointer;
 }
 
-.kc-lesson-actions button:disabled, .kc-step-bar-actions button:disabled { opacity: 0.45; }
+.kc-side-actions button:disabled, .kc-mobilebar-actions button:disabled { opacity: 0.45; }
 .kc-check { background: #f5c96b; color: #241f16; border-color: #f5c96b; font-weight: bold; }
 
 .kc-match {
@@ -142,7 +143,16 @@
 .kc-reveal { margin-top: 10px; flex: none; width: 100%; }
 
 .kc-path { margin-top: 14px; }
-.kc-path summary { cursor: pointer; color: #b9a98a; min-height: 32px; }
+.kc-path h3, .kc-side-shelf h3 {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #b9a98a;
+}
+.kc-path-scroll { max-height: 260px; overflow-y: auto; }
+.kc-side-shelf { margin-top: 16px; }
+.kc-match-revealed { margin: 8px 0 0; font-size: 0.85rem; color: #e8b64c; }
 .kc-path-chapter h4 { margin: 10px 0 4px; color: #f5c96b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
 .kc-path-chapter ol { margin: 0; padding-left: 20px; }
 .kc-path-chapter button {
@@ -416,54 +426,47 @@
   .kc-key-letter, .kc-keys-hint { display: none; }
 }
 
-/* Sticky step bar: the current lesson's goal and actions stay on screen while
-   the player scrolls through the panel, so there is no scrolling back to the
-   instructions. */
+/* Lessons layout: the lesson, its steps and the shelf ride in a sidebar
+   right next to the synth, so nothing about the current step sits far from
+   the controls. On phones the sidebar stacks just above the panel. */
 
-.kc-step-bar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 12px;
-  background: #17140f;
-  border-bottom: 1px solid #3a3122;
-  padding: 8px 0;
-  margin-bottom: 8px;
+.kc-lesson-layout { display: flex; flex-direction: column; gap: 14px; }
+.kc-mobilebar { display: none; }
+
+@media (min-width: 980px) {
+  .kc-lesson-layout { flex-direction: row; align-items: flex-start; }
+  .kc-sidebar {
+    flex: 0 0 320px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 10px;
+    max-height: calc(100vh - 190px);
+    overflow-y: auto;
+  }
+  .kc-lesson-layout > .kc-panel { flex: 1 1 auto; min-width: 0; }
 }
 
-.kc-step-bar-text { flex: 1 1 220px; }
-.kc-step-bar-lesson { font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: #b9a98a; }
-.kc-step-bar-goal { margin: 2px 0 0; font-size: 0.85rem; color: #f5c96b; }
-
-.kc-step-bar-actions { display: flex; gap: 6px; flex: 0 0 auto; }
-.kc-step-bar-actions button { min-height: 40px; padding: 0 12px; font-size: 0.8rem; }
-
-.kc-step-bar-result {
-  flex-basis: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
-  color: #e8b64c;
+/* Phones: a slim pinned bar keeps the goal and the two ear actions on screen
+   while the panel scrolls; the check verdict itself shows at the knobs. */
+@media (max-width: 979.98px) {
+  .kc-sidebar .kc-side-actions { display: none; }
+  .kc-mobilebar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: #17140f;
+    border-bottom: 1px solid #3a3122;
+    padding: 8px 0;
+    margin-bottom: 8px;
+  }
+  .kc-mobilebar-goal { flex: 1 1 170px; margin: 0; font-size: 0.8rem; color: #f5c96b; }
+  .kc-mobilebar-actions { display: flex; gap: 6px; flex: 0 0 auto; }
+  .kc-mobilebar-actions button { min-height: 40px; padding: 0 12px; font-size: 0.8rem; white-space: nowrap; }
 }
-
-.kc-step-bar-result button {
-  flex: none;
-  min-height: 36px;
-  padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid #6b5b3e;
-  background: #2c2519;
-  color: #efe6d4;
-  font-family: inherit;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.kc-step-bar-passed { color: #a8c68a; }
 
 /* Lesson guidance on the panel: ring the knobs to adjust, point at them, and
    pin the step's instruction to the first one. */
@@ -518,6 +521,18 @@
   border-top-color: #f5c96b;
 }
 
+/* Ear-check verdicts on the knobs: green when matched, clay when off. */
+.kc-tip-hint, .kc-tip-status { display: block; }
+.kc-tip-status { font-weight: 700; }
+.kc-tip-hint + .kc-tip-status { margin-top: 3px; }
+.kc-tip-ok { background: #a8c68a; }
+.kc-tip-ok::after { border-top-color: #a8c68a; }
+.kc-tip-fix { background: #d98a6a; }
+.kc-tip-fix::after { border-top-color: #d98a6a; }
+
+.kc-control-ok { outline-color: #a8c68a; animation: none; }
+.kc-control-fix { outline-color: #d98a6a; }
+
 @keyframes kc-guide-pulse {
   50% { outline-color: rgba(245, 201, 107, 0.25); }
 }
@@ -530,10 +545,8 @@
   .kc-control-guided, .kc-pointer { animation: none; }
 }
 
-.kc-step-bar-actions button { white-space: nowrap; }
-
-/* Keep guided controls clear of the sticky step bar and the pinned piano when
-   anything scrolls them into view (browser find-in-page, focus, etc.). */
+/* Keep guided controls clear of the pinned goal bar and the pinned piano
+   when anything scrolls them into view (browser find-in-page, focus, etc.). */
 .kc-control {
   scroll-margin-top: 90px;
   scroll-margin-bottom: 160px;
