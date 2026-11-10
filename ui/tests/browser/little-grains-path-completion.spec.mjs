@@ -13,8 +13,8 @@ async function fixture(page, { completed = false, quiz = false, partial = false,
     if (p.endsWith('/celebrated/')) { celebratedNow = true; return route.fulfill({ status: 201, json: { celebrated: true } }); }
     if (p.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ id: 'life', title: 'Life & Society', learning_paths: [{ id: 'baby', title: "A baby's first year through science", get celebrated() { return celebratedNow; }, progress: progress(), catch_up: { eligible: read, remaining: 1 }, lessons: [{ id: 'lesson', title: 'Small steps', position: 1, progress: progress() }, ...(lastLesson ? [] : [{ id: 'lesson-2', title: 'Growing taller', position: 2, progress: progress() }])] }] }], rewards: { drops: answered ? 107 : 0, carrots: Number(answered) } } });
     if (p.endsWith('/open/')) return route.fulfill({ json: {} });
-    if (p.endsWith('/complete/')) { read = true; return route.fulfill({ json: {} }); }
-    if (p.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { correct: true, carrot_earned: !completed, explanation: 'Correct.', next_step: null } }); }
+    if (p.endsWith('/complete/')) { read = true; return route.fulfill({ json: { card_id: 'card', completed_at: '2026-11-04T07:00:00Z', created: true, progress: progress(), next_step: !answered ? { type: 'question', id: 'question' } : null } }); }
+    if (p.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { attempt_id: 'attempt-1', question_id: 'question', attempt_type: 'initial', correct: true, carrot_earned: !completed, explanation: 'Correct.', answered_at: '2026-11-04T07:01:00Z', correct_answer: null, progress: progress(), next_step: null } }); }
     const question = { id: 'question', type: 'multiple_choice', lesson_title: 'Small steps', after_card_position: 1, prompt: 'What grows?', options: [{ id: 'a', text: 'Knowledge' }, { id: 'b', text: 'Nothing' }] };
     if (p.endsWith('/catch-up/')) return route.fulfill({ json: { questions: [question] } });
     return route.fulfill({ json: { theme: { id: 'life', title: 'Life & Society' }, learning_path: { id: 'baby', title: "A baby's first year through science" }, lesson: { id: 'lesson', title: 'Small steps', position: 1, progress: progress() }, cards: [{ id: 'card', title: 'A little every day', body_markdown: 'Small steps make a difference.', position: 1, completed_at: read || completed ? '2026-11-04T07:00:00Z' : null }], questions: [question], next_step: !read ? { type: 'card', id: 'card' } : !answered ? { type: 'question', id: 'question' } : null } });
@@ -35,6 +35,8 @@ for (const size of [{ width: 390, height: 844 }, { width: 320, height: 568 }, { 
     await expect(page.locator('.grains-path-complete')).toHaveCount(0);
     await answer(page);
     await expect(page.getByText('Lesson finished!')).toBeVisible();
+    // The garden refreshes when the lesson closes; the path celebration fires then.
+    await page.getByRole('button', { name: 'Close lesson' }).click();
     await expect(page.getByRole('dialog', { name: 'Your knowledge is in full bloom.' })).toBeVisible({ timeout: 10000 });
     const celebration = page.locator('.grains-path-complete');
     await expect(celebration).toContainText('+100');
@@ -83,6 +85,7 @@ test('finishing the last card celebrates the path even with questions still open
   await page.getByRole('button', { name: /read this card/ }).click();
   await answer(page);
   await expect(page.getByText('Lesson finished!')).toBeVisible();
+  await page.getByRole('button', { name: 'Close lesson' }).click();
   await expect(page.getByRole('dialog', { name: 'Your knowledge is in full bloom.' })).toBeVisible({ timeout: 10000 });
   await expect(page.locator('.grains-path-complete')).toContainText('+100');
 });

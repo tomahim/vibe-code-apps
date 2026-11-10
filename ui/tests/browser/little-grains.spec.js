@@ -21,8 +21,8 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       return route.fulfill({ json: { theme: row(id.theme, 'Language'), learning_path: row(id.path, 'Early Childhood English'), lesson: { ...row(id.lesson, 'Bath time and care'), progress: progress() }, cards: [{ id: id.card, position: 1, title: 'Warm water', body_markdown: 'The bath water is **warm**.', illustration_url: '', completed_at: read ? '2026-10-28T10:00:00Z' : null }, ...(twoCards ? [{ id: id.card2, position: 2, title: 'Dry gently', body_markdown: 'Use a **soft towel**.', illustration_url: '', completed_at: readSecond ? '2026-10-28T10:01:00Z' : null }] : [])], questions: [question], next_step: !read ? { type: 'card', id: id.card } : twoCards && !readSecond ? { type: 'card', id: id.card2 } : !answered ? { type: 'question', id: question.id } : null } });
     }
     if (url.pathname.endsWith(`/lessons/${id.lesson}/open/`)) return route.fulfill({ json: { lesson_id: id.lesson } });
-    if (url.pathname.endsWith(`/cards/${id.card}/complete/`)) { read = true; return route.fulfill({ status: 201, json: { created: true } }); }
-    if (url.pathname.endsWith(`/cards/${id.card2}/complete/`)) { readSecond = true; return route.fulfill({ status: 201, json: { created: true } }); }
+    if (url.pathname.endsWith(`/cards/${id.card}/complete/`)) { read = true; return route.fulfill({ status: 201, json: { card_id: id.card, completed_at: '2026-10-28T10:00:00Z', created: true, progress: progress(), next_step: twoCards && !readSecond ? { type: 'card', id: id.card2 } : !answered ? { type: 'question', id: wrong ? id.alternative : id.question } : null } }); }
+    if (url.pathname.endsWith(`/cards/${id.card2}/complete/`)) { readSecond = true; return route.fulfill({ status: 201, json: { card_id: id.card2, completed_at: '2026-10-28T10:01:00Z', created: true, progress: progress(), next_step: !answered ? { type: 'question', id: wrong ? id.alternative : id.question } : null } }); }
     if (url.pathname.endsWith('/question-attempts/')) {
       const review = answered;
       const answer = JSON.parse(route.request().postData()).answer;
@@ -30,7 +30,8 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
       const correctAnswer = wrong ? 'Use a soft towel.' : 'The bath water is warm.';
       const correct = typed ? answer.toLowerCase().replace(/[^a-z\s]/g, '').trim() === correctAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim() : answer === 'warm';
       if (correct) answered = true; else wrong = true;
-      return route.fulfill({ status: 201, json: { correct, carrot_earned: correct && !review, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', correct_answer: typed ? correctAnswer : null, next_step: correct ? null : { type: 'question', id: id.alternative } } });
+      const questionId = JSON.parse(route.request().postData()).question_id;
+      return route.fulfill({ status: 201, json: { attempt_id: `attempt-${questionId}`, question_id: questionId, correct, carrot_earned: correct && !review, attempt_type: review ? 'review' : 'initial', explanation: 'Compare the full sentence.', answered_at: '2026-10-28T10:02:00Z', correct_answer: typed ? correctAnswer : null, progress: progress(), next_step: correct ? null : { type: 'question', id: id.alternative } } });
     }
     if (url.pathname.endsWith('/badges/check/')) { if (badgeLog) badgeLog.push(route.request().method()); return route.fulfill({ json: mockBadges() }); }
     if (url.pathname.endsWith('/leaderboard/')) {

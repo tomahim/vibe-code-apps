@@ -162,7 +162,7 @@ function LessonComplete({ kind, onDone }) {
   </div>;
 }
 
-function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onStepChange, onLessonEnd }) {
+function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onLessonEnd }) {
   const [data, setData] = useState(null);
   const [viewStep, setViewStep] = useState(null);
   const [replay, setReplay] = useState(false);
@@ -187,11 +187,30 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     return result;
   }, [lessonId]);
 
+  // The complete/answer POST responses already carry the post-save progress
+  // and next_step, computed server-side in the same transaction. Apply them
+  // locally instead of re-downloading the whole lesson: on a card read or a
+  // correct answer the content of every upcoming step is already on screen's
+  // data (only a wrong answer can rotate in an unseen question - handled in
+  // continueAfterAnswer). The garden refreshes when the reader closes.
+  function applyProgress(result) {
+    setData((current) => current ? {
+      ...current,
+      lesson: { ...current.lesson, progress: result.progress ?? current.lesson.progress },
+      cards: result.card_id
+        ? current.cards.map((item) => item.id === result.card_id ? { ...item, completed_at: result.completed_at } : item)
+        : current.cards,
+      questions: result.question_id && result.correct
+        ? current.questions.map((item) => item.id === result.question_id ? { ...item, completed: true } : item)
+        : current.questions,
+    } : current);
+  }
+
   useEffect(() => {
     let active = true;
     setData(null); setReplay(false); setReturnStep(null); setFeedback(null); setChoice(""); setError("");
     api(`lessons/${lessonId}/open/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
-      .then(onProgress).catch(() => {});
+      .catch(() => {});
     api(`lessons/${lessonId}/`).then((result) => {
       if (!active) return;
       noteFullyRead(result); setData(result); setReplay(fullyReadAtOpen.current);
@@ -210,7 +229,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     return () => { active = false; };
     // initialStep is a mount-time deep link only; step moves stay local.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lessonId, onProgress]);
+  }, [lessonId]);
 
   // Keep the URL in sync with the reading step (#225): the parent pushes one
   // history entry when the reader opens, then replaces it from step to step.
@@ -256,11 +275,12 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     if (replay) { setViewStep(nextReplayStep(data, viewStep)); return; }
     setBusy(true); setError("");
     try {
-      await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+      const result = await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
       // Reading every card finishes the lesson (+5 drops, earned once), but a
-      // checkpoint after the last card is still a lesson step: let next_step
-      // serve it before the celebration, so the steps counter reaches the total.
-      await load(); await onProgress();
+      // checkpoint after the last card is still a lesson step: the server's
+      // next_step serves it before the celebration, so the counter reaches the total.
+      applyProgress(result);
+      setViewStep(result.next_step);
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
@@ -271,21 +291,24 @@ function LessonReader({ lessonId, initialStep = null, onClose, onProgress, onSte
     try {
       const result = await api("question-attempts/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question_id: question.id, answer: choice }) });
       setFeedback(result);
-      if (result.correct) { await load(true); if (!replay) await onProgress(); }
+      if (result.correct) applyProgress(result);
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
   }
 
   async function continueAfterAnswer() {
     if (busy) return;
+    const step = replay
+      ? (feedback.correct ? nextReplayStep(data, viewStep) : feedback.next_step)
+      : feedback.next_step;
+    // A wrong answer can rotate in a replacement question whose prompt and
+    // options were never downloaded (only the selected question per checkpoint
+    // ships at open). That is the one step that still needs a lesson refetch.
+    const rotated = step?.type === "question" && !data.questions.some((item) => item.id === step.id);
     setBusy(true); setError("");
     try {
-      if (replay) {
-        await load(true);
-        setViewStep(feedback.correct ? nextReplayStep(data, viewStep) : feedback.next_step);
-      } else {
-        await load();
-      }
+      if (rotated) await load(true);
+      setViewStep(step);
       setFeedback(null); setChoice("");
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
@@ -879,6 +902,16 @@ export default function LittleGrains() {
     }
   }, []);
 
+  // Garden freshness: the reader no longer refreshes the garden per card or
+  // answer (each save response already carries the progress it shows). One
+  // refresh when the lesson closes updates the map, the reward counters and
+  // fires any earned path celebration. (Thomas, 2026-11-10)
+  const wasReading = useRef(false);
+  useEffect(() => {
+    if (reader) { wasReading.current = true; return; }
+    if (wasReading.current) { wasReading.current = false; refresh(); }
+  }, [reader, refresh]);
+
   const closeReader = useCallback(() => {
     if (readerHistory.current === "pushed") { readerHistory.current = "none"; window.history.back(); return; }
     readerHistory.current = "none";
@@ -984,7 +1017,7 @@ export default function LittleGrains() {
         : startup.phase !== "ready"
           ? <GrainsLoader attempt={startup.attempt} />
           : <GrainsLoader />)}{error && <div className="grains-stage-message" role="alert"><p>{error}</p><button onClick={() => { setError(""); refresh().catch((err) => setError(err.message)); }}>Try again</button></div>}{garden?.themes.length === 0 && <div className="grains-stage-message"><h1>Your garden is ready</h1><p>Lessons will appear here when they are published.</p></div>}{rewardInfo && <RewardInfo currency={rewardInfo} onClose={() => setRewardInfo(null)} />}</section>
-    {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onProgress={refresh} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
+    {reader && <LessonReader key={reader.lessonId} lessonId={reader.lessonId} initialStep={reader.step} onClose={closeReader} onStepChange={handleReaderStep} onLessonEnd={(kind) => handleLessonEnd(reader.lessonId, kind)} />}
     {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} lesson={catchUp.lesson} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
     {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
