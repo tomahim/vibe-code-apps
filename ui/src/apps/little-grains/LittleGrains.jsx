@@ -25,23 +25,20 @@ const REWARD_COPY = {
   },
 };
 
-// Cold start: Railway puts the api to sleep after a quiet spell, and the
-// first request can fail before it is awake. Wait on a real database health
-// check before loading the garden, then keep pinging it while this tab is
-// visible so the api stays awake during the session.
+// Cold start: the first request can hit a sleeping api. Wait on a real
+// database health check before loading the garden; the loader covers the
+// retry budget. No keep-awake heartbeat: the api no longer sleeps (#466).
 const HEALTH_URL = "/api/learning/health/";
 const HEALTH_TIMEOUT_MS = 10000;
 const HEALTH_MAX_ATTEMPTS = 24;
 const HEALTH_WAIT_BUDGET_MS = 120000; // Total cap: attempts alone could stretch much longer.
 const HEALTH_RETRY_BASE_MS = 1500;
 const HEALTH_RETRY_CAP_MS = 5000;
-const KEEP_AWAKE_INTERVAL_MS = 10000;
 
 // Window overrides let browser tests run the retry loop fast.
 function healthMaxAttempts() { return window.__GRAINS_HEALTH_MAX_ATTEMPTS__ ?? HEALTH_MAX_ATTEMPTS; }
 function healthWaitBudget() { return window.__GRAINS_HEALTH_BUDGET_MS__ ?? HEALTH_WAIT_BUDGET_MS; }
 function healthRetryDelay(attempt) { return window.__GRAINS_HEALTH_RETRY_MS__ ?? Math.min(HEALTH_RETRY_BASE_MS * attempt, HEALTH_RETRY_CAP_MS); }
-function keepAwakeInterval() { return window.__GRAINS_KEEP_AWAKE_MS__ ?? KEEP_AWAKE_INTERVAL_MS; }
 
 async function pingHealth() {
   const response = await fetch(HEALTH_URL, { cache: "no-store", signal: AbortSignal.timeout(HEALTH_TIMEOUT_MS) });
@@ -1005,21 +1002,6 @@ export default function LittleGrains() {
     return () => { active = false; };
   }, [refresh, wakeRun]);
 
-  // Keep the api awake while this tab is in front: one health ping every
-  // 10s, paused whenever the tab is hidden so background tabs stay quiet.
-  useEffect(() => {
-    if (startup.phase !== "ready") return undefined;
-    let timer = null;
-    const ping = () => { pingHealth().catch(() => {}); };
-    const stop = () => { if (timer !== null) { clearInterval(timer); timer = null; } };
-    const start = () => { if (timer === null) timer = setInterval(ping, keepAwakeInterval()); };
-    const onVisibility = () => {
-      if (document.visibilityState === "visible") { ping(); start(); } else stop();
-    };
-    if (document.visibilityState === "visible") start();
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => { stop(); document.removeEventListener("visibilitychange", onVisibility); };
-  }, [startup.phase]);
 
   useEffect(() => {
     if (!garden || !mount.current) return;
