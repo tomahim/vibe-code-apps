@@ -4,14 +4,21 @@
 .artifacts-intro h1 { margin: 0; font: 650 clamp(56px, 8vw, 86px)/1.1 system-ui, sans-serif; letter-spacing: -.075em; }
 .artifacts-intro h1 > span { color: var(--green); }
 .artifacts-intro p:last-child { max-width: 560px; margin: 20px 0 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
-.artifact-controls { display: grid; grid-template-columns: 1fr 140px 160px; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.artifact-controls { display: grid; grid-template-columns: 1fr 140px 160px auto; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .artifact-controls label { display: grid; gap: 8px; color: var(--muted); font-size: 11px; font-weight: 600; }
 .artifact-controls input, .artifact-controls select { width: 100%; min-width: 0; height: 44px; padding: 0 13px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--ink); font-size: 13px; }
 .artifact-controls input:focus, .artifact-controls select:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+.artifact-fav-filter { align-self: end; }
+.artifact-fav-filter button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.artifact-fav-filter button:hover { border-color: #c8d4ca; color: var(--green); }
+.artifact-fav-filter button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--paper); }
 .artifact-results-heading { display: flex; justify-content: space-between; align-items: center; margin-top: 27px; color: var(--muted); font-size: 11px; }
 .artifact-results-heading > span { font: 9px monospace; letter-spacing: .09em; }
 .artifact-list { padding: 0; margin: 0; list-style: none; }
-.artifact-list > li { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 12px; padding: 27px 0; border-bottom: 1px solid var(--line); }
+.artifact-list > li { display: grid; grid-template-columns: 42px minmax(0, 1fr) 44px; gap: 12px; padding: 27px 0; border-bottom: 1px solid var(--line); }
+.artifact-fav { align-self: start; display: grid; place-items: center; width: 44px; height: 44px; margin-top: 10px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font-size: 20px; line-height: 1; }
+.artifact-fav:hover { background: var(--collection-wash, #eaf0e9); color: var(--green); }
+.artifact-fav[aria-pressed="true"] { color: #d9932a; }
 .artifact-number { padding-top: 5px; color: var(--green); font: 12px monospace; }
 .artifact-entry-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .artifact-entry h2 { margin: 0; font: 600 22px system-ui, sans-serif; letter-spacing: -.04em; }
@@ -43,7 +50,9 @@
   .artifacts-intro .collection-artwork { grid-column: 2; grid-row: 2; }
   .artifact-controls { grid-template-columns: 1fr 1fr; }
   .artifact-search { grid-column: 1 / -1; }
-  .artifact-list > li { grid-template-columns: 25px minmax(0, 1fr); gap: 8px; }
+  .artifact-fav-filter { grid-column: 1 / -1; }
+  .artifact-list > li { grid-template-columns: 25px minmax(0, 1fr) 40px; gap: 8px; }
+  .artifact-fav { width: 40px; height: 40px; margin-top: 6px; }
   .artifact-entry-heading { flex-direction: column; gap: 8px; }
   .artifacts-footer { flex-direction: column; }
   .artifact-viewer-bar { gap: 15px; padding-inline: 12px; }

@@ -81,3 +81,37 @@ test('mobile pages fit the viewport and unknown artifacts have a recovery link',
   await page.getByRole('link', { name: 'Browse all artifacts' }).click();
   await expect(page).toHaveURL(/\/artifacts$/);
 });
+
+test('favorites: star toggles, favorites view filters, state survives reload', async ({ page }) => {
+  await page.goto('/artifacts');
+  const rows = page.locator('.artifact-list > li');
+  await expect(rows.first()).toBeVisible();
+  const total = await rows.count();
+  expect(total).toBeGreaterThan(2);
+  const favToggle = page.getByRole('button', { name: /Favorites/ });
+  await expect(favToggle).toHaveAttribute('aria-pressed', 'false');
+  // Favorites view starts empty with a dedicated empty state.
+  await favToggle.click();
+  await expect(favToggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('heading', { name: 'No favorites yet.' })).toBeVisible();
+  await favToggle.click();
+  // Star the first two experiments.
+  await rows.nth(0).locator('.artifact-fav').click();
+  await rows.nth(1).locator('.artifact-fav').click();
+  await expect(rows.nth(0).locator('.artifact-fav')).toHaveAttribute('aria-pressed', 'true');
+  await expect(favToggle).toContainText('(2)');
+  await favToggle.click();
+  await expect(page.locator('.artifact-list > li')).toHaveCount(2);
+  await expect(page.getByRole('status')).toContainText('2 favorites starred');
+  // Stars persist across a reload; the view filter resets.
+  await page.reload();
+  await expect(page.locator('.artifact-fav[aria-pressed="true"]')).toHaveCount(2);
+  await expect(page.locator('.artifact-list > li')).toHaveCount(total);
+  await favToggle.click();
+  await expect(page.locator('.artifact-list > li')).toHaveCount(2);
+  // Unstarring inside the favorites view removes the row immediately.
+  await page.locator('.artifact-fav').first().click();
+  await expect(page.locator('.artifact-list > li')).toHaveCount(1);
+  await page.locator('.artifact-fav').first().click();
+  await expect(page.getByRole('heading', { name: 'No favorites yet.' })).toBeVisible();
+});

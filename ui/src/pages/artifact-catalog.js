@@ -17,9 +17,12 @@ export function createCatalog(files, metadata = {}) {
   });
 }
 
-export function filterArtifacts(artifacts, { query = "", month = "", order = "oldest" } = {}) {
+export function filterArtifacts(artifacts, { query = "", month = "", order = "oldest", favorites } = {}) {
   const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   return artifacts.filter((artifact) => {
+    // favorites is an array of starred slugs when the favorites view is on;
+    // undefined means no favorites filtering (an empty list shows nothing).
+    if (favorites && !favorites.includes(artifact.slug)) return false;
     const haystack = [artifact.title, artifact.description, ...artifact.tags, artifact.date || ""].join(" ").toLowerCase();
     return words.every((word) => haystack.includes(word)) && (!month || artifact.date?.startsWith(month));
   }).sort((a, b) => {
