@@ -246,6 +246,20 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
     }
   }, [data, viewStep, onLessonEnd]);
 
+  // Advancing a step ("I've read this card", "Continue →") swaps the content
+  // while the reader stays scrolled at the bottom; bring the new step's top
+  // into view instead of making the reader scroll back up (Thomas, 2026-11-10).
+  const stepAnchor = useRef(null);
+  const scrollToStep = useRef(false);
+  useEffect(() => {
+    if (!scrollToStep.current) return;
+    scrollToStep.current = false;
+    const anchor = stepAnchor.current;
+    if (!anchor) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    anchor.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }, [viewStep, feedback]);
+
   const card = data?.cards.find((item) => viewStep?.type === "card" && item.id === viewStep.id);
   const question = data?.questions.find((item) => viewStep?.type === "question" && item.id === viewStep.id);
   // Shuffled once per question so the order stays stable while it is on screen.
@@ -269,7 +283,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
 
   async function completeCard() {
     if (!card || busy) return;
-    if (replay) { setViewStep(nextReplayStep(data, viewStep)); return; }
+    if (replay) { scrollToStep.current = true; setViewStep(nextReplayStep(data, viewStep)); return; }
     setBusy(true); setError("");
     try {
       const result = await api(`cards/${card.id}/complete/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
@@ -277,6 +291,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
       // checkpoint after the last card is still a lesson step: the server's
       // next_step serves it before the celebration, so the counter reaches the total.
       applyProgress(result);
+      scrollToStep.current = true;
       setViewStep(result.next_step);
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
@@ -305,6 +320,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
     setBusy(true); setError("");
     try {
       if (rotated) await load(true);
+      scrollToStep.current = true;
       setViewStep(step);
       setFeedback(null); setChoice("");
     } catch (err) { setError(err.message); }
@@ -360,8 +376,8 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
             <h2>{data.lesson.title}</h2>
             {data.lesson.introduction_markdown && <Markdown source={data.lesson.introduction_markdown} />}
           </div>
-          {card && <article className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3><CardIllustration card={card} /><Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
-          {question && <div className="grains-question">
+          {card && <article ref={stepAnchor} className="grains-study-card">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<p className="grains-card-index">CARD {card.position} OF {data.cards.length}</p><h3>{card.title}</h3><CardIllustration card={card} /><Markdown source={card.body_markdown} /><button className="grains-primary" disabled={busy} onClick={completeCard}>{busy ? "Saving…" : "I’ve read this card →"}</button></article>}
+          {question && <div ref={stepAnchor} className="grains-question">
             {previousCard && <button className="grains-text-button" disabled={!!feedback || busy} onClick={openPreviousCard}>← Previous card</button>}
             <p className="grains-card-index">{typedQuestion ? "TYPE YOUR ANSWER" : "CHECK YOUR UNDERSTANDING"}</p>
             <h3>{question.prompt}</h3>
@@ -379,10 +395,10 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
               <button className="grains-primary" disabled={busy} onClick={continueAfterAnswer}>{busy ? "Loading…" : feedback.correct ? "Continue →" : feedback.next_step?.id !== question.id ? "Try another question" : "Try again"}</button>
             </div> : <button className="grains-primary" disabled={!choice.trim() || busy} onClick={submitAnswer}>{busy ? "Checking…" : "Check answer"}</button>}
           </div>}
-          {!viewStep && (data.cards.length
+          {!viewStep && <div ref={stepAnchor}>{data.cards.length
             ? <LessonComplete kind={fullyReadAtOpen.current ? "reviewed" : "drops"} onDone={onClose} />
-            : <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>This lesson has no cards yet.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>)}
-          {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
+            : <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>This lesson has no cards yet.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>}</div>}
+          {reviewCard && <article ref={stepAnchor} className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
         </>}
       </div>
       </div>
