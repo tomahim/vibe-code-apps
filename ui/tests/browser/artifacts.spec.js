@@ -14,15 +14,18 @@ test('gallery and archive share artwork and theme; search, filters, navigation w
   await expect(page.getByRole('heading', { name: 'Artifacts.' })).toBeVisible();
   expect(await page.locator('.artifacts-page').evaluate(node => getComputedStyle(node).backgroundColor)).toBe(galleryColor);
   await expect(page.locator('.collection-artwork')).toBeVisible();
+  const allArtifacts = await page.locator('.artifact-list > li').count();
+  // Tags have no filter UI since #129, but still match search; 'DARK workspace'
+  // matches only DevFlow through its tags and description.
   await page.getByRole('searchbox', { name: 'Search the collection' }).fill('DARK workspace');
-  await page.getByRole('button', { name: 'dashboard', exact: true }).click();
-  await page.getByRole('combobox', { name: 'Added', exact: true }).selectOption('2026');
+  await expect(page.locator('.artifact-list > li')).toHaveCount(1);
+  await page.getByRole('combobox', { name: 'Added', exact: true }).selectOption('2026-10');
   await page.getByRole('combobox', { name: 'Sort by' }).selectOption('oldest');
   await expect(page.locator('.artifact-list > li')).toHaveCount(1);
   await page.getByRole('searchbox').fill('not-an-experiment');
   await expect(page.getByRole('heading', { name: 'No experiments found.' })).toBeVisible();
   await page.getByRole('button', { name: 'Clear filters' }).click();
-  await expect(page.locator('.artifact-list > li')).toHaveCount(1);
+  await expect(page.locator('.artifact-list > li')).toHaveCount(allArtifacts);
   await page.screenshot({ path: '/tmp/artifacts-desktop.png', fullPage: true });
   await page.getByRole('link', { name: /DevFlow/ }).click();
   await expect(page).toHaveURL(new RegExp(`${artifactPath}$`));
