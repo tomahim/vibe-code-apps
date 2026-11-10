@@ -25,8 +25,8 @@ async function fixture(page, { delay = false, fail = false, empty = false } = {}
     if (path.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (path.endsWith('/garden/')) return route.fulfill({ json: { themes: [], rewards: {} } });
     if (path.endsWith('/open/')) return route.fulfill({ json: {} });
-    if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { progress: progress() } }); }
-    if (path.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { correct: true, carrot_earned: true, explanation: 'Correct.' } }); }
+    if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { card_id: cards[0].id, completed_at: '2026-11-02T17:00:00Z', created: true, progress: progress(), next_step: { type: 'question', id: 'question' } } }); }
+    if (path.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { attempt_id: 'attempt-1', question_id: 'question', attempt_type: 'initial', correct: true, carrot_earned: true, explanation: 'Correct.', answered_at: '2026-11-02T17:01:00Z', correct_answer: null, progress: progress(), next_step: null } }); }
     if (delay) return; // Leave the lesson request pending to test loading deterministically.
     if (fail) return route.fulfill({ status: 500, json: { error: 'Could not open lesson.' } });
     return route.fulfill({ json: {
@@ -103,6 +103,27 @@ for (const state of ['loading', 'error', 'empty']) {
   });
 }
 
+test('garden refreshes on leaving the lesson, not per step', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await fixture(page);
+  let gardenCalls = 0;
+  page.on('request', (request) => { if (request.url().endsWith('/api/learning/garden/')) gardenCalls++; });
+  await page.goto(url);
+  const reader = page.getByRole('dialog', { name: title });
+  await expect(reader.getByRole('heading', { name: title })).toBeVisible();
+  const afterOpen = gardenCalls; // The app load fetches the garden once.
+  await reader.getByRole('button', { name: /read this card/ }).click();
+  await expect(reader.getByRole('heading', { name: 'Which direction develops first?' })).toBeVisible();
+  await reader.getByLabel('Head to tail', { exact: true }).check();
+  await reader.getByRole('button', { name: 'Check answer', exact: true }).click();
+  await expect(reader.getByRole('status')).toContainText('right');
+  await reader.getByRole('button', { name: 'Continue →', exact: true }).click();
+  await expect(reader.getByText('Lesson finished!')).toBeVisible();
+  expect(gardenCalls).toBe(afterOpen);
+  await reader.getByRole('button', { name: 'Close lesson' }).click();
+  await expect.poll(() => gardenCalls).toBe(afterOpen + 1);
+});
+
 test('multiple-choice options display in shuffled order', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => { Math.random = () => 0; }); // Deterministic: reverses a two-option list.
@@ -138,8 +159,8 @@ test('a checkpoint after the last card is served before the celebration', async 
     if (path.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (path.endsWith('/garden/')) return route.fulfill({ json: { themes: [], rewards: {} } });
     if (path.endsWith('/open/')) return route.fulfill({ json: {} });
-    if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { progress: progress() } }); }
-    if (path.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { correct: true, carrot_earned: true, explanation: 'Correct.', next_step: null } }); }
+    if (path.endsWith('/complete/')) { read = true; return route.fulfill({ json: { card_id: cards[1].id, completed_at: '2026-11-03T21:00:00Z', created: true, progress: progress(), next_step: { type: 'question', id: 'final-question' } } }); }
+    if (path.endsWith('/question-attempts/')) { answered = true; return route.fulfill({ json: { attempt_id: 'attempt-1', question_id: 'final-question', attempt_type: 'initial', correct: true, carrot_earned: true, explanation: 'Correct.', answered_at: '2026-11-03T21:01:00Z', correct_answer: null, progress: progress(), next_step: null } }); }
     return route.fulfill({ json: payload() });
   });
   await page.goto(`/apps/little-grains/theme/life/path/baby/lesson/${lesson.id}/card/${cards[1].id}`);
