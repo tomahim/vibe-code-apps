@@ -314,6 +314,22 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
     finally { setBusy(false); }
   }
 
+  // Focus mode sidebar (desktop only): every card with its read state, and a
+  // jump back to any read card (read-only revisit) or to the current step.
+  // Cards ahead of the current step stay locked so the lesson order holds.
+  const viewedCardId = (card || reviewCard)?.id;
+  function jumpToCard(target) {
+    if (target.id === viewedCardId) return;
+    const isNext = data.next_step?.type === "card" && data.next_step.id === target.id;
+    if (target.completed_at) {
+      if (viewStep.type !== "revisit") setReturnStep(viewStep);
+      setViewStep({ type: "revisit", id: target.id });
+    } else if (isNext) {
+      setReturnStep(null);
+      setViewStep({ type: "card", id: target.id });
+    }
+  }
+
   return <div className="grains-modal-backdrop grains-lesson-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="grains-reader grains-lesson-reader" role="dialog" aria-modal="true" aria-label={data?.lesson.title || "Lesson"}>
       <div className="grains-reader-top">
@@ -322,6 +338,23 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
         <button className="grains-close" onClick={onClose} aria-label="Close lesson">×</button>
       </div>
       {data && <div className="grains-progress-track" role="progressbar" aria-label="Lesson progress" aria-valuemin={0} aria-valuemax={totalSteps} aria-valuenow={completedSteps}><span style={{ width: `${totalSteps ? completedSteps / totalSteps * 100 : 0}%` }} /></div>}
+      <div className="grains-lesson-body">
+      {data && <aside className="grains-lesson-sidebar" aria-label="Cards in this lesson">
+        <p className="grains-sidebar-kicker">In this lesson</p>
+        <p className="grains-sidebar-progress">{completedSteps} of {totalSteps} steps</p>
+        <ol className="grains-sidebar-cards">
+          {data.cards.map((item) => {
+            const state = item.id === viewedCardId ? "current" : item.completed_at ? "read" : data.next_step?.type === "card" && data.next_step.id === item.id ? "next" : "locked";
+            return <li key={item.id}>
+              <button type="button" className={`grains-sidebar-card ${state}`} disabled={state === "locked"} aria-current={state === "current" ? "true" : undefined}
+                onClick={() => jumpToCard(item)}>
+                <span className="grains-sidebar-card-icon" aria-hidden="true">{state === "read" ? "✓" : state === "current" ? "●" : state === "next" ? "→" : "·"}</span>
+                <span className="grains-sidebar-card-title">{item.position}. {item.title}</span>
+              </button>
+            </li>;
+          })}
+        </ol>
+      </aside>}
       <div className="grains-reader-content">
         {error && <p className="grains-error" role="alert">{error}</p>}
         {!data ? <p className="grains-loading">Opening lesson…</p> : <>
@@ -354,6 +387,7 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
             : <div className="grains-complete"><span aria-hidden="true">✿</span><h3>Lesson in bloom</h3><p>This lesson has no cards yet.</p><button className="grains-primary" onClick={onClose}>Back to the garden</button></div>)}
           {reviewCard && <article className="grains-study-card"><div className="grains-review-nav">{previousCard && <button className="grains-text-button" onClick={openPreviousCard}>← Previous card</button>}<button className="grains-text-button" onClick={() => { setViewStep(returnStep || data.next_step); setReturnStep(null); }}>Return to next step →</button></div><p className="grains-card-index">CARD {reviewCard.position} OF {data.cards.length} · ALREADY READ</p><h3>{reviewCard.title}</h3><CardIllustration card={reviewCard} /><Markdown source={reviewCard.body_markdown} /></article>}
         </>}
+      </div>
       </div>
     </section>
   </div>;
