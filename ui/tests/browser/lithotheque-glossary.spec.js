@@ -21,7 +21,7 @@ for (const width of [393, 1440]) {
   await page.screenshot({path:`/downloads/lithotheque-glossary-en-${width}.png`});
   await card.screenshot({path:`/downloads/lithotheque-card-en-${width}.png`, animations: 'disabled'});
   await page.getByRole('button', {name:'Roches & sédiments',exact:true}).click();
-  await expect(page.locator('.gcard')).toHaveCount(18);
+  await expect(page.locator('.gcard')).toHaveCount(20);
   await page.getByRole('searchbox').fill('gres');
   await expect(page.getByRole('heading', {name:'Grès',exact:true})).toBeVisible();
   await expect(page.locator('.gcard')).toHaveCount(1);
