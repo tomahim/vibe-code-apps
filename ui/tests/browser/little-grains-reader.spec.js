@@ -124,6 +124,48 @@ test('garden refreshes on leaving the lesson, not per step', async ({ page }) =>
   await expect.poll(() => gardenCalls).toBe(afterOpen + 1);
 });
 
+test('desktop focus mode fills the window and jumps between cards from the sidebar', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await fixture(page);
+  await page.goto(url);
+  const reader = page.getByRole('dialog', { name: title });
+  await expect(reader.getByRole('heading', { name: title })).toBeVisible();
+  // Focus: the reader takes the whole window, no garden peeks behind it.
+  const bounds = await reader.boundingBox();
+  expect(bounds).toMatchObject({ x: 0, y: 0, width: 1440, height: 1000 });
+  const sidebar = reader.getByRole('complementary', { name: 'Cards in this lesson' });
+  await expect(sidebar).toBeVisible();
+  await expect(sidebar.getByText('0 of 9 steps')).toBeVisible();
+  // Nothing read yet: card 1 is the current step, the rest locked.
+  const cards = sidebar.getByRole('button');
+  await expect(cards).toHaveCount(8);
+  await expect(cards.nth(0)).toContainText('Head first');
+  await expect(cards.nth(7)).toBeDisabled();
+  // Read card 1, then jump back to it from the sidebar: read-only revisit.
+  await reader.getByRole('button', { name: /read this card/ }).click();
+  await expect(reader.getByRole('heading', { name: 'Which direction develops first?' })).toBeVisible();
+  await expect(sidebar.getByText('1 of 9 steps')).toBeVisible();
+  await cards.nth(0).click();
+  await expect(reader.getByText(/ALREADY READ/)).toBeVisible();
+  await expect(reader.getByRole('button', { name: /read this card/ })).toHaveCount(0);
+  await reader.getByRole('button', { name: /Return to next step/ }).click();
+  await expect(reader.getByRole('heading', { name: 'Which direction develops first?' })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
+  await page.screenshot({ path: '/tmp/lg-focus-sidebar-desktop.png' });
+});
+
+test('phone focus mode fills the window without the sidebar', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await fixture(page);
+  await page.goto(url);
+  const reader = page.getByRole('dialog', { name: title });
+  await expect(reader.getByRole('heading', { name: title })).toBeVisible();
+  await expect(reader.getByRole('complementary', { name: 'Cards in this lesson' })).toBeHidden();
+  const bounds = await reader.boundingBox();
+  expect(bounds).toMatchObject({ x: 0, y: 0, width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+});
+
 test('multiple-choice options display in shuffled order', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => { Math.random = () => 0; }); // Deterministic: reverses a two-option list.
