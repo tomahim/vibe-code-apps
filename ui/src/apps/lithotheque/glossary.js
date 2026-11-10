@@ -1049,5 +1049,26 @@ export const GLOSSARY_TERMS = [
                     "license": "Public domain (CC0 1.0)",
                     "alt": "Échantillon de montmorillonite, une argile beige clair"
             }
+    },
+    {
+            "id": "diagenese",
+            "category": "roches",
+            "fr": {
+                    "term": "Diagenèse",
+                    "definition": "Ensemble des transformations physiques, chimiques et biologiques qu'un sédiment subit après son dépôt, pendant son enfouissement : la compaction tasse les grains, puis la cimentation et la recristallisation les soudent, jusqu'à former une roche sédimentaire.",
+                    "source": "https://fr.wikipedia.org/wiki/Diagen%C3%A8se"
+            },
+            "en": {
+                    "term": "Diagenesis",
+                    "definition": "All the physical, chemical and biological changes a sediment undergoes after deposition, as burial turns it into sedimentary rock: compaction squeezes the grains together, while cementation and recrystallization bind them into solid rock.",
+                    "source": "https://en.wikipedia.org/wiki/Diagenesis"
+            },
+            "image": {
+                    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Sediment_Compaction_and_Diagenesis.jpg/960px-Sediment_Compaction_and_Diagenesis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+                    "file": "https://commons.wikimedia.org/wiki/File:Sediment_Compaction_and_Diagenesis.jpg",
+                    "credit": "Page Quinton",
+                    "license": "CC BY-SA 4.0",
+                    "alt": "Schéma des changements à l'échelle du grain dans un grès pendant la compaction et la cimentation"
+            }
     }
 ];
