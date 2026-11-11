@@ -281,24 +281,35 @@ def question_attempts(request):
             current = next_step(state, question.lesson) == {"type": "question", "id": str(question.pk)}
         if not current:
             return JsonResponse({"error": "This question is not the current checkpoint."}, status=409)
-        checkpoint_ids = [q.pk for q in state.questions if q.lesson_id == question.lesson_id
-                          and q.after_card_position == question.after_card_position]
-        retry = QuestionAttempt.objects.filter(
-            user=request.user, question_id__in=checkpoint_ids,
-            attempt_type__in=["initial", "retry"]).exists()
+        # retry and first_correct come from the loaded state, not extra
+        # queries: any earlier initial/retry attempt on this checkpoint makes
+        # this one a retry, and a question with no earlier correct answer
+        # earns its carrot on this first one.
+        retry = (question.lesson_id, question.after_card_position) in state.first_run_checkpoints
         correct = (data["answer"] == question.answer if question.type == Question.Type.MULTIPLE_CHOICE
                    else normalize_typed_answer(data["answer"]) in {
                        normalize_typed_answer(answer) for answer in question.accepted_answers
                    })
-        first_correct = correct and not QuestionAttempt.objects.filter(
-            user=request.user, question=question, correct=True).exists()
+        first_correct = correct and question.pk not in state.correct_questions
         attempt = QuestionAttempt.objects.create(
             user=request.user, question=question,
             attempt_type=("review" if review else "retry" if retry else "initial"),
             submitted_answer=data["answer"],
             correct=correct, answered_at=timezone.now(),
         )
-        state = LearnerState(request.user, lesson=question.lesson)
+        # The row lock serializes this learner, so the state we already loaded
+        # plus this write is the post-write state (same pattern as
+        # complete_card): apply the attempt instead of reloading LearnerState.
+        state.attempted.add(question.lesson_id)
+        state.first_run_checkpoints.add((question.lesson_id, question.after_card_position))
+        state.last_attempt[question.pk] = attempt.answered_at
+        state.last_correct[question.pk] = correct
+        if correct:
+            state.correct_questions.add(question.pk)
+            if attempt.attempt_type != "review":
+                state.passed.add((question.lesson_id, question.after_card_position))
+        else:
+            state.wrong_counts[question.lesson_id, question.after_card_position, question.type] += 1
         if review:
             following = None
             if not attempt.correct:

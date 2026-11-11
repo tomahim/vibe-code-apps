@@ -75,6 +75,11 @@ class LearnerState:
             for a in attempts if not a["correct"]
         )
         self.attempted = {questions[a["question_id"]].lesson_id for a in attempts}
+        # Checkpoints that already saw a first-run (initial/retry) attempt:
+        # lets a write derive "retry" from this loaded state, no extra query.
+        self.first_run_checkpoints = {(questions[a["question_id"]].lesson_id,
+                                       questions[a["question_id"]].after_card_position)
+                                      for a in attempts if a["attempt_type"] in ("initial", "retry")}
         self.last_attempt = {}
         self.last_correct = {}
         for a in attempts:  # ordered by answered_at: the last write wins
