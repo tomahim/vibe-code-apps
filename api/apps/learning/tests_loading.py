@@ -52,8 +52,7 @@ class BoundedLearningReadsTests(TestCase):
         self.assertEqual(LearnerState(self.user, lessons=[]).cards, [])
 
     def test_summary_endpoints_do_not_select_card_or_question_content(self):
-        for url in ('themes/', f'themes/{self.theme.pk}/', f'paths/{self.path.pk}/',
-                    'garden/', 'progress/'):
+        for url in ('garden/',):
             with self.subTest(url=url), CaptureQueriesContext(connection) as queries:
                 self.assertEqual(self.client.get('/api/learning/' + url).status_code, 200)
             projections = [q['sql'].split(' FROM ')[0] for q in queries

@@ -46,13 +46,14 @@ class LearningImageTests(TestCase):
     @patch("apps.learning.images.requests.get")
     def test_serialized_urls_load_on_the_app_origin_without_bearer_headers(self, get):
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.user)}"
-        themes = self.client.get("/api/learning/themes/").json()
-        theme = self.client.get(f"/api/learning/themes/{self.theme.pk}/").json()
+        garden = self.client.get("/api/learning/garden/").json()
+        theme = garden["themes"][0]
+        path = theme["learning_paths"][0]
         lesson = self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()
-        urls = [themes["themes"][0]["image_url"], theme["learning_paths"][0]["image_url"],
+        urls = [theme["image_url"], path["image_url"],
                 lesson["lesson"]["image_url"], lesson["cards"][0]["illustration_url"]]
         self.assertEqual(urls, [self.url(row) for row in (self.theme, self.path, self.lesson, self.card)])
-        self.assertEqual(theme["learning_paths"][0]["image_path"], self.path_image)
+        self.assertEqual(path["image_path"], self.path_image)
         self.client.defaults.clear()
         get.return_value = self.upstream()
         for url in urls:

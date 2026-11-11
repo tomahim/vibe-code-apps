@@ -66,9 +66,6 @@ try:
     LessonOpen.objects.create(user=user, lesson=lesson, opened_at=at)
     client = Client(HTTP_AUTHORIZATION=f'Bearer {issue_token(user)}')
     urls = {
-        'themes': '/api/learning/themes/',
-        'theme': f'/api/learning/themes/{lesson.learning_path.theme_id}/',
-        'path': f'/api/learning/paths/{lesson.learning_path_id}/',
         'lesson': f'/api/learning/lessons/{lesson.pk}/',
         'garden': '/api/learning/garden/',
         'practice': f'/api/learning/paths/{lesson.learning_path_id}/catch-up/',

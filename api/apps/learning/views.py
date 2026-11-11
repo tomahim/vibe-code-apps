@@ -117,52 +117,6 @@ def celebrate_path(request, path_id):
 @never_cache
 @require_GET
 @jwt_required
-def themes(request):
-    state = LearnerState(request.user)
-    lessons = list(visible(Lesson).select_related("learning_path"))
-    paths = list(visible(LearningPath))
-    return JsonResponse({"themes": [
-        {**described(theme), "learning_paths_total": sum(p.theme_id == theme.pk for p in paths),
-         "learning_paths_started": sum(state.progress([l for l in lessons if l.learning_path_id == p.pk])["started"]
-                                       for p in paths if p.theme_id == theme.pk),
-         "progress": state.progress([l for l in lessons if l.learning_path.theme_id == theme.pk])}
-        for theme in visible(Theme)
-    ]})
-
-
-@never_cache
-@require_GET
-@jwt_required
-def theme_detail(request, theme_id):
-    theme = get_object_or_404(visible(Theme), pk=theme_id)
-    lessons = list(visible(Lesson).filter(learning_path__theme=theme))
-    state = LearnerState(request.user, lessons=lessons)
-    return JsonResponse({"theme": described(theme), "learning_paths": [
-        {**described(path), "theme_id": str(theme.pk),
-         "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
-        for path in visible(LearningPath).filter(theme=theme)
-    ]})
-
-
-@never_cache
-@require_GET
-@jwt_required
-def path_detail(request, path_id):
-    path = get_object_or_404(visible(LearningPath).select_related("theme"), pk=path_id)
-    lessons = list(visible(Lesson).filter(learning_path=path))
-    state = LearnerState(request.user, lessons=lessons)
-    return JsonResponse({"learning_path": {**described(path), "theme_id": str(path.theme_id),
-                                          "progress": state.progress(lessons),
-                                          "catch_up": catch_up_payload(state, lessons)},
-                         "theme": described(path.theme),
-                         "lessons": [lesson_summary(l, state) for l in lessons],
-                         "next_lesson_id": next((str(l.pk) for l in lessons
-                                                 if not state.progress([l])["completed"]), None)})
-
-
-@never_cache
-@require_GET
-@jwt_required
 def lesson_detail(request, lesson_id):
     lesson = get_object_or_404(visible(Lesson).select_related("learning_path__theme"), pk=lesson_id)
     state = LearnerState(request.user, lesson=lesson, card_content=True)
@@ -429,21 +383,6 @@ def quiz_session(state, pool, limit=10):
 @never_cache
 @require_GET
 @jwt_required
-def progress(request):
-    state = LearnerState(request.user)
-    lessons = list(visible(Lesson))
-    return JsonResponse({"progress": state.progress(lessons),
-                         "rewards": reward_totals(reward_events().get(request.user.pk, [])),
-                         "learning_paths": [
-                             {"id": str(path.pk), "theme_id": str(path.theme_id),
-                              "progress": state.progress([l for l in lessons if l.learning_path_id == path.pk])}
-                             for path in visible(LearningPath)],
-                         "lessons": [lesson_summary(lesson, state) for lesson in lessons]})
-
-
-@never_cache
-@require_GET
-@jwt_required
 def garden(request):
     """One snapshot for the garden scene, with published hierarchy and real progress."""
     state = LearnerState(request.user)
@@ -526,7 +465,6 @@ def badges_leaderboard_view(request):
     Same audience as the drops/carrots leaderboard, aggregates only, and
     everything derived from existing records: no writes, no new tables."""
     return JsonResponse(badges_leaderboard(request.user))
-
 
 
 @never_cache
