@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Grains — a learning garden</title>
+<style>
+:root{
+  --cream:#fffefa; --paper:#f8f2e7; --sand:#e5ddc9; --ink:#2c3327;
+  --pine:#3c6a47; --moss:#6e9f70; --leaf:#7eaa6a; --clay:#a56545; --rust:#a74131;
+  --gold:#c9a227; --line:#e3d8c6; --muted:#5b6157;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+h1,h2,h3,.serif{font-family:ui-serif,Georgia,"Times New Roman",serif;line-height:1.12;margin:0}
+p{margin:.4rem 0}
+a{color:var(--pine)}
+img,svg{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(255,254,250,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:18px;max-width:1080px;margin:0 auto;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:9px;font-family:ui-serif,Georgia,serif;font-weight:700;font-size:1.15rem;color:var(--ink);text-decoration:none}
+.brand svg{width:26px;height:26px}
+.nav-links{display:flex;gap:18px;margin-left:auto;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.nav-links a:hover{color:var(--pine)}
+.nav-links a.btn,.nav-links a.btn:hover{color:#fff}
+@media(max-width:720px){.nav-links a.hide-m{display:none}}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 22px;font-size:1rem;font-weight:600;
+  background:var(--pine);color:#fff;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{background:#2f5538}
+.btn.ghost{background:transparent;color:var(--pine);border:2px solid var(--pine)}
+.btn.ghost:hover{background:var(--pine);color:#fff}
+.btn.small{padding:8px 16px;font-size:.9rem}
+
+/* hero */
+.hero{background:linear-gradient(180deg,var(--paper),var(--cream));padding:64px 0 48px;text-align:center;overflow:hidden}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--pine);border-bottom:6px solid var(--sand)}
+.hero .sub{max-width:560px;margin:16px auto 26px;font-size:1.12rem;color:var(--muted)}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:14px;font-size:.85rem;color:var(--muted)}
+.hero-garden{margin:40px auto 0;max-width:760px}
+
+/* generic section heads */
+.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;font-weight:700;color:var(--clay)}
+h2.title{font-size:clamp(1.6rem,4vw,2.4rem);margin:6px 0 10px}
+.lead{color:var(--muted);max-width:620px}
+
+/* benefit cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:28px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:1.15rem;margin:10px 0 6px}
+.card p{color:var(--muted);font-size:.95rem;margin:0}
+.card .ic{width:40px;height:40px;border-radius:12px;background:var(--sand);display:grid;place-items:center}
+
+/* phone carousel */
+.stage{background:var(--pine);color:#fff}
+.stage .kicker{color:#cfe3b8}
+.stage .lead{color:#dce8d4}
+.carousel{display:flex;gap:20px;align-items:flex-start;margin-top:30px;flex-wrap:wrap}
+.phone{width:270px;flex:none;margin:0 auto;background:#10150f;border-radius:34px;padding:10px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.screen{background:var(--cream);color:var(--ink);border-radius:26px;overflow:hidden;min-height:480px;position:relative}
+.slide{display:none;padding:16px;min-height:480px}
+.slide.on{display:block}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.dots button{width:10px;height:10px;border-radius:50%;border:0;background:#8fae85;cursor:pointer;padding:0}
+.dots button[aria-current="true"]{background:#fff}
+.car-btns{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.car-btns button{background:#2f5538;color:#fff;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;font:inherit}
+.cap{font-size:.9rem;color:#dce8d4;text-align:center;margin-top:8px;min-height:2.4em}
+
+/* mini app mock elements */
+.m-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.hexrow{display:flex;gap:6px;justify-content:center;margin:6px 0}
+.hex{width:52px;height:58px;display:grid;place-items:center;font-size:1.2rem}
+.m-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;font-size:.85rem}
+.m-progress{height:8px;background:var(--sand);border-radius:99px;overflow:hidden}
+.m-progress i{display:block;height:100%;background:var(--moss)}
+.m-q{margin-top:10px}
+.m-opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;font:inherit;font-size:.82rem;cursor:pointer}
+.m-opt.ok{border-color:var(--pine);background:#edf5e9}
+.m-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.m-badge{width:44px;height:44px;border-radius:50%;background:var(--sand);display:grid;place-items:center;font-size:1.1rem}
+
+/* problem */
+.problem{background:var(--paper)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px;counter-reset:s}
+.step{padding:20px;border-top:3px solid var(--sand)}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:ui-serif,Georgia,serif;font-size:2rem;color:var(--leaf)}
+.step h3{margin:8px 0 6px;font-size:1.1rem}
+.step p{color:var(--muted);font-size:.95rem;margin:0}
+
+/* rewards */
+.rewards{background:linear-gradient(180deg,#22301f,#2c3f27);color:#f0ead9}
+.rewards .kicker{color:var(--gold)}
+.rewards .lead{color:#cdc4a8}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px}
+.rcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px}
+.rcard .big{font-family:ui-serif,Georgia,serif;font-size:1.9rem;color:var(--gold)}
+.rcard h3{margin:6px 0;font-size:1.05rem}
+.rcard p{color:#cdc4a8;font-size:.9rem;margin:0}
+
+/* library */
+.shelf{display:flex;gap:14px;overflow-x:auto;padding:22px 4px 10px;scroll-snap-type:x mandatory}
+.book{flex:none;width:170px;scroll-snap-align:start;border-radius:14px;padding:18px 14px;color:#fff;min-height:210px;display:flex;flex-direction:column;justify-content:flex-end}
+.book h3{font-size:1.05rem;margin:0 0 4px}
+.book p{font-size:.8rem;margin:0;opacity:.85}
+.book .em{font-size:1.8rem;margin-bottom:auto}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:16px 4px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--clay);font-size:1.2rem}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 4px 16px;color:var(--muted);font-size:.95rem;max-width:640px}
+
+/* waitlist */
+.wait{background:var(--paper);text-align:center}
+.wait form{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.wait input[type=email]{padding:12px 16px;border-radius:999px;border:1px solid var(--line);font:inherit;min-width:min(300px,80vw)}
+.wait .fine{font-size:.8rem;color:var(--muted);margin-top:12px}
+.wait .ok-msg{display:none;margin-top:18px;font-weight:600;color:var(--pine)}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.88rem}
+.foot-in{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 20px}
+footer a{color:var(--muted)}
+.demo-flag{display:inline-block;background:var(--sand);color:var(--ink);border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;margin-left:8px}
+</style>
+</head>
+<body>
+<nav aria-label="Site">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Little Grains home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28c0-8 0-14-8-18 6 0 8 4 8 4s2-8 8-10c-2 8-6 12-8 12v12z" fill="#3c6a47"/><circle cx="16" cy="28" r="2.4" fill="#c9a227"/></svg>
+      Little Grains<span class="demo-flag">Concept</span>
+    </a>
+    <div class="nav-links">
+      <a href="#why" class="hide-m">Why it works</a>
+      <a href="#how" class="hide-m">How it works</a>
+      <a href="#rewards" class="hide-m">Rewards</a>
+      <a href="#library" class="hide-m">Library</a>
+      <a href="#faq" class="hide-m">FAQ</a>
+      <a href="#waitlist" class="btn small">Get the launch email</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="kicker">A personal learning project, growing toward launch</p>
+    <h1>Plant a few minutes.<br>Watch a <em>garden of knowledge</em> grow.</h1>
+    <p class="sub">Little Grains turns spare minutes into tiny lessons. Every card you read and every question you answer plants something in a garden that is yours alone.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#waitlist">Get one email when it opens</a>
+      <a class="btn ghost" href="#how">See how it works</a>
+    </div>
+    <p class="hero-note">No launch date promised, no price decided. This page is a design concept for a future site.</p>
+    <div class="hero-garden" aria-hidden="true">
+      <svg viewBox="0 0 760 210" role="img" aria-label="Illustration of a small garden of hexagonal plots with sprouts">
+        <rect x="0" y="0" width="760" height="210" fill="none"/>
+        <g stroke="#e3d8c6" stroke-width="2">
+          <polygon points="120,150 150,133 180,150 180,184 150,201 120,184" fill="#edf5e9"/>
+          <polygon points="190,110 220,93 250,110 250,144 220,161 190,144" fill="#f8f2e7"/>
+          <polygon points="260,150 290,133 320,150 320,184 290,201 260,184" fill="#edf5e9"/>
+          <polygon points="330,110 360,93 390,110 390,144 360,161 330,144" fill="#edf5e9"/>
+          <polygon points="400,150 430,133 460,150 460,184 430,201 400,184" fill="#f8f2e7"/>
+          <polygon points="470,110 500,93 530,110 530,144 500,161 470,144" fill="#edf5e9"/>
+          <polygon points="540,150 570,133 600,150 600,184 570,201 540,184" fill="#f8f2e7"/>
+        </g>
+        <g fill="none" stroke="#3c6a47" stroke-width="3" stroke-linecap="round">
+          <path d="M150 178 q0 -20 -10 -28 M150 178 q0 -16 12 -24"/>
+          <path d="M360 138 q0 -22 -12 -30 M360 138 q2 -18 14 -26"/>
+          <path d="M500 138 q0 -14 -8 -20"/>
+        </g>
+        <circle cx="290" cy="176" r="5" fill="#c9a227"/>
+        <circle cx="220" cy="136" r="4" fill="#a56545"/>
+        <text x="380" y="40" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#5b6157">every finished lesson is a planted seed</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <p class="kicker">Why it sticks</p>
+    <h2 class="title">Learning built for real days, not ideal ones</h2>
+    <p class="lead">Most study plans die on a busy Tuesday. Little Grains is sized for the days you actually have.</p>
+    <div class="cards">
+      <div class="card"><div class="ic">🌱</div><h3>Lessons that fit a queue</h3><p>A lesson is a handful of short cards, each a single idea with a concrete example. A few spare minutes is enough for one.</p></div>
+      <div class="card"><div class="ic">🌾</div><h3>A garden you can see</h3><p>Progress is not a bar, it is a place. Themes and paths grow as plots and plants, and you can see at a glance what is thriving.</p></div>
+      <div class="card"><div class="ic">🍂</div><h3>Review before you forget</h3><p>Paths you neglect visibly age through the seasons, so a quick review round always knows where to send you.</p></div>
+      <div class="card"><div class="ic">🥕</div><h3>A friendly weekly duel</h3><p>A weekly challenge pits you against a friend on questions drawn from what you have both read. Bragging rights included.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stage" id="tour">
+  <div class="wrap">
+    <p class="kicker">A look inside</p>
+    <h2 class="title">The app, in four screens</h2>
+    <p class="lead">Mock screens from the working prototype. Swipe or use the buttons.</p>
+    <div class="carousel">
+      <div class="phone"><div class="screen" id="screen">
+        <div class="slide on" data-cap="The garden: every path is a place, not a list entry.">
+          <div class="m-top"><span>🌿 Garden</span><span>💧 1,240 &nbsp;🥕 36</span></div>
+          <div class="hexrow"><div class="hex" style="background:#3c6a47;border-radius:12px">🤿</div><div class="hex" style="background:#6e9f70;border-radius:12px">⚡</div></div>
+          <div class="hexrow"><div class="hex" style="background:#7eaa6a;border-radius:12px">🏒</div><div class="hex" style="background:#a56545;border-radius:12px">🚴</div><div class="hex" style="background:#3c6a47;border-radius:12px">🤖</div></div>
+          <div class="m-card"><b>Diving · Physics of depth</b><div class="m-progress" style="margin-top:8px"><i style="width:70%"></i></div><p style="margin:6px 0 0;font-size:.78rem;color:#5b6157">7 / 10 lessons · next: Pressure and your ears</p></div>
+          <div class="m-card" style="background:#f8f2e7"><b>🍂 Energy · Data centers</b><p style="margin:4px 0 0;font-size:.78rem;color:#5b6157">Autumn leaves: not revisited in a while. One review round freshens it.</p></div>
+        </div>
+        <div class="slide" data-cap="A lesson: short cards, one idea each, with real illustrations.">
+          <div class="m-top"><span>‹ Lesson 4 of 10</span><span>✕</span></div>
+          <div class="m-progress"><i style="width:40%"></i></div>
+          <div class="m-card"><b>Why your ears hurt at 10 meters</b><p style="font-size:.82rem;margin-top:6px">Pressure rises by roughly one atmosphere every ten meters of water. The air in your middle ear gets squeezed, and the soft tissue of the eardrum bends inward…</p><p style="font-size:.82rem">The fix is equalizing early and often: a gentle pinch-and-blow before you feel pain, not after.</p></div>
+          <div class="m-card" style="text-align:center;background:#edf5e9">🖼️ <span style="font-size:.78rem;color:#5b6157">card illustration</span></div>
+        </div>
+        <div class="slide" data-cap="Checkpoints: short questions along the way, typed or multiple choice.">
+          <div class="m-top"><span>Checkpoint</span><span>2 of 2</span></div>
+          <div class="m-card"><b>At what depth does pressure roughly double compared to the surface?</b>
+            <div class="m-q">
+              <button class="m-opt" type="button">5 meters</button>
+              <button class="m-opt ok" type="button">10 meters</button>
+              <button class="m-opt" type="button">20 meters</button>
+            </div></div>
+          <p style="font-size:.78rem;color:#5b6157">Some checkpoints ask you to type the answer yourself — recognition is not recall.</p>
+        </div>
+        <div class="slide" data-cap="Finishing a path is an event: confetti, drops, and badges.">
+          <div style="text-align:center;padding-top:40px">
+            <div style="font-size:3rem">🎉</div>
+            <h3 class="serif" style="margin:10px 0">Path complete!</h3>
+            <p style="font-size:.85rem;color:#5b6157">Physics of depth · 10 lessons</p>
+            <p style="font-family:Georgia,serif;font-size:1.6rem;color:#c9a227;margin:10px 0">+100 💧</p>
+            <div class="m-badges" style="justify-content:center"><div class="m-badge">🤿</div><div class="m-badge">🌊</div><div class="m-badge">📖</div></div>
+            <p style="font-size:.78rem;color:#5b6157;margin-top:12px">Badges mark real milestones: first path finished, ten lessons in a theme, a review streak kept.</p>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="car-btns">
+      <button type="button" id="prev" aria-label="Previous screen">‹ Prev</button>
+      <button type="button" id="next" aria-label="Next screen">Next ›</button>
+    </div>
+    <div class="dots" id="dots" role="tablist" aria-label="Screens"></div>
+    <p class="cap" id="cap"></p>
+  </div>
+</section>
+<section class="problem">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">The problem</p>
+      <h2 class="title">You do not need more content. You need smaller grains.</h2>
+      <p class="lead" style="margin-top:12px">The internet has no shortage of things to learn. What is missing is a format light enough to survive a commute, a lunch break, a queue at the bakery. Little Grains starts there: small enough to finish, connected enough to add up.</p>
+      <p class="lead" style="margin-top:12px">Lessons hang on paths, paths hang on themes, and the whole thing lives in one garden. Finished weeks of reading look like something.</p>
+    </div>
+    <div aria-hidden="true">
+      <svg viewBox="0 0 420 300">
+        <g font-family="Georgia,serif">
+          <rect x="20" y="30" width="380" height="60" rx="12" fill="#e3d8c6"/>
+          <text x="40" y="66" font-size="16" fill="#5b6157">"Learn Spanish this year" 📚😰</text>
+          <rect x="20" y="110" width="380" height="60" rx="12" fill="#edf5e9"/>
+          <text x="40" y="146" font-size="16" fill="#3c6a47">One card: why pressure doubles at 10 m 🤿</text>
+          <rect x="20" y="190" width="380" height="60" rx="12" fill="#edf5e9"/>
+          <text x="40" y="226" font-size="16" fill="#3c6a47">One question, typed from memory ✍️</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 class="title">Three moves, repeated</h2>
+    <div class="steps">
+      <div class="step"><h3>Pick a path</h3><p>Browse themes and open a learning path, from diving physics to how data centers drink electricity. Each path is a short series of lessons.</p></div>
+      <div class="step"><h3>Read and answer</h3><p>Read cards at your pace, tap "read this card", and answer short checkpoint questions along the way. Some you pick, some you type.</p></div>
+      <div class="step"><h3>Watch it grow</h3><p>Finished lessons water the garden, completed paths bloom with a celebration, and review rounds keep older beds from fading into autumn.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rewards" id="rewards">
+  <div class="wrap">
+    <p class="kicker">What makes it a game</p>
+    <h2 class="title">Drops, carrots and badges</h2>
+    <p class="lead">The reward system is simple on purpose: it celebrates finished work, not time spent staring.</p>
+    <div class="rgrid">
+      <div class="rcard"><div class="big">💧</div><h3>Drops</h3><p>Earned for finished lessons and completed paths. They water the garden — the score is a place, not a number.</p></div>
+      <div class="rcard"><div class="big">🥕</div><h3>Carrots</h3><p>Earned for questions answered, in lessons, practice quizzes and review rounds. Every honest attempt at recall counts.</p></div>
+      <div class="rcard"><div class="big">🏅</div><h3>Badges</h3><p>Milestones with their own art: finishing paths, exploring themes, keeping up with review. Earned once, dated, yours.</p></div>
+      <div class="rcard"><div class="big">⚔️</div><h3>The weekly duel</h3><p>Challenge a friend for the week on questions from shared reading. The leaderboard keeps score, Monday to Sunday.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="library">
+  <div class="wrap">
+    <p class="kicker">The library so far</p>
+    <h2 class="title">Worlds already growing</h2>
+    <p class="lead">A sample of the themes being written and illustrated for the private preview.</p>
+  </div>
+  <div class="wrap"><div class="shelf" tabindex="0" aria-label="Sample themes">
+    <div class="book" style="background:#3c6a47"><div class="em">🤿</div><h3>Diving</h3><p>Physics, physiology and dive sites — the deepest library so far.</p></div>
+    <div class="book" style="background:#a56545"><div class="em">⚡</div><h3>Energy</h3><p>From the grid to the anatomy of a data center.</p></div>
+    <div class="book" style="background:#5b6157"><div class="em">🏒</div><h3>Hockey Legends</h3><p>The players and stories that built the game.</p></div>
+    <div class="book" style="background:#7a4a8c"><div class="em">🚴</div><h3>Cycling Legends</h3><p>Ten riders and ten races that shaped the sport.</p></div>
+    <div class="book" style="background:#2f4d6a"><div class="em">🤖</div><h3>AI &amp; Tech</h3><p>How modern software and AI actually work, card by card.</p></div>
+    <div class="book" style="background:#8a7a5c"><div class="em">👶</div><h3>Baby's First Year</h3><p>The science of the first twelve months, for new parents.</p></div>
+  </div></div>
+</section>
+
+<section id="faq" style="background:var(--paper)">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2 class="title">Honest answers</h2>
+    <div class="faq" style="margin-top:18px">
+      <details><summary>When does Little Grains launch?</summary><div class="a">There is no date. It is a personal project in a private preview today, and it opens when it is ready — not before. The waitlist below exists so interested people hear about it the day that changes.</div></details>
+      <details><summary>What will it cost?</summary><div class="a">Undecided. No pricing is being promised on this page, and joining the list commits you to nothing.</div></details>
+      <details><summary>Which platforms?</summary><div class="a">The app is built mobile-first as an installable web app (PWA), so it works on phones without an app-store download. Other platforms may follow.</div></details>
+      <details><summary>What makes it different from other learning apps?</summary><div class="a">The garden. Progress lives in a visible place that grows and seasons, review is woven into that place, and the weekly challenge turns learning into a friendly rivalry instead of a solitary streak.</div></details>
+      <details><summary>Who is making it?</summary><div class="a">A small independent project, built in the open with a public build log planned. The content is human-reviewed before it ships.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="wait" id="waitlist">
+  <div class="wrap">
+    <p class="kicker">One email, someday</p>
+    <h2 class="title">Hear about it when the gate opens</h2>
+    <p class="lead" style="margin:10px auto 0;max-width:480px">Leave an address and the launch note finds you. That is the entire deal: one email, the day there is something to open.</p>
+    <form id="wl" novalidate>
+      <label class="serif" for="email" style="position:absolute;left:-9999px">Email address</label>
+      <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+      <button class="btn" type="submit">Notify me</button>
+    </form>
+    <p class="ok-msg" id="okMsg">🌱 Noted — in this demo. On the real site, this is where your address would be saved.</p>
+    <p class="fine">Demo notice: this form is a design mockup. Nothing you type is stored, sent or collected anywhere.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div><b style="color:var(--ink)">Little Grains</b> — a learning garden.<br>Design concept for a future launch site, inspired by the structure of modern microlearning sites. All copy is draft sample text.</div>
+    <div><a href="#why">Why it works</a> · <a href="#how">How it works</a> · <a href="#rewards">Rewards</a> · <a href="#faq">FAQ</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('#screen .slide'));
+  var dots=document.getElementById('dots'),cap=document.getElementById('cap'),i=0;
+  slides.forEach(function(_,n){
+    var b=document.createElement('button');
+    b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-label','Screen '+(n+1));
+    b.addEventListener('click',function(){show(n)});dots.appendChild(b);
+  });
+  var dotBtns=[].slice.call(dots.children);
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    dotBtns.forEach(function(d,k){d.setAttribute('aria-current',k===i?'true':'false')});
+    cap.textContent=slides[i].getAttribute('data-cap')||'';
+  }
+  document.getElementById('prev').addEventListener('click',function(){show(i-1)});
+  document.getElementById('next').addEventListener('click',function(){show(i+1)});
+  var sx=null;
+  var scr=document.getElementById('screen');
+  scr.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  scr.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));sx=null},{passive:true});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight')show(i+1);else if(e.key==='ArrowLeft')show(i-1);
+  });
+  show(0);
+  document.getElementById('wl').addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=document.getElementById('email');
+    if(!em.value||em.value.indexOf('@')<1){em.focus();em.setAttribute('aria-invalid','true');return}
+    em.removeAttribute('aria-invalid');
+    document.getElementById('okMsg').style.display='block';
+    em.value='';
+  });
+  document.querySelectorAll('.m-opt').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.parentNode.querySelectorAll('.m-opt').forEach(function(x){x.classList.remove('ok')});
+      b.classList.add('ok');
+    });
+  });
+})();
+</script>
+</body>
+</html>
