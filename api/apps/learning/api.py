@@ -35,6 +35,17 @@ def described(row):
     }
 
 
+def cards_all_read(card_ids, read_ids):
+    """The one lesson-completion rule (#465): a lesson completes once every
+    one of its cards is read - a card-less lesson never completes, and
+    question results never gate completion (they are separate mastery
+    practice). Every backend completion site delegates here: the API gauge
+    via LearnerState, the rewards, the read badges and the admin dashboard.
+    """
+    card_ids = list(card_ids)
+    return bool(card_ids) and all(card_id in read_ids for card_id in card_ids)
+
+
 class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
     def __init__(self, user, lesson=None, *, lessons=None, card_content=False):
@@ -103,8 +114,7 @@ class LearnerState:
                 "completed": bool(ids) and completed_lessons == len(ids)}
 
     def lesson_fully_read(self, lesson_id):
-        cards = [c for c in self.cards if c.lesson_id == lesson_id]
-        return bool(cards) and all(c.pk in self.completed for c in cards)
+        return cards_all_read([c.pk for c in self.cards if c.lesson_id == lesson_id], self.completed)
 
     def lesson_started(self, lesson_id):
         return any(c.pk in self.completed

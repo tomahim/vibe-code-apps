@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone as dt_timezone
 from django.contrib.auth import get_user_model
 from django.db.models import Count
 
-from .api import visible
+from .api import cards_all_read, visible
 from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt
 
 
@@ -51,7 +51,8 @@ def reward_events():
         for lesson in lessons:
             lesson_id = lesson['pk']
             required_cards = cards_by_lesson[lesson_id]
-            if not required_cards or not required_cards.issubset(card_times[user_id]):
+            # Same single completion predicate as the API gauge (#465).
+            if not cards_all_read(required_cards, card_times[user_id]):
                 continue
             # The lesson bonus is earned once every card is read, whatever the
             # question results: correct answers drive the mastery gauges and

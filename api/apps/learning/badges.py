@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
-from .api import visible
+from .api import cards_all_read, visible
 from .badge_catalog import BADGES, MONTH, WEEK, TIERS  # noqa: F401 (re-exported for tests)
 from .models import (BadgeAward, Card, CardProgress, ChallengeWeek, LearningPath, Lesson,
                      Question, QuestionAttempt, Theme)
@@ -228,8 +228,9 @@ class History:
         return sorted((sorted(times)[cards - 1], (level, area)) for area, times in counts.items() if len(times) >= cards)
 
     def lesson_read_at(self, lesson_id):
+        # Same single completion predicate as the API gauge (#465).
         cards = self.cards_of[lesson_id]
-        if cards and cards.issubset(self.card_times):
+        if cards_all_read(cards, self.card_times):
             return max(self.card_times[c] for c in cards)
 
     def lesson_done_at(self, lesson_id):
