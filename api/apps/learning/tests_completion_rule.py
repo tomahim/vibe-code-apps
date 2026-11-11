@@ -21,14 +21,13 @@ Compute sites covered here:
   - badges.History read variants vs mastery variants
 
 Sites that still require every pooled question answered correctly contradict
-the product rule. Their tests assert the intended rule and are marked
-@expectedFailure: they pass as "expected failures" today, and flip to an
-UNEXPECTED SUCCESS (a loud CI failure) as soon as the strict predicate is
-aligned with the reading rule - the fix then only removes the decorator.
+the product rule. Their tests assert the intended rule and FAIL against the
+current strict predicate: this PR is intentionally red (Thomas, 2026-11-11).
+The fix aligns the strict predicate with the reading rule and turns these
+tests green; it must not weaken or delete them.
 """
 
 from datetime import datetime, timedelta, timezone
-from unittest import expectedFailure
 from uuid import uuid4
 
 from django.contrib.auth import get_user_model
@@ -159,26 +158,26 @@ class ReadingRuleTests(CompletionRuleFixtures):
 class StrictGaugeGapTests(CompletionRuleFixtures):
     """Sites that still require every pooled question answered correctly.
 
-    Each test asserts the product rule and fails against the current strict
-    predicate, so it is marked @expectedFailure. An UNEXPECTED SUCCESS means
-    the predicate was aligned: remove the decorator in the same change.
+    Each test asserts the product rule and FAILS against the current strict
+    predicate. That red is the point of this PR: CI stays red until a fix
+    aligns these sites with the all-cards-read rule (#465).
     """
 
-    @expectedFailure  # strict api.progress requires all questions correct (#465)
+    # fails today: strict api.progress requires all questions correct (#465)
     def test_api_lesson_completed_matches_all_cards_read(self):
         self.read_all_cards()
         progress = self.state(self.lesson1, self.lesson2).progress([self.lesson1])
         self.assertTrue(progress["completed"])
         self.assertEqual(progress["lessons_completed"], 1)
 
-    @expectedFailure  # strict api.progress requires all questions correct (#465)
+    # fails today: strict api.progress requires all questions correct (#465)
     def test_api_path_completed_matches_all_cards_read(self):
         self.read_all_cards()
         progress = self.state(self.lesson1, self.lesson2).progress([self.lesson1, self.lesson2])
         self.assertTrue(progress["completed"])
         self.assertEqual(progress["lessons_completed"], 2)
 
-    @expectedFailure  # strict api.progress requires EVERY pooled alternative correct (#465, #204)
+    # fails today: strict api.progress requires EVERY pooled alternative correct (#465, #204)
     def test_api_completion_ignores_unseen_pool_alternatives(self):
         self.read_all_cards()
         # One correct answer per checkpoint, but the pooled alternative q1b
@@ -188,7 +187,7 @@ class StrictGaugeGapTests(CompletionRuleFixtures):
         progress = self.state(self.lesson1, self.lesson2).progress([self.lesson1, self.lesson2])
         self.assertTrue(progress["completed"])
 
-    @expectedFailure  # next_lesson_id uses the strict gauge while the garden's Resume uses reading (#465)
+    # fails today: next_lesson_id uses the strict gauge while the garden's Resume uses reading (#465)
     def test_path_detail_next_lesson_follows_all_cards_read(self):
         url = f"/api/learning/paths/{self.path.pk}/"
         self.read(self.cards1)
