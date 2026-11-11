@@ -9,7 +9,7 @@ const TAGLINE = "Little Grains, strong growth...";
 // the garden fetch - so there is never a sequence of different loaders.
 // The carrot grows and sinks back in a loop on purpose: readiness is
 // unknown, so the animation must not pretend to be determinate progress.
-export function Garden() {
+function Garden() {
   return <div className="grains-garden-scene" aria-hidden="true">
     <span className="grains-garden-sun" />
     <span className="grains-garden-cloud" />

@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { makeSpecies, makeBlade, makeFish, makeTurtle, rngFor } from './plants.js';
 import { hexPrism, hexOutline, axial, inHex } from './terrain.js';
 
-export const PROFILES = {
+const PROFILES = {
   desktop: { name: 'desktop', detail: 1, shadows: true, dpr: 1.75, K: 8, cellK: 5, trailK: 14, plants: 30, grass: 420, trailPlants: 70, trailGrass: 1300, creatures: 10, pollen: 150, clouds: 6, fov: 34 },
   mobile: { name: 'mobile', detail: 0, shadows: false, dpr: 1.5, K: 4, cellK: 3, trailK: 7, plants: 11, grass: 70, trailPlants: 22, trailGrass: 240, creatures: 3, pollen: 0, clouds: 0, fov: 38 },
 };

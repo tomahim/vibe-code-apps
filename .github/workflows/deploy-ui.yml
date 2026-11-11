@@ -37,6 +37,8 @@ jobs:
           cache-dependency-path: ui/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Check Little Grains for dead code
+        run: npm run knip
       - name: Validate lessons and saved progress
         run: npm test
       - name: Test production proxy uploads

@@ -4,7 +4,7 @@ export function rngFor(seed) { let a = seed >>> 0; return () => { a |= 0; a = (a
 const hash3 = (x, y, z) => { const s = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453; return s - Math.floor(s); };
 
 // Displace by a function of position so duplicated vertices of non-indexed geometry stay welded.
-export function wobble(geo, amt, seed = 0) {
+function wobble(geo, amt, seed = 0) {
   const p = geo.attributes.position;
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
@@ -15,7 +15,7 @@ export function wobble(geo, amt, seed = 0) {
 }
 
 // Collects many primitives into one vertex-coloured, flat-shaded geometry.
-export class Builder {
+class Builder {
   constructor(seed = 1) { this.pos = []; this.col = []; this.rng = rngFor(seed); this.tmp = new THREE.Color(); }
   add(geo, { p = [0, 0, 0], r = [0, 0, 0], s = [1, 1, 1], c = '#ffffff', j = 0.07, grad = 0 } = {}) {
     const g = geo.index ? geo.toNonIndexed() : geo.clone();
