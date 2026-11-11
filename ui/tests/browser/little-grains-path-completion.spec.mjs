@@ -2,10 +2,13 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => { await page.setViewportSize({ width: 390, height: 844 }); });
 const url = '/apps/little-grains/theme/life/path/baby/lesson/lesson/card/card';
+// The mock follows the #465 contract: completion means every card read and
+// never depends on question state, so progress.completed flips with `read`
+// even when `partial` leaves questions open elsewhere.
 async function fixture(page, { completed = false, quiz = false, partial = false, celebratedOnServer = false, lastLesson = true } = {}) {
   await page.addInitScript(() => localStorage.setItem('genious_token', 'path-celebration-fixture'));
   let read = quiz || completed, answered = completed, celebratedNow = celebratedOnServer;
-  const progress = () => ({ completed: completed || (read && answered && !partial), cards_completed: Number(read), cards_total: 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(read && answered), lessons_total: 1, lessons_fully_read: Number(read) });
+  const progress = () => ({ completed: completed || read, cards_completed: Number(read), cards_total: 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(read), lessons_total: 1, lessons_fully_read: Number(read) });
   await page.route('**/api/learning/**', async route => {
     const p = new URL(route.request().url()).pathname;
     if (p.endsWith('/health/')) return route.fulfill({ json: { status: 'ok' } });

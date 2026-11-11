@@ -7,7 +7,7 @@ const id = {
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
 function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null, badgeLog = null } = {}) {
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
-  const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(answered), lessons_total: 1, started: read, completed: answered });
+  const allRead = () => read && (!twoCards || readSecond); const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(allRead()), lessons_total: 1, started: read, completed: allRead() });
   page.route('**/api/learning/**', route => {
     if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
