@@ -301,7 +301,8 @@ def question_attempts(request):
         # plus this write is the post-write state (same pattern as
         # complete_card): apply the attempt instead of reloading LearnerState.
         state.attempted.add(question.lesson_id)
-        state.first_run_checkpoints.add((question.lesson_id, question.after_card_position))
+        if attempt.attempt_type in ("initial", "retry"):
+            state.first_run_checkpoints.add((question.lesson_id, question.after_card_position))
         state.last_attempt[question.pk] = attempt.answered_at
         state.last_correct[question.pk] = correct
         if correct:

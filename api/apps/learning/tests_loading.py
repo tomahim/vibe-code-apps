@@ -114,3 +114,29 @@ class BoundedLearningReadsTests(TestCase):
                                         json.dumps({'question_id': str(question.pk), 'answer': 'a'}),
                                         content_type='application/json')
         self.assertEqual(response.status_code, 201)
+
+    def test_in_memory_answer_state_matches_fresh_state_after_each_attempt(self):
+        card = Card.objects.get(lesson=self.lesson)
+        question = Question.objects.get(lesson=self.lesson)
+        question.options = [{'id': 'a', 'text': 'A'}, {'id': 'b', 'text': 'B'}]
+        question.save()
+        CardProgress.objects.create(user=self.user, card=card, completed_at=timezone.now())
+        loaded = []
+
+        def capture(*args, **kwargs):
+            state = LearnerState(*args, **kwargs)
+            loaded.append(state)
+            return state
+
+        for answer in ['b', 'a', 'b', 'a']:
+            with patch('apps.learning.views.LearnerState', side_effect=capture) as builds:
+                response = self.client.post('/api/learning/question-attempts/',
+                                            json.dumps({'question_id': str(question.pk), 'answer': answer}),
+                                            content_type='application/json')
+            self.assertEqual(response.status_code, 201)
+            self.assertEqual(builds.call_count, 1)
+            fresh = LearnerState(self.user, lesson=self.lesson)
+            for field in ['attempted', 'first_run_checkpoints', 'last_attempt', 'last_correct',
+                          'correct_questions', 'passed', 'wrong_counts']:
+                self.assertEqual(getattr(loaded[-1], field), getattr(fresh, field), (answer, field))
+            self.assertEqual(response.json()['progress'], fresh.progress([self.lesson]))
