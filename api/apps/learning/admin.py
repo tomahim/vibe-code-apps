@@ -44,11 +44,8 @@ def progress_dashboard_context(user):
         questions = [q for lesson in path_lessons for q in questions_by_lesson.get(lesson.pk, [])]
         cards_read = sum(c.pk in state.completed for c in cards)
         questions_correct = sum(q.pk in state.correct_questions for q in questions)
-        lessons_read = sum(
-            bool(cards_by_lesson.get(lesson.pk))
-            and all(c.pk in state.completed for c in cards_by_lesson[lesson.pk])
-            for lesson in path_lessons
-        )
+        # Same single predicate as the API gauge (#465): every card read.
+        lessons_read = sum(state.lesson_fully_read(lesson.pk) for lesson in path_lessons)
         path_rows.append({
             "path": path,
             "cards_read": cards_read, "cards_total": len(cards),

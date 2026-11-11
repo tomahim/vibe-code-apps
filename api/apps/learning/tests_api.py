@@ -231,9 +231,11 @@ class LearningAPITests(TestCase):
         first_id = self.client.get(lesson_url).json()["questions"][0]["id"]
         first = Question.objects.get(pk=first_id)
         self.assertEqual(self.post(attempt_url, {"question_id": first_id, "answer": first.answer}).json()["attempt_type"], "initial")
-        # One of two questions answered correctly: the lesson is not complete.
+        # Every card is read: the lesson is complete under the all-cards-read
+        # rule (#465), even with one of two questions answered correctly;
+        # question mastery stays a separate gauge.
         before = self.client.get(lesson_url).json()
-        self.assertFalse(before["lesson"]["progress"]["completed"])
+        self.assertTrue(before["lesson"]["progress"]["completed"])
         self.assertEqual(before["lesson"]["progress"]["questions_correct"], 1)
         self.assertEqual(before["lesson"]["progress"]["questions_total"], 2)
         card_completed_at = before["cards"][0]["completed_at"]
@@ -258,9 +260,9 @@ class LearningAPITests(TestCase):
         self.assertTrue(correct.json()["correct"])
         self.assertTrue(correct.json()["carrot_earned"])
         self.assertIsNone(correct.json()["next_step"])
-        # A first correct answer counts toward completion even in review: the
-        # lesson completes and earns its drops once, and each of its two
-        # questions earned one carrot for its first correct answer.
+        # A first correct answer in review closes the mastery gap: the lesson
+        # was already complete from reading and earned its drops once, and
+        # each of its two questions earned one carrot for its first correct.
         after = self.client.get(lesson_url).json()
         self.assertTrue(after["lesson"]["progress"]["completed"])
         self.assertEqual(after["lesson"]["progress"]["questions_correct"], 2)
@@ -304,11 +306,14 @@ class LearningAPITests(TestCase):
                                                  "answer": translations[0].answer}).status_code, 409)
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.assertEqual(self.post(attempt_url, {"question_id": str(self.question.pk), "answer": "0"}).status_code, 201)
-        # One of three questions answered correctly: not complete yet. The
-        # catch-up quiz is how the typed alternatives get their first answer.
+        # Every card is read: the lesson is complete under the all-cards-read
+        # rule (#465), so review already prefers a typed alternative. One of
+        # three questions answered correctly: the mastery gap remains, and
+        # the catch-up quiz is how the typed alternatives get their first answer.
         before = self.client.get(lesson_url).json()
-        self.assertFalse(before["lesson"]["progress"]["completed"])
-        self.assertEqual(before["questions"][0]["type"], "multiple_choice")
+        self.assertTrue(before["lesson"]["progress"]["completed"])
+        self.assertEqual(before["lesson"]["progress"]["questions_correct"], 1)
+        self.assertEqual(before["questions"][0]["type"], "type_answer_question")
         pool = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
         self.assertEqual({q["id"] for q in pool["questions"]}, {str(q.pk) for q in translations} | {str(self.question.pk)})
         for typed in translations:
@@ -407,7 +412,9 @@ class LearningAPITests(TestCase):
         chosen = Question.objects.get(pk=selected)
         response = self.post("/api/learning/question-attempts/", {"question_id": selected, "answer": chosen.answer})
         progress = response.json()["progress"]
-        self.assertFalse(progress["completed"])
+        # All cards read: complete under the reading rule (#465); the unseen
+        # alternative stays a question-mastery gap, not a completion blocker.
+        self.assertTrue(progress["completed"])
         self.assertEqual(progress["checkpoints_correct"], 1)
         self.assertEqual(progress["questions_correct"], 1)
         self.assertEqual(progress["questions_total"], 2)
@@ -451,9 +458,10 @@ class LearningAPITests(TestCase):
         self.assertEqual(self.post(attempt_url, {"question_id": question_ids[3], "answer": wrong_resumed}).status_code, 201)
         current = Question.objects.get(pk=selected)
         correct = self.post(attempt_url, {"question_id": selected, "answer": current.answer})
-        # One of three alternatives answered correctly: the catch-up quiz
-        # covers the other two before the lesson completes.
-        self.assertFalse(correct.json()["progress"]["completed"])
+        # One of three alternatives answered correctly: the lesson is already
+        # complete from reading (#465); the catch-up quiz covers the other
+        # two as question-mastery gaps.
+        self.assertTrue(correct.json()["progress"]["completed"])
         self.assertIsNone(correct.json()["next_step"])
         pool = self.client.get(f"/api/learning/paths/{self.path.pk}/catch-up/").json()
         self.assertEqual(pool["remaining"], 2)

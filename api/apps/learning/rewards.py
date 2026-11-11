@@ -54,14 +54,15 @@ def reward_events():
             if not required_cards or not required_cards.issubset(card_times[user_id]):
                 continue
             # The lesson bonus is earned once every card is read, whatever the
-            # question results: question completion drives the gauge and the
-            # catch-up quiz (#204), not this reward.
+            # question results: correct answers drive the mastery gauges and
+            # the catch-up quiz (#204), not this reward.
             cards_done_at = max(card_times[user_id][card_id] for card_id in required_cards)
             events[user_id].append(('drops', 5, cards_done_at))
             # The path bonus follows the same rule as the lesson bonus and the
             # garden celebration: a path is finished once every card is read.
-            # Questions are independent practice - they drive the gauge,
-            # carrots, the catch-up quiz and the "done" badges, not this bonus.
+            # Questions are independent practice - they drive the mastery
+            # gauge, carrots, the catch-up quiz and the "done" badges, not
+            # this bonus.
             completion_times[lesson_id] = cards_done_at
         for path in paths:
             required_lessons = lessons_by_path[path['pk']]

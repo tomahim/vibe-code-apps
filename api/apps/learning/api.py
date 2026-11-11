@@ -89,14 +89,12 @@ class LearnerState:
         done = sum(c.pk in self.completed for c in cards)
         correct = len(checkpoints & self.passed)
         answered = sum(q.pk in self.correct_questions for q in questions)
-        # A lesson completes once every card is read and every question has one
-        # correct answer: rotation can leave pool alternatives unseen (#204).
-        completed_lessons = sum(
-            bool(lesson_cards := [c for c in cards if c.lesson_id == lesson.pk])
-            and all(c.pk in self.completed for c in lesson_cards)
-            and all(q.pk in self.correct_questions for q in questions if q.lesson_id == lesson.pk)
-            for lesson in lessons
-        )
+        # Single source of truth (#465): a lesson completes once every card is
+        # read, independent of question results - lesson_fully_read owns the
+        # predicate, and path completion is every lesson completed. Rotation
+        # can leave pool alternatives unseen (#204), so questions never gate
+        # completion. The question counts stay a separate mastery signal.
+        completed_lessons = sum(self.lesson_fully_read(lesson.pk) for lesson in lessons)
         return {"lessons_completed": completed_lessons, "lessons_total": len(ids),
                 "cards_completed": done, "cards_total": len(cards),
                 "checkpoints_correct": correct, "checkpoints_total": len(checkpoints),
