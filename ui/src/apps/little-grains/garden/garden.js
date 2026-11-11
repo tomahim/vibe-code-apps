@@ -19,7 +19,8 @@ const fraction = (progress) => { const total = progress?.cards_total || 0; retur
 // Finished = every card read. The stricter server "completed" gauge also
 // wants every pooled question answered correctly (#204), which is practice
 // that happens later, so the flag, dots and panels must not wait for it.
-const lessonFinished = (progress) => !!progress && (progress.completed || ((progress.cards_total || 0) > 0 && (progress.cards_completed || 0) >= progress.cards_total));
+// Completion is server-owned (#465): the API's progress.completed flag decides, the garden never recomputes it from card counts.
+const lessonFinished = (progress) => !!progress && !!progress.completed;
 const spiral = (n) => { const out = [[0, 0]]; for (let radius = 1; out.length < n; radius++) { let q = -radius, r = radius; for (const [dq, dr] of [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]) for (let i = 0; i < radius && out.length < n; i++) { out.push([q, r]); q += dq; r += dr; } } return out; };
 // Successive hex tiles of a learning path, as axial steps (a gentle zigzag).
 const CHAIN = [[1, 0], [0, 1], [1, 0], [1, -1], [1, 0], [0, 1]];
@@ -426,7 +427,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
   const pathP = (ti, pi) => disp.get(`c${ti}.${pi}`) ?? 0;
   const lessonInfo = (path) => {
     const n = path.lessonData.length, cur = path.lessonData.filter((lesson) => lessonFinished(lesson.progress)).length;
-    return { n, cur, cards: path.lessonData[cur]?.progress.cards_completed || 0, done: n > 0 && cur === n };
+    return { n, cur, cards: path.lessonData[cur]?.progress.cards_completed || 0, done: !!path.progress?.completed };
   };
   const totals = () => ({ ...state.rewards, started: THEMES.reduce((n, t) => n + t.paths.filter((p) => p.progress.started).length, 0), paths: THEMES.reduce((n,t) => n + t.paths.length, 0) });
 

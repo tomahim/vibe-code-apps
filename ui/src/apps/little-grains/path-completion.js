@@ -1,10 +1,9 @@
-// A learning path is finished once every card is read: questions are
-// practice that continues in the quiz, the gauge and the mastery badges,
-// so the celebration follows the same rule as the garden's dots, flags
-// and "Every lesson has bloomed".
+// Completion is server-owned (#465): the API's progress.completed flag
+// decides, the frontend never recomputes it from card counts. The backend
+// rule is every card read, independent of question results - questions are
+// practice that continues in the quiz, the gauge and the mastery badges.
 export function pathFinished(path) {
-  const progress = path?.progress || {};
-  return (progress.cards_total || 0) > 0 && (progress.cards_completed || 0) >= progress.cards_total;
+  return !!path?.progress?.completed;
 }
 
 function describe(path) {

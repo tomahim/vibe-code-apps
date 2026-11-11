@@ -201,11 +201,13 @@ class StrictGaugeGapTests(CompletionRuleFixtures):
 
 class EmptyLessonCharacterizationTests(TestCase):
     """A path whose visible lessons include a zero-card lesson. The intended
-    empty-lesson rule is UNRESOLVED (#465): today the frontend celebration
-    aggregates cards and celebrates, while these backend sites say the path
-    is not finished. This pins current behavior only - it does not endorse
-    it. Update it together with whichever rule the fix chooses; the frontend
-    half of the split lives in little-grains-completion-rule.test.mjs."""
+    empty-lesson rule is UNRESOLVED (#465): the backend treats a zero-card
+    lesson as never fully read, so the gauge and rewards say the path is not
+    finished - and the frontend now shows the server flag rather than its own
+    aggregate, so the old celebration split is gone. This pins current
+    behavior only - it does not endorse it. Whichever rule the policy chooses
+    updates these tests; the mirrored frontend characterization lives in
+    little-grains-completion-rule.test.mjs."""
 
     def row(self, model, **fields):
         return model.objects.create(
@@ -237,5 +239,5 @@ class EmptyLessonCharacterizationTests(TestCase):
         events = reward_events()[self.user.pk]
         self.assertEqual(sum(1 for kind, amount, _ in events if (kind, amount) == ("drops", 5)), 1)
         self.assertEqual(sum(1 for kind, amount, _ in events if (kind, amount) == ("drops", 100)), 0)
-        # ... while the frontend celebration (aggregate cards 3/3) says the
-        # path IS finished. See the mirrored frontend characterization test.
+        # The frontend celebration follows the same server flag, so it no
+        # longer celebrates this path either (mirrored frontend test).
