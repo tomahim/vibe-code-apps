@@ -12,7 +12,7 @@
 // The learner read all 5 cards. Question state never appears in these
 // payloads on purpose: completion must not depend on it.
 //
-// garden.js keeps lessonFinished module-private and LittleGrains.jsx tracks
+// garden.js keeps lessonFinished module-private and reader/LessonReader.jsx tracks
 // fullyReadAtOpen inline, so those two checks extract the exact shipped
 // expression from the source and evaluate it against the mock. If a refactor
 // moves either expression, the extraction fails loudly and the test switches
@@ -30,9 +30,9 @@ assert.ok(lessonFinishedMatch, 'lessonFinished no longer found inline in garden.
 const lessonFinished = eval(lessonFinishedMatch[1]);
 
 // The reader's "was already complete when opened" snapshot, from the shipped source.
-const readerSource = readFileSync(new URL('../src/apps/little-grains/LittleGrains.jsx', import.meta.url), 'utf8');
+const readerSource = readFileSync(new URL('../src/apps/little-grains/reader/LessonReader.jsx', import.meta.url), 'utf8');
 const fullyReadMatch = readerSource.match(/fullyReadAtOpen\.current = ([^;]+);/);
-assert.ok(fullyReadMatch, 'fullyReadAtOpen computation no longer found inline in LittleGrains.jsx: import the shared helper here instead');
+assert.ok(fullyReadMatch, 'fullyReadAtOpen computation no longer found inline in reader/LessonReader.jsx: import the shared helper here instead');
 const fullyReadAtOpen = new Function('result', `return (${fullyReadMatch[1]});`);
 
 // Shared mock: lesson payloads carry card reads only, never question state.
