@@ -10,12 +10,6 @@ Sources read 2026-10-27:
 - [Garden design board](https://linear.app/tomahim/document/little-grains-garden-design-board-6dd69300c9a6)
 - [Current project context](https://linear.app/tomahim/project/little-grains-atomic-learning-ac2cbdcff98c/overview)
 
-## GET themes/
-
-Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts, a per-path `celebrated` flag (its finish celebration was already shown to this learner) and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
-
-Theme, path and lesson objects still include `image_url`, but learning path and lesson images were removed (#195), so it is empty for them; only cards carry images, through `illustration_url`. Lesson cards also return the full illustration metadata: `illustration_srcset` (width-described variant URLs for `<img srcset>`, empty until variants exist), `illustration_width`/`illustration_height` for layout reservation, and `illustration_caption`, `illustration_credit`, `illustration_license` and `illustration_source_url` for attribution. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
-
 ## GET images/<kind>/<uuid>/
 
 Serves only the referenced artwork of a published, unarchived theme, learning path, lesson or card, with the same ancestry checks as content reads. `kind` is `theme`, `learning_path`, `lesson` or `card`. Published artwork is public so a browser image element does not need a Bearer header; this route never exposes learner state, Markdown or question files. Unknown, hidden or missing image references return 404.
