@@ -187,16 +187,23 @@ class StrictGaugeGapTests(CompletionRuleFixtures):
         progress = self.state(self.lesson1, self.lesson2).progress([self.lesson1, self.lesson2])
         self.assertTrue(progress["completed"])
 
-    # fails today: next_lesson_id uses the strict gauge while the garden's Resume uses reading (#465)
-    def test_path_detail_next_lesson_follows_all_cards_read(self):
-        url = f"/api/learning/paths/{self.path.pk}/"
+    def test_garden_lesson_and_path_flags_follow_all_cards_read(self):
+        # Garden is the surviving navigation contract (#470): it must expose
+        # the same rule used to select unfinished lessons, without a second
+        # client-side definition. Keep the original red checkpoint in history.
+        def garden_path():
+            response = self.client.get('/api/learning/garden/')
+            self.assertEqual(response.status_code, 200)
+            return response.json()['themes'][0]['learning_paths'][0]
+
         self.read(self.cards1)
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["next_lesson_id"], str(self.lesson2.pk))
+        path = garden_path()
+        self.assertEqual([lesson['progress']['completed'] for lesson in path['lessons']], [True, False])
+        self.assertFalse(path['progress']['completed'])
         self.read(self.cards2)
-        response = self.client.get(url)
-        self.assertIsNone(response.json()["next_lesson_id"])
+        path = garden_path()
+        self.assertTrue(all(lesson['progress']['completed'] for lesson in path['lessons']))
+        self.assertTrue(path['progress']['completed'])
 
 
 class EmptyLessonCharacterizationTests(TestCase):
