@@ -1,7 +1,7 @@
 """The badge catalogue: one declarative entry per badge.
 
 To add a badge that uses an existing rule `kind`, add one `Badge(...)` line
-below and drop its art at ui/src/apps/little-grains/badge-art/<slug>.svg.
+below and add its art, named <slug>.svg, to the frontend badge assets.
 Nothing else changes: the list, header counter, detail view and awarding all
 read this catalogue. A new kind of rule needs one method on `History` in
 badges.py (returning sorted (time, reference) events) plus its tests.
