@@ -1,4 +1,5 @@
 """Guard the DB-to-API boundary, not just the browser JSON size."""
+import json
 from uuid import uuid4
 from unittest.mock import patch
 
@@ -86,7 +87,7 @@ class BoundedLearningReadsTests(TestCase):
         with self.assertNumQueries(0):
             self.assertEqual(public_questions([]), [])
 
-    def test_answer_submission_bounds_both_state_reads_to_the_question_lesson(self):
+    def test_answer_submission_loads_state_once_bounded_to_the_question_lesson(self):
         card = Card.objects.get(lesson=self.lesson)
         question = Question.objects.get(lesson=self.lesson)
         CardProgress.objects.create(user=self.user, card=card, completed_at=timezone.now())
@@ -96,6 +97,46 @@ class BoundedLearningReadsTests(TestCase):
                                         content_type='application/json')
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()['progress']['cards_total'], 1)
-        self.assertEqual(states.call_count, 2)
+        # One load per write (#457): the locked row makes the loaded state
+        # plus the new attempt the post-write state, no reload needed.
+        self.assertEqual(states.call_count, 1)
         for call in states.call_args_list:
             self.assertEqual(call.kwargs['lesson'].pk, self.lesson.pk)
+
+    def test_answer_submission_query_count_stays_flat(self):
+        # Pin the whole write's query set (#457): one LearnerState load, no
+        # per-answer EXISTS probes, no reload. Was 16 before the fix.
+        card = Card.objects.get(lesson=self.lesson)
+        question = Question.objects.get(lesson=self.lesson)
+        CardProgress.objects.create(user=self.user, card=card, completed_at=timezone.now())
+        with self.assertNumQueries(10):
+            response = self.client.post('/api/learning/question-attempts/',
+                                        json.dumps({'question_id': str(question.pk), 'answer': 'a'}),
+                                        content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+
+    def test_in_memory_answer_state_matches_fresh_state_after_each_attempt(self):
+        card = Card.objects.get(lesson=self.lesson)
+        question = Question.objects.get(lesson=self.lesson)
+        question.options = [{'id': 'a', 'text': 'A'}, {'id': 'b', 'text': 'B'}]
+        question.save()
+        CardProgress.objects.create(user=self.user, card=card, completed_at=timezone.now())
+        loaded = []
+
+        def capture(*args, **kwargs):
+            state = LearnerState(*args, **kwargs)
+            loaded.append(state)
+            return state
+
+        for answer in ['b', 'a', 'b', 'a']:
+            with patch('apps.learning.views.LearnerState', side_effect=capture) as builds:
+                response = self.client.post('/api/learning/question-attempts/',
+                                            json.dumps({'question_id': str(question.pk), 'answer': answer}),
+                                            content_type='application/json')
+            self.assertEqual(response.status_code, 201)
+            self.assertEqual(builds.call_count, 1)
+            fresh = LearnerState(self.user, lesson=self.lesson)
+            for field in ['attempted', 'first_run_checkpoints', 'last_attempt', 'last_correct',
+                          'correct_questions', 'passed', 'wrong_counts']:
+                self.assertEqual(getattr(loaded[-1], field), getattr(fresh, field), (answer, field))
+            self.assertEqual(response.json()['progress'], fresh.progress([self.lesson]))
