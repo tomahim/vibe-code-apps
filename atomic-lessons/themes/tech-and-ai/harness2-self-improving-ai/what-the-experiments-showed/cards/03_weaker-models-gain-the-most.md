@@ -4,7 +4,7 @@ position: 3
 title: Weaker models gain the most
 archived: false
 image: l9-weaker-model-overtakes.png
-image_alt: "Bar chart of WorkBuddy-Bench scores: with OpenCode, base Gemini 3.5 Flash 72.4 versus improved GLM-5 75.7; with Codex, base Gemini 74.5 versus improved GLM-5 75.3. The bars start at 60."
+image_alt: "Bar chart of WorkBuddy-Bench scores: with OpenCode, base Gemini 3.5 Flash 72.4 versus improved GLM-5 75.7; with Codex, base Gemini 74.5 versus improved GLM-5 75.3. The axis starts at 0."
 image_caption: "The weaker model with an improved harness wins in both setups."
 image_license: original
 ---
