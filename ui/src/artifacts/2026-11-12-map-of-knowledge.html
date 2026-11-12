@@ -64,10 +64,13 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 .plist li{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:10px;cursor:pointer}
 .plist li:hover{background:#ffffff10}
 .plist .dot{flex:none;width:10px;height:10px;border-radius:50%}
+.plist .num{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#07161f;color:#fff;border:1px solid #ffffff33}
 .plist .nm{flex:1;font-size:13.5px}
 .plist .pg{flex:none;font-size:11.5px;color:var(--dim)}
 .llist{list-style:none;margin:10px 0 0;padding:0;max-height:26vh;overflow:auto}
-.llist li{display:flex;align-items:center;gap:10px;padding:6px 4px;font-size:13.5px}
+.llist li{display:flex;align-items:center;gap:10px;padding:8px 6px;font-size:13.5px;cursor:pointer;border-radius:8px;min-height:36px}
+.llist li:hover{background:#ffffff12}
+.llist li:active{background:#ffffff1e}
 .llist .ico{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700}
 .llist .done .ico{background:#57cc99;color:#0b2a20}
 .llist .now .ico{background:var(--accent);color:#20303a}
@@ -318,17 +321,16 @@ function buildIslands(){
         const nr=Math.min(rr*.052,(2*rr*.42/Math.max(p.lessons-1,1))*.42);
         pts.forEach((q,k)=>{
           const st=k<p.done?"done":(k===p.done?"now":"lock");
-          el("circle",{cx:q[0],cy:q[1],r:nr,fill:st==="done"?"#57cc99":st==="now"?"#ffd166":"#5a6b73",stroke:"#0b1d24","stroke-width":nr*.22},tg);
+          el("circle",{id:"bead-"+t.slug+"-"+rg.slug+"-"+j+"-"+k,cx:q[0],cy:q[1],r:nr,fill:st==="done"?"#57cc99":st==="now"?"#ffd166":"#5a6b73",stroke:"#0b1d24","stroke-width":nr*.22},tg);
           if(st==="now")el("circle",{cx:q[0],cy:q[1],r:nr*1.7,fill:"none",stroke:"#ffd166","stroke-width":nr*.28,class:"pulse",opacity:.85},tg);
         });
         tg.id="trail-"+t.slug+"-"+rg.slug+"-"+j;
         const ax=slots[j][0],ay=slots[j][1];
         let dx=ax-rcx,dy=ay-rcy;const dl=Math.hypot(dx,dy)||1;dx/=dl;dy/=dl;
-        const lx=ax+dx*rr*.13,ly=ay+dy*rr*.13;
+        const mid=pts[Math.floor(pts.length/2)];
         const pl=el("g",{class:"lod plbl"},tg);
-        const pw2=p.name.length*rr*.058+rr*.16;
-        el("rect",{x:lx-pw2/2,y:ly-rr*.1,width:pw2,height:rr*.2,rx:rr*.08,fill:"#07161f","opacity":.72},pl);
-        txt(pl,lx,ly+rr*.042,p.name,"",rr*.11,"#fff");
+        el("circle",{cx:mid[0],cy:mid[1],r:rr*.115,fill:"#07161f",opacity:.88,stroke:"#ffffff","stroke-width":rr*.015},pl);
+        txt(pl,mid[0],mid[1]+rr*.04,String(j+1),"",rr*.115,"#fff");
         pts.forEach((q,k)=>{txt(tg,q[0],q[1]+nr*.36,String(k+1),"lod nvis",nr*1.05,k<p.done?"#0b2a20":k===p.done?"#20303a":"#c9d4d6")});
       });
       // region label (theme zoom)
@@ -413,17 +415,23 @@ function renderSheet(){
   }else if(state.level==="region"){
     const rg=T.regions.find(x=>x.slug===state.r);const tot=rg.paths.reduce((s,p)=>s+p.lessons,0),dn=rg.paths.reduce((s,p)=>s+p.done,0);
     h=`<h2>${rg.name}<span class="demotag">related paths · one shape</span></h2><p class="sub">${T.name} · ${rg.paths.length} paths</p>${bar(dn,tot)}
-    <ul class="plist">${rg.paths.map((p,j)=>`<li data-j="${j}"><span class="dot" style="background:${p.done===p.lessons?"#57cc99":p.done?"#ffd166":"#5a6b73"}"></span><span class="nm">${p.name}</span><span class="pg">${p.done}/${p.lessons}</span></li>`).join("")}</ul>
+    <ul class="plist">${rg.paths.map((p,j)=>`<li data-j="${j}"><span class="num">${j+1}</span><span class="nm">${p.name}</span><span class="pg">${p.done}/${p.lessons} · ${p.done===p.lessons?"done":p.done?"going":"new"}</span></li>`).join("")}</ul>
     <p class="blurb">Tap a path to walk its lessons.</p>`;
   }else{
     const rg=T.regions.find(x=>x.slug===state.r),p=rg.paths[state.p];
     h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name} › ${rg.name}</p>${bar(p.done,p.lessons)}
     <ul class="llist">${p.pts.map((_,k)=>{const st=k<p.done?"done":k===p.done?"now":"lock";
-      return `<li class="${st}"><span class="ico">${st==="done"?"✓":st==="now"?"▶":"·"}</span>${p.name} · part ${ROMAN[k]||k+1}</li>`}).join("")}</ul>
+      return `<li class="${st}" data-k="${k}"><span class="ico">${st==="done"?"✓":st==="now"?"▶":"·"}</span>${p.name} · part ${ROMAN[k]||k+1}</li>`}).join("")}</ul>
     <button id="continueBtn">${p.done===0?"Start this path":p.done===p.lessons?"Review this path":"Continue · part "+(ROMAN[p.done]||p.done+1)}</button>`;
   }
   sheet.innerHTML=h;sheet.classList.remove("hidden");
   sheet.querySelectorAll(".plist li").forEach(li=>li.onclick=()=>go({level:"path",t:state.t,r:state.r,p:+li.dataset.j}));
+  sheet.querySelectorAll(".llist li").forEach(li=>li.onclick=()=>{
+    const bead=document.getElementById("bead-"+state.t+"-"+state.r+"-"+state.p+"-"+li.dataset.k);
+    if(!bead)return;const oldW=bead.getAttribute("stroke-width"),oldS=bead.getAttribute("stroke");
+    bead.setAttribute("stroke","#ffffff");bead.setAttribute("stroke-width",+oldW*3);
+    setTimeout(()=>{bead.setAttribute("stroke",oldS);bead.setAttribute("stroke-width",oldW)},900);
+    li.scrollIntoView({block:"nearest"})});
   const cb=document.getElementById("continueBtn");if(cb)cb.onclick=()=>{cb.textContent="Demo only - no real progress is stored";setTimeout(renderSheet,1600)};
 }
 addEventListener("keydown",e=>{if(e.key==="Escape"){const b=[{level:"world"}];if(state.t)b.push({level:"theme",t:state.t});if(state.r)b.push({level:"region",t:state.t,r:state.r});b.pop();go(b[b.length-1]||{level:"world"})}});
