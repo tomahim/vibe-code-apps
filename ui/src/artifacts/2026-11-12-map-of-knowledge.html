@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>Map of Knowledge · a navigation study for Cultive</title><style>
+:root{--ink:#eaf2f0;--dim:#9db4b8;--panel:#0e2230ee;--line:#ffffff22;--accent:#ffd166}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#071824;color:var(--ink);overflow:hidden}
+#stage{position:fixed;inset:0}
+#map{display:block;width:100%;height:100%;touch-action:manipulation}
+text{font-family:inherit;user-select:none;pointer-events:none}
+.lod{transition:opacity .35s ease}
+.geog{opacity:.26;transition:opacity .4s ease}
+svg.z-theme .geog,svg.z-region .geog,svg.z-path .geog{opacity:1}
+.tvis,.rlbl,.plbl{opacity:0}
+svg.z-theme .tvis,svg.z-region .tvis,svg.z-path .tvis{opacity:1}
+svg.z-theme .rlbl{opacity:1}
+svg.z-region .plbl{opacity:1}
+.nvis{opacity:0}
+svg.z-path .nvis{opacity:1}
+svg.z-path .tvis:not(.focus){opacity:.16}
+svg.z-theme .wlbl,svg.z-region .wlbl,svg.z-path .wlbl{opacity:0}
+svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
+.island{cursor:pointer}
+.island:focus-visible .land{stroke:var(--accent);stroke-width:2.5}
+.region-shape{cursor:pointer}
+.trail{cursor:pointer}
+.trail:hover .trail-line{stroke-width:2.4}
+@media (prefers-reduced-motion:no-preference){
+  .waves{animation:drift 26s linear infinite}
+  .waves2{animation:drift 41s linear infinite reverse}
+  .cloud{animation:cloud 60s ease-in-out infinite alternate}
+  .cloud.c2{animation-duration:74s;animation-delay:-30s}
+  .cloud.c3{animation-duration:88s;animation-delay:-55s}
+  .smoke{animation:smoke 5s ease-in-out infinite}
+  .pulse{animation:pulse 2.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  .boat{animation:boat 34s ease-in-out infinite alternate}
+  .glow{animation:glow 4.5s ease-in-out infinite}
+}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-140px)}}
+@keyframes cloud{from{transform:translateX(-30px)}to{transform:translateX(46px)}}
+@keyframes smoke{0%,100%{opacity:.25}50%{opacity:.7}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+@keyframes boat{from{transform:translate(0,0) rotate(-2deg)}to{transform:translate(60px,-14px) rotate(2deg)}}
+@keyframes glow{0%,100%{opacity:.35}50%{opacity:.85}}
+#topbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(#071824f0,#07182400);pointer-events:none;z-index:5}
+#topbar>*{pointer-events:auto}
+#brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap}
+#brand svg{flex:none}
+#crumbs{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dim);overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+#crumbs button{max-width:34vw;overflow:hidden;text-overflow:ellipsis;background:#ffffff12;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+#crumbs button:hover{background:#ffffff22}
+#crumbs button[aria-current]{background:var(--accent);color:#20303a;border-color:transparent;font-weight:700}
+#crumbs .sep{flex:none;color:#ffffff44}
+#infoBtn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#ffffff12;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+#infoBtn:hover{background:#ffffff22}
+#sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(560px,calc(100vw - 20px));background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:14px 16px;z-index:6;transition:opacity .3s ease,translate .3s ease}
+#sheet.hidden{opacity:0;translate:0 18px;pointer-events:none}
+#sheet h2{margin:0 0 2px;font-size:17px}
+#sheet .sub{color:var(--dim);font-size:12.5px;margin:0 0 10px}
+#sheet .blurb{color:var(--dim);font-size:13px;margin:8px 0 0;line-height:1.45}
+#sheet .stat{display:inline-block;background:#ffffff10;border-radius:8px;padding:4px 9px;font-size:12px;margin:0 6px 6px 0;color:var(--ink)}
+.bar{height:7px;border-radius:99px;background:#ffffff1a;overflow:hidden;margin:8px 0 2px}
+.bar>i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+.barlabel{font-size:11.5px;color:var(--dim)}
+.plist{list-style:none;margin:10px 0 0;padding:0;max-height:32vh;overflow:auto}
+.plist li{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:10px;cursor:pointer}
+.plist li:hover{background:#ffffff10}
+.plist .dot{flex:none;width:10px;height:10px;border-radius:50%}
+.plist .nm{flex:1;font-size:13.5px}
+.plist .pg{flex:none;font-size:11.5px;color:var(--dim)}
+.llist{list-style:none;margin:10px 0 0;padding:0;max-height:26vh;overflow:auto}
+.llist li{display:flex;align-items:center;gap:10px;padding:6px 4px;font-size:13.5px}
+.llist .ico{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700}
+.llist .done .ico{background:#57cc99;color:#0b2a20}
+.llist .now .ico{background:var(--accent);color:#20303a}
+.llist .lock .ico{background:#ffffff14;color:#ffffff55}
+.llist .lock{color:#ffffff66}
+#continueBtn{margin-top:12px;width:100%;border:0;border-radius:12px;padding:12px;font:inherit;font-weight:700;font-size:14.5px;background:var(--accent);color:#20303a;cursor:pointer}
+#continueBtn:hover{filter:brightness(1.07)}
+.demotag{display:inline-block;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:2px 6px;margin-left:8px;vertical-align:middle}
+#hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:#0e2230cc;border:1px solid var(--line);color:var(--dim);font-size:12.5px;padding:8px 14px;border-radius:999px;z-index:4;transition:opacity .4s;backdrop-filter:blur(8px);white-space:nowrap}
+#hint.hidden{opacity:0;pointer-events:none}
+#about{position:fixed;inset:0;background:#051018d9;display:grid;place-items:center;z-index:10;padding:20px}
+#about.hidden{display:none}
+#about .card{max-width:480px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+#about h2{margin:0 0 10px;font-size:18px}
+#about p,#about li{font-size:13.5px;color:var(--dim);line-height:1.55}
+#about ul{padding-left:18px;margin:8px 0}
+#about b{color:var(--ink);font-weight:600}
+#about button{margin-top:8px;border:1px solid var(--line);background:#ffffff12;color:var(--ink);border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.legend span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+@media (max-width:520px){#brand .brandtxt{display:none}#sheet h2{font-size:15.5px}}
+</style></head><body>
+<div id="stage"><svg id="map" role="application" aria-label="Map of Knowledge: an explorable imaginary map of learning themes" preserveAspectRatio="xMidYMid meet"></svg></div>
+<div id="topbar">
+  <div id="brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10Z" fill="#57cc99"/><path d="M12 8v10" stroke="#0b2a20" stroke-width="1.6" stroke-linecap="round"/></svg><span class="brandtxt">Cultive · Map of Knowledge</span></div>
+  <nav id="crumbs" aria-label="Breadcrumb"></nav>
+  <button id="infoBtn" aria-label="About this design study">?</button>
+</div>
+<div id="sheet" class="hidden"></div>
+<div id="hint">Tap an island to enter a theme</div>
+<div id="about" class="hidden"><div class="card">
+<h2>Map of Knowledge</h2>
+<p>A navigation design study for Cultive (Little Grains). The whole map is the knowledge; every landform is a way in.</p>
+<ul>
+<li><b>Islands are themes.</b> Each ecosystem - forest, desert, volcano, atolls - is one theme, so a dozen themes share one map without crowding.</li>
+<li><b>Shaped regions are families of related paths.</b> No repeated hexagon grid: English paths live inside one English-shaped region, dive-physics paths in another shape. Every ecosystem gets its own geography.</li>
+<li><b>Trails are learning paths</b>, and the beads on them are lessons: done, current, locked.</li>
+</ul>
+<p>A theme here holds 8-12 paths across its regions - room to grow past today's 6-7 tiles. Demo data only; nothing is stored.</p>
+<div class="legend"><span><i style="background:#57cc99"></i>completed</span><span><i style="background:#ffd166"></i>current</span><span><i style="background:#ffffff2e"></i>locked</span></div>
+<button id="aboutClose">Close</button>
+</div></div>
+<script>
+"use strict";
+/* ---------- demo data: 12 themes, shaped regions of related paths ---------- */
+const P=(name,lessons,done)=>({name,lessons,done});
+const THEMES=[
+{slug:"verdance",name:"Verdance",subject:"Nature & Environment",biome:"forest",land:"#2f7d4f",land2:"#3f9c63",accent:"#8fe388",blurb:"An old-growth forest theme. Paths gather under canopy, roots and clearings.",
+ regions:[{slug:"canopy",name:"Canopy Ring",shape:"ring",paths:[P("Forests of the World",9,9),P("Rainforest Layers",7,4),P("Old-Growth Ecology",6,0)]},
+ {slug:"rootways",name:"The Rootways",shape:"elongated",paths:[P("Soil & Fungi",8,3),P("Compost & Cycles",5,0),P("Mushroom Foraging",5,0)]},
+ {slug:"petal",name:"Petal Flats",shape:"blob",paths:[P("Plant Identification",10,6),P("Pollinators",6,2),P("Garden Seasons",7,0),P("Wetland Birds",6,1)]}]},
+{slug:"sunkar",name:"Sunkar Desert",subject:"History & Civilizations",biome:"desert",land:"#c99a4b",land2:"#e0b76a",accent:"#ffe1a1",blurb:"Dunes bury empires here; each shaped dig site holds its related expeditions.",
+ regions:[{slug:"dunesea",name:"Dune Sea",shape:"crescent",paths:[P("Ancient Egypt",9,5),P("Mesopotamia",8,0),P("The Silk Road",10,2)]},
+ {slug:"compass",name:"Buried Compass",shape:"star",paths:[P("Greek City-States",7,7),P("Rome: Republic to Empire",9,4),P("Byzantium",7,0)]},
+ {slug:"oasis",name:"Oasis Shards",shape:"shards",paths:[P("Lost Cities",6,1),P("Archaeology Methods",5,0),P("Egyptian Hieroglyphs",6,2)]}]},
+{slug:"frostreach",name:"Frostreach",subject:"Sport & Endurance",biome:"peaks",land:"#7d9bb3",land2:"#a8c3d8",accent:"#e8f4ff",blurb:"High country for hard training: faces, glaciers and icefalls of discipline.",
+ regions:[{slug:"northface",name:"North Face",shape:"elongated",paths:[P("Climbing Fundamentals",8,4),P("Alpinism History",6,0),P("Ski Touring",6,0)]},
+ {slug:"glacier",name:"Glacier Bowl",shape:"blob",paths:[P("Cycling Legends",9,9),P("Marathon Science",7,3),P("Trail Running",7,2)]},
+ {slug:"icefall",name:"Icefall Steps",shape:"shards",paths:[P("Winter Survival",6,2),P("Recovery & Sleep",5,0),P("Nutrition Basics",8,5)]}]},
+{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#2a9d8f",land2:"#64d4c0",accent:"#b9fff0",blurb:"Atolls and blue holes: every dive course gets its own shaped lagoon.",
+ regions:[{slug:"coral",name:"Coral Ring",shape:"ring",paths:[P("Dive Sites of the World",9,6),P("Reef Ecology",7,2),P("Wreck Diving",7,0)]},
+ {slug:"bluehole",name:"The Blue Hole",shape:"blob",paths:[P("Diving N4: Physics",8,8),P("Diving N4: Physiology",8,6),P("Diving N4: Equipment",7,0),P("Freediving Basics",6,0)]},
+ {slug:"drift",name:"Drift Current",shape:"elongated",paths:[P("Ocean Currents",6,1),P("Megafauna",7,0),P("Tides & Weather",5,1)]}]},
+{slug:"cinderfel",name:"Cinderfel",subject:"Energy & Industry",biome:"volcano",land:"#5b4a4a",land2:"#7d5c50",accent:"#ffb36b",blurb:"A working volcano: calderas of infrastructure, lava channels of generation.",
+ regions:[{slug:"caldera",name:"The Caldera",shape:"ring",paths:[P("Data Center Anatomy",9,7),P("Power Grids",8,2)]},
+ {slug:"lava",name:"Lava Channels",shape:"elongated",paths:[P("Solar & Wind",7,3),P("Nuclear Basics",8,0),P("Geothermal",5,0)]},
+ {slug:"ash",name:"Ash Fields",shape:"blob",paths:[P("Batteries & Storage",6,1),P("Hydrogen",5,0),P("Home Energy",5,0),P("Carbon Capture",6,0)]}]},
+{slug:"nimbus",name:"Nimbus Drift",subject:"Space & Astronomy",biome:"sky",land:"#5b6ab3",land2:"#8797dd",accent:"#d5dcff",blurb:"Floating islands above the weather, tied to one another by comet trails.",
+ regions:[{slug:"firmament",name:"The Firmament",shape:"star",paths:[P("Solar System Tour",10,8),P("Exoplanets",7,2)]},
+ {slug:"comet",name:"Comet Trail",shape:"elongated",paths:[P("Apollo Missions",9,9),P("Rocket Science",8,4),P("Space Stations",6,1)]},
+ {slug:"nebula",name:"Dark Nebula",shape:"blob",paths:[P("Cosmology 101",8,0),P("Telescopes",6,1),P("Stargazing",5,3)]}]},
+{slug:"amber",name:"Amber Savanna",subject:"Life & Society",biome:"savanna",land:"#b3813f",land2:"#d3a45c",accent:"#ffe2ae",blurb:"Open grassland of human questions, crossed by one long migration route.",
+ regions:[{slug:"migration",name:"Migration Route",shape:"elongated",paths:[P("Psychology Basics",9,4),P("Behavioral Economics",8,2),P("Negotiation",6,2)]},
+ {slug:"waterhole",name:"The Watering Hole",shape:"ring",paths:[P("Cities & Urbanism",7,1),P("Food Systems",8,0),P("Personal Finance",8,4)]},
+ {slug:"termite",name:"Termite Towers",shape:"shards",paths:[P("Philosophy Starters",6,0),P("Sociology of Networks",7,3),P("Media Literacy",6,0)]}]},
+{slug:"mistmire",name:"Mistmire",subject:"Biology & Medicine",biome:"wetland",land:"#3f7d6b",land2:"#5da48d",accent:"#bdf0dd",blurb:"Reed beds and still pools: anatomy, viruses and sleep under the mist.",
+ regions:[{slug:"reeds",name:"Reed Maze",shape:"elongated",paths:[P("Human Anatomy",10,5),P("Immune System",8,3),P("Genetics 101",8,0)]},
+ {slug:"pools",name:"Frogspawn Pools",shape:"ring",paths:[P("Microbiome",6,0),P("Virology Essentials",7,2)]},
+ {slug:"willow",name:"Old Willow",shape:"blob",paths:[P("Neuroscience 101",9,1),P("Sleep Science",6,0),P("First Aid",6,2)]}]},
+{slug:"crystal",name:"Crystal Hollow",subject:"Geology & Earth",biome:"crystal",land:"#6a4d8f",land2:"#8f6cb8",accent:"#e3ccff",blurb:"A geode cracked open: minerals, tectonics and deep time in the facets.",
+ regions:[{slug:"geode",name:"Geode Heart",shape:"star",paths:[P("Minerals & Crystals",8,4),P("Plate Tectonics",9,6)]},
+ {slug:"tunnels",name:"Echo Tunnels",shape:"elongated",paths:[P("Volcanoes",7,2),P("Earthquakes",6,0),P("Caves & Karst",6,0)]},
+ {slug:"fossil",name:"Fossil Beds",shape:"crescent",paths:[P("Deep Time",8,1),P("Dinosaurs",9,5),P("The Rock Cycle",6,1)]}]},
+{slug:"polyglotta",name:"Polyglotta",subject:"Language & Words",biome:"terraces",land:"#a35d4b",land2:"#c57f68",accent:"#ffd9c4",blurb:"Terraced plains of words. The English Marches are one shaped region holding every English path.",
+ regions:[{slug:"english",name:"The English Marches",shape:"blob",paths:[P("English Grammar",10,6),P("English Vocabulary",12,8),P("English Pronunciation",8,2),P("English Idioms",7,0),P("English Listening",8,5)]},
+ {slug:"romancia",name:"Romancia",shape:"crescent",paths:[P("French A1",9,9),P("Spanish Starters",9,3),P("Italian Gestures",5,0),P("German Starters",9,0)]},
+ {slug:"scripts",name:"Character Cliffs",shape:"shards",paths:[P("Japanese Kana",8,1),P("Mandarin Tones",7,0),P("Arabic Script",6,0)]}]},
+{slug:"cogsworth",name:"Cogsworth Reach",subject:"AI & Technology",biome:"mesa",land:"#4a5d6b",land2:"#688092",accent:"#bfe3f0",blurb:"High mesas of computation, cut by circuit-like valleys.",
+ regions:[{slug:"foundry",name:"The Foundry",shape:"ring",paths:[P("How LLMs Work",9,7),P("Prompt Craft",6,4),P("AI Safety Basics",7,0),P("Hardware Anatomy",7,0)]},
+ {slug:"circuit",name:"Circuit Vale",shape:"elongated",paths:[P("Internet Protocols",8,3),P("The WannaCry Attack",5,5),P("Cryptography 101",8,1),P("Cyber Hygiene",6,4)]},
+ {slug:"datafalls",name:"Data Falls",shape:"crescent",paths:[P("Databases",7,2),P("Unix Philosophy",6,0)]}]},
+{slug:"rosewind",name:"Rosewind Vale",subject:"Arts & Culture",biome:"meadow",land:"#a3556b",land2:"#c97f92",accent:"#ffd7e0",blurb:"A flowering vale: galleries, an amphitheater and loom fields of craft.",
+ regions:[{slug:"gallery",name:"Gallery Terraces",shape:"shards",paths:[P("Color Theory",7,4),P("Art History Eras",10,2),P("Photography Basics",7,3)]},
+ {slug:"amphi",name:"The Amphitheater",shape:"ring",paths:[P("Music Theory 101",8,6),P("World Cinema",9,0),P("Jazz History",6,0)]},
+ {slug:"loom",name:"Loom Fields",shape:"elongated",paths:[P("Design Principles",7,1),P("Typography",6,0)]}]}
+];
+/* ---------- seeded random + geometry ---------- */
+const NS="http://www.w3.org/2000/svg";
+function hash(s){let h=1779033703;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return h>>>0}
+function RNG(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const el=(t,a,p)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n};
+const txt=(p,x,y,s,cls,size,fill,anchor="middle")=>{const n=el("text",{x,y,class:cls,"font-size":size,fill,"text-anchor":anchor,"font-weight":600},p);n.textContent=s;return n};
+function mix(c1,c2,t){const p=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));const a=p(c1),b=p(c2);return"#"+a.map((v,i)=>Math.round(v+(b[i]-v)*t).toString(16).padStart(2,"0")).join("")}
+function blob(cx,cy,r,rand,irr=.26,n=13){let d="";for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,rr=r*(1+(rand()-.5)*2*irr);const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;d+=(i? " L":"M")+x.toFixed(1)+" "+y.toFixed(1)}return d+" Z"}
+function regionGeom(type,cx,cy,r,rand){
+  if(type==="ring"){return{d:blob(cx,cy,r,rand,.18)+" "+blob(cx,cy,r*.48,rand,.22),rule:"evenodd",slots:m=>{const o=[];for(let i=0;i<m;i++){const a=(i/m)*Math.PI*2+rand();o.push([cx+Math.cos(a)*r*.74,cy+Math.sin(a)*r*.74])}return o},lab:[cx,cy]}}
+  if(type==="crescent"){const a0=rand()*Math.PI*2,r2=r*.78,off=r*.55;
+    const p1=[cx+Math.cos(a0)*r,cy+Math.sin(a0)*r],p2=[cx-Math.cos(a0)*r,cy-Math.sin(a0)*r];
+    const d=`M ${p1[0]} ${p1[1]} A ${r} ${r} 0 1 1 ${p2[0]} ${p2[1]} A ${r2} ${r2} 0 1 0 ${p1[0]} ${p1[1]} Z`;
+    return{d,rule:"nonzero",slots:m=>{const o=[];for(let i=0;i<m;i++){const a=a0+Math.PI+(i+.5)/m*Math.PI*1.1-Math.PI*.55;o.push([cx+Math.cos(a)*r*.62-off*.3,cy+Math.sin(a)*r*.62])}return o},lab:[cx+Math.cos(a0+Math.PI)*r*.3,cy+Math.sin(a0+Math.PI)*r*.3]}}
+  if(type==="elongated"){const a=rand()*Math.PI,L=r*1.5,W=r*.5;const dx=Math.cos(a),dy=Math.sin(a),px=-dy,py=dx;let d="";
+    for(let i=0;i<=12;i++){const t=i/12,s=(t-.5)*L,w=Math.sin(t*Math.PI)*W*(0.8+rand()*.4);d+=(i?" L":"M")+(cx+dx*s+px*w).toFixed(1)+" "+(cy+dy*s+py*w).toFixed(1)}
+    for(let i=12;i>=0;i--){const t=i/12,s=(t-.5)*L,w=Math.sin(t*Math.PI)*W*(0.8+rand()*.4);d+=" L"+(cx+dx*s-px*w).toFixed(1)+" "+(cy+dy*s-py*w).toFixed(1)}
+    return{d:d+" Z",rule:"nonzero",slots:m=>{const o=[];for(let i=0;i<m;i++){const s=m===1?0:(i/(m-1)-.5)*L*.8;o.push([cx+dx*s,cy+dy*s])}return o},lab:[cx,cy],angle:a}}
+  if(type==="star"){let d="";for(let i=0;i<=10;i++){const a=i/10*Math.PI*2-Math.PI/2,rr=(i%2?r*.45:r)*(1+(rand()-.5)*.16);d+=(i?" L":"M")+(cx+Math.cos(a)*rr).toFixed(1)+" "+(cy+Math.sin(a)*rr).toFixed(1)}
+    return{d:d+" Z",rule:"nonzero",slots:m=>{const o=[];for(let i=0;i<m;i++){const a=(i/m)*Math.PI*2;o.push([cx+Math.cos(a)*r*.3,cy+Math.sin(a)*r*.3])}return o},lab:[cx,cy]}}
+  /* shards: three leaning triangles */
+  {const tri=(ox,oy,s,rot)=>{const pts=[];for(let i=0;i<3;i++){const a=rot+i/3*Math.PI*2;pts.push((cx+ox+Math.cos(a)*s).toFixed(1)+" "+(cy+oy+Math.sin(a)*s).toFixed(1))}return"M"+pts.join(" L")+" Z"};
+    const offs=[[-r*.5,-r*.25],[r*.45,-r*.35],[0,r*.45]];
+    return{d:offs.map((o,i)=>tri(o[0],o[1],r*.42,rand()*3)).join(" "),rule:"nonzero",slots:m=>{const o=[];for(let i=0;i<m;i++){const c=offs[i%3];o.push([cx+c[0],cy+c[1]])}return o},lab:[cx,cy-r*.05]}}
+}
+const blobGeom=(cx,cy,r,rand)=>({d:blob(cx,cy,r,rand,.3),rule:"nonzero",slots:m=>{const o=[];for(let i=0;i<m;i++){const a=(i/m)*Math.PI*2+rand()*.3,rr=r*.5;o.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr])}return o},lab:[cx,cy]});
+function geomFor(type,cx,cy,r,rand){return type==="blob"?blobGeom(cx,cy,r,rand):regionGeom(type,cx,cy,r,rand)}
+function trailPts(ax,ay,n,rand,span){const pts=[];const a0=rand()*Math.PI*2,dx=Math.cos(a0),dy=Math.sin(a0),px=-dy,py=dx,w=rand()*3;
+for(let i=0;i<n;i++){const t=n===1?0:i/(n-1),along=(t-.5)*2*span,wob=Math.sin(t*Math.PI*2.1+w)*span*.3;pts.push([ax+dx*along+px*wob,ay+dy*along+py*wob])}return pts}
+/* ---------- island layouts (fractions of world) ---------- */
+const POS_L={verdance:[.12,.26,.13],nimbus:[.33,.15,.115],frostreach:[.54,.25,.125],cinderfel:[.77,.15,.115],rosewind:[.90,.40,.11],amber:[.73,.45,.125],polyglotta:[.50,.52,.125],cogsworth:[.27,.48,.12],mistmire:[.10,.66,.115],crystal:[.30,.78,.12],azure:[.56,.81,.13],sunkar:[.83,.76,.125]};
+const POS_P={verdance:[.27,.09,.135],nimbus:[.72,.11,.12],frostreach:[.26,.245,.125],cinderfel:[.74,.27,.115],polyglotta:[.27,.405,.13],cogsworth:[.72,.44,.12],amber:[.26,.565,.125],mistmire:[.73,.585,.115],crystal:[.27,.725,.12],azure:[.72,.745,.13],sunkar:[.28,.885,.125],rosewind:[.72,.90,.115]};
+const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+/* ---------- biome decorations (world-level icons) ---------- */
+function decor(g,t,cx,cy,r,rand){
+  const dark=mix(t.land,"#000000",.5),deep=mix(t.land,"#000000",.68),A=t.accent;
+  const s=r/58;
+  // icons sit on a ring around the centre label pill
+  const N=6,base=rand()*Math.PI*2;
+  const spots=[];for(let i=0;i<N;i++){const a=base+i/N*Math.PI*2+(rand()-.5)*.5,rad=r*(.52+rand()*.16);spots.push([cx+Math.cos(a)*rad,cy+Math.sin(a)*rad])}
+  let si=0;const put=fn=>{if(si<spots.length)fn(spots[si][0],spots[si][1]);si=(si+1)%spots.length};
+  const tree=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-14*s*k} L ${x+10*s*k} ${y+8*s*k} L ${x-10*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x} ${y-19*s*k} L ${x+7*s*k} ${y-2*s*k} L ${x-7*s*k} ${y-2*s*k} Z`,fill:dark},g);el("rect",{x:x-2*s*k,y:y+8*s*k,width:4*s*k,height:6*s*k,fill:deep},g)};
+  const peak=(x,y,k=1)=>{el("path",{d:`M ${x-16*s*k} ${y+10*s*k} L ${x} ${y-16*s*k} L ${x+16*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-5.5*s*k} ${y-5.5*s*k} L ${x} ${y-16*s*k} L ${x+5.5*s*k} ${y-5.5*s*k} L ${x+1.8*s*k} ${y-1.5*s*k} L ${x-1.8*s*k} ${y-3.5*s*k} Z`,fill:"#ffffff"},g)};
+  const cactus=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+10*s*k} v ${-18*s*k} M ${x} ${y-2*s*k} q ${-8*s*k} 0 ${-8*s*k} ${-9*s*k} M ${x} ${y-6*s*k} q ${8*s*k} 0 ${8*s*k} ${-9*s*k}`,stroke:deep,"stroke-width":3.4*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const dune=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y+6*s*k} Q ${x} ${y-9*s*k} ${x+18*s*k} ${y+6*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g);el("path",{d:`M ${x-10*s*k} ${y+11*s*k} Q ${x+4*s*k} ${y+2*s*k} ${x+16*s*k} ${y+11*s*k}`,stroke:dark,"stroke-width":1.8*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const lagoon=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:12*s*k,fill:"none",stroke:A,"stroke-width":3*s*k},g);el("circle",{cx:x,cy:y,r:5*s*k,fill:"#0e4a56"},g);el("path",{d:`M ${x-16*s*k} ${y-13*s*k} q ${5*s*k} ${-4*s*k} ${10*s*k} 0`,stroke:A,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const cone=(x,y,k=1)=>{el("path",{d:`M ${x-17*s*k} ${y+10*s*k} L ${x-4*s*k} ${y-15*s*k} L ${x+4*s*k} ${y-15*s*k} L ${x+17*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-4*s*k} ${y-15*s*k} L ${x} ${y-9*s*k} L ${x+4*s*k} ${y-15*s*k} Z`,fill:"#ff7b4d"},g);el("circle",{cx:x,cy:y-21*s*k,r:4*s*k,fill:"#ffffff",class:"smoke"},g);el("circle",{cx:x+6*s*k,cy:y-27*s*k,r:2.8*s*k,fill:"#ffffff",class:"smoke"},g)};
+  const cloudlet=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:15*s*k,ry:5.6*s*k,fill:"#ffffff",opacity:.92},g);el("ellipse",{cx:x+8*s*k,cy:y-3*s*k,rx:9*s*k,ry:4.2*s*k,fill:"#ffffff",opacity:.85},g)};
+  const rock=(x,y,k=1)=>{el("path",{d:`M ${x-9*s*k} ${y+5*s*k} L ${x-4*s*k} ${y-6*s*k} L ${x+5*s*k} ${y-7*s*k} L ${x+10*s*k} ${y+4*s*k} Z`,fill:dark},g)};
+  const acacia=(x,y,k=1)=>{el("line",{x1:x,y1:y+9*s*k,x2:x,y2:y-8*s*k,stroke:deep,"stroke-width":2.6*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x,cy:y-11*s*k,rx:12*s*k,ry:4.2*s*k,fill:dark},g)};
+  const reeds=(x,y,k=1)=>{for(let kk=-1;kk<2;kk++)el("line",{x1:x+kk*5*s*k,y1:y+6*s*k,x2:x+kk*5*s*k,y2:y-12*s*k,stroke:deep,"stroke-width":2.2*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x+9*s*k,cy:y+6*s*k,rx:8*s*k,ry:3.2*s*k,fill:deep,opacity:.8},g)};
+  const crystalF=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-15*s*k} L ${x+6*s*k} ${y-3*s*k} L ${x+4*s*k} ${y+9*s*k} L ${x-4*s*k} ${y+9*s*k} L ${x-6*s*k} ${y-3*s*k} Z`,fill:A,stroke:deep,"stroke-width":1},g);el("path",{d:`M ${x+9*s*k} ${y-6*s*k} L ${x+13*s*k} ${y+1*s*k} L ${x+11*s*k} ${y+7*s*k} L ${x+6*s*k} ${y+7*s*k} L ${x+5*s*k} ${y+1*s*k} Z`,fill:mix(A,"#ffffff",.4),stroke:deep,"stroke-width":.8},g)};
+  const terrace=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-16*s*k} ${y+(kk*7-6)*s*k} Q ${x} ${y+(kk*7-13)*s*k} ${x+16*s*k} ${y+(kk*7-6)*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const mesa=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y+8*s*k} L ${x-10*s*k} ${y-8*s*k} L ${x+10*s*k} ${y-8*s*k} L ${x+14*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-14*s*k} ${y+8*s*k} h ${10*s*k} m ${6*s*k} 0 h ${10*s*k}`,stroke:A,"stroke-width":1.6*s*k},g)};
+  const flower=(x,y,k=1)=>{for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#ffd166"},g)};
+  const wavelet=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y} q ${7*s*k} ${-7*s*k} ${14*s*k} 0 q ${7*s*k} ${7*s*k} ${14*s*k} 0`,stroke:A,"stroke-width":2.2*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const B=t.biome;
+  if(B==="forest"){for(let i=0;i<6;i++)put((x,y)=>tree(x,y,.9+rand()*.4))}
+  else if(B==="desert"){for(let i=0;i<3;i++)put((x,y)=>dune(x,y));for(let i=0;i<2;i++)put((x,y)=>cactus(x,y))}
+  else if(B==="peaks"){for(let i=0;i<4;i++)put((x,y)=>peak(x,y,.9+rand()*.5))}
+  else if(B==="atolls"){for(let i=0;i<3;i++)put((x,y)=>lagoon(x,y));for(let i=0;i<2;i++)put((x,y)=>wavelet(x,y))}
+  else if(B==="volcano"){put((x,y)=>cone(x,y,1.5));for(let i=0;i<2;i++)put((x,y)=>rock(x,y))}
+  else if(B==="sky"){for(let i=0;i<4;i++)put((x,y)=>cloudlet(x,y));put((x,y)=>rock(x,y))}
+  else if(B==="savanna"){for(let i=0;i<4;i++)put((x,y)=>acacia(x,y,.9+rand()*.3))}
+  else if(B==="wetland"){for(let i=0;i<5;i++)put((x,y)=>reeds(x,y,.9+rand()*.3))}
+  else if(B==="crystal"){for(let i=0;i<4;i++)put((x,y)=>crystalF(x,y,.9+rand()*.4))}
+  else if(B==="terraces"){for(let i=0;i<3;i++)put((x,y)=>terrace(x,y))}
+  else if(B==="mesa"){for(let i=0;i<3;i++)put((x,y)=>mesa(x,y));put((x,y)=>cactus(x,y,.8))}
+  else if(B==="meadow"){for(let i=0;i<6;i++)put((x,y)=>flower(x,y,.9+rand()*.4))}
+}
+/* ---------- scene ---------- */
+const svg=document.getElementById("map");
+let WORLD={w:1600,h:1000,pos:POS_L};
+let themeIndex={};
+function build(){
+  svg.innerHTML="";themeIndex={};
+  const aspect=innerWidth/innerHeight;
+  WORLD=aspect>1?{w:1600,h:1000,pos:POS_L}:{w:950,h:1500,pos:POS_P};
+  const minD=Math.min(WORLD.w,WORLD.h);
+  const defs=el("defs",{},svg);
+  const gr=el("linearGradient",{id:"ocean",x1:0,y1:0,x2:0,y2:1},defs);
+  el("stop",{offset:"0","stop-color":"#0a2733"},gr);el("stop",{offset:"1","stop-color":"#061720"},gr);
+  el("rect",{x:0,y:0,width:WORLD.w,height:WORLD.h,fill:"url(#ocean)"},svg);
+  // graticule
+  const grat=el("g",{stroke:"#ffffff","stroke-width":1,opacity:.05,fill:"none"},svg);
+  for(let i=1;i<6;i++)el("line",{x1:WORLD.w*i/6,y1:0,x2:WORLD.w*i/6,y2:WORLD.h},grat);
+  for(let i=1;i<4;i++)el("line",{x1:0,y1:WORLD.h*i/4,x2:WORLD.w,y2:WORLD.h*i/4},grat);
+  // waves
+  const rand=RNG(42);
+  for(const[cls,op,amp]of[["waves",.5,1],["waves2",.3,1.6]]){
+    const w=el("g",{class:cls,stroke:"#bfe3f0","stroke-width":1.6,fill:"none",opacity:op},svg);
+    for(let i=0;i<26;i++){const x=rand()*WORLD.w,y=rand()*WORLD.h,l=(14+rand()*20)*amp;
+      el("path",{d:`M ${x} ${y} q ${l/4} ${-5*amp} ${l/2} 0 q ${l/4} ${5*amp} ${l/2} 0`,"stroke-linecap":"round"},w)}}
+  // routes between islands (dashed voyages)
+  const routes=el("g",{stroke:"#ffd166","stroke-width":1.4,"stroke-dasharray":"2 7",fill:"none",opacity:.4,"stroke-linecap":"round"},svg);
+  const posOf=slug=>{const f=WORLD.pos[slug];return[f[0]*WORLD.w,f[1]*WORLD.h,f[2]*minD]};
+  const links=[["verdance","polyglotta"],["polyglotta","amber"],["cogsworth","crystal"],["crystal","azure"],["sunkar","amber"],["frostreach","cinderfel"],["nimbus","frostreach"],["mistmire","verdance"],["rosewind","sunkar"]];
+  for(const[a,b]of links){const A=posOf(a),B=posOf(b);const mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2-30;
+    el("path",{d:`M ${A[0]} ${A[1]} Q ${mx} ${my} ${B[0]} ${B[1]}`},routes)}
+  // compass
+  const comp=el("g",{transform:`translate(${WORLD.w-70},78)`,opacity:.75},svg);
+  el("circle",{cx:0,cy:0,r:26,fill:"none",stroke:"#bfe3f0","stroke-width":1.4},comp);
+  el("path",{d:"M 0 -20 L 5 0 L 0 20 L -5 0 Z",fill:"#ffd166"},comp);
+  txt(comp,0,-32,"N","",12,"#bfe3f0");
+  // clouds
+  for(const[fx,fy,sc,cls]of[[.2,.08,1,"cloud"],[.62,.06,1.4,"cloud c2"],[.85,.55,1.1,"cloud c3"]]){
+    const c=el("g",{class:cls,opacity:.16,fill:"#ffffff"},svg);
+    el("ellipse",{cx:fx*WORLD.w,cy:fy*WORLD.h,rx:70*sc,ry:16*sc},c);
+    el("ellipse",{cx:fx*WORLD.w+40*sc,cy:fy*WORLD.h-8*sc,rx:44*sc,ry:13*sc},c)}
+  // sailboat
+  const boat=el("g",{class:"boat",opacity:.8},svg);
+  el("path",{d:`M ${WORLD.w*.44} ${WORLD.h*.68} l 10 -22 l 2 22 Z`,fill:"#e8e0cf"},boat);
+  el("path",{d:`M ${WORLD.w*.42} ${WORLD.h*.68} q 12 6 24 0 l -3 6 q -9 3 -18 0 Z`,fill:"#8a5a3b"},boat);
+  buildIslands();
+}
+function buildIslands(){
+  const layer=el("g",{},svg);
+  for(const t of THEMES){
+    const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*Math.min(WORLD.w,WORLD.h);
+    const rand=RNG(hash(t.slug));
+    const g=el("g",{class:"island",tabindex:0,role:"button","aria-label":t.name+", "+t.subject+" theme. Activate to explore."},layer);
+    g.addEventListener("click",()=>go({level:"theme",t:t.slug}));
+    g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go({level:"theme",t:t.slug})}});
+    // landmass
+    el("path",{class:"land",d:blob(cx,cy,r,rand,.2),fill:t.land,stroke:mix(t.land,"#000000",.45),"stroke-width":1.6},g);
+    el("path",{d:blob(cx+r*.03,cy-r*.02,r*.86,rand,.24),fill:t.land2,opacity:.85},g);
+    decor(el("g",{class:"lod bdecor"},g),t,cx,cy,r,RNG(hash(t.slug+"d")));
+    // regions (shaped families of related paths)
+    const regRand=RNG(hash(t.slug+"r"));
+    const n=t.regions.length;
+    t.regions.forEach((rg,i)=>{
+      const a=(-Math.PI/2)+i*(Math.PI*2/n)+regRand()*.5;
+      const rcx=cx+Math.cos(a)*r*.38,rcy=cy+Math.sin(a)*r*.38,rr=r*(rg.shape==="elongated"?.30:.30);
+      const geo=geomFor(rg.shape,rcx,rcy,rr,RNG(hash(t.slug+rg.slug)));
+      const fill=mix(t.land2,i%2?t.accent:"#ffffff",i%2?.30:.20);
+      const gg=el("g",{class:"geog"},g);
+      const rgEl=el("path",{class:"region-shape",d:geo.d,fill,stroke:mix(t.land,"#000000",.55),"stroke-width":1,"fill-rule":geo.rule,opacity:.96,"vector-effect":"non-scaling-stroke"},gg);
+      rgEl.addEventListener("click",ev=>{ev.stopPropagation();go({level:"region",t:t.slug,r:rg.slug})});
+      rg.cx=rcx;rg.cy=rcy;rg.r=rr;rg.geom=geo;
+      // trails (learning paths) inside the shaped region
+      const pathRand=RNG(hash(t.slug+rg.slug+"p"));
+      const slots=geo.slots(rg.paths.length);
+      rg.paths.forEach((p,j)=>{
+        const pts=trailPts(slots[j][0],slots[j][1],p.lessons,pathRand,rr*.42);
+        p.pts=pts;p.slug=rg.slug+"-"+j;
+        const tg=el("g",{class:"trail lod tvis"},gg);
+        const d="M"+pts.map(q=>q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" L");
+        el("path",{d,fill:"none",stroke:"#1c2b33","stroke-width":7,opacity:0,"stroke-linecap":"round","stroke-linejoin":"round"},tg)
+          .addEventListener("click",ev=>{ev.stopPropagation();go({level:"path",t:t.slug,r:rg.slug,p:j})});
+        el("path",{class:"trail-line",d,fill:"none",stroke:"#f4ead2","stroke-width":1.6,"stroke-dasharray":"1 4","stroke-linecap":"round","vector-effect":"non-scaling-stroke"},tg);
+        const nr=Math.min(rr*.052,(2*rr*.42/Math.max(p.lessons-1,1))*.42);
+        pts.forEach((q,k)=>{
+          const st=k<p.done?"done":(k===p.done?"now":"lock");
+          el("circle",{cx:q[0],cy:q[1],r:nr,fill:st==="done"?"#57cc99":st==="now"?"#ffd166":"#5a6b73",stroke:"#0b1d24","stroke-width":nr*.22},tg);
+          if(st==="now")el("circle",{cx:q[0],cy:q[1],r:nr*1.7,fill:"none",stroke:"#ffd166","stroke-width":nr*.28,class:"pulse",opacity:.85},tg);
+        });
+        tg.id="trail-"+t.slug+"-"+rg.slug+"-"+j;
+        const ax=slots[j][0],ay=slots[j][1];
+        let dx=ax-rcx,dy=ay-rcy;const dl=Math.hypot(dx,dy)||1;dx/=dl;dy/=dl;
+        const lx=ax+dx*rr*.13,ly=ay+dy*rr*.13;
+        const pl=el("g",{class:"lod plbl"},tg);
+        const pw2=p.name.length*rr*.058+rr*.16;
+        el("rect",{x:lx-pw2/2,y:ly-rr*.1,width:pw2,height:rr*.2,rx:rr*.08,fill:"#07161f","opacity":.72},pl);
+        txt(pl,lx,ly+rr*.042,p.name,"",rr*.11,"#fff");
+        pts.forEach((q,k)=>{txt(tg,q[0],q[1]+nr*.36,String(k+1),"lod nvis",nr*1.05,k<p.done?"#0b2a20":k===p.done?"#20303a":"#c9d4d6")});
+      });
+      // region label (theme zoom)
+      const rl=el("g",{class:"lod rlbl"},g);
+      const rw=rg.name.length*rr*.13+rr*.3;
+      el("rect",{x:geo.lab[0]-rw/2,y:geo.lab[1]-rr*.19,width:rw,height:rr*.38,rx:rr*.12,fill:"#07161f","opacity":.66},rl);
+      txt(rl,geo.lab[0],geo.lab[1]+rr*.07,rg.name,"",rr*.21,"#ffffff");
+      // world-level: theme name + progress
+      const wl=el("g",{class:"lod wlbl"},g);
+      const tot=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.lessons,0);
+      const dn=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.done,0);
+      const sub=t.subject+" · "+dn+"/"+tot;
+      const pw=Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24;
+      el("rect",{x:cx-pw/2,y:cy-r*.21,width:pw,height:r*.42,rx:r*.1,fill:"#07161f","opacity":.68},wl);
+      txt(wl,cx,cy-r*.02,t.name,"",r*.17,"#ffffff");
+      txt(wl,cx,cy+r*.13,sub,"",r*.095,t.accent);
+    });
+    themeIndex[t.slug]={t,cx,cy,r};
+  }
+}
+/* ---------- zoom + navigation ---------- */
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const crumbs=document.getElementById("crumbs"),sheet=document.getElementById("sheet"),hint=document.getElementById("hint");
+let vb={x:0,y:0,w:1600,h:1000},anim=null,state={level:"world"};
+function fit(cx,cy,halfW){const A=innerWidth/innerHeight;let w=halfW*2,h=w/A;return{x:cx-w/2,y:cy-h/2,w,h}}
+function targetFor(st){
+  if(st.level==="world")return fit(WORLD.w/2,WORLD.h/2,WORLD.w/2);
+  const T=themeIndex[st.t];
+  if(st.level==="theme"){const v=fit(T.cx,T.cy,T.r*1.45);v.y+=v.h*(innerWidth<600?.08:.05);return v}
+  const rg=T.t.regions.find(x=>x.slug===st.r);
+  if(st.level==="region"){const v=fit(rg.cx,rg.cy,rg.r*1.6);v.y+=v.h*(innerWidth<600?.12:.08);return v}
+  const p=rg.paths[st.p];const xs=p.pts.map(q=>q[0]),ys=p.pts.map(q=>q[1]);
+  const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2;
+  const hw=Math.max((Math.max(...xs)-Math.min(...xs))/2,(Math.max(...ys)-Math.min(...ys))/2,rg.r*.45);
+  const v=fit(cx,cy,hw*2.1);v.y+=v.h*(innerWidth<600?.17:.12);return v;
+}
+function zClass(){let lvl="world";const w=vb.w;
+  if(state.t){const T=themeIndex[state.t];
+    if(w<=2.9*T.r*1.3)lvl="theme";
+    if(lvl!=="world"&&state.r){const rg=T.t.regions.find(x=>x.slug===state.r);
+      if(w<=3.2*rg.r*1.3)lvl="region";
+      if(lvl==="region"&&state.p!==undefined){const p=rg.paths[state.p];const xs=p.pts.map(q=>q[0]),ys=p.pts.map(q=>q[1]);
+        const hw=Math.max((Math.max(...xs)-Math.min(...xs))/2,(Math.max(...ys)-Math.min(...ys))/2,rg.r*.45);
+        if(w<=hw*4.2*1.3)lvl="path"}}}
+  svg.setAttribute("class","z-"+lvl)}
+function setVB(v){vb=v;svg.setAttribute("viewBox",`${v.x} ${v.y} ${v.w} ${v.h}`);zClass()}
+function go(st,instant){state=st;
+  svg.querySelectorAll(".trail.focus").forEach(n=>n.classList.remove("focus"));
+  if(st.level==="path"){const f=document.getElementById("trail-"+st.t+"-"+st.r+"-"+st.p);if(f)f.classList.add("focus")}
+  history.replaceState(null,"","#"+[st.t,st.r,st.p].filter(x=>x!==undefined).join("/"));
+  const to=targetFor(st);renderChrome();
+  if(instant||RM){anim=null;setVB(to);return}
+  const from={...vb},t0=performance.now(),dur=750;
+  cancelAnimationFrame(anim);
+  const step=now=>{const k=Math.min(1,(now-t0)/dur),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+    setVB({x:from.x+(to.x-from.x)*e,y:from.y+(to.y-from.y)*e,w:from.w+(to.w-from.w)*e,h:from.h+(to.h-from.h)*e});
+    if(k<1)anim=requestAnimationFrame(step)};
+  anim=requestAnimationFrame(step)}
+function renderChrome(){
+  const parts=[{label:"World",st:{level:"world"}}];
+  const T=state.t?themeIndex[state.t].t:null;
+  if(T){parts.push({label:T.name,st:{level:"theme",t:T.slug}});
+    if(state.r){const rg=T.regions.find(x=>x.slug===state.r);parts.push({label:rg.name,st:{level:"region",t:T.slug,r:rg.slug}});
+      if(state.p!==undefined)parts.push({label:rg.paths[state.p].name,st:null})}}
+  crumbs.innerHTML="";
+  parts.forEach((pt,i)=>{if(i){const s=document.createElement("span");s.className="sep";s.textContent="›";crumbs.appendChild(s)}
+    const b=document.createElement("button");b.textContent=pt.label;
+    if(!pt.st||i===parts.length-1&&parts.length>1)b.setAttribute("aria-current","true");
+    if(pt.st)b.onclick=()=>go(pt.st);crumbs.appendChild(b)});
+  hint.classList.toggle("hidden",state.level!=="world");
+  renderSheet();
+}
+function bar(done,tot){return `<div class="bar"><i style="width:${tot?Math.round(done/tot*100):0}%"></i></div><div class="barlabel">${done} of ${tot} lessons</div>`}
+function renderSheet(){
+  if(state.level==="world"){sheet.classList.add("hidden");return}
+  const T=themeIndex[state.t].t;let h="";
+  if(state.level==="theme"){
+    const paths=T.regions.flatMap(r=>r.paths),tot=paths.reduce((s,p)=>s+p.lessons,0),dn=paths.reduce((s,p)=>s+p.done,0);
+    h=`<h2>${T.name}<span class="demotag">theme · ecosystem</span></h2><p class="sub">${T.subject}</p>
+    <span class="stat">${T.regions.length} shaped regions</span><span class="stat">${paths.length} paths</span><span class="stat">${tot} lessons</span>
+    ${bar(dn,tot)}<p class="blurb">${T.blurb} Tap a shaped region to see its related paths.</p>`;
+  }else if(state.level==="region"){
+    const rg=T.regions.find(x=>x.slug===state.r);const tot=rg.paths.reduce((s,p)=>s+p.lessons,0),dn=rg.paths.reduce((s,p)=>s+p.done,0);
+    h=`<h2>${rg.name}<span class="demotag">related paths · one shape</span></h2><p class="sub">${T.name} · ${rg.paths.length} paths</p>${bar(dn,tot)}
+    <ul class="plist">${rg.paths.map((p,j)=>`<li data-j="${j}"><span class="dot" style="background:${p.done===p.lessons?"#57cc99":p.done?"#ffd166":"#5a6b73"}"></span><span class="nm">${p.name}</span><span class="pg">${p.done}/${p.lessons}</span></li>`).join("")}</ul>
+    <p class="blurb">Tap a path to walk its lessons.</p>`;
+  }else{
+    const rg=T.regions.find(x=>x.slug===state.r),p=rg.paths[state.p];
+    h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name} › ${rg.name}</p>${bar(p.done,p.lessons)}
+    <ul class="llist">${p.pts.map((_,k)=>{const st=k<p.done?"done":k===p.done?"now":"lock";
+      return `<li class="${st}"><span class="ico">${st==="done"?"✓":st==="now"?"▶":"·"}</span>${p.name} · part ${ROMAN[k]||k+1}</li>`}).join("")}</ul>
+    <button id="continueBtn">${p.done===0?"Start this path":p.done===p.lessons?"Review this path":"Continue · part "+(ROMAN[p.done]||p.done+1)}</button>`;
+  }
+  sheet.innerHTML=h;sheet.classList.remove("hidden");
+  sheet.querySelectorAll(".plist li").forEach(li=>li.onclick=()=>go({level:"path",t:state.t,r:state.r,p:+li.dataset.j}));
+  const cb=document.getElementById("continueBtn");if(cb)cb.onclick=()=>{cb.textContent="Demo only - no real progress is stored";setTimeout(renderSheet,1600)};
+}
+addEventListener("keydown",e=>{if(e.key==="Escape"){const b=[{level:"world"}];if(state.t)b.push({level:"theme",t:state.t});if(state.r)b.push({level:"region",t:state.t,r:state.r});b.pop();go(b[b.length-1]||{level:"world"})}});
+document.getElementById("infoBtn").onclick=()=>document.getElementById("about").classList.remove("hidden");
+document.getElementById("aboutClose").onclick=()=>document.getElementById("about").classList.add("hidden");
+document.getElementById("about").addEventListener("click",e=>{if(e.target.id==="about")e.target.classList.add("hidden")});
+let rsT;addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTimeout(()=>{const asp=innerWidth/innerHeight,wasL=WORLD.w===1600;if((asp>1)!==wasL){build();go(state,true)}else go(state,true)},200)});
+build();
+(function(){const h=location.hash.slice(1).split("/");const st={level:"world"};
+  if(h[0]&&themeIndex[h[0]]){st.level="theme";st.t=h[0];
+    if(h[1]&&themeIndex[h[0]].t.regions.some(r=>r.slug===h[1])){st.level="region";st.r=h[1];
+      if(h[2]!==undefined&&themeIndex[h[0]].t.regions.find(r=>r.slug===h[1]).paths[+h[2]]){st.level="path";st.p=+h[2]}}}
+  go(st,true)})();
+</script>
+</body></html>
