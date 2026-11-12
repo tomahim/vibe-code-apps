@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Optional private HTTPS for services behind the router. Sourced by start.sh
-# after the node is on the tailnet. Does nothing unless TS_HTTPS_SERVICES is set.
+# after the node is on the tailnet. With TS_HTTPS_SERVICES unset it only clears any leftover serve config.
 #
 #   TS_HTTPS_SERVICES='443=ui.railway.internal:8080;8443=cultive-dev.railway.internal:8080'
 #
@@ -16,15 +16,22 @@
 #  - Every failure is logged and swallowed: it must never stop start.sh, and
 #    every tailscale call has a timeout (serve blocks when HTTPS certificates
 #    are not enabled in the tailnet admin console yet).
-#  - Unset or empty TS_HTTPS_SERVICES means the router behaves exactly as before.
+#  - Unset or empty TS_HTTPS_SERVICES: only a bounded `tailscale serve reset`
+#    (the state is on a volume, so old serve config would otherwise persist).
 
 https_serve_setup() {
   local spec="${TS_HTTPS_SERVICES:-}"
-  [ -n "$spec" ] || return 0
-
   local tsbin="${TS_HTTPS_TAILSCALE_BIN:-tailscale}"
   local sock="${TS_HTTPS_SOCKET:-/var/run/tailscale/tailscaled.sock}"
   local serve_timeout="${TS_HTTPS_SERVE_TIMEOUT:-20}"
+  if [ -z "$spec" ]; then
+    # The tailscaled state lives on the router's volume, so a serve config from
+    # an earlier boot would survive. Clearing it makes "unset the variable" a
+    # real rollback. Bounded, and a no-op when nothing is configured.
+    timeout "$serve_timeout" "$tsbin" --socket="$sock" serve reset >/dev/null 2>&1 || true
+    return 0
+  fi
+
   local base_port="${TS_HTTPS_LOCAL_BASE_PORT:-18080}"
   local idx=0 entry hport target host port lport
 

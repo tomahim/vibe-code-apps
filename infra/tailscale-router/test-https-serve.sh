@@ -21,9 +21,10 @@ sleep 1
 export TS_HTTPS_TAILSCALE_BIN="$T/ts" TS_STUB_LOG="$T/log" TS_HTTPS_SERVE_TIMEOUT=2 TS_HTTPS_LOCAL_BASE_PORT=18700
 . ./https-serve.sh
 
-# 1. unset: no-op
+# 1. unset: only a serve reset, no forwarders, no serve listeners
 unset TS_HTTPS_SERVICES; : > "$T/log"; https_serve_safe
-check "unset is a no-op" "$(wc -c < "$T/log" | tr -d ' ')" 0
+check "unset only resets serve" "$(cat "$T/log")" "--socket=/var/run/tailscale/tailscaled.sock serve reset"
+check "unset starts no forwarder" "$(pgrep -fc 'socat TCP-LISTEN:187')" 0
 
 # 2. two mappings, one invalid
 export TS_HTTPS_SERVICES='443=127.0.0.1:18999; 8443=localhost:18999;bogus;x=y:z'

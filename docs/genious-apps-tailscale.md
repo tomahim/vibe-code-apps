@@ -98,7 +98,7 @@ version running today), plus `https-serve.sh`. With `TS_HTTPS_SERVICES` set
 the router serves `https://tailscale-rw.<tailnet>.ts.net` and `:8443` through
 `tailscale serve` with daemon-managed, auto-renewed certificates. Each mapping
 goes through a local `socat` forwarder because serve only proxies to localhost.
-Without the variable the router behaves exactly as before.
+Without the variable the router behaves as before (it only clears any leftover serve config at boot).
 
 ### What stays unchanged
 - The plain-HTTP URLs (`http://ui.<project>-railway.internal:8080`) keep working:
@@ -121,14 +121,14 @@ over HTTPS and add trusted origins if it fails).
 ### Cutover (manual, in order; nothing here happens on merge)
 1. Tailscale admin console, DNS, Enable HTTPS certificates. This publishes the
    tailnet and machine names in public certificate transparency logs.
-2. Railway, router service, Settings, Source: this repository, root directory
-   `/infra/tailscale-router`. Test first with `TS_HTTPS_SERVICES` unset and
+2. Railway, router service, Settings, Source: today it tracks `dotlouis/tailscale-rw` (branch `main`). Change it to this repository, root directory
+   `/infra/tailscale-router`, and set watch paths to `/infra/tailscale-router/**` so unrelated pushes to master do not redeploy the router. `TAILSCALE_VERSION` (1.104.1) stays as the build argument. Test first with `TS_HTTPS_SERVICES` unset and
    confirm the plain-HTTP URLs and an admin upload still work.
 3. Set `tailscale_https_services` in Terraform (or the variable in Railway).
 4. Verify: HTTPS on both ports, the HTTP URLs, music-library Play (#443),
    certificate renewal after a redeploy.
 
-Rollback: unset `TS_HTTPS_SERVICES` (HTTPS gone, HTTP unaffected), or point the
+Rollback: unset `TS_HTTPS_SERVICES` (HTTPS gone after the redeploy because the router clears leftover serve config on boot; HTTP unaffected), or point the
 router source back to the template. Both redeploy the router.
 
 Local check of the forwarding logic: `bash infra/tailscale-router/test-https-serve.sh`.

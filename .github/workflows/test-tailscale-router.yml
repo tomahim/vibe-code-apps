@@ -1,0 +1,30 @@
+name: Tailscale router image (build and test only)
+
+# Review-only checks for infra/tailscale-router. Builds the image without
+# pushing it and never touches Railway.
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "infra/tailscale-router/**"
+      - ".github/workflows/test-tailscale-router.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install socat
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends socat
+      - name: Shell syntax and forwarding test (stub tailscale)
+        run: |
+          bash -n infra/tailscale-router/start.sh
+          bash -n infra/tailscale-router/https-serve.sh
+          bash infra/tailscale-router/test-https-serve.sh
+      - name: Build image (no push)
+        run: docker build --build-arg TAILSCALE_VERSION=1.104.1 -t tailscale-router-test infra/tailscale-router
+      - name: Check the binaries are in the image
+        run: docker run --rm --entrypoint sh tailscale-router-test -c 'tailscale version && tailscaled --version && coredns -version && socat -V | head -2'

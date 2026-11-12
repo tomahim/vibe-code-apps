@@ -154,8 +154,9 @@ EOF
 fi
 
 # --- Optional private HTTPS (TS_HTTPS_SERVICES), see https-serve.sh ------------
-# No-op when the variable is unset. Failures are logged, never fatal.
-if [ -n "${TS_HTTPS_SERVICES:-}" ] && [ -f /app/https-serve.sh ]; then
+# With the variable unset it only clears leftover serve config. Failures are
+# logged, never fatal.
+if [ -f /app/https-serve.sh ]; then
   # shellcheck disable=SC1091
   . /app/https-serve.sh
   set +e
