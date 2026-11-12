@@ -7,15 +7,17 @@ body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"S
 #map{display:block;width:100%;height:100%;touch-action:manipulation}
 text{font-family:inherit;user-select:none;pointer-events:none}
 .lod{transition:opacity .35s ease}
-.geog{opacity:.26;transition:opacity .4s ease}
-svg.z-theme .geog,svg.z-region .geog,svg.z-path .geog{opacity:1}
+.geog{opacity:.12;transition:opacity .4s ease}
+.island{transition:opacity .45s ease}
+svg.z-theme .island:not(.active),svg.z-region .island:not(.active),svg.z-path .island:not(.active){opacity:.28}
+svg.z-theme .island.active .geog,svg.z-region .island.active .geog,svg.z-path .island.active .geog{opacity:1}
 .tvis,.rlbl,.plbl{opacity:0}
-svg.z-theme .tvis,svg.z-region .tvis,svg.z-path .tvis{opacity:1}
-svg.z-theme .rlbl{opacity:1}
-svg.z-region .plbl{opacity:1}
+svg.z-theme .island.active .tvis,svg.z-region .island.active .tvis,svg.z-path .island.active .tvis{opacity:1}
+svg.z-theme .island.active .rlbl{opacity:1}
+svg.z-region .island.active .plbl{opacity:1}
 .nvis{opacity:0}
-svg.z-path .nvis{opacity:1}
-svg.z-path .tvis:not(.focus){opacity:.16}
+svg.z-path .island.active .nvis{opacity:1}
+svg.z-path .island.active .tvis:not(.focus){opacity:.16}
 svg.z-theme .wlbl,svg.z-region .wlbl,svg.z-path .wlbl{opacity:0}
 svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 .island{cursor:pointer}
@@ -49,6 +51,7 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 #crumbs button:hover{background:#fffdf8}
 #crumbs button[aria-current]{background:var(--accent);color:#27392e;border-color:transparent;font-weight:700}
 #crumbs .sep{flex:none;color:#27392e44}
+#proto{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#8a6a1f;background:#e3a83c2e;border:1px solid #e3a83c66;border-radius:999px;padding:5px 10px;white-space:nowrap}
 #infoBtn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#fffdf8cc;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
 #infoBtn:hover{background:#fffdf8}
 #sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(560px,calc(100vw - 20px));background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:14px 16px;z-index:6;transition:opacity .3s ease,translate .3s ease}
@@ -98,6 +101,7 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 <div id="topbar">
   <div id="brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10Z" fill="#5ea84a"/><path d="M12 8v10" stroke="#27392e" stroke-width="1.6" stroke-linecap="round"/></svg><span class="brandtxt">Cultive · Map of Knowledge</span></div>
   <nav id="crumbs" aria-label="Breadcrumb"></nav>
+  <span id="proto">Prototype · demo progress</span>
   <button id="infoBtn" aria-label="About this design study">?</button>
 </div>
 <div id="sheet" class="hidden"></div>
@@ -110,7 +114,7 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 <li><b>Generated, not drawn.</b> Territories are placed on a phyllotaxis spiral and shaped by seeded fractal coastlines; terrains rotate by position like the garden does today. Adding or archiving a theme just re-generates the map.</li>
 <li><b>Trails are learning paths</b>, beads are lessons: done, current, locked. Tap a territory to zoom into its paths.</li>
 </ul>
-<p>Progress shown here is demo data. Try the layout stress test:</p>
+<p>Theme names, paths and lesson counts are the real published content; progress bars are demo data. Layout stress test:</p>
 <div class="legend" id="stress"></div>
 <button id="aboutClose">Close</button>
 </div></div>
@@ -118,17 +122,17 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 "use strict";
 /* ---------- demo data: 12 themes, shaped regions of related paths ---------- */
 const P=(name,lessons,done)=>({name,lessons,done});
-const RAW_THEMES=[{"id": "language", "title": "Language", "desc": "Practical language learning for everyday life.", "paths": [["600 words for little english talkers", 168], ["Early Childhood English", 94]]}, {"id": "tech-and-ai", "title": "Tech & AI", "desc": "Understand the ideas behind the digital tools you use.", "paths": [["Anatomy of a cyberattack", 105], ["Code review at Anthropic", 84], ["Harness²: self-improving AI", 80], ["How ChatGPT works", 140]]}, {"id": "sport", "title": "Sport", "desc": "The athletes, teams, and moments that shaped sports history.", "paths": [["Cycling legends", 160], ["Hockey all time legends", 128], ["Legendary dive sites", 80], ["Trail running legends", 160], ["Trail running mythical races", 168]]}, {"id": "life-and-society", "title": "Life & Society", "desc": "The science of everyday life: child development, health, home and society.", "paths": [["A baby's first year through science", 96]]}, {"id": "energy", "title": "Energy", "desc": "How energy powers the digital world, from the chip to the grid.", "paths": [["Data Center Anatomy", 120]]}, {"id": "plongee-niveau-4-partie-1", "title": "Diving N4 #1", "desc": "Première partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["1 - Prendre sa place de guide de palanquée", 75], ["2 - Utiliser la physique en plongée", 94], ["3 - Comprendre le corps immergé", 102], ["4 - Prévenir et reconnaître les accidents", 136], ["5 - Comprendre la saturation et la désaturation", 96], ["6 - Gérer la désaturation d'une palanquée", 96], ["7 - Comprendre et contrôler le matériel", 149]]}, {"id": "plongee-niveau-4-partie-2", "title": "Diving N4 #2", "desc": "Deuxième partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["10 - Participer à l'organisation et au matelotage", 104], ["11 - Préparer les épreuves du niveau 4", 87], ["8 - Préparer et conduire une palanquée", 144], ["9 - Faire découvrir le milieu et le protéger", 112]]}];
+const RAW_THEMES=[{"id": "language", "title": "Language", "desc": "Practical language learning for everyday life.", "paths": [["600 words for little english talkers", 21], ["Early Childhood English", 18]]}, {"id": "tech-and-ai", "title": "Tech & AI", "desc": "Understand the ideas behind the digital tools you use.", "paths": [["Anatomy of a cyberattack", 15], ["Code review at Anthropic", 12], ["Harness²: self-improving AI", 10], ["How ChatGPT works", 20]]}, {"id": "sport", "title": "Sport", "desc": "The athletes, teams, and moments that shaped sports history.", "paths": [["Cycling legends", 20], ["Hockey all time legends", 16], ["Legendary dive sites", 10], ["Trail running legends", 20], ["Trail running mythical races", 21]]}, {"id": "life-and-society", "title": "Life & Society", "desc": "The science of everyday life: child development, health, home and society.", "paths": [["A baby's first year through science", 12]]}, {"id": "energy", "title": "Energy", "desc": "How energy powers the digital world, from the chip to the grid.", "paths": [["Data Center Anatomy", 15]]}, {"id": "plongee-niveau-4-partie-1", "title": "Diving N4 #1", "desc": "Première partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["1 - Prendre sa place de guide de palanquée", 10], ["2 - Utiliser la physique en plongée", 12], ["3 - Comprendre le corps immergé", 12], ["4 - Prévenir et reconnaître les accidents", 17], ["5 - Comprendre la saturation et la désaturation", 12], ["6 - Gérer la désaturation d'une palanquée", 12], ["7 - Comprendre et contrôler le matériel", 18]]}, {"id": "plongee-niveau-4-partie-2", "title": "Diving N4 #2", "desc": "Deuxième partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["10 - Participer à l'organisation et au matelotage", 13], ["11 - Préparer les épreuves du niveau 4", 11], ["8 - Préparer et conduire une palanquée", 18], ["9 - Faire découvrir le milieu et le protéger", 14]]}];
 /* Terrains rotate by position and the diving themes get reef scenery, exactly like the app's garden adapter
    (ui/src/apps/little-grains/LittleGrains.jsx), so adding a theme never means redrawing the world. */
 const TERRAIN_ROT=["meadow","forest","orchard","mesa","lavender","pond","alpine"];
 const REEF={"plongee-niveau-4-partie-1":"coral","plongee-niveau-4-partie-2":"reef"};
 const STYLES={
  meadow:{glyph:"meadow",land:"#8abf70",land2:"#a9d191"},
- forest:{glyph:"forest",land:"#75a672",land2:"#93c08f"},
- orchard:{glyph:"forest",land:"#a1c875",land2:"#bcda97"},
+ forest:{glyph:"forest",land:"#679b6a",land2:"#8ab98d"},
+ orchard:{glyph:"forest",land:"#b5cf72",land2:"#cfe09a"},
  mesa:{glyph:"mesa",land:"#d7a37d",land2:"#e6bfa0"},
- lavender:{glyph:"meadow",land:"#b4b58b",land2:"#cccda9"},
+ lavender:{glyph:"meadow",land:"#a9a7c4",land2:"#c6c4dc"},
  pond:{glyph:"atolls",land:"#87bbad",land2:"#a9d2c6"},
  alpine:{glyph:"peaks",land:"#b5c0a6",land2:"#d2dac6"},
  coral:{glyph:"atolls",land:"#e6d3a3",land2:"#f0e3bf"},
@@ -216,6 +220,35 @@ function closedD(pts){const n=pts.length;
 function pip(pts,x,y){let c=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const xi=pts[i][0],yi=pts[i][1],xj=pts[j][0],yj=pts[j][1];
   if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)c=!c}return c}
 function scalePts(pts,cx,cy,k){return pts.map(p=>[cx+(p[0]-cx)*k,cy+(p[1]-cy)*k])}
+function clipHalf(pts,bx,by,nx,ny){
+  const out=[];const inside=q=>((q[0]-bx)*nx+(q[1]-by)*ny)<=0;
+  for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];const ia=inside(a),ib=inside(b);
+    if(ia)out.push(a);
+    if(ia!==ib){const t=((bx-a[0])*nx+(by-a[1])*ny)/((b[0]-a[0])*nx+(b[1]-a[1])*ny);out.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t])}}
+  return out}
+/* interlocking territory cell: circle clipped by perpendicular bisectors of neighbouring sites */
+function cellPts(cx,cy,R,sites){
+  const K=60;let pts=[];
+  for(let i=0;i<K;i++){const a=i/K*Math.PI*2;pts.push([cx+Math.cos(a)*R*1.7,cy+Math.sin(a)*R*1.7])}
+  for(const q of sites){const dx=q[0]-cx,dy=q[1]-cy,d=Math.hypot(dx,dy);
+    if(d<1||d>R*3.4)continue;
+    pts=clipHalf(pts,cx+dx/2,cy+dy/2,dx/d,dy/d);
+    if(!pts.length)break}
+  return pts}
+function subdivide(pts,maxSeg){
+  const out=[];for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];
+    out.push(a);const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.floor(d/maxSeg);
+    for(let k=1;k<=n;k++)out.push([a[0]+(b[0]-a[0])*k/(n+1),a[1]+(b[1]-a[1])*k/(n+1)])}
+  return out}
+function insetPts(pts,inset){
+  let mx=0,my=0;for(const q of pts){mx+=q[0];my+=q[1]}mx/=pts.length;my/=pts.length;
+  return pts.map(q=>{const dx=q[0]-mx,dy=q[1]-my,d=Math.hypot(dx,dy)||1,f=Math.max(d-inset,2)/d;
+    return[mx+dx*f,my+dy*f]})}
+function fieldPts(pts,amp){
+  return pts.map(q=>{const x=q[0],y=q[1];
+    const dx=(Math.sin(y*.011+1.7)+.6*Math.sin(y*.023+.4))*amp;
+    const dy=(Math.sin(x*.013+4.2)+.6*Math.sin(x*.021+2.1))*amp;
+    return[x+dx,y+dy]})}
 /* ---------- terrain glyphs ---------- */
 function glyphSet(g,s,dark,deep,A,rand){
   return {
@@ -250,10 +283,11 @@ function glyphSet(g,s,dark,deep,A,rand){
 function dressTerritory(g,t,cx,cy,r,pts){
   const rand=RNG(hash(t.slug+"x"));
   const dark=mix(t.land,"#27392e",.5),deep=mix(t.land,"#27392e",.68),A=t.accent;
-  const s=r/95,G=glyphSet(g,s,dark,deep,A,rand);
-  const want={forest:56,desert:38,peaks:54,volcano:24,sky:20,delta:26,jungle:54,crystal:34,terraces:30,mesa:28,meadow:44,atolls:16}[t.biome]||24;
+  const s=r/118,G=glyphSet(g,s,dark,deep,A,rand);
+  const base={forest:56,desert:38,peaks:54,volcano:24,sky:20,delta:26,jungle:54,crystal:34,terraces:30,mesa:28,meadow:44,atolls:16}[t.biome]||24;
+  const want=Math.round(base*Math.max(.55,Math.min(1.6,r/140)));
   const B=t.biome;
-  const clear=B==="sky"?r*.05:r*.36,gap=B==="sky"?r*.13:r*.16;
+  const clear=B==="sky"?r*.05:r*.32,gap=B==="sky"?r*.11:r*.12;
   const spots=[];let tries=0;
   while(spots.length<want&&tries<want*40){tries++;
     const x=cx+(rand()*2-1)*r*1.3,y=cy+(rand()*2-1)*r*1.3;
@@ -335,11 +369,14 @@ function buildIslands(coast){
   const layer=el("g",{"clip-path":"url(#landclip)"},layerAll);
   const layerOff=el("g",{},layerAll);
   const terr={};
+  const allSites=THEMES.map(t=>{const f=WORLD.pos[t.slug];return[f[0]*WORLD.w,f[1]*WORLD.h]});
+  const totLessons=t=>t.regions.reduce((sum,rg)=>sum+rg.paths[0].lessons,0);
+  const maxLessons=Math.max(...THEMES.map(totLessons));
   /* pass 1: territory landmasses */
   for(const t of THEMES){
-    const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*minD;
-    const mult=terrMult(t.slug);
-    const pts=fractalPts(cx,cy,r*mult[0],r*mult[1],hash(t.slug+"c"),5,.30);
+    const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h;
+    const r=f[2]*minD*(0.9+0.45*Math.sqrt(totLessons(t)/maxLessons));
+    const pts=fieldPts(subdivide(cellPts(cx,cy,r*1.35,allSites.filter(q=>q[0]!==cx||q[1]!==cy)),52),17);
     terr[t.slug]={cx,cy,r,pts};
     const offshore=false;
     const g=el("g",{class:"island",tabindex:0,role:"button","aria-label":t.name+", "+t.subject+" theme. Activate to explore."},offshore?layerOff:layer);
@@ -352,8 +389,10 @@ function buildIslands(coast){
         el("path",{d:closedD(scalePts(sk,sx,sy,1.3)),fill:"#dcecf1",opacity:.8},g);
         el("path",{d:closedD(sk),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":1.5},g);
         el("path",{d:closedD(scalePts(sk,sx,sy,.8)),fill:t.land2,opacity:.5},g)}}
-    el("path",{class:"land",d:closedD(pts),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":2},g);
-    el("path",{d:closedD(scalePts(pts,cx,cy,.84)),fill:t.land2,opacity:.5},g);
+    const inPts=insetPts(pts,11);
+    terr[t.slug].inPts=inPts;
+    el("path",{class:"land",d:closedD(inPts),fill:t.land},g);
+    el("path",{d:closedD(insetPts(pts,11+r*.14)),fill:t.land2,opacity:.45},g);
     if(t.biome==="sky"){const cg=el("g",{class:"lod"},g);const cr=RNG(hash(t.slug+"cl"));
       for(let i=0;i<4;i++)glyphSet(cg,r/95,"#8a94b8","#6a74a0",t.accent,cr).cloudlet(cx+(cr()*2-1)*r,cy+r*.5+cr()*r*.4,1.6)}
     dressTerritory(el("g",{class:"lod bdecor"},g),t,cx,cy,r,pts);
@@ -361,9 +400,7 @@ function buildIslands(coast){
   /* pass 2: plains gaps + soft outlines, so territories read as separated lands on one continent */
   const borders=el("g",{"pointer-events":"none","clip-path":"url(#landclip)"},svg);
   for(const t of THEMES){const T=terr[t.slug];
-    el("path",{d:closedD(scalePts(T.pts,T.cx,T.cy,1.03)),fill:"none",stroke:"#eee5cd","stroke-width":7,"stroke-linejoin":"round",opacity:.95},borders)}
-  for(const t of THEMES){const T=terr[t.slug];
-    el("path",{d:closedD(T.pts),fill:"none",stroke:mix(t.land,"#27392e",.38),"stroke-width":1.3,opacity:.8},borders)}
+    el("path",{d:closedD(T.inPts),fill:"none",stroke:mix(t.land,"#27392e",.35),"stroke-width":1.2,"stroke-linejoin":"round",opacity:.6},borders)}
   /* rivers: generated from the northernmost territory to the coasts */
   const smooth=pts=>{let d=`M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
     for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
@@ -372,10 +409,12 @@ function buildIslands(coast){
   const rw=minD/1000,riv=el("g",{fill:"none","stroke-linecap":"round","pointer-events":"none"},svg);
   {const ts=THEMES.map(t=>terr[t.slug]);
    const top=ts.reduce((a,b)=>a.cy<b.cy?a:b);
-   const ccx2=WORLD.w*.47,ccy2=WORLD.h*.49;
-   const south=[ccx2+(top.cx-ccx2)*.3,WORLD.h*.94],west=[WORLD.w*.06,ccy2+(top.cy-ccy2)*.4+WORLD.h*.12];
-   const rp1=[[top.cx,top.cy+top.r*.4],[(top.cx+ccx2)/2+24,(top.cy+ccy2)/2],[ccx2-18,ccy2+(south[1]-ccy2)*.35],south];
-   const rp2=[[ccx2-18,ccy2+(south[1]-ccy2)*.35],[(ccx2+west[0])/2,(ccy2+west[1])/2+30],west];
+   const low=ts.reduce((a,b)=>a.cy>b.cy?a:b);
+   const ccx2=WORLD.w*.47;
+   const meander=(x0,y0,x1,y1,x2,y2)=>[[x0,y0],[(x0*2+x1)/3+26,(y0*2+y1)/3],[(x0+x1*2)/3-22,(y0+y1*2)/3],[x1,y1],[(x1*2+x2)/3+18,(y1*2+y2)/3],[x2,y2]];
+   const rp1=meander(top.cx,top.cy+top.r*.35,(top.cx+low.cx)/2,(top.cy+low.cy)/2,ccx2+(low.cx-ccx2)*.4,WORLD.h*.95);
+   const westmost=ts.reduce((a,b)=>a.cx<b.cx?a:b);
+   const rp2=meander(top.cx-top.r*.3,top.cy+top.r*.5,(top.cx+westmost.cx)/2-10,(top.cy+westmost.cy)/2+24,WORLD.w*.05,westmost.cy+WORLD.h*.08);
    for(const rp of [rp1,rp2]){const d=smooth(rp);
     el("path",{d,stroke:"#9fcfe0","stroke-width":7*rw,opacity:.9},riv);
     el("path",{d,stroke:"#d6edf5","stroke-width":3*rw,opacity:.95},riv)}}
@@ -384,12 +423,26 @@ function buildIslands(coast){
   const sl=THEMES.map(t=>t.slug);
   const links=[];const seen=new Set();
   for(const a of sl){const A=terr[a];
-    const near=sl.filter(b=>b!==a).map(b=>[b,Math.hypot(terr[b].cx-A.cx,terr[b].cy-A.cy)]).sort((x,y)=>x[1]-y[1]).slice(0,2);
+    const near=sl.filter(b=>b!==a).map(b=>[b,Math.hypot(terr[b].cx-A.cx,terr[b].cy-A.cy)]).filter(x=>x[1]<(A.r+terr[x[0]].r)*1.05).sort((x,y)=>x[1]-y[1]).slice(0,2);
     for(const[b]of near){const k=[a,b].sort().join("|");if(!seen.has(k)){seen.add(k);links.push([a,b])}}}
   for(const[a,b]of links){const A=terr[a],B=terr[b];const mx=(A.cx+B.cx)/2,my=(A.cy+B.cy)/2-30;
     el("path",{d:`M ${A.cx} ${A.cy} Q ${mx} ${my} ${B.cx} ${B.cy}`},routes)}
   /* pass 3: regions, trails, labels */
   const labels=el("g",{"pointer-events":"none"},svg);
+  const dense=THEMES.length>12;
+  const lspec={};
+  for(const t of THEMES){const T=terr[t.slug];const r=Math.min(T.r,180);
+    const tot=t.regions.flatMap(x=>x.paths).reduce((sum,p)=>sum+p.lessons,0);
+    const dn=t.regions.flatMap(x=>x.paths).reduce((sum,p)=>sum+p.done,0);
+    const sub=t.regions.length+" path"+(t.regions.length>1?"s":"")+" · "+dn+"/"+tot+" lessons";
+    const big=WORLD.w>1200;
+    const lw=(big?1:1.4)*(dense?.82:1);
+    const pw=(dense||!big)?t.name.length*r*.115*lw+r*.34:Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24;
+    lspec[t.slug]={cx:T.cx,cy:T.cy,pw,ph:(big&&!dense)?r*.42:r*.34,sub,lw,big:big&&!dense,r};}
+  for(let pass=0;pass<8;pass++){const ks=Object.keys(lspec);
+    for(let i=0;i<ks.length;i++)for(let j=i+1;j<ks.length;j++){const A=lspec[ks[i]],B=lspec[ks[j]];
+      const ox=(A.pw+B.pw)/2*.92-Math.abs(A.cx-B.cx),oy=(A.ph+B.ph)/2*1.05-Math.abs(A.cy-B.cy);
+      if(ox>0&&oy>0){const push=(oy/2+1)*(A.cy<B.cy?1:-1);A.cy-=push;B.cy+=push}}}
   for(const t of THEMES){
     const T=terr[t.slug],cx=T.cx,cy=T.cy,r=T.r;
     const g=[...layer.children].find(x=>x.__slug===t.slug)||[...layerOff.children].find(x=>x.__slug===t.slug);
@@ -436,16 +489,10 @@ function buildIslands(coast){
     });
     {
       const wl=el("g",{class:"lod wlbl"},labels);
-      const tot=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.lessons,0);
-      const dn=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.done,0);
-      const sub=t.regions.length+" path"+(t.regions.length>1?"s":"")+" · "+dn+"/"+tot+" lessons";
-      const big=WORLD.w>1200;
-      const lw=big?1:1.4;
-      const pw=big?Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24:t.name.length*r*.115*lw+r*.34;
-      const ph=big?r*.42:r*.34;
-      el("rect",{x:cx-pw/2,y:cy-ph/2,width:pw,height:ph,rx:r*.1,fill:"#fffdf8","opacity":.92},wl);
-      txt(wl,cx,cy+(big?-r*.02:r*.085),t.name,"",r*.17*lw,"#27392e");
-      if(big)txt(wl,cx,cy+r*.13,sub,"",r*.095,t.accent);
+      const L=lspec[t.slug];
+      el("rect",{x:L.cx-L.pw/2,y:L.cy-L.ph/2,width:L.pw,height:L.ph,rx:L.r*.1,fill:"#fffdf8","opacity":.92},wl);
+      txt(wl,L.cx,L.cy+(L.big?-L.r*.02:L.r*.085),t.name,"",L.r*.17*L.lw,"#27392e");
+      if(L.big)txt(wl,L.cx,L.cy+L.r*.13,L.sub,"",L.r*.095,t.accent);
     }
     themeIndex[t.slug]={t,cx,cy,r};
   }
@@ -477,6 +524,7 @@ function zClass(){let lvl="world";const w=vb.w;
   svg.setAttribute("class","z-"+lvl)}
 function setVB(v){vb=v;svg.setAttribute("viewBox",`${v.x} ${v.y} ${v.w} ${v.h}`);zClass()}
 function go(st,instant){state=st;
+  svg.querySelectorAll(".island").forEach(g=>g.classList.toggle("active",!!st.t&&g.__slug===st.t));
   svg.querySelectorAll(".trail.focus").forEach(n=>n.classList.remove("focus"));
   if(st.level==="path"){const f=document.getElementById("trail-"+st.t+"-"+st.r+"-"+st.p);if(f)f.classList.add("focus")}
   history.replaceState(null,"","#"+[st.t,st.r,st.p].filter(x=>x!==undefined).join("/"));
@@ -502,7 +550,7 @@ function renderChrome(){
   hint.classList.toggle("hidden",state.level!=="world");
   renderSheet();
 }
-function bar(done,tot){return `<div class="bar"><i style="width:${tot?Math.round(done/tot*100):0}%"></i></div><div class="barlabel">${done} of ${tot} lessons</div>`}
+function bar(done,tot){return `<div class="bar"><i style="width:${tot?Math.round(done/tot*100):0}%"></i></div><div class="barlabel">${done} of ${tot} lessons (demo progress)</div>`}
 function renderSheet(){
   if(state.level==="world"){sheet.classList.add("hidden");return}
   const T=themeIndex[state.t].t;let h="";
