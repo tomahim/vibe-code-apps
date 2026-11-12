@@ -1,29 +1,8 @@
 """Learner-facing representations. Answer keys and publishing metadata stay private."""
 from collections import Counter
-from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt, Theme
+from .models import Card, CardProgress, Question, QuestionAttempt
 from .images import image_url
-
-
-PARENTS = {
-    Theme: [], LearningPath: ["theme"],
-    Lesson: ["learning_path", "learning_path__theme"],
-    Card: ["lesson", "lesson__learning_path", "lesson__learning_path__theme"],
-    Question: ["lesson", "lesson__learning_path", "lesson__learning_path__theme"],
-}
-
-
-def visible(model):
-    filters = {"published": True, "entity__archived": False}
-    for parent in PARENTS[model]:
-        filters[f"{parent}__published"] = True
-        filters[f"{parent}__entity__archived"] = False
-    rows = model.objects.filter(**filters)
-    if model == Question:
-        from django.db.models import Exists, OuterRef
-        rows = rows.filter(Exists(visible(Card).filter(
-            lesson_id=OuterRef("lesson_id"), position=OuterRef("after_card_position"),
-        )))
-    return rows
+from .snapshot import content_snapshot, visible  # noqa: F401 (visible re-exported)
 
 
 def described(row):
@@ -60,28 +39,42 @@ class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
     def __init__(self, user, lesson=None, *, lessons=None, card_content=False):
         self.user_id = user.pk
-        cards = visible(Card)
-        questions = visible(Question)
-        if lesson is not None:
-            cards = cards.filter(lesson=lesson)
-            questions = questions.filter(lesson=lesson)
-        if lessons is not None:
-            lesson_ids = [row.pk for row in lessons]
-            cards = cards.filter(lesson_id__in=lesson_ids)
-            questions = questions.filter(lesson_id__in=lesson_ids)
         # Summary/progression code needs identities and ordering, not the
-        # library's Markdown, illustrations, prompts or answer keys. Keep the
-        # full card payload opt-in for the single-lesson reader only.
-        if not card_content:
-            cards = cards.only("entity", "lesson", "position")
-        self.cards = list(cards)
-        self.questions = list(questions.only(
-            "entity", "lesson", "position", "after_card_position", "type",
-        ))
+        # library's Markdown, illustrations, prompts or answer keys: it reads
+        # the cached published snapshot. The single-lesson reader is the one
+        # place full card payloads leave the database, so it keeps its own
+        # scoped query.
+        if card_content:
+            cards = visible(Card)
+            questions = visible(Question)
+            if lesson is not None:
+                cards = cards.filter(lesson=lesson)
+                questions = questions.filter(lesson=lesson)
+            if lessons is not None:
+                lesson_ids = [row.pk for row in lessons]
+                cards = cards.filter(lesson_id__in=lesson_ids)
+                questions = questions.filter(lesson_id__in=lesson_ids)
+            self.cards = list(cards)
+            self.questions = list(questions.only(
+                "entity", "lesson", "position", "after_card_position", "type",
+            ))
+        else:
+            snapshot = content_snapshot()
+            cards = snapshot.cards
+            questions = snapshot.questions
+            if lesson is not None:
+                cards = [row for row in cards if row.lesson_id == lesson.pk]
+                questions = [row for row in questions if row.lesson_id == lesson.pk]
+            if lessons is not None:
+                lesson_ids = {row.pk for row in lessons}
+                cards = [row for row in cards if row.lesson_id in lesson_ids]
+                questions = [row for row in questions if row.lesson_id in lesson_ids]
+            self.cards = list(cards)
+            self.questions = list(questions)
         self.completed = dict(CardProgress.objects.filter(
-            user=user, card__in=self.cards,
+            user=user, card_id__in=[card.pk for card in self.cards],
         ).values_list("card_id", "completed_at"))
-        attempts = list(QuestionAttempt.objects.filter(user=user, question__in=self.questions)
+        attempts = list(QuestionAttempt.objects.filter(user=user, question_id__in=[q.pk for q in self.questions])
                         .values("question_id", "correct", "attempt_type", "answered_at"))
         questions = {q.pk: q for q in self.questions}
         self.passed = {(questions[a["question_id"]].lesson_id,

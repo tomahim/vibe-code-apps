@@ -20,7 +20,8 @@ from zoneinfo import ZoneInfo
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
-from .api import cards_all_read, visible
+from .api import cards_all_read
+from .snapshot import content_snapshot
 from .badge_catalog import BADGES, MONTH, WEEK, TIERS  # noqa: F401 (re-exported for tests)
 from .models import (BadgeAward, Card, CardProgress, ChallengeWeek, LearningPath, Lesson,
                      Question, QuestionAttempt, Theme)
@@ -46,12 +47,12 @@ class History:
 
     def __init__(self, user):
         self.user = user
-        lessons = dict(Lesson.objects.values_list("pk", "learning_path_id"))
-        paths = dict(LearningPath.objects.values_list("pk", "theme_id"))
-        card_lesson = dict(Card.objects.values_list("pk", "lesson_id"))
-        questions = {pk: (lesson, typed) for pk, lesson, typed in
-                     Question.objects.values_list("pk", "lesson_id", "type")}
-        self.lesson_path, self.path_theme = lessons, paths
+        # The content maps come from the cached published snapshot; only the
+        # learner's own history rows are queried per check.
+        snapshot = content_snapshot()
+        card_lesson = snapshot.card_lesson
+        questions = snapshot.question_info
+        self.lesson_path, self.path_theme = snapshot.lesson_path, snapshot.path_theme
         self.card_times = {}  # card -> read time
         for card_id, at in CardProgress.objects.filter(user=user).values_list("card_id", "completed_at"):
             if card_id in card_lesson:
@@ -72,17 +73,17 @@ class History:
             + [at for rows in self.attempts.values() for at, _, ok in rows if ok])
         # Current content tree, for completion rules.
         self.cards_of = defaultdict(set)
-        for card_id, lesson_id in visible(Card).values_list("pk", "lesson_id"):
-            self.cards_of[lesson_id].add(card_id)
+        for card in snapshot.cards:
+            self.cards_of[card.lesson_id].add(card.pk)
         self.questions_of = defaultdict(set)
-        for question_id, lesson_id in visible(Question).values_list("pk", "lesson_id"):
-            self.questions_of[lesson_id].add(question_id)
+        for question in snapshot.questions:
+            self.questions_of[question.lesson_id].add(question.pk)
         self.lessons_of = defaultdict(set)
-        for lesson_id, path_id in visible(Lesson).values_list("pk", "learning_path_id"):
-            self.lessons_of[path_id].add(lesson_id)
+        for lesson in snapshot.lessons:
+            self.lessons_of[lesson.learning_path_id].add(lesson.pk)
         self.paths_of = defaultdict(set)
-        for path_id, theme_id in visible(LearningPath).values_list("pk", "theme_id"):
-            self.paths_of[theme_id].add(path_id)
+        for path in snapshot.paths:
+            self.paths_of[path.theme_id].add(path.pk)
 
     # Qualifying events, each a (time, reference) pair sorted by time. The
     # reference names what qualified, so the badge can show its evidence.

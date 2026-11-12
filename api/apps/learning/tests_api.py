@@ -14,6 +14,7 @@ from .api import LearnerState
 from apps.feature_flags.testing import enable_flags
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, PathCelebration, Theme
 from .rewards import chart, period_window, totals
+from .snapshot import content_snapshot
 
 
 class LearningHealthTests(TestCase):
@@ -152,8 +153,9 @@ class LearningAPITests(TestCase):
                                        submitted_answer="1", correct=False,
                                        answered_at=datetime.now(timezone.utc))
 
+        content_snapshot()  # warm the published-content cache: steady state
         url = f"/api/learning/cards/{self.card.pk}/complete/"
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             first = self.post(url, {})
         self.assertEqual(first.status_code, 201)
         state = LearnerState(self.user, lesson=self.lesson)
@@ -162,7 +164,7 @@ class LearningAPITests(TestCase):
         self.assertEqual(set(state.completed), {self.card.pk})
         self.assertFalse(state.attempted)
 
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(8):
             repeat = self.post(url, {})
         self.assertEqual(repeat.status_code, 200)
 
@@ -1062,12 +1064,12 @@ class LearningAPITests(TestCase):
         unseen = self.row(Question, lesson=self.lesson, position=2, after_card_position=1,
                           prompt="New", options=self.question.options, answer="1")
         state = LearnerState(self.user)
-        self.assertEqual(quiz_session(state, state.questions, limit=1), [unseen])
+        self.assertEqual([q.pk for q in quiz_session(state, state.questions, limit=1)], [unseen.pk])
         QuestionAttempt.objects.create(user=self.user, question=self.question,
             attempt_type="review", submitted_answer="1", correct=False,
             answered_at=now + timedelta(seconds=3))
         state = LearnerState(self.user)
-        self.assertEqual(quiz_session(state, state.questions, limit=1), [self.question])
+        self.assertEqual([q.pk for q in quiz_session(state, state.questions, limit=1)], [self.question.pk])
 
 
 from concurrent.futures import ThreadPoolExecutor

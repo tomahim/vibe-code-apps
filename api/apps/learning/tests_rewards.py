@@ -11,6 +11,7 @@ from django.test.utils import CaptureQueriesContext
 from apps.accounts.tokens import issue_token
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, Question, QuestionAttempt, Theme
 from .rewards import reward_events, reward_events_for, totals
+from .snapshot import content_snapshot
 
 T0 = datetime(2026, 10, 31, 23, 59, tzinfo=timezone.utc)
 
@@ -85,13 +86,15 @@ class PersonalRewardTests(TestCase):
         for model, record in ((Theme, self.theme), (LearningPath, self.path), (Lesson, self.lesson),
                               (Card, self.cards[0]), (Question, self.question)):
             with self.subTest(model=model.__name__):
-                model.objects.filter(pk=record.pk).update(published=False)
+                record.published = False
+                record.save()
                 self.assert_parity()
                 # A hidden anchor card also hides its checkpoint question.
                 expected = {'drops': 106, 'carrots': 0} if model == Card else (
                     {'drops': 107, 'carrots': 0} if model == Question else {'drops': 0, 'carrots': 0})
                 self.assertEqual(totals(reward_events_for(self.user)), expected)
-                model.objects.filter(pk=record.pk).update(published=True)
+                record.published = True
+                record.save()
 
     def test_archived_content_is_excluded(self):
         self.path.entity.archived = True
@@ -100,6 +103,7 @@ class PersonalRewardTests(TestCase):
         self.assert_parity()
 
     def test_history_queries_only_return_the_requested_user(self):
+        content_snapshot()  # warm the published-content cache: steady state
         with CaptureQueriesContext(connection) as captured:
             reward_events_for(self.user)
         history = [q['sql'] for q in captured if 'FROM "lg_card_progress"' in q['sql']
@@ -111,8 +115,9 @@ class PersonalRewardTests(TestCase):
                 rows = cursor.fetchall()
                 self.assertTrue(rows)
                 self.assertEqual({row[0] for row in rows}, {self.user.pk})
-        # Both paths keep four content queries and two history queries, not N+1.
-        self.assertEqual(len(captured), 6)
+        # Content reads come from the warmed snapshot: one SyncLog commit
+        # check plus the two history queries, not N+1.
+        self.assertEqual(len(captured), 3)
 
     def test_other_learners_history_does_not_expand_personal_replay(self):
         before = reward_events_for(self.user)
