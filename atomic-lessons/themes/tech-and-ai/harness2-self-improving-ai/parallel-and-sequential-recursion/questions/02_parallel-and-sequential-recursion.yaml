@@ -3,7 +3,7 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: How many execution rollouts does k=2 account for in the released implementation?
+prompt: In parallel recursion at k=2, how many task executions run in total (references, candidate probes and composed harnesses)?
 choices:
 - id: f694212b-31a1-4b43-9a54-f16a5c2a1835
   text: Two
@@ -15,5 +15,5 @@ choices:
   text: Sixteen
 correct_choice_ids:
 - b1c814ee-1e08-4954-81d2-33da9ec136fa
-explanation: The algorithm accounts for 4k rollouts and 3k improvement stages per mode, so k=2 means eight rollouts and six stages.
+explanation: k reference runs, 2k candidate probes and k composed runs make 4k executions, so k=2 means eight.
 archived: false

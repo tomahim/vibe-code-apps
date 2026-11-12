@@ -6,7 +6,7 @@ archived: false
 ---
 
 
-**1. The budget k sets refinement effort**: about 4k execution rollouts and 3k improvement stages per mode, tracked explicitly in code.
+**1. The budget k sets refinement effort**: in parallel mode, k reference runs, 2k candidate probes and k composed runs, so cost grows in step with k.
 
 **2. Parallel recursion tests competing hypotheses at once; sequential recursion fixes a chain of dependent problems**, and both scale smoothly from k=1 to k=5 where baselines did not.
 

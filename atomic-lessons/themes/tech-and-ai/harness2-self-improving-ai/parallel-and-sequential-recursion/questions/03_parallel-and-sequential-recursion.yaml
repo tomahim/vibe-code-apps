@@ -3,17 +3,17 @@ position: 3
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: What does the ledger in the released code do?
+prompt: In parallel recursion with budget k, how many candidate harnesses are drafted?
 choices:
 - id: 60f30886-19be-4852-8799-ef9b2bfe0cc8
-  text: It verifies counts and detects duplicate execution labels
+  text: 'Two times k: k invariant and k domain'
 - id: dfff3587-2316-40d7-94db-d6f2e546e82e
-  text: It stores the user's billing address
+  text: Exactly one, whatever k is
 - id: a5447c4d-e6d1-4f94-882d-3f4ed45ebf20
-  text: It encrypts the model's weights
+  text: Ten times k, chosen at random
 - id: b89830f3-da24-4dce-a548-4c4a0f2625c6
-  text: It schedules the marketing emails
+  text: None, because only references run
 correct_choice_ids:
 - 60f30886-19be-4852-8799-ef9b2bfe0cc8
-explanation: core/ledger.py tracks the budget accounting so the system knows exactly what was spent per task.
+explanation: The paper drafts k invariant and k domain candidates, 2k in total, then probes each.
 archived: false
