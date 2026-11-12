@@ -21,9 +21,14 @@ const TAB_BY_SLUG = {
   "content-review": "Tech tools",
   "db-dashboard": "Tech tools",
   "livetrail-scrap": "Sports",
+  "little-grains": "Learning",
 };
 
 const FAVORITES_KEY = "genious-gallery-favorites";
+
+// Little Grains now lives on its own Railway service; the gallery card links
+// out to it instead of mounting a local app. Single source for the address.
+const LITTLE_GRAINS_URL = "http://cultive-dev.genious-apps-production-railway.internal:8080/";
 
 function loadFavorites() {
   try {
@@ -88,6 +93,14 @@ const initialApps = [
     description: "Learn 3D one small experiment at a time. Interactive lessons, a live editor, and a world to build.",
     category: "Learning",
     icon: "◇",
+  },
+  {
+    slug: "little-grains",
+    name: "Little Grains",
+    description: "Atomic learning: tiny lessons that add up, one little grain at a time.",
+    category: "Learning",
+    icon: "🌾",
+    href: LITTLE_GRAINS_URL,
   },
   {
     slug: "content-review",
