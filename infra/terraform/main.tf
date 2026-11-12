@@ -75,8 +75,10 @@ resource "railway_service" "bot" {
 resource "railway_service" "tailscale_router" {
   name               = "tailscale-rw"
   project_id         = railway_project.genious_apps.id
-  source_repo        = "dotlouis/tailscale-rw"
-  source_repo_branch = "main"
+  source_repo        = "tomahim/vibe-code-apps"
+  source_repo_branch = "master"
+  root_directory     = "/infra/tailscale-router"
+  watch_patterns     = ["/infra/tailscale-router/**"]
 
   volume = {
     name       = "tailscale-rw-volume"
