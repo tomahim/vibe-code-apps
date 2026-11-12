@@ -13,6 +13,7 @@ from django.test.utils import CaptureQueriesContext
 from apps.accounts.tokens import issue_token
 from .api import LearnerState, next_step, public_questions
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, Question, Theme
+from .snapshot import content_snapshot
 
 
 class BoundedLearningReadsTests(TestCase):
@@ -35,12 +36,15 @@ class BoundedLearningReadsTests(TestCase):
             self.row(Card, lesson=lesson, body_markdown='large body' * 1000)
             self.row(Question, lesson=lesson, after_card_position=1, prompt='large prompt' * 1000,
                      options=[{'id': 'a', 'text': 'A'}], answer='a', explanation='private explanation')
+        # Warm the published-content cache, the steady state in production.
+        content_snapshot()
 
     def test_metadata_supports_progress_and_next_step_without_deferred_reads(self):
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(3):
             state = LearnerState(self.user)
-        self.assertIn('body_markdown', state.cards[0].get_deferred_fields())
-        self.assertIn('prompt', state.questions[0].get_deferred_fields())
+        # Structural rows carry no content fields at all (not even deferred).
+        self.assertFalse(hasattr(state.cards[0], 'body_markdown'))
+        self.assertFalse(hasattr(state.questions[0], 'prompt'))
         with self.assertNumQueries(0):
             self.assertEqual(state.progress([self.lesson])['cards_total'], 1)
             self.assertIsNotNone(next_step(state, self.lesson))
@@ -108,7 +112,7 @@ class BoundedLearningReadsTests(TestCase):
         card = Card.objects.get(lesson=self.lesson)
         question = Question.objects.get(lesson=self.lesson)
         CardProgress.objects.create(user=self.user, card=card, completed_at=timezone.now())
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             response = self.client.post('/api/learning/question-attempts/',
                                         json.dumps({'question_id': str(question.pk), 'answer': 'a'}),
                                         content_type='application/json')

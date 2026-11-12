@@ -9,8 +9,9 @@ from datetime import datetime, timedelta, timezone as dt_timezone
 from django.contrib.auth import get_user_model
 from django.db.models import Count
 
-from .api import cards_all_read, visible
-from .models import Card, CardProgress, LearningPath, Lesson, Question, QuestionAttempt
+from .api import cards_all_read
+from .models import CardProgress, QuestionAttempt
+from .snapshot import content_snapshot
 
 
 def reward_events():
@@ -28,18 +29,19 @@ def reward_events_for(user):
 def _reward_events(*, only_user_id=None):
     # Share content visibility, first-correct and completion-bonus rules so
     # personal totals cannot drift from the leaderboard's totals.
-    cards = list(visible(Card).values('pk', 'lesson_id'))
-    questions = list(visible(Question).values('pk', 'lesson_id', 'after_card_position'))
-    lessons = list(visible(Lesson).values('pk', 'learning_path_id'))
-    paths = list(visible(LearningPath).values('pk'))
-    card_by_id = {card['pk']: card for card in cards}
-    question_by_id = {question['pk']: question for question in questions}
+    snapshot = content_snapshot()
+    cards = snapshot.cards
+    questions = snapshot.questions
+    lessons = snapshot.lessons
+    paths = snapshot.paths
+    card_by_id = {card.pk: card for card in cards}
+    question_by_id = {question.pk: question for question in questions}
     cards_by_lesson = defaultdict(set)
     lessons_by_path = defaultdict(set)
     for card in cards:
-        cards_by_lesson[card['lesson_id']].add(card['pk'])
+        cards_by_lesson[card.lesson_id].add(card.pk)
     for lesson in lessons:
-        lessons_by_path[lesson['learning_path_id']].add(lesson['pk'])
+        lessons_by_path[lesson.learning_path_id].add(lesson.pk)
 
     events = defaultdict(list)
     card_times = defaultdict(dict)
@@ -68,7 +70,7 @@ def _reward_events(*, only_user_id=None):
     for user_id in set(card_times) | set(question_times):
         completion_times = {}
         for lesson in lessons:
-            lesson_id = lesson['pk']
+            lesson_id = lesson.pk
             required_cards = cards_by_lesson[lesson_id]
             # Same single completion predicate as the API gauge (#465).
             if not cards_all_read(required_cards, card_times[user_id]):
@@ -85,7 +87,7 @@ def _reward_events(*, only_user_id=None):
             # this bonus.
             completion_times[lesson_id] = cards_done_at
         for path in paths:
-            required_lessons = lessons_by_path[path['pk']]
+            required_lessons = lessons_by_path[path.pk]
             if required_lessons and required_lessons.issubset(completion_times):
                 events[user_id].append(('drops', 100, max(completion_times[lesson_id] for lesson_id in required_lessons)))
     return events
@@ -99,8 +101,9 @@ def activity_stats(window_start, window_end):
     question figures count every QuestionAttempt (Carrots only count the
     first correct answer, so they cannot stand in for attempts).
     """
-    card_ids = [card['pk'] for card in visible(Card).values('pk')]
-    question_ids = [question['pk'] for question in visible(Question).values('pk')]
+    snapshot = content_snapshot()
+    card_ids = [card.pk for card in snapshot.cards]
+    question_ids = [question.pk for question in snapshot.questions]
     progress = CardProgress.objects.filter(card_id__in=card_ids)
     attempts = QuestionAttempt.objects.filter(question_id__in=question_ids)
     if window_start is not None:
