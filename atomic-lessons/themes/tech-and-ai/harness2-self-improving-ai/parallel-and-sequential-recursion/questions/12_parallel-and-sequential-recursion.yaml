@@ -1,0 +1,19 @@
+id: 46981905-c11a-4baa-8601-ca7beddc3423
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'Raising k from 1 to 5 changed the gain over base on JobBench from:'
+choices:
+- id: 49e25f12-9c04-4bb7-9ee0-0f91bb7c544e
+  text: 4.5 to 7.5 points
+- id: a2b9bd8c-b7ac-46d9-953b-21eba62e965d
+  text: 1.0 to 1.5 points
+- id: 043711af-2c8a-473b-9afc-4d9f370dcb95
+  text: 7.5 to 4.5 points
+- id: fbab66d1-5809-40db-b62c-4ee059d390e0
+  text: 0 to 100 points
+correct_choice_ids:
+- 49e25f12-9c04-4bb7-9ee0-0f91bb7c544e
+explanation: With Gemini 3.5 Flash under OpenCode, gains grew from 4.5 to 7.5 points on JobBench and 5.1 to 8.4 on WorkBuddy-Bench.
+archived: false

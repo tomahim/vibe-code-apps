@@ -1,0 +1,19 @@
+id: 09bd1b25-8e03-43f2-b80b-18f8534aa584
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What two procedural failures did the case study's base trajectory reveal?
+choices:
+- id: 324a0506-93ef-447a-9a11-5ddb569e9d3f
+  text: Figures never reconciled across files, and outputs never reopened after writing
+- id: 2a1c8c69-b872-4add-8494-d420f27bc2f1
+  text: The model refused to work, and the tools were missing
+- id: 8b6f5690-5860-41ca-8c2c-2e79693f62fd
+  text: The prompts were too short, and the context too small
+- id: 99ff1a34-aacc-4812-8ff6-007bbf172dfa
+  text: The task was misread, and the language was wrong
+correct_choice_ids:
+- 324a0506-93ef-447a-9a11-5ddb569e9d3f
+explanation: 'Not knowledge gaps: the agent never cross-checked figures and never verified its own written files.'
+archived: false

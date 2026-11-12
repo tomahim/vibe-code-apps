@@ -1,0 +1,13 @@
+id: 7ddeb659-3d09-4e79-83eb-2590c2d1af56
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Name the kind of environment where candidate harnesses should be executed, per the Medium article. (One or two words.)
+accepted_answers:
+- isolated environments
+- isolated
+- sandboxed
+- isolated environment
+- a sandbox
+explanation: Candidates run in isolated environments with minimal permissions, never directly against production authority.
+archived: false

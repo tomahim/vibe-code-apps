@@ -1,0 +1,19 @@
+id: 3a69b681-ff04-4cb8-a125-c3449cda3d1a
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why do ablations matter for trusting the design?
+choices:
+- id: b0781f0e-0e76-4d65-b9d7-7bc6ef929453
+  text: They price each component in points when removed
+- id: ce162812-65a0-4862-b824-740065acd5e0
+  text: They make the paper longer
+- id: 6a456926-2581-46ab-b4e3-b04261776ac6
+  text: They show which model is prettiest
+- id: ad6ac007-3de5-42a4-b6c3-af9e91adc958
+  text: They replace the need for benchmarks
+correct_choice_ids:
+- b0781f0e-0e76-4d65-b9d7-7bc6ef929453
+explanation: Removing one component at a time while holding everything else equal shows each design decision earns its keep.
+archived: false

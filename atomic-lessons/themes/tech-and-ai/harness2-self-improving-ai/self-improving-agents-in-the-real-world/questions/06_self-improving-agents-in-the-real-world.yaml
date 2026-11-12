@@ -1,0 +1,19 @@
+id: 6d26d9d7-be61-4930-b5ed-ec70c9e0fd87
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What is the Medium article's core authority control?
+choices:
+- id: 10386395-8e3f-4111-99cb-168146e0a1bd
+  text: The model proposes; the platform decides what executes
+- id: d160e72d-0475-428d-8223-dc9c533d27bd
+  text: The model executes anything it proposes immediately
+- id: d988bde7-ef8a-4ce8-9037-fefd61efa9c9
+  text: Humans write all harness changes by hand
+- id: c1e7feee-656d-4923-bebc-218b1110c1cc
+  text: A public vote approves each change
+correct_choice_ids:
+- 10386395-8e3f-4111-99cb-168146e0a1bd
+explanation: 'Separation of proposal and execution authority: immutable versioned candidates, static checks, sandboxed runs, approvals.'
+archived: false

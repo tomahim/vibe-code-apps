@@ -1,0 +1,19 @@
+id: 49eb3c56-e9f5-4547-831a-fcbe3239edec
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which three benchmarks does the paper evaluate on?
+choices:
+- id: f6ba390a-cd4f-4ffd-87a6-f022bc3ac296
+  text: WorkBuddy-Bench, JobBench and LAB
+- id: 217da1f7-61fd-4c4f-8ac5-274e948e7e02
+  text: MMLU, HumanEval and GSM8K
+- id: 267ef261-c981-4a97-ac0f-71aa98483b2d
+  text: ARC, HellaSwag and WinoGrande
+- id: 8df42db5-e6ea-4ad8-95a3-7a17ffe3ebf8
+  text: SWE-bench, WebArena and OSWorld
+correct_choice_ids:
+- f6ba390a-cd4f-4ffd-87a6-f022bc3ac296
+explanation: 'Three professional benchmarks: office-style deliverables, long end-to-end job tasks, and legal work scored by per-criterion pass rate.'
+archived: false

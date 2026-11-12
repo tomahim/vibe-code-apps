@@ -1,0 +1,19 @@
+id: aff1d943-b3f7-4597-ab5c-ffd88065b05e
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What are the two proposal scopes in the Propose stage?
+choices:
+- id: df61325a-c60e-470b-955e-b88a2fa8eec2
+  text: Invariant (cross-domain procedure) and domain-specific (subject knowledge)
+- id: 5e8b0748-82ba-418b-9a27-303a2131129e
+  text: Cheap proposals and expensive proposals
+- id: a8e1b24c-d9af-463f-838e-d3625461b7e8
+  text: Prompt edits and script edits
+- id: cd0089f9-6766-418b-b2d4-73f3f799217a
+  text: Fast proposals and slow proposals
+correct_choice_ids:
+- df61325a-c60e-470b-955e-b88a2fa8eec2
+explanation: The invariant editor fixes agentic procedure that recurs across domains; the domain editor handles this kind of work's knowledge and constraints.
+archived: false

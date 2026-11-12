@@ -1,0 +1,10 @@
+id: 2acbe9c8-e649-4189-a272-bf35b00702c3
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: Name the offline baseline that used more compute than Harness² at k=5 for lower performance.
+accepted_answers:
+- Meta-Harness
+- metaharness
+explanation: Meta-Harness searches offline on training tasks; here it cost more compute than k=5 Harness² and performed worse.
+archived: false

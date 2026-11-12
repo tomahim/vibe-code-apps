@@ -1,0 +1,12 @@
+id: 6b748535-37cf-4094-b178-064dd8d5fcf4
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'In one word: what kind of evidence does Harness² use to improve the harness, instead of an answer key?'
+accepted_answers:
+- execution
+- executions
+- behavioral evidence
+- execution evidence
+explanation: 'Harness² improves the harness from evidence in the agent''s own executions: trajectories, tool calls and deliverables.'
+archived: false

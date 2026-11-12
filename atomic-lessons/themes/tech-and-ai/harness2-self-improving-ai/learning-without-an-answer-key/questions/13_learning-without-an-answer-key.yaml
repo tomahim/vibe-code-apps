@@ -1,0 +1,19 @@
+id: b69e9554-c371-457d-b416-0220075aba48
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What does 'epistemic hygiene' mean for harness improvement?
+choices:
+- id: b7cb072e-d440-4a60-892a-76b5916b7251
+  text: Keep what you observed separate from what you infer
+- id: b6693bad-7762-4163-be02-83a08e098360
+  text: Delete all logs after each task
+- id: a312b071-d558-404b-961f-de8efa57a6db
+  text: Never let models read external documents
+- id: 9ddf6262-5442-4e5b-befe-8ac316712d53
+  text: Always assume the newest harness is best
+correct_choice_ids:
+- b7cb072e-d440-4a60-892a-76b5916b7251
+explanation: A trajectory showing the agent skipped a check is knowledge; claiming the task is solved is inference. The design keeps them apart.
+archived: false

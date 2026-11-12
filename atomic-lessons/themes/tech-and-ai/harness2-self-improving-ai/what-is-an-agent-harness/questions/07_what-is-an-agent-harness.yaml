@@ -1,0 +1,10 @@
+id: 23180ca1-f106-4d32-b7dc-dc8b244ec982
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Name the file that holds the agent's persistent memory in the OpenCode-style harness tree.
+accepted_answers:
+- LongTermMEMORY.md
+- LongTermMEMORY
+explanation: Persistent memory lives in LongTermMEMORY.md, one of the four always-on files.
+archived: false

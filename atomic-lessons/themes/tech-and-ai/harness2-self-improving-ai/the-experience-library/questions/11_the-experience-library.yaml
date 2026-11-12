@@ -1,0 +1,19 @@
+id: 97e984ae-42ed-4873-a5ba-5122b130a59a
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How much did removing the library cost in the ablation?
+choices:
+- id: 7296d78e-1e26-4db9-af81-2ab50c6aaa64
+  text: 3.1 points on WorkBuddy-Bench, 1.8 on JobBench
+- id: 650adc7c-ee2b-47d5-bbec-ce0d9f63f0ef
+  text: Nothing measurable on either benchmark
+- id: 680567bf-1761-4931-b0bb-838f90791e1b
+  text: Exactly 10 points lost everywhere
+- id: 405e2b31-f508-40d0-8091-89a5564ad4b3
+  text: 0.1 points on one benchmark
+correct_choice_ids:
+- 7296d78e-1e26-4db9-af81-2ab50c6aaa64
+explanation: 'Same pipeline, same budget, no library: scores fell, pricing cross-task memory in points.'
+archived: false

@@ -1,0 +1,11 @@
+id: 996e0554-8363-412f-938f-587feeed3170
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: What Python library does the Medium article's example use for reliable financial arithmetic?
+accepted_answers:
+- Decimal
+- python's decimal
+- the decimal module
+explanation: A deterministic Decimal script beats probabilistic text generation for financial totals.
+archived: false

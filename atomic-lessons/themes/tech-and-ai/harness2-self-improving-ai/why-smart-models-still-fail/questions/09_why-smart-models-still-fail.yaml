@@ -1,0 +1,19 @@
+id: c7c4fe4a-df1d-4074-be31-c8c61b6d5c76
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the 'open world' in the paper's sense?
+choices:
+- id: e16df141-a0ad-4b33-9701-c71303deaa97
+  text: A setting where agents keep meeting new tasks with evolving requirements
+- id: 3a1aaa18-d593-4773-b75d-274ebb73078a
+  text: A benchmark with a very large public training set
+- id: 64e07a6d-8a0c-415f-ac4e-ecdb2a451088
+  text: Any deployment where the agent can browse the open internet
+- id: 392180af-5a15-4e83-bedb-1b5c414d6670
+  text: A world-model simulation used to pretrain agents
+correct_choice_ids:
+- e16df141-a0ad-4b33-9701-c71303deaa97
+explanation: 'The open world is a dynamic deployment setting: novel tasks arrive that were unseen when the harness was designed, with no answer keys attached.'
+archived: false

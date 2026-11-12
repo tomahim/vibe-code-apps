@@ -1,0 +1,19 @@
+id: f2a0c52e-22f0-4fa8-90c8-214a9c65bf77
+position: 5
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Which components are 'always-on' in the model's context?
+choices:
+- id: 9cc6ee57-0925-4066-a5b6-2ca76e6b15d1
+  text: Skills, scripts, subagents and plugins
+- id: 8e6a9110-a735-462c-8f99-9c006f78bc1d
+  text: System prompt, guardrails, memory and tool guidance
+- id: 525e9c5d-504c-485a-8277-7d0f0b9b2e7b
+  text: Only the system prompt and nothing else
+- id: 25e023e7-9eb1-4b6c-9f13-c135cd5955e5
+  text: The scripts and the plugins only
+correct_choice_ids:
+- 8e6a9110-a735-462c-8f99-9c006f78bc1d
+explanation: The four always-on text files shape every call and spend context continuously; the other four components activate on demand.
+archived: false

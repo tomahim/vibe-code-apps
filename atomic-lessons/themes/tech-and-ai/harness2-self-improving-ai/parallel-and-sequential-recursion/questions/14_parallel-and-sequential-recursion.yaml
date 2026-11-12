@@ -1,0 +1,19 @@
+id: e2401007-9ef3-4854-ac07-aa15b653daca
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Which limits does the Medium article recommend for production refinement?
+choices:
+- id: bd650278-e337-4013-b5d8-4dc0705eb2ba
+  text: Caps on recursion budget, tokens, execution time and probe count
+- id: 500f6c22-e1ca-4a12-8979-2d0fd74a5718
+  text: No limits; let the agent decide
+- id: e68e09f5-4d99-4906-8754-6040f8f26463
+  text: Only a limit on user count
+- id: f7d021d4-5921-4eec-b5a5-197e6a4a6f90
+  text: A limit of one task yearly
+correct_choice_ids:
+- bd650278-e337-4013-b5d8-4dc0705eb2ba
+explanation: Explicit caps plus decoupling experimentation from serving traffic keep optimization from swamping the product.
+archived: false

@@ -1,0 +1,9 @@
+id: 1d58e7b3-75f4-4f1b-a141-3519cda8e637
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: 'Fill in the blank: every proposed harness artifact should be stored as an immutable, ____ candidate.'
+accepted_answers:
+- versioned
+explanation: Immutable, versioned candidates make every change inspectable and instantly reversible.
+archived: false

@@ -1,0 +1,19 @@
+id: 97acab43-610a-42cb-babb-5dcf607bf963
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is a 'security regression' in this context?
+choices:
+- id: 99cf7fd4-1bbd-4a7f-8806-b70c2ded41ea
+  text: A changed component adds undesirable actions behind good-looking output
+- id: 72ffbfc6-61c3-4b23-92d7-e2955b5ea272
+  text: The model suddenly forgets all of its training
+- id: 2823acb5-2217-4b39-b805-1c9b2234db51
+  text: Users choose overly weak account passwords
+- id: 159759f4-1d35-4786-ba72-ee6805c2daf1
+  text: The benchmark scores drop sharply overnight
+correct_choice_ids:
+- 99cf7fd4-1bbd-4a7f-8806-b70c2ded41ea
+explanation: Better-looking task output can hide newly dangerous behavior in the components the optimizer changed.
+archived: false

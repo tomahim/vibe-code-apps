@@ -1,0 +1,19 @@
+id: 8062de52-8796-4952-a155-6ab2a89f0780
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What are the two levels of recursion in Harness²?
+choices:
+- id: 2e521e84-c7b9-40b0-86d1-08d6c5b5af70
+  text: Model-level and data-level recursion
+- id: d4309fc4-52cc-497f-8709-5fe01a53a769
+  text: Training recursion and inference recursion
+- id: c8d4520e-2714-449f-87a2-690a3c39e271
+  text: Task-level recursion and harnessing-level recursion
+- id: 0618590e-c90b-4028-953f-99587114f440
+  text: Prompt recursion and tool recursion
+correct_choice_ids:
+- c8d4520e-2714-449f-87a2-690a3c39e271
+explanation: Task-level recursion refines the current task's harness; harnessing-level recursion carries lessons forward so future harnessing improves too.
+archived: false

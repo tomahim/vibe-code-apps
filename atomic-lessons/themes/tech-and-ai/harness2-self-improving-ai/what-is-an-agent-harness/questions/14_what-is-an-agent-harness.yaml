@@ -1,0 +1,19 @@
+id: 398e5f6f-6fac-4fc0-870d-4dc2365b2c62
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: Why decouple the stable production harness from experimentation?
+choices:
+- id: 75a79428-78a4-425b-985e-2649c3cd21fe
+  text: It removes the need for any model at all
+- id: d062484d-a59b-4318-9944-6a055be3b46e
+  text: Users get a stable agent while candidates are tested in isolation
+- id: aae836fe-5a4e-42d7-9675-d1cea8da3068
+  text: Experiments then cost nothing at all to run
+- id: 76021dc4-2bb9-4bcb-b759-2b169f1a1619
+  text: It makes rollbacks wholly unnecessary in practice
+correct_choice_ids:
+- d062484d-a59b-4318-9944-6a055be3b46e
+explanation: 'Decoupling keeps production steady: candidates are evaluated separately, pass regression, security and approval gates, and only then take traffic.'
+archived: false

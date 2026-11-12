@@ -1,0 +1,10 @@
+id: ef831de8-b9ca-4b02-bf72-01aa436e1e06
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Which recursion mode was ahead on the Code domain at k=2 in the paper's scaling study?
+accepted_answers:
+- sequential
+- sequential recursion
+explanation: Sequential was higher on Code at k=2, though parallel finished higher at k=5.
+archived: false

@@ -1,0 +1,19 @@
+id: ad3e2a55-845f-4b71-a10e-caabb06a7f3e
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is 'selection error'?
+choices:
+- id: 2fca9fa0-4068-4b12-bbd0-2c7c5dabd9cc
+  text: The framework picks a wrong result because it looks convincing
+- id: 776e27c0-d6b1-438a-adfc-4d2d166b3deb
+  text: The user selects the wrong benchmark
+- id: a0c67ce5-2fd3-4a36-9d30-dbc9da0ba172
+  text: The model refuses to select anything
+- id: 3db79333-128c-4930-87ff-b994a3edd9fa
+  text: A typo in the selector's prompt
+correct_choice_ids:
+- 2fca9fa0-4068-4b12-bbd0-2c7c5dabd9cc
+explanation: Without an answer key, a convincing but wrong output can be adopted; that risk has a name and must be measured.
+archived: false

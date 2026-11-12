@@ -1,0 +1,10 @@
+id: 44877867-922c-4fcc-a3d9-d05a24249e85
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: At what value of k is the final selection step bypassed? (A number.)
+accepted_answers:
+- '1'
+- k=1
+explanation: At k=1, both recursion forms reduce to one contrastive step and no selection is needed.
+archived: false

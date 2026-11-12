@@ -1,0 +1,19 @@
+id: 7d16fb12-81de-4f52-aa49-667f1ab616ae
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What is 'experience contamination'?
+choices:
+- id: d97eaf07-c545-49b5-92d4-e8353aa77c12
+  text: A lesson from limited evidence is generalized too broadly
+- id: 4456c15f-d9c3-4d56-ac24-04ed6e9b169a
+  text: Two experience libraries merge by accident
+- id: a1f65158-5334-40aa-bb97-bf74d87210b3
+  text: A computer virus infects the library
+- id: f2411f9a-2fb3-4ac4-85be-0a4232daf71f
+  text: Old lessons get deleted too early
+correct_choice_ids:
+- d97eaf07-c545-49b5-92d4-e8353aa77c12
+explanation: Over-generalized lessons steadily mislead later tasks, which is why lessons need execution-contrast support to enter the library.
+archived: false

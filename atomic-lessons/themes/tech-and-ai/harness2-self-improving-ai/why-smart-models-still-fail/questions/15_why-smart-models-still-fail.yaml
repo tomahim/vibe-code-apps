@@ -1,0 +1,10 @@
+id: 7e18e2c9-8ef0-4a55-9cf5-b9e0e7cc680b
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: Harness² is described as 'plug-and-play'. Name one of the two off-the-shelf agent harnesses it was tested on.
+accepted_answers:
+- OpenCode
+- Codex
+explanation: The paper evaluates Harness² wrapping the OpenCode and Codex harnesses without rewriting them.
+archived: false

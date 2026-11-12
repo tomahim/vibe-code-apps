@@ -1,0 +1,19 @@
+id: 06e5894d-60b2-4b10-9b8c-52e90dfa3257
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What happened when the base harness was directly refined without executions, probes or library access?
+choices:
+- id: 823e63e4-0e33-4a59-95be-377af49c8a7e
+  text: Code fell 73.4 to 63.2, Web 69.9 to 65.0
+- id: 7acc0ced-f6a2-4081-89aa-a993a8b47344
+  text: Scores improved dramatically across every domain
+- id: f0806261-56f1-4e7e-ab20-ff8de965a24a
+  text: Nothing measurable changed in either domain
+- id: 1a599130-4872-4342-aea1-cf4104e90e90
+  text: The model crashed on every single task
+correct_choice_ids:
+- 823e63e4-0e33-4a59-95be-377af49c8a7e
+explanation: Naive direct refinement degraded performance badly; the evidence pipeline and library are what make improvement work.
+archived: false

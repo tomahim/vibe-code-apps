@@ -1,0 +1,19 @@
+id: 5b341a42-41af-426f-afe7-eb3105a64463
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What were the improved GLM-5 scores versus base Gemini scores on WorkBuddy-Bench?
+choices:
+- id: a68a99bd-df3e-4d46-9d45-ce093884bdb4
+  text: 75.7 and 75.3 versus 72.4 and 74.5
+- id: 35106817-4aa1-4b5b-9844-e9cf0faefdda
+  text: 72.4 and 74.5 versus 75.7 and 75.3
+- id: 1a0899c7-392c-47d2-a6ad-4986352f07a7
+  text: 90 and 91 versus 80 and 81
+- id: e2220212-3424-48f9-8786-d7d5868224a4
+  text: 50 and 51 versus 60 and 61
+correct_choice_ids:
+- a68a99bd-df3e-4d46-9d45-ce093884bdb4
+explanation: 'Improved GLM-5 (75.7 OpenCode, 75.3 Codex) overtook base Gemini (72.4 and 74.5): harness quality compensated for model strength.'
+archived: false

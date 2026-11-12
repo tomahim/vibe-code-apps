@@ -1,0 +1,19 @@
+id: 24c4156d-b073-42bc-b6ac-903ec3fe8e80
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Which statement best captures the paper's central question?
+choices:
+- id: 5b56d007-1c66-49df-a860-f6fd8d04ec1d
+  text: Can it improve the current harness and future harnessing alike?
+- id: 53ce4f1e-efb1-4a5a-8dca-c81d2b7b7e8e
+  text: Can a model be retrained with no data?
+- id: 38c97fe8-e1ef-4301-b6e4-c8a1eac6e5bb
+  text: Can agents replace all human engineers?
+- id: c43971de-4612-4251-8a9a-85d01060e13e
+  text: Can one benchmark rank all possible harnesses?
+correct_choice_ids:
+- 5b56d007-1c66-49df-a860-f6fd8d04ec1d
+explanation: 'The two-loop design answers this: an execution harness being improved, and an improvement harness that itself gets updated after each task.'
+archived: false

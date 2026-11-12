@@ -1,0 +1,19 @@
+id: 1e089768-2d1e-45a4-8b0f-496c3398a10e
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What is the flaw of carrying a successful tailored harness forward to the next task?
+choices:
+- id: 650f2657-5fa1-423a-8488-8db15f0596ab
+  text: It is illegal under most licenses
+- id: 0915b992-9399-4b4e-9017-2eeba71ab2a5
+  text: Task-specific noise drags into future tasks as distributions shift
+- id: 4737dc16-21dc-4574-9f20-7d32bdc81f23
+  text: The harness becomes too small to load
+- id: 8a44e26a-7e67-40bd-95c8-3944294b7b7c
+  text: It prevents any tool use on the next task
+correct_choice_ids:
+- 0915b992-9399-4b4e-9017-2eeba71ab2a5
+explanation: Directly inheriting a heavily tailored harness makes improvement noisy when task requirements change; Harness² saves lessons, not tailoring.
+archived: false

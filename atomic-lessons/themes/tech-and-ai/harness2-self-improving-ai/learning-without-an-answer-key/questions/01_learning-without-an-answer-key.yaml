@@ -1,0 +1,19 @@
+id: c2825397-4af1-471d-b2dd-febf1fdefe92
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why can't open-world harness improvement rely on labels or test suites?
+choices:
+- id: 9033fd06-0413-40c0-ac20-765ee08f0b14
+  text: Real tasks arrive without ground-truth answers or verifiers
+- id: a85b0e11-a433-4175-ab43-817b5f188d24
+  text: Labels exist but are always encrypted
+- id: 85c258a7-ae45-4b7b-ba4b-7f4b84fcc941
+  text: Test suites only work for legal tasks
+- id: 6d15e990-ebc2-4dd2-b69c-0e0c13b7e6f9
+  text: Models simply refuse to read any labels
+correct_choice_ids:
+- 9033fd06-0413-40c0-ac20-765ee08f0b14
+explanation: Open-world tasks are novel and unlabeled; the whole contrastive design exists because no referee is available at adaptation time.
+archived: false

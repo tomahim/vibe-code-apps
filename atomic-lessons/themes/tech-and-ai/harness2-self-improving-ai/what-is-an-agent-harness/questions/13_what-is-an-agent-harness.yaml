@@ -1,0 +1,19 @@
+id: 1e2fcdf3-88fd-488c-a160-ccaaf67e2378
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What are the two layers of an application using Harness², per the Medium article?
+choices:
+- id: 8dd209a1-f04f-4853-987b-c8cbf4d776dd
+  text: The execution layer and the improvement layer
+- id: 230619c7-1e9a-4476-8fd4-dc08f375a028
+  text: The frontend layer and the backend layer
+- id: 44a42851-0475-4b0b-b5e7-6feb1b28111b
+  text: The training layer and the serving layer
+- id: 3383559a-eec9-4cbf-a509-d9375872a3ac
+  text: The safety layer and the privacy layer
+correct_choice_ids:
+- 8dd209a1-f04f-4853-987b-c8cbf4d776dd
+explanation: The agent does real work in the execution layer; a separate improvement layer watches execution and proposes harness modifications.
+archived: false

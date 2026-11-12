@@ -1,0 +1,11 @@
+id: cce0e0b4-1ba9-46bd-acde-a14c6f1f6526
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: each composition decision must be tied to a concrete ____ rather than a presumed score gain.'
+accepted_answers:
+- observation
+- observed evidence
+- evidence
+explanation: Compose may merge, revise, adopt or preserve, but every decision cites something actually observed in the executions.
+archived: false

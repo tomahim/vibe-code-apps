@@ -1,0 +1,19 @@
+id: da5f1803-576a-458b-871b-5cc7b58f5e2e
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the 'execution harness' versus the 'improvement harness'?
+choices:
+- id: e61947d8-0a74-4487-a2dd-ee9dde88c2a2
+  text: The system being improved versus the mechanism that improves it
+- id: b7a86c0a-7204-4132-a8db-3e3c37875157
+  text: The fast harness versus the slow harness
+- id: f223b39e-9a66-4bc7-a4af-d15fd6ca2047
+  text: The local harness versus the cloud harness
+- id: b525fd24-537b-4e1b-aa5d-413649c24ecc
+  text: The old harness versus the new harness
+correct_choice_ids:
+- e61947d8-0a74-4487-a2dd-ee9dde88c2a2
+explanation: The execution harness does the task; the improvement harness guides refinement and is itself updated across tasks.
+archived: false

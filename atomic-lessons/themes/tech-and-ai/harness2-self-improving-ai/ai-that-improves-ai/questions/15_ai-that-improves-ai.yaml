@@ -1,0 +1,12 @@
+id: 49e944ab-4a6c-4db6-85be-80c3366a9ba1
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: Harness² saves the ____, not the tailoring, from each task''s refinement.'
+accepted_answers:
+- lessons
+- lesson
+- experience
+- experiences
+explanation: The outer loop retains evidence-supported lessons and adopted harnesses, not the task-specific tailoring that would mislead future tasks.
+archived: false
