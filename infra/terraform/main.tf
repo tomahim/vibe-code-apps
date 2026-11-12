@@ -141,7 +141,7 @@ resource "railway_variable" "bot_api_base_url" {
 locals {
   media_bucket_name = "genious-media"
 
-  api_bucket_variables = {
+  media_bucket_variables = {
     AWS_S3_ENDPOINT_URL     = "$${{${local.media_bucket_name}.ENDPOINT}}"
     AWS_STORAGE_BUCKET_NAME = "$${{${local.media_bucket_name}.BUCKET}}"
     AWS_ACCESS_KEY_ID       = "$${{${local.media_bucket_name}.ACCESS_KEY_ID}}"
@@ -151,7 +151,7 @@ locals {
 }
 
 resource "railway_variable" "api_bucket" {
-  for_each = local.api_bucket_variables
+  for_each = local.media_bucket_variables
 
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.api.id
