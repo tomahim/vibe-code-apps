@@ -830,20 +830,30 @@ window.Cultive3D = (function(){
 </main>
 <script>
 Cultive3D.mount(document.getElementById('cv'),function(g){
-  var r=34, tiles=[], i, j;
+  var r=40, tiles=[], i, j;
   for(i=-1;i<=1;i++)for(j=-1;j<=1;j++)tiles.push([i*r*1.78+(j%2?r*0.89:0), j*r*1.55]);
-  tiles.sort(function(a,b){return (g.P(a[0],0,a[1])[3]-g.P(b[0],0,b[1])[3]);});
+  var a=g.t*0.3;
+  tiles.sort(function(t1,t2){return (g.P(t1[0],0,t1[1],a)[3]-g.P(t2[0],0,t2[1],a)[3]);});
   tiles.forEach(function(tc,k){
-    var a=g.t*0.35;
     var grow=(g.t*0.3+k*0.55)%4;
-    g.poly(g.hexPts(tc[0],0,tc[1],r,a),'#1c352a','#d9a441',1.2);
-    if(grow>0.8){
-      var gr=Math.min(1,(grow-0.8)/1.2), h=34*gr, sw=Math.sin(g.t+k)*3*gr;
-      var top=g.P(tc[0]+sw,h,tc[1],a);
-      g.line(g.P(tc[0],0,tc[1],a),top,'#7eaa6a',2.2);
-      if(gr>0.6){g.dot(top,3.5,'#d9a441');}
+    var active=grow>0.8;
+    var lift=active?6:0;
+    // tile side (extruded) then top face
+    var top=g.hexPts(tc[0],lift,tc[1],r,a), bot=g.hexPts(tc[0],0,tc[1],r,a);
+    for(var e=0;e<6;e++){var e2=(e+1)%6;
+      g.poly([top[e],top[e2],bot[e2],bot[e]],'#152a20',null);}
+    g.poly(top,active?'#234636':'#1c352a',active?'#f0c25c':'#d9a441',active?2:1.2);
+    if(active){
+      var gr=Math.min(1,(grow-0.8)/1.2), h=(52+10*Math.sin(k*2.7))*gr, sw=Math.sin(g.t*1.2+k)*4*gr;
+      var bx=tc[0], bz=tc[1];
+      var mid=g.P(bx+sw*0.4,lift+h*0.5,bz,a), tip=g.P(bx+sw,lift+h,bz,a);
+      g.line(g.P(bx,lift,bz,a),mid,'#7eaa6a',2.6); g.line(mid,tip,'#7eaa6a',2.6);
+      if(gr>0.5){var lw=20*gr;
+        g.line(mid,g.P(bx+sw*0.4-lw,lift+h*0.72,bz,a),'#a8c98f',2.2);
+        g.line(mid,g.P(bx+sw*0.4+lw,lift+h*0.6,bz,a),'#a8c98f',2.2);}
+      if(gr>=1){g.dot(tip,5,'#d9a441'); g.ctx.globalAlpha=0.35; g.dot(tip,10,'#d9a441'); g.ctx.globalAlpha=1;}
     } else {
-      g.dot(g.P(tc[0],2,tc[1],a),2.5,'#3d5747');
+      g.dot(g.P(tc[0],lift+2,tc[1],a),2.5,'#3d5747');
     }
   });
 });
