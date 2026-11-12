@@ -62,6 +62,8 @@ Cards use the same front matter. Use positive sibling positions, unique within t
 
 For concept lessons, use 6–10 cards including a final **3 key learnings** card. Keep each concept card at least 100 words long in two or three paragraphs. Explain the mechanism with a concrete example when relevant; avoid cards made only of definitions or broad claims. Add a source or optional deeper-reading link directly to selected cards. Author six multiple-choice questions per lesson as two pools of three alternatives: one checkpoint midway through the teaching cards and one after the recap, so the learner answers exactly two.
 
+**Illustrations:** every lesson needs at least two card illustrations, on two different cards, and more when a picture explains the concept better than text: a mechanism, a flow, a comparison, a structure or a set of numbers. Declare each one with the card image fields above. Prefer an original diagram or schematic that teaches the idea (`image_license: original`). When a source paper, article or reference publishes a figure that fits, either reproduce it only if its license allows, with `image_credit`, `image_license` and `image_source_url`, or redraw it as your own original diagram and credit the source in the card text. Write `image_alt` and `image_caption` so the picture still teaches the idea without being seen. A decorative image does not count toward the two.
+
 For expression lessons, put exactly four expression pairs in each card. Write the English in bold followed by its French translation as an italic blockquote. Keep translations precise and American English natural:
 
 ```markdown
