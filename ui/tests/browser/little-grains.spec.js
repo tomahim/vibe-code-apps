@@ -6,6 +6,7 @@ const id = {
 };
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
 function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null, badgeLog = null, flags = ['leaderboard_two_users', 'challenge_two_users'], meStatus = 200, requestLog = null } = {}) {
+  let celebrated = completed; // Replay fixtures have already seen their first path celebration.
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const allRead = () => read && (!twoCards || readSecond); const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(allRead()), lessons_total: 1, started: read, completed: allRead() });
   page.route('**/api/auth/me', route => (meStatus === 200 ? route.fulfill({ json: { user: { email: 'learner@example.com' }, feature_flags: flags } }) : route.fulfill({ status: meStatus, json: { error: 'down' } })));
@@ -14,7 +15,8 @@ function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, 
     if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
     const url = new URL(route.request().url());
-    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), description: 'Everyday language', progress: progress(), learning_paths: [{ ...row(id.path, 'Early Childhood English'), progress: progress(), lessons: Array.from({ length: lessonCount }, (_, i) => ({ ...row(i ? `lesson-${i}` : id.lesson, i ? `Everyday phrase ${i + 1}` : 'Bath time and care'), progress: progress() })) }] }], rewards: { drops: Number(read) + Number(readSecond) + Number(answered) * 105, carrots: Number(answered) }, recent_lessons: recentLessons } });
+    if (url.pathname.endsWith('/celebrated/')) { celebrated = true; return route.fulfill({ status: 201, json: { celebrated: true } }); }
+    if (url.pathname.endsWith('/garden/')) return route.fulfill({ json: { themes: [{ ...row(id.theme, 'Language'), description: 'Everyday language', progress: progress(), learning_paths: [{ ...row(id.path, 'Early Childhood English'), celebrated, progress: progress(), lessons: Array.from({ length: lessonCount }, (_, i) => ({ ...row(i ? `lesson-${i}` : id.lesson, i ? `Everyday phrase ${i + 1}` : 'Bath time and care'), progress: progress() })) }] }], rewards: { drops: Number(read) + Number(readSecond) + Number(answered) * 105, carrots: Number(answered) }, recent_lessons: recentLessons } });
     if (url.pathname.endsWith(`/lessons/${id.lesson}/`)) {
       const typed = typedAnswers && answered;
       const question = typed
@@ -177,8 +179,15 @@ test('garden, lesson progress and leaderboard use the API', async ({ page }) => 
   await reader.getByRole('button', { name: 'Check answer' }).click();
   await expect(reader.getByText('That’s right! +1 carrot')).toBeVisible();
   await reader.getByRole('button', { name: 'Continue →' }).click();
-  await expect(reader.getByText('Lesson in bloom')).toBeVisible();
-  await reader.getByRole('button', { name: 'Back to the garden' }).click();
+  await expect(reader.getByRole('heading', { name: 'Lesson finished!', exact: true })).toBeVisible();
+  await reader.getByRole('button', { name: 'Close lesson' }).click();
+  // First completion deliberately opens a modal. Dismiss it like a learner,
+  // rather than clicking through it or disabling the real celebration.
+  const celebration = page.getByRole('dialog', { name: 'Your knowledge is in full bloom.' });
+  await expect(celebration).toBeVisible();
+  await expect(celebration).toContainText('+100');
+  await celebration.getByRole('button', { name: 'Back to my garden' }).click();
+  await expect(celebration).toHaveCount(0);
   await page.getByRole('button', { name: 'Open leaderboard' }).click();
   await expect(page.getByRole('dialog', { name: 'Leaderboard' }).locator('.grains-ranking .name').filter({ hasText: 'Learner' })).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-desktop.png' });
@@ -329,7 +338,7 @@ test('recent lessons open from a Last lessons menu at the garden root only', asy
   await expect(panel.locator('.lg-lastlessons-menu button')).toHaveCount(3);
   await page.screenshot({ path: '/tmp/little-grains-recent-desktop.png' });
   await panel.getByRole('button', { name: 'Continue Bath time and care' }).click();
-  await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByText('Warm water')).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByRole('heading', { name: 'Warm water', exact: true })).toBeVisible();
   await page.getByRole('dialog', { name: 'Bath time and care' }).getByRole('button', { name: 'Close lesson' }).click();
   // Theme and path panels no longer mix in lessons from other paths.
   await panel.getByRole('button', { name: /Language/ }).click();
@@ -375,7 +384,7 @@ test('the selected lesson gets a floating start action at the panel right edge',
   expect(layout.dotsT).toBeGreaterThanOrEqual(layout.nameB - 1);
   await page.screenshot({ path: '/tmp/little-grains-fab-start-desktop.png' });
   await start.click();
-  await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByText('Warm water')).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Bath time and care' }).getByRole('heading', { name: 'Warm water', exact: true })).toBeVisible();
 });
 
 test('previous cards are read-only and return to the current step', async ({ page }) => {
@@ -391,14 +400,14 @@ test('previous cards are read-only and return to the current step', async ({ pag
   await page.getByRole('button', { name: 'Start lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
-  await expect(reader.getByText('Dry gently')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Dry gently', exact: true })).toBeVisible();
   await reader.getByRole('button', { name: 'Previous card' }).click();
-  await expect(reader.getByText('Warm water')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Warm water', exact: true })).toBeVisible();
   await expect(reader.getByText('ALREADY READ')).toBeVisible();
   await expect(reader.getByRole('button', { name: /I’ve read this card/ })).toHaveCount(0);
   await page.screenshot({ path: '/tmp/little-grains-previous-card.png' });
   await reader.getByRole('button', { name: 'Return to next step' }).click();
-  await expect(reader.getByText('Dry gently')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Dry gently', exact: true })).toBeVisible();
   expect(firstCardCompletions).toBe(1);
 });
 
@@ -416,13 +425,13 @@ test('a completed lesson replays cards and questions without rereading progress'
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
-  await panel.getByRole('button', { name: /Read lesson/ }).click();
+  await page.getByRole('button', { name: 'Review lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
-  await expect(reader.getByText('Warm water')).toBeVisible();
-  await expect(reader.getByText('3 of 3 steps complete')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Warm water', exact: true })).toBeVisible();
+  await expect(reader.getByLabel('3 of 3 steps complete', { exact: true })).toBeVisible();
   await page.screenshot({ path: '/tmp/little-grains-lesson-replay.png' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
-  await expect(reader.getByText('Dry gently')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Dry gently', exact: true })).toBeVisible();
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await expect(reader.getByText('What is the water like?')).toBeVisible();
   await reader.getByLabel('Cold', { exact: true }).check();
@@ -435,7 +444,7 @@ test('a completed lesson replays cards and questions without rereading progress'
   await expect(reader.getByText('That’s right!', { exact: true })).toBeVisible();
   await expect(reader.getByText('+1 carrot')).toHaveCount(0);
   await reader.getByRole('button', { name: 'Continue →' }).click();
-  await expect(reader.getByText('Lesson in bloom')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Lesson reviewed!', exact: true })).toBeVisible();
   expect(cardWrites).toHaveLength(0);
   expect(attempts).toHaveLength(2);
 });
@@ -449,7 +458,7 @@ test('phone replay asks for a full typed answer and rotates after a wrong answer
   await panel.getByRole('button', { name: /Language/ }).click();
   await panel.getByRole('button', { name: /Early Childhood English/ }).click();
   await panel.locator('button[data-lesson]').filter({ hasText: 'Bath time and care' }).click();
-  await panel.getByRole('button', { name: /Read lesson/ }).click();
+  await page.getByRole('button', { name: 'Review lesson', exact: true }).click();
   const reader = page.getByRole('dialog', { name: 'Bath time and care' });
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
   await reader.getByRole('button', { name: /I’ve read this card/ }).click();
@@ -470,7 +479,7 @@ test('phone replay asks for a full typed answer and rotates after a wrong answer
   await expect(reader.getByText('+1 carrot')).toHaveCount(0);
   await page.screenshot({ path: '/tmp/little-grains-typed-feedback-mobile.png' });
   await reader.getByRole('button', { name: 'Continue →' }).click();
-  await expect(reader.getByText('Lesson in bloom')).toBeVisible();
+  await expect(reader.getByRole('heading', { name: 'Lesson reviewed!', exact: true })).toBeVisible();
 });
 
 test('expired token is cleared', async ({ page }) => {
