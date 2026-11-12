@@ -53,7 +53,8 @@ class LearningImageTests(TestCase):
         urls = [theme["image_url"], path["image_url"],
                 lesson["lesson"]["image_url"], lesson["cards"][0]["illustration_url"]]
         self.assertEqual(urls, [self.url(row) for row in (self.theme, self.path, self.lesson, self.card)])
-        self.assertEqual(path["image_path"], self.path_image)
+        self.assertNotIn("image_path", path)  # garden tiles send the usable URL only
+        self.assertEqual(lesson["learning_path"]["image_path"], self.path_image)
         self.client.defaults.clear()
         get.return_value = self.upstream()
         for url in urls:
