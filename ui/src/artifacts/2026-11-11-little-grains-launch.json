@@ -1,6 +1,6 @@
 {
   "title": "Cultive Launch Site Concepts",
-  "description": "16 landing-page concepts for Cultive (dailycultive.com): the original Little Grains NerdSip-inspired page plus 15 new identities, each with its own logo and a real-time WebGL 3D scene (three.js). Demo signup forms only.",
+  "description": "16 landing-page concepts for Cultive (dailycultive.com), all scroll-led: a real-time WebGL 3D hero (three.js) with an email signup demo, an Explore Cultive cue, then illustrative learning blocks (atomic card, checkpoint quiz, weekly review). d01 is the original Little Grains page adapted to the same structure; d02-d03 and d16 keep their identities; d04-d15 are calm, light ecosystem variations (garden, meadow, forest, dunes, valley, lakeside, terraces, orchard, alpine, canyon, islands), several carrying the Little Grains hexagonal identity. Demo signup forms only, nothing is sent.",
   "date": "2026-11-11",
   "tags": [
     "little-grains",
