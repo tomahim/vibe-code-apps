@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
@@ -432,23 +433,33 @@ def garden(request):
         })
         if len(recent_lessons) == 3:
             break
+    # Group once per request instead of re-filtering the full lists inside the
+    # per-theme and per-path loops. Each group keeps the original list order.
+    theme_of_path = {path.pk: path.theme_id for path in paths}
+    paths_by_theme = defaultdict(list)
+    for path in paths:
+        paths_by_theme[path.theme_id].append(path)
+    lessons_by_path = defaultdict(list)
+    lessons_by_theme = defaultdict(list)
+    for lesson in lessons:
+        lessons_by_path[lesson.learning_path_id].append(lesson)
+        theme_id = theme_of_path.get(lesson.learning_path_id)
+        if theme_id is not None:
+            lessons_by_theme[theme_id].append(lesson)
     return JsonResponse({
         "themes": [{
             **garden_tile(theme), "description": theme.description,
-            "progress": state.progress([lesson for lesson in lessons if
-                                        any(path.pk == lesson.learning_path_id and path.theme_id == theme.pk for path in paths)]),
+            "progress": state.progress(lessons_by_theme[theme.pk]),
             "learning_paths": [{
                 **garden_tile(path), "theme_id": str(theme.pk),
                 "celebrated": path.pk in celebrated_paths,
-                "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
-                "catch_up": catch_up_payload(state, [lesson for lesson in lessons
-                                                     if lesson.learning_path_id == path.pk]),
-                "practice": practice_payload(state, [lesson for lesson in lessons
-                                                     if lesson.learning_path_id == path.pk], recency, now),
+                "progress": state.progress(lessons_by_path[path.pk]),
+                "catch_up": catch_up_payload(state, lessons_by_path[path.pk]),
+                "practice": practice_payload(state, lessons_by_path[path.pk], recency, now),
                 "lessons": [{**garden_tile(lesson), "learning_path_id": str(path.pk),
                              "progress": state.progress([lesson])}
-                            for lesson in lessons if lesson.learning_path_id == path.pk],
-            } for path in paths if path.theme_id == theme.pk],
+                            for lesson in lessons_by_path[path.pk]],
+            } for path in paths_by_theme[theme.pk]],
         } for theme in themes_list],
         "rewards": reward_totals(events),
         "recent_lessons": recent_lessons,
