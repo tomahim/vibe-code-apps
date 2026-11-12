@@ -38,6 +38,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
 from apps.accounts.decorators import jwt_required
+from apps.feature_flags.decorators import feature_flag_required
 
 from .api import input_error, json_object, lock_learner, public_question, visible
 from .grading import normalize_typed_answer
@@ -220,6 +221,7 @@ def week_payload(user, week, *, include_questions, players=None):
 @never_cache
 @require_GET
 @jwt_required
+@feature_flag_required("challenge_two_users")
 def challenge(request):
     """The current week: its questions, my progress, the ranking if revealed.
     With no eligible questions at all, an honest empty state (re-drawn on
@@ -239,6 +241,7 @@ def challenge(request):
 @never_cache
 @require_GET
 @jwt_required
+@feature_flag_required("challenge_two_users")
 def challenge_history(request):
     """Past weekly results, plus the current week once I finished it."""
     players, denied = player_or_404(request)
@@ -267,6 +270,7 @@ def challenge_history(request):
 @csrf_exempt  # Bearer-only auth; Django session cookies cannot authorize this write.
 @require_POST
 @jwt_required
+@feature_flag_required("challenge_two_users")
 def challenge_answer(request):
     """One challenge answer. The question must be in the current week's set
     and unanswered by me; nothing else gates it (no read requirement)."""

@@ -11,6 +11,7 @@ from django.utils import timezone
 
 from apps.accounts.tokens import issue_token
 from apps.learning.challenge import current_week_key, recent_week_keys
+from apps.feature_flags.testing import enable_flags
 from apps.learning.management.commands.seed_challenge_players import GENERAL_KNOWLEDGE_PATHS
 from apps.learning.models import (Card, ChallengePlayer, ChallengeWeek, ContentEntity, LearningPath, Lesson,
                                   Question, QuestionAttempt, Theme)
@@ -25,6 +26,7 @@ class ChallengeTests(TestCase):
         )
 
     def setUp(self):
+        enable_flags()
         self.thomas = get_user_model().objects.create_user(username="thomas", first_name="Thomas")
         self.aurore = get_user_model().objects.create_user(username="aurore", first_name="Aurore")
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.thomas)}"
@@ -231,6 +233,7 @@ class ChallengeCooldownTests(TestCase):
     week, never an early repeat; already drawn weeks stay frozen."""
 
     def setUp(self):
+        enable_flags()
         self.thomas = get_user_model().objects.create_user(username="thomas", first_name="Thomas")
         self.aurore = get_user_model().objects.create_user(username="aurore", first_name="Aurore")
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.thomas)}"
@@ -343,6 +346,7 @@ class ChallengePlayersConfigTest(TestCase):
     """The duel is live only while exactly two distinct active players are seated."""
 
     def setUp(self):
+        enable_flags()
         User = get_user_model()
         self.thomas = User.objects.create_user(username="thomas", email="thomas@example.com", password="x")
         self.aurore = User.objects.create_user(username="aurore", email="aurore@example.com", password="x")

@@ -5,10 +5,12 @@ const id = {
   lesson: 'ef40c724-a882-4798-949b-1bf950471d9b', card: '8f8b4671-3e2d-4c7f-a3c7-eb207401bb40', card2: '925a9b78-0546-44bf-a8bb-bb02fb6d7aca', question: 'd5494bfe-ef7b-44aa-b2ad-898ea6424a50', alternative: 'a4260aa0-b45b-47e0-b5d7-d869b00e20c3',
 };
 const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
-function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null, badgeLog = null } = {}) {
+function mockApi(page, lessonCount = 1, { recentLessons = [], twoCards = false, completed = false, typedAnswers = false, leaderboardLog = null, badgeLog = null, flags = ['leaderboard_two_users', 'challenge_two_users'], meStatus = 200, requestLog = null } = {}) {
   let read = completed, readSecond = completed && twoCards, answered = completed, wrong = false;
   const allRead = () => read && (!twoCards || readSecond); const progress = () => ({ cards_completed: Number(read) + Number(readSecond), cards_total: twoCards ? 2 : 1, checkpoints_correct: Number(answered), checkpoints_total: 1, questions_correct: Number(answered), questions_total: 1, lessons_completed: Number(allRead()), lessons_total: 1, started: read, completed: allRead() });
+  page.route('**/api/auth/me', route => (meStatus === 200 ? route.fulfill({ json: { user: { email: 'learner@example.com' }, feature_flags: flags } }) : route.fulfill({ status: meStatus, json: { error: 'down' } })));
   page.route('**/api/learning/**', route => {
+    if (requestLog) requestLog.push(new URL(route.request().url()).pathname);
     if (new URL(route.request().url()).pathname.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     expect(route.request().headers().authorization).toBe('Bearer fake-jwt');
     const url = new URL(route.request().url());
@@ -945,4 +947,43 @@ test.describe('badges on a phone', () => {
     await reader.getByRole('button', { name: 'Close lesson' }).click();
     await expect.poll(() => badgeLog.length).toBe(2); // leaving the lesson does
   });
+});
+
+
+test('leaderboard and Challenge stay hidden and silent without their flags', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const requestLog = [];
+  mockApi(page, 1, { flags: [], requestLog });
+  await page.goto('/apps/little-grains');
+  await expect(page.getByRole('button', { name: 'Open leaderboard' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Start a review' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /challenge/i })).toHaveCount(0);
+  await expect(page.getByText('Review or Challenge')).toHaveCount(0);
+  await page.screenshot({ path: '/tmp/little-grains-no-flags.png' });
+  expect(requestLog.filter(path => /leaderboard|challenge/.test(path))).toEqual([]);
+});
+
+test('a failed flag lookup hides both features', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  const requestLog = [];
+  mockApi(page, 1, { meStatus: 500, requestLog });
+  await page.goto('/apps/little-grains');
+  await expect(page.getByRole('button', { name: 'Start a review' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Open leaderboard' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /challenge/i })).toHaveCount(0);
+  expect(requestLog.filter(path => /leaderboard|challenge/.test(path))).toEqual([]);
+});
+
+test('the two flags switch the leaderboard and Challenge independently', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
+  mockApi(page, 1, { flags: ['challenge_two_users'] });
+  await page.goto('/apps/little-grains');
+  await expect(page.getByRole('button', { name: /Take the challenge/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Open leaderboard' })).toHaveCount(0);
+  await page.screenshot({ path: '/tmp/little-grains-challenge-only.png' });
+  await page.unrouteAll({ behavior: 'ignoreErrors' });
+  mockApi(page, 1, { flags: ['leaderboard_two_users'] });
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Open leaderboard' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /challenge/i })).toHaveCount(0);
 });
