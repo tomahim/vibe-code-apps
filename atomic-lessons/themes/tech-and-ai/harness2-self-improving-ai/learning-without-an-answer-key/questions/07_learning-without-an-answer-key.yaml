@@ -5,5 +5,5 @@ after_card_position: 4
 prompt: 'Fill in the blank: behavioral comparison is not proof of ____.'
 accepted_answers:
 - correctness
-explanation: 'The Medium article''s caution: a convincing but wrong explanation can still be selected; contrast is evidence, not a verdict.'
+explanation: 'Behavioral comparison is evidence about procedure, not a verdict: a convincing but wrong result can still be selected.'
 archived: false

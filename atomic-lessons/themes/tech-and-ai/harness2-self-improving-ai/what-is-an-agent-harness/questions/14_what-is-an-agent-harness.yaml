@@ -3,17 +3,17 @@ position: 14
 type: multiple_choice
 selection: single
 after_card_position: 8
-prompt: Why decouple the stable production harness from experimentation?
+prompt: Why is it useful to keep the execution harness and improvement harness apart?
 choices:
 - id: 75a79428-78a4-425b-985e-2649c3cd21fe
-  text: It removes the need for any model at all
+  text: You can tell which layer changed and why
 - id: d062484d-a59b-4318-9944-6a055be3b46e
-  text: Users get a stable agent while candidates are tested in isolation
+  text: It removes the need for any model at all
 - id: aae836fe-5a4e-42d7-9675-d1cea8da3068
   text: Experiments then cost nothing at all to run
 - id: 76021dc4-2bb9-4bcb-b759-2b169f1a1619
-  text: It makes rollbacks wholly unnecessary in practice
+  text: It makes undoing a change wholly unnecessary
 correct_choice_ids:
 - d062484d-a59b-4318-9944-6a055be3b46e
-explanation: 'Decoupling keeps production steady: candidates are evaluated separately, pass regression, security and approval gates, and only then take traffic.'
+explanation: Keeping them apart means the improver stays fixed during a task and is updated afterward, so every change has a clear owner.
 archived: false

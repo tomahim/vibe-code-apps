@@ -2,7 +2,7 @@
 id: 9787d320-626f-4847-998d-9f753d6d9675
 position: 1
 title: Why smart models still fail
-description: A debugging assistant keeps failing, and a bigger brain is not the fix.
+description: A capable assistant keeps making avoidable mistakes, and a bigger brain is not the fix.
 archived: false
 ---
 

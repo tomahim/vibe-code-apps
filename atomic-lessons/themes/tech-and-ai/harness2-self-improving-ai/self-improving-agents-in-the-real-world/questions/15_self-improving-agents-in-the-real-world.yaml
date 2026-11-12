@@ -2,10 +2,9 @@ id: 9e5d7a1f-f8f6-4158-9eff-e8643bd9275e
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: In the analytics example, under what kind of credentials should generated SQL execute in production? (Three words.)
+prompt: To keep refinement affordable, cap the recursion budget, token spend, run time and number of parallel ____. (One word.)
 accepted_answers:
-- read-only least-privilege credentials
-- read-only credentials
-- least-privilege credentials
-explanation: Read-only, least-privilege credentials, plus query timeouts and restrictions on accessible databases.
+- probes
+- probe
+explanation: Caps on budget, tokens, time and probe count keep the optimizer from becoming the biggest expense.
 archived: false

@@ -3,10 +3,10 @@ position: 5
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: Why is self-modifying harness behavior a security issue?
+prompt: Why does a self-improving harness call for extra care?
 choices:
 - id: 16cc7aa4-9d9e-4ede-9a43-ca0911eb50e5
-  text: It writes scripts and plugins that shape future behavior
+  text: It writes scripts and hooks that shape future behavior
 - id: 2f2bd78c-972c-4f0e-b484-bbdc3b7063fe
   text: Scripts are always considered to be malware
 - id: c88605b2-00fd-422b-a0f7-eb6bb48d09eb
@@ -15,5 +15,5 @@ choices:
   text: Plugins only ever run inside browsers
 correct_choice_ids:
 - 16cc7aa4-9d9e-4ede-9a43-ca0911eb50e5
-explanation: The system writes part of its own future behavior, so harness changes deserve deployment-grade suspicion and review.
+explanation: The system writes part of its own future behavior, so its changes deserve the same care as code going to production.
 archived: false

@@ -10,4 +10,4 @@ archived: false
 
 **2. Contrasts reveal procedure, not correctness**: stochasticity and shared model biases mean a convincing but wrong change can still be selected.
 
-**3. Adoption is not optimality.** The selector picks an existing deliverable blindly, and production use should add validators, tests and human approval gates.
+**3. Adoption is not optimality.** The selector picks an existing deliverable blindly, so higher-stakes uses should add validators, tests and human approval.

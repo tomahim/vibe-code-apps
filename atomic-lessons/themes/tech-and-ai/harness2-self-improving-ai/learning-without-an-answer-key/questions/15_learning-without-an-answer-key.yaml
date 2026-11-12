@@ -2,12 +2,14 @@ id: b27f572f-5f04-482c-8b75-0359ff0f0d16
 position: 15
 type: type_answer_question
 after_card_position: 8
-prompt: Name one kind of independent validation the Medium article says should supplement answer-free selection in production.
+prompt: Name one outside check that can back up answer-free selection when reliability matters.
 accepted_answers:
 - human review
 - external validators
+- validators
 - test results
 - tests
 - regression tests
-explanation: External validators, real test results and human review supplement the contrast-based selection for high-reliability applications.
+- independent validation
+explanation: Validators, real test results and human review cover what a contrast cannot see.
 archived: false

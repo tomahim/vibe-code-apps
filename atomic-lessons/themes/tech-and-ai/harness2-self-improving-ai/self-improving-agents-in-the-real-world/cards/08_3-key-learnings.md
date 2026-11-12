@@ -6,8 +6,8 @@ archived: false
 ---
 
 
-**1. Know the five failure modes**: selection error, experience contamination, complexity growth, optimization overhead and security regression, each measured separately in a serious deployment.
+**1. Know the risks by name**: wrong picks, over-broad lessons, pile-up, runaway cost and unsafe edits, and measure each separately instead of trusting a better benchmark score.
 
-**2. Separate proposal from authority**: versioned candidates, static checks, sandboxed execution, gated rollout and instant rollback turn self-improvement into a controlled release process.
+**2. Separate proposing from approving**: versioned candidates, isolated trials, gradual rollout and a ready way back make self-improvement a controlled process.
 
-**3. Adaptation pays on recurring, observable, high-volume task families**, and even the paper's authors flag cost and evidence quality as open problems, not solved ones.
+**3. Adaptation pays on recurring, observable, high-volume task families**, and even the paper's authors flag cost and evidence quality as open problems.

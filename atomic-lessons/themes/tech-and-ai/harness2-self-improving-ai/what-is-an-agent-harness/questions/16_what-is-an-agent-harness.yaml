@@ -2,10 +2,13 @@ id: 85de8d1f-eb66-4952-83f5-8806b71adb91
 position: 16
 type: type_answer_question
 after_card_position: 8
-prompt: The Medium article says candidate harnesses should be treated like what kind of engineering artifact?
+prompt: Because the harness is stored as files, what can you always do with a bad change? (One word.)
 accepted_answers:
-- software releases
-- a software release
-- releases
-explanation: 'Treat harness changes like software releases: validation, staged rollout, and instant rollback to a previous immutable version.'
+- revert
+- roll back
+- rollback
+- undo
+- restore
+- reverse
+explanation: Files can be diffed, versioned and restored, so a harmful change can be reversed.
 archived: false

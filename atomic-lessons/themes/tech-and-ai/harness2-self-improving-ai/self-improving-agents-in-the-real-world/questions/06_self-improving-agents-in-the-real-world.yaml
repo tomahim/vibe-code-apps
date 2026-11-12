@@ -3,10 +3,10 @@ position: 6
 type: multiple_choice
 selection: single
 after_card_position: 4
-prompt: What is the Medium article's core authority control?
+prompt: What is a sound authority rule for self-changing agents?
 choices:
 - id: 10386395-8e3f-4111-99cb-168146e0a1bd
-  text: The model proposes; the platform decides what executes
+  text: The model proposes; something outside it decides what runs
 - id: d160e72d-0475-428d-8223-dc9c533d27bd
   text: The model executes anything it proposes immediately
 - id: d988bde7-ef8a-4ce8-9037-fefd61efa9c9
@@ -15,5 +15,5 @@ choices:
   text: A public vote approves each change
 correct_choice_ids:
 - 10386395-8e3f-4111-99cb-168146e0a1bd
-explanation: 'Separation of proposal and execution authority: immutable versioned candidates, static checks, sandboxed runs, approvals.'
+explanation: Separating proposal from approval, with saved candidates, isolated trials and review, keeps changes controlled.
 archived: false

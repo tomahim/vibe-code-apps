@@ -3,10 +3,10 @@ position: 12
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: Which of these does the released Harness² framework NOT automatically optimize?
+prompt: Which of these does Harness² NOT edit?
 choices:
 - id: 50d8950c-7bca-4fc1-87ff-35dd2b36028c
-  text: Vector indexes and LangGraph workflow topologies
+  text: The model weights and training data
 - id: 790e1bab-d234-4738-8510-94aaf7231c5a
   text: System prompts and guardrail files
 - id: a82c9d51-51ca-4379-a3a2-4cd8d7b1185a
@@ -15,5 +15,5 @@ choices:
   text: Tool guidance text files
 correct_choice_ids:
 - 50d8950c-7bca-4fc1-87ff-35dd2b36028c
-explanation: Extending the editable surface to RAG internals or orchestration topology would need new adapters; the release edits the eight harness components.
+explanation: The model stays frozen. Harness² edits the eight harness components, such as prompts, skills and scripts.
 archived: false

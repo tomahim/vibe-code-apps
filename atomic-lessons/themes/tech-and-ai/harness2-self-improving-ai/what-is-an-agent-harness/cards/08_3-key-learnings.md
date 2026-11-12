@@ -10,4 +10,4 @@ archived: false
 
 **2. A harness is a folder of files**, some always-on in the model's context, others loaded on demand, which makes improvements concrete, versionable and reversible.
 
-**3. Harness changes are real engineering**, from prompt edits to deterministic scripts and middleware, so they deserve the same discipline as code: review, testing, staged rollout and rollback.
+**3. Two harnesses, two jobs**: the execution harness does the task, and a separate improvement harness decides how the first should change.

@@ -3,17 +3,17 @@ position: 10
 type: multiple_choice
 selection: single
 after_card_position: 6
-prompt: 'An agent keeps botching financial totals. The Medium article''s preferred fix:'
+prompt: An agent keeps converting currencies wrongly. Which fix is usually the most robust?
 choices:
 - id: ebb3d787-a65e-4f88-84ea-a7ca82d51f32
-  text: Add a paragraph telling the model to calculate carefully
+  text: Add a paragraph telling the model to be careful
 - id: b5661f60-828f-49f3-9a80-190455f186e3
-  text: A deterministic script using Python's Decimal to verify calculations
+  text: Add a small deterministic conversion script to check results
 - id: 94c251ac-4a5c-4a69-ad03-7a445fc63bc3
   text: Remove the calculator tool from the harness entirely
 - id: 2706a52f-8e6c-45c5-a763-a8ca43cc12d0
   text: Ask users to round all their numbers first
 correct_choice_ids:
 - b5661f60-828f-49f3-9a80-190455f186e3
-explanation: 'A script moves a verifiable computation from probabilistic text into deterministic code: more robust than pleading in prose.'
+explanation: 'A script moves a checkable computation from free-form text into deterministic code: more robust than pleading in prose.'
 archived: false

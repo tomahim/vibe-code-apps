@@ -2,8 +2,8 @@ id: 2ef5f2f0-dbee-4564-99f7-aecda3f71580
 position: 16
 type: type_answer_question
 after_card_position: 8
-prompt: 'Complete the Medium article''s closing ideal: infrastructure should evolve through measurable evidence, controlled experimentation and reliable ____.'
+prompt: 'Fill in the blank: Harness² improves the system around the model without changing the model''s ____. (One word.)'
 accepted_answers:
-- validation
-explanation: 'Not unsupervised self-modification: evidence, controlled experimentation and reliable validation.'
+- weights
+explanation: The model stays frozen; only the surrounding harness evolves.
 archived: false

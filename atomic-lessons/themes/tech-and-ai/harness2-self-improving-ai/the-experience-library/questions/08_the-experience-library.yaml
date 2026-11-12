@@ -2,8 +2,9 @@ id: c11ea9fd-f116-4199-94ac-c1fbf2122370
 position: 8
 type: type_answer_question
 after_card_position: 4
-prompt: What is the Medium article's name for the failure mode where a lesson from limited evidence is generalized too broadly? (Two words.)
+prompt: 'Fill in the blank: lessons enter the library only when supported by execution ____. (One word.)'
 accepted_answers:
-- experience contamination
-explanation: 'Experience contamination: an over-generalized lesson steadily misleads future tasks in the domain.'
+- contrasts
+- contrast
+explanation: Lessons need support from behavioral contrasts, otherwise an over-broad lesson could mislead later tasks.
 archived: false

@@ -6,4 +6,4 @@ description: Failure modes, safety controls, and where harness adaptation actual
 archived: false
 ---
 
-The last lesson leaves the lab: what can go wrong, what a production system must add, and where this approach is genuinely worth trying.
+The last lesson leaves the lab: what can go wrong, which habits keep self-changing agents under control, and where this approach is worth trying.

@@ -3,17 +3,17 @@ position: 2
 type: multiple_choice
 selection: single
 after_card_position: 2
-prompt: Why does the Python debugging assistant fail, according to the Medium article?
+prompt: Why does the trip-planning assistant fail in the lesson's example?
 choices:
 - id: f0bae6ec-d0a2-468f-8a10-35b5ad47ea5b
-  text: Its model is too small to reason about bugs
+  text: Its model is too small to understand time zones
 - id: 33b489eb-64fd-4e06-bb15-2af417150b40
-  text: Its surrounding setup was not designed for these problems
+  text: Its surrounding setup lacks checks for these problems
 - id: 732083f3-f5f1-4df0-9aeb-d6775b296a2b
-  text: Python code is too ambiguous for AI agents
+  text: Travel data is too ambiguous for AI agents
 - id: ad80f6aa-6426-4063-ae56-a341a9db338f
-  text: It lacks access to source files and tests
+  text: It has no access to flights, hotels or calendars
 correct_choice_ids:
 - 33b489eb-64fd-4e06-bb15-2af417150b40
-explanation: 'The failures are procedural: reading irrelevant files, missing edge cases, testing inefficiently. The model itself is capable; the setup around it is the bottleneck.'
+explanation: 'The failures are procedural: no hours check, no time-zone check, repeated searches. The model is capable; the setup around it is the bottleneck.'
 archived: false
