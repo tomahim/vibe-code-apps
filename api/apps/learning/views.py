@@ -14,7 +14,7 @@ from apps.accounts.decorators import jwt_required
 from apps.feature_flags.decorators import feature_flag_required
 
 from .api import (
-    LearnerState, checkpoint_questions, described, input_error, json_object,
+    LearnerState, checkpoint_questions, described, garden_tile, input_error, json_object,
     lesson_summary, lock_learner, next_step, public_questions, visible,
 )
 from .models import (Card, CardProgress, LearningPath, Lesson, LessonOpen, PathCelebration,
@@ -434,18 +434,20 @@ def garden(request):
             break
     return JsonResponse({
         "themes": [{
-            **described(theme),
+            **garden_tile(theme), "description": theme.description,
             "progress": state.progress([lesson for lesson in lessons if
                                         any(path.pk == lesson.learning_path_id and path.theme_id == theme.pk for path in paths)]),
             "learning_paths": [{
-                **described(path), "theme_id": str(theme.pk),
+                **garden_tile(path), "theme_id": str(theme.pk),
                 "celebrated": path.pk in celebrated_paths,
                 "progress": state.progress([lesson for lesson in lessons if lesson.learning_path_id == path.pk]),
                 "catch_up": catch_up_payload(state, [lesson for lesson in lessons
                                                      if lesson.learning_path_id == path.pk]),
                 "practice": practice_payload(state, [lesson for lesson in lessons
                                                      if lesson.learning_path_id == path.pk], recency, now),
-                "lessons": [lesson_summary(lesson, state) for lesson in lessons if lesson.learning_path_id == path.pk],
+                "lessons": [{**garden_tile(lesson), "learning_path_id": str(path.pk),
+                             "progress": state.progress([lesson])}
+                            for lesson in lessons if lesson.learning_path_id == path.pk],
             } for path in paths if path.theme_id == theme.pk],
         } for theme in themes_list],
         "rewards": reward_totals(events),

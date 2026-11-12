@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 // Synthetic progress and rewards only. No production API or database access.
 const progress = { cards_completed: 2, cards_total: 10, lessons_completed: 0, lessons_total: 1, questions_correct: 0, questions_total: 1, started: true, completed: false };
-const row = (id, title) => ({ id, title, position: 1, description: '', image_url: '', image_alt: '', introduction_markdown: '' });
+// Match the slim garden API: descriptions belong only to theme blurbs;
+// reader-only introductions and image source metadata are absent.
+const row = (id, title) => ({ id, title, position: 1, image_url: '' });
 const titles = ['Energy', 'Language', 'Life & Society', 'Sport', 'Tech & AI', 'Diving N4 #1', 'Diving N4 #2'];
 async function setup(page) {
   await page.addInitScript(() => localStorage.setItem('genious_token', 'fake-jwt'));
@@ -10,7 +12,7 @@ async function setup(page) {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith('/health/')) return route.fulfill({ json: { status: 'ok', database: 'ok' } });
     if (path.endsWith('/garden/')) return route.fulfill({ json: {
-      themes: titles.map((title, i) => ({ ...row(i === 5 ? 'bd957ab9-8aa7-4f8c-970f-c858f4cbec04' : i === 6 ? 'e0fecbd7-085e-4f6e-8fdb-afd4f52a3f8b' : `theme-${i}`, title), progress, learning_paths: [{ ...row(`path-${i}`, 'A learning path'), progress, lessons: [{ ...row(`lesson-${i}`, 'First lesson'), progress }] }] })),
+      themes: titles.map((title, i) => ({ ...row(i === 5 ? 'bd957ab9-8aa7-4f8c-970f-c858f4cbec04' : i === 6 ? 'e0fecbd7-085e-4f6e-8fdb-afd4f52a3f8b' : `theme-${i}`, title), description: 'A place to grow your knowledge.', progress, learning_paths: [{ ...row(`path-${i}`, 'A learning path'), progress, lessons: [{ ...row(`lesson-${i}`, 'First lesson'), progress }] }] })),
       rewards: { drops: 1284, carrots: 212 }, recent_lessons: [],
     } });
     if (path.endsWith('/badges/check/')) return route.fulfill({ json: { badges: [], earned_count: 0, new_count: 0 } });

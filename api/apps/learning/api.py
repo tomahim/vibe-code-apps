@@ -35,6 +35,16 @@ def described(row):
     }
 
 
+def garden_tile(row):
+    """Garden-only identity and display fields; reader text stays in described().
+
+    Theme blurbs are added by the garden caller, since they are the only
+    descriptions rendered there. Keep image_url, not its source metadata.
+    """
+    return {"id": str(row.pk), "title": row.title, "position": row.position,
+            "image_url": image_url(row)}
+
+
 def cards_all_read(card_ids, read_ids):
     """The one lesson-completion rule (#465): a lesson completes once every
     one of its cards is read - a card-less lesson never completes, and
