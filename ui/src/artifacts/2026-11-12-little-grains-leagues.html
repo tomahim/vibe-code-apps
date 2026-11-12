@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Grains — weekly leagues, 3 design concepts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;background:#efe7d6;color:#26342b;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
+:focus-visible{outline:3px solid #bd6748;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.chrome{flex:none;background:#fffcf5;border-bottom:1px solid #dfd8c8;padding:8px 14px 0;z-index:10}
+.chrome .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.chrome h1{font:700 15px/1.2 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.chrome .sub{font-size:11px;color:#6d7668}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0 0;scrollbar-width:thin}
+.tab{flex:none;border:1px solid #dfd8c8;border-bottom:0;background:#f6efdf;color:#6d6452;border-radius:12px 12px 0 0;padding:8px 14px;font-size:13px;font-weight:700;white-space:nowrap}
+.tab small{color:#a39a85;font-weight:700;margin-right:6px}
+.tab[aria-current="true"]{background:#f5efe3;color:#26342b;box-shadow:inset 0 2px 0 #bd6748}
+main{flex:1;min-height:0;position:relative}
+.design{position:absolute;inset:0;overflow:hidden}
+.design[hidden]{display:none}
+.lg{--cream:#f5efe3;--paper:#fffcf5;--ink:#26342b;--dim:#6d7668;--line:#dfd8c8;--terra:#bd6748;--terra-d:#a64d34;--blue:#3b8dce;--orange:#ef8c32;--green:#5a9e5b;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;position:absolute;inset:0;display:flex;flex-direction:column;background:var(--cream);color:var(--ink);overflow:hidden}
+.gh{height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--paper);border-bottom:1px solid var(--line);z-index:20;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font:700 21px/1 var(--serif);white-space:nowrap}
+.brand .mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#e8f0dc;font-size:19px}
+.brand small{display:block;margin-top:5px;color:#84917f;font:700 9px/1 var(--sans);letter-spacing:.18em}
+.acts{display:flex;align-items:center;gap:10px}
+.hlabel{color:#8a907e;font-size:12px;margin-right:6px;white-space:nowrap}
+.pill{height:42px;display:flex;align-items:center;gap:8px;border:1px solid #dac9ac;border-radius:999px;padding:0 16px;background:#f6ecda;color:#69512f;font-size:13px;font-weight:700}
+.pill:hover{background:#efdfc0}
+.pill .ic{font-size:17px}
+.pill.league{background:#e9f2e4;border-color:#c4dab9;color:#3f6a44}
+.pill.league:hover{background:#deebd7}
+.streakpill{height:42px;display:flex;align-items:center;gap:6px;border:1px solid #ecd9c2;border-radius:999px;padding:0 14px;background:#fdf3e4;color:#8a5a2b;font-weight:800;font-size:14px}
+.streakpill:hover{background:#fae9cf}
+.streakpill .delta{font-size:11px;color:#9a8b6f;font-weight:700}
+.hexbtn{width:42px;height:42px;display:grid;place-items:center;color:#69512f;border-radius:12px}
+.hexbtn:hover{background:#f1e9d8}
+.avatar-b{width:38px;height:38px;border-radius:50%;background:#dce6d3;color:#4d6a51;display:grid;place-items:center;font-weight:800;font-size:14px;flex:none}
+.stage{position:relative;flex:1;min-height:0;overflow:hidden;background:#f8eddc}
+.garden-ph{position:absolute;inset:0}
+.garden-ph svg{width:100%;height:100%;display:block}
+.ph-chip{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(255,252,245,.92);border:1px dashed #c9b98f;border-radius:999px;padding:6px 14px;font-size:11.5px;color:#8a7a5c;font-weight:700;white-space:nowrap}
+.fabs{position:absolute;right:18px;bottom:18px;display:flex;gap:10px;z-index:6}
+.fab{height:52px;min-width:52px;border-radius:999px;border:1px solid #e0d4bd;background:#fffcf5;box-shadow:0 10px 26px rgba(42,39,26,.22);display:flex;align-items:center;gap:8px;padding:0 16px;font-weight:800;font-size:14px;color:#5b4a2e}
+.fab .ic{font-size:20px}
+.fab.chal{background:#7a4a8c;color:#fff;border-color:#6a3f7a}
+.fab:hover{filter:brightness(.97)}
+.dnote{position:absolute;left:12px;bottom:12px;z-index:5;max-width:min(360px,78%);background:rgba(255,252,245,.94);border:1px solid #e3d8c6;border-radius:12px;padding:9px 13px;font-size:11.5px;color:#6d7668;line-height:1.5;box-shadow:0 6px 18px rgba(60,50,30,.08)}
+.dnote b{color:#43503f}
+.backdrop{position:absolute;inset:0;z-index:40;background:rgba(29,39,31,.42);backdrop-filter:blur(3px);display:flex;justify-content:flex-end;align-items:stretch;animation:fade .18s ease}
+.panel{width:min(430px,100%);height:100%;display:flex;flex-direction:column;background:var(--paper);box-shadow:-20px 0 60px rgba(20,35,24,.2);padding:24px;overflow:auto;animation:slidein .22s ease}
+@keyframes fade{from{opacity:0}}
+@keyframes slidein{from{transform:translateX(40px);opacity:.4}}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.p-head .k{color:var(--terra);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.p-head h2{font:700 30px/1.15 var(--serif)}
+.psub{margin-top:7px;color:var(--dim);font-size:12.5px;line-height:1.5}
+.x{flex:none;width:38px;height:38px;border-radius:50%;background:#eee8d9;color:#5b6157;font-size:24px;line-height:1}
+.x:hover{background:#e5dac8}
+.selffoot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;font-size:12.5px;color:var(--dim);line-height:1.6}
+.selffoot b{color:var(--ink)}
+.week{display:flex;gap:6px;margin-top:16px}
+.week .d{flex:1;text-align:center;font-size:10px;font-weight:700;color:#9aa194;padding:7px 0;border-radius:8px;background:#f1ead9}
+.week .d.done{background:#e4eedb;color:#4b744b}
+.week .d.today{background:#7ea86a;color:#fff}
+.weeklab{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--dim)}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;background:#eee8d8;border-radius:13px;margin-top:16px}
+.seg button{min-height:40px;border-radius:10px;color:#79776b;font-size:12.5px;font-weight:700;padding:0 6px;white-space:nowrap}
+.seg button.on{background:#fffefa;color:#385545;box-shadow:0 2px 7px rgba(155,143,118,.16)}
+.rank{list-style:none;display:grid;gap:6px;margin-top:14px}
+.rank li{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 10px;border-radius:12px;background:#fbf7ee;border:1px solid transparent}
+.rank li.up{background:#eef5e4;border-color:#cfe0b8}
+.rank li.down{background:#faeae4;border-color:#ecc9bd}
+.rank li.self{outline:2px solid #7ea86a;background:#edf5e9}
+.rank .r{width:26px;font:700 15px var(--serif);color:#8a806b;text-align:center;flex:none}
+.rank .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#dce6d3;color:#4d6a51;font-size:13px;font-weight:800;flex:none}
+.rank .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:700}
+.rank .n small{font-size:9px;color:#72916d;margin-left:5px}
+.rank .n .det{display:block;margin-top:2px;font-size:11px;font-weight:400;color:#98a094}
+.rank .sc{font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;flex:none}
+.rank li.pending{opacity:.55;background:transparent;border:1px dashed var(--line);min-height:42px}
+.zone-note{display:flex;gap:14px;margin-top:12px;font-size:11px;color:var(--dim);flex-wrap:wrap;line-height:1.5}
+.zone-note i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.pend-h{margin:16px 0 2px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9aa194}
+.live-note{margin-top:12px;font-size:12.5px;color:#5d4a70;background:#f6effa;border:1px solid #e2d2ee;border-radius:12px;padding:10px 12px;line-height:1.5}
+.live-note b{color:#432a5e}
+.c-backdrop{position:absolute;inset:0;z-index:50;background:rgba(29,39,31,.42);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:center;padding:20px}
+.c-card{width:min(560px,100%);max-height:calc(100% - 10px);display:flex;flex-direction:column;background:var(--paper);border:1px solid #e3d8c6;border-radius:24px;box-shadow:0 28px 80px rgba(22,35,22,.28);overflow:hidden;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(.96);opacity:.4}}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.c-kick{color:#708478;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.c-body{padding:22px 24px 26px;overflow:auto}
+.timer{height:6px;background:#ece4d2;border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.timer span{display:block;height:100%;background:#7a4a8c}
+.opts{display:grid;gap:10px;margin-top:16px}
+.opts button{display:flex;align-items:center;gap:12px;min-height:50px;border:1px solid #e2d9cb;border-radius:12px;padding:10px 14px;background:#fffefa;text-align:left;line-height:1.4;font-size:14px}
+.opts button:hover{border-color:#b57658;background:#fbefe6}
+.opts button.correct{border-color:#6e9f70;background:#edf5e9}
+.opts button.wrong{border-color:#b0433a;background:#fbeeea}
+.opts button:disabled{cursor:default}
+.qh{font:700 22px/1.25 var(--serif)}
+.qmeta{font-size:11px;color:var(--dim);margin-top:4px}
+.feed{margin-top:14px;font-size:13px;font-weight:700}
+.feed.ok{color:#3c6a47}.feed.ko{color:#a74131}
+@media(max-width:760px){.c-backdrop{padding:0;align-items:flex-end}.c-card{width:100%;max-height:94%;border-radius:22px 22px 0 0}}
+.chart{margin-top:16px;border:1px solid #e5ddc9;border-radius:14px;background:#f8f2e7;padding:14px}
+.chart h4{font:700 14px var(--serif);color:#4d6a51;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.chart h4 span{font:400 10px var(--sans);color:var(--dim)}
+.chart svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:14px;margin-top:6px;font-size:11px;font-weight:700;color:#5c645a}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:3px}
+.newtag{display:inline-block;background:#e8f0fb;color:#3b8dce;border-radius:999px;padding:2px 9px;font-size:9.5px;font-weight:800;letter-spacing:.06em;margin-left:8px;vertical-align:2px}
+.streak-hero{display:flex;align-items:center;gap:14px;margin-top:16px;padding:16px;border-radius:16px;background:linear-gradient(160deg,#fff6e6,#fbe8cd);border:1px solid #ecd9b8}
+.streak-hero .flame{font-size:40px}
+.streak-hero b{font:800 26px var(--serif);color:#8a5a2b}
+.streak-hero small{display:block;color:#9a7b4f;font-size:12px;margin-top:2px}
+.mtrack{height:8px;background:#efe6d2;border-radius:6px;overflow:hidden;margin-top:10px}
+.mtrack span{display:block;height:100%;background:linear-gradient(90deg,#7ea86a,#5a9e5b)}
+.mlab{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin-top:6px}
+details.oq{margin-top:18px;border:1px solid #e3d8c6;border-radius:14px;background:#fbf7ec;padding:12px 14px}
+details.oq summary{font-size:12px;font-weight:800;color:#8a7a5c;cursor:pointer}
+details.oq ul{margin:10px 0 2px;padding-left:18px;font-size:12px;color:#6d7668;display:grid;gap:6px;line-height:1.45}
+.medal{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffd98c,#f0a13c);display:grid;place-items:center;font-size:21px;border:2px solid #d88f2e;position:relative;flex:none}
+.medal:hover{filter:brightness(1.05)}
+.medal .tr{position:absolute;right:-5px;bottom:-5px;background:#5a9e5b;color:#fff;font-size:9px;border-radius:6px;padding:1px 4px;font-weight:800;border:1.5px solid #fffcf5}
+.tiers{margin-top:16px;display:grid;gap:8px}
+.tier{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:#fbf7ee}
+.tier.cur{border-color:#e0a34c;background:#fdf3e0;box-shadow:0 4px 14px rgba(224,163,76,.18)}
+.tier .ic{font-size:22px}
+.tier b{font:700 15px var(--serif)}
+.tier span{margin-left:auto;font-size:11px;color:var(--dim);text-align:right}
+.sunarc{margin-top:16px}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:20px 0 4px}
+.podium .p{display:flex;flex-direction:column;align-items:center;gap:6px}
+.podium .step{width:78px;border-radius:10px 10px 0 0;background:linear-gradient(180deg,#f3e8cf,#e8d9b8);border:1px solid #dcccab;border-bottom:0;display:grid;place-items:center;font:800 18px var(--serif);color:#8a7a5c}
+.podium .p1 .step{height:88px}.podium .p2 .step{height:64px}.podium .p3 .step{height:48px}
+.podium .av{width:40px;height:40px;border-radius:50%;background:#dce6d3;color:#4d6a51;display:grid;place-items:center;font-weight:800}
+.podium .av.me{background:#cfe4c5;outline:2px solid #7ea86a}
+.podium .nm{font-size:11px;font-weight:700;color:#5b6157}
+.podium .psc{font-size:10px;color:#98a094;font-variant-numeric:tabular-nums}
+.pop{position:absolute;top:66px;right:14px;z-index:45;width:min(350px,calc(100% - 28px));background:var(--paper);border:1px solid #e0d4bd;border-radius:16px;box-shadow:0 18px 50px rgba(42,39,26,.22);padding:16px 18px;animation:pop .18s ease}
+.pop .p-head h2{font-size:22px}
+.pop .chart{padding:12px;margin-top:12px}
+.room{position:absolute;inset:0;z-index:40;background:linear-gradient(180deg,#f3ecdc 0%,#eee2c8 100%);display:flex;flex-direction:column;animation:fade .2s ease}
+.rhead{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;background:var(--paper);border-bottom:1px solid var(--line)}
+.rhead .k{color:var(--terra);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.rhead h2{font:700 22px var(--serif)}
+.rbody{flex:1;overflow:auto;padding:18px 14px 30px}
+.chalcard{margin:0 auto 18px;max-width:540px;background:var(--paper);border:1px solid #e3d8c6;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 22px rgba(60,50,30,.1)}
+.chalcard .ic{font-size:26px}
+.chalcard b{font-size:14px}
+.chalcard p{margin:2px 0 0;font-size:11.5px;color:var(--dim)}
+.chalcard button{margin-left:auto;flex:none;background:#7a4a8c;color:#fff;border-radius:10px;padding:10px 16px;font-weight:800;font-size:13px}
+.shelfrow{display:flex;gap:8px;justify-content:center;padding:12px 2px 8px;border-bottom:6px solid #c9a97e;border-radius:3px;margin-bottom:16px;max-width:640px;margin-left:auto;margin-right:auto}
+.plant{flex:1;min-width:0;max-width:96px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 2px;border-radius:12px;position:relative}
+.plant .rk{font-size:9px;font-weight:800;color:#8a806b}
+.plant .pe{font-size:29px;line-height:1.2}
+.plant .pn{font-size:10.5px;font-weight:700;color:#5b6157;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plant .ps{font-size:10px;color:#98a094;font-variant-numeric:tabular-nums}
+.plant.up{background:rgba(126,168,106,.16);box-shadow:inset 0 0 0 1.5px #9fbf8d}
+.plant.down{background:rgba(176,67,58,.1);box-shadow:inset 0 0 0 1.5px #d9a295}
+.plant.me{background:#edf5e9;box-shadow:inset 0 0 0 2px #7ea86a;transform:scale(1.06)}
+.plant .badge{position:absolute;top:-6px;right:-4px;background:#7a4a8c;color:#fff;font-size:9px;font-weight:800;border-radius:999px;padding:2px 7px;border:1.5px solid #fff;animation:pop .3s ease}
+.shelflab{text-align:center;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#a08c62;margin:2px 0 10px}
+.move-card{margin:20px auto 0;max-width:540px;background:linear-gradient(160deg,#eef5e4,#e2edd4);border:1px solid #cfe0b8;border-radius:16px;padding:14px 16px;font-size:12.5px;color:#44584a;line-height:1.6}
+@media(max-width:1000px){.hlabel{display:none}}
+@media(max-width:760px){
+  .gh{height:60px;padding:0 10px;gap:8px}
+  .acts{gap:6px}
+  .pill{height:38px;padding:0 10px}
+  .pill .ic{font-size:15px}
+  .streakpill{height:38px;padding:0 10px}
+  .hexbtn{width:38px;height:38px}
+  .avatar-b{width:34px;height:34px}
+  .brand{font-size:15px;gap:6px}.brand .mark{width:28px;height:28px;font-size:14px}.brand small{display:none}
+  .hlabel{display:none}
+  .pill{padding:0 8px}.pill .txt{display:none}.pill.league .txt{display:inline;font-size:12px}.pill.iconm .txt{display:none}
+  .streakpill{padding:0 11px}.streakpill .delta{display:none}
+  .backdrop{align-items:flex-end}
+  .panel{width:100%;height:min(82dvh,780px);border-radius:22px 22px 0 0;padding:20px}
+  .dnote{display:none}
+  .pop{top:58px}
+}
+</style>
+</head>
+<body>
+<header class="chrome">
+  <div class="row"><h1>Little Grains — weekly leagues</h1><span class="sub">3 design concepts on the current app shell · demo data only, nothing stored · garden is an unchanged placeholder</span></div>
+  <nav class="tabs" id="tabs" aria-label="Design concepts">
+    <button class="tab" data-d="d1" aria-current="true"><small>01</small>Growth leagues</button>
+    <button class="tab" data-d="d2" aria-current="false"><small>02</small>Seasons</button>
+    <button class="tab" data-d="d3" aria-current="false"><small>03</small>Garden rooms</button>
+  </nav>
+</header>
+<main>
+  <section class="design" id="d1"></section>
+  <section class="design" id="d2" hidden></section>
+  <section class="design" id="d3" hidden></section>
+</main>
+<script>
+"use strict";
+/* Demo data — 24-player league, week 46 (Mon 9 – Sun 15 Nov), today Thursday. */
+const PLAYERS=[
+["Camille",142,31],["Hugo",129,30],["Mehdi",118,31],["Léa",110,30],["Gabriel",104,31],
+["Emma",96,24],["Louis",76,19],["Thomas",68,18,"you"],["Aurore",64,17],["Chloé",60,18],
+["Raphaël",55,19],["Manon",52,18],["Jules",49,17],["Sarah",45,16],["Adam",42,19],["Inès",39,19],
+["Nathan",36,18],["Juliette",33,16],["Arthur",30,14],["Zoé",27,12],["Théo",22,12],["Eva",18,11],
+["Rayan",12,10],["Alice",6,2]];
+const score=p=>p[1]+p[2];
+const selfRank=PLAYERS.findIndex(p=>p[3]==="you")+1;
+const WEEK=["Mon 9","Tue 10","Wed 11","Thu 12","Fri 13","Sat 14","Sun 15"], TODAY=3;
+const MY_DROPS=[12,9,15,12,0,0,0], MY_CARROTS=[3,1,4,2,0,0,0];
+const MY8_D=[38,44,51,47,60,55,63,48], MY8_C=[9,12,10,14,11,15,13,10];
+const CHAL_DONE=[["Aurore",3],["Camille",3],["Mehdi",2],["Léa",2],["Hugo",2],["Emma",1],["Gabriel",1],["Sarah",1],["Louis",1],["Arthur",0],["Inès",0]];
+const QUESTIONS=[
+ {q:"Which sentence is correct?",o:["She don't like coffee.","She doesn't likes coffee.","She doesn't like coffee.","She not like coffee."],a:2},
+ {q:"What is the past tense of “to grow”?",o:["Growed","Grew","Growed up","Grown"],a:1},
+ {q:"A group of stars forming a pattern is called…",o:["A galaxy","A nebula","A comet","A constellation"],a:3}];
+const OQ=`<details class="oq"><summary>Open product questions (not decided — illustrative answers shown)</summary><ul>
+<li>What moves you between leagues: drops, carrots, or a mix (and with what weights)? Concepts show an illustrative 💧+🥕 sum.</li>
+<li>Exact league size inside 20–30, number of tiers, how many promote/relegate, tie-breaks.</li>
+<li>What counts as "not practicing" enough to go down.</li>
+<li>Settlement moment: "end of the week" vs the current Monday-reset leaderboard, and which timezone.</li>
+<li>Whether challenge results feed league standing, or only weekly drops/carrots do.</li>
+<li>With only a few real users today, a 20–30 league needs filler players or a later start.</li>
+<li>What happens to the current 2-player challenge, wins bar and challenge badges.</li></ul></details>`;
+
+const h=(html)=>{const t=document.createElement("template");t.innerHTML=html.trim();return t.content.firstElementChild;};
+const init=n=>n.slice(0,1).toUpperCase();
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+
+function gardenPlaceholder(){return `<div class="garden-ph" aria-hidden="true"><svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+<rect width="800" height="600" fill="#f8eddc"/>
+<g stroke="#e3d3b3" fill="#f3e6cd">${hexes()}</g>
+<text x="400" y="300" text-anchor="middle" font-size="46">🌷 🌻 🥕 🌱</text>
+<text x="400" y="352" text-anchor="middle" font-size="15" fill="#a08c62" font-weight="700">your garden — unchanged</text>
+</svg></div><div class="ph-chip">3D garden placeholder — not changing in these concepts</div>`;}
+function hexes(){let s="";for(let r=0;r<7;r++)for(let c=0;c<9;c++){const x=60+c*86+(r%2?43:0),y=40+r*74;s+=`<polygon points="${hex(x,y,40)}"/>`;}return s;}
+function hex(cx,cy,r){let p=[];for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;p.push((cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1));}return p.join(" ");}
+
+function headerHTML(leagueItem,streakInner){return `<header class="gh">
+<a class="brand"><span class="mark">🌱</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a>
+<div class="acts"><span class="hlabel">Grow a little, every day</span>
+${leagueItem}
+<button class="streakpill" data-open="streak" aria-label="Open streak details">${streakInner}</button>
+<button class="hexbtn" aria-label="Open badges"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 19.6 7.2v9.6L12 21.2 4.4 16.8V7.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 8.2c-2.2 0-3.4 1.6-3.4 3.4 0 2.1 1.6 3.5 3.4 4.2 1.8-.7 3.4-2.1 3.4-4.2 0-1.8-1.2-3.4-3.4-3.4Z" fill="currentColor"/></svg></button>
+<span class="avatar-b">T</span></div></header>`;}
+
+function fabsHTML(chalLabel){return `<div class="fabs">
+<button class="fab" title="Review — unchanged in these concepts"><span class="ic">✎</span></button>
+<button class="fab chal" data-open="challenge"><span class="ic">⚔</span>${chalLabel||"Challenge"}</button></div>`;}
+
+function weekHTML(){return `<div class="week">${WEEK.map((d,i)=>`<span class="d${i<TODAY?" done":i===TODAY?" today":""}">${d.split(" ")[0]}<br>${d.split(" ")[1]}</span>`).join("")}</div>
+<div class="weeklab"><span>Week 46</span><span>Leagues settle Sunday night · today Thursday</span></div>`;}
+
+function rankRow(name,sc,det,cls,rk){return `<li class="${cls||""}"><span class="r">${rk}</span><span class="av">${init(name)}</span><span class="n">${esc(name)}${det==="you"?"<small>YOU</small>":""}${det&&det!=="you"?`<small class="det">${det}</small>`:""}</span><strong class="sc">${sc}</strong></li>`;}
+
+function rankingHTML(metric){ /* metric: sum|drops|carrots */
+ const val=p=>metric==="drops"?p[1]:metric==="carrots"?p[2]:score(p);
+ const rows=[...PLAYERS].sort((a,b)=>val(b)-val(a));
+ const ic=metric==="drops"?"💧":metric==="carrots"?"🥕":"⚡";
+ return `<ol class="rank">${rows.map((p,i)=>{const cls=(p[3]==="you"?"self":i<5?"up":i>=rows.length-5?"down":"");
+ const det=p[3]==="you"?"you":`${ic==="⚡"?"💧"+p[1]+" · 🥕"+p[2]:ic+" "+val(p)+" this week"}`;
+ return rankRow(p[0],(ic==="⚡"?"":ic+" ")+val(p),det,cls,i+1);}).join("")}</ol>`;}
+
+function zoneNoteHTML(){return `<div class="zone-note"><span><i style="background:#cfe0b8"></i>Top 5 move up</span><span><i style="background:#ecc9bd"></i>Bottom 5 move down</span><span>20–30 players per league (illustrative cutoffs)</span></div>`;}
+/* ---- charts ---- */
+function bars7(vals,color,label){const max=Math.max(...vals,1);const W=280,H=64,bw=26,gap=(W-7*bw)/8;
+ const bars=vals.map((v,i)=>{const bh=Math.max(2,v/max*(H-16));const x=gap+i*(bw+gap);
+ return `<rect x="${x}" y="${H-bh}" width="${bw}" height="${bh}" rx="4" fill="${i===TODAY?color:"#d9cdae"}"/>${i===TODAY?`<text x="${x+bw/2}" y="${H-bh-4}" text-anchor="middle" font-size="9" font-weight="800" fill="${color}">${v}</text>`:""}`;}).join("");
+ return `<svg viewBox="0 0 ${W} ${H+16}" role="img" aria-label="${label}">${bars}<text x="${gap+13}" y="${H+12}" text-anchor="middle" font-size="8" fill="#8a806b">M</text><text x="${gap+13+3*(bw+gap)}" y="${H+12}" text-anchor="middle" font-size="8" fill="#8a806b">T</text><text x="${gap+13+6*(bw+gap)}" y="${H+12}" text-anchor="middle" font-size="8" fill="#8a806b">S</text></svg>`;}
+function spark(vals,color,w,hgt){w=w||280;hgt=hgt||54;const max=Math.max(...vals),min=Math.min(...vals);
+ const px=i=>8+i*(w-16)/(vals.length-1), py=v=>hgt-8-(v-min)/(max-min||1)*(hgt-16);
+ const line=vals.map((v,i)=>`${i?"L":"M"}${px(i).toFixed(1)},${py(v).toFixed(1)}`).join(" ");
+ return `<svg viewBox="0 0 ${w} ${hgt}"><path d="${line}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round"/>${vals.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="3" fill="#fffefa" stroke="${color}" stroke-width="1.8"/>`).join("")}<text x="${px(vals.length-1)}" y="${py(vals[vals.length-1])-7}" text-anchor="end" font-size="9" font-weight="800" fill="${color}">${vals[vals.length-1]}</text></svg>`;}
+function dualChart(a,b){const W=300,H=110,max=Math.max(...a,...b);
+ const px=i=>14+i*(W-28)/7, py=v=>H-14-(v/max)*(H-30);
+ const path=vs=>vs.map((v,i)=>`${i?"L":"M"}${px(i).toFixed(1)},${py(v).toFixed(1)}`).join(" ");
+ const area=`${path(a)} L${px(7)},${H-14} L${px(0)},${H-14} Z`;
+ return `<svg viewBox="0 0 ${W} ${H}"><path d="${area}" fill="rgba(59,141,206,.12)"/>
+ <path d="${path(a)}" fill="none" stroke="#3b8dce" stroke-width="2.5" stroke-linecap="round"/>
+ <path d="${path(b)}" fill="none" stroke="#ef8c32" stroke-width="2.5" stroke-linecap="round"/>
+ ${a.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="2.6" fill="#fffefa" stroke="#3b8dce" stroke-width="1.6"/>`).join("")}
+ ${b.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="2.6" fill="#fffefa" stroke="#ef8c32" stroke-width="1.6"/>`).join("")}
+ <text x="${px(7)}" y="${py(a[7])-6}" text-anchor="end" font-size="9" font-weight="800" fill="#3b8dce">${a[7]}</text>
+ <text x="${px(7)}" y="${py(b[7])+12}" text-anchor="end" font-size="9" font-weight="800" fill="#ef8c32">${b[7]}</text></svg>`;}
+
+/* ---- challenge runner (3 demo questions, then design-specific results) ---- */
+function runChallenge(section,renderResults){
+ const old=section.querySelector(".c-backdrop");if(old)old.remove();
+ let qi=0,good=0,timerId=null;
+ const back=h(`<div class="c-backdrop"><div class="c-card" role="dialog" aria-modal="true" aria-label="Weekly challenge">
+  <div class="c-top"><span class="c-kick">Weekly Challenge · Week 46 · Sprout league</span><button class="x" aria-label="Close challenge">×</button></div>
+  <div class="c-body"></div></div></div>`);
+ section.appendChild(back);
+ const body=back.querySelector(".c-body");
+ back.querySelector(".x").onclick=()=>{clearInterval(timerId);back.remove();};
+ back.addEventListener("mousedown",e=>{if(e.target===back){clearInterval(timerId);back.remove();}});
+ function question(){
+  if(qi>=QUESTIONS.length){clearInterval(timerId);renderResults(body,good,()=>back.remove());return;}
+  const Q=QUESTIONS[qi];let left=15;
+  body.innerHTML=`<div class="qmeta">Question ${qi+1} of ${QUESTIONS.length} · demo uses 15s, real challenge 30s</div>
+  <h3 class="qh">${esc(Q.q)}</h3><div class="timer"><span style="width:100%"></span></div>
+  <div class="opts">${Q.o.map((o,i)=>`<button data-i="${i}">${esc(o)}</button>`).join("")}</div><div class="feed"></div>`;
+  const bar=body.querySelector(".timer span");const t0=Date.now();
+  timerId=setInterval(()=>{const w=Math.max(0,100-(Date.now()-t0)/(left*10));bar.style.width=w+"%";if(w<=0){clearInterval(timerId);answer(-1);}},100);
+  body.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{clearInterval(timerId);answer(+b.dataset.i);});
+  function answer(i){
+   body.querySelectorAll(".opts button").forEach(b=>{b.disabled=true;
+    if(+b.dataset.i===Q.a)b.classList.add("correct");else if(+b.dataset.i===i)b.classList.add("wrong");});
+   const ok=i===Q.a;if(ok)good++;
+   const f=body.querySelector(".feed");f.className="feed "+(ok?"ok":"ko");
+   f.textContent=ok?"That's right! +1 carrot":"Not quite.";
+   qi++;setTimeout(question,900);
+  }}
+ question();}
+
+/* close topmost layer with Escape */
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;
+ const sec=document.querySelector(".design:not([hidden])");
+ const top=sec.querySelector(".c-backdrop")||sec.querySelector(".backdrop")||sec.querySelector(".room")||sec.querySelector(".pop");
+ if(top)top.remove();});
+/* ================= DESIGN 1 — Growth leagues ================= */
+(function(){
+ const sec=document.getElementById("d1");
+ sec.innerHTML=`<div class="lg">
+ ${headerHTML(`<button class="pill" data-open="leaderboard"><span class="ic">♛</span><span class="txt">Leaderboard</span></button>
+ <button class="pill league iconm" data-open="league"><span class="ic">🌱</span><span class="txt">Sprout</span></button>`,
+ `<span>🔥</span><span>12</span>`)}
+ <div class="stage">${gardenPlaceholder()}
+ <div class="dnote"><b>Design 1 — Growth leagues.</b> League pill in the header (Seed 🌰 · Sprout 🌱 · Bloom 🌸 · Harvest 🌾). It opens a league drawer with the weekly league ranking and promotion zones; the challenge shows its ranking live as soon as you finish; the streak panel gains your own drops/carrots charts.</div>
+ ${fabsHTML()}</div></div>`;
+ function drawer(title,kick,sub,bodyHTML){
+  const old=sec.querySelector(".backdrop");if(old)old.remove();
+  const b=h(`<div class="backdrop"><aside class="panel" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+  <div class="p-head"><div><p class="k">${kick}</p><h2>${title}</h2>${sub?`<p class="psub">${sub}</p>`:""}</div><button class="x" aria-label="Close">×</button></div>
+  <div class="p-body">${bodyHTML}</div></aside></div>`);
+  sec.querySelector(".lg").appendChild(b);
+  b.querySelector(".x").onclick=()=>b.remove();
+  b.addEventListener("mousedown",e=>{if(e.target===b)b.remove();});
+  return b;}
+ function leagueDrawer(){
+  const b=drawer("🌱 Sprout League","Weekly league","24 gardeners · settles Sunday night",
+  `${weekHTML()}
+  <div class="seg" role="tablist" aria-label="Ranking score"><button data-m="sum" class="on">⚡ League score</button><button data-m="drops">💧 Drops</button><button data-m="carrots">🥕 Carrots</button></div>
+  ${zoneNoteHTML()}<div class="rank-slot">${rankingHTML("sum")}</div>
+  <div class="selffoot">Your rank <b>#${selfRank} · ⚡${score(PLAYERS[selfRank-1])}</b> — ${135-score(PLAYERS[selfRank-1])} points from the Bloom promotion zone.<br>League score is an illustrative 💧+🥕 sum — the real rule is an open question.</div>
+  ${OQ}`);
+  b.querySelectorAll(".seg button").forEach(btn=>btn.onclick=()=>{
+   b.querySelectorAll(".seg button").forEach(x=>x.classList.remove("on"));btn.classList.add("on");
+   b.querySelector(".rank-slot").innerHTML=rankingHTML(btn.dataset.m);});}
+ function leaderboardDrawer(){
+  drawer("Leaderboard","The garden grows together","Overall view stays as today — the weekly view is what moves into the league.",
+  `<div class="seg"><button class="on">💧 Drops</button><button>🥕 Carrots</button><button>🏅 Badges & streak</button></div>
+  <div class="seg"><button>Weekly → league</button><button>Monthly</button><button class="on">Overall</button></div>
+  <ol class="rank">${[...PLAYERS].sort((a,b)=>b[1]-a[1]).slice(0,8).map((p,i)=>rankRow(p[0],"💧 "+(p[1]*11),p[3]==="you"?"you":"",p[3]==="you"?"self":"",i+1)).join("")}</ol>
+  <div class="selffoot">Your drops rank <b>#8 · 💧748</b> overall. Illustrative — the key change is the weekly tab becoming your league.</div>`);}
+ function streakDrawer(){
+  drawer("Daily streak","Grow a little, every day","",
+  `<div class="streak-hero"><span class="flame">🔥</span><div><b>12 days</b><small>3 more days to the 15-day milestone badge</small></div></div>
+  <div class="mtrack"><span style="width:80%"></span></div><div class="mlab"><span>7-day badge ✔</span><span>15-day badge · 80%</span></div>
+  <div class="chart"><h4>Your drops this week <span>💧 cards read · demo data<span class="newtag">NEW</span></span></h4>${bars7(MY_DROPS,"#3b8dce","Your drops per day this week")}</div>
+  <div class="chart"><h4>Your carrots this week <span>🥕 correct answers<span class="newtag">NEW</span></span></h4>${bars7(MY_CARROTS,"#ef8c32","Your carrots per day this week")}</div>
+  <div class="chart"><h4>8-week trend<span class="newtag">NEW</span></h4>${dualChart(MY8_D,MY8_C)}<div class="legend"><span><i style="background:#3b8dce"></i>Drops</span><span><i style="background:#ef8c32"></i>Carrots</span></div></div>`);}
+ function chalResults(body,good,close){
+  const mine=[...CHAL_DONE,["Thomas",good]].sort((a,b)=>b[1]-a[1]);
+  const myPos=mine.findIndex(r=>r[0]==="Thomas")+1;
+  const pending=PLAYERS.map(p=>p[0]).filter(n=>n!=="Thomas"&&!CHAL_DONE.some(r=>r[0]===n));
+  body.innerHTML=`<h3 class="qh">Challenge done — ${good}/${QUESTIONS.length} correct</h3>
+  <div class="live-note"><b>Live ranking is now visible right away.</b> ${CHAL_DONE.length+1} of 24 league players have played; positions keep moving as others finish. Final on Sunday.</div>
+  <ol class="rank">${mine.map((r,i)=>rankRow(r[0],r[1]+"/3",r[0]==="Thomas"?"you":"",r[0]==="Thomas"?"self":"",i+1)).join("")}</ol>
+  <p class="pend-h">Yet to play (${pending.length})</p>
+  <ol class="rank">${pending.map(n=>`<li class="pending"><span class="av">${init(n)}</span><span class="n">${esc(n)}</span></li>`).join("")}</ol>
+  <button class="pill" style="margin-top:18px;width:100%;justify-content:center" data-x>Done</button>`;
+  body.querySelector("[data-x]").onclick=close;}
+ sec.addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(!t)return;
+  if(t.dataset.open==="league")leagueDrawer();
+  if(t.dataset.open==="leaderboard")leaderboardDrawer();
+  if(t.dataset.open==="streak")streakDrawer();
+  if(t.dataset.open==="challenge")runChallenge(sec,chalResults);});
+ sec.dataset.ready="1";
+})();
+/* ================= DESIGN 2 — Seasons ================= */
+(function(){
+ const sec=document.getElementById("d2");
+ const TIERS=[["❄️","Winter","lowest tier"],["🌱","Spring",""],["☀️","Summer","your league"],["🌲","Evergreen","top tier"]];
+ sec.innerHTML=`<div class="lg">
+ ${headerHTML(`<button class="pill" data-open="league"><span class="ic">♛</span><span class="txt">Leaderboard</span></button>
+ <button class="medal" data-open="league" aria-label="Summer league, trending up">☀️<span class="tr">▲</span></button>`,
+ `<span>🔥</span><span>12</span><span class="delta">💧48 🥕10 wk</span>`)}
+ <div class="stage">${gardenPlaceholder()}
+ <div class="dnote"><b>Design 2 — Seasons.</b> Leagues named Winter ❄️ → Evergreen 🌲, a season medallion in the header, and the weekly deltas ride inside the streak pill. League lives as the first tab of the existing leaderboard panel; challenge ends on a podium with live standings.</div>
+ ${fabsHTML()}</div></div>`;
+ function sunArc(){const W=300,H=64;const f=(TODAY+0.5)/7;const cx=30+f*(W-60),cy=H-8-Math.sin(Math.PI*f)* (H-22);
+  return `<svg class="sunarc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Week progress, Thursday">
+  <path d="M30,${H-8} A ${(W-60)/2} ${H-22} 0 0 1 ${W-30},${H-8}" fill="none" stroke="#e3d5b5" stroke-width="2.5" stroke-dasharray="4 5"/>
+  <circle cx="${cx}" cy="${cy}" r="9" fill="#f5b73f" stroke="#d88f2e" stroke-width="2"/>
+  <text x="30" y="${H-0}" text-anchor="middle" font-size="8" fill="#8a806b">MON</text>
+  <text x="${W-30}" y="${H-0}" text-anchor="middle" font-size="8" fill="#8a806b">SUN</text></svg>`;}
+ function leaguePanel(){
+  const old=sec.querySelector(".backdrop");if(old)old.remove();
+  const b=h(`<div class="backdrop"><aside class="panel" role="dialog" aria-modal="true" aria-label="Leaderboard">
+  <div class="p-head"><div><p class="k">The garden grows together</p><h2>Leaderboard</h2></div><button class="x" aria-label="Close">×</button></div>
+  <div class="seg" role="tablist"><button class="on" data-t="league">🏆 League</button><button data-t="drops">💧 Drops</button><button data-t="carrots">🥕 Carrots</button><button data-t="badges">🏅 Badges</button></div>
+  <div class="slot"></div></aside></div>`);
+  sec.querySelector(".lg").appendChild(b);
+  b.querySelector(".x").onclick=()=>b.remove();
+  b.addEventListener("mousedown",e=>{if(e.target===b)b.remove();});
+  const slot=b.querySelector(".slot");
+  function tab(t){
+   if(t==="league"){slot.innerHTML=`<div class="tiers">${TIERS.map(x=>`<div class="tier${x[1]==="Summer"?" cur":""}"><span class="ic">${x[0]}</span><b>${x[1]}</b><span>${x[1]==="Summer"?"you · 24 gardeners":x[2]}</span></div>`).join("")}</div>
+   ${sunArc()}<div class="weeklab"><span>Top 5 bloom into Evergreen</span><span>Bottom 5 fall back to Spring</span></div>
+   <p class="pend-h" style="margin-top:14px">Summer league · week 46 ranking</p>${rankingHTML("sum")}
+   <div class="selffoot">Your rank <b>#${selfRank}</b> in Summer · ${135-score(PLAYERS[selfRank-1])} points from Evergreen.</div>${OQ}`;}
+   else if(t==="badges"){slot.innerHTML=`<p class="psub" style="margin-top:16px">Badges & streak tab stays as it is today — unchanged by leagues.</p><div class="chart"><h4>🏅 Badges growth</h4>${spark([3,5,6,9,11,12,14,15],"#5a9e5b")}</div>`;}
+   else{slot.innerHTML=`<p class="psub" style="margin-top:16px">${t==="drops"?"💧 Drops":"🥕 Carrots"} · overall periods stay global; the weekly period moves into your league.</p>
+   <div class="seg"><button class="on">Weekly · Summer league</button><button>Monthly</button><button>Overall</button></div>${rankingHTML(t)}`;}
+  }
+  b.querySelectorAll(".seg:first-of-type button,.seg[role=tablist] button").forEach(btn=>btn.onclick=()=>{
+   b.querySelectorAll(".seg[role=tablist] button").forEach(x=>x.classList.remove("on"));btn.classList.add("on");tab(btn.dataset.t);});
+  tab("league");}
+ function streakPop(){
+  const old=sec.querySelector(".pop");if(old){old.remove();return;}
+  const p=h(`<div class="pop" role="dialog" aria-label="Streak and weekly evolution">
+  <div class="p-head"><div><p class="k">Daily streak</p><h2>🔥 12 days</h2></div><button class="x" aria-label="Close">×</button></div>
+  <div class="mtrack"><span style="width:80%"></span></div><div class="mlab"><span>7 ✔</span><span>15-day badge · 3 to go</span></div>
+  <div class="chart"><h4>💧 Your drops · 8 weeks<span class="newtag">NEW</span></h4>${spark(MY8_D,"#3b8dce")}</div>
+  <div class="chart"><h4>🥕 Your carrots · 8 weeks<span class="newtag">NEW</span></h4>${spark(MY8_C,"#ef8c32")}</div>
+  <p class="psub" style="font-size:11px">Your own evolution, right from the header streak pill.</p></div>`);
+  sec.querySelector(".lg").appendChild(p);
+  p.querySelector(".x").onclick=()=>p.remove();}
+ function chalResults(body,good,close){
+  const mine=[...CHAL_DONE,["Thomas",good]].sort((a,b)=>b[1]-a[1]);
+  const top=mine.slice(0,3),rest=mine.slice(3);
+  const pod=[top[1],top[0],top[2]].filter(Boolean);
+  body.innerHTML=`<h3 class="qh" style="text-align:center">${good}/${QUESTIONS.length} — well grown!</h3>
+  <div class="podium">${pod.map((r,i)=>{const place=i===0?2:i===1?1:3;return `<div class="p p${place}"><span class="av${r[0]==="Thomas"?" me":""}">${init(r[0])}</span><span class="nm">${esc(r[0])}${r[0]==="Thomas"?" (you)":""}</span><span class="psc">${r[1]}/3</span><div class="step">${place}</div></div>`;}).join("")}</div>
+  <div class="live-note"><b>Live:</b> ${mine.length} of 24 Summer players have finished — your spot updates as others play, no waiting for the last one.</div>
+  <ol class="rank">${rest.map((r,i)=>rankRow(r[0],r[1]+"/3",r[0]==="Thomas"?"you":"",r[0]==="Thomas"?"self":"",i+4)).join("")}</ol>
+  <p class="pend-h">Yet to play (${24-mine.length})</p>
+  <button class="pill" style="margin-top:16px;width:100%;justify-content:center" data-x>Done</button>`;
+  body.querySelector("[data-x]").onclick=close;}
+ sec.addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(!t)return;
+  if(t.dataset.open==="league")leaguePanel();
+  if(t.dataset.open==="streak")streakPop();
+  if(t.dataset.open==="challenge")runChallenge(sec,chalResults);});
+ sec.dataset.ready="1";
+})();
+/* ================= DESIGN 3 — Garden rooms ================= */
+(function(){
+ const sec=document.getElementById("d3");
+ const PE=["🌷","🌻","🌵","🪴","🌼","🍅","🥕","🌿","🌸","🍓","🌾","🪻"];
+ sec.innerHTML=`<div class="lg">
+ ${headerHTML(`<button class="pill league" data-open="league"><span class="ic">🏡</span><span class="txt">Greenhouse · #${selfRank}</span></button>`,
+ `<span>🔥</span><span>12</span>`)}
+ <div class="stage">${gardenPlaceholder()}
+ <div class="dnote"><b>Design 3 — Garden rooms.</b> Each league is a room (Balcony 🪴 · Greenhouse 🏡 · Orchard 🍎 · Botanical 🌷) and the ranking is a shelf of plants — you see the whole league at a glance. The header chip carries your live rank; the challenge card sits on the shelf and reports live standings.</div>
+ ${fabsHTML()}</div></div>`;
+ let played=false, myScore=0;
+ function shelfHTML(){
+  const rows=[];const sorted=[...PLAYERS];
+  for(let r=0;r<sorted.length;r+=6){rows.push(sorted.slice(r,r+6));}
+  return rows.map((row,ri)=>{const first=ri*6+1;
+   const label=ri===0?"Promotion shelf — top 5 climb to the Orchard":ri===rows.length-1?"Relegation shelf — bottom 5 return to the Balcony":"";
+   return `${label?`<p class="shelflab">${label}</p>`:""}<div class="shelfrow">${row.map((p,i)=>{const rk=first+i;
+   const cls=p[3]==="you"?"me":rk<=5?"up":rk>PLAYERS.length-5?"down":"";
+   return `<div class="plant ${cls}"><span class="rk">#${rk}</span><span class="pe">${PE[(rk*3)%PE.length]}</span><span class="pn">${esc(p[0])}${p[3]==="you"?" · you":""}</span><span class="ps">⚡${score(p)}</span>${p[3]==="you"&&played?`<span class="badge">⚔ #${chalPos()}</span>`:""}</div>`;}).join("")}</div>`;}).join("");}
+ function chalPos(){const mine=[...CHAL_DONE,["Thomas",myScore]].sort((a,b)=>b[1]-a[1]);return mine.findIndex(r=>r[0]==="Thomas")+1;}
+ function room(){
+  if(sec.querySelector(".room"))return;
+  const r=h(`<div class="room" role="dialog" aria-modal="true" aria-label="Greenhouse league room">
+  <div class="rhead"><div><p class="k">Weekly league room</p><h2>🏡 Greenhouse</h2></div>
+  <div class="weeklab" style="margin:0"><span>Week 46 · settles Sunday night</span></div><button class="x" aria-label="Close room">×</button></div>
+  <div class="rbody">
+   <div class="chalcard"><span class="ic">⚔</span><div><b>Weekly challenge — Greenhouse gardeners</b><p class="csub"></p></div><button data-play>Play</button></div>
+   <div class="shelf-slot"></div>
+   <div class="move-card"><b>Sunday moving day.</b> When the week settles, the top 5 plants climb to the 🍎 Orchard, the bottom 5 return to the 🪴 Balcony, and everyone keeps their drops and carrots. League names, shelf sizes and cutoffs are illustrative.</div>
+   ${OQ}</div></div>`);
+  sec.querySelector(".lg").appendChild(r);
+  r.querySelector(".x").onclick=()=>r.remove();
+  const sub=r.querySelector(".csub"),btn=r.querySelector("[data-play]");
+  function refresh(){
+   sub.textContent=played?`${CHAL_DONE.length+1} of 24 played · you ${myScore}/${QUESTIONS.length} · live #${chalPos()} — standings visible immediately`:`${CHAL_DONE.length} of 24 played · ranking goes live the moment you finish`;
+   btn.textContent=played?"Replay":"Play";
+   r.querySelector(".shelf-slot").innerHTML=shelfHTML();}
+  btn.onclick=()=>runChallenge(sec,(body,good,close)=>{played=true;myScore=good;
+   body.innerHTML=`<h3 class="qh">Challenge done — ${good}/${QUESTIONS.length}</h3>
+   <div class="live-note"><b>Live:</b> your #${chalPos()} spot is already on the shelf — no waiting for the others.</div>
+   <button class="pill" style="margin-top:18px;width:100%;justify-content:center" data-x>Back to the Greenhouse</button>`;
+   body.querySelector("[data-x]").onclick=()=>{close();refresh();};});
+  refresh();}
+ function streakDrawer(){
+  const old=sec.querySelector(".backdrop");if(old)old.remove();
+  const b=h(`<div class="backdrop"><aside class="panel" role="dialog" aria-modal="true" aria-label="Daily streak">
+  <div class="p-head"><div><p class="k">Grow a little, every day</p><h2>Daily streak</h2></div><button class="x" aria-label="Close">×</button></div>
+  <div class="streak-hero"><span class="flame">🔥</span><div><b>12 days</b><small>3 more days to the 15-day milestone badge</small></div></div>
+  <div class="mtrack"><span style="width:80%"></span></div><div class="mlab"><span>7 ✔</span><span>15 · 80%</span></div>
+  <div class="chart"><h4>Growth rings — your 8 weeks <span>💧 drops · 🥕 carrots<span class="newtag">NEW</span></span></h4>${dualChart(MY8_D,MY8_C)}
+  <div class="legend"><span><i style="background:#3b8dce"></i>Drops</span><span><i style="background:#ef8c32"></i>Carrots</span></div></div>
+  <div class="chart"><h4>This week, day by day<span class="newtag">NEW</span></h4>${bars7(MY_DROPS,"#3b8dce","Drops this week")}${bars7(MY_CARROTS,"#ef8c32","Carrots this week")}</div></aside></div>`);
+  sec.querySelector(".lg").appendChild(b);
+  b.querySelector(".x").onclick=()=>b.remove();
+  b.addEventListener("mousedown",e=>{if(e.target===b)b.remove();});}
+ sec.addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(!t)return;
+  if(t.dataset.open==="league")room();
+  if(t.dataset.open==="streak")streakDrawer();
+  if(t.dataset.open==="challenge"){room();}
+ });
+ sec.dataset.ready="1";
+})();
+
+/* ---- tabs + deep links (#d1, #d2+league, #d3+streak ...) ---- */
+function activate(id,open){
+ document.querySelectorAll(".design").forEach(s=>s.hidden=s.id!==id);
+ document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-current",t.dataset.d===id?"true":"false"));
+ if(open){const sec=document.getElementById(id);const btn=sec.querySelector(`[data-open="${open}"]`);if(btn)setTimeout(()=>btn.click(),60);}}
+document.getElementById("tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;
+ activate(t.dataset.d);try{history.replaceState(null,"","#"+t.dataset.d);}catch(_){}});
+(function(){const m=(location.hash||"").replace("#","").split("+");const id=["d1","d2","d3"].includes(m[0])?m[0]:"d1";
+ activate(id,m[1]);})();
+</script>
+</body>
+</html>
