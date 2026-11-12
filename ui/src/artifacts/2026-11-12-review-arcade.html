@@ -493,7 +493,7 @@ function endGame(extra){
   $("gProg").textContent="Done";
   $("gDots").innerHTML="";
   $("gBody").innerHTML=`<div class="gend">
-    <div style="font-size:2.4rem">🌻</div>
+    <div><svg viewBox="0 0 48 48" width="44" height="44" role="img" aria-label="Flower"><g stroke="#5a9e5b" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M24 44 V26"/><path d="M24 34 q-8 -1 -10 -9 q9 1 10 9"/><path d="M24 32 q8 -1 10 -9 q-9 1 -10 9"/></g><g fill="#e8a13c"><circle cx="24" cy="14" r="5"/><circle cx="31" cy="19" r="5"/><circle cx="17" cy="19" r="5"/><circle cx="28" cy="25" r="5"/><circle cx="20" cy="25" r="5"/></g><circle cx="24" cy="20" r="6" fill="#a74131"/></svg></div>
     <div class="big">${G.score} / 10 correct</div>
     <p>${extra||""}</p>
     <p>This is a design study with demo questions: no progress is saved and no drops or carrots are awarded.</p>
