@@ -207,7 +207,7 @@ const QUESTIONS=[
  {q:"Which instrument has 88 keys?",a:"PIANO",choices:["Piano","Guitar","Violin","Flute"]},
  {q:"Which season comes right after summer?",a:"AUTUMN",choices:["Autumn","Spring","Winter","Monsoon"]}
 ];
-const XW_SEED=213; /* verified: all 10 words interlock in a 9x14 grid */
+const XW_SEED=982; /* verified: deterministic shuffle, all 10 words interlock, single connected 9x11 grid, 9 crossings */
 </script>
 <script>
 /* ---------- 32 mini-games ---------- */
@@ -645,7 +645,8 @@ function xwLayout(){
   let lay=null;
   for(let seed=XW_SEED;seed<XW_SEED+400&&!lay;seed++){
     const r=rng(seed);
-    const order=[...words].sort(()=>r()-0.5);
+    const order=[...words];
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(r()*(i+1));const t=order[i];order[i]=order[j];order[j]=t;}
     lay=tryLayout(order);
   }
   lay=lay||tryLayout(words);
