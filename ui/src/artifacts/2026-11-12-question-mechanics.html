@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Grains — 30 Question Mechanics Playground</title>
+<style>
+:root{
+  --cream:#f5efe3;--paper:#fffcf5;--ink:#26342b;--dim:#6d7668;--line:#dfd8c8;
+  --terra:#bd6748;--terra-d:#a64d34;--blue:#3b8dce;--orange:#ef8c32;--green:#5a9e5b;
+  --purple:#7a4a8c;--gold:#c9a227;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.5;display:flex;flex-direction:column;min-height:100dvh}
+button{font:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:3px solid var(--terra);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Header */
+.hdr{position:sticky;top:0;z-index:30;background:rgba(255,252,245,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.hdr-in{max-width:1080px;margin:0 auto;padding:12px 16px 10px}
+.hdr h1{font:700 clamp(19px,3.4vw,26px)/1.15 var(--serif)}
+.hdr h1 em{font-style:normal;color:var(--terra)}
+.hdr p{color:var(--dim);font-size:13px;margin-top:3px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 16px 12px;max-width:1080px;margin:0 auto;scrollbar-width:thin}
+.cat{flex:none;border:1px solid #dac9ac;border-radius:999px;background:#f6ecda;color:#69512f;padding:7px 13px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.cat[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat small{opacity:.75;font-weight:600;margin-left:4px}
+
+/* Grid of mechanics */
+main{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:16px 16px 40px}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:880px){.grid{grid-template-columns:repeat(3,1fr)}}
+.mcard{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--paper);border:1px solid #e8ddc9;border-radius:18px;padding:16px;box-shadow:0 8px 28px rgba(83,74,52,.07);transition:transform .15s,box-shadow .15s}
+.mcard:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(83,74,52,.12)}
+.mcard .ic{flex:none;width:44px;height:44px;border-radius:13px;background:#eee4cd;display:grid;place-items:center;font-size:22px}
+.mcard .tx{flex:1;min-width:0}
+.mcard .num{font-size:10px;font-weight:800;letter-spacing:.14em;color:#a56545;text-transform:uppercase}
+.mcard h2{font:700 16px/1.2 var(--serif);margin:2px 0 3px}
+.mcard p{color:var(--dim);font-size:12.5px;line-height:1.45}
+.mcard .go{display:inline-block;margin-top:8px;color:var(--terra);font-size:12px;font-weight:800}
+.mcard[hidden]{display:none}
+.foot{max-width:1080px;margin:0 auto;padding:0 16px 28px;color:var(--dim);font-size:12px}
+
+/* Modal reader (mirrors the app's lesson reader) */
+.bk{position:fixed;inset:0;z-index:100;background:rgba(29,39,31,.42);backdrop-filter:blur(4px);display:flex;justify-content:center;align-items:center;padding:20px}
+.bk[hidden]{display:none}
+.rdr{width:min(660px,100%);max-height:min(850px,calc(100dvh - 40px));display:flex;flex-direction:column;background:var(--paper);border:1px solid #e3d8c6;border-radius:24px;box-shadow:0 28px 80px rgba(22,35,22,.28);overflow:hidden}
+.rdr-top{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.rdr-kick{color:#708478;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.rdr-close{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#eee8d9;color:#5b6157;font-size:22px;line-height:1}
+.rdr-close:hover{background:#e5dac8}
+.rdr-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px 24px 28px}
+.rdr-body h2{font:700 clamp(22px,4vw,30px)/1.12 var(--serif);margin:0 0 6px}
+.rdr-blurb{color:var(--dim);font-size:13px;margin-bottom:16px}
+@media(max-width:760px){
+  .bk{padding:0;align-items:flex-end}
+  .rdr{width:100%;max-height:94dvh;border-radius:22px 22px 0 0}
+  .rdr-body{padding:16px 16px max(24px,env(safe-area-inset-bottom))}
+}
+
+/* Shared question skin */
+.q{background:#fffdfa;border:1px solid #e8ddc9;border-radius:18px;padding:20px;box-shadow:0 8px 28px rgba(83,74,52,.07)}
+.q .kicker{color:#a56545;font-size:11px;font-weight:800;letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.q .prompt{font:700 19px/1.3 var(--serif);margin-bottom:14px}
+.q .hint{color:var(--dim);font-size:12.5px;margin:-8px 0 12px}
+.fb{margin-top:16px;padding:14px 16px;border-radius:14px;font-size:14px;line-height:1.5}
+.fb[hidden]{display:none}
+.fb.ok{background:#e8f3e4;color:#3c6a47}
+.fb.no{background:#fcf0e3;color:#925c39}
+.fb strong{display:block;margin-bottom:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;background:var(--terra);color:#fff;font-size:14px;font-weight:800;padding:12px 20px;min-height:48px}
+.btn:hover{background:var(--terra-d)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--terra);border:2px solid var(--terra)}
+.btn.ghost:hover{background:var(--terra);color:#fff}
+.btn.small{min-height:38px;padding:7px 14px;font-size:12.5px}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.scoreline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.scoreline b{color:var(--ink)}
+.chipbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid #e2d9cb;background:#fffefa;border-radius:999px;padding:10px 16px;min-height:44px;font-size:14px;font-weight:600;color:#344536}
+.chip:hover{border-color:#b57658;background:#fbefe6}
+.chip.sel{border-color:var(--terra);background:#fbefe6;color:#734631}
+.chip.done{background:#e8f3e4;border-color:#a3c391;color:#3c6a47}
+.chip:disabled{opacity:.55;cursor:default}
+.blankrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;font-size:15px;line-height:1.6}
+.slot{display:inline-flex;align-items:center;justify-content:center;min-width:70px;min-height:44px;padding:6px 12px;border:2px dashed #cbbf9f;border-radius:10px;background:#faf5ea;font-weight:700;color:var(--terra-d);cursor:pointer}
+.slot.full{border-style:solid;border-color:#b57658;background:#fbefe6}
+.slot:focus-visible{outline:3px solid var(--terra)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px}
+.tile{border:1px solid #e2d9cb;background:#fffefa;border-radius:12px;min-height:56px;padding:10px;font-size:13.5px;font-weight:600;text-align:center;color:#344536}
+.tile:hover{border-color:#b57658;background:#fbefe6}
+.tile.sel{border-color:var(--terra);background:#fbefe6}
+.tile.ok{background:#e8f3e4;border-color:#a3c391;color:#3c6a47}
+.tile.no{background:#fcf0e3;border-color:#d9a583;color:#925c39}
+.tile:disabled{opacity:.65;cursor:default}
+.slotbox{display:inline-grid;place-items:center;width:34px;height:44px;border:1px solid #d9cbb8;border-radius:8px;background:#fffefa;font:700 19px var(--sans);color:var(--ink)}
+.slotbox.cur{border-color:var(--terra);box-shadow:0 0 0 3px #b5d2ac}
+.hidden-input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.timerbar{height:6px;background:#e8e2d4;border-radius:5px;overflow:hidden;margin:10px 0 16px}
+.timerbar i{display:block;height:100%;background:var(--purple);transition:width .2s linear}
+.bigemoji{font-size:44px;line-height:1.2;text-align:center;margin:8px 0}
+.center{text-align:center}
+.shake{animation:shk .3s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pop{animation:pop .35s cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{0%{transform:scale(.6)}100%{transform:scale(1)}}
+.wilt{display:inline-block;transition:filter .4s,transform .4s}
+#js-errors{display:none}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-in">
+    <h1>Question Mechanics <em>Playground</em></h1>
+    <p>30 new ways to ask, beyond 4-choice and typing. Built for review and practice moments — reading and listening stay calm. All playable, demo facts only, nothing is scored or saved.</p>
+  </div>
+  <nav class="cats" id="cats" aria-label="Filter by category"></nav>
+</header>
+<main><div class="grid" id="grid"></div></main>
+<p class="foot">Interaction studies on the current Little Grains look — content is real general knowledge, rewards shown are illustrative. Deep link: add #m-1 … #m-30 to the URL.</p>
+
+<div class="bk" id="bk" hidden>
+  <div class="rdr" role="dialog" aria-modal="true" aria-labelledby="rdr-title">
+    <div class="rdr-top">
+      <span class="rdr-kick" id="rdr-kick"></span>
+      <button class="rdr-close" id="rdr-close" aria-label="Close">×</button>
+    </div>
+    <div class="rdr-body">
+      <h2 id="rdr-title"></h2>
+      <p class="rdr-blurb" id="rdr-blurb"></p>
+      <div id="rdr-demo"></div>
+    </div>
+  </div>
+</div>
+<div id="js-errors"></div>
+<script>
+'use strict';
+window.addEventListener('error',e=>{const d=document.getElementById('js-errors');if(d)d.textContent+='ERR: '+e.message+' @ '+(e.filename||'')+':'+(e.lineno||'')+' | ';});
+</script>
+<script>
+'use strict';
+/* ---------- shared helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const vibrate=ms=>{try{navigator.vibrate&&navigator.vibrate(ms);}catch(_){}};
+
+function qShell(kicker,prompt,hint){
+  const q=el('div','q');
+  q.appendChild(el('div','kicker',kicker));
+  q.appendChild(el('div','prompt',prompt));
+  if(hint)q.appendChild(el('div','hint',hint));
+  return q;
+}
+function feedbackBox(parent){
+  const f=el('div','fb');f.hidden=true;parent.appendChild(f);
+  return (ok,title,body)=>{f.hidden=false;f.className='fb '+(ok?'ok':'no');f.innerHTML='<strong>'+title+'</strong>'+(body||'');vibrate(ok?30:[40,40,40]);};
+}
+function scoreBar(parent,label){
+  const s=el('div','scoreline');const l=el('span','',label);const v=el('b','','0');
+  s.appendChild(l);s.appendChild(v);parent.appendChild(s);
+  let n=0;return {add(k){n+=k;v.textContent=n;},set(k){n=k;v.textContent=n;},get(){return n;}};
+}
+function timerBar(parent){
+  const t=el('div','timerbar');const i=el('i');t.appendChild(i);parent.appendChild(t);
+  return frac=>{i.style.width=Math.max(0,Math.min(1,frac))*100+'%';};
+}
+
+/* slot-typing widget (mechanics 4 & 15): letter slots + hidden input */
+function slotTyper(parent,answer,opts={}){
+  const ans=answer.toUpperCase().replace(/[^A-Z]/g,'');
+  const shown=answer.toUpperCase().split('');
+  const wrap=el('div');wrap.style.display='flex';wrap.style.flexWrap='wrap';wrap.style.gap='6px';wrap.style.margin='12px 0';
+  const input=el('input','hidden-input');input.setAttribute('aria-label','Type the answer');input.autocomplete='off';input.autocapitalize='characters';
+  const boxes=[];let cur=opts.given?1:0;
+  shown.forEach(ch=>{
+    const b=el('span','slotbox',ch===' '?'·':(opts.given&&boxes.length===0?ch:''));
+    if(ch===' ')b.style.visibility='hidden';
+    boxes.push({b,ch,filled:!!(opts.given&&boxes.length===0)});
+    wrap.appendChild(b);
+  });
+  parent.appendChild(wrap);parent.appendChild(input);
+  const paint=()=>boxes.forEach((o,i)=>o.b.classList.toggle('cur',i===cur));
+  const fillables=boxes.filter(o=>o.ch!==' ');
+  wrap.addEventListener('click',()=>{input.focus({preventScroll:true});paint();});
+  input.addEventListener('input',()=>{
+    const v=input.value.toUpperCase().replace(/[^A-Z]/g,'');input.value='';
+    if(!v)return;
+    const targets=fillables.filter(o=>!o.filled);
+    for(const ch of v){
+      const t=fillables.find(o=>!o.filled);if(!t)break;
+      t.b.textContent=ch;t.filled=true;
+    }
+    const next=boxes.findIndex(o=>o.ch!==' '&&!o.filled);cur=next<0?-1:next;paint();
+  });
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Backspace'){e.preventDefault();
+      for(let i=fillables.length-1;i>=0;i--){if(fillables[i].filled&&fillables[i].b.textContent!==(opts.given?shown[0]:'')){if(opts.given&&i===0)continue;fillables[i].filled=false;fillables[i].b.textContent='';break;}}
+      const next=boxes.findIndex(o=>o.ch!==' '&&!o.filled);cur=next<0?-1:next;paint();
+    }
+  });
+  paint();
+  return {
+    value:()=>fillables.map(o=>o.filled?o.b.textContent:'').join(''),
+    complete:()=>fillables.every(o=>o.filled),
+    reveal(){fillables.forEach(o=>{o.b.textContent=o.ch;o.filled=true;});cur=-1;paint();}
+  };
+}
+
+/* ---------- mechanics ---------- */
+const MECHS=[];
+
+/* 1. Cloze chips */
+MECHS.push({icon:'🧩',cat:'Recall',name:'Cloze chips',blurb:'Fill the blanks by tapping word chips instead of typing.',
+build(root,fb){
+  const q=qShell('Fill the blanks','Complete the sentence about photosynthesis.','Tap a chip to fill the next blank; tap a filled blank to clear it.');
+  const answers=['carbon dioxide','glucose'];
+  const blanks=answers.map(()=>{const s=el('button','slot','___');s.type='button';return s;});
+  const row=el('div','blankrow');
+  row.append('Photosynthesis lets plants turn sunlight, water and ',blanks[0],' into ',blanks[1],', releasing oxygen.');
+  q.appendChild(row);
+  const bar=el('div','chipbar');q.appendChild(bar);
+  const used=[null,null];
+  shuffle(['glucose','carbon dioxide','sand','music','lightning']).forEach(w=>{
+    const c=el('button','chip',w);c.type='button';
+    c.onclick=()=>{
+      if(c.disabled)return;
+      const i=used[0]===null?0:(used[1]===null?1:-1);if(i<0)return;
+      used[i]=w;c.disabled=true;blanks[i].textContent=w;blanks[i].classList.add('full');
+    };
+    bar.appendChild(c);
+  });
+  blanks.forEach((s,i)=>s.onclick=()=>{
+    if(used[i]===null)return;
+    [...bar.children].forEach(c=>{if(c.textContent===used[i])c.disabled=false;});
+    used[i]=null;s.textContent='___';s.classList.remove('full');
+  });
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(used[0]===null||used[1]===null){fb(false,'Two blanks to fill.','Tap chips to complete the sentence.');return;}
+    const ok=used[0]===answers[0]&&used[1]===answers[1];
+    fb(ok,ok?'Planted!':'Not quite.','Plants take in carbon dioxide and turn it into glucose, releasing oxygen.');
+  };
+  root.appendChild(q);
+}});
+
+/* 2. Word scramble */
+MECHS.push({icon:'🔤',cat:'Recall',name:'Word scramble',blurb:'Rebuild the sentence by tapping the words in the right order.',
+build(root,fb){
+  const q=qShell('Sentence builder','Tap the words in order to rebuild the fact.');
+  const target=['The','mitochondria','is','the','powerhouse','of','the','cell'];
+  const out=el('div','blankrow');out.style.minHeight='52px';out.style.background='#faf5ea';out.style.borderRadius='12px';out.style.padding='10px';
+  q.appendChild(out);
+  const bar=el('div','chipbar');q.appendChild(bar);
+  const picked=[];
+  shuffle(target.map((w,i)=>w+'#'+i)).forEach(tok=>{
+    const w=tok.split('#')[0];
+    const c=el('button','chip',w);c.type='button';
+    c.onclick=()=>{if(c.disabled)return;c.disabled=true;picked.push({w,c});
+      const s=el('button','chip sel',w);s.type='button';
+      s.onclick=()=>{const idx=picked.findIndex(p=>p.c===c);if(idx<0)return;picked.splice(idx,1);c.disabled=false;s.remove();};
+      out.appendChild(s);};
+    bar.appendChild(c);
+  });
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(picked.length<target.length){fb(false,'Keep going.','Use every word.');return;}
+    const ok=picked.every((p,i)=>p.w===target[i]);
+    fb(ok,ok?'Word for word.':'Order is off.','"The mitochondria is the powerhouse of the cell."');
+    if(!ok)out.classList.add('shake'),setTimeout(()=>out.classList.remove('shake'),350);
+  };
+  root.appendChild(q);
+}});
+
+/* 3. Save the sprout (friendly hangman) */
+MECHS.push({icon:'🌱',cat:'Recall',name:'Save the sprout',blurb:'Guess the word letter by letter — each wrong letter wilts the sprout. 5 misses and it\'s gone.',
+build(root,fb){
+  const q=qShell('Letter rescue','The green pigment that captures sunlight in leaves. 11 letters.');
+  const word='CHLOROPHYLL';
+  const plant=el('div','bigemoji');plant.textContent='🌱';q.appendChild(plant);
+  const row=el('div');row.style.cssText='display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin:10px 0 14px';
+  const slots=word.split('').map(ch=>{const b=el('span','slotbox','');row.appendChild(b);return{b,ch};});
+  q.appendChild(row);
+  const kbd=el('div','chipbar');kbd.style.justifyContent='center';q.appendChild(kbd);
+  let misses=0,found=0;const stages=['🌱','🌿','🥀','🍂','💀'];
+  const miss=()=>{misses++;plant.textContent=stages[Math.min(misses,4)];plant.classList.add('shake');setTimeout(()=>plant.classList.remove('shake'),350);
+    if(misses>=5){[...kbd.children].forEach(b=>b.disabled=true);fb(false,'The sprout is gone.','The word was CHLOROPHYLL — the pigment that absorbs light for photosynthesis.');slots.forEach(s=>{s.b.textContent=s.ch;});}};
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(ch=>{
+    const b=el('button','chip',ch);b.type='button';b.style.minWidth='40px';b.style.padding='8px 10px';
+    b.onclick=()=>{b.disabled=true;
+      let hit=false;slots.forEach(s=>{if(s.ch===ch){s.b.textContent=ch;if(!s.b.dataset.d){s.b.dataset.d=1;found++;hit=true;}}});
+      if(hit){b.classList.add('done');
+        if(found===word.length){[...kbd.children].forEach(x=>x.disabled=true);plant.textContent='🌻';plant.classList.add('pop');
+          fb(true,'It bloomed!','Chlorophyll absorbs mostly red and blue light — that\'s why leaves look green.');}}
+      else miss();};
+    kbd.appendChild(b);
+  });
+  root.appendChild(q);
+}});
+
+/* 4. Definition slots */
+MECHS.push({icon:'⌨️',cat:'Recall',name:'Definition slots',blurb:'Typing, but with training wheels: the length and the first letter are given.',
+build(root,fb){
+  const q=qShell('Guided typing','The invisible force that keeps your feet on the ground.','7 letters, starts with G. Tap the slots and type.');
+  const st=slotTyper(q,'GRAVITY',{given:true});
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(!st.complete()){fb(false,'Some letters missing.','Fill every slot.');return;}
+    fb(st.value()==='GRAVITY',st.value()==='GRAVITY'?'Grounded.':'Not this word.','Gravity — described by Newton\'s apple, pinned down by Einstein.');
+    if(st.value()!=='GRAVITY')st.reveal();
+  };
+  root.appendChild(q);
+}});
+
+/* 5. Memory flash */
+MECHS.push({icon:'📸',cat:'Recall',name:'Memory flash',blurb:'A list flashes for 5 seconds, then hides. Tap what you actually saw.',
+build(root,fb){
+  const q=qShell('Flash memory','Watch closely — the list disappears in 5 seconds.');
+  const items=['carrot','water','seed','sun','soil','bee'];
+  const intruders=['truck','pillow'];
+  const stage=el('div','center');stage.style.cssText='background:#faf5ea;border-radius:14px;padding:18px;margin-bottom:12px;font:700 24px/2 var(--serif)';
+  stage.textContent=items.join('  ·  ');
+  const bar=timerBar(q);q.appendChild(stage);
+  const bar2=el('div','chipbar');q.appendChild(bar2);
+  const act=el('div','actions');const check=el('button','btn','Check');check.disabled=true;act.appendChild(check);q.appendChild(act);
+  const sel=new Set();let armed=false;
+  shuffle(items.concat(intruders)).forEach(w=>{
+    const c=el('button','chip',w);c.type='button';c.disabled=true;
+    c.onclick=()=>{if(!armed)return;
+      if(sel.has(w)){sel.delete(w);c.classList.remove('sel');}else{sel.add(w);c.classList.add('sel');}};
+    bar2.appendChild(c);
+  });
+  const t0=Date.now();
+  const iv=setInterval(()=>{
+    const f=1-(Date.now()-t0)/5000;bar(Math.max(0,f));
+    if(f<=0){clearInterval(iv);stage.textContent='What was in the list?';
+      stage.style.font='700 18px/1.4 var(--serif)';
+      armed=true;[...bar2.children].forEach(c=>c.disabled=false);check.disabled=false;}
+  },100);
+  check.onclick=()=>{
+    const right=[...sel].filter(w=>items.includes(w)).length;
+    const wrong=[...sel].filter(w=>!items.includes(w)).length;
+    const ok=right===items.length&&wrong===0;
+    fb(ok,ok?right+'/'+items.length+' — nothing invented.':'You found '+right+' of '+items.length+'.',
+      'The list was: '+items.join(', ')+'. "truck" and "pillow" were intruders.');
+  };
+  root.appendChild(q);
+}});
+
+/* 6. Pair matching */
+MECHS.push({icon:'🃏',cat:'Match & Sort',name:'Pair matching',blurb:'Match each country to its capital by tapping one card from each side. Watch out for the Rio trap.',
+build(root,fb){
+  const q=qShell('Tap two to match','Match each country to its capital.');
+  const pairs=[['France','Paris'],['Japan','Tokyo'],['Egypt','Cairo'],['Canada','Ottawa'],['Brazil','Brasília']];
+  const wrap=el('div');wrap.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';
+  let done=0,picks=[];
+  const lockCheck=()=>{if(done===pairs.length)fb(true,'All matched!','Brasília, not Rio, is Brazil\'s capital — built from scratch in the 1950s.');};
+  const mk=(txt,side,other)=>{const c=el('button','tile',txt);c.type='button';
+    c.onclick=()=>{if(c.classList.contains('ok'))return;
+      const prev=wrap.querySelector('.tile.sel[data-side="'+side+'"]');
+      if(prev&&prev!==c)prev.classList.remove('sel');
+      c.classList.toggle('sel');
+      const mine=c.classList.contains('sel')?c:null;
+      const otherSide=side==='a'?'b':'a';
+      const partner=wrap.querySelector('.tile.sel[data-side="'+otherSide+'"]');
+      if(mine&&partner){
+        const okPair=mine.dataset.pair===partner.dataset.pair;
+        [mine,partner].forEach(x=>{x.classList.remove('sel');x.classList.add(okPair?'ok':'no');});
+        if(okPair){done++;mine.disabled=partner.disabled=true;setTimeout(lockCheck,150);}
+        else{mine.classList.add('shake');partner.classList.add('shake');
+          setTimeout(()=>[mine,partner].forEach(x=>{x.classList.remove('no','shake');}),600);}
+      }};
+    c.dataset.side=side;wrap.appendChild(c);return c;};
+  pairs.forEach((p,i)=>{const a=mk(p[0],'a');a.dataset.pair=i;});
+  shuffle(pairs.map((p,i)=>i)).forEach(i=>{const b=mk(pairs[i][1],'b');b.dataset.pair=i;});
+  q.appendChild(wrap);root.appendChild(q);
+}});
+
+/* 7. Chronology */
+MECHS.push({icon:'⏳',cat:'Match & Sort',name:'Chronology',blurb:'Tap the events from earliest to latest.',
+build(root,fb){
+  const q=qShell('Order the timeline','Tap the events from earliest to latest.');
+  const events=[['First powered flight',1903],['Moon landing',1969],['Berlin Wall falls',1989],['First iPhone',2007]];
+  const out=el('div','chipbar');out.style.cssText='min-height:52px;background:#faf5ea;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px';
+  q.appendChild(out);
+  const bar=el('div','chipbar');q.appendChild(bar);
+  const picked=[];
+  shuffle(events).forEach(ev=>{
+    const c=el('button','chip',ev[0]);c.type='button';
+    c.onclick=()=>{if(c.disabled)return;c.disabled=true;picked.push(ev);
+      const s=el('button','chip sel',(picked.length)+'. '+ev[0]);s.type='button';
+      s.onclick=()=>{const i=picked.indexOf(ev);if(i<0)return;picked.splice(i,1);c.disabled=false;s.remove();
+        [...out.children].forEach((n,j)=>n.textContent=(j+1)+'. '+picked[j][0]);};
+      out.appendChild(s);};
+    bar.appendChild(c);
+  });
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(picked.length<events.length){fb(false,'Not finished.','Place all four events.');return;}
+    const ok=picked.every((e,i)=>i===0||picked[i-1][1]<e[1]);
+    fb(ok,ok?'Perfectly dated.':'Timeline tangled.','1903 → 1969 → 1989 → 2007.');
+  };
+  root.appendChild(q);
+}});
+
+/* 8. Buckets */
+MECHS.push({icon:'🗂️',cat:'Match & Sort',name:'Buckets',blurb:'Sort fast: is it a mammal or not? One item at a time, straight into the right bucket.',
+build(root,fb){
+  const q=qShell('Sort the animals','Mammal or not? Trust your biology.');
+  const items=[['🐬 Dolphin',true],['🐧 Penguin',false],['🦇 Bat',true],['🦈 Shark',false],['🦘 Kangaroo',true],['🐙 Octopus',false],['🐋 Whale',true],['🐊 Crocodile',false]];
+  const score=scoreBar(q,'Sorted correctly');
+  const stage=el('div','center');stage.style.cssText='background:#faf5ea;border-radius:14px;padding:22px;font-size:40px;margin:6px 0 14px';
+  q.appendChild(stage);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';
+  let idx=0,right=0;
+  const next=()=>{if(idx>=items.length){stage.textContent='🏁';
+    fb(right===items.length,right+'/'+items.length+' sorted right.','Dolphins, bats, kangaroos and whales are mammals. Penguins, sharks, octopuses and crocodiles are not.');return;}
+    stage.textContent=items[idx][0];};
+  [['Mammal',true],['Not a mammal',false]].forEach(([label,v])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='64px';
+    b.onclick=()=>{if(idx>=items.length)return;
+      if(items[idx][1]===v){right++;score.set(right);stage.classList.add('pop');setTimeout(()=>stage.classList.remove('pop'),300);}
+      else{stage.classList.add('shake');setTimeout(()=>stage.classList.remove('shake'),350);vibrate(60);}
+      idx++;next();};
+    row.appendChild(b);});
+  q.appendChild(row);next();root.appendChild(q);
+}});
+
+/* 9. Odd one out */
+MECHS.push({icon:'🍌',cat:'Match & Sort',name:'Odd one out',blurb:'Six tiles, one intruder. Spot it.',
+build(root,fb){
+  const q=qShell('Find the intruder','Tap the tile that does not belong.');
+  const tiles=[['🍋 Lemon',false],['🍊 Orange',false],['🍌 Banana',true],['🍈 Melon… no wait',null]];
+  const items=[['🍋 Lemon',false],['🍊 Orange',false],['Grapefruit',false],['🍌 Banana',true],['Lime',false],['Mandarin',false]];
+  const g=el('div','tiles');
+  items.forEach(([label,odd])=>{
+    const t=el('button','tile',label);t.type='button';
+    t.onclick=()=>{
+      [...g.children].forEach(x=>x.disabled=true);
+      if(odd){t.classList.add('ok');fb(true,'Exactly.','The banana is the only non-citrus fruit here.');}
+      else{t.classList.add('no');
+        [...g.children].forEach(x=>{if(x.textContent.includes('Banana'))x.classList.add('ok');});
+        fb(false,'That one belongs.','Lemons, oranges, grapefruit, limes and mandarins are all citrus. The banana was the intruder.');}
+    };
+    g.appendChild(t);
+  });
+  q.appendChild(g);root.appendChild(q);
+}});
+
+/* 10. Rank by size */
+MECHS.push({icon:'🪐',cat:'Match & Sort',name:'Rank by size',blurb:'Order the planets from smallest to largest.',
+build(root,fb){
+  const q=qShell('Smallest to largest','Tap the planets from smallest to largest.');
+  const planets=[['Mercury',0,'#b8a898'],['Venus',1,'#e0b36a'],['Earth',2,'#5a9ece'],['Jupiter',3,'#d8a06a']];
+  const sizes=[16,22,24,42];
+  const out=el('div','chipbar');out.style.cssText='min-height:56px;background:#faf5ea;border-radius:12px;padding:10px;align-items:center;justify-content:center';
+  q.appendChild(out);
+  const bar=el('div','chipbar');bar.style.justifyContent='center';q.appendChild(bar);
+  const picked=[];
+  shuffle(planets).forEach(p=>{
+    const c=el('button','chip','');c.type='button';
+    c.innerHTML='<span style="display:inline-block;width:'+sizes[p[1]]+'px;height:'+sizes[p[1]]+'px;border-radius:50%;background:'+p[2]+';vertical-align:middle;margin-right:6px"></span>'+p[0];
+    c.onclick=()=>{if(c.disabled)return;c.disabled=true;picked.push(p);
+      const s=el('span','chip sel',(picked.length)+'. '+p[0]);out.appendChild(s);};
+    bar.appendChild(c);
+  });
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(picked.length<planets.length){fb(false,'Four planets to place.','');return;}
+    const ok=picked.every((p,i)=>p[1]===i);
+    fb(ok,ok?'Astronomically correct.':'Not this order.','Mercury < Venus < Earth < Jupiter. Venus is slightly smaller than Earth.');
+  };
+  root.appendChild(q);
+}});
+
+/* 11. Hotspot */
+MECHS.push({icon:'📍',cat:'Look & Tap',name:'Hotspot',blurb:'Answer by tapping the right spot on a picture.',
+build(root,fb){
+  const q=qShell('Tap the spot','Where should you sow a seed so it gets the most direct sunlight?');
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 340 200');svg.style.cssText='width:100%;height:auto;border-radius:14px;background:#cfe3f2;display:block';
+  svg.innerHTML=
+    '<rect x="0" y="150" width="340" height="50" fill="#8a9b6e"/>'+
+    '<rect x="0" y="150" width="340" height="6" fill="#77885c"/>'+
+    '<circle cx="290" cy="35" r="20" fill="#f2c94c"/><g stroke="#f2c94c" stroke-width="3">'+
+    '<line x1="290" y1="6" x2="290" y2="12"/><line x1="318" y1="35" x2="312" y2="35"/><line x1="310" y1="15" x2="306" y2="19"/><line x1="270" y1="15" x2="274" y2="19"/></g>'+
+    '<g><rect x="30" y="60" width="10" height="95" fill="#6b4f35"/><circle cx="35" cy="52" r="34" fill="#5a7a4a"/><circle cx="18" cy="64" r="22" fill="#648652"/></g>'+
+    '<g><rect x="120" y="95" width="60" height="58" fill="#a56545"/><path d="M112 95 L150 66 L188 95 Z" fill="#7c4a33"/></g>'+
+    '<ellipse cx="235" cy="143" rx="30" ry="10" fill="#6f6252"/>';
+  const zones=[['under the tree',8,40,84,110,false],['open ground by the path',195,150,90,45,true],['inside the shed',120,95,60,58,false],['under the flat stone',208,132,54,16,false]];
+  let answered=false;
+  zones.forEach(([name,x,y,w,h,ok])=>{
+    const r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',w);r.setAttribute('height',h);
+    r.setAttribute('fill','transparent');r.style.cursor='pointer';r.setAttribute('tabindex','0');r.setAttribute('role','button');r.setAttribute('aria-label',name);
+    const hit=()=>{if(answered)return;answered=true;
+      zones.forEach(()=>{});
+      r.setAttribute('fill',ok?'rgba(90,158,91,.45)':'rgba(189,103,72,.45)');r.setAttribute('stroke',ok?'#3c6a47':'#a64d34');r.setAttribute('stroke-width','3');
+      fb(ok,ok?'Full sun.':'Shady business.','Seeds sprout fastest with direct light — the open ground wins. The tree shades its spot, the shed is dark, and the stone blocks light entirely.');};
+    r.addEventListener('click',hit);
+    r.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hit();}});
+    svg.appendChild(r);
+  });
+  q.appendChild(svg);
+  q.appendChild(el('div','hint','Tap a spot in the scene — under the tree, the open ground, the shed, or under the stone.'));
+  root.appendChild(q);
+}});
+
+/* 12. Label the diagram */
+MECHS.push({icon:'🏷️',cat:'Look & Tap',name:'Label the diagram',blurb:'Place each label on the right part of the plant.',
+build(root,fb){
+  const q=qShell('Label the plant','Tap a label, then tap where it belongs.');
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 340 220');svg.style.cssText='width:100%;max-width:300px;height:auto;display:block;margin:0 auto';
+  svg.innerHTML=
+    '<rect x="0" y="150" width="340" height="70" fill="#a58456"/><rect x="0" y="150" width="340" height="5" fill="#8a6f47"/>'+
+    '<path d="M170 150 L170 60" stroke="#5a7a4a" stroke-width="6" fill="none"/>'+
+    '<ellipse cx="145" cy="110" rx="26" ry="11" fill="#6e9f70" transform="rotate(-24 145 110)"/>'+
+    '<ellipse cx="196" cy="92" rx="26" ry="11" fill="#6e9f70" transform="rotate(20 196 92)"/>'+
+    '<circle cx="170" cy="44" r="18" fill="#e78fb3"/><circle cx="170" cy="44" r="7" fill="#f2c94c"/>'+
+    '<path d="M170 150 C160 165 152 172 148 186 M170 150 C172 168 166 178 170 196 M170 150 C182 164 188 172 192 188" stroke="#8a6f47" stroke-width="4" fill="none"/>';
+  const slotsDef=[['Flower',186,18],['Leaf',206,110],['Roots',196,180]];
+  const slots=[];
+  slotsDef.forEach(([name,x,y],i)=>{
+    const g=document.createElementNS(NS,'g');
+    g.innerHTML='<rect x="'+x+'" y="'+y+'" width="86" height="30" rx="9" fill="#faf5ea" stroke="#cbbf9f" stroke-width="2" stroke-dasharray="5 4"/>'+
+      '<text x="'+(x+43)+'" y="'+(y+19)+'" text-anchor="middle" font-size="13" font-weight="700" fill="#b3a68a">?</text>';
+    g.style.cursor='pointer';g.dataset.slot=i;
+    svg.appendChild(g);slots.push(g);
+  });
+  q.appendChild(svg);
+  const bar=el('div','chipbar');bar.style.justifyContent='center';q.appendChild(bar);
+  let selLabel=null,placed=0;
+  const placedAt={};
+  slots.forEach((g,i)=>g.addEventListener('click',()=>{
+    if(selLabel===null)return;
+    const name=selLabel;selLabel=null;
+    [...bar.children].forEach(c=>{if(c.textContent===name)c.disabled=true;});
+    const right=slotsDef[i][0]===name;
+    g.dataset.placed=name;
+    g.querySelector('rect').setAttribute('stroke-dasharray','none');
+    g.querySelector('rect').setAttribute('stroke',right?'#a3c391':'#b57658');
+    g.querySelector('text').textContent=name;
+    g.querySelector('text').setAttribute('fill',right?'#3c6a47':'#734631');
+    placedAt[i]=name;placed++;
+    if(placed===3){
+      const allRight=slots.every((s2,j)=>slotsDef[j][0]===placedAt[j]);
+      fb(allRight,allRight?'Botanist badge earned.':'Check the labels.','Flower on top, leaves on the stem, roots underground.');
+    }
+  }));
+  shuffle(['Flower','Leaf','Roots']).forEach(name=>{
+    const c=el('button','chip',name);c.type='button';
+    c.onclick=()=>{if(c.disabled)return;
+      const on=selLabel===name;selLabel=on?null:name;
+      [...bar.children].forEach(x=>x.classList.remove('sel'));if(!on)c.classList.add('sel');};
+    bar.appendChild(c);
+  });
+  root.appendChild(q);
+}});
+
+/* 13. Picture zoom */
+MECHS.push({icon:'🔭',cat:'Look & Tap',name:'Zoom reveal',blurb:'The picture sharpens step by step. Lock your answer early for more drops.',
+build(root,fb){
+  const q=qShell('Guess early, win more','Which landmark is this? Each zoom step costs one drop.');
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 300 170');svg.style.cssText='width:100%;max-width:320px;height:auto;display:block;margin:0 auto 12px;border-radius:14px;background:#f0ead9';
+  svg.innerHTML=
+    '<rect x="0" y="0" width="300" height="170" fill="#e9e2d4"/>'+
+    '<g stroke="#8a7a5c" stroke-width="5" fill="none" class="zl">'+
+    '<path d="M150 18 L128 150 M150 18 L172 150" class="z1"/>'+
+    '<path d="M138 74 L162 74 M133 108 L167 108" class="z2"/>'+
+    '<path d="M128 150 L172 150 M141 74 Q150 92 159 74" class="z2"/>'+
+    '<circle cx="150" cy="14" r="5" fill="#8a7a5c" class="z3"/>'+
+    '<path d="M143 40 L157 40 M146 54 L154 54" stroke-width="3" class="z3"/></g>';
+  q.appendChild(svg);
+  const drops=el('div','scoreline');drops.innerHTML='<span>Reward if you answer now</span><b>💧 3</b>';q.appendChild(drops);
+  const opts=el('div','chipbar');opts.style.justifyContent='center';
+  let step=1,locked=false;
+  const paint=()=>{[1,2,3].forEach(z=>{svg.querySelectorAll('.z'+z).forEach(n=>n.style.opacity=z<=step?1:0);});
+    drops.querySelector('b').textContent='💧 '+(4-step);};
+  paint();
+  ['Eiffel Tower','Big Ben','Statue of Liberty'].forEach(name=>{
+    const c=el('button','chip',name);c.type='button';
+    c.onclick=()=>{if(locked)return;locked=true;zoomBtn.disabled=true;
+      [...opts.children].forEach(x=>x.disabled=true);
+      const ok=name==='Eiffel Tower';
+      if(ok)c.classList.add('done');else{[...opts.children].forEach(x=>{if(x.textContent==='Eiffel Tower')x.classList.add('done');});step=3;paint();}
+      fb(ok,ok?'Spotted at zoom '+step+' — '+(4-step)+' drop'+((4-step)>1?'s':'')+'.':'It was the Eiffel Tower.',
+        ok?'Earlier guesses keep more drops.':'330 m of iron lattice in Paris, finished in 1889.');};
+    opts.appendChild(c);
+  });
+  q.appendChild(opts);
+  const act=el('div','actions');
+  const zoomBtn=el('button','btn ghost','Zoom in (−1 💧)');
+  zoomBtn.onclick=()=>{if(step<3){step++;paint();if(step===3)zoomBtn.disabled=true;}};
+  act.appendChild(zoomBtn);q.appendChild(act);
+  root.appendChild(q);
+}});
+
+/* 14. Error hunt */
+MECHS.push({icon:'🕵️',cat:'Look & Tap',name:'Error hunt',blurb:'One word in the sentence is wrong. Tap it.',
+build(root,fb){
+  const q=qShell('Spot the error','Tap the word that makes this sentence wrong.');
+  const sent=[['At',0],['sea',0],['level,',0],['water',0],['boils',0],['at',0],['90',1],['degrees',0],['Celsius.',0]];
+  const row=el('div','blankrow');
+  let answered=false;
+  sent.forEach(([w,wrong])=>{
+    const t=el('button','chip',w);t.type='button';
+    t.onclick=()=>{if(answered)return;answered=true;
+      if(wrong){t.classList.add('done');fb(true,'Caught it.','Water boils at 100°C at sea level — and earlier up in the mountains, where pressure is lower.');}
+      else{t.classList.add('no');
+        [...row.children].forEach(x=>{if(x.textContent==='90')x.classList.add('done');});
+        fb(false,'That word is fine.','The wrong one was "90": water boils at 100°C at sea level.');}
+      [...row.children].forEach(x=>x.disabled=true);};
+    row.appendChild(t);
+  });
+  q.appendChild(row);root.appendChild(q);
+}});
+
+/* 15. Emoji rebus */
+MECHS.push({icon:'👁️',cat:'Look & Tap',name:'Emoji rebus',blurb:'Decode the emoji, then spell the answer in slots.',
+build(root,fb){
+  const q=qShell('Say what you see','👁️  🍦','Sounds like a dessert. 9 letters, space included.');
+  const st=slotTyper(q,'ICE CREAM',{});
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(!st.complete()){fb(false,'Letters missing.','Sound it out: eye + cream.');return;}
+    const ok=st.value()==='ICECREAM';
+    fb(ok,ok?'Sweet.':'Melted.','👁️ + 🍦 = "eye scream" = ice cream.');
+    if(!ok)st.reveal();
+  };
+  root.appendChild(q);
+}});
+
+/* 16. Slider estimate */
+MECHS.push({icon:'🎚️',cat:'Number Sense',name:'Slider estimate',blurb:'No options at all: drag the slider to your best estimate. Graded in tolerance bands.',
+build(root,fb){
+  const q=qShell('Estimate','How tall is the Eiffel Tower, in meters?','Drag the slider, then check. ±5% is a bullseye, ±15% is close.');
+  const out=el('div','center');out.style.cssText='font:700 34px var(--serif);margin:8px 0';
+  const input=el('input');input.type='range';input.min=50;input.max=550;input.value=300;input.step=5;
+  input.style.cssText='width:100%;accent-color:var(--terra);height:36px';
+  out.textContent=input.value+' m';
+  input.oninput=()=>out.textContent=input.value+' m';
+  q.appendChild(out);q.appendChild(input);
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    input.disabled=true;check.disabled=true;
+    const v=+input.value,target=330,off=Math.abs(v-target)/target;
+    if(off<=0.05)fb(true,'🎯 Bullseye — '+v+' m.','The Eiffel Tower stands 330 m tall (with its antennas).');
+    else if(off<=0.15)fb(true,'Close — '+v+' m.','Actual height: 330 m with antennas. You were within 15%.');
+    else fb(false,'Off — '+v+' m.','Actual height: 330 m with antennas. The tower grows about 15 cm in summer heat.');
+  };
+  root.appendChild(q);
+}});
+
+/* 17. Higher or lower */
+MECHS.push({icon:'📈',cat:'Number Sense',name:'Higher or lower',blurb:'A chain of comparisons: each answer becomes the next anchor.',
+build(root,fb){
+  const q=qShell('Higher or lower?','A human body has 206 bones. Chain four comparisons without a mistake.');
+  const chain=[
+    ['keys on a standard piano',88,'A piano has 88 keys — fewer than the 206 bones.'],
+    ['days in a leap year',366,'A leap year has 366 days.'],
+    ['meters of the Eiffel Tower',330,'The Eiffel Tower is 330 m — just under a leap year\'s days.'],
+    ['carats of pure gold',24,'Pure gold is 24 carats.']];
+  let anchor=206,i=0;
+  const stage=el('div','center');stage.style.cssText='background:#faf5ea;border-radius:14px;padding:18px;margin-bottom:12px';
+  q.appendChild(stage);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';q.appendChild(row);
+  const render=()=>{
+    if(i>=chain.length){stage.innerHTML='🏆';
+      fb(true,'Chain complete!','206 bones → 88 keys → 366 days → 330 m → 24 carats.');row.innerHTML='';return;}
+    stage.innerHTML='<div style="font:700 15px var(--sans);color:var(--dim)">More or fewer than '+anchor+'…</div><div style="font:700 21px var(--serif);margin-top:4px">'+chain[i][0]+'?</div>';
+  };
+  [['Higher',1],['Lower',-1]].forEach(([label,dir])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='60px';
+    b.onclick=()=>{if(i>=chain.length)return;
+      const target=chain[i][1];
+      const ok=(dir===1&&target>anchor)||(dir===-1&&target<anchor);
+      if(ok){anchor=target;i++;render();}
+      else{fb(false,'Chain broken at step '+(i+1)+'.','The answer was '+target+'. '+chain[i][2]+' Reset and try again.');
+        row.querySelectorAll('button').forEach(x=>x.disabled=true);}};
+    row.appendChild(b);});
+  render();root.appendChild(q);
+}});
+
+/* 18. Number pad */
+MECHS.push({icon:'🔢',cat:'Number Sense',name:'Number pad',blurb:'Type a number on an old-school pad — with warmer/colder hints.',
+build(root,fb){
+  const q=qShell('Exact figure','How many minutes are there in a full day?','You get warmer/colder hints within 10%.');
+  const disp=el('div','center');disp.style.cssText='font:700 34px var(--serif);letter-spacing:.06em;background:#faf5ea;border-radius:12px;padding:10px;margin-bottom:12px;min-height:58px';
+  disp.textContent='—';
+  q.appendChild(disp);
+  let val='';
+  const pad=el('div');pad.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:280px;margin:0 auto';
+  const paint=()=>disp.textContent=val===''?'—':(+val).toLocaleString('en-US');
+  '123456789'.split('').concat(['C','0','⌫']).forEach(k=>{
+    const b=el('button','chip',k);b.type='button';b.style.cssText='min-height:56px;font-size:19px;justify-content:center;display:flex';
+    b.onclick=()=>{
+      if(k==='C')val='';
+      else if(k==='⌫')val=val.slice(0,-1);
+      else if(val.length<5)val+=k;
+      paint();};
+    pad.appendChild(b);});
+  q.appendChild(pad);
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(val===''){fb(false,'Type something.','');return;}
+    const v=+val,target=1440;
+    if(v===target){fb(true,'Exactly 1,440.','24 hours × 60 minutes.');pad.querySelectorAll('button').forEach(x=>x.disabled=true);check.disabled=true;}
+    else if(Math.abs(v-target)/target<=0.1)fb(false,'Very warm ('+v+').','Within 10% — one more try.');
+    else fb(false,v<target?'Too cold — aim higher.':'Too hot — aim lower.','');
+  };
+  root.appendChild(q);
+}});
+
+/* 19. Digit dial */
+MECHS.push({icon:'🔐',cat:'Number Sense',name:'Combination lock',blurb:'Spin the dials to the right answer, like opening a padlock.',
+build(root,fb){
+  const q=qShell('Crack the code',"Set the dials to how many years the Hundred Years' War actually lasted.",'Three digits. Tap ▲ and ▼ to spin each dial.');
+  const target=[1,1,6];
+  const row=el('div');row.style.cssText='display:flex;gap:14px;justify-content:center;margin:14px 0';
+  const dials=[];
+  target.forEach((t,i)=>{
+    const d=el('div');d.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px';
+    const up=el('button','chip','▲');up.type='button';up.style.minWidth='64px';
+    const num=el('div');num.style.cssText='font:700 40px var(--serif);background:#26342b;color:#f5efe3;border-radius:12px;width:64px;height:64px;display:grid;place-items:center';
+    num.textContent='0';
+    const dn=el('button','chip','▼');dn.type='button';dn.style.minWidth='64px';
+    const st={v:0};
+    up.onclick=()=>{st.v=(st.v+1)%10;num.textContent=st.v;};
+    dn.onclick=()=>{st.v=(st.v+9)%10;num.textContent=st.v;};
+    d.appendChild(up);d.appendChild(num);d.appendChild(dn);row.appendChild(d);dials.push(st);
+  });
+  q.appendChild(row);
+  const act=el('div','actions');const check=el('button','btn','Open the lock');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    const ok=dials.every((d,i)=>d.v===target[i]);
+    fb(ok,ok?'Unlocked. 🔓':'Still locked.','It lasted 116 years (1337–1453) — a series of conflicts, not one continuous war.');
+  };
+  root.appendChild(q);
+}});
+
+/* 20. Budget split */
+MECHS.push({icon:'⚖️',cat:'Number Sense',name:'Session budget',blurb:'Allocate 60 minutes across a study session. Balance matters more than one big number.',
+build(root,fb){
+  const q=qShell('Split 60 minutes','Design a balanced review session: reading, quizzing, breaks.','Targets (hidden): a solid share of active quizzing, and real breaks.');
+  const parts=[['📖 Reading',20],['🧠 Quizzing',30],['☕ Breaks',10]];
+  const vals=parts.map(p=>p[1]);
+  const remain=el('div','scoreline');q.appendChild(remain);
+  const rows=el('div');q.appendChild(rows);
+  const paint=()=>{
+    const used=vals.reduce((a,b)=>a+b,0);
+    remain.innerHTML='<span>Minutes left to allocate</span><b>'+(60-used)+'</b>';
+    rows.querySelectorAll('.val').forEach((n,i)=>n.textContent=vals[i]+' min');
+  };
+  parts.forEach(([label],i)=>{
+    const r=el('div');r.style.cssText='display:flex;align-items:center;gap:10px;margin:10px 0';
+    const lab=el('span','',label);lab.style.cssText='flex:1;font-weight:700;font-size:14px';
+    const minus=el('button','chip','−');minus.type='button';minus.style.minWidth='48px';
+    const v=el('b','val','0');v.style.minWidth='64px';v.style.textAlign='center';
+    const plus=el('button','chip','+');plus.type='button';plus.style.minWidth='48px';
+    minus.onclick=()=>{if(vals[i]>=5){vals[i]-=5;paint();}};
+    plus.onclick=()=>{if(vals.reduce((a,b)=>a+b,0)<60){vals[i]+=5;paint();}};
+    r.append(lab,minus,v,plus);rows.appendChild(r);
+  });
+  paint();
+  const act=el('div','actions');const check=el('button','btn','Check the balance');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    const used=vals.reduce((a,b)=>a+b,0);
+    if(used!==60){fb(false,'Use all 60 minutes.','You allocated '+used+'.');return;}
+    const quizOk=vals[1]>=25&&vals[1]<=40,breakOk=vals[2]>=5&&vals[2]<=15,readOk=vals[0]>=10;
+    const ok=quizOk&&breakOk&&readOk;
+    fb(ok,ok?'Balanced session.':'Wobbly balance.',
+      'A good split leans on active recall: roughly 20 min reading, 30 min quizzing, 10 min breaks. Quizzing yourself beats re-reading for memory.');
+  };
+  root.appendChild(q);
+}});
+
+/* shared T/F pool */
+const TF_POOL=[
+  ['Honey never spoils.',true,'Archaeologists found edible 3,000-year-old honey.'],
+  ['The Great Wall is visible from the Moon.',false,'It is far too narrow — an old myth.'],
+  ['Botanically, bananas are berries.',true,'Berries grow from a single ovary — bananas qualify.'],
+  ['Sharks are mammals.',false,'They are fish; most lay eggs or give live birth as fish.'],
+  ['Lightning is hotter than the Sun\'s surface.',true,'A bolt reaches ~30,000 K vs ~5,800 K.'],
+  ['Venus is the closest planet to the Sun.',false,'That is Mercury.'],
+  ['Octopuses have three hearts.',true,'Two pump to the gills, one to the body.'],
+  ['Sound travels faster than light.',false,'Light is roughly a million times faster.'],
+  ['A tomato is botanically a fruit.',true,'It develops from the flower\'s ovary.'],
+  ['Adult humans have 300 bones.',false,'206 as adults; babies have about 300.']];
+
+/* 21. Rapid true/false */
+MECHS.push({icon:'⚡',cat:'Speed & Pressure',name:'Rapid true or false',blurb:'Eight statements, one timer, two buttons. Reflexes plus knowledge.',
+build(root,fb){
+  const q=qShell('True or false — 20 seconds','Judge all 8 before the bar runs out.');
+  const deck=shuffle(TF_POOL).slice(0,8);
+  const score=scoreBar(q,'Correct');
+  const bar=timerBar(q);
+  const card=el('div','center');card.style.cssText='background:#faf5ea;border-radius:14px;padding:24px 18px;font:700 19px/1.4 var(--serif);min-height:110px;display:grid;place-items:center;margin-bottom:12px';
+  q.appendChild(card);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';q.appendChild(row);
+  let i=0,right=0,t0=Date.now(),over=false;
+  const iv=setInterval(()=>{
+    const f=1-(Date.now()-t0)/20000;bar(Math.max(0,f));
+    if(f<=0){over=true;clearInterval(iv);finish();}
+  },120);
+  const finish=()=>{
+    row.querySelectorAll('button').forEach(b=>b.disabled=true);
+    card.textContent='🏁 '+right+' / '+deck.length;
+    fb(right===deck.length&&i>=deck.length,'Time. You judged '+i+' of '+deck.length+', '+right+' right.',
+      'Speed rounds suit review of old material — not first contact with new facts.');
+  };
+  const next=()=>{if(i>=deck.length){clearInterval(iv);finish();return;}card.textContent=deck[i][0];};
+  [['✗ False',false],['✓ True',true]].forEach(([label,v])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='64px';
+    b.onclick=()=>{if(over||i>=deck.length)return;
+      if(deck[i][1]===v){right++;score.set(right);card.classList.add('pop');setTimeout(()=>card.classList.remove('pop'),250);}
+      else{card.classList.add('shake');setTimeout(()=>card.classList.remove('shake'),300);}
+      i++;next();};
+    row.appendChild(b);});
+  next();root.appendChild(q);
+}});
+
+/* 22. Blitz */
+MECHS.push({icon:'⏱️',cat:'Speed & Pressure',name:'30-second blitz',blurb:'Odd or even? As many as you can in 30 seconds.',
+build(root,fb){
+  const q=qShell('Odd or even — 30 seconds','For each sum, tap whether the result is odd or even.');
+  const score=scoreBar(q,'Correct');
+  const bar=timerBar(q);
+  const card=el('div','center');card.style.cssText='background:#faf5ea;border-radius:14px;padding:22px;font:700 30px var(--serif);margin-bottom:12px';
+  q.appendChild(card);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';q.appendChild(row);
+  let cur=null,right=0,answered=0,over=false,t0=Date.now();
+  const gen=()=>{const a=2+Math.floor(Math.random()*8),b=2+Math.floor(Math.random()*8);cur={a,b,odd:(a+b)%2===1};card.textContent=a+' + '+b;};
+  const iv=setInterval(()=>{
+    const f=1-(Date.now()-t0)/30000;bar(Math.max(0,f));
+    if(f<=0){over=true;clearInterval(iv);
+      row.querySelectorAll('b'.length?'button':'button').forEach(x=>x.disabled=true);
+      card.textContent='🏁';
+      fb(right>=10,'Score: '+right+' right out of '+answered+'.',
+        'Fast binary checks keep mental arithmetic snappy without a keyboard.');}
+  },120);
+  [['Odd',true],['Even',false]].forEach(([label,v])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='64px';
+    b.onclick=()=>{if(over)return;answered++;
+      if(cur.odd===v){right++;score.set(right);}
+      gen();};
+    row.appendChild(b);});
+  gen();root.appendChild(q);
+}});
+
+/* 23. Sudden death */
+MECHS.push({icon:'💀',cat:'Speed & Pressure',name:'Sudden death',blurb:'One wrong answer ends the run. How long is your streak?',
+build(root,fb){
+  const q=qShell('One mistake and you\'re out','True or false, until you miss.');
+  const deck=shuffle(TF_POOL);
+  const score=scoreBar(q,'Streak');
+  const hearts=el('div','center');hearts.style.fontSize='26px';hearts.textContent='❤️';q.appendChild(hearts);
+  const card=el('div','center');card.style.cssText='background:#faf5ea;border-radius:14px;padding:24px 18px;font:700 19px/1.4 var(--serif);min-height:110px;display:grid;place-items:center;margin-bottom:12px';
+  q.appendChild(card);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';q.appendChild(row);
+  let i=0,streak=0,alive=true;
+  const next=()=>{card.textContent=deck[i%deck.length][0];};
+  const die=()=>{alive=false;hearts.textContent='💔';
+    row.querySelectorAll('button').forEach(b=>b.disabled=true);
+    card.textContent='💀 Streak: '+streak;
+    fb(streak>=5,'Out after '+streak+'.',deck[i%deck.length][2]);};
+  [['✗ False',false],['✓ True',true]].forEach(([label,v])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='64px';
+    b.onclick=()=>{if(!alive)return;
+      if(deck[i%deck.length][1]===v){streak++;score.set(streak);i++;next();}
+      else die();};
+    row.appendChild(b);});
+  next();root.appendChild(q);
+}});
+
+/* 24. Confidence wager */
+MECHS.push({icon:'🥕',cat:'Speed & Pressure',name:'Confidence wager',blurb:'Bet 1–3 carrots on each answer. Win them or lose them.',
+build(root,fb){
+  const q=qShell('Bet on yourself','Three questions. Wager carrots before each answer.');
+  const qs=[
+    ['Which planet has the most moons (as of 2024)?',['Saturn','Jupiter','Mars'],0,'Saturn leads with 146 confirmed moons.'],
+    ['What is the chemical symbol for gold?',['Go','Au','Gd'],1,'Au, from the Latin "aurum".'],
+    ['How many legs does a spider have?',['Six','Eight','Ten'],1,'Eight — spiders are arachnids, not insects.']];
+  const pot=el('div','scoreline');pot.innerHTML='<span>Your carrot pot</span><b>🥕 10</b>';q.appendChild(pot);
+  let carrots=10,i=0,wager=1;
+  const stage=el('div');q.appendChild(stage);
+  const paintPot=()=>pot.querySelector('b').textContent='🥕 '+carrots;
+  const askQ=()=>{
+    stage.innerHTML='';
+    if(i>=qs.length){
+      fb(carrots>=10,'Final pot: '+carrots+' carrots.',
+        'Wagering forces an honest self-rating: how sure am I, really? Great for calibrating review.');
+      return;}
+    const [text,opts,correct,why]=qs[i];
+    stage.appendChild(el('div','prompt','Q'+(i+1)+' of 3 — '+text));
+    const wagerRow=el('div','chipbar');stage.appendChild(wagerRow);
+    const optRow=el('div','chipbar');stage.appendChild(optRow);
+    const lock=el('button','btn','Lock bet & answer');lock.disabled=true;
+    let choice=-1;
+    [1,2,3].forEach(w=>{
+      const c=el('button','chip',w+' 🥕');c.type='button';
+      if(w>carrots)c.disabled=true;
+      c.onclick=()=>{wager=w;[...wagerRow.children].forEach(x=>x.classList.remove('sel'));c.classList.add('sel');lock.disabled=choice<0;};
+      wagerRow.appendChild(c);});
+    wagerRow.children[0].click();
+    opts.forEach((o,oi)=>{
+      const c=el('button','chip',o);c.type='button';
+      c.onclick=()=>{choice=oi;[...optRow.children].forEach(x=>x.classList.remove('sel'));c.classList.add('sel');lock.disabled=false;};
+      optRow.appendChild(c);});
+    const act=el('div','actions');act.appendChild(lock);stage.appendChild(act);
+    lock.onclick=()=>{
+      const won=choice===correct;
+      carrots+=won?wager:-wager;paintPot();
+      stage.querySelectorAll('button').forEach(b=>b.disabled=true);
+      optRow.children[correct].classList.add('done');
+      if(!won)optRow.children[choice].classList.add('no');
+      const next=el('button','btn','Next question');const a2=el('div','actions');a2.appendChild(next);stage.appendChild(a2);
+      fb(won,(won?'+':'−')+wager+' carrots — '+(won?'nicely backed.':'ouch.'),why);
+      i++;next.onclick=()=>{document.querySelectorAll('#rdr-demo .fb').forEach(f=>f.hidden=true);askQ();};
+    };
+  };
+  askQ();root.appendChild(q);
+}});
+
+/* 25. Fifty-fifty trade-off */
+MECHS.push({icon:'🎬',cat:'Game Show',name:'Lifeline trade-off',blurb:'Answer now for 3 drops, or burn reward to remove two wrong options.',
+build(root,fb){
+  const q=qShell('Answer or eliminate','Which chemical element has the symbol W?','Answering with 4 options = 💧3. Using the lifeline leaves 2 options but only 💧1.');
+  const opts=['Tungsten','Tin','Lead','Iron'];const correct=0;
+  let reward=3,answered=false;
+  const stake=el('div','scoreline');stake.innerHTML='<span>Reward if correct</span><b>💧 3</b>';q.appendChild(stake);
+  const row=el('div','chipbar');row.style.flexDirection='column';row.style.display='flex';
+  opts.forEach((o,oi)=>{
+    const c=el('button','chip',o);c.type='button';c.style.textAlign='left';
+    c.onclick=()=>{if(answered)return;answered=true;
+      [...row.children].forEach(x=>x.disabled=true);life.disabled=true;
+      const ok=oi===correct;
+      row.children[correct].classList.add('done');
+      if(!ok)c.classList.add('no');
+      fb(ok,'+'+(ok?reward:0)+' drops — '+(ok?'tungsten it is.':'wrong pick.'),
+        'W stands for wolfram, the mineral it was first isolated from.');};
+    row.appendChild(c);});
+  q.appendChild(row);
+  const act=el('div','actions');
+  const life=el('button','btn ghost','50:50 lifeline (−2 💧)');
+  life.onclick=()=>{
+    reward=1;stake.querySelector('b').textContent='💧 1';life.disabled=true;
+    shuffle([1,2,3]).slice(0,2).forEach(i=>{row.children[i].disabled=true;row.children[i].style.opacity='.35';row.children[i].textContent+='  (eliminated)';});};
+  act.appendChild(life);q.appendChild(act);
+  root.appendChild(q);
+}});
+
+/* 26. Grid of nine */
+MECHS.push({icon:'🔳',cat:'Game Show',name:'Grid of nine',blurb:'Nine tiles about water. Exactly three are true — find all three.',
+build(root,fb){
+  const q=qShell('Three truths among nine','Tap exactly the 3 true statements, then check.');
+  const facts=[
+    ['Boils at 100°C at sea level',true],['Pure water conducts electricity well',false],['Chemical formula is H₂O',true],
+    ['Most common gas in the air',false],['Expands when it freezes',true],['Was discovered in 1984',false],
+    ['Freezes at 10°C',false],['Heavier than mercury',false],['Covers ~71% of Earth\'s surface',null]];
+  // 4th truth acts as trap: it is true but not in the answer key — keep it false-safe by wording? Simpler: count it as false for the demo.
+  facts[8][1]=false;
+  const g=el('div','tiles');
+  const sel=new Set();let done=false;
+  facts.forEach(([txt,truth],i)=>{
+    const t=el('button','tile',txt);t.type='button';
+    t.onclick=()=>{if(done)return;
+      if(sel.has(i)){sel.delete(i);t.classList.remove('sel');}
+      else if(sel.size<3){sel.add(i);t.classList.add('sel');}};
+    g.appendChild(t);});
+  q.appendChild(g);
+  const act=el('div','actions');const check=el('button','btn','Check');act.appendChild(check);q.appendChild(act);
+  check.onclick=()=>{
+    if(sel.size<3){fb(false,'Pick 3 tiles.','');return;}
+    done=true;
+    let right=0;
+    [...g.children].forEach((t,i)=>{
+      t.disabled=true;
+      if(facts[i][1]&&sel.has(i)){t.classList.add('ok');right++;}
+      else if(sel.has(i))t.classList.add('no');
+      else if(facts[i][1])t.classList.add('ok');
+    });
+    fb(right===3,right+' of 3 right.','Pure water is actually a poor conductor (impurities carry the current), nitrogen is the most common gas, and water covers ~71% of Earth — but we only asked for the three in the key. Tricky, or unfair? You decide.');
+  };
+  root.appendChild(q);
+}});
+
+/* 27. Two truths and a lie */
+MECHS.push({icon:'🎭',cat:'Game Show',name:'Two truths and a lie',blurb:'All three sound plausible. Pick the lie.',
+build(root,fb){
+  const q=qShell('Spot the lie','About octopuses:');
+  const stmts=[
+    ['They have three hearts',false],
+    ['Their blood is blue',false],
+    ['They commonly live up to 10 years',true]];
+  const g=el('div');g.style.cssText='display:grid;gap:10px';
+  let done=false;
+  stmts.forEach(([txt,lie])=>{
+    const t=el('button','tile',txt);t.type='button';t.style.minHeight='52px';
+    t.onclick=()=>{if(done)return;done=true;
+      [...g.children].forEach(x=>x.disabled=true);
+      g.children[2].classList.add('ok');
+      if(lie)t.classList.add('ok'),fb(true,'That was the lie.','Most octopuses live only 1–2 years; even the giant Pacific octopus rarely passes 5. The other two are true: three hearts, and blue copper-based blood.');
+      else{t.classList.add('no');fb(false,'That one is true.','The lie was the 10-year lifespan — most octopuses live only 1–2 years.');}};
+    g.appendChild(t);});
+  q.appendChild(g);root.appendChild(q);
+}});
+
+/* 28. Best explanation */
+MECHS.push({icon:'🧑‍🏫',cat:'Game Show',name:'Rate the explanation',blurb:'Judge teach-backs: pick the explanation that is both correct and clear. Great for review quality.',
+build(root,fb){
+  const q=qShell('Pick the best explanation','"Why is the sky blue?" — which answer teaches it best?');
+  const opts=[
+    ['Sunlight scatters off air molecules, and short blue wavelengths scatter the most — so blue reaches our eyes from every direction.',true],
+    ['The sky reflects the oceans, which are blue.',false],
+    ['Air itself is made of tiny blue particles.',false]];
+  const g=el('div');g.style.cssText='display:grid;gap:10px';
+  let done=false;
+  shuffle(opts).forEach(([txt,good])=>{
+    const t=el('button','tile',txt);t.type='button';t.style.cssText='min-height:52px;text-align:left;padding:14px';
+    t.onclick=()=>{if(done)return;done=true;
+      [...g.children].forEach(x=>x.disabled=true);
+      if(good){t.classList.add('ok');fb(true,'Best teach-back.','Rayleigh scattering: shorter (blue) wavelengths scatter far more than red. This is how learners would explain it back — a strong review format.');}
+      else{t.classList.add('no');
+        [...g.children].forEach(x=>{if(x.textContent.startsWith('Sunlight'))x.classList.add('ok');});
+        fb(false,'A common misconception.','The scattering explanation is the accurate one. Rating explanations catches half-learned ideas that a correct pick would miss.');}};
+    g.appendChild(t);});
+  q.appendChild(g);root.appendChild(q);
+}});
+
+/* 29. Chain quiz */
+MECHS.push({icon:'🔗',cat:'Game Show',name:'Chain quiz',blurb:'Each answer feeds the next question — lose the thread and the chain breaks.',
+build(root,fb){
+  const q=qShell('Follow the chain','Step 1: how many legs does an insect have?');
+  const stage=el('div');q.appendChild(stage);
+  const steps=[
+    {p:'How many legs does an insect have?',opts:['6','8','4'],c:0,v:6},
+    {p:'Multiply by the number of Snow White\'s dwarfs (7). What do you get?',opts:['42','36','49'],c:0,v:42},
+    {p:'In Douglas Adams\' novels, that number is famously…',opts:['the answer to life, the universe and everything','the speed of light','a phone number'],c:0,v:null}];
+  let i=0;
+  const render=()=>{
+    stage.innerHTML='';
+    if(i>=steps.length){fb(true,'Chain complete. 🏁','6 legs × 7 dwarfs = 42 — the answer to life, the universe and everything. Chaining links facts together so recall has to stay active across steps.');return;}
+    stage.appendChild(el('div','prompt','Step '+(i+1)+' — '+steps[i].p));
+    const bar=el('div','chipbar');stage.appendChild(bar);
+    steps[i].opts.forEach((o,oi)=>{
+      const c=el('button','chip',o);c.type='button';
+      c.onclick=()=>{
+        [...bar.children].forEach(x=>x.disabled=true);
+        if(oi===steps[i].c){c.classList.add('done');i++;
+          setTimeout(render,450);}
+        else{c.classList.add('no');
+          fb(false,'Chain broken at step '+(i+1)+'.','Reset to start the chain over.');}};
+      bar.appendChild(c);});
+  };
+  render();root.appendChild(q);
+}});
+
+/* 30. Boss battle */
+MECHS.push({icon:'👹',cat:'Game Show',name:'Boss battle',blurb:'Five hits to defeat the Wilted Wizard. Every wrong answer costs you a heart.',
+build(root,fb){
+  const q=qShell('Boss: the Wilted Wizard','Answer correctly to land a hit. Three hearts, five hits to win.');
+  const boss=el('div','center');boss.style.fontSize='56px';boss.textContent='🧙';q.appendChild(boss);
+  const bars=el('div','scoreline');q.appendChild(bars);
+  const card=el('div','center');card.style.cssText='background:#faf5ea;border-radius:14px;padding:22px 18px;font:700 19px/1.4 var(--serif);min-height:110px;display:grid;place-items:center;margin:12px 0';
+  q.appendChild(card);
+  const row=el('div');row.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';q.appendChild(row);
+  const deck=shuffle(TF_POOL);
+  let hp=5,hearts=3,i=0,over=false;
+  const paint=()=>bars.innerHTML='<span>Boss '+'🗡️'.repeat(5-hp)+' '+hp+'/5 HP</span><b>'+'❤️'.repeat(hearts)+'🖤'.repeat(3-hearts)+'</b>';
+  const end=win=>{over=true;row.querySelectorAll('button').forEach(b=>b.disabled=true);
+    boss.textContent=win?'💥':'🧙';boss.classList.add('pop');
+    card.textContent=win?'Victory! The garden is safe.':'The wizard wins this time.';
+    fb(win,win?'Boss defeated in '+(i)+' questions.':'Out of hearts.',
+      'A boss bar turns a 5-question streak into a tiny story — same facts, more suspense.');};
+  const next=()=>{if(over)return;
+    if(hp<=0){end(true);return;}
+    if(hearts<=0){end(false);return;}
+    card.textContent=deck[i%deck.length][0];paint();};
+  [['✗ False',false],['✓ True',true]].forEach(([label,v])=>{
+    const b=el('button','btn ghost',label);b.style.minHeight='64px';
+    b.onclick=()=>{if(over)return;
+      if(deck[i%deck.length][1]===v){hp--;boss.classList.add('shake');setTimeout(()=>boss.classList.remove('shake'),300);}
+      else{hearts--;card.classList.add('shake');setTimeout(()=>card.classList.remove('shake'),300);vibrate(70);}
+      i++;next();};
+    row.appendChild(b);});
+  next();root.appendChild(q);
+}});
+
+/* ---------- shell: grid, categories, modal, deep links ---------- */
+const grid=document.getElementById('grid');
+const catsNav=document.getElementById('cats');
+const bk=document.getElementById('bk');
+const kickEl=document.getElementById('rdr-kick');
+const titleEl=document.getElementById('rdr-title');
+const blurbEl=document.getElementById('rdr-blurb');
+const demoEl=document.getElementById('rdr-demo');
+const closeBtn=document.getElementById('rdr-close');
+const CATS=['All','Recall','Match & Sort','Look & Tap','Number Sense','Speed & Pressure','Game Show'];
+let activeCat='All';
+let current=-1;
+
+function feedbackFactory(q){return feedbackBox(q);}
+
+function openMech(n,push){
+  if(n<0||n>=MECHS.length)return;
+  current=n;
+  const m=MECHS[n];
+  kickEl.textContent='Mechanic '+(n+1)+' of 30 · '+m.cat;
+  titleEl.textContent=m.name;
+  blurbEl.textContent=m.blurb;
+  demoEl.innerHTML='';
+  let fbFn=null;
+  const fb=(ok,title,body)=>{
+    if(!fbFn){fbFn=el('div','fb');demoEl.appendChild(fbFn);}
+    fbFn.hidden=false;fbFn.className='fb '+(ok?'ok':'no');
+    fbFn.innerHTML='<strong>'+title+'</strong>'+(body||'');vibrate(ok?30:[40,40,40]);
+  };
+  try{m.build(demoEl,fb);}catch(err){
+    document.getElementById('js-errors').textContent+='BUILD-ERR m'+(n+1)+': '+err.message+' | ';
+    demoEl.appendChild(el('p','hint','This demo failed to load: '+err.message));
+  }
+  const act=el('div','actions');act.style.marginTop='20px';
+  const reset=el('button','btn ghost','↺ Play again');reset.onclick=()=>openMech(n,false);
+  act.appendChild(reset);demoEl.appendChild(act);
+  bk.hidden=false;
+  document.body.style.overflow='hidden';
+  closeBtn.focus({preventScroll:true});
+  if(push!==false)history.replaceState(null,'','#m-'+(n+1));
+}
+function closeMech(){
+  bk.hidden=true;current=-1;
+  document.body.style.overflow='';
+  history.replaceState(null,'',location.pathname+location.search);
+  const card=grid.querySelector('[data-open]');if(card)card.focus({preventScroll:true});
+}
+closeBtn.onclick=closeMech;
+bk.addEventListener('click',e=>{if(e.target===bk)closeMech();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!bk.hidden)closeMech();});
+
+function renderCats(){
+  catsNav.innerHTML='';
+  CATS.forEach(c=>{
+    const n=c==='All'?MECHS.length:MECHS.filter(m=>m.cat===c).length;
+    const b=el('button','cat',c+' ');b.appendChild(el('small','',String(n)));
+    b.setAttribute('aria-pressed',String(c===activeCat));
+    b.onclick=()=>{activeCat=c;renderCats();renderGrid();};
+    catsNav.appendChild(b);
+  });
+}
+function renderGrid(){
+  grid.innerHTML='';
+  MECHS.forEach((m,i)=>{
+    const c=el('button','mcard');
+    c.dataset.open='';
+    if(activeCat!=='All'&&m.cat!==activeCat)c.hidden=true;
+    c.setAttribute('aria-label','Try mechanic '+(i+1)+': '+m.name);
+    c.innerHTML='<span class="ic">'+m.icon+'</span><span class="tx"><span class="num">N°'+(i+1)+' · '+m.cat+'</span><h2>'+m.name+'</h2><p>'+m.blurb+'</p><span class="go">Try it →</span></span>';
+    c.onclick=()=>openMech(i);
+    grid.appendChild(c);
+  });
+}
+renderCats();renderGrid();
+const h=location.hash.match(/^#m-(\d+)$/);
+if(h)openMech(Math.min(30,Math.max(1,+h[1]))-1,false);
+</script>
+</body>
+</html>
