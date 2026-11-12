@@ -118,7 +118,7 @@ main{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:16px 16px 40px}
 <header class="hdr">
   <div class="hdr-in">
     <h1>Question Mechanics <em>Playground</em></h1>
-    <p>30 new ways to ask, beyond 4-choice and typing. Built for review and practice moments — reading and listening stay calm. All playable, demo facts only, nothing is scored or saved.</p>
+    <p>30 question-mechanic variations to explore beyond plain 4-choice and typing — new input styles (chips, dials, sliders, hotspots) and playful wrappers (wagers, streaks, boss battles). Built for review and practice moments; reading and listening stay calm. All playable, demo facts only, nothing is scored or saved.</p>
   </div>
   <nav class="cats" id="cats" aria-label="Filter by category"></nav>
 </header>
@@ -482,7 +482,7 @@ build(root,fb){
 /* 11. Hotspot */
 MECHS.push({icon:'📍',cat:'Look & Tap',name:'Hotspot',blurb:'Answer by tapping the right spot on a picture.',
 build(root,fb){
-  const q=qShell('Tap the spot','Where should you sow a seed so it gets the most direct sunlight?');
+  const q=qShell('Tap the spot','Where should you sow a seed so it gets the most direct sunlight?','Tap a spot in the scene — under the tree, the open ground, the shed, or under the stone.');
   const NS='http://www.w3.org/2000/svg';
   const svg=document.createElementNS(NS,'svg');
   svg.setAttribute('viewBox','0 0 340 200');svg.style.cssText='width:100%;height:auto;border-radius:14px;background:#cfe3f2;display:block';
@@ -509,7 +509,6 @@ build(root,fb){
     svg.appendChild(r);
   });
   q.appendChild(svg);
-  q.appendChild(el('div','hint','Tap a spot in the scene — under the tree, the open ground, the shed, or under the stone.'));
   root.appendChild(q);
 }});
 
