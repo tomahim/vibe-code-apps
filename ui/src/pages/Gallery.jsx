@@ -18,7 +18,6 @@ const TAB_BY_SLUG = {
   "rust-learning-path": "Learning",
   "recipes": "Daily organization",
   "threejs-learning-path": "Learning",
-  "little-grains": "Learning",
   "content-review": "Tech tools",
   "db-dashboard": "Tech tools",
   "livetrail-scrap": "Sports",
@@ -89,13 +88,6 @@ const initialApps = [
     description: "Learn 3D one small experiment at a time. Interactive lessons, a live editor, and a world to build.",
     category: "Learning",
     icon: "◇",
-  },
-  {
-    slug: "little-grains",
-    name: "Little Grains",
-    description: "Atomic learning: tiny lessons that add up, one little grain at a time.",
-    category: "Learning",
-    icon: "🌾",
   },
   {
     slug: "content-review",

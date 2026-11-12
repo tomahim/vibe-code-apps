@@ -1,12 +1,10 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { GrainsBootLoader } from "../apps/little-grains/Loader.jsx";
 import Gallery from "../pages/Gallery.jsx";
 import Login from "../pages/Login.jsx";
 import Profile from "../pages/Profile.jsx";
 import LiveTrailScrap from "../apps/livetrail-scrap/LiveTrailScrap.jsx";
 
 const StoryShelf = lazy(() => import("../apps/story-shelf/StoryShelf.jsx"));
-const LittleGrains = lazy(() => import("../apps/little-grains/LittleGrains.jsx"));
 
 const Recipes = lazy(() => import("../apps/recipes/Recipes.jsx"));
 
@@ -51,10 +49,6 @@ export default function App() {
 
   if (path === "/apps/story-shelf") {
     return <Suspense fallback={<div>Opening the story room...</div>}><StoryShelf onHome={() => navigate("/")} /></Suspense>;
-  }
-
-  if (path.startsWith("/apps/little-grains")) {
-    return <Suspense fallback={<GrainsBootLoader />}><LittleGrains /></Suspense>;
   }
 
   if (path.startsWith("/apps/livetrail-scrap")) {

@@ -5,7 +5,7 @@ import collectionArtwork from "../assets/genious-apps.png";
 import "./login.css";
 
 // Email/password login against the api. A successful sign-in stores a JWT and
-// lands on Little Grains, the first app that requires an account.
+// returns to the gallery unless a same-origin deep link was requested.
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ export default function Login() {
       await logIn(email, password);
       const next = new URLSearchParams(window.location.search).get("next");
       // Deep links survive sign-in (#225); keep the allow-list same-origin.
-      const destination = next === "/apps/hockey" || next?.startsWith("/apps/hockey/") || next === "/apps/little-grains" || next?.startsWith("/apps/little-grains/") ? next : "/apps/little-grains";
+      const destination = next === "/apps/hockey" || next?.startsWith("/apps/hockey/") ? next : "/";
       window.history.pushState({}, "", destination);
       window.dispatchEvent(new PopStateEvent("popstate"));
       window.scrollTo(0, 0);
