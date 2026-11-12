@@ -5,8 +5,9 @@ from uuid import uuid4
 from unittest import mock
 
 from django.contrib.auth import get_user_model
-from django.db import DatabaseError
+from django.db import DatabaseError, connection
 from django.test import TestCase
+from django.test.utils import CaptureQueriesContext
 
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
@@ -55,15 +56,17 @@ class LearningAPITests(TestCase):
     def post(self, url, body):
         return self.client.post(url, json.dumps(body), content_type="application/json")
 
-    def test_themes_and_authentication(self):
-        url = "/api/learning/themes/"
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["themes"][0]["progress"]["cards_total"], 1)
-        self.assertIn("no-store", response["Cache-Control"])
-        self.assertNotIn("answer", response.content.decode())
+    def test_retired_navigation_endpoints_stay_retired(self):
+        # #470: themes/, theme detail, path detail and progress/ had no caller
+        # left and were retired. Garden and the lesson reader carry the same
+        # data; re-adding one of these routes must fail this test.
+        retired = ("/api/learning/themes/", f"/api/learning/themes/{self.theme.pk}/",
+                   f"/api/learning/paths/{self.path.pk}/", "/api/learning/progress/")
+        for url in retired:
+            self.assertEqual(self.client.get(url).status_code, 404, url)
         self.client.defaults.clear()
-        self.assertEqual(self.client.get(url).status_code, 401)
+        for url in retired:
+            self.assertEqual(self.client.get(url).status_code, 404, url)
 
     def test_path_celebration_is_marked_once_per_learner(self):
         url = f"/api/learning/paths/{self.path.pk}/celebrated/"
@@ -93,7 +96,7 @@ class LearningAPITests(TestCase):
         for model, record in [(Theme, self.theme), (LearningPath, self.path), (Lesson, self.lesson),
                               (Card, self.card), (Question, self.question)]:
             model.objects.filter(pk=record.pk).update(published=False)
-            data = self.client.get("/api/learning/themes/").json()["themes"]
+            data = self.client.get("/api/learning/garden/").json()["themes"]
             if model == Theme:
                 self.assertEqual(data, [])
             elif model == Question:
@@ -103,26 +106,7 @@ class LearningAPITests(TestCase):
             model.objects.filter(pk=record.pk).update(published=True)
         self.theme.entity.archived = True
         self.theme.entity.save()
-        self.assertEqual(self.client.get("/api/learning/themes/").json()["themes"], [])
-
-    def test_theme_detail_paths_and_hidden_ancestors(self):
-        url = f"/api/learning/themes/{self.theme.pk}/"
-        result = self.client.get(url)
-        self.assertEqual(result.status_code, 200)
-        self.assertEqual(result.json()["learning_paths"][0]["id"], str(self.path.pk))
-        self.path.entity.archived = True
-        self.path.entity.save()
-        self.assertEqual(self.client.get(url).json()["learning_paths"], [])
-        self.assertEqual(self.client.get(f"/api/learning/themes/{uuid4()}/").status_code, 404)
-
-    def test_path_detail_and_lesson_order(self):
-        url = f"/api/learning/paths/{self.path.pk}/"
-        result = self.client.get(url).json()
-        self.assertEqual(result["lessons"][0]["id"], str(self.lesson.pk))
-        self.assertEqual(result["next_lesson_id"], str(self.lesson.pk))
-        self.assertEqual(result["theme"]["id"], str(self.theme.pk))
-        Theme.objects.filter(pk=self.theme.pk).update(published=False)
-        self.assertEqual(self.client.get(url).status_code, 404)
+        self.assertEqual(self.client.get("/api/learning/garden/").json()["themes"], [])
 
     def test_lesson_content_pool_selection_and_answer_safety(self):
         self.question.options[0]["correct"] = True
@@ -475,16 +459,18 @@ class LearningAPITests(TestCase):
         self.assertEqual(final["lesson"]["progress"]["questions_correct"], 3)
 
     def test_progress_is_private_persistent_and_has_unique_counts(self):
+        garden_url = "/api/learning/garden/"
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
-        response = self.client.get("/api/learning/progress/")
+        response = self.client.get(garden_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["progress"]["cards_completed"], 1)
-        self.assertEqual(response.json()["progress"]["checkpoints_correct"], 1)
-        self.assertEqual(response.json()["progress"]["lessons_completed"], 1)
-        self.assertTrue(response.json()["learning_paths"][0]["progress"]["completed"])
+        progress = response.json()["themes"][0]["progress"]
+        self.assertEqual(progress["cards_completed"], 1)
+        self.assertEqual(progress["checkpoints_correct"], 1)
+        self.assertEqual(progress["lessons_completed"], 1)
+        self.assertTrue(response.json()["themes"][0]["learning_paths"][0]["progress"]["completed"])
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.other)}"
-        other = self.client.get("/api/learning/progress/").json()["progress"]
+        other = self.client.get(garden_url).json()["themes"][0]["progress"]
         self.assertEqual(other["cards_completed"], 0)
         self.assertEqual(other["checkpoints_correct"], 0)
         self.assertFalse(other["started"])
@@ -594,7 +580,6 @@ class LearningAPITests(TestCase):
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
         # A correct answer adds its carrot; the reading bonuses do not move.
         self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
-        self.assertEqual(self.client.get("/api/learning/progress/").json()["rewards"], {"drops": 106, "carrots": 1})
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.assertEqual(self.client.get(garden_url).json()["rewards"], {"drops": 106, "carrots": 1})
 
@@ -850,7 +835,6 @@ class LearningAPITests(TestCase):
         self.assertEqual(self.client.get(f"/api/learning/lessons/{self.lesson.pk}/").json()["next_step"],
                          {"type": "card", "id": str(second.pk)})
         self.assertTrue(self.post(url, {}).json()["progress"]["completed"])
-        self.assertIsNone(self.client.get(f"/api/learning/paths/{self.path.pk}/").json()["next_lesson_id"])
 
     def test_hidden_checkpoint_card_hides_question_and_empty_lessons_do_not_complete(self):
         Card.objects.filter(pk=self.card.pk).update(published=False)
@@ -864,26 +848,29 @@ class LearningAPITests(TestCase):
     def test_all_endpoints_require_bearer_not_session_auth(self):
         self.client.defaults.clear()
         self.client.force_login(self.user)
-        for url in ("/api/learning/themes/", f"/api/learning/themes/{self.theme.pk}/",
-                    f"/api/learning/paths/{self.path.pk}/", f"/api/learning/lessons/{self.lesson.pk}/",
-                    "/api/learning/progress/", "/api/learning/garden/", "/api/learning/leaderboard/",
+        for url in (f"/api/learning/lessons/{self.lesson.pk}/",
+                    "/api/learning/garden/", "/api/learning/leaderboard/",
                     f"/api/learning/paths/{self.path.pk}/catch-up/"):
             self.assertEqual(self.client.get(url).status_code, 401)
         for url in (f"/api/learning/cards/{self.card.pk}/complete/", "/api/learning/question-attempts/"):
             self.assertEqual(self.post(url, {}).status_code, 401)
 
     def test_ordering_and_query_count_does_not_grow_with_card_count(self):
+        garden_url = "/api/learning/garden/"
+        with CaptureQueriesContext(connection) as before:
+            self.assertEqual(self.client.get(garden_url).status_code, 200)
         second = self.row(Lesson, learning_path=self.path, position=2)
         for position in range(2, 12):
             self.row(Card, lesson=second, position=position, body_markdown="More")
-        with self.assertNumQueries(8):
-            result = self.client.get("/api/learning/themes/")
+        with CaptureQueriesContext(connection) as after:
+            result = self.client.get(garden_url)
         self.assertEqual(result.status_code, 200)
-        lessons = self.client.get(f"/api/learning/paths/{self.path.pk}/").json()["lessons"]
+        self.assertEqual(len(after.captured_queries), len(before.captured_queries))
+        lessons = result.json()["themes"][0]["learning_paths"][0]["lessons"]
         self.assertEqual([l["id"] for l in lessons], [str(self.lesson.pk), str(second.pk)])
 
     def test_get_methods_reject_writes_and_large_or_cross_origin_answers_fail(self):
-        self.assertEqual(self.post("/api/learning/progress/", {}).status_code, 405)
+        self.assertEqual(self.post("/api/learning/garden/", {}).status_code, 405)
         self.assertEqual(self.client.post("/api/learning/question-attempts/", "{}", content_type="application/json",
                                          HTTP_ORIGIN="https://untrusted.invalid").status_code, 403)
         self.assertEqual(self.client.post("/api/learning/question-attempts/", " " * 4097,
@@ -894,9 +881,9 @@ class LearningAPITests(TestCase):
         self.row(Lesson, learning_path=self.path, position=2)
         self.post(f"/api/learning/cards/{self.card.pk}/complete/", {})
         self.post("/api/learning/question-attempts/", {"question_id": str(self.question.pk), "answer": "0"})
-        data = self.client.get(f"/api/learning/paths/{self.path.pk}/").json()
-        self.assertFalse(data["learning_path"]["progress"]["completed"])
-        self.assertEqual(data["learning_path"]["progress"]["lessons_completed"], 1)
+        data = self.client.get("/api/learning/garden/").json()["themes"][0]["learning_paths"][0]
+        self.assertFalse(data["progress"]["completed"])
+        self.assertEqual(data["progress"]["lessons_completed"], 1)
 
 
     def test_catch_up_pool_and_gauge_track_never_answered_and_wrong_only_questions(self):

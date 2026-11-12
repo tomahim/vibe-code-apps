@@ -20,13 +20,7 @@ The backend fetches bytes from `LEARNING_CONTENT_REPOSITORY` (default `tomahim/v
 
 PNG, JPEG, WebP, GIF and SVG are supported, with a 10 MiB delivery limit. Upstream bytes are cached in the backend for an hour per repository/commit/path; publication visibility is checked on every request before consulting that cache. Browser responses are non-cacheable, use an explicit image MIME type and `nosniff`, and sandbox SVG active content. Missing publication configuration returns 503; upstream failures, empty files or oversized responses return 502. Runtime access to `raw.githubusercontent.com` is required. No production sync or data migration is needed for already-published repository paths.
 
-## GET themes/<uuid>/
-
-Returns `{theme, learning_paths}` in position order, with learner progress per path. Hidden or unknown IDs return 404.
-
-## GET paths/<uuid>/
-
-Returns `{learning_path, theme, lessons, next_lesson_id}`. Lessons are ordered for the trail, include current-user completion, and remain visible even if not yet started. The next lesson is the first incomplete lesson, not a hard path unlock rule.
+Theme, path and lesson objects still include `image_url`, but learning path and lesson images were removed (#195), so it is empty for them; only cards carry images, through `illustration_url`. Lesson cards also return the full illustration metadata: `illustration_srcset` (width-described variant URLs for `<img srcset>`, empty until variants exist), `illustration_width`/`illustration_height` for layout reservation, and `illustration_caption`, `illustration_credit`, `illustration_license` and `illustration_source_url` for attribution. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
 
 ## GET lessons/<uuid>/
 
@@ -70,10 +64,6 @@ Send `{"question_id":"<uuid>","answer":"<choice-id-or-typed-response>"}`. While 
 
 **Catch-up and review quiz answers** use this same endpoint with no extra field: a fully read lesson's question with no correct answer yet records `initial`/`retry` exactly like a first-run answer — same checkpoint passing, same first-correct carrot — and an already-correct question records `review`. The client supplies no `attempt_type`; the server derives it.
 
-## GET progress/
-
-Returns `{progress, learning_paths, lessons}` for the current user only. Aggregates include unique card/checkpoint completion and lesson totals/completed counts. There is no user-ID parameter, raw answer history, leaderboard, or another learner's data. Completion is derived, never separately stored; archived/unpublished content and questions whose checkpoint card is hidden are excluded. History rows are retained across content retirement. A content edit can change derived requirements, consistent with the existing no-revisions schema.
-
 ## POST badges/check/
 
 Awards what the learner has newly earned, then returns their 41-badge collection: `{badges, earned_count, new_count, streak}`. Each badge carries `slug, name, family, tier` (1 achievable, 2 challenging, 3 rare), `explanation, progress, target, earned, earned_at, new, evidence, evidence_is_last`. Rules live in `badge_catalog.py` and `badges.py`.
@@ -85,6 +75,8 @@ Awards are persisted in `lg_badge_award` (unique per user and badge) the first t
 ## Garden rewards and rankings
 
 `GET garden/` returns the complete published theme → learning path → lesson hierarchy with the current learner's progress on each level, `rewards: {drops, carrots}`, and `recent_lessons`. Each learning path also carries `catch_up: {eligible, remaining}` for the gauge and quiz button, and `practice: {last_activity_at, days_since, state}` for the seasonal aging of its practice: `state` is `autumn` from 10 days without a question attempt or card read, `winter` from 20, and `fresh` otherwise, with `last_activity_at`/`days_since` null and state `fresh` while nothing in the path is fully read yet. The frontend uses it to wilt or snow over stale paths in the 3D scene. Recent lessons are the three most recently opened visible lessons that are started but unfinished: at least one card read and not every card read. A lesson enters the list only once a card is read, and leaves it as soon as every card is read, even when questions remain open (the practice quiz covers those). Each shortcut includes the lesson and path titles, progress and its authoritative `next_step`. The frontend uses this snapshot to build the 3D scene and refreshes it after opening lessons and recording progress.
+
+Progress dictionaries at every level report `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
 
 `GET leaderboard/?currency=drops|carrots&period=weekly|monthly|overall` returns a ranking for one currency and period, plus the learner's own row. The top 20 and personal rank are computed independently for Drops and Carrots. Only learners with a positive score in the selected currency and period are ranked. Weekly periods start Monday 00:00 UTC; monthly periods start on the 1st at 00:00 UTC; overall is cumulative. Ties are ordered by user ID. This first version uses a global ranking.
 
