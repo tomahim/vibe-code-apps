@@ -5003,6 +5003,35 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 .foot-in{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 20px}
 footer a{color:var(--muted)}
 .demo-flag{display:inline-block;background:var(--sand);color:var(--ink);border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;margin-left:8px}
+
+
+.learn-sec{background:#f7f1e6;padding:56px 20px 70px;text-align:center}
+.learn-sec .lk{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;font-weight:700;color:#3c6a47}
+.learn-sec .lt{font-size:clamp(1.5rem,4.6vw,2rem);color:#2e3a2c;margin:6px auto 26px;line-height:1.2;max-width:20ch}
+.learn-sec .lsec{margin:0 auto 46px;max-width:480px}
+.learn-sec .lsec h3{color:#2e3a2c;font-size:1.15rem;margin:16px 0 6px}
+.learn-sec .lsec p{color:#5b6157;font-size:.96rem;line-height:1.55;max-width:44ch;margin:0 auto}
+.learn-sec .mock{background:#fff;border:1.5px solid #d8e2d4;border-radius:12px;padding:16px 18px;text-align:left;box-shadow:0 10px 30px rgba(46,58,44,.08)}
+.learn-sec .mc-tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#3c6a47;font-weight:700}
+.learn-sec .mc-title{color:#2e3a2c;font-weight:700;font-size:1.05rem;margin:6px 0 10px}
+.learn-sec .mc-line{height:8px;border-radius:4px;background:#e4e7e0;margin:7px 0}
+.learn-sec .mc-line.short{width:62%}
+.learn-sec .mc-dots{margin:12px 0 10px;display:flex;gap:6px}
+.learn-sec .mc-dots i{width:8px;height:8px;border-radius:50%;background:#d4d9cf}
+.learn-sec .mc-dots i.on{background:#3c6a47}
+.learn-sec .mc-btn{display:inline-block;background:#3c6a47;color:#fff;border-radius:12px;padding:8px 16px;font-size:.85rem;font-weight:600}
+.learn-sec .mc-q{color:#2e3a2c;font-weight:600;margin:6px 0 12px;font-size:.98rem}
+.learn-sec .mc-opt{border:1.5px solid #d4d9cf;border-radius:12px;padding:9px 12px;margin:7px 0;color:#5b6157;font-size:.9rem}
+.learn-sec .mc-opt.ok{border-color:#3c6a47;color:#3c6a47;font-weight:600;background:#eef4ec}
+.learn-sec .mc-week{display:flex;gap:6px;margin:10px 0 12px;justify-content:center}
+.learn-sec .mc-week i{width:28px;height:28px;border-radius:50%;border:1.5px solid #d4d9cf;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.68rem;color:#5b6157}
+.learn-sec .mc-week i.on{background:#3c6a47;border-color:#3c6a47;color:#fff}
+.learn-sec .mc-bar{height:10px;border-radius:5px;background:#e4e7e0;overflow:hidden;margin:6px 0 8px}
+.learn-sec .mc-bar span{display:block;height:100%;background:#3c6a47;border-radius:5px}
+.learn-sec .mc-note{font-size:.8rem;color:#5b6157}
+.explore-cue{display:block;text-align:center;margin:30px auto 0;font-weight:600;color:#3c6a47;text-decoration:none;font-size:1.05rem}
+.explore-cue .arr{display:block;font-size:1.6rem;line-height:1;margin-top:2px}
+
 </style>
 </head>
 <body>
@@ -5032,7 +5061,8 @@ footer a{color:var(--muted)}
       <a class="btn" href="#waitlist">Get one email when it opens</a>
       <a class="btn ghost" href="#how">See how it works</a>
     </div>
-    <p class="hero-note">No launch date promised, no price decided. This page is a design concept for a future site.</p>
+    <a class="explore-cue" href="#how-cultive-teaches"><span>Explore Cultive</span><span class="arr" aria-hidden="true">↓</span></a>
+      <p class="hero-note">No launch date promised, no price decided. This page is a design concept for a future site.</p>
     <div class="hero-garden" aria-hidden="true">
       <svg viewBox="0 0 760 210" role="img" aria-label="Illustration of a small garden of hexagonal plots with sprouts">
         <rect x="0" y="0" width="760" height="210" fill="none"/>
@@ -5067,7 +5097,7 @@ footer a{color:var(--muted)}
       <div class="card"><div class="ic">🌱</div><h3>Lessons that fit a queue</h3><p>A lesson is a handful of short cards, each a single idea with a concrete example. A few spare minutes is enough for one.</p></div>
       <div class="card"><div class="ic">🌾</div><h3>A garden you can see</h3><p>Progress is not a bar, it is a place. Themes and paths grow as plots and plants, and you can see at a glance what is thriving.</p></div>
       <div class="card"><div class="ic">🍂</div><h3>Review before you forget</h3><p>Paths you neglect visibly age through the seasons, so a quick review round always knows where to send you.</p></div>
-      <div class="card"><div class="ic">🥕</div><h3>A friendly weekly duel</h3><p>A weekly challenge pits you against a friend on questions drawn from what you have both read. Bragging rights included.</p></div>
+      <div class="card"><div class="ic">🥕</div><h3>A weekly review challenge</h3><p>One short round a day, Monday to Sunday, drawn from what you have read. Watch the week fill in.</p></div>
     </div>
   </div>
 </section>
@@ -5166,7 +5196,7 @@ footer a{color:var(--muted)}
       <div class="rcard"><div class="big">💧</div><h3>Drops</h3><p>Earned for finished lessons and completed paths. They water the garden — the score is a place, not a number.</p></div>
       <div class="rcard"><div class="big">🥕</div><h3>Carrots</h3><p>Earned for questions answered, in lessons, practice quizzes and review rounds. Every honest attempt at recall counts.</p></div>
       <div class="rcard"><div class="big">🏅</div><h3>Badges</h3><p>Milestones with their own art: finishing paths, exploring themes, keeping up with review. Earned once, dated, yours.</p></div>
-      <div class="rcard"><div class="big">⚔️</div><h3>The weekly duel</h3><p>Challenge a friend for the week on questions from shared reading. The leaderboard keeps score, Monday to Sunday.</p></div>
+      <div class="rcard"><div class="big">⚔️</div><h3>The weekly challenge</h3><p>A short daily round on questions from your own reading. The garden keeps score, Monday to Sunday.</p></div>
     </div>
   </div>
 </section>
@@ -5195,13 +5225,52 @@ footer a{color:var(--muted)}
       <details><summary>When does Little Grains launch?</summary><div class="a">There is no date. It is a personal project in a private preview today, and it opens when it is ready — not before. The waitlist below exists so interested people hear about it the day that changes.</div></details>
       <details><summary>What will it cost?</summary><div class="a">Undecided. No pricing is being promised on this page, and joining the list commits you to nothing.</div></details>
       <details><summary>Which platforms?</summary><div class="a">The app is built mobile-first as an installable web app (PWA), so it works on phones without an app-store download. Other platforms may follow.</div></details>
-      <details><summary>What makes it different from other learning apps?</summary><div class="a">The garden. Progress lives in a visible place that grows and seasons, review is woven into that place, and the weekly challenge turns learning into a friendly rivalry instead of a solitary streak.</div></details>
+      <details><summary>What makes it different from other learning apps?</summary><div class="a">The garden. Progress lives in a visible place that grows and seasons, review is woven into that place, and the weekly challenge gives review a calm rhythm instead of a solitary streak.</div></details>
       <details><summary>Who is making it?</summary><div class="a">A small independent project, built in the open with a public build log planned. The content is human-reviewed before it ships.</div></details>
     </div>
   </div>
 </section>
 
-<section class="wait" id="waitlist">
+
+<section class="learn-sec" id="how-cultive-teaches">
+<p class="lk">How Cultive teaches</p>
+<h2 class="lt">Big ideas, small grains.</h2>
+<div class="lsec">
+<div class="mock" aria-hidden="true">
+<div class="mc-tag">Diving · Card 3 of 9</div>
+<div class="mc-title">Why pressure doubles at 10 m</div>
+<div class="mc-line"></div><div class="mc-line"></div><div class="mc-line short"></div>
+<div class="mc-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+<div class="mc-btn">Read this card</div>
+</div>
+<h3>One idea per card</h3>
+<p>A lesson is a handful of atomic cards. Each card holds a single idea you can finish in a minute — on a commute, in a queue, before the day starts.</p>
+</div>
+<div class="lsec">
+<div class="mock" aria-hidden="true">
+<div class="mc-tag">Checkpoint</div>
+<div class="mc-q">At 10 m, the pressure on your body is…</div>
+<div class="mc-opt">The same as at the surface</div>
+<div class="mc-opt ok">Twice the surface pressure ✓</div>
+<div class="mc-opt">Half the surface pressure</div>
+</div>
+<h3>Questions that make it stick</h3>
+<p>Short checkpoints break up the reading. Pick an answer or type it from memory — every honest attempt teaches your brain to keep the idea.</p>
+</div>
+<div class="lsec">
+<div class="mock" aria-hidden="true">
+<div class="mc-tag">Weekly review</div>
+<div class="mc-title">One short round a day, Monday to Sunday</div>
+<div class="mc-week"><i class="on">M</i><i class="on">T</i><i class="on">W</i><i class="on">T</i><i>F</i><i>S</i><i>S</i></div>
+<div class="mc-bar"><span style="width:68%"></span></div>
+<div class="mc-note">12 of 18 cards recalled this week</div>
+</div>
+<h3>A weekly game of recall</h3>
+<p>Old lessons come back as a small review challenge. Answer through the week and watch the bar fill — the garden remembers what you keep.</p>
+</div>
+</section>
+
+  <section class="wait" id="waitlist">
   <div class="wrap">
     <p class="kicker">One email, someday</p>
     <h2 class="title">Hear about it when the gate opens</h2>
