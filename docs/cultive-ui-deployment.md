@@ -1,4 +1,4 @@
-# cultive-dev UI service
+# cultive-ui-dev UI service
 
 Review-only infrastructure change. The existing Terraform workflow applies on
 merge to master. Review the current plan and approve cost before merging.
@@ -15,8 +15,10 @@ domain is added. No infrastructure has been applied during preparation.
 - `API_UPSTREAM=http://api.railway.internal:8000`.
 - Use the service-ID output after approved apply. Store deployment credentials
   in CI secrets, never source code or build arguments.
-- Read actual private DNS after creation and verify health and application
-  access before reporting deployment ready. No hostname is promised here.
+- Private DNS is automatic: Railway resolves `cultive-ui-dev.railway.internal`
+  on the project private network (zero configuration). Verify health and
+  application access at that hostname after deployment, before reporting
+  deployment ready.
 
 ## Cost review
 
