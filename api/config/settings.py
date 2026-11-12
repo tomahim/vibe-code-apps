@@ -128,3 +128,8 @@ GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-app
 # Optional plan storage allowance (bytes) shown against the database size in the
 # database dashboard. Unset: the dashboard lets staff enter one in the browser.
 DB_STORAGE_LIMIT_BYTES = int(os.environ.get("DB_STORAGE_LIMIT_BYTES", "0") or 0)
+
+# Optional Google Identity Services sign-in. Off until explicitly configured.
+GOOGLE_SIGN_IN_ENABLED = os.environ.get("GOOGLE_SIGN_IN_ENABLED", "false").lower() in {"true", "1"}
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
+GOOGLE_ALLOWED_ORIGINS = [origin.strip() for origin in os.environ.get("GOOGLE_ALLOWED_ORIGINS", "").split(",") if origin.strip()]
