@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Grains — Review Arcade: 32 ways to play a 10-question review</title>
+<style>
+:root{
+  --cream:#f5efe3;--paper:#fffcf5;--ink:#26342b;--dim:#6d7668;--line:#dfd8c8;
+  --terra:#bd6748;--terra-d:#a64d34;--blue:#3b8dce;--orange:#ef8c32;--green:#5a9e5b;
+  --gold:#d9a441;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 90px}
+
+/* header */
+.hdr{padding:18px 0 6px}
+.hdr-top{display:flex;align-items:center;gap:10px}
+.hdr h1{font-family:var(--serif);font-size:1.45rem;margin:0;line-height:1.15}
+.hdr .sub{color:var(--dim);font-size:.85rem;margin:8px 0 0}
+.stats{display:flex;gap:6px;margin-left:auto;flex-shrink:0}
+.stat{display:flex;align-items:center;gap:3px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-size:.78rem;font-weight:600}
+.banner{margin-top:12px;background:#f3e8cf;border:1px solid #e3d3ac;border-radius:12px;padding:9px 12px;font-size:.78rem;color:#6d5c2e;line-height:1.45}
+
+/* filters */
+.filters{position:sticky;top:0;z-index:5;display:flex;gap:7px;overflow-x:auto;padding:12px 0 10px;background:var(--cream);scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-size:.8rem;font-weight:600;color:var(--dim)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* gallery */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;padding:0;display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}
+.card:active{transform:scale(.98)}
+.card .art{display:block;width:100%;height:104px;background:#e9f2e4;border-bottom:1px solid var(--line)}
+.card .art svg{width:100%;height:100%;display:block}
+.card .meta{padding:9px 11px 11px;display:flex;flex-direction:column;gap:5px;flex:1}
+.card .name{font-weight:700;font-size:.88rem;line-height:1.2}
+.card .blurb{font-size:.74rem;color:var(--dim);line-height:1.4;flex:1}
+.card .tags{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.tag{font-size:.62rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:#eef3e8;color:var(--green);border:1px solid #d7e4cc}
+.tag.play{background:#fdf0dc;color:var(--terra-d);border-color:#f2d9b8}
+.qbadge{margin-left:auto;font-size:.62rem;font-weight:700;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:2px 7px}
+
+/* detail sheet */
+.backdrop{position:fixed;inset:0;background:rgba(38,52,43,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--paper);border-radius:20px 20px 0 0;max-height:88dvh;overflow-y:auto;transform:translateY(102%);transition:transform .25s ease;padding:0 0 34px;box-shadow:0 -8px 30px rgba(38,52,43,.18)}
+.sheet.open{transform:translateY(0)}
+.sheet-inner{max-width:640px;margin:0 auto;padding:0 18px}
+.grabber{width:44px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 4px}
+.sheet .art-big{width:100%;height:150px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#e9f2e4;margin-top:8px}
+.sheet .art-big svg{width:100%;height:100%}
+.sheet h2{font-family:var(--serif);font-size:1.3rem;margin:12px 0 2px}
+.sheet .why{font-size:.85rem;color:var(--dim);line-height:1.5;margin:6px 0 0}
+.sheet h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin:18px 0 8px}
+.flow{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.flow li{display:flex;gap:10px;font-size:.85rem;line-height:1.45;align-items:flex-start}
+.flow .n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.dots-diagram{margin-top:4px}
+.play-btn{display:block;width:100%;margin-top:20px;background:var(--terra);color:#fff;border-radius:14px;padding:14px;font-size:.95rem;font-weight:700;text-align:center}
+.play-btn:active{background:var(--terra-d)}
+.concept-note{margin-top:20px;background:#eef3e8;border:1px solid #d7e4cc;color:#3c5a37;border-radius:12px;padding:11px 13px;font-size:.78rem;line-height:1.5}
+.close-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-size:1rem;z-index:2}
+</style>
+<style>
+/* playable overlay */
+.game{position:fixed;inset:0;z-index:30;background:var(--cream);display:none;flex-direction:column}
+.game.open{display:flex}
+.game-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--paper);border-bottom:1px solid var(--line)}
+.game-hdr .gname{font-family:var(--serif);font-weight:700;font-size:1rem}
+.game-hdr .gprog{margin-left:auto;font-size:.8rem;font-weight:700;color:var(--dim)}
+.game-hdr .gx{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);font-size:.95rem;flex-shrink:0}
+.game-body{flex:1;overflow-y:auto;padding:16px 14px 20px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.gq{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:1.02rem;font-weight:600;line-height:1.4;max-width:520px;width:100%;text-align:center}
+.gdots{display:flex;gap:6px;justify-content:center;padding:0 0 8px}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.gdot.done{background:var(--green)}
+.gdot.now{background:var(--orange);transform:scale(1.25)}
+.gend{margin:auto;text-align:center;max-width:420px;padding:24px 18px}
+.gend .big{font-family:var(--serif);font-size:1.6rem;margin:10px 0 6px}
+.gend p{color:var(--dim);font-size:.88rem;line-height:1.5}
+.gend .again{margin-top:18px;background:var(--terra);color:#fff;border-radius:14px;padding:13px 26px;font-weight:700}
+
+/* anagram */
+.tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px}
+.tile{width:44px;height:52px;border-radius:10px;background:var(--paper);border:1.5px solid var(--line);border-bottom-width:3px;font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tile.sel{background:#eef3e8;border-color:var(--green);color:var(--green)}
+.slots{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:52px;max-width:420px}
+.slot{width:44px;height:52px;border-radius:10px;border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;background:#fbf7ec}
+.slot.full{border-style:solid;border-color:var(--ink);background:var(--paper)}
+.slot.ok{border-color:var(--green);color:var(--green);background:#eef3e8}
+.slot.bad{border-color:var(--terra);color:var(--terra);background:#fbe9e2}
+.shake{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* hangman / letter pad */
+.pad{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:400px}
+.key{width:34px;height:42px;border-radius:8px;background:var(--paper);border:1px solid var(--line);border-bottom-width:3px;font-weight:700;font-size:.92rem}
+.key:disabled{opacity:.35;border-bottom-width:1px}
+.key.ok{background:#eef3e8;border-color:var(--green);color:var(--green);opacity:1}
+.key.no{background:#fbe9e2;border-color:var(--terra);color:var(--terra);opacity:1}
+.wordrow{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.lbox{width:32px;height:42px;border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:700}
+
+/* crossword */
+.xw-wrap{width:100%;max-width:100%;overflow-x:auto}
+.xw{display:grid;gap:2px;justify-content:center}
+.xw .c{aspect-ratio:1;border-radius:5px;min-width:0;font-size:clamp(.6rem,3.4vw,.85rem);background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;position:relative}
+.xw .c.void{background:transparent;border:none}
+.xw .c.cur{background:#fdf0dc;border-color:var(--orange)}
+.xw .c.ok{background:#eef3e8;border-color:var(--green);color:var(--green)}
+.xw .num{position:absolute;top:0;left:2px;font-size:.5rem;font-weight:600;color:var(--dim)}
+.xw-clues{display:flex;flex-direction:column;gap:5px;width:100%;max-width:520px}
+.xw-clue{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.82rem;line-height:1.35}
+.xw-clue.cur{border-color:var(--orange);background:#fdf6e8}
+.xw-clue.ok{border-color:var(--green);background:#eef3e8}
+.xw-clue.ok .cl-t{text-decoration:line-through;color:var(--dim)}
+.xw-input{display:flex;gap:8px;width:100%;max-width:420px}
+.xw-input input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font:inherit;font-size:1rem;background:var(--paper);text-transform:uppercase}
+.xw-input button{background:var(--ink);color:var(--paper);border-radius:12px;padding:0 18px;font-weight:700}
+
+/* memory */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;width:100%}
+.mcard{aspect-ratio:3/3.6;border-radius:12px;background:var(--paper);border:1.5px solid var(--line);border-bottom-width:3px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.66rem;font-weight:600;line-height:1.25;padding:4px;transition:transform .18s,opacity .3s}
+.mcard.back{background:var(--green);border-color:#4d8a4e;color:#fff;font-size:1.15rem}
+.mcard.open{background:#fdf6e8;border-color:var(--orange)}
+.mcard.hit{background:#eef3e8;border-color:var(--green);opacity:.45;pointer-events:none}
+
+/* reveal + stones MC */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:420px;width:100%}
+.choice{background:var(--paper);border:1.5px solid var(--line);border-bottom-width:3px;border-radius:12px;padding:13px 10px;font-weight:700;font-size:.9rem;text-align:center}
+.choice.ok{background:#eef3e8;border-color:var(--green);color:var(--green)}
+.choice.no{background:#fbe9e2;border-color:var(--terra);color:var(--terra)}
+.reveal-stage{position:relative;width:100%;max-width:420px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.reveal-stage svg.scene{display:block;width:100%}
+.fog{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr)}
+.fog div{background:#cfd8c4;border:1px solid #bcc8b0;transition:opacity .5s,transform .5s;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.fog div.gone{opacity:0;transform:scale(.6);pointer-events:none}
+.pond{width:100%;max-width:460px}
+.pond svg{width:100%;display:block}
+.frog-jump{transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hdr">
+    <div class="hdr-top">
+      <h1>Review Arcade</h1>
+      <div class="stats" aria-hidden="true">
+        <span class="stat">🔥 12</span><span class="stat">💧 128</span><span class="stat">🥕 45</span>
+      </div>
+    </div>
+    <p class="sub">Lessons stay calm — read or listen at your pace. Review is where you play. One review session is 10 questions; here are 32 little games those same 10 questions could live inside.</p>
+    <div class="banner">Design study with demo questions, not a live feature. Six games have a playable sketch; the rest are illustrated concepts. Scoring, timing and rewards shown here are placeholders — nothing is decided.</div>
+  </header>
+  <nav class="filters" id="filters" aria-label="Filter games by type"></nav>
+  <main class="grid" id="grid"></main>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetName">
+  <div class="grabber"></div>
+  <div class="sheet-inner">
+    <button class="close-x" id="sheetClose" aria-label="Close">✕</button>
+    <div class="art-big" id="sheetArt"></div>
+    <h2 id="sheetName"></h2>
+    <div class="dots-diagram" id="sheetDots"></div>
+    <p class="why" id="sheetWhy"></p>
+    <h3>How a 10-question review plays</h3>
+    <ol class="flow" id="sheetFlow"></ol>
+    <div id="sheetAction"></div>
+  </div>
+</section>
+
+<section class="game" id="game" role="dialog" aria-modal="true" aria-label="Playable demo">
+  <div class="game-hdr">
+    <span class="gname" id="gName"></span>
+    <span class="gprog" id="gProg"></span>
+    <button class="gx" id="gClose" aria-label="Close game">✕</button>
+  </div>
+  <div class="game-body" id="gBody"></div>
+  <div class="gdots" id="gDots"></div>
+</section>
+
+<script>
+"use strict";
+/* ---------- demo questions (placeholder content, general knowledge) ---------- */
+const QUESTIONS=[
+ {q:"What is the capital of Japan?",a:"TOKYO",choices:["Tokyo","Kyoto","Osaka","Seoul"]},
+ {q:"Which planet is famous for its rings?",a:"SATURN",choices:["Saturn","Mars","Venus","Mercury"]},
+ {q:"H2O is the chemical formula of…",a:"WATER",choices:["Water","Salt","Sugar","Oxygen"]},
+ {q:"“Bonjour” is a greeting in which language?",a:"FRENCH",choices:["French","Spanish","Italian","German"]},
+ {q:"What is the largest ocean on Earth?",a:"PACIFIC",choices:["Pacific","Atlantic","Indian","Arctic"]},
+ {q:"Which insect makes honey?",a:"BEE",choices:["Bee","Ant","Wasp","Butterfly"]},
+ {q:"What is the opposite of “hot”?",a:"COLD",choices:["Cold","Warm","Cool","Mild"]},
+ {q:"What colour is a ripe banana?",a:"YELLOW",choices:["Yellow","Green","Purple","Orange"]},
+ {q:"Which instrument has 88 keys?",a:"PIANO",choices:["Piano","Guitar","Violin","Flute"]},
+ {q:"Which season comes right after summer?",a:"AUTUMN",choices:["Autumn","Spring","Winter","Monsoon"]}
+];
+const XW_SEED=213; /* verified: all 10 words interlock in a 9x14 grid */
+</script>
+<script>
+/* ---------- 32 mini-games ---------- */
+const S=(inner,bg)=>`<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="120" height="80" fill="${bg||'#e9f2e4'}"/>${inner}</svg>`;
+const CATS=[["all","All"],["word","Word play"],["memory","Memory"],["arcade","Arcade"],["puzzle","Puzzle"],["board","Board & luck"],["build","Build & collect"],["social","Social"]];
+const GAMES=[
+{id:"crossword",name:"Mini Crossword",cat:"word",shape:"grid",playable:true,
+ blurb:"The 10 answers interlock in a small grid. Each question is a clue; solving one word reveals letters of its neighbours.",
+ why:"Crossing letters give hints without giving the answer away — recall with a safety net, the friendly face of typed answers.",
+ flow:["The session's 10 answers are woven into a compact crossword, clues phrased as the review questions.","Tap a clue, type the word; correct words lock into the grid in green.","Stuck? Crossing words you've already solved lend you letters.","Session ends when the grid is full — 10 words, 10 reviews."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g fill="#fffcf5" stroke="#8a806b" stroke-width="1"><rect x="18" y="14" width="14" height="14" rx="2"/><rect x="32" y="14" width="14" height="14" rx="2"/><rect x="46" y="14" width="14" height="14" rx="2"/><rect x="32" y="28" width="14" height="14" rx="2"/><rect x="32" y="42" width="14" height="14" rx="2"/></g><text x="22" y="25" font-size="9" font-weight="700" fill="#26342b">B</text><text x="36" y="25" font-size="9" font-weight="700" fill="#26342b">E</text><text x="50" y="25" font-size="9" font-weight="700" fill="#26342b">E</text><g stroke="#5a9e5b" stroke-width="2" fill="none"><path d="M80 30 q6 -14 14 -16"/><path d="M94 14 q8 2 6 10"/></g><circle cx="94" cy="14" r="4" fill="#5a9e5b"/>`)},
+{id:"anagram",name:"Anagram Sprouts",cat:"word",shape:"scatter",playable:true,
+ blurb:"Each answer arrives as a sprout of scrambled letters. Rearrange the tiles to grow the word.",
+ why:"Unscrambling forces you to reconstruct the answer letter by letter — stronger recall than picking from four options.",
+ flow:["A question appears with its answer scrambled into letter tiles.","Tap tiles in order to spell the answer; tap a placed letter to send it back.","Correct spellings bloom into a flower; wrong arrangements gently shake loose.","10 sprouts to grow, one per question."],
+ art:S(`<rect y="56" width="120" height="24" fill="#a8c68a"/><g font-size="11" font-weight="700"><rect x="14" y="30" width="16" height="18" rx="3" fill="#fffcf5" stroke="#8a806b"/><text x="19" y="43" fill="#26342b">W</text><rect x="34" y="26" width="16" height="18" rx="3" fill="#fffcf5" stroke="#8a806b"/><text x="39" y="39" fill="#26342b">R</text><rect x="54" y="32" width="16" height="18" rx="3" fill="#fffcf5" stroke="#8a806b"/><text x="59" y="45" fill="#26342b">A</text></g><g stroke="#5a9e5b" stroke-width="2" fill="none"><path d="M92 58 v-18"/><path d="M92 44 q-8 -4 -10 -12"/><path d="M92 40 q8 -4 10 -12"/></g><circle cx="92" cy="36" r="5" fill="#ef8c32"/>`)},
+{id:"hangman",name:"Scarecrow Letters",cat:"word",shape:"stack",playable:true,
+ blurb:"Classic letter guessing with a garden twist: wrong letters assemble a scarecrow, right letters save the crop.",
+ why:"Guessing letter by letter practices spelling the answer exactly, not just recognising it.",
+ flow:["The question shows as a clue with blank dashes for its answer.","Pick letters; correct ones fill the dashes, wrong ones add a piece to the scarecrow.","Solve the word before the scarecrow is finished (6 wrong letters).","10 words per session; the scarecrow resets each time."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g stroke="#8a6b4a" stroke-width="3"><line x1="60" y1="58" x2="60" y2="22"/><line x1="46" y1="32" x2="74" y2="32"/></g><circle cx="60" cy="17" r="8" fill="#f0d9a8" stroke="#8a6b4a" stroke-width="2"/><path d="M50 12 h20 l-3 -6 h-14 z" fill="#bd6748"/><g font-size="9" font-weight="700" fill="#26342b"><rect x="18" y="46" width="12" height="12" rx="2" fill="#fffcf5" stroke="#8a806b"/><rect x="90" y="46" width="12" height="12" rx="2" fill="#fffcf5" stroke="#8a806b"/></g>`)},
+{id:"ladder",name:"Word Ladder",cat:"word",shape:"zigzag",
+ blurb:"Climb from a starter word to the answer by changing one letter per rung — the question tells you the target.",
+ why:"Spelling plus word structure: you hold the answer in mind while transforming toward it.",
+ flow:["Read the question, then see a starter word and the answer's length.","Each rung changes one letter; type each rung to climb.","Reach the exact answer to finish the word.","10 ladders per session, short words first."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g font-size="8" font-weight="700" fill="#26342b"><rect x="20" y="44" width="34" height="12" rx="2" fill="#fffcf5" stroke="#8a806b"/><text x="24" y="53">C O L D</text><rect x="34" y="28" width="34" height="12" rx="2" fill="#fffcf5" stroke="#8a806b"/><text x="38" y="37">C O R D</text><rect x="48" y="12" width="34" height="12" rx="2" fill="#eef3e8" stroke="#5a9e5b"/><text x="52" y="21">W O R D</text></g>`)},
+{id:"harvest",name:"Letter Harvest",cat:"word",shape:"scatter",
+ blurb:"A field of letters hides the answer. Trace neighbouring letters to pick it out, Boggle-style.",
+ why:"Searching for a known answer in noise sharpens orthographic memory — you see the word's shape, not just its meaning.",
+ flow:["The question names what to find; a grid of letters grows on the field.","Drag across adjacent letters to spell the answer.","Found words get picked like berries; decoy words cost nothing but a smile.","10 answers hidden across fresh little fields."],
+ art:S(`<rect width="120" height="80" fill="#a8c68a"/><g font-size="9" font-weight="700"><g fill="#fffcf5" stroke="#7a9a5e"><rect x="22" y="14" width="15" height="15" rx="3"/><rect x="37" y="14" width="15" height="15" rx="3"/><rect x="52" y="14" width="15" height="15" rx="3"/><rect x="22" y="29" width="15" height="15" rx="3"/><rect x="37" y="29" width="15" height="15" rx="3"/><rect x="52" y="29" width="15" height="15" rx="3"/></g><g fill="#26342b"><text x="26" y="25">S</text><text x="41" y="25">U</text><text x="56" y="25">N</text><text x="26" y="40">T</text><text x="41" y="40">A</text><text x="56" y="40">P</text></g></g><path d="M29 21 L44 21 L59 21" stroke="#ef8c32" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><circle cx="88" cy="52" r="9" fill="#bd6748"/><circle cx="84" cy="50" r="2" fill="#f0d9a8"/>`)},
+{id:"syllables",name:"Syllable Stacks",cat:"word",shape:"stack",
+ blurb:"Answers arrive chopped into syllable blocks. Stack them in the right order to say the word.",
+ why:"Chunking long answers into syllables makes hard vocabulary approachable and memorable.",
+ flow:["The question shows a jumble of syllable tiles (AU-TUMN, PA-CI-FIC).","Tap syllables in order to build the answer.","A correct stack pronounces the word and shelves it.","10 stacks per session, from two chunks to four."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g font-size="8" font-weight="700"><rect x="34" y="42" width="24" height="12" rx="3" fill="#bd6748"/><text x="38" y="51" fill="#fff">TUMN</text><rect x="40" y="28" width="24" height="12" rx="3" fill="#3b8dce"/><text x="46" y="37" fill="#fff">AU</text><rect x="70" y="34" width="24" height="12" rx="3" fill="#fffcf5" stroke="#8a806b"/><text x="73" y="43" fill="#26342b">PA</text><rect x="76" y="20" width="24" height="12" rx="3" fill="#fffcf5" stroke="#8a806b"/><text x="78" y="29" fill="#26342b">CIFIC</text></g>`)},
+{id:"memory",name:"Memory Greenhouse",cat:"memory",shape:"pairs",playable:true,
+ blurb:"Classic pairs, but each match couples a question to its answer. Two trays of five pairs make the 10 questions.",
+ why:"Matching term to meaning is recognition; hunting both halves under pressure of memory makes it stick.",
+ flow:["Ten cards face down: five questions and their five answers, shuffled.","Flip two: a true question–answer match stays open and sprouts.","Clear the tray, then a second tray of five fresh pairs.","10 questions reviewed across two trays."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g><rect x="18" y="16" width="20" height="26" rx="4" fill="#5a9e5b"/><rect x="42" y="16" width="20" height="26" rx="4" fill="#5a9e5b"/><rect x="66" y="16" width="20" height="26" rx="4" fill="#fffcf5" stroke="#8a806b"/><rect x="90" y="16" width="20" height="26" rx="4" fill="#5a9e5b"/><text x="26" y="33" font-size="12" fill="#fff">?</text><text x="50" y="33" font-size="12" fill="#fff">?</text><text x="71" y="33" font-size="9" font-weight="700" fill="#26342b">BEE</text><text x="98" y="33" font-size="12" fill="#fff">?</text></g>`)},
+{id:"missing",name:"What's Missing?",cat:"memory",shape:"row",
+ blurb:"Study the shelf of 10 answers. Lights out — one vanishes. Which one? Repeat until none are left.",
+ why:"Whole-set rehearsal: you keep all 10 answers alive in mind at once, the exact muscle review day needs.",
+ flow:["See all 10 answers of the session on a shelf for 20 seconds.","One disappears; pick it from three options.","Each round removes another; the shelf empties as you prove you hold it.","Ends when you catch all 10 vanishings."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><rect x="14" y="44" width="92" height="5" rx="2" fill="#8a6b4a"/><g><circle cx="26" cy="36" r="7" fill="#ef8c32"/><circle cx="44" cy="36" r="7" fill="#3b8dce"/><rect x="56" y="29" width="14" height="14" rx="7" fill="#f3e8cf" stroke="#8a806b" stroke-dasharray="3 2"/><circle cx="80" cy="36" r="7" fill="#5a9e5b"/><circle cx="98" cy="36" r="7" fill="#bd6748"/></g>`)},
+{id:"echo",name:"Echo Trail",cat:"memory",shape:"wave",
+ blurb:"Fireflies light up answers in a sequence. Watch, then tap the trail back in the same order.",
+ why:"Sequencing answers binds them together — you rehearse the session as a story, not ten loose facts.",
+ flow:["The session's answers glow one by one along a trail of fireflies.","Repeat the sequence by tapping the fireflies in order.","Each round adds one more firefly to the chain.","Reach 10 in a row to finish the session."],
+ art:S(`<rect width="120" height="80" fill="#2c3a4a"/><path d="M12 60 Q40 20 60 45 T108 30" stroke="#4a5a6a" stroke-width="2" fill="none" stroke-dasharray="4 4"/><g><circle cx="16" cy="58" r="5" fill="#f5d76e"/><circle cx="38" cy="38" r="5" fill="#f5d76e" opacity=".8"/><circle cx="60" cy="45" r="5" fill="#f5d76e" opacity=".6"/><circle cx="84" cy="38" r="5" fill="#f5d76e" opacity=".45"/><circle cx="106" cy="30" r="5" fill="#f5d76e" opacity=".3"/></g>`)},
+{id:"flashback",name:"Flashback Flip",cat:"memory",shape:"row",
+ blurb:"A card flashes its answer for two seconds, flips back, and asks. Blink and you miss it.",
+ why:"A quick glance forces attention first, recall second — a tiny photographic-memory workout per question.",
+ flow:["Each question card shows its answer face-up for two seconds.","It flips; now answer the question from memory (pick or type).","Instant feedback, then the next card flashes.","10 flips per session."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><rect x="30" y="16" width="26" height="36" rx="5" fill="#fffcf5" stroke="#8a806b"/><text x="37" y="38" font-size="10" font-weight="700" fill="#26342b">TOKYO</text><rect x="64" y="16" width="26" height="36" rx="5" fill="#5a9e5b"/><text x="73" y="38" font-size="13" fill="#fff">?</text><path d="M56 30 q4 4 0 8 M60 26 q6 8 0 16" stroke="#ef8c32" stroke-width="2" fill="none" stroke-linecap="round"/>`)},
+{id:"invaders",name:"Carrot Invaders",cat:"arcade",shape:"cols",
+ blurb:"Answer-ships drift down the sky. Zap the one that answers the question before it lands.",
+ why:"Fast recognition under gentle pressure — the multiple-choice reflex with a pulse.",
+ flow:["The question sits on your carrot cannon at the bottom.","Four answer-ships descend; tap the correct one to zap it.","A right zap clears the wave; a wrong one costs a heart, not progress.","10 waves per session."],
+ art:S(`<rect width="120" height="80" fill="#2c3a4a"/><g><rect x="20" y="12" width="18" height="12" rx="4" fill="#bd6748"/><rect x="52" y="20" width="18" height="12" rx="4" fill="#3b8dce"/><rect x="84" y="10" width="18" height="12" rx="4" fill="#8a7a5c"/></g><path d="M60 78 l-6 -14 h12 z" fill="#ef8c32"/><line x1="60" y1="64" x2="61" y2="30" stroke="#f5d76e" stroke-width="2" stroke-linecap="round"/><circle cx="61" cy="28" r="3" fill="#f5d76e"/>`)},
+{id:"rain",name:"Answer Rain",cat:"arcade",shape:"cols",
+ blurb:"Answers fall as raindrops. Move your umbrella to catch the right one, let the wrong ones splash.",
+ why:"Tracking several moving options while holding the question in mind trains quick, confident recognition.",
+ flow:["The question floats in a cloud; answers rain down in lanes.","Slide the umbrella left/right to catch the correct drop.","Catching a decoy splashes mud — the question repeats.","10 good catches end the shower."],
+ art:S(`<rect width="120" height="80" fill="#dcecF5"/><ellipse cx="40" cy="16" rx="22" ry="10" fill="#fff"/><ellipse cx="58" cy="13" rx="16" ry="8" fill="#fff"/><g fill="#3b8dce"><path d="M30 34 q3 6 0 8 q-3 -2 0 -8"/><path d="M52 40 q3 6 0 8 q-3 -2 0 -8"/><path d="M76 32 q3 6 0 8 q-3 -2 0 -8"/></g><path d="M86 62 a14 14 0 0 1 28 0 z" fill="#bd6748"/><line x1="100" y1="62" x2="100" y2="72" stroke="#8a6b4a" stroke-width="2.5"/>`)},
+{id:"mole",name:"Whack-a-Mole",cat:"arcade",shape:"bumps",
+ blurb:"Moles pop out of mounds holding answers. Bonk the one that's true; spare the fibbers.",
+ why:"Snap judgements between look-alike options — great for confusable vocabulary and formulas.",
+ flow:["The question appears on the garden sign.","Four mounds; moles pop up showing possible answers.","Tap the true answer's mole before it ducks.","10 questions, mounds get cheekier each round."],
+ art:S(`<rect y="50" width="120" height="30" fill="#a8c68a"/><ellipse cx="30" cy="56" rx="14" ry="6" fill="#8a6b4a"/><ellipse cx="90" cy="56" rx="14" ry="6" fill="#8a6b4a"/><circle cx="30" cy="44" r="9" fill="#a5855f"/><circle cx="27" cy="42" r="1.6" fill="#26342b"/><circle cx="33" cy="42" r="1.6" fill="#26342b"/><rect x="56" y="10" width="34" height="16" rx="4" fill="#f0d9a8" stroke="#8a6b4a"/><text x="61" y="21" font-size="8" font-weight="700" fill="#26342b">88 keys?</text>`)},
+{id:"rocket",name:"Rocket Recall",cat:"arcade",shape:"up",
+ blurb:"Every correct answer is a stage of rocket fuel. Ten correct answers and your rocket reaches the stars.",
+ why:"A visible ascent ties the session together — you literally see ten recalls add up to lift-off.",
+ flow:["A question is mission control's call; pick the right answer to fuel one stage.","Wrong answers vent fuel — try again until the stage fills.","Watch the rocket climb the launch tower, stage by stage.","The 10th correct answer ignites lift-off."],
+ art:S(`<rect width="120" height="80" fill="#2c3a4a"/><circle cx="100" cy="14" r="2" fill="#f5d76e"/><circle cx="18" cy="24" r="1.5" fill="#f5d76e"/><circle cx="78" cy="34" r="1.5" fill="#f5d76e"/><g><path d="M52 64 q0 -22 8 -30 q8 8 8 30 z" fill="#fffcf5" stroke="#8a806b"/><circle cx="60" cy="46" r="4" fill="#3b8dce"/><path d="M52 64 l-6 8 h8 z M68 64 l6 8 h-8 z" fill="#bd6748"/><path d="M56 68 q4 8 4 10 q4 -4 4 -10 z" fill="#ef8c32"/></g>`)},
+{id:"conveyor",name:"Conveyor Seeds",cat:"arcade",shape:"loop",
+ blurb:"Seed packets ride a conveyor past the question. Grab the matching packet before it falls off the end.",
+ why:"Deciding under motion rehearses the exact skill of review: the right answer, on sight, every time.",
+ flow:["The question labels the collection crate.","Packets with candidate answers roll along the belt.","Drag the correct packet into the crate; wrong packets jam the belt briefly.","10 packets sorted, crate full, session done."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><rect x="8" y="46" width="104" height="10" rx="5" fill="#8a806b"/><g fill="#5b6157"><circle cx="20" cy="51" r="3"/><circle cx="40" cy="51" r="3"/><circle cx="60" cy="51" r="3"/><circle cx="80" cy="51" r="3"/><circle cx="100" cy="51" r="3"/></g><g><rect x="24" y="30" width="14" height="14" rx="2" fill="#bd6748"/><rect x="54" y="30" width="14" height="14" rx="2" fill="#3b8dce"/><rect x="84" y="30" width="14" height="14" rx="2" fill="#ef8c32"/></g>`)},
+{id:"reveal",name:"Seedling Reveal",cat:"puzzle",shape:"grid",playable:true,
+ blurb:"A hidden picture sleeps under 10 fog tiles. Each correct answer wipes one tile clean.",
+ why:"Curiosity pulls you through the set: you answer question 7 because you need to know what's under tile 7.",
+ flow:["A mystery picture hides under ten fog tiles; the question sits on top.","Answer correctly (four options) to clear one tile.","Wrong pick? The correct answer is shown and the tile still clears — no grinding, no hiding the learning.","After question 10 the whole picture is revealed and named."],
+ art:S(`<rect width="120" height="80" fill="#a8c68a"/><g fill="#cfd8c4" stroke="#bcc8b0"><rect x="24" y="12" width="24" height="20" rx="3"/><rect x="48" y="12" width="24" height="20" rx="3"/><rect x="72" y="12" width="24" height="20" rx="3"/><rect x="24" y="32" width="24" height="20" rx="3"/><rect x="72" y="32" width="24" height="20" rx="3"/></g><rect x="48" y="32" width="24" height="20" rx="3" fill="#dcecF5" stroke="#bcc8b0"/><path d="M60 48 v-8 M60 40 q-5 -2 -6 -7 M60 38 q5 -2 6 -7" stroke="#5a9e5b" stroke-width="2" fill="none"/>`)},
+{id:"jigsaw",name:"Jigsaw Patch",cat:"puzzle",shape:"grid",
+ blurb:"Every correct answer earns a jigsaw piece. Fit all ten to complete the garden patch.",
+ why:"Ten small wins assemble into one visible whole — the session as an object you built.",
+ flow:["Answer a question to win the next jigsaw piece.","Drag it into the puzzle frame; it snaps where it belongs.","Wrong answers cost nothing but another try at the same question.","The 10th piece completes the picture."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g stroke="#8a806b" fill="#fffcf5"><path d="M26 20 h18 v6 q5 -3 5 2 t-5 2 v6 h-18 v-6 q-5 3 -5 -2 t5 -2 z"/><path d="M52 20 h18 v16 h-18 z" fill="#eef3e8" stroke="#5a9e5b"/><path d="M78 20 h18 v16 h-18 z"/></g><circle cx="87" cy="28" r="4" fill="#ef8c32" stroke="none"/>`)},
+{id:"maze",name:"Maze Runner",cat:"puzzle",shape:"maze",
+ blurb:"A hedge maze where every fork is a question. The correct answer is the gate that opens.",
+ why:"Wrong turns are safe and cheap, so you explore; the maze makes 10 questions feel like one journey.",
+ flow:["Walk the maze; each junction poses a question with the exits as answers.","Choose the correct exit to pass; a wrong one is a soft dead-end that teaches.","Find the heart of the maze after 10 gates.","A breadcrumb trail shows the questions you already passed."],
+ art:S(`<rect width="120" height="80" fill="#a8c68a"/><g stroke="#4d8a4e" stroke-width="4" fill="none" stroke-linecap="round"><path d="M10 70 v-56 h100"/><path d="M30 70 v-40 h60"/><path d="M50 70 v-24 h40 v-20"/></g><circle cx="90" cy="56" r="5" fill="#ef8c32"/><circle cx="14" cy="66" r="4" fill="#3b8dce"/>`)},
+{id:"bridge",name:"Bridge Builder",cat:"puzzle",shape:"gaps",
+ blurb:"A river, ten missing planks. Each correct answer lays one plank and the snail crosses a little further.",
+ why:"Steady one-by-one progress you can watch; perfect for a calm, untimed review.",
+ flow:["The question appears at the riverbank with four plank options.","The correct plank drops into the gap; the snail inches across.","A wrong plank floats away, the right one is named, try the next gap.","Ten planks, one crossing, session complete."],
+ art:S(`<rect width="120" height="80" fill="#dcecF5"/><rect y="40" width="120" height="26" fill="#7ab3d9"/><path d="M0 40 h120 M0 66 h120" stroke="#5a9ec4" stroke-width="2"/><g fill="#8a6b4a"><rect x="18" y="38" width="12" height="5" rx="2"/><rect x="36" y="38" width="12" height="5" rx="2"/><rect x="54" y="38" width="12" height="5" rx="2"/></g><circle cx="20" cy="34" r="4" fill="#f0d9a8"/><path d="M16 34 h-4" stroke="#8a6b4a" stroke-width="2"/>`)},
+{id:"tangram",name:"Tangram Plot",cat:"puzzle",shape:"cluster",
+ blurb:"Correct answers unlock wooden shapes; fit all ten into the garden plot's silhouette.",
+ why:"A spatial puzzle between questions keeps hands busy while memory does the work.",
+ flow:["Answer to release the next tangram piece onto the mat.","Rotate and place it into the silhouette.","Pieces never lock you out — hints show a ghost outline if you're stuck.","Ten pieces, one filled plot."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g stroke="#8a6b4a" stroke-width="1"><path d="M30 46 l16 -22 l16 22 z" fill="#bd6748"/><path d="M62 46 l12 -12 l12 12 z" fill="#3b8dce"/><rect x="52" y="20" width="12" height="12" fill="#ef8c32" transform="rotate(45 58 26)"/></g>`)},
+{id:"stones",name:"Stepping Stones",cat:"board",shape:"path",playable:true,
+ blurb:"Ten stones across the pond, one question per hop. Help the frog reach the water lily.",
+ why:"A gentle race with a visible end — you always know exactly how much review is left.",
+ flow:["Each stone shows a question; four lily-pad answers float nearby.","Pick the correct pad and the frog hops on.","A splash on a wrong pick, the right answer is shown, then the next stone.","The 10th hop lands on the flower."],
+ art:S(`<rect width="120" height="80" fill="#7ab3d9"/><g fill="#8fae7c"><ellipse cx="20" cy="64" rx="10" ry="4"/><ellipse cx="42" cy="52" rx="10" ry="4"/><ellipse cx="64" cy="60" rx="10" ry="4"/><ellipse cx="86" cy="46" rx="10" ry="4"/><ellipse cx="104" cy="32" rx="10" ry="4"/></g><circle cx="42" cy="47" r="6" fill="#5a9e5b"/><circle cx="40" cy="45" r="1.4" fill="#26342b"/><circle cx="45" cy="45" r="1.4" fill="#26342b"/><circle cx="104" cy="28" r="5" fill="#e88bb0"/>`)},
+{id:"wheel",name:"Wheel of Sprouts",cat:"board",shape:"circle",
+ blurb:"Spin the seed wheel to pick how the next question is served: type it, pick it, true-or-false.",
+ why:"The wheel varies the question format for you — variety that keeps the same ten questions surprising.",
+ flow:["Spin; the wheel lands on a question format and a question.","Answer in that format.","Each wedge can be used once — 10 spins, 10 different servings.","A full ring of sprouts marks the finished session."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><circle cx="60" cy="34" r="24" fill="#fffcf5" stroke="#8a806b"/><g stroke="#8a806b"><line x1="60" y1="10" x2="60" y2="58"/><line x1="36" y1="34" x2="84" y2="34"/><line x1="43" y1="17" x2="77" y2="51"/><line x1="77" y1="17" x2="43" y2="51"/></g><path d="M60 6 l-4 -6 h8 z" fill="#bd6748"/><circle cx="60" cy="34" r="4" fill="#ef8c32"/>`)},
+{id:"bingo",name:"Bingo Bed",cat:"board",shape:"bingo",
+ blurb:"A 2×5 bingo card of answers. Questions are called out one by one; mark them all to fill the bed.",
+ why:"Scanning your card for each called question keeps all ten answers warm the whole session.",
+ flow:["Your bingo bed shows the session's 10 answers, shuffled into 2 rows.","Questions are called; tap the matching answer cell.","Each marked cell plants a seedling; wrong taps just wiggle.","A full bed of ten seedlings is bingo."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g fill="#fffcf5" stroke="#8a806b"><rect x="24" y="14" width="14" height="12" rx="2"/><rect x="38" y="14" width="14" height="12" rx="2"/><rect x="52" y="14" width="14" height="12" rx="2"/><rect x="66" y="14" width="14" height="12" rx="2"/><rect x="80" y="14" width="14" height="12" rx="2"/><rect x="24" y="26" width="14" height="12" rx="2"/><rect x="38" y="26" width="14" height="12" rx="2"/><rect x="52" y="26" width="14" height="12" rx="2"/><rect x="66" y="26" width="14" height="12" rx="2"/><rect x="80" y="26" width="14" height="12" rx="2"/></g><g fill="#5a9e5b"><circle cx="45" cy="20" r="3"/><circle cx="73" cy="32" r="3"/><circle cx="31" cy="32" r="3"/></g>`)},
+{id:"dice",name:"Dice Meadow",cat:"board",shape:"loop",
+ blurb:"Roll the die, walk the meadow path, answer the tile you land on. Ten tiles, one loop.",
+ why:"Chance decides the order, so review never falls into a stale routine — you answer what you land on.",
+ flow:["Tap to roll; your token strolls forward that many tiles.","The landing tile flips over: its question, your answer.","Answered tiles bloom and stay open.","Complete the loop by answering all 10 tiles."],
+ art:S(`<rect width="120" height="80" fill="#a8c68a"/><path d="M20 62 Q20 22 60 22 T100 62" stroke="#f0d9a8" stroke-width="8" fill="none" stroke-linecap="round"/><g fill="#8a6b4a"><circle cx="20" cy="62" r="2.5"/><circle cx="34" cy="38" r="2.5"/><circle cx="60" cy="24" r="2.5"/><circle cx="86" cy="38" r="2.5"/><circle cx="100" cy="62" r="2.5"/></g><rect x="52" y="42" width="16" height="16" rx="4" fill="#fffcf5" stroke="#8a806b"/><g fill="#26342b"><circle cx="57" cy="47" r="1.6"/><circle cx="63" cy="53" r="1.6"/><circle cx="63" cy="47" r="1.6"/><circle cx="57" cy="53" r="1.6"/></g>`)},
+{id:"tower",name:"Trivia Tower",cat:"build",shape:"stack",
+ blurb:"Each correct answer stacks a wooden floor on your tower. Ten floors reach the treehouse.",
+ why:"Vertical progress you feel in your thumb — short sessions with a summit.",
+ flow:["A question is a crane call; answer to stack the next floor.","Wrong answers wobble the tower but never topple it.","Every fifth floor adds a flag marking the halfway views.","Floor 10 opens the treehouse."],
+ art:S(`<rect y="62" width="120" height="18" fill="#a8c68a"/><g stroke="#8a6b4a"><rect x="44" y="50" width="32" height="12" fill="#c89b6d"/><rect x="48" y="38" width="24" height="12" fill="#b5855a"/><rect x="52" y="26" width="16" height="12" fill="#c89b6d"/></g><path d="M60 26 v-10 l10 3 -10 3" fill="#bd6748" stroke="#bd6748"/>`)},
+{id:"constellation",name:"Constellation",cat:"build",shape:"stars",
+ blurb:"Each answer lights a star in the night garden. Connect all ten to draw the session's constellation.",
+ why:"The growing pattern rewards completion, and naming the constellation gives the session a souvenir.",
+ flow:["Answer to light the next star.","Drag from star to star to link the constellation as it grows.","Wrong answers dim the sky for a breath, then clear.","Ten stars make a named constellation (the Carrot, the Watering Can…)."],
+ art:S(`<rect width="120" height="80" fill="#2c3a4a"/><g fill="#f5d76e"><circle cx="24" cy="56" r="2.5"/><circle cx="40" cy="40" r="2.5"/><circle cx="58" cy="48" r="2.5"/><circle cx="74" cy="28" r="2.5"/><circle cx="94" cy="36" r="2.5"/></g><g stroke="#f5d76e" stroke-width="1" opacity=".6"><line x1="24" y1="56" x2="40" y2="40"/><line x1="40" y1="40" x2="58" y2="48"/><line x1="58" y1="48" x2="74" y2="28"/><line x1="74" y1="28" x2="94" y2="36"/></g><circle cx="100" cy="14" r="6" fill="#f0d9a8" opacity=".8"/>`)},
+{id:"recipe",name:"Recipe Pot",cat:"build",shape:"ring",
+ blurb:"The soup needs ten ingredients. Each correct answer drops one in; the 10th makes dinner.",
+ why:"A cosy cumulative goal — every answer visibly changes the pot, no score arithmetic needed.",
+ flow:["The recipe card lists tonight's soup; a question guards each ingredient.","Answer to toss it in and stir.","Wrong answers splatter a little broth, then the right one is named.","Ten ingredients in, the pot is served."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><path d="M38 40 h44 v10 q0 14 -22 14 t-22 -14 z" fill="#5b6157"/><rect x="34" y="36" width="52" height="6" rx="3" fill="#4a5047"/><g><circle cx="50" cy="32" r="3" fill="#bd6748"/><circle cx="62" cy="28" r="3" fill="#ef8c32"/><circle cx="72" cy="32" r="3" fill="#5a9e5b"/></g><path d="M46 22 q3 -6 0 -10 M60 20 q3 -6 0 -10 M74 22 q3 -6 0 -10" stroke="#cfd8c4" stroke-width="2" fill="none"/>`)},
+{id:"detective",name:"Detective Case",cat:"build",shape:"spiral",
+ blurb:"Ten clues crack the case of the missing watering can. Each question answered is a clue pinned to the board.",
+ why:"A story spine gives the ten unrelated questions one shared purpose and a punchline.",
+ flow:["The case file opens with a tiny mystery told in two lines.","Each question answered pins a clue to the corkboard.","After 10 clues, name the culprit from three suspects.","Solve the case to close the session."],
+ art:S(`<rect width="120" height="80" fill="#c89b6d"/><g><rect x="26" y="16" width="18" height="14" rx="2" fill="#fffcf5"/><rect x="56" y="24" width="18" height="14" rx="2" fill="#fdf0dc"/><rect x="82" y="14" width="18" height="14" rx="2" fill="#eef3e8"/></g><g fill="#bd6748"><circle cx="35" cy="18" r="2"/><circle cx="65" cy="26" r="2"/><circle cx="91" cy="16" r="2"/></g><g stroke="#f0d9a8" stroke-width="1.5"><line x1="35" y1="18" x2="65" y2="26"/><line x1="65" y1="26" x2="91" y2="16"/></g><circle cx="50" cy="56" r="10" fill="none" stroke="#5b6157" stroke-width="3"/><line x1="57" y1="63" x2="66" y2="72" stroke="#5b6157" stroke-width="3" stroke-linecap="round"/>`)},
+{id:"bee",name:"Bee Round",cat:"build",shape:"ring",
+ blurb:"Ten flowers wait in the meadow. Each correct answer sends the bee to pollinate one.",
+ why:"One answer, one flower: an honest count of the session that ends in a blooming meadow.",
+ flow:["The bee hovers over a meadow of ten buds; a question per bud.","Answer correctly and the bee lands — the bud blooms.","Wrong answers send the bee looping back with the right answer shown.","Ten blooms fill the meadow."],
+ art:S(`<rect width="120" height="80" fill="#dcecF5"/><rect y="56" width="120" height="24" fill="#a8c68a"/><g><g stroke="#5a9e5b" stroke-width="2"><line x1="30" y1="70" x2="30" y2="58"/><line x1="55" y1="70" x2="55" y2="58"/><line x1="80" y1="70" x2="80" y2="58"/></g><circle cx="30" cy="55" r="5" fill="#e88bb0"/><circle cx="55" cy="55" r="5" fill="#d9a441"/><circle cx="80" cy="55" r="5" fill="#cfd8c4"/></g><ellipse cx="66" cy="26" r="6" ry="4.5" fill="#f5d76e" stroke="#26342b"/><line x1="64" y1="22" x2="64" y2="30" stroke="#26342b" stroke-width="1.5"/><ellipse cx="70" cy="21" rx="4" ry="2.5" fill="#fff" opacity=".8"/>`)},
+{id:"ants",name:"Ant Picnic",cat:"build",shape:"trail",
+ blurb:"The ants are carrying ten crumbs home. Each answer you give lets one ant grab its crumb.",
+ why:"A parade of tiny finishes — frequent, friendly feedback with zero jeopardy.",
+ flow:["A crumb and a question at the picnic blanket.","Answer and an ant lifts the crumb onto the trail.","Wrong answers make the ant circle back while the right one is shown.","Ten crumbs reach the anthill."],
+ art:S(`<rect y="52" width="120" height="28" fill="#c89b6d"/><path d="M14 64 q20 -10 40 0 t52 -4" stroke="#8a6b4a" stroke-width="2" fill="none" stroke-dasharray="3 4"/><g fill="#5b3a26"><circle cx="30" cy="60" r="2.5"/><circle cx="48" cy="64" r="2.5"/><circle cx="68" cy="61" r="2.5"/></g><rect x="14" y="34" width="26" height="16" rx="3" fill="#bd6748"/><g fill="#f0d9a8"><circle cx="20" cy="40" r="1.5"/><circle cx="28" cy="44" r="1.5"/><circle cx="34" cy="38" r="1.5"/></g>`)},
+{id:"duel",name:"Past-Self Duel",cat:"social",shape:"dual",
+ blurb:"Race the ghost of your own session from last week: same ten questions, side by side.",
+ why:"Competing with yourself keeps it kind — the rival always deserves to win, and improvement is the point.",
+ flow:["The same 10 questions as a past session appear in order.","Your ghost replays its old pace and old answers beside you.","Answer faster and better than the ghost to pull ahead.","A finish-line photo shows then vs now."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><line x1="12" y1="20" x2="108" y2="20" stroke="#8a806b" stroke-width="2"/><g><circle cx="40" cy="14" r="6" fill="#3b8dce"/><circle cx="64" cy="14" r="6" fill="#cfd8c4"/></g><g><circle cx="40" cy="40" r="8" fill="#3b8dce"/><circle cx="64" cy="40" r="8" fill="#cfd8c4" opacity=".7"/><text x="36" y="44" font-size="9" fill="#fff" font-weight="700">You</text></g><rect x="102" y="26" width="4" height="36" fill="#bd6748"/>`)},
+{id:"potato",name:"Hot Potato",cat:"social",shape:"circle",
+ blurb:"Pass the phone (or play solo against the clock you set): each holder answers one question and passes it on.",
+ why:"Ten questions shared across people turns review into a party trick — everyone recalls out loud.",
+ flow:["Start a round; question 1 shows with a soft timer you choose (or none).","Answer, pass the potato — the next player (or the next you) gets question 2.","Drops are shared: the group answers 10 together.","The round ends with everyone's correct answers counted as one harvest."],
+ art:S(`<rect y="58" width="120" height="22" fill="#a8c68a"/><g fill="#f0d9a8" stroke="#8a6b4a"><circle cx="30" cy="46" r="8"/><circle cx="90" cy="46" r="8"/><circle cx="60" cy="58" r="8"/></g><ellipse cx="60" cy="26" rx="10" ry="7" fill="#c89b6d"/><path d="M52 22 q8 -6 16 0" stroke="#8a6b4a" fill="none"/><path d="M40 30 q8 -4 12 2 M80 30 q-8 -4 -12 2" stroke="#bd6748" stroke-width="2" fill="none" stroke-linecap="round"/>`)}
+];
+</script>
+<script>
+/* ---------- gallery rendering ---------- */
+const $=id=>document.getElementById(id);
+let activeCat="all";
+function renderFilters(){
+  const f=$("filters");f.innerHTML="";
+  CATS.forEach(([k,label])=>{
+    const n=k==="all"?GAMES.length:GAMES.filter(g=>g.cat===k).length;
+    const b=document.createElement("button");
+    b.className="chip"+(k===activeCat?" on":"");
+    b.textContent=label+" · "+n;
+    b.onclick=()=>{activeCat=k;renderFilters();renderGrid();};
+    f.appendChild(b);
+  });
+}
+function renderGrid(){
+  const g=$("grid");g.innerHTML="";
+  GAMES.filter(x=>activeCat==="all"||x.cat===activeCat).forEach(game=>{
+    const c=document.createElement("button");
+    c.className="card";c.setAttribute("aria-label",game.name);
+    c.innerHTML=`<span class="art">${game.art}</span>
+      <span class="meta">
+        <span class="name">${game.name}</span>
+        <span class="blurb">${game.blurb}</span>
+        <span class="tags">
+          <span class="tag">${CATS.find(c=>c[0]===game.cat)[1]}</span>
+          ${game.playable?'<span class="tag play">Playable sketch</span>':''}
+          <span class="qbadge">10 Q</span>
+        </span>
+      </span>`;
+    c.onclick=()=>openSheet(game);
+    g.appendChild(c);
+  });
+}
+/* ---------- session-shape dot diagrams (10 dots) ---------- */
+function dots(shape){
+  const P=(x,y)=>`<circle cx="${x}" cy="${y}" r="3.4" fill="#bd6748"/>`;
+  let pts=[];
+  const N=10;
+  if(shape==="grid"){for(let i=0;i<N;i++)pts.push([18+(i%5)*24,14+Math.floor(i/5)*18]);}
+  else if(shape==="row"){for(let i=0;i<N;i++)pts.push([10+i*14,20]);}
+  else if(shape==="stack"||shape==="up"){for(let i=0;i<N;i++)pts.push([60,38-i*3.6]);}
+  else if(shape==="pairs"){for(let i=0;i<5;i++){pts.push([22+i*22,12]);pts.push([22+i*22,30]);}}
+  else if(shape==="circle"||shape==="ring"){for(let i=0;i<N;i++){const a=-Math.PI/2+i*2*Math.PI/N;pts.push([60+26*Math.cos(a),21+16*Math.sin(a)]);}}
+  else if(shape==="wave"){for(let i=0;i<N;i++)pts.push([10+i*11.5,21+10*Math.sin(i/1.4)]);}
+  else if(shape==="zigzag"){for(let i=0;i<N;i++)pts.push([12+i*10.5,i%2?10:32]);}
+  else if(shape==="cols"){for(let i=0;i<5;i++){pts.push([20+i*20,10]);pts.push([20+i*20,32]);}}
+  else if(shape==="bumps"){for(let i=0;i<N;i++)pts.push([12+i*10.5,26-6*Math.abs(Math.sin(i*1.1))]);}
+  else if(shape==="loop"){for(let i=0;i<N;i++){const a=i*2*Math.PI/N;pts.push([60+30*Math.cos(a)*1,21+14*Math.sin(a)]);}}
+  else if(shape==="maze"||shape==="path"||shape==="trail"){for(let i=0;i<N;i++)pts.push([12+i*10.5,21+9*Math.sin(i*1.2)]);}
+  else if(shape==="gaps"){for(let i=0;i<N;i++)pts.push([10+i*11,i%3===1?14:26]);}
+  else if(shape==="cluster"){for(let i=0;i<N;i++)pts.push([60+Math.cos(i*2.4)*8*(1+i*.9),21+Math.sin(i*2.4)*6*(1+i*.9)]);}
+  else if(shape==="bingo"){for(let i=0;i<N;i++)pts.push([20+(i%5)*20,13+Math.floor(i/5)*16]);}
+  else if(shape==="stars"){for(let i=0;i<N;i++)pts.push([60+Math.cos(i*2.2)*(6+i*2.6),21+Math.sin(i*2.2)*(4+i*1.8)]);}
+  else if(shape==="spiral"){for(let i=0;i<N;i++){const a=i*.9,r=3+i*2.4;pts.push([60+r*Math.cos(a),21+r*.7*Math.sin(a)]);}}
+  else if(shape==="dual"){for(let i=0;i<5;i++){pts.push([16+i*22,11]);pts.push([16+i*22,31]);}}
+  else if(shape==="scatter"){for(let i=0;i<N;i++)pts.push([14+((i*37)%92),10+((i*23)%24)]);}
+  else{for(let i=0;i<N;i++)pts.push([10+i*11,20]);}
+  return `<svg viewBox="0 0 120 42" width="150" height="52" role="img" aria-label="Session shape: ten questions">${pts.map(p=>P(p[0].toFixed(1),p[1].toFixed(1))).join("")}</svg>`;
+}
+/* ---------- detail sheet ---------- */
+let sheetGame=null;
+function openSheet(game){
+  sheetGame=game;
+  $("sheetArt").innerHTML=game.art;
+  $("sheetName").textContent=game.name;
+  $("sheetWhy").textContent=game.why;
+  $("sheetDots").innerHTML=dots(game.shape);
+  const f=$("sheetFlow");f.innerHTML="";
+  game.flow.forEach((s,i)=>{
+    const li=document.createElement("li");
+    li.innerHTML=`<span class="n">${i+1}</span><span>${s}</span>`;
+    f.appendChild(li);
+  });
+  const act=$("sheetAction");
+  if(game.playable){
+    act.innerHTML=`<button class="play-btn" id="playBtn">▶ Try the playable sketch (demo questions)</button>`;
+    $("playBtn").onclick=()=>{closeSheet();startGame(game.id);};
+  }else{
+    act.innerHTML=`<div class="concept-note">Concept illustration — not playable in this study. The drawing and flow above show how the same 10 review questions would run inside this game.</div>`;
+  }
+  $("backdrop").classList.add("open");$("sheet").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeSheet(){
+  $("backdrop").classList.remove("open");$("sheet").classList.remove("open");
+  document.body.style.overflow="";
+}
+$("backdrop").onclick=closeSheet;$("sheetClose").onclick=closeSheet;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSheet();closeGame();}});
+renderFilters();renderGrid();
+</script>
+<script>
+/* ---------- playable sketches ---------- */
+let G={}; /* per-game state */
+function startGame(id){
+  G={id,idx:0,score:0};
+  $("gName").textContent=GAMES.find(g=>g.id===id).name+" (demo)";
+  $("game").classList.add("open");document.body.style.overflow="hidden";
+  drawDots();
+  ({anagram:playAnagram,hangman:playHangman,crossword:playCrossword,memory:playMemory,reveal:playReveal,stones:playStones})[id]();
+}
+function closeGame(){$("game").classList.remove("open");document.body.style.overflow="";}
+$("gClose").onclick=closeGame;
+function drawDots(){
+  const d=$("gDots");d.innerHTML="";
+  for(let i=0;i<10;i++){
+    const s=document.createElement("span");
+    s.className="gdot"+(i<G.idx?" done":i===G.idx?" now":"");
+    d.appendChild(s);
+  }
+  $("gProg").textContent="Q "+Math.min(G.idx+1,10)+" / 10";
+}
+function endGame(extra){
+  $("gProg").textContent="Done";
+  $("gDots").innerHTML="";
+  $("gBody").innerHTML=`<div class="gend">
+    <div style="font-size:2.4rem">🌻</div>
+    <div class="big">${G.score} / 10 correct</div>
+    <p>${extra||""}</p>
+    <p>In the real app this session would count as your review: first-time correct answers earn their 🥕 as usual, and wrong ones come back sooner. All numbers here are demo placeholders.</p>
+    <button class="again" id="gAgain">Back to the arcade</button>
+  </div>`;
+  $("gAgain").onclick=closeGame;
+}
+/* ---- 1. Anagram Sprouts ---- */
+function playAnagram(){
+  if(G.idx>=10)return endGame("Every sprout you grew was a spelled-out recall — no options to lean on.");
+  const Q=QUESTIONS[G.idx];drawDots();
+  const letters=Q.a.split("").map((ch,i)=>({ch,i,used:false}));
+  /* seeded shuffle that never returns the word in order */
+  let order=[...letters];
+  do{order.sort(()=>Math.sin(G.idx*31+order.length*7+order[0].i)-0.5);}while(order.map(l=>l.ch).join("")===Q.a);
+  let placed=[];
+  $("gBody").innerHTML=`<div class="gq">${Q.q}</div>
+    <div class="slots" id="anSlots"></div>
+    <div class="tiles" id="anTiles"></div>
+    <div style="font-size:.78rem;color:var(--dim)">Tap tiles to spell the answer · tap a placed letter to remove it</div>`;
+  const slots=$("anSlots"),tiles=$("anTiles");
+  function render(){
+    slots.innerHTML="";tiles.innerHTML="";
+    Q.a.split("").forEach((_,i)=>{
+      const s=document.createElement("button");s.className="slot"+(placed[i]?" full":"");
+      s.textContent=placed[i]?placed[i].ch:"";
+      if(placed[i])s.onclick=()=>{placed[i].used=false;placed.splice(i,1);render();};
+      slots.appendChild(s);
+    });
+    order.forEach(l=>{
+      if(l.used)return;
+      const t=document.createElement("button");t.className="tile";t.textContent=l.ch;
+      t.onclick=()=>{if(placed.length<Q.a.length){l.used=true;placed.push(l);render();check();}};
+      tiles.appendChild(t);
+    });
+  }
+  function check(){
+    if(placed.length<Q.a.length)return;
+    const word=placed.map(l=>l.ch).join("");
+    if(word===Q.a){
+      slots.querySelectorAll(".slot").forEach(s=>s.classList.add("ok"));
+      G.score++;G.idx++;setTimeout(playAnagram,650);
+    }else{
+      slots.classList.add("shake");
+      slots.querySelectorAll(".slot").forEach(s=>s.classList.add("bad"));
+      setTimeout(()=>{slots.classList.remove("shake");placed.forEach(l=>l.used=false);placed=[];render();
+        $("gBody").insertAdjacentHTML("beforeend",`<div style="font-size:.8rem;color:var(--terra-d)">Not quite — the answer was <b>${Q.a}</b>. Try spelling it now.</div>`);
+      },420);
+    }
+  }
+  render();
+}
+/* ---- 2. Scarecrow Letters (hangman) ---- */
+function playHangman(){
+  if(G.idx>=10)return endGame("Spelling the answers letter by letter is the strictest kind of recall — nicely done.");
+  const Q=QUESTIONS[G.idx];drawDots();
+  G.hw={found:new Set(),wrong:0};
+  const parts=["pole","arm","arm2","head","hat","face"];
+  $("gBody").innerHTML=`<div class="gq">${Q.q}</div>
+    <svg viewBox="0 0 120 100" width="130" role="img" aria-label="Scarecrow progress">
+      <g id="scare" stroke="#8a6b4a" stroke-width="3" fill="none">
+        <line data-p="pole" x1="60" y1="92" x2="60" y2="34" style="visibility:hidden"/>
+        <line data-p="arm" x1="60" y1="44" x2="42" y2="52" style="visibility:hidden"/>
+        <line data-p="arm2" x1="60" y1="44" x2="78" y2="52" style="visibility:hidden"/>
+        <circle data-p="head" cx="60" cy="26" r="9" fill="#f0d9a8" style="visibility:hidden"/>
+        <path data-p="hat" d="M48 21 h24 l-4 -8 h-16 z" fill="#bd6748" style="visibility:hidden"/>
+        <g data-p="face" stroke="#26342b" stroke-width="1.6" style="visibility:hidden"><circle cx="57" cy="25" r="1"/><circle cx="63" cy="25" r="1"/><path d="M57 30 q3 2 6 0"/></g>
+      </g>
+    </svg>
+    <div class="wordrow" id="hwRow"></div>
+    <div class="pad" id="hwPad"></div>`;
+  const AZ="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const row=$("hwRow"),pad=$("hwPad");
+  function renderWord(){
+    row.innerHTML="";
+    Q.a.split("").forEach(ch=>{
+      const b=document.createElement("span");b.className="lbox";
+      b.textContent=G.hw.found.has(ch)?ch:"";
+      row.appendChild(b);
+    });
+  }
+  function renderScare(){
+    document.querySelectorAll("#scare [data-p]").forEach((el,i)=>{
+      el.style.visibility=i<G.hw.wrong?"visible":"hidden";
+    });
+  }
+  AZ.forEach(ch=>{
+    const k=document.createElement("button");k.className="key";k.textContent=ch;
+    k.onclick=()=>{
+      k.disabled=true;
+      if(Q.a.includes(ch)){
+        k.classList.add("ok");G.hw.found.add(ch);renderWord();
+        if(Q.a.split("").every(c=>G.hw.found.has(c))){G.score++;G.idx++;setTimeout(playHangman,700);}
+      }else{
+        k.classList.add("no");G.hw.wrong++;renderScare();
+        if(G.hw.wrong>=6){
+          pad.querySelectorAll(".key").forEach(x=>x.disabled=true);
+          row.innerHTML=Q.a.split("").map(c=>`<span class="lbox" style="color:var(--terra-d)">${c}</span>`).join("");
+          G.idx++;setTimeout(playHangman,1400);
+        }
+      }
+    };
+    pad.appendChild(k);
+  });
+  renderWord();renderScare();
+}
+</script>
+<script>
+/* ---- 3. Mini Crossword (layout verified: seed 213, 10/10 words placed) ---- */
+function xwLayout(){
+  function rng(seed){let s=seed;return()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff}}
+  function tryLayout(order){
+    const placed=[],grid=new Map(),key=(r,c)=>r+","+c;
+    function canPlace(w,r,c,dir){
+      for(let i=0;i<w.length;i++){
+        const rr=dir===0?r:r+i,cc=dir===0?c+i:c,ex=grid.get(key(rr,cc));
+        if(ex!==undefined&&ex!==w[i])return false;
+        if(ex===undefined){
+          const n1=dir===0?key(rr-1,cc):key(rr,cc-1),n2=dir===0?key(rr+1,cc):key(rr,cc+1);
+          if(grid.has(n1)||grid.has(n2))return false;
+        }
+      }
+      const br=dir===0?r:r-1,bc=dir===0?c-1:c,er=dir===0?r:r+w.length,ec=dir===0?c+w.length:c;
+      if(grid.has(key(br,bc))||grid.has(key(er,ec)))return false;
+      return true;
+    }
+    function place(w,r,c,dir){
+      for(let i=0;i<w.length;i++)grid.set(key(dir===0?r:r+i,dir===0?c+i:c),w[i]);
+      placed.push({word:w,r,c,dir});
+    }
+    place(order[0],0,0,0);
+    for(let k=1;k<order.length;k++){
+      const w=order[k];let best=null;
+      outer:for(const p of placed){
+        const ndir=p.dir===0?1:0;
+        for(let i=0;i<w.length;i++)for(let j=0;j<p.word.length;j++){
+          if(w[i]!==p.word[j])continue;
+          const cr=p.dir===0?p.r:p.r+j,cc=p.dir===0?p.c+j:p.c;
+          const sr=ndir===0?cr:cr-i,sc=ndir===0?cc-i:cc;
+          if(canPlace(w,sr,sc,ndir)){best={r:sr,c:sc,dir:ndir};break outer;}
+        }
+      }
+      if(!best)return null;
+      place(w,best.r,best.c,best.dir);
+    }
+    return placed;
+  }
+  const words=QUESTIONS.map(q=>q.a);
+  let lay=null;
+  for(let seed=XW_SEED;seed<XW_SEED+400&&!lay;seed++){
+    const r=rng(seed);
+    const order=[...words].sort(()=>r()-0.5);
+    lay=tryLayout(order);
+  }
+  lay=lay||tryLayout(words);
+  const minR=Math.min(...lay.map(p=>p.r)),minC=Math.min(...lay.map(p=>p.c));
+  lay.forEach(p=>{p.r-=minR;p.c-=minC;});
+  const H=Math.max(...lay.map(p=>p.dir?p.r+p.word.length-1:p.r))+1;
+  const W=Math.max(...lay.map(p=>p.dir?p.c:p.c+p.word.length-1))+1;
+  /* clue numbers in reading order */
+  const cellStart=new Map();let n=0;
+  for(let rr=0;rr<H;rr++)for(let cc=0;cc<W;cc++){
+    const starts=lay.filter(p=>p.r===rr&&p.c===cc);
+    if(starts.length){n++;starts.forEach(p=>p.num=n);cellStart.set(rr+","+cc,n);}
+  }
+  return {lay,H,W,cellStart};
+}
+function playCrossword(){
+  drawDots();$("gProg").textContent="Crossword";
+  const {lay,H,W,cellStart}=xwLayout();
+  G.xw={solved:new Set(),cur:0};
+  const gridEl=document.createElement("div");
+  $("gBody").innerHTML=`<div class="gq" style="font-size:.85rem">Ten clues, ten interlocking answers. Tap a clue, type the word.</div>
+    <div class="xw-wrap"><div class="xw" id="xwGrid" ></div></div>
+    <div class="xw-input"><input id="xwIn" maxlength="12" placeholder="Type the highlighted word…" autocomplete="off" autocapitalize="characters"><button id="xwGo">Check</button></div>
+    <div class="xw-clues" id="xwClues"></div>`;
+  $("xwGrid").style.cssText=`width:100%;max-width:${W*30+(W-1)*2}px;grid-template-columns:repeat(${W},minmax(0,1fr));margin:0 auto`;
+  const grid=$("xwGrid");
+  lay.forEach(p=>{
+    for(let i=0;i<p.word.length;i++){
+      const rr=p.dir===0?p.r:p.r+i,cc=p.dir===0?p.c+i:p.c;
+      p["cell"+i]=rr+"-"+cc;
+    }
+  });
+  const cellEls={};
+  for(let rr=0;rr<H;rr++)for(let cc=0;cc<W;cc++){
+    const d=document.createElement("div");
+    const owner=lay.find(p=>(p.dir===0?p.r===rr&&cc>=p.c&&cc<p.c+p.word.length:p.c===cc&&rr>=p.r&&rr<p.r+p.word.length));
+    if(owner){d.className="c";d.id="c"+rr+"-"+cc;
+      if(cellStart.has(rr+","+cc))d.innerHTML=`<span class="num">${cellStart.get(rr+","+cc)}</span>`;
+    }else d.className="c void";
+    grid.appendChild(d);cellEls[rr+"-"+cc]=d;
+  }
+  const clues=$("xwClues");
+  function renderClues(){
+    clues.innerHTML="";
+    lay.slice().sort((a,b)=>a.num-b.num).forEach((p,i)=>{
+      const qi=QUESTIONS.findIndex(q=>q.a===p.word);
+      const b=document.createElement("button");
+      b.className="xw-clue"+(G.xw.cur===lay.indexOf(p)?" cur":"")+(G.xw.solved.has(p.word)?" ok":"");
+      b.innerHTML=`<b>${p.num}${p.dir===0?"A":"D"}.</b> <span class="cl-t">${QUESTIONS[qi].q}</span>`;
+      b.onclick=()=>{G.xw.cur=lay.indexOf(p);refresh();$("xwIn").focus();};
+      clues.appendChild(b);
+    });
+  }
+  function refresh(){
+    lay.forEach((p,pi)=>{
+      for(let i=0;i<p.word.length;i++){
+        const el=cellEls[p["cell"+i]];
+        el.classList.toggle("cur",pi===G.xw.cur&&!G.xw.solved.has(p.word));
+        if(G.xw.solved.has(p.word)){el.classList.add("ok");el.classList.remove("cur");
+          if(!el.querySelector(".num")||true){const numEl=el.querySelector(".num");el.innerHTML=(numEl?numEl.outerHTML:"")+p.word[i];}
+        }
+      }
+    });
+    renderClues();
+    const unsolved=lay[G.xw.cur];
+    $("xwIn").value="";$("xwIn").placeholder=`${unsolved.num}${unsolved.dir===0?"A":"D"} — ${unsolved.word.length} letters`;
+  }
+  function checkWord(){
+    const p=lay[G.xw.cur];
+    const v=$("xwIn").value.trim().toUpperCase();
+    if(!v||G.xw.solved.has(p.word))return;
+    if(v===p.word){
+      G.xw.solved.add(p.word);G.score++;
+      const next=lay.findIndex(x=>!G.xw.solved.has(x.word));
+      G.xw.cur=next===-1?G.xw.cur:next;
+      refresh();
+      if(G.xw.solved.size===10)setTimeout(()=>endGame("A full grid: every crossing letter was a hint you earned by recalling its neighbour."),700);
+    }else{
+      $("xwIn").classList.add("shake");
+      setTimeout(()=>$("xwIn").classList.remove("shake"),400);
+      const qi=QUESTIONS.findIndex(q=>q.a===p.word);
+      $("xwIn").value="";$("xwIn").placeholder=`Answer: ${p.word} — type it to learn it`;
+    }
+  }
+  $("xwGo").onclick=checkWord;
+  $("xwIn").addEventListener("keydown",e=>{if(e.key==="Enter")checkWord();});
+  refresh();
+}
+</script>
+<script>
+/* ---- 4. Memory Greenhouse ---- */
+function playMemory(){
+  G.mem={round:G.mem&&G.mem.round===1?2:1,open:[],hits:0,lock:false};
+  if(G.mem.round===1)G.idx=0;
+  drawDots();
+  const base=(G.mem.round-1)*5;
+  const qs=QUESTIONS.slice(base,base+5);
+  let cards=[];
+  qs.forEach((q,i)=>{
+    cards.push({k:i,t:"q",label:q.q});
+    cards.push({k:i,t:"a",label:q.choices[0]});
+  });
+  cards.sort(()=>Math.sin(base*13+cards.length*3+cards[0].k)-0.5);
+  $("gBody").innerHTML=`<div class="gq" style="font-size:.9rem">Tray ${G.mem.round} of 2 — match each question to its answer.</div><div class="mem" id="memGrid"></div>`;
+  const grid=$("memGrid");
+  cards.forEach(c=>{
+    const b=document.createElement("button");b.className="mcard back";b.innerHTML=`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21 v-8 M12 13 q-6 -1 -7 -8 q7 0 7 8 M12 11 q6 -1 7 -8 q-7 0 -7 8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+    b.onclick=()=>{
+      if(G.mem.lock||b.classList.contains("hit")||b.classList.contains("open"))return;
+      b.classList.remove("back");b.classList.add("open");b.textContent=c.label;
+      G.mem.open.push({b,c});
+      if(G.mem.open.length===2){
+        G.mem.lock=true;
+        const [x,y]=G.mem.open;
+        if(x.c.k===y.c.k&&x.c.t!==y.c.t){
+          setTimeout(()=>{x.b.classList.add("hit");y.b.classList.add("hit");
+            x.b.classList.remove("open");y.b.classList.remove("open");
+            G.mem.hits++;G.score++;G.idx++;drawDots();
+            G.mem.open=[];G.mem.lock=false;
+            if(G.mem.hits===5){
+              if(G.mem.round===1)setTimeout(playMemory,700);
+              else setTimeout(()=>endGame("Two trays matched: question to answer, ten times, from memory."),700);
+            }
+          },450);
+        }else{
+          setTimeout(()=>{x.b.classList.add("back");y.b.classList.add("back");
+            x.b.classList.remove("open");y.b.classList.remove("open");
+            x.b.innerHTML=`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21 v-8 M12 13 q-6 -1 -7 -8 q7 0 7 8 M12 11 q6 -1 7 -8 q-7 0 -7 8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;y.b.innerHTML=`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21 v-8 M12 13 q-6 -1 -7 -8 q7 0 7 8 M12 11 q6 -1 7 -8 q-7 0 -7 8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+            G.mem.open=[];G.mem.lock=false;},900);
+        }
+      }
+    };
+    grid.appendChild(b);
+  });
+}
+/* ---- shared MC for reveal + stones ---- */
+function mcRound(container,Q,onPick){
+  const box=document.createElement("div");box.className="choices";
+  const opts=[...Q.choices].sort(()=>Math.sin(G.idx*17+Q.a.length)-0.5);
+  let done=false;
+  opts.forEach(o=>{
+    const b=document.createElement("button");b.className="choice";b.textContent=o;
+    b.onclick=()=>{
+      if(done)return;
+      if(o.toUpperCase()===Q.a){
+        done=true;b.classList.add("ok");G.score++;
+        setTimeout(()=>onPick(true),650);
+      }else{
+        b.classList.add("no");b.disabled=true;
+        const right=[...box.children].find(x=>x.textContent.toUpperCase()===Q.a);
+        if(right)right.classList.add("ok");
+        done=true;setTimeout(()=>onPick(false),1100);
+      }
+    };
+    box.appendChild(b);
+  });
+  container.appendChild(box);
+}
+/* ---- 5. Seedling Reveal ---- */
+function playReveal(){
+  if(G.idx>=10)return endGame("The hidden picture was the hook; the ten answers were the work.");
+  const Q=QUESTIONS[G.idx];drawDots();
+  if(!G.rvTiles){
+    $("gBody").innerHTML=`<div class="reveal-stage">
+      <svg class="scene" viewBox="0 0 400 170">
+        <rect width="400" height="120" fill="#dcecF5"/><rect y="120" width="400" height="50" fill="#a8c68a"/>
+        <circle cx="330" cy="34" r="20" fill="#f5d76e"/>
+        <path d="M60 122 v-36 M60 100 q-16 -6 -20 -22 M60 94 q16 -6 20 -22" stroke="#5a9e5b" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="60" cy="80" r="12" fill="#e88bb0"/><circle cx="60" cy="80" r="4" fill="#a74131"/>
+        <path d="M150 124 q10 -30 26 -34 q-4 18 -8 34" fill="#5a9e5b"/>
+        <ellipse cx="250" cy="110" rx="16" ry="10" fill="#bd6748"/><path d="M240 104 q10 -14 20 0" fill="#f0d9a8"/>
+        <ellipse cx="120" cy="140" rx="10" ry="4" fill="#8fae7c"/><ellipse cx="300" cy="145" rx="12" ry="4" fill="#8fae7c"/>
+      </svg>
+      <div class="fog" id="fog"></div>
+    </div>
+    <div class="gq" id="rvQ"></div>
+    <div id="rvMc" style="width:100%;max-width:420px"></div>`;
+    G.rvTiles=true;
+    const fog=$("fog");
+    for(let i=0;i<10;i++){const d=document.createElement("div");d.innerHTML=`<svg viewBox="0 0 24 24" width="20" height="20"><ellipse cx="9" cy="14" rx="7" ry="4.5" fill="#e6ebdd"/><ellipse cx="15" cy="11" rx="5.5" ry="4" fill="#eef2e6"/></svg>`;fog.appendChild(d);}
+  }
+  $("rvQ").textContent=Q.q;
+  const mc=$("rvMc");mc.innerHTML="";
+  mcRound(mc,Q,ok=>{
+    const tile=$("fog").children[G.idx];if(tile)tile.classList.add("gone");
+    G.idx++;playReveal();
+  });
+}
+/* ---- 6. Stepping Stones ---- */
+function playStones(){
+  if(G.idx>=10)return endGame("Ten hops, ten recalls — the frog made it to the flower.");
+  const Q=QUESTIONS[G.idx];drawDots();
+  if(!G.stSVG){
+    $("gBody").innerHTML=`<div class="pond" id="pond"></div>
+    <div class="gq" id="stQ"></div>
+    <div id="stMc" style="width:100%;max-width:420px"></div>`;
+    G.stSVG=true;
+    const sx=i=>24+i*36, sy=i=>120+30*Math.sin(i/1.6);
+    let stones="";
+    for(let i=0;i<10;i++)stones+=`<ellipse cx="${sx(i)}" cy="${sy(i)}" rx="17" ry="7" fill="#8fae7c"/>`;
+    $("pond").innerHTML=`<svg viewBox="0 0 400 180">
+      <rect width="400" height="180" fill="#7ab3d9"/>
+      <ellipse cx="30" cy="30" rx="60" ry="14" fill="#9cc8e4"/><ellipse cx="360" cy="150" rx="70" ry="16" fill="#9cc8e4"/>
+      ${stones}
+      <g id="frog" class="frog-jump"><circle r="11" cx="10" cy="${sy(0)-10}" fill="#5a9e5b"/><circle cx="6" cy="${sy(0)-14}" r="2.4" fill="#fff"/><circle cx="14" cy="${sy(0)-14}" r="2.4" fill="#fff"/><circle cx="6" cy="${sy(0)-14}" r="1.2" fill="#26342b"/><circle cx="14" cy="${sy(0)-14}" r="1.2" fill="#26342b"/></g>
+      <g transform="translate(${sx(9)+24},${sy(9)-8})"><line x1="0" y1="10" x2="0" y2="0" stroke="#5a9e5b" stroke-width="3"/><circle r="7" cy="-4" fill="#e88bb0"/><circle r="2.5" cy="-4" fill="#a74131"/></g>
+    </svg>`;
+  }
+  $("stQ").textContent=Q.q;
+  const mc=$("stMc");mc.innerHTML="";
+  mcRound(mc,Q,ok=>{
+    const f=$("frog");
+    const sx=i=>24+i*36, sy=i=>120+30*Math.sin(i/1.6);
+    const target=Math.min(G.idx,9);
+    const cx=sx(target),cy=sy(target);
+    f.querySelectorAll("circle").forEach(c=>{
+      c.setAttribute("cx",cx);c.setAttribute("cy",cy);
+    });
+    /* rebuild frog at target to keep transforms simple */
+    $("frog").outerHTML=`<g id="frog" class="frog-jump"><circle r="11" cx="${cx}" cy="${cy-6}" fill="#5a9e5b"/><circle cx="${cx-4}" cy="${cy-10}" r="2.4" fill="#fff"/><circle cx="${cx+4}" cy="${cy-10}" r="2.4" fill="#fff"/><circle cx="${cx-4}" cy="${cy-10}" r="1.2" fill="#26342b"/><circle cx="${cx+4}" cy="${cy-10}" r="1.2" fill="#26342b"/></g>`;
+    G.idx++;setTimeout(playStones,500);
+  });
+}
+</script>
+<script>
+/* deep links: #open=<game-id> opens a concept sheet, #game=<id> starts a playable sketch */
+(function(){
+  const h=location.hash;
+  const g=h.match(/game=(\w+)/);
+  if(g&&GAMES.some(x=>x.id===g[1]&&x.playable)){startGame(g[1]);return;}
+  const o=h.match(/open=(\w+)/);
+  if(o){const game=GAMES.find(x=>x.id===o[1]);if(game)openSheet(game);}
+})();
+</script>
+</body>
+</html>
