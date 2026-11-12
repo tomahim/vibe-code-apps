@@ -14,6 +14,20 @@ from .models import Card, CardProgress, LearningPath, Lesson, Question, Question
 
 
 def reward_events():
+    """All learners' rewards for the leaderboard and staff dashboard."""
+    return _reward_events()
+
+
+def reward_events_for(user):
+    """One learner's rewards, filtering history in SQL before replaying it."""
+    if user.pk is None:
+        raise ValueError("Rewards require a saved user.")
+    return _reward_events(only_user_id=user.pk).get(user.pk, [])
+
+
+def _reward_events(*, only_user_id=None):
+    # Share content visibility, first-correct and completion-bonus rules so
+    # personal totals cannot drift from the leaderboard's totals.
     cards = list(visible(Card).values('pk', 'lesson_id'))
     questions = list(visible(Question).values('pk', 'lesson_id', 'after_card_position'))
     lessons = list(visible(Lesson).values('pk', 'learning_path_id'))
@@ -30,14 +44,19 @@ def reward_events():
     events = defaultdict(list)
     card_times = defaultdict(dict)
     question_times = defaultdict(dict)
-    for row in CardProgress.objects.filter(card_id__in=card_by_id).values('user_id', 'card_id', 'completed_at'):
+    progress = CardProgress.objects.filter(card_id__in=card_by_id)
+    attempts = QuestionAttempt.objects.filter(question_id__in=question_by_id, correct=True)
+    if only_user_id is not None:
+        progress = progress.filter(user_id=only_user_id)
+        attempts = attempts.filter(user_id=only_user_id)
+    for row in progress.values('user_id', 'card_id', 'completed_at'):
         user_id, card_id, at = row['user_id'], row['card_id'], row['completed_at']
         card_times[user_id][card_id] = at
         events[user_id].append(('drops', 1, at))
     # A question's first correct answer, whatever its attempt type (lesson,
     # Practice quiz or review), earns one carrot and counts toward lesson
     # completion. Repeating a correct answer earns nothing more.
-    attempts = QuestionAttempt.objects.filter(question_id__in=question_by_id, correct=True).order_by(
+    attempts = attempts.order_by(
         'answered_at', 'pk',
     ).values('user_id', 'question_id', 'answered_at')
     for row in attempts:
