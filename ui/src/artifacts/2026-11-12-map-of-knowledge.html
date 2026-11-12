@@ -198,56 +198,86 @@ function geomFor(type,cx,cy,r,rand){return type==="blob"?blobGeom(cx,cy,r,rand):
 function trailPts(ax,ay,n,rand,span){const pts=[];const a0=rand()*Math.PI*2,dx=Math.cos(a0),dy=Math.sin(a0),px=-dy,py=dx,w=rand()*3;
 for(let i=0;i<n;i++){const t=n===1?0:i/(n-1),along=(t-.5)*2*span,wob=Math.sin(t*Math.PI*2.1+w)*span*.3;pts.push([ax+dx*along+px*wob,ay+dy*along+py*wob])}return pts}
 /* ---------- island layouts (fractions of world) ---------- */
-const POS_L={nimbus:[.16,.12,.10],frostreach:[.46,.16,.15],cinderfel:[.68,.18,.12],verdance:[.21,.38,.155],cogsworth:[.38,.33,.115],amber:[.58,.42,.13],rosewind:[.80,.42,.125],polyglotta:[.37,.56,.125],mistmire:[.17,.63,.135],sunkar:[.66,.60,.135],crystal:[.42,.76,.115],azure:[.74,.84,.14]};
+const POS_L={nimbus:[.15,.11,.10],frostreach:[.46,.19,.15],cinderfel:[.67,.21,.12],verdance:[.225,.40,.155],cogsworth:[.40,.35,.115],amber:[.57,.45,.13],rosewind:[.78,.44,.125],polyglotta:[.38,.58,.125],mistmire:[.18,.64,.135],sunkar:[.65,.62,.135],crystal:[.42,.74,.115],azure:[.76,.85,.14]};
 const POS_P={nimbus:[.20,.09,.12],frostreach:[.52,.16,.155],cinderfel:[.74,.28,.125],verdance:[.24,.32,.155],cogsworth:[.50,.33,.12],rosewind:[.72,.43,.13],amber:[.38,.47,.135],polyglotta:[.64,.57,.13],mistmire:[.26,.62,.145],sunkar:[.60,.72,.14],crystal:[.30,.80,.12],azure:[.64,.89,.145]};
+const TERR={frostreach:[1.6,1.0],cinderfel:[1.3,1.1],verdance:[1.5,1.0],cogsworth:[1.2,1.05],amber:[1.25,1.1],rosewind:[1.42,1.05],polyglotta:[1.25,1.05],mistmire:[1.3,1.1],sunkar:[1.5,1.05],crystal:[1.25,1.0],azure:[1.05,1.0],nimbus:[1.05,1.0]};
 const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
-/* ---------- biome decorations (world-level icons) ---------- */
-function decor(g,t,cx,cy,r,rand){
+/* ---------- fractal geography helpers ---------- */
+function fractalPts(cx,cy,rx,ry,seed,harm=5,rough=.34){
+  const rand=RNG(seed),hs=[];
+  for(let o=0;o<harm;o++)hs.push([2+o*2+Math.floor(rand()*3),Math.pow(rough,o+1)*(.7+rand()*.6),rand()*Math.PI*2]);
+  const pts=[],n=150;
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2;let f=0;for(const h of hs)f+=Math.sin(a*h[0]+h[2])*h[1];
+    const rr=1+f*.7;pts.push([cx+Math.cos(a)*rx*rr,cy+Math.sin(a)*ry*rr]);}
+  return pts;
+}
+function closedD(pts){const n=pts.length;
+  let d=`M ${((pts[0][0]+pts[n-1][0])/2).toFixed(1)} ${((pts[0][1]+pts[n-1][1])/2).toFixed(1)}`;
+  for(let i=0;i<n;i++){const p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];
+    d+=` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}
+  return d+" Z"}
+function pip(pts,x,y){let c=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const xi=pts[i][0],yi=pts[i][1],xj=pts[j][0],yj=pts[j][1];
+  if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)c=!c}return c}
+function scalePts(pts,cx,cy,k){return pts.map(p=>[cx+(p[0]-cx)*k,cy+(p[1]-cy)*k])}
+/* ---------- terrain glyphs ---------- */
+function glyphSet(g,s,dark,deep,A,rand){
+  return {
+  tree(x,y,k=1){el("path",{d:`M ${x} ${y-14*s*k} L ${x+10*s*k} ${y+8*s*k} L ${x-10*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x} ${y-19*s*k} L ${x+7*s*k} ${y-2*s*k} L ${x-7*s*k} ${y-2*s*k} Z`,fill:dark},g);el("rect",{x:x-2*s*k,y:y+8*s*k,width:4*s*k,height:6*s*k,fill:deep},g)},
+  peak(x,y,k=1){el("path",{d:`M ${x-16*s*k} ${y+10*s*k} L ${x} ${y-16*s*k} L ${x+16*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-5.5*s*k} ${y-5.5*s*k} L ${x} ${y-16*s*k} L ${x+5.5*s*k} ${y-5.5*s*k} L ${x+1.8*s*k} ${y-1.5*s*k} L ${x-1.8*s*k} ${y-3.5*s*k} Z`,fill:"#ffffff"},g)},
+  cactus(x,y,k=1){el("path",{d:`M ${x} ${y+10*s*k} v ${-18*s*k} M ${x} ${y-2*s*k} q ${-8*s*k} 0 ${-8*s*k} ${-9*s*k} M ${x} ${y-6*s*k} q ${8*s*k} 0 ${8*s*k} ${-9*s*k}`,stroke:deep,"stroke-width":3.4*s*k,fill:"none","stroke-linecap":"round"},g)},
+  dune(x,y,k=1){el("path",{d:`M ${x-18*s*k} ${y+6*s*k} Q ${x} ${y-9*s*k} ${x+18*s*k} ${y+6*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g);el("path",{d:`M ${x-10*s*k} ${y+11*s*k} Q ${x+4*s*k} ${y+2*s*k} ${x+16*s*k} ${y+11*s*k}`,stroke:dark,"stroke-width":1.8*s*k,fill:"none","stroke-linecap":"round"},g)},
+  lagoon(x,y,k=1){el("circle",{cx:x,cy:y,r:12*s*k,fill:"none",stroke:A,"stroke-width":3*s*k},g);el("circle",{cx:x,cy:y,r:5*s*k,fill:"#4f9bb8"},g);el("path",{d:`M ${x-16*s*k} ${y-13*s*k} q ${5*s*k} ${-4*s*k} ${10*s*k} 0`,stroke:A,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)},
+  cone(x,y,k=1){el("path",{d:`M ${x-17*s*k} ${y+10*s*k} L ${x-4*s*k} ${y-15*s*k} L ${x+4*s*k} ${y-15*s*k} L ${x+17*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-4*s*k} ${y-15*s*k} L ${x} ${y-9*s*k} L ${x+4*s*k} ${y-15*s*k} Z`,fill:"#f08a24"},g);el("circle",{cx:x,cy:y-21*s*k,r:4*s*k,fill:"#ffffff",class:"smoke"},g);el("circle",{cx:x+6*s*k,cy:y-27*s*k,r:2.8*s*k,fill:"#ffffff",class:"smoke"},g)},
+  cloudlet(x,y,k=1){el("ellipse",{cx:x,cy:y,rx:15*s*k,ry:5.6*s*k,fill:"#ffffff",opacity:.92},g);el("ellipse",{cx:x+8*s*k,cy:y-3*s*k,rx:9*s*k,ry:4.2*s*k,fill:"#ffffff",opacity:.85},g)},
+  star(x,y,k=1){el("path",{d:`M ${x} ${y-6*s*k} L ${x+1.8*s*k} ${y-1.8*s*k} L ${x+6*s*k} ${y} L ${x+1.8*s*k} ${y+1.8*s*k} L ${x} ${y+6*s*k} L ${x-1.8*s*k} ${y+1.8*s*k} L ${x-6*s*k} ${y} L ${x-1.8*s*k} ${y-1.8*s*k} Z`,fill:"#fffdf8",opacity:.95},g)},
+  rock(x,y,k=1){el("path",{d:`M ${x-9*s*k} ${y+5*s*k} L ${x-4*s*k} ${y-6*s*k} L ${x+5*s*k} ${y-7*s*k} L ${x+10*s*k} ${y+4*s*k} Z`,fill:dark},g)},
+  acacia(x,y,k=1){el("line",{x1:x,y1:y+9*s*k,x2:x,y2:y-8*s*k,stroke:deep,"stroke-width":2.6*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x,cy:y-11*s*k,rx:12*s*k,ry:4.2*s*k,fill:dark},g)},
+  reeds(x,y,k=1){for(let kk=-1;kk<2;kk++)el("line",{x1:x+kk*5*s*k,y1:y+6*s*k,x2:x+kk*5*s*k,y2:y-12*s*k,stroke:deep,"stroke-width":2.2*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x+9*s*k,cy:y+6*s*k,rx:8*s*k,ry:3.2*s*k,fill:deep,opacity:.8},g)},
+  crystalF(x,y,k=1){el("path",{d:`M ${x} ${y-15*s*k} L ${x+6*s*k} ${y-3*s*k} L ${x+4*s*k} ${y+9*s*k} L ${x-4*s*k} ${y+9*s*k} L ${x-6*s*k} ${y-3*s*k} Z`,fill:A,stroke:deep,"stroke-width":1},g);el("path",{d:`M ${x+9*s*k} ${y-6*s*k} L ${x+13*s*k} ${y+1*s*k} L ${x+11*s*k} ${y+7*s*k} L ${x+6*s*k} ${y+7*s*k} L ${x+5*s*k} ${y+1*s*k} Z`,fill:mix(A,"#ffffff",.4),stroke:deep,"stroke-width":.8},g)},
+  terrace(x,y,k=1){for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-16*s*k} ${y+(kk*7-6)*s*k} Q ${x} ${y+(kk*7-13)*s*k} ${x+16*s*k} ${y+(kk*7-6)*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g)},
+  mesa(x,y,k=1){el("path",{d:`M ${x-14*s*k} ${y+8*s*k} L ${x-10*s*k} ${y-8*s*k} L ${x+10*s*k} ${y-8*s*k} L ${x+14*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-14*s*k} ${y+8*s*k} h ${10*s*k} m ${6*s*k} 0 h ${10*s*k}`,stroke:A,"stroke-width":1.6*s*k},g)},
+  flower(x,y,k=1){for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#e3a83c"},g)},
+  fish(x,y,k=1){el("ellipse",{cx:x,cy:y,rx:8*s*k,ry:3.6*s*k,fill:A},g);el("path",{d:`M ${x+8*s*k} ${y} l ${6*s*k} ${-4*s*k} l 0 ${8*s*k} Z`,fill:A},g);el("circle",{cx:x-4*s*k,cy:y-1*s*k,r:1*s*k,fill:"#27392e"},g)},
+  kelp(x,y,k=1){el("path",{d:`M ${x} ${y+12*s*k} q ${-5*s*k} ${-8*s*k} 0 ${-16*s*k} q ${5*s*k} ${-8*s*k} 0 ${-16*s*k}`,stroke:deep,"stroke-width":2.6*s*k,fill:"none","stroke-linecap":"round"},g)},
+  bubble(x,y,k=1){el("circle",{cx:x,cy:y,r:2.6*s*k,fill:"none",stroke:A,"stroke-width":1.4*s*k},g);el("circle",{cx:x+5*s*k,cy:y-6*s*k,r:1.8*s*k,fill:"none",stroke:A,"stroke-width":1.2*s*k},g)},
+  leaf(x,y,k=1){el("ellipse",{cx:x,cy:y,rx:6*s*k,ry:13*s*k,fill:dark,transform:`rotate(${(rand()*70-35).toFixed(0)} ${x} ${y})`},g);el("line",{x1:x,y1:y-11*s*k,x2:x,y2:y+11*s*k,stroke:deep,"stroke-width":1.2*s*k},g)},
+  vine(x,y,k=1){el("path",{d:`M ${x} ${y-14*s*k} q ${6*s*k} ${8*s*k} 0 ${16*s*k} q ${-5*s*k} ${7*s*k} ${-1*s*k} ${13*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)},
+  buildings(x,y,k=1){for(let kk=0;kk<3;kk++){const h=(6+((kk*37)%7))*s*k;el("rect",{x:x+(kk*7-7)*s*k,y:y+8*s*k-h,width:5.4*s*k,height:h,fill:deep},g)}},
+  towerBabel(x,y,k=1){for(let kk=0;kk<4;kk++)el("rect",{x:x-(14-kk*3)*s*k,y:y+8*s*k-(kk+1)*5.4*s*k,width:(28-kk*6)*s*k,height:5.4*s*k,fill:dark},g)},
+  chipG(x,y,k=1){el("rect",{x:x-7*s*k,y:y-7*s*k,width:14*s*k,height:14*s*k,rx:2*s*k,fill:dark},g);el("rect",{x:x-3.4*s*k,y:y-3.4*s*k,width:6.8*s*k,height:6.8*s*k,fill:A},g);for(let kk=-1;kk<2;kk++){el("line",{x1:x+kk*4.6*s*k,y1:y-7*s*k,x2:x+kk*4.6*s*k,y2:y-11*s*k,stroke:dark,"stroke-width":1.4*s*k},g);el("line",{x1:x+kk*4.6*s*k,y1:y+7*s*k,x2:x+kk*4.6*s*k,y2:y+11*s*k,stroke:dark,"stroke-width":1.4*s*k},g)}},
+  amphi(x,y,k=1){for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-(16-kk*5)*s*k} ${y+8*s*k} A ${(16-kk*5)*s*k} ${(16-kk*5)*s*k} 0 0 1 ${x+(16-kk*5)*s*k} ${y+8*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none"},g)},
+  wavelet(x,y,k=1){el("path",{d:`M ${x-14*s*k} ${y} q ${7*s*k} ${-7*s*k} ${14*s*k} 0 q ${7*s*k} ${7*s*k} ${14*s*k} 0`,stroke:A,"stroke-width":2.2*s*k,fill:"none","stroke-linecap":"round"},g)}
+  }
+}
+/* scatter terrain glyphs inside a territory polygon, keeping the centre clear for labels */
+function dressTerritory(g,t,cx,cy,r,pts){
+  const rand=RNG(hash(t.slug+"x"));
   const dark=mix(t.land,"#27392e",.5),deep=mix(t.land,"#27392e",.68),A=t.accent;
-  const s=r/58;
-  // icons sit on a ring around the centre label pill
-  const N=6,base=rand()*Math.PI*2;
-  const spots=[];for(let i=0;i<N;i++){const a=base+i/N*Math.PI*2+(rand()-.5)*.5,rad=r*(.52+rand()*.16);spots.push([cx+Math.cos(a)*rad,cy+Math.sin(a)*rad])}
-  let si=0;const put=fn=>{if(si<spots.length)fn(spots[si][0],spots[si][1]);si=(si+1)%spots.length};
-  const tree=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-14*s*k} L ${x+10*s*k} ${y+8*s*k} L ${x-10*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x} ${y-19*s*k} L ${x+7*s*k} ${y-2*s*k} L ${x-7*s*k} ${y-2*s*k} Z`,fill:dark},g);el("rect",{x:x-2*s*k,y:y+8*s*k,width:4*s*k,height:6*s*k,fill:deep},g)};
-  const peak=(x,y,k=1)=>{el("path",{d:`M ${x-16*s*k} ${y+10*s*k} L ${x} ${y-16*s*k} L ${x+16*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-5.5*s*k} ${y-5.5*s*k} L ${x} ${y-16*s*k} L ${x+5.5*s*k} ${y-5.5*s*k} L ${x+1.8*s*k} ${y-1.5*s*k} L ${x-1.8*s*k} ${y-3.5*s*k} Z`,fill:"#ffffff"},g)};
-  const cactus=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+10*s*k} v ${-18*s*k} M ${x} ${y-2*s*k} q ${-8*s*k} 0 ${-8*s*k} ${-9*s*k} M ${x} ${y-6*s*k} q ${8*s*k} 0 ${8*s*k} ${-9*s*k}`,stroke:deep,"stroke-width":3.4*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const dune=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y+6*s*k} Q ${x} ${y-9*s*k} ${x+18*s*k} ${y+6*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g);el("path",{d:`M ${x-10*s*k} ${y+11*s*k} Q ${x+4*s*k} ${y+2*s*k} ${x+16*s*k} ${y+11*s*k}`,stroke:dark,"stroke-width":1.8*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const lagoon=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:12*s*k,fill:"none",stroke:A,"stroke-width":3*s*k},g);el("circle",{cx:x,cy:y,r:5*s*k,fill:"#4f9bb8"},g);el("path",{d:`M ${x-16*s*k} ${y-13*s*k} q ${5*s*k} ${-4*s*k} ${10*s*k} 0`,stroke:A,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const cone=(x,y,k=1)=>{el("path",{d:`M ${x-17*s*k} ${y+10*s*k} L ${x-4*s*k} ${y-15*s*k} L ${x+4*s*k} ${y-15*s*k} L ${x+17*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-4*s*k} ${y-15*s*k} L ${x} ${y-9*s*k} L ${x+4*s*k} ${y-15*s*k} Z`,fill:"#f08a24"},g);el("circle",{cx:x,cy:y-21*s*k,r:4*s*k,fill:"#ffffff",class:"smoke"},g);el("circle",{cx:x+6*s*k,cy:y-27*s*k,r:2.8*s*k,fill:"#ffffff",class:"smoke"},g)};
-  const cloudlet=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:15*s*k,ry:5.6*s*k,fill:"#ffffff",opacity:.92},g);el("ellipse",{cx:x+8*s*k,cy:y-3*s*k,rx:9*s*k,ry:4.2*s*k,fill:"#ffffff",opacity:.85},g)};
-  const rock=(x,y,k=1)=>{el("path",{d:`M ${x-9*s*k} ${y+5*s*k} L ${x-4*s*k} ${y-6*s*k} L ${x+5*s*k} ${y-7*s*k} L ${x+10*s*k} ${y+4*s*k} Z`,fill:dark},g)};
-  const acacia=(x,y,k=1)=>{el("line",{x1:x,y1:y+9*s*k,x2:x,y2:y-8*s*k,stroke:deep,"stroke-width":2.6*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x,cy:y-11*s*k,rx:12*s*k,ry:4.2*s*k,fill:dark},g)};
-  const reeds=(x,y,k=1)=>{for(let kk=-1;kk<2;kk++)el("line",{x1:x+kk*5*s*k,y1:y+6*s*k,x2:x+kk*5*s*k,y2:y-12*s*k,stroke:deep,"stroke-width":2.2*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x+9*s*k,cy:y+6*s*k,rx:8*s*k,ry:3.2*s*k,fill:deep,opacity:.8},g)};
-  const crystalF=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-15*s*k} L ${x+6*s*k} ${y-3*s*k} L ${x+4*s*k} ${y+9*s*k} L ${x-4*s*k} ${y+9*s*k} L ${x-6*s*k} ${y-3*s*k} Z`,fill:A,stroke:deep,"stroke-width":1},g);el("path",{d:`M ${x+9*s*k} ${y-6*s*k} L ${x+13*s*k} ${y+1*s*k} L ${x+11*s*k} ${y+7*s*k} L ${x+6*s*k} ${y+7*s*k} L ${x+5*s*k} ${y+1*s*k} Z`,fill:mix(A,"#ffffff",.4),stroke:deep,"stroke-width":.8},g)};
-  const terrace=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-16*s*k} ${y+(kk*7-6)*s*k} Q ${x} ${y+(kk*7-13)*s*k} ${x+16*s*k} ${y+(kk*7-6)*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const mesa=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y+8*s*k} L ${x-10*s*k} ${y-8*s*k} L ${x+10*s*k} ${y-8*s*k} L ${x+14*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-14*s*k} ${y+8*s*k} h ${10*s*k} m ${6*s*k} 0 h ${10*s*k}`,stroke:A,"stroke-width":1.6*s*k},g)};
-  const flower=(x,y,k=1)=>{for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#e3a83c"},g)};
-  const fish=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:8*s*k,ry:3.6*s*k,fill:A},g);el("path",{d:`M ${x+8*s*k} ${y} l ${6*s*k} ${-4*s*k} l 0 ${8*s*k} Z`,fill:A},g);el("circle",{cx:x-4*s*k,cy:y-1*s*k,r:1*s*k,fill:"#27392e"},g)};
-  const kelp=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+12*s*k} q ${-5*s*k} ${-8*s*k} 0 ${-16*s*k} q ${5*s*k} ${-8*s*k} 0 ${-16*s*k}`,stroke:deep,"stroke-width":2.6*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const bubble=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:2.6*s*k,fill:"none",stroke:A,"stroke-width":1.4*s*k},g);el("circle",{cx:x+5*s*k,cy:y-6*s*k,r:1.8*s*k,fill:"none",stroke:A,"stroke-width":1.2*s*k},g)};
-  const leaf=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:6*s*k,ry:13*s*k,fill:dark,transform:`rotate(${(rand()*70-35).toFixed(0)} ${x} ${y})`},g);el("line",{x1:x,y1:y-11*s*k,x2:x,y2:y+11*s*k,stroke:deep,"stroke-width":1.2*s*k},g)};
-  const vine=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-14*s*k} q ${6*s*k} ${8*s*k} 0 ${16*s*k} q ${-5*s*k} ${7*s*k} ${-1*s*k} ${13*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const river=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y-8*s*k} q ${9*s*k} ${6*s*k} 0 ${10*s*k} q ${-9*s*k} ${4*s*k} ${18*s*k} ${12*s*k}`,stroke:"#7fb8d8","stroke-width":3*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const buildings=(x,y,k=1)=>{for(let kk=0;kk<3;kk++){const h=(6+((kk*37)%7))*s*k;el("rect",{x:x+(kk*7-7)*s*k,y:y+8*s*k-h,width:5.4*s*k,height:h,fill:deep},g)}};
-  const towerBabel=(x,y,k=1)=>{for(let kk=0;kk<4;kk++)el("rect",{x:x-(14-kk*3)*s*k,y:y+8*s*k-(kk+1)*5.4*s*k,width:(28-kk*6)*s*k,height:5.4*s*k,fill:dark},g)};
-  const chipG=(x,y,k=1)=>{el("rect",{x:x-7*s*k,y:y-7*s*k,width:14*s*k,height:14*s*k,rx:2*s*k,fill:dark},g);el("rect",{x:x-3.4*s*k,y:y-3.4*s*k,width:6.8*s*k,height:6.8*s*k,fill:A},g);for(let kk=-1;kk<2;kk++){el("line",{x1:x+kk*4.6*s*k,y1:y-7*s*k,x2:x+kk*4.6*s*k,y2:y-11*s*k,stroke:dark,"stroke-width":1.4*s*k},g);el("line",{x1:x+kk*4.6*s*k,y1:y+7*s*k,x2:x+kk*4.6*s*k,y2:y+11*s*k,stroke:dark,"stroke-width":1.4*s*k},g)}};
-  const amphi=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-(16-kk*5)*s*k} ${y+8*s*k} A ${(16-kk*5)*s*k} ${(16-kk*5)*s*k} 0 0 1 ${x+(16-kk*5)*s*k} ${y+8*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none"},g)};
-  const wavelet=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y} q ${7*s*k} ${-7*s*k} ${14*s*k} 0 q ${7*s*k} ${7*s*k} ${14*s*k} 0`,stroke:A,"stroke-width":2.2*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const s=r/95,G=glyphSet(g,s,dark,deep,A,rand);
+  const want={forest:56,desert:38,peaks:54,volcano:24,sky:20,delta:26,jungle:54,crystal:34,terraces:30,mesa:28,meadow:44,atolls:16}[t.biome]||24;
   const B=t.biome;
-  if(B==="forest"){for(let i=0;i<6;i++)put((x,y)=>tree(x,y,.9+rand()*.4))}
-  else if(B==="desert"){for(let i=0;i<3;i++)put((x,y)=>dune(x,y));for(let i=0;i<2;i++)put((x,y)=>cactus(x,y))}
-  else if(B==="peaks"){for(let i=0;i<4;i++)put((x,y)=>peak(x,y,.9+rand()*.5))}
-  else if(B==="atolls"){el("ellipse",{cx,cy,rx:r*.52,ry:r*.42,fill:"#8fd0e0"},g);for(let i=0;i<2;i++)put((x,y)=>fish(x,y));put((x,y)=>kelp(x,y));put((x,y)=>bubble(x,y));put((x,y)=>lagoon(x,y))}
-  else if(B==="volcano"){put((x,y)=>cone(x,y,1.5));for(let i=0;i<2;i++)put((x,y)=>rock(x,y))}
-  else if(B==="sky"){for(let i=0;i<4;i++)put((x,y)=>cloudlet(x,y));put((x,y)=>rock(x,y))}
-  else if(B==="savanna"){for(let i=0;i<4;i++)put((x,y)=>acacia(x,y,.9+rand()*.3))}
-  else if(B==="jungle"){for(let i=0;i<4;i++)put((x,y)=>leaf(x,y,.9+rand()*.4));for(let i=0;i<2;i++)put((x,y)=>vine(x,y))}
-  else if(B==="delta"){put((x,y)=>river(x,y));put((x,y)=>river(x,y));for(let i=0;i<2;i++)put((x,y)=>buildings(x,y))}
-  else if(B==="crystal"){for(let i=0;i<4;i++)put((x,y)=>crystalF(x,y,.9+rand()*.4))}
-  else if(B==="terraces"){for(let i=0;i<2;i++)put((x,y)=>terrace(x,y));put((x,y)=>towerBabel(x,y))}
-  else if(B==="mesa"){for(let i=0;i<2;i++)put((x,y)=>mesa(x,y));put((x,y)=>chipG(x,y))}
-  else if(B==="meadow"){for(let i=0;i<4;i++)put((x,y)=>flower(x,y,.9+rand()*.4));put((x,y)=>amphi(x,y))}
+  const clear=B==="sky"?r*.05:r*.36,gap=B==="sky"?r*.13:r*.16;
+  const spots=[];let tries=0;
+  while(spots.length<want&&tries<want*40){tries++;
+    const x=cx+(rand()*2-1)*r*1.3,y=cy+(rand()*2-1)*r*1.3;
+    if(!pip(pts,x,y))continue;
+    if(Math.hypot(x-cx,y-cy)<clear)continue;
+    if(spots.some(q=>Math.hypot(q[0]-x,q[1]-y)<gap))continue;
+    spots.push([x,y])}
+  let i=0;
+  const each=(fns)=>{for(const[x,y]of spots){fns[i%fns.length](x,y,.8+((i*29)%40)/100);i++}};
+  if(B==="forest")each([G.tree,G.tree,G.leaf]);
+  else if(B==="jungle")each([G.leaf,G.leaf,G.vine,G.reeds]);
+  else if(B==="desert")each([G.dune,G.dune,G.cactus,G.rock]);
+  else if(B==="peaks")each([G.peak,G.peak,G.peak,G.rock]);
+  else if(B==="volcano"){G.cone(cx+r*.34,cy-r*.12,2.3);each([G.rock,G.rock,G.cactus])}
+  else if(B==="sky")each([G.cloudlet,G.star,G.star,G.cloudlet,G.rock]);
+  else if(B==="delta")each([G.buildings,G.reeds,G.wavelet,G.acacia]);
+  else if(B==="crystal")each([G.crystalF,G.crystalF,G.rock]);
+  else if(B==="terraces"){G.towerBabel(cx-r*.4,cy-r*.35,1);each([G.terrace,G.terrace,G.reeds])}
+  else if(B==="mesa")each([G.mesa,G.chipG,G.rock]);
+  else if(B==="meadow"){G.amphi(cx+r*.4,cy-r*.3,1);each([G.flower,G.flower,G.flower,G.acacia])}
+  else if(B==="atolls")each([G.fish,G.kelp,G.bubble,G.lagoon]);
 }
 /* ---------- scene ---------- */
 const svg=document.getElementById("map");
@@ -260,26 +290,89 @@ function build(){
   const minD=Math.min(WORLD.w,WORLD.h);
   const defs=el("defs",{},svg);
   const gr=el("linearGradient",{id:"ocean",x1:0,y1:0,x2:0,y2:1},defs);
-  el("stop",{offset:"0","stop-color":"#d3e8f0"},gr);el("stop",{offset:"1","stop-color":"#a5cede"},gr);
+  el("stop",{offset:"0","stop-color":"#cfe5ee"},gr);el("stop",{offset:"1","stop-color":"#97c3d8"},gr);
   el("rect",{x:0,y:0,width:WORLD.w,height:WORLD.h,fill:"url(#ocean)"},svg);
-  // graticule
-  const grat=el("g",{stroke:"#ffffff","stroke-width":1,opacity:.18,fill:"none"},svg);
+  const grat=el("g",{stroke:"#ffffff","stroke-width":1,opacity:.14,fill:"none"},svg);
   for(let i=1;i<6;i++)el("line",{x1:WORLD.w*i/6,y1:0,x2:WORLD.w*i/6,y2:WORLD.h},grat);
   for(let i=1;i<4;i++)el("line",{x1:0,y1:WORLD.h*i/4,x2:WORLD.w,y2:WORLD.h*i/4},grat);
-  // waves
   const rand=RNG(42);
-  // one connected continent: shallows, a neutral plains landmass, rivers between biomes
+  /* one connected continent with a fractal coastline, shallows and plains */
   const landscape=WORLD.w>1200;
-  const ccx=WORLD.w*(landscape?.46:.47),ccy=WORLD.h*(landscape?.47:.52),minW=Math.min(WORLD.w,WORLD.h);
-  const crand=RNG(7);
-  el("path",{d:blob(ccx,ccy,minW*.53,crand,.14),fill:"#d8edf3",opacity:.9},svg);
-  el("path",{d:blob(ccx,ccy,minW*.48,crand,.16),fill:"#e9f4f7",opacity:.9},svg);
-  el("path",{d:blob(ccx,ccy,minW*.44,crand,.18),fill:"#ece3d1",stroke:"#f8efdd","stroke-width":6},svg);
+  const ccx=WORLD.w*(landscape?.47:.47),ccy=WORLD.h*(landscape?.49:.50);
+  const coast=fractalPts(ccx,ccy,WORLD.w*(landscape?.43:.44),WORLD.h*(landscape?.445:.44),11,5,.30);
+  el("path",{d:closedD(scalePts(coast,ccx,ccy,1.055)),fill:"#bcdde8",opacity:.85},svg);
+  el("path",{d:closedD(scalePts(coast,ccx,ccy,1.02)),fill:"#dcecf1",opacity:.9},svg);
+  el("path",{d:closedD(coast),fill:"#eee5cd",stroke:"#f8efdd","stroke-width":5},svg);
+  /* soft plains texture */
+  const plainRand=RNG(23);
+  for(let i=0;i<7;i++){const a=plainRand()*Math.PI*2,d=plainRand()*minD*.18;
+    el("ellipse",{cx:ccx+Math.cos(a)*d,cy:ccy+Math.sin(a)*d,rx:(40+plainRand()*90),ry:(24+plainRand()*60),fill:i%2?"#e5e3c2":"#dfe8cd",opacity:.35},svg)}
+  buildIslands(coast);
+  /* waves */
+  for(const[cls,op,amp]of[["waves",.5,1],["waves2",.3,1.6]]){
+    const w=el("g",{class:cls,stroke:"#ffffff","stroke-width":1.6,fill:"none",opacity:op},svg);
+    for(let i=0;i<26;i++){const x=rand()*WORLD.w,y=rand()*WORLD.h,l=(14+rand()*20)*amp;
+      el("path",{d:`M ${x} ${y} q ${l/4} ${-5*amp} ${l/2} 0 q ${l/4} ${5*amp} ${l/2} 0`,"stroke-linecap":"round"},w)}}
+  /* compass */
+  const comp=el("g",{transform:`translate(${WORLD.w-70},78)`,opacity:.8},svg);
+  el("circle",{cx:0,cy:0,r:26,fill:"#fffdf866",stroke:"#5b6157","stroke-width":1.4},comp);
+  el("path",{d:"M 0 -20 L 5 0 L 0 20 L -5 0 Z",fill:"#e3a83c",stroke:"#5b6157","stroke-width":.8},comp);
+  txt(comp,0,-32,"N","",12,"#5b6157");
+  /* clouds */
+  for(const[fx,fy,sc,cls]of[[.2,.08,1,"cloud"],[.62,.06,1.4,"cloud c2"],[.85,.55,1.1,"cloud c3"]]){
+    const c=el("g",{class:cls,opacity:.6,fill:"#ffffff"},svg);
+    el("ellipse",{cx:fx*WORLD.w,cy:fy*WORLD.h,rx:70*sc,ry:16*sc},c);
+    el("ellipse",{cx:fx*WORLD.w+40*sc,cy:fy*WORLD.h-8*sc,rx:44*sc,ry:13*sc},c)}
+  /* sailboat */
+  const boat=el("g",{class:"boat",opacity:.8},svg);
+  el("path",{d:`M ${WORLD.w*.44} ${WORLD.h*.93} l 10 -22 l 2 22 Z`,fill:"#e8e0cf"},boat);
+  el("path",{d:`M ${WORLD.w*.42} ${WORLD.h*.93} q 12 6 24 0 l -3 6 q -9 3 -18 0 Z`,fill:"#8a5a3b"},boat);
+}
+function buildIslands(coast){
+  const minD=Math.min(WORLD.w,WORLD.h);
+  const landscape=WORLD.w>1200;
+  const defs2=el("defs",{},svg);
+  const clip=el("clipPath",{id:"landclip"},defs2);
+  el("path",{d:closedD(coast)},clip);
+  const layerAll=el("g",{},svg);
+  const layer=el("g",{"clip-path":"url(#landclip)"},layerAll);
+  const layerOff=el("g",{},layerAll);
+  const terr={};
+  /* pass 1: territory landmasses */
+  for(const t of THEMES){
+    const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*minD;
+    const mult=TERR[t.slug]||[1.15,1];
+    const pts=fractalPts(cx,cy,r*mult[0],r*mult[1],hash(t.slug+"c"),5,.30);
+    terr[t.slug]={cx,cy,r,pts};
+    const offshore=(t.biome==="atolls"||t.biome==="sky");
+    const g=el("g",{class:"island",tabindex:0,role:"button","aria-label":t.name+", "+t.subject+" theme. Activate to explore."},offshore?layerOff:layer);
+    g.__slug=t.slug;
+    g.addEventListener("click",()=>go({level:"theme",t:t.slug}));
+    g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go({level:"theme",t:t.slug})}});
+    if(offshore){el("path",{d:closedD(scalePts(pts,cx,cy,1.22)),fill:"#dcecf1",opacity:.85},g);
+      const sr=RNG(hash(t.slug+"s"));
+      for(let k=0;k<(t.biome==="sky"?3:2);k++){const sa=sr()*Math.PI*2,sd=r*(0.95+sr()*.35),sx=cx+Math.cos(sa)*sd,sy=cy+Math.sin(sa)*sd*.8,sk=fractalPts(sx,sy,r*.42,r*.36,hash(t.slug+"s"+k),4,.34);
+        el("path",{d:closedD(scalePts(sk,sx,sy,1.3)),fill:"#dcecf1",opacity:.8},g);
+        el("path",{d:closedD(sk),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":1.5},g);
+        el("path",{d:closedD(scalePts(sk,sx,sy,.8)),fill:t.land2,opacity:.5},g)}}
+    el("path",{class:"land",d:closedD(pts),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":2},g);
+    el("path",{d:closedD(scalePts(pts,cx,cy,.84)),fill:t.land2,opacity:.5},g);
+    if(t.biome==="sky"){const cg=el("g",{class:"lod"},g);const cr=RNG(hash(t.slug+"cl"));
+      for(let i=0;i<4;i++)glyphSet(cg,r/95,"#8a94b8","#6a74a0",t.accent,cr).cloudlet(cx+(cr()*2-1)*r,cy+r*.5+cr()*r*.4,1.6)}
+    dressTerritory(el("g",{class:"lod bdecor"},g),t,cx,cy,r,pts);
+  }
+  /* pass 2: plains gaps + soft outlines, so territories read as separated lands on one continent */
+  const borders=el("g",{"pointer-events":"none"},svg);
+  for(const t of THEMES){const T=terr[t.slug];if(t.biome==="atolls"||t.biome==="sky")continue;
+    el("path",{d:closedD(scalePts(T.pts,T.cx,T.cy,1.03)),fill:"none",stroke:"#eee5cd","stroke-width":7,"stroke-linejoin":"round",opacity:.95},borders)}
+  for(const t of THEMES){const T=terr[t.slug];
+    el("path",{d:closedD(T.pts),fill:"none",stroke:mix(t.land,"#27392e",.38),"stroke-width":1.3,opacity:.8},borders)}
+  /* rivers from the northern peaks to the coast, marking territory borders */
   const RIVERS=landscape?[
-    [[.47,.19],[.40,.26],[.32,.31],[.26,.38],[.21,.47],[.17,.56],[.14,.64]],
-    [[.53,.22],[.60,.30],[.64,.38],[.63,.46],[.60,.52],[.62,.60],[.66,.68],[.70,.76],[.72,.82]],
-    [[.63,.46],[.70,.50],[.76,.55],[.80,.62]],
-    [[.40,.62],[.37,.69],[.36,.76],[.36,.84],[.38,.90]]
+    [[.46,.20],[.40,.26],[.33,.31],[.27,.37],[.22,.45],[.18,.54],[.15,.62]],
+    [[.52,.22],[.59,.29],[.63,.37],[.63,.45],[.61,.51],[.63,.59],[.67,.67],[.71,.75],[.73,.83]],
+    [[.63,.45],[.70,.49],[.76,.54],[.80,.60]],
+    [[.40,.58],[.375,.66],[.365,.74],[.37,.82],[.39,.89]]
   ]:[
     [[.50,.19],[.42,.25],[.33,.29],[.26,.36],[.20,.44],[.16,.52]],
     [[.56,.20],[.64,.27],[.70,.34],[.72,.42],[.70,.50],[.66,.58],[.64,.66],[.62,.74],[.63,.82],[.64,.88]],
@@ -290,63 +383,32 @@ function build(){
     for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
       d+=` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}
     return d};
-  const rw=minW/1000,riv=el("g",{fill:"none","stroke-linecap":"round"},svg);
+  const rw=minD/1000,riv=el("g",{fill:"none","stroke-linecap":"round","pointer-events":"none"},svg);
   for(const rp of RIVERS){const d=smooth(rp.map(f=>[f[0]*WORLD.w,f[1]*WORLD.h]));
-    el("path",{d,stroke:"#9fcfe0","stroke-width":9*rw,opacity:.9},riv);
-    el("path",{d,stroke:"#d6edf5","stroke-width":4*rw,opacity:.95},riv)}
-  for(const[cls,op,amp]of[["waves",.5,1],["waves2",.3,1.6]]){
-    const w=el("g",{class:cls,stroke:"#ffffff","stroke-width":1.6,fill:"none",opacity:op},svg);
-    for(let i=0;i<26;i++){const x=rand()*WORLD.w,y=rand()*WORLD.h,l=(14+rand()*20)*amp;
-      el("path",{d:`M ${x} ${y} q ${l/4} ${-5*amp} ${l/2} 0 q ${l/4} ${5*amp} ${l/2} 0`,"stroke-linecap":"round"},w)}}
-  // routes between islands (dashed voyages)
-  const routes=el("g",{stroke:"#c98a2e","stroke-width":1.6,"stroke-dasharray":"1 7",fill:"none",opacity:.75,"stroke-linecap":"round"},svg);
-  const posOf=slug=>{const f=WORLD.pos[slug];return[f[0]*WORLD.w,f[1]*WORLD.h,f[2]*minD]};
+    el("path",{d,stroke:"#9fcfe0","stroke-width":7*rw,opacity:.9},riv);
+    el("path",{d,stroke:"#d6edf5","stroke-width":3*rw,opacity:.95},riv)}
+  /* dotted gold walking trails between neighbouring territories */
+  const routes=el("g",{stroke:"#c98a2e","stroke-width":1.6,"stroke-dasharray":"1 7",fill:"none",opacity:.75,"stroke-linecap":"round","pointer-events":"none"},svg);
   const links=[["verdance","cogsworth"],["cogsworth","frostreach"],["frostreach","cinderfel"],["cinderfel","rosewind"],["cogsworth","amber"],["verdance","polyglotta"],["polyglotta","mistmire"],["amber","sunkar"],["mistmire","crystal"],["sunkar","azure"],["amber","rosewind"],["polyglotta","amber"]];
-  for(const[a,b]of links){const A=posOf(a),B=posOf(b);const mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2-30;
-    el("path",{d:`M ${A[0]} ${A[1]} Q ${mx} ${my} ${B[0]} ${B[1]}`},routes)}
-  // compass
-  const comp=el("g",{transform:`translate(${WORLD.w-70},78)`,opacity:.8},svg);
-  el("circle",{cx:0,cy:0,r:26,fill:"#fffdf866",stroke:"#5b6157","stroke-width":1.4},comp);
-  el("path",{d:"M 0 -20 L 5 0 L 0 20 L -5 0 Z",fill:"#e3a83c",stroke:"#5b6157","stroke-width":.8},comp);
-  txt(comp,0,-32,"N","",12,"#5b6157");
-  // clouds
-  for(const[fx,fy,sc,cls]of[[.2,.08,1,"cloud"],[.62,.06,1.4,"cloud c2"],[.85,.55,1.1,"cloud c3"]]){
-    const c=el("g",{class:cls,opacity:.6,fill:"#ffffff"},svg);
-    el("ellipse",{cx:fx*WORLD.w,cy:fy*WORLD.h,rx:70*sc,ry:16*sc},c);
-    el("ellipse",{cx:fx*WORLD.w+40*sc,cy:fy*WORLD.h-8*sc,rx:44*sc,ry:13*sc},c)}
-  // sailboat
-  const boat=el("g",{class:"boat",opacity:.8},svg);
-  el("path",{d:`M ${WORLD.w*.44} ${WORLD.h*.68} l 10 -22 l 2 22 Z`,fill:"#e8e0cf"},boat);
-  el("path",{d:`M ${WORLD.w*.42} ${WORLD.h*.68} q 12 6 24 0 l -3 6 q -9 3 -18 0 Z`,fill:"#8a5a3b"},boat);
-  buildIslands();
-}
-function buildIslands(){
-  const layer=el("g",{},svg);
+  for(const[a,b]of links){const A=terr[a],B=terr[b];const mx=(A.cx+B.cx)/2,my=(A.cy+B.cy)/2-30;
+    el("path",{d:`M ${A.cx} ${A.cy} Q ${mx} ${my} ${B.cx} ${B.cy}`},routes)}
+  /* pass 3: regions, trails, labels */
   const labels=el("g",{"pointer-events":"none"},svg);
   for(const t of THEMES){
-    const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*Math.min(WORLD.w,WORLD.h);
+    const T=terr[t.slug],cx=T.cx,cy=T.cy,r=T.r;
+    const g=(t.biome==="atolls"||t.biome==="sky")?[...layerOff.children].find(x=>x.__slug===t.slug):[...layer.children].find(x=>x.__slug===t.slug);
     const rand=RNG(hash(t.slug));
-    const g=el("g",{class:"island",tabindex:0,role:"button","aria-label":t.name+", "+t.subject+" theme. Activate to explore."},layer);
-    g.addEventListener("click",()=>go({level:"theme",t:t.slug}));
-    g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go({level:"theme",t:t.slug})}});
-    // landmass
-    const lr=r*.85;
-    el("path",{class:"land",d:blob(cx,cy,lr,rand,.18),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":2},g);
-    el("path",{d:blob(cx+lr*.03,cy-lr*.02,lr*.82,rand,.22),fill:t.land2,opacity:.85},g);
-    decor(el("g",{class:"lod bdecor"},g),t,cx,cy,r,RNG(hash(t.slug+"d")));
-    // regions (shaped families of related paths)
     const regRand=RNG(hash(t.slug+"r"));
     const n=t.regions.length;
     t.regions.forEach((rg,i)=>{
       const a=(-Math.PI/2)+i*(Math.PI*2/n)+regRand()*.5;
-      const rcx=cx+Math.cos(a)*r*.38,rcy=cy+Math.sin(a)*r*.38,rr=r*(rg.shape==="elongated"?.30:.30);
+      const rcx=cx+Math.cos(a)*r*.38,rcy=cy+Math.sin(a)*r*.38,rr=r*.30;
       const geo=geomFor(rg.shape,rcx,rcy,rr,RNG(hash(t.slug+rg.slug)));
       const fill=mix(t.land2,i%2?t.accent:"#ffffff",i%2?.30:.20);
       const gg=el("g",{class:"geog"},g);
       const rgEl=el("path",{class:"region-shape",d:geo.d,fill,stroke:mix(t.land,"#27392e",.45),"stroke-width":1,"fill-rule":geo.rule,opacity:.96,"vector-effect":"non-scaling-stroke"},gg);
       rgEl.addEventListener("click",ev=>{ev.stopPropagation();go({level:"region",t:t.slug,r:rg.slug})});
       rg.cx=rcx;rg.cy=rcy;rg.r=rr;rg.geom=geo;
-      // trails (learning paths) inside the shaped region
       const pathRand=RNG(hash(t.slug+rg.slug+"p"));
       const slots=geo.slots(rg.paths.length);
       rg.paths.forEach((p,j)=>{
@@ -365,21 +427,17 @@ function buildIslands(){
           if(st==="now")el("circle",{cx:q[0],cy:q[1],r:nr*1.7,fill:"none",stroke:"#e3a83c","stroke-width":nr*.28,class:"pulse",opacity:.85},tg);
         });
         tg.id="trail-"+t.slug+"-"+rg.slug+"-"+j;
-        const ax=slots[j][0],ay=slots[j][1];
-        let dx=ax-rcx,dy=ay-rcy;const dl=Math.hypot(dx,dy)||1;dx/=dl;dy/=dl;
         const mid=pts[Math.floor(pts.length/2)];
         const pl=el("g",{class:"lod plbl"},tg);
         el("circle",{cx:mid[0],cy:mid[1],r:rr*.115,fill:"#fffdf8",opacity:.94,stroke:"#e3d8c6","stroke-width":rr*.015},pl);
         txt(pl,mid[0],mid[1]+rr*.04,String(j+1),"",rr*.115,"#27392e");
         pts.forEach((q,k)=>{txt(tg,q[0],q[1]+nr*.36,String(k+1),"lod nvis",nr*1.05,k<p.done?"#3c6a47":k===p.done?"#8a6a1f":"#8a806b")});
       });
-      // region label (theme zoom)
       const rl=el("g",{class:"lod rlbl"},g);
-      const rw=rg.name.length*rr*.13+rr*.3;
-      el("rect",{x:geo.lab[0]-rw/2,y:geo.lab[1]-rr*.19,width:rw,height:rr*.38,rx:rr*.12,fill:"#fffdf8","opacity":.88},rl);
+      const rwd=rg.name.length*rr*.13+rr*.3;
+      el("rect",{x:geo.lab[0]-rwd/2,y:geo.lab[1]-rr*.19,width:rwd,height:rr*.38,rx:rr*.12,fill:"#fffdf8","opacity":.88},rl);
       txt(rl,geo.lab[0],geo.lab[1]+rr*.07,rg.name,"",rr*.21,"#27392e");
     });
-    // world-level: theme name + progress (one label per theme, above all land)
     {
       const wl=el("g",{class:"lod wlbl"},labels);
       const tot=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.lessons,0);
