@@ -42,13 +42,38 @@ resource "railway_variable" "cultive_api_port" {
   value          = "8000"
 }
 
-# Private DNS needs no resource: Railway automatically resolves
-# <service-name>.railway.internal on the project private network (zero
-# configuration), so the rename moves the UI to cultive-ui-dev.railway.internal
-# and the API answers at cultive-api-dev.railway.internal once deployed.
-# The provider's only domain resource (railway_service_domain) manages public
-# *.up.railway.app domains and is deliberately not used: both services stay
-# unexposed, reachable over the Tailscale router like the other services.
+# --- cultive-api-dev variables ---
+#
+# Same shared database and media bucket as the api service, by reference:
+# Railway resolves the $${{...}} expressions at runtime, so no secret value is
+# ever in this repo or in the state (the provider stores the literal reference
+# string, marked sensitive). No schema or data migration is implied.
+
+resource "railway_variable" "cultive_api_database_url" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = "DATABASE_URL"
+  value          = "$${{api.DATABASE_URL}}"
+}
+
+resource "railway_variable" "cultive_api_bucket" {
+  for_each = local.media_bucket_variables
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = each.key
+  value          = each.value
+}
+
+# Private DNS needs no resource: every service gets an endpoint on the project
+# private network (<endpoint>.railway.internal, zero configuration). The
+# endpoint name defaults to the service name at creation but does NOT follow
+# later renames: after the cultive-dev -> cultive-ui-dev rename the endpoint is
+# still "cultive-dev" until edited under Settings > Networking > Private
+# Networking (this provider has no resource for it). cultive-api-dev, created
+# here, gets "cultive-api-dev" from the start. Both services stay unexposed:
+# the provider's only domain resource (railway_service_domain) manages public
+# *.up.railway.app domains and is deliberately not used.
 
 # No public domain. Configure deployment only after approved apply.
 output "cultive_ui_service_id" {

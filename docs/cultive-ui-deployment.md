@@ -15,9 +15,10 @@ domain is added. No infrastructure has been applied during preparation.
 - `API_UPSTREAM=http://api.railway.internal:8000`.
 - Use the service-ID output after approved apply. Store deployment credentials
   in CI secrets, never source code or build arguments.
-- Private DNS is automatic: Railway resolves `cultive-ui-dev.railway.internal`
-  on the project private network (zero configuration). Verify health and
-  application access at that hostname after deployment, before reporting
+- Private DNS: the endpoint name does not follow service renames, so the
+  service still answers at `cultive-dev.railway.internal` until edited under
+  Settings > Networking > Private Networking. Verify health and application
+  access at the current hostname after deployment, before reporting
   deployment ready.
 
 ## Cost review
