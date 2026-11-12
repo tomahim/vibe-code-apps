@@ -131,7 +131,7 @@ const THEMES=[
  regions:[{slug:"northface",name:"North Face",shape:"elongated",paths:[P("Climbing Fundamentals",8,4),P("Alpinism History",6,0),P("Ski Touring",6,0)]},
  {slug:"glacier",name:"Glacier Bowl",shape:"blob",paths:[P("Cycling Legends",9,9),P("Marathon Science",7,3),P("Trail Running",7,2)]},
  {slug:"icefall",name:"Icefall Steps",shape:"shards",paths:[P("Winter Survival",6,2),P("Recovery & Sleep",5,0),P("Nutrition Basics",8,5)]}]},
-{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#2a9d8f",land2:"#64d4c0",accent:"#b9fff0",blurb:"Atolls and blue holes: every dive course gets its own shaped lagoon.",
+{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#2a9d8f",land2:"#64d4c0",accent:"#b9fff0",blurb:"An ocean world: atolls above, fish and kelp below. Every dive course gets its own shaped lagoon.",
  regions:[{slug:"coral",name:"Coral Ring",shape:"ring",paths:[P("Dive Sites of the World",9,6),P("Reef Ecology",7,2),P("Wreck Diving",7,0)]},
  {slug:"bluehole",name:"The Blue Hole",shape:"blob",paths:[P("Diving N4: Physics",8,8),P("Diving N4: Physiology",8,6),P("Diving N4: Equipment",7,0),P("Freediving Basics",6,0)]},
  {slug:"drift",name:"Drift Current",shape:"elongated",paths:[P("Ocean Currents",6,1),P("Megafauna",7,0),P("Tides & Weather",5,1)]}]},
@@ -143,14 +143,14 @@ const THEMES=[
  regions:[{slug:"firmament",name:"The Firmament",shape:"star",paths:[P("Solar System Tour",10,8),P("Exoplanets",7,2)]},
  {slug:"comet",name:"Comet Trail",shape:"elongated",paths:[P("Apollo Missions",9,9),P("Rocket Science",8,4),P("Space Stations",6,1)]},
  {slug:"nebula",name:"Dark Nebula",shape:"blob",paths:[P("Cosmology 101",8,0),P("Telescopes",6,1),P("Stargazing",5,3)]}]},
-{slug:"amber",name:"Amber Savanna",subject:"Life & Society",biome:"savanna",land:"#b3813f",land2:"#d3a45c",accent:"#ffe2ae",blurb:"Open grassland of human questions, crossed by one long migration route.",
+{slug:"amber",name:"The Amber Delta",subject:"Life & Society",biome:"delta",land:"#b3813f",land2:"#d3a45c",accent:"#ffe2ae",blurb:"A river delta of human questions: cities, minds and markets along the channels.",
  regions:[{slug:"migration",name:"Migration Route",shape:"elongated",paths:[P("Psychology Basics",9,4),P("Behavioral Economics",8,2),P("Negotiation",6,2)]},
  {slug:"waterhole",name:"The Watering Hole",shape:"ring",paths:[P("Cities & Urbanism",7,1),P("Food Systems",8,0),P("Personal Finance",8,4)]},
- {slug:"termite",name:"Termite Towers",shape:"shards",paths:[P("Philosophy Starters",6,0),P("Sociology of Networks",7,3),P("Media Literacy",6,0)]}]},
-{slug:"mistmire",name:"Mistmire",subject:"Biology & Medicine",biome:"wetland",land:"#3f7d6b",land2:"#5da48d",accent:"#bdf0dd",blurb:"Reed beds and still pools: anatomy, viruses and sleep under the mist.",
- regions:[{slug:"reeds",name:"Reed Maze",shape:"elongated",paths:[P("Human Anatomy",10,5),P("Immune System",8,3),P("Genetics 101",8,0)]},
- {slug:"pools",name:"Frogspawn Pools",shape:"ring",paths:[P("Microbiome",6,0),P("Virology Essentials",7,2)]},
- {slug:"willow",name:"Old Willow",shape:"blob",paths:[P("Neuroscience 101",9,1),P("Sleep Science",6,0),P("First Aid",6,2)]}]},
+ {slug:"termite",name:"The Agora",shape:"shards",paths:[P("Philosophy Starters",6,0),P("Sociology of Networks",7,3),P("Media Literacy",6,0)]}]},
+{slug:"mistmire",name:"Rainwild",subject:"Biology & Medicine",biome:"jungle",land:"#2e7d5b",land2:"#45a877",accent:"#d2f7c5",blurb:"Dense rainforest biodiversity: anatomy, viruses and sleep under the canopy.",
+ regions:[{slug:"reeds",name:"Liana Maze",shape:"elongated",paths:[P("Human Anatomy",10,5),P("Immune System",8,3),P("Genetics 101",8,0)]},
+ {slug:"pools",name:"The Emerald Pools",shape:"ring",paths:[P("Microbiome",6,0),P("Virology Essentials",7,2)]},
+ {slug:"willow",name:"Old Kapok",shape:"blob",paths:[P("Neuroscience 101",9,1),P("Sleep Science",6,0),P("First Aid",6,2)]}]},
 {slug:"crystal",name:"Crystal Hollow",subject:"Geology & Earth",biome:"crystal",land:"#6a4d8f",land2:"#8f6cb8",accent:"#e3ccff",blurb:"A geode cracked open: minerals, tectonics and deep time in the facets.",
  regions:[{slug:"geode",name:"Geode Heart",shape:"star",paths:[P("Minerals & Crystals",8,4),P("Plate Tectonics",9,6)]},
  {slug:"tunnels",name:"Echo Tunnels",shape:"elongated",paths:[P("Volcanoes",7,2),P("Earthquakes",6,0),P("Caves & Karst",6,0)]},
@@ -223,20 +223,31 @@ function decor(g,t,cx,cy,r,rand){
   const terrace=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-16*s*k} ${y+(kk*7-6)*s*k} Q ${x} ${y+(kk*7-13)*s*k} ${x+16*s*k} ${y+(kk*7-6)*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g)};
   const mesa=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y+8*s*k} L ${x-10*s*k} ${y-8*s*k} L ${x+10*s*k} ${y-8*s*k} L ${x+14*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-14*s*k} ${y+8*s*k} h ${10*s*k} m ${6*s*k} 0 h ${10*s*k}`,stroke:A,"stroke-width":1.6*s*k},g)};
   const flower=(x,y,k=1)=>{for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#ffd166"},g)};
+  const fish=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:8*s*k,ry:3.6*s*k,fill:A},g);el("path",{d:`M ${x+8*s*k} ${y} l ${6*s*k} ${-4*s*k} l 0 ${8*s*k} Z`,fill:A},g);el("circle",{cx:x-4*s*k,cy:y-1*s*k,r:1*s*k,fill:"#0b1d24"},g)};
+  const kelp=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+12*s*k} q ${-5*s*k} ${-8*s*k} 0 ${-16*s*k} q ${5*s*k} ${-8*s*k} 0 ${-16*s*k}`,stroke:deep,"stroke-width":2.6*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const bubble=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:2.6*s*k,fill:"none",stroke:A,"stroke-width":1.4*s*k},g);el("circle",{cx:x+5*s*k,cy:y-6*s*k,r:1.8*s*k,fill:"none",stroke:A,"stroke-width":1.2*s*k},g)};
+  const leaf=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:6*s*k,ry:13*s*k,fill:dark,transform:`rotate(${(rand()*70-35).toFixed(0)} ${x} ${y})`},g);el("line",{x1:x,y1:y-11*s*k,x2:x,y2:y+11*s*k,stroke:deep,"stroke-width":1.2*s*k},g)};
+  const vine=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-14*s*k} q ${6*s*k} ${8*s*k} 0 ${16*s*k} q ${-5*s*k} ${7*s*k} ${-1*s*k} ${13*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const river=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y-8*s*k} q ${9*s*k} ${6*s*k} 0 ${10*s*k} q ${-9*s*k} ${4*s*k} ${18*s*k} ${12*s*k}`,stroke:"#9fd8e8","stroke-width":3*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const buildings=(x,y,k=1)=>{for(let kk=0;kk<3;kk++){const h=(6+((kk*37)%7))*s*k;el("rect",{x:x+(kk*7-7)*s*k,y:y+8*s*k-h,width:5.4*s*k,height:h,fill:deep},g)}};
+  const towerBabel=(x,y,k=1)=>{for(let kk=0;kk<4;kk++)el("rect",{x:x-(14-kk*3)*s*k,y:y+8*s*k-(kk+1)*5.4*s*k,width:(28-kk*6)*s*k,height:5.4*s*k,fill:dark},g)};
+  const chipG=(x,y,k=1)=>{el("rect",{x:x-7*s*k,y:y-7*s*k,width:14*s*k,height:14*s*k,rx:2*s*k,fill:dark},g);el("rect",{x:x-3.4*s*k,y:y-3.4*s*k,width:6.8*s*k,height:6.8*s*k,fill:A},g);for(let kk=-1;kk<2;kk++){el("line",{x1:x+kk*4.6*s*k,y1:y-7*s*k,x2:x+kk*4.6*s*k,y2:y-11*s*k,stroke:dark,"stroke-width":1.4*s*k},g);el("line",{x1:x+kk*4.6*s*k,y1:y+7*s*k,x2:x+kk*4.6*s*k,y2:y+11*s*k,stroke:dark,"stroke-width":1.4*s*k},g)}};
+  const amphi=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-(16-kk*5)*s*k} ${y+8*s*k} A ${(16-kk*5)*s*k} ${(16-kk*5)*s*k} 0 0 1 ${x+(16-kk*5)*s*k} ${y+8*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none"},g)};
   const wavelet=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y} q ${7*s*k} ${-7*s*k} ${14*s*k} 0 q ${7*s*k} ${7*s*k} ${14*s*k} 0`,stroke:A,"stroke-width":2.2*s*k,fill:"none","stroke-linecap":"round"},g)};
   const B=t.biome;
   if(B==="forest"){for(let i=0;i<6;i++)put((x,y)=>tree(x,y,.9+rand()*.4))}
   else if(B==="desert"){for(let i=0;i<3;i++)put((x,y)=>dune(x,y));for(let i=0;i<2;i++)put((x,y)=>cactus(x,y))}
   else if(B==="peaks"){for(let i=0;i<4;i++)put((x,y)=>peak(x,y,.9+rand()*.5))}
-  else if(B==="atolls"){for(let i=0;i<3;i++)put((x,y)=>lagoon(x,y));for(let i=0;i<2;i++)put((x,y)=>wavelet(x,y))}
+  else if(B==="atolls"){el("ellipse",{cx,cy,rx:r*.52,ry:r*.42,fill:"#0e4a56"},g);for(let i=0;i<2;i++)put((x,y)=>fish(x,y));put((x,y)=>kelp(x,y));put((x,y)=>bubble(x,y));put((x,y)=>lagoon(x,y))}
   else if(B==="volcano"){put((x,y)=>cone(x,y,1.5));for(let i=0;i<2;i++)put((x,y)=>rock(x,y))}
   else if(B==="sky"){for(let i=0;i<4;i++)put((x,y)=>cloudlet(x,y));put((x,y)=>rock(x,y))}
   else if(B==="savanna"){for(let i=0;i<4;i++)put((x,y)=>acacia(x,y,.9+rand()*.3))}
-  else if(B==="wetland"){for(let i=0;i<5;i++)put((x,y)=>reeds(x,y,.9+rand()*.3))}
+  else if(B==="jungle"){for(let i=0;i<4;i++)put((x,y)=>leaf(x,y,.9+rand()*.4));for(let i=0;i<2;i++)put((x,y)=>vine(x,y))}
+  else if(B==="delta"){put((x,y)=>river(x,y));put((x,y)=>river(x,y));for(let i=0;i<2;i++)put((x,y)=>buildings(x,y))}
   else if(B==="crystal"){for(let i=0;i<4;i++)put((x,y)=>crystalF(x,y,.9+rand()*.4))}
-  else if(B==="terraces"){for(let i=0;i<3;i++)put((x,y)=>terrace(x,y))}
-  else if(B==="mesa"){for(let i=0;i<3;i++)put((x,y)=>mesa(x,y));put((x,y)=>cactus(x,y,.8))}
-  else if(B==="meadow"){for(let i=0;i<6;i++)put((x,y)=>flower(x,y,.9+rand()*.4))}
+  else if(B==="terraces"){for(let i=0;i<2;i++)put((x,y)=>terrace(x,y));put((x,y)=>towerBabel(x,y))}
+  else if(B==="mesa"){for(let i=0;i<2;i++)put((x,y)=>mesa(x,y));put((x,y)=>chipG(x,y))}
+  else if(B==="meadow"){for(let i=0;i<4;i++)put((x,y)=>flower(x,y,.9+rand()*.4));put((x,y)=>amphi(x,y))}
 }
 /* ---------- scene ---------- */
 const svg=document.getElementById("map");
