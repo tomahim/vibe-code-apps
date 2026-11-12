@@ -4767,6 +4767,7 @@ footer a{color:var(--muted)}
 var TABS=[{"id":"d01","num":"01","label":"Original \u00b7 Little Grains"},{"id":"d02","num":"02","label":"Field Notes"},{"id":"d03","num":"03","label":"Daybreak"},{"id":"d04","num":"04","label":"Night Garden"},{"id":"d05","num":"05","label":"Terminal"},{"id":"d06","num":"06","label":"Little Drop"},{"id":"d07","num":"07","label":"Orbit"},{"id":"d08","num":"08","label":"Highlighter"},{"id":"d09","num":"09","label":"Botanica"},{"id":"d10","num":"10","label":"Granary"},{"id":"d11","num":"11","label":"Prism"},{"id":"d12","num":"12","label":"Standard"},{"id":"d13","num":"13","label":"Constellation"},{"id":"d14","num":"14","label":"Paper Fold"},{"id":"d15","num":"15","label":"Greenhouse"},{"id":"d16","num":"16","label":"Voxel Arcade"}];
 var SCENES={"d02":"sprouts","d03":"daybreak","d04":"nightgarden","d05":"terminal","d06":"drop","d07":"orbit","d08":"highlighter","d09":"botanica","d10":"granary","d11":"prism","d12":"standard","d13":"constellation","d14":"paperfold","d15":"greenhouse","d16":"voxel"};
 var stage=document.getElementById('stage'), nav=document.getElementById('tabs');
+document.querySelectorAll('.design').forEach(function(s){stage.appendChild(s);});
 var frames={}, buttons={}, active=null;
 var HEAD='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>';
 TABS.forEach(function(t){
