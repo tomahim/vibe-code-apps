@@ -101,73 +101,55 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
   <button id="infoBtn" aria-label="About this design study">?</button>
 </div>
 <div id="sheet" class="hidden"></div>
-<div id="hint">Tap a landscape to enter a theme</div>
+<div id="hint">Tap a territory to enter a theme</div>
 <div id="about" class="hidden"><div class="card">
 <h2>Map of Knowledge</h2>
-<p>A navigation design study for Cultive (Little Grains). The whole map is the knowledge; every landform is a way in.</p>
+<p>A prototype for a new Little Grains themes screen: the garden list becomes one generated world map in the Little Grains palette.</p>
 <ul>
-<li><b>Landscapes are themes.</b> Forest, desert, peaks, atolls: each ecosystem is one theme, joined on a single continent in the Little Grains palette.</li>
-<li><b>Shaped regions are families of related paths.</b> No repeated hexagon grid: English paths live inside one English-shaped region, dive-physics paths in another shape. Every ecosystem gets its own geography.</li>
-<li><b>Trails are learning paths</b>, and the beads on them are lessons: done, current, locked.</li>
+<li><b>Every published theme is a territory.</b> This demo uses the seven live themes - Language, Tech &amp; AI, Sport, Life &amp; Society, Energy, Diving N4 #1 and #2 - with their real paths and lesson counts.</li>
+<li><b>Generated, not drawn.</b> Territories are placed on a phyllotaxis spiral and shaped by seeded fractal coastlines; terrains rotate by position like the garden does today. Adding or archiving a theme just re-generates the map.</li>
+<li><b>Trails are learning paths</b>, beads are lessons: done, current, locked. Tap a territory to zoom into its paths.</li>
 </ul>
-<p>A theme here holds 8-12 paths across its regions - room to grow past today's 6-7 tiles. Demo data only; nothing is stored.</p>
-<div class="legend"><span><i style="background:#5ea84a"></i>completed</span><span><i style="background:#e3a83c"></i>current</span><span><i style="background:#cfc6b4"></i>locked</span></div>
+<p>Progress shown here is demo data. Try the layout stress test:</p>
+<div class="legend" id="stress"></div>
 <button id="aboutClose">Close</button>
 </div></div>
 <script>
 "use strict";
 /* ---------- demo data: 12 themes, shaped regions of related paths ---------- */
 const P=(name,lessons,done)=>({name,lessons,done});
-const THEMES=[
-{slug:"verdance",name:"Verdance",subject:"Nature & Environment",biome:"forest",land:"#8fbc6e",land2:"#aad194",accent:"#3c6a47",blurb:"An old-growth forest theme. Paths gather under canopy, roots and clearings.",
- regions:[{slug:"canopy",name:"Canopy Ring",shape:"ring",paths:[P("Forests of the World",9,9),P("Rainforest Layers",7,4),P("Old-Growth Ecology",6,0)]},
- {slug:"rootways",name:"The Rootways",shape:"elongated",paths:[P("Soil & Fungi",8,3),P("Compost & Cycles",5,0),P("Mushroom Foraging",5,0)]},
- {slug:"petal",name:"Petal Flats",shape:"blob",paths:[P("Plant Identification",10,6),P("Pollinators",6,2),P("Garden Seasons",7,0),P("Wetland Birds",6,1)]}]},
-{slug:"sunkar",name:"Sunkar Desert",subject:"History & Civilizations",biome:"desert",land:"#e6cb93",land2:"#f2dfb6",accent:"#a56545",blurb:"Dunes bury empires here; each shaped dig site holds its related expeditions.",
- regions:[{slug:"dunesea",name:"Dune Sea",shape:"crescent",paths:[P("Ancient Egypt",9,5),P("Mesopotamia",8,0),P("The Silk Road",10,2)]},
- {slug:"compass",name:"Buried Compass",shape:"star",paths:[P("Greek City-States",7,7),P("Rome: Republic to Empire",9,4),P("Byzantium",7,0)]},
- {slug:"oasis",name:"Oasis Shards",shape:"shards",paths:[P("Lost Cities",6,1),P("Archaeology Methods",5,0),P("Egyptian Hieroglyphs",6,2)]}]},
-{slug:"frostreach",name:"Frostreach",subject:"Sport & Endurance",biome:"peaks",land:"#b9cfdf",land2:"#dbe9f2",accent:"#4d6a7a",blurb:"High country for hard training: faces, glaciers and icefalls of discipline.",
- regions:[{slug:"northface",name:"North Face",shape:"elongated",paths:[P("Climbing Fundamentals",8,4),P("Alpinism History",6,0),P("Ski Touring",6,0)]},
- {slug:"glacier",name:"Glacier Bowl",shape:"blob",paths:[P("Cycling Legends",9,9),P("Marathon Science",7,3),P("Trail Running",7,2)]},
- {slug:"icefall",name:"Icefall Steps",shape:"shards",paths:[P("Winter Survival",6,2),P("Recovery & Sleep",5,0),P("Nutrition Basics",8,5)]}]},
-{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#7cc9ba",land2:"#a9e0d4",accent:"#2f7d6d",blurb:"An ocean world: atolls above, fish and kelp below. Every dive course gets its own shaped lagoon.",
- regions:[{slug:"coral",name:"Coral Ring",shape:"ring",paths:[P("Dive Sites of the World",9,6),P("Reef Ecology",7,2),P("Wreck Diving",7,0)]},
- {slug:"bluehole",name:"The Blue Hole",shape:"blob",paths:[P("Diving N4: Physics",8,8),P("Diving N4: Physiology",8,6),P("Diving N4: Equipment",7,0),P("Freediving Basics",6,0)]},
- {slug:"drift",name:"Drift Current",shape:"elongated",paths:[P("Ocean Currents",6,1),P("Megafauna",7,0),P("Tides & Weather",5,1)]}]},
-{slug:"cinderfel",name:"Cinderfel",subject:"Energy & Industry",biome:"volcano",land:"#cfa490",land2:"#e2c3b0",accent:"#a74131",blurb:"A working volcano: calderas of infrastructure, lava channels of generation.",
- regions:[{slug:"caldera",name:"The Caldera",shape:"ring",paths:[P("Data Center Anatomy",9,7),P("Power Grids",8,2)]},
- {slug:"lava",name:"Lava Channels",shape:"elongated",paths:[P("Solar & Wind",7,3),P("Nuclear Basics",8,0),P("Geothermal",5,0)]},
- {slug:"ash",name:"Ash Fields",shape:"blob",paths:[P("Batteries & Storage",6,1),P("Hydrogen",5,0),P("Home Energy",5,0),P("Carbon Capture",6,0)]}]},
-{slug:"nimbus",name:"Nimbus Drift",subject:"Space & Astronomy",biome:"sky",land:"#b7c3e6",land2:"#d3dcf3",accent:"#5b6ab3",blurb:"Floating islands above the weather, tied to one another by comet trails.",
- regions:[{slug:"firmament",name:"The Firmament",shape:"star",paths:[P("Solar System Tour",10,8),P("Exoplanets",7,2)]},
- {slug:"comet",name:"Comet Trail",shape:"elongated",paths:[P("Apollo Missions",9,9),P("Rocket Science",8,4),P("Space Stations",6,1)]},
- {slug:"nebula",name:"Dark Nebula",shape:"blob",paths:[P("Cosmology 101",8,0),P("Telescopes",6,1),P("Stargazing",5,3)]}]},
-{slug:"amber",name:"The Amber Delta",subject:"Life & Society",biome:"delta",land:"#dbbd85",land2:"#eed6a8",accent:"#8a6a3b",blurb:"A river delta of human questions: cities, minds and markets along the channels.",
- regions:[{slug:"migration",name:"Migration Route",shape:"elongated",paths:[P("Psychology Basics",9,4),P("Behavioral Economics",8,2),P("Negotiation",6,2)]},
- {slug:"waterhole",name:"The Watering Hole",shape:"ring",paths:[P("Cities & Urbanism",7,1),P("Food Systems",8,0),P("Personal Finance",8,4)]},
- {slug:"termite",name:"The Agora",shape:"shards",paths:[P("Philosophy Starters",6,0),P("Sociology of Networks",7,3),P("Media Literacy",6,0)]}]},
-{slug:"mistmire",name:"Rainwild",subject:"Biology & Medicine",biome:"jungle",land:"#6fae7d",land2:"#9ccba6",accent:"#2e6b4f",blurb:"Dense rainforest biodiversity: anatomy, viruses and sleep under the canopy.",
- regions:[{slug:"reeds",name:"Liana Maze",shape:"elongated",paths:[P("Human Anatomy",10,5),P("Immune System",8,3),P("Genetics 101",8,0)]},
- {slug:"pools",name:"The Emerald Pools",shape:"ring",paths:[P("Microbiome",6,0),P("Virology Essentials",7,2)]},
- {slug:"willow",name:"Old Kapok",shape:"blob",paths:[P("Neuroscience 101",9,1),P("Sleep Science",6,0),P("First Aid",6,2)]}]},
-{slug:"crystal",name:"Crystal Hollow",subject:"Geology & Earth",biome:"crystal",land:"#bda8d6",land2:"#d8c9ea",accent:"#7a4a8c",blurb:"A geode cracked open: minerals, tectonics and deep time in the facets.",
- regions:[{slug:"geode",name:"Geode Heart",shape:"star",paths:[P("Minerals & Crystals",8,4),P("Plate Tectonics",9,6)]},
- {slug:"tunnels",name:"Echo Tunnels",shape:"elongated",paths:[P("Volcanoes",7,2),P("Earthquakes",6,0),P("Caves & Karst",6,0)]},
- {slug:"fossil",name:"Fossil Beds",shape:"crescent",paths:[P("Deep Time",8,1),P("Dinosaurs",9,5),P("The Rock Cycle",6,1)]}]},
-{slug:"polyglotta",name:"Polyglotta",subject:"Language & Words",biome:"terraces",land:"#daa48d",land2:"#edc5b2",accent:"#b57658",blurb:"Terraced plains of words. The English Marches are one shaped region holding every English path.",
- regions:[{slug:"english",name:"The English Marches",shape:"blob",paths:[P("English Grammar",10,6),P("English Vocabulary",12,8),P("English Pronunciation",8,2),P("English Idioms",7,0),P("English Listening",8,5)]},
- {slug:"romancia",name:"Romancia",shape:"crescent",paths:[P("French A1",9,9),P("Spanish Starters",9,3),P("Italian Gestures",5,0),P("German Starters",9,0)]},
- {slug:"scripts",name:"Character Cliffs",shape:"shards",paths:[P("Japanese Kana",8,1),P("Mandarin Tones",7,0),P("Arabic Script",6,0)]}]},
-{slug:"cogsworth",name:"Cogsworth Reach",subject:"AI & Technology",biome:"mesa",land:"#a9bfc9",land2:"#c8dae1",accent:"#47606e",blurb:"High mesas of computation, cut by circuit-like valleys.",
- regions:[{slug:"foundry",name:"The Foundry",shape:"ring",paths:[P("How LLMs Work",9,7),P("Prompt Craft",6,4),P("AI Safety Basics",7,0),P("Hardware Anatomy",7,0)]},
- {slug:"circuit",name:"Circuit Vale",shape:"elongated",paths:[P("Internet Protocols",8,3),P("The WannaCry Attack",5,5),P("Cryptography 101",8,1),P("Cyber Hygiene",6,4)]},
- {slug:"datafalls",name:"Data Falls",shape:"crescent",paths:[P("Databases",7,2),P("Unix Philosophy",6,0)]}]},
-{slug:"rosewind",name:"Rosewind Vale",subject:"Arts & Culture",biome:"meadow",land:"#e3aebc",land2:"#f2cdd6",accent:"#a3556b",blurb:"A flowering vale: galleries, an amphitheater and loom fields of craft.",
- regions:[{slug:"gallery",name:"Gallery Terraces",shape:"shards",paths:[P("Color Theory",7,4),P("Art History Eras",10,2),P("Photography Basics",7,3)]},
- {slug:"amphi",name:"The Amphitheater",shape:"ring",paths:[P("Music Theory 101",8,6),P("World Cinema",9,0),P("Jazz History",6,0)]},
- {slug:"loom",name:"Loom Fields",shape:"elongated",paths:[P("Design Principles",7,1),P("Typography",6,0)]}]}
-];
+const RAW_THEMES=[{"id": "language", "title": "Language", "desc": "Practical language learning for everyday life.", "paths": [["600 words for little english talkers", 168], ["Early Childhood English", 94]]}, {"id": "tech-and-ai", "title": "Tech & AI", "desc": "Understand the ideas behind the digital tools you use.", "paths": [["Anatomy of a cyberattack", 105], ["Code review at Anthropic", 84], ["Harness²: self-improving AI", 80], ["How ChatGPT works", 140]]}, {"id": "sport", "title": "Sport", "desc": "The athletes, teams, and moments that shaped sports history.", "paths": [["Cycling legends", 160], ["Hockey all time legends", 128], ["Legendary dive sites", 80], ["Trail running legends", 160], ["Trail running mythical races", 168]]}, {"id": "life-and-society", "title": "Life & Society", "desc": "The science of everyday life: child development, health, home and society.", "paths": [["A baby's first year through science", 96]]}, {"id": "energy", "title": "Energy", "desc": "How energy powers the digital world, from the chip to the grid.", "paths": [["Data Center Anatomy", 120]]}, {"id": "plongee-niveau-4-partie-1", "title": "Diving N4 #1", "desc": "Première partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["1 - Prendre sa place de guide de palanquée", 75], ["2 - Utiliser la physique en plongée", 94], ["3 - Comprendre le corps immergé", 102], ["4 - Prévenir et reconnaître les accidents", 136], ["5 - Comprendre la saturation et la désaturation", 96], ["6 - Gérer la désaturation d'une palanquée", 96], ["7 - Comprendre et contrôler le matériel", 149]]}, {"id": "plongee-niveau-4-partie-2", "title": "Diving N4 #2", "desc": "Deuxième partie de la préparation au Guide de Palanquée Niveau 4 (FFESSM), pour Aurore. Les leçons arrivent bientôt.", "paths": [["10 - Participer à l'organisation et au matelotage", 104], ["11 - Préparer les épreuves du niveau 4", 87], ["8 - Préparer et conduire une palanquée", 144], ["9 - Faire découvrir le milieu et le protéger", 112]]}];
+/* Terrains rotate by position and the diving themes get reef scenery, exactly like the app's garden adapter
+   (ui/src/apps/little-grains/LittleGrains.jsx), so adding a theme never means redrawing the world. */
+const TERRAIN_ROT=["meadow","forest","orchard","mesa","lavender","pond","alpine"];
+const REEF={"plongee-niveau-4-partie-1":"coral","plongee-niveau-4-partie-2":"reef"};
+const STYLES={
+ meadow:{glyph:"meadow",land:"#8abf70",land2:"#a9d191"},
+ forest:{glyph:"forest",land:"#75a672",land2:"#93c08f"},
+ orchard:{glyph:"forest",land:"#a1c875",land2:"#bcda97"},
+ mesa:{glyph:"mesa",land:"#d7a37d",land2:"#e6bfa0"},
+ lavender:{glyph:"meadow",land:"#b4b58b",land2:"#cccda9"},
+ pond:{glyph:"atolls",land:"#87bbad",land2:"#a9d2c6"},
+ alpine:{glyph:"peaks",land:"#b5c0a6",land2:"#d2dac6"},
+ coral:{glyph:"atolls",land:"#e6d3a3",land2:"#f0e3bf"},
+ reef:{glyph:"atolls",land:"#d3d8b8",land2:"#e3e7cf"}};
+const SHAPES=["blob","elongated","crescent","ring","star","shards"];
+function buildThemes(raw){
+  return raw.map((d,i)=>{
+    const terrain=REEF[d.id]||TERRAIN_ROT[i%TERRAIN_ROT.length];
+    const st=STYLES[terrain];
+    const rand=RNG(hash(d.id+"prog"));
+    return {slug:d.id,name:d.title,subject:d.desc,biome:st.glyph,land:st.land,land2:st.land2,
+      accent:mix(st.land,"#27392e",.55),blurb:d.desc,terrain,
+      regions:d.paths.map((pp,j)=>({slug:"p"+j,name:pp[0],shape:SHAPES[(i+j)%SHAPES.length],
+        paths:[P(pp[0],pp[1],Math.floor(rand()*pp[1]))]}))};
+  });
+}
+/* Stress-test data: proves the layout is generated, not twelve fixed slots. */
+const EXTRA_NAMES=["Astronomy","History","Biology","Art & Cinema","Geopolitics","Economics","Philosophy","Psychology","Music","Cooking","Climate","Mathematics","Literature","Architecture"];
+function genExtra(k){const out=[];for(let i=0;i<k;i++){const n=2+(i*7)%5;
+  out.push({id:"extra-"+i,title:EXTRA_NAMES[i%EXTRA_NAMES.length],desc:"A theme someone could publish tomorrow.",paths:Array.from({length:n},(_,j)=>["Path "+String.fromCharCode(65+j),4+((i*13+j*7)%9)])})}return out}
+let THEMES;
 /* ---------- seeded random + geometry ---------- */
 const NS="http://www.w3.org/2000/svg";
 function hash(s){let h=1779033703;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return h>>>0}
@@ -197,10 +179,25 @@ const blobGeom=(cx,cy,r,rand)=>({d:blob(cx,cy,r,rand,.3),rule:"nonzero",slots:m=
 function geomFor(type,cx,cy,r,rand){return type==="blob"?blobGeom(cx,cy,r,rand):regionGeom(type,cx,cy,r,rand)}
 function trailPts(ax,ay,n,rand,span){const pts=[];const a0=rand()*Math.PI*2,dx=Math.cos(a0),dy=Math.sin(a0),px=-dy,py=dx,w=rand()*3;
 for(let i=0;i<n;i++){const t=n===1?0:i/(n-1),along=(t-.5)*2*span,wob=Math.sin(t*Math.PI*2.1+w)*span*.3;pts.push([ax+dx*along+px*wob,ay+dy*along+py*wob])}return pts}
-/* ---------- island layouts (fractions of world) ---------- */
-const POS_L={nimbus:[.15,.11,.10],frostreach:[.46,.19,.15],cinderfel:[.67,.21,.12],verdance:[.225,.40,.155],cogsworth:[.40,.35,.115],amber:[.57,.45,.13],rosewind:[.78,.44,.125],polyglotta:[.38,.58,.125],mistmire:[.18,.64,.135],sunkar:[.65,.62,.135],crystal:[.42,.74,.115],azure:[.76,.85,.14]};
-const POS_P={nimbus:[.20,.09,.12],frostreach:[.52,.16,.155],cinderfel:[.74,.28,.125],verdance:[.24,.32,.155],cogsworth:[.50,.33,.12],rosewind:[.72,.43,.13],amber:[.38,.47,.135],polyglotta:[.64,.57,.13],mistmire:[.26,.62,.145],sunkar:[.60,.72,.14],crystal:[.30,.80,.12],azure:[.64,.89,.145]};
-const TERR={frostreach:[1.6,1.0],cinderfel:[1.3,1.1],verdance:[1.5,1.0],cogsworth:[1.2,1.05],amber:[1.25,1.1],rosewind:[1.42,1.05],polyglotta:[1.25,1.05],mistmire:[1.3,1.1],sunkar:[1.5,1.05],crystal:[1.25,1.0],azure:[1.05,1.0],nimbus:[1.05,1.0]};
+/* ---------- generated layout: N themes placed on a phyllotaxis spiral, no fixed slots ---------- */
+function layoutThemes(slugs,landscape){
+  const W=landscape?1600:950,H=landscape?1000:1500,minD=Math.min(W,H);
+  const n=slugs.length;
+  const rx=W*.385,ry=H*.40,cx=W*.47,cy=H*.50;
+  const cols=Math.ceil(Math.sqrt(n*(rx/ry))),rows=Math.ceil(n/cols);
+  const cw=2*rx/cols,ch=2*ry/rows;
+  const pos={};
+  slugs.forEach((slug,i)=>{
+    const r=Math.floor(i/cols),c=i%cols;
+    const inRow=Math.min(cols,n-r*cols);
+    const h=hash(slug);
+    const jx=((h%100)/100-.5)*cw*.34,jy=(((h>>7)%100)/100-.5)*ch*.34;
+    const x=cx-rx+cw*(c+.5)+(cols-inRow)*cw/2+jx,y=cy-ry+ch*(r+.5)+jy;
+    pos[slug]=[x/W,y/H,Math.min(cw,ch)*(landscape?.68:.60)/minD];
+  });
+  return pos;
+}
+function terrMult(slug){const h=hash(slug);return[1.05+(h%20)/100,1.0+((h>>5)%12)/100]}
 const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
 /* ---------- fractal geography helpers ---------- */
 function fractalPts(cx,cy,rx,ry,seed,harm=5,rough=.34){
@@ -281,12 +278,12 @@ function dressTerritory(g,t,cx,cy,r,pts){
 }
 /* ---------- scene ---------- */
 const svg=document.getElementById("map");
-let WORLD={w:1600,h:1000,pos:POS_L};
+let WORLD={w:1600,h:1000,pos:{}};
 let themeIndex={};
 function build(){
   svg.innerHTML="";themeIndex={};
   const aspect=innerWidth/innerHeight;
-  WORLD=aspect>1?{w:1600,h:1000,pos:POS_L}:{w:950,h:1500,pos:POS_P};
+  WORLD=aspect>1?{w:1600,h:1000}:{w:950,h:1500};WORLD.pos=layoutThemes(THEMES.map(t=>t.slug),WORLD.w>1200);
   const minD=Math.min(WORLD.w,WORLD.h);
   const defs=el("defs",{},svg);
   const gr=el("linearGradient",{id:"ocean",x1:0,y1:0,x2:0,y2:1},defs);
@@ -299,7 +296,7 @@ function build(){
   /* one connected continent with a fractal coastline, shallows and plains */
   const landscape=WORLD.w>1200;
   const ccx=WORLD.w*(landscape?.47:.47),ccy=WORLD.h*(landscape?.49:.50);
-  const coast=fractalPts(ccx,ccy,WORLD.w*(landscape?.43:.44),WORLD.h*(landscape?.445:.44),11,5,.30);
+  const coast=fractalPts(ccx,ccy,WORLD.w*(landscape?.42:.43),WORLD.h*(landscape?.435:.43),11,5,.30);
   el("path",{d:closedD(scalePts(coast,ccx,ccy,1.055)),fill:"#bcdde8",opacity:.85},svg);
   el("path",{d:closedD(scalePts(coast,ccx,ccy,1.02)),fill:"#dcecf1",opacity:.9},svg);
   el("path",{d:closedD(coast),fill:"#eee5cd",stroke:"#f8efdd","stroke-width":5},svg);
@@ -341,10 +338,10 @@ function buildIslands(coast){
   /* pass 1: territory landmasses */
   for(const t of THEMES){
     const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*minD;
-    const mult=TERR[t.slug]||[1.15,1];
+    const mult=terrMult(t.slug);
     const pts=fractalPts(cx,cy,r*mult[0],r*mult[1],hash(t.slug+"c"),5,.30);
     terr[t.slug]={cx,cy,r,pts};
-    const offshore=(t.biome==="atolls"||t.biome==="sky");
+    const offshore=false;
     const g=el("g",{class:"island",tabindex:0,role:"button","aria-label":t.name+", "+t.subject+" theme. Activate to explore."},offshore?layerOff:layer);
     g.__slug=t.slug;
     g.addEventListener("click",()=>go({level:"theme",t:t.slug}));
@@ -362,41 +359,40 @@ function buildIslands(coast){
     dressTerritory(el("g",{class:"lod bdecor"},g),t,cx,cy,r,pts);
   }
   /* pass 2: plains gaps + soft outlines, so territories read as separated lands on one continent */
-  const borders=el("g",{"pointer-events":"none"},svg);
-  for(const t of THEMES){const T=terr[t.slug];if(t.biome==="atolls"||t.biome==="sky")continue;
+  const borders=el("g",{"pointer-events":"none","clip-path":"url(#landclip)"},svg);
+  for(const t of THEMES){const T=terr[t.slug];
     el("path",{d:closedD(scalePts(T.pts,T.cx,T.cy,1.03)),fill:"none",stroke:"#eee5cd","stroke-width":7,"stroke-linejoin":"round",opacity:.95},borders)}
   for(const t of THEMES){const T=terr[t.slug];
     el("path",{d:closedD(T.pts),fill:"none",stroke:mix(t.land,"#27392e",.38),"stroke-width":1.3,opacity:.8},borders)}
-  /* rivers from the northern peaks to the coast, marking territory borders */
-  const RIVERS=landscape?[
-    [[.46,.20],[.40,.26],[.33,.31],[.27,.37],[.22,.45],[.18,.54],[.15,.62]],
-    [[.52,.22],[.59,.29],[.63,.37],[.63,.45],[.61,.51],[.63,.59],[.67,.67],[.71,.75],[.73,.83]],
-    [[.63,.45],[.70,.49],[.76,.54],[.80,.60]],
-    [[.40,.58],[.375,.66],[.365,.74],[.37,.82],[.39,.89]]
-  ]:[
-    [[.50,.19],[.42,.25],[.33,.29],[.26,.36],[.20,.44],[.16,.52]],
-    [[.56,.20],[.64,.27],[.70,.34],[.72,.42],[.70,.50],[.66,.58],[.64,.66],[.62,.74],[.63,.82],[.64,.88]],
-    [[.70,.50],[.77,.57],[.79,.66]],
-    [[.44,.55],[.40,.64],[.36,.72],[.34,.80],[.33,.87]]
-  ];
+  /* rivers: generated from the northernmost territory to the coasts */
   const smooth=pts=>{let d=`M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
     for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
       d+=` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}
     return d};
   const rw=minD/1000,riv=el("g",{fill:"none","stroke-linecap":"round","pointer-events":"none"},svg);
-  for(const rp of RIVERS){const d=smooth(rp.map(f=>[f[0]*WORLD.w,f[1]*WORLD.h]));
+  {const ts=THEMES.map(t=>terr[t.slug]);
+   const top=ts.reduce((a,b)=>a.cy<b.cy?a:b);
+   const ccx2=WORLD.w*.47,ccy2=WORLD.h*.49;
+   const south=[ccx2+(top.cx-ccx2)*.3,WORLD.h*.94],west=[WORLD.w*.06,ccy2+(top.cy-ccy2)*.4+WORLD.h*.12];
+   const rp1=[[top.cx,top.cy+top.r*.4],[(top.cx+ccx2)/2+24,(top.cy+ccy2)/2],[ccx2-18,ccy2+(south[1]-ccy2)*.35],south];
+   const rp2=[[ccx2-18,ccy2+(south[1]-ccy2)*.35],[(ccx2+west[0])/2,(ccy2+west[1])/2+30],west];
+   for(const rp of [rp1,rp2]){const d=smooth(rp);
     el("path",{d,stroke:"#9fcfe0","stroke-width":7*rw,opacity:.9},riv);
-    el("path",{d,stroke:"#d6edf5","stroke-width":3*rw,opacity:.95},riv)}
+    el("path",{d,stroke:"#d6edf5","stroke-width":3*rw,opacity:.95},riv)}}
   /* dotted gold walking trails between neighbouring territories */
   const routes=el("g",{stroke:"#c98a2e","stroke-width":1.6,"stroke-dasharray":"1 7",fill:"none",opacity:.75,"stroke-linecap":"round","pointer-events":"none"},svg);
-  const links=[["verdance","cogsworth"],["cogsworth","frostreach"],["frostreach","cinderfel"],["cinderfel","rosewind"],["cogsworth","amber"],["verdance","polyglotta"],["polyglotta","mistmire"],["amber","sunkar"],["mistmire","crystal"],["sunkar","azure"],["amber","rosewind"],["polyglotta","amber"]];
+  const sl=THEMES.map(t=>t.slug);
+  const links=[];const seen=new Set();
+  for(const a of sl){const A=terr[a];
+    const near=sl.filter(b=>b!==a).map(b=>[b,Math.hypot(terr[b].cx-A.cx,terr[b].cy-A.cy)]).sort((x,y)=>x[1]-y[1]).slice(0,2);
+    for(const[b]of near){const k=[a,b].sort().join("|");if(!seen.has(k)){seen.add(k);links.push([a,b])}}}
   for(const[a,b]of links){const A=terr[a],B=terr[b];const mx=(A.cx+B.cx)/2,my=(A.cy+B.cy)/2-30;
     el("path",{d:`M ${A.cx} ${A.cy} Q ${mx} ${my} ${B.cx} ${B.cy}`},routes)}
   /* pass 3: regions, trails, labels */
   const labels=el("g",{"pointer-events":"none"},svg);
   for(const t of THEMES){
     const T=terr[t.slug],cx=T.cx,cy=T.cy,r=T.r;
-    const g=(t.biome==="atolls"||t.biome==="sky")?[...layerOff.children].find(x=>x.__slug===t.slug):[...layer.children].find(x=>x.__slug===t.slug);
+    const g=[...layer.children].find(x=>x.__slug===t.slug)||[...layerOff.children].find(x=>x.__slug===t.slug);
     const rand=RNG(hash(t.slug));
     const regRand=RNG(hash(t.slug+"r"));
     const n=t.regions.length;
@@ -442,7 +438,7 @@ function buildIslands(coast){
       const wl=el("g",{class:"lod wlbl"},labels);
       const tot=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.lessons,0);
       const dn=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.done,0);
-      const sub=t.subject+" · "+dn+"/"+tot;
+      const sub=t.regions.length+" path"+(t.regions.length>1?"s":"")+" · "+dn+"/"+tot+" lessons";
       const big=WORLD.w>1200;
       const lw=big?1:1.4;
       const pw=big?Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24:t.name.length*r*.115*lw+r*.34;
@@ -513,13 +509,13 @@ function renderSheet(){
   if(state.level==="theme"){
     const paths=T.regions.flatMap(r=>r.paths),tot=paths.reduce((s,p)=>s+p.lessons,0),dn=paths.reduce((s,p)=>s+p.done,0);
     h=`<h2>${T.name}<span class="demotag">theme · ecosystem</span></h2><p class="sub">${T.subject}</p>
-    <span class="stat">${T.regions.length} shaped regions</span><span class="stat">${paths.length} paths</span><span class="stat">${tot} lessons</span>
-    ${bar(dn,tot)}<p class="blurb">${T.blurb} Tap a shaped region to see its related paths.</p>`;
+    <span class="stat">${paths.length} paths</span><span class="stat">${tot} lessons</span><span class="stat">${T.terrain} terrain</span>
+    ${bar(dn,tot)}<p class="blurb">${T.blurb} Tap an area of the map to open its path.</p>`;
   }else if(state.level==="region"){
-    const rg=T.regions.find(x=>x.slug===state.r);const tot=rg.paths.reduce((s,p)=>s+p.lessons,0),dn=rg.paths.reduce((s,p)=>s+p.done,0);
-    h=`<h2>${rg.name}<span class="demotag">related paths · one shape</span></h2><p class="sub">${T.name} · ${rg.paths.length} paths</p>${bar(dn,tot)}
-    <ul class="plist">${rg.paths.map((p,j)=>`<li data-j="${j}"><span class="num">${j+1}</span><span class="nm">${p.name}</span><span class="pg">${p.done}/${p.lessons} · ${p.done===p.lessons?"done":p.done?"going":"new"}</span></li>`).join("")}</ul>
-    <p class="blurb">Tap a path to walk its lessons.</p>`;
+    const rg=T.regions.find(x=>x.slug===state.r);const p=rg.paths[0];
+    h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name}</p>${bar(p.done,p.lessons)}
+    <ul class="plist"><li data-j="0"><span class="num">1</span><span class="nm">Walk the trail</span><span class="pg">${p.done}/${p.lessons} · ${p.done===p.lessons?"done":p.done?"going":"new"}</span></li></ul>
+    <p class="blurb">Tap the trail to walk its lessons one bead at a time.</p>`;
   }else{
     const rg=T.regions.find(x=>x.slug===state.r),p=rg.paths[state.p];
     h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name} › ${rg.name}</p>${bar(p.done,p.lessons)}
@@ -540,8 +536,13 @@ function renderSheet(){
 addEventListener("keydown",e=>{if(e.key==="Escape"){const b=[{level:"world"}];if(state.t)b.push({level:"theme",t:state.t});if(state.r)b.push({level:"region",t:state.t,r:state.r});b.pop();go(b[b.length-1]||{level:"world"})}});
 document.getElementById("infoBtn").onclick=()=>document.getElementById("about").classList.remove("hidden");
 document.getElementById("aboutClose").onclick=()=>document.getElementById("about").classList.add("hidden");
+{const box=document.getElementById("stress");
+ for(const n of[7,14,21]){const b=document.createElement("button");b.textContent=n+" themes";b.style.marginRight="6px";
+  b.onclick=()=>{THEMES=buildThemes(n<=7?RAW_THEMES:RAW_THEMES.concat(genExtra(n-7)));document.getElementById("about").classList.add("hidden");build();go({level:"world"},true)};
+  box.appendChild(b)}}
 document.getElementById("about").addEventListener("click",e=>{if(e.target.id==="about")e.target.classList.add("hidden")});
 let rsT;addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTimeout(()=>{const asp=innerWidth/innerHeight,wasL=WORLD.w===1600;if((asp>1)!==wasL){build();go(state,true)}else go(state,true)},200)});
+THEMES=buildThemes(RAW_THEMES);
 build();
 (function(){const h=location.hash.slice(1).split("/");const st={level:"world"};
   if(h[0]&&themeIndex[h[0]]){st.level="theme";st.t=h[0];

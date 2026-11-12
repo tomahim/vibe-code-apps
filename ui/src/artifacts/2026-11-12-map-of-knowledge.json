@@ -1,1 +1,14 @@
-{"title": "Map of Knowledge", "description": "An explorable map where each theme is an ecosystem on one connected continent - mountains, forests, rivers and drier regions in the soft Little Grains palette - with shaped regions grouping related paths and lessons as beads on trails. A navigation design study for Cultive with room to grow past 6-7 paths per theme.", "date": "2026-11-12", "tags": ["map", "navigation", "learning", "little-grains", "cultive", "interactive", "design-study"]}
+{
+  "title": "Map of Knowledge",
+  "description": "Prototype for a generated world-map themes screen for Little Grains: every published theme becomes a biome territory on one fractal-coastline continent (real themes, paths and lesson counts), territories placed by phyllotaxis and shaped procedurally so the map scales to any number of themes. Zoom from world to theme to path; lessons are beads on trails. A navigation design study for Cultive.",
+  "date": "2026-11-12",
+  "tags": [
+    "map",
+    "navigation",
+    "learning",
+    "little-grains",
+    "cultive",
+    "interactive",
+    "design-study"
+  ]
+}
