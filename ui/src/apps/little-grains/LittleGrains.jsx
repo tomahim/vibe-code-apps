@@ -11,6 +11,7 @@ import { api, redirectToLogin } from "./api.js";
 import { LessonReader } from "./reader/LessonReader.jsx";
 import { QuizSession } from "./quiz/QuizSession.jsx";
 import { ReviewPicker } from "./quiz/ReviewPicker.jsx";
+import { fetchFeatureFlags } from "../../featureFlags.js";
 import { ChallengeSession } from "./challenge/ChallengeSession.jsx";
 import { Leaderboard, RewardInfo } from "./leaderboard/Leaderboard.jsx";
 import "./garden/garden.css";
@@ -120,6 +121,11 @@ export default function LittleGrains() {
   const [catchUp, setCatchUp] = useState(null);
   const [reviewPicker, setReviewPicker] = useState(false);
   const [reviewMinutes, setReviewMinutes] = useState(null);
+  // null until /api/auth/me answers. Missing or failed means no flags: both
+  // features stay hidden and make no requests.
+  const [flags, setFlags] = useState(null);
+  const challengeEnabled = Boolean(flags?.includes("challenge_two_users"));
+  const leaderboardEnabled = Boolean(flags?.includes("leaderboard_two_users"));
   const [challenge, setChallenge] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showBadges, setShowBadges] = useState(false);
@@ -250,6 +256,8 @@ export default function LittleGrains() {
       }
       if (!active) return;
       setStartup({ phase: "ready", attempt: 0 });
+      // Flags load once the api is awake, so a cold start is not read as "no flags".
+      fetchFeatureFlags().then((keys) => { if (active) setFlags(keys); });
       refresh().catch((err) => { if (active) setError(err.message); });
       checkBadges();
     })();
@@ -258,16 +266,16 @@ export default function LittleGrains() {
 
 
   useEffect(() => {
-    if (!garden || !mount.current) return;
+    if (!garden || !flags || !mount.current) return;
     // Restore the garden level from the URL and correct unknown ids (#225).
     const current = parseRoute(window.location.pathname);
     const located = locateRoute(garden, current);
     if (!current.step) { const valid = routeUrl(located.route); if (valid !== window.location.pathname) window.history.replaceState({}, "", valid); }
-    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle, lesson = null) => setCatchUp({ pathId, pathTitle, lesson }), onReview: () => setReviewPicker(true), onChallenge: () => setChallenge(true), reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
+    const instance = createGarden({ container: mount.current, profile, themes: adaptGarden(garden), rewards: garden.rewards, recentLessons: garden.recent_lessons || [], initialView: located.view, onViewChange: handleViewChange, onOpenLesson: openReader, onRewardInfo: setRewardInfo, onPracticeQuiz: (pathId, pathTitle, lesson = null) => setCatchUp({ pathId, pathTitle, lesson }), onReview: () => setReviewPicker(true), onChallenge: () => setChallenge(true), challengeEnabled, reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     scene.current = instance;
     lastGarden.current = garden;
     return () => { instance.dispose(); scene.current = null; };
-  }, [Boolean(garden), profile]);
+  }, [Boolean(garden), Boolean(flags), profile]);
 
   useEffect(() => {
     if (garden && garden !== lastGarden.current && scene.current && !scene.current.failed) {
@@ -281,8 +289,8 @@ export default function LittleGrains() {
     window.addEventListener("keydown", onEscape); return () => window.removeEventListener("keydown", onEscape);
   }, [reader, catchUp, reviewPicker, reviewMinutes, challenge, showLeaderboard, showBadges, showStreak, rewardInfo, closeReader, completedPaths]);
 
-  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span><button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button><StreakPill streak={badges?.streak} onClick={() => { setShowStreak(true); checkBadges(); }} /><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
-    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || (!garden && !error)) && (startup.phase === "exhausted"
+  return <main className="little-grains-page"><header className="grains-header"><a className="grains-brand" href="/"><span className="grains-brand-mark">{BRAND_BADGE}</span><span>Little Grains<small>THE LEARNING GARDEN</small></span></a><div className="grains-header-actions"><span className="grains-header-label">Grow a little, every day</span>{leaderboardEnabled && <button className="grains-leaderboard-button" onClick={() => setShowLeaderboard(true)} aria-label="Open leaderboard"><span aria-hidden="true">♛</span><span className="grains-button-text">Leaderboard</span></button>}<StreakPill streak={badges?.streak} onClick={() => { setShowStreak(true); checkBadges(); }} /><BadgeButton newCount={badges?.new_count || 0} onClick={() => { setShowBadges(true); checkBadges(); }} /><AccountMenu /></div></header>
+    <section className="grains-stage" aria-label="Learning garden"><div className="grains-garden-mount" ref={mount} />{(startup.phase !== "ready" || ((!garden || !flags) && !error)) && (startup.phase === "exhausted"
         ? <GrainsLoader exhausted onRetry={() => setWakeRun((run) => run + 1)} />
         : startup.phase !== "ready"
           ? <GrainsLoader attempt={startup.attempt} />
@@ -291,9 +299,9 @@ export default function LittleGrains() {
     {catchUp && <QuizSession fetchUrl={`paths/${catchUp.pathId}/catch-up/${catchUp.lesson ? `?lesson=${catchUp.lesson.id}` : ""}`} kicker={`Practice quiz · ${catchUp.lesson ? `${catchUp.pathTitle} · ${catchUp.lesson.title}` : catchUp.pathTitle}`} label={`Practice quiz - ${catchUp.lesson ? catchUp.lesson.title : catchUp.pathTitle}`} lesson={catchUp.lesson} onClose={() => setCatchUp(null)} onProgress={refresh} />}
     {reviewPicker && <ReviewPicker onPick={(minutes) => { setReviewPicker(false); setReviewMinutes(minutes); }} onClose={() => setReviewPicker(false)} />}
     {reviewMinutes && <QuizSession fetchUrl={`review/?minutes=${reviewMinutes}`} kicker={`Review · ${reviewMinutes} minutes`} heading="REVIEW" onClose={() => setReviewMinutes(null)} onProgress={refresh} />}
-    {challenge && <ChallengeSession onClose={() => setChallenge(false)} onProgress={refresh} />}
+    {challengeEnabled && challenge && <ChallengeSession onClose={() => setChallenge(false)} onProgress={refresh} />}
     {!reader && !catchUp && completedPaths.length > 0 && <PathComplete key={completedPaths[0].id} path={completedPaths[0]} onDone={() => setCompletedPaths(queue => queue.slice(1))} />}
-    {showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} onOpenBadges={() => { setShowLeaderboard(false); setShowBadges(true); checkBadges(); }} />}
+    {leaderboardEnabled && showLeaderboard && <Leaderboard onClose={() => setShowLeaderboard(false)} onOpenBadges={() => { setShowLeaderboard(false); setShowBadges(true); checkBadges(); }} />}
     {showBadges && <BadgeCollection data={badges} error={badgesError} onClose={() => setShowBadges(false)} />}
     {showStreak && <StreakPanel data={badges} error={badgesError} onClose={() => setShowStreak(false)} />}
   </main>;

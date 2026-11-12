@@ -11,6 +11,7 @@ from django.test.utils import CaptureQueriesContext
 
 from apps.accounts.tokens import issue_token
 from .api import LearnerState
+from apps.feature_flags.testing import enable_flags
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, LessonOpen, Question, QuestionAttempt, PathCelebration, Theme
 from .rewards import chart, period_window, totals
 
@@ -42,6 +43,7 @@ class LearningAPITests(TestCase):
         )
 
     def setUp(self):
+        enable_flags()
         self.user = get_user_model().objects.create_user(username="learner")
         self.other = get_user_model().objects.create_user(username="other")
         self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {issue_token(self.user)}"

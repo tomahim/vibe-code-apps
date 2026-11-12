@@ -7,7 +7,7 @@ from GET /api/auth/me.
 
 from django.conf import settings
 from django.core.validators import RegexValidator
-from django.db import models
+from django.db import DatabaseError, models
 
 key_validator = RegexValidator(
     r"^[a-z0-9][a-z0-9_-]*$",
@@ -45,3 +45,12 @@ def active_flag_keys(user):
         models.Q(enabled_for_everyone=True) | models.Q(users=user)
     )
     return sorted(set(flags.values_list("key", flat=True)))
+
+
+def flag_enabled(user, key):
+    """True only when the flag is on for this user. Fails closed: a missing
+    flag or a database error never turns a feature on."""
+    try:
+        return key in active_flag_keys(user)
+    except DatabaseError:
+        return False

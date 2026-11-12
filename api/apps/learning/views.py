@@ -11,6 +11,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 
 from apps.accounts.decorators import jwt_required
+from apps.feature_flags.decorators import feature_flag_required
 
 from .api import (
     LearnerState, checkpoint_questions, described, input_error, json_object,
@@ -455,6 +456,7 @@ def garden(request):
 @never_cache
 @require_GET
 @jwt_required
+@feature_flag_required("leaderboard_two_users")
 def leaderboard(request):
     currency = request.GET.get('currency', 'drops')
     period = request.GET.get('period', 'weekly')
@@ -472,6 +474,7 @@ def leaderboard(request):
 @never_cache
 @require_GET
 @jwt_required
+@feature_flag_required("leaderboard_two_users")
 def badges_leaderboard_view(request):
     """Per-player badge and streak fun stats for the Badges & streak tab.
     Same audience as the drops/carrots leaderboard, aggregates only, and

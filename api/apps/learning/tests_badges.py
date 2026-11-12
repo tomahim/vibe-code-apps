@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .badge_catalog import BADGES, TIERS
 from .badges import MONTH, WEEK, History, check
+from apps.feature_flags.testing import enable_flags
 from .models import BadgeAward
 from .models import Card, CardProgress, ContentEntity, LearningPath, Lesson, Question, QuestionAttempt, Theme
 
@@ -29,6 +30,7 @@ class BadgeTests(TestCase):
         )
 
     def setUp(self):
+        enable_flags()
         self.user = get_user_model().objects.create_user(username="learner")
         self.other = get_user_model().objects.create_user(username="other")
         self.theme = self.row(Theme)

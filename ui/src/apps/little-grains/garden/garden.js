@@ -84,7 +84,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onReview, onChallenge, onViewChange, initialView = null, reduced = false }) {
+export function createGarden({ container, profile: P, themes: THEMES, rewards, recentLessons = [], onOpenLesson, onRewardInfo, onPracticeQuiz, onReview, onChallenge, challengeEnabled = false, onViewChange, initialView = null, reduced = false }) {
   const state = { rewards, recentLessons };
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
@@ -882,12 +882,13 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
     if (view.level !== 'garden') { reviewFloatEl.hidden = true; reviewFloatEl.innerHTML = ''; return; }
     const reviewable = THEMES.some((t) => t.paths.some((p) => p.lessonData.some((l) => lessonFinished(l.progress))));
     const reviewNote = reviewable ? '' : ' disabled aria-disabled="true" title="Read every card of a lesson first"';
+    // The Challenge entry only exists for learners with the challenge_two_users flag.
     reviewFloatEl.innerHTML = mobile
       ? `<button class="lg-review-pill" data-review="1"${reviewNote}>${ICON.pencil} Review</button>`
-        + `<button class="lg-review-pill lg-challenge-pill" data-challenge="1">${ICON.swords} Challenge</button>`
-      : `<div class="lg-review-card"><h3>Review or Challenge</h3><p>Questions from your least-practised paths, or this week's duel</p>`
+        + (challengeEnabled ? `<button class="lg-review-pill lg-challenge-pill" data-challenge="1">${ICON.swords} Challenge</button>` : '')
+      : `<div class="lg-review-card"><h3>${challengeEnabled ? 'Review or Challenge' : 'Review'}</h3><p>${challengeEnabled ? "Questions from your least-practised paths, or this week's duel" : 'Questions from your least-practised paths'}</p>`
         + `<button class="primary" data-review="1"${reviewNote}>${ICON.pencil} Start a review</button>`
-        + `<button class="primary lg-challenge-btn" data-challenge="1">${ICON.swords} Take the challenge</button>`
+        + (challengeEnabled ? `<button class="primary lg-challenge-btn" data-challenge="1">${ICON.swords} Take the challenge</button>` : '')
         + (reviewable ? '' : '<p class="lg-review-note">Read every card of a lesson first</p>') + '</div>';
     reviewFloatEl.hidden = false;
     placeReviewFloat();
@@ -930,7 +931,7 @@ export function createGarden({ container, profile: P, themes: THEMES, rewards, r
       onPracticeQuiz?.(trail.path.id, trail.path.title, scoped);
     }
     else if (b.dataset.review) onReview?.();
-    else if (b.dataset.challenge) onChallenge?.();
+    else if (b.dataset.challenge && challengeEnabled) onChallenge?.();
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) { panel.classList.toggle('open'); trackFab(); }
   });
