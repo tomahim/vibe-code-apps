@@ -22,7 +22,7 @@ from .models import (Card, CardProgress, LearningPath, Lesson, LessonOpen, PathC
 from .images import illustration_srcset, image_url
 from .grading import normalize_typed_answer
 from .badges import badges_leaderboard, check as check_badges
-from .rewards import leaderboard as ranking, reward_events, totals as reward_totals
+from .rewards import leaderboard as ranking, reward_events_for, totals as reward_totals
 
 
 @never_cache
@@ -404,7 +404,7 @@ def garden(request):
     lessons = list(visible(Lesson))
     recency = path_recency(state, lessons)
     now = timezone.now()
-    events = reward_events().get(request.user.pk, [])
+    events = reward_events_for(request.user)
     celebrated_paths = set(PathCelebration.objects.filter(
         user=request.user, learning_path__in=paths,
     ).values_list("learning_path_id", flat=True))
