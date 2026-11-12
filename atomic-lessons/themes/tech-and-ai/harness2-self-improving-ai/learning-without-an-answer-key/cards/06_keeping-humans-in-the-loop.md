@@ -3,6 +3,10 @@ id: 02f10dc7-dd73-4534-b29c-86eee3675f33
 position: 6
 title: Keeping humans in the loop
 archived: false
+image: l6-release-gate.png
+image_alt: "A six-step chain: composed candidate harness, automated checks, regression tests, safety review, human approval for risky changes, then adoption."
+image_caption: "A release gate between a candidate harness and its adoption (general practice, not from the paper)."
+image_license: original
 ---
 
 

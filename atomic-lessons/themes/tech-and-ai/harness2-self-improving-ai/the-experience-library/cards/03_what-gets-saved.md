@@ -3,6 +3,10 @@ id: cb5a044b-ed88-4449-941c-b2710f35dd8d
 position: 3
 title: What gets saved
 archived: false
+image: l8-library-entry.png
+image_alt: "A library entry has two parts: the adopted harness file tree, and an EXPERIENCE.md listing situation, observation, change tried and lesson, shown with a made-up budget workbook example."
+image_caption: "Anatomy of a library entry (made-up example)."
+image_license: original
 ---
 
 

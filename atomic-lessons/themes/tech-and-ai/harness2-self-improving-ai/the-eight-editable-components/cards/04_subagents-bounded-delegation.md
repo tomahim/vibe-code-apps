@@ -3,6 +3,10 @@ id: 85bd69e7-a750-4f54-9b16-be1ae4d5da25
 position: 4
 title: 'Subagents: bounded delegation'
 archived: false
+image: l3-subagent-isolation.png
+image_alt: "Left: without a subagent, search results pile up around the real task and crowd it out. Right: a subagent searches in its own context and returns only a short conclusion to the main agent."
+image_caption: "A subagent keeps the main context clean."
+image_license: original
 ---
 
 

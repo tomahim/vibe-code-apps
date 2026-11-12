@@ -3,6 +3,10 @@ id: 9a7f227f-dac4-4633-9c78-6ef3ef91ae4d
 position: 5
 title: The open world problem
 archived: false
+image: l1-open-world-two-challenges.png
+image_alt: "Left: before deployment, a fixed set of training tasks graded by tests, with the best configuration shipped. Right: the open world, with new tasks, no answer key to grade edits, and fixes for one task that mislead the next."
+image_caption: "Two challenges separate the open world from a closed benchmark."
+image_license: original
 ---
 
 

@@ -3,6 +3,10 @@ id: a15adb01-6906-4ce4-985a-c7bb1b6a0d86
 position: 2
 title: 'Two layers: the brain and the workplace'
 archived: false
+image: l1-agent-model-plus-harness.png
+image_alt: "Two stacked layers: a frozen model that reads, reasons and writes sits on top of an editable harness made of instructions, tools, memory, procedures and a runtime."
+image_caption: "Agent = Model + Harness: the harness is the part that can be improved."
+image_license: original
 ---
 
 

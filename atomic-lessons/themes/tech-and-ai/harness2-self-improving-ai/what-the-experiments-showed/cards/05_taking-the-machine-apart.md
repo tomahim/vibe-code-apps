@@ -3,6 +3,10 @@ id: 13165703-5823-4ad2-81d6-c99d67b0b5b3
 position: 5
 title: Taking the machine apart
 archived: false
+image: l9-ablation-costs.png
+image_alt: "Grouped bars of points lost when a part is removed, WorkBuddy-Bench then JobBench: library 3.1 and 1.8, scoped editors 2.9 and 3.7, composition 1.6 and 1.9."
+image_caption: "Ablation: every component earns its place."
+image_license: original
 ---
 
 

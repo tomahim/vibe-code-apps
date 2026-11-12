@@ -3,6 +3,10 @@ id: 1b2174f6-0462-4573-9ec7-95d45ff80cef
 position: 2
 title: Harnessing-level recursion
 archived: false
+image: l8-library-loop.png
+image_alt: "A loop: the task is refined, the improvement record is reviewed, reflection extracts supported lessons, and they go into a per-domain library that guides the next task's refinement."
+image_caption: "Harnessing-level recursion: only the library evolves."
+image_license: original
 ---
 
 

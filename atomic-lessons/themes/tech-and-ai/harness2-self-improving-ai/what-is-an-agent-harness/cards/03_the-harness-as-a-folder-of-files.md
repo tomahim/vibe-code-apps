@@ -3,6 +3,10 @@ id: 33d92abc-758b-4738-ac8f-49778cf4ecd5
 position: 3
 title: The harness as a folder of files
 archived: false
+image: l2-harness-folder-of-files.png
+image_alt: "A folder tree named harness with four always-on files (system prompt, guardrails, long-term memory, tool guidance) and four on-demand parts (skills, scripts, sub_agents, plugin), each with a one-line purpose."
+image_caption: "The harness as a literal folder of editable files."
+image_license: original
 ---
 
 

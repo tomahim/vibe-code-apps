@@ -79,6 +79,13 @@ class Harness2Tests(unittest.TestCase):
             self.assertIn("[Further reading:", text, lesson)
         self.assertTrue((Path(__file__).parent / "harness2-sources.md").is_file())
 
+    def test_at_least_two_illustrations_per_lesson(self):
+        for lesson in sorted(p for p in ROOT.iterdir() if p.is_dir()):
+            illustrated = [c for c in (lesson / "cards").glob("*.md") if front(c).get("image")]
+            self.assertGreaterEqual(len(illustrated), 2, lesson.name)
+            for card in illustrated:
+                self.assertEqual(front(card).get("image_license"), "original", card.name)
+
 
 if __name__ == "__main__":
     unittest.main()

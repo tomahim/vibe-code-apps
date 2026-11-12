@@ -3,6 +3,10 @@ id: 580787f1-722f-4de1-a8eb-c4a8c7c7d8b5
 position: 2
 title: Contrast instead of scores
 archived: false
+image: l6-behavioral-contrast.png
+image_alt: "A reference run answering no to three process checks (opened the configuration file, reopened its outputs, checked its work) beside a candidate run answering yes to all three."
+image_caption: "A behavioral contrast compares procedure, not answers (illustrative checks)."
+image_license: original
 ---
 
 

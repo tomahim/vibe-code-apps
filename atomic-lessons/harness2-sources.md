@@ -23,4 +23,4 @@ Reviewed 12 November 2026. This is an introductory learning path about a researc
 
 - The paper's formal notation (executors, harness tuples, update equations) is replaced with plain-language descriptions of the same mechanisms.
 - The statistical caveats (stochasticity, shared model bias) are kept.
-- No card reproduces the paper's prompts, tables or figures; mechanisms and numbers are described in prose.
+- No card reproduces the paper's prompts, tables or figures. Every lesson carries two original diagrams (`image_license: original`) drawn for this path; they restate mechanisms and numbers from the lesson text and are not copies of paper figures. The library-entry, release-gate and contrast diagrams are illustrations, not paper results.

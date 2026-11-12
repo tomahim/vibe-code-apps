@@ -3,6 +3,10 @@ id: 7efbf1e3-135a-4a34-9ec0-1aea4759f9af
 position: 1
 title: Five risks worth naming
 archived: false
+image: l10-five-risks.png
+image_alt: "Five risks of a self-editing harness: wrong pick, over-broad lesson, pile-up, runaway cost and unsafe edit, each with a one-line description."
+image_caption: "Five risks to measure separately."
+image_license: original
 ---
 
 

@@ -3,6 +3,10 @@ id: 3fdfb522-f631-49de-981c-05c239f6c14e
 position: 7
 title: The central question
 archived: false
+image: l4-two-loops.png
+image_alt: "An execution harness that solves the task and an improvement harness that refines it. The inner loop refines for the current task; the outer loop updates the improver itself after the task."
+image_caption: "The two-loop picture behind everything that follows."
+image_license: original
 ---
 
 

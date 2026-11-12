@@ -3,6 +3,10 @@ id: 4d80fe4e-e914-49a5-816a-b854e2e621ae
 position: 3
 title: 'Sequential recursion: dig deeper'
 archived: false
+image: l7-sequential-recursion.png
+image_alt: "Three chained steps: step 1 fixes the earliest failure, step 2 retains, revises or corrects step 1 using new evidence, and step k continues as new problems surface."
+image_caption: "Sequential recursion digs deeper, one step at a time."
+image_license: original
 ---
 
 

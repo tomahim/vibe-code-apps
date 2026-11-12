@@ -3,6 +3,10 @@ id: 0334a248-005b-4506-a0a8-4bbd7c6e97b1
 position: 2
 title: 'Propose: two kinds of candidates'
 archived: false
+image: l5-propose-probe-compose.png
+image_alt: "Five steps in a row: watch the current harness run, propose an invariant and a domain candidate, probe both on the same task, compose what the evidence supports, then run the successor."
+image_caption: "One improvement step, with no answer key required."
+image_license: original
 ---
 
 

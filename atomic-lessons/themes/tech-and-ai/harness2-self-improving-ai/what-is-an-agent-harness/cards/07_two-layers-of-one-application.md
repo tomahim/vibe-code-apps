@@ -3,6 +3,10 @@ id: 19a688ca-e4d7-471d-9ac0-cc015189cb07
 position: 7
 title: Two layers of one application
 archived: false
+image: l2-two-harnesses.png
+image_alt: "Two boxes: the execution harness, which does the task, and the improvement harness, which revises the execution harness. An arrow points from the improvement harness to the execution harness."
+image_caption: "One harness does the work, the other decides how it should change."
+image_license: original
 ---
 
 

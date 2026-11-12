@@ -3,6 +3,10 @@ id: 53312b72-572d-4de4-9bb1-2ff5006860da
 position: 2
 title: 'Parallel recursion: explore wide'
 archived: false
+image: l7-parallel-recursion.png
+image_alt: "With k equal to 2: two reference runs feed four probed candidates (two invariant, two domain), which two independent composers read in full to produce two successor harnesses."
+image_caption: "Parallel recursion at k = 2 explores wide."
+image_license: original
 ---
 
 

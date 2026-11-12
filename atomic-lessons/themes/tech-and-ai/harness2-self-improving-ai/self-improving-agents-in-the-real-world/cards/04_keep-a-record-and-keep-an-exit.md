@@ -3,6 +3,10 @@ id: 43ebcd2e-280f-4617-be6c-0a707bb5d2db
 position: 4
 title: Keep a record and keep an exit
 archived: false
+image: l10-record-and-exit.png
+image_alt: "A rollout flow: current snapshot v1, new version v2 checked and tried on a small share of work, then widened if quality holds, or rolled back to the previous snapshot if quality drops. A record of each cycle is kept."
+image_caption: "Keep a record of every cycle and an exit to the last snapshot."
+image_license: original
 ---
 
 

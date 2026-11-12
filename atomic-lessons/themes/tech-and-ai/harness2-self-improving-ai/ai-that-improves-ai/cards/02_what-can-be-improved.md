@@ -3,6 +3,10 @@ id: a72fb043-76d9-444e-b6af-3321c65de352
 position: 2
 title: What can be improved
 archived: false
+image: l4-what-can-be-improved.png
+image_alt: "Three columns for what a system can improve: model weights (self-rewarding language models), agent code (STOP and the Darwin Gödel Machine), and the harness, which is what Harness² edits."
+image_caption: "Harness² targets the harness, not the weights or the code."
+image_license: original
 ---
 
 

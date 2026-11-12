@@ -3,6 +3,10 @@ id: d9eec431-f9db-4042-91ef-253deb234f03
 position: 6
 title: 'Compose: selective assembly'
 archived: false
+image: l5-composition-case-study.png
+image_alt: "Bar chart: base harness 43.1 versus composed harness 77.8, a gain of 34.7 points, next to the four edits the composer kept: an inventory guardrail, a verification script, a reconciliation skill and number-format tool guidance."
+image_caption: "Composition in the paper's JobBench case study."
+image_license: original
 ---
 
 
