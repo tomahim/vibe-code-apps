@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.admin_ui",
     "apps.accounts",
+    "apps.feature_flags",
     "apps.little_grains",
     "apps.content_review",
     "apps.db_dashboard",
