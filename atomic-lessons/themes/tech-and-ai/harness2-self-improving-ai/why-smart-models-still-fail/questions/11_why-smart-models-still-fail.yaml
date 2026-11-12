@@ -1,0 +1,19 @@
+id: 0739cff8-70a9-4e34-9484-cbe9c8460073
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What are the two coupled challenges of open-world harness evolution?
+choices:
+- id: f3096e02-9b8f-484b-9275-f33b2055f6bb
+  text: Models are too slow, and hardware is too expensive
+- id: de4fc33b-25fd-4d7c-986a-7f017e9c1d1a
+  text: Prompts are too short, and tools are too few
+- id: 2f16f524-3d20-41e4-8e9f-4a02073110e9
+  text: Benchmarks are too easy, and baselines too strong
+- id: 73a3f517-99d6-4740-aac4-3d973649224b
+  text: No ground-truth verdicts to guide edits, and task-specific edits that do not generalize
+correct_choice_ids:
+- 73a3f517-99d6-4740-aac4-3d973649224b
+explanation: Without an answer key it is hard to know which change helped, and a fix tuned to one task can mislead the next one.
+archived: false

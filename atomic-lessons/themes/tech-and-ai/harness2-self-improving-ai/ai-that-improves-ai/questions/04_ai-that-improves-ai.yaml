@@ -1,0 +1,19 @@
+id: 438cb869-60f9-45d7-b240-ead2b580deef
+position: 4
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Why is editing a harness safer than retraining a model?
+choices:
+- id: 955683c1-df55-428b-ac53-2639471fd9cf
+  text: Bad edits are reversible files; the model itself stays safe
+- id: a9a454fe-1538-4109-9a1a-9afa367ecfe9
+  text: Harness edits cannot actually change behavior anyway
+- id: b8119507-c2b8-44fc-8abd-2e44f2b5f7a7
+  text: Retraining is illegal in most countries
+- id: 26b5ddd4-968e-4bfe-af25-567ffd3edd49
+  text: Harnesses never contain mistakes of any kind
+correct_choice_ids:
+- 955683c1-df55-428b-ac53-2639471fd9cf
+explanation: Harness edits are cheap, instant, reviewable diffs; a bad one is rolled back by restoring the previous version, with the frozen model untouched.
+archived: false

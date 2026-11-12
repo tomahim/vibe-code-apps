@@ -1,0 +1,9 @@
+id: 213f5b53-bdbb-46d1-a0ee-96839b581cf5
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: 'Fill in the blank: behavioral comparison is not proof of ____.'
+accepted_answers:
+- correctness
+explanation: 'Behavioral comparison is evidence about procedure, not a verdict: a convincing but wrong result can still be selected.'
+archived: false

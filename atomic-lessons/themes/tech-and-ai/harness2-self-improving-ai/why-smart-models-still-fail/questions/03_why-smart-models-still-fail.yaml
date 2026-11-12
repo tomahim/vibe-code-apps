@@ -1,0 +1,19 @@
+id: e10dd374-5451-4756-bba0-34a3034442ae
+position: 3
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What do the paper's experiments say about a weaker model with an improved harness?
+choices:
+- id: 8f575587-d5f6-4e52-acee-6a656d4b23f3
+  text: It can outperform a stronger model with its original harness
+- id: 5aba2ae6-ac9c-41e9-bec7-ea7f6dd7fcd4
+  text: It always remains below any stronger model
+- id: c6ba8082-f788-43cd-be27-ae14329770f8
+  text: It only improves on coding tasks, not other work
+- id: eaacfe48-d56d-4a21-a4b5-32a21494fe65
+  text: It matches the stronger model but uses far more compute
+correct_choice_ids:
+- 8f575587-d5f6-4e52-acee-6a656d4b23f3
+explanation: 'On WorkBuddy-Bench, GLM-5 with an improved harness scored higher than Gemini 3.5 Flash with its base harness: harness quality can outweigh model strength.'
+archived: false

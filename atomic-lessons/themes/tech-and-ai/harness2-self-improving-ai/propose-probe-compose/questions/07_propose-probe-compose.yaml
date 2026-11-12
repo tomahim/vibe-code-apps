@@ -1,0 +1,11 @@
+id: 003682ab-27e0-4d13-9ba8-ee3503b36fbf
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: What do the letters PPC stand for in Harness²'s improvement step?
+accepted_answers:
+- Propose Probe Compose
+- propose probe and compose
+- PPC
+explanation: Propose candidate edits, Probe them by execution, Compose the successor from the behavioral evidence.
+archived: false

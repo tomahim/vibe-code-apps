@@ -1,0 +1,19 @@
+id: a2b40830-91dd-4d04-9a18-d0f47f7d22d9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: In Harness²'s two-loop picture, when does the improvement harness change?
+choices:
+- id: 09d90ead-5b97-4ee1-944d-9ce9db0397fb
+  text: Continuously, during every model call
+- id: ee57b7e8-e712-4372-a0c2-f3fd880929c7
+  text: After the task, using what the refinement taught
+- id: 410452a3-7ccd-4948-bae9-c0feb945d00d
+  text: Never; it is hard-coded forever
+- id: 707c4c87-432f-409b-aebe-34b0431ef493
+  text: Only when a human edits it manually
+correct_choice_ids:
+- ee57b7e8-e712-4372-a0c2-f3fd880929c7
+explanation: The improver stays fixed during the task and is updated afterward with adopted harnesses and lessons from the refinement.
+archived: false

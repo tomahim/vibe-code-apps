@@ -1,0 +1,19 @@
+id: 88cd9906-9666-42ad-b8d1-40366d6f4857
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: When does delegation to a subagent pay off?
+choices:
+- id: 2d3376f9-fdf1-468f-8b89-ec273662a830
+  text: When the subagent's findings are themselves the main deliverable
+- id: 81c7b3f2-0153-4c3d-92d2-6a8a05455e62
+  text: When a bounded side-quest would flood the main context and a concise result suffices
+- id: 937ae624-06d1-4db5-ac3c-50ee9e27c1df
+  text: Whenever any kind of tool call is available to use
+- id: 2803a2fc-d65e-4a03-8220-77198f632c53
+  text: Only when the main model happens to be offline
+correct_choice_ids:
+- 81c7b3f2-0153-4c3d-92d2-6a8a05455e62
+explanation: Subagents isolate bounded side-quests and return concise results, at the price of extra latency and model cost.
+archived: false

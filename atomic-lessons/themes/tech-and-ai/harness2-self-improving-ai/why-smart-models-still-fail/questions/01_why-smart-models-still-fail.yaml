@@ -1,0 +1,19 @@
+id: 273be1d5-7129-430e-8179-8ff1874d8fb2
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In the formula Agent = Model + Harness, what does the harness include?
+choices:
+- id: 42213b5c-2d9b-4d36-8e33-ea53f93aef3e
+  text: The instructions, tools, memory and procedures around the model
+- id: f45026d5-d8fb-45ca-8b2f-f051eeb71799
+  text: Only the system prompt given to the model
+- id: 5e2185f7-db93-4c9e-90bf-8cee8a3fa24a
+  text: The neural network weights inside the model
+- id: 61360db1-311a-4917-9efa-b55f957844c7
+  text: The physical server the model runs on
+correct_choice_ids:
+- 42213b5c-2d9b-4d36-8e33-ea53f93aef3e
+explanation: 'The harness is the whole execution system surrounding the model: prompts, guardrails, memory, skills, tool guidance, scripts, subagents and plugins.'
+archived: false

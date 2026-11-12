@@ -1,0 +1,19 @@
+id: 68d0be90-ba94-4335-9750-2ec4bb34bb95
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why is 'no referee' a hard problem for open-world improvement?
+choices:
+- id: 3f83b2c2-2e44-4e70-99fc-1cb8b604e1d7
+  text: A convincing-looking improvement can be a convincing-looking mistake
+- id: c37d44ad-a88c-49fd-968c-9acece5ad110
+  text: Referees are too expensive to hire
+- id: 37ca2b6b-03c9-4c87-8eaf-1e7f25563a92
+  text: Models refuse to work without scores
+- id: 7d317dc3-9f6c-42ce-9b25-0d6bdc19967a
+  text: Execution logs cannot be stored
+correct_choice_ids:
+- 3f83b2c2-2e44-4e70-99fc-1cb8b604e1d7
+explanation: 'Without ground truth, proxies and model judgments are imperfect: behavioral evidence can endorse a change that is actually wrong.'
+archived: false

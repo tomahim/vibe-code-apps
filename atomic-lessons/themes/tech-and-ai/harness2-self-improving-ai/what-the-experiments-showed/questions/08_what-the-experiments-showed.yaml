@@ -1,0 +1,10 @@
+id: 1d13e871-08d7-4b74-951e-ca26f856b6ed
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: In how many of the twelve benchmark-configuration pairs did Harness Scaling underperform the plain base harness? (A number.)
+accepted_answers:
+- '7'
+- seven
+explanation: Per-task stateless revision without carried state was worse than doing nothing in seven of twelve pairs.
+archived: false

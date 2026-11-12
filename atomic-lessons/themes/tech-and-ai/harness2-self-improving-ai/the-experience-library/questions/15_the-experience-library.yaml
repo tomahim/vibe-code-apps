@@ -1,0 +1,10 @@
+id: d0edd8d2-6d7d-4ede-9d67-9ead936a71d5
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: A k=5 library improved direct refinement on the Office domain without any probing. By how many points? (A number with one decimal.)
+accepted_answers:
+- '5.1'
+- 5.1 points
+explanation: Libraries from larger budgets supported gains of 0.9 (Code), 4.4 (Web) and 5.1 (Office) with no additional probing.
+archived: false

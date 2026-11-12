@@ -1,0 +1,19 @@
+id: 1145f062-966b-44e8-bff2-484b5d8d7f22
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How did Harness² at k=2 compare with the plotted baselines at k=5?
+choices:
+- id: d95ff92c-c6b9-464a-9072-ad70c99fd992
+  text: Both recursive forms at k=2 beat every baseline at k=5
+- id: 27138c1a-9d43-4841-b18d-f1ac171cdd99
+  text: It lost to every single one of them
+- id: d7a976aa-cf42-454b-a7c0-c0637b208c56
+  text: It exactly tied with ReasoningBank overall
+- id: 093b42b0-078f-4dac-99f8-609184ce2289
+  text: It was only evaluated at k=5
+correct_choice_ids:
+- d95ff92c-c6b9-464a-9072-ad70c99fd992
+explanation: 'Refinement quality beat raw exploration quantity: Harness² with less than half the budget still came out ahead.'
+archived: false

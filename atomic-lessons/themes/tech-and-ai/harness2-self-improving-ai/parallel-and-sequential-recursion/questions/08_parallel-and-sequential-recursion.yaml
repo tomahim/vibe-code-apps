@@ -1,0 +1,9 @@
+id: 366486df-a7d9-406c-a227-e99441a2b9c3
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: In parallel mode, what controls the 'width' of the single population update? (One letter.)
+accepted_answers:
+- k
+explanation: The implementation performs one population update; k controls its width rather than its depth.
+archived: false

@@ -1,0 +1,19 @@
+id: 6bf5b0ec-ffe6-407d-91b3-3043b04fdecd
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does a middleware plugin do?
+choices:
+- id: 2948f16a-bc49-43ec-a923-b2fe636bf3fd
+  text: Hooks every tool call from outside the model's own discretion
+- id: 3f616680-9714-4398-a2a5-f66e3db4c014
+  text: Translates user messages into other languages
+- id: f8a5e6a7-b7a6-41f6-b8be-416ff6c016ac
+  text: Caches model weights for much faster inference
+- id: e272ae48-d5c2-410d-a4cc-d198849f7e4d
+  text: Replaces the system prompt at random times
+correct_choice_ids:
+- 2948f16a-bc49-43ec-a923-b2fe636bf3fd
+explanation: 'A plugin is middleware in the tool loop. The paper''s example: refuse to let the agent finish before a deliverable exists, without blocking valid completion.'
+archived: false

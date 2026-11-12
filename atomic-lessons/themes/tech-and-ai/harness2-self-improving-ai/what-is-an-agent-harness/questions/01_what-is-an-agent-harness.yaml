@@ -1,0 +1,19 @@
+id: ad8820f9-8516-4275-b845-3c0ed75e5d92
+position: 1
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: What separates an agent from a plain chatbot?
+choices:
+- id: dbb9030c-e02e-4842-b8cc-e5cb0f40883d
+  text: The agent loops between reasoning and tool actions in a workplace
+- id: 71adea7c-61d9-444a-a7c3-ad742c8a26b2
+  text: The agent simply uses a much larger language model
+- id: 8e2a7d90-f4f2-49e7-ab6b-1305eb71092e
+  text: The chatbot cannot produce any formatted text output
+- id: 62479814-9f1d-4c31-a999-6045333e02f5
+  text: The agent always runs without any instructions at all
+correct_choice_ids:
+- dbb9030c-e02e-4842-b8cc-e5cb0f40883d
+explanation: 'An agent is a model in a workplace: it reads files, calls tools and executes in a loop. The content of that workplace is its harness.'
+archived: false

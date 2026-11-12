@@ -1,0 +1,19 @@
+id: ffb2b6ba-148c-4343-98e2-b1a85602b552
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: When does the harnessing-level update run?
+choices:
+- id: 64440320-b09d-4e7b-91e3-50feb51331b8
+  text: After the task, by reviewing the complete improvement record
+- id: b19d6c54-342d-4a27-8692-7b11f38490c2
+  text: Before the task starts, as warmup
+- id: 7ed7c71d-b9da-46c3-8417-7a88f9afd53a
+  text: During every single model call made
+- id: 14a4e63f-309f-49cc-889f-7c09994fbe9c
+  text: Only when a human triggers it
+correct_choice_ids:
+- 64440320-b09d-4e7b-91e3-50feb51331b8
+explanation: The improvement harness stays fixed during the task and is updated afterward from the full refinement record.
+archived: false

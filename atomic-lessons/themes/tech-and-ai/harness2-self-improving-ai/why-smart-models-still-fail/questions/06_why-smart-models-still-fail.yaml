@@ -1,0 +1,19 @@
+id: 4ba4fbbe-0b9b-490e-b189-c0246020d2ba
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: How do developers typically fix a misbehaving agent today?
+choices:
+- id: 9017f916-9331-4a5a-8021-40564a21c8f0
+  text: Retrain the model from scratch on new data
+- id: 9f321e94-1c11-4e16-b829-86b02fbfa58b
+  text: Hand-edit prompts, add tools and restructure workflows by intuition
+- id: 14b4ec10-3e6a-4cef-a7b3-ab05f7961f17
+  text: Wait for the next model release to solve the problem
+- id: 24c366c5-aa95-4f94-9b3d-529aab550ef0
+  text: Reduce the number of tools until errors disappear
+correct_choice_ids:
+- 9f321e94-1c11-4e16-b829-86b02fbfa58b
+explanation: The standard fix is manual tinkering guided by gut feeling, which does not scale and never records why a change worked.
+archived: false

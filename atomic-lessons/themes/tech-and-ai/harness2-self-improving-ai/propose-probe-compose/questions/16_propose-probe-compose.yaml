@@ -1,0 +1,11 @@
+id: dd69a58f-1568-41f7-803d-70a8c9e3d8ef
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'In one word: which stage executes each candidate harness on the same task under matched conditions?'
+accepted_answers:
+- probe
+- the probe
+- probing
+explanation: Probe runs the candidates so their trajectories and deliverables can be contrasted with the reference execution.
+archived: false

@@ -1,0 +1,19 @@
+id: 4fc3a862-d415-4190-8b79-a3ac30eb9293
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How many edits did the composer retain in the case study, and what was the score swing?
+choices:
+- id: a93e35a2-d4a1-4273-ac52-32edb90cd14a
+  text: Four edits, from 43.1 to 77.8
+- id: ca21d879-3048-4f1c-9f5a-d0fd4c96f215
+  text: One edit, from 43.1 to 44.0
+- id: cc216e96-11a7-49f0-85dd-692bc38bd4b0
+  text: Twelve edits, from 0 to 100
+- id: dd9e0b71-6b60-4dae-b601-658d08d6d797
+  text: No edits, from 77.8 to 43.1
+correct_choice_ids:
+- a93e35a2-d4a1-4273-ac52-32edb90cd14a
+explanation: 'Guardrails, a verification script, a reconciliation skill and tool guidance: +34.7 points on the re-run.'
+archived: false

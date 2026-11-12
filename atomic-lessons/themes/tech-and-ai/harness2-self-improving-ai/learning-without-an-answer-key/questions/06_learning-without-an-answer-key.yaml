@@ -1,0 +1,19 @@
+id: 80ae0f30-cc39-4e50-ba2d-23b43fa4ca12
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: Why can a contrast mislead even when it looks clean?
+choices:
+- id: 55bc9342-fad8-4cab-8110-09ca0f344fb9
+  text: Runs are stochastic and share the same model's biases
+- id: cf684730-855c-4bdf-991e-f1d63dacf0cf
+  text: Every contrast is recorded by human reviewers
+- id: b5cde584-12a0-461e-8a24-e3e6412e67c9
+  text: The compared tasks are always fully identical
+- id: a1089f42-fefa-4232-af8c-6b0890ae91a1
+  text: The selector injects random ranking noise
+correct_choice_ids:
+- 55bc9342-fad8-4cab-8110-09ca0f344fb9
+explanation: A lucky run can flatter a bad edit, and a shared blind spot stays invisible because both executions make the same systematic mistake.
+archived: false

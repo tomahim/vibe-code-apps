@@ -1,0 +1,19 @@
+id: 39921f99-7737-49c6-94b2-30cc245cb2a0
+position: 14
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: What is the fairest summary of the experimental evidence?
+choices:
+- id: 5317c562-e376-479e-b98d-f27e1358223e
+  text: Consistent gains, with limits openly reported
+- id: 0dcaf062-1e75-40fe-9442-726dabff3873
+  text: Proof that Harness² always wins everywhere
+- id: e084ef51-e67f-46bd-a6e8-20c38d62a307
+  text: Evidence only on toy puzzles
+- id: 618d6cff-afae-499a-8e4a-88d710886269
+  text: Results the authors could not reproduce
+correct_choice_ids:
+- 5317c562-e376-479e-b98d-f27e1358223e
+explanation: 'Gains are consistent but bounded: Meta-Harness still leads one LAB configuration, and the paper reports cost and feedback limitations.'
+archived: false

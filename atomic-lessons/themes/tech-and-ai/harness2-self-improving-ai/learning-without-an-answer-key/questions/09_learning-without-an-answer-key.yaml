@@ -1,0 +1,19 @@
+id: be23ab90-ddd8-4316-9bc1-b5b193aca815
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: How does the final selector compare deliverables when k > 1?
+choices:
+- id: f878f805-a858-4f98-9853-d29d6719752d
+  text: Anonymized, against the task request and source materials
+- id: 5cdda2ea-96da-409e-807d-4da42ee8d6d8
+  text: By harness name, preferring the newest
+- id: 0ac82a03-b52f-4b1c-93aa-8fc44c6bd6fb
+  text: By file size, largest first
+- id: cb44f863-7bfd-4599-b9b9-7dd4fc15b313
+  text: By asking the executor to rank itself
+correct_choice_ids:
+- f878f805-a858-4f98-9853-d29d6719752d
+explanation: Anonymization prevents favoritism; the selector returns an existing output and never synthesizes a new one.
+archived: false

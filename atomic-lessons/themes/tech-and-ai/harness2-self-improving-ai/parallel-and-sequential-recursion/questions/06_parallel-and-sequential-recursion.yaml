@@ -1,0 +1,19 @@
+id: 75abc432-838e-4de3-b2a6-6d90fa967e97
+position: 6
+type: multiple_choice
+selection: single
+after_card_position: 4
+prompt: What can later steps in sequential recursion do with earlier changes?
+choices:
+- id: 60ad0a83-abc2-4280-8031-465c91ac3897
+  text: Retain, revise or correct them using current and previous evidence
+- id: 8a994e24-ac7b-49ea-9d9c-fb52107dbc0c
+  text: Only admire them from a distance
+- id: 402b3963-73dc-42ba-b5f5-98b46504fd82
+  text: Nothing; earlier changes are locked forever
+- id: ccfdb253-4fb6-4026-8d48-cbd9ba7aa43a
+  text: Convert them into new model weights
+correct_choice_ids:
+- 60ad0a83-abc2-4280-8031-465c91ac3897
+explanation: Each chained step is conditioned on the preceding harness and the full accumulated execution history.
+archived: false

@@ -1,0 +1,19 @@
+id: 06a91dc2-381f-4511-95d3-c68e52ab2951
+position: 11
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does it mean that Harness²'s configurations lie on the Pareto frontier?
+choices:
+- id: 31f4fe04-5403-4de5-8f8f-8d39c8523129
+  text: No compared method achieved their scores with less total compute
+- id: b4dd9580-180f-4fff-8726-44383d6d671a
+  text: They always use the least compute
+- id: bbcace10-f8ca-45d6-bf6e-2fd1717e7212
+  text: They are simply illegal to deploy
+- id: ef8bf4b0-c223-48d8-8c02-d2acdddb0ed3
+  text: They score highest on every known metric
+correct_choice_ids:
+- 31f4fe04-5403-4de5-8f8f-8d39c8523129
+explanation: Counting all tokens spent before the final deliverable, no compared method dominated them on the cost-performance trade-off.
+archived: false

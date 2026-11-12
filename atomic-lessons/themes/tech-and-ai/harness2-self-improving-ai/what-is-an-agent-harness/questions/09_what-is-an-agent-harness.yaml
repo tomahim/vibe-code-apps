@@ -1,0 +1,19 @@
+id: f6bbbf6b-b155-43f5-a1d0-4a40af394bba
+position: 9
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: Why are harnesses kept as files rather than hidden configuration?
+choices:
+- id: e778b3b0-5c98-4c87-a512-e8b65af4ef43
+  text: Files simply load faster than databases
+- id: 41745507-458a-4358-b3d9-cc33358fadc7
+  text: Diffs, versioning and rollback become ordinary engineering operations
+- id: 7e684b27-44b3-4317-8956-3910e9dba345
+  text: Models can only ever read plain text files
+- id: e197c459-784f-4199-9866-6db25a6aa56d
+  text: Files are unable to contain mistakes
+correct_choice_ids:
+- 41745507-458a-4358-b3d9-cc33358fadc7
+explanation: Concrete files make each improvement inspectable, executable, comparable and restorable, which the whole propose-probe-compose pipeline depends on.
+archived: false

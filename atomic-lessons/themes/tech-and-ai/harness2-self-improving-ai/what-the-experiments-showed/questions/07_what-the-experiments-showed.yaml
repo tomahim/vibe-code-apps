@@ -1,0 +1,10 @@
+id: 0e06b471-79eb-418a-857f-dfecc91582ed
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: Name the strongest baseline, an offline harness optimizer, which led on one LAB configuration.
+accepted_answers:
+- Meta-Harness
+- metaharness
+explanation: Meta-Harness searches harnesses offline on labeled training tasks; it led LAB for Gemini 3.5 Flash under Codex.
+archived: false

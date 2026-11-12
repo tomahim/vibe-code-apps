@@ -1,0 +1,10 @@
+id: 00b28383-fb2b-480d-9f08-ff9bce900f13
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: 'Fill in the blank: the paper''s editor is told to match each failure to the ____ effective component.'
+accepted_answers:
+- cheapest
+- smallest
+explanation: 'Match each failure to the cheapest effective component: the smallest change that reliably fixes the problem.'
+archived: false

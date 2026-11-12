@@ -1,0 +1,10 @@
+id: fe562bd5-565c-494e-a28c-165153909f53
+position: 15
+type: type_answer_question
+after_card_position: 8
+prompt: How many points did GLM-5 gain on LAB when acting as its own editor at k=2? (A number with one decimal.)
+accepted_answers:
+- '13.7'
+- 13.7 points
+explanation: Self-editing GLM-5 gained 13.7 points on LAB, the largest self-edit gain reported.
+archived: false

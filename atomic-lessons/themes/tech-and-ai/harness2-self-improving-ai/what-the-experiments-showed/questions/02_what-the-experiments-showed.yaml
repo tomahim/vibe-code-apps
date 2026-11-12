@@ -1,0 +1,19 @@
+id: 63521890-dbda-419c-a45d-d8a214781184
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: Which four configurations are crossed in the main experiments?
+choices:
+- id: 85980698-eb44-41e2-bdba-dcf7151a1b5e
+  text: GLM-5 and Gemini 3.5 Flash, under OpenCode and Codex
+- id: 3791b928-b040-44b6-820c-07dbbb05afbf
+  text: GPT-4 and Llama, under LangChain and CrewAI
+- id: 75861b78-b0be-4d29-8395-b5243f413840
+  text: Claude and Mistral, under Kubernetes and Docker
+- id: ae186bfb-34c3-4922-99c1-bfb32ad14a0a
+  text: One model under four different temperatures
+correct_choice_ids:
+- 85980698-eb44-41e2-bdba-dcf7151a1b5e
+explanation: Two frozen executor models times two off-the-shelf harnesses, with Claude Opus 4.8 as the default editor and selector.
+archived: false

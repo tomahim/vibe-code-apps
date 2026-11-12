@@ -1,0 +1,19 @@
+id: 4bb6b75b-fe8a-45a4-b9d2-e08e4aba3dd9
+position: 13
+type: multiple_choice
+selection: single
+after_card_position: 8
+prompt: How is the library different from appending all past conversations to memory?
+choices:
+- id: ab07fc0b-df0a-4005-8b6f-bb031c23a2f4
+  text: It stores structured, evidence-linked records of adopted edits
+- id: e811a8c5-4a8b-44b2-811f-17004cb8d66c
+  text: It is bigger than transcript stores
+- id: 665696c8-fbd3-4d98-82ed-3ed87f8a67cc
+  text: It is written by humans only
+- id: 82d7005d-e5e4-4464-b03f-ee3d9b677cf1
+  text: It deletes everything older than a day
+correct_choice_ids:
+- ab07fc0b-df0a-4005-8b6f-bb031c23a2f4
+explanation: Situation, lesson and supporting evidence are captured in a controlled structure instead of burying signal in raw transcripts.
+archived: false

@@ -1,0 +1,19 @@
+id: fa9a1d46-a7f2-4926-aa5a-faee61b61463
+position: 10
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: What does the paper say the refinement process itself produces?
+choices:
+- id: 1c097598-e732-4c97-8a23-2b1ef740c5f6
+  text: Nothing reusable beyond the final answer
+- id: 6508d8d5-e448-4aaf-818d-c0d35783a92e
+  text: Only billing records for the accounting team
+- id: ff9ad875-b148-427b-ad01-e3f7a9182996
+  text: Reusable experience about diagnoses, tested changes and what execution revealed
+- id: 78127d10-e75e-4b57-96af-ccca91c62c7b
+  text: A brand new base model checkpoint
+correct_choice_ids:
+- ff9ad875-b148-427b-ad01-e3f7a9182996
+explanation: How a weakness was diagnosed, which changes were tried and what their execution revealed is exactly the experience the outer loop learns from.
+archived: false

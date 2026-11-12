@@ -1,0 +1,9 @@
+id: 28d1bb53-22d3-43dc-ae89-7e60b59dd0b8
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: In the producers case study, what was the improved run's score? (A number with one decimal.)
+accepted_answers:
+- '77.8'
+explanation: The composed harness raised the JobBench task score from 43.1 to 77.8.
+archived: false

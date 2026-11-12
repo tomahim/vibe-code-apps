@@ -1,0 +1,19 @@
+id: 3308bc6f-970b-4f47-9abd-1f50412ac2a1
+position: 2
+type: multiple_choice
+selection: single
+after_card_position: 2
+prompt: In parallel recursion at k=2, how many task executions run in total (references, candidate probes and composed harnesses)?
+choices:
+- id: f694212b-31a1-4b43-9a54-f16a5c2a1835
+  text: Two
+- id: 3fa7781b-c6c5-4d4c-bc95-0a425dac469a
+  text: Four
+- id: b1c814ee-1e08-4954-81d2-33da9ec136fa
+  text: Eight
+- id: ccf1e942-30fb-4d0a-92ba-92acda663682
+  text: Sixteen
+correct_choice_ids:
+- b1c814ee-1e08-4954-81d2-33da9ec136fa
+explanation: k reference runs, 2k candidate probes and k composed runs make 4k executions, so k=2 means eight.
+archived: false

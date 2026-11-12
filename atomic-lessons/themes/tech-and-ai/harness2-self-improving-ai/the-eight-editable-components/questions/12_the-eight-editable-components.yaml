@@ -1,0 +1,19 @@
+id: 50b36ca5-b47e-4ef4-9a00-f9698d2bb193
+position: 12
+type: multiple_choice
+selection: single
+after_card_position: 6
+prompt: 'An agent repeats the same failing tool call over and over. The editor prompt''s prescribed fix:'
+choices:
+- id: 4f17cc1c-5131-42f1-af89-4aa3c0377db9
+  text: One bounded fallback with a stop condition, never blind repetition
+- id: ba358347-eab0-4a92-afc7-bc89e69270aa
+  text: A longer system prompt urging persistence
+- id: 7a2d3485-352b-4e6c-8b7c-1b2309f5a79a
+  text: Delete the failing tool from the harness
+- id: ed756cdb-5bbe-45d3-8940-c1f4092f57d2
+  text: Retry until the context window is completely full
+correct_choice_ids:
+- 4f17cc1c-5131-42f1-af89-4aa3c0377db9
+explanation: For tool errors, distinguish the cause (bad input, timeout, missing capability), give one bounded fallback and a stop condition.
+archived: false

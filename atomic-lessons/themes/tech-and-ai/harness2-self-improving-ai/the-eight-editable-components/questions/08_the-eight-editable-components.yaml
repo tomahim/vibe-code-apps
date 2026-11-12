@@ -1,0 +1,11 @@
+id: 996e0554-8363-412f-938f-587feeed3170
+position: 8
+type: type_answer_question
+after_card_position: 4
+prompt: Which component is best for a deterministic check that behaves identically on every run? (One word.)
+accepted_answers:
+- script
+- scripts
+- a script
+explanation: Scripts are deterministic programs, so they suit checks where 'usually right' is not good enough.
+archived: false

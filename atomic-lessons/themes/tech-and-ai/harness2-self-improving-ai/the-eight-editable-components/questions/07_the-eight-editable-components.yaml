@@ -1,0 +1,10 @@
+id: 57d266f0-8e63-49c2-9817-d5a597c76147
+position: 7
+type: type_answer_question
+after_card_position: 4
+prompt: In the paper's case study, name the script that reopened produced files to confirm they were correct. (inspect_inputs.py or verify_outputs.py)
+accepted_answers:
+- verify_outputs.py
+- verify_outputs
+explanation: verify_outputs.py reopened produced files, because a successful write call does not establish that a file is usable.
+archived: false
