@@ -1,6 +1,13 @@
 {
   "title": "Cultive Launch Site Concepts",
-  "description": "16 landing-page concepts for Cultive (dailycultive.com): the original Little Grains NerdSip-inspired page plus 15 new identities, each with its own logo, animated 3D scene and demo signup form.",
+  "description": "16 landing-page concepts for Cultive (dailycultive.com): the original Little Grains NerdSip-inspired page plus 15 new identities, each with its own logo and a real-time WebGL 3D scene (three.js). Demo signup forms only.",
   "date": "2026-11-11",
-  "tags": ["little-grains", "cultive", "landing-page", "design", "concept", "3d"]
+  "tags": [
+    "little-grains",
+    "cultive",
+    "landing-page",
+    "design",
+    "concept",
+    "3d"
+  ]
 }
