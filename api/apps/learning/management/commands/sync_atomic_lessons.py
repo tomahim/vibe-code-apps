@@ -334,7 +334,8 @@ class Command(BaseCommand):
         A stored source hash that still matches skips every decode, resize and
         object write, so an unchanged re-sync does no image work. Without the
         media bucket (local development, content CI) variant generation is
-        skipped and delivery stays on the repository fallback.
+        skipped and those illustrations are not served until a bucket-enabled
+        sync processes them.
         """
         cards = [
             element
@@ -346,7 +347,8 @@ class Command(BaseCommand):
         if not illustrations.bucket_available():
             self.stdout.write(
                 f"{len(cards)} card image(s) present but the media bucket is not configured; "
-                "skipping WebP variant processing (repository fallback keeps serving them)."
+                "skipping WebP variant processing (they will not be served until a "
+                "bucket-enabled sync processes them)."
             )
             return {}
         to_process = []
@@ -356,7 +358,7 @@ class Command(BaseCommand):
         for element in cards:
             candidate = self.image_file(element["metadata"], element["directory"], element["location"])
             if not illustrations.raster_image(candidate):
-                non_raster += 1  # SVG and friends are served as-is through the fallback
+                non_raster += 1  # SVG and friends cannot become WebP variants
                 continue
             sha = illustrations.source_hash(candidate)
             row = stored_cards.get(element["id"])
@@ -367,7 +369,7 @@ class Command(BaseCommand):
         if unchanged:
             self.stdout.write(f"Illustrations: {unchanged} unchanged (source hash match), no reprocessing.")
         if non_raster:
-            self.stdout.write(f"Illustrations: {non_raster} non-raster image(s) served as-is via the repository fallback.")
+            self.stdout.write(f"Illustrations: {non_raster} non-raster image(s) skipped; only raster images can be served.")
         prepared = {}
         # Units are source illustrations; each uploads its 640/1280 WebP
         # variants. The counter advances only after a successful upload, and a

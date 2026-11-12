@@ -356,7 +356,7 @@ class CardIllustrationSyncTests(TestCase):
         self.assertEqual(card.illustration_credit, "Jane Doe")
         self.assertEqual(card.illustration_license, "CC BY 4.0")
         self.assertEqual(card.illustration_source_url, "https://commons.example.org/reef")
-        # No bucket: no variants, no hash, delivery stays on the repository fallback.
+        # No bucket: no variants, no hash; the illustration is not served until processed.
         self.assertEqual(card.illustration_variants, {})
         self.assertEqual(card.illustration_source_hash, "")
 

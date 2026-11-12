@@ -107,9 +107,6 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES
 DATA_UPLOAD_MAX_MEMORY_SIZE = MEDIA_UPLOAD_MAX_BYTES + 1024 * 1024
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Public canonical content repository. Images are proxied by the API from the
-# latest successful SyncLog commit; clients never need to access GitHub.
-LEARNING_CONTENT_REPOSITORY = os.environ.get("LEARNING_CONTENT_REPOSITORY", "tomahim/vibe-code-apps")
 # The weekly Challenge is a private duel: comma-separated usernames or emails
 # of the two allowed players. Empty disables the challenge entirely.
 
