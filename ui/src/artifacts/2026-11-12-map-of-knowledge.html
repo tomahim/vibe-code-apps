@@ -47,7 +47,7 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 #brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap}
 #brand svg{flex:none}
 #crumbs{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dim);overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
-#crumbs button{max-width:34vw;overflow:hidden;text-overflow:ellipsis;background:#fffdf8cc;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+#crumbs button{flex:none;max-width:52vw;overflow:hidden;text-overflow:ellipsis;background:#fffdf8cc;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
 #crumbs button:hover{background:#fffdf8}
 #crumbs button[aria-current]{background:var(--accent);color:#27392e;border-color:transparent;font-weight:700}
 #crumbs .sep{flex:none;color:#27392e44}
@@ -96,6 +96,11 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 .legend span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
 .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
 @media (max-width:520px){#brand .brandtxt{display:none}#sheet h2{font-size:15.5px}}
+@media (max-width:600px){
+  #proto{font-size:9.5px;padding:3px 7px;letter-spacing:.04em}
+  #crumbs button{font-size:11.5px;padding:4px 9px}
+  #crumbs{gap:4px}
+}
 </style></head><body>
 <div id="stage"><svg id="map" role="application" aria-label="Map of Knowledge: an explorable imaginary map of learning themes" preserveAspectRatio="xMidYMid meet"></svg></div>
 <div id="topbar">
@@ -488,7 +493,8 @@ function buildIslands(coast){
       txt(rl,geo.lab[0],geo.lab[1]+rr*.07,rg.name,"",rr*.21,"#27392e");
     });
     {
-      const wl=el("g",{class:"lod wlbl"},labels);
+      const wl=el("g",{class:"lod wlbl",style:"pointer-events:auto;cursor:pointer",role:"button","aria-label":"Open "+t.name+" theme"},labels);
+      wl.addEventListener("click",ev=>{ev.stopPropagation();go({level:"theme",t:t.slug})});
       const L=lspec[t.slug];
       el("rect",{x:L.cx-L.pw/2,y:L.cy-L.ph/2,width:L.pw,height:L.ph,rx:L.r*.1,fill:"#fffdf8","opacity":.92},wl);
       txt(wl,L.cx,L.cy+(L.big?-L.r*.02:L.r*.085),t.name,"",L.r*.17*L.lw,"#27392e");
@@ -548,6 +554,7 @@ function renderChrome(){
     if(!pt.st||i===parts.length-1&&parts.length>1)b.setAttribute("aria-current","true");
     if(pt.st)b.onclick=()=>go(pt.st);crumbs.appendChild(b)});
   hint.classList.toggle("hidden",state.level!=="world");
+  requestAnimationFrame(()=>{crumbs.scrollLeft=crumbs.scrollWidth});
   renderSheet();
 }
 function bar(done,tot){return `<div class="bar"><i style="width:${tot?Math.round(done/tot*100):0}%"></i></div><div class="barlabel">${done} of ${tot} lessons (demo progress)</div>`}
@@ -556,14 +563,17 @@ function renderSheet(){
   const T=themeIndex[state.t].t;let h="";
   if(state.level==="theme"){
     const paths=T.regions.flatMap(r=>r.paths),tot=paths.reduce((s,p)=>s+p.lessons,0),dn=paths.reduce((s,p)=>s+p.done,0);
+    const items=T.regions.flatMap(rg=>rg.paths.map((p,j)=>({rg,p,j})));
     h=`<h2>${T.name}<span class="demotag">theme · ecosystem</span></h2><p class="sub">${T.subject}</p>
     <span class="stat">${paths.length} paths</span><span class="stat">${tot} lessons</span><span class="stat">${T.terrain} terrain</span>
-    ${bar(dn,tot)}<p class="blurb">${T.blurb} Tap an area of the map to open its path.</p>`;
+    ${bar(dn,tot)}
+    <ul class="plist">${items.map((it,i)=>`<li data-r="${it.rg.slug}" data-j="${it.j}"><span class="num">${i+1}</span><span class="nm">${it.p.name}</span><span class="pg">${it.p.done}/${it.p.lessons} · ${it.p.done===it.p.lessons?"done":it.p.done?"going":"new"}</span></li>`).join("")}</ul>
+    <p class="blurb">${T.blurb} Pick a path here, or tap an area of the map.</p>`;
   }else if(state.level==="region"){
-    const rg=T.regions.find(x=>x.slug===state.r);const p=rg.paths[0];
-    h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name}</p>${bar(p.done,p.lessons)}
-    <ul class="plist"><li data-j="0"><span class="num">1</span><span class="nm">Walk the trail</span><span class="pg">${p.done}/${p.lessons} · ${p.done===p.lessons?"done":p.done?"going":"new"}</span></li></ul>
-    <p class="blurb">Tap the trail to walk its lessons one bead at a time.</p>`;
+    const rg=T.regions.find(x=>x.slug===state.r);
+    h=`<h2>${rg.name}<span class="demotag">${rg.paths.length} learning path${rg.paths.length>1?"s":""}</span></h2><p class="sub">${T.name}</p>
+    <ul class="plist">${rg.paths.map((p,j)=>`<li data-r="${rg.slug}" data-j="${j}"><span class="num">${j+1}</span><span class="nm">${p.name}</span><span class="pg">${p.done}/${p.lessons} · ${p.done===p.lessons?"done":p.done?"going":"new"}</span></li>`).join("")}</ul>
+    <p class="blurb">Pick a path, or tap its trail on the map.</p>`;
   }else{
     const rg=T.regions.find(x=>x.slug===state.r),p=rg.paths[state.p];
     h=`<h2>${p.name}<span class="demotag">learning path</span></h2><p class="sub">${T.name} › ${rg.name}</p>${bar(p.done,p.lessons)}
@@ -572,7 +582,7 @@ function renderSheet(){
     <button id="continueBtn">${p.done===0?"Start this path":p.done===p.lessons?"Review this path":"Continue · part "+(ROMAN[p.done]||p.done+1)}</button>`;
   }
   sheet.innerHTML=h;sheet.classList.remove("hidden");
-  sheet.querySelectorAll(".plist li").forEach(li=>li.onclick=()=>go({level:"path",t:state.t,r:state.r,p:+li.dataset.j}));
+  sheet.querySelectorAll(".plist li").forEach(li=>li.onclick=()=>go({level:"path",t:state.t,r:li.dataset.r||state.r,p:+li.dataset.j}));
   sheet.querySelectorAll(".llist li").forEach(li=>li.onclick=()=>{
     const bead=document.getElementById("bead-"+state.t+"-"+state.r+"-"+state.p+"-"+li.dataset.k);
     if(!bead)return;const oldW=bead.getAttribute("stroke-width"),oldS=bead.getAttribute("stroke");
