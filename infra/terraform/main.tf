@@ -66,6 +66,29 @@ resource "railway_service" "bot" {
 # through the Tailscale Subnet Router in the same Railway environment (see
 # docs/genious-apps-tailscale.md).
 
+# RESEARCH ONLY (issue #529): adopt the template-created router service so its
+# source can later be switched in code. Draft PR to read `terraform plan`
+# (it must show an in-place update or no change, never a replacement or
+# destroy). Do not merge: merging applies it. Attribute values mirror what the
+# Railway dashboard shows today (source dotlouis/tailscale-rw on main, volume
+# tailscale-rw-volume at /var/lib/tailscale); the plan shows any other drift.
+resource "railway_service" "tailscale_router" {
+  name               = "tailscale-rw"
+  project_id         = railway_project.genious_apps.id
+  source_repo        = "dotlouis/tailscale-rw"
+  source_repo_branch = "main"
+
+  volume = {
+    name       = "tailscale-rw-volume"
+    mount_path = "/var/lib/tailscale"
+  }
+}
+
+import {
+  to = railway_service.tailscale_router
+  id = local.tailscale_router_id
+}
+
 # --- Tailscale router variables ---
 # The template-created router and its volume remain managed in Railway.
 # Adopt only this performance setting; leave its auth key outside Terraform.
