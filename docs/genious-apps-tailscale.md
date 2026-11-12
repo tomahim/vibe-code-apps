@@ -89,6 +89,51 @@ account; they never see the admin's credentials or `TAILSCALE_AUTHKEY`.
    `api.railway.internal:8000` over Railway's private network, so the whole app
    works through that one address.
 
+## Optional private HTTPS on the router (issue #529)
+
+`infra/tailscale-router/` is the router image vendored from
+https://github.com/dotlouis/tailscale-rw, pinned to Tailscale 1.104.1 (the
+version running today), plus `https-serve.sh`. With `TS_HTTPS_SERVICES` set
+(for example `443=ui.railway.internal:8080;8443=cultive-dev.railway.internal:8080`)
+the router serves `https://tailscale-rw.<tailnet>.ts.net` and `:8443` through
+`tailscale serve` with daemon-managed, auto-renewed certificates. Each mapping
+goes through a local `socat` forwarder because serve only proxies to localhost.
+Without the variable the router behaves exactly as before.
+
+### What stays unchanged
+- The plain-HTTP URLs (`http://ui.<project>-railway.internal:8080`) keep working:
+  subnet routes, split DNS and CoreDNS are not touched, and there is no
+  HTTP-to-HTTPS redirect.
+- No new Railway service. Extra compute on the existing router is not measured.
+
+### Blast radius (the router is shared)
+A bad router deploy affects every private URL, HTTP included. Mitigations in
+the code: the HTTPS block runs after the node is on the tailnet, every
+failure is logged and ignored, every `tailscale` call has a timeout (serve
+blocks when certificates are not enabled), and unset variable means no-op.
+Remaining risks, not verified without a live router: the userspace router
+build 1.104.1 behaviour of `serve`, a redeploy blip (the router restarts on any
+change of image or variable, and its ephemeral state means a fresh tailnet IP
+that split DNS would need), and Django CSRF/scheme handling behind serve (the
+ui nginx forwards `X-Forwarded-Proto` or falls back to `http`; check admin login
+over HTTPS and add trusted origins if it fails).
+
+### Cutover (manual, in order; nothing here happens on merge)
+1. Tailscale admin console, DNS, Enable HTTPS certificates. This publishes the
+   tailnet and machine names in public certificate transparency logs.
+2. Railway, router service, Settings, Source: this repository, root directory
+   `/infra/tailscale-router`. Test first with `TS_HTTPS_SERVICES` unset and
+   confirm the plain-HTTP URLs and an admin upload still work.
+3. Set `tailscale_https_services` in Terraform (or the variable in Railway).
+4. Verify: HTTPS on both ports, the HTTP URLs, music-library Play (#443),
+   certificate renewal after a redeploy.
+
+Rollback: unset `TS_HTTPS_SERVICES` (HTTPS gone, HTTP unaffected), or point the
+router source back to the template. Both redeploy the router.
+
+Local check of the forwarding logic: `bash infra/tailscale-router/test-https-serve.sh`.
+It uses a stub `tailscale`; it does not prove certificates or serve work.
+
 ## Router throughput workaround
 
 The existing `tailscale-rw` service has `TS_DEBUG_DISABLE_UDP_GSO=true`.

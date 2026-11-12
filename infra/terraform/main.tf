@@ -90,6 +90,25 @@ resource "railway_variable" "tailscale_disable_udp_gro" {
   value          = "true"
 }
 
+# Private HTTPS on the router (issue #529, option A). Off by default: with
+# the default (empty) value no resource is created, so merging this file changes
+# nothing in Railway. The router only reads TS_HTTPS_SERVICES once its source is
+# switched to infra/tailscale-router (see docs/genious-apps-tailscale.md).
+variable "tailscale_https_services" {
+  description = "TS_HTTPS_SERVICES for the router: '<https-port>=<host>:<port>;...'. Empty keeps HTTPS off."
+  type        = string
+  default     = ""
+}
+
+resource "railway_variable" "tailscale_https_services" {
+  count = var.tailscale_https_services == "" ? 0 : 1
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = local.tailscale_router_id
+  name           = "TS_HTTPS_SERVICES"
+  value          = var.tailscale_https_services
+}
+
 # --- ui variables ---
 
 resource "railway_variable" "ui_port" {
