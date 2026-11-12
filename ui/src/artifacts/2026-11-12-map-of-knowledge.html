@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>Map of Knowledge · a navigation study for Cultive</title><style>
-:root{--ink:#eaf2f0;--dim:#9db4b8;--panel:#0e2230ee;--line:#ffffff22;--accent:#ffd166}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><title>Map of Knowledge · a navigation study for Cultive</title><style>
+:root{--ink:#27392e;--dim:#5b6157;--panel:#fffdf8f2;--line:#27392e22;--accent:#e3a83c}
 *{box-sizing:border-box}html,body{height:100%}
-body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#071824;color:var(--ink);overflow:hidden}
+body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#b7d8e6;color:var(--ink);overflow:hidden}
 #stage{position:fixed;inset:0}
 #map{display:block;width:100%;height:100%;touch-action:manipulation}
 text{font-family:inherit;user-select:none;pointer-events:none}
@@ -40,55 +40,55 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 @keyframes boat{from{transform:translate(0,0) rotate(-2deg)}to{transform:translate(60px,-14px) rotate(2deg)}}
 @keyframes glow{0%,100%{opacity:.35}50%{opacity:.85}}
-#topbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(#071824f0,#07182400);pointer-events:none;z-index:5}
+#topbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(#d3e8f0f2,#d3e8f000);pointer-events:none;z-index:5}
 #topbar>*{pointer-events:auto}
 #brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:.2px;white-space:nowrap}
 #brand svg{flex:none}
 #crumbs{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dim);overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
-#crumbs button{max-width:34vw;overflow:hidden;text-overflow:ellipsis;background:#ffffff12;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
-#crumbs button:hover{background:#ffffff22}
-#crumbs button[aria-current]{background:var(--accent);color:#20303a;border-color:transparent;font-weight:700}
-#crumbs .sep{flex:none;color:#ffffff44}
-#infoBtn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#ffffff12;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-#infoBtn:hover{background:#ffffff22}
+#crumbs button{max-width:34vw;overflow:hidden;text-overflow:ellipsis;background:#fffdf8cc;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+#crumbs button:hover{background:#fffdf8}
+#crumbs button[aria-current]{background:var(--accent);color:#27392e;border-color:transparent;font-weight:700}
+#crumbs .sep{flex:none;color:#27392e44}
+#infoBtn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#fffdf8cc;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+#infoBtn:hover{background:#fffdf8}
 #sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(560px,calc(100vw - 20px));background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:14px 16px;z-index:6;transition:opacity .3s ease,translate .3s ease}
 #sheet.hidden{opacity:0;translate:0 18px;pointer-events:none}
 #sheet h2{margin:0 0 2px;font-size:17px}
 #sheet .sub{color:var(--dim);font-size:12.5px;margin:0 0 10px}
 #sheet .blurb{color:var(--dim);font-size:13px;margin:8px 0 0;line-height:1.45}
-#sheet .stat{display:inline-block;background:#ffffff10;border-radius:8px;padding:4px 9px;font-size:12px;margin:0 6px 6px 0;color:var(--ink)}
-.bar{height:7px;border-radius:99px;background:#ffffff1a;overflow:hidden;margin:8px 0 2px}
+#sheet .stat{display:inline-block;background:#27392e0d;border-radius:8px;padding:4px 9px;font-size:12px;margin:0 6px 6px 0;color:var(--ink)}
+.bar{height:7px;border-radius:99px;background:#27392e14;overflow:hidden;margin:8px 0 2px}
 .bar>i{display:block;height:100%;border-radius:99px;background:var(--accent)}
 .barlabel{font-size:11.5px;color:var(--dim)}
 .plist{list-style:none;margin:10px 0 0;padding:0;max-height:32vh;overflow:auto}
 .plist li{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:10px;cursor:pointer}
-.plist li:hover{background:#ffffff10}
+.plist li:hover{background:#27392e0d}
 .plist .dot{flex:none;width:10px;height:10px;border-radius:50%}
-.plist .num{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#07161f;color:#fff;border:1px solid #ffffff33}
+.plist .num{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#f6efe1;color:#27392e;border:1px solid #27392e22}
 .plist .nm{flex:1;font-size:13.5px}
 .plist .pg{flex:none;font-size:11.5px;color:var(--dim)}
 .llist{list-style:none;margin:10px 0 0;padding:0;max-height:26vh;overflow:auto}
 .llist li{display:flex;align-items:center;gap:10px;padding:8px 6px;font-size:13.5px;cursor:pointer;border-radius:8px;min-height:36px}
-.llist li:hover{background:#ffffff12}
-.llist li:active{background:#ffffff1e}
+.llist li:hover{background:#27392e0d}
+.llist li:active{background:#27392e17}
 .llist .ico{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700}
-.llist .done .ico{background:#57cc99;color:#0b2a20}
-.llist .now .ico{background:var(--accent);color:#20303a}
-.llist .lock .ico{background:#ffffff14;color:#ffffff55}
-.llist .lock{color:#ffffff66}
-#continueBtn{margin-top:12px;width:100%;border:0;border-radius:12px;padding:12px;font:inherit;font-weight:700;font-size:14.5px;background:var(--accent);color:#20303a;cursor:pointer}
+.llist .done .ico{background:#5ea84a;color:#fffdf8}
+.llist .now .ico{background:var(--accent);color:#27392e}
+.llist .lock .ico{background:#27392e10;color:#8a806b}
+.llist .lock{color:#a89f8a}
+#continueBtn{margin-top:12px;width:100%;border:0;border-radius:12px;padding:12px;font:inherit;font-weight:700;font-size:14.5px;background:var(--accent);color:#27392e;cursor:pointer}
 #continueBtn:hover{filter:brightness(1.07)}
 .demotag{display:inline-block;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:2px 6px;margin-left:8px;vertical-align:middle}
-#hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:#0e2230cc;border:1px solid var(--line);color:var(--dim);font-size:12.5px;padding:8px 14px;border-radius:999px;z-index:4;transition:opacity .4s;backdrop-filter:blur(8px);white-space:nowrap}
+#hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:#fffdf8e6;border:1px solid var(--line);color:var(--dim);font-size:12.5px;padding:8px 14px;border-radius:999px;z-index:4;transition:opacity .4s;backdrop-filter:blur(8px);white-space:nowrap}
 #hint.hidden{opacity:0;pointer-events:none}
-#about{position:fixed;inset:0;background:#051018d9;display:grid;place-items:center;z-index:10;padding:20px}
+#about{position:fixed;inset:0;background:#f6efe1d9;display:grid;place-items:center;z-index:10;padding:20px}
 #about.hidden{display:none}
 #about .card{max-width:480px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
 #about h2{margin:0 0 10px;font-size:18px}
 #about p,#about li{font-size:13.5px;color:var(--dim);line-height:1.55}
 #about ul{padding-left:18px;margin:8px 0}
 #about b{color:var(--ink);font-weight:600}
-#about button{margin-top:8px;border:1px solid var(--line);background:#ffffff12;color:var(--ink);border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer}
+#about button{margin-top:8px;border:1px solid var(--line);background:#fffdf8;color:var(--ink);border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer}
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
 .legend span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
 .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
@@ -96,22 +96,22 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 </style></head><body>
 <div id="stage"><svg id="map" role="application" aria-label="Map of Knowledge: an explorable imaginary map of learning themes" preserveAspectRatio="xMidYMid meet"></svg></div>
 <div id="topbar">
-  <div id="brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10Z" fill="#57cc99"/><path d="M12 8v10" stroke="#0b2a20" stroke-width="1.6" stroke-linecap="round"/></svg><span class="brandtxt">Cultive · Map of Knowledge</span></div>
+  <div id="brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10Z" fill="#5ea84a"/><path d="M12 8v10" stroke="#27392e" stroke-width="1.6" stroke-linecap="round"/></svg><span class="brandtxt">Cultive · Map of Knowledge</span></div>
   <nav id="crumbs" aria-label="Breadcrumb"></nav>
   <button id="infoBtn" aria-label="About this design study">?</button>
 </div>
 <div id="sheet" class="hidden"></div>
-<div id="hint">Tap an island to enter a theme</div>
+<div id="hint">Tap a landscape to enter a theme</div>
 <div id="about" class="hidden"><div class="card">
 <h2>Map of Knowledge</h2>
 <p>A navigation design study for Cultive (Little Grains). The whole map is the knowledge; every landform is a way in.</p>
 <ul>
-<li><b>Islands are themes.</b> Each ecosystem - forest, desert, volcano, atolls - is one theme, so a dozen themes share one map without crowding.</li>
+<li><b>Landscapes are themes.</b> Forest, desert, peaks, atolls: each ecosystem is one theme, joined on a single continent in the Little Grains palette.</li>
 <li><b>Shaped regions are families of related paths.</b> No repeated hexagon grid: English paths live inside one English-shaped region, dive-physics paths in another shape. Every ecosystem gets its own geography.</li>
 <li><b>Trails are learning paths</b>, and the beads on them are lessons: done, current, locked.</li>
 </ul>
 <p>A theme here holds 8-12 paths across its regions - room to grow past today's 6-7 tiles. Demo data only; nothing is stored.</p>
-<div class="legend"><span><i style="background:#57cc99"></i>completed</span><span><i style="background:#ffd166"></i>current</span><span><i style="background:#ffffff2e"></i>locked</span></div>
+<div class="legend"><span><i style="background:#5ea84a"></i>completed</span><span><i style="background:#e3a83c"></i>current</span><span><i style="background:#cfc6b4"></i>locked</span></div>
 <button id="aboutClose">Close</button>
 </div></div>
 <script>
@@ -119,51 +119,51 @@ svg.z-region .bdecor,svg.z-path .bdecor{opacity:0}
 /* ---------- demo data: 12 themes, shaped regions of related paths ---------- */
 const P=(name,lessons,done)=>({name,lessons,done});
 const THEMES=[
-{slug:"verdance",name:"Verdance",subject:"Nature & Environment",biome:"forest",land:"#2f7d4f",land2:"#3f9c63",accent:"#8fe388",blurb:"An old-growth forest theme. Paths gather under canopy, roots and clearings.",
+{slug:"verdance",name:"Verdance",subject:"Nature & Environment",biome:"forest",land:"#8fbc6e",land2:"#aad194",accent:"#3c6a47",blurb:"An old-growth forest theme. Paths gather under canopy, roots and clearings.",
  regions:[{slug:"canopy",name:"Canopy Ring",shape:"ring",paths:[P("Forests of the World",9,9),P("Rainforest Layers",7,4),P("Old-Growth Ecology",6,0)]},
  {slug:"rootways",name:"The Rootways",shape:"elongated",paths:[P("Soil & Fungi",8,3),P("Compost & Cycles",5,0),P("Mushroom Foraging",5,0)]},
  {slug:"petal",name:"Petal Flats",shape:"blob",paths:[P("Plant Identification",10,6),P("Pollinators",6,2),P("Garden Seasons",7,0),P("Wetland Birds",6,1)]}]},
-{slug:"sunkar",name:"Sunkar Desert",subject:"History & Civilizations",biome:"desert",land:"#c99a4b",land2:"#e0b76a",accent:"#ffe1a1",blurb:"Dunes bury empires here; each shaped dig site holds its related expeditions.",
+{slug:"sunkar",name:"Sunkar Desert",subject:"History & Civilizations",biome:"desert",land:"#e6cb93",land2:"#f2dfb6",accent:"#a56545",blurb:"Dunes bury empires here; each shaped dig site holds its related expeditions.",
  regions:[{slug:"dunesea",name:"Dune Sea",shape:"crescent",paths:[P("Ancient Egypt",9,5),P("Mesopotamia",8,0),P("The Silk Road",10,2)]},
  {slug:"compass",name:"Buried Compass",shape:"star",paths:[P("Greek City-States",7,7),P("Rome: Republic to Empire",9,4),P("Byzantium",7,0)]},
  {slug:"oasis",name:"Oasis Shards",shape:"shards",paths:[P("Lost Cities",6,1),P("Archaeology Methods",5,0),P("Egyptian Hieroglyphs",6,2)]}]},
-{slug:"frostreach",name:"Frostreach",subject:"Sport & Endurance",biome:"peaks",land:"#7d9bb3",land2:"#a8c3d8",accent:"#e8f4ff",blurb:"High country for hard training: faces, glaciers and icefalls of discipline.",
+{slug:"frostreach",name:"Frostreach",subject:"Sport & Endurance",biome:"peaks",land:"#b9cfdf",land2:"#dbe9f2",accent:"#4d6a7a",blurb:"High country for hard training: faces, glaciers and icefalls of discipline.",
  regions:[{slug:"northface",name:"North Face",shape:"elongated",paths:[P("Climbing Fundamentals",8,4),P("Alpinism History",6,0),P("Ski Touring",6,0)]},
  {slug:"glacier",name:"Glacier Bowl",shape:"blob",paths:[P("Cycling Legends",9,9),P("Marathon Science",7,3),P("Trail Running",7,2)]},
  {slug:"icefall",name:"Icefall Steps",shape:"shards",paths:[P("Winter Survival",6,2),P("Recovery & Sleep",5,0),P("Nutrition Basics",8,5)]}]},
-{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#2a9d8f",land2:"#64d4c0",accent:"#b9fff0",blurb:"An ocean world: atolls above, fish and kelp below. Every dive course gets its own shaped lagoon.",
+{slug:"azure",name:"The Azure Shelf",subject:"Diving & Oceans",biome:"atolls",land:"#7cc9ba",land2:"#a9e0d4",accent:"#2f7d6d",blurb:"An ocean world: atolls above, fish and kelp below. Every dive course gets its own shaped lagoon.",
  regions:[{slug:"coral",name:"Coral Ring",shape:"ring",paths:[P("Dive Sites of the World",9,6),P("Reef Ecology",7,2),P("Wreck Diving",7,0)]},
  {slug:"bluehole",name:"The Blue Hole",shape:"blob",paths:[P("Diving N4: Physics",8,8),P("Diving N4: Physiology",8,6),P("Diving N4: Equipment",7,0),P("Freediving Basics",6,0)]},
  {slug:"drift",name:"Drift Current",shape:"elongated",paths:[P("Ocean Currents",6,1),P("Megafauna",7,0),P("Tides & Weather",5,1)]}]},
-{slug:"cinderfel",name:"Cinderfel",subject:"Energy & Industry",biome:"volcano",land:"#5b4a4a",land2:"#7d5c50",accent:"#ffb36b",blurb:"A working volcano: calderas of infrastructure, lava channels of generation.",
+{slug:"cinderfel",name:"Cinderfel",subject:"Energy & Industry",biome:"volcano",land:"#cfa490",land2:"#e2c3b0",accent:"#a74131",blurb:"A working volcano: calderas of infrastructure, lava channels of generation.",
  regions:[{slug:"caldera",name:"The Caldera",shape:"ring",paths:[P("Data Center Anatomy",9,7),P("Power Grids",8,2)]},
  {slug:"lava",name:"Lava Channels",shape:"elongated",paths:[P("Solar & Wind",7,3),P("Nuclear Basics",8,0),P("Geothermal",5,0)]},
  {slug:"ash",name:"Ash Fields",shape:"blob",paths:[P("Batteries & Storage",6,1),P("Hydrogen",5,0),P("Home Energy",5,0),P("Carbon Capture",6,0)]}]},
-{slug:"nimbus",name:"Nimbus Drift",subject:"Space & Astronomy",biome:"sky",land:"#5b6ab3",land2:"#8797dd",accent:"#d5dcff",blurb:"Floating islands above the weather, tied to one another by comet trails.",
+{slug:"nimbus",name:"Nimbus Drift",subject:"Space & Astronomy",biome:"sky",land:"#b7c3e6",land2:"#d3dcf3",accent:"#5b6ab3",blurb:"Floating islands above the weather, tied to one another by comet trails.",
  regions:[{slug:"firmament",name:"The Firmament",shape:"star",paths:[P("Solar System Tour",10,8),P("Exoplanets",7,2)]},
  {slug:"comet",name:"Comet Trail",shape:"elongated",paths:[P("Apollo Missions",9,9),P("Rocket Science",8,4),P("Space Stations",6,1)]},
  {slug:"nebula",name:"Dark Nebula",shape:"blob",paths:[P("Cosmology 101",8,0),P("Telescopes",6,1),P("Stargazing",5,3)]}]},
-{slug:"amber",name:"The Amber Delta",subject:"Life & Society",biome:"delta",land:"#b3813f",land2:"#d3a45c",accent:"#ffe2ae",blurb:"A river delta of human questions: cities, minds and markets along the channels.",
+{slug:"amber",name:"The Amber Delta",subject:"Life & Society",biome:"delta",land:"#dbbd85",land2:"#eed6a8",accent:"#8a6a3b",blurb:"A river delta of human questions: cities, minds and markets along the channels.",
  regions:[{slug:"migration",name:"Migration Route",shape:"elongated",paths:[P("Psychology Basics",9,4),P("Behavioral Economics",8,2),P("Negotiation",6,2)]},
  {slug:"waterhole",name:"The Watering Hole",shape:"ring",paths:[P("Cities & Urbanism",7,1),P("Food Systems",8,0),P("Personal Finance",8,4)]},
  {slug:"termite",name:"The Agora",shape:"shards",paths:[P("Philosophy Starters",6,0),P("Sociology of Networks",7,3),P("Media Literacy",6,0)]}]},
-{slug:"mistmire",name:"Rainwild",subject:"Biology & Medicine",biome:"jungle",land:"#2e7d5b",land2:"#45a877",accent:"#d2f7c5",blurb:"Dense rainforest biodiversity: anatomy, viruses and sleep under the canopy.",
+{slug:"mistmire",name:"Rainwild",subject:"Biology & Medicine",biome:"jungle",land:"#6fae7d",land2:"#9ccba6",accent:"#2e6b4f",blurb:"Dense rainforest biodiversity: anatomy, viruses and sleep under the canopy.",
  regions:[{slug:"reeds",name:"Liana Maze",shape:"elongated",paths:[P("Human Anatomy",10,5),P("Immune System",8,3),P("Genetics 101",8,0)]},
  {slug:"pools",name:"The Emerald Pools",shape:"ring",paths:[P("Microbiome",6,0),P("Virology Essentials",7,2)]},
  {slug:"willow",name:"Old Kapok",shape:"blob",paths:[P("Neuroscience 101",9,1),P("Sleep Science",6,0),P("First Aid",6,2)]}]},
-{slug:"crystal",name:"Crystal Hollow",subject:"Geology & Earth",biome:"crystal",land:"#6a4d8f",land2:"#8f6cb8",accent:"#e3ccff",blurb:"A geode cracked open: minerals, tectonics and deep time in the facets.",
+{slug:"crystal",name:"Crystal Hollow",subject:"Geology & Earth",biome:"crystal",land:"#bda8d6",land2:"#d8c9ea",accent:"#7a4a8c",blurb:"A geode cracked open: minerals, tectonics and deep time in the facets.",
  regions:[{slug:"geode",name:"Geode Heart",shape:"star",paths:[P("Minerals & Crystals",8,4),P("Plate Tectonics",9,6)]},
  {slug:"tunnels",name:"Echo Tunnels",shape:"elongated",paths:[P("Volcanoes",7,2),P("Earthquakes",6,0),P("Caves & Karst",6,0)]},
  {slug:"fossil",name:"Fossil Beds",shape:"crescent",paths:[P("Deep Time",8,1),P("Dinosaurs",9,5),P("The Rock Cycle",6,1)]}]},
-{slug:"polyglotta",name:"Polyglotta",subject:"Language & Words",biome:"terraces",land:"#a35d4b",land2:"#c57f68",accent:"#ffd9c4",blurb:"Terraced plains of words. The English Marches are one shaped region holding every English path.",
+{slug:"polyglotta",name:"Polyglotta",subject:"Language & Words",biome:"terraces",land:"#daa48d",land2:"#edc5b2",accent:"#b57658",blurb:"Terraced plains of words. The English Marches are one shaped region holding every English path.",
  regions:[{slug:"english",name:"The English Marches",shape:"blob",paths:[P("English Grammar",10,6),P("English Vocabulary",12,8),P("English Pronunciation",8,2),P("English Idioms",7,0),P("English Listening",8,5)]},
  {slug:"romancia",name:"Romancia",shape:"crescent",paths:[P("French A1",9,9),P("Spanish Starters",9,3),P("Italian Gestures",5,0),P("German Starters",9,0)]},
  {slug:"scripts",name:"Character Cliffs",shape:"shards",paths:[P("Japanese Kana",8,1),P("Mandarin Tones",7,0),P("Arabic Script",6,0)]}]},
-{slug:"cogsworth",name:"Cogsworth Reach",subject:"AI & Technology",biome:"mesa",land:"#4a5d6b",land2:"#688092",accent:"#bfe3f0",blurb:"High mesas of computation, cut by circuit-like valleys.",
+{slug:"cogsworth",name:"Cogsworth Reach",subject:"AI & Technology",biome:"mesa",land:"#a9bfc9",land2:"#c8dae1",accent:"#47606e",blurb:"High mesas of computation, cut by circuit-like valleys.",
  regions:[{slug:"foundry",name:"The Foundry",shape:"ring",paths:[P("How LLMs Work",9,7),P("Prompt Craft",6,4),P("AI Safety Basics",7,0),P("Hardware Anatomy",7,0)]},
  {slug:"circuit",name:"Circuit Vale",shape:"elongated",paths:[P("Internet Protocols",8,3),P("The WannaCry Attack",5,5),P("Cryptography 101",8,1),P("Cyber Hygiene",6,4)]},
  {slug:"datafalls",name:"Data Falls",shape:"crescent",paths:[P("Databases",7,2),P("Unix Philosophy",6,0)]}]},
-{slug:"rosewind",name:"Rosewind Vale",subject:"Arts & Culture",biome:"meadow",land:"#a3556b",land2:"#c97f92",accent:"#ffd7e0",blurb:"A flowering vale: galleries, an amphitheater and loom fields of craft.",
+{slug:"rosewind",name:"Rosewind Vale",subject:"Arts & Culture",biome:"meadow",land:"#e3aebc",land2:"#f2cdd6",accent:"#a3556b",blurb:"A flowering vale: galleries, an amphitheater and loom fields of craft.",
  regions:[{slug:"gallery",name:"Gallery Terraces",shape:"shards",paths:[P("Color Theory",7,4),P("Art History Eras",10,2),P("Photography Basics",7,3)]},
  {slug:"amphi",name:"The Amphitheater",shape:"ring",paths:[P("Music Theory 101",8,6),P("World Cinema",9,0),P("Jazz History",6,0)]},
  {slug:"loom",name:"Loom Fields",shape:"elongated",paths:[P("Design Principles",7,1),P("Typography",6,0)]}]}
@@ -198,12 +198,12 @@ function geomFor(type,cx,cy,r,rand){return type==="blob"?blobGeom(cx,cy,r,rand):
 function trailPts(ax,ay,n,rand,span){const pts=[];const a0=rand()*Math.PI*2,dx=Math.cos(a0),dy=Math.sin(a0),px=-dy,py=dx,w=rand()*3;
 for(let i=0;i<n;i++){const t=n===1?0:i/(n-1),along=(t-.5)*2*span,wob=Math.sin(t*Math.PI*2.1+w)*span*.3;pts.push([ax+dx*along+px*wob,ay+dy*along+py*wob])}return pts}
 /* ---------- island layouts (fractions of world) ---------- */
-const POS_L={verdance:[.12,.26,.13],nimbus:[.33,.15,.115],frostreach:[.54,.25,.125],cinderfel:[.77,.15,.115],rosewind:[.90,.40,.11],amber:[.73,.45,.125],polyglotta:[.50,.52,.125],cogsworth:[.27,.48,.12],mistmire:[.10,.66,.115],crystal:[.30,.78,.12],azure:[.56,.81,.13],sunkar:[.83,.76,.125]};
-const POS_P={verdance:[.27,.09,.135],nimbus:[.72,.11,.12],frostreach:[.26,.245,.125],cinderfel:[.74,.27,.115],polyglotta:[.27,.405,.13],cogsworth:[.72,.44,.12],amber:[.26,.565,.125],mistmire:[.73,.585,.115],crystal:[.27,.725,.12],azure:[.72,.745,.13],sunkar:[.28,.885,.125],rosewind:[.72,.90,.115]};
+const POS_L={nimbus:[.16,.12,.10],frostreach:[.46,.16,.15],cinderfel:[.68,.18,.12],verdance:[.21,.38,.155],cogsworth:[.38,.33,.115],amber:[.58,.42,.13],rosewind:[.80,.42,.125],polyglotta:[.37,.56,.125],mistmire:[.17,.63,.135],sunkar:[.66,.60,.135],crystal:[.42,.76,.115],azure:[.74,.84,.14]};
+const POS_P={nimbus:[.20,.09,.12],frostreach:[.52,.16,.155],cinderfel:[.74,.28,.125],verdance:[.24,.32,.155],cogsworth:[.50,.33,.12],rosewind:[.72,.43,.13],amber:[.38,.47,.135],polyglotta:[.64,.57,.13],mistmire:[.26,.62,.145],sunkar:[.60,.72,.14],crystal:[.30,.80,.12],azure:[.64,.89,.145]};
 const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
 /* ---------- biome decorations (world-level icons) ---------- */
 function decor(g,t,cx,cy,r,rand){
-  const dark=mix(t.land,"#000000",.5),deep=mix(t.land,"#000000",.68),A=t.accent;
+  const dark=mix(t.land,"#27392e",.5),deep=mix(t.land,"#27392e",.68),A=t.accent;
   const s=r/58;
   // icons sit on a ring around the centre label pill
   const N=6,base=rand()*Math.PI*2;
@@ -213,8 +213,8 @@ function decor(g,t,cx,cy,r,rand){
   const peak=(x,y,k=1)=>{el("path",{d:`M ${x-16*s*k} ${y+10*s*k} L ${x} ${y-16*s*k} L ${x+16*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-5.5*s*k} ${y-5.5*s*k} L ${x} ${y-16*s*k} L ${x+5.5*s*k} ${y-5.5*s*k} L ${x+1.8*s*k} ${y-1.5*s*k} L ${x-1.8*s*k} ${y-3.5*s*k} Z`,fill:"#ffffff"},g)};
   const cactus=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+10*s*k} v ${-18*s*k} M ${x} ${y-2*s*k} q ${-8*s*k} 0 ${-8*s*k} ${-9*s*k} M ${x} ${y-6*s*k} q ${8*s*k} 0 ${8*s*k} ${-9*s*k}`,stroke:deep,"stroke-width":3.4*s*k,fill:"none","stroke-linecap":"round"},g)};
   const dune=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y+6*s*k} Q ${x} ${y-9*s*k} ${x+18*s*k} ${y+6*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g);el("path",{d:`M ${x-10*s*k} ${y+11*s*k} Q ${x+4*s*k} ${y+2*s*k} ${x+16*s*k} ${y+11*s*k}`,stroke:dark,"stroke-width":1.8*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const lagoon=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:12*s*k,fill:"none",stroke:A,"stroke-width":3*s*k},g);el("circle",{cx:x,cy:y,r:5*s*k,fill:"#0e4a56"},g);el("path",{d:`M ${x-16*s*k} ${y-13*s*k} q ${5*s*k} ${-4*s*k} ${10*s*k} 0`,stroke:A,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const cone=(x,y,k=1)=>{el("path",{d:`M ${x-17*s*k} ${y+10*s*k} L ${x-4*s*k} ${y-15*s*k} L ${x+4*s*k} ${y-15*s*k} L ${x+17*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-4*s*k} ${y-15*s*k} L ${x} ${y-9*s*k} L ${x+4*s*k} ${y-15*s*k} Z`,fill:"#ff7b4d"},g);el("circle",{cx:x,cy:y-21*s*k,r:4*s*k,fill:"#ffffff",class:"smoke"},g);el("circle",{cx:x+6*s*k,cy:y-27*s*k,r:2.8*s*k,fill:"#ffffff",class:"smoke"},g)};
+  const lagoon=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:12*s*k,fill:"none",stroke:A,"stroke-width":3*s*k},g);el("circle",{cx:x,cy:y,r:5*s*k,fill:"#4f9bb8"},g);el("path",{d:`M ${x-16*s*k} ${y-13*s*k} q ${5*s*k} ${-4*s*k} ${10*s*k} 0`,stroke:A,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const cone=(x,y,k=1)=>{el("path",{d:`M ${x-17*s*k} ${y+10*s*k} L ${x-4*s*k} ${y-15*s*k} L ${x+4*s*k} ${y-15*s*k} L ${x+17*s*k} ${y+10*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-4*s*k} ${y-15*s*k} L ${x} ${y-9*s*k} L ${x+4*s*k} ${y-15*s*k} Z`,fill:"#f08a24"},g);el("circle",{cx:x,cy:y-21*s*k,r:4*s*k,fill:"#ffffff",class:"smoke"},g);el("circle",{cx:x+6*s*k,cy:y-27*s*k,r:2.8*s*k,fill:"#ffffff",class:"smoke"},g)};
   const cloudlet=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:15*s*k,ry:5.6*s*k,fill:"#ffffff",opacity:.92},g);el("ellipse",{cx:x+8*s*k,cy:y-3*s*k,rx:9*s*k,ry:4.2*s*k,fill:"#ffffff",opacity:.85},g)};
   const rock=(x,y,k=1)=>{el("path",{d:`M ${x-9*s*k} ${y+5*s*k} L ${x-4*s*k} ${y-6*s*k} L ${x+5*s*k} ${y-7*s*k} L ${x+10*s*k} ${y+4*s*k} Z`,fill:dark},g)};
   const acacia=(x,y,k=1)=>{el("line",{x1:x,y1:y+9*s*k,x2:x,y2:y-8*s*k,stroke:deep,"stroke-width":2.6*s*k,"stroke-linecap":"round"},g);el("ellipse",{cx:x,cy:y-11*s*k,rx:12*s*k,ry:4.2*s*k,fill:dark},g)};
@@ -222,13 +222,13 @@ function decor(g,t,cx,cy,r,rand){
   const crystalF=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-15*s*k} L ${x+6*s*k} ${y-3*s*k} L ${x+4*s*k} ${y+9*s*k} L ${x-4*s*k} ${y+9*s*k} L ${x-6*s*k} ${y-3*s*k} Z`,fill:A,stroke:deep,"stroke-width":1},g);el("path",{d:`M ${x+9*s*k} ${y-6*s*k} L ${x+13*s*k} ${y+1*s*k} L ${x+11*s*k} ${y+7*s*k} L ${x+6*s*k} ${y+7*s*k} L ${x+5*s*k} ${y+1*s*k} Z`,fill:mix(A,"#ffffff",.4),stroke:deep,"stroke-width":.8},g)};
   const terrace=(x,y,k=1)=>{for(let kk=0;kk<3;kk++)el("path",{d:`M ${x-16*s*k} ${y+(kk*7-6)*s*k} Q ${x} ${y+(kk*7-13)*s*k} ${x+16*s*k} ${y+(kk*7-6)*s*k}`,stroke:dark,"stroke-width":2.4*s*k,fill:"none","stroke-linecap":"round"},g)};
   const mesa=(x,y,k=1)=>{el("path",{d:`M ${x-14*s*k} ${y+8*s*k} L ${x-10*s*k} ${y-8*s*k} L ${x+10*s*k} ${y-8*s*k} L ${x+14*s*k} ${y+8*s*k} Z`,fill:deep},g);el("path",{d:`M ${x-14*s*k} ${y+8*s*k} h ${10*s*k} m ${6*s*k} 0 h ${10*s*k}`,stroke:A,"stroke-width":1.6*s*k},g)};
-  const flower=(x,y,k=1)=>{for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#ffd166"},g)};
-  const fish=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:8*s*k,ry:3.6*s*k,fill:A},g);el("path",{d:`M ${x+8*s*k} ${y} l ${6*s*k} ${-4*s*k} l 0 ${8*s*k} Z`,fill:A},g);el("circle",{cx:x-4*s*k,cy:y-1*s*k,r:1*s*k,fill:"#0b1d24"},g)};
+  const flower=(x,y,k=1)=>{for(let kk=0;kk<6;kk++){const a=kk/6*Math.PI*2;el("circle",{cx:x+Math.cos(a)*4.6*s*k,cy:y+Math.sin(a)*4.6*s*k,r:2.6*s*k,fill:A},g)}el("circle",{cx:x,cy:y,r:2.2*s*k,fill:"#e3a83c"},g)};
+  const fish=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:8*s*k,ry:3.6*s*k,fill:A},g);el("path",{d:`M ${x+8*s*k} ${y} l ${6*s*k} ${-4*s*k} l 0 ${8*s*k} Z`,fill:A},g);el("circle",{cx:x-4*s*k,cy:y-1*s*k,r:1*s*k,fill:"#27392e"},g)};
   const kelp=(x,y,k=1)=>{el("path",{d:`M ${x} ${y+12*s*k} q ${-5*s*k} ${-8*s*k} 0 ${-16*s*k} q ${5*s*k} ${-8*s*k} 0 ${-16*s*k}`,stroke:deep,"stroke-width":2.6*s*k,fill:"none","stroke-linecap":"round"},g)};
   const bubble=(x,y,k=1)=>{el("circle",{cx:x,cy:y,r:2.6*s*k,fill:"none",stroke:A,"stroke-width":1.4*s*k},g);el("circle",{cx:x+5*s*k,cy:y-6*s*k,r:1.8*s*k,fill:"none",stroke:A,"stroke-width":1.2*s*k},g)};
   const leaf=(x,y,k=1)=>{el("ellipse",{cx:x,cy:y,rx:6*s*k,ry:13*s*k,fill:dark,transform:`rotate(${(rand()*70-35).toFixed(0)} ${x} ${y})`},g);el("line",{x1:x,y1:y-11*s*k,x2:x,y2:y+11*s*k,stroke:deep,"stroke-width":1.2*s*k},g)};
   const vine=(x,y,k=1)=>{el("path",{d:`M ${x} ${y-14*s*k} q ${6*s*k} ${8*s*k} 0 ${16*s*k} q ${-5*s*k} ${7*s*k} ${-1*s*k} ${13*s*k}`,stroke:deep,"stroke-width":2*s*k,fill:"none","stroke-linecap":"round"},g)};
-  const river=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y-8*s*k} q ${9*s*k} ${6*s*k} 0 ${10*s*k} q ${-9*s*k} ${4*s*k} ${18*s*k} ${12*s*k}`,stroke:"#9fd8e8","stroke-width":3*s*k,fill:"none","stroke-linecap":"round"},g)};
+  const river=(x,y,k=1)=>{el("path",{d:`M ${x-18*s*k} ${y-8*s*k} q ${9*s*k} ${6*s*k} 0 ${10*s*k} q ${-9*s*k} ${4*s*k} ${18*s*k} ${12*s*k}`,stroke:"#7fb8d8","stroke-width":3*s*k,fill:"none","stroke-linecap":"round"},g)};
   const buildings=(x,y,k=1)=>{for(let kk=0;kk<3;kk++){const h=(6+((kk*37)%7))*s*k;el("rect",{x:x+(kk*7-7)*s*k,y:y+8*s*k-h,width:5.4*s*k,height:h,fill:deep},g)}};
   const towerBabel=(x,y,k=1)=>{for(let kk=0;kk<4;kk++)el("rect",{x:x-(14-kk*3)*s*k,y:y+8*s*k-(kk+1)*5.4*s*k,width:(28-kk*6)*s*k,height:5.4*s*k,fill:dark},g)};
   const chipG=(x,y,k=1)=>{el("rect",{x:x-7*s*k,y:y-7*s*k,width:14*s*k,height:14*s*k,rx:2*s*k,fill:dark},g);el("rect",{x:x-3.4*s*k,y:y-3.4*s*k,width:6.8*s*k,height:6.8*s*k,fill:A},g);for(let kk=-1;kk<2;kk++){el("line",{x1:x+kk*4.6*s*k,y1:y-7*s*k,x2:x+kk*4.6*s*k,y2:y-11*s*k,stroke:dark,"stroke-width":1.4*s*k},g);el("line",{x1:x+kk*4.6*s*k,y1:y+7*s*k,x2:x+kk*4.6*s*k,y2:y+11*s*k,stroke:dark,"stroke-width":1.4*s*k},g)}};
@@ -238,7 +238,7 @@ function decor(g,t,cx,cy,r,rand){
   if(B==="forest"){for(let i=0;i<6;i++)put((x,y)=>tree(x,y,.9+rand()*.4))}
   else if(B==="desert"){for(let i=0;i<3;i++)put((x,y)=>dune(x,y));for(let i=0;i<2;i++)put((x,y)=>cactus(x,y))}
   else if(B==="peaks"){for(let i=0;i<4;i++)put((x,y)=>peak(x,y,.9+rand()*.5))}
-  else if(B==="atolls"){el("ellipse",{cx,cy,rx:r*.52,ry:r*.42,fill:"#0e4a56"},g);for(let i=0;i<2;i++)put((x,y)=>fish(x,y));put((x,y)=>kelp(x,y));put((x,y)=>bubble(x,y));put((x,y)=>lagoon(x,y))}
+  else if(B==="atolls"){el("ellipse",{cx,cy,rx:r*.52,ry:r*.42,fill:"#8fd0e0"},g);for(let i=0;i<2;i++)put((x,y)=>fish(x,y));put((x,y)=>kelp(x,y));put((x,y)=>bubble(x,y));put((x,y)=>lagoon(x,y))}
   else if(B==="volcano"){put((x,y)=>cone(x,y,1.5));for(let i=0;i<2;i++)put((x,y)=>rock(x,y))}
   else if(B==="sky"){for(let i=0;i<4;i++)put((x,y)=>cloudlet(x,y));put((x,y)=>rock(x,y))}
   else if(B==="savanna"){for(let i=0;i<4;i++)put((x,y)=>acacia(x,y,.9+rand()*.3))}
@@ -260,32 +260,58 @@ function build(){
   const minD=Math.min(WORLD.w,WORLD.h);
   const defs=el("defs",{},svg);
   const gr=el("linearGradient",{id:"ocean",x1:0,y1:0,x2:0,y2:1},defs);
-  el("stop",{offset:"0","stop-color":"#0a2733"},gr);el("stop",{offset:"1","stop-color":"#061720"},gr);
+  el("stop",{offset:"0","stop-color":"#d3e8f0"},gr);el("stop",{offset:"1","stop-color":"#a5cede"},gr);
   el("rect",{x:0,y:0,width:WORLD.w,height:WORLD.h,fill:"url(#ocean)"},svg);
   // graticule
-  const grat=el("g",{stroke:"#ffffff","stroke-width":1,opacity:.05,fill:"none"},svg);
+  const grat=el("g",{stroke:"#ffffff","stroke-width":1,opacity:.18,fill:"none"},svg);
   for(let i=1;i<6;i++)el("line",{x1:WORLD.w*i/6,y1:0,x2:WORLD.w*i/6,y2:WORLD.h},grat);
   for(let i=1;i<4;i++)el("line",{x1:0,y1:WORLD.h*i/4,x2:WORLD.w,y2:WORLD.h*i/4},grat);
   // waves
   const rand=RNG(42);
+  // one connected continent: shallows, a neutral plains landmass, rivers between biomes
+  const landscape=WORLD.w>1200;
+  const ccx=WORLD.w*(landscape?.46:.47),ccy=WORLD.h*(landscape?.47:.52),minW=Math.min(WORLD.w,WORLD.h);
+  const crand=RNG(7);
+  el("path",{d:blob(ccx,ccy,minW*.53,crand,.14),fill:"#d8edf3",opacity:.9},svg);
+  el("path",{d:blob(ccx,ccy,minW*.48,crand,.16),fill:"#e9f4f7",opacity:.9},svg);
+  el("path",{d:blob(ccx,ccy,minW*.44,crand,.18),fill:"#ece3d1",stroke:"#f8efdd","stroke-width":6},svg);
+  const RIVERS=landscape?[
+    [[.47,.19],[.40,.26],[.32,.31],[.26,.38],[.21,.47],[.17,.56],[.14,.64]],
+    [[.53,.22],[.60,.30],[.64,.38],[.63,.46],[.60,.52],[.62,.60],[.66,.68],[.70,.76],[.72,.82]],
+    [[.63,.46],[.70,.50],[.76,.55],[.80,.62]],
+    [[.40,.62],[.37,.69],[.36,.76],[.36,.84],[.38,.90]]
+  ]:[
+    [[.50,.19],[.42,.25],[.33,.29],[.26,.36],[.20,.44],[.16,.52]],
+    [[.56,.20],[.64,.27],[.70,.34],[.72,.42],[.70,.50],[.66,.58],[.64,.66],[.62,.74],[.63,.82],[.64,.88]],
+    [[.70,.50],[.77,.57],[.79,.66]],
+    [[.44,.55],[.40,.64],[.36,.72],[.34,.80],[.33,.87]]
+  ];
+  const smooth=pts=>{let d=`M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+    for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
+      d+=` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}
+    return d};
+  const rw=minW/1000,riv=el("g",{fill:"none","stroke-linecap":"round"},svg);
+  for(const rp of RIVERS){const d=smooth(rp.map(f=>[f[0]*WORLD.w,f[1]*WORLD.h]));
+    el("path",{d,stroke:"#9fcfe0","stroke-width":9*rw,opacity:.9},riv);
+    el("path",{d,stroke:"#d6edf5","stroke-width":4*rw,opacity:.95},riv)}
   for(const[cls,op,amp]of[["waves",.5,1],["waves2",.3,1.6]]){
-    const w=el("g",{class:cls,stroke:"#bfe3f0","stroke-width":1.6,fill:"none",opacity:op},svg);
+    const w=el("g",{class:cls,stroke:"#ffffff","stroke-width":1.6,fill:"none",opacity:op},svg);
     for(let i=0;i<26;i++){const x=rand()*WORLD.w,y=rand()*WORLD.h,l=(14+rand()*20)*amp;
       el("path",{d:`M ${x} ${y} q ${l/4} ${-5*amp} ${l/2} 0 q ${l/4} ${5*amp} ${l/2} 0`,"stroke-linecap":"round"},w)}}
   // routes between islands (dashed voyages)
-  const routes=el("g",{stroke:"#ffd166","stroke-width":1.4,"stroke-dasharray":"2 7",fill:"none",opacity:.4,"stroke-linecap":"round"},svg);
+  const routes=el("g",{stroke:"#c98a2e","stroke-width":1.6,"stroke-dasharray":"1 7",fill:"none",opacity:.75,"stroke-linecap":"round"},svg);
   const posOf=slug=>{const f=WORLD.pos[slug];return[f[0]*WORLD.w,f[1]*WORLD.h,f[2]*minD]};
-  const links=[["verdance","polyglotta"],["polyglotta","amber"],["cogsworth","crystal"],["crystal","azure"],["sunkar","amber"],["frostreach","cinderfel"],["nimbus","frostreach"],["mistmire","verdance"],["rosewind","sunkar"]];
+  const links=[["verdance","cogsworth"],["cogsworth","frostreach"],["frostreach","cinderfel"],["cinderfel","rosewind"],["cogsworth","amber"],["verdance","polyglotta"],["polyglotta","mistmire"],["amber","sunkar"],["mistmire","crystal"],["sunkar","azure"],["amber","rosewind"],["polyglotta","amber"]];
   for(const[a,b]of links){const A=posOf(a),B=posOf(b);const mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2-30;
     el("path",{d:`M ${A[0]} ${A[1]} Q ${mx} ${my} ${B[0]} ${B[1]}`},routes)}
   // compass
-  const comp=el("g",{transform:`translate(${WORLD.w-70},78)`,opacity:.75},svg);
-  el("circle",{cx:0,cy:0,r:26,fill:"none",stroke:"#bfe3f0","stroke-width":1.4},comp);
-  el("path",{d:"M 0 -20 L 5 0 L 0 20 L -5 0 Z",fill:"#ffd166"},comp);
-  txt(comp,0,-32,"N","",12,"#bfe3f0");
+  const comp=el("g",{transform:`translate(${WORLD.w-70},78)`,opacity:.8},svg);
+  el("circle",{cx:0,cy:0,r:26,fill:"#fffdf866",stroke:"#5b6157","stroke-width":1.4},comp);
+  el("path",{d:"M 0 -20 L 5 0 L 0 20 L -5 0 Z",fill:"#e3a83c",stroke:"#5b6157","stroke-width":.8},comp);
+  txt(comp,0,-32,"N","",12,"#5b6157");
   // clouds
   for(const[fx,fy,sc,cls]of[[.2,.08,1,"cloud"],[.62,.06,1.4,"cloud c2"],[.85,.55,1.1,"cloud c3"]]){
-    const c=el("g",{class:cls,opacity:.16,fill:"#ffffff"},svg);
+    const c=el("g",{class:cls,opacity:.6,fill:"#ffffff"},svg);
     el("ellipse",{cx:fx*WORLD.w,cy:fy*WORLD.h,rx:70*sc,ry:16*sc},c);
     el("ellipse",{cx:fx*WORLD.w+40*sc,cy:fy*WORLD.h-8*sc,rx:44*sc,ry:13*sc},c)}
   // sailboat
@@ -296,6 +322,7 @@ function build(){
 }
 function buildIslands(){
   const layer=el("g",{},svg);
+  const labels=el("g",{"pointer-events":"none"},svg);
   for(const t of THEMES){
     const f=WORLD.pos[t.slug];const cx=f[0]*WORLD.w,cy=f[1]*WORLD.h,r=f[2]*Math.min(WORLD.w,WORLD.h);
     const rand=RNG(hash(t.slug));
@@ -303,8 +330,9 @@ function buildIslands(){
     g.addEventListener("click",()=>go({level:"theme",t:t.slug}));
     g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go({level:"theme",t:t.slug})}});
     // landmass
-    el("path",{class:"land",d:blob(cx,cy,r,rand,.2),fill:t.land,stroke:mix(t.land,"#000000",.45),"stroke-width":1.6},g);
-    el("path",{d:blob(cx+r*.03,cy-r*.02,r*.86,rand,.24),fill:t.land2,opacity:.85},g);
+    const lr=r*.85;
+    el("path",{class:"land",d:blob(cx,cy,lr,rand,.18),fill:t.land,stroke:mix(t.land,"#27392e",.42),"stroke-width":2},g);
+    el("path",{d:blob(cx+lr*.03,cy-lr*.02,lr*.82,rand,.22),fill:t.land2,opacity:.85},g);
     decor(el("g",{class:"lod bdecor"},g),t,cx,cy,r,RNG(hash(t.slug+"d")));
     // regions (shaped families of related paths)
     const regRand=RNG(hash(t.slug+"r"));
@@ -315,7 +343,7 @@ function buildIslands(){
       const geo=geomFor(rg.shape,rcx,rcy,rr,RNG(hash(t.slug+rg.slug)));
       const fill=mix(t.land2,i%2?t.accent:"#ffffff",i%2?.30:.20);
       const gg=el("g",{class:"geog"},g);
-      const rgEl=el("path",{class:"region-shape",d:geo.d,fill,stroke:mix(t.land,"#000000",.55),"stroke-width":1,"fill-rule":geo.rule,opacity:.96,"vector-effect":"non-scaling-stroke"},gg);
+      const rgEl=el("path",{class:"region-shape",d:geo.d,fill,stroke:mix(t.land,"#27392e",.45),"stroke-width":1,"fill-rule":geo.rule,opacity:.96,"vector-effect":"non-scaling-stroke"},gg);
       rgEl.addEventListener("click",ev=>{ev.stopPropagation();go({level:"region",t:t.slug,r:rg.slug})});
       rg.cx=rcx;rg.cy=rcy;rg.r=rr;rg.geom=geo;
       // trails (learning paths) inside the shaped region
@@ -328,37 +356,43 @@ function buildIslands(){
         const d="M"+pts.map(q=>q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" L");
         el("path",{d,fill:"none",stroke:"#1c2b33","stroke-width":7,opacity:0,"stroke-linecap":"round","stroke-linejoin":"round"},tg)
           .addEventListener("click",ev=>{ev.stopPropagation();go({level:"path",t:t.slug,r:rg.slug,p:j})});
+        el("path",{d,fill:"none",stroke:mix(t.land,"#27392e",.35),"stroke-width":3,opacity:.45,"stroke-linecap":"round","stroke-linejoin":"round","vector-effect":"non-scaling-stroke"},tg);
         el("path",{class:"trail-line",d,fill:"none",stroke:"#f4ead2","stroke-width":1.6,"stroke-dasharray":"1 4","stroke-linecap":"round","vector-effect":"non-scaling-stroke"},tg);
         const nr=Math.min(rr*.052,(2*rr*.42/Math.max(p.lessons-1,1))*.42);
         pts.forEach((q,k)=>{
           const st=k<p.done?"done":(k===p.done?"now":"lock");
-          el("circle",{id:"bead-"+t.slug+"-"+rg.slug+"-"+j+"-"+k,cx:q[0],cy:q[1],r:nr,fill:st==="done"?"#57cc99":st==="now"?"#ffd166":"#5a6b73",stroke:"#0b1d24","stroke-width":nr*.22},tg);
-          if(st==="now")el("circle",{cx:q[0],cy:q[1],r:nr*1.7,fill:"none",stroke:"#ffd166","stroke-width":nr*.28,class:"pulse",opacity:.85},tg);
+          el("circle",{id:"bead-"+t.slug+"-"+rg.slug+"-"+j+"-"+k,cx:q[0],cy:q[1],r:nr,fill:st==="done"?"#5ea84a":st==="now"?"#e3a83c":"#cfc6b4",stroke:"#fffdf8","stroke-width":nr*.26},tg);
+          if(st==="now")el("circle",{cx:q[0],cy:q[1],r:nr*1.7,fill:"none",stroke:"#e3a83c","stroke-width":nr*.28,class:"pulse",opacity:.85},tg);
         });
         tg.id="trail-"+t.slug+"-"+rg.slug+"-"+j;
         const ax=slots[j][0],ay=slots[j][1];
         let dx=ax-rcx,dy=ay-rcy;const dl=Math.hypot(dx,dy)||1;dx/=dl;dy/=dl;
         const mid=pts[Math.floor(pts.length/2)];
         const pl=el("g",{class:"lod plbl"},tg);
-        el("circle",{cx:mid[0],cy:mid[1],r:rr*.115,fill:"#07161f",opacity:.88,stroke:"#ffffff","stroke-width":rr*.015},pl);
-        txt(pl,mid[0],mid[1]+rr*.04,String(j+1),"",rr*.115,"#fff");
-        pts.forEach((q,k)=>{txt(tg,q[0],q[1]+nr*.36,String(k+1),"lod nvis",nr*1.05,k<p.done?"#0b2a20":k===p.done?"#20303a":"#c9d4d6")});
+        el("circle",{cx:mid[0],cy:mid[1],r:rr*.115,fill:"#fffdf8",opacity:.94,stroke:"#e3d8c6","stroke-width":rr*.015},pl);
+        txt(pl,mid[0],mid[1]+rr*.04,String(j+1),"",rr*.115,"#27392e");
+        pts.forEach((q,k)=>{txt(tg,q[0],q[1]+nr*.36,String(k+1),"lod nvis",nr*1.05,k<p.done?"#3c6a47":k===p.done?"#8a6a1f":"#8a806b")});
       });
       // region label (theme zoom)
       const rl=el("g",{class:"lod rlbl"},g);
       const rw=rg.name.length*rr*.13+rr*.3;
-      el("rect",{x:geo.lab[0]-rw/2,y:geo.lab[1]-rr*.19,width:rw,height:rr*.38,rx:rr*.12,fill:"#07161f","opacity":.66},rl);
-      txt(rl,geo.lab[0],geo.lab[1]+rr*.07,rg.name,"",rr*.21,"#ffffff");
-      // world-level: theme name + progress
-      const wl=el("g",{class:"lod wlbl"},g);
+      el("rect",{x:geo.lab[0]-rw/2,y:geo.lab[1]-rr*.19,width:rw,height:rr*.38,rx:rr*.12,fill:"#fffdf8","opacity":.88},rl);
+      txt(rl,geo.lab[0],geo.lab[1]+rr*.07,rg.name,"",rr*.21,"#27392e");
+    });
+    // world-level: theme name + progress (one label per theme, above all land)
+    {
+      const wl=el("g",{class:"lod wlbl"},labels);
       const tot=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.lessons,0);
       const dn=t.regions.flatMap(x=>x.paths).reduce((s,p)=>s+p.done,0);
       const sub=t.subject+" · "+dn+"/"+tot;
-      const pw=Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24;
-      el("rect",{x:cx-pw/2,y:cy-r*.21,width:pw,height:r*.42,rx:r*.1,fill:"#07161f","opacity":.68},wl);
-      txt(wl,cx,cy-r*.02,t.name,"",r*.17,"#ffffff");
-      txt(wl,cx,cy+r*.13,sub,"",r*.095,t.accent);
-    });
+      const big=WORLD.w>1200;
+      const lw=big?1:1.4;
+      const pw=big?Math.max(t.name.length*r*.115,sub.length*r*.058)+r*.24:t.name.length*r*.115*lw+r*.34;
+      const ph=big?r*.42:r*.34;
+      el("rect",{x:cx-pw/2,y:cy-ph/2,width:pw,height:ph,rx:r*.1,fill:"#fffdf8","opacity":.92},wl);
+      txt(wl,cx,cy+(big?-r*.02:r*.085),t.name,"",r*.17*lw,"#27392e");
+      if(big)txt(wl,cx,cy+r*.13,sub,"",r*.095,t.accent);
+    }
     themeIndex[t.slug]={t,cx,cy,r};
   }
 }
