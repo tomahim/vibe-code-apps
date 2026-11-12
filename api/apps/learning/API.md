@@ -1,3 +1,7 @@
+## Server-owned progress contract
+
+A lesson completes once every visible card is read, independent of question results (#465). An empty lesson is not complete under the current policy. A path completes only when every visible lesson completes. The existing `progress.completed` flag is authoritative: the frontend displays it for tiles, dots, panels and celebrations instead of rebuilding the rule from counts. `questions_correct` and `questions_total` are separate mastery counters; correct answers never gate reading completion. All backend reading-completion callers use `cards_all_read` (directly or through `LearnerState.lesson_fully_read`).
+
 # Little Grains learner API
 
 All routes live under `/api/learning/`. Learner endpoints require the existing `Authorization: Bearer <token>` from `/api/auth/login` and return private, non-cacheable JSON. Published artwork has a separate public image route, described below. UUIDs are the published content IDs. Only published, unarchived content with a visible ancestry is readable or writable. Publishing provenance, answer keys and pre-answer explanations are not returned. No production DB access is needed to test this API.
@@ -5,12 +9,6 @@ All routes live under `/api/learning/`. Learner endpoints require the existing `
 Sources read 2026-10-27:
 - [Garden design board](https://linear.app/tomahim/document/little-grains-garden-design-board-6dd69300c9a6)
 - [Current project context](https://linear.app/tomahim/project/little-grains-atomic-learning-ac2cbdcff98c/overview)
-
-## GET themes/
-
-Returns `{themes: [...]}` ordered by position/UUID, including introductions, image paths/alt text, path totals/started counts, a per-path `celebrated` flag (its finish celebration was already shown to this learner) and current-user progress. Progress reports `cards_completed`, `cards_total`, `checkpoints_correct`, `checkpoints_total`, `questions_correct`, `questions_total`, `started`, `completed`. `questions_correct` counts distinct questions with at least one correct answer, of any attempt type. A lesson completes once all its visible cards are read and every visible question has been answered correctly at least once; rotation at a checkpoint can leave alternatives unseen on a first pass, and those count too (#204). Empty lessons are not complete. These are completion counts, not spendable rewards or a public ranking.
-
-Theme, path and lesson objects still include `image_url`, but learning path and lesson images were removed (#195), so it is empty for them; only cards carry images, through `illustration_url`. Lesson cards also return the full illustration metadata: `illustration_srcset` (width-described variant URLs for `<img srcset>`, empty until variants exist), `illustration_width`/`illustration_height` for layout reservation, and `illustration_caption`, `illustration_credit`, `illustration_license` and `illustration_source_url` for attribution. These are root-relative URLs on the app origin, ready for `<img src>`, or an empty string when no image is authored. Existing repository-relative `image_path`/`illustration_path` fields and alt text remain available; use the URL fields for display.
 
 ## GET images/<kind>/<uuid>/
 
@@ -32,7 +30,7 @@ Returns `{learning_path, theme, lessons, next_lesson_id}`. Lessons are ordered f
 
 ## GET lessons/<uuid>/
 
-Returns `{lesson, learning_path, theme, cards, questions, next_step}` for introduction, breadcrumbs, reading and resume. Cards include body, artwork and this user's completion timestamp. Questions include `type` and prompt. Multiple-choice questions include four `{id,text}` options; `type_answer_question` has empty `options`. Normal reads never disclose answers, accepted variants or explanations. Exactly one alternative per checkpoint is selected from a deterministic learner-specific ordering. When both types are authored at a checkpoint, multiple choice is used until the whole lesson is complete; later reviews use typed answers. Each wrong attempt advances within the current type's alternatives, wrapping around after the pool is exhausted. Completion is per checkpoint, independent of alternative. `next_step` is `{type: "card"|"question", id}` or null on completion. The frontend should refetch on resume and after writes.
+Returns `{lesson, learning_path, theme, cards, questions, next_step}` for introduction, breadcrumbs, reading and resume. Cards include body, artwork and this user's completion timestamp. Questions include `type` and prompt. Multiple-choice questions include four `{id,text}` options; `type_answer_question` has empty `options`. Normal reads never disclose answers, accepted variants or explanations. Exactly one alternative per checkpoint is selected from a deterministic learner-specific ordering. When both types are authored at a checkpoint, multiple choice is used until every card is read; reviews of a read lesson use typed answers. Each wrong attempt advances within the current type's alternatives, wrapping around after the pool is exhausted. Completion is per checkpoint, independent of alternative. `next_step` is `{type: "card"|"question", id}` or null on completion. The frontend should refetch on resume and after writes.
 
 ## POST lessons/<uuid>/open/
 

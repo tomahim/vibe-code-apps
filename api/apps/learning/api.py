@@ -35,6 +35,17 @@ def described(row):
     }
 
 
+def cards_all_read(card_ids, read_ids):
+    """The one lesson-completion rule (#465): a lesson completes once every
+    one of its cards is read - a card-less lesson never completes, and
+    question results never gate completion (they are separate mastery
+    practice). Every backend completion site delegates here: the API gauge
+    via LearnerState, the rewards, the read badges and the admin dashboard.
+    """
+    card_ids = list(card_ids)
+    return bool(card_ids) and all(card_id in read_ids for card_id in card_ids)
+
+
 class LearnerState:
     """One bounded set of queries per request, not one query per card/lesson."""
     def __init__(self, user, lesson=None, *, lessons=None, card_content=False):
@@ -89,14 +100,12 @@ class LearnerState:
         done = sum(c.pk in self.completed for c in cards)
         correct = len(checkpoints & self.passed)
         answered = sum(q.pk in self.correct_questions for q in questions)
-        # A lesson completes once every card is read and every question has one
-        # correct answer: rotation can leave pool alternatives unseen (#204).
-        completed_lessons = sum(
-            bool(lesson_cards := [c for c in cards if c.lesson_id == lesson.pk])
-            and all(c.pk in self.completed for c in lesson_cards)
-            and all(q.pk in self.correct_questions for q in questions if q.lesson_id == lesson.pk)
-            for lesson in lessons
-        )
+        # Single source of truth (#465): a lesson completes once every card is
+        # read, independent of question results - lesson_fully_read owns the
+        # predicate, and path completion is every lesson completed. Rotation
+        # can leave pool alternatives unseen (#204), so questions never gate
+        # completion. The question counts stay a separate mastery signal.
+        completed_lessons = sum(self.lesson_fully_read(lesson.pk) for lesson in lessons)
         return {"lessons_completed": completed_lessons, "lessons_total": len(ids),
                 "cards_completed": done, "cards_total": len(cards),
                 "checkpoints_correct": correct, "checkpoints_total": len(checkpoints),
@@ -105,8 +114,7 @@ class LearnerState:
                 "completed": bool(ids) and completed_lessons == len(ids)}
 
     def lesson_fully_read(self, lesson_id):
-        cards = [c for c in self.cards if c.lesson_id == lesson_id]
-        return bool(cards) and all(c.pk in self.completed for c in cards)
+        return cards_all_read([c.pk for c in self.cards if c.lesson_id == lesson_id], self.completed)
 
     def lesson_started(self, lesson_id):
         return any(c.pk in self.completed

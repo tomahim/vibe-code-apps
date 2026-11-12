@@ -168,12 +168,13 @@ function LessonReader({ lessonId, initialStep = null, onClose, onStepChange, onL
   const [feedback, setFeedback] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  // Snapshot at open: was every card already read? Drives which celebration
-  // plays at the end - the +5 drops bonus is earned exactly once, by the
-  // session that finishes reading the cards.
+  // Snapshot at open: did the server already consider this lesson complete?
+  // Server-owned flag (#465), never recomputed from card timestamps. Drives
+  // which celebration plays at the end - the +5 drops bonus is earned exactly
+  // once, by the session that finishes reading the cards.
   const fullyReadAtOpen = useRef(null);
   const noteFullyRead = (result) => {
-    if (fullyReadAtOpen.current === null) fullyReadAtOpen.current = result.cards.length > 0 && result.cards.every((item) => item.completed_at);
+    if (fullyReadAtOpen.current === null) fullyReadAtOpen.current = !!result.lesson?.progress?.completed;
   };
 
   const load = useCallback(async (preserveStep = false) => {

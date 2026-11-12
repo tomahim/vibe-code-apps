@@ -2,12 +2,17 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { finishedPaths, newlyCompletedPaths, pathFinished } from '../src/apps/little-grains/path-completion.js';
 const garden = (...paths) => ({ themes: [{ learning_paths: paths }] });
-const path = (id, read, total = 3) => ({ id, title: `Path ${id}`, progress: { cards_completed: read, cards_total: total, lessons_total: 3 } });
+// Fixtures mimic the API: the server owns completion and ships the flag.
+const path = (id, read, total = 3) => ({ id, title: `Path ${id}`, progress: { cards_completed: read, cards_total: total, lessons_total: 3, completed: total > 0 && read >= total } });
 test('a path is finished once every card is read, whatever the questions', () => {
   assert.equal(pathFinished(path('a', 3)), true);
   assert.equal(pathFinished(path('a', 2)), false);
   assert.equal(pathFinished(path('a', 0, 0)), false);
   assert.equal(pathFinished({ id: 'a' }), false);
+});
+test('the server flag decides, never the card counts (#465)', () => {
+  assert.equal(pathFinished({ id: 'a', progress: { cards_completed: 3, cards_total: 3, lessons_total: 3, completed: false } }), false);
+  assert.equal(pathFinished({ id: 'a', progress: { cards_completed: 0, cards_total: 3, lessons_total: 3, completed: true } }), true);
 });
 test('only known unfinished to finished paths celebrate', () => {
   assert.deepEqual(newlyCompletedPaths(garden(path('a', 2)), garden(path('a', 3))), [{ id: 'a', title: 'Path a', lessons: 3 }]);
