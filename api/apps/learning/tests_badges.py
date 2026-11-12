@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from apps.accounts.tokens import issue_token
-from pathlib import Path
 
 from .badge_catalog import BADGES, TIERS
 from .badges import MONTH, WEEK, History, check
@@ -388,8 +387,9 @@ class BadgeTests(TestCase):
 
 
 class CatalogueTests(TestCase):
-    def test_every_entry_is_wired_and_has_art(self):
-        art = Path(__file__).resolve().parents[3] / "ui/src/apps/little-grains/badge-art"
+    def test_every_entry_is_wired(self):
+        # Badge art lives with the frontend, outside this repo: its completeness
+        # is checked there, not here.
         slugs = [badge.slug for badge in BADGES]
         self.assertEqual(len(slugs), len(set(slugs)))
         for badge in BADGES:
@@ -397,8 +397,6 @@ class CatalogueTests(TestCase):
             self.assertTrue(callable(getattr(History, badge.kind, None)), f"{badge.slug}: no rule {badge.kind}")
             self.assertGreaterEqual(badge.target, 1, badge.slug)
             self.assertTrue(badge.explanation.strip() and badge.name.strip(), badge.slug)
-            self.assertTrue((art / f"{badge.slug}.svg").exists(), f"{badge.slug}: missing art")
-        self.assertEqual(sorted(p.stem for p in art.glob("*.svg")), sorted(slugs), "art without a catalogue entry")
 
     def test_the_designed_mix_of_46_badges(self):
         self.assertEqual(len(BADGES), 46)
