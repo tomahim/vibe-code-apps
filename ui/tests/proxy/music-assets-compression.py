@@ -1,7 +1,7 @@
 """Actual nginx GET negotiation on vendored engine assets. Docker required."""
 from pathlib import Path
 import gzip, json, subprocess, tempfile, time, urllib.request, urllib.error
-root = Path(__file__).resolve().parents[3]
+root = Path(__file__).resolve().parents[2]
 def run(*args):
     return subprocess.check_output(args, text=True).strip()
 with tempfile.TemporaryDirectory() as tmp:
