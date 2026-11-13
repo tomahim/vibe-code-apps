@@ -53,10 +53,24 @@ jobs:
       - name: Migrate and test PostgreSQL
         env:
           DATABASE_URL: postgres://django:ci-only-password@localhost:5432/django?sslmode=disable
+          # Scratch CI database: confirm the cleanup and name the scratch host
+          # so the guarded drop path itself is exercised on PostgreSQL. Real
+          # services must set both deliberately.
+          LEARNING_CLEANUP_CONFIRM: drop-lg-tables
+          LEARNING_CLEANUP_EXPECT_HOST: localhost
         run: |
           python manage.py migrate --settings=config.migration_settings --noinput
           python manage.py test
           python manage.py makemigrations --check --dry-run
+      - name: Test the content publisher settings (learning package)
+        # apps.learning is no longer in the runtime settings; its publisher-side
+        # tests and migration check run against config.publisher_settings.
+        env:
+          DATABASE_URL: postgres://django:ci-only-password@localhost:5432/django?sslmode=disable
+        run: |
+          python manage.py migrate --settings=config.publisher_settings --noinput
+          python manage.py test apps.learning --settings=config.publisher_settings
+          python manage.py makemigrations --check --dry-run --settings=config.publisher_settings
 
   deploy:
     needs: validate

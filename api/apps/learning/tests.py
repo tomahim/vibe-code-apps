@@ -1,3 +1,12 @@
+import unittest
+
+from django.apps import apps as _django_apps
+
+if not _django_apps.is_installed("apps.learning"):
+    # Publisher-only package: the experimentation runtime no longer installs
+    # apps.learning. Run these with --settings=config.publisher_settings.
+    raise unittest.SkipTest("apps.learning is not installed; use config.publisher_settings")
+
 from uuid import uuid4
 
 from django.apps import apps

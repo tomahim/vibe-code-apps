@@ -160,3 +160,36 @@ class AdminUserManagementTests(TestCase):
         self.assertEqual(self.client.get("/admin/auth/user/").status_code, 200)
         self.assertEqual(self.client.get("/admin/auth/user/add/").status_code, 403)
         self.assertEqual(self.client.get("/admin/auth/group/").status_code, 403)
+
+
+class SettingsSeparationTests(SimpleTestCase):
+    """The experimentation runtime and the content publisher must not cross.
+
+    The publisher migrates the paid Cultive database, so it can never install
+    learning_cleanup (whose migration drops the lg_* tables) or the
+    experimentation apps. The runtime must not install apps.learning, or its
+    startup migrate would keep recreating those tables here.
+    """
+
+    def test_runtime_does_not_install_learning(self):
+        from django.conf import settings
+        self.assertNotIn("apps.learning.apps.LearningConfig", settings.INSTALLED_APPS)
+        self.assertIn("apps.learning_cleanup", settings.INSTALLED_APPS)
+
+    def test_publisher_scope(self):
+        from config import publisher_settings
+        apps = publisher_settings.INSTALLED_APPS
+        self.assertIn("apps.learning.apps.LearningConfig", apps)
+        self.assertIn("apps.feature_flags", apps)
+        for blocked in (
+            "apps.learning_cleanup",
+            "apps.curator.apps.CuratorConfig",
+            "apps.hockey.apps.HockeyConfig",
+            "apps.recipes",
+            "apps.knob_conservatory.apps.KnobConservatoryConfig",
+            "apps.livetrail_scrap",
+            "apps.rust_learning_path",
+            "apps.content_review",
+            "apps.db_dashboard",
+        ):
+            self.assertNotIn(blocked, apps)

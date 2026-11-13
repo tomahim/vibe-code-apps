@@ -8,6 +8,7 @@ on:
       - 'api/apps/learning/models.py'
       - 'api/apps/learning/migrations/**'
       - 'api/apps/learning/management/**'
+      - 'api/config/publisher_settings.py'
       - '.github/workflows/sync-atomic-lessons.yml'
   push:
     branches: [master]
@@ -17,6 +18,7 @@ on:
       - 'api/apps/learning/models.py'
       - 'api/apps/learning/migrations/**'
       - 'api/apps/learning/management/**'
+      - 'api/config/publisher_settings.py'
       - '.github/workflows/sync-atomic-lessons.yml'
   workflow_dispatch:
 
@@ -49,8 +51,8 @@ jobs:
       - name: Prove the full library imports into a scratch database
         working-directory: api
         run: |
-          python manage.py migrate --noinput
-          python manage.py sync_atomic_lessons --commit "${{ github.sha }}" --dry-run
+          python manage.py migrate --settings=config.publisher_settings --noinput
+          python manage.py sync_atomic_lessons --settings=config.publisher_settings --commit "${{ github.sha }}" --dry-run
 
   sync:
     # Push to master (and manual dispatch on master) publishes content to Neon.
@@ -71,10 +73,13 @@ jobs:
             atomic-lessons/requirements.txt
       - run: python -m pip install -r api/requirements.txt -r atomic-lessons/requirements.txt
       - name: Migrate the content database
+        # publisher_settings installs only the shared apps plus learning, so
+        # this migrate cannot recreate experimentation tables on the paid
+        # Cultive database.
         working-directory: api
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: python manage.py migrate --noinput
+        run: python manage.py migrate --settings=config.publisher_settings --noinput
       - name: Sync content to the Neon database
         working-directory: api
         env:
@@ -88,4 +93,4 @@ jobs:
           AWS_S3_REGION_NAME: ${{ secrets.AWS_S3_REGION_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: python manage.py sync_atomic_lessons --commit "${{ github.sha }}"
+        run: python manage.py sync_atomic_lessons --settings=config.publisher_settings --commit "${{ github.sha }}"

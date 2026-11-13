@@ -35,9 +35,23 @@ apply. The Cultive UI already uses the standalone Cultive API.
    Cultive's value securely to `cultive-dev db`, then verify its resolved target
    and health. Complete this before changing the experimentation API connection
    or renaming a service referenced by that expression.
-4. Preserve the publisher's GitHub `DATABASE_URL` on `cultive-dev db`. Its current
-   production workflow still calls unrestricted `migrate` before content sync;
-   this is a separate review item, not authorization to run migrations.
+4. Preserve the publisher's GitHub `DATABASE_URL` on `cultive-dev db`. The
+   publisher workflow now migrates with `config.publisher_settings`, which
+   installs only the shared apps plus learning, so it can no longer recreate
+   experimentation tables on the paid database. The experimentation runtime
+   no longer installs `apps.learning`; `apps.learning_cleanup`'s migration
+   drops the orphaned `lg_*` tables from the experimentation database,
+   replacing the Free-side manual SQL block in tomahim/cultive#34. The
+   migration fails closed on a real database unless the service carries
+   `LEARNING_CLEANUP_CONFIRM=drop-lg-tables` and the server itself proves its
+   identity: the guard reads `current_setting('neon.project_id')` and
+   `current_setting('neon.endpoint_id')` from the live connection and requires
+   them to match `LEARNING_CLEANUP_EXPECT_PROJECT_ID=frosty-moon-05702800`
+   and `LEARNING_CLEANUP_EXPECT_ENDPOINT_ID=ep-fragrant-sea-zafai3y3`. A
+   wrongly targeted DATABASE_URL (as seen during this split) refuses before
+   any SQL runs. Set the variables on the experimentation service
+   (`vibe-code-apps-api-dev`) only, once its target is verified. Its
+   `django_migrations` ledger rows are retained.
 5. With target checks and review complete, update the owner-managed
    experimentation API connection and scoped worker routes. Preserve exact
    permissions; do not add schema rights or delete old roles.
