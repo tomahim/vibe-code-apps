@@ -49,6 +49,23 @@ resource "railway_variable" "cultive_api_port" {
 # ever in this repo or in the state (the provider stores the literal reference
 # string, marked sensitive). No schema or data migration is implied.
 
+# Separate signing secret for the standalone backend (decision 2026-11-13):
+# JWTs signed by the source api won't verify on Cultive, so users log in
+# again after cutover. Placeholder only: the real value is entered securely
+# in Railway by the owner after apply, and ignore_changes keeps Terraform
+# from overwriting it. While the placeholder (or nothing) is set, the api's
+# secret-key guard refuses JWT sign-in.
+resource "railway_variable" "cultive_api_django_secret_key" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = "DJANGO_SECRET_KEY"
+  value          = "managed-in-railway"
+
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
 resource "railway_variable" "cultive_api_database_url" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_api.id
