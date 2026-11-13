@@ -39,12 +39,11 @@ INSTALLED_APPS = [
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
-    # Cultive owns the Little Grains learning runtime and its lg_* tables on the
-    # paid Cultive database (repo tomahim/cultive); this service no longer
-    # installs apps.learning. The content publisher keeps models, migrations
-    # and the sync command via config.publisher_settings. learning_cleanup's
-    # only migration drops the orphaned lg_* tables from this service's
-    # experimentation database; it is never installed by publisher_settings.
+    # Cultive owns the Little Grains learning runtime, its lg_* tables on the
+    # paid Cultive database, the atomic-lessons content library and the content
+    # publisher (repo tomahim/cultive); this service no longer installs
+    # apps.learning. learning_cleanup's only migration drops the orphaned lg_*
+    # tables from this service's experimentation database.
     "apps.learning_cleanup",
 ]
 

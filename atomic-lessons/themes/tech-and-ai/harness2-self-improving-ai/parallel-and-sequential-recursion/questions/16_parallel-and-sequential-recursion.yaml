@@ -1,9 +1,0 @@
-id: 037f654a-f657-409a-b32a-b5f9fc29e36d
-position: 16
-type: type_answer_question
-after_card_position: 8
-prompt: 'Fill in the blank: future work should stop refinement when additional probes yield little new ____.'
-accepted_answers:
-- evidence
-explanation: Adaptive recursion would allocate exploration by task difficulty and stop when extra probes stop producing new evidence.
-archived: false

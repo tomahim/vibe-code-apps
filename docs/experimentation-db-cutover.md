@@ -7,9 +7,11 @@ is run by this change.
 ## Destinations
 
 - `cultive-api-dev`: keep `cultive-dev db` (paid).
-- `vibe-code-apps-dev` (existing `api` service, same ID): move to the restored
-  `vibe-code-apps dev db` (Free) only after validation.
-- Source content publisher and Cultive progress reader: keep `cultive-dev db`.
+- `vibe-code-apps-api-dev` (existing `api` service, same ID): move to the
+  restored `vibe-code-apps dev db` (Free) only after validation.
+- Source content publisher: moves to the Cultive repo (cultive#35), which
+  publishes to `cultive-dev db` through its own GitHub `DATABASE_URL` secret.
+- Cultive progress reader: keep `cultive-dev db`.
 - Experimentation background workers: route individually to the Free target.
   The readonly credential has mixed consumers and must not be retargeted globally.
 
@@ -20,9 +22,9 @@ The database names above are user labels, not verified physical database names.
 Keep the Terraform resource address `railway_service.api` and service ID.
 Deployment workflows already select this ID. Preserve the independently managed
 private endpoint `api.railway.internal`: the experimentation UI, bot and image
-fallbacks use it. The service display name is `vibe-code-apps-dev`; changing the
-private endpoint is not part of this cutover. Verify DNS and proxy health after
-apply. The Cultive UI already uses the standalone Cultive API.
+fallbacks use it. The service display name is `vibe-code-apps-api-dev`;
+changing the private endpoint is not part of this cutover. Verify DNS and proxy
+health after apply. The Cultive UI already uses the standalone Cultive API.
 
 ## Before the database switch
 
@@ -35,13 +37,22 @@ apply. The Cultive UI already uses the standalone Cultive API.
    Cultive's value securely to `cultive-dev db`, then verify its resolved target
    and health. Complete this before changing the experimentation API connection
    or renaming a service referenced by that expression.
-4. Preserve the publisher's GitHub `DATABASE_URL` on `cultive-dev db`. The
-   publisher workflow now migrates with `config.publisher_settings`, which
-   installs only the shared apps plus learning, so it can no longer recreate
-   experimentation tables on the paid database. The experimentation runtime
-   no longer installs `apps.learning`; `apps.learning_cleanup`'s migration
-   drops the orphaned `lg_*` tables from the experimentation database,
-   replacing the Free-side manual SQL block in tomahim/cultive#34. The
+4. Move the publisher's GitHub `DATABASE_URL` to the Cultive repo: set it
+   fresh there (GitHub secrets cannot be read back) pointing at `cultive-dev
+   db`, along with the five media bucket secrets, then set the
+   `SYNC_ATOMIC_LESSONS_ENABLED` repository variable to `true` and run the
+   ported workflow once manually to confirm the new `lg_sync_log` row on the
+   paid database. Only then merge this PR, which deletes the publisher
+   workflow, the sync command, the learning app and the `atomic-lessons/`
+   tree here, and remove the `DATABASE_URL` and media secrets from this
+   repo. This ordering keeps exactly one publisher at all times. Also
+   repoint `GITHUB_REVIEW_REPO` on `vibe-code-apps-api-dev` to
+   `tomahim/cultive` so the content-review tool reviews content PRs in
+   their new home (its `GITHUB_REVIEW_TOKEN` needs access to that repo).
+   The experimentation runtime no longer installs `apps.learning`;
+   `apps.learning_cleanup`'s migration drops the orphaned `lg_*` tables
+   from the experimentation database, replacing the Free-side manual SQL
+   block in tomahim/cultive#34. The
    migration fails closed on a real database unless the service carries
    `LEARNING_CLEANUP_CONFIRM=drop-lg-tables` and the server itself proves its
    identity: the guard reads `current_setting('neon.project_id')` and

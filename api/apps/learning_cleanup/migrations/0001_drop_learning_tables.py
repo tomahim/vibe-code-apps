@@ -1,10 +1,10 @@
 """Drop the orphaned Little Grains learning tables from this database.
 
 The experimentation API no longer installs apps.learning: Cultive (repo
-tomahim/cultive) owns the learning runtime and its lg_* tables on the paid
-Cultive database, which the GitHub content publisher keeps migrating through
-config.publisher_settings. This app is installed only in the experimentation
-runtime settings (config.settings), never by the publisher.
+tomahim/cultive) owns the learning runtime, its lg_* tables on the paid
+Cultive database, the atomic-lessons content library and the content
+publisher (cultive#35). This app is installed only in the experimentation
+runtime settings (config.settings).
 
 Settings separation alone is NOT the safety guarantee: a service's
 DATABASE_URL can be pointed at the wrong database (it already happened once
