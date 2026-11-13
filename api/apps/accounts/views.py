@@ -9,8 +9,9 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET, require_POST
 
+from .decorators import jwt_required
 from .tokens import issue_token
 
 # Brute-force guard: a handful of tries per minute per client IP.
@@ -70,6 +71,22 @@ def login(request):
         return error("Sign-in is not configured on the server.", 503)
     return JsonResponse({
         "token": token,
+        "user": {
+            "email": user.email or user.get_username(),
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        },
+    })
+
+
+@never_cache
+@require_GET
+@jwt_required
+def me(request):
+    """The signed-in user's identity. Lives in accounts since the feature-flag
+    system that used to own it was retired."""
+    user = request.user
+    return JsonResponse({
         "user": {
             "email": user.email or user.get_username(),
             "first_name": user.first_name,

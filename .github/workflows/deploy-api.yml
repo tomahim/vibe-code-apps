@@ -58,6 +58,8 @@ jobs:
           # services must set both deliberately.
           LEARNING_CLEANUP_CONFIRM: drop-lg-tables
           LEARNING_CLEANUP_EXPECT_HOST: localhost
+          FEATURE_FLAGS_CLEANUP_CONFIRM: drop-feature-flag-tables
+          FEATURE_FLAGS_CLEANUP_EXPECT_HOST: localhost
         run: |
           python manage.py migrate --settings=config.migration_settings --noinput
           python manage.py test

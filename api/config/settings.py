@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.admin_ui",
     "apps.accounts",
+    # Empty shell kept for its migration history (0001 creates, 0002 drops).
     "apps.feature_flags",
     "apps.db_dashboard",
     "apps.curator.apps.CuratorConfig",

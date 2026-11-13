@@ -1,8 +1,6 @@
 from django.urls import path
 
-from apps.feature_flags.views import me
-
-from .views import login
+from .views import login, me
 
 urlpatterns = [
     path("login", login, name="auth-login"),

@@ -1,47 +1,118 @@
+"""Guard tests: the drop must fail closed on any real database connection."""
+
+import importlib
 from unittest import mock
 
-from django.contrib.auth import get_user_model
-from django.db import DatabaseError
-from django.test import Client, TestCase, override_settings
+from django.test import SimpleTestCase
 
-from apps.accounts.tokens import issue_token
+migration = importlib.import_module(
+    "apps.feature_flags.migrations.0002_delete_featureflag"
+)
 
-from .models import FeatureFlag
+FREE_PROJECT = "frosty-moon-05702800"
+FREE_ENDPOINT = "ep-fragrant-sea-zafai3y3"
+PAID_PROJECT = "wispy-unit-75400790"
+PAID_ENDPOINT = "ep-holy-hall-b5rgosv4"
 
 
-@override_settings(AUTH_JWT_TTL_SECONDS=3600)
-class MeEndpointTests(TestCase):
-    url = "/api/auth/me"
+class FakeCursor:
+    def __init__(self, identity):
+        self.identity = identity
 
-    def setUp(self):
-        User = get_user_model()
-        self.user = User.objects.create_user("thomas", "thomas@example.com", "test-only-password")
-        self.other = User.objects.create_user("other", "other@example.com", "test-only-password")
+    def __enter__(self):
+        return self
 
-    def get(self, user=None):
-        headers = {"HTTP_AUTHORIZATION": f"Bearer {issue_token(user)}"} if user else {}
-        return Client().get(self.url, **headers)
+    def __exit__(self, *args):
+        return False
 
-    def test_requires_sign_in(self):
-        self.assertEqual(self.get().status_code, 401)
+    def execute(self, sql):
+        self.last_sql = sql
 
-    def test_returns_user_and_no_flags_by_default(self):
-        FeatureFlag.objects.create(key="hidden")
-        body = self.get(self.user).json()
-        self.assertEqual(body["user"]["email"], "thomas@example.com")
-        self.assertEqual(body["feature_flags"], [])
+    def fetchone(self):
+        return self.identity
 
-    def test_global_and_assigned_flags(self):
-        FeatureFlag.objects.create(key="everyone", enabled_for_everyone=True)
-        FeatureFlag.objects.create(key="beta").users.add(self.user)
-        FeatureFlag.objects.create(key="other-only").users.add(self.other)
-        self.assertEqual(self.get(self.user).json()["feature_flags"], ["beta", "everyone"])
-        self.assertEqual(self.get(self.other).json()["feature_flags"], ["everyone", "other-only"])
 
-    def test_flag_global_and_assigned_is_listed_once(self):
-        FeatureFlag.objects.create(key="both", enabled_for_everyone=True).users.add(self.user)
-        self.assertEqual(self.get(self.user).json()["feature_flags"], ["both"])
+class FakeEditor:
+    def __init__(self, vendor, host, identity):
+        self.connection = mock.Mock(
+            vendor=vendor,
+            settings_dict={"HOST": host},
+        )
+        self.connection.cursor.return_value = FakeCursor(identity)
+        self.executed = []
 
-    def test_post_not_allowed(self):
-        response = Client().post(self.url, HTTP_AUTHORIZATION=f"Bearer {issue_token(self.user)}")
-        self.assertEqual(response.status_code, 405)
+    def execute(self, sql):
+        self.executed.append(sql)
+
+
+def free_editor():
+    return FakeEditor(
+        "postgresql",
+        f"{FREE_ENDPOINT}-pooler.c-2.eu-west-2.aws.neon.tech",
+        (FREE_PROJECT, FREE_ENDPOINT),
+    )
+
+
+def env(**overrides):
+    base = {
+        migration.CONFIRM_ENV: migration.CONFIRM_VALUE,
+        migration.EXPECT_PROJECT_ENV: FREE_PROJECT,
+        migration.EXPECT_ENDPOINT_ENV: FREE_ENDPOINT,
+    }
+    base.update(overrides)
+    return mock.patch.dict("os.environ", base, clear=True)
+
+
+class DropGuardTests(SimpleTestCase):
+    def test_postgres_without_confirmation_refuses_and_touches_nothing(self):
+        editor = free_editor()
+        with env(**{migration.CONFIRM_ENV: ""}):
+            with self.assertRaises(migration.FeatureFlagsCleanupNotConfirmed):
+                migration.drop_feature_flag_tables(None, editor)
+        self.assertEqual(editor.executed, [])
+
+    def test_neon_identity_from_server_matching_expectations_proceeds(self):
+        editor = free_editor()
+        with env():
+            migration.drop_feature_flag_tables(None, editor)
+        self.assertEqual(len(editor.executed), len(migration.FEATURE_FLAG_TABLES))
+        for sql, table in zip(editor.executed, migration.FEATURE_FLAG_TABLES):
+            self.assertEqual(sql, f"DROP TABLE IF EXISTS {table} RESTRICT")
+
+    def test_paid_server_identity_refuses_even_with_matching_host_config(self):
+        # The server itself reports the paid project/endpoint; configured host
+        # alone must not be trusted.
+        editor = FakeEditor(
+            "postgresql",
+            f"{FREE_ENDPOINT}-pooler.c-2.eu-west-2.aws.neon.tech",  # config lies
+            (PAID_PROJECT, PAID_ENDPOINT),  # server tells the truth
+        )
+        with env():
+            with self.assertRaises(migration.FeatureFlagsCleanupWrongTarget):
+                migration.drop_feature_flag_tables(None, editor)
+        self.assertEqual(editor.executed, [])
+
+    def test_missing_expected_identity_refuses(self):
+        editor = free_editor()
+        for cleared in (migration.EXPECT_PROJECT_ENV, migration.EXPECT_ENDPOINT_ENV):
+            with env(**{cleared: ""}):
+                with self.assertRaises(migration.FeatureFlagsCleanupWrongTarget):
+                    migration.drop_feature_flag_tables(None, editor)
+            self.assertEqual(editor.executed, [])
+
+    def test_non_neon_falls_back_to_explicit_host_match(self):
+        editor = FakeEditor("postgresql", "localhost", ("", ""))
+        with env(**{migration.EXPECT_HOST_ENV: "localhost"}):
+            migration.drop_feature_flag_tables(None, editor)
+        self.assertEqual(len(editor.executed), len(migration.FEATURE_FLAG_TABLES))
+
+    def test_non_neon_without_expected_host_refuses(self):
+        editor = FakeEditor("postgresql", "localhost", ("", ""))
+        with env():
+            with self.assertRaises(migration.FeatureFlagsCleanupWrongTarget):
+                migration.drop_feature_flag_tables(None, editor)
+        self.assertEqual(editor.executed, [])
+
+    def test_child_drops_before_parent(self):
+        order = migration.FEATURE_FLAG_TABLES
+        self.assertLess(order.index("feature_flag_users"), order.index("feature_flag"))
