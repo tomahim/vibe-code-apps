@@ -44,10 +44,12 @@ resource "railway_variable" "cultive_api_port" {
 
 # --- cultive-api-dev variables ---
 #
-# Same shared database and media bucket as the api service, by reference:
-# Railway resolves the $${{...}} expressions at runtime, so no secret value is
-# ever in this repo or in the state (the provider stores the literal reference
-# string, marked sensitive). No schema or data migration is implied.
+# Cultive keeps "cultive-dev db" (paid), while the experimentation API moves
+# to "vibe-code-apps db" (Free). These labels do not rename Postgres databases.
+# DATABASE_URL must be an independent owner-managed secret,
+# not a reference to api.DATABASE_URL. Media bucket variables remain references.
+# Real secrets remain in Railway and the private Terraform state, never Git.
+# No schema or data migration is implied by these declarations.
 
 # Separate signing secret for the standalone backend (decision 2026-11-13):
 # JWTs signed by the source api won't verify on Cultive, so users log in
@@ -70,8 +72,18 @@ resource "railway_variable" "cultive_api_database_url" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_api.id
   name           = "DATABASE_URL"
-  value          = "$${{api.DATABASE_URL}}"
+  value          = "managed-in-railway"
+
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
+
+# Existing resources keep their current value when ignore_changes is added.
+# Therefore this change alone DOES NOT detach an existing api.DATABASE_URL
+# reference. Before changing the source API connection, securely set Cultive's
+# DATABASE_URL to the cultive-dev db URL and verify its resolved target.
+# A newly created service receives the placeholder and needs the same setup.
 
 resource "railway_variable" "cultive_api_bucket" {
   for_each = local.media_bucket_variables
