@@ -25,8 +25,10 @@ const TAB_BY_SLUG = {
 
 const FAVORITES_KEY = "genious-gallery-favorites";
 
-// Little Grains now lives on its own Railway service; the gallery card links
-// out to it instead of mounting a local app. Single source for the address.
+// AudioWorklet requires the dedicated secure origin, even from an HTTP gallery.
+const MUSIC_LIBRARY_URL = "https://vibe-music-https.tailfd1cee.ts.net/apps/music-library";
+
+// Little Grains keeps its existing separate-service destination.
 const LITTLE_GRAINS_URL = "http://cultive-dev.genious-apps-production-railway.internal:8080/";
 
 function loadFavorites() {
@@ -64,6 +66,7 @@ const initialApps = [
     description: "A library of generative film ambiences played live by a real SuperCollider engine in your browser. Press play, read the score, change the code.",
     category: "Creativity",
     icon: "🎼",
+    href: MUSIC_LIBRARY_URL,
   },
   {
     slug: "lithotheque",
@@ -160,6 +163,10 @@ export default function Gallery({ onOpenApp }) {
           result.apps.forEach((app) => {
             // The local wheel replaces the older API card that linked to admin.
             const local = initialApps.find((entry) => entry.slug === app.slug);
+            if (app.slug === "music-library") {
+              merged.set(app.slug, { ...local, ...app, href: MUSIC_LIBRARY_URL });
+              return;
+            }
             merged.set(app.slug, app.slug === "recipes" ? { ...app, ...local, href: undefined, action_label: undefined } : { ...local, ...app });
           });
           setApps([...merged.values()]);
