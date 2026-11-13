@@ -89,50 +89,16 @@ account; they never see the admin's credentials or `TAILSCALE_AUTHKEY`.
    `api.railway.internal:8000` over Railway's private network, so the whole app
    works through that one address.
 
-## Optional private HTTPS on the router (issue #529)
+## Private HTTPS for the music library (issues #443 and #529)
 
-`infra/tailscale-router/` is the router image vendored from
-https://github.com/dotlouis/tailscale-rw, pinned to Tailscale 1.104.1 (the
-version running today), plus `https-serve.sh`. With `TS_HTTPS_SERVICES` set
-(for example `443=ui.railway.internal:8080;8443=cultive-dev.railway.internal:8080`)
-the router serves `https://tailscale-rw.<tailnet>.ts.net` and `:8443` through
-`tailscale serve` with daemon-managed, auto-renewed certificates. Each mapping
-goes through a local `socat` forwarder because serve only proxies to localhost.
-Without the variable the router behaves as before (it only clears any leftover serve config at boot).
+The preparation PR vendors the existing router image and adds an opt-in
+Tailscale Serve proxy. Start with **vibe only**:
+`443=ui.railway.internal:8080`. Cultive's authentication and HTTPS rollout are
+separate work; do not add its mapping as part of this fix.
 
-### What stays unchanged
-- The plain-HTTP URLs (`http://ui.<project>-railway.internal:8080`) keep working:
-  subnet routes, split DNS and CoreDNS are not touched, and there is no
-  HTTP-to-HTTPS redirect.
-- No new Railway service. Extra compute on the existing router is not measured.
-
-### Blast radius (the router is shared)
-A bad router deploy affects every private URL, HTTP included. Mitigations in
-the code: the HTTPS block runs after the node is on the tailnet, every
-failure is logged and ignored, every `tailscale` call has a timeout (serve
-blocks when certificates are not enabled), and unset variable means no-op.
-Remaining risks, not verified without a live router: the userspace router
-build 1.104.1 behaviour of `serve`, a redeploy blip (the router restarts on any
-change of image or variable, and its ephemeral state means a fresh tailnet IP
-that split DNS would need), and Django CSRF/scheme handling behind serve (the
-ui nginx forwards `X-Forwarded-Proto` or falls back to `http`; check admin login
-over HTTPS and add trusted origins if it fails).
-
-### Cutover (manual, in order; nothing here happens on merge)
-1. Tailscale admin console, DNS, Enable HTTPS certificates. This publishes the
-   tailnet and machine names in public certificate transparency logs.
-2. Railway, router service, Settings, Source: today it tracks `dotlouis/tailscale-rw` (branch `main`). Change it to this repository, root directory
-   `/infra/tailscale-router`, and set watch paths to `/infra/tailscale-router/**` so unrelated pushes to master do not redeploy the router. `TAILSCALE_VERSION` (1.104.1) stays as the build argument. Test first with `TS_HTTPS_SERVICES` unset and
-   confirm the plain-HTTP URLs and an admin upload still work.
-3. Set `tailscale_https_services` in Terraform (or the variable in Railway).
-4. Verify: HTTPS on both ports, the HTTP URLs, music-library Play (#443),
-   certificate renewal after a redeploy.
-
-Rollback: unset `TS_HTTPS_SERVICES` (HTTPS gone after the redeploy because the router clears leftover serve config on boot; HTTP unaffected), or point the
-router source back to the template. Both redeploy the router.
-
-Local check of the forwarding logic: `bash infra/tailscale-router/test-https-serve.sh`.
-It uses a stub `tailscale`; it does not prove certificates or serve work.
+Follow [the ordered music HTTPS rollout](music-library-https.md). It covers
+Terraform PR gates, Tailscale HTTPS consent and access policy, HTTP continuity,
+real playback checks, costs, and rollback. Nothing is enabled by default.
 
 ## Router throughput workaround
 
@@ -316,8 +282,9 @@ library (SuperSonic / scsynth on WebAssembly) cannot start its audio engine on
 the deployed address; other apps are unaffected. The app now detects this and
 says so instead of showing SuperSonic's "Missing required features" error.
 
-The real fix is serving the app over HTTPS on the tailnet (for example
-Tailscale HTTPS certificates plus `tailscale serve` in front of the `ui`
-service). Until then, a per-device Chrome workaround is
-`chrome://flags/#unsafely-treat-insecure-origin-as-secure` with the app's
-`http://...railway.internal:8080` origin added, then relaunch Chrome.
+The intended fix is private HTTPS through the existing router, described in
+[the rollout instructions](music-library-https.md). A successful TLS connection
+alone is not acceptance: test Play, non-silent audio, Stop and replay in Chrome.
+Do not disable browser security or add an insecure-origin exception to roll out
+this fix. Existing HTTP URLs remain available, but cannot run this AudioWorklet
+engine without a secure context.

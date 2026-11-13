@@ -2,7 +2,7 @@
 # Optional private HTTPS for services behind the router. Sourced by start.sh
 # after the node is on the tailnet. With TS_HTTPS_SERVICES unset it only clears any leftover serve config.
 #
-#   TS_HTTPS_SERVICES='443=ui.railway.internal:8080;8443=cultive-dev.railway.internal:8080'
+#   TS_HTTPS_SERVICES='443=ui.railway.internal:8080'
 #
 # For each <https-port>=<host>:<port> entry: a socat forwarder listens on
 # 127.0.0.1:<18080+index> and relays to <host>:<port> (tailscale serve can only
@@ -28,7 +28,7 @@ https_serve_setup() {
     # The tailscaled state lives on the router's volume, so a serve config from
     # an earlier boot would survive. Clearing it makes "unset the variable" a
     # real rollback. Bounded, and a no-op when nothing is configured.
-    timeout "$serve_timeout" "$tsbin" --socket="$sock" serve reset >/dev/null 2>&1 || true
+    timeout "$serve_timeout" "$tsbin" --socket="$sock" serve reset >/dev/null 2>&1 || echo "https-serve: WARNING: serve reset failed; verify serve status before treating HTTPS as off" >&2
     return 0
   fi
 
@@ -36,7 +36,7 @@ https_serve_setup() {
   local idx=0 entry hport target host port lport
 
   echo "https-serve: configuring from TS_HTTPS_SERVICES"
-  timeout "$serve_timeout" "$tsbin" --socket="$sock" serve reset >/dev/null 2>&1 || true
+  timeout "$serve_timeout" "$tsbin" --socket="$sock" serve reset >/dev/null 2>&1 || echo "https-serve: WARNING: serve reset failed; verify serve status before treating HTTPS as off" >&2
 
   local IFS=';'
   for entry in $spec; do
@@ -51,10 +51,11 @@ https_serve_setup() {
     fi
     lport=$((base_port + idx)); idx=$((idx + 1))
     # fork: one child per connection, host resolved per connection (Railway
-    # private addresses change when services restart or wake).
-    socat "TCP-LISTEN:${lport},bind=127.0.0.1,fork,reuseaddr" "TCP:${host}:${port}" &
+    # private addresses change when services restart or wake). Force IPv4 to match
+    # the UI's IPv4-only listener and avoid the known Railway IPv6 body stall.
+    socat "TCP-LISTEN:${lport},bind=127.0.0.1,fork,reuseaddr" "TCP4:${host}:${port}" &
     echo "https-serve: 127.0.0.1:${lport} -> ${host}:${port}"
-    if timeout "$serve_timeout" "$tsbin" --socket="$sock" serve --bg --https="$hport" "http://127.0.0.1:${lport}" >/tmp/https-serve-${hport}.log 2>&1; then
+    if timeout "$serve_timeout" "$tsbin" --socket="$sock" serve --yes --bg --https="$hport" "http://127.0.0.1:${lport}" >/tmp/https-serve-${hport}.log 2>&1; then
       echo "https-serve: https :${hport} -> 127.0.0.1:${lport}"
     else
       echo "https-serve: WARNING: serve for :${hport} failed or timed out (are HTTPS certificates enabled for the tailnet?):" >&2

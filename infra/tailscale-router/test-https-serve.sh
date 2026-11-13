@@ -16,7 +16,22 @@ exit 0
 STUB
 chmod +x "$T/ts"
 mkdir -p "$T/www"; echo hello > "$T/www/index.html"
-(cd "$T/www" && python3 -m http.server 18999 --bind 127.0.0.1 >/dev/null 2>&1) & HP=$!
+(cd "$T/www" && exec python3 -m http.server 18999 --bind 127.0.0.1 >"$T/http.log" 2>&1) & HP=$!
+stop_forwarders() {
+  local pid
+  for pid in $(jobs -pr); do
+    [ "$pid" = "$HP" ] && continue
+    kill "$pid" 2>/dev/null || true
+    wait "$pid" 2>/dev/null || true
+  done
+}
+cleanup() {
+  stop_forwarders
+  kill "$HP" 2>/dev/null || true
+  wait "$HP" 2>/dev/null || true
+  rm -rf "$T"
+}
+trap cleanup EXIT
 sleep 1
 export TS_HTTPS_TAILSCALE_BIN="$T/ts" TS_STUB_LOG="$T/log" TS_HTTPS_SERVE_TIMEOUT=2 TS_HTTPS_LOCAL_BASE_PORT=18700
 . ./https-serve.sh
@@ -36,17 +51,17 @@ check "no plain http serve / redirect" "$(grep -c -- '--http=' "$T/log")" 0
 sleep 1
 check "forwarder 1 relays" "$(curl -s http://127.0.0.1:18700/index.html)" hello
 check "forwarder 2 relays" "$(curl -s http://127.0.0.1:18701/index.html)" hello
-pkill -f 'socat TCP-LISTEN:187' ; sleep 1
+stop_forwarders ; sleep 1
 
 # 3. serve fails: function still returns 0
 export TS_HTTPS_SERVICES='443=127.0.0.1:18999' TS_STUB_MODE=fail
 https_serve_safe 2>/dev/null; check "serve failure is swallowed" "$?" 0
-pkill -f 'socat TCP-LISTEN:187' ; sleep 1
+stop_forwarders ; sleep 1
 
 # 4. serve hangs: timeout bounds it
 export TS_STUB_MODE=hang; s=$(date +%s)
 https_serve_safe 2>/dev/null; e=$(( $(date +%s) - s ))
 check "hang bounded by timeout (<12s)" "$([ $e -lt 12 ] && echo yes || echo no)" yes
-pkill -f 'socat TCP-LISTEN:187'
-kill $HP 2>/dev/null; rm -rf "$T"
+stop_forwarders
+
 exit $fail

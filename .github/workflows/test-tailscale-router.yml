@@ -28,3 +28,21 @@ jobs:
         run: docker build --build-arg TAILSCALE_VERSION=1.104.1 -t tailscale-router-test infra/tailscale-router
       - name: Check the binaries are in the image
         run: docker run --rm --entrypoint sh tailscale-router-test -c 'tailscale version && tailscaled --version && coredns -version && socat -V | head -2'
+
+  music-playback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ui/package-lock.json
+      - run: npm ci
+        working-directory: ui
+      - run: npx playwright install --with-deps chromium
+        working-directory: ui
+      - run: npm run build
+        working-directory: ui
+      - name: Production HTTP rejection and HTTPS non-silent audio
+        run: node infra/tailscale-router/music-https-check.mjs
