@@ -1,0 +1,24 @@
+name: Private Cultive HTTPS preparation (no deploy)
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "infra/cultive-https/**"
+      - ".github/workflows/test-cultive-https.yml"
+permissions:
+  contents: read
+jobs:
+  build-and-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 infra/cultive-https/test-config.py
+      - run: sh -n infra/cultive-https/start.sh
+      - run: docker build -t cultive-https-test infra/cultive-https
+      - run: docker run --rm --entrypoint nginx cultive-https-test -t
+      - run: python3 infra/cultive-https/test-proxy.py
+      - name: Reject routing configuration before login
+        run: |
+          if docker run --rm -e TS_ROUTES=10.0.0.0/8 cultive-https-test; then exit 1; fi
+          if docker run --rm -e TS_EXTRA_ARGS=--advertise-exit-node cultive-https-test; then exit 1; fi
+          if docker run --rm cultive-https-test; then exit 1; fi
