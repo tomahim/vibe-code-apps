@@ -35,7 +35,7 @@ resource "railway_project" "genious_apps" {
 # and service ID stable, so deployment workflows, variables and history survive.
 # Its private endpoint remains api.railway.internal; UI and bot keep using it.
 resource "railway_service" "api" {
-  name                       = "vibe-code-apps-dev"
+  name                       = "vibe-code-apps-api-dev"
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3

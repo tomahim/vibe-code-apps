@@ -7,7 +7,7 @@ is run by this change.
 ## Destinations
 
 - `cultive-api-dev`: keep `cultive-dev db` (paid).
-- `vibe-code-apps-dev` (existing `api` service, same ID): move to the restored
+- `vibe-code-apps-api-dev` (existing `api` service, same ID): move to the restored
   `vibe-code-apps dev db` (Free) only after validation.
 - Source content publisher and Cultive progress reader: keep `cultive-dev db`.
 - Experimentation background workers: route individually to the Free target.
@@ -20,7 +20,7 @@ The database names above are user labels, not verified physical database names.
 Keep the Terraform resource address `railway_service.api` and service ID.
 Deployment workflows already select this ID. Preserve the independently managed
 private endpoint `api.railway.internal`: the experimentation UI, bot and image
-fallbacks use it. The service display name is `vibe-code-apps-dev`; changing the
+fallbacks use it. The service display name is `vibe-code-apps-api-dev`; changing the
 private endpoint is not part of this cutover. Verify DNS and proxy health after
 apply. The Cultive UI already uses the standalone Cultive API.
 
