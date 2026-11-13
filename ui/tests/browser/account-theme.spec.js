@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 const pages = [
-  { name: 'review', path: '/apps/content-review', dark: false },
   { name: 'gallery', path: '/', dark: true },
   { name: 'profile', path: '/profile', dark: true },
 ];
@@ -29,7 +28,6 @@ for (const width of [390, 1440]) {
         localStorage.setItem('genious_user', JSON.stringify({ first_name: 'Thomas', email: 'test@example.com' }));
       });
       await page.route('**/api/apps/', route => route.fulfill({ json: { apps: [] } }));
-      await page.route('**/api/apps/content-review/prs', route => route.fulfill({ json: { pull_requests: [] } }));
       await page.route('**/api/learning/garden/', route => route.fulfill({ json: { themes: [], recent_lessons: [], rewards: { drops: 0, carrots: 0 } } }));
       await page.goto(owner.path);
       const avatar = page.getByRole('button', { name: 'Open your account menu' });

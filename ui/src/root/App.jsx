@@ -13,7 +13,6 @@ const ThreeLearningPath = lazy(() => import("../apps/threejs-learning-path/Three
 
 const LittleNotes = lazy(() => import("../apps/little-notes/LittleNotes.jsx"));
 const Artifacts = lazy(() => import("../pages/Artifacts.jsx"));
-const ContentReview = lazy(() => import("../apps/content-review/ContentReview.jsx"));
 const DbDashboard = lazy(() => import("../apps/db-dashboard/DbDashboard.jsx"));
 const Hockey = lazy(() => import("../apps/hockey/Hockey.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
@@ -63,9 +62,6 @@ export default function App() {
     return <Suspense fallback={<div>Opening little notes...</div>}><LittleNotes onHome={() => navigate("/")} /></Suspense>;
   }
 
-  if (path.startsWith("/apps/content-review")) {
-    return <Suspense fallback={<div className="review-page" style={{ paddingTop: 40 }}>Opening the review bench…</div>}><ContentReview /></Suspense>;
-  }
 
   if (path.startsWith("/apps/db-dashboard")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0b0f17", color: "#8d9ab3", display: "grid", placeItems: "center" }}>Opening the dashboard…</div>}><DbDashboard onHome={() => navigate("/")} /></Suspense>;

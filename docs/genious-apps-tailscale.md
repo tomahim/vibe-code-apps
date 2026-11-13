@@ -89,6 +89,17 @@ account; they never see the admin's credentials or `TAILSCALE_AUTHKEY`.
    `api.railway.internal:8000` over Railway's private network, so the whole app
    works through that one address.
 
+## Private HTTPS for the music library (issues #443 and #529)
+
+The preparation PR vendors the existing router image and adds an opt-in
+Tailscale Serve proxy. Start with **vibe only**:
+`443=ui.railway.internal:8080`. Cultive's authentication and HTTPS rollout are
+separate work; do not add its mapping as part of this fix.
+
+Follow [the ordered music HTTPS rollout](music-library-https.md). It covers
+Terraform PR gates, Tailscale HTTPS consent and access policy, HTTP continuity,
+real playback checks, costs, and rollback. Nothing is enabled by default.
+
 ## Router throughput workaround
 
 The existing `tailscale-rw` service has `TS_DEBUG_DISABLE_UDP_GSO=true`.
@@ -271,8 +282,9 @@ library (SuperSonic / scsynth on WebAssembly) cannot start its audio engine on
 the deployed address; other apps are unaffected. The app now detects this and
 says so instead of showing SuperSonic's "Missing required features" error.
 
-The real fix is serving the app over HTTPS on the tailnet (for example
-Tailscale HTTPS certificates plus `tailscale serve` in front of the `ui`
-service). Until then, a per-device Chrome workaround is
-`chrome://flags/#unsafely-treat-insecure-origin-as-secure` with the app's
-`http://...railway.internal:8080` origin added, then relaunch Chrome.
+The intended fix is private HTTPS through the existing router, described in
+[the rollout instructions](music-library-https.md). A successful TLS connection
+alone is not acceptance: test Play, non-silent audio, Stop and replay in Chrome.
+Do not disable browser security or add an insecure-origin exception to roll out
+this fix. Existing HTTP URLs remain available, but cannot run this AudioWorklet
+engine without a secure context.

@@ -30,17 +30,21 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.admin_ui",
     "apps.accounts",
+    # Empty shell kept for its migration history (0001 creates, 0002 drops).
     "apps.feature_flags",
-    "apps.little_grains",
-    "apps.content_review",
     "apps.db_dashboard",
     "apps.curator.apps.CuratorConfig",
-    "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
     "apps.recipes",
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
+    # Cultive owns the Little Grains learning runtime, its lg_* tables on the
+    # paid Cultive database, the atomic-lessons content library and the content
+    # publisher (repo tomahim/cultive); this service no longer installs
+    # apps.learning. learning_cleanup's only migration drops the orphaned lg_*
+    # tables from this service's experimentation database.
+    "apps.learning_cleanup",
 ]
 
 UNFOLD = {
@@ -48,7 +52,7 @@ UNFOLD = {
     "SITE_HEADER": "Vibe Code Apps",
     "SITE_SUBHEADER": "User management",
     "SITE_URL": "/",
-    # Default app list plus the learning dashboard link (see apps/admin_ui/sidebar.py).
+    # Default app list (see apps/admin_ui/sidebar.py).
     "SIDEBAR": {"navigation": "apps.admin_ui.sidebar.navigation"},
 }
 MIDDLEWARE = [
@@ -116,12 +120,6 @@ BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
 # JWT access tokens (see apps/accounts): signed with SECRET_KEY, default 7-day expiry.
 AUTH_JWT_TTL_SECONDS = int(os.environ.get("AUTH_JWT_TTL_SECONDS", str(7 * 24 * 3600)))
 
-
-# Little Grains content review: read open PRs/content trees and post review
-# comments on the one repo and commit quick content edits to PR branches. Fine-grained GitHub token, contents:write (quick edits commit on the PR branch) +
-# pull-requests:read + issues:write on this repo. Unset disables the app (503).
-GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
-GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
 
 
 

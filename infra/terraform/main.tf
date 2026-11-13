@@ -31,8 +31,11 @@ resource "railway_project" "genious_apps" {
   }
 }
 
+# Rename the existing experimentation API in place. Keep its Terraform address
+# and service ID stable, so deployment workflows, variables and history survive.
+# Its private endpoint remains api.railway.internal; UI and bot keep using it.
 resource "railway_service" "api" {
-  name                       = "api"
+  name                       = "vibe-code-apps-api-dev"
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3
@@ -113,6 +116,25 @@ resource "railway_variable" "tailscale_disable_udp_gro" {
   service_id     = local.tailscale_router_id
   name           = "TS_DEBUG_DISABLE_UDP_GRO"
   value          = "true"
+}
+
+# Private HTTPS on the router (issue #529, option A). Off by default: with
+# the default (empty) value no resource is created, so merging this file changes
+# nothing in Railway. The router only reads TS_HTTPS_SERVICES once its source is
+# switched to infra/tailscale-router (see docs/genious-apps-tailscale.md).
+variable "tailscale_https_services" {
+  description = "TS_HTTPS_SERVICES for the router: '<https-port>=<host>:<port>;...'. Empty keeps HTTPS off."
+  type        = string
+  default     = ""
+}
+
+resource "railway_variable" "tailscale_https_services" {
+  count = var.tailscale_https_services == "" ? 0 : 1
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = local.tailscale_router_id
+  name           = "TS_HTTPS_SERVICES"
+  value          = var.tailscale_https_services
 }
 
 # --- ui variables ---

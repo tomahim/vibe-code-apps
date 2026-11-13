@@ -19,8 +19,6 @@ APP_LABELS = {
     "sessions": "Django core",
     "curator": "Little notes",
     "hockey": "Hockey Lab",
-    "learning": "Little Grains",
-    "little_grains": "Little Grains",
     "recipes": "Etchebest",
     "livetrail_scrap": "LiveTrail",
     "rust_learning_path": "Rust path",

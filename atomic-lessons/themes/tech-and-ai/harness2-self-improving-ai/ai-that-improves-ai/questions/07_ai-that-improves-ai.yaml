@@ -1,9 +1,0 @@
-id: 6d9f664c-2beb-4f8d-81f2-92f7de8caedb
-position: 7
-type: type_answer_question
-after_card_position: 4
-prompt: What three-letter acronym does the paper use for recursive self-improvement?
-accepted_answers:
-- RSI
-explanation: 'RSI: a system that turns execution outcomes and reflections into persistent changes to itself, compounding over time.'
-archived: false
