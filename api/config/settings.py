@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     "apps.admin_ui",
     "apps.accounts",
     "apps.feature_flags",
-    "apps.content_review",
     "apps.db_dashboard",
     "apps.curator.apps.CuratorConfig",
     "apps.livetrail_scrap",
@@ -120,12 +119,6 @@ BOT_API_SECRET = os.environ.get("BOT_API_SECRET", "")
 # JWT access tokens (see apps/accounts): signed with SECRET_KEY, default 7-day expiry.
 AUTH_JWT_TTL_SECONDS = int(os.environ.get("AUTH_JWT_TTL_SECONDS", str(7 * 24 * 3600)))
 
-
-# Little Grains content review: read open PRs/content trees and post review
-# comments on the one repo and commit quick content edits to PR branches. Fine-grained GitHub token, contents:write (quick edits commit on the PR branch) +
-# pull-requests:read + issues:write on this repo. Unset disables the app (503).
-GITHUB_REVIEW_TOKEN = os.environ.get("GITHUB_REVIEW_TOKEN", "")
-GITHUB_REVIEW_REPO = os.environ.get("GITHUB_REVIEW_REPO", "tomahim/vibe-code-apps")
 
 
 
