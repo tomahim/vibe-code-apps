@@ -69,6 +69,19 @@ server {
         return 200 '{"status":"ok"}';
     }
 
+    # Only public, vendored engine assets: never compress personalized API/admin.
+    # No long-lived immutable cache: these paths are not content-hashed.
+    location ^~ /supersonic/ {
+        gzip on;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_min_length 1024;
+        gzip_types application/wasm application/javascript text/javascript
+                   application/json application/octet-stream;
+        try_files $uri =404;
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }

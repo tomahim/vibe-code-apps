@@ -1,0 +1,17 @@
+name: Music engine asset compression
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "ui/nginx/**"
+      - "ui/public/supersonic/**"
+      - "ui/tests/proxy/music-assets-compression.py"
+      - ".github/workflows/test-music-compression.yml"
+permissions:
+  contents: read
+jobs:
+  nginx-get-negotiation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 ui/tests/proxy/music-assets-compression.py
