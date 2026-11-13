@@ -31,16 +31,20 @@ INSTALLED_APPS = [
     "apps.admin_ui",
     "apps.accounts",
     "apps.feature_flags",
-    "apps.little_grains",
     "apps.content_review",
     "apps.db_dashboard",
     "apps.curator.apps.CuratorConfig",
-    "apps.learning.apps.LearningConfig",
     "apps.livetrail_scrap",
     "apps.recipes",
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
+    # Cultive owns the Little Grains learning runtime, its lg_* tables on the
+    # paid Cultive database, the atomic-lessons content library and the content
+    # publisher (repo tomahim/cultive); this service no longer installs
+    # apps.learning. learning_cleanup's only migration drops the orphaned lg_*
+    # tables from this service's experimentation database.
+    "apps.learning_cleanup",
 ]
 
 UNFOLD = {
@@ -48,7 +52,7 @@ UNFOLD = {
     "SITE_HEADER": "Vibe Code Apps",
     "SITE_SUBHEADER": "User management",
     "SITE_URL": "/",
-    # Default app list plus the learning dashboard link (see apps/admin_ui/sidebar.py).
+    # Default app list (see apps/admin_ui/sidebar.py).
     "SIDEBAR": {"navigation": "apps.admin_ui.sidebar.navigation"},
 }
 MIDDLEWARE = [

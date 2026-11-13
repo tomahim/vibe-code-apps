@@ -160,3 +160,18 @@ class AdminUserManagementTests(TestCase):
         self.assertEqual(self.client.get("/admin/auth/user/").status_code, 200)
         self.assertEqual(self.client.get("/admin/auth/user/add/").status_code, 403)
         self.assertEqual(self.client.get("/admin/auth/group/").status_code, 403)
+
+
+class SettingsSeparationTests(SimpleTestCase):
+    """The experimentation runtime must not install the learning app.
+
+    apps.learning and the content publisher moved to tomahim/cultive (cultive#35).
+    The runtime must not install apps.learning, or its startup migrate would
+    keep recreating the lg_* tables here; learning_cleanup's guarded migration
+    drops the orphaned copies from the experimentation database instead.
+    """
+
+    def test_runtime_does_not_install_learning(self):
+        from django.conf import settings
+        self.assertNotIn("apps.learning.apps.LearningConfig", settings.INSTALLED_APPS)
+        self.assertIn("apps.learning_cleanup", settings.INSTALLED_APPS)

@@ -107,7 +107,7 @@ class ProductionSecretRefusalTests(TestCase):
             {"sub": str(self.user.pk), "iat": int(time.time()), "exp": int(time.time()) + 600},
             LOCAL_DEV_SECRET_KEY, algorithm="HS256",
         )
-        response = Client().get("/api/apps/little-grains/lessons", HTTP_AUTHORIZATION=f"Bearer {forged}")
+        response = Client().get("/api/auth/me", HTTP_AUTHORIZATION=f"Bearer {forged}")
         self.assertEqual(response.status_code, 503)
 
     def test_system_check_errors(self):
@@ -125,14 +125,14 @@ class ProductionConfiguredTests(TestCase):
         cache.clear()
         self.user = get_user_model().objects.create_user("thomas", "thomas@example.com", "test-only-password")
 
-    def test_login_and_lessons_work(self):
+    def test_login_and_protected_endpoint_work(self):
         response = Client().post(
             "/api/auth/login", '{"email": "thomas@example.com", "password": "test-only-password"}',
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
         token = response.json()["token"]
-        self.assertEqual(Client().get("/api/apps/little-grains/lessons", HTTP_AUTHORIZATION=f"Bearer {token}").status_code, 200)
+        self.assertEqual(Client().get("/api/auth/me", HTTP_AUTHORIZATION=f"Bearer {token}").status_code, 200)
 
     def test_system_check_is_silent(self):
         from .apps import secret_key_guard
@@ -169,7 +169,7 @@ class TerraformPlaceholderRefusalTests(TestCase):
             "managed-in-railway", algorithm="HS256",
         )
         self.assertEqual(
-            Client().get("/api/apps/little-grains/lessons", HTTP_AUTHORIZATION=f"Bearer {forged}").status_code, 503,
+            Client().get("/api/auth/me", HTTP_AUTHORIZATION=f"Bearer {forged}").status_code, 503,
         )
         from .apps import secret_key_guard
 

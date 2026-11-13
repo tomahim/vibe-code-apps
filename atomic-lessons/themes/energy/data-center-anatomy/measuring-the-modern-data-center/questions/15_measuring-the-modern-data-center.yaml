@@ -1,9 +1,0 @@
-id: 8304722d-2c59-47f1-a5b8-5b01a2ad15ff
-position: 15
-type: type_answer_question
-after_card_position: 8
-prompt: 'Complete the two-rivers model: electricity flows down to the chip; ______ flows up to the sky.'
-accepted_answers:
-- heat
-explanation: 'The data center converts electricity to heat: one river flows down the power chain, the other rises up the cooling chain.'
-archived: false
