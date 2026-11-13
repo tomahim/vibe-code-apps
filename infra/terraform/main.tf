@@ -69,12 +69,11 @@ resource "railway_service" "bot" {
 # through the Tailscale Subnet Router in the same Railway environment (see
 # docs/genious-apps-tailscale.md).
 
-# RESEARCH ONLY (issue #529): adopt the template-created router service so its
-# source can later be switched in code. Draft PR to read `terraform plan`
-# (it must show an in-place update or no change, never a replacement or
-# destroy). Do not merge: merging applies it. Attribute values mirror what the
-# Railway dashboard shows today (source dotlouis/tailscale-rw on main, volume
-# tailscale-rw-volume at /var/lib/tailscale); the plan shows any other drift.
+# Live router adoption/source wiring (issue #529), stacked after PR #530.
+# Preparation only: merging this runs Terraform apply and may restart the shared
+# router. Review a fresh plan: import existing service, update in place only,
+# no replacement/destroy or unrelated change. Keep the existing state volume.
+# HTTPS remains disabled (tailscale_https_services defaults to empty).
 resource "railway_service" "tailscale_router" {
   name               = "tailscale-rw"
   project_id         = railway_project.genious_apps.id
@@ -95,8 +94,8 @@ import {
 }
 
 # --- Tailscale router variables ---
-# The template-created router and its volume remain managed in Railway.
-# Adopt only this performance setting; leave its auth key outside Terraform.
+# Router service and volume are adopted above; its auth key stays in Railway.
+# These existing performance settings are preserved during the source switch.
 # Disabling UDP send offloading reduced the 292 kB font download from
 # 21–29 seconds to 2.7–3.5 seconds (2026-10-18).
 resource "railway_variable" "tailscale_disable_udp_gso" {
