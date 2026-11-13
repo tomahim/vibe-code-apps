@@ -37,8 +37,9 @@ suffix or machine name.
   shows the secure-context error; actual HTTPS on that test name boots the real
   engine and produces non-silent output. This uses a local self-signed test
   certificate accepted only by the test context, not a public-chain test.
-- Shell tests use a stub Tailscale binary: they test forwarding, timeout and
-  failure isolation, not real Serve, certificate issuance or the tailnet ACL.
+- Shell tests use a stub Tailscale binary: they test exact allowlist rejection,
+  localhost/IPv4 forwarding, failed-reset refusal, failed-Serve cleanup and
+  bounded timeout, not real Serve, certificate issuance or the tailnet ACL.
 - Live router userspace Serve on 1.104.1, router-side UI DNS resolution, real
   certificate issuance/renewal, and playback at the final private origin remain
   rollout checks. They have not been performed by this preparation PR.
@@ -55,6 +56,41 @@ node infra/tailscale-router/music-https-check.mjs
 
 The browser check measures real audio samples at the engine's output, rather
 than treating `isSecureContext` or a visible Stop button alone as success.
+
+## Security review before takeover
+
+Read [router provenance and maintenance](../infra/tailscale-router/UPSTREAM.md).
+The image now checks downloaded archives against reviewed pinned SHA256 values,
+pins the Debian base digest and restricts newly created state/key files. These
+reduce supply-chain/file-access risk; they are not proof of no vulnerabilities.
+Root, auth-key environment use and broad route discovery are inherited from the
+upstream template. Adding Serve/socat to the same container adds exposure beside
+those credentials. This is still a shared gateway, not strong process isolation.
+
+The helper accepts only empty config or exactly `443=ui.railway.internal:8080`;
+Terraform validates the same allowlist. Other backends, ports, whitespace,
+multiple mappings and socat address options are rejected. Its localhost
+forwarder is stopped if Serve fails. If resetting previous config fails, new
+setup stops, but old rules may remain: verify status before claiming no exposure.
+
+Before rollout, inspect `tailscale serve status --json` and `tailscale funnel
+status` for existing unrelated/public rules, and review the actual tailnet ACL.
+The global reset must not erase someone else's configuration. Verify daemon
+state/certificate cache permissions in the deployed container; no secret or key
+content belongs in a PR. No full live ACL, certificate or vulnerability audit is
+claimed by CI. Review the pinned Tailscale version's security advisories and
+agree who will maintain upstream updates before takeover.
+
+HTTPS forwards the whole UI, including its existing API/admin proxy routes.
+The ACL's intended audience must match existing UI permission, not everyone who
+only needs a music demo. Existing HTTP remains by design and can bypass any
+HTTPS-specific restrictions unless its current access rules are also correct.
+
+An alternative is a separate, narrowly tagged HTTPS service with its own state
+and credentials, leaving the router template unchanged. It separates compromise
+and rollout impact from the subnet router but adds a paid Railway service,
+new auth/state/ACL management and extra maintenance. It is not prepared or
+costed here; choose it explicitly before changing architecture.
 
 ## Cost and privacy decisions before rollout
 
@@ -99,7 +135,9 @@ root directory `/infra/tailscale-router`, watch path `/infra/tailscale-router/**
 Require **no destroys/replacements** and no unrelated service/database changes.
 Ensure the Railway GitHub app can read this repo. Do not use a public domain.
 
-First deploy with `TS_HTTPS_SERVICES` absent. Check router health, unchanged node
+Before this deploy, verify no unrelated Serve/Funnel config is on the node: the
+helper resets all persisted node rules even when disabled. First deploy with
+`TS_HTTPS_SERVICES` absent. Check router health, unchanged node
 IP, existing HTTP UI, admin login and upload, plus Cultive's existing private
 HTTP route because the router is shared. Stop and roll back the source on a
 regression. Preserve the volume even during rollback.
@@ -173,7 +211,7 @@ has its own separate provider and application checks.
 ## Rollback
 
 Set the durable Terraform input/default back to `""` in a reviewed PR. The plan
-should delete only `TS_HTTPS_SERVICES`. Apply/redeploy clears the persisted
+should delete only `TS_HTTPS_SERVICES`. Apply/redeploy attempts to clear the persisted
 Serve configuration at boot via a bounded `tailscale serve reset`. Check logs
 and `serve status`; if reset fails, do not claim HTTPS is off.
 
