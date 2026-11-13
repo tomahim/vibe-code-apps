@@ -1,0 +1,16 @@
+id: ab03f08c-1e17-46b6-bd28-624b84ae1a83
+position: 16
+type: type_answer_question
+after_card_position: 8
+prompt: "A baby accepts carrot flavor more readily after exposure in the womb. Is this an inborn preference or a learned preference?"
+accepted_answers:
+  - "a learned preference"
+  - "learned preference"
+  - "learned"
+  - "a learned one"
+  - "learned through experience"
+  - "an acquired preference"
+  - "acquired preference"
+  - "acquired"
+explanation: "This is a learned preference: early flavor exposure can shape later acceptance. Unlike the inborn liking for sweetness, familiarity with carrot flavor comes from experience. Flavor learning can begin in amniotic fluid and continue through breast milk."
+archived: false

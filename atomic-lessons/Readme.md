@@ -76,6 +76,8 @@ For expression lessons, use at most six cards. Keep card counts even so a questi
 
 ## Lesson questions
 
+**Test useful understanding, not name trivia.** Do not ask learners to recall a person's first name. Prefer questions about the person's ideas, findings, mechanisms or practical implications. A family-name question can make sense for a very famous person when recognizing that person is relevant to the learning goal; do not use name recall as filler.
+
 Keep questions as YAML files in the lesson's `questions/` folder. They belong to the lesson, not to an individual card. Each question has its own `id`, sibling `position`, `type`, `after_card_position`, `prompt`, `explanation`, and `archived`. A `multiple_choice` question has four `choices` (each with `id` and `text`) and one `correct_choice_ids` reference.
 
 Keep the four choices of a `multiple_choice` question nearly the same length and level of detail. The longest or most detailed choice reads as the correct answer, so write distractors that match the correct answer's shape and length rather than padding the correct answer.
