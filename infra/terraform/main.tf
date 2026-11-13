@@ -31,8 +31,11 @@ resource "railway_project" "genious_apps" {
   }
 }
 
+# Rename the existing experimentation API in place. Keep its Terraform address
+# and service ID stable, so deployment workflows, variables and history survive.
+# Its private endpoint remains api.railway.internal; UI and bot keep using it.
 resource "railway_service" "api" {
-  name                       = "api"
+  name                       = "vibe-code-apps-dev"
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3
