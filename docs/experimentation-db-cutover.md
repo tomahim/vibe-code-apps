@@ -37,16 +37,22 @@ health after apply. The Cultive UI already uses the standalone Cultive API.
    Cultive's value securely to `cultive-dev db`, then verify its resolved target
    and health. Complete this before changing the experimentation API connection
    or renaming a service referenced by that expression.
-4. Move the publisher's GitHub `DATABASE_URL` to the Cultive repo: set it
-   fresh there (GitHub secrets cannot be read back) pointing at `cultive-dev
-   db`, along with the five media bucket secrets, then set the
-   `SYNC_ATOMIC_LESSONS_ENABLED` repository variable to `true` and run the
-   ported workflow once manually to confirm the new `lg_sync_log` row on the
-   paid database. Only then merge this PR, which deletes the publisher
-   workflow, the sync command, the learning app and the `atomic-lessons/`
-   tree here, and remove the `DATABASE_URL` and media secrets from this
-   repo. This ordering keeps exactly one publisher at all times. Also
-   repoint `GITHUB_REVIEW_REPO` on `vibe-code-apps-api-dev` to
+4. Move the publisher to the Cultive repo (cultive#35), keeping exactly one
+   publisher at all times: first pause the source publisher (disable
+   `sync-atomic-lessons.yml` via the Actions API and confirm no run is in
+   progress), then set the `DATABASE_URL` Actions secret on the Cultive repo
+   fresh from the vault's paid Cultive connection URL (GitHub secrets cannot
+   be read back) pointing at `cultive-dev db`, set the five media bucket
+   secrets (values retrieved from Railway's signed-in session at cutover,
+   never exposed), and set the `SYNC_ATOMIC_LESSONS_ENABLED` repository
+   variable to `true`. Run the ported workflow once manually and confirm the
+   new `lg_sync_log` row on the paid database. Only then set the three
+   `LEARNING_CLEANUP_*` variables below and merge this PR, which deletes the
+   publisher workflow, the sync command, the learning app and the
+   `atomic-lessons/` tree here, and afterwards remove the `DATABASE_URL` and
+   media secrets from this repo (audited: the retired workflow was their
+   only consumer; the Railway bucket variables stay for the recipes app).
+   Also repoint `GITHUB_REVIEW_REPO` on `vibe-code-apps-api-dev` to
    `tomahim/cultive` so the content-review tool reviews content PRs in
    their new home (its `GITHUB_REVIEW_TOKEN` needs access to that repo).
    The experimentation runtime no longer installs `apps.learning`;
@@ -61,7 +67,10 @@ health after apply. The Cultive UI already uses the standalone Cultive API.
    and `LEARNING_CLEANUP_EXPECT_ENDPOINT_ID=ep-fragrant-sea-zafai3y3`. A
    wrongly targeted DATABASE_URL (as seen during this split) refuses before
    any SQL runs. Set the variables on the experimentation service
-   (`vibe-code-apps-api-dev`) only, once its target is verified. Its
+   (`vibe-code-apps-api-dev`) only, once its target is verified, BEFORE
+   merging this PR: they are inert on `master` (no cleanup app there) and
+   let the merge's deploy run the drop in the same rollout, while a guard
+   refusal fails the deploy with the previous version still serving. Its
    `django_migrations` ledger rows are retained.
 5. With target checks and review complete, update the owner-managed
    experimentation API connection and scoped worker routes. Preserve exact
