@@ -1,9 +1,0 @@
-id: b74dc16d-7874-48d9-b3cf-4560964944f6
-position: 16
-type: type_answer_question
-after_card_position: 8
-prompt: 'Fill in the blank: traffic between servers inside a data center is called ______-west traffic.'
-accepted_answers:
-- east
-explanation: East-west is server-to-server traffic inside the facility; north-south is traffic to and from users.
-archived: false

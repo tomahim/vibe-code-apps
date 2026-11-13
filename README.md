@@ -7,7 +7,7 @@ A collection of small applications. The reusable web platform lives in two proje
 
 ## Atomic lesson authoring
 
-Keep each concept card focused, at least 100 words long, and split into two or three paragraphs with concrete explanations and examples. Concept lessons have 6–10 cards, including a three-key-learnings recap card, and a bank of six questions. Put three alternatives at each of two checkpoints so the learner answers two questions per lesson. See [the content guide](atomic-lessons/Readme.md).
+The atomic-lessons content library, its authoring guide and the content publisher moved to [Cultive](https://github.com/tomahim/cultive) (cultive#35); content PRs are authored there now.
 
 ## Run locally
 

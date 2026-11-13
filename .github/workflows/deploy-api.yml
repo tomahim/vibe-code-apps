@@ -53,6 +53,13 @@ jobs:
       - name: Migrate and test PostgreSQL
         env:
           DATABASE_URL: postgres://django:ci-only-password@localhost:5432/django?sslmode=disable
+          # Scratch CI database: confirm the cleanup and name the scratch host
+          # so the guarded drop path itself is exercised on PostgreSQL. Real
+          # services must set both deliberately.
+          LEARNING_CLEANUP_CONFIRM: drop-lg-tables
+          LEARNING_CLEANUP_EXPECT_HOST: localhost
+          FEATURE_FLAGS_CLEANUP_CONFIRM: drop-feature-flag-tables
+          FEATURE_FLAGS_CLEANUP_EXPECT_HOST: localhost
         run: |
           python manage.py migrate --settings=config.migration_settings --noinput
           python manage.py test

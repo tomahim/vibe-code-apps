@@ -18,7 +18,6 @@ const TAB_BY_SLUG = {
   "rust-learning-path": "Learning",
   "recipes": "Daily organization",
   "threejs-learning-path": "Learning",
-  "content-review": "Tech tools",
   "db-dashboard": "Tech tools",
   "livetrail-scrap": "Sports",
   "little-grains": "Learning",
@@ -101,13 +100,6 @@ const initialApps = [
     category: "Learning",
     icon: "🌾",
     href: LITTLE_GRAINS_URL,
-  },
-  {
-    slug: "content-review",
-    name: "Content Review",
-    description: "Review Little Grains lessons while they are still pull requests: see exactly what changed and send feedback straight to GitHub.",
-    category: "Tech tools",
-    icon: "🔍",
   },
   {
     slug: "db-dashboard",

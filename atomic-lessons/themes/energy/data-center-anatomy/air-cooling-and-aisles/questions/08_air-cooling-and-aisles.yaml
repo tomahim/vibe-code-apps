@@ -1,9 +1,0 @@
-id: b44f1c48-ae58-41ec-9d5e-45b284d3174f
-position: 8
-type: type_answer_question
-after_card_position: 4
-prompt: 'Fill in the blank: servers draw cold air in at the ______ and exhaust hot air at the back.'
-accepted_answers:
-- front
-explanation: The front-to-back airflow contract is what makes aisle-based cooling architecture possible.
-archived: false

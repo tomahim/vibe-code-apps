@@ -3,19 +3,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from apps.learning.admin import progress_dashboard_view
 from .views import app_gallery, health
 
 urlpatterns = [
-    path("admin/learning/progress/", progress_dashboard_view, name="admin-learning-progress"),
     path("admin/", admin.site.urls),
     path("health/", health, name="health"),
     path("api/apps/little-notes/", include("apps.curator.urls")),
-    path("api/learning/", include("apps.learning.urls")),
     path("api/apps/", app_gallery, name="app-gallery"),
     path("api/auth/", include("apps.accounts.urls")),
-    path("api/apps/little-grains/", include("apps.little_grains.urls")),
-    path("api/apps/content-review/", include("apps.content_review.urls")),
     path("api/apps/db-dashboard/", include("apps.db_dashboard.urls")),
     path("api/", include("apps.livetrail_scrap.urls")),
     path("api/apps/rust/", include("apps.rust_learning_path.urls")),

@@ -1,9 +1,0 @@
-id: 7ea12de4-38ff-4602-8c13-fc785425a4ec
-position: 16
-type: type_answer_question
-after_card_position: 8
-prompt: 'Fill in the blank: Tier III facilities are typically designed to be concurrently ______, so maintenance never interrupts computing.'
-accepted_answers:
-- maintainable
-explanation: Concurrent maintainability means any component or path can be serviced while the IT load keeps running.
-archived: false

@@ -1,9 +1,0 @@
-id: 4a43e718-c3de-4132-94fa-668940f4c6f0
-position: 7
-type: type_answer_question
-after_card_position: 4
-prompt: Name the file in each library entry that records the applicable situation, lessons and supporting evidence.
-accepted_answers:
-- EXPERIENCE.md
-explanation: EXPERIENCE.md sits beside the adopted harness tree and records when the lessons apply and what evidence supports them.
-archived: false
