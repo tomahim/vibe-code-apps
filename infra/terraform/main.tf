@@ -122,9 +122,13 @@ resource "railway_variable" "tailscale_disable_udp_gro" {
 # nothing in Railway. The router only reads TS_HTTPS_SERVICES once its source is
 # switched to infra/tailscale-router (see docs/genious-apps-tailscale.md).
 variable "tailscale_https_services" {
-  description = "TS_HTTPS_SERVICES for the router: '<https-port>=<host>:<port>;...'. Empty keeps HTTPS off."
+  description = "Private HTTPS for vibe UI only. Empty keeps HTTPS off."
   type        = string
   default     = ""
+  validation {
+    condition     = contains(["", "443=ui.railway.internal:8080"], var.tailscale_https_services)
+    error_message = "Only empty (off) or 443=ui.railway.internal:8080 is allowed."
+  }
 }
 
 resource "railway_variable" "tailscale_https_services" {

@@ -4,6 +4,7 @@
 # devices reach every service directly at <service>.railway.internal.
 # Nothing is exposed on Railway's public proxy.
 set -euo pipefail
+umask 077
 
 if [ -z "${TAILSCALE_AUTHKEY:-}" ]; then
   echo "TAILSCALE_AUTHKEY is not set — cannot join the tailnet. Set it on the service, then redeploy." >&2
@@ -34,6 +35,7 @@ fi
 case "$ALIAS_SUFFIX" in none|off|false) ALIAS_SUFFIX="" ;; esac
 
 mkdir -p /var/run/tailscale /var/lib/tailscale
+chmod 700 /var/run/tailscale /var/lib/tailscale
 
 tailscaled \
   --tun=userspace-networking \
