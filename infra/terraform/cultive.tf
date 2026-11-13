@@ -21,7 +21,7 @@ resource "railway_variable" "cultive_ui_api_upstream" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_ui.id
   name           = "API_UPSTREAM"
-  value          = "http://api.railway.internal:8000"
+  value          = "http://cultive-api-dev.railway.internal:8000"
 }
 
 # Independent API service, empty for now: no source, no build config and no
