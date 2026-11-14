@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -42,9 +41,6 @@ class Instrument(models.Model):
     )
     source_url = models.URLField(blank=True)
     license = models.CharField(max_length=120, blank=True)
-    added_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL
-    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

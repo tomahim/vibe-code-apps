@@ -80,7 +80,6 @@ def import_instrument(request):
         definition=upload,
         source_url=(request.POST.get("source_url") or "").strip(),
         license=(request.POST.get("license") or "").strip()[:120],
-        added_by=request.user,
     )
     instrument.save()
     return JsonResponse(serialize(instrument, request), status=201)

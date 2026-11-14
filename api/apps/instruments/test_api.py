@@ -52,8 +52,7 @@ class InstrumentAPITests(TestCase):
         self.assertEqual(body["origin"], "imported")
         self.assertFalse(body["ready"])
         self.assertIn("/media/instruments/", body["definition_url"])
-        inst = Instrument.objects.get(name="my_synth")
-        self.assertEqual(inst.added_by.username, "thomas")
+        self.assertTrue(Instrument.objects.filter(name="my_synth").exists())
 
     def test_import_rejects_wrong_extension(self):
         response = self.client.post(

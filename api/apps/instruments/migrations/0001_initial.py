@@ -2,8 +2,6 @@
 
 import apps.instruments.models
 import config.media
-import django.db.models.deletion
-from django.conf import settings
 from django.db import migrations, models
 
 
@@ -12,7 +10,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -29,7 +26,6 @@ class Migration(migrations.Migration):
                 ('source_url', models.URLField(blank=True)),
                 ('license', models.CharField(blank=True, max_length=120)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('added_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['type', 'name'],
