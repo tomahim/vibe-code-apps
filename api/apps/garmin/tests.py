@@ -233,3 +233,109 @@ class GearImportTests(GarminBase):
         self.assertEqual(gear.custom_make_model, "Synthetic Shoe")
         # Only the existing activity is linked.
         self.assertEqual(GarminGearActivity.objects.count(), 1)
+
+
+# ---------------------------------------------------------------------------
+# FIT parser (apps.garmin.fitdec) regression tests.
+# ---------------------------------------------------------------------------
+
+def _fit_header(payload_len):
+    import struct as st
+    return bytes([14, 16]) + st.pack('<H', 1078) + st.pack('<I', payload_len) + b'.FIT' + b'\x00\x00'
+
+
+def _def_msg(local, gmn, fields, dev_fields=(), big_endian=False):
+    """fields: (num, size, base_type); dev_fields: (fnum, size, dev_idx)."""
+    import struct as st
+    rh = 0x40 | (0x20 if dev_fields else 0) | local
+    out = bytes([rh, 0, 1 if big_endian else 0])
+    out += st.pack('>H' if big_endian else '<H', gmn)
+    out += bytes([len(fields)])
+    for num, size, bt in fields:
+        out += bytes([num, size, bt])
+    if dev_fields:
+        out += bytes([len(dev_fields)])
+        for fnum, size, didx in dev_fields:
+            out += bytes([fnum, size, didx])
+    return out
+
+
+def _data_msg(local, values, compressed=False):
+    rh = (0x80 | (local << 5)) if compressed else local
+    return bytes([rh]) + values
+
+
+class FitDecodeTests(TestCase):
+    def _decode_one(self, gmn, fields, values, dev_defs=(), dev_fields=(),
+                    dev_values=b'', big_endian=False, gmn_wanted=None):
+        from apps.garmin.fitdec import _fit_decode
+        payload = b''
+        for dd in dev_defs:
+            payload += _def_msg(0, 206, [(0, 1, 2), (1, 1, 2), (2, 1, 2), (3, 8, 7)])
+            payload += _data_msg(0, dd)
+        payload += _def_msg(1, gmn, fields, dev_fields=dev_fields, big_endian=big_endian)
+        payload += _data_msg(1, values + dev_values)
+        data = _fit_header(len(payload)) + payload + b'\x00\x00'
+        wanted = gmn_wanted or {gmn: 'msgs'}
+        out, _ = _fit_decode(data, wanted, include_records=True)
+        return out.get('msgs', out.get('records', [{}]))[0]
+
+    def test_all_base_types(self):
+        import struct as st
+        fields = [(i, sz, i) for i, (_, sz) in sorted(__import__('apps.garmin.fitdec', fromlist=['_BASE'])._BASE.items())]
+        vals = b''
+        for num, size, bt in fields:
+            ch, sz = __import__('apps.garmin.fitdec', fromlist=['_BASE'])._BASE[bt]
+            vals += st.pack('<' + ch, 7)
+        rec = self._decode_one(18, fields, vals)
+        for num, _, bt in fields:
+            self.assertEqual(rec[num], '07' if bt == 13 else 7, f'base type {bt}')
+
+    def test_big_endian_definition(self):
+        import struct as st
+        rec = self._decode_one(18, [(9, 4, 6)], st.pack('>I', 404503), big_endian=True)
+        self.assertEqual(rec[9], 404503)
+
+    def test_array_field(self):
+        import struct as st
+        rec = self._decode_one(18, [(50, 8, 4)], st.pack('<4H', 1, 2, 3, 4))
+        self.assertEqual(rec[50], [1, 2, 3, 4])
+
+    def test_invalid_sentinel_kept_raw(self):
+        import struct as st
+        rec = self._decode_one(18, [(16, 1, 2), (9, 4, 6)], b'\xff' + st.pack('<I', 0xFFFFFFFF))
+        self.assertEqual(rec[16], 255)
+        self.assertEqual(rec[9], 4294967295)
+
+    def test_string_field(self):
+        rec = self._decode_one(18, [(3, 8, 7)], b'Zwift\x00\x00\x00')
+        self.assertEqual(rec[3], 'Zwift')
+
+    def test_compressed_timestamp_header(self):
+        import struct as st
+        payload = _def_msg(2, 20, [(3, 1, 2), (5, 4, 6)]) + _data_msg(2, b'\x98' + st.pack('<I', 12345), compressed=True)
+        from apps.garmin.fitdec import _fit_decode
+        data = _fit_header(len(payload)) + payload + b'\x00\x00'
+        out, rc = _fit_decode(data, {20: 'records'}, include_records=True)
+        self.assertEqual(rc, 1)
+        self.assertEqual(out['records'][0][3], 152)
+        self.assertEqual(out['records'][0][5], 12345)
+
+    def test_developer_fields_resolved_via_definitions(self):
+        import struct as st
+        dev_def = bytes([0, 9, 11]) + b'doubling\x00'[:8]  # idx 0, field 9, base uint16z, name
+        rec = self._decode_one(
+            20, [(3, 1, 2)], b'\x98',
+            dev_defs=[dev_def], dev_fields=[(9, 2, 0)], dev_values=st.pack('<H', 42),
+            gmn_wanted={20: 'records'})
+        self.assertEqual(rec[3], 152)
+        self.assertEqual(rec['dev:0:9'], 42)
+
+    def test_record_count_without_decode(self):
+        import struct as st
+        from apps.garmin.fitdec import _fit_decode
+        payload = _def_msg(1, 20, [(3, 1, 2)]) + _data_msg(1, b'\x90') * 3
+        data = _fit_header(len(payload)) + payload + b'\x00\x00'
+        out, rc = _fit_decode(data, {20: 'records'}, include_records=False)
+        self.assertEqual(rc, 3)
+        self.assertNotIn('records', out)
