@@ -44,17 +44,17 @@ m.spawn(async (m) => {
         const fill = ["sc808_tomhi", "sc808_tomhi", "sc808_tommid",
                       "sc808_tommid", "sc808_tomlo", "sc808_tomlo",
                       "sc808_snare", "sc808_cymbal"];
-        m.play(fill[slot - 8], { amp: slot === 15 ? 0.45 : 0.35, pan: (slot - 12) * 0.2 });
+        m.play(fill[slot - 8], { amp: slot === 15 ? 0.028 : 0.02, pan: (slot - 12) * 0.2 });
       } else {
-        if (kicks.includes(slot)) m.play("sc808_bassdrum", { amp: 0.6 });
-        if (slot === 4 || slot === 12) m.play("sc808_snare", { amp: 0.45 });
-        if (slot === 12 && bar % 4 === 3) m.play("sc808_clap", { amp: 0.28 });
-        if (slot === 7) m.play("sc808_rimshot", { amp: 0.2, pan: 0.3 });
+        if (kicks.includes(slot)) m.play("sc808_bassdrum", { amp: 0.10 });
+        if (slot === 4 || slot === 12) m.play("sc808_snare", { amp: 0.09 });
+        if (slot === 12 && bar % 4 === 3) m.play("sc808_clap", { amp: 0.06 });
+        if (slot === 7) m.play("sc808_rimshot", { amp: 0.05, pan: 0.3 });
         if (slot % 2 === 0) {
-          m.play("sc808_closed_hihat", { amp: slot % 4 === 2 ? 0.26 : 0.15, pan: -0.2 });
+          m.play("sc808_closed_hihat", { amp: slot % 4 === 2 ? 0.05 : 0.03, pan: -0.2 });
         }
-        if (slot === 14 && bar % 2 === 1) m.play("sc808_open_hihat", { amp: 0.24, pan: -0.2 });
-        if (slot === 0 && phraseBar === 0) m.play("sc808_cymbal", { amp: 0.35, release: 4 });
+        if (slot === 14 && bar % 2 === 1) m.play("sc808_open_hihat", { amp: 0.06, pan: -0.2 });
+        if (slot === 0 && phraseBar === 0) m.play("sc808_cymbal", { amp: 0.022, release: 4 });
       }
       await m.sleep(S);
     }
@@ -69,7 +69,7 @@ m.spawn(async (m) => {
     m.play("tb303", {
       note: BASSLINE[i % BASSLINE.length],
       dur: 0.2, attack: 0.005, release: 0.15,
-      amp: 0.22, cutoff: m.rrand(65, 85), res: 0.4,
+      amp: 0.05, cutoff: m.rrand(65, 85), res: 0.4,
     });
     i += 1;
     await m.sleep(S * 2);
@@ -84,11 +84,11 @@ m.spawn(async (m) => {
     if (bar % 2 === 0) {
       m.chord("blade", chord, {
         at: 6 * S, dur: 0.35, attack: 0.005, release: 0.25,
-        amp: 0.18, cutoff: 75, vibrato_rate: 5, vibrato_depth: 0.08,
+        amp: 0.04, cutoff: 75, vibrato_rate: 5, vibrato_depth: 0.08,
       });
       m.chord("blade", chord, {
         at: 14 * S, dur: 0.3, attack: 0.005, release: 0.2,
-        amp: 0.14, cutoff: 70, vibrato_rate: 5, vibrato_depth: 0.08,
+        amp: 0.03, cutoff: 70, vibrato_rate: 5, vibrato_depth: 0.08,
       });
     }
     bar += 1;
@@ -101,7 +101,7 @@ m.spawn(async (m) => {
   while (m.playing) {
     m.chord("prophet", ["D2", "A2"], {
       attack: 0.5, dur: 6, release: 3,
-      amp: 0.12, cutoff: 52, res: 0.4,
+      amp: 0.03, cutoff: 52, res: 0.4,
     });
     await m.sleep(BAR * 2);
   }
@@ -112,13 +112,13 @@ m.spawn(async (m) => {
 m.spawn(async (m) => {
   let phrase = 0;
   while (m.playing) {
-    m.play("dull_bell", { note: "A5", amp: 0.07, release: 6, pan: 0.4 });
+    m.play("dull_bell", { note: "A5", amp: 0.01, release: 6, pan: 0.4 });
     phrase += 1;
     if (phrase % 2 === 0) {
       for (let j = 0; j < MOTIF.length; j += 1) {
         m.play("hoover", {
           note: MOTIF[j], dur: 0.4, attack: 0.02, release: 0.3,
-          amp: 0.14, cutoff: 80,
+          amp: 0.012, cutoff: 80,
         });
         await m.sleep(S * 2);
       }
@@ -135,7 +135,7 @@ m.spawn(async (m) => {
     await m.sleep(BAR * 6);
     m.play("growl", {
       note: "D1", attack: 1, dur: 3, release: 1.5,
-      amp: 0.16, cutoff: 45,
+      amp: 0.012, cutoff: 45,
     });
     await m.sleep(BAR * 2);
   }
