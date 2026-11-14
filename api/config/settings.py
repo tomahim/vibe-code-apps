@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "apps.hockey.apps.HockeyConfig",
     "apps.instruments.apps.InstrumentsConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
+    "simple_history",
     "apps.music_library.apps.MusicLibraryConfig",
     # Cultive owns the Little Grains learning runtime, its lg_* tables on the
     # paid Cultive database, the atomic-lessons content library and the content
