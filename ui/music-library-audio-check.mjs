@@ -151,6 +151,25 @@ for (let i = 0; i < 40; i += 1) {
 }
 await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
 
+// 8. Instrument browser page: renders the catalogue, search works, preview plays.
+await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library/sounds'));
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await settle(600);
+await page.screenshot({ path: '/tmp/music-library-5-instruments.png' });
+const cardCount = await page.locator('.ib-card').count();
+check('instrument browser lists catalogue', cardCount === 61, `cards: ${cardCount}`);
+await page.locator('.ml-search').fill('tb303');
+await settle(500);
+const tb = await page.locator('.ib-card').allTextContents();
+check('instrument search filters', tb.length === 1 && tb[0].includes('tb303'), tb.join('|'));
+await page.locator('.ib-card').getByRole('button', { name: /Preview/ }).click();
+await settle(1500);
+const ibNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+check('instrument preview sounds', ibNodes.some((n) => n.includes('tb303')), `nodes: ${ibNodes.join(', ')}`);
+const stopVisible = await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).isVisible().catch(() => false);
+if (stopVisible) await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).click();
+await settle(400);
+
 await browser.close();
 server.kill();
 

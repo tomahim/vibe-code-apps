@@ -16,6 +16,7 @@ urlpatterns = [
     path("api/apps/rust/", include("apps.rust_learning_path.urls")),
     path("api/apps/recipes/", include("apps.recipes.urls")),
     path("api/apps/hockey/", include("apps.hockey.urls")),
+    path("api/apps/instruments/", include("apps.instruments.urls")),
     path("api/apps/knob-conservatory/", include("apps.knob_conservatory.urls")),
 ]
 

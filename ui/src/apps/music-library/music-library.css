@@ -295,3 +295,68 @@
   cursor: pointer;
 }
 .ml-step-dot.active { background: #d8b96a; color: #0d1017; border-color: #d8b96a; }
+
+/* Instrument browser */
+.ib-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  max-width: 860px;
+  margin: 0 auto 18px;
+}
+
+.ib-card {
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.ib-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ib-card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #e8e4d8;
+  word-break: break-all;
+}
+
+.ib-badge {
+  font-size: 11px;
+  border-radius: 6px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.ib-badge.ready { background: #26452e; color: #9fd8ab; }
+.ib-badge.ondemand { background: #4a3a1c; color: #e3c078; }
+.ib-badge.imported { background: #2c3a55; color: #9db8e8; }
+
+.ib-blurb {
+  color: #9aa0b0;
+  font-size: 13px;
+  margin: 6px 0 10px;
+}
+
+.ib-actions .ml-play { padding: 6px 14px; font-size: 13px; }
+
+.ib-add {
+  max-width: 860px;
+  margin: 0 auto 30px;
+  border-top: 1px solid #2a3040;
+  padding-top: 14px;
+}
+
+.ib-add h2 { color: #e8e4d8; font-size: 18px; }
+
+.ml-sounds-link {
+  color: #d4a94e;
+  font-size: 14px;
+  align-self: center;
+  white-space: nowrap;
+}

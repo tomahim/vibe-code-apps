@@ -160,6 +160,42 @@ class MusicEngine {
     return SuperSonic.osc.ntpNow();
   }
 
+  // Load an additional vendored synthdef on demand (beyond the boot palette).
+  async ensureSynth(short) {
+    if (!this.extraSynths) this.extraSynths = new Set();
+    if (SYNTH_PALETTE.includes(short) || this.extraSynths.has(short)) return;
+    await this.supersonic.loadSynthDefs([fullName(short)]);
+    this.extraSynths.add(short);
+  }
+
+  // Import a .scsyndef binary (File/Blob/ArrayBuffer). The engine validates the
+  // data and extracts the real definition name from it; we diff the loaded set
+  // to learn that name. Throws with the engine's message when invalid.
+  async importSynth(source) {
+    const before = new Set(this.supersonic.loadedSynthDefs);
+    await this.supersonic.loadSynthDef(source);
+    const added = this.supersonic.loadedSynthDefs.filter((n) => !before.has(n));
+    if (added.length === 0) throw new Error("No new instrument found in that file.");
+    return added[0];
+  }
+
+  // Play one bounded preview note right now. `raw` names are used as-is
+  // (imported instruments); short catalog names get the sonic-pi- prefix.
+  preview(defName, { raw = false, amp = 0.25 } = {}) {
+    const id = this.supersonic.nextNodeId();
+    const name = raw ? defName : fullName(defName);
+    const bundle = SuperSonic.osc.encodeBundle(this.ntpNow() + 0.1, [
+      ["/s_new", name, id, 0, this.sourceGroup, "note", 60, "amp", amp, "out_bus", MUSIC_BUS],
+    ]);
+    this.supersonic.sendOSC(bundle);
+    return id;
+  }
+
+  freeNode(id) {
+    if (!this.ready) return;
+    this.supersonic.send("/n_free", id);
+  }
+
   // Drop every pending scheduled bundle and silence all sounding notes.
   stopAll() {
     if (!this.ready) return;
