@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "apps.recipes",
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
+    "apps.garmin.apps.GarminConfig",
     "apps.instruments.apps.InstrumentsConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
     "simple_history",
