@@ -148,3 +148,61 @@ def categories(request):
             ]
         }
     )
+
+
+def serialize_version(record, full=False):
+    data = {
+        "version_id": record.history_id,
+        "saved_at": record.history_date.isoformat(),
+        "kind": {"+": "created", "~": "edited", "-": "deleted"}[record.history_type],
+        "reason": record.history_change_reason or "",
+        "name": record.name,
+        "description": record.description,
+    }
+    if full:
+        data["code"] = record.code
+    return data
+
+
+def _track_history(pk):
+    # Versions of a deleted track stay in the history table but are not served.
+    if not Track.objects.filter(pk=pk).exists():
+        return None
+    return Track.history.filter(id=pk).exclude(history_type="-")
+
+
+@require_GET
+def track_versions(request, pk):
+    history = _track_history(pk)
+    if history is None:
+        return JsonResponse({"error": "Track not found."}, status=404)
+    return JsonResponse({"versions": [serialize_version(r) for r in history]})
+
+
+@require_GET
+def track_version_detail(request, pk, version_id):
+    history = _track_history(pk)
+    record = history.filter(history_id=version_id).first() if history is not None else None
+    if record is None:
+        return JsonResponse({"error": "Version not found."}, status=404)
+    return JsonResponse(serialize_version(record, full=True))
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+@jwt_required
+def restore_track_version(request, pk, version_id):
+    """Copy an older version back onto the track. The restore is itself saved as a
+    new version, so nothing in the history is rewritten or removed."""
+    history = _track_history(pk)
+    record = history.filter(history_id=version_id).first() if history is not None else None
+    if record is None:
+        return JsonResponse({"error": "Version not found."}, status=404)
+    track = Track.objects.select_related("category").get(pk=pk)
+    track.name = record.name
+    track.description = record.description
+    track.code = record.code
+    track.category_id = record.category_id if Category.objects.filter(pk=record.category_id).exists() else None
+    track._change_reason = f"Restored from version of {record.history_date:%Y-%m-%d %H:%M}"[:100]
+    track.save()
+    return JsonResponse(serialize_track(track, full=True))

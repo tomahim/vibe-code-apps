@@ -1,4 +1,5 @@
 from django.db import models
+from simple_history.models import HistoricalRecords
 
 
 class Category(models.Model):
@@ -27,6 +28,9 @@ class Track(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # One row per saved version (create, edit, restore). Rows are never edited or deleted
+    # by the app: a restore writes a new version on top.
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ["name"]
