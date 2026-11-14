@@ -122,14 +122,61 @@ def scan_fit_files(export_dir, hash_all=False):
     return rows
 
 
-def post_batch(session, api_base, dataset, records):
-    r = session.post(
-        f"{api_base}/api/apps/garmin/import/{dataset}/",
-        json={"records": records},
-        timeout=120,
-    )
-    r.raise_for_status()
-    return r.json()
+# The UI proxy caps request bodies (nginx client_max_body_size), so batches
+# are bounded by serialized bytes, not just record count. A single record
+# bigger than the batch cap goes out as its own batch: every record is sent.
+MAX_BATCH_BYTES = 700_000
+
+
+def batched(records, max_records, max_bytes=MAX_BATCH_BYTES):
+    """Yield chunks whose JSON body stays under max_bytes (big records alone)."""
+    chunk, size = [], 20  # 20 = {"records": []} envelope slack
+    for rec in records:
+        rec_size = len(json.dumps(rec)) + 2
+        if chunk and (len(chunk) >= max_records or size + rec_size > max_bytes):
+            yield chunk
+            chunk, size = [], 20
+        chunk.append(rec)
+        size += rec_size
+    if chunk:
+        yield chunk
+
+
+def post_batch(session, api_base, dataset, records, attempts=3):
+    """POST one batch; retry only transient failures (uploads are idempotent)."""
+    body = {"records": records}
+    for attempt in range(1, attempts + 1):
+        try:
+            r = session.post(
+                f"{api_base}/api/apps/garmin/import/{dataset}/",
+                json=body,
+                timeout=120,
+            )
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            if attempt == attempts:
+                sys.exit(f"{dataset}: request failed {attempts}x ({exc}). "
+                         f"Re-run the script: already-written batches are "
+                         f"updated in place, nothing is duplicated.")
+            wait = 10 * attempt
+            print(f"  request timed out, retry {attempt}/{attempts - 1} "
+                  f"in {wait}s", flush=True)
+            time.sleep(wait)
+            continue
+        if r.status_code == 413:
+            sys.exit(
+                f"{dataset}: batch of {len(json.dumps(body)) / 1e6:.1f} MB "
+                f"refused (413, request too large). The proxy's route limit "
+                f"needs the import-limit change first; smaller batches won't "
+                f"fix a single oversized record."
+            )
+        if r.status_code >= 500 and attempt < attempts:
+            wait = 10 * attempt
+            print(f"  server error {r.status_code}, retry {attempt}/{attempts - 1} "
+                  f"in {wait}s", flush=True)
+            time.sleep(wait)
+            continue
+        r.raise_for_status()
+        return r.json()
 
 
 def main():
@@ -158,15 +205,12 @@ def main():
         print(f"{dataset}: {len(records)} records read", flush=True)
         if args.dry_run or not records:
             continue
-        batches = (len(records) + args.batch_size - 1) // args.batch_size
+        chunks = list(batched(records, args.batch_size))
         sent = 0
-        for i in range(0, len(records), args.batch_size):
-            result = post_batch(
-                session, args.api_base, dataset,
-                records[i:i + args.batch_size],
-            )
+        for i, chunk in enumerate(chunks, 1):
+            result = post_batch(session, args.api_base, dataset, chunk)
             sent += result["written"]
-            print(f"  {dataset}: batch {i // args.batch_size + 1}/{batches} "
+            print(f"  {dataset}: batch {i}/{len(chunks)} "
                   f"- {sent}/{len(records)} written ({time.time()-t0:.0f}s)",
                   flush=True)
 
@@ -176,13 +220,14 @@ def main():
         act_rows = [r for r, t in rows if t == 4]
         totals["activity-files"] = len(act_rows)
         if not args.dry_run:
-            batches = (len(act_rows) + args.batch_size - 1) // args.batch_size
-            for i in range(0, len(act_rows), args.batch_size):
-                post_batch(session, args.api_base, "activity-files",
-                           act_rows[i:i + args.batch_size])
-                print(f"  activity-files: batch {i // args.batch_size + 1}/{batches} "
-                      f"- {min(i + args.batch_size, len(act_rows))}/{len(act_rows)} sent "
-                      f"({time.time()-t0:.0f}s)", flush=True)
+            chunks = list(batched(act_rows, args.batch_size))
+            sent = 0
+            for i, chunk in enumerate(chunks, 1):
+                post_batch(session, args.api_base, "activity-files", chunk)
+                sent += len(chunk)
+                print(f"  activity-files: batch {i}/{len(chunks)} "
+                      f"- {sent}/{len(act_rows)} sent ({time.time()-t0:.0f}s)",
+                      flush=True)
 
     print(json.dumps({"dry_run": args.dry_run, "records": totals}, indent=2))
 
