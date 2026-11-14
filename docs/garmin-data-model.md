@@ -48,15 +48,28 @@ row per file.
 
 Preservation has two distinct layers:
 
-1. **Raw bytes.** `garmin_activity_file` keeps sha256 + size per file so the
-   original FIT bytes (the only truly lossless form) stay retrievable and
-   verifiable. The loader records `storage_ref`; the bytes themselves stay in
-   the local export unless option D is approved.
+1. **Raw bytes.** The original FIT bytes (the only truly lossless form)
+   stay in the user's own export archive. `garmin_activity_file` keeps
+   sha256 + size + `storage_ref` per file - a verifiable reference, NOT a
+   copy. No bytes are uploaded anywhere without explicit approval (option D).
 2. **Decoded layer.** Typed columns cover known fields. Unknown message
-   types and developer fields are not yet semantically decoded: they are
-   preserved as raw bytes only (layer 1), not as queryable rows. Real Garmin activity files also carry
-   undocumented per-second message types that fall in this category -
-   dropping raw bytes would lose them.
+   types and developer fields are not yet semantically decoded: they exist
+   only as raw bytes in the user's archive (layer 1), not as queryable
+   rows. Real Garmin activity files carry undocumented per-second message
+   types (two types, ~60% of all activity-file messages) plus a small
+   number of developer-data definitions - dropping raw bytes would lose
+   them.
+
+FIT message coverage, from a full message-level census of a real export:
+
+- Decoded today by the loader: `file_id` (type), `session` (start time,
+  sport) of activity files.
+- Known message types present and NOT yet decoded (identified remaining
+  work): per-second `record`, `lap`, `event`, `activity`, `sport`,
+  `device_info`, `zones_target`, `hrv`, and developer data
+  (`developer_data_id`, `field_description`).
+- Undocumented message types present (raw-bytes-only until reverse
+  engineered): ~15 types, including the two per-second types above.
 
 ## Model overview (29 tables)
 
@@ -88,8 +101,8 @@ Supporting:
   `garmin_personal_record`, `garmin_workout`, `garmin_workout_schedule`,
   `garmin_course`, `garmin_user_goal`, `garmin_weekly_report`
 
-High-volume time series (models + migration exist; import is gated on the
-storage decision below):
+High-volume time series (models + migration exist; FIT decoders and import
+plumbing not yet implemented; sample import also needs a storage pick):
 - `garmin_activity_sample` — per-second activity records (timestamp, position,
   altitude, speed, HR, cadence, power, run dynamics + `extra` JSONB for
   decoded-but-untyped fields).
@@ -124,10 +137,9 @@ derived, not measured on Postgres:
 | C | downsampled 1/10 s | ~70-85 MB | loses 1 s detail - conflicts with the maximum-detail request |
 | D | raw FIT in the existing media bucket + on-demand sample import | bucket bytes only | incremental bucket cost/egress unknown; needs the provider account to price |
 
-No default is chosen. A maximum-detail goal points at B or D, but B is gated
-on real headroom and D on bucket pricing; both checks are listed as decision
-questions. Monitoring/segment decoding stays out of every option until
-explicitly approved.
+No default is chosen. A maximum-detail goal points at B or D; B is gated on
+real headroom, D is now cost-grounded (~$0.015/month on the existing bucket)
+but still needs explicit approval before any bytes move.
 
 ## Import flow
 
@@ -139,11 +151,18 @@ file. Idempotent: re-running an import updates in place.
 
 ## Decision questions
 
-1. Storage option A/B/C/D for per-second activity samples (none chosen;
-   sample import is gated in the loader until picked).
+1. Storage option A/B/C/D for per-second activity samples (none chosen).
+   Option D cost grounding: the existing shared bucket is a Railway Bucket
+   priced at $0.015/GB-month with free operations and egress (repo's own
+   docs/object-storage.md); a full export's FIT bytes (~0.4 GB) round up to
+   ~$0.015/month on the existing bucket - no new resource needed.
 2. Actual free-db size: the `instinct_readonly` role's login failed at
    proposal time, so option B's headroom is unverified.
-3. Bucket (option D): incremental-cost check on the existing media bucket
-   needs provider account access before any bytes move.
-4. Monitoring/segment FITs: keep as manifest + raw bytes, or approve
-   decoding work (separate storage discussion, ~10.6M rows 1:1).
+
+Remaining implementation work (part of the original full-detail scope, not
+deferrals awaiting approval):
+
+- FIT decoders for the known message types listed above (lap, event, sport,
+  device_info, developer fields, then per-second records).
+- Monitoring/segment message decoders and their import plumbing.
+- Sample-table import plumbing, enabled once a storage option is picked.
