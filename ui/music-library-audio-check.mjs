@@ -164,6 +164,24 @@ for (let i = 0; i < 40; i += 1) {
 }
 await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
 
+// 9. Sound palette: opens, searches, previews (engine node appears), inserts
+// a playable call into the editor. The instruments API is not deployed on
+// this branch, so this exercises the static-catalogue fallback path.
+await page.getByRole('button', { name: /Available sounds/ }).click();
+await page.locator('.ml-sound-palette .ml-search').fill('tb303');
+await settle(400);
+const soundRows = await page.locator('.ml-sound-list li').count();
+check('palette: search filters catalogue', soundRows === 1, `rows: ${soundRows}`);
+await page.locator('.ml-sound-list li .ml-sound-preview').click();
+await settle(700); // probe before the 1.2s auto-free
+const paletteNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+check('palette: preview sounds', paletteNodes.some((n) => n.includes('tb303')), `nodes: ${paletteNodes.join(', ')}`);
+await page.locator('.ml-sound-list li .ml-sound-insert').click();
+await settle(400);
+const paletteEditorText = await page.locator('.cm-content').innerText();
+check('palette: insert adds a playable call', paletteEditorText.includes('m.play("tb303"'), 'm.play("tb303", ...) in editor');
+await page.getByRole('button', { name: /Hide sounds/ }).click();
+
 // 10. UI CRUD roundtrip against the API: sign in, create through the UI,
 // edit, save, reload, and verify the edit persisted from the server.
 await page.evaluate(async () => {

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { javascript } from "@codemirror/lang-javascript";
 import CodeEditor from "../../components/CodeEditor.jsx";
-import { getEngine, SYNTH_PALETTE } from "./engine/supersonicEngine.js";
+import { getEngine, MUSIC_BUS } from "./engine/supersonicEngine.js";
+import { SOUND_CATALOG } from "./soundCatalog.js";
 import { createPerformance } from "./engine/player.js";
 import { tracks as bundledTracks } from "./tracks/index.js";
 import Tutorial from "./Tutorial.jsx";
@@ -107,6 +108,10 @@ export default function MusicLibrary({ onHome }) {
   const [volume, setVolume] = useState(0.9);
   const [startedCode, setStartedCode] = useState("");
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [paletteItems, setPaletteItems] = useState(null); // null until first open
+  const [paletteQuery, setPaletteQuery] = useState("");
+  const [previewingSound, setPreviewingSound] = useState("");
+  const editorViewRef = useRef(null);
 
   const [creating, setCreating] = useState(false);
   const [details, setDetails] = useState({ name: "", description: "", category: "" });
@@ -308,6 +313,70 @@ export default function MusicLibrary({ onHome }) {
     engine.setMasterVolume(value);
   }
 
+  // The DB-backed catalogue comes from the instruments API (#556). When that
+  // backend is not deployed the palette falls back to the static catalogue
+  // copy and says nothing - the same names either way.
+  async function loadPalette() {
+    try {
+      const response = await fetch("/api/apps/instruments/instruments/");
+      if (!response.ok) throw new Error(`instruments API ${response.status}`);
+      const data = await response.json();
+      setPaletteItems(data.instruments);
+    } catch {
+      setPaletteItems(SOUND_CATALOG);
+    }
+  }
+
+  function togglePalette() {
+    setPaletteOpen((v) => {
+      if (!v && paletteItems === null) loadPalette();
+      return !v;
+    });
+  }
+
+  async function previewSound(item) {
+    setError("");
+    try {
+      if (!engine.ready) {
+        setBooting(true);
+        await engine.boot(setStatus);
+        engine.setMasterVolume(volume);
+        setBooting(false);
+      }
+      let id;
+      if (item.definition_url) {
+        // Imported definition: load the persisted file, then play its real name.
+        const response = await fetch(item.definition_url);
+        if (!response.ok) throw new Error(`could not fetch the definition (${response.status})`);
+        const { name } = await engine.supersonic.loadSynthDef(await response.arrayBuffer());
+        id = engine.supersonic.nextNodeId();
+        engine.supersonic.send(
+          "/s_new", name, id, 0, engine.sourceGroup, "note", 60, "amp", 0.25, "out_bus", MUSIC_BUS,
+        );
+      } else {
+        if (!engine.supersonic.loadedSynthDefs.has(`sonic-pi-${item.name}`)) {
+          await engine.supersonic.loadSynthDef(item.name);
+        }
+        id = engine.scheduleNote(engine.ntpNow() + 0.1, item.name, { note: 60, amp: 0.25 });
+      }
+      setPreviewingSound(item.name);
+      setTimeout(() => {
+        engine.supersonic?.send("/n_free", id);
+        setPreviewingSound((current) => (current === item.name ? "" : current));
+      }, 1200);
+    } catch (err) {
+      setBooting(false);
+      setError(`Could not preview ${item.name}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  function insertSound(item) {
+    const view = editorViewRef.current;
+    if (!view) return;
+    view.dispatch(view.state.replaceSelection(`m.play("${item.name}", { note: "C4", dur: 1 });\n`));
+    view.focus();
+  }
+
   const totalPages = Math.max(1, Math.ceil(count / 20));
 
   return (
@@ -497,7 +566,7 @@ export default function MusicLibrary({ onHome }) {
             <button
               type="button"
               className="ml-palette-toggle"
-              onClick={() => setPaletteOpen((v) => !v)}
+              onClick={togglePalette}
             >
               {paletteOpen ? "Hide sounds" : "Available sounds"}
             </button>
@@ -535,16 +604,53 @@ export default function MusicLibrary({ onHome }) {
           </div>
         )}
         {paletteOpen && (
-          <p className="ml-palette">
-            {SYNTH_PALETTE.join(", ")} - each note also takes amp, pan, attack,
-            dur, release, cutoff, res; notes as names ("C#3") or MIDI numbers.
-          </p>
+          <div className="ml-sound-palette">
+            <input
+              type="search"
+              className="ml-search"
+              placeholder="Search sounds…"
+              value={paletteQuery}
+              onChange={(e) => setPaletteQuery(e.target.value)}
+              aria-label="Search sounds"
+            />
+            <p className="ml-hint">
+              Each note also takes amp, pan, attack, dur, release, cutoff, res;
+              notes as names ("C#3") or MIDI numbers.
+            </p>
+            <ul className="ml-sound-list">
+              {(paletteItems ?? [])
+                .filter((it) => {
+                  const q = paletteQuery.trim().toLowerCase();
+                  return !q || it.name.toLowerCase().includes(q) || (it.blurb ?? "").toLowerCase().includes(q);
+                })
+                .map((it) => (
+                  <li key={`${it.origin ?? "builtin"}:${it.name}`}>
+                    <span className="ml-sound-name">{it.name}</span>
+                    <span className="ml-sound-blurb">
+                      {it.type}{it.blurb ? ` · ${it.blurb}` : ""}{it.origin === "imported" ? " · imported" : ""}
+                    </span>
+                    <button
+                      type="button"
+                      className="ml-sound-preview"
+                      disabled={booting}
+                      onClick={() => previewSound(it)}
+                    >
+                      {previewingSound === it.name ? "■" : "▶"}
+                    </button>
+                    <button type="button" className="ml-sound-insert" onClick={() => insertSound(it)}>
+                      Insert
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
         )}
         <CodeEditor
           key={track.key}
           value={code}
           onChange={updateCode}
           onRun={togglePlay}
+          onReady={(view) => { editorViewRef.current = view; }}
           language={javascript()}
           label={`Score for ${track.name}`}
           className="ml-editor"
