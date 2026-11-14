@@ -31,6 +31,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": apiProxy,
+      "/media": apiProxy,
       "/admin": apiProxy,
       "/static": apiProxy,
       "/health": apiProxy,

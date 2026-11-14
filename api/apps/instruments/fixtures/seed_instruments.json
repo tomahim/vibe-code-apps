@@ -1,0 +1,612 @@
+[
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_bassdrum",
+   "type": "Drums",
+   "blurb": "808 kick",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_snare",
+   "type": "Drums",
+   "blurb": "808 snare",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_clap",
+   "type": "Drums",
+   "blurb": "808 hand clap",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_rimshot",
+   "type": "Drums",
+   "blurb": "808 rimshot",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_closed_hihat",
+   "type": "Drums",
+   "blurb": "808 closed hat",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_open_hihat",
+   "type": "Drums",
+   "blurb": "808 open hat",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_cymbal",
+   "type": "Drums",
+   "blurb": "808 crash cymbal",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_tomhi",
+   "type": "Drums",
+   "blurb": "808 high tom",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_tommid",
+   "type": "Drums",
+   "blurb": "808 mid tom",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_tomlo",
+   "type": "Drums",
+   "blurb": "808 low tom",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_congahi",
+   "type": "Drums",
+   "blurb": "808 high conga",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_congamid",
+   "type": "Drums",
+   "blurb": "808 mid conga",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_congalo",
+   "type": "Drums",
+   "blurb": "808 low conga",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_claves",
+   "type": "Drums",
+   "blurb": "808 claves",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_cowbell",
+   "type": "Drums",
+   "blurb": "808 cowbell",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "sc808_maracas",
+   "type": "Drums",
+   "blurb": "808 maracas",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "gabberkick",
+   "type": "Drums",
+   "blurb": "hard gabber kick",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "tb303",
+   "type": "Bass",
+   "blurb": "acid bassline",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "growl",
+   "type": "Bass",
+   "blurb": "deep growling bass",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "bass_foundation",
+   "type": "Bass",
+   "blurb": "sub bass foundation",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "bass_highend",
+   "type": "Bass",
+   "blurb": "bass with bite",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "chipbass",
+   "type": "Bass",
+   "blurb": "chiptune bass",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "subpulse",
+   "type": "Bass",
+   "blurb": "pulsing sub",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "prophet",
+   "type": "Synth",
+   "blurb": "warm poly, Prophet-5 flavour",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "hoover",
+   "type": "Synth",
+   "blurb": "classic rave hoover",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "blade",
+   "type": "Synth",
+   "blurb": "cinematic string pad",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "supersaw",
+   "type": "Synth",
+   "blurb": "detuned saw stack",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "saw",
+   "type": "Synth",
+   "blurb": "plain sawtooth",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "tri",
+   "type": "Synth",
+   "blurb": "triangle wave",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "pulse",
+   "type": "Synth",
+   "blurb": "pulse wave",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "square",
+   "type": "Synth",
+   "blurb": "square wave",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "dsaw",
+   "type": "Synth",
+   "blurb": "detuned saw",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "dpulse",
+   "type": "Synth",
+   "blurb": "detuned pulse",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "dtri",
+   "type": "Synth",
+   "blurb": "detuned triangle",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_saw",
+   "type": "Synth",
+   "blurb": "saw with modulator",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_pulse",
+   "type": "Synth",
+   "blurb": "pulse with modulator",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_tri",
+   "type": "Synth",
+   "blurb": "triangle with modulator",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_dsaw",
+   "type": "Synth",
+   "blurb": "detuned mod saw",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_sine",
+   "type": "Synth",
+   "blurb": "sine with modulator",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "fm",
+   "type": "Synth",
+   "blurb": "2-op FM",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "mod_fm",
+   "type": "Synth",
+   "blurb": "basic FM",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "chiplead",
+   "type": "Synth",
+   "blurb": "chiptune lead",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "tech_saws",
+   "type": "Synth",
+   "blurb": "techno saw stack",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "zawa",
+   "type": "Synth",
+   "blurb": "saw wave with sync",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "rodeo",
+   "type": "Synth",
+   "blurb": "twangy synth",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "beep",
+   "type": "Synth",
+   "blurb": "plain sine beep",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "dark_ambience",
+   "type": "Pad",
+   "blurb": "dark evolving drone",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "hollow",
+   "type": "Pad",
+   "blurb": "airy, breathy pad",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "organ_tonewheel",
+   "type": "Pad",
+   "blurb": "tonewheel organ",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "pluck",
+   "type": "Keys",
+   "blurb": "karplus-strong pluck",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "kalimba",
+   "type": "Keys",
+   "blurb": "thumb piano",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "rhodey",
+   "type": "Keys",
+   "blurb": "electric piano",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "piano",
+   "type": "Keys",
+   "blurb": "piano (MdaPiano)",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "pretty_bell",
+   "type": "Bell",
+   "blurb": "FM bell, long shimmer",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "dull_bell",
+   "type": "Bell",
+   "blurb": "soft, round bell",
+   "origin": "builtin",
+   "ready": true
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "bnoise",
+   "type": "Noise",
+   "blurb": "brown noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "cnoise",
+   "type": "Noise",
+   "blurb": "clipped noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "gnoise",
+   "type": "Noise",
+   "blurb": "grey noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "pnoise",
+   "type": "Noise",
+   "blurb": "pink noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "noise",
+   "type": "Noise",
+   "blurb": "white noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ },
+ {
+  "model": "instruments.instrument",
+  "fields": {
+   "name": "chipnoise",
+   "type": "Noise",
+   "blurb": "chiptune noise",
+   "origin": "builtin",
+   "ready": false
+  }
+ }
+]

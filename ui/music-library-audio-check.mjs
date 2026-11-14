@@ -151,6 +151,105 @@ for (let i = 0; i < 40; i += 1) {
 }
 await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
 
+// 8. Instrument browser page: renders the catalogue, search works, preview plays.
+await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library/sounds'));
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await settle(600);
+await page.screenshot({ path: '/tmp/music-library-5-instruments.png' });
+const cardCount = await page.locator('.ib-card').count();
+check('instrument browser lists catalogue', cardCount === 61, `cards: ${cardCount}`);
+await page.locator('.ml-search').fill('tb303');
+await settle(500);
+const tb = await page.locator('.ib-card').allTextContents();
+check('instrument search filters', tb.length === 1 && tb[0].includes('tb303'), tb.join('|'));
+await page.locator('.ib-card').getByRole('button', { name: /Preview/ }).click();
+await settle(1500);
+const ibNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+check('instrument preview sounds', ibNodes.some((n) => n.includes('tb303')), `nodes: ${ibNodes.join(', ')}`);
+const stopVisible = await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).isVisible().catch(() => false);
+if (stopVisible) await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).click();
+await settle(400);
+
+// 9. Import roundtrip: sign in, upload a real vendored synthdef as a new
+// instrument, save it, reload, preview the persisted definition.
+await page.evaluate(async () => {
+  const r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: 'thomas', password: 'checkpass1' }) });
+  const data = await r.json();
+  if (!data.token) throw new Error('login failed');
+  localStorage.setItem('genious_token', data.token);
+  localStorage.setItem('genious_user', JSON.stringify(data.user));
+});
+await page.reload();
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await page.locator('.ib-add input[type=file]').setInputFiles('public/supersonic/synthdefs/sonic-pi-zawa.scsyndef');
+await page.getByRole('button', { name: /Check & load/ }).click();
+await page.getByText('accepted it as "sonic-pi-zawa"', { exact: false }).waitFor({ timeout: 10000 });
+check('import: engine loads uploaded definition', true, 'detected sonic-pi-zawa');
+await page.getByRole('button', { name: /Save "sonic-pi-zawa"/ }).click();
+await page.getByText('Saved "sonic-pi-zawa" to the shared library', { exact: false }).waitFor({ timeout: 10000 });
+check('import: saved to library', true, 'persisted');
+await page.reload();
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await page.locator('.ml-search').fill('zawa');
+await settle(700);
+// 'zawa' also matches the built-in zawa card; the imported copy must be there too.
+const importedCard = page.locator('.ib-card', { hasText: 'sonic-pi-zawa' });
+const importedCount = await importedCard.count();
+check('import: survives reload', importedCount === 1, `imported cards: ${importedCount}`);
+await importedCard.getByRole('button', { name: /Preview/ }).click();
+// The reload reset the engine; a fresh WASM boot takes several seconds, so poll.
+let zawaNodes = [];
+for (let i = 0; i < 20; i += 1) {
+  await settle(1000);
+  zawaNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+  if (zawaNodes.some((n) => n.includes('zawa'))) break;
+}
+check('import: persisted definition creates a node', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
+
+// Measured audible output of the persisted preview, tapped after the final
+// clip stage: it must be non-silent AND stay inside the hard bound.
+const persistedAudio = await page.evaluate(async () => {
+  const e = window.__musicEngine;
+  const ctx = e.supersonic.audioContext;
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 4096;
+  e.outputShaper.connect(analyser);
+  await new Promise((r) => setTimeout(r, 1500));
+  const buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  let sum = 0; let peak = 0;
+  for (const v of buf) { sum += v * v; peak = Math.max(peak, Math.abs(v)); }
+  return { rms: Math.sqrt(sum / buf.length), peak };
+});
+check('import: persisted preview audibly renders', persistedAudio.rms > 0.005, `output RMS ${persistedAudio.rms.toFixed(4)}`);
+check('import: persisted preview within hard bound', persistedAudio.peak <= 0.90, `peak ${persistedAudio.peak.toFixed(4)} (bound 0.89)`);
+
+// The clip must hold for a signal that tries to exceed it: inject a 2.0x
+// full-scale oscillator straight into the final stage and measure the peak.
+const clipPeak = await page.evaluate(async () => {
+  const e = window.__musicEngine;
+  const ctx = e.supersonic.audioContext;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  gain.gain.value = 2.0;
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 4096;
+  osc.connect(gain);
+  gain.connect(e.outputShaper);
+  e.outputShaper.connect(analyser);
+  osc.start();
+  await new Promise((r) => setTimeout(r, 1200));
+  const buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  osc.stop();
+  osc.disconnect(); gain.disconnect();
+  let peak = 0;
+  for (const v of buf) peak = Math.max(peak, Math.abs(v));
+  return peak;
+});
+check('output clip: over-range signal stays within bound', clipPeak <= 0.90, `peak ${clipPeak.toFixed(4)} with a 2.0x test signal (bound 0.89)`);
+
 await browser.close();
 server.kill();
 

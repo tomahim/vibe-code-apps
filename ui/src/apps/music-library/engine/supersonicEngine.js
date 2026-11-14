@@ -10,6 +10,9 @@ import { audioEnvironmentProblem } from "./environment.js";
 
 export const MUSIC_BUS = 10; // private stereo bus pair (10/11): every note plays here
 export const WET_BUS = 12;   // reverb output pair (12/13), read by the master level
+const LIMIT_BUS = 14;
+// Final speaker bound: every output sample is clipped to +-OUTPUT_CLIP.
+const OUTPUT_CLIP = 0.89;        // master level output pair (14/15), read by the peak normaliser
 
 // Synthdefs preloaded at boot and available to compositions via short names.
 // Names map to sonic-pi-<name>.scsyndef files vendored in /supersonic/synthdefs/.
@@ -43,7 +46,7 @@ export const SYNTH_PALETTE = [
   "sc808_tomlo",
 ];
 
-const FX_SYNTHS = ["fx_gverb", "fx_level"];
+const FX_SYNTHS = ["fx_gverb", "fx_level", "fx_normaliser"];
 
 function fullName(short) {
   return `sonic-pi-${short}`;
@@ -114,10 +117,40 @@ class MusicEngine {
       this.masterId = supersonic.nextNodeId();
       supersonic.send(
         "/s_new", fullName("fx_level"), this.masterId, 1, this.fxGroup,
-        "in_bus", WET_BUS, "out_bus", 0, "amp", 0.9,
+        "in_bus", WET_BUS, "out_bus", LIMIT_BUS, "amp", 0.9,
+      );
+      // Last stage: peak normaliser, so even a definition that ignores its
+      // amp parameter is pulled toward the target level before the speakers.
+      // (Not a hard limiter: fast transients can still overshoot.)
+      this.normaliserId = supersonic.nextNodeId();
+      supersonic.send(
+        "/s_new", fullName("fx_normaliser"), this.normaliserId, 1, this.fxGroup,
+        "in_bus", LIMIT_BUS, "out_bus", 0, "level", 0.5,
       );
 
       await supersonic.sync();
+
+      // Hard output bound: a final WebAudio stage clips every sample to
+      // +-OUTPUT_CLIP before the speakers. The normaliser only pulls the
+      // level toward a target (fast transients can overshoot), and an
+      // imported definition can ignore its amp parameter entirely - so the
+      // last word is a sample-level clip, outside the WASM engine.
+      const ctx = supersonic.audioContext;
+      const worklet = supersonic.node?.node ?? supersonic.node;
+      if (worklet && !this.outputShaper) {
+        const curve = new Float32Array(4096);
+        for (let i = 0; i < curve.length; i += 1) {
+          const x = (i / (curve.length - 1)) * 2 - 1;
+          curve[i] = Math.max(-OUTPUT_CLIP, Math.min(OUTPUT_CLIP, x));
+        }
+        this.outputShaper = ctx.createWaveShaper();
+        this.outputShaper.curve = curve;
+        this.outputShaper.oversample = "none";
+        worklet.disconnect();
+        worklet.connect(this.outputShaper);
+        this.outputShaper.connect(ctx.destination);
+      }
+
       this.ready = true;
       onStatus("Ready");
       return this;
@@ -158,6 +191,40 @@ class MusicEngine {
 
   ntpNow() {
     return SuperSonic.osc.ntpNow();
+  }
+
+  // Load an additional vendored synthdef on demand (beyond the boot palette).
+  async ensureSynth(short) {
+    if (!this.extraSynths) this.extraSynths = new Set();
+    if (SYNTH_PALETTE.includes(short) || this.extraSynths.has(short)) return;
+    await this.supersonic.loadSynthDefs([fullName(short)]);
+    this.extraSynths.add(short);
+  }
+
+  // Import a .scsyndef binary (File/Blob/ArrayBuffer). The engine validates the
+  // data, extracts the real definition name from it and returns it. Throws with
+  // the engine's message when invalid.
+  async importSynth(source) {
+    const { name } = await this.supersonic.loadSynthDef(source);
+    if (!name) throw new Error("No instrument name found in that file.");
+    return name;
+  }
+
+  // Play one bounded preview note right now. `raw` names are used as-is
+  // (imported instruments); short catalog names get the sonic-pi- prefix.
+  preview(defName, { raw = false, amp = 0.25 } = {}) {
+    const id = this.supersonic.nextNodeId();
+    const name = raw ? defName : fullName(defName);
+    const bundle = SuperSonic.osc.encodeBundle(this.ntpNow() + 0.1, [
+      ["/s_new", name, id, 0, this.sourceGroup, "note", 60, "amp", amp, "out_bus", MUSIC_BUS],
+    ]);
+    this.supersonic.sendOSC(bundle);
+    return id;
+  }
+
+  freeNode(id) {
+    if (!this.ready) return;
+    this.supersonic.send("/n_free", id);
   }
 
   // Drop every pending scheduled bundle and silence all sounding notes.
