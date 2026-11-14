@@ -30,9 +30,9 @@ const check = (name, ok, detail) => {
 };
 const settle = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// 1. Library renders both tracks.
+// 1. Library renders all tracks.
 const trackButtons = await page.locator('.ml-track').allTextContents();
-check('library lists 2 tracks', trackButtons.length === 2, trackButtons.join(' | '));
+check('library lists 3 tracks', trackButtons.length === 3, trackButtons.join(' | '));
 
 // 2. Play boots the engine (this click is the required user gesture).
 await page.getByRole('button', { name: /Play/ }).click();
@@ -91,6 +91,36 @@ await page.getByRole('button', { name: /Play/ }).click();
 await settle(3000);
 const replayNodes = await page.evaluate(() => window.__musicEngine.supersonic.getRawTree()?.nodeCount ?? -1);
 check('second track plays', replayNodes > 3, `tree nodes: ${replayNodes}`);
+await page.getByRole('button', { name: /Stop/ }).click();
+
+// 6b. Night Pursuit: percussion score schedules 808 kit nodes and renders.
+await page.getByRole('button', { name: /Stop/ }).click().catch(() => {});
+await page.locator('.ml-track', { hasText: 'Night Pursuit' }).click();
+await settle(600);
+const pursuitCode = await page.locator('.cm-content').textContent();
+check('pursuit score loads', pursuitCode.includes('Night Pursuit'), 'editor shows Night Pursuit code');
+await page.getByRole('button', { name: /Play/ }).click();
+await settle(5000);
+const pursuit = await page.evaluate(() => {
+  const t = window.__musicEngine.supersonic.getRawTree();
+  const defs = t.nodes.filter((n) => !n.isGroup).map((n) => n.defName);
+  return { drums: defs.filter((d) => d.includes('sc808')).length, defs };
+});
+check('808 kit sounding', pursuit.drums >= 3, `drum nodes: ${pursuit.drums} (${pursuit.defs.join(', ')})`);
+const pursuitRms = await page.evaluate(async () => {
+  const s = window.__musicEngine.supersonic;
+  const node = s.node?.node ?? s.node;
+  const analyser = s.audioContext.createAnalyser();
+  analyser.fftSize = 2048;
+  node.connect(analyser);
+  await new Promise((r) => setTimeout(r, 1500));
+  const buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  let sum = 0;
+  for (const v of buf) sum += v * v;
+  return Math.sqrt(sum / buf.length);
+});
+check('pursuit audio renders', pursuitRms > 0.005, `output RMS ${pursuitRms.toFixed(4)}`);
 await page.getByRole('button', { name: /Stop/ }).click();
 
 // 7. Mobile screenshots.

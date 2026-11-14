@@ -30,6 +30,17 @@ export const SYNTH_PALETTE = [
   "tb303",          // acid bassline
   "mod_fm",         // basic fm
   "fm",             // 2-op fm with modulator
+  // 808 kit for percussion-driven tracks (Night Pursuit).
+  "sc808_bassdrum",
+  "sc808_snare",
+  "sc808_clap",
+  "sc808_rimshot",
+  "sc808_closed_hihat",
+  "sc808_open_hihat",
+  "sc808_cymbal",
+  "sc808_tomhi",
+  "sc808_tommid",
+  "sc808_tomlo",
 ];
 
 const FX_SYNTHS = ["fx_gverb", "fx_level"];

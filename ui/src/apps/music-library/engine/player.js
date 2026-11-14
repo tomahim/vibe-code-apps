@@ -16,7 +16,7 @@
 // it sample-accurately whatever the JS timers do.
 
 const LOOKAHEAD_SECONDS = 1.0; // how far code may run ahead of the audio clock
-const MAX_EVENTS = 4000;       // safety valve against runaway loops
+const MAX_EVENTS = 24000;      // runaway-loop guard, sized so dense percussion scores (Night Pursuit, ~20 notes/s) still play ~20 minutes
 const START_DELAY = 0.4;       // silence before the first note
 
 const NOTE_OFFSETS = { c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11 };
