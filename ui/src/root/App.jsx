@@ -17,6 +17,7 @@ const DbDashboard = lazy(() => import("../apps/db-dashboard/DbDashboard.jsx"));
 const Hockey = lazy(() => import("../apps/hockey/Hockey.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
 const KnobConservatory = lazy(() => import("../apps/knob-conservatory/KnobConservatory.jsx"));
+const GarminStats = lazy(() => import("../apps/garmin-stats/GarminStats.jsx"));
 const MusicLibrary = lazy(() => import("../apps/music-library/MusicLibrary.jsx"));
 const MusicEditor = lazy(() => import("../apps/music-library/MusicEditor.jsx"));
 const InstrumentBrowser = lazy(() => import("../apps/music-library/InstrumentBrowser.jsx"));
@@ -83,6 +84,10 @@ export default function App() {
 
   if (path.startsWith("/apps/knob-conservatory")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#17140f", color: "#f5c96b", display: "grid", placeItems: "center" }}>Warming up the oscillators…</div>}><KnobConservatory onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/garmin-stats")) {
+    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0b0e17", color: "#8b93a7", display: "grid", placeItems: "center" }}>Lacing up…</div>}><GarminStats onHome={() => navigate("/")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/music-library/sounds")) {

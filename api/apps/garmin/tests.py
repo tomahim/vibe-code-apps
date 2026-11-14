@@ -317,3 +317,91 @@ class FitDecodeTests(TestCase):
         out, rc = _fit_decode(data, {20: 'records'}, include_records=False)
         self.assertEqual(rc, 3)
         self.assertNotIn('records', out)
+
+
+def make_activity(user, garmin_id, activity_type, when, **overrides):
+    """Insert a fully synthetic activity row (no real export data)."""
+    fields = {
+        "owner": user,
+        "garmin_activity_id": garmin_id,
+        "activity_type": activity_type,
+        "sport_type": activity_type.upper(),
+        "name": f"Synthetic {activity_type} {garmin_id}",
+        "start_time_gmt": when,
+        "duration_ms": 3_600_000,
+        "elapsed_duration_ms": 3_660_000,
+        "distance_m": 10_000.0,
+        "elevation_gain_m": 100.0,
+        "calories": 600.0,
+        "steps": 9_000,
+    }
+    fields.update(overrides)
+    return GarminActivity.objects.create(**fields)
+
+
+class StatsApiTests(GarminBase):
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.other = User.objects.create_user(username="other-synthetic", password="x")
+        make_activity(cls.user, 91000000001, "running", datetime(2024, 3, 10, 8, 0, tzinfo=timezone.utc),
+                      distance_m=42_500.0, duration_ms=3 * 3_600_000, steps=40_000)
+        make_activity(cls.user, 91000000002, "trail_running", datetime(2024, 5, 12, 8, 0, tzinfo=timezone.utc),
+                      distance_m=50_000.0, duration_ms=6 * 3_600_000, elevation_gain_m=2_500.0)
+        make_activity(cls.user, 91000000003, "cycling", datetime(2024, 5, 12, 18, 0, tzinfo=timezone.utc),
+                      distance_m=80_000.0, duration_ms=3 * 3_600_000)
+        make_activity(cls.user, 91000000004, "walking", datetime(2025, 1, 5, 10, 0, tzinfo=timezone.utc),
+                      distance_m=6_000.0)
+        # Another owner's rows must never leak into the stats.
+        make_activity(cls.other, 91000000009, "running", datetime(2024, 3, 10, 9, 0, tzinfo=timezone.utc),
+                      distance_m=99_000.0)
+
+    def get(self, path):
+        return auth_client(self.user).get(path)
+
+    def test_stats_require_auth(self):
+        self.assertEqual(Client().get("/api/apps/garmin/stats/overview/").status_code, 401)
+        self.assertEqual(Client().get("/api/apps/garmin/stats/running/").status_code, 401)
+
+    def test_overview_totals_and_breakdowns(self):
+        r = self.get("/api/apps/garmin/stats/overview/")
+        self.assertEqual(r.status_code, 200)
+        data = r.json()
+        self.assertEqual(data["totals"]["count"], 4)
+        self.assertAlmostEqual(data["totals"]["km"], 178.5)
+        types = {row["type"]: row for row in data["by_type"]}
+        self.assertEqual(types["running"]["count"], 1)
+        self.assertEqual(types["trail_running"]["km"], 50.0)
+        self.assertEqual(types["cycling"]["type_label"], "Cycling")
+        years = {row["year"]: row for row in data["by_year"]}
+        self.assertEqual(years[2024]["count"], 3)
+        self.assertEqual(years[2025]["count"], 1)
+        months = {row["month"]: row for row in data["by_month"]}
+        self.assertEqual(months["2024-05"]["count"], 2)
+        self.assertEqual(months["2024-05"]["km"], 130.0)
+        self.assertEqual(data["records"]["longest_distance"]["km"], 80.0)
+        self.assertEqual(data["records"]["most_elevation"]["elevation_m"], 2500.0)
+        self.assertEqual(data["best_month"]["month"], "2024-05")
+        self.assertEqual(sum(row["count"] for row in data["weekdays"]), 4)
+        self.assertEqual(data["first_activity"], "2024-03-10")
+
+    def test_running_scope_and_progression(self):
+        r = self.get("/api/apps/garmin/stats/running/")
+        self.assertEqual(r.status_code, 200)
+        data = r.json()
+        self.assertEqual(data["totals"]["runs"], 2)
+        self.assertAlmostEqual(data["totals"]["km"], 92.5)
+        self.assertEqual(data["totals"]["hours"], 9.0)
+        years = {row["year"]: row for row in data["by_year"]}
+        self.assertEqual(years[2024]["runs"], 2)
+        self.assertAlmostEqual(years[2024]["cumulative_km"], 92.5)
+        # Both synthetic runs are at least marathon distance.
+        self.assertEqual(data["records"]["marathon_plus_count"], 2)
+        self.assertEqual(data["records"]["longest_distance"]["km"], 50.0)
+        # 42.5 km in 3 h -> ~254 s/km best pace.
+        self.assertEqual(data["records"]["best_pace_seconds_per_km"], 254)
+
+    def test_running_excludes_other_sports_and_owners(self):
+        data = self.get("/api/apps/garmin/stats/running/").json()
+        self.assertEqual(data["totals"]["runs"], 2)
+        self.assertNotAlmostEqual(data["totals"]["km"], 92.5 + 99.0)

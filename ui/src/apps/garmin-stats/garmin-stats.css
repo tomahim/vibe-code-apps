@@ -1,0 +1,992 @@
+/* Garmin stats app: clean light dashboard + full-width animated story. */
+
+.garmin-app {
+  min-height: 100vh;
+  background: #f4f5f7;
+  color: #17202b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.garmin-app--story {
+  background: #0b0e17;
+  color: #f2f4f8;
+}
+
+.garmin-loading {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: #5b6472;
+  font-size: 1.05rem;
+}
+
+.garmin-loading--dark {
+  color: #8b93a7;
+  background: #0b0e17;
+  min-height: 100vh;
+}
+
+.garmin-error {
+  padding: 2rem;
+  color: #b03a2e;
+}
+
+/* ---- header ---- */
+
+.garmin-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1.2rem;
+  background: rgba(244, 245, 247, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.garmin-app--story .garmin-header {
+  background: rgba(11, 14, 23, 0.85);
+  border-bottom-color: #1d2333;
+}
+
+.garmin-home {
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: inherit;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+}
+
+.garmin-home:hover {
+  background: rgba(127, 127, 127, 0.15);
+}
+
+.garmin-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.garmin-title h1 {
+  font-size: 1.15rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.garmin-title-icon {
+  font-size: 1.3rem;
+}
+
+.garmin-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.garmin-tab {
+  border: 1px solid #d5d9e0;
+  background: #fff;
+  color: #39414f;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.garmin-app--story .garmin-tab {
+  background: #161b28;
+  border-color: #2a3247;
+  color: #b9c0d0;
+}
+
+.garmin-tab--active {
+  background: #17202b;
+  border-color: #17202b;
+  color: #fff;
+}
+
+.garmin-app--story .garmin-tab--active {
+  background: #f2f4f8;
+  border-color: #f2f4f8;
+  color: #0b0e17;
+}
+
+/* ---- overall stats dashboard ---- */
+
+.gs-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.gs-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.gs-hero h2 {
+  margin: 0.3rem 0 0.4rem;
+  font-size: 1.8rem;
+}
+
+.gs-hero-sub {
+  margin: 0;
+  color: #5b6472;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: #7a8494;
+  font-weight: 700;
+}
+
+.gs-year-filter {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.gs-year-filter button {
+  border: 1px solid #d5d9e0;
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #39414f;
+}
+
+.gs-year-filter button.active {
+  background: #17202b;
+  color: #fff;
+  border-color: #17202b;
+}
+
+.gs-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+}
+
+.gs-kpi {
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gs-kpi-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-kpi-label {
+  font-size: 0.8rem;
+  color: #7a8494;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gs-section-title {
+  margin: 0 0 0.9rem;
+  font-size: 1.05rem;
+}
+
+.gs-empty {
+  color: #7a8494;
+}
+
+/* month bars */
+
+.gs-monthbars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 190px;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+  padding: 1rem 1rem 0.6rem;
+  overflow-x: auto;
+}
+
+.gs-monthbar {
+  flex: 1 0 26px;
+  min-width: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+}
+
+.gs-monthbar-value {
+  font-size: 0.68rem;
+  color: #7a8494;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-monthbar-track {
+  flex: 1;
+  width: 100%;
+  max-width: 34px;
+  display: flex;
+  align-items: flex-end;
+  background: #eef0f3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gs-monthbar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #2a9d8f, #1d6f66);
+  border-radius: 6px 6px 0 0;
+}
+
+.gs-monthbar-label {
+  font-size: 0.68rem;
+  color: #7a8494;
+}
+
+.gs-monthbar-year {
+  font-size: 0.62rem;
+  color: #a8b0bc;
+}
+
+/* sports */
+
+.gs-sports {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gs-sport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  overflow: hidden;
+}
+
+.gs-sport-share {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(42, 157, 143, 0.08);
+  pointer-events: none;
+}
+
+.gs-sport-icon {
+  font-size: 1.4rem;
+}
+
+.gs-sport-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-sport-name {
+  font-weight: 700;
+}
+
+.gs-sport-stats {
+  font-size: 0.82rem;
+  color: #5b6472;
+  font-variant-numeric: tabular-nums;
+}
+
+/* highlights */
+
+.gs-records {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.gs-record {
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.gs-record-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a8494;
+  font-weight: 700;
+}
+
+.gs-record-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-record-name {
+  font-size: 0.85rem;
+}
+
+.gs-record-meta {
+  font-size: 0.75rem;
+  color: #7a8494;
+}
+
+/* weekdays */
+
+.gs-weekdays {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 160px;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+  padding: 1rem 1rem 0.6rem;
+}
+
+.gs-weekday {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+}
+
+.gs-weekday-count {
+  font-size: 0.72rem;
+  color: #7a8494;
+}
+
+.gs-weekday-track {
+  flex: 1;
+  width: 60%;
+  display: flex;
+  align-items: flex-end;
+  background: #eef0f3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gs-weekday-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #e76f51, #c84b31);
+  border-radius: 6px 6px 0 0;
+}
+
+.gs-weekday-label {
+  font-size: 0.72rem;
+  color: #7a8494;
+}
+
+/* ---- animated running story ---- */
+
+.gr-story {
+  width: 100%;
+  /* clip (not hidden) keeps position: sticky working in descendants. */
+  overflow-x: clip;
+}
+
+.gr-hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(64, 145, 255, 0.25), transparent 60%),
+    radial-gradient(1000px 500px at 85% 110%, rgba(255, 111, 97, 0.22), transparent 60%),
+    #0b0e17;
+}
+
+.gr-hero-eyebrow {
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: #8b93a7;
+  margin: 0 0 1rem;
+}
+
+.gr-hero-title {
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  background: linear-gradient(90deg, #5eb1ff, #8ef0d2 55%, #ffd166);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gr-hero-title span {
+  font-size: 0.35em;
+  font-weight: 600;
+}
+
+.gr-hero-sub {
+  color: #b9c0d0;
+  max-width: 34rem;
+  margin: 1.2rem 0 0;
+  font-size: 1.05rem;
+}
+
+.gr-hero-hint {
+  margin-top: 3rem;
+  color: #6b7387;
+  font-size: 0.85rem;
+  animation: gr-bob 2s ease-in-out infinite;
+}
+
+@keyframes gr-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* year evolution */
+
+.gr-evolution {
+  position: relative;
+}
+
+.gr-evolution-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 2rem 1rem;
+  transition: background 0.4s linear;
+  text-align: center;
+}
+
+.gr-evolution-eyebrow {
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.gr-evolution-year {
+  font-size: clamp(4rem, 18vw, 11rem);
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 12px 60px rgba(0, 0, 0, 0.45);
+}
+
+.gr-evolution-counters {
+  display: flex;
+  gap: clamp(2rem, 8vw, 6rem);
+}
+
+.gr-evolution-number {
+  display: block;
+  font-size: clamp(2rem, 7vw, 4.2rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-evolution-unit {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+}
+
+.gr-evolution-track {
+  position: relative;
+  width: min(640px, 80vw);
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: 1rem;
+}
+
+.gr-evolution-track-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5eb1ff, #8ef0d2, #ffd166);
+}
+
+.gr-evolution-runner {
+  position: absolute;
+  top: -1.55rem;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+}
+
+.gr-evolution-years {
+  display: flex;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-evolution-years .done {
+  color: #ffd166;
+}
+
+/* totals band */
+
+.gr-totals {
+  padding: 5rem 1.2rem;
+  background: #0b0e17;
+  text-align: center;
+}
+
+.gr-totals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .gr-totals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gr-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.gr-total .gr-count {
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-total-label {
+  color: #8b93a7;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gr-totals-note {
+  margin-top: 2.4rem;
+  color: #6b7387;
+  font-size: 0.95rem;
+}
+
+/* comparison cards */
+
+.gr-group {
+  padding: 3rem 1.2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.gr-group-title {
+  letter-spacing: 0.3em;
+  font-size: 0.8rem;
+  color: #8b93a7;
+  text-transform: uppercase;
+  margin: 0 0 1.4rem;
+  text-align: center;
+}
+
+.gr-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.gr-card {
+  border-radius: 22px;
+  padding: clamp(2rem, 6vw, 4rem);
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.gr-card-number {
+  display: block;
+  font-size: clamp(3rem, 11vw, 7rem);
+  font-weight: 900;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
+
+.gr-card-label {
+  font-size: clamp(1.2rem, 3.4vw, 1.8rem);
+  font-weight: 700;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.gr-card-caption {
+  margin: 0 auto;
+  max-width: 32rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+/* outro */
+
+.gr-outro {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  padding: 4rem 1.2rem;
+  background:
+    radial-gradient(900px 480px at 50% 120%, rgba(255, 209, 102, 0.18), transparent 65%),
+    #0b0e17;
+}
+
+.gr-outro-big {
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  font-weight: 800;
+  margin: 0;
+}
+
+.gr-outro-sub {
+  color: #8b93a7;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .garmin-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .garmin-tabs {
+    order: 3;
+    width: 100%;
+    margin: 0;
+  }
+
+  .garmin-tab {
+    flex: 1;
+    text-align: center;
+  }
+
+  .gs-hero h2 {
+    font-size: 1.4rem;
+  }
+
+  .gr-evolution-counters {
+    gap: 1.6rem;
+  }
+}
+
+/* ---- comparison card visual motifs ---- */
+
+.gr-card--viz {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  text-align: left;
+}
+
+.gr-card--viz .gr-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.gr-card-viz {
+  flex: 0 0 auto;
+  width: clamp(140px, 24vw, 220px);
+  display: grid;
+  place-items: center;
+}
+
+.gr-card-source {
+  margin: 0.9rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+}
+
+.gr-viz-icon {
+  font-size: 34px;
+}
+
+.gr-viz-ring {
+  width: 100%;
+  max-width: 180px;
+}
+
+.gr-viz-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 8;
+}
+
+.gr-viz-ring-fill {
+  fill: none;
+  stroke: #ffd166;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.gr-viz-route {
+  width: 100%;
+  max-width: 220px;
+}
+
+.gr-viz-route-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.gr-viz-route-track {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.gr-viz-route-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.gr-viz-route-marker {
+  position: absolute;
+  top: -1.3rem;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+}
+
+.gr-viz-times {
+  position: absolute;
+  top: 0.9rem;
+  transform: translateX(-50%);
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.gr-viz-space {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  height: 190px;
+}
+
+.gr-viz-space-target {
+  font-size: 1.8rem;
+}
+
+.gr-viz-space-track {
+  position: relative;
+  flex: 1;
+  width: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.gr-viz-space-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 14px #ffd166;
+}
+
+.gr-viz-space-times {
+  position: absolute;
+  top: -0.2rem;
+  left: 0.8rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.gr-viz-space-ground {
+  font-size: 1.4rem;
+}
+
+.gr-viz-peaks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  max-width: 220px;
+}
+
+.gr-viz-peak {
+  width: 26px;
+  height: 21px;
+}
+
+.gr-viz-peak path {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.gr-viz-peak .gr-viz-peak-snow {
+  fill: #cfe8ff;
+}
+
+.gr-viz-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 14px);
+  gap: 5px;
+  justify-content: center;
+}
+
+.gr-viz-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.gr-viz-grid--daynight .gr-viz-cell {
+  border-radius: 50%;
+  background: #ffd166;
+}
+
+.gr-viz-grid--daynight .gr-viz-cell[data-alt="1"] {
+  background: #7ea6e0;
+}
+
+.gr-viz-grid--medal .gr-viz-cell {
+  border-radius: 50%;
+  background: #ffd166;
+}
+
+/* evolution area chart backdrop */
+
+.gr-evolution-chart {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.gr-evolution-area {
+  fill: rgba(255, 255, 255, 0.10);
+}
+
+.gr-evolution-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 0.8;
+}
+
+.gr-evolution-marker {
+  stroke: rgba(255, 209, 102, 0.7);
+  stroke-width: 0.4;
+}
+
+.gr-evolution-sticky > *:not(.gr-evolution-chart) {
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .gr-card--viz {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gr-card-viz {
+    width: min(220px, 70vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-hero-hint {
+    animation: none;
+  }
+
+  .gr-evolution-sticky {
+    transition: none;
+  }
+}
+
+/* year-by-year table */
+
+.gs-yeartable-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+}
+
+.gs-yeartable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-yeartable th,
+.gs-yeartable td {
+  text-align: right;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid #eef0f3;
+  white-space: nowrap;
+}
+
+.gs-yeartable th:first-child,
+.gs-yeartable td:first-child,
+.gs-yeartable th:last-child,
+.gs-yeartable td:last-child {
+  text-align: left;
+}
+
+.gs-yeartable thead th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7a8494;
+}
+
+.gs-yeartable tbody tr:last-child td {
+  border-bottom: none;
+}
