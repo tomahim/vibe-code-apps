@@ -23,6 +23,13 @@ Terraform config intentionally leaves credentials for manual entry so they
 are not stored in Terraform state. Once the variables are saved, Railway
 deploys the bot and it starts polling Telegram. Keep it at one replica.
 
+## Logging
+
+Telegram Bot API URLs embed the bot token, so the bot pins httpx/httpcore
+loggers to WARNING (silencing per-request URL lines) and redacts the token
+and BOT_API_SECRET from any log record that still contains them, including
+exception tracebacks (see log_redaction.py).
+
 ## Stop the bot overnight
 
 After Terraform has created the bot service, deploy the Railway marketplace

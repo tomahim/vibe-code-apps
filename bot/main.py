@@ -9,6 +9,7 @@ import os
 import re
 
 import httpx
+from log_redaction import install_log_secret_redaction
 from telegram import BotCommand, Update
 from telegram.error import TelegramError
 from telegram.ext import (
@@ -436,7 +437,10 @@ async def post_shutdown(application: Application) -> None:
 
 
 def main() -> None:
-    token, _, user_ids = required_settings()
+    token, api_secret, user_ids = required_settings()
+    # Telegram API URLs embed the bot token, so request logging must never
+    # write them (and the same goes for the API secret) to platform logs.
+    install_log_secret_redaction(token, api_secret)
     application = (
         Application.builder()
         .token(token)
