@@ -250,3 +250,48 @@
     height: 460px;
   }
 }
+
+/* Tutorial mode */
+.ml-tutorial-toggle {
+  align-self: start;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #d8b96a55;
+  background: transparent;
+  color: #d8b96a;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ml-tutorial-toggle:hover { background: #d8b96a22; }
+.ml-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.ml-step-nav {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #d8b96a44;
+  background: transparent;
+  color: #d8b96a;
+  font: inherit;
+  cursor: pointer;
+}
+.ml-step-nav:disabled { opacity: 0.35; cursor: default; }
+.ml-step-dots { display: flex; gap: 6px; flex-wrap: wrap; }
+.ml-step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #d8b96a44;
+  background: transparent;
+  color: #d8b96a99;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ml-step-dot.active { background: #d8b96a; color: #0d1017; border-color: #d8b96a; }

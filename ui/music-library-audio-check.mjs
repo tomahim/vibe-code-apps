@@ -123,6 +123,20 @@ const pursuitRms = await page.evaluate(async () => {
 check('pursuit audio renders', pursuitRms > 0.005, `output RMS ${pursuitRms.toFixed(4)}`);
 await page.getByRole('button', { name: /Stop/ }).click();
 
+// 6c. Tutorial mode: lesson 1 plays real notes through the shared engine.
+await page.getByRole('button', { name: 'Tutorial' }).click();
+await settle(400);
+const lessonHeading = await page.locator('.ml-tutorial h2').textContent();
+check('tutorial opens', lessonHeading.includes('Lesson 1 of 12'), lessonHeading.trim());
+await page.screenshot({ path: '/tmp/music-library-4-tutorial.png' });
+await page.locator('.ml-tutorial').getByRole('button', { name: /Play/ }).click();
+await settle(1200); // lesson 1 is a single 2s note; check while it is still sounding
+const lessonNodes = await page.evaluate(() => window.__musicEngine.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).length ?? -1);
+check('tutorial lesson plays', lessonNodes > 2, `tree nodes: ${lessonNodes}`);
+// One-shot lesson: playback ends by itself, no Stop button to click.
+await page.getByRole('button', { name: 'Library', exact: true }).click(); // mode switch stops playback
+await settle(400);
+
 // 7. Mobile screenshots.
 await page.locator('.ml-track', { hasText: 'Neon Rain' }).click();
 await settle(400);

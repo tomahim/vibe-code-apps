@@ -4,6 +4,7 @@ import CodeEditor from "../../components/CodeEditor.jsx";
 import { getEngine, SYNTH_PALETTE } from "./engine/supersonicEngine.js";
 import { createPerformance } from "./engine/player.js";
 import { tracks } from "./tracks/index.js";
+import Tutorial from "./Tutorial.jsx";
 import "./music-library.css";
 
 const storageKey = (trackId) => `music-library:code:${trackId}`;
@@ -50,6 +51,7 @@ export default function MusicLibrary({ onHome }) {
   const [volume, setVolume] = useState(0.9);
   const [startedCode, setStartedCode] = useState("");
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [mode, setMode] = useState("library"); // "library" | "tutorial"
 
   const code = codes[track.id];
   const edited = code !== track.code;
@@ -119,7 +121,23 @@ export default function MusicLibrary({ onHome }) {
             SuperCollider engine (SuperSonic / scsynth on WebAssembly). No server:
             press play, read the score, change the code.</p>
         </div>
+        <button
+          type="button"
+          className="ml-tutorial-toggle"
+          onClick={() => {
+            performanceRef.current.stop();
+            setPlaying(false);
+            setMode(mode === "tutorial" ? "library" : "tutorial");
+          }}
+        >
+          {mode === "tutorial" ? "Library" : "Tutorial"}
+        </button>
       </header>
+
+      {mode === "tutorial" ? (
+        <Tutorial onBack={() => setMode("library")} />
+      ) : (
+      <>
 
       <nav className="ml-tracks" aria-label="Library">
         {tracks.map((t) => (
@@ -208,6 +226,8 @@ export default function MusicLibrary({ onHome }) {
           Your edits are saved in this browser only. Ctrl/Cmd+Enter re-plays.
         </p>
       </section>
+      </>
+      )}
     </main>
   );
 }
