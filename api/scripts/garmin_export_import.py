@@ -29,6 +29,7 @@ import json
 import os
 import struct
 import sys
+import time
 import zipfile
 
 import requests
@@ -73,11 +74,23 @@ def scan_fit_files(export_dir, hash_all=False):
     pattern = os.path.join(
         export_dir, "DI_CONNECT", "DI-Connect-Uploaded-Files", "*.zip"
     )
-    for zip_path in sorted(glob.glob(pattern)):
+    zips = sorted(glob.glob(pattern))
+    total = 0
+    for zip_path in zips:
+        with zipfile.ZipFile(zip_path) as z:
+            total += sum(1 for i in z.infolist() if i.filename.lower().endswith(".fit"))
+    print(f"scanning {total} FIT files in {len(zips)} archives...", flush=True)
+    t0 = time.time()
+    seen, activities = 0, 0
+    for zip_path in zips:
         with zipfile.ZipFile(zip_path) as z:
             for info in z.infolist():
                 if not info.filename.lower().endswith(".fit"):
                     continue
+                seen += 1
+                if seen % 2000 == 0:
+                    print(f"  scanned {seen}/{total} FIT files "
+                          f"({activities} activity, {time.time()-t0:.0f}s)", flush=True)
                 head = z.read(info)[:8192]
                 ftype, start, sport = _fit_scan(head)
                 if ftype == 4:
@@ -101,7 +114,11 @@ def scan_fit_files(export_dir, hash_all=False):
                     row["extra"] = row_extra
                 if hash_all or ftype == 4:
                     row["sha256"] = hashlib.sha256(z.read(info)).hexdigest()
+                if ftype == 4:
+                    activities += 1
                 rows.append((row, ftype))
+    print(f"  scanned {seen}/{total} FIT files "
+          f"({activities} activity, {time.time()-t0:.0f}s)", flush=True)
     return rows
 
 
@@ -132,19 +149,26 @@ def main():
 
     wanted = set(args.datasets.split(",")) if args.datasets else None
     totals = {}
+    t0 = time.time()
     for dataset, (pattern, kind) in DATASET_FILES.items():
         if wanted and dataset not in wanted:
             continue
         records = extract(load_json_records(args.export_dir, pattern), kind)
         totals[dataset] = len(records)
+        print(f"{dataset}: {len(records)} records read", flush=True)
         if args.dry_run or not records:
             continue
+        batches = (len(records) + args.batch_size - 1) // args.batch_size
+        sent = 0
         for i in range(0, len(records), args.batch_size):
             result = post_batch(
                 session, args.api_base, dataset,
                 records[i:i + args.batch_size],
             )
-            print(f"{dataset}: {result['written']} written (batch {i // args.batch_size + 1})")
+            sent += result["written"]
+            print(f"  {dataset}: batch {i // args.batch_size + 1}/{batches} "
+                  f"- {sent}/{len(records)} written ({time.time()-t0:.0f}s)",
+                  flush=True)
 
     # .FIT files: activity files get the timestamp-match import.
     if not wanted or "activity-files" in wanted:
@@ -152,10 +176,13 @@ def main():
         act_rows = [r for r, t in rows if t == 4]
         totals["activity-files"] = len(act_rows)
         if not args.dry_run:
+            batches = (len(act_rows) + args.batch_size - 1) // args.batch_size
             for i in range(0, len(act_rows), args.batch_size):
                 post_batch(session, args.api_base, "activity-files",
                            act_rows[i:i + args.batch_size])
-        print(f"activity-files: {len(act_rows)} activity FIT files scanned")
+                print(f"  activity-files: batch {i // args.batch_size + 1}/{batches} "
+                      f"- {min(i + args.batch_size, len(act_rows))}/{len(act_rows)} sent "
+                      f"({time.time()-t0:.0f}s)", flush=True)
 
     print(json.dumps({"dry_run": args.dry_run, "records": totals}, indent=2))
 
