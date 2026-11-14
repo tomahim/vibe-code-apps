@@ -170,6 +170,36 @@ const stopVisible = await page.locator('.ib-card').getByRole('button', { name: /
 if (stopVisible) await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).click();
 await settle(400);
 
+// 9. Import roundtrip: sign in, upload a real vendored synthdef as a new
+// instrument, save it, reload, preview the persisted definition.
+await page.evaluate(async () => {
+  const r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: 'thomas', password: 'checkpass1' }) });
+  const data = await r.json();
+  if (!data.token) throw new Error('login failed');
+  localStorage.setItem('genious_token', data.token);
+  localStorage.setItem('genious_user', JSON.stringify(data.user));
+});
+await page.reload();
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await page.locator('.ib-add input[type=file]').setInputFiles('public/supersonic/synthdefs/sonic-pi-zawa.scsyndef');
+await page.getByRole('button', { name: /Check & load/ }).click();
+await page.getByText('accepted it as "sonic-pi-zawa"', { exact: false }).waitFor({ timeout: 10000 });
+check('import: engine loads uploaded definition', true, 'detected sonic-pi-zawa');
+await page.getByRole('button', { name: /Save "sonic-pi-zawa"/ }).click();
+await page.getByText('Saved "sonic-pi-zawa" to the shared library', { exact: false }).waitFor({ timeout: 10000 });
+check('import: saved to library', true, 'persisted');
+await page.reload();
+await page.waitForSelector('.ib-card', { timeout: 15000 });
+await page.locator('.ml-search').fill('zawa');
+await settle(700);
+const zawaCards = await page.locator('.ib-card').count();
+check('import: survives reload', zawaCards === 1, `cards: ${zawaCards}`);
+await page.locator('.ib-card').getByRole('button', { name: /Preview/ }).click();
+await settle(1500);
+const zawaNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+check('import: persisted definition plays', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
+
 await browser.close();
 server.kill();
 

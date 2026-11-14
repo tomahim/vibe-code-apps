@@ -10,6 +10,7 @@ import { audioEnvironmentProblem } from "./environment.js";
 
 export const MUSIC_BUS = 10; // private stereo bus pair (10/11): every note plays here
 export const WET_BUS = 12;   // reverb output pair (12/13), read by the master level
+const LIMIT_BUS = 14;        // master level output pair (14/15), read by the peak normaliser
 
 // Synthdefs preloaded at boot and available to compositions via short names.
 // Names map to sonic-pi-<name>.scsyndef files vendored in /supersonic/synthdefs/.
@@ -43,7 +44,7 @@ export const SYNTH_PALETTE = [
   "sc808_tomlo",
 ];
 
-const FX_SYNTHS = ["fx_gverb", "fx_level"];
+const FX_SYNTHS = ["fx_gverb", "fx_level", "fx_normaliser"];
 
 function fullName(short) {
   return `sonic-pi-${short}`;
@@ -114,7 +115,15 @@ class MusicEngine {
       this.masterId = supersonic.nextNodeId();
       supersonic.send(
         "/s_new", fullName("fx_level"), this.masterId, 1, this.fxGroup,
-        "in_bus", WET_BUS, "out_bus", 0, "amp", 0.9,
+        "in_bus", WET_BUS, "out_bus", LIMIT_BUS, "amp", 0.9,
+      );
+      // Last stage: peak normaliser, so even a definition that ignores its
+      // amp parameter is pulled toward the target level before the speakers.
+      // (Not a hard limiter: fast transients can still overshoot.)
+      this.normaliserId = supersonic.nextNodeId();
+      supersonic.send(
+        "/s_new", fullName("fx_normaliser"), this.normaliserId, 1, this.fxGroup,
+        "in_bus", LIMIT_BUS, "out_bus", 0, "level", 0.5,
       );
 
       await supersonic.sync();

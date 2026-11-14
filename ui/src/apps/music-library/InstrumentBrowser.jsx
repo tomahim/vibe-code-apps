@@ -72,6 +72,18 @@ export default function InstrumentBrowser({ onHome }) {
     }
   }
 
+  // A loaded definition can still fail to instantiate (unsupported unit
+  // generators fail server-side without a JS error) - probe the node tree.
+  function verifyInstantiation(rawName) {
+    setTimeout(() => {
+      const tree = engine.supersonic?.getRawTree?.();
+      const sounding = tree?.nodes?.some((n) => !n.isGroup && n.defName === rawName);
+      if (!sounding) {
+        setError(`"${rawName}" loaded but produced no sound - it may use unit generators the browser engine does not support.`);
+      }
+    }, 600);
+  }
+
   function stopPreview() {
     if (previewTimer.current) clearTimeout(previewTimer.current);
     previewTimer.current = null;
@@ -110,6 +122,7 @@ export default function InstrumentBrowser({ onHome }) {
       const bytes = await response.arrayBuffer();
       const realName = await engine.importSynth(bytes);
       armPreview(engine.preview(realName, { raw: true }), item.name);
+      verifyInstantiation(realName);
     } catch (err) {
       setError(`Could not preview ${item.name}: ${err.message}`);
     }
@@ -190,8 +203,9 @@ export default function InstrumentBrowser({ onHome }) {
         </button>
         <div>
           <h1>Instrument browser</h1>
-          <p>Every instrument the SuperCollider engine can play. Preview any of them,
-            or add a new one as a .scsyndef file.</p>
+          <p>The instruments available in this app's catalogue - the built-in set
+            plus anything imported here. Preview any of them, or add a new one as a
+            .scsyndef file.</p>
         </div>
       </header>
 
@@ -304,7 +318,10 @@ export default function InstrumentBrowser({ onHome }) {
                   <button
                     type="button"
                     className="ml-play"
-                    onClick={() => armPreview(engine.preview(detected.name, { raw: true }), detected.name)}
+                    onClick={() => {
+                      armPreview(engine.preview(detected.name, { raw: true }), detected.name);
+                      verifyInstantiation(detected.name);
+                    }}
                   >
                     ▶ Preview
                   </button>
