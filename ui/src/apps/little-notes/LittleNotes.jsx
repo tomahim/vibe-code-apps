@@ -51,7 +51,7 @@ export default function LittleNotes({ onHome }) {
   const [loading, setLoading] = useState(true); const [drawer, setDrawer] = useState(false);
   const [capture, setCapture] = useState(false); const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ title: "", type: "bookmark", body_markdown: "", external_url: "", saved_on: localDate() });
-  const [refresh, setRefresh] = useState(0); const [quickTag, setQuickTag] = useState(""); const [quickCategory, setQuickCategory] = useState("");
+  const [refresh, setRefresh] = useState(0); const [taxonomyRefresh, setTaxonomyRefresh] = useState(0); const [quickTag, setQuickTag] = useState(""); const [quickCategory, setQuickCategory] = useState("");
   const generation = useRef(0);
   const modalRef = useRef(null);
   const detailRef = useRef(null);
@@ -89,10 +89,20 @@ export default function LittleNotes({ onHome }) {
         const value = viewCache.current[route.type] || "default";
         setRoute(old => ({ ...old, view: value, month: value === "calendar" && !old.month ? localDate().slice(0, 7) : old.month }));
       }
-    } }).catch(e => setError(e.message)); }, [signedIn, refresh]);
+    } }).catch(e => setError(e.message)); }, [signedIn, taxonomyRefresh]);
+  const routeItemRef = useRef(routeItem);
+  useEffect(() => { routeItemRef.current = routeItem; }, [routeItem]);
+  const refreshSeen = useRef(refresh);
   useEffect(() => {
     if (!signedIn) { setLoading(false); return; }
-    const current = ++generation.current; setLoading(true); setError(""); if (!routeItem) { setSelected(null); setDetailOpen(false); }
+    const current = ++generation.current;
+    // A refresh bumped by a quick action (archive, categorize, tag, undo) keeps
+    // the current view on screen while the list catches up. Only browsing -
+    // filters, pages, views, the first load - replaces it with the loader.
+    const background = refresh !== refreshSeen.current;
+    refreshSeen.current = refresh;
+    if (!background) setLoading(true);
+    setError(""); if (!routeItemRef.current) { setSelected(null); setDetailOpen(false); }
     const timer = setTimeout(async () => {
       try {
         const params = new URLSearchParams({ type, category, tag, month, q, page: view === "calendar" ? 1 : page });
@@ -108,12 +118,12 @@ export default function LittleNotes({ onHome }) {
         }
         if (current !== generation.current) return;
         setItems(result.items); setTotal(result.total); setNext(result.next_page); setCategoryCounts(result.category_counts || null); setTypeCounts(result.type_counts || null);
-        if (!routeItem && view === "default" && result.items[0]) { const detail = await api(`content/${result.items[0].id}/`); if (current === generation.current) setSelected(detail); }
+        if (!routeItemRef.current && view === "default" && result.items[0]) { const detail = await api(`content/${result.items[0].id}/`); if (current === generation.current) setSelected(detail); }
       } catch (e) { if (current === generation.current) setError(e.message); }
       finally { if (current === generation.current) setLoading(false); }
     }, q ? 200 : 0);
     return () => { clearTimeout(timer); generation.current++; };
-  }, [signedIn, type, category, tag, month, q, page, refresh, view, routeItem]);
+  }, [signedIn, type, category, tag, month, q, page, refresh, view]);
   function filter(setter, value) { setRoute(old => ({ ...old, item: "" })); setter(value); setPage(1); setDrawer(false); flash(""); }
   const visibleCategories = taxonomy.categories.filter(c => !type || !c.types.length || c.types.includes(type));
   // Archive is a destination, not a triage lane: it stays available as a small
@@ -136,7 +146,7 @@ export default function LittleNotes({ onHome }) {
     let active = true; setBusy(true); setError("");
     api(`content/${routeItem}/`).then(item => { if (active) { setSelected(item); setDetailOpen(true); } }).catch(e => { if (active) { setSelected(null); setError(`Could not open this object: ${e.message}`); } }).finally(() => { if (active) setBusy(false); });
     return () => { active = false; };
-  }, [signedIn, routeItem, refresh]);
+  }, [signedIn, routeItem]);
   async function toggle(path, key, slug, enabled = true) {
     if (!selected || busy) return; setBusy(true); setError("");
     // In the API, Inbox and Archive are mutually exclusive, and choosing any
@@ -159,7 +169,9 @@ export default function LittleNotes({ onHome }) {
     try {
       const updated = await api(`content/${selected.id}/${path}/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ [key]: slug, enabled, updated_at: selected.updated_at }) });
       flash(slug === "archive" ? "Kept in Archive. Nothing deleted." : `${slug} ${enabled ? "added" : "removed"}.`, before ? { id: selected.id, before } : null);
-      if (leaving) setRoute(old => ({ ...old, item: nextId }));
+      // The object just left this view: clear the stage at once instead of
+      // showing the moved object until the next one's detail arrives.
+      if (leaving) { setSelected(null); setDetailOpen(false); setRoute(old => ({ ...old, item: nextId })); }
       else setSelected(updated);
       setRefresh(x => x + 1);
     } catch (e) { setError(e.message); } finally { setBusy(false); }
@@ -188,6 +200,7 @@ export default function LittleNotes({ onHome }) {
         current = await api(`content/${move.id}/categories/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: step.slug, enabled: step.enabled, updated_at: current.updated_at }) });
       }
       flash("Undone. Back where it was.");
+      setSelected(current);
       setRoute(old => ({ ...old, item: move.id }));
       setRefresh(x => x + 1);
     } catch (e) { setError(`Could not undo: ${e.message}`); setNotice(""); }
@@ -200,8 +213,8 @@ export default function LittleNotes({ onHome }) {
   async function save(e) {
     e.preventDefault(); setBusy(true); setError("");
     try {
-      await api(editing ? `content/${selected.id}/` : "content/", { method: editing ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(draft) });
-      setCapture(false); setRefresh(x => x + 1); flash(editing ? "Changes saved." : "Saved to Inbox.");
+      const saved = await api(editing ? `content/${selected.id}/` : "content/", { method: editing ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(draft) });
+      setCapture(false); if (editing) setSelected(saved); setRefresh(x => x + 1); setTaxonomyRefresh(x => x + 1); flash(editing ? "Changes saved." : "Saved to Inbox.");
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   }
   async function changeView(value) {
@@ -225,7 +238,7 @@ export default function LittleNotes({ onHome }) {
   return <div className={`ln-app ln-theme-${theme}`}>
     <header className="ln-header"><button className="ln-home" onClick={onHome} aria-label="Back to apps">↖</button><span className="ln-brand">little notes<span>IN / OUT</span></span><div className="ln-header-actions"><button className="ln-theme-toggle" aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} onClick={toggleTheme}>{theme === "dark" ? "☀" : "☾"}</button><button onClick={openCapture} disabled={!signedIn}>+ Capture</button><AccountMenu /></div></header>
     {!signedIn ? <main className="ln-signin"><p className="ln-eyebrow">YOUR PERSONAL COLLECTION</p><h1>A little room<br />for later.</h1><p>Ideas, bookmarks, news, videos, work ideas and daily notes. Sign in to open your own collection.</p><a href="/login">Sign in →</a></main> : <>
-      {admin && taxonomy.can_manage_taxonomy ? <TaxonomyAdmin key={route.adminKind} initialKind={route.adminKind} onKindChange={value => setRoute(old => ({ ...old, adminKind: value }))} taxonomy={taxonomy} api={api} onCreated={() => setRefresh(x => x + 1)} onClose={() => setAdmin(false)} /> : <div className="ln-workspace">
+      {admin && taxonomy.can_manage_taxonomy ? <TaxonomyAdmin key={route.adminKind} initialKind={route.adminKind} onKindChange={value => setRoute(old => ({ ...old, adminKind: value }))} taxonomy={taxonomy} api={api} onCreated={() => { setRefresh(x => x + 1); setTaxonomyRefresh(x => x + 1); }} onClose={() => setAdmin(false)} /> : <div className="ln-workspace">
         <aside className={`ln-sidebar ${drawer ? "is-open" : ""}`} aria-label="Object type filters"><button className="ln-close" onClick={() => setDrawer(false)}>Close filters ×</button><p className="ln-eyebrow">YOUR OBJECTS</p><button className={!type ? "active" : ""} onClick={() => chooseType("")}>◉ <span>Everything</span><SideCount counts={typeCounts} slug="all" /></button>{taxonomy.types.map(t => <button key={t.slug} className={type === t.slug ? "active" : ""} onClick={() => chooseType(t.slug)}>{t.icon || icons[t.slug] || "◇"}<span>{t.name}</span><SideCount counts={typeCounts} slug={t.slug} /></button>)}<div className="ln-sidebar-foot"><strong>KEEP THE THOUGHT.<br />CLEAR THE INBOX.</strong><p>No folders to maintain.<br />Just types, dates and categories.</p></div>{taxonomy.can_manage_taxonomy && <button className="ln-manage-button" onClick={() => { setDrawer(false); setAdmin(true); }}><span aria-hidden="true">⚙</span> Manage</button>}</aside>
         <main className="ln-main"><div className="ln-toolbar"><button className="ln-filter-button" onClick={() => setDrawer(true)}>☰ Types</button><label className="ln-search"><span>⌕</span><input type="search" placeholder="Find a thought, link, phrase..." value={q} onChange={e => filter(setQ, e.target.value)} aria-label="Search content" /></label><select value={month} onChange={e => filter(setMonth, e.target.value)} aria-label="Browse by saved month">{view !== "calendar" && <option value="">All months</option>}{month && !taxonomy.months.some(m => m.month === month) && <option value={month}>{month}</option>}{taxonomy.months.map(m => <option key={m.month} value={m.month}>{m.month} · {m.count}</option>)}</select></div>
           <nav className="ln-tabs" aria-label="Category filters"><button className={!category ? "active" : ""} onClick={() => filter(setCategory, "")}>All<TabCount counts={categoryCounts} slug="all" /></button>{tabCategories.map(c => <button key={c.slug} className={category === c.slug ? "active" : ""} onClick={() => filter(setCategory, c.slug)}>{c.name}<TabCount counts={categoryCounts} slug={c.slug} /></button>)}<select aria-label="Topic tag filter" value={tag} onChange={e => filter(setTag, e.target.value)}><option value="">More tags</option>{taxonomy.tags.map(t => <option key={t.slug} value={t.slug}>{t.name}</option>)}</select></nav>

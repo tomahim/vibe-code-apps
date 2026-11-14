@@ -21,8 +21,10 @@ await page.addInitScript(()=>localStorage.setItem('genious_token','visual-fixtur
 const withCats=(rec,slugs)=>({...rec,categories:slugs.map(slug=>({slug,name:CATS.find(c=>c.slug===slug).name}))});
 const initial=()=>new Map(records.map(r=>[r.id,r.categories.map(c=>c.slug)]));
 let state=initial();
+const apiLog=[];
 await page.route('**/api/apps/little-notes/**',async route=>{
  const u=new URL(route.request().url());let body;
+ apiLog.push(route.request().method()+' '+u.pathname+u.search);
  if(u.pathname.endsWith('/taxonomy/'))body={types:[['idea','Ideas'],['bookmark','Bookmarks'],['news','News'],['daily-note','Daily notes']].map(([slug,name])=>({slug,name})),categories:CATS,tags:[{slug:'topic-coding-agents-x',name:'Coding agents',is_system:false}],months:[{month:'2026-11',count:7},{month:'2026-10',count:10}]};
  else if(u.pathname.endsWith('/categories/')){
    const id=u.pathname.split('/').filter(Boolean).slice(-2)[0];
@@ -152,12 +154,21 @@ await page.getByRole('button',{name:'Archive ↗',exact:true}).click();await pag
 state=initial();
 await page.goto('http://localhost:5199/apps/little-notes');
 await page.getByRole('heading',{name:'A small cabinet for big ideas'}).waitFor();
+// Quick actions stay light: Skip only loads the next object's detail (no
+// taxonomy or list refetch), and an archive never refetches the taxonomy.
+apiLog.length=0;
 await page.getByRole('button',{name:'Skip →'}).click();
 await page.getByRole('heading',{name:'A field guide to quiet interfaces'}).waitFor();
+await page.waitForTimeout(400);
+if(apiLog.some(r=>r.includes('taxonomy/')))throw new Error('Skip refetched the taxonomy');
+if(apiLog.some(r=>r.includes('content/?')))throw new Error('Skip refetched the list');
+apiLog.length=0;
 await page.setViewportSize({width:390,height:844});
 await page.screenshot({path:`${screenshots}/triage-skip-390.png`,fullPage:true});
 await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
 await page.getByRole('heading',{name:'What the newest maps can tell us'}).waitFor();
+await page.waitForTimeout(400);
+if(apiLog.some(r=>r.includes('taxonomy/')))throw new Error('Archive refetched the taxonomy');
 if(await page.getByRole('button',{name:'Back to inbox',exact:false}).count())throw new Error('Archived object stayed on stage after archive');
 await page.screenshot({path:`${screenshots}/triage-archive-advance-390.png`,fullPage:true});
 await page.getByRole('button',{name:'Archive ↗',exact:true}).click();
@@ -184,5 +195,5 @@ await page.screenshot({path:`${screenshots}/triage-categorize-advance-390.png`,f
 await page.getByLabel('Assign a category').selectOption({label:'Add Inspiration'});
 await page.getByRole('heading',{name:'What the newest maps can tell us'}).waitFor();
 if(!state.get('b1').includes('inspiration')||state.get('b1').includes('inbox'))throw new Error('Category select must clear Inbox, got '+state.get('b1'));
-console.log('PASS desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; categorize-in-Inbox advance clears Inbox; no horizontal overflow');
+console.log('PASS light quick actions (no taxonomy/list refetch); desktop/mobile320/390; type-linked category tabs; type-filtered card+queue; More tags fullyVisible='+fullyVisible+' x='+Math.round(selBox.x)+' w='+Math.round(selBox.width)+' vp='+vp+'; capture/Escape/search/empty/reset/archive; skip-archive/restore triage advance; categorize-in-Inbox advance clears Inbox; no horizontal overflow');
 await browser.close();server.kill('SIGTERM'); await new Promise(resolve => server.once('exit', resolve));
