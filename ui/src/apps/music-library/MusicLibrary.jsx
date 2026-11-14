@@ -4,6 +4,7 @@ import { createPerformance } from "./engine/player.js";
 import { tracks as bundledTracks } from "./tracks/index.js";
 import Tutorial from "./Tutorial.jsx";
 import { fetchCategories, fetchTrack, fetchTracks } from "./api.js";
+import { loadSounds } from "./sounds.js";
 import "./music-library.css";
 
 const EDIT_BASE = "/apps/music-library/edit";
@@ -109,6 +110,11 @@ export default function MusicLibrary({ onHome, onNavigate }) {
   }, [mode, source]);
 
   useEffect(() => () => performanceRef.current.stop(), []);
+
+  // Warm the memoized sounds list so the editor's sounds pane is instant.
+  useEffect(() => {
+    loadSounds();
+  }, []);
 
   async function togglePlay(item) {
     setError("");
