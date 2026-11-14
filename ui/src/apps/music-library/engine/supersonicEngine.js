@@ -10,7 +10,9 @@ import { audioEnvironmentProblem } from "./environment.js";
 
 export const MUSIC_BUS = 10; // private stereo bus pair (10/11): every note plays here
 export const WET_BUS = 12;   // reverb output pair (12/13), read by the master level
-const LIMIT_BUS = 14;        // master level output pair (14/15), read by the peak normaliser
+const LIMIT_BUS = 14;
+// Final speaker bound: every output sample is clipped to +-OUTPUT_CLIP.
+const OUTPUT_CLIP = 0.89;        // master level output pair (14/15), read by the peak normaliser
 
 // Synthdefs preloaded at boot and available to compositions via short names.
 // Names map to sonic-pi-<name>.scsyndef files vendored in /supersonic/synthdefs/.
@@ -127,6 +129,28 @@ class MusicEngine {
       );
 
       await supersonic.sync();
+
+      // Hard output bound: a final WebAudio stage clips every sample to
+      // +-OUTPUT_CLIP before the speakers. The normaliser only pulls the
+      // level toward a target (fast transients can overshoot), and an
+      // imported definition can ignore its amp parameter entirely - so the
+      // last word is a sample-level clip, outside the WASM engine.
+      const ctx = supersonic.audioContext;
+      const worklet = supersonic.node?.node ?? supersonic.node;
+      if (worklet && !this.outputShaper) {
+        const curve = new Float32Array(4096);
+        for (let i = 0; i < curve.length; i += 1) {
+          const x = (i / (curve.length - 1)) * 2 - 1;
+          curve[i] = Math.max(-OUTPUT_CLIP, Math.min(OUTPUT_CLIP, x));
+        }
+        this.outputShaper = ctx.createWaveShaper();
+        this.outputShaper.curve = curve;
+        this.outputShaper.oversample = "none";
+        worklet.disconnect();
+        worklet.connect(this.outputShaper);
+        this.outputShaper.connect(ctx.destination);
+      }
+
       this.ready = true;
       onStatus("Ready");
       return this;

@@ -207,6 +207,49 @@ for (let i = 0; i < 20; i += 1) {
 }
 check('import: persisted definition creates a node', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
 
+// Measured audible output of the persisted preview, tapped after the final
+// clip stage: it must be non-silent AND stay inside the hard bound.
+const persistedAudio = await page.evaluate(async () => {
+  const e = window.__musicEngine;
+  const ctx = e.supersonic.audioContext;
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 4096;
+  e.outputShaper.connect(analyser);
+  await new Promise((r) => setTimeout(r, 1500));
+  const buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  let sum = 0; let peak = 0;
+  for (const v of buf) { sum += v * v; peak = Math.max(peak, Math.abs(v)); }
+  return { rms: Math.sqrt(sum / buf.length), peak };
+});
+check('import: persisted preview audibly renders', persistedAudio.rms > 0.005, `output RMS ${persistedAudio.rms.toFixed(4)}`);
+check('import: persisted preview within hard bound', persistedAudio.peak <= 0.90, `peak ${persistedAudio.peak.toFixed(4)} (bound 0.89)`);
+
+// The clip must hold for a signal that tries to exceed it: inject a 2.0x
+// full-scale oscillator straight into the final stage and measure the peak.
+const clipPeak = await page.evaluate(async () => {
+  const e = window.__musicEngine;
+  const ctx = e.supersonic.audioContext;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  gain.gain.value = 2.0;
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 4096;
+  osc.connect(gain);
+  gain.connect(e.outputShaper);
+  e.outputShaper.connect(analyser);
+  osc.start();
+  await new Promise((r) => setTimeout(r, 1200));
+  const buf = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buf);
+  osc.stop();
+  osc.disconnect(); gain.disconnect();
+  let peak = 0;
+  for (const v of buf) peak = Math.max(peak, Math.abs(v));
+  return peak;
+});
+check('output clip: over-range signal stays within bound', clipPeak <= 0.90, `peak ${clipPeak.toFixed(4)} with a 2.0x test signal (bound 0.89)`);
+
 await browser.close();
 server.kill();
 
