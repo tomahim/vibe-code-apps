@@ -3,6 +3,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import CodeEditor from "../../components/CodeEditor.jsx";
 import { getEngine, MUSIC_BUS } from "./engine/supersonicEngine.js";
 import { SOUND_CATALOG } from "./soundCatalog.js";
+import { loadSounds } from "./sounds.js";
 import { createPerformance } from "./engine/player.js";
 import { tracks as bundledTracks } from "./tracks/index.js";
 import {
@@ -79,7 +80,10 @@ export default function MusicEditor({ trackId, onNavigate }) {
   const [paneOpen, setPaneOpen] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 900px)").matches,
   );
-  const [soundItems, setSoundItems] = useState(null);
+  // Render the bundled catalog immediately; the API result (ready flags and
+  // imported sounds) swaps in when it arrives, so a slow API never shows a
+  // spinner. See sounds.js.
+  const [soundItems, setSoundItems] = useState(SOUND_CATALOG);
   const [soundQuery, setSoundQuery] = useState("");
   const [soundType, setSoundType] = useState("");
   const [previewingSound, setPreviewingSound] = useState("");
@@ -147,17 +151,17 @@ export default function MusicEditor({ trackId, onNavigate }) {
     return () => window.removeEventListener("beforeunload", handler);
   }, [dirty, isNew, isApi]);
 
-  // Sounds list: the instruments API when deployed, else the static catalogue.
+  // Sounds list: static catalog first, refreshed from the instruments API
+  // (memoized in sounds.js; the list page warms it).
   useEffect(() => {
-    if (!paneOpen || soundItems !== null) return;
-    fetch("/api/apps/instruments/instruments/")
-      .then((response) => {
-        if (!response.ok) throw new Error(`instruments API ${response.status}`);
-        return response.json();
-      })
-      .then((data) => setSoundItems(data.instruments))
-      .catch(() => setSoundItems(SOUND_CATALOG));
-  }, [paneOpen, soundItems]);
+    let active = true;
+    loadSounds().then((items) => {
+      if (active) setSoundItems(items);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   function updateCode(value) {
     setCode(value);
@@ -591,7 +595,6 @@ export default function MusicEditor({ trackId, onNavigate }) {
                 Each note also takes amp, pan, attack, dur, release, cutoff, res; notes as
                 names ("C#3") or MIDI numbers.
               </p>
-              {soundItems === null && <p className="ml-status">Loading sounds…</p>}
               <ul className="ml-sound-list">
                 {visibleSounds.map((it) => (
                   <li key={`${it.origin ?? "builtin"}:${it.name}`}>
