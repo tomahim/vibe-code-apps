@@ -361,6 +361,37 @@ const persisted = await page.locator('.cm-content').innerText();
 check('ui: edit survives reload from API', persisted.includes('roundtrip-marker-4815 edit2'), persisted.includes('roundtrip-marker-4815') ? 'code persisted' : `tail: ${persisted.slice(-80)}`);
 await page.screenshot({ path: '/tmp/music-library-6-crud.png' });
 
+// 12. Revisions: list, play an older revision (editor untouched), restore it
+// with a warning about unsaved edits; the restore adds a NEW revision.
+await page.getByRole('button', { name: 'Revisions', exact: true }).click();
+await page.waitForFunction(() => document.querySelectorAll('.ml-version').length >= 2, null, { timeout: 10000 });
+const before = await page.locator('.ml-version').count();
+check('revisions: list shows history', before >= 2, `revisions: ${before}`);
+await page.locator('.ml-version').last().locator('.ml-sound-preview').click();
+await page.waitForFunction(() => (window.__musicEngine?.supersonic?.getRawTree()?.nodes ?? []).some((n) => !n.isGroup && n.defName.includes('prophet')), null, { timeout: 30000 });
+check('revisions: older revision plays', true, 'prophet node sounding');
+const editorAfterPlay = await page.locator('.cm-content').innerText();
+check('revisions: playing does not change the editor', editorAfterPlay.includes('edit2'), 'editor still has latest edit');
+await page.locator('.ml-editor-bar .ml-play').click(); // Stop
+await page.locator('.cm-content').click();
+await page.keyboard.press('Control+End');
+await page.keyboard.type(' UNSAVEDX');
+await page.locator('.ml-version').nth(1).getByRole('button', { name: 'Restore' }).click();
+const warn = await page.getByRole('alertdialog').innerText();
+check('revisions: restore warns about unsaved edits', warn.includes('unsaved edits'), warn.split('\n')[0]);
+await page.screenshot({ path: '/tmp/music-library-8-revisions.png' });
+await page.getByRole('button', { name: 'Discard edits and restore' }).click();
+await page.waitForFunction((n) => document.querySelectorAll('.ml-version').length === n + 1, before, { timeout: 10000 });
+const restoredCode = await page.locator('.cm-content').innerText();
+check('revisions: restore replaces editor with old code', restoredCode.includes('roundtrip-marker-4815') && !restoredCode.includes('UNSAVEDX') && !restoredCode.includes('edit2'), restoredCode.slice(-60));
+check('revisions: restore adds a new revision', true, `${before} -> ${before + 1}`);
+await page.reload();
+await page.locator('.cm-content').waitFor();
+await page.waitForFunction(() => document.querySelector('.cm-content')?.innerText.includes('roundtrip-marker-4815'), null, { timeout: 10000 });
+const afterReload = await page.locator('.cm-content').innerText();
+check('revisions: restored code persisted', !afterReload.includes('edit2'), 'server holds restored code');
+
+
 await browser.close();
 server.kill();
 

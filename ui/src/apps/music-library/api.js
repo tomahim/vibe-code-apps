@@ -54,3 +54,20 @@ export async function updateTrack(id, payload) {
   });
   return parse(response);
 }
+
+export async function fetchVersions(id, signal) {
+  const response = await fetch(`${API}/tracks/${id}/versions/`, { signal });
+  return parse(response);
+}
+
+export async function fetchVersion(id, versionId) {
+  const response = await fetch(`${API}/tracks/${id}/versions/${versionId}/`);
+  return parse(response);
+}
+
+export async function restoreVersion(id, versionId) {
+  const response = await authFetch(`${API}/tracks/${id}/versions/${versionId}/restore/`, {
+    method: "POST",
+  });
+  return parse(response);
+}
