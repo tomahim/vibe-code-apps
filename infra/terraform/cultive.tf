@@ -82,6 +82,26 @@ resource "railway_variable" "cultive_api_database_url" {
   }
 }
 
+# Transactional email (cultive PR #49): production delivery goes through
+# Brevo's HTTPS API because Railway blocks outbound SMTP below the Pro plan.
+# These two settings are non-secret. BREVO_API_KEY is deliberately NOT
+# declared here: the Railway provider reads live values back into Terraform
+# state on refresh, and the owner keeps this key out of state - it is entered
+# manually in Railway (decision 2026-11-14).
+resource "railway_variable" "cultive_api_email_backend" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = "EMAIL_BACKEND"
+  value          = "apps.emails.backends.BrevoEmailBackend"
+}
+
+resource "railway_variable" "cultive_api_default_from_email" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = "DEFAULT_FROM_EMAIL"
+  value          = "Cultive - Atomic learning app <no-reply@dailycultive.com>"
+}
+
 # Existing resources keep their current value when ignore_changes is added.
 # Therefore this change alone DOES NOT detach an existing api.DATABASE_URL
 # reference. Before changing the source API connection, securely set Cultive's
