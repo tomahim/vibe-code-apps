@@ -1,7 +1,7 @@
 """Bulk-import JSON API for Garmin export datasets.
 
 All endpoints except health require the shared JWT sign-in. Every import is
-idempotent (upsert on natural keys) and audited in garmin_import_batch.
+idempotent (upsert on natural keys).
 The loader script (api/scripts/garmin_export_import.py) posts raw export
 records; mapping.py owns all field and unit conversion.
 """
@@ -19,7 +19,7 @@ from apps.accounts.decorators import jwt_required
 from . import mapping
 from .models import (
     GarminActivity, GarminActivityFile, GarminActivitySplit,
-    GarminActivitySplitSummary, GarminImportBatch, GarminSourceFile,
+    GarminActivitySplitSummary,
 )
 
 MATCH_WINDOW = timedelta(seconds=5)
@@ -44,16 +44,6 @@ def _records(request):
     return records, None
 
 
-def _finish(batch, written, status=GarminImportBatch.STATUS_OK, error=""):
-    batch.records_written = written
-    batch.status = status
-    batch.error = error
-    batch.finished_at = timezone.now()
-    batch.save(
-        update_fields=["records_written", "status", "error", "finished_at"]
-    )
-
-
 def _bulk_upsert(model, objects, unique_fields, update_fields):
     if not objects:
         return 0
@@ -72,21 +62,10 @@ def _import_view(dataset):
         records, error = _records(request)
         if error:
             return error
-        batch = GarminImportBatch.objects.create(
-            owner=request.user,
-            dataset=dataset,
-            source_file=request.headers.get("X-Source-File", "")[:300],
-            records_received=len(records),
-        )
-        try:
-            written = IMPORTERS[dataset](request.user, records)
-        except Exception as exc:  # audit the failure, then surface it
-            _finish(batch, 0, GarminImportBatch.STATUS_ERROR, str(exc)[:2000])
-            raise
-        _finish(batch, written)
+        written = IMPORTERS[dataset](request.user, records)
         return JsonResponse(
             {"ok": True, "dataset": dataset, "received": len(records),
-             "written": written, "batch_id": batch.id}
+             "written": written}
         )
 
     return view
@@ -163,25 +142,6 @@ def _import_activity_files(user, records):
     return written
 
 
-def _import_source_files(user, records):
-    written = 0
-    with transaction.atomic():
-        for rec in records:
-            GarminSourceFile.objects.update_or_create(
-                owner=user,
-                path=rec["path"],
-                defaults={
-                    "size_bytes": rec.get("size_bytes") or 0,
-                    "sha256": rec.get("sha256", ""),
-                    "category": rec.get("category") or "",
-                    "status": rec.get("status") or GarminSourceFile.STATUS_RETAINED,
-                    "note": rec.get("note") or "",
-                },
-            )
-            written += 1
-    return written
-
-
 def _simple(model, map_fn, unique_fields, update_fields, needs_activities=False):
     def importer(user, records):
         ctx = {}
@@ -204,31 +164,7 @@ def _all_fields(model, exclude=("id", "owner_id")):
 IMPORTERS = {
     "activities": _import_activities,
     "activity-files": _import_activity_files,
-    "source-files": _import_source_files,
 }
-
-
-@require_GET
-@jwt_required
-def import_batches(request):
-    batches = GarminImportBatch.objects.filter(owner=request.user).order_by("-id")[:50]
-    return JsonResponse(
-        {
-            "batches": [
-                {
-                    "id": b.id,
-                    "dataset": b.dataset,
-                    "records_received": b.records_received,
-                    "records_written": b.records_written,
-                    "status": b.status,
-                    "error": b.error,
-                    "started_at": b.started_at.isoformat(),
-                    "finished_at": b.finished_at.isoformat() if b.finished_at else None,
-                }
-                for b in batches
-            ]
-        }
-    )
 
 
 @csrf_exempt

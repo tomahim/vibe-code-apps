@@ -10,7 +10,6 @@ from apps.accounts.tokens import issue_token
 
 from .models import (
     GarminActivity, GarminActivityFile, GarminActivitySplit,
-    GarminImportBatch,
 )
 
 User = get_user_model()
@@ -124,9 +123,6 @@ class ActivityImportTests(GarminBase):
         split = a.splits.get()
         self.assertEqual(split.measurements[0]["fieldEnum"], "WEIGHTED_MEAN_HEART_RATE")
         self.assertEqual(a.split_summaries.count(), 1)
-        batch = GarminImportBatch.objects.get()
-        self.assertEqual(batch.status, "ok")
-        self.assertEqual(batch.records_received, 1)
 
     def test_reimport_is_idempotent(self):
         self.post("activities", [SYNTH_ACTIVITY])

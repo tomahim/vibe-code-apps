@@ -237,7 +237,7 @@ class GarminActivityFile(OwnerModel):
     sport = models.CharField(max_length=40, blank=True, default="")
     activity = models.ForeignKey(
         GarminActivity, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="source_files",
+        related_name="files",
     )
     match_status = models.CharField(max_length=20, choices=MATCH_CHOICES)
     # Where the bytes live: 'export-uploaded-files' for the GDPR export, an
@@ -253,69 +253,3 @@ class GarminActivityFile(OwnerModel):
 
     class Meta:
         db_table = "garmin_activity_file"
-
-
-class GarminImportBatch(OwnerModel):
-    """Audit row for every bulk-import API call."""
-
-    STATUS_RUNNING = "running"
-    STATUS_OK = "ok"
-    STATUS_ERROR = "error"
-    STATUS_CHOICES = [
-        (STATUS_RUNNING, "Running"),
-        (STATUS_OK, "OK"),
-        (STATUS_ERROR, "Error"),
-    ]
-
-    dataset = models.CharField(max_length=40, db_index=True)
-    source_file = models.CharField(max_length=300, blank=True, default="")
-    records_received = models.IntegerField(default=0)
-    records_written = models.IntegerField(default=0)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_RUNNING)
-    error = models.TextField(blank=True, default="")
-    started_at = models.DateTimeField(auto_now_add=True)
-    finished_at = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_import_batch"
-
-
-# --- High-volume tier (DECISION PENDING - see docs/garmin-data-model.md) ---
-# These tables account for the remaining retrievable data. They are part of
-# the proposed schema so the review covers everything; whether the migration
-# ships them depends on Thomas's storage choice.
-
-
-class GarminSourceFile(OwnerModel):
-    """Preservation manifest: one row per file in the export.
-
-    Every file of the export archive is accounted for here, whether it was
-    parsed into tables (status 'parsed'), kept traceable ('retained'), left
-    for a later iteration ('deferred') or deliberately not imported
-    ('excluded', e.g. account data). This is the completeness guarantee for
-    the import: coverage is auditable per file, not asserted overall.
-    """
-
-    STATUS_PARSED = "parsed"
-    STATUS_RETAINED = "retained"
-    STATUS_DEFERRED = "deferred"
-    STATUS_EXCLUDED = "excluded"
-    STATUS_CHOICES = [
-        (STATUS_PARSED, "Parsed into tables"),
-        (STATUS_RETAINED, "Retained, traceable"),
-        (STATUS_DEFERRED, "Deferred to a later iteration"),
-        (STATUS_EXCLUDED, "Excluded by design"),
-    ]
-
-    path = models.CharField(max_length=500)
-    size_bytes = models.BigIntegerField()
-    sha256 = models.CharField(max_length=64, blank=True, default="")
-    category = models.CharField(max_length=60)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    note = models.CharField(max_length=300, blank=True, default="")
-
-    class Meta:
-        db_table = "garmin_source_file"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "path"], name="garmin_sourcefile_uniq")
-        ]

@@ -25,9 +25,8 @@ The export root contains `DI_CONNECT/` with these in-scope families:
 | `DI-Connect-Fitness/*_summarizedActivities.json` | paged shards | activity summaries (~93 fields) with nested split arrays |
 | `DI-Connect-Uploaded-Files/*.zip` | zip archives | original activity `.FIT` files (session/lap/event/sport messages) |
 
-Everything else in the export is out of scope. Out-of-scope files are still
-listed in the source-file manifest as excluded entries so coverage is
-auditable, but they are never parsed or imported.
+Everything else in the export is out of scope: those files are never parsed
+or imported.
 
 ### Units (verified against real records, owned by `mapping.py`)
 
@@ -63,7 +62,7 @@ files for every FIT base type, endianness, arrays, sentinels, strings,
 developer definitions and compressed-timestamp headers, and was
 cross-checked against the maintained `fitparse` library on real files.
 
-## Model overview (6 tables)
+## Model overview (4 tables)
 
 All tables are owner-scoped (`auth_user` FK), `garmin_` prefixed, and the
 activity table carries a `raw` JSONB of the source record (with gear/device
@@ -77,19 +76,16 @@ Domain (sports activities):
 - `garmin_activity_file` — FIT reference: sha256, size, record_count,
   fit_messages, match status, NULLable activity FK (N:1 activity)
 
-Ingest bookkeeping:
-- `garmin_import_batch` — one row per bulk API call (dataset, counts, status)
-- `garmin_source_file` — manifest: one row per file found in the export
-  (path, size, sha256, class: imported/excluded)
+No ingest bookkeeping tables: import progress, counts and errors are the
+loader script's console output, not database rows.
 
 ## Import flow
 
 `api/scripts/garmin_export_import.py` (stdlib + requests) runs locally against
 the extracted ZIP, scans FIT headers with the app's parser, and posts batches
 to `POST /api/apps/garmin/import/<dataset>/` (JWT). The API maps and upserts
-records keyed by natural IDs and writes a manifest row per source file.
-Idempotent: re-running an import updates in place. Out-of-scope export files
-are recorded in the manifest as excluded and never read beyond classification.
+records keyed by natural IDs. Idempotent: re-running an import updates in
+place.
 
 ## Open items
 

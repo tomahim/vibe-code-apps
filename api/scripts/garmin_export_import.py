@@ -105,12 +105,10 @@ def scan_fit_files(export_dir, hash_all=False):
     return rows
 
 
-def post_batch(session, api_base, dataset, records, source_file=""):
-    headers = {"X-Source-File": source_file}
+def post_batch(session, api_base, dataset, records):
     r = session.post(
         f"{api_base}/api/apps/garmin/import/{dataset}/",
         json={"records": records},
-        headers=headers,
         timeout=120,
     )
     r.raise_for_status()
@@ -144,12 +142,11 @@ def main():
         for i in range(0, len(records), args.batch_size):
             result = post_batch(
                 session, args.api_base, dataset,
-                records[i:i + args.batch_size], source_file=pattern,
+                records[i:i + args.batch_size],
             )
             print(f"{dataset}: {result['written']} written (batch {i // args.batch_size + 1})")
 
-    # .FIT files: activity files get the timestamp-match import; every file
-    # (any type) also lands in the source-file manifest.
+    # .FIT files: activity files get the timestamp-match import.
     if not wanted or "activity-files" in wanted:
         rows = scan_fit_files(args.export_dir)
         act_rows = [r for r, t in rows if t == 4]
