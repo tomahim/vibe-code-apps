@@ -17,6 +17,7 @@ urlpatterns = [
     path("api/apps/recipes/", include("apps.recipes.urls")),
     path("api/apps/hockey/", include("apps.hockey.urls")),
     path("api/apps/knob-conservatory/", include("apps.knob_conservatory.urls")),
+    path("api/apps/music-library/", include("apps.music_library.urls")),
 ]
 
 # Local disk media is served by Django in DEBUG only; production uses the bucket.
