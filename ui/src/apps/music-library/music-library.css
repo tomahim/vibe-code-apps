@@ -253,8 +253,19 @@
 }
 
 /* Tutorial mode */
-.ml-tutorial-toggle {
-  align-self: start;
+.ml-header-actions {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.ml-tutorial-toggle,
+.ml-sounds-link {
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.2;
   padding: 8px 16px;
   border-radius: 999px;
   border: 1px solid #d8b96a55;
@@ -264,7 +275,8 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.ml-tutorial-toggle:hover { background: #d8b96a22; }
+.ml-tutorial-toggle:hover,
+.ml-sounds-link:hover { background: #d8b96a22; }
 .ml-steps {
   display: flex;
   align-items: center;
@@ -448,13 +460,6 @@
 }
 
 .ib-add .ml-palette-toggle:disabled { opacity: 0.5; cursor: default; }
-
-.ml-sounds-link {
-  color: #d4a94e;
-  font-size: 14px;
-  align-self: center;
-  white-space: nowrap;
-}
 
 /* Library list: search, filters, pagination, save flow */
 .ml-filters {
