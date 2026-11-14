@@ -18,6 +18,7 @@ const Hockey = lazy(() => import("../apps/hockey/Hockey.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
 const KnobConservatory = lazy(() => import("../apps/knob-conservatory/KnobConservatory.jsx"));
 const MusicLibrary = lazy(() => import("../apps/music-library/MusicLibrary.jsx"));
+const MusicEditor = lazy(() => import("../apps/music-library/MusicEditor.jsx"));
 const InstrumentBrowser = lazy(() => import("../apps/music-library/InstrumentBrowser.jsx"));
 
 export default function App() {
@@ -88,8 +89,13 @@ export default function App() {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0d1017", color: "#d8b96a", display: "grid", placeItems: "center" }}>Tuning the instruments…</div>}><InstrumentBrowser onHome={() => navigate("/apps/music-library")} /></Suspense>;
   }
 
+  if (path.startsWith("/apps/music-library/edit/")) {
+    const trackId = decodeURIComponent(path.split("/")[4] ?? "");
+    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0d1017", color: "#d8b96a", display: "grid", placeItems: "center" }}>Opening the editor…</div>}><MusicEditor key={trackId} trackId={trackId} onNavigate={navigate} /></Suspense>;
+  }
+
   if (path.startsWith("/apps/music-library")) {
-    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0d1017", color: "#d8b96a", display: "grid", placeItems: "center" }}>Tuning the instruments…</div>}><MusicLibrary onHome={() => navigate("/")} /></Suspense>;
+    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0d1017", color: "#d8b96a", display: "grid", placeItems: "center" }}>Tuning the instruments…</div>}><MusicLibrary onHome={() => navigate("/")} onNavigate={navigate} /></Suspense>;
   }
 
   if (path.startsWith("/apps/rust-learning-path")) {

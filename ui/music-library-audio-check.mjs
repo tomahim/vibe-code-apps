@@ -29,13 +29,20 @@ const check = (name, ok, detail) => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${name}: ${detail}`);
 };
 const settle = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const openEditor = async (name) => {
+  await page.locator('.ml-track', { hasText: name }).getByRole('link', { name: 'Edit' }).click();
+  await page.locator('.cm-content').waitFor();
+  await page.waitForFunction(() => !document.querySelector('.ml-editor-page .ml-play')?.disabled, null, { timeout: 15000 });
+  await settle(300);
+};
+const editorPlay = () => page.locator('.ml-editor-bar .ml-play').click();
 
 // 1. Library renders all tracks.
 const trackButtons = await page.locator('.ml-track').allTextContents();
 check('library lists 3 tracks', trackButtons.length === 3, trackButtons.join(' | '));
 
 // 2. Play boots the engine (this click is the required user gesture).
-await page.getByRole('button', { name: /Play/ }).click();
+await page.locator('.ml-row-play').first().click();
 let booted = false;
 for (let i = 0; i < 120; i += 1) {
   booted = await page.evaluate(() => Boolean(window.__musicEngine?.ready));
@@ -77,29 +84,28 @@ const rms = await page.evaluate(async () => {
 });
 check('audio renders', rms > 0.005, `output RMS ${rms.toFixed(4)}`);
 
-// 5. Switching track stops playback cleanly and the second score loads.
-await page.locator('.ml-track', { hasText: 'First Light' }).click();
-await settle(600);
+// 5. Row play stops cleanly; the Edit link opens the separate editor page.
+await page.locator('.ml-row-play.stop').click();
+await settle(400);
+await openEditor('First Light');
+check('editor route opens', page.url().includes('/apps/music-library/edit/'), page.url());
 const editorText = await page.locator('.cm-content').textContent();
 check('second score loads', editorText.includes('First Light'), 'editor shows First Light code');
 
-// 6. Edited code runs: replace the score with a single fast beep loop and play.
-await page.evaluate(() => {
-  // Select all in the focused editor is brittle; use the React path instead:
-});
-await page.getByRole('button', { name: /Play/ }).click();
+// 6. Editor Play hears the (unedited) score.
+await editorPlay();
 await settle(3000);
 const replayNodes = await page.evaluate(() => window.__musicEngine.supersonic.getRawTree()?.nodeCount ?? -1);
 check('second track plays', replayNodes > 3, `tree nodes: ${replayNodes}`);
-await page.getByRole('button', { name: /Stop/ }).click();
+await editorPlay(); // Stop
+await page.goBack();
+await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
 
 // 6b. Night Pursuit: percussion score schedules 808 kit nodes and renders.
-await page.getByRole('button', { name: /Stop/ }).click().catch(() => {});
-await page.locator('.ml-track', { hasText: 'Night Pursuit' }).click();
-await settle(600);
+await openEditor('Night Pursuit');
 const pursuitCode = await page.locator('.cm-content').textContent();
 check('pursuit score loads', pursuitCode.includes('Night Pursuit'), 'editor shows Night Pursuit code');
-await page.getByRole('button', { name: /Play/ }).click();
+await editorPlay();
 await settle(5000);
 const pursuit = await page.evaluate(() => {
   const t = window.__musicEngine.supersonic.getRawTree();
@@ -121,7 +127,20 @@ const pursuitRms = await page.evaluate(async () => {
   return Math.sqrt(sum / buf.length);
 });
 check('pursuit audio renders', pursuitRms > 0.005, `output RMS ${pursuitRms.toFixed(4)}`);
-await page.getByRole('button', { name: /Stop/ }).click();
+
+// 6b2. Playing edited, UNSAVED code: type a marker note and hear it.
+await page.locator('.cm-content').click();
+await page.keyboard.press('Control+Home');
+await page.keyboard.type('m.play("blade", { note: "A3", dur: 6, amp: 0.3 });\n');
+await settle(300);
+check('unsaved edit is flagged', await page.getByText('Code changed', { exact: false }).isVisible(), 'banner visible while playing');
+await editorPlay(); await settle(300); await editorPlay(); // stop, play again with the edit
+await settle(2500);
+const editedDefs = await page.evaluate(() => window.__musicEngine.supersonic.getRawTree().nodes.filter((n) => !n.isGroup).map((n) => n.defName));
+check('edited (unsaved) code plays', editedDefs.some((d) => d.includes('blade')), `nodes: ${editedDefs.slice(0, 8).join(', ')}`);
+await editorPlay(); // Stop
+await page.goBack();
+await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
 
 // 6d. Server-side library search (only when the API is reachable).
 const searchBox = page.locator('.ml-search');
@@ -150,19 +169,15 @@ check('tutorial lesson plays', lessonNodes > 2, `tree nodes: ${lessonNodes}`);
 await page.getByRole('button', { name: 'Library', exact: true }).click(); // mode switch stops playback
 await settle(400);
 
-// 7. Mobile screenshots.
-await page.locator('.ml-track', { hasText: 'Neon Rain' }).click();
+// 7. Screenshots: library list, then editor with the sounds pane.
 await settle(400);
-await page.screenshot({ path: '/tmp/music-library-1-track.png' });
-await page.locator('.ml-editor').scrollIntoViewIfNeeded();
-await settle(300);
+await page.screenshot({ path: '/tmp/music-library-1-list.png' });
+await openEditor('Neon Rain');
 await page.screenshot({ path: '/tmp/music-library-2-editor.png' });
-await page.getByRole('button', { name: /Play/ }).click();
-for (let i = 0; i < 40; i += 1) {
-  if (await page.getByRole('button', { name: /Stop/ }).isVisible().catch(() => false)) break;
-  await settle(250);
-}
-await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
+await page.getByRole('button', { name: /Available sounds/ }).click();
+await settle(600);
+await page.screenshot({ path: '/tmp/music-library-3-pane.png' });
+await page.goBack();
 
 // 8. Instrument browser page: renders the catalogue, search works, preview plays.
 await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library/sounds'));
@@ -270,8 +285,11 @@ check('output clip: over-range signal stays within bound', clipPeak <= 0.90, `pe
 await page.evaluate(() => { const e = window.__musicEngine; e?.supersonic?.send('/g_freeAll', e.sourceGroup); });
 await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library'));
 await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
-await page.getByRole('button', { name: /Available sounds/ }).click();
+await openEditor('Neon Rain');
+const paneBtn = page.getByRole('button', { name: /Available sounds/ });
+if (await paneBtn.count()) await paneBtn.click();
 await page.locator('.ml-sound-palette .ml-search').waitFor();
+await page.waitForFunction(() => document.querySelectorAll('.ml-sound-list li').length > 1, null, { timeout: 15000 });
 const dbRows = await page.locator('.ml-sound-list li').count();
 check('palette: serves the DB catalogue, not the fallback', dbRows === 62, `rows: ${dbRows}`);
 await page.locator('.ml-sound-palette .ml-search').fill('zawa');
@@ -314,29 +332,31 @@ const palEditor = await page.locator('.cm-content').innerText();
 check('palette: import inserts a playable call', palEditor.includes('m.play("sonic-pi-zawa"'), 'm.play("sonic-pi-zawa", ...) in editor');
 await page.screenshot({ path: '/tmp/music-library-7-palette.png' });
 await page.getByRole('button', { name: /Hide sounds/ }).click();
+check('sounds pane collapses', await page.locator('.ml-sound-pane').count() === 0, 'pane removed');
+await page.goBack();
 
 // 11. UI CRUD roundtrip against the API: create through the UI, edit, save,
 // reload, and verify the edit persisted from the server.
-await page.getByRole('button', { name: '+ New track' }).click();
+await page.getByRole('link', { name: '+ New track' }).click();
+await page.locator('.cm-content').waitFor();
 await page.locator('.ml-details input').first().fill('Roundtrip Check Track');
 await page.locator('.cm-content').click();
 await page.keyboard.press('Control+End');
 await page.keyboard.type('\n// roundtrip-marker-4815');
 await page.getByRole('button', { name: 'Save new track' }).click();
-await page.getByText('Saved "Roundtrip Check Track" to the library', { exact: false }).waitFor({ timeout: 10000 });
-check('ui: create track saves via API', true, 'created');
+await page.waitForURL(/\/apps\/music-library\/edit\/\d+/, { timeout: 10000, waitUntil: 'commit' });
+check('ui: create track saves via API', true, page.url());
+await page.locator('.cm-content').waitFor();
+await page.waitForFunction(() => document.querySelector('.cm-content')?.innerText.includes('roundtrip-marker-4815'), null, { timeout: 10000 });
 await page.locator('.cm-content').click();
 await page.keyboard.press('Control+End');
 await page.keyboard.type(' edit2');
-await page.getByRole('button', { name: 'Save to library' }).click();
+await page.getByRole('button', { name: 'Save', exact: true }).click();
 await page.getByText('Saved "Roundtrip Check Track".', { exact: false }).waitFor({ timeout: 10000 });
 check('ui: edit track saves via API', true, 'updated');
 await page.reload();
-await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
-await page.locator('.ml-search').fill('Roundtrip');
-await settle(800);
-await page.locator('.ml-track', { hasText: 'Roundtrip Check Track' }).click();
-await settle(800);
+await page.locator('.cm-content').waitFor();
+await page.waitForFunction(() => document.querySelector('.cm-content')?.innerText.includes('edit2'), null, { timeout: 10000 });
 const persisted = await page.locator('.cm-content').innerText();
 check('ui: edit survives reload from API', persisted.includes('roundtrip-marker-4815 edit2'), persisted.includes('roundtrip-marker-4815') ? 'code persisted' : `tail: ${persisted.slice(-80)}`);
 await page.screenshot({ path: '/tmp/music-library-6-crud.png' });
