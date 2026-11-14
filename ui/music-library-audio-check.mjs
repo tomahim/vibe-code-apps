@@ -164,23 +164,6 @@ for (let i = 0; i < 40; i += 1) {
 }
 await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
 
-// 9. Sound palette: opens, searches, previews (engine node appears), inserts
-// a playable call into the editor.
-await page.getByRole('button', { name: /Available sounds/ }).click();
-await page.locator('.ml-sound-palette .ml-search').fill('tb303');
-await settle(400);
-const soundRows = await page.locator('.ml-sound-list li').count();
-check('palette: search filters catalogue', soundRows === 1, `rows: ${soundRows}`);
-await page.locator('.ml-sound-list li .ml-sound-preview').click();
-await settle(700); // probe before the 1.2s auto-free
-const paletteNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
-check('palette: preview sounds', paletteNodes.some((n) => n.includes('tb303')), `nodes: ${paletteNodes.join(', ')}`);
-await page.locator('.ml-sound-list li .ml-sound-insert').click();
-await settle(400);
-const paletteEditorText = await page.locator('.cm-content').innerText();
-check('palette: insert adds a playable call', paletteEditorText.includes('m.play("tb303"'), 'm.play("tb303", ...) in editor');
-await page.getByRole('button', { name: /Hide sounds/ }).click();
-
 // 8. Instrument browser page: renders the catalogue, search works, preview plays.
 await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library/sounds'));
 await page.waitForSelector('.ib-card', { timeout: 15000 });
@@ -200,8 +183,8 @@ const stopVisible = await page.locator('.ib-card').getByRole('button', { name: /
 if (stopVisible) await page.locator('.ib-card').getByRole('button', { name: /Stop/ }).click();
 await settle(400);
 
-// 10. Sign in, then exercise the import roundtrip on the sounds page and the
-// track CRUD roundtrip on the library page, each against the API.
+// 9. Import roundtrip: sign in, upload a real vendored synthdef as a new
+// instrument, save it, reload, preview the persisted definition.
 await page.evaluate(async () => {
   const r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: 'thomas', password: 'checkpass1' }) });
@@ -279,8 +262,61 @@ const clipPeak = await page.evaluate(async () => {
   return peak;
 });
 check('output clip: over-range signal stays within bound', clipPeak <= 0.90, `peak ${clipPeak.toFixed(4)} with a 2.0x test signal (bound 0.89)`);
+
+// 10. Editor palette on the DB catalogue (#555+#556+#557 combined): proves the
+// palette consumes the instruments API rather than the static fallback (62
+// rows = 61 seeded + the imported zawa), previews the persisted import through
+// the output clip, and inserts a playable call at the cursor.
+await page.evaluate(() => { const e = window.__musicEngine; e?.supersonic?.send('/g_freeAll', e.sourceGroup); });
 await page.goto(page.url().replace(/\/apps\/music-library.*/, '/apps/music-library'));
 await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
+await page.getByRole('button', { name: /Available sounds/ }).click();
+await page.locator('.ml-sound-palette .ml-search').waitFor();
+const dbRows = await page.locator('.ml-sound-list li').count();
+check('palette: serves the DB catalogue, not the fallback', dbRows === 62, `rows: ${dbRows}`);
+await page.locator('.ml-sound-palette .ml-search').fill('zawa');
+await settle(400);
+const zawaRow = page.locator('.ml-sound-list li', { hasText: 'sonic-pi-zawa' });
+check('palette: imported instrument listed', await zawaRow.count() === 1, 'sonic-pi-zawa row');
+// The library list page boots the engine lazily on the first user gesture, so
+// the first preview click starts the WASM boot; a second click once booted is
+// the one measured for audible output through the clip stage.
+await zawaRow.locator('.ml-sound-preview').click();
+await page.waitForFunction(
+  () => Boolean(window.__musicEngine?.supersonic?.audioContext && window.__musicEngine?.outputShaper),
+  null,
+  { timeout: 30000 },
+);
+await zawaRow.locator('.ml-sound-preview').click();
+const palAudio = await page.evaluate(async () => {
+  const e = window.__musicEngine;
+  const ctx = e.supersonic.audioContext;
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 4096;
+  e.outputShaper.connect(analyser);
+  const buf = new Float32Array(analyser.fftSize);
+  let peak = 0; let bestRms = 0;
+  const t0 = performance.now();
+  while (performance.now() - t0 < 4000) {
+    await new Promise((r) => setTimeout(r, 150));
+    analyser.getFloatTimeDomainData(buf);
+    let sum = 0;
+    for (const v of buf) { sum += v * v; peak = Math.max(peak, Math.abs(v)); }
+    bestRms = Math.max(bestRms, Math.sqrt(sum / buf.length));
+  }
+  return { rms: bestRms, peak };
+});
+check('palette: persisted import previews audibly', palAudio.rms > 0.005, `RMS ${palAudio.rms.toFixed(4)}`);
+check('palette: preview within output clamp', palAudio.peak <= 0.90, `peak ${palAudio.peak.toFixed(4)} (bound 0.89)`);
+await zawaRow.locator('.ml-sound-insert').click();
+await settle(400);
+const palEditor = await page.locator('.cm-content').innerText();
+check('palette: import inserts a playable call', palEditor.includes('m.play("sonic-pi-zawa"'), 'm.play("sonic-pi-zawa", ...) in editor');
+await page.screenshot({ path: '/tmp/music-library-7-palette.png' });
+await page.getByRole('button', { name: /Hide sounds/ }).click();
+
+// 11. UI CRUD roundtrip against the API: create through the UI, edit, save,
+// reload, and verify the edit persisted from the server.
 await page.getByRole('button', { name: '+ New track' }).click();
 await page.locator('.ml-details input').first().fill('Roundtrip Check Track');
 await page.locator('.cm-content').click();
