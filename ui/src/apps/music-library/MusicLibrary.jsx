@@ -391,18 +391,20 @@ export default function MusicLibrary({ onHome }) {
             SuperCollider engine (SuperSonic / scsynth on WebAssembly). No server:
             press play, read the score, change the code.</p>
         </div>
-        <button
-          type="button"
-          className="ml-tutorial-toggle"
-          onClick={() => {
-            performanceRef.current.stop();
-            setPlaying(false);
-            setMode(mode === "tutorial" ? "library" : "tutorial");
-          }}
-        >
-          {mode === "tutorial" ? "Library" : "Tutorial"}
-        </button>
-        <a className="ml-sounds-link" href="/apps/music-library/sounds">Sounds</a>
+        <div className="ml-header-actions">
+          <button
+            type="button"
+            className="ml-tutorial-toggle"
+            onClick={() => {
+              performanceRef.current.stop();
+              setPlaying(false);
+              setMode(mode === "tutorial" ? "library" : "tutorial");
+            }}
+          >
+            {mode === "tutorial" ? "Library" : "Tutorial"}
+          </button>
+          <a className="ml-sounds-link" href="/apps/music-library/sounds">Sounds</a>
+        </div>
       </header>
 
       {mode === "tutorial" ? (
