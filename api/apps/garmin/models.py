@@ -242,6 +242,10 @@ class GarminActivityFile(OwnerModel):
     # Where the bytes live: 'export-uploaded-files' for the GDPR export, an
     # object-storage key prefix once raw files move to the media bucket.
     storage_ref = models.CharField(max_length=300, blank=True, default="")
+    # Value-level decode of known FIT messages (sessions/laps/events/sport/
+    # device_info), keyed by FIT field number - no semantic mapping, so
+    # nothing is guessed. Undocumented message types stay raw-bytes-only.
+    fit_messages = models.JSONField(default=dict)
 
     class Meta:
         db_table = "garmin_activity_file"

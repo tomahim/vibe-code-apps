@@ -174,6 +174,78 @@ def _fit_scan(data):
 
 FIT_TYPE_NAMES = {4: "activity", 32: "monitoring_b", 35: "segment_list"}
 
+# FIT base types we decode generically (base type number -> (struct char, size)).
+_BASE = {
+    0: ("B", 1), 1: ("b", 1), 2: ("B", 1), 5: ("B", 1), 10: ("B", 1), 13: ("B", 1),
+    3: ("h", 2), 4: ("H", 2), 8: ("f", 4),
+    6: ("i", 4), 7: ("I", 4), 11: ("d", 8), 12: ("q", 8), 9: ("Q", 8),
+}
+# Known message types decoded into extra payload, keyed by field number.
+_DECODED_GMN = {18: "sessions", 19: "laps", 21: "events", 12: "sport", 23: "device_info"}
+
+
+def _fit_decode(data, gmn_wanted):
+    """Generic walk: decode wanted message types into {field_num: value} dicts.
+
+    Values keep field numbers (no semantic names, no unit conversion) so
+    nothing is guessed; the DB stores them in the file row's extra JSONB.
+    FIT epoch fields stay as raw ints (seconds since 1989-12-31 UTC).
+    """
+    defs = {}
+    out = {name: [] for name in set(gmn_wanted.values())}
+    try:
+        pos = data[0]
+        data_end = pos + struct.unpack_from("<I", data, 4)[0]
+        while pos < data_end:
+            rh = data[pos]
+            pos += 1
+            if rh & 0x80:
+                local = (rh >> 5) & 3
+            elif rh & 0x40:
+                local = rh & 0x0F
+                dev = bool(rh & 0x20)
+                fmt = ">" if data[pos + 1] else "<"
+                gmn = struct.unpack_from(fmt + "H", data, pos + 2)[0]
+                nf = data[pos + 4]
+                fields = []
+                p2 = pos + 5
+                for _ in range(nf):
+                    fields.append((data[p2], data[p2 + 1], data[p2 + 2]))
+                    p2 += 3
+                dsz = 0
+                if dev:
+                    ndf = data[p2]
+                    p2 += 1
+                    for _ in range(ndf):
+                        dsz += data[p2 + 1]
+                        p2 += 3
+                defs[local] = (gmn, fields, fmt, dsz)
+                pos = p2
+                continue
+            else:
+                local = rh & 15
+            if local not in defs:
+                break
+            gmn, fields, fmt, dsz = defs[local]
+            if gmn in gmn_wanted:
+                rec = {}
+                for num, size, btype in fields:
+                    bt = btype & 0x1F
+                    if bt in _BASE and size >= _BASE[bt][1]:
+                        ch, sz = _BASE[bt]
+                        vals = struct.unpack_from(fmt + ch * (size // sz), data, pos)
+                        rec[num] = vals[0] if len(vals) == 1 else list(vals)
+                    else:
+                        rec[num] = data[pos:pos + size].hex()
+                    pos += size
+                out[gmn_wanted[gmn]].append(rec)
+            else:
+                pos += sum(sz for _, sz, _ in fields)
+            pos += dsz
+    except (IndexError, struct.error):
+        pass
+    return {k: v for k, v in out.items() if v}
+
 
 def scan_fit_files(export_dir, hash_all=False):
     """Yield manifest/activity-file rows for every .FIT in Uploaded-Files zips."""
@@ -188,9 +260,14 @@ def scan_fit_files(export_dir, hash_all=False):
                     continue
                 head = z.read(info)[:8192]
                 ftype, start, sport = _fit_scan(head)
-                if ftype == 4 and start is None:
-                    # session messages sit near the end of activity files
-                    ftype, start, sport = _fit_scan(z.read(info))
+                if ftype == 4:
+                    full = z.read(info)
+                    if start is None:
+                        # session messages sit near the end of activity files
+                        ftype, start, sport = _fit_scan(full)
+                    row_extra = _fit_decode(full, _DECODED_GMN)
+                else:
+                    row_extra = {}
                 row = {
                     "file_name": info.filename,
                     "size_bytes": info.file_size,
@@ -199,6 +276,8 @@ def scan_fit_files(export_dir, hash_all=False):
                     "sport": sport if isinstance(sport, str) else (str(sport) if sport else ""),
                     "storage_ref": f"export:{os.path.basename(zip_path)}",
                 }
+                if row_extra:
+                    row["extra"] = row_extra
                 if hash_all or ftype == 4:
                     row["sha256"] = hashlib.sha256(z.read(info)).hexdigest()
                 rows.append((row, ftype))

@@ -62,12 +62,13 @@ Preservation has two distinct layers:
 
 FIT message coverage, from a full message-level census of a real export:
 
-- Decoded today by the loader: `file_id` (type), `session` (start time,
-  sport) of activity files.
+- Decoded by the loader: `file_id` (type) plus value-level decode of
+  `session`, `lap`, `event`, `sport` and `device_info` messages into
+  `garmin_activity_file.fit_messages`, keyed by FIT field number with raw
+  FIT-epoch timestamps - no semantic names or unit conversions guessed.
 - Known message types present and NOT yet decoded (identified remaining
-  work): per-second `record`, `lap`, `event`, `activity`, `sport`,
-  `device_info`, `zones_target`, `hrv`, and developer data
-  (`developer_data_id`, `field_description`).
+  work): per-second `record`, `activity`, `zones_target`, `hrv`, and
+  developer data (`developer_data_id`, `field_description`).
 - Undocumented message types present (raw-bytes-only until reverse
   engineered): ~15 types, including the two per-second types above.
 
@@ -138,8 +139,8 @@ derived, not measured on Postgres:
 | D | raw FIT in the existing media bucket + on-demand sample import | bucket bytes only | incremental bucket cost/egress unknown; needs the provider account to price |
 
 No default is chosen. A maximum-detail goal points at B or D; B is gated on
-real headroom, D is now cost-grounded (~$0.015/month on the existing bucket)
-but still needs explicit approval before any bytes move.
+real headroom, D on verified vendor pricing - and both need explicit
+approval before any bytes move.
 
 ## Import flow
 
@@ -152,10 +153,11 @@ file. Idempotent: re-running an import updates in place.
 ## Decision questions
 
 1. Storage option A/B/C/D for per-second activity samples (none chosen).
-   Option D cost grounding: the existing shared bucket is a Railway Bucket
-   priced at $0.015/GB-month with free operations and egress (repo's own
-   docs/object-storage.md); a full export's FIT bytes (~0.4 GB) round up to
-   ~$0.015/month on the existing bucket - no new resource needed.
+   Option D would reuse the existing shared Railway bucket (see
+   docs/object-storage.md); current vendor pricing and any minimum
+   GB-month billing still need verification against Railway's own pricing
+   source before any cost claim. FIT byte volume is measured by the loader
+   at import time.
 2. Actual free-db size: the `instinct_readonly` role's login failed at
    proposal time, so option B's headroom is unverified.
 

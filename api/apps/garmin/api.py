@@ -157,6 +157,7 @@ def _import_activity_files(user, records):
                     "activity_id": activity_id,
                     "match_status": status,
                     "storage_ref": rec.get("storage_ref") or "",
+                    "fit_messages": rec.get("extra") or {},
                 },
             )
             written += 1
