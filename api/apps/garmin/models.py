@@ -1,4 +1,7 @@
-"""Garmin Connect history: activities, daily wellness, metrics and gear.
+"""Garmin Connect history: sports activities and their splits/laps.
+
+Scope set by Thomas (2026-11-14): no daily fitness, sleep, continuous
+wellness, per-second samples, segments, or gear/equipment data.
 
 Data-model proposal for review - see docs/garmin-data-model.md for the
 verified source contract, unit conventions, deferred export domains and the
@@ -133,8 +136,6 @@ class GarminActivity(OwnerModel):
     min_longitude = models.FloatField(null=True, blank=True)
     max_longitude = models.FloatField(null=True, blank=True)
 
-    device_id = models.BigIntegerField(null=True, blank=True)
-    manufacturer = models.CharField(max_length=50, blank=True, default="")
     user_profile_id = models.BigIntegerField(null=True, blank=True)
     summarized_dive_info = models.JSONField(null=True, blank=True)
 
@@ -243,7 +244,7 @@ class GarminActivityFile(OwnerModel):
     # object-storage key prefix once raw files move to the media bucket.
     storage_ref = models.CharField(max_length=300, blank=True, default="")
     # Value-level decode of known FIT messages (sessions/laps/events/sport/
-    # device_info), keyed by FIT field number - no semantic mapping, so
+    # zones/hrv), keyed by FIT field number - no semantic mapping, so
     # nothing is guessed. Undocumented message types stay raw-bytes-only.
     fit_messages = models.JSONField(default=dict)
     # Per-second record messages counted during the scan (decoded records
@@ -252,267 +253,6 @@ class GarminActivityFile(OwnerModel):
 
     class Meta:
         db_table = "garmin_activity_file"
-
-
-class DatedMetricModel(OwnerModel):
-    """Base for dated metric time series from DI-Connect-Metrics."""
-
-    calendar_date = models.DateField()
-    device_id = models.BigIntegerField(null=True, blank=True)
-    timestamp = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        abstract = True
-
-
-class GarminVo2Max(DatedMetricModel):
-    sport = models.CharField(max_length=50, blank=True, default="")
-    sub_sport = models.CharField(max_length=50, blank=True, default="")
-    vo2max_value = models.FloatField(null=True, blank=True)
-    activity = models.ForeignKey(
-        GarminActivity, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="vo2max_entries",
-    )
-    timestamp_gmt = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_vo2max"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["owner", "calendar_date", "sport"], name="garmin_vo2max_uniq"
-            )
-        ]
-
-
-class GarminRacePrediction(DatedMetricModel):
-    race_time_5k = models.FloatField(null=True, blank=True)
-    race_time_10k = models.FloatField(null=True, blank=True)
-    race_time_half = models.FloatField(null=True, blank=True)
-    race_time_marathon = models.FloatField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_race_prediction"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_racepred_uniq")
-        ]
-
-
-class GarminEnduranceScore(DatedMetricModel):
-    overall_score = models.FloatField(null=True, blank=True)
-    classification = models.CharField(max_length=50, blank=True, default="")
-    endurance_score_contributor = models.CharField(max_length=50, blank=True, default="")
-    feedback_phrase = models.CharField(max_length=200, blank=True, default="")
-    primary_training_device = models.BooleanField(default=False)
-
-    class Meta:
-        db_table = "garmin_endurance_score"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_endurance_uniq")
-        ]
-
-
-class GarminHillScore(DatedMetricModel):
-    overall_score = models.FloatField(null=True, blank=True)
-    endurance_score = models.FloatField(null=True, blank=True)
-    strength_score = models.FloatField(null=True, blank=True)
-    hill_score_classification_id = models.IntegerField(null=True, blank=True)
-    hill_score_feedback_phrase_id = models.IntegerField(null=True, blank=True)
-    primary_training_device = models.BooleanField(default=False)
-
-    class Meta:
-        db_table = "garmin_hill_score"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_hill_uniq")
-        ]
-
-
-class GarminTrainingStatus(DatedMetricModel):
-    sport = models.CharField(max_length=50, blank=True, default="")
-    sub_sport = models.CharField(max_length=50, blank=True, default="")
-    training_status = models.CharField(max_length=50, blank=True, default="")
-    fitness_level_trend = models.CharField(max_length=50, blank=True, default="")
-    feedback_phrase = models.CharField(max_length=200, blank=True, default="")
-
-    class Meta:
-        db_table = "garmin_training_status"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["owner", "calendar_date", "sport"], name="garmin_trstatus_uniq"
-            )
-        ]
-
-
-class GarminAcuteTrainingLoad(DatedMetricModel):
-    daily_training_load_acute = models.FloatField(null=True, blank=True)
-    daily_training_load_chronic = models.FloatField(null=True, blank=True)
-    daily_acute_chronic_workload_ratio = models.FloatField(null=True, blank=True)
-    acwr_percent = models.FloatField(null=True, blank=True)
-    acwr_status = models.CharField(max_length=50, blank=True, default="")
-    acwr_status_feedback = models.CharField(max_length=200, blank=True, default="")
-
-    class Meta:
-        db_table = "garmin_acute_training_load"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_acuteload_uniq")
-        ]
-
-
-class GarminHeatAltitudeAcclimation(DatedMetricModel):
-    current_altitude = models.FloatField(null=True, blank=True)
-    heat_acclimation_percentage = models.FloatField(null=True, blank=True)
-    heat_trend = models.CharField(max_length=50, blank=True, default="")
-    heat_acclimation_timestamp = models.DateTimeField(null=True, blank=True)
-    previous_heat_acclimation_percentage = models.FloatField(null=True, blank=True)
-    previous_heat_acclimation_timestamp = models.DateTimeField(null=True, blank=True)
-    altitude_acclimation = models.FloatField(null=True, blank=True)
-    altitude_trend = models.CharField(max_length=50, blank=True, default="")
-    altitude_acclimation_timestamp = models.DateTimeField(null=True, blank=True)
-    altitude_acclimation_local_timestamp = models.DateTimeField(null=True, blank=True)
-    previous_altitude_acclimation = models.FloatField(null=True, blank=True)
-    previous_altitude_acclimation_timestamp = models.DateTimeField(null=True, blank=True)
-    prev_acclimation_percentage = models.FloatField(null=True, blank=True)
-    prev_altitude = models.FloatField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_heat_altitude_acclimation"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_acclimation_uniq")
-        ]
-
-
-class GarminMaxMet(DatedMetricModel):
-    sport = models.CharField(max_length=50, blank=True, default="")
-    sub_sport = models.CharField(max_length=50, blank=True, default="")
-    max_met = models.FloatField(null=True, blank=True)
-    max_met_category = models.CharField(max_length=50, blank=True, default="")
-    vo2max_value = models.FloatField(null=True, blank=True)
-    calibrated_data = models.JSONField(null=True, blank=True)
-    update_timestamp = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_max_met"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["owner", "calendar_date", "sport"], name="garmin_maxmet_uniq"
-            )
-        ]
-
-
-class GarminGear(OwnerModel):
-    gear_pk = models.BigIntegerField(primary_key=True)
-    uuid = models.CharField(max_length=64, blank=True, default="")
-    gear_type_name = models.CharField(max_length=50, blank=True, default="")
-    gear_status_name = models.CharField(max_length=50, blank=True, default="")
-    display_name = models.CharField(max_length=200, blank=True, default="")
-    custom_make_model = models.CharField(max_length=200, blank=True, default="")
-    date_begin = models.DateField(null=True, blank=True)
-    maximum_meters = models.FloatField(null=True, blank=True)
-    notified = models.BooleanField(default=False)
-    gear_version = models.SmallIntegerField(null=True, blank=True)
-    create_date = models.DateTimeField(null=True, blank=True)
-    update_date = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_gear"
-
-
-class GarminGearActivity(models.Model):
-    """M-N link from the export's gearActivityDTOs (gear mileage per activity)."""
-
-    gear = models.ForeignKey(GarminGear, on_delete=models.CASCADE, related_name="activity_links")
-    activity = models.ForeignKey(
-        GarminActivity, on_delete=models.CASCADE, related_name="gear_links"
-    )
-
-    class Meta:
-        db_table = "garmin_gear_activity"
-        constraints = [
-            models.UniqueConstraint(fields=["gear", "activity"], name="garmin_gear_activity_uniq")
-        ]
-
-
-class GarminPersonalRecord(OwnerModel):
-    personal_record_id = models.BigIntegerField(primary_key=True)
-    personal_record_type = models.CharField(max_length=100)
-    value = models.FloatField(null=True, blank=True)
-    # The export writes this as a display string ("Fri Oct 02 22:00:00 GMT
-    # 2026"); keep the text verbatim and the parsed date beside it.
-    pr_start_time_text = models.CharField(max_length=100, blank=True, default="")
-    pr_start_date = models.DateField(null=True, blank=True)
-    activity = models.ForeignKey(
-        GarminActivity, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="personal_records",
-    )
-    confirmed = models.BooleanField(default=False)
-    current = models.BooleanField(default=False)
-    created_date = models.DateField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_personal_record"
-
-
-class GarminWorkout(OwnerModel):
-    workout_id = models.BigIntegerField(primary_key=True)
-    workout_name = models.CharField(max_length=300, blank=True, default="")
-    description = models.TextField(blank=True, default="")
-    sport_type_key = models.CharField(max_length=50, blank=True, default="")
-    sport_type = models.JSONField(null=True, blank=True)
-    workout_steps = models.JSONField(null=True, blank=True)
-    estimated_duration_secs = models.FloatField(null=True, blank=True)
-    estimated_distance_unit = models.JSONField(null=True, blank=True)
-    avg_training_speed = models.FloatField(null=True, blank=True)
-    atp = models.BooleanField(default=False)
-    atp_plan_id = models.BigIntegerField(null=True, blank=True)
-    author = models.JSONField(null=True, blank=True)
-    shared = models.BooleanField(default=False)
-    create_date = models.DateTimeField(null=True, blank=True)
-    update_date = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_workout"
-
-
-class GarminWorkoutSchedule(OwnerModel):
-    """One scheduled workout entry (workoutScheduleList)."""
-
-    workout = models.ForeignKey(
-        GarminWorkout, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="schedules",
-    )
-    payload = models.JSONField(default=dict)
-
-    class Meta:
-        db_table = "garmin_workout_schedule"
-
-
-class GarminCourse(OwnerModel):
-    course_name = models.CharField(max_length=300, blank=True, default="")
-    course_type = models.JSONField(null=True, blank=True)
-    elevation_gain_m = models.FloatField(null=True, blank=True)
-    elevation_loss_m = models.FloatField(null=True, blank=True)
-    start_point = models.JSONField(null=True, blank=True)
-    geo_points = models.JSONField(null=True, blank=True)
-    access_control = models.JSONField(null=True, blank=True)
-    has_turn_detection_disabled = models.BooleanField(default=False)
-    create_date = models.DateTimeField(null=True, blank=True)
-    update_date = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_course"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["owner", "course_name", "create_date"], name="garmin_course_uniq"
-            )
-        ]
-
-
-class GarminWeeklyTrainingReport(OwnerModel):
-    primary_activity_type = models.JSONField(null=True, blank=True)
-    cross_training_enabled = models.BooleanField(default=False)
-    payload = models.JSONField(default=dict)
-
-    class Meta:
-        db_table = "garmin_weekly_training_report"
 
 
 class GarminImportBatch(OwnerModel):

@@ -39,19 +39,6 @@ from apps.garmin.fitdec import _fit_scan, _fit_decode, _DECODED_GMN  # noqa: E40
 DATASET_FILES = {
     # dataset -> (glob relative to DI_CONNECT, extractor)
     "activities": ("DI-Connect-Fitness/*_summarizedActivities.json", "activities"),
-    "vo2max": ("DI-Connect-Metrics/ActivityVo2Max_*.json", "plain"),
-    "race-predictions": ("DI-Connect-Metrics/RunRacePredictions_*.json", "plain"),
-    "endurance-scores": ("DI-Connect-Metrics/EnduranceScore_*.json", "plain"),
-    "hill-scores": ("DI-Connect-Metrics/HillScore_*.json", "plain"),
-    "training-status": ("DI-Connect-Metrics/TrainingHistory_*.json", "plain"),
-    "acute-training-load": ("DI-Connect-Metrics/MetricsAcuteTrainingLoad_*.json", "plain"),
-    "heat-altitude": ("DI-Connect-Metrics/MetricsHeatAltitudeAcclimation_*.json", "plain"),
-    "max-met": ("DI-Connect-Metrics/MetricsMaxMetData_*.json", "plain"),
-    "gear": ("DI-Connect-Fitness/*_gear.json", "gear"),
-    "personal-records": ("DI-Connect-Fitness/*_personalRecord.json", "personal_records"),
-    "workouts": ("DI-Connect-Fitness/*_workout.json", "workouts"),
-    "courses": ("DI-Connect-Routing/*_courses_*.json", "plain"),
-    "weekly-reports": ("DI-Connect-Fitness/*_weekly_training_report.json", "weekly_reports"),
 }
 
 # Files that carry account/personal data rather than sports data: imported as
@@ -65,33 +52,6 @@ def extract(records, kind):
         out = []
         for wrapper in records:
             out.extend(wrapper.get("summarizedActivitiesExport", []))
-        return out
-    if kind == "gear":
-        out = []
-        for wrapper in records:
-            links = {
-                int(pk): [l["activityId"] for l in links]
-                for pk, links in (wrapper.get("gearActivityDTOs") or {}).items()
-            }
-            for g in wrapper.get("gearDTOS", []):
-                g = dict(g)
-                g["activityIds"] = links.get(g.get("gearPk"), [])
-                out.append(g)
-        return out
-    if kind == "personal_records":
-        out = []
-        for wrapper in records:
-            out.extend(wrapper.get("personalRecords", []))
-        return out
-    if kind == "workouts":
-        out = []
-        for wrapper in records:
-            out.extend(wrapper.get("workoutList", []))
-        return out
-    if kind == "weekly_reports":
-        out = []
-        for wrapper in records:
-            out.extend(wrapper.get("weeklyTrainingReportExport", []))
         return out
     return records  # plain list files
 

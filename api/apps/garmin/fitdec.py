@@ -79,7 +79,7 @@ _BASE = {
 }
 # Known message types decoded into extra payload, keyed by field number.
 _DECODED_GMN = {18: "sessions", 19: "laps", 21: "events", 12: "sport",
-                23: "device_info", 34: "activity", 7: "zones_target", 78: "hrv"}
+                34: "activity", 7: "zones_target", 78: "hrv"}
 _RECORD_GMN = 20
 _DEV_DEF_GMN = 206   # field_description
 _DEV_ID_GMN = 207    # developer_data_id

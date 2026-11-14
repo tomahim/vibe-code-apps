@@ -10,7 +10,7 @@ from apps.accounts.tokens import issue_token
 
 from .models import (
     GarminActivity, GarminActivityFile, GarminActivitySplit,
-    GarminGear, GarminGearActivity, GarminImportBatch,
+    GarminImportBatch,
 )
 
 User = get_user_model()
@@ -143,17 +143,18 @@ class ActivityImportTests(GarminBase):
         self.post("activities", [SYNTH_ACTIVITY])
         c = auth_client(other)
         r = c.post(
-            "/api/apps/garmin/import/vo2max/",
-            data=json.dumps({"records": [
-                {"calendarDate": "2026-01-01", "sport": "RUNNING",
-                 "vo2MaxValue": 49.0, "activityId": 90000000001}
-            ]}),
+            "/api/apps/garmin/import/activity-files/",
+            data=json.dumps({"records": [{
+                "file_name": "cross.fit", "sha256": "3" * 64, "size_bytes": 10,
+                "session_start_time_gmt": 1760000000000,
+            }]}),
             content_type="application/json",
         )
         self.assertEqual(r.status_code, 200)
-        # The other user's VO2max row must not link to this user's activity.
-        from .models import GarminVo2Max
-        self.assertIsNone(GarminVo2Max.objects.get(owner=other).activity)
+        # Another user must never match this user's activity by timestamp.
+        f = GarminActivityFile.objects.get(owner=other)
+        self.assertEqual(f.match_status, "orphan")
+        self.assertIsNone(f.activity)
 
 
 class ActivityFileMatchingTests(GarminBase):
@@ -193,22 +194,6 @@ class ActivityFileMatchingTests(GarminBase):
         f = GarminActivityFile.objects.get(file_name="synthetic_3.fit")
         self.assertEqual(f.match_status, "ambiguous")
         self.assertIsNone(f.activity)
-
-
-class GearImportTests(GarminBase):
-    def test_gear_with_activity_links(self):
-        self.post("activities", [SYNTH_ACTIVITY])
-        r = self.post("gear", [{
-            "gearPk": 555,
-            "gearTypeName": "Shoes",
-            "customMakeModel": "Synthetic Shoe",
-            "activityIds": [90000000001, 99999999999],  # one missing activity
-        }])
-        self.assertEqual(r.status_code, 200)
-        gear = GarminGear.objects.get(gear_pk=555)
-        self.assertEqual(gear.custom_make_model, "Synthetic Shoe")
-        # Only the existing activity is linked.
-        self.assertEqual(GarminGearActivity.objects.count(), 1)
 
 
 # ---------------------------------------------------------------------------

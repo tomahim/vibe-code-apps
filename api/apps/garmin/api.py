@@ -19,9 +19,7 @@ from apps.accounts.decorators import jwt_required
 from . import mapping
 from .models import (
     GarminActivity, GarminActivityFile, GarminActivitySplit,
-    GarminActivitySplitSummary, GarminCourse, GarminGear, GarminGearActivity,
-    GarminImportBatch, GarminPersonalRecord, GarminSourceFile,
-    GarminWorkout, GarminWorkoutSchedule,
+    GarminActivitySplitSummary, GarminImportBatch, GarminSourceFile,
 )
 
 MATCH_WINDOW = timedelta(seconds=5)
@@ -165,57 +163,6 @@ def _import_activity_files(user, records):
     return written
 
 
-def _import_gear(user, records):
-    """Gear items plus their activity links (gearActivityDTOs shape)."""
-    written = 0
-    with transaction.atomic():
-        for rec in records:
-            gear = mapping.map_gear(rec, user)
-            gear.save()
-            links = [
-                GarminGearActivity(gear=gear, activity_id=gid)
-                for gid in rec.get("activityIds") or []
-                if GarminActivity.objects.filter(pk=gid).exists()
-            ]
-            GarminGearActivity.objects.bulk_create(links, ignore_conflicts=True)
-            written += 1
-    return written
-
-
-def _import_workouts(user, records):
-    written = 0
-    with transaction.atomic():
-        for rec in records:
-            mapping.map_workout(rec, user).save()
-            written += 1
-    return written
-
-
-def _import_workout_schedules(user, records):
-    workouts = {w.workout_id: w for w in GarminWorkout.objects.filter(owner=user)}
-    with transaction.atomic():
-        GarminWorkoutSchedule.objects.bulk_create(
-            [
-                GarminWorkoutSchedule(
-                    owner=user,
-                    workout=workouts.get(rec.get("workoutId")),
-                    payload=rec,
-                )
-                for rec in records
-            ],
-            ignore_conflicts=True,
-        )
-    return len(records)
-
-
-def _import_weekly_reports(user, records):
-    with transaction.atomic():
-        for rec in records:
-            mapping.map_weekly_report(rec, user).save()
-            written = len(records)
-    return written
-
-
 def _import_source_files(user, records):
     written = 0
     with transaction.atomic():
@@ -257,52 +204,6 @@ def _all_fields(model, exclude=("id", "owner_id")):
 IMPORTERS = {
     "activities": _import_activities,
     "activity-files": _import_activity_files,
-    "vo2max": _simple(
-        mapping.GarminVo2Max, mapping.map_vo2max,
-        ["owner", "calendar_date", "sport"], _all_fields(mapping.GarminVo2Max),
-        needs_activities=True,
-    ),
-    "race-predictions": _simple(
-        mapping.GarminRacePrediction, mapping.map_race_prediction,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminRacePrediction),
-    ),
-    "endurance-scores": _simple(
-        mapping.GarminEnduranceScore, mapping.map_endurance_score,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminEnduranceScore),
-    ),
-    "hill-scores": _simple(
-        mapping.GarminHillScore, mapping.map_hill_score,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminHillScore),
-    ),
-    "training-status": _simple(
-        mapping.GarminTrainingStatus, mapping.map_training_status,
-        ["owner", "calendar_date", "sport"], _all_fields(mapping.GarminTrainingStatus),
-    ),
-    "acute-training-load": _simple(
-        mapping.GarminAcuteTrainingLoad, mapping.map_acute_training_load,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminAcuteTrainingLoad),
-    ),
-    "heat-altitude": _simple(
-        mapping.GarminHeatAltitudeAcclimation, mapping.map_heat_altitude,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminHeatAltitudeAcclimation),
-    ),
-    "max-met": _simple(
-        mapping.GarminMaxMet, mapping.map_max_met,
-        ["owner", "calendar_date", "sport"], _all_fields(mapping.GarminMaxMet),
-    ),
-    "gear": _import_gear,
-    "personal-records": _simple(
-        mapping.GarminPersonalRecord, mapping.map_personal_record,
-        ["personal_record_id"], _all_fields(mapping.GarminPersonalRecord),
-        needs_activities=True,
-    ),
-    "workouts": _import_workouts,
-    "workout-schedules": _import_workout_schedules,
-    "courses": _simple(
-        mapping.GarminCourse, mapping.map_course,
-        ["owner", "course_name", "create_date"], _all_fields(mapping.GarminCourse),
-    ),
-    "weekly-reports": _import_weekly_reports,
     "source-files": _import_source_files,
 }
 
