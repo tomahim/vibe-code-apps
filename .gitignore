@@ -16,3 +16,9 @@ staticfiles/
 node_modules/
 dist/
 media/
+
+# Garmin export (private source data, never commit)
+DI_CONNECT/
+garmin_data*.zip
+garmin_extract/
+*.fit
