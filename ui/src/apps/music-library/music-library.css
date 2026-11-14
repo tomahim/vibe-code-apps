@@ -193,7 +193,9 @@
 
 .ml-editor-actions {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
 .ml-reset,
@@ -296,21 +298,126 @@
 }
 .ml-step-dot.active { background: #d8b96a; color: #0d1017; border-color: #d8b96a; }
 
+/* Shared form controls (library + instrument browser) */
+.ml-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 860px;
+  margin: 0 auto 16px;
+}
+
+.ml-search,
+.ml-category-filter,
+.ml-details input,
+.ml-details textarea {
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 10px;
+  color: #e8e4d8;
+  font: inherit;
+  font-size: 16px; /* keeps iOS from zooming on focus */
+  line-height: 1.35;
+  padding: 11px 14px;
+  min-height: 46px;
+  box-sizing: border-box;
+}
+
+.ml-search { flex: 1 1 220px; }
+
+.ml-category-filter {
+  flex: 0 1 auto;
+  min-width: 150px;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23d8b96a' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.ml-search::placeholder { color: #6b7386; }
+
+.ml-search:focus,
+.ml-category-filter:focus,
+.ml-details input:focus,
+.ml-details textarea:focus {
+  outline: none;
+  border-color: #d8b96a;
+  box-shadow: 0 0 0 2px #d8b96a33;
+}
+
+.ml-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.ml-details label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #9aa0b0;
+}
+
+.ml-details input[type="file"] {
+  padding: 9px 14px;
+  color: #9aa0b0;
+  font-size: 14px;
+}
+
+.ml-details input[type="file"]::file-selector-button {
+  background: transparent;
+  border: 1px solid #d8b96a66;
+  border-radius: 8px;
+  color: #d8b96a;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 14px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.ml-details input[type="file"]::file-selector-button:hover { border-color: #d8b96a; }
+
+.ml-save {
+  background: #d4a94e;
+  border: none;
+  border-radius: 10px;
+  color: #141824;
+  padding: 10px 18px;
+  min-height: 44px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ml-save:disabled { opacity: 0.5; cursor: default; }
+
+.ml-signin-hint { color: #d8b96a; }
+
 /* Instrument browser */
 .ib-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 10px;
+  gap: 12px;
   max-width: 860px;
-  margin: 0 auto 18px;
+  margin: 0 auto 24px;
 }
 
 .ib-card {
   background: #141824;
   border: 1px solid #2a3040;
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: border-color 120ms ease;
 }
+
+.ib-card:hover { border-color: #3d4761; }
 
 .ib-card header {
   display: flex;
@@ -322,14 +429,16 @@
 .ib-card h3 {
   margin: 0;
   font-size: 15px;
+  font-weight: 600;
   color: #e8e4d8;
   word-break: break-all;
 }
 
 .ib-badge {
   font-size: 11px;
-  border-radius: 6px;
-  padding: 2px 7px;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 3px 9px;
   white-space: nowrap;
 }
 
@@ -340,19 +449,38 @@
 .ib-blurb {
   color: #9aa0b0;
   font-size: 13px;
-  margin: 6px 0 10px;
+  line-height: 1.45;
+  margin: 6px 0 12px;
 }
 
-.ib-actions .ml-play { padding: 6px 14px; font-size: 13px; }
+.ib-actions .ml-play {
+  padding: 8px 18px;
+  min-height: 40px;
+  font-size: 14px;
+  border-radius: 10px;
+}
 
 .ib-add {
   max-width: 860px;
   margin: 0 auto 30px;
   border-top: 1px solid #2a3040;
-  padding-top: 14px;
+  padding-top: 20px;
 }
 
-.ib-add h2 { color: #e8e4d8; font-size: 18px; }
+.ib-add h2 {
+  margin: 0 0 8px;
+  color: #f0e6c8;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.ib-add .ml-palette-toggle {
+  padding: 10px 16px;
+  min-height: 44px;
+  font-size: 14px;
+}
+
+.ib-add .ml-palette-toggle:disabled { opacity: 0.5; cursor: default; }
 
 .ml-sounds-link {
   color: #d4a94e;
