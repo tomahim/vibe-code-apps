@@ -401,44 +401,106 @@
 .ml-signin-hint { color: #d8b96a; }
 
 /* Instrument browser */
+.ib-types { display: none; }
+
+@media (min-width: 720px) {
+  .ib-body {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .ib-types {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 0 0 158px;
+    position: sticky;
+    top: 16px;
+  }
+
+  .ib-types button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #9aa0b0;
+    font: inherit;
+    font-size: 13px;
+    padding: 7px 10px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .ib-types button:hover { color: #e8e4d8; background: #141824; }
+
+  .ib-types button.active {
+    background: #141824;
+    border-color: #2a3040;
+    color: #d8b96a;
+  }
+
+  .ib-type-count { color: #6b7386; font-size: 11px; }
+
+  .ib-main { flex: 1; min-width: 0; }
+
+  .ib-main .ml-filters,
+  .ib-main .ib-grid,
+  .ib-main .ib-add {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ib-main .ml-category-filter { display: none; }
+}
+
 .ib-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 8px;
   max-width: 860px;
   margin: 0 auto 24px;
 }
 
 .ib-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   background: #141824;
   border: 1px solid #2a3040;
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 9px 12px 9px 14px;
   transition: border-color 120ms ease;
 }
 
 .ib-card:hover { border-color: #3d4761; }
 
-.ib-card header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-}
+.ib-card .ib-info { flex: 1; min-width: 0; }
 
 .ib-card h3 {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #e8e4d8;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ib-badge {
-  font-size: 11px;
+  display: inline-block;
+  vertical-align: 1px;
+  font-size: 10px;
   font-weight: 500;
   border-radius: 999px;
-  padding: 3px 9px;
+  padding: 2px 6px;
+  margin-right: 6px;
   white-space: nowrap;
 }
 
@@ -448,15 +510,20 @@
 
 .ib-blurb {
   color: #9aa0b0;
-  font-size: 13px;
-  line-height: 1.45;
-  margin: 6px 0 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.ib-actions { flex: none; }
+
 .ib-actions .ml-play {
-  padding: 8px 18px;
-  min-height: 40px;
-  font-size: 14px;
+  padding: 7px 14px;
+  min-height: 38px;
+  font-size: 13px;
   border-radius: 10px;
 }
 

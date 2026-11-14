@@ -194,6 +194,10 @@ export default function InstrumentBrowser({ onHome }) {
     return true;
   });
   const types = [...new Set(items.map((i) => i.type).filter(Boolean))].sort();
+  const typeCounts = items.reduce((acc, i) => {
+    if (i.type) acc[i.type] = (acc[i.type] || 0) + 1;
+    return acc;
+  }, {});
 
   return (
     <main className="music-library">
@@ -209,6 +213,27 @@ export default function InstrumentBrowser({ onHome }) {
         </div>
       </header>
 
+      <div className="ib-body">
+        <nav className="ib-types" aria-label="Filter by type">
+          <button
+            type="button"
+            className={typeFilter === "" ? "active" : ""}
+            onClick={() => setTypeFilter("")}
+          >
+            All types <span className="ib-type-count">{items.length}</span>
+          </button>
+          {types.map((t) => (
+            <button
+              key={t}
+              type="button"
+              className={typeFilter === t ? "active" : ""}
+              onClick={() => setTypeFilter(t)}
+            >
+              {t} <span className="ib-type-count">{typeCounts[t]}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="ib-main">
       <div className="ml-filters">
         <input
           type="search"
@@ -242,13 +267,15 @@ export default function InstrumentBrowser({ onHome }) {
       <section className="ib-grid" aria-label="Instruments">
         {visible.map((item) => (
           <article key={item.name} className="ib-card">
-            <header>
+            <div className="ib-info">
               <h3>{item.name}</h3>
-              <span className={`ib-badge ${item.origin === "imported" ? "imported" : item.ready ? "ready" : "ondemand"}`}>
-                {item.origin === "imported" ? "Imported" : item.ready ? "Ready" : "Loads on demand"}
-              </span>
-            </header>
-            <p className="ib-blurb">{item.type}{item.blurb ? ` · ${item.blurb}` : ""}</p>
+              <p className="ib-blurb">
+                <span className={`ib-badge ${item.origin === "imported" ? "imported" : item.ready ? "ready" : "ondemand"}`}>
+                  {item.origin === "imported" ? "Imported" : item.ready ? "Ready" : "Loads on demand"}
+                </span>
+                {item.type}{item.blurb ? ` · ${item.blurb}` : ""}
+              </p>
+            </div>
             <div className="ib-actions">
               {previewing === item.name ? (
                 <button type="button" className="ml-play stop" onClick={stopPreview}>
@@ -334,6 +361,8 @@ export default function InstrumentBrowser({ onHome }) {
           </>
         )}
       </section>
+        </div>
+      </div>
     </main>
   );
 }
