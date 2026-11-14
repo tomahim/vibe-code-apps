@@ -124,6 +124,17 @@ class ActivityImportTests(GarminBase):
         self.assertEqual(split.measurements[0]["fieldEnum"], "WEIGHTED_MEAN_HEART_RATE")
         self.assertEqual(a.split_summaries.count(), 1)
 
+    def test_multi_megabyte_body_accepted(self):
+        # Long FIT tracks serialize to multi-MB activity records. The import
+        # route is meant to take them: Django's request.body read must not hit
+        # DATA_UPLOAD_MAX_MEMORY_SIZE (6 MB in settings) and the nginx
+        # template grants the route a matching 6 MB limit. This guards the
+        # Django half of that chain with a synthetic ~5.2 MB body.
+        big = dict(SYNTH_ACTIVITY, padding="x" * 5_000_000)
+        r = self.post("activities", [big])
+        self.assertEqual(r.status_code, 200, r.content[:200])
+        self.assertEqual(r.json()["written"], 1)
+
     def test_reimport_is_idempotent(self):
         self.post("activities", [SYNTH_ACTIVITY])
         updated = dict(SYNTH_ACTIVITY, calories=800.0)
