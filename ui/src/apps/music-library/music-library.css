@@ -772,3 +772,12 @@ a.ml-home { display: grid; place-items: center; text-decoration: none; color: in
 @media (min-width: 900px) {
   .ml-editor-layout .ml-sound-pane { height: calc(100vh - 150px); }
 }
+
+/* Revisions pane */
+.ml-version { flex-wrap: wrap; align-items: center; }
+.ml-version-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.ml-version-actions { display: flex; gap: 6px; flex: none; }
+.ml-restore-confirm { flex-basis: 100%; background: #1d1a12; border: 1px solid #d8b96a66; border-radius: 10px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ml-restore-confirm p { flex-basis: 100%; margin: 0; font-size: 0.8rem; color: #e6d9b0; }
+.ml-restore-confirm .ml-save { min-height: 36px; padding: 6px 12px; }
+.ml-sound-pane .ml-sound-list { max-height: none; }

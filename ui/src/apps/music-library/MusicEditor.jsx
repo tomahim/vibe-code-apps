@@ -5,7 +5,15 @@ import { getEngine, MUSIC_BUS } from "./engine/supersonicEngine.js";
 import { SOUND_CATALOG } from "./soundCatalog.js";
 import { createPerformance } from "./engine/player.js";
 import { tracks as bundledTracks } from "./tracks/index.js";
-import { createTrack, fetchTrack, signedIn, updateTrack } from "./api.js";
+import {
+  createTrack,
+  fetchTrack,
+  fetchVersion,
+  fetchVersions,
+  restoreVersion,
+  signedIn,
+  updateTrack,
+} from "./api.js";
 import "./music-library.css";
 
 const LIST_PATH = "/apps/music-library";
@@ -76,11 +84,17 @@ export default function MusicEditor({ trackId, onNavigate }) {
   const [soundType, setSoundType] = useState("");
   const [previewingSound, setPreviewingSound] = useState("");
   const editorViewRef = useRef(null);
+  const [revisionsOpen, setRevisionsOpen] = useState(false);
+  const [versions, setVersions] = useState(null);
+  const [versionsError, setVersionsError] = useState("");
+  const [playingVersion, setPlayingVersion] = useState(null);
+  const [confirmRestore, setConfirmRestore] = useState(null);
+  const [restoring, setRestoring] = useState(false);
 
   const canWrite = signedIn();
   const isApi = !bundled;
   const dirty = code !== savedCode;
-  const dirtyWhilePlaying = playing && code !== startedCode;
+  const dirtyWhilePlaying = playing && playingVersion === null && code !== startedCode;
 
   // Load the track once.
   useEffect(() => {
@@ -179,12 +193,14 @@ export default function MusicEditor({ trackId, onNavigate }) {
     if (playing) {
       performanceRef.current.stop();
       setPlaying(false);
+      setPlayingVersion(null);
       return;
     }
     try {
       await bootEngine();
       if (performanceRef.current.start(code)) {
         setStartedCode(code);
+        setPlayingVersion(null);
         setPlaying(true);
       }
     } catch (err) {
@@ -192,6 +208,91 @@ export default function MusicEditor({ trackId, onNavigate }) {
       setStatus("");
       setError(`The audio engine could not start: ${err instanceof Error ? err.message : String(err)}`);
     }
+  }
+
+  const trackId_ = track?.id;
+
+  async function loadVersions() {
+    setVersionsError("");
+    try {
+      const data = await fetchVersions(trackId_);
+      setVersions(data.versions);
+    } catch (err) {
+      setVersionsError(`Could not load the revisions: ${err.message}`);
+    }
+  }
+
+  function toggleRevisions() {
+    setConfirmRestore(null);
+    setRevisionsOpen((open) => {
+      if (!open) {
+        setPaneOpen(false);
+        loadVersions();
+      }
+      return !open;
+    });
+  }
+
+  function toggleSounds() {
+    setPaneOpen((open) => {
+      if (!open) setRevisionsOpen(false);
+      return !open;
+    });
+  }
+
+  // Plays an older revision without touching the editor text.
+  async function playVersion(version) {
+    setError("");
+    if (playing && playingVersion === version.version_id) {
+      performanceRef.current.stop();
+      setPlaying(false);
+      setPlayingVersion(null);
+      return;
+    }
+    try {
+      performanceRef.current.stop();
+      setPlaying(false);
+      const full = await fetchVersion(trackId_, version.version_id);
+      await bootEngine();
+      if (performanceRef.current.start(full.code)) {
+        setStartedCode(full.code);
+        setPlayingVersion(version.version_id);
+        setPlaying(true);
+      }
+    } catch (err) {
+      setBooting(false);
+      setError(`Could not play this revision: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  async function doRestore(version) {
+    setRestoring(true);
+    setError("");
+    try {
+      performanceRef.current.stop();
+      setPlaying(false);
+      setPlayingVersion(null);
+      const restored = await restoreVersion(trackId_, version.version_id);
+      setTrack({ ...restored, origin: "api" });
+      setCode(restored.code);
+      setSavedCode(restored.code);
+      setDetails({
+        name: restored.name,
+        description: restored.description ?? "",
+        category: restored.category ?? "",
+      });
+      setSaveMessage("Restored. This is saved as a new revision; older ones are kept.");
+      setConfirmRestore(null);
+      await loadVersions();
+    } catch (err) {
+      setError(`Could not restore: ${err.message}`);
+    } finally {
+      setRestoring(false);
+    }
+  }
+
+  function askRestore(version) {
+    setConfirmRestore(version.version_id);
   }
 
   function changeVolume(value) {
@@ -225,6 +326,7 @@ export default function MusicEditor({ trackId, onNavigate }) {
       setTrack({ ...saved, origin: "api" });
       setSavedCode(saved.code);
       setSaveMessage(`Saved "${saved.name}".`);
+      if (revisionsOpen) loadVersions();
     } catch (err) {
       setError(`Could not save: ${err.message}`);
     } finally {
@@ -326,7 +428,7 @@ export default function MusicEditor({ trackId, onNavigate }) {
       {loading ? (
         <p className="ml-status">Loading the track…</p>
       ) : (
-        <div className={`ml-editor-layout ${paneOpen ? "pane-open" : ""}`}>
+        <div className={`ml-editor-layout ${paneOpen || revisionsOpen ? "pane-open" : ""}`}>
           <section className="ml-editor-main">
             {writable && (
               <div className="ml-details ml-details-row">
@@ -361,11 +463,21 @@ export default function MusicEditor({ trackId, onNavigate }) {
                     {bundled ? "Reset to original" : "Discard changes"}
                   </button>
                 )}
+                {isApi && track && !isNew && (
+                  <button
+                    type="button"
+                    className="ml-palette-toggle ml-revisions-toggle"
+                    aria-expanded={revisionsOpen}
+                    onClick={toggleRevisions}
+                  >
+                    {revisionsOpen ? "Hide revisions" : "Revisions"}
+                  </button>
+                )}
                 <button
                   type="button"
                   className="ml-palette-toggle"
                   aria-expanded={paneOpen}
-                  onClick={() => setPaneOpen((v) => !v)}
+                  onClick={toggleSounds}
                 >
                   {paneOpen ? "Hide sounds" : "Available sounds"}
                 </button>
@@ -387,6 +499,70 @@ export default function MusicEditor({ trackId, onNavigate }) {
                 : "Your edits are saved in this browser only. Ctrl/Cmd+Enter plays or stops."}
             </p>
           </section>
+
+          {revisionsOpen && (
+            <aside className="ml-sound-pane ml-revisions-pane" aria-label="Revisions">
+              <div className="ml-pane-head">
+                <h3>Revisions</h3>
+                <button type="button" className="ml-palette-toggle" onClick={toggleRevisions}>
+                  Collapse
+                </button>
+              </div>
+              <p className="ml-hint">
+                Every save is a revision. Play one to hear it, or restore it: the restore is
+                saved as a new revision, nothing is deleted.
+              </p>
+              {versionsError && <p className="ml-error" role="alert">{versionsError}</p>}
+              {versions === null && !versionsError && <p className="ml-status">Loading revisions…</p>}
+              <ul className="ml-sound-list ml-version-list">
+                {(versions ?? []).map((v, index) => (
+                  <li key={v.version_id} className="ml-version">
+                    <div className="ml-version-text">
+                      <span className="ml-sound-name">
+                        {new Date(v.saved_at).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}
+                        {index === 0 ? " · current" : ""}
+                      </span>
+                      <span className="ml-sound-blurb">
+                        {v.reason || (v.kind === "created" ? "Created" : "Edited")} · {v.name}
+                      </span>
+                    </div>
+                    <div className="ml-version-actions">
+                      <button
+                        type="button"
+                        className="ml-sound-preview"
+                        aria-label={`Play revision from ${v.saved_at}`}
+                        disabled={booting}
+                        onClick={() => playVersion(v)}
+                      >
+                        {playing && playingVersion === v.version_id ? "■" : "▶"}
+                      </button>
+                      {index > 0 && canWrite && (
+                        <button type="button" className="ml-sound-insert ml-restore" onClick={() => askRestore(v)}>
+                          Restore
+                        </button>
+                      )}
+                    </div>
+                    {confirmRestore === v.version_id && (
+                      <div className="ml-restore-confirm" role="alertdialog" aria-label="Confirm restore">
+                        <p>
+                          {dirty
+                            ? "You have unsaved edits. Restoring replaces them with this revision and they cannot be recovered."
+                            : "Restore this revision? It becomes the current version and is saved as a new revision."}
+                        </p>
+                        <button type="button" className="ml-save" disabled={restoring} onClick={() => doRestore(v)}>
+                          {restoring ? "Restoring…" : dirty ? "Discard edits and restore" : "Restore"}
+                        </button>
+                        <button type="button" className="ml-reset" onClick={() => setConfirmRestore(null)}>
+                          Cancel
+                        </button>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              {!canWrite && <p className="ml-hint">Sign in to restore a revision.</p>}
+            </aside>
+          )}
 
           {paneOpen && (
             <aside className="ml-sound-pane ml-sound-palette" aria-label="Available sounds">
