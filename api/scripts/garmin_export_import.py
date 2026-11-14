@@ -142,14 +142,41 @@ def batched(records, max_records, max_bytes=MAX_BATCH_BYTES):
         yield chunk
 
 
-def post_batch(session, api_base, dataset, records):
-    r = session.post(
-        f"{api_base}/api/apps/garmin/import/{dataset}/",
-        json={"records": records},
-        timeout=120,
-    )
-    r.raise_for_status()
-    return r.json()
+def post_batch(session, api_base, dataset, records, attempts=3):
+    """POST one batch; retry only transient failures (uploads are idempotent)."""
+    body = {"records": records}
+    for attempt in range(1, attempts + 1):
+        try:
+            r = session.post(
+                f"{api_base}/api/apps/garmin/import/{dataset}/",
+                json=body,
+                timeout=120,
+            )
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            if attempt == attempts:
+                sys.exit(f"{dataset}: request failed {attempts}x ({exc}). "
+                         f"Re-run the script: already-written batches are "
+                         f"updated in place, nothing is duplicated.")
+            wait = 10 * attempt
+            print(f"  request timed out, retry {attempt}/{attempts - 1} "
+                  f"in {wait}s", flush=True)
+            time.sleep(wait)
+            continue
+        if r.status_code == 413:
+            sys.exit(
+                f"{dataset}: batch of {len(json.dumps(body)) / 1e6:.1f} MB "
+                f"refused (413, request too large). The proxy's route limit "
+                f"needs the import-limit change first; smaller batches won't "
+                f"fix a single oversized record."
+            )
+        if r.status_code >= 500 and attempt < attempts:
+            wait = 10 * attempt
+            print(f"  server error {r.status_code}, retry {attempt}/{attempts - 1} "
+                  f"in {wait}s", flush=True)
+            time.sleep(wait)
+            continue
+        r.raise_for_status()
+        return r.json()
 
 
 def main():
