@@ -18,6 +18,7 @@ const Hockey = lazy(() => import("../apps/hockey/Hockey.jsx"));
 const Lithotheque = lazy(() => import("../apps/lithotheque/Lithotheque.jsx"));
 const KnobConservatory = lazy(() => import("../apps/knob-conservatory/KnobConservatory.jsx"));
 const MusicLibrary = lazy(() => import("../apps/music-library/MusicLibrary.jsx"));
+const InstrumentBrowser = lazy(() => import("../apps/music-library/InstrumentBrowser.jsx"));
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -81,6 +82,10 @@ export default function App() {
 
   if (path.startsWith("/apps/knob-conservatory")) {
     return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#17140f", color: "#f5c96b", display: "grid", placeItems: "center" }}>Warming up the oscillators…</div>}><KnobConservatory onHome={() => navigate("/")} /></Suspense>;
+  }
+
+  if (path.startsWith("/apps/music-library/sounds")) {
+    return <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0d1017", color: "#d8b96a", display: "grid", placeItems: "center" }}>Tuning the instruments…</div>}><InstrumentBrowser onHome={() => navigate("/apps/music-library")} /></Suspense>;
   }
 
   if (path.startsWith("/apps/music-library")) {

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "apps.recipes",
     "apps.rust_learning_path",
     "apps.hockey.apps.HockeyConfig",
+    "apps.instruments.apps.InstrumentsConfig",
     "apps.knob_conservatory.apps.KnobConservatoryConfig",
     "apps.music_library.apps.MusicLibraryConfig",
     # Cultive owns the Little Grains learning runtime, its lg_* tables on the

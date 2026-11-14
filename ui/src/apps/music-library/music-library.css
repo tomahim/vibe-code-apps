@@ -194,7 +194,9 @@
 
 .ml-editor-actions {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
 .ml-reset,
@@ -297,11 +299,11 @@
 }
 .ml-step-dot.active { background: #d8b96a; color: #0d1017; border-color: #d8b96a; }
 
-/* Library list: search, filters, pagination, save flow */
+/* Shared form controls (library + instrument browser) */
 .ml-filters {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
   max-width: 860px;
   margin: 0 auto 16px;
 }
@@ -347,6 +349,41 @@
   box-shadow: 0 0 0 2px #d8b96a33;
 }
 
+.ml-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.ml-details label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #9aa0b0;
+}
+
+.ml-details input[type="file"] {
+  padding: 9px 14px;
+  color: #9aa0b0;
+  font-size: 14px;
+}
+
+.ml-details input[type="file"]::file-selector-button {
+  background: transparent;
+  border: 1px solid #d8b96a66;
+  border-radius: 8px;
+  color: #d8b96a;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 14px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.ml-details input[type="file"]::file-selector-button:hover { border-color: #d8b96a; }
+
 .ml-new-track,
 .ml-save {
   background: #d4a94e;
@@ -355,6 +392,7 @@
   color: #141824;
   padding: 10px 18px;
   min-height: 44px;
+  font: inherit;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -467,4 +505,163 @@
   padding: 4px 10px;
   font-size: 0.78rem;
   cursor: pointer;
+}
+
+/* Instrument browser */
+.ib-types { display: none; }
+
+@media (min-width: 720px) {
+  .ib-body {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .ib-types {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 0 0 158px;
+    position: sticky;
+    top: 16px;
+  }
+
+  .ib-types button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #9aa0b0;
+    font: inherit;
+    font-size: 13px;
+    padding: 7px 10px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .ib-types button:hover { color: #e8e4d8; background: #141824; }
+
+  .ib-types button.active {
+    background: #141824;
+    border-color: #2a3040;
+    color: #d8b96a;
+  }
+
+  .ib-type-count { color: #6b7386; font-size: 11px; }
+
+  .ib-main { flex: 1; min-width: 0; }
+
+  .ib-main .ml-filters,
+  .ib-main .ib-grid,
+  .ib-main .ib-add {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ib-main .ml-category-filter { display: none; }
+}
+
+.ib-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 8px;
+  max-width: 860px;
+  margin: 0 auto 24px;
+}
+
+.ib-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 12px;
+  padding: 9px 12px 9px 14px;
+  transition: border-color 120ms ease;
+}
+
+.ib-card:hover { border-color: #3d4761; }
+
+.ib-card .ib-info { flex: 1; min-width: 0; }
+
+.ib-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8e4d8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ib-badge {
+  display: inline-block;
+  vertical-align: 1px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 2px 6px;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.ib-badge.ready { background: #26452e; color: #9fd8ab; }
+.ib-badge.ondemand { background: #4a3a1c; color: #e3c078; }
+.ib-badge.imported { background: #2c3a55; color: #9db8e8; }
+
+.ib-blurb {
+  color: #9aa0b0;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ib-actions { flex: none; }
+
+.ib-actions .ml-play {
+  padding: 7px 0;
+  width: 42px;
+  min-width: 0;
+  min-height: 38px;
+  font-size: 14px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.ib-add {
+  max-width: 860px;
+  margin: 0 auto 30px;
+  border-top: 1px solid #2a3040;
+  padding-top: 20px;
+}
+
+.ib-add h2 {
+  margin: 0 0 8px;
+  color: #f0e6c8;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.ib-add .ml-palette-toggle {
+  padding: 10px 16px;
+  min-height: 44px;
+  font-size: 14px;
+}
+
+.ib-add .ml-palette-toggle:disabled { opacity: 0.5; cursor: default; }
+
+.ml-sounds-link {
+  color: #d4a94e;
+  font-size: 14px;
+  align-self: center;
+  white-space: nowrap;
 }

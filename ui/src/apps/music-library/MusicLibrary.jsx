@@ -402,6 +402,7 @@ export default function MusicLibrary({ onHome }) {
         >
           {mode === "tutorial" ? "Library" : "Tutorial"}
         </button>
+        <a className="ml-sounds-link" href="/apps/music-library/sounds">Sounds</a>
       </header>
 
       {mode === "tutorial" ? (
