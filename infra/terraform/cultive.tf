@@ -27,12 +27,15 @@ resource "railway_variable" "cultive_ui_api_upstream" {
 # Independent API service, empty for now: no source, no build config and no
 # deployment. Settings mirror the existing api service (/health/, PORT 8000)
 # so a later backend deployment drops in without Terraform changes.
+# serverless = false: turned off manually in Railway by the project owner on
+# 2026-11-14 so the dev API stays running instead of idling to zero. Terraform
+# mirrors the live setting here; changing back to true re-enables idle sleep.
 resource "railway_service" "cultive_api" {
   name                       = "cultive-api-dev"
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3
-  serverless                 = true
+  serverless                 = false
 }
 
 resource "railway_variable" "cultive_api_port" {
