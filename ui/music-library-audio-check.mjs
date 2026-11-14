@@ -164,6 +164,42 @@ for (let i = 0; i < 40; i += 1) {
 }
 await page.screenshot({ path: '/tmp/music-library-3-playing.png' });
 
+// 10. UI CRUD roundtrip against the API: sign in, create through the UI,
+// edit, save, reload, and verify the edit persisted from the server.
+await page.evaluate(async () => {
+  const r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: 'thomas', password: 'checkpass1' }) });
+  const data = await r.json();
+  if (!data.token) throw new Error('login failed');
+  localStorage.setItem('genious_token', data.token);
+  localStorage.setItem('genious_user', JSON.stringify(data.user));
+});
+await page.reload();
+await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
+await page.getByRole('button', { name: '+ New track' }).click();
+await page.locator('.ml-details input').first().fill('Roundtrip Check Track');
+await page.locator('.cm-content').click();
+await page.keyboard.press('Control+End');
+await page.keyboard.type('\n// roundtrip-marker-4815');
+await page.getByRole('button', { name: 'Save new track' }).click();
+await page.getByText('Saved "Roundtrip Check Track" to the library', { exact: false }).waitFor({ timeout: 10000 });
+check('ui: create track saves via API', true, 'created');
+await page.locator('.cm-content').click();
+await page.keyboard.press('Control+End');
+await page.keyboard.type(' edit2');
+await page.getByRole('button', { name: 'Save to library' }).click();
+await page.getByText('Saved "Roundtrip Check Track".', { exact: false }).waitFor({ timeout: 10000 });
+check('ui: edit track saves via API', true, 'updated');
+await page.reload();
+await page.getByRole('heading', { name: 'Music generation library' }).waitFor();
+await page.locator('.ml-search').fill('Roundtrip');
+await settle(800);
+await page.locator('.ml-track', { hasText: 'Roundtrip Check Track' }).click();
+await settle(800);
+const persisted = await page.locator('.cm-content').innerText();
+check('ui: edit survives reload from API', persisted.includes('roundtrip-marker-4815 edit2'), persisted.includes('roundtrip-marker-4815') ? 'code persisted' : `tail: ${persisted.slice(-80)}`);
+await page.screenshot({ path: '/tmp/music-library-6-crud.png' });
+
 await browser.close();
 server.kill();
 
