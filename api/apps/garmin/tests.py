@@ -10,8 +10,7 @@ from apps.accounts.tokens import issue_token
 
 from .models import (
     GarminActivity, GarminActivityFile, GarminActivitySplit,
-    GarminDailySummary, GarminGear, GarminGearActivity, GarminImportBatch,
-    GarminSleepNight, GarminTrainingReadiness,
+    GarminGear, GarminGearActivity, GarminImportBatch,
 )
 
 User = get_user_model()
@@ -155,29 +154,6 @@ class ActivityImportTests(GarminBase):
         # The other user's VO2max row must not link to this user's activity.
         from .models import GarminVo2Max
         self.assertIsNone(GarminVo2Max.objects.get(owner=other).activity)
-
-
-class SimpleDatasetTests(GarminBase):
-    def test_daily_summary_upsert(self):
-        rec = {"calendarDate": "2026-01-02", "totalSteps": 10000,
-               "restingHeartRate": 50, "bodyBattery": {"chargedValue": 90}}
-        self.post("daily-summaries", [rec])
-        self.post("daily-summaries", [dict(rec, totalSteps=12000)])
-        self.assertEqual(GarminDailySummary.objects.count(), 1)
-        d = GarminDailySummary.objects.get()
-        self.assertEqual(d.total_steps, 12000)
-        self.assertEqual(d.body_battery["chargedValue"], 90)
-
-    def test_sleep_and_readiness(self):
-        self.post("sleep-nights", [
-            {"calendarDate": "2026-01-02", "deepSleepSeconds": 3600,
-             "sleepScores": {"overallScore": 80}}
-        ])
-        self.post("training-readiness", [
-            {"calendarDate": "2026-01-02", "score": 75, "level": "MODERATE"}
-        ])
-        self.assertEqual(GarminSleepNight.objects.get().sleep_scores["overallScore"], 80)
-        self.assertEqual(GarminTrainingReadiness.objects.get().score, 75)
 
 
 class ActivityFileMatchingTests(GarminBase):

@@ -11,11 +11,11 @@ from datetime import datetime, timezone
 
 from .models import (
     GarminAcuteTrainingLoad, GarminActivity, GarminActivitySplit,
-    GarminActivitySplitSummary, GarminCourse, GarminDailySummary,
+    GarminActivitySplitSummary, GarminCourse,
     GarminEnduranceScore, GarminGear, GarminHeatAltitudeAcclimation,
-    GarminHillScore, GarminHydrationLog, GarminMaxMet, GarminPersonalRecord,
-    GarminRacePrediction, GarminSleepNight, GarminTrainingReadiness,
-    GarminTrainingStatus, GarminUserGoal, GarminVo2Max, GarminWeeklyTrainingReport,
+    GarminHillScore, GarminMaxMet, GarminPersonalRecord,
+    GarminRacePrediction,
+    GarminTrainingStatus, GarminVo2Max, GarminWeeklyTrainingReport,
     GarminWorkout, uuid_from_msb_lsb,
 )
 
@@ -219,116 +219,6 @@ def map_split_summary(rec, activity):
     )
 
 
-def map_daily_summary(rec, owner):
-    return GarminDailySummary(
-        owner=owner,
-        calendar_date=_date(rec.get("calendarDate")),
-        source=rec.get("source") or "",
-        uuid=rec.get("uuid") or "",
-        version=rec.get("version"),
-        duration_ms=_int(rec.get("durationInMilliseconds")),
-        total_steps=_int(rec.get("totalSteps")),
-        daily_step_goal=_int(rec.get("dailyStepGoal")),
-        total_distance_m=rec.get("totalDistanceMeters"),
-        total_kilocalories=rec.get("totalKilocalories"),
-        active_kilocalories=rec.get("activeKilocalories"),
-        bmr_kilocalories=rec.get("bmrKilocalories"),
-        wellness_kilocalories=rec.get("wellnessKilocalories"),
-        wellness_active_kilocalories=rec.get("wellnessActiveKilocalories"),
-        wellness_total_kilocalories=rec.get("wellnessTotalKilocalories"),
-        wellness_distance_m=rec.get("wellnessDistanceMeters"),
-        wellness_start_time_gmt=_any_epoch(rec.get("wellnessStartTimeGmt")),
-        wellness_end_time_gmt=_any_epoch(rec.get("wellnessEndTimeGmt")),
-        wellness_start_time_local=_any_epoch(rec.get("wellnessStartTimeLocal")),
-        wellness_end_time_local=_any_epoch(rec.get("wellnessEndTimeLocal")),
-        active_seconds=_int(rec.get("activeSeconds")),
-        highly_active_seconds=_int(rec.get("highlyActiveSeconds")),
-        moderate_intensity_minutes=_int(rec.get("moderateIntensityMinutes")),
-        vigorous_intensity_minutes=_int(rec.get("vigorousIntensityMinutes")),
-        is_vigorous_day=bool(rec.get("isVigorousDay")),
-        floors_ascended_m=rec.get("floorsAscendedInMeters"),
-        floors_descended_m=rec.get("floorsDescendedInMeters"),
-        user_floors_ascended_goal=rec.get("userFloorsAscendedGoal"),
-        user_intensity_minutes_goal=_int(rec.get("userIntensityMinutesGoal")),
-        resting_heart_rate=_int(rec.get("restingHeartRate")),
-        resting_heart_rate_timestamp=_any_epoch(rec.get("restingHeartRateTimestamp")),
-        min_heart_rate=_int(rec.get("minHeartRate")),
-        max_heart_rate=_int(rec.get("maxHeartRate")),
-        min_avg_heart_rate=_int(rec.get("minAvgHeartRate")),
-        max_avg_heart_rate=_int(rec.get("maxAvgHeartRate")),
-        current_day_resting_heart_rate=_int(rec.get("currentDayRestingHeartRate")),
-        average_monitoring_environment_altitude_m=rec.get(
-            "averageMonitoringEnvironmentAltitude"
-        ),
-        includes_activity_data=bool(rec.get("includesActivityData")),
-        includes_wellness_data=bool(rec.get("includesWellnessData")),
-        includes_all_day_pulse_ox=bool(rec.get("includesAllDayPulseOx")),
-        includes_sleep_pulse_ox=bool(rec.get("includesSleepPulseOx")),
-        includes_calorie_consumed_data=bool(rec.get("includesCalorieConsumedData")),
-        includes_single_measurement=bool(rec.get("includesSingleMeasurement")),
-        includes_continuous_measurement=bool(rec.get("includesContinuousMeasurement")),
-        all_day_stress=rec.get("allDayStress") or None,
-        body_battery=rec.get("bodyBattery") or None,
-        body_battery_feedback=rec.get("bodyBatteryFeedback") or None,
-        hydration=rec.get("hydration") or None,
-        respiration=rec.get("respiration") or None,
-    )
-
-
-def map_sleep(rec, owner):
-    return GarminSleepNight(
-        owner=owner,
-        calendar_date=_date(rec.get("calendarDate")),
-        sleep_start_time_gmt=_any_epoch(rec.get("sleepStartTimestampGMT")),
-        sleep_end_time_gmt=_any_epoch(rec.get("sleepEndTimestampGMT")),
-        deep_sleep_seconds=_int(rec.get("deepSleepSeconds")),
-        light_sleep_seconds=_int(rec.get("lightSleepSeconds")),
-        rem_sleep_seconds=_int(rec.get("remSleepSeconds")),
-        awake_sleep_seconds=_int(rec.get("awakeSleepSeconds")),
-        unmeasurable_seconds=_int(rec.get("unmeasurableSeconds")),
-        awake_count=_int(rec.get("awakeCount")),
-        restless_moment_count=_int(rec.get("restlessMomentCount")),
-        average_respiration=rec.get("averageRespiration"),
-        highest_respiration=rec.get("highestRespiration"),
-        lowest_respiration=rec.get("lowestRespiration"),
-        avg_sleep_stress=rec.get("avgSleepStress"),
-        retro=bool(rec.get("retro")),
-        sleep_window_confirmation_type=rec.get("sleepWindowConfirmationType") or "",
-        sleep_scores=rec.get("sleepScores") or None,
-    )
-
-
-def map_training_readiness(rec, owner):
-    return GarminTrainingReadiness(
-        owner=owner,
-        calendar_date=_date(rec.get("calendarDate")),
-        device_id=rec.get("deviceId"),
-        timestamp=_any_epoch(rec.get("timestamp")),
-        timestamp_local=_any_epoch(rec.get("timestampLocal")),
-        score=_int(rec.get("score")),
-        level=rec.get("level") or "",
-        hrv_weekly_average=rec.get("hrvWeeklyAverage"),
-        hrv_factor_percent=rec.get("hrvFactorPercent"),
-        hrv_factor_feedback=rec.get("hrvFactorFeedback") or "",
-        sleep_score_factor_percent=rec.get("sleepScoreFactorPercent"),
-        sleep_score_factor_feedback=rec.get("sleepScoreFactorFeedback") or "",
-        sleep_history_factor_percent=rec.get("sleepHistoryFactorPercent"),
-        sleep_history_factor_feedback=rec.get("sleepHistoryFactorFeedback") or "",
-        stress_history_factor_percent=rec.get("stressHistoryFactorPercent"),
-        stress_history_factor_feedback=rec.get("stressHistoryFactorFeedback") or "",
-        recovery_time=rec.get("recoveryTime"),
-        recovery_time_factor_percent=rec.get("recoveryTimeFactorPercent"),
-        recovery_time_factor_feedback=rec.get("recoveryTimeFactorFeedback") or "",
-        acute_load=rec.get("acuteLoad"),
-        acwr_factor_percent=rec.get("acwrFactorPercent"),
-        acwr_factor_feedback=rec.get("acwrFactorFeedback") or "",
-        valid_sleep=bool(rec.get("validSleep")),
-        input_context=rec.get("inputContext") or "",
-        feedback_short=rec.get("feedbackShort") or "",
-        feedback_long=rec.get("feedbackLong") or "",
-    )
-
-
 def map_vo2max(rec, owner, activities_by_id):
     return GarminVo2Max(
         owner=owner,
@@ -457,24 +347,6 @@ def map_max_met(rec, owner):
     )
 
 
-def map_hydration(rec, owner, activities_by_id):
-    # Activity-derived sweat entries have no uuid; fall back to a stable key.
-    uuid = rec.get("uuid") or "activity-%s" % rec.get("activityId")
-    return GarminHydrationLog(
-        owner=owner,
-        uuid=uuid,
-        calendar_date=_date(rec.get("calendarDate")),
-        value_ml=rec.get("valueInML"),
-        activity=activities_by_id.get(rec.get("activityId")),
-        hydration_source=rec.get("hydrationSource") or "",
-        duration_ms=_int(rec.get("duration")),
-        estimated_sweat_loss_ml=rec.get("estimatedSweatLossInML"),
-        capped=bool(rec.get("capped")),
-        persisted_timestamp_gmt=_any_epoch(rec.get("persistedTimestampGMT")),
-        timestamp_local=_any_epoch(rec.get("timestampLocal")),
-    )
-
-
 def map_gear(rec, owner):
     return GarminGear(
         owner=owner,
@@ -569,18 +441,6 @@ def _goal_date(v):
         except ValueError:
             continue
     return None
-
-
-def map_goal(rec, owner):
-    return GarminUserGoal(
-        owner=owner,
-        user_goal_category=rec.get("userGoalCategory") or None,
-        user_goal_type=rec.get("userGoalType") or None,
-        goal_value=rec.get("goalValue"),
-        start_date=_goal_date(rec.get("startDate")),
-        create_date=_goal_date(rec.get("createDate")),
-        update_date=_goal_date(rec.get("updateDate")),
-    )
 
 
 def map_weekly_report(rec, owner):

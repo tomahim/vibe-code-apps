@@ -39,9 +39,6 @@ from apps.garmin.fitdec import _fit_scan, _fit_decode, _DECODED_GMN  # noqa: E40
 DATASET_FILES = {
     # dataset -> (glob relative to DI_CONNECT, extractor)
     "activities": ("DI-Connect-Fitness/*_summarizedActivities.json", "activities"),
-    "daily-summaries": ("DI-Connect-Aggregator/UDSFile_*.json", "uds"),
-    "sleep-nights": ("DI-Connect-Wellness/*_sleepData.json", "plain"),
-    "training-readiness": ("DI-Connect-Metrics/TrainingReadinessDTO_*.json", "plain"),
     "vo2max": ("DI-Connect-Metrics/ActivityVo2Max_*.json", "plain"),
     "race-predictions": ("DI-Connect-Metrics/RunRacePredictions_*.json", "plain"),
     "endurance-scores": ("DI-Connect-Metrics/EnduranceScore_*.json", "plain"),
@@ -50,12 +47,10 @@ DATASET_FILES = {
     "acute-training-load": ("DI-Connect-Metrics/MetricsAcuteTrainingLoad_*.json", "plain"),
     "heat-altitude": ("DI-Connect-Metrics/MetricsHeatAltitudeAcclimation_*.json", "plain"),
     "max-met": ("DI-Connect-Metrics/MetricsMaxMetData_*.json", "plain"),
-    "hydration": ("DI-Connect-Aggregator/HydrationLogFile_*.json", "plain"),
     "gear": ("DI-Connect-Fitness/*_gear.json", "gear"),
     "personal-records": ("DI-Connect-Fitness/*_personalRecord.json", "personal_records"),
     "workouts": ("DI-Connect-Fitness/*_workout.json", "workouts"),
     "courses": ("DI-Connect-Routing/*_courses_*.json", "plain"),
-    "goals": ("DI-Connect-User/UserGoal_*.json", "plain"),
     "weekly-reports": ("DI-Connect-Fitness/*_weekly_training_report.json", "weekly_reports"),
 }
 
@@ -112,7 +107,7 @@ def load_json_records(export_dir, pattern):
 
 FIT_TYPE_NAMES = {4: "activity", 32: "monitoring_b", 35: "segment_list"}
 
-def scan_fit_files(export_dir, hash_all=False, decode_records=False):
+def scan_fit_files(export_dir, hash_all=False):
     """Yield manifest/activity-file rows for every .FIT in Uploaded-Files zips."""
     rows = []
     pattern = os.path.join(
@@ -130,8 +125,7 @@ def scan_fit_files(export_dir, hash_all=False, decode_records=False):
                     if start is None:
                         # session messages sit near the end of activity files
                         ftype, start, sport = _fit_scan(full)
-                    row_extra, rec_count = _fit_decode(
-                        full, _DECODED_GMN, include_records=decode_records)
+                    row_extra, rec_count = _fit_decode(full, _DECODED_GMN)
                     row["record_count"] = rec_count
                 else:
                     row_extra = {}
@@ -171,9 +165,6 @@ def main():
     p.add_argument("--datasets", default="")
     p.add_argument("--batch-size", type=int, default=200)
     p.add_argument("--dry-run", action="store_true")
-    p.add_argument("--decode-records", action="store_true",
-                   help="also decode per-second record messages (high volume; "
-                        "off by default until a storage option is picked)")
     args = p.parse_args()
     if not args.token and not args.dry_run:
         sys.exit("Provide --token or GARMIN_IMPORT_TOKEN (or use --dry-run).")
@@ -200,7 +191,7 @@ def main():
     # .FIT files: activity files get the timestamp-match import; every file
     # (any type) also lands in the source-file manifest.
     if not wanted or "activity-files" in wanted:
-        rows = scan_fit_files(args.export_dir, decode_records=args.decode_records)
+        rows = scan_fit_files(args.export_dir)
         act_rows = [r for r, t in rows if t == 4]
         totals["activity-files"] = len(act_rows)
         if not args.dry_run:

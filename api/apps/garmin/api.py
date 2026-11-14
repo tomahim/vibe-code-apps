@@ -257,18 +257,6 @@ def _all_fields(model, exclude=("id", "owner_id")):
 IMPORTERS = {
     "activities": _import_activities,
     "activity-files": _import_activity_files,
-    "daily-summaries": _simple(
-        mapping.GarminDailySummary, mapping.map_daily_summary,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminDailySummary),
-    ),
-    "sleep-nights": _simple(
-        mapping.GarminSleepNight, mapping.map_sleep,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminSleepNight),
-    ),
-    "training-readiness": _simple(
-        mapping.GarminTrainingReadiness, mapping.map_training_readiness,
-        ["owner", "calendar_date"], _all_fields(mapping.GarminTrainingReadiness),
-    ),
     "vo2max": _simple(
         mapping.GarminVo2Max, mapping.map_vo2max,
         ["owner", "calendar_date", "sport"], _all_fields(mapping.GarminVo2Max),
@@ -301,11 +289,6 @@ IMPORTERS = {
     "max-met": _simple(
         mapping.GarminMaxMet, mapping.map_max_met,
         ["owner", "calendar_date", "sport"], _all_fields(mapping.GarminMaxMet),
-    ),
-    "hydration": _simple(
-        mapping.GarminHydrationLog, mapping.map_hydration,
-        ["uuid"], _all_fields(mapping.GarminHydrationLog),
-        needs_activities=True,
     ),
     "gear": _import_gear,
     "personal-records": _simple(
@@ -351,23 +334,6 @@ def import_batches(request):
 @require_POST
 @jwt_required
 def import_dataset(request, dataset):
-    if dataset == "goals":
-        # No natural key in the export: replace the owner's goal rows.
-        records, error = _records(request)
-        if error:
-            return error
-        batch = GarminImportBatch.objects.create(
-            owner=request.user, dataset=dataset, records_received=len(records)
-        )
-        with transaction.atomic():
-            mapping.GarminUserGoal.objects.filter(owner=request.user).delete()
-            for rec in records:
-                mapping.map_goal(rec, request.user).save()
-        _finish(batch, len(records))
-        return JsonResponse(
-            {"ok": True, "dataset": dataset, "received": len(records),
-             "written": len(records), "batch_id": batch.id}
-        )
     if dataset not in IMPORTERS:
         return err(f"Unknown dataset '{dataset}'.", 404)
     return _import_view(dataset)(request)

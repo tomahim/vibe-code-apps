@@ -254,97 +254,6 @@ class GarminActivityFile(OwnerModel):
         db_table = "garmin_activity_file"
 
 
-class GarminDailySummary(OwnerModel):
-    """One row per day from the UDS (User Daily Summary) aggregator files."""
-
-    calendar_date = models.DateField()
-    source = models.CharField(max_length=50, blank=True, default="")
-    uuid = models.CharField(max_length=64, blank=True, default="")
-    version = models.IntegerField(null=True, blank=True)
-    duration_ms = models.BigIntegerField(null=True, blank=True)
-
-    total_steps = models.IntegerField(null=True, blank=True)
-    daily_step_goal = models.IntegerField(null=True, blank=True)
-    total_distance_m = models.FloatField(null=True, blank=True)
-    total_kilocalories = models.FloatField(null=True, blank=True)
-    active_kilocalories = models.FloatField(null=True, blank=True)
-    bmr_kilocalories = models.FloatField(null=True, blank=True)
-    wellness_kilocalories = models.FloatField(null=True, blank=True)
-    wellness_active_kilocalories = models.FloatField(null=True, blank=True)
-    wellness_total_kilocalories = models.FloatField(null=True, blank=True)
-    wellness_distance_m = models.FloatField(null=True, blank=True)
-    wellness_start_time_gmt = models.DateTimeField(null=True, blank=True)
-    wellness_end_time_gmt = models.DateTimeField(null=True, blank=True)
-    wellness_start_time_local = models.DateTimeField(null=True, blank=True)
-    wellness_end_time_local = models.DateTimeField(null=True, blank=True)
-    active_seconds = models.IntegerField(null=True, blank=True)
-    highly_active_seconds = models.IntegerField(null=True, blank=True)
-    moderate_intensity_minutes = models.SmallIntegerField(null=True, blank=True)
-    vigorous_intensity_minutes = models.SmallIntegerField(null=True, blank=True)
-    is_vigorous_day = models.BooleanField(default=False)
-    floors_ascended_m = models.FloatField(null=True, blank=True)
-    floors_descended_m = models.FloatField(null=True, blank=True)
-    user_floors_ascended_goal = models.FloatField(null=True, blank=True)
-    user_intensity_minutes_goal = models.IntegerField(null=True, blank=True)
-
-    resting_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    resting_heart_rate_timestamp = models.DateTimeField(null=True, blank=True)
-    min_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    max_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    min_avg_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    max_avg_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    current_day_resting_heart_rate = models.SmallIntegerField(null=True, blank=True)
-    average_monitoring_environment_altitude_m = models.FloatField(null=True, blank=True)
-
-    includes_activity_data = models.BooleanField(default=False)
-    includes_wellness_data = models.BooleanField(default=False)
-    includes_all_day_pulse_ox = models.BooleanField(default=False)
-    includes_sleep_pulse_ox = models.BooleanField(default=False)
-    includes_calorie_consumed_data = models.BooleanField(default=False)
-    includes_single_measurement = models.BooleanField(default=False)
-    includes_continuous_measurement = models.BooleanField(default=False)
-
-    # Nested source structures kept verbatim.
-    all_day_stress = models.JSONField(null=True, blank=True)
-    body_battery = models.JSONField(null=True, blank=True)
-    body_battery_feedback = models.JSONField(null=True, blank=True)
-    hydration = models.JSONField(null=True, blank=True)
-    respiration = models.JSONField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_daily_summary"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_uds_uniq")
-        ]
-        indexes = [models.Index(fields=["owner", "calendar_date"])]
-
-
-class GarminSleepNight(OwnerModel):
-    calendar_date = models.DateField()
-    sleep_start_time_gmt = models.DateTimeField(null=True, blank=True)
-    sleep_end_time_gmt = models.DateTimeField(null=True, blank=True)
-    deep_sleep_seconds = models.IntegerField(null=True, blank=True)
-    light_sleep_seconds = models.IntegerField(null=True, blank=True)
-    rem_sleep_seconds = models.IntegerField(null=True, blank=True)
-    awake_sleep_seconds = models.IntegerField(null=True, blank=True)
-    unmeasurable_seconds = models.IntegerField(null=True, blank=True)
-    awake_count = models.SmallIntegerField(null=True, blank=True)
-    restless_moment_count = models.SmallIntegerField(null=True, blank=True)
-    average_respiration = models.FloatField(null=True, blank=True)
-    highest_respiration = models.FloatField(null=True, blank=True)
-    lowest_respiration = models.FloatField(null=True, blank=True)
-    avg_sleep_stress = models.FloatField(null=True, blank=True)
-    retro = models.BooleanField(default=False)
-    sleep_window_confirmation_type = models.CharField(max_length=50, blank=True, default="")
-    sleep_scores = models.JSONField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_sleep_night"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_sleep_uniq")
-        ]
-
-
 class DatedMetricModel(OwnerModel):
     """Base for dated metric time series from DI-Connect-Metrics."""
 
@@ -354,37 +263,6 @@ class DatedMetricModel(OwnerModel):
 
     class Meta:
         abstract = True
-
-
-class GarminTrainingReadiness(DatedMetricModel):
-    score = models.SmallIntegerField(null=True, blank=True)
-    level = models.CharField(max_length=50, blank=True, default="")
-    hrv_weekly_average = models.FloatField(null=True, blank=True)
-    hrv_factor_percent = models.FloatField(null=True, blank=True)
-    hrv_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    sleep_score_factor_percent = models.FloatField(null=True, blank=True)
-    sleep_score_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    sleep_history_factor_percent = models.FloatField(null=True, blank=True)
-    sleep_history_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    stress_history_factor_percent = models.FloatField(null=True, blank=True)
-    stress_history_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    recovery_time = models.FloatField(null=True, blank=True)
-    recovery_time_factor_percent = models.FloatField(null=True, blank=True)
-    recovery_time_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    acute_load = models.FloatField(null=True, blank=True)
-    acwr_factor_percent = models.FloatField(null=True, blank=True)
-    acwr_factor_feedback = models.CharField(max_length=100, blank=True, default="")
-    valid_sleep = models.BooleanField(default=False)
-    input_context = models.CharField(max_length=100, blank=True, default="")
-    feedback_short = models.TextField(blank=True, default="")
-    feedback_long = models.TextField(blank=True, default="")
-    timestamp_local = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_training_readiness"
-        constraints = [
-            models.UniqueConstraint(fields=["owner", "calendar_date"], name="garmin_readiness_uniq")
-        ]
 
 
 class GarminVo2Max(DatedMetricModel):
@@ -520,25 +398,6 @@ class GarminMaxMet(DatedMetricModel):
         ]
 
 
-class GarminHydrationLog(OwnerModel):
-    uuid = models.CharField(max_length=64, unique=True)
-    calendar_date = models.DateField()
-    value_ml = models.FloatField(null=True, blank=True)
-    activity = models.ForeignKey(
-        GarminActivity, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name="hydration_logs",
-    )
-    hydration_source = models.CharField(max_length=50, blank=True, default="")
-    duration_ms = models.BigIntegerField(null=True, blank=True)
-    estimated_sweat_loss_ml = models.FloatField(null=True, blank=True)
-    capped = models.BooleanField(default=False)
-    persisted_timestamp_gmt = models.DateTimeField(null=True, blank=True)
-    timestamp_local = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_hydration_log"
-
-
 class GarminGear(OwnerModel):
     gear_pk = models.BigIntegerField(primary_key=True)
     uuid = models.CharField(max_length=64, blank=True, default="")
@@ -647,18 +506,6 @@ class GarminCourse(OwnerModel):
         ]
 
 
-class GarminUserGoal(OwnerModel):
-    user_goal_category = models.JSONField(null=True, blank=True)
-    user_goal_type = models.JSONField(null=True, blank=True)
-    goal_value = models.FloatField(null=True, blank=True)
-    start_date = models.DateField(null=True, blank=True)
-    create_date = models.DateTimeField(null=True, blank=True)
-    update_date = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "garmin_user_goal"
-
-
 class GarminWeeklyTrainingReport(OwnerModel):
     primary_activity_type = models.JSONField(null=True, blank=True)
     cross_training_enabled = models.BooleanField(default=False)
@@ -697,85 +544,6 @@ class GarminImportBatch(OwnerModel):
 # These tables account for the remaining retrievable data. They are part of
 # the proposed schema so the review covers everything; whether the migration
 # ships them depends on Thomas's storage choice.
-
-
-class GarminActivitySample(models.Model):
-    """Per-second time series from activity .FIT record messages.
-
-    ~27 source fields per record incl. developer/unknown fields; `extra`
-    keeps every field this schema does not type, so nothing is dropped when
-    Garmin adds message fields. Estimated volume for a full history import:
-    on the order of millions of rows and several hundred MB - see the doc's
-    storage math. Not created until the storage decision is made.
-    """
-
-    activity = models.ForeignKey(
-        GarminActivity, on_delete=models.CASCADE, related_name="samples"
-    )
-    timestamp = models.DateTimeField()
-    position_lat = models.FloatField(null=True, blank=True)
-    position_long = models.FloatField(null=True, blank=True)
-    altitude_m = models.FloatField(null=True, blank=True)
-    speed_mps = models.FloatField(null=True, blank=True)
-    distance_m = models.FloatField(null=True, blank=True)
-    heart_rate = models.SmallIntegerField(null=True, blank=True)
-    cadence = models.SmallIntegerField(null=True, blank=True)
-    fractional_cadence = models.FloatField(null=True, blank=True)
-    power = models.SmallIntegerField(null=True, blank=True)
-    accumulated_power = models.IntegerField(null=True, blank=True)
-    stance_time_ms = models.FloatField(null=True, blank=True)
-    stance_time_balance = models.FloatField(null=True, blank=True)
-    stance_time_percent = models.FloatField(null=True, blank=True)
-    step_length_mm = models.FloatField(null=True, blank=True)
-    vertical_oscillation_mm = models.FloatField(null=True, blank=True)
-    vertical_ratio = models.FloatField(null=True, blank=True)
-    # Developer fields + message fields not typed above, verbatim.
-    extra = models.JSONField(default=dict)
-
-    class Meta:
-        db_table = "garmin_activity_sample"
-        constraints = [
-            models.UniqueConstraint(fields=["activity", "timestamp"], name="garmin_sample_uniq")
-        ]
-
-
-class GarminMonitoringSample(OwnerModel):
-    """Minute-level daily wellness series from monitoring .FIT files.
-
-    Monitoring and newer wellness FIT types (heart rate, stress, body
-    battery, HRV, SpO2...) carry one payload per minute or event; the message
-    layouts vary by file type and some are not in public FIT profiles yet, so
-    the payload stays verbatim JSON. Largest volume in the export (tens of
-    millions of points estimated) - decision pending, see the doc.
-    """
-
-    source_fit_type = models.CharField(max_length=40)
-    timestamp = models.DateTimeField()
-    payload = models.JSONField(default=dict)
-
-    class Meta:
-        db_table = "garmin_monitoring_sample"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["owner", "source_fit_type", "timestamp"], name="garmin_monitoring_uniq"
-            )
-        ]
-        indexes = [models.Index(fields=["owner", "timestamp"])]
-
-
-class GarminSegment(OwnerModel):
-    """A Strava/Garmin live segment from the export's segment_list files.
-
-    Parsing of the segment_list FIT layout is pending; `payload` keeps the
-    segment message verbatim until typed columns are grounded.
-    """
-
-    name = models.CharField(max_length=300, blank=True, default="")
-    sport = models.CharField(max_length=40, blank=True, default="")
-    payload = models.JSONField(default=dict)
-
-    class Meta:
-        db_table = "garmin_segment"
 
 
 class GarminSourceFile(OwnerModel):
