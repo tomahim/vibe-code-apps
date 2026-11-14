@@ -205,7 +205,7 @@ for (let i = 0; i < 20; i += 1) {
   zawaNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
   if (zawaNodes.some((n) => n.includes('zawa'))) break;
 }
-check('import: persisted definition plays', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
+check('import: persisted definition creates a node', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
 
 await browser.close();
 server.kill();

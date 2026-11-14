@@ -18,7 +18,10 @@ def serialize(instrument, request):
     definition_url = None
     if instrument.definition:
         try:
-            definition_url = request.build_absolute_uri(instrument.definition.url)
+            # Bucket storage returns an absolute presigned URL; local disk
+            # returns a path, which the browser resolves against its own
+            # origin so dev proxies keep working.
+            definition_url = instrument.definition.url
         except Exception:  # storage unavailable: still list the instrument
             definition_url = None
     return {
