@@ -300,34 +300,61 @@
 /* Library list: search, filters, pagination, save flow */
 .ml-filters {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
   max-width: 860px;
-  margin: 0 auto 10px;
+  margin: 0 auto 16px;
 }
 
 .ml-search,
-.ml-category-filter {
+.ml-category-filter,
+.ml-details input,
+.ml-details textarea {
   background: #141824;
   border: 1px solid #2a3040;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #e8e4d8;
-  padding: 8px 12px;
-  font-size: 14px;
+  font: inherit;
+  font-size: 16px; /* keeps iOS from zooming on focus */
+  line-height: 1.35;
+  padding: 11px 14px;
+  min-height: 46px;
+  box-sizing: border-box;
 }
 
-.ml-search {
-  flex: 1;
-  min-width: 160px;
+.ml-search { flex: 1 1 220px; }
+
+.ml-category-filter {
+  flex: 0 1 auto;
+  min-width: 150px;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23d8b96a' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.ml-search::placeholder { color: #6b7386; }
+
+.ml-search:focus,
+.ml-category-filter:focus,
+.ml-details input:focus,
+.ml-details textarea:focus {
+  outline: none;
+  border-color: #d8b96a;
+  box-shadow: 0 0 0 2px #d8b96a33;
 }
 
 .ml-new-track,
 .ml-save {
   background: #d4a94e;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #141824;
-  padding: 8px 14px;
+  padding: 10px 18px;
+  min-height: 44px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -381,15 +408,6 @@
   gap: 4px;
   color: #9aa0b0;
   font-size: 13px;
-}
-
-.ml-details input {
-  background: #141824;
-  border: 1px solid #2a3040;
-  border-radius: 8px;
-  color: #e8e4d8;
-  padding: 8px 12px;
-  font-size: 14px;
 }
 
 .ml-sound-palette {
