@@ -44,8 +44,19 @@ Filename IDs do not match activity IDs. Each activity FIT is linked to its
 activity by unique session start timestamp within ±5 s. No silent attachment:
 zero matches -> orphan row with NULL activity FK; multiple matches within the
 window -> `ambiguous` match status, NULL FK. Multi-sport files keep one file
-row per file; unknown FIT messages and developer fields are preserved
-losslessly in the file's `extra` JSONB, never dropped.
+row per file.
+
+Preservation has two distinct layers:
+
+1. **Raw bytes.** `garmin_activity_file` keeps sha256 + size per file so the
+   original FIT bytes (the only truly lossless form) stay retrievable and
+   verifiable. The loader records `storage_ref`; the bytes themselves stay in
+   the local export unless option D is approved.
+2. **Decoded layer.** Typed columns cover known fields. Unknown message
+   types and developer fields are not yet semantically decoded: they are
+   preserved as raw bytes only (layer 1), not as queryable rows. Real Garmin activity files also carry
+   undocumented per-second message types that fall in this category -
+   dropping raw bytes would lose them.
 
 ## Model overview (29 tables)
 
@@ -77,30 +88,46 @@ Supporting:
   `garmin_personal_record`, `garmin_workout`, `garmin_workout_schedule`,
   `garmin_course`, `garmin_user_goal`, `garmin_weekly_report`
 
-High-volume time series (designed, gated on the storage decision below —
-models exist, import only when the chosen option allows):
+High-volume time series (models + migration exist; import is gated on the
+storage decision below):
 - `garmin_activity_sample` — per-second activity records (timestamp, position,
   altitude, speed, HR, cadence, power, run dynamics + `extra` JSONB for
-  unknown/developer fields)
-- `garmin_monitoring_sample` — wellness monitoring FIT records
-- `garmin_segment` — segment-list entries from segment FITs
+  decoded-but-untyped fields).
+- `garmin_monitoring_sample` — wellness monitoring FIT records.
+- `garmin_segment` — segment-list entries from segment FITs.
 
 ## Storage decision (user pick required)
 
-Sizes scale with history length H (hours of recorded activity). Illustrative
-figure for H = 1,300 h at ~1 sample/s and ~27 fields/sample:
+Illustrative multi-year history: ~1k activities, ~3M activity record
+messages, ~10M monitoring messages, ~13k segment entries (rounded orders of
+magnitude; the loader reports exact counts per import). Size estimates are
+derived, not measured on Postgres:
 
-| Option | What is stored | Estimated size | Notes |
+- Row width for `garmin_activity_sample` (~15 numeric/timestamp columns + 2
+  FKs + extra JSONB ~50-100 B) is ~230-280 B/row including tuple header.
+  Cross-check: the same schema loaded into SQLite measured 228 B/row
+  including PK + 2 indexes (200k synthetic rows).
+- Full activity samples: 3M rows × ~230-280 B ≈ 0.7-0.85 GB heap +
+  ~0.1-0.2 GB indexes. Grows linearly with future activities.
+- Downsampled 1 point / 10 s: ~300k rows ≈ 70-85 MB all-in.
+- Monitoring samples decoded 1:1: ~10M messages; as rows of similar width
+  ≈ 2.3-2.8 GB - above the whole free-tier project allowance.
+- Free-tier limit: 1 GB Postgres storage per project, 20 GB per account
+  (source: https://neon.com/docs/introduction/plans, fetched 2026-11-14).
+  Current project headroom is UNKNOWN: the read-only DB role's login was
+  failing at proposal time, so no live size could be measured.
+
+| Option | What is stored | Derived size (illustrative history) | Unresolved constraint |
 | --- | --- | --- | --- |
-| A | metadata only, FIT stays in the local export | ~0 MB | tracks re-importable later |
-| B | full typed samples (~27 fields) | ~0.6–0.8 GB | near the 1 GB free-tier project limit (source: https://neon.com/docs/introduction/plans); grows with every future activity |
-| C | downsampled (1 point / 10 s) | ~60–80 MB | keeps map/pace shape, loses 1 s detail |
-| D | raw FIT bytes in the existing media bucket + per-activity on-demand sample import | bucket bytes only | needs incremental bucket cost check before adoption |
+| A | metadata only; FIT stays local | ~0 MB | needs nothing; full detail re-importable later from local bytes |
+| B | full typed samples | ~0.8-1.0 GB | actual project headroom unknown (role login failing); close to the 1 GB project limit even if empty today; grows with every activity |
+| C | downsampled 1/10 s | ~70-85 MB | loses 1 s detail - conflicts with the maximum-detail request |
+| D | raw FIT in the existing media bucket + on-demand sample import | bucket bytes only | incremental bucket cost/egress unknown; needs the provider account to price |
 
-Monitoring samples (24/7 wrist data) are an order of magnitude larger than
-activity samples and are not viable on the free tier under any variant of B;
-they stay as deferred manifest entries + raw files until a paid tier or
-downsampling is approved.
+No default is chosen. A maximum-detail goal points at B or D, but B is gated
+on real headroom and D on bucket pricing; both checks are listed as decision
+questions. Monitoring/segment decoding stays out of every option until
+explicitly approved.
 
 ## Import flow
 
@@ -112,9 +139,11 @@ file. Idempotent: re-running an import updates in place.
 
 ## Decision questions
 
-1. Storage option A/B/C/D for per-second activity samples (default: none
-   chosen; import of sample tables is gated until picked).
-2. Monitoring/segment FITs: confirm deferred (manifest + raw preserved) or
-   schedule downsampling work.
-3. Bucket (option D): approve incremental-cost check on the existing media
-   bucket before any bytes move.
+1. Storage option A/B/C/D for per-second activity samples (none chosen;
+   sample import is gated in the loader until picked).
+2. Actual free-db size: the `instinct_readonly` role's login failed at
+   proposal time, so option B's headroom is unverified.
+3. Bucket (option D): incremental-cost check on the existing media bucket
+   needs provider account access before any bytes move.
+4. Monitoring/segment FITs: keep as manifest + raw bytes, or approve
+   decoding work (separate storage discussion, ~10.6M rows 1:1).
