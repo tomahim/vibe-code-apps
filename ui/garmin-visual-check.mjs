@@ -64,12 +64,19 @@ await page.waitForTimeout(1200);
 await page.screenshot({ path: `${OUT}/06-story-totals.png` });
 
 const cards = await page.$$(".gr-card");
-for (const [i, card] of [[0, cards[0]], [7, cards[7]], [12, cards[12]], [17, cards[17]]]) {
+for (const [i, card] of [[0, cards[0]], [3, cards[3]], [8, cards[8]], [13, cards[13]], [15, cards[15]]]) {
   if (!card) continue;
   await card.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1500);
   await page.screenshot({ path: `${OUT}/07-story-card-${i}.png` });
 }
+
+// dashboard year table
+await page.click('.garmin-tab:text-is("Overall stats")');
+await page.waitForSelector('.gs-yeartable', { timeout: 20000 });
+await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+await page.waitForTimeout(600);
+await page.screenshot({ path: `${OUT}/09-overall-yeartable.png` });
 
 await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 await page.waitForTimeout(800);
@@ -96,5 +103,28 @@ if (mobileCards[3]) {
 }
 await mobile.close();
 
+// --- scroll video of the full story (desktop) ---
+const videoContext = await browser.newContext({
+  viewport: { width: 1440, height: 900 },
+  recordVideo: { dir: "/tmp/garmin-video", size: { width: 1440, height: 900 } },
+});
+await videoContext.addInitScript((t) => {
+  window.localStorage.setItem("genious_token", t);
+}, token);
+const videoPage = await videoContext.newPage();
+await videoPage.goto(`${BASE}/apps/garmin-stats`, { waitUntil: "networkidle" });
+await videoPage.waitForSelector(".gs-kpis", { timeout: 20000 });
+await videoPage.click('.garmin-tab:text-is("My stats animated")');
+await videoPage.waitForSelector(".gr-hero-title", { timeout: 20000 });
+await videoPage.waitForTimeout(1000);
+const totalHeight = await videoPage.evaluate(() => document.body.scrollHeight - window.innerHeight);
+for (let y = 0; y <= totalHeight; y += 300) {
+  await videoPage.evaluate((top) => window.scrollTo({ top }), y);
+  await videoPage.waitForTimeout(260);
+}
+await videoPage.waitForTimeout(800);
+await videoPage.close();
+await videoContext.close();
+
 await browser.close();
-console.log("screenshots done");
+console.log("screenshots + video done");

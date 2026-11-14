@@ -188,6 +188,43 @@ export default function OverallStats() {
         <h3 className="gs-section-title">When you move</h3>
         <WeekdayBars weekdays={data.weekdays} />
       </section>
+
+      <section>
+        <h3 className="gs-section-title">Year by year</h3>
+        <div className="gs-yeartable-wrap">
+          <table className="gs-yeartable">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Activities</th>
+                <th>Distance</th>
+                <th>Time</th>
+                <th>Elevation</th>
+                <th>Avg / activity</th>
+                <th>Top sport</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.by_year.map((row) => {
+                const typeRows = data.by_year_type.filter((entry) => entry.year === row.year);
+                const top = typeRows.reduce((best, entry) => (entry.count > (best?.count || 0) ? entry : best), null);
+                const topLabel = top ? (data.by_type.find((t) => t.type === top.type)?.type_label || top.type) : "—";
+                return (
+                  <tr key={row.year}>
+                    <td>{row.year}</td>
+                    <td>{formatInt(row.count)}</td>
+                    <td>{formatKm(row.km, 0)}</td>
+                    <td>{formatHours(row.hours, 0)}</td>
+                    <td>{formatElevation(row.elevation_m)}</td>
+                    <td>{row.count ? formatKm(row.km / row.count, 1) : "—"}</td>
+                    <td>{topLabel}{top ? ` (${top.count})` : ""}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   );
 }

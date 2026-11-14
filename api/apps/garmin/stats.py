@@ -238,6 +238,7 @@ def running(request):
         distance_m=Sum("distance_m"),
         duration_ms=Sum("duration_ms"),
         elapsed_ms=Sum("elapsed_duration_ms"),
+        moving_ms=Sum("moving_duration_ms"),
         elevation_m=Sum("elevation_gain_m"),
         calories=Sum("calories"),
         steps=Sum("steps"),
@@ -245,7 +246,10 @@ def running(request):
     totals = {
         "runs": agg["count"] or 0,
         "km": _round((agg["distance_m"] or 0) / 1000),
+        # duration = activity time on the watch; moving = with stops removed;
+        # elapsed = wall clock including pauses.
         "hours": _round((agg["duration_ms"] or 0) / 3_600_000),
+        "moving_hours": _round((agg["moving_ms"] or 0) / 3_600_000),
         "elapsed_hours": _round((agg["elapsed_ms"] or 0) / 3_600_000),
         "elevation_m": _round(agg["elevation_m"], 0),
         "kcal": _round(agg["calories"], 0),
@@ -254,25 +258,31 @@ def running(request):
 
     cumulative_km = 0.0
     cumulative_hours = 0.0
+    cumulative_moving_hours = 0.0
     by_year = []
     for row in qs.annotate(period=TruncYear("start_time_gmt")).values("period").annotate(
         count=Count("garmin_activity_id"),
         distance_m=Sum("distance_m"),
         duration_ms=Sum("duration_ms"),
+        moving_ms=Sum("moving_duration_ms"),
         elevation_m=Sum("elevation_gain_m"),
     ).order_by("period"):
         km = (row["distance_m"] or 0) / 1000
         hours = (row["duration_ms"] or 0) / 3_600_000
+        moving_hours = (row["moving_ms"] or 0) / 3_600_000
         cumulative_km += km
         cumulative_hours += hours
+        cumulative_moving_hours += moving_hours
         by_year.append({
             "year": row["period"].year,
             "runs": row["count"],
             "km": _round(km),
             "hours": _round(hours),
+            "moving_hours": _round(moving_hours),
             "elevation_m": _round(row["elevation_m"], 0),
             "cumulative_km": _round(cumulative_km),
             "cumulative_hours": _round(cumulative_hours),
+            "cumulative_moving_hours": _round(cumulative_moving_hours),
         })
 
     longest_distance = qs.filter(distance_m__isnull=False).order_by("-distance_m").first()

@@ -710,3 +710,283 @@
     gap: 1.6rem;
   }
 }
+
+/* ---- comparison card visual motifs ---- */
+
+.gr-card--viz {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  text-align: left;
+}
+
+.gr-card--viz .gr-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.gr-card-viz {
+  flex: 0 0 auto;
+  width: clamp(140px, 24vw, 220px);
+  display: grid;
+  place-items: center;
+}
+
+.gr-card-source {
+  margin: 0.9rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+}
+
+.gr-viz-icon {
+  font-size: 34px;
+}
+
+.gr-viz-ring {
+  width: 100%;
+  max-width: 180px;
+}
+
+.gr-viz-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 8;
+}
+
+.gr-viz-ring-fill {
+  fill: none;
+  stroke: #ffd166;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.gr-viz-route {
+  width: 100%;
+  max-width: 220px;
+}
+
+.gr-viz-route-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.gr-viz-route-track {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.gr-viz-route-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.gr-viz-route-marker {
+  position: absolute;
+  top: -1.3rem;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+}
+
+.gr-viz-times {
+  position: absolute;
+  top: 0.9rem;
+  transform: translateX(-50%);
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.gr-viz-space {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  height: 190px;
+}
+
+.gr-viz-space-target {
+  font-size: 1.8rem;
+}
+
+.gr-viz-space-track {
+  position: relative;
+  flex: 1;
+  width: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.gr-viz-space-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 14px #ffd166;
+}
+
+.gr-viz-space-times {
+  position: absolute;
+  top: -0.2rem;
+  left: 0.8rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.gr-viz-space-ground {
+  font-size: 1.4rem;
+}
+
+.gr-viz-peaks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  max-width: 220px;
+}
+
+.gr-viz-peak {
+  width: 26px;
+  height: 21px;
+}
+
+.gr-viz-peak path {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.gr-viz-peak .gr-viz-peak-snow {
+  fill: #cfe8ff;
+}
+
+.gr-viz-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 14px);
+  gap: 5px;
+  justify-content: center;
+}
+
+.gr-viz-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.gr-viz-grid--daynight .gr-viz-cell {
+  border-radius: 50%;
+  background: #ffd166;
+}
+
+.gr-viz-grid--daynight .gr-viz-cell[data-alt="1"] {
+  background: #7ea6e0;
+}
+
+.gr-viz-grid--medal .gr-viz-cell {
+  border-radius: 50%;
+  background: #ffd166;
+}
+
+/* evolution area chart backdrop */
+
+.gr-evolution-chart {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.gr-evolution-area {
+  fill: rgba(255, 255, 255, 0.10);
+}
+
+.gr-evolution-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 0.8;
+}
+
+.gr-evolution-marker {
+  stroke: rgba(255, 209, 102, 0.7);
+  stroke-width: 0.4;
+}
+
+.gr-evolution-sticky > *:not(.gr-evolution-chart) {
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .gr-card--viz {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gr-card-viz {
+    width: min(220px, 70vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-hero-hint {
+    animation: none;
+  }
+
+  .gr-evolution-sticky {
+    transition: none;
+  }
+}
+
+/* year-by-year table */
+
+.gs-yeartable-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+}
+
+.gs-yeartable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-yeartable th,
+.gs-yeartable td {
+  text-align: right;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid #eef0f3;
+  white-space: nowrap;
+}
+
+.gs-yeartable th:first-child,
+.gs-yeartable td:first-child,
+.gs-yeartable th:last-child,
+.gs-yeartable td:last-child {
+  text-align: left;
+}
+
+.gs-yeartable thead th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7a8494;
+}
+
+.gs-yeartable tbody tr:last-child td {
+  border-bottom: none;
+}
