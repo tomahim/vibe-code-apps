@@ -122,6 +122,26 @@ def scan_fit_files(export_dir, hash_all=False):
     return rows
 
 
+# The UI proxy caps request bodies (nginx client_max_body_size), so batches
+# are bounded by serialized bytes, not just record count. A single record
+# bigger than the batch cap goes out as its own batch: every record is sent.
+MAX_BATCH_BYTES = 700_000
+
+
+def batched(records, max_records, max_bytes=MAX_BATCH_BYTES):
+    """Yield chunks whose JSON body stays under max_bytes (big records alone)."""
+    chunk, size = [], 20  # 20 = {"records": []} envelope slack
+    for rec in records:
+        rec_size = len(json.dumps(rec)) + 2
+        if chunk and (len(chunk) >= max_records or size + rec_size > max_bytes):
+            yield chunk
+            chunk, size = [], 20
+        chunk.append(rec)
+        size += rec_size
+    if chunk:
+        yield chunk
+
+
 def post_batch(session, api_base, dataset, records):
     r = session.post(
         f"{api_base}/api/apps/garmin/import/{dataset}/",
@@ -158,15 +178,12 @@ def main():
         print(f"{dataset}: {len(records)} records read", flush=True)
         if args.dry_run or not records:
             continue
-        batches = (len(records) + args.batch_size - 1) // args.batch_size
+        chunks = list(batched(records, args.batch_size))
         sent = 0
-        for i in range(0, len(records), args.batch_size):
-            result = post_batch(
-                session, args.api_base, dataset,
-                records[i:i + args.batch_size],
-            )
+        for i, chunk in enumerate(chunks, 1):
+            result = post_batch(session, args.api_base, dataset, chunk)
             sent += result["written"]
-            print(f"  {dataset}: batch {i // args.batch_size + 1}/{batches} "
+            print(f"  {dataset}: batch {i}/{len(chunks)} "
                   f"- {sent}/{len(records)} written ({time.time()-t0:.0f}s)",
                   flush=True)
 
@@ -176,13 +193,14 @@ def main():
         act_rows = [r for r, t in rows if t == 4]
         totals["activity-files"] = len(act_rows)
         if not args.dry_run:
-            batches = (len(act_rows) + args.batch_size - 1) // args.batch_size
-            for i in range(0, len(act_rows), args.batch_size):
-                post_batch(session, args.api_base, "activity-files",
-                           act_rows[i:i + args.batch_size])
-                print(f"  activity-files: batch {i // args.batch_size + 1}/{batches} "
-                      f"- {min(i + args.batch_size, len(act_rows))}/{len(act_rows)} sent "
-                      f"({time.time()-t0:.0f}s)", flush=True)
+            chunks = list(batched(act_rows, args.batch_size))
+            sent = 0
+            for i, chunk in enumerate(chunks, 1):
+                post_batch(session, args.api_base, "activity-files", chunk)
+                sent += len(chunk)
+                print(f"  activity-files: batch {i}/{len(chunks)} "
+                      f"- {sent}/{len(act_rows)} sent ({time.time()-t0:.0f}s)",
+                      flush=True)
 
     print(json.dumps({"dry_run": args.dry_run, "records": totals}, indent=2))
 
