@@ -193,11 +193,18 @@ await page.reload();
 await page.waitForSelector('.ib-card', { timeout: 15000 });
 await page.locator('.ml-search').fill('zawa');
 await settle(700);
-const zawaCards = await page.locator('.ib-card').count();
-check('import: survives reload', zawaCards === 1, `cards: ${zawaCards}`);
-await page.locator('.ib-card').getByRole('button', { name: /Preview/ }).click();
-await settle(1500);
-const zawaNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+// 'zawa' also matches the built-in zawa card; the imported copy must be there too.
+const importedCard = page.locator('.ib-card', { hasText: 'sonic-pi-zawa' });
+const importedCount = await importedCard.count();
+check('import: survives reload', importedCount === 1, `imported cards: ${importedCount}`);
+await importedCard.getByRole('button', { name: /Preview/ }).click();
+// The reload reset the engine; a fresh WASM boot takes several seconds, so poll.
+let zawaNodes = [];
+for (let i = 0; i < 20; i += 1) {
+  await settle(1000);
+  zawaNodes = await page.evaluate(() => window.__musicEngine?.supersonic.getRawTree()?.nodes.filter((n) => !n.isGroup).map((n) => n.defName) ?? []);
+  if (zawaNodes.some((n) => n.includes('zawa'))) break;
+}
 check('import: persisted definition plays', zawaNodes.some((n) => n.includes('zawa')), `nodes: ${zawaNodes.join(', ')}`);
 
 await browser.close();

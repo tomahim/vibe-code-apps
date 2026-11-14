@@ -178,14 +178,12 @@ class MusicEngine {
   }
 
   // Import a .scsyndef binary (File/Blob/ArrayBuffer). The engine validates the
-  // data and extracts the real definition name from it; we diff the loaded set
-  // to learn that name. Throws with the engine's message when invalid.
+  // data, extracts the real definition name from it and returns it. Throws with
+  // the engine's message when invalid.
   async importSynth(source) {
-    const before = new Set(this.supersonic.loadedSynthDefs);
-    await this.supersonic.loadSynthDef(source);
-    const added = this.supersonic.loadedSynthDefs.filter((n) => !before.has(n));
-    if (added.length === 0) throw new Error("No new instrument found in that file.");
-    return added[0];
+    const { name } = await this.supersonic.loadSynthDef(source);
+    if (!name) throw new Error("No instrument name found in that file.");
+    return name;
   }
 
   // Play one bounded preview note right now. `raw` names are used as-is
