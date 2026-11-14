@@ -3,6 +3,7 @@
 Value-level only: field numbers, raw FIT-epoch timestamps, no semantic
 names or unit conversions. Undocumented message types are never decoded.
 """
+import math
 import struct
 
 
@@ -94,6 +95,10 @@ def _decode_value(data, pos, size, btype, fmt):
     if bt in _BASE and size >= _BASE[bt][1]:
         ch, sz = _BASE[bt]
         vals = struct.unpack_from(fmt + ch * (size // sz), data, pos)
+        # Float NaN/Inf (the FIT profile's float "invalid" sentinel) cannot
+        # round-trip through JSON: normalize to None like other sentinels.
+        vals = tuple(None if isinstance(v, float) and not math.isfinite(v) else v
+                     for v in vals)
         return vals[0] if len(vals) == 1 else list(vals)
     return data[pos:pos + size].hex()
 

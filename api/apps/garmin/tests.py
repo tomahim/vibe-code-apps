@@ -292,6 +292,16 @@ class FitDecodeTests(TestCase):
         self.assertEqual(rec[3], 152)
         self.assertEqual(rec['dev:0:9'], 42)
 
+    def test_float_nan_becomes_none(self):
+        # A float32 field holding the FIT invalid sentinel (NaN) decodes to
+        # None so the value survives JSON serialization.
+        import struct as st
+        from .fitdec import _decode_value
+        data = st.pack("<f", float("nan"))
+        self.assertIsNone(_decode_value(data, 0, 4, 0x88, "<"))
+        data2 = st.pack("<ff", 1.5, float("nan"))
+        self.assertEqual(_decode_value(data2, 0, 8, 0x88, "<"), [1.5, None])
+
     def test_record_count_without_decode(self):
         import struct as st
         from apps.garmin.fitdec import _fit_decode
