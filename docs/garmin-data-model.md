@@ -63,12 +63,17 @@ Preservation has two distinct layers:
 FIT message coverage, from a full message-level census of a real export:
 
 - Decoded by the loader: `file_id` (type) plus value-level decode of
-  `session`, `lap`, `event`, `sport` and `device_info` messages into
-  `garmin_activity_file.fit_messages`, keyed by FIT field number with raw
-  FIT-epoch timestamps - no semantic names or unit conversions guessed.
+  `session`, `lap`, `event`, `sport`, `device_info`, `activity`,
+  `zones_target`, `hrv` and developer data (`developer_data_id`,
+  `field_description`, and dev values resolved through the file's own
+  definitions) into `garmin_activity_file.fit_messages`, keyed by FIT
+  field number with raw FIT-epoch timestamps - no semantic names or unit
+  conversions guessed. Per-second `record` messages are always counted
+  (`record_count` column) and decoded only with the loader's
+  `--decode-records` flag (the gated high-volume tier).
 - Known message types present and NOT yet decoded (identified remaining
-  work): per-second `record`, `activity`, `zones_target`, `hrv`, and
-  developer data (`developer_data_id`, `field_description`).
+  work): none beyond the list above; semantic naming/unit mapping of the
+  decoded field numbers is the remaining modeling work.
 - Undocumented message types present (raw-bytes-only until reverse
   engineered): ~15 types, including the two per-second types above.
 

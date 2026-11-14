@@ -174,25 +174,51 @@ def _fit_scan(data):
 
 FIT_TYPE_NAMES = {4: "activity", 32: "monitoring_b", 35: "segment_list"}
 
-# FIT base types we decode generically (base type number -> (struct char, size)).
+# FIT base types: number -> (struct char, size). String and byte handled apart.
+# enum=0 sint8=1 uint8=2 sint16=3 uint16=4 sint32=5 uint32=6 string=7
+# float32=8 float64=9 uint8z=10 uint16z=11 uint32z=12 byte=13
+# sint64=14 uint64=15 uint64z=16
 _BASE = {
-    0: ("B", 1), 1: ("b", 1), 2: ("B", 1), 5: ("B", 1), 10: ("B", 1), 13: ("B", 1),
-    3: ("h", 2), 4: ("H", 2), 8: ("f", 4),
-    6: ("i", 4), 7: ("I", 4), 11: ("d", 8), 12: ("q", 8), 9: ("Q", 8),
+    0: ("B", 1), 1: ("b", 1), 2: ("B", 1), 3: ("h", 2), 4: ("H", 2),
+    5: ("i", 4), 6: ("I", 4), 8: ("f", 4), 9: ("d", 8), 10: ("B", 1),
+    11: ("H", 2), 12: ("I", 4), 13: ("B", 1), 14: ("q", 8), 15: ("Q", 8),
+    16: ("Q", 8),
 }
 # Known message types decoded into extra payload, keyed by field number.
-_DECODED_GMN = {18: "sessions", 19: "laps", 21: "events", 12: "sport", 23: "device_info"}
+_DECODED_GMN = {18: "sessions", 19: "laps", 21: "events", 12: "sport",
+                23: "device_info", 34: "activity", 7: "zones_target", 78: "hrv"}
+_RECORD_GMN = 20
+_DEV_DEF_GMN = 206   # field_description
+_DEV_ID_GMN = 207    # developer_data_id
 
 
-def _fit_decode(data, gmn_wanted):
+def _decode_value(data, pos, size, btype, fmt):
+    bt = btype & 0x1F
+    if bt == 7:  # string
+        return data[pos:pos + size].split(b"\x00")[0].decode("utf-8", "replace")
+    if bt == 13:  # byte blob
+        return data[pos:pos + size].hex()
+    if bt in _BASE and size >= _BASE[bt][1]:
+        ch, sz = _BASE[bt]
+        vals = struct.unpack_from(fmt + ch * (size // sz), data, pos)
+        return vals[0] if len(vals) == 1 else list(vals)
+    return data[pos:pos + size].hex()
+
+
+def _fit_decode(data, gmn_wanted, include_records=False):
     """Generic walk: decode wanted message types into {field_num: value} dicts.
 
     Values keep field numbers (no semantic names, no unit conversion) so
-    nothing is guessed; the DB stores them in the file row's extra JSONB.
-    FIT epoch fields stay as raw ints (seconds since 1989-12-31 UTC).
+    nothing is guessed. Developer fields are decoded using the file's own
+    field_description messages and keyed "dev:<index>:<field>" (with the
+    declared name attached in dev_field_defs). FIT epoch fields stay raw
+    ints (seconds since 1989-12-31 UTC). Per-second record messages are
+    counted always and decoded only when include_records is set.
     """
     defs = {}
-    out = {name: [] for name in set(gmn_wanted.values())}
+    dev_defs = {}  # (dev_data_index, field_def_num) -> {"name":, "btype":}
+    out = {}
+    record_count = 0
     try:
         pos = data[0]
         data_end = pos + struct.unpack_from("<I", data, 4)[0]
@@ -212,42 +238,55 @@ def _fit_decode(data, gmn_wanted):
                 for _ in range(nf):
                     fields.append((data[p2], data[p2 + 1], data[p2 + 2]))
                     p2 += 3
-                dsz = 0
+                dev_fields = []
                 if dev:
                     ndf = data[p2]
                     p2 += 1
                     for _ in range(ndf):
-                        dsz += data[p2 + 1]
+                        # (field_def_num, size, dev_data_index)
+                        dev_fields.append((data[p2], data[p2 + 1], data[p2 + 2]))
                         p2 += 3
-                defs[local] = (gmn, fields, fmt, dsz)
+                defs[local] = (gmn, fields, fmt, dev_fields)
                 pos = p2
                 continue
             else:
                 local = rh & 15
             if local not in defs:
                 break
-            gmn, fields, fmt, dsz = defs[local]
-            if gmn in gmn_wanted:
+            gmn, fields, fmt, dev_fields = defs[local]
+            if gmn == _RECORD_GMN:
+                record_count += 1
+                if not include_records:
+                    pos += sum(sz for _, sz, _ in fields) + sum(s for _, s, _ in dev_fields)
+                    continue
+            if gmn in gmn_wanted or (gmn == _RECORD_GMN and include_records) or gmn in (_DEV_DEF_GMN, _DEV_ID_GMN):
                 rec = {}
                 for num, size, btype in fields:
-                    bt = btype & 0x1F
-                    if bt in _BASE and size >= _BASE[bt][1]:
-                        ch, sz = _BASE[bt]
-                        vals = struct.unpack_from(fmt + ch * (size // sz), data, pos)
-                        rec[num] = vals[0] if len(vals) == 1 else list(vals)
-                    else:
-                        rec[num] = data[pos:pos + size].hex()
+                    rec[num] = _decode_value(data, pos, size, btype, fmt)
                     pos += size
-                out[gmn_wanted[gmn]].append(rec)
+                for fnum, size, didx in dev_fields:
+                    dd = dev_defs.get((didx, fnum), {})
+                    rec["dev:%d:%d" % (didx, fnum)] = _decode_value(
+                        data, pos, size, dd.get("btype", 13), fmt)
+                    pos += size
+                if gmn == _DEV_DEF_GMN:
+                    key = (rec.get(0), rec.get(1))  # dev index, field num
+                    dev_defs[key] = {"name": rec.get(3), "btype": rec.get(2)}
+                    out.setdefault("dev_field_defs", []).append(rec)
+                elif gmn == _DEV_ID_GMN:
+                    out.setdefault("developer_data_ids", []).append(rec)
+                elif gmn == _RECORD_GMN:
+                    out.setdefault("records", []).append(rec)
+                else:
+                    out.setdefault(gmn_wanted[gmn], []).append(rec)
             else:
-                pos += sum(sz for _, sz, _ in fields)
-            pos += dsz
+                pos += sum(sz for _, sz, _ in fields) + sum(s for _, s, _ in dev_fields)
     except (IndexError, struct.error):
         pass
-    return {k: v for k, v in out.items() if v}
+    return out, record_count
 
 
-def scan_fit_files(export_dir, hash_all=False):
+def scan_fit_files(export_dir, hash_all=False, decode_records=False):
     """Yield manifest/activity-file rows for every .FIT in Uploaded-Files zips."""
     rows = []
     pattern = os.path.join(
@@ -265,7 +304,9 @@ def scan_fit_files(export_dir, hash_all=False):
                     if start is None:
                         # session messages sit near the end of activity files
                         ftype, start, sport = _fit_scan(full)
-                    row_extra = _fit_decode(full, _DECODED_GMN)
+                    row_extra, rec_count = _fit_decode(
+                        full, _DECODED_GMN, include_records=decode_records)
+                    row["record_count"] = rec_count
                 else:
                     row_extra = {}
                 row = {
@@ -304,6 +345,9 @@ def main():
     p.add_argument("--datasets", default="")
     p.add_argument("--batch-size", type=int, default=200)
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--decode-records", action="store_true",
+                   help="also decode per-second record messages (high volume; "
+                        "off by default until a storage option is picked)")
     args = p.parse_args()
     if not args.token and not args.dry_run:
         sys.exit("Provide --token or GARMIN_IMPORT_TOKEN (or use --dry-run).")
@@ -330,7 +374,7 @@ def main():
     # .FIT files: activity files get the timestamp-match import; every file
     # (any type) also lands in the source-file manifest.
     if not wanted or "activity-files" in wanted:
-        rows = scan_fit_files(args.export_dir)
+        rows = scan_fit_files(args.export_dir, decode_records=args.decode_records)
         act_rows = [r for r, t in rows if t == 4]
         totals["activity-files"] = len(act_rows)
         if not args.dry_run:

@@ -246,6 +246,9 @@ class GarminActivityFile(OwnerModel):
     # device_info), keyed by FIT field number - no semantic mapping, so
     # nothing is guessed. Undocumented message types stay raw-bytes-only.
     fit_messages = models.JSONField(default=dict)
+    # Per-second record messages counted during the scan (decoded records
+    # themselves only when the gated high-volume import is enabled).
+    record_count = models.BigIntegerField(null=True, blank=True)
 
     class Meta:
         db_table = "garmin_activity_file"
