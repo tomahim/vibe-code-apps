@@ -7,5 +7,5 @@ COPY start.sh /app/start.sh
 RUN chmod 755 /app/start.sh
 ENV TS_USERSPACE=true TS_STATE_DIR=/var/lib/tailscale TS_AUTH_ONCE=true \
     TS_SERVE_CONFIG=/config/serve.json TS_HOSTNAME=vibe-music-https \
-    TS_ACCEPT_DNS=false
+    TS_ACCEPT_DNS=false TS_DEBUG_ALWAYS_USE_DERP=true
 ENTRYPOINT ["/app/start.sh"]
