@@ -123,6 +123,19 @@ const pursuitRms = await page.evaluate(async () => {
 check('pursuit audio renders', pursuitRms > 0.005, `output RMS ${pursuitRms.toFixed(4)}`);
 await page.getByRole('button', { name: /Stop/ }).click();
 
+// 6d. Server-side library search (only when the API is reachable).
+const searchBox = page.locator('.ml-search');
+if (await searchBox.isVisible().catch(() => false)) {
+  await searchBox.fill('pursuit');
+  await settle(900); // debounce + fetch
+  const hits = await page.locator('.ml-track').allTextContents();
+  check('search filters library', hits.length === 1 && hits[0].includes('Night Pursuit'), hits.join('|'));
+  await searchBox.fill('');
+  await settle(900);
+  const restored = await page.locator('.ml-track').count();
+  check('clearing search restores list', restored === 3, `tracks: ${restored}`);
+}
+
 // 6c. Tutorial mode: lesson 1 plays real notes through the shared engine.
 await page.getByRole('button', { name: 'Tutorial' }).click();
 await settle(400);

@@ -295,3 +295,98 @@
   cursor: pointer;
 }
 .ml-step-dot.active { background: #d8b96a; color: #0d1017; border-color: #d8b96a; }
+
+/* Library list: search, filters, pagination, save flow */
+.ml-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  max-width: 860px;
+  margin: 0 auto 10px;
+}
+
+.ml-search,
+.ml-category-filter {
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 8px;
+  color: #e8e4d8;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.ml-search {
+  flex: 1;
+  min-width: 160px;
+}
+
+.ml-new-track,
+.ml-save {
+  background: #d4a94e;
+  border: none;
+  border-radius: 8px;
+  color: #141824;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ml-new-track:disabled,
+.ml-save:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.ml-signin-hint {
+  color: #d4a94e;
+  font-size: 14px;
+  align-self: center;
+}
+
+.ml-pagination {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  max-width: 860px;
+  margin: 10px auto 0;
+  color: #9aa0b0;
+  font-size: 13px;
+}
+
+.ml-pagination button {
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 8px;
+  color: #e8e4d8;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.ml-pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ml-details {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.ml-details label {
+  display: grid;
+  gap: 4px;
+  color: #9aa0b0;
+  font-size: 13px;
+}
+
+.ml-details input {
+  background: #141824;
+  border: 1px solid #2a3040;
+  border-radius: 8px;
+  color: #e8e4d8;
+  padding: 8px 12px;
+  font-size: 14px;
+}

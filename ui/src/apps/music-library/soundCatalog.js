@@ -1,0 +1,75 @@
+// Every playable synthdef vendored in /supersonic/synthdefs/, grouped by type.
+// `ready` (computed in SoundBrowser) means preloaded at boot (SYNTH_PALETTE);
+// anything else loads on demand the first time it is previewed or played.
+export const SOUND_TYPES = ["Drums", "Bass", "Synth", "Pad", "Keys", "Bell", "Noise"];
+
+export const SOUND_CATALOG = [
+  // Drums
+  { name: "sc808_bassdrum", type: "Drums", blurb: "808 kick" },
+  { name: "sc808_snare", type: "Drums", blurb: "808 snare" },
+  { name: "sc808_clap", type: "Drums", blurb: "808 hand clap" },
+  { name: "sc808_rimshot", type: "Drums", blurb: "808 rimshot" },
+  { name: "sc808_closed_hihat", type: "Drums", blurb: "808 closed hat" },
+  { name: "sc808_open_hihat", type: "Drums", blurb: "808 open hat" },
+  { name: "sc808_cymbal", type: "Drums", blurb: "808 crash cymbal" },
+  { name: "sc808_tomhi", type: "Drums", blurb: "808 high tom" },
+  { name: "sc808_tommid", type: "Drums", blurb: "808 mid tom" },
+  { name: "sc808_tomlo", type: "Drums", blurb: "808 low tom" },
+  { name: "sc808_congahi", type: "Drums", blurb: "808 high conga" },
+  { name: "sc808_congamid", type: "Drums", blurb: "808 mid conga" },
+  { name: "sc808_congalo", type: "Drums", blurb: "808 low conga" },
+  { name: "sc808_claves", type: "Drums", blurb: "808 claves" },
+  { name: "sc808_cowbell", type: "Drums", blurb: "808 cowbell" },
+  { name: "sc808_maracas", type: "Drums", blurb: "808 maracas" },
+  { name: "gabberkick", type: "Drums", blurb: "hard gabber kick" },
+  // Bass
+  { name: "tb303", type: "Bass", blurb: "acid bassline" },
+  { name: "growl", type: "Bass", blurb: "deep growling bass" },
+  { name: "bass_foundation", type: "Bass", blurb: "sub bass foundation" },
+  { name: "bass_highend", type: "Bass", blurb: "bass with bite" },
+  { name: "chipbass", type: "Bass", blurb: "chiptune bass" },
+  { name: "subpulse", type: "Bass", blurb: "pulsing sub" },
+  // Synths
+  { name: "prophet", type: "Synth", blurb: "warm poly, Prophet-5 flavour" },
+  { name: "hoover", type: "Synth", blurb: "classic rave hoover" },
+  { name: "blade", type: "Synth", blurb: "cinematic string pad" },
+  { name: "supersaw", type: "Synth", blurb: "detuned saw stack" },
+  { name: "saw", type: "Synth", blurb: "plain sawtooth" },
+  { name: "tri", type: "Synth", blurb: "triangle wave" },
+  { name: "pulse", type: "Synth", blurb: "pulse wave" },
+  { name: "square", type: "Synth", blurb: "square wave" },
+  { name: "dsaw", type: "Synth", blurb: "detuned saw" },
+  { name: "dpulse", type: "Synth", blurb: "detuned pulse" },
+  { name: "dtri", type: "Synth", blurb: "detuned triangle" },
+  { name: "mod_saw", type: "Synth", blurb: "saw with modulator" },
+  { name: "mod_pulse", type: "Synth", blurb: "pulse with modulator" },
+  { name: "mod_tri", type: "Synth", blurb: "triangle with modulator" },
+  { name: "mod_dsaw", type: "Synth", blurb: "detuned mod saw" },
+  { name: "mod_sine", type: "Synth", blurb: "sine with modulator" },
+  { name: "fm", type: "Synth", blurb: "2-op FM" },
+  { name: "mod_fm", type: "Synth", blurb: "basic FM" },
+  { name: "chiplead", type: "Synth", blurb: "chiptune lead" },
+  { name: "tech_saws", type: "Synth", blurb: "techno saw stack" },
+  { name: "zawa", type: "Synth", blurb: "saw wave with sync" },
+  { name: "rodeo", type: "Synth", blurb: "twangy synth" },
+  { name: "beep", type: "Synth", blurb: "plain sine beep" },
+  // Pads
+  { name: "dark_ambience", type: "Pad", blurb: "dark evolving drone" },
+  { name: "hollow", type: "Pad", blurb: "airy, breathy pad" },
+  { name: "organ_tonewheel", type: "Pad", blurb: "tonewheel organ" },
+  // Keys
+  { name: "pluck", type: "Keys", blurb: "karplus-strong pluck" },
+  { name: "kalimba", type: "Keys", blurb: "thumb piano" },
+  { name: "rhodey", type: "Keys", blurb: "electric piano" },
+  { name: "piano", type: "Keys", blurb: "piano (MdaPiano)" },
+  // Bells
+  { name: "pretty_bell", type: "Bell", blurb: "FM bell, long shimmer" },
+  { name: "dull_bell", type: "Bell", blurb: "soft, round bell" },
+  // Noise
+  { name: "bnoise", type: "Noise", blurb: "brown noise" },
+  { name: "cnoise", type: "Noise", blurb: "clipped noise" },
+  { name: "gnoise", type: "Noise", blurb: "grey noise" },
+  { name: "pnoise", type: "Noise", blurb: "pink noise" },
+  { name: "noise", type: "Noise", blurb: "white noise" },
+  { name: "chipnoise", type: "Noise", blurb: "chiptune noise" },
+];
