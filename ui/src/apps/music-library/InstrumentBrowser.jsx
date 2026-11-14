@@ -278,17 +278,19 @@ export default function InstrumentBrowser({ onHome }) {
             </div>
             <div className="ib-actions">
               {previewing === item.name ? (
-                <button type="button" className="ml-play stop" onClick={stopPreview}>
-                  ■ Stop
+                <button type="button" className="ml-play stop" onClick={stopPreview} aria-label={`Stop previewing ${item.name}`} title="Stop">
+                  ■
                 </button>
               ) : (
                 <button
                   type="button"
                   className="ml-play"
+                  aria-label={`Preview ${item.name}`}
+                  title="Preview"
                   disabled={booting || (item.origin === "imported" && !item.definition_url)}
                   onClick={() => (item.origin === "imported" ? previewImported(item) : previewBuiltin(item))}
                 >
-                  ▶ Preview
+                  ▶
                 </button>
               )}
             </div>

@@ -521,10 +521,13 @@
 .ib-actions { flex: none; }
 
 .ib-actions .ml-play {
-  padding: 7px 14px;
+  padding: 7px 0;
+  width: 42px;
+  min-width: 0;
   min-height: 38px;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 10px;
+  text-align: center;
 }
 
 .ib-add {
