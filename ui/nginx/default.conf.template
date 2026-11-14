@@ -24,6 +24,20 @@ server {
     set $api_upstream ${API_UPSTREAM};
 
     location /api/ {
+        # Garmin export import: a single activity record can reach ~5.2 MB of
+        # JSON (long FIT track). Django accepts bodies up to
+        # DATA_UPLOAD_MAX_MEMORY_SIZE (6 MB); match it on this route only so
+        # the rest of the API keeps nginx's 1 MB default.
+        location = /api/apps/garmin/import/activities/ {
+            client_max_body_size 6m;
+            proxy_pass $api_upstream;
+            proxy_http_version 1.1;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $originating_scheme;
+            proxy_read_timeout 60s;
+        }
         proxy_pass $api_upstream;
         proxy_http_version 1.1;
         proxy_set_header Host $http_host;
