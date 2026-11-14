@@ -20,6 +20,7 @@ const TAB_BY_SLUG = {
   "threejs-learning-path": "Learning",
   "db-dashboard": "Tech tools",
   "livetrail-scrap": "Sports",
+  "garmin-stats": "Sports",
   "little-grains": "Learning",
 };
 
@@ -117,6 +118,13 @@ const initialApps = [
     description: "Estimate checkpoint times for trail races and explore the elevation profile.",
     category: "Sports",
     icon: "↗",
+  },
+  {
+    slug: "garmin-stats",
+    name: "Garmin stats",
+    description: "All your activities in numbers, plus a full-screen animated story of your running life.",
+    category: "Sports",
+    icon: "🏔️",
   },
 ];
 
