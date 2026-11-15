@@ -28,8 +28,17 @@ export const interlocking=THEMES.map((t,ti)=>{
    if(du<=0)q.push(u);if((du<0)!==(dv<0)){const t2=du/(du-dv);q.push([u[0]+(v[0]-u[0])*t2,u[1]+(v[1]-u[1])*t2]);}});p=q;
  });
  p=p.filter((v,k)=>Math.hypot(v[0]-p[(k+1)%p.length][0],v[1]-p[(k+1)%p.length][1])>1e-5);
+ // Bound open outer edges with a broad faceted perimeter, avoiding long bare prongs.
+ // Interior seams still come from neighbouring territories; only the exposed coast changes.
+ for(let side=0;side<12;side++){
+  const a=Math.cos(side*Math.PI/6),b=Math.sin(side*Math.PI/6),q=[];
+  p.forEach((u,k)=>{const v=p[(k+1)%p.length],du=a*u[0]+b*u[1]-3.85,dv=a*v[0]+b*v[1]-3.85;
+   if(du<=0)q.push(u);if((du<0)!==(dv<0)){const t=du/(du-dv);q.push([u[0]+(v[0]-u[0])*t,u[1]+(v[1]-u[1])*t]);}});p=q;
+ }
  return p;
 });
+// Largest local radius of each interlocking territory, for camera framing of world groups.
+export const interlockRadii=interlocking.map(p=>Math.max(...p.map(([x,z])=>Math.hypot(x,z))));
 // Five world groups of four themes, in catalog order.
 export const WORLDS=[{name:'Wild Earth',themes:[0,1,2,3]},{name:'Stone & Sky',themes:[4,5,6,7]},{name:'Body & Mind',themes:[8,9,10,11]},{name:'Arts & Letters',themes:[12,13,14,15]},{name:'Human Systems',themes:[16,17,18,19]}];
 export const themeCenters=CENTERS;
@@ -55,3 +64,13 @@ export function reshape(geo,ti,poly=polygons[ti]){
  ccw.forEach((a,i)=>{const b=ccw[(i+1)%ccw.length];quad([a[0]*.97,H,a[1]*.97],[b[0]*.97,H,b[1]*.97],[b[0],H-bev,b[1]],[a[0],H-bev,a[1]],c1.clone().multiplyScalar(.82));bands.slice(0,-1).forEach((y,j)=>quad([a[0],y,a[1]],[b[0],y,b[1]],[b[0],bands[j+1],b[1]],[a[0],bands[j+1],a[1]],new T.Color(strata[j]).multiplyScalar(.96+h(a[0]*5,y*7+b[1],seed)*.08)));});
  const out=new T.BufferGeometry();out.setAttribute('position',new T.Float32BufferAttribute(pos,3));out.setAttribute('color',new T.Float32BufferAttribute(col,3));out.computeVertexNormals();out.computeBoundingSphere();geo.dispose();return out;
 }
+
+// Related subjects form four intentionally uneven five-theme constellations.
+export const COMPACT_GROUPS=[
+ {name:'Earth & cosmos',themes:[0,2,3,4,5],center:[-6,-5],slots:[[0,0],[1,0],[0,1],[-1,1],[-1,0]]},
+ {name:'Life & wellbeing',themes:[1,8,9,10,11],center:[5,-4],slots:[[0,0],[0,-1],[1,-1],[1,0],[0,1]]},
+ {name:'Science & making',themes:[6,7,16,17,18],center:[-5,5],slots:[[0,0],[-1,0],[-1,1],[0,1],[1,0]]},
+ {name:'Culture & society',themes:[12,13,14,15,19],center:[7,6],slots:[[0,0],[0,-1],[1,-1],[-1,0],[0,1]]}
+];
+export const compactCenters=Array.from({length:20});
+COMPACT_GROUPS.forEach(g=>g.themes.forEach((ti,k)=>{const[q,r]=g.slots[k];compactCenters[ti]=[g.center[0]+2.65*(q+r/2),g.center[1]+2.65*Math.sqrt(3)/2*r];}));
