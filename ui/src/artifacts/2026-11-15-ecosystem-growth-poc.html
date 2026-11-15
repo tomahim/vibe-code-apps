@@ -619,6 +619,7 @@
 </style>
 </head>
 <body>
+<script src="/artifact-assets/2026-11-15-ecosystem-growth-poc/scene-tap-guard.js"></script>
 <header>
   <h1>
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3C7 8 6 14 12 21 18 14 17 8 12 3Z" stroke="#6fa05a" stroke-width="1.6"/><path d="M12 7v10" stroke="#6fa05a" stroke-width="1.2"/></svg>
@@ -6796,6 +6797,8 @@ three/build/three.module.js:
     var t0 = performance.now();
     var stage = document.getElementById("hyStage");
     var scene = document.getElementById("hyScene");
+    window.SceneTapGuard.install(scene);
+    window.SceneTapGuard.install(panel, {enabled:function(){return active === "hybrid";}});
     var imgs = [
       document.getElementById("hyEarly"),
       document.getElementById("hyMid"),
