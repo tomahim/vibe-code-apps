@@ -8,6 +8,7 @@
   const life = $('life'), live = life.getContext('2d');
   const painting = $('painting'), landscape = $('landscape');
   window.SceneTapGuard.install(landscape);
+  window.HybridImageOnly.install({enter:$('imageOnly'),exit:$('exitImageOnly'),announce:$('announcement')});
   const viewport=window.SceneViewport.install({root:landscape,layer:painting,
     changed:()=>resize(),zoomIn:$('zoomIn'),zoomOut:$('zoomOut'),reset:$('zoomReset'),level:$('zoomLevel'),
     swipe:direction=>{if(!theme)go(group+direction);}});
@@ -130,11 +131,12 @@
   function openTheme(key) { stopReplay(); theme = key; loadView(); }
   function resize() {
     const bounds = landscape.getBoundingClientRect();
-    const topPad = patches()?(innerWidth<=600&&innerHeight<=700?70:82):theme ? (innerWidth <= 600 ? 60 : 53) : 0;
-    const availableH = Math.max(1,bounds.height-topPad-(theme&&innerWidth<=600?20:0));
-    const availableW = Math.max(1,bounds.width-(innerWidth>=1000&&!theme?380:0));
+    const immersive=document.documentElement.classList.contains('image-only');
+    const topPad = immersive?0:patches()?(innerWidth<=600&&innerHeight<=700?70:82):theme ? (innerWidth <= 600 ? 60 : 53) : 0;
+    const availableH = Math.max(1,bounds.height-topPad-(!immersive&&theme&&innerWidth<=600?20:0));
+    const availableW = Math.max(1,bounds.width-(!immersive&&innerWidth>=1000&&!theme?380:0));
     const ratio = patches()?840/800:theme ? 1672/941 : 1;
-    const sizeW = Math.min(availableW,availableH*ratio,theme?1100:760);
+    const sizeW = Math.min(availableW,availableH*ratio,immersive?Infinity:theme?1100:760);
     painting.style.width=sizeW+'px'; painting.style.height=(sizeW/ratio)+'px';
     const r = painting.getBoundingClientRect();
     const dpr = Math.min(devicePixelRatio || 1, 1.75);
@@ -234,6 +236,7 @@
   $('closePerf').onclick=()=>{$('performance').hidden=true;$('perfToggle').setAttribute('aria-expanded','false');$('perfToggle').focus();};
   document.addEventListener('keydown',e=>{
     if($('lessonDialog').open)return;
+    if(e.key==='Escape'&&document.fullscreenElement)return;
     if(e.key==='Escape'){if(!$('performance').hidden){$('closePerf').click();return;}if(theme){theme=null;loadView();}return;}
     if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;
     if(e.key==='ArrowLeft'){e.preventDefault();go(group-1);}if(e.key==='ArrowRight'){e.preventDefault();go(group+1);}

@@ -34,6 +34,17 @@ try{for(const engine of (process.env.ZOOM_ENGINE?[process.env.ZOOM_ENGINE]:['chr
    if(mode==='patches')check((await state()).patches,'Nature patches selected');
    if(mode==='painted'||mode==='patches'){const title=await f.locator('#interiorTitle').boundingBox(),modes=await f.locator('#natureModes').boundingBox();check(title.y+title.height<=modes.y,'fixed title clears the Nature mode switch');}
    if(mode==='biology')check(!(await state()).patches&&!!(await state()).theme,'non-Nature interior');
+   if(process.env.FULLSCREEN_ONLY){
+    const previous=await state();await f.locator('#imageOnly').click();await f.waitForFunction(()=>document.fullscreenElement===document.documentElement);await f.locator('html.image-only').waitFor();
+    check(await f.locator('footer').isHidden(),'growth chrome hidden');check(await f.locator('#markers').isHidden(),'markers hidden for image-only');check(await f.locator('.journey-head').isHidden(),'navigation hidden');check(await f.locator('#exitImageOnly').isVisible(),'exit remains visible');
+    const full=await f.evaluate(()=>({width:innerWidth,height:innerHeight,screenW:screen.width,screenH:screen.height}));console.log('native fullscreen',engine,mode,full);
+    await f.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await f.locator('html').screenshot({path:`${shots}/${engine}-${width}-${height}-${mode}-fullscreen.png`});
+    const area=await f.locator('#landscape').boundingBox();await page.mouse.move(area.x+area.width/2,area.y+area.height/2);await page.mouse.wheel(0,-250);await f.waitForFunction(()=>window.hybridJourneyState().viewport.zoom>1);check((await state()).viewport.zoom>1,'zoom retained in fullscreen');
+    await page.mouse.down();await page.mouse.move(area.x+area.width/2+40,area.y+area.height/2+20,{steps:5});await page.mouse.up();check(Math.abs((await state()).viewport.x)>0,'fullscreen pan works');
+    await f.locator('#exitImageOnly').click();await f.waitForFunction(()=>!document.fullscreenElement);await f.locator('html:not(.image-only)').waitFor();
+    check((await state()).theme===previous.theme&&(await state()).state===previous.state,'exit preserves theme and growth');check(await f.locator('footer').isVisible(),'exit restores controls');
+    await f.locator('#zoomReset').click();continue;
+   }
    await f.locator('#zoomReset').click();
    const before=await f.locator('#painting').boundingBox(),head=await f.locator('.journey-head').boundingBox(),foot=await f.locator('footer').boundingBox();
    await page.screenshot({path:`${shots}/${engine}-${width}-${height}-${mode}-before.png`});
