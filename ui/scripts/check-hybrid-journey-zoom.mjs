@@ -36,10 +36,39 @@ try{for(const engine of (process.env.ZOOM_ENGINE?[process.env.ZOOM_ENGINE]:['chr
    if(mode==='biology')check(!(await state()).patches&&!!(await state()).theme,'non-Nature interior');
    if(process.env.FULLSCREEN_ONLY){
     const previous=await state();await f.locator('#imageOnly').click();await f.waitForFunction(()=>document.fullscreenElement===document.documentElement);await f.locator('html.image-only').waitFor();
-    check(await f.locator('footer').isHidden(),'growth chrome hidden');check(await f.locator('#markers').isHidden(),'markers hidden for image-only');check(await f.locator('.journey-head').isHidden(),'navigation hidden');check(await f.locator('#exitImageOnly').isVisible(),'exit remains visible');
+    const stillFull=()=>f.waitForFunction(()=>document.fullscreenElement===document.documentElement);
+    check(await f.locator('footer').isHidden(),'growth chrome hidden');check(await f.locator('.journey-head').isHidden(),'navigation hidden');check(await f.locator('#exitImageOnly').isVisible(),'exit remains visible');
+    check(await f.locator('#markers').isVisible(),'floating labels stay visible in fullscreen');check((await f.locator('.map-marker').count())>0,'fullscreen shows theme or lesson labels');
     const full=await f.evaluate(()=>({width:innerWidth,height:innerHeight,screenW:screen.width,screenH:screen.height}));console.log('native fullscreen',engine,mode,full);
     await f.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await f.locator('html').screenshot({path:`${shots}/${engine}-${width}-${height}-${mode}-fullscreen.png`});
-    const area=await f.locator('#landscape').boundingBox();await page.mouse.move(area.x+area.width/2,area.y+area.height/2);await page.mouse.wheel(0,-250);await f.waitForFunction(()=>window.hybridJourneyState().viewport.zoom>1);check((await state()).viewport.zoom>1,'zoom retained in fullscreen');
+    const tappable=async()=>await f.locator('.map-marker').evaluateAll(nodes=>nodes.findIndex(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return hit&&(e.contains(hit)||hit.contains(e));}));
+    if(mode==='overview'){
+     // A floating theme label enters its theme without leaving fullscreen.
+     const pick=await tappable();check(pick>=0,'a theme label has a clear tap target in fullscreen');
+     await f.locator('.map-marker').nth(pick).click();await ready();await stillFull();
+     check(!!(await state()).theme,'tapping a theme label enters the theme in fullscreen');
+     check(await f.locator('#back').isVisible(),'a way back is kept in fullscreen');
+     await f.locator('html').screenshot({path:`${shots}/${engine}-${width}-${height}-${mode}-fullscreen-interior.png`});
+     const lessonPick=await tappable();check(lessonPick>=0,'a lesson label has a clear tap target in fullscreen');
+     await f.locator('.map-marker').nth(lessonPick).click();check(await f.locator('#lessonDialog').evaluate(e=>e.open),'tapping a lesson label opens it in fullscreen');await stillFull();
+     await f.locator('#lessonDialog .done').click();await f.locator('#back').click();await ready();await stillFull();
+     check((await state()).theme===null,'back returns to the group without leaving fullscreen');
+    }else{
+     // Interior fullscreen: the same floating behaviour covers lesson labels.
+     check(await f.locator('#back').isVisible(),'a way back is kept in fullscreen');
+     const lessonPick=await tappable();check(lessonPick>=0,'a lesson label has a clear tap target in fullscreen');
+     await f.locator('.map-marker').nth(lessonPick).click();check(await f.locator('#lessonDialog').evaluate(e=>e.open),'tapping a lesson label opens it in fullscreen');await stillFull();
+     await f.locator('#lessonDialog .done').click();
+    }
+    const area=await f.locator('#landscape').boundingBox();
+    const label=()=>f.locator('.map-marker').first();
+    const sizeBefore=await label().boundingBox();
+    await page.mouse.move(area.x+area.width/2,area.y+area.height/2);await page.mouse.wheel(0,-250);await f.waitForFunction(()=>window.hybridJourneyState().viewport.zoom>1);check((await state()).viewport.zoom>1,'zoom retained in fullscreen');
+    const sizeAfter=await label().boundingBox();
+    check(Math.abs(sizeAfter.width-sizeBefore.width)<2&&Math.abs(sizeAfter.height-sizeBefore.height)<2,'label size stays fixed under fullscreen zoom');
+    const anchored=await label().evaluate(e=>{const p=document.querySelector('#painting').getBoundingClientRect(),r=e.getBoundingClientRect();return Math.abs((r.x+r.width/2-p.x)/p.width-parseFloat(e.style.left)/100)<.002;});
+    check(anchored,'label does not drift from its scene position under zoom');
+    await f.locator('html').screenshot({path:`${shots}/${engine}-${width}-${height}-${mode}-fullscreen-zoomed.png`});
     await page.mouse.down();await page.mouse.move(area.x+area.width/2+40,area.y+area.height/2+20,{steps:5});await page.mouse.up();check(Math.abs((await state()).viewport.x)>0,'fullscreen pan works');
     await f.locator('#exitImageOnly').click();await f.waitForFunction(()=>!document.fullscreenElement);await f.locator('html:not(.image-only)').waitFor();
     check((await state()).theme===previous.theme&&(await state()).state===previous.state,'exit preserves theme and growth');check(await f.locator('footer').isVisible(),'exit restores controls');

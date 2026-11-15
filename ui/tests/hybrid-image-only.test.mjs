@@ -7,4 +7,11 @@ function fixture(){const listeners={},classes=new Set();let focused=false;const 
 test('image-only uses native fullscreen and exposes exit without losing document state',async()=>{const f=fixture();await f.enter.onclick();assert.equal(f.doc.fullscreenElement,f.html);assert.ok(f.classes.has('image-only'));assert.equal(f.exit.hidden,false);f.exit.onclick();assert.equal(f.doc.fullscreenElement,null);assert.equal(f.exit.hidden,true);assert.ok(f.focused());});
 test('browser fullscreen exit restores normal chrome',async()=>{const f=fixture();await f.enter.onclick();f.doc.fullscreenElement=null;f.listeners.fullscreenchange();assert.ok(!f.classes.has('image-only'));assert.equal(f.exit.hidden,true);});
 test('refused fullscreen stays in the existing view with an accessible explanation',async()=>{const f=fixture();f.html.requestFullscreen=()=>Promise.reject(Error('denied'));await f.enter.onclick();assert.ok(!f.classes.has('image-only'));assert.match(f.announce.textContent,/not available/);});
+test('fullscreen keeps floating theme and lesson labels plus the way back',()=>{
+ const css=fs.readFileSync(base+'journey.css','utf8');
+ const hidden=css.match(/html\.image-only[^{}]*\{display:none!important\}/g)||[];
+ assert.ok(hidden.length,'image-only still hides page chrome');
+ for(const rule of hidden){assert.ok(!rule.includes('#markers'),'floating labels stay visible: '+rule);assert.ok(!rule.includes('#back'),'a entered theme can be left: '+rule);}
+ assert.match(css,/#painting \.map-marker\{transform:translate\(-50%,-50%\) scale\(calc\(1 \/ var\(--scene-zoom,1\)\)\)\}/,'labels stay anchored and fixed-size under zoom');
+});
 test('fullscreen permissions are scoped to this artifact and its journey frame',()=>{const host=fs.readFileSync('src/pages/Artifacts.jsx','utf8'),shell=fs.readFileSync('src/artifacts/2026-11-15-ecosystem-growth-poc.html','utf8');assert.match(host,/allowFullScreen=\{artifact.slug === "2026-11-15-ecosystem-growth-poc"\}/);assert.match(shell,/<iframe allow="fullscreen \*" allowfullscreen id="hjFrame"/);});
