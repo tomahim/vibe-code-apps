@@ -14,4 +14,21 @@ test('fullscreen keeps floating theme and lesson labels plus the way back',()=>{
  for(const rule of hidden){assert.ok(!rule.includes('#markers'),'floating labels stay visible: '+rule);assert.ok(!rule.includes('#back'),'a entered theme can be left: '+rule);}
  assert.match(css,/#painting \.map-marker\{transform:translate\(-50%,-50%\) scale\(calc\(1 \/ var\(--scene-zoom,1\)\)\)\}/,'labels stay anchored and fixed-size under zoom');
 });
-test('fullscreen permissions are scoped to this artifact and its journey frame',()=>{const host=fs.readFileSync('src/pages/Artifacts.jsx','utf8'),shell=fs.readFileSync('src/artifacts/2026-11-15-ecosystem-growth-poc.html','utf8');assert.match(host,/allowFullScreen=\{artifact.slug === "2026-11-15-ecosystem-growth-poc"\}/);assert.match(shell,/<iframe allow="fullscreen \*" allowfullscreen id="hjFrame"/);});
+test('fullscreen permissions are scoped to the two garden artifacts and their frames',()=>{
+ const host=fs.readFileSync('src/pages/Artifacts.jsx','utf8');
+ const declaration=host.match(/const supportsFullscreen = ([^;]+);/);
+ assert.ok(declaration,'viewer declares its fullscreen policy');
+ const allowed=new Set(['2026-11-15-ecosystem-growth-poc','2026-11-15-little-grains-orientations']);
+ const slugs=fs.readdirSync('src/artifacts').filter(name=>name.endsWith('.html')).map(name=>name.slice(0,-5));
+ for(const slug of [...allowed,...slugs,'unknown-artifact','2026-11-15-little-grains-orientations-extra']){
+  const enabled=vm.runInNewContext(declaration[1],{artifact:{slug}});
+  assert.equal(enabled,allowed.has(slug),'fullscreen permission for '+slug);
+ }
+ assert.match(host,/allowFullScreen=\{supportsFullscreen\}/);
+ assert.match(host,/allow=\{supportsFullscreen \? "fullscreen \*" : undefined\}/);
+ assert.match(host,/sandbox="allow-scripts"/);
+ const shell=fs.readFileSync('src/artifacts/2026-11-15-ecosystem-growth-poc.html','utf8');
+ assert.match(shell,/<iframe allow="fullscreen \*" allowfullscreen id="hjFrame"/);
+ const orientations=fs.readFileSync('src/artifacts/2026-11-15-little-grains-orientations.html','utf8');
+ assert.match(orientations,/<iframe allow="fullscreen \*" allowfullscreen/);
+});
