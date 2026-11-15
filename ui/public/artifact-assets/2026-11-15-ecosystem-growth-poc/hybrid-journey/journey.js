@@ -7,6 +7,7 @@
   const art = $('art'), ctx = art.getContext('2d');
   const life = $('life'), live = life.getContext('2d');
   const painting = $('painting'), landscape = $('landscape');
+  window.SceneTapGuard.install(landscape);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const names = ['Sparse / dormant', 'First seedlings', 'Taking root', 'Young shoots', 'A little greener', 'Growing together', 'Canopies return', 'A thriving habitat', 'Almost in bloom', 'Full ecosystem'];
   let group = 0, theme = null, state = 10, version = 0, current = null;
@@ -233,10 +234,10 @@
     if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;
     if(e.key==='ArrowLeft'){e.preventDefault();go(group-1);}if(e.key==='ArrowRight'){e.preventDefault();go(group+1);}
   });
-  let down=null;
-  landscape.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;down={x:e.clientX,y:e.clientY,id:e.pointerId};});
-  landscape.addEventListener('pointerup',e=>{if(!down||e.pointerId!==down.id)return;const dx=e.clientX-down.x,dy=e.clientY-down.y;down=null;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.5)go(group+(dx<0?1:-1));});
-  landscape.addEventListener('pointercancel',()=>{down=null;});
+  let down=null,multiSwipe=false;const swipePointers=new Set();
+  landscape.addEventListener('pointerdown',e=>{swipePointers.add(e.pointerId);if(swipePointers.size>1){multiSwipe=true;down=null;return;}if(e.target.closest('button'))return;down={x:e.clientX,y:e.clientY,id:e.pointerId};});
+  document.addEventListener('pointerup',e=>{if(!swipePointers.has(e.pointerId))return;swipePointers.delete(e.pointerId);const multi=multiSwipe;if(!swipePointers.size)multiSwipe=false;if(multi||!down||e.pointerId!==down.id){down=null;return;}const dx=e.clientX-down.x,dy=e.clientY-down.y;down=null;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.5)go(group+(dx<0?1:-1));});
+  document.addEventListener('pointercancel',e=>{if(!swipePointers.has(e.pointerId))return;swipePointers.delete(e.pointerId);down=null;if(!swipePointers.size)multiSwipe=false;});
   new ResizeObserver(resize).observe(landscape);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopReplay();});
   window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);stopReplay();imageCache.clear();});
