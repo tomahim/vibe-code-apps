@@ -433,7 +433,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   }
   function viewSpec() {
     if (view.level === 'garden' && groupFocus && state.group >= 0) return groupSpec();
-    if(mobile)camera.setViewOffset(root.clientWidth,root.clientHeight,0,root.clientHeight*.09,root.clientWidth,root.clientHeight);else if(root.clientWidth>900)camera.setViewOffset(root.clientWidth,root.clientHeight,-Math.min(170,root.clientWidth*.11),0,root.clientWidth,root.clientHeight);else camera.clearViewOffset();
+    if(mobile)camera.setViewOffset(root.clientWidth,root.clientHeight,0,root.clientHeight*.09,root.clientWidth,root.clientHeight);else if(root.clientWidth>900)camera.setViewOffset(root.clientWidth,root.clientHeight,-Math.min(170,root.clientWidth*.11),0,root.clientWidth,root.clientHeight);else if(root.clientHeight<=560&&root.clientWidth>700)camera.setViewOffset(root.clientWidth,root.clientHeight,-Math.min(150,root.clientWidth*.18),0,root.clientWidth,root.clientHeight);else camera.clearViewOffset();
     camera.updateProjectionMatrix();
     if (view.level === 'garden' && compact) { if (!world) return { target:new THREE.Vector3(0,.4,0),dist:fitDist(14,.95),polar:.95,pan:3 }; const ccx=ccenters.reduce((a,p)=>a+p[0],0)/ccenters.length, ccz=ccenters.reduce((a,p)=>a+p[1],0)/ccenters.length; const cr=Math.max(...ccenters.map(([x,z])=>Math.hypot(x-ccx,z-ccz)))+3.6*TS; return { target:new THREE.Vector3(ccx,.4,ccz),dist:fitDist(cr,.95),polar:.95,pan:3 }; }
     if (view.level === 'garden') return { target: new THREE.Vector3(0.74, 0.4, -0.26), dist: fitDist(mobile ? 18.6 : 18.9, 0.95), polar: 0.95, pan: 3 };
