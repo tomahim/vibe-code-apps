@@ -603,6 +603,7 @@
   .mobile-experiment { display:block; margin:0.45rem auto 0; max-width:100%; width:17rem; border:1px solid #d8c9a9; border-radius:0.7rem; padding:0.5rem 0.7rem; background:var(--pill); color:var(--ink); font:inherit; font-size:0.85rem; }
   .gt-stage.viewing-3d { flex:1!important; height:auto!important; min-height:0; }
 }
+.il-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px;font-size:12px}.il-controls select{font:inherit;padding:7px 10px;border:1px solid #c8c6a5;border-radius:9px;background:#fff8e5;color:#34462c}#ilFrame{width:100%;flex:1;min-height:0;border:0;background:#29482c}.il-note{font-size:11px;text-align:center;padding:7px 12px;color:#665c48;background:#f5ecd7}#pane-interiorlab{min-height:65vh}@media(max-width:600px){body:has(#pane-interiorlab:not([hidden])) header h1,body:has(#pane-interiorlab:not([hidden])) header>p{display:none}body:has(#pane-interiorlab:not([hidden])) header{padding:6px 10px}#pane-interiorlab{height:auto;flex:1;min-height:0}.gt-viewtoggle{top:3.4rem;left:0.7rem;right:auto}.gt-stage.focusing .fw-crumb{display:none}.il-controls{padding:5px 10px}.il-controls strong{display:none}.il-controls select{width:100%;font-size:11px;padding:6px 8px}.il-note{font-size:9px;padding:5px 10px}}
 </style>
 </head>
 <body>
@@ -621,7 +622,8 @@
     <button class="etab" role="tab" data-tab="connected" id="tab-connected" aria-selected="false" tabindex="-1" aria-controls="pane-connected">Connected world<small>20 themes · one painting</small></button>
     <button class="etab" role="tab" data-tab="worlds" id="tab-worlds" aria-selected="false" tabindex="-1" aria-controls="pane-worlds">Five worlds<small>5 × 4 themes · deep zoom</small></button>
     <button class="etab" role="tab" data-tab="tour" id="tab-tour" aria-selected="false" tabindex="-1" aria-controls="pane-tour">World tour<small>glide · 5 × 4 themes</small></button>
-  </div>
+  <button class="etab" role="tab" data-tab="interiorlab" id="tab-interiorlab" aria-selected="false" tabindex="-1" aria-controls="pane-interiorlab">Interior lab<small>Nature · art comparisons</small></button>
+</div>
 <select class="mobile-experiment" id="mobileExperiment" aria-label="Rendering experiment"></select></header>
 <main class="emain">
   <section class="epane" id="pane-illustrated" role="tabpanel" aria-labelledby="tab-illustrated">
@@ -1014,7 +1016,8 @@
         </div>
         <div class="gt-interior" id="gtInterior" hidden></div>
         <div class="gt-viewtoggle" id="gtViewToggle" hidden>
-          <button data-view="painting" aria-pressed="true">Painting</button>
+          <button id="gtAuthoredPond" aria-label="Explore Nature authored pond interior">Authored pond</button>
+        <button data-view="painting" aria-pressed="true">Painting</button>
           <button data-view="interior" aria-pressed="false" aria-label="Real-time 3D interior, prototype for Nature only">3D interior<small> prototype</small></button>
         </div>
         <div class="fw-regions on" id="gtRegions" aria-hidden="true"></div>
@@ -1025,7 +1028,12 @@
       <div class="pan-hint" id="gtHint">swipe or use ‹ › to glide · tap a territory to enter · inside: drag, scroll or pinch to zoom</div>
     </div>
   </section>
-  <aside class="drill-panel" id="drillPanel" hidden aria-label="Theme details">
+  <section class="epane" id="pane-interiorlab" role="tabpanel" aria-labelledby="tab-interiorlab" hidden>
+<div class="il-controls"><strong>Nature · interior comparison</strong><select id="ilMode" aria-label="Interior approach"><option value="painted-pond">Authored pond · hybrid 2.5D</option><option value="painted-study">Painted materials · true 3D</option></select></div>
+<iframe id="ilFrame" title="Nature interior prototype" loading="lazy" referrerpolicy="same-origin"></iframe>
+<div class="il-note" id="ilNote">New close-detail art + live wildlife. Bounded 2.5D, not free-orbit 3D. Nature pond only; other interiors are not built yet.</div>
+</section>
+<aside class="drill-panel" id="drillPanel" hidden aria-label="Theme details">
     <div class="drill-head">
       <button id="drillBack" hidden>‹ paths</button>
       <h2 id="drillTitle"></h2>
@@ -6341,7 +6349,8 @@ three/build/three.module.js:
       s.onerror = function () { interiorLoading = false; setViewMode("painting"); };
       document.head.appendChild(s);
     }
-    Array.prototype.forEach.call(viewToggle.querySelectorAll("button"), function (b) {
+    document.getElementById("gtAuthoredPond").onclick=function(){activate("interiorlab");};
+    Array.prototype.forEach.call(viewToggle.querySelectorAll("button[data-view]"), function (b) {
       b.addEventListener("click", function () { setViewMode(b.dataset.view); });
     });
     function disposeInterior() {
@@ -6442,15 +6451,21 @@ three/build/three.module.js:
     connected: document.getElementById("pane-connected"),
     worlds: document.getElementById("pane-worlds"),
     tour: document.getElementById("pane-tour"),
+    interiorlab: document.getElementById("pane-interiorlab"),
   };
   var inited = { illustrated: true, world3d: false, hybrid: false, grand: false, painted: false, connected: false, worlds: false, tour: false };
   var mobileExperiment = document.getElementById("mobileExperiment");
   tabs.forEach(function(t){var o=document.createElement("option");o.value=t.dataset.tab;o.textContent=t.childNodes[0].textContent.trim();mobileExperiment.appendChild(o);});
   mobileExperiment.addEventListener("change",function(){activate(this.value);});
+  var ilFrame=document.getElementById('ilFrame'),ilMode=document.getElementById('ilMode');
+  function showInteriorLab(){ilFrame.src='/artifact-assets/2026-11-15-ecosystem-growth-poc/interior-lab/'+ilMode.value+'.html';document.getElementById('ilNote').textContent=ilMode.value==='painted-pond'?'New close-detail art + live wildlife. Bounded 2.5D, not free-orbit 3D. Nature pond only; other interiors are not built yet.':'Real 3D terrain + painted botanical cards. Stylized art-direction study; not all 20 interiors. Drag/orbit, pinch/zoom, two-finger pan.';}
+  ilMode.onchange=showInteriorLab;
   var active = "illustrated";
   function activate(name, focus) {
     if (!panes[name]) return;
     var leaving = active;
+    if(leaving==="interiorlab" && name!==leaving)ilFrame.src="about:blank";
+    if(name==="interiorlab" && name!==leaving)showInteriorLab();
     active = name;
     mobileExperiment.value = name;
     Object.keys(panes).forEach(function (k) {
