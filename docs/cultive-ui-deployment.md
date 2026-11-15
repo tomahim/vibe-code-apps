@@ -1,4 +1,4 @@
-# cultive-ui-dev UI service
+# daily-cultive-ui-dev UI service
 
 Review-only infrastructure change. The existing Terraform workflow applies on
 merge to master. Review the current plan and approve cost before merging.

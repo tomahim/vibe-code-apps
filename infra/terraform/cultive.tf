@@ -1,9 +1,9 @@
 # Independent UI service, deployed by a separate CLI upload workflow.
-# The rename from cultive-dev to cultive-ui-dev is an in-place update: the
-# provider patches the name on the same service ID, so state, variables and
-# (future) deployments are preserved.
+# Renames (cultive-dev -> cultive-ui-dev -> daily-cultive-ui-dev) are in-place
+# updates: the provider patches the name on the same service ID, so state,
+# variables and (future) deployments are preserved.
 resource "railway_service" "cultive_ui" {
-  name                       = "cultive-ui-dev"
+  name                       = "daily-cultive-ui-dev"
   project_id                 = railway_project.genious_apps.id
   healthcheck_path           = "/health/"
   restart_policy_max_retries = 3
@@ -120,7 +120,7 @@ resource "railway_variable" "cultive_api_bucket" {
 # Private DNS needs no resource: every service gets an endpoint on the project
 # private network (<endpoint>.railway.internal, zero configuration). The
 # endpoint name defaults to the service name at creation but does NOT follow
-# later renames: after the cultive-dev -> cultive-ui-dev rename the endpoint is
+# later renames: after two renames (now daily-cultive-ui-dev) the endpoint is
 # still "cultive-dev" until edited under Settings > Networking > Private
 # Networking (this provider has no resource for it). cultive-api-dev, created
 # here, gets "cultive-api-dev" from the start. Both services stay unexposed:

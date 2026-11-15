@@ -12,7 +12,7 @@ this infrastructure PR.
 Tailnet browser -> dedicated Tailscale Serve443 (`cultive`) -> localhost nginx
 18080 -> `cultive-dev.railway.internal:8080` -> existing Cultive UI/API proxy.
 That private DNS name was read in live Railway settings on November13,2026:
-service display name is `cultive-ui-dev`, but its private DNS retains `cultive-dev`.
+service display name is `daily-cultive-ui-dev`, but its private DNS retains `cultive-dev`.
 Do not infer private DNS from display name or rename it as part of this work.
 
 All UI routes, `/api` and admin share the same new HTTPS origin, with Host
