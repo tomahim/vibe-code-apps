@@ -216,11 +216,30 @@
   .perf .note { margin-top: 0.5rem; color: #8a7a5c; }
   .perf hr { border: none; border-top: 1px solid #e6d9ba; margin: 0.45rem 0; }
 
+  .scene.pannable { cursor: grab; touch-action: none; }
+  .scene.pannable:active { cursor: grabbing; }
+  .pan-hint {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 7.2rem;
+    z-index: 5;
+    background: rgba(74, 63, 46, 0.75);
+    color: var(--pill);
+    border-radius: 999px;
+    padding: 0.3em 0.9em;
+    font-size: 0.7rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .pan-hint.show { opacity: 1; }
   @media (max-width: 560px) {
     header { padding-top: 0.35rem; }
-    .stage { align-items: flex-start; padding-top: 0.25rem; }
-    .pill { padding: 0.18em 0.5em; font-size: 0.52rem; box-shadow: 0 1px 2px rgba(74, 63, 46, 0.18); }
-    .pill::before { width: 0.7em; height: 0.7em; }
+    .stage { padding: 0.25rem 0 0.5rem; overflow: hidden; }
+    .scene { width: min(150vw, calc((100vh - 200px) * (1672 / 941))); flex: none; }
+    .pill { padding: 0.25em 0.65em; font-size: 0.68rem; box-shadow: 0 1px 3px rgba(74, 63, 46, 0.22); }
+    .pill::before { width: 0.75em; height: 0.75em; }
     .player { flex-wrap: wrap; justify-content: center; }
     .timeline { order: 3; flex-basis: 100%; }
   }
@@ -269,21 +288,24 @@
   </div>
 </footer>
 
+<div class="pan-hint" id="panHint">drag to explore</div>
 <button class="perf-toggle" id="perfToggle" aria-expanded="false">perf</button>
 <aside class="perf" id="perfPanel" hidden aria-label="Performance measurements">
   <h2>Performance (this device)</h2>
   <table>
     <tr><td>Single-file document</td><td id="mDoc">…</td></tr>
     <tr><td>Illustrations (10 × WebP)</td><td id="mImg">…</td></tr>
-    <tr><td>Time to first image</td><td id="mFirst">…</td></tr>
+    <tr><td>First image shown</td><td id="mFirst">…</td></tr>
     <tr><td>All states decoded</td><td id="mAll">…</td></tr>
+    <tr><td>Warm state switch</td><td id="mSwitch">—</td></tr>
     <tr><td>Replay frame rate</td><td id="mFps">—</td></tr>
     <tr><td>JS heap</td><td id="mHeap">n/a</td></tr>
     <tr><td>Viewport / DPR</td><td id="mVp">…</td></tr>
   </table>
   <hr>
   <div class="decodes" id="mDecodes"></div>
-  <p class="note">Measured live in this browser. Illustrations are inline WebP data URLs in one self-contained file: zero network requests after load, instant switching once decoded. Decode runs in the background after the first image is shown. Run this page on a phone for representative numbers.</p>
+  <p class="note">Measured live in this browser. All 10 illustrations are inline WebP data URLs inside one document that the gallery lazy-loads as part of its app bundle: there are no per-image network requests or cold-cache image fetches to measure. The decode rows above are first (cold) decodes from memory; "warm state switch" is the cost once cached, which is why replay stays smooth. On a repeat visit the bundle itself may come from the browser's HTTP cache. Run this page on a phone for representative numbers.</p>
+  <p class="note">POC scope: this swaps 10 whole illustrations per theme. A production version would compose reusable plant/terrain pieces per region instead - same visual target, finer granularity, less artwork per new ecosystem.</p>
 </aside>
 
 <script>
@@ -395,7 +417,15 @@
   function goTo(i) {
     i = Math.max(1, Math.min(N, i));
     if (i === current) return Promise.resolve();
-    return decodeState(i).then(function (img) { applyState(i, img); });
+    var start = performance.now();
+    var wasWarm = !!decoded[i];
+    return decodeState(i).then(function (img) {
+      applyState(i, img);
+      if (wasWarm) {
+        document.getElementById("mSwitch").textContent =
+          (Math.round((performance.now() - start) * 10) / 10) + " ms";
+      }
+    });
   }
 
   // ---- replay ----
@@ -439,6 +469,39 @@
     else if (e.key === "ArrowLeft") { setPlaying(false); goTo(current - 1); }
     else if (e.key === " ") { e.preventDefault(); playBtn.click(); }
   });
+
+  // ---- pan when the scene is wider than the stage (small portrait screens) ----
+  var scene = document.getElementById("scene");
+  var stage = document.querySelector(".stage");
+  var panHint = document.getElementById("panHint");
+  var tx = 0, dragging = false, startX = 0, startTx = 0, hintShown = false;
+  function panBounds() { return Math.min(0, stage.clientWidth - scene.offsetWidth); }
+  function refreshPannable() {
+    var on = scene.offsetWidth > stage.clientWidth + 4;
+    scene.classList.toggle("pannable", on);
+    if (!on) { tx = 0; scene.style.transform = ""; }
+    else if (!hintShown) {
+      hintShown = true;
+      panHint.classList.add("show");
+      setTimeout(function () { panHint.classList.remove("show"); }, 2600);
+    }
+  }
+  scene.addEventListener("pointerdown", function (e) {
+    if (!scene.classList.contains("pannable")) return;
+    dragging = true; startX = e.clientX; startTx = tx;
+    scene.setPointerCapture(e.pointerId);
+    panHint.classList.remove("show");
+  });
+  scene.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    tx = Math.max(panBounds(), Math.min(0, startTx + (e.clientX - startX)));
+    scene.style.transform = "translateX(" + tx + "px)";
+  });
+  ["pointerup", "pointercancel"].forEach(function (ev) {
+    scene.addEventListener(ev, function () { dragging = false; });
+  });
+  window.addEventListener("resize", refreshPannable);
+  refreshPannable();
 
   // ---- boot: show week 1 first, then warm the cache in the background ----
   decodeState(1).then(function (img) {
