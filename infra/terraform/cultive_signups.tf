@@ -15,5 +15,5 @@ resource "railway_variable" "cultive_api_signups_allowed_origins" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_api.id
   name           = "SIGNUPS_ALLOWED_ORIGINS"
-  value          = "daily-cultive-ui.genious-apps-production-railway.internal"
+  value          = "daily-cultive-ui.genious-apps-production-railway.internal:8080,daily-cultive-ui.railway.internal:8080"
 }
