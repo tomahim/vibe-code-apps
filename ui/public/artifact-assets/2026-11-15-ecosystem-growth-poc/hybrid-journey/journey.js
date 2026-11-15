@@ -195,6 +195,35 @@
       const x=((t*(.03+i*.006)+i*.3)%1.3-.15)*w,y=(.17+i*.045+Math.sin(t+i)*.009)*h,s=(5+i)*scale,f=Math.sin(t*7+i)*s*.6;
       live.beginPath();live.moveTo(x-s,y+f);live.quadraticCurveTo(x-s*.4,y-s*.3,x,y);live.quadraticCurveTo(x+s*.4,y-s*.3,x+s,y+f);live.stroke();
     }
+    if(k==='ocean'){
+      // A gull squadron crossing high, then two wheeling over the lagoon.
+      live.strokeStyle='rgba(58,56,44,.7)';live.lineWidth=Math.max(1,scale);
+      for(let i=0;i<5;i++){
+        const gx=((t*.045+i*.13)%1.45-.22)*w,gy=(.11+.05*Math.sin(t*.8+i*2.1)+i*.016)*h,gs=(3.2+(i%3))*scale,gf=Math.sin(t*9+i*1.7)*gs*.7;
+        live.beginPath();live.moveTo(gx-gs,gy+gf);live.quadraticCurveTo(gx-gs*.35,gy-gs*.4,gx,gy);live.quadraticCurveTo(gx+gs*.35,gy-gs*.4,gx+gs,gy+gf);live.stroke();
+      }
+      for(let i=0;i<2;i++){
+        const a=t*(.5+i*.18)+i*3.1,gx=(.6+.14*Math.cos(a))*w,gy=(.3+.07*Math.sin(a))*h,gs=3.6*scale,gf=Math.sin(t*8+i)*gs*.6;
+        live.beginPath();live.moveTo(gx-gs,gy+gf);live.quadraticCurveTo(gx-gs*.4,gy-gs*.3,gx,gy);live.quadraticCurveTo(gx+gs*.4,gy-gs*.3,gx+gs,gy+gf);live.stroke();
+      }
+      // Sun glints twinkling on the lagoon.
+      for(let i=0;i<12;i++){
+        const sx=(.18+random(i*7+2)*.64)*w,sy=(.3+random(i*5+9)*.42)*h,tw=.5+.5*Math.sin(t*2.2+i*1.9);
+        live.fillStyle='rgba(255,255,255,'+(.5*tw*tw)+')';
+        live.beginPath();live.ellipse(sx,sy,1.7*scale*tw,.8*scale*tw,0,0,Math.PI*2);live.fill();
+      }
+      // A ray gliding beneath the surface.
+      const mx=((t*.02+.35)%1.6-.3)*w,my=(.58+.04*Math.sin(t*.5))*h,mw=15*scale,mh=mw*.32,beat=Math.sin(t*2.4)*.35;
+      live.fillStyle='rgba(18,60,74,.5)';
+      live.beginPath();live.moveTo(mx-mw,my);
+      live.quadraticCurveTo(mx-mw*.3,my-mh*(1+beat),mx,my);
+      live.quadraticCurveTo(mx+mw*.3,my-mh*(1-beat),mx+mw,my);
+      live.quadraticCurveTo(mx+mw*.3,my+mh*(1+beat),mx,my);
+      live.quadraticCurveTo(mx-mw*.3,my+mh*(1-beat),mx-mw,my);
+      live.fill();
+      live.strokeStyle='rgba(18,60,74,.5)';
+      live.beginPath();live.moveTo(mx+mw,my);live.lineTo(mx+mw+9*scale,my+2*scale);live.stroke();
+    }
     const snow = k === 'earthsky' || k === 'wellbeing' || k === 'climate' || k === 'sport';
     const sparks = k === 'discovery' || k === 'physics' || k === 'chemistry';
     particles.forEach((p,i)=>{
