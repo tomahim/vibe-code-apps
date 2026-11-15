@@ -626,7 +626,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (rainT > 0 && !state.playing) rainT -= dt;
     const raining = rainT > 0 || state.playing; rain.visible = raining;
     if (raining) { const R = Math.min(9, camera.position.distanceTo(ctr) * 0.5); for (let i = 0; i < RAIN_N; i++) { const s0 = rainSeed[i * 3], s1 = rainSeed[i * 3 + 1], s2 = rainSeed[i * 3 + 2], y = (((s1 - time * 0.9 * (0.8 + s0 * 0.2)) % 1) + 1) % 1, x = ctr.x + s0 * R, z = ctr.z + s2 * R, yy = ctr.y + y * 9 - 1; rainArr.set([x, yy, z, x - 0.02, yy - 0.34, z], i * 6); } rain.geometry.attributes.position.needsUpdate = true; }
-    stepFly(now); controls.update(); placeLabels();
+    stepFly(now); controls.update(); camera.updateMatrixWorld(); placeLabels();
     renderer.render(scene, camera);
   }
   resize(); renderUI(); setVisibility(); raf = requestAnimationFrame(frame);
