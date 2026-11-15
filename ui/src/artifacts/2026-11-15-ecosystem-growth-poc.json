@@ -1,6 +1,6 @@
 {
-  "title": "Living Ecosystem — Illustrated Growth POC",
-  "description": "Illustration-only proof of concept: a painted miniature garden island in ten switchable growth states, with a weekly replay bar and built-in loading, decode and frame-rate measurements.",
+  "title": "Living Ecosystem — Growth POC",
+  "description": "Three rendering approaches for a connected living world, side by side: ten painted growth states, a real-time lightweight 3D island where desert, forest and snow biomes touch and open into learning paths, and a static illustration plus animated overlay hybrid - each with live performance measurements.",
   "date": "2026-11-15",
-  "tags": ["illustration", "ecosystem", "garden", "performance", "poc"]
+  "tags": ["illustration", "3d", "ecosystem", "interactive", "performance", "poc"]
 }
