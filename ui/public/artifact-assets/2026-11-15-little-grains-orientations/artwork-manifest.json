@@ -1,0 +1,133 @@
+{
+  "themes": {
+    "ocean": {
+      "portrait": {
+        "lush": {
+          "src": "assets/ocean-portrait-lush-1e30c90521c8.webp",
+          "width": 1086,
+          "height": 1448,
+          "bytes": 1681212
+        },
+        "dormant": {
+          "src": "assets/ocean-portrait-dormant-0f28d3bf1be3.webp",
+          "width": 1086,
+          "height": 1448,
+          "bytes": 1630216
+        },
+        "anchors": [
+          [
+            32,
+            63
+          ],
+          [
+            75,
+            48
+          ],
+          [
+            53,
+            27
+          ]
+        ],
+        "nativeShortSide": 1086,
+        "vegetationPixels": 260140,
+        "growthMethod": "computed-dormant-colors"
+      },
+      "landscape": {
+        "lush": {
+          "src": "assets/ocean-landscape-lush-a1a56ceb4d0f.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 2167476
+        },
+        "dormant": {
+          "src": "assets/ocean-landscape-dormant-b3ad27502e8a.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 2094760
+        },
+        "anchors": [
+          [
+            25,
+            59
+          ],
+          [
+            76,
+            47
+          ],
+          [
+            52,
+            32
+          ]
+        ],
+        "nativeShortSide": 941,
+        "vegetationPixels": 328612,
+        "growthMethod": "computed-dormant-colors"
+      }
+    },
+    "nature": {
+      "portrait": {
+        "lush": {
+          "src": "assets/nature-portrait-lush-854932bca5e7.webp",
+          "width": 1086,
+          "height": 1448,
+          "bytes": 2226734
+        },
+        "dormant": {
+          "src": "assets/nature-portrait-dormant-301f265911a1.webp",
+          "width": 1086,
+          "height": 1448,
+          "bytes": 2066752
+        },
+        "anchors": [
+          [
+            45,
+            27
+          ],
+          [
+            68,
+            49
+          ],
+          [
+            30,
+            68
+          ]
+        ],
+        "nativeShortSide": 1086,
+        "vegetationPixels": 533217,
+        "growthMethod": "computed-dormant-colors"
+      },
+      "landscape": {
+        "lush": {
+          "src": "assets/nature-landscape-lush-09a4335c148a.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 2467316
+        },
+        "dormant": {
+          "src": "assets/nature-landscape-dormant-54e3737e5c46.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 2303940
+        },
+        "anchors": [
+          [
+            28,
+            35
+          ],
+          [
+            54,
+            55
+          ],
+          [
+            77,
+            62
+          ]
+        ],
+        "nativeShortSide": 941,
+        "vegetationPixels": 573797,
+        "growthMethod": "computed-dormant-colors"
+      }
+    }
+  },
+  "note": "Four independently composed lush paintings, with locally computed dormant endpoints. Transparent artwork sits over exact #f3e8d0 paper. Native generator dimensions are preserved; these benchmark images are below the requested 1200px short side, with no upscaling presented as new detail."
+}
