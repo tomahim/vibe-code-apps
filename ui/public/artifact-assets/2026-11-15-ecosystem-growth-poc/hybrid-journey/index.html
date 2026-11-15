@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hybrid journey</title>
+<link rel="stylesheet" href="journey.css">
+</head>
+<body>
+<main id="app">
+  <header class="journey-head">
+    <div class="eyebrow"><span id="viewHint">SEVEN LITTLE WORLDS</span><button id="perfToggle" aria-expanded="false" aria-controls="performance">Performance</button></div>
+    <div class="navigation"><button class="arrow" id="previous" aria-label="Previous theme group">&#8592;</button><div class="group-picker"><label for="groupSelect" id="groupCount">Group 1 of 7</label><select id="groupSelect" aria-label="Theme group"></select></div><button class="arrow" id="next" aria-label="Next theme group">&#8594;</button></div>
+    <p id="groupBlurb"></p>
+  </header>
+  <section class="landscape" id="landscape" aria-label="Interactive painted landscape">
+    <div id="painting" class="painting"><canvas id="art" aria-hidden="true"></canvas><canvas id="life" aria-hidden="true"></canvas><div id="markers"></div></div>
+    <div class="load-state" id="loadState" role="status">Preparing this little world...</div>
+    <button id="back" hidden>&#8592; Back to group</button>
+    <div id="interiorTitle" hidden><h1></h1><p></p></div>
+  </section>
+  <section class="theme-strip" id="themeStrip" aria-label="Themes in this group"></section>
+  <section class="lesson-strip" id="lessonStrip" aria-label="Demo lessons" hidden></section>
+  <footer>
+    <div class="growth-head"><button id="play" aria-label="Play growth evolution" aria-pressed="false">&#9654;</button><div><strong id="growthName">A world awakening</strong><span id="growthCount">State 1 / 10</span></div><button id="motion" aria-pressed="true">Life on</button></div>
+    <input id="growth" type="range" min="1" max="10" step="1" value="10" aria-label="Vegetation growth state">
+    <div class="growth-labels"><span>Sparse / dormant</span><span id="interactionHint">Swipe to explore · tap a theme to step inside</span><span>Full bloom</span></div>
+  </footer>
+  <aside id="performance" hidden><h2>Measured here, not a promise</h2><dl id="metrics"></dl><p>Only this group and its selected interior are decoded. The same decoded artwork is reused across ten growth states. Paintings have content-hashed URLs and a one-year private browser-cache policy on the production host. Decoded-image reuse is measured separately below. The browser may still evict cached files.</p><p>Growth is a deterministic spatial reveal between two fixed paintings, with ten distinct stops. Five groups have a painted sparse base. The other two groups and interiors use a computed dormant-foliage preview, so their plants change color and fullness, not geometry. These are not ten separately painted scenes. The moving overlay is a separate 2D canvas. This is a 2.5D design study, not a free-orbit 3D world.</p><button id="closePerf">Close</button></aside>
+  <dialog id="lessonDialog"><div><button class="close" aria-label="Close lesson">&#10005;</button><span class="eyebrow">DEMO LESSON</span><h2 id="lessonTitle"></h2><p id="lessonLandmark"></p><p>This is a sample lesson stop. In the app, this would open a short lesson, a question, and the next step through this landscape.</p><button class="done">Back to the garden</button></div></dialog>
+  <p class="sr-only" aria-live="polite" id="announcement"></p>
+</main>
+<script src="journey-data.js"></script>
+<script src="journey-assets.js"></script>
+<script src="journey.js"></script>
+</body>
+</html>
