@@ -14,24 +14,27 @@ function Kpi({ label, value, hint }) {
   );
 }
 
-function MonthBars({ months, year }) {
-  // One bar per month of the selected year; a full timeline for "All".
+function DistanceBars({ months, years, year, period }) {
+  // A single year always shows its months. "All" shows the full monthly
+  // timeline or one bar per year, depending on the period switch.
+  const byYear = year === "all" && period === "year";
   const data = useMemo(() => {
-    if (year === "all") return months;
-    return months.filter((row) => row.month.startsWith(`${year}-`));
-  }, [months, year]);
+    if (byYear) return years.map((row) => ({ key: String(row.year), label: String(row.year), km: row.km, count: row.count, hours: row.hours }));
+    const rows = year === "all" ? months : months.filter((row) => row.month.startsWith(`${year}-`));
+    return rows.map((row) => ({ key: row.month, label: row.month.slice(5), sub: year === "all" ? row.month.slice(0, 4) : "", km: row.km, count: row.count, hours: row.hours }));
+  }, [months, years, year, byYear]);
   const max = Math.max(...data.map((row) => row.km), 1);
   if (!data.length) return <p className="gs-empty">No activities this year yet.</p>;
   return (
-    <div className="gs-monthbars" role="img" aria-label="Distance per month">
+    <div className="gs-monthbars" role="img" aria-label={byYear ? "Distance per year" : "Distance per month"}>
       {data.map((row) => (
-        <div className="gs-monthbar" key={row.month} title={`${row.month}: ${formatKm(row.km, 0)}, ${row.count} activities, ${formatHours(row.hours, 0)}`}>
-          <span className="gs-monthbar-value">{row.km >= 10 ? Math.round(row.km) : row.km.toFixed(0)}</span>
+        <div className="gs-monthbar" key={row.key} title={`${row.key}: ${formatKm(row.km, 0)}, ${row.count} activities, ${formatHours(row.hours, 0)}`}>
+          <span className="gs-monthbar-value">{Math.round(row.km)}</span>
           <div className="gs-monthbar-track">
             <div className="gs-monthbar-fill" style={{ height: `${Math.max((row.km / max) * 100, 2)}%` }} />
           </div>
-          <span className="gs-monthbar-label">{row.month.slice(5)}</span>
-          {year === "all" ? <span className="gs-monthbar-year">{row.month.slice(0, 4)}</span> : null}
+          <span className="gs-monthbar-label">{row.label}</span>
+          {row.sub ? <span className="gs-monthbar-year">{row.sub}</span> : null}
         </div>
       ))}
     </div>
@@ -70,6 +73,7 @@ function RecordCard({ title, record, metric }) {
 export default function OverallStats() {
   const [state, setState] = useState({ data: null, loading: true, error: "" });
   const [year, setYear] = useState("all");
+  const [period, setPeriod] = useState("month");
 
   useEffect(() => {
     let live = true;
@@ -137,8 +141,16 @@ export default function OverallStats() {
       </section>
 
       <section>
-        <h3 className="gs-section-title">Distance per month</h3>
-        <MonthBars months={data.by_month} year={year} />
+        <div className="gs-section-head">
+          <h3 className="gs-section-title">{year === "all" ? "Distance per period" : "Distance per month"}</h3>
+          {year === "all" ? (
+            <div className="gs-year-filter" role="group" aria-label="Chart period">
+              <button type="button" className={period === "month" ? "active" : ""} aria-pressed={period === "month"} onClick={() => setPeriod("month")}>Monthly</button>
+              <button type="button" className={period === "year" ? "active" : ""} aria-pressed={period === "year"} onClick={() => setPeriod("year")}>Yearly</button>
+            </div>
+          ) : null}
+        </div>
+        <DistanceBars months={data.by_month} years={data.by_year} year={year} period={period} />
       </section>
 
       <section>

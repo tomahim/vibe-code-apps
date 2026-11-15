@@ -210,6 +210,19 @@
   font-size: 1.05rem;
 }
 
+.gs-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.gs-section-head .gs-section-title {
+  margin: 0;
+}
+
 .gs-empty {
   color: #7a8494;
 }
