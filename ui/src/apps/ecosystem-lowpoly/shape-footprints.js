@@ -1,6 +1,11 @@
 import * as T from 'three';
-import {THEMES} from '../../../scripts/artifacts/little-grains/data.js';
+import {THEMES} from './shape-data.js';
 const SLOTS=[[0,0],[1,0],[-1,1],[0,-1],[0,1],[-1,0],[1,-1]];
+// Twenty theme slots on an open-ended axial spiral: center, two full rings, one outer cell.
+export const THEME_SLOTS=[[0,0],[1,0],[1,-1],[0,-1],[-1,0],[-1,1],[0,1],[2,0],[2,-1],[2,-2],[1,-2],[0,-2],[-1,-1],[-2,0],[-2,1],[-2,2],[-1,2],[0,2],[1,2],[3,-2]];
+export const THEME_SPACING=Math.sqrt(3)*3.15+0.5;
+const slotXY=([q,r])=>{const s=THEME_SPACING/Math.sqrt(3);return [s*Math.sqrt(3)*(q+r/2),s*1.5*r];};
+const CENTERS=THEME_SLOTS.map(slotXY);
 export const polygons=THEMES.map(t=>{
  const edges=new Map(),r=1.035,tag=v=>v.map(n=>Math.round(n*1e5)).join(',');
  t.paths.forEach((_,i)=>{const[q,z]=SLOTS[i],cx=r*Math.sqrt(3)*(q+z/2),cz=r*1.5*z;
@@ -9,11 +14,31 @@ export const polygons=THEMES.map(t=>{
  const remaining=[...edges.values()],out=[remaining.shift()];while(remaining.length){const tail=tag(out.at(-1)[1]);const i=remaining.findIndex(e=>tag(e[0])===tail);if(i<0)throw new Error('Open footprint');out.push(remaining.splice(i,1)[0]);}
  return out.map(([a])=>a.map(n=>n*1.13));
 });
+// Interlocking mode: every territory keeps its own path-footprint outline, dilated so
+// neighbours mesh like puzzle pieces. Shared borders land on the perpendicular bisector
+// between theme centres, each side inset by half the gap, so a visible seam always remains.
+const GAP=0.9;
+export const interlocking=THEMES.map((t,ti)=>{
+ const [cx,cz]=CENTERS[ti];
+ let p=polygons[ti].map(([x,z])=>[x*2.1,z*2.1]);
+ CENTERS.forEach(([x,z],j)=>{
+  if(j===ti)return;
+  const a=x-cx,b=z-cz,len=Math.hypot(a,b),c=(len*len)/2-(GAP/2)*len,q=[];
+  p.forEach((u,k)=>{const v=p[(k+1)%p.length],du=a*u[0]+b*u[1]-c,dv=a*v[0]+b*v[1]-c;
+   if(du<=0)q.push(u);if((du<0)!==(dv<0)){const t2=du/(du-dv);q.push([u[0]+(v[0]-u[0])*t2,u[1]+(v[1]-u[1])*t2]);}});p=q;
+ });
+ p=p.filter((v,k)=>Math.hypot(v[0]-p[(k+1)%p.length][0],v[1]-p[(k+1)%p.length][1])>1e-5);
+ return p;
+});
+// Five world groups of four themes, in catalog order.
+export const WORLDS=[{name:'Wild Earth',themes:[0,1,2,3]},{name:'Stone & Sky',themes:[4,5,6,7]},{name:'Body & Mind',themes:[8,9,10,11]},{name:'Arts & Letters',themes:[12,13,14,15]},{name:'Human Systems',themes:[16,17,18,19]}];
+export const themeCenters=CENTERS;
+
 // Build the changed outer territory directly from its full concave boundary.
 // The cell geometry, props, colours, lighting and plant placement are untouched.
 const h=(x,z,s)=>{const v=Math.sin(x*127.1+z*311.7+s*74.7)*43758.5453;return v-Math.floor(v);};
-export function reshape(geo,ti){
- const poly=polygons[ti], outline=!geo.getAttribute('color');
+export function reshape(geo,ti,poly=polygons[ti]){
+ const outline=!geo.getAttribute('color');
  if(outline){const shape=new T.Shape(),hole=new T.Path();poly.forEach(([x,z],i)=>{shape[i?'lineTo':'moveTo'](x,-z);hole[i?'lineTo':'moveTo'](x*.967,-z*.967);});shape.closePath();hole.closePath();shape.holes.push(hole);const out=new T.ShapeGeometry(shape).rotateX(-Math.PI/2);geo.dispose();return out;}
  const pos=[],col=[],theme=THEMES[ti],seed=ti+1,H=.55,bev=.12;
  const c1=new T.Color(theme.top2),c2=new T.Color(theme.top);

@@ -1,7 +1,8 @@
 // Fresh land-theme visual comparison. Demo progress only; no account integration.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { THEMES, progressAt } from '../../../scripts/artifacts/little-grains/data.js';
+import { THEMES, progressAt } from './shape-data.js';
+import { THEME_SLOTS, THEME_SPACING, WORLDS } from './shape-footprints.js';
 import { makeSpecies, makeBlade, rngFor } from '../../../scripts/artifacts/little-grains/plants.js';
 import { hexPrism, hexOutline, axial, inHex } from '../../../scripts/artifacts/little-grains/terrain.js';
 
@@ -72,7 +73,7 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null }) {
+export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null, groupFocus = false, veilPolygons = null }) {
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
   const root = document.createElement('div');
@@ -97,7 +98,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
 
   const scene = new THREE.Scene();
   const HORIZON = new THREE.Color('#f8eddc');
-  scene.fog = new THREE.Fog(HORIZON, 46, 130);
+  scene.fog = new THREE.Fog(HORIZON, 70, 200);
   const camera = new THREE.PerspectiveCamera(prof.fov, 1, 0.1, 400);
   const controls = new OrbitControls(camera, canvas);
   Object.assign(controls, { enableDamping: true, dampingFactor: 0.08, rotateSpeed: 0.7, zoomSpeed: 0.8, minPolarAngle: 0.2, maxPolarAngle: 1.28, screenSpacePanning: false, enablePan: !mobile });
@@ -109,7 +110,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   scene.add(new THREE.HemisphereLight('#fff7ea', '#d9ccb2', 1.35));
   const sun = new THREE.DirectionalLight('#fff0d8', 2.5);
   sun.position.set(-12, 20, 11);
-  if (prof.shadows) { sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 70 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = 3; }
+  if (prof.shadows) { sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); Object.assign(sun.shadow.camera, { left: -22, right: 22, top: 22, bottom: -22, near: 1, far: 90 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = 3; }
   scene.add(sun); scene.add(sun.target);
   const fill = new THREE.DirectionalLight('#cfe0ff', 0.55); fill.position.set(14, 8, -10); scene.add(fill);
 
@@ -122,7 +123,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); const g = x.createRadialGradient(64, 64, 8, 64, 64, 64);
     g.addColorStop(0, 'rgba(90,70,40,.38)'); g.addColorStop(0.55, 'rgba(90,70,40,.16)'); g.addColorStop(1, 'rgba(90,70,40,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128);
     const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, fog: false }));
-    blob.position.y = GROUND_Y + 0.01; blob.scale.setScalar(36); scene.add(blob); return blob;
+    blob.position.y = GROUND_Y + 0.01; blob.scale.setScalar(76); scene.add(blob); return blob;
   })();
 
   const species = makeSpecies(prof.detail);
@@ -160,8 +161,8 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const themeGeo = (g, ti) => themeShape ? themeShape(g, ti) : g;
   // ----- Garden of themes -----
   const garden = new THREE.Group(); scene.add(garden);
-  const spacing = Math.sqrt(3) * R_THEME + 0.5;
-  const themeSlots = [[0, 0], [1, 0], [0, 1], [-1, 1], [-1, 0], [0, -1], [1, -1]];
+  const spacing = THEME_SPACING;
+  const themeSlots = THEME_SLOTS;
   const themeMeshes = [], cellMeshes = [], tiles = [];
   const gardenPlants = new Plants(species, plantMat, prof.shadows);
   const grassList = [], rng = rngFor(20261028);
@@ -208,6 +209,35 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const outlineMat = new THREE.MeshBasicMaterial({ color: TERRACOTTA, transparent: true, opacity: 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2, side: THREE.DoubleSide });
   const cellOutline = new THREE.Mesh(hexOutline(R_CELL, 0.07), outlineMat), slabOutline = new THREE.Mesh(hexOutline(R_THEME + 0.02, 0.11), outlineMat), selOutline = new THREE.Mesh(hexOutline(R_CELL, 0.09), outlineMat), tileOutline = new THREE.Mesh(hexOutline(TILE_R, 0.08), outlineMat);
   [cellOutline, slabOutline, selOutline, tileOutline].forEach((o) => { o.visible = false; o.renderOrder = 5; scene.add(o); });
+
+  // ----- Group focus (interlocking groups mode): frosted veils dim the themes outside the focused world -----
+  state.group = state.group ?? -1;
+  const veils = [];
+  if (groupFocus && veilPolygons) {
+    tiles.forEach((T, ti) => {
+      const sh = new THREE.Shape();
+      veilPolygons[ti].forEach(([x, z], i) => sh[i ? 'lineTo' : 'moveTo'](x * 1.05, -z * 1.05));
+      sh.closePath();
+      const veil = new THREE.Mesh(new THREE.ShapeGeometry(sh).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: '#f6efe3', transparent: true, opacity: 0.55, depthWrite: false }));
+      veil.position.set(T.center.x, SLAB_H + 0.9, T.center.z);
+      veil.visible = false; veil.renderOrder = 6; scene.add(veil); veils.push(veil);
+    });
+  }
+  const updateVeils = () => { veils.forEach((v, ti) => { v.visible = view.level === 'garden' && state.group >= 0 && !WORLDS[state.group].themes.includes(ti); }); };
+  let grpNav = null;
+  if (groupFocus) {
+    grpNav = document.createElement('div');
+    grpNav.className = 'lg-grpnav';
+    grpNav.innerHTML = '<button data-grp="prev" aria-label="Previous group">‹</button><button class="lg-worldchip" data-grp="all"></button><button data-grp="next" aria-label="Next group">›</button>';
+    root.appendChild(grpNav);
+  }
+  function setGroup(k, ms = 900) {
+    state.group = ((k % WORLDS.length) + WORLDS.length) % WORLDS.length;
+    if (view.level !== 'garden') { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; setVisibility(); }
+    clearHover(); flyTo(viewSpec(), ms); renderUI();
+  }
+  function clearGroup(ms = 900) { state.group = -1; if (view.level === 'garden') flyTo(viewSpec(), ms); renderUI(); }
+  function renderGroupChip() { if (!grpNav) return; const chip = grpNav.querySelector('.lg-worldchip'); const on = view.level === 'garden' && state.group >= 0; chip.textContent = on ? `${WORLDS[state.group].name} · all themes` : 'Pick a group to focus'; grpNav.classList.toggle('focused', on); }
 
   // ----- Ambient life -----
   const clouds = new THREE.Group(); scene.add(clouds);
@@ -339,8 +369,13 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const sph = new THREE.Spherical(), tmpV = new THREE.Vector3();
   let fly = null, switching = false, panCenter = new THREE.Vector3(), panLimit = 3;
   const fitDist = (radius, polar) => { const v = THREE.MathUtils.degToRad(camera.fov / 2), h = Math.atan(Math.tan(v) * camera.aspect); return Math.max((radius * 1.08) / Math.tan(h), (radius * (Math.cos(polar) * 0.9 + 0.32) * 1.12) / Math.tan(v)); };
+  const worldCentroid = (k) => {
+    const ts = WORLDS[k].themes.map((ti) => tiles[ti].center);
+    return new THREE.Vector3(ts.reduce((a, c) => a + c.x, 0) / ts.length, 0.5, ts.reduce((a, c) => a + c.z, 0) / ts.length);
+  };
   function viewSpec() {
-    if (view.level === 'garden') return { target: new THREE.Vector3(0, 0.4, 0.3), dist: fitDist(mobile ? 9.0 : 9.4, 0.95), polar: 0.95, pan: 3 };
+    if (view.level === 'garden' && groupFocus && state.group >= 0) return { target: worldCentroid(state.group), dist: fitDist(9.4, 0.95), polar: 0.95, pan: 3 };
+    if (view.level === 'garden') return { target: new THREE.Vector3(0.74, 0.4, -0.26), dist: fitDist(mobile ? 18.6 : 18.9, 0.95), polar: 0.95, pan: 3 };
     if (view.level === 'theme') return { target: tiles[view.ti].center.clone().setY(0.7), dist: fitDist(3.9, 0.92), polar: 0.92, pan: 1.6 };
     if (view.lesson >= 0 && trail) return { target: trail.nodes[view.lesson].pos.clone().setY(TRAIL_H + 0.45), dist: fitDist(2.3, 0.85), polar: 0.85, pan: 3 };
     const half = trail ? Math.max(...trail.nodes.map((n) => Math.abs(n.pos.x))) + 1.7 : 5;
@@ -350,7 +385,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const inPath = view.level === 'path';
     controls.minDistance = inPath ? 2.6 : 4.5; controls.maxDistance = Math.max(spec.dist * 1.5, 34);
     if (inPath) { panCenter.set(0, TRAIL_H + 0.3, 0); panLimit = (trail ? Math.max(...trail.nodes.map((n) => Math.abs(n.pos.x))) : 4) + 2.2; }
-    else { panCenter.set(0, 0.4, 0.3); panLimit = 9.8; }
+    else { panCenter.set(0.74, 0.4, -0.26); panLimit = 22; }
   }
   function flyTo(spec, ms = 900, azim) {
     camera.position.sub(controls.target); sph.setFromVector3(camera.position); camera.position.add(controls.target);
@@ -391,7 +426,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (e.ctrlKey || e.metaKey) zoomBy(Math.exp(e.deltaY * m * 0.01)); else panBy(e.deltaX * m, e.deltaY * m);
   }, { capture: true, passive: false });
   const fade = $('.lg-fade');
-  function setVisibility() { const inPath = view.level === 'path'; garden.visible = !inPath; contact.visible = !inPath; if (trailGroup) trailGroup.visible = inPath; }
+  function setVisibility() { const inPath = view.level === 'path'; garden.visible = !inPath; contact.visible = !inPath; if (trailGroup) trailGroup.visible = inPath; updateVeils(); }
   const clearHover = () => { cellOutline.visible = slabOutline.visible = tileOutline.visible = false; };
   function goGarden(ms = 1000) {
     if (switching) return;
@@ -461,14 +496,21 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   }
   let down = null;
   canvas.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
-  canvas.addEventListener('pointerup', (e) => { if (!down) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y), dt = performance.now() - down.t; down = null; if (moved < 7 && dt < 600) activate(pickAt(e.clientX, e.clientY)); });
+  canvas.addEventListener('pointerup', (e) => {
+    if (!down) return; const dx = e.clientX - down.x, dy = e.clientY - down.y, moved = Math.hypot(dx, dy), dt = performance.now() - down.t; down = null;
+    if (groupFocus && view.level === 'garden' && Math.abs(dx) > 70 && Math.abs(dx) > 1.6 * Math.abs(dy) && dt < 500) { setGroup((state.group < 0 ? 0 : state.group) + (dx < 0 ? 1 : -1)); return; }
+    if (moved < 7 && dt < 600) activate(pickAt(e.clientX, e.clientY));
+  });
   canvas.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' && !down) setHover(pickAt(e.clientX, e.clientY)); });
   canvas.addEventListener('pointerleave', () => setHover(null));
   const onKey = (e) => {
     if (!root.isConnected || e.target.matches?.('input')) return;
     if (e.key === 'Escape' || e.key === 'Backspace') { back(); e.preventDefault(); }
-    else if (/^[1-7]$/.test(e.key) && view.level !== 'path') goTheme(Number(e.key) - 1);
-    else if (e.key.startsWith('Arrow')) { const st = 60; panBy(e.key === 'ArrowLeft' ? -st : e.key === 'ArrowRight' ? st : 0, e.key === 'ArrowUp' ? -st : e.key === 'ArrowDown' ? st : 0); e.preventDefault(); }
+    else if (/^[1-9]$/.test(e.key) && view.level !== 'path' && THEMES[Number(e.key) - 1]) goTheme(Number(e.key) - 1);
+    else if (e.key.startsWith('Arrow')) {
+      if (groupFocus && view.level === 'garden' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { setGroup((state.group < 0 ? 0 : state.group) + (e.key === 'ArrowRight' ? 1 : -1)); e.preventDefault(); return; }
+      const st = 60; panBy(e.key === 'ArrowLeft' ? -st : e.key === 'ArrowRight' ? st : 0, e.key === 'ArrowUp' ? -st : e.key === 'ArrowDown' ? st : 0); e.preventDefault();
+    }
     else if (e.key === '+' || e.key === '=') zoomBy(0.85);
     else if (e.key === '-' || e.key === '_') zoomBy(1.18);
   };
@@ -499,8 +541,10 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   function renderPanel() {
     let h = '';
     if (view.level === 'garden') {
-      h = `<p class="eyebrow">Little Grains · sample garden</p><h2>The Garden</h2><p class="lede">${themeShape ? 'Each land follows the footprint of its learning paths. The scenery, lessons and controls are unchanged.' : 'Each hexagon is a theme. Walk into one to find a hexagon per learning path, then follow its tiles lesson by lesson.'}</p><ul class="lg-list">` +
-        THEMES.map((t, i) => { const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
+      const focused = groupFocus && state.group >= 0 ? WORLDS[state.group] : null;
+      const listed = focused ? focused.themes.map((i) => THEMES[i]) : THEMES;
+      h = `<p class="eyebrow">Little Grains · sample garden</p><h2>${focused ? esc(focused.name) : 'The Garden'}</h2><p class="lede">${focused ? 'Focused world; its neighbours stay frosted behind it. ' : ''}${themeShape ? 'Each land follows the footprint of its learning paths. The scenery, lessons and controls are unchanged.' : 'Each hexagon is a theme. Walk into one to find a hexagon per learning path, then follow its tiles lesson by lesson.'}</p><ul class="lg-list">` +
+        listed.map((t) => { const i = THEMES.indexOf(t); const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson, filled once completed.</p><ul class="lg-list">` +
@@ -526,7 +570,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     playBtn.setAttribute('aria-label', state.playing ? 'Pause study timeline' : w >= 16 ? 'Replay study timeline' : 'Play study timeline');
     weekInput.style.setProperty('--fill', `${(w / 16) * 100}%`);
   }
-  function renderUI() { renderCrumbs(); renderPanel(); renderStats(); renderTime(); buildLabels(); dirty = true; }
+  function renderUI() { renderCrumbs(); renderPanel(); renderStats(); renderTime(); buildLabels(); updateVeils(); renderGroupChip(); dirty = true; }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
@@ -534,6 +578,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     else if (b.dataset.path) goPath(view.ti, Number(b.dataset.path));
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
     else if (b.dataset.start) toast('Sample data: lessons open in the real Little Grains app.');
+    else if (b.dataset.grp) { const g = b.dataset.grp; if (g === 'all') clearGroup(); else setGroup((state.group < 0 ? 0 : state.group) + (g === 'next' ? 1 : -1)); }
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
     else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
     else if (b.classList.contains('lg-play')) togglePlay();
@@ -547,7 +592,10 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   function buildLabels() {
     labelsEl.innerHTML = ''; labelDefs = [];
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
-    if (view.level === 'garden') tiles.forEach((T, ti) => add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true }));
+    if (view.level === 'garden') tiles.forEach((T, ti) => {
+      if (groupFocus && state.group >= 0 && !WORLDS[state.group].themes.includes(ti)) return;
+      add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true });
+    });
     if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => mobile ? add('lesson', `<i class="n">${pi + 1}</i>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28))) : add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
     if (view.level === 'path' && trail) trail.nodes.forEach((n) => add('lesson', `<i class="n">${n.i + 1}</i>${mobile ? '' : `<b>${esc(trail.path.lessons[n.i])}</b>`}`, n.pos.clone().add(new THREE.Vector3(0, mobile ? 1.35 : 1.5, 0)), { i: n.i }));
   }
@@ -555,9 +603,16 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const tv = new THREE.Vector3();
   function placeLabels() {
     const w = root.clientWidth, h = root.clientHeight;
+    const placed = [];
     for (const L of labelDefs) {
       tv.copy(L.anchor).project(camera);
-      const vis = tv.z < 1 && Math.abs(tv.x) < 1.1 && Math.abs(tv.y) < 1.1 && !switching;
+      let vis = tv.z < 1 && Math.abs(tv.x) < 1.1 && Math.abs(tv.y) < 1.1 && !switching;
+      if (vis && view.level === 'garden') {
+        // Twenty theme chips blanket the map at full zoom; drop ones that would overlap a kept chip.
+        const sx = (tv.x * 0.5 + 0.5) * w, sy = (-tv.y * 0.5 + 0.5) * h;
+        if (placed.some(([px, py]) => Math.abs(px - sx) < 108 && Math.abs(py - sy) < 34)) vis = false;
+        else placed.push([sx, sy]);
+      }
       L.el.style.opacity = vis ? 1 : 0;
       if (vis) L.el.style.transform = `translate(-50%,-100%) translate(${((tv.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-tv.y * 0.5 + 0.5) * h).toFixed(1)}px)`;
     }
@@ -633,9 +688,10 @@ export function createGarden({ container, profile: P, state, reduced = false, th
 
   return {
     root, view, state, prof, failed: false, camera, controls,
-    goGarden, goTheme, goPath, selectLesson, back, water, togglePlay,
+    goGarden, goTheme, goPath, selectLesson, back, water, togglePlay, setGroup, clearGroup,
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
+    pause: () => { alive = false; cancelAnimationFrame(raf); stepFly(performance.now() + 1e5); controls.update(); camera.updateMatrixWorld(); placeLabels(); renderer.render(scene, camera); },
     growthReady: () => [...disp.entries()].every(([k,v]) => Math.abs(targetOf(k)-v)<0.0004),
     progressSnapshot: () => Object.fromEntries(disp),
     dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },
