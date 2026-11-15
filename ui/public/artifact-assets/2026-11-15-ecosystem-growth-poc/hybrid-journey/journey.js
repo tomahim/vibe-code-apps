@@ -94,6 +94,9 @@
     $('markers').style.visibility = 'hidden'; art.style.opacity = '.3';
     updateHead(); markers(); resize();
     const entries = theme ? assets.interiors[theme] : assets.groups[group];
+    $('growthNotice').textContent = entries.sparseMethod === 'painted-sparse'
+      ? 'Growth preview: this group has painted sparse-to-lush artwork. Other scenes are still being finished.'
+      : 'Growth unfinished here: vegetation currently changes color, not structure. New artwork is coming in a follow-up.';
     try {
       const result = await Promise.all([image(entries.sparse), image(entries.lush)]);
       if (token !== version) return;
