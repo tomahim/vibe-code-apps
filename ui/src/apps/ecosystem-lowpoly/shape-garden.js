@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { THEMES, progressAt } from './shape-data.js';
-import { THEME_SLOTS, THEME_SPACING, WORLDS } from './shape-footprints.js';
+import { THEME_SLOTS, THEME_SPACING, WORLDS, interlocking, compactCenters, COMPACT_GROUPS } from './shape-footprints.js';
 import { makeSpecies, makeBlade, rngFor } from '../../../scripts/artifacts/little-grains/plants.js';
 import { hexPrism, hexOutline, axial, inHex } from '../../../scripts/artifacts/little-grains/terrain.js';
 
@@ -73,9 +73,12 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null, groupFocus = false, veilPolygons = null }) {
+export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null, groupFocus = false, compact = false }) {
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
+  const worlds=compact?COMPACT_GROUPS:WORLDS;
+  const themePoint=ti=>compact?new THREE.Vector3(compactCenters[ti][0],SLAB_H,compactCenters[ti][1]):tiles[ti].center;
+  const focusPolygon=ti=>compact?Array.from({length:6},(_,k)=>[1.38*Math.cos(Math.PI/6+k*Math.PI/3),1.38*Math.sin(Math.PI/6+k*Math.PI/3)]):interlocking[ti];
   const root = document.createElement('div');
   root.className = `lg-root ${mobile ? 'lg-mobile' : 'lg-desktop'}`;
   root.innerHTML = `<canvas class="lg-canvas" tabindex="0" aria-label="Interactive 3D garden of learning themes. Drag to orbit, scroll or pinch to zoom, tap a hexagon to open it."></canvas>
@@ -105,7 +108,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE };
   controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_ROTATE };
   controls.enableZoom = true; controls.panSpeed = 1.1;
-  controls.autoRotate = !reduced; controls.autoRotateSpeed = 0.35;
+  controls.autoRotate = !reduced && !groupFocus; controls.autoRotateSpeed = 0.35;
 
   scene.add(new THREE.HemisphereLight('#fff7ea', '#d9ccb2', 1.35));
   const sun = new THREE.DirectionalLight('#fff0d8', 2.5);
@@ -206,24 +209,29 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   gardenPlants.build(garden);
   const gardenGrass = makeGrass(grassList, garden);
 
+  // Compact mode has a separate one-hex-per-theme overview. Paths are revealed on entry.
+  const compactGarden=new THREE.Group(); scene.add(compactGarden);
+  const compactMeshes=[],compactPlants=new Plants(species,plantMat,prof.shadows);
+  if(compact){
+    THEMES.forEach((t,ti)=>{
+      const [x,z]=compactCenters[ti],m=new THREE.Mesh(hexPrism(1.38,SLAB_H,{K:prof.K,top:t.top2,top2:t.top,seed:ti+1,noise:.015}),new THREE.MeshStandardMaterial({vertexColors:true,flatShading:true,roughness:.95}));
+      m.position.set(x,0,z);m.castShadow=prof.shadows;m.receiveShadow=true;m.userData.pick={kind:'theme',ti};compactGarden.add(m);compactMeshes.push(m);
+      if(t.terrain==='pond'){const water=new THREE.Mesh(new THREE.CircleGeometry(.64,20).rotateX(-Math.PI/2),new THREE.MeshStandardMaterial({color:'#79bfd8',roughness:.12,metalness:.1}));water.position.set(x,SLAB_H+.02,z);compactGarden.add(water);}
+    });
+    for(const [name,list] of Object.entries(gardenPlants.items))for(const it of list){
+      const ti=Number(it.key.slice(1).split('.')[0]),t=tiles[ti],c=compactCenters[ti];
+      compactPlants.add(name,{...it,x:c[0]+(it.x-t.center.x)*.38,z:c[1]+(it.z-t.center.z)*.38,y:SLAB_H+.015,s:it.s*.68});
+    }
+    compactPlants.build(compactGarden);
+  }
+
   const outlineMat = new THREE.MeshBasicMaterial({ color: TERRACOTTA, transparent: true, opacity: 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2, side: THREE.DoubleSide });
   const cellOutline = new THREE.Mesh(hexOutline(R_CELL, 0.07), outlineMat), slabOutline = new THREE.Mesh(hexOutline(R_THEME + 0.02, 0.11), outlineMat), selOutline = new THREE.Mesh(hexOutline(R_CELL, 0.09), outlineMat), tileOutline = new THREE.Mesh(hexOutline(TILE_R, 0.08), outlineMat);
   [cellOutline, slabOutline, selOutline, tileOutline].forEach((o) => { o.visible = false; o.renderOrder = 5; scene.add(o); });
 
-  // ----- Group focus (interlocking groups mode): frosted veils dim the themes outside the focused world -----
-  state.group = state.group ?? -1;
-  const veils = [];
-  if (groupFocus && veilPolygons) {
-    tiles.forEach((T, ti) => {
-      const sh = new THREE.Shape();
-      veilPolygons[ti].forEach(([x, z], i) => sh[i ? 'lineTo' : 'moveTo'](x * 1.05, -z * 1.05));
-      sh.closePath();
-      const veil = new THREE.Mesh(new THREE.ShapeGeometry(sh).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: '#f6efe3', transparent: true, opacity: 0.55, depthWrite: false }));
-      veil.position.set(T.center.x, SLAB_H + 0.9, T.center.z);
-      veil.visible = false; veil.renderOrder = 6; scene.add(veil); veils.push(veil);
-    });
-  }
-  const updateVeils = () => { veils.forEach((v, ti) => { v.visible = view.level === 'garden' && state.group >= 0 && !WORLDS[state.group].themes.includes(ti); }); };
+  // ----- Group focus (interlocking groups mode): the focused world stays sharp while the
+  // rest of the garden is genuinely blurred by a selective screen-space defocus pass -----
+  state.group = state.group == null || state.group < 0 ? -1 : state.group % worlds.length;
   let grpNav = null;
   if (groupFocus) {
     grpNav = document.createElement('div');
@@ -232,12 +240,12 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     root.appendChild(grpNav);
   }
   function setGroup(k, ms = 900) {
-    state.group = ((k % WORLDS.length) + WORLDS.length) % WORLDS.length;
+    state.group = ((k % worlds.length) + worlds.length) % worlds.length;
     if (view.level !== 'garden') { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; setVisibility(); }
-    clearHover(); flyTo(viewSpec(), ms); renderUI();
+    clearHover(); renderUI(); flyTo(viewSpec(), ms);
   }
-  function clearGroup(ms = 900) { state.group = -1; if (view.level === 'garden') flyTo(viewSpec(), ms); renderUI(); }
-  function renderGroupChip() { if (!grpNav) return; const chip = grpNav.querySelector('.lg-worldchip'); const on = view.level === 'garden' && state.group >= 0; chip.textContent = on ? `${WORLDS[state.group].name} · all themes` : 'Pick a group to focus'; grpNav.classList.toggle('focused', on); }
+  function clearGroup(ms = 900) { state.group = -1; renderUI(); if (view.level === 'garden') flyTo(viewSpec(), ms); }
+  function renderGroupChip() { if (!grpNav) return; grpNav.style.display=view.level==='garden'?'':'none'; const chip = grpNav.querySelector('.lg-worldchip'); const on = view.level === 'garden' && state.group >= 0; root.classList.toggle('group-focused',on); chip.textContent = on ? `${worlds[state.group].name} · all themes` : 'Pick a group to focus'; grpNav.classList.toggle('focused', on); }
 
   // ----- Ambient life -----
   const clouds = new THREE.Group(); scene.add(clouds);
@@ -370,12 +378,37 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   let fly = null, switching = false, panCenter = new THREE.Vector3(), panLimit = 3;
   const fitDist = (radius, polar) => { const v = THREE.MathUtils.degToRad(camera.fov / 2), h = Math.atan(Math.tan(v) * camera.aspect); return Math.max((radius * 1.08) / Math.tan(h), (radius * (Math.cos(polar) * 0.9 + 0.32) * 1.12) / Math.tan(v)); };
   const worldCentroid = (k) => {
-    const ts = WORLDS[k].themes.map((ti) => tiles[ti].center);
+    const ts = worlds[k].themes.map((ti) => themePoint(ti));
     return new THREE.Vector3(ts.reduce((a, c) => a + c.x, 0) / ts.length, 0.5, ts.reduce((a, c) => a + c.z, 0) / ts.length);
   };
+  function groupSpec(indices=worlds[state.group].themes,useCompact=compact){
+    const w=root.clientWidth,h=root.clientHeight, rr=root.getBoundingClientRect();
+    const panelRect=$('.lg-panel').getBoundingClientRect(), navRect=(view.level==='garden'?grpNav:$('.lg-stats')).getBoundingClientRect();
+    const small=mobile||w<=900;
+    const left=small?24:panelRect.right-rr.left+30, right=w-(small?24:60);
+    const top=navRect.bottom-rr.top+34, bottom=small?panelRect.top-rr.top-24:h-105;
+    const sw=Math.max(140,right-left),sh=Math.max(110,bottom-top);
+    camera.setViewOffset(w,h,w/2-(left+right)/2,h/2-(top+bottom)/2,w,h);camera.updateProjectionMatrix();
+    const centerOf=ti=>useCompact?themePoint(ti):tiles[ti].center;
+    const target=indices.reduce((a,ti)=>a.add(centerOf(ti)),new THREE.Vector3()).divideScalar(indices.length), polar=.95;
+    const off=camera.position.clone().sub(controls.target),theta=Math.atan2(off.x,off.z);
+    const test=camera.clone();let dist=8;
+    const points=[];
+    indices.forEach(ti=>(useCompact?focusPolygon(ti):Array.from({length:6},(_,k)=>[3.5*Math.cos(Math.PI/6+k*Math.PI/3),3.5*Math.sin(Math.PI/6+k*Math.PI/3)])).forEach(([x,z])=>{const c=centerOf(ti);for(const y of [0,2.5])points.push(new THREE.Vector3(c.x+x,y,c.z+z));}));
+    for(let n=0;n<120;n++){
+      test.position.setFromSpherical(new THREE.Spherical(dist,polar,theta)).add(target);test.lookAt(target);test.updateMatrixWorld();
+      if(points.every(p=>{const v=p.clone().project(test),x=(v.x*.5+.5)*w,y=(-v.y*.5+.5)*h;return x>left&&x<right&&y>top&&y<bottom;}))break;
+      dist*=1.035;
+    }
+    return {target,dist,polar,pan:3};
+  }
   function viewSpec() {
-    if (view.level === 'garden' && groupFocus && state.group >= 0) return { target: worldCentroid(state.group), dist: fitDist(9.4, 0.95), polar: 0.95, pan: 3 };
+    if (view.level === 'garden' && groupFocus && state.group >= 0) return groupSpec();
+    if(mobile)camera.setViewOffset(root.clientWidth,root.clientHeight,0,root.clientHeight*.09,root.clientWidth,root.clientHeight);else if(root.clientWidth>900)camera.setViewOffset(root.clientWidth,root.clientHeight,-Math.min(170,root.clientWidth*.11),0,root.clientWidth,root.clientHeight);else camera.clearViewOffset();
+    camera.updateProjectionMatrix();
+    if (view.level === 'garden' && compact) return { target:new THREE.Vector3(0,.4,0),dist:fitDist(14,.95),polar:.95,pan:3 };
     if (view.level === 'garden') return { target: new THREE.Vector3(0.74, 0.4, -0.26), dist: fitDist(mobile ? 18.6 : 18.9, 0.95), polar: 0.95, pan: 3 };
+    if(view.level==='theme'&&compact)return groupSpec([view.ti],false);
     if (view.level === 'theme') return { target: tiles[view.ti].center.clone().setY(0.7), dist: fitDist(3.9, 0.92), polar: 0.92, pan: 1.6 };
     if (view.lesson >= 0 && trail) return { target: trail.nodes[view.lesson].pos.clone().setY(TRAIL_H + 0.45), dist: fitDist(2.3, 0.85), polar: 0.85, pan: 3 };
     const half = trail ? Math.max(...trail.nodes.map((n) => Math.abs(n.pos.x))) + 1.7 : 5;
@@ -426,16 +459,16 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (e.ctrlKey || e.metaKey) zoomBy(Math.exp(e.deltaY * m * 0.01)); else panBy(e.deltaX * m, e.deltaY * m);
   }, { capture: true, passive: false });
   const fade = $('.lg-fade');
-  function setVisibility() { const inPath = view.level === 'path'; garden.visible = !inPath; contact.visible = !inPath; if (trailGroup) trailGroup.visible = inPath; updateVeils(); }
+  function setVisibility() { const inPath = view.level === 'path'; garden.visible = !inPath && !(compact && view.level === 'garden'); compactGarden.visible=compact&&view.level==='garden'; contact.visible = !inPath; if (trailGroup) trailGroup.visible = inPath; }
   const clearHover = () => { cellOutline.visible = slabOutline.visible = tileOutline.visible = false; };
   function goGarden(ms = 1000) {
     if (switching) return;
-    const go = () => { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms, 0.35); renderUI(); };
+    const go = () => { view.level = 'garden'; view.ti = view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); setVisibility(); flyTo(viewSpec(), ms, 0.35); renderUI(); };
     if (view.level === 'path') exitPath(go); else go();
   }
   function goTheme(ti, ms = 1000) {
     if (switching) return;
-    const go = () => { view.level = 'theme'; view.ti = ti; view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); flyTo(viewSpec(), ms); renderUI(); };
+    const go = () => { view.level = 'theme'; view.ti = ti; view.pi = view.lesson = -1; selOutline.visible = false; clearHover(); setVisibility(); renderUI(); flyTo(viewSpec(), ms); };
     if (view.level === 'path') exitPath(go); else go();
   }
   function goPath(ti, pi) {
@@ -473,7 +506,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   // ----- Picking -----
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
   let hover = null;
-  const pickables = () => switching ? [] : view.level === 'path' ? (trail ? trail.nodes.map((n) => n.stone) : []) : [...cellMeshes, ...themeMeshes];
+  const pickables = () => switching ? [] : view.level === 'path' ? (trail ? trail.nodes.map((n) => n.stone) : []) : compact&&view.level==='garden'?compactMeshes:[...cellMeshes, ...themeMeshes];
   function pickAt(cx, cy) {
     const rc = canvas.getBoundingClientRect(); ptr.set(((cx - rc.left) / rc.width) * 2 - 1, -((cy - rc.top) / rc.height) * 2 + 1);
     ray.setFromCamera(ptr, camera); const hit = ray.intersectObjects(pickables(), false)[0];
@@ -481,9 +514,9 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   }
   function setHover(p) {
     const key = p ? `${p.kind}.${p.ti ?? ''}.${p.pi ?? ''}.${p.i ?? ''}` : null;
-    if (key === hover) return; hover = key; clearHover(); canvas.style.cursor = p ? 'pointer' : 'grab';
+    if (key === hover) return; hover = key; clearHover(); canvas.style.cursor = p ? 'pointer' : 'grab';canvas.title=p?.ti!=null?THEMES[p.ti].title:'';
     if (!p) return;
-    const slab = (ti) => { if(themeShape){slabOutline.geometry.dispose();slabOutline.geometry=themeGeo(hexOutline(R_THEME+.02,.11),ti);} const T = tiles[ti]; slabOutline.position.set(T.center.x, SLAB_H + CELL_H * 0.4, T.center.z); slabOutline.visible = true; };
+    const slab = (ti) => { if(compact&&view.level==='garden'){slabOutline.geometry.dispose();slabOutline.geometry=hexOutline(1.4,.07);const [x,z]=compactCenters[ti];slabOutline.position.set(x,SLAB_H+.02,z);slabOutline.visible=true;return;} if(themeShape){slabOutline.geometry.dispose();slabOutline.geometry=themeGeo(hexOutline(R_THEME+.02,.11),ti);} const T = tiles[ti]; slabOutline.position.set(T.center.x, SLAB_H + CELL_H * 0.4, T.center.z); slabOutline.visible = true; };
     if (p.kind === 'lesson') { const n = trail.nodes[p.i]; tileOutline.position.set(n.pos.x, n.pos.y + 0.05, n.pos.z); tileOutline.visible = true; }
     else if (p.kind === 'theme' || view.level === 'garden' || p.ti !== view.ti) slab(p.ti);
     else { const c = tiles[p.ti].cells[p.pi].center; cellOutline.position.set(c.x, c.y + 0.03, c.z); cellOutline.visible = true; }
@@ -498,7 +531,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   canvas.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
   canvas.addEventListener('pointerup', (e) => {
     if (!down) return; const dx = e.clientX - down.x, dy = e.clientY - down.y, moved = Math.hypot(dx, dy), dt = performance.now() - down.t; down = null;
-    if (groupFocus && view.level === 'garden' && Math.abs(dx) > 70 && Math.abs(dx) > 1.6 * Math.abs(dy) && dt < 500) { setGroup((state.group < 0 ? 0 : state.group) + (dx < 0 ? 1 : -1)); return; }
+    if (groupFocus && view.level === 'garden' && Math.abs(dx) > 70 && Math.abs(dx) > 1.6 * Math.abs(dy) && dt < 500) { setGroup((state.group < 0 ? (dx < 0 ? -1 : 0) : state.group) + (dx < 0 ? 1 : -1)); return; }
     if (moved < 7 && dt < 600) activate(pickAt(e.clientX, e.clientY));
   });
   canvas.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' && !down) setHover(pickAt(e.clientX, e.clientY)); });
@@ -508,7 +541,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (e.key === 'Escape' || e.key === 'Backspace') { back(); e.preventDefault(); }
     else if (/^[1-9]$/.test(e.key) && view.level !== 'path' && THEMES[Number(e.key) - 1]) goTheme(Number(e.key) - 1);
     else if (e.key.startsWith('Arrow')) {
-      if (groupFocus && view.level === 'garden' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { setGroup((state.group < 0 ? 0 : state.group) + (e.key === 'ArrowRight' ? 1 : -1)); e.preventDefault(); return; }
+      if (groupFocus && view.level === 'garden' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { setGroup((state.group < 0 ? (e.key === 'ArrowRight' ? -1 : 0) : state.group) + (e.key === 'ArrowRight' ? 1 : -1)); e.preventDefault(); return; }
       const st = 60; panBy(e.key === 'ArrowLeft' ? -st : e.key === 'ArrowRight' ? st : 0, e.key === 'ArrowUp' ? -st : e.key === 'ArrowDown' ? st : 0); e.preventDefault();
     }
     else if (e.key === '+' || e.key === '=') zoomBy(0.85);
@@ -541,10 +574,10 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   function renderPanel() {
     let h = '';
     if (view.level === 'garden') {
-      const focused = groupFocus && state.group >= 0 ? WORLDS[state.group] : null;
-      const listed = focused ? focused.themes.map((i) => THEMES[i]) : THEMES;
-      h = `<p class="eyebrow">Little Grains · sample garden</p><h2>${focused ? esc(focused.name) : 'The Garden'}</h2><p class="lede">${focused ? 'Focused world; its neighbours stay frosted behind it. ' : ''}${themeShape ? 'Each land follows the footprint of its learning paths. The scenery, lessons and controls are unchanged.' : 'Each hexagon is a theme. Walk into one to find a hexagon per learning path, then follow its tiles lesson by lesson.'}</p><ul class="lg-list">` +
-        listed.map((t) => { const i = THEMES.indexOf(t); const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; return `<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
+      const focused = groupFocus && state.group >= 0 ? worlds[state.group] : null;
+      const listed = focused ? focused.themes.map((i) => THEMES[i]) : compact ? COMPACT_GROUPS.flatMap(g=>g.themes.map(i=>THEMES[i])) : THEMES;
+      h = `<p class="eyebrow">Little Grains · sample garden</p><h2>${focused ? esc(focused.name) : 'The Garden'}</h2><p class="lede">${focused ? 'Focused world; the rest of the garden blurs into the background. ' : ''}${compact ? 'One hexagon per theme, arranged in related groups. Select a hexagon to reveal all its learning paths.' : themeShape ? 'Each land follows the footprint of its learning paths. The scenery, lessons and controls are unchanged.' : 'Each hexagon is a theme. Walk into one to find a hexagon per learning path, then follow its tiles lesson by lesson.'}</p><ul class="lg-list">` +
+        listed.map((t) => { const i = THEMES.indexOf(t); const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; const group=compact&&!focused?COMPACT_GROUPS.find(g=>g.themes[0]===i):null;return `${group?`<li class="group-list-title">${esc(group.name)}</li>`:''}<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson, filled once completed.</p><ul class="lg-list">` +
@@ -570,7 +603,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     playBtn.setAttribute('aria-label', state.playing ? 'Pause study timeline' : w >= 16 ? 'Replay study timeline' : 'Play study timeline');
     weekInput.style.setProperty('--fill', `${(w / 16) * 100}%`);
   }
-  function renderUI() { renderCrumbs(); renderPanel(); renderStats(); renderTime(); buildLabels(); updateVeils(); renderGroupChip(); dirty = true; }
+  function renderUI() { root.classList.toggle('compact-overview',compact&&view.level==='garden'&&(!groupFocus||state.group<0)); renderCrumbs(); renderPanel(); renderStats(); renderTime(); renderGroupChip(); buildLabels(); dirty = true; }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.go) { const g = b.dataset.go; if (g === 'garden') goGarden(); else if (g === 'theme') { if (view.level === 'path') exitPath(() => { flyTo(viewSpec(), 900); renderUI(); }); else goTheme(view.ti); } else if (g === 'back') back(); }
@@ -578,9 +611,9 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     else if (b.dataset.path) goPath(view.ti, Number(b.dataset.path));
     else if (b.dataset.lesson) selectLesson(Number(b.dataset.lesson));
     else if (b.dataset.start) toast('Sample data: lessons open in the real Little Grains app.');
-    else if (b.dataset.grp) { const g = b.dataset.grp; if (g === 'all') clearGroup(); else setGroup((state.group < 0 ? 0 : state.group) + (g === 'next' ? 1 : -1)); }
+    else if (b.dataset.grp) { const g = b.dataset.grp; if (g === 'all') clearGroup(); else setGroup((state.group < 0 ? (g === 'next' ? -1 : 0) : state.group) + (g === 'next' ? 1 : -1)); }
     else if (b.dataset.zoom) zoomBy(b.dataset.zoom === 'in' ? 0.8 : 1.25);
-    else if (b.classList.contains('lg-handle')) panel.classList.toggle('open');
+    else if (b.classList.contains('lg-handle')) {panel.classList.toggle('open');if(groupFocus&&state.group>=0)setTimeout(()=>flyTo(viewSpec(),0),280);}
     else if (b.classList.contains('lg-play')) togglePlay();
     else if (b.classList.contains('lg-water')) water();
   });
@@ -593,9 +626,10 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     labelsEl.innerHTML = ''; labelDefs = [];
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
     if (view.level === 'garden') tiles.forEach((T, ti) => {
-      if (groupFocus && state.group >= 0 && !WORLDS[state.group].themes.includes(ti)) return;
-      add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, T.center.clone().add(new THREE.Vector3(0, 1.45, R_THEME * 0.62)), { ti, dots: true });
+      if (groupFocus && state.group >= 0 && !worlds[state.group].themes.includes(ti)) return;
+      add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, (compact?new THREE.Vector3(compactCenters[ti][0],SLAB_H,compactCenters[ti][1]):T.center.clone()).add(new THREE.Vector3(0,compact?1.2:1.45,compact?.6:R_THEME*.62)), { ti, dots: true });
     });
+    if(compact&&view.level==='garden'&&(!groupFocus||state.group<0))COMPACT_GROUPS.forEach(g=>add('group-name',esc(g.name),new THREE.Vector3(g.center[0],.8,g.center[1]-3.2)));
     if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => mobile ? add('lesson', `<i class="n">${pi + 1}</i>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28))) : add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
     if (view.level === 'path' && trail) trail.nodes.forEach((n) => add('lesson', `<i class="n">${n.i + 1}</i>${mobile ? '' : `<b>${esc(trail.path.lessons[n.i])}</b>`}`, n.pos.clone().add(new THREE.Vector3(0, mobile ? 1.35 : 1.5, 0)), { i: n.i }));
   }
@@ -604,17 +638,29 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   function placeLabels() {
     const w = root.clientWidth, h = root.clientHeight;
     const placed = [];
+    const focusedLabels=groupFocus&&state.group>=0&&view.level==='garden';
+    const boxes=[];
     for (const L of labelDefs) {
       tv.copy(L.anchor).project(camera);
       let vis = tv.z < 1 && Math.abs(tv.x) < 1.1 && Math.abs(tv.y) < 1.1 && !switching;
-      if (vis && view.level === 'garden') {
+      if (vis && !L.el.classList.contains('group-name') && view.level === 'garden' && !(groupFocus && state.group >= 0)) {
         // Twenty theme chips blanket the map at full zoom; drop ones that would overlap a kept chip.
         const sx = (tv.x * 0.5 + 0.5) * w, sy = (-tv.y * 0.5 + 0.5) * h;
         if (placed.some(([px, py]) => Math.abs(px - sx) < 108 && Math.abs(py - sy) < 34)) vis = false;
         else placed.push([sx, sy]);
       }
       L.el.style.opacity = vis ? 1 : 0;
-      if (vis) L.el.style.transform = `translate(-50%,-100%) translate(${((tv.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-tv.y * 0.5 + 0.5) * h).toFixed(1)}px)`;
+      if (vis) {
+        let x=(tv.x*.5+.5)*w,y=(-tv.y*.5+.5)*h;
+        if(focusedLabels){
+          const lw=L.el.offsetWidth,lh=L.el.offsetHeight;
+          x=clamp(x,lw/2+12,w-lw/2-12);
+          const offsets=[0,-30,30,-60,60,-90,90];
+          for(const off of offsets){const yy=y+off,b={l:x-lw/2-3,r:x+lw/2+3,t:yy-lh-3,b:yy+3};
+            if(boxes.every(a=>b.r<a.l||b.l>a.r||b.b<a.t||b.t>a.b)){y=yy;boxes.push(b);break;}}
+        }
+        L.el.style.transform=`translate(-50%,-100%) translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+      }
     }
   }
   function refreshLabelDots() {
@@ -628,6 +674,56 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     }
   }
 
+  // Render once with depth, blur in two Gaussian passes, then keep the selected themes
+  // sharp using the world position of each visible pixel. This also masks instanced plants.
+  let blurRT = null, softRT = null;
+  const postCam = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+  const postScene = new THREE.Scene();
+  const quad = new THREE.Mesh(new THREE.PlaneGeometry(2,2)); postScene.add(quad);
+  const blurMat = new THREE.ShaderMaterial({depthTest:false, depthWrite:false,
+    uniforms:{tScene:{value:null},tSharp:{value:null},tDepth:{value:null},uStep:{value:new THREE.Vector2()},uFinal:{value:false},uInvProj:{value:new THREE.Matrix4()},uWorld:{value:new THREE.Matrix4()},uCenters:{value:tiles.map((t,ti)=>{const c=themePoint(ti);return new THREE.Vector2(c.x,c.z);})},uSelected:{value:new THREE.Vector4()},uFifth:{value:-1}},
+    vertexShader:'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader:`
+      #include <common>
+      varying vec2 vUv; uniform sampler2D tScene,tSharp,tDepth; uniform vec2 uStep,uCenters[20];
+      uniform mat4 uInvProj,uWorld; uniform vec4 uSelected; uniform float uFifth; uniform bool uFinal;
+      void main(){
+        vec4 c=vec4(0.);float total=0.;
+        for(int i=-12;i<=12;i++){float x=float(i),weight=exp(-x*x/32.);c+=texture2D(tScene,vUv+uStep*x)*weight;total+=weight;}c/=total;
+        if(uFinal){
+          float depth=texture2D(tDepth,vUv).x;
+          vec4 wp=uInvProj*vec4(vUv*2.-1.,depth*2.-1.,1.); wp/=wp.w; wp=uWorld*wp;
+          float best=1.e10; float id=-1.;
+          for(int i=0;i<20;i++){float d=distance(wp.xz,uCenters[i]);if(d<best){best=d;id=float(i);}}
+          bool selected=abs(id-uSelected.x)<.1||abs(id-uSelected.y)<.1||abs(id-uSelected.z)<.1||abs(id-uSelected.w)<.1||abs(id-uFifth)<.1;
+          if(selected&&depth<.99999&&wp.y>-.1)c=texture2D(tSharp,vUv);
+        }
+        gl_FragColor=c;
+        if(uFinal){
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }
+      }`});
+  function drawScene(){
+    if(!(groupFocus&&view.level==='garden'&&state.group>=0)){renderer.setRenderTarget(null);renderer.render(scene,camera);return;}
+    const size=renderer.getDrawingBufferSize(new THREE.Vector2());
+    if(!blurRT||blurRT.width!==size.x||blurRT.height!==size.y){
+      blurRT?.dispose();softRT?.dispose();
+      blurRT=new THREE.WebGLRenderTarget(size.x,size.y); blurRT.depthTexture=new THREE.DepthTexture(size.x,size.y);
+      softRT=new THREE.WebGLRenderTarget(size.x,size.y,{depthBuffer:false});
+    }
+    const fogNear=scene.fog.near,fogFar=scene.fog.far,dist=camera.position.distanceTo(controls.target);
+    scene.fog.near=dist+40;scene.fog.far=dist+200;
+    renderer.setRenderTarget(blurRT);renderer.render(scene,camera);scene.fog.near=fogNear;scene.fog.far=fogFar;
+    const u=blurMat.uniforms;quad.material=blurMat;
+    u.tScene.value=blurRT.texture;u.uStep.value.set(1.7/size.x,0);u.uFinal.value=false;
+    renderer.setRenderTarget(softRT);renderer.render(postScene,postCam);
+    u.tScene.value=softRT.texture;u.tSharp.value=blurRT.texture;u.tDepth.value=blurRT.depthTexture;
+    u.uInvProj.value.copy(camera.projectionMatrixInverse);u.uWorld.value.copy(camera.matrixWorld);
+    u.uSelected.value.fromArray(worlds[state.group].themes);u.uFifth.value=worlds[state.group].themes[4]??-1;u.uStep.value.set(0,1.7/size.y);u.uFinal.value=true;
+    renderer.setRenderTarget(null);renderer.render(postScene,postCam);
+  }
+
   // ----- Loop -----
   let raf = 0, last = performance.now(), time = 0, rainT = 0, dirty = true, alive = true, panelKey = '', resized = false;
   const TRAIL_DONE = new THREE.Color('#5fa84a'), TRAIL_CUR = new THREE.Color(TERRACOTTA), TRAIL_TODO = new THREE.Color('#b9b3a2'), DROP = new THREE.Color('#3f8fd2'), EMPTY = new THREE.Color('#e9e1cd');
@@ -637,7 +733,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (mobile) camera.setViewOffset(w, h, 0, h * 0.09, w, h); else if (w > 900) camera.setViewOffset(w, h, -Math.min(170, w * 0.11), 0, w, h); else camera.clearViewOffset();
     camera.updateProjectionMatrix();
     if (!resized) { resized = true; flyTo(viewSpec(), 0, 0.35); }
-    else if (!fly) { applyLimits(viewSpec()); }
+    else if (!fly) { if(groupFocus&&state.group>=0)flyTo(viewSpec(),0);else applyLimits(viewSpec()); }
   }
   const ro = new ResizeObserver(() => resize()); ro.observe(root);
   function frame(now) {
@@ -646,11 +742,12 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (state.playing) { state.week = Math.min(16, state.week + dt / 2.1); if (state.week >= 16) { state.playing = false; rainT = 0.4; } renderTime(); }
     let changed = false; const rate = reduced ? 1 : 1 - Math.exp(-dt * 2.6);
     const keys = [];
-    if (garden.visible) THEMES.forEach((t, ti) => t.paths.forEach((_, pi) => keys.push(`c${ti}.${pi}`)));
+    if (garden.visible || compactGarden.visible) THEMES.forEach((t, ti) => t.paths.forEach((_, pi) => keys.push(`c${ti}.${pi}`)));
     if (trail && trailGroup.visible) { keys.push('T'); trail.nodes.forEach((n) => keys.push(`L${n.i}`)); }
     for (const k of keys) { const t = targetOf(k), c = disp.get(k) ?? 0, d = t - c; if (Math.abs(d) > 0.0004) { disp.set(k, c + d * rate); changed = true; } else if (d !== 0) { disp.set(k, t); changed = true; } }
     if (changed || dirty) {
-      if (garden.visible) {
+      if (garden.visible || compactGarden.visible) {
+        if(compact)compactPlants.update(disp);
         gardenPlants.update(disp); updateGrass(gardenGrass, disp);
         tiles.forEach((T) => T.cells.forEach((c) => { const s = smooth((disp.get(c.key) ?? 0) * 3); c.mesh.material.color.setRGB(0.8 + 0.2 * s, 0.74 + 0.26 * s, 0.6 + 0.4 * s); }));
       }
@@ -682,19 +779,19 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const raining = rainT > 0 || state.playing; rain.visible = raining;
     if (raining) { const R = Math.min(9, camera.position.distanceTo(ctr) * 0.5); for (let i = 0; i < RAIN_N; i++) { const s0 = rainSeed[i * 3], s1 = rainSeed[i * 3 + 1], s2 = rainSeed[i * 3 + 2], y = (((s1 - time * 0.9 * (0.8 + s0 * 0.2)) % 1) + 1) % 1, x = ctr.x + s0 * R, z = ctr.z + s2 * R, yy = ctr.y + y * 9 - 1; rainArr.set([x, yy, z, x - 0.02, yy - 0.34, z], i * 6); } rain.geometry.attributes.position.needsUpdate = true; }
     stepFly(now); controls.update(); camera.updateMatrixWorld(); placeLabels();
-    renderer.render(scene, camera);
+    drawScene();
   }
   resize(); renderUI(); setVisibility(); raf = requestAnimationFrame(frame);
 
   return {
-    root, view, state, prof, failed: false, camera, controls,
+    root, view, state, prof, compact, failed: false, camera, controls,
     goGarden, goTheme, goPath, selectLesson, back, water, togglePlay, setGroup, clearGroup,
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, plants: gardenPlants.meshes.reduce((a, m) => a + m.count, 0), grass: gardenGrass?.count || 0 }),
     ready: () => !switching && !fly,
-    pause: () => { alive = false; cancelAnimationFrame(raf); stepFly(performance.now() + 1e5); controls.update(); camera.updateMatrixWorld(); placeLabels(); renderer.render(scene, camera); },
+    pause: () => { alive = false; cancelAnimationFrame(raf); stepFly(performance.now() + 1e5); controls.update(); camera.updateMatrixWorld(); placeLabels(); drawScene(); },
     growthReady: () => [...disp.entries()].every(([k,v]) => Math.abs(targetOf(k)-v)<0.0004),
     progressSnapshot: () => Object.fromEntries(disp),
-    dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },
+    dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); removeEventListener('keydown', onKey); disposeTrail(); controls.dispose(); blurRT?.dispose(); softRT?.dispose(); quad.geometry.dispose(); blurMat.dispose(); scene.traverse((o) => { o.geometry?.dispose?.(); const m = o.material; if (m) (Array.isArray(m) ? m : [m]).forEach((x) => { x.map?.dispose?.(); x.dispose?.(); }); }); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); },
   };
 }
 

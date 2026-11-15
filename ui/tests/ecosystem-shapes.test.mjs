@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {polygons,interlocking,WORLDS,themeCenters,reshape} from '../src/apps/ecosystem-lowpoly/shape-footprints.js';
+import {polygons,interlocking,WORLDS,COMPACT_GROUPS,compactCenters,themeCenters,reshape} from '../src/apps/ecosystem-lowpoly/shape-footprints.js';
 import {THEMES} from '../src/apps/ecosystem-lowpoly/shape-data.js';
 import {hexPrism,hexOutline,axial} from '../scripts/artifacts/little-grains/terrain.js';
 const contains=(poly,x,z)=>{let yes=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if(((a[1]>z)!==(b[1]>z))&&(x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0]))yes=!yes;}return yes;};
@@ -35,4 +35,12 @@ test('changed outer slabs and hover boundaries have finite closed contours and s
 test('comparison is isolated, explicitly illustrative and preserves state and view on toggle',async()=>{
  const root=new URL('../',import.meta.url),s=await readFile(new URL('src/apps/ecosystem-lowpoly/shape-experiment.js',root),'utf8'),html=await readFile(new URL('src/apps/ecosystem-lowpoly/shapes.html',root),'utf8'),g=await readFile(new URL('src/apps/ecosystem-lowpoly/shape-garden.js',root),'utf8'),a=await readFile(new URL('src/artifacts/2026-11-15-ecosystem-growth-poc.html',root),'utf8');
  assert.match(s,/week:16/);assert.match(s,/camera.position.copy\(previous.camera\)/);assert.match(s,/controls.target.copy\(previous.target\)/);assert.match(s,/view:\{\.\.\.garden.view\}/);assert.match(html,/Demo progress, fresh season only, no live account/);assert.match(html,/Seasons, oceans and live lesson UI are not reproduced/);assert.match(g,/grow: true, min: 0\.14/);assert.match(g,/nextMark/);assert.match(a,/leaving==='pathshapes'.*?about:blank/);assert.match(a,/shapeFrame/);
+});
+
+test('compact constellations cover every theme once in separated, asymmetric five-theme groups',()=>{
+ assert.deepEqual(COMPACT_GROUPS.map(g=>g.themes.length),[5,5,5,5]);
+ assert.deepEqual(COMPACT_GROUPS.flatMap(g=>g.themes).sort((a,b)=>a-b),Array.from({length:20},(_,i)=>i));
+ assert.equal(new Set(compactCenters.map(c=>c.join(','))).size,20);
+ assert.equal(new Set(COMPACT_GROUPS.map(g=>JSON.stringify(g.slots))).size,4);
+ COMPACT_GROUPS.forEach((g,i)=>COMPACT_GROUPS.forEach((h,j)=>{if(i>=j)return;g.themes.forEach(a=>h.themes.forEach(b=>assert.ok(Math.hypot(compactCenters[a][0]-compactCenters[b][0],compactCenters[a][1]-compactCenters[b][1])>3,'space between groups')));}));
 });
