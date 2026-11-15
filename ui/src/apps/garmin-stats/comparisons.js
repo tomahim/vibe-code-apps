@@ -17,6 +17,11 @@
 // - parkrun distance 5 km — parkrun
 // - Mount Everest official height 8,848.86 m — Nepal/China 2020 survey
 //   https://www.reuters.com/article/idUSKBN28I18U/
+// - Great Pyramid of Giza original height 146.6 m (the casing and capstone are
+//   gone; it stands ~138.5 m today, and published present-day figures vary
+//   between ~137 and ~138.8 m, so the original figure is the fixed reference)
+//   https://www.giza-pyramids.info/great-pyramid.html
+//   https://kids.britannica.com/scholars/article/Great-Pyramid-of-Giza/637956
 // - Kármán line 100 km — FAI definition of the edge of space
 // - The Parisian step benchmark comparison was removed: run-only steps vs an
 //   all-day step figure read as like-for-like even with a caveat, and the
@@ -43,6 +48,7 @@ const GREAT_WALL_KM = 21196;
 const APOLLO_HOURS_TO_MOON = 72;
 const PARKRUN_KM = 5;
 const EVEREST_M = 8849;
+const GREAT_PYRAMID_ORIGINAL_M = 146.6;
 const KARMAN_LINE_M = 100000;
 const WORK_WEEK_HOURS = 40;
 const SONG_MINUTES = 3.5;
@@ -208,6 +214,14 @@ export function buildComparisons({ totals, records, span_days: spanDays }) {
     {
       group: "The climbs",
       cards: [
+        {
+          value: elevation / GREAT_PYRAMID_ORIGINAL_M,
+          decimals: 0,
+          label: "Great Pyramids stacked up",
+          caption: "Your running elevation gain (ascent only, descents not counted) divided by the Great Pyramid of Giza's original height of 146.6 m. It stands about 138.5 m today, so measured against that you would get a few more.",
+          source: "Great Pyramid original height 146.6 m (giza-pyramids.info, Britannica)",
+          viz: { kind: "peaks", count: Math.min(Math.round(elevation / GREAT_PYRAMID_ORIGINAL_M), 20), icon: "🔺" },
+        },
         {
           value: elevation / EVEREST_M,
           decimals: 1,

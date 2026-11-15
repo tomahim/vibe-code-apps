@@ -40,3 +40,18 @@ test("the Parisian step benchmark comparison stays removed", () => {
   assert.ok(!cards().some((c) => /Parisian/.test(c.label)));
   assert.ok(!cards().some((c) => /Parisian/.test(c.caption || "")));
 });
+
+test("Great Pyramid card divides elevation gain by the original 146.6 m height", () => {
+  const card = cards().find((c) => c.label.startsWith("Great Pyramids"));
+  assert.equal(card.value, 10000 / 146.6);
+  assert.match(card.caption, /146\.6 m/);
+  assert.match(card.caption, /ascent only/);
+  assert.match(card.caption, /138\.5 m/);
+});
+
+test("Great Pyramid card is zero, not NaN, without elevation data", () => {
+  const card = buildComparisons({ ...synthetic, totals: { ...synthetic.totals, elevation_m: undefined } })
+    .flatMap((g) => g.cards)
+    .find((c) => c.label.startsWith("Great Pyramids"));
+  assert.equal(card.value, 0);
+});
