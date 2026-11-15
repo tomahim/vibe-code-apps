@@ -29,8 +29,8 @@ const FAVORITES_KEY = "genious-gallery-favorites";
 // AudioWorklet requires the dedicated secure origin, even from an HTTP gallery.
 const MUSIC_LIBRARY_URL = "https://vibe-music-https.tailfd1cee.ts.net/apps/music-library";
 
-// Little Grains keeps its existing separate-service destination.
-const LITTLE_GRAINS_URL = "http://cultive-dev.genious-apps-production-railway.internal:8080/";
+// Cultive uses its dedicated HTTPS destination.
+const LITTLE_GRAINS_URL = "https://cultive.tailfd1cee.ts.net";
 
 function loadFavorites() {
   try {
