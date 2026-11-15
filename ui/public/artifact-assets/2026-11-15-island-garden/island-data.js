@@ -15,8 +15,8 @@ window.ISLAND_GARDEN_DATA={
    ],
    "wideSpots": [
     [
-     75,
-     12
+     48,
+     11
     ],
     [
      32,
@@ -63,8 +63,8 @@ window.ISLAND_GARDEN_DATA={
    ],
    "wideSpots": [
     [
-     68,
-     15
+     60,
+     22
     ],
     [
      15,
@@ -87,8 +87,8 @@ window.ISLAND_GARDEN_DATA={
    ],
    "wideSpots": [
     [
-     38,
-     15
+     44,
+     22
     ],
     [
      18,
@@ -111,8 +111,8 @@ window.ISLAND_GARDEN_DATA={
    ],
    "wideSpots": [
     [
-     45,
-     18
+     48,
+     24
     ],
     [
      18,
@@ -135,8 +135,8 @@ window.ISLAND_GARDEN_DATA={
    ],
    "wideSpots": [
     [
-     58,
-     12
+     55,
+     24
     ],
     [
      18,
@@ -180,24 +180,24 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Old oak",
      "x": 50,
      "y": 20,
-     "px": 55,
-     "py": 25
+     "px": 60,
+     "py": 27
     },
     {
      "title": "A river habitat",
      "landmark": "Stream",
      "x": 33,
      "y": 50,
-     "px": 25,
-     "py": 50
+     "px": 34,
+     "py": 40
     },
     {
      "title": "Ecosystem engineers",
      "landmark": "Beaver lodge",
      "x": 49,
      "y": 55,
-     "px": 48,
-     "py": 68
+     "px": 59,
+     "py": 61
     }
    ]
   },
@@ -213,23 +213,23 @@ window.ISLAND_GARDEN_DATA={
      "x": 28,
      "y": 20,
      "px": 50,
-     "py": 10
+     "py": 16
     },
     {
      "title": "Water on the move",
      "landmark": "Waterfall",
      "x": 58,
      "y": 48,
-     "px": 52,
-     "py": 40
+     "px": 54,
+     "py": 42
     },
     {
      "title": "Hidden communities",
      "landmark": "Forest floor",
      "x": 68,
      "y": 72,
-     "px": 55,
-     "py": 85
+     "px": 50,
+     "py": 93
     }
    ]
   },
@@ -308,16 +308,16 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Observatory",
      "x": 22,
      "y": 21,
-     "px": 18,
-     "py": 18
+     "px": 22,
+     "py": 24
     },
     {
      "title": "Visitors from space",
      "landmark": "Crater",
      "x": 70,
      "y": 55,
-     "px": 70,
-     "py": 28
+     "px": 67,
+     "py": 32
     },
     {
      "title": "A desert observatory",
@@ -373,7 +373,7 @@ window.ISLAND_GARDEN_DATA={
      "x": 34,
      "y": 28,
      "px": 25,
-     "py": 12
+     "py": 17
     },
     {
      "title": "Water under pressure",
@@ -404,8 +404,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Amethyst chamber",
      "x": 25,
      "y": 45,
-     "px": 22,
-     "py": 68
+     "px": 18,
+     "py": 62
     },
     {
      "title": "Minerals in solution",
@@ -413,7 +413,7 @@ window.ISLAND_GARDEN_DATA={
      "x": 37,
      "y": 66,
      "px": 30,
-     "py": 82
+     "py": 90
     },
     {
      "title": "Patterns in matter",
@@ -444,8 +444,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Lighthouse",
      "x": 60,
      "y": 10,
-     "px": 35,
-     "py": 26
+     "px": 70,
+     "py": 20
     },
     {
      "title": "Working with the tide",
@@ -516,8 +516,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Garden bridge",
      "x": 44,
      "y": 43,
-     "px": 35,
-     "py": 42
+     "px": 43,
+     "py": 46
     }
    ]
   },
@@ -532,8 +532,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Stone arrangement",
      "x": 54,
      "y": 35,
-     "px": 40,
-     "py": 38
+     "px": 42,
+     "py": 37
     },
     {
      "title": "A pause to breathe",
@@ -548,8 +548,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Raked sand",
      "x": 74,
      "y": 65,
-     "px": 35,
-     "py": 48
+     "px": 46,
+     "py": 46
     }
    ]
   },
@@ -612,8 +612,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Granary",
      "x": 70,
      "y": 26,
-     "px": 72,
-     "py": 13
+     "px": 64,
+     "py": 15
     }
    ]
   },
@@ -644,8 +644,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Waterwheel",
      "x": 34,
      "y": 78,
-     "px": 60,
-     "py": 78
+     "px": 48,
+     "py": 68
     }
    ]
   },
@@ -660,24 +660,24 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Rose arbor",
      "x": 54,
      "y": 64,
-     "px": 40,
-     "py": 75
+     "px": 54,
+     "py": 52
     },
     {
      "title": "Building a sentence",
      "landmark": "Garden path",
      "x": 44,
      "y": 58,
-     "px": 28,
-     "py": 52
+     "px": 24,
+     "py": 47
     },
     {
      "title": "A conversation grows",
      "landmark": "Garden bridge",
      "x": 75,
      "y": 60,
-     "px": 45,
-     "py": 64
+     "px": 83,
+     "py": 51
     }
    ]
   },
@@ -700,8 +700,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Lone tree",
      "x": 67,
      "y": 28,
-     "px": 7,
-     "py": 17
+     "px": 9,
+     "py": 20
     },
     {
      "title": "Light changes color",
@@ -724,8 +724,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Cascade",
      "x": 48,
      "y": 34,
-     "px": 15,
-     "py": 10
+     "px": 18,
+     "py": 15
     },
     {
      "title": "Patterns in rhythm",
@@ -756,8 +756,8 @@ window.ISLAND_GARDEN_DATA={
      "landmark": "Columned ruins",
      "x": 50,
      "y": 12,
-     "px": 28,
-     "py": 10
+     "px": 37,
+     "py": 17
     },
     {
      "title": "A city gathers",
@@ -765,7 +765,7 @@ window.ISLAND_GARDEN_DATA={
      "x": 51,
      "y": 43,
      "px": 55,
-     "py": 28
+     "py": 30
     },
     {
      "title": "Trade across the sea",
