@@ -42,13 +42,28 @@ test('Island-cut landscape interiors exist with byte counts and content hashes',
   }
 });
 
-test('Group worlds reference the approved square paintings in place, with painted orientation pairs still pending', () => {
+test('Group worlds pair the approved square paintings with the generated wide compositions', () => {
   for (const pair of assets.groups) {
-    assert.equal(pair.landscape, null);
+    for (const key of ['lush', 'sparse']) {
+      checkAsset(pair.portrait[key], base);
+      checkAsset(pair.landscape[key], base);
+    }
+  }
+  // Distinct portrait interior compositions landed on 2026-11-16 after the
+  // daily image limit reset; both orientations are now real painted pairs.
+  for (const pair of Object.values(assets.themes)) {
     for (const key of ['lush', 'sparse']) checkAsset(pair.portrait[key], base);
   }
-  // Distinct portrait interior compositions are the approved generation follow-up.
-  for (const pair of Object.values(assets.themes)) assert.equal(pair.portrait, null);
+});
+
+test('Portrait lesson anchors and wide group spots stay on the paintings', () => {
+  for (const t of Object.values(data.themes)) {
+    for (const l of t.lessons) { assert.ok(l.px >= 3 && l.px <= 97 && l.py >= 3 && l.py <= 97); }
+  }
+  for (const g of data.groups) {
+    assert.equal(g.wideSpots.length, g.themes.length);
+    for (const [x, y] of g.wideSpots) { assert.ok(x >= 3 && x <= 97 && y >= 3 && y <= 97); }
+  }
 });
 
 test('The app shell, orientation engine and floating interface are wired', () => {

@@ -12,6 +12,20 @@ window.ISLAND_GARDEN_DATA={
     "nature",
     "biology",
     "ocean"
+   ],
+   "wideSpots": [
+    [
+     75,
+     12
+    ],
+    [
+     32,
+     30
+    ],
+    [
+     82,
+     55
+    ]
    ]
   },
   {
@@ -22,6 +36,20 @@ window.ISLAND_GARDEN_DATA={
     "climate",
     "space",
     "geology"
+   ],
+   "wideSpots": [
+    [
+     38,
+     28
+    ],
+    [
+     15,
+     50
+    ],
+    [
+     75,
+     50
+    ]
    ]
   },
   {
@@ -32,6 +60,20 @@ window.ISLAND_GARDEN_DATA={
     "physics",
     "chemistry",
     "engineering"
+   ],
+   "wideSpots": [
+    [
+     68,
+     15
+    ],
+    [
+     15,
+     40
+    ],
+    [
+     88,
+     45
+    ]
    ]
   },
   {
@@ -42,6 +84,20 @@ window.ISLAND_GARDEN_DATA={
     "sport",
     "health",
     "mind"
+   ],
+   "wideSpots": [
+    [
+     38,
+     15
+    ],
+    [
+     18,
+     50
+    ],
+    [
+     72,
+     62
+    ]
    ]
   },
   {
@@ -52,6 +108,20 @@ window.ISLAND_GARDEN_DATA={
     "cooking",
     "economics",
     "mathematics"
+   ],
+   "wideSpots": [
+    [
+     45,
+     18
+    ],
+    [
+     18,
+     30
+    ],
+    [
+     72,
+     50
+    ]
    ]
   },
   {
@@ -62,6 +132,20 @@ window.ISLAND_GARDEN_DATA={
     "languages",
     "art",
     "music"
+   ],
+   "wideSpots": [
+    [
+     58,
+     12
+    ],
+    [
+     18,
+     45
+    ],
+    [
+     78,
+     50
+    ]
    ]
   },
   {
@@ -71,6 +155,16 @@ window.ISLAND_GARDEN_DATA={
    "themes": [
     "history",
     "technology"
+   ],
+   "wideSpots": [
+    [
+     25,
+     22
+    ],
+    [
+     72,
+     40
+    ]
    ]
   }
  ],
@@ -85,19 +179,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Reading tree rings",
      "landmark": "Old oak",
      "x": 50,
-     "y": 20
+     "y": 20,
+     "px": 55,
+     "py": 25
     },
     {
      "title": "A river habitat",
      "landmark": "Stream",
      "x": 33,
-     "y": 50
+     "y": 50,
+     "px": 25,
+     "py": 50
     },
     {
      "title": "Ecosystem engineers",
      "landmark": "Beaver lodge",
      "x": 49,
-     "y": 55
+     "y": 55,
+     "px": 48,
+     "py": 68
     }
    ]
   },
@@ -111,19 +211,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Life in layers",
      "landmark": "Emergent tree",
      "x": 28,
-     "y": 20
+     "y": 20,
+     "px": 50,
+     "py": 10
     },
     {
      "title": "Water on the move",
      "landmark": "Waterfall",
      "x": 58,
-     "y": 48
+     "y": 48,
+     "px": 52,
+     "py": 40
     },
     {
      "title": "Hidden communities",
      "landmark": "Forest floor",
      "x": 68,
-     "y": 72
+     "y": 72,
+     "px": 55,
+     "py": 85
     }
    ]
   },
@@ -137,19 +243,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "A reef is a city",
      "landmark": "Coral garden",
      "x": 38,
-     "y": 61
+     "y": 61,
+     "px": 70,
+     "py": 75
     },
     {
      "title": "The changing shore",
      "landmark": "Reef crest",
      "x": 70,
-     "y": 44
+     "y": 44,
+     "px": 70,
+     "py": 12
     },
     {
      "title": "Into the blue",
      "landmark": "Deep lagoon",
      "x": 49,
-     "y": 32
+     "y": 32,
+     "px": 40,
+     "py": 40
     }
    ]
   },
@@ -163,19 +275,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Ice keeps a record",
      "landmark": "Glacier",
      "x": 67,
-     "y": 33
+     "y": 33,
+     "px": 48,
+     "py": 40
     },
     {
      "title": "A world in thaw",
      "landmark": "Meltwater",
      "x": 69,
-     "y": 55
+     "y": 55,
+     "px": 75,
+     "py": 60
     },
     {
      "title": "Life at the edge",
      "landmark": "Tundra flowers",
      "x": 24,
-     "y": 69
+     "y": 69,
+     "px": 50,
+     "py": 90
     }
    ]
   },
@@ -189,19 +307,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Reading the night",
      "landmark": "Observatory",
      "x": 22,
-     "y": 21
+     "y": 21,
+     "px": 18,
+     "py": 18
     },
     {
      "title": "Visitors from space",
      "landmark": "Crater",
      "x": 70,
-     "y": 55
+     "y": 55,
+     "px": 70,
+     "py": 28
     },
     {
      "title": "A desert observatory",
      "landmark": "Plateau",
      "x": 32,
-     "y": 65
+     "y": 65,
+     "px": 50,
+     "py": 70
     }
    ]
   },
@@ -215,19 +339,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Layers of time",
      "landmark": "Strata wall",
      "x": 58,
-     "y": 32
+     "y": 32,
+     "px": 60,
+     "py": 25
     },
     {
      "title": "A river writes in rock",
      "landmark": "Canyon",
      "x": 39,
-     "y": 57
+     "y": 57,
+     "px": 70,
+     "py": 78
     },
     {
      "title": "Rock tells a story",
      "landmark": "Hoodoo column",
      "x": 69,
-     "y": 67
+     "y": 67,
+     "px": 48,
+     "py": 52
     }
    ]
   },
@@ -241,19 +371,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Heat beneath our feet",
      "landmark": "Lava fissure",
      "x": 34,
-     "y": 28
+     "y": 28,
+     "px": 25,
+     "py": 12
     },
     {
      "title": "Water under pressure",
      "landmark": "Geyser",
      "x": 57,
-     "y": 24
+     "y": 24,
+     "px": 40,
+     "py": 25
     },
     {
      "title": "Energy changes form",
      "landmark": "Hot spring",
      "x": 64,
-     "y": 67
+     "y": 67,
+     "px": 40,
+     "py": 48
     }
    ]
   },
@@ -267,19 +403,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "How crystals grow",
      "landmark": "Amethyst chamber",
      "x": 25,
-     "y": 45
+     "y": 45,
+     "px": 22,
+     "py": 68
     },
     {
      "title": "Minerals in solution",
      "landmark": "Mineral spring",
      "x": 37,
-     "y": 66
+     "y": 66,
+     "px": 30,
+     "py": 82
     },
     {
      "title": "Patterns in matter",
      "landmark": "Crystal cluster",
      "x": 75,
-     "y": 58
+     "y": 58,
+     "px": 40,
+     "py": 56
     }
    ]
   },
@@ -293,19 +435,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Strong by design",
      "landmark": "Basalt columns",
      "x": 50,
-     "y": 38
+     "y": 38,
+     "px": 45,
+     "py": 55
     },
     {
      "title": "Signals across water",
      "landmark": "Lighthouse",
      "x": 60,
-     "y": 10
+     "y": 10,
+     "px": 35,
+     "py": 26
     },
     {
      "title": "Working with the tide",
      "landmark": "Tide pool",
      "x": 28,
-     "y": 59
+     "y": 59,
+     "px": 25,
+     "py": 68
     }
    ]
   },
@@ -319,19 +467,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Effort and altitude",
      "landmark": "Summit ridge",
      "x": 53,
-     "y": 22
+     "y": 22,
+     "px": 40,
+     "py": 25
     },
     {
      "title": "Effort and recovery",
      "landmark": "Alpine meadow",
      "x": 40,
-     "y": 60
+     "y": 60,
+     "px": 35,
+     "py": 60
     },
     {
      "title": "Flow at altitude",
      "landmark": "Glacier stream",
      "x": 70,
-     "y": 64
+     "y": 64,
+     "px": 58,
+     "py": 68
     }
    ]
   },
@@ -345,19 +499,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "The rhythm of rest",
      "landmark": "Cherry walk",
      "x": 32,
-     "y": 36
+     "y": 36,
+     "px": 15,
+     "py": 30
     },
     {
      "title": "Systems in balance",
      "landmark": "Koi pond",
      "x": 57,
-     "y": 64
+     "y": 64,
+     "px": 45,
+     "py": 55
     },
     {
      "title": "Daily habits",
      "landmark": "Garden bridge",
      "x": 44,
-     "y": 43
+     "y": 43,
+     "px": 35,
+     "py": 42
     }
    ]
   },
@@ -371,19 +531,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Noticing attention",
      "landmark": "Stone arrangement",
      "x": 54,
-     "y": 35
+     "y": 35,
+     "px": 40,
+     "py": 38
     },
     {
      "title": "A pause to breathe",
      "landmark": "Moss knoll",
      "x": 45,
-     "y": 49
+     "y": 49,
+     "px": 58,
+     "py": 32
     },
     {
      "title": "Patterns of thought",
      "landmark": "Raked sand",
      "x": 74,
-     "y": 65
+     "y": 65,
+     "px": 35,
+     "py": 48
     }
    ]
   },
@@ -397,19 +563,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "From plant to plate",
      "landmark": "Herb beds",
      "x": 37,
-     "y": 62
+     "y": 62,
+     "px": 50,
+     "py": 62
     },
     {
      "title": "Oil and aroma",
      "landmark": "Olive grove",
      "x": 20,
-     "y": 48
+     "y": 48,
+     "px": 20,
+     "py": 55
     },
     {
      "title": "The kitchen as a lab",
      "landmark": "Farmhouse",
      "x": 65,
-     "y": 31
+     "y": 31,
+     "px": 35,
+     "py": 20
     }
    ]
   },
@@ -423,19 +595,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "What creates value",
      "landmark": "Wheat field",
      "x": 52,
-     "y": 23
+     "y": 23,
+     "px": 75,
+     "py": 25
     },
     {
      "title": "The flow of exchange",
      "landmark": "River port",
      "x": 69,
-     "y": 63
+     "y": 63,
+     "px": 75,
+     "py": 78
     },
     {
      "title": "Saving for later",
      "landmark": "Granary",
      "x": 70,
-     "y": 26
+     "y": 26,
+     "px": 72,
+     "py": 13
     }
    ]
   },
@@ -449,19 +627,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Following a contour",
      "landmark": "Rice terraces",
      "x": 50,
-     "y": 40
+     "y": 40,
+     "px": 50,
+     "py": 45
     },
     {
      "title": "Patterns and repetition",
      "landmark": "Seedling rows",
      "x": 75,
-     "y": 70
+     "y": 70,
+     "px": 78,
+     "py": 38
     },
     {
      "title": "Measuring a flow",
      "landmark": "Waterwheel",
      "x": 34,
-     "y": 78
+     "y": 78,
+     "px": 60,
+     "py": 78
     }
    ]
   },
@@ -475,19 +659,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Words that take root",
      "landmark": "Rose arbor",
      "x": 54,
-     "y": 64
+     "y": 64,
+     "px": 40,
+     "py": 75
     },
     {
      "title": "Building a sentence",
      "landmark": "Garden path",
      "x": 44,
-     "y": 58
+     "y": 58,
+     "px": 28,
+     "py": 52
     },
     {
      "title": "A conversation grows",
      "landmark": "Garden bridge",
      "x": 75,
-     "y": 60
+     "y": 60,
+     "px": 45,
+     "py": 64
     }
    ]
   },
@@ -501,19 +691,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "A living color wheel",
      "landmark": "Flower drifts",
      "x": 55,
-     "y": 60
+     "y": 60,
+     "px": 48,
+     "py": 52
     },
     {
      "title": "Balance in a frame",
      "landmark": "Lone tree",
      "x": 67,
-     "y": 28
+     "y": 28,
+     "px": 7,
+     "py": 17
     },
     {
      "title": "Light changes color",
      "landmark": "Pollinator wetland",
      "x": 15,
-     "y": 64
+     "y": 64,
+     "px": 30,
+     "py": 78
     }
    ]
   },
@@ -527,19 +723,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Hearing a pulse",
      "landmark": "Cascade",
      "x": 48,
-     "y": 34
+     "y": 34,
+     "px": 15,
+     "py": 10
     },
     {
      "title": "Patterns in rhythm",
      "landmark": "Cascade terraces",
      "x": 33,
-     "y": 67
+     "y": 67,
+     "px": 40,
+     "py": 45
     },
     {
      "title": "Why spaces echo",
      "landmark": "Resonance cliffs",
      "x": 73,
-     "y": 37
+     "y": 37,
+     "px": 75,
+     "py": 30
     }
    ]
   },
@@ -553,19 +755,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "Reading the remains",
      "landmark": "Columned ruins",
      "x": 50,
-     "y": 12
+     "y": 12,
+     "px": 28,
+     "py": 10
     },
     {
      "title": "A city gathers",
      "landmark": "Amphitheater",
      "x": 51,
-     "y": 43
+     "y": 43,
+     "px": 55,
+     "py": 28
     },
     {
      "title": "Trade across the sea",
      "landmark": "Harbor",
      "x": 73,
-     "y": 66
+     "y": 66,
+     "px": 75,
+     "py": 55
     }
    ]
   },
@@ -579,19 +787,25 @@ window.ISLAND_GARDEN_DATA={
      "title": "What is a network?",
      "landmark": "Root maze",
      "x": 28,
-     "y": 61
+     "y": 61,
+     "px": 28,
+     "py": 72
     },
     {
      "title": "Information finds a route",
      "landmark": "Tidal channels",
      "x": 65,
-     "y": 64
+     "y": 64,
+     "px": 70,
+     "py": 45
     },
     {
      "title": "Connected systems",
      "landmark": "Estuary island",
      "x": 70,
-     "y": 32
+     "y": 32,
+     "px": 55,
+     "py": 65
     }
    ]
   }

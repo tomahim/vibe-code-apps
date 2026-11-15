@@ -109,7 +109,8 @@
     $('markers').replaceChildren();
     if (!theme) {
       const g = data.groups[group];
-      const spots = g.spots || (g.themes.length === 2 ? [[29,42],[74,49]] : [[50,21],[23,57],[77,58]]);
+      const spots = (slotUsed === 'landscape' && g.wideSpots) ? g.wideSpots
+        : (g.spots || (g.themes.length === 2 ? [[29,42],[74,49]] : [[50,21],[23,57],[77,58]]));
       g.themes.forEach((key, index) => {
         const t = data.themes[key];
         const b = document.createElement('button'); b.className = 'map-marker';
@@ -121,16 +122,19 @@
       const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
       svg.setAttribute('viewBox','0 0 100 100'); svg.setAttribute('preserveAspectRatio','none');
       svg.classList.add('leaders'); $('markers').append(svg);
-      const labelSpots = [[21,18],[77,25],[51,91]];
+      const portrait = slotUsed === 'portrait';
+      const labelSpots = portrait ? [[14,16],[72,22],[50,90]] : [[21,18],[77,25],[51,91]];
       data.themes[theme].lessons.forEach((lesson, index) => {
         const b = document.createElement('button'); b.className = 'map-marker lesson';
         const [lx,ly] = labelSpots[index];
+        const ax = portrait && lesson.px !== undefined ? lesson.px : lesson.x;
+        const ay = portrait && lesson.py !== undefined ? lesson.py : lesson.y;
         b.style.cssText = 'left:' + lx + '%;top:' + ly + '%;--color:' + data.themes[theme].color;
         const line = document.createElementNS(svg.namespaceURI,'line');
         line.setAttribute('x1',lx); line.setAttribute('y1',ly);
-        line.setAttribute('x2',lesson.x); line.setAttribute('y2',lesson.y); svg.append(line);
+        line.setAttribute('x2',ax); line.setAttribute('y2',ay); svg.append(line);
         const point = document.createElementNS(svg.namespaceURI,'circle');
-        point.setAttribute('cx',lesson.x); point.setAttribute('cy',lesson.y); point.setAttribute('r','1'); svg.append(point);
+        point.setAttribute('cx',ax); point.setAttribute('cy',ay); point.setAttribute('r','1'); svg.append(point);
         b.innerHTML = '<div></div>'; b.firstChild.textContent = lesson.title;
         const small = document.createElement('span'); small.textContent = lesson.landmark; b.firstChild.append(small);
         b.setAttribute('aria-label', 'Open demo lesson ' + lesson.title + ' at ' + lesson.landmark);
