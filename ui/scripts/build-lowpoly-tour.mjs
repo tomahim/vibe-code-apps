@@ -11,3 +11,8 @@ await build({entryPoints:['src/apps/ecosystem-lowpoly/tour.js'],outfile:dir+'low
 
 await copyFile('src/apps/ecosystem-lowpoly/shapes.html',dir+'shapes.html');
 await build({entryPoints:['src/apps/ecosystem-lowpoly/shape-experiment.js'],outfile:dir+'shape-experiment.js',bundle:true,format:'iife',minify:true,target:'es2022',legalComments:'eof'});
+
+// Garden family preview: five landscape families in the real garden scene (Compact + focus).
+const famDir='public/artifact-assets/2026-11-15-garden-families/';await mkdir(famDir,{recursive:true});
+await copyFile('src/apps/ecosystem-lowpoly/families.html',famDir+'families.html');
+await build({entryPoints:['src/apps/ecosystem-lowpoly/families.js'],outfile:famDir+'families.js',bundle:true,format:'iife',minify:true,target:'es2022',legalComments:'eof'});
