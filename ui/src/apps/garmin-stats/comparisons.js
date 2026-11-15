@@ -18,7 +18,21 @@
 // - Mount Everest official height 8,848.86 m — Nepal/China 2020 survey
 //   https://www.reuters.com/article/idUSKBN28I18U/
 // - Kármán line 100 km — FAI definition of the edge of space
-// - Paris population ~2.1 million — INSEE
+// - Average Parisian: 7,071 steps/day (WeWard step-app users, 2024; Paris ranked
+//   first of French cities) - Le Parisien, 2024-07-25
+//   https://www.leparisien.fr/societe/sante/paris-nice-strasbourg-ces-villes-ou-lon-marche-le-plus-en-france-25-07-2024-KYY2UWTHBRD45GDOA5YREUJ2IU.php
+//   App users are a self-selected sample and other apps report other figures
+//   (Macadam 2023: 9,692), so this is a rough benchmark. It counts all-day
+//   steps, while the Garmin figure here only counts steps recorded during runs.
+// - Pizza slice: USDA FoodData Central "Fast Food, Pizza Chain, 14\" pizza,
+//   cheese topping, regular crust": 1 slice (1/8 pizza, 107 g) = 285 kcal
+//   https://fdc.nal.usda.gov/
+// - Meringue nest ~12 g = ~53 kcal (Sainsbury's meringue nests, per nest)
+//   https://www.sainsburys.co.uk/groceries/product/sainsburys-meringue-nests-x8-124g
+// - Double cream, 2 tablespoons (30 ml) = 140 kcal (Sainsbury's / Tesco labels)
+//   https://www.sainsburys.co.uk/groceries/product/sainsburys-double-cream-300ml
+// - Garmin activity calories include the resting (BMR) share for the activity
+//   time, so they are total kcal, not "extra" kcal
 // - Typical EV consumption ~15 kWh/100 km; 1 kcal = 0.001162 kWh
 
 const EARTH_CIRCUMFERENCE_KM = 40075;
@@ -35,8 +49,12 @@ const KARMAN_LINE_M = 100000;
 const WORK_WEEK_HOURS = 40;
 const SONG_MINUTES = 3.5;
 const FOOTBALL_MATCH_HOURS = 1.5;
-const PARIS_POPULATION = 2100000;
+const PARISIAN_STEPS_PER_DAY = 7071;
 const EV_KWH_PER_100KM = 15;
+const PIZZA_SLICE_KCAL = 285;
+const MERINGUE_NEST_KCAL = 53;
+const DOUBLE_CREAM_2_TBSP_KCAL = 140;
+const MERINGUE_CREAM_KCAL = MERINGUE_NEST_KCAL + DOUBLE_CREAM_2_TBSP_KCAL;
 const KCAL_TO_KWH = 0.001162;
 
 // viz kinds: "ring" (fraction of a circle), "route" (A→B bar, fraction may
@@ -216,11 +234,29 @@ export function buildComparisons({ totals, records, span_days: spanDays }) {
       group: "And everything else",
       cards: [
         {
-          value: steps / PARIS_POPULATION,
-          decimals: 1,
-          label: "steps for every Parisian",
-          caption: "About 2.1 million people live in Paris. You took more than three steps for each of them.",
-          source: "INSEE",
+          value: spanDays > 0 ? steps / (PARISIAN_STEPS_PER_DAY * spanDays) : 0,
+          decimals: 2,
+          label: "average Parisians' worth of walking",
+          caption: spanDays > 0
+            ? `Your steps recorded during runs, divided by what one average Parisian walks all day (about 7,071 steps) over the same ${Math.round(spanDays).toLocaleString("en")} days. Not like for like: your figure counts run steps only, theirs counts every step.`
+            : "Needs at least two days of runs to compare.",
+          source: "WeWard step-app users in Paris, 2024 (Le Parisien); steps as recorded by Garmin",
+          viz: { kind: "none" },
+        },
+        {
+          value: kcal / PIZZA_SLICE_KCAL,
+          decimals: 0,
+          label: "pizza slices, burned off",
+          caption: "One slice = 1/8 of a 14-inch cheese pizza (107 g, 285 kcal). Garmin's calorie figure for an activity includes the resting burn over that time, so this is a fun scale, not a diet plan.",
+          source: "USDA FoodData Central; kcal as recorded by Garmin",
+          viz: { kind: "none" },
+        },
+        {
+          value: kcal / MERINGUE_CREAM_KCAL,
+          decimals: 0,
+          label: "meringues with double cream",
+          caption: "One meringue nest (12 g, 53 kcal) plus 2 tablespoons of double cream (30 ml, 140 kcal) = about 193 kcal each. Rough store-label values; a home-made dessert will differ.",
+          source: "Sainsbury's / Tesco nutrition labels; kcal as recorded by Garmin",
           viz: { kind: "none" },
         },
         {
