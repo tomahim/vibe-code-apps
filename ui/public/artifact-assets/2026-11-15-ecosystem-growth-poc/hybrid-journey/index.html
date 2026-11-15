@@ -23,6 +23,7 @@
   <section class="theme-strip" id="themeStrip" aria-label="Themes in this group"></section>
   <section class="lesson-strip" id="lessonStrip" aria-label="Demo lessons" hidden></section>
   <footer>
+    <div class="scene-tools" role="group" aria-label="Landscape zoom"><span>Pinch / wheel to zoom · drag to explore</span><button id="zoomOut" aria-label="Zoom out">−</button><output id="zoomLevel" aria-label="Landscape zoom level">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomReset">Reset view</button></div>
     <p id="growthNotice" class="growth-notice">Growth artwork is a work in progress. Some scenes currently recolor rather than lose vegetation.</p>
     <div class="growth-head"><button id="play" aria-label="Play growth evolution" aria-pressed="false">&#9654;</button><div><strong id="growthName">A world awakening</strong><span id="growthCount">State 1 / 10</span></div><button id="motion" aria-pressed="true">Life on</button></div>
     <input id="growth" type="range" min="1" max="10" step="1" value="10" aria-label="Vegetation growth state">
@@ -37,6 +38,7 @@
 <script src="journey-assets.js"></script>
 <script src="patch-assets.js"></script>
 <script src="lesson-patches.js"></script>
+<script src="scene-viewport.js"></script>
 <script src="journey.js"></script>
 </body>
 </html>

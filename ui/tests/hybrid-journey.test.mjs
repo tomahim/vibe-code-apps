@@ -27,7 +27,7 @@ test('The new tab is separate, unloaded until selected, and the original phone c
 });
 test('Growth, motion, modal lessons and bounded caching are explicit',()=>{
  const html=read('index.html'),js=read('journey.js');
- assert.match(html,/id="growth"[^>]*min="1" max="10" step="1"/);assert.match(html,/id="lessonDialog"/);assert.match(js,/imageCache.size > 5/);assert.match(js,/1000\/30/);assert.match(js,/prefers-reduced-motion/);assert.match(js,/pointercancel/);assert.match(js,/token !== version/);
+ assert.match(html,/id="growth"[^>]*min="1" max="10" step="1"/);assert.match(html,/id="lessonDialog"/);assert.match(js,/imageCache.size > 5/);assert.match(js,/1000\/30/);assert.match(js,/prefers-reduced-motion/);assert.match(read('scene-viewport.js'),/pointercancel/);assert.match(js,/token !== version/);
 });
 test('Only the hashed artwork directory receives long-lived private caching',()=>{
  const config=fs.readFileSync('nginx/default.conf.template','utf8');
