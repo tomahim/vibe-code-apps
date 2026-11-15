@@ -8,3 +8,6 @@ const dir='public/artifact-assets/2026-11-15-ecosystem-growth-poc/low-poly/';awa
 await writeFile(dir+'tour-data.js','window.LOWPOLY_DATA='+JSON.stringify({worlds:data.worlds.map(({key,name,themes})=>({key,name,themes})),names})+';');
 await copyFile('src/apps/ecosystem-lowpoly/tour.html',dir+'tour.html');
 await build({entryPoints:['src/apps/ecosystem-lowpoly/tour.js'],outfile:dir+'low-poly-tour.js',bundle:true,format:'iife',minify:true,target:'es2022',legalComments:'eof'});
+
+await copyFile('src/apps/ecosystem-lowpoly/shapes.html',dir+'shapes.html');
+await build({entryPoints:['src/apps/ecosystem-lowpoly/shape-experiment.js'],outfile:dir+'shape-experiment.js',bundle:true,format:'iife',minify:true,target:'es2022',legalComments:'eof'});

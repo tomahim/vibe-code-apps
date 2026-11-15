@@ -20,3 +20,11 @@ From `ui`, run `node scripts/build-lowpoly-tour.mjs`, `npm test`, and `npm run b
 Checks include all twenty interiors in both modes at 390px, canonical group headings, lesson-chip collision/screen bounds, stage extremes and intermediate fractional stages, terrain picking, mouse drag, native two-touch pinch, reset/back, placeholder cards, embedded desktop/phone layout, reduced motion and lazy iframe unload.
 
 The local software-renderer map measurement after batching is roughly 480 draw calls / 163k triangles at full growth. Real-device FPS is not measured. The richer geometry is an intentional quality trade-off, not a performance guarantee. Rendering caps DPR at 1.5 and uses one 2048px shadow map. No paid assets or infrastructure changes.
+
+## Controlled theme-shape comparison
+
+The separate Little Grains shapes tab uses the existing illustrative seven-theme library, with 3-5 sample paths per theme. Both toggles share the same demo timeline and preserve theme/path, camera and target. Initial demo week 16 shows every sample path fully grown; move the timeline back to preview growth.
+
+The fresh-land scene baseline was checked against the current garden implementation: matching land species, geometry, seeded plant/grass scatter, lighting profiles and growth thresholds. This isolated demo carries the current minimum seedlings and next-lesson marker. It does not reproduce current account progress, live lesson UI, seasons or underwater themes. No live data or account integration.
+
+Only outer theme slab/hover geometry changes between the toggles. The changed slab traces the union of the original path-cell positions, with an outer margin, a faceted top, bevel and matching soil strata. Path cells, lesson trail platform, planted scenery and progress remain fixed. The original older public sample renderer is untouched. Reduced motion snaps growth immediately. Demo controls are not production-app changes.

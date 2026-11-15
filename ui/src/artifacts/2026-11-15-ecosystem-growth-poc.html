@@ -605,7 +605,7 @@
 }
 .il-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px;font-size:12px}.il-controls select{font:inherit;padding:7px 10px;border:1px solid #c8c6a5;border-radius:9px;background:#fff8e5;color:#34462c}#ilFrame{width:100%;flex:1;min-height:0;border:0;background:#29482c}.il-note{font-size:11px;text-align:center;padding:7px 12px;color:#665c48;background:#f5ecd7}#pane-interiorlab{min-height:65vh}@media(max-width:600px){body:has(#pane-interiorlab:not([hidden])) header h1,body:has(#pane-interiorlab:not([hidden])) header>p{display:none}body:has(#pane-interiorlab:not([hidden])) header{padding:6px 10px}#pane-interiorlab{height:auto;flex:1;min-height:0}.gt-viewtoggle{top:3.4rem;left:0.7rem;right:auto}.gt-stage.focusing .fw-crumb{display:none}.il-controls{padding:5px 10px}.il-controls strong{display:none}.il-controls select{width:100%;font-size:11px;padding:6px 8px}.il-note{font-size:9px;padding:5px 10px}}
 
-#pane-lowpoly,#pane-lowpolyall{height:calc(100vh - 158px);min-height:430px}#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]){display:flex}#lpFrame,#lpAllFrame{width:100%;height:100%;border:0;display:block;background:#f6efe3}@media(max-width:600px){body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden])) header h1,body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden])) header>p{display:none}body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden])) header{padding:6px 10px}#pane-lowpoly,#pane-lowpolyall{flex:1;min-height:0;height:auto}}
+#pane-lowpoly,#pane-lowpolyall,#pane-pathshapes{height:calc(100vh - 158px);min-height:430px}#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden]){display:flex}#lpFrame,#lpAllFrame,#shapeFrame{width:100%;height:100%;border:0;display:block;background:#f6efe3}@media(max-width:600px){body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header h1,body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header>p{display:none}body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header{padding:6px 10px}#pane-lowpoly,#pane-lowpolyall,#pane-pathshapes{flex:1;min-height:0;height:auto}}
 </style>
 </head>
 <body>
@@ -625,6 +625,7 @@
     <button class="etab" role="tab" data-tab="worlds" id="tab-worlds" aria-selected="false" tabindex="-1" aria-controls="pane-worlds">Five worlds<small>5 × 4 themes · deep zoom</small></button>
     <button class="etab" role="tab" data-tab="tour" id="tab-tour" aria-selected="false" tabindex="-1" aria-controls="pane-tour">World tour<small>glide · 5 × 4 themes</small></button>
   <button class="etab" role="tab" data-tab="lowpolyall" id="tab-lowpolyall" aria-selected="false" tabindex="-1" aria-controls="pane-lowpolyall">Low-poly map<small>20 themes · grow in 10 stages</small></button>
+  <button class="etab" role="tab" data-tab="pathshapes" id="tab-pathshapes" aria-selected="false" tabindex="-1" aria-controls="pane-pathshapes">Little Grains shapes<small>same garden · path-shaped lands</small></button>
   <button class="etab" role="tab" data-tab="lowpoly" id="tab-lowpoly" aria-selected="false" tabindex="-1" aria-controls="pane-lowpoly">Low-poly tour<small>5 × 4 themes · grow in 10 stages</small></button>
   <button class="etab" role="tab" data-tab="interiorlab" id="tab-interiorlab" aria-selected="false" tabindex="-1" aria-controls="pane-interiorlab">Interior lab<small>Nature · art comparisons</small></button>
 </div>
@@ -1032,6 +1033,7 @@
       <div class="pan-hint" id="gtHint">swipe or use ‹ › to glide · tap a territory to enter · inside: drag, scroll or pinch to zoom</div>
     </div>
   </section>
+  <section class="epane" id="pane-pathshapes" role="tabpanel" aria-labelledby="tab-pathshapes" hidden><iframe id="shapeFrame" title="Same Little Grains garden with path-shaped theme territories" loading="lazy" referrerpolicy="same-origin"></iframe></section>
   <section class="epane" id="pane-lowpolyall" role="tabpanel" aria-labelledby="tab-lowpolyall" hidden><iframe id="lpAllFrame" title="Low-poly open map of all twenty themes" loading="lazy" referrerpolicy="same-origin"></iframe></section>
   <section class="epane" id="pane-lowpoly" role="tabpanel" aria-labelledby="tab-lowpoly" hidden><iframe id="lpFrame" title="Low-poly learning-first world tour" loading="lazy" referrerpolicy="same-origin"></iframe></section>
   <section class="epane" id="pane-interiorlab" role="tabpanel" aria-labelledby="tab-interiorlab" hidden>
@@ -6460,6 +6462,7 @@ three/build/three.module.js:
     interiorlab: document.getElementById("pane-interiorlab"),
     lowpoly: document.getElementById("pane-lowpoly"),
     lowpolyall: document.getElementById("pane-lowpolyall"),
+    pathshapes: document.getElementById("pane-pathshapes"),
   };
   var inited = { illustrated: true, world3d: false, hybrid: false, grand: false, painted: false, connected: false, worlds: false, tour: false };
   var mobileExperiment = document.getElementById("mobileExperiment");
@@ -6472,6 +6475,8 @@ three/build/three.module.js:
   function activate(name, focus) {
     if (!panes[name]) return;
     var leaving = active;
+    if(leaving==='pathshapes'&&name!==leaving)document.getElementById('shapeFrame').src='about:blank';
+    if(name==='pathshapes'&&name!==leaving)document.getElementById('shapeFrame').src='/artifact-assets/2026-11-15-ecosystem-growth-poc/low-poly/shapes.html';
     if(leaving==="lowpolyall" && name!==leaving)document.getElementById('lpAllFrame').src='about:blank';
     if(name==="lowpolyall" && name!==leaving)document.getElementById('lpAllFrame').src='/artifact-assets/2026-11-15-ecosystem-growth-poc/low-poly/tour.html?mode=atlas';
     if(leaving==="lowpoly" && name!==leaving)document.getElementById('lpFrame').src='about:blank';
