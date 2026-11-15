@@ -8,6 +8,9 @@
   const life = $('life'), live = life.getContext('2d');
   const painting = $('painting'), landscape = $('landscape');
   window.SceneTapGuard.install(landscape);
+  const viewport=window.SceneViewport.install({root:landscape,layer:painting,
+    changed:()=>resize(),zoomIn:$('zoomIn'),zoomOut:$('zoomOut'),reset:$('zoomReset'),level:$('zoomLevel'),
+    swipe:direction=>{if(!theme)go(group+direction);}});
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const names = ['Sparse / dormant', 'First seedlings', 'Taking root', 'Young shoots', 'A little greener', 'Growing together', 'Canopies return', 'A thriving habitat', 'Almost in bloom', 'Full ecosystem'];
   let group = 0, theme = null, state = 10, version = 0, current = null;
@@ -52,7 +55,7 @@
     landscape.classList.toggle('patch-study',patches());
     $('back').hidden = !theme; $('interiorTitle').hidden = !theme;
     $('themeStrip').hidden = !!theme; $('lessonStrip').hidden = !theme;
-    $('interactionHint').textContent = theme ? 'Tap a lesson marker · arrows change groups' : 'Swipe to explore · tap a theme to step inside';
+    $('interactionHint').textContent = theme ? 'Pinch to zoom · drag when zoomed · tap a lesson' : 'Swipe at 100% · pinch to zoom · tap a theme';
     landscape.classList.toggle('interior', !!theme);
     if (theme) { $('interiorTitle').querySelector('h1').textContent = data.themes[theme].name; $('interiorTitle').querySelector('p').textContent = 'Sample lessons rooted in the scenery'; }
   }
@@ -97,6 +100,7 @@
   }
   async function loadView() {
     const token = ++version;
+    viewport.reset();
     current = null; $('loadState').hidden = false; $('loadState').textContent = 'Preparing this little world...';
     $('markers').style.visibility = 'hidden'; art.style.opacity = '.3';
     updateHead(); markers(); resize();
@@ -137,7 +141,7 @@
     const w = Math.max(1, Math.min(1400, Math.round(r.width * dpr)));
     const h = Math.max(1, Math.round(w * r.height / Math.max(1, r.width)));
     if (art.width !== w || art.height !== h) { art.width = life.width = composite.width = w; art.height = life.height = composite.height = h; }
-    render(); drawLife(performance.now());
+    viewport.reflow(); render(); drawLife(performance.now());
   }
   function revealMask(progress) {
     mask.width = 192; mask.height = 192;
@@ -234,14 +238,10 @@
     if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;
     if(e.key==='ArrowLeft'){e.preventDefault();go(group-1);}if(e.key==='ArrowRight'){e.preventDefault();go(group+1);}
   });
-  let down=null,multiSwipe=false;const swipePointers=new Set();
-  landscape.addEventListener('pointerdown',e=>{swipePointers.add(e.pointerId);if(swipePointers.size>1){multiSwipe=true;down=null;return;}if(e.target.closest('button'))return;down={x:e.clientX,y:e.clientY,id:e.pointerId};});
-  document.addEventListener('pointerup',e=>{if(!swipePointers.has(e.pointerId))return;swipePointers.delete(e.pointerId);const multi=multiSwipe;if(!swipePointers.size)multiSwipe=false;if(multi||!down||e.pointerId!==down.id){down=null;return;}const dx=e.clientX-down.x,dy=e.clientY-down.y;down=null;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.5)go(group+(dx<0?1:-1));});
-  document.addEventListener('pointercancel',e=>{if(!swipePointers.has(e.pointerId))return;swipePointers.delete(e.pointerId);down=null;if(!swipePointers.size)multiSwipe=false;});
   new ResizeObserver(resize).observe(landscape);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopReplay();});
   window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);stopReplay();imageCache.clear();});
   // Testable state only. No persistence or cross-frame access is needed.
-  window.hybridJourneyState=()=>({group,theme,state,patches:patches(),lessonProgress:patches()?window.HybridLessonPatches.progress(state):null,ready:!!current,cachedImages:imageCache.size,renderMs,fps,moving});
+  window.hybridJourneyState=()=>({group,theme,state,viewport:viewport.state(),patches:patches(),lessonProgress:patches()?window.HybridLessonPatches.progress(state):null,ready:!!current,cachedImages:imageCache.size,renderMs,fps,moving});
   loadView();raf=requestAnimationFrame(animate);
 })();
