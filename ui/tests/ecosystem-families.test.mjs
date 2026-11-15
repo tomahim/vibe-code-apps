@@ -14,10 +14,10 @@ test('five proposed families of four themes cover the whole catalog exactly once
 test('every family hex gets a finite center beside its siblings',()=>{
  assert.equal(FAMILY_CENTERS.length,THEMES.length);
  FAMILY_CENTERS.forEach((c,ti)=>{assert.ok(c&&Number.isFinite(c[0])&&Number.isFinite(c[1]),`center ${ti}`);});
- // Hexes inside a family share the compact spacing and never overlap.
+ // Hexes inside a family keep visible breathing room and never overlap (bigger slabs, wider slots).
  FAMILY_GROUPS.forEach(g=>{
   const pts=g.themes.map(ti=>FAMILY_CENTERS[ti]);
-  pts.forEach((a,i)=>pts.forEach((b,j)=>{if(j>i){const d=Math.hypot(a[0]-b[0],a[1]-b[1]);assert.ok(d>2.5&&d<5.5,`${g.id} spacing ${d}`);}}));
+  pts.forEach((a,i)=>pts.forEach((b,j)=>{if(j>i){const d=Math.hypot(a[0]-b[0],a[1]-b[1]);assert.ok(d>2.5&&d<6.6,`${g.id} spacing ${d}`);}}));
  });
 });
 
