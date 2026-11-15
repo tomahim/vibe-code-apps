@@ -1,0 +1,26 @@
+[
+  {
+    "theme": "ocean",
+    "orientation": "landscape",
+    "prompt": "Generate a new DISTINCT wide landscape 16:9 companion composition to the reference portrait, NOT a crop, resize or rotated version. Request 2304x1296 pixels, minimum short edge1200. Match its fine painted storybook style, soft upper-left lighting, color palette, slightly elevated three-quarter view and craggy textured natural cliff base darker beneath. Arrange the entire floating island horizontally with organic coastlines and comfortable8-10% margins. Ocean, coral atoll lagoon with luminous turquoise water, palms and mangrove-root islets. Three landmarks: Coral garden, Reef crest, Deep lagoon. Place a rich coral garden at left around(25%,60%), a pale winding reef crest with breaking white surf at right around(75%,48%), and a distinct generous deep-blue lagoon in middle-back around(50%,35%). All three landmarks must be large, clearly separated and visibly present. One coherent natural landscape, not separate panels. Lush ecosystem. Single soft blurred contact shadow beneath. TRUE transparent background (not cream, not checkerboard), including margins, because app places the island on exact #f3e8d0 paper. No sky outside island. No rectangular edges, smooth skirt, text, labels, frames, UI or watermarks. ONE artwork only.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "theme": "nature",
+    "orientation": "landscape",
+    "prompt": "Generate a new DISTINCT wide landscape 16:9 companion composition to the reference portrait, NOT a crop, resize or rotated version. Request 2304x1296 pixels, minimum short edge1200. Match its fine painted storybook style, soft upper-left lighting, color palette, slightly elevated three-quarter view and craggy textured natural cliff base darker beneath. Arrange the entire floating island horizontally with organic coastlines and comfortable8-10% margins. Nature, temperate broadleaf forest dominated by a magnificent old oak, mossy ground, ferns and flowers, a winding clear stream and a beaver lodge. Three landmarks: Old oak, Stream, Beaver lodge. Place the majestic Old oak on the left around(28%,35%), winding clear Stream through center around(52%,58%), and visibly recognizable Beaver lodge of interwoven sticks on right around(75%,65%). All three landmarks must be large, clearly separated and visibly present. One coherent natural landscape, not separate panels. Lush ecosystem. Single soft blurred contact shadow beneath. TRUE transparent background (not cream, not checkerboard), including margins, because app places the island on exact #f3e8d0 paper. No sky outside island. No rectangular edges, smooth skirt, text, labels, frames, UI or watermarks. ONE artwork only.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "theme": "ocean",
+    "orientation": "portrait",
+    "prompt": "Precisely edit the reference: preserve the whole island composition, camera, painted style, light, detail, landmarks and their positions. Remove ONLY the warm cream background to true transparent alpha. Retain the single soft contact shadow, painted as semitransparent alpha. Do not change island artwork. Output portrait exactly 3:4, request 1536x2048 pixels, minimum short edge1200. TRUE transparent background (not cream, not checkerboard), including margins, because app places the island on exact #f3e8d0 paper. No sky outside island. No rectangular edges, smooth skirt, text, labels, frames, UI or watermarks. ONE artwork only.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "theme": "nature",
+    "orientation": "portrait",
+    "prompt": "Precisely edit the reference: preserve the whole island composition, camera, painted style, light, detail, landmarks and their positions. Remove ONLY the warm cream background to true transparent alpha. Retain the single soft contact shadow, painted as semitransparent alpha. Do not change island artwork. Output portrait exactly 3:4, request 1536x2048 pixels, minimum short edge1200. TRUE transparent background (not cream, not checkerboard), including margins, because app places the island on exact #f3e8d0 paper. No sky outside island. No rectangular edges, smooth skirt, text, labels, frames, UI or watermarks. ONE artwork only.",
+    "generator": "built-in imagegen"
+  }
+]
