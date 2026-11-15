@@ -41,4 +41,7 @@
 
 @media(max-height:450px) and (min-width:601px){.journey-head>p{display:none}.lesson-strip{top:90px}}
 
-#interiorTitle{background:#fffdf7e8;border-radius:9px;padding:5px 8px;pointer-events:none}
+#interiorTitle{background:#fffdf7e8;border-radius:9px;padding:2px 8px;pointer-events:none}
+
+/* The mode switch has its own fixed row beneath the short title. */
+#interiorTitle p{display:none}

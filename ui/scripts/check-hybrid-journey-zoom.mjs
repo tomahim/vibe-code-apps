@@ -32,6 +32,7 @@ try{for(const engine of (process.env.ZOOM_ENGINE?[process.env.ZOOM_ENGINE]:['chr
    if(mode==='painted'){await f.locator('#paintedNature').click();await ready();}
    if(mode==='biology'){await f.locator('#back').click();await ready();await f.locator('#themeStrip button').nth(1).click();await ready();}
    if(mode==='patches')check((await state()).patches,'Nature patches selected');
+   if(mode==='painted'||mode==='patches'){const title=await f.locator('#interiorTitle').boundingBox(),modes=await f.locator('#natureModes').boundingBox();check(title.y+title.height<=modes.y,'fixed title clears the Nature mode switch');}
    if(mode==='biology')check(!(await state()).patches&&!!(await state()).theme,'non-Nature interior');
    await f.locator('#zoomReset').click();
    const before=await f.locator('#painting').boundingBox(),head=await f.locator('.journey-head').boundingBox(),foot=await f.locator('footer').boundingBox();
