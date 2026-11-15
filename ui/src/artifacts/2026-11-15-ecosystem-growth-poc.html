@@ -594,6 +594,15 @@
     .gt-stage.viewing-3d .fw-crumb { display: none; }
     .gt-stage.viewing-3d .fw-caption { top: auto; bottom: 0.5rem; }
   }
+
+.mobile-experiment { display:none; }
+@media(max-width:600px){
+  header { padding:0.5rem 0.75rem; }
+  header h1 { font-size:1.35rem; }
+  .etabs { display:none; }
+  .mobile-experiment { display:block; margin:0.45rem auto 0; max-width:100%; width:17rem; border:1px solid #d8c9a9; border-radius:0.7rem; padding:0.5rem 0.7rem; background:var(--pill); color:var(--ink); font:inherit; font-size:0.85rem; }
+  .gt-stage.viewing-3d { flex:1!important; height:auto!important; min-height:0; }
+}
 </style>
 </head>
 <body>
@@ -613,7 +622,7 @@
     <button class="etab" role="tab" data-tab="worlds" id="tab-worlds" aria-selected="false" tabindex="-1" aria-controls="pane-worlds">Five worlds<small>5 × 4 themes · deep zoom</small></button>
     <button class="etab" role="tab" data-tab="tour" id="tab-tour" aria-selected="false" tabindex="-1" aria-controls="pane-tour">World tour<small>glide · 5 × 4 themes</small></button>
   </div>
-</header>
+<select class="mobile-experiment" id="mobileExperiment" aria-label="Rendering experiment"></select></header>
 <main class="emain">
   <section class="epane" id="pane-illustrated" role="tabpanel" aria-labelledby="tab-illustrated">
 
@@ -6435,11 +6444,15 @@ three/build/three.module.js:
     tour: document.getElementById("pane-tour"),
   };
   var inited = { illustrated: true, world3d: false, hybrid: false, grand: false, painted: false, connected: false, worlds: false, tour: false };
+  var mobileExperiment = document.getElementById("mobileExperiment");
+  tabs.forEach(function(t){var o=document.createElement("option");o.value=t.dataset.tab;o.textContent=t.childNodes[0].textContent.trim();mobileExperiment.appendChild(o);});
+  mobileExperiment.addEventListener("change",function(){activate(this.value);});
   var active = "illustrated";
   function activate(name, focus) {
     if (!panes[name]) return;
     var leaving = active;
     active = name;
+    mobileExperiment.value = name;
     Object.keys(panes).forEach(function (k) {
       panes[k].hidden = k !== name;
     });

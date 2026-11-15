@@ -597,7 +597,7 @@ export function create(opts) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0xd8e4d4, 34, 120);
 
-  const camera = new THREE.PerspectiveCamera(55, W() / H(), 0.1, 400);
+  const camera = new THREE.PerspectiveCamera(W()/H()<1?65:55, W() / H(), 0.1, 400);
 
   const sun = new THREE.DirectionalLight(0xffecd0, 2.0);
   sun.position.set(26, 40, 22);
@@ -633,11 +633,11 @@ export function create(opts) {
   // default framing mirrors the painted close-up: elevated view across the
   // clearing, pond left, ancient tree right, forest wall and ridges behind.
   const ZONE_R = 22;
-  const HOME = { az: 0.15, pol: 0.90, dist: 33, tx: -3, ty: 1.6, tz: -4 };
+  const HOME = { az: 0.15, pol: 0.90, dist: W()/H()<1?40:33, tx: -3, ty: 1.6, tz: -4 };
   const target = new THREE.Vector3(HOME.tx, HOME.ty, HOME.tz);
   const cam = { az: HOME.az, pol: HOME.pol, dist: HOME.dist };
   const camGoal = { az: cam.az, pol: cam.pol, dist: cam.dist, tx: target.x, ty: target.y, tz: target.z };
-  const MIN_D = 4, MAX_D = 34, MIN_P = 0.55, MAX_P = 1.38;
+  const MIN_D = 4, MAX_D = 60, MIN_P = 0.55, MAX_P = 1.38;
 
   const ray = new THREE.Raycaster();
   const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -1.0);
@@ -747,6 +747,7 @@ export function create(opts) {
       const w = W(), h = H();
       if (!w || !h) return;
       camera.aspect = w / h;
+      camera.fov = w/h<1?65:55;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     },
