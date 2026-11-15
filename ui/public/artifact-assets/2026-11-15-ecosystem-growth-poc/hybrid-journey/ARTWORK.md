@@ -26,3 +26,15 @@ Nature now defaults to a separate lesson-patch study. The original wide painted 
 - Patch percentages mean added planting/foliage density, not tree age or coverage of the whole base. Existing sparse scrub is not removed.
 - Nine images total roughly 485 KiB encoded and 4.6 MiB decoded RGBA. They load on the first patch visit, share one cached promise and stay decoded for that iframe session. The performance panel reports this separately from the five-image painting cache. No real-phone speedup is claimed.
 - This is a limited composition study. It has depth sorting by ground position but no matching contact-shadow or foreground-occlusion layers, and no authored sapling-to-mature stages. The separate sparse-painting finishing pass remains necessary for the ordinary painted interiors.
+
+## Ocean island silhouette trial
+
+The Ocean interior trials the floating-diorama shape he picked on 2026-11-15: the
+rectangular sea border is gone. The approved lagoon painting is cut to an irregular
+coastline silhouette with a rock-toned cliff skirt sampled from its own shoreline
+colours and a soft contact shadow, floating on the page paper. The same silhouette
+applies to the lush and computed dormant endpoints, so growth compositing is
+unchanged. Generated offline by `island-mask.py` (content-hashed WebP, same byte
+budget); no new image generation. The overlay also gained a gull squadron, two
+wheeling gulls, sun glints and a gliding ray on this theme only. Other interiors
+keep their framed paintings until he judges this trial.
