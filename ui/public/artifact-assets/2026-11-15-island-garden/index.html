@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Island Garden — app-style PoC</title>
+<link rel="stylesheet" href="island.css">
+</head>
+<body>
+<main id="app">
+  <div id="stage" aria-label="Interactive painted island">
+    <div id="painting"><canvas id="art" aria-hidden="true"></canvas><canvas id="life" aria-hidden="true"></canvas><div id="markers"></div></div>
+    <div class="load-state" id="loadState" role="status">Preparing this little world...</div>
+  </div>
+
+  <header id="brand">
+    <div class="brand-mark" aria-hidden="true">C</div>
+    <div class="brand-text"><strong>Island Garden</strong><small>The learning garden · app PoC</small></div>
+    <p class="brand-tag">Grow a little, every day</p>
+  </header>
+
+  <aside id="panel" aria-label="Themes">
+    <p class="eyebrow">Your learning garden</p>
+    <h1>The Garden</h1>
+    <p class="panel-blurb">Choose a theme, then a learning path. Every card you read helps your garden grow.</p>
+    <div id="groupList"></div>
+    <p class="pair-note" id="pairNote"></p>
+  </aside>
+
+  <div id="themeChip" hidden><strong></strong><small></small></div>
+  <button id="back" hidden>&#8592; Back to the world</button>
+
+  <div id="growthDock" role="group" aria-label="Growth and view">
+    <button id="play" aria-label="Play growth evolution" aria-pressed="false">&#9654;</button>
+    <div class="growth-main">
+      <div class="growth-head"><strong id="growthName">Full ecosystem</strong><span id="growthCount">State 10 / 10</span></div>
+      <input id="growth" type="range" min="1" max="10" step="1" value="10" aria-label="Vegetation growth state">
+    </div>
+    <div class="scene-tools">
+      <button id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <output id="zoomLevel" aria-label="Zoom level">100%</output>
+      <button id="zoomIn" aria-label="Zoom in">+</button>
+      <button id="zoomReset">Reset</button>
+    </div>
+  </div>
+
+  <nav id="bottomNav" aria-label="Themes"></nav>
+
+  <dialog id="lessonDialog"><div><button class="close" aria-label="Close lesson">&#10005;</button><span class="eyebrow">Demo lesson</span><h2 id="lessonTitle"></h2><p id="lessonLandmark"></p><p>This is a sample lesson stop. In the app, this would open a short lesson, a question, and the next step through this landscape.</p><button class="done">Back to the garden</button></div></dialog>
+  <p class="sr-only" aria-live="polite" id="announcement"></p>
+</main>
+<script src="scene-tap-guard.js"></script>
+<script src="scene-viewport.js"></script>
+<script src="island-data.js"></script>
+<script src="island-assets.js"></script>
+<script src="island.js"></script>
+</body>
+</html>

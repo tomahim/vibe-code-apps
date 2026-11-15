@@ -1,0 +1,6 @@
+{
+  "title": "Island Garden — App-Style PoC",
+  "description": "The twenty-theme learning garden as floating island dioramas in an app shell: full-screen painted canvas by default with the interface floating over it - Little Grains-style header, learning-context panel on desktop, bottom navigation on mobile, ten-state growth slider, demo lesson stops rooted in the scenery, and viewport-shape-aware artwork that swaps compositions on rotation or resize (distinct portrait and wide compositions in progress).",
+  "date": "2026-11-15",
+  "tags": ["illustration", "ecosystem", "interactive", "app", "poc"]
+}
