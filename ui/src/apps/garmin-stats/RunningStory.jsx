@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchRunning } from "./api.js";
 import { buildComparisons } from "./comparisons.js";
-import { formatInt, formatPace, formatDate } from "./format.js";
+import { formatInt, formatKm, formatPace, formatDate } from "./format.js";
 
 const REDUCED_MOTION =
   typeof window !== "undefined" &&
@@ -255,6 +255,71 @@ const CARD_PALETTES = [
   "linear-gradient(135deg, #134e5e 0%, #71b280 100%)",
 ];
 
+/* The five biggest step days: a ranked podium list. Bars grow and numbers
+   count up when the section scrolls into view. Steps are recorded-run steps
+   only, never a full-day count - the note under the list says so. */
+function TopStepDays({ days }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(REDUCED_MOTION);
+
+  useEffect(() => {
+    if (REDUCED_MOTION) return undefined;
+    const node = ref.current;
+    if (!node) return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  if (!days.length) return null;
+  const max = days[0].steps || 1;
+
+  return (
+    <section className="gr-topdays" ref={ref}>
+      <p className="gr-group-title">Your biggest step days</p>
+      <ol className="gr-topdays-list">
+        {days.map((day, i) => (
+          <li className={`gr-topday${i === 0 ? " gr-topday--first" : ""}`} key={day.date}>
+            <span className={`gr-topday-rank gr-topday-rank--${i + 1}`} aria-label={`Rank ${i + 1}`}>
+              {i + 1}
+            </span>
+            <div className="gr-topday-body">
+              <div className="gr-topday-row">
+                <span className="gr-topday-date">{formatDate(day.date)}</span>
+                <span className="gr-topday-steps">
+                  <CountUp value={day.steps} />
+                  <span className="gr-topday-steps-unit"> steps</span>
+                </span>
+              </div>
+              <div className="gr-topday-track" aria-hidden="true">
+                <div
+                  className="gr-topday-fill"
+                  style={{ width: visible ? `${Math.max((day.steps / max) * 100, 4)}%` : "0%" }}
+                />
+              </div>
+              <p className="gr-topday-detail">
+                {formatKm(day.km)} running{day.runs > 1 ? ` across ${day.runs} runs` : ""}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p className="gr-topdays-note">
+        Steps are only counted while a run or trail run is being recorded, so the rest of each
+        day's walking is not in here.
+      </p>
+    </section>
+  );
+}
+
 function ComparisonCard({ card, index }) {
   const hasViz = card.viz && card.viz.kind !== "none";
   return (
@@ -333,6 +398,8 @@ export default function RunningStory() {
           </div>
         </section>
       ))}
+
+      <TopStepDays days={data.top_step_days || []} />
 
       <section className="gr-outro">
         <p className="gr-outro-big">And the story is still being written.</p>

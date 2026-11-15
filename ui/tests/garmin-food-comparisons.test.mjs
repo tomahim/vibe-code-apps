@@ -34,15 +34,9 @@ test("food cards are zero, not NaN, without calorie data", () => {
   for (const c of empty) assert.equal(c.value, 0);
 });
 
-test("people-equivalent card divides run steps by Paris steps/day over the span", () => {
-  const card = cards().find((c) => c.label.startsWith("average Parisians"));
-  assert.equal(card.value, 1_000_000 / (7071 * 730));
-  assert.match(card.caption, /run steps only/);
-  assert.match(card.source, /WeWard/);
-  assert.ok(!cards().some((c) => /steps for every Parisian/.test(c.label)));
-});
-
-test("people-equivalent card is 0 without a span", () => {
-  const card = buildComparisons({ ...synthetic, span_days: 0 }).flatMap((g) => g.cards).find((c) => c.label.startsWith("average Parisians"));
-  assert.equal(card.value, 0);
+test("the Parisian step benchmark comparison stays removed", () => {
+  // Run-only steps vs an all-day benchmark read as like-for-like; replaced
+  // by the top-5 step days section fed by the API's top_step_days.
+  assert.ok(!cards().some((c) => /Parisian/.test(c.label)));
+  assert.ok(!cards().some((c) => /Parisian/.test(c.caption || "")));
 });

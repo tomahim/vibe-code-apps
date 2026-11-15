@@ -71,6 +71,13 @@ for (const [i, card] of [[0, cards[0]], [3, cards[3]], [8, cards[8]], [13, cards
   await page.screenshot({ path: `${OUT}/07-story-card-${i}.png` });
 }
 
+const topDays = await page.$(".gr-topdays");
+if (topDays) {
+  await topDays.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(2200);
+  await page.screenshot({ path: `${OUT}/07b-story-top-step-days.png` });
+}
+
 // dashboard year table
 await page.click('.garmin-tab:text-is("Overall stats")');
 await page.waitForSelector('.gs-yeartable', { timeout: 20000 });
