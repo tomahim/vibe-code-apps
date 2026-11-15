@@ -33,7 +33,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #7e9a67;outline-offse
 
 #panel{position:absolute;z-index:6;left:18px;top:96px;width:262px;max-height:calc(100% - 220px);
   overflow:auto;background:#fffdf7d9;backdrop-filter:blur(6px);border:1px solid #e4d8bf;
-  border-radius:16px;padding:16px;box-shadow:0 4px 24px #30291422}
+  border-radius:16px;padding:16px 16px 28px;box-shadow:0 4px 24px #30291422}
 #panel .eyebrow{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:650;color:var(--muted);margin:0}
 #panel h1{font:700 22px var(--serif);margin:4px 0 6px}
 #panel .panel-blurb{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 12px}
@@ -101,14 +101,15 @@ dialog .close{position:absolute;right:12px;top:12px;border-radius:50%;width:28px
 dialog .done{padding:10px 15px;border-radius:9px;background:#e1e8d4;font-size:12px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0)}
 
-@media(max-width:700px){
+@media(max-width:700px),(max-height:560px){
   #brand{padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top))}
   #brand .brand-text strong{font-size:15px}
   #brand .brand-tag{display:none}
   #panel{display:none}
-  #back{top:56px;left:12px;font-size:10px;padding:8px 10px}
-  #themeChip{top:52px;padding:6px 12px}
-  #themeChip strong{font-size:13px}
+  #back{top:52px;left:12px;font-size:10px;padding:7px 10px}
+  #themeChip{top:50px;left:auto;right:12px;transform:none;padding:5px 11px;max-width:calc(100% - 150px)}
+  #themeChip strong{font-size:12px}
+  #themeChip small{font-size:8px}
   #growthDock{bottom:64px;width:calc(100% - 24px);padding:8px 10px;gap:8px;border-radius:14px}
   .scene-tools button{min-width:26px;height:26px;font-size:12px}
   #bottomNav{display:flex;position:absolute;z-index:6;left:0;right:0;bottom:0;gap:6px;
@@ -121,9 +122,5 @@ dialog .done{padding:10px 15px;border-radius:9px;background:#e1e8d4;font-size:12
   .map-marker::after{height:17px}
   .map-marker.lesson{font-size:9px;max-width:115px;padding:5px 7px}
   .map-marker.lesson span{font-size:7px}
-}
-@media(max-height:520px) and (min-width:701px){
-  #panel{top:64px;max-height:calc(100% - 150px)}
-  #growthDock{bottom:10px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}

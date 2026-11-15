@@ -184,9 +184,10 @@
     const b = stage.getBoundingClientRect();
     const picked = current ? {w: current.lush.naturalWidth, h: current.lush.naturalHeight} : null;
     const entry = picked || (() => { const p = pickEntry(); return {w: p.entry.lush.width, h: p.entry.lush.height}; })();
-    const narrow = b.width <= 700;
-    const topClear = narrow ? 100 : 64;
-    const bottomClear = narrow ? 150 : 100;
+    const compact = b.height <= 560 && b.width > 700; // short landscape windows
+    const narrow = b.width <= 700 || compact;
+    const topClear = narrow ? (compact ? 92 : 100) : 64;
+    const bottomClear = narrow ? (compact ? 128 : 150) : 100;
     const availW = Math.max(1, b.width * (narrow ? 0.98 : 0.9));
     const availH = Math.max(1, b.height - topClear - bottomClear);
     const scale = Math.min(availW / entry.w, availH / entry.h);
