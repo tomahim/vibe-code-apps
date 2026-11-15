@@ -41,7 +41,7 @@ function ArtifactViewer({ artifact }) {
       <span>DESIGN EXPERIMENT</span>
     </header>
     {failed ? <div className="artifact-empty" role="alert"><h2>Couldn’t open this experiment.</h2><p>Refresh the page to try again.</p></div>
-      : source ? <iframe title={artifact.title} srcDoc={source} sandbox="allow-scripts" />
+      : source ? <iframe title={artifact.title} srcDoc={source} sandbox="allow-scripts" allow={artifact.slug === "2026-11-15-ecosystem-growth-poc" ? "fullscreen *" : undefined} allowFullScreen={artifact.slug === "2026-11-15-ecosystem-growth-poc"} />
         : <p className="artifact-empty" role="status">Opening experiment…</p>}
   </main>;
 }

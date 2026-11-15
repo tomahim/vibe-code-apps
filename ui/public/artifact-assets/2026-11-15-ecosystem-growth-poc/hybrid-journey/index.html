@@ -23,7 +23,7 @@
   <section class="theme-strip" id="themeStrip" aria-label="Themes in this group"></section>
   <section class="lesson-strip" id="lessonStrip" aria-label="Demo lessons" hidden></section>
   <footer>
-    <div class="scene-tools" role="group" aria-label="Landscape zoom"><span>Pinch / wheel to zoom · drag to explore</span><button id="zoomOut" aria-label="Zoom out">−</button><output id="zoomLevel" aria-label="Landscape zoom level">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomReset">Reset view</button></div>
+    <div class="scene-tools" role="group" aria-label="Landscape zoom"><span>Pinch / wheel to zoom · drag to explore</span><button id="zoomOut" aria-label="Zoom out">−</button><button id="imageOnly" aria-label="Open image-only fullscreen">⛶</button><output id="zoomLevel" aria-label="Landscape zoom level">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomReset">Reset view</button></div>
     <p id="growthNotice" class="growth-notice">Growth artwork is a work in progress. Some scenes currently recolor rather than lose vegetation.</p>
     <div class="growth-head"><button id="play" aria-label="Play growth evolution" aria-pressed="false">&#9654;</button><div><strong id="growthName">A world awakening</strong><span id="growthCount">State 1 / 10</span></div><button id="motion" aria-pressed="true">Life on</button></div>
     <input id="growth" type="range" min="1" max="10" step="1" value="10" aria-label="Vegetation growth state">
@@ -31,6 +31,7 @@
   </footer>
   <aside id="performance" hidden><h2>Measured here, not a promise</h2><dl id="metrics"></dl><p>The painting cache is bounded to five images. Nature lesson-patch mode separately retains its base and eight small cutouts after the first visit. The same decoded artwork is reused across ten growth states. Paintings have content-hashed URLs and a one-year private browser-cache policy on the production host. Decoded-image reuse is measured separately below. The browser may still evict cached files.</p><p>Growth is a deterministic spatial reveal between two fixed paintings, with ten distinct stops. Five groups have a painted sparse base. The other two groups and interiors use a computed dormant-foliage preview, so their plants change color and fullness, not geometry. These are not ten separately painted scenes. Nature lesson-patch mode instead uses one fixed sparse base and real transparent botanical pieces in three separate density regions. The shared slider drives fast, steady and late patch-density curves. The old oak trunk, bare branches and existing sparse scrub are permanent base scenery, not lesson growth. Only added canopy fragments and planting clusters change. It does not yet include authored sapling-to-mature stages, matching shadows or foreground occlusion layers. The moving overlay is a separate 2D canvas. This is a 2.5D design study, not a free-orbit 3D world.</p><button id="closePerf">Close</button></aside>
   <dialog id="lessonDialog"><div><button class="close" aria-label="Close lesson">&#10005;</button><span class="eyebrow">DEMO LESSON</span><h2 id="lessonTitle"></h2><p id="lessonLandmark"></p><p>This is a sample lesson stop. In the app, this would open a short lesson, a question, and the next step through this landscape.</p><button class="done">Back to the garden</button></div></dialog>
+  <button id="exitImageOnly" hidden aria-label="Exit image-only fullscreen">↙ Exit fullscreen</button>
   <p class="sr-only" aria-live="polite" id="announcement"></p>
 </main>
 <script src="../scene-tap-guard.js"></script>
@@ -38,6 +39,7 @@
 <script src="journey-assets.js"></script>
 <script src="patch-assets.js"></script>
 <script src="lesson-patches.js"></script>
+<script src="image-only.js"></script>
 <script src="scene-viewport.js"></script>
 <script src="journey.js"></script>
 </body>
