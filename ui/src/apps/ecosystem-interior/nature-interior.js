@@ -139,7 +139,7 @@ function makeWater() {
   // stream ribbon
   const pts = [];
   for (let i = 0; i <= 64; i++) {
-    const t = 0.23 + (i / 64) * 0.82;
+    const t = 0.13 + (i / 64) * 0.92;
     const z = -6 + t * 26 * 1.05;
     const x = -11 + Math.sin(t * 5.2) * 4.5 + t * 8;
     pts.push(new THREE.Vector3(x, -0.18, z));
