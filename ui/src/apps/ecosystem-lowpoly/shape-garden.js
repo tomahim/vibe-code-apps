@@ -73,11 +73,19 @@ class Plants {
   dispose() { this.meshes.forEach((m) => { m.parent?.remove(m); m.dispose(); }); }
 }
 
-export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null, groupFocus = false, compact = false }) {
+export function createGarden({ container, profile: P, state, reduced = false, themeShape = null, displayProgress = null, groupFocus = false, compact = false, world = null }) {
   const prof = typeof P === 'string' ? PROFILES[P] : P;
   const mobile = prof.name === 'mobile';
-  const worlds=compact?COMPACT_GROUPS:WORLDS;
-  const themePoint=ti=>compact?new THREE.Vector3(compactCenters[ti][0],SLAB_H,compactCenters[ti][1]):tiles[ti].center;
+  // Optional world override (family preview): own compact groups/centres and per-theme art
+  // direction. Defaults keep the existing compact comparison untouched.
+  const cgroups = world?.groups || COMPACT_GROUPS;
+  const noun = world?.noun || 'group';
+  const ccenters = world?.centers || compactCenters;
+  const styleOf = world?.styleOf || (() => null);
+  const groundOf = (theme, ti) => { const g = styleOf(ti)?.ground; return g ? { top: g.top || theme.top, top2: g.top2 || theme.top2 } : theme; };
+  const mixOf = (theme, ti) => styleOf(ti)?.mix || MIX[theme.terrain];
+  const worlds=compact?cgroups:WORLDS;
+  const themePoint=ti=>compact?new THREE.Vector3(ccenters[ti][0],SLAB_H,ccenters[ti][1]):tiles[ti].center;
   const focusPolygon=ti=>compact?Array.from({length:6},(_,k)=>[1.38*Math.cos(Math.PI/6+k*Math.PI/3),1.38*Math.sin(Math.PI/6+k*Math.PI/3)]):interlocking[ti];
   const root = document.createElement('div');
   root.className = `lg-root ${mobile ? 'lg-mobile' : 'lg-desktop'}`;
@@ -170,19 +178,19 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const gardenPlants = new Plants(species, plantMat, prof.shadows);
   const grassList = [], rng = rngFor(20261028);
   THEMES.forEach((theme, ti) => {
-    const [q, r] = themeSlots[ti], c = axial(q, r, spacing / Math.sqrt(3));
-    const slab = new THREE.Mesh(themeGeo(hexPrism(R_THEME, SLAB_H, { K: prof.K, top: theme.top2, top2: theme.top, seed: ti + 1, noise: 0.015 }), ti), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+    const [q, r] = themeSlots[ti], c = axial(q, r, spacing / Math.sqrt(3)), st = styleOf(ti), gs = groundOf(theme, ti);
+    const slab = new THREE.Mesh(themeGeo(hexPrism(R_THEME, SLAB_H, { K: prof.K, top: gs.top2, top2: gs.top, seed: ti + 1, noise: 0.015 }), ti), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
     slab.position.set(c.x, 0, c.z); slab.castShadow = prof.shadows; slab.receiveShadow = true; slab.userData.pick = { kind: 'theme', ti };
     garden.add(slab); themeMeshes.push(slab);
-    const mix = MIX[theme.terrain], T = { ti, theme, center: new THREE.Vector3(c.x, SLAB_H, c.z), cells: [] };
+    const mix = mixOf(theme, ti), T = { ti, theme, center: new THREE.Vector3(c.x, SLAB_H, c.z), cells: [] };
     theme.paths.forEach((path, pi) => {
       const [cq, cr] = CELL_SLOTS[ORDER[pi]], cc = axial(cq, cr, R_CELL * 1.035), cx = c.x + cc.x, cz = c.z + cc.z;
-      const mesh = new THREE.Mesh(hexPrism(R_CELL, CELL_H, { K: prof.cellK, top: '#' + new THREE.Color(theme.top).offsetHSL(0, 0, 0.02 * (pi % 3)).getHexString(), top2: theme.top2, seed: ti * 10 + pi + 3, noise: 0.05, bevel: 0.05, colorJitter: 0.09 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+      const mesh = new THREE.Mesh(hexPrism(R_CELL, CELL_H, { K: prof.cellK, top: '#' + new THREE.Color(gs.top).offsetHSL(0, 0, 0.02 * (pi % 3)).getHexString(), top2: gs.top2, seed: ti * 10 + pi + 3, noise: 0.05, bevel: 0.05, colorJitter: 0.09 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
       mesh.position.set(cx, SLAB_H, cz); mesh.castShadow = prof.shadows; mesh.receiveShadow = true; mesh.userData.pick = { kind: 'path', ti, pi };
       garden.add(mesh); cellMeshes.push(mesh);
       const key = `c${ti}.${pi}`, top = SLAB_H + CELL_H, cell = { pi, path, key, center: new THREE.Vector3(cx, top, cz), mesh };
       T.cells.push(cell);
-      const isPond = theme.terrain === 'pond', pondR = 0.42;
+      const isPond = theme.terrain === 'pond' && !st?.noPonds, pondR = 0.42;
       if (isPond) {
         const water = new THREE.Mesh(new THREE.CircleGeometry(pondR, 20).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: '#79bfd8', transparent: true, opacity: 0.86, roughness: 0.12, metalness: 0.1 }));
         water.position.set(cx, top + 0.012, cz); garden.add(water);
@@ -191,7 +199,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
         for (let k = 0; k < 3; k++) { const a = k * 2.2 + pi; gardenPlants.add('lotus', { x: cx + Math.cos(a) * 0.19, y: top + 0.012, z: cz + Math.sin(a) * 0.19, rot: rng() * 6, s: 0.9 + rng() * 0.3, thr: 0.15 + k * 0.2, w: 0.3, key }); }
       }
       const test = (x, z) => inHex(x, z, 0.86) && (!isPond || Math.hypot(x, z) > pondR + 0.14);
-      const pts = scatter(rng, prof.plants, test, mobile ? 0.3 : 0.21, 0.9);
+      const pts = scatter(rng, Math.round(prof.plants * (st?.plantMul ?? 1)), test, mobile ? 0.3 : 0.21, 0.9);
       pts.forEach((pt, i) => {
         const u = i / Math.max(1, pts.length - 1), tier = u < 0.28 ? 'sig' : u < 0.62 ? 'mid' : 'low', list = mix[tier];
         const name = list[Math.floor(rng() * list.length)], sr = SIG_SCALE[name];
@@ -201,9 +209,27 @@ export function createGarden({ container, profile: P, state, reduced = false, th
         else { s = (name === 'rock' || name === 'redRock') ? 0.7 + rng() * 0.6 : 0.9 + rng() * 0.5; thr = 0.01 + rng() * 0.3; w = 0.25; }
         gardenPlants.add(name, { x: cx + pt[0], y: top + 0.01, z: cz + pt[1], rot: rng() * 6.28, s, thr, w, key, grow: true, min: 0.14, tint: new THREE.Color().setScalar(0.88 + rng() * 0.22) });
       });
-      const gp = scatter(rng, prof.grass, (x, z) => inHex(x, z, 0.9) && (!isPond || Math.hypot(x, z) > pondR + 0.08), 0, 0.92), gtint = new THREE.Color(theme.top);
+      const gp = st?.grassMul === 0 ? [] : scatter(rng, Math.round(prof.grass * (st?.grassMul ?? 1)), (x, z) => inHex(x, z, 0.9) && (!isPond || Math.hypot(x, z) > pondR + 0.08), 0, 0.92), gtint = new THREE.Color(st?.grassTint || gs.top);
       gp.forEach((pt) => grassList.push({ x: cx + pt[0], y: top, z: cz + pt[1], s: 0.14 + rng() * 0.16, rot: rng() * 6.28, key, v: rng(), tint: gtint.clone().offsetHSL((rng() - 0.5) * 0.03, 0, (rng() - 0.5) * 0.2).addScalar(0.45) }));
     });
+    // Family art direction: surface sheets (lagoon, river, raked rings) and one landmark.
+    if (st?.sheet) {
+      const sh = st.sheet;
+      if (sh.type === 'water') {
+        const w = new THREE.Mesh(new THREE.CircleGeometry(sh.r || 2.6, 36).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: sh.color, roughness: 0.14, metalness: 0.12 }));
+        w.position.set(c.x + (sh.dx || 0), SLAB_H + 0.028, c.z + (sh.dz || 0)); w.receiveShadow = true; garden.add(w);
+      } else if (sh.type === 'river') {
+        const wmat = new THREE.MeshStandardMaterial({ color: sh.color, roughness: 0.14, metalness: 0.12 });
+        for (let k = -2; k <= 2; k++) { const w = new THREE.Mesh(new THREE.CircleGeometry(0.72, 20).rotateX(-Math.PI / 2), wmat); w.position.set(c.x + k * 1.05, SLAB_H + 0.028, c.z + Math.sin(k * 1.1) * 0.55); w.receiveShadow = true; garden.add(w); }
+      } else if (sh.type === 'rings') {
+        const rmat = new THREE.MeshBasicMaterial({ color: '#a89a76', transparent: true, opacity: 0.8, depthWrite: false });
+        for (let k = 1; k <= 3; k++) { const ring = new THREE.Mesh(new THREE.RingGeometry(k * 0.42, k * 0.42 + 0.045, 40).rotateX(-Math.PI / 2), rmat); ring.position.set(c.x + (st.landmark?.dx || 0), SLAB_H + 0.03, c.z + (st.landmark?.dz || 0)); garden.add(ring); }
+      }
+    }
+    if (st?.landmark) {
+      const L = st.landmark;
+      gardenPlants.add(L.name, { x: c.x + L.dx, y: SLAB_H + 0.02, z: c.z + L.dz, rot: rng() * 6.28, s: L.s, thr: 0.18, w: 0.4, key: `c${ti}.0`, grow: true, min: 0.3 });
+    }
     tiles.push(T);
   });
   gardenPlants.build(garden);
@@ -214,12 +240,14 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   const compactMeshes=[],compactPlants=new Plants(species,plantMat,prof.shadows);
   if(compact){
     THEMES.forEach((t,ti)=>{
-      const [x,z]=compactCenters[ti],m=new THREE.Mesh(hexPrism(1.38,SLAB_H,{K:prof.K,top:t.top2,top2:t.top,seed:ti+1,noise:.015}),new THREE.MeshStandardMaterial({vertexColors:true,flatShading:true,roughness:.95}));
+      const cs=styleOf(ti),cg=groundOf(t,ti);
+      const [x,z]=ccenters[ti],m=new THREE.Mesh(hexPrism(1.38,SLAB_H,{K:prof.K,top:cg.top2,top2:cg.top,seed:ti+1,noise:.015}),new THREE.MeshStandardMaterial({vertexColors:true,flatShading:true,roughness:.95}));
       m.position.set(x,0,z);m.castShadow=prof.shadows;m.receiveShadow=true;m.userData.pick={kind:'theme',ti};compactGarden.add(m);compactMeshes.push(m);
-      if(t.terrain==='pond'){const water=new THREE.Mesh(new THREE.CircleGeometry(.64,20).rotateX(-Math.PI/2),new THREE.MeshStandardMaterial({color:'#79bfd8',roughness:.12,metalness:.1}));water.position.set(x,SLAB_H+.02,z);compactGarden.add(water);}
+      const waterR=cs?.sheet?.type==='water'?Math.min(1.3,cs.sheet.r*.44):(t.terrain==='pond'&&!cs?.noPonds)?.64:0;
+      if(waterR){const water=new THREE.Mesh(new THREE.CircleGeometry(waterR,20).rotateX(-Math.PI/2),new THREE.MeshStandardMaterial({color:cs?.sheet?.color||'#79bfd8',roughness:.12,metalness:.1}));water.position.set(x+(cs?.sheet?.dx||0)*.44,SLAB_H+.02,z+(cs?.sheet?.dz||0)*.44);compactGarden.add(water);}
     });
     for(const [name,list] of Object.entries(gardenPlants.items))for(const it of list){
-      const ti=Number(it.key.slice(1).split('.')[0]),t=tiles[ti],c=compactCenters[ti];
+      const ti=Number(it.key.slice(1).split('.')[0]),t=tiles[ti],c=ccenters[ti];
       compactPlants.add(name,{...it,x:c[0]+(it.x-t.center.x)*.38,z:c[1]+(it.z-t.center.z)*.38,y:SLAB_H+.015,s:it.s*.68});
     }
     compactPlants.build(compactGarden);
@@ -245,7 +273,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     clearHover(); renderUI(); flyTo(viewSpec(), ms);
   }
   function clearGroup(ms = 900) { state.group = -1; renderUI(); if (view.level === 'garden') flyTo(viewSpec(), ms); }
-  function renderGroupChip() { if (!grpNav) return; grpNav.style.display=view.level==='garden'?'':'none'; const chip = grpNav.querySelector('.lg-worldchip'); const on = view.level === 'garden' && state.group >= 0; root.classList.toggle('group-focused',on); chip.textContent = on ? `${worlds[state.group].name} · all themes` : 'Pick a group to focus'; grpNav.classList.toggle('focused', on); }
+  function renderGroupChip() { if (!grpNav) return; grpNav.style.display=view.level==='garden'?'':'none'; const chip = grpNav.querySelector('.lg-worldchip'); const on = view.level === 'garden' && state.group >= 0; root.classList.toggle('group-focused',on); chip.textContent = on ? `${worlds[state.group].name} · all themes` : `Pick a ${noun} to focus`; grpNav.classList.toggle('focused', on); }
 
   // ----- Ambient life -----
   const clouds = new THREE.Group(); scene.add(clouds);
@@ -310,9 +338,9 @@ export function createGarden({ container, profile: P, state, reduced = false, th
   }
   function buildTrail(ti, pi) {
     disposeTrail();
-    const theme = THEMES[ti], path = theme.paths[pi], n = path.lessons.length, mix = MIX[theme.terrain], r = rngFor(ti * 100 + pi * 7 + 1);
+    const theme = THEMES[ti], path = theme.paths[pi], n = path.lessons.length, mix = mixOf(theme, ti), tgs = groundOf(theme, ti), r = rngFor(ti * 100 + pi * 7 + 1);
     const g = new THREE.Group(), top = TRAIL_H, tTop = TRAIL_H + TILE_H;
-    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: theme.top, top2: theme.top2, seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+    const plat = new THREE.Mesh(hexPrism(TRAIL_R, TRAIL_H, { K: prof.trailK, top: tgs.top, top2: tgs.top2, seed: ti * 10 + pi + 40, noise: 0.45, bevel: 0.04, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
     plat.rotation.y = Math.PI / 6; plat.castShadow = prof.shadows; plat.receiveShadow = true; plat.userData.own = true; g.add(plat);
     // axial chain of tiles
     const ax = [[0, 0]]; for (let i = 1; i < n; i++) { const d = CHAIN[(i - 1) % CHAIN.length]; ax.push([ax[i - 1][0] + d[0], ax[i - 1][1] + d[1]]); }
@@ -323,7 +351,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const lessonName = mix.lesson, big = { tree: 0.85, pine: 0.9, snowPine: 0.9, appleTree: 0.85, cactus: 1.05, lotus: 1.25, sunflower: 1.15 }[lessonName] || 1;
     wp.forEach((w, i) => {
       const x = w.x - cx, z = w.z - cz;
-      const tile = new THREE.Mesh(hexPrism(TILE_R, TILE_H, { K: prof.cellK, top: theme.top, top2: theme.top2, seed: ti * 13 + pi * 5 + i + 90, noise: 0.05, bevel: 0.05, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+      const tile = new THREE.Mesh(hexPrism(TILE_R, TILE_H, { K: prof.cellK, top: tgs.top, top2: tgs.top2, seed: ti * 13 + pi * 5 + i + 90, noise: 0.05, bevel: 0.05, colorJitter: 0.07 }), new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
       tile.position.set(x, top, z); tile.castShadow = prof.shadows; tile.receiveShadow = true; tile.userData = { pick: { kind: 'lesson', i }, own: true }; g.add(tile);
       const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: '#b9b3a2', transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide })); ring.position.set(x, tTop + 0.03, z); ring.userData.own = true; g.add(ring);
       const dotMat = [], dotMeshes = [];
@@ -362,7 +390,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
       plants.add(name, { x: pt[0], y: top + 0.03, z: pt[1], rot: r() * 6.28, s, thr: tier === 'sig' ? 0.3 + r() * 0.5 : tier === 'mid' ? 0.1 + r() * 0.4 : r() * 0.25, w: 0.3, key: 'T', grow: true, tint: new THREE.Color().setScalar(0.9 + r() * 0.2) });
     });
     plants.build(g);
-    const gl = [], gt = new THREE.Color(theme.top);
+    const gl = [], gt = new THREE.Color(styleOf(ti)?.grassTint || tgs.top);
     scatter(r, prof.trailGrass, (x, z) => inHex(z, x, TRAIL_R - 0.35) && nodes.every((nd) => (nd.pos.x - x) ** 2 + (nd.pos.z - z) ** 2 > 1.5), 0, TRAIL_R)
       .forEach((pt) => gl.push({ x: pt[0], y: top, z: pt[1], s: 0.22 + r() * 0.25, rot: r() * 6.28, key: 'T', v: r(), tint: gt.clone().offsetHSL((r() - 0.5) * 0.03, 0, (r() - 0.5) * 0.2).addScalar(0.45) }));
     const tg = makeGrass(gl, g);
@@ -406,7 +434,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     if (view.level === 'garden' && groupFocus && state.group >= 0) return groupSpec();
     if(mobile)camera.setViewOffset(root.clientWidth,root.clientHeight,0,root.clientHeight*.09,root.clientWidth,root.clientHeight);else if(root.clientWidth>900)camera.setViewOffset(root.clientWidth,root.clientHeight,-Math.min(170,root.clientWidth*.11),0,root.clientWidth,root.clientHeight);else camera.clearViewOffset();
     camera.updateProjectionMatrix();
-    if (view.level === 'garden' && compact) return { target:new THREE.Vector3(0,.4,0),dist:fitDist(14,.95),polar:.95,pan:3 };
+    if (view.level === 'garden' && compact) { if (!world) return { target:new THREE.Vector3(0,.4,0),dist:fitDist(14,.95),polar:.95,pan:3 }; const ccx=ccenters.reduce((a,p)=>a+p[0],0)/ccenters.length, ccz=ccenters.reduce((a,p)=>a+p[1],0)/ccenters.length; const cr=Math.max(...ccenters.map(([x,z])=>Math.hypot(x-ccx,z-ccz)))+3.6; return { target:new THREE.Vector3(ccx,.4,ccz),dist:fitDist(cr,.95),polar:.95,pan:3 }; }
     if (view.level === 'garden') return { target: new THREE.Vector3(0.74, 0.4, -0.26), dist: fitDist(mobile ? 18.6 : 18.9, 0.95), polar: 0.95, pan: 3 };
     if(view.level==='theme'&&compact)return groupSpec([view.ti],false);
     if (view.level === 'theme') return { target: tiles[view.ti].center.clone().setY(0.7), dist: fitDist(3.9, 0.92), polar: 0.92, pan: 1.6 };
@@ -516,7 +544,7 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const key = p ? `${p.kind}.${p.ti ?? ''}.${p.pi ?? ''}.${p.i ?? ''}` : null;
     if (key === hover) return; hover = key; clearHover(); canvas.style.cursor = p ? 'pointer' : 'grab';canvas.title=p?.ti!=null?THEMES[p.ti].title:'';
     if (!p) return;
-    const slab = (ti) => { if(compact&&view.level==='garden'){slabOutline.geometry.dispose();slabOutline.geometry=hexOutline(1.4,.07);const [x,z]=compactCenters[ti];slabOutline.position.set(x,SLAB_H+.02,z);slabOutline.visible=true;return;} if(themeShape){slabOutline.geometry.dispose();slabOutline.geometry=themeGeo(hexOutline(R_THEME+.02,.11),ti);} const T = tiles[ti]; slabOutline.position.set(T.center.x, SLAB_H + CELL_H * 0.4, T.center.z); slabOutline.visible = true; };
+    const slab = (ti) => { if(compact&&view.level==='garden'){slabOutline.geometry.dispose();slabOutline.geometry=hexOutline(1.4,.07);const [x,z]=ccenters[ti];slabOutline.position.set(x,SLAB_H+.02,z);slabOutline.visible=true;return;} if(themeShape){slabOutline.geometry.dispose();slabOutline.geometry=themeGeo(hexOutline(R_THEME+.02,.11),ti);} const T = tiles[ti]; slabOutline.position.set(T.center.x, SLAB_H + CELL_H * 0.4, T.center.z); slabOutline.visible = true; };
     if (p.kind === 'lesson') { const n = trail.nodes[p.i]; tileOutline.position.set(n.pos.x, n.pos.y + 0.05, n.pos.z); tileOutline.visible = true; }
     else if (p.kind === 'theme' || view.level === 'garden' || p.ti !== view.ti) slab(p.ti);
     else { const c = tiles[p.ti].cells[p.pi].center; cellOutline.position.set(c.x, c.y + 0.03, c.z); cellOutline.visible = true; }
@@ -575,9 +603,9 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     let h = '';
     if (view.level === 'garden') {
       const focused = groupFocus && state.group >= 0 ? worlds[state.group] : null;
-      const listed = focused ? focused.themes.map((i) => THEMES[i]) : compact ? COMPACT_GROUPS.flatMap(g=>g.themes.map(i=>THEMES[i])) : THEMES;
+      const listed = focused ? focused.themes.map((i) => THEMES[i]) : compact ? cgroups.flatMap(g=>g.themes.map(i=>THEMES[i])) : THEMES;
       h = `<p class="eyebrow">Little Grains · sample garden</p><h2>${focused ? esc(focused.name) : 'The Garden'}</h2><p class="lede">${focused ? 'Focused world; the rest of the garden blurs into the background. ' : ''}${compact ? 'One hexagon per theme, arranged in related groups. Select a hexagon to reveal all its learning paths.' : themeShape ? 'Each land follows the footprint of its learning paths. The scenery, lessons and controls are unchanged.' : 'Each hexagon is a theme. Walk into one to find a hexagon per learning path, then follow its tiles lesson by lesson.'}</p><ul class="lg-list">` +
-        listed.map((t) => { const i = THEMES.indexOf(t); const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; const group=compact&&!focused?COMPACT_GROUPS.find(g=>g.themes[0]===i):null;return `${group?`<li class="group-list-title">${esc(group.name)}</li>`:''}<li><button data-theme="${i}"><span class="sw" style="background:${t.top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
+        listed.map((t) => { const i = THEMES.indexOf(t); const started = t.paths.filter((p) => progressAt(state.week, p) > 0).length, avg = t.paths.reduce((a, p) => a + progressAt(state.week, p), 0) / t.paths.length; const group=compact&&!focused?cgroups.find(g=>g.themes[0]===i):null;return `${group?`<li class="group-list-title">${esc(group.name)}</li>`:''}<li><button data-theme="${i}"><span class="sw" style="background:${groundOf(t,i).top}"></span><span class="tt"><b>${esc(t.title)}</b><small>${started}/${t.paths.length} paths started</small></span><span class="bar"><i style="width:${pct(avg)}"></i></span></button></li>`; }).join('') + '</ul>';
     } else if (view.level === 'theme') {
       const t = THEMES[view.ti];
       h = `<p class="eyebrow">Theme garden</p><h2>${esc(t.title)}</h2><p class="lede">${esc(t.blurb)} One hexagon per learning path; one dot per lesson, filled once completed.</p><ul class="lg-list">` +
@@ -627,9 +655,9 @@ export function createGarden({ container, profile: P, state, reduced = false, th
     const add = (cls, html, anchor, extra = {}) => { const el = document.createElement('div'); el.className = `lg-label ${cls}`; el.innerHTML = html; labelsEl.appendChild(el); labelDefs.push({ el, anchor, ...extra }); };
     if (view.level === 'garden') tiles.forEach((T, ti) => {
       if (groupFocus && state.group >= 0 && !worlds[state.group].themes.includes(ti)) return;
-      add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, (compact?new THREE.Vector3(compactCenters[ti][0],SLAB_H,compactCenters[ti][1]):T.center.clone()).add(new THREE.Vector3(0,compact?1.2:1.45,compact?.6:R_THEME*.62)), { ti, dots: true });
+      add('theme', `<b>${esc(T.theme.title)}</b>${mobile ? '' : '<span class="dots"></span>'}`, (compact?new THREE.Vector3(ccenters[ti][0],SLAB_H,ccenters[ti][1]):T.center.clone()).add(new THREE.Vector3(0,compact?1.2:1.45,compact?.6:R_THEME*.62)), { ti, dots: true });
     });
-    if(compact&&view.level==='garden'&&(!groupFocus||state.group<0))COMPACT_GROUPS.forEach(g=>add('group-name',esc(g.name),new THREE.Vector3(g.center[0],.8,g.center[1]-3.2)));
+    if(compact&&view.level==='garden'&&(!groupFocus||state.group<0))cgroups.forEach(g=>add('group-name',esc(g.name),new THREE.Vector3(g.center[0],.8,g.center[1]-3.2)));
     if (view.level === 'theme') tiles[view.ti].cells.forEach((c, pi) => mobile ? add('lesson', `<i class="n">${pi + 1}</i>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28))) : add('cell', `<b>${esc(c.path.title)}</b><span class="dots"></span>`, c.center.clone().add(new THREE.Vector3(0, 0.85, 0.28)), { ti: view.ti, pi, dots: true, cell: true }));
     if (view.level === 'path' && trail) trail.nodes.forEach((n) => add('lesson', `<i class="n">${n.i + 1}</i>${mobile ? '' : `<b>${esc(trail.path.lessons[n.i])}</b>`}`, n.pos.clone().add(new THREE.Vector3(0, mobile ? 1.35 : 1.5, 0)), { i: n.i }));
   }
