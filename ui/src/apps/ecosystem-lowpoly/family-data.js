@@ -6,20 +6,23 @@ import { THEMES } from './shape-data.js';
 
 const idx = (id) => THEMES.findIndex((t) => t.id === id);
 
-// Four hexes per family in a small diamond, same spacing as the compact overview.
 const SLOTS4 = [[0, 0], [1, 0], [0, 1], [1, -1]];
+// In-group hex spacing: bigger tiles (tileScale below) plus visible breathing room between siblings.
+const SLOT_SPACING = 3.55;
+// Quincunx arrangement: Desert fills the middle so the overview has no empty centre; families stay
+// one clear gap apart (>= ~1.2 world units between hex edges, about twice the in-group gap).
 export const FAMILY_GROUPS = [
-  { id: 'forest', name: 'Forest', blurb: 'Dense and shaded. The one family where planting fills the hex.', themes: ['nature', 'biology', 'languages', 'health'].map(idx), center: [-7, -4.6], slots: SLOTS4 },
-  { id: 'prairie', name: 'Prairie', blurb: 'Quiet fields: warm golds and sages, bloom drifts, open ground.', themes: ['art', 'cooking', 'economics', 'mind'].map(idx), center: [7, -4.6], slots: SLOTS4 },
-  { id: 'mountains', name: 'Mountains', blurb: 'Snow, stone and restrained evergreens. The terrain does the talking.', themes: ['sport', 'climate', 'space', 'mathematics'].map(idx), center: [-7.6, 3.4], slots: SLOTS4 },
-  { id: 'oceans', name: 'Oceans', blurb: 'Water and coral. Growth is coral spreading, not trees.', themes: ['ocean', 'technology', 'music', 'engineering'].map(idx), center: [7.6, 3.4], slots: SLOTS4 },
-  { id: 'desert', name: 'Desert', blurb: 'Warm stone. The sparsest family; a single shape carries the hex.', themes: ['geology', 'physics', 'chemistry', 'history'].map(idx), center: [0, 9.8], slots: SLOTS4 },
+  { id: 'forest', name: 'Forest', blurb: 'Dense and shaded. The one family where planting fills the hex.', themes: ['nature', 'biology', 'languages', 'health'].map(idx), center: [-4.2, -5.3], slots: SLOTS4 },
+  { id: 'prairie', name: 'Prairie', blurb: 'Quiet fields: warm golds and sages, bloom drifts, open ground.', themes: ['art', 'cooking', 'economics', 'mind'].map(idx), center: [4.2, -5.3], slots: SLOTS4 },
+  { id: 'mountains', name: 'Mountains', blurb: 'Snow, stone and restrained evergreens. The terrain does the talking.', themes: ['sport', 'climate', 'space', 'mathematics'].map(idx), center: [-6, 4.7], slots: SLOTS4 },
+  { id: 'oceans', name: 'Oceans', blurb: 'Water and coral. Growth is coral spreading, not trees.', themes: ['ocean', 'technology', 'music', 'engineering'].map(idx), center: [6, 4.7], slots: SLOTS4 },
+  { id: 'desert', name: 'Desert', blurb: 'Warm stone. The sparsest family; a single shape carries the hex.', themes: ['geology', 'physics', 'chemistry', 'history'].map(idx), center: [0, 1.2], slots: SLOTS4 },
 ];
 
 export const FAMILY_CENTERS = Array.from({ length: THEMES.length });
 FAMILY_GROUPS.forEach((g) => g.themes.forEach((ti, k) => {
   const [q, r] = g.slots[k];
-  FAMILY_CENTERS[ti] = [g.center[0] + 2.65 * (q + r / 2), g.center[1] + 2.65 * Math.sqrt(3) / 2 * r];
+  FAMILY_CENTERS[ti] = [g.center[0] + SLOT_SPACING * (q + r / 2), g.center[1] + SLOT_SPACING * Math.sqrt(3) / 2 * r];
 }));
 
 // Per-theme art direction. ground overrides the slab/cell palette; mix overrides the
@@ -56,4 +59,4 @@ const STYLES = {
 export const familyStyle = (ti) => STYLES[THEMES[ti].id] || null;
 export const familyOf = (ti) => FAMILY_GROUPS.findIndex((g) => g.themes.includes(ti));
 
-export const FAMILY_WORLD = { groups: FAMILY_GROUPS, centers: FAMILY_CENTERS, styleOf: familyStyle, noun: 'family' };
+export const FAMILY_WORLD = { groups: FAMILY_GROUPS, centers: FAMILY_CENTERS, styleOf: familyStyle, noun: 'family', tileScale: 1.25 };
