@@ -671,6 +671,144 @@
   font-size: 0.95rem;
 }
 
+/* biggest step days podium */
+
+.gr-topdays {
+  padding: 3rem 1.2rem 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.gr-topdays-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.gr-topday {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(26, 42, 108, 0.55) 0%, rgba(33, 161, 196, 0.28) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.gr-topday--first {
+  background: linear-gradient(135deg, #b24592 0%, #f15f79 100%);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 44px rgba(178, 69, 146, 0.35);
+}
+
+.gr-topday-rank {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-topday-rank--1 {
+  background: linear-gradient(135deg, #ffd166, #f4a261);
+  color: #3a2000;
+}
+
+.gr-topday-rank--2 {
+  background: linear-gradient(135deg, #e8edf5, #9aa7bd);
+  color: #1f2937;
+}
+
+.gr-topday-rank--3 {
+  background: linear-gradient(135deg, #e0995e, #a85b22);
+  color: #2d1400;
+}
+
+.gr-topday-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.gr-topday-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.gr-topday-date {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  font-size: 0.98rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gr-topday-steps {
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+
+.gr-topday-steps .gr-count {
+  font: inherit;
+}
+
+.gr-topday-steps-unit {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.gr-topday-track {
+  margin-top: 0.55rem;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.gr-topday-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffd166, #f15f79);
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gr-topday-detail {
+  margin: 0.45rem 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.gr-topdays-note {
+  margin: 1.4rem auto 0;
+  max-width: 32rem;
+  text-align: center;
+  color: #6b7387;
+  font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-topday-fill {
+    transition: none;
+  }
+}
+
 /* outro */
 
 .gr-outro {

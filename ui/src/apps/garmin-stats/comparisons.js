@@ -18,12 +18,10 @@
 // - Mount Everest official height 8,848.86 m — Nepal/China 2020 survey
 //   https://www.reuters.com/article/idUSKBN28I18U/
 // - Kármán line 100 km — FAI definition of the edge of space
-// - Average Parisian: 7,071 steps/day (WeWard step-app users, 2024; Paris ranked
-//   first of French cities) - Le Parisien, 2024-07-25
-//   https://www.leparisien.fr/societe/sante/paris-nice-strasbourg-ces-villes-ou-lon-marche-le-plus-en-france-25-07-2024-KYY2UWTHBRD45GDOA5YREUJ2IU.php
-//   App users are a self-selected sample and other apps report other figures
-//   (Macadam 2023: 9,692), so this is a rough benchmark. It counts all-day
-//   steps, while the Garmin figure here only counts steps recorded during runs.
+// - The Parisian step benchmark comparison was removed: run-only steps vs an
+//   all-day step figure read as like-for-like even with a caveat, and the
+//   result was confusing. The story now shows a top 5 of biggest step days
+//   instead (RunningStory.jsx, from the API's top_step_days).
 // - Pizza slice: USDA FoodData Central "Fast Food, Pizza Chain, 14\" pizza,
 //   cheese topping, regular crust": 1 slice (1/8 pizza, 107 g) = 285 kcal
 //   https://fdc.nal.usda.gov/
@@ -49,7 +47,6 @@ const KARMAN_LINE_M = 100000;
 const WORK_WEEK_HOURS = 40;
 const SONG_MINUTES = 3.5;
 const FOOTBALL_MATCH_HOURS = 1.5;
-const PARISIAN_STEPS_PER_DAY = 7071;
 const EV_KWH_PER_100KM = 15;
 const PIZZA_SLICE_KCAL = 285;
 const MERINGUE_NEST_KCAL = 53;
@@ -64,7 +61,6 @@ export function buildComparisons({ totals, records, span_days: spanDays }) {
   const km = totals.km || 0;
   const hours = totals.hours || 0;
   const elevation = totals.elevation_m || 0;
-  const steps = totals.steps || 0;
   const kcal = totals.kcal || 0;
   const runs = totals.runs || 0;
   const yearsSpan = spanDays / 365.25;
@@ -233,16 +229,6 @@ export function buildComparisons({ totals, records, span_days: spanDays }) {
     {
       group: "And everything else",
       cards: [
-        {
-          value: spanDays > 0 ? steps / (PARISIAN_STEPS_PER_DAY * spanDays) : 0,
-          decimals: 2,
-          label: "average Parisians' worth of walking",
-          caption: spanDays > 0
-            ? `Your steps recorded during runs, divided by what one average Parisian walks all day (about 7,071 steps) over the same ${Math.round(spanDays).toLocaleString("en")} days. Not like for like: your figure counts run steps only, theirs counts every step.`
-            : "Needs at least two days of runs to compare.",
-          source: "WeWard step-app users in Paris, 2024 (Le Parisien); steps as recorded by Garmin",
-          viz: { kind: "none" },
-        },
         {
           value: kcal / PIZZA_SLICE_KCAL,
           decimals: 0,

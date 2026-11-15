@@ -405,3 +405,21 @@ class StatsApiTests(GarminBase):
         data = self.get("/api/apps/garmin/stats/running/").json()
         self.assertEqual(data["totals"]["runs"], 2)
         self.assertNotAlmostEqual(data["totals"]["km"], 92.5 + 99.0)
+
+    def test_running_top_step_days(self):
+        # A second recorded run on 2024-03-10: same-day steps add up.
+        make_activity(self.user, 91000000005, "running", datetime(2024, 3, 10, 18, 0, tzinfo=timezone.utc),
+                      distance_m=10_000.0, duration_ms=3_600_000, steps=9_000)
+        make_activity(self.user, 91000000006, "running", datetime(2024, 6, 2, 8, 0, tzinfo=timezone.utc),
+                      distance_m=21_000.0, duration_ms=2 * 3_600_000, steps=20_000)
+        days = self.get("/api/apps/garmin/stats/running/").json()["top_step_days"]
+        by_date = {d["date"]: d for d in days}
+        self.assertEqual(days[0]["date"], "2024-03-10")
+        self.assertEqual(days[0]["steps"], 49_000)
+        self.assertEqual(days[0]["runs"], 2)
+        self.assertAlmostEqual(days[0]["km"], 52.5)
+        # Trail running counts as running; other sports and owners stay out.
+        self.assertEqual(by_date["2024-05-12"]["steps"], 9_000)
+        self.assertAlmostEqual(by_date["2024-05-12"]["km"], 50.0)
+        self.assertEqual(days[1]["date"], "2024-06-02")
+        self.assertLessEqual(len(days), 5)

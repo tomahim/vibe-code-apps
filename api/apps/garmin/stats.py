@@ -14,7 +14,7 @@ any caching layer.
 from datetime import timedelta
 
 from django.db.models import Count, Max, Min, Sum
-from django.db.models.functions import ExtractWeekDay, TruncMonth, TruncYear
+from django.db.models.functions import ExtractWeekDay, TruncDate, TruncMonth, TruncYear
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
@@ -301,6 +301,27 @@ def running(request):
     bounds = qs.aggregate(first=Min("start_time_gmt"), last=Max("start_time_gmt"))
     span_days = (bounds["last"].date() - bounds["first"].date()).days if bounds["first"] and bounds["last"] else 0
 
+    # The five days with the most steps recorded during runs. Several runs on
+    # the same day are added together; steps outside recorded runs are not in
+    # the export, so this is never a full-day step count.
+    top_step_days = [
+        {
+            "date": row["day"].isoformat(),
+            "steps": row["day_steps"],
+            "km": _round((row["distance_m"] or 0) / 1000, 1),
+            "runs": row["count"],
+        }
+        for row in qs.filter(steps__gt=0)
+        .annotate(day=TruncDate("start_time_gmt"))
+        .values("day")
+        .annotate(
+            day_steps=Sum("steps"),
+            distance_m=Sum("distance_m"),
+            count=Count("garmin_activity_id"),
+        )
+        .order_by("-day_steps", "day")[:5]
+    ]
+
     return JsonResponse({
         "running_types": list(RUNNING_TYPES),
         "totals": totals,
@@ -315,4 +336,5 @@ def running(request):
         "first_run": bounds["first"].date().isoformat() if bounds["first"] else None,
         "last_run": bounds["last"].date().isoformat() if bounds["last"] else None,
         "span_days": span_days,
+        "top_step_days": top_step_days,
     })
