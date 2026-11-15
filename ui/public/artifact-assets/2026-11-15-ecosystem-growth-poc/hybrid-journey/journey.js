@@ -10,6 +10,8 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const names = ['Sparse / dormant', 'First seedlings', 'Taking root', 'Young shoots', 'A little greener', 'Growing together', 'Canopies return', 'A thriving habitat', 'Almost in bloom', 'Full ecosystem'];
   let group = 0, theme = null, state = 10, version = 0, current = null;
+  let patchMode=true,patchImages=null;
+  const patches=()=>theme==='nature'&&patchMode;
   let moving = !reduced, raf = 0, last = 0, frames = 0, fps = 0, fpsAt = 0, timer = null;
   let firstReady = null, renderMs = 0, loadedBytes = 0, reads = 0, decodedHits = 0;
   let imageCache = new Map(), pending = new Map();
@@ -44,6 +46,9 @@
     $('groupCount').textContent = 'Group ' + (group + 1) + ' of 7';
     $('groupBlurb').textContent = theme ? data.themes[theme].ecosystem + ' · 3 demo lessons' : g.blurb;
     $('viewHint').textContent = theme ? 'A LITTLE CLOSER' : 'SEVEN LITTLE WORLDS';
+    $('natureModes').hidden=theme!=='nature';
+    $('paintedNature').setAttribute('aria-pressed',String(!patchMode));$('patchNature').setAttribute('aria-pressed',String(patchMode));
+    landscape.classList.toggle('patch-study',patches());
     $('back').hidden = !theme; $('interiorTitle').hidden = !theme;
     $('themeStrip').hidden = !!theme; $('lessonStrip').hidden = !theme;
     $('interactionHint').textContent = theme ? 'Tap a lesson marker · arrows change groups' : 'Swipe to explore · tap a theme to step inside';
@@ -67,10 +72,11 @@
     } else {
       const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
       svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('preserveAspectRatio','none');svg.classList.add('leaders');$('markers').append(svg);
-      const labelSpots=[[21,18],[77,25],[51,91]];
+      const labelSpots=patches()?[[25,15],[77,54],[26,86]]:[[21,18],[77,25],[51,91]];
       data.themes[theme].lessons.forEach((lesson, index) => {
         const b = document.createElement('button'); b.className = 'map-marker lesson';
         const [lx,ly]=labelSpots[index];
+        if(patches())lesson=Object.assign({},lesson,window.HybridLessonPatches.regions[index]);
         b.style.cssText = 'left:' + lx + '%;top:' + ly + '%;--color:' + data.themes[theme].color;
         const line=document.createElementNS(svg.namespaceURI,'line');line.setAttribute('x1',lx);line.setAttribute('y1',ly);line.setAttribute('x2',lesson.x);line.setAttribute('y2',lesson.y);svg.append(line);
         const point=document.createElementNS(svg.namespaceURI,'circle');point.setAttribute('cx',lesson.x);point.setAttribute('cy',lesson.y);point.setAttribute('r','1');svg.append(point);
@@ -84,7 +90,7 @@
     }
   }
   function lessonOpen(index) {
-    const t = data.themes[theme], l = t.lessons[index];
+    const t = data.themes[theme], l = patches()?Object.assign({},t.lessons[index],window.HybridLessonPatches.regions[index]):t.lessons[index];
     $('lessonTitle').textContent = l.title; $('lessonLandmark').textContent = t.name + ' · At the ' + l.landmark.toLowerCase() + '.';
     $('lessonDialog').showModal();
   }
@@ -94,6 +100,11 @@
     $('markers').style.visibility = 'hidden'; art.style.opacity = '.3';
     updateHead(); markers(); resize();
     const entries = theme ? assets.interiors[theme] : assets.groups[group];
+    if(patches()){
+      $('growthNotice').textContent='Patch-density PoC: one slider, three growth rates. Old oak trunk, terrain and existing scrub stay fixed; only added plants and foliage change.';
+      try{patchImages=await window.HybridLessonPatches.ready();if(token!==version)return;current={patches:true};$('loadState').hidden=true;$('markers').style.visibility='';art.style.opacity='1';resize();render();updateMetrics();report('Nature lesson patches. One slider drives three different growth rates.');}catch(e){if(token!==version)return;$('loadState').textContent='Could not load lesson patches. Tap to retry.';$('loadState').onclick=loadView;}
+      return;
+    }
     $('growthNotice').textContent = entries.sparseMethod === 'painted-sparse'
       ? 'Growth preview: this group has painted sparse-to-lush artwork. Other scenes are still being finished.'
       : 'Growth unfinished here: vegetation currently changes color, not structure. New artwork is coming in a follow-up.';
@@ -114,10 +125,10 @@
   function openTheme(key) { stopReplay(); theme = key; loadView(); }
   function resize() {
     const bounds = landscape.getBoundingClientRect();
-    const topPad = theme ? (innerWidth <= 600 ? 60 : 53) : 0;
+    const topPad = patches()?(innerWidth<=600&&innerHeight<=700?70:82):theme ? (innerWidth <= 600 ? 60 : 53) : 0;
     const availableH = Math.max(1,bounds.height-topPad-(theme&&innerWidth<=600?20:0));
     const availableW = Math.max(1,bounds.width-(innerWidth>=1000&&!theme?380:0));
-    const ratio = theme ? 1672/941 : 1;
+    const ratio = patches()?840/800:theme ? 1672/941 : 1;
     const sizeW = Math.min(availableW,availableH*ratio,theme?1100:760);
     painting.style.width=sizeW+'px'; painting.style.height=(sizeW/ratio)+'px';
     const r = painting.getBoundingClientRect();
@@ -145,6 +156,10 @@
     $('growthName').textContent = names[state-1]; $('growthCount').textContent = 'State ' + state + ' / 10';
     if (!current) return;
     const at = performance.now(), w = art.width, h = art.height;
+    if(patches()&&patchImages){const values=window.HybridLessonPatches.draw(ctx,w,h,state,patchImages);
+      document.querySelectorAll('#lessonStrip button').forEach((button,i)=>{button.querySelector('small').textContent=window.HybridLessonPatches.regions[i].curve+' · '+Math.round(values[i]*100)+'%';});
+      document.querySelectorAll('#markers .lesson span').forEach((label,i)=>label.textContent=window.HybridLessonPatches.regions[i].landmark+' · '+Math.round(values[i]*100)+'%');
+      renderMs=performance.now()-at;document.documentElement.dataset.growthState=String(state);document.documentElement.dataset.growthReady='true';return;}
     ctx.clearRect(0,0,w,h); ctx.drawImage(current.sparse,0,0,w,h);
     if (state === 10) ctx.drawImage(current.lush,0,0,w,h);
     else if (state > 1) {
@@ -199,10 +214,11 @@
   }
   function updateMetrics() {
     const decodedMiB=Array.from(imageCache.values()).reduce((n,img)=>n+img.naturalWidth*img.naturalHeight*4,0)/1048576;
-    const rows=[['First group ready',firstReady===null?'Loading':Math.round(firstReady)+' ms'],['Overlay cadence',moving?(fps?fps+' fps':'Measuring')+' / 30 fps cap':'Paused'],['Growth compositing',renderMs.toFixed(1)+' ms'],['Decoded image cache',imageCache.size+' / 5 images · '+decodedMiB.toFixed(1)+' MiB'],['Decoded-cache reuses',decodedHits],['Image loads / encoded total',reads+' / '+(loadedBytes/1048576).toFixed(2)+' MiB'],['Canvas pixels',art.width+' × '+art.height],['Current growth',state+' / 10']];
+    const rows=[['First group ready',firstReady===null?'Loading':Math.round(firstReady)+' ms'],['Overlay cadence',moving?(fps?fps+' fps':'Measuring')+' / 30 fps cap':'Paused'],['Growth compositing',renderMs.toFixed(1)+' ms'],['Painting decoded cache',imageCache.size+' / 5 images · '+decodedMiB.toFixed(1)+' MiB'],['Lesson-patch images',patchImages?'9 / '+((patchImages.base.naturalWidth*patchImages.base.naturalHeight*4+Object.values(patchImages.sprites).reduce((n,i)=>n+i.naturalWidth*i.naturalHeight*4,0))/1048576).toFixed(1)+' MiB':'Not loaded'],['Lesson-patch encoded size',(window.HybridLessonPatches.bytes/1024).toFixed(0)+' KiB'],['Decoded-cache reuses',decodedHits],['Painting loads / encoded total',reads+' / '+(loadedBytes/1048576).toFixed(2)+' MiB'],['Canvas pixels',art.width+' × '+art.height],['Current growth',state+' / 10']];
     $('metrics').replaceChildren(); rows.forEach(([name,value])=>{const row=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=name;dd.textContent=String(value);row.append(dt,dd);$('metrics').append(row);});
   }
   data.groups.forEach((g,index)=>{const opt=document.createElement('option');opt.value=String(index);opt.textContent=g.name;$('groupSelect').append(opt);});
+  $('paintedNature').onclick=()=>{patchMode=false;loadView();};$('patchNature').onclick=()=>{patchMode=true;loadView();};
   $('lessonDialog').querySelectorAll('.close,.done').forEach(button=>button.onclick=()=>$('lessonDialog').close());
   $('groupSelect').onchange=e=>go(Number(e.target.value)); $('previous').onclick=()=>go(group-1); $('next').onclick=()=>go(group+1);
   $('back').onclick=()=>{theme=null;loadView();}; $('growth').oninput=e=>{stopReplay();setState(e.target.value);};
@@ -225,6 +241,6 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopReplay();});
   window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);stopReplay();imageCache.clear();});
   // Testable state only. No persistence or cross-frame access is needed.
-  window.hybridJourneyState=()=>({group,theme,state,ready:!!current,cachedImages:imageCache.size,renderMs,fps,moving});
+  window.hybridJourneyState=()=>({group,theme,state,patches:patches(),lessonProgress:patches()?window.HybridLessonPatches.progress(state):null,ready:!!current,cachedImages:imageCache.size,renderMs,fps,moving});
   loadView();raf=requestAnimationFrame(animate);
 })();

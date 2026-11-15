@@ -15,3 +15,14 @@ progress are fictional. No production content or schema is used or changed.
 The image files are content-addressed; no API credentials, account data or
 private source links are embedded. Only selected views load. Runtime decoding is
 bounded to five images, with browser HTTP caching independent of that decoded cache.
+
+## Nature lesson-patch experiment
+
+Nature now defaults to a separate lesson-patch study. The original wide painted interior is still available through its toggle. Other interiors and all earlier artifact variants are unchanged.
+
+- The fixed 840 x 800 ground is a crop of the genuine sparse first-group painting. The old oak trunk and bare branches, terrain, water, paths, bridges and small existing scrub remain present at zero.
+- Eight real RGBA botanical pieces are reused from the earlier local `interior-lab/atlas-*.png` assets: canopy leaves (0), fern (8), purple flowers (9), daisies (10), yellow flowers (11), log (13), mushrooms (14) and pine (15). They are encoded as content-hashed WebP cutouts, not a soft mask over a full-scene painting.
+- The same ten-stop slider drives three deterministic density curves. At state 5 the oak foliage patch is 80%, bank planting 37% and forest-floor patch 0%. Stable plants are added in a fixed order; they do not jump position or scale through each state.
+- Patch percentages mean added planting/foliage density, not tree age or coverage of the whole base. Existing sparse scrub is not removed.
+- Nine images total roughly 485 KiB encoded and 4.6 MiB decoded RGBA. They load on the first patch visit, share one cached promise and stay decoded for that iframe session. The performance panel reports this separately from the five-image painting cache. No real-phone speedup is claimed.
+- This is a limited composition study. It has depth sorting by ground position but no matching contact-shadow or foreground-occlusion layers, and no authored sapling-to-mature stages. The separate sparse-painting finishing pass remains necessary for the ordinary painted interiors.

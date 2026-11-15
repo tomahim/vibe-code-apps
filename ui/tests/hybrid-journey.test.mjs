@@ -34,3 +34,33 @@ test('Only the hashed artwork directory receives long-lived private caching',()=
  assert.match(config,/location \^~ \/artifact-assets\/2026-11-15-ecosystem-growth-poc\/hybrid-journey\/assets\/ \{\s*add_header Cache-Control "private, max-age=31536000, immutable";\s*try_files \$uri =404;/);
  assert.ok(!/location \/ \{[^}]*immutable/s.test(config));
 });
+
+test('Nature uses real hashed partial assets with bounded encoded and decoded payloads',()=>{
+ vm.runInNewContext(read('patch-assets.js'),context);
+ const a=context.window.HYBRID_PATCH_ASSETS;
+ assert.equal(Object.keys(a.sprites).length,8);assert.equal(a.regions.length,3);
+ let bytes=0,pixels=0;
+ for(const asset of[a.base,...Object.values(a.sprites)]){
+  const b=fs.readFileSync(path.join(base,asset.src));bytes+=b.length;pixels+=asset.width*asset.height;
+  assert.equal(asset.bytes,b.length);assert.ok(asset.src.includes(crypto.createHash('sha256').update(b).digest('hex').slice(0,12)));
+ }
+ assert.ok(bytes<550*1024);assert.ok(pixels*4<5*1048576);
+});
+test('One slider drives monotonic fast, steady and late lesson progress with mixed middle states',()=>{
+ vm.runInNewContext(read('lesson-patches.js'),context);const p=context.window.HybridLessonPatches.progress;
+ assert.deepEqual(Array.from(p(1)),[0,0,0]);assert.deepEqual(Array.from(p(10)),[1,1,1]);
+ assert.ok(p(5)[0]>.79&&p(5)[1]>.36&&p(5)[1]<.38);assert.equal(p(5)[2],0);
+ for(let s=2;s<=10;s++)for(let i=0;i<3;i++)assert.ok(p(s)[i]>=p(s-1)[i]);
+ assert.equal(p(6)[0],1);assert.ok(p(6)[1]<1&&p(6)[2]<.2);
+});
+test('Patch composition leaves the base fixed and adds deterministic alpha pieces without a whole-scene mask',()=>{
+ const engine=context.window.HybridLessonPatches,a=context.window.HYBRID_PATCH_ASSETS;
+ const sprites=Object.fromEntries(Object.entries(a.sprites).map(([k,v])=>[k,{...v,key:k}]));
+ const loaded={base:{key:'base'},sprites};let calls=[];
+ const ctx={clearRect(){},drawImage(...args){calls.push(args);}};
+ engine.draw(ctx,840,800,1,loaded);assert.equal(calls.length,1);assert.equal(calls[0][0],loaded.base);
+ calls=[];engine.draw(ctx,840,800,5,loaded);const middle=calls.slice();
+ calls=[];engine.draw(ctx,840,800,10,loaded);assert.ok(calls.length>middle.length);
+ for(const c of middle)assert.ok(calls.some(full=>full.every((value,i)=>value===c[i])));
+ for(const[,x,y,w,h]of calls.slice(1)){assert.ok(x>=0&&y>=0&&x+w<=840&&y+h<=800);}
+});
