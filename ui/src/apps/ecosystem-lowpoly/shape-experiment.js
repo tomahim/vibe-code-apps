@@ -1,17 +1,19 @@
 import {createGarden} from './shape-garden.js';
-import {THEMES} from '../../../scripts/artifacts/little-grains/data.js';
-import {polygons,reshape} from './shape-footprints.js';
+import {THEMES} from './shape-data.js';
+import {polygons,interlocking,reshape} from './shape-footprints.js';
 
-// Identical illustrative library, fresh-season scenery and progress in both modes.
-// The optional shape callback touches only the outer theme slab and its outline.
-const state={week:16,playing:false},mount=document.querySelector('#mount');let garden,changing=false;
+// Identical illustrative library, fresh-season scenery and progress in every mode.
+// The shape callbacks touch only the outer theme slab and its outline.
+const state={week:16,playing:false,group:-1},mount=document.querySelector('#mount');let garden,changing=false;
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-async function render(shaped){
+const MODES={hex:{shape:null},paths:{shape:reshape},interlock:{shape:(g,ti)=>reshape(g,ti,interlocking[ti])},groups:{shape:(g,ti)=>reshape(g,ti,interlocking[ti]),groups:true}};
+async function render(mode){
  if(changing)return;changing=true;
  const previous=garden?{view:{...garden.view},progress:garden.progressSnapshot(),camera:garden.camera.position.clone(),target:garden.controls.target.clone()}:null;
  document.querySelectorAll('[data-shape]').forEach(b=>b.disabled=true);
  garden?.dispose();
- garden=createGarden({container:mount,profile:innerWidth<700?'mobile':'desktop',state,reduced:matchMedia('(prefers-reduced-motion:reduce)').matches,themeShape:shaped?reshape:null,displayProgress:previous?.progress});
+ const m=MODES[mode]||MODES.paths;
+ garden=createGarden({container:mount,profile:innerWidth<700?'mobile':'desktop',state,reduced:matchMedia('(prefers-reduced-motion:reduce)').matches,themeShape:m.shape,displayProgress:previous?.progress,groupFocus:!!m.groups,veilPolygons:m.groups?interlocking:null});
  window.__shapeGarden=garden;
  if(previous){
   const v=previous.view;
@@ -23,10 +25,10 @@ async function render(shaped){
   }
   garden.camera.position.copy(previous.camera);garden.controls.target.copy(previous.target);garden.controls.update();
  }
- document.querySelectorAll('[data-shape]').forEach(b=>{b.setAttribute('aria-pressed',String((b.dataset.shape==='paths')===shaped));b.disabled=false;});
+ document.querySelectorAll('[data-shape]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.shape===mode));b.disabled=false;});
  changing=false;
 }
-document.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>render(b.dataset.shape==='paths'));
-render(true);
-window.__shapeExperiment={counts:THEMES.map((t,i)=>({name:t.title,paths:t.paths.length,outlineVertices:polygons[i].length})),polygons};
+document.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>render(b.dataset.shape));
+render(MODES[location.hash.slice(1)]?location.hash.slice(1):'paths');
+window.__shapeExperiment={counts:THEMES.map((t,i)=>({name:t.title,paths:t.paths.length,outlineVertices:polygons[i].length,interlockVertices:interlocking[i].length})),polygons,interlocking};
 new ResizeObserver(([e])=>{mount.style.top=e.target.getBoundingClientRect().height+'px';}).observe(document.querySelector('.experiment-bar'));

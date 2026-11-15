@@ -1,14 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {polygons,reshape} from '../src/apps/ecosystem-lowpoly/shape-footprints.js';
-import {THEMES} from '../scripts/artifacts/little-grains/data.js';
+import {polygons,interlocking,WORLDS,themeCenters,reshape} from '../src/apps/ecosystem-lowpoly/shape-footprints.js';
+import {THEMES} from '../src/apps/ecosystem-lowpoly/shape-data.js';
 import {hexPrism,hexOutline,axial} from '../scripts/artifacts/little-grains/terrain.js';
 const contains=(poly,x,z)=>{let yes=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if(((a[1]>z)!==(b[1]>z))&&(x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0]))yes=!yes;}return yes;};
+test('the comparison library holds all twenty catalog themes with three to five paths each',()=>{
+ assert.equal(THEMES.length,20);
+ assert.equal(new Set(THEMES.map(t=>t.id)).size,20);
+ const terrains=new Set(['meadow','forest','orchard','mesa','lavender','pond','alpine']);
+ THEMES.forEach(t=>{assert.ok(terrains.has(t.terrain),t.id);assert.ok(t.paths.length>=3&&t.paths.length<=5,`${t.id} paths`);t.paths.forEach(p=>assert.ok(p.lessons.length>=3,`${t.id}/${p.title}`));});
+});
 test('outer footprints cover every unchanged path cell in the original slot order',()=>{
  const slots=[[0,0],[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]],order=[0,1,3,5,2,4,6];
  THEMES.forEach((t,ti)=>{const p=polygons[ti];assert.ok(p.length>6);t.paths.forEach((_,pi)=>{const [q,r]=slots[order[pi]],c=axial(q,r,1.035);for(let k=0;k<6;k++){const a=Math.PI/6+k*Math.PI/3;assert.ok(contains(p,c.x+Math.cos(a),c.z+Math.sin(a)),`${t.title} path${pi} corner${k}`);}});});
  assert.equal(new Set(polygons.map(p=>JSON.stringify(p))).size,3);
+});
+test('interlocking territories mesh without touching and keep every path cell inside',()=>{
+ assert.equal(interlocking.length,20);
+ assert.deepEqual(WORLDS.map(w=>w.themes.length),[4,4,4,4,4]);
+ assert.deepEqual(WORLDS.flatMap(w=>w.themes),[...Array(20).keys()]);
+ interlocking.forEach((p,ti)=>{
+  assert.ok(p.length>6,`theme ${ti} outline`);
+  // Every path-cell centre of this theme stays inside its own interlocking territory.
+  const slots=[[0,0],[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]],order=[0,1,3,5,2,4,6];
+  THEMES[ti].paths.forEach((_,pi)=>{const [q,r]=slots[order[pi]],c=axial(q,r,1.035);assert.ok(contains(p,c.x,c.z),`theme ${ti} path ${pi}`);});
+ });
+ // Neighbouring territories never intrude into one another (gap keeps them apart). Compare in world coordinates.
+ interlocking.forEach((a,i)=>interlocking.forEach((b,j)=>{if(j<=i)return;const [ax,az]=themeCenters[i],[bx,bz]=themeCenters[j];a.forEach(v=>assert.ok(!contains(b,v[0]+ax-bx,v[1]+az-bz),`${i} inside ${j}`));b.forEach(v=>assert.ok(!contains(a,v[0]+bx-ax,v[1]+bz-az),`${j} inside ${i}`));}));
 });
 test('changed outer slabs and hover boundaries have finite closed contours and soil colours',()=>{
  THEMES.forEach((t,i)=>{for(const g of [reshape(hexPrism(3.15,.55),i),reshape(hexOutline(3.15,.11),i)]){for(const v of g.attributes.position.array)assert.ok(Number.isFinite(v));assert.ok(g.boundingSphere?.radius>0||!g.boundingSphere);g.dispose();}});
