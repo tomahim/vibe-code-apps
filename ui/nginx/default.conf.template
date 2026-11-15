@@ -96,6 +96,13 @@ server {
         try_files $uri =404;
     }
 
+    # This experiment's paintings are content-addressed. Cache only this asset
+    # directory, never its HTML, controls, manifests or any account response.
+    location ^~ /artifact-assets/2026-11-15-ecosystem-growth-poc/hybrid-journey/assets/ {
+        add_header Cache-Control "private, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }

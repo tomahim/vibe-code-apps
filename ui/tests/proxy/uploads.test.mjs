@@ -145,3 +145,18 @@ test('recipe batch import bodies above 501 MiB are rejected by nginx', async () 
   });
   assert.equal(status, 413);
 });
+
+test('hybrid artwork is privately cached, but controls and missing files are not', async () => {
+  const route = '/artifact-assets/2026-11-15-ecosystem-growth-poc/hybrid-journey';
+  docker('exec', proxy, 'sh', '-c', `mkdir -p /usr/share/nginx/html${route}/assets && printf artwork > /usr/share/nginx/html${route}/assets/painting-0123456789ab.webp && printf controls > /usr/share/nginx/html${route}/index.html`);
+  const image = await fetch(`${origin}${route}/assets/painting-0123456789ab.webp`);
+  assert.equal(image.status, 200);
+  assert.equal(await image.text(), 'artwork');
+  assert.equal(image.headers.get('cache-control'), 'private, max-age=31536000, immutable');
+  const controls = await fetch(`${origin}${route}/index.html`);
+  assert.equal(controls.status, 200);
+  assert.equal(controls.headers.get('cache-control'), null);
+  const missing = await fetch(`${origin}${route}/assets/not-found.webp`);
+  assert.equal(missing.status, 404);
+  assert.equal(missing.headers.get('cache-control'), null);
+});

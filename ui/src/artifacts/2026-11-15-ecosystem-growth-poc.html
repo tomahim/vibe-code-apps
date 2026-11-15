@@ -414,7 +414,11 @@
     header { padding-top: 0.3rem; }
     #hyPanHint, #w3Hint, #g20Hint, #pwHint { bottom: 9.4rem; }
     .hy-stage { padding: 0.25rem 0 0.5rem; overflow: hidden; }
-    .hy-scene { width: min(150vw, calc((100vh - 260px) * (1672 / 940))); flex: none; }
+    .hy-scene { width: 100%; max-width: 100%; flex: none; }
+    #pane-hybrid .hy-stage { flex: none; padding: 3.1rem 0.4rem 0.5rem; }
+    #pane-hybrid .hy-wrap { flex: none; margin-top: auto; }
+    #pane-hybrid footer { margin-bottom: auto; padding-top: 0.5rem; }
+    #pane-hybrid .hy-pill { font-size: 0.66rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .hy-scene img { transition: none; }
@@ -606,6 +610,12 @@
 .il-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px;font-size:12px}.il-controls select{font:inherit;padding:7px 10px;border:1px solid #c8c6a5;border-radius:9px;background:#fff8e5;color:#34462c}#ilFrame{width:100%;flex:1;min-height:0;border:0;background:#29482c}.il-note{font-size:11px;text-align:center;padding:7px 12px;color:#665c48;background:#f5ecd7}#pane-interiorlab{min-height:65vh}@media(max-width:600px){body:has(#pane-interiorlab:not([hidden])) header h1,body:has(#pane-interiorlab:not([hidden])) header>p{display:none}body:has(#pane-interiorlab:not([hidden])) header{padding:6px 10px}#pane-interiorlab{height:auto;flex:1;min-height:0}.gt-viewtoggle{top:3.4rem;left:0.7rem;right:auto}.gt-stage.focusing .fw-crumb{display:none}.il-controls{padding:5px 10px}.il-controls strong{display:none}.il-controls select{width:100%;font-size:11px;padding:6px 8px}.il-note{font-size:9px;padding:5px 10px}}
 
 #pane-lowpoly,#pane-lowpolyall,#pane-pathshapes{height:calc(100vh - 158px);min-height:430px}#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden]){display:flex}#lpFrame,#lpAllFrame,#shapeFrame{width:100%;height:100%;border:0;display:block;background:#f6efe3}@media(max-width:600px){body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header h1,body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header>p{display:none}body:has(#pane-lowpoly:not([hidden]),#pane-lowpolyall:not([hidden]),#pane-pathshapes:not([hidden])) header{padding:6px 10px}#pane-lowpoly,#pane-lowpolyall,#pane-pathshapes{flex:1;min-height:0;height:auto}}
+
+@media(max-height:500px) and (min-width:601px){
+  body:has(#pane-hybridjourney:not([hidden])) header{display:flex;align-items:center;justify-content:center;padding:4px 12px}
+  body:has(#pane-hybridjourney:not([hidden])) header h1,body:has(#pane-hybridjourney:not([hidden])) .etabs{display:none}
+  body:has(#pane-hybridjourney:not([hidden])) .mobile-experiment{display:block;margin:0;width:260px;padding:5px 10px;border:1px solid #d8c9a9;border-radius:8px;background:var(--pill);font:12px system-ui;color:var(--ink)}
+}
 </style>
 </head>
 <body>
@@ -619,6 +629,7 @@
     <button class="etab" role="tab" data-tab="illustrated" id="tab-illustrated" aria-selected="true" aria-controls="pane-illustrated">Illustrated<small>10 states · baseline</small></button>
     <button class="etab" role="tab" data-tab="world3d" id="tab-world3d" aria-selected="false" tabindex="-1" aria-controls="pane-world3d">3D world<small>real-time</small></button>
     <button class="etab" role="tab" data-tab="hybrid" id="tab-hybrid" aria-selected="false" tabindex="-1" aria-controls="pane-hybrid">Hybrid<small>image + live overlay</small></button>
+    <button class="etab" role="tab" data-tab="hybridjourney" id="tab-hybridjourney" aria-selected="false" tabindex="-1" aria-controls="pane-hybridjourney">Hybrid journey<small>20 themes · 7 groups · 10 states</small></button>
     <button class="etab" role="tab" data-tab="grand" id="tab-grand" aria-selected="false" tabindex="-1" aria-controls="pane-grand">Grand world<small>20 themes</small></button>
     <button class="etab" role="tab" data-tab="painted" id="tab-painted" aria-selected="false" tabindex="-1" aria-controls="pane-painted">Painted world<small>20 themes · gallery art</small></button>
     <button class="etab" role="tab" data-tab="connected" id="tab-connected" aria-selected="false" tabindex="-1" aria-controls="pane-connected">Connected world<small>20 themes · one painting</small></button>
@@ -631,6 +642,7 @@
 </div>
 <select class="mobile-experiment" id="mobileExperiment" aria-label="Rendering experiment"></select></header>
 <main class="emain">
+  <section class="epane" id="pane-hybridjourney" role="tabpanel" aria-labelledby="tab-hybridjourney" hidden><iframe id="hjFrame" title="Hybrid journey: twenty themes in seven groups" style="flex:1;width:100%;height:100%;border:0;min-height:0" src="about:blank"></iframe></section>
   <section class="epane" id="pane-illustrated" role="tabpanel" aria-labelledby="tab-illustrated">
 
 
@@ -6454,6 +6466,7 @@ three/build/three.module.js:
     illustrated: document.getElementById("pane-illustrated"),
     world3d: document.getElementById("pane-world3d"),
     hybrid: document.getElementById("pane-hybrid"),
+    hybridjourney: document.getElementById("pane-hybridjourney"),
     grand: document.getElementById("pane-grand"),
     painted: document.getElementById("pane-painted"),
     connected: document.getElementById("pane-connected"),
@@ -6475,6 +6488,8 @@ three/build/three.module.js:
   function activate(name, focus) {
     if (!panes[name]) return;
     var leaving = active;
+    if(leaving === "hybridjourney" && name !== leaving) document.getElementById("hjFrame").src="about:blank";
+    if(name === "hybridjourney" && name !== leaving) document.getElementById("hjFrame").src="/artifact-assets/2026-11-15-ecosystem-growth-poc/hybrid-journey/index.html";
     if(leaving==='pathshapes'&&name!==leaving)document.getElementById('shapeFrame').src='about:blank';
     if(name==='pathshapes'&&name!==leaving)document.getElementById('shapeFrame').src='/artifact-assets/2026-11-15-ecosystem-growth-poc/low-poly/shapes.html';
     if(leaving==="lowpolyall" && name!==leaving)document.getElementById('lpAllFrame').src='about:blank';
@@ -7610,7 +7625,7 @@ three/build/three.module.js:
 
   // boot: honor a hash deep-link (#world3d / #hybrid / #grand / #painted / #connected), default tab stays illustrated
   var hash = (location.hash || "").replace("#", "");
-  if (hash === "world3d" || hash === "hybrid" || hash === "grand" || hash === "painted" || hash === "connected") activate(hash);
+  if (hash === "hybridjourney" || hash === "world3d" || hash === "hybrid" || hash === "grand" || hash === "painted" || hash === "connected") activate(hash);
 })();
 </script>
 </body>
