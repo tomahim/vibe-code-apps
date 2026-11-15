@@ -6203,15 +6203,27 @@ three/build/three.module.js:
       applyFT(false);
     }
     function positionFMarkers() {
+      var placed = [];
       Array.prototype.forEach.call(fRegions.children, function (m, k) {
         var sx, sy;
         if (viewMode === "interior" && interior) {
           var a = interior.regionAnchors[k % interior.regionAnchors.length];
           var pt = interior.project(a.x, a.y, a.z);
-          if (!pt) { m.style.display = "none"; return; }
           m.style.display = "";
-          sx = pt.x; sy = pt.y;
+          var mw = m.offsetWidth, mh = m.offsetHeight;
+          var clash = pt && placed.some(function(r){ return Math.abs(pt.x-r.x)<(mw+r.w)/2+6 && Math.abs(pt.y-r.y)<(mh+r.h)/2+5; });
+          // hide markers whose spot is off-screen instead of clamping them
+          // onto the stage edge (they clipped there / piled into strips)
+          if (!pt || clash || pt.x < mw / 2 + 12 || pt.x > stage.clientWidth - mw / 2 - 12 || pt.y < 60 || pt.y > stage.clientHeight - 44) {
+            m.style.display = "none"; return;
+          }
+          m.style.display = "";
+          placed.push({x:pt.x,y:pt.y,w:mw,h:mh});
+          m.style.left = pt.x + "px";
+          m.style.top = pt.y + "px";
+          return;
         } else {
+          m.style.display = "";
           sx = T.x + (Number(m.dataset.px) / 100) * WW * T.s;
           sy = T.y + (Number(m.dataset.py) / 100) * WH * T.s;
         }
