@@ -2,6 +2,7 @@
 // Every scenery item can be a lesson spot, and every item grows in over ten stages.
 // Data only: no lesson content, progress or app data is connected.
 import * as T from 'three';
+import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 
 const PAL={terra:'#c65d3b',terraD:'#a94a2e',sand:'#e5d4a8',pale:'#e7dcc3',moss:'#7d9c63',mossD:'#5f8660',oakA:'#8fae6b',oakB:'#a9c07c',pine:'#5f8660',pineD:'#486e55',trunk:'#8c6a4a',
 rock:'#b6b1a2',rockD:'#8e8b82',snow:'#f3f5ef',ice:'#bcd8e6',iceD:'#8fbbd4',water:'#9ccbd6',waterD:'#6fa8bf',lagoon:'#8fd2cc',deep:'#2f6f93',gold:'#d9b95a',goldD:'#c49a3c',
@@ -20,7 +21,8 @@ const rockM=(g,r,c,x,z,s=1)=>{const m=M(new T.DodecahedronGeometry(r,0),c,g,x,r*
 
 // Prop library. Each prop is built at the origin, base on the ground, about 2 units tall at scale 1.
 const P={
-oak:(g,c)=>{cyl(g,.1,.16,.9,'trunk',0,0,0,5);ico(g,.8,c==='warm'?'#b3b373':'oakA',0,1.45,0,.9);ico(g,.52,'oakB',.45,1.2,.1);ico(g,.4,'oakB',-.4,1.15,-.2);},
+oak:(g,c)=>{cyl(g,.13,.24,1.2,'#76563a',0,0,0,7);for(let j=0;j<4;j++){const a=j*1.9;const br=cyl(g,.06,.12,.85,'#876347',0,.65,0,5);br.rotation.set(Math.cos(a)*.55,0,Math.sin(a)*.55);}
+ [[0,1.75,0,.95],[-.6,1.45,.1,.66],[.62,1.55,.05,.72],[-.1,1.45,-.55,.7],[.12,2.15,.1,.64]].forEach(([x,y,z,r],i)=>{const m=ico(g,r,['#78934b','#9bb55f','#a9be70','#627e41','#b7c77b'][i],x,y,z,.85,1);m.rotation.set(i*.4,i*1.7,0);});},
 pine:(g,c)=>{const sn=c==='snow';cyl(g,.08,.12,.5,'trunk',0,0,0,5);cone(g,.8,1.1,sn?'#c6d7cb':'pine',0,.4,0);cone(g,.6,1,sn?'#e9efe0':'#6c966a',0,1.0,0);cone(g,.4,.9,sn?'snow':'#80a77b',0,1.55,0);},
 blossom:g=>{cyl(g,.1,.16,.8,'trunk',0,0,0,5);ico(g,.8,'pink',0,1.35,0,.9);ico(g,.5,'#f0cfc4',.45,1.2,.1);ico(g,.4,'#e2939f',-.4,1.15,-.1);},
 maple:g=>{cyl(g,.1,.16,.8,'trunk',0,0,0,5);ico(g,.78,'#d2763d',0,1.35,0,.9);ico(g,.5,'#e29b4c',.4,1.2,.1);},
@@ -41,7 +43,7 @@ cobble:g=>{rockM(g,.3,'rock',-.35,0);rockM(g,.35,'rockD',.1,.1);rockM(g,.25,'roc
 stones:g=>{rockM(g,.6,'#a9a59a',0,0,.9);rockM(g,.4,'rock',.65,.2);rockM(g,.32,'#8e8b82',-.55,.3);},
 crystal:(g,c)=>{const cc=c==='white'?'#e8ecf6':'purple';for(let i=0;i<5;i++){const h=.8+((i*23)%7)/6,m=cone(g,.17,h,i%2?cc:(c==='white'?'#cfd8ec':'purpleL'),Math.cos(i*1.26)*.3,0,Math.sin(i*1.26)*.3,6);m.rotation.set(Math.sin(i)*.25,0,Math.cos(i*2)*.25);}},
 geode:g=>{const s=M(new T.DodecahedronGeometry(1,0),'#8f8c88',g,0,.55,0);s.scale.set(1.05,.62,.9);const hole=M(new T.CylinderGeometry(.62,.62,.12,7),'#5d557a',g,0,.98,0);for(let i=0;i<6;i++){const m=cone(g,.12,.55+(i%3)*.15,i%2?'purple':'purpleL',Math.cos(i*1.05)*.32,.92,Math.sin(i*1.05)*.32,6);m.rotation.set(Math.sin(i*2)*.3,0,Math.cos(i*2)*.3);}},
-ice:g=>{bx(g,1.5,.5,1.1,'ice',0,.25,0).rotation.y=.2;bx(g,1.1,.45,.85,'#cfe5ee',.1,.7,0).rotation.y=-.15;cone(g,.5,.9,'snow',0,.9,0,5);},
+ice:g=>{const a=M(new T.DodecahedronGeometry(1,0),'#c4dde8',g,0,.42,0);a.scale.set(1.2,.65,.85);const b=M(new T.IcosahedronGeometry(.85,0),'#f2f6f4',g,.04,.8,-.12);b.scale.set(1.2,.5,.9);},
 iceberg:g=>{cone(g,.7,1,'#dcecf2',0,.1,0,4);cone(g,.4,.7,'ice',.5,.05,.1,4);},
 crack:g=>{bx(g,.1,.06,1.6,'#4f7fa4',0,.03,0).rotation.y=.4;bx(g,.08,.06,.9,'#4f7fa4',.25,.03,.45).rotation.y=.9;},
 basalt:g=>{[[0,0,1.3],[.42,.25,.9],[-.42,.2,1.6],[.1,-.45,.7],[-.2,.55,1.0],[.55,-.3,1.1],[-.55,-.35,.6]].forEach(([x,z,h],i)=>cyl(g,.24,.26,h,i%2?'basaltL':'basalt',x,0,z,6));},
@@ -121,33 +123,136 @@ P.mist=g=>{cyl(g,1.3,1.5,.3,'mist',0,.5,0,9).material=mat('#eef3ee','soft');};
 export const THEME_KEYS=Object.keys(THEMES);
 const lerpC=(a,b,t)=>new T.Color(a).lerp(new T.Color(b),t);
 // Build one theme into parent at (cx,cz). mode 'ov' (overview) or 'in' (interior).
-export function buildTheme(parent,key,mode,cx,cz,R,hexFn){
- const th=THEMES[key],f=R*.8,k=R*(mode==='in'?.165:.19),items=[],pins=[],root=new T.Group();root.position.set(cx,0,cz);parent.add(root);
- const gmat=new T.MeshStandardMaterial({color:th.g,roughness:1,flatShading:true});hexFn(root,0,0,R,gmat);
+export function buildTheme(parent,key,mode,cx,cz,R,hexFn,polygon=null){
+ const th=THEMES[key],f=R*.88,k=R*.19,items=[],pins=[],root=new T.Group();root.position.set(cx,0,cz);parent.add(root);
+ const gmat=new T.MeshStandardMaterial({color:th.g,roughness:1,flatShading:true,vertexColors:true});
+ const poly=polygon||Array.from({length:9},(_,i)=>{const a=i*Math.PI*2/9;return [Math.cos(a)*R*(1+.08*Math.sin(i*17)),Math.sin(a)*R*(1+.08*Math.sin(i*17))];});
+ const ground=terrain(root,poly,R,key,gmat);ground.userData.theme=key;
  const entry={root,items,pins,gmat,color:th.g};
  th.items.forEach(it=>{
-  let [kind,x,z,s,from,lesson,inOnly]=it;if(inOnly&&mode!=='in')return;
+  let [kind,x,z,s,from,lesson,inOnly]=it;if(inOnly&&mode!=='in')return;if(key==='ocean'&&kind==='pool:lagoon')return;
   const [name,param]=kind.split(':');const g=new T.Group();root.add(g);
   if(name==='river'){const pts=x,w=z;ribbon(g,pts,w*(mode==='in'?1:1.5),param||'water',f);g.position.y=.42;g.userData.flat=true;
    const mp=pts[Math.min(1,pts.length-1)],mid=new T.Vector3(mp[0]*f,.9,mp[1]*f);
    const rname=from,rec={g,from:s,scale:1,flat:true,lesson:rname||null,mid};items.push(rec);g.userData.rec=rec;
    if(rname){const pin=makePin();pin.position.copy(mid);g.add(pin);pins.push({pin,rec});rec.pin=pin;}
    return;}
-  const build=P[name];if(!build)throw new Error('missing prop '+name);build(g,param);
+  const build=key==='art'&&name==='flowers'?P.wildflowers:P[name];if(!build)throw new Error('missing prop '+name);build(g,param);if(!['stars','steam','geyser','mist','lavacrack','meteor'].includes(name))bake(g);
   const box=new T.Box3().setFromObject(g),top=Math.max(.8,box.max.y);
-  const sc=k*s;g.position.set(x*f,.42,z*f);g.rotation.y=(x*7+z*3)%6.28*.4;g.scale.setScalar(sc);
+  const sc=k*s;g.position.set(x*f,(key==='ocean'&&name==='pool'?.52:.42)+(key==='cooking'&&Math.abs(x)<.73&&z>-.77&&z<.49?Math.max(0,Math.floor((.75-z)*2.5))*R*.065+R*.035:0),z*f);g.rotation.y=(x*7+z*3)%6.28*.4;g.scale.setScalar(sc);
   const rec={g,from,scale:sc,lesson:lesson||null};items.push(rec);g.userData.rec=rec;
   if(lesson){const pin=makePin();pin.position.set(0,top+.45,0);pin.scale.setScalar((mode==='in'?.7:.42)/Math.max(.55,sc));g.add(pin);pins.push({pin,rec});rec.pin=pin;rec.pinK=mode==='in'?.7:.42;}
  });
+ enrich(entry,key,mode,R,poly);
  return entry;
 }
-function makePin(){const g=new T.Group();const m=new T.Mesh(new T.OctahedronGeometry(.34,0),mat('#c65d3b','glow'));m.scale.y=1.25;g.add(m);g.userData.pin=true;return g;}
+function makePin(){const g=new T.Group();const m=new T.Mesh(new T.OctahedronGeometry(.18,0),mat('#c65d3b','glow'));m.scale.y=1.25;g.add(m);g.userData.pin=true;return g;}
 // Growth: item appears at its stage and reaches full size three stages later.
 export function applyStage(entry,stage){
- for(const rec of entry.items){const vis=stage>=rec.from;rec.g.visible=vis;if(!vis)continue;const w=Math.min(3,10-rec.from),k=w<=0?1:.35+.65*Math.min(1,(stage-rec.from)/w);
+ for(const rec of entry.items){const vis=stage>rec.from-.85;rec.g.visible=vis;if(!vis)continue;const w=Math.min(2.4,10-rec.from+.85),t=Math.max(0,Math.min(1,(stage-rec.from+.85)/w)),k=Math.max(.001,t*t*(3-2*t));
   if(rec.flat){rec.g.scale.set(1,1,1);const q=.4+.6*k;rec.g.scale.set(1,1,1);rec.g.children[0].scale.set(1,1,1);rec.g.children[0].material.opacity=1;rec.g.scale.y=1;rec.g.scale.x=q+0*1;rec.g.scale.z=q;rec.g.position.x=0;}
-  else rec.g.scale.setScalar(rec.scale*k);
+  else if(rec.deco)rec.g.scale.set(1,k,1);else rec.g.scale.setScalar(rec.scale*k);
   if(rec.pin&&!rec.flat)rec.pin.scale.setScalar(rec.pinK/Math.max(.55,rec.scale*k));}
- entry.gmat.color.copy(lerpC('#e8dec7',entry.color,.35+.65*(stage-1)/9));
+ entry.gmat.color.copy(lerpC('#a99a7b','#ffffff',.65+.35*(stage-1)/9));
 }
 export function disposeEntry(entry){entry.root.traverse(o=>{if(o.geometry)o.geometry.dispose();});entry.gmat.dispose();}
+
+P.lavarock=g=>{rockM(g,.75,'basalt',0,0);rockM(g,.4,'basaltL',.45,.2);};
+P.wildflowers=(g,c)=>{const cc={purple:'#9b81b8',sun:'#ecc85d',poppy:'#e27e68'}[c]||'#ece7bf';for(let i=0;i<7;i++){const x=(i%3-.8)*.3,z=(Math.floor(i/3)-.8)*.3;cyl(g,.014,.02,.3+i%3*.08,'green',x,0,z,4);ico(g,.08,cc,x,.34+i%3*.08,z,.7);}};
+// Seeded low-poly ground, planted layers and ecosystem-scale silhouettes.
+const rnd=(i,s=0)=>{const x=Math.sin(i*127.1+s*311.7)*43758.5453;return x-Math.floor(x);};
+function inside(x,z,p){let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];if(((a[1]>z)!==(b[1]>z))&&x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0])c=!c;}return c;}
+function terrain(root,p,R,key,material){
+ const pos=[],colors=[],base=new T.Color(THEMES[key].g),sand=new T.Color('#d9c799');
+ function tri(a,b,c,depth=0){if(depth<3){const ab=[(a[0]+b[0])/2,(a[1]+b[1])/2],bc=[(b[0]+c[0])/2,(b[1]+c[1])/2],ca=[(c[0]+a[0])/2,(c[1]+a[1])/2];tri(a,ab,ca,depth+1);tri(ab,b,bc,depth+1);tri(ca,bc,c,depth+1);tri(ab,bc,ca,depth+1);return;}
+  const x=(a[0]+b[0]+c[0])/3,z=(a[1]+b[1]+c[1])/3,n=rnd(x*9+z*3,4),cc=base.clone().lerp(sand,n*.12).multiplyScalar(.96+n*.07);
+  for(const q of [a,c,b]){pos.push(q[0],.42+(rnd(q[0]*3+q[1]*7,8)-.5)*R*.0011,q[1]);colors.push(cc.r,cc.g,cc.b);}}
+ p.forEach((a,i)=>tri([0,0],a,p[(i+1)%p.length]));
+ const geom=new T.BufferGeometry();geom.setAttribute('position',new T.Float32BufferAttribute(pos,3));geom.setAttribute('color',new T.Float32BufferAttribute(colors,3));geom.computeVertexNormals();const top=new T.Mesh(geom,material);top.receiveShadow=true;root.add(top);
+ // Three narrow soil bands and a bevel give the shared landscape physical depth.
+ const shape=new T.Shape(p.map(([x,z])=>new T.Vector2(x,-z)));const geo=new T.ExtrudeGeometry(shape,{depth:.34,bevelEnabled:true,bevelSegments:1,steps:1,bevelSize:.025,bevelThickness:.025});geo.rotateX(-Math.PI/2);const slab=new T.Mesh(geo,mat('#b8a37d'));slab.position.y=.04;slab.castShadow=true;slab.receiveShadow=true;root.add(slab);return top;
+}
+function bake(g){const geos=[];g.updateMatrixWorld(true);const inv=new T.Matrix4().copy(g.matrixWorld).invert();g.traverse(m=>{if(!m.isMesh||m.userData.pin)return;let geo=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone();geo.applyMatrix4(new T.Matrix4().multiplyMatrices(inv,m.matrixWorld));const co=m.material.color,cs=[];for(let i=0;i<geo.attributes.position.count;i++)cs.push(co.r,co.g,co.b);geo.setAttribute('color',new T.Float32BufferAttribute(cs,3));for(const a of Object.keys(geo.attributes))if(!['position','normal','color'].includes(a))geo.deleteAttribute(a);geos.push(geo);});
+ if(!geos.length)return;const merged=mergeGeometries(geos);g.clear();const material=new T.MeshStandardMaterial({vertexColors:true,roughness:1,flatShading:true});const mesh=new T.Mesh(merged,material);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);geos.forEach(x=>x.dispose());
+}
+function enrich(entry,key,mode,R,poly){
+ const root=entry.root,groups=Array.from({length:8},()=>new T.Group());groups.forEach(g=>{g.position.y=.43;root.add(g);});
+ const f=R*.88,seed=THEME_KEYS.indexOf(key)+1;
+ function add(kind,x,z,s=1,from=3,c){if(!inside(x*R*1.045,z*R*1.045,poly))return;const g=new T.Group();groups[Math.min(7,Math.max(0,from-2))].add(g);P[kind](g,c);g.position.set(x*R,key==='cooking'&&Math.abs(x)<.73&&z>-.77&&z<.49?Math.max(0,Math.floor((.75-z)*2.5))*R*.065+R*.035:0,z*R);g.scale.setScalar(s*R*.185);g.rotation.y=rnd(x+z,seed)*6.28;return g;}
+ const leafy=['nature','biology','health','languages','music','history','technology','mathematics','cooking'];
+ const lush=leafy.includes(key),barren=['climate','space','physics','chemistry','geology','engineering'].includes(key);
+ // A planted ground layer, with quiet clearings and open water kept clear.
+ const N=mode==='in'?470:190;
+ for(let i=0;i<N;i++){
+  const x=(rnd(i,seed)-.5)*2.8,z=(rnd(i+901,seed)-.5)*2.8;if(!inside(x*R,z*R,poly))continue;
+  if(Math.hypot(x,z)>1.18)continue;
+  const clear=Math.abs(x+.16*Math.sin(z*5))<.13;
+  if(key==='mind')continue;
+  if(key==='ocean'&&Math.hypot(x,z)<.79)continue;
+  if(['health','languages'].includes(key)&&Math.hypot(x+.45,z-.4)<.29)continue;
+  if(['history','engineering'].includes(key)&&z>.27)continue;
+  if(key==='technology'&&(Math.abs(x)<.13||Math.abs(z)<.16))continue;
+  if(lush&&clear&&z>-.5&&z<.95)continue;
+  const scale=.13+rnd(i+78,seed)*.24,from=2+(i%7);
+  if(barren){if(i%4===0)add('rock',x,z,scale,from);if(key==='space'&&i%31===0)add('cactus',x,z,.28,from);continue;}
+  if(i%13===0)add('rock',x,z,scale,from);
+  else if(i%7===0&&lush)add('bush',x,z,scale*1.8,from);
+  else if(i%17===0&&key==='nature')add('mushroom',x,z,.24,from);
+  else if(i%6===0&&['health','languages','art','cooking','music'].includes(key))add('flowers',x,z,scale*.7,from,key==='art'?['purple','sun','poppy'][Math.floor((z+1)*2)%3]:'mixed');
+  else add(lush&&i%3===0?'fern':'grass',x,z,scale*1.8,from);
+ }
+ // Composition-level masses, not a collection of symbols.
+ if(key==='nature'||key==='biology'){
+  const N=key==='nature'?25:21;
+  for(let i=0;i<N;i++){
+   const a=i*2.399,r=.39+.56*Math.sqrt(rnd(i+42,seed)),x=Math.cos(a)*r,z=Math.sin(a)*r;
+   if(z>.18&&Math.abs(x)<.32)continue;
+   add(key==='biology'?(i%4?'emergent':'palm'):(i%5?'oak':'pine'),x,z,.7+rnd(i,9)*.8,2+i%6);
+  }
+  if(key==='biology')for(let i=0;i<8;i++)add('rock',-.15+Math.cos(i)*.28,-.5+Math.sin(i)*.18,1.3+i%3*.3,2+i%4);
+  const path=new T.Group();path.position.y=.44;root.add(path);ribbon(path,[[.05,-.8],[-.1,-.3],[.15,.15],[-.12,.55],[.07,1]],.075,'#e8d3a8',R);
+ }
+ if(key==='ocean'){
+  const lagoon=new T.Group();lagoon.position.y=.435;root.add(lagoon);cyl(lagoon,R*.84,R*.84,.015,'#65c9cb',0,0,0,22);cyl(lagoon,R*.65,R*.65,.025,'#70d1cf',0,0,0,18);
+  // Ring of beach, reef stones and palms around the lagoon.
+  for(let i=0;i<30;i++){const a=i*6.28/30,x=Math.cos(a)*.92,z=Math.sin(a)*.92;add(i%7===0?'palm':i%3?'rock':'bush',x,z,i%7===0?.65:.35,2+i%6,i%3?'white':undefined);}
+  for(let i=0;i<14;i++){const a=i*2.4;add('coral',Math.cos(a)*.65,Math.sin(a)*.65,.4+rnd(i,2)*.25,3+i%6);}
+ }
+ if(key==='climate'){
+  for(let i=0;i<13;i++){const x=(i%5-2)*.36,z=-.6+Math.floor(i/5)*.34;add('ice',x,z,1.3+rnd(i,8)*1.4,2+i%5);}
+  const sea=new T.Group();root.add(sea);sea.position.y=.44;ribbon(sea,[[-.7,.6],[-.3,.68],[.3,.62],[.7,.65]],.13,'#5fa9c6',R);
+ }
+ if(key==='space'){for(let i=0;i<6;i++)add('mesa',-.75+i*.3,-.75+Math.sin(i)*.1,1.2+i%2*.3,2+i%3,'mauve');}
+ if(key==='geology'){for(let i=0;i<8;i++)add(i%3?'mesa':'hoodoo',Math.cos(i*2.1)*.58,-.15+Math.sin(i*2.1)*.55,1.2+rnd(i,5)*1.1,2+i%5);}
+ if(key==='physics'){
+  for(let i=0;i<10;i++){const a=i*2.4;add('lavarock',Math.cos(a)*(.35+rnd(i,5)*.6),Math.sin(a)*.8,.65+rnd(i,7)*.85,2+i%6);}
+  const lava=new T.Group();root.add(lava);lava.position.y=.46;ribbon(lava,[[.2,-1],[.35,-.5],[-.15,0],[.25,.5],[-.1,1]],.045,'lava',R);
+ }
+ if(key==='chemistry'){
+  for(let i=0;i<11;i++){const a=Math.PI+i*Math.PI/10;add('rock',Math.cos(a)*.57,Math.sin(a)*.65,2.5+Math.sin(i/10*Math.PI)*2,2+i%5);}
+  for(let i=0;i<22;i++){const a=i*2.4,r=.25+rnd(i,3)*.55;add('crystal',Math.cos(a)*r,Math.sin(a)*r,.6+rnd(i,4),3+i%6,i%4===0?'white':undefined);}
+ }
+ if(key==='sport'){for(let i=0;i<7;i++)add('peak',-.8+i*.25,-.55+Math.sin(i)*.13,1.3+Math.sin(i*.7)*.9,2+i%4);for(let i=0;i<18;i++){const a=i*2.4;add('pine',Math.cos(a)*.8,.3+Math.sin(a)*.45,.35+rnd(i,3)*.45,2+i%6);}}
+ if(key==='health'){for(let i=0;i<13;i++){const a=i*2.4;add(['blossom','maple','pine'][i%3],Math.cos(a)*.8,Math.sin(a)*.75,.45+rnd(i,3)*.4,2+i%6,i%3===2?'snow':undefined);}}
+ if(key==='mind'){
+  for(let i=0;i<42;i++){const t=M(new T.TorusGeometry(R*(.18+i*.018),R*.0018,3,64),'#c5ba99',root,0,.435,.12*R);t.rotation.x=Math.PI/2;}
+  for(let i=0;i<5;i++)add('screen',-.65+i*.3,-.8,.85,2+i%4);
+ }
+ if(key==='cooking'){
+  for(let i=0;i<4;i++){const g=new T.Group();groups[0].add(g);bx(g,R*1.45,R*.07,R*.24,'#cbb67c',0,(3-i)*R*.065,-.65*R+i*.34*R);for(let j=0;j<7;j++)add(i%2?'olive':'rows',-.75+j*.24,-.6+i*.34,.43,2+(i+j)%6,'vine');}
+ }
+ if(key==='languages'){for(let i=0;i<13;i++)add('bush',-.9+i*.15,-.78,.65,2+i%6);for(let i=0;i<9;i++)add('flowers',-.7+i*.18,.08+Math.sin(i)*.2,.6,3+i%5,'mixed');}
+ if(key==='art'){for(let i=0;i<85;i++){const x=(rnd(i,4)-.5)*1.9,z=(rnd(i,5)-.5)*1.9;add('wildflowers',x,z,.9,2+i%7,z<-.25?'purple':z<.3?'sun':'poppy');}}
+ if(key==='music'){
+  for(let i=0;i<9;i++){const a=Math.PI+i*Math.PI/8;add('cliff',Math.cos(a)*.7,Math.sin(a)*.7,1.2+rnd(i,1)*.5,2+i%5);}
+  for(let i=0;i<9;i++)add(i%3?'pine':'oak',Math.cos(i*2.4)*.8,Math.sin(i*2.4)*.8,.5,2+i%5);
+ }
+ if(key==='history'){for(let i=0;i<24;i++)add(i%4?'olive':'cypress',Math.cos(i*2.4)*.8,-.2+Math.sin(i*2.4)*.4,.7+rnd(i,3)*.3,2+i%6);for(let i=0;i<7;i++)add('rock',-.9+i*.28,.32,.8,2+i%4);}
+ if(key==='technology'){for(let i=0;i<20;i++){const a=i*2.4;add('mangrove',Math.cos(a)*(.45+rnd(i,3)*.35),Math.sin(a)*.8,.65+rnd(i,2)*.6,2+i%6);}}
+ if(key==='engineering'){for(let i=0;i<20;i++){const x=-.8+(i%5)*.34,z=-.6+Math.floor(i/5)*.28;add('basalt',x,z,1.2-z*.9,2+i%6);}}
+ if(key==='mathematics'){for(let i=0;i<6;i++){const a=i*2.4;add('terrace',Math.cos(a)*.48,Math.sin(a)*.48,1.3,2+i,'rice');}for(let i=0;i<8;i++)add(i%2?'pine':'oak',Math.cos(i*2.4)*.88,Math.sin(i*2.4)*.88,.55,2+i%6);}
+ if(key==='economics'){for(let i=0;i<20;i++){const x=-.65+(i%4)*.4,z=-.65+Math.floor(i/4)*.29;if(Math.abs(x)<.15)continue;add('wheat',x,z,.85,2+i%6);}for(let i=0;i<7;i++)add('cypress',-.8+i*.26,-.85,.6,2+i%6);}
+ // Signature terracotta stone recurring in the reference sheets.
+ if(key!=='mind')add('rock',.69,.68,.55,5,'terra');
+ groups.forEach((g,i)=>{bake(g);entry.items.push({g,from:Math.min(9,i+2),scale:1,deco:true,lesson:null});});
+}

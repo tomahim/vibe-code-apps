@@ -1,24 +1,22 @@
-# Learning-first low-poly navigation studies
+# Low-poly ecosystem landscape studies
 
-Two artifact-only variants share the same small Three.js renderer and canonical twenty-theme inventory:
+Two artifact-only variants share the canonical twenty-theme inventory:
 
-- Low-poly tour: five worlds with four themes, controlled horizontal swipe/arrows in the overview. Choosing a theme hides the other territories and opens a slightly richer low-poly scene.
-- Low-poly map: all twenty themes on one open-ground scene. Drag, wheel/pinch or the zoom controls to explore and choose a territory. The theme view returns to that same map position and zoom.
+- Low-poly tour: five groups of four neighbouring landscapes. Swipe/arrows move between groups; a territory opens its interior.
+- Low-poly map: twenty ecosystems form one irregular shared-edge terrain mosaic. Narrow inset seams retain their boundaries. Drag, pinch/wheel and zoom controls explore the map; tapping terrain enters a theme. Phone map names appear after zooming so labels do not blanket the scenery.
 
-The scenes follow the simple direction of the 20-theme low-poly design catalog: one calm ecosystem per theme on a cream hex territory (oak and deer for Nature, observatory dome and crater for Space, cottage, pond and terracotta pot for Languages, and so on). The terracotta accent, serif names and spaced hex territories carry over from the learning garden.
+The scenes follow the Simple visual rows of the twenty-theme Notion comparison catalog: layered forest canopies and clearings, coral lagoon, glacier, desert plateau, stratified mesa, geothermal field, crystal cavern, alpine massif, seasonal garden, raked-sand garden, farm terraces, cottage garden, wildflower prairie, waterfall gorge, antiquity coast, mangroves, basalt coast, rice terraces and grain fields. These are procedural 3D interpretations, not image-identical reproductions of the concept illustrations.
 
-Each scenery element can be a lesson spot (a tree, an animal, a rock, a pond). Spots show a small terracotta marker; inside a theme each one has a small name chip, and tapping it opens a short card. Scenes are data in `scenes.js` (kind, position, size, stage it appears at, optional spot name). There is no lesson content, recorded progress, app data or production-app integration; the cards say so.
+`territories.js` clips a shared polygon against Voronoi bisectors. Adjacent cells reuse the same border before a small inset. The layouts have no regular-hex/grid selector arrangement. `scenes.js` provides flat-shaded props, seeded planted ground layers, topographic masses and vertex-coloured faceted ground. Decorative geometry is merged to reduce draw calls.
 
-A ten-stage growth slider (with play) sits in both tabs. Elements appear at their stage and grow to full size three stages later while the ground colour fills in, so each theme can be watched growing from bare ground to fully grown. The stage is shared by the overview, the map and the theme interior.
+Named scenery objects remain lesson spots. Interior chips track their exact object anchors, with leader lines when labels move for readability. Chips avoid one another and the header/control area. Tapping a chip opens an explicitly labelled layout placeholder. No real lessons, personal progress, API calls, app data or production-app integration.
 
-Both variants use 3D geometry on open ground rather than a rectangular background image. Territory gaps remain visible. The finite twenty-theme inventory is not an infinite content promise; the ground has no visible board frame or image edge. Theme view pan/zoom is bounded, while the full map has a wider exploration range.
+A shared ten-state slider and autoplay preview growth in both variants. Every transition interpolates continuously with smoothstep easing over 1.9 seconds; entering a theme grows it into the currently selected state. Reduced motion snaps immediately and freezes ambient motion.
 
-## Build and performance
+## Build and verification
 
-From `ui`, run `node scripts/build-lowpoly-tour.mjs`. This extracts only group/theme keys from the existing artifact and writes a small data entry beside the shared renderer and HTML. No textures, external image requests or model downloads are needed. The variants load only when selected and unload when leaving their tab. The shared engine is cached across both variants. Existing illustration and 3D comparisons remain unchanged.
+From `ui`, run `node scripts/build-lowpoly-tour.mjs`, `npm test`, and `npm run build`. Assets are local geometry only, with no textures, downloaded models or runtime network requests. Only selected tabs load their renderer; leaving unloads the iframe.
 
-Measured locally in headless Chrome (software GL) at full growth: the open map starts at about 740 draw calls and 14,000 triangles, a tour overview at about 150 calls and 2,600 triangles, a theme interior at about 60 calls and 1,000 triangles. These are local structural measurements, not frame-rate guarantees. Rendering uses a 1.5 pixel-ratio cap and a single 1024px shadow map. Reduced motion freezes ambient bird motion and removes the world glide. No paid assets or infrastructure changes.
+Checks include all twenty interiors in both modes at 390px, canonical group headings, lesson-chip collision/screen bounds, stage extremes and intermediate fractional stages, terrain picking, mouse drag, native two-touch pinch, reset/back, placeholder cards, embedded desktop/phone layout, reduced motion and lazy iframe unload.
 
-## Verification
-
-Run `npm test` and `npm run build`. Inspect the actual embedded artifact on desktop and phone: all five worlds, all twenty theme labels, lesson-placeholder readability, no label overlap, swipe limits, theme entry/back, pan/zoom bounds, reset and reduced motion. Check both mouse and native two-touch pinch. Confirm lazy entry and iframe unload for both tabs.
+The local software-renderer map measurement after batching is roughly 480 draw calls / 163k triangles at full growth. Real-device FPS is not measured. The richer geometry is an intentional quality trade-off, not a performance guarantee. Rendering caps DPR at 1.5 and uses one 2048px shadow map. No paid assets or infrastructure changes.
