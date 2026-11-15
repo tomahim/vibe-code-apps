@@ -4,6 +4,8 @@
   const Core = window.GardenCore, $ = id => document.getElementById(id);
   const keys = ['ocean', 'nature'];
   const canvas = $('art'), ctx = canvas.getContext('2d');
+  const life = $('life'), live = life.getContext('2d');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stage = $('stage'), markers = $('markers'), svg = $('leaders');
   const svgNS = 'http://www.w3.org/2000/svg';
   const initial = Core.parseRoute(location.hash, data);
@@ -101,7 +103,8 @@
     const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
     const w = Math.max(1,Math.round(width*dpr)), h = Math.max(1,Math.round(height*dpr));
     if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
-    ctx.setTransform(dpr,0,0,dpr,0,0); paint();
+    if(life.width!==w||life.height!==h){life.width=w;life.height=h;}
+    ctx.setTransform(dpr,0,0,dpr,0,0); live.setTransform(dpr,0,0,dpr,0,0); paint();
     if(!current) return;
     const points = entry.anchors.map(([x,y]) => ({x:geometry.x + x*geometry.width/100,y:geometry.y + y*geometry.height/100}));
     const bounds = artOnly ? {left:10,right:width-10,top:76,bottom:height-110} : {left:mobile?10:110,right:width-10,top:mobile?155:185,bottom:height-(mobile?168:117)};
@@ -145,6 +148,95 @@
     comp.globalCompositeOperation='source-over';comp.globalAlpha=1;
     ctx.drawImage(composite,geometry.x,geometry.y,geometry.width,geometry.height);renders++;
   }
+
+  // Decorative life overlay: birds, rays and drifting specks on a transparent
+  // canvas above the painting, below the lesson labels. Capped at 30 fps.
+  const rand = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  function bird(x, y, s, f) {
+    live.beginPath(); live.moveTo(x - s, y + f);
+    live.quadraticCurveTo(x - s * .4, y - s * .35, x, y);
+    live.quadraticCurveTo(x + s * .4, y - s * .35, x + s, y + f); live.stroke();
+  }
+  function ray(gx, gy, mw, beat) {
+    const mh = mw * .32;
+    live.beginPath(); live.moveTo(gx - mw, gy);
+    live.quadraticCurveTo(gx - mw * .3, gy - mh * (1 + beat), gx, gy);
+    live.quadraticCurveTo(gx + mw * .3, gy - mh * (1 - beat), gx + mw, gy);
+    live.quadraticCurveTo(gx + mw * .3, gy + mh * (1 + beat), gx, gy);
+    live.quadraticCurveTo(gx - mw * .3, gy + mh * (1 - beat), gx - mw, gy);
+    live.fill();
+    live.beginPath(); live.moveTo(gx + mw, gy); live.lineTo(gx + mw + mw * .6, gy + mh * .6); live.stroke();
+  }
+  function drawLife(now) {
+    const t = now / 1000;
+    live.clearRect(0, 0, width, height);
+    if (!current || !geometry) return;
+    const gx = geometry.x, gy = geometry.y, gw = geometry.width, gh = geometry.height;
+    const scale = gw / 700, px = fx => gx + fx * gw, py = fy => gy + fy * gh;
+    // A slow cloud shadow drifting across the painting.
+    live.fillStyle = 'rgba(72,69,45,.035)';
+    live.beginPath(); live.ellipse(px(((t * .016) % 1.5) - .25), py(.45), gw * .2, gh * .05, -.3, 0, Math.PI * 2); live.fill();
+    // Small birds crossing the sky of either world.
+    live.strokeStyle = 'rgba(64,62,48,.65)'; live.lineWidth = Math.max(1, 1.2 * scale);
+    for (let i = 0; i < 3; i++) {
+      const bx = px(((t * (.03 + i * .006) + i * .3) % 1.3) - .15), by = py(.1 + i * .05 + Math.sin(t + i) * .012), s = (5 + i) * scale, f = Math.sin(t * 7 + i) * s * .6;
+      bird(bx, by, s, f);
+    }
+    if (theme === 'ocean') {
+      // A gull squadron crossing high, then two wheeling over the lagoon.
+      live.strokeStyle = 'rgba(58,56,44,.7)'; live.lineWidth = Math.max(1, scale);
+      for (let i = 0; i < 5; i++) {
+        const bx = px(((t * .045 + i * .13) % 1.45) - .22), by = py(.08 + .04 * Math.sin(t * .8 + i * 2.1) + i * .018), s = (3.2 + (i % 3)) * scale, f = Math.sin(t * 9 + i * 1.7) * s * .7;
+        bird(bx, by, s, f);
+      }
+      for (let i = 0; i < 2; i++) {
+        const a = t * (.5 + i * .18) + i * 3.1, s = 3.6 * scale, f = Math.sin(t * 8 + i) * s * .6;
+        bird(px(.6 + .14 * Math.cos(a)), py(.28 + .07 * Math.sin(a)), s, f);
+      }
+      // Sun glints twinkling on the lagoon.
+      for (let i = 0; i < 12; i++) {
+        const sx = px(.18 + rand(i * 7 + 2) * .64), sy = py(.32 + rand(i * 5 + 9) * .4), tw = .5 + .5 * Math.sin(t * 2.2 + i * 1.9);
+        live.fillStyle = 'rgba(255,255,255,' + (.5 * tw * tw) + ')';
+        live.beginPath(); live.ellipse(sx, sy, 1.7 * scale * tw, .8 * scale * tw, 0, 0, Math.PI * 2); live.fill();
+      }
+      // A few small fish drifting through the lagoon in the painting's muted palette.
+      live.fillStyle = 'rgba(38,84,96,.5)';
+      for (let i = 0; i < 6; i++) {
+        const dir = i % 2 ? -1 : 1, sp = .022 + rand(i * 3 + 5) * .014;
+        const fx = px(((t * sp * dir + rand(i * 13 + 4)) % 1 + 1) % 1 * .6 + .2), fy = py(.48 + rand(i * 7 + 11) * .3 + Math.sin(t * .9 + i * 2.2) * .012);
+        const s = (3.4 + rand(i + 9) * 2.2) * scale, tail = Math.sin(t * 6 + i * 1.4) * s * .3;
+        live.beginPath(); live.ellipse(fx, fy, s, s * .38, 0, 0, Math.PI * 2); live.fill();
+        live.beginPath(); live.moveTo(fx - dir * s, fy);
+        live.lineTo(fx - dir * (s + s * .5), fy - s * .35 + tail * .5);
+        live.lineTo(fx - dir * (s + s * .5), fy + s * .35 + tail * .5); live.fill();
+      }
+      // Two small gray rays gliding beneath the surface, deliberately muted.
+      live.fillStyle = 'rgba(45,58,66,.45)'; live.strokeStyle = 'rgba(45,58,66,.45)'; live.lineWidth = Math.max(1, scale);
+      ray(px(((t * .018 + .35) % 1.6) - .3), py(.6 + .03 * Math.sin(t * .5)), 9 * scale, Math.sin(t * 2.4) * .35);
+      ray(px(((t * .013 + .8) % 1.7) - .35), py(.72 + .025 * Math.sin(t * .4 + 2)), 7 * scale, Math.sin(t * 2.1 + 1) * .35);
+    } else {
+      // Nature: butterflies over the clearings and drifting pollen in the light.
+      for (let i = 0; i < 3; i++) {
+        const a = t * (.4 + i * .13) + i * 2.4, bx = px(.3 + i * .2 + .09 * Math.cos(a)), by = py(.55 + .1 * Math.sin(a * 1.3) + i * .06), s = 2.6 * scale, w2 = Math.abs(Math.sin(t * 9 + i)) * s;
+        live.fillStyle = 'rgba(94,80,56,.55)';
+        live.beginPath(); live.ellipse(bx - w2 * .5, by, w2 * .55, s * .5, -.5, 0, Math.PI * 2); live.fill();
+        live.beginPath(); live.ellipse(bx + w2 * .5, by, w2 * .55, s * .5, .5, 0, Math.PI * 2); live.fill();
+      }
+      for (let i = 0; i < 14; i++) {
+        const sx = px(.15 + rand(i * 11 + 3) * .7 + Math.sin(t * .5 + i) * .008), sy = py(.15 + ((rand(i * 5 + 7) + t * .012) % .6));
+        live.fillStyle = 'rgba(202,178,92,.5)';
+        live.beginPath(); live.ellipse(sx, sy, 1.6 * scale, .8 * scale, t * .5 + i, 0, Math.PI * 2); live.fill();
+      }
+    }
+  }
+  let lifeLast = 0;
+  function animateLife(now) {
+    requestAnimationFrame(animateLife);
+    if (document.hidden || !current) return;
+    if (now - lifeLast < 1000 / 30 - 1) return;
+    lifeLast = now; drawLife(now);
+  }
+  if (!reduceMotion) requestAnimationFrame(animateLife);
   function setGrowth(value) { growth=Core.clamp(Math.round(Number(value))||1,1,10);updateContext();paint(); }
   function navigate(key, push=true) {
     if(!keys.includes(key)) return;
