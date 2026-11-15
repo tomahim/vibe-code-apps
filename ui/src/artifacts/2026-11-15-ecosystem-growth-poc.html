@@ -5643,6 +5643,17 @@ three/build/three.module.js:
     }
     function fitScale() { return Math.min(stage.clientWidth / WW, stage.clientHeight / WH) * 0.985; }
     function home(animate) { fwT.s = fitScale(); applyT(animate !== false); }
+    // mobile framing: on narrow screens, size the stage to the painting instead
+    // of leaving dead bands above/below a full-height flex stage
+    function fitMobileStage() {
+      if (stage.clientWidth < 600) {
+        stage.style.flex = "none";
+        stage.style.height = Math.ceil(WH * (stage.clientWidth / WW) * 0.985) + 4 + "px";
+      } else {
+        stage.style.flex = "";
+        stage.style.height = "";
+      }
+    }
     function zoomAt(px, py, f) {
       var r = stage.getBoundingClientRect();
       var cx = (px - r.left - fwT.x) / fwT.s, cy = (py - r.top - fwT.y) / fwT.s;
@@ -5911,6 +5922,7 @@ three/build/three.module.js:
       });
       markFw();
       hint.textContent = "drag to explore · scroll or pinch to zoom · tap a territory";
+      fitMobileStage();
       home(animate !== false);
       positionLabels();
       // ambient life overlay, zones mapped to this world's painting
@@ -5953,7 +5965,12 @@ three/build/three.module.js:
       }
     }, 2000);
 
-    window.addEventListener("resize", function () { if (active === "worlds") worldsResize(); });
+    window.addEventListener("resize", function () {
+      if (active !== "worlds") return;
+      fitMobileStage();
+      if (fwSelected) { fwT.s = fitScale(); applyT(false); } else home(false);
+      worldsResize();
+    });
     selectWorld(FW_DATA.worlds[0].key, false);
     fwLater(function () { hint.classList.add("show"); }, 600);
     fwLater(function () { hint.classList.remove("show"); }, 5200);
@@ -6063,6 +6080,13 @@ three/build/three.module.js:
       var sw = stage.clientWidth, sh = stage.clientHeight;
       var iw = Math.min(sw, sh * (WW / WH));
       var ih = iw * (WH / WW);
+      if (sw < 600) {
+        stage.style.flex = "none";
+        stage.style.height = Math.ceil(ih) + 4 + "px";
+      } else {
+        stage.style.flex = "";
+        stage.style.height = "";
+      }
       track.style.width = (sw * FW_DATA.worlds.length) + "px";
       frames.forEach(function (f) {
         f.frame.style.width = sw + "px";
