@@ -117,6 +117,51 @@ resource "railway_variable" "cultive_api_bucket" {
   value          = each.value
 }
 
+# --- dedicated draft media bucket (draft-cultive) ---
+#
+# A second bucket with its own credentials, separate from the shared media
+# bucket: Railway Buckets issue one full-access credential set per bucket,
+# with no prefix or read-only scoping, so isolation means a separate bucket.
+# The bucket itself is created by Terraform in modules/draft_bucket through
+# the bucket-capable lachieh/railway provider (the pinned
+# terraform-community-providers provider has no bucket resource).
+# The provider does not manage bucket deletion. Railway dashboard deletion
+# is supported with a 52-hour restore window; reconcile Terraform state first.
+# See docs/object-storage.md.
+module "draft_bucket" {
+  source = "./modules/draft_bucket"
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  bucket_name    = local.draft_bucket_name
+}
+
+# "$${" below is Terraform's escape for a literal "${".
+
+locals {
+  draft_bucket_name = "draft-cultive"
+
+  draft_bucket_variables = {
+    DRAFT_MEDIA_ENDPOINT          = "$${{${local.draft_bucket_name}.ENDPOINT}}"
+    DRAFT_MEDIA_BUCKET            = "$${{${local.draft_bucket_name}.BUCKET}}"
+    DRAFT_MEDIA_ACCESS_KEY_ID     = "$${{${local.draft_bucket_name}.ACCESS_KEY_ID}}"
+    DRAFT_MEDIA_SECRET_ACCESS_KEY = "$${{${local.draft_bucket_name}.SECRET_ACCESS_KEY}}"
+    DRAFT_MEDIA_REGION            = "$${{${local.draft_bucket_name}.REGION}}"
+  }
+}
+
+resource "railway_variable" "cultive_api_draft_bucket" {
+  # The referenced bucket must exist before these variables resolve at
+  # deploy time.
+  depends_on = [module.draft_bucket]
+
+  for_each = local.draft_bucket_variables
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = each.key
+  value          = each.value
+}
+
 # Private DNS needs no resource: every service gets an endpoint on the project
 # private network (<endpoint>.railway.internal, zero configuration). The
 # endpoint name defaults to the service name at creation but does NOT follow

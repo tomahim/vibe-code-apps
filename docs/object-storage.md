@@ -43,3 +43,24 @@ $0.015 per GB-month, rounded up to the next whole GB-month. S3 operations and bu
 - One bucket per environment, with its own credentials.
 
 Source: https://docs.railway.com/guides/storage-buckets
+
+# Draft media bucket
+
+A second private bucket, `draft-cultive`, in the same project and environment, wired only to the `cultive-api-dev` service. It exists so draft-stage files and live media never share credentials: Railway Buckets issue one full-access credential set per bucket, with no prefix or read-only scoping, so isolation means a separate bucket, not a second key.
+
+Unlike the shared bucket above (created by hand), `draft-cultive` is managed by Terraform in `infra/terraform/modules/draft_bucket` through the `lachieh/railway` provider, pinned to `0.1.0` and scoped to that single module: the pinned provider (`terraform-community-providers/railway` ~> 0.6) has no bucket resource, and both providers ship `railway_*` resource types that Terraform routes by local-name prefix, so they cannot share one module. Existing resources and state stay with the pinned provider; adopting the bucket provider is additive only. Two consequences to know before apply:
+
+- This provider does not manage bucket deletion through its API lifecycle; removing a resource from Terraform state is not deletion. To stop managing it without a destroy attempt, use a `removed` block with `destroy = false`. This does not make the bucket irreversible: Railway supports deletion through the dashboard (bucket Settings > Delete Bucket, then deploy the staged change), with a 52-hour restore window before permanent deletion. Reconcile Terraform configuration/state before a dashboard deletion so a later apply does not recreate it. See https://docs.railway.com/guides/storage-buckets#deleting-a-bucket.
+- `lachieh/railway` is a young provider (first bucket release 2026-10). Review its plan output carefully at apply time; it manages only the one bucket resource here.
+
+The same apply wires these variable references onto `cultive-api-dev` (`infra/terraform/cultive.tf`):
+
+| Variable on `cultive-api-dev` | Value |
+| --- | --- |
+| `DRAFT_MEDIA_ENDPOINT` | `${{draft-cultive.ENDPOINT}}` |
+| `DRAFT_MEDIA_BUCKET` | `${{draft-cultive.BUCKET}}` |
+| `DRAFT_MEDIA_ACCESS_KEY_ID` | `${{draft-cultive.ACCESS_KEY_ID}}` |
+| `DRAFT_MEDIA_SECRET_ACCESS_KEY` | `${{draft-cultive.SECRET_ACCESS_KEY}}` |
+| `DRAFT_MEDIA_REGION` | `${{draft-cultive.REGION}}` |
+
+If the bucket does not exist when the references apply, they resolve to empty values; nothing else breaks. Same pricing ($0.015 per GB-month, operations and egress free) and same credential-rotation runbook as above.
