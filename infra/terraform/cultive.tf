@@ -132,7 +132,7 @@ module "draft_bucket" {
   source = "./modules/draft_bucket"
 
   providers = {
-    railway = railway_iac
+    railway = railway-iac
   }
 
   environment_id = railway_project.genious_apps.default_environment.id
