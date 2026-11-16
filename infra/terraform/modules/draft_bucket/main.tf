@@ -18,14 +18,6 @@ terraform {
   }
 }
 
-# Self-configured provider (the legacy in-module pattern) on purpose: the root
-# module's `railway` local name belongs to terraform-community-providers/
-# railway, and Terraform cannot pass a configuration of a different provider
-# source across the module boundary when both share the `railway_*` type
-# prefix. A child that configures its own provider cannot be cleanly removed
-# later, but Railway cannot delete buckets through its API anyway, so this
-# module only ever creates. Reads RAILWAY_TOKEN like the root provider.
-provider "railway" {}
 
 variable "environment_id" {
   type        = string
