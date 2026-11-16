@@ -122,11 +122,23 @@ resource "railway_variable" "cultive_api_bucket" {
 # A second bucket with its own credentials, separate from the shared media
 # bucket: Railway Buckets issue one full-access credential set per bucket,
 # with no prefix or read-only scoping, so isolation means a separate bucket.
-# Same pattern as the shared bucket above: the pinned provider
-# (terraform-community-providers/railway ~> 0.6) has no bucket resource, so
-# `draft-cultive` is created by hand in the Railway UI
-# (docs/object-storage.md) BEFORE this is applied, and the reference name
-# must match the bucket name exactly.
+# The bucket itself is created by Terraform in modules/draft_bucket through
+# the bucket-capable lachieh/railway provider (the pinned
+# terraform-community-providers provider has no bucket resource).
+# Railway cannot delete buckets through its API, so apply is one-way: the
+# name `draft-cultive` stays taken in the project afterwards. See
+# docs/object-storage.md.
+module "draft_bucket" {
+  source = "./modules/draft_bucket"
+
+  providers = {
+    railway = railway_iac
+  }
+
+  environment_id = railway_project.genious_apps.default_environment.id
+  bucket_name    = local.draft_bucket_name
+}
+
 # "$${" below is Terraform's escape for a literal "${".
 
 locals {
@@ -142,6 +154,10 @@ locals {
 }
 
 resource "railway_variable" "cultive_api_draft_bucket" {
+  # The referenced bucket must exist before these variables resolve at
+  # deploy time.
+  depends_on = [module.draft_bucket]
+
   for_each = local.draft_bucket_variables
 
   environment_id = railway_project.genious_apps.default_environment.id

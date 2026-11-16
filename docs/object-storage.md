@@ -48,7 +48,12 @@ Source: https://docs.railway.com/guides/storage-buckets
 
 A second private bucket, `draft-cultive`, in the same project and environment, wired only to the `cultive-api-dev` service. It exists so draft-stage files and live media never share credentials: Railway Buckets issue one full-access credential set per bucket, with no prefix or read-only scoping, so isolation means a separate bucket, not a second key.
 
-Same manual-creation pattern as above: the pinned provider (`terraform-community-providers/railway` ~> 0.6) has no bucket resource, so create it in the Railway UI named exactly `draft-cultive` before applying the Terraform that wires these variable references onto `cultive-api-dev` (`infra/terraform/cultive.tf`):
+Unlike the shared bucket above (created by hand), `draft-cultive` is managed by Terraform in `infra/terraform/modules/draft_bucket` through the `lachieh/railway` provider, pinned to `0.1.0` and scoped to that single module: the pinned provider (`terraform-community-providers/railway` ~> 0.6) has no bucket resource, and both providers ship `railway_*` resource types that Terraform routes by local-name prefix, so they cannot share one module. Existing resources and state stay with the pinned provider; adopting the bucket provider is additive only. Two consequences to know before apply:
+
+- Railway cannot delete buckets through its API, so creating `draft-cultive` is one-way: the name stays taken in the project even if the resource later leaves state (remove it with a `removed` block, `destroy = false`).
+- `lachieh/railway` is a young provider (first bucket release 2026-10). Review its plan output carefully at apply time; it manages only the one bucket resource here.
+
+The same apply wires these variable references onto `cultive-api-dev` (`infra/terraform/cultive.tf`):
 
 | Variable on `cultive-api-dev` | Value |
 | --- | --- |
