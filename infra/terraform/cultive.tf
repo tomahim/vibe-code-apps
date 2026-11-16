@@ -125,9 +125,9 @@ resource "railway_variable" "cultive_api_bucket" {
 # The bucket itself is created by Terraform in modules/draft_bucket through
 # the bucket-capable lachieh/railway provider (the pinned
 # terraform-community-providers provider has no bucket resource).
-# Railway cannot delete buckets through its API, so apply is one-way: the
-# name `draft-cultive` stays taken in the project afterwards. See
-# docs/object-storage.md.
+# The provider does not manage bucket deletion. Railway dashboard deletion
+# is supported with a 52-hour restore window; reconcile Terraform state first.
+# See docs/object-storage.md.
 module "draft_bucket" {
   source = "./modules/draft_bucket"
 

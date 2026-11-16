@@ -26,7 +26,7 @@ variable "environment_id" {
 
 variable "bucket_name" {
   type        = string
-  description = "Bucket name. Railway cannot delete buckets through its API, so this name stays taken in the project even if the resource leaves state."
+  description = "Bucket name. Provider deletion is unsupported; dashboard deletion and Terraform state reconciliation are documented in docs/object-storage.md."
 }
 
 variable "region" {
