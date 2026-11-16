@@ -6,14 +6,6 @@ terraform {
       source  = "terraform-community-providers/railway"
       version = "~> 0.6"
     }
-    # Bucket-capable provider, used only by modules/draft_bucket. Kept under a
-    # separate local name: both providers ship `railway_*` resource types and
-    # Terraform routes by local-name prefix, so they cannot share one module.
-    # Existing resources stay with the pinned provider above; no state moves.
-    railway-iac = {
-      source  = "lachieh/railway"
-      version = "0.1.0"
-    }
   }
 
   # State lives in a Railway Bucket (S3 compatible). Connection details are

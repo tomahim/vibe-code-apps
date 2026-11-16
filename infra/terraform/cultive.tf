@@ -131,10 +131,6 @@ resource "railway_variable" "cultive_api_bucket" {
 module "draft_bucket" {
   source = "./modules/draft_bucket"
 
-  providers = {
-    railway = railway-iac
-  }
-
   environment_id = railway_project.genious_apps.default_environment.id
   bucket_name    = local.draft_bucket_name
 }
