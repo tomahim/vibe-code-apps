@@ -41,3 +41,10 @@ test('reduced motion, keyboard navigation, local-only signup and playable quiz',
  const submissions=[];page.on('request',r=>{if(r.method()==='POST')submissions.push(r.url())});await v.locator('#signup-email').fill('preview@example.com');await v.locator('.signup button').click();await expect(v.locator('.toast')).toContainText('not been sent or saved');expect(submissions).toEqual([]);
  await v.locator('[data-answer="correct"]').click();await expect(v.locator('.quiz-feedback')).toContainText('Yes.');
 });
+
+test('Museum hero keeps illustration clear of headline and scene text does not ghost',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});const v=await open(page);await v.locator('.lab-tabs button').nth(6).click();
+ const art=await v.locator('.hero-art .island').boundingBox(),title=await v.locator('.hero-copy h1').boundingBox();expect(art.x+art.width).toBeLessThan(title.x-15);
+ await v.locator('.scroll-story').evaluate(el=>window.scrollTo({top:el.offsetTop-174,behavior:'instant'}));await v.locator('[data-step="2"]').click();await page.waitForTimeout(800);await v.locator('[data-step="3"]').click();await page.waitForTimeout(150);
+ const visible=await v.locator('.workflow-scene').evaluateAll(nodes=>nodes.filter(n=>parseFloat(getComputedStyle(n).opacity)>.2).length);expect(visible).toBeLessThanOrEqual(1);
+});
