@@ -43,3 +43,19 @@ $0.015 per GB-month, rounded up to the next whole GB-month. S3 operations and bu
 - One bucket per environment, with its own credentials.
 
 Source: https://docs.railway.com/guides/storage-buckets
+
+# Draft media bucket
+
+A second private bucket, `draft-cultive`, in the same project and environment, wired only to the `cultive-api-dev` service. It exists so draft-stage files and live media never share credentials: Railway Buckets issue one full-access credential set per bucket, with no prefix or read-only scoping, so isolation means a separate bucket, not a second key.
+
+Same manual-creation pattern as above: the pinned provider (`terraform-community-providers/railway` ~> 0.6) has no bucket resource, so create it in the Railway UI named exactly `draft-cultive` before applying the Terraform that wires these variable references onto `cultive-api-dev` (`infra/terraform/cultive.tf`):
+
+| Variable on `cultive-api-dev` | Value |
+| --- | --- |
+| `DRAFT_MEDIA_ENDPOINT` | `${{draft-cultive.ENDPOINT}}` |
+| `DRAFT_MEDIA_BUCKET` | `${{draft-cultive.BUCKET}}` |
+| `DRAFT_MEDIA_ACCESS_KEY_ID` | `${{draft-cultive.ACCESS_KEY_ID}}` |
+| `DRAFT_MEDIA_SECRET_ACCESS_KEY` | `${{draft-cultive.SECRET_ACCESS_KEY}}` |
+| `DRAFT_MEDIA_REGION` | `${{draft-cultive.REGION}}` |
+
+If the bucket does not exist when the references apply, they resolve to empty values; nothing else breaks. Same pricing ($0.015 per GB-month, operations and egress free) and same credential-rotation runbook as above.
