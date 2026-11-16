@@ -32,12 +32,12 @@ resource "railway_variable" "daily_cultive_ui_api_upstream" {
 # separate from the app frontend. The DSN is a public client key, added here
 # once that project exists; until then the container starts with reporting
 # off (empty SENTRY_DSN in the entrypoint default).
-# resource "railway_variable" "daily_cultive_ui_sentry_dsn" {
-#   environment_id = railway_project.genious_apps.default_environment.id
-#   service_id     = railway_service.daily_cultive_ui.id
-#   name           = "SENTRY_DSN"
-#   value          = "<website project client key>"
-# }
+resource "railway_variable" "daily_cultive_ui_sentry_dsn" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.daily_cultive_ui.id
+  name           = "SENTRY_DSN"
+  value          = "https://6660873ad04b0daf922709897ecdf1a7@o4512432009838592.ingest.de.sentry.io/4512443238383696"
+}
 resource "railway_variable" "daily_cultive_ui_sentry_environment" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.daily_cultive_ui.id
