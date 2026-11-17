@@ -11,7 +11,9 @@
 #     SIGNUP_TOKEN_SECRET (entered once in Railway by the owner)
 #   - a project token for the production environment, saved as the GitHub
 #     environment secret RAILWAY_TOKEN
-#   - the DNS records printed by the cultive_production_dns output
+#
+# The public domain is NOT in this file on purpose: attaching it can route
+# live traffic, so it lives in its own change (cultive_production_domain.tf).
 
 locals {
   cultive_production_project_id = "79299d89-100d-4262-a396-8c9e8362c39d"
@@ -111,27 +113,6 @@ resource "railway_variable" "cultive_production_ui_sentry_environment" {
   service_id     = railway_service.cultive_production_ui.id
   name           = "SENTRY_ENVIRONMENT"
   value          = "production"
-}
-
-# Public custom domain for the website. Railway will not route it until the
-# DNS records below exist. Creating it does not change anything on the live
-# domain by itself.
-resource "railway_custom_domain" "cultive_production_ui" {
-  domain         = local.cultive_production_domain
-  environment_id = railway_project.cultive_production.default_environment.id
-  service_id     = railway_service.cultive_production_ui.id
-  target_port    = 8080
-}
-
-output "cultive_production_dns" {
-  description = "DNS records to add for the website domain (apex record and ownership check)."
-  value = {
-    domain                    = railway_custom_domain.cultive_production_ui.domain
-    dns_record_value          = railway_custom_domain.cultive_production_ui.dns_record_value
-    host_label                = railway_custom_domain.cultive_production_ui.host_label
-    verification_host_label   = railway_custom_domain.cultive_production_ui.verification_host_label
-    verification_record_value = railway_custom_domain.cultive_production_ui.verification_record_value
-  }
 }
 
 output "cultive_production_service_ids" {
