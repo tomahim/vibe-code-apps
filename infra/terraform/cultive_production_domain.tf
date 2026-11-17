@@ -4,17 +4,13 @@
 # also creates DNS records), so applying this resource is the public cutover.
 # The email-provider DNS records on the domain must stay untouched.
 #
-# Disabled by default (plans no change). The website service does not exist
-# until the services change is applied, so the id below is a placeholder that
-# is never used while the gate is off. To enable, in a separate change after
-# that apply: set the real daily-cultive-ui service id (output
-# cultive_production_service_ids) and the gate to true. That plan must show
-# exactly one resource to add.
+# Enabled for the release-0.0.1 cutover: the real daily-cultive-ui service id is
+# set and the gate is on. The plan must show exactly one resource to add.
 
 locals {
   cultive_production_environment_id = "bccbb2b0-0cb7-4e67-9a0a-def3039cfd19"
-  cultive_production_ui_service_id  = "00000000-0000-0000-0000-000000000000"
-  cultive_production_domain_enabled = false
+  cultive_production_ui_service_id  = "18cb6c96-735c-4279-a4f3-d3468b7f5098"
+  cultive_production_domain_enabled = true
 }
 
 resource "railway_custom_domain" "cultive_production_ui" {
