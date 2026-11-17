@@ -11,12 +11,25 @@ locals {
   cultive_production_environment_id = "bccbb2b0-0cb7-4e67-9a0a-def3039cfd19"
   cultive_production_ui_service_id  = "18cb6c96-735c-4279-a4f3-d3468b7f5098"
   cultive_production_domain_enabled = true
+  cultive_production_apex           = "dailycultive.com"
 }
 
 resource "railway_custom_domain" "cultive_production_ui" {
   count = local.cultive_production_domain_enabled ? 1 : 0
 
   domain         = "dailycultive.com"
+  environment_id = local.cultive_production_environment_id
+  service_id     = local.cultive_production_ui_service_id
+  target_port    = 8080
+}
+
+# www serves the same site as the apex (the pages' canonical URL stays the apex).
+# Railway manages this domain's DNS, so it adds the www record itself, as it did
+# for the apex. Hobby allows 2 custom domains per service: this is the second.
+resource "railway_custom_domain" "cultive_production_ui_www" {
+  count = local.cultive_production_domain_enabled ? 1 : 0
+
+  domain         = "www.${local.cultive_production_apex}"
   environment_id = local.cultive_production_environment_id
   service_id     = local.cultive_production_ui_service_id
   target_port    = 8080

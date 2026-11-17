@@ -62,12 +62,12 @@ resource "railway_variable" "cultive_production_signup_api_port" {
 }
 
 # The website's nginx proxies the browser's Origin untouched, so the API must
-# trust the public hostname.
+# trust the public hostnames (the apex and www).
 resource "railway_variable" "cultive_production_signup_api_origins" {
   environment_id = railway_project.cultive_production.default_environment.id
   service_id     = railway_service.cultive_production_signup_api.id
   name           = "SIGNUPS_ALLOWED_ORIGINS"
-  value          = local.cultive_production_domain
+  value          = "${local.cultive_production_domain},www.${local.cultive_production_domain}"
 }
 
 resource "railway_variable" "cultive_production_signup_api_sentry_dsn" {
