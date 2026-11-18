@@ -35,19 +35,26 @@ resource "railway_variable" "cultive_ui_sentry_environment" {
   value          = "dev"
 }
 
-# Dev-only tracing opt-in. The shared Developer allowance is 5M spans/month;
-# start at 10% and tune from accepted spans/day, not temporary trial gifts.
+# Dev-only tracing opt-in, raised from 10% at the owner's request
+# (2026-11-18): 10% sampled too few traces to be useful. The shared
+# Developer allowance is 5M spans/month; keep tuning from accepted
+# spans/day, not temporary trial gifts. The API continues the browser's
+# sampling decision for linked traces, so this rate only governs
+# backend-rooted traces; browser-initiated traces follow the UI rate.
 resource "railway_variable" "cultive_api_sentry_traces_sample_rate" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_api.id
   name           = "SENTRY_TRACES_SAMPLE_RATE"
-  value          = "0.1"
+  value          = "0.5"
 }
 
 # Vite embeds this at build time: apply before the UI's next Docker rebuild.
+# Raised from 10% at the owner's request (2026-11-18). This rate gates
+# browser-initiated end-to-end traces: the API continues the parent's
+# decision for linked requests instead of re-drawing at its own rate.
 resource "railway_variable" "cultive_ui_sentry_traces_sample_rate" {
   environment_id = railway_project.genious_apps.default_environment.id
   service_id     = railway_service.cultive_ui.id
   name           = "VITE_SENTRY_TRACES_SAMPLE_RATE"
-  value          = "0.1"
+  value          = "0.3"
 }
