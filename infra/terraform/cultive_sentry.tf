@@ -34,3 +34,20 @@ resource "railway_variable" "cultive_ui_sentry_environment" {
   name           = "VITE_SENTRY_ENVIRONMENT"
   value          = "dev"
 }
+
+# Dev-only tracing opt-in. The shared Developer allowance is 5M spans/month;
+# start at 10% and tune from accepted spans/day, not temporary trial gifts.
+resource "railway_variable" "cultive_api_sentry_traces_sample_rate" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_api.id
+  name           = "SENTRY_TRACES_SAMPLE_RATE"
+  value          = "0.1"
+}
+
+# Vite embeds this at build time: apply before the UI's next Docker rebuild.
+resource "railway_variable" "cultive_ui_sentry_traces_sample_rate" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_ui.id
+  name           = "VITE_SENTRY_TRACES_SAMPLE_RATE"
+  value          = "0.1"
+}
