@@ -69,6 +69,11 @@
     cursor:pointer; color:var(--ink); display:grid; place-items:center; padding:0;
   }
   .fs-btn:hover { border-color:var(--accent); }
+  .fit-btn {
+    display:none; position:absolute; z-index:6; width:30px; height:30px;
+    border-radius:10px; background:rgba(250,247,236,.92); border:1px solid var(--line);
+    cursor:pointer; color:var(--ink); place-items:center; padding:0;
+  }
 
   .map-note {
     position:absolute; top:16px; right:60px; font-size:11px; color:var(--ink-soft);
@@ -235,21 +240,37 @@
 
   @media (max-width:700px) { .pin-label { display:none; } }
   @media (max-width:840px) {
-    .map-wrap { height:min(74svh, 600px); }
-    .year-badge { top:8px; left:10px; font-size:19px; min-width:78px; }
-    .fs-btn { top:8px; right:10px; }
-    .themes {
-      top:62px; left:8px; right:8px; width:auto; max-height:none;
-      flex-direction:row; overflow-x:auto; padding:6px; gap:6px;
+    body { padding:12px 10px 28px; }
+    header { margin-bottom:8px; gap:8px; }
+    .eyebrow { font-size:10px; margin-bottom:2px; }
+    header h1 { font-size:22px; }
+    header .intro {
+      font-size:12.5px; line-height:1.45;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
     }
-    .theme-btn { min-width:150px; }
-    .theme-count { display:none; }
-    .chips-dock { bottom:70px; max-width:calc(100% - 16px); }
-    .timeline { bottom:8px; width:calc(100% - 20px); padding:6px 12px 6px 6px; }
-    .map-note { top:auto; bottom:120px; left:10px; right:auto; font-size:9.5px; padding:2px 8px; max-width:56%; }
+    .progress-chip { font-size:12px; padding:4px 10px; gap:6px; }
+    .reset-btn { font-size:12px; padding:4px 2px; }
+    .map-wrap { height:min(76svh, 640px); }
+    .map-wrap svg { touch-action:none; }
+    .year-badge { top:8px; left:10px; font-size:16px; min-width:64px; padding:3px 8px 4px; }
+    .year-badge small { font-size:9px; }
+    .fs-btn { top:8px; right:10px; width:30px; height:30px; }
+    .fit-btn { display:grid; top:44px; right:10px; }
+    .themes {
+      top:50px; left:8px; right:48px; width:auto; max-height:none;
+      flex-direction:row; overflow-x:auto; padding:4px; gap:4px;
+    }
+    .theme-btn { min-width:0; flex:none; grid-template-columns:20px 1fr; gap:6px; padding:4px 8px; border-radius:10px; }
+    .theme-icon { width:20px; height:20px; border-radius:6px; }
+    .theme-icon svg { width:13px; height:13px; }
+    .theme-name { font-size:11px; }
+    .theme-count, .theme-meter { display:none; }
+    .chips-dock { bottom:62px; max-width:calc(100% - 16px); }
+    .timeline { bottom:6px; width:calc(100% - 20px); padding:4px 10px 4px 4px; }
+    .map-note { top:auto; bottom:108px; left:10px; right:auto; font-size:9.5px; padding:2px 8px; max-width:56%; }
     .steps { grid-template-columns:1fr; }
     .story-card {
-      top:auto; bottom:8px; left:8px; right:8px; width:auto; max-height:58%;
+      top:auto; bottom:8px; left:8px; right:8px; width:auto; max-height:55%;
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -307,6 +328,7 @@
       <div class="year-badge serif"><small id="badge-era">Year</small><span id="badge-year">1950</span></div>
       <div class="map-note">Modern coastlines and borders for orientation; colored regions are approximate</div>
       <button class="fs-btn" id="fs-btn" type="button" aria-label="View fullscreen"></button>
+      <button class="fit-btn" id="fit-btn" type="button" aria-label="Show the whole world"></button>
 
       <div class="story-card" id="story-card" hidden role="dialog" aria-modal="false" aria-labelledby="story-title">
         <button class="story-close" id="story-close" type="button" aria-label="Close story">✕</button>
@@ -733,6 +755,7 @@ function fsActive() { return document.fullscreenElement === mapWrap || mapWrap.c
 function fsSync() {
   fsBtn.innerHTML = fsActive() ? shrinkSVG : expandSVG;
   fsBtn.setAttribute("aria-label", fsActive() ? "Exit fullscreen" : "View fullscreen");
+  requestAnimationFrame(() => { if (mobileMap.matches) applyView(); });
 }
 fsBtn.addEventListener("click", () => {
   if (document.fullscreenElement) { document.exitFullscreen(); return; }
@@ -745,9 +768,115 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape" && mapWrap.classList.contains("fs-on")) { mapWrap.classList.remove("fs-on"); fsSync(); }
 });
 
+/* Mobile pan & zoom: on phones the map fills the portrait wrap; drag pans,
+   pinch zooms, double-tap or the fit button shows the whole world. Desktop is untouched. */
+const mapSvg = $("map");
+const WORLD = { w: 1000, h: 389 };
+const view = { cx: 570, cy: WORLD.h / 2, w: WORLD.w };
+const mobileMap = window.matchMedia("(max-width: 840px)");
+function wrapAspect() {
+  const r = mapWrap.getBoundingClientRect();
+  return r.width > 0 && r.height > 0 ? r.width / r.height : 1;
+}
+function fitAllW() { return Math.max(WORLD.w, WORLD.h * wrapAspect()); }
+function clampView() {
+  const aspect = wrapAspect();
+  view.w = Math.min(Math.max(view.w, 130), fitAllW());
+  const vw = view.w, vh = vw / aspect;
+  if (vw >= WORLD.w) view.cx = WORLD.w / 2;
+  else view.cx = Math.min(Math.max(view.cx, vw / 2), WORLD.w - vw / 2);
+  if (vh >= WORLD.h) view.cy = WORLD.h / 2;
+  else view.cy = Math.min(Math.max(view.cy, vh / 2), WORLD.h - vh / 2);
+}
+function applyView() {
+  if (!mobileMap.matches) { mapSvg.setAttribute("viewBox", `0 0 ${WORLD.w} ${WORLD.h}`); return; }
+  clampView();
+  const vh = view.w / wrapAspect();
+  mapSvg.setAttribute("viewBox", `${view.cx - view.w / 2} ${view.cy - vh / 2} ${view.w} ${vh}`);
+}
+function defaultMobileView() {
+  const aspect = wrapAspect();
+  view.w = Math.min(WORLD.w, WORLD.h * aspect);
+  view.cx = 570; view.cy = WORLD.h / 2;
+  applyView();
+}
+function fitWorldView() { view.w = fitAllW(); applyView(); }
+$("fit-btn").innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.3 3.9 5.2 3.9 8.5s-1.3 6.2-3.9 8.5c-2.6-2.3-3.9-5.2-3.9-8.5S9.4 5.8 12 3.5z"/></svg>';
+$("fit-btn").addEventListener("click", fitWorldView);
+const panPts = new Map();
+let panMoved = false, pinchD0 = 0, pinchW0 = 0, pinchMid0 = null, suppressClickUntil = 0;
+function evToMap(px, py) {
+  const r = mapSvg.getBoundingClientRect();
+  const vh = view.w / wrapAspect();
+  return {
+    x: view.cx - view.w / 2 + (px - r.left) / r.width * view.w,
+    y: view.cy - vh / 2 + (py - r.top) / r.height * vh
+  };
+}
+mapSvg.addEventListener("pointerdown", e => {
+  if (!mobileMap.matches) return;
+  mapSvg.setPointerCapture(e.pointerId);
+  panPts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  panMoved = false;
+  if (panPts.size === 2) {
+    const [a, b] = [...panPts.values()];
+    pinchD0 = Math.hypot(a.x - b.x, a.y - b.y);
+    pinchW0 = view.w;
+    pinchMid0 = evToMap((a.x + b.x) / 2, (a.y + b.y) / 2);
+  }
+});
+mapSvg.addEventListener("pointermove", e => {
+  if (!mobileMap.matches || !panPts.has(e.pointerId)) return;
+  const prev = panPts.get(e.pointerId);
+  panPts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (panPts.size === 1) {
+    const r = mapSvg.getBoundingClientRect();
+    const vh = view.w / wrapAspect();
+    if (Math.abs(e.clientX - prev.x) + Math.abs(e.clientY - prev.y) > 1) panMoved = true;
+    view.cx -= (e.clientX - prev.x) / r.width * view.w;
+    view.cy -= (e.clientY - prev.y) / r.height * vh;
+    applyView();
+  } else if (panPts.size === 2 && pinchD0 > 0) {
+    panMoved = true;
+    const [a, b] = [...panPts.values()];
+    const d = Math.hypot(a.x - b.x, a.y - b.y);
+    if (d <= 0) return;
+    view.w = pinchW0 * pinchD0 / d;
+    clampView();
+    const r = mapSvg.getBoundingClientRect();
+    const vh = view.w / wrapAspect();
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    const curX = view.cx - view.w / 2 + (mx - r.left) / r.width * view.w;
+    const curY = view.cy - vh / 2 + (my - r.top) / r.height * vh;
+    view.cx += pinchMid0.x - curX;
+    view.cy += pinchMid0.y - curY;
+    applyView();
+  }
+});
+function panEnd(e) {
+  if (panMoved) suppressClickUntil = Date.now() + 350;
+  panPts.delete(e.pointerId);
+  if (panPts.size < 2) pinchD0 = 0;
+}
+mapSvg.addEventListener("pointerup", panEnd);
+mapSvg.addEventListener("pointercancel", panEnd);
+mapSvg.addEventListener("click", e => {
+  if (Date.now() < suppressClickUntil) { e.stopPropagation(); e.preventDefault(); }
+}, true);
+mapSvg.addEventListener("dblclick", e => {
+  if (mobileMap.matches) { e.preventDefault(); fitWorldView(); }
+});
+window.addEventListener("resize", () => { if (mobileMap.matches) applyView(); });
+document.addEventListener("fullscreenchange", () => { if (mobileMap.matches) applyView(); });
+if (mobileMap.addEventListener) mobileMap.addEventListener("change", () => {
+  if (mobileMap.matches) defaultMobileView();
+  else mapSvg.setAttribute("viewBox", `0 0 ${WORLD.w} ${WORLD.h}`);
+});
+
 $("year-slider").value = YMAX;
 renderTheme();
 updateVisibility();
+if (mobileMap.matches) requestAnimationFrame(defaultMobileView);
 </script>
 </body>
 </html>
