@@ -116,7 +116,21 @@
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
   @media (max-width: 1080px) { .beds { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
-  @media (max-width: 540px) { .beds { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .beds-axis { display: none; } }
+  @media (max-width: 540px) {
+    .card { padding: 16px 14px 18px; }
+    .hand { gap: 8px; }
+    .mini { flex: 1 1 40%; font-size: 13.5px; padding: 9px 10px; }
+    .beds { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .bed:last-child { grid-column: 1 / -1; }
+    .bed { padding: 12px 8px 10px; }
+    .bed-illo { width: 48px; height: 48px; margin-bottom: 6px; }
+    .bed-illo svg { width: 30px; height: 30px; }
+    .bed .bed-title { font-size: 14px; }
+    .bed .bed-years { font-size: 11.5px; }
+    .bed .bed-divider { margin: 7px 0; }
+    .bed .planted span { font-size: 12px; }
+  }
   .bed {
     display: flex; flex-direction: column; align-items: center; text-align: center;
     border: 1.5px dashed var(--line); border-radius: 16px; padding: 18px 12px 14px;
@@ -276,8 +290,8 @@ const ERAS = [
  {k:"ancient",     t:"Ancient World",  y:"before 500"},
  {k:"medieval",    t:"Middle Ages",    y:"500 – 1450"},
  {k:"earlymodern", t:"Early Modern",   y:"1450 – 1750"},
- {k:"industrial",  t:"Industrial Age", y:"1750 – 1914"},
- {k:"modern",      t:"Modern Times",   y:"1914 – today"}
+ {k:"industrial",  t:"Industrial Age", y:"1750 – 1900"},
+ {k:"modern",      t:"Modern Times",   y:"1900 – today"}
 ];
 const PLANTS = ["🌱","🌿","🌷","🌻","🍀","🌾","🌵","🌸","🌼","🪻"];
 const fmtY = y => y < 0 ? `${-y} BC` : `${y}`;
@@ -372,7 +386,14 @@ const beds = {
         <div id="beds-fb"></div>
       </div>`;
     panel.querySelectorAll('.mini[data-i]').forEach(b =>
-      b.addEventListener('click', () => { s.sel = +b.dataset.i; s.hint = null; this.render(panel); }));
+      b.addEventListener('click', () => {
+        s.sel = +b.dataset.i; s.hint = null; this.render(panel);
+        // On narrow screens the beds sit below the fold: bring them into view.
+        if (window.matchMedia('(max-width: 1079px)').matches) {
+          const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          panel.querySelector('.beds').scrollIntoView({behavior: smooth ? 'smooth' : 'auto', block: 'start'});
+        }
+      }));
     panel.querySelectorAll('.bed').forEach(b =>
       b.addEventListener('click', () => this.plant(panel, b.dataset.era, b)));
     if (s.hint) {
