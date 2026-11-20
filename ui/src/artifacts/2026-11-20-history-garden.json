@@ -1,6 +1,11 @@
 {
   "title": "History Garden",
-  "description": "Three history games to grow your garden: Seed Duel, Era Beds and Roots. 60 real events with sources.",
+  "description": "Sort 60 real events into five era beds, from the Ancient World to Modern Times. Every correct planting grows your garden.",
   "date": "2026-11-20",
-  "tags": ["history", "game", "education", "interactive"]
+  "tags": [
+    "history",
+    "game",
+    "education",
+    "interactive"
+  ]
 }
