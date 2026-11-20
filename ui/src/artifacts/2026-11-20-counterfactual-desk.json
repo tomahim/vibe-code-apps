@@ -1,6 +1,11 @@
 {
   "title": "The Counterfactual Desk",
-  "description": "Ten real historical decisions, taken with only the information available at the time. Make the call, see one plausible outcome, then open the record of what history actually chose.",
+  "description": "Inspect visual evidence, make a historical decision, then discover what happened. Ten sourced dossiers.",
   "date": "2026-11-20",
-  "tags": ["history", "decisions", "interactive", "education"]
+  "tags": [
+    "history",
+    "decisions",
+    "interactive",
+    "education"
+  ]
 }
