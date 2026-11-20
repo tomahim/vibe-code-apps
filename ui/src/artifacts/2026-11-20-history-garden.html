@@ -27,43 +27,30 @@
     font-family: var(--serif);
     min-height: 100vh;
   }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px 48px; }
-  @media (min-width: 1100px) { .wrap { max-width: 86vw; } }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 20px 20px 48px; }
+  @media (min-width: 1200px) { .wrap { max-width: 1180px; } }
 
-  header.top { text-align: center; padding: 18px 0 6px; }
+  header.top { text-align: center; padding: 22px 0 4px; }
   .brand { display: inline-flex; align-items: center; gap: 10px; }
   .brand .sprout { font-size: 30px; }
   .brand h1 { font-size: 34px; margin: 0; letter-spacing: .5px; font-weight: 600; }
-  .tag { margin: 6px 0 0; color: var(--ink-soft); font-style: italic; }
+  .tag { margin: 8px 0 0; color: var(--ink-soft); font-style: italic; }
   .proto {
-    display: inline-block; margin-top: 8px; font-size: 11px; letter-spacing: 2px;
+    display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: 2px;
     text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent);
     border-radius: 999px; padding: 3px 12px;
   }
 
-  .tabs { display: flex; gap: 8px; justify-content: center; margin: 18px 0 6px; flex-wrap: wrap; }
-  .tabs button {
-    font: inherit; font-size: 15px; padding: 9px 18px; border-radius: 999px;
-    border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
-    cursor: pointer; transition: background .15s, color .15s;
-  }
-  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
-  .tabs button:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .tab-hint { text-align: center; color: var(--ink-soft); font-size: 13.5px; font-style: italic; margin: 4px 0 16px; }
-
-  .panel { display: none; }
-  .panel.active { display: block; }
-
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 20px; box-shadow: 0 2px 10px rgba(29,58,42,.06);
+    padding: 22px 22px 24px; box-shadow: 0 2px 10px rgba(29,58,42,.06);
+    margin-top: 20px;
   }
 
   .label {
     font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent);
     font-family: var(--serif);
   }
-  .event-name { font-size: 23px; line-height: 1.25; margin: 8px 0 2px; font-weight: 600; }
   .year-chip {
     display: inline-block; font-size: 14px; background: var(--leaf-soft); color: var(--leaf);
     border-radius: 999px; padding: 2px 12px; margin-top: 6px;
@@ -82,52 +69,85 @@
   .bigbtn:active { transform: scale(.97); }
   .bigbtn:disabled { opacity: .45; cursor: default; }
 
-  .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px; flex-wrap: wrap; }
   .pill {
     font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px;
     padding: 3px 12px; background: var(--card); color: var(--ink-soft);
   }
   .streak { color: var(--accent); font-weight: 600; }
 
-  .feedback { margin-top: 14px; border-radius: 14px; padding: 14px 16px; border: 1px solid var(--line); }
+  .feedback { margin-top: 16px; border-radius: 14px; padding: 14px 16px; border: 1px solid var(--line); }
   .feedback.good { background: var(--leaf-soft); border-color: #bcd8c2; }
   .feedback.bad { background: #f9e4de; border-color: #e4bcae; }
   .feedback h3 { margin: 0 0 4px; font-size: 17px; }
   .feedback.bad h3 { color: var(--wrong); }
   .feedback.good h3 { color: var(--leaf); }
 
-  /* Era beds */
-  .hand { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  /* Seed hand */
+  .hand-label { text-align: center; }
+  .hand {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin: 14px auto 6px; max-width: 860px;
+  }
   .mini {
-    font: inherit; font-size: 14px; line-height: 1.2; padding: 10px 12px; border-radius: 12px;
-    border: 1.5px solid var(--line); background: var(--card); cursor: pointer; color: var(--ink);
-    max-width: 200px;
+    font: inherit; font-size: 14.5px; line-height: 1.25; padding: 11px 16px; border-radius: 999px;
+    border: 1.5px solid var(--line); background: var(--bg); cursor: pointer; color: var(--ink);
+    box-shadow: 0 1px 3px rgba(29,58,42,.07);
+    transition: transform .12s, border-color .12s, background .12s;
   }
-  .mini.sel { border-color: var(--accent); background: var(--accent-soft); }
+  .mini:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .mini.sel { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
   .mini.done { opacity: 0; pointer-events: none; }
-  .beds { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 8px; }
-  .bed {
-    border: 1.5px dashed var(--line); border-radius: 14px; padding: 12px; min-height: 96px;
-    background: repeating-linear-gradient(45deg, #efe8d6, #efe8d6 10px, #f3eddd 10px, #f3eddd 20px);
-    cursor: pointer; text-align: left; font: inherit; color: var(--ink);
+
+  .beds-axis {
+    display: flex; align-items: center; gap: 10px;
+    margin: 18px 4px 10px; color: var(--ink-soft); font-size: 12px;
+    letter-spacing: 1.5px; text-transform: uppercase;
   }
-  .bed:hover { border-color: var(--leaf); }
-  .bed .bed-title { font-size: 15px; font-weight: 600; }
-  .bed .bed-years { font-size: 12px; color: var(--ink-soft); }
-  .bed .planted { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
-  .bed .planted span { font-size: 13px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px; }
+  .beds-axis .axis-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--line), var(--accent), var(--leaf)); position: relative; }
+  .beds-axis .axis-line::after {
+    content: ""; position: absolute; right: -1px; top: -4px;
+    border-left: 8px solid var(--leaf); border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent;
+  }
+
+  /* Era beds */
+  .beds {
+    display: grid; gap: 14px; align-items: stretch;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  @media (max-width: 1080px) { .beds { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
+  @media (max-width: 540px) { .beds { grid-template-columns: 1fr; } }
+  .bed {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    border: 1.5px dashed var(--line); border-radius: 16px; padding: 18px 12px 14px;
+    background: repeating-linear-gradient(45deg, #f1ebda, #f1ebda 10px, #f5efdf 10px, #f5efdf 20px);
+    cursor: pointer; font: inherit; color: var(--ink); width: 100%;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .bed:hover { border-color: var(--leaf); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(29,58,42,.10); }
+  .bed:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .bed-illo {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(29,58,42,.10); margin-bottom: 10px; flex: none;
+  }
+  .bed-illo svg { width: 40px; height: 40px; display: block; }
+  .illo-ancient     { background: var(--accent-soft); color: var(--accent); }
+  .illo-medieval    { background: var(--leaf-soft);   color: var(--leaf); }
+  .illo-earlymodern { background: #f0e7cf;            color: #8a6d2f; }
+  .illo-industrial  { background: #e8e2d3;            color: #5c5546; }
+  .illo-modern      { background: #dde7e9;            color: #3d6b75; }
+  .bed .bed-title { font-size: 16px; font-weight: 600; line-height: 1.2; }
+  .bed .bed-years { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .bed .bed-divider { width: 34px; border-top: 1px solid var(--line); margin: 10px 0; flex: none; }
+  .bed .planted { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+  .bed .planted span {
+    font-size: 13px; line-height: 1.25; background: var(--card); border: 1px solid var(--line);
+    border-radius: 9px; padding: 4px 8px;
+  }
+  .bed .bed-empty { font-size: 12.5px; font-style: italic; color: #a79d85; }
   .shake { animation: shake .35s; }
   @keyframes shake { 25% { transform: translateX(-5px);} 75% { transform: translateX(5px);} }
-
-  /* Map */
-  .mapcard { margin-top: 14px; }
-  svg.map { width: 100%; height: auto; display: block; }
-  .region { fill: #dfe8d8; stroke: var(--line); stroke-width: 1.5; cursor: pointer; transition: fill .15s; }
-  .region:hover { fill: #cfe2cc; }
-  .region.hit { fill: var(--leaf); }
-  .region.miss { fill: var(--wrong); }
-  .region.reveal { fill: var(--accent); }
-  .region-label { font-size: 11px; fill: var(--ink-soft); pointer-events: none; font-family: var(--serif); }
 
   /* Garden */
   .garden {
@@ -163,20 +183,11 @@
 <div class="wrap">
   <header class="top">
     <div class="brand"><span class="sprout" aria-hidden="true">🌱</span><h1>History Garden</h1></div>
-    <p class="tag">Plant every event in its right place. A Cultive game prototype.</p>
+    <p class="tag">Plant every event in its right era. A Cultive game prototype.</p>
     <span class="proto">Prototype · design preview</span>
   </header>
 
-  <div class="tabs" role="tablist" aria-label="Game modes">
-    <button role="tab" id="tab-duel" aria-selected="true" aria-controls="panel-duel">Seed Duel</button>
-    <button role="tab" id="tab-beds" aria-selected="false" aria-controls="panel-beds">Era Beds</button>
-    <button role="tab" id="tab-map" aria-selected="false" aria-controls="panel-map">Roots</button>
-  </div>
-  <p class="tab-hint" id="tab-hint">Was this event earlier or later than the stake in the ground?</p>
-
-  <section class="panel active" id="panel-duel" role="tabpanel" aria-labelledby="tab-duel"></section>
-  <section class="panel" id="panel-beds" role="tabpanel" aria-labelledby="tab-beds"></section>
-  <section class="panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map"></section>
+  <section id="panel-beds" aria-label="Era Beds game"></section>
 
   <div class="garden" aria-live="polite">
     <div class="garden-head"><span class="label">Your garden</span><span class="garden-count" id="garden-count">0 / 60 collected</span></div>
@@ -260,24 +271,44 @@ const EVENTS = [
 {n:"iPhone announced", y:2007, e:"modern", r:"north-america", f:"Apple's touchscreen phone put the internet in a pocket.", s:"IPhone_(1st_generation)"}
 ];
 
+
 const ERAS = [
- {k:"ancient",    t:"Ancient World",   y:"before 500"},
- {k:"medieval",   t:"Middle Ages",     y:"500 – 1450"},
- {k:"earlymodern",t:"Early Modern",    y:"1450 – 1750"},
- {k:"industrial", t:"Industrial Age",  y:"1750 – 1914"},
- {k:"modern",     t:"Modern Times",    y:"1914 – today"}
+ {k:"ancient",     t:"Ancient World",  y:"before 500"},
+ {k:"medieval",    t:"Middle Ages",    y:"500 – 1450"},
+ {k:"earlymodern", t:"Early Modern",   y:"1450 – 1750"},
+ {k:"industrial",  t:"Industrial Age", y:"1750 – 1914"},
+ {k:"modern",      t:"Modern Times",   y:"1914 – today"}
 ];
-const REGIONS = {
- "north-america":"North America & Caribbean", "latin-america":"Latin America", "europe":"Europe",
- "mena":"N. Africa & Middle East", "africa":"Sub-Saharan Africa",
- "south-asia":"South Asia", "east-asia":"Central & East Asia", "oceania":"Oceania"
-};
 const PLANTS = ["🌱","🌿","🌷","🌻","🍀","🌾","🌵","🌸","🌼","🪻"];
 const fmtY = y => y < 0 ? `${-y} BC` : `${y}`;
 const src = e => `https://en.wikipedia.org/wiki/${e.s}`;
 const collected = new Set();
 const rand = a => a[Math.floor(Math.random()*a.length)];
 function shuffle(a){ const x=[...a]; for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];} return x; }
+
+/* Small line illustrations, one per era. Drawn with strokes, tinted by CSS. */
+const ILLUS = {
+  ancient: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="10" y1="8"  x2="38" y2="8"/><line x1="12" y1="12" x2="36" y2="12"/>
+    <line x1="16" y1="12" x2="17" y2="36"/><line x1="24" y1="12" x2="24" y2="36"/><line x1="32" y1="12" x2="31" y2="36"/>
+    <line x1="12" y1="36" x2="36" y2="36"/><line x1="10" y1="41" x2="38" y2="41"/></svg>`,
+  medieval: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M13 40 V16 h4.4 v-4 h5 v4 h3.2 v-4 h5 v4 h4.4 V40"/>
+    <path d="M21 40 v-6 a3 3 0 0 1 6 0 v6"/><line x1="8" y1="40" x2="40" y2="40"/></svg>`,
+  earlymodern: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="24" y1="6" x2="24" y2="30"/>
+    <path d="M24 9 L12 26 h12 Z"/><path d="M24 12 L35 26 H24"/>
+    <path d="M9 31 h30 l-5 8 H14 Z"/></svg>`,
+  industrial: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M8 40 V24 l8 5 v-5 l8 5 v-5 l8 5 v11 Z"/>
+    <line x1="33" y1="16" x2="33" y2="24"/><line x1="37" y1="16" x2="37" y2="24"/><line x1="33" y1="16" x2="37" y2="16"/>
+    <line x1="14" y1="33" x2="18" y2="33"/><line x1="23" y1="33" x2="27" y2="33"/>
+    <path d="M35 11 c-2 -2 2 -3 0 -5"/></svg>`,
+  modern: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M24 5 c4 4 6 10 6 15 l3 6 h-6 c-1 3 -5 3 -6 0 h-6 l3 -6 c0 -5 2 -11 6 -15 Z"/>
+    <circle cx="24" cy="16" r="2.6"/>
+    <path d="M21 30 c0 4 1 6 3 8 c2 -2 3 -4 3 -8"/></svg>`
+};
 
 function collect(ev){
   if (collected.has(ev.n)) return;
@@ -302,72 +333,7 @@ function feedbackHTML(ok, title, ev, extra){
   </div>`;
 }
 
-/* ============ Game 1: Seed Duel (earlier / later than an anchor) ============ */
-const duel = {
-  state: null,
-  start(panel){
-    const anchor = rand(EVENTS);
-    const deck = shuffle(EVENTS.filter(e => e.n !== anchor.n)).slice(0, 10);
-    this.state = {anchor, deck, i:0, streak:0, best:0, done:0, locked:false};
-    this.render(panel);
-  },
-  render(panel){
-    const s = this.state;
-    if (s.i >= s.deck.length) return this.summary(panel);
-    const ev = s.deck[s.i];
-    panel.innerHTML = `
-      <div class="card">
-        <div class="meta-row">
-          <span class="pill">Card ${s.i+1} / ${s.deck.length}</span>
-          <span class="pill">Streak: <span class="streak">${s.streak}</span> · best ${s.best}</span>
-        </div>
-        <p class="label">The stake in the ground</p>
-        <p style="font-size:17px;margin:6px 0 0"><b>${s.anchor.n}</b> <span class="year-chip">${fmtY(s.anchor.y)}</span></p>
-        <hr style="border:none;border-top:1px solid var(--line);margin:16px 0">
-        <p class="label">New seed</p>
-        <p class="event-name">${ev.n}</p>
-        <p class="tab-hint" style="margin:2px 0 0">Earlier or later than the stake?</p>
-        <div class="btnrow">
-          <button class="bigbtn ghost" data-a="earlier">⬅ Earlier</button>
-          <button class="bigbtn" data-a="later">Later ➡</button>
-        </div>
-        <div id="duel-fb"></div>
-      </div>`;
-    panel.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => this.answer(panel, b.dataset.a)));
-  },
-  answer(panel, guess){
-    const s = this.state;
-    if (s.locked) return;
-    s.locked = true;
-    const ev = s.deck[s.i];
-    const ok = (guess === 'earlier') === (ev.y < s.anchor.y);
-    if (ok) { s.streak++; s.best = Math.max(s.best, s.streak); collect(ev); }
-    else s.streak = 0;
-    panel.querySelectorAll('[data-a]').forEach(b => b.disabled = true);
-    const fb = document.getElementById('duel-fb');
-    fb.innerHTML = feedbackHTML(ok,
-      ok ? `${ev.n} was ${ev.y < s.anchor.y ? 'earlier' : 'later'} than ${s.anchor.n}.`
-         : `It was ${ev.y < s.anchor.y ? 'earlier' : 'later'} — the stake was ${fmtY(s.anchor.y)}.`, ev);
-    const next = document.createElement('button');
-    next.className = 'bigbtn'; next.style.marginTop = '12px';
-    next.textContent = s.i + 1 < s.deck.length ? 'Next seed →' : 'See the harvest →';
-    next.addEventListener('click', () => { s.i++; s.locked = false; this.render(panel); });
-    fb.appendChild(next);
-    next.focus();
-  },
-  summary(panel){
-    const s = this.state;
-    panel.innerHTML = `<div class="card roundover">
-      <p class="label">Round over</p>
-      <p class="big">Best streak: <span class="streak">${s.best}</span> of ${s.deck.length}</p>
-      <p class="fact">The stake was <b>${s.anchor.n}</b> (${fmtY(s.anchor.y)}).</p>
-      <div class="btnrow" style="justify-content:center"><button class="bigbtn" id="again">Play again ↻</button></div>
-    </div>`;
-    panel.querySelector('#again').addEventListener('click', () => this.start(panel));
-  }
-};
-
-/* ============ Game 2: Era Beds (sort into era buckets) ============ */
+/* ============ Era Beds (sort into era buckets) ============ */
 const beds = {
   state: null,
   start(panel){
@@ -382,10 +348,15 @@ const beds = {
       ev._placed ? `<button class="mini done" tabindex="-1">${ev.n}</button>`
                  : `<button class="mini ${s.sel===i?'sel':''}" data-i="${i}">${ev.n}</button>`).join('');
     const bedsHtml = ERAS.map(era => {
-      const planted = s.deck.filter(e => e._placed && e.e === era.k)
-        .map(e => `<span>🌱 ${e.n} · ${fmtY(e.y)}</span>`).join('');
+      const items = s.deck.filter(e => e._placed && e.e === era.k);
+      const planted = items.length
+        ? items.map(e => `<span>🌱 ${e.n} · ${fmtY(e.y)}</span>`).join('')
+        : `<span class="bed-empty">nothing planted yet</span>`;
       return `<button class="bed" data-era="${era.k}">
-        <span class="bed-title">${era.t}</span><br><span class="bed-years">${era.y}</span>
+        <span class="bed-illo illo-${era.k}">${ILLUS[era.k]}</span>
+        <span class="bed-title">${era.t}</span>
+        <span class="bed-years">${era.y}</span>
+        <span class="bed-divider" aria-hidden="true"></span>
         <span class="planted">${planted}</span></button>`;
     }).join('');
     panel.innerHTML = `
@@ -394,8 +365,9 @@ const beds = {
           <span class="pill">Planted ${s.placed} / ${s.deck.length}</span>
           <span class="pill">Mistakes: <span class="streak">${s.errors}</span></span>
         </div>
-        <p class="label">Pick a seed card, then plant it in the right era bed</p>
+        <p class="label hand-label">Pick a seed card, then plant it in the right era bed</p>
         <div class="hand">${hand}</div>
+        <div class="beds-axis" aria-hidden="true"><span>Older</span><span class="axis-line"></span><span>Newer</span></div>
         <div class="beds">${bedsHtml}</div>
         <div id="beds-fb"></div>
       </div>`;
@@ -438,102 +410,7 @@ const beds = {
   }
 };
 
-/* ============ Game 3: Roots (map placement) ============ */
-const MAP_REGIONS = [
- {k:"north-america", d:"M40,110 C30,60 90,30 160,35 C230,40 250,80 220,120 C200,150 120,160 80,145 C50,135 45,125 40,110 Z", lx:120, ly:95},
- {k:"latin-america", d:"M150,190 C180,175 215,185 220,215 C228,255 205,305 185,315 C165,322 155,285 150,250 C146,225 138,200 150,190 Z", lx:185, ly:250},
- {k:"europe", d:"M330,60 C360,40 420,42 445,65 C465,85 450,115 420,125 C390,135 345,125 330,100 C322,85 320,70 330,60 Z", lx:390, ly:88},
- {k:"mena", d:"M350,140 C390,125 460,125 490,145 C505,160 495,185 465,195 C425,207 370,200 352,178 C342,162 340,148 350,140 Z", lx:420, ly:163},
- {k:"africa", d:"M355,215 C395,198 455,200 475,225 C492,252 470,300 440,318 C415,330 380,315 365,285 C352,258 345,225 355,215 Z", lx:415, ly:265},
- {k:"south-asia", d:"M495,150 C520,140 555,148 565,170 C573,192 552,215 530,215 C508,215 490,190 488,170 C487,160 490,153 495,150 Z", lx:527, ly:185},
- {k:"east-asia", d:"M555,60 C600,40 665,45 690,75 C710,100 695,135 660,145 C625,155 575,145 560,118 C550,98 545,70 555,60 Z", lx:625, ly:95},
- {k:"oceania", d:"M590,255 C620,240 665,245 680,265 C692,282 675,305 645,308 C615,311 590,295 585,275 C582,265 585,258 590,255 Z", lx:638, ly:278}
-];
-const map = {
-  state: null,
-  start(panel){
-    const deck = shuffle(EVENTS.filter(e => e.m !== 0)).slice(0, 8);
-    this.state = {deck, i:0, score:0, locked:false};
-    this.render(panel);
-  },
-  svg(){
-    const regs = MAP_REGIONS.map(r =>
-      `<path class="region" data-r="${r.k}" d="${r.d}"></path>
-       <text class="region-label" x="${r.lx}" y="${r.ly}" text-anchor="middle">${REGIONS[r.k]}</text>`).join('');
-    return `<svg class="map" viewBox="0 0 720 350" role="img" aria-label="Stylised world map">${regs}</svg>`;
-  },
-  render(panel){
-    const s = this.state;
-    if (s.i >= s.deck.length) return this.summary(panel);
-    const ev = s.deck[s.i];
-    panel.innerHTML = `
-      <div class="card">
-        <div class="meta-row">
-          <span class="pill">Seed ${s.i+1} / ${s.deck.length}</span>
-          <span class="pill">Rooted: <span class="streak">${s.score}</span></span>
-        </div>
-        <p class="label">Where did this first sprout?</p>
-        <p class="event-name">${ev.n} <span class="year-chip">${fmtY(ev.y)}</span></p>
-        <p class="tab-hint" style="margin:4px 0 0">Tap the region on the map.</p>
-        <div class="mapcard">${this.svg()}</div>
-        <div id="map-fb"></div>
-      </div>`;
-    panel.querySelectorAll('.region').forEach(p =>
-      p.addEventListener('click', () => this.answer(panel, p.dataset.r, p)));
-  },
-  answer(panel, region, path){
-    const s = this.state;
-    if (s.locked) return;
-    s.locked = true;
-    const ev = s.deck[s.i];
-    const ok = region === ev.r;
-    if (ok) { s.score++; collect(ev); path.classList.add('hit'); }
-    else {
-      path.classList.add('miss');
-      panel.querySelector(`.region[data-r="${ev.r}"]`).classList.add('reveal');
-    }
-    const fb = panel.querySelector('#map-fb');
-    fb.innerHTML = feedbackHTML(ok,
-      ok ? `${ev.n} took root in ${REGIONS[ev.r]}.`
-         : `Its roots are in ${REGIONS[ev.r]}, not ${REGIONS[region]}.`, ev);
-    const next = document.createElement('button');
-    next.className = 'bigbtn'; next.style.marginTop = '12px';
-    next.textContent = s.i + 1 < s.deck.length ? 'Next seed →' : 'See the harvest →';
-    next.addEventListener('click', () => { s.i++; s.locked = false; this.render(panel); });
-    fb.appendChild(next);
-    next.focus();
-  },
-  summary(panel){
-    const s = this.state;
-    panel.innerHTML = `<div class="card roundover">
-      <p class="label">Round over</p>
-      <p class="big">Rooted <span class="streak">${s.score}</span> of ${s.deck.length} on the first tap</p>
-      <div class="btnrow" style="justify-content:center"><button class="bigbtn" id="again3">Explore again ↻</button></div>
-    </div>`;
-    panel.querySelector('#again3').addEventListener('click', () => this.start(panel));
-  }
-};
-
-/* ---------- Tabs & sources ---------- */
-const HINTS = {
-  duel: "Was this event earlier or later than the stake in the ground?",
-  beds: "Sort each seed card into the era bed where it belongs.",
-  map: "Each event sprouted somewhere. Tap its home region."
-};
-const panels = { duel: duel, beds: beds, map: map };
-function activate(key){
-  document.querySelectorAll('.tabs button').forEach(b =>
-    b.setAttribute('aria-selected', String(b.id === `tab-${key}`)));
-  document.querySelectorAll('.panel').forEach(p =>
-    p.classList.toggle('active', p.id === `panel-${key}`));
-  document.getElementById('tab-hint').textContent = HINTS[key];
-}
-Object.keys(panels).forEach(key => {
-  document.getElementById(`tab-${key}`).addEventListener('click', () => activate(key));
-  panels[key].start(document.getElementById(`panel-${key}`));
-});
-const initial = location.hash.replace('#','');
-if (panels[initial]) activate(initial);
+beds.start(document.getElementById('panel-beds'));
 
 document.getElementById('srclist').innerHTML = ERAS.map(era => {
   const rows = EVENTS.filter(e => e.e === era.k)
