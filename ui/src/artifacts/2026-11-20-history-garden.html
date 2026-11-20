@@ -210,7 +210,7 @@ const EVENTS = [
 {n:"Muhammad's Hijra to Medina", y:622, e:"medieval", r:"mena", f:"The journey from Mecca to Medina marks year one of the Islamic calendar.", s:"Hijrah"},
 {n:"Charlemagne crowned emperor", y:800, e:"medieval", r:"europe", f:"The Pope crowned him in Rome on Christmas Day.", s:"Charlemagne"},
 {n:"Battle of Hastings", y:1066, e:"medieval", r:"europe", f:"William of Normandy's victory changed England's rulers, laws and language.", s:"Battle_of_Hastings"},
-{n:"First Crusade sets out", y:1096, e:"medieval", r:"mena", f:"European armies marched east; Jerusalem fell to them in 1099.", s:"First_Crusade"},
+{n:"First Crusade sets out", y:1096, e:"medieval", r:"mena", m:0, f:"European armies marched east; Jerusalem fell to them in 1099.", s:"First_Crusade"},
 {n:"Genghis Khan proclaimed ruler", y:1206, e:"medieval", r:"east-asia", f:"Born Temujin, he united the Mongol tribes into the largest land empire ever.", s:"Genghis_Khan"},
 {n:"Magna Carta sealed", y:1215, e:"medieval", r:"europe", f:"King John accepted that even the king must obey the law.", s:"Magna_Carta"},
 {n:"Marco Polo leaves for China", y:1271, e:"medieval", r:"east-asia", f:"His 24-year journey opened European eyes to the wealth of Asia.", s:"Marco_Polo"},
@@ -235,7 +235,7 @@ const EVENTS = [
 {n:"Eiffel Tower completed", y:1889, e:"industrial", r:"europe", f:"Built for the Paris World's Fair; the world's tallest structure for 41 years.", s:"Eiffel_Tower"},
 {n:"First modern Olympic Games", y:1896, e:"industrial", r:"europe", f:"Revived in Athens with 241 athletes from 14 nations.", s:"1896_Summer_Olympics"},
 {n:"Wright brothers' first flight", y:1903, e:"modern", r:"north-america", f:"Twelve seconds aloft at Kitty Hawk began the age of aviation.", s:"Wright_brothers"},
-{n:"Titanic sinks", y:1912, e:"modern", r:"north-america", f:"Struck an iceberg in the North Atlantic on her maiden voyage; more than 1,500 people died.", s:"Sinking_of_the_Titanic"},
+{n:"Titanic sinks", y:1912, e:"modern", r:"north-america", m:0, f:"Struck an iceberg in the North Atlantic on her maiden voyage; more than 1,500 people died.", s:"Sinking_of_the_Titanic"},
 {n:"First World War begins", y:1914, e:"modern", r:"europe", f:"A pistol shot in Sarajevo drew the great powers into four years of trench warfare.", s:"World_War_I"},
 {n:"Russian Revolution", y:1917, e:"modern", r:"europe", f:"The Bolsheviks seized power and built the world's first communist state.", s:"Russian_Revolution"},
 {n:"Penicillin discovered", y:1928, e:"modern", r:"europe", f:"Fleming noticed mould killing bacteria on a dish — the first antibiotic.", s:"Penicillin"},
@@ -250,8 +250,8 @@ const EVENTS = [
 {n:"Sputnik 1 launched", y:1957, e:"modern", r:"east-asia", f:"The first artificial satellite, launched from Baikonur, started the space race.", s:"Sputnik_1"},
 {n:"Cuban Missile Crisis", y:1962, e:"modern", r:"north-america", f:"Thirteen days in October brought the superpowers to the brink of nuclear war.", s:"Cuban_Missile_Crisis"},
 {n:"'I Have a Dream' speech", y:1963, e:"modern", r:"north-america", f:"Martin Luther King Jr. addressed 250,000 marchers in Washington, DC.", s:"I_Have_a_Dream"},
-{n:"First humans walk on the Moon", y:1969, e:"modern", r:"north-america", f:"Armstrong and Aldrin landed Apollo 11 while Collins orbited above.", s:"Apollo_11"},
-{n:"First email sent on ARPANET", y:1971, e:"modern", r:"north-america", f:"Ray Tomlinson chose the @ sign to separate the user from the machine.", s:"History_of_email"},
+{n:"First humans walk on the Moon", y:1969, e:"modern", r:"north-america", m:0, f:"Armstrong and Aldrin landed Apollo 11 while Collins orbited above.", s:"Apollo_11"},
+{n:"First networked email", y:1971, e:"modern", r:"north-america", f:"Ray Tomlinson sent the first message between two computers on ARPANET, choosing the @ sign to separate user from machine.", s:"History_of_email"},
 {n:"Berlin Wall falls", y:1989, e:"modern", r:"europe", f:"Crowds with hammers ended 28 years of a divided city.", s:"Berlin_Wall"},
 {n:"Nelson Mandela released", y:1990, e:"modern", r:"africa", f:"Walked free after 27 years in prison; four years later he was president.", s:"Nelson_Mandela"},
 {n:"World Wide Web opens to the public", y:1991, e:"modern", r:"europe", f:"Tim Berners-Lee gave the web away for free from CERN.", s:"World_Wide_Web"},
@@ -268,7 +268,7 @@ const ERAS = [
  {k:"modern",     t:"Modern Times",    y:"1914 – today"}
 ];
 const REGIONS = {
- "north-america":"North America", "latin-america":"Latin America", "europe":"Europe",
+ "north-america":"North America & Caribbean", "latin-america":"Latin America", "europe":"Europe",
  "mena":"N. Africa & Middle East", "africa":"Sub-Saharan Africa",
  "south-asia":"South Asia", "east-asia":"Central & East Asia", "oceania":"Oceania"
 };
@@ -452,7 +452,7 @@ const MAP_REGIONS = [
 const map = {
   state: null,
   start(panel){
-    const deck = shuffle(EVENTS).slice(0, 8);
+    const deck = shuffle(EVENTS.filter(e => e.m !== 0)).slice(0, 8);
     this.state = {deck, i:0, score:0, locked:false};
     this.render(panel);
   },
