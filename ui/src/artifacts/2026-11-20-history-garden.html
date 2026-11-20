@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History Garden — a Cultive game prototype</title>
+<style>
+  :root {
+    --bg: #f6f1e6;
+    --card: #fffdf6;
+    --ink: #1d3a2a;
+    --ink-soft: #4a6152;
+    --accent: #c2693a;
+    --accent-soft: #f3e3d5;
+    --leaf: #3e7d54;
+    --leaf-soft: #e3efe4;
+    --line: #e5dcc6;
+    --wrong: #b3402e;
+    --radius: 18px;
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px 48px; }
+  @media (min-width: 1100px) { .wrap { max-width: 86vw; } }
+
+  header.top { text-align: center; padding: 18px 0 6px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; }
+  .brand .sprout { font-size: 30px; }
+  .brand h1 { font-size: 34px; margin: 0; letter-spacing: .5px; font-weight: 600; }
+  .tag { margin: 6px 0 0; color: var(--ink-soft); font-style: italic; }
+  .proto {
+    display: inline-block; margin-top: 8px; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 3px 12px;
+  }
+
+  .tabs { display: flex; gap: 8px; justify-content: center; margin: 18px 0 6px; flex-wrap: wrap; }
+  .tabs button {
+    font: inherit; font-size: 15px; padding: 9px 18px; border-radius: 999px;
+    border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+    cursor: pointer; transition: background .15s, color .15s;
+  }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+  .tabs button:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tab-hint { text-align: center; color: var(--ink-soft); font-size: 13.5px; font-style: italic; margin: 4px 0 16px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; box-shadow: 0 2px 10px rgba(29,58,42,.06);
+  }
+
+  .label {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent);
+    font-family: var(--serif);
+  }
+  .event-name { font-size: 23px; line-height: 1.25; margin: 8px 0 2px; font-weight: 600; }
+  .year-chip {
+    display: inline-block; font-size: 14px; background: var(--leaf-soft); color: var(--leaf);
+    border-radius: 999px; padding: 2px 12px; margin-top: 6px;
+  }
+  .fact { color: var(--ink-soft); font-size: 15px; line-height: 1.45; margin: 10px 0 0; }
+  .src { font-size: 12px; color: var(--ink-soft); margin-top: 10px; word-break: break-all; }
+  .src b { color: var(--accent); font-weight: 600; }
+
+  .btnrow { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .bigbtn {
+    font: inherit; flex: 1; min-width: 130px; padding: 14px; font-size: 17px;
+    border-radius: 14px; border: 1.5px solid var(--ink); background: var(--ink);
+    color: var(--bg); cursor: pointer; transition: transform .1s;
+  }
+  .bigbtn.ghost { background: transparent; color: var(--ink); }
+  .bigbtn:active { transform: scale(.97); }
+  .bigbtn:disabled { opacity: .45; cursor: default; }
+
+  .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .pill {
+    font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px;
+    padding: 3px 12px; background: var(--card); color: var(--ink-soft);
+  }
+  .streak { color: var(--accent); font-weight: 600; }
+
+  .feedback { margin-top: 14px; border-radius: 14px; padding: 14px 16px; border: 1px solid var(--line); }
+  .feedback.good { background: var(--leaf-soft); border-color: #bcd8c2; }
+  .feedback.bad { background: #f9e4de; border-color: #e4bcae; }
+  .feedback h3 { margin: 0 0 4px; font-size: 17px; }
+  .feedback.bad h3 { color: var(--wrong); }
+  .feedback.good h3 { color: var(--leaf); }
+
+  /* Era beds */
+  .hand { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .mini {
+    font: inherit; font-size: 14px; line-height: 1.2; padding: 10px 12px; border-radius: 12px;
+    border: 1.5px solid var(--line); background: var(--card); cursor: pointer; color: var(--ink);
+    max-width: 200px;
+  }
+  .mini.sel { border-color: var(--accent); background: var(--accent-soft); }
+  .mini.done { opacity: 0; pointer-events: none; }
+  .beds { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 8px; }
+  .bed {
+    border: 1.5px dashed var(--line); border-radius: 14px; padding: 12px; min-height: 96px;
+    background: repeating-linear-gradient(45deg, #efe8d6, #efe8d6 10px, #f3eddd 10px, #f3eddd 20px);
+    cursor: pointer; text-align: left; font: inherit; color: var(--ink);
+  }
+  .bed:hover { border-color: var(--leaf); }
+  .bed .bed-title { font-size: 15px; font-weight: 600; }
+  .bed .bed-years { font-size: 12px; color: var(--ink-soft); }
+  .bed .planted { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .bed .planted span { font-size: 13px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px; }
+  .shake { animation: shake .35s; }
+  @keyframes shake { 25% { transform: translateX(-5px);} 75% { transform: translateX(5px);} }
+
+  /* Map */
+  .mapcard { margin-top: 14px; }
+  svg.map { width: 100%; height: auto; display: block; }
+  .region { fill: #dfe8d8; stroke: var(--line); stroke-width: 1.5; cursor: pointer; transition: fill .15s; }
+  .region:hover { fill: #cfe2cc; }
+  .region.hit { fill: var(--leaf); }
+  .region.miss { fill: var(--wrong); }
+  .region.reveal { fill: var(--accent); }
+  .region-label { font-size: 11px; fill: var(--ink-soft); pointer-events: none; font-family: var(--serif); }
+
+  /* Garden */
+  .garden {
+    margin: 22px 0 8px; padding: 14px 16px; background: var(--leaf-soft);
+    border: 1px solid #c9dcc9; border-radius: var(--radius);
+  }
+  .garden .label { color: var(--leaf); }
+  .garden-strip { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; min-height: 30px; align-items: center; }
+  .garden-strip .plant { font-size: 22px; animation: pop .35s ease; }
+  @keyframes pop { from { transform: scale(0);} 70% { transform: scale(1.25);} }
+  .garden-count { margin-left: auto; font-size: 13px; color: var(--leaf); font-weight: 600; }
+  .garden-head { display: flex; align-items: baseline; gap: 10px; }
+
+  details.sources { margin-top: 26px; }
+  details.sources summary {
+    cursor: pointer; font-size: 13px; color: var(--ink-soft); letter-spacing: 1px;
+    text-transform: uppercase; font-size: 12px;
+  }
+  .srclist { columns: 2; column-gap: 28px; font-size: 12px; color: var(--ink-soft); margin-top: 10px; }
+  @media (max-width: 640px) { .srclist { columns: 1; } }
+  .srclist p { margin: 0 0 6px; break-inside: avoid; }
+
+  .roundover { text-align: center; padding: 10px 0 4px; }
+  .roundover .big { font-size: 26px; margin: 8px 0; }
+  .hidden { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="sprout" aria-hidden="true">🌱</span><h1>History Garden</h1></div>
+    <p class="tag">Plant every event in its right place. A Cultive game prototype.</p>
+    <span class="proto">Prototype · design preview</span>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Game modes">
+    <button role="tab" id="tab-duel" aria-selected="true" aria-controls="panel-duel">Seed Duel</button>
+    <button role="tab" id="tab-beds" aria-selected="false" aria-controls="panel-beds">Era Beds</button>
+    <button role="tab" id="tab-map" aria-selected="false" aria-controls="panel-map">Roots</button>
+  </div>
+  <p class="tab-hint" id="tab-hint">Was this event earlier or later than the stake in the ground?</p>
+
+  <section class="panel active" id="panel-duel" role="tabpanel" aria-labelledby="tab-duel"></section>
+  <section class="panel" id="panel-beds" role="tabpanel" aria-labelledby="tab-beds"></section>
+  <section class="panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map"></section>
+
+  <div class="garden" aria-live="polite">
+    <div class="garden-head"><span class="label">Your garden</span><span class="garden-count" id="garden-count">0 / 60 collected</span></div>
+    <div class="garden-strip" id="garden-strip"><span style="font-size:13px;color:var(--ink-soft)">Answer events correctly to plant them here.</span></div>
+  </div>
+
+  <details class="sources">
+    <summary>Sources &amp; notes</summary>
+    <div class="srclist" id="srclist"></div>
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:14px">
+      Original prototype inspired by timeline quiz games; mechanics, code and copy are new.
+      Dates and facts follow the linked public encyclopedia articles (URLs shown for copy).
+      Progress lives only in this page; it resets on reload.
+    </p>
+  </details>
+</div>
+
+<script>
+"use strict";
+/* ---------- Data: 60 real events. y = year (negative = BC). ---------- */
+const EVENTS = [
+{n:"First recorded Olympic Games", y:-776, e:"ancient", r:"europe", f:"Held at Olympia in Greece; the only event was a short foot race, won by a cook named Koroibos.", s:"Ancient_Olympic_Games"},
+{n:"Founding of Rome (traditional date)", y:-753, e:"ancient", r:"europe", f:"The Romulus and Remus legend; a hilltop village that grew into an empire.", s:"Founding_of_Rome"},
+{n:"Democracy established in Athens", y:-508, e:"ancient", r:"europe", f:"Cleisthenes' reforms let Athenian citizens vote directly on laws.", s:"Athenian_democracy"},
+{n:"Battle of Thermopylae", y:-480, e:"ancient", r:"europe", f:"A small Greek force held a mountain pass against the Persian army for three days.", s:"Battle_of_Thermopylae"},
+{n:"Qin Shi Huang unifies China", y:-221, e:"ancient", r:"east-asia", f:"First emperor of a united China; standardised writing and coins, buried with the Terracotta Army.", s:"Qin_Shi_Huang"},
+{n:"Hannibal crosses the Alps", y:-218, e:"ancient", r:"europe", f:"Marched an army with war elephants over the Alps to strike Rome from the north.", s:"Hannibal"},
+{n:"Julius Caesar assassinated", y:-44, e:"ancient", r:"europe", f:"Stabbed by a group of senators on the Ides of March, 15 March 44 BC.", s:"Assassination_of_Julius_Caesar"},
+{n:"Vesuvius buries Pompeii", y:79, e:"ancient", r:"europe", f:"The eruption preserved a whole Roman city under ash for nearly 1,700 years.", s:"Eruption_of_Mount_Vesuvius_in_79_AD"},
+{n:"Western Roman Empire falls", y:476, e:"ancient", r:"europe", f:"The general Odoacer deposed the boy emperor Romulus Augustulus.", s:"Fall_of_the_Western_Roman_Empire"},
+{n:"Muhammad's Hijra to Medina", y:622, e:"medieval", r:"mena", f:"The journey from Mecca to Medina marks year one of the Islamic calendar.", s:"Hijrah"},
+{n:"Charlemagne crowned emperor", y:800, e:"medieval", r:"europe", f:"The Pope crowned him in Rome on Christmas Day.", s:"Charlemagne"},
+{n:"Battle of Hastings", y:1066, e:"medieval", r:"europe", f:"William of Normandy's victory changed England's rulers, laws and language.", s:"Battle_of_Hastings"},
+{n:"First Crusade sets out", y:1096, e:"medieval", r:"mena", f:"European armies marched east; Jerusalem fell to them in 1099.", s:"First_Crusade"},
+{n:"Genghis Khan proclaimed ruler", y:1206, e:"medieval", r:"east-asia", f:"Born Temujin, he united the Mongol tribes into the largest land empire ever.", s:"Genghis_Khan"},
+{n:"Magna Carta sealed", y:1215, e:"medieval", r:"europe", f:"King John accepted that even the king must obey the law.", s:"Magna_Carta"},
+{n:"Marco Polo leaves for China", y:1271, e:"medieval", r:"east-asia", f:"His 24-year journey opened European eyes to the wealth of Asia.", s:"Marco_Polo"},
+{n:"Black Death reaches Europe", y:1347, e:"medieval", r:"europe", f:"The plague killed at least a third of Europe's people within a few years.", s:"Black_Death"},
+{n:"Constantinople falls to the Ottomans", y:1453, e:"earlymodern", r:"mena", f:"Mehmed II's cannons ended the Byzantine Empire after a thousand years.", s:"Fall_of_Constantinople"},
+{n:"Gutenberg prints his Bible", y:1455, e:"earlymodern", r:"europe", f:"The first major European book printed with movable metal type.", s:"Gutenberg_Bible"},
+{n:"Columbus reaches the Americas", y:1492, e:"earlymodern", r:"north-america", f:"He landed in the Bahamas believing, to his death, that he had reached Asia.", s:"Christopher_Columbus"},
+{n:"Luther publishes his 95 Theses", y:1517, e:"earlymodern", r:"europe", f:"A protest against indulgences that started the Reformation.", s:"Ninety-five_Theses"},
+{n:"Fall of Tenochtitlan", y:1521, e:"earlymodern", r:"north-america", f:"Cortés and his Indigenous allies captured the Aztec capital after a 93-day siege.", s:"Fall_of_Tenochtitlan"},
+{n:"Spanish Armada defeated", y:1588, e:"earlymodern", r:"europe", f:"England's navy and Atlantic storms broke Spain's invasion fleet.", s:"Spanish_Armada"},
+{n:"Jamestown founded", y:1607, e:"earlymodern", r:"north-america", f:"The first permanent English settlement in North America.", s:"Jamestown,_Virginia"},
+{n:"Newton publishes the Principia", y:1687, e:"earlymodern", r:"europe", f:"Set out the laws of motion and universal gravitation.", s:"Philosophiæ_Naturalis_Principia_Mathematica"},
+{n:"US Declaration of Independence", y:1776, e:"industrial", r:"north-america", f:"Thirteen colonies declared independence from Britain on 4 July.", s:"United_States_Declaration_of_Independence"},
+{n:"Storming of the Bastille", y:1789, e:"industrial", r:"europe", f:"The Paris prison held only seven prisoners, but its fall began the French Revolution.", s:"Storming_of_the_Bastille"},
+{n:"Napoleon crowns himself emperor", y:1804, e:"industrial", r:"europe", f:"He took the crown and placed it on his own head in Notre-Dame.", s:"Napoleon"},
+{n:"Battle of Waterloo", y:1815, e:"industrial", r:"europe", f:"Napoleon's final defeat ended more than twenty years of war in Europe.", s:"Battle_of_Waterloo"},
+{n:"First public steam railway opens", y:1825, e:"industrial", r:"europe", f:"The Stockton and Darlington Railway carried passengers by steam power.", s:"Stockton_and_Darlington_Railway"},
+{n:"Darwin publishes On the Origin of Species", y:1859, e:"industrial", r:"europe", f:"Introduced evolution by natural selection after decades of hesitation.", s:"On_the_Origin_of_Species"},
+{n:"American Civil War ends", y:1865, e:"industrial", r:"north-america", f:"Lee's surrender at Appomattox ended four years of war; slavery was abolished that year.", s:"American_Civil_War"},
+{n:"Suez Canal opens", y:1869, e:"industrial", r:"mena", f:"Linked the Mediterranean and the Red Sea, cutting months off the voyage to Asia.", s:"Suez_Canal"},
+{n:"Bell patents the telephone", y:1876, e:"industrial", r:"north-america", f:"His first intelligible call: 'Mr. Watson, come here, I want to see you.'", s:"Invention_of_the_telephone"},
+{n:"Eiffel Tower completed", y:1889, e:"industrial", r:"europe", f:"Built for the Paris World's Fair; the world's tallest structure for 41 years.", s:"Eiffel_Tower"},
+{n:"First modern Olympic Games", y:1896, e:"industrial", r:"europe", f:"Revived in Athens with 241 athletes from 14 nations.", s:"1896_Summer_Olympics"},
+{n:"Wright brothers' first flight", y:1903, e:"modern", r:"north-america", f:"Twelve seconds aloft at Kitty Hawk began the age of aviation.", s:"Wright_brothers"},
+{n:"Titanic sinks", y:1912, e:"modern", r:"north-america", f:"Struck an iceberg in the North Atlantic on her maiden voyage; more than 1,500 people died.", s:"Sinking_of_the_Titanic"},
+{n:"First World War begins", y:1914, e:"modern", r:"europe", f:"A pistol shot in Sarajevo drew the great powers into four years of trench warfare.", s:"World_War_I"},
+{n:"Russian Revolution", y:1917, e:"modern", r:"europe", f:"The Bolsheviks seized power and built the world's first communist state.", s:"Russian_Revolution"},
+{n:"Penicillin discovered", y:1928, e:"modern", r:"europe", f:"Fleming noticed mould killing bacteria on a dish — the first antibiotic.", s:"Penicillin"},
+{n:"Wall Street Crash", y:1929, e:"modern", r:"north-america", f:"The New York market collapse triggered the Great Depression worldwide.", s:"Wall_Street_Crash_of_1929"},
+{n:"Second World War begins", y:1939, e:"modern", r:"europe", f:"Germany invaded Poland; Britain and France declared war two days later.", s:"World_War_II"},
+{n:"D-Day landings in Normandy", y:1944, e:"modern", r:"europe", f:"The largest seaborne invasion in history opened the liberation of Western Europe.", s:"Normandy_landings"},
+{n:"United Nations founded", y:1945, e:"modern", r:"north-america", f:"Fifty-one nations signed the charter in San Francisco to prevent another world war.", s:"United_Nations"},
+{n:"India gains independence", y:1947, e:"modern", r:"south-asia", f:"Two centuries of British rule ended; the land was partitioned into India and Pakistan.", s:"Indian_Independence_Act_1947"},
+{n:"Everest first summited", y:1953, e:"modern", r:"south-asia", f:"Edmund Hillary and Tenzing Norgay stood on the highest point on Earth.", s:"1953_British_Mount_Everest_expedition"},
+{n:"Structure of DNA revealed", y:1953, e:"modern", r:"europe", f:"Watson and Crick described the double helix, building on Rosalind Franklin's data.", s:"Molecular_structure_of_nucleic_acids"},
+{n:"Rosa Parks refuses her seat", y:1955, e:"modern", r:"north-america", f:"Her arrest in Montgomery ignited the US civil rights movement.", s:"Rosa_Parks"},
+{n:"Sputnik 1 launched", y:1957, e:"modern", r:"east-asia", f:"The first artificial satellite, launched from Baikonur, started the space race.", s:"Sputnik_1"},
+{n:"Cuban Missile Crisis", y:1962, e:"modern", r:"north-america", f:"Thirteen days in October brought the superpowers to the brink of nuclear war.", s:"Cuban_Missile_Crisis"},
+{n:"'I Have a Dream' speech", y:1963, e:"modern", r:"north-america", f:"Martin Luther King Jr. addressed 250,000 marchers in Washington, DC.", s:"I_Have_a_Dream"},
+{n:"First humans walk on the Moon", y:1969, e:"modern", r:"north-america", f:"Armstrong and Aldrin landed Apollo 11 while Collins orbited above.", s:"Apollo_11"},
+{n:"First email sent on ARPANET", y:1971, e:"modern", r:"north-america", f:"Ray Tomlinson chose the @ sign to separate the user from the machine.", s:"History_of_email"},
+{n:"Berlin Wall falls", y:1989, e:"modern", r:"europe", f:"Crowds with hammers ended 28 years of a divided city.", s:"Berlin_Wall"},
+{n:"Nelson Mandela released", y:1990, e:"modern", r:"africa", f:"Walked free after 27 years in prison; four years later he was president.", s:"Nelson_Mandela"},
+{n:"World Wide Web opens to the public", y:1991, e:"modern", r:"europe", f:"Tim Berners-Lee gave the web away for free from CERN.", s:"World_Wide_Web"},
+{n:"Soviet Union dissolved", y:1991, e:"modern", r:"europe", f:"Fifteen republics became independent states; the Cold War was over.", s:"Dissolution_of_the_Soviet_Union"},
+{n:"South Africa's first democratic election", y:1994, e:"modern", r:"africa", f:"Mandela was elected in the first vote open to citizens of all races.", s:"1994_South_African_general_election"},
+{n:"iPhone announced", y:2007, e:"modern", r:"north-america", f:"Apple's touchscreen phone put the internet in a pocket.", s:"IPhone_(1st_generation)"}
+];
+
+const ERAS = [
+ {k:"ancient",    t:"Ancient World",   y:"before 500"},
+ {k:"medieval",   t:"Middle Ages",     y:"500 – 1450"},
+ {k:"earlymodern",t:"Early Modern",    y:"1450 – 1750"},
+ {k:"industrial", t:"Industrial Age",  y:"1750 – 1914"},
+ {k:"modern",     t:"Modern Times",    y:"1914 – today"}
+];
+const REGIONS = {
+ "north-america":"North America", "latin-america":"Latin America", "europe":"Europe",
+ "mena":"N. Africa & Middle East", "africa":"Sub-Saharan Africa",
+ "south-asia":"South Asia", "east-asia":"Central & East Asia", "oceania":"Oceania"
+};
+const PLANTS = ["🌱","🌿","🌷","🌻","🍀","🌾","🌵","🌸","🌼","🪻"];
+const fmtY = y => y < 0 ? `${-y} BC` : `${y}`;
+const src = e => `https://en.wikipedia.org/wiki/${e.s}`;
+const collected = new Set();
+const rand = a => a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ const x=[...a]; for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];} return x; }
+
+function collect(ev){
+  if (collected.has(ev.n)) return;
+  collected.add(ev.n);
+  const strip = document.getElementById('garden-strip');
+  if (collected.size === 1) strip.innerHTML = '';
+  const p = document.createElement('span');
+  p.className = 'plant'; p.textContent = PLANTS[collected.size % PLANTS.length];
+  p.title = ev.n;
+  strip.appendChild(p);
+  document.getElementById('garden-count').textContent = `${collected.size} / ${EVENTS.length} collected`;
+}
+
+function feedbackHTML(ok, title, ev, extra){
+  return `<div class="feedback ${ok?'good':'bad'}">
+    <h3>${ok ? rand(['Planted! 🌱','It takes root 🌿','A new bloom 🌷']) : 'Not this soil…'}</h3>
+    <p style="margin:0;font-size:15px"><b>${title}</b></p>
+    <p class="fact" style="margin-top:6px"><span class="year-chip">${fmtY(ev.y)}</span></p>
+    <p class="fact">${ev.f}</p>
+    ${extra || ''}
+    <p class="src">Source (copy): <b>${src(ev)}</b></p>
+  </div>`;
+}
+
+/* ============ Game 1: Seed Duel (earlier / later than an anchor) ============ */
+const duel = {
+  state: null,
+  start(panel){
+    const anchor = rand(EVENTS);
+    const deck = shuffle(EVENTS.filter(e => e.n !== anchor.n)).slice(0, 10);
+    this.state = {anchor, deck, i:0, streak:0, best:0, done:0, locked:false};
+    this.render(panel);
+  },
+  render(panel){
+    const s = this.state;
+    if (s.i >= s.deck.length) return this.summary(panel);
+    const ev = s.deck[s.i];
+    panel.innerHTML = `
+      <div class="card">
+        <div class="meta-row">
+          <span class="pill">Card ${s.i+1} / ${s.deck.length}</span>
+          <span class="pill">Streak: <span class="streak">${s.streak}</span> · best ${s.best}</span>
+        </div>
+        <p class="label">The stake in the ground</p>
+        <p style="font-size:17px;margin:6px 0 0"><b>${s.anchor.n}</b> <span class="year-chip">${fmtY(s.anchor.y)}</span></p>
+        <hr style="border:none;border-top:1px solid var(--line);margin:16px 0">
+        <p class="label">New seed</p>
+        <p class="event-name">${ev.n}</p>
+        <p class="tab-hint" style="margin:2px 0 0">Earlier or later than the stake?</p>
+        <div class="btnrow">
+          <button class="bigbtn ghost" data-a="earlier">⬅ Earlier</button>
+          <button class="bigbtn" data-a="later">Later ➡</button>
+        </div>
+        <div id="duel-fb"></div>
+      </div>`;
+    panel.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => this.answer(panel, b.dataset.a)));
+  },
+  answer(panel, guess){
+    const s = this.state;
+    if (s.locked) return;
+    s.locked = true;
+    const ev = s.deck[s.i];
+    const ok = (guess === 'earlier') === (ev.y < s.anchor.y);
+    if (ok) { s.streak++; s.best = Math.max(s.best, s.streak); collect(ev); }
+    else s.streak = 0;
+    panel.querySelectorAll('[data-a]').forEach(b => b.disabled = true);
+    const fb = document.getElementById('duel-fb');
+    fb.innerHTML = feedbackHTML(ok,
+      ok ? `${ev.n} was ${ev.y < s.anchor.y ? 'earlier' : 'later'} than ${s.anchor.n}.`
+         : `It was ${ev.y < s.anchor.y ? 'earlier' : 'later'} — the stake was ${fmtY(s.anchor.y)}.`, ev);
+    const next = document.createElement('button');
+    next.className = 'bigbtn'; next.style.marginTop = '12px';
+    next.textContent = s.i + 1 < s.deck.length ? 'Next seed →' : 'See the harvest →';
+    next.addEventListener('click', () => { s.i++; s.locked = false; this.render(panel); });
+    fb.appendChild(next);
+    next.focus();
+  },
+  summary(panel){
+    const s = this.state;
+    panel.innerHTML = `<div class="card roundover">
+      <p class="label">Round over</p>
+      <p class="big">Best streak: <span class="streak">${s.best}</span> of ${s.deck.length}</p>
+      <p class="fact">The stake was <b>${s.anchor.n}</b> (${fmtY(s.anchor.y)}).</p>
+      <div class="btnrow" style="justify-content:center"><button class="bigbtn" id="again">Play again ↻</button></div>
+    </div>`;
+    panel.querySelector('#again').addEventListener('click', () => this.start(panel));
+  }
+};
+
+/* ============ Game 2: Era Beds (sort into era buckets) ============ */
+const beds = {
+  state: null,
+  start(panel){
+    // 8 cards: guarantee at least one from 3+ eras
+    const deck = shuffle(EVENTS).slice(0, 8);
+    this.state = {deck, sel:null, errors:0, placed:0, hint:null};
+    this.render(panel);
+  },
+  render(panel){
+    const s = this.state;
+    const hand = s.deck.map((ev,i) =>
+      ev._placed ? `<button class="mini done" tabindex="-1">${ev.n}</button>`
+                 : `<button class="mini ${s.sel===i?'sel':''}" data-i="${i}">${ev.n}</button>`).join('');
+    const bedsHtml = ERAS.map(era => {
+      const planted = s.deck.filter(e => e._placed && e.e === era.k)
+        .map(e => `<span>🌱 ${e.n} · ${fmtY(e.y)}</span>`).join('');
+      return `<button class="bed" data-era="${era.k}">
+        <span class="bed-title">${era.t}</span><br><span class="bed-years">${era.y}</span>
+        <span class="planted">${planted}</span></button>`;
+    }).join('');
+    panel.innerHTML = `
+      <div class="card">
+        <div class="meta-row">
+          <span class="pill">Planted ${s.placed} / ${s.deck.length}</span>
+          <span class="pill">Mistakes: <span class="streak">${s.errors}</span></span>
+        </div>
+        <p class="label">Pick a seed card, then plant it in the right era bed</p>
+        <div class="hand">${hand}</div>
+        <div class="beds">${bedsHtml}</div>
+        <div id="beds-fb"></div>
+      </div>`;
+    panel.querySelectorAll('.mini[data-i]').forEach(b =>
+      b.addEventListener('click', () => { s.sel = +b.dataset.i; s.hint = null; this.render(panel); }));
+    panel.querySelectorAll('.bed').forEach(b =>
+      b.addEventListener('click', () => this.plant(panel, b.dataset.era, b)));
+    if (s.hint) {
+      const fb = panel.querySelector('#beds-fb');
+      fb.innerHTML = `<div class="feedback bad" style="margin-top:12px"><h3>Wrong bed</h3>
+        <p class="fact" style="margin:4px 0 0">${s.hint}</p></div>`;
+    }
+  },
+  plant(panel, eraKey, btn){
+    const s = this.state;
+    if (s.sel === null) { s.hint = "Pick a seed card first, then a bed."; return this.render(panel); }
+    const ev = s.deck[s.sel];
+    if (ev.e === eraKey) {
+      ev._placed = true; s.placed++; s.hint = null; collect(ev);
+      if (s.placed >= s.deck.length) return this.summary(panel);
+      s.sel = s.deck.findIndex(e => !e._placed);
+      this.render(panel);
+    } else {
+      s.errors++;
+      const dir = ERAS.findIndex(e => e.k === ev.e) < ERAS.findIndex(e => e.k === eraKey) ? 'older' : 'newer';
+      s.hint = `"${ev.n}" doesn't belong to ${ERAS.find(e=>e.k===eraKey).t}. Think ${dir}…`;
+      btn.classList.add('shake'); setTimeout(() => this.render(panel), 380);
+    }
+  },
+  summary(panel){
+    const s = this.state;
+    const perfect = s.errors === 0;
+    panel.innerHTML = `<div class="card roundover">
+      <p class="label">All seeds planted</p>
+      <p class="big">${perfect ? '🌻 A flawless harvest!' : `Harvest done · ${s.errors} mistake${s.errors>1?'s':''}`}</p>
+      <p class="fact">${perfect ? 'Every event landed in its era on the first try.' : 'Every correct bed revealed the year and story.'}</p>
+      <div class="btnrow" style="justify-content:center"><button class="bigbtn" id="again2">Sort a new hand ↻</button></div>
+    </div>`;
+    panel.querySelector('#again2').addEventListener('click', () => this.start(panel));
+  }
+};
+
+/* ============ Game 3: Roots (map placement) ============ */
+const MAP_REGIONS = [
+ {k:"north-america", d:"M40,110 C30,60 90,30 160,35 C230,40 250,80 220,120 C200,150 120,160 80,145 C50,135 45,125 40,110 Z", lx:120, ly:95},
+ {k:"latin-america", d:"M150,190 C180,175 215,185 220,215 C228,255 205,305 185,315 C165,322 155,285 150,250 C146,225 138,200 150,190 Z", lx:185, ly:250},
+ {k:"europe", d:"M330,60 C360,40 420,42 445,65 C465,85 450,115 420,125 C390,135 345,125 330,100 C322,85 320,70 330,60 Z", lx:390, ly:88},
+ {k:"mena", d:"M350,140 C390,125 460,125 490,145 C505,160 495,185 465,195 C425,207 370,200 352,178 C342,162 340,148 350,140 Z", lx:420, ly:163},
+ {k:"africa", d:"M355,215 C395,198 455,200 475,225 C492,252 470,300 440,318 C415,330 380,315 365,285 C352,258 345,225 355,215 Z", lx:415, ly:265},
+ {k:"south-asia", d:"M495,150 C520,140 555,148 565,170 C573,192 552,215 530,215 C508,215 490,190 488,170 C487,160 490,153 495,150 Z", lx:527, ly:185},
+ {k:"east-asia", d:"M555,60 C600,40 665,45 690,75 C710,100 695,135 660,145 C625,155 575,145 560,118 C550,98 545,70 555,60 Z", lx:625, ly:95},
+ {k:"oceania", d:"M590,255 C620,240 665,245 680,265 C692,282 675,305 645,308 C615,311 590,295 585,275 C582,265 585,258 590,255 Z", lx:638, ly:278}
+];
+const map = {
+  state: null,
+  start(panel){
+    const deck = shuffle(EVENTS).slice(0, 8);
+    this.state = {deck, i:0, score:0, locked:false};
+    this.render(panel);
+  },
+  svg(){
+    const regs = MAP_REGIONS.map(r =>
+      `<path class="region" data-r="${r.k}" d="${r.d}"></path>
+       <text class="region-label" x="${r.lx}" y="${r.ly}" text-anchor="middle">${REGIONS[r.k]}</text>`).join('');
+    return `<svg class="map" viewBox="0 0 720 350" role="img" aria-label="Stylised world map">${regs}</svg>`;
+  },
+  render(panel){
+    const s = this.state;
+    if (s.i >= s.deck.length) return this.summary(panel);
+    const ev = s.deck[s.i];
+    panel.innerHTML = `
+      <div class="card">
+        <div class="meta-row">
+          <span class="pill">Seed ${s.i+1} / ${s.deck.length}</span>
+          <span class="pill">Rooted: <span class="streak">${s.score}</span></span>
+        </div>
+        <p class="label">Where did this first sprout?</p>
+        <p class="event-name">${ev.n} <span class="year-chip">${fmtY(ev.y)}</span></p>
+        <p class="tab-hint" style="margin:4px 0 0">Tap the region on the map.</p>
+        <div class="mapcard">${this.svg()}</div>
+        <div id="map-fb"></div>
+      </div>`;
+    panel.querySelectorAll('.region').forEach(p =>
+      p.addEventListener('click', () => this.answer(panel, p.dataset.r, p)));
+  },
+  answer(panel, region, path){
+    const s = this.state;
+    if (s.locked) return;
+    s.locked = true;
+    const ev = s.deck[s.i];
+    const ok = region === ev.r;
+    if (ok) { s.score++; collect(ev); path.classList.add('hit'); }
+    else {
+      path.classList.add('miss');
+      panel.querySelector(`.region[data-r="${ev.r}"]`).classList.add('reveal');
+    }
+    const fb = panel.querySelector('#map-fb');
+    fb.innerHTML = feedbackHTML(ok,
+      ok ? `${ev.n} took root in ${REGIONS[ev.r]}.`
+         : `Its roots are in ${REGIONS[ev.r]}, not ${REGIONS[region]}.`, ev);
+    const next = document.createElement('button');
+    next.className = 'bigbtn'; next.style.marginTop = '12px';
+    next.textContent = s.i + 1 < s.deck.length ? 'Next seed →' : 'See the harvest →';
+    next.addEventListener('click', () => { s.i++; s.locked = false; this.render(panel); });
+    fb.appendChild(next);
+    next.focus();
+  },
+  summary(panel){
+    const s = this.state;
+    panel.innerHTML = `<div class="card roundover">
+      <p class="label">Round over</p>
+      <p class="big">Rooted <span class="streak">${s.score}</span> of ${s.deck.length} on the first tap</p>
+      <div class="btnrow" style="justify-content:center"><button class="bigbtn" id="again3">Explore again ↻</button></div>
+    </div>`;
+    panel.querySelector('#again3').addEventListener('click', () => this.start(panel));
+  }
+};
+
+/* ---------- Tabs & sources ---------- */
+const HINTS = {
+  duel: "Was this event earlier or later than the stake in the ground?",
+  beds: "Sort each seed card into the era bed where it belongs.",
+  map: "Each event sprouted somewhere. Tap its home region."
+};
+const panels = { duel: duel, beds: beds, map: map };
+function activate(key){
+  document.querySelectorAll('.tabs button').forEach(b =>
+    b.setAttribute('aria-selected', String(b.id === `tab-${key}`)));
+  document.querySelectorAll('.panel').forEach(p =>
+    p.classList.toggle('active', p.id === `panel-${key}`));
+  document.getElementById('tab-hint').textContent = HINTS[key];
+}
+Object.keys(panels).forEach(key => {
+  document.getElementById(`tab-${key}`).addEventListener('click', () => activate(key));
+  panels[key].start(document.getElementById(`panel-${key}`));
+});
+const initial = location.hash.replace('#','');
+if (panels[initial]) activate(initial);
+
+document.getElementById('srclist').innerHTML = ERAS.map(era => {
+  const rows = EVENTS.filter(e => e.e === era.k)
+    .map(e => `<p>· ${e.n} (${fmtY(e.y)})<br>${src(e)}</p>`).join('');
+  return `<p style="margin-bottom:4px"><b style="color:var(--ink)">${era.t}</b></p>${rows}`;
+}).join('');
+</script>
+</body>
+</html>
