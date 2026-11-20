@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Counterfactual Desk</title>
+<style>
+:root{
+  --paper:#f7f1e4; --cream:#fbf6ea; --ink:#33302a; --ink-soft:#71695c;
+  --terra:#c2603e; --terra-deep:#a5502f; --green:#5f8f52; --green-deep:#3f6b3a;
+  --line:#ddcfb2; --desk:#3d2c1e; --shadow:0 10px 30px rgba(68,52,30,.14);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; padding:0 0 56px; background:var(--paper); color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+.serif{font-family:"Iowan Old Style",Georgia,"Palatino Linotype",serif}
+.type{font-family:"Courier New",ui-monospace,monospace}
+button{font:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+.page{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* ---- masthead ---- */
+.masthead{background-color:#43301f;color:#f2e8d5;padding:34px 0 78px;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 14px),
+    linear-gradient(180deg,#43301f,#5a4330)}
+.masthead .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d9a05b;font-weight:700;margin:0 0 8px}
+.masthead h1{font-size:clamp(30px,5.4vw,46px);margin:0 0 12px;font-weight:600}
+.masthead .intro{max-width:64ch;color:#e6d9c3;font-size:15px;line-height:1.6;margin:0}
+.progress-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.progress-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(251,246,234,.12);
+  border:1px solid rgba(251,246,234,.35);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600}
+.reset-btn{background:transparent;border:1px solid rgba(251,246,234,.4);color:#f2e8d5;border-radius:999px;
+  padding:6px 14px;font-size:13px;font-weight:600}
+.reset-btn:hover{background:rgba(251,246,234,.12)}
+
+/* ---- desk ---- */
+.desk{margin-top:-52px}
+.desk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.dossier{position:relative;text-align:left;background:var(--cream);border:1px solid var(--line);
+  border-top:10px solid #d8c39a;border-radius:6px;padding:16px 16px 14px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:8px;transition:transform .15s ease,box-shadow .15s ease}
+.dossier:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(68,52,30,.22)}
+.dossier .year{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--terra-deep)}
+.dossier h2{font-size:18px;margin:0;line-height:1.25;font-weight:600}
+.dossier .role{font-size:13px;color:var(--ink-soft)}
+.dossier .tag{font-size:12px;color:var(--ink-soft);margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
+.dossier.done{border-top-color:var(--green)}
+.stamp{position:absolute;top:10px;right:10px;transform:rotate(8deg);border:2px solid var(--green-deep);
+  color:var(--green-deep);font-size:10px;font-weight:800;letter-spacing:.14em;padding:3px 7px;border-radius:3px;
+  text-transform:uppercase;background:rgba(251,246,234,.85)}
+.desk-hint{color:var(--ink-soft);font-size:13px;margin:18px 2px 0}
+
+/* ---- case view ---- */
+.case{display:none}
+.case.open{display:block}
+.casebar{margin-top:-52px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.back-btn{background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+  font-weight:600;font-size:14px;box-shadow:var(--shadow);color:var(--ink)}
+.back-btn:hover{background:#fff}
+.paper{background:var(--cream);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);
+  padding:clamp(20px,4vw,40px);margin-top:18px;max-width:820px;margin-left:auto;margin-right:auto}
+.paper .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-deep);font-weight:800;margin:0 0 4px}
+.paper h2{font-size:clamp(24px,4vw,32px);margin:0 0 4px;font-weight:600}
+.paper .sub{color:var(--ink-soft);font-size:14px;margin:0 0 18px}
+.known{background:#f2e9d3;border:1px solid var(--line);border-left:5px solid var(--terra);
+  border-radius:4px;padding:14px 16px;margin:0 0 18px}
+.known h3{margin:0 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-deep)}
+.known p,.known li{font-size:14.5px}
+.known ul{margin:6px 0 0;padding-left:20px}
+.known li{margin-bottom:4px}
+.paper p.body{font-size:15.5px;line-height:1.65;margin:0 0 14px}
+.stakes{font-weight:600;color:var(--terra-deep)}
+.decide-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);
+  margin:26px 0 10px}
+.options{display:grid;gap:12px}
+.option{position:relative;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:8px;
+  padding:14px 16px 14px 52px;transition:border-color .12s ease,background .12s ease}
+.option:hover{border-color:var(--terra);background:#fffaf0}
+.option .letter{position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--terra);color:var(--terra-deep);font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.option h3{margin:0 0 4px;font-size:16px}
+.option p{margin:0;font-size:14px;color:var(--ink-soft)}
+.option.chosen{border-color:var(--terra-deep);background:#fffaf0;box-shadow:0 0 0 3px rgba(194,96,62,.18)}
+.option:disabled,.option:disabled h3{color:var(--ink)}
+.option:disabled p{color:var(--ink-soft)}
+.option:disabled{cursor:default}
+.option.dim{opacity:.55}
+.consequence{display:none;margin-top:22px}
+.consequence.show{display:block}
+.spec-label{display:inline-block;background:#efe3c8;border:1.5px dashed var(--terra-deep);color:var(--terra-deep);
+  border-radius:4px;padding:5px 12px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.consequence p{font-size:15px;line-height:1.6;margin:0 0 12px}
+.hist-btn{display:inline-block;background:var(--terra);color:#fff;border:none;border-radius:8px;
+  padding:12px 22px;font-weight:700;font-size:15px;margin-top:6px}
+.hist-btn:hover{background:var(--terra-deep)}
+.history{display:none;margin-top:26px;border-top:3px double var(--line);padding-top:20px}
+.history.show{display:block}
+.hist-stamp{display:inline-block;transform:rotate(-2deg);border:3px solid var(--green-deep);color:var(--green-deep);
+  font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:4px;
+  margin-bottom:12px;background:rgba(95,143,82,.08)}
+.history h3{font-size:18px;margin:0 0 8px}
+.history p{font-size:15px;line-height:1.6;margin:0 0 12px}
+.tradeoff{background:#eef2e6;border:1px solid #c9d6b4;border-left:5px solid var(--green);border-radius:4px;
+  padding:14px 16px;font-size:14.5px;margin:16px 0}
+.tradeoff h4{margin:0 0 4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep)}
+.tradeoff p{margin:0}
+.sources{font-size:13px;color:var(--ink-soft);margin-top:14px}
+.sources h4{margin:0 0 4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.sources ul{margin:4px 0 0;padding-left:18px}
+.sources li{margin-bottom:2px}
+.next-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.next-btn{background:var(--ink);color:var(--cream);border:none;border-radius:8px;padding:12px 22px;font-weight:700;font-size:15px}
+.next-btn:hover{background:#000}
+.again-btn{background:transparent;border:1.5px solid var(--line);border-radius:8px;padding:12px 18px;font-weight:600;color:var(--ink)}
+.again-btn:hover{border-color:var(--ink-soft)}
+.fade-in{animation:fade .45s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+}
+@media (max-width:560px){
+  .masthead{padding:26px 0 66px}
+  .desk-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .dossier{padding:12px}
+  .dossier h2{font-size:15px}
+  .option{padding:12px 12px 12px 46px}
+}
+@media (max-width:400px){
+  .desk-grid{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="page">
+    <p class="eyebrow type">The Counterfactual Desk</p>
+    <h1 class="serif">Ten decisions history got to make once</h1>
+    <p class="intro">Each dossier puts you at a real desk on a real date, with only the information available at the time. You make the call. The consequences that follow your choice are one plausible path, not a prediction. Only then do you open the record and see what history actually chose - and what it cost.</p>
+    <div class="progress-row">
+      <span class="progress-chip" id="progress" role="status">No cases decided yet</span>
+      <button class="reset-btn" id="reset">Clear my record</button>
+    </div>
+  </div>
+</header>
+<main class="page">
+  <section class="desk" id="desk" aria-label="Case desk">
+    <div class="desk-grid"></div>
+    <p class="desk-hint">Ten dossiers, oldest first is not required - open any of them. Your record is kept only until you close this page.</p>
+  </section>
+  <section class="case" id="case" aria-label="Open case">
+    <div class="casebar">
+      <button class="back-btn">&larr; Back to the desk</button>
+    </div>
+    <div id="case-content"></div>
+  </section>
+</main>
+<script>
+const EVENTS=[];
+EVENTS.push({
+id:"mississippi-1927",year:"1927",place:"New Orleans, USA",title:"The Levee at Caernarvon",
+role:"a member of New Orleans' Citizens Flood Relief Committee",tag:"One week of rising water",hist:0,
+known:[
+ "Rain has hammered the Mississippi basin since last August. On Good Friday, April 15, fifteen inches fell on your city in eighteen hours, and a power failure briefly silenced the pumps.",
+ "Upriver levees are breaking - the big crevasse at Mounds Landing on April 21 drowned the Delta - yet the river at New Orleans is still high and the city's levees are saturated.",
+ "Engineers say dynamiting the levee twelve miles downriver at Caernarvon would drop the river at the city, but it would drown St. Bernard and Plaquemines parishes: some ten thousand people, their homes, farms and trapping grounds.",
+ "The bankers on your committee fear bank runs and a collapse of trade if the city floods. The people downriver have been publicly assured they are safe."
+],
+body:[
+ "The city is the commercial heart of the South, and its business leaders want certainty at any price. The parish presidents downriver want guarantees in writing. The river does not care what anyone signs.",
+ "You can break a levee on purpose, or ask the saturated ones to hold, or move the breach somewhere else. Each choice names a different loser."
+],
+stakes:"Whatever you choose, someone pays for the river's relief - and everyone is watching which someone.",
+options:[
+ {label:"Dynamite the levee at Caernarvon",detail:"Sacrifice the two downriver parishes to take the pressure off the city, with a public promise of full compensation.",
+  consequence:"The river falls at New Orleans and the banks stay open. St. Bernard and Plaquemines fill with water; families who were told they were safe lose homes, boats and seasons. The promised compensation becomes a paper war: claims pile up far beyond the committee's estimates, lawyers get paid first, and the resentment outlives everyone in the room."},
+ {label:"Hold and reinforce the city levees",detail:"Trust the engineers, sandbag the low spots, and quietly evacuate the most exposed neighborhoods.",
+  consequence:"Crews work around the clock and the city holds its breath. If a saturated levee lets go inside the city, whole districts flood and the panic the bankers feared arrives anyway - with casualties. Even if it holds, weeks of terror and relief costs land on the city alone, and the parishes keep their dry homes without ever knowing how close it came."},
+ {label:"Cut a controlled breach upriver instead",detail:"Relieve the pressure through sparsely settled farmland above the city rather than through the parishes below it.",
+  consequence:"You trade one set of victims for another and learn how little 'controlled' means with a river like this: a cut can widen on its own, the upriver planters have their own lawyers and senators, and if the crest has already passed you have flooded people's land for nothing. Nobody in the room can tell you the crest has passed."}
+],
+history:{choice:"They dynamited it.",outcome:"On April 29, 1927, the levee at Caernarvon was blown, flooding St. Bernard and Plaquemines. New Orleans stayed dry. The city had pledged to make the victims whole; claims reached about $35 million against estimates of $2-6 million, and many displaced families saw little of it. The flood displaced hundreds of thousands across the basin and pushed Congress to put flood control in federal hands with the Flood Control Act of 1928.",
+ sources:["64 Parishes (Louisiana Endowment for the Humanities), 'Great Flood of 1927'","PBS American Experience, 'New Orleans and the Flood of 1927'","John M. Barry, 'Rising Tide' (1997)"]},
+tradeoff:"The city's leaders treated a political question - who should bear the loss - as an engineering question, and the people with the least say in the room paid the bill."
+});
+EVENTS.push({
+id:"cuba-1962",year:"1962",place:"Washington, D.C.",title:"Thirteen Days in October",
+role:"a member of President Kennedy's Executive Committee",tag:"Thirteen days",hist:1,
+known:[
+ "On the morning of October 16 you are shown U-2 photographs: Soviet medium-range nuclear missile sites under construction in Cuba, ninety miles from Florida. Some could be operational within days; larger ones within weeks.",
+ "Roughly one hundred million Americans would be in range. An air strike would kill Soviet soldiers, and nobody can tell you how Khrushchev answers that.",
+ "The failed Bay of Pigs invasion is eighteen months old. The Soviets insist, in public and in private letters, that everything in Cuba is defensive.",
+ "NATO keeps American Jupiter missiles in Turkey, close to the Soviet border. Everyone at the table knows it, and nobody wants to say it first."
+],
+body:[
+ "The Joint Chiefs want air strikes followed by invasion. Others want a blockade - which is an act of war under international law, so it would be called a 'quarantine'. A few urge private diplomacy before anything public.",
+ "Missile construction continues while you talk. Every day of debate is also a decision."
+],
+stakes:"The missiles get more real every day you wait, and the war gets more likely every hour you rush.",
+options:[
+ {label:"Strike the sites without warning",detail:"Destroy the missiles from the air before they are operational, and prepare an invasion to follow.",
+  consequence:"The first wave wrecks the sites it can find - but some missiles likely survive, mobile and now armed in every sense. Dead Soviet soldiers force Khrushchev to answer somewhere: Berlin, Turkey, or the missiles themselves. The escalation ladder has nuclear rungs and you are climbing it in the dark."},
+ {label:"Quarantine the island and demand withdrawal",detail:"A naval line against offensive weapons, a public ultimatum, and time for back-channel bargaining.",
+  consequence:"You buy time without the first shot - but construction continues behind the line, and a Soviet ship testing it could start the shooting anyway. Allies grumble that it is weak; the Chiefs call it slow suicide. Then again, every hour without an explosion is an hour both capitals can talk."},
+ {label:"Trade privately from the start",detail:"Quietly offer to pull the Jupiter missiles out of Turkey in exchange for the Soviet missiles leaving Cuba, with no public confrontation.",
+  consequence:"The crisis may never become a crisis - no speeches, no blockade, no U-2s in danger. But if the deal leaks, it reads as paying tribute for a secret deployment, NATO solidarity cracks, and the next secret deployment becomes cheaper for Moscow to attempt. You also spend your one bargaining chip before you know its price."}
+],
+history:{choice:"The quarantine - with a secret trade behind it.",outcome:"Kennedy announced the quarantine on October 22. The crisis peaked on October 27, 'Black Saturday', when a U-2 was shot down over Cuba. On October 28 Khrushchev announced the missiles would be withdrawn, in exchange for a public no-invasion pledge and a secret American promise to remove the Jupiters from Turkey later. It was the closest the Cold War came to nuclear war; the Moscow-Washington hotline and the 1963 Partial Test Ban Treaty followed.",
+ sources:["John F. Kennedy Presidential Library, Cuban Missile Crisis materials","U.S. National Archives, 'The Cuban Missile Crisis, 1962'","ExComm meeting records (National Security Archive / FRUS)"]},
+tradeoff:"Every option traded one danger for another: striking risked escalation, waiting risked finished missiles, and even looking weak had a price that would be collected later."
+});
+EVENTS.push({
+id:"dday-1944",year:"1944",place:"Southwick House, England",title:"The Weather Call",
+role:"General Eisenhower, Supreme Allied Commander",tag:"One night, one window",hist:0,
+known:[
+ "The invasion of Normandy was set for June 5. A storm forced you to postpone twenty-four hours; the fleet is at sea or cooped up in ports, 160,000 men already briefed and seasick.",
+ "It is the evening of June 4. Your chief meteorologist, Group Captain Stagg, reports a tentative break: a ridge of high pressure may give marginal but workable weather on June 6. His team disagrees among themselves.",
+ "After June 6, the next window with the right tide and moon is about two weeks away. The Germans read the same sky; their commanders believe no invasion is possible in this weather.",
+ "If you recall the force, thousands of briefed men go back ashore, and the secret of Normandy must survive two more weeks in the hands of an army that has already been told."
+],
+body:[
+ "The airborne drops need cloud ceilings and light winds; the landing craft need calm-ish seas; the bombers need visibility. Stagg is offering you 'marginal' on all three, for one day.",
+ "Your commanders are split. The decision is yours alone, and it is due before midnight."
+],
+stakes:"Bet wrong on the sky and the largest invasion in history drowns in the Channel; bet wrong on the calendar and it may never sail at all.",
+options:[
+ {label:"Go on June 6",detail:"Take the marginal window and trust the weatherman's ridge of high pressure.",
+  consequence:"If the ridge holds, you catch the defenders relaxed and gain the one thing no bombardment can buy: surprise - paid for with rough seas, scattered paratroopers and chaos on some beaches. If the ridge fails, the fleet is caught mid-Channel in a gale and the second front dies in public view. Stagg's own colleagues think the odds are worse than he says."},
+ {label:"Wait for the next window, about two weeks",detail:"Hold the force for the next tide-and-moon alignment around June 19.",
+  consequence:"It feels prudent - better weather odds, rested troops. But secrecy strains as briefed soldiers wait, deception plans age, and you cannot know that mid-June will bring one of the worst Channel storms in decades, the one that will wreck the artificial harbors. Prudence has a weather forecast too; you just haven't heard it."},
+ {label:"Postpone to July",detail:"Stand the whole operation down for a safer season and rebuild the plan's secrecy.",
+  consequence:"The deception campaign likely unravels once the force disperses; the Soviets, bleeding on the Eastern Front, ask what became of the promised second front; V-weapons keep falling on London; and the Atlantic Wall gets two more months of concrete, mines and troops. Summer looks safe from June 4. It is the most expensive kind of safe."}
+],
+history:{choice:"\"OK, we'll go.\"",outcome:"Eisenhower ordered the invasion for June 6. Stagg's ridge arrived; the landings succeeded in weather rough enough to scatter the airborne divisions and sink many amphibious tanks, but surprising enough that Rommel was away in Germany, convinced no attack was possible. Two weeks later a historic storm destroyed the American Mulberry harbor - the weather the invasion would have met had it waited.",
+ sources:["U.S. National Archives, 'D-Day: OK, We'll Go' (Prologue, 2014)","UK Met Office archive, the D-Day forecast","Royal Meteorological Society, 'How a weather forecast made history'"]},
+tradeoff:"A failed invasion and a cancelled one both looked like catastrophe. He could not compare them - he could only pick one, on the word of a weatherman whose own team was divided."
+});
+EVENTS.push({
+id:"challenger-1986",year:"1986",place:"Utah / Kennedy Space Center",title:"The 53-Degree Line",
+role:"an engineering manager on the solid-rocket booster program",tag:"One teleconference",hist:1,
+known:[
+ "Launch is set for tomorrow morning, January 28. Overnight it will drop to about 18 F, and the boosters will sit on the pad in the coldest conditions the program has ever faced - far below the 53 F of the coldest previous launch.",
+ "Your engineers have plotted O-ring erosion against temperature for past flights. The worst damage came on that 53 F flight. The data is sparse and noisy: some warm flights also showed erosion.",
+ "Tomorrow's launch has already slipped repeatedly. It is carrying a schoolteacher, the flight is a public event, and the space agency is pressing hard for a recommendation to fly.",
+ "The joints have always sealed before - on every flight that came home. No engineer in the room can prove the joint will fail at 36 F."
+],
+body:[
+ "Your senior engineers have just recommended, in writing, against launching below 53 F. The response from the customer is open displeasure: they are 'appalled' by the recommendation and ask what temperature the design is qualified for. Nobody has a clean answer.",
+ "You have one more caucus before the final recommendation is called in."
+],
+stakes:"You cannot prove it will fail. They cannot prove it will not. One of those burdens of proof is about to carry seven people.",
+options:[
+ {label:"Hold the 53-degree line",detail:"Refuse to reverse the engineering recommendation: no launch below the temperature the joint has survived before.",
+  consequence:"The launch slips again. The customer is furious, contract pressure intensifies, and your team may be overruled or quietly cut out of future calls. The crew waits on the ground - alive, though that is a sentence you can only think, not prove. The O-ring problem goes back into review, where it always should have stayed."},
+ {label:"Accept the launch, concerns on record",detail:"Reverse the recommendation, document the worries, and let senior management own the risk.",
+  consequence:"Your name is on the record and your hands are, technically, clean. The boosters chill overnight toward the teens. If the primary O-ring is slow to seat in the cold and the backup ring can't do the job, you will find out seventy-three seconds after liftoff, live on television, with the paperwork already filed."},
+ {label:"Delay a few hours and launch warm",detail:"Hold the count, let the Florida sun work, and fly in the afternoon at a warmer pad temperature.",
+  consequence:"The day warms, the joint seals as it always has, and the mission flies with a teacher aboard and a relieved country watching. Nobody outside the program ever learns how close the morning came to a scrub - and the cold-weather erosion pattern remains a quiet chart in an engineering file, waiting for a colder launch date."}
+],
+history:{choice:"They reversed the engineers' 'no'.",outcome:"Thiokol's engineers first recommended against launch below 53 F. Under pressure from NASA, management caucused, excluded the engineers, and reversed - one executive was told to put on his 'management hat'. Challenger launched into 36-degree cold on January 28, 1986; the right booster's field joint failed, and seventy-three seconds after liftoff the vehicle broke apart, killing all seven aboard. The Rogers Commission called the decision-making process 'flawed' in exactly these words.",
+ sources:["Report of the Presidential Commission on the Space Shuttle Challenger Accident (Rogers Commission), 1986 - NASA History Office","Commission records of the January 27 teleconference"]},
+tradeoff:"The engineers had a pattern, not a proof. Somewhere in that teleconference the burden of proof flipped from 'show us it is safe' to 'show us it will fail' - and nothing can be proven about a machine that has never been flown that cold."
+});
+EVENTS.push({
+id:"chernobyl-1986",year:"1986",place:"Chernobyl NPP, Unit 4 control room",title:"The Safety Test",
+role:"the deputy chief engineer running the night shift",tag:"One test, one hour",hist:1,
+known:[
+ "The plan: prove a coasting turbine can bridge the pumps for about forty seconds during a blackout. The test was scheduled for daytime, at 700 to 1,000 megawatts, with the day shift that rehearsed it.",
+ "The grid dispatcher delayed you for about nine hours. The reactor sat at half power all evening; the rested crew went home. It is past midnight, and your night shift inherited the test.",
+ "An hour ago, during a control transfer, reactor power crashed to about 30 megawatts - xenon has built up in the core and is poisoning the reaction. To claw power back, your operators have pulled nearly all the control rods, far below the thirty-rod minimum.",
+ "The turbine crew is ready, Kiev expects the result, and the maintenance outage starts tomorrow. You know the RBMK is unstable at low power. What nobody ever told the operators: at low power with the rods out, the emergency shutdown button can briefly add reactivity instead of removing it."
+],
+body:[
+ "The core is in a state the procedures never planned for, held up by a handful of rods. The xenon will burn off on its own if you simply wait a day.",
+ "Your instrumentation will not show you the shutdown-margin problem; the computer that calculates it takes fifteen minutes and you have already overridden it once."
+],
+stakes:"The test is about surviving a blackout. The way it is being run, the test itself may be the accident.",
+options:[
+ {label:"Abort and stabilize",detail:"Shut the test down, hold the reactor safe, and let the xenon decay for a day before trying again.",
+  consequence:"The turbine crew stands down, the report to Kiev explains a missed deadline, and your power-drop mistake is the talk of the plant for a week. The reactor recovers quietly overnight. Somewhere in a design bureau, a memo about the scram flaw stays unread - and stays true."},
+ {label:"Run the test now, as is",detail:"Proceed at about 200 megawatts, below plan conditions, with the rods nearly all out.",
+  consequence:"The test runs. At the end, as procedure demands, someone presses AZ-5 to shut the reactor down - and in this poisoned, rod-out, low-power core, the graphite tips of the descending rods momentarily add reactivity exactly where the reaction is strongest. You do not know that. That is precisely the problem."},
+ {label:"Raise power first, then test",detail:"Pull more rods, fight the xenon, and climb back toward the planned test conditions before running it.",
+  consequence:"Every rod you withdraw buys megawatts with shutdown margin. The reactor grows harder to hold, not easier; the operators chase the power with the pumps and the water, and the core drifts further from any state the procedures imagined. You are closer to the plan on paper and further from safety in fact."}
+],
+history:{choice:"They ran the test at 200 megawatts.",outcome:"At 01:23 on April 26, 1986, the test ended and AZ-5 was pressed. The graphite-tipped rods caused a power surge; seconds later two explosions destroyed Unit 4. The Soviet investigation blamed the operators almost entirely. The IAEA's INSAG-7 review in 1992 shifted the weight to the reactor's design flaws - above all that its most dangerous characteristics were kept secret from the very people operating it.",
+ sources:["IAEA INSAG-7, 'The Chernobyl Accident: Updating of INSAG-1' (1992)","World Nuclear Association, Chernobyl accident sequence of events"]},
+tradeoff:"The operators broke real rules, and the state had hidden the flaw that made those rules matter. They were condemned for pressing a shutdown button nobody had told them could, in that one state, work backwards."
+});
+EVENTS.push({
+id:"broad-street-1854",year:"1854",place:"Soho, London",title:"The Pump Handle",
+role:"a member of the St James parish Board of Guardians",tag:"One evening's decision",hist:0,
+known:[
+ "Since August 31, cholera has torn through the streets around Broad Street: more than five hundred dead in ten days, nearly all within two hundred and fifty yards of one public water pump.",
+ "Respectable science says cholera travels by miasma - bad air. Germ theory does not yet exist, and no instrument on Earth can show you what is in the water.",
+ "A local doctor, John Snow, has mapped the deaths house by house. They cluster around the Broad Street pump. The nearby brewery, whose workers drink beer instead of pump water, is almost untouched.",
+ "Snow asks you to remove the pump handle tonight. It is the neighborhood's water supply, and taking it sends hundreds of residents walking to other wells on the word of one doctor's map."
+],
+body:[
+ "You cannot verify his theory. You can only weigh the cost of acting on a hunch against the cost of not acting on a pattern.",
+ "The death rate, for what it is worth, has already begun to fall - though nobody in the parish knows whether the outbreak is ending or merely pausing."
+],
+stakes:"A cheap, reversible remedy, on a theory the establishment calls nonsense, against an epidemic that kills within hours.",
+options:[
+ {label:"Remove the handle tonight",detail:"Take Snow's advice on the strength of his map, before another day's water is drawn.",
+  consequence:"Residents grumble and carry water from farther off. If Snow is right, the pump stops infecting tonight; if he is wrong, you have inconvenienced a neighborhood for a theory. Either way, the dying among those who already drank continues - cholera's bill arrives days after the water."},
+ {label:"Wait for firmer evidence",detail:"Convene a proper inquiry, test what can be tested, and act when the science is settled.",
+  consequence:"You remain respectable. The committee deliberates with 1854 tools, which is to say inconclusively, while the pump keeps dispensing whatever it is dispensing. Epidemics do not wait for minutes to be approved, and the map on Snow's desk keeps accumulating addresses."},
+ {label:"Order boiling and street cleaning, keep the pump",detail:"Advise residents to boil water, scrub the gutters against the miasma, and leave the supply running.",
+  consequence:"A reasonable response by the science of the day, and it may even help at the margins. But advice is not enforcement: the tired, the poor and the skeptical keep drinking straight from the pump, and if the pump is the source, the outbreak keeps its foothold while everyone feels something was done."}
+],
+history:{choice:"They removed the handle.",outcome:"On September 8, 1854, the Board of Guardians had the Broad Street pump handle taken off. Snow himself recorded that the outbreak was already subsiding, and honest history keeps that caveat - but his investigation became the founding case of epidemiology. His 'grand experiment' traced a widow who had the pump's water carted to her distant home and died of cholera there, the final proof that the pump, not the air, was the killer.",
+ sources:["U.S. CDC, MMWR: '150th Anniversary of John Snow and the Pump Handle' (2004)","John Snow, 'On the Mode of Communication of Cholera' (2nd ed., 1855)"]},
+tradeoff:"Snow asked the parish to act against settled science on the strength of a map. The handle cost nothing to remove and little to be wrong about - the rare decision where caution meant acting, not waiting."
+});
+EVENTS.push({
+id:"donner-1846",year:"1846",place:"Fort Bridger, Wyoming",title:"The Shortcut",
+role:"captain of a wagon train bound for California",tag:"One fork in the trail",hist:0,
+known:[
+ "It is late July. California is seven to eight weeks away by the established trail, and snow can close the Sierra Nevada as early as October. Your party: eighty-seven people, twenty wagons, children, cattle.",
+ "A promoter named Lansford Hastings advertises a cutoff that saves three to four hundred miles, passing south of the Great Salt Lake. He has left letters promising to guide wagons through personally.",
+ "The mountain man James Clyman, just arrived from California, warns you to your face: the cutoff is barely passable for wagons. He rode it with horses, and Hastings has never taken wagons over it.",
+ "Most of this season's emigration has already gone ahead on the old trail. Turning back is not a choice anyone will vote for."
+],
+body:[
+ "The old trail is longer but known: marked, watered, crossed by thousands of wagons. The cutoff is shorter on paper and crossed by almost no one.",
+ "Hastings is ahead of you somewhere. Clyman is standing in front of you. You must decide which man's trail to believe."
+],
+stakes:"Every mile you might save is borrowed against a deadline you cannot see - the first snow in the Sierra.",
+options:[
+ {label:"Take the Hastings Cutoff",detail:"Trust the promoter's letters and turn off the proven trail for the shorter route.",
+  consequence:"If Hastings is right, you beat the season and the crowds to California. If the Wasatch canyons and the salt desert are what Clyman says, you will spend weeks building a road instead of traveling one, burning your oxen and your calendar - and the mountains will not renegotiate the season."},
+ {label:"Follow the established California Trail",detail:"Accept the longer distance for a route that is marked, watered and known.",
+  consequence:"More weeks of dust, more mouths fed longer, and the Sierra crossing lands late in the season no matter what. But the road exists, the water is where the guidebooks say, and your margin for error is spent on the weather rather than on guessing whether a stranger's shortcut is real."},
+ {label:"Rest and send scouts to verify",detail:"Lose a few days now to have riders confirm Hastings' route before committing the whole train.",
+  consequence:"Prudent, and perhaps decisive - a few days could save weeks. But grass is short, tempers shorter, your scouts may find Hastings gone ahead and out of reach, and every day spent verifying is a day of winter approaching. You may return to the fork having bought certainty at the price of the season."}
+],
+history:{choice:"They took the cutoff.",outcome:"The Donner Party spent nearly three weeks hacking a road through the Wasatch, then crossed the salt desert, losing wagons, cattle and days. Hastings was not there to guide them. They reached the Sierra weeks late and were snowbound at Truckee Lake from the end of October. Of the eighty-seven who entered the cutoff, forty-eight survived; rescue parties worked through February to April 1847.",
+ sources:["PBS American Experience, 'The Donner Party'","U.S. National Park Service, Hastings Cutoff"]},
+tradeoff:"In July, the proven road's extra miles looked like cowardice and the shortcut looked like nerve. The price list was only posted in October, and it was written in snow."
+});
+EVENTS.push({
+id:"kodak-1975",year:"1975",place:"Rochester, New York",title:"The Filmless Camera",
+role:"a member of Kodak's executive committee",tag:"One prototype",hist:1,
+known:[
+ "A young engineer, Steve Sasson, has just demonstrated a camera with no film: eight pounds of circuitry, a hundredth of a megapixel, fifty seconds to write one black-and-white image to a cassette, played back on a television.",
+ "Kodak owns photography. Film brings the overwhelming share of profit, on margins digital anything cannot dream of - and every camera in the world is a machine for selling that film.",
+ "No customer has ever asked for electronic photography. Home computers barely exist. The engineers believe the technology will take fifteen to twenty years to threaten anyone.",
+ "The patent office would let Kodak own key pieces of this future. Funding it seriously means building the product that kills your most profitable one."
+],
+body:[
+ "The prototype is ugly, slow and expensive. It is also, the engineers quietly agree, the future - on a timescale longer than any bonus cycle in the building.",
+ "You can fund it, shelve it, or park it somewhere in between."
+],
+stakes:"The question is not whether the camera is good. It is whether a company can sell its own replacement.",
+options:[
+ {label:"Fund a serious digital program now",detail:"Cannibalize film on your own terms before someone else does it to you.",
+  consequence:"For fifteen or twenty years the program burns money while film profits carry it, your own divisions resent it, and every annual review asks why. If the engineers are right about the curve, you own the transition when it finally arrives. Shareholders in 1975 see only the cost - and so do most of the people around this table."},
+ {label:"Patent it, and keep it quiet",detail:"Take the patents, leave the project in the lab, and protect the film business as long as it prints money.",
+  consequence:"Film booms for another two decades and the decision looks brilliant at every single one of those annual reviews. Meanwhile the patents expire one by one, and when digital finally tips, the companies that suffered through the ugly early years hold the technology, the talent and the story. Your head start becomes an exhibit in someone else's museum."},
+ {label:"Watch and re-enter when it matures",detail:"License the patent, track the technology, and commit real money only when costs fall.",
+  consequence:"Rational on paper: let others pay the tuition, then buy your way in. In practice, the business case for digital never beats film until the year it suddenly does - and by then the learning you skipped is the thing money cannot quickly buy. 'Wait and see' quietly becomes 'wait too long', one reasonable quarter at a time."}
+],
+history:{choice:"They shelved it, politely.",outcome:"The executive response to Sasson's demo: 'That's cute - but don't tell anyone about it.' Kodak patented the digital camera in 1978, kept it at arm's length while film boomed, arrived late and half-heartedly to the market it had invented, and filed for bankruptcy in 2012 - finished off by the technology born in its own lab.",
+ sources:["The New York Times, 'At Kodak, Some Old Things Are New Again' (2008)","Snopes fact-check, Kodak's digital camera invention"]},
+tradeoff:"Film was not just a product, it was the company's identity and its margin. Killing it early required believing a curve that, in 1975, only the engineers could see - and every year of proof arrived wrapped as another record year for film."
+});
+EVENTS.push({
+id:"titanic-1912",year:"1912",place:"RMS Titanic, the North Atlantic",title:"Ice Ahead, Full Speed",
+role:"the ship's master, Captain Edward Smith",tag:"One evening in the ice region",hist:1,
+known:[
+ "It is Sunday, April 14, on the maiden voyage of the largest ship afloat. Her watertight compartments have earned her a 'practically unsinkable' reputation.",
+ "Today at least four ships have radioed ice warnings - Caronia in the morning, Baltic and Amerika in the afternoon, Californian this evening. Bergs and field ice lie directly on your track.",
+ "Tonight is flat calm and moonless: no surf breaking on the ice, which makes bergs far harder to see. The lookouts' binoculars stayed behind at Southampton after an officer change.",
+ "You are making about twenty-two knots, near full speed. The line expects a fast crossing, and no modern liner has ever been lost to ice."
+],
+body:[
+ "The practice of the North Atlantic trade is plain: liners hold their speed through reported ice and rely on their lookouts. Captains who slow down explain themselves.",
+ "Your officers have the warnings on the chart table. The sea is giving you no help tonight, and no warning of its own."
+],
+stakes:"Hours of schedule against a risk no one has ever paid for - because no one has met it yet.",
+options:[
+ {label:"Slow down and go south around it",detail:"Reduce speed, post extra lookouts, and shape a course south of the reported ice.",
+  consequence:"Arrival slips by hours; a few passengers grumble; the crossing record is safe from you. A slower ship can turn or stop within what her lookouts can see, and the night passes with nothing but a story for the dining room. You will never know whether the caution was necessary. That is what bought safety feels like."},
+ {label:"Hold course and speed",detail:"Trust the lookouts, the practice of the trade, and the ship's reputation.",
+  consequence:"Most likely, a quiet night: ships have crossed this ocean on this advice for years and arrived bored. But if a growler sits dead ahead in this dead calm, a ship at twenty-two knots measures the margin in seconds - and her celebrated compartments were never designed for a wound six compartments long."},
+ {label:"Stop for the night",detail:"Heave to until daylight, as the Californian, ten miles away, has already done.",
+  consequence:"The safest choice and the most expensive in pride: a night lost, the largest liner in the world becalmed among the ice, and pointed questions in New York about a captain who parked his ship. You will also be awake to hear the wireless traffic of everyone who chose differently."}
+],
+history:{choice:"She kept her speed.",outcome:"Titanic held about twenty-two knots into the ice region. At 11:40 pm the lookout's bell rang; the turn came too late. The berg opened five of her compartments - one more than she could survive - and she sank in two hours and forty minutes. About 1,500 of the roughly 2,200 people aboard died; there were boats for barely half. The British inquiry concluded the ship had steamed at excessive speed given the warnings, while noting the practice was common to the trade.",
+ sources:["British Wreck Commissioner's Inquiry, Report on the Loss of the Titanic (1912)","U.S. Senate Inquiry into the Titanic disaster (1912)"]},
+tradeoff:"Schedule, custom, reputation and even the flat calm itself all quietly argued for the throttle. The risk was real, invisible, and priced at zero - right up to the thirty-seven seconds between the bell and the ice."
+});
+EVENTS.push({
+id:"munich-1938",year:"1938",place:"London / Munich",title:"Peace for Our Time",
+role:"British Prime Minister Neville Chamberlain",tag:"Three flights to Germany",hist:0,
+known:[
+ "Hitler demands the Sudetenland - the German-speaking, fortified, industrial borderlands of Czechoslovakia - and threatens war by October 1.",
+ "France is bound to Czechoslovakia by alliance, and France's war pulls Britain in. Your chiefs of staff warn that Britain's air defenses and army are not ready; the Air Ministry expects devastating bomber losses among civilians in a 1938 war.",
+ "The public remembers 1914-1918 and dreads the bomber. The Dominions are reluctant. America is neutral and isolationist.",
+ "The Sudeten Germans do have real grievances, and the Versailles borders are arguable. You have flown to Hitler twice; he has now invited you to a four-power conference in Munich. Czechoslovakia is not invited. Neither is Stalin."
+],
+body:[
+ "The Czechs have thirty-five divisions, strong fortifications, and one of Europe's great arms industries. They cannot fight Germany alone, and their fate is on your table, in a room they are not allowed to enter.",
+ "Hitler says the Sudetenland is his last territorial demand in Europe. His own record - the Rhineland, Austria - is the evidence against him, and the hope of avoiding 1914 again is the evidence for him."
+],
+stakes:"Peace in 1938, or readiness for a worse war later - paid for, either way, by a country not in the room.",
+options:[
+ {label:"Sign the agreement",detail:"Cede the Sudetenland in exchange for Hitler's promise that this is his last demand.",
+  consequence:"You fly home to cheering crowds as the man who spared London the bombers. If the promise holds, you are the greatest peacemaker of the century. If it does not, you have dismantled an ally's fortress line, handed Germany its arms factories, and taught it that threats work - while spending your own rearmament year either way."},
+ {label:"Refuse and stand with the Czechs",detail:"Join France in guaranteeing Czechoslovakia, and accept the risk of war in 1938.",
+  consequence:"Hitler's generals are unready, his economy strained, the Czech forts real - the war of 1938 might be shorter than the war of 1939. Or the bluff collapses into exactly the bombing catastrophe your advisers predict, with your radar chain a year from finished and your Spitfires just entering service. Your cabinet, parliament and the Dominions may split under you either way."},
+ {label:"Stall through the League and keep talking",detail:"Refuse Munich's terms, push the dispute to international arbitration, and buy months for rearmament.",
+  consequence:"Talks gain time; time strengthens the RAF. But Hitler, denied his September deadline, may invade anyway and force the issue in mud and winter - or pocket the delay to complete his own preparations. And through every week of arbitration, the Czechs stand mobilized, bled white, waiting on your calendar."}
+],
+history:{choice:"He signed.",outcome:"On September 30, 1938, Chamberlain, Daladier, Hitler and Mussolini signed the Munich Agreement, ceding the Sudetenland without Czechoslovakia in the room. Chamberlain came home promising 'peace for our time'. Germany took the rest of Czechoslovakia in March 1939, along with its gold and its arms industry; Britain guaranteed Poland; war came that September - with the Czech fortifications, tanks and factories now on the German side.",
+ sources:["UK National Archives, records of the Munich crisis","EBSCO Research Starters, 'Munich Agreement'"]},
+tradeoff:"He bought time with someone else's country. Whether 1938 Britain could have fought better than it bargained is still argued by historians. What is not argued: the invoice for the time he bought was delivered first to Prague."
+});
+
+/* EVENTS data injected below */
+const state={decided:new Set(),current:null,chosen:null,revealed:false};
+const $=s=>document.querySelector(s);
+const desk=$('#desk'),caseView=$('#case');
+
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+
+function renderDesk(){
+  desk.querySelector('.desk-grid').innerHTML=EVENTS.map((e,i)=>{
+    const done=state.decided.has(e.id);
+    return `<button class="dossier${done?' done':''}" data-id="${e.id}" aria-label="Open case: ${esc(e.title)}, ${e.year}${done?', decided':''}">
+      ${done?'<span class="stamp" aria-hidden="true">Decided</span>':''}
+      <span class="year type">${e.year} &middot; ${esc(e.place)}</span>
+      <h2 class="serif">${esc(e.title)}</h2>
+      <span class="role">You are: ${esc(e.role)}</span>
+      <span class="tag">${esc(e.tag)}</span>
+    </button>`;
+  }).join('');
+  desk.querySelectorAll('.dossier').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.id)));
+  const n=state.decided.size;
+  $('#progress').textContent=n===0?'No cases decided yet':`${n} of ${EVENTS.length} cases decided`;
+}
+function openCase(id){
+  state.current=EVENTS.find(e=>e.id===id);state.chosen=null;state.revealed=false;
+  renderCase();desk.style.display='none';caseView.classList.add('open');
+  window.scrollTo({top:0,behavior:'auto'});caseView.querySelector('.back-btn').focus();
+}
+function closeCase(){caseView.classList.remove('open');desk.style.display='';renderDesk();window.scrollTo({top:0,behavior:'auto'});}
+function renderCase(){
+  const e=state.current;
+  $('#case-content').innerHTML=`
+  <article class="paper fade-in">
+    <p class="kicker type">Confidential briefing &middot; ${e.year}</p>
+    <h2 class="serif">${esc(e.title)}</h2>
+    <p class="sub">${esc(e.place)} &middot; You are ${esc(e.role)} &middot; ${esc(e.tag)}</p>
+    <div class="known">
+      <h3>What you know &mdash; and nothing more</h3>
+      <ul>${e.known.map(k=>`<li>${esc(k)}</li>`).join('')}</ul>
+    </div>
+    ${e.body.map(p=>`<p class="body">${esc(p)}</p>`).join('')}
+    <p class="body stakes">${esc(e.stakes)}</p>
+    <p class="decide-label">Your decision</p>
+    <div class="options" role="group" aria-label="Decision options">
+      ${e.options.map((o,i)=>`
+        <button class="option" data-i="${i}">
+          <span class="letter" aria-hidden="true">${'ABC'[i]}</span>
+          <h3>${esc(o.label)}</h3>
+          <p>${esc(o.detail)}</p>
+        </button>`).join('')}
+    </div>
+    <div class="consequence" id="consequence" aria-live="polite"></div>
+    <div class="history" id="history"></div>
+  </article>`;
+  caseView.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>choose(+b.dataset.i)));
+}
+function choose(i){
+  const e=state.current;
+  if(state.revealed)return;
+  state.chosen=i;
+  caseView.querySelectorAll('.option').forEach((b,j)=>{
+    b.disabled=true;b.classList.toggle('chosen',j===i);b.classList.toggle('dim',j!==i);
+  });
+  const o=e.options[i];
+  const c=$('#consequence');
+  c.innerHTML=`
+    <span class="spec-label">One plausible path &mdash; speculation, not history</span>
+    <p>${esc(o.consequence)}</p>
+    <p>Nobody in ${e.year} could know if this is how it would have gone. Now lift the flap on the real record.</p>
+    <button class="hist-btn" id="reveal">Open the historical record</button>`;
+  c.classList.add('show','fade-in');
+  $('#reveal').addEventListener('click',reveal);
+  c.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+}
+function reveal(){
+  const e=state.current;state.revealed=true;state.decided.add(e.id);
+  const h=$('#history');
+  const matchLine = state.chosen===e.hist
+    ? '<p><strong>Your call matched history\u2019s.</strong> That does not mean it was easy - it means you accepted the same tradeoff.</p>'
+    : '<p><strong>History chose otherwise.</strong> The record below is the path that was actually taken.</p>';
+  h.innerHTML=`
+    <span class="hist-stamp">What history chose</span>
+    ${matchLine}
+    <h3 class="serif">${esc(e.history.choice)}</h3>
+    <p>${esc(e.history.outcome)}</p>
+    <div class="tradeoff">
+      <h4>The tradeoff that made it hard</h4>
+      <p>${esc(e.tradeoff)}</p>
+    </div>
+    <div class="sources">
+      <h4>Sources for the historical record</h4>
+      <ul>${e.history.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
+    </div>
+    <div class="next-row">
+      <button class="next-btn" id="next">${state.decided.size<EVENTS.length?'Back to the desk':'Finish'}</button>
+      <button class="again-btn" id="again">Replay this decision</button>
+    </div>`;
+  h.classList.add('show','fade-in');
+  $('#next').addEventListener('click',closeCase);
+  $('#again').addEventListener('click',()=>openCase(e.id));
+  h.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+}
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'&&caseView.classList.contains('open'))closeCase();
+});
+caseView.querySelector('.back-btn').addEventListener('click',closeCase);
+$('#reset').addEventListener('click',()=>{state.decided.clear();renderDesk();});
+renderDesk();
+
+</script>
+</body>
+</html>
