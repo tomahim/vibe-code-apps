@@ -58,3 +58,29 @@ resource "railway_variable" "cultive_ui_sentry_traces_sample_rate" {
   name           = "VITE_SENTRY_TRACES_SAMPLE_RATE"
   value          = "0.3"
 }
+
+# Source-map upload for the dev UI build (hidden maps uploaded at Docker
+# build time, deleted from the shipped image; Sentry charges no quota or
+# price for source maps). org/project are non-secret identifiers.
+resource "railway_variable" "cultive_ui_sentry_org" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_ui.id
+  name           = "SENTRY_ORG"
+  value          = "cultive-app"
+}
+
+resource "railway_variable" "cultive_ui_sentry_project" {
+  environment_id = railway_project.genious_apps.default_environment.id
+  service_id     = railway_service.cultive_ui.id
+  name           = "SENTRY_PROJECT"
+  value          = "cultive-frontend"
+}
+
+# SENTRY_AUTH_TOKEN is deliberately NOT declared here (same decision as
+# BREVO_API_KEY, 2026-11-14): the Railway provider reads live values back
+# into Terraform state on refresh, and the token must stay out of state and
+# plan artifacts. The scoped internal-integration token (org:ci, org:read,
+# project:read, project:releases) is created already, kept in the owner's
+# password vault, and is entered manually in Railway as a sealed variable on
+# this service. While it is unset the build skips the upload; with it set,
+# a failed upload fails the build so no deploy ships without its maps.
