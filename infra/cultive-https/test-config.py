@@ -19,3 +19,18 @@ assert 'default     = false' in t
 assert 'resource "railway_service_domain"' not in t
 assert 'import {' not in t
 print('PASS fixed private Serve config, localhost-only fixed UI backend, disabled Terraform')
+
+# Only the exact dry-run route receives the longer upstream-header allowance.
+import re
+route = re.search(r"location ~ ([^\n]+) \{([^}]+)\}", n, re.S)
+assert route is not None
+pattern, settings = route.groups()
+assert "proxy_read_timeout 600s;" in settings
+assert "proxy_pass $backend;" in settings
+assert n.count("proxy_read_timeout 600s;") == 1
+assert n.count("proxy_read_timeout 120s;") == 1
+base = "/api/learning/content-review/change-sets/536bb595-82f0-5a77-88db-1421c75d87d0"
+assert re.fullmatch(pattern, base + "/publish-check/")
+for path in (base + "/publish/", base + "/publish-check/extra", "/api/auth/me/", "/", base + "/publish-check"):
+    assert not re.fullmatch(pattern, path), path
+print("PASS only exact Publish-check path receives 600s; other requests keep 120s")
