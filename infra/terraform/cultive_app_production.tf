@@ -47,12 +47,14 @@ resource "railway_variable" "cultive_app_api_port" {
 
 # The UI's nginx proxies /api with the public Host header, so Django only
 # needs to trust the public hostname (default stays "*" until this applies;
-# tightening to the real host is the point of setting it).
+# tightening to the real host is the point of setting it). Railway's deploy
+# healthcheck calls the container with Host healthcheck.railway.app, so that
+# host must be allowed too or the healthcheck gets HTTP 400 and the deploy fails.
 resource "railway_variable" "cultive_app_api_allowed_hosts" {
   environment_id = railway_project.cultive_production.default_environment.id
   service_id     = railway_service.cultive_app_api.id
   name           = "DJANGO_ALLOWED_HOSTS"
-  value          = local.cultive_app_domain
+  value          = "${local.cultive_app_domain},healthcheck.railway.app"
 }
 
 # Secrets: placeholders only, real values entered in Railway by the owner.
