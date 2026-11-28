@@ -19,14 +19,6 @@ resource "railway_variable" "daily_cultive_ui_port" {
   value          = "8080"
 }
 
-# The landing page proxies /api/signups/ to the API over the private network,
-# same pattern as the main UI.
-resource "railway_variable" "daily_cultive_ui_api_upstream" {
-  environment_id = railway_project.genious_apps.default_environment.id
-  service_id     = railway_service.daily_cultive_ui.id
-  name           = "API_UPSTREAM"
-  value          = "http://cultive-api-dev.railway.internal:8000"
-}
 
 # Signup failures report to the website's own error-monitoring project,
 # separate from the app frontend. The DSN is a public client key, added here
