@@ -15,6 +15,15 @@ resource "railway_variable" "cultive_ui_port" {
   service_id     = railway_service.cultive_ui.id
   name           = "PORT"
   value          = "8080"
+
+  # The community Railway provider reads this variable's project_id back as
+  # unknown, so every plan shows a spurious in-place update and apply fails
+  # with "inconsistent values for sensitive attribute" (provider bug, hit on
+  # the 2026-11-28 cultive-app production apply). The value is already
+  # correct in Railway; keep it managed but stop the phantom project_id diff.
+  lifecycle {
+    ignore_changes = [project_id]
+  }
 }
 
 resource "railway_variable" "cultive_ui_api_upstream" {
