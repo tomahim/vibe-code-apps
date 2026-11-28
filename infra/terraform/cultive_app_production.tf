@@ -178,6 +178,48 @@ resource "railway_variable" "cultive_app_api_bucket" {
   value          = each.value
 }
 
+# --- cultive-draft-media bucket (production) ---
+#
+# Content authored and published from production uploads draft images to a
+# dedicated draft bucket (api/apps/learning/draft_media_store.py reads the
+# DRAFT_MEDIA_* variables, no fallback), then publish moves them into the live
+# media bucket. Railway references cannot cross projects, so production gets
+# its own draft bucket instead of sharing draft-cultive from genious-apps
+# (one full-access credential set per bucket). Same module and caveats as the
+# media bucket above. Stored data is billed at $0.015 per GB-month, operations
+# and egress are free (docs.railway.com/storage-buckets/billing).
+module "cultive_draft_media_bucket" {
+  source = "./modules/draft_bucket"
+
+  environment_id = railway_project.cultive_production.default_environment.id
+  bucket_name    = local.cultive_draft_media_bucket_name
+}
+
+locals {
+  cultive_draft_media_bucket_name = "cultive-draft-media"
+
+  cultive_draft_media_bucket_variables = {
+    DRAFT_MEDIA_ENDPOINT          = "$${{${local.cultive_draft_media_bucket_name}.ENDPOINT}}"
+    DRAFT_MEDIA_BUCKET            = "$${{${local.cultive_draft_media_bucket_name}.BUCKET}}"
+    DRAFT_MEDIA_ACCESS_KEY_ID     = "$${{${local.cultive_draft_media_bucket_name}.ACCESS_KEY_ID}}"
+    DRAFT_MEDIA_SECRET_ACCESS_KEY = "$${{${local.cultive_draft_media_bucket_name}.SECRET_ACCESS_KEY}}"
+    DRAFT_MEDIA_REGION            = "$${{${local.cultive_draft_media_bucket_name}.REGION}}"
+  }
+}
+
+resource "railway_variable" "cultive_app_api_draft_bucket" {
+  # The referenced bucket must exist before these variables resolve at
+  # deploy time.
+  depends_on = [module.cultive_draft_media_bucket]
+
+  for_each = local.cultive_draft_media_bucket_variables
+
+  environment_id = railway_project.cultive_production.default_environment.id
+  service_id     = railway_service.cultive_app_api.id
+  name           = each.key
+  value          = each.value
+}
+
 # --- cultive-ui (production) ---
 
 resource "railway_service" "cultive_app_ui" {
