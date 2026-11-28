@@ -64,3 +64,27 @@ The same apply wires these variable references onto `cultive-api-dev` (`infra/te
 | `DRAFT_MEDIA_REGION` | `${{draft-cultive.REGION}}` |
 
 If the bucket does not exist when the references apply, they resolve to empty values; nothing else breaks. Same pricing ($0.015 per GB-month, operations and egress free) and same credential-rotation runbook as above.
+
+# Cultive production media bucket (cultive-media)
+
+A third private bucket, `cultive-media`, in project `cultive-app`, environment `production`, wired only to the `cultive-api` (production app) service. Managed by Terraform in `infra/terraform/cultive_app_production.tf` through the same `modules/draft_bucket` module and the same constraints as `draft-cultive` (no provider deletion; dashboard deletion with the 52-hour restore window, reconcile state first). Created for the production launch (owner request 2026-11-28) so production media never share credentials with the shared `genious-media` bucket.
+
+## Runbook: copy existing media from genious-media to cultive-media
+
+Run this **after** the Terraform apply has created `cultive-media`, and before the first `release-app-*` deploy serves production traffic. It copies, it does not move: `genious-media` stays intact as the dev bucket, so the copy can be re-run or verified without risk.
+
+1. Collect both credential sets without writing them into any repo:
+   - Source: Railway > `genious-apps` > `production` > `genious-media` > Credentials.
+   - Target: Railway > `cultive-app` > `production` > `cultive-media` > Credentials.
+2. From any machine with the AWS CLI (or `rclone`), sync bucket to bucket. With the AWS CLI twice (no direct bucket-to-bucket copy across accounts/credentials, so stage through a local temp dir or a small throwaway Railway service):
+
+   ```sh
+   aws s3 sync s3://genious-media s3://cultive-media \
+     --endpoint-url <target-endpoint> # per-side credentials/endpoints via profiles
+   ```
+
+   In practice: configure two named profiles (`--profile genious` / `--profile cultive`) with each bucket's endpoint and keys, download to a temp dir from the source profile, then upload with the target profile. Keep the object keys byte-identical: the database stores keys, not bucket names, so no data migration is needed.
+3. Verify: object count and total bytes match on both sides (`aws s3 ls --recursive --summarize`), then spot-check a few presigned URLs through the production API once it runs.
+4. Only then point production traffic at it (first `release-app-*` deploy). Dev keeps using `genious-media`; nothing is deleted from it.
+
+Same pricing as the other buckets ($0.015 per GB-month, operations and bucket egress free).
