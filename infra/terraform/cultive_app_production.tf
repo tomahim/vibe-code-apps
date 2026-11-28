@@ -243,12 +243,13 @@ resource "railway_variable" "cultive_app_ui_sentry_project" {
 
 # --- public domain ---
 #
-# app.dailycultive.com on the UI service. Railway manages this domain's DNS,
-# so attaching the custom domain creates the record itself (as it did for the
-# apex and www) and provisions the TLS certificate automatically. Unlike the
+# app.dailycultive.com on the UI service. DNS for dailycultive.com is hosted
+# at the registrar (name.com nameservers; verified 2026-11-28: www is a manual
+# CNAME to <id>.up.railway.app), so after apply one manual step remains: add a
+# CNAME for app -> the dns_record_value this resource outputs, at name.com.
+# Railway provisions the TLS certificate once the name resolves. Unlike the
 # website cutover there is no existing traffic on this name to disrupt, so
-# the domain lives in this change: applying this configuration is what makes
-# the name resolve, ahead of the first release-app deploy.
+# the domain lives in this change, ahead of the first release-app deploy.
 
 resource "railway_custom_domain" "cultive_app_ui" {
   domain         = local.cultive_app_domain
